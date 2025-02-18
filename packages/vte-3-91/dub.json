@@ -1,0 +1,18 @@
+{
+  "name": "vte-3-91",
+  "description": "Vte library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["Vte"],
+  "dependencies": {
+    "gid:cairo-1-0": "*",
+    "gid:gdk-4-0": "*",
+    "gid:graphene-1-0": "*",
+    "gid:gsk-4-0": "*",
+    "gid:gtk-4-0": "*",
+    "gid:pango-1-0": "*"
+  }
+}

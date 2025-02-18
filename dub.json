@@ -23,7 +23,8 @@
     ":harfbuzz-0-0": "*",
     ":pango-1-0": "*",
     ":pangocairo-1-0": "*",
-    ":parquet-1-0": "*"
+    ":parquet-1-0": "*",
+    ":vte-3-91": "*"
   },
   "subPackages": [
     "packages/arrow-1-0/",
@@ -43,6 +44,7 @@
     "packages/harfbuzz-0-0/",
     "packages/pango-1-0/",
     "packages/pangocairo-1-0/",
-    "packages/parquet-1-0/"
+    "packages/parquet-1-0/",
+    "packages/vte-3-91/"
   ]
 }
