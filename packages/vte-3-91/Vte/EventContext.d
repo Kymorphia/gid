@@ -27,4 +27,11 @@ class EventContext
   {
     return cast(void*)cInstancePtr;
   }
+
+  bool getCoordinates(out double x, out double y)
+  {
+    bool _retval;
+    _retval = vte_event_context_get_coordinates(cast(VteEventContext*)cPtr, cast(double*)&x, cast(double*)&y);
+    return _retval;
+  }
 }

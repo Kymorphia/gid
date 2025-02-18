@@ -9,7 +9,7 @@ import Vte.c.types;
 
 
 // Enums
-alias Align = VteAlign;
+alias AlignVte = VteAlign;
 alias CursorBlinkMode = VteCursorBlinkMode;
 alias CursorShape = VteCursorShape;
 alias EraseBinding = VteEraseBinding;

@@ -708,11 +708,11 @@ class Terminal : Widget, Scrollable
     return _retval;
   }
 
-  Align getXalign()
+  AlignVte getXalign()
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_xalign(cast(VteTerminal*)cPtr);
-    Align _retval = cast(Align)_cretval;
+    AlignVte _retval = cast(AlignVte)_cretval;
     return _retval;
   }
 
@@ -723,11 +723,11 @@ class Terminal : Widget, Scrollable
     return _retval;
   }
 
-  Align getYalign()
+  AlignVte getYalign()
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_yalign(cast(VteTerminal*)cPtr);
-    Align _retval = cast(Align)_cretval;
+    AlignVte _retval = cast(AlignVte)_cretval;
     return _retval;
   }
 
@@ -1517,7 +1517,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   align_ = alignment value from #VteAlign
    */
-  void setXalign(Align align_)
+  void setXalign(AlignVte align_)
   {
     vte_terminal_set_xalign(cast(VteTerminal*)cPtr, align_);
   }
@@ -1539,7 +1539,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   align_ = alignment value from #VteAlign
    */
-  void setYalign(Align align_)
+  void setYalign(AlignVte align_)
   {
     vte_terminal_set_yalign(cast(VteTerminal*)cPtr, align_);
   }
@@ -1554,6 +1554,71 @@ class Terminal : Widget, Scrollable
   void setYfill(bool fill)
   {
     vte_terminal_set_yfill(cast(VteTerminal*)cPtr, fill);
+  }
+
+  /**
+   * Starts the specified command under a newly-allocated controlling
+   * pseudo-terminal.  The argv and envv lists should be %NULL-terminated.
+   * The "TERM" environment variable is automatically set to a default value,
+   * but can be overridden from envv.
+   * pty_flags controls logging the session to the specified system log files.
+   * Note that %G_SPAWN_DO_NOT_REAP_CHILD will always be added to spawn_flags.
+   * Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
+   * and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in spawn_flags, since
+   * stdin, stdout and stderr of the child process will always be connected to
+   * the PTY.
+   * Note that all open file descriptors will be closed in the child. If you want
+   * to keep some file descriptor open for use in the child process, you need to
+   * use a child setup function that unsets the FD_CLOEXEC flag on that file
+   * descriptor.
+   * See vte_pty_new$(LPAREN)$(RPAREN), [GLib.Global.spawnAsync] and [Vte.Terminal.watchChild] for more information.
+   * Beginning with 0.52, sets PWD to working_directory in order to preserve symlink components.
+   * The caller should also make sure that symlinks were preserved while constructing the value of working_directory,
+   * e.g. by using [Vte.Terminal.getCurrentDirectoryUri], [GLib.Global.getCurrentDir] or get_current_dir_name().
+   * Params:
+   *   ptyFlags = flags from #VtePtyFlags
+   *   workingDirectory = the name of a directory the command should start
+   *     in, or %NULL to use the current working directory
+   *   argv = child's argument vector
+   *   envv = a list of environment
+   *     variables to be added to the environment before starting the process, or %NULL
+   *   spawnFlags = flags from #GSpawnFlags
+   *   childSetup = an extra child setup function to run in the child just before exec$(LPAREN)$(RPAREN), or %NULL
+   *   childPid = a location to store the child PID, or %NULL
+   *   cancellable = a #GCancellable, or %NULL
+   * Returns: %TRUE on success, or %FALSE on error with error filled in
+
+   * Deprecated: Use [Vte.Terminal.spawnAsync] instead.
+   */
+  bool spawnSync(PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, out Pid childPid, Cancellable cancellable)
+  {
+    extern(C) void _childSetupCallback(void* data)
+    {
+      auto _dlg = cast(SpawnChildSetupFunc*)data;
+
+      (*_dlg)();
+    }
+
+    bool _retval;
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    char*[] _tmpargv;
+    foreach (s; argv)
+      _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= null;
+    char** _argv = _tmpargv.ptr;
+
+    char*[] _tmpenvv;
+    foreach (s; envv)
+      _tmpenvv ~= s.toCString(No.Alloc);
+    _tmpenvv ~= null;
+    char** _envv = _tmpenvv.ptr;
+
+    auto _childSetup = cast(void*)&childSetup;
+    GError *_err;
+    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, &_childSetupCallback, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
   }
 
   /**

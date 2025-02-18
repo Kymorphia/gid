@@ -22,7 +22,7 @@ HarfBuzz     |   35    0    0   100 |  407   52   42  90.6 |    0    0    0   10
 Pango        |   44    0    0   100 |  387   44   13  96.8 |    0    0    0   100 |  162   11    8  95.3 |
 PangoCairo   |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
 Parquet      |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |   28    0    0   100 |
-Vte          |    8    0    0   100 |  150    6   10  93.8 |   27    0    1  96.4 |   36    0    0   100 |
+Vte          |    8    0    0   100 |  153    6    7  95.6 |   27    0    1  96.4 |   36    0    0   100 |
 cairo        |   20    0    1  95.2 |  328   56    2  99.4 |    0    0    0   100 |   38    0    1  97.4 |
 freetype2    |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
@@ -172,15 +172,12 @@ Pango.GlyphItem.get_logical_widths
 Pango.GlyphItem.letter_space
 Pango.GlyphString.get_logical_widths
 Pango.TabArray.get_tabs
-Vte.EventContext.get_coordinates
-Vte.Global.get_encodings
 Vte.Pty.spawn_async
 Vte.Pty.spawn_with_fds_async
 Vte.Terminal.get_text
 Vte.Terminal.get_text_include_trailing_spaces
 Vte.Terminal.get_text_range
 Vte.Terminal.spawn_async
-Vte.Terminal.spawn_sync
 Vte.Terminal.spawn_with_fds_async
 cairo.Global.image_surface_create_for_data
 cairo.ScaledFont.text_to_glyphs

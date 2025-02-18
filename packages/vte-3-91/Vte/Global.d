@@ -32,6 +32,34 @@ bool getEncodingSupported(string encoding)
 }
 
 /**
+ * Gets the list of supported legacy encodings.
+ * If ICU support is not available, this returns an empty vector.
+ * Note that UTF-8 is always supported; you can select it by
+ * passing %NULL to [Vte.Terminal.setEncoding].
+ * Params:
+ *   includeAliases = whether to include alias names
+ * Returns: the list of supported encodings; free with
+ *   [GLib.Global.strfreev]
+ */
+string[] getEncodings(bool includeAliases)
+{
+  char** _cretval;
+  _cretval = vte_get_encodings(includeAliases);
+  string[] _retval;
+
+  if (_cretval)
+  {
+    uint _cretlength;
+    for (; _cretval[_cretlength] !is null; _cretlength++)
+      break;
+    _retval = new string[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = _cretval[i].fromCString(Yes.Free);
+  }
+  return _retval;
+}
+
+/**
  * Gets features VTE was compiled with.
  * Returns: flags from #VteFeatureFlags
  */
