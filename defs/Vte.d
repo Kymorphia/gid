@@ -18,5 +18,3 @@
 //# Set basic parameters to out
 //!set record[EventContext].method[get_coordinates].parameters.parameter[x][direction] out
 //!set record[EventContext].method[get_coordinates].parameters.parameter[y][direction] out
-
-//!set class[Terminal].method[get_xalign].return-value.type VteAlign
