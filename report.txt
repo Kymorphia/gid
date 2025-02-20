@@ -11,10 +11,10 @@ Atk          |   40    0    0   100 |  220   27    7  96.9 |   41    0    0   10
 GLib         |   85    0    0   100 | 1350  610   14  99.0 |    0    0    0   100 |  215   16   33  86.7 |
 GModule      |    3    0    0   100 |    8    6    0   100 |    0    0    0   100 |    0    0    0   100 |
 GObject      |   59    1    0   100 |  302  158    7  97.7 |    3    0    0   100 |  226    8   15  93.8 |
-Gdk          |   69    0    0   100 |  478   34    5  99.0 |   33    0    2  94.3 |   32    0    1  97.0 |
+Gdk          |   69    0    0   100 |  478   34    5  99.0 |   35    0    0   100 |   32    0    1  97.0 |
 GdkPixbuf    |   12    0    0   100 |   96   12    1  99.0 |    4    0    0   100 |   40    4    4  90.9 |
 Gid          |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-Gio          |  266    2    0   100 | 1721  162   25  98.6 |   80    0    1  98.8 |  895  195   22  97.6 |
+Gio          |  266    2    0   100 | 1728  162   18  99.0 |   80    0    1  98.8 |  895  195   22  97.6 |
 Graphene     |   21    0    0   100 |  367   43    0   100 |    0    0    0   100 |   40    0    0   100 |
 Gsk          |   51    0    0   100 |  256   24   14  94.8 |    0    0    0   100 |   13    0    2  86.7 |
 Gtk          |  355    0    0   100 | 3589  115   14  99.6 |  342    1    3  99.1 |  605   95    5  99.2 |
@@ -22,6 +22,7 @@ HarfBuzz     |   35    0    0   100 |  407   52   42  90.6 |    0    0    0   10
 Pango        |   44    0    0   100 |  387   44   13  96.8 |    0    0    0   100 |  162   11    8  95.3 |
 PangoCairo   |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
 Parquet      |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |   28    0    0   100 |
+Vte          |    8    0    0   100 |  157    9    0   100 |   28    0    0   100 |   36    0    0   100 |
 cairo        |   20    0    1  95.2 |  328   56    2  99.4 |    0    0    0   100 |   38    0    1  97.4 |
 freetype2    |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
@@ -66,19 +67,13 @@ GdkPixbuf.Pixbuf.new_from_data
 Gio.ActionMap.add_action_entries
 Gio.ActionMap.remove_action_entries
 Gio.Cancellable.connect
-Gio.DBusObjectManagerClient.new
-Gio.DBusObjectManagerClient.new_for_bus
 Gio.DataInputStream.read_line
 Gio.DataInputStream.read_line_finish
 Gio.DatagramBased.receive_messages
 Gio.DatagramBased.send_messages
 Gio.DesktopAppInfo.search
-Gio.DesktopAppInfo.launch_uris_as_manager
-Gio.DesktopAppInfo.launch_uris_as_manager_with_fds
 Gio.DtlsClientConnection.get_accepted_cas
 Gio.DtlsConnection.get_channel_binding_data
-Gio.File.copy_async
-Gio.File.move_async
 Gio.Initable.newv
 Gio.MemoryInputStream.new_from_data
 Gio.MemoryInputStream.add_data
@@ -87,7 +82,6 @@ Gio.Socket.receive_messages
 Gio.Socket.send_messages
 Gio.TlsClientConnection.get_accepted_cas
 Gio.TlsConnection.get_channel_binding_data
-Gio.Vfs.register_uri_scheme
 Gsk.ConicGradientNode.new
 Gsk.ConicGradientNode.get_color_stops
 Gsk.LinearGradientNode.new
@@ -175,8 +169,6 @@ cairo.Global.image_surface_create_for_data
 cairo.ScaledFont.text_to_glyphs
 
 [Unsupported Signals]
-Gdk.DragSurface.compute-size
-Gdk.Toplevel.compute-size
 Gio.MountOperation.show-processes
 Gtk.Editable.insert-text
 Gtk.Overlay.get-child-position

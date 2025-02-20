@@ -484,6 +484,28 @@ interface File
   bool copy(File destination, FileCopyFlags flags, Cancellable cancellable, FileProgressCallback progressCallback);
 
   /**
+   * Copies the file source to the location specified by destination
+   * asynchronously. For details of the behaviour, see [Gio.File.copy].
+   * If progress_callback is not %NULL, then that function that will be called
+   * just like in [Gio.File.copy]. The callback will run in the default main context
+   * of the thread calling [Gio.File.copyAsync] — the same context as callback is
+   * run in.
+   * When the operation is finished, callback will be called. You can then call
+   * [Gio.File.copyFinish] to get the result of the operation.
+   * Params:
+   *   destination = destination #GFile
+   *   flags = set of #GFileCopyFlags
+   *   ioPriority = the [I/O priority][io-priority] of the request
+   *   cancellable = optional #GCancellable object,
+   *     %NULL to ignore
+   *   progressCallback = function to callback with progress information, or %NULL if
+   *     progress information is not needed
+   *   callback = a #GAsyncReadyCallback
+   *     to call when the request is satisfied
+   */
+  void copyAsync(File destination, FileCopyFlags flags, int ioPriority, Cancellable cancellable, FileProgressCallback progressCallback, AsyncReadyCallback callback);
+
+  /**
    * Copies the file attributes from source to destination.
    * Normally only a subset of the file attributes are copied,
    * those that are copies in a normal file copy operation
@@ -1463,6 +1485,26 @@ interface File
    * Returns: %TRUE on successful move, %FALSE otherwise.
    */
   bool move(File destination, FileCopyFlags flags, Cancellable cancellable, FileProgressCallback progressCallback);
+
+  /**
+   * Asynchronously moves a file source to the location of destination. For details of the behaviour, see [Gio.File.move].
+   * If progress_callback is not %NULL, then that function that will be called
+   * just like in [Gio.File.move]. The callback will run in the default main context
+   * of the thread calling [Gio.File.moveAsync] — the same context as callback is
+   * run in.
+   * When the operation is finished, callback will be called. You can then call
+   * [Gio.File.moveFinish] to get the result of the operation.
+   * Params:
+   *   destination = #GFile pointing to the destination location
+   *   flags = set of #GFileCopyFlags
+   *   ioPriority = the [I/O priority][io-priority] of the request
+   *   cancellable = optional #GCancellable object,
+   *     %NULL to ignore
+   *   progressCallback = #GFileProgressCallback function for updates
+   *   callback = a #GAsyncReadyCallback
+   *     to call when the request is satisfied
+   */
+  void moveAsync(File destination, FileCopyFlags flags, int ioPriority, Cancellable cancellable, FileProgressCallback progressCallback, AsyncReadyCallback callback);
 
   /**
    * Finishes an asynchronous file movement, started with

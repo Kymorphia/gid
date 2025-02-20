@@ -1,11 +1,13 @@
 module Gdk.ToplevelT;
 
 public import Gdk.ToplevelIfaceProxy;
+public import GObject.DClosure;
 public import Gdk.Device;
 public import Gdk.Event;
 public import Gdk.Surface;
 public import Gdk.Texture;
 public import Gdk.ToplevelLayout;
+public import Gdk.ToplevelSize;
 public import Gdk.Types;
 public import Gdk.c.functions;
 public import Gdk.c.types;
@@ -292,5 +294,47 @@ template ToplevelT()
     bool _retval;
     _retval = gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)cPtr, gesture);
     return _retval;
+  }
+
+  /**
+   * Emitted when the size for the surface needs to be computed, when
+   * it is present.
+   * This signal will normally be emitted during or after a call to
+   * [Gdk.Toplevel.present], depending on the configuration
+   * received by the windowing system. It may also be emitted at any
+   * other point in time, in response to the windowing system
+   * spontaneously changing the configuration of the toplevel surface.
+   * It is the responsibility of the toplevel user to handle this signal
+   * and compute the desired size of the toplevel, given the information
+   * passed via the [Gdk.ToplevelSize] object. Failing to do so
+   * will result in an arbitrary size being used as a result.
+   * Params
+   *   size = a `GdkToplevelSize`
+   *   toplevel = the instance the signal is connected to
+   */
+  alias ComputeSizeCallbackDlg = void delegate(ToplevelSize size, Toplevel toplevel);
+  alias ComputeSizeCallbackFunc = void function(ToplevelSize size, Toplevel toplevel);
+
+  /**
+   * Connect to ComputeSize signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectComputeSize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : ComputeSizeCallbackDlg) || is(T : ComputeSizeCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto toplevel = getVal!Toplevel(_paramVals);
+      auto size = getVal!ToplevelSize(&_paramVals[1]);
+      _dClosure.dlg(size, toplevel);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("compute-size", closure, after);
   }
 }

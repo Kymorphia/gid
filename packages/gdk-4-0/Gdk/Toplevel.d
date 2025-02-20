@@ -1,11 +1,13 @@
 module Gdk.Toplevel;
 
 public import Gdk.ToplevelIfaceProxy;
+import GObject.DClosure;
 import Gdk.Device;
 import Gdk.Event;
 import Gdk.Surface;
 import Gdk.Texture;
 import Gdk.ToplevelLayout;
+import Gdk.ToplevelSize;
 import Gdk.Types;
 import Gdk.c.functions;
 import Gdk.c.types;
@@ -225,4 +227,33 @@ interface Toplevel
   bool supportsEdgeConstraints();
 
   bool titlebarGesture(TitlebarGesture gesture);
-}
+
+  /**
+   * Emitted when the size for the surface needs to be computed, when
+   * it is present.
+   * This signal will normally be emitted during or after a call to
+   * [Gdk.Toplevel.present], depending on the configuration
+   * received by the windowing system. It may also be emitted at any
+   * other point in time, in response to the windowing system
+   * spontaneously changing the configuration of the toplevel surface.
+   * It is the responsibility of the toplevel user to handle this signal
+   * and compute the desired size of the toplevel, given the information
+   * passed via the [Gdk.ToplevelSize] object. Failing to do so
+   * will result in an arbitrary size being used as a result.
+   * Params
+   *   size = a `GdkToplevelSize`
+   *   toplevel = the instance the signal is connected to
+   */
+  alias ComputeSizeCallbackDlg = void delegate(ToplevelSize size, Toplevel toplevel);
+  alias ComputeSizeCallbackFunc = void function(ToplevelSize size, Toplevel toplevel);
+
+  /**
+   * Connect to ComputeSize signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectComputeSize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : ComputeSizeCallbackDlg) || is(T : ComputeSizeCallbackFunc));
+  }

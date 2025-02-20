@@ -145,6 +145,65 @@ class Vfs : ObjectG
   }
 
   /**
+   * Registers uri_func and parse_name_func as the #GFile URI and parse name
+   * lookup functions for URIs with a scheme matching scheme.
+   * Note that scheme is registered only within the running application, as
+   * opposed to desktop-wide as it happens with GVfs backends.
+   * When a #GFile is requested with an URI containing scheme $(LPAREN)e.g. through
+   * [Gio.File.newForUri]$(RPAREN), uri_func will be called to allow a custom
+   * constructor. The implementation of uri_func should not be blocking, and
+   * must not call [Gio.Vfs.registerUriScheme] or [Gio.Vfs.unregisterUriScheme].
+   * When [Gio.File.parseName] is called with a parse name obtained from such file,
+   * parse_name_func will be called to allow the #GFile to be created again. In
+   * that case, it's responsibility of parse_name_func to make sure the parse
+   * name matches what the custom #GFile implementation returned when
+   * [Gio.File.getParseName] was previously called. The implementation of
+   * parse_name_func should not be blocking, and must not call
+   * [Gio.Vfs.registerUriScheme] or [Gio.Vfs.unregisterUriScheme].
+   * It's an error to call this function twice with the same scheme. To unregister
+   * a custom URI scheme, use [Gio.Vfs.unregisterUriScheme].
+   * Params:
+   *   scheme = an URI scheme, e.g. "http"
+   *   uriFunc = a #GVfsFileLookupFunc
+   *   parseNameFunc = a #GVfsFileLookupFunc
+   * Returns: %TRUE if scheme was successfully registered, or %FALSE if a handler
+   *   for scheme already exists.
+   */
+  bool registerUriScheme(string scheme, VfsFileLookupFunc uriFunc, VfsFileLookupFunc parseNameFunc)
+  {
+    extern(C) GFile* _uriFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
+    {
+      File _dretval;
+      auto _dlg = cast(VfsFileLookupFunc*)userData;
+      string _identifier = identifier.fromCString(No.Free);
+
+      _dretval = (*_dlg)(ObjectG.getDObject!Vfs(cast(void*)vfs, No.Take), _identifier);
+      GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
+
+      return _retval;
+    }
+
+    extern(C) GFile* _parseNameFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
+    {
+      File _dretval;
+      auto _dlg = cast(VfsFileLookupFunc*)userData;
+      string _identifier = identifier.fromCString(No.Free);
+
+      _dretval = (*_dlg)(ObjectG.getDObject!Vfs(cast(void*)vfs, No.Take), _identifier);
+      GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
+
+      return _retval;
+    }
+
+    bool _retval;
+    const(char)* _scheme = scheme.toCString(No.Alloc);
+    auto _uriFunc = freezeDelegate(cast(void*)&uriFunc);
+    auto _parseNameFunc = freezeDelegate(cast(void*)&parseNameFunc);
+    _retval = g_vfs_register_uri_scheme(cast(GVfs*)cPtr, _scheme, &_uriFuncCallback, _uriFunc, &thawDelegate, &_parseNameFuncCallback, _parseNameFunc, &thawDelegate);
+    return _retval;
+  }
+
+  /**
    * Unregisters the URI handler for scheme previously registered with
    * [Gio.Vfs.registerUriScheme].
    * Params:

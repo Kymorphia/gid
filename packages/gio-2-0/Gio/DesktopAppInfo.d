@@ -1,6 +1,8 @@
 module Gio.DesktopAppInfo;
 
+import GLib.ErrorG;
 import GLib.KeyFile;
+import GLib.Types;
 import GObject.ObjectG;
 import Gid.gid;
 import Gio.AppInfo;
@@ -387,6 +389,105 @@ class DesktopAppInfo : ObjectG, AppInfo
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_desktop_app_info_launch_action(cast(GDesktopAppInfo*)cPtr, _actionName, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null);
+  }
+
+  /**
+   * This function performs the equivalent of [Gio.AppInfo.launchUris],
+   * but is intended primarily for operating system components that
+   * launch applications.  Ordinary applications should use
+   * [Gio.AppInfo.launchUris].
+   * If the application is launched via GSpawn, then spawn_flags, user_setup
+   * and user_setup_data are used for the call to [GLib.Global.spawnAsync].
+   * Additionally, pid_callback $(LPAREN)with pid_callback_data$(RPAREN) will be called to
+   * inform about the PID of the created process. See [GLib.Global.spawnAsyncWithPipes]
+   * for information on certain parameter conditions that can enable an
+   * optimized posix_spawn$(LPAREN)$(RPAREN) codepath to be used.
+   * If application launching occurs via some other mechanism $(LPAREN)eg: D-Bus
+   * activation$(RPAREN) then spawn_flags, user_setup, user_setup_data,
+   * pid_callback and pid_callback_data are ignored.
+   * Params:
+   *   uris = List of URIs
+   *   launchContext = a #GAppLaunchContext
+   *   spawnFlags = #GSpawnFlags, used for each process
+   *   userSetup = a #GSpawnChildSetupFunc, used once
+   *     for each process.
+   *   pidCallback = Callback for child processes
+   * Returns: %TRUE on successful launch, %FALSE otherwise.
+   */
+  bool launchUrisAsManager(string[] uris, AppLaunchContext launchContext, SpawnFlags spawnFlags, SpawnChildSetupFunc userSetup, DesktopAppLaunchCallback pidCallback)
+  {
+    extern(C) void _userSetupCallback(void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(SpawnChildSetupFunc*)data;
+
+      (*_dlg)();
+    }
+
+    extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
+    {
+      auto _dlg = cast(DesktopAppLaunchCallback*)userData;
+
+      (*_dlg)(ObjectG.getDObject!DesktopAppInfo(cast(void*)appinfo, No.Take), pid);
+    }
+
+    bool _retval;
+    auto _uris = gListFromD!(string)(uris);
+    scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
+    auto _userSetup = freezeDelegate(cast(void*)&userSetup);
+    auto _pidCallback = cast(void*)&pidCallback;
+    GError *_err;
+    _retval = g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, &_userSetupCallback, _userSetup, &_pidCallbackCallback, _pidCallback, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Equivalent to [Gio.DesktopAppInfo.launchUrisAsManager] but allows
+   * you to pass in file descriptors for the stdin, stdout and stderr streams
+   * of the launched process.
+   * If application launching occurs via some non-spawn mechanism $(LPAREN)e.g. D-Bus
+   * activation$(RPAREN) then stdin_fd, stdout_fd and stderr_fd are ignored.
+   * Params:
+   *   uris = List of URIs
+   *   launchContext = a #GAppLaunchContext
+   *   spawnFlags = #GSpawnFlags, used for each process
+   *   userSetup = a #GSpawnChildSetupFunc, used once
+   *     for each process.
+   *   pidCallback = Callback for child processes
+   *   stdinFd = file descriptor to use for child's stdin, or -1
+   *   stdoutFd = file descriptor to use for child's stdout, or -1
+   *   stderrFd = file descriptor to use for child's stderr, or -1
+   * Returns: %TRUE on successful launch, %FALSE otherwise.
+   */
+  bool launchUrisAsManagerWithFds(string[] uris, AppLaunchContext launchContext, SpawnFlags spawnFlags, SpawnChildSetupFunc userSetup, DesktopAppLaunchCallback pidCallback, int stdinFd, int stdoutFd, int stderrFd)
+  {
+    extern(C) void _userSetupCallback(void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(SpawnChildSetupFunc*)data;
+
+      (*_dlg)();
+    }
+
+    extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
+    {
+      auto _dlg = cast(DesktopAppLaunchCallback*)userData;
+
+      (*_dlg)(ObjectG.getDObject!DesktopAppInfo(cast(void*)appinfo, No.Take), pid);
+    }
+
+    bool _retval;
+    auto _uris = gListFromD!(string)(uris);
+    scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
+    auto _userSetup = freezeDelegate(cast(void*)&userSetup);
+    auto _pidCallback = cast(void*)&pidCallback;
+    GError *_err;
+    _retval = g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, &_userSetupCallback, _userSetup, &_pidCallbackCallback, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
   }
 
   /**

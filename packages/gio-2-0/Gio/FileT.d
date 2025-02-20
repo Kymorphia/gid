@@ -287,6 +287,48 @@ template FileT()
   }
 
   /**
+   * Copies the file source to the location specified by destination
+   * asynchronously. For details of the behaviour, see [Gio.File.copy].
+   * If progress_callback is not %NULL, then that function that will be called
+   * just like in [Gio.File.copy]. The callback will run in the default main context
+   * of the thread calling [Gio.File.copyAsync] — the same context as callback is
+   * run in.
+   * When the operation is finished, callback will be called. You can then call
+   * [Gio.File.copyFinish] to get the result of the operation.
+   * Params:
+   *   destination = destination #GFile
+   *   flags = set of #GFileCopyFlags
+   *   ioPriority = the [I/O priority][io-priority] of the request
+   *   cancellable = optional #GCancellable object,
+   *     %NULL to ignore
+   *   progressCallback = function to callback with progress information, or %NULL if
+   *     progress information is not needed
+   *   callback = a #GAsyncReadyCallback
+   *     to call when the request is satisfied
+   */
+  override void copyAsync(File destination, FileCopyFlags flags, int ioPriority, Cancellable cancellable, FileProgressCallback progressCallback, AsyncReadyCallback callback)
+  {
+    extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
+    {
+      auto _dlg = cast(FileProgressCallback*)data;
+
+      (*_dlg)(currentNumBytes, totalNumBytes);
+    }
+
+    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(AsyncReadyCallback*)data;
+
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    }
+
+    auto _progressCallback = freezeDelegate(cast(void*)&progressCallback);
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    g_file_copy_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_progressCallbackCallback, _progressCallback, &_callbackCallback, _callback);
+  }
+
+  /**
    * Copies the file attributes from source to destination.
    * Normally only a subset of the file attributes are copied,
    * those that are copies in a normal file copy operation
@@ -1832,6 +1874,46 @@ template FileT()
     if (_err)
       throw new ErrorG(_err);
     return _retval;
+  }
+
+  /**
+   * Asynchronously moves a file source to the location of destination. For details of the behaviour, see [Gio.File.move].
+   * If progress_callback is not %NULL, then that function that will be called
+   * just like in [Gio.File.move]. The callback will run in the default main context
+   * of the thread calling [Gio.File.moveAsync] — the same context as callback is
+   * run in.
+   * When the operation is finished, callback will be called. You can then call
+   * [Gio.File.moveFinish] to get the result of the operation.
+   * Params:
+   *   destination = #GFile pointing to the destination location
+   *   flags = set of #GFileCopyFlags
+   *   ioPriority = the [I/O priority][io-priority] of the request
+   *   cancellable = optional #GCancellable object,
+   *     %NULL to ignore
+   *   progressCallback = #GFileProgressCallback function for updates
+   *   callback = a #GAsyncReadyCallback
+   *     to call when the request is satisfied
+   */
+  override void moveAsync(File destination, FileCopyFlags flags, int ioPriority, Cancellable cancellable, FileProgressCallback progressCallback, AsyncReadyCallback callback)
+  {
+    extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
+    {
+      auto _dlg = cast(FileProgressCallback*)data;
+
+      (*_dlg)(currentNumBytes, totalNumBytes);
+    }
+
+    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(AsyncReadyCallback*)data;
+
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    }
+
+    auto _progressCallback = cast(void*)&progressCallback;
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    g_file_move_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_progressCallbackCallback, _progressCallback, &_callbackCallback, _callback);
   }
 
   /**

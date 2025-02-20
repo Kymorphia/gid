@@ -36,6 +36,7 @@ with some added understanding of the D binding differences, and the D binding so
 
 ### C API Library Reference
 
+ * [Atk](https://docs.gtk.org/atk/)
  * [Gtk4](https://docs.gtk.org/gtk4/)
  * [Gdk4](https://docs.gtk.org/gdk4/)
  * [GdkPixbuf](https://docs.gtk.org/gdk-pixbuf/)
@@ -81,7 +82,7 @@ Here are some general rules about symbol renaming:
    structure/union types, enum/flag types, and module namespace names.
  * Many other symbols use **snake_case**, including: functions, method names, and argument names.
    These symbols are renamed to **camelCase**.  `get_value()` for example becomes `getValue()`.
- * Enum and flag values use **SNAKE_CASE** which is converted to **CamelCase**.  
+ * Enum and flag values use **SNAKE_CASE** which is converted to **CamelCase**.
    For example, GTK_ALIGN_BASELINE_FILL becomes Align.BaselineFill.
  * Other standalone constants (not enums or flags) generally use **SNAKE_CASE** and are used as is,
    after removing the module prefix. `GTK_INPUT_ERROR` for example becomes just `INPUT_ERROR`.

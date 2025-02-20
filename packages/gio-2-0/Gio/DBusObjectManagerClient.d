@@ -238,6 +238,95 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
   }
 
   /**
+   * Asynchronously creates a new #GDBusObjectManagerClient object.
+   * This is an asynchronous failable constructor. When the result is
+   * ready, callback will be invoked in the
+   * [thread-default main context][g-main-context-push-thread-default]
+   * of the thread you are calling this method from. You can
+   * then call [Gio.DBusObjectManagerClient.newFinish] to get the result. See
+   * [Gio.DBusObjectManagerClient.newSync] for the synchronous version.
+   * Params:
+   *   connection = A #GDBusConnection.
+   *   flags = Zero or more flags from the #GDBusObjectManagerClientFlags enumeration.
+   *   name = The owner of the control object $(LPAREN)unique or well-known name$(RPAREN).
+   *   objectPath = The object path of the control object.
+   *   getProxyTypeFunc = A #GDBusProxyTypeFunc function or %NULL to always construct #GDBusProxy proxies.
+   *   cancellable = A #GCancellable or %NULL
+   *   callback = A #GAsyncReadyCallback to call when the request is satisfied.
+   */
+  static void new_(DBusConnection connection, DBusObjectManagerClientFlags flags, string name, string objectPath, DBusProxyTypeFunc getProxyTypeFunc, Cancellable cancellable, AsyncReadyCallback callback)
+  {
+    extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
+    {
+      auto _dlg = cast(DBusProxyTypeFunc*)data;
+      string _objectPath = objectPath.fromCString(No.Free);
+      string _interfaceName = interfaceName.fromCString(No.Free);
+
+      GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      return _retval;
+    }
+
+    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(AsyncReadyCallback*)data;
+
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    }
+
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    g_dbus_object_manager_client_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  }
+
+  /**
+   * Like [Gio.DBusObjectManagerClient.new_] but takes a #GBusType instead of a
+   * #GDBusConnection.
+   * This is an asynchronous failable constructor. When the result is
+   * ready, callback will be invoked in the
+   * [thread-default main loop][g-main-context-push-thread-default]
+   * of the thread you are calling this method from. You can
+   * then call [Gio.DBusObjectManagerClient.newForBusFinish] to get the result. See
+   * [Gio.DBusObjectManagerClient.newForBusSync] for the synchronous version.
+   * Params:
+   *   busType = A #GBusType.
+   *   flags = Zero or more flags from the #GDBusObjectManagerClientFlags enumeration.
+   *   name = The owner of the control object $(LPAREN)unique or well-known name$(RPAREN).
+   *   objectPath = The object path of the control object.
+   *   getProxyTypeFunc = A #GDBusProxyTypeFunc function or %NULL to always construct #GDBusProxy proxies.
+   *   cancellable = A #GCancellable or %NULL
+   *   callback = A #GAsyncReadyCallback to call when the request is satisfied.
+   */
+  static void newForBus(BusType busType, DBusObjectManagerClientFlags flags, string name, string objectPath, DBusProxyTypeFunc getProxyTypeFunc, Cancellable cancellable, AsyncReadyCallback callback)
+  {
+    extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
+    {
+      auto _dlg = cast(DBusProxyTypeFunc*)data;
+      string _objectPath = objectPath.fromCString(No.Free);
+      string _interfaceName = interfaceName.fromCString(No.Free);
+
+      GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      return _retval;
+    }
+
+    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(AsyncReadyCallback*)data;
+
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    }
+
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    g_dbus_object_manager_client_new_for_bus(busType, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  }
+
+  /**
    * Gets the #GDBusConnection used by manager.
    * Returns: A #GDBusConnection object. Do not free,
    *   the object belongs to manager.
