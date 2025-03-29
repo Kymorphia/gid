@@ -59,6 +59,7 @@ Though the adrdox generated documentation is now available and is a better docum
  * [Gsk](https://docs.gtk.org/gsk4/)
  * [Gtk4](https://docs.gtk.org/gtk4/)
  * [GtkSource5](https://gnome.pages.gitlab.gnome.org/gtksourceview/gtksourceview5/)
+ * [Panel](https://gnome.pages.gitlab.gnome.org/libpanel/panel-1.0/)
  * [Pango](https://docs.gtk.org/Pango/)
  * [Parquet](https://arrow.apache.org/docs/c_glib/parquet-glib/index.html)
  * [RSvg2](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html)

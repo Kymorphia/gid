@@ -11,21 +11,21 @@ arrowflight1   |   32    0    0   100 |   61    0    0   100 |    0    0    0   
 atk1           |   40    0    0   100 |  220   24    7  96.9 |   41    0    0   100 |   25    0    0   100 |
 glib2          |   80    0    0   100 | 1275  404    5  99.6 |    0    0    0   100 |   88    0    8  91.7 |
 gmodule2       |    3    0    0   100 |    8    6    0   100 |    0    0    0   100 |    0    0    0   100 |
-gobject2       |   54    0    0   100 |  262  148    1  99.6 |    3    0    0   100 |   41    0    4  91.1 |
+gobject2       |   55    0    0   100 |  266  150    2  99.3 |    3    0    0   100 |   43    0    2  95.6 |
 gdk3           |   57    0    0   100 |  538   27    9  98.4 |   37    0    2  94.9 |  246    0    3  98.8 |
 gdk4           |   63    0    0   100 |  478   18    5  99.0 |   35    0    0   100 |    8    0    0   100 |
 gdkpixbuf2     |   12    0    0   100 |   96   11    1  99.0 |    4    0    0   100 |   21    0    2  91.3 |
-gio2           |  178    0    0   100 | 1712  126   18  99.0 |   80    0    1  98.8 |   38    0   20  65.5 |
+gio2           |  178    0    0   100 | 1712  126   18  99.0 |   81    0    0   100 |   38    0   20  65.5 |
 graphene1      |   21    0    0   100 |  367   26    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4           |   51    0    0   100 |  256   10   14  94.8 |    0    0    0   100 |    7    0    2  77.8 |
-gst1           |   89    0    0   100 | 1370  158   25  98.2 |   23    0    0   100 |  111    0    5  95.7 |
+gst1           |   89    0    0   100 | 1370  158   24  98.3 |   23    0    0   100 |  111    0    5  95.7 |
 gstallocators1 |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1        |    6    0    0   100 |   48    4    0   100 |   17    0    0   100 |    0    0    0   100 |
 gstaudio1      |   33    0    0   100 |  204   31   10  95.3 |    0    0    0   100 |   53    0   12  81.5 |
 gstbase1       |   23    0    0   100 |  305   66   10  96.8 |    2    2    0   100 |   25    0    4  86.2 |
 gstcheck1      |    8    0    0   100 |  110   33    2  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1 |   10    0    0   100 |   16    0    0   100 |    3    0    0   100 |    2    0    1  66.7 |
-gstgl1         |   38    0    0   100 |  257   47   13  95.2 |    5    0    0   100 |   56    0    6  90.3 |
+gstgl1         |   38    0    0   100 |  257   47   12  95.5 |    5    0    0   100 |   56    0    6  90.3 |
 gstglegl1      |    7    0    0   100 |   14    6    6  70.0 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1  |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstnet1        |    9    0    0   100 |   24    3    0   100 |    0    0    0   100 |    6    0    0   100 |
@@ -34,19 +34,20 @@ gstrtp1        |   11    0    0   100 |  196   27    2  99.0 |    6    0    0   
 gstrtsp1       |   15    0    0   100 |  136   18    2  98.6 |    1    0    0   100 |   35    0    2  94.6 |
 gstsdp1        |   23    0    0   100 |  168    9    2  98.8 |    0    0    0   100 |   60    0   23  72.3 |
 gsttag1        |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1      |   58    0    0   100 |  341  107    9  97.4 |    2    0    0   100 |  135    0   33  80.4 |
-gtk3           |  344    0    1  99.7 | 3744  129   30  99.2 |  441    1    6  98.7 |  132    0   12  91.7 |
-gtk4           |  320    0    0   100 | 3567   89   15  99.6 |  342    1    3  99.1 |   18    0    4  81.8 |
+gstvideo1      |   58    0    0   100 |  341  107    8  97.7 |    2    0    0   100 |  135    0   33  80.4 |
+gtk3           |  344    0    1  99.7 | 3749  129   25  99.3 |  444    1    3  99.3 |  132    0   12  91.7 |
+gtk4           |  320    0    0   100 | 3568   89   13  99.6 |  342    1    3  99.1 |   18    0    4  81.8 |
 gtksource4     |   38    0    0   100 |  368   10    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5     |   49    0    0   100 |  446    9    0   100 |   29    0    1  96.7 |    0    0    0   100 |
 harfbuzz0      |   35    0    0   100 |  407   52   42  90.6 |    0    0    0   100 |   41    0    3  93.2 |
 json1          |   12    0    0   100 |  197    5    0   100 |    9    0    0   100 |    0    0    0   100 |
-pango1         |   43    0    0   100 |  387   25   13  96.8 |    0    0    0   100 |   65    0    8  89.0 |
+panel1         |   33    0    0   100 |  311    4    0   100 |   17    0    0   100 |    0    0    0   100 |
+pango1         |   43    0    0   100 |  387   25   12  97.0 |    0    0    0   100 |   65    0    8  89.0 |
 pangocairo1    |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1       |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 rsvg2          |    7    0    0   100 |   45    1    0   100 |    0    0    0   100 |    0    0    0   100 |
 secret1        |   11    0    0   100 |  132   64    8  94.3 |    0    0    0   100 |    4    0    1  80.0 |
-soup3          |   38    0    0   100 |  364   19    7  98.1 |   41    0    1  97.6 |    1    0    1  50.0 |
+soup3          |   38    0    0   100 |  364   19    7  98.1 |   42    0    0   100 |    1    0    1  50.0 |
 vte2           |    7    0    0   100 |  167    4    4  97.7 |   35    0    0   100 |    0    0    0   100 |
 vte3           |    7    0    0   100 |  157    4    0   100 |   28    0    0   100 |    0    0    0   100 |
 cairo1         |   20    0    1  95.2 |  328   54    2  99.4 |    0    0    0   100 |   24    0    1  96.0 |
@@ -72,6 +73,7 @@ GLib.global.environ_setenv
 GLib.global.environ_unsetenv
 GLib.global.parse_debug_string
 GObject.ObjectG.newv
+GObject.TypeClass.adjust_private_offset
 Gdk.Device.list_axes
 Gdk.Display.store_clipboard
 Gdk.DragContext.list_targets
@@ -124,7 +126,6 @@ Gst.Buffer.extract
 Gst.CapsFeatures.set_parent_refcount
 Gst.ElementFactory.get_static_pad_templates
 Gst.Iterator.find_custom
-Gst.Meta.serialize
 Gst.Pad.set_activate_function_full
 Gst.Pad.set_activatemode_function_full
 Gst.Pad.set_chain_function_full
@@ -166,7 +167,6 @@ GstBase.ByteWriter.reset_and_get_data
 GstBase.CollectPads.add_pad
 GstCheck.global.check_element_push_buffer_list
 GstCheck.global.check_init
-GstGL.GLFilter.add_rgba_pad_templates
 GstGL.GLFramebuffer.draw_to_texture
 GstGL.GLShader.set_uniform_matrix_2fv
 GstGL.GLShader.set_uniform_matrix_2x3fv
@@ -197,7 +197,6 @@ GstSdp.MIKEYMessage.add_t
 GstSdp.MIKEYPayload.t_set
 GstVideo.VideoEncoder.set_headers
 GstVideo.VideoMeta.set_alignment
-GstVideo.VideoOverlay.install_properties
 GstVideo.VideoScaler.vertical
 GstVideo.VideoSink.center_rect
 GstVideo.VideoVBIEncoder.write_line
@@ -215,14 +214,9 @@ Gtk.PadController.set_action_entries
 Gtk.SelectionData.get_targets
 Gtk.TextBuffer.get_deserialize_formats
 Gtk.TextBuffer.get_serialize_formats
-Gtk.TextBuffer.register_serialize_format
 Gtk.Widget.get_allocated_size
 Gtk.Widget.get_allocation
 Gtk.Widget.get_clip
-Gtk.Widget.set_allocation
-Gtk.Widget.set_clip
-Gtk.Widget.size_allocate
-Gtk.Widget.size_allocate_with_baseline
 Gtk.Window.set_default_icon_list
 Gtk.global.init
 Gtk.global.init_check
@@ -237,7 +231,6 @@ Gtk.global.targets_include_uri
 Gtk.BuilderCScope.add_callback_symbol
 Gtk.CClosureExpression.new
 Gtk.ClosureExpression.new
-Gtk.Editable.install_properties
 Gtk.ListStore.reorder
 Gtk.PadController.set_action_entries
 Gtk.PrintJob.set_page_ranges
@@ -248,7 +241,6 @@ Gtk.Snapshot.append_repeating_linear_gradient
 Gtk.Snapshot.append_repeating_radial_gradient
 Gtk.Snapshot.push_shadow
 Gtk.Widget.get_allocation
-Gtk.Widget.size_allocate
 HarfBuzz.global.buffer_serialize
 HarfBuzz.global.buffer_serialize_glyphs
 HarfBuzz.global.buffer_serialize_unicode
@@ -292,7 +284,6 @@ HarfBuzz.global.tag_to_string
 HarfBuzz.global.unicode_funcs_set_decompose_compatibility_func
 HarfBuzz.global.variation_to_string
 Pango.AttrShape.new_with_data
-Pango.Attribute.init
 Pango.Font.descriptions_free
 Pango.GlyphItem.get_logical_widths
 Pango.GlyphItem.letter_space
@@ -330,18 +321,13 @@ cairo.global.image_surface_create_for_data
 Adw.SpinRow.input
 Gdk.Window.from-embedder
 Gdk.Window.to-embedder
-Gio.MountOperation.show-processes
 Gtk.Editable.insert-text
 Gtk.Overlay.get-child-position
-Gtk.PlacesSidebar.drag-action-requested
-Gtk.PlacesSidebar.drag-perform-drop
 Gtk.SpinButton.input
-Gtk.Widget.size-allocate
 Gtk.Editable.insert-text
 Gtk.Overlay.get-child-position
 Gtk.SpinButton.input
 GtkSource.View.push-snippet
-Soup.Message.content-sniffed
 
 [Unsupported Fields]
 GLib.Hook.data
@@ -353,8 +339,6 @@ GLib.ThreadPool.user_data
 GLib.TokenValue.v_symbol
 GLib.VariantDict.u
 GObject.CClosure.callback
-GObject.EnumClass.g_type_class
-GObject.FlagsClass.g_type_class
 GObject.SignalQuery.param_types
 Gdk.EventButton.axes
 Gdk.EventMotion.axes

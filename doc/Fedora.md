@@ -66,3 +66,10 @@ Adwaita
 For gid:libadwaita1 you need the following:
 
 `sudo dnf install libadwaita-devel`
+
+Panel
+-----
+
+For gid:panel1 you need the following:
+
+`sudo dnf install libpanel-devel`

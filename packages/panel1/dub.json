@@ -1,0 +1,14 @@
+{
+  "name": "panel1",
+  "description": "Panel library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["panel"],
+  "dependencies": {
+    "gid:adw1": "*",
+    "gid:gtk4": "*"
+  }
+}
