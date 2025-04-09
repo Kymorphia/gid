@@ -419,7 +419,6 @@ timeoutAddSeconds(PRIORITY_DEFAULT, 1, () {
 });
 ```
 
-
 ## Memory Leaks
 
 Currently there are a number of potential memory issues when using giD.
