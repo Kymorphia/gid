@@ -1,0 +1,85 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+#
+# dlang-community/setup-dlang
+#
+name: main
+
+# on:
+#   push:
+#     branches: ["*"]
+#   pull_request:
+#     branches: [ "main" ]
+
+# TODO: change this after testing
+on:
+  push:
+    branches:
+      - "dejan/gha-1"
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/main.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  dmd-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dlang-community/setup-dlang@4c99aa991ce7d19dd3064de0a4f2f6b2f152e2d7
+
+    - name: Fetch gidgen and generate packages
+      run: |
+        # Fetch gidgen latest
+        dub fetch gidgen
+        dub run gidgen -- --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
+
+    - name: Build
+      run: |
+        # Build the project, with its main file included, without unittests
+        # dub build --compiler=$DC
+        dub build --parallel --compiler=dmd --debug debug
+
+    - name: Test
+      run: |
+        # Run tests, as defined by `unittest` configuration
+        # In this mode, `mainSourceFile` is excluded and `version (unittest)` are included
+        # See https://dub.pm/package-format-json.html#configurations
+        #dub test --compiler=$DC
+        dub test --compiler=dmd
+
+# No GDC on the running container.
+  # gdc-build:
+  #   runs-on: ubuntu-latest
+  #   concurrency:
+  #     group: build-grp
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: dlang-community/setup-dlang@4c99aa991ce7d19dd3064de0a4f2f6b2f152e2d7
+
+  #   - name: Fetch gidgen and generate packages
+  #     run: |
+  #       # Fetch gidgen latest
+  #       dub fetch gidgen
+  #       dub run gidgen -- --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
+
+  #   - name: Build
+  #     run: |
+  #       # Build the project, with its main file included, without unittests
+  #       # dub build --compiler=$DC
+  #       dub build --parallel --compiler=gdc --debug debug
+
+  #   - name: Test
+  #     run: |
+  #       # Run tests, as defined by `unittest` configuration
+  #       # In this mode, `mainSourceFile` is excluded and `version (unittest)` are included
+  #       # See https://dub.pm/package-format-json.html#configurations
+  #       #dub test --compiler=$DC
+  #       dub test --compiler=gdc
