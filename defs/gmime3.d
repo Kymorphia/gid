@@ -6,3 +6,13 @@
 
 //!subdtype Object ObjectWrap
 //!subtype ssize_t size_t
+
+//!subctype _GMimeFilterPrivate void
+//!subctype _GMimeFilterGZipPrivate void
+//!subctype _UrlScanner void
+//!subctype _GMimeParserPrivate void
+//!subctype _GMimeStreamFilterPrivate void
+//!subctype _cat_node void
+
+//# typedef void *iconv_t;
+//!subctype iconv_t void*
