@@ -82,3 +82,10 @@ For gid:webkitgtk6 you need the following:
 `sudo dnf install webkitgtk6.0-devel`
 
 ( Will install the `javascriptcoregtk6.0-devel` package as it depends on it. )
+
+GMime 3
+-------
+
+For gid:gmime3 you need the following:
+
+`sudo dnf install gmime30-devel`

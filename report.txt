@@ -10,6 +10,7 @@ arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0 
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236   24    7  97.1 |   41    0    0   100 |   25    0    0   100 |
 glib2                      |   80    0    0   100 | 1276  405    5  99.6 |    0    0    0   100 |   88    0    8  91.7 |
+gmime3                     |   69    0    0   100 |  546   31   12  97.8 |    0    0    0   100 |   11    0    2  84.6 |
 gmodule2                   |    3    0    0   100 |    8    6    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   55    0    0   100 |  266  150    2  99.3 |    3    0    0   100 |   43    0    2  95.6 |
 gda5                       |  113    0    2  98.3 |  669  174   19  97.2 |   53    0    1  98.1 |  156    0   42  78.8 |
@@ -79,6 +80,18 @@ glib.option_context.OptionContext.parseStrv
 glib.global.environSetenv
 glib.global.environUnsetenv
 glib.global.parseDebugString
+gmime.encoding.Encoding.base64DecodeStep
+gmime.encoding.Encoding.base64EncodeClose
+gmime.encoding.Encoding.base64EncodeStep
+gmime.encoding.Encoding.quotedDecodeStep
+gmime.encoding.Encoding.quotedEncodeClose
+gmime.encoding.Encoding.quotedEncodeStep
+gmime.encoding.Encoding.uudecodeStep
+gmime.encoding.Encoding.uuencodeClose
+gmime.encoding.Encoding.uuencodeStep
+gmime.global.ydecodeStep
+gmime.global.yencodeClose
+gmime.global.yencodeStep
 gobject.object.ObjectWrap.newv
 gobject.type_class.TypeClass.adjustPrivateOffset
 gda.connection.Connection.asyncStatementExecute
@@ -372,6 +385,8 @@ glib.scanner.Scanner.userData
 glib.thread_pool.ThreadPool.userData
 glib.token_value.TokenValue.vSymbol
 glib.variant_dict.VariantDict.u
+gmime.encoding.Encoding.uubuf
+gmime.references.References.array
 gobject.cclosure.CClosure.callback
 gobject.signal_query.SignalQuery.paramTypes
 gda.binary.Binary.data
