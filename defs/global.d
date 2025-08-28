@@ -136,7 +136,6 @@
 //!subtype gshort short
 //!subtype gsize size_t
 //!subtype gssize ptrdiff_t
-//!subtype ssize_t ptrdiff_t
 //!subtype guchar ubyte
 //!subtype guint uint
 //!subtype guint16 ushort
@@ -155,6 +154,7 @@
 //!subtype none void
 //!subtype passwd void
 //!subtype pid_t int
+//!subtype ssize_t ptrdiff_t
 //!subtype time_t long
 //!subtype tm void
 //!subtype uid_t uint
@@ -162,8 +162,8 @@
 //!subtype uint16_t ushort
 //!subtype uint32_t uint
 //!subtype "unsigned char" ubyte
-//!subtype unsigned uint
 //!subtype "unsigned int" uint
+//!subtype unsigned uint
 //!subtype utf8 string
 //!subtype va_list void*
 
