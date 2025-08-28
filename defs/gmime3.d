@@ -4,8 +4,6 @@
 //!info docs https://www.kymorphia.com/gid/gmime.html
 //!info capi https://lazka.github.io/pgi-docs/GMime-3.0/index.html
 
-//!subtype ssize_t ptrdiff_t
-
 //!subdtype Object ObjectWrap
 //!subctype iconv_t void*
 

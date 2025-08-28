@@ -136,6 +136,7 @@
 //!subtype gshort short
 //!subtype gsize size_t
 //!subtype gssize ptrdiff_t
+//!subtype ssize_t ptrdiff_t
 //!subtype guchar ubyte
 //!subtype guint uint
 //!subtype guint16 ushort
