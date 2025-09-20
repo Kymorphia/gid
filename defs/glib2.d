@@ -39,6 +39,9 @@
 //!set function[test_add_func][ignore] 1
 //!set function[test_queue_destroy][ignore] 1
 
+//# Ignore unnecessary dup_string method (get_string does the same thing)
+//!set record[Variant].method[dup_string][ignore] 1
+
 //# Error conflicts with the base D Error type, rename to ErrorG
 //!subtype Error ErrorWrap
 
@@ -211,6 +214,15 @@
 //!set record[IOChannel].method[set_line_term].parameters.parameter[line_term].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set record[Regex].function[escape_nul].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set record[Regex].function[escape_string].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[KeyFile].method[get_keys].return-value.array[][length] 1
+//!set record[KeyFile].method[get_groups].return-value.array[][length] 0
+//!set record[KeyFile].method[to_data].return-value.type '<array length="0" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set function[filename_from_utf8].return-value.type '<array length="3" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set function[filename_from_utf8].parameters.parameter[utf8string].type '<array length="1" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set function[filename_to_utf8].return-value.type '<array length="3" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set function[filename_to_utf8].parameters.parameter[opsysstring].type '<array length="1" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set function[locale_from_utf8].parameters.parameter[utf8string].type '<array length="1" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set function[locale_to_utf8].return-value.type '<array length="3" c:type="gchar*"><type name="char" c:type="char"/></array>'
 
 //# Set writable to false as it should be
 //!set record[Node].field[children][writable] 0
