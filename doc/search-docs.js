@@ -69,15 +69,19 @@ function adrdox_search(searchTerm) {
 
 	var dotTerms = searchTerm.replace(/ /g, "").split(".");
 	for(var i = 0; i < dotTerms.length; i++) {
-		var t = dotTerms[i];
-		var dna = declByName[t];
-		if(dna) {
-			dna.forEach(function(dn) {
-				if(hitsObj[dn.getAttribute("id")])
-					hitsObj[dn.getAttribute("id")] += 1;
-				else
-					hitsObj[dn.getAttribute("id")] = 1;
-			});
+		var t = dotTerms[i].toLowerCase();
+
+		for (const key of Object.keys(declByName)) {
+		    if (key.toLowerCase() === t) {
+				var dna = declByName[key];
+
+				dna.forEach(function(dn) {
+					if(hitsObj[dn.getAttribute("id")])
+						hitsObj[dn.getAttribute("id")] += 1;
+					else
+						hitsObj[dn.getAttribute("id")] = 1;
+				});
+			}
 		}
 	}
 
