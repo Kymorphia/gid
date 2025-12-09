@@ -118,6 +118,7 @@ template PollableInputStreamT()
   {
     ptrdiff_t _retval;
     size_t _count;
+    _count = cast(size_t)buffer.length;
     GError *_err;
     _retval = g_pollable_input_stream_read_nonblocking(cast(GPollableInputStream*)this._cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

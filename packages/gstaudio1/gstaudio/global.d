@@ -188,7 +188,7 @@ gstaudio.types.AudioFormat[] audioFormatsRaw()
 
   if (_cretval)
   {
-    _retval = cast(gstaudio.types.AudioFormat[] )_cretval[0 .. _cretlength];
+    _retval = cast(gstaudio.types.AudioFormat[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }

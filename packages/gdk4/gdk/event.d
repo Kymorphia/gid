@@ -189,6 +189,7 @@ class Event
       _retval = new gdk.types.TimeCoord[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i];
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

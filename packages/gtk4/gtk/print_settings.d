@@ -439,6 +439,7 @@ class PrintSettings : gobject.object.ObjectWrap
       _retval = new gtk.types.PageRange[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i];
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

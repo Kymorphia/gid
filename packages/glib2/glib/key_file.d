@@ -251,7 +251,8 @@ class KeyFile : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(bool[] )_cretval[0 .. _cretlength];
+      _retval = cast(bool[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -344,7 +345,8 @@ class KeyFile : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(double[] )_cretval[0 .. _cretlength];
+      _retval = cast(double[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -353,26 +355,22 @@ class KeyFile : gobject.boxed.Boxed
       Returns all groups in the key file loaded with key_file.
       The array of returned groups will be null-terminated, so
       length may optionally be null.
-  
-      Params:
-        length = return location for the number of returned groups, or null
       Returns: a newly-allocated null-terminated array of strings.
           Use [glib.global.strfreev] to free it.
   */
-  string[] getGroups(out size_t length)
+  string[] getGroups()
   {
     char** _cretval;
-    _cretval = g_key_file_get_groups(cast(GKeyFile*)this._cPtr, cast(size_t*)&length);
+    size_t _cretlength;
+    _cretval = g_key_file_get_groups(cast(GKeyFile*)this._cPtr, &_cretlength);
     string[] _retval;
 
     if (_cretval)
     {
-      uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -462,7 +460,8 @@ class KeyFile : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(int[] )_cretval[0 .. _cretlength];
+      _retval = cast(int[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -476,29 +475,27 @@ class KeyFile : gobject.boxed.Boxed
   
       Params:
         groupName = a group name
-        length = return location for the number of keys returned, or null
       Returns: a newly-allocated null-terminated array of strings.
             Use [glib.global.strfreev] to free it.
       Throws: [KeyFileException]
   */
-  string[] getKeys(string groupName, out size_t length)
+  string[] getKeys(string groupName)
   {
     char** _cretval;
+    size_t _cretlength;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_key_file_get_keys(cast(GKeyFile*)this._cPtr, _groupName, cast(size_t*)&length, &_err);
+    _cretval = g_key_file_get_keys(cast(GKeyFile*)this._cPtr, _groupName, &_cretlength, &_err);
     if (_err)
       throw new KeyFileException(_err);
     string[] _retval;
 
     if (_cretval)
     {
-      uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -611,6 +608,7 @@ class KeyFile : gobject.boxed.Boxed
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -689,6 +687,7 @@ class KeyFile : gobject.boxed.Boxed
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -1294,22 +1293,25 @@ class KeyFile : gobject.boxed.Boxed
       
       Note that this function never reports an error,
       so it is safe to pass null as error.
-  
-      Params:
-        length = return location for the length of the
-            returned string, or null
       Returns: a newly allocated string holding
           the contents of the #GKeyFile
       Throws: [KeyFileException]
   */
-  string toData(out size_t length)
+  string toData()
   {
     char* _cretval;
+    size_t _cretlength;
     GError *_err;
-    _cretval = g_key_file_to_data(cast(GKeyFile*)this._cPtr, cast(size_t*)&length, &_err);
+    _cretval = g_key_file_to_data(cast(GKeyFile*)this._cPtr, &_cretlength, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(string)_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
+    }
     return _retval;
   }
 

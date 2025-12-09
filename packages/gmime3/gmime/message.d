@@ -438,6 +438,7 @@ class Message : gmime.object.ObjectWrap
       _retval = new gmime.message.Message[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = gobject.object.ObjectWrap._getDObject!(gmime.message.Message)(_cretval[i], Yes.Take);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

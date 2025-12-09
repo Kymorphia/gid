@@ -308,7 +308,7 @@ class DBusMessage : gobject.object.ObjectWrap
       uint _cretlength;
       for (; _cretval[_cretlength] != 0; _cretlength++)
         break;
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }
@@ -762,7 +762,8 @@ class DBusMessage : gobject.object.ObjectWrap
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

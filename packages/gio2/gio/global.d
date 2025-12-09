@@ -486,6 +486,7 @@ string[] contentTypeGuessForTree(gio.file.File root)
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -1052,7 +1053,7 @@ ubyte[] dbusUnescapeObjectPath(string s)
     uint _cretlength;
     for (; _cretval[_cretlength] != 0; _cretlength++)
       break;
-    _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+    _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -1512,6 +1513,7 @@ string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags l
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }

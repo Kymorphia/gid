@@ -132,7 +132,7 @@ class Value : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

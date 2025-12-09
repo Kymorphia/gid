@@ -82,7 +82,7 @@ class LargeListArray : arrow.array.Array
 
     if (_cretval)
     {
-      _retval = cast(long[] )_cretval[0 .. _cretlength];
+      _retval = cast(long[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

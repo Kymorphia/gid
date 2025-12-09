@@ -343,7 +343,8 @@ class IconTheme : gobject.object.ObjectWrap
       uint _cretlength;
       for (; _cretval[_cretlength] != 0; _cretlength++)
         break;
-      _retval = cast(int[] )_cretval[0 .. _cretlength];
+      _retval = cast(int[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

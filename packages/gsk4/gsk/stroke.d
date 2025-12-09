@@ -85,7 +85,7 @@ class Stroke : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(float[] )_cretval[0 .. _cretlength];
+      _retval = cast(float[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

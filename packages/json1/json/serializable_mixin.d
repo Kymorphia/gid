@@ -179,6 +179,7 @@ template SerializableT()
       _retval = new gobject.param_spec.ParamSpec[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = new gobject.param_spec.ParamSpec(cast(void*)_cretval[i], No.Take);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

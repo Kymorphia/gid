@@ -1333,7 +1333,8 @@ class TextBuffer : gobject.object.ObjectWrap
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

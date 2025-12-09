@@ -459,6 +459,7 @@ string[] debugRingBufferLoggerGetLogs()
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -1028,6 +1029,7 @@ string[] protectionFilterSystemsByAvailableDecryptors(string[] systemIdentifiers
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }

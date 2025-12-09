@@ -306,7 +306,7 @@ class DropTarget : gtk.event_controller.EventController
 
     if (_cretval)
     {
-      _retval = cast(gobject.types.GType[] )_cretval[0 .. _cretlength];
+      _retval = cast(gobject.types.GType[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

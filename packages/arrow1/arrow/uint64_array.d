@@ -64,7 +64,7 @@ class UInt64Array : arrow.numeric_array.NumericArray
 
     if (_cretval)
     {
-      _retval = cast(ulong[] )_cretval[0 .. _cretlength];
+      _retval = cast(ulong[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

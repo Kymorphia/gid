@@ -1110,7 +1110,7 @@ gobject.types.GType[] testListAllTypes()
 
   if (_cretval)
   {
-    _retval = cast(gobject.types.GType[] )_cretval[0 .. _cretlength];
+    _retval = cast(gobject.types.GType[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }

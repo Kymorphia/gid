@@ -64,7 +64,7 @@ class UInt32Array : arrow.numeric_array.NumericArray
 
     if (_cretval)
     {
-      _retval = cast(uint[] )_cretval[0 .. _cretlength];
+      _retval = cast(uint[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

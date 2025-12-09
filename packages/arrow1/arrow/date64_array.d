@@ -63,7 +63,7 @@ class Date64Array : arrow.numeric_array.NumericArray
 
     if (_cretval)
     {
-      _retval = cast(long[] )_cretval[0 .. _cretlength];
+      _retval = cast(long[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

@@ -1183,7 +1183,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

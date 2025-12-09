@@ -522,7 +522,8 @@ class Clipboard : gobject.object.ObjectWrap
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     format = new gdk.atom.Atom(cast(void*)&_format, No.Take);
     return _retval;
@@ -572,6 +573,7 @@ class Clipboard : gobject.object.ObjectWrap
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

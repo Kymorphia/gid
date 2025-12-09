@@ -363,6 +363,7 @@ class RTSPMessage : gobject.boxed.Boxed
       _retval = new gstrtsp.rtspauth_credential.RTSPAuthCredential[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = new gstrtsp.rtspauth_credential.RTSPAuthCredential(cast(void*)_cretval[i], Yes.Take);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

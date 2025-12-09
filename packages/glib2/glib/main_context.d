@@ -398,6 +398,7 @@ class MainContext : gobject.boxed.Boxed
   {
     int _retval;
     int _nFds;
+    _nFds = cast(int)fds.length;
     _retval = g_main_context_query(cast(GMainContext*)this._cPtr, maxPriority, cast(int*)&timeout, fds.ptr, _nFds);
     return _retval;
   }

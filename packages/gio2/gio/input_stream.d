@@ -208,6 +208,7 @@ class InputStream : gobject.object.ObjectWrap
   {
     ptrdiff_t _retval;
     size_t _count;
+    _count = cast(size_t)buffer.length;
     GError *_err;
     _retval = g_input_stream_read(cast(GInputStream*)this._cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -247,6 +248,7 @@ class InputStream : gobject.object.ObjectWrap
   {
     bool _retval;
     size_t _count;
+    _count = cast(size_t)buffer.length;
     GError *_err;
     _retval = g_input_stream_read_all(cast(GInputStream*)this._cPtr, buffer.ptr, _count, cast(size_t*)&bytesRead, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -285,6 +287,7 @@ class InputStream : gobject.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     size_t _count;
+    _count = cast(size_t)buffer.length;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_input_stream_read_all_async(cast(GInputStream*)this._cPtr, buffer.ptr, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -361,6 +364,7 @@ class InputStream : gobject.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     size_t _count;
+    _count = cast(size_t)buffer.length;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_input_stream_read_async(cast(GInputStream*)this._cPtr, buffer.ptr, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

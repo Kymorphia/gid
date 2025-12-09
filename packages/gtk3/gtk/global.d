@@ -2855,6 +2855,7 @@ gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList
     _retval = new gtk.target_entry.TargetEntry[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = new gtk.target_entry.TargetEntry(cast(void*)&_cretval[i], Yes.Take);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -2965,7 +2966,7 @@ gobject.types.GType[] testListAllTypes()
 
   if (_cretval)
   {
-    _retval = cast(gobject.types.GType[] )_cretval[0 .. _cretlength];
+    _retval = cast(gobject.types.GType[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }

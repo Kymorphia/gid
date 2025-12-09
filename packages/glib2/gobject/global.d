@@ -1430,7 +1430,8 @@ uint[] signalListIds(gobject.types.GType itype)
 
   if (_cretval)
   {
-    _retval = cast(uint[] )_cretval[0 .. _cretlength];
+    _retval = cast(uint[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -1787,7 +1788,8 @@ gobject.types.GType[] typeChildren(gobject.types.GType type)
 
   if (_cretval)
   {
-    _retval = cast(gobject.types.GType[] )_cretval[0 .. _cretlength];
+    _retval = cast(gobject.types.GType[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -1993,7 +1995,8 @@ gobject.types.GType[] typeInterfaces(gobject.types.GType type)
 
   if (_cretval)
   {
-    _retval = cast(gobject.types.GType[] )_cretval[0 .. _cretlength];
+    _retval = cast(gobject.types.GType[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }

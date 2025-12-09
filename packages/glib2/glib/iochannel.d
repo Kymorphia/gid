@@ -304,6 +304,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     GIOError _cretval;
     size_t _count;
+    _count = cast(size_t)buf.length;
     _cretval = g_io_channel_read(cast(GIOChannel*)this._cPtr, buf.ptr, _count, cast(size_t*)&bytesRead);
     glib.types.IOError _retval = cast(glib.types.IOError)_cretval;
     return _retval;
@@ -325,6 +326,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     GIOStatus _cretval;
     size_t _count;
+    _count = cast(size_t)buf.length;
     GError *_err;
     _cretval = g_io_channel_read_chars(cast(GIOChannel*)this._cPtr, buf.ptr, _count, cast(size_t*)&bytesRead, &_err);
     if (_err)

@@ -116,7 +116,7 @@ class Language : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(pango.types.Script[] )_cretval[0 .. _cretlength];
+      _retval = cast(pango.types.Script[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

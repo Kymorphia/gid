@@ -160,7 +160,8 @@ class NetTimePacket : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. 16];
+      _retval = cast(ubyte[])_cretval[0 .. 16].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

@@ -1616,9 +1616,9 @@ __gshared extern(C)
   char* function(const(char)* filename) c_g_filename_display_basename; ///
   char* function(const(char)* filename) c_g_filename_display_name; ///
   char* function(const(char)* uri, char** hostname, GError** _err) c_g_filename_from_uri; ///
-  char* function(const(char)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_filename_from_utf8; ///
+  ubyte* function(const(ubyte)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_filename_from_utf8; ///
   char* function(const(char)* filename, const(char)* hostname, GError** _err) c_g_filename_to_uri; ///
-  char* function(const(char)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_filename_to_utf8; ///
+  char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_filename_to_utf8; ///
   char* function(const(char)* program) c_g_find_program_in_path; ///
   void* function(const(char)* filename, const(char)* mode) c_g_fopen; ///
   char* function(ulong size) c_g_format_size; ///
@@ -1680,7 +1680,7 @@ __gshared extern(C)
   uint function(GIOChannel* channel, int priority, GIOCondition condition, GIOFunc func, void* userData, GDestroyNotify notify) c_g_io_add_watch_full; ///
   GSource* function(GIOChannel* channel, GIOCondition condition) c_g_io_create_watch; ///
   char** function() c_g_listenv; ///
-  ubyte* function(const(char)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_locale_from_utf8; ///
+  ubyte* function(const(ubyte)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_locale_from_utf8; ///
   char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_locale_to_utf8; ///
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format,  ...) c_g_log; ///
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* unusedData) c_g_log_default_handler; ///

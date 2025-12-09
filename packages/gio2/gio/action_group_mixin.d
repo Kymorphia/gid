@@ -355,6 +355,7 @@ template ActionGroupT()
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

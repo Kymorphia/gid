@@ -187,7 +187,7 @@ class UnixFDList : gobject.object.ObjectWrap
 
     if (_cretval)
     {
-      _retval = cast(int[] )_cretval[0 .. _cretlength];
+      _retval = cast(int[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }
@@ -223,7 +223,8 @@ class UnixFDList : gobject.object.ObjectWrap
 
     if (_cretval)
     {
-      _retval = cast(int[] )_cretval[0 .. _cretlength];
+      _retval = cast(int[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

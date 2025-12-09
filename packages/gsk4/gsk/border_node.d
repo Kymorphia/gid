@@ -91,7 +91,7 @@ class BorderNode : gsk.render_node.RenderNode
 
     if (_cretval)
     {
-      _retval = cast(float[] )_cretval[0 .. 4];
+      _retval = cast(float[])_cretval[0 .. 4].dup;
     }
     return _retval;
   }

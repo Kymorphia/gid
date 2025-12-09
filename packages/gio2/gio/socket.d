@@ -1123,6 +1123,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     ptrdiff_t _retval;
     size_t _size;
+    _size = cast(size_t)buffer.length;
     GError *_err;
     _retval = g_socket_receive(cast(GSocket*)this._cPtr, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1223,6 +1224,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     ptrdiff_t _retval;
     GSocketAddress* _address;
     size_t _size;
+    _size = cast(size_t)buffer.length;
     GError *_err;
     _retval = g_socket_receive_from(cast(GSocket*)this._cPtr, &_address, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1346,6 +1348,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     ptrdiff_t _retval;
     size_t _size;
+    _size = cast(size_t)buffer.length;
     GError *_err;
     _retval = g_socket_receive_with_blocking(cast(GSocket*)this._cPtr, buffer.ptr, _size, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

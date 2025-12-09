@@ -74,7 +74,8 @@ class UnionDataType : arrow.data_type.DataType
 
     if (_cretval)
     {
-      _retval = cast(byte[] )_cretval[0 .. _cretlength];
+      _retval = cast(byte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

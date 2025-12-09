@@ -1013,7 +1013,8 @@ class Variant
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -1043,6 +1044,7 @@ class Variant
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -1072,27 +1074,8 @@ class Variant
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
-    return _retval;
-  }
-
-  /**
-      Similar to [glib.variant.Variant.getString] except that instead of returning
-      a constant string, the string is duplicated.
-      
-      The string will always be UTF-8 encoded.
-      
-      The return value must be freed using [glib.global.gfree].
-  
-      Params:
-        length = a pointer to a #gsize, to store the length
-      Returns: a newly allocated string, UTF-8 encoded
-  */
-  string dupString(out size_t length)
-  {
-    char* _cretval;
-    _cretval = g_variant_dup_string(cast(GVariant*)this._cPtr, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1121,6 +1104,7 @@ class Variant
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -1224,6 +1208,7 @@ class Variant
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -1462,6 +1447,7 @@ class Variant
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -1517,7 +1503,7 @@ class Variant
 
     if (_cretval)
     {
-      _retval = cast(string )_cretval[0 .. _cretlength];
+      _retval = cast(string)_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }
@@ -1547,6 +1533,7 @@ class Variant
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

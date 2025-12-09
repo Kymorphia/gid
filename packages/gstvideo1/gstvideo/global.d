@@ -933,7 +933,7 @@ gstvideo.types.VideoFormat[] videoFormatsAny()
 
   if (_cretval)
   {
-    _retval = cast(gstvideo.types.VideoFormat[] )_cretval[0 .. _cretlength];
+    _retval = cast(gstvideo.types.VideoFormat[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -951,7 +951,7 @@ gstvideo.types.VideoFormat[] videoFormatsRaw()
 
   if (_cretval)
   {
-    _retval = cast(gstvideo.types.VideoFormat[] )_cretval[0 .. _cretlength];
+    _retval = cast(gstvideo.types.VideoFormat[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }

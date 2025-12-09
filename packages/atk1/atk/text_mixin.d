@@ -75,6 +75,7 @@ template TextT()
       _retval = new atk.text_range.TextRange[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = new atk.text_range.TextRange(cast(void*)_cretval[i], Yes.Take);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

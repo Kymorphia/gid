@@ -323,6 +323,7 @@ class BookmarkFile : gobject.boxed.Boxed
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -382,6 +383,7 @@ class BookmarkFile : gobject.boxed.Boxed
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -569,6 +571,7 @@ class BookmarkFile : gobject.boxed.Boxed
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }
@@ -1221,7 +1224,8 @@ class BookmarkFile : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

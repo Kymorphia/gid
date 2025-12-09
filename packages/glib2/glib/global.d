@@ -1345,7 +1345,8 @@ ubyte[] base64Decode(string text)
 
   if (_cretval)
   {
-    _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+    _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -2086,7 +2087,8 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
 
   if (_cretval)
   {
-    _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+    _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -2157,7 +2159,8 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
 
   if (_cretval)
   {
-    _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+    _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -3000,8 +3003,6 @@ string filenameFromUri(string uri, out string hostname)
 
     Params:
       utf8string = a UTF-8 encoded string.
-      len = the length of the string, or -1 if the string is
-                        nul-terminated.
       bytesRead = location to store the number of bytes in
                         the input string that were successfully converted, or null.
                         Even if the conversion was successful, this may be
@@ -3010,20 +3011,29 @@ string filenameFromUri(string uri, out string hostname)
                         `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
-      bytesWritten = the number of bytes stored in
-                        the output buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
     Throws: [ErrorWrap]
 */
-string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, out size_t bytesWritten)
+ubyte[] filenameFromUtf8(ubyte[] utf8string, out size_t bytesRead)
 {
-  char* _cretval;
-  const(char)* _utf8string = utf8string.toCString(No.Alloc);
+  ubyte* _cretval;
+  size_t _cretlength;
+  ptrdiff_t _len;
+  if (utf8string)
+    _len = cast(ptrdiff_t)utf8string.length;
+
+  auto _utf8string = cast(const(ubyte)*)utf8string.ptr;
   GError *_err;
-  _cretval = g_filename_from_utf8(_utf8string, len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
+  _cretval = g_filename_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  ubyte[] _retval;
+
+  if (_cretval)
+  {
+    _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
+  }
   return _retval;
 }
 
@@ -3069,10 +3079,6 @@ string filenameToUri(string filename, string hostname = null)
 
     Params:
       opsysstring = a string in the encoding for filenames
-      len = the length of the string, or -1 if the string is
-                        nul-terminated (Note that some encodings may allow nul
-                        bytes to occur inside strings. In that case, using -1
-                        for the len parameter is unsafe)
       bytesRead = location to store the number of bytes in the
                         input string that were successfully converted, or null.
                         Even if the conversion was successful, this may be
@@ -3081,20 +3087,29 @@ string filenameToUri(string filename, string hostname = null)
                         `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
-      bytesWritten = the number of bytes stored in the output
-                        buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
     Throws: [ErrorWrap]
 */
-string filenameToUtf8(string opsysstring, ptrdiff_t len, out size_t bytesRead, out size_t bytesWritten)
+string filenameToUtf8(ubyte[] opsysstring, out size_t bytesRead)
 {
   char* _cretval;
-  const(char)* _opsysstring = opsysstring.toCString(No.Alloc);
+  size_t _cretlength;
+  ptrdiff_t _len;
+  if (opsysstring)
+    _len = cast(ptrdiff_t)opsysstring.length;
+
+  auto _opsysstring = cast(const(ubyte)*)opsysstring.ptr;
   GError *_err;
-  _cretval = g_filename_to_utf8(_opsysstring, len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
+  _cretval = g_filename_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval;
+
+  if (_cretval)
+  {
+    _retval = cast(string)_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
+  }
   return _retval;
 }
 
@@ -3494,6 +3509,7 @@ string[] getEnviron()
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -3710,6 +3726,7 @@ string[] getLocaleVariants(string locale)
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -4546,6 +4563,7 @@ string[] listenv()
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -4563,8 +4581,6 @@ string[] listenv()
 
     Params:
       utf8string = a UTF-8 encoded string
-      len = the length of the string, or -1 if the string is
-                        nul-terminated.
       bytesRead = location to store the number of bytes in the
                         input string that were successfully converted, or null.
                         Even if the conversion was successful, this may be
@@ -4577,20 +4593,25 @@ string[] listenv()
                or null on an error, and error will be set.
     Throws: [ErrorWrap]
 */
-ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
+ubyte[] localeFromUtf8(ubyte[] utf8string, out size_t bytesRead)
 {
   ubyte* _cretval;
   size_t _cretlength;
-  const(char)* _utf8string = utf8string.toCString(No.Alloc);
+  ptrdiff_t _len;
+  if (utf8string)
+    _len = cast(ptrdiff_t)utf8string.length;
+
+  auto _utf8string = cast(const(ubyte)*)utf8string.ptr;
   GError *_err;
-  _cretval = g_locale_from_utf8(_utf8string, len, cast(size_t*)&bytesRead, &_cretlength, &_err);
+  _cretval = g_locale_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   ubyte[] _retval;
 
   if (_cretval)
   {
-    _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+    _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -4620,24 +4641,29 @@ ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
                         `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
-      bytesWritten = the number of bytes stored in the output
-                        buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
     Throws: [ErrorWrap]
 */
-string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead, out size_t bytesWritten)
+string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
 {
   char* _cretval;
+  size_t _cretlength;
   ptrdiff_t _len;
   if (opsysstring)
     _len = cast(ptrdiff_t)opsysstring.length;
 
   auto _opsysstring = cast(const(ubyte)*)opsysstring.ptr;
   GError *_err;
-  _cretval = g_locale_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
+  _cretval = g_locale_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval;
+
+  if (_cretval)
+  {
+    _retval = cast(string)_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
+  }
   return _retval;
 }
 
@@ -6776,7 +6802,7 @@ long[] sliceGetConfigState(glib.types.SliceConfig ckey, long address)
 
   if (_cretval)
   {
-    _retval = cast(long[] )_cretval[0 .. _cretlength];
+    _retval = cast(long[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -7785,6 +7811,7 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   uint _lenasciiAlternates;
   if (_asciiAlternates)
@@ -8044,6 +8071,7 @@ string[] strdupv(string[] strArray = null)
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -8420,6 +8448,7 @@ string[] strsplit(string string_, string delimiter, int maxTokens)
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -8471,6 +8500,7 @@ string[] strsplitSet(string string_, string delimiters, int maxTokens)
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -9660,7 +9690,8 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
     uint _cretlength;
     for (; _cretval[_cretlength] != 0; _cretlength++)
       break;
-    _retval = cast(ushort[] )_cretval[0 .. _cretlength];
+    _retval = cast(ushort[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -10306,7 +10337,7 @@ dchar[] unicodeCanonicalDecomposition(dchar ch)
 
   if (_cretval)
   {
-    _retval = cast(dchar[] )_cretval[0 .. _cretlength];
+    _retval = cast(dchar[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -10650,7 +10681,8 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
 
   if (_cretval)
   {
-    _retval = cast(dchar[] )_cretval[0 .. _cretlength];
+    _retval = cast(dchar[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -11272,7 +11304,8 @@ dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
 
   if (_cretval)
   {
-    _retval = cast(dchar[] )_cretval[0 .. _cretlength];
+    _retval = cast(dchar[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -11303,7 +11336,8 @@ dchar[] utf8ToUcs4Fast(string str)
 
   if (_cretval)
   {
-    _retval = cast(dchar[] )_cretval[0 .. _cretlength];
+    _retval = cast(dchar[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }
@@ -11338,7 +11372,8 @@ ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
 
   if (_cretval)
   {
-    _retval = cast(ushort[] )_cretval[0 .. _cretlength];
+    _retval = cast(ushort[])_cretval[0 .. _cretlength].dup;
+    gFree(cast(void*)_cretval);
   }
   return _retval;
 }

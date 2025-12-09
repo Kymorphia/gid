@@ -66,6 +66,7 @@ uint aatLayoutFeatureTypeGetSelectorInfos(harfbuzz.face.Face face, harfbuzz.type
 {
   uint _retval;
   uint _selectorCount;
+  _selectorCount = cast(uint)selectors.length;
   _retval = hb_aat_layout_feature_type_get_selector_infos(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, featureType, startOffset, &_selectorCount, selectors.ptr, cast(uint*)&defaultIndex);
   return _retval;
 }
@@ -83,6 +84,7 @@ uint aatLayoutGetFeatureTypes(harfbuzz.face.Face face, uint startOffset, ref har
 {
   uint _retval;
   uint _featureCount;
+  _featureCount = cast(uint)features.length;
   _retval = hb_aat_layout_get_feature_types(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, startOffset, &_featureCount, features.ptr);
   return _retval;
 }
@@ -228,7 +230,7 @@ string blobGetData(harfbuzz.blob.Blob blob)
 
   if (_cretval)
   {
-    _retval = cast(string )_cretval[0 .. _cretlength];
+    _retval = cast(string)_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -254,7 +256,7 @@ string blobGetDataWritable(harfbuzz.blob.Blob blob)
 
   if (_cretval)
   {
-    _retval = cast(string )_cretval[0 .. _cretlength];
+    _retval = cast(string)_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -1834,6 +1836,7 @@ uint faceGetTableTags(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.ty
 {
   uint _retval;
   uint _tableCount;
+  _tableCount = cast(uint)tableTags.length;
   _retval = hb_face_get_table_tags(face ? cast(const(hb_face_t)*)face._cPtr(No.Dup) : null, startOffset, &_tableCount, tableTags.ptr);
   return _retval;
 }
@@ -3106,7 +3109,7 @@ float[] fontGetVarCoordsDesign(harfbuzz.font.Font font)
 
   if (_cretval)
   {
-    _retval = cast(float[] )_cretval[0 .. _cretlength];
+    _retval = cast(float[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -3134,7 +3137,7 @@ int[] fontGetVarCoordsNormalized(harfbuzz.font.Font font)
 
   if (_cretval)
   {
-    _retval = cast(int[] )_cretval[0 .. _cretlength];
+    _retval = cast(int[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
 }
@@ -4063,6 +4066,7 @@ uint otColorGlyphGetLayers(harfbuzz.face.Face face, harfbuzz.types.Codepoint gly
 {
   uint _retval;
   uint _layerCount;
+  _layerCount = cast(uint)layers.length;
   _retval = hb_ot_color_glyph_get_layers(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, glyph, startOffset, &_layerCount, layers.ptr);
   return _retval;
 }
@@ -4236,6 +4240,7 @@ uint otColorPaletteGetColors(harfbuzz.face.Face face, uint paletteIndex, uint st
 {
   uint _retval;
   uint _colorCount;
+  _colorCount = cast(uint)colors.length;
   _retval = hb_ot_color_palette_get_colors(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, paletteIndex, startOffset, &_colorCount, colors.ptr);
   return _retval;
 }
@@ -4319,6 +4324,7 @@ uint otLayoutFeatureGetCharacters(harfbuzz.face.Face face, harfbuzz.types.Tag ta
 {
   uint _retval;
   uint _charCount;
+  _charCount = cast(uint)characters.length;
   _retval = hb_ot_layout_feature_get_characters(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, featureIndex, startOffset, &_charCount, characters.ptr);
   return _retval;
 }
@@ -4340,6 +4346,7 @@ uint otLayoutFeatureGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag table
 {
   uint _retval;
   uint _lookupCount;
+  _lookupCount = cast(uint)lookupIndexes.length;
   _retval = hb_ot_layout_feature_get_lookups(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, featureIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
   return _retval;
 }
@@ -4390,6 +4397,7 @@ uint otLayoutFeatureWithVariationsGetLookups(harfbuzz.face.Face face, harfbuzz.t
 {
   uint _retval;
   uint _lookupCount;
+  _lookupCount = cast(uint)lookupIndexes.length;
   _retval = hb_ot_layout_feature_with_variations_get_lookups(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, featureIndex, variationsIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
   return _retval;
 }
@@ -4411,6 +4419,7 @@ uint otLayoutGetAttachPoints(harfbuzz.face.Face face, harfbuzz.types.Codepoint g
 {
   uint _retval;
   uint _pointCount;
+  _pointCount = cast(uint)pointArray.length;
   _retval = hb_ot_layout_get_attach_points(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, glyph, startOffset, &_pointCount, pointArray.ptr);
   return _retval;
 }
@@ -4601,6 +4610,7 @@ uint otLayoutGetLigatureCarets(harfbuzz.font.Font font, harfbuzz.types.Direction
 {
   uint _retval;
   uint _caretCount;
+  _caretCount = cast(uint)caretArray.length;
   _retval = hb_ot_layout_get_ligature_carets(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, glyph, startOffset, &_caretCount, caretArray.ptr);
   return _retval;
 }
@@ -4711,6 +4721,7 @@ uint otLayoutLanguageGetFeatureIndexes(harfbuzz.face.Face face, harfbuzz.types.T
 {
   uint _retval;
   uint _featureCount;
+  _featureCount = cast(uint)featureIndexes.length;
   _retval = hb_ot_layout_language_get_feature_indexes(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureIndexes.ptr);
   return _retval;
 }
@@ -4733,6 +4744,7 @@ uint otLayoutLanguageGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag 
 {
   uint _retval;
   uint _featureCount;
+  _featureCount = cast(uint)featureTags.length;
   _retval = hb_ot_layout_language_get_feature_tags(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureTags.ptr);
   return _retval;
 }
@@ -4792,6 +4804,7 @@ uint otLayoutLookupGetGlyphAlternates(harfbuzz.face.Face face, uint lookupIndex,
 {
   uint _retval;
   uint _alternateCount;
+  _alternateCount = cast(uint)alternateGlyphs.length;
   _retval = hb_ot_layout_lookup_get_glyph_alternates(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, lookupIndex, glyph, startOffset, &_alternateCount, alternateGlyphs.ptr);
   return _retval;
 }
@@ -4873,6 +4886,7 @@ uint otLayoutScriptGetLanguageTags(harfbuzz.face.Face face, harfbuzz.types.Tag t
 {
   uint _retval;
   uint _languageCount;
+  _languageCount = cast(uint)languageTags.length;
   _retval = hb_ot_layout_script_get_language_tags(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, startOffset, &_languageCount, languageTags.ptr);
   return _retval;
 }
@@ -4992,6 +5006,7 @@ uint otLayoutTableGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tab
 {
   uint _retval;
   uint _featureCount;
+  _featureCount = cast(uint)featureTags.length;
   _retval = hb_ot_layout_table_get_feature_tags(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, startOffset, &_featureCount, featureTags.ptr);
   return _retval;
 }
@@ -5027,6 +5042,7 @@ uint otLayoutTableGetScriptTags(harfbuzz.face.Face face, harfbuzz.types.Tag tabl
 {
   uint _retval;
   uint _scriptCount;
+  _scriptCount = cast(uint)scriptTags.length;
   _retval = hb_ot_layout_table_get_script_tags(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, startOffset, &_scriptCount, scriptTags.ptr);
   return _retval;
 }
@@ -5181,6 +5197,7 @@ uint otMathGetGlyphKernings(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
 {
   uint _retval;
   uint _entriesCount;
+  _entriesCount = cast(uint)kernEntries.length;
   _retval = hb_ot_math_get_glyph_kernings(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, kern, startOffset, &_entriesCount, kernEntries.ptr);
   return _retval;
 }
@@ -5514,6 +5531,7 @@ uint otVarGetAxes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.
 {
   uint _retval;
   uint _axesCount;
+  _axesCount = cast(uint)axesArray.length;
   _retval = hb_ot_var_get_axes(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, startOffset, &_axesCount, axesArray.ptr);
   return _retval;
 }
@@ -5597,6 +5615,7 @@ uint otVarNamedInstanceGetDesignCoords(harfbuzz.face.Face face, uint instanceInd
 {
   uint _retval;
   uint _coordsLength;
+  _coordsLength = cast(uint)coords.length;
   _retval = hb_ot_var_named_instance_get_design_coords(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, instanceIndex, &_coordsLength, coords.ptr);
   return _retval;
 }

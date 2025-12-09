@@ -259,7 +259,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
 
     if (_cretval)
     {
-      _retval = cast(ubyte[] )_cretval[0 .. _cretlength];
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }

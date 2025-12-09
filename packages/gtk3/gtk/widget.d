@@ -3955,6 +3955,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

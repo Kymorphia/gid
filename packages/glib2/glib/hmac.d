@@ -122,6 +122,7 @@ class Hmac : gobject.boxed.Boxed
   void getDigest(ref ubyte[] buffer)
   {
     size_t _digestLen;
+    _digestLen = cast(size_t)buffer.length;
     g_hmac_get_digest(cast(GHmac*)this._cPtr, buffer.ptr, &_digestLen);
   }
 

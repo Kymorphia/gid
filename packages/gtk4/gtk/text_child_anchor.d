@@ -114,6 +114,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
       _retval = new gtk.widget.Widget[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(_cretval[i], No.Take);
+      gFree(cast(void*)_cretval);
     }
     return _retval;
   }

@@ -64,7 +64,7 @@ class DoubleArray : arrow.numeric_array.NumericArray
 
     if (_cretval)
     {
-      _retval = cast(double[] )_cretval[0 .. _cretlength];
+      _retval = cast(double[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
   }
