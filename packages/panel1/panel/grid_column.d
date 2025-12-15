@@ -76,7 +76,7 @@ class GridColumn : gtk.widget.Widget
   bool getEmpty()
   {
     bool _retval;
-    _retval = panel_grid_column_get_empty(cast(PanelGridColumn*)this._cPtr);
+    _retval = cast(bool)panel_grid_column_get_empty(cast(PanelGridColumn*)this._cPtr);
     return _retval;
   }
 

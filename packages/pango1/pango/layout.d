@@ -188,7 +188,7 @@ class Layout : gobject.object.ObjectWrap
   bool getAutoDir()
   {
     bool _retval;
-    _retval = pango_layout_get_auto_dir(cast(PangoLayout*)this._cPtr);
+    _retval = cast(bool)pango_layout_get_auto_dir(cast(PangoLayout*)this._cPtr);
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class Layout : gobject.object.ObjectWrap
   bool getJustify()
   {
     bool _retval;
-    _retval = pango_layout_get_justify(cast(PangoLayout*)this._cPtr);
+    _retval = cast(bool)pango_layout_get_justify(cast(PangoLayout*)this._cPtr);
     return _retval;
   }
 
@@ -418,7 +418,7 @@ class Layout : gobject.object.ObjectWrap
   bool getJustifyLastLine()
   {
     bool _retval;
-    _retval = pango_layout_get_justify_last_line(cast(PangoLayout*)this._cPtr);
+    _retval = cast(bool)pango_layout_get_justify_last_line(cast(PangoLayout*)this._cPtr);
     return _retval;
   }
 
@@ -645,7 +645,7 @@ class Layout : gobject.object.ObjectWrap
   bool getSingleParagraphMode()
   {
     bool _retval;
-    _retval = pango_layout_get_single_paragraph_mode(cast(PangoLayout*)this._cPtr);
+    _retval = cast(bool)pango_layout_get_single_paragraph_mode(cast(PangoLayout*)this._cPtr);
     return _retval;
   }
 
@@ -799,7 +799,7 @@ class Layout : gobject.object.ObjectWrap
   bool isEllipsized()
   {
     bool _retval;
-    _retval = pango_layout_is_ellipsized(cast(PangoLayout*)this._cPtr);
+    _retval = cast(bool)pango_layout_is_ellipsized(cast(PangoLayout*)this._cPtr);
     return _retval;
   }
 
@@ -816,7 +816,7 @@ class Layout : gobject.object.ObjectWrap
   bool isWrapped()
   {
     bool _retval;
-    _retval = pango_layout_is_wrapped(cast(PangoLayout*)this._cPtr);
+    _retval = cast(bool)pango_layout_is_wrapped(cast(PangoLayout*)this._cPtr);
     return _retval;
   }
 
@@ -1305,7 +1305,7 @@ class Layout : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = pango_layout_write_to_file(cast(PangoLayout*)this._cPtr, flags, _filename, &_err);
+    _retval = cast(bool)pango_layout_write_to_file(cast(PangoLayout*)this._cPtr, flags, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1335,7 +1335,7 @@ class Layout : gobject.object.ObjectWrap
   bool xyToIndex(int x, int y, out int index, out int trailing)
   {
     bool _retval;
-    _retval = pango_layout_xy_to_index(cast(PangoLayout*)this._cPtr, x, y, cast(int*)&index, cast(int*)&trailing);
+    _retval = cast(bool)pango_layout_xy_to_index(cast(PangoLayout*)this._cPtr, x, y, cast(int*)&index, cast(int*)&trailing);
     return _retval;
   }
 }

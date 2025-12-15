@@ -25,7 +25,7 @@ struct DragAction
   static bool isUnique(gdk.types.DragAction action)
   {
     bool _retval;
-    _retval = gdk_drag_action_is_unique(action);
+    _retval = cast(bool)gdk_drag_action_is_unique(action);
     return _retval;
   }
 }

@@ -21,7 +21,7 @@ else
 __gshared extern(C)
 {
   // EventContext
-  bool function(const(VteEventContext)* context, double* x, double* y) c_vte_event_context_get_coordinates; ///
+  gboolean function(const(VteEventContext)* context, double* x, double* y) c_vte_event_context_get_coordinates; ///
 
   // Pty
   GType function() c_vte_pty_get_type; ///
@@ -30,11 +30,11 @@ __gshared extern(C)
   void function(VtePty* pty) c_vte_pty_child_setup; ///
   void function(VtePty* pty) c_vte_pty_close; ///
   int function(VtePty* pty) c_vte_pty_get_fd; ///
-  bool function(VtePty* pty, int* rows, int* columns, GError** _err) c_vte_pty_get_size; ///
-  bool function(VtePty* pty, int rows, int columns, GError** _err) c_vte_pty_set_size; ///
-  bool function(VtePty* pty, bool utf8, GError** _err) c_vte_pty_set_utf8; ///
+  gboolean function(VtePty* pty, int* rows, int* columns, GError** _err) c_vte_pty_get_size; ///
+  gboolean function(VtePty* pty, int rows, int columns, GError** _err) c_vte_pty_set_size; ///
+  gboolean function(VtePty* pty, gboolean utf8, GError** _err) c_vte_pty_set_utf8; ///
   void function(VtePty* pty, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_vte_pty_spawn_async; ///
-  bool function(VtePty* pty, GAsyncResult* result, GPid* childPid, GError** _err) c_vte_pty_spawn_finish; ///
+  gboolean function(VtePty* pty, GAsyncResult* result, GPid* childPid, GError** _err) c_vte_pty_spawn_finish; ///
   void function(VtePty* pty, const(char)* workingDirectory, const(char*)* argv, const(char*)* envv, const(int)* fds, int nFds, const(int)* mapFds, int nMapFds, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_vte_pty_spawn_with_fds_async; ///
 
   // Regex
@@ -43,7 +43,7 @@ __gshared extern(C)
   VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, size_t* errorOffset, GError** _err) c_vte_regex_new_for_match_full; ///
   VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, GError** _err) c_vte_regex_new_for_search; ///
   VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, size_t* errorOffset, GError** _err) c_vte_regex_new_for_search_full; ///
-  bool function(VteRegex* regex, uint flags, GError** _err) c_vte_regex_jit; ///
+  gboolean function(VteRegex* regex, uint flags, GError** _err) c_vte_regex_jit; ///
   VteRegex* function(VteRegex* regex) c_vte_regex_ref; ///
   char* function(VteRegex* regex, const(char)* subject, const(char)* replacement, uint flags, GError** _err) c_vte_regex_substitute; ///
   VteRegex* function(VteRegex* regex) c_vte_regex_unref; ///
@@ -54,17 +54,17 @@ __gshared extern(C)
   char* function(VteTerminal* terminal, double x, double y) c_vte_terminal_check_hyperlink_at; ///
   char* function(VteTerminal* terminal, double x, double y, int* tag) c_vte_terminal_check_match_at; ///
   char** function(VteTerminal* terminal, double x, double y, VteRegex** regexes, size_t nRegexes, uint matchFlags, size_t* nMatches) c_vte_terminal_check_regex_array_at; ///
-  bool function(VteTerminal* terminal, double x, double y, VteRegex** regexes, size_t nRegexes, uint matchFlags, char** matches) c_vte_terminal_check_regex_simple_at; ///
+  gboolean function(VteTerminal* terminal, double x, double y, VteRegex** regexes, size_t nRegexes, uint matchFlags, char** matches) c_vte_terminal_check_regex_simple_at; ///
   void function(VteTerminal* terminal) c_vte_terminal_copy_clipboard; ///
   void function(VteTerminal* terminal, VteFormat format) c_vte_terminal_copy_clipboard_format; ///
   void function(VteTerminal* terminal) c_vte_terminal_copy_primary; ///
   void function(VteTerminal* terminal, const(ubyte)* data, ptrdiff_t length) c_vte_terminal_feed; ///
   void function(VteTerminal* terminal, const(ubyte)* text, ptrdiff_t length) c_vte_terminal_feed_child; ///
   void function(VteTerminal* terminal, const(ubyte)* data, size_t length) c_vte_terminal_feed_child_binary; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_allow_bold; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_allow_hyperlink; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_audible_bell; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_bold_is_bright; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_allow_bold; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_allow_hyperlink; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_audible_bell; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_bold_is_bright; ///
   double function(VteTerminal* terminal) c_vte_terminal_get_cell_height_scale; ///
   double function(VteTerminal* terminal) c_vte_terminal_get_cell_width_scale; ///
   glong function(VteTerminal* terminal) c_vte_terminal_get_char_height; ///
@@ -79,25 +79,25 @@ __gshared extern(C)
   VteCursorBlinkMode function(VteTerminal* terminal) c_vte_terminal_get_cursor_blink_mode; ///
   void function(VteTerminal* terminal, glong* column, glong* row) c_vte_terminal_get_cursor_position; ///
   VteCursorShape function(VteTerminal* terminal) c_vte_terminal_get_cursor_shape; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_enable_bidi; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_enable_fallback_scrolling; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_enable_shaping; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_enable_sixel; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_bidi; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_fallback_scrolling; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_shaping; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_sixel; ///
   const(char)* function(VteTerminal* terminal) c_vte_terminal_get_encoding; ///
   const(PangoFontDescription)* function(VteTerminal* terminal) c_vte_terminal_get_font; ///
   const(cairo_font_options_t)* function(VteTerminal* terminal) c_vte_terminal_get_font_options; ///
   double function(VteTerminal* terminal) c_vte_terminal_get_font_scale; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_has_selection; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_has_selection; ///
   const(char)* function(VteTerminal* terminal) c_vte_terminal_get_icon_title; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_input_enabled; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_mouse_autohide; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_input_enabled; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_mouse_autohide; ///
   VtePty* function(VteTerminal* terminal) c_vte_terminal_get_pty; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_rewrap_on_resize; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_rewrap_on_resize; ///
   glong function(VteTerminal* terminal) c_vte_terminal_get_row_count; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_insert; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_keystroke; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_output; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_scroll_unit_is_pixels; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_insert; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_keystroke; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_output; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_unit_is_pixels; ///
   glong function(VteTerminal* terminal) c_vte_terminal_get_scrollback_lines; ///
   char* function(VteTerminal* terminal, VteSelectionFunc isSelected, void* userData, GArray* attributes) c_vte_terminal_get_text; ///
   VteTextBlinkMode function(VteTerminal* terminal) c_vte_terminal_get_text_blink_mode; ///
@@ -110,9 +110,9 @@ __gshared extern(C)
   const(char)* function(VteTerminal* terminal) c_vte_terminal_get_window_title; ///
   const(char)* function(VteTerminal* terminal) c_vte_terminal_get_word_char_exceptions; ///
   VteAlign function(VteTerminal* terminal) c_vte_terminal_get_xalign; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_xfill; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_xfill; ///
   VteAlign function(VteTerminal* terminal) c_vte_terminal_get_yalign; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_get_yfill; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_yfill; ///
   int function(VteTerminal* terminal, VteRegex* regex, uint flags) c_vte_terminal_match_add_regex; ///
   char* function(VteTerminal* terminal, glong column, glong row, int* tag) c_vte_terminal_match_check; ///
   void function(VteTerminal* terminal, int tag) c_vte_terminal_match_remove; ///
@@ -123,23 +123,23 @@ __gshared extern(C)
   void function(VteTerminal* terminal) c_vte_terminal_paste_primary; ///
   void function(VteTerminal* terminal, const(char)* text) c_vte_terminal_paste_text; ///
   VtePty* function(VteTerminal* terminal, VtePtyFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_pty_new_sync; ///
-  void function(VteTerminal* terminal, bool clearTabstops, bool clearHistory) c_vte_terminal_reset; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_search_find_next; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_search_find_previous; ///
+  void function(VteTerminal* terminal, gboolean clearTabstops, gboolean clearHistory) c_vte_terminal_reset; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_search_find_next; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_search_find_previous; ///
   VteRegex* function(VteTerminal* terminal) c_vte_terminal_search_get_regex; ///
-  bool function(VteTerminal* terminal) c_vte_terminal_search_get_wrap_around; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_search_get_wrap_around; ///
   void function(VteTerminal* terminal, VteRegex* regex, uint flags) c_vte_terminal_search_set_regex; ///
-  void function(VteTerminal* terminal, bool wrapAround) c_vte_terminal_search_set_wrap_around; ///
+  void function(VteTerminal* terminal, gboolean wrapAround) c_vte_terminal_search_set_wrap_around; ///
   void function(VteTerminal* terminal) c_vte_terminal_select_all; ///
-  void function(VteTerminal* terminal, bool allowBold) c_vte_terminal_set_allow_bold; ///
-  void function(VteTerminal* terminal, bool allowHyperlink) c_vte_terminal_set_allow_hyperlink; ///
-  void function(VteTerminal* terminal, bool isAudible) c_vte_terminal_set_audible_bell; ///
+  void function(VteTerminal* terminal, gboolean allowBold) c_vte_terminal_set_allow_bold; ///
+  void function(VteTerminal* terminal, gboolean allowHyperlink) c_vte_terminal_set_allow_hyperlink; ///
+  void function(VteTerminal* terminal, gboolean isAudible) c_vte_terminal_set_audible_bell; ///
   void function(VteTerminal* terminal, VteEraseBinding binding) c_vte_terminal_set_backspace_binding; ///
-  void function(VteTerminal* terminal, bool boldIsBright) c_vte_terminal_set_bold_is_bright; ///
+  void function(VteTerminal* terminal, gboolean boldIsBright) c_vte_terminal_set_bold_is_bright; ///
   void function(VteTerminal* terminal, double scale) c_vte_terminal_set_cell_height_scale; ///
   void function(VteTerminal* terminal, double scale) c_vte_terminal_set_cell_width_scale; ///
   void function(VteTerminal* terminal, int width) c_vte_terminal_set_cjk_ambiguous_width; ///
-  void function(VteTerminal* terminal, bool setting) c_vte_terminal_set_clear_background; ///
+  void function(VteTerminal* terminal, gboolean setting) c_vte_terminal_set_clear_background; ///
   void function(VteTerminal* terminal, const(GdkRGBA)* background) c_vte_terminal_set_color_background; ///
   void function(VteTerminal* terminal, const(GdkRGBA)* bold) c_vte_terminal_set_color_bold; ///
   void function(VteTerminal* terminal, const(GdkRGBA)* cursorBackground) c_vte_terminal_set_color_cursor; ///
@@ -154,41 +154,41 @@ __gshared extern(C)
   void function(VteTerminal* terminal, VteCursorShape shape) c_vte_terminal_set_cursor_shape; ///
   void function(VteTerminal* terminal) c_vte_terminal_set_default_colors; ///
   void function(VteTerminal* terminal, VteEraseBinding binding) c_vte_terminal_set_delete_binding; ///
-  void function(VteTerminal* terminal, bool enableBidi) c_vte_terminal_set_enable_bidi; ///
-  void function(VteTerminal* terminal, bool enable) c_vte_terminal_set_enable_fallback_scrolling; ///
-  void function(VteTerminal* terminal, bool enableShaping) c_vte_terminal_set_enable_shaping; ///
-  void function(VteTerminal* terminal, bool enabled) c_vte_terminal_set_enable_sixel; ///
-  bool function(VteTerminal* terminal, const(char)* codeset, GError** _err) c_vte_terminal_set_encoding; ///
+  void function(VteTerminal* terminal, gboolean enableBidi) c_vte_terminal_set_enable_bidi; ///
+  void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_enable_fallback_scrolling; ///
+  void function(VteTerminal* terminal, gboolean enableShaping) c_vte_terminal_set_enable_shaping; ///
+  void function(VteTerminal* terminal, gboolean enabled) c_vte_terminal_set_enable_sixel; ///
+  gboolean function(VteTerminal* terminal, const(char)* codeset, GError** _err) c_vte_terminal_set_encoding; ///
   void function(VteTerminal* terminal, const(PangoFontDescription)* fontDesc) c_vte_terminal_set_font; ///
   void function(VteTerminal* terminal, const(cairo_font_options_t)* fontOptions) c_vte_terminal_set_font_options; ///
   void function(VteTerminal* terminal, double scale) c_vte_terminal_set_font_scale; ///
-  void function(VteTerminal* terminal, bool enabled) c_vte_terminal_set_input_enabled; ///
-  void function(VteTerminal* terminal, bool setting) c_vte_terminal_set_mouse_autohide; ///
+  void function(VteTerminal* terminal, gboolean enabled) c_vte_terminal_set_input_enabled; ///
+  void function(VteTerminal* terminal, gboolean setting) c_vte_terminal_set_mouse_autohide; ///
   void function(VteTerminal* terminal, VtePty* pty) c_vte_terminal_set_pty; ///
-  void function(VteTerminal* terminal, bool rewrap) c_vte_terminal_set_rewrap_on_resize; ///
-  void function(VteTerminal* terminal, bool scroll) c_vte_terminal_set_scroll_on_insert; ///
-  void function(VteTerminal* terminal, bool scroll) c_vte_terminal_set_scroll_on_keystroke; ///
-  void function(VteTerminal* terminal, bool scroll) c_vte_terminal_set_scroll_on_output; ///
-  void function(VteTerminal* terminal, bool enable) c_vte_terminal_set_scroll_unit_is_pixels; ///
+  void function(VteTerminal* terminal, gboolean rewrap) c_vte_terminal_set_rewrap_on_resize; ///
+  void function(VteTerminal* terminal, gboolean scroll) c_vte_terminal_set_scroll_on_insert; ///
+  void function(VteTerminal* terminal, gboolean scroll) c_vte_terminal_set_scroll_on_keystroke; ///
+  void function(VteTerminal* terminal, gboolean scroll) c_vte_terminal_set_scroll_on_output; ///
+  void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_scroll_unit_is_pixels; ///
   void function(VteTerminal* terminal, glong lines) c_vte_terminal_set_scrollback_lines; ///
   void function(VteTerminal* terminal, glong columns, glong rows) c_vte_terminal_set_size; ///
   void function(VteTerminal* terminal, VteTextBlinkMode textBlinkMode) c_vte_terminal_set_text_blink_mode; ///
   void function(VteTerminal* terminal, const(char)* exceptions) c_vte_terminal_set_word_char_exceptions; ///
   void function(VteTerminal* terminal, VteAlign align_) c_vte_terminal_set_xalign; ///
-  void function(VteTerminal* terminal, bool fill) c_vte_terminal_set_xfill; ///
+  void function(VteTerminal* terminal, gboolean fill) c_vte_terminal_set_xfill; ///
   void function(VteTerminal* terminal, VteAlign align_) c_vte_terminal_set_yalign; ///
-  void function(VteTerminal* terminal, bool fill) c_vte_terminal_set_yfill; ///
+  void function(VteTerminal* terminal, gboolean fill) c_vte_terminal_set_yfill; ///
   void function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, VteTerminalSpawnAsyncCallback callback, void* userData) c_vte_terminal_spawn_async; ///
-  bool function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GPid* childPid, GCancellable* cancellable, GError** _err) c_vte_terminal_spawn_sync; ///
+  gboolean function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GPid* childPid, GCancellable* cancellable, GError** _err) c_vte_terminal_spawn_sync; ///
   void function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, const(char*)* argv, const(char*)* envv, const(int)* fds, int nFds, const(int)* mapFds, int nMapFds, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, VteTerminalSpawnAsyncCallback callback, void* userData) c_vte_terminal_spawn_with_fds_async; ///
   void function(VteTerminal* terminal) c_vte_terminal_unselect_all; ///
   void function(VteTerminal* terminal, GPid childPid) c_vte_terminal_watch_child; ///
-  bool function(VteTerminal* terminal, GOutputStream* stream, VteWriteFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_write_contents_sync; ///
+  gboolean function(VteTerminal* terminal, GOutputStream* stream, VteWriteFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_write_contents_sync; ///
 
   // global
   GType function() c_vte_event_context_get_type; ///
-  bool function(const(char)* encoding) c_vte_get_encoding_supported; ///
-  char** function(bool includeAliases) c_vte_get_encodings; ///
+  gboolean function(const(char)* encoding) c_vte_get_encoding_supported; ///
+  char** function(gboolean includeAliases) c_vte_get_encodings; ///
   VteFeatureFlags function() c_vte_get_feature_flags; ///
   const(char)* function() c_vte_get_features; ///
   uint function() c_vte_get_major_version; ///

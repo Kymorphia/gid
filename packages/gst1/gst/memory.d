@@ -316,7 +316,7 @@ class Memory : gobject.boxed.Boxed
   bool isSpan(gst.memory.Memory mem2, out size_t offset)
   {
     bool _retval;
-    _retval = gst_memory_is_span(cast(GstMemory*)this._cPtr, mem2 ? cast(GstMemory*)mem2._cPtr(No.Dup) : null, cast(size_t*)&offset);
+    _retval = cast(bool)gst_memory_is_span(cast(GstMemory*)this._cPtr, mem2 ? cast(GstMemory*)mem2._cPtr(No.Dup) : null, cast(size_t*)&offset);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class Memory : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _memType = memType.toCString(No.Alloc);
-    _retval = gst_memory_is_type(cast(GstMemory*)this._cPtr, _memType);
+    _retval = cast(bool)gst_memory_is_type(cast(GstMemory*)this._cPtr, _memType);
     return _retval;
   }
 
@@ -384,7 +384,7 @@ class Memory : gobject.boxed.Boxed
   {
     bool _retval;
     GstMapInfo _info;
-    _retval = gst_memory_map(cast(GstMemory*)this._cPtr, &_info, flags);
+    _retval = cast(bool)gst_memory_map(cast(GstMemory*)this._cPtr, &_info, flags);
     info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
   }

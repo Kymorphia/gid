@@ -221,7 +221,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealArea(panel.types.Area area)
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_area(cast(PanelDock*)this._cPtr, area);
+    _retval = cast(bool)panel_dock_get_can_reveal_area(cast(PanelDock*)this._cPtr, area);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealBottom()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_bottom(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_can_reveal_bottom(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealEnd()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_end(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_can_reveal_end(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealStart()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_start(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_can_reveal_start(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealTop()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_top(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_can_reveal_top(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Dock : gtk.widget.Widget
   bool getRevealArea(panel.types.Area area)
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_area(cast(PanelDock*)this._cPtr, area);
+    _retval = cast(bool)panel_dock_get_reveal_area(cast(PanelDock*)this._cPtr, area);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class Dock : gtk.widget.Widget
   bool getRevealBottom()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_bottom(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_reveal_bottom(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class Dock : gtk.widget.Widget
   bool getRevealEnd()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_end(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_reveal_end(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class Dock : gtk.widget.Widget
   bool getRevealStart()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_start(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_reveal_start(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Dock : gtk.widget.Widget
   bool getRevealTop()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_top(cast(PanelDock*)this._cPtr);
+    _retval = cast(bool)panel_dock_get_reveal_top(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 

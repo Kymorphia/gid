@@ -132,7 +132,7 @@ class ActionBar : gtk.widget.Widget
   bool getRevealed()
   {
     bool _retval;
-    _retval = gtk_action_bar_get_revealed(cast(GtkActionBar*)this._cPtr);
+    _retval = cast(bool)gtk_action_bar_get_revealed(cast(GtkActionBar*)this._cPtr);
     return _retval;
   }
 

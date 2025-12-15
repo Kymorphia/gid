@@ -101,7 +101,7 @@ class BitReader
   bool getBitsUint16(out ushort val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_get_bits_uint16(cast(GstBitReader*)this._cPtr, cast(ushort*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_get_bits_uint16(cast(GstBitReader*)this._cPtr, cast(ushort*)&val, nbits);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class BitReader
   bool getBitsUint32(out uint val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_get_bits_uint32(cast(GstBitReader*)this._cPtr, cast(uint*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_get_bits_uint32(cast(GstBitReader*)this._cPtr, cast(uint*)&val, nbits);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class BitReader
   bool getBitsUint64(out ulong val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_get_bits_uint64(cast(GstBitReader*)this._cPtr, cast(ulong*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_get_bits_uint64(cast(GstBitReader*)this._cPtr, cast(ulong*)&val, nbits);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class BitReader
   bool getBitsUint8(out ubyte val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_get_bits_uint8(cast(GstBitReader*)this._cPtr, cast(ubyte*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_get_bits_uint8(cast(GstBitReader*)this._cPtr, cast(ubyte*)&val, nbits);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class BitReader
   bool peekBitsUint16(out ushort val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_peek_bits_uint16(cast(const(GstBitReader)*)this._cPtr, cast(ushort*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_peek_bits_uint16(cast(const(GstBitReader)*)this._cPtr, cast(ushort*)&val, nbits);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class BitReader
   bool peekBitsUint32(out uint val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_peek_bits_uint32(cast(const(GstBitReader)*)this._cPtr, cast(uint*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_peek_bits_uint32(cast(const(GstBitReader)*)this._cPtr, cast(uint*)&val, nbits);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class BitReader
   bool peekBitsUint64(out ulong val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_peek_bits_uint64(cast(const(GstBitReader)*)this._cPtr, cast(ulong*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_peek_bits_uint64(cast(const(GstBitReader)*)this._cPtr, cast(ulong*)&val, nbits);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class BitReader
   bool peekBitsUint8(out ubyte val, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_peek_bits_uint8(cast(const(GstBitReader)*)this._cPtr, cast(ubyte*)&val, nbits);
+    _retval = cast(bool)gst_bit_reader_peek_bits_uint8(cast(const(GstBitReader)*)this._cPtr, cast(ubyte*)&val, nbits);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class BitReader
   bool setPos(uint pos)
   {
     bool _retval;
-    _retval = gst_bit_reader_set_pos(cast(GstBitReader*)this._cPtr, pos);
+    _retval = cast(bool)gst_bit_reader_set_pos(cast(GstBitReader*)this._cPtr, pos);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class BitReader
   bool skip(uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_reader_skip(cast(GstBitReader*)this._cPtr, nbits);
+    _retval = cast(bool)gst_bit_reader_skip(cast(GstBitReader*)this._cPtr, nbits);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class BitReader
   bool skipToByte()
   {
     bool _retval;
-    _retval = gst_bit_reader_skip_to_byte(cast(GstBitReader*)this._cPtr);
+    _retval = cast(bool)gst_bit_reader_skip_to_byte(cast(GstBitReader*)this._cPtr);
     return _retval;
   }
 }

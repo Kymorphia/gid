@@ -106,7 +106,7 @@ class Parser : gobject.object.ObjectWrap
   bool eos()
   {
     bool _retval;
-    _retval = g_mime_parser_eos(cast(GMimeParser*)this._cPtr);
+    _retval = cast(bool)g_mime_parser_eos(cast(GMimeParser*)this._cPtr);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Parser : gobject.object.ObjectWrap
   bool getPersistStream()
   {
     bool _retval;
-    _retval = g_mime_parser_get_persist_stream(cast(GMimeParser*)this._cPtr);
+    _retval = cast(bool)g_mime_parser_get_persist_stream(cast(GMimeParser*)this._cPtr);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Parser : gobject.object.ObjectWrap
   bool getRespectContentLength()
   {
     bool _retval;
-    _retval = g_mime_parser_get_respect_content_length(cast(GMimeParser*)this._cPtr);
+    _retval = cast(bool)g_mime_parser_get_respect_content_length(cast(GMimeParser*)this._cPtr);
     return _retval;
   }
 

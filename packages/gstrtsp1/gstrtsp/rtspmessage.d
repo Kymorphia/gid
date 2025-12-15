@@ -269,7 +269,7 @@ class RTSPMessage : gobject.boxed.Boxed
   bool hasBodyBuffer()
   {
     bool _retval;
-    _retval = gst_rtsp_message_has_body_buffer(cast(const(GstRTSPMessage)*)this._cPtr);
+    _retval = cast(bool)gst_rtsp_message_has_body_buffer(cast(const(GstRTSPMessage)*)this._cPtr);
     return _retval;
   }
 

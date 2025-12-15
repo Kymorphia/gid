@@ -40,7 +40,7 @@ class Descriptor : gobject.object.ObjectWrap
   bool equal(arrowflight.descriptor.Descriptor otherDescriptor)
   {
     bool _retval;
-    _retval = gaflight_descriptor_equal(cast(GAFlightDescriptor*)this._cPtr, otherDescriptor ? cast(GAFlightDescriptor*)otherDescriptor._cPtr(No.Dup) : null);
+    _retval = cast(bool)gaflight_descriptor_equal(cast(GAFlightDescriptor*)this._cPtr, otherDescriptor ? cast(GAFlightDescriptor*)otherDescriptor._cPtr(No.Dup) : null);
     return _retval;
   }
 

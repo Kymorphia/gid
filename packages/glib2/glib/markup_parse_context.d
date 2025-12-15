@@ -72,7 +72,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = g_markup_parse_context_end_parse(cast(GMarkupParseContext*)this._cPtr, &_err);
+    _retval = cast(bool)g_markup_parse_context_end_parse(cast(GMarkupParseContext*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -170,7 +170,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
     GError *_err;
-    _retval = g_markup_parse_context_parse(cast(GMarkupParseContext*)this._cPtr, _text, textLen, &_err);
+    _retval = cast(bool)g_markup_parse_context_parse(cast(GMarkupParseContext*)this._cPtr, _text, textLen, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

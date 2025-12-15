@@ -336,7 +336,7 @@ class FontDialogButton : gtk.widget.Widget
   bool getUseFont()
   {
     bool _retval;
-    _retval = gtk_font_dialog_button_get_use_font(cast(GtkFontDialogButton*)this._cPtr);
+    _retval = cast(bool)gtk_font_dialog_button_get_use_font(cast(GtkFontDialogButton*)this._cPtr);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class FontDialogButton : gtk.widget.Widget
   bool getUseSize()
   {
     bool _retval;
-    _retval = gtk_font_dialog_button_get_use_size(cast(GtkFontDialogButton*)this._cPtr);
+    _retval = cast(bool)gtk_font_dialog_button_get_use_size(cast(GtkFontDialogButton*)this._cPtr);
     return _retval;
   }
 

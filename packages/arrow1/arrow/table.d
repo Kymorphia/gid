@@ -155,7 +155,7 @@ class Table : gobject.object.ObjectWrap
   bool equal(arrow.table.Table otherTable)
   {
     bool _retval;
-    _retval = garrow_table_equal(cast(GArrowTable*)this._cPtr, otherTable ? cast(GArrowTable*)otherTable._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_table_equal(cast(GArrowTable*)this._cPtr, otherTable ? cast(GArrowTable*)otherTable._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class Table : gobject.object.ObjectWrap
   bool equalMetadata(arrow.table.Table otherTable, bool checkMetadata)
   {
     bool _retval;
-    _retval = garrow_table_equal_metadata(cast(GArrowTable*)this._cPtr, otherTable ? cast(GArrowTable*)otherTable._cPtr(No.Dup) : null, checkMetadata);
+    _retval = cast(bool)garrow_table_equal_metadata(cast(GArrowTable*)this._cPtr, otherTable ? cast(GArrowTable*)otherTable._cPtr(No.Dup) : null, checkMetadata);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class Table : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_table_write_as_feather(cast(GArrowTable*)this._cPtr, sink ? cast(GArrowOutputStream*)sink._cPtr(No.Dup) : null, properties ? cast(GArrowFeatherWriteProperties*)properties._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_table_write_as_feather(cast(GArrowTable*)this._cPtr, sink ? cast(GArrowOutputStream*)sink._cPtr(No.Dup) : null, properties ? cast(GArrowFeatherWriteProperties*)properties._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

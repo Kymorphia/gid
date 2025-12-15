@@ -57,7 +57,7 @@ template TableCellT()
   override bool getPosition(out int row, out int column)
   {
     bool _retval;
-    _retval = atk_table_cell_get_position(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column);
+    _retval = cast(bool)atk_table_cell_get_position(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ template TableCellT()
   override bool getRowColumnSpan(out int row, out int column, out int rowSpan, out int columnSpan)
   {
     bool _retval;
-    _retval = atk_table_cell_get_row_column_span(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column, cast(int*)&rowSpan, cast(int*)&columnSpan);
+    _retval = cast(bool)atk_table_cell_get_row_column_span(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column, cast(int*)&rowSpan, cast(int*)&columnSpan);
     return _retval;
   }
 

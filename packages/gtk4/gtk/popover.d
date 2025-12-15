@@ -307,7 +307,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getAutohide()
   {
     bool _retval;
-    _retval = gtk_popover_get_autohide(cast(GtkPopover*)this._cPtr);
+    _retval = cast(bool)gtk_popover_get_autohide(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getCascadePopdown()
   {
     bool _retval;
-    _retval = gtk_popover_get_cascade_popdown(cast(GtkPopover*)this._cPtr);
+    _retval = cast(bool)gtk_popover_get_cascade_popdown(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getHasArrow()
   {
     bool _retval;
-    _retval = gtk_popover_get_has_arrow(cast(GtkPopover*)this._cPtr);
+    _retval = cast(bool)gtk_popover_get_has_arrow(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getMnemonicsVisible()
   {
     bool _retval;
-    _retval = gtk_popover_get_mnemonics_visible(cast(GtkPopover*)this._cPtr);
+    _retval = cast(bool)gtk_popover_get_mnemonics_visible(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
+    _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }

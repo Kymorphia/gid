@@ -87,7 +87,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   bool containsPointer()
   {
     bool _retval;
-    _retval = gtk_drop_controller_motion_contains_pointer(cast(GtkDropControllerMotion*)this._cPtr);
+    _retval = cast(bool)gtk_drop_controller_motion_contains_pointer(cast(GtkDropControllerMotion*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   bool isPointer()
   {
     bool _retval;
-    _retval = gtk_drop_controller_motion_is_pointer(cast(GtkDropControllerMotion*)this._cPtr);
+    _retval = cast(bool)gtk_drop_controller_motion_is_pointer(cast(GtkDropControllerMotion*)this._cPtr);
     return _retval;
   }
 

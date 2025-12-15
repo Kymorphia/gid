@@ -32,7 +32,7 @@ __gshared extern(C)
 
   // Navigation
   GType function() c_gst_navigation_get_type; ///
-  bool function(GstEvent* event, double* x, double* y) c_gst_navigation_event_get_coordinates; ///
+  gboolean function(GstEvent* event, double* x, double* y) c_gst_navigation_event_get_coordinates; ///
   GstNavigationEventType function(GstEvent* event) c_gst_navigation_event_get_type; ///
   GstEvent* function(GstNavigationCommand command) c_gst_navigation_event_new_command; ///
   GstEvent* function(const(char)* key, GstNavigationModifierType state) c_gst_navigation_event_new_key_press; ///
@@ -46,29 +46,29 @@ __gshared extern(C)
   GstEvent* function(GstNavigationModifierType state) c_gst_navigation_event_new_touch_frame; ///
   GstEvent* function(uint identifier, double x, double y, double pressure, GstNavigationModifierType state) c_gst_navigation_event_new_touch_motion; ///
   GstEvent* function(uint identifier, double x, double y, GstNavigationModifierType state) c_gst_navigation_event_new_touch_up; ///
-  bool function(GstEvent* event, GstNavigationCommand* command) c_gst_navigation_event_parse_command; ///
-  bool function(GstEvent* event, const(char*)* key) c_gst_navigation_event_parse_key_event; ///
-  bool function(GstEvent* event, GstNavigationModifierType* state) c_gst_navigation_event_parse_modifier_state; ///
-  bool function(GstEvent* event, int* button, double* x, double* y) c_gst_navigation_event_parse_mouse_button_event; ///
-  bool function(GstEvent* event, double* x, double* y) c_gst_navigation_event_parse_mouse_move_event; ///
-  bool function(GstEvent* event, double* x, double* y, double* deltaX, double* deltaY) c_gst_navigation_event_parse_mouse_scroll_event; ///
-  bool function(GstEvent* event, uint* identifier, double* x, double* y, double* pressure) c_gst_navigation_event_parse_touch_event; ///
-  bool function(GstEvent* event, uint* identifier, double* x, double* y) c_gst_navigation_event_parse_touch_up_event; ///
-  bool function(GstEvent* event, double x, double y) c_gst_navigation_event_set_coordinates; ///
+  gboolean function(GstEvent* event, GstNavigationCommand* command) c_gst_navigation_event_parse_command; ///
+  gboolean function(GstEvent* event, const(char*)* key) c_gst_navigation_event_parse_key_event; ///
+  gboolean function(GstEvent* event, GstNavigationModifierType* state) c_gst_navigation_event_parse_modifier_state; ///
+  gboolean function(GstEvent* event, int* button, double* x, double* y) c_gst_navigation_event_parse_mouse_button_event; ///
+  gboolean function(GstEvent* event, double* x, double* y) c_gst_navigation_event_parse_mouse_move_event; ///
+  gboolean function(GstEvent* event, double* x, double* y, double* deltaX, double* deltaY) c_gst_navigation_event_parse_mouse_scroll_event; ///
+  gboolean function(GstEvent* event, uint* identifier, double* x, double* y, double* pressure) c_gst_navigation_event_parse_touch_event; ///
+  gboolean function(GstEvent* event, uint* identifier, double* x, double* y) c_gst_navigation_event_parse_touch_up_event; ///
+  gboolean function(GstEvent* event, double x, double y) c_gst_navigation_event_set_coordinates; ///
   GstNavigationMessageType function(GstMessage* message) c_gst_navigation_message_get_type; ///
   GstMessage* function(GstObject* src, uint curAngle, uint nAngles) c_gst_navigation_message_new_angles_changed; ///
   GstMessage* function(GstObject* src) c_gst_navigation_message_new_commands_changed; ///
   GstMessage* function(GstObject* src, GstEvent* event) c_gst_navigation_message_new_event; ///
-  GstMessage* function(GstObject* src, bool active) c_gst_navigation_message_new_mouse_over; ///
-  bool function(GstMessage* message, uint* curAngle, uint* nAngles) c_gst_navigation_message_parse_angles_changed; ///
-  bool function(GstMessage* message, GstEvent** event) c_gst_navigation_message_parse_event; ///
-  bool function(GstMessage* message, bool* active) c_gst_navigation_message_parse_mouse_over; ///
+  GstMessage* function(GstObject* src, gboolean active) c_gst_navigation_message_new_mouse_over; ///
+  gboolean function(GstMessage* message, uint* curAngle, uint* nAngles) c_gst_navigation_message_parse_angles_changed; ///
+  gboolean function(GstMessage* message, GstEvent** event) c_gst_navigation_message_parse_event; ///
+  gboolean function(GstMessage* message, gboolean* active) c_gst_navigation_message_parse_mouse_over; ///
   GstNavigationQueryType function(GstQuery* query) c_gst_navigation_query_get_type; ///
   GstQuery* function() c_gst_navigation_query_new_angles; ///
   GstQuery* function() c_gst_navigation_query_new_commands; ///
-  bool function(GstQuery* query, uint* curAngle, uint* nAngles) c_gst_navigation_query_parse_angles; ///
-  bool function(GstQuery* query, uint* nCmds) c_gst_navigation_query_parse_commands_length; ///
-  bool function(GstQuery* query, uint nth, GstNavigationCommand* cmd) c_gst_navigation_query_parse_commands_nth; ///
+  gboolean function(GstQuery* query, uint* curAngle, uint* nAngles) c_gst_navigation_query_parse_angles; ///
+  gboolean function(GstQuery* query, uint* nCmds) c_gst_navigation_query_parse_commands_length; ///
+  gboolean function(GstQuery* query, uint nth, GstNavigationCommand* cmd) c_gst_navigation_query_parse_commands_nth; ///
   void function(GstQuery* query, uint curAngle, uint nAngles) c_gst_navigation_query_set_angles; ///
   void function(GstQuery* query, int nCmds,  ...) c_gst_navigation_query_set_commands; ///
   void function(GstQuery* query, int nCmds, GstNavigationCommand* cmds) c_gst_navigation_query_set_commandsv; ///
@@ -98,8 +98,8 @@ __gshared extern(C)
   GType function() c_gst_video_aggregator_pad_get_type; ///
   GstBuffer* function(GstVideoAggregatorPad* pad) c_gst_video_aggregator_pad_get_current_buffer; ///
   GstVideoFrame* function(GstVideoAggregatorPad* pad) c_gst_video_aggregator_pad_get_prepared_frame; ///
-  bool function(GstVideoAggregatorPad* pad) c_gst_video_aggregator_pad_has_current_buffer; ///
-  void function(GstVideoAggregatorPad* pad, bool needsAlpha) c_gst_video_aggregator_pad_set_needs_alpha; ///
+  gboolean function(GstVideoAggregatorPad* pad) c_gst_video_aggregator_pad_has_current_buffer; ///
+  void function(GstVideoAggregatorPad* pad, gboolean needsAlpha) c_gst_video_aggregator_pad_set_needs_alpha; ///
 
   // VideoAggregatorParallelConvertPad
   GType function() c_gst_video_aggregator_parallel_convert_pad_get_type; ///
@@ -138,18 +138,18 @@ __gshared extern(C)
   void function(GstVideoCodecState* state) c_gst_video_codec_state_unref; ///
 
   // VideoColorimetry
-  bool function(GstVideoColorimetry* cinfo, const(char)* color) c_gst_video_colorimetry_from_string; ///
-  bool function(const(GstVideoColorimetry)* cinfo, const(GstVideoColorimetry)* other) c_gst_video_colorimetry_is_equal; ///
-  bool function(const(GstVideoColorimetry)* cinfo, uint bitdepth, const(GstVideoColorimetry)* other, uint otherBitdepth) c_gst_video_colorimetry_is_equivalent; ///
-  bool function(const(GstVideoColorimetry)* cinfo, const(char)* color) c_gst_video_colorimetry_matches; ///
+  gboolean function(GstVideoColorimetry* cinfo, const(char)* color) c_gst_video_colorimetry_from_string; ///
+  gboolean function(const(GstVideoColorimetry)* cinfo, const(GstVideoColorimetry)* other) c_gst_video_colorimetry_is_equal; ///
+  gboolean function(const(GstVideoColorimetry)* cinfo, uint bitdepth, const(GstVideoColorimetry)* other, uint otherBitdepth) c_gst_video_colorimetry_is_equivalent; ///
+  gboolean function(const(GstVideoColorimetry)* cinfo, const(char)* color) c_gst_video_colorimetry_matches; ///
   char* function(const(GstVideoColorimetry)* cinfo) c_gst_video_colorimetry_to_string; ///
 
   // VideoContentLightLevel
-  bool function(const(GstVideoContentLightLevel)* linfo, GstCaps* caps) c_gst_video_content_light_level_add_to_caps; ///
-  bool function(GstVideoContentLightLevel* linfo, const(GstCaps)* caps) c_gst_video_content_light_level_from_caps; ///
-  bool function(GstVideoContentLightLevel* linfo, const(char)* level) c_gst_video_content_light_level_from_string; ///
+  gboolean function(const(GstVideoContentLightLevel)* linfo, GstCaps* caps) c_gst_video_content_light_level_add_to_caps; ///
+  gboolean function(GstVideoContentLightLevel* linfo, const(GstCaps)* caps) c_gst_video_content_light_level_from_caps; ///
+  gboolean function(GstVideoContentLightLevel* linfo, const(char)* level) c_gst_video_content_light_level_from_string; ///
   void function(GstVideoContentLightLevel* linfo) c_gst_video_content_light_level_init; ///
-  bool function(const(GstVideoContentLightLevel)* linfo, const(GstVideoContentLightLevel)* other) c_gst_video_content_light_level_is_equal; ///
+  gboolean function(const(GstVideoContentLightLevel)* linfo, const(GstVideoContentLightLevel)* other) c_gst_video_content_light_level_is_equal; ///
   char* function(const(GstVideoContentLightLevel)* linfo) c_gst_video_content_light_level_to_string; ///
 
   // VideoConverter
@@ -159,7 +159,7 @@ __gshared extern(C)
   const(GstStructure)* function(GstVideoConverter* convert) c_gst_video_converter_get_config; ///
   const(GstVideoInfo)* function(GstVideoConverter* convert) c_gst_video_converter_get_in_info; ///
   const(GstVideoInfo)* function(GstVideoConverter* convert) c_gst_video_converter_get_out_info; ///
-  bool function(GstVideoConverter* convert, GstStructure* config) c_gst_video_converter_set_config; ///
+  gboolean function(GstVideoConverter* convert, GstStructure* config) c_gst_video_converter_set_config; ///
   GstVideoConverter* function(const(GstVideoInfo)* inInfo, const(GstVideoInfo)* outInfo, GstStructure* config) c_gst_video_converter_new; ///
   GstVideoConverter* function(const(GstVideoInfo)* inInfo, const(GstVideoInfo)* outInfo, GstStructure* config, GstTaskPool* pool) c_gst_video_converter_new_with_pool; ///
 
@@ -185,32 +185,32 @@ __gshared extern(C)
   void function(GstVideoDecoder* decoder, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_video_decoder_get_latency; ///
   GstClockTimeDiff function(GstVideoDecoder* decoder, GstVideoCodecFrame* frame) c_gst_video_decoder_get_max_decode_time; ///
   int function(GstVideoDecoder* dec) c_gst_video_decoder_get_max_errors; ///
-  bool function(GstVideoDecoder* dec) c_gst_video_decoder_get_needs_format; ///
-  bool function(GstVideoDecoder* dec) c_gst_video_decoder_get_needs_sync_point; ///
+  gboolean function(GstVideoDecoder* dec) c_gst_video_decoder_get_needs_format; ///
+  gboolean function(GstVideoDecoder* dec) c_gst_video_decoder_get_needs_sync_point; ///
   GstVideoCodecFrame* function(GstVideoDecoder* decoder) c_gst_video_decoder_get_oldest_frame; ///
   GstVideoCodecState* function(GstVideoDecoder* decoder) c_gst_video_decoder_get_output_state; ///
-  bool function(GstVideoDecoder* decoder) c_gst_video_decoder_get_packetized; ///
+  gboolean function(GstVideoDecoder* decoder) c_gst_video_decoder_get_packetized; ///
   size_t function(GstVideoDecoder* decoder) c_gst_video_decoder_get_pending_frame_size; ///
   uint function(GstVideoDecoder* decoder, GstVideoCodecFrame* frame) c_gst_video_decoder_get_processed_subframe_index; ///
   double function(GstVideoDecoder* decoder) c_gst_video_decoder_get_qos_proportion; ///
-  bool function(GstVideoDecoder* decoder) c_gst_video_decoder_get_subframe_mode; ///
+  gboolean function(GstVideoDecoder* decoder) c_gst_video_decoder_get_subframe_mode; ///
   GstFlowReturn function(GstVideoDecoder* decoder) c_gst_video_decoder_have_frame; ///
   GstFlowReturn function(GstVideoDecoder* decoder, GstVideoCodecFrame* frame) c_gst_video_decoder_have_last_subframe; ///
   void function(GstVideoDecoder* decoder, const(GstTagList)* tags, GstTagMergeMode mode) c_gst_video_decoder_merge_tags; ///
-  bool function(GstVideoDecoder* decoder) c_gst_video_decoder_negotiate; ///
+  gboolean function(GstVideoDecoder* decoder) c_gst_video_decoder_negotiate; ///
   GstCaps* function(GstVideoDecoder* decoder, GstCaps* caps, GstCaps* filter) c_gst_video_decoder_proxy_getcaps; ///
   void function(GstVideoDecoder* dec, GstVideoCodecFrame* frame) c_gst_video_decoder_release_frame; ///
   void function(GstVideoDecoder* dec, GstVideoCodecFrame* frame, GstVideoDecoderRequestSyncPointFlags flags) c_gst_video_decoder_request_sync_point; ///
-  void function(GstVideoDecoder* dec, bool enabled) c_gst_video_decoder_set_estimate_rate; ///
+  void function(GstVideoDecoder* dec, gboolean enabled) c_gst_video_decoder_set_estimate_rate; ///
   GstVideoCodecState* function(GstVideoDecoder* decoder, GstVideoFormat fmt, GstVideoInterlaceMode interlaceMode, uint width, uint height, GstVideoCodecState* reference) c_gst_video_decoder_set_interlaced_output_state; ///
   void function(GstVideoDecoder* decoder, GstClockTime minLatency, GstClockTime maxLatency) c_gst_video_decoder_set_latency; ///
   void function(GstVideoDecoder* dec, int num) c_gst_video_decoder_set_max_errors; ///
-  void function(GstVideoDecoder* dec, bool enabled) c_gst_video_decoder_set_needs_format; ///
-  void function(GstVideoDecoder* dec, bool enabled) c_gst_video_decoder_set_needs_sync_point; ///
+  void function(GstVideoDecoder* dec, gboolean enabled) c_gst_video_decoder_set_needs_format; ///
+  void function(GstVideoDecoder* dec, gboolean enabled) c_gst_video_decoder_set_needs_sync_point; ///
   GstVideoCodecState* function(GstVideoDecoder* decoder, GstVideoFormat fmt, uint width, uint height, GstVideoCodecState* reference) c_gst_video_decoder_set_output_state; ///
-  void function(GstVideoDecoder* decoder, bool packetized) c_gst_video_decoder_set_packetized; ///
-  void function(GstVideoDecoder* decoder, bool subframeMode) c_gst_video_decoder_set_subframe_mode; ///
-  void function(GstVideoDecoder* decoder, bool use) c_gst_video_decoder_set_use_default_pad_acceptcaps; ///
+  void function(GstVideoDecoder* decoder, gboolean packetized) c_gst_video_decoder_set_packetized; ///
+  void function(GstVideoDecoder* decoder, gboolean subframeMode) c_gst_video_decoder_set_subframe_mode; ///
+  void function(GstVideoDecoder* decoder, gboolean use) c_gst_video_decoder_set_use_default_pad_acceptcaps; ///
 
   // VideoDirection
   GType function() c_gst_video_direction_get_type; ///
@@ -234,16 +234,16 @@ __gshared extern(C)
   GstClockTime function(GstVideoEncoder* encoder) c_gst_video_encoder_get_min_force_key_unit_interval; ///
   GstVideoCodecFrame* function(GstVideoEncoder* encoder) c_gst_video_encoder_get_oldest_frame; ///
   GstVideoCodecState* function(GstVideoEncoder* encoder) c_gst_video_encoder_get_output_state; ///
-  bool function(GstVideoEncoder* encoder) c_gst_video_encoder_is_qos_enabled; ///
+  gboolean function(GstVideoEncoder* encoder) c_gst_video_encoder_is_qos_enabled; ///
   void function(GstVideoEncoder* encoder, const(GstTagList)* tags, GstTagMergeMode mode) c_gst_video_encoder_merge_tags; ///
-  bool function(GstVideoEncoder* encoder) c_gst_video_encoder_negotiate; ///
+  gboolean function(GstVideoEncoder* encoder) c_gst_video_encoder_negotiate; ///
   GstCaps* function(GstVideoEncoder* enc, GstCaps* caps, GstCaps* filter) c_gst_video_encoder_proxy_getcaps; ///
   void function(GstVideoEncoder* encoder, GList* headers) c_gst_video_encoder_set_headers; ///
   void function(GstVideoEncoder* encoder, GstClockTime minLatency, GstClockTime maxLatency) c_gst_video_encoder_set_latency; ///
   void function(GstVideoEncoder* encoder, GstClockTime interval) c_gst_video_encoder_set_min_force_key_unit_interval; ///
   void function(GstVideoEncoder* encoder, GstClockTime minPts) c_gst_video_encoder_set_min_pts; ///
   GstVideoCodecState* function(GstVideoEncoder* encoder, GstCaps* caps, GstVideoCodecState* reference) c_gst_video_encoder_set_output_state; ///
-  void function(GstVideoEncoder* encoder, bool enabled) c_gst_video_encoder_set_qos_enabled; ///
+  void function(GstVideoEncoder* encoder, gboolean enabled) c_gst_video_encoder_set_qos_enabled; ///
 
   // VideoFilter
   GType function() c_gst_video_filter_get_type; ///
@@ -253,30 +253,30 @@ __gshared extern(C)
   int function(const(GstVideoFormatInfo)* finfo, int plane, int stride) c_gst_video_format_info_extrapolate_stride; ///
 
   // VideoFrame
-  bool function(GstVideoFrame* dest, const(GstVideoFrame)* src) c_gst_video_frame_copy; ///
-  bool function(GstVideoFrame* dest, const(GstVideoFrame)* src, uint plane) c_gst_video_frame_copy_plane; ///
+  gboolean function(GstVideoFrame* dest, const(GstVideoFrame)* src) c_gst_video_frame_copy; ///
+  gboolean function(GstVideoFrame* dest, const(GstVideoFrame)* src, uint plane) c_gst_video_frame_copy_plane; ///
   void function(GstVideoFrame* frame) c_gst_video_frame_unmap; ///
-  bool function(GstVideoFrame* frame, const(GstVideoInfo)* info, GstBuffer* buffer, GstMapFlags flags) c_gst_video_frame_map; ///
-  bool function(GstVideoFrame* frame, const(GstVideoInfo)* info, GstBuffer* buffer, int id, GstMapFlags flags) c_gst_video_frame_map_id; ///
+  gboolean function(GstVideoFrame* frame, const(GstVideoInfo)* info, GstBuffer* buffer, GstMapFlags flags) c_gst_video_frame_map; ///
+  gboolean function(GstVideoFrame* frame, const(GstVideoInfo)* info, GstBuffer* buffer, int id, GstMapFlags flags) c_gst_video_frame_map_id; ///
 
   // VideoGLTextureUploadMeta
-  bool function(GstVideoGLTextureUploadMeta* meta, uint* textureId) c_gst_video_gl_texture_upload_meta_upload; ///
+  gboolean function(GstVideoGLTextureUploadMeta* meta, uint* textureId) c_gst_video_gl_texture_upload_meta_upload; ///
   const(GstMetaInfo)* function() c_gst_video_gl_texture_upload_meta_get_info; ///
 
   // VideoInfo
   GType function() c_gst_video_info_get_type; ///
   GstVideoInfo* function() c_gst_video_info_new; ///
   GstVideoInfo* function(const(GstCaps)* caps) c_gst_video_info_new_from_caps; ///
-  bool function(GstVideoInfo* info, GstVideoAlignment* align_) c_gst_video_info_align; ///
-  bool function(GstVideoInfo* info, GstVideoAlignment* align_, size_t* planeSize) c_gst_video_info_align_full; ///
-  bool function(const(GstVideoInfo)* info, GstFormat srcFormat, long srcValue, GstFormat destFormat, long* destValue) c_gst_video_info_convert; ///
+  gboolean function(GstVideoInfo* info, GstVideoAlignment* align_) c_gst_video_info_align; ///
+  gboolean function(GstVideoInfo* info, GstVideoAlignment* align_, size_t* planeSize) c_gst_video_info_align_full; ///
+  gboolean function(const(GstVideoInfo)* info, GstFormat srcFormat, long srcValue, GstFormat destFormat, long* destValue) c_gst_video_info_convert; ///
   GstVideoInfo* function(const(GstVideoInfo)* info) c_gst_video_info_copy; ///
   void function(GstVideoInfo* info) c_gst_video_info_free; ///
-  bool function(const(GstVideoInfo)* info, const(GstVideoInfo)* other) c_gst_video_info_is_equal; ///
-  bool function(GstVideoInfo* info, GstVideoFormat format, uint width, uint height) c_gst_video_info_set_format; ///
-  bool function(GstVideoInfo* info, GstVideoFormat format, GstVideoInterlaceMode mode, uint width, uint height) c_gst_video_info_set_interlaced_format; ///
+  gboolean function(const(GstVideoInfo)* info, const(GstVideoInfo)* other) c_gst_video_info_is_equal; ///
+  gboolean function(GstVideoInfo* info, GstVideoFormat format, uint width, uint height) c_gst_video_info_set_format; ///
+  gboolean function(GstVideoInfo* info, GstVideoFormat format, GstVideoInterlaceMode mode, uint width, uint height) c_gst_video_info_set_interlaced_format; ///
   GstCaps* function(const(GstVideoInfo)* info) c_gst_video_info_to_caps; ///
-  bool function(GstVideoInfo* info, const(GstCaps)* caps) c_gst_video_info_from_caps; ///
+  gboolean function(GstVideoInfo* info, const(GstCaps)* caps) c_gst_video_info_from_caps; ///
   void function(GstVideoInfo* info) c_gst_video_info_init; ///
 
   // VideoInfoDmaDrm
@@ -285,25 +285,25 @@ __gshared extern(C)
   GstVideoInfoDmaDrm* function(const(GstCaps)* caps) c_gst_video_info_dma_drm_new_from_caps; ///
   void function(GstVideoInfoDmaDrm* drmInfo) c_gst_video_info_dma_drm_free; ///
   GstCaps* function(const(GstVideoInfoDmaDrm)* drmInfo) c_gst_video_info_dma_drm_to_caps; ///
-  bool function(const(GstVideoInfoDmaDrm)* drmInfo, GstVideoInfo* info) c_gst_video_info_dma_drm_to_video_info; ///
-  bool function(GstVideoInfoDmaDrm* drmInfo, const(GstCaps)* caps) c_gst_video_info_dma_drm_from_caps; ///
-  bool function(GstVideoInfoDmaDrm* drmInfo, const(GstVideoInfo)* info, ulong modifier) c_gst_video_info_dma_drm_from_video_info; ///
+  gboolean function(const(GstVideoInfoDmaDrm)* drmInfo, GstVideoInfo* info) c_gst_video_info_dma_drm_to_video_info; ///
+  gboolean function(GstVideoInfoDmaDrm* drmInfo, const(GstCaps)* caps) c_gst_video_info_dma_drm_from_caps; ///
+  gboolean function(GstVideoInfoDmaDrm* drmInfo, const(GstVideoInfo)* info, ulong modifier) c_gst_video_info_dma_drm_from_video_info; ///
   void function(GstVideoInfoDmaDrm* drmInfo) c_gst_video_info_dma_drm_init; ///
 
   // VideoMasteringDisplayInfo
-  bool function(const(GstVideoMasteringDisplayInfo)* minfo, GstCaps* caps) c_gst_video_mastering_display_info_add_to_caps; ///
-  bool function(GstVideoMasteringDisplayInfo* minfo, const(GstCaps)* caps) c_gst_video_mastering_display_info_from_caps; ///
+  gboolean function(const(GstVideoMasteringDisplayInfo)* minfo, GstCaps* caps) c_gst_video_mastering_display_info_add_to_caps; ///
+  gboolean function(GstVideoMasteringDisplayInfo* minfo, const(GstCaps)* caps) c_gst_video_mastering_display_info_from_caps; ///
   void function(GstVideoMasteringDisplayInfo* minfo) c_gst_video_mastering_display_info_init; ///
-  bool function(const(GstVideoMasteringDisplayInfo)* minfo, const(GstVideoMasteringDisplayInfo)* other) c_gst_video_mastering_display_info_is_equal; ///
+  gboolean function(const(GstVideoMasteringDisplayInfo)* minfo, const(GstVideoMasteringDisplayInfo)* other) c_gst_video_mastering_display_info_is_equal; ///
   char* function(const(GstVideoMasteringDisplayInfo)* minfo) c_gst_video_mastering_display_info_to_string; ///
-  bool function(GstVideoMasteringDisplayInfo* minfo, const(char)* mastering) c_gst_video_mastering_display_info_from_string; ///
+  gboolean function(GstVideoMasteringDisplayInfo* minfo, const(char)* mastering) c_gst_video_mastering_display_info_from_string; ///
 
   // VideoMeta
-  bool function(GstVideoMeta* meta, uint* planeHeight) c_gst_video_meta_get_plane_height; ///
-  bool function(GstVideoMeta* meta, size_t* planeSize) c_gst_video_meta_get_plane_size; ///
-  bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info, void** data, int* stride, GstMapFlags flags) c_gst_video_meta_map; ///
-  bool function(GstVideoMeta* meta, GstVideoAlignment alignment) c_gst_video_meta_set_alignment; ///
-  bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info) c_gst_video_meta_unmap; ///
+  gboolean function(GstVideoMeta* meta, uint* planeHeight) c_gst_video_meta_get_plane_height; ///
+  gboolean function(GstVideoMeta* meta, size_t* planeSize) c_gst_video_meta_get_plane_size; ///
+  gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info, void** data, int* stride, GstMapFlags flags) c_gst_video_meta_map; ///
+  gboolean function(GstVideoMeta* meta, GstVideoAlignment alignment) c_gst_video_meta_set_alignment; ///
+  gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info) c_gst_video_meta_unmap; ///
   const(GstMetaInfo)* function() c_gst_video_meta_get_info; ///
 
   // VideoMetaTransform
@@ -314,32 +314,32 @@ __gshared extern(C)
 
   // VideoOrientation
   GType function() c_gst_video_orientation_get_type; ///
-  bool function(GstTagList* taglist, GstVideoOrientationMethod* method) c_gst_video_orientation_from_tag; ///
-  bool function(GstVideoOrientation* videoOrientation, int* center) c_gst_video_orientation_get_hcenter; ///
-  bool function(GstVideoOrientation* videoOrientation, bool* flip) c_gst_video_orientation_get_hflip; ///
-  bool function(GstVideoOrientation* videoOrientation, int* center) c_gst_video_orientation_get_vcenter; ///
-  bool function(GstVideoOrientation* videoOrientation, bool* flip) c_gst_video_orientation_get_vflip; ///
-  bool function(GstVideoOrientation* videoOrientation, int center) c_gst_video_orientation_set_hcenter; ///
-  bool function(GstVideoOrientation* videoOrientation, bool flip) c_gst_video_orientation_set_hflip; ///
-  bool function(GstVideoOrientation* videoOrientation, int center) c_gst_video_orientation_set_vcenter; ///
-  bool function(GstVideoOrientation* videoOrientation, bool flip) c_gst_video_orientation_set_vflip; ///
+  gboolean function(GstTagList* taglist, GstVideoOrientationMethod* method) c_gst_video_orientation_from_tag; ///
+  gboolean function(GstVideoOrientation* videoOrientation, int* center) c_gst_video_orientation_get_hcenter; ///
+  gboolean function(GstVideoOrientation* videoOrientation, gboolean* flip) c_gst_video_orientation_get_hflip; ///
+  gboolean function(GstVideoOrientation* videoOrientation, int* center) c_gst_video_orientation_get_vcenter; ///
+  gboolean function(GstVideoOrientation* videoOrientation, gboolean* flip) c_gst_video_orientation_get_vflip; ///
+  gboolean function(GstVideoOrientation* videoOrientation, int center) c_gst_video_orientation_set_hcenter; ///
+  gboolean function(GstVideoOrientation* videoOrientation, gboolean flip) c_gst_video_orientation_set_hflip; ///
+  gboolean function(GstVideoOrientation* videoOrientation, int center) c_gst_video_orientation_set_vcenter; ///
+  gboolean function(GstVideoOrientation* videoOrientation, gboolean flip) c_gst_video_orientation_set_vflip; ///
 
   // VideoOverlay
   GType function() c_gst_video_overlay_get_type; ///
   void function(GObjectClass* oclass, int lastPropId) c_gst_video_overlay_install_properties; ///
-  bool function(GObject* object, int lastPropId, uint propertyId, const(GValue)* value) c_gst_video_overlay_set_property; ///
+  gboolean function(GObject* object, int lastPropId, uint propertyId, const(GValue)* value) c_gst_video_overlay_set_property; ///
   void function(GstVideoOverlay* overlay) c_gst_video_overlay_expose; ///
   void function(GstVideoOverlay* overlay, size_t handle) c_gst_video_overlay_got_window_handle; ///
-  void function(GstVideoOverlay* overlay, bool handleEvents) c_gst_video_overlay_handle_events; ///
+  void function(GstVideoOverlay* overlay, gboolean handleEvents) c_gst_video_overlay_handle_events; ///
   void function(GstVideoOverlay* overlay) c_gst_video_overlay_prepare_window_handle; ///
-  bool function(GstVideoOverlay* overlay, int x, int y, int width, int height) c_gst_video_overlay_set_render_rectangle; ///
+  gboolean function(GstVideoOverlay* overlay, int x, int y, int width, int height) c_gst_video_overlay_set_render_rectangle; ///
   void function(GstVideoOverlay* overlay, size_t handle) c_gst_video_overlay_set_window_handle; ///
 
   // VideoOverlayComposition
   GType function() c_gst_video_overlay_composition_get_type; ///
   GstVideoOverlayComposition* function(GstVideoOverlayRectangle* rectangle) c_gst_video_overlay_composition_new; ///
   void function(GstVideoOverlayComposition* comp, GstVideoOverlayRectangle* rectangle) c_gst_video_overlay_composition_add_rectangle; ///
-  bool function(GstVideoOverlayComposition* comp, GstVideoFrame* videoBuf) c_gst_video_overlay_composition_blend; ///
+  gboolean function(GstVideoOverlayComposition* comp, GstVideoFrame* videoBuf) c_gst_video_overlay_composition_blend; ///
   GstVideoOverlayComposition* function(GstVideoOverlayComposition* comp) c_gst_video_overlay_composition_copy; ///
   GstVideoOverlayRectangle* function(GstVideoOverlayComposition* comp, uint n) c_gst_video_overlay_composition_get_rectangle; ///
   uint function(GstVideoOverlayComposition* comp) c_gst_video_overlay_composition_get_seqnum; ///
@@ -361,7 +361,7 @@ __gshared extern(C)
   GstBuffer* function(GstVideoOverlayRectangle* rectangle, GstVideoOverlayFormatFlags flags) c_gst_video_overlay_rectangle_get_pixels_unscaled_argb; ///
   GstBuffer* function(GstVideoOverlayRectangle* rectangle, GstVideoOverlayFormatFlags flags) c_gst_video_overlay_rectangle_get_pixels_unscaled_ayuv; ///
   GstBuffer* function(GstVideoOverlayRectangle* rectangle, GstVideoOverlayFormatFlags flags) c_gst_video_overlay_rectangle_get_pixels_unscaled_raw; ///
-  bool function(GstVideoOverlayRectangle* rectangle, int* renderX, int* renderY, uint* renderWidth, uint* renderHeight) c_gst_video_overlay_rectangle_get_render_rectangle; ///
+  gboolean function(GstVideoOverlayRectangle* rectangle, int* renderX, int* renderY, uint* renderWidth, uint* renderHeight) c_gst_video_overlay_rectangle_get_render_rectangle; ///
   uint function(GstVideoOverlayRectangle* rectangle) c_gst_video_overlay_rectangle_get_seqnum; ///
   void function(GstVideoOverlayRectangle* rectangle, float globalAlpha) c_gst_video_overlay_rectangle_set_global_alpha; ///
   void function(GstVideoOverlayRectangle* rectangle, int renderX, int renderY, uint renderWidth, uint renderHeight) c_gst_video_overlay_rectangle_set_render_rectangle; ///
@@ -373,7 +373,7 @@ __gshared extern(C)
 
   // VideoResampler
   void function(GstVideoResampler* resampler) c_gst_video_resampler_clear; ///
-  bool function(GstVideoResampler* resampler, GstVideoResamplerMethod method, GstVideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, GstStructure* options) c_gst_video_resampler_init; ///
+  gboolean function(GstVideoResampler* resampler, GstVideoResamplerMethod method, GstVideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, GstStructure* options) c_gst_video_resampler_init; ///
 
   // VideoSEIUserDataUnregisteredMeta
   const(GstMetaInfo)* function() c_gst_video_sei_user_data_unregistered_meta_get_info; ///
@@ -390,7 +390,7 @@ __gshared extern(C)
 
   // VideoSink
   GType function() c_gst_video_sink_get_type; ///
-  void function(GstVideoRectangle src, GstVideoRectangle dst, GstVideoRectangle* result, bool scaling) c_gst_video_sink_center_rect; ///
+  void function(GstVideoRectangle src, GstVideoRectangle dst, GstVideoRectangle* result, gboolean scaling) c_gst_video_sink_center_rect; ///
 
   // VideoTimeCode
   GType function() c_gst_video_time_code_get_type; ///
@@ -409,8 +409,8 @@ __gshared extern(C)
   void function(GstVideoTimeCode* tc) c_gst_video_time_code_increment_frame; ///
   void function(GstVideoTimeCode* tc, uint fpsN, uint fpsD, GDateTime* latestDailyJam, GstVideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount) c_gst_video_time_code_init; ///
   void function(GstVideoTimeCode* tc, uint fpsN, uint fpsD, GDateTime* dt, GstVideoTimeCodeFlags flags, uint fieldCount) c_gst_video_time_code_init_from_date_time; ///
-  bool function(GstVideoTimeCode* tc, uint fpsN, uint fpsD, GDateTime* dt, GstVideoTimeCodeFlags flags, uint fieldCount) c_gst_video_time_code_init_from_date_time_full; ///
-  bool function(const(GstVideoTimeCode)* tc) c_gst_video_time_code_is_valid; ///
+  gboolean function(GstVideoTimeCode* tc, uint fpsN, uint fpsD, GDateTime* dt, GstVideoTimeCodeFlags flags, uint fieldCount) c_gst_video_time_code_init_from_date_time_full; ///
+  gboolean function(const(GstVideoTimeCode)* tc) c_gst_video_time_code_is_valid; ///
   ulong function(const(GstVideoTimeCode)* tc) c_gst_video_time_code_nsec_since_daily_jam; ///
   GDateTime* function(const(GstVideoTimeCode)* tc) c_gst_video_time_code_to_date_time; ///
   char* function(const(GstVideoTimeCode)* tc) c_gst_video_time_code_to_string; ///
@@ -430,7 +430,7 @@ __gshared extern(C)
   // VideoVBIEncoder
   GType function() c_gst_video_vbi_encoder_get_type; ///
   GstVideoVBIEncoder* function(GstVideoFormat format, uint pixelWidth) c_gst_video_vbi_encoder_new; ///
-  bool function(GstVideoVBIEncoder* encoder, bool composite, ubyte DID, ubyte SDIDBlockNumber, const(ubyte)* data, uint dataCount) c_gst_video_vbi_encoder_add_ancillary; ///
+  gboolean function(GstVideoVBIEncoder* encoder, gboolean composite, ubyte DID, ubyte SDIDBlockNumber, const(ubyte)* data, uint dataCount) c_gst_video_vbi_encoder_add_ancillary; ///
   GstVideoVBIEncoder* function(const(GstVideoVBIEncoder)* encoder) c_gst_video_vbi_encoder_copy; ///
   void function(GstVideoVBIEncoder* encoder) c_gst_video_vbi_encoder_free; ///
   void function(GstVideoVBIEncoder* encoder, ubyte* data) c_gst_video_vbi_encoder_write_line; ///
@@ -448,7 +448,7 @@ __gshared extern(C)
   GstAncillaryMeta* function(GstBuffer* buffer) c_gst_buffer_add_ancillary_meta; ///
   GstVideoAFDMeta* function(GstBuffer* buffer, ubyte field, GstVideoAFDSpec spec, GstVideoAFDValue afd) c_gst_buffer_add_video_afd_meta; ///
   GstVideoAffineTransformationMeta* function(GstBuffer* buffer) c_gst_buffer_add_video_affine_transformation_meta; ///
-  GstVideoBarMeta* function(GstBuffer* buffer, ubyte field, bool isLetterbox, uint barData1, uint barData2) c_gst_buffer_add_video_bar_meta; ///
+  GstVideoBarMeta* function(GstBuffer* buffer, ubyte field, gboolean isLetterbox, uint barData1, uint barData2) c_gst_buffer_add_video_bar_meta; ///
   GstVideoCaptionMeta* function(GstBuffer* buffer, GstVideoCaptionType captionType, const(ubyte)* data, size_t size) c_gst_buffer_add_video_caption_meta; ///
   GstVideoCodecAlphaMeta* function(GstBuffer* buffer, GstBuffer* alphaBuffer) c_gst_buffer_add_video_codec_alpha_meta; ///
   GstVideoGLTextureUploadMeta* function(GstBuffer* buffer, GstVideoGLTextureOrientation textureOrientation, uint nTextures, GstVideoGLTextureType* textureType, GstVideoGLTextureUpload upload, void* userData, GBoxedCopyFunc userDataCopy, GBoxedFreeFunc userDataFree) c_gst_buffer_add_video_gl_texture_upload_meta; ///
@@ -463,17 +463,17 @@ __gshared extern(C)
   GstVideoMeta* function(GstBuffer* buffer) c_gst_buffer_get_video_meta; ///
   GstVideoMeta* function(GstBuffer* buffer, int id) c_gst_buffer_get_video_meta_id; ///
   GstVideoRegionOfInterestMeta* function(GstBuffer* buffer, int id) c_gst_buffer_get_video_region_of_interest_meta_id; ///
-  bool function(GstStructure* config, GstVideoAlignment* align_) c_gst_buffer_pool_config_get_video_alignment; ///
+  gboolean function(GstStructure* config, GstVideoAlignment* align_) c_gst_buffer_pool_config_get_video_alignment; ///
   void function(GstStructure* config, const(GstVideoAlignment)* align_) c_gst_buffer_pool_config_set_video_alignment; ///
-  bool function(GstMessage* msg) c_gst_is_video_overlay_prepare_window_handle_message; ///
+  gboolean function(GstMessage* msg) c_gst_is_video_overlay_prepare_window_handle_message; ///
   GType function() c_gst_video_afd_meta_api_get_type; ///
   GType function() c_gst_video_affine_transformation_meta_api_get_type; ///
   GType function() c_gst_video_bar_meta_api_get_type; ///
-  bool function(GstVideoFrame* dest, GstVideoFrame* src, int x, int y, float globalAlpha) c_gst_video_blend; ///
+  gboolean function(GstVideoFrame* dest, GstVideoFrame* src, int x, int y, float globalAlpha) c_gst_video_blend; ///
   void function(GstVideoInfo* src, GstBuffer* srcBuffer, int destHeight, int destWidth, GstVideoInfo* dest, GstBuffer** destBuffer) c_gst_video_blend_scale_linear_RGBA; ///
-  bool function(uint* darN, uint* darD, uint videoWidth, uint videoHeight, uint videoParN, uint videoParD, uint displayParN, uint displayParD) c_gst_video_calculate_display_ratio; ///
+  gboolean function(uint* darN, uint* darD, uint videoWidth, uint videoHeight, uint videoParN, uint videoParD, uint displayParN, uint displayParD) c_gst_video_calculate_display_ratio; ///
   GType function() c_gst_video_caption_meta_api_get_type; ///
-  void function(const(GstVideoRectangle)* src, const(GstVideoRectangle)* dst, GstVideoRectangle* result, bool scaling) c_gst_video_center_rect; ///
+  void function(const(GstVideoRectangle)* src, const(GstVideoRectangle)* dst, GstVideoRectangle* result, gboolean scaling) c_gst_video_center_rect; ///
   GstVideoChromaSite function(const(char)* s) c_gst_video_chroma_from_string; ///
   void function(GstVideoChromaResample* resample, void** lines, int width) c_gst_video_chroma_resample; ///
   const(char)* function(GstVideoChromaSite site) c_gst_video_chroma_to_string; ///
@@ -487,19 +487,19 @@ __gshared extern(C)
   uint function(const(char)* formatStr, ulong* modifier) c_gst_video_dma_drm_fourcc_from_string; ///
   GstVideoFormat function(uint fourcc) c_gst_video_dma_drm_fourcc_to_format; ///
   char* function(uint fourcc, ulong modifier) c_gst_video_dma_drm_fourcc_to_string; ///
-  bool function(GstEvent* event) c_gst_video_event_is_force_key_unit; ///
-  GstEvent* function(GstClockTime timestamp, GstClockTime streamTime, GstClockTime runningTime, bool allHeaders, uint count) c_gst_video_event_new_downstream_force_key_unit; ///
-  GstEvent* function(bool inStill) c_gst_video_event_new_still_frame; ///
-  GstEvent* function(GstClockTime runningTime, bool allHeaders, uint count) c_gst_video_event_new_upstream_force_key_unit; ///
-  bool function(GstEvent* event, GstClockTime* timestamp, GstClockTime* streamTime, GstClockTime* runningTime, bool* allHeaders, uint* count) c_gst_video_event_parse_downstream_force_key_unit; ///
-  bool function(GstEvent* event, bool* inStill) c_gst_video_event_parse_still_frame; ///
-  bool function(GstEvent* event, GstClockTime* runningTime, bool* allHeaders, uint* count) c_gst_video_event_parse_upstream_force_key_unit; ///
+  gboolean function(GstEvent* event) c_gst_video_event_is_force_key_unit; ///
+  GstEvent* function(GstClockTime timestamp, GstClockTime streamTime, GstClockTime runningTime, gboolean allHeaders, uint count) c_gst_video_event_new_downstream_force_key_unit; ///
+  GstEvent* function(gboolean inStill) c_gst_video_event_new_still_frame; ///
+  GstEvent* function(GstClockTime runningTime, gboolean allHeaders, uint count) c_gst_video_event_new_upstream_force_key_unit; ///
+  gboolean function(GstEvent* event, GstClockTime* timestamp, GstClockTime* streamTime, GstClockTime* runningTime, gboolean* allHeaders, uint* count) c_gst_video_event_parse_downstream_force_key_unit; ///
+  gboolean function(GstEvent* event, gboolean* inStill) c_gst_video_event_parse_still_frame; ///
+  gboolean function(GstEvent* event, GstClockTime* runningTime, gboolean* allHeaders, uint* count) c_gst_video_event_parse_upstream_force_key_unit; ///
   const(GstVideoFormat)* function(uint* len) c_gst_video_formats_any; ///
   const(GstVideoFormat)* function(uint* len) c_gst_video_formats_raw; ///
   GType function() c_gst_video_gl_texture_upload_meta_api_get_type; ///
-  bool function(GstClockTime duration, int* destN, int* destD) c_gst_video_guess_framerate; ///
-  bool function(int width, int height, int parN, int parD) c_gst_video_is_common_aspect_ratio; ///
-  bool function(const(GstCaps)* caps) c_gst_video_is_dma_drm_caps; ///
+  gboolean function(GstClockTime duration, int* destN, int* destD) c_gst_video_guess_framerate; ///
+  gboolean function(int width, int height, int parN, int parD) c_gst_video_is_common_aspect_ratio; ///
+  gboolean function(const(GstCaps)* caps) c_gst_video_is_dma_drm_caps; ///
   GstCaps* function(const(GstVideoFormat)* formats, uint len) c_gst_video_make_raw_caps; ///
   GstCaps* function(const(GstVideoFormat)* formats, uint len, GstCapsFeatures* features) c_gst_video_make_raw_caps_with_features; ///
   GType function() c_gst_video_meta_api_get_type; ///
@@ -508,12 +508,12 @@ __gshared extern(C)
   const(GValue)* function() c_gst_video_multiview_get_doubled_width_modes; ///
   const(GValue)* function() c_gst_video_multiview_get_mono_modes; ///
   const(GValue)* function() c_gst_video_multiview_get_unpacked_modes; ///
-  bool function(GstVideoMultiviewMode mvMode, uint width, uint height, uint parN, uint parD) c_gst_video_multiview_guess_half_aspect; ///
+  gboolean function(GstVideoMultiviewMode mvMode, uint width, uint height, uint parN, uint parD) c_gst_video_multiview_guess_half_aspect; ///
   void function(GstVideoInfo* info, GstVideoMultiviewMode outMviewMode, GstVideoMultiviewFlags outMviewFlags) c_gst_video_multiview_video_info_change_mode; ///
   GType function() c_gst_video_overlay_composition_meta_api_get_type; ///
   GType function() c_gst_video_region_of_interest_meta_api_get_type; ///
   GType function() c_gst_video_sei_user_data_unregistered_meta_api_get_type; ///
-  bool function(GstVideoSEIUserDataUnregisteredMeta* userData, ubyte* status, ulong* precisionTimeStamp) c_gst_video_sei_user_data_unregistered_parse_precision_time_stamp; ///
+  gboolean function(GstVideoSEIUserDataUnregisteredMeta* userData, ubyte* status, ulong* precisionTimeStamp) c_gst_video_sei_user_data_unregistered_parse_precision_time_stamp; ///
   uint function(GstVideoTileMode mode, int x, int y, int xTiles, int yTiles) c_gst_video_tile_get_index; ///
   GType function() c_gst_video_time_code_meta_api_get_type; ///
 
@@ -527,13 +527,13 @@ __gshared extern(C)
 
   // VideoColorMatrix
   GstVideoColorMatrix function(uint value) c_gst_video_color_matrix_from_iso; ///
-  bool function(GstVideoColorMatrix matrix, double* Kr, double* Kb) c_gst_video_color_matrix_get_Kr_Kb; ///
+  gboolean function(GstVideoColorMatrix matrix, double* Kr, double* Kb) c_gst_video_color_matrix_get_Kr_Kb; ///
   uint function(GstVideoColorMatrix matrix) c_gst_video_color_matrix_to_iso; ///
 
   // VideoColorPrimaries
   GstVideoColorPrimaries function(uint value) c_gst_video_color_primaries_from_iso; ///
   const(GstVideoColorPrimariesInfo)* function(GstVideoColorPrimaries primaries) c_gst_video_color_primaries_get_info; ///
-  bool function(GstVideoColorPrimaries primaries, GstVideoColorPrimaries other) c_gst_video_color_primaries_is_equivalent; ///
+  gboolean function(GstVideoColorPrimaries primaries, GstVideoColorPrimaries other) c_gst_video_color_primaries_is_equivalent; ///
   uint function(GstVideoColorPrimaries primaries) c_gst_video_color_primaries_to_iso; ///
 
   // VideoColorRange
@@ -564,7 +564,7 @@ __gshared extern(C)
   double function(GstVideoTransferFunction func, double val) c_gst_video_transfer_function_decode; ///
   double function(GstVideoTransferFunction func, double val) c_gst_video_transfer_function_encode; ///
   GstVideoTransferFunction function(uint value) c_gst_video_transfer_function_from_iso; ///
-  bool function(GstVideoTransferFunction fromFunc, uint fromBpp, GstVideoTransferFunction toFunc, uint toBpp) c_gst_video_transfer_function_is_equivalent; ///
+  gboolean function(GstVideoTransferFunction fromFunc, uint fromBpp, GstVideoTransferFunction toFunc, uint toBpp) c_gst_video_transfer_function_is_equivalent; ///
   uint function(GstVideoTransferFunction func) c_gst_video_transfer_function_to_iso; ///
 }
 

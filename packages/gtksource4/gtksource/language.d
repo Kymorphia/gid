@@ -94,7 +94,7 @@ class Language : gobject.object.ObjectWrap
   bool getHidden()
   {
     bool _retval;
-    _retval = gtk_source_language_get_hidden(cast(GtkSourceLanguage*)this._cPtr);
+    _retval = cast(bool)gtk_source_language_get_hidden(cast(GtkSourceLanguage*)this._cPtr);
     return _retval;
   }
 

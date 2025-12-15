@@ -119,7 +119,7 @@ class UriParamsIter
     char* _attribute;
     char* _value;
     GError *_err;
-    _retval = g_uri_params_iter_next(cast(GUriParamsIter*)this._cPtr, &_attribute, &_value, &_err);
+    _retval = cast(bool)g_uri_params_iter_next(cast(GUriParamsIter*)this._cPtr, &_attribute, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     attribute = _attribute.fromCString(Yes.Free);

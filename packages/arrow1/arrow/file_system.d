@@ -82,7 +82,7 @@ class FileSystem : gobject.object.ObjectWrap
     const(char)* _src = src.toCString(No.Alloc);
     const(char)* _dest = dest.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_copy_file(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
+    _retval = cast(bool)garrow_file_system_copy_file(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -103,7 +103,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_create_dir(cast(GArrowFileSystem*)this._cPtr, _path, recursive, &_err);
+    _retval = cast(bool)garrow_file_system_create_dir(cast(GArrowFileSystem*)this._cPtr, _path, recursive, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -122,7 +122,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_delete_dir(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
+    _retval = cast(bool)garrow_file_system_delete_dir(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -144,7 +144,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_delete_dir_contents(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
+    _retval = cast(bool)garrow_file_system_delete_dir_contents(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -163,7 +163,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_delete_file(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
+    _retval = cast(bool)garrow_file_system_delete_file(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -190,7 +190,7 @@ class FileSystem : gobject.object.ObjectWrap
     const(char*)* _paths = _tmppaths.ptr;
 
     GError *_err;
-    _retval = garrow_file_system_delete_files(cast(GArrowFileSystem*)this._cPtr, _paths, _nPaths, &_err);
+    _retval = cast(bool)garrow_file_system_delete_files(cast(GArrowFileSystem*)this._cPtr, _paths, _nPaths, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -304,7 +304,7 @@ class FileSystem : gobject.object.ObjectWrap
     const(char)* _src = src.toCString(No.Alloc);
     const(char)* _dest = dest.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_move(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
+    _retval = cast(bool)garrow_file_system_move(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

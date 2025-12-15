@@ -324,7 +324,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool getNotNull()
   {
     bool _retval;
-    _retval = gda_holder_get_not_null(cast(GdaHolder*)this._cPtr);
+    _retval = cast(bool)gda_holder_get_not_null(cast(GdaHolder*)this._cPtr);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool isValid()
   {
     bool _retval;
-    _retval = gda_holder_is_valid(cast(GdaHolder*)this._cPtr);
+    _retval = cast(bool)gda_holder_is_valid(cast(GdaHolder*)this._cPtr);
     return _retval;
   }
 
@@ -381,7 +381,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     bool _retval;
     GError *_err;
-    _retval = gda_holder_is_valid_e(cast(GdaHolder*)this._cPtr, &_err);
+    _retval = cast(bool)gda_holder_is_valid_e(cast(GdaHolder*)this._cPtr, &_err);
     if (_err)
       throw new HolderException(_err);
     return _retval;
@@ -440,7 +440,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     bool _retval;
     GError *_err;
-    _retval = gda_holder_set_bind(cast(GdaHolder*)this._cPtr, bindTo ? cast(GdaHolder*)bindTo._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_holder_set_bind(cast(GdaHolder*)this._cPtr, bindTo ? cast(GdaHolder*)bindTo._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new HolderException(_err);
     return _retval;
@@ -490,7 +490,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     bool _retval;
     GError *_err;
-    _retval = gda_holder_set_source_model(cast(GdaHolder*)this._cPtr, model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, col, &_err);
+    _retval = cast(bool)gda_holder_set_source_model(cast(GdaHolder*)this._cPtr, model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, col, &_err);
     if (_err)
       throw new HolderException(_err);
     return _retval;
@@ -524,7 +524,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     bool _retval;
     GError *_err;
-    _retval = gda_holder_set_value(cast(GdaHolder*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_holder_set_value(cast(GdaHolder*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new HolderException(_err);
     return _retval;
@@ -550,7 +550,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
     bool _retval;
     const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_holder_set_value_str(cast(GdaHolder*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null, _value, &_err);
+    _retval = cast(bool)gda_holder_set_value_str(cast(GdaHolder*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null, _value, &_err);
     if (_err)
       throw new HolderException(_err);
     return _retval;
@@ -563,7 +563,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool setValueToDefault()
   {
     bool _retval;
-    _retval = gda_holder_set_value_to_default(cast(GdaHolder*)this._cPtr);
+    _retval = cast(bool)gda_holder_set_value_to_default(cast(GdaHolder*)this._cPtr);
     return _retval;
   }
 
@@ -597,7 +597,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     bool _retval;
     GError *_err;
-    _retval = gda_holder_take_value(cast(GdaHolder*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null, &_err);
+    _retval = cast(bool)gda_holder_take_value(cast(GdaHolder*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null, &_err);
     if (_err)
       throw new HolderException(_err);
     return _retval;
@@ -610,7 +610,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool valueIsDefault()
   {
     bool _retval;
-    _retval = gda_holder_value_is_default(cast(GdaHolder*)this._cPtr);
+    _retval = cast(bool)gda_holder_value_is_default(cast(GdaHolder*)this._cPtr);
     return _retval;
   }
 

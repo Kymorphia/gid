@@ -167,7 +167,7 @@ class Animation : gobject.object.ObjectWrap
   bool getFollowEnableAnimationsSetting()
   {
     bool _retval;
-    _retval = adw_animation_get_follow_enable_animations_setting(cast(AdwAnimation*)this._cPtr);
+    _retval = cast(bool)adw_animation_get_follow_enable_animations_setting(cast(AdwAnimation*)this._cPtr);
     return _retval;
   }
 

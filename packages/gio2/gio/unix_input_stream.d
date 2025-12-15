@@ -98,7 +98,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   bool getCloseFd()
   {
     bool _retval;
-    _retval = g_unix_input_stream_get_close_fd(cast(GUnixInputStream*)this._cPtr);
+    _retval = cast(bool)g_unix_input_stream_get_close_fd(cast(GUnixInputStream*)this._cPtr);
     return _retval;
   }
 

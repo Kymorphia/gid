@@ -573,7 +573,7 @@ class Buffer : gobject.boxed.Boxed
   bool copyInto(gst.buffer.Buffer src, gst.types.BufferCopyFlags flags, size_t offset, size_t size)
   {
     bool _retval;
-    _retval = gst_buffer_copy_into(cast(GstBuffer*)this._cPtr, src ? cast(GstBuffer*)src._cPtr(No.Dup) : null, flags, offset, size);
+    _retval = cast(bool)gst_buffer_copy_into(cast(GstBuffer*)this._cPtr, src ? cast(GstBuffer*)src._cPtr(No.Dup) : null, flags, offset, size);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class Buffer : gobject.boxed.Boxed
   bool findMemory(size_t offset, size_t size, out uint idx, out uint length, out size_t skip)
   {
     bool _retval;
-    _retval = gst_buffer_find_memory(cast(GstBuffer*)this._cPtr, offset, size, cast(uint*)&idx, cast(uint*)&length, cast(size_t*)&skip);
+    _retval = cast(bool)gst_buffer_find_memory(cast(GstBuffer*)this._cPtr, offset, size, cast(uint*)&idx, cast(uint*)&length, cast(size_t*)&skip);
     return _retval;
   }
 
@@ -686,12 +686,12 @@ class Buffer : gobject.boxed.Boxed
   */
   bool foreachMeta(gst.types.BufferForeachMetaFunc func)
   {
-    extern(C) bool _funcCallback(GstBuffer* buffer, GstMeta** meta, void* userData)
+    extern(C) gboolean _funcCallback(GstBuffer* buffer, GstMeta** meta, void* userData)
     {
       auto _dlg = cast(gst.types.BufferForeachMetaFunc*)userData;
       auto _meta = new gst.meta.Meta(meta, No.Take);
 
-      bool _retval = (*_dlg)(buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, _meta);
+      gboolean _retval = (*_dlg)(buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, _meta);
       *meta = *cast(GstMeta**)_meta._cPtr;
 
       return _retval;
@@ -700,7 +700,7 @@ class Buffer : gobject.boxed.Boxed
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_buffer_foreach_meta(cast(GstBuffer*)this._cPtr, _funcCB, _func);
+    _retval = cast(bool)gst_buffer_foreach_meta(cast(GstBuffer*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -894,7 +894,7 @@ class Buffer : gobject.boxed.Boxed
   bool hasFlags(gst.types.BufferFlags flags)
   {
     bool _retval;
-    _retval = gst_buffer_has_flags(cast(GstBuffer*)this._cPtr, flags);
+    _retval = cast(bool)gst_buffer_has_flags(cast(GstBuffer*)this._cPtr, flags);
     return _retval;
   }
 
@@ -925,7 +925,7 @@ class Buffer : gobject.boxed.Boxed
   bool isAllMemoryWritable()
   {
     bool _retval;
-    _retval = gst_buffer_is_all_memory_writable(cast(GstBuffer*)this._cPtr);
+    _retval = cast(bool)gst_buffer_is_all_memory_writable(cast(GstBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -945,7 +945,7 @@ class Buffer : gobject.boxed.Boxed
   bool isMemoryRangeWritable(uint idx, int length)
   {
     bool _retval;
-    _retval = gst_buffer_is_memory_range_writable(cast(GstBuffer*)this._cPtr, idx, length);
+    _retval = cast(bool)gst_buffer_is_memory_range_writable(cast(GstBuffer*)this._cPtr, idx, length);
     return _retval;
   }
 
@@ -972,7 +972,7 @@ class Buffer : gobject.boxed.Boxed
   {
     bool _retval;
     GstMapInfo _info;
-    _retval = gst_buffer_map(cast(GstBuffer*)this._cPtr, &_info, flags);
+    _retval = cast(bool)gst_buffer_map(cast(GstBuffer*)this._cPtr, &_info, flags);
     info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
@@ -1004,7 +1004,7 @@ class Buffer : gobject.boxed.Boxed
   {
     bool _retval;
     GstMapInfo _info;
-    _retval = gst_buffer_map_range(cast(GstBuffer*)this._cPtr, idx, length, &_info, flags);
+    _retval = cast(bool)gst_buffer_map_range(cast(GstBuffer*)this._cPtr, idx, length, &_info, flags);
     info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
@@ -1134,7 +1134,7 @@ class Buffer : gobject.boxed.Boxed
   bool removeMeta(gst.meta.Meta meta)
   {
     bool _retval;
-    _retval = gst_buffer_remove_meta(cast(GstBuffer*)this._cPtr, meta ? cast(GstMeta*)meta._cPtr : null);
+    _retval = cast(bool)gst_buffer_remove_meta(cast(GstBuffer*)this._cPtr, meta ? cast(GstMeta*)meta._cPtr : null);
     return _retval;
   }
 
@@ -1205,7 +1205,7 @@ class Buffer : gobject.boxed.Boxed
   bool resizeRange(uint idx, int length, ptrdiff_t offset, ptrdiff_t size)
   {
     bool _retval;
-    _retval = gst_buffer_resize_range(cast(GstBuffer*)this._cPtr, idx, length, offset, size);
+    _retval = cast(bool)gst_buffer_resize_range(cast(GstBuffer*)this._cPtr, idx, length, offset, size);
     return _retval;
   }
 
@@ -1219,7 +1219,7 @@ class Buffer : gobject.boxed.Boxed
   bool setFlags(gst.types.BufferFlags flags)
   {
     bool _retval;
-    _retval = gst_buffer_set_flags(cast(GstBuffer*)this._cPtr, flags);
+    _retval = cast(bool)gst_buffer_set_flags(cast(GstBuffer*)this._cPtr, flags);
     return _retval;
   }
 
@@ -1255,7 +1255,7 @@ class Buffer : gobject.boxed.Boxed
   bool unsetFlags(gst.types.BufferFlags flags)
   {
     bool _retval;
-    _retval = gst_buffer_unset_flags(cast(GstBuffer*)this._cPtr, flags);
+    _retval = cast(bool)gst_buffer_unset_flags(cast(GstBuffer*)this._cPtr, flags);
     return _retval;
   }
 

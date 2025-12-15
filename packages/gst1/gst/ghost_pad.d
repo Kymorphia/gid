@@ -150,7 +150,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static bool activateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active)
   {
     bool _retval;
-    _retval = gst_ghost_pad_activate_mode_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, mode, active);
+    _retval = cast(bool)gst_ghost_pad_activate_mode_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, mode, active);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static bool internalActivateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active)
   {
     bool _retval;
-    _retval = gst_ghost_pad_internal_activate_mode_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, mode, active);
+    _retval = cast(bool)gst_ghost_pad_internal_activate_mode_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, mode, active);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   bool construct()
   {
     bool _retval;
-    _retval = gst_ghost_pad_construct(cast(GstGhostPad*)this._cPtr);
+    _retval = cast(bool)gst_ghost_pad_construct(cast(GstGhostPad*)this._cPtr);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   bool setTarget(gst.pad.Pad newtarget = null)
   {
     bool _retval;
-    _retval = gst_ghost_pad_set_target(cast(GstGhostPad*)this._cPtr, newtarget ? cast(GstPad*)newtarget._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_ghost_pad_set_target(cast(GstGhostPad*)this._cPtr, newtarget ? cast(GstPad*)newtarget._cPtr(No.Dup) : null);
     return _retval;
   }
 }

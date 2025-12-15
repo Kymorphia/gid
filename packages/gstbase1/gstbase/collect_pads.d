@@ -153,7 +153,7 @@ class CollectPads : gst.object.ObjectWrap
   bool eventDefault(gstbase.collect_data.CollectData data, gst.event.Event event, bool discard)
   {
     bool _retval;
-    _retval = gst_collect_pads_event_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null, discard);
+    _retval = cast(bool)gst_collect_pads_event_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null, discard);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class CollectPads : gst.object.ObjectWrap
   bool queryDefault(gstbase.collect_data.CollectData data, gst.query.Query query, bool discard)
   {
     bool _retval;
-    _retval = gst_collect_pads_query_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, discard);
+    _retval = cast(bool)gst_collect_pads_query_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, discard);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class CollectPads : gst.object.ObjectWrap
   bool removePad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_collect_pads_remove_pad(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_collect_pads_remove_pad(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -373,11 +373,11 @@ class CollectPads : gst.object.ObjectWrap
   */
   void setEventFunction(gstbase.types.CollectPadsEventFunction func)
   {
-    extern(C) bool _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData)
+    extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData)
     {
       auto _dlg = cast(gstbase.types.CollectPadsEventFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -474,11 +474,11 @@ class CollectPads : gst.object.ObjectWrap
   */
   void setQueryFunction(gstbase.types.CollectPadsQueryFunction func)
   {
-    extern(C) bool _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData)
+    extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData)
     {
       auto _dlg = cast(gstbase.types.CollectPadsQueryFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -520,7 +520,7 @@ class CollectPads : gst.object.ObjectWrap
   bool srcEventDefault(gst.pad.Pad pad, gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_collect_pads_src_event_default(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_collect_pads_src_event_default(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 

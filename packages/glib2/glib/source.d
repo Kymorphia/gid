@@ -195,7 +195,7 @@ class Source : gobject.boxed.Boxed
   bool getCanRecurse()
   {
     bool _retval;
-    _retval = g_source_get_can_recurse(cast(GSource*)this._cPtr);
+    _retval = cast(bool)g_source_get_can_recurse(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class Source : gobject.boxed.Boxed
   bool isDestroyed()
   {
     bool _retval;
-    _retval = g_source_is_destroyed(cast(GSource*)this._cPtr);
+    _retval = cast(bool)g_source_is_destroyed(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -520,11 +520,11 @@ class Source : gobject.boxed.Boxed
   */
   void setCallback(glib.types.SourceFunc func)
   {
-    extern(C) bool _funcCallback(void* userData)
+    extern(C) gboolean _funcCallback(void* userData)
     {
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      bool _retval = (*_dlg)();
+      gboolean _retval = (*_dlg)();
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -704,7 +704,7 @@ class Source : gobject.boxed.Boxed
   static bool remove(uint tag)
   {
     bool _retval;
-    _retval = g_source_remove(tag);
+    _retval = cast(bool)g_source_remove(tag);
     return _retval;
   }
 
@@ -721,7 +721,7 @@ class Source : gobject.boxed.Boxed
   static bool removeByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null)
   {
     bool _retval;
-    _retval = g_source_remove_by_funcs_user_data(&funcs, userData);
+    _retval = cast(bool)g_source_remove_by_funcs_user_data(&funcs, userData);
     return _retval;
   }
 
@@ -737,7 +737,7 @@ class Source : gobject.boxed.Boxed
   static bool removeByUserData(void* userData = null)
   {
     bool _retval;
-    _retval = g_source_remove_by_user_data(userData);
+    _retval = cast(bool)g_source_remove_by_user_data(userData);
     return _retval;
   }
 

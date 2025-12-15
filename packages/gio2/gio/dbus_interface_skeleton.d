@@ -88,7 +88,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
     bool _retval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     GError *_err;
-    _retval = g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath, &_err);
+    _retval = cast(bool)g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -216,7 +216,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   bool hasConnection(gio.dbus_connection.DBusConnection connection)
   {
     bool _retval;
-    _retval = g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null);
     return _retval;
   }
 

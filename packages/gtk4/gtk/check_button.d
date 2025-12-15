@@ -276,7 +276,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_check_button_get_active(cast(GtkCheckButton*)this._cPtr);
+    _retval = cast(bool)gtk_check_button_get_active(cast(GtkCheckButton*)this._cPtr);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getInconsistent()
   {
     bool _retval;
-    _retval = gtk_check_button_get_inconsistent(cast(GtkCheckButton*)this._cPtr);
+    _retval = cast(bool)gtk_check_button_get_inconsistent(cast(GtkCheckButton*)this._cPtr);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_check_button_get_use_underline(cast(GtkCheckButton*)this._cPtr);
+    _retval = cast(bool)gtk_check_button_get_use_underline(cast(GtkCheckButton*)this._cPtr);
     return _retval;
   }
 

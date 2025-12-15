@@ -93,7 +93,7 @@ template IndenterT()
   override bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval)
   {
     bool _retval;
-    _retval = gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null, location ? cast(const(GtkTextIter)*)location._cPtr(No.Dup) : null, state, keyval);
+    _retval = cast(bool)gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null, location ? cast(const(GtkTextIter)*)location._cPtr(No.Dup) : null, state, keyval);
     return _retval;
   }
 }

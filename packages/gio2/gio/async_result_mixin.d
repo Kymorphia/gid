@@ -134,7 +134,7 @@ template AsyncResultT()
   override bool isTagged(void* sourceTag = null)
   {
     bool _retval;
-    _retval = g_async_result_is_tagged(cast(GAsyncResult*)this._cPtr, sourceTag);
+    _retval = cast(bool)g_async_result_is_tagged(cast(GAsyncResult*)this._cPtr, sourceTag);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ template AsyncResultT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_async_result_legacy_propagate_error(cast(GAsyncResult*)this._cPtr, &_err);
+    _retval = cast(bool)g_async_result_legacy_propagate_error(cast(GAsyncResult*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

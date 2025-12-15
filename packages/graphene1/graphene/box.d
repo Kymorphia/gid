@@ -82,7 +82,7 @@ class Box : gobject.boxed.Boxed
   bool containsBox(graphene.box.Box b)
   {
     bool _retval;
-    _retval = graphene_box_contains_box(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_box_contains_box(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Box : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
-    _retval = graphene_box_contains_point(cast(const(graphene_box_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_box_contains_point(cast(const(graphene_box_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Box : gobject.boxed.Boxed
   bool equal(graphene.box.Box b)
   {
     bool _retval;
-    _retval = graphene_box_equal(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_box_equal(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class Box : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_box_t _res;
-    _retval = graphene_box_intersection(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_box_intersection(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, &_res);
     res = new graphene.box.Box(cast(void*)&_res, No.Take);
     return _retval;
   }

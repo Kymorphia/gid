@@ -160,7 +160,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
   bool getSelectMultiple()
   {
     bool _retval;
-    _retval = webkit_file_chooser_request_get_select_multiple(cast(WebKitFileChooserRequest*)this._cPtr);
+    _retval = cast(bool)webkit_file_chooser_request_get_select_multiple(cast(WebKitFileChooserRequest*)this._cPtr);
     return _retval;
   }
 

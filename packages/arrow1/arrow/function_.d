@@ -65,7 +65,7 @@ class Function : gobject.object.ObjectWrap
   bool equal(arrow.function_.Function otherFunction)
   {
     bool _retval;
-    _retval = garrow_function_equal(cast(GArrowFunction*)this._cPtr, otherFunction ? cast(GArrowFunction*)otherFunction._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_function_equal(cast(GArrowFunction*)this._cPtr, otherFunction ? cast(GArrowFunction*)otherFunction._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -103,7 +103,7 @@ class DataComparator : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_comparator_compute_diff(cast(GdaDataComparator*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_comparator_compute_diff(cast(GdaDataComparator*)this._cPtr, &_err);
     if (_err)
       throw new DataComparatorException(_err);
     return _retval;

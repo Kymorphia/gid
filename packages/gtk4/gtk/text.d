@@ -559,7 +559,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getActivatesDefault()
   {
     bool _retval;
-    _retval = gtk_text_get_activates_default(cast(GtkText*)this._cPtr);
+    _retval = cast(bool)gtk_text_get_activates_default(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getEnableEmojiCompletion()
   {
     bool _retval;
-    _retval = gtk_text_get_enable_emoji_completion(cast(GtkText*)this._cPtr);
+    _retval = cast(bool)gtk_text_get_enable_emoji_completion(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -682,7 +682,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getOverwriteMode()
   {
     bool _retval;
-    _retval = gtk_text_get_overwrite_mode(cast(GtkText*)this._cPtr);
+    _retval = cast(bool)gtk_text_get_overwrite_mode(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -709,7 +709,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getPropagateTextWidth()
   {
     bool _retval;
-    _retval = gtk_text_get_propagate_text_width(cast(GtkText*)this._cPtr);
+    _retval = cast(bool)gtk_text_get_propagate_text_width(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -750,7 +750,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getTruncateMultiline()
   {
     bool _retval;
-    _retval = gtk_text_get_truncate_multiline(cast(GtkText*)this._cPtr);
+    _retval = cast(bool)gtk_text_get_truncate_multiline(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -761,7 +761,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getVisibility()
   {
     bool _retval;
-    _retval = gtk_text_get_visibility(cast(GtkText*)this._cPtr);
+    _retval = cast(bool)gtk_text_get_visibility(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -778,7 +778,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool grabFocusWithoutSelecting()
   {
     bool _retval;
-    _retval = gtk_text_grab_focus_without_selecting(cast(GtkText*)this._cPtr);
+    _retval = cast(bool)gtk_text_grab_focus_without_selecting(cast(GtkText*)this._cPtr);
     return _retval;
   }
 

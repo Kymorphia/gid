@@ -368,7 +368,7 @@ class TimeZone : gobject.boxed.Boxed
   bool isDst(int interval)
   {
     bool _retval;
-    _retval = g_time_zone_is_dst(cast(GTimeZone*)this._cPtr, interval);
+    _retval = cast(bool)g_time_zone_is_dst(cast(GTimeZone*)this._cPtr, interval);
     return _retval;
   }
 }

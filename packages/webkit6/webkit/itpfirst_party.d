@@ -82,7 +82,7 @@ class ITPFirstParty : gobject.boxed.Boxed
   bool getWebsiteDataAccessAllowed()
   {
     bool _retval;
-    _retval = webkit_itp_first_party_get_website_data_access_allowed(cast(WebKitITPFirstParty*)this._cPtr);
+    _retval = cast(bool)webkit_itp_first_party_get_website_data_access_allowed(cast(WebKitITPFirstParty*)this._cPtr);
     return _retval;
   }
 }

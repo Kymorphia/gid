@@ -337,7 +337,7 @@ struct GstTestClockClass
 /** */
 struct GstTestClockPrivate;
 
-alias extern(C) bool function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) GstCheckLogFilterFunc;
+alias extern(C) gboolean function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) GstCheckLogFilterFunc;
 
 alias extern(C) GstBuffer* function(GstHarness* h, void* data) GstHarnessPrepareBufferFunc;
 

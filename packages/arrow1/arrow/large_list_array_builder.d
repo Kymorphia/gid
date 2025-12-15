@@ -55,7 +55,7 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_large_list_array_builder_append_value(cast(GArrowLargeListArrayBuilder*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_large_list_array_builder_append_value(cast(GArrowLargeListArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

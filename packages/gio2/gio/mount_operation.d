@@ -269,7 +269,7 @@ class MountOperation : gobject.object.ObjectWrap
   bool getAnonymous()
   {
     bool _retval;
-    _retval = g_mount_operation_get_anonymous(cast(GMountOperation*)this._cPtr);
+    _retval = cast(bool)g_mount_operation_get_anonymous(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class MountOperation : gobject.object.ObjectWrap
   bool getIsTcryptHiddenVolume()
   {
     bool _retval;
-    _retval = g_mount_operation_get_is_tcrypt_hidden_volume(cast(GMountOperation*)this._cPtr);
+    _retval = cast(bool)g_mount_operation_get_is_tcrypt_hidden_volume(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class MountOperation : gobject.object.ObjectWrap
   bool getIsTcryptSystemVolume()
   {
     bool _retval;
-    _retval = g_mount_operation_get_is_tcrypt_system_volume(cast(GMountOperation*)this._cPtr);
+    _retval = cast(bool)g_mount_operation_get_is_tcrypt_system_volume(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 

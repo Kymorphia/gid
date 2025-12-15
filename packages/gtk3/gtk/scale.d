@@ -262,7 +262,7 @@ class Scale : gtk.range.Range
   bool getDrawValue()
   {
     bool _retval;
-    _retval = gtk_scale_get_draw_value(cast(GtkScale*)this._cPtr);
+    _retval = cast(bool)gtk_scale_get_draw_value(cast(GtkScale*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Scale : gtk.range.Range
   bool getHasOrigin()
   {
     bool _retval;
-    _retval = gtk_scale_get_has_origin(cast(GtkScale*)this._cPtr);
+    _retval = cast(bool)gtk_scale_get_has_origin(cast(GtkScale*)this._cPtr);
     return _retval;
   }
 

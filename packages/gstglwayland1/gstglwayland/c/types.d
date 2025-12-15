@@ -32,7 +32,7 @@ struct GstGLDisplayWayland
   void* shell;
 
   /** */
-  bool foreignDisplay;
+  gboolean foreignDisplay;
 
   /** */
   void*[4] Padding;

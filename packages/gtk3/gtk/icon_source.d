@@ -123,7 +123,7 @@ class IconSource : gobject.boxed.Boxed
   bool getDirectionWildcarded()
   {
     bool _retval;
-    _retval = gtk_icon_source_get_direction_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
+    _retval = cast(bool)gtk_icon_source_get_direction_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class IconSource : gobject.boxed.Boxed
   bool getSizeWildcarded()
   {
     bool _retval;
-    _retval = gtk_icon_source_get_size_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
+    _retval = cast(bool)gtk_icon_source_get_size_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class IconSource : gobject.boxed.Boxed
   bool getStateWildcarded()
   {
     bool _retval;
-    _retval = gtk_icon_source_get_state_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
+    _retval = cast(bool)gtk_icon_source_get_state_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
     return _retval;
   }
 

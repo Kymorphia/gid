@@ -247,7 +247,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_add_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_source_completion_add_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -350,7 +350,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -378,7 +378,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
     bool _retval;
     auto _providers = gListFromD!(gtksource.completion_provider.CompletionProvider)(providers);
     scope(exit) containerFree!(GList*, gtksource.completion_provider.CompletionProvider, GidOwnership.None)(_providers);
-    _retval = gtk_source_completion_start(cast(GtkSourceCompletion*)this._cPtr, _providers, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_completion_start(cast(GtkSourceCompletion*)this._cPtr, _providers, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 

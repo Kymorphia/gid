@@ -185,7 +185,7 @@ class Sample : gobject.boxed.Boxed
   bool setInfo(gst.structure.Structure info)
   {
     bool _retval;
-    _retval = gst_sample_set_info(cast(GstSample*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_sample_set_info(cast(GstSample*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
     return _retval;
   }
 

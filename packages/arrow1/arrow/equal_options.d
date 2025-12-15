@@ -107,7 +107,7 @@ class EqualOptions : gobject.object.ObjectWrap
   bool isApprox()
   {
     bool _retval;
-    _retval = garrow_equal_options_is_approx(cast(GArrowEqualOptions*)this._cPtr);
+    _retval = cast(bool)garrow_equal_options_is_approx(cast(GArrowEqualOptions*)this._cPtr);
     return _retval;
   }
 }

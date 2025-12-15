@@ -205,7 +205,7 @@ class SessionItem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
     const(GVariantType)* _valueType;
-    _retval = panel_session_item_has_metadata(cast(PanelSessionItem*)this._cPtr, _key, &_valueType);
+    _retval = cast(bool)panel_session_item_has_metadata(cast(PanelSessionItem*)this._cPtr, _key, &_valueType);
     valueType = new glib.variant_type.VariantType(cast(void*)_valueType, Yes.Take);
     return _retval;
   }
@@ -223,7 +223,7 @@ class SessionItem : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_session_item_has_metadata_with_type(cast(PanelSessionItem*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
+    _retval = cast(bool)panel_session_item_has_metadata_with_type(cast(PanelSessionItem*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     return _retval;
   }
 

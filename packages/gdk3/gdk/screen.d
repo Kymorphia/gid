@@ -517,7 +517,7 @@ class Screen : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gdk_screen_get_setting(cast(GdkScreen*)this._cPtr, _name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_screen_get_setting(cast(GdkScreen*)this._cPtr, _name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -624,7 +624,7 @@ class Screen : gobject.object.ObjectWrap
   bool isComposited()
   {
     bool _retval;
-    _retval = gdk_screen_is_composited(cast(GdkScreen*)this._cPtr);
+    _retval = cast(bool)gdk_screen_is_composited(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 

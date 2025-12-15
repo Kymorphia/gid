@@ -99,7 +99,7 @@ class GLSLStage : gst.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gst_glsl_stage_compile(cast(GstGLSLStage*)this._cPtr, &_err);
+    _retval = cast(bool)gst_glsl_stage_compile(cast(GstGLSLStage*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -159,7 +159,7 @@ class GLSLStage : gst.object.ObjectWrap
     foreach (s; str)
       _tmpstr ~= s.toCString(No.Alloc);
     const(char*)* _str = _tmpstr.ptr;
-    _retval = gst_glsl_stage_set_strings(cast(GstGLSLStage*)this._cPtr, version_, profile, _nStrings, _str);
+    _retval = cast(bool)gst_glsl_stage_set_strings(cast(GstGLSLStage*)this._cPtr, version_, profile, _nStrings, _str);
     return _retval;
   }
 }

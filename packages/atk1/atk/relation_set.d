@@ -103,7 +103,7 @@ class RelationSet : gobject.object.ObjectWrap
   bool contains(atk.types.RelationType relationship)
   {
     bool _retval;
-    _retval = atk_relation_set_contains(cast(AtkRelationSet*)this._cPtr, relationship);
+    _retval = cast(bool)atk_relation_set_contains(cast(AtkRelationSet*)this._cPtr, relationship);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class RelationSet : gobject.object.ObjectWrap
   bool containsTarget(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
-    _retval = atk_relation_set_contains_target(cast(AtkRelationSet*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
+    _retval = cast(bool)atk_relation_set_contains_target(cast(AtkRelationSet*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
   }
 

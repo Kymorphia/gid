@@ -73,7 +73,7 @@ class Field : gobject.object.ObjectWrap
   bool equal(arrow.field.Field otherField)
   {
     bool _retval;
-    _retval = garrow_field_equal(cast(GArrowField*)this._cPtr, otherField ? cast(GArrowField*)otherField._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_field_equal(cast(GArrowField*)this._cPtr, otherField ? cast(GArrowField*)otherField._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Field : gobject.object.ObjectWrap
   bool hasMetadata()
   {
     bool _retval;
-    _retval = garrow_field_has_metadata(cast(GArrowField*)this._cPtr);
+    _retval = cast(bool)garrow_field_has_metadata(cast(GArrowField*)this._cPtr);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class Field : gobject.object.ObjectWrap
   bool isNullable()
   {
     bool _retval;
-    _retval = garrow_field_is_nullable(cast(GArrowField*)this._cPtr);
+    _retval = cast(bool)garrow_field_is_nullable(cast(GArrowField*)this._cPtr);
     return _retval;
   }
 

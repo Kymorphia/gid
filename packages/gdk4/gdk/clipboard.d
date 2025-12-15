@@ -147,7 +147,7 @@ class Clipboard : gobject.object.ObjectWrap
   bool isLocal()
   {
     bool _retval;
-    _retval = gdk_clipboard_is_local(cast(GdkClipboard*)this._cPtr);
+    _retval = cast(bool)gdk_clipboard_is_local(cast(GdkClipboard*)this._cPtr);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class Clipboard : gobject.object.ObjectWrap
   bool setContent(gdk.content_provider.ContentProvider provider = null)
   {
     bool _retval;
-    _retval = gdk_clipboard_set_content(cast(GdkClipboard*)this._cPtr, provider ? cast(GdkContentProvider*)provider._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_clipboard_set_content(cast(GdkClipboard*)this._cPtr, provider ? cast(GdkContentProvider*)provider._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ class Clipboard : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_clipboard_store_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gdk_clipboard_store_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

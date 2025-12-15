@@ -124,7 +124,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   bool hasCurrentBuffer()
   {
     bool _retval;
-    _retval = gst_video_aggregator_pad_has_current_buffer(cast(GstVideoAggregatorPad*)this._cPtr);
+    _retval = cast(bool)gst_video_aggregator_pad_has_current_buffer(cast(GstVideoAggregatorPad*)this._cPtr);
     return _retval;
   }
 

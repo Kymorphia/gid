@@ -42,7 +42,7 @@ class FileMetadata : gobject.object.ObjectWrap
   bool canDecompress()
   {
     bool _retval;
-    _retval = gparquet_file_metadata_can_decompress(cast(GParquetFileMetadata*)this._cPtr);
+    _retval = cast(bool)gparquet_file_metadata_can_decompress(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class FileMetadata : gobject.object.ObjectWrap
   bool equal(parquet.file_metadata.FileMetadata otherMetadata)
   {
     bool _retval;
-    _retval = gparquet_file_metadata_equal(cast(GParquetFileMetadata*)this._cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata._cPtr(No.Dup) : null);
+    _retval = cast(bool)gparquet_file_metadata_equal(cast(GParquetFileMetadata*)this._cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata._cPtr(No.Dup) : null);
     return _retval;
   }
 

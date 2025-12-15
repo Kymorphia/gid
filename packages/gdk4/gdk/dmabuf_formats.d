@@ -75,7 +75,7 @@ class DmabufFormats : gobject.boxed.Boxed
   bool contains(uint fourcc, ulong modifier)
   {
     bool _retval;
-    _retval = gdk_dmabuf_formats_contains(cast(GdkDmabufFormats*)this._cPtr, fourcc, modifier);
+    _retval = cast(bool)gdk_dmabuf_formats_contains(cast(GdkDmabufFormats*)this._cPtr, fourcc, modifier);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class DmabufFormats : gobject.boxed.Boxed
   bool equal(gdk.dmabuf_formats.DmabufFormats formats2 = null)
   {
     bool _retval;
-    _retval = gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)this._cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)this._cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2._cPtr(No.Dup) : null);
     return _retval;
   }
 

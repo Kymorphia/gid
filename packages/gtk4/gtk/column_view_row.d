@@ -196,7 +196,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_activatable(cast(GtkColumnViewRow*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_row_get_activatable(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getFocusable()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_focusable(cast(GtkColumnViewRow*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_row_get_focusable(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_selectable(cast(GtkColumnViewRow*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_row_get_selectable(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getSelected()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_selected(cast(GtkColumnViewRow*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_row_get_selected(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 

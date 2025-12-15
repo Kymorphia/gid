@@ -59,7 +59,7 @@ template PowerProfileMonitorT()
   override bool getPowerSaverEnabled()
   {
     bool _retval;
-    _retval = g_power_profile_monitor_get_power_saver_enabled(cast(GPowerProfileMonitor*)this._cPtr);
+    _retval = cast(bool)g_power_profile_monitor_get_power_saver_enabled(cast(GPowerProfileMonitor*)this._cPtr);
     return _retval;
   }
 }

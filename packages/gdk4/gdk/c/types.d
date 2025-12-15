@@ -1708,10 +1708,10 @@ struct GdkContentProviderClass
   extern(C) void function(GdkContentProvider* provider, const(char)* mimeType, GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) writeMimeTypeAsync;
 
   /** */
-  extern(C) bool function(GdkContentProvider* provider, GAsyncResult* result, GError** _err) writeMimeTypeFinish;
+  extern(C) gboolean function(GdkContentProvider* provider, GAsyncResult* result, GError** _err) writeMimeTypeFinish;
 
   /** */
-  extern(C) bool function(GdkContentProvider* provider, GValue* value, GError** _err) getValue;
+  extern(C) gboolean function(GdkContentProvider* provider, GValue* value, GError** _err) getValue;
 
   /** */
   void*[8] padding;

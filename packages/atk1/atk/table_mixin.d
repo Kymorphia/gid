@@ -56,7 +56,7 @@ template TableT()
   override bool addColumnSelection(int column)
   {
     bool _retval;
-    _retval = atk_table_add_column_selection(cast(AtkTable*)this._cPtr, column);
+    _retval = cast(bool)atk_table_add_column_selection(cast(AtkTable*)this._cPtr, column);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ template TableT()
   override bool addRowSelection(int row)
   {
     bool _retval;
-    _retval = atk_table_add_row_selection(cast(AtkTable*)this._cPtr, row);
+    _retval = cast(bool)atk_table_add_row_selection(cast(AtkTable*)this._cPtr, row);
     return _retval;
   }
 
@@ -324,7 +324,7 @@ template TableT()
   override bool isColumnSelected(int column)
   {
     bool _retval;
-    _retval = atk_table_is_column_selected(cast(AtkTable*)this._cPtr, column);
+    _retval = cast(bool)atk_table_is_column_selected(cast(AtkTable*)this._cPtr, column);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ template TableT()
   override bool isRowSelected(int row)
   {
     bool _retval;
-    _retval = atk_table_is_row_selected(cast(AtkTable*)this._cPtr, row);
+    _retval = cast(bool)atk_table_is_row_selected(cast(AtkTable*)this._cPtr, row);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ template TableT()
   override bool isSelected(int row, int column)
   {
     bool _retval;
-    _retval = atk_table_is_selected(cast(AtkTable*)this._cPtr, row, column);
+    _retval = cast(bool)atk_table_is_selected(cast(AtkTable*)this._cPtr, row, column);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ template TableT()
   override bool removeColumnSelection(int column)
   {
     bool _retval;
-    _retval = atk_table_remove_column_selection(cast(AtkTable*)this._cPtr, column);
+    _retval = cast(bool)atk_table_remove_column_selection(cast(AtkTable*)this._cPtr, column);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ template TableT()
   override bool removeRowSelection(int row)
   {
     bool _retval;
-    _retval = atk_table_remove_row_selection(cast(AtkTable*)this._cPtr, row);
+    _retval = cast(bool)atk_table_remove_row_selection(cast(AtkTable*)this._cPtr, row);
     return _retval;
   }
 

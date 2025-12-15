@@ -38,7 +38,7 @@ template SelectionT()
   override bool addSelection(int i)
   {
     bool _retval;
-    _retval = atk_selection_add_selection(cast(AtkSelection*)this._cPtr, i);
+    _retval = cast(bool)atk_selection_add_selection(cast(AtkSelection*)this._cPtr, i);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ template SelectionT()
   override bool clearSelection()
   {
     bool _retval;
-    _retval = atk_selection_clear_selection(cast(AtkSelection*)this._cPtr);
+    _retval = cast(bool)atk_selection_clear_selection(cast(AtkSelection*)this._cPtr);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ template SelectionT()
   override bool isChildSelected(int i)
   {
     bool _retval;
-    _retval = atk_selection_is_child_selected(cast(AtkSelection*)this._cPtr, i);
+    _retval = cast(bool)atk_selection_is_child_selected(cast(AtkSelection*)this._cPtr, i);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ template SelectionT()
   override bool removeSelection(int i)
   {
     bool _retval;
-    _retval = atk_selection_remove_selection(cast(AtkSelection*)this._cPtr, i);
+    _retval = cast(bool)atk_selection_remove_selection(cast(AtkSelection*)this._cPtr, i);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ template SelectionT()
   override bool selectAllSelection()
   {
     bool _retval;
-    _retval = atk_selection_select_all_selection(cast(AtkSelection*)this._cPtr);
+    _retval = cast(bool)atk_selection_select_all_selection(cast(AtkSelection*)this._cPtr);
     return _retval;
   }
 

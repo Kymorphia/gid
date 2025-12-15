@@ -183,7 +183,7 @@ class WindowControls : gtk.widget.Widget
   bool getEmpty()
   {
     bool _retval;
-    _retval = gtk_window_controls_get_empty(cast(GtkWindowControls*)this._cPtr);
+    _retval = cast(bool)gtk_window_controls_get_empty(cast(GtkWindowControls*)this._cPtr);
     return _retval;
   }
 

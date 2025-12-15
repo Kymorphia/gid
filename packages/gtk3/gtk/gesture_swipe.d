@@ -76,7 +76,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   bool getVelocity(out double velocityX, out double velocityY)
   {
     bool _retval;
-    _retval = gtk_gesture_swipe_get_velocity(cast(GtkGestureSwipe*)this._cPtr, cast(double*)&velocityX, cast(double*)&velocityY);
+    _retval = cast(bool)gtk_gesture_swipe_get_velocity(cast(GtkGestureSwipe*)this._cPtr, cast(double*)&velocityX, cast(double*)&velocityY);
     return _retval;
   }
 

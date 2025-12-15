@@ -405,7 +405,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getAllowNone()
   {
     bool _retval;
-    _retval = adw_squeezer_get_allow_none(cast(AdwSqueezer*)this._cPtr);
+    _retval = cast(bool)adw_squeezer_get_allow_none(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -418,7 +418,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = adw_squeezer_get_homogeneous(cast(AdwSqueezer*)this._cPtr);
+    _retval = cast(bool)adw_squeezer_get_homogeneous(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getInterpolateSize()
   {
     bool _retval;
-    _retval = adw_squeezer_get_interpolate_size(cast(AdwSqueezer*)this._cPtr);
+    _retval = cast(bool)adw_squeezer_get_interpolate_size(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -509,7 +509,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getTransitionRunning()
   {
     bool _retval;
-    _retval = adw_squeezer_get_transition_running(cast(AdwSqueezer*)this._cPtr);
+    _retval = cast(bool)adw_squeezer_get_transition_running(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 

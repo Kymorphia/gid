@@ -634,7 +634,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool getEmbedPageSetup()
   {
     bool _retval;
-    _retval = gtk_print_operation_get_embed_page_setup(cast(GtkPrintOperation*)this._cPtr);
+    _retval = cast(bool)gtk_print_operation_get_embed_page_setup(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -664,7 +664,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool getHasSelection()
   {
     bool _retval;
-    _retval = gtk_print_operation_get_has_selection(cast(GtkPrintOperation*)this._cPtr);
+    _retval = cast(bool)gtk_print_operation_get_has_selection(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -745,7 +745,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool getSupportSelection()
   {
     bool _retval;
-    _retval = gtk_print_operation_get_support_selection(cast(GtkPrintOperation*)this._cPtr);
+    _retval = cast(bool)gtk_print_operation_get_support_selection(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -764,7 +764,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool isFinished()
   {
     bool _retval;
-    _retval = gtk_print_operation_is_finished(cast(GtkPrintOperation*)this._cPtr);
+    _retval = cast(bool)gtk_print_operation_is_finished(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 

@@ -134,7 +134,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getAutoexpand()
   {
     bool _retval;
-    _retval = gtk_tree_list_model_get_autoexpand(cast(GtkTreeListModel*)this._cPtr);
+    _retval = cast(bool)gtk_tree_list_model_get_autoexpand(cast(GtkTreeListModel*)this._cPtr);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getPassthrough()
   {
     bool _retval;
-    _retval = gtk_tree_list_model_get_passthrough(cast(GtkTreeListModel*)this._cPtr);
+    _retval = cast(bool)gtk_tree_list_model_get_passthrough(cast(GtkTreeListModel*)this._cPtr);
     return _retval;
   }
 

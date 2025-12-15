@@ -256,7 +256,7 @@ class GridView : gtk.list_base.ListBase
   bool getEnableRubberband()
   {
     bool _retval;
-    _retval = gtk_grid_view_get_enable_rubberband(cast(GtkGridView*)this._cPtr);
+    _retval = cast(bool)gtk_grid_view_get_enable_rubberband(cast(GtkGridView*)this._cPtr);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class GridView : gtk.list_base.ListBase
   bool getSingleClickActivate()
   {
     bool _retval;
-    _retval = gtk_grid_view_get_single_click_activate(cast(GtkGridView*)this._cPtr);
+    _retval = cast(bool)gtk_grid_view_get_single_click_activate(cast(GtkGridView*)this._cPtr);
     return _retval;
   }
 

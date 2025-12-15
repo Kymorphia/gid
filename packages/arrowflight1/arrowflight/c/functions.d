@@ -25,8 +25,8 @@ __gshared extern(C)
   // Client
   GType function() c_gaflight_client_get_type; ///
   GAFlightClient* function(GAFlightLocation* location, GAFlightClientOptions* options, GError** _err) c_gaflight_client_new; ///
-  bool function(GAFlightClient* client, const(char)* user, const(char)* password, GAFlightCallOptions* options, char** bearerName, char** bearerValue, GError** _err) c_gaflight_client_authenticate_basic_token; ///
-  bool function(GAFlightClient* client, GError** _err) c_gaflight_client_close; ///
+  gboolean function(GAFlightClient* client, const(char)* user, const(char)* password, GAFlightCallOptions* options, char** bearerName, char** bearerValue, GError** _err) c_gaflight_client_authenticate_basic_token; ///
+  gboolean function(GAFlightClient* client, GError** _err) c_gaflight_client_close; ///
   GAFlightStreamReader* function(GAFlightClient* client, GAFlightTicket* ticket, GAFlightCallOptions* options, GError** _err) c_gaflight_client_do_get; ///
   GAFlightDoPutResult* function(GAFlightClient* client, GAFlightDescriptor* descriptor, GArrowSchema* schema, GAFlightCallOptions* options, GError** _err) c_gaflight_client_do_put; ///
   GAFlightInfo* function(GAFlightClient* client, GAFlightDescriptor* descriptor, GAFlightCallOptions* options, GError** _err) c_gaflight_client_get_flight_info; ///
@@ -50,7 +50,7 @@ __gshared extern(C)
 
   // Descriptor
   GType function() c_gaflight_descriptor_get_type; ///
-  bool function(GAFlightDescriptor* descriptor, GAFlightDescriptor* otherDescriptor) c_gaflight_descriptor_equal; ///
+  gboolean function(GAFlightDescriptor* descriptor, GAFlightDescriptor* otherDescriptor) c_gaflight_descriptor_equal; ///
   char* function(GAFlightDescriptor* descriptor) c_gaflight_descriptor_to_string; ///
 
   // DoPutResult
@@ -59,13 +59,13 @@ __gshared extern(C)
   // Endpoint
   GType function() c_gaflight_endpoint_get_type; ///
   GAFlightEndpoint* function(GAFlightTicket* ticket, GList* locations) c_gaflight_endpoint_new; ///
-  bool function(GAFlightEndpoint* endpoint, GAFlightEndpoint* otherEndpoint) c_gaflight_endpoint_equal; ///
+  gboolean function(GAFlightEndpoint* endpoint, GAFlightEndpoint* otherEndpoint) c_gaflight_endpoint_equal; ///
   GList* function(GAFlightEndpoint* endpoint) c_gaflight_endpoint_get_locations; ///
 
   // Info
   GType function() c_gaflight_info_get_type; ///
   GAFlightInfo* function(GArrowSchema* schema, GAFlightDescriptor* descriptor, GList* endpoints, long totalRecords, long totalBytes, GError** _err) c_gaflight_info_new; ///
-  bool function(GAFlightInfo* info, GAFlightInfo* otherInfo) c_gaflight_info_equal; ///
+  gboolean function(GAFlightInfo* info, GAFlightInfo* otherInfo) c_gaflight_info_equal; ///
   GAFlightDescriptor* function(GAFlightInfo* info) c_gaflight_info_get_descriptor; ///
   GList* function(GAFlightInfo* info) c_gaflight_info_get_endpoints; ///
   GArrowSchema* function(GAFlightInfo* info, GArrowReadOptions* options, GError** _err) c_gaflight_info_get_schema; ///
@@ -75,7 +75,7 @@ __gshared extern(C)
   // Location
   GType function() c_gaflight_location_get_type; ///
   GAFlightLocation* function(const(char)* uri, GError** _err) c_gaflight_location_new; ///
-  bool function(GAFlightLocation* location, GAFlightLocation* otherLocation) c_gaflight_location_equal; ///
+  gboolean function(GAFlightLocation* location, GAFlightLocation* otherLocation) c_gaflight_location_equal; ///
   char* function(GAFlightLocation* location) c_gaflight_location_get_scheme; ///
   char* function(GAFlightLocation* location) c_gaflight_location_to_string; ///
 
@@ -89,7 +89,7 @@ __gshared extern(C)
 
   // MetadataWriter
   GType function() c_gaflight_metadata_writer_get_type; ///
-  bool function(GAFlightMetadataWriter* writer, GArrowBuffer* metadata, GError** _err) c_gaflight_metadata_writer_write; ///
+  gboolean function(GAFlightMetadataWriter* writer, GArrowBuffer* metadata, GError** _err) c_gaflight_metadata_writer_write; ///
 
   // PathDescriptor
   GType function() c_gaflight_path_descriptor_get_type; ///
@@ -107,9 +107,9 @@ __gshared extern(C)
 
   // RecordBatchWriter
   GType function() c_gaflight_record_batch_writer_get_type; ///
-  bool function(GAFlightRecordBatchWriter* writer, GArrowSchema* schema, GArrowWriteOptions* options, GError** _err) c_gaflight_record_batch_writer_begin; ///
-  bool function(GAFlightRecordBatchWriter* writer, GArrowBuffer* metadata, GError** _err) c_gaflight_record_batch_writer_write_metadata; ///
-  bool function(GAFlightRecordBatchWriter* writer, GArrowRecordBatch* recordBatch, GArrowBuffer* metadata, GError** _err) c_gaflight_record_batch_writer_write_record_batch; ///
+  gboolean function(GAFlightRecordBatchWriter* writer, GArrowSchema* schema, GArrowWriteOptions* options, GError** _err) c_gaflight_record_batch_writer_begin; ///
+  gboolean function(GAFlightRecordBatchWriter* writer, GArrowBuffer* metadata, GError** _err) c_gaflight_record_batch_writer_write_metadata; ///
+  gboolean function(GAFlightRecordBatchWriter* writer, GArrowRecordBatch* recordBatch, GArrowBuffer* metadata, GError** _err) c_gaflight_record_batch_writer_write_record_batch; ///
 
   // Servable
   GType function() c_gaflight_servable_get_type; ///
@@ -117,13 +117,13 @@ __gshared extern(C)
   // Server
   GType function() c_gaflight_server_get_type; ///
   GAFlightDataStream* function(GAFlightServer* server, GAFlightServerCallContext* context, GAFlightTicket* ticket, GError** _err) c_gaflight_server_do_get; ///
-  bool function(GAFlightServer* server, GAFlightServerCallContext* context, GAFlightMessageReader* reader, GAFlightMetadataWriter* writer, GError** _err) c_gaflight_server_do_put; ///
+  gboolean function(GAFlightServer* server, GAFlightServerCallContext* context, GAFlightMessageReader* reader, GAFlightMetadataWriter* writer, GError** _err) c_gaflight_server_do_put; ///
   GAFlightInfo* function(GAFlightServer* server, GAFlightServerCallContext* context, GAFlightDescriptor* request, GError** _err) c_gaflight_server_get_flight_info; ///
   int function(GAFlightServer* server) c_gaflight_server_get_port; ///
   GList* function(GAFlightServer* server, GAFlightServerCallContext* context, GAFlightCriteria* criteria, GError** _err) c_gaflight_server_list_flights; ///
-  bool function(GAFlightServer* server, GAFlightServerOptions* options, GError** _err) c_gaflight_server_listen; ///
-  bool function(GAFlightServer* server, GError** _err) c_gaflight_server_shutdown; ///
-  bool function(GAFlightServer* server, GError** _err) c_gaflight_server_wait; ///
+  gboolean function(GAFlightServer* server, GAFlightServerOptions* options, GError** _err) c_gaflight_server_listen; ///
+  gboolean function(GAFlightServer* server, GError** _err) c_gaflight_server_shutdown; ///
+  gboolean function(GAFlightServer* server, GError** _err) c_gaflight_server_wait; ///
 
   // ServerAuthHandler
   GType function() c_gaflight_server_auth_handler_get_type; ///
@@ -134,7 +134,7 @@ __gshared extern(C)
 
   // ServerAuthSender
   GType function() c_gaflight_server_auth_sender_get_type; ///
-  bool function(GAFlightServerAuthSender* sender, GBytes* message, GError** _err) c_gaflight_server_auth_sender_write; ///
+  gboolean function(GAFlightServerAuthSender* sender, GBytes* message, GError** _err) c_gaflight_server_auth_sender_write; ///
 
   // ServerCallContext
   GType function() c_gaflight_server_call_context_get_type; ///
@@ -159,12 +159,12 @@ __gshared extern(C)
 
   // StreamWriter
   GType function() c_gaflight_stream_writer_get_type; ///
-  bool function(GAFlightStreamWriter* writer, GError** _err) c_gaflight_stream_writer_done_writing; ///
+  gboolean function(GAFlightStreamWriter* writer, GError** _err) c_gaflight_stream_writer_done_writing; ///
 
   // Ticket
   GType function() c_gaflight_ticket_get_type; ///
   GAFlightTicket* function(GBytes* data) c_gaflight_ticket_new; ///
-  bool function(GAFlightTicket* ticket, GAFlightTicket* otherTicket) c_gaflight_ticket_equal; ///
+  gboolean function(GAFlightTicket* ticket, GAFlightTicket* otherTicket) c_gaflight_ticket_equal; ///
 }
 
 // CallOptions

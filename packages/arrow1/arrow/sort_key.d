@@ -66,7 +66,7 @@ class SortKey : gobject.object.ObjectWrap
   bool equal(arrow.sort_key.SortKey otherSortKey)
   {
     bool _retval;
-    _retval = garrow_sort_key_equal(cast(GArrowSortKey*)this._cPtr, otherSortKey ? cast(GArrowSortKey*)otherSortKey._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_sort_key_equal(cast(GArrowSortKey*)this._cPtr, otherSortKey ? cast(GArrowSortKey*)otherSortKey._cPtr(No.Dup) : null);
     return _retval;
   }
 }

@@ -330,7 +330,7 @@ class Surface : gobject.object.ObjectWrap
   bool getDevicePosition(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
   {
     bool _retval;
-    _retval = gdk_surface_get_device_position(cast(GdkSurface*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
+    _retval = cast(bool)gdk_surface_get_device_position(cast(GdkSurface*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class Surface : gobject.object.ObjectWrap
   bool getMapped()
   {
     bool _retval;
-    _retval = gdk_surface_get_mapped(cast(GdkSurface*)this._cPtr);
+    _retval = cast(bool)gdk_surface_get_mapped(cast(GdkSurface*)this._cPtr);
     return _retval;
   }
 
@@ -465,7 +465,7 @@ class Surface : gobject.object.ObjectWrap
   bool isDestroyed()
   {
     bool _retval;
-    _retval = gdk_surface_is_destroyed(cast(GdkSurface*)this._cPtr);
+    _retval = cast(bool)gdk_surface_is_destroyed(cast(GdkSurface*)this._cPtr);
     return _retval;
   }
 
@@ -592,7 +592,7 @@ class Surface : gobject.object.ObjectWrap
   bool translateCoordinates(gdk.surface.Surface to, ref double x, ref double y)
   {
     bool _retval;
-    _retval = gdk_surface_translate_coordinates(cast(GdkSurface*)this._cPtr, to ? cast(GdkSurface*)to._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
+    _retval = cast(bool)gdk_surface_translate_coordinates(cast(GdkSurface*)this._cPtr, to ? cast(GdkSurface*)to._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 

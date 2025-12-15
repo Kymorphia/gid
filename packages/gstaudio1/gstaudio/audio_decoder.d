@@ -314,7 +314,7 @@ class AudioDecoder : gst.element.Element
   bool getDrainable()
   {
     bool _retval;
-    _retval = gst_audio_decoder_get_drainable(cast(GstAudioDecoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_decoder_get_drainable(cast(GstAudioDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -369,7 +369,7 @@ class AudioDecoder : gst.element.Element
   bool getNeedsFormat()
   {
     bool _retval;
-    _retval = gst_audio_decoder_get_needs_format(cast(GstAudioDecoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_decoder_get_needs_format(cast(GstAudioDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -382,7 +382,11 @@ class AudioDecoder : gst.element.Element
   */
   void getParseState(out bool sync, out bool eos)
   {
-    gst_audio_decoder_get_parse_state(cast(GstAudioDecoder*)this._cPtr, cast(bool*)&sync, cast(bool*)&eos);
+    gboolean _sync;
+    gboolean _eos;
+    gst_audio_decoder_get_parse_state(cast(GstAudioDecoder*)this._cPtr, &_sync, &_eos);
+    sync = cast(bool)_sync;
+    eos = cast(bool)_eos;
   }
 
   /**
@@ -394,7 +398,7 @@ class AudioDecoder : gst.element.Element
   bool getPlc()
   {
     bool _retval;
-    _retval = gst_audio_decoder_get_plc(cast(GstAudioDecoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_decoder_get_plc(cast(GstAudioDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -445,7 +449,7 @@ class AudioDecoder : gst.element.Element
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_audio_decoder_negotiate(cast(GstAudioDecoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_decoder_negotiate(cast(GstAudioDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -580,7 +584,7 @@ class AudioDecoder : gst.element.Element
   bool setOutputCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_audio_decoder_set_output_caps(cast(GstAudioDecoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_audio_decoder_set_output_caps(cast(GstAudioDecoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -594,7 +598,7 @@ class AudioDecoder : gst.element.Element
   bool setOutputFormat(gstaudio.audio_info.AudioInfo info)
   {
     bool _retval;
-    _retval = gst_audio_decoder_set_output_format(cast(GstAudioDecoder*)this._cPtr, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_audio_decoder_set_output_format(cast(GstAudioDecoder*)this._cPtr, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null);
     return _retval;
   }
 

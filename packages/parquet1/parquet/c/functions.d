@@ -26,24 +26,24 @@ __gshared extern(C)
   GArrowChunkedArray* function(GParquetArrowFileReader* reader, int i, GError** _err) c_gparquet_arrow_file_reader_read_column_data; ///
   GArrowTable* function(GParquetArrowFileReader* reader, int rowGroupIndex, int* columnIndices, size_t nColumnIndices, GError** _err) c_gparquet_arrow_file_reader_read_row_group; ///
   GArrowTable* function(GParquetArrowFileReader* reader, GError** _err) c_gparquet_arrow_file_reader_read_table; ///
-  void function(GParquetArrowFileReader* reader, bool useThreads) c_gparquet_arrow_file_reader_set_use_threads; ///
+  void function(GParquetArrowFileReader* reader, gboolean useThreads) c_gparquet_arrow_file_reader_set_use_threads; ///
 
   // ArrowFileWriter
   GType function() c_gparquet_arrow_file_writer_get_type; ///
   GParquetArrowFileWriter* function(GArrowSchema* schema, GArrowOutputStream* sink, GParquetWriterProperties* writerProperties, GError** _err) c_gparquet_arrow_file_writer_new_arrow; ///
   GParquetArrowFileWriter* function(GArrowSchema* schema, const(char)* path, GParquetWriterProperties* writerProperties, GError** _err) c_gparquet_arrow_file_writer_new_path; ///
-  bool function(GParquetArrowFileWriter* writer, GError** _err) c_gparquet_arrow_file_writer_close; ///
+  gboolean function(GParquetArrowFileWriter* writer, GError** _err) c_gparquet_arrow_file_writer_close; ///
   GArrowSchema* function(GParquetArrowFileWriter* writer) c_gparquet_arrow_file_writer_get_schema; ///
-  bool function(GParquetArrowFileWriter* writer, GError** _err) c_gparquet_arrow_file_writer_new_buffered_row_group; ///
-  bool function(GParquetArrowFileWriter* writer, size_t chunkSize, GError** _err) c_gparquet_arrow_file_writer_new_row_group; ///
-  bool function(GParquetArrowFileWriter* writer, GArrowChunkedArray* chunkedArray, GError** _err) c_gparquet_arrow_file_writer_write_chunked_array; ///
-  bool function(GParquetArrowFileWriter* writer, GArrowRecordBatch* recordBatch, GError** _err) c_gparquet_arrow_file_writer_write_record_batch; ///
-  bool function(GParquetArrowFileWriter* writer, GArrowTable* table, size_t chunkSize, GError** _err) c_gparquet_arrow_file_writer_write_table; ///
+  gboolean function(GParquetArrowFileWriter* writer, GError** _err) c_gparquet_arrow_file_writer_new_buffered_row_group; ///
+  gboolean function(GParquetArrowFileWriter* writer, size_t chunkSize, GError** _err) c_gparquet_arrow_file_writer_new_row_group; ///
+  gboolean function(GParquetArrowFileWriter* writer, GArrowChunkedArray* chunkedArray, GError** _err) c_gparquet_arrow_file_writer_write_chunked_array; ///
+  gboolean function(GParquetArrowFileWriter* writer, GArrowRecordBatch* recordBatch, GError** _err) c_gparquet_arrow_file_writer_write_record_batch; ///
+  gboolean function(GParquetArrowFileWriter* writer, GArrowTable* table, size_t chunkSize, GError** _err) c_gparquet_arrow_file_writer_write_table; ///
 
   // BooleanStatistics
   GType function() c_gparquet_boolean_statistics_get_type; ///
-  bool function(GParquetBooleanStatistics* statistics) c_gparquet_boolean_statistics_get_max; ///
-  bool function(GParquetBooleanStatistics* statistics) c_gparquet_boolean_statistics_get_min; ///
+  gboolean function(GParquetBooleanStatistics* statistics) c_gparquet_boolean_statistics_get_max; ///
+  gboolean function(GParquetBooleanStatistics* statistics) c_gparquet_boolean_statistics_get_min; ///
 
   // ByteArrayStatistics
   GType function() c_gparquet_byte_array_statistics_get_type; ///
@@ -52,8 +52,8 @@ __gshared extern(C)
 
   // ColumnChunkMetadata
   GType function() c_gparquet_column_chunk_metadata_get_type; ///
-  bool function(GParquetColumnChunkMetadata* metadata) c_gparquet_column_chunk_metadata_can_decompress; ///
-  bool function(GParquetColumnChunkMetadata* metadata, GParquetColumnChunkMetadata* otherMetadata) c_gparquet_column_chunk_metadata_equal; ///
+  gboolean function(GParquetColumnChunkMetadata* metadata) c_gparquet_column_chunk_metadata_can_decompress; ///
+  gboolean function(GParquetColumnChunkMetadata* metadata, GParquetColumnChunkMetadata* otherMetadata) c_gparquet_column_chunk_metadata_equal; ///
   long function(GParquetColumnChunkMetadata* metadata) c_gparquet_column_chunk_metadata_get_file_offset; ///
   GParquetStatistics* function(GParquetColumnChunkMetadata* metadata) c_gparquet_column_chunk_metadata_get_statistics; ///
   long function(GParquetColumnChunkMetadata* metadata) c_gparquet_column_chunk_metadata_get_total_compressed_size; ///
@@ -66,8 +66,8 @@ __gshared extern(C)
 
   // FileMetadata
   GType function() c_gparquet_file_metadata_get_type; ///
-  bool function(GParquetFileMetadata* metadata) c_gparquet_file_metadata_can_decompress; ///
-  bool function(GParquetFileMetadata* metadata, GParquetFileMetadata* otherMetadata) c_gparquet_file_metadata_equal; ///
+  gboolean function(GParquetFileMetadata* metadata) c_gparquet_file_metadata_can_decompress; ///
+  gboolean function(GParquetFileMetadata* metadata, GParquetFileMetadata* otherMetadata) c_gparquet_file_metadata_equal; ///
   const(char)* function(GParquetFileMetadata* metadata) c_gparquet_file_metadata_get_created_by; ///
   int function(GParquetFileMetadata* metadata) c_gparquet_file_metadata_get_n_columns; ///
   int function(GParquetFileMetadata* metadata) c_gparquet_file_metadata_get_n_row_groups; ///
@@ -98,8 +98,8 @@ __gshared extern(C)
 
   // RowGroupMetadata
   GType function() c_gparquet_row_group_metadata_get_type; ///
-  bool function(GParquetRowGroupMetadata* metadata) c_gparquet_row_group_metadata_can_decompress; ///
-  bool function(GParquetRowGroupMetadata* metadata, GParquetRowGroupMetadata* otherMetadata) c_gparquet_row_group_metadata_equal; ///
+  gboolean function(GParquetRowGroupMetadata* metadata) c_gparquet_row_group_metadata_can_decompress; ///
+  gboolean function(GParquetRowGroupMetadata* metadata, GParquetRowGroupMetadata* otherMetadata) c_gparquet_row_group_metadata_equal; ///
   GParquetColumnChunkMetadata* function(GParquetRowGroupMetadata* metadata, int index, GError** _err) c_gparquet_row_group_metadata_get_column_chunk; ///
   long function(GParquetRowGroupMetadata* metadata) c_gparquet_row_group_metadata_get_file_offset; ///
   int function(GParquetRowGroupMetadata* metadata) c_gparquet_row_group_metadata_get_n_columns; ///
@@ -109,13 +109,13 @@ __gshared extern(C)
 
   // Statistics
   GType function() c_gparquet_statistics_get_type; ///
-  bool function(GParquetStatistics* statistics, GParquetStatistics* otherStatistics) c_gparquet_statistics_equal; ///
+  gboolean function(GParquetStatistics* statistics, GParquetStatistics* otherStatistics) c_gparquet_statistics_equal; ///
   long function(GParquetStatistics* statistics) c_gparquet_statistics_get_n_distinct_values; ///
   long function(GParquetStatistics* statistics) c_gparquet_statistics_get_n_nulls; ///
   long function(GParquetStatistics* statistics) c_gparquet_statistics_get_n_values; ///
-  bool function(GParquetStatistics* statistics) c_gparquet_statistics_has_min_max; ///
-  bool function(GParquetStatistics* statistics) c_gparquet_statistics_has_n_distinct_values; ///
-  bool function(GParquetStatistics* statistics) c_gparquet_statistics_has_n_nulls; ///
+  gboolean function(GParquetStatistics* statistics) c_gparquet_statistics_has_min_max; ///
+  gboolean function(GParquetStatistics* statistics) c_gparquet_statistics_has_n_distinct_values; ///
+  gboolean function(GParquetStatistics* statistics) c_gparquet_statistics_has_n_nulls; ///
 
   // WriterProperties
   GType function() c_gparquet_writer_properties_get_type; ///
@@ -127,7 +127,7 @@ __gshared extern(C)
   long function(GParquetWriterProperties* properties) c_gparquet_writer_properties_get_data_page_size; ///
   long function(GParquetWriterProperties* properties) c_gparquet_writer_properties_get_dictionary_page_size_limit; ///
   long function(GParquetWriterProperties* properties) c_gparquet_writer_properties_get_max_row_group_length; ///
-  bool function(GParquetWriterProperties* properties, const(char)* path) c_gparquet_writer_properties_is_dictionary_enabled; ///
+  gboolean function(GParquetWriterProperties* properties, const(char)* path) c_gparquet_writer_properties_is_dictionary_enabled; ///
   void function(GParquetWriterProperties* properties, long batchSize) c_gparquet_writer_properties_set_batch_size; ///
   void function(GParquetWriterProperties* properties, GArrowCompressionType compressionType, const(char)* path) c_gparquet_writer_properties_set_compression; ///
   void function(GParquetWriterProperties* properties, long dataPageSize) c_gparquet_writer_properties_set_data_page_size; ///

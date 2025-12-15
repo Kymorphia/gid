@@ -119,7 +119,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
     bool _retval;
     GtkTextIter _begin;
     GtkTextIter _end;
-    _retval = gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)this._cPtr, &_begin, &_end);
+    _retval = cast(bool)gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)this._cPtr, &_begin, &_end);
     begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
     end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
@@ -149,7 +149,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getBusy()
   {
     bool _retval;
-    _retval = gtk_source_completion_context_get_busy(cast(GtkSourceCompletionContext*)this._cPtr);
+    _retval = cast(bool)gtk_source_completion_context_get_busy(cast(GtkSourceCompletionContext*)this._cPtr);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getEmpty()
   {
     bool _retval;
-    _retval = gtk_source_completion_context_get_empty(cast(GtkSourceCompletionContext*)this._cPtr);
+    _retval = cast(bool)gtk_source_completion_context_get_empty(cast(GtkSourceCompletionContext*)this._cPtr);
     return _retval;
   }
 

@@ -169,7 +169,7 @@ class DragContext : gobject.object.ObjectWrap
   bool manageDnd(gdk.window.Window ipcWindow, gdk.types.DragAction actions)
   {
     bool _retval;
-    _retval = gdk_drag_context_manage_dnd(cast(GdkDragContext*)this._cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow._cPtr(No.Dup) : null, actions);
+    _retval = cast(bool)gdk_drag_context_manage_dnd(cast(GdkDragContext*)this._cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow._cPtr(No.Dup) : null, actions);
     return _retval;
   }
 

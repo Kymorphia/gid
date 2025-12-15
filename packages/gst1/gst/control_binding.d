@@ -69,7 +69,7 @@ class ControlBinding : gst.object.ObjectWrap
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
-    _retval = gst_control_binding_get_g_value_array(cast(GstControlBinding*)this._cPtr, timestamp, interval, _nValues, _values);
+    _retval = cast(bool)gst_control_binding_get_g_value_array(cast(GstControlBinding*)this._cPtr, timestamp, interval, _nValues, _values);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class ControlBinding : gst.object.ObjectWrap
   bool isDisabled()
   {
     bool _retval;
-    _retval = gst_control_binding_is_disabled(cast(GstControlBinding*)this._cPtr);
+    _retval = cast(bool)gst_control_binding_is_disabled(cast(GstControlBinding*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class ControlBinding : gst.object.ObjectWrap
   bool syncValues(gst.object.ObjectWrap object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync)
   {
     bool _retval;
-    _retval = gst_control_binding_sync_values(cast(GstControlBinding*)this._cPtr, object ? cast(GstObject*)object._cPtr(No.Dup) : null, timestamp, lastSync);
+    _retval = cast(bool)gst_control_binding_sync_values(cast(GstControlBinding*)this._cPtr, object ? cast(GstObject*)object._cPtr(No.Dup) : null, timestamp, lastSync);
     return _retval;
   }
 }

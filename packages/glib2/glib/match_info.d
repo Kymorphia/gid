@@ -199,7 +199,7 @@ class MatchInfo : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_match_info_fetch_named_pos(cast(const(GMatchInfo)*)this._cPtr, _name, cast(int*)&startPos, cast(int*)&endPos);
+    _retval = cast(bool)g_match_info_fetch_named_pos(cast(const(GMatchInfo)*)this._cPtr, _name, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class MatchInfo : gobject.boxed.Boxed
   bool fetchPos(int matchNum, out int startPos, out int endPos)
   {
     bool _retval;
-    _retval = g_match_info_fetch_pos(cast(const(GMatchInfo)*)this._cPtr, matchNum, cast(int*)&startPos, cast(int*)&endPos);
+    _retval = cast(bool)g_match_info_fetch_pos(cast(const(GMatchInfo)*)this._cPtr, matchNum, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ class MatchInfo : gobject.boxed.Boxed
   bool isPartialMatch()
   {
     bool _retval;
-    _retval = g_match_info_is_partial_match(cast(const(GMatchInfo)*)this._cPtr);
+    _retval = cast(bool)g_match_info_is_partial_match(cast(const(GMatchInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class MatchInfo : gobject.boxed.Boxed
   bool matches()
   {
     bool _retval;
-    _retval = g_match_info_matches(cast(const(GMatchInfo)*)this._cPtr);
+    _retval = cast(bool)g_match_info_matches(cast(const(GMatchInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class MatchInfo : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = g_match_info_next(cast(GMatchInfo*)this._cPtr, &_err);
+    _retval = cast(bool)g_match_info_next(cast(GMatchInfo*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

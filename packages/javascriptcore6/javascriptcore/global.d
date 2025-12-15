@@ -68,13 +68,13 @@ uint getMinorVersion()
 */
 void optionsForeach(javascriptcore.types.OptionsFunc function_)
 {
-  extern(C) bool _function_Callback(const(char)* option, JSCOptionType type, const(char)* description, void* userData)
+  extern(C) gboolean _function_Callback(const(char)* option, JSCOptionType type, const(char)* description, void* userData)
   {
     auto _dlg = cast(javascriptcore.types.OptionsFunc*)userData;
     string _option = option.fromCString(No.Free);
     string _description = description.fromCString(No.Free);
 
-    bool _retval = (*_dlg)(_option, type, _description);
+    gboolean _retval = (*_dlg)(_option, type, _description);
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
@@ -95,7 +95,9 @@ bool optionsGetBoolean(string option, out bool value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_get_boolean(_option, cast(bool*)&value);
+  gboolean _value;
+  _retval = cast(bool)jsc_options_get_boolean(_option, &_value);
+  value = cast(bool)_value;
   return _retval;
 }
 
@@ -111,7 +113,7 @@ bool optionsGetDouble(string option, out double value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_get_double(_option, cast(double*)&value);
+  _retval = cast(bool)jsc_options_get_double(_option, cast(double*)&value);
   return _retval;
 }
 
@@ -127,7 +129,7 @@ bool optionsGetInt(string option, out int value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_get_int(_option, cast(int*)&value);
+  _retval = cast(bool)jsc_options_get_int(_option, cast(int*)&value);
   return _retval;
 }
 
@@ -165,7 +167,7 @@ bool optionsGetRangeString(string option, out string value)
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
   char* _value;
-  _retval = jsc_options_get_range_string(_option, &_value);
+  _retval = cast(bool)jsc_options_get_range_string(_option, &_value);
   value = _value.fromCString(Yes.Free);
   return _retval;
 }
@@ -182,7 +184,7 @@ bool optionsGetSize(string option, out size_t value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_get_size(_option, cast(size_t*)&value);
+  _retval = cast(bool)jsc_options_get_size(_option, cast(size_t*)&value);
   return _retval;
 }
 
@@ -199,7 +201,7 @@ bool optionsGetString(string option, out string value)
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
   char* _value;
-  _retval = jsc_options_get_string(_option, &_value);
+  _retval = cast(bool)jsc_options_get_string(_option, &_value);
   value = _value.fromCString(Yes.Free);
   return _retval;
 }
@@ -216,7 +218,7 @@ bool optionsGetUint(string option, out uint value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_get_uint(_option, cast(uint*)&value);
+  _retval = cast(bool)jsc_options_get_uint(_option, cast(uint*)&value);
   return _retval;
 }
 
@@ -232,7 +234,7 @@ bool optionsSetBoolean(string option, bool value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_set_boolean(_option, value);
+  _retval = cast(bool)jsc_options_set_boolean(_option, value);
   return _retval;
 }
 
@@ -248,7 +250,7 @@ bool optionsSetDouble(string option, double value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_set_double(_option, value);
+  _retval = cast(bool)jsc_options_set_double(_option, value);
   return _retval;
 }
 
@@ -264,7 +266,7 @@ bool optionsSetInt(string option, int value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_set_int(_option, value);
+  _retval = cast(bool)jsc_options_set_int(_option, value);
   return _retval;
 }
 
@@ -284,7 +286,7 @@ bool optionsSetRangeString(string option, string value)
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = jsc_options_set_range_string(_option, _value);
+  _retval = cast(bool)jsc_options_set_range_string(_option, _value);
   return _retval;
 }
 
@@ -300,7 +302,7 @@ bool optionsSetSize(string option, size_t value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_set_size(_option, value);
+  _retval = cast(bool)jsc_options_set_size(_option, value);
   return _retval;
 }
 
@@ -317,7 +319,7 @@ bool optionsSetString(string option, string value)
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = jsc_options_set_string(_option, _value);
+  _retval = cast(bool)jsc_options_set_string(_option, _value);
   return _retval;
 }
 
@@ -333,6 +335,6 @@ bool optionsSetUint(string option, uint value)
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
-  _retval = jsc_options_set_uint(_option, value);
+  _retval = cast(bool)jsc_options_set_uint(_option, value);
   return _retval;
 }

@@ -84,7 +84,7 @@ class RTSPRange
   static bool convertUnits(gstrtsp.rtsptime_range.RTSPTimeRange range, gstrtsp.types.RTSPRangeUnit unit)
   {
     bool _retval;
-    _retval = gst_rtsp_range_convert_units(range ? cast(GstRTSPTimeRange*)range._cPtr : null, unit);
+    _retval = cast(bool)gst_rtsp_range_convert_units(range ? cast(GstRTSPTimeRange*)range._cPtr : null, unit);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class RTSPRange
   static bool getTimes(gstrtsp.rtsptime_range.RTSPTimeRange range, out gst.types.ClockTime min, out gst.types.ClockTime max)
   {
     bool _retval;
-    _retval = gst_rtsp_range_get_times(range ? cast(const(GstRTSPTimeRange)*)range._cPtr : null, cast(GstClockTime*)&min, cast(GstClockTime*)&max);
+    _retval = cast(bool)gst_rtsp_range_get_times(range ? cast(const(GstRTSPTimeRange)*)range._cPtr : null, cast(GstClockTime*)&min, cast(GstClockTime*)&max);
     return _retval;
   }
 

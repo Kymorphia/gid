@@ -70,7 +70,7 @@ class HoverContext : gobject.object.ObjectWrap
     bool _retval;
     GtkTextIter _begin;
     GtkTextIter _end;
-    _retval = gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)this._cPtr, &_begin, &_end);
+    _retval = cast(bool)gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)this._cPtr, &_begin, &_end);
     begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
     end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
@@ -92,7 +92,7 @@ class HoverContext : gobject.object.ObjectWrap
   bool getIter(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

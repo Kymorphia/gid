@@ -214,7 +214,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   bool getTextSet()
   {
     bool _retval;
-    _retval = gtk_source_snippet_chunk_get_text_set(cast(GtkSourceSnippetChunk*)this._cPtr);
+    _retval = cast(bool)gtk_source_snippet_chunk_get_text_set(cast(GtkSourceSnippetChunk*)this._cPtr);
     return _retval;
   }
 

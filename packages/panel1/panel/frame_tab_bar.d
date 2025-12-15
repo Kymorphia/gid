@@ -124,7 +124,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getAutohide()
   {
     bool _retval;
-    _retval = panel_frame_tab_bar_get_autohide(cast(PanelFrameTabBar*)this._cPtr);
+    _retval = cast(bool)panel_frame_tab_bar_get_autohide(cast(PanelFrameTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getExpandTabs()
   {
     bool _retval;
-    _retval = panel_frame_tab_bar_get_expand_tabs(cast(PanelFrameTabBar*)this._cPtr);
+    _retval = cast(bool)panel_frame_tab_bar_get_expand_tabs(cast(PanelFrameTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getInverted()
   {
     bool _retval;
-    _retval = panel_frame_tab_bar_get_inverted(cast(PanelFrameTabBar*)this._cPtr);
+    _retval = cast(bool)panel_frame_tab_bar_get_inverted(cast(PanelFrameTabBar*)this._cPtr);
     return _retval;
   }
 

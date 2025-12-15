@@ -58,7 +58,7 @@ template StreamVolumeT()
   override bool getMute()
   {
     bool _retval;
-    _retval = gst_stream_volume_get_mute(cast(GstStreamVolume*)this._cPtr);
+    _retval = cast(bool)gst_stream_volume_get_mute(cast(GstStreamVolume*)this._cPtr);
     return _retval;
   }
 

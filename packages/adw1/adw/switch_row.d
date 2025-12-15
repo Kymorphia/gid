@@ -112,7 +112,7 @@ class SwitchRow : adw.action_row.ActionRow
   bool getActive()
   {
     bool _retval;
-    _retval = adw_switch_row_get_active(cast(AdwSwitchRow*)this._cPtr);
+    _retval = cast(bool)adw_switch_row_get_active(cast(AdwSwitchRow*)this._cPtr);
     return _retval;
   }
 

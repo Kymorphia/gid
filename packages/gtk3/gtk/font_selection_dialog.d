@@ -155,7 +155,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     bool _retval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
-    _retval = gtk_font_selection_dialog_set_font_name(cast(GtkFontSelectionDialog*)this._cPtr, _fontname);
+    _retval = cast(bool)gtk_font_selection_dialog_set_font_name(cast(GtkFontSelectionDialog*)this._cPtr, _fontname);
     return _retval;
   }
 

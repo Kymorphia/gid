@@ -168,7 +168,7 @@ class Credential : gobject.boxed.Boxed
   bool hasPassword()
   {
     bool _retval;
-    _retval = webkit_credential_has_password(cast(WebKitCredential*)this._cPtr);
+    _retval = cast(bool)webkit_credential_has_password(cast(WebKitCredential*)this._cPtr);
     return _retval;
   }
 }

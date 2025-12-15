@@ -35,12 +35,12 @@ __gshared extern(C)
   GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout, GstRTSPMessage* response) c_gst_rtsp_connection_connect_with_response; ///
   GstRTSPResult function(GstRTSPConnection* conn, long timeout, GstRTSPMessage* response) c_gst_rtsp_connection_connect_with_response_usec; ///
   GstRTSPResult function(GstRTSPConnection* conn, GstRTSPConnection* conn2) c_gst_rtsp_connection_do_tunnel; ///
-  GstRTSPResult function(GstRTSPConnection* conn, bool flush) c_gst_rtsp_connection_flush; ///
+  GstRTSPResult function(GstRTSPConnection* conn, gboolean flush) c_gst_rtsp_connection_flush; ///
   GstRTSPResult function(GstRTSPConnection* conn) c_gst_rtsp_connection_free; ///
-  bool function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_ignore_x_server_reply; ///
+  gboolean function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_ignore_x_server_reply; ///
   const(char)* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_ip; ///
   GSocket* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_read_socket; ///
-  bool function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_remember_session_id; ///
+  gboolean function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_remember_session_id; ///
   GTlsConnection* function(GstRTSPConnection* conn, GError** _err) c_gst_rtsp_connection_get_tls; ///
   GTlsDatabase* function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_tls_database; ///
   GTlsInteraction* function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_tls_interaction; ///
@@ -48,7 +48,7 @@ __gshared extern(C)
   const(char)* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_tunnelid; ///
   GstRTSPUrl* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_url; ///
   GSocket* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_write_socket; ///
-  bool function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_is_tunneled; ///
+  gboolean function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_is_tunneled; ///
   GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout) c_gst_rtsp_connection_next_timeout; ///
   long function(GstRTSPConnection* conn) c_gst_rtsp_connection_next_timeout_usec; ///
   GstRTSPResult function(GstRTSPConnection* conn, GstRTSPEvent events, GstRTSPEvent* revents, GTimeVal* timeout) c_gst_rtsp_connection_poll; ///
@@ -66,16 +66,16 @@ __gshared extern(C)
   GstRTSPResult function(GstRTSPConnection* conn, GstRTSPAuthMethod method, const(char)* user, const(char)* pass) c_gst_rtsp_connection_set_auth; ///
   void function(GstRTSPConnection* conn, const(char)* param, const(char)* value) c_gst_rtsp_connection_set_auth_param; ///
   void function(GstRTSPConnection* conn, uint limit) c_gst_rtsp_connection_set_content_length_limit; ///
-  void function(GstRTSPConnection* conn, bool enable) c_gst_rtsp_connection_set_http_mode; ///
-  void function(GstRTSPConnection* conn, bool ignore) c_gst_rtsp_connection_set_ignore_x_server_reply; ///
+  void function(GstRTSPConnection* conn, gboolean enable) c_gst_rtsp_connection_set_http_mode; ///
+  void function(GstRTSPConnection* conn, gboolean ignore) c_gst_rtsp_connection_set_ignore_x_server_reply; ///
   void function(GstRTSPConnection* conn, const(char)* ip) c_gst_rtsp_connection_set_ip; ///
   GstRTSPResult function(GstRTSPConnection* conn, const(char)* host, uint port) c_gst_rtsp_connection_set_proxy; ///
   GstRTSPResult function(GstRTSPConnection* conn, uint qosDscp) c_gst_rtsp_connection_set_qos_dscp; ///
-  void function(GstRTSPConnection* conn, bool remember) c_gst_rtsp_connection_set_remember_session_id; ///
+  void function(GstRTSPConnection* conn, gboolean remember) c_gst_rtsp_connection_set_remember_session_id; ///
   void function(GstRTSPConnection* conn, GTlsDatabase* database) c_gst_rtsp_connection_set_tls_database; ///
   void function(GstRTSPConnection* conn, GTlsInteraction* interaction) c_gst_rtsp_connection_set_tls_interaction; ///
-  bool function(GstRTSPConnection* conn, GTlsCertificateFlags flags) c_gst_rtsp_connection_set_tls_validation_flags; ///
-  void function(GstRTSPConnection* conn, bool tunneled) c_gst_rtsp_connection_set_tunneled; ///
+  gboolean function(GstRTSPConnection* conn, GTlsCertificateFlags flags) c_gst_rtsp_connection_set_tls_validation_flags; ///
+  void function(GstRTSPConnection* conn, gboolean tunneled) c_gst_rtsp_connection_set_tunneled; ///
   GstRTSPResult function(GstRTSPConnection* conn, const(ubyte)* data, uint size, GTimeVal* timeout) c_gst_rtsp_connection_write; ///
   GstRTSPResult function(GstRTSPConnection* conn, const(ubyte)* data, uint size, long timeout) c_gst_rtsp_connection_write_usec; ///
   GstRTSPResult function(GSocket* socket, GstRTSPConnection** conn, GCancellable* cancellable) c_gst_rtsp_connection_accept; ///
@@ -86,8 +86,8 @@ __gshared extern(C)
   GType function() c_gst_rtsp_extension_get_type; ///
   GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req, GstRTSPMessage* resp) c_gst_rtsp_extension_after_send; ///
   GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req) c_gst_rtsp_extension_before_send; ///
-  bool function(GstRTSPExtension* ext, GstCaps* caps) c_gst_rtsp_extension_configure_stream; ///
-  bool function(GstRTSPExtension* ext, GstRTSPMessage* resp) c_gst_rtsp_extension_detect_server; ///
+  gboolean function(GstRTSPExtension* ext, GstCaps* caps) c_gst_rtsp_extension_configure_stream; ///
+  gboolean function(GstRTSPExtension* ext, GstRTSPMessage* resp) c_gst_rtsp_extension_detect_server; ///
   GstRTSPResult function(GstRTSPExtension* ext, GstRTSPLowerTrans protocols, char* transport) c_gst_rtsp_extension_get_transports; ///
   GstRTSPResult function(GstRTSPExtension* ext, GstSDPMessage* sdp, GstStructure* s) c_gst_rtsp_extension_parse_sdp; ///
   GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req) c_gst_rtsp_extension_receive_request; ///
@@ -108,7 +108,7 @@ __gshared extern(C)
   GstRTSPResult function(const(GstRTSPMessage)* msg, GstRTSPHeaderField field, char** value, int indx) c_gst_rtsp_message_get_header; ///
   GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, char** value, int index) c_gst_rtsp_message_get_header_by_name; ///
   GstRTSPMsgType function(GstRTSPMessage* msg) c_gst_rtsp_message_get_type; ///
-  bool function(const(GstRTSPMessage)* msg) c_gst_rtsp_message_has_body_buffer; ///
+  gboolean function(const(GstRTSPMessage)* msg) c_gst_rtsp_message_has_body_buffer; ///
   GstRTSPResult function(GstRTSPMessage* msg) c_gst_rtsp_message_init; ///
   GstRTSPResult function(GstRTSPMessage* msg, ubyte channel) c_gst_rtsp_message_init_data; ///
   GstRTSPResult function(GstRTSPMessage* msg, GstRTSPMethod method, const(char)* uri) c_gst_rtsp_message_init_request; ///
@@ -130,9 +130,9 @@ __gshared extern(C)
   GstRTSPResult function(GstRTSPMessage* msg) c_gst_rtsp_message_unset; ///
 
   // RTSPRange
-  bool function(GstRTSPTimeRange* range, GstRTSPRangeUnit unit) c_gst_rtsp_range_convert_units; ///
+  gboolean function(GstRTSPTimeRange* range, GstRTSPRangeUnit unit) c_gst_rtsp_range_convert_units; ///
   void function(GstRTSPTimeRange* range) c_gst_rtsp_range_free; ///
-  bool function(const(GstRTSPTimeRange)* range, GstClockTime* min, GstClockTime* max) c_gst_rtsp_range_get_times; ///
+  gboolean function(const(GstRTSPTimeRange)* range, GstClockTime* min, GstClockTime* max) c_gst_rtsp_range_get_times; ///
   GstRTSPResult function(const(char)* rangestr, GstRTSPTimeRange** range) c_gst_rtsp_range_parse; ///
   char* function(const(GstRTSPTimeRange)* range) c_gst_rtsp_range_to_string; ///
 
@@ -163,7 +163,7 @@ __gshared extern(C)
   void function(GstRTSPWatch* watch) c_gst_rtsp_watch_reset; ///
   GstRTSPResult function(GstRTSPWatch* watch, GstRTSPMessage* message, uint* id) c_gst_rtsp_watch_send_message; ///
   GstRTSPResult function(GstRTSPWatch* watch, GstRTSPMessage* messages, uint nMessages, uint* id) c_gst_rtsp_watch_send_messages; ///
-  void function(GstRTSPWatch* watch, bool flushing) c_gst_rtsp_watch_set_flushing; ///
+  void function(GstRTSPWatch* watch, gboolean flushing) c_gst_rtsp_watch_set_flushing; ///
   void function(GstRTSPWatch* watch, size_t bytes, uint messages) c_gst_rtsp_watch_set_send_backlog; ///
   void function(GstRTSPWatch* watch) c_gst_rtsp_watch_unref; ///
   GstRTSPResult function(GstRTSPWatch* watch, GTimeVal* timeout) c_gst_rtsp_watch_wait_backlog; ///
@@ -177,7 +177,7 @@ __gshared extern(C)
   GstRTSPMethod function(const(char)* method) c_gst_rtsp_find_method; ///
   char* function(const(char)* algorithm, const(char)* method, const(char)* realm, const(char)* username, const(char)* password, const(char)* uri, const(char)* nonce) c_gst_rtsp_generate_digest_auth_response; ///
   char* function(const(char)* algorithm, const(char)* method, const(char)* md5, const(char)* uri, const(char)* nonce) c_gst_rtsp_generate_digest_auth_response_from_md5; ///
-  bool function(GstRTSPHeaderField field) c_gst_rtsp_header_allow_multiple; ///
+  gboolean function(GstRTSPHeaderField field) c_gst_rtsp_header_allow_multiple; ///
   const(char)* function(GstRTSPHeaderField field) c_gst_rtsp_header_as_text; ///
   GstRTSPResult function(GstRTSPMessage** msg) c_gst_rtsp_message_new; ///
   GstRTSPResult function(GstRTSPMessage** msg, ubyte channel) c_gst_rtsp_message_new_data; ///

@@ -158,7 +158,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getAtWordBoundaries()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_at_word_boundaries(cast(GtkSourceSearchSettings*)this._cPtr);
+    _retval = cast(bool)gtk_source_search_settings_get_at_word_boundaries(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getCaseSensitive()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_case_sensitive(cast(GtkSourceSearchSettings*)this._cPtr);
+    _retval = cast(bool)gtk_source_search_settings_get_case_sensitive(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getRegexEnabled()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_regex_enabled(cast(GtkSourceSearchSettings*)this._cPtr);
+    _retval = cast(bool)gtk_source_search_settings_get_regex_enabled(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getWrapAround()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_wrap_around(cast(GtkSourceSearchSettings*)this._cPtr);
+    _retval = cast(bool)gtk_source_search_settings_get_wrap_around(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 

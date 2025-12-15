@@ -415,7 +415,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
 bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
   bool _retval;
-  _retval = gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
+  _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
   return _retval;
 }
 
@@ -443,7 +443,7 @@ void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.
 bool isVideoOverlayPrepareWindowHandleMessage(gst.message.Message msg)
 {
   bool _retval;
-  _retval = gst_is_video_overlay_prepare_window_handle_message(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_video_overlay_prepare_window_handle_message(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -486,7 +486,7 @@ gobject.types.GType videoBarMetaApiGetType()
 bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.VideoFrame src, int x, int y, float globalAlpha)
 {
   bool _retval;
-  _retval = gst_video_blend(dest ? cast(GstVideoFrame*)dest._cPtr : null, src ? cast(GstVideoFrame*)src._cPtr : null, x, y, globalAlpha);
+  _retval = cast(bool)gst_video_blend(dest ? cast(GstVideoFrame*)dest._cPtr : null, src ? cast(GstVideoFrame*)src._cPtr : null, x, y, globalAlpha);
   return _retval;
 }
 
@@ -536,7 +536,7 @@ void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buf
 bool videoCalculateDisplayRatio(out uint darN, out uint darD, uint videoWidth, uint videoHeight, uint videoParN, uint videoParD, uint displayParN, uint displayParD)
 {
   bool _retval;
-  _retval = gst_video_calculate_display_ratio(cast(uint*)&darN, cast(uint*)&darD, videoWidth, videoHeight, videoParN, videoParD, displayParN, displayParD);
+  _retval = cast(bool)gst_video_calculate_display_ratio(cast(uint*)&darN, cast(uint*)&darD, videoWidth, videoHeight, videoParN, videoParD, displayParN, displayParD);
   return _retval;
 }
 
@@ -774,7 +774,7 @@ string videoDmaDrmFourccToString(uint fourcc, ulong modifier)
 bool videoEventIsForceKeyUnit(gst.event.Event event)
 {
   bool _retval;
-  _retval = gst_video_event_is_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_video_event_is_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -868,7 +868,9 @@ gst.event.Event videoEventNewUpstreamForceKeyUnit(gst.types.ClockTime runningTim
 bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime timestamp, out gst.types.ClockTime streamTime, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
 {
   bool _retval;
-  _retval = gst_video_event_parse_downstream_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(GstClockTime*)&timestamp, cast(GstClockTime*)&streamTime, cast(GstClockTime*)&runningTime, cast(bool*)&allHeaders, cast(uint*)&count);
+  gboolean _allHeaders;
+  _retval = cast(bool)gst_video_event_parse_downstream_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(GstClockTime*)&timestamp, cast(GstClockTime*)&streamTime, cast(GstClockTime*)&runningTime, &_allHeaders, cast(uint*)&count);
+  allHeaders = cast(bool)_allHeaders;
   return _retval;
 }
 
@@ -890,7 +892,9 @@ bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.
 bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
 {
   bool _retval;
-  _retval = gst_video_event_parse_still_frame(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(bool*)&inStill);
+  gboolean _inStill;
+  _retval = cast(bool)gst_video_event_parse_still_frame(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, &_inStill);
+  inStill = cast(bool)_inStill;
   return _retval;
 }
 
@@ -913,7 +917,9 @@ bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
 bool videoEventParseUpstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
 {
   bool _retval;
-  _retval = gst_video_event_parse_upstream_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(GstClockTime*)&runningTime, cast(bool*)&allHeaders, cast(uint*)&count);
+  gboolean _allHeaders;
+  _retval = cast(bool)gst_video_event_parse_upstream_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(GstClockTime*)&runningTime, &_allHeaders, cast(uint*)&count);
+  allHeaders = cast(bool)_allHeaders;
   return _retval;
 }
 
@@ -933,7 +939,9 @@ gstvideo.types.VideoFormat[] videoFormatsAny()
 
   if (_cretval)
   {
-    _retval = cast(gstvideo.types.VideoFormat[])_cretval[0 .. _cretlength].dup;
+    _retval = new gstvideo.types.VideoFormat[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = cast(gstvideo.types.VideoFormat)(_cretval[i]);
   }
   return _retval;
 }
@@ -951,7 +959,9 @@ gstvideo.types.VideoFormat[] videoFormatsRaw()
 
   if (_cretval)
   {
-    _retval = cast(gstvideo.types.VideoFormat[])_cretval[0 .. _cretlength].dup;
+    _retval = new gstvideo.types.VideoFormat[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = cast(gstvideo.types.VideoFormat)(_cretval[i]);
   }
   return _retval;
 }
@@ -984,7 +994,7 @@ gobject.types.GType videoGlTextureUploadMetaApiGetType()
 bool videoGuessFramerate(gst.types.ClockTime duration, out int destN, out int destD)
 {
   bool _retval;
-  _retval = gst_video_guess_framerate(duration, cast(int*)&destN, cast(int*)&destD);
+  _retval = cast(bool)gst_video_guess_framerate(duration, cast(int*)&destN, cast(int*)&destD);
   return _retval;
 }
 
@@ -1004,7 +1014,7 @@ bool videoGuessFramerate(gst.types.ClockTime duration, out int destN, out int de
 bool videoIsCommonAspectRatio(int width, int height, int parN, int parD)
 {
   bool _retval;
-  _retval = gst_video_is_common_aspect_ratio(width, height, parN, parD);
+  _retval = cast(bool)gst_video_is_common_aspect_ratio(width, height, parN, parD);
   return _retval;
 }
 
@@ -1019,7 +1029,7 @@ bool videoIsCommonAspectRatio(int width, int height, int parN, int parD)
 bool videoIsDmaDrmCaps(gst.caps.Caps caps)
 {
   bool _retval;
-  _retval = gst_video_is_dma_drm_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_video_is_dma_drm_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1126,7 +1136,7 @@ gobject.value.Value videoMultiviewGetUnpackedModes()
 bool videoMultiviewGuessHalfAspect(gstvideo.types.VideoMultiviewMode mvMode, uint width, uint height, uint parN, uint parD)
 {
   bool _retval;
-  _retval = gst_video_multiview_guess_half_aspect(mvMode, width, height, parN, parD);
+  _retval = cast(bool)gst_video_multiview_guess_half_aspect(mvMode, width, height, parN, parD);
   return _retval;
 }
 
@@ -1181,7 +1191,7 @@ gobject.types.GType videoSeiUserDataUnregisteredMetaApiGetType()
 bool videoSeiUserDataUnregisteredParsePrecisionTimeStamp(gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta userData, out ubyte status, out ulong precisionTimeStamp)
 {
   bool _retval;
-  _retval = gst_video_sei_user_data_unregistered_parse_precision_time_stamp(userData ? cast(GstVideoSEIUserDataUnregisteredMeta*)userData._cPtr : null, cast(ubyte*)&status, cast(ulong*)&precisionTimeStamp);
+  _retval = cast(bool)gst_video_sei_user_data_unregistered_parse_precision_time_stamp(userData ? cast(GstVideoSEIUserDataUnregisteredMeta*)userData._cPtr : null, cast(ubyte*)&status, cast(ulong*)&precisionTimeStamp);
   return _retval;
 }
 

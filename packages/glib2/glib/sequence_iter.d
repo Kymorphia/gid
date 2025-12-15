@@ -81,7 +81,7 @@ class SequenceIter
   bool isBegin()
   {
     bool _retval;
-    _retval = g_sequence_iter_is_begin(cast(GSequenceIter*)this._cPtr);
+    _retval = cast(bool)g_sequence_iter_is_begin(cast(GSequenceIter*)this._cPtr);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class SequenceIter
   bool isEnd()
   {
     bool _retval;
-    _retval = g_sequence_iter_is_end(cast(GSequenceIter*)this._cPtr);
+    _retval = cast(bool)g_sequence_iter_is_end(cast(GSequenceIter*)this._cPtr);
     return _retval;
   }
 

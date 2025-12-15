@@ -92,18 +92,18 @@ class Path : gobject.boxed.Boxed
   */
   bool foreach_(gsk.types.PathForeachFlags flags, gsk.types.PathForeachFunc func)
   {
-    extern(C) bool _funcCallback(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData)
+    extern(C) gboolean _funcCallback(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData)
     {
       auto _dlg = cast(gsk.types.PathForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(op, pts ? new graphene.point.Point(cast(void*)pts, No.Take) : null, nPts, weight);
+      gboolean _retval = (*_dlg)(op, pts ? new graphene.point.Point(cast(void*)pts, No.Take) : null, nPts, weight);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gsk_path_foreach(cast(GskPath*)this._cPtr, flags, _funcCB, _func);
+    _retval = cast(bool)gsk_path_foreach(cast(GskPath*)this._cPtr, flags, _funcCB, _func);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Path : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_rect_t _bounds;
-    _retval = gsk_path_get_bounds(cast(GskPath*)this._cPtr, &_bounds);
+    _retval = cast(bool)gsk_path_get_bounds(cast(GskPath*)this._cPtr, &_bounds);
     bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
     return _retval;
   }
@@ -156,7 +156,7 @@ class Path : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_rect_t _bounds;
-    _retval = gsk_path_get_stroke_bounds(cast(GskPath*)this._cPtr, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null, &_bounds);
+    _retval = cast(bool)gsk_path_get_stroke_bounds(cast(GskPath*)this._cPtr, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null, &_bounds);
     bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
     return _retval;
   }
@@ -177,7 +177,7 @@ class Path : gobject.boxed.Boxed
   bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule)
   {
     bool _retval;
-    _retval = gsk_path_in_fill(cast(GskPath*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null, fillRule);
+    _retval = cast(bool)gsk_path_in_fill(cast(GskPath*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null, fillRule);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class Path : gobject.boxed.Boxed
   bool isClosed()
   {
     bool _retval;
-    _retval = gsk_path_is_closed(cast(GskPath*)this._cPtr);
+    _retval = cast(bool)gsk_path_is_closed(cast(GskPath*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Path : gobject.boxed.Boxed
   bool isEmpty()
   {
     bool _retval;
-    _retval = gsk_path_is_empty(cast(GskPath*)this._cPtr);
+    _retval = cast(bool)gsk_path_is_empty(cast(GskPath*)this._cPtr);
     return _retval;
   }
 

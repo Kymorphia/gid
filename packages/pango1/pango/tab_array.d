@@ -109,7 +109,7 @@ class TabArray : gobject.boxed.Boxed
   bool getPositionsInPixels()
   {
     bool _retval;
-    _retval = pango_tab_array_get_positions_in_pixels(cast(PangoTabArray*)this._cPtr);
+    _retval = cast(bool)pango_tab_array_get_positions_in_pixels(cast(PangoTabArray*)this._cPtr);
     return _retval;
   }
 

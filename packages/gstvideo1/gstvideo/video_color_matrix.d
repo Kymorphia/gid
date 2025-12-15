@@ -66,7 +66,7 @@ struct VideoColorMatrix
   static bool getKrKb(gstvideo.types.VideoColorMatrix matrix, out double Kr, out double Kb)
   {
     bool _retval;
-    _retval = gst_video_color_matrix_get_Kr_Kb(matrix, cast(double*)&Kr, cast(double*)&Kb);
+    _retval = cast(bool)gst_video_color_matrix_get_Kr_Kb(matrix, cast(double*)&Kr, cast(double*)&Kb);
     return _retval;
   }
 

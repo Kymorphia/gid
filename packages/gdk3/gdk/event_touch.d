@@ -210,7 +210,7 @@ class EventTouch
   */
   @property bool emulatingPointer()
   {
-    return (cast(GdkEventTouch*)this._cPtr).emulatingPointer;
+    return cast(bool)(cast(GdkEventTouch*)this._cPtr).emulatingPointer;
   }
 
   /**

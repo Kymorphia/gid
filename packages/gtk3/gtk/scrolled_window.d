@@ -460,7 +460,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getCaptureButtonPress()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_capture_button_press(cast(GtkScrolledWindow*)this._cPtr);
+    _retval = cast(bool)gtk_scrolled_window_get_capture_button_press(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getKineticScrolling()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr);
+    _retval = cast(bool)gtk_scrolled_window_get_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -552,7 +552,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getOverlayScrolling()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr);
+    _retval = cast(bool)gtk_scrolled_window_get_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -595,7 +595,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getPropagateNaturalHeight()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr);
+    _retval = cast(bool)gtk_scrolled_window_get_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -607,7 +607,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getPropagateNaturalWidth()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr);
+    _retval = cast(bool)gtk_scrolled_window_get_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 

@@ -29,7 +29,7 @@ template UndoManagerT()
   override bool canRedo()
   {
     bool _retval;
-    _retval = gtk_source_undo_manager_can_redo(cast(GtkSourceUndoManager*)this._cPtr);
+    _retval = cast(bool)gtk_source_undo_manager_can_redo(cast(GtkSourceUndoManager*)this._cPtr);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ template UndoManagerT()
   override bool canUndo()
   {
     bool _retval;
-    _retval = gtk_source_undo_manager_can_undo(cast(GtkSourceUndoManager*)this._cPtr);
+    _retval = cast(bool)gtk_source_undo_manager_can_undo(cast(GtkSourceUndoManager*)this._cPtr);
     return _retval;
   }
 

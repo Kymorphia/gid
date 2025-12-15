@@ -190,7 +190,7 @@ class ColorDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_color_dialog_get_modal(cast(GtkColorDialog*)this._cPtr);
+    _retval = cast(bool)gtk_color_dialog_get_modal(cast(GtkColorDialog*)this._cPtr);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class ColorDialog : gobject.object.ObjectWrap
   bool getWithAlpha()
   {
     bool _retval;
-    _retval = gtk_color_dialog_get_with_alpha(cast(GtkColorDialog*)this._cPtr);
+    _retval = cast(bool)gtk_color_dialog_get_with_alpha(cast(GtkColorDialog*)this._cPtr);
     return _retval;
   }
 

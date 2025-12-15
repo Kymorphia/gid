@@ -533,7 +533,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   bool getActivateOnSingleClick()
   {
     bool _retval;
-    _retval = gtk_icon_view_get_activate_on_single_click(cast(GtkIconView*)this._cPtr);
+    _retval = cast(bool)gtk_icon_view_get_activate_on_single_click(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, &_rect);
+    _retval = cast(bool)gtk_icon_view_get_cell_rect(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -609,7 +609,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     bool _retval;
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
-    _retval = gtk_icon_view_get_cursor(cast(GtkIconView*)this._cPtr, &_path, &_cell);
+    _retval = cast(bool)gtk_icon_view_get_cursor(cast(GtkIconView*)this._cPtr, &_path, &_cell);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
@@ -631,7 +631,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     bool _retval;
     GtkTreePath* _path;
-    _retval = gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)this._cPtr, dragX, dragY, &_path, &pos);
+    _retval = cast(bool)gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)this._cPtr, dragX, dragY, &_path, &pos);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
@@ -671,7 +671,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     bool _retval;
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
-    _retval = gtk_icon_view_get_item_at_pos(cast(GtkIconView*)this._cPtr, x, y, &_path, &_cell);
+    _retval = cast(bool)gtk_icon_view_get_item_at_pos(cast(GtkIconView*)this._cPtr, x, y, &_path, &_cell);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
@@ -835,7 +835,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   bool getReorderable()
   {
     bool _retval;
-    _retval = gtk_icon_view_get_reorderable(cast(GtkIconView*)this._cPtr);
+    _retval = cast(bool)gtk_icon_view_get_reorderable(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -965,7 +965,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     GtkTreeModel* _model;
     GtkTreePath* _path;
     GtkTreeIter _iter;
-    _retval = gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
+    _retval = cast(bool)gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
@@ -990,7 +990,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     bool _retval;
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
-    _retval = gtk_icon_view_get_visible_range(cast(GtkIconView*)this._cPtr, &_startPath, &_endPath);
+    _retval = cast(bool)gtk_icon_view_get_visible_range(cast(GtkIconView*)this._cPtr, &_startPath, &_endPath);
     startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.Take);
     endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
@@ -1022,7 +1022,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_icon_view_path_is_selected(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 

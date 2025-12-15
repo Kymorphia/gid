@@ -29,7 +29,7 @@ template PopupT()
   override bool getAutohide()
   {
     bool _retval;
-    _retval = gdk_popup_get_autohide(cast(GdkPopup*)this._cPtr);
+    _retval = cast(bool)gdk_popup_get_autohide(cast(GdkPopup*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ template PopupT()
   override bool present(int width, int height, gdk.popup_layout.PopupLayout layout)
   {
     bool _retval;
-    _retval = gdk_popup_present(cast(GdkPopup*)this._cPtr, width, height, layout ? cast(GdkPopupLayout*)layout._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_popup_present(cast(GdkPopup*)this._cPtr, width, height, layout ? cast(GdkPopupLayout*)layout._cPtr(No.Dup) : null);
     return _retval;
   }
 }

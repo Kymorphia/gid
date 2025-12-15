@@ -2790,7 +2790,7 @@ struct GstAncillaryMeta
          data is located. 0 if content is SD or stored in the luminance channel
          (default). 1 if HD and stored in the chrominance channel.
   */
-  bool cNotYChannel;
+  gboolean cNotYChannel;
 
   /**
       The line on which the ancillary data is located (max 11bit). There
@@ -3109,7 +3109,7 @@ struct GstVideoAggregatorClass
       Optional.
                                  Lets subclasses decide of the best common format to use.
   */
-  extern(C) void function(GstVideoAggregator* vagg, GstCaps* downstreamCaps, GstVideoInfo* bestInfo, bool* atLeastOneAlpha) findBestFormat;
+  extern(C) void function(GstVideoAggregator* vagg, GstCaps* downstreamCaps, GstVideoInfo* bestInfo, gboolean* atLeastOneAlpha) findBestFormat;
 
   /** */
   void*[20] GstReserved;
@@ -3183,7 +3183,7 @@ struct GstVideoAggregatorPadClass
            Implementations should always return TRUE.  Returning FALSE will cease
            iteration over subsequent pads.
   */
-  extern(C) bool function(GstVideoAggregatorPad* pad, GstVideoAggregator* videoaggregator, GstBuffer* buffer, GstVideoFrame* preparedFrame) prepareFrame;
+  extern(C) gboolean function(GstVideoAggregatorPad* pad, GstVideoAggregator* videoaggregator, GstBuffer* buffer, GstVideoFrame* preparedFrame) prepareFrame;
 
   /**
       clean the frame previously prepared in prepare_frame
@@ -3322,7 +3322,7 @@ struct GstVideoBarMeta
   /**
       if true then bar data specifies letterbox, otherwise pillarbox
   */
-  bool isLetterbox;
+  gboolean isLetterbox;
 
   /**
       If @is_letterbox is true, then the value specifies the
@@ -3879,47 +3879,47 @@ struct GstVideoDecoderClass
                        Called when the element changes to GST_STATE_READY.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstVideoDecoder* decoder) open;
+  extern(C) gboolean function(GstVideoDecoder* decoder) open;
 
   /**
       Optional.
                        Called when the element changes to GST_STATE_NULL.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstVideoDecoder* decoder) close;
+  extern(C) gboolean function(GstVideoDecoder* decoder) close;
 
   /**
       Optional.
                        Called when the element starts processing.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstVideoDecoder* decoder) start;
+  extern(C) gboolean function(GstVideoDecoder* decoder) start;
 
   /**
       Optional.
                        Called when the element stops processing.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstVideoDecoder* decoder) stop;
+  extern(C) gboolean function(GstVideoDecoder* decoder) stop;
 
   /**
       Required for non-packetized input.
                        Allows chopping incoming data into manageable units (frames)
                        for subsequent decoding.
   */
-  extern(C) GstFlowReturn function(GstVideoDecoder* decoder, GstVideoCodecFrame* frame, GstAdapter* adapter, bool atEos) parse;
+  extern(C) GstFlowReturn function(GstVideoDecoder* decoder, GstVideoCodecFrame* frame, GstAdapter* adapter, gboolean atEos) parse;
 
   /**
       Notifies subclass of incoming data format (caps).
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstVideoCodecState* state) setFormat;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstVideoCodecState* state) setFormat;
 
   /**
       Optional.
                        Allows subclass (decoder) to perform post-seek semantics reset.
                        Deprecated.
   */
-  extern(C) bool function(GstVideoDecoder* decoder, bool hard) reset;
+  extern(C) gboolean function(GstVideoDecoder* decoder, gboolean hard) reset;
 
   /**
       Optional.
@@ -3943,7 +3943,7 @@ struct GstVideoDecoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstEvent* event) sinkEvent;
 
   /**
       Optional.
@@ -3953,7 +3953,7 @@ struct GstVideoDecoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstEvent* event) srcEvent;
 
   /**
       Optional.
@@ -3961,7 +3961,7 @@ struct GstVideoDecoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstVideoDecoder* decoder) negotiate;
+  extern(C) gboolean function(GstVideoDecoder* decoder) negotiate;
 
   /**
       Optional.
@@ -3971,7 +3971,7 @@ struct GstVideoDecoderClass
                           Subclasses should chain up to the parent implementation to
                           invoke the default handler.
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstQuery* query) decideAllocation;
 
   /**
       Optional.
@@ -3979,14 +3979,14 @@ struct GstVideoDecoderClass
                            Subclasses should chain up to the parent implementation to
                            invoke the default handler.
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstQuery* query) proposeAllocation;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstQuery* query) proposeAllocation;
 
   /**
       Optional.
                            Flush all remaining data from the decoder without
                            pushing it downstream. Since: 1.2
   */
-  extern(C) bool function(GstVideoDecoder* decoder) flush;
+  extern(C) gboolean function(GstVideoDecoder* decoder) flush;
 
   /**
       Optional.
@@ -3995,7 +3995,7 @@ struct GstVideoDecoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.4
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstQuery* query) sinkQuery;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstQuery* query) sinkQuery;
 
   /**
       Optional.
@@ -4004,7 +4004,7 @@ struct GstVideoDecoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.4
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstQuery* query) srcQuery;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstQuery* query) srcQuery;
 
   /**
       Optional.
@@ -4031,10 +4031,10 @@ struct GstVideoDecoderClass
                        implement this method and return true if the metadata is to be
                        copied. Since: 1.6
   */
-  extern(C) bool function(GstVideoDecoder* decoder, GstVideoCodecFrame* frame, GstMeta* meta) transformMeta;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstVideoCodecFrame* frame, GstMeta* meta) transformMeta;
 
   /** */
-  extern(C) bool function(GstVideoDecoder* decoder, GstClockTime timestamp, GstClockTime duration) handleMissingData;
+  extern(C) gboolean function(GstVideoDecoder* decoder, GstClockTime timestamp, GstClockTime duration) handleMissingData;
 
   /** */
   void*[13] padding;
@@ -4176,28 +4176,28 @@ struct GstVideoEncoderClass
                        Called when the element changes to GST_STATE_READY.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstVideoEncoder* encoder) open;
+  extern(C) gboolean function(GstVideoEncoder* encoder) open;
 
   /**
       Optional.
                        Called when the element changes to GST_STATE_NULL.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstVideoEncoder* encoder) close;
+  extern(C) gboolean function(GstVideoEncoder* encoder) close;
 
   /**
       Optional.
                        Called when the element starts processing.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstVideoEncoder* encoder) start;
+  extern(C) gboolean function(GstVideoEncoder* encoder) start;
 
   /**
       Optional.
                        Called when the element stops processing.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstVideoEncoder* encoder) stop;
+  extern(C) gboolean function(GstVideoEncoder* encoder) stop;
 
   /**
       Optional.
@@ -4205,7 +4205,7 @@ struct GstVideoEncoderClass
                        GstVideoCodecState fields have already been
                        set according to provided caps.
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstVideoCodecState* state) setFormat;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstVideoCodecState* state) setFormat;
 
   /**
       Provides input frame to subclass.
@@ -4217,7 +4217,7 @@ struct GstVideoEncoderClass
                        Allows subclass (encoder) to perform post-seek semantics reset.
                        Deprecated.
   */
-  extern(C) bool function(GstVideoEncoder* encoder, bool hard) reset;
+  extern(C) gboolean function(GstVideoEncoder* encoder, gboolean hard) reset;
 
   /**
       Optional.
@@ -4251,7 +4251,7 @@ struct GstVideoEncoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstEvent* event) sinkEvent;
 
   /**
       Optional.
@@ -4261,7 +4261,7 @@ struct GstVideoEncoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstEvent* event) srcEvent;
 
   /**
       Optional.
@@ -4269,7 +4269,7 @@ struct GstVideoEncoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstVideoEncoder* encoder) negotiate;
+  extern(C) gboolean function(GstVideoEncoder* encoder) negotiate;
 
   /**
       Optional.
@@ -4279,7 +4279,7 @@ struct GstVideoEncoderClass
                           Subclasses should chain up to the parent implementation to
                           invoke the default handler.
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstQuery* query) decideAllocation;
 
   /**
       Optional.
@@ -4287,14 +4287,14 @@ struct GstVideoEncoderClass
                            Subclasses should chain up to the parent implementation to
                            invoke the default handler.
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstQuery* query) proposeAllocation;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstQuery* query) proposeAllocation;
 
   /**
       Optional.
                            Flush all remaining data from the encoder without
                            pushing it downstream. Since: 1.2
   */
-  extern(C) bool function(GstVideoEncoder* encoder) flush;
+  extern(C) gboolean function(GstVideoEncoder* encoder) flush;
 
   /**
       Optional.
@@ -4303,7 +4303,7 @@ struct GstVideoEncoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.4
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstQuery* query) sinkQuery;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstQuery* query) sinkQuery;
 
   /**
       Optional.
@@ -4312,7 +4312,7 @@ struct GstVideoEncoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.4
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstQuery* query) srcQuery;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstQuery* query) srcQuery;
 
   /**
       Optional. Transform the metadata on the input buffer to the
@@ -4321,7 +4321,7 @@ struct GstVideoEncoderClass
                        implement this method and return true if the metadata is to be
                        copied. Since: 1.6
   */
-  extern(C) bool function(GstVideoEncoder* encoder, GstVideoCodecFrame* frame, GstMeta* meta) transformMeta;
+  extern(C) gboolean function(GstVideoEncoder* encoder, GstVideoCodecFrame* frame, GstMeta* meta) transformMeta;
 
   /** */
   void*[16] GstReserved;
@@ -4342,7 +4342,7 @@ struct GstVideoFilter
   GstBaseTransform element;
 
   /** */
-  bool negotiated;
+  gboolean negotiated;
 
   /** */
   GstVideoInfo inInfo;
@@ -4367,7 +4367,7 @@ struct GstVideoFilterClass
   /**
       function to be called with the negotiated caps and video infos
   */
-  extern(C) bool function(GstVideoFilter* filter, GstCaps* incaps, GstVideoInfo* inInfo, GstCaps* outcaps, GstVideoInfo* outInfo) setInfo;
+  extern(C) gboolean function(GstVideoFilter* filter, GstCaps* incaps, GstVideoInfo* inInfo, GstCaps* outcaps, GstVideoInfo* outInfo) setInfo;
 
   /**
       transform a video frame
@@ -4872,12 +4872,12 @@ struct GstVideoMeta
   /**
       map the memory of a plane
   */
-  extern(C) bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info, void** data, int* stride, GstMapFlags flags) map;
+  extern(C) gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info, void** data, int* stride, GstMapFlags flags) map;
 
   /**
       unmap the memory of a plane
   */
-  extern(C) bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info) unmap;
+  extern(C) gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info) unmap;
 
   /**
       the paddings and alignment constraints of the video buffer.
@@ -4929,42 +4929,42 @@ struct GstVideoOrientationInterface
   /**
       virtual method to get horizontal flipping state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, bool* flip) getHflip;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, gboolean* flip) getHflip;
 
   /**
       virtual method to get vertical flipping state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, bool* flip) getVflip;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, gboolean* flip) getVflip;
 
   /**
       virtual method to get horizontal centering state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, int* center) getHcenter;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, int* center) getHcenter;
 
   /**
       virtual method to get vertical centering state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, int* center) getVcenter;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, int* center) getVcenter;
 
   /**
       virtual method to set horizontal flipping state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, bool flip) setHflip;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, gboolean flip) setHflip;
 
   /**
       virtual method to set vertical flipping state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, bool flip) setVflip;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, gboolean flip) setVflip;
 
   /**
       virtual method to set horizontal centering state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, int center) setHcenter;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, int center) setHcenter;
 
   /**
       virtual method to set vertical centering state
   */
-  extern(C) bool function(GstVideoOrientation* videoOrientation, int center) setVcenter;
+  extern(C) gboolean function(GstVideoOrientation* videoOrientation, int center) setVcenter;
 }
 
 /**
@@ -5293,7 +5293,7 @@ struct GstVideoOverlayInterface
   /**
       virtual method to handle events
   */
-  extern(C) void function(GstVideoOverlay* overlay, bool handleEvents) handleEvents;
+  extern(C) void function(GstVideoOverlay* overlay, gboolean handleEvents) handleEvents;
 
   /**
       virtual method to set the render rectangle
@@ -5521,7 +5521,7 @@ struct GstVideoSinkClass
   extern(C) GstFlowReturn function(GstVideoSink* videoSink, GstBuffer* buf) showFrame;
 
   /** */
-  extern(C) bool function(GstVideoSink* videoSink, GstCaps* caps, const(GstVideoInfo)* info) setInfo;
+  extern(C) gboolean function(GstVideoSink* videoSink, GstCaps* caps, const(GstVideoInfo)* info) setInfo;
 
   /** */
   void*[3] GstReserved;
@@ -5693,7 +5693,7 @@ struct GstVideoVBIEncoder;
 */
 struct GstVideoVBIParser;
 
-alias extern(C) bool function(GstVideoAffineTransformationMeta* meta, float* matrix) GstVideoAffineTransformationGetMatrix;
+alias extern(C) gboolean function(GstVideoAffineTransformationMeta* meta, float* matrix) GstVideoAffineTransformationGetMatrix;
 
 alias extern(C) void function(GstSample* sample, GError* error, void* userData) GstVideoConvertSampleCallback;
 
@@ -5701,5 +5701,5 @@ alias extern(C) void function(const(GstVideoFormatInfo)* info, GstVideoPackFlags
 
 alias extern(C) void function(const(GstVideoFormatInfo)* info, GstVideoPackFlags flags, void* dest, const(void*)* data, const(int)* stride, int x, int y, int width) GstVideoFormatUnpack;
 
-alias extern(C) bool function(GstVideoGLTextureUploadMeta* meta, uint* textureId) GstVideoGLTextureUpload;
+alias extern(C) gboolean function(GstVideoGLTextureUploadMeta* meta, uint* textureId) GstVideoGLTextureUpload;
 

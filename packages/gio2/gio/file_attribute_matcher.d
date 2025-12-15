@@ -96,7 +96,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _ns = ns.toCString(No.Alloc);
-    _retval = g_file_attribute_matcher_enumerate_namespace(cast(GFileAttributeMatcher*)this._cPtr, _ns);
+    _retval = cast(bool)g_file_attribute_matcher_enumerate_namespace(cast(GFileAttributeMatcher*)this._cPtr, _ns);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_attribute_matcher_matches(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
+    _retval = cast(bool)g_file_attribute_matcher_matches(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_attribute_matcher_matches_only(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
+    _retval = cast(bool)g_file_attribute_matcher_matches_only(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
     return _retval;
   }
 

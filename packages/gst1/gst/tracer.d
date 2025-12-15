@@ -70,7 +70,7 @@ class Tracer : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_tracer_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, type);
+    _retval = cast(bool)gst_tracer_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, type);
     return _retval;
   }
 }

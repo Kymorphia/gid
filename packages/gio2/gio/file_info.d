@@ -173,7 +173,7 @@ class FileInfo : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_info_get_attribute_boolean(cast(GFileInfo*)this._cPtr, _attribute);
+    _retval = cast(bool)g_file_info_get_attribute_boolean(cast(GFileInfo*)this._cPtr, _attribute);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class FileInfo : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_info_get_attribute_data(cast(GFileInfo*)this._cPtr, _attribute, &type, cast(void**)&valuePp, &status);
+    _retval = cast(bool)g_file_info_get_attribute_data(cast(GFileInfo*)this._cPtr, _attribute, &type, cast(void**)&valuePp, &status);
     return _retval;
   }
 
@@ -541,7 +541,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool getIsBackup()
   {
     bool _retval;
-    _retval = g_file_info_get_is_backup(cast(GFileInfo*)this._cPtr);
+    _retval = cast(bool)g_file_info_get_is_backup(cast(GFileInfo*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool getIsHidden()
   {
     bool _retval;
-    _retval = g_file_info_get_is_hidden(cast(GFileInfo*)this._cPtr);
+    _retval = cast(bool)g_file_info_get_is_hidden(cast(GFileInfo*)this._cPtr);
     return _retval;
   }
 
@@ -569,7 +569,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool getIsSymlink()
   {
     bool _retval;
-    _retval = g_file_info_get_is_symlink(cast(GFileInfo*)this._cPtr);
+    _retval = cast(bool)g_file_info_get_is_symlink(cast(GFileInfo*)this._cPtr);
     return _retval;
   }
 
@@ -703,7 +703,7 @@ class FileInfo : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_info_has_attribute(cast(GFileInfo*)this._cPtr, _attribute);
+    _retval = cast(bool)g_file_info_has_attribute(cast(GFileInfo*)this._cPtr, _attribute);
     return _retval;
   }
 
@@ -720,7 +720,7 @@ class FileInfo : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _nameSpace = nameSpace.toCString(No.Alloc);
-    _retval = g_file_info_has_namespace(cast(GFileInfo*)this._cPtr, _nameSpace);
+    _retval = cast(bool)g_file_info_has_namespace(cast(GFileInfo*)this._cPtr, _nameSpace);
     return _retval;
   }
 
@@ -913,7 +913,7 @@ class FileInfo : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_info_set_attribute_status(cast(GFileInfo*)this._cPtr, _attribute, status);
+    _retval = cast(bool)g_file_info_set_attribute_status(cast(GFileInfo*)this._cPtr, _attribute, status);
     return _retval;
   }
 

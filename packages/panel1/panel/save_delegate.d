@@ -240,7 +240,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   bool getIsDraft()
   {
     bool _retval;
-    _retval = panel_save_delegate_get_is_draft(cast(PanelSaveDelegate*)this._cPtr);
+    _retval = cast(bool)panel_save_delegate_get_is_draft(cast(PanelSaveDelegate*)this._cPtr);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = panel_save_delegate_save_finish(cast(PanelSaveDelegate*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)panel_save_delegate_save_finish(cast(PanelSaveDelegate*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

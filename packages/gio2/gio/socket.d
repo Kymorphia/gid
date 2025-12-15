@@ -422,7 +422,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_bind(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, allowReuse, &_err);
+    _retval = cast(bool)g_socket_bind(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, allowReuse, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -439,7 +439,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_check_connect_result(cast(GSocket*)this._cPtr, &_err);
+    _retval = cast(bool)g_socket_check_connect_result(cast(GSocket*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -482,7 +482,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_close(cast(GSocket*)this._cPtr, &_err);
+    _retval = cast(bool)g_socket_close(cast(GSocket*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -548,7 +548,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_condition_timed_wait(cast(GSocket*)this._cPtr, condition, timeoutUs, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_socket_condition_timed_wait(cast(GSocket*)this._cPtr, condition, timeoutUs, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -576,7 +576,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_condition_wait(cast(GSocket*)this._cPtr, condition, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_socket_condition_wait(cast(GSocket*)this._cPtr, condition, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -610,7 +610,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connect(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_socket_connect(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -660,7 +660,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool getBlocking()
   {
     bool _retval;
-    _retval = g_socket_get_blocking(cast(GSocket*)this._cPtr);
+    _retval = cast(bool)g_socket_get_blocking(cast(GSocket*)this._cPtr);
     return _retval;
   }
 
@@ -673,7 +673,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool getBroadcast()
   {
     bool _retval;
-    _retval = g_socket_get_broadcast(cast(GSocket*)this._cPtr);
+    _retval = cast(bool)g_socket_get_broadcast(cast(GSocket*)this._cPtr);
     return _retval;
   }
 
@@ -750,7 +750,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool getKeepalive()
   {
     bool _retval;
-    _retval = g_socket_get_keepalive(cast(GSocket*)this._cPtr);
+    _retval = cast(bool)g_socket_get_keepalive(cast(GSocket*)this._cPtr);
     return _retval;
   }
 
@@ -794,7 +794,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool getMulticastLoopback()
   {
     bool _retval;
-    _retval = g_socket_get_multicast_loopback(cast(GSocket*)this._cPtr);
+    _retval = cast(bool)g_socket_get_multicast_loopback(cast(GSocket*)this._cPtr);
     return _retval;
   }
 
@@ -838,7 +838,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_get_option(cast(GSocket*)this._cPtr, level, optname, cast(int*)&value, &_err);
+    _retval = cast(bool)g_socket_get_option(cast(GSocket*)this._cPtr, level, optname, cast(int*)&value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -918,7 +918,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool isClosed()
   {
     bool _retval;
-    _retval = g_socket_is_closed(cast(GSocket*)this._cPtr);
+    _retval = cast(bool)g_socket_is_closed(cast(GSocket*)this._cPtr);
     return _retval;
   }
 
@@ -935,7 +935,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool isConnected()
   {
     bool _retval;
-    _retval = g_socket_is_connected(cast(GSocket*)this._cPtr);
+    _retval = cast(bool)g_socket_is_connected(cast(GSocket*)this._cPtr);
     return _retval;
   }
 
@@ -967,7 +967,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_join_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
+    _retval = cast(bool)g_socket_join_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1003,7 +1003,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_join_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
+    _retval = cast(bool)g_socket_join_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1032,7 +1032,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_leave_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
+    _retval = cast(bool)g_socket_leave_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1059,7 +1059,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_leave_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
+    _retval = cast(bool)g_socket_leave_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1081,7 +1081,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_listen(cast(GSocket*)this._cPtr, &_err);
+    _retval = cast(bool)g_socket_listen(cast(GSocket*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1709,7 +1709,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_set_option(cast(GSocket*)this._cPtr, level, optname, value, &_err);
+    _retval = cast(bool)g_socket_set_option(cast(GSocket*)this._cPtr, level, optname, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1783,7 +1783,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_shutdown(cast(GSocket*)this._cPtr, shutdownRead, shutdownWrite, &_err);
+    _retval = cast(bool)g_socket_shutdown(cast(GSocket*)this._cPtr, shutdownRead, shutdownWrite, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1804,7 +1804,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool speaksIpv4()
   {
     bool _retval;
-    _retval = g_socket_speaks_ipv4(cast(GSocket*)this._cPtr);
+    _retval = cast(bool)g_socket_speaks_ipv4(cast(GSocket*)this._cPtr);
     return _retval;
   }
 }

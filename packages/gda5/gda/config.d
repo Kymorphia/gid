@@ -89,7 +89,7 @@ class Config : gobject.object.ObjectWrap
   static bool canModifySystemConfig()
   {
     bool _retval;
-    _retval = gda_config_can_modify_system_config();
+    _retval = cast(bool)gda_config_can_modify_system_config();
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class Config : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_config_define_dsn(info ? cast(const(GdaDsnInfo)*)info._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_config_define_dsn(info ? cast(const(GdaDsnInfo)*)info._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ConfigException(_err);
     return _retval;
@@ -125,7 +125,7 @@ class Config : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _dsnName = dsnName.toCString(No.Alloc);
-    _retval = gda_config_dsn_needs_authentication(_dsnName);
+    _retval = cast(bool)gda_config_dsn_needs_authentication(_dsnName);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Config : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _dsnName = dsnName.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_config_remove_dsn(_dsnName, &_err);
+    _retval = cast(bool)gda_config_remove_dsn(_dsnName, &_err);
     if (_err)
       throw new ConfigException(_err);
     return _retval;

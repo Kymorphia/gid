@@ -293,7 +293,7 @@ class SocketListener : gobject.object.ObjectWrap
     bool _retval;
     GSocketAddress* _effectiveAddress;
     GError *_err;
-    _retval = g_socket_listener_add_address(cast(GSocketListener*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, type, protocol, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_effectiveAddress, &_err);
+    _retval = cast(bool)g_socket_listener_add_address(cast(GSocketListener*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, type, protocol, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_effectiveAddress, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     effectiveAddress = new gio.socket_address.SocketAddress(cast(void*)_effectiveAddress, Yes.Take);
@@ -351,7 +351,7 @@ class SocketListener : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_listener_add_inet_port(cast(GSocketListener*)this._cPtr, port, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_socket_listener_add_inet_port(cast(GSocketListener*)this._cPtr, port, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -382,7 +382,7 @@ class SocketListener : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_listener_add_socket(cast(GSocketListener*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_socket_listener_add_socket(cast(GSocketListener*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

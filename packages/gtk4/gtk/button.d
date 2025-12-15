@@ -287,7 +287,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   bool getCanShrink()
   {
     bool _retval;
-    _retval = gtk_button_get_can_shrink(cast(GtkButton*)this._cPtr);
+    _retval = cast(bool)gtk_button_get_can_shrink(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   bool getHasFrame()
   {
     bool _retval;
-    _retval = gtk_button_get_has_frame(cast(GtkButton*)this._cPtr);
+    _retval = cast(bool)gtk_button_get_has_frame(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
+    _retval = cast(bool)gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 

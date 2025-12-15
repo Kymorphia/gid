@@ -181,7 +181,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   {
     bool _retval;
     const(char)* _classes = classes.toCString(No.Alloc);
-    _retval = gst_device_provider_factory_has_classes(cast(GstDeviceProviderFactory*)this._cPtr, _classes);
+    _retval = cast(bool)gst_device_provider_factory_has_classes(cast(GstDeviceProviderFactory*)this._cPtr, _classes);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       _tmpclasses ~= s.toCString(No.Alloc);
     _tmpclasses ~= null;
     char** _classes = _tmpclasses.ptr;
-    _retval = gst_device_provider_factory_has_classesv(cast(GstDeviceProviderFactory*)this._cPtr, _classes);
+    _retval = cast(bool)gst_device_provider_factory_has_classesv(cast(GstDeviceProviderFactory*)this._cPtr, _classes);
     return _retval;
   }
 }

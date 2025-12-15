@@ -257,7 +257,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   bool getShowArrow()
   {
     bool _retval;
-    _retval = gtk_toolbar_get_show_arrow(cast(GtkToolbar*)this._cPtr);
+    _retval = cast(bool)gtk_toolbar_get_show_arrow(cast(GtkToolbar*)this._cPtr);
     return _retval;
   }
 

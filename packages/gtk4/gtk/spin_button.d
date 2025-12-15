@@ -420,7 +420,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getActivatesDefault()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_activates_default(cast(GtkSpinButton*)this._cPtr);
+    _retval = cast(bool)gtk_spin_button_get_activates_default(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getNumeric()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_numeric(cast(GtkSpinButton*)this._cPtr);
+    _retval = cast(bool)gtk_spin_button_get_numeric(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -505,7 +505,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getSnapToTicks()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_snap_to_ticks(cast(GtkSpinButton*)this._cPtr);
+    _retval = cast(bool)gtk_spin_button_get_snap_to_ticks(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -554,7 +554,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getWrap()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_wrap(cast(GtkSpinButton*)this._cPtr);
+    _retval = cast(bool)gtk_spin_button_get_wrap(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 

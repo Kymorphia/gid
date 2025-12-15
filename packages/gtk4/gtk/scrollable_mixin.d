@@ -145,7 +145,7 @@ template ScrollableT()
   {
     bool _retval;
     GtkBorder _border;
-    _retval = gtk_scrollable_get_border(cast(GtkScrollable*)this._cPtr, &_border);
+    _retval = cast(bool)gtk_scrollable_get_border(cast(GtkScrollable*)this._cPtr, &_border);
     border = new gtk.border.Border(cast(void*)&_border, No.Take);
     return _retval;
   }

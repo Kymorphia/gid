@@ -3711,7 +3711,7 @@ struct AdwSwipeableInterface
   /**
       Gets the swipeable rectangle.
   */
-  extern(C) void function(AdwSwipeable* self, AdwNavigationDirection navigationDirection, bool isDrag, GdkRectangle* rect) getSwipeArea;
+  extern(C) void function(AdwSwipeable* self, AdwNavigationDirection navigationDirection, gboolean isDrag, GdkRectangle* rect) getSwipeArea;
 
   /** */
   void*[4] padding;

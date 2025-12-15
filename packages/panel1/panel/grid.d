@@ -103,7 +103,7 @@ class Grid : gtk.widget.Widget
   {
     bool _retval;
     GError *_err;
-    _retval = panel_grid_agree_to_close_finish(cast(PanelGrid*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)panel_grid_agree_to_close_finish(cast(PanelGrid*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

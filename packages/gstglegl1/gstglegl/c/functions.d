@@ -21,7 +21,7 @@ __gshared extern(C)
   // EGLImage
   GType function() c_gst_egl_image_get_type; ///
   GstEGLImage* function(GstGLContext* context, void* image, GstGLFormat format, void* userData, GstEGLImageDestroyNotify userDataDestroy) c_gst_egl_image_new_wrapped; ///
-  bool function(GstEGLImage* image, int* fd, int* stride, size_t* offset) c_gst_egl_image_export_dmabuf; ///
+  gboolean function(GstEGLImage* image, int* fd, int* stride, size_t* offset) c_gst_egl_image_export_dmabuf; ///
   void* function(GstEGLImage* image) c_gst_egl_image_get_image; ///
   GstEGLImage* function(GstGLContext* context, int dmabuf, const(GstVideoInfo)* inInfo, int plane, size_t offset) c_gst_egl_image_from_dmabuf; ///
   GstEGLImage* function(GstGLContext* context, int* fd, const(size_t)* offset, const(GstVideoInfo)* inInfo) c_gst_egl_image_from_dmabuf_direct; ///
@@ -53,7 +53,7 @@ __gshared extern(C)
 
   // global
   const(char)* function(int err) c_gst_egl_get_error_string; ///
-  bool function(GstMemory* mem) c_gst_is_gl_memory_egl; ///
+  gboolean function(GstMemory* mem) c_gst_is_gl_memory_egl; ///
 }
 
 // EGLImage

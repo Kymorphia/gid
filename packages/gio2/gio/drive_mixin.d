@@ -53,7 +53,7 @@ template DriveT()
   override bool canEject()
   {
     bool _retval;
-    _retval = g_drive_can_eject(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_can_eject(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ template DriveT()
   override bool canPollForMedia()
   {
     bool _retval;
-    _retval = g_drive_can_poll_for_media(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_can_poll_for_media(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ template DriveT()
   override bool canStart()
   {
     bool _retval;
-    _retval = g_drive_can_start(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_can_start(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ template DriveT()
   override bool canStartDegraded()
   {
     bool _retval;
-    _retval = g_drive_can_start_degraded(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_can_start_degraded(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ template DriveT()
   override bool canStop()
   {
     bool _retval;
-    _retval = g_drive_can_stop(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_can_stop(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_eject_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_drive_eject_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -192,7 +192,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_eject_with_operation_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_drive_eject_with_operation_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -332,7 +332,7 @@ template DriveT()
   override bool hasMedia()
   {
     bool _retval;
-    _retval = g_drive_has_media(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_has_media(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ template DriveT()
   override bool hasVolumes()
   {
     bool _retval;
-    _retval = g_drive_has_volumes(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_has_volumes(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ template DriveT()
   override bool isMediaCheckAutomatic()
   {
     bool _retval;
-    _retval = g_drive_is_media_check_automatic(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_is_media_check_automatic(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ template DriveT()
   override bool isMediaRemovable()
   {
     bool _retval;
-    _retval = g_drive_is_media_removable(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_is_media_removable(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ template DriveT()
   override bool isRemovable()
   {
     bool _retval;
-    _retval = g_drive_is_removable(cast(GDrive*)this._cPtr);
+    _retval = cast(bool)g_drive_is_removable(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_poll_for_media_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_drive_poll_for_media_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -469,7 +469,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_start_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_drive_start_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -517,7 +517,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_stop_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_drive_stop_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

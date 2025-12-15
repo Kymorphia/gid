@@ -133,7 +133,7 @@ class PartIter : gobject.boxed.Boxed
   bool isValid()
   {
     bool _retval;
-    _retval = g_mime_part_iter_is_valid(cast(GMimePartIter*)this._cPtr);
+    _retval = cast(bool)g_mime_part_iter_is_valid(cast(GMimePartIter*)this._cPtr);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class PartIter : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = g_mime_part_iter_jump_to(cast(GMimePartIter*)this._cPtr, _path);
+    _retval = cast(bool)g_mime_part_iter_jump_to(cast(GMimePartIter*)this._cPtr, _path);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class PartIter : gobject.boxed.Boxed
   bool next()
   {
     bool _retval;
-    _retval = g_mime_part_iter_next(cast(GMimePartIter*)this._cPtr);
+    _retval = cast(bool)g_mime_part_iter_next(cast(GMimePartIter*)this._cPtr);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class PartIter : gobject.boxed.Boxed
   bool prev()
   {
     bool _retval;
-    _retval = g_mime_part_iter_prev(cast(GMimePartIter*)this._cPtr);
+    _retval = cast(bool)g_mime_part_iter_prev(cast(GMimePartIter*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class PartIter : gobject.boxed.Boxed
   bool remove()
   {
     bool _retval;
-    _retval = g_mime_part_iter_remove(cast(GMimePartIter*)this._cPtr);
+    _retval = cast(bool)g_mime_part_iter_remove(cast(GMimePartIter*)this._cPtr);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class PartIter : gobject.boxed.Boxed
   bool replace(gmime.object.ObjectWrap replacement)
   {
     bool _retval;
-    _retval = g_mime_part_iter_replace(cast(GMimePartIter*)this._cPtr, replacement ? cast(GMimeObject*)replacement._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_mime_part_iter_replace(cast(GMimePartIter*)this._cPtr, replacement ? cast(GMimeObject*)replacement._cPtr(No.Dup) : null);
     return _retval;
   }
 

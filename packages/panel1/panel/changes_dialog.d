@@ -89,7 +89,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   bool getCloseAfterSave()
   {
     bool _retval;
-    _retval = panel_changes_dialog_get_close_after_save(cast(PanelChangesDialog*)this._cPtr);
+    _retval = cast(bool)panel_changes_dialog_get_close_after_save(cast(PanelChangesDialog*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   {
     bool _retval;
     GError *_err;
-    _retval = panel_changes_dialog_run_finish(cast(PanelChangesDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)panel_changes_dialog_run_finish(cast(PanelChangesDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

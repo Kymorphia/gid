@@ -78,7 +78,7 @@ class Client : gobject.object.ObjectWrap
     char* _bearerName;
     char* _bearerValue;
     GError *_err;
-    _retval = gaflight_client_authenticate_basic_token(cast(GAFlightClient*)this._cPtr, _user, _password, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_bearerName, &_bearerValue, &_err);
+    _retval = cast(bool)gaflight_client_authenticate_basic_token(cast(GAFlightClient*)this._cPtr, _user, _password, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_bearerName, &_bearerValue, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     bearerName = _bearerName.fromCString(Yes.Free);
@@ -91,7 +91,7 @@ class Client : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_client_close(cast(GAFlightClient*)this._cPtr, &_err);
+    _retval = cast(bool)gaflight_client_close(cast(GAFlightClient*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

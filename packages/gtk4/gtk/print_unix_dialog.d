@@ -301,7 +301,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   bool getEmbedPageSetup()
   {
     bool _retval;
-    _retval = gtk_print_unix_dialog_get_embed_page_setup(cast(GtkPrintUnixDialog*)this._cPtr);
+    _retval = cast(bool)gtk_print_unix_dialog_get_embed_page_setup(cast(GtkPrintUnixDialog*)this._cPtr);
     return _retval;
   }
 
@@ -312,7 +312,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   bool getHasSelection()
   {
     bool _retval;
-    _retval = gtk_print_unix_dialog_get_has_selection(cast(GtkPrintUnixDialog*)this._cPtr);
+    _retval = cast(bool)gtk_print_unix_dialog_get_has_selection(cast(GtkPrintUnixDialog*)this._cPtr);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   bool getPageSetupSet()
   {
     bool _retval;
-    _retval = gtk_print_unix_dialog_get_page_setup_set(cast(GtkPrintUnixDialog*)this._cPtr);
+    _retval = cast(bool)gtk_print_unix_dialog_get_page_setup_set(cast(GtkPrintUnixDialog*)this._cPtr);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   bool getSupportSelection()
   {
     bool _retval;
-    _retval = gtk_print_unix_dialog_get_support_selection(cast(GtkPrintUnixDialog*)this._cPtr);
+    _retval = cast(bool)gtk_print_unix_dialog_get_support_selection(cast(GtkPrintUnixDialog*)this._cPtr);
     return _retval;
   }
 

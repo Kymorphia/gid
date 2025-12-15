@@ -68,7 +68,7 @@ class Tensor : gobject.object.ObjectWrap
   bool equal(arrow.tensor.Tensor otherTensor)
   {
     bool _retval;
-    _retval = garrow_tensor_equal(cast(GArrowTensor*)this._cPtr, otherTensor ? cast(GArrowTensor*)otherTensor._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_tensor_equal(cast(GArrowTensor*)this._cPtr, otherTensor ? cast(GArrowTensor*)otherTensor._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Tensor : gobject.object.ObjectWrap
   bool isColumnMajor()
   {
     bool _retval;
-    _retval = garrow_tensor_is_column_major(cast(GArrowTensor*)this._cPtr);
+    _retval = cast(bool)garrow_tensor_is_column_major(cast(GArrowTensor*)this._cPtr);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Tensor : gobject.object.ObjectWrap
   bool isContiguous()
   {
     bool _retval;
-    _retval = garrow_tensor_is_contiguous(cast(GArrowTensor*)this._cPtr);
+    _retval = cast(bool)garrow_tensor_is_contiguous(cast(GArrowTensor*)this._cPtr);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class Tensor : gobject.object.ObjectWrap
   bool isMutable()
   {
     bool _retval;
-    _retval = garrow_tensor_is_mutable(cast(GArrowTensor*)this._cPtr);
+    _retval = cast(bool)garrow_tensor_is_mutable(cast(GArrowTensor*)this._cPtr);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class Tensor : gobject.object.ObjectWrap
   bool isRowMajor()
   {
     bool _retval;
-    _retval = garrow_tensor_is_row_major(cast(GArrowTensor*)this._cPtr);
+    _retval = cast(bool)garrow_tensor_is_row_major(cast(GArrowTensor*)this._cPtr);
     return _retval;
   }
 }

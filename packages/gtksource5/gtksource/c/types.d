@@ -596,10 +596,10 @@ struct GtkSourceCompletionProviderInterface
   extern(C) int function(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context) getPriority;
 
   /** */
-  extern(C) bool function(GtkSourceCompletionProvider* self, const(GtkTextIter)* iter, dchar ch) isTrigger;
+  extern(C) gboolean function(GtkSourceCompletionProvider* self, const(GtkTextIter)* iter, dchar ch) isTrigger;
 
   /** */
-  extern(C) bool function(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal, uint keyval, GdkModifierType state) keyActivates;
+  extern(C) gboolean function(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal, uint keyval, GdkModifierType state) keyActivates;
 
   /** */
   extern(C) GListModel* function(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GError** _err) populate;
@@ -866,7 +866,7 @@ struct GtkSourceGutterRendererClass
   extern(C) void function(GtkSourceGutterRenderer* renderer, GtkSourceBuffer* oldBuffer) changeBuffer;
 
   /** */
-  extern(C) bool function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area) queryActivatable;
+  extern(C) gboolean function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area) queryActivatable;
 
   /** */
   extern(C) void function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, uint button, GdkModifierType state, int nPresses) activate;
@@ -1005,13 +1005,13 @@ struct GtkSourceHoverProviderInterface
   GTypeInterface parentIface;
 
   /** */
-  extern(C) bool function(GtkSourceHoverProvider* self, GtkSourceHoverContext* context, GtkSourceHoverDisplay* display, GError** _err) populate;
+  extern(C) gboolean function(GtkSourceHoverProvider* self, GtkSourceHoverContext* context, GtkSourceHoverDisplay* display, GError** _err) populate;
 
   /** */
   extern(C) void function(GtkSourceHoverProvider* self, GtkSourceHoverContext* context, GtkSourceHoverDisplay* display, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) populateAsync;
 
   /** */
-  extern(C) bool function(GtkSourceHoverProvider* self, GAsyncResult* result, GError** _err) populateFinish;
+  extern(C) gboolean function(GtkSourceHoverProvider* self, GAsyncResult* result, GError** _err) populateFinish;
 }
 
 /**
@@ -1057,7 +1057,7 @@ struct GtkSourceIndenterInterface
   /**
       the virtual function pointer for [gtksource.indenter.Indenter.isTrigger]
   */
-  extern(C) bool function(GtkSourceIndenter* self, GtkSourceView* view, const(GtkTextIter)* location, GdkModifierType state, uint keyval) isTrigger;
+  extern(C) gboolean function(GtkSourceIndenter* self, GtkSourceView* view, const(GtkTextIter)* location, GdkModifierType state, uint keyval) isTrigger;
 
   /**
       the virtual function pointer for [gtksource.indenter.Indenter.indent]
@@ -1811,7 +1811,7 @@ struct GtkSourceViewClass
   extern(C) void function(GtkSourceView* view) showCompletion;
 
   /** */
-  extern(C) void function(GtkSourceView* view, bool down) moveLines;
+  extern(C) void function(GtkSourceView* view, gboolean down) moveLines;
 
   /** */
   extern(C) void function(GtkSourceView* view, int step) moveWords;
@@ -1884,5 +1884,5 @@ struct GtkSourceVimIMContextClass
 
 alias extern(C) GMountOperation* function(GtkSourceFile* file, void* userdata) GtkSourceMountOperationFactory;
 
-alias extern(C) bool function(long deadline, void* userData) GtkSourceSchedulerCallback;
+alias extern(C) gboolean function(long deadline, void* userData) GtkSourceSchedulerCallback;
 

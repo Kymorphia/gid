@@ -156,7 +156,7 @@ class Cancellable : gobject.object.ObjectWrap
   bool isCancelled()
   {
     bool _retval;
-    _retval = g_cancellable_is_cancelled(cast(GCancellable*)this._cPtr);
+    _retval = cast(bool)g_cancellable_is_cancelled(cast(GCancellable*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Cancellable : gobject.object.ObjectWrap
   bool makePollfd(glib.types.PollFD pollfd)
   {
     bool _retval;
-    _retval = g_cancellable_make_pollfd(cast(GCancellable*)this._cPtr, &pollfd);
+    _retval = cast(bool)g_cancellable_make_pollfd(cast(GCancellable*)this._cPtr, &pollfd);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class Cancellable : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_cancellable_set_error_if_cancelled(cast(GCancellable*)this._cPtr, &_err);
+    _retval = cast(bool)g_cancellable_set_error_if_cancelled(cast(GCancellable*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

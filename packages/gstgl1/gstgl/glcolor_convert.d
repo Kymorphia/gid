@@ -136,7 +136,7 @@ class GLColorConvert : gst.object.ObjectWrap
   bool decideAllocation(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_gl_color_convert_decide_allocation(cast(GstGLColorConvert*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_color_convert_decide_allocation(cast(GstGLColorConvert*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class GLColorConvert : gst.object.ObjectWrap
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {
     bool _retval;
-    _retval = gst_gl_color_convert_set_caps(cast(GstGLColorConvert*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_color_convert_set_caps(cast(GstGLColorConvert*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
     return _retval;
   }
 }

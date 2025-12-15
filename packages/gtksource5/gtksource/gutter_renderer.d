@@ -362,7 +362,7 @@ class GutterRenderer : gtk.widget.Widget
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null);
     return _retval;
   }
 

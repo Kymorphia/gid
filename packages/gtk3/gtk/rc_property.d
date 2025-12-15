@@ -121,7 +121,7 @@ class RcProperty
   static bool parseBorder(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_border(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_rc_property_parse_border(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class RcProperty
   static bool parseColor(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_color(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_rc_property_parse_color(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class RcProperty
   static bool parseEnum(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_enum(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_rc_property_parse_enum(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class RcProperty
   static bool parseFlags(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_flags(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_rc_property_parse_flags(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class RcProperty
   static bool parseRequisition(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_requisition(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_rc_property_parse_requisition(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
     return _retval;
   }
 }

@@ -190,7 +190,7 @@ class VariantDict : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_variant_dict_contains(cast(GVariantDict*)this._cPtr, _key);
+    _retval = cast(bool)g_variant_dict_contains(cast(GVariantDict*)this._cPtr, _key);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class VariantDict : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_variant_dict_remove(cast(GVariantDict*)this._cPtr, _key);
+    _retval = cast(bool)g_variant_dict_remove(cast(GVariantDict*)this._cPtr, _key);
     return _retval;
   }
 }

@@ -423,7 +423,7 @@ class NavigationSplitView : gtk.widget.Widget
   bool getCollapsed()
   {
     bool _retval;
-    _retval = adw_navigation_split_view_get_collapsed(cast(AdwNavigationSplitView*)this._cPtr);
+    _retval = cast(bool)adw_navigation_split_view_get_collapsed(cast(AdwNavigationSplitView*)this._cPtr);
     return _retval;
   }
 
@@ -468,7 +468,7 @@ class NavigationSplitView : gtk.widget.Widget
   bool getShowContent()
   {
     bool _retval;
-    _retval = adw_navigation_split_view_get_show_content(cast(AdwNavigationSplitView*)this._cPtr);
+    _retval = cast(bool)adw_navigation_split_view_get_show_content(cast(AdwNavigationSplitView*)this._cPtr);
     return _retval;
   }
 

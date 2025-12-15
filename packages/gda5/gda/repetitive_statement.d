@@ -69,7 +69,7 @@ class RepetitiveStatement : gobject.object.ObjectWrap
   bool appendSet(gda.set.Set values, bool makeCopy)
   {
     bool _retval;
-    _retval = gda_repetitive_statement_append_set(cast(GdaRepetitiveStatement*)this._cPtr, values ? cast(GdaSet*)values._cPtr(No.Dup) : null, makeCopy);
+    _retval = cast(bool)gda_repetitive_statement_append_set(cast(GdaRepetitiveStatement*)this._cPtr, values ? cast(GdaSet*)values._cPtr(No.Dup) : null, makeCopy);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class RepetitiveStatement : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_repetitive_statement_get_template_set(cast(GdaRepetitiveStatement*)this._cPtr, set ? cast(GdaSet**)set._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_repetitive_statement_get_template_set(cast(GdaRepetitiveStatement*)this._cPtr, set ? cast(GdaSet**)set._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

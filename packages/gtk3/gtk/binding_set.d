@@ -128,7 +128,7 @@ class BindingSet
   bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectWrap object)
   {
     bool _retval;
-    _retval = gtk_binding_set_activate(cast(GtkBindingSet*)this._cPtr, keyval, modifiers, object ? cast(GObject*)object._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_binding_set_activate(cast(GtkBindingSet*)this._cPtr, keyval, modifiers, object ? cast(GObject*)object._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -175,7 +175,7 @@ class WebContext : gobject.object.ObjectWrap
   bool getSpellCheckingEnabled()
   {
     bool _retval;
-    _retval = webkit_web_context_get_spell_checking_enabled(cast(WebKitWebContext*)this._cPtr);
+    _retval = cast(bool)webkit_web_context_get_spell_checking_enabled(cast(WebKitWebContext*)this._cPtr);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class WebContext : gobject.object.ObjectWrap
   bool isAutomationAllowed()
   {
     bool _retval;
-    _retval = webkit_web_context_is_automation_allowed(cast(WebKitWebContext*)this._cPtr);
+    _retval = cast(bool)webkit_web_context_is_automation_allowed(cast(WebKitWebContext*)this._cPtr);
     return _retval;
   }
 

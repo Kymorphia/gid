@@ -37,7 +37,7 @@ template PollableInputStreamT()
   override bool canPoll()
   {
     bool _retval;
-    _retval = g_pollable_input_stream_can_poll(cast(GPollableInputStream*)this._cPtr);
+    _retval = cast(bool)g_pollable_input_stream_can_poll(cast(GPollableInputStream*)this._cPtr);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ template PollableInputStreamT()
   override bool isReadable()
   {
     bool _retval;
-    _retval = g_pollable_input_stream_is_readable(cast(GPollableInputStream*)this._cPtr);
+    _retval = cast(bool)g_pollable_input_stream_is_readable(cast(GPollableInputStream*)this._cPtr);
     return _retval;
   }
 

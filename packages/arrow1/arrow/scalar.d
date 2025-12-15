@@ -73,7 +73,7 @@ class Scalar : gobject.object.ObjectWrap
   bool equal(arrow.scalar.Scalar otherScalar)
   {
     bool _retval;
-    _retval = garrow_scalar_equal(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_scalar_equal(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Scalar : gobject.object.ObjectWrap
   bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
-    _retval = garrow_scalar_equal_options(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_scalar_equal_options(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class Scalar : gobject.object.ObjectWrap
   bool isValid()
   {
     bool _retval;
-    _retval = garrow_scalar_is_valid(cast(GArrowScalar*)this._cPtr);
+    _retval = cast(bool)garrow_scalar_is_valid(cast(GArrowScalar*)this._cPtr);
     return _retval;
   }
 

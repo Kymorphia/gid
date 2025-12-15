@@ -131,7 +131,7 @@ class Printer : gobject.object.ObjectWrap
   bool acceptsPdf()
   {
     bool _retval;
-    _retval = gtk_printer_accepts_pdf(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_accepts_pdf(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Printer : gobject.object.ObjectWrap
   bool acceptsPs()
   {
     bool _retval;
-    _retval = gtk_printer_accepts_ps(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_accepts_ps(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Printer : gobject.object.ObjectWrap
   bool getHardMargins(out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
-    _retval = gtk_printer_get_hard_margins(cast(GtkPrinter*)this._cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
+    _retval = cast(bool)gtk_printer_get_hard_margins(cast(GtkPrinter*)this._cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Printer : gobject.object.ObjectWrap
   bool getHardMarginsForPaperSize(gtk.paper_size.PaperSize paperSize, out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
-    _retval = gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)this._cPtr, paperSize ? cast(GtkPaperSize*)paperSize._cPtr(No.Dup) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
+    _retval = cast(bool)gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)this._cPtr, paperSize ? cast(GtkPaperSize*)paperSize._cPtr(No.Dup) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class Printer : gobject.object.ObjectWrap
   bool hasDetails()
   {
     bool _retval;
-    _retval = gtk_printer_has_details(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_has_details(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class Printer : gobject.object.ObjectWrap
   bool isAcceptingJobs()
   {
     bool _retval;
-    _retval = gtk_printer_is_accepting_jobs(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_is_accepting_jobs(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class Printer : gobject.object.ObjectWrap
   bool isActive()
   {
     bool _retval;
-    _retval = gtk_printer_is_active(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_is_active(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class Printer : gobject.object.ObjectWrap
   bool isDefault()
   {
     bool _retval;
-    _retval = gtk_printer_is_default(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_is_default(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 
@@ -381,7 +381,7 @@ class Printer : gobject.object.ObjectWrap
   bool isPaused()
   {
     bool _retval;
-    _retval = gtk_printer_is_paused(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_is_paused(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class Printer : gobject.object.ObjectWrap
   bool isVirtual()
   {
     bool _retval;
-    _retval = gtk_printer_is_virtual(cast(GtkPrinter*)this._cPtr);
+    _retval = cast(bool)gtk_printer_is_virtual(cast(GtkPrinter*)this._cPtr);
     return _retval;
   }
 

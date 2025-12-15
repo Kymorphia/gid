@@ -734,7 +734,7 @@ class Window : gtk.bin.Bin
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_window_set_default_icon_from_file(_filename, &_err);
+    _retval = cast(bool)gtk_window_set_default_icon_from_file(_filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -777,7 +777,7 @@ class Window : gtk.bin.Bin
   bool activateDefault()
   {
     bool _retval;
-    _retval = gtk_window_activate_default(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_activate_default(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -788,7 +788,7 @@ class Window : gtk.bin.Bin
   bool activateFocus()
   {
     bool _retval;
-    _retval = gtk_window_activate_focus(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_activate_focus(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -805,7 +805,7 @@ class Window : gtk.bin.Bin
   bool activateKey(gdk.event_key.EventKey event)
   {
     bool _retval;
-    _retval = gtk_window_activate_key(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
+    _retval = cast(bool)gtk_window_activate_key(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
     return _retval;
   }
 
@@ -940,7 +940,7 @@ class Window : gtk.bin.Bin
   bool getAcceptFocus()
   {
     bool _retval;
-    _retval = gtk_window_get_accept_focus(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_accept_focus(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -978,7 +978,7 @@ class Window : gtk.bin.Bin
   bool getDecorated()
   {
     bool _retval;
-    _retval = gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1019,7 +1019,7 @@ class Window : gtk.bin.Bin
   bool getDeletable()
   {
     bool _retval;
-    _retval = gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1031,7 +1031,7 @@ class Window : gtk.bin.Bin
   bool getDestroyWithParent()
   {
     bool _retval;
-    _retval = gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1060,7 +1060,7 @@ class Window : gtk.bin.Bin
   bool getFocusOnMap()
   {
     bool _retval;
-    _retval = gtk_window_get_focus_on_map(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_focus_on_map(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1072,7 +1072,7 @@ class Window : gtk.bin.Bin
   bool getFocusVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1111,7 +1111,7 @@ class Window : gtk.bin.Bin
   bool getHasResizeGrip()
   {
     bool _retval;
-    _retval = gtk_window_get_has_resize_grip(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_has_resize_grip(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1124,7 +1124,7 @@ class Window : gtk.bin.Bin
   bool getHideTitlebarWhenMaximized()
   {
     bool _retval;
-    _retval = gtk_window_get_hide_titlebar_when_maximized(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_hide_titlebar_when_maximized(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1192,7 +1192,7 @@ class Window : gtk.bin.Bin
   bool getMnemonicsVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1204,7 +1204,7 @@ class Window : gtk.bin.Bin
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1278,7 +1278,7 @@ class Window : gtk.bin.Bin
   bool getResizable()
   {
     bool _retval;
-    _retval = gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1297,7 +1297,7 @@ class Window : gtk.bin.Bin
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_window_get_resize_grip_area(cast(GtkWindow*)this._cPtr, &_rect);
+    _retval = cast(bool)gtk_window_get_resize_grip_area(cast(GtkWindow*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -1418,7 +1418,7 @@ class Window : gtk.bin.Bin
   bool getSkipPagerHint()
   {
     bool _retval;
-    _retval = gtk_window_get_skip_pager_hint(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_skip_pager_hint(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1429,7 +1429,7 @@ class Window : gtk.bin.Bin
   bool getSkipTaskbarHint()
   {
     bool _retval;
-    _retval = gtk_window_get_skip_taskbar_hint(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_skip_taskbar_hint(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1493,7 +1493,7 @@ class Window : gtk.bin.Bin
   bool getUrgencyHint()
   {
     bool _retval;
-    _retval = gtk_window_get_urgency_hint(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_urgency_hint(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1518,7 +1518,7 @@ class Window : gtk.bin.Bin
   bool hasGroup()
   {
     bool _retval;
-    _retval = gtk_window_has_group(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_has_group(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1531,7 +1531,7 @@ class Window : gtk.bin.Bin
   bool hasToplevelFocus()
   {
     bool _retval;
-    _retval = gtk_window_has_toplevel_focus(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_has_toplevel_focus(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1569,7 +1569,7 @@ class Window : gtk.bin.Bin
   bool isActive()
   {
     bool _retval;
-    _retval = gtk_window_is_active(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_is_active(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1586,7 +1586,7 @@ class Window : gtk.bin.Bin
   bool isMaximized()
   {
     bool _retval;
-    _retval = gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1625,7 +1625,7 @@ class Window : gtk.bin.Bin
   bool mnemonicActivate(uint keyval, gdk.types.ModifierType modifier)
   {
     bool _retval;
-    _retval = gtk_window_mnemonic_activate(cast(GtkWindow*)this._cPtr, keyval, modifier);
+    _retval = cast(bool)gtk_window_mnemonic_activate(cast(GtkWindow*)this._cPtr, keyval, modifier);
     return _retval;
   }
 
@@ -1756,7 +1756,7 @@ class Window : gtk.bin.Bin
   {
     bool _retval;
     const(char)* _geometry = geometry.toCString(No.Alloc);
-    _retval = gtk_window_parse_geometry(cast(GtkWindow*)this._cPtr, _geometry);
+    _retval = cast(bool)gtk_window_parse_geometry(cast(GtkWindow*)this._cPtr, _geometry);
     return _retval;
   }
 
@@ -1814,7 +1814,7 @@ class Window : gtk.bin.Bin
   bool propagateKeyEvent(gdk.event_key.EventKey event)
   {
     bool _retval;
-    _retval = gtk_window_propagate_key_event(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
+    _retval = cast(bool)gtk_window_propagate_key_event(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
     return _retval;
   }
 
@@ -1903,7 +1903,7 @@ class Window : gtk.bin.Bin
   bool resizeGripIsVisible()
   {
     bool _retval;
-    _retval = gtk_window_resize_grip_is_visible(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_resize_grip_is_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -2291,7 +2291,7 @@ class Window : gtk.bin.Bin
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_window_set_icon_from_file(cast(GtkWindow*)this._cPtr, _filename, &_err);
+    _retval = cast(bool)gtk_window_set_icon_from_file(cast(GtkWindow*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

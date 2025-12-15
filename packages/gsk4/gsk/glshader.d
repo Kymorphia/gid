@@ -211,7 +211,7 @@ class GLShader : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gsk_gl_shader_compile(cast(GskGLShader*)this._cPtr, renderer ? cast(GskRenderer*)renderer._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gsk_gl_shader_compile(cast(GskGLShader*)this._cPtr, renderer ? cast(GskRenderer*)renderer._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -246,7 +246,7 @@ class GLShader : gobject.object.ObjectWrap
   bool getArgBool(glib.bytes.Bytes args, int idx)
   {
     bool _retval;
-    _retval = gsk_gl_shader_get_arg_bool(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
+    _retval = cast(bool)gsk_gl_shader_get_arg_bool(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
     return _retval;
   }
 

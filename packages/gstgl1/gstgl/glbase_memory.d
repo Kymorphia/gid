@@ -160,7 +160,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   bool allocData()
   {
     bool _retval;
-    _retval = gst_gl_base_memory_alloc_data(cast(GstGLBaseMemory*)this._cPtr);
+    _retval = cast(bool)gst_gl_base_memory_alloc_data(cast(GstGLBaseMemory*)this._cPtr);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   bool memcpy(gstgl.glbase_memory.GLBaseMemory dest, ptrdiff_t offset, ptrdiff_t size)
   {
     bool _retval;
-    _retval = gst_gl_base_memory_memcpy(cast(GstGLBaseMemory*)this._cPtr, dest ? cast(GstGLBaseMemory*)dest._cPtr(No.Dup) : null, offset, size);
+    _retval = cast(bool)gst_gl_base_memory_memcpy(cast(GstGLBaseMemory*)this._cPtr, dest ? cast(GstGLBaseMemory*)dest._cPtr(No.Dup) : null, offset, size);
     return _retval;
   }
 

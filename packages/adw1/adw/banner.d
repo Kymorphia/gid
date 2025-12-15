@@ -198,7 +198,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   bool getRevealed()
   {
     bool _retval;
-    _retval = adw_banner_get_revealed(cast(AdwBanner*)this._cPtr);
+    _retval = cast(bool)adw_banner_get_revealed(cast(AdwBanner*)this._cPtr);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = adw_banner_get_use_markup(cast(AdwBanner*)this._cPtr);
+    _retval = cast(bool)adw_banner_get_use_markup(cast(AdwBanner*)this._cPtr);
     return _retval;
   }
 

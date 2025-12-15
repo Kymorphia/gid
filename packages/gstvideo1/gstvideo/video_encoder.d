@@ -359,7 +359,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   bool isQosEnabled()
   {
     bool _retval;
-    _retval = gst_video_encoder_is_qos_enabled(cast(GstVideoEncoder*)this._cPtr);
+    _retval = cast(bool)gst_video_encoder_is_qos_enabled(cast(GstVideoEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_video_encoder_negotiate(cast(GstVideoEncoder*)this._cPtr);
+    _retval = cast(bool)gst_video_encoder_negotiate(cast(GstVideoEncoder*)this._cPtr);
     return _retval;
   }
 

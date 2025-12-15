@@ -83,7 +83,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
   bool copyIntoTexture(uint texId, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, int width, int height, int stride, bool respecify)
   {
     bool _retval;
-    _retval = gst_gl_memory_pbo_copy_into_texture(cast(GstGLMemoryPBO*)this._cPtr, texId, target, texFormat, width, height, stride, respecify);
+    _retval = cast(bool)gst_gl_memory_pbo_copy_into_texture(cast(GstGLMemoryPBO*)this._cPtr, texId, target, texFormat, width, height, stride, respecify);
     return _retval;
   }
 

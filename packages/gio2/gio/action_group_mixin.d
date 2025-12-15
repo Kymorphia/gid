@@ -199,7 +199,7 @@ template ActionGroupT()
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _retval = g_action_group_get_action_enabled(cast(GActionGroup*)this._cPtr, _actionName);
+    _retval = cast(bool)g_action_group_get_action_enabled(cast(GActionGroup*)this._cPtr, _actionName);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ template ActionGroupT()
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _retval = g_action_group_has_action(cast(GActionGroup*)this._cPtr, _actionName);
+    _retval = cast(bool)g_action_group_has_action(cast(GActionGroup*)this._cPtr, _actionName);
     return _retval;
   }
 
@@ -402,11 +402,13 @@ template ActionGroupT()
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
+    gboolean _enabled;
     const(GVariantType)* _parameterType;
     const(GVariantType)* _stateType;
     GVariant* _stateHint;
     GVariant* _state;
-    _retval = g_action_group_query_action(cast(GActionGroup*)this._cPtr, _actionName, cast(bool*)&enabled, &_parameterType, &_stateType, &_stateHint, &_state);
+    _retval = cast(bool)g_action_group_query_action(cast(GActionGroup*)this._cPtr, _actionName, &_enabled, &_parameterType, &_stateType, &_stateHint, &_state);
+    enabled = cast(bool)_enabled;
     parameterType = new glib.variant_type.VariantType(cast(void*)_parameterType, No.Take);
     stateType = new glib.variant_type.VariantType(cast(void*)_stateType, No.Take);
     stateHint = new glib.variant.Variant(cast(void*)_stateHint, Yes.Take);

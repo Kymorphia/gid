@@ -487,7 +487,7 @@ class Query : gobject.boxed.Boxed
   bool addBufferingRange(long start, long stop)
   {
     bool _retval;
-    _retval = gst_query_add_buffering_range(cast(GstQuery*)this._cPtr, start, stop);
+    _retval = cast(bool)gst_query_add_buffering_range(cast(GstQuery*)this._cPtr, start, stop);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class Query : gobject.boxed.Boxed
   bool findAllocationMeta(gobject.types.GType api, out uint index)
   {
     bool _retval;
-    _retval = gst_query_find_allocation_meta(cast(GstQuery*)this._cPtr, api, cast(uint*)&index);
+    _retval = cast(bool)gst_query_find_allocation_meta(cast(GstQuery*)this._cPtr, api, cast(uint*)&index);
     return _retval;
   }
 
@@ -614,7 +614,7 @@ class Query : gobject.boxed.Boxed
   bool hasSchedulingMode(gst.types.PadMode mode)
   {
     bool _retval;
-    _retval = gst_query_has_scheduling_mode(cast(GstQuery*)this._cPtr, mode);
+    _retval = cast(bool)gst_query_has_scheduling_mode(cast(GstQuery*)this._cPtr, mode);
     return _retval;
   }
 
@@ -631,7 +631,7 @@ class Query : gobject.boxed.Boxed
   bool hasSchedulingModeWithFlags(gst.types.PadMode mode, gst.types.SchedulingFlags flags)
   {
     bool _retval;
-    _retval = gst_query_has_scheduling_mode_with_flags(cast(GstQuery*)this._cPtr, mode, flags);
+    _retval = cast(bool)gst_query_has_scheduling_mode_with_flags(cast(GstQuery*)this._cPtr, mode, flags);
     return _retval;
   }
 
@@ -657,7 +657,9 @@ class Query : gobject.boxed.Boxed
   */
   void parseAcceptCapsResult(out bool result)
   {
-    gst_query_parse_accept_caps_result(cast(GstQuery*)this._cPtr, cast(bool*)&result);
+    gboolean _result;
+    gst_query_parse_accept_caps_result(cast(GstQuery*)this._cPtr, &_result);
+    result = cast(bool)_result;
   }
 
   /**
@@ -675,8 +677,10 @@ class Query : gobject.boxed.Boxed
   void parseAllocation(out gst.caps.Caps caps, out bool needPool)
   {
     GstCaps* _caps;
-    gst_query_parse_allocation(cast(GstQuery*)this._cPtr, &_caps, cast(bool*)&needPool);
+    gboolean _needPool;
+    gst_query_parse_allocation(cast(GstQuery*)this._cPtr, &_caps, &_needPool);
     caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
+    needPool = cast(bool)_needPool;
   }
 
   /**
@@ -700,7 +704,9 @@ class Query : gobject.boxed.Boxed
   */
   void parseBufferingPercent(out bool busy, out int percent)
   {
-    gst_query_parse_buffering_percent(cast(GstQuery*)this._cPtr, cast(bool*)&busy, cast(int*)&percent);
+    gboolean _busy;
+    gst_query_parse_buffering_percent(cast(GstQuery*)this._cPtr, &_busy, cast(int*)&percent);
+    busy = cast(bool)_busy;
   }
 
   /**
@@ -789,7 +795,7 @@ class Query : gobject.boxed.Boxed
   {
     bool _retval;
     char* _contextType;
-    _retval = gst_query_parse_context_type(cast(GstQuery*)this._cPtr, &_contextType);
+    _retval = cast(bool)gst_query_parse_context_type(cast(GstQuery*)this._cPtr, &_contextType);
     contextType = _contextType.fromCString(No.Free);
     return _retval;
   }
@@ -836,7 +842,9 @@ class Query : gobject.boxed.Boxed
   */
   void parseLatency(out bool live, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
   {
-    gst_query_parse_latency(cast(GstQuery*)this._cPtr, cast(bool*)&live, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    gboolean _live;
+    gst_query_parse_latency(cast(GstQuery*)this._cPtr, &_live, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    live = cast(bool)_live;
   }
 
   /**
@@ -918,7 +926,7 @@ class Query : gobject.boxed.Boxed
   bool parseNthBufferingRange(uint index, out long start, out long stop)
   {
     bool _retval;
-    _retval = gst_query_parse_nth_buffering_range(cast(GstQuery*)this._cPtr, index, cast(long*)&start, cast(long*)&stop);
+    _retval = cast(bool)gst_query_parse_nth_buffering_range(cast(GstQuery*)this._cPtr, index, cast(long*)&start, cast(long*)&stop);
     return _retval;
   }
 
@@ -994,7 +1002,9 @@ class Query : gobject.boxed.Boxed
   */
   void parseSeeking(out gst.types.Format format, out bool seekable, out long segmentStart, out long segmentEnd)
   {
-    gst_query_parse_seeking(cast(GstQuery*)this._cPtr, &format, cast(bool*)&seekable, cast(long*)&segmentStart, cast(long*)&segmentEnd);
+    gboolean _seekable;
+    gst_query_parse_seeking(cast(GstQuery*)this._cPtr, &format, &_seekable, cast(long*)&segmentStart, cast(long*)&segmentEnd);
+    seekable = cast(bool)_seekable;
   }
 
   /**
@@ -1023,7 +1033,9 @@ class Query : gobject.boxed.Boxed
   */
   void parseSelectable(out bool selectable)
   {
-    gst_query_parse_selectable(cast(GstQuery*)this._cPtr, cast(bool*)&selectable);
+    gboolean _selectable;
+    gst_query_parse_selectable(cast(GstQuery*)this._cPtr, &_selectable);
+    selectable = cast(bool)_selectable;
   }
 
   /**
@@ -1070,7 +1082,9 @@ class Query : gobject.boxed.Boxed
   */
   void parseUriRedirectionPermanent(out bool permanent)
   {
-    gst_query_parse_uri_redirection_permanent(cast(GstQuery*)this._cPtr, cast(bool*)&permanent);
+    gboolean _permanent;
+    gst_query_parse_uri_redirection_permanent(cast(GstQuery*)this._cPtr, &_permanent);
+    permanent = cast(bool)_permanent;
   }
 
   /**

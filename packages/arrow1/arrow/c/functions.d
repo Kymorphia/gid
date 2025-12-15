@@ -33,11 +33,11 @@ __gshared extern(C)
   GArrowStructArray* function(GArrowArray* array, GError** _err) c_garrow_array_count_values; ///
   GArrowDictionaryArray* function(GArrowArray* array, GError** _err) c_garrow_array_dictionary_encode; ///
   char* function(GArrowArray* array, GArrowArray* otherArray) c_garrow_array_diff_unified; ///
-  bool function(GArrowArray* array, GArrowArray* otherArray) c_garrow_array_equal; ///
-  bool function(GArrowArray* array, GArrowArray* otherArray) c_garrow_array_equal_approx; ///
-  bool function(GArrowArray* array, GArrowArray* otherArray, GArrowEqualOptions* options) c_garrow_array_equal_options; ///
-  bool function(GArrowArray* array, long startIndex, GArrowArray* otherArray, long otherStartIndex, long endIndex, GArrowEqualOptions* options) c_garrow_array_equal_range; ///
-  bool function(GArrowArray* array, void** cAbiArray, void** cAbiSchema, GError** _err) c_garrow_array_export; ///
+  gboolean function(GArrowArray* array, GArrowArray* otherArray) c_garrow_array_equal; ///
+  gboolean function(GArrowArray* array, GArrowArray* otherArray) c_garrow_array_equal_approx; ///
+  gboolean function(GArrowArray* array, GArrowArray* otherArray, GArrowEqualOptions* options) c_garrow_array_equal_options; ///
+  gboolean function(GArrowArray* array, long startIndex, GArrowArray* otherArray, long otherStartIndex, long endIndex, GArrowEqualOptions* options) c_garrow_array_equal_range; ///
+  gboolean function(GArrowArray* array, void** cAbiArray, void** cAbiSchema, GError** _err) c_garrow_array_export; ///
   GArrowArray* function(GArrowArray* array, GArrowBooleanArray* filter, GArrowFilterOptions* options, GError** _err) c_garrow_array_filter; ///
   long function(GArrowArray* array) c_garrow_array_get_length; ///
   long function(GArrowArray* array) c_garrow_array_get_n_nulls; ///
@@ -47,8 +47,8 @@ __gshared extern(C)
   GArrowType function(GArrowArray* array) c_garrow_array_get_value_type; ///
   GArrowBooleanArray* function(GArrowArray* left, GArrowArray* right, GError** _err) c_garrow_array_is_in; ///
   GArrowBooleanArray* function(GArrowArray* left, GArrowChunkedArray* right, GError** _err) c_garrow_array_is_in_chunked_array; ///
-  bool function(GArrowArray* array, long i) c_garrow_array_is_null; ///
-  bool function(GArrowArray* array, long i) c_garrow_array_is_valid; ///
+  gboolean function(GArrowArray* array, long i) c_garrow_array_is_null; ///
+  gboolean function(GArrowArray* array, long i) c_garrow_array_is_valid; ///
   GArrowRunEndEncodedArray* function(GArrowArray* array, GArrowRunEndEncodeOptions* options, GError** _err) c_garrow_array_run_end_encode; ///
   GArrowArray* function(GArrowArray* array, long offset, long length) c_garrow_array_slice; ///
   GArrowUInt64Array* function(GArrowArray* array, GArrowSortOrder order, GError** _err) c_garrow_array_sort_indices; ///
@@ -61,10 +61,10 @@ __gshared extern(C)
 
   // ArrayBuilder
   GType function() c_garrow_array_builder_get_type; ///
-  bool function(GArrowArrayBuilder* builder, GError** _err) c_garrow_array_builder_append_empty_value; ///
-  bool function(GArrowArrayBuilder* builder, long n, GError** _err) c_garrow_array_builder_append_empty_values; ///
-  bool function(GArrowArrayBuilder* builder, GError** _err) c_garrow_array_builder_append_null; ///
-  bool function(GArrowArrayBuilder* builder, long n, GError** _err) c_garrow_array_builder_append_nulls; ///
+  gboolean function(GArrowArrayBuilder* builder, GError** _err) c_garrow_array_builder_append_empty_value; ///
+  gboolean function(GArrowArrayBuilder* builder, long n, GError** _err) c_garrow_array_builder_append_empty_values; ///
+  gboolean function(GArrowArrayBuilder* builder, GError** _err) c_garrow_array_builder_append_null; ///
+  gboolean function(GArrowArrayBuilder* builder, long n, GError** _err) c_garrow_array_builder_append_nulls; ///
   GArrowArray* function(GArrowArrayBuilder* builder, GError** _err) c_garrow_array_builder_finish; ///
   long function(GArrowArrayBuilder* builder) c_garrow_array_builder_get_capacity; ///
   GArrowArrayBuilder* function(GArrowArrayBuilder* builder, int i) c_garrow_array_builder_get_child; ///
@@ -73,9 +73,9 @@ __gshared extern(C)
   long function(GArrowArrayBuilder* builder) c_garrow_array_builder_get_n_nulls; ///
   GArrowDataType* function(GArrowArrayBuilder* builder) c_garrow_array_builder_get_value_data_type; ///
   GArrowType function(GArrowArrayBuilder* builder) c_garrow_array_builder_get_value_type; ///
-  bool function(GArrowArrayBuilder* builder, long additionalCapacity, GError** _err) c_garrow_array_builder_reserve; ///
+  gboolean function(GArrowArrayBuilder* builder, long additionalCapacity, GError** _err) c_garrow_array_builder_reserve; ///
   void function(GArrowArrayBuilder* builder) c_garrow_array_builder_reset; ///
-  bool function(GArrowArrayBuilder* builder, long capacity, GError** _err) c_garrow_array_builder_resize; ///
+  gboolean function(GArrowArrayBuilder* builder, long capacity, GError** _err) c_garrow_array_builder_resize; ///
 
   // ArrayDatum
   GType function() c_garrow_array_datum_get_type; ///
@@ -84,7 +84,7 @@ __gshared extern(C)
   // ArraySortOptions
   GType function() c_garrow_array_sort_options_get_type; ///
   GArrowArraySortOptions* function(GArrowSortOrder order) c_garrow_array_sort_options_new; ///
-  bool function(GArrowArraySortOptions* options, GArrowArraySortOptions* otherOptions) c_garrow_array_sort_options_equal; ///
+  gboolean function(GArrowArraySortOptions* options, GArrowArraySortOptions* otherOptions) c_garrow_array_sort_options_equal; ///
 
   // AzureFileSystem
   GType function() c_garrow_azure_file_system_get_type; ///
@@ -108,12 +108,12 @@ __gshared extern(C)
   // BinaryArrayBuilder
   GType function() c_garrow_binary_array_builder_get_type; ///
   GArrowBinaryArrayBuilder* function() c_garrow_binary_array_builder_new; ///
-  bool function(GArrowBinaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_binary_array_builder_append; ///
-  bool function(GArrowBinaryArrayBuilder* builder, GError** _err) c_garrow_binary_array_builder_append_null; ///
-  bool function(GArrowBinaryArrayBuilder* builder, long n, GError** _err) c_garrow_binary_array_builder_append_nulls; ///
-  bool function(GArrowBinaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_binary_array_builder_append_value; ///
-  bool function(GArrowBinaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_binary_array_builder_append_value_bytes; ///
-  bool function(GArrowBinaryArrayBuilder* builder, GBytes** values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_binary_array_builder_append_values; ///
+  gboolean function(GArrowBinaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_binary_array_builder_append; ///
+  gboolean function(GArrowBinaryArrayBuilder* builder, GError** _err) c_garrow_binary_array_builder_append_null; ///
+  gboolean function(GArrowBinaryArrayBuilder* builder, long n, GError** _err) c_garrow_binary_array_builder_append_nulls; ///
+  gboolean function(GArrowBinaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_binary_array_builder_append_value; ///
+  gboolean function(GArrowBinaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_binary_array_builder_append_value_bytes; ///
+  gboolean function(GArrowBinaryArrayBuilder* builder, GBytes** values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_binary_array_builder_append_values; ///
 
   // BinaryDataType
   GType function() c_garrow_binary_data_type_get_type; ///
@@ -122,14 +122,14 @@ __gshared extern(C)
   // BinaryDictionaryArrayBuilder
   GType function() c_garrow_binary_dictionary_array_builder_get_type; ///
   GArrowBinaryDictionaryArrayBuilder* function() c_garrow_binary_dictionary_array_builder_new; ///
-  bool function(GArrowBinaryDictionaryArrayBuilder* builder, GArrowBinaryArray* array, GError** _err) c_garrow_binary_dictionary_array_builder_append_array; ///
-  bool function(GArrowBinaryDictionaryArrayBuilder* builder, const(long)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_binary_dictionary_array_builder_append_indices; ///
-  bool function(GArrowBinaryDictionaryArrayBuilder* builder, GError** _err) c_garrow_binary_dictionary_array_builder_append_null; ///
-  bool function(GArrowBinaryDictionaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_binary_dictionary_array_builder_append_value; ///
-  bool function(GArrowBinaryDictionaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_binary_dictionary_array_builder_append_value_bytes; ///
-  bool function(GArrowBinaryDictionaryArrayBuilder* builder, GArrowArray** outIndices, GArrowArray** outDelta, GError** _err) c_garrow_binary_dictionary_array_builder_finish_delta; ///
+  gboolean function(GArrowBinaryDictionaryArrayBuilder* builder, GArrowBinaryArray* array, GError** _err) c_garrow_binary_dictionary_array_builder_append_array; ///
+  gboolean function(GArrowBinaryDictionaryArrayBuilder* builder, const(long)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_binary_dictionary_array_builder_append_indices; ///
+  gboolean function(GArrowBinaryDictionaryArrayBuilder* builder, GError** _err) c_garrow_binary_dictionary_array_builder_append_null; ///
+  gboolean function(GArrowBinaryDictionaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_binary_dictionary_array_builder_append_value; ///
+  gboolean function(GArrowBinaryDictionaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_binary_dictionary_array_builder_append_value_bytes; ///
+  gboolean function(GArrowBinaryDictionaryArrayBuilder* builder, GArrowArray** outIndices, GArrowArray** outDelta, GError** _err) c_garrow_binary_dictionary_array_builder_finish_delta; ///
   long function(GArrowBinaryDictionaryArrayBuilder* builder) c_garrow_binary_dictionary_array_builder_get_dictionary_length; ///
-  bool function(GArrowBinaryDictionaryArrayBuilder* builder, GArrowBinaryArray* values, GError** _err) c_garrow_binary_dictionary_array_builder_insert_memo_values; ///
+  gboolean function(GArrowBinaryDictionaryArrayBuilder* builder, GArrowBinaryArray* values, GError** _err) c_garrow_binary_dictionary_array_builder_insert_memo_values; ///
   void function(GArrowBinaryDictionaryArrayBuilder* builder) c_garrow_binary_dictionary_array_builder_reset_full; ///
 
   // BinaryScalar
@@ -144,8 +144,8 @@ __gshared extern(C)
   GType function() c_garrow_boolean_array_get_type; ///
   GArrowBooleanArray* function(long length, GArrowBuffer* data, GArrowBuffer* nullBitmap, long nNulls) c_garrow_boolean_array_new; ///
   GArrowBooleanArray* function(GArrowBooleanArray* left, GArrowBooleanArray* right, GError** _err) c_garrow_boolean_array_and; ///
-  bool function(GArrowBooleanArray* array, long i) c_garrow_boolean_array_get_value; ///
-  bool* function(GArrowBooleanArray* array, long* length) c_garrow_boolean_array_get_values; ///
+  gboolean function(GArrowBooleanArray* array, long i) c_garrow_boolean_array_get_value; ///
+  gboolean* function(GArrowBooleanArray* array, long* length) c_garrow_boolean_array_get_values; ///
   GArrowBooleanArray* function(GArrowBooleanArray* array, GError** _err) c_garrow_boolean_array_invert; ///
   GArrowBooleanArray* function(GArrowBooleanArray* left, GArrowBooleanArray* right, GError** _err) c_garrow_boolean_array_or; ///
   GArrowBooleanArray* function(GArrowBooleanArray* left, GArrowBooleanArray* right, GError** _err) c_garrow_boolean_array_xor; ///
@@ -153,11 +153,11 @@ __gshared extern(C)
   // BooleanArrayBuilder
   GType function() c_garrow_boolean_array_builder_get_type; ///
   GArrowBooleanArrayBuilder* function() c_garrow_boolean_array_builder_new; ///
-  bool function(GArrowBooleanArrayBuilder* builder, bool value, GError** _err) c_garrow_boolean_array_builder_append; ///
-  bool function(GArrowBooleanArrayBuilder* builder, GError** _err) c_garrow_boolean_array_builder_append_null; ///
-  bool function(GArrowBooleanArrayBuilder* builder, long n, GError** _err) c_garrow_boolean_array_builder_append_nulls; ///
-  bool function(GArrowBooleanArrayBuilder* builder, bool value, GError** _err) c_garrow_boolean_array_builder_append_value; ///
-  bool function(GArrowBooleanArrayBuilder* builder, const(bool)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_boolean_array_builder_append_values; ///
+  gboolean function(GArrowBooleanArrayBuilder* builder, gboolean value, GError** _err) c_garrow_boolean_array_builder_append; ///
+  gboolean function(GArrowBooleanArrayBuilder* builder, GError** _err) c_garrow_boolean_array_builder_append_null; ///
+  gboolean function(GArrowBooleanArrayBuilder* builder, long n, GError** _err) c_garrow_boolean_array_builder_append_nulls; ///
+  gboolean function(GArrowBooleanArrayBuilder* builder, gboolean value, GError** _err) c_garrow_boolean_array_builder_append_value; ///
+  gboolean function(GArrowBooleanArrayBuilder* builder, const(gboolean)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_boolean_array_builder_append_values; ///
 
   // BooleanDataType
   GType function() c_garrow_boolean_data_type_get_type; ///
@@ -165,22 +165,22 @@ __gshared extern(C)
 
   // BooleanScalar
   GType function() c_garrow_boolean_scalar_get_type; ///
-  GArrowBooleanScalar* function(bool value) c_garrow_boolean_scalar_new; ///
-  bool function(GArrowBooleanScalar* scalar) c_garrow_boolean_scalar_get_value; ///
+  GArrowBooleanScalar* function(gboolean value) c_garrow_boolean_scalar_new; ///
+  gboolean function(GArrowBooleanScalar* scalar) c_garrow_boolean_scalar_get_value; ///
 
   // Buffer
   GType function() c_garrow_buffer_get_type; ///
   GArrowBuffer* function(const(ubyte)* data, long size) c_garrow_buffer_new; ///
   GArrowBuffer* function(GBytes* data) c_garrow_buffer_new_bytes; ///
   GArrowBuffer* function(GArrowBuffer* buffer, long start, long size, GError** _err) c_garrow_buffer_copy; ///
-  bool function(GArrowBuffer* buffer, GArrowBuffer* otherBuffer) c_garrow_buffer_equal; ///
-  bool function(GArrowBuffer* buffer, GArrowBuffer* otherBuffer, long nBytes) c_garrow_buffer_equal_n_bytes; ///
+  gboolean function(GArrowBuffer* buffer, GArrowBuffer* otherBuffer) c_garrow_buffer_equal; ///
+  gboolean function(GArrowBuffer* buffer, GArrowBuffer* otherBuffer, long nBytes) c_garrow_buffer_equal_n_bytes; ///
   long function(GArrowBuffer* buffer) c_garrow_buffer_get_capacity; ///
   GBytes* function(GArrowBuffer* buffer) c_garrow_buffer_get_data; ///
   GBytes* function(GArrowBuffer* buffer) c_garrow_buffer_get_mutable_data; ///
   GArrowBuffer* function(GArrowBuffer* buffer) c_garrow_buffer_get_parent; ///
   long function(GArrowBuffer* buffer) c_garrow_buffer_get_size; ///
-  bool function(GArrowBuffer* buffer) c_garrow_buffer_is_mutable; ///
+  gboolean function(GArrowBuffer* buffer) c_garrow_buffer_is_mutable; ///
   GArrowBuffer* function(GArrowBuffer* buffer, long offset, long size) c_garrow_buffer_slice; ///
 
   // BufferInputStream
@@ -232,7 +232,7 @@ __gshared extern(C)
   GArrowChunkedArray* function(GList* chunks, GError** _err) c_garrow_chunked_array_new; ///
   GArrowChunkedArray* function(GArrowDataType* dataType, GError** _err) c_garrow_chunked_array_new_empty; ///
   GArrowArray* function(GArrowChunkedArray* chunkedArray, GError** _err) c_garrow_chunked_array_combine; ///
-  bool function(GArrowChunkedArray* chunkedArray, GArrowChunkedArray* otherChunkedArray) c_garrow_chunked_array_equal; ///
+  gboolean function(GArrowChunkedArray* chunkedArray, GArrowChunkedArray* otherChunkedArray) c_garrow_chunked_array_equal; ///
   GArrowChunkedArray* function(GArrowChunkedArray* chunkedArray, GArrowBooleanArray* filter, GArrowFilterOptions* options, GError** _err) c_garrow_chunked_array_filter; ///
   GArrowChunkedArray* function(GArrowChunkedArray* chunkedArray, GArrowChunkedArray* filter, GArrowFilterOptions* options, GError** _err) c_garrow_chunked_array_filter_chunked_array; ///
   GArrowArray* function(GArrowChunkedArray* chunkedArray, uint i) c_garrow_chunked_array_get_chunk; ///
@@ -275,7 +275,7 @@ __gshared extern(C)
   // DataType
   GType function() c_garrow_data_type_get_type; ///
   GArrowDataType* function(void* cAbiSchema, GError** _err) c_garrow_data_type_import; ///
-  bool function(GArrowDataType* dataType, GArrowDataType* otherDataType) c_garrow_data_type_equal; ///
+  gboolean function(GArrowDataType* dataType, GArrowDataType* otherDataType) c_garrow_data_type_equal; ///
   void* function(GArrowDataType* dataType, GError** _err) c_garrow_data_type_export; ///
   GArrowType function(GArrowDataType* dataType) c_garrow_data_type_get_id; ///
   char* function(GArrowDataType* dataType) c_garrow_data_type_get_name; ///
@@ -290,11 +290,11 @@ __gshared extern(C)
   // Date32ArrayBuilder
   GType function() c_garrow_date32_array_builder_get_type; ///
   GArrowDate32ArrayBuilder* function() c_garrow_date32_array_builder_new; ///
-  bool function(GArrowDate32ArrayBuilder* builder, int value, GError** _err) c_garrow_date32_array_builder_append; ///
-  bool function(GArrowDate32ArrayBuilder* builder, GError** _err) c_garrow_date32_array_builder_append_null; ///
-  bool function(GArrowDate32ArrayBuilder* builder, long n, GError** _err) c_garrow_date32_array_builder_append_nulls; ///
-  bool function(GArrowDate32ArrayBuilder* builder, int value, GError** _err) c_garrow_date32_array_builder_append_value; ///
-  bool function(GArrowDate32ArrayBuilder* builder, const(int)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_date32_array_builder_append_values; ///
+  gboolean function(GArrowDate32ArrayBuilder* builder, int value, GError** _err) c_garrow_date32_array_builder_append; ///
+  gboolean function(GArrowDate32ArrayBuilder* builder, GError** _err) c_garrow_date32_array_builder_append_null; ///
+  gboolean function(GArrowDate32ArrayBuilder* builder, long n, GError** _err) c_garrow_date32_array_builder_append_nulls; ///
+  gboolean function(GArrowDate32ArrayBuilder* builder, int value, GError** _err) c_garrow_date32_array_builder_append_value; ///
+  gboolean function(GArrowDate32ArrayBuilder* builder, const(int)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_date32_array_builder_append_values; ///
 
   // Date32DataType
   GType function() c_garrow_date32_data_type_get_type; ///
@@ -314,11 +314,11 @@ __gshared extern(C)
   // Date64ArrayBuilder
   GType function() c_garrow_date64_array_builder_get_type; ///
   GArrowDate64ArrayBuilder* function() c_garrow_date64_array_builder_new; ///
-  bool function(GArrowDate64ArrayBuilder* builder, long value, GError** _err) c_garrow_date64_array_builder_append; ///
-  bool function(GArrowDate64ArrayBuilder* builder, GError** _err) c_garrow_date64_array_builder_append_null; ///
-  bool function(GArrowDate64ArrayBuilder* builder, long n, GError** _err) c_garrow_date64_array_builder_append_nulls; ///
-  bool function(GArrowDate64ArrayBuilder* builder, long value, GError** _err) c_garrow_date64_array_builder_append_value; ///
-  bool function(GArrowDate64ArrayBuilder* builder, const(long)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_date64_array_builder_append_values; ///
+  gboolean function(GArrowDate64ArrayBuilder* builder, long value, GError** _err) c_garrow_date64_array_builder_append; ///
+  gboolean function(GArrowDate64ArrayBuilder* builder, GError** _err) c_garrow_date64_array_builder_append_null; ///
+  gboolean function(GArrowDate64ArrayBuilder* builder, long n, GError** _err) c_garrow_date64_array_builder_append_nulls; ///
+  gboolean function(GArrowDate64ArrayBuilder* builder, long value, GError** _err) c_garrow_date64_array_builder_append_value; ///
+  gboolean function(GArrowDate64ArrayBuilder* builder, const(long)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_date64_array_builder_append_values; ///
 
   // Date64DataType
   GType function() c_garrow_date64_data_type_get_type; ///
@@ -331,18 +331,18 @@ __gshared extern(C)
 
   // Datum
   GType function() c_garrow_datum_get_type; ///
-  bool function(GArrowDatum* datum, GArrowDatum* otherDatum) c_garrow_datum_equal; ///
-  bool function(GArrowDatum* datum) c_garrow_datum_is_array; ///
-  bool function(GArrowDatum* datum) c_garrow_datum_is_array_like; ///
-  bool function(GArrowDatum* datum) c_garrow_datum_is_scalar; ///
-  bool function(GArrowDatum* datum) c_garrow_datum_is_value; ///
+  gboolean function(GArrowDatum* datum, GArrowDatum* otherDatum) c_garrow_datum_equal; ///
+  gboolean function(GArrowDatum* datum) c_garrow_datum_is_array; ///
+  gboolean function(GArrowDatum* datum) c_garrow_datum_is_array_like; ///
+  gboolean function(GArrowDatum* datum) c_garrow_datum_is_scalar; ///
+  gboolean function(GArrowDatum* datum) c_garrow_datum_is_value; ///
   char* function(GArrowDatum* datum) c_garrow_datum_to_string; ///
 
   // DayMillisecond
   GType function() c_garrow_day_millisecond_get_type; ///
   GArrowDayMillisecond* function(int day, int millisecond) c_garrow_day_millisecond_new; ///
-  bool function(GArrowDayMillisecond* dayMillisecond, GArrowDayMillisecond* otherDayMillisecond) c_garrow_day_millisecond_equal; ///
-  bool function(GArrowDayMillisecond* dayMillisecond, GArrowDayMillisecond* otherDayMillisecond) c_garrow_day_millisecond_less_than; ///
+  gboolean function(GArrowDayMillisecond* dayMillisecond, GArrowDayMillisecond* otherDayMillisecond) c_garrow_day_millisecond_equal; ///
+  gboolean function(GArrowDayMillisecond* dayMillisecond, GArrowDayMillisecond* otherDayMillisecond) c_garrow_day_millisecond_less_than; ///
 
   // DayTimeIntervalArray
   GType function() c_garrow_day_time_interval_array_get_type; ///
@@ -353,8 +353,8 @@ __gshared extern(C)
   // DayTimeIntervalArrayBuilder
   GType function() c_garrow_day_time_interval_array_builder_get_type; ///
   GArrowDayTimeIntervalArrayBuilder* function() c_garrow_day_time_interval_array_builder_new; ///
-  bool function(GArrowDayTimeIntervalArrayBuilder* builder, GArrowDayMillisecond* value, GError** _err) c_garrow_day_time_interval_array_builder_append_value; ///
-  bool function(GArrowDayTimeIntervalArrayBuilder* builder, const(GArrowDayMillisecond*)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_day_time_interval_array_builder_append_values; ///
+  gboolean function(GArrowDayTimeIntervalArrayBuilder* builder, GArrowDayMillisecond* value, GError** _err) c_garrow_day_time_interval_array_builder_append_value; ///
+  gboolean function(GArrowDayTimeIntervalArrayBuilder* builder, const(GArrowDayMillisecond*)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_day_time_interval_array_builder_append_values; ///
 
   // DayTimeIntervalDataType
   GType function() c_garrow_day_time_interval_data_type_get_type; ///
@@ -372,15 +372,15 @@ __gshared extern(C)
   void function(GArrowDecimal128* decimal) c_garrow_decimal128_abs; ///
   GArrowDecimal128* function(GArrowDecimal128* decimal) c_garrow_decimal128_copy; ///
   GArrowDecimal128* function(GArrowDecimal128* left, GArrowDecimal128* right, GArrowDecimal128** remainder, GError** _err) c_garrow_decimal128_divide; ///
-  bool function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_equal; ///
-  bool function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_greater_than; ///
-  bool function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_greater_than_or_equal; ///
-  bool function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_less_than; ///
-  bool function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_less_than_or_equal; ///
+  gboolean function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_equal; ///
+  gboolean function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_greater_than; ///
+  gboolean function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_greater_than_or_equal; ///
+  gboolean function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_less_than; ///
+  gboolean function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_less_than_or_equal; ///
   GArrowDecimal128* function(GArrowDecimal128* left, GArrowDecimal128* right) c_garrow_decimal128_minus; ///
   GArrowDecimal128* function(GArrowDecimal128* left, GArrowDecimal128* right) c_garrow_decimal128_multiply; ///
   void function(GArrowDecimal128* decimal) c_garrow_decimal128_negate; ///
-  bool function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_not_equal; ///
+  gboolean function(GArrowDecimal128* decimal, GArrowDecimal128* otherDecimal) c_garrow_decimal128_not_equal; ///
   GArrowDecimal128* function(GArrowDecimal128* left, GArrowDecimal128* right) c_garrow_decimal128_plus; ///
   GArrowDecimal128* function(GArrowDecimal128* decimal, int originalScale, int newScale, GError** _err) c_garrow_decimal128_rescale; ///
   GBytes* function(GArrowDecimal128* decimal) c_garrow_decimal128_to_bytes; ///
@@ -396,10 +396,10 @@ __gshared extern(C)
   // Decimal128ArrayBuilder
   GType function() c_garrow_decimal128_array_builder_get_type; ///
   GArrowDecimal128ArrayBuilder* function(GArrowDecimal128DataType* dataType) c_garrow_decimal128_array_builder_new; ///
-  bool function(GArrowDecimal128ArrayBuilder* builder, GArrowDecimal128* value, GError** _err) c_garrow_decimal128_array_builder_append; ///
-  bool function(GArrowDecimal128ArrayBuilder* builder, GError** _err) c_garrow_decimal128_array_builder_append_null; ///
-  bool function(GArrowDecimal128ArrayBuilder* builder, GArrowDecimal128* value, GError** _err) c_garrow_decimal128_array_builder_append_value; ///
-  bool function(GArrowDecimal128ArrayBuilder* builder, GArrowDecimal128** values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_decimal128_array_builder_append_values; ///
+  gboolean function(GArrowDecimal128ArrayBuilder* builder, GArrowDecimal128* value, GError** _err) c_garrow_decimal128_array_builder_append; ///
+  gboolean function(GArrowDecimal128ArrayBuilder* builder, GError** _err) c_garrow_decimal128_array_builder_append_null; ///
+  gboolean function(GArrowDecimal128ArrayBuilder* builder, GArrowDecimal128* value, GError** _err) c_garrow_decimal128_array_builder_append_value; ///
+  gboolean function(GArrowDecimal128ArrayBuilder* builder, GArrowDecimal128** values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_decimal128_array_builder_append_values; ///
 
   // Decimal128DataType
   GType function() c_garrow_decimal128_data_type_get_type; ///
@@ -418,14 +418,14 @@ __gshared extern(C)
   void function(GArrowDecimal256* decimal) c_garrow_decimal256_abs; ///
   GArrowDecimal256* function(GArrowDecimal256* decimal) c_garrow_decimal256_copy; ///
   GArrowDecimal256* function(GArrowDecimal256* left, GArrowDecimal256* right, GArrowDecimal256** remainder, GError** _err) c_garrow_decimal256_divide; ///
-  bool function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_equal; ///
-  bool function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_greater_than; ///
-  bool function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_greater_than_or_equal; ///
-  bool function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_less_than; ///
-  bool function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_less_than_or_equal; ///
+  gboolean function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_equal; ///
+  gboolean function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_greater_than; ///
+  gboolean function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_greater_than_or_equal; ///
+  gboolean function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_less_than; ///
+  gboolean function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_less_than_or_equal; ///
   GArrowDecimal256* function(GArrowDecimal256* left, GArrowDecimal256* right) c_garrow_decimal256_multiply; ///
   void function(GArrowDecimal256* decimal) c_garrow_decimal256_negate; ///
-  bool function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_not_equal; ///
+  gboolean function(GArrowDecimal256* decimal, GArrowDecimal256* otherDecimal) c_garrow_decimal256_not_equal; ///
   GArrowDecimal256* function(GArrowDecimal256* left, GArrowDecimal256* right) c_garrow_decimal256_plus; ///
   GArrowDecimal256* function(GArrowDecimal256* decimal, int originalScale, int newScale, GError** _err) c_garrow_decimal256_rescale; ///
   GBytes* function(GArrowDecimal256* decimal) c_garrow_decimal256_to_bytes; ///
@@ -440,8 +440,8 @@ __gshared extern(C)
   // Decimal256ArrayBuilder
   GType function() c_garrow_decimal256_array_builder_get_type; ///
   GArrowDecimal256ArrayBuilder* function(GArrowDecimal256DataType* dataType) c_garrow_decimal256_array_builder_new; ///
-  bool function(GArrowDecimal256ArrayBuilder* builder, GArrowDecimal256* value, GError** _err) c_garrow_decimal256_array_builder_append_value; ///
-  bool function(GArrowDecimal256ArrayBuilder* builder, GArrowDecimal256** values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_decimal256_array_builder_append_values; ///
+  gboolean function(GArrowDecimal256ArrayBuilder* builder, GArrowDecimal256* value, GError** _err) c_garrow_decimal256_array_builder_append_value; ///
+  gboolean function(GArrowDecimal256ArrayBuilder* builder, GArrowDecimal256** values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_decimal256_array_builder_append_values; ///
 
   // Decimal256DataType
   GType function() c_garrow_decimal256_data_type_get_type; ///
@@ -460,15 +460,15 @@ __gshared extern(C)
   void function(GArrowDecimal32* decimal) c_garrow_decimal32_abs; ///
   GArrowDecimal32* function(GArrowDecimal32* decimal) c_garrow_decimal32_copy; ///
   GArrowDecimal32* function(GArrowDecimal32* left, GArrowDecimal32* right, GArrowDecimal32** remainder, GError** _err) c_garrow_decimal32_divide; ///
-  bool function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_equal; ///
-  bool function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_greater_than; ///
-  bool function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_greater_than_or_equal; ///
-  bool function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_less_than; ///
-  bool function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_less_than_or_equal; ///
+  gboolean function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_equal; ///
+  gboolean function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_greater_than; ///
+  gboolean function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_greater_than_or_equal; ///
+  gboolean function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_less_than; ///
+  gboolean function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_less_than_or_equal; ///
   GArrowDecimal32* function(GArrowDecimal32* left, GArrowDecimal32* right) c_garrow_decimal32_minus; ///
   GArrowDecimal32* function(GArrowDecimal32* left, GArrowDecimal32* right) c_garrow_decimal32_multiply; ///
   void function(GArrowDecimal32* decimal) c_garrow_decimal32_negate; ///
-  bool function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_not_equal; ///
+  gboolean function(GArrowDecimal32* decimal, GArrowDecimal32* otherDecimal) c_garrow_decimal32_not_equal; ///
   GArrowDecimal32* function(GArrowDecimal32* left, GArrowDecimal32* right) c_garrow_decimal32_plus; ///
   GArrowDecimal32* function(GArrowDecimal32* decimal, int originalScale, int newScale, GError** _err) c_garrow_decimal32_rescale; ///
   GBytes* function(GArrowDecimal32* decimal) c_garrow_decimal32_to_bytes; ///
@@ -484,8 +484,8 @@ __gshared extern(C)
   // Decimal32ArrayBuilder
   GType function() c_garrow_decimal32_array_builder_get_type; ///
   GArrowDecimal32ArrayBuilder* function(GArrowDecimal32DataType* dataType) c_garrow_decimal32_array_builder_new; ///
-  bool function(GArrowDecimal32ArrayBuilder* builder, GArrowDecimal32* value, GError** _err) c_garrow_decimal32_array_builder_append_value; ///
-  bool function(GArrowDecimal32ArrayBuilder* builder, GArrowDecimal32** values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_decimal32_array_builder_append_values; ///
+  gboolean function(GArrowDecimal32ArrayBuilder* builder, GArrowDecimal32* value, GError** _err) c_garrow_decimal32_array_builder_append_value; ///
+  gboolean function(GArrowDecimal32ArrayBuilder* builder, GArrowDecimal32** values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_decimal32_array_builder_append_values; ///
 
   // Decimal32DataType
   GType function() c_garrow_decimal32_data_type_get_type; ///
@@ -504,15 +504,15 @@ __gshared extern(C)
   void function(GArrowDecimal64* decimal) c_garrow_decimal64_abs; ///
   GArrowDecimal64* function(GArrowDecimal64* decimal) c_garrow_decimal64_copy; ///
   GArrowDecimal64* function(GArrowDecimal64* left, GArrowDecimal64* right, GArrowDecimal64** remainder, GError** _err) c_garrow_decimal64_divide; ///
-  bool function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_equal; ///
-  bool function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_greater_than; ///
-  bool function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_greater_than_or_equal; ///
-  bool function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_less_than; ///
-  bool function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_less_than_or_equal; ///
+  gboolean function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_equal; ///
+  gboolean function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_greater_than; ///
+  gboolean function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_greater_than_or_equal; ///
+  gboolean function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_less_than; ///
+  gboolean function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_less_than_or_equal; ///
   GArrowDecimal64* function(GArrowDecimal64* left, GArrowDecimal64* right) c_garrow_decimal64_minus; ///
   GArrowDecimal64* function(GArrowDecimal64* left, GArrowDecimal64* right) c_garrow_decimal64_multiply; ///
   void function(GArrowDecimal64* decimal) c_garrow_decimal64_negate; ///
-  bool function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_not_equal; ///
+  gboolean function(GArrowDecimal64* decimal, GArrowDecimal64* otherDecimal) c_garrow_decimal64_not_equal; ///
   GArrowDecimal64* function(GArrowDecimal64* left, GArrowDecimal64* right) c_garrow_decimal64_plus; ///
   GArrowDecimal64* function(GArrowDecimal64* decimal, int originalScale, int newScale, GError** _err) c_garrow_decimal64_rescale; ///
   GBytes* function(GArrowDecimal64* decimal) c_garrow_decimal64_to_bytes; ///
@@ -528,8 +528,8 @@ __gshared extern(C)
   // Decimal64ArrayBuilder
   GType function() c_garrow_decimal64_array_builder_get_type; ///
   GArrowDecimal64ArrayBuilder* function(GArrowDecimal64DataType* dataType) c_garrow_decimal64_array_builder_new; ///
-  bool function(GArrowDecimal64ArrayBuilder* builder, GArrowDecimal64* value, GError** _err) c_garrow_decimal64_array_builder_append_value; ///
-  bool function(GArrowDecimal64ArrayBuilder* builder, GArrowDecimal64** values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_decimal64_array_builder_append_values; ///
+  gboolean function(GArrowDecimal64ArrayBuilder* builder, GArrowDecimal64* value, GError** _err) c_garrow_decimal64_array_builder_append_value; ///
+  gboolean function(GArrowDecimal64ArrayBuilder* builder, GArrowDecimal64** values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_decimal64_array_builder_append_values; ///
 
   // Decimal64DataType
   GType function() c_garrow_decimal64_data_type_get_type; ///
@@ -574,10 +574,10 @@ __gshared extern(C)
 
   // DictionaryDataType
   GType function() c_garrow_dictionary_data_type_get_type; ///
-  GArrowDictionaryDataType* function(GArrowDataType* indexDataType, GArrowDataType* valueDataType, bool ordered) c_garrow_dictionary_data_type_new; ///
+  GArrowDictionaryDataType* function(GArrowDataType* indexDataType, GArrowDataType* valueDataType, gboolean ordered) c_garrow_dictionary_data_type_new; ///
   GArrowDataType* function(GArrowDictionaryDataType* dictionaryDataType) c_garrow_dictionary_data_type_get_index_data_type; ///
   GArrowDataType* function(GArrowDictionaryDataType* dictionaryDataType) c_garrow_dictionary_data_type_get_value_data_type; ///
-  bool function(GArrowDictionaryDataType* dictionaryDataType) c_garrow_dictionary_data_type_is_ordered; ///
+  gboolean function(GArrowDictionaryDataType* dictionaryDataType) c_garrow_dictionary_data_type_is_ordered; ///
 
   // DoubleArray
   GType function() c_garrow_double_array_get_type; ///
@@ -589,11 +589,11 @@ __gshared extern(C)
   // DoubleArrayBuilder
   GType function() c_garrow_double_array_builder_get_type; ///
   GArrowDoubleArrayBuilder* function() c_garrow_double_array_builder_new; ///
-  bool function(GArrowDoubleArrayBuilder* builder, double value, GError** _err) c_garrow_double_array_builder_append; ///
-  bool function(GArrowDoubleArrayBuilder* builder, GError** _err) c_garrow_double_array_builder_append_null; ///
-  bool function(GArrowDoubleArrayBuilder* builder, long n, GError** _err) c_garrow_double_array_builder_append_nulls; ///
-  bool function(GArrowDoubleArrayBuilder* builder, double value, GError** _err) c_garrow_double_array_builder_append_value; ///
-  bool function(GArrowDoubleArrayBuilder* builder, const(double)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_double_array_builder_append_values; ///
+  gboolean function(GArrowDoubleArrayBuilder* builder, double value, GError** _err) c_garrow_double_array_builder_append; ///
+  gboolean function(GArrowDoubleArrayBuilder* builder, GError** _err) c_garrow_double_array_builder_append_null; ///
+  gboolean function(GArrowDoubleArrayBuilder* builder, long n, GError** _err) c_garrow_double_array_builder_append_nulls; ///
+  gboolean function(GArrowDoubleArrayBuilder* builder, double value, GError** _err) c_garrow_double_array_builder_append_value; ///
+  gboolean function(GArrowDoubleArrayBuilder* builder, const(double)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_double_array_builder_append_values; ///
 
   // DoubleDataType
   GType function() c_garrow_double_data_type_get_type; ///
@@ -607,7 +607,7 @@ __gshared extern(C)
   // EqualOptions
   GType function() c_garrow_equal_options_get_type; ///
   GArrowEqualOptions* function() c_garrow_equal_options_new; ///
-  bool function(GArrowEqualOptions* options) c_garrow_equal_options_is_approx; ///
+  gboolean function(GArrowEqualOptions* options) c_garrow_equal_options_is_approx; ///
 
   // ExecuteContext
   GType function() c_garrow_execute_context_get_type; ///
@@ -634,12 +634,12 @@ __gshared extern(C)
   GList* function(GArrowExecutePlan* plan) c_garrow_execute_plan_get_nodes; ///
   void function(GArrowExecutePlan* plan) c_garrow_execute_plan_start; ///
   void function(GArrowExecutePlan* plan) c_garrow_execute_plan_stop; ///
-  bool function(GArrowExecutePlan* plan, GError** _err) c_garrow_execute_plan_validate; ///
-  bool function(GArrowExecutePlan* plan, GError** _err) c_garrow_execute_plan_wait; ///
+  gboolean function(GArrowExecutePlan* plan, GError** _err) c_garrow_execute_plan_validate; ///
+  gboolean function(GArrowExecutePlan* plan, GError** _err) c_garrow_execute_plan_wait; ///
 
   // Expression
   GType function() c_garrow_expression_get_type; ///
-  bool function(GArrowExpression* expression, GArrowExpression* otherExpression) c_garrow_expression_equal; ///
+  gboolean function(GArrowExpression* expression, GArrowExpression* otherExpression) c_garrow_expression_equal; ///
   char* function(GArrowExpression* expression) c_garrow_expression_to_string; ///
 
   // ExtensionArray
@@ -656,8 +656,8 @@ __gshared extern(C)
   GType function() c_garrow_extension_data_type_registry_get_type; ///
   GArrowExtensionDataTypeRegistry* function() c_garrow_extension_data_type_registry_default; ///
   GArrowExtensionDataType* function(GArrowExtensionDataTypeRegistry* registry, const(char)* name) c_garrow_extension_data_type_registry_lookup; ///
-  bool function(GArrowExtensionDataTypeRegistry* registry, GArrowExtensionDataType* dataType, GError** _err) c_garrow_extension_data_type_registry_register; ///
-  bool function(GArrowExtensionDataTypeRegistry* registry, const(char)* name, GError** _err) c_garrow_extension_data_type_registry_unregister; ///
+  gboolean function(GArrowExtensionDataTypeRegistry* registry, GArrowExtensionDataType* dataType, GError** _err) c_garrow_extension_data_type_registry_register; ///
+  gboolean function(GArrowExtensionDataTypeRegistry* registry, const(char)* name, GError** _err) c_garrow_extension_data_type_registry_unregister; ///
 
   // ExtensionScalar
   GType function() c_garrow_extension_scalar_get_type; ///
@@ -677,18 +677,18 @@ __gshared extern(C)
   // Field
   GType function() c_garrow_field_get_type; ///
   GArrowField* function(const(char)* name, GArrowDataType* dataType) c_garrow_field_new; ///
-  GArrowField* function(const(char)* name, GArrowDataType* dataType, bool nullable) c_garrow_field_new_full; ///
+  GArrowField* function(const(char)* name, GArrowDataType* dataType, gboolean nullable) c_garrow_field_new_full; ///
   GArrowField* function(void* cAbiSchema, GError** _err) c_garrow_field_import; ///
-  bool function(GArrowField* field, GArrowField* otherField) c_garrow_field_equal; ///
+  gboolean function(GArrowField* field, GArrowField* otherField) c_garrow_field_equal; ///
   void* function(GArrowField* field, GError** _err) c_garrow_field_export; ///
   GArrowDataType* function(GArrowField* field) c_garrow_field_get_data_type; ///
   GHashTable* function(GArrowField* field) c_garrow_field_get_metadata; ///
   const(char)* function(GArrowField* field) c_garrow_field_get_name; ///
-  bool function(GArrowField* field) c_garrow_field_has_metadata; ///
-  bool function(GArrowField* field) c_garrow_field_is_nullable; ///
+  gboolean function(GArrowField* field) c_garrow_field_has_metadata; ///
+  gboolean function(GArrowField* field) c_garrow_field_is_nullable; ///
   GArrowField* function(GArrowField* field) c_garrow_field_remove_metadata; ///
   char* function(GArrowField* field) c_garrow_field_to_string; ///
-  char* function(GArrowField* field, bool showMetadata) c_garrow_field_to_string_metadata; ///
+  char* function(GArrowField* field, gboolean showMetadata) c_garrow_field_to_string_metadata; ///
   GArrowField* function(GArrowField* field, GHashTable* metadata) c_garrow_field_with_merged_metadata; ///
   GArrowField* function(GArrowField* field, GHashTable* metadata) c_garrow_field_with_metadata; ///
 
@@ -698,17 +698,17 @@ __gshared extern(C)
 
   // File
   GType function() c_garrow_file_get_type; ///
-  bool function(GArrowFile* file, GError** _err) c_garrow_file_close; ///
+  gboolean function(GArrowFile* file, GError** _err) c_garrow_file_close; ///
   GArrowFileMode function(GArrowFile* file) c_garrow_file_get_mode; ///
-  bool function(GArrowFile* file) c_garrow_file_is_closed; ///
+  gboolean function(GArrowFile* file) c_garrow_file_is_closed; ///
   long function(GArrowFile* file, GError** _err) c_garrow_file_tell; ///
 
   // FileInfo
   GType function() c_garrow_file_info_get_type; ///
   GArrowFileInfo* function() c_garrow_file_info_new; ///
-  bool function(GArrowFileInfo* fileInfo, GArrowFileInfo* otherFileInfo) c_garrow_file_info_equal; ///
-  bool function(GArrowFileInfo* fileInfo) c_garrow_file_info_is_dir; ///
-  bool function(GArrowFileInfo* fileInfo) c_garrow_file_info_is_file; ///
+  gboolean function(GArrowFileInfo* fileInfo, GArrowFileInfo* otherFileInfo) c_garrow_file_info_equal; ///
+  gboolean function(GArrowFileInfo* fileInfo) c_garrow_file_info_is_dir; ///
+  gboolean function(GArrowFileInfo* fileInfo) c_garrow_file_info_is_file; ///
   char* function(GArrowFileInfo* fileInfo) c_garrow_file_info_to_string; ///
 
   // FileInputStream
@@ -719,7 +719,7 @@ __gshared extern(C)
 
   // FileOutputStream
   GType function() c_garrow_file_output_stream_get_type; ///
-  GArrowFileOutputStream* function(const(char)* path, bool append, GError** _err) c_garrow_file_output_stream_new; ///
+  GArrowFileOutputStream* function(const(char)* path, gboolean append, GError** _err) c_garrow_file_output_stream_new; ///
 
   // FileSelector
   GType function() c_garrow_file_selector_get_type; ///
@@ -727,17 +727,17 @@ __gshared extern(C)
   // FileSystem
   GType function() c_garrow_file_system_get_type; ///
   GArrowFileSystem* function(const(char)* uri, GError** _err) c_garrow_file_system_create; ///
-  bool function(GArrowFileSystem* fileSystem, const(char)* src, const(char)* dest, GError** _err) c_garrow_file_system_copy_file; ///
-  bool function(GArrowFileSystem* fileSystem, const(char)* path, bool recursive, GError** _err) c_garrow_file_system_create_dir; ///
-  bool function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_delete_dir; ///
-  bool function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_delete_dir_contents; ///
-  bool function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_delete_file; ///
-  bool function(GArrowFileSystem* fileSystem, const(char*)* paths, size_t nPaths, GError** _err) c_garrow_file_system_delete_files; ///
+  gboolean function(GArrowFileSystem* fileSystem, const(char)* src, const(char)* dest, GError** _err) c_garrow_file_system_copy_file; ///
+  gboolean function(GArrowFileSystem* fileSystem, const(char)* path, gboolean recursive, GError** _err) c_garrow_file_system_create_dir; ///
+  gboolean function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_delete_dir; ///
+  gboolean function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_delete_dir_contents; ///
+  gboolean function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_delete_file; ///
+  gboolean function(GArrowFileSystem* fileSystem, const(char*)* paths, size_t nPaths, GError** _err) c_garrow_file_system_delete_files; ///
   GArrowFileInfo* function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_get_file_info; ///
   GList* function(GArrowFileSystem* fileSystem, const(char*)* paths, size_t nPaths, GError** _err) c_garrow_file_system_get_file_infos_paths; ///
   GList* function(GArrowFileSystem* fileSystem, GArrowFileSelector* fileSelector, GError** _err) c_garrow_file_system_get_file_infos_selector; ///
   char* function(GArrowFileSystem* fileSystem) c_garrow_file_system_get_type_name; ///
-  bool function(GArrowFileSystem* fileSystem, const(char)* src, const(char)* dest, GError** _err) c_garrow_file_system_move; ///
+  gboolean function(GArrowFileSystem* fileSystem, const(char)* src, const(char)* dest, GError** _err) c_garrow_file_system_move; ///
   GArrowOutputStream* function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_open_append_stream; ///
   GArrowSeekableInputStream* function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_open_input_file; ///
   GArrowInputStream* function(GArrowFileSystem* fileSystem, const(char)* path, GError** _err) c_garrow_file_system_open_input_stream; ///
@@ -761,10 +761,10 @@ __gshared extern(C)
   // FixedSizeBinaryArrayBuilder
   GType function() c_garrow_fixed_size_binary_array_builder_get_type; ///
   GArrowFixedSizeBinaryArrayBuilder* function(GArrowFixedSizeBinaryDataType* dataType) c_garrow_fixed_size_binary_array_builder_new; ///
-  bool function(GArrowFixedSizeBinaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_fixed_size_binary_array_builder_append_value; ///
-  bool function(GArrowFixedSizeBinaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_fixed_size_binary_array_builder_append_value_bytes; ///
-  bool function(GArrowFixedSizeBinaryArrayBuilder* builder, GBytes** values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_fixed_size_binary_array_builder_append_values; ///
-  bool function(GArrowFixedSizeBinaryArrayBuilder* builder, GBytes* values, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_fixed_size_binary_array_builder_append_values_packed; ///
+  gboolean function(GArrowFixedSizeBinaryArrayBuilder* builder, const(ubyte)* value, int length, GError** _err) c_garrow_fixed_size_binary_array_builder_append_value; ///
+  gboolean function(GArrowFixedSizeBinaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_fixed_size_binary_array_builder_append_value_bytes; ///
+  gboolean function(GArrowFixedSizeBinaryArrayBuilder* builder, GBytes** values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_fixed_size_binary_array_builder_append_values; ///
+  gboolean function(GArrowFixedSizeBinaryArrayBuilder* builder, GBytes* values, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_fixed_size_binary_array_builder_append_values_packed; ///
 
   // FixedSizeBinaryDataType
   GType function() c_garrow_fixed_size_binary_data_type_get_type; ///
@@ -789,11 +789,11 @@ __gshared extern(C)
   // FloatArrayBuilder
   GType function() c_garrow_float_array_builder_get_type; ///
   GArrowFloatArrayBuilder* function() c_garrow_float_array_builder_new; ///
-  bool function(GArrowFloatArrayBuilder* builder, float value, GError** _err) c_garrow_float_array_builder_append; ///
-  bool function(GArrowFloatArrayBuilder* builder, GError** _err) c_garrow_float_array_builder_append_null; ///
-  bool function(GArrowFloatArrayBuilder* builder, long n, GError** _err) c_garrow_float_array_builder_append_nulls; ///
-  bool function(GArrowFloatArrayBuilder* builder, float value, GError** _err) c_garrow_float_array_builder_append_value; ///
-  bool function(GArrowFloatArrayBuilder* builder, const(float)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_float_array_builder_append_values; ///
+  gboolean function(GArrowFloatArrayBuilder* builder, float value, GError** _err) c_garrow_float_array_builder_append; ///
+  gboolean function(GArrowFloatArrayBuilder* builder, GError** _err) c_garrow_float_array_builder_append_null; ///
+  gboolean function(GArrowFloatArrayBuilder* builder, long n, GError** _err) c_garrow_float_array_builder_append_nulls; ///
+  gboolean function(GArrowFloatArrayBuilder* builder, float value, GError** _err) c_garrow_float_array_builder_append_value; ///
+  gboolean function(GArrowFloatArrayBuilder* builder, const(float)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_float_array_builder_append_values; ///
 
   // FloatDataType
   GType function() c_garrow_float_data_type_get_type; ///
@@ -811,7 +811,7 @@ __gshared extern(C)
   GType function() c_garrow_function_get_type; ///
   GList* function() c_garrow_function_all; ///
   GArrowFunction* function(const(char)* name) c_garrow_function_find; ///
-  bool function(GArrowFunction* function_, GArrowFunction* otherFunction) c_garrow_function_equal; ///
+  gboolean function(GArrowFunction* function_, GArrowFunction* otherFunction) c_garrow_function_equal; ///
   GArrowDatum* function(GArrowFunction* function_, GList* args, GArrowFunctionOptions* options, GArrowExecuteContext* context, GError** _err) c_garrow_function_execute; ///
   GArrowFunctionOptions* function(GArrowFunction* function_) c_garrow_function_get_default_options; ///
   GArrowFunctionDoc* function(GArrowFunction* function_) c_garrow_function_get_doc; ///
@@ -828,7 +828,7 @@ __gshared extern(C)
 
   // FunctionOptions
   GType function() c_garrow_function_options_get_type; ///
-  bool function(GArrowFunctionOptions* options, GArrowFunctionOptions* otherOptions) c_garrow_function_options_equal; ///
+  gboolean function(GArrowFunctionOptions* options, GArrowFunctionOptions* otherOptions) c_garrow_function_options_equal; ///
   char* function(GArrowFunctionOptions* options) c_garrow_function_options_to_string; ///
 
   // GCSFileSystem
@@ -856,8 +856,8 @@ __gshared extern(C)
   // HalfFloatArrayBuilder
   GType function() c_garrow_half_float_array_builder_get_type; ///
   GArrowHalfFloatArrayBuilder* function() c_garrow_half_float_array_builder_new; ///
-  bool function(GArrowHalfFloatArrayBuilder* builder, ushort value, GError** _err) c_garrow_half_float_array_builder_append_value; ///
-  bool function(GArrowHalfFloatArrayBuilder* builder, const(ushort)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_half_float_array_builder_append_values; ///
+  gboolean function(GArrowHalfFloatArrayBuilder* builder, ushort value, GError** _err) c_garrow_half_float_array_builder_append_value; ///
+  gboolean function(GArrowHalfFloatArrayBuilder* builder, const(ushort)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_half_float_array_builder_append_values; ///
 
   // HalfFloatDataType
   GType function() c_garrow_half_float_data_type_get_type; ///
@@ -871,8 +871,8 @@ __gshared extern(C)
   // HashJoinNodeOptions
   GType function() c_garrow_hash_join_node_options_get_type; ///
   GArrowHashJoinNodeOptions* function(GArrowJoinType type, const(char*)* leftKeys, size_t nLeftKeys, const(char*)* rightKeys, size_t nRightKeys, GError** _err) c_garrow_hash_join_node_options_new; ///
-  bool function(GArrowHashJoinNodeOptions* options, const(char*)* outputs, size_t nOutputs, GError** _err) c_garrow_hash_join_node_options_set_left_outputs; ///
-  bool function(GArrowHashJoinNodeOptions* options, const(char*)* outputs, size_t nOutputs, GError** _err) c_garrow_hash_join_node_options_set_right_outputs; ///
+  gboolean function(GArrowHashJoinNodeOptions* options, const(char*)* outputs, size_t nOutputs, GError** _err) c_garrow_hash_join_node_options_set_left_outputs; ///
+  gboolean function(GArrowHashJoinNodeOptions* options, const(char*)* outputs, size_t nOutputs, GError** _err) c_garrow_hash_join_node_options_set_right_outputs; ///
 
   // ISO8601TimestampParser
   GType function() c_garrow_iso8601_timestamp_parser_get_type; ///
@@ -884,8 +884,8 @@ __gshared extern(C)
 
   // InputStream
   GType function() c_garrow_input_stream_get_type; ///
-  bool function(GArrowInputStream* inputStream, long nBytes, GError** _err) c_garrow_input_stream_advance; ///
-  bool function(GArrowInputStream* inputStream, int alignment, GError** _err) c_garrow_input_stream_align; ///
+  gboolean function(GArrowInputStream* inputStream, long nBytes, GError** _err) c_garrow_input_stream_advance; ///
+  gboolean function(GArrowInputStream* inputStream, int alignment, GError** _err) c_garrow_input_stream_align; ///
   GArrowRecordBatch* function(GArrowInputStream* inputStream, GArrowSchema* schema, GArrowReadOptions* options, GError** _err) c_garrow_input_stream_read_record_batch; ///
   GArrowTensor* function(GArrowInputStream* inputStream, GError** _err) c_garrow_input_stream_read_tensor; ///
 
@@ -899,11 +899,11 @@ __gshared extern(C)
   // Int16ArrayBuilder
   GType function() c_garrow_int16_array_builder_get_type; ///
   GArrowInt16ArrayBuilder* function() c_garrow_int16_array_builder_new; ///
-  bool function(GArrowInt16ArrayBuilder* builder, short value, GError** _err) c_garrow_int16_array_builder_append; ///
-  bool function(GArrowInt16ArrayBuilder* builder, GError** _err) c_garrow_int16_array_builder_append_null; ///
-  bool function(GArrowInt16ArrayBuilder* builder, long n, GError** _err) c_garrow_int16_array_builder_append_nulls; ///
-  bool function(GArrowInt16ArrayBuilder* builder, short value, GError** _err) c_garrow_int16_array_builder_append_value; ///
-  bool function(GArrowInt16ArrayBuilder* builder, const(short)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_int16_array_builder_append_values; ///
+  gboolean function(GArrowInt16ArrayBuilder* builder, short value, GError** _err) c_garrow_int16_array_builder_append; ///
+  gboolean function(GArrowInt16ArrayBuilder* builder, GError** _err) c_garrow_int16_array_builder_append_null; ///
+  gboolean function(GArrowInt16ArrayBuilder* builder, long n, GError** _err) c_garrow_int16_array_builder_append_nulls; ///
+  gboolean function(GArrowInt16ArrayBuilder* builder, short value, GError** _err) c_garrow_int16_array_builder_append_value; ///
+  gboolean function(GArrowInt16ArrayBuilder* builder, const(short)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_int16_array_builder_append_values; ///
 
   // Int16DataType
   GType function() c_garrow_int16_data_type_get_type; ///
@@ -924,11 +924,11 @@ __gshared extern(C)
   // Int32ArrayBuilder
   GType function() c_garrow_int32_array_builder_get_type; ///
   GArrowInt32ArrayBuilder* function() c_garrow_int32_array_builder_new; ///
-  bool function(GArrowInt32ArrayBuilder* builder, int value, GError** _err) c_garrow_int32_array_builder_append; ///
-  bool function(GArrowInt32ArrayBuilder* builder, GError** _err) c_garrow_int32_array_builder_append_null; ///
-  bool function(GArrowInt32ArrayBuilder* builder, long n, GError** _err) c_garrow_int32_array_builder_append_nulls; ///
-  bool function(GArrowInt32ArrayBuilder* builder, int value, GError** _err) c_garrow_int32_array_builder_append_value; ///
-  bool function(GArrowInt32ArrayBuilder* builder, const(int)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_int32_array_builder_append_values; ///
+  gboolean function(GArrowInt32ArrayBuilder* builder, int value, GError** _err) c_garrow_int32_array_builder_append; ///
+  gboolean function(GArrowInt32ArrayBuilder* builder, GError** _err) c_garrow_int32_array_builder_append_null; ///
+  gboolean function(GArrowInt32ArrayBuilder* builder, long n, GError** _err) c_garrow_int32_array_builder_append_nulls; ///
+  gboolean function(GArrowInt32ArrayBuilder* builder, int value, GError** _err) c_garrow_int32_array_builder_append_value; ///
+  gboolean function(GArrowInt32ArrayBuilder* builder, const(int)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_int32_array_builder_append_values; ///
 
   // Int32DataType
   GType function() c_garrow_int32_data_type_get_type; ///
@@ -949,11 +949,11 @@ __gshared extern(C)
   // Int64ArrayBuilder
   GType function() c_garrow_int64_array_builder_get_type; ///
   GArrowInt64ArrayBuilder* function() c_garrow_int64_array_builder_new; ///
-  bool function(GArrowInt64ArrayBuilder* builder, long value, GError** _err) c_garrow_int64_array_builder_append; ///
-  bool function(GArrowInt64ArrayBuilder* builder, GError** _err) c_garrow_int64_array_builder_append_null; ///
-  bool function(GArrowInt64ArrayBuilder* builder, long n, GError** _err) c_garrow_int64_array_builder_append_nulls; ///
-  bool function(GArrowInt64ArrayBuilder* builder, long value, GError** _err) c_garrow_int64_array_builder_append_value; ///
-  bool function(GArrowInt64ArrayBuilder* builder, const(long)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_int64_array_builder_append_values; ///
+  gboolean function(GArrowInt64ArrayBuilder* builder, long value, GError** _err) c_garrow_int64_array_builder_append; ///
+  gboolean function(GArrowInt64ArrayBuilder* builder, GError** _err) c_garrow_int64_array_builder_append_null; ///
+  gboolean function(GArrowInt64ArrayBuilder* builder, long n, GError** _err) c_garrow_int64_array_builder_append_nulls; ///
+  gboolean function(GArrowInt64ArrayBuilder* builder, long value, GError** _err) c_garrow_int64_array_builder_append_value; ///
+  gboolean function(GArrowInt64ArrayBuilder* builder, const(long)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_int64_array_builder_append_values; ///
 
   // Int64DataType
   GType function() c_garrow_int64_data_type_get_type; ///
@@ -974,11 +974,11 @@ __gshared extern(C)
   // Int8ArrayBuilder
   GType function() c_garrow_int8_array_builder_get_type; ///
   GArrowInt8ArrayBuilder* function() c_garrow_int8_array_builder_new; ///
-  bool function(GArrowInt8ArrayBuilder* builder, byte value, GError** _err) c_garrow_int8_array_builder_append; ///
-  bool function(GArrowInt8ArrayBuilder* builder, GError** _err) c_garrow_int8_array_builder_append_null; ///
-  bool function(GArrowInt8ArrayBuilder* builder, long n, GError** _err) c_garrow_int8_array_builder_append_nulls; ///
-  bool function(GArrowInt8ArrayBuilder* builder, byte value, GError** _err) c_garrow_int8_array_builder_append_value; ///
-  bool function(GArrowInt8ArrayBuilder* builder, const(byte)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_int8_array_builder_append_values; ///
+  gboolean function(GArrowInt8ArrayBuilder* builder, byte value, GError** _err) c_garrow_int8_array_builder_append; ///
+  gboolean function(GArrowInt8ArrayBuilder* builder, GError** _err) c_garrow_int8_array_builder_append_null; ///
+  gboolean function(GArrowInt8ArrayBuilder* builder, long n, GError** _err) c_garrow_int8_array_builder_append_nulls; ///
+  gboolean function(GArrowInt8ArrayBuilder* builder, byte value, GError** _err) c_garrow_int8_array_builder_append_value; ///
+  gboolean function(GArrowInt8ArrayBuilder* builder, const(byte)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_int8_array_builder_append_values; ///
 
   // Int8DataType
   GType function() c_garrow_int8_data_type_get_type; ///
@@ -992,15 +992,15 @@ __gshared extern(C)
   // IntArrayBuilder
   GType function() c_garrow_int_array_builder_get_type; ///
   GArrowIntArrayBuilder* function() c_garrow_int_array_builder_new; ///
-  bool function(GArrowIntArrayBuilder* builder, long value, GError** _err) c_garrow_int_array_builder_append; ///
-  bool function(GArrowIntArrayBuilder* builder, GError** _err) c_garrow_int_array_builder_append_null; ///
-  bool function(GArrowIntArrayBuilder* builder, long n, GError** _err) c_garrow_int_array_builder_append_nulls; ///
-  bool function(GArrowIntArrayBuilder* builder, long value, GError** _err) c_garrow_int_array_builder_append_value; ///
-  bool function(GArrowIntArrayBuilder* builder, const(long)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_int_array_builder_append_values; ///
+  gboolean function(GArrowIntArrayBuilder* builder, long value, GError** _err) c_garrow_int_array_builder_append; ///
+  gboolean function(GArrowIntArrayBuilder* builder, GError** _err) c_garrow_int_array_builder_append_null; ///
+  gboolean function(GArrowIntArrayBuilder* builder, long n, GError** _err) c_garrow_int_array_builder_append_nulls; ///
+  gboolean function(GArrowIntArrayBuilder* builder, long value, GError** _err) c_garrow_int_array_builder_append_value; ///
+  gboolean function(GArrowIntArrayBuilder* builder, const(long)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_int_array_builder_append_values; ///
 
   // IntegerDataType
   GType function() c_garrow_integer_data_type_get_type; ///
-  bool function(GArrowIntegerDataType* dataType) c_garrow_integer_data_type_is_signed; ///
+  gboolean function(GArrowIntegerDataType* dataType) c_garrow_integer_data_type_is_signed; ///
 
   // IntervalDataType
   GType function() c_garrow_interval_data_type_get_type; ///
@@ -1026,11 +1026,11 @@ __gshared extern(C)
   // LargeBinaryArrayBuilder
   GType function() c_garrow_large_binary_array_builder_get_type; ///
   GArrowLargeBinaryArrayBuilder* function() c_garrow_large_binary_array_builder_new; ///
-  bool function(GArrowLargeBinaryArrayBuilder* builder, GError** _err) c_garrow_large_binary_array_builder_append_null; ///
-  bool function(GArrowLargeBinaryArrayBuilder* builder, long n, GError** _err) c_garrow_large_binary_array_builder_append_nulls; ///
-  bool function(GArrowLargeBinaryArrayBuilder* builder, const(ubyte)* value, long length, GError** _err) c_garrow_large_binary_array_builder_append_value; ///
-  bool function(GArrowLargeBinaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_large_binary_array_builder_append_value_bytes; ///
-  bool function(GArrowLargeBinaryArrayBuilder* builder, GBytes** values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_large_binary_array_builder_append_values; ///
+  gboolean function(GArrowLargeBinaryArrayBuilder* builder, GError** _err) c_garrow_large_binary_array_builder_append_null; ///
+  gboolean function(GArrowLargeBinaryArrayBuilder* builder, long n, GError** _err) c_garrow_large_binary_array_builder_append_nulls; ///
+  gboolean function(GArrowLargeBinaryArrayBuilder* builder, const(ubyte)* value, long length, GError** _err) c_garrow_large_binary_array_builder_append_value; ///
+  gboolean function(GArrowLargeBinaryArrayBuilder* builder, GBytes* value, GError** _err) c_garrow_large_binary_array_builder_append_value_bytes; ///
+  gboolean function(GArrowLargeBinaryArrayBuilder* builder, GBytes** values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_large_binary_array_builder_append_values; ///
 
   // LargeBinaryDataType
   GType function() c_garrow_large_binary_data_type_get_type; ///
@@ -1053,8 +1053,8 @@ __gshared extern(C)
   // LargeListArrayBuilder
   GType function() c_garrow_large_list_array_builder_get_type; ///
   GArrowLargeListArrayBuilder* function(GArrowLargeListDataType* dataType, GError** _err) c_garrow_large_list_array_builder_new; ///
-  bool function(GArrowLargeListArrayBuilder* builder, GError** _err) c_garrow_large_list_array_builder_append_null; ///
-  bool function(GArrowLargeListArrayBuilder* builder, GError** _err) c_garrow_large_list_array_builder_append_value; ///
+  gboolean function(GArrowLargeListArrayBuilder* builder, GError** _err) c_garrow_large_list_array_builder_append_null; ///
+  gboolean function(GArrowLargeListArrayBuilder* builder, GError** _err) c_garrow_large_list_array_builder_append_value; ///
   GArrowArrayBuilder* function(GArrowLargeListArrayBuilder* builder) c_garrow_large_list_array_builder_get_value_builder; ///
 
   // LargeListDataType
@@ -1074,9 +1074,9 @@ __gshared extern(C)
   // LargeStringArrayBuilder
   GType function() c_garrow_large_string_array_builder_get_type; ///
   GArrowLargeStringArrayBuilder* function() c_garrow_large_string_array_builder_new; ///
-  bool function(GArrowLargeStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_large_string_array_builder_append_string; ///
-  bool function(GArrowLargeStringArrayBuilder* builder, const(char)* value, long length, GError** _err) c_garrow_large_string_array_builder_append_string_len; ///
-  bool function(GArrowLargeStringArrayBuilder* builder, const(char*)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_large_string_array_builder_append_strings; ///
+  gboolean function(GArrowLargeStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_large_string_array_builder_append_string; ///
+  gboolean function(GArrowLargeStringArrayBuilder* builder, const(char)* value, long length, GError** _err) c_garrow_large_string_array_builder_append_string_len; ///
+  gboolean function(GArrowLargeStringArrayBuilder* builder, const(char*)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_large_string_array_builder_append_strings; ///
 
   // LargeStringDataType
   GType function() c_garrow_large_string_data_type_get_type; ///
@@ -1099,9 +1099,9 @@ __gshared extern(C)
   // ListArrayBuilder
   GType function() c_garrow_list_array_builder_get_type; ///
   GArrowListArrayBuilder* function(GArrowListDataType* dataType, GError** _err) c_garrow_list_array_builder_new; ///
-  bool function(GArrowListArrayBuilder* builder, GError** _err) c_garrow_list_array_builder_append; ///
-  bool function(GArrowListArrayBuilder* builder, GError** _err) c_garrow_list_array_builder_append_null; ///
-  bool function(GArrowListArrayBuilder* builder, GError** _err) c_garrow_list_array_builder_append_value; ///
+  gboolean function(GArrowListArrayBuilder* builder, GError** _err) c_garrow_list_array_builder_append; ///
+  gboolean function(GArrowListArrayBuilder* builder, GError** _err) c_garrow_list_array_builder_append_null; ///
+  gboolean function(GArrowListArrayBuilder* builder, GError** _err) c_garrow_list_array_builder_append_value; ///
   GArrowArrayBuilder* function(GArrowListArrayBuilder* builder) c_garrow_list_array_builder_get_value_builder; ///
 
   // ListDataType
@@ -1135,10 +1135,10 @@ __gshared extern(C)
   // MapArrayBuilder
   GType function() c_garrow_map_array_builder_get_type; ///
   GArrowMapArrayBuilder* function(GArrowMapDataType* dataType, GError** _err) c_garrow_map_array_builder_new; ///
-  bool function(GArrowMapArrayBuilder* builder, GError** _err) c_garrow_map_array_builder_append_null; ///
-  bool function(GArrowMapArrayBuilder* builder, long n, GError** _err) c_garrow_map_array_builder_append_nulls; ///
-  bool function(GArrowMapArrayBuilder* builder, GError** _err) c_garrow_map_array_builder_append_value; ///
-  bool function(GArrowMapArrayBuilder* builder, const(int)* offsets, long offsetsLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_map_array_builder_append_values; ///
+  gboolean function(GArrowMapArrayBuilder* builder, GError** _err) c_garrow_map_array_builder_append_null; ///
+  gboolean function(GArrowMapArrayBuilder* builder, long n, GError** _err) c_garrow_map_array_builder_append_nulls; ///
+  gboolean function(GArrowMapArrayBuilder* builder, GError** _err) c_garrow_map_array_builder_append_value; ///
+  gboolean function(GArrowMapArrayBuilder* builder, const(int)* offsets, long offsetsLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_map_array_builder_append_values; ///
   GArrowArrayBuilder* function(GArrowMapArrayBuilder* builder) c_garrow_map_array_builder_get_item_builder; ///
   GArrowArrayBuilder* function(GArrowMapArrayBuilder* builder) c_garrow_map_array_builder_get_key_builder; ///
   GArrowArrayBuilder* function(GArrowMapArrayBuilder* builder) c_garrow_map_array_builder_get_value_builder; ///
@@ -1174,7 +1174,7 @@ __gshared extern(C)
   // MonthDayNano
   GType function() c_garrow_month_day_nano_get_type; ///
   GArrowMonthDayNano* function(int month, int day, long nanosecond) c_garrow_month_day_nano_new; ///
-  bool function(GArrowMonthDayNano* monthNanoDay, GArrowMonthDayNano* otherMonthNanoDay) c_garrow_month_day_nano_equal; ///
+  gboolean function(GArrowMonthDayNano* monthNanoDay, GArrowMonthDayNano* otherMonthNanoDay) c_garrow_month_day_nano_equal; ///
 
   // MonthDayNanoIntervalArray
   GType function() c_garrow_month_day_nano_interval_array_get_type; ///
@@ -1185,8 +1185,8 @@ __gshared extern(C)
   // MonthDayNanoIntervalArrayBuilder
   GType function() c_garrow_month_day_nano_interval_array_builder_get_type; ///
   GArrowMonthDayNanoIntervalArrayBuilder* function() c_garrow_month_day_nano_interval_array_builder_new; ///
-  bool function(GArrowMonthDayNanoIntervalArrayBuilder* builder, GArrowMonthDayNano* value, GError** _err) c_garrow_month_day_nano_interval_array_builder_append_value; ///
-  bool function(GArrowMonthDayNanoIntervalArrayBuilder* builder, const(GArrowMonthDayNano*)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_month_day_nano_interval_array_builder_append_values; ///
+  gboolean function(GArrowMonthDayNanoIntervalArrayBuilder* builder, GArrowMonthDayNano* value, GError** _err) c_garrow_month_day_nano_interval_array_builder_append_value; ///
+  gboolean function(GArrowMonthDayNanoIntervalArrayBuilder* builder, const(GArrowMonthDayNano*)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_month_day_nano_interval_array_builder_append_values; ///
 
   // MonthDayNanoIntervalDataType
   GType function() c_garrow_month_day_nano_interval_data_type_get_type; ///
@@ -1206,8 +1206,8 @@ __gshared extern(C)
   // MonthIntervalArrayBuilder
   GType function() c_garrow_month_interval_array_builder_get_type; ///
   GArrowMonthIntervalArrayBuilder* function() c_garrow_month_interval_array_builder_new; ///
-  bool function(GArrowMonthIntervalArrayBuilder* builder, int value, GError** _err) c_garrow_month_interval_array_builder_append_value; ///
-  bool function(GArrowMonthIntervalArrayBuilder* builder, const(int)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_month_interval_array_builder_append_values; ///
+  gboolean function(GArrowMonthIntervalArrayBuilder* builder, int value, GError** _err) c_garrow_month_interval_array_builder_append_value; ///
+  gboolean function(GArrowMonthIntervalArrayBuilder* builder, const(int)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_month_interval_array_builder_append_values; ///
 
   // MonthIntervalDataType
   GType function() c_garrow_month_interval_data_type_get_type; ///
@@ -1222,7 +1222,7 @@ __gshared extern(C)
   GType function() c_garrow_mutable_buffer_get_type; ///
   GArrowMutableBuffer* function(ubyte* data, long size) c_garrow_mutable_buffer_new; ///
   GArrowMutableBuffer* function(GBytes* data) c_garrow_mutable_buffer_new_bytes; ///
-  bool function(GArrowMutableBuffer* buffer, long offset, const(ubyte)* data, long size, GError** _err) c_garrow_mutable_buffer_set_data; ///
+  gboolean function(GArrowMutableBuffer* buffer, long offset, const(ubyte)* data, long size, GError** _err) c_garrow_mutable_buffer_set_data; ///
   GArrowMutableBuffer* function(GArrowMutableBuffer* buffer, long offset, long size) c_garrow_mutable_buffer_slice; ///
 
   // NullArray
@@ -1232,8 +1232,8 @@ __gshared extern(C)
   // NullArrayBuilder
   GType function() c_garrow_null_array_builder_get_type; ///
   GArrowNullArrayBuilder* function() c_garrow_null_array_builder_new; ///
-  bool function(GArrowNullArrayBuilder* builder, GError** _err) c_garrow_null_array_builder_append_null; ///
-  bool function(GArrowNullArrayBuilder* builder, long n, GError** _err) c_garrow_null_array_builder_append_nulls; ///
+  gboolean function(GArrowNullArrayBuilder* builder, GError** _err) c_garrow_null_array_builder_append_null; ///
+  gboolean function(GArrowNullArrayBuilder* builder, long n, GError** _err) c_garrow_null_array_builder_append_nulls; ///
 
   // NullDataType
   GType function() c_garrow_null_data_type_get_type; ///
@@ -1252,7 +1252,7 @@ __gshared extern(C)
 
   // OutputStream
   GType function() c_garrow_output_stream_get_type; ///
-  bool function(GArrowOutputStream* stream, int alignment, GError** _err) c_garrow_output_stream_align; ///
+  gboolean function(GArrowOutputStream* stream, int alignment, GError** _err) c_garrow_output_stream_align; ///
   long function(GArrowOutputStream* stream, GArrowRecordBatch* recordBatch, GArrowWriteOptions* options, GError** _err) c_garrow_output_stream_write_record_batch; ///
   long function(GArrowOutputStream* stream, GArrowTensor* tensor, GError** _err) c_garrow_output_stream_write_tensor; ///
 
@@ -1276,7 +1276,7 @@ __gshared extern(C)
   GType function() c_garrow_rank_options_get_type; ///
   GArrowRankOptions* function() c_garrow_rank_options_new; ///
   void function(GArrowRankOptions* options, GArrowSortKey* sortKey) c_garrow_rank_options_add_sort_key; ///
-  bool function(GArrowRankOptions* options, GArrowRankOptions* otherOptions) c_garrow_rank_options_equal; ///
+  gboolean function(GArrowRankOptions* options, GArrowRankOptions* otherOptions) c_garrow_rank_options_equal; ///
   GList* function(GArrowRankOptions* options) c_garrow_rank_options_get_sort_keys; ///
   void function(GArrowRankOptions* options, GList* sortKeys) c_garrow_rank_options_set_sort_keys; ///
 
@@ -1296,9 +1296,9 @@ __gshared extern(C)
   GArrowRecordBatch* function(GArrowSchema* schema, uint nRows, GList* columns, GError** _err) c_garrow_record_batch_new; ///
   GArrowRecordBatch* function(void* cAbiArray, GArrowSchema* schema, GError** _err) c_garrow_record_batch_import; ///
   GArrowRecordBatch* function(GArrowRecordBatch* recordBatch, uint i, GArrowField* field, GArrowArray* column, GError** _err) c_garrow_record_batch_add_column; ///
-  bool function(GArrowRecordBatch* recordBatch, GArrowRecordBatch* otherRecordBatch) c_garrow_record_batch_equal; ///
-  bool function(GArrowRecordBatch* recordBatch, GArrowRecordBatch* otherRecordBatch, bool checkMetadata) c_garrow_record_batch_equal_metadata; ///
-  bool function(GArrowRecordBatch* recordBatch, void** cAbiArray, void** cAbiSchema, GError** _err) c_garrow_record_batch_export; ///
+  gboolean function(GArrowRecordBatch* recordBatch, GArrowRecordBatch* otherRecordBatch) c_garrow_record_batch_equal; ///
+  gboolean function(GArrowRecordBatch* recordBatch, GArrowRecordBatch* otherRecordBatch, gboolean checkMetadata) c_garrow_record_batch_equal_metadata; ///
+  gboolean function(GArrowRecordBatch* recordBatch, void** cAbiArray, void** cAbiSchema, GError** _err) c_garrow_record_batch_export; ///
   GArrowRecordBatch* function(GArrowRecordBatch* recordBatch, GArrowBooleanArray* filter, GArrowFilterOptions* options, GError** _err) c_garrow_record_batch_filter; ///
   GArrowArray* function(GArrowRecordBatch* recordBatch, int i) c_garrow_record_batch_get_column_data; ///
   const(char)* function(GArrowRecordBatch* recordBatch, int i) c_garrow_record_batch_get_column_name; ///
@@ -1344,7 +1344,7 @@ __gshared extern(C)
   // RecordBatchIterator
   GType function() c_garrow_record_batch_iterator_get_type; ///
   GArrowRecordBatchIterator* function(GList* recordBatches) c_garrow_record_batch_iterator_new; ///
-  bool function(GArrowRecordBatchIterator* iterator, GArrowRecordBatchIterator* otherIterator) c_garrow_record_batch_iterator_equal; ///
+  gboolean function(GArrowRecordBatchIterator* iterator, GArrowRecordBatchIterator* otherIterator) c_garrow_record_batch_iterator_equal; ///
   GArrowRecordBatch* function(GArrowRecordBatchIterator* iterator, GError** _err) c_garrow_record_batch_iterator_next; ///
   GList* function(GArrowRecordBatchIterator* iterator, GError** _err) c_garrow_record_batch_iterator_to_list; ///
 
@@ -1370,16 +1370,16 @@ __gshared extern(C)
 
   // RecordBatchWriter
   GType function() c_garrow_record_batch_writer_get_type; ///
-  bool function(GArrowRecordBatchWriter* writer, GError** _err) c_garrow_record_batch_writer_close; ///
-  bool function(GArrowRecordBatchWriter* writer) c_garrow_record_batch_writer_is_closed; ///
-  bool function(GArrowRecordBatchWriter* writer, GArrowRecordBatch* recordBatch, GError** _err) c_garrow_record_batch_writer_write_record_batch; ///
-  bool function(GArrowRecordBatchWriter* writer, GArrowTable* table, GError** _err) c_garrow_record_batch_writer_write_table; ///
+  gboolean function(GArrowRecordBatchWriter* writer, GError** _err) c_garrow_record_batch_writer_close; ///
+  gboolean function(GArrowRecordBatchWriter* writer) c_garrow_record_batch_writer_is_closed; ///
+  gboolean function(GArrowRecordBatchWriter* writer, GArrowRecordBatch* recordBatch, GError** _err) c_garrow_record_batch_writer_write_record_batch; ///
+  gboolean function(GArrowRecordBatchWriter* writer, GArrowTable* table, GError** _err) c_garrow_record_batch_writer_write_table; ///
 
   // ResizableBuffer
   GType function() c_garrow_resizable_buffer_get_type; ///
   GArrowResizableBuffer* function(long initialSize, GError** _err) c_garrow_resizable_buffer_new; ///
-  bool function(GArrowResizableBuffer* buffer, long newCapacity, GError** _err) c_garrow_resizable_buffer_reserve; ///
-  bool function(GArrowResizableBuffer* buffer, long newSize, GError** _err) c_garrow_resizable_buffer_resize; ///
+  gboolean function(GArrowResizableBuffer* buffer, long newCapacity, GError** _err) c_garrow_resizable_buffer_reserve; ///
+  gboolean function(GArrowResizableBuffer* buffer, long newSize, GError** _err) c_garrow_resizable_buffer_resize; ///
 
   // RoundOptions
   GType function() c_garrow_round_options_get_type; ///
@@ -1421,10 +1421,10 @@ __gshared extern(C)
   GType function() c_garrow_scalar_get_type; ///
   GArrowScalar* function(GArrowDataType* dataType, const(ubyte)* data, size_t size, GError** _err) c_garrow_scalar_parse; ///
   GArrowScalar* function(GArrowScalar* scalar, GArrowDataType* dataType, GArrowCastOptions* options, GError** _err) c_garrow_scalar_cast; ///
-  bool function(GArrowScalar* scalar, GArrowScalar* otherScalar) c_garrow_scalar_equal; ///
-  bool function(GArrowScalar* scalar, GArrowScalar* otherScalar, GArrowEqualOptions* options) c_garrow_scalar_equal_options; ///
+  gboolean function(GArrowScalar* scalar, GArrowScalar* otherScalar) c_garrow_scalar_equal; ///
+  gboolean function(GArrowScalar* scalar, GArrowScalar* otherScalar, GArrowEqualOptions* options) c_garrow_scalar_equal_options; ///
   GArrowDataType* function(GArrowScalar* scalar) c_garrow_scalar_get_data_type; ///
-  bool function(GArrowScalar* scalar) c_garrow_scalar_is_valid; ///
+  gboolean function(GArrowScalar* scalar) c_garrow_scalar_is_valid; ///
   char* function(GArrowScalar* scalar) c_garrow_scalar_to_string; ///
 
   // ScalarAggregateOptions
@@ -1440,25 +1440,25 @@ __gshared extern(C)
   GArrowSchema* function(GList* fields) c_garrow_schema_new; ///
   GArrowSchema* function(void* cAbiSchema, GError** _err) c_garrow_schema_import; ///
   GArrowSchema* function(GArrowSchema* schema, uint i, GArrowField* field, GError** _err) c_garrow_schema_add_field; ///
-  bool function(GArrowSchema* schema, GArrowSchema* otherSchema) c_garrow_schema_equal; ///
+  gboolean function(GArrowSchema* schema, GArrowSchema* otherSchema) c_garrow_schema_equal; ///
   void* function(GArrowSchema* schema, GError** _err) c_garrow_schema_export; ///
   GArrowField* function(GArrowSchema* schema, uint i) c_garrow_schema_get_field; ///
   GArrowField* function(GArrowSchema* schema, const(char)* name) c_garrow_schema_get_field_by_name; ///
   int function(GArrowSchema* schema, const(char)* name) c_garrow_schema_get_field_index; ///
   GList* function(GArrowSchema* schema) c_garrow_schema_get_fields; ///
   GHashTable* function(GArrowSchema* schema) c_garrow_schema_get_metadata; ///
-  bool function(GArrowSchema* schema) c_garrow_schema_has_metadata; ///
+  gboolean function(GArrowSchema* schema) c_garrow_schema_has_metadata; ///
   uint function(GArrowSchema* schema) c_garrow_schema_n_fields; ///
   GArrowSchema* function(GArrowSchema* schema, uint i, GError** _err) c_garrow_schema_remove_field; ///
   GArrowSchema* function(GArrowSchema* schema, uint i, GArrowField* field, GError** _err) c_garrow_schema_replace_field; ///
   char* function(GArrowSchema* schema) c_garrow_schema_to_string; ///
-  char* function(GArrowSchema* schema, bool showMetadata) c_garrow_schema_to_string_metadata; ///
+  char* function(GArrowSchema* schema, gboolean showMetadata) c_garrow_schema_to_string_metadata; ///
   GArrowSchema* function(GArrowSchema* schema, GHashTable* metadata) c_garrow_schema_with_metadata; ///
 
   // SeekableInputStream
   GType function() c_garrow_seekable_input_stream_get_type; ///
   ulong function(GArrowSeekableInputStream* inputStream, GError** _err) c_garrow_seekable_input_stream_get_size; ///
-  bool function(GArrowSeekableInputStream* inputStream) c_garrow_seekable_input_stream_get_support_zero_copy; ///
+  gboolean function(GArrowSeekableInputStream* inputStream) c_garrow_seekable_input_stream_get_support_zero_copy; ///
   GBytes* function(GArrowSeekableInputStream* inputStream, long nBytes, GError** _err) c_garrow_seekable_input_stream_peek; ///
   GArrowBuffer* function(GArrowSeekableInputStream* inputStream, long position, long nBytes, GError** _err) c_garrow_seekable_input_stream_read_at; ///
   GBytes* function(GArrowSeekableInputStream* inputStream, long position, long nBytes, GError** _err) c_garrow_seekable_input_stream_read_at_bytes; ///
@@ -1480,13 +1480,13 @@ __gshared extern(C)
   // SortKey
   GType function() c_garrow_sort_key_get_type; ///
   GArrowSortKey* function(const(char)* target, GArrowSortOrder order, GError** _err) c_garrow_sort_key_new; ///
-  bool function(GArrowSortKey* sortKey, GArrowSortKey* otherSortKey) c_garrow_sort_key_equal; ///
+  gboolean function(GArrowSortKey* sortKey, GArrowSortKey* otherSortKey) c_garrow_sort_key_equal; ///
 
   // SortOptions
   GType function() c_garrow_sort_options_get_type; ///
   GArrowSortOptions* function(GList* sortKeys) c_garrow_sort_options_new; ///
   void function(GArrowSortOptions* options, GArrowSortKey* sortKey) c_garrow_sort_options_add_sort_key; ///
-  bool function(GArrowSortOptions* options, GArrowSortOptions* otherOptions) c_garrow_sort_options_equal; ///
+  gboolean function(GArrowSortOptions* options, GArrowSortOptions* otherOptions) c_garrow_sort_options_equal; ///
   GList* function(GArrowSortOptions* options) c_garrow_sort_options_get_sort_keys; ///
   void function(GArrowSortOptions* options, GList* sortKeys) c_garrow_sort_options_set_sort_keys; ///
 
@@ -1520,17 +1520,17 @@ __gshared extern(C)
   // StreamDecoder
   GType function() c_garrow_stream_decoder_get_type; ///
   GArrowStreamDecoder* function(GArrowStreamListener* listener, GArrowReadOptions* options) c_garrow_stream_decoder_new; ///
-  bool function(GArrowStreamDecoder* decoder, GArrowBuffer* buffer, GError** _err) c_garrow_stream_decoder_consume_buffer; ///
-  bool function(GArrowStreamDecoder* decoder, GBytes* bytes, GError** _err) c_garrow_stream_decoder_consume_bytes; ///
+  gboolean function(GArrowStreamDecoder* decoder, GArrowBuffer* buffer, GError** _err) c_garrow_stream_decoder_consume_buffer; ///
+  gboolean function(GArrowStreamDecoder* decoder, GBytes* bytes, GError** _err) c_garrow_stream_decoder_consume_bytes; ///
   size_t function(GArrowStreamDecoder* decoder) c_garrow_stream_decoder_get_next_required_size; ///
   GArrowSchema* function(GArrowStreamDecoder* decoder) c_garrow_stream_decoder_get_schema; ///
-  bool function(GArrowStreamDecoder* decoder, GError** _err) c_garrow_stream_decoder_reset; ///
+  gboolean function(GArrowStreamDecoder* decoder, GError** _err) c_garrow_stream_decoder_reset; ///
 
   // StreamListener
   GType function() c_garrow_stream_listener_get_type; ///
-  bool function(GArrowStreamListener* listener, GError** _err) c_garrow_stream_listener_on_eos; ///
-  bool function(GArrowStreamListener* listener, GArrowRecordBatch* recordBatch, GHashTable* metadata, GError** _err) c_garrow_stream_listener_on_record_batch_decoded; ///
-  bool function(GArrowStreamListener* listener, GArrowSchema* schema, GArrowSchema* filteredSchema, GError** _err) c_garrow_stream_listener_on_schema_decoded; ///
+  gboolean function(GArrowStreamListener* listener, GError** _err) c_garrow_stream_listener_on_eos; ///
+  gboolean function(GArrowStreamListener* listener, GArrowRecordBatch* recordBatch, GHashTable* metadata, GError** _err) c_garrow_stream_listener_on_record_batch_decoded; ///
+  gboolean function(GArrowStreamListener* listener, GArrowSchema* schema, GArrowSchema* filteredSchema, GError** _err) c_garrow_stream_listener_on_schema_decoded; ///
 
   // StrftimeOptions
   GType function() c_garrow_strftime_options_get_type; ///
@@ -1544,12 +1544,12 @@ __gshared extern(C)
   // StringArrayBuilder
   GType function() c_garrow_string_array_builder_get_type; ///
   GArrowStringArrayBuilder* function() c_garrow_string_array_builder_new; ///
-  bool function(GArrowStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_array_builder_append; ///
-  bool function(GArrowStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_array_builder_append_string; ///
-  bool function(GArrowStringArrayBuilder* builder, const(char)* value, int length, GError** _err) c_garrow_string_array_builder_append_string_len; ///
-  bool function(GArrowStringArrayBuilder* builder, const(char*)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_string_array_builder_append_strings; ///
-  bool function(GArrowStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_array_builder_append_value; ///
-  bool function(GArrowStringArrayBuilder* builder, const(char*)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_string_array_builder_append_values; ///
+  gboolean function(GArrowStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_array_builder_append; ///
+  gboolean function(GArrowStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_array_builder_append_string; ///
+  gboolean function(GArrowStringArrayBuilder* builder, const(char)* value, int length, GError** _err) c_garrow_string_array_builder_append_string_len; ///
+  gboolean function(GArrowStringArrayBuilder* builder, const(char*)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_string_array_builder_append_strings; ///
+  gboolean function(GArrowStringArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_array_builder_append_value; ///
+  gboolean function(GArrowStringArrayBuilder* builder, const(char*)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_string_array_builder_append_values; ///
 
   // StringDataType
   GType function() c_garrow_string_data_type_get_type; ///
@@ -1558,13 +1558,13 @@ __gshared extern(C)
   // StringDictionaryArrayBuilder
   GType function() c_garrow_string_dictionary_array_builder_get_type; ///
   GArrowStringDictionaryArrayBuilder* function() c_garrow_string_dictionary_array_builder_new; ///
-  bool function(GArrowStringDictionaryArrayBuilder* builder, GArrowStringArray* array, GError** _err) c_garrow_string_dictionary_array_builder_append_array; ///
-  bool function(GArrowStringDictionaryArrayBuilder* builder, const(long)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_string_dictionary_array_builder_append_indices; ///
-  bool function(GArrowStringDictionaryArrayBuilder* builder, GError** _err) c_garrow_string_dictionary_array_builder_append_null; ///
-  bool function(GArrowStringDictionaryArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_dictionary_array_builder_append_string; ///
-  bool function(GArrowStringDictionaryArrayBuilder* builder, GArrowArray** outIndices, GArrowArray** outDelta, GError** _err) c_garrow_string_dictionary_array_builder_finish_delta; ///
+  gboolean function(GArrowStringDictionaryArrayBuilder* builder, GArrowStringArray* array, GError** _err) c_garrow_string_dictionary_array_builder_append_array; ///
+  gboolean function(GArrowStringDictionaryArrayBuilder* builder, const(long)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_string_dictionary_array_builder_append_indices; ///
+  gboolean function(GArrowStringDictionaryArrayBuilder* builder, GError** _err) c_garrow_string_dictionary_array_builder_append_null; ///
+  gboolean function(GArrowStringDictionaryArrayBuilder* builder, const(char)* value, GError** _err) c_garrow_string_dictionary_array_builder_append_string; ///
+  gboolean function(GArrowStringDictionaryArrayBuilder* builder, GArrowArray** outIndices, GArrowArray** outDelta, GError** _err) c_garrow_string_dictionary_array_builder_finish_delta; ///
   long function(GArrowStringDictionaryArrayBuilder* builder) c_garrow_string_dictionary_array_builder_get_dictionary_length; ///
-  bool function(GArrowStringDictionaryArrayBuilder* builder, GArrowStringArray* values, GError** _err) c_garrow_string_dictionary_array_builder_insert_memo_values; ///
+  gboolean function(GArrowStringDictionaryArrayBuilder* builder, GArrowStringArray* values, GError** _err) c_garrow_string_dictionary_array_builder_insert_memo_values; ///
   void function(GArrowStringDictionaryArrayBuilder* builder) c_garrow_string_dictionary_array_builder_reset_full; ///
 
   // StringScalar
@@ -1594,9 +1594,9 @@ __gshared extern(C)
   // StructArrayBuilder
   GType function() c_garrow_struct_array_builder_get_type; ///
   GArrowStructArrayBuilder* function(GArrowStructDataType* dataType, GError** _err) c_garrow_struct_array_builder_new; ///
-  bool function(GArrowStructArrayBuilder* builder, GError** _err) c_garrow_struct_array_builder_append; ///
-  bool function(GArrowStructArrayBuilder* builder, GError** _err) c_garrow_struct_array_builder_append_null; ///
-  bool function(GArrowStructArrayBuilder* builder, GError** _err) c_garrow_struct_array_builder_append_value; ///
+  gboolean function(GArrowStructArrayBuilder* builder, GError** _err) c_garrow_struct_array_builder_append; ///
+  gboolean function(GArrowStructArrayBuilder* builder, GError** _err) c_garrow_struct_array_builder_append_null; ///
+  gboolean function(GArrowStructArrayBuilder* builder, GError** _err) c_garrow_struct_array_builder_append_value; ///
   GArrowArrayBuilder* function(GArrowStructArrayBuilder* builder, int i) c_garrow_struct_array_builder_get_field_builder; ///
   GList* function(GArrowStructArrayBuilder* builder) c_garrow_struct_array_builder_get_field_builders; ///
 
@@ -1632,8 +1632,8 @@ __gshared extern(C)
   GArrowTable* function(GArrowTable* table, uint i, GArrowField* field, GArrowChunkedArray* chunkedArray, GError** _err) c_garrow_table_add_column; ///
   GArrowTable* function(GArrowTable* table, GError** _err) c_garrow_table_combine_chunks; ///
   GArrowTable* function(GArrowTable* table, GList* otherTables, GArrowTableConcatenateOptions* options, GError** _err) c_garrow_table_concatenate; ///
-  bool function(GArrowTable* table, GArrowTable* otherTable) c_garrow_table_equal; ///
-  bool function(GArrowTable* table, GArrowTable* otherTable, bool checkMetadata) c_garrow_table_equal_metadata; ///
+  gboolean function(GArrowTable* table, GArrowTable* otherTable) c_garrow_table_equal; ///
+  gboolean function(GArrowTable* table, GArrowTable* otherTable, gboolean checkMetadata) c_garrow_table_equal_metadata; ///
   GArrowTable* function(GArrowTable* table, GArrowBooleanArray* filter, GArrowFilterOptions* options, GError** _err) c_garrow_table_filter; ///
   GArrowTable* function(GArrowTable* table, GArrowChunkedArray* filter, GArrowFilterOptions* options, GError** _err) c_garrow_table_filter_chunked_array; ///
   GArrowChunkedArray* function(GArrowTable* table, int i) c_garrow_table_get_column_data; ///
@@ -1647,7 +1647,7 @@ __gshared extern(C)
   GArrowTable* function(GArrowTable* table, GArrowArray* indices, GArrowTakeOptions* options, GError** _err) c_garrow_table_take; ///
   GArrowTable* function(GArrowTable* table, GArrowChunkedArray* indices, GArrowTakeOptions* options, GError** _err) c_garrow_table_take_chunked_array; ///
   char* function(GArrowTable* table, GError** _err) c_garrow_table_to_string; ///
-  bool function(GArrowTable* table, GArrowOutputStream* sink, GArrowFeatherWriteProperties* properties, GError** _err) c_garrow_table_write_as_feather; ///
+  gboolean function(GArrowTable* table, GArrowOutputStream* sink, GArrowFeatherWriteProperties* properties, GError** _err) c_garrow_table_write_as_feather; ///
 
   // TableBatchReader
   GType function() c_garrow_table_batch_reader_get_type; ///
@@ -1672,7 +1672,7 @@ __gshared extern(C)
   // Tensor
   GType function() c_garrow_tensor_get_type; ///
   GArrowTensor* function(GArrowDataType* dataType, GArrowBuffer* data, long* shape, size_t nDimensions, long* strides, size_t nStrides, char** dimensionNames, size_t nDimensionNames) c_garrow_tensor_new; ///
-  bool function(GArrowTensor* tensor, GArrowTensor* otherTensor) c_garrow_tensor_equal; ///
+  gboolean function(GArrowTensor* tensor, GArrowTensor* otherTensor) c_garrow_tensor_equal; ///
   GArrowBuffer* function(GArrowTensor* tensor) c_garrow_tensor_get_buffer; ///
   const(char)* function(GArrowTensor* tensor, int i) c_garrow_tensor_get_dimension_name; ///
   int function(GArrowTensor* tensor) c_garrow_tensor_get_n_dimensions; ///
@@ -1681,10 +1681,10 @@ __gshared extern(C)
   long* function(GArrowTensor* tensor, int* nStrides) c_garrow_tensor_get_strides; ///
   GArrowDataType* function(GArrowTensor* tensor) c_garrow_tensor_get_value_data_type; ///
   GArrowType function(GArrowTensor* tensor) c_garrow_tensor_get_value_type; ///
-  bool function(GArrowTensor* tensor) c_garrow_tensor_is_column_major; ///
-  bool function(GArrowTensor* tensor) c_garrow_tensor_is_contiguous; ///
-  bool function(GArrowTensor* tensor) c_garrow_tensor_is_mutable; ///
-  bool function(GArrowTensor* tensor) c_garrow_tensor_is_row_major; ///
+  gboolean function(GArrowTensor* tensor) c_garrow_tensor_is_column_major; ///
+  gboolean function(GArrowTensor* tensor) c_garrow_tensor_is_contiguous; ///
+  gboolean function(GArrowTensor* tensor) c_garrow_tensor_is_mutable; ///
+  gboolean function(GArrowTensor* tensor) c_garrow_tensor_is_row_major; ///
 
   // Time32Array
   GType function() c_garrow_time32_array_get_type; ///
@@ -1695,11 +1695,11 @@ __gshared extern(C)
   // Time32ArrayBuilder
   GType function() c_garrow_time32_array_builder_get_type; ///
   GArrowTime32ArrayBuilder* function(GArrowTime32DataType* dataType) c_garrow_time32_array_builder_new; ///
-  bool function(GArrowTime32ArrayBuilder* builder, int value, GError** _err) c_garrow_time32_array_builder_append; ///
-  bool function(GArrowTime32ArrayBuilder* builder, GError** _err) c_garrow_time32_array_builder_append_null; ///
-  bool function(GArrowTime32ArrayBuilder* builder, long n, GError** _err) c_garrow_time32_array_builder_append_nulls; ///
-  bool function(GArrowTime32ArrayBuilder* builder, int value, GError** _err) c_garrow_time32_array_builder_append_value; ///
-  bool function(GArrowTime32ArrayBuilder* builder, const(int)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_time32_array_builder_append_values; ///
+  gboolean function(GArrowTime32ArrayBuilder* builder, int value, GError** _err) c_garrow_time32_array_builder_append; ///
+  gboolean function(GArrowTime32ArrayBuilder* builder, GError** _err) c_garrow_time32_array_builder_append_null; ///
+  gboolean function(GArrowTime32ArrayBuilder* builder, long n, GError** _err) c_garrow_time32_array_builder_append_nulls; ///
+  gboolean function(GArrowTime32ArrayBuilder* builder, int value, GError** _err) c_garrow_time32_array_builder_append_value; ///
+  gboolean function(GArrowTime32ArrayBuilder* builder, const(int)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_time32_array_builder_append_values; ///
 
   // Time32DataType
   GType function() c_garrow_time32_data_type_get_type; ///
@@ -1719,11 +1719,11 @@ __gshared extern(C)
   // Time64ArrayBuilder
   GType function() c_garrow_time64_array_builder_get_type; ///
   GArrowTime64ArrayBuilder* function(GArrowTime64DataType* dataType) c_garrow_time64_array_builder_new; ///
-  bool function(GArrowTime64ArrayBuilder* builder, long value, GError** _err) c_garrow_time64_array_builder_append; ///
-  bool function(GArrowTime64ArrayBuilder* builder, GError** _err) c_garrow_time64_array_builder_append_null; ///
-  bool function(GArrowTime64ArrayBuilder* builder, long n, GError** _err) c_garrow_time64_array_builder_append_nulls; ///
-  bool function(GArrowTime64ArrayBuilder* builder, long value, GError** _err) c_garrow_time64_array_builder_append_value; ///
-  bool function(GArrowTime64ArrayBuilder* builder, const(long)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_time64_array_builder_append_values; ///
+  gboolean function(GArrowTime64ArrayBuilder* builder, long value, GError** _err) c_garrow_time64_array_builder_append; ///
+  gboolean function(GArrowTime64ArrayBuilder* builder, GError** _err) c_garrow_time64_array_builder_append_null; ///
+  gboolean function(GArrowTime64ArrayBuilder* builder, long n, GError** _err) c_garrow_time64_array_builder_append_nulls; ///
+  gboolean function(GArrowTime64ArrayBuilder* builder, long value, GError** _err) c_garrow_time64_array_builder_append_value; ///
+  gboolean function(GArrowTime64ArrayBuilder* builder, const(long)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_time64_array_builder_append_values; ///
 
   // Time64DataType
   GType function() c_garrow_time64_data_type_get_type; ///
@@ -1747,11 +1747,11 @@ __gshared extern(C)
   // TimestampArrayBuilder
   GType function() c_garrow_timestamp_array_builder_get_type; ///
   GArrowTimestampArrayBuilder* function(GArrowTimestampDataType* dataType) c_garrow_timestamp_array_builder_new; ///
-  bool function(GArrowTimestampArrayBuilder* builder, long value, GError** _err) c_garrow_timestamp_array_builder_append; ///
-  bool function(GArrowTimestampArrayBuilder* builder, GError** _err) c_garrow_timestamp_array_builder_append_null; ///
-  bool function(GArrowTimestampArrayBuilder* builder, long n, GError** _err) c_garrow_timestamp_array_builder_append_nulls; ///
-  bool function(GArrowTimestampArrayBuilder* builder, long value, GError** _err) c_garrow_timestamp_array_builder_append_value; ///
-  bool function(GArrowTimestampArrayBuilder* builder, const(long)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_timestamp_array_builder_append_values; ///
+  gboolean function(GArrowTimestampArrayBuilder* builder, long value, GError** _err) c_garrow_timestamp_array_builder_append; ///
+  gboolean function(GArrowTimestampArrayBuilder* builder, GError** _err) c_garrow_timestamp_array_builder_append_null; ///
+  gboolean function(GArrowTimestampArrayBuilder* builder, long n, GError** _err) c_garrow_timestamp_array_builder_append_nulls; ///
+  gboolean function(GArrowTimestampArrayBuilder* builder, long value, GError** _err) c_garrow_timestamp_array_builder_append_value; ///
+  gboolean function(GArrowTimestampArrayBuilder* builder, const(long)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_timestamp_array_builder_append_values; ///
 
   // TimestampDataType
   GType function() c_garrow_timestamp_data_type_get_type; ///
@@ -1777,11 +1777,11 @@ __gshared extern(C)
   // UInt16ArrayBuilder
   GType function() c_garrow_uint16_array_builder_get_type; ///
   GArrowUInt16ArrayBuilder* function() c_garrow_uint16_array_builder_new; ///
-  bool function(GArrowUInt16ArrayBuilder* builder, ushort value, GError** _err) c_garrow_uint16_array_builder_append; ///
-  bool function(GArrowUInt16ArrayBuilder* builder, GError** _err) c_garrow_uint16_array_builder_append_null; ///
-  bool function(GArrowUInt16ArrayBuilder* builder, long n, GError** _err) c_garrow_uint16_array_builder_append_nulls; ///
-  bool function(GArrowUInt16ArrayBuilder* builder, ushort value, GError** _err) c_garrow_uint16_array_builder_append_value; ///
-  bool function(GArrowUInt16ArrayBuilder* builder, const(ushort)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_uint16_array_builder_append_values; ///
+  gboolean function(GArrowUInt16ArrayBuilder* builder, ushort value, GError** _err) c_garrow_uint16_array_builder_append; ///
+  gboolean function(GArrowUInt16ArrayBuilder* builder, GError** _err) c_garrow_uint16_array_builder_append_null; ///
+  gboolean function(GArrowUInt16ArrayBuilder* builder, long n, GError** _err) c_garrow_uint16_array_builder_append_nulls; ///
+  gboolean function(GArrowUInt16ArrayBuilder* builder, ushort value, GError** _err) c_garrow_uint16_array_builder_append_value; ///
+  gboolean function(GArrowUInt16ArrayBuilder* builder, const(ushort)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_uint16_array_builder_append_values; ///
 
   // UInt16DataType
   GType function() c_garrow_uint16_data_type_get_type; ///
@@ -1802,11 +1802,11 @@ __gshared extern(C)
   // UInt32ArrayBuilder
   GType function() c_garrow_uint32_array_builder_get_type; ///
   GArrowUInt32ArrayBuilder* function() c_garrow_uint32_array_builder_new; ///
-  bool function(GArrowUInt32ArrayBuilder* builder, uint value, GError** _err) c_garrow_uint32_array_builder_append; ///
-  bool function(GArrowUInt32ArrayBuilder* builder, GError** _err) c_garrow_uint32_array_builder_append_null; ///
-  bool function(GArrowUInt32ArrayBuilder* builder, long n, GError** _err) c_garrow_uint32_array_builder_append_nulls; ///
-  bool function(GArrowUInt32ArrayBuilder* builder, uint value, GError** _err) c_garrow_uint32_array_builder_append_value; ///
-  bool function(GArrowUInt32ArrayBuilder* builder, const(uint)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_uint32_array_builder_append_values; ///
+  gboolean function(GArrowUInt32ArrayBuilder* builder, uint value, GError** _err) c_garrow_uint32_array_builder_append; ///
+  gboolean function(GArrowUInt32ArrayBuilder* builder, GError** _err) c_garrow_uint32_array_builder_append_null; ///
+  gboolean function(GArrowUInt32ArrayBuilder* builder, long n, GError** _err) c_garrow_uint32_array_builder_append_nulls; ///
+  gboolean function(GArrowUInt32ArrayBuilder* builder, uint value, GError** _err) c_garrow_uint32_array_builder_append_value; ///
+  gboolean function(GArrowUInt32ArrayBuilder* builder, const(uint)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_uint32_array_builder_append_values; ///
 
   // UInt32DataType
   GType function() c_garrow_uint32_data_type_get_type; ///
@@ -1827,11 +1827,11 @@ __gshared extern(C)
   // UInt64ArrayBuilder
   GType function() c_garrow_uint64_array_builder_get_type; ///
   GArrowUInt64ArrayBuilder* function() c_garrow_uint64_array_builder_new; ///
-  bool function(GArrowUInt64ArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint64_array_builder_append; ///
-  bool function(GArrowUInt64ArrayBuilder* builder, GError** _err) c_garrow_uint64_array_builder_append_null; ///
-  bool function(GArrowUInt64ArrayBuilder* builder, long n, GError** _err) c_garrow_uint64_array_builder_append_nulls; ///
-  bool function(GArrowUInt64ArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint64_array_builder_append_value; ///
-  bool function(GArrowUInt64ArrayBuilder* builder, const(ulong)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_uint64_array_builder_append_values; ///
+  gboolean function(GArrowUInt64ArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint64_array_builder_append; ///
+  gboolean function(GArrowUInt64ArrayBuilder* builder, GError** _err) c_garrow_uint64_array_builder_append_null; ///
+  gboolean function(GArrowUInt64ArrayBuilder* builder, long n, GError** _err) c_garrow_uint64_array_builder_append_nulls; ///
+  gboolean function(GArrowUInt64ArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint64_array_builder_append_value; ///
+  gboolean function(GArrowUInt64ArrayBuilder* builder, const(ulong)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_uint64_array_builder_append_values; ///
 
   // UInt64DataType
   GType function() c_garrow_uint64_data_type_get_type; ///
@@ -1852,11 +1852,11 @@ __gshared extern(C)
   // UInt8ArrayBuilder
   GType function() c_garrow_uint8_array_builder_get_type; ///
   GArrowUInt8ArrayBuilder* function() c_garrow_uint8_array_builder_new; ///
-  bool function(GArrowUInt8ArrayBuilder* builder, ubyte value, GError** _err) c_garrow_uint8_array_builder_append; ///
-  bool function(GArrowUInt8ArrayBuilder* builder, GError** _err) c_garrow_uint8_array_builder_append_null; ///
-  bool function(GArrowUInt8ArrayBuilder* builder, long n, GError** _err) c_garrow_uint8_array_builder_append_nulls; ///
-  bool function(GArrowUInt8ArrayBuilder* builder, ubyte value, GError** _err) c_garrow_uint8_array_builder_append_value; ///
-  bool function(GArrowUInt8ArrayBuilder* builder, const(ubyte)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_uint8_array_builder_append_values; ///
+  gboolean function(GArrowUInt8ArrayBuilder* builder, ubyte value, GError** _err) c_garrow_uint8_array_builder_append; ///
+  gboolean function(GArrowUInt8ArrayBuilder* builder, GError** _err) c_garrow_uint8_array_builder_append_null; ///
+  gboolean function(GArrowUInt8ArrayBuilder* builder, long n, GError** _err) c_garrow_uint8_array_builder_append_nulls; ///
+  gboolean function(GArrowUInt8ArrayBuilder* builder, ubyte value, GError** _err) c_garrow_uint8_array_builder_append_value; ///
+  gboolean function(GArrowUInt8ArrayBuilder* builder, const(ubyte)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_uint8_array_builder_append_values; ///
 
   // UInt8DataType
   GType function() c_garrow_uint8_data_type_get_type; ///
@@ -1870,11 +1870,11 @@ __gshared extern(C)
   // UIntArrayBuilder
   GType function() c_garrow_uint_array_builder_get_type; ///
   GArrowUIntArrayBuilder* function() c_garrow_uint_array_builder_new; ///
-  bool function(GArrowUIntArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint_array_builder_append; ///
-  bool function(GArrowUIntArrayBuilder* builder, GError** _err) c_garrow_uint_array_builder_append_null; ///
-  bool function(GArrowUIntArrayBuilder* builder, long n, GError** _err) c_garrow_uint_array_builder_append_nulls; ///
-  bool function(GArrowUIntArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint_array_builder_append_value; ///
-  bool function(GArrowUIntArrayBuilder* builder, const(ulong)* values, long valuesLength, const(bool)* isValids, long isValidsLength, GError** _err) c_garrow_uint_array_builder_append_values; ///
+  gboolean function(GArrowUIntArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint_array_builder_append; ///
+  gboolean function(GArrowUIntArrayBuilder* builder, GError** _err) c_garrow_uint_array_builder_append_null; ///
+  gboolean function(GArrowUIntArrayBuilder* builder, long n, GError** _err) c_garrow_uint_array_builder_append_nulls; ///
+  gboolean function(GArrowUIntArrayBuilder* builder, ulong value, GError** _err) c_garrow_uint_array_builder_append_value; ///
+  gboolean function(GArrowUIntArrayBuilder* builder, const(ulong)* values, long valuesLength, const(gboolean)* isValids, long isValidsLength, GError** _err) c_garrow_uint_array_builder_append_values; ///
 
   // UTF8NormalizeOptions
   GType function() c_garrow_utf8_normalize_options_get_type; ///
@@ -1889,7 +1889,7 @@ __gshared extern(C)
   // UnionArrayBuilder
   GType function() c_garrow_union_array_builder_get_type; ///
   byte function(GArrowUnionArrayBuilder* builder, GArrowArrayBuilder* child, const(char)* fieldName) c_garrow_union_array_builder_append_child; ///
-  bool function(GArrowUnionArrayBuilder* builder, byte value, GError** _err) c_garrow_union_array_builder_append_value; ///
+  gboolean function(GArrowUnionArrayBuilder* builder, byte value, GError** _err) c_garrow_union_array_builder_append_value; ///
 
   // UnionDataType
   GType function() c_garrow_union_data_type_get_type; ///
@@ -1909,21 +1909,21 @@ __gshared extern(C)
 
   // Writable
   GType function() c_garrow_writable_get_type; ///
-  bool function(GArrowWritable* writable, GError** _err) c_garrow_writable_flush; ///
-  bool function(GArrowWritable* writable, const(ubyte)* data, long nBytes, GError** _err) c_garrow_writable_write; ///
+  gboolean function(GArrowWritable* writable, GError** _err) c_garrow_writable_flush; ///
+  gboolean function(GArrowWritable* writable, const(ubyte)* data, long nBytes, GError** _err) c_garrow_writable_write; ///
 
   // WritableFile
   GType function() c_garrow_writable_file_get_type; ///
-  bool function(GArrowWritableFile* writableFile, long position, const(ubyte)* data, long nBytes, GError** _err) c_garrow_writable_file_write_at; ///
+  gboolean function(GArrowWritableFile* writableFile, long position, const(ubyte)* data, long nBytes, GError** _err) c_garrow_writable_file_write_at; ///
 
   // WriteOptions
   GType function() c_garrow_write_options_get_type; ///
   GArrowWriteOptions* function() c_garrow_write_options_new; ///
 
   // global
-  bool function(GError** _err) c_garrow_s3_finalize; ///
-  bool function(GArrowS3GlobalOptions* options, GError** _err) c_garrow_s3_initialize; ///
-  bool function() c_garrow_s3_is_enabled; ///
+  gboolean function(GError** _err) c_garrow_s3_finalize; ///
+  gboolean function(GArrowS3GlobalOptions* options, GError** _err) c_garrow_s3_initialize; ///
+  gboolean function() c_garrow_s3_is_enabled; ///
 
   // Error
   GQuark function() c_garrow_error_quark; ///

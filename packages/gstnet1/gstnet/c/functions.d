@@ -34,7 +34,7 @@ __gshared extern(C)
   GstNetTimePacket* function(const(ubyte)* buffer) c_gst_net_time_packet_new; ///
   GstNetTimePacket* function(const(GstNetTimePacket)* packet) c_gst_net_time_packet_copy; ///
   void function(GstNetTimePacket* packet) c_gst_net_time_packet_free; ///
-  bool function(const(GstNetTimePacket)* packet, GSocket* socket, GSocketAddress* destAddress, GError** _err) c_gst_net_time_packet_send; ///
+  gboolean function(const(GstNetTimePacket)* packet, GSocket* socket, GSocketAddress* destAddress, GError** _err) c_gst_net_time_packet_send; ///
   ubyte* function(const(GstNetTimePacket)* packet) c_gst_net_time_packet_serialize; ///
   GstNetTimePacket* function(GSocket* socket, GSocketAddress** srcAddress, GError** _err) c_gst_net_time_packet_receive; ///
 
@@ -56,12 +56,12 @@ __gshared extern(C)
   GstNetAddressMeta* function(GstBuffer* buffer) c_gst_buffer_get_net_address_meta; ///
   GType function() c_gst_net_address_meta_api_get_type; ///
   GType function() c_gst_net_control_message_meta_api_get_type; ///
-  bool function(GSocket* socket, int qosDscp) c_gst_net_utils_set_socket_tos; ///
+  gboolean function(GSocket* socket, int qosDscp) c_gst_net_utils_set_socket_tos; ///
   void function() c_gst_ptp_deinit; ///
-  bool function(ulong clockId, char** interfaces) c_gst_ptp_init; ///
-  bool function(const(GstStructure)* config) c_gst_ptp_init_full; ///
-  bool function() c_gst_ptp_is_initialized; ///
-  bool function() c_gst_ptp_is_supported; ///
+  gboolean function(ulong clockId, char** interfaces) c_gst_ptp_init; ///
+  gboolean function(const(GstStructure)* config) c_gst_ptp_init_full; ///
+  gboolean function() c_gst_ptp_is_initialized; ///
+  gboolean function() c_gst_ptp_is_supported; ///
   gulong function(GstPtpStatisticsCallback callback, void* userData, GDestroyNotify destroyData) c_gst_ptp_statistics_callback_add; ///
   void function(gulong id) c_gst_ptp_statistics_callback_remove; ///
 }

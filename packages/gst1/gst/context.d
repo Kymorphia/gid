@@ -126,7 +126,7 @@ class Context : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
-    _retval = gst_context_has_context_type(cast(const(GstContext)*)this._cPtr, _contextType);
+    _retval = cast(bool)gst_context_has_context_type(cast(const(GstContext)*)this._cPtr, _contextType);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Context : gobject.boxed.Boxed
   bool isPersistent()
   {
     bool _retval;
-    _retval = gst_context_is_persistent(cast(const(GstContext)*)this._cPtr);
+    _retval = cast(bool)gst_context_is_persistent(cast(const(GstContext)*)this._cPtr);
     return _retval;
   }
 

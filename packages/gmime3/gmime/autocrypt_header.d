@@ -183,7 +183,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
   bool isComplete()
   {
     bool _retval;
-    _retval = g_mime_autocrypt_header_is_complete(cast(GMimeAutocryptHeader*)this._cPtr);
+    _retval = cast(bool)g_mime_autocrypt_header_is_complete(cast(GMimeAutocryptHeader*)this._cPtr);
     return _retval;
   }
 

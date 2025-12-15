@@ -81,7 +81,7 @@ class Sphere : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
-    _retval = graphene_sphere_contains_point(cast(const(graphene_sphere_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_sphere_contains_point(cast(const(graphene_sphere_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Sphere : gobject.boxed.Boxed
   bool equal(graphene.sphere.Sphere b)
   {
     bool _retval;
-    _retval = graphene_sphere_equal(cast(const(graphene_sphere_t)*)this._cPtr, b ? cast(const(graphene_sphere_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_sphere_equal(cast(const(graphene_sphere_t)*)this._cPtr, b ? cast(const(graphene_sphere_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Sphere : gobject.boxed.Boxed
   bool isEmpty()
   {
     bool _retval;
-    _retval = graphene_sphere_is_empty(cast(const(graphene_sphere_t)*)this._cPtr);
+    _retval = cast(bool)graphene_sphere_is_empty(cast(const(graphene_sphere_t)*)this._cPtr);
     return _retval;
   }
 

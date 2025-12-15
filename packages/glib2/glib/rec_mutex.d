@@ -112,7 +112,7 @@ class RecMutex
   bool trylock()
   {
     bool _retval;
-    _retval = g_rec_mutex_trylock(cast(GRecMutex*)this._cPtr);
+    _retval = cast(bool)g_rec_mutex_trylock(cast(GRecMutex*)this._cPtr);
     return _retval;
   }
 

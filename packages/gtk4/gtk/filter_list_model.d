@@ -178,7 +178,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   bool getIncremental()
   {
     bool _retval;
-    _retval = gtk_filter_list_model_get_incremental(cast(GtkFilterListModel*)this._cPtr);
+    _retval = cast(bool)gtk_filter_list_model_get_incremental(cast(GtkFilterListModel*)this._cPtr);
     return _retval;
   }
 

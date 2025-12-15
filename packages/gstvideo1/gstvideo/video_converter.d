@@ -111,7 +111,7 @@ class VideoConverter
   bool setConfig(gst.structure.Structure config)
   {
     bool _retval;
-    _retval = gst_video_converter_set_config(cast(GstVideoConverter*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_video_converter_set_config(cast(GstVideoConverter*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
     return _retval;
   }
 }

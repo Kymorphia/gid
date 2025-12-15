@@ -430,7 +430,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   bool isSame(gio.tls_certificate.TlsCertificate certTwo)
   {
     bool _retval;
-    _retval = g_tls_certificate_is_same(cast(GTlsCertificate*)this._cPtr, certTwo ? cast(GTlsCertificate*)certTwo._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_tls_certificate_is_same(cast(GTlsCertificate*)this._cPtr, certTwo ? cast(GTlsCertificate*)certTwo._cPtr(No.Dup) : null);
     return _retval;
   }
 

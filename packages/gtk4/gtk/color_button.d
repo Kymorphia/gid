@@ -178,7 +178,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_color_button_get_modal(cast(GtkColorButton*)this._cPtr);
+    _retval = cast(bool)gtk_color_button_get_modal(cast(GtkColorButton*)this._cPtr);
     return _retval;
   }
 

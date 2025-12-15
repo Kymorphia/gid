@@ -115,7 +115,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_toggle_tool_button_get_active(cast(GtkToggleToolButton*)this._cPtr);
+    _retval = cast(bool)gtk_toggle_tool_button_get_active(cast(GtkToggleToolButton*)this._cPtr);
     return _retval;
   }
 

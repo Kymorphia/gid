@@ -425,7 +425,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasDay()
   {
     bool _retval;
-    _retval = gst_date_time_has_day(cast(const(GstDateTime)*)this._cPtr);
+    _retval = cast(bool)gst_date_time_has_day(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -433,7 +433,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasMonth()
   {
     bool _retval;
-    _retval = gst_date_time_has_month(cast(const(GstDateTime)*)this._cPtr);
+    _retval = cast(bool)gst_date_time_has_month(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -441,7 +441,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasSecond()
   {
     bool _retval;
-    _retval = gst_date_time_has_second(cast(const(GstDateTime)*)this._cPtr);
+    _retval = cast(bool)gst_date_time_has_second(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -449,7 +449,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasTime()
   {
     bool _retval;
-    _retval = gst_date_time_has_time(cast(const(GstDateTime)*)this._cPtr);
+    _retval = cast(bool)gst_date_time_has_time(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -457,7 +457,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasYear()
   {
     bool _retval;
-    _retval = gst_date_time_has_year(cast(const(GstDateTime)*)this._cPtr);
+    _retval = cast(bool)gst_date_time_has_year(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 

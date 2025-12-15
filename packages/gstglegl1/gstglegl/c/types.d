@@ -51,7 +51,7 @@ struct GstGLDisplayEGL
   void* display;
 
   /** */
-  bool foreignDisplay;
+  gboolean foreignDisplay;
 
   /** */
   void*[4] Padding;

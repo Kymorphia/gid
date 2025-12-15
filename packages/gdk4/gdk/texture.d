@@ -257,7 +257,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
-    _retval = gdk_texture_save_to_png(cast(GdkTexture*)this._cPtr, _filename);
+    _retval = cast(bool)gdk_texture_save_to_png(cast(GdkTexture*)this._cPtr, _filename);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
-    _retval = gdk_texture_save_to_tiff(cast(GdkTexture*)this._cPtr, _filename);
+    _retval = cast(bool)gdk_texture_save_to_tiff(cast(GdkTexture*)this._cPtr, _filename);
     return _retval;
   }
 

@@ -42,7 +42,7 @@ class RowGroupMetadata : gobject.object.ObjectWrap
   bool canDecompress()
   {
     bool _retval;
-    _retval = gparquet_row_group_metadata_can_decompress(cast(GParquetRowGroupMetadata*)this._cPtr);
+    _retval = cast(bool)gparquet_row_group_metadata_can_decompress(cast(GParquetRowGroupMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class RowGroupMetadata : gobject.object.ObjectWrap
   bool equal(parquet.row_group_metadata.RowGroupMetadata otherMetadata)
   {
     bool _retval;
-    _retval = gparquet_row_group_metadata_equal(cast(GParquetRowGroupMetadata*)this._cPtr, otherMetadata ? cast(GParquetRowGroupMetadata*)otherMetadata._cPtr(No.Dup) : null);
+    _retval = cast(bool)gparquet_row_group_metadata_equal(cast(GParquetRowGroupMetadata*)this._cPtr, otherMetadata ? cast(GParquetRowGroupMetadata*)otherMetadata._cPtr(No.Dup) : null);
     return _retval;
   }
 

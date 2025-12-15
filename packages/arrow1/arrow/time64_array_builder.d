@@ -51,7 +51,7 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_time64_array_builder_append(cast(GArrowTime64ArrayBuilder*)this._cPtr, value, &_err);
+    _retval = cast(bool)garrow_time64_array_builder_append(cast(GArrowTime64ArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -62,7 +62,7 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_time64_array_builder_append_value(cast(GArrowTime64ArrayBuilder*)this._cPtr, value, &_err);
+    _retval = cast(bool)garrow_time64_array_builder_append_value(cast(GArrowTime64ArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -94,9 +94,9 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(bool)*)isValids.ptr;
+    auto _isValids = cast(const(gboolean)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_time64_array_builder_append_values(cast(GArrowTime64ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = cast(bool)garrow_time64_array_builder_append_values(cast(GArrowTime64ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

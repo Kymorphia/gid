@@ -197,7 +197,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_box_layout_get_homogeneous(cast(GtkBoxLayout*)this._cPtr);
+    _retval = cast(bool)gtk_box_layout_get_homogeneous(cast(GtkBoxLayout*)this._cPtr);
     return _retval;
   }
 

@@ -169,7 +169,7 @@ class RWLock
   bool readerTrylock()
   {
     bool _retval;
-    _retval = g_rw_lock_reader_trylock(cast(GRWLock*)this._cPtr);
+    _retval = cast(bool)g_rw_lock_reader_trylock(cast(GRWLock*)this._cPtr);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class RWLock
   bool writerTrylock()
   {
     bool _retval;
-    _retval = g_rw_lock_writer_trylock(cast(GRWLock*)this._cPtr);
+    _retval = cast(bool)g_rw_lock_writer_trylock(cast(GRWLock*)this._cPtr);
     return _retval;
   }
 

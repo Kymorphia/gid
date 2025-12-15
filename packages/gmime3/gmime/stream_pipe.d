@@ -60,7 +60,7 @@ class StreamPipe : gmime.stream.Stream
   bool getOwner()
   {
     bool _retval;
-    _retval = g_mime_stream_pipe_get_owner(cast(GMimeStreamPipe*)this._cPtr);
+    _retval = cast(bool)g_mime_stream_pipe_get_owner(cast(GMimeStreamPipe*)this._cPtr);
     return _retval;
   }
 

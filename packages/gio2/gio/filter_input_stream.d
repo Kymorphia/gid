@@ -81,7 +81,7 @@ class FilterInputStream : gio.input_stream.InputStream
   bool getCloseBaseStream()
   {
     bool _retval;
-    _retval = g_filter_input_stream_get_close_base_stream(cast(GFilterInputStream*)this._cPtr);
+    _retval = cast(bool)g_filter_input_stream_get_close_base_stream(cast(GFilterInputStream*)this._cPtr);
     return _retval;
   }
 

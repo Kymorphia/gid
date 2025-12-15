@@ -22,7 +22,7 @@ bool sdpAddressIsMulticast(string nettype, string addrtype, string addr)
   const(char)* _nettype = nettype.toCString(No.Alloc);
   const(char)* _addrtype = addrtype.toCString(No.Alloc);
   const(char)* _addr = addr.toCString(No.Alloc);
-  _retval = gst_sdp_address_is_multicast(_nettype, _addrtype, _addr);
+  _retval = cast(bool)gst_sdp_address_is_multicast(_nettype, _addrtype, _addr);
   return _retval;
 }
 

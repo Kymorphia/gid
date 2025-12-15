@@ -18,27 +18,27 @@ __gshared extern(C)
 {
   // AppSink
   GType function() c_gst_app_sink_get_type; ///
-  bool function(GstAppSink* appsink) c_gst_app_sink_get_buffer_list_support; ///
+  gboolean function(GstAppSink* appsink) c_gst_app_sink_get_buffer_list_support; ///
   GstCaps* function(GstAppSink* appsink) c_gst_app_sink_get_caps; ///
-  bool function(GstAppSink* appsink) c_gst_app_sink_get_drop; ///
-  bool function(GstAppSink* appsink) c_gst_app_sink_get_emit_signals; ///
+  gboolean function(GstAppSink* appsink) c_gst_app_sink_get_drop; ///
+  gboolean function(GstAppSink* appsink) c_gst_app_sink_get_emit_signals; ///
   uint function(GstAppSink* appsink) c_gst_app_sink_get_max_buffers; ///
   ulong function(GstAppSink* appsink) c_gst_app_sink_get_max_bytes; ///
   GstClockTime function(GstAppSink* appsink) c_gst_app_sink_get_max_time; ///
-  bool function(GstAppSink* appsink) c_gst_app_sink_get_wait_on_eos; ///
-  bool function(GstAppSink* appsink) c_gst_app_sink_is_eos; ///
+  gboolean function(GstAppSink* appsink) c_gst_app_sink_get_wait_on_eos; ///
+  gboolean function(GstAppSink* appsink) c_gst_app_sink_is_eos; ///
   GstMiniObject* function(GstAppSink* appsink) c_gst_app_sink_pull_object; ///
   GstSample* function(GstAppSink* appsink) c_gst_app_sink_pull_preroll; ///
   GstSample* function(GstAppSink* appsink) c_gst_app_sink_pull_sample; ///
-  void function(GstAppSink* appsink, bool enableLists) c_gst_app_sink_set_buffer_list_support; ///
+  void function(GstAppSink* appsink, gboolean enableLists) c_gst_app_sink_set_buffer_list_support; ///
   void function(GstAppSink* appsink, GstAppSinkCallbacks* callbacks, void* userData, GDestroyNotify notify) c_gst_app_sink_set_callbacks; ///
   void function(GstAppSink* appsink, const(GstCaps)* caps) c_gst_app_sink_set_caps; ///
-  void function(GstAppSink* appsink, bool drop) c_gst_app_sink_set_drop; ///
-  void function(GstAppSink* appsink, bool emit) c_gst_app_sink_set_emit_signals; ///
+  void function(GstAppSink* appsink, gboolean drop) c_gst_app_sink_set_drop; ///
+  void function(GstAppSink* appsink, gboolean emit) c_gst_app_sink_set_emit_signals; ///
   void function(GstAppSink* appsink, uint max) c_gst_app_sink_set_max_buffers; ///
   void function(GstAppSink* appsink, ulong max) c_gst_app_sink_set_max_bytes; ///
   void function(GstAppSink* appsink, GstClockTime max) c_gst_app_sink_set_max_time; ///
-  void function(GstAppSink* appsink, bool wait) c_gst_app_sink_set_wait_on_eos; ///
+  void function(GstAppSink* appsink, gboolean wait) c_gst_app_sink_set_wait_on_eos; ///
   GstMiniObject* function(GstAppSink* appsink, GstClockTime timeout) c_gst_app_sink_try_pull_object; ///
   GstSample* function(GstAppSink* appsink, GstClockTime timeout) c_gst_app_sink_try_pull_preroll; ///
   GstSample* function(GstAppSink* appsink, GstClockTime timeout) c_gst_app_sink_try_pull_sample; ///
@@ -51,7 +51,7 @@ __gshared extern(C)
   ulong function(GstAppSrc* appsrc) c_gst_app_src_get_current_level_bytes; ///
   GstClockTime function(GstAppSrc* appsrc) c_gst_app_src_get_current_level_time; ///
   GstClockTime function(GstAppSrc* appsrc) c_gst_app_src_get_duration; ///
-  bool function(GstAppSrc* appsrc) c_gst_app_src_get_emit_signals; ///
+  gboolean function(GstAppSrc* appsrc) c_gst_app_src_get_emit_signals; ///
   void function(GstAppSrc* appsrc, ulong* min, ulong* max) c_gst_app_src_get_latency; ///
   GstAppLeakyType function(GstAppSrc* appsrc) c_gst_app_src_get_leaky_type; ///
   ulong function(GstAppSrc* appsrc) c_gst_app_src_get_max_buffers; ///
@@ -65,7 +65,7 @@ __gshared extern(C)
   void function(GstAppSrc* appsrc, GstAppSrcCallbacks* callbacks, void* userData, GDestroyNotify notify) c_gst_app_src_set_callbacks; ///
   void function(GstAppSrc* appsrc, const(GstCaps)* caps) c_gst_app_src_set_caps; ///
   void function(GstAppSrc* appsrc, GstClockTime duration) c_gst_app_src_set_duration; ///
-  void function(GstAppSrc* appsrc, bool emit) c_gst_app_src_set_emit_signals; ///
+  void function(GstAppSrc* appsrc, gboolean emit) c_gst_app_src_set_emit_signals; ///
   void function(GstAppSrc* appsrc, ulong min, ulong max) c_gst_app_src_set_latency; ///
   void function(GstAppSrc* appsrc, GstAppLeakyType leaky) c_gst_app_src_set_leaky_type; ///
   void function(GstAppSrc* appsrc, ulong max) c_gst_app_src_set_max_buffers; ///

@@ -95,7 +95,7 @@ class Spinner : gtk.widget.Widget
   bool getSpinning()
   {
     bool _retval;
-    _retval = gtk_spinner_get_spinning(cast(GtkSpinner*)this._cPtr);
+    _retval = cast(bool)gtk_spinner_get_spinning(cast(GtkSpinner*)this._cPtr);
     return _retval;
   }
 

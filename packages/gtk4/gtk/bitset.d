@@ -97,7 +97,7 @@ class Bitset : gobject.boxed.Boxed
   bool add(uint value)
   {
     bool _retval;
-    _retval = gtk_bitset_add(cast(GtkBitset*)this._cPtr, value);
+    _retval = cast(bool)gtk_bitset_add(cast(GtkBitset*)this._cPtr, value);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class Bitset : gobject.boxed.Boxed
   bool contains(uint value)
   {
     bool _retval;
-    _retval = gtk_bitset_contains(cast(const(GtkBitset)*)this._cPtr, value);
+    _retval = cast(bool)gtk_bitset_contains(cast(const(GtkBitset)*)this._cPtr, value);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Bitset : gobject.boxed.Boxed
   bool equals(gtk.bitset.Bitset other)
   {
     bool _retval;
-    _retval = gtk_bitset_equals(cast(const(GtkBitset)*)this._cPtr, other ? cast(const(GtkBitset)*)other._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_bitset_equals(cast(const(GtkBitset)*)this._cPtr, other ? cast(const(GtkBitset)*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Bitset : gobject.boxed.Boxed
   bool isEmpty()
   {
     bool _retval;
-    _retval = gtk_bitset_is_empty(cast(const(GtkBitset)*)this._cPtr);
+    _retval = cast(bool)gtk_bitset_is_empty(cast(const(GtkBitset)*)this._cPtr);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class Bitset : gobject.boxed.Boxed
   bool remove(uint value)
   {
     bool _retval;
-    _retval = gtk_bitset_remove(cast(GtkBitset*)this._cPtr, value);
+    _retval = cast(bool)gtk_bitset_remove(cast(GtkBitset*)this._cPtr, value);
     return _retval;
   }
 

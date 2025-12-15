@@ -925,7 +925,7 @@ gobject.types.GType paramTypeRegisterStatic(string name, gobject.types.ParamSpec
 bool paramValueConvert(gobject.param_spec.ParamSpec pspec, gobject.value.Value srcValue, gobject.value.Value destValue, bool strictValidation)
 {
   bool _retval;
-  _retval = g_param_value_convert(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, srcValue ? cast(const(GValue)*)srcValue._cPtr(No.Dup) : null, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null, strictValidation);
+  _retval = cast(bool)g_param_value_convert(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, srcValue ? cast(const(GValue)*)srcValue._cPtr(No.Dup) : null, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null, strictValidation);
   return _retval;
 }
 
@@ -940,7 +940,7 @@ bool paramValueConvert(gobject.param_spec.ParamSpec pspec, gobject.value.Value s
 bool paramValueDefaults(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_param_value_defaults(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  _retval = cast(bool)g_param_value_defaults(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -957,7 +957,7 @@ bool paramValueDefaults(gobject.param_spec.ParamSpec pspec, gobject.value.Value 
 bool paramValueIsValid(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_param_value_is_valid(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  _retval = cast(bool)g_param_value_is_valid(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -990,7 +990,7 @@ void paramValueSetDefault(gobject.param_spec.ParamSpec pspec, gobject.value.Valu
 bool paramValueValidate(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_param_value_validate(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+  _retval = cast(bool)g_param_value_validate(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1050,7 +1050,7 @@ gobject.types.GType pointerTypeRegisterStatic(string name)
 bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
 {
   bool _retval;
-  _retval = g_signal_accumulator_first_wins(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
+  _retval = cast(bool)g_signal_accumulator_first_wins(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
   return _retval;
 }
 
@@ -1073,7 +1073,7 @@ bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobjec
 bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
 {
   bool _retval;
-  _retval = g_signal_accumulator_true_handled(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
+  _retval = cast(bool)g_signal_accumulator_true_handled(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
   return _retval;
 }
 
@@ -1090,7 +1090,7 @@ bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobj
 */
 gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.types.SignalEmissionHook hookFunc)
 {
-  extern(C) bool _hookFuncCallback(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data)
+  extern(C) gboolean _hookFuncCallback(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data)
   {
     auto _dlg = cast(gobject.types.SignalEmissionHook*)data;
     gobject.value.Value[] _paramValues;
@@ -1098,7 +1098,7 @@ gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.typ
     foreach (i; 0 .. nParamValues)
       _paramValues[i] = new gobject.value.Value(cast(GValue*)&paramValues[i], No.Take);
 
-    bool _retval = (*_dlg)(*ihint, _paramValues);
+    gboolean _retval = (*_dlg)(*ihint, _paramValues);
     return _retval;
   }
   auto _hookFuncCB = hookFunc ? &_hookFuncCallback : null;
@@ -1232,7 +1232,7 @@ gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.Signa
 bool signalHandlerIsConnected(gobject.object.ObjectWrap instance, gulong handlerId)
 {
   bool _retval;
-  _retval = g_signal_handler_is_connected(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
+  _retval = cast(bool)g_signal_handler_is_connected(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
   return _retval;
 }
 
@@ -1388,7 +1388,7 @@ uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.ty
 bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, bool mayBeBlocked)
 {
   bool _retval;
-  _retval = g_signal_has_handler_pending(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail, mayBeBlocked);
+  _retval = cast(bool)g_signal_has_handler_pending(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail, mayBeBlocked);
   return _retval;
 }
 
@@ -1408,7 +1408,7 @@ bool signalIsValidName(string name)
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = g_signal_is_valid_name(_name);
+  _retval = cast(bool)g_signal_is_valid_name(_name);
   return _retval;
 }
 
@@ -1508,11 +1508,11 @@ string signalName(uint signalId)
 */
 uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.SignalFlags signalFlags, gobject.closure.Closure classClosure, gobject.types.SignalAccumulator accumulator, gobject.types.SignalCMarshaller cMarshaller, gobject.types.GType returnType, gobject.types.GType[] paramTypes = null)
 {
-  extern(C) bool _accumulatorCallback(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data)
+  extern(C) gboolean _accumulatorCallback(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data)
   {
     auto _dlg = cast(gobject.types.SignalAccumulator*)data;
 
-    bool _retval = (*_dlg)(*ihint, returnAccu ? new gobject.value.Value(cast(void*)returnAccu, No.Take) : null, handlerReturn ? new gobject.value.Value(cast(void*)handlerReturn, No.Take) : null);
+    gboolean _retval = (*_dlg)(*ihint, returnAccu ? new gobject.value.Value(cast(void*)returnAccu, No.Take) : null, handlerReturn ? new gobject.value.Value(cast(void*)handlerReturn, No.Take) : null);
     return _retval;
   }
   auto _accumulatorCB = accumulator ? &_accumulatorCallback : null;
@@ -1577,7 +1577,7 @@ bool signalParseName(string detailedSignal, gobject.types.GType itype, out uint 
 {
   bool _retval;
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
-  _retval = g_signal_parse_name(_detailedSignal, itype, cast(uint*)&signalIdP, cast(GQuark*)&detailP, forceDetailQuark);
+  _retval = cast(bool)g_signal_parse_name(_detailedSignal, itype, cast(uint*)&signalIdP, cast(GQuark*)&detailP, forceDetailQuark);
   return _retval;
 }
 
@@ -1726,7 +1726,7 @@ int typeAddInstancePrivate(gobject.types.GType classType, size_t privateSize)
 bool typeCheckInstance(gobject.type_instance.TypeInstance instance)
 {
   bool _retval;
-  _retval = g_type_check_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
+  _retval = cast(bool)g_type_check_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
   return _retval;
 }
 
@@ -1734,7 +1734,7 @@ bool typeCheckInstance(gobject.type_instance.TypeInstance instance)
 bool typeCheckInstanceIsA(gobject.type_instance.TypeInstance instance, gobject.types.GType ifaceType)
 {
   bool _retval;
-  _retval = g_type_check_instance_is_a(instance ? cast(GTypeInstance*)instance._cPtr : null, ifaceType);
+  _retval = cast(bool)g_type_check_instance_is_a(instance ? cast(GTypeInstance*)instance._cPtr : null, ifaceType);
   return _retval;
 }
 
@@ -1742,7 +1742,7 @@ bool typeCheckInstanceIsA(gobject.type_instance.TypeInstance instance, gobject.t
 bool typeCheckInstanceIsFundamentallyA(gobject.type_instance.TypeInstance instance, gobject.types.GType fundamentalType)
 {
   bool _retval;
-  _retval = g_type_check_instance_is_fundamentally_a(instance ? cast(GTypeInstance*)instance._cPtr : null, fundamentalType);
+  _retval = cast(bool)g_type_check_instance_is_fundamentally_a(instance ? cast(GTypeInstance*)instance._cPtr : null, fundamentalType);
   return _retval;
 }
 
@@ -1750,7 +1750,7 @@ bool typeCheckInstanceIsFundamentallyA(gobject.type_instance.TypeInstance instan
 bool typeCheckIsValueType(gobject.types.GType type)
 {
   bool _retval;
-  _retval = g_type_check_is_value_type(type);
+  _retval = cast(bool)g_type_check_is_value_type(type);
   return _retval;
 }
 
@@ -1758,7 +1758,7 @@ bool typeCheckIsValueType(gobject.types.GType type)
 bool typeCheckValue(gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_type_check_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  _retval = cast(bool)g_type_check_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1766,7 +1766,7 @@ bool typeCheckValue(gobject.value.Value value)
 bool typeCheckValueHolds(gobject.value.Value value, gobject.types.GType type)
 {
   bool _retval;
-  _retval = g_type_check_value_holds(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, type);
+  _retval = cast(bool)g_type_check_value_holds(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, type);
   return _retval;
 }
 
@@ -2015,7 +2015,7 @@ gobject.types.GType[] typeInterfaces(gobject.types.GType type)
 bool typeIsA(gobject.types.GType type, gobject.types.GType isAType)
 {
   bool _retval;
-  _retval = g_type_is_a(type, isAType);
+  _retval = cast(bool)g_type_is_a(type, isAType);
   return _retval;
 }
 
@@ -2138,6 +2138,6 @@ void typeSetQdata(gobject.types.GType type, glib.types.Quark quark, void* data =
 bool typeTestFlags(gobject.types.GType type, uint flags)
 {
   bool _retval;
-  _retval = g_type_test_flags(type, flags);
+  _retval = cast(bool)g_type_test_flags(type, flags);
   return _retval;
 }

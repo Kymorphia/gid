@@ -143,7 +143,7 @@ class Vec3 : gobject.boxed.Boxed
   bool equal(graphene.vec3.Vec3 v2)
   {
     bool _retval;
-    _retval = graphene_vec3_equal(cast(const(graphene_vec3_t)*)this._cPtr, v2 ? cast(const(graphene_vec3_t)*)v2._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_vec3_equal(cast(const(graphene_vec3_t)*)this._cPtr, v2 ? cast(const(graphene_vec3_t)*)v2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class Vec3 : gobject.boxed.Boxed
   bool near(graphene.vec3.Vec3 v2, float epsilon)
   {
     bool _retval;
-    _retval = graphene_vec3_near(cast(const(graphene_vec3_t)*)this._cPtr, v2 ? cast(const(graphene_vec3_t)*)v2._cPtr(No.Dup) : null, epsilon);
+    _retval = cast(bool)graphene_vec3_near(cast(const(graphene_vec3_t)*)this._cPtr, v2 ? cast(const(graphene_vec3_t)*)v2._cPtr(No.Dup) : null, epsilon);
     return _retval;
   }
 

@@ -33,40 +33,40 @@ __gshared extern(C)
   GType function() c_panel_changes_dialog_get_type; ///
   GtkWidget* function() c_panel_changes_dialog_new; ///
   void function(PanelChangesDialog* self, PanelSaveDelegate* delegate_) c_panel_changes_dialog_add_delegate; ///
-  bool function(PanelChangesDialog* self) c_panel_changes_dialog_get_close_after_save; ///
+  gboolean function(PanelChangesDialog* self) c_panel_changes_dialog_get_close_after_save; ///
   void function(PanelChangesDialog* self, GtkWidget* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_panel_changes_dialog_run_async; ///
-  bool function(PanelChangesDialog* self, GAsyncResult* result, GError** _err) c_panel_changes_dialog_run_finish; ///
-  void function(PanelChangesDialog* self, bool closeAfterSave) c_panel_changes_dialog_set_close_after_save; ///
+  gboolean function(PanelChangesDialog* self, GAsyncResult* result, GError** _err) c_panel_changes_dialog_run_finish; ///
+  void function(PanelChangesDialog* self, gboolean closeAfterSave) c_panel_changes_dialog_set_close_after_save; ///
 
   // Dock
   GType function() c_panel_dock_get_type; ///
   GtkWidget* function() c_panel_dock_new; ///
   void function(PanelDock* self, PanelFrameCallback callback, void* userData) c_panel_dock_foreach_frame; ///
-  bool function(PanelDock* self, PanelArea area) c_panel_dock_get_can_reveal_area; ///
-  bool function(PanelDock* self) c_panel_dock_get_can_reveal_bottom; ///
-  bool function(PanelDock* self) c_panel_dock_get_can_reveal_end; ///
-  bool function(PanelDock* self) c_panel_dock_get_can_reveal_start; ///
-  bool function(PanelDock* self) c_panel_dock_get_can_reveal_top; ///
-  bool function(PanelDock* self, PanelArea area) c_panel_dock_get_reveal_area; ///
-  bool function(PanelDock* self) c_panel_dock_get_reveal_bottom; ///
-  bool function(PanelDock* self) c_panel_dock_get_reveal_end; ///
-  bool function(PanelDock* self) c_panel_dock_get_reveal_start; ///
-  bool function(PanelDock* self) c_panel_dock_get_reveal_top; ///
+  gboolean function(PanelDock* self, PanelArea area) c_panel_dock_get_can_reveal_area; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_can_reveal_bottom; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_can_reveal_end; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_can_reveal_start; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_can_reveal_top; ///
+  gboolean function(PanelDock* self, PanelArea area) c_panel_dock_get_reveal_area; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_reveal_bottom; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_reveal_end; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_reveal_start; ///
+  gboolean function(PanelDock* self) c_panel_dock_get_reveal_top; ///
   void function(PanelDock* self, GtkWidget* widget) c_panel_dock_remove; ///
   void function(PanelDock* self, int height) c_panel_dock_set_bottom_height; ///
   void function(PanelDock* self, int width) c_panel_dock_set_end_width; ///
-  void function(PanelDock* self, PanelArea area, bool reveal) c_panel_dock_set_reveal_area; ///
-  void function(PanelDock* self, bool revealBottom) c_panel_dock_set_reveal_bottom; ///
-  void function(PanelDock* self, bool revealEnd) c_panel_dock_set_reveal_end; ///
-  void function(PanelDock* self, bool revealStart) c_panel_dock_set_reveal_start; ///
-  void function(PanelDock* self, bool revealTop) c_panel_dock_set_reveal_top; ///
+  void function(PanelDock* self, PanelArea area, gboolean reveal) c_panel_dock_set_reveal_area; ///
+  void function(PanelDock* self, gboolean revealBottom) c_panel_dock_set_reveal_bottom; ///
+  void function(PanelDock* self, gboolean revealEnd) c_panel_dock_set_reveal_end; ///
+  void function(PanelDock* self, gboolean revealStart) c_panel_dock_set_reveal_start; ///
+  void function(PanelDock* self, gboolean revealTop) c_panel_dock_set_reveal_top; ///
   void function(PanelDock* self, int width) c_panel_dock_set_start_width; ///
   void function(PanelDock* self, int height) c_panel_dock_set_top_height; ///
 
   // DocumentWorkspace
   GType function() c_panel_document_workspace_get_type; ///
   GtkWidget* function() c_panel_document_workspace_new; ///
-  bool function(PanelDocumentWorkspace* self, PanelWidget* widget, PanelPosition* position) c_panel_document_workspace_add_widget; ///
+  gboolean function(PanelDocumentWorkspace* self, PanelWidget* widget, PanelPosition* position) c_panel_document_workspace_add_widget; ///
   PanelDock* function(PanelDocumentWorkspace* self) c_panel_document_workspace_get_dock; ///
   PanelGrid* function(PanelDocumentWorkspace* self) c_panel_document_workspace_get_grid; ///
   PanelStatusbar* function(PanelDocumentWorkspace* self) c_panel_document_workspace_get_statusbar; ///
@@ -78,8 +78,8 @@ __gshared extern(C)
   GtkWidget* function() c_panel_frame_new; ///
   void function(PanelFrame* self, PanelWidget* panel) c_panel_frame_add; ///
   void function(PanelFrame* self, PanelWidget* panel, PanelWidget* sibling) c_panel_frame_add_before; ///
-  bool function(PanelFrame* self) c_panel_frame_get_closeable; ///
-  bool function(PanelFrame* self) c_panel_frame_get_empty; ///
+  gboolean function(PanelFrame* self) c_panel_frame_get_closeable; ///
+  gboolean function(PanelFrame* self) c_panel_frame_get_empty; ///
   PanelFrameHeader* function(PanelFrame* self) c_panel_frame_get_header; ///
   uint function(PanelFrame* self) c_panel_frame_get_n_pages; ///
   PanelWidget* function(PanelFrame* self, uint n) c_panel_frame_get_page; ///
@@ -89,7 +89,7 @@ __gshared extern(C)
   int function(PanelFrame* self) c_panel_frame_get_requested_size; ///
   PanelWidget* function(PanelFrame* self) c_panel_frame_get_visible_child; ///
   void function(PanelFrame* self, PanelWidget* panel) c_panel_frame_remove; ///
-  void function(PanelFrame* self, PanelWidget* child, bool pinned) c_panel_frame_set_child_pinned; ///
+  void function(PanelFrame* self, PanelWidget* child, gboolean pinned) c_panel_frame_set_child_pinned; ///
   void function(PanelFrame* self, PanelFrameHeader* header) c_panel_frame_set_header; ///
   void function(PanelFrame* self, GtkWidget* placeholder) c_panel_frame_set_placeholder; ///
   void function(PanelFrame* self, int requestedSize) c_panel_frame_set_requested_size; ///
@@ -99,7 +99,7 @@ __gshared extern(C)
   GType function() c_panel_frame_header_get_type; ///
   void function(PanelFrameHeader* self, int priority, GtkWidget* child) c_panel_frame_header_add_prefix; ///
   void function(PanelFrameHeader* self, int priority, GtkWidget* child) c_panel_frame_header_add_suffix; ///
-  bool function(PanelFrameHeader* self, PanelWidget* widget) c_panel_frame_header_can_drop; ///
+  gboolean function(PanelFrameHeader* self, PanelWidget* widget) c_panel_frame_header_can_drop; ///
   PanelFrame* function(PanelFrameHeader* self) c_panel_frame_header_get_frame; ///
   void function(PanelFrameHeader* self, PanelWidget* widget) c_panel_frame_header_page_changed; ///
   void function(PanelFrameHeader* self, PanelFrame* frame) c_panel_frame_header_set_frame; ///
@@ -108,8 +108,8 @@ __gshared extern(C)
   GType function() c_panel_frame_header_bar_get_type; ///
   GtkWidget* function() c_panel_frame_header_bar_new; ///
   GtkPopoverMenu* function(PanelFrameHeaderBar* self) c_panel_frame_header_bar_get_menu_popover; ///
-  bool function(PanelFrameHeaderBar* self) c_panel_frame_header_bar_get_show_icon; ///
-  void function(PanelFrameHeaderBar* self, bool showIcon) c_panel_frame_header_bar_set_show_icon; ///
+  gboolean function(PanelFrameHeaderBar* self) c_panel_frame_header_bar_get_show_icon; ///
+  void function(PanelFrameHeaderBar* self, gboolean showIcon) c_panel_frame_header_bar_set_show_icon; ///
 
   // FrameSwitcher
   GType function() c_panel_frame_switcher_get_type; ///
@@ -118,12 +118,12 @@ __gshared extern(C)
   // FrameTabBar
   GType function() c_panel_frame_tab_bar_get_type; ///
   GtkWidget* function() c_panel_frame_tab_bar_new; ///
-  bool function(PanelFrameTabBar* self) c_panel_frame_tab_bar_get_autohide; ///
-  bool function(PanelFrameTabBar* self) c_panel_frame_tab_bar_get_expand_tabs; ///
-  bool function(PanelFrameTabBar* self) c_panel_frame_tab_bar_get_inverted; ///
-  void function(PanelFrameTabBar* self, bool autohide) c_panel_frame_tab_bar_set_autohide; ///
-  void function(PanelFrameTabBar* self, bool expandTabs) c_panel_frame_tab_bar_set_expand_tabs; ///
-  void function(PanelFrameTabBar* self, bool inverted) c_panel_frame_tab_bar_set_inverted; ///
+  gboolean function(PanelFrameTabBar* self) c_panel_frame_tab_bar_get_autohide; ///
+  gboolean function(PanelFrameTabBar* self) c_panel_frame_tab_bar_get_expand_tabs; ///
+  gboolean function(PanelFrameTabBar* self) c_panel_frame_tab_bar_get_inverted; ///
+  void function(PanelFrameTabBar* self, gboolean autohide) c_panel_frame_tab_bar_set_autohide; ///
+  void function(PanelFrameTabBar* self, gboolean expandTabs) c_panel_frame_tab_bar_set_expand_tabs; ///
+  void function(PanelFrameTabBar* self, gboolean inverted) c_panel_frame_tab_bar_set_inverted; ///
 
   // GSettingsActionGroup
   GType function() c_panel_gsettings_action_group_get_type; ///
@@ -134,7 +134,7 @@ __gshared extern(C)
   GtkWidget* function() c_panel_grid_new; ///
   void function(PanelGrid* self, PanelWidget* widget) c_panel_grid_add; ///
   void function(PanelGrid* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_panel_grid_agree_to_close_async; ///
-  bool function(PanelGrid* self, GAsyncResult* result, GError** _err) c_panel_grid_agree_to_close_finish; ///
+  gboolean function(PanelGrid* self, GAsyncResult* result, GError** _err) c_panel_grid_agree_to_close_finish; ///
   void function(PanelGrid* self, PanelFrameCallback callback, void* userData) c_panel_grid_foreach_frame; ///
   PanelGridColumn* function(PanelGrid* self, uint column) c_panel_grid_get_column; ///
   PanelGridColumn* function(PanelGrid* self) c_panel_grid_get_most_recent_column; ///
@@ -146,7 +146,7 @@ __gshared extern(C)
   GType function() c_panel_grid_column_get_type; ///
   GtkWidget* function() c_panel_grid_column_new; ///
   void function(PanelGridColumn* self, PanelFrameCallback callback, void* userData) c_panel_grid_column_foreach_frame; ///
-  bool function(PanelGridColumn* self) c_panel_grid_column_get_empty; ///
+  gboolean function(PanelGridColumn* self) c_panel_grid_column_get_empty; ///
   PanelFrame* function(PanelGridColumn* self) c_panel_grid_column_get_most_recent_frame; ///
   uint function(PanelGridColumn* self) c_panel_grid_column_get_n_rows; ///
   PanelFrame* function(PanelGridColumn* self, uint row) c_panel_grid_column_get_row; ///
@@ -161,7 +161,7 @@ __gshared extern(C)
   void function(PanelLayeredSettings* self, GSettings* settings) c_panel_layered_settings_append; ///
   void function(PanelLayeredSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags) c_panel_layered_settings_bind; ///
   void function(PanelLayeredSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) c_panel_layered_settings_bind_with_mapping; ///
-  bool function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_boolean; ///
+  gboolean function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_boolean; ///
   GVariant* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_default_value; ///
   double function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_double; ///
   int function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_int; ///
@@ -171,7 +171,7 @@ __gshared extern(C)
   GVariant* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_user_value; ///
   GVariant* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_value; ///
   char** function(PanelLayeredSettings* self) c_panel_layered_settings_list_keys; ///
-  void function(PanelLayeredSettings* self, const(char)* key, bool val) c_panel_layered_settings_set_boolean; ///
+  void function(PanelLayeredSettings* self, const(char)* key, gboolean val) c_panel_layered_settings_set_boolean; ///
   void function(PanelLayeredSettings* self, const(char)* key, double val) c_panel_layered_settings_set_double; ///
   void function(PanelLayeredSettings* self, const(char)* key, int val) c_panel_layered_settings_set_int; ///
   void function(PanelLayeredSettings* self, const(char)* key, const(char)* val) c_panel_layered_settings_set_string; ///
@@ -219,24 +219,24 @@ __gshared extern(C)
   GType function() c_panel_position_get_type; ///
   PanelPosition* function() c_panel_position_new; ///
   PanelPosition* function(GVariant* variant) c_panel_position_new_from_variant; ///
-  bool function(PanelPosition* a, PanelPosition* b) c_panel_position_equal; ///
+  gboolean function(PanelPosition* a, PanelPosition* b) c_panel_position_equal; ///
   PanelArea function(PanelPosition* self) c_panel_position_get_area; ///
-  bool function(PanelPosition* self) c_panel_position_get_area_set; ///
+  gboolean function(PanelPosition* self) c_panel_position_get_area_set; ///
   uint function(PanelPosition* self) c_panel_position_get_column; ///
-  bool function(PanelPosition* self) c_panel_position_get_column_set; ///
+  gboolean function(PanelPosition* self) c_panel_position_get_column_set; ///
   uint function(PanelPosition* self) c_panel_position_get_depth; ///
-  bool function(PanelPosition* self) c_panel_position_get_depth_set; ///
+  gboolean function(PanelPosition* self) c_panel_position_get_depth_set; ///
   uint function(PanelPosition* self) c_panel_position_get_row; ///
-  bool function(PanelPosition* self) c_panel_position_get_row_set; ///
-  bool function(PanelPosition* self) c_panel_position_is_indeterminate; ///
+  gboolean function(PanelPosition* self) c_panel_position_get_row_set; ///
+  gboolean function(PanelPosition* self) c_panel_position_is_indeterminate; ///
   void function(PanelPosition* self, PanelArea area) c_panel_position_set_area; ///
-  void function(PanelPosition* self, bool areaSet) c_panel_position_set_area_set; ///
+  void function(PanelPosition* self, gboolean areaSet) c_panel_position_set_area_set; ///
   void function(PanelPosition* self, uint column) c_panel_position_set_column; ///
-  void function(PanelPosition* self, bool columnSet) c_panel_position_set_column_set; ///
+  void function(PanelPosition* self, gboolean columnSet) c_panel_position_set_column_set; ///
   void function(PanelPosition* self, uint depth) c_panel_position_set_depth; ///
-  void function(PanelPosition* self, bool depthSet) c_panel_position_set_depth_set; ///
+  void function(PanelPosition* self, gboolean depthSet) c_panel_position_set_depth_set; ///
   void function(PanelPosition* self, uint row) c_panel_position_set_row; ///
-  void function(PanelPosition* self, bool rowSet) c_panel_position_set_row_set; ///
+  void function(PanelPosition* self, gboolean rowSet) c_panel_position_set_row_set; ///
   GVariant* function(PanelPosition* self) c_panel_position_to_variant; ///
 
   // SaveDelegate
@@ -246,15 +246,15 @@ __gshared extern(C)
   void function(PanelSaveDelegate* self) c_panel_save_delegate_discard; ///
   GIcon* function(PanelSaveDelegate* self) c_panel_save_delegate_get_icon; ///
   const(char)* function(PanelSaveDelegate* self) c_panel_save_delegate_get_icon_name; ///
-  bool function(PanelSaveDelegate* self) c_panel_save_delegate_get_is_draft; ///
+  gboolean function(PanelSaveDelegate* self) c_panel_save_delegate_get_is_draft; ///
   double function(PanelSaveDelegate* self) c_panel_save_delegate_get_progress; ///
   const(char)* function(PanelSaveDelegate* self) c_panel_save_delegate_get_subtitle; ///
   const(char)* function(PanelSaveDelegate* self) c_panel_save_delegate_get_title; ///
   void function(PanelSaveDelegate* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_panel_save_delegate_save_async; ///
-  bool function(PanelSaveDelegate* self, GAsyncResult* result, GError** _err) c_panel_save_delegate_save_finish; ///
+  gboolean function(PanelSaveDelegate* self, GAsyncResult* result, GError** _err) c_panel_save_delegate_save_finish; ///
   void function(PanelSaveDelegate* self, GIcon* icon) c_panel_save_delegate_set_icon; ///
   void function(PanelSaveDelegate* self, const(char)* icon) c_panel_save_delegate_set_icon_name; ///
-  void function(PanelSaveDelegate* self, bool isDraft) c_panel_save_delegate_set_is_draft; ///
+  void function(PanelSaveDelegate* self, gboolean isDraft) c_panel_save_delegate_set_is_draft; ///
   void function(PanelSaveDelegate* self, double progress) c_panel_save_delegate_set_progress; ///
   void function(PanelSaveDelegate* self, const(char)* subtitle) c_panel_save_delegate_set_subtitle; ///
   void function(PanelSaveDelegate* self, const(char)* title) c_panel_save_delegate_set_title; ///
@@ -263,10 +263,10 @@ __gshared extern(C)
   GType function() c_panel_save_dialog_get_type; ///
   GtkWidget* function() c_panel_save_dialog_new; ///
   void function(PanelSaveDialog* self, PanelSaveDelegate* delegate_) c_panel_save_dialog_add_delegate; ///
-  bool function(PanelSaveDialog* self) c_panel_save_dialog_get_close_after_save; ///
+  gboolean function(PanelSaveDialog* self) c_panel_save_dialog_get_close_after_save; ///
   void function(PanelSaveDialog* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_panel_save_dialog_run_async; ///
-  bool function(PanelSaveDialog* self, GAsyncResult* result, GError** _err) c_panel_save_dialog_run_finish; ///
-  void function(PanelSaveDialog* self, bool closeAfterSave) c_panel_save_dialog_set_close_after_save; ///
+  gboolean function(PanelSaveDialog* self, GAsyncResult* result, GError** _err) c_panel_save_dialog_run_finish; ///
+  void function(PanelSaveDialog* self, gboolean closeAfterSave) c_panel_save_dialog_set_close_after_save; ///
 
   // Session
   GType function() c_panel_session_get_type; ///
@@ -286,14 +286,14 @@ __gshared extern(C)
   GType function() c_panel_session_item_get_type; ///
   PanelSessionItem* function() c_panel_session_item_new; ///
   const(char)* function(PanelSessionItem* self) c_panel_session_item_get_id; ///
-  bool function(PanelSessionItem* self, const(char)* key, const(char)* format,  ...) c_panel_session_item_get_metadata; ///
+  gboolean function(PanelSessionItem* self, const(char)* key, const(char)* format,  ...) c_panel_session_item_get_metadata; ///
   GVariant* function(PanelSessionItem* self, const(char)* key, const(GVariantType)* expectedType) c_panel_session_item_get_metadata_value; ///
   const(char)* function(PanelSessionItem* self) c_panel_session_item_get_module_name; ///
   PanelPosition* function(PanelSessionItem* self) c_panel_session_item_get_position; ///
   const(char)* function(PanelSessionItem* self) c_panel_session_item_get_type_hint; ///
   const(char)* function(PanelSessionItem* self) c_panel_session_item_get_workspace; ///
-  bool function(PanelSessionItem* self, const(char)* key, const(GVariantType*)* valueType) c_panel_session_item_has_metadata; ///
-  bool function(PanelSessionItem* self, const(char)* key, const(GVariantType)* expectedType) c_panel_session_item_has_metadata_with_type; ///
+  gboolean function(PanelSessionItem* self, const(char)* key, const(GVariantType*)* valueType) c_panel_session_item_has_metadata; ///
+  gboolean function(PanelSessionItem* self, const(char)* key, const(GVariantType)* expectedType) c_panel_session_item_has_metadata_with_type; ///
   void function(PanelSessionItem* self, const(char)* id) c_panel_session_item_set_id; ///
   void function(PanelSessionItem* self, const(char)* key, const(char)* format,  ...) c_panel_session_item_set_metadata; ///
   void function(PanelSessionItem* self, const(char)* key, GVariant* value) c_panel_session_item_set_metadata_value; ///
@@ -310,7 +310,7 @@ __gshared extern(C)
   char* function(const(char)* schemaIdPrefix, const(char)* schemaId, const(char)* identifier, const(char)* pathPrefix, const(char)* pathSuffix) c_panel_settings_resolve_schema_path; ///
   void function(PanelSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags) c_panel_settings_bind; ///
   void function(PanelSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) c_panel_settings_bind_with_mapping; ///
-  bool function(PanelSettings* self, const(char)* key) c_panel_settings_get_boolean; ///
+  gboolean function(PanelSettings* self, const(char)* key) c_panel_settings_get_boolean; ///
   GVariant* function(PanelSettings* self, const(char)* key) c_panel_settings_get_default_value; ///
   double function(PanelSettings* self, const(char)* key) c_panel_settings_get_double; ///
   int function(PanelSettings* self, const(char)* key) c_panel_settings_get_int; ///
@@ -319,7 +319,7 @@ __gshared extern(C)
   uint function(PanelSettings* self, const(char)* key) c_panel_settings_get_uint; ///
   GVariant* function(PanelSettings* self, const(char)* key) c_panel_settings_get_user_value; ///
   GVariant* function(PanelSettings* self, const(char)* key) c_panel_settings_get_value; ///
-  void function(PanelSettings* self, const(char)* key, bool val) c_panel_settings_set_boolean; ///
+  void function(PanelSettings* self, const(char)* key, gboolean val) c_panel_settings_set_boolean; ///
   void function(PanelSettings* self, const(char)* key, double val) c_panel_settings_set_double; ///
   void function(PanelSettings* self, const(char)* key, int val) c_panel_settings_set_int; ///
   void function(PanelSettings* self, const(char)* key, const(char)* val) c_panel_settings_set_string; ///
@@ -347,12 +347,12 @@ __gshared extern(C)
   // Widget
   GType function() c_panel_widget_get_type; ///
   GtkWidget* function() c_panel_widget_new; ///
-  void function(PanelWidget* widget, const(char)* actionName, bool enabled) c_panel_widget_action_set_enabled; ///
+  void function(PanelWidget* widget, const(char)* actionName, gboolean enabled) c_panel_widget_action_set_enabled; ///
   void function(PanelWidget* self) c_panel_widget_close; ///
-  bool function(PanelWidget* self) c_panel_widget_focus_default; ///
+  gboolean function(PanelWidget* self) c_panel_widget_focus_default; ///
   void function(PanelWidget* self) c_panel_widget_force_close; ///
-  bool function(PanelWidget* self) c_panel_widget_get_busy; ///
-  bool function(PanelWidget* self) c_panel_widget_get_can_maximize; ///
+  gboolean function(PanelWidget* self) c_panel_widget_get_busy; ///
+  gboolean function(PanelWidget* self) c_panel_widget_get_can_maximize; ///
   GtkWidget* function(PanelWidget* self) c_panel_widget_get_child; ///
   GtkWidget* function(PanelWidget* self) c_panel_widget_get_default_focus; ///
   GIcon* function(PanelWidget* self) c_panel_widget_get_icon; ///
@@ -360,10 +360,10 @@ __gshared extern(C)
   const(char)* function(PanelWidget* self) c_panel_widget_get_id; ///
   const(char)* function(PanelWidget* self) c_panel_widget_get_kind; ///
   GMenuModel* function(PanelWidget* self) c_panel_widget_get_menu_model; ///
-  bool function(PanelWidget* self) c_panel_widget_get_modified; ///
-  bool function(PanelWidget* self) c_panel_widget_get_needs_attention; ///
+  gboolean function(PanelWidget* self) c_panel_widget_get_modified; ///
+  gboolean function(PanelWidget* self) c_panel_widget_get_needs_attention; ///
   PanelPosition* function(PanelWidget* self) c_panel_widget_get_position; ///
-  bool function(PanelWidget* self) c_panel_widget_get_reorderable; ///
+  gboolean function(PanelWidget* self) c_panel_widget_get_reorderable; ///
   PanelSaveDelegate* function(PanelWidget* self) c_panel_widget_get_save_delegate; ///
   const(char)* function(PanelWidget* self) c_panel_widget_get_title; ///
   const(char)* function(PanelWidget* self) c_panel_widget_get_tooltip; ///
@@ -371,16 +371,16 @@ __gshared extern(C)
   void function(PanelWidget* self) c_panel_widget_mark_busy; ///
   void function(PanelWidget* self) c_panel_widget_maximize; ///
   void function(PanelWidget* self) c_panel_widget_raise; ///
-  void function(PanelWidget* self, bool canMaximize) c_panel_widget_set_can_maximize; ///
+  void function(PanelWidget* self, gboolean canMaximize) c_panel_widget_set_can_maximize; ///
   void function(PanelWidget* self, GtkWidget* child) c_panel_widget_set_child; ///
   void function(PanelWidget* self, GIcon* icon) c_panel_widget_set_icon; ///
   void function(PanelWidget* self, const(char)* iconName) c_panel_widget_set_icon_name; ///
   void function(PanelWidget* self, const(char)* id) c_panel_widget_set_id; ///
   void function(PanelWidget* self, const(char)* kind) c_panel_widget_set_kind; ///
   void function(PanelWidget* self, GMenuModel* menuModel) c_panel_widget_set_menu_model; ///
-  void function(PanelWidget* self, bool modified) c_panel_widget_set_modified; ///
-  void function(PanelWidget* self, bool needsAttention) c_panel_widget_set_needs_attention; ///
-  void function(PanelWidget* self, bool reorderable) c_panel_widget_set_reorderable; ///
+  void function(PanelWidget* self, gboolean modified) c_panel_widget_set_modified; ///
+  void function(PanelWidget* self, gboolean needsAttention) c_panel_widget_set_needs_attention; ///
+  void function(PanelWidget* self, gboolean reorderable) c_panel_widget_set_reorderable; ///
   void function(PanelWidget* self, PanelSaveDelegate* saveDelegate) c_panel_widget_set_save_delegate; ///
   void function(PanelWidget* self, const(char)* title) c_panel_widget_set_title; ///
   void function(PanelWidget* self, const(char)* tooltip) c_panel_widget_set_tooltip; ///
@@ -395,7 +395,7 @@ __gshared extern(C)
   GType function() c_panel_workbench_get_type; ///
   PanelWorkbench* function() c_panel_workbench_new; ///
   PanelWorkbench* function(GtkWidget* widget) c_panel_workbench_find_from_widget; ///
-  void function(PanelWorkbench* self, const(char)* actionName, bool enabled) c_panel_workbench_action_set_enabled; ///
+  void function(PanelWorkbench* self, const(char)* actionName, gboolean enabled) c_panel_workbench_action_set_enabled; ///
   void function(PanelWorkbench* self) c_panel_workbench_activate; ///
   void function(PanelWorkbench* self, PanelWorkspace* workspace) c_panel_workbench_add_workspace; ///
   PanelWorkspace* function(PanelWorkbench* self, GType workspaceType) c_panel_workbench_find_workspace_typed; ///
@@ -412,7 +412,7 @@ __gshared extern(C)
   // Workspace
   GType function() c_panel_workspace_get_type; ///
   PanelWorkspace* function(GtkWidget* widget) c_panel_workspace_find_from_widget; ///
-  void function(PanelWorkspace* self, const(char)* actionName, bool enabled) c_panel_workspace_action_set_enabled; ///
+  void function(PanelWorkspace* self, const(char)* actionName, gboolean enabled) c_panel_workspace_action_set_enabled; ///
   const(char)* function(PanelWorkspace* self) c_panel_workspace_get_id; ///
   PanelWorkbench* function(PanelWorkspace* self) c_panel_workspace_get_workbench; ///
   PanelInhibitor* function(PanelWorkspace* self, GtkApplicationInhibitFlags flags, const(char)* reason) c_panel_workspace_inhibit; ///
@@ -423,7 +423,7 @@ __gshared extern(C)
   void function(PanelWorkspaceClass* workspaceClass, const(char)* actionName, const(char)* propertyName) c_panel_workspace_class_install_property_action; ///
 
   // global
-  bool function(uint major, uint minor, uint micro) c_panel_check_version; ///
+  gboolean function(uint major, uint minor, uint micro) c_panel_check_version; ///
   void function() c_panel_finalize; ///
   uint function() c_panel_get_major_version; ///
   uint function() c_panel_get_micro_version; ///

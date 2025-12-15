@@ -54,11 +54,11 @@ class CustomFilter : gtk.filter.Filter
   */
   this(gtk.types.CustomFilterFunc matchFunc = null)
   {
-    extern(C) bool _matchFuncCallback(GObject* item, void* userData)
+    extern(C) gboolean _matchFuncCallback(GObject* item, void* userData)
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
@@ -86,11 +86,11 @@ class CustomFilter : gtk.filter.Filter
   */
   void setFilterFunc(gtk.types.CustomFilterFunc matchFunc = null)
   {
-    extern(C) bool _matchFuncCallback(GObject* item, void* userData)
+    extern(C) gboolean _matchFuncCallback(GObject* item, void* userData)
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;

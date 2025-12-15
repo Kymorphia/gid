@@ -131,7 +131,7 @@ class GLUpload : gst.object.ObjectWrap
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {
     bool _retval;
-    _retval = gst_gl_upload_set_caps(cast(GstGLUpload*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_upload_set_caps(cast(GstGLUpload*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -165,7 +165,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   bool hasFunction()
   {
     bool _retval;
-    _retval = gst_type_find_factory_has_function(cast(GstTypeFindFactory*)this._cPtr);
+    _retval = cast(bool)gst_type_find_factory_has_function(cast(GstTypeFindFactory*)this._cPtr);
     return _retval;
   }
 }

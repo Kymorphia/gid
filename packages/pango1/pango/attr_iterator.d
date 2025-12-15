@@ -149,7 +149,7 @@ class AttrIterator : gobject.boxed.Boxed
   bool next()
   {
     bool _retval;
-    _retval = pango_attr_iterator_next(cast(PangoAttrIterator*)this._cPtr);
+    _retval = cast(bool)pango_attr_iterator_next(cast(PangoAttrIterator*)this._cPtr);
     return _retval;
   }
 

@@ -214,7 +214,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   bool getShowMenubar()
   {
     bool _retval;
-    _retval = gtk_application_window_get_show_menubar(cast(GtkApplicationWindow*)this._cPtr);
+    _retval = cast(bool)gtk_application_window_get_show_menubar(cast(GtkApplicationWindow*)this._cPtr);
     return _retval;
   }
 

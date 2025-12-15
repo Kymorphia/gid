@@ -43,7 +43,7 @@ class GrabBrokenEvent : gdk.event.Event
   bool getImplicit()
   {
     bool _retval;
-    _retval = gdk_grab_broken_event_get_implicit(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_grab_broken_event_get_implicit(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

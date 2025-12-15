@@ -105,7 +105,7 @@ class MonthDayNano : gobject.object.ObjectWrap
   bool equal(arrow.month_day_nano.MonthDayNano otherMonthNanoDay)
   {
     bool _retval;
-    _retval = garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)this._cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)this._cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay._cPtr(No.Dup) : null);
     return _retval;
   }
 }

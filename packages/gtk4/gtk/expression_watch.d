@@ -62,7 +62,7 @@ class ExpressionWatch : gobject.boxed.Boxed
   bool evaluate(gobject.value.Value value)
   {
     bool _retval;
-    _retval = gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 

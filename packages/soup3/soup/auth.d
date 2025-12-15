@@ -142,7 +142,7 @@ class Auth : gobject.object.ObjectWrap
   bool canAuthenticate()
   {
     bool _retval;
-    _retval = soup_auth_can_authenticate(cast(SoupAuth*)this._cPtr);
+    _retval = cast(bool)soup_auth_can_authenticate(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Auth : gobject.object.ObjectWrap
   bool isAuthenticated()
   {
     bool _retval;
-    _retval = soup_auth_is_authenticated(cast(SoupAuth*)this._cPtr);
+    _retval = cast(bool)soup_auth_is_authenticated(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Auth : gobject.object.ObjectWrap
   bool isCancelled()
   {
     bool _retval;
-    _retval = soup_auth_is_cancelled(cast(SoupAuth*)this._cPtr);
+    _retval = cast(bool)soup_auth_is_cancelled(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class Auth : gobject.object.ObjectWrap
   bool isForProxy()
   {
     bool _retval;
-    _retval = soup_auth_is_for_proxy(cast(SoupAuth*)this._cPtr);
+    _retval = cast(bool)soup_auth_is_for_proxy(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Auth : gobject.object.ObjectWrap
   bool isReady(soup.message.Message msg)
   {
     bool _retval;
-    _retval = soup_auth_is_ready(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
+    _retval = cast(bool)soup_auth_is_ready(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -324,7 +324,7 @@ class Auth : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _authHeader = authHeader.toCString(No.Alloc);
-    _retval = soup_auth_update(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _authHeader);
+    _retval = cast(bool)soup_auth_update(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _authHeader);
     return _retval;
   }
 }

@@ -71,7 +71,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   bool advance(glib.time_val.TimeVal currentTime = null)
   {
     bool _retval;
-    _retval = gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)this._cPtr, currentTime ? cast(const(GTimeVal)*)currentTime._cPtr : null);
+    _retval = cast(bool)gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)this._cPtr, currentTime ? cast(const(GTimeVal)*)currentTime._cPtr : null);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   bool onCurrentlyLoadingFrame()
   {
     bool _retval;
-    _retval = gdk_pixbuf_animation_iter_on_currently_loading_frame(cast(GdkPixbufAnimationIter*)this._cPtr);
+    _retval = cast(bool)gdk_pixbuf_animation_iter_on_currently_loading_frame(cast(GdkPixbufAnimationIter*)this._cPtr);
     return _retval;
   }
 }

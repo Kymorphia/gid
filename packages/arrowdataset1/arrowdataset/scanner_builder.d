@@ -78,7 +78,7 @@ class ScannerBuilder : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_scanner_builder_set_filter(cast(GADatasetScannerBuilder*)this._cPtr, expression ? cast(GArrowExpression*)expression._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gadataset_scanner_builder_set_filter(cast(GADatasetScannerBuilder*)this._cPtr, expression ? cast(GArrowExpression*)expression._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

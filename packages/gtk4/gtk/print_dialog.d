@@ -187,7 +187,7 @@ class PrintDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_print_dialog_get_modal(cast(GtkPrintDialog*)this._cPtr);
+    _retval = cast(bool)gtk_print_dialog_get_modal(cast(GtkPrintDialog*)this._cPtr);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class PrintDialog : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_print_dialog_print_file_finish(cast(GtkPrintDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_print_dialog_print_file_finish(cast(GtkPrintDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

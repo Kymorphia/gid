@@ -304,7 +304,7 @@ class Expander : gtk.bin.Bin
   bool getExpanded()
   {
     bool _retval;
-    _retval = gtk_expander_get_expanded(cast(GtkExpander*)this._cPtr);
+    _retval = cast(bool)gtk_expander_get_expanded(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class Expander : gtk.bin.Bin
   bool getLabelFill()
   {
     bool _retval;
-    _retval = gtk_expander_get_label_fill(cast(GtkExpander*)this._cPtr);
+    _retval = cast(bool)gtk_expander_get_label_fill(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class Expander : gtk.bin.Bin
   bool getResizeToplevel()
   {
     bool _retval;
-    _retval = gtk_expander_get_resize_toplevel(cast(GtkExpander*)this._cPtr);
+    _retval = cast(bool)gtk_expander_get_resize_toplevel(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class Expander : gtk.bin.Bin
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = gtk_expander_get_use_markup(cast(GtkExpander*)this._cPtr);
+    _retval = cast(bool)gtk_expander_get_use_markup(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Expander : gtk.bin.Bin
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_expander_get_use_underline(cast(GtkExpander*)this._cPtr);
+    _retval = cast(bool)gtk_expander_get_use_underline(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 

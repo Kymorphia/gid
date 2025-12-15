@@ -69,7 +69,7 @@ class AggregatorPad : gst.pad.Pad
   bool dropBuffer()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_drop_buffer(cast(GstAggregatorPad*)this._cPtr);
+    _retval = cast(bool)gst_aggregator_pad_drop_buffer(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class AggregatorPad : gst.pad.Pad
   bool hasBuffer()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_has_buffer(cast(GstAggregatorPad*)this._cPtr);
+    _retval = cast(bool)gst_aggregator_pad_has_buffer(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class AggregatorPad : gst.pad.Pad
   bool isEos()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_is_eos(cast(GstAggregatorPad*)this._cPtr);
+    _retval = cast(bool)gst_aggregator_pad_is_eos(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class AggregatorPad : gst.pad.Pad
   bool isInactive()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_is_inactive(cast(GstAggregatorPad*)this._cPtr);
+    _retval = cast(bool)gst_aggregator_pad_is_inactive(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 

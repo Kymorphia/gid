@@ -50,7 +50,7 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_float_array_builder_append(cast(GArrowFloatArrayBuilder*)this._cPtr, value, &_err);
+    _retval = cast(bool)garrow_float_array_builder_append(cast(GArrowFloatArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -61,7 +61,7 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_float_array_builder_append_value(cast(GArrowFloatArrayBuilder*)this._cPtr, value, &_err);
+    _retval = cast(bool)garrow_float_array_builder_append_value(cast(GArrowFloatArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -92,9 +92,9 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(bool)*)isValids.ptr;
+    auto _isValids = cast(const(gboolean)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_float_array_builder_append_values(cast(GArrowFloatArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = cast(bool)garrow_float_array_builder_append_values(cast(GArrowFloatArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

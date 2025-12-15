@@ -405,7 +405,7 @@ class Value : gobject.object.ObjectWrap
   bool isArray()
   {
     bool _retval;
-    _retval = jsc_value_is_array(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_array(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ class Value : gobject.object.ObjectWrap
   bool isArrayBuffer()
   {
     bool _retval;
-    _retval = jsc_value_is_array_buffer(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_array_buffer(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class Value : gobject.object.ObjectWrap
   bool isBoolean()
   {
     bool _retval;
-    _retval = jsc_value_is_boolean(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_boolean(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -438,7 +438,7 @@ class Value : gobject.object.ObjectWrap
   bool isConstructor()
   {
     bool _retval;
-    _retval = jsc_value_is_constructor(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_constructor(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -449,7 +449,7 @@ class Value : gobject.object.ObjectWrap
   bool isFunction()
   {
     bool _retval;
-    _retval = jsc_value_is_function(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_function(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -460,7 +460,7 @@ class Value : gobject.object.ObjectWrap
   bool isNull()
   {
     bool _retval;
-    _retval = jsc_value_is_null(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_null(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -471,7 +471,7 @@ class Value : gobject.object.ObjectWrap
   bool isNumber()
   {
     bool _retval;
-    _retval = jsc_value_is_number(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_number(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class Value : gobject.object.ObjectWrap
   bool isObject()
   {
     bool _retval;
-    _retval = jsc_value_is_object(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_object(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -493,7 +493,7 @@ class Value : gobject.object.ObjectWrap
   bool isString()
   {
     bool _retval;
-    _retval = jsc_value_is_string(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_string(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -504,7 +504,7 @@ class Value : gobject.object.ObjectWrap
   bool isTypedArray()
   {
     bool _retval;
-    _retval = jsc_value_is_typed_array(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_typed_array(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class Value : gobject.object.ObjectWrap
   bool isUndefined()
   {
     bool _retval;
-    _retval = jsc_value_is_undefined(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_is_undefined(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 
@@ -576,7 +576,7 @@ class Value : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = jsc_value_object_delete_property(cast(JSCValue*)this._cPtr, _name);
+    _retval = cast(bool)jsc_value_object_delete_property(cast(JSCValue*)this._cPtr, _name);
     return _retval;
   }
 
@@ -647,7 +647,7 @@ class Value : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = jsc_value_object_has_property(cast(JSCValue*)this._cPtr, _name);
+    _retval = cast(bool)jsc_value_object_has_property(cast(JSCValue*)this._cPtr, _name);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class Value : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = jsc_value_object_is_instance_of(cast(JSCValue*)this._cPtr, _name);
+    _retval = cast(bool)jsc_value_object_is_instance_of(cast(JSCValue*)this._cPtr, _name);
     return _retval;
   }
 
@@ -730,7 +730,7 @@ class Value : gobject.object.ObjectWrap
   bool toBoolean()
   {
     bool _retval;
-    _retval = jsc_value_to_boolean(cast(JSCValue*)this._cPtr);
+    _retval = cast(bool)jsc_value_to_boolean(cast(JSCValue*)this._cPtr);
     return _retval;
   }
 

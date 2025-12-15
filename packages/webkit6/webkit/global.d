@@ -111,7 +111,7 @@ string uriForDisplay(string uri)
 bool userMediaPermissionIsForAudioDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request)
 {
   bool _retval;
-  _retval = webkit_user_media_permission_is_for_audio_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
+  _retval = cast(bool)webkit_user_media_permission_is_for_audio_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -125,7 +125,7 @@ bool userMediaPermissionIsForAudioDevice(webkit.user_media_permission_request.Us
 bool userMediaPermissionIsForDisplayDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request)
 {
   bool _retval;
-  _retval = webkit_user_media_permission_is_for_display_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
+  _retval = cast(bool)webkit_user_media_permission_is_for_display_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -139,6 +139,6 @@ bool userMediaPermissionIsForDisplayDevice(webkit.user_media_permission_request.
 bool userMediaPermissionIsForVideoDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request)
 {
   bool _retval;
-  _retval = webkit_user_media_permission_is_for_video_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
+  _retval = cast(bool)webkit_user_media_permission_is_for_video_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
   return _retval;
 }

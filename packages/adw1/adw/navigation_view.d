@@ -343,7 +343,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getAnimateTransitions()
   {
     bool _retval;
-    _retval = adw_navigation_view_get_animate_transitions(cast(AdwNavigationView*)this._cPtr);
+    _retval = cast(bool)adw_navigation_view_get_animate_transitions(cast(AdwNavigationView*)this._cPtr);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getPopOnEscape()
   {
     bool _retval;
-    _retval = adw_navigation_view_get_pop_on_escape(cast(AdwNavigationView*)this._cPtr);
+    _retval = cast(bool)adw_navigation_view_get_pop_on_escape(cast(AdwNavigationView*)this._cPtr);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool pop()
   {
     bool _retval;
-    _retval = adw_navigation_view_pop(cast(AdwNavigationView*)this._cPtr);
+    _retval = cast(bool)adw_navigation_view_pop(cast(AdwNavigationView*)this._cPtr);
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool popToPage(adw.navigation_page.NavigationPage page)
   {
     bool _retval;
-    _retval = adw_navigation_view_pop_to_page(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
+    _retval = cast(bool)adw_navigation_view_pop_to_page(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -471,7 +471,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = adw_navigation_view_pop_to_tag(cast(AdwNavigationView*)this._cPtr, _tag);
+    _retval = cast(bool)adw_navigation_view_pop_to_tag(cast(AdwNavigationView*)this._cPtr, _tag);
     return _retval;
   }
 

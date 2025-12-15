@@ -1872,7 +1872,7 @@ struct PangoAttrClass
   extern(C) void function(PangoAttribute* attr) destroy;
 
   /** */
-  extern(C) bool function(const(PangoAttribute)* attr1, const(PangoAttribute)* attr2) equal;
+  extern(C) gboolean function(const(PangoAttribute)* attr1, const(PangoAttribute)* attr2) equal;
 }
 
 /**
@@ -2238,7 +2238,7 @@ struct PangoFontFaceClass
   extern(C) void function(PangoFontFace* face, int** sizes, int* nSizes) listSizes;
 
   /** */
-  extern(C) bool function(PangoFontFace* face) isSynthesized;
+  extern(C) gboolean function(PangoFontFace* face) isSynthesized;
 
   /** */
   extern(C) PangoFontFamily* function(PangoFontFace* face) getFamily;
@@ -2276,10 +2276,10 @@ struct PangoFontFamilyClass
   extern(C) const(char)* function(PangoFontFamily* family) getName;
 
   /** */
-  extern(C) bool function(PangoFontFamily* family) isMonospace;
+  extern(C) gboolean function(PangoFontFamily* family) isMonospace;
 
   /** */
-  extern(C) bool function(PangoFontFamily* family) isVariable;
+  extern(C) gboolean function(PangoFontFamily* family) isVariable;
 
   /** */
   extern(C) PangoFontFace* function(PangoFontFamily* family, const(char)* name) getFace;
@@ -3010,7 +3010,7 @@ struct PangoRenderer
   PangoUnderline underline;
 
   /** */
-  bool strikethrough;
+  gboolean strikethrough;
 
   /** */
   int activeCount;
@@ -3116,7 +3116,7 @@ struct PangoTabArray;
 
 alias extern(C) void* function(const(void)* userData) PangoAttrDataCopyFunc;
 
-alias extern(C) bool function(PangoAttribute* attribute, void* userData) PangoAttrFilterFunc;
+alias extern(C) gboolean function(PangoAttribute* attribute, void* userData) PangoAttrFilterFunc;
 
-alias extern(C) bool function(PangoFontset* fontset, PangoFont* font, void* userData) PangoFontsetForeachFunc;
+alias extern(C) gboolean function(PangoFontset* fontset, PangoFont* font, void* userData) PangoFontsetForeachFunc;
 

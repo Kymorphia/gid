@@ -978,7 +978,7 @@ struct GstRTSPExtensionInterface
   GTypeInterface parent;
 
   /** */
-  extern(C) bool function(GstRTSPExtension* ext, GstRTSPMessage* resp) detectServer;
+  extern(C) gboolean function(GstRTSPExtension* ext, GstRTSPMessage* resp) detectServer;
 
   /** */
   extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req) beforeSend;
@@ -993,7 +993,7 @@ struct GstRTSPExtensionInterface
   extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstSDPMedia* media) setupMedia;
 
   /** */
-  extern(C) bool function(GstRTSPExtension* ext, GstCaps* caps) configureStream;
+  extern(C) gboolean function(GstRTSPExtension* ext, GstCaps* caps) configureStream;
 
   /** */
   extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPLowerTrans protocols, char** transport) getTransports;
@@ -1215,17 +1215,17 @@ struct GstRTSPTransport
   /**
       if play mode was selected
   */
-  bool modePlay;
+  gboolean modePlay;
 
   /**
       if record mode was selected
   */
-  bool modeRecord;
+  gboolean modeRecord;
 
   /**
       is append mode was selected
   */
-  bool append;
+  gboolean append;
 
   /**
       the interleave range
@@ -1377,5 +1377,5 @@ struct GstRTSPWatchFuncs
   void*[3] GstReserved;
 }
 
-alias extern(C) bool function(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData) GstRTSPConnectionAcceptCertificateFunc;
+alias extern(C) gboolean function(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData) GstRTSPConnectionAcceptCertificateFunc;
 

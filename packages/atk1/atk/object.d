@@ -338,7 +338,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
-    _retval = atk_object_add_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
+    _retval = cast(bool)atk_object_add_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -610,7 +610,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
-    _retval = atk_object_remove_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
+    _retval = cast(bool)atk_object_remove_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
   }
 

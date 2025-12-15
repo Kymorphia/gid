@@ -578,7 +578,7 @@ class Menu : gtk.menu_shell.MenuShell
   bool getReserveToggleSize()
   {
     bool _retval;
-    _retval = gtk_menu_get_reserve_toggle_size(cast(GtkMenu*)this._cPtr);
+    _retval = cast(bool)gtk_menu_get_reserve_toggle_size(cast(GtkMenu*)this._cPtr);
     return _retval;
   }
 
@@ -590,7 +590,7 @@ class Menu : gtk.menu_shell.MenuShell
   bool getTearoffState()
   {
     bool _retval;
-    _retval = gtk_menu_get_tearoff_state(cast(GtkMenu*)this._cPtr);
+    _retval = cast(bool)gtk_menu_get_tearoff_state(cast(GtkMenu*)this._cPtr);
     return _retval;
   }
 
@@ -668,12 +668,15 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void popup(gtk.widget.Widget parentMenuShell, gtk.widget.Widget parentMenuItem, gtk.types.MenuPositionFunc func, uint button, uint activateTime)
   {
-    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, bool* pushIn, void* userData)
+    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData)
     {
       ptrThawGC(userData);
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
+      bool _pushIn;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, _pushIn);
+      *pushIn = _pushIn;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -813,11 +816,14 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void popupForDevice(gdk.device.Device device, gtk.widget.Widget parentMenuShell, gtk.widget.Widget parentMenuItem, gtk.types.MenuPositionFunc func, uint button, uint activateTime)
   {
-    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, bool* pushIn, void* userData)
+    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData)
     {
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
+      bool _pushIn;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, _pushIn);
+      *pushIn = _pushIn;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
 

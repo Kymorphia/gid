@@ -132,7 +132,7 @@ class Style : gobject.object.ObjectWrap
   bool hasContext()
   {
     bool _retval;
-    _retval = gtk_style_has_context(cast(GtkStyle*)this._cPtr);
+    _retval = cast(bool)gtk_style_has_context(cast(GtkStyle*)this._cPtr);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Style : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkColor _color;
-    _retval = gtk_style_lookup_color(cast(GtkStyle*)this._cPtr, _colorName, &_color);
+    _retval = cast(bool)gtk_style_lookup_color(cast(GtkStyle*)this._cPtr, _colorName, &_color);
     color = new gdk.color.Color(cast(void*)&_color, No.Take);
     return _retval;
   }

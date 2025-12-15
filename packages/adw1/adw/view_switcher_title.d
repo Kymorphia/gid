@@ -303,7 +303,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   bool getTitleVisible()
   {
     bool _retval;
-    _retval = adw_view_switcher_title_get_title_visible(cast(AdwViewSwitcherTitle*)this._cPtr);
+    _retval = cast(bool)adw_view_switcher_title_get_title_visible(cast(AdwViewSwitcherTitle*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   bool getViewSwitcherEnabled()
   {
     bool _retval;
-    _retval = adw_view_switcher_title_get_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr);
+    _retval = cast(bool)adw_view_switcher_title_get_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr);
     return _retval;
   }
 

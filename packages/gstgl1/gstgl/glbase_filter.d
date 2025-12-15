@@ -53,7 +53,7 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
   bool findGlContext()
   {
     bool _retval;
-    _retval = gst_gl_base_filter_find_gl_context(cast(GstGLBaseFilter*)this._cPtr);
+    _retval = cast(bool)gst_gl_base_filter_find_gl_context(cast(GstGLBaseFilter*)this._cPtr);
     return _retval;
   }
 

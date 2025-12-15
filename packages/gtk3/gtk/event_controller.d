@@ -97,7 +97,7 @@ class EventController : gobject.object.ObjectWrap
   bool handleEvent(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_event_controller_handle_event(cast(GtkEventController*)this._cPtr, event ? cast(const(GdkEvent)*)event._cPtr : null);
+    _retval = cast(bool)gtk_event_controller_handle_event(cast(GtkEventController*)this._cPtr, event ? cast(const(GdkEvent)*)event._cPtr : null);
     return _retval;
   }
 

@@ -69,7 +69,7 @@ class ParamSpec
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_param_spec_is_valid_name(_name);
+    _retval = cast(bool)g_param_spec_is_valid_name(_name);
     return _retval;
   }
 

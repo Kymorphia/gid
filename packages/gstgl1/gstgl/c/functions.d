@@ -23,7 +23,7 @@ __gshared extern(C)
   void function(GstGLAllocationParams* src, GstGLAllocationParams* dest) c_gst_gl_allocation_params_copy_data; ///
   void function(GstGLAllocationParams* params) c_gst_gl_allocation_params_free; ///
   void function(GstGLAllocationParams* params) c_gst_gl_allocation_params_free_data; ///
-  bool function(GstGLAllocationParams* params, size_t structSize, uint allocFlags, GstGLAllocationParamsCopyFunc copy, GstGLAllocationParamsFreeFunc free, GstGLContext* context, size_t allocSize, const(GstAllocationParams)* allocParams, void* wrappedData, void* glHandle, void* userData, GDestroyNotify notify) c_gst_gl_allocation_params_init; ///
+  gboolean function(GstGLAllocationParams* params, size_t structSize, uint allocFlags, GstGLAllocationParamsCopyFunc copy, GstGLAllocationParamsFreeFunc free, GstGLContext* context, size_t allocSize, const(GstAllocationParams)* allocParams, void* wrappedData, void* glHandle, void* userData, GDestroyNotify notify) c_gst_gl_allocation_params_init; ///
 
   // GLAsyncDebug
   void function(GstGLAsyncDebug* ad) c_gst_gl_async_debug_free; ///
@@ -38,14 +38,14 @@ __gshared extern(C)
 
   // GLBaseFilter
   GType function() c_gst_gl_base_filter_get_type; ///
-  bool function(GstGLBaseFilter* filter) c_gst_gl_base_filter_find_gl_context; ///
+  gboolean function(GstGLBaseFilter* filter) c_gst_gl_base_filter_find_gl_context; ///
   GstGLContext* function(GstGLBaseFilter* filter) c_gst_gl_base_filter_get_gl_context; ///
 
   // GLBaseMemory
   GType function() c_gst_gl_base_memory_get_type; ///
-  bool function(GstGLBaseMemory* glMem) c_gst_gl_base_memory_alloc_data; ///
+  gboolean function(GstGLBaseMemory* glMem) c_gst_gl_base_memory_alloc_data; ///
   void function(GstGLBaseMemory* mem, GstAllocator* allocator, GstMemory* parent, GstGLContext* context, const(GstAllocationParams)* params, size_t size, void* userData, GDestroyNotify notify) c_gst_gl_base_memory_init; ///
-  bool function(GstGLBaseMemory* src, GstGLBaseMemory* dest, ptrdiff_t offset, ptrdiff_t size) c_gst_gl_base_memory_memcpy; ///
+  gboolean function(GstGLBaseMemory* src, GstGLBaseMemory* dest, ptrdiff_t offset, ptrdiff_t size) c_gst_gl_base_memory_memcpy; ///
   GstGLBaseMemory* function(GstGLBaseMemoryAllocator* allocator, GstGLAllocationParams* params) c_gst_gl_base_memory_alloc; ///
   void function() c_gst_gl_base_memory_init_once; ///
 
@@ -85,9 +85,9 @@ __gshared extern(C)
   char* function(GstGLContext* context) c_gst_gl_color_convert_swizzle_shader_string; ///
   GstCaps* function(GstGLContext* context, GstPadDirection direction, GstCaps* caps, GstCaps* filter) c_gst_gl_color_convert_transform_caps; ///
   char* function(GstGLContext* context) c_gst_gl_color_convert_yuv_to_rgb_shader_string; ///
-  bool function(GstGLColorConvert* convert, GstQuery* query) c_gst_gl_color_convert_decide_allocation; ///
+  gboolean function(GstGLColorConvert* convert, GstQuery* query) c_gst_gl_color_convert_decide_allocation; ///
   GstBuffer* function(GstGLColorConvert* convert, GstBuffer* inbuf) c_gst_gl_color_convert_perform; ///
-  bool function(GstGLColorConvert* convert, GstCaps* inCaps, GstCaps* outCaps) c_gst_gl_color_convert_set_caps; ///
+  gboolean function(GstGLColorConvert* convert, GstCaps* inCaps, GstCaps* outCaps) c_gst_gl_color_convert_set_caps; ///
 
   // GLContext
   GType function() c_gst_gl_context_get_type; ///
@@ -98,16 +98,16 @@ __gshared extern(C)
   GstGLAPI function(GstGLPlatform platform, uint* major, uint* minor) c_gst_gl_context_get_current_gl_api; ///
   size_t function(GstGLPlatform contextType) c_gst_gl_context_get_current_gl_context; ///
   void* function(GstGLPlatform contextType, GstGLAPI glApi, const(char)* name) c_gst_gl_context_get_proc_address_with_platform; ///
-  bool function(GstGLContext* context, bool activate) c_gst_gl_context_activate; ///
-  bool function(GstGLContext* context, GstGLContext* otherContext) c_gst_gl_context_can_share; ///
-  bool function(GstGLContext* context, const(char)* feature) c_gst_gl_context_check_feature; ///
-  bool function(GstGLContext* context, uint fboTarget) c_gst_gl_context_check_framebuffer_status; ///
-  bool function(GstGLContext* context, GstGLAPI api, int maj, int min) c_gst_gl_context_check_gl_version; ///
+  gboolean function(GstGLContext* context, gboolean activate) c_gst_gl_context_activate; ///
+  gboolean function(GstGLContext* context, GstGLContext* otherContext) c_gst_gl_context_can_share; ///
+  gboolean function(GstGLContext* context, const(char)* feature) c_gst_gl_context_check_feature; ///
+  gboolean function(GstGLContext* context, uint fboTarget) c_gst_gl_context_check_framebuffer_status; ///
+  gboolean function(GstGLContext* context, GstGLAPI api, int maj, int min) c_gst_gl_context_check_gl_version; ///
   void function(GstGLContext* context) c_gst_gl_context_clear_framebuffer; ///
   void function(GstGLContext* context) c_gst_gl_context_clear_shader; ///
-  bool function(GstGLContext* context, GstGLContext* otherContext, GError** _err) c_gst_gl_context_create; ///
+  gboolean function(GstGLContext* context, GstGLContext* otherContext, GError** _err) c_gst_gl_context_create; ///
   void function(GstGLContext* context) c_gst_gl_context_destroy; ///
-  bool function(GstGLContext* context, GError** _err) c_gst_gl_context_fill_info; ///
+  gboolean function(GstGLContext* context, GError** _err) c_gst_gl_context_fill_info; ///
   GstStructure* function(GstGLContext* context) c_gst_gl_context_get_config; ///
   GstGLDisplay* function(GstGLContext* context) c_gst_gl_context_get_display; ///
   GstGLAPI function(GstGLContext* context) c_gst_gl_context_get_gl_api; ///
@@ -118,13 +118,13 @@ __gshared extern(C)
   void* function(GstGLContext* context, const(char)* name) c_gst_gl_context_get_proc_address; ///
   GThread* function(GstGLContext* context) c_gst_gl_context_get_thread; ///
   GstGLWindow* function(GstGLContext* context) c_gst_gl_context_get_window; ///
-  bool function(GstGLContext* context) c_gst_gl_context_is_shared; ///
-  bool function(GstGLContext* context, GstStructure* glConfig) c_gst_gl_context_request_config; ///
+  gboolean function(GstGLContext* context) c_gst_gl_context_is_shared; ///
+  gboolean function(GstGLContext* context, GstStructure* glConfig) c_gst_gl_context_request_config; ///
   void function(GstGLContext* context, GstGLContext* share) c_gst_gl_context_set_shared_with; ///
-  bool function(GstGLContext* context, GstGLWindow* window) c_gst_gl_context_set_window; ///
-  bool function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_context_supports_glsl_profile_version; ///
-  bool function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_context_supports_precision; ///
-  bool function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_context_supports_precision_highp; ///
+  gboolean function(GstGLContext* context, GstGLWindow* window) c_gst_gl_context_set_window; ///
+  gboolean function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_context_supports_glsl_profile_version; ///
+  gboolean function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_context_supports_precision; ///
+  gboolean function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_context_supports_precision_highp; ///
   void function(GstGLContext* context) c_gst_gl_context_swap_buffers; ///
   void function(GstGLContext* context, GstGLContextThreadFunc func, void* data) c_gst_gl_context_thread_add; ///
 
@@ -132,10 +132,10 @@ __gshared extern(C)
   GType function() c_gst_gl_display_get_type; ///
   GstGLDisplay* function() c_gst_gl_display_new; ///
   GstGLDisplay* function(GstGLDisplayType type) c_gst_gl_display_new_with_type; ///
-  bool function(GstGLDisplay* display, GstGLContext* context) c_gst_gl_display_add_context; ///
-  bool function(GstGLDisplay* display, GstGLContext* otherContext, GstGLContext** pContext, GError** _err) c_gst_gl_display_create_context; ///
+  gboolean function(GstGLDisplay* display, GstGLContext* context) c_gst_gl_display_add_context; ///
+  gboolean function(GstGLDisplay* display, GstGLContext* otherContext, GstGLContext** pContext, GError** _err) c_gst_gl_display_create_context; ///
   GstGLWindow* function(GstGLDisplay* display) c_gst_gl_display_create_window; ///
-  bool function(GstGLDisplay* display, GstGLContext* otherContext, GstGLContext** context, GError** _err) c_gst_gl_display_ensure_context; ///
+  gboolean function(GstGLDisplay* display, GstGLContext* otherContext, GstGLContext** context, GError** _err) c_gst_gl_display_ensure_context; ///
   void function(GstGLDisplay* display, GstGLAPI glApi) c_gst_gl_display_filter_gl_api; ///
   GstGLWindow* function(GstGLDisplay* display, void* data, GCompareFunc compareFunc) c_gst_gl_display_find_window; ///
   GstGLAPI function(GstGLDisplay* display) c_gst_gl_display_get_gl_api; ///
@@ -144,15 +144,15 @@ __gshared extern(C)
   size_t function(GstGLDisplay* display) c_gst_gl_display_get_handle; ///
   GstGLDisplayType function(GstGLDisplay* display) c_gst_gl_display_get_handle_type; ///
   void function(GstGLDisplay* display, GstGLContext* context) c_gst_gl_display_remove_context; ///
-  bool function(GstGLDisplay* display, GstGLWindow* window) c_gst_gl_display_remove_window; ///
+  gboolean function(GstGLDisplay* display, GstGLWindow* window) c_gst_gl_display_remove_window; ///
   GstGLWindow* function(GstGLDisplay* display, void* data, GCompareFunc compareFunc) c_gst_gl_display_retrieve_window; ///
 
   // GLFilter
   GType function() c_gst_gl_filter_get_type; ///
   void function(GstGLFilterClass* klass) c_gst_gl_filter_add_rgba_pad_templates; ///
   void function(GstGLFilter* filter) c_gst_gl_filter_draw_fullscreen_quad; ///
-  bool function(GstGLFilter* filter, GstBuffer* input, GstBuffer* output) c_gst_gl_filter_filter_texture; ///
-  bool function(GstGLFilter* filter, GstGLMemory* input, GstGLMemory* output, GstGLFilterRenderFunc func, void* data) c_gst_gl_filter_render_to_target; ///
+  gboolean function(GstGLFilter* filter, GstBuffer* input, GstBuffer* output) c_gst_gl_filter_filter_texture; ///
+  gboolean function(GstGLFilter* filter, GstGLMemory* input, GstGLMemory* output, GstGLFilterRenderFunc func, void* data) c_gst_gl_filter_render_to_target; ///
   void function(GstGLFilter* filter, GstGLMemory* input, GstGLMemory* output, GstGLShader* shader) c_gst_gl_filter_render_to_target_with_shader; ///
 
   // GLFramebuffer
@@ -161,24 +161,24 @@ __gshared extern(C)
   GstGLFramebuffer* function(GstGLContext* context, uint width, uint height) c_gst_gl_framebuffer_new_with_default_depth; ///
   void function(GstGLFramebuffer* fb, uint attachmentPoint, GstGLBaseMemory* mem) c_gst_gl_framebuffer_attach; ///
   void function(GstGLFramebuffer* fb) c_gst_gl_framebuffer_bind; ///
-  bool function(GstGLFramebuffer* fb, GstGLMemory* mem, GstGLFramebufferFunc func, void* userData) c_gst_gl_framebuffer_draw_to_texture; ///
+  gboolean function(GstGLFramebuffer* fb, GstGLMemory* mem, GstGLFramebufferFunc func, void* userData) c_gst_gl_framebuffer_draw_to_texture; ///
   void function(GstGLFramebuffer* fb, uint* width, uint* height) c_gst_gl_framebuffer_get_effective_dimensions; ///
   uint function(GstGLFramebuffer* fb) c_gst_gl_framebuffer_get_id; ///
 
   // GLMemory
   GType function() c_gst_gl_memory_get_type; ///
-  bool function(GstGLMemory* glMem, uint texId, GstGLTextureTarget target, GstGLFormat texFormat, int width, int height) c_gst_gl_memory_copy_into; ///
-  bool function(GstGLMemory* src, uint texId, GstGLTextureTarget outTarget, GstGLFormat outTexFormat, int outWidth, int outHeight) c_gst_gl_memory_copy_teximage; ///
+  gboolean function(GstGLMemory* glMem, uint texId, GstGLTextureTarget target, GstGLFormat texFormat, int width, int height) c_gst_gl_memory_copy_into; ///
+  gboolean function(GstGLMemory* src, uint texId, GstGLTextureTarget outTarget, GstGLFormat outTexFormat, int outWidth, int outHeight) c_gst_gl_memory_copy_teximage; ///
   GstGLFormat function(GstGLMemory* glMem) c_gst_gl_memory_get_texture_format; ///
   int function(GstGLMemory* glMem) c_gst_gl_memory_get_texture_height; ///
   uint function(GstGLMemory* glMem) c_gst_gl_memory_get_texture_id; ///
   GstGLTextureTarget function(GstGLMemory* glMem) c_gst_gl_memory_get_texture_target; ///
   int function(GstGLMemory* glMem) c_gst_gl_memory_get_texture_width; ///
   void function(GstGLMemory* mem, GstAllocator* allocator, GstMemory* parent, GstGLContext* context, GstGLTextureTarget target, GstGLFormat texFormat, const(GstAllocationParams)* params, const(GstVideoInfo)* info, uint plane, const(GstVideoAlignment)* valign, void* userData, GDestroyNotify notify) c_gst_gl_memory_init; ///
-  bool function(GstGLMemory* glMem, void* writePointer) c_gst_gl_memory_read_pixels; ///
+  gboolean function(GstGLMemory* glMem, void* writePointer) c_gst_gl_memory_read_pixels; ///
   void function(GstGLMemory* glMem, void* readPointer) c_gst_gl_memory_texsubimage; ///
   void function() c_gst_gl_memory_init_once; ///
-  bool function(GstGLMemoryAllocator* allocator, GstBuffer* buffer, GstGLVideoAllocationParams* params, GstGLFormat* texFormats, void** wrappedData, size_t nWrappedPointers) c_gst_gl_memory_setup_buffer; ///
+  gboolean function(GstGLMemoryAllocator* allocator, GstBuffer* buffer, GstGLVideoAllocationParams* params, GstGLFormat* texFormats, void** wrappedData, size_t nWrappedPointers) c_gst_gl_memory_setup_buffer; ///
 
   // GLMemoryAllocator
   GType function() c_gst_gl_memory_allocator_get_type; ///
@@ -186,7 +186,7 @@ __gshared extern(C)
 
   // GLMemoryPBO
   GType function() c_gst_gl_memory_pbo_get_type; ///
-  bool function(GstGLMemoryPBO* glMem, uint texId, GstGLTextureTarget target, GstGLFormat texFormat, int width, int height, int stride, bool respecify) c_gst_gl_memory_pbo_copy_into_texture; ///
+  gboolean function(GstGLMemoryPBO* glMem, uint texId, GstGLTextureTarget target, GstGLFormat texFormat, int width, int height, int stride, gboolean respecify) c_gst_gl_memory_pbo_copy_into_texture; ///
   void function(GstGLMemoryPBO* glMem) c_gst_gl_memory_pbo_download_transfer; ///
   void function(GstGLMemoryPBO* glMem) c_gst_gl_memory_pbo_upload_transfer; ///
   void function() c_gst_gl_memory_pbo_init_once; ///
@@ -197,7 +197,7 @@ __gshared extern(C)
   // GLMixer
   GType function() c_gst_gl_mixer_get_type; ///
   GstGLFramebuffer* function(GstGLMixer* mix) c_gst_gl_mixer_get_framebuffer; ///
-  bool function(GstGLMixer* mix, GstBuffer* outbuf) c_gst_gl_mixer_process_textures; ///
+  gboolean function(GstGLMixer* mix, GstBuffer* outbuf) c_gst_gl_mixer_process_textures; ///
 
   // GLMixerClass
   void function(GstGLMixerClass* klass) c_gst_gl_mixer_class_add_rgba_pad_templates; ///
@@ -221,7 +221,7 @@ __gshared extern(C)
   ulong function(GstGLQuery* query) c_gst_gl_query_result; ///
   void function(GstGLQuery* query) c_gst_gl_query_start; ///
   void function(GstGLQuery* query) c_gst_gl_query_unset; ///
-  bool function(GstElement* element, GstPadDirection direction, GstGLContext** contextPtr) c_gst_gl_query_local_gl_context; ///
+  gboolean function(GstElement* element, GstPadDirection direction, GstGLContext** contextPtr) c_gst_gl_query_local_gl_context; ///
   GstGLQuery* function(GstGLContext* context, GstGLQueryType queryType) c_gst_gl_query_new; ///
 
   // GLRenderbuffer
@@ -247,12 +247,12 @@ __gshared extern(C)
   GstGLSLStage* function(GstGLContext* context) c_gst_glsl_stage_new_default_vertex; ///
   GstGLSLStage* function(GstGLContext* context, uint type, GstGLSLVersion version_, GstGLSLProfile profile, const(char)* str) c_gst_glsl_stage_new_with_string; ///
   GstGLSLStage* function(GstGLContext* context, uint type, GstGLSLVersion version_, GstGLSLProfile profile, int nStrings, const(char*)* str) c_gst_glsl_stage_new_with_strings; ///
-  bool function(GstGLSLStage* stage, GError** _err) c_gst_glsl_stage_compile; ///
+  gboolean function(GstGLSLStage* stage, GError** _err) c_gst_glsl_stage_compile; ///
   uint function(GstGLSLStage* stage) c_gst_glsl_stage_get_handle; ///
   GstGLSLProfile function(GstGLSLStage* stage) c_gst_glsl_stage_get_profile; ///
   uint function(GstGLSLStage* stage) c_gst_glsl_stage_get_shader_type; ///
   GstGLSLVersion function(GstGLSLStage* stage) c_gst_glsl_stage_get_version; ///
-  bool function(GstGLSLStage* stage, GstGLSLVersion version_, GstGLSLProfile profile, int nStrings, const(char*)* str) c_gst_glsl_stage_set_strings; ///
+  gboolean function(GstGLSLStage* stage, GstGLSLVersion version_, GstGLSLProfile profile, int nStrings, const(char*)* str) c_gst_glsl_stage_set_strings; ///
 
   // GLShader
   GType function() c_gst_gl_shader_get_type; ///
@@ -263,17 +263,17 @@ __gshared extern(C)
   char* function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_shader_string_fragment_external_oes_get_default; ///
   char* function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_shader_string_fragment_get_default; ///
   const(char)* function(GstGLContext* context, GstGLSLVersion version_, GstGLSLProfile profile) c_gst_gl_shader_string_get_highest_precision; ///
-  bool function(GstGLShader* shader, GstGLSLStage* stage) c_gst_gl_shader_attach; ///
-  bool function(GstGLShader* shader, GstGLSLStage* stage) c_gst_gl_shader_attach_unlocked; ///
+  gboolean function(GstGLShader* shader, GstGLSLStage* stage) c_gst_gl_shader_attach; ///
+  gboolean function(GstGLShader* shader, GstGLSLStage* stage) c_gst_gl_shader_attach_unlocked; ///
   void function(GstGLShader* shader, uint index, const(char)* name) c_gst_gl_shader_bind_attribute_location; ///
   void function(GstGLShader* shader, uint index, const(char)* name) c_gst_gl_shader_bind_frag_data_location; ///
-  bool function(GstGLShader* shader, GstGLSLStage* stage, GError** _err) c_gst_gl_shader_compile_attach_stage; ///
+  gboolean function(GstGLShader* shader, GstGLSLStage* stage, GError** _err) c_gst_gl_shader_compile_attach_stage; ///
   void function(GstGLShader* shader, GstGLSLStage* stage) c_gst_gl_shader_detach; ///
   void function(GstGLShader* shader, GstGLSLStage* stage) c_gst_gl_shader_detach_unlocked; ///
   int function(GstGLShader* shader, const(char)* name) c_gst_gl_shader_get_attribute_location; ///
   int function(GstGLShader* shader) c_gst_gl_shader_get_program_handle; ///
-  bool function(GstGLShader* shader) c_gst_gl_shader_is_linked; ///
-  bool function(GstGLShader* shader, GError** _err) c_gst_gl_shader_link; ///
+  gboolean function(GstGLShader* shader) c_gst_gl_shader_is_linked; ///
+  gboolean function(GstGLShader* shader, GError** _err) c_gst_gl_shader_link; ///
   void function(GstGLShader* shader) c_gst_gl_shader_release; ///
   void function(GstGLShader* shader) c_gst_gl_shader_release_unlocked; ///
   void function(GstGLShader* shader, const(char)* name, float value) c_gst_gl_shader_set_uniform_1f; ///
@@ -292,15 +292,15 @@ __gshared extern(C)
   void function(GstGLShader* shader, const(char)* name, uint count, const(float)* value) c_gst_gl_shader_set_uniform_4fv; ///
   void function(GstGLShader* shader, const(char)* name, int v0, int v1, int v2, int v3) c_gst_gl_shader_set_uniform_4i; ///
   void function(GstGLShader* shader, const(char)* name, uint count, const(int)* value) c_gst_gl_shader_set_uniform_4iv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_2fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_2x3fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_2x4fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_3fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_3x2fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_3x4fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_4fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_4x2fv; ///
-  void function(GstGLShader* shader, const(char)* name, int count, bool transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_4x3fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_2fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_2x3fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_2x4fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_3fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_3x2fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_3x4fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_4fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_4x2fv; ///
+  void function(GstGLShader* shader, const(char)* name, int count, gboolean transpose, const(float)* value) c_gst_gl_shader_set_uniform_matrix_4x3fv; ///
   void function(GstGLShader* shader) c_gst_gl_shader_use; ///
 
   // GLSyncMeta
@@ -317,7 +317,7 @@ __gshared extern(C)
   void function(GstGLUpload* upload, GstCaps** inCaps, GstCaps** outCaps) c_gst_gl_upload_get_caps; ///
   GstGLUploadReturn function(GstGLUpload* upload, GstBuffer* buffer, GstBuffer** outbufPtr) c_gst_gl_upload_perform_with_buffer; ///
   void function(GstGLUpload* upload, GstQuery* decideQuery, GstQuery* query) c_gst_gl_upload_propose_allocation; ///
-  bool function(GstGLUpload* upload, GstCaps* inCaps, GstCaps* outCaps) c_gst_gl_upload_set_caps; ///
+  gboolean function(GstGLUpload* upload, GstCaps* inCaps, GstCaps* outCaps) c_gst_gl_upload_set_caps; ///
   void function(GstGLUpload* upload, GstGLContext* context) c_gst_gl_upload_set_context; ///
   GstCaps* function(GstGLUpload* upload, GstGLContext* context, GstPadDirection direction, GstCaps* caps, GstCaps* filter) c_gst_gl_upload_transform_caps; ///
 
@@ -329,7 +329,7 @@ __gshared extern(C)
   GstGLVideoAllocationParams* function(GstGLContext* context, const(GstAllocationParams)* allocParams, const(GstVideoInfo)* vInfo, uint plane, const(GstVideoAlignment)* valign, GstGLTextureTarget target, GstGLFormat texFormat, uint texId, void* userData, GDestroyNotify notify) c_gst_gl_video_allocation_params_new_wrapped_texture; ///
   void function(GstGLVideoAllocationParams* srcVid, GstGLVideoAllocationParams* destVid) c_gst_gl_video_allocation_params_copy_data; ///
   void function(GstGLVideoAllocationParams* params) c_gst_gl_video_allocation_params_free_data; ///
-  bool function(GstGLVideoAllocationParams* params, size_t structSize, uint allocFlags, GstGLAllocationParamsCopyFunc copy, GstGLAllocationParamsFreeFunc free, GstGLContext* context, const(GstAllocationParams)* allocParams, const(GstVideoInfo)* vInfo, uint plane, const(GstVideoAlignment)* valign, GstGLTextureTarget target, GstGLFormat texFormat, void* wrappedData, void* glHandle, void* userData, GDestroyNotify notify) c_gst_gl_video_allocation_params_init_full; ///
+  gboolean function(GstGLVideoAllocationParams* params, size_t structSize, uint allocFlags, GstGLAllocationParamsCopyFunc copy, GstGLAllocationParamsFreeFunc free, GstGLContext* context, const(GstAllocationParams)* allocParams, const(GstVideoInfo)* vInfo, uint plane, const(GstVideoAlignment)* valign, GstGLTextureTarget target, GstGLFormat texFormat, void* wrappedData, void* glHandle, void* userData, GDestroyNotify notify) c_gst_gl_video_allocation_params_init_full; ///
 
   // GLViewConvert
   GType function() c_gst_gl_view_convert_get_type; ///
@@ -338,22 +338,22 @@ __gshared extern(C)
   GstFlowReturn function(GstGLViewConvert* viewconvert, GstBuffer** outbufPtr) c_gst_gl_view_convert_get_output; ///
   GstBuffer* function(GstGLViewConvert* viewconvert, GstBuffer* inbuf) c_gst_gl_view_convert_perform; ///
   void function(GstGLViewConvert* viewconvert) c_gst_gl_view_convert_reset; ///
-  bool function(GstGLViewConvert* viewconvert, GstCaps* inCaps, GstCaps* outCaps) c_gst_gl_view_convert_set_caps; ///
+  gboolean function(GstGLViewConvert* viewconvert, GstCaps* inCaps, GstCaps* outCaps) c_gst_gl_view_convert_set_caps; ///
   void function(GstGLViewConvert* viewconvert, GstGLContext* context) c_gst_gl_view_convert_set_context; ///
-  GstFlowReturn function(GstGLViewConvert* viewconvert, bool isDiscont, GstBuffer* input) c_gst_gl_view_convert_submit_input_buffer; ///
+  GstFlowReturn function(GstGLViewConvert* viewconvert, gboolean isDiscont, GstBuffer* input) c_gst_gl_view_convert_submit_input_buffer; ///
   GstCaps* function(GstGLViewConvert* viewconvert, GstPadDirection direction, GstCaps* caps, GstCaps* filter) c_gst_gl_view_convert_transform_caps; ///
 
   // GLWindow
   GType function() c_gst_gl_window_get_type; ///
   GstGLWindow* function(GstGLDisplay* display) c_gst_gl_window_new; ///
-  bool function(GstGLWindow* window) c_gst_gl_window_controls_viewport; ///
+  gboolean function(GstGLWindow* window) c_gst_gl_window_controls_viewport; ///
   void function(GstGLWindow* window) c_gst_gl_window_draw; ///
   GstGLContext* function(GstGLWindow* window) c_gst_gl_window_get_context; ///
   size_t function(GstGLWindow* window) c_gst_gl_window_get_display; ///
   void function(GstGLWindow* window, uint* width, uint* height) c_gst_gl_window_get_surface_dimensions; ///
   size_t function(GstGLWindow* window) c_gst_gl_window_get_window_handle; ///
-  void function(GstGLWindow* window, bool handleEvents) c_gst_gl_window_handle_events; ///
-  bool function(GstGLWindow* window) c_gst_gl_window_has_output_surface; ///
+  void function(GstGLWindow* window, gboolean handleEvents) c_gst_gl_window_handle_events; ///
+  gboolean function(GstGLWindow* window) c_gst_gl_window_has_output_surface; ///
   void function(GstGLWindow* window) c_gst_gl_window_queue_resize; ///
   void function(GstGLWindow* window) c_gst_gl_window_quit; ///
   void function(GstGLWindow* window, uint width, uint height) c_gst_gl_window_resize; ///
@@ -366,7 +366,7 @@ __gshared extern(C)
   void function(GstGLWindow* window, GstGLWindowCB callback, void* data, GDestroyNotify destroyNotify) c_gst_gl_window_set_close_callback; ///
   void function(GstGLWindow* window, GstGLWindowCB callback, void* data, GDestroyNotify destroyNotify) c_gst_gl_window_set_draw_callback; ///
   void function(GstGLWindow* window, int width, int height) c_gst_gl_window_set_preferred_size; ///
-  bool function(GstGLWindow* window, int x, int y, int width, int height) c_gst_gl_window_set_render_rectangle; ///
+  gboolean function(GstGLWindow* window, int x, int y, int width, int height) c_gst_gl_window_set_render_rectangle; ///
   void function(GstGLWindow* window, GstGLWindowResizeCB callback, void* data, GDestroyNotify destroyNotify) c_gst_gl_window_set_resize_callback; ///
   void function(GstGLWindow* window, size_t handle) c_gst_gl_window_set_window_handle; ///
   void function(GstGLWindow* window) c_gst_gl_window_show; ///
@@ -378,16 +378,16 @@ __gshared extern(C)
   uint function(GstStructure* config) c_gst_buffer_pool_config_get_gl_min_free_queue_size; ///
   void function(GstStructure* config, const(GstGLAllocationParams)* params) c_gst_buffer_pool_config_set_gl_allocation_params; ///
   void function(GstStructure* config, uint queueSize) c_gst_buffer_pool_config_set_gl_min_free_queue_size; ///
-  bool function(GstContext* context, GstGLDisplay** display) c_gst_context_get_gl_display; ///
+  gboolean function(GstContext* context, GstGLDisplay** display) c_gst_context_get_gl_display; ///
   void function(GstContext* context, GstGLDisplay* display) c_gst_context_set_gl_display; ///
-  bool function(const(char)* name, const(char)* ext) c_gst_gl_check_extension; ///
+  gboolean function(const(char)* name, const(char)* ext) c_gst_gl_check_extension; ///
   void function(GstElement* element, GstGLDisplay* display) c_gst_gl_element_propagate_display_context; ///
-  bool function(GstElement* element, GstGLDisplay** displayPtr, GstGLContext** otherContextPtr) c_gst_gl_ensure_element_data; ///
+  gboolean function(GstElement* element, GstGLDisplay** displayPtr, GstGLContext** otherContextPtr) c_gst_gl_ensure_element_data; ///
   void function(GstVideoAffineTransformationMeta* meta, float* matrix) c_gst_gl_get_affine_transformation_meta_as_ndc; ///
   size_t function(const(GstVideoInfo)* info, const(GstVideoAlignment)* align_, uint plane) c_gst_gl_get_plane_data_size; ///
   size_t function(const(GstVideoInfo)* info, const(GstVideoAlignment)* valign, uint plane) c_gst_gl_get_plane_start; ///
-  bool function(GstElement* element, GstQuery* query, GstGLDisplay* display, GstGLContext* context, GstGLContext* otherContext) c_gst_gl_handle_context_query; ///
-  bool function(GstElement* element, GstContext* context, GstGLDisplay** display, GstGLContext** otherContext) c_gst_gl_handle_set_context; ///
+  gboolean function(GstElement* element, GstQuery* query, GstGLDisplay* display, GstGLContext* context, GstGLContext* otherContext) c_gst_gl_handle_context_query; ///
+  gboolean function(GstElement* element, GstContext* context, GstGLDisplay** display, GstGLContext** otherContext) c_gst_gl_handle_set_context; ///
   void function(GstGLContext* context, const(char)* format,  ...) c_gst_gl_insert_debug_marker; ///
   void function(const(float)* a, const(float)* b, float* result) c_gst_gl_multiply_matrix4; ///
   void function(GstVideoAffineTransformationMeta* meta, const(float)* matrix) c_gst_gl_set_affine_transformation_meta_from_ndc; ///
@@ -396,16 +396,16 @@ __gshared extern(C)
   void function(int* swizzle, int* inversion) c_gst_gl_swizzle_invert; ///
   GType function() c_gst_gl_sync_meta_api_get_type; ///
   GstGLTextureTarget function(const(GValue)* value) c_gst_gl_value_get_texture_target_mask; ///
-  bool function(GValue* value, GstGLTextureTarget target) c_gst_gl_value_set_texture_target; ///
-  bool function(GValue* value, GstGLTextureTarget targetMask) c_gst_gl_value_set_texture_target_from_mask; ///
+  gboolean function(GValue* value, GstGLTextureTarget target) c_gst_gl_value_set_texture_target; ///
+  gboolean function(GValue* value, GstGLTextureTarget targetMask) c_gst_gl_value_set_texture_target_from_mask; ///
   GstGLSLVersion function(GstGLAPI glApi, int maj, int min) c_gst_gl_version_to_glsl_version; ///
-  bool function(GstVideoFormat videoFormat, int* swizzle) c_gst_gl_video_format_swizzle; ///
-  bool function(const(char)* s, GstGLSLVersion* version_, GstGLSLProfile* profile) c_gst_glsl_string_get_version_profile; ///
-  bool function(GstMemory* mem) c_gst_is_gl_base_memory; ///
-  bool function(GstMemory* mem) c_gst_is_gl_buffer; ///
-  bool function(GstMemory* mem) c_gst_is_gl_memory; ///
-  bool function(GstMemory* mem) c_gst_is_gl_memory_pbo; ///
-  bool function(GstMemory* mem) c_gst_is_gl_renderbuffer; ///
+  gboolean function(GstVideoFormat videoFormat, int* swizzle) c_gst_gl_video_format_swizzle; ///
+  gboolean function(const(char)* s, GstGLSLVersion* version_, GstGLSLProfile* profile) c_gst_glsl_string_get_version_profile; ///
+  gboolean function(GstMemory* mem) c_gst_is_gl_base_memory; ///
+  gboolean function(GstMemory* mem) c_gst_is_gl_buffer; ///
+  gboolean function(GstMemory* mem) c_gst_is_gl_memory; ///
+  gboolean function(GstMemory* mem) c_gst_is_gl_memory_pbo; ///
+  gboolean function(GstMemory* mem) c_gst_is_gl_renderbuffer; ///
 
   // GLAPI
   GstGLAPI function(const(char)* apiS) c_gst_gl_api_from_string; ///
@@ -425,7 +425,7 @@ __gshared extern(C)
 
   // GLFormat
   GstGLFormat function(GstGLContext* context, const(GstVideoInfo)* vinfo, uint plane) c_gst_gl_format_from_video_info; ///
-  bool function(GstGLContext* context, GstGLFormat format) c_gst_gl_format_is_supported; ///
+  gboolean function(GstGLContext* context, GstGLFormat format) c_gst_gl_format_is_supported; ///
   uint function(GstGLFormat glFormat) c_gst_gl_format_n_components; ///
   void function(GstGLFormat format, GstGLFormat* unsizedFormat, uint* glType) c_gst_gl_format_type_from_sized_gl_format; ///
   uint function(uint format, uint type) c_gst_gl_format_type_n_bytes; ///
@@ -443,7 +443,7 @@ __gshared extern(C)
 
   // GLSLVersion
   GstGLSLVersion function(const(char)* string_) c_gst_glsl_version_from_string; ///
-  bool function(const(char)* string_, GstGLSLVersion* versionRet, GstGLSLProfile* profileRet) c_gst_glsl_version_profile_from_string; ///
+  gboolean function(const(char)* string_, GstGLSLVersion* versionRet, GstGLSLProfile* profileRet) c_gst_glsl_version_profile_from_string; ///
   char* function(GstGLSLVersion version_, GstGLSLProfile profile) c_gst_glsl_version_profile_to_string; ///
   const(char)* function(GstGLSLVersion version_) c_gst_glsl_version_to_string; ///
 

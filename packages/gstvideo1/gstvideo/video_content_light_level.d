@@ -84,7 +84,7 @@ class VideoContentLightLevel
   bool addToCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_content_light_level_add_to_caps(cast(const(GstVideoContentLightLevel)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_content_light_level_add_to_caps(cast(const(GstVideoContentLightLevel)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class VideoContentLightLevel
   bool fromCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_content_light_level_from_caps(cast(GstVideoContentLightLevel*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_content_light_level_from_caps(cast(GstVideoContentLightLevel*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class VideoContentLightLevel
   {
     bool _retval;
     const(char)* _level = level.toCString(No.Alloc);
-    _retval = gst_video_content_light_level_from_string(cast(GstVideoContentLightLevel*)this._cPtr, _level);
+    _retval = cast(bool)gst_video_content_light_level_from_string(cast(GstVideoContentLightLevel*)this._cPtr, _level);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class VideoContentLightLevel
   bool isEqual(gstvideo.video_content_light_level.VideoContentLightLevel other)
   {
     bool _retval;
-    _retval = gst_video_content_light_level_is_equal(cast(const(GstVideoContentLightLevel)*)this._cPtr, other ? cast(const(GstVideoContentLightLevel)*)other._cPtr : null);
+    _retval = cast(bool)gst_video_content_light_level_is_equal(cast(const(GstVideoContentLightLevel)*)this._cPtr, other ? cast(const(GstVideoContentLightLevel)*)other._cPtr : null);
     return _retval;
   }
 

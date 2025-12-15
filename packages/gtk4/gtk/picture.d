@@ -346,7 +346,7 @@ class Picture : gtk.widget.Widget
   bool getCanShrink()
   {
     bool _retval;
-    _retval = gtk_picture_get_can_shrink(cast(GtkPicture*)this._cPtr);
+    _retval = cast(bool)gtk_picture_get_can_shrink(cast(GtkPicture*)this._cPtr);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ class Picture : gtk.widget.Widget
   bool getKeepAspectRatio()
   {
     bool _retval;
-    _retval = gtk_picture_get_keep_aspect_ratio(cast(GtkPicture*)this._cPtr);
+    _retval = cast(bool)gtk_picture_get_keep_aspect_ratio(cast(GtkPicture*)this._cPtr);
     return _retval;
   }
 

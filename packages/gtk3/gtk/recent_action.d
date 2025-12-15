@@ -132,7 +132,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   bool getShowNumbers()
   {
     bool _retval;
-    _retval = gtk_recent_action_get_show_numbers(cast(GtkRecentAction*)this._cPtr);
+    _retval = cast(bool)gtk_recent_action_get_show_numbers(cast(GtkRecentAction*)this._cPtr);
     return _retval;
   }
 

@@ -334,7 +334,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     bool _retval;
     GdkRGBA _color;
-    _retval = gtk_source_gutter_renderer_get_background(cast(GtkSourceGutterRenderer*)this._cPtr, &_color);
+    _retval = cast(bool)gtk_source_gutter_renderer_get_background(cast(GtkSourceGutterRenderer*)this._cPtr, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }
@@ -383,7 +383,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_get_visible(cast(GtkSourceGutterRenderer*)this._cPtr);
+    _retval = cast(bool)gtk_source_gutter_renderer_get_visible(cast(GtkSourceGutterRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 
@@ -450,7 +450,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryTooltip(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area._cPtr(No.Dup) : null, x, y, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area._cPtr(No.Dup) : null, x, y, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
     return _retval;
   }
 

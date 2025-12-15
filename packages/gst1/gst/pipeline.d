@@ -199,7 +199,7 @@ class Pipeline : gst.bin.Bin
   bool getAutoFlushBus()
   {
     bool _retval;
-    _retval = gst_pipeline_get_auto_flush_bus(cast(GstPipeline*)this._cPtr);
+    _retval = cast(bool)gst_pipeline_get_auto_flush_bus(cast(GstPipeline*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class Pipeline : gst.bin.Bin
   bool isLive()
   {
     bool _retval;
-    _retval = gst_pipeline_is_live(cast(GstPipeline*)this._cPtr);
+    _retval = cast(bool)gst_pipeline_is_live(cast(GstPipeline*)this._cPtr);
     return _retval;
   }
 

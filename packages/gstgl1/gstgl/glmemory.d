@@ -193,7 +193,7 @@ class GLMemory : gobject.boxed.Boxed
   /** */
   @property bool textureWrapped()
   {
-    return (cast(GstGLMemory*)this._cPtr).textureWrapped;
+    return cast(bool)(cast(GstGLMemory*)this._cPtr).textureWrapped;
   }
 
   /** */
@@ -241,7 +241,7 @@ class GLMemory : gobject.boxed.Boxed
   bool copyInto(uint texId, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, int width, int height)
   {
     bool _retval;
-    _retval = gst_gl_memory_copy_into(cast(GstGLMemory*)this._cPtr, texId, target, texFormat, width, height);
+    _retval = cast(bool)gst_gl_memory_copy_into(cast(GstGLMemory*)this._cPtr, texId, target, texFormat, width, height);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class GLMemory : gobject.boxed.Boxed
   bool copyTeximage(uint texId, gstgl.types.GLTextureTarget outTarget, gstgl.types.GLFormat outTexFormat, int outWidth, int outHeight)
   {
     bool _retval;
-    _retval = gst_gl_memory_copy_teximage(cast(GstGLMemory*)this._cPtr, texId, outTarget, outTexFormat, outWidth, outHeight);
+    _retval = cast(bool)gst_gl_memory_copy_teximage(cast(GstGLMemory*)this._cPtr, texId, outTarget, outTexFormat, outWidth, outHeight);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class GLMemory : gobject.boxed.Boxed
   bool readPixels(void* writePointer = null)
   {
     bool _retval;
-    _retval = gst_gl_memory_read_pixels(cast(GstGLMemory*)this._cPtr, writePointer);
+    _retval = cast(bool)gst_gl_memory_read_pixels(cast(GstGLMemory*)this._cPtr, writePointer);
     return _retval;
   }
 

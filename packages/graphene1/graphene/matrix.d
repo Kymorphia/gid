@@ -103,7 +103,7 @@ class Matrix : gobject.boxed.Boxed
     graphene_quaternion_t _rotate;
     graphene_vec3_t _shear;
     graphene_vec4_t _perspective;
-    _retval = graphene_matrix_decompose(cast(const(graphene_matrix_t)*)this._cPtr, &_translate, &_scale, &_rotate, &_shear, &_perspective);
+    _retval = cast(bool)graphene_matrix_decompose(cast(const(graphene_matrix_t)*)this._cPtr, &_translate, &_scale, &_rotate, &_shear, &_perspective);
     translate = new graphene.vec3.Vec3(cast(void*)&_translate, No.Take);
     scale = new graphene.vec3.Vec3(cast(void*)&_scale, No.Take);
     rotate = new graphene.quaternion.Quaternion(cast(void*)&_rotate, No.Take);
@@ -133,7 +133,7 @@ class Matrix : gobject.boxed.Boxed
   bool equal(graphene.matrix.Matrix b)
   {
     bool _retval;
-    _retval = graphene_matrix_equal(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_matrix_equal(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class Matrix : gobject.boxed.Boxed
   bool equalFast(graphene.matrix.Matrix b)
   {
     bool _retval;
-    _retval = graphene_matrix_equal_fast(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_matrix_equal_fast(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -560,7 +560,7 @@ class Matrix : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_matrix_t _res;
-    _retval = graphene_matrix_inverse(cast(const(graphene_matrix_t)*)this._cPtr, &_res);
+    _retval = cast(bool)graphene_matrix_inverse(cast(const(graphene_matrix_t)*)this._cPtr, &_res);
     res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
     return _retval;
   }
@@ -574,7 +574,7 @@ class Matrix : gobject.boxed.Boxed
   bool is2d()
   {
     bool _retval;
-    _retval = graphene_matrix_is_2d(cast(const(graphene_matrix_t)*)this._cPtr);
+    _retval = cast(bool)graphene_matrix_is_2d(cast(const(graphene_matrix_t)*)this._cPtr);
     return _retval;
   }
 
@@ -585,7 +585,7 @@ class Matrix : gobject.boxed.Boxed
   bool isBackfaceVisible()
   {
     bool _retval;
-    _retval = graphene_matrix_is_backface_visible(cast(const(graphene_matrix_t)*)this._cPtr);
+    _retval = cast(bool)graphene_matrix_is_backface_visible(cast(const(graphene_matrix_t)*)this._cPtr);
     return _retval;
   }
 
@@ -596,7 +596,7 @@ class Matrix : gobject.boxed.Boxed
   bool isIdentity()
   {
     bool _retval;
-    _retval = graphene_matrix_is_identity(cast(const(graphene_matrix_t)*)this._cPtr);
+    _retval = cast(bool)graphene_matrix_is_identity(cast(const(graphene_matrix_t)*)this._cPtr);
     return _retval;
   }
 
@@ -607,7 +607,7 @@ class Matrix : gobject.boxed.Boxed
   bool isSingular()
   {
     bool _retval;
-    _retval = graphene_matrix_is_singular(cast(const(graphene_matrix_t)*)this._cPtr);
+    _retval = cast(bool)graphene_matrix_is_singular(cast(const(graphene_matrix_t)*)this._cPtr);
     return _retval;
   }
 
@@ -643,7 +643,7 @@ class Matrix : gobject.boxed.Boxed
   bool near(graphene.matrix.Matrix b, float epsilon)
   {
     bool _retval;
-    _retval = graphene_matrix_near(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, epsilon);
+    _retval = cast(bool)graphene_matrix_near(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, epsilon);
     return _retval;
   }
 
@@ -899,7 +899,7 @@ class Matrix : gobject.boxed.Boxed
   bool to2d(out double xx, out double yx, out double xy, out double yy, out double x0, out double y0)
   {
     bool _retval;
-    _retval = graphene_matrix_to_2d(cast(const(graphene_matrix_t)*)this._cPtr, cast(double*)&xx, cast(double*)&yx, cast(double*)&xy, cast(double*)&yy, cast(double*)&x0, cast(double*)&y0);
+    _retval = cast(bool)graphene_matrix_to_2d(cast(const(graphene_matrix_t)*)this._cPtr, cast(double*)&xx, cast(double*)&yx, cast(double*)&xy, cast(double*)&yy, cast(double*)&x0, cast(double*)&y0);
     return _retval;
   }
 
@@ -1161,7 +1161,7 @@ class Matrix : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_point_t _res;
-    _retval = graphene_matrix_untransform_point(cast(const(graphene_matrix_t)*)this._cPtr, p ? cast(const(graphene_point_t)*)p._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_matrix_untransform_point(cast(const(graphene_matrix_t)*)this._cPtr, p ? cast(const(graphene_point_t)*)p._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, &_res);
     res = new graphene.point.Point(cast(void*)&_res, No.Take);
     return _retval;
   }

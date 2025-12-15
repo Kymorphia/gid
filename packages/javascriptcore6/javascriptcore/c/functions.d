@@ -74,7 +74,7 @@ __gshared extern(C)
   JSCValue* function(JSCContext* context, void* data, size_t size, GDestroyNotify destroyNotify, void* userData) c_jsc_value_new_array_buffer; ///
   JSCValue* function(JSCContext* context, GPtrArray* array) c_jsc_value_new_array_from_garray; ///
   JSCValue* function(JSCContext* context, const(char*)* strv) c_jsc_value_new_array_from_strv; ///
-  JSCValue* function(JSCContext* context, bool value) c_jsc_value_new_boolean; ///
+  JSCValue* function(JSCContext* context, gboolean value) c_jsc_value_new_boolean; ///
   JSCValue* function(JSCContext* context, const(char)* json) c_jsc_value_new_from_json; ///
   JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParams,  ...) c_jsc_value_new_function; ///
   JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType) c_jsc_value_new_function_variadic; ///
@@ -94,31 +94,31 @@ __gshared extern(C)
   JSCValue* function(JSCValue* value, GType firstParameterType,  ...) c_jsc_value_function_call; ///
   JSCValue* function(JSCValue* value, uint nParameters, JSCValue** parameters) c_jsc_value_function_callv; ///
   JSCContext* function(JSCValue* value) c_jsc_value_get_context; ///
-  bool function(JSCValue* value) c_jsc_value_is_array; ///
-  bool function(JSCValue* value) c_jsc_value_is_array_buffer; ///
-  bool function(JSCValue* value) c_jsc_value_is_boolean; ///
-  bool function(JSCValue* value) c_jsc_value_is_constructor; ///
-  bool function(JSCValue* value) c_jsc_value_is_function; ///
-  bool function(JSCValue* value) c_jsc_value_is_null; ///
-  bool function(JSCValue* value) c_jsc_value_is_number; ///
-  bool function(JSCValue* value) c_jsc_value_is_object; ///
-  bool function(JSCValue* value) c_jsc_value_is_string; ///
-  bool function(JSCValue* value) c_jsc_value_is_typed_array; ///
-  bool function(JSCValue* value) c_jsc_value_is_undefined; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_array; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_array_buffer; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_boolean; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_constructor; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_function; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_null; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_number; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_object; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_string; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_typed_array; ///
+  gboolean function(JSCValue* value) c_jsc_value_is_undefined; ///
   JSCValue* function(JSCValue* arrayBuffer, JSCTypedArrayType type, size_t offset, ptrdiff_t length) c_jsc_value_new_typed_array_with_buffer; ///
   void function(JSCValue* value, const(char)* propertyName, JSCValuePropertyFlags flags, GType propertyType, GCallback getter, GCallback setter, void* userData, GDestroyNotify destroyNotify) c_jsc_value_object_define_property_accessor; ///
   void function(JSCValue* value, const(char)* propertyName, JSCValuePropertyFlags flags, JSCValue* propertyValue) c_jsc_value_object_define_property_data; ///
-  bool function(JSCValue* value, const(char)* name) c_jsc_value_object_delete_property; ///
+  gboolean function(JSCValue* value, const(char)* name) c_jsc_value_object_delete_property; ///
   char** function(JSCValue* value) c_jsc_value_object_enumerate_properties; ///
   JSCValue* function(JSCValue* value, const(char)* name) c_jsc_value_object_get_property; ///
   JSCValue* function(JSCValue* value, uint index) c_jsc_value_object_get_property_at_index; ///
-  bool function(JSCValue* value, const(char)* name) c_jsc_value_object_has_property; ///
+  gboolean function(JSCValue* value, const(char)* name) c_jsc_value_object_has_property; ///
   JSCValue* function(JSCValue* value, const(char)* name, GType firstParameterType,  ...) c_jsc_value_object_invoke_method; ///
   JSCValue* function(JSCValue* value, const(char)* name, uint nParameters, JSCValue** parameters) c_jsc_value_object_invoke_methodv; ///
-  bool function(JSCValue* value, const(char)* name) c_jsc_value_object_is_instance_of; ///
+  gboolean function(JSCValue* value, const(char)* name) c_jsc_value_object_is_instance_of; ///
   void function(JSCValue* value, const(char)* name, JSCValue* property) c_jsc_value_object_set_property; ///
   void function(JSCValue* value, uint index, JSCValue* property) c_jsc_value_object_set_property_at_index; ///
-  bool function(JSCValue* value) c_jsc_value_to_boolean; ///
+  gboolean function(JSCValue* value) c_jsc_value_to_boolean; ///
   double function(JSCValue* value) c_jsc_value_to_double; ///
   int function(JSCValue* value) c_jsc_value_to_int32; ///
   char* function(JSCValue* value, uint indent) c_jsc_value_to_json; ///
@@ -145,21 +145,21 @@ __gshared extern(C)
   uint function() c_jsc_get_micro_version; ///
   uint function() c_jsc_get_minor_version; ///
   void function(JSCOptionsFunc function_, void* userData) c_jsc_options_foreach; ///
-  bool function(const(char)* option, bool* value) c_jsc_options_get_boolean; ///
-  bool function(const(char)* option, double* value) c_jsc_options_get_double; ///
-  bool function(const(char)* option, int* value) c_jsc_options_get_int; ///
+  gboolean function(const(char)* option, gboolean* value) c_jsc_options_get_boolean; ///
+  gboolean function(const(char)* option, double* value) c_jsc_options_get_double; ///
+  gboolean function(const(char)* option, int* value) c_jsc_options_get_int; ///
   GOptionGroup* function() c_jsc_options_get_option_group; ///
-  bool function(const(char)* option, char** value) c_jsc_options_get_range_string; ///
-  bool function(const(char)* option, size_t* value) c_jsc_options_get_size; ///
-  bool function(const(char)* option, char** value) c_jsc_options_get_string; ///
-  bool function(const(char)* option, uint* value) c_jsc_options_get_uint; ///
-  bool function(const(char)* option, bool value) c_jsc_options_set_boolean; ///
-  bool function(const(char)* option, double value) c_jsc_options_set_double; ///
-  bool function(const(char)* option, int value) c_jsc_options_set_int; ///
-  bool function(const(char)* option, const(char)* value) c_jsc_options_set_range_string; ///
-  bool function(const(char)* option, size_t value) c_jsc_options_set_size; ///
-  bool function(const(char)* option, const(char)* value) c_jsc_options_set_string; ///
-  bool function(const(char)* option, uint value) c_jsc_options_set_uint; ///
+  gboolean function(const(char)* option, char** value) c_jsc_options_get_range_string; ///
+  gboolean function(const(char)* option, size_t* value) c_jsc_options_get_size; ///
+  gboolean function(const(char)* option, char** value) c_jsc_options_get_string; ///
+  gboolean function(const(char)* option, uint* value) c_jsc_options_get_uint; ///
+  gboolean function(const(char)* option, gboolean value) c_jsc_options_set_boolean; ///
+  gboolean function(const(char)* option, double value) c_jsc_options_set_double; ///
+  gboolean function(const(char)* option, int value) c_jsc_options_set_int; ///
+  gboolean function(const(char)* option, const(char)* value) c_jsc_options_set_range_string; ///
+  gboolean function(const(char)* option, size_t value) c_jsc_options_set_size; ///
+  gboolean function(const(char)* option, const(char)* value) c_jsc_options_set_string; ///
+  gboolean function(const(char)* option, uint value) c_jsc_options_set_uint; ///
 }
 
 // Class

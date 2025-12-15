@@ -233,7 +233,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_user_content_filter_store_remove_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_user_content_filter_store_remove_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

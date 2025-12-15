@@ -447,7 +447,7 @@ class Session : gobject.object.ObjectWrap
   bool getAcceptLanguageAuto()
   {
     bool _retval;
-    _retval = soup_session_get_accept_language_auto(cast(SoupSession*)this._cPtr);
+    _retval = cast(bool)soup_session_get_accept_language_auto(cast(SoupSession*)this._cPtr);
     return _retval;
   }
 
@@ -636,7 +636,7 @@ class Session : gobject.object.ObjectWrap
   bool hasFeature(gobject.types.GType featureType)
   {
     bool _retval;
-    _retval = soup_session_has_feature(cast(SoupSession*)this._cPtr, featureType);
+    _retval = cast(bool)soup_session_has_feature(cast(SoupSession*)this._cPtr, featureType);
     return _retval;
   }
 
@@ -686,7 +686,7 @@ class Session : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = soup_session_preconnect_finish(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)soup_session_preconnect_finish(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

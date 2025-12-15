@@ -445,7 +445,7 @@ class TabView : gtk.widget.Widget
   bool getIsTransferringPage()
   {
     bool _retval;
-    _retval = adw_tab_view_get_is_transferring_page(cast(AdwTabView*)this._cPtr);
+    _retval = cast(bool)adw_tab_view_get_is_transferring_page(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 
@@ -671,7 +671,7 @@ class TabView : gtk.widget.Widget
   bool reorderBackward(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_backward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
+    _retval = cast(bool)adw_tab_view_reorder_backward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -685,7 +685,7 @@ class TabView : gtk.widget.Widget
   bool reorderFirst(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_first(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
+    _retval = cast(bool)adw_tab_view_reorder_first(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -699,7 +699,7 @@ class TabView : gtk.widget.Widget
   bool reorderForward(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_forward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
+    _retval = cast(bool)adw_tab_view_reorder_forward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -713,7 +713,7 @@ class TabView : gtk.widget.Widget
   bool reorderLast(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_last(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
+    _retval = cast(bool)adw_tab_view_reorder_last(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -731,7 +731,7 @@ class TabView : gtk.widget.Widget
   bool reorderPage(adw.tab_page.TabPage page, int position)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, position);
+    _retval = cast(bool)adw_tab_view_reorder_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, position);
     return _retval;
   }
 
@@ -744,7 +744,7 @@ class TabView : gtk.widget.Widget
   bool selectNextPage()
   {
     bool _retval;
-    _retval = adw_tab_view_select_next_page(cast(AdwTabView*)this._cPtr);
+    _retval = cast(bool)adw_tab_view_select_next_page(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 
@@ -757,7 +757,7 @@ class TabView : gtk.widget.Widget
   bool selectPreviousPage()
   {
     bool _retval;
-    _retval = adw_tab_view_select_previous_page(cast(AdwTabView*)this._cPtr);
+    _retval = cast(bool)adw_tab_view_select_previous_page(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 

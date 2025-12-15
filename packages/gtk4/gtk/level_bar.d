@@ -323,7 +323,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   bool getInverted()
   {
     bool _retval;
-    _retval = gtk_level_bar_get_inverted(cast(GtkLevelBar*)this._cPtr);
+    _retval = cast(bool)gtk_level_bar_get_inverted(cast(GtkLevelBar*)this._cPtr);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_level_bar_get_offset_value(cast(GtkLevelBar*)this._cPtr, _name, cast(double*)&value);
+    _retval = cast(bool)gtk_level_bar_get_offset_value(cast(GtkLevelBar*)this._cPtr, _name, cast(double*)&value);
     return _retval;
   }
 

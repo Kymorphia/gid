@@ -342,7 +342,7 @@ class Popover : gtk.bin.Bin
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_popover_get_modal(cast(GtkPopover*)this._cPtr);
+    _retval = cast(bool)gtk_popover_get_modal(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class Popover : gtk.bin.Bin
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
+    _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -401,7 +401,7 @@ class Popover : gtk.bin.Bin
   bool getTransitionsEnabled()
   {
     bool _retval;
-    _retval = gtk_popover_get_transitions_enabled(cast(GtkPopover*)this._cPtr);
+    _retval = cast(bool)gtk_popover_get_transitions_enabled(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 

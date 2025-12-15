@@ -106,7 +106,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
     const(char)* _field = field.toCString(No.Alloc);
     const(char)* _alias_ = alias_.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_data_pivot_add_data(cast(GdaDataPivot*)this._cPtr, aggregateType, _field, _alias_, &_err);
+    _retval = cast(bool)gda_data_pivot_add_data(cast(GdaDataPivot*)this._cPtr, aggregateType, _field, _alias_, &_err);
     if (_err)
       throw new DataPivotException(_err);
     return _retval;
@@ -141,7 +141,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
     const(char)* _field = field.toCString(No.Alloc);
     const(char)* _alias_ = alias_.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_data_pivot_add_field(cast(GdaDataPivot*)this._cPtr, fieldType, _field, _alias_, &_err);
+    _retval = cast(bool)gda_data_pivot_add_field(cast(GdaDataPivot*)this._cPtr, fieldType, _field, _alias_, &_err);
     if (_err)
       throw new DataPivotException(_err);
     return _retval;
@@ -156,7 +156,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_pivot_populate(cast(GdaDataPivot*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_pivot_populate(cast(GdaDataPivot*)this._cPtr, &_err);
     if (_err)
       throw new DataPivotException(_err);
     return _retval;

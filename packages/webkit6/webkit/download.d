@@ -128,7 +128,7 @@ class Download : gobject.object.ObjectWrap
   bool getAllowOverwrite()
   {
     bool _retval;
-    _retval = webkit_download_get_allow_overwrite(cast(WebKitDownload*)this._cPtr);
+    _retval = cast(bool)webkit_download_get_allow_overwrite(cast(WebKitDownload*)this._cPtr);
     return _retval;
   }
 

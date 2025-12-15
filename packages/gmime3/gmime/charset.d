@@ -97,7 +97,7 @@ class Charset
     bool _retval;
     const(char)* _charset = charset.toCString(No.Alloc);
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = g_mime_charset_can_encode(cast(GMimeCharset*)this._cPtr, _charset, _text, len);
+    _retval = cast(bool)g_mime_charset_can_encode(cast(GMimeCharset*)this._cPtr, _charset, _text, len);
     return _retval;
   }
 

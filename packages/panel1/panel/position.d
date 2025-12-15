@@ -201,7 +201,7 @@ class Position : gobject.object.ObjectWrap
   bool equal(panel.position.Position b)
   {
     bool _retval;
-    _retval = panel_position_equal(cast(PanelPosition*)this._cPtr, b ? cast(PanelPosition*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)panel_position_equal(cast(PanelPosition*)this._cPtr, b ? cast(PanelPosition*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class Position : gobject.object.ObjectWrap
   bool getAreaSet()
   {
     bool _retval;
-    _retval = panel_position_get_area_set(cast(PanelPosition*)this._cPtr);
+    _retval = cast(bool)panel_position_get_area_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class Position : gobject.object.ObjectWrap
   bool getColumnSet()
   {
     bool _retval;
-    _retval = panel_position_get_column_set(cast(PanelPosition*)this._cPtr);
+    _retval = cast(bool)panel_position_get_column_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Position : gobject.object.ObjectWrap
   bool getDepthSet()
   {
     bool _retval;
-    _retval = panel_position_get_depth_set(cast(PanelPosition*)this._cPtr);
+    _retval = cast(bool)panel_position_get_depth_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class Position : gobject.object.ObjectWrap
   bool getRowSet()
   {
     bool _retval;
-    _retval = panel_position_get_row_set(cast(PanelPosition*)this._cPtr);
+    _retval = cast(bool)panel_position_get_row_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Position : gobject.object.ObjectWrap
   bool isIndeterminate()
   {
     bool _retval;
-    _retval = panel_position_is_indeterminate(cast(PanelPosition*)this._cPtr);
+    _retval = cast(bool)panel_position_is_indeterminate(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 

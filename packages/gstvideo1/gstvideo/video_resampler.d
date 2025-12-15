@@ -121,7 +121,7 @@ class VideoResampler
   bool init_(gstvideo.types.VideoResamplerMethod method, gstvideo.types.VideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, gst.structure.Structure options)
   {
     bool _retval;
-    _retval = gst_video_resampler_init(cast(GstVideoResampler*)this._cPtr, method, flags, nPhases, nTaps, shift, inSize, outSize, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_resampler_init(cast(GstVideoResampler*)this._cPtr, method, flags, nPhases, nTaps, shift, inSize, outSize, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 }

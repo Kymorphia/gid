@@ -439,7 +439,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   bool getPremultiplied()
   {
     bool _retval;
-    _retval = gdk_dmabuf_texture_builder_get_premultiplied(cast(GdkDmabufTextureBuilder*)this._cPtr);
+    _retval = cast(bool)gdk_dmabuf_texture_builder_get_premultiplied(cast(GdkDmabufTextureBuilder*)this._cPtr);
     return _retval;
   }
 

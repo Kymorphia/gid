@@ -144,7 +144,7 @@ class WebInspector : gobject.object.ObjectWrap
   bool getCanAttach()
   {
     bool _retval;
-    _retval = webkit_web_inspector_get_can_attach(cast(WebKitWebInspector*)this._cPtr);
+    _retval = cast(bool)webkit_web_inspector_get_can_attach(cast(WebKitWebInspector*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class WebInspector : gobject.object.ObjectWrap
   bool isAttached()
   {
     bool _retval;
-    _retval = webkit_web_inspector_is_attached(cast(WebKitWebInspector*)this._cPtr);
+    _retval = cast(bool)webkit_web_inspector_is_attached(cast(WebKitWebInspector*)this._cPtr);
     return _retval;
   }
 

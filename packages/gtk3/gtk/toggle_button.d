@@ -197,7 +197,7 @@ class ToggleButton : gtk.button.Button
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_toggle_button_get_active(cast(GtkToggleButton*)this._cPtr);
+    _retval = cast(bool)gtk_toggle_button_get_active(cast(GtkToggleButton*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class ToggleButton : gtk.button.Button
   bool getInconsistent()
   {
     bool _retval;
-    _retval = gtk_toggle_button_get_inconsistent(cast(GtkToggleButton*)this._cPtr);
+    _retval = cast(bool)gtk_toggle_button_get_inconsistent(cast(GtkToggleButton*)this._cPtr);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class ToggleButton : gtk.button.Button
   bool getMode()
   {
     bool _retval;
-    _retval = gtk_toggle_button_get_mode(cast(GtkToggleButton*)this._cPtr);
+    _retval = cast(bool)gtk_toggle_button_get_mode(cast(GtkToggleButton*)this._cPtr);
     return _retval;
   }
 

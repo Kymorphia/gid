@@ -33,18 +33,18 @@ __gshared extern(C)
   SecretCollection* function(SecretService* service, const(char)* alias_, SecretCollectionFlags flags, GCancellable* cancellable, GError** _err) c_secret_collection_for_alias_sync; ///
   void function(SecretService* service, const(char)* collectionPath, SecretCollectionFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_collection_new_for_dbus_path; ///
   void function(SecretCollection* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_collection_delete; ///
-  bool function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_delete_finish; ///
-  bool function(SecretCollection* self, GCancellable* cancellable, GError** _err) c_secret_collection_delete_sync; ///
+  gboolean function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_delete_finish; ///
+  gboolean function(SecretCollection* self, GCancellable* cancellable, GError** _err) c_secret_collection_delete_sync; ///
   ulong function(SecretCollection* self) c_secret_collection_get_created; ///
   SecretCollectionFlags function(SecretCollection* self) c_secret_collection_get_flags; ///
   GList* function(SecretCollection* self) c_secret_collection_get_items; ///
   char* function(SecretCollection* self) c_secret_collection_get_label; ///
-  bool function(SecretCollection* self) c_secret_collection_get_locked; ///
+  gboolean function(SecretCollection* self) c_secret_collection_get_locked; ///
   ulong function(SecretCollection* self) c_secret_collection_get_modified; ///
   SecretService* function(SecretCollection* self) c_secret_collection_get_service; ///
   void function(SecretCollection* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_collection_load_items; ///
-  bool function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_load_items_finish; ///
-  bool function(SecretCollection* self, GCancellable* cancellable, GError** _err) c_secret_collection_load_items_sync; ///
+  gboolean function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_load_items_finish; ///
+  gboolean function(SecretCollection* self, GCancellable* cancellable, GError** _err) c_secret_collection_load_items_sync; ///
   void function(SecretCollection* self) c_secret_collection_refresh; ///
   void function(SecretCollection* self, const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_collection_search; ///
   GList* function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_search_finish; ///
@@ -53,8 +53,8 @@ __gshared extern(C)
   char** function(SecretCollection* collection, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_collection_search_for_dbus_paths_sync; ///
   GList* function(SecretCollection* self, const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GError** _err) c_secret_collection_search_sync; ///
   void function(SecretCollection* self, const(char)* label, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_collection_set_label; ///
-  bool function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_set_label_finish; ///
-  bool function(SecretCollection* self, const(char)* label, GCancellable* cancellable, GError** _err) c_secret_collection_set_label_sync; ///
+  gboolean function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_set_label_finish; ///
+  gboolean function(SecretCollection* self, const(char)* label, GCancellable* cancellable, GError** _err) c_secret_collection_set_label_sync; ///
 
   // Item
   GType function() c_secret_item_get_type; ///
@@ -64,34 +64,34 @@ __gshared extern(C)
   SecretItem* function(GAsyncResult* result, GError** _err) c_secret_item_create_finish; ///
   SecretItem* function(SecretCollection* collection, const(SecretSchema)* schema, GHashTable* attributes, const(char)* label, SecretValue* value, SecretItemCreateFlags flags, GCancellable* cancellable, GError** _err) c_secret_item_create_sync; ///
   void function(GList* items, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_item_load_secrets; ///
-  bool function(GAsyncResult* result, GError** _err) c_secret_item_load_secrets_finish; ///
-  bool function(GList* items, GCancellable* cancellable, GError** _err) c_secret_item_load_secrets_sync; ///
+  gboolean function(GAsyncResult* result, GError** _err) c_secret_item_load_secrets_finish; ///
+  gboolean function(GList* items, GCancellable* cancellable, GError** _err) c_secret_item_load_secrets_sync; ///
   void function(SecretService* service, const(char)* itemPath, SecretItemFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_item_new_for_dbus_path; ///
   void function(SecretItem* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_item_delete; ///
-  bool function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_delete_finish; ///
-  bool function(SecretItem* self, GCancellable* cancellable, GError** _err) c_secret_item_delete_sync; ///
+  gboolean function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_delete_finish; ///
+  gboolean function(SecretItem* self, GCancellable* cancellable, GError** _err) c_secret_item_delete_sync; ///
   GHashTable* function(SecretItem* self) c_secret_item_get_attributes; ///
   ulong function(SecretItem* self) c_secret_item_get_created; ///
   SecretItemFlags function(SecretItem* self) c_secret_item_get_flags; ///
   char* function(SecretItem* self) c_secret_item_get_label; ///
-  bool function(SecretItem* self) c_secret_item_get_locked; ///
+  gboolean function(SecretItem* self) c_secret_item_get_locked; ///
   ulong function(SecretItem* self) c_secret_item_get_modified; ///
   char* function(SecretItem* self) c_secret_item_get_schema_name; ///
   SecretValue* function(SecretItem* self) c_secret_item_get_secret; ///
   SecretService* function(SecretItem* self) c_secret_item_get_service; ///
   void function(SecretItem* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_item_load_secret; ///
-  bool function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_load_secret_finish; ///
-  bool function(SecretItem* self, GCancellable* cancellable, GError** _err) c_secret_item_load_secret_sync; ///
+  gboolean function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_load_secret_finish; ///
+  gboolean function(SecretItem* self, GCancellable* cancellable, GError** _err) c_secret_item_load_secret_sync; ///
   void function(SecretItem* self) c_secret_item_refresh; ///
   void function(SecretItem* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_item_set_attributes; ///
-  bool function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_set_attributes_finish; ///
-  bool function(SecretItem* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_item_set_attributes_sync; ///
+  gboolean function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_set_attributes_finish; ///
+  gboolean function(SecretItem* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_item_set_attributes_sync; ///
   void function(SecretItem* self, const(char)* label, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_item_set_label; ///
-  bool function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_set_label_finish; ///
-  bool function(SecretItem* self, const(char)* label, GCancellable* cancellable, GError** _err) c_secret_item_set_label_sync; ///
+  gboolean function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_set_label_finish; ///
+  gboolean function(SecretItem* self, const(char)* label, GCancellable* cancellable, GError** _err) c_secret_item_set_label_sync; ///
   void function(SecretItem* self, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_item_set_secret; ///
-  bool function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_set_secret_finish; ///
-  bool function(SecretItem* self, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_item_set_secret_sync; ///
+  gboolean function(SecretItem* self, GAsyncResult* result, GError** _err) c_secret_item_set_secret_finish; ///
+  gboolean function(SecretItem* self, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_item_set_secret_sync; ///
 
   // Prompt
   GType function() c_secret_prompt_get_type; ///
@@ -130,8 +130,8 @@ __gshared extern(C)
   SecretService* function(GAsyncResult* result, GError** _err) c_secret_service_open_finish; ///
   SecretService* function(GType serviceGtype, const(char)* serviceBusName, SecretServiceFlags flags, GCancellable* cancellable, GError** _err) c_secret_service_open_sync; ///
   void function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_clear; ///
-  bool function(SecretService* service, GAsyncResult* result, GError** _err) c_secret_service_clear_finish; ///
-  bool function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_service_clear_sync; ///
+  gboolean function(SecretService* service, GAsyncResult* result, GError** _err) c_secret_service_clear_finish; ///
+  gboolean function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_service_clear_sync; ///
   void function(SecretService* self, GHashTable* properties, const(char)* alias_, SecretCollectionCreateFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_create_collection_dbus_path; ///
   char* function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_create_collection_dbus_path_finish; ///
   char* function(SecretService* self, GHashTable* properties, const(char)* alias_, SecretCollectionCreateFlags flags, GCancellable* cancellable, GError** _err) c_secret_service_create_collection_dbus_path_sync; ///
@@ -140,12 +140,12 @@ __gshared extern(C)
   char* function(SecretService* self, const(char)* collectionPath, GHashTable* properties, SecretValue* value, SecretItemCreateFlags flags, GCancellable* cancellable, GError** _err) c_secret_service_create_item_dbus_path_sync; ///
   SecretValue* function(SecretService* service, GVariant* value) c_secret_service_decode_dbus_secret; ///
   void function(SecretService* self, const(char)* itemPath, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_delete_item_dbus_path; ///
-  bool function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_delete_item_dbus_path_finish; ///
-  bool function(SecretService* self, const(char)* itemPath, GCancellable* cancellable, GError** _err) c_secret_service_delete_item_dbus_path_sync; ///
+  gboolean function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_delete_item_dbus_path_finish; ///
+  gboolean function(SecretService* self, const(char)* itemPath, GCancellable* cancellable, GError** _err) c_secret_service_delete_item_dbus_path_sync; ///
   GVariant* function(SecretService* service, SecretValue* value) c_secret_service_encode_dbus_secret; ///
   void function(SecretService* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_ensure_session; ///
-  bool function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_ensure_session_finish; ///
-  bool function(SecretService* self, GCancellable* cancellable, GError** _err) c_secret_service_ensure_session_sync; ///
+  gboolean function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_ensure_session_finish; ///
+  gboolean function(SecretService* self, GCancellable* cancellable, GError** _err) c_secret_service_ensure_session_sync; ///
   GType function(SecretService* self) c_secret_service_get_collection_gtype; ///
   GList* function(SecretService* self) c_secret_service_get_collections; ///
   SecretServiceFlags function(SecretService* self) c_secret_service_get_flags; ///
@@ -159,8 +159,8 @@ __gshared extern(C)
   const(char)* function(SecretService* self) c_secret_service_get_session_algorithms; ///
   const(char)* function(SecretService* self) c_secret_service_get_session_dbus_path; ///
   void function(SecretService* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_load_collections; ///
-  bool function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_load_collections_finish; ///
-  bool function(SecretService* self, GCancellable* cancellable, GError** _err) c_secret_service_load_collections_sync; ///
+  gboolean function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_load_collections_finish; ///
+  gboolean function(SecretService* self, GCancellable* cancellable, GError** _err) c_secret_service_load_collections_sync; ///
   void function(SecretService* service, GList* objects, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_lock; ///
   void function(SecretService* self, const(char*)* paths, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_lock_dbus_paths; ///
   int function(SecretService* self, GAsyncResult* result, char*** locked, GError** _err) c_secret_service_lock_dbus_paths_finish; ///
@@ -182,18 +182,18 @@ __gshared extern(C)
   void function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_search; ///
   GList* function(SecretService* service, GAsyncResult* result, GError** _err) c_secret_service_search_finish; ///
   void function(SecretService* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_search_for_dbus_paths; ///
-  bool function(SecretService* self, GAsyncResult* result, char*** unlocked, char*** locked, GError** _err) c_secret_service_search_for_dbus_paths_finish; ///
-  bool function(SecretService* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, char*** unlocked, char*** locked, GError** _err) c_secret_service_search_for_dbus_paths_sync; ///
+  gboolean function(SecretService* self, GAsyncResult* result, char*** unlocked, char*** locked, GError** _err) c_secret_service_search_for_dbus_paths_finish; ///
+  gboolean function(SecretService* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, char*** unlocked, char*** locked, GError** _err) c_secret_service_search_for_dbus_paths_sync; ///
   GList* function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GError** _err) c_secret_service_search_sync; ///
   void function(SecretService* service, const(char)* alias_, SecretCollection* collection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_set_alias; ///
-  bool function(SecretService* service, GAsyncResult* result, GError** _err) c_secret_service_set_alias_finish; ///
-  bool function(SecretService* service, const(char)* alias_, SecretCollection* collection, GCancellable* cancellable, GError** _err) c_secret_service_set_alias_sync; ///
+  gboolean function(SecretService* service, GAsyncResult* result, GError** _err) c_secret_service_set_alias_finish; ///
+  gboolean function(SecretService* service, const(char)* alias_, SecretCollection* collection, GCancellable* cancellable, GError** _err) c_secret_service_set_alias_sync; ///
   void function(SecretService* self, const(char)* alias_, const(char)* collectionPath, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_set_alias_to_dbus_path; ///
-  bool function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_set_alias_to_dbus_path_finish; ///
-  bool function(SecretService* self, const(char)* alias_, const(char)* collectionPath, GCancellable* cancellable, GError** _err) c_secret_service_set_alias_to_dbus_path_sync; ///
+  gboolean function(SecretService* self, GAsyncResult* result, GError** _err) c_secret_service_set_alias_to_dbus_path_finish; ///
+  gboolean function(SecretService* self, const(char)* alias_, const(char)* collectionPath, GCancellable* cancellable, GError** _err) c_secret_service_set_alias_to_dbus_path_sync; ///
   void function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_store; ///
-  bool function(SecretService* service, GAsyncResult* result, GError** _err) c_secret_service_store_finish; ///
-  bool function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_service_store_sync; ///
+  gboolean function(SecretService* service, GAsyncResult* result, GError** _err) c_secret_service_store_finish; ///
+  gboolean function(SecretService* service, const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_service_store_sync; ///
   void function(SecretService* service, GList* objects, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_unlock; ///
   void function(SecretService* self, const(char*)* paths, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_service_unlock_dbus_paths; ///
   int function(SecretService* self, GAsyncResult* result, char*** unlocked, GError** _err) c_secret_service_unlock_dbus_paths_finish; ///
@@ -215,13 +215,13 @@ __gshared extern(C)
   // global
   GHashTable* function(const(SecretSchema)* schema,  ...) c_secret_attributes_build; ///
   GHashTable* function(const(SecretSchema)* schema, void* va) c_secret_attributes_buildv; ///
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, GError** _err) c_secret_attributes_validate; ///
+  gboolean function(const(SecretSchema)* schema, GHashTable* attributes, GError** _err) c_secret_attributes_validate; ///
   const(SecretSchema)* function(SecretSchemaType type) c_secret_get_schema; ///
   void function(const(SecretSchema)* schema, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_clear; ///
-  bool function(GAsyncResult* result, GError** _err) c_secret_password_clear_finish; ///
-  bool function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_clear_sync; ///
+  gboolean function(GAsyncResult* result, GError** _err) c_secret_password_clear_finish; ///
+  gboolean function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_clear_sync; ///
   void function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_clearv; ///
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_clearv_sync; ///
+  gboolean function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_clearv_sync; ///
   void function(char* password) c_secret_password_free; ///
   void function(const(SecretSchema)* schema, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_lookup; ///
   SecretValue* function(GAsyncResult* result, GError** _err) c_secret_password_lookup_binary_finish; ///
@@ -241,13 +241,13 @@ __gshared extern(C)
   GList* function(const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GError** _err) c_secret_password_searchv_sync; ///
   void function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_store; ///
   void function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_store_binary; ///
-  bool function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_binary_sync; ///
-  bool function(GAsyncResult* result, GError** _err) c_secret_password_store_finish; ///
-  bool function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_sync; ///
+  gboolean function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_binary_sync; ///
+  gboolean function(GAsyncResult* result, GError** _err) c_secret_password_store_finish; ///
+  gboolean function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_sync; ///
   void function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_storev; ///
   void function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_storev_binary; ///
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_password_storev_binary_sync; ///
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** _err) c_secret_password_storev_sync; ///
+  gboolean function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_password_storev_binary_sync; ///
+  gboolean function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** _err) c_secret_password_storev_sync; ///
   void function(char* password) c_secret_password_wipe; ///
 
   // Error

@@ -246,7 +246,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool add(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_bin_add(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_bin_add(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -455,7 +455,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool recalculateLatency()
   {
     bool _retval;
-    _retval = gst_bin_recalculate_latency(cast(GstBin*)this._cPtr);
+    _retval = cast(bool)gst_bin_recalculate_latency(cast(GstBin*)this._cPtr);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool remove(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_bin_remove(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_bin_remove(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -505,7 +505,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool syncChildrenStates()
   {
     bool _retval;
-    _retval = gst_bin_sync_children_states(cast(GstBin*)this._cPtr);
+    _retval = cast(bool)gst_bin_sync_children_states(cast(GstBin*)this._cPtr);
     return _retval;
   }
 

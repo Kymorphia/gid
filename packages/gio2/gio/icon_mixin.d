@@ -57,7 +57,7 @@ template IconT()
   override bool equal(gio.icon.Icon icon2 = null)
   {
     bool _retval;
-    _retval = g_icon_equal(cast(GIcon*)this._cPtr, icon2 ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon2)._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_icon_equal(cast(GIcon*)this._cPtr, icon2 ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon2)._cPtr(No.Dup) : null);
     return _retval;
   }
 

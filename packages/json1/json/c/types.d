@@ -314,7 +314,7 @@ struct JsonObjectIter
   int[2] privInt;
 
   /** */
-  bool[1] privBoolean;
+  gboolean[1] privBoolean;
 }
 
 /**
@@ -708,7 +708,7 @@ struct JsonSerializableIface
   extern(C) JsonNode* function(JsonSerializable* serializable, const(char)* propertyName, const(GValue)* value, GParamSpec* pspec) serializeProperty;
 
   /** */
-  extern(C) bool function(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) deserializeProperty;
+  extern(C) gboolean function(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) deserializeProperty;
 
   /** */
   extern(C) GParamSpec* function(JsonSerializable* serializable, const(char)* name) findProperty;

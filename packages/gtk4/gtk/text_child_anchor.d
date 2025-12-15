@@ -91,7 +91,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
   bool getDeleted()
   {
     bool _retval;
-    _retval = gtk_text_child_anchor_get_deleted(cast(GtkTextChildAnchor*)this._cPtr);
+    _retval = cast(bool)gtk_text_child_anchor_get_deleted(cast(GtkTextChildAnchor*)this._cPtr);
     return _retval;
   }
 

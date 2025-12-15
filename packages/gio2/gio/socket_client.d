@@ -676,7 +676,7 @@ class SocketClient : gobject.object.ObjectWrap
   bool getEnableProxy()
   {
     bool _retval;
-    _retval = g_socket_client_get_enable_proxy(cast(GSocketClient*)this._cPtr);
+    _retval = cast(bool)g_socket_client_get_enable_proxy(cast(GSocketClient*)this._cPtr);
     return _retval;
   }
 
@@ -772,7 +772,7 @@ class SocketClient : gobject.object.ObjectWrap
   bool getTls()
   {
     bool _retval;
-    _retval = g_socket_client_get_tls(cast(GSocketClient*)this._cPtr);
+    _retval = cast(bool)g_socket_client_get_tls(cast(GSocketClient*)this._cPtr);
     return _retval;
   }
 

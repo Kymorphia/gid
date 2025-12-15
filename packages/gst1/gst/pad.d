@@ -238,7 +238,7 @@ class Pad : gst.object.ObjectWrap
   bool activateMode(gst.types.PadMode mode, bool active)
   {
     bool _retval;
-    _retval = gst_pad_activate_mode(cast(GstPad*)this._cPtr, mode, active);
+    _retval = cast(bool)gst_pad_activate_mode(cast(GstPad*)this._cPtr, mode, active);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class Pad : gst.object.ObjectWrap
   bool canLink(gst.pad.Pad sinkpad)
   {
     bool _retval;
-    _retval = gst_pad_can_link(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_can_link(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ class Pad : gst.object.ObjectWrap
   bool checkReconfigure()
   {
     bool _retval;
-    _retval = gst_pad_check_reconfigure(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_check_reconfigure(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class Pad : gst.object.ObjectWrap
   bool eventDefault(gst.object.ObjectWrap parent, gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_pad_event_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_pad_event_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -442,18 +442,18 @@ class Pad : gst.object.ObjectWrap
   */
   bool forward(gst.types.PadForwardFunction forward)
   {
-    extern(C) bool _forwardCallback(GstPad* pad, void* userData)
+    extern(C) gboolean _forwardCallback(GstPad* pad, void* userData)
     {
       auto _dlg = cast(gst.types.PadForwardFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _forwardCB = forward ? &_forwardCallback : null;
 
     bool _retval;
     auto _forward = forward ? cast(void*)&(forward) : null;
-    _retval = gst_pad_forward(cast(GstPad*)this._cPtr, _forwardCB, _forward);
+    _retval = cast(bool)gst_pad_forward(cast(GstPad*)this._cPtr, _forwardCB, _forward);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class Pad : gst.object.ObjectWrap
   bool hasCurrentCaps()
   {
     bool _retval;
-    _retval = gst_pad_has_current_caps(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_has_current_caps(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -754,7 +754,7 @@ class Pad : gst.object.ObjectWrap
   bool isActive()
   {
     bool _retval;
-    _retval = gst_pad_is_active(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_is_active(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -769,7 +769,7 @@ class Pad : gst.object.ObjectWrap
   bool isBlocked()
   {
     bool _retval;
-    _retval = gst_pad_is_blocked(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_is_blocked(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -783,7 +783,7 @@ class Pad : gst.object.ObjectWrap
   bool isBlocking()
   {
     bool _retval;
-    _retval = gst_pad_is_blocking(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_is_blocking(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -796,7 +796,7 @@ class Pad : gst.object.ObjectWrap
   bool isLinked()
   {
     bool _retval;
-    _retval = gst_pad_is_linked(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_is_linked(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -900,7 +900,7 @@ class Pad : gst.object.ObjectWrap
   bool linkMaybeGhosting(gst.pad.Pad sink)
   {
     bool _retval;
-    _retval = gst_pad_link_maybe_ghosting(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_link_maybe_ghosting(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -925,7 +925,7 @@ class Pad : gst.object.ObjectWrap
   bool linkMaybeGhostingFull(gst.pad.Pad sink, gst.types.PadLinkCheck flags)
   {
     bool _retval;
-    _retval = gst_pad_link_maybe_ghosting_full(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null, flags);
+    _retval = cast(bool)gst_pad_link_maybe_ghosting_full(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -946,7 +946,7 @@ class Pad : gst.object.ObjectWrap
   bool needsReconfigure()
   {
     bool _retval;
-    _retval = gst_pad_needs_reconfigure(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_needs_reconfigure(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -960,7 +960,7 @@ class Pad : gst.object.ObjectWrap
   bool pauseTask()
   {
     bool _retval;
-    _retval = gst_pad_pause_task(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_pause_task(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -978,7 +978,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQuery(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_peer_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_peer_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -993,7 +993,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryAcceptCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_peer_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1035,7 +1035,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
+    _retval = cast(bool)gst_pad_peer_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
     return _retval;
   }
 
@@ -1051,7 +1051,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryDuration(gst.types.Format format, out long duration)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
+    _retval = cast(bool)gst_pad_peer_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
     return _retval;
   }
 
@@ -1067,7 +1067,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryPosition(gst.types.Format format, out long cur)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
+    _retval = cast(bool)gst_pad_peer_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
     return _retval;
   }
 
@@ -1086,7 +1086,7 @@ class Pad : gst.object.ObjectWrap
   bool proxyQueryAcceptCaps(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_proxy_query_accept_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_proxy_query_accept_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1105,7 +1105,7 @@ class Pad : gst.object.ObjectWrap
   bool proxyQueryCaps(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_proxy_query_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_proxy_query_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1200,7 +1200,7 @@ class Pad : gst.object.ObjectWrap
   bool pushEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_pad_push_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_pad_push_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1253,7 +1253,7 @@ class Pad : gst.object.ObjectWrap
   bool query(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1267,7 +1267,7 @@ class Pad : gst.object.ObjectWrap
   bool queryAcceptCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_pad_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1313,7 +1313,7 @@ class Pad : gst.object.ObjectWrap
   bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
     bool _retval;
-    _retval = gst_pad_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
+    _retval = cast(bool)gst_pad_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
     return _retval;
   }
 
@@ -1332,7 +1332,7 @@ class Pad : gst.object.ObjectWrap
   bool queryDefault(gst.object.ObjectWrap parent, gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_query_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_query_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1348,7 +1348,7 @@ class Pad : gst.object.ObjectWrap
   bool queryDuration(gst.types.Format format, out long duration)
   {
     bool _retval;
-    _retval = gst_pad_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
+    _retval = cast(bool)gst_pad_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
     return _retval;
   }
 
@@ -1363,7 +1363,7 @@ class Pad : gst.object.ObjectWrap
   bool queryPosition(gst.types.Format format, out long cur)
   {
     bool _retval;
-    _retval = gst_pad_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
+    _retval = cast(bool)gst_pad_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
     return _retval;
   }
 
@@ -1409,7 +1409,7 @@ class Pad : gst.object.ObjectWrap
   bool sendEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_pad_send_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_pad_send_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1433,7 +1433,7 @@ class Pad : gst.object.ObjectWrap
   bool setActive(bool active)
   {
     bool _retval;
-    _retval = gst_pad_set_active(cast(GstPad*)this._cPtr, active);
+    _retval = cast(bool)gst_pad_set_active(cast(GstPad*)this._cPtr, active);
     return _retval;
   }
 
@@ -1484,7 +1484,7 @@ class Pad : gst.object.ObjectWrap
     bool _retval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _retval = gst_pad_start_task(cast(GstPad*)this._cPtr, _funcCB, _func, _funcDestroyCB);
+    _retval = cast(bool)gst_pad_start_task(cast(GstPad*)this._cPtr, _funcCB, _func, _funcDestroyCB);
     return _retval;
   }
 
@@ -1498,11 +1498,11 @@ class Pad : gst.object.ObjectWrap
   */
   void stickyEventsForeach(gst.types.PadStickyEventsForeachFunction foreachFunc)
   {
-    extern(C) bool _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData)
+    extern(C) gboolean _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData)
     {
       auto _dlg = cast(gst.types.PadStickyEventsForeachFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
       return _retval;
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
@@ -1526,7 +1526,7 @@ class Pad : gst.object.ObjectWrap
   bool stopTask()
   {
     bool _retval;
-    _retval = gst_pad_stop_task(cast(GstPad*)this._cPtr);
+    _retval = cast(bool)gst_pad_stop_task(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -1560,7 +1560,7 @@ class Pad : gst.object.ObjectWrap
   bool unlink(gst.pad.Pad sinkpad)
   {
     bool _retval;
-    _retval = gst_pad_unlink(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_pad_unlink(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -192,7 +192,7 @@ class Regex : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = vte_regex_jit(cast(VteRegex*)this._cPtr, flags, &_err);
+    _retval = cast(bool)vte_regex_jit(cast(VteRegex*)this._cPtr, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -26,7 +26,7 @@ template DragSurfaceT()
   override bool present(int width, int height)
   {
     bool _retval;
-    _retval = gdk_drag_surface_present(cast(GdkDragSurface*)this._cPtr, width, height);
+    _retval = cast(bool)gdk_drag_surface_present(cast(GdkDragSurface*)this._cPtr, width, height);
     return _retval;
   }
 

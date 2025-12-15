@@ -176,7 +176,7 @@ class Assistant : gtk.window.Window
   bool getPageComplete(gtk.widget.Widget page)
   {
     bool _retval;
-    _retval = gtk_assistant_get_page_complete(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_assistant_get_page_complete(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class Assistant : gtk.window.Window
   bool getPageHasPadding(gtk.widget.Widget page)
   {
     bool _retval;
-    _retval = gtk_assistant_get_page_has_padding(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_assistant_get_page_has_padding(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 

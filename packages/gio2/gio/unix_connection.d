@@ -199,7 +199,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     bool _retval;
     GError *_err;
-    _retval = g_unix_connection_send_credentials(cast(GUnixConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_unix_connection_send_credentials(cast(GUnixConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -247,7 +247,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     bool _retval;
     GError *_err;
-    _retval = g_unix_connection_send_credentials_finish(cast(GUnixConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_unix_connection_send_credentials_finish(cast(GUnixConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -272,7 +272,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     bool _retval;
     GError *_err;
-    _retval = g_unix_connection_send_fd(cast(GUnixConnection*)this._cPtr, fd, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_unix_connection_send_fd(cast(GUnixConnection*)this._cPtr, fd, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

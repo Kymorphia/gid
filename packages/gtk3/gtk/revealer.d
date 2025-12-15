@@ -116,7 +116,7 @@ class Revealer : gtk.bin.Bin
   bool getChildRevealed()
   {
     bool _retval;
-    _retval = gtk_revealer_get_child_revealed(cast(GtkRevealer*)this._cPtr);
+    _retval = cast(bool)gtk_revealer_get_child_revealed(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Revealer : gtk.bin.Bin
   bool getRevealChild()
   {
     bool _retval;
-    _retval = gtk_revealer_get_reveal_child(cast(GtkRevealer*)this._cPtr);
+    _retval = cast(bool)gtk_revealer_get_reveal_child(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 

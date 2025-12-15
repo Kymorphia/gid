@@ -373,7 +373,7 @@ class MenuButton : gtk.widget.Widget
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_active(cast(GtkMenuButton*)this._cPtr);
+    _retval = cast(bool)gtk_menu_button_get_active(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class MenuButton : gtk.widget.Widget
   bool getAlwaysShowArrow()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_always_show_arrow(cast(GtkMenuButton*)this._cPtr);
+    _retval = cast(bool)gtk_menu_button_get_always_show_arrow(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class MenuButton : gtk.widget.Widget
   bool getCanShrink()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_can_shrink(cast(GtkMenuButton*)this._cPtr);
+    _retval = cast(bool)gtk_menu_button_get_can_shrink(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class MenuButton : gtk.widget.Widget
   bool getHasFrame()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_has_frame(cast(GtkMenuButton*)this._cPtr);
+    _retval = cast(bool)gtk_menu_button_get_has_frame(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class MenuButton : gtk.widget.Widget
   bool getPrimary()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_primary(cast(GtkMenuButton*)this._cPtr);
+    _retval = cast(bool)gtk_menu_button_get_primary(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -510,7 +510,7 @@ class MenuButton : gtk.widget.Widget
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_use_underline(cast(GtkMenuButton*)this._cPtr);
+    _retval = cast(bool)gtk_menu_button_get_use_underline(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 

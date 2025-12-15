@@ -37,7 +37,7 @@ template CompletionProposalT()
   override bool equal(gtksource.completion_proposal.CompletionProposal other)
   {
     bool _retval;
-    _retval = gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)this._cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)other)._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)this._cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)other)._cPtr(No.Dup) : null);
     return _retval;
   }
 

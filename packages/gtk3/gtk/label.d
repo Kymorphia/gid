@@ -821,7 +821,7 @@ class Label : gtk.misc.Misc
   bool getLineWrap()
   {
     bool _retval;
-    _retval = gtk_label_get_line_wrap(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_line_wrap(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -895,7 +895,7 @@ class Label : gtk.misc.Misc
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_label_get_selectable(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_selectable(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -911,7 +911,7 @@ class Label : gtk.misc.Misc
   bool getSelectionBounds(out int start, out int end)
   {
     bool _retval;
-    _retval = gtk_label_get_selection_bounds(cast(GtkLabel*)this._cPtr, cast(int*)&start, cast(int*)&end);
+    _retval = cast(bool)gtk_label_get_selection_bounds(cast(GtkLabel*)this._cPtr, cast(int*)&start, cast(int*)&end);
     return _retval;
   }
 
@@ -922,7 +922,7 @@ class Label : gtk.misc.Misc
   bool getSingleLineMode()
   {
     bool _retval;
-    _retval = gtk_label_get_single_line_mode(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_single_line_mode(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -949,7 +949,7 @@ class Label : gtk.misc.Misc
   bool getTrackVisitedLinks()
   {
     bool _retval;
-    _retval = gtk_label_get_track_visited_links(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_track_visited_links(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -962,7 +962,7 @@ class Label : gtk.misc.Misc
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = gtk_label_get_use_markup(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_use_markup(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -975,7 +975,7 @@ class Label : gtk.misc.Misc
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_label_get_use_underline(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_use_underline(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 

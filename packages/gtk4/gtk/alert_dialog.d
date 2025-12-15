@@ -306,7 +306,7 @@ class AlertDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_alert_dialog_get_modal(cast(GtkAlertDialog*)this._cPtr);
+    _retval = cast(bool)gtk_alert_dialog_get_modal(cast(GtkAlertDialog*)this._cPtr);
     return _retval;
   }
 

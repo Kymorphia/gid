@@ -204,7 +204,7 @@ class Completion : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _haystack = haystack.toCString(No.Alloc);
     const(char)* _casefoldNeedle = casefoldNeedle.toCString(No.Alloc);
-    _retval = gtk_source_completion_fuzzy_match(_haystack, _casefoldNeedle, cast(uint*)&priority);
+    _retval = cast(bool)gtk_source_completion_fuzzy_match(_haystack, _casefoldNeedle, cast(uint*)&priority);
     return _retval;
   }
 

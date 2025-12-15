@@ -308,7 +308,7 @@ struct GstTagDemuxClass
       tag. Buffer may be larger than the specified minimum size.
       Subclassed MUST override this vfunc in their class_init function.
   */
-  extern(C) bool function(GstTagDemux* demux, GstBuffer* buffer, bool startTag, uint* tagSize) identifyTag;
+  extern(C) gboolean function(GstTagDemux* demux, GstBuffer* buffer, gboolean startTag, uint* tagSize) identifyTag;
 
   /**
       parse the tag. Buffer will be exactly of the size determined by
@@ -318,7 +318,7 @@ struct GstTagDemuxClass
       smaller value and then return GST_TAG_DEMUX_RESULT_OK in one go.
       Subclassed MUST override the parse_tag vfunc in their class_init function.
   */
-  extern(C) GstTagDemuxResult function(GstTagDemux* demux, GstBuffer* buffer, bool startTag, uint* tagSize, GstTagList** tags) parseTag;
+  extern(C) GstTagDemuxResult function(GstTagDemux* demux, GstBuffer* buffer, gboolean startTag, uint* tagSize, GstTagList** tags) parseTag;
 
   /**
       merge start and end tags. Subclasses may want to override this

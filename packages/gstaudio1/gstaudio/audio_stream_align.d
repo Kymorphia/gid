@@ -183,7 +183,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   bool process(bool discont, gst.types.ClockTime timestamp, uint nSamples, out gst.types.ClockTime outTimestamp, out gst.types.ClockTime outDuration, out ulong outSamplePosition)
   {
     bool _retval;
-    _retval = gst_audio_stream_align_process(cast(GstAudioStreamAlign*)this._cPtr, discont, timestamp, nSamples, cast(GstClockTime*)&outTimestamp, cast(GstClockTime*)&outDuration, cast(ulong*)&outSamplePosition);
+    _retval = cast(bool)gst_audio_stream_align_process(cast(GstAudioStreamAlign*)this._cPtr, discont, timestamp, nSamples, cast(GstClockTime*)&outTimestamp, cast(GstClockTime*)&outDuration, cast(ulong*)&outSamplePosition);
     return _retval;
   }
 

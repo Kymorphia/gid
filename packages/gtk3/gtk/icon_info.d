@@ -83,7 +83,7 @@ class IconInfo : gobject.object.ObjectWrap
     bool _retval;
     int _nPoints;
     GdkPoint* _points;
-    _retval = gtk_icon_info_get_attach_points(cast(GtkIconInfo*)this._cPtr, &_points, &_nPoints);
+    _retval = cast(bool)gtk_icon_info_get_attach_points(cast(GtkIconInfo*)this._cPtr, &_points, &_nPoints);
     points.length = _nPoints;
     points[0 .. $] = (cast(gdk.types.Point*)_points)[0 .. _nPoints];
     gFree(cast(void*)_points);
@@ -176,7 +176,7 @@ class IconInfo : gobject.object.ObjectWrap
   {
     bool _retval;
     GdkRectangle _rectangle;
-    _retval = gtk_icon_info_get_embedded_rect(cast(GtkIconInfo*)this._cPtr, &_rectangle);
+    _retval = cast(bool)gtk_icon_info_get_embedded_rect(cast(GtkIconInfo*)this._cPtr, &_rectangle);
     rectangle = new gdk.rectangle.Rectangle(cast(void*)&_rectangle, No.Take);
     return _retval;
   }
@@ -208,7 +208,7 @@ class IconInfo : gobject.object.ObjectWrap
   bool isSymbolic()
   {
     bool _retval;
-    _retval = gtk_icon_info_is_symbolic(cast(GtkIconInfo*)this._cPtr);
+    _retval = cast(bool)gtk_icon_info_is_symbolic(cast(GtkIconInfo*)this._cPtr);
     return _retval;
   }
 
@@ -357,11 +357,13 @@ class IconInfo : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf loadSymbolic(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor, gdk.rgba.RGBA warningColor, gdk.rgba.RGBA errorColor, out bool wasSymbolic)
   {
     GdkPixbuf* _cretval;
+    gboolean _wasSymbolic;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic(cast(GtkIconInfo*)this._cPtr, fg ? cast(const(GdkRGBA)*)fg._cPtr(No.Dup) : null, successColor ? cast(const(GdkRGBA)*)successColor._cPtr(No.Dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor._cPtr(No.Dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor._cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic(cast(GtkIconInfo*)this._cPtr, fg ? cast(const(GdkRGBA)*)fg._cPtr(No.Dup) : null, successColor ? cast(const(GdkRGBA)*)successColor._cPtr(No.Dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor._cPtr(No.Dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor._cPtr(No.Dup) : null, &_wasSymbolic, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    wasSymbolic = cast(bool)_wasSymbolic;
     return _retval;
   }
 
@@ -417,11 +419,13 @@ class IconInfo : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicFinish(gio.async_result.AsyncResult res, out bool wasSymbolic)
   {
     GdkPixbuf* _cretval;
+    gboolean _wasSymbolic;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_finish(cast(GtkIconInfo*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_finish(cast(GtkIconInfo*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_wasSymbolic, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    wasSymbolic = cast(bool)_wasSymbolic;
     return _retval;
   }
 
@@ -448,11 +452,13 @@ class IconInfo : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicForContext(gtk.style_context.StyleContext context, out bool wasSymbolic)
   {
     GdkPixbuf* _cretval;
+    gboolean _wasSymbolic;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_for_context(cast(GtkIconInfo*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_for_context(cast(GtkIconInfo*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, &_wasSymbolic, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    wasSymbolic = cast(bool)_wasSymbolic;
     return _retval;
   }
 
@@ -502,11 +508,13 @@ class IconInfo : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicForContextFinish(gio.async_result.AsyncResult res, out bool wasSymbolic)
   {
     GdkPixbuf* _cretval;
+    gboolean _wasSymbolic;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_for_context_finish(cast(GtkIconInfo*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_for_context_finish(cast(GtkIconInfo*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_wasSymbolic, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    wasSymbolic = cast(bool)_wasSymbolic;
     return _retval;
   }
 
@@ -533,11 +541,13 @@ class IconInfo : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicForStyle(gtk.style.Style style, gtk.types.StateType state, out bool wasSymbolic)
   {
     GdkPixbuf* _cretval;
+    gboolean _wasSymbolic;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_for_style(cast(GtkIconInfo*)this._cPtr, style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, state, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_for_style(cast(GtkIconInfo*)this._cPtr, style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, state, &_wasSymbolic, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    wasSymbolic = cast(bool)_wasSymbolic;
     return _retval;
   }
 

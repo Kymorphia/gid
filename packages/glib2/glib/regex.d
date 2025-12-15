@@ -156,7 +156,7 @@ class Regex : gobject.boxed.Boxed
   bool getHasCrOrLf()
   {
     bool _retval;
-    _retval = g_regex_get_has_cr_or_lf(cast(const(GRegex)*)this._cPtr);
+    _retval = cast(bool)g_regex_get_has_cr_or_lf(cast(const(GRegex)*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class Regex : gobject.boxed.Boxed
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     GMatchInfo* _matchInfo;
-    _retval = g_regex_match(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
+    _retval = cast(bool)g_regex_match(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
     matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
     return _retval;
   }
@@ -314,7 +314,7 @@ class Regex : gobject.boxed.Boxed
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     GMatchInfo* _matchInfo;
-    _retval = g_regex_match_all(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
+    _retval = cast(bool)g_regex_match_all(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
     matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
     return _retval;
   }
@@ -378,7 +378,7 @@ class Regex : gobject.boxed.Boxed
     auto _string_ = cast(const(char)*)string_.ptr;
     GMatchInfo* _matchInfo;
     GError *_err;
-    _retval = g_regex_match_all_full(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, matchOptions, &_matchInfo, &_err);
+    _retval = cast(bool)g_regex_match_all_full(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, matchOptions, &_matchInfo, &_err);
     if (_err)
       throw new RegexException(_err);
     matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
@@ -457,7 +457,7 @@ class Regex : gobject.boxed.Boxed
     auto _string_ = cast(const(char)*)string_.ptr;
     GMatchInfo* _matchInfo;
     GError *_err;
-    _retval = g_regex_match_full(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, matchOptions, &_matchInfo, &_err);
+    _retval = cast(bool)g_regex_match_full(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, matchOptions, &_matchInfo, &_err);
     if (_err)
       throw new RegexException(_err);
     matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
@@ -576,11 +576,11 @@ class Regex : gobject.boxed.Boxed
   */
   string replaceEval(string string_, int startPosition, glib.types.RegexMatchFlags matchOptions, glib.types.RegexEvalCallback eval)
   {
-    extern(C) bool _evalCallback(const(GMatchInfo)* matchInfo, GString* result, void* userData)
+    extern(C) gboolean _evalCallback(const(GMatchInfo)* matchInfo, GString* result, void* userData)
     {
       auto _dlg = cast(glib.types.RegexEvalCallback*)userData;
 
-      bool _retval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new glib.string_.String(cast(void*)result, No.Take) : null);
+      gboolean _retval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new glib.string_.String(cast(void*)result, No.Take) : null);
       return _retval;
     }
     auto _evalCB = eval ? &_evalCallback : null;
@@ -762,10 +762,12 @@ class Regex : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _replacement = replacement.toCString(No.Alloc);
+    gboolean _hasReferences;
     GError *_err;
-    _retval = g_regex_check_replacement(_replacement, cast(bool*)&hasReferences, &_err);
+    _retval = cast(bool)g_regex_check_replacement(_replacement, &_hasReferences, &_err);
     if (_err)
       throw new RegexException(_err);
+    hasReferences = cast(bool)_hasReferences;
     return _retval;
   }
 
@@ -851,7 +853,7 @@ class Regex : gobject.boxed.Boxed
     bool _retval;
     const(char)* _pattern = pattern.toCString(No.Alloc);
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _retval = g_regex_match_simple(_pattern, _string_, compileOptions, matchOptions);
+    _retval = cast(bool)g_regex_match_simple(_pattern, _string_, compileOptions, matchOptions);
     return _retval;
   }
 

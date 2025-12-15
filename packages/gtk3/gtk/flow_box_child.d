@@ -96,7 +96,7 @@ class FlowBoxChild : gtk.bin.Bin
   bool isSelected()
   {
     bool _retval;
-    _retval = gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)this._cPtr);
+    _retval = cast(bool)gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)this._cPtr);
     return _retval;
   }
 

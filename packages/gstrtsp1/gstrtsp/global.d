@@ -126,7 +126,7 @@ string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, st
 bool rtspHeaderAllowMultiple(gstrtsp.types.RTSPHeaderField field)
 {
   bool _retval;
-  _retval = gst_rtsp_header_allow_multiple(field);
+  _retval = cast(bool)gst_rtsp_header_allow_multiple(field);
   return _retval;
 }
 

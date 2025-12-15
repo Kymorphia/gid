@@ -211,7 +211,7 @@ class BaseTransform : gst.element.Element
   bool isInPlace()
   {
     bool _retval;
-    _retval = gst_base_transform_is_in_place(cast(GstBaseTransform*)this._cPtr);
+    _retval = cast(bool)gst_base_transform_is_in_place(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class BaseTransform : gst.element.Element
   bool isPassthrough()
   {
     bool _retval;
-    _retval = gst_base_transform_is_passthrough(cast(GstBaseTransform*)this._cPtr);
+    _retval = cast(bool)gst_base_transform_is_passthrough(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class BaseTransform : gst.element.Element
   bool isQosEnabled()
   {
     bool _retval;
-    _retval = gst_base_transform_is_qos_enabled(cast(GstBaseTransform*)this._cPtr);
+    _retval = cast(bool)gst_base_transform_is_qos_enabled(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class BaseTransform : gst.element.Element
   bool reconfigure()
   {
     bool _retval;
-    _retval = gst_base_transform_reconfigure(cast(GstBaseTransform*)this._cPtr);
+    _retval = cast(bool)gst_base_transform_reconfigure(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class BaseTransform : gst.element.Element
   bool updateSrcCaps(gst.caps.Caps updatedCaps)
   {
     bool _retval;
-    _retval = gst_base_transform_update_src_caps(cast(GstBaseTransform*)this._cPtr, updatedCaps ? cast(GstCaps*)updatedCaps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_base_transform_update_src_caps(cast(GstBaseTransform*)this._cPtr, updatedCaps ? cast(GstCaps*)updatedCaps._cPtr(No.Dup) : null);
     return _retval;
   }
 }

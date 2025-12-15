@@ -69,7 +69,7 @@ class DeviceProvider : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_device_provider_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
+    _retval = cast(bool)gst_device_provider_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class DeviceProvider : gst.object.ObjectWrap
   bool canMonitor()
   {
     bool _retval;
-    _retval = gst_device_provider_can_monitor(cast(GstDeviceProvider*)this._cPtr);
+    _retval = cast(bool)gst_device_provider_can_monitor(cast(GstDeviceProvider*)this._cPtr);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class DeviceProvider : gst.object.ObjectWrap
   bool isStarted()
   {
     bool _retval;
-    _retval = gst_device_provider_is_started(cast(GstDeviceProvider*)this._cPtr);
+    _retval = cast(bool)gst_device_provider_is_started(cast(GstDeviceProvider*)this._cPtr);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class DeviceProvider : gst.object.ObjectWrap
   bool start()
   {
     bool _retval;
-    _retval = gst_device_provider_start(cast(GstDeviceProvider*)this._cPtr);
+    _retval = cast(bool)gst_device_provider_start(cast(GstDeviceProvider*)this._cPtr);
     return _retval;
   }
 

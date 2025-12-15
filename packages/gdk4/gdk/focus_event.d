@@ -30,7 +30,7 @@ class FocusEvent : gdk.event.Event
   bool getIn()
   {
     bool _retval;
-    _retval = gdk_focus_event_get_in(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_focus_event_get_in(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

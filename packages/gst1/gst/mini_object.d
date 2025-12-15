@@ -279,7 +279,7 @@ class MiniObject : gobject.boxed.Boxed
   bool isWritable()
   {
     bool _retval;
-    _retval = gst_mini_object_is_writable(cast(const(GstMiniObject)*)this._cPtr);
+    _retval = cast(bool)gst_mini_object_is_writable(cast(const(GstMiniObject)*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class MiniObject : gobject.boxed.Boxed
   bool lock(gst.types.LockFlags flags)
   {
     bool _retval;
-    _retval = gst_mini_object_lock(cast(GstMiniObject*)this._cPtr, flags);
+    _retval = cast(bool)gst_mini_object_lock(cast(GstMiniObject*)this._cPtr, flags);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class MiniObject : gobject.boxed.Boxed
   static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null)
   {
     bool _retval;
-    _retval = gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class MiniObject : gobject.boxed.Boxed
   static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
   {
     bool _retval;
-    _retval = gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
     return _retval;
   }
 }

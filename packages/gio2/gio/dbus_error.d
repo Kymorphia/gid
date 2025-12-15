@@ -73,7 +73,7 @@ struct DBusError
   static bool isRemoteError(glib.error.ErrorWrap error)
   {
     bool _retval;
-    _retval = g_dbus_error_is_remote_error(error ? cast(const(GError)*)error._cPtr : null);
+    _retval = cast(bool)g_dbus_error_is_remote_error(error ? cast(const(GError)*)error._cPtr : null);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ struct DBusError
   {
     bool _retval;
     const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
-    _retval = g_dbus_error_register_error(errorDomain, errorCode, _dbusErrorName);
+    _retval = cast(bool)g_dbus_error_register_error(errorDomain, errorCode, _dbusErrorName);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ struct DBusError
   static bool stripRemoteError(glib.error.ErrorWrap error)
   {
     bool _retval;
-    _retval = g_dbus_error_strip_remote_error(error ? cast(GError*)error._cPtr : null);
+    _retval = cast(bool)g_dbus_error_strip_remote_error(error ? cast(GError*)error._cPtr : null);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ struct DBusError
   {
     bool _retval;
     const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
-    _retval = g_dbus_error_unregister_error(errorDomain, errorCode, _dbusErrorName);
+    _retval = cast(bool)g_dbus_error_unregister_error(errorDomain, errorCode, _dbusErrorName);
     return _retval;
   }
 }

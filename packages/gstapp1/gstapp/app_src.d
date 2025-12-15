@@ -574,7 +574,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   bool getEmitSignals()
   {
     bool _retval;
-    _retval = gst_app_src_get_emit_signals(cast(GstAppSrc*)this._cPtr);
+    _retval = cast(bool)gst_app_src_get_emit_signals(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 

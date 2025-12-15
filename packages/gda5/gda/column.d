@@ -80,7 +80,7 @@ class Column : gobject.object.ObjectWrap
   bool getAllowNull()
   {
     bool _retval;
-    _retval = gda_column_get_allow_null(cast(GdaColumn*)this._cPtr);
+    _retval = cast(bool)gda_column_get_allow_null(cast(GdaColumn*)this._cPtr);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Column : gobject.object.ObjectWrap
   bool getAutoIncrement()
   {
     bool _retval;
-    _retval = gda_column_get_auto_increment(cast(GdaColumn*)this._cPtr);
+    _retval = cast(bool)gda_column_get_auto_increment(cast(GdaColumn*)this._cPtr);
     return _retval;
   }
 

@@ -334,7 +334,7 @@ class DBusMessage : gobject.object.ObjectWrap
   bool getLocked()
   {
     bool _retval;
-    _retval = g_dbus_message_get_locked(cast(GDBusMessage*)this._cPtr);
+    _retval = cast(bool)g_dbus_message_get_locked(cast(GDBusMessage*)this._cPtr);
     return _retval;
   }
 
@@ -783,7 +783,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_dbus_message_to_gerror(cast(GDBusMessage*)this._cPtr, &_err);
+    _retval = cast(bool)g_dbus_message_to_gerror(cast(GDBusMessage*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -312,7 +312,7 @@ class ListView : gtk.list_base.ListBase
   bool getEnableRubberband()
   {
     bool _retval;
-    _retval = gtk_list_view_get_enable_rubberband(cast(GtkListView*)this._cPtr);
+    _retval = cast(bool)gtk_list_view_get_enable_rubberband(cast(GtkListView*)this._cPtr);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class ListView : gtk.list_base.ListBase
   bool getShowSeparators()
   {
     bool _retval;
-    _retval = gtk_list_view_get_show_separators(cast(GtkListView*)this._cPtr);
+    _retval = cast(bool)gtk_list_view_get_show_separators(cast(GtkListView*)this._cPtr);
     return _retval;
   }
 
@@ -372,7 +372,7 @@ class ListView : gtk.list_base.ListBase
   bool getSingleClickActivate()
   {
     bool _retval;
-    _retval = gtk_list_view_get_single_click_activate(cast(GtkListView*)this._cPtr);
+    _retval = cast(bool)gtk_list_view_get_single_click_activate(cast(GtkListView*)this._cPtr);
     return _retval;
   }
 

@@ -373,7 +373,7 @@ template FontChooserT()
   override bool getShowPreviewEntry()
   {
     bool _retval;
-    _retval = gtk_font_chooser_get_show_preview_entry(cast(GtkFontChooser*)this._cPtr);
+    _retval = cast(bool)gtk_font_chooser_get_show_preview_entry(cast(GtkFontChooser*)this._cPtr);
     return _retval;
   }
 
@@ -389,11 +389,11 @@ template FontChooserT()
   */
   override void setFilterFunc(gtk.types.FontFilterFunc filter = null)
   {
-    extern(C) bool _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data)
+    extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data)
     {
       auto _dlg = cast(gtk.types.FontFilterFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;

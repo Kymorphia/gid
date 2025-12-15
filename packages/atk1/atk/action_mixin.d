@@ -42,7 +42,7 @@ template ActionT()
   override bool doAction(int i)
   {
     bool _retval;
-    _retval = atk_action_do_action(cast(AtkAction*)this._cPtr, i);
+    _retval = cast(bool)atk_action_do_action(cast(AtkAction*)this._cPtr, i);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ template ActionT()
   {
     bool _retval;
     const(char)* _desc = desc.toCString(No.Alloc);
-    _retval = atk_action_set_description(cast(AtkAction*)this._cPtr, i, _desc);
+    _retval = cast(bool)atk_action_set_description(cast(AtkAction*)this._cPtr, i, _desc);
     return _retval;
   }
 }

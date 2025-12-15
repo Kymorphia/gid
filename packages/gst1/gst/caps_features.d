@@ -138,7 +138,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _feature = feature.toCString(No.Alloc);
-    _retval = gst_caps_features_contains(cast(const(GstCapsFeatures)*)this._cPtr, _feature);
+    _retval = cast(bool)gst_caps_features_contains(cast(const(GstCapsFeatures)*)this._cPtr, _feature);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool containsId(glib.types.Quark feature)
   {
     bool _retval;
-    _retval = gst_caps_features_contains_id(cast(const(GstCapsFeatures)*)this._cPtr, feature);
+    _retval = cast(bool)gst_caps_features_contains_id(cast(const(GstCapsFeatures)*)this._cPtr, feature);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool isAny()
   {
     bool _retval;
-    _retval = gst_caps_features_is_any(cast(const(GstCapsFeatures)*)this._cPtr);
+    _retval = cast(bool)gst_caps_features_is_any(cast(const(GstCapsFeatures)*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool isEqual(gst.caps_features.CapsFeatures features2)
   {
     bool _retval;
-    _retval = gst_caps_features_is_equal(cast(const(GstCapsFeatures)*)this._cPtr, features2 ? cast(const(GstCapsFeatures)*)features2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_features_is_equal(cast(const(GstCapsFeatures)*)this._cPtr, features2 ? cast(const(GstCapsFeatures)*)features2._cPtr(No.Dup) : null);
     return _retval;
   }
 

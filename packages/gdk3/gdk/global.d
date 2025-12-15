@@ -130,7 +130,7 @@ bool cairoGetClipRectangle(cairo.context.Context cr, out gdk.rectangle.Rectangle
 {
   bool _retval;
   GdkRectangle _rect;
-  _retval = gdk_cairo_get_clip_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, &_rect);
+  _retval = cast(bool)gdk_cairo_get_clip_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, &_rect);
   rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
   return _retval;
 }
@@ -359,7 +359,7 @@ void dragDropDone(gdk.drag_context.DragContext context, bool success)
 bool dragDropSucceeded(gdk.drag_context.DragContext context)
 {
   bool _retval;
-  _retval = gdk_drag_drop_succeeded(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
+  _retval = cast(bool)gdk_drag_drop_succeeded(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -426,7 +426,7 @@ gdk.atom.Atom dragGetSelection(gdk.drag_context.DragContext context)
 bool dragMotion(gdk.drag_context.DragContext context, gdk.window.Window destWindow, gdk.types.DragProtocol protocol, int xRoot, int yRoot, gdk.types.DragAction suggestedAction, gdk.types.DragAction possibleActions, uint time)
 {
   bool _retval;
-  _retval = gdk_drag_motion(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, destWindow ? cast(GdkWindow*)destWindow._cPtr(No.Dup) : null, protocol, xRoot, yRoot, suggestedAction, possibleActions, time);
+  _retval = cast(bool)gdk_drag_motion(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, destWindow ? cast(GdkWindow*)destWindow._cPtr(No.Dup) : null, protocol, xRoot, yRoot, suggestedAction, possibleActions, time);
   return _retval;
 }
 
@@ -559,7 +559,7 @@ void errorTrapPush()
 bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double angle)
 {
   bool _retval;
-  _retval = gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&angle);
+  _retval = cast(bool)gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&angle);
   return _retval;
 }
 
@@ -577,7 +577,7 @@ bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double a
 bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double x, out double y)
 {
   bool _retval;
-  _retval = gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&x, cast(double*)&y);
+  _retval = cast(bool)gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&x, cast(double*)&y);
   return _retval;
 }
 
@@ -594,7 +594,7 @@ bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double 
 bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out double distance)
 {
   bool _retval;
-  _retval = gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&distance);
+  _retval = cast(bool)gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&distance);
   return _retval;
 }
 
@@ -605,7 +605,7 @@ bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out doubl
 bool eventsPending()
 {
   bool _retval;
-  _retval = gdk_events_pending();
+  _retval = cast(bool)gdk_events_pending();
   return _retval;
 }
 
@@ -686,7 +686,7 @@ string getProgramClass()
 bool getShowEvents()
 {
   bool _retval;
-  _retval = gdk_get_show_events();
+  _retval = cast(bool)gdk_get_show_events();
   return _retval;
 }
 
@@ -782,7 +782,7 @@ uint keyvalFromName(string keyvalName)
 bool keyvalIsLower(uint keyval)
 {
   bool _retval;
-  _retval = gdk_keyval_is_lower(keyval);
+  _retval = cast(bool)gdk_keyval_is_lower(keyval);
   return _retval;
 }
 
@@ -797,7 +797,7 @@ bool keyvalIsLower(uint keyval)
 bool keyvalIsUpper(uint keyval)
 {
   bool _retval;
-  _retval = gdk_keyval_is_upper(keyval);
+  _retval = cast(bool)gdk_keyval_is_upper(keyval);
   return _retval;
 }
 
@@ -1195,7 +1195,7 @@ gdk.types.GrabStatus pointerGrab(gdk.window.Window window, bool ownerEvents, gdk
 bool pointerIsGrabbed()
 {
   bool _retval;
-  _retval = gdk_pointer_is_grabbed();
+  _retval = cast(bool)gdk_pointer_is_grabbed();
   return _retval;
 }
 
@@ -1286,7 +1286,7 @@ bool propertyGet(gdk.window.Window window, gdk.atom.Atom property, gdk.atom.Atom
   GdkAtom _actualPropertyType;
   int _actualLength;
   ubyte* _data;
-  _retval = gdk_property_get(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, property ? cast(GdkAtom)property._cPtr : null, type ? cast(GdkAtom)type._cPtr : null, offset, length, pdelete, &_actualPropertyType, cast(int*)&actualFormat, &_actualLength, &_data);
+  _retval = cast(bool)gdk_property_get(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, property ? cast(GdkAtom)property._cPtr : null, type ? cast(GdkAtom)type._cPtr : null, offset, length, pdelete, &_actualPropertyType, cast(int*)&actualFormat, &_actualLength, &_data);
   actualPropertyType = new gdk.atom.Atom(cast(void*)&_actualPropertyType, No.Take);
   data.length = _actualLength;
   data[0 .. $] = (cast(ubyte*)_data)[0 .. _actualLength];
@@ -1424,7 +1424,7 @@ gdk.window.Window selectionOwnerGetForDisplay(gdk.display.Display display, gdk.a
 bool selectionOwnerSet(gdk.window.Window owner, gdk.atom.Atom selection, uint time, bool sendEvent)
 {
   bool _retval;
-  _retval = gdk_selection_owner_set(owner ? cast(GdkWindow*)owner._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time, sendEvent);
+  _retval = cast(bool)gdk_selection_owner_set(owner ? cast(GdkWindow*)owner._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time, sendEvent);
   return _retval;
 }
 
@@ -1447,7 +1447,7 @@ bool selectionOwnerSet(gdk.window.Window owner, gdk.atom.Atom selection, uint ti
 bool selectionOwnerSetForDisplay(gdk.display.Display display, gdk.window.Window owner, gdk.atom.Atom selection, uint time, bool sendEvent)
 {
   bool _retval;
-  _retval = gdk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, owner ? cast(GdkWindow*)owner._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time, sendEvent);
+  _retval = cast(bool)gdk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, owner ? cast(GdkWindow*)owner._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time, sendEvent);
   return _retval;
 }
 
@@ -1583,7 +1583,7 @@ bool settingGet(string name, gobject.value.Value value)
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = gdk_setting_get(_name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+  _retval = cast(bool)gdk_setting_get(_name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1635,7 +1635,7 @@ void testRenderSync(gdk.window.Window window)
 bool testSimulateButton(gdk.window.Window window, int x, int y, uint button, gdk.types.ModifierType modifiers, gdk.types.EventType buttonPressrelease)
 {
   bool _retval;
-  _retval = gdk_test_simulate_button(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, x, y, button, modifiers, buttonPressrelease);
+  _retval = cast(bool)gdk_test_simulate_button(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, x, y, button, modifiers, buttonPressrelease);
   return _retval;
 }
 
@@ -1670,7 +1670,7 @@ bool testSimulateButton(gdk.window.Window window, int x, int y, uint button, gdk
 bool testSimulateKey(gdk.window.Window window, int x, int y, uint keyval, gdk.types.ModifierType modifiers, gdk.types.EventType keyPressrelease)
 {
   bool _retval;
-  _retval = gdk_test_simulate_key(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, x, y, keyval, modifiers, keyPressrelease);
+  _retval = cast(bool)gdk_test_simulate_key(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, x, y, keyval, modifiers, keyPressrelease);
   return _retval;
 }
 
@@ -1763,11 +1763,11 @@ int textPropertyToUtf8ListForDisplay(gdk.display.Display display, gdk.atom.Atom 
 */
 uint threadsAddIdle(int priority, glib.types.SourceFunc function_)
 {
-  extern(C) bool _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData)
   {
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    bool _retval = (*_dlg)();
+    gboolean _retval = (*_dlg)();
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
@@ -1834,11 +1834,11 @@ uint threadsAddIdle(int priority, glib.types.SourceFunc function_)
 */
 uint threadsAddTimeout(int priority, uint interval, glib.types.SourceFunc function_)
 {
-  extern(C) bool _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData)
   {
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    bool _retval = (*_dlg)();
+    gboolean _retval = (*_dlg)();
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
@@ -1864,11 +1864,11 @@ uint threadsAddTimeout(int priority, uint interval, glib.types.SourceFunc functi
 */
 uint threadsAddTimeoutSeconds(int priority, uint interval, glib.types.SourceFunc function_)
 {
-  extern(C) bool _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData)
   {
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    bool _retval = (*_dlg)();
+    gboolean _retval = (*_dlg)();
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;

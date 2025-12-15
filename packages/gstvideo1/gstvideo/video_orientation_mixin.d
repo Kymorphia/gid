@@ -26,7 +26,7 @@ template VideoOrientationT()
   override bool getHcenter(out int center)
   {
     bool _retval;
-    _retval = gst_video_orientation_get_hcenter(cast(GstVideoOrientation*)this._cPtr, cast(int*)&center);
+    _retval = cast(bool)gst_video_orientation_get_hcenter(cast(GstVideoOrientation*)this._cPtr, cast(int*)&center);
     return _retval;
   }
 
@@ -40,7 +40,9 @@ template VideoOrientationT()
   override bool getHflip(out bool flip)
   {
     bool _retval;
-    _retval = gst_video_orientation_get_hflip(cast(GstVideoOrientation*)this._cPtr, cast(bool*)&flip);
+    gboolean _flip;
+    _retval = cast(bool)gst_video_orientation_get_hflip(cast(GstVideoOrientation*)this._cPtr, &_flip);
+    flip = cast(bool)_flip;
     return _retval;
   }
 
@@ -54,7 +56,7 @@ template VideoOrientationT()
   override bool getVcenter(out int center)
   {
     bool _retval;
-    _retval = gst_video_orientation_get_vcenter(cast(GstVideoOrientation*)this._cPtr, cast(int*)&center);
+    _retval = cast(bool)gst_video_orientation_get_vcenter(cast(GstVideoOrientation*)this._cPtr, cast(int*)&center);
     return _retval;
   }
 
@@ -68,7 +70,9 @@ template VideoOrientationT()
   override bool getVflip(out bool flip)
   {
     bool _retval;
-    _retval = gst_video_orientation_get_vflip(cast(GstVideoOrientation*)this._cPtr, cast(bool*)&flip);
+    gboolean _flip;
+    _retval = cast(bool)gst_video_orientation_get_vflip(cast(GstVideoOrientation*)this._cPtr, &_flip);
+    flip = cast(bool)_flip;
     return _retval;
   }
 
@@ -82,7 +86,7 @@ template VideoOrientationT()
   override bool setHcenter(int center)
   {
     bool _retval;
-    _retval = gst_video_orientation_set_hcenter(cast(GstVideoOrientation*)this._cPtr, center);
+    _retval = cast(bool)gst_video_orientation_set_hcenter(cast(GstVideoOrientation*)this._cPtr, center);
     return _retval;
   }
 
@@ -96,7 +100,7 @@ template VideoOrientationT()
   override bool setHflip(bool flip)
   {
     bool _retval;
-    _retval = gst_video_orientation_set_hflip(cast(GstVideoOrientation*)this._cPtr, flip);
+    _retval = cast(bool)gst_video_orientation_set_hflip(cast(GstVideoOrientation*)this._cPtr, flip);
     return _retval;
   }
 
@@ -110,7 +114,7 @@ template VideoOrientationT()
   override bool setVcenter(int center)
   {
     bool _retval;
-    _retval = gst_video_orientation_set_vcenter(cast(GstVideoOrientation*)this._cPtr, center);
+    _retval = cast(bool)gst_video_orientation_set_vcenter(cast(GstVideoOrientation*)this._cPtr, center);
     return _retval;
   }
 
@@ -124,7 +128,7 @@ template VideoOrientationT()
   override bool setVflip(bool flip)
   {
     bool _retval;
-    _retval = gst_video_orientation_set_vflip(cast(GstVideoOrientation*)this._cPtr, flip);
+    _retval = cast(bool)gst_video_orientation_set_vflip(cast(GstVideoOrientation*)this._cPtr, flip);
     return _retval;
   }
 }

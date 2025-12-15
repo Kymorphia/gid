@@ -32,7 +32,7 @@ class SqlStatementSelect
   /** */
   @property bool distinct()
   {
-    return (cast(GdaSqlStatementSelect*)this._cPtr).distinct;
+    return cast(bool)(cast(GdaSqlStatementSelect*)this._cPtr).distinct;
   }
 
   /** */

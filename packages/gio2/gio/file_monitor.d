@@ -87,7 +87,7 @@ class FileMonitor : gobject.object.ObjectWrap
   bool cancel()
   {
     bool _retval;
-    _retval = g_file_monitor_cancel(cast(GFileMonitor*)this._cPtr);
+    _retval = cast(bool)g_file_monitor_cancel(cast(GFileMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class FileMonitor : gobject.object.ObjectWrap
   bool isCancelled()
   {
     bool _retval;
-    _retval = g_file_monitor_is_cancelled(cast(GFileMonitor*)this._cPtr);
+    _retval = cast(bool)g_file_monitor_is_cancelled(cast(GFileMonitor*)this._cPtr);
     return _retval;
   }
 

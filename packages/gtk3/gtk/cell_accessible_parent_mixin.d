@@ -93,7 +93,7 @@ template CellAccessibleParentT()
   override bool grabFocus(gtk.cell_accessible.CellAccessible cell)
   {
     bool _retval;
-    _retval = gtk_cell_accessible_parent_grab_focus(cast(GtkCellAccessibleParent*)this._cPtr, cell ? cast(GtkCellAccessible*)cell._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_cell_accessible_parent_grab_focus(cast(GtkCellAccessibleParent*)this._cPtr, cell ? cast(GtkCellAccessible*)cell._cPtr(No.Dup) : null);
     return _retval;
   }
 

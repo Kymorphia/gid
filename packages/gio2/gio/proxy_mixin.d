@@ -107,7 +107,7 @@ template ProxyT()
   override bool supportsHostname()
   {
     bool _retval;
-    _retval = g_proxy_supports_hostname(cast(GProxy*)this._cPtr);
+    _retval = cast(bool)g_proxy_supports_hostname(cast(GProxy*)this._cPtr);
     return _retval;
   }
 }

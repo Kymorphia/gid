@@ -66,7 +66,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
   bool getGracefulDisconnect()
   {
     bool _retval;
-    _retval = g_tcp_connection_get_graceful_disconnect(cast(GTcpConnection*)this._cPtr);
+    _retval = cast(bool)g_tcp_connection_get_graceful_disconnect(cast(GTcpConnection*)this._cPtr);
     return _retval;
   }
 

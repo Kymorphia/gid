@@ -232,7 +232,7 @@ class MenuModel : gobject.object.ObjectWrap
   bool isMutable()
   {
     bool _retval;
-    _retval = g_menu_model_is_mutable(cast(GMenuModel*)this._cPtr);
+    _retval = cast(bool)g_menu_model_is_mutable(cast(GMenuModel*)this._cPtr);
     return _retval;
   }
 

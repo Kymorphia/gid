@@ -132,7 +132,7 @@ class TreeSelection : gobject.object.ObjectWrap
     bool _retval;
     GtkTreeModel* _model;
     GtkTreeIter _iter;
-    _retval = gtk_tree_selection_get_selected(cast(GtkTreeSelection*)this._cPtr, &_model, &_iter);
+    _retval = cast(bool)gtk_tree_selection_get_selected(cast(GtkTreeSelection*)this._cPtr, &_model, &_iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
@@ -189,7 +189,7 @@ class TreeSelection : gobject.object.ObjectWrap
   bool iterIsSelected(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class TreeSelection : gobject.object.ObjectWrap
   bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -300,11 +300,11 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void setSelectFunction(gtk.types.TreeSelectionFunc func = null)
   {
-    extern(C) bool _funcCallback(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, bool pathCurrentlySelected, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, gboolean pathCurrentlySelected, void* data)
     {
       auto _dlg = cast(gtk.types.TreeSelectionFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, cast(bool)pathCurrentlySelected);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

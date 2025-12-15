@@ -41,7 +41,7 @@ class CrossingEvent : gdk.event.Event
   bool getFocus()
   {
     bool _retval;
-    _retval = gdk_crossing_event_get_focus(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_crossing_event_get_focus(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 

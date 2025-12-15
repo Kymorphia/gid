@@ -1048,7 +1048,7 @@ struct SoupAuthClass
   uint strength;
 
   /** */
-  extern(C) bool function(SoupAuth* auth, SoupMessage* msg, GHashTable* authHeader) update;
+  extern(C) gboolean function(SoupAuth* auth, SoupMessage* msg, GHashTable* authHeader) update;
 
   /** */
   extern(C) GSList* function(SoupAuth* auth, GUri* sourceUri) getProtectionSpace;
@@ -1057,16 +1057,16 @@ struct SoupAuthClass
   extern(C) void function(SoupAuth* auth, const(char)* username, const(char)* password) authenticate;
 
   /** */
-  extern(C) bool function(SoupAuth* auth) isAuthenticated;
+  extern(C) gboolean function(SoupAuth* auth) isAuthenticated;
 
   /** */
   extern(C) char* function(SoupAuth* auth, SoupMessage* msg) getAuthorization;
 
   /** */
-  extern(C) bool function(SoupAuth* auth, SoupMessage* msg) isReady;
+  extern(C) gboolean function(SoupAuth* auth, SoupMessage* msg) isReady;
 
   /** */
-  extern(C) bool function(SoupAuth* auth) canAuthenticate;
+  extern(C) gboolean function(SoupAuth* auth) canAuthenticate;
 
   /** */
   void*[6] padding;
@@ -1134,7 +1134,7 @@ struct SoupAuthDomainClass
   extern(C) char* function(SoupAuthDomain* domain, SoupServerMessage* msg) challenge;
 
   /** */
-  extern(C) bool function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) checkPassword;
+  extern(C) gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) checkPassword;
 
   /** */
   void*[6] padding;
@@ -1337,7 +1337,7 @@ struct SoupCookieJarClass
   extern(C) void function(SoupCookieJar* jar) save;
 
   /** */
-  extern(C) bool function(SoupCookieJar* jar) isPersistent;
+  extern(C) gboolean function(SoupCookieJar* jar) isPersistent;
 
   /** */
   extern(C) void function(SoupCookieJar* jar, SoupCookie* oldCookie, SoupCookie* newCookie) changed;
@@ -1424,7 +1424,7 @@ struct SoupHSTSEnforcerClass
       The @is_persistent function advertises whether the enforcer is persistent or
       whether changes made to it will be lost when the underlying `class@Session` is finished.
   */
-  extern(C) bool function(SoupHSTSEnforcer* hstsEnforcer) isPersistent;
+  extern(C) gboolean function(SoupHSTSEnforcer* hstsEnforcer) isPersistent;
 
   /**
       The @has_valid_policy function is called to check whether there is a valid
@@ -1433,7 +1433,7 @@ struct SoupHSTSEnforcerClass
       chain up to the @has_valid_policy in the parent class to check, for instance, for runtime
       policies.
   */
-  extern(C) bool function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) hasValidPolicy;
+  extern(C) gboolean function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) hasValidPolicy;
 
   /**
       The class closure for the #SoupHSTSEnforcer::changed signal.
@@ -2012,7 +2012,7 @@ struct SoupWebsocketExtensionClass
   /**
       called to configure the extension with the given parameters
   */
-  extern(C) bool function(SoupWebsocketExtension* extension, SoupWebsocketConnectionType connectionType, GHashTable* params, GError** _err) configure;
+  extern(C) gboolean function(SoupWebsocketExtension* extension, SoupWebsocketConnectionType connectionType, GHashTable* params, GError** _err) configure;
 
   /**
       called by the client to build the request header.
@@ -2077,13 +2077,13 @@ struct SoupWebsocketExtensionManagerClass
   GObjectClass parentClass;
 }
 
-alias extern(C) bool function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData) SoupAuthDomainBasicAuthCallback;
+alias extern(C) gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData) SoupAuthDomainBasicAuthCallback;
 
 alias extern(C) char* function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) SoupAuthDomainDigestAuthCallback;
 
-alias extern(C) bool function(SoupAuthDomain* domain, SoupServerMessage* msg, void* userData) SoupAuthDomainFilter;
+alias extern(C) gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg, void* userData) SoupAuthDomainFilter;
 
-alias extern(C) bool function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) SoupAuthDomainGenericAuthCallback;
+alias extern(C) gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) SoupAuthDomainGenericAuthCallback;
 
 alias extern(C) SoupLoggerLogLevel function(SoupLogger* logger, SoupMessage* msg, void* userData) SoupLoggerFilter;
 

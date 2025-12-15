@@ -29,7 +29,7 @@ class TouchEvent : gdk.event.Event
   bool getEmulatingPointer()
   {
     bool _retval;
-    _retval = gdk_touch_event_get_emulating_pointer(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_touch_event_get_emulating_pointer(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

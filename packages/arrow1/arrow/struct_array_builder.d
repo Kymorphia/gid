@@ -55,7 +55,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_struct_array_builder_append(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_struct_array_builder_append(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -66,7 +66,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_struct_array_builder_append_value(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_struct_array_builder_append_value(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

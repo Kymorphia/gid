@@ -102,7 +102,7 @@ class PathPoint : gobject.boxed.Boxed
   bool equal(gsk.path_point.PathPoint point2)
   {
     bool _retval;
-    _retval = gsk_path_point_equal(cast(const(GskPathPoint)*)this._cPtr, point2 ? cast(const(GskPathPoint)*)point2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gsk_path_point_equal(cast(const(GskPathPoint)*)this._cPtr, point2 ? cast(const(GskPathPoint)*)point2._cPtr(No.Dup) : null);
     return _retval;
   }
 

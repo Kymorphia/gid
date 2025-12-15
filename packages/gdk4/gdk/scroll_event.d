@@ -82,7 +82,7 @@ class ScrollEvent : gdk.event.Event
   bool isStop()
   {
     bool _retval;
-    _retval = gdk_scroll_event_is_stop(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_scroll_event_is_stop(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

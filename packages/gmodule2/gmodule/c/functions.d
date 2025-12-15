@@ -16,16 +16,16 @@ else
 __gshared extern(C)
 {
   // Module
-  bool function(ModuleC* module_) c_g_module_close; ///
+  gboolean function(ModuleC* module_) c_g_module_close; ///
   void function(ModuleC* module_) c_g_module_make_resident; ///
   const(char)* function(ModuleC* module_) c_g_module_name; ///
-  bool function(ModuleC* module_, const(char)* symbolName, void** symbol) c_g_module_symbol; ///
+  gboolean function(ModuleC* module_, const(char)* symbolName, void** symbol) c_g_module_symbol; ///
   char* function(const(char)* directory, const(char)* moduleName) c_g_module_build_path; ///
   const(char)* function() c_g_module_error; ///
   GQuark function() c_g_module_error_quark; ///
   ModuleC* function(const(char)* fileName, GModuleFlags flags) c_g_module_open; ///
   ModuleC* function(const(char)* fileName, GModuleFlags flags, GError** _err) c_g_module_open_full; ///
-  bool function() c_g_module_supported; ///
+  gboolean function() c_g_module_supported; ///
 }
 
 // Module

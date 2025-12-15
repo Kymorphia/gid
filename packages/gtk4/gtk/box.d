@@ -214,7 +214,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_box_get_homogeneous(cast(GtkBox*)this._cPtr);
+    _retval = cast(bool)gtk_box_get_homogeneous(cast(GtkBox*)this._cPtr);
     return _retval;
   }
 

@@ -116,7 +116,7 @@ class ShortcutAction : gobject.object.ObjectWrap
   bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.Variant args = null)
   {
     bool _retval;
-    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)this._cPtr, flags, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_shortcut_action_activate(cast(GtkShortcutAction*)this._cPtr, flags, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
     return _retval;
   }
 

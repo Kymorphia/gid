@@ -386,7 +386,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   bool getAlwaysShowImage()
   {
     bool _retval;
-    _retval = gtk_button_get_always_show_image(cast(GtkButton*)this._cPtr);
+    _retval = cast(bool)gtk_button_get_always_show_image(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   override bool getFocusOnClick()
   {
     bool _retval;
-    _retval = gtk_button_get_focus_on_click(cast(GtkButton*)this._cPtr);
+    _retval = cast(bool)gtk_button_get_focus_on_click(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -484,7 +484,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   bool getUseStock()
   {
     bool _retval;
-    _retval = gtk_button_get_use_stock(cast(GtkButton*)this._cPtr);
+    _retval = cast(bool)gtk_button_get_use_stock(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
+    _retval = cast(bool)gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 

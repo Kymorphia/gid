@@ -118,7 +118,7 @@ class MetaStruct : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_meta_struct_complement_all(cast(GdaMetaStruct*)this._cPtr, &_err);
+    _retval = cast(bool)gda_meta_struct_complement_all(cast(GdaMetaStruct*)this._cPtr, &_err);
     if (_err)
       throw new MetaStructException(_err);
     return _retval;
@@ -138,7 +138,7 @@ class MetaStruct : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_meta_struct_complement_default(cast(GdaMetaStruct*)this._cPtr, &_err);
+    _retval = cast(bool)gda_meta_struct_complement_default(cast(GdaMetaStruct*)this._cPtr, &_err);
     if (_err)
       throw new MetaStructException(_err);
     return _retval;
@@ -159,7 +159,7 @@ class MetaStruct : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_meta_struct_complement_depend(cast(GdaMetaStruct*)this._cPtr, dbo ? cast(GdaMetaDbObject*)dbo._cPtr : null, &_err);
+    _retval = cast(bool)gda_meta_struct_complement_depend(cast(GdaMetaStruct*)this._cPtr, dbo ? cast(GdaMetaDbObject*)dbo._cPtr : null, &_err);
     if (_err)
       throw new MetaStructException(_err);
     return _retval;
@@ -183,7 +183,7 @@ class MetaStruct : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_meta_struct_complement_schema(cast(GdaMetaStruct*)this._cPtr, catalog ? cast(const(GValue)*)catalog._cPtr(No.Dup) : null, schema ? cast(const(GValue)*)schema._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_meta_struct_complement_schema(cast(GdaMetaStruct*)this._cPtr, catalog ? cast(const(GValue)*)catalog._cPtr(No.Dup) : null, schema ? cast(const(GValue)*)schema._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new MetaStructException(_err);
     return _retval;
@@ -247,7 +247,7 @@ class MetaStruct : gobject.object.ObjectWrap
     const(char)* _schema = schema.toCString(No.Alloc);
     const(char)* _xmlSpecFile = xmlSpecFile.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_meta_struct_load_from_xml_file(cast(GdaMetaStruct*)this._cPtr, _catalog, _schema, _xmlSpecFile, &_err);
+    _retval = cast(bool)gda_meta_struct_load_from_xml_file(cast(GdaMetaStruct*)this._cPtr, _catalog, _schema, _xmlSpecFile, &_err);
     if (_err)
       throw new MetaStructException(_err);
     return _retval;
@@ -265,7 +265,7 @@ class MetaStruct : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_meta_struct_sort_db_objects(cast(GdaMetaStruct*)this._cPtr, sortType, &_err);
+    _retval = cast(bool)gda_meta_struct_sort_db_objects(cast(GdaMetaStruct*)this._cPtr, sortType, &_err);
     if (_err)
       throw new MetaStructException(_err);
     return _retval;

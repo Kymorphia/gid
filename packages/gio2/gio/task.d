@@ -655,7 +655,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap sourceObject = null)
   {
     bool _retval;
-    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_task_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -711,7 +711,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool getCheckCancellable()
   {
     bool _retval;
-    _retval = g_task_get_check_cancellable(cast(GTask*)this._cPtr);
+    _retval = cast(bool)g_task_get_check_cancellable(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -724,7 +724,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool getCompleted()
   {
     bool _retval;
-    _retval = g_task_get_completed(cast(GTask*)this._cPtr);
+    _retval = cast(bool)g_task_get_completed(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -777,7 +777,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool getReturnOnCancel()
   {
     bool _retval;
-    _retval = g_task_get_return_on_cancel(cast(GTask*)this._cPtr);
+    _retval = cast(bool)g_task_get_return_on_cancel(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -821,7 +821,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool hadError()
   {
     bool _retval;
-    _retval = g_task_had_error(cast(GTask*)this._cPtr);
+    _retval = cast(bool)g_task_had_error(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -840,7 +840,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   {
     bool _retval;
     GError *_err;
-    _retval = g_task_propagate_boolean(cast(GTask*)this._cPtr, &_err);
+    _retval = cast(bool)g_task_propagate_boolean(cast(GTask*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -910,7 +910,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     bool _retval;
     GValue _value;
     GError *_err;
-    _retval = g_task_propagate_value(cast(GTask*)this._cPtr, &_value, &_err);
+    _retval = cast(bool)g_task_propagate_value(cast(GTask*)this._cPtr, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -962,7 +962,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool returnErrorIfCancelled()
   {
     bool _retval;
-    _retval = g_task_return_error_if_cancelled(cast(GTask*)this._cPtr);
+    _retval = cast(bool)g_task_return_error_if_cancelled(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -1230,7 +1230,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool setReturnOnCancel(bool returnOnCancel)
   {
     bool _retval;
-    _retval = g_task_set_return_on_cancel(cast(GTask*)this._cPtr, returnOnCancel);
+    _retval = cast(bool)g_task_set_return_on_cancel(cast(GTask*)this._cPtr, returnOnCancel);
     return _retval;
   }
 

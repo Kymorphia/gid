@@ -65,7 +65,7 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
     bool _retval;
     GPtrArray* _fieldNames;
     GPtrArray* _fieldValues;
-    _retval = webkit_form_submission_request_list_text_fields(cast(WebKitFormSubmissionRequest*)this._cPtr, &_fieldNames, &_fieldValues);
+    _retval = cast(bool)webkit_form_submission_request_list_text_fields(cast(WebKitFormSubmissionRequest*)this._cPtr, &_fieldNames, &_fieldValues);
     fieldNames = gPtrArrayToD!(string, GidOwnership.None)(_fieldNames);
     fieldValues = gPtrArrayToD!(string, GidOwnership.None)(_fieldValues);
     return _retval;

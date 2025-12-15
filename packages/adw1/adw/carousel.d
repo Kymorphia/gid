@@ -285,7 +285,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getAllowLongSwipes()
   {
     bool _retval;
-    _retval = adw_carousel_get_allow_long_swipes(cast(AdwCarousel*)this._cPtr);
+    _retval = cast(bool)adw_carousel_get_allow_long_swipes(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getAllowMouseDrag()
   {
     bool _retval;
-    _retval = adw_carousel_get_allow_mouse_drag(cast(AdwCarousel*)this._cPtr);
+    _retval = cast(bool)adw_carousel_get_allow_mouse_drag(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getAllowScrollWheel()
   {
     bool _retval;
-    _retval = adw_carousel_get_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr);
+    _retval = cast(bool)adw_carousel_get_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getInteractive()
   {
     bool _retval;
-    _retval = adw_carousel_get_interactive(cast(AdwCarousel*)this._cPtr);
+    _retval = cast(bool)adw_carousel_get_interactive(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 

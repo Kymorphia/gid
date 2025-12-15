@@ -300,7 +300,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap source = null, void* sourceTag = null)
   {
     bool _retval;
-    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, source ? cast(GObject*)source._cPtr(No.Dup) : null, sourceTag);
+    _retval = cast(bool)g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, source ? cast(GObject*)source._cPtr(No.Dup) : null, sourceTag);
     return _retval;
   }
 
@@ -346,7 +346,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   bool getOpResGboolean()
   {
     bool _retval;
-    _retval = g_simple_async_result_get_op_res_gboolean(cast(GSimpleAsyncResult*)this._cPtr);
+    _retval = cast(bool)g_simple_async_result_get_op_res_gboolean(cast(GSimpleAsyncResult*)this._cPtr);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   {
     bool _retval;
     GError *_err;
-    _retval = g_simple_async_result_propagate_error(cast(GSimpleAsyncResult*)this._cPtr, &_err);
+    _retval = cast(bool)g_simple_async_result_propagate_error(cast(GSimpleAsyncResult*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

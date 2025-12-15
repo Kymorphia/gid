@@ -496,7 +496,7 @@ class Container : gtk.widget.Widget
   {
     bool _retval;
     GList* _focusableWidgets;
-    _retval = gtk_container_get_focus_chain(cast(GtkContainer*)this._cPtr, &_focusableWidgets);
+    _retval = cast(bool)gtk_container_get_focus_chain(cast(GtkContainer*)this._cPtr, &_focusableWidgets);
     focusableWidgets = gListToD!(gtk.widget.Widget, GidOwnership.Container)(_focusableWidgets);
     return _retval;
   }

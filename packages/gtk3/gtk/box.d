@@ -178,7 +178,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_box_get_homogeneous(cast(GtkBox*)this._cPtr);
+    _retval = cast(bool)gtk_box_get_homogeneous(cast(GtkBox*)this._cPtr);
     return _retval;
   }
 
@@ -261,7 +261,11 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   */
   void queryChildPacking(gtk.widget.Widget child, out bool expand, out bool fill, out uint padding, out gtk.types.PackType packType)
   {
-    gtk_box_query_child_packing(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, cast(bool*)&expand, cast(bool*)&fill, cast(uint*)&padding, &packType);
+    gboolean _expand;
+    gboolean _fill;
+    gtk_box_query_child_packing(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, &_expand, &_fill, cast(uint*)&padding, &packType);
+    expand = cast(bool)_expand;
+    fill = cast(bool)_fill;
   }
 
   /**

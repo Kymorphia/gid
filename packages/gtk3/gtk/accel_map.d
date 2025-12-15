@@ -162,7 +162,7 @@ class AccelMap : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
-    _retval = gtk_accel_map_change_entry(_accelPath, accelKey, accelMods, replace);
+    _retval = cast(bool)gtk_accel_map_change_entry(_accelPath, accelKey, accelMods, replace);
     return _retval;
   }
 
@@ -181,12 +181,12 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void foreach_(void* data, gtk.types.AccelMapForeach foreachFunc)
   {
-    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, bool changed)
+    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed)
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
       string _accelPath = accelPath.fromCString(No.Free);
 
-      (*_dlg)(_accelPath, accelKey, accelMods, changed);
+      (*_dlg)(_accelPath, accelKey, accelMods, cast(bool)changed);
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
     gtk_accel_map_foreach(data, _foreachFuncCB);
@@ -206,12 +206,12 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void foreachUnfiltered(void* data, gtk.types.AccelMapForeach foreachFunc)
   {
-    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, bool changed)
+    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed)
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
       string _accelPath = accelPath.fromCString(No.Free);
 
-      (*_dlg)(_accelPath, accelKey, accelMods, changed);
+      (*_dlg)(_accelPath, accelKey, accelMods, cast(bool)changed);
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
     gtk_accel_map_foreach_unfiltered(data, _foreachFuncCB);
@@ -309,7 +309,7 @@ class AccelMap : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
-    _retval = gtk_accel_map_lookup_entry(_accelPath, &key);
+    _retval = cast(bool)gtk_accel_map_lookup_entry(_accelPath, &key);
     return _retval;
   }
 

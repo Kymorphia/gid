@@ -231,7 +231,7 @@ class BaseParse : gst.element.Element
   bool addIndexEntry(ulong offset, gst.types.ClockTime ts, bool key, bool force)
   {
     bool _retval;
-    _retval = gst_base_parse_add_index_entry(cast(GstBaseParse*)this._cPtr, offset, ts, key, force);
+    _retval = cast(bool)gst_base_parse_add_index_entry(cast(GstBaseParse*)this._cPtr, offset, ts, key, force);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class BaseParse : gst.element.Element
   bool convertDefault(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue)
   {
     bool _retval;
-    _retval = gst_base_parse_convert_default(cast(GstBaseParse*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
+    _retval = cast(bool)gst_base_parse_convert_default(cast(GstBaseParse*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
     return _retval;
   }
 

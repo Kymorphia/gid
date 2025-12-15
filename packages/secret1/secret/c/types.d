@@ -333,13 +333,13 @@ struct SecretBackendInterface
   extern(C) void function(SecretBackend* self, SecretBackendFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) ensureForFlags;
 
   /** */
-  extern(C) bool function(SecretBackend* self, GAsyncResult* result, GError** _err) ensureForFlagsFinish;
+  extern(C) gboolean function(SecretBackend* self, GAsyncResult* result, GError** _err) ensureForFlagsFinish;
 
   /** */
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) store;
 
   /** */
-  extern(C) bool function(SecretBackend* self, GAsyncResult* result, GError** _err) storeFinish;
+  extern(C) gboolean function(SecretBackend* self, GAsyncResult* result, GError** _err) storeFinish;
 
   /** */
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) lookup;
@@ -351,7 +351,7 @@ struct SecretBackendInterface
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) clear;
 
   /** */
-  extern(C) bool function(SecretBackend* self, GAsyncResult* result, GError** _err) clearFinish;
+  extern(C) gboolean function(SecretBackend* self, GAsyncResult* result, GError** _err) clearFinish;
 
   /** */
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) search;

@@ -22,14 +22,14 @@ __gshared extern(C)
   // Array
   GType function() c_g_array_get_type; ///
   GArray* function(GArray* array, const(void)* data, uint len) c_g_array_append_vals; ///
-  bool function(GArray* array, const(void)* target, GCompareFunc compareFunc, uint* outMatchIndex) c_g_array_binary_search; ///
+  gboolean function(GArray* array, const(void)* target, GCompareFunc compareFunc, uint* outMatchIndex) c_g_array_binary_search; ///
   GArray* function(GArray* array) c_g_array_copy; ///
-  char* function(GArray* array, bool freeSegment) c_g_array_free; ///
+  char* function(GArray* array, gboolean freeSegment) c_g_array_free; ///
   uint function(GArray* array) c_g_array_get_element_size; ///
   GArray* function(GArray* array, uint index, const(void)* data, uint len) c_g_array_insert_vals; ///
-  GArray* function(bool zeroTerminated, bool clear, uint elementSize) c_g_array_new; ///
-  GArray* function(void* data, size_t len, bool clear, size_t elementSize) c_g_array_new_take; ///
-  GArray* function(void* data, bool clear, size_t elementSize) c_g_array_new_take_zero_terminated; ///
+  GArray* function(gboolean zeroTerminated, gboolean clear, uint elementSize) c_g_array_new; ///
+  GArray* function(void* data, size_t len, gboolean clear, size_t elementSize) c_g_array_new_take; ///
+  GArray* function(void* data, gboolean clear, size_t elementSize) c_g_array_new_take_zero_terminated; ///
   GArray* function(GArray* array, const(void)* data, uint len) c_g_array_prepend_vals; ///
   GArray* function(GArray* array) c_g_array_ref; ///
   GArray* function(GArray* array, uint index) c_g_array_remove_index; ///
@@ -37,7 +37,7 @@ __gshared extern(C)
   GArray* function(GArray* array, uint index, uint length) c_g_array_remove_range; ///
   void function(GArray* array, GDestroyNotify clearFunc) c_g_array_set_clear_func; ///
   GArray* function(GArray* array, uint length) c_g_array_set_size; ///
-  GArray* function(bool zeroTerminated, bool clear, uint elementSize, uint reservedSize) c_g_array_sized_new; ///
+  GArray* function(gboolean zeroTerminated, gboolean clear, uint elementSize, uint reservedSize) c_g_array_sized_new; ///
   void function(GArray* array, GCompareFunc compareFunc) c_g_array_sort; ///
   void function(GArray* array, GCompareDataFunc compareFunc, void* userData) c_g_array_sort_with_data; ///
   void* function(GArray* array, size_t* len) c_g_array_steal; ///
@@ -57,8 +57,8 @@ __gshared extern(C)
   void function(GAsyncQueue* queue, void* data) c_g_async_queue_push_unlocked; ///
   GAsyncQueue* function(GAsyncQueue* queue) c_g_async_queue_ref; ///
   void function(GAsyncQueue* queue) c_g_async_queue_ref_unlocked; ///
-  bool function(GAsyncQueue* queue, void* item) c_g_async_queue_remove; ///
-  bool function(GAsyncQueue* queue, void* item) c_g_async_queue_remove_unlocked; ///
+  gboolean function(GAsyncQueue* queue, void* item) c_g_async_queue_remove; ///
+  gboolean function(GAsyncQueue* queue, void* item) c_g_async_queue_remove_unlocked; ///
   void function(GAsyncQueue* queue, GCompareDataFunc func, void* userData) c_g_async_queue_sort; ///
   void function(GAsyncQueue* queue, GCompareDataFunc func, void* userData) c_g_async_queue_sort_unlocked; ///
   void* function(GAsyncQueue* queue, GTimeVal* endTime) c_g_async_queue_timed_pop; ///
@@ -82,13 +82,13 @@ __gshared extern(C)
   void function(GBookmarkFile* bookmark) c_g_bookmark_file_free; ///
   long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_added; ///
   GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_added_date_time; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, long* stamp, GError** _err) c_g_bookmark_file_get_app_info; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, GDateTime** stamp, GError** _err) c_g_bookmark_file_get_application_info; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, long* stamp, GError** _err) c_g_bookmark_file_get_app_info; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, GDateTime** stamp, GError** _err) c_g_bookmark_file_get_application_info; ///
   char** function(GBookmarkFile* bookmark, const(char)* uri, size_t* length, GError** _err) c_g_bookmark_file_get_applications; ///
   char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_description; ///
   char** function(GBookmarkFile* bookmark, const(char)* uri, size_t* length, GError** _err) c_g_bookmark_file_get_groups; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, char** href, char** mimeType, GError** _err) c_g_bookmark_file_get_icon; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_is_private; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, char** href, char** mimeType, GError** _err) c_g_bookmark_file_get_icon; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_is_private; ///
   char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_mime_type; ///
   long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_modified; ///
   GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_modified_date_time; ///
@@ -97,24 +97,24 @@ __gshared extern(C)
   char** function(GBookmarkFile* bookmark, size_t* length) c_g_bookmark_file_get_uris; ///
   long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_visited; ///
   GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_visited_date_time; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) c_g_bookmark_file_has_application; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) c_g_bookmark_file_has_group; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri) c_g_bookmark_file_has_item; ///
-  bool function(GBookmarkFile* bookmark, const(ubyte)* data, size_t length, GError** _err) c_g_bookmark_file_load_from_data; ///
-  bool function(GBookmarkFile* bookmark, const(char)* file, char** fullPath, GError** _err) c_g_bookmark_file_load_from_data_dirs; ///
-  bool function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) c_g_bookmark_file_load_from_file; ///
-  bool function(GBookmarkFile* bookmark, const(char)* oldUri, const(char)* newUri, GError** _err) c_g_bookmark_file_move_item; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) c_g_bookmark_file_remove_application; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) c_g_bookmark_file_remove_group; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_remove_item; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) c_g_bookmark_file_has_application; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) c_g_bookmark_file_has_group; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri) c_g_bookmark_file_has_item; ///
+  gboolean function(GBookmarkFile* bookmark, const(ubyte)* data, size_t length, GError** _err) c_g_bookmark_file_load_from_data; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* file, char** fullPath, GError** _err) c_g_bookmark_file_load_from_data_dirs; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) c_g_bookmark_file_load_from_file; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* oldUri, const(char)* newUri, GError** _err) c_g_bookmark_file_move_item; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) c_g_bookmark_file_remove_application; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) c_g_bookmark_file_remove_group; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_remove_item; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, long added) c_g_bookmark_file_set_added; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* added) c_g_bookmark_file_set_added_date_time; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, long stamp, GError** _err) c_g_bookmark_file_set_app_info; ///
-  bool function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, GDateTime* stamp, GError** _err) c_g_bookmark_file_set_application_info; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, long stamp, GError** _err) c_g_bookmark_file_set_app_info; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, GDateTime* stamp, GError** _err) c_g_bookmark_file_set_application_info; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* description) c_g_bookmark_file_set_description; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, const(char*)* groups, size_t length) c_g_bookmark_file_set_groups; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* href, const(char)* mimeType) c_g_bookmark_file_set_icon; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, bool isPrivate) c_g_bookmark_file_set_is_private; ///
+  void function(GBookmarkFile* bookmark, const(char)* uri, gboolean isPrivate) c_g_bookmark_file_set_is_private; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* mimeType) c_g_bookmark_file_set_mime_type; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, long modified) c_g_bookmark_file_set_modified; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* modified) c_g_bookmark_file_set_modified_date_time; ///
@@ -122,13 +122,13 @@ __gshared extern(C)
   void function(GBookmarkFile* bookmark, const(char)* uri, long visited) c_g_bookmark_file_set_visited; ///
   void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* visited) c_g_bookmark_file_set_visited_date_time; ///
   ubyte* function(GBookmarkFile* bookmark, size_t* length, GError** _err) c_g_bookmark_file_to_data; ///
-  bool function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) c_g_bookmark_file_to_file; ///
+  gboolean function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) c_g_bookmark_file_to_file; ///
   GQuark function() c_g_bookmark_file_error_quark; ///
 
   // ByteArray
   GType function() c_g_byte_array_get_type; ///
   GByteArray* function(GByteArray* array, const(ubyte)* data, uint len) c_g_byte_array_append; ///
-  ubyte* function(GByteArray* array, bool freeSegment) c_g_byte_array_free; ///
+  ubyte* function(GByteArray* array, gboolean freeSegment) c_g_byte_array_free; ///
   GBytes* function(GByteArray* array) c_g_byte_array_free_to_bytes; ///
   GByteArray* function() c_g_byte_array_new; ///
   GByteArray* function(ubyte* data, size_t len) c_g_byte_array_new_take; ///
@@ -151,7 +151,7 @@ __gshared extern(C)
   GBytes* function(void* data, size_t size) c_g_bytes_new_take; ///
   GBytes* function(const(void)* data, size_t size, GDestroyNotify freeFunc, void* userData) c_g_bytes_new_with_free_func; ///
   int function(GBytes* bytes1, GBytes* bytes2) c_g_bytes_compare; ///
-  bool function(GBytes* bytes1, GBytes* bytes2) c_g_bytes_equal; ///
+  gboolean function(GBytes* bytes1, GBytes* bytes2) c_g_bytes_equal; ///
   const(void)* function(GBytes* bytes, size_t* size) c_g_bytes_get_data; ///
   const(void)* function(GBytes* bytes, size_t elementSize, size_t offset, size_t nElements) c_g_bytes_get_region; ///
   size_t function(GBytes* bytes) c_g_bytes_get_size; ///
@@ -197,9 +197,9 @@ __gshared extern(C)
   void function(GCond* cond) c_g_cond_free; ///
   void function(GCond* cond) c_g_cond_init; ///
   void function(GCond* cond) c_g_cond_signal; ///
-  bool function(GCond* cond, GMutex* mutex, GTimeVal* absTime) c_g_cond_timed_wait; ///
+  gboolean function(GCond* cond, GMutex* mutex, GTimeVal* absTime) c_g_cond_timed_wait; ///
   void function(GCond* cond, GMutex* mutex) c_g_cond_wait; ///
-  bool function(GCond* cond, GMutex* mutex, long endTime) c_g_cond_wait_until; ///
+  gboolean function(GCond* cond, GMutex* mutex, long endTime) c_g_cond_wait_until; ///
   GCond* function() c_g_cond_new; ///
 
   // Date
@@ -225,8 +225,8 @@ __gshared extern(C)
   uint function(const(GDate)* date) c_g_date_get_sunday_week_of_year; ///
   GDateWeekday function(const(GDate)* date) c_g_date_get_weekday; ///
   GDateYear function(const(GDate)* date) c_g_date_get_year; ///
-  bool function(const(GDate)* date) c_g_date_is_first_of_month; ///
-  bool function(const(GDate)* date) c_g_date_is_last_of_month; ///
+  gboolean function(const(GDate)* date) c_g_date_is_first_of_month; ///
+  gboolean function(const(GDate)* date) c_g_date_is_last_of_month; ///
   void function(GDate* date1, GDate* date2) c_g_date_order; ///
   void function(GDate* date, GDateDay day) c_g_date_set_day; ///
   void function(GDate* date, GDateDay day, GDateMonth month, GDateYear y) c_g_date_set_dmy; ///
@@ -241,18 +241,18 @@ __gshared extern(C)
   void function(GDate* date, uint nMonths) c_g_date_subtract_months; ///
   void function(GDate* date, uint nYears) c_g_date_subtract_years; ///
   void function(const(GDate)* date, void* tm) c_g_date_to_struct_tm; ///
-  bool function(const(GDate)* date) c_g_date_valid; ///
+  gboolean function(const(GDate)* date) c_g_date_valid; ///
   ubyte function(GDateMonth month, GDateYear year) c_g_date_get_days_in_month; ///
   ubyte function(GDateYear year) c_g_date_get_monday_weeks_in_year; ///
   ubyte function(GDateYear year) c_g_date_get_sunday_weeks_in_year; ///
-  bool function(GDateYear year) c_g_date_is_leap_year; ///
+  gboolean function(GDateYear year) c_g_date_is_leap_year; ///
   size_t function(char* s, size_t slen, const(char)* format, const(GDate)* date) c_g_date_strftime; ///
-  bool function(GDateDay day) c_g_date_valid_day; ///
-  bool function(GDateDay day, GDateMonth month, GDateYear year) c_g_date_valid_dmy; ///
-  bool function(uint julianDate) c_g_date_valid_julian; ///
-  bool function(GDateMonth month) c_g_date_valid_month; ///
-  bool function(GDateWeekday weekday) c_g_date_valid_weekday; ///
-  bool function(GDateYear year) c_g_date_valid_year; ///
+  gboolean function(GDateDay day) c_g_date_valid_day; ///
+  gboolean function(GDateDay day, GDateMonth month, GDateYear year) c_g_date_valid_dmy; ///
+  gboolean function(uint julianDate) c_g_date_valid_julian; ///
+  gboolean function(GDateMonth month) c_g_date_valid_month; ///
+  gboolean function(GDateWeekday weekday) c_g_date_valid_weekday; ///
+  gboolean function(GDateYear year) c_g_date_valid_year; ///
 
   // DateTime
   GType function() c_g_date_time_get_type; ///
@@ -280,7 +280,7 @@ __gshared extern(C)
   GDateTime* function(GDateTime* datetime, int years) c_g_date_time_add_years; ///
   int function(GDateTime* dt1, GDateTime* dt2) c_g_date_time_compare; ///
   GTimeSpan function(GDateTime* end, GDateTime* begin) c_g_date_time_difference; ///
-  bool function(GDateTime* dt1, GDateTime* dt2) c_g_date_time_equal; ///
+  gboolean function(GDateTime* dt1, GDateTime* dt2) c_g_date_time_equal; ///
   char* function(GDateTime* datetime, const(char)* format) c_g_date_time_format; ///
   char* function(GDateTime* datetime) c_g_date_time_format_iso8601; ///
   int function(GDateTime* datetime) c_g_date_time_get_day_of_month; ///
@@ -300,10 +300,10 @@ __gshared extern(C)
   int function(GDateTime* datetime) c_g_date_time_get_year; ///
   void function(GDateTime* datetime, int* year, int* month, int* day) c_g_date_time_get_ymd; ///
   uint function(GDateTime* datetime) c_g_date_time_hash; ///
-  bool function(GDateTime* datetime) c_g_date_time_is_daylight_savings; ///
+  gboolean function(GDateTime* datetime) c_g_date_time_is_daylight_savings; ///
   GDateTime* function(GDateTime* datetime) c_g_date_time_ref; ///
   GDateTime* function(GDateTime* datetime) c_g_date_time_to_local; ///
-  bool function(GDateTime* datetime, GTimeVal* tv) c_g_date_time_to_timeval; ///
+  gboolean function(GDateTime* datetime, GTimeVal* tv) c_g_date_time_to_timeval; ///
   GDateTime* function(GDateTime* datetime, GTimeZone* tz) c_g_date_time_to_timezone; ///
   long function(GDateTime* datetime) c_g_date_time_to_unix; ///
   long function(GDateTime* datetime) c_g_date_time_to_unix_usec; ///
@@ -327,14 +327,14 @@ __gshared extern(C)
   GError* function(GQuark domain, int code, const(char)* format, void* args) c_g_error_new_valist; ///
   GError* function(const(GError)* error) c_g_error_copy; ///
   void function(GError* error) c_g_error_free; ///
-  bool function(const(GError)* error, GQuark domain, int code) c_g_error_matches; ///
+  gboolean function(const(GError)* error, GQuark domain, int code) c_g_error_matches; ///
   GQuark function(const(char)* errorTypeName, size_t errorTypePrivateSize, GErrorInitFunc errorTypeInit, GErrorCopyFunc errorTypeCopy, GErrorClearFunc errorTypeClear) c_g_error_domain_register; ///
   GQuark function(const(char)* errorTypeName, size_t errorTypePrivateSize, GErrorInitFunc errorTypeInit, GErrorCopyFunc errorTypeCopy, GErrorClearFunc errorTypeClear) c_g_error_domain_register_static; ///
 
   // HashTable
   GType function() c_g_hash_table_get_type; ///
-  bool function(GHashTable* hashTable, void* key) c_g_hash_table_add; ///
-  bool function(GHashTable* hashTable, const(void)* key) c_g_hash_table_contains; ///
+  gboolean function(GHashTable* hashTable, void* key) c_g_hash_table_add; ///
+  gboolean function(GHashTable* hashTable, const(void)* key) c_g_hash_table_contains; ///
   void function(GHashTable* hashTable) c_g_hash_table_destroy; ///
   void* function(GHashTable* hashTable, GHRFunc predicate, void* userData) c_g_hash_table_find; ///
   void function(GHashTable* hashTable, GHFunc func, void* userData) c_g_hash_table_foreach; ///
@@ -345,28 +345,28 @@ __gshared extern(C)
   GPtrArray* function(GHashTable* hashTable) c_g_hash_table_get_keys_as_ptr_array; ///
   GList* function(GHashTable* hashTable) c_g_hash_table_get_values; ///
   GPtrArray* function(GHashTable* hashTable) c_g_hash_table_get_values_as_ptr_array; ///
-  bool function(GHashTable* hashTable, void* key, void* value) c_g_hash_table_insert; ///
+  gboolean function(GHashTable* hashTable, void* key, void* value) c_g_hash_table_insert; ///
   void* function(GHashTable* hashTable, const(void)* key) c_g_hash_table_lookup; ///
-  bool function(GHashTable* hashTable, const(void)* lookupKey, void** origKey, void** value) c_g_hash_table_lookup_extended; ///
+  gboolean function(GHashTable* hashTable, const(void)* lookupKey, void** origKey, void** value) c_g_hash_table_lookup_extended; ///
   GHashTable* function(GHashFunc hashFunc, GEqualFunc keyEqualFunc) c_g_hash_table_new; ///
   GHashTable* function(GHashFunc hashFunc, GEqualFunc keyEqualFunc, GDestroyNotify keyDestroyFunc, GDestroyNotify valueDestroyFunc) c_g_hash_table_new_full; ///
   GHashTable* function(GHashTable* otherHashTable) c_g_hash_table_new_similar; ///
   GHashTable* function(GHashTable* hashTable) c_g_hash_table_ref; ///
-  bool function(GHashTable* hashTable, const(void)* key) c_g_hash_table_remove; ///
+  gboolean function(GHashTable* hashTable, const(void)* key) c_g_hash_table_remove; ///
   void function(GHashTable* hashTable) c_g_hash_table_remove_all; ///
-  bool function(GHashTable* hashTable, void* key, void* value) c_g_hash_table_replace; ///
+  gboolean function(GHashTable* hashTable, void* key, void* value) c_g_hash_table_replace; ///
   uint function(GHashTable* hashTable) c_g_hash_table_size; ///
-  bool function(GHashTable* hashTable, const(void)* key) c_g_hash_table_steal; ///
+  gboolean function(GHashTable* hashTable, const(void)* key) c_g_hash_table_steal; ///
   void function(GHashTable* hashTable) c_g_hash_table_steal_all; ///
   GPtrArray* function(GHashTable* hashTable) c_g_hash_table_steal_all_keys; ///
   GPtrArray* function(GHashTable* hashTable) c_g_hash_table_steal_all_values; ///
-  bool function(GHashTable* hashTable, const(void)* lookupKey, void** stolenKey, void** stolenValue) c_g_hash_table_steal_extended; ///
+  gboolean function(GHashTable* hashTable, const(void)* lookupKey, void** stolenKey, void** stolenValue) c_g_hash_table_steal_extended; ///
   void function(GHashTable* hashTable) c_g_hash_table_unref; ///
 
   // HashTableIter
   GHashTable* function(GHashTableIter* iter) c_g_hash_table_iter_get_hash_table; ///
   void function(GHashTableIter* iter, GHashTable* hashTable) c_g_hash_table_iter_init; ///
-  bool function(GHashTableIter* iter, void** key, void** value) c_g_hash_table_iter_next; ///
+  gboolean function(GHashTableIter* iter, void** key, void** value) c_g_hash_table_iter_next; ///
   void function(GHashTableIter* iter) c_g_hash_table_iter_remove; ///
   void function(GHashTableIter* iter, void* value) c_g_hash_table_iter_replace; ///
   void function(GHashTableIter* iter) c_g_hash_table_iter_steal; ///
@@ -384,18 +384,18 @@ __gshared extern(C)
   // Hook
   int function(GHook* newHook, GHook* sibling) c_g_hook_compare_ids; ///
   GHook* function(GHookList* hookList) c_g_hook_alloc; ///
-  bool function(GHookList* hookList, gulong hookId) c_g_hook_destroy; ///
+  gboolean function(GHookList* hookList, gulong hookId) c_g_hook_destroy; ///
   void function(GHookList* hookList, GHook* hook) c_g_hook_destroy_link; ///
-  GHook* function(GHookList* hookList, bool needValids, GHookFindFunc func, void* data) c_g_hook_find; ///
-  GHook* function(GHookList* hookList, bool needValids, void* data) c_g_hook_find_data; ///
-  GHook* function(GHookList* hookList, bool needValids, void* func) c_g_hook_find_func; ///
-  GHook* function(GHookList* hookList, bool needValids, void* func, void* data) c_g_hook_find_func_data; ///
-  GHook* function(GHookList* hookList, bool mayBeInCall) c_g_hook_first_valid; ///
+  GHook* function(GHookList* hookList, gboolean needValids, GHookFindFunc func, void* data) c_g_hook_find; ///
+  GHook* function(GHookList* hookList, gboolean needValids, void* data) c_g_hook_find_data; ///
+  GHook* function(GHookList* hookList, gboolean needValids, void* func) c_g_hook_find_func; ///
+  GHook* function(GHookList* hookList, gboolean needValids, void* func, void* data) c_g_hook_find_func_data; ///
+  GHook* function(GHookList* hookList, gboolean mayBeInCall) c_g_hook_first_valid; ///
   void function(GHookList* hookList, GHook* hook) c_g_hook_free; ///
   GHook* function(GHookList* hookList, gulong hookId) c_g_hook_get; ///
   void function(GHookList* hookList, GHook* sibling, GHook* hook) c_g_hook_insert_before; ///
   void function(GHookList* hookList, GHook* hook, GHookCompareFunc func) c_g_hook_insert_sorted; ///
-  GHook* function(GHookList* hookList, GHook* hook, bool mayBeInCall) c_g_hook_next_valid; ///
+  GHook* function(GHookList* hookList, GHook* hook, gboolean mayBeInCall) c_g_hook_next_valid; ///
   void function(GHookList* hookList, GHook* hook) c_g_hook_prepend; ///
   GHook* function(GHookList* hookList, GHook* hook) c_g_hook_ref; ///
   void function(GHookList* hookList, GHook* hook) c_g_hook_unref; ///
@@ -403,10 +403,10 @@ __gshared extern(C)
   // HookList
   void function(GHookList* hookList) c_g_hook_list_clear; ///
   void function(GHookList* hookList, uint hookSize) c_g_hook_list_init; ///
-  void function(GHookList* hookList, bool mayRecurse) c_g_hook_list_invoke; ///
-  void function(GHookList* hookList, bool mayRecurse) c_g_hook_list_invoke_check; ///
-  void function(GHookList* hookList, bool mayRecurse, GHookMarshaller marshaller, void* marshalData) c_g_hook_list_marshal; ///
-  void function(GHookList* hookList, bool mayRecurse, GHookCheckMarshaller marshaller, void* marshalData) c_g_hook_list_marshal_check; ///
+  void function(GHookList* hookList, gboolean mayRecurse) c_g_hook_list_invoke; ///
+  void function(GHookList* hookList, gboolean mayRecurse) c_g_hook_list_invoke_check; ///
+  void function(GHookList* hookList, gboolean mayRecurse, GHookMarshaller marshaller, void* marshalData) c_g_hook_list_marshal; ///
+  void function(GHookList* hookList, gboolean mayRecurse, GHookCheckMarshaller marshaller, void* marshalData) c_g_hook_list_marshal_check; ///
 
   // IOChannel
   GType function() c_g_io_channel_get_type; ///
@@ -416,8 +416,8 @@ __gshared extern(C)
   GIOStatus function(GIOChannel* channel, GError** _err) c_g_io_channel_flush; ///
   GIOCondition function(GIOChannel* channel) c_g_io_channel_get_buffer_condition; ///
   size_t function(GIOChannel* channel) c_g_io_channel_get_buffer_size; ///
-  bool function(GIOChannel* channel) c_g_io_channel_get_buffered; ///
-  bool function(GIOChannel* channel) c_g_io_channel_get_close_on_unref; ///
+  gboolean function(GIOChannel* channel) c_g_io_channel_get_buffered; ///
+  gboolean function(GIOChannel* channel) c_g_io_channel_get_close_on_unref; ///
   const(char)* function(GIOChannel* channel) c_g_io_channel_get_encoding; ///
   GIOFlags function(GIOChannel* channel) c_g_io_channel_get_flags; ///
   const(char)* function(GIOChannel* channel, int* length) c_g_io_channel_get_line_term; ///
@@ -432,12 +432,12 @@ __gshared extern(C)
   GIOError function(GIOChannel* channel, long offset, GSeekType type) c_g_io_channel_seek; ///
   GIOStatus function(GIOChannel* channel, long offset, GSeekType type, GError** _err) c_g_io_channel_seek_position; ///
   void function(GIOChannel* channel, size_t size) c_g_io_channel_set_buffer_size; ///
-  void function(GIOChannel* channel, bool buffered) c_g_io_channel_set_buffered; ///
-  void function(GIOChannel* channel, bool doClose) c_g_io_channel_set_close_on_unref; ///
+  void function(GIOChannel* channel, gboolean buffered) c_g_io_channel_set_buffered; ///
+  void function(GIOChannel* channel, gboolean doClose) c_g_io_channel_set_close_on_unref; ///
   GIOStatus function(GIOChannel* channel, const(char)* encoding, GError** _err) c_g_io_channel_set_encoding; ///
   GIOStatus function(GIOChannel* channel, GIOFlags flags, GError** _err) c_g_io_channel_set_flags; ///
   void function(GIOChannel* channel, const(char)* lineTerm, int length) c_g_io_channel_set_line_term; ///
-  GIOStatus function(GIOChannel* channel, bool flush, GError** _err) c_g_io_channel_shutdown; ///
+  GIOStatus function(GIOChannel* channel, gboolean flush, GError** _err) c_g_io_channel_shutdown; ///
   int function(GIOChannel* channel) c_g_io_channel_unix_get_fd; ///
   void function(GIOChannel* channel) c_g_io_channel_unref; ///
   GIOError function(GIOChannel* channel, const(char)* buf, size_t count, size_t* bytesWritten) c_g_io_channel_write; ///
@@ -450,8 +450,8 @@ __gshared extern(C)
   GType function() c_g_key_file_get_type; ///
   GKeyFile* function() c_g_key_file_new; ///
   void function(GKeyFile* keyFile) c_g_key_file_free; ///
-  bool function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_boolean; ///
-  bool* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_boolean_list; ///
+  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_boolean; ///
+  gboolean* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_boolean_list; ///
   char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_comment; ///
   double function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_double; ///
   double* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_double_list; ///
@@ -468,21 +468,21 @@ __gshared extern(C)
   char** function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_string_list; ///
   ulong function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_uint64; ///
   char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_value; ///
-  bool function(GKeyFile* keyFile, const(char)* groupName) c_g_key_file_has_group; ///
-  bool function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_has_key; ///
-  bool function(GKeyFile* keyFile, GBytes* bytes, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_bytes; ///
-  bool function(GKeyFile* keyFile, const(char)* data, size_t length, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_data; ///
-  bool function(GKeyFile* keyFile, const(char)* file, char** fullPath, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_data_dirs; ///
-  bool function(GKeyFile* keyFile, const(char)* file, const(char*)* searchDirs, char** fullPath, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_dirs; ///
-  bool function(GKeyFile* keyFile, const(char)* file, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_file; ///
+  gboolean function(GKeyFile* keyFile, const(char)* groupName) c_g_key_file_has_group; ///
+  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_has_key; ///
+  gboolean function(GKeyFile* keyFile, GBytes* bytes, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_bytes; ///
+  gboolean function(GKeyFile* keyFile, const(char)* data, size_t length, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_data; ///
+  gboolean function(GKeyFile* keyFile, const(char)* file, char** fullPath, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_data_dirs; ///
+  gboolean function(GKeyFile* keyFile, const(char)* file, const(char*)* searchDirs, char** fullPath, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_dirs; ///
+  gboolean function(GKeyFile* keyFile, const(char)* file, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_file; ///
   GKeyFile* function(GKeyFile* keyFile) c_g_key_file_ref; ///
-  bool function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_remove_comment; ///
-  bool function(GKeyFile* keyFile, const(char)* groupName, GError** _err) c_g_key_file_remove_group; ///
-  bool function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_remove_key; ///
-  bool function(GKeyFile* keyFile, const(char)* filename, GError** _err) c_g_key_file_save_to_file; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, bool value) c_g_key_file_set_boolean; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, bool* list, size_t length) c_g_key_file_set_boolean_list; ///
-  bool function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* comment, GError** _err) c_g_key_file_set_comment; ///
+  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_remove_comment; ///
+  gboolean function(GKeyFile* keyFile, const(char)* groupName, GError** _err) c_g_key_file_remove_group; ///
+  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_remove_key; ///
+  gboolean function(GKeyFile* keyFile, const(char)* filename, GError** _err) c_g_key_file_save_to_file; ///
+  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, gboolean value) c_g_key_file_set_boolean; ///
+  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, gboolean* list, size_t length) c_g_key_file_set_boolean_list; ///
+  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* comment, GError** _err) c_g_key_file_set_comment; ///
   void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, double value) c_g_key_file_set_double; ///
   void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, double* list, size_t length) c_g_key_file_set_double_list; ///
   void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, long value) c_g_key_file_set_int64; ///
@@ -539,9 +539,9 @@ __gshared extern(C)
   GType function() c_g_main_context_get_type; ///
   GMainContext* function() c_g_main_context_new; ///
   GMainContext* function(GMainContextFlags flags) c_g_main_context_new_with_flags; ///
-  bool function(GMainContext* context) c_g_main_context_acquire; ///
+  gboolean function(GMainContext* context) c_g_main_context_acquire; ///
   void function(GMainContext* context, GPollFD* fd, int priority) c_g_main_context_add_poll; ///
-  bool function(GMainContext* context, int maxPriority, GPollFD* fds, int nFds) c_g_main_context_check; ///
+  gboolean function(GMainContext* context, int maxPriority, GPollFD* fds, int nFds) c_g_main_context_check; ///
   void function(GMainContext* context) c_g_main_context_dispatch; ///
   GSource* function(GMainContext* context, GSourceFuncs* funcs, void* userData) c_g_main_context_find_source_by_funcs_user_data; ///
   GSource* function(GMainContext* context, uint sourceId) c_g_main_context_find_source_by_id; ///
@@ -549,11 +549,11 @@ __gshared extern(C)
   GPollFunc function(GMainContext* context) c_g_main_context_get_poll_func; ///
   void function(GMainContext* context, GSourceFunc function_, void* data) c_g_main_context_invoke; ///
   void function(GMainContext* context, int priority, GSourceFunc function_, void* data, GDestroyNotify notify) c_g_main_context_invoke_full; ///
-  bool function(GMainContext* context) c_g_main_context_is_owner; ///
-  bool function(GMainContext* context, bool mayBlock) c_g_main_context_iteration; ///
-  bool function(GMainContext* context) c_g_main_context_pending; ///
+  gboolean function(GMainContext* context) c_g_main_context_is_owner; ///
+  gboolean function(GMainContext* context, gboolean mayBlock) c_g_main_context_iteration; ///
+  gboolean function(GMainContext* context) c_g_main_context_pending; ///
   void function(GMainContext* context) c_g_main_context_pop_thread_default; ///
-  bool function(GMainContext* context, int* priority) c_g_main_context_prepare; ///
+  gboolean function(GMainContext* context, int* priority) c_g_main_context_prepare; ///
   void function(GMainContext* context) c_g_main_context_push_thread_default; ///
   int function(GMainContext* context, int maxPriority, int* timeout, GPollFD* fds, int nFds) c_g_main_context_query; ///
   GMainContext* function(GMainContext* context) c_g_main_context_ref; ///
@@ -561,7 +561,7 @@ __gshared extern(C)
   void function(GMainContext* context, GPollFD* fd) c_g_main_context_remove_poll; ///
   void function(GMainContext* context, GPollFunc func) c_g_main_context_set_poll_func; ///
   void function(GMainContext* context) c_g_main_context_unref; ///
-  bool function(GMainContext* context, GCond* cond, GMutex* mutex) c_g_main_context_wait; ///
+  gboolean function(GMainContext* context, GCond* cond, GMutex* mutex) c_g_main_context_wait; ///
   void function(GMainContext* context) c_g_main_context_wakeup; ///
   GMainContext* function() c_g_main_context_default; ///
   GMainContext* function() c_g_main_context_get_thread_default; ///
@@ -569,9 +569,9 @@ __gshared extern(C)
 
   // MainLoop
   GType function() c_g_main_loop_get_type; ///
-  GMainLoop* function(GMainContext* context, bool isRunning) c_g_main_loop_new; ///
+  GMainLoop* function(GMainContext* context, gboolean isRunning) c_g_main_loop_new; ///
   GMainContext* function(GMainLoop* loop) c_g_main_loop_get_context; ///
-  bool function(GMainLoop* loop) c_g_main_loop_is_running; ///
+  gboolean function(GMainLoop* loop) c_g_main_loop_is_running; ///
   void function(GMainLoop* loop) c_g_main_loop_quit; ///
   GMainLoop* function(GMainLoop* loop) c_g_main_loop_ref; ///
   void function(GMainLoop* loop) c_g_main_loop_run; ///
@@ -579,8 +579,8 @@ __gshared extern(C)
 
   // MappedFile
   GType function() c_g_mapped_file_get_type; ///
-  GMappedFile* function(const(char)* filename, bool writable, GError** _err) c_g_mapped_file_new; ///
-  GMappedFile* function(int fd, bool writable, GError** _err) c_g_mapped_file_new_from_fd; ///
+  GMappedFile* function(const(char)* filename, gboolean writable, GError** _err) c_g_mapped_file_new; ///
+  GMappedFile* function(int fd, gboolean writable, GError** _err) c_g_mapped_file_new_from_fd; ///
   void function(GMappedFile* file) c_g_mapped_file_free; ///
   GBytes* function(GMappedFile* file) c_g_mapped_file_get_bytes; ///
   char* function(GMappedFile* file) c_g_mapped_file_get_contents; ///
@@ -591,13 +591,13 @@ __gshared extern(C)
   // MarkupParseContext
   GType function() c_g_markup_parse_context_get_type; ///
   GMarkupParseContext* function(const(GMarkupParser)* parser, GMarkupParseFlags flags, void* userData, GDestroyNotify userDataDnotify) c_g_markup_parse_context_new; ///
-  bool function(GMarkupParseContext* context, GError** _err) c_g_markup_parse_context_end_parse; ///
+  gboolean function(GMarkupParseContext* context, GError** _err) c_g_markup_parse_context_end_parse; ///
   void function(GMarkupParseContext* context) c_g_markup_parse_context_free; ///
   const(char)* function(GMarkupParseContext* context) c_g_markup_parse_context_get_element; ///
   const(GSList)* function(GMarkupParseContext* context) c_g_markup_parse_context_get_element_stack; ///
   void function(GMarkupParseContext* context, int* lineNumber, int* charNumber) c_g_markup_parse_context_get_position; ///
   void* function(GMarkupParseContext* context) c_g_markup_parse_context_get_user_data; ///
-  bool function(GMarkupParseContext* context, const(char)* text, ptrdiff_t textLen, GError** _err) c_g_markup_parse_context_parse; ///
+  gboolean function(GMarkupParseContext* context, const(char)* text, ptrdiff_t textLen, GError** _err) c_g_markup_parse_context_parse; ///
   void* function(GMarkupParseContext* context) c_g_markup_parse_context_pop; ///
   void function(GMarkupParseContext* context, const(GMarkupParser)* parser, void* userData) c_g_markup_parse_context_push; ///
   GMarkupParseContext* function(GMarkupParseContext* context) c_g_markup_parse_context_ref; ///
@@ -609,15 +609,15 @@ __gshared extern(C)
   char* function(const(GMatchInfo)* matchInfo, int matchNum) c_g_match_info_fetch; ///
   char** function(const(GMatchInfo)* matchInfo) c_g_match_info_fetch_all; ///
   char* function(const(GMatchInfo)* matchInfo, const(char)* name) c_g_match_info_fetch_named; ///
-  bool function(const(GMatchInfo)* matchInfo, const(char)* name, int* startPos, int* endPos) c_g_match_info_fetch_named_pos; ///
-  bool function(const(GMatchInfo)* matchInfo, int matchNum, int* startPos, int* endPos) c_g_match_info_fetch_pos; ///
+  gboolean function(const(GMatchInfo)* matchInfo, const(char)* name, int* startPos, int* endPos) c_g_match_info_fetch_named_pos; ///
+  gboolean function(const(GMatchInfo)* matchInfo, int matchNum, int* startPos, int* endPos) c_g_match_info_fetch_pos; ///
   void function(GMatchInfo* matchInfo) c_g_match_info_free; ///
   int function(const(GMatchInfo)* matchInfo) c_g_match_info_get_match_count; ///
   GRegex* function(const(GMatchInfo)* matchInfo) c_g_match_info_get_regex; ///
   const(char)* function(const(GMatchInfo)* matchInfo) c_g_match_info_get_string; ///
-  bool function(const(GMatchInfo)* matchInfo) c_g_match_info_is_partial_match; ///
-  bool function(const(GMatchInfo)* matchInfo) c_g_match_info_matches; ///
-  bool function(GMatchInfo* matchInfo, GError** _err) c_g_match_info_next; ///
+  gboolean function(const(GMatchInfo)* matchInfo) c_g_match_info_is_partial_match; ///
+  gboolean function(const(GMatchInfo)* matchInfo) c_g_match_info_matches; ///
+  gboolean function(GMatchInfo* matchInfo, GError** _err) c_g_match_info_next; ///
   GMatchInfo* function(GMatchInfo* matchInfo) c_g_match_info_ref; ///
   void function(GMatchInfo* matchInfo) c_g_match_info_unref; ///
 
@@ -637,7 +637,7 @@ __gshared extern(C)
   void function(GMutex* mutex) c_g_mutex_free; ///
   void function(GMutex* mutex) c_g_mutex_init; ///
   void function(GMutex* mutex) c_g_mutex_lock; ///
-  bool function(GMutex* mutex) c_g_mutex_trylock; ///
+  gboolean function(GMutex* mutex) c_g_mutex_trylock; ///
   void function(GMutex* mutex) c_g_mutex_unlock; ///
   GMutex* function() c_g_mutex_new; ///
 
@@ -656,7 +656,7 @@ __gshared extern(C)
   GNode* function(GNode* parent, int position, GNode* node) c_g_node_insert; ///
   GNode* function(GNode* parent, GNode* sibling, GNode* node) c_g_node_insert_after; ///
   GNode* function(GNode* parent, GNode* sibling, GNode* node) c_g_node_insert_before; ///
-  bool function(GNode* node, GNode* descendant) c_g_node_is_ancestor; ///
+  gboolean function(GNode* node, GNode* descendant) c_g_node_is_ancestor; ///
   GNode* function(GNode* node) c_g_node_last_child; ///
   GNode* function(GNode* node) c_g_node_last_sibling; ///
   uint function(GNode* root) c_g_node_max_height; ///
@@ -673,9 +673,9 @@ __gshared extern(C)
 
   // Once
   void* function(GOnce* once, GThreadFunc func, void* arg) c_g_once_impl; ///
-  bool function(void* location) c_g_once_init_enter; ///
-  bool function(size_t* location) c_g_once_init_enter_impl; ///
-  bool function(void* location) c_g_once_init_enter_pointer; ///
+  gboolean function(void* location) c_g_once_init_enter; ///
+  gboolean function(size_t* location) c_g_once_init_enter_impl; ///
+  gboolean function(void* location) c_g_once_init_enter_pointer; ///
   void function(void* location, size_t result) c_g_once_init_leave; ///
   void function(void* location, void* result) c_g_once_init_leave_pointer; ///
 
@@ -684,19 +684,19 @@ __gshared extern(C)
   void function(GOptionContext* context, const(GOptionEntry)* entries, const(char)* translationDomain) c_g_option_context_add_main_entries; ///
   void function(GOptionContext* context) c_g_option_context_free; ///
   const(char)* function(GOptionContext* context) c_g_option_context_get_description; ///
-  char* function(GOptionContext* context, bool mainHelp, GOptionGroup* group) c_g_option_context_get_help; ///
-  bool function(GOptionContext* context) c_g_option_context_get_help_enabled; ///
-  bool function(GOptionContext* context) c_g_option_context_get_ignore_unknown_options; ///
+  char* function(GOptionContext* context, gboolean mainHelp, GOptionGroup* group) c_g_option_context_get_help; ///
+  gboolean function(GOptionContext* context) c_g_option_context_get_help_enabled; ///
+  gboolean function(GOptionContext* context) c_g_option_context_get_ignore_unknown_options; ///
   GOptionGroup* function(GOptionContext* context) c_g_option_context_get_main_group; ///
-  bool function(GOptionContext* context) c_g_option_context_get_strict_posix; ///
+  gboolean function(GOptionContext* context) c_g_option_context_get_strict_posix; ///
   const(char)* function(GOptionContext* context) c_g_option_context_get_summary; ///
-  bool function(GOptionContext* context, int* argc, char*** argv, GError** _err) c_g_option_context_parse; ///
-  bool function(GOptionContext* context, char*** arguments, GError** _err) c_g_option_context_parse_strv; ///
+  gboolean function(GOptionContext* context, int* argc, char*** argv, GError** _err) c_g_option_context_parse; ///
+  gboolean function(GOptionContext* context, char*** arguments, GError** _err) c_g_option_context_parse_strv; ///
   void function(GOptionContext* context, const(char)* description) c_g_option_context_set_description; ///
-  void function(GOptionContext* context, bool helpEnabled) c_g_option_context_set_help_enabled; ///
-  void function(GOptionContext* context, bool ignoreUnknown) c_g_option_context_set_ignore_unknown_options; ///
+  void function(GOptionContext* context, gboolean helpEnabled) c_g_option_context_set_help_enabled; ///
+  void function(GOptionContext* context, gboolean ignoreUnknown) c_g_option_context_set_ignore_unknown_options; ///
   void function(GOptionContext* context, GOptionGroup* group) c_g_option_context_set_main_group; ///
-  void function(GOptionContext* context, bool strictPosix) c_g_option_context_set_strict_posix; ///
+  void function(GOptionContext* context, gboolean strictPosix) c_g_option_context_set_strict_posix; ///
   void function(GOptionContext* context, const(char)* summary) c_g_option_context_set_summary; ///
   void function(GOptionContext* context, GTranslateFunc func, void* data, GDestroyNotify destroyNotify) c_g_option_context_set_translate_func; ///
   void function(GOptionContext* context, const(char)* domain) c_g_option_context_set_translation_domain; ///
@@ -722,12 +722,12 @@ __gshared extern(C)
   char* function(GPathBuf* buf) c_g_path_buf_free_to_path; ///
   GPathBuf* function(GPathBuf* buf) c_g_path_buf_init; ///
   GPathBuf* function(GPathBuf* buf, const(char)* path) c_g_path_buf_init_from_path; ///
-  bool function(GPathBuf* buf) c_g_path_buf_pop; ///
+  gboolean function(GPathBuf* buf) c_g_path_buf_pop; ///
   GPathBuf* function(GPathBuf* buf, const(char)* path) c_g_path_buf_push; ///
-  bool function(GPathBuf* buf, const(char)* extension) c_g_path_buf_set_extension; ///
-  bool function(GPathBuf* buf, const(char)* fileName) c_g_path_buf_set_filename; ///
+  gboolean function(GPathBuf* buf, const(char)* extension) c_g_path_buf_set_extension; ///
+  gboolean function(GPathBuf* buf, const(char)* fileName) c_g_path_buf_set_filename; ///
   char* function(GPathBuf* buf) c_g_path_buf_to_path; ///
-  bool function(const(void)* v1, const(void)* v2) c_g_path_buf_equal; ///
+  gboolean function(const(void)* v1, const(void)* v2) c_g_path_buf_equal; ///
   GPathBuf* function() c_g_path_buf_new; ///
   GPathBuf* function(const(char)* path) c_g_path_buf_new_from_path; ///
 
@@ -735,10 +735,10 @@ __gshared extern(C)
   GType function() c_g_pattern_spec_get_type; ///
   GPatternSpec* function(const(char)* pattern) c_g_pattern_spec_new; ///
   GPatternSpec* function(GPatternSpec* pspec) c_g_pattern_spec_copy; ///
-  bool function(GPatternSpec* pspec1, GPatternSpec* pspec2) c_g_pattern_spec_equal; ///
+  gboolean function(GPatternSpec* pspec1, GPatternSpec* pspec2) c_g_pattern_spec_equal; ///
   void function(GPatternSpec* pspec) c_g_pattern_spec_free; ///
-  bool function(GPatternSpec* pspec, size_t stringLength, const(char)* string_, const(char)* stringReversed) c_g_pattern_spec_match; ///
-  bool function(GPatternSpec* pspec, const(char)* string_) c_g_pattern_spec_match_string; ///
+  gboolean function(GPatternSpec* pspec, size_t stringLength, const(char)* string_, const(char)* stringReversed) c_g_pattern_spec_match; ///
+  gboolean function(GPatternSpec* pspec, const(char)* string_) c_g_pattern_spec_match_string; ///
 
   // PollFD
   GType function() c_g_pollfd_get_type; ///
@@ -755,23 +755,23 @@ __gshared extern(C)
   GPtrArray* function(GPtrArray* array, GCopyFunc func, void* userData) c_g_ptr_array_copy; ///
   void function(GPtrArray* arrayToExtend, GPtrArray* array, GCopyFunc func, void* userData) c_g_ptr_array_extend; ///
   void function(GPtrArray* arrayToExtend, GPtrArray* array) c_g_ptr_array_extend_and_steal; ///
-  bool function(GPtrArray* haystack, const(void)* needle, uint* index) c_g_ptr_array_find; ///
-  bool function(GPtrArray* haystack, const(void)* needle, GEqualFunc equalFunc, uint* index) c_g_ptr_array_find_with_equal_func; ///
+  gboolean function(GPtrArray* haystack, const(void)* needle, uint* index) c_g_ptr_array_find; ///
+  gboolean function(GPtrArray* haystack, const(void)* needle, GEqualFunc equalFunc, uint* index) c_g_ptr_array_find_with_equal_func; ///
   void function(GPtrArray* array, GFunc func, void* userData) c_g_ptr_array_foreach; ///
-  void** function(GPtrArray* array, bool freeSeg) c_g_ptr_array_free; ///
+  void** function(GPtrArray* array, gboolean freeSeg) c_g_ptr_array_free; ///
   void function(GPtrArray* array, int index, void* data) c_g_ptr_array_insert; ///
-  bool function(GPtrArray* array) c_g_ptr_array_is_null_terminated; ///
+  gboolean function(GPtrArray* array) c_g_ptr_array_is_null_terminated; ///
   GPtrArray* function() c_g_ptr_array_new; ///
   GPtrArray* function(void** data, size_t len, GCopyFunc copyFunc, void* copyFuncUserData, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_from_array; ///
   GPtrArray* function(void** data, GCopyFunc copyFunc, void* copyFuncUserData, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_from_null_terminated_array; ///
   GPtrArray* function(uint reservedSize, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_full; ///
-  GPtrArray* function(uint reservedSize, GDestroyNotify elementFreeFunc, bool nullTerminated) c_g_ptr_array_new_null_terminated; ///
+  GPtrArray* function(uint reservedSize, GDestroyNotify elementFreeFunc, gboolean nullTerminated) c_g_ptr_array_new_null_terminated; ///
   GPtrArray* function(void** data, size_t len, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_take; ///
   GPtrArray* function(void** data, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_take_null_terminated; ///
   GPtrArray* function(GDestroyNotify elementFreeFunc) c_g_ptr_array_new_with_free_func; ///
   GPtrArray* function(GPtrArray* array) c_g_ptr_array_ref; ///
-  bool function(GPtrArray* array, void* data) c_g_ptr_array_remove; ///
-  bool function(GPtrArray* array, void* data) c_g_ptr_array_remove_fast; ///
+  gboolean function(GPtrArray* array, void* data) c_g_ptr_array_remove; ///
+  gboolean function(GPtrArray* array, void* data) c_g_ptr_array_remove_fast; ///
   void* function(GPtrArray* array, uint index) c_g_ptr_array_remove_index; ///
   void* function(GPtrArray* array, uint index) c_g_ptr_array_remove_index_fast; ///
   GPtrArray* function(GPtrArray* array, uint index, uint length) c_g_ptr_array_remove_range; ///
@@ -805,7 +805,7 @@ __gshared extern(C)
   void function(GQueue* queue, GList* sibling, void* data) c_g_queue_insert_before; ///
   void function(GQueue* queue, GList* sibling, GList* link) c_g_queue_insert_before_link; ///
   void function(GQueue* queue, void* data, GCompareDataFunc func, void* userData) c_g_queue_insert_sorted; ///
-  bool function(GQueue* queue) c_g_queue_is_empty; ///
+  gboolean function(GQueue* queue) c_g_queue_is_empty; ///
   int function(GQueue* queue, GList* link) c_g_queue_link_index; ///
   void* function(GQueue* queue) c_g_queue_peek_head; ///
   GList* function(GQueue* queue) c_g_queue_peek_head_link; ///
@@ -825,7 +825,7 @@ __gshared extern(C)
   void function(GQueue* queue, int n, GList* link) c_g_queue_push_nth_link; ///
   void function(GQueue* queue, void* data) c_g_queue_push_tail; ///
   void function(GQueue* queue, GList* link) c_g_queue_push_tail_link; ///
-  bool function(GQueue* queue, const(void)* data) c_g_queue_remove; ///
+  gboolean function(GQueue* queue, const(void)* data) c_g_queue_remove; ///
   uint function(GQueue* queue, const(void)* data) c_g_queue_remove_all; ///
   void function(GQueue* queue) c_g_queue_reverse; ///
   void function(GQueue* queue, GCompareDataFunc compareFunc, void* userData) c_g_queue_sort; ///
@@ -836,10 +836,10 @@ __gshared extern(C)
   void function(GRWLock* rwLock) c_g_rw_lock_clear; ///
   void function(GRWLock* rwLock) c_g_rw_lock_init; ///
   void function(GRWLock* rwLock) c_g_rw_lock_reader_lock; ///
-  bool function(GRWLock* rwLock) c_g_rw_lock_reader_trylock; ///
+  gboolean function(GRWLock* rwLock) c_g_rw_lock_reader_trylock; ///
   void function(GRWLock* rwLock) c_g_rw_lock_reader_unlock; ///
   void function(GRWLock* rwLock) c_g_rw_lock_writer_lock; ///
-  bool function(GRWLock* rwLock) c_g_rw_lock_writer_trylock; ///
+  gboolean function(GRWLock* rwLock) c_g_rw_lock_writer_trylock; ///
   void function(GRWLock* rwLock) c_g_rw_lock_writer_unlock; ///
 
   // Rand
@@ -860,7 +860,7 @@ __gshared extern(C)
   void function(GRecMutex* recMutex) c_g_rec_mutex_clear; ///
   void function(GRecMutex* recMutex) c_g_rec_mutex_init; ///
   void function(GRecMutex* recMutex) c_g_rec_mutex_lock; ///
-  bool function(GRecMutex* recMutex) c_g_rec_mutex_trylock; ///
+  gboolean function(GRecMutex* recMutex) c_g_rec_mutex_trylock; ///
   void function(GRecMutex* recMutex) c_g_rec_mutex_unlock; ///
 
   // Regex
@@ -868,16 +868,16 @@ __gshared extern(C)
   GRegex* function(const(char)* pattern, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions, GError** _err) c_g_regex_new; ///
   int function(const(GRegex)* regex) c_g_regex_get_capture_count; ///
   GRegexCompileFlags function(const(GRegex)* regex) c_g_regex_get_compile_flags; ///
-  bool function(const(GRegex)* regex) c_g_regex_get_has_cr_or_lf; ///
+  gboolean function(const(GRegex)* regex) c_g_regex_get_has_cr_or_lf; ///
   GRegexMatchFlags function(const(GRegex)* regex) c_g_regex_get_match_flags; ///
   int function(const(GRegex)* regex) c_g_regex_get_max_backref; ///
   int function(const(GRegex)* regex) c_g_regex_get_max_lookbehind; ///
   const(char)* function(const(GRegex)* regex) c_g_regex_get_pattern; ///
   int function(const(GRegex)* regex, const(char)* name) c_g_regex_get_string_number; ///
-  bool function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) c_g_regex_match; ///
-  bool function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) c_g_regex_match_all; ///
-  bool function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) c_g_regex_match_all_full; ///
-  bool function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) c_g_regex_match_full; ///
+  gboolean function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) c_g_regex_match; ///
+  gboolean function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) c_g_regex_match_all; ///
+  gboolean function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) c_g_regex_match_all_full; ///
+  gboolean function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) c_g_regex_match_full; ///
   GRegex* function(GRegex* regex) c_g_regex_ref; ///
   char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, const(char)* replacement, GRegexMatchFlags matchOptions, GError** _err) c_g_regex_replace; ///
   char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GRegexEvalCallback eval, void* userData, GError** _err) c_g_regex_replace_eval; ///
@@ -885,18 +885,18 @@ __gshared extern(C)
   char** function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions) c_g_regex_split; ///
   char** function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, int maxTokens, GError** _err) c_g_regex_split_full; ///
   void function(GRegex* regex) c_g_regex_unref; ///
-  bool function(const(char)* replacement, bool* hasReferences, GError** _err) c_g_regex_check_replacement; ///
+  gboolean function(const(char)* replacement, gboolean* hasReferences, GError** _err) c_g_regex_check_replacement; ///
   GQuark function() c_g_regex_error_quark; ///
   char* function(const(char)* string_, int length) c_g_regex_escape_nul; ///
   char* function(const(char)* string_, int length) c_g_regex_escape_string; ///
-  bool function(const(char)* pattern, const(char)* string_, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions) c_g_regex_match_simple; ///
+  gboolean function(const(char)* pattern, const(char)* string_, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions) c_g_regex_match_simple; ///
   char** function(const(char)* pattern, const(char)* string_, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions) c_g_regex_split_simple; ///
 
   // Relation
   int function(GRelation* relation, const(void)* key, int field) c_g_relation_count; ///
   int function(GRelation* relation, const(void)* key, int field) c_g_relation_delete; ///
   void function(GRelation* relation) c_g_relation_destroy; ///
-  bool function(GRelation* relation,  ...) c_g_relation_exists; ///
+  gboolean function(GRelation* relation,  ...) c_g_relation_exists; ///
   void function(GRelation* relation, int field, GHashFunc hashFunc, GEqualFunc keyEqualFunc) c_g_relation_index; ///
   void function(GRelation* relation,  ...) c_g_relation_insert; ///
   void function(GRelation* relation) c_g_relation_print; ///
@@ -942,7 +942,7 @@ __gshared extern(C)
   GTokenType function(GScanner* scanner) c_g_scanner_cur_token; ///
   GTokenValue function(GScanner* scanner) c_g_scanner_cur_value; ///
   void function(GScanner* scanner) c_g_scanner_destroy; ///
-  bool function(GScanner* scanner) c_g_scanner_eof; ///
+  gboolean function(GScanner* scanner) c_g_scanner_eof; ///
   void function(GScanner* scanner, const(char)* format,  ...) c_g_scanner_error; ///
   GTokenType function(GScanner* scanner) c_g_scanner_get_next_token; ///
   void function(GScanner* scanner, int inputFd) c_g_scanner_input_file; ///
@@ -969,7 +969,7 @@ __gshared extern(C)
   int function(GSequence* seq) c_g_sequence_get_length; ///
   GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) c_g_sequence_insert_sorted; ///
   GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) c_g_sequence_insert_sorted_iter; ///
-  bool function(GSequence* seq) c_g_sequence_is_empty; ///
+  gboolean function(GSequence* seq) c_g_sequence_is_empty; ///
   GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) c_g_sequence_lookup; ///
   GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) c_g_sequence_lookup_iter; ///
   GSequenceIter* function(GSequence* seq, void* data) c_g_sequence_prepend; ///
@@ -995,8 +995,8 @@ __gshared extern(C)
   int function(GSequenceIter* a, GSequenceIter* b) c_g_sequence_iter_compare; ///
   int function(GSequenceIter* iter) c_g_sequence_iter_get_position; ///
   GSequence* function(GSequenceIter* iter) c_g_sequence_iter_get_sequence; ///
-  bool function(GSequenceIter* iter) c_g_sequence_iter_is_begin; ///
-  bool function(GSequenceIter* iter) c_g_sequence_iter_is_end; ///
+  gboolean function(GSequenceIter* iter) c_g_sequence_iter_is_begin; ///
+  gboolean function(GSequenceIter* iter) c_g_sequence_iter_is_end; ///
   GSequenceIter* function(GSequenceIter* iter, int delta) c_g_sequence_iter_move; ///
   GSequenceIter* function(GSequenceIter* iter) c_g_sequence_iter_next; ///
   GSequenceIter* function(GSequenceIter* iter) c_g_sequence_iter_prev; ///
@@ -1009,7 +1009,7 @@ __gshared extern(C)
   void* function(GSource* source, int fd, GIOCondition events) c_g_source_add_unix_fd; ///
   uint function(GSource* source, GMainContext* context) c_g_source_attach; ///
   void function(GSource* source) c_g_source_destroy; ///
-  bool function(GSource* source) c_g_source_get_can_recurse; ///
+  gboolean function(GSource* source) c_g_source_get_can_recurse; ///
   GMainContext* function(GSource* source) c_g_source_get_context; ///
   void function(GSource* source, GTimeVal* timeval) c_g_source_get_current_time; ///
   uint function(GSource* source) c_g_source_get_id; ///
@@ -1017,7 +1017,7 @@ __gshared extern(C)
   int function(GSource* source) c_g_source_get_priority; ///
   long function(GSource* source) c_g_source_get_ready_time; ///
   long function(GSource* source) c_g_source_get_time; ///
-  bool function(GSource* source) c_g_source_is_destroyed; ///
+  gboolean function(GSource* source) c_g_source_is_destroyed; ///
   void function(GSource* source, void* tag, GIOCondition newEvents) c_g_source_modify_unix_fd; ///
   GIOCondition function(GSource* source, void* tag) c_g_source_query_unix_fd; ///
   GSource* function(GSource* source) c_g_source_ref; ///
@@ -1026,7 +1026,7 @@ __gshared extern(C)
   void function(GSource* source, void* tag) c_g_source_remove_unix_fd; ///
   void function(GSource* source, GSourceFunc func, void* data, GDestroyNotify notify) c_g_source_set_callback; ///
   void function(GSource* source, void* callbackData, GSourceCallbackFuncs* callbackFuncs) c_g_source_set_callback_indirect; ///
-  void function(GSource* source, bool canRecurse) c_g_source_set_can_recurse; ///
+  void function(GSource* source, gboolean canRecurse) c_g_source_set_can_recurse; ///
   void function(GSource* source, GSourceDisposeFunc dispose) c_g_source_set_dispose_function; ///
   void function(GSource* source, GSourceFuncs* funcs) c_g_source_set_funcs; ///
   void function(GSource* source, const(char)* name) c_g_source_set_name; ///
@@ -1034,9 +1034,9 @@ __gshared extern(C)
   void function(GSource* source, long readyTime) c_g_source_set_ready_time; ///
   void function(GSource* source, const(char)* name) c_g_source_set_static_name; ///
   void function(GSource* source) c_g_source_unref; ///
-  bool function(uint tag) c_g_source_remove; ///
-  bool function(GSourceFuncs* funcs, void* userData) c_g_source_remove_by_funcs_user_data; ///
-  bool function(void* userData) c_g_source_remove_by_user_data; ///
+  gboolean function(uint tag) c_g_source_remove; ///
+  gboolean function(GSourceFuncs* funcs, void* userData) c_g_source_remove_by_funcs_user_data; ///
+  gboolean function(void* userData) c_g_source_remove_by_user_data; ///
   void function(uint tag, const(char)* name) c_g_source_set_name_by_id; ///
 
   // StaticMutex
@@ -1054,10 +1054,10 @@ __gshared extern(C)
   void function(GStaticRWLock* lock) c_g_static_rw_lock_free; ///
   void function(GStaticRWLock* lock) c_g_static_rw_lock_init; ///
   void function(GStaticRWLock* lock) c_g_static_rw_lock_reader_lock; ///
-  bool function(GStaticRWLock* lock) c_g_static_rw_lock_reader_trylock; ///
+  gboolean function(GStaticRWLock* lock) c_g_static_rw_lock_reader_trylock; ///
   void function(GStaticRWLock* lock) c_g_static_rw_lock_reader_unlock; ///
   void function(GStaticRWLock* lock) c_g_static_rw_lock_writer_lock; ///
-  bool function(GStaticRWLock* lock) c_g_static_rw_lock_writer_trylock; ///
+  gboolean function(GStaticRWLock* lock) c_g_static_rw_lock_writer_trylock; ///
   void function(GStaticRWLock* lock) c_g_static_rw_lock_writer_unlock; ///
 
   // StaticRecMutex
@@ -1065,7 +1065,7 @@ __gshared extern(C)
   void function(GStaticRecMutex* mutex) c_g_static_rec_mutex_init; ///
   void function(GStaticRecMutex* mutex) c_g_static_rec_mutex_lock; ///
   void function(GStaticRecMutex* mutex, uint depth) c_g_static_rec_mutex_lock_full; ///
-  bool function(GStaticRecMutex* mutex) c_g_static_rec_mutex_trylock; ///
+  gboolean function(GStaticRecMutex* mutex) c_g_static_rec_mutex_trylock; ///
   void function(GStaticRecMutex* mutex) c_g_static_rec_mutex_unlock; ///
   uint function(GStaticRecMutex* mutex) c_g_static_rec_mutex_unlock_full; ///
 
@@ -1080,15 +1080,15 @@ __gshared extern(C)
   GString* function(GString* string_, const(char)* val, ptrdiff_t len) c_g_string_append_len; ///
   void function(GString* string_, const(char)* format,  ...) c_g_string_append_printf; ///
   GString* function(GString* string_, dchar wc) c_g_string_append_unichar; ///
-  GString* function(GString* string_, const(char)* unescaped, const(char)* reservedCharsAllowed, bool allowUtf8) c_g_string_append_uri_escaped; ///
+  GString* function(GString* string_, const(char)* unescaped, const(char)* reservedCharsAllowed, gboolean allowUtf8) c_g_string_append_uri_escaped; ///
   void function(GString* string_, const(char)* format, void* args) c_g_string_append_vprintf; ///
   GString* function(GString* string_) c_g_string_ascii_down; ///
   GString* function(GString* string_) c_g_string_ascii_up; ///
   GString* function(GString* string_, const(char)* rval) c_g_string_assign; ///
   GString* function(GString* string_) c_g_string_down; ///
-  bool function(const(GString)* v, const(GString)* v2) c_g_string_equal; ///
+  gboolean function(const(GString)* v, const(GString)* v2) c_g_string_equal; ///
   GString* function(GString* string_, ptrdiff_t pos, ptrdiff_t len) c_g_string_erase; ///
-  char* function(GString* string_, bool freeSegment) c_g_string_free; ///
+  char* function(GString* string_, gboolean freeSegment) c_g_string_free; ///
   char* function(GString* string_) c_g_string_free_and_steal; ///
   GBytes* function(GString* string_) c_g_string_free_to_bytes; ///
   uint function(const(GString)* str) c_g_string_hash; ///
@@ -1153,31 +1153,31 @@ __gshared extern(C)
   GThread* function(GThread* thread) c_g_thread_ref; ///
   void function(GThread* thread, GThreadPriority priority) c_g_thread_set_priority; ///
   void function(GThread* thread) c_g_thread_unref; ///
-  GThread* function(GThreadFunc func, void* data, bool joinable, GError** _err) c_g_thread_create; ///
-  GThread* function(GThreadFunc func, void* data, gulong stackSize, bool joinable, bool bound, GThreadPriority priority, GError** _err) c_g_thread_create_full; ///
+  GThread* function(GThreadFunc func, void* data, gboolean joinable, GError** _err) c_g_thread_create; ///
+  GThread* function(GThreadFunc func, void* data, gulong stackSize, gboolean joinable, gboolean bound, GThreadPriority priority, GError** _err) c_g_thread_create_full; ///
   GQuark function() c_g_thread_error_quark; ///
   void function(void* retval) c_g_thread_exit; ///
   void function(GFunc threadFunc, void* userData) c_g_thread_foreach; ///
-  bool function() c_g_thread_get_initialized; ///
+  gboolean function() c_g_thread_get_initialized; ///
   void function(void* vtable) c_g_thread_init; ///
   void function(void* vtable) c_g_thread_init_with_errorcheck_mutexes; ///
   GThread* function() c_g_thread_self; ///
   void function() c_g_thread_yield; ///
 
   // ThreadPool
-  void function(GThreadPool* pool, bool immediate, bool wait) c_g_thread_pool_free; ///
+  void function(GThreadPool* pool, gboolean immediate, gboolean wait) c_g_thread_pool_free; ///
   int function(GThreadPool* pool) c_g_thread_pool_get_max_threads; ///
   uint function(GThreadPool* pool) c_g_thread_pool_get_num_threads; ///
-  bool function(GThreadPool* pool, void* data) c_g_thread_pool_move_to_front; ///
-  bool function(GThreadPool* pool, void* data, GError** _err) c_g_thread_pool_push; ///
-  bool function(GThreadPool* pool, int maxThreads, GError** _err) c_g_thread_pool_set_max_threads; ///
+  gboolean function(GThreadPool* pool, void* data) c_g_thread_pool_move_to_front; ///
+  gboolean function(GThreadPool* pool, void* data, GError** _err) c_g_thread_pool_push; ///
+  gboolean function(GThreadPool* pool, int maxThreads, GError** _err) c_g_thread_pool_set_max_threads; ///
   void function(GThreadPool* pool, GCompareDataFunc func, void* userData) c_g_thread_pool_set_sort_function; ///
   uint function(GThreadPool* pool) c_g_thread_pool_unprocessed; ///
   uint function() c_g_thread_pool_get_max_idle_time; ///
   int function() c_g_thread_pool_get_max_unused_threads; ///
   uint function() c_g_thread_pool_get_num_unused_threads; ///
-  GThreadPool* function(GFunc func, void* userData, int maxThreads, bool exclusive, GError** _err) c_g_thread_pool_new; ///
-  GThreadPool* function(GFunc func, void* userData, GDestroyNotify itemFreeFunc, int maxThreads, bool exclusive, GError** _err) c_g_thread_pool_new_full; ///
+  GThreadPool* function(GFunc func, void* userData, int maxThreads, gboolean exclusive, GError** _err) c_g_thread_pool_new; ///
+  GThreadPool* function(GFunc func, void* userData, GDestroyNotify itemFreeFunc, int maxThreads, gboolean exclusive, GError** _err) c_g_thread_pool_new_full; ///
   void function(uint interval) c_g_thread_pool_set_max_idle_time; ///
   void function(int maxThreads) c_g_thread_pool_set_max_unused_threads; ///
   void function() c_g_thread_pool_stop_unused_threads; ///
@@ -1185,7 +1185,7 @@ __gshared extern(C)
   // TimeVal
   void function(GTimeVal* time, glong microseconds) c_g_time_val_add; ///
   char* function(GTimeVal* time) c_g_time_val_to_iso8601; ///
-  bool function(const(char)* isoDate, GTimeVal* time) c_g_time_val_from_iso8601; ///
+  gboolean function(const(char)* isoDate, GTimeVal* time) c_g_time_val_from_iso8601; ///
 
   // TimeZone
   GType function() c_g_time_zone_get_type; ///
@@ -1199,7 +1199,7 @@ __gshared extern(C)
   const(char)* function(GTimeZone* tz, int interval) c_g_time_zone_get_abbreviation; ///
   const(char)* function(GTimeZone* tz) c_g_time_zone_get_identifier; ///
   int function(GTimeZone* tz, int interval) c_g_time_zone_get_offset; ///
-  bool function(GTimeZone* tz, int interval) c_g_time_zone_is_dst; ///
+  gboolean function(GTimeZone* tz, int interval) c_g_time_zone_is_dst; ///
   GTimeZone* function(GTimeZone* tz) c_g_time_zone_ref; ///
   void function(GTimeZone* tz) c_g_time_zone_unref; ///
 
@@ -1207,7 +1207,7 @@ __gshared extern(C)
   void function(GTimer* timer) c_g_timer_continue; ///
   void function(GTimer* timer) c_g_timer_destroy; ///
   double function(GTimer* timer, gulong* microseconds) c_g_timer_elapsed; ///
-  bool function(GTimer* timer) c_g_timer_is_active; ///
+  gboolean function(GTimer* timer) c_g_timer_is_active; ///
   void function(GTimer* timer) c_g_timer_reset; ///
   void function(GTimer* timer) c_g_timer_start; ///
   void function(GTimer* timer) c_g_timer_stop; ///
@@ -1231,20 +1231,20 @@ __gshared extern(C)
   void function(GTree* tree, void* key, void* value) c_g_tree_insert; ///
   GTreeNode* function(GTree* tree, void* key, void* value) c_g_tree_insert_node; ///
   void* function(GTree* tree, const(void)* key) c_g_tree_lookup; ///
-  bool function(GTree* tree, const(void)* lookupKey, void** origKey, void** value) c_g_tree_lookup_extended; ///
+  gboolean function(GTree* tree, const(void)* lookupKey, void** origKey, void** value) c_g_tree_lookup_extended; ///
   GTreeNode* function(GTree* tree, const(void)* key) c_g_tree_lookup_node; ///
   GTreeNode* function(GTree* tree, const(void)* key) c_g_tree_lower_bound; ///
   int function(GTree* tree) c_g_tree_nnodes; ///
   GTreeNode* function(GTree* tree) c_g_tree_node_first; ///
   GTreeNode* function(GTree* tree) c_g_tree_node_last; ///
   GTree* function(GTree* tree) c_g_tree_ref; ///
-  bool function(GTree* tree, const(void)* key) c_g_tree_remove; ///
+  gboolean function(GTree* tree, const(void)* key) c_g_tree_remove; ///
   void function(GTree* tree) c_g_tree_remove_all; ///
   void function(GTree* tree, void* key, void* value) c_g_tree_replace; ///
   GTreeNode* function(GTree* tree, void* key, void* value) c_g_tree_replace_node; ///
   void* function(GTree* tree, GCompareFunc searchFunc, const(void)* userData) c_g_tree_search; ///
   GTreeNode* function(GTree* tree, GCompareFunc searchFunc, const(void)* userData) c_g_tree_search_node; ///
-  bool function(GTree* tree, const(void)* key) c_g_tree_steal; ///
+  gboolean function(GTree* tree, const(void)* key) c_g_tree_steal; ///
   void function(GTree* tree, GTraverseFunc traverseFunc, GTraverseType traverseType, void* userData) c_g_tree_traverse; ///
   void function(GTree* tree) c_g_tree_unref; ///
   GTreeNode* function(GTree* tree, const(void)* key) c_g_tree_upper_bound; ///
@@ -1281,8 +1281,8 @@ __gshared extern(C)
   GUri* function(GUriFlags flags, const(char)* scheme, const(char)* user, const(char)* password, const(char)* authParams, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) c_g_uri_build_with_user; ///
   GQuark function() c_g_uri_error_quark; ///
   char* function(const(ubyte)* unescaped, size_t length, const(char)* reservedCharsAllowed) c_g_uri_escape_bytes; ///
-  char* function(const(char)* unescaped, const(char)* reservedCharsAllowed, bool allowUtf8) c_g_uri_escape_string; ///
-  bool function(const(char)* uriString, GUriFlags flags, GError** _err) c_g_uri_is_valid; ///
+  char* function(const(char)* unescaped, const(char)* reservedCharsAllowed, gboolean allowUtf8) c_g_uri_escape_string; ///
+  gboolean function(const(char)* uriString, GUriFlags flags, GError** _err) c_g_uri_is_valid; ///
   char* function(GUriFlags flags, const(char)* scheme, const(char)* userinfo, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) c_g_uri_join; ///
   char* function(GUriFlags flags, const(char)* scheme, const(char)* user, const(char)* password, const(char)* authParams, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) c_g_uri_join_with_user; ///
   char** function(const(char)* uriList) c_g_uri_list_extract_uris; ///
@@ -1291,30 +1291,30 @@ __gshared extern(C)
   char* function(const(char)* uri) c_g_uri_parse_scheme; ///
   const(char)* function(const(char)* uri) c_g_uri_peek_scheme; ///
   char* function(const(char)* baseUriString, const(char)* uriRef, GUriFlags flags, GError** _err) c_g_uri_resolve_relative; ///
-  bool function(const(char)* uriRef, GUriFlags flags, char** scheme, char** userinfo, char** host, int* port, char** path, char** query, char** fragment, GError** _err) c_g_uri_split; ///
-  bool function(const(char)* uriString, GUriFlags flags, char** scheme, char** host, int* port, GError** _err) c_g_uri_split_network; ///
-  bool function(const(char)* uriRef, GUriFlags flags, char** scheme, char** user, char** password, char** authParams, char** host, int* port, char** path, char** query, char** fragment, GError** _err) c_g_uri_split_with_user; ///
+  gboolean function(const(char)* uriRef, GUriFlags flags, char** scheme, char** userinfo, char** host, int* port, char** path, char** query, char** fragment, GError** _err) c_g_uri_split; ///
+  gboolean function(const(char)* uriString, GUriFlags flags, char** scheme, char** host, int* port, GError** _err) c_g_uri_split_network; ///
+  gboolean function(const(char)* uriRef, GUriFlags flags, char** scheme, char** user, char** password, char** authParams, char** host, int* port, char** path, char** query, char** fragment, GError** _err) c_g_uri_split_with_user; ///
   GBytes* function(const(char)* escapedString, ptrdiff_t length, const(char)* illegalCharacters, GError** _err) c_g_uri_unescape_bytes; ///
   char* function(const(char)* escapedString, const(char)* escapedStringEnd, const(char)* illegalCharacters) c_g_uri_unescape_segment; ///
   char* function(const(char)* escapedString, const(char)* illegalCharacters) c_g_uri_unescape_string; ///
 
   // UriParamsIter
   void function(GUriParamsIter* iter, const(char)* params, ptrdiff_t length, const(char)* separators, GUriParamsFlags flags) c_g_uri_params_iter_init; ///
-  bool function(GUriParamsIter* iter, char** attribute, char** value, GError** _err) c_g_uri_params_iter_next; ///
+  gboolean function(GUriParamsIter* iter, char** attribute, char** value, GError** _err) c_g_uri_params_iter_next; ///
 
   // Variant
   GType function() c_intern; ///
   GVariant* function(const(char)* formatString,  ...) c_g_variant_new; ///
   GVariant* function(const(GVariantType)* childType, const(GVariant*)* children, size_t nChildren) c_g_variant_new_array; ///
-  GVariant* function(bool value) c_g_variant_new_boolean; ///
+  GVariant* function(gboolean value) c_g_variant_new_boolean; ///
   GVariant* function(ubyte value) c_g_variant_new_byte; ///
   GVariant* function(const(char)* string_) c_g_variant_new_bytestring; ///
   GVariant* function(const(char*)* strv, ptrdiff_t length) c_g_variant_new_bytestring_array; ///
   GVariant* function(GVariant* key, GVariant* value) c_g_variant_new_dict_entry; ///
   GVariant* function(double value) c_g_variant_new_double; ///
   GVariant* function(const(GVariantType)* elementType, const(void)* elements, size_t nElements, size_t elementSize) c_g_variant_new_fixed_array; ///
-  GVariant* function(const(GVariantType)* type, GBytes* bytes, bool trusted) c_g_variant_new_from_bytes; ///
-  GVariant* function(const(GVariantType)* type, const(void)* data, size_t size, bool trusted, GDestroyNotify notify, void* userData) c_g_variant_new_from_data; ///
+  GVariant* function(const(GVariantType)* type, GBytes* bytes, gboolean trusted) c_g_variant_new_from_bytes; ///
+  GVariant* function(const(GVariantType)* type, const(void)* data, size_t size, gboolean trusted, GDestroyNotify notify, void* userData) c_g_variant_new_from_data; ///
   GVariant* function(int value) c_g_variant_new_handle; ///
   GVariant* function(short value) c_g_variant_new_int16; ///
   GVariant* function(int value) c_g_variant_new_int32; ///
@@ -1336,7 +1336,7 @@ __gshared extern(C)
   GVariant* function(const(char)* formatString, const(char*)* endptr, void** app) c_g_variant_new_va; ///
   GVariant* function(GVariant* value) c_g_variant_new_variant; ///
   GVariant* function(GVariant* value) c_g_variant_byteswap; ///
-  bool function(GVariant* value, const(char)* formatString, bool copyOnly) c_g_variant_check_format_string; ///
+  gboolean function(GVariant* value, const(char)* formatString, gboolean copyOnly) c_g_variant_check_format_string; ///
   GVariantClass function(GVariant* value) c_g_variant_classify; ///
   int function(GVariant* one, GVariant* two) c_g_variant_compare; ///
   ubyte* function(GVariant* value, size_t* length) c_g_variant_dup_bytestring; ///
@@ -1344,9 +1344,9 @@ __gshared extern(C)
   char** function(GVariant* value, size_t* length) c_g_variant_dup_objv; ///
   char* function(GVariant* value, size_t* length) c_g_variant_dup_string; ///
   char** function(GVariant* value, size_t* length) c_g_variant_dup_strv; ///
-  bool function(GVariant* one, GVariant* two) c_g_variant_equal; ///
+  gboolean function(GVariant* one, GVariant* two) c_g_variant_equal; ///
   void function(GVariant* value, const(char)* formatString,  ...) c_g_variant_get; ///
-  bool function(GVariant* value) c_g_variant_get_boolean; ///
+  gboolean function(GVariant* value) c_g_variant_get_boolean; ///
   ubyte function(GVariant* value) c_g_variant_get_byte; ///
   const(char)* function(GVariant* value) c_g_variant_get_bytestring; ///
   const(char*)* function(GVariant* value, size_t* length) c_g_variant_get_bytestring_array; ///
@@ -1374,23 +1374,23 @@ __gshared extern(C)
   void function(GVariant* value, const(char)* formatString, const(char*)* endptr, void** app) c_g_variant_get_va; ///
   GVariant* function(GVariant* value) c_g_variant_get_variant; ///
   uint function(GVariant* value) c_g_variant_hash; ///
-  bool function(GVariant* value) c_g_variant_is_container; ///
-  bool function(GVariant* value) c_g_variant_is_floating; ///
-  bool function(GVariant* value) c_g_variant_is_normal_form; ///
-  bool function(GVariant* value, const(GVariantType)* type) c_g_variant_is_of_type; ///
+  gboolean function(GVariant* value) c_g_variant_is_container; ///
+  gboolean function(GVariant* value) c_g_variant_is_floating; ///
+  gboolean function(GVariant* value) c_g_variant_is_normal_form; ///
+  gboolean function(GVariant* value, const(GVariantType)* type) c_g_variant_is_of_type; ///
   GVariantIter* function(GVariant* value) c_g_variant_iter_new; ///
-  bool function(GVariant* dictionary, const(char)* key, const(char)* formatString,  ...) c_g_variant_lookup; ///
+  gboolean function(GVariant* dictionary, const(char)* key, const(char)* formatString,  ...) c_g_variant_lookup; ///
   GVariant* function(GVariant* dictionary, const(char)* key, const(GVariantType)* expectedType) c_g_variant_lookup_value; ///
   size_t function(GVariant* value) c_g_variant_n_children; ///
-  char* function(GVariant* value, bool typeAnnotate) c_g_variant_print; ///
-  GString* function(GVariant* value, GString* string_, bool typeAnnotate) c_g_variant_print_string; ///
+  char* function(GVariant* value, gboolean typeAnnotate) c_g_variant_print; ///
+  GString* function(GVariant* value, GString* string_, gboolean typeAnnotate) c_g_variant_print_string; ///
   GVariant* function(GVariant* value) c_g_variant_ref; ///
   GVariant* function(GVariant* value) c_g_variant_ref_sink; ///
   void function(GVariant* value, void* data) c_g_variant_store; ///
   GVariant* function(GVariant* value) c_g_variant_take_ref; ///
   void function(GVariant* value) c_g_variant_unref; ///
-  bool function(const(char)* string_) c_g_variant_is_object_path; ///
-  bool function(const(char)* string_) c_g_variant_is_signature; ///
+  gboolean function(const(char)* string_) c_g_variant_is_object_path; ///
+  gboolean function(const(char)* string_) c_g_variant_is_signature; ///
   GVariant* function(const(GVariantType)* type, const(char)* text, const(char)* limit, const(char*)* endptr, GError** _err) c_g_variant_parse; ///
   char* function(GError* error, const(char)* sourceStr) c_g_variant_parse_error_print_context; ///
   GQuark function() c_g_variant_parse_error_quark; ///
@@ -1414,24 +1414,24 @@ __gshared extern(C)
   GType function() c_g_variant_dict_get_type; ///
   GVariantDict* function(GVariant* fromAsv) c_g_variant_dict_new; ///
   void function(GVariantDict* dict) c_g_variant_dict_clear; ///
-  bool function(GVariantDict* dict, const(char)* key) c_g_variant_dict_contains; ///
+  gboolean function(GVariantDict* dict, const(char)* key) c_g_variant_dict_contains; ///
   GVariant* function(GVariantDict* dict) c_g_variant_dict_end; ///
   void function(GVariantDict* dict, GVariant* fromAsv) c_g_variant_dict_init; ///
   void function(GVariantDict* dict, const(char)* key, const(char)* formatString,  ...) c_g_variant_dict_insert; ///
   void function(GVariantDict* dict, const(char)* key, GVariant* value) c_g_variant_dict_insert_value; ///
-  bool function(GVariantDict* dict, const(char)* key, const(char)* formatString,  ...) c_g_variant_dict_lookup; ///
+  gboolean function(GVariantDict* dict, const(char)* key, const(char)* formatString,  ...) c_g_variant_dict_lookup; ///
   GVariant* function(GVariantDict* dict, const(char)* key, const(GVariantType)* expectedType) c_g_variant_dict_lookup_value; ///
   GVariantDict* function(GVariantDict* dict) c_g_variant_dict_ref; ///
-  bool function(GVariantDict* dict, const(char)* key) c_g_variant_dict_remove; ///
+  gboolean function(GVariantDict* dict, const(char)* key) c_g_variant_dict_remove; ///
   void function(GVariantDict* dict) c_g_variant_dict_unref; ///
 
   // VariantIter
   GVariantIter* function(GVariantIter* iter) c_g_variant_iter_copy; ///
   void function(GVariantIter* iter) c_g_variant_iter_free; ///
   size_t function(GVariantIter* iter, GVariant* value) c_g_variant_iter_init; ///
-  bool function(GVariantIter* iter, const(char)* formatString,  ...) c_g_variant_iter_loop; ///
+  gboolean function(GVariantIter* iter, const(char)* formatString,  ...) c_g_variant_iter_loop; ///
   size_t function(GVariantIter* iter) c_g_variant_iter_n_children; ///
-  bool function(GVariantIter* iter, const(char)* formatString,  ...) c_g_variant_iter_next; ///
+  gboolean function(GVariantIter* iter, const(char)* formatString,  ...) c_g_variant_iter_next; ///
   GVariant* function(GVariantIter* iter) c_g_variant_iter_next_value; ///
 
   // VariantType
@@ -1444,20 +1444,20 @@ __gshared extern(C)
   GVariantType* function(const(GVariantType)* type) c_g_variant_type_copy; ///
   char* function(const(GVariantType)* type) c_g_variant_type_dup_string; ///
   const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_element; ///
-  bool function(GVariantType* type1, GVariantType* type2) c_g_variant_type_equal; ///
+  gboolean function(GVariantType* type1, GVariantType* type2) c_g_variant_type_equal; ///
   const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_first; ///
   void function(GVariantType* type) c_g_variant_type_free; ///
   size_t function(const(GVariantType)* type) c_g_variant_type_get_string_length; ///
   uint function(GVariantType* type) c_g_variant_type_hash; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_array; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_basic; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_container; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_definite; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_dict_entry; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_maybe; ///
-  bool function(const(GVariantType)* type, const(GVariantType)* supertype) c_g_variant_type_is_subtype_of; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_tuple; ///
-  bool function(const(GVariantType)* type) c_g_variant_type_is_variant; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_array; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_basic; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_container; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_definite; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_dict_entry; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_maybe; ///
+  gboolean function(const(GVariantType)* type, const(GVariantType)* supertype) c_g_variant_type_is_subtype_of; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_tuple; ///
+  gboolean function(const(GVariantType)* type) c_g_variant_type_is_variant; ///
   const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_key; ///
   size_t function(const(GVariantType)* type) c_g_variant_type_n_items; ///
   const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_next; ///
@@ -1465,8 +1465,8 @@ __gshared extern(C)
   const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_value; ///
   const(GVariantType)* function(const(char)* typeString) c_g_variant_type_checked_; ///
   size_t function(const(char)* typeString) c_g_variant_type_string_get_depth_; ///
-  bool function(const(char)* typeString) c_g_variant_type_string_is_valid; ///
-  bool function(const(char)* string_, const(char)* limit, const(char*)* endptr) c_g_variant_type_string_scan; ///
+  gboolean function(const(char)* typeString) c_g_variant_type_string_is_valid; ///
+  gboolean function(const(char)* string_, const(char)* limit, const(char*)* endptr) c_g_variant_type_string_scan; ///
 
   // global
   int function(const(char)* filename, int mode) c_g_access; ///
@@ -1479,8 +1479,8 @@ __gshared extern(C)
   char* function(char* buffer, int bufLen, const(char)* format, double d) c_g_ascii_formatd; ///
   int function(const(char)* s1, const(char)* s2) c_g_ascii_strcasecmp; ///
   char* function(const(char)* str, ptrdiff_t len) c_g_ascii_strdown; ///
-  bool function(const(char)* str, uint base, long min, long max, long* outNum, GError** _err) c_g_ascii_string_to_signed; ///
-  bool function(const(char)* str, uint base, ulong min, ulong max, ulong* outNum, GError** _err) c_g_ascii_string_to_unsigned; ///
+  gboolean function(const(char)* str, uint base, long min, long max, long* outNum, GError** _err) c_g_ascii_string_to_signed; ///
+  gboolean function(const(char)* str, uint base, ulong min, ulong max, ulong* outNum, GError** _err) c_g_ascii_string_to_unsigned; ///
   int function(const(char)* s1, const(char)* s2, size_t n) c_g_ascii_strncasecmp; ///
   double function(const(char)* nptr, char** endptr) c_g_ascii_strtod; ///
   long function(const(char)* nptr, char** endptr, uint base) c_g_ascii_strtoll; ///
@@ -1500,9 +1500,9 @@ __gshared extern(C)
   void function(GVoidFunc func) c_g_atexit; ///
   int function(int* atomic, int val) c_g_atomic_int_add; ///
   uint function(uint* atomic, uint val) c_g_atomic_int_and; ///
-  bool function(int* atomic, int oldval, int newval) c_g_atomic_int_compare_and_exchange; ///
-  bool function(int* atomic, int oldval, int newval, int* preval) c_g_atomic_int_compare_and_exchange_full; ///
-  bool function(int* atomic) c_g_atomic_int_dec_and_test; ///
+  gboolean function(int* atomic, int oldval, int newval) c_g_atomic_int_compare_and_exchange; ///
+  gboolean function(int* atomic, int oldval, int newval, int* preval) c_g_atomic_int_compare_and_exchange_full; ///
+  gboolean function(int* atomic) c_g_atomic_int_dec_and_test; ///
   int function(int* atomic, int newval) c_g_atomic_int_exchange; ///
   int function(int* atomic, int val) c_g_atomic_int_exchange_and_add; ///
   int function(const(int)* atomic) c_g_atomic_int_get; ///
@@ -1512,8 +1512,8 @@ __gshared extern(C)
   uint function(uint* atomic, uint val) c_g_atomic_int_xor; ///
   ptrdiff_t function(void* atomic, ptrdiff_t val) c_g_atomic_pointer_add; ///
   size_t function(void* atomic, size_t val) c_g_atomic_pointer_and; ///
-  bool function(void* atomic, void* oldval, void* newval) c_g_atomic_pointer_compare_and_exchange; ///
-  bool function(void* atomic, void* oldval, void* newval, void* preval) c_g_atomic_pointer_compare_and_exchange_full; ///
+  gboolean function(void* atomic, void* oldval, void* newval) c_g_atomic_pointer_compare_and_exchange; ///
+  gboolean function(void* atomic, void* oldval, void* newval, void* preval) c_g_atomic_pointer_compare_and_exchange_full; ///
   void* function(void* atomic, void* newval) c_g_atomic_pointer_exchange; ///
   void* function(void* atomic) c_g_atomic_pointer_get; ///
   size_t function(void* atomic, size_t val) c_g_atomic_pointer_or; ///
@@ -1526,22 +1526,22 @@ __gshared extern(C)
   size_t function(void* memBlock) c_g_atomic_rc_box_get_size; ///
   void function(void* memBlock) c_g_atomic_rc_box_release; ///
   void function(void* memBlock, GDestroyNotify clearFunc) c_g_atomic_rc_box_release_full; ///
-  bool function(int* arc, int val) c_g_atomic_ref_count_compare; ///
-  bool function(int* arc) c_g_atomic_ref_count_dec; ///
+  gboolean function(int* arc, int val) c_g_atomic_ref_count_compare; ///
+  gboolean function(int* arc) c_g_atomic_ref_count_dec; ///
   void function(int* arc) c_g_atomic_ref_count_inc; ///
   void function(int* arc) c_g_atomic_ref_count_init; ///
   ubyte* function(const(char)* text, size_t* outLen) c_g_base64_decode; ///
   ubyte* function(ubyte* text, size_t* outLen) c_g_base64_decode_inplace; ///
   size_t function(const(ubyte)* in_, size_t len, ubyte* out_, int* state, uint* save) c_g_base64_decode_step; ///
   char* function(const(ubyte)* data, size_t len) c_g_base64_encode; ///
-  size_t function(bool breakLines, char* out_, int* state, int* save) c_g_base64_encode_close; ///
-  size_t function(const(ubyte)* in_, size_t len, bool breakLines, char* out_, int* state, int* save) c_g_base64_encode_step; ///
+  size_t function(gboolean breakLines, char* out_, int* state, int* save) c_g_base64_encode_close; ///
+  size_t function(const(ubyte)* in_, size_t len, gboolean breakLines, char* out_, int* state, int* save) c_g_base64_encode_step; ///
   const(char)* function(const(char)* fileName) c_g_basename; ///
   void function(int* address, int lockBit) c_g_bit_lock; ///
   int function(gulong mask, int nthBit) c_g_bit_nth_lsf; ///
   int function(gulong mask, int nthBit) c_g_bit_nth_msf; ///
   uint function(gulong number) c_g_bit_storage; ///
-  bool function(int* address, int lockBit) c_g_bit_trylock; ///
+  gboolean function(int* address, int lockBit) c_g_bit_trylock; ///
   void function(int* address, int lockBit) c_g_bit_unlock; ///
   void function() c_g_blow_chunks; ///
   char* function(const(char)* firstElement,  ...) c_g_build_filename; ///
@@ -1561,7 +1561,7 @@ __gshared extern(C)
   void function(GList** listPtr, GDestroyNotify destroy) c_g_clear_list; ///
   void function(void** pp, GDestroyNotify destroy) c_g_clear_pointer; ///
   void function(GSList** slistPtr, GDestroyNotify destroy) c_g_clear_slist; ///
-  bool function(int fd, GError** _err) c_g_close; ///
+  gboolean function(int fd, GError** _err) c_g_close; ///
   int function(int lowfd) c_g_closefrom; ///
   char* function(GChecksumType checksumType, GBytes* data) c_g_compute_checksum_for_bytes; ///
   char* function(GChecksumType checksumType, const(ubyte)* data, size_t length) c_g_compute_checksum_for_data; ///
@@ -1582,7 +1582,7 @@ __gshared extern(C)
   void* function(GData** datalist, GQuark keyId) c_g_datalist_id_get_data; ///
   void function(GData** datalist, GQuark* keys, size_t nKeys) c_g_datalist_id_remove_multiple; ///
   void* function(GData** datalist, GQuark keyId) c_g_datalist_id_remove_no_notify; ///
-  bool function(GData** datalist, GQuark keyId, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_datalist_id_replace_data; ///
+  gboolean function(GData** datalist, GQuark keyId, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_datalist_id_replace_data; ///
   void function(GData** datalist, GQuark keyId, void* data, GDestroyNotify destroyFunc) c_g_datalist_id_set_data_full; ///
   void function(GData** datalist) c_g_datalist_init; ///
   void function(GData** datalist, uint flags) c_g_datalist_set_flags; ///
@@ -1594,25 +1594,25 @@ __gshared extern(C)
   void function(const(void)* datasetLocation, GQuark keyId, void* data, GDestroyNotify destroyFunc) c_g_dataset_id_set_data_full; ///
   const(char)* function(const(char)* domain, const(char)* msgid, int category) c_g_dcgettext; ///
   const(char)* function(const(char)* domain, const(char)* msgid) c_g_dgettext; ///
-  bool function(const(void)* v1, const(void)* v2) c_g_direct_equal; ///
+  gboolean function(const(void)* v1, const(void)* v2) c_g_direct_equal; ///
   uint function(const(void)* v) c_g_direct_hash; ///
   const(char)* function(const(char)* domain, const(char)* msgid, const(char)* msgidPlural, gulong n) c_g_dngettext; ///
-  bool function(const(void)* v1, const(void)* v2) c_g_double_equal; ///
+  gboolean function(const(void)* v1, const(void)* v2) c_g_double_equal; ///
   uint function(const(void)* v) c_g_double_hash; ///
   const(char)* function(const(char)* domain, const(char)* msgctxtid, size_t msgidoffset) c_g_dpgettext; ///
   const(char)* function(const(char)* domain, const(char)* context, const(char)* msgid) c_g_dpgettext2; ///
   const(char)* function(char** envp, const(char)* variable) c_g_environ_getenv; ///
-  char** function(char** envp, const(char)* variable, const(char)* value, bool overwrite) c_g_environ_setenv; ///
+  char** function(char** envp, const(char)* variable, const(char)* value, gboolean overwrite) c_g_environ_setenv; ///
   char** function(char** envp, const(char)* variable) c_g_environ_unsetenv; ///
   int function(int lowfd) c_g_fdwalk_set_cloexec; ///
   GFileError function(int errNo) c_g_file_error_from_errno; ///
   GQuark function() c_g_file_error_quark; ///
-  bool function(const(char)* filename, ubyte** contents, size_t* length, GError** _err) c_g_file_get_contents; ///
+  gboolean function(const(char)* filename, ubyte** contents, size_t* length, GError** _err) c_g_file_get_contents; ///
   int function(const(char)* tmpl, char** nameUsed, GError** _err) c_g_file_open_tmp; ///
   char* function(const(char)* filename, GError** _err) c_g_file_read_link; ///
-  bool function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GError** _err) c_g_file_set_contents; ///
-  bool function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GFileSetContentsFlags flags, int mode, GError** _err) c_g_file_set_contents_full; ///
-  bool function(const(char)* filename, GFileTest test) c_g_file_test; ///
+  gboolean function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GError** _err) c_g_file_set_contents; ///
+  gboolean function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GFileSetContentsFlags flags, int mode, GError** _err) c_g_file_set_contents_full; ///
+  gboolean function(const(char)* filename, GFileTest test) c_g_file_test; ///
   char* function(const(char)* filename) c_g_filename_display_basename; ///
   char* function(const(char)* filename) c_g_filename_display_name; ///
   char* function(const(char)* uri, char** hostname, GError** _err) c_g_filename_from_uri; ///
@@ -1630,13 +1630,13 @@ __gshared extern(C)
   void* function(const(char)* filename, const(char)* mode, void* stream) c_g_freopen; ///
   int function(int fd) c_g_fsync; ///
   const(char)* function() c_g_get_application_name; ///
-  bool function(const(char*)* charset) c_g_get_charset; ///
+  gboolean function(const(char*)* charset) c_g_get_charset; ///
   char* function() c_g_get_codeset; ///
-  bool function(const(char*)* charset) c_g_get_console_charset; ///
+  gboolean function(const(char*)* charset) c_g_get_console_charset; ///
   char* function() c_g_get_current_dir; ///
   void function(GTimeVal* result) c_g_get_current_time; ///
   char** function() c_g_get_environ; ///
-  bool function(const(char**)* filenameCharsets) c_g_get_filename_charsets; ///
+  gboolean function(const(char**)* filenameCharsets) c_g_get_filename_charsets; ///
   const(char)* function() c_g_get_home_dir; ///
   const(char)* function() c_g_get_host_name; ///
   const(char*)* function() c_g_get_language_names; ///
@@ -1659,20 +1659,20 @@ __gshared extern(C)
   const(char)* function(GUserDirectory directory) c_g_get_user_special_dir; ///
   const(char)* function() c_g_get_user_state_dir; ///
   const(char)* function(const(char)* variable) c_g_getenv; ///
-  bool function(const(char)* hostname) c_g_hostname_is_ascii_encoded; ///
-  bool function(const(char)* hostname) c_g_hostname_is_ip_address; ///
-  bool function(const(char)* hostname) c_g_hostname_is_non_ascii; ///
+  gboolean function(const(char)* hostname) c_g_hostname_is_ascii_encoded; ///
+  gboolean function(const(char)* hostname) c_g_hostname_is_ip_address; ///
+  gboolean function(const(char)* hostname) c_g_hostname_is_non_ascii; ///
   char* function(const(char)* hostname) c_g_hostname_to_ascii; ///
   char* function(const(char)* hostname) c_g_hostname_to_unicode; ///
   size_t function(GIConv converter, char** inbuf, size_t* inbytesLeft, char** outbuf, size_t* outbytesLeft) c_g_iconv; ///
   uint function(GSourceFunc function_, void* data) c_g_idle_add; ///
   uint function(int priority, GSourceFunc function_, void* data, GDestroyNotify notify) c_g_idle_add_full; ///
   uint function(GSourceOnceFunc function_, void* data) c_g_idle_add_once; ///
-  bool function(void* data) c_g_idle_remove_by_data; ///
+  gboolean function(void* data) c_g_idle_remove_by_data; ///
   GSource* function() c_g_idle_source_new; ///
-  bool function(const(void)* v1, const(void)* v2) c_g_int64_equal; ///
+  gboolean function(const(void)* v1, const(void)* v2) c_g_int64_equal; ///
   uint function(const(void)* v) c_g_int64_hash; ///
-  bool function(const(void)* v1, const(void)* v2) c_g_int_equal; ///
+  gboolean function(const(void)* v1, const(void)* v2) c_g_int_equal; ///
   uint function(const(void)* v) c_g_int_hash; ///
   const(char)* function(const(char)* string_) c_g_intern_static_string; ///
   const(char)* function(const(char)* string_) c_g_intern_string; ///
@@ -1684,10 +1684,10 @@ __gshared extern(C)
   char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_locale_to_utf8; ///
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format,  ...) c_g_log; ///
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* unusedData) c_g_log_default_handler; ///
-  bool function() c_g_log_get_debug_enabled; ///
+  gboolean function() c_g_log_get_debug_enabled; ///
   void function(const(char)* logDomain, uint handlerId) c_g_log_remove_handler; ///
   GLogLevelFlags function(GLogLevelFlags fatalMask) c_g_log_set_always_fatal; ///
-  void function(bool enabled) c_g_log_set_debug_enabled; ///
+  void function(gboolean enabled) c_g_log_set_debug_enabled; ///
   GLogFunc function(GLogFunc logFunc, void* userData) c_g_log_set_default_handler; ///
   GLogLevelFlags function(const(char)* logDomain, GLogLevelFlags fatalMask) c_g_log_set_fatal_mask; ///
   uint function(const(char)* logDomain, GLogLevelFlags logLevels, GLogFunc logFunc, void* userData) c_g_log_set_handler; ///
@@ -1699,13 +1699,13 @@ __gshared extern(C)
   void function(const(char)* logDomain, GLogLevelFlags logLevel, GVariant* fields) c_g_log_variant; ///
   GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_default; ///
   void function(const(char*)* domains) c_g_log_writer_default_set_debug_domains; ///
-  void function(bool useStderr) c_g_log_writer_default_set_use_stderr; ///
-  bool function(GLogLevelFlags logLevel, const(char)* logDomain) c_g_log_writer_default_would_drop; ///
-  char* function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, bool useColor) c_g_log_writer_format_fields; ///
-  bool function(int outputFd) c_g_log_writer_is_journald; ///
+  void function(gboolean useStderr) c_g_log_writer_default_set_use_stderr; ///
+  gboolean function(GLogLevelFlags logLevel, const(char)* logDomain) c_g_log_writer_default_would_drop; ///
+  char* function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, gboolean useColor) c_g_log_writer_format_fields; ///
+  gboolean function(int outputFd) c_g_log_writer_is_journald; ///
   GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_journald; ///
   GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_standard_streams; ///
-  bool function(int outputFd) c_g_log_writer_supports_color; ///
+  gboolean function(int outputFd) c_g_log_writer_supports_color; ///
   GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_syslog; ///
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format, void* args) c_g_logv; ///
   int function(const(char)* filename, GStatBuf* buf) c_g_lstat; ///
@@ -1715,12 +1715,12 @@ __gshared extern(C)
   void* function(size_t nBytes) c_g_malloc0; ///
   void* function(size_t nBlocks, size_t nBlockBytes) c_g_malloc0_n; ///
   void* function(size_t nBlocks, size_t nBlockBytes) c_g_malloc_n; ///
-  bool function(const(char)* elementName, const(char*)* attributeNames, const(char*)* attributeValues, GError** error, GMarkupCollectType firstType, const(char)* firstAttr,  ...) c_g_markup_collect_attributes; ///
+  gboolean function(const(char)* elementName, const(char*)* attributeNames, const(char*)* attributeValues, GError** error, GMarkupCollectType firstType, const(char)* firstAttr,  ...) c_g_markup_collect_attributes; ///
   GQuark function() c_g_markup_error_quark; ///
   char* function(const(char)* text, ptrdiff_t length) c_g_markup_escape_text; ///
   char* function(const(char)* format,  ...) c_g_markup_printf_escaped; ///
   char* function(const(char)* format, void* args) c_g_markup_vprintf_escaped; ///
-  bool function() c_g_mem_is_system_malloc; ///
+  gboolean function() c_g_mem_is_system_malloc; ///
   void function() c_g_mem_profile; ///
   void function(GMemVTable* vtable) c_g_mem_set_vtable; ///
   void* function(const(void)* mem, uint byteSize) c_g_memdup; ///
@@ -1740,15 +1740,15 @@ __gshared extern(C)
   uint function(const(char)* string_, const(GDebugKey)* keys, uint nkeys) c_g_parse_debug_string; ///
   char* function(const(char)* fileName) c_g_path_get_basename; ///
   char* function(const(char)* fileName) c_g_path_get_dirname; ///
-  bool function(const(char)* fileName) c_g_path_is_absolute; ///
+  gboolean function(const(char)* fileName) c_g_path_is_absolute; ///
   const(char)* function(const(char)* fileName) c_g_path_skip_root; ///
-  bool function(GPatternSpec* pspec, uint stringLength, const(char)* string_, const(char)* stringReversed) c_g_pattern_match; ///
-  bool function(const(char)* pattern, const(char)* string_) c_g_pattern_match_simple; ///
-  bool function(GPatternSpec* pspec, const(char)* string_) c_g_pattern_match_string; ///
+  gboolean function(GPatternSpec* pspec, uint stringLength, const(char)* string_, const(char)* stringReversed) c_g_pattern_match; ///
+  gboolean function(const(char)* pattern, const(char)* string_) c_g_pattern_match_simple; ///
+  gboolean function(GPatternSpec* pspec, const(char)* string_) c_g_pattern_match_string; ///
   void function(void* address, int lockBit) c_g_pointer_bit_lock; ///
   void function(void* address, uint lockBit, size_t* outPtr) c_g_pointer_bit_lock_and_get; ///
-  void* function(void* ptr, uint lockBit, bool set, size_t preserveMask, void* preservePtr) c_g_pointer_bit_lock_mask_ptr; ///
-  bool function(void* address, int lockBit) c_g_pointer_bit_trylock; ///
+  void* function(void* ptr, uint lockBit, gboolean set, size_t preserveMask, void* preservePtr) c_g_pointer_bit_lock_mask_ptr; ///
+  gboolean function(void* address, int lockBit) c_g_pointer_bit_trylock; ///
   void function(void* address, int lockBit) c_g_pointer_bit_unlock; ///
   void function(void* address, uint lockBit, void* ptr, size_t preserveMask) c_g_pointer_bit_unlock_and_set; ///
   int function(GPollFD* fds, uint nfds, int timeout) c_g_poll; ///
@@ -1779,8 +1779,8 @@ __gshared extern(C)
   void function(void* memBlock, GDestroyNotify clearFunc) c_g_rc_box_release_full; ///
   void* function(void* mem, size_t nBytes) c_g_realloc; ///
   void* function(void* mem, size_t nBlocks, size_t nBlockBytes) c_g_realloc_n; ///
-  bool function(int* rc, int val) c_g_ref_count_compare; ///
-  bool function(int* rc) c_g_ref_count_dec; ///
+  gboolean function(int* rc, int val) c_g_ref_count_compare; ///
+  gboolean function(int* rc) c_g_ref_count_dec; ///
   void function(int* rc) c_g_ref_count_inc; ///
   void function(int* rc) c_g_ref_count_init; ///
   char* function(char* str) c_g_ref_string_acquire; ///
@@ -1800,9 +1800,9 @@ __gshared extern(C)
   void function(const(char)* prgname) c_g_set_prgname; ///
   GPrintFunc function(GPrintFunc func) c_g_set_print_handler; ///
   GPrintFunc function(GPrintFunc func) c_g_set_printerr_handler; ///
-  bool function(const(char)* variable, const(char)* value, bool overwrite) c_g_setenv; ///
+  gboolean function(const(char)* variable, const(char)* value, gboolean overwrite) c_g_setenv; ///
   GQuark function() c_g_shell_error_quark; ///
-  bool function(const(char)* commandLine, int* argcp, char*** argvp, GError** _err) c_g_shell_parse_argv; ///
+  gboolean function(const(char)* commandLine, int* argcp, char*** argvp, GError** _err) c_g_shell_parse_argv; ///
   char* function(const(char)* unquotedString) c_g_shell_quote; ///
   char* function(const(char)* quotedString, GError** _err) c_g_shell_unquote; ///
   void* function(size_t blockSize) c_g_slice_alloc; ///
@@ -1815,27 +1815,27 @@ __gshared extern(C)
   void function(GSliceConfig ckey, long value) c_g_slice_set_config; ///
   int function(char* string_, gulong n, const(char)* format,  ...) c_g_snprintf; ///
   uint function(uint num) c_g_spaced_primes_closest; ///
-  bool function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, GError** _err) c_g_spawn_async; ///
-  bool function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int stdinFd, int stdoutFd, int stderrFd, GError** _err) c_g_spawn_async_with_fds; ///
-  bool function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int* standardInput, int* standardOutput, int* standardError, GError** _err) c_g_spawn_async_with_pipes; ///
-  bool function(const(char)* workingDirectory, const(char*)* argv, const(char*)* envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, int stdinFd, int stdoutFd, int stderrFd, const(int)* sourceFds, const(int)* targetFds, size_t nFds, GPid* childPidOut, int* stdinPipeOut, int* stdoutPipeOut, int* stderrPipeOut, GError** _err) c_g_spawn_async_with_pipes_and_fds; ///
-  bool function(int waitStatus, GError** _err) c_g_spawn_check_exit_status; ///
-  bool function(int waitStatus, GError** _err) c_g_spawn_check_wait_status; ///
+  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, GError** _err) c_g_spawn_async; ///
+  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int stdinFd, int stdoutFd, int stderrFd, GError** _err) c_g_spawn_async_with_fds; ///
+  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int* standardInput, int* standardOutput, int* standardError, GError** _err) c_g_spawn_async_with_pipes; ///
+  gboolean function(const(char)* workingDirectory, const(char*)* argv, const(char*)* envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, int stdinFd, int stdoutFd, int stderrFd, const(int)* sourceFds, const(int)* targetFds, size_t nFds, GPid* childPidOut, int* stdinPipeOut, int* stdoutPipeOut, int* stderrPipeOut, GError** _err) c_g_spawn_async_with_pipes_and_fds; ///
+  gboolean function(int waitStatus, GError** _err) c_g_spawn_check_exit_status; ///
+  gboolean function(int waitStatus, GError** _err) c_g_spawn_check_wait_status; ///
   void function(GPid pid) c_g_spawn_close_pid; ///
-  bool function(const(char)* commandLine, GError** _err) c_g_spawn_command_line_async; ///
-  bool function(const(char)* commandLine, char** standardOutput, char** standardError, int* waitStatus, GError** _err) c_g_spawn_command_line_sync; ///
+  gboolean function(const(char)* commandLine, GError** _err) c_g_spawn_command_line_async; ///
+  gboolean function(const(char)* commandLine, char** standardOutput, char** standardError, int* waitStatus, GError** _err) c_g_spawn_command_line_sync; ///
   GQuark function() c_g_spawn_error_quark; ///
   GQuark function() c_g_spawn_exit_error_quark; ///
-  bool function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, char** standardOutput, char** standardError, int* waitStatus, GError** _err) c_g_spawn_sync; ///
+  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, char** standardOutput, char** standardError, int* waitStatus, GError** _err) c_g_spawn_sync; ///
   int function(char* string_, const(char)* format,  ...) c_g_sprintf; ///
   int function(const(char)* filename, GStatBuf* buf) c_g_stat; ///
   char* function(char* dest, const(char)* src) c_g_stpcpy; ///
-  bool function(const(void)* v1, const(void)* v2) c_g_str_equal; ///
-  bool function(const(char)* str, const(char)* prefix) c_g_str_has_prefix; ///
-  bool function(const(char)* str, const(char)* suffix) c_g_str_has_suffix; ///
+  gboolean function(const(void)* v1, const(void)* v2) c_g_str_equal; ///
+  gboolean function(const(char)* str, const(char)* prefix) c_g_str_has_prefix; ///
+  gboolean function(const(char)* str, const(char)* suffix) c_g_str_has_suffix; ///
   uint function(const(void)* v) c_g_str_hash; ///
-  bool function(const(char)* str) c_g_str_is_ascii; ///
-  bool function(const(char)* searchTerm, const(char)* potentialHit, bool acceptAlternates) c_g_str_match_string; ///
+  gboolean function(const(char)* str) c_g_str_is_ascii; ///
+  gboolean function(const(char)* searchTerm, const(char)* potentialHit, gboolean acceptAlternates) c_g_str_match_string; ///
   char* function(const(char)* str, const(char)* fromLocale) c_g_str_to_ascii; ///
   char** function(const(char)* string_, const(char)* translitLocale, char*** asciiAlternates) c_g_str_tokenize_and_fold; ///
   char* function(char* string_, const(char)* validChars, char substitutor) c_g_strcanon; ///
@@ -1871,8 +1871,8 @@ __gshared extern(C)
   char* function(const(char)* haystack, ptrdiff_t haystackLen, const(char)* needle) c_g_strstr_len; ///
   double function(const(char)* nptr, char** endptr) c_g_strtod; ///
   char* function(char* string_) c_g_strup; ///
-  bool function(const(char*)* strv, const(char)* str) c_g_strv_contains; ///
-  bool function(const(char*)* strv1, const(char*)* strv2) c_g_strv_equal; ///
+  gboolean function(const(char*)* strv, const(char)* str) c_g_strv_contains; ///
+  gboolean function(const(char*)* strv1, const(char*)* strv2) c_g_strv_equal; ///
   GType function() c_g_strv_get_type; ///
   uint function(char** strArray) c_g_strv_length; ///
   void function(const(char)* testpath, const(void)* testData, GTestDataFunc testFunc) c_g_test_add_data_func; ///
@@ -1889,7 +1889,7 @@ __gshared extern(C)
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* pattern) c_g_test_expect_message; ///
   void function() c_g_test_fail; ///
   void function(const(char)* format,  ...) c_g_test_fail_printf; ///
-  bool function() c_g_test_failed; ///
+  gboolean function() c_g_test_failed; ///
   const(char)* function(GTestFileType fileType) c_g_test_get_dir; ///
   const(char)* function(GTestFileType fileType, const(char)* firstPath,  ...) c_g_test_get_filename; ///
   const(char)* function() c_g_test_get_path; ///
@@ -1913,15 +1913,15 @@ __gshared extern(C)
   void function() c_g_test_set_nonfatal_assertions; ///
   void function(const(char)* msg) c_g_test_skip; ///
   void function(const(char)* format,  ...) c_g_test_skip_printf; ///
-  bool function() c_g_test_subprocess; ///
+  gboolean function() c_g_test_subprocess; ///
   void function(const(char)* summary) c_g_test_summary; ///
   double function() c_g_test_timer_elapsed; ///
   double function() c_g_test_timer_last; ///
   void function() c_g_test_timer_start; ///
   void function(const(char)* domain, const(char)* file, int line, const(char)* func, ulong assertionFlags, const(char)* pattern) c_g_test_trap_assertions; ///
-  bool function(ulong usecTimeout, GTestTrapFlags testTrapFlags) c_g_test_trap_fork; ///
-  bool function() c_g_test_trap_has_passed; ///
-  bool function() c_g_test_trap_reached_timeout; ///
+  gboolean function(ulong usecTimeout, GTestTrapFlags testTrapFlags) c_g_test_trap_fork; ///
+  gboolean function() c_g_test_trap_has_passed; ///
+  gboolean function() c_g_test_trap_reached_timeout; ///
   void function(const(char)* testPath, ulong usecTimeout, GTestSubprocessFlags testFlags) c_g_test_trap_subprocess; ///
   void function(const(char)* testPath, const(char*)* envp, ulong usecTimeout, GTestSubprocessFlags testFlags) c_g_test_trap_subprocess_with_envp; ///
   uint function(uint interval, GSourceFunc function_, void* data) c_g_timeout_add; ///
@@ -1942,35 +1942,35 @@ __gshared extern(C)
   char* function(const(dchar)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_ucs4_to_utf8; ///
   GUnicodeBreakType function(dchar c) c_g_unichar_break_type; ///
   int function(dchar uc) c_g_unichar_combining_class; ///
-  bool function(dchar a, dchar b, dchar* ch) c_g_unichar_compose; ///
-  bool function(dchar ch, dchar* a, dchar* b) c_g_unichar_decompose; ///
+  gboolean function(dchar a, dchar b, dchar* ch) c_g_unichar_compose; ///
+  gboolean function(dchar ch, dchar* a, dchar* b) c_g_unichar_decompose; ///
   int function(dchar c) c_g_unichar_digit_value; ///
-  size_t function(dchar ch, bool compat, dchar* result, size_t resultLen) c_g_unichar_fully_decompose; ///
-  bool function(dchar ch, dchar* mirroredCh) c_g_unichar_get_mirror_char; ///
+  size_t function(dchar ch, gboolean compat, dchar* result, size_t resultLen) c_g_unichar_fully_decompose; ///
+  gboolean function(dchar ch, dchar* mirroredCh) c_g_unichar_get_mirror_char; ///
   GUnicodeScript function(dchar ch) c_g_unichar_get_script; ///
-  bool function(dchar c) c_g_unichar_isalnum; ///
-  bool function(dchar c) c_g_unichar_isalpha; ///
-  bool function(dchar c) c_g_unichar_iscntrl; ///
-  bool function(dchar c) c_g_unichar_isdefined; ///
-  bool function(dchar c) c_g_unichar_isdigit; ///
-  bool function(dchar c) c_g_unichar_isgraph; ///
-  bool function(dchar c) c_g_unichar_islower; ///
-  bool function(dchar c) c_g_unichar_ismark; ///
-  bool function(dchar c) c_g_unichar_isprint; ///
-  bool function(dchar c) c_g_unichar_ispunct; ///
-  bool function(dchar c) c_g_unichar_isspace; ///
-  bool function(dchar c) c_g_unichar_istitle; ///
-  bool function(dchar c) c_g_unichar_isupper; ///
-  bool function(dchar c) c_g_unichar_iswide; ///
-  bool function(dchar c) c_g_unichar_iswide_cjk; ///
-  bool function(dchar c) c_g_unichar_isxdigit; ///
-  bool function(dchar c) c_g_unichar_iszerowidth; ///
+  gboolean function(dchar c) c_g_unichar_isalnum; ///
+  gboolean function(dchar c) c_g_unichar_isalpha; ///
+  gboolean function(dchar c) c_g_unichar_iscntrl; ///
+  gboolean function(dchar c) c_g_unichar_isdefined; ///
+  gboolean function(dchar c) c_g_unichar_isdigit; ///
+  gboolean function(dchar c) c_g_unichar_isgraph; ///
+  gboolean function(dchar c) c_g_unichar_islower; ///
+  gboolean function(dchar c) c_g_unichar_ismark; ///
+  gboolean function(dchar c) c_g_unichar_isprint; ///
+  gboolean function(dchar c) c_g_unichar_ispunct; ///
+  gboolean function(dchar c) c_g_unichar_isspace; ///
+  gboolean function(dchar c) c_g_unichar_istitle; ///
+  gboolean function(dchar c) c_g_unichar_isupper; ///
+  gboolean function(dchar c) c_g_unichar_iswide; ///
+  gboolean function(dchar c) c_g_unichar_iswide_cjk; ///
+  gboolean function(dchar c) c_g_unichar_isxdigit; ///
+  gboolean function(dchar c) c_g_unichar_iszerowidth; ///
   int function(dchar c, char* outbuf) c_g_unichar_to_utf8; ///
   dchar function(dchar c) c_g_unichar_tolower; ///
   dchar function(dchar c) c_g_unichar_totitle; ///
   dchar function(dchar c) c_g_unichar_toupper; ///
   GUnicodeType function(dchar c) c_g_unichar_type; ///
-  bool function(dchar ch) c_g_unichar_validate; ///
+  gboolean function(dchar ch) c_g_unichar_validate; ///
   int function(dchar c) c_g_unichar_xdigit_value; ///
   dchar* function(dchar ch, size_t* resultLen) c_g_unicode_canonical_decomposition; ///
   void function(dchar* string_, size_t len) c_g_unicode_canonical_ordering; ///
@@ -1979,8 +1979,8 @@ __gshared extern(C)
   uint function(int priority, int fd, GIOCondition condition, GUnixFDSourceFunc function_, void* userData, GDestroyNotify notify) c_g_unix_fd_add_full; ///
   GSource* function(int fd, GIOCondition condition) c_g_unix_fd_source_new; ///
   void* function(const(char)* userName, GError** _err) c_g_unix_get_passwd_entry; ///
-  bool function(int* fds, int flags, GError** _err) c_g_unix_open_pipe; ///
-  bool function(int fd, bool nonblock, GError** _err) c_g_unix_set_fd_nonblocking; ///
+  gboolean function(int* fds, int flags, GError** _err) c_g_unix_open_pipe; ///
+  gboolean function(int fd, gboolean nonblock, GError** _err) c_g_unix_set_fd_nonblocking; ///
   uint function(int signum, GSourceFunc handler, void* userData) c_g_unix_signal_add; ///
   uint function(int priority, int signum, GSourceFunc handler, void* userData, GDestroyNotify notify) c_g_unix_signal_add_full; ///
   GSource* function(int signum) c_g_unix_signal_source_new; ///
@@ -2014,9 +2014,9 @@ __gshared extern(C)
   dchar* function(const(char)* str, glong len, glong* itemsWritten) c_g_utf8_to_ucs4_fast; ///
   ushort* function(const(char)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_utf8_to_utf16; ///
   char* function(const(char)* string_, size_t truncateLength) c_g_utf8_truncate_middle; ///
-  bool function(const(ubyte)* str, ptrdiff_t maxLen, const(char*)* end) c_g_utf8_validate; ///
-  bool function(const(ubyte)* str, size_t maxLen, const(char*)* end) c_g_utf8_validate_len; ///
-  bool function(const(char)* str) c_g_uuid_string_is_valid; ///
+  gboolean function(const(ubyte)* str, ptrdiff_t maxLen, const(char*)* end) c_g_utf8_validate; ///
+  gboolean function(const(ubyte)* str, size_t maxLen, const(char*)* end) c_g_utf8_validate_len; ///
+  gboolean function(const(char)* str) c_g_uuid_string_is_valid; ///
   char* function() c_g_uuid_string_random; ///
   GType function() c_g_variant_get_gtype; ///
   int function(char** string_, const(char)* format, void* args) c_g_vasprintf; ///

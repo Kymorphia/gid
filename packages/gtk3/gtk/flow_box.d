@@ -303,7 +303,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   bool getActivateOnSingleClick()
   {
     bool _retval;
-    _retval = gtk_flow_box_get_activate_on_single_click(cast(GtkFlowBox*)this._cPtr);
+    _retval = cast(bool)gtk_flow_box_get_activate_on_single_click(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_flow_box_get_homogeneous(cast(GtkFlowBox*)this._cPtr);
+    _retval = cast(bool)gtk_flow_box_get_homogeneous(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -554,11 +554,11 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setFilterFunc(gtk.types.FlowBoxFilterFunc filterFunc = null)
   {
-    extern(C) bool _filterFuncCallback(GtkFlowBoxChild* child, void* userData)
+    extern(C) gboolean _filterFuncCallback(GtkFlowBoxChild* child, void* userData)
     {
       auto _dlg = cast(gtk.types.FlowBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;

@@ -88,7 +88,7 @@ class RecordBatch : gobject.object.ObjectWrap
   bool equal(arrow.record_batch.RecordBatch otherRecordBatch)
   {
     bool _retval;
-    _retval = garrow_record_batch_equal(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_record_batch_equal(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class RecordBatch : gobject.object.ObjectWrap
   bool equalMetadata(arrow.record_batch.RecordBatch otherRecordBatch, bool checkMetadata)
   {
     bool _retval;
-    _retval = garrow_record_batch_equal_metadata(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null, checkMetadata);
+    _retval = cast(bool)garrow_record_batch_equal_metadata(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null, checkMetadata);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_record_batch_export(cast(GArrowRecordBatch*)this._cPtr, cast(void**)&cAbiArray, cast(void**)&cAbiSchema, &_err);
+    _retval = cast(bool)garrow_record_batch_export(cast(GArrowRecordBatch*)this._cPtr, cast(void**)&cAbiArray, cast(void**)&cAbiSchema, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

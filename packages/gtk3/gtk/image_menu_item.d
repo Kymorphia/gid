@@ -290,7 +290,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   bool getAlwaysShowImage()
   {
     bool _retval;
-    _retval = gtk_image_menu_item_get_always_show_image(cast(GtkImageMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_image_menu_item_get_always_show_image(cast(GtkImageMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   bool getUseStock()
   {
     bool _retval;
-    _retval = gtk_image_menu_item_get_use_stock(cast(GtkImageMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_image_menu_item_get_use_stock(cast(GtkImageMenuItem*)this._cPtr);
     return _retval;
   }
 

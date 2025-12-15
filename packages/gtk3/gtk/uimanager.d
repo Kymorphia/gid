@@ -499,7 +499,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getAddTearoffs()
   {
     bool _retval;
-    _retval = gtk_ui_manager_get_add_tearoffs(cast(GtkUIManager*)this._cPtr);
+    _retval = cast(bool)gtk_ui_manager_get_add_tearoffs(cast(GtkUIManager*)this._cPtr);
     return _retval;
   }
 

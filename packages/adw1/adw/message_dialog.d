@@ -474,7 +474,7 @@ class MessageDialog : gtk.window.Window
   bool getBodyUseMarkup()
   {
     bool _retval;
-    _retval = adw_message_dialog_get_body_use_markup(cast(AdwMessageDialog*)this._cPtr);
+    _retval = cast(bool)adw_message_dialog_get_body_use_markup(cast(AdwMessageDialog*)this._cPtr);
     return _retval;
   }
 
@@ -533,7 +533,7 @@ class MessageDialog : gtk.window.Window
   bool getHeadingUseMarkup()
   {
     bool _retval;
-    _retval = adw_message_dialog_get_heading_use_markup(cast(AdwMessageDialog*)this._cPtr);
+    _retval = cast(bool)adw_message_dialog_get_heading_use_markup(cast(AdwMessageDialog*)this._cPtr);
     return _retval;
   }
 
@@ -568,7 +568,7 @@ class MessageDialog : gtk.window.Window
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_message_dialog_get_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response);
+    _retval = cast(bool)adw_message_dialog_get_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response);
     return _retval;
   }
 
@@ -601,7 +601,7 @@ class MessageDialog : gtk.window.Window
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_message_dialog_has_response(cast(AdwMessageDialog*)this._cPtr, _response);
+    _retval = cast(bool)adw_message_dialog_has_response(cast(AdwMessageDialog*)this._cPtr, _response);
     return _retval;
   }
 

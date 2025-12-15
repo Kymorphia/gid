@@ -46,7 +46,7 @@ class FileFormat : gobject.object.ObjectWrap
   bool equal(arrowdataset.file_format.FileFormat otherFormat)
   {
     bool _retval;
-    _retval = gadataset_file_format_equal(cast(GADatasetFileFormat*)this._cPtr, otherFormat ? cast(GADatasetFileFormat*)otherFormat._cPtr(No.Dup) : null);
+    _retval = cast(bool)gadataset_file_format_equal(cast(GADatasetFileFormat*)this._cPtr, otherFormat ? cast(GADatasetFileFormat*)otherFormat._cPtr(No.Dup) : null);
     return _retval;
   }
 

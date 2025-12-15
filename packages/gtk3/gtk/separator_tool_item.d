@@ -92,7 +92,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   bool getDraw()
   {
     bool _retval;
-    _retval = gtk_separator_tool_item_get_draw(cast(GtkSeparatorToolItem*)this._cPtr);
+    _retval = cast(bool)gtk_separator_tool_item_get_draw(cast(GtkSeparatorToolItem*)this._cPtr);
     return _retval;
   }
 

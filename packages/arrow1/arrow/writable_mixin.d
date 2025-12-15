@@ -21,7 +21,7 @@ template WritableT()
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_writable_flush(cast(GArrowWritable*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_writable_flush(cast(GArrowWritable*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -37,7 +37,7 @@ template WritableT()
 
     auto _data = cast(const(ubyte)*)data.ptr;
     GError *_err;
-    _retval = garrow_writable_write(cast(GArrowWritable*)this._cPtr, _data, _nBytes, &_err);
+    _retval = cast(bool)garrow_writable_write(cast(GArrowWritable*)this._cPtr, _data, _nBytes, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

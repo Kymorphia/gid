@@ -128,7 +128,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_toggle_get_activatable(cast(GtkCellRendererToggle*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_toggle_get_activatable(cast(GtkCellRendererToggle*)this._cPtr);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_toggle_get_active(cast(GtkCellRendererToggle*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_toggle_get_active(cast(GtkCellRendererToggle*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   bool getRadio()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_toggle_get_radio(cast(GtkCellRendererToggle*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_toggle_get_radio(cast(GtkCellRendererToggle*)this._cPtr);
     return _retval;
   }
 

@@ -112,7 +112,7 @@ class BoolFilter : gtk.filter.Filter
   bool getInvert()
   {
     bool _retval;
-    _retval = gtk_bool_filter_get_invert(cast(GtkBoolFilter*)this._cPtr);
+    _retval = cast(bool)gtk_bool_filter_get_invert(cast(GtkBoolFilter*)this._cPtr);
     return _retval;
   }
 

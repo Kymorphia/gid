@@ -96,7 +96,7 @@ class GLQuery
   static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, gstgl.glcontext.GLContext contextPtr)
   {
     bool _retval;
-    _retval = gst_gl_query_local_gl_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_query_local_gl_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr._cPtr(No.Dup) : null);
     return _retval;
   }
 }

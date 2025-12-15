@@ -140,7 +140,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   bool getMatchesAllHosts()
   {
     bool _retval;
-    _retval = webkit_web_extension_match_pattern_get_matches_all_hosts(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
+    _retval = cast(bool)webkit_web_extension_match_pattern_get_matches_all_hosts(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   bool getMatchesAllUrls()
   {
     bool _retval;
-    _retval = webkit_web_extension_match_pattern_get_matches_all_urls(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
+    _retval = cast(bool)webkit_web_extension_match_pattern_get_matches_all_urls(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   bool matchesPattern(webkit.web_extension_match_pattern.WebExtensionMatchPattern pattern, webkit.types.WebExtensionMatchPatternOptions options)
   {
     bool _retval;
-    _retval = webkit_web_extension_match_pattern_matches_pattern(cast(WebKitWebExtensionMatchPattern*)this._cPtr, pattern ? cast(WebKitWebExtensionMatchPattern*)pattern._cPtr(No.Dup) : null, options);
+    _retval = cast(bool)webkit_web_extension_match_pattern_matches_pattern(cast(WebKitWebExtensionMatchPattern*)this._cPtr, pattern ? cast(WebKitWebExtensionMatchPattern*)pattern._cPtr(No.Dup) : null, options);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _url = url.toCString(No.Alloc);
-    _retval = webkit_web_extension_match_pattern_matches_url(cast(WebKitWebExtensionMatchPattern*)this._cPtr, _url, options);
+    _retval = cast(bool)webkit_web_extension_match_pattern_matches_url(cast(WebKitWebExtensionMatchPattern*)this._cPtr, _url, options);
     return _retval;
   }
 

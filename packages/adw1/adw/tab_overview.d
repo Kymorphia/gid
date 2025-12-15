@@ -400,7 +400,7 @@ class TabOverview : gtk.widget.Widget
   bool getEnableNewTab()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_enable_new_tab(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_enable_new_tab(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 
@@ -411,7 +411,7 @@ class TabOverview : gtk.widget.Widget
   bool getEnableSearch()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_enable_search(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_enable_search(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 
@@ -434,7 +434,7 @@ class TabOverview : gtk.widget.Widget
   bool getExtraDragPreload()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_extra_drag_preload(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_extra_drag_preload(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class TabOverview : gtk.widget.Widget
   bool getInverted()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_inverted(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_inverted(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 
@@ -456,7 +456,7 @@ class TabOverview : gtk.widget.Widget
   bool getOpen()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_open(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_open(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 
@@ -469,7 +469,7 @@ class TabOverview : gtk.widget.Widget
   bool getSearchActive()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_search_active(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_search_active(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 
@@ -492,7 +492,7 @@ class TabOverview : gtk.widget.Widget
   bool getShowEndTitleButtons()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_show_end_title_buttons(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_show_end_title_buttons(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class TabOverview : gtk.widget.Widget
   bool getShowStartTitleButtons()
   {
     bool _retval;
-    _retval = adw_tab_overview_get_show_start_title_buttons(cast(AdwTabOverview*)this._cPtr);
+    _retval = cast(bool)adw_tab_overview_get_show_start_title_buttons(cast(AdwTabOverview*)this._cPtr);
     return _retval;
   }
 

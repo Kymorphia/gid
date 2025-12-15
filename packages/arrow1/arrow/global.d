@@ -18,7 +18,7 @@ bool s3Finalize()
 {
   bool _retval;
   GError *_err;
-  _retval = garrow_s3_finalize(&_err);
+  _retval = cast(bool)garrow_s3_finalize(&_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -39,7 +39,7 @@ bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
 {
   bool _retval;
   GError *_err;
-  _retval = garrow_s3_initialize(options ? cast(GArrowS3GlobalOptions*)options._cPtr(No.Dup) : null, &_err);
+  _retval = cast(bool)garrow_s3_initialize(options ? cast(GArrowS3GlobalOptions*)options._cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -49,6 +49,6 @@ bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
 bool s3IsEnabled()
 {
   bool _retval;
-  _retval = garrow_s3_is_enabled();
+  _retval = cast(bool)garrow_s3_is_enabled();
   return _retval;
 }

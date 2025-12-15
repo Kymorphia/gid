@@ -95,7 +95,7 @@ class Decimal64 : gobject.object.ObjectWrap
   bool equal(arrow.decimal64.Decimal64 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal64_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_decimal64_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class Decimal64 : gobject.object.ObjectWrap
   bool greaterThan(arrow.decimal64.Decimal64 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal64_greater_than(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_decimal64_greater_than(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Decimal64 : gobject.object.ObjectWrap
   bool greaterThanOrEqual(arrow.decimal64.Decimal64 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal64_greater_than_or_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_decimal64_greater_than_or_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class Decimal64 : gobject.object.ObjectWrap
   bool lessThan(arrow.decimal64.Decimal64 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal64_less_than(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_decimal64_less_than(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class Decimal64 : gobject.object.ObjectWrap
   bool lessThanOrEqual(arrow.decimal64.Decimal64 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal64_less_than_or_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_decimal64_less_than_or_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Decimal64 : gobject.object.ObjectWrap
   bool notEqual(arrow.decimal64.Decimal64 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal64_not_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_decimal64_not_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
     return _retval;
   }
 

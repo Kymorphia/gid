@@ -342,7 +342,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   bool isValid()
   {
     bool _retval;
-    _retval = gdk_monitor_is_valid(cast(GdkMonitor*)this._cPtr);
+    _retval = cast(bool)gdk_monitor_is_valid(cast(GdkMonitor*)this._cPtr);
     return _retval;
   }
 

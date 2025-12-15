@@ -260,7 +260,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getMonitored()
   {
     bool _retval;
-    _retval = gtk_directory_list_get_monitored(cast(GtkDirectoryList*)this._cPtr);
+    _retval = cast(bool)gtk_directory_list_get_monitored(cast(GtkDirectoryList*)this._cPtr);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isLoading()
   {
     bool _retval;
-    _retval = gtk_directory_list_is_loading(cast(GtkDirectoryList*)this._cPtr);
+    _retval = cast(bool)gtk_directory_list_is_loading(cast(GtkDirectoryList*)this._cPtr);
     return _retval;
   }
 

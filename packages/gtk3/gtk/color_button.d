@@ -291,7 +291,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   bool getUseAlpha()
   {
     bool _retval;
-    _retval = gtk_color_button_get_use_alpha(cast(GtkColorButton*)this._cPtr);
+    _retval = cast(bool)gtk_color_button_get_use_alpha(cast(GtkColorButton*)this._cPtr);
     return _retval;
   }
 

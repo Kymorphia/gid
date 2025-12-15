@@ -344,7 +344,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   bool getNumeric()
   {
     bool _retval;
-    _retval = adw_spin_row_get_numeric(cast(AdwSpinRow*)this._cPtr);
+    _retval = cast(bool)adw_spin_row_get_numeric(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   bool getSnapToTicks()
   {
     bool _retval;
-    _retval = adw_spin_row_get_snap_to_ticks(cast(AdwSpinRow*)this._cPtr);
+    _retval = cast(bool)adw_spin_row_get_snap_to_ticks(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   bool getWrap()
   {
     bool _retval;
-    _retval = adw_spin_row_get_wrap(cast(AdwSpinRow*)this._cPtr);
+    _retval = cast(bool)adw_spin_row_get_wrap(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 

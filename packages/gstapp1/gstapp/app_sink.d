@@ -227,7 +227,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getBufferListSupport()
   {
     bool _retval;
-    _retval = gst_app_sink_get_buffer_list_support(cast(GstAppSink*)this._cPtr);
+    _retval = cast(bool)gst_app_sink_get_buffer_list_support(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getDrop()
   {
     bool _retval;
-    _retval = gst_app_sink_get_drop(cast(GstAppSink*)this._cPtr);
+    _retval = cast(bool)gst_app_sink_get_drop(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getEmitSignals()
   {
     bool _retval;
-    _retval = gst_app_sink_get_emit_signals(cast(GstAppSink*)this._cPtr);
+    _retval = cast(bool)gst_app_sink_get_emit_signals(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getWaitOnEos()
   {
     bool _retval;
-    _retval = gst_app_sink_get_wait_on_eos(cast(GstAppSink*)this._cPtr);
+    _retval = cast(bool)gst_app_sink_get_wait_on_eos(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool isEos()
   {
     bool _retval;
-    _retval = gst_app_sink_is_eos(cast(GstAppSink*)this._cPtr);
+    _retval = cast(bool)gst_app_sink_is_eos(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 

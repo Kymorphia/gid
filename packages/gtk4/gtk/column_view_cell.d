@@ -140,7 +140,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   override bool getFocusable()
   {
     bool _retval;
-    _retval = gtk_column_view_cell_get_focusable(cast(GtkColumnViewCell*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_cell_get_focusable(cast(GtkColumnViewCell*)this._cPtr);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   override bool getSelected()
   {
     bool _retval;
-    _retval = gtk_column_view_cell_get_selected(cast(GtkColumnViewCell*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_cell_get_selected(cast(GtkColumnViewCell*)this._cPtr);
     return _retval;
   }
 

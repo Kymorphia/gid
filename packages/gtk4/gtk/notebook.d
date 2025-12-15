@@ -499,7 +499,7 @@ class Notebook : gtk.widget.Widget
   bool getScrollable()
   {
     bool _retval;
-    _retval = gtk_notebook_get_scrollable(cast(GtkNotebook*)this._cPtr);
+    _retval = cast(bool)gtk_notebook_get_scrollable(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -510,7 +510,7 @@ class Notebook : gtk.widget.Widget
   bool getShowBorder()
   {
     bool _retval;
-    _retval = gtk_notebook_get_show_border(cast(GtkNotebook*)this._cPtr);
+    _retval = cast(bool)gtk_notebook_get_show_border(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -521,7 +521,7 @@ class Notebook : gtk.widget.Widget
   bool getShowTabs()
   {
     bool _retval;
-    _retval = gtk_notebook_get_show_tabs(cast(GtkNotebook*)this._cPtr);
+    _retval = cast(bool)gtk_notebook_get_show_tabs(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -535,7 +535,7 @@ class Notebook : gtk.widget.Widget
   bool getTabDetachable(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_notebook_get_tab_detachable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_notebook_get_tab_detachable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -597,7 +597,7 @@ class Notebook : gtk.widget.Widget
   bool getTabReorderable(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 

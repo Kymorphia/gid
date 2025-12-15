@@ -206,7 +206,7 @@ class SymbolicColor : gobject.boxed.Boxed
   {
     bool _retval;
     GdkRGBA _resolvedColor;
-    _retval = gtk_symbolic_color_resolve(cast(GtkSymbolicColor*)this._cPtr, props ? cast(GtkStyleProperties*)props._cPtr(No.Dup) : null, &_resolvedColor);
+    _retval = cast(bool)gtk_symbolic_color_resolve(cast(GtkSymbolicColor*)this._cPtr, props ? cast(GtkStyleProperties*)props._cPtr(No.Dup) : null, &_resolvedColor);
     resolvedColor = new gdk.rgba.RGBA(cast(void*)&_resolvedColor, No.Take);
     return _retval;
   }

@@ -176,7 +176,7 @@ class TimeVal
     bool _retval;
     const(char)* _isoDate = isoDate.toCString(No.Alloc);
     GTimeVal _time;
-    _retval = g_time_val_from_iso8601(_isoDate, &_time);
+    _retval = cast(bool)g_time_val_from_iso8601(_isoDate, &_time);
     time = new glib.time_val.TimeVal(cast(void*)&_time, No.Take);
     return _retval;
   }

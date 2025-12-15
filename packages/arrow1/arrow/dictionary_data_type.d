@@ -68,7 +68,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   bool isOrdered()
   {
     bool _retval;
-    _retval = garrow_dictionary_data_type_is_ordered(cast(GArrowDictionaryDataType*)this._cPtr);
+    _retval = cast(bool)garrow_dictionary_data_type_is_ordered(cast(GArrowDictionaryDataType*)this._cPtr);
     return _retval;
   }
 }

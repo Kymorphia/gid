@@ -129,7 +129,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_list_box_row_get_activatable(cast(GtkListBoxRow*)this._cPtr);
+    _retval = cast(bool)gtk_list_box_row_get_activatable(cast(GtkListBoxRow*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_list_box_row_get_selectable(cast(GtkListBoxRow*)this._cPtr);
+    _retval = cast(bool)gtk_list_box_row_get_selectable(cast(GtkListBoxRow*)this._cPtr);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   bool isSelected()
   {
     bool _retval;
-    _retval = gtk_list_box_row_is_selected(cast(GtkListBoxRow*)this._cPtr);
+    _retval = cast(bool)gtk_list_box_row_is_selected(cast(GtkListBoxRow*)this._cPtr);
     return _retval;
   }
 

@@ -40,7 +40,7 @@ class Datum : gobject.object.ObjectWrap
   bool equal(arrow.datum.Datum otherDatum)
   {
     bool _retval;
-    _retval = garrow_datum_equal(cast(GArrowDatum*)this._cPtr, otherDatum ? cast(GArrowDatum*)otherDatum._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_datum_equal(cast(GArrowDatum*)this._cPtr, otherDatum ? cast(GArrowDatum*)otherDatum._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class Datum : gobject.object.ObjectWrap
   bool isArray()
   {
     bool _retval;
-    _retval = garrow_datum_is_array(cast(GArrowDatum*)this._cPtr);
+    _retval = cast(bool)garrow_datum_is_array(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class Datum : gobject.object.ObjectWrap
   bool isArrayLike()
   {
     bool _retval;
-    _retval = garrow_datum_is_array_like(cast(GArrowDatum*)this._cPtr);
+    _retval = cast(bool)garrow_datum_is_array_like(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class Datum : gobject.object.ObjectWrap
   bool isScalar()
   {
     bool _retval;
-    _retval = garrow_datum_is_scalar(cast(GArrowDatum*)this._cPtr);
+    _retval = cast(bool)garrow_datum_is_scalar(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class Datum : gobject.object.ObjectWrap
   bool isValue()
   {
     bool _retval;
-    _retval = garrow_datum_is_value(cast(GArrowDatum*)this._cPtr);
+    _retval = cast(bool)garrow_datum_is_value(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 

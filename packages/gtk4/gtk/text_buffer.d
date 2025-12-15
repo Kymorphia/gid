@@ -243,7 +243,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool backspace(gtk.text_iter.TextIter iter, bool interactive, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_backspace(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, interactive, defaultEditable);
+    _retval = cast(bool)gtk_text_buffer_backspace(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, interactive, defaultEditable);
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool deleteInteractive(gtk.text_iter.TextIter startIter, gtk.text_iter.TextIter endIter, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)this._cPtr, startIter ? cast(GtkTextIter*)startIter._cPtr(No.Dup) : null, endIter ? cast(GtkTextIter*)endIter._cPtr(No.Dup) : null, defaultEditable);
+    _retval = cast(bool)gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)this._cPtr, startIter ? cast(GtkTextIter*)startIter._cPtr(No.Dup) : null, endIter ? cast(GtkTextIter*)endIter._cPtr(No.Dup) : null, defaultEditable);
     return _retval;
   }
 
@@ -465,7 +465,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool deleteSelection(bool interactive, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_delete_selection(cast(GtkTextBuffer*)this._cPtr, interactive, defaultEditable);
+    _retval = cast(bool)gtk_text_buffer_delete_selection(cast(GtkTextBuffer*)this._cPtr, interactive, defaultEditable);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool getCanRedo()
   {
     bool _retval;
-    _retval = gtk_text_buffer_get_can_redo(cast(GtkTextBuffer*)this._cPtr);
+    _retval = cast(bool)gtk_text_buffer_get_can_redo(cast(GtkTextBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -534,7 +534,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool getCanUndo()
   {
     bool _retval;
-    _retval = gtk_text_buffer_get_can_undo(cast(GtkTextBuffer*)this._cPtr);
+    _retval = cast(bool)gtk_text_buffer_get_can_undo(cast(GtkTextBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool getEnableUndo()
   {
     bool _retval;
-    _retval = gtk_text_buffer_get_enable_undo(cast(GtkTextBuffer*)this._cPtr);
+    _retval = cast(bool)gtk_text_buffer_get_enable_undo(cast(GtkTextBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool getHasSelection()
   {
     bool _retval;
-    _retval = gtk_text_buffer_get_has_selection(cast(GtkTextBuffer*)this._cPtr);
+    _retval = cast(bool)gtk_text_buffer_get_has_selection(cast(GtkTextBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -647,7 +647,7 @@ class TextBuffer : gobject.object.ObjectWrap
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber);
+    _retval = cast(bool)gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -672,7 +672,7 @@ class TextBuffer : gobject.object.ObjectWrap
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, byteIndex);
+    _retval = cast(bool)gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, byteIndex);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -697,7 +697,7 @@ class TextBuffer : gobject.object.ObjectWrap
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, charOffset);
+    _retval = cast(bool)gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, charOffset);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -791,7 +791,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool getModified()
   {
     bool _retval;
-    _retval = gtk_text_buffer_get_modified(cast(GtkTextBuffer*)this._cPtr);
+    _retval = cast(bool)gtk_text_buffer_get_modified(cast(GtkTextBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -837,7 +837,7 @@ class TextBuffer : gobject.object.ObjectWrap
     bool _retval;
     GtkTextIter _start;
     GtkTextIter _end;
-    _retval = gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)this._cPtr, &_start, &_end);
+    _retval = cast(bool)gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)this._cPtr, &_start, &_end);
     start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
     end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
@@ -1029,7 +1029,7 @@ class TextBuffer : gobject.object.ObjectWrap
       _len = cast(int)text.length;
 
     auto _text = cast(const(char)*)text.ptr;
-    _retval = gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _text, _len, defaultEditable);
+    _retval = cast(bool)gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _text, _len, defaultEditable);
     return _retval;
   }
 
@@ -1056,7 +1056,7 @@ class TextBuffer : gobject.object.ObjectWrap
       _len = cast(int)text.length;
 
     auto _text = cast(const(char)*)text.ptr;
-    _retval = gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)this._cPtr, _text, _len, defaultEditable);
+    _retval = cast(bool)gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)this._cPtr, _text, _len, defaultEditable);
     return _retval;
   }
 
@@ -1145,7 +1145,7 @@ class TextBuffer : gobject.object.ObjectWrap
   bool insertRangeInteractive(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, defaultEditable);
+    _retval = cast(bool)gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, defaultEditable);
     return _retval;
   }
 

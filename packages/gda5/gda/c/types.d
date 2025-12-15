@@ -1785,7 +1785,7 @@ struct GdaBlobOpClass
   extern(C) glong function(GdaBlobOp* op, GdaBlob* blob, glong offset) write;
 
   /** */
-  extern(C) bool function(GdaBlobOp* op, GdaBlob* blob) writeAll;
+  extern(C) gboolean function(GdaBlobOp* op, GdaBlob* blob) writeAll;
 
   /** */
   extern(C) void function() GdaReserved1;
@@ -2013,7 +2013,7 @@ struct GdaDataComparatorClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GdaDataComparator* comp, GdaDiff* diff) diffComputed;
+  extern(C) gboolean function(GdaDataComparator* comp, GdaDiff* diff) diffComputed;
 
   /** */
   extern(C) void function() GdaReserved1;
@@ -2056,7 +2056,7 @@ struct GdaDataHandlerIface
   extern(C) GValue* function(GdaDataHandler* dh, GType type) getSaneInitValue;
 
   /** */
-  extern(C) bool function(GdaDataHandler* dh, GType type) acceptsGType;
+  extern(C) gboolean function(GdaDataHandler* dh, GType type) acceptsGType;
 
   /** */
   extern(C) const(char)* function(GdaDataHandler* dh) getDescr;
@@ -2157,22 +2157,22 @@ struct GdaDataModelIface
   extern(C) GdaDataModelIter* function(GdaDataModel* model) iCreateIter;
 
   /** */
-  extern(C) bool function(GdaDataModel* model, GdaDataModelIter* iter, int row) iIterAtRow;
+  extern(C) gboolean function(GdaDataModel* model, GdaDataModelIter* iter, int row) iIterAtRow;
 
   /** */
-  extern(C) bool function(GdaDataModel* model, GdaDataModelIter* iter) iIterNext;
+  extern(C) gboolean function(GdaDataModel* model, GdaDataModelIter* iter) iIterNext;
 
   /** */
-  extern(C) bool function(GdaDataModel* model, GdaDataModelIter* iter) iIterPrev;
+  extern(C) gboolean function(GdaDataModel* model, GdaDataModelIter* iter) iIterPrev;
 
   /** */
-  extern(C) bool function(GdaDataModel* model, int col, int row, const(GValue)* value, GError** _err) iSetValueAt;
+  extern(C) gboolean function(GdaDataModel* model, int col, int row, const(GValue)* value, GError** _err) iSetValueAt;
 
   /** */
-  extern(C) bool function(GdaDataModel* model, GdaDataModelIter* iter, int col, const(GValue)* value, GError** _err) iIterSetValue;
+  extern(C) gboolean function(GdaDataModel* model, GdaDataModelIter* iter, int col, const(GValue)* value, GError** _err) iIterSetValue;
 
   /** */
-  extern(C) bool function(GdaDataModel* model, int row, GList* values, GError** _err) iSetValues;
+  extern(C) gboolean function(GdaDataModel* model, int row, GList* values, GError** _err) iSetValues;
 
   /** */
   extern(C) int function(GdaDataModel* model, const(GList)* values, GError** _err) iAppendValues;
@@ -2181,16 +2181,16 @@ struct GdaDataModelIface
   extern(C) int function(GdaDataModel* model, GError** _err) iAppendRow;
 
   /** */
-  extern(C) bool function(GdaDataModel* model, int row, GError** _err) iRemoveRow;
+  extern(C) gboolean function(GdaDataModel* model, int row, GError** _err) iRemoveRow;
 
   /** */
   extern(C) int function(GdaDataModel* model, GSList* values, int* colsIndex) iFindRow;
 
   /** */
-  extern(C) void function(GdaDataModel* model, bool doNotifyChanges) iSetNotify;
+  extern(C) void function(GdaDataModel* model, gboolean doNotifyChanges) iSetNotify;
 
   /** */
-  extern(C) bool function(GdaDataModel* model) iGetNotify;
+  extern(C) gboolean function(GdaDataModel* model) iGetNotify;
 
   /** */
   extern(C) void function(GdaDataModel* model, GdaDataModelHint hint, const(GValue)* hintValue) iSendHint;
@@ -2336,7 +2336,7 @@ struct GdaDataProxyClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) void function(GdaDataProxy* proxy, int row, bool toBeDeleted) rowDeleteChanged;
+  extern(C) void function(GdaDataProxy* proxy, int row, gboolean toBeDeleted) rowDeleteChanged;
 
   /** */
   extern(C) void function(GdaDataProxy* proxy, int sampleSize) sampleSizeChanged;
@@ -2410,19 +2410,19 @@ struct GdaDataSelectClass
   extern(C) int function(GdaDataSelect* model) fetchNbRows;
 
   /** */
-  extern(C) bool function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchRandom;
+  extern(C) gboolean function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchRandom;
 
   /** */
-  extern(C) bool function(GdaDataSelect* model, GError** _err) storeAll;
+  extern(C) gboolean function(GdaDataSelect* model, GError** _err) storeAll;
 
   /** */
-  extern(C) bool function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchNext;
+  extern(C) gboolean function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchNext;
 
   /** */
-  extern(C) bool function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchPrev;
+  extern(C) gboolean function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchPrev;
 
   /** */
-  extern(C) bool function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchAt;
+  extern(C) gboolean function(GdaDataSelect* model, GdaRow** prow, int rownum, GError** _err) fetchAt;
 
   /** */
   extern(C) void function() GdaReserved1;
@@ -2489,7 +2489,7 @@ struct GdaDsnInfo
   /**
       true if the DSN is a system wide defined data source
   */
-  bool isSystem;
+  gboolean isSystem;
 
   /** */
   void* GdaReserved1;
@@ -2727,7 +2727,7 @@ struct GdaLockableIface
   extern(C) void function(GdaLockable* lock) iLock;
 
   /** */
-  extern(C) bool function(GdaLockable* lock) iTrylock;
+  extern(C) gboolean function(GdaLockable* lock) iTrylock;
 
   /** */
   extern(C) void function(GdaLockable* lock) iUnlock;
@@ -2809,7 +2809,7 @@ struct GdaMetaDbObject
   /**
       set to true if the information in this #GdaMetaDbObject may be outdated because the #GdaMetaStore has been updated
   */
-  bool outdated;
+  gboolean outdated;
 
   /**
       the catalog the object is in
@@ -3024,12 +3024,12 @@ struct GdaMetaTableColumn
   /**
       tells if the column is part of a primary key
   */
-  bool pkey;
+  gboolean pkey;
 
   /**
       tells if the column can be null
   */
-  bool nullok;
+  gboolean nullok;
 
   /**
       the column's default value, represented as a valid SQL value (surrounded by simple quotes for strings, ...), or null if column has no default value
@@ -3098,7 +3098,7 @@ struct GdaMetaTableForeignKey
   GdaMetaForeignKeyPolicy onDeletePolicy;
 
   /** */
-  bool declared;
+  gboolean declared;
 
   /** */
   char* fkName;
@@ -3135,7 +3135,7 @@ struct GdaMetaView
   /**
       tells if the view's contents can be updated
   */
-  bool isUpdatable;
+  gboolean isUpdatable;
 
   /** */
   void* GdaReserved1;
@@ -3424,7 +3424,7 @@ struct GdaServerProviderClass
   extern(C) const(char)* function(GdaServerProvider* provider, GdaConnection* cnc) getServerVersion;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaConnectionFeature feature) supportsFeature;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaConnectionFeature feature) supportsFeature;
 
   /** */
   extern(C) GdaDataHandler* function(GdaServerProvider* provider, GdaConnection* cnc, GType gType, const(char)* dbmsType) getDataHandler;
@@ -3439,16 +3439,16 @@ struct GdaServerProviderClass
   extern(C) char* function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* str) unescapeString;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaQuarkList* params, GdaQuarkList* auth, uint* taskId, GdaServerProviderAsyncCallback asyncCb, void* cbData) openConnection;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaQuarkList* params, GdaQuarkList* auth, uint* taskId, GdaServerProviderAsyncCallback asyncCb, void* cbData) openConnection;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc) closeConnection;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc) closeConnection;
 
   /** */
   extern(C) const(char)* function(GdaServerProvider* provider, GdaConnection* cnc) getDatabase;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperationType type, GdaSet* options) supportsOperation;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperationType type, GdaSet* options) supportsOperation;
 
   /** */
   extern(C) GdaServerOperation* function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperationType type, GdaSet* options, GError** _err) createOperation;
@@ -3457,25 +3457,25 @@ struct GdaServerProviderClass
   extern(C) char* function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, GError** _err) renderOperation;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, uint* taskId, GdaServerProviderAsyncCallback asyncCb, void* cbData, GError** _err) performOperation;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, uint* taskId, GdaServerProviderAsyncCallback asyncCb, void* cbData, GError** _err) performOperation;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GdaTransactionIsolation level, GError** _err) beginTransaction;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GdaTransactionIsolation level, GError** _err) beginTransaction;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) commitTransaction;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) commitTransaction;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) rollbackTransaction;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) rollbackTransaction;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) addSavepoint;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) addSavepoint;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) rollbackSavepoint;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) rollbackSavepoint;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) deleteSavepoint;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* name, GError** _err) deleteSavepoint;
 
   /** */
   extern(C) GdaSqlParser* function(GdaServerProvider* provider, GdaConnection* cnc) createParser;
@@ -3484,16 +3484,16 @@ struct GdaServerProviderClass
   extern(C) char* function(GdaServerProvider* provider, GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementSqlFlag flags, GSList** paramsUsed, GError** _err) statementToSql;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaStatement* stmt, GError** _err) statementPrepare;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaStatement* stmt, GError** _err) statementPrepare;
 
   /** */
   extern(C) GObject* function(GdaServerProvider* provider, GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementModelUsage modelUsage, GType* colTypes, GdaSet** lastInsertedRow, uint* taskId, GdaServerProviderExecCallback execCb, void* cbData, GError** _err) statementExecute;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, GError** _err) isBusy;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GError** _err) isBusy;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, uint taskId, GError** _err) cancel;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, uint taskId, GError** _err) cancel;
 
   /** */
   extern(C) GdaConnection* function(GdaServerProvider* provider) createConnection;
@@ -3505,10 +3505,10 @@ struct GdaServerProviderClass
   GdaServerProviderXa* xaFuncs;
 
   /** */
-  extern(C) char* function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* id, bool forMetaStore, bool forceQuotes) identifierQuote;
+  extern(C) char* function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* id, gboolean forMetaStore, gboolean forceQuotes) identifierQuote;
 
   /** */
-  extern(C) bool function(GdaServerProvider* provider, GdaConnection* cnc, GError** _err) handleAsync;
+  extern(C) gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GError** _err) handleAsync;
 
   /** */
   extern(C) GdaSqlStatement* function(GdaServerProvider* provider, GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GError** _err) statementRewrite;
@@ -3556,142 +3556,142 @@ struct GdaServerProviderInfo;
 struct GdaServerProviderMeta
 {
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Info;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Info;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Btypes;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Btypes;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Udt;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Udt;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* udtCatalog, const(GValue)* udtSchema) udt;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* udtCatalog, const(GValue)* udtSchema) udt;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) UdtCols;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) UdtCols;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* udtCatalog, const(GValue)* udtSchema, const(GValue)* udtName) udtCols;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* udtCatalog, const(GValue)* udtSchema, const(GValue)* udtName) udtCols;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Enums;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Enums;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* udtCatalog, const(GValue)* udtSchema, const(GValue)* udtName) enums;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* udtCatalog, const(GValue)* udtSchema, const(GValue)* udtName) enums;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Domains;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Domains;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* domainCatalog, const(GValue)* domainSchema) domains;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* domainCatalog, const(GValue)* domainSchema) domains;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ConstraintsDom;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ConstraintsDom;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* domainCatalog, const(GValue)* domainSchema, const(GValue)* domainName) constraintsDom;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* domainCatalog, const(GValue)* domainSchema, const(GValue)* domainName) constraintsDom;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ElTypes;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ElTypes;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* specificName) elTypes;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* specificName) elTypes;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Collations;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Collations;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* collationCatalog, const(GValue)* collationSchema, const(GValue)* collationNameN) collations;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* collationCatalog, const(GValue)* collationSchema, const(GValue)* collationNameN) collations;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) CharacterSets;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) CharacterSets;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* chsetCatalog, const(GValue)* chsetSchema, const(GValue)* chsetNameN) characterSets;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* chsetCatalog, const(GValue)* chsetSchema, const(GValue)* chsetNameN) characterSets;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Schemata;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Schemata;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* catalogName, const(GValue)* schemaNameN) schemata;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* catalogName, const(GValue)* schemaNameN) schemata;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) TablesViews;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) TablesViews;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableNameN) tablesViews;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableNameN) tablesViews;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Columns;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Columns;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName) columns;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName) columns;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ViewCols;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ViewCols;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* viewCatalog, const(GValue)* viewSchema, const(GValue)* viewName) viewCols;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* viewCatalog, const(GValue)* viewSchema, const(GValue)* viewName) viewCols;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ConstraintsTab;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ConstraintsTab;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintNameN) constraintsTab;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintNameN) constraintsTab;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ConstraintsRef;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) ConstraintsRef;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintName) constraintsRef;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintName) constraintsRef;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) KeyColumns;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) KeyColumns;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintName) keyColumns;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintName) keyColumns;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) CheckColumns;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) CheckColumns;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintName) checkColumns;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* constraintName) checkColumns;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Triggers;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Triggers;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName) triggers;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName) triggers;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Routines;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) Routines;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* routineCatalog, const(GValue)* routineSchema, const(GValue)* routineNameN) routines;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* routineCatalog, const(GValue)* routineSchema, const(GValue)* routineNameN) routines;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) RoutineCol;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) RoutineCol;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* routCatalog, const(GValue)* routSchema, const(GValue)* routName) routineCol;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* routCatalog, const(GValue)* routSchema, const(GValue)* routName) routineCol;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) RoutinePar;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) RoutinePar;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* routCatalog, const(GValue)* routSchema, const(GValue)* routName) routinePar;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* routCatalog, const(GValue)* routSchema, const(GValue)* routName) routinePar;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) IndexesTab;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) IndexesTab;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* indexNameN) indexesTab;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* indexNameN) indexesTab;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) IndexCols;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** _err) IndexCols;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* indexName) indexCols;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, GdaMetaStore* meta, GdaMetaContext* ctx, GError** error, const(GValue)* tableCatalog, const(GValue)* tableSchema, const(GValue)* tableName, const(GValue)* indexName) indexCols;
 
   /** */
   extern(C) void function() GdaReserved5;
@@ -3744,19 +3744,19 @@ struct GdaServerProviderPrivate
 struct GdaServerProviderXa
 {
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaStart;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaStart;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaEnd;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaEnd;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaPrepare;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaPrepare;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaCommit;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaCommit;
 
   /** */
-  extern(C) bool function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaRollback;
+  extern(C) gboolean function(GdaServerProvider* prov, GdaConnection* cnc, const(GdaXaTransactionId)* trx, GError** _err) xaRollback;
 
   /** */
   extern(C) GList* function(GdaServerProvider* prov, GdaConnection* cnc, GError** _err) xaRecover;
@@ -4064,7 +4064,7 @@ struct GdaSqlExpr
   /**
       Please see specific note about the @value field
   */
-  bool valueIsIdent;
+  gboolean valueIsIdent;
 
   /** */
   void* GdaReserved1;
@@ -4163,10 +4163,10 @@ struct GdaSqlParamSpec
   char* descr;
 
   /** */
-  bool isParam;
+  gboolean isParam;
 
   /** */
-  bool nullok;
+  gboolean nullok;
 
   /** */
   GType gType;
@@ -4569,7 +4569,7 @@ struct GdaSqlSelectOrder
   /**
       TRUE is ordering is ascending
   */
-  bool asc;
+  gboolean asc;
 
   /**
       name of the collation to use for ordering
@@ -4829,7 +4829,7 @@ struct GdaSqlStatementSelect
   GdaSqlAnyPart any;
 
   /** */
-  bool distinct;
+  gboolean distinct;
 
   /** */
   GdaSqlExpr* distinctExpr;
@@ -4986,7 +4986,7 @@ struct GdaStatementClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) void function(GdaStatement* stmt, GdaConnection* cnc, bool checked) checked;
+  extern(C) void function(GdaStatement* stmt, GdaConnection* cnc, gboolean checked) checked;
 
   /** */
   extern(C) void function(GdaStatement* stmt) reset;
@@ -5315,7 +5315,7 @@ struct GdaTreeManagerClass
   GObjectClass objectClass;
 
   /** */
-  extern(C) GSList* function(GdaTreeManager* manager, GdaTreeNode* node, const(GSList)* childrenNodes, bool* outError, GError** _err) updateChildren;
+  extern(C) GSList* function(GdaTreeManager* manager, GdaTreeNode* node, const(GSList)* childrenNodes, gboolean* outError, GError** _err) updateChildren;
 
   /** */
   extern(C) void function() GdaReserved1;
@@ -5547,21 +5547,21 @@ alias extern(C) void function(const(char)* attName, const(GValue)* value, void* 
 
 alias extern(C) void function(GObject* obj, const(char)* attName, const(GValue)* value, void* data) GdaAttributesManagerSignal;
 
-alias extern(C) void function(GdaServerProvider* provider, GdaConnection* cnc, uint taskId, bool resultStatus, const(GError)* error, void* data) GdaServerProviderAsyncCallback;
+alias extern(C) void function(GdaServerProvider* provider, GdaConnection* cnc, uint taskId, gboolean resultStatus, const(GError)* error, void* data) GdaServerProviderAsyncCallback;
 
 alias extern(C) void function(GdaServerProvider* provider, GdaConnection* cnc, uint taskId, GObject* resultObj, const(GError)* error, void* data) GdaServerProviderExecCallback;
 
-alias extern(C) bool function(GdaSqlAnyPart* part, void* data, GError** _err) GdaSqlForeachFunc;
+alias extern(C) gboolean function(GdaSqlAnyPart* part, void* data, GError** _err) GdaSqlForeachFunc;
 
-alias extern(C) char* function(GdaSqlExpr* expr, GdaSqlRenderingContext* context, bool* isDefault, bool* isNull, GError** _err) GdaSqlRenderingExpr;
+alias extern(C) char* function(GdaSqlExpr* expr, GdaSqlRenderingContext* context, gboolean* isDefault, gboolean* isNull, GError** _err) GdaSqlRenderingExpr;
 
 alias extern(C) char* function(GdaSqlAnyPart* node, GdaSqlRenderingContext* context, GError** _err) GdaSqlRenderingFunc;
 
-alias extern(C) char* function(GdaSqlParamSpec* pspec, GdaSqlExpr* expr, GdaSqlRenderingContext* context, bool* isDefault, bool* isNull, GError** _err) GdaSqlRenderingPSpecFunc;
+alias extern(C) char* function(GdaSqlParamSpec* pspec, GdaSqlExpr* expr, GdaSqlRenderingContext* context, gboolean* isDefault, gboolean* isNull, GError** _err) GdaSqlRenderingPSpecFunc;
 
 alias extern(C) char* function(const(GValue)* value, GdaSqlRenderingContext* context, GError** _err) GdaSqlRenderingValue;
 
-alias extern(C) bool function(const(char)* word) GdaSqlReservedKeywordsFunc;
+alias extern(C) gboolean function(const(char)* word) GdaSqlReservedKeywordsFunc;
 
 alias extern(C) void function(GdaThreadWrapper* wrapper, void* instance, const(char)* signame, int nParamValues, const(GValue)* paramValues, void* gdaReserved, void* data) GdaThreadWrapperCallback;
 
@@ -5571,5 +5571,5 @@ alias extern(C) void function(void* arg, GError** _err) GdaThreadWrapperVoidFunc
 
 alias extern(C) GdaTreeNode* function(GdaTreeManager* manager, GdaTreeNode* parent, const(char)* name) GdaTreeManagerNodeFunc;
 
-alias extern(C) GSList* function(GdaTreeManager* manager, GdaTreeNode* node, const(GSList)* childrenNodes, bool* outError, GError** _err) GdaTreeManagerNodesFunc;
+alias extern(C) GSList* function(GdaTreeManager* manager, GdaTreeNode* node, const(GSList)* childrenNodes, gboolean* outError, GError** _err) GdaTreeManagerNodesFunc;
 

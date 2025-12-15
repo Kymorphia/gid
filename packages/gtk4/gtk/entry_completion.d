@@ -361,7 +361,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getInlineCompletion()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_inline_completion(cast(GtkEntryCompletion*)this._cPtr);
+    _retval = cast(bool)gtk_entry_completion_get_inline_completion(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -374,7 +374,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getInlineSelection()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_inline_selection(cast(GtkEntryCompletion*)this._cPtr);
+    _retval = cast(bool)gtk_entry_completion_get_inline_selection(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getPopupCompletion()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_popup_completion(cast(GtkEntryCompletion*)this._cPtr);
+    _retval = cast(bool)gtk_entry_completion_get_popup_completion(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getPopupSetWidth()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_popup_set_width(cast(GtkEntryCompletion*)this._cPtr);
+    _retval = cast(bool)gtk_entry_completion_get_popup_set_width(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getPopupSingleMatch()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_popup_single_match(cast(GtkEntryCompletion*)this._cPtr);
+    _retval = cast(bool)gtk_entry_completion_get_popup_single_match(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -514,12 +514,12 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setMatchFunc(gtk.types.EntryCompletionMatchFunc func)
   {
-    extern(C) bool _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
+    extern(C) gboolean _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
     {
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

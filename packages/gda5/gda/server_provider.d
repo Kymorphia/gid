@@ -325,7 +325,7 @@ class ServerProvider : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_server_provider_perform_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_server_provider_perform_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ServerProviderException(_err);
     return _retval;
@@ -344,7 +344,7 @@ class ServerProvider : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_server_provider_perform_operation_default(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_server_provider_perform_operation_default(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ServerProviderException(_err);
     return _retval;
@@ -421,7 +421,7 @@ class ServerProvider : gobject.object.ObjectWrap
   bool supportsFeature(gda.connection.Connection cnc, gda.types.ConnectionFeature feature)
   {
     bool _retval;
-    _retval = gda_server_provider_supports_feature(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, feature);
+    _retval = cast(bool)gda_server_provider_supports_feature(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, feature);
     return _retval;
   }
 
@@ -438,7 +438,7 @@ class ServerProvider : gobject.object.ObjectWrap
   bool supportsOperation(gda.connection.Connection cnc, gda.types.ServerOperationType type, gda.set.Set options = null)
   {
     bool _retval;
-    _retval = gda_server_provider_supports_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, type, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
+    _retval = cast(bool)gda_server_provider_supports_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, type, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 

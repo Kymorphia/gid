@@ -161,7 +161,7 @@ template ColorChooserT()
   override bool getUseAlpha()
   {
     bool _retval;
-    _retval = gtk_color_chooser_get_use_alpha(cast(GtkColorChooser*)this._cPtr);
+    _retval = cast(bool)gtk_color_chooser_get_use_alpha(cast(GtkColorChooser*)this._cPtr);
     return _retval;
   }
 

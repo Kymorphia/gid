@@ -321,7 +321,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_copy(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
+    _retval = cast(bool)g_file_copy(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -397,7 +397,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_attributes(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_copy_attributes(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -415,7 +415,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_copy_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -650,7 +650,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_delete(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_delete(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -695,7 +695,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_delete_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_delete_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -774,7 +774,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_eject_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -828,7 +828,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_with_operation_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_eject_mountable_with_operation_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -957,7 +957,7 @@ template FileT()
   override bool equal(gio.file.File file2)
   {
     bool _retval;
-    _retval = g_file_equal(cast(GFile*)this._cPtr, file2 ? cast(GFile*)(cast(gobject.object.ObjectWrap)file2)._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_file_equal(cast(GFile*)this._cPtr, file2 ? cast(GFile*)(cast(gobject.object.ObjectWrap)file2)._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1260,7 +1260,7 @@ template FileT()
   override bool hasParent(gio.file.File parent = null)
   {
     bool _retval;
-    _retval = g_file_has_parent(cast(GFile*)this._cPtr, parent ? cast(GFile*)(cast(gobject.object.ObjectWrap)parent)._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_file_has_parent(cast(GFile*)this._cPtr, parent ? cast(GFile*)(cast(gobject.object.ObjectWrap)parent)._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1288,7 +1288,7 @@ template FileT()
   override bool hasPrefix(gio.file.File prefix)
   {
     bool _retval;
-    _retval = g_file_has_prefix(cast(GFile*)this._cPtr, prefix ? cast(GFile*)(cast(gobject.object.ObjectWrap)prefix)._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_file_has_prefix(cast(GFile*)this._cPtr, prefix ? cast(GFile*)(cast(gobject.object.ObjectWrap)prefix)._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1307,7 +1307,7 @@ template FileT()
   {
     bool _retval;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
-    _retval = g_file_has_uri_scheme(cast(GFile*)this._cPtr, _uriScheme);
+    _retval = cast(bool)g_file_has_uri_scheme(cast(GFile*)this._cPtr, _uriScheme);
     return _retval;
   }
 
@@ -1344,7 +1344,7 @@ template FileT()
   override bool isNative()
   {
     bool _retval;
-    _retval = g_file_is_native(cast(GFile*)this._cPtr);
+    _retval = cast(bool)g_file_is_native(cast(GFile*)this._cPtr);
     return _retval;
   }
 
@@ -1470,7 +1470,7 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_contents(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = cast(bool)g_file_load_contents(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     contents.length = _length;
@@ -1537,7 +1537,7 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = cast(bool)g_file_load_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     contents.length = _length;
@@ -1570,7 +1570,7 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_partial_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = cast(bool)g_file_load_partial_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     contents.length = _length;
@@ -1606,7 +1606,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_make_directory(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1650,7 +1650,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_make_directory_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1682,7 +1682,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory_with_parents(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_make_directory_with_parents(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1709,7 +1709,7 @@ template FileT()
     bool _retval;
     const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_make_symbolic_link(cast(GFile*)this._cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_make_symbolic_link(cast(GFile*)this._cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1757,7 +1757,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_symbolic_link_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_make_symbolic_link_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1796,18 +1796,18 @@ template FileT()
   */
   override bool measureDiskUsage(gio.types.FileMeasureFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileMeasureProgressCallback progressCallback, out ulong diskUsage, out ulong numDirs, out ulong numFiles)
   {
-    extern(C) void _progressCallbackCallback(bool reporting, ulong currentSize, ulong numDirs, ulong numFiles, void* data)
+    extern(C) void _progressCallbackCallback(gboolean reporting, ulong currentSize, ulong numDirs, ulong numFiles, void* data)
     {
       auto _dlg = cast(gio.types.FileMeasureProgressCallback*)data;
 
-      (*_dlg)(reporting, currentSize, numDirs, numFiles);
+      (*_dlg)(cast(bool)reporting, currentSize, numDirs, numFiles);
     }
     auto _progressCallbackCB = progressCallback ? &_progressCallbackCallback : null;
 
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_measure_disk_usage(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
+    _retval = cast(bool)g_file_measure_disk_usage(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1831,7 +1831,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_measure_disk_usage_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
+    _retval = cast(bool)g_file_measure_disk_usage_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1984,7 +1984,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_mount_enclosing_volume_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_mount_enclosing_volume_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2108,7 +2108,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_move(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
+    _retval = cast(bool)g_file_move(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2172,7 +2172,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_move_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_move_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2332,7 +2332,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_poll_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_poll_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2441,7 +2441,7 @@ template FileT()
   override bool queryExists(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    _retval = g_file_query_exists(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_file_query_exists(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2973,7 +2973,7 @@ template FileT()
     const(char)* _etag = etag.toCString(No.Alloc);
     char* _newEtag;
     GError *_err;
-    _retval = g_file_replace_contents(cast(GFile*)this._cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_replace_contents(cast(GFile*)this._cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     newEtag = _newEtag.fromCString(Yes.Free);
@@ -3082,7 +3082,7 @@ template FileT()
     bool _retval;
     char* _newEtag;
     GError *_err;
-    _retval = g_file_replace_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_newEtag, &_err);
+    _retval = cast(bool)g_file_replace_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_newEtag, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     newEtag = _newEtag.fromCString(Yes.Free);
@@ -3252,7 +3252,7 @@ template FileT()
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute(cast(GFile*)this._cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attribute(cast(GFile*)this._cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3283,7 +3283,7 @@ template FileT()
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_byte_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attribute_byte_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3312,7 +3312,7 @@ template FileT()
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_int32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attribute_int32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3340,7 +3340,7 @@ template FileT()
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_int64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attribute_int64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3369,7 +3369,7 @@ template FileT()
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attribute_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3398,7 +3398,7 @@ template FileT()
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_uint32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attribute_uint32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3427,7 +3427,7 @@ template FileT()
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_uint64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attribute_uint64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3481,7 +3481,7 @@ template FileT()
     bool _retval;
     GFileInfo* _info;
     GError *_err;
-    _retval = g_file_set_attributes_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_info, &_err);
+    _retval = cast(bool)g_file_set_attributes_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_info, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     info = new gio.file_info.FileInfo(cast(void*)_info, Yes.Take);
@@ -3514,7 +3514,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_set_attributes_from_info(cast(GFile*)this._cPtr, info ? cast(GFileInfo*)info._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_set_attributes_from_info(cast(GFile*)this._cPtr, info ? cast(GFileInfo*)info._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3663,7 +3663,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_start_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_start_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3720,7 +3720,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_stop_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_stop_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3736,7 +3736,7 @@ template FileT()
   override bool supportsThreadContexts()
   {
     bool _retval;
-    _retval = g_file_supports_thread_contexts(cast(GFile*)this._cPtr);
+    _retval = cast(bool)g_file_supports_thread_contexts(cast(GFile*)this._cPtr);
     return _retval;
   }
 
@@ -3762,7 +3762,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_trash(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_trash(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3806,7 +3806,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_trash_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_trash_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3866,7 +3866,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_unmount_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -3924,7 +3924,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_with_operation_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_unmount_mountable_with_operation_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

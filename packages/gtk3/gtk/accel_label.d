@@ -192,7 +192,7 @@ class AccelLabel : gtk.label.Label
   bool refetch()
   {
     bool _retval;
-    _retval = gtk_accel_label_refetch(cast(GtkAccelLabel*)this._cPtr);
+    _retval = cast(bool)gtk_accel_label_refetch(cast(GtkAccelLabel*)this._cPtr);
     return _retval;
   }
 

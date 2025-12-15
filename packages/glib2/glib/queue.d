@@ -200,7 +200,7 @@ class Queue
   bool isEmpty()
   {
     bool _retval;
-    _retval = g_queue_is_empty(cast(GQueue*)this._cPtr);
+    _retval = cast(bool)g_queue_is_empty(cast(GQueue*)this._cPtr);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class Queue
   bool remove(const(void)* data = null)
   {
     bool _retval;
-    _retval = g_queue_remove(cast(GQueue*)this._cPtr, data);
+    _retval = cast(bool)g_queue_remove(cast(GQueue*)this._cPtr, data);
     return _retval;
   }
 

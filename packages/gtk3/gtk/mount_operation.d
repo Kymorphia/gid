@@ -112,7 +112,7 @@ class MountOperation : gio.mount_operation.MountOperation
   bool isShowing()
   {
     bool _retval;
-    _retval = gtk_mount_operation_is_showing(cast(GtkMountOperation*)this._cPtr);
+    _retval = cast(bool)gtk_mount_operation_is_showing(cast(GtkMountOperation*)this._cPtr);
     return _retval;
   }
 

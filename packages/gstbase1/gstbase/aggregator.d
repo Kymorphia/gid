@@ -267,7 +267,7 @@ class Aggregator : gst.element.Element
   bool getForceLive()
   {
     bool _retval;
-    _retval = gst_aggregator_get_force_live(cast(GstAggregator*)this._cPtr);
+    _retval = cast(bool)gst_aggregator_get_force_live(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class Aggregator : gst.element.Element
   bool getIgnoreInactivePads()
   {
     bool _retval;
-    _retval = gst_aggregator_get_ignore_inactive_pads(cast(GstAggregator*)this._cPtr);
+    _retval = cast(bool)gst_aggregator_get_ignore_inactive_pads(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Aggregator : gst.element.Element
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_aggregator_negotiate(cast(GstAggregator*)this._cPtr);
+    _retval = cast(bool)gst_aggregator_negotiate(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 

@@ -127,7 +127,7 @@ class PopupLayout : gobject.boxed.Boxed
   bool equal(gdk.popup_layout.PopupLayout other)
   {
     bool _retval;
-    _retval = gdk_popup_layout_equal(cast(GdkPopupLayout*)this._cPtr, other ? cast(GdkPopupLayout*)other._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_popup_layout_equal(cast(GdkPopupLayout*)this._cPtr, other ? cast(GdkPopupLayout*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 

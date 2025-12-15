@@ -256,7 +256,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getSensitive()
   {
     bool _retval;
-    _retval = gtk_action_group_get_sensitive(cast(GtkActionGroup*)this._cPtr);
+    _retval = cast(bool)gtk_action_group_get_sensitive(cast(GtkActionGroup*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_action_group_get_visible(cast(GtkActionGroup*)this._cPtr);
+    _retval = cast(bool)gtk_action_group_get_visible(cast(GtkActionGroup*)this._cPtr);
     return _retval;
   }
 

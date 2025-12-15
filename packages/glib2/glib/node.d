@@ -162,7 +162,7 @@ class Node
   bool isAncestor(glib.node.Node descendant)
   {
     bool _retval;
-    _retval = g_node_is_ancestor(cast(GNode*)this._cPtr, descendant ? cast(GNode*)descendant._cPtr : null);
+    _retval = cast(bool)g_node_is_ancestor(cast(GNode*)this._cPtr, descendant ? cast(GNode*)descendant._cPtr : null);
     return _retval;
   }
 
@@ -235,11 +235,11 @@ class Node
   */
   void traverse(glib.types.TraverseType order, glib.types.TraverseFlags flags, int maxDepth, glib.types.NodeTraverseFunc func)
   {
-    extern(C) bool _funcCallback(GNode* node, void* data)
+    extern(C) gboolean _funcCallback(GNode* node, void* data)
     {
       auto _dlg = cast(glib.types.NodeTraverseFunc*)data;
 
-      bool _retval = (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
+      gboolean _retval = (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

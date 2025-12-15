@@ -256,7 +256,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)this._cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)this._cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -303,7 +303,7 @@ template FileChooserT()
   override bool getCreateFolders()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_create_folders(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_create_folders(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ template FileChooserT()
   override bool getSelectMultiple()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_select_multiple(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_select_multiple(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -489,7 +489,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)this._cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)this._cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -564,7 +564,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -651,7 +651,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_chooser_set_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

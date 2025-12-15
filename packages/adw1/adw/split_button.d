@@ -355,7 +355,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getCanShrink()
   {
     bool _retval;
-    _retval = adw_split_button_get_can_shrink(cast(AdwSplitButton*)this._cPtr);
+    _retval = cast(bool)adw_split_button_get_can_shrink(cast(AdwSplitButton*)this._cPtr);
     return _retval;
   }
 
@@ -452,7 +452,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_split_button_get_use_underline(cast(AdwSplitButton*)this._cPtr);
+    _retval = cast(bool)adw_split_button_get_use_underline(cast(AdwSplitButton*)this._cPtr);
     return _retval;
   }
 

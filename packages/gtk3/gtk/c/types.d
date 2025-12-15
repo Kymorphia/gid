@@ -4464,7 +4464,7 @@ struct GtkAboutDialogClass
   GtkDialogClass parentClass;
 
   /** */
-  extern(C) bool function(GtkAboutDialog* dialog, const(char)* uri) activateLink;
+  extern(C) gboolean function(GtkAboutDialog* dialog, const(char)* uri) activateLink;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -6519,7 +6519,7 @@ struct GtkBuildableIface
        properties defined via `<packing>` elements to child properties.
        Note that @user_data must be freed in @custom_tag_end or @custom_finished.
   */
-  extern(C) bool function(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, GMarkupParser* parser, void** data) customTagStart;
+  extern(C) gboolean function(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, GMarkupParser* parser, void** data) customTagStart;
 
   /**
       Called for the end tag of each custom element that is
@@ -7016,7 +7016,7 @@ struct GtkCellAccessibleClass
   GtkAccessibleClass parentClass;
 
   /** */
-  extern(C) void function(GtkCellAccessible* cell, bool emitSignal) updateCache;
+  extern(C) void function(GtkCellAccessible* cell, gboolean emitSignal) updateCache;
 }
 
 /** */
@@ -7035,7 +7035,7 @@ struct GtkCellAccessibleParentIface
   extern(C) void function(GtkCellAccessibleParent* parent, GtkCellAccessible* cell, GdkRectangle* cellRect) getCellArea;
 
   /** */
-  extern(C) bool function(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) grabFocus;
+  extern(C) gboolean function(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) grabFocus;
 
   /** */
   extern(C) int function(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) getChildIndex;
@@ -7483,14 +7483,14 @@ struct GtkCellAreaClass
           @background_area should be correctly distributed to the cells
           corresponding background areas.
   */
-  extern(C) void function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, cairo_t* cr, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags, bool paintFocus) render;
+  extern(C) void function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, cairo_t* cr, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags, gboolean paintFocus) render;
 
   /**
       Apply the cell attributes to the cells. This is
           implemented as a signal and generally #GtkCellArea subclasses don't
           need to implement it since it is handled by the base class.
   */
-  extern(C) void function(GtkCellArea* area, GtkTreeModel* treeModel, GtkTreeIter* iter, bool isExpander, bool isExpanded) applyAttributes;
+  extern(C) void function(GtkCellArea* area, GtkTreeModel* treeModel, GtkTreeIter* iter, gboolean isExpander, gboolean isExpanded) applyAttributes;
 
   /**
       Creates and returns a class specific #GtkCellAreaContext
@@ -7574,7 +7574,7 @@ struct GtkCellAreaClass
           of other sibling cells (see [gtk.cell_area.CellArea.getFocusFromSibling]).
           Focus is set by calling [gtk.cell_area.CellArea.setFocusCell].
   */
-  extern(C) bool function(GtkCellArea* area, GtkDirectionType direction) focus;
+  extern(C) gboolean function(GtkCellArea* area, GtkDirectionType direction) focus;
 
   /**
       Returns whether the #GtkCellArea can respond to
@@ -7583,13 +7583,13 @@ struct GtkCellAreaClass
           be enhanced if the #GtkCellArea subclass can handle activation in
           other ways than activating its #GtkCellRenderers.
   */
-  extern(C) bool function(GtkCellArea* area) isActivatable;
+  extern(C) gboolean function(GtkCellArea* area) isActivatable;
 
   /**
       This is called when the layouting widget rendering the
           #GtkCellArea activates the focus cell (see [gtk.cell_area.CellArea.getFocusCell]).
   */
-  extern(C) bool function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, const(GdkRectangle)* cellArea, GtkCellRendererState flags, bool editOnly) activate;
+  extern(C) gboolean function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, const(GdkRectangle)* cellArea, GtkCellRendererState flags, gboolean editOnly) activate;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -7842,12 +7842,12 @@ struct GtkCellLayoutIface
   /**
       Packs the cell into the beginning of cell_layout.
   */
-  extern(C) void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, bool expand) packStart;
+  extern(C) void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, gboolean expand) packStart;
 
   /**
       Adds the cell to the end of cell_layout.
   */
-  extern(C) void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, bool expand) packEnd;
+  extern(C) void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, gboolean expand) packEnd;
 
   /**
       Unsets all the mappings on all renderers on cell_layout and
@@ -8035,7 +8035,7 @@ struct GtkCellRendererClass
   /**
       Called to activate the content of the #GtkCellRenderer.
   */
-  extern(C) bool function(GtkCellRenderer* cell, GdkEvent* event, GtkWidget* widget, const(char)* path, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) activate;
+  extern(C) gboolean function(GtkCellRenderer* cell, GdkEvent* event, GtkWidget* widget, const(char)* path, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) activate;
 
   /**
       Called to initiate editing the content of the #GtkCellRenderer.
@@ -9358,7 +9358,7 @@ struct GtkContainerClass
       Invokes callback on each child of container. The callback handler
          may remove the child.
   */
-  extern(C) void function(GtkContainer* container, bool includeInternals, GtkCallback callback, void* callbackData) forall;
+  extern(C) void function(GtkContainer* container, gboolean includeInternals, GtkCallback callback, void* callbackData) forall;
 
   /**
       Sets the focused child of container.
@@ -9830,7 +9830,7 @@ struct GtkEditableInterface
   extern(C) void function(GtkEditable* editable, int startPos, int endPos) setSelectionBounds;
 
   /** */
-  extern(C) bool function(GtkEditable* editable, int* startPos, int* endPos) getSelectionBounds;
+  extern(C) gboolean function(GtkEditable* editable, int* startPos, int* endPos) getSelectionBounds;
 
   /** */
   extern(C) void function(GtkEditable* editable, int position) setPosition;
@@ -10049,7 +10049,7 @@ struct GtkEntryClass
         default implementation specifies the standard #GtkEntry cursor movement
         behavior.
   */
-  extern(C) void function(GtkEntry* entry, GtkMovementStep step, int count, bool extendSelection) moveCursor;
+  extern(C) void function(GtkEntry* entry, GtkMovementStep step, int count, gboolean extendSelection) moveCursor;
 
   /**
       Class handler for the #GtkEntry::insert-at-cursor signal.
@@ -10190,16 +10190,16 @@ struct GtkEntryCompletionClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) matchSelected;
+  extern(C) gboolean function(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) matchSelected;
 
   /** */
   extern(C) void function(GtkEntryCompletion* completion, int index) actionActivated;
 
   /** */
-  extern(C) bool function(GtkEntryCompletion* completion, const(char)* prefix) insertPrefix;
+  extern(C) gboolean function(GtkEntryCompletion* completion, const(char)* prefix) insertPrefix;
 
   /** */
-  extern(C) bool function(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) cursorOnMatch;
+  extern(C) gboolean function(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) cursorOnMatch;
 
   /** */
   extern(C) void function(GtkEntryCompletion* completion) noMatches;
@@ -11404,7 +11404,7 @@ struct GtkFlowBoxClass
   extern(C) void function(GtkFlowBox* box) toggleCursorChild;
 
   /** */
-  extern(C) bool function(GtkFlowBox* box, GtkMovementStep step, int count) moveCursor;
+  extern(C) gboolean function(GtkFlowBox* box, GtkMovementStep step, int count) moveCursor;
 
   /** */
   extern(C) void function(GtkFlowBox* box) selectAll;
@@ -11903,7 +11903,7 @@ struct GtkGLAreaClass
   /**
       class closure for the #GtkGLArea::render signal
   */
-  extern(C) bool function(GtkGLArea* area, GdkGLContext* context) render;
+  extern(C) gboolean function(GtkGLArea* area, GdkGLContext* context) render;
 
   /**
       class closeure for the #GtkGLArea::resize signal
@@ -12659,13 +12659,13 @@ struct GtkIMContextClass
       Default handler of the
         #GtkIMContext::retrieve-surrounding signal.
   */
-  extern(C) bool function(GtkIMContext* context) retrieveSurrounding;
+  extern(C) gboolean function(GtkIMContext* context) retrieveSurrounding;
 
   /**
       Default handler of the
         #GtkIMContext::delete-surrounding signal.
   */
-  extern(C) bool function(GtkIMContext* context, int offset, int nChars) deleteSurrounding;
+  extern(C) gboolean function(GtkIMContext* context, int offset, int nChars) deleteSurrounding;
 
   /**
       Called via [gtk.imcontext.IMContext.setClientWindow] when the
@@ -12696,7 +12696,7 @@ struct GtkIMContextClass
         If a builtin mapping exists for the key, it is used to produce a
         character.
   */
-  extern(C) bool function(GtkIMContext* context, GdkEventKey* event) filterKeypress;
+  extern(C) gboolean function(GtkIMContext* context, GdkEventKey* event) filterKeypress;
 
   /**
       Called via [gtk.imcontext.IMContext.focusIn] when the input widget
@@ -12730,7 +12730,7 @@ struct GtkIMContextClass
         the use of the preedit string. Override this to display feedback by some
         other means if turned off.
   */
-  extern(C) void function(GtkIMContext* context, bool usePreedit) setUsePreedit;
+  extern(C) void function(GtkIMContext* context, gboolean usePreedit) setUsePreedit;
 
   /**
       Called via [gtk.imcontext.IMContext.setSurrounding] in response
@@ -12750,7 +12750,7 @@ struct GtkIMContextClass
         #GtkIMContext::retrieve-surrounding and records the context received
         by the subsequent invocation of @get_surrounding.
   */
-  extern(C) bool function(GtkIMContext* context, char** text, int* cursorIndex) getSurrounding;
+  extern(C) gboolean function(GtkIMContext* context, char** text, int* cursorIndex) getSurrounding;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -13183,10 +13183,10 @@ struct GtkIconViewClass
   extern(C) void function(GtkIconView* iconView) toggleCursorItem;
 
   /** */
-  extern(C) bool function(GtkIconView* iconView, GtkMovementStep step, int count) moveCursor;
+  extern(C) gboolean function(GtkIconView* iconView, GtkMovementStep step, int count) moveCursor;
 
   /** */
-  extern(C) bool function(GtkIconView* iconView) activateCursorItem;
+  extern(C) gboolean function(GtkIconView* iconView) activateCursorItem;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -13819,7 +13819,7 @@ struct GtkLabelClass
   GtkMiscClass parentClass;
 
   /** */
-  extern(C) void function(GtkLabel* label, GtkMovementStep step, int count, bool extendSelection) moveCursor;
+  extern(C) void function(GtkLabel* label, GtkMovementStep step, int count, gboolean extendSelection) moveCursor;
 
   /** */
   extern(C) void function(GtkLabel* label) copyClipboard;
@@ -13828,7 +13828,7 @@ struct GtkLabelClass
   extern(C) void function(GtkLabel* label, GtkMenu* menu) populatePopup;
 
   /** */
-  extern(C) bool function(GtkLabel* label, const(char)* uri) activateLink;
+  extern(C) gboolean function(GtkLabel* label, const(char)* uri) activateLink;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -14109,7 +14109,7 @@ struct GtkLinkButtonClass
   /**
       class handler for the #GtkLinkButton::activate-link signal
   */
-  extern(C) bool function(GtkLinkButton* button) activateLink;
+  extern(C) gboolean function(GtkLinkButton* button) activateLink;
 
   /** */
   extern(C) void function() GtkPadding1;
@@ -15088,7 +15088,7 @@ struct GtkMenuShellClass
   extern(C) void function(GtkMenuShell* menuShell, GtkMenuDirectionType direction) moveCurrent;
 
   /** */
-  extern(C) void function(GtkMenuShell* menuShell, bool forceHide) activateCurrent;
+  extern(C) void function(GtkMenuShell* menuShell, gboolean forceHide) activateCurrent;
 
   /** */
   extern(C) void function(GtkMenuShell* menuShell) cancel;
@@ -15103,7 +15103,7 @@ struct GtkMenuShellClass
   extern(C) int function(GtkMenuShell* menuShell) getPopupDelay;
 
   /** */
-  extern(C) bool function(GtkMenuShell* menuShell, int distance) moveSelected;
+  extern(C) gboolean function(GtkMenuShell* menuShell, int distance) moveSelected;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -15465,22 +15465,22 @@ struct _GtkMountOperationHandlerIface
   /**
       Handler for the #_GtkMountOperationHandler::handle-ask-password signal.
   */
-  extern(C) bool function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, const(char)* argDefaultUser, const(char)* argDefaultDomain, uint argFlags) handleAskPassword;
+  extern(C) gboolean function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, const(char)* argDefaultUser, const(char)* argDefaultDomain, uint argFlags) handleAskPassword;
 
   /**
       Handler for the #_GtkMountOperationHandler::handle-ask-question signal.
   */
-  extern(C) bool function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, const(char*)* argChoices) handleAskQuestion;
+  extern(C) gboolean function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, const(char*)* argChoices) handleAskQuestion;
 
   /**
       Handler for the #_GtkMountOperationHandler::handle-close signal.
   */
-  extern(C) bool function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation) handleClose;
+  extern(C) gboolean function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation) handleClose;
 
   /**
       Handler for the #_GtkMountOperationHandler::handle-show-processes signal.
   */
-  extern(C) bool function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, GVariant* argApplicationPids, const(char*)* argChoices) handleShowProcesses;
+  extern(C) gboolean function(_GtkMountOperationHandler* object, GDBusMethodInvocation* invocation, const(char)* argId, const(char)* argMessage, const(char)* argIconName, GVariant* argApplicationPids, const(char*)* argChoices) handleShowProcesses;
 }
 
 /**
@@ -15683,19 +15683,19 @@ struct GtkNotebookClass
   extern(C) void function(GtkNotebook* notebook, GtkWidget* page, uint pageNum) switchPage;
 
   /** */
-  extern(C) bool function(GtkNotebook* notebook, bool moveFocus) selectPage;
+  extern(C) gboolean function(GtkNotebook* notebook, gboolean moveFocus) selectPage;
 
   /** */
-  extern(C) bool function(GtkNotebook* notebook, GtkNotebookTab type) focusTab;
+  extern(C) gboolean function(GtkNotebook* notebook, GtkNotebookTab type) focusTab;
 
   /** */
-  extern(C) bool function(GtkNotebook* notebook, int offset) changeCurrentPage;
+  extern(C) gboolean function(GtkNotebook* notebook, int offset) changeCurrentPage;
 
   /** */
   extern(C) void function(GtkNotebook* notebook, GtkDirectionType direction) moveFocusOut;
 
   /** */
-  extern(C) bool function(GtkNotebook* notebook, GtkDirectionType direction, bool moveToLast) reorderTab;
+  extern(C) gboolean function(GtkNotebook* notebook, GtkDirectionType direction, gboolean moveToLast) reorderTab;
 
   /** */
   extern(C) int function(GtkNotebook* notebook, GtkWidget* child, GtkWidget* tabLabel, GtkWidget* menuLabel, int position) insertPage;
@@ -15910,7 +15910,7 @@ struct GtkOverlayClass
       Signal emitted to determine the position and
          size of any overlay child widgets.
   */
-  extern(C) bool function(GtkOverlay* overlay, GtkWidget* widget, GtkAllocation* allocation) getChildPosition;
+  extern(C) gboolean function(GtkOverlay* overlay, GtkWidget* widget, GtkAllocation* allocation) getChildPosition;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -16187,22 +16187,22 @@ struct GtkPanedClass
   GtkContainerClass parentClass;
 
   /** */
-  extern(C) bool function(GtkPaned* paned, bool reverse) cycleChildFocus;
+  extern(C) gboolean function(GtkPaned* paned, gboolean reverse) cycleChildFocus;
 
   /** */
-  extern(C) bool function(GtkPaned* paned) toggleHandleFocus;
+  extern(C) gboolean function(GtkPaned* paned) toggleHandleFocus;
 
   /** */
-  extern(C) bool function(GtkPaned* paned, GtkScrollType scroll) moveHandle;
+  extern(C) gboolean function(GtkPaned* paned, GtkScrollType scroll) moveHandle;
 
   /** */
-  extern(C) bool function(GtkPaned* paned, bool reverse) cycleHandleFocus;
+  extern(C) gboolean function(GtkPaned* paned, gboolean reverse) cycleHandleFocus;
 
   /** */
-  extern(C) bool function(GtkPaned* paned) acceptPosition;
+  extern(C) gboolean function(GtkPaned* paned) acceptPosition;
 
   /** */
-  extern(C) bool function(GtkPaned* paned) cancelPosition;
+  extern(C) gboolean function(GtkPaned* paned) cancelPosition;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -16706,7 +16706,7 @@ struct GtkPrintOperationClass
       Signal emitted after the “begin-print” signal, but
          before the actual rendering starts.
   */
-  extern(C) bool function(GtkPrintOperation* operation, GtkPrintContext* context) paginate;
+  extern(C) gboolean function(GtkPrintOperation* operation, GtkPrintContext* context) paginate;
 
   /**
       Emitted once for every page that is printed,
@@ -16745,7 +16745,7 @@ struct GtkPrintOperationClass
       Signal emitted when a preview is requested from the
          native dialog.
   */
-  extern(C) bool function(GtkPrintOperation* operation, GtkPrintOperationPreview* preview, GtkPrintContext* context, GtkWindow* parent) preview;
+  extern(C) gboolean function(GtkPrintOperation* operation, GtkPrintOperationPreview* preview, GtkPrintContext* context, GtkWindow* parent) preview;
 
   /**
       Emitted after change of selected printer.
@@ -16796,7 +16796,7 @@ struct GtkPrintOperationPreviewIface
   extern(C) void function(GtkPrintOperationPreview* preview, int pageNr) renderPage;
 
   /** */
-  extern(C) bool function(GtkPrintOperationPreview* preview, int pageNr) isSelected;
+  extern(C) gboolean function(GtkPrintOperationPreview* preview, int pageNr) isSelected;
 
   /** */
   extern(C) void function(GtkPrintOperationPreview* preview) endPreview;
@@ -17350,7 +17350,7 @@ struct GtkRangeClass
   extern(C) void function(GtkRange* range, GtkBorder* border) getRangeBorder;
 
   /** */
-  extern(C) bool function(GtkRange* range, GtkScrollType scroll, double newValue) changeValue;
+  extern(C) gboolean function(GtkRange* range, GtkScrollType scroll, double newValue) changeValue;
 
   /** */
   extern(C) void function(GtkRange* range, GtkOrientation orientation, int* minimum, int* natural) getRangeSizeRequest;
@@ -17639,7 +17639,7 @@ struct GtkRecentChooserIface
   /**
       Sets uri as the current URI for chooser.
   */
-  extern(C) bool function(GtkRecentChooser* chooser, const(char)* uri, GError** _err) setCurrentUri;
+  extern(C) gboolean function(GtkRecentChooser* chooser, const(char)* uri, GError** _err) setCurrentUri;
 
   /**
       Gets the URI currently selected by chooser.
@@ -17649,7 +17649,7 @@ struct GtkRecentChooserIface
   /**
       Selects uri inside chooser.
   */
-  extern(C) bool function(GtkRecentChooser* chooser, const(char)* uri, GError** _err) selectUri;
+  extern(C) gboolean function(GtkRecentChooser* chooser, const(char)* uri, GError** _err) selectUri;
 
   /**
       Unselects uri inside chooser.
@@ -17854,7 +17854,7 @@ struct GtkRecentData
       whether this resource should be displayed only by the
         applications that have registered it or not.
   */
-  bool isPrivate;
+  gboolean isPrivate;
 }
 
 /**
@@ -18395,7 +18395,7 @@ struct GtkScrollableInterface
   GTypeInterface baseIface;
 
   /** */
-  extern(C) bool function(GtkScrollable* scrollable, GtkBorder* border) getBorder;
+  extern(C) gboolean function(GtkScrollable* scrollable, GtkBorder* border) getBorder;
 }
 
 /**
@@ -18587,7 +18587,7 @@ struct GtkScrolledWindowClass
       Keybinding signal which gets emitted when a
          keybinding that scrolls is pressed.
   */
-  extern(C) bool function(GtkScrolledWindow* scrolledWindow, GtkScrollType scroll, bool horizontal) scrollChild;
+  extern(C) gboolean function(GtkScrolledWindow* scrolledWindow, GtkScrollType scroll, gboolean horizontal) scrollChild;
 
   /**
       Keybinding signal which gets emitted when focus is
@@ -19228,7 +19228,7 @@ struct GtkSocketClass
   extern(C) void function(GtkSocket* socket) plugAdded;
 
   /** */
-  extern(C) bool function(GtkSocket* socket) plugRemoved;
+  extern(C) gboolean function(GtkSocket* socket) plugRemoved;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -19682,19 +19682,19 @@ struct GtkStatusIconClass
   extern(C) void function(GtkStatusIcon* statusIcon, uint button, uint activateTime) popupMenu;
 
   /** */
-  extern(C) bool function(GtkStatusIcon* statusIcon, int size) sizeChanged;
+  extern(C) gboolean function(GtkStatusIcon* statusIcon, int size) sizeChanged;
 
   /** */
-  extern(C) bool function(GtkStatusIcon* statusIcon, GdkEventButton* event) buttonPressEvent;
+  extern(C) gboolean function(GtkStatusIcon* statusIcon, GdkEventButton* event) buttonPressEvent;
 
   /** */
-  extern(C) bool function(GtkStatusIcon* statusIcon, GdkEventButton* event) buttonReleaseEvent;
+  extern(C) gboolean function(GtkStatusIcon* statusIcon, GdkEventButton* event) buttonReleaseEvent;
 
   /** */
-  extern(C) bool function(GtkStatusIcon* statusIcon, GdkEventScroll* event) scrollEvent;
+  extern(C) gboolean function(GtkStatusIcon* statusIcon, GdkEventScroll* event) scrollEvent;
 
   /** */
-  extern(C) bool function(GtkStatusIcon* statusIcon, int x, int y, bool keyboardMode, GtkTooltip* tooltip) queryTooltip;
+  extern(C) gboolean function(GtkStatusIcon* statusIcon, int x, int y, gboolean keyboardMode, GtkTooltip* tooltip) queryTooltip;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -19990,7 +19990,7 @@ struct GtkStyleClass
   extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) drawShadow;
 
   /** */
-  extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, GtkArrowType arrowType, bool fill, int x, int y, int width, int height) drawArrow;
+  extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, GtkArrowType arrowType, gboolean fill, int x, int y, int width, int height) drawArrow;
 
   /** */
   extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) drawDiamond;
@@ -20032,7 +20032,7 @@ struct GtkStyleClass
   extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, int x, int y, GtkExpanderStyle expanderStyle) drawExpander;
 
   /** */
-  extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, bool useText, GtkWidget* widget, const(char)* detail, int x, int y, PangoLayout* layout) drawLayout;
+  extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, gboolean useText, GtkWidget* widget, const(char)* detail, int x, int y, PangoLayout* layout) drawLayout;
 
   /** */
   extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, GdkWindowEdge edge, int x, int y, int width, int height) drawResizeGrip;
@@ -20232,7 +20232,7 @@ struct GtkStyleProviderIface
   /**
       Gets the value of a widget style property that applies to a widget path.
   */
-  extern(C) bool function(GtkStyleProvider* provider, GtkWidgetPath* path, GtkStateFlags state, GParamSpec* pspec, GValue* value) getStyleProperty;
+  extern(C) gboolean function(GtkStyleProvider* provider, GtkWidgetPath* path, GtkStateFlags state, GParamSpec* pspec, GValue* value) getStyleProperty;
 
   /**
       Gets the icon factory that applies to a widget path.
@@ -20303,7 +20303,7 @@ struct GtkSwitchClass
   /**
       Class handler for the ::state-set signal.
   */
-  extern(C) bool function(GtkSwitch* sw, bool state) stateSet;
+  extern(C) gboolean function(GtkSwitch* sw, gboolean state) stateSet;
 
   /** */
   extern(C) void function() SwitchPadding1;
@@ -21078,7 +21078,7 @@ struct GtkTextTagClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GtkTextTag* tag, GObject* eventObject, GdkEvent* event, const(GtkTextIter)* iter) event;
+  extern(C) gboolean function(GtkTextTag* tag, GObject* eventObject, GdkEvent* event, const(GtkTextIter)* iter) event;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -21134,7 +21134,7 @@ struct GtkTextTagTableClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) void function(GtkTextTagTable* table, GtkTextTag* tag, bool sizeChanged) tagChanged;
+  extern(C) void function(GtkTextTagTable* table, GtkTextTag* tag, gboolean sizeChanged) tagChanged;
 
   /** */
   extern(C) void function(GtkTextTagTable* table, GtkTextTag* tag) tagAdded;
@@ -21234,7 +21234,7 @@ struct GtkTextViewClass
       The class handler for the #GtkTextView::move-cursor
         keybinding signal.
   */
-  extern(C) void function(GtkTextView* textView, GtkMovementStep step, int count, bool extendSelection) moveCursor;
+  extern(C) void function(GtkTextView* textView, GtkMovementStep step, int count, gboolean extendSelection) moveCursor;
 
   /**
       The class handler for the #GtkTextView::set-anchor
@@ -21306,7 +21306,7 @@ struct GtkTextViewClass
       The class handler for the #GtkTextView::extend-selection
         signal. Since 3.16
   */
-  extern(C) bool function(GtkTextView* textView, GtkTextExtendSelection granularity, const(GtkTextIter)* location, GtkTextIter* start, GtkTextIter* end) extendSelection;
+  extern(C) gboolean function(GtkTextView* textView, GtkTextExtendSelection granularity, const(GtkTextIter)* location, GtkTextIter* start, GtkTextIter* end) extendSelection;
 
   /** */
   extern(C) void function(GtkTextView* textView) insertEmoji;
@@ -21532,7 +21532,7 @@ struct GtkToggleActionEntry
   /**
       The initial state of the toggle action.
   */
-  bool isActive;
+  gboolean isActive;
 }
 
 /** */
@@ -21802,7 +21802,7 @@ struct GtkToolItemClass
          information from tool_item about whether the item should appear in
          the toolbar overflow menu.
   */
-  extern(C) bool function(GtkToolItem* toolItem) createMenuProxy;
+  extern(C) gboolean function(GtkToolItem* toolItem) createMenuProxy;
 
   /**
       Signal emitted when some property of the
@@ -22079,7 +22079,7 @@ struct GtkToolbarClass
   extern(C) void function(GtkToolbar* toolbar, GtkToolbarStyle style) styleChanged;
 
   /** */
-  extern(C) bool function(GtkToolbar* toolbar, int x, int y, int buttonNumber) popupContextMenu;
+  extern(C) gboolean function(GtkToolbar* toolbar, int x, int y, int buttonNumber) popupContextMenu;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -22173,13 +22173,13 @@ struct GtkTreeDragDestIface
          before the path dest, deriving the contents of the row from
          selection_data.
   */
-  extern(C) bool function(GtkTreeDragDest* dragDest, GtkTreePath* dest, GtkSelectionData* selectionData) dragDataReceived;
+  extern(C) gboolean function(GtkTreeDragDest* dragDest, GtkTreePath* dest, GtkSelectionData* selectionData) dragDataReceived;
 
   /**
       Determines whether a drop is possible before
          the given dest_path, at the same depth as dest_path.
   */
-  extern(C) bool function(GtkTreeDragDest* dragDest, GtkTreePath* destPath, GtkSelectionData* selectionData) rowDropPossible;
+  extern(C) gboolean function(GtkTreeDragDest* dragDest, GtkTreePath* destPath, GtkSelectionData* selectionData) rowDropPossible;
 }
 
 /** */
@@ -22195,19 +22195,19 @@ struct GtkTreeDragSourceIface
       Asks the #GtkTreeDragSource whether a particular
          row can be used as the source of a DND operation.
   */
-  extern(C) bool function(GtkTreeDragSource* dragSource, GtkTreePath* path) rowDraggable;
+  extern(C) gboolean function(GtkTreeDragSource* dragSource, GtkTreePath* path) rowDraggable;
 
   /**
       Asks the #GtkTreeDragSource to fill in
          selection_data with a representation of the row at path.
   */
-  extern(C) bool function(GtkTreeDragSource* dragSource, GtkTreePath* path, GtkSelectionData* selectionData) dragDataGet;
+  extern(C) gboolean function(GtkTreeDragSource* dragSource, GtkTreePath* path, GtkSelectionData* selectionData) dragDataGet;
 
   /**
       Asks the #GtkTreeDragSource to delete the row at
          path, because it was moved somewhere else via drag-and-drop.
   */
-  extern(C) bool function(GtkTreeDragSource* dragSource, GtkTreePath* path) dragDataDelete;
+  extern(C) gboolean function(GtkTreeDragSource* dragSource, GtkTreePath* path) dragDataDelete;
 }
 
 /**
@@ -22525,7 +22525,7 @@ struct GtkTreeModelFilterClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GtkTreeModelFilter* self, GtkTreeModel* childModel, GtkTreeIter* iter) visible;
+  extern(C) gboolean function(GtkTreeModelFilter* self, GtkTreeModel* childModel, GtkTreeIter* iter) visible;
 
   /** */
   extern(C) void function(GtkTreeModelFilter* self, GtkTreeModel* childModel, GtkTreeIter* iter, GValue* value, int column) modify;
@@ -22598,7 +22598,7 @@ struct GtkTreeModelIface
   /**
       Sets iter to a valid iterator pointing to path.
   */
-  extern(C) bool function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreePath* path) getIter;
+  extern(C) gboolean function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreePath* path) getIter;
 
   /**
       Gets a newly-created #GtkTreePath referenced by iter.
@@ -22614,23 +22614,23 @@ struct GtkTreeModelIface
       Sets iter to point to the node following it at the
          current level.
   */
-  extern(C) bool function(GtkTreeModel* treeModel, GtkTreeIter* iter) iterNext;
+  extern(C) gboolean function(GtkTreeModel* treeModel, GtkTreeIter* iter) iterNext;
 
   /**
       Sets iter to point to the previous node at the
          current level.
   */
-  extern(C) bool function(GtkTreeModel* treeModel, GtkTreeIter* iter) iterPrevious;
+  extern(C) gboolean function(GtkTreeModel* treeModel, GtkTreeIter* iter) iterPrevious;
 
   /**
       Sets iter to point to the first child of parent.
   */
-  extern(C) bool function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent) iterChildren;
+  extern(C) gboolean function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent) iterChildren;
 
   /**
       true if iter has children, false otherwise.
   */
-  extern(C) bool function(GtkTreeModel* treeModel, GtkTreeIter* iter) iterHasChild;
+  extern(C) gboolean function(GtkTreeModel* treeModel, GtkTreeIter* iter) iterHasChild;
 
   /**
       Gets the number of children that iter has.
@@ -22641,12 +22641,12 @@ struct GtkTreeModelIface
       Sets iter to be the child of parent, using the
          given index.
   */
-  extern(C) bool function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent, int n) iterNthChild;
+  extern(C) gboolean function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent, int n) iterNthChild;
 
   /**
       Sets iter to be the parent of child.
   */
-  extern(C) bool function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* child) iterParent;
+  extern(C) gboolean function(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* child) iterParent;
 
   /**
       Lets the tree ref the node.
@@ -22882,7 +22882,7 @@ struct GtkTreeSortableIface
       Fills in sort_column_id and order with the
          current sort column and the order.
   */
-  extern(C) bool function(GtkTreeSortable* sortable, int* sortColumnId, GtkSortType* order) getSortColumnId;
+  extern(C) gboolean function(GtkTreeSortable* sortable, int* sortColumnId, GtkSortType* order) getSortColumnId;
 
   /**
       Sets the current sort column to be
@@ -22906,7 +22906,7 @@ struct GtkTreeSortableIface
       true if the model has a default sort
       function.
   */
-  extern(C) bool function(GtkTreeSortable* sortable) hasDefaultSortFunc;
+  extern(C) gboolean function(GtkTreeSortable* sortable) hasDefaultSortFunc;
 }
 
 /**
@@ -23085,10 +23085,10 @@ struct GtkTreeViewClass
   extern(C) void function(GtkTreeView* treeView, GtkTreePath* path, GtkTreeViewColumn* column) rowActivated;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) testExpandRow;
+  extern(C) gboolean function(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) testExpandRow;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) testCollapseRow;
+  extern(C) gboolean function(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) testCollapseRow;
 
   /** */
   extern(C) void function(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) rowExpanded;
@@ -23103,28 +23103,28 @@ struct GtkTreeViewClass
   extern(C) void function(GtkTreeView* treeView) cursorChanged;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView, GtkMovementStep step, int count) moveCursor;
+  extern(C) gboolean function(GtkTreeView* treeView, GtkMovementStep step, int count) moveCursor;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView) selectAll;
+  extern(C) gboolean function(GtkTreeView* treeView) selectAll;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView) unselectAll;
+  extern(C) gboolean function(GtkTreeView* treeView) unselectAll;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView, bool startEditing) selectCursorRow;
+  extern(C) gboolean function(GtkTreeView* treeView, gboolean startEditing) selectCursorRow;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView) toggleCursorRow;
+  extern(C) gboolean function(GtkTreeView* treeView) toggleCursorRow;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView, bool logical, bool expand, bool openAll) expandCollapseCursorRow;
+  extern(C) gboolean function(GtkTreeView* treeView, gboolean logical, gboolean expand, gboolean openAll) expandCollapseCursorRow;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView) selectCursorParent;
+  extern(C) gboolean function(GtkTreeView* treeView) selectCursorParent;
 
   /** */
-  extern(C) bool function(GtkTreeView* treeView) startInteractiveSearch;
+  extern(C) gboolean function(GtkTreeView* treeView) startInteractiveSearch;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -24247,7 +24247,7 @@ struct GtkWidgetClass
         GTK+ grab (not a pointer or keyboard grab) on another widget, or
         when it becomes unshadowed due to a grab being removed.
   */
-  extern(C) void function(GtkWidget* widget, bool wasGrabbed) grabNotify;
+  extern(C) void function(GtkWidget* widget, gboolean wasGrabbed) grabNotify;
 
   /**
       Signal emitted for each child property that has
@@ -24258,7 +24258,7 @@ struct GtkWidgetClass
   /**
       Signal emitted when a widget is supposed to render itself.
   */
-  extern(C) bool function(GtkWidget* widget, cairo_t* cr) draw;
+  extern(C) gboolean function(GtkWidget* widget, cairo_t* cr) draw;
 
   /**
       This allows a widget to tell its parent container whether
@@ -24322,7 +24322,7 @@ struct GtkWidgetClass
       Activates the @widget if @group_cycling is
         false, and just grabs the focus if @group_cycling is true.
   */
-  extern(C) bool function(GtkWidget* widget, bool groupCycling) mnemonicActivate;
+  extern(C) gboolean function(GtkWidget* widget, gboolean groupCycling) mnemonicActivate;
 
   /**
       Causes @widget to have the keyboard focus for the
@@ -24331,7 +24331,7 @@ struct GtkWidgetClass
   extern(C) void function(GtkWidget* widget) grabFocus;
 
   /** */
-  extern(C) bool function(GtkWidget* widget, GtkDirectionType direction) focus;
+  extern(C) gboolean function(GtkWidget* widget, GtkDirectionType direction) focus;
 
   /**
       Signal emitted when a change of focus is requested
@@ -24341,7 +24341,7 @@ struct GtkWidgetClass
   /**
       Signal emitted if keyboard navigation fails.
   */
-  extern(C) bool function(GtkWidget* widget, GtkDirectionType direction) keynavFailed;
+  extern(C) gboolean function(GtkWidget* widget, GtkDirectionType direction) keynavFailed;
 
   /**
       The GTK+ main loop will emit three signals for each GDK
@@ -24350,145 +24350,145 @@ struct GtkWidgetClass
         (e.g. "key-press-event") and finally a generic "event-after"
         signal.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEvent* event) event;
+  extern(C) gboolean function(GtkWidget* widget, GdkEvent* event) event;
 
   /**
       Signal will be emitted when a button
         (typically from a mouse) is pressed.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventButton* event) buttonPressEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventButton* event) buttonPressEvent;
 
   /**
       Signal will be emitted when a button
         (typically from a mouse) is released.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventButton* event) buttonReleaseEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventButton* event) buttonReleaseEvent;
 
   /**
       Signal emitted when a button in the 4 to 7 range is
         pressed.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventScroll* event) scrollEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventScroll* event) scrollEvent;
 
   /**
       Signal emitted when the pointer moves over
         the widget’s #GdkWindow.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventMotion* event) motionNotifyEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventMotion* event) motionNotifyEvent;
 
   /**
       Signal emitted if a user requests that a toplevel
         window is closed.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventAny* event) deleteEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventAny* event) deleteEvent;
 
   /**
       Signal is emitted when a #GdkWindow is destroyed.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventAny* event) destroyEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventAny* event) destroyEvent;
 
   /**
       Signal emitted when a key is pressed.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventKey* event) keyPressEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventKey* event) keyPressEvent;
 
   /**
       Signal is emitted when a key is released.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventKey* event) keyReleaseEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventKey* event) keyReleaseEvent;
 
   /**
       Signal event will be emitted when the pointer
         enters the widget’s window.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventCrossing* event) enterNotifyEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventCrossing* event) enterNotifyEvent;
 
   /**
       Will be emitted when the pointer leaves the
         widget’s window.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventCrossing* event) leaveNotifyEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventCrossing* event) leaveNotifyEvent;
 
   /**
       Signal will be emitted when the size, position or
         stacking of the widget’s window has changed.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventConfigure* event) configureEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventConfigure* event) configureEvent;
 
   /**
       Signal emitted when the keyboard focus enters the
       widget’s window.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventFocus* event) focusInEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventFocus* event) focusInEvent;
 
   /**
       Signal emitted when the keyboard focus leaves the
       widget’s window.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventFocus* event) focusOutEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventFocus* event) focusOutEvent;
 
   /**
       Signal emitted when the widget’s window is mapped.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventAny* event) mapEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventAny* event) mapEvent;
 
   /**
       Signal will be emitted when the widget’s window is
         unmapped.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventAny* event) unmapEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventAny* event) unmapEvent;
 
   /**
       Signal will be emitted when a property on
         the widget’s window has been changed or deleted.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventProperty* event) propertyNotifyEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventProperty* event) propertyNotifyEvent;
 
   /**
       Signal will be emitted when the the
         widget’s window has lost ownership of a selection.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventSelection* event) selectionClearEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventSelection* event) selectionClearEvent;
 
   /**
       Signal will be emitted when another
         client requests ownership of the selection owned by the widget's
         window.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventSelection* event) selectionRequestEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventSelection* event) selectionRequestEvent;
 
   /** */
-  extern(C) bool function(GtkWidget* widget, GdkEventSelection* event) selectionNotifyEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventSelection* event) selectionNotifyEvent;
 
   /** */
-  extern(C) bool function(GtkWidget* widget, GdkEventProximity* event) proximityInEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventProximity* event) proximityInEvent;
 
   /** */
-  extern(C) bool function(GtkWidget* widget, GdkEventProximity* event) proximityOutEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventProximity* event) proximityOutEvent;
 
   /**
       Signal emitted when the widget’s window is
         obscured or unobscured.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventVisibility* event) visibilityNotifyEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventVisibility* event) visibilityNotifyEvent;
 
   /**
       Signal emitted when the state of the toplevel
         window associated to the widget changes.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventWindowState* event) windowStateEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventWindowState* event) windowStateEvent;
 
   /**
       Signal emitted when a redirected window belonging to
         widget gets drawn into.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventExpose* event) damageEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventExpose* event) damageEvent;
 
   /**
       Signal emitted when a pointer or keyboard grab
         on a window belonging to widget gets broken.
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventGrabBroken* event) grabBrokenEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventGrabBroken* event) grabBrokenEvent;
 
   /** */
   extern(C) void function(GtkWidget* widget, GtkSelectionData* selectionData, uint info, uint time) selectionGet;
@@ -24530,13 +24530,13 @@ struct GtkWidgetClass
       signal emitted on the drop site when the user moves
         the cursor over the widget during a drag.
   */
-  extern(C) bool function(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) dragMotion;
+  extern(C) gboolean function(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) dragMotion;
 
   /**
       Signal emitted on the drop site when the user drops the
         data onto the widget.
   */
-  extern(C) bool function(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) dragDrop;
+  extern(C) gboolean function(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) dragDrop;
 
   /**
       Signal emitted on the drop site when the
@@ -24548,16 +24548,16 @@ struct GtkWidgetClass
       Signal emitted on the drag source when a drag has
         failed.
   */
-  extern(C) bool function(GtkWidget* widget, GdkDragContext* context, GtkDragResult result) dragFailed;
+  extern(C) gboolean function(GtkWidget* widget, GdkDragContext* context, GtkDragResult result) dragFailed;
 
   /**
       Signal emitted whenever a widget should pop up a
         context menu.
   */
-  extern(C) bool function(GtkWidget* widget) popupMenu;
+  extern(C) gboolean function(GtkWidget* widget) popupMenu;
 
   /** */
-  extern(C) bool function(GtkWidget* widget, GtkWidgetHelpType helpType) showHelp;
+  extern(C) gboolean function(GtkWidget* widget, GtkWidgetHelpType helpType) showHelp;
 
   /**
       Returns the accessible object that describes the
@@ -24576,7 +24576,7 @@ struct GtkWidgetClass
         to override the default GtkWidget handling for determining whether
         an accelerator can be activated.
   */
-  extern(C) bool function(GtkWidget* widget, uint signalId) canActivateAccel;
+  extern(C) gboolean function(GtkWidget* widget, uint signalId) canActivateAccel;
 
   /**
       Signal emitted when the composited status of
@@ -24589,13 +24589,13 @@ struct GtkWidgetClass
         hover timeout has expired with the cursor hovering “above”
         widget; or emitted when widget got focus in keyboard mode.
   */
-  extern(C) bool function(GtkWidget* widget, int x, int y, bool keyboardTooltip, GtkTooltip* tooltip) queryTooltip;
+  extern(C) gboolean function(GtkWidget* widget, int x, int y, gboolean keyboardTooltip, GtkTooltip* tooltip) queryTooltip;
 
   /**
       Computes whether a container should give this
         widget extra space when possible.
   */
-  extern(C) void function(GtkWidget* widget, bool* hexpandP, bool* vexpandP) computeExpand;
+  extern(C) void function(GtkWidget* widget, gboolean* hexpandP, gboolean* vexpandP) computeExpand;
 
   /**
       Convert an initial size request from a widget's
@@ -24644,7 +24644,7 @@ struct GtkWidgetClass
   /**
       Signal emitted when a touch event happens
   */
-  extern(C) bool function(GtkWidget* widget, GdkEventTouch* event) touchEvent;
+  extern(C) gboolean function(GtkWidget* widget, GdkEventTouch* event) touchEvent;
 
   /** */
   extern(C) void function(GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight, int* minimumBaseline, int* naturalBaseline) getPreferredHeightAndBaselineForWidth;
@@ -24849,7 +24849,7 @@ struct GtkWindowClass
       Class handler for the #GtkWindow::enable-debugging
         keybinding signal. Since: 3.14
   */
-  extern(C) bool function(GtkWindow* window, bool toggle) enableDebugging;
+  extern(C) gboolean function(GtkWindow* window, gboolean toggle) enableDebugging;
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -24948,11 +24948,11 @@ struct _GtkMountOperationHandlerSkeletonClass
 /** */
 struct _GtkMountOperationHandlerSkeletonPrivate;
 
-alias extern(C) bool function(GtkAccelGroup* accelGroup, GObject* acceleratable, uint keyval, GdkModifierType modifier) GtkAccelGroupActivate;
+alias extern(C) gboolean function(GtkAccelGroup* accelGroup, GObject* acceleratable, uint keyval, GdkModifierType modifier) GtkAccelGroupActivate;
 
-alias extern(C) bool function(GtkAccelKey* key, GClosure* closure, void* data) GtkAccelGroupFindFunc;
+alias extern(C) gboolean function(GtkAccelKey* key, GClosure* closure, void* data) GtkAccelGroupFindFunc;
 
-alias extern(C) void function(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, bool changed) GtkAccelMapForeach;
+alias extern(C) void function(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed) GtkAccelMapForeach;
 
 alias extern(C) int function(int currentPage, void* data) GtkAssistantPageFunc;
 
@@ -24962,9 +24962,9 @@ alias extern(C) char* function(GtkCalendar* calendar, uint year, uint month, uin
 
 alias extern(C) void function(GtkWidget* widget, void* data) GtkCallback;
 
-alias extern(C) bool function(GtkCellRenderer* renderer, const(GdkRectangle)* cellArea, const(GdkRectangle)* cellBackground, void* data) GtkCellAllocCallback;
+alias extern(C) gboolean function(GtkCellRenderer* renderer, const(GdkRectangle)* cellArea, const(GdkRectangle)* cellBackground, void* data) GtkCellAllocCallback;
 
-alias extern(C) bool function(GtkCellRenderer* renderer, void* data) GtkCellCallback;
+alias extern(C) gboolean function(GtkCellRenderer* renderer, void* data) GtkCellCallback;
 
 alias extern(C) void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data) GtkCellLayoutDataFunc;
 
@@ -24988,19 +24988,19 @@ alias extern(C) void function(const(GdkColor)* colors, int nColors) GtkColorSele
 
 alias extern(C) void function(GdkScreen* screen, const(GdkColor)* colors, int nColors) GtkColorSelectionChangePaletteWithScreenFunc;
 
-alias extern(C) bool function(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData) GtkEntryCompletionMatchFunc;
+alias extern(C) gboolean function(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData) GtkEntryCompletionMatchFunc;
 
-alias extern(C) bool function(const(GtkFileFilterInfo)* filterInfo, void* data) GtkFileFilterFunc;
+alias extern(C) gboolean function(const(GtkFileFilterInfo)* filterInfo, void* data) GtkFileFilterFunc;
 
 alias extern(C) GtkWidget* function(GObject* item, void* userData) GtkFlowBoxCreateWidgetFunc;
 
-alias extern(C) bool function(GtkFlowBoxChild* child, void* userData) GtkFlowBoxFilterFunc;
+alias extern(C) gboolean function(GtkFlowBoxChild* child, void* userData) GtkFlowBoxFilterFunc;
 
 alias extern(C) void function(GtkFlowBox* box, GtkFlowBoxChild* child, void* userData) GtkFlowBoxForeachFunc;
 
 alias extern(C) int function(GtkFlowBoxChild* child1, GtkFlowBoxChild* child2, void* userData) GtkFlowBoxSortFunc;
 
-alias extern(C) bool function(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data) GtkFontFilterFunc;
+alias extern(C) gboolean function(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data) GtkFontFilterFunc;
 
 alias extern(C) void function(GtkIconView* iconView, GtkTreePath* path, void* data) GtkIconViewForeachFunc;
 
@@ -25008,7 +25008,7 @@ alias extern(C) int function(GtkWidget* grabWidget, GdkEventKey* event, void* fu
 
 alias extern(C) GtkWidget* function(GObject* item, void* userData) GtkListBoxCreateWidgetFunc;
 
-alias extern(C) bool function(GtkListBoxRow* row, void* userData) GtkListBoxFilterFunc;
+alias extern(C) gboolean function(GtkListBoxRow* row, void* userData) GtkListBoxFilterFunc;
 
 alias extern(C) void function(GtkListBox* box, GtkListBoxRow* row, void* userData) GtkListBoxForeachFunc;
 
@@ -25018,7 +25018,7 @@ alias extern(C) void function(GtkListBoxRow* row, GtkListBoxRow* before, void* u
 
 alias extern(C) void function(GtkWidget* attachWidget, GtkMenu* menu) GtkMenuDetachFunc;
 
-alias extern(C) void function(GtkMenu* menu, int* x, int* y, bool* pushIn, void* userData) GtkMenuPositionFunc;
+alias extern(C) void function(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData) GtkMenuPositionFunc;
 
 alias extern(C) void function(GdkDisplay* display) GtkModuleDisplayInitFunc;
 
@@ -25028,23 +25028,23 @@ alias extern(C) void function(GtkPageSetup* pageSetup, void* data) GtkPageSetupD
 
 alias extern(C) void function(const(char)* key, const(char)* value, void* userData) GtkPrintSettingsFunc;
 
-alias extern(C) bool function(const(GParamSpec)* pspec, const(GString)* rcString, GValue* propertyValue) GtkRcPropertyParser;
+alias extern(C) gboolean function(const(GParamSpec)* pspec, const(GString)* rcString, GValue* propertyValue) GtkRcPropertyParser;
 
-alias extern(C) bool function(const(GtkRecentFilterInfo)* filterInfo, void* userData) GtkRecentFilterFunc;
+alias extern(C) gboolean function(const(GtkRecentFilterInfo)* filterInfo, void* userData) GtkRecentFilterFunc;
 
 alias extern(C) int function(GtkRecentInfo* a, GtkRecentInfo* b, void* userData) GtkRecentSortFunc;
 
-alias extern(C) bool function(const(char)* string_, GValue* value, GError** _err) GtkStylePropertyParser;
+alias extern(C) gboolean function(const(char)* string_, GValue* value, GError** _err) GtkStylePropertyParser;
 
-alias extern(C) bool function(GtkTextBuffer* registerBuffer, GtkTextBuffer* contentBuffer, GtkTextIter* iter, const(ubyte)* data, size_t length, bool createTags, void* userData, GError** _err) GtkTextBufferDeserializeFunc;
+alias extern(C) gboolean function(GtkTextBuffer* registerBuffer, GtkTextBuffer* contentBuffer, GtkTextIter* iter, const(ubyte)* data, size_t length, gboolean createTags, void* userData, GError** _err) GtkTextBufferDeserializeFunc;
 
 alias extern(C) ubyte* function(GtkTextBuffer* registerBuffer, GtkTextBuffer* contentBuffer, const(GtkTextIter)* start, const(GtkTextIter)* end, size_t* length, void* userData) GtkTextBufferSerializeFunc;
 
-alias extern(C) bool function(dchar ch, void* userData) GtkTextCharPredicate;
+alias extern(C) gboolean function(dchar ch, void* userData) GtkTextCharPredicate;
 
 alias extern(C) void function(GtkTextTag* tag, void* data) GtkTextTagTableForeach;
 
-alias extern(C) bool function(GtkWidget* widget, GdkFrameClock* frameClock, void* userData) GtkTickCallback;
+alias extern(C) gboolean function(GtkWidget* widget, GdkFrameClock* frameClock, void* userData) GtkTickCallback;
 
 alias extern(C) char* function(const(char)* path, void* funcData) GtkTranslateFunc;
 
@@ -25056,21 +25056,21 @@ alias extern(C) int function(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b
 
 alias extern(C) void function(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data) GtkTreeModelFilterModifyFunc;
 
-alias extern(C) bool function(GtkTreeModel* model, GtkTreeIter* iter, void* data) GtkTreeModelFilterVisibleFunc;
+alias extern(C) gboolean function(GtkTreeModel* model, GtkTreeIter* iter, void* data) GtkTreeModelFilterVisibleFunc;
 
-alias extern(C) bool function(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) GtkTreeModelForeachFunc;
+alias extern(C) gboolean function(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) GtkTreeModelForeachFunc;
 
 alias extern(C) void function(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) GtkTreeSelectionForeachFunc;
 
-alias extern(C) bool function(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, bool pathCurrentlySelected, void* data) GtkTreeSelectionFunc;
+alias extern(C) gboolean function(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, gboolean pathCurrentlySelected, void* data) GtkTreeSelectionFunc;
 
-alias extern(C) bool function(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data) GtkTreeViewColumnDropFunc;
+alias extern(C) gboolean function(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data) GtkTreeViewColumnDropFunc;
 
 alias extern(C) void function(GtkTreeView* treeView, GtkTreePath* path, void* userData) GtkTreeViewMappingFunc;
 
-alias extern(C) bool function(GtkTreeModel* model, GtkTreeIter* iter, void* data) GtkTreeViewRowSeparatorFunc;
+alias extern(C) gboolean function(GtkTreeModel* model, GtkTreeIter* iter, void* data) GtkTreeViewRowSeparatorFunc;
 
-alias extern(C) bool function(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData) GtkTreeViewSearchEqualFunc;
+alias extern(C) gboolean function(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData) GtkTreeViewSearchEqualFunc;
 
 alias extern(C) void function(GtkTreeView* treeView, GtkWidget* searchDialog, void* userData) GtkTreeViewSearchPositionFunc;
 

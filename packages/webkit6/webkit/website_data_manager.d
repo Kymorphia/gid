@@ -104,7 +104,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_website_data_manager_clear_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_website_data_manager_clear_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -201,7 +201,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   bool getFaviconsEnabled()
   {
     bool _retval;
-    _retval = webkit_website_data_manager_get_favicons_enabled(cast(WebKitWebsiteDataManager*)this._cPtr);
+    _retval = cast(bool)webkit_website_data_manager_get_favicons_enabled(cast(WebKitWebsiteDataManager*)this._cPtr);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   bool isEphemeral()
   {
     bool _retval;
-    _retval = webkit_website_data_manager_is_ephemeral(cast(WebKitWebsiteDataManager*)this._cPtr);
+    _retval = cast(bool)webkit_website_data_manager_is_ephemeral(cast(WebKitWebsiteDataManager*)this._cPtr);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_website_data_manager_remove_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_website_data_manager_remove_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

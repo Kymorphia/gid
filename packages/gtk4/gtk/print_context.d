@@ -188,7 +188,7 @@ class PrintContext : gobject.object.ObjectWrap
   bool getHardMargins(out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
-    _retval = gtk_print_context_get_hard_margins(cast(GtkPrintContext*)this._cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
+    _retval = cast(bool)gtk_print_context_get_hard_margins(cast(GtkPrintContext*)this._cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
     return _retval;
   }
 

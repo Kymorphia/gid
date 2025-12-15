@@ -117,7 +117,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   bool getEditing()
   {
     bool _retval;
-    _retval = gtk_editable_label_get_editing(cast(GtkEditableLabel*)this._cPtr);
+    _retval = cast(bool)gtk_editable_label_get_editing(cast(GtkEditableLabel*)this._cPtr);
     return _retval;
   }
 

@@ -293,7 +293,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   bool getEnableExpansion()
   {
     bool _retval;
-    _retval = adw_expander_row_get_enable_expansion(cast(AdwExpanderRow*)this._cPtr);
+    _retval = cast(bool)adw_expander_row_get_enable_expansion(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   bool getExpanded()
   {
     bool _retval;
-    _retval = adw_expander_row_get_expanded(cast(AdwExpanderRow*)this._cPtr);
+    _retval = cast(bool)adw_expander_row_get_expanded(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   bool getShowEnableSwitch()
   {
     bool _retval;
-    _retval = adw_expander_row_get_show_enable_switch(cast(AdwExpanderRow*)this._cPtr);
+    _retval = cast(bool)adw_expander_row_get_show_enable_switch(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 

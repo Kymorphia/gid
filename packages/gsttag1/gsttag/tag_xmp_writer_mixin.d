@@ -52,7 +52,7 @@ template TagXmpWriterT()
   {
     bool _retval;
     const(char)* _schema = schema.toCString(No.Alloc);
-    _retval = gst_tag_xmp_writer_has_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
+    _retval = cast(bool)gst_tag_xmp_writer_has_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
     return _retval;
   }
 

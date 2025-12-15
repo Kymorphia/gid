@@ -198,7 +198,7 @@ class ServerOperation : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _itemPath = itemPath.toCString(No.Alloc);
-    _retval = gda_server_operation_del_item_from_sequence(cast(GdaServerOperation*)this._cPtr, _itemPath);
+    _retval = cast(bool)gda_server_operation_del_item_from_sequence(cast(GdaServerOperation*)this._cPtr, _itemPath);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class ServerOperation : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _xmlFile = xmlFile.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_server_operation_is_valid(cast(GdaServerOperation*)this._cPtr, _xmlFile, &_err);
+    _retval = cast(bool)gda_server_operation_is_valid(cast(GdaServerOperation*)this._cPtr, _xmlFile, &_err);
     if (_err)
       throw new ServerOperationException(_err);
     return _retval;
@@ -408,7 +408,7 @@ class ServerOperation : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_server_operation_load_data_from_xml(cast(GdaServerOperation*)this._cPtr, node, &_err);
+    _retval = cast(bool)gda_server_operation_load_data_from_xml(cast(GdaServerOperation*)this._cPtr, node, &_err);
     if (_err)
       throw new ServerOperationException(_err);
     return _retval;
@@ -428,7 +428,7 @@ class ServerOperation : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _provider = provider.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_server_operation_perform_create_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
+    _retval = cast(bool)gda_server_operation_perform_create_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
     if (_err)
       throw new ServerOperationException(_err);
     return _retval;
@@ -445,7 +445,7 @@ class ServerOperation : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_server_operation_perform_create_table(cast(GdaServerOperation*)this._cPtr, &_err);
+    _retval = cast(bool)gda_server_operation_perform_create_table(cast(GdaServerOperation*)this._cPtr, &_err);
     if (_err)
       throw new ServerOperationException(_err);
     return _retval;
@@ -465,7 +465,7 @@ class ServerOperation : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _provider = provider.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_server_operation_perform_drop_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
+    _retval = cast(bool)gda_server_operation_perform_drop_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
     if (_err)
       throw new ServerOperationException(_err);
     return _retval;
@@ -480,7 +480,7 @@ class ServerOperation : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_server_operation_perform_drop_table(cast(GdaServerOperation*)this._cPtr, &_err);
+    _retval = cast(bool)gda_server_operation_perform_drop_table(cast(GdaServerOperation*)this._cPtr, &_err);
     if (_err)
       throw new ServerOperationException(_err);
     return _retval;
@@ -529,7 +529,7 @@ class ServerOperation : gobject.object.ObjectWrap
     const(char)* _value = value.toCString(No.Alloc);
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_server_operation_set_value_at_path(cast(GdaServerOperation*)this._cPtr, _value, _path, &_err);
+    _retval = cast(bool)gda_server_operation_set_value_at_path(cast(GdaServerOperation*)this._cPtr, _value, _path, &_err);
     if (_err)
       throw new ServerOperationException(_err);
     return _retval;

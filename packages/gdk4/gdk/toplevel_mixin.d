@@ -307,7 +307,7 @@ template ToplevelT()
   override bool lower()
   {
     bool _retval;
-    _retval = gdk_toplevel_lower(cast(GdkToplevel*)this._cPtr);
+    _retval = cast(bool)gdk_toplevel_lower(cast(GdkToplevel*)this._cPtr);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ template ToplevelT()
   override bool minimize()
   {
     bool _retval;
-    _retval = gdk_toplevel_minimize(cast(GdkToplevel*)this._cPtr);
+    _retval = cast(bool)gdk_toplevel_minimize(cast(GdkToplevel*)this._cPtr);
     return _retval;
   }
 
@@ -490,7 +490,7 @@ template ToplevelT()
   override bool showWindowMenu(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_toplevel_show_window_menu(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ template ToplevelT()
   override bool supportsEdgeConstraints()
   {
     bool _retval;
-    _retval = gdk_toplevel_supports_edge_constraints(cast(GdkToplevel*)this._cPtr);
+    _retval = cast(bool)gdk_toplevel_supports_edge_constraints(cast(GdkToplevel*)this._cPtr);
     return _retval;
   }
 
@@ -510,7 +510,7 @@ template ToplevelT()
   override bool titlebarGesture(gdk.types.TitlebarGesture gesture)
   {
     bool _retval;
-    _retval = gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)this._cPtr, gesture);
+    _retval = cast(bool)gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)this._cPtr, gesture);
     return _retval;
   }
 

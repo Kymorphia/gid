@@ -17,96 +17,96 @@ else
 __gshared extern(C)
 {
   // RTCPBuffer
-  bool function(GstRTCPBuffer* rtcp, GstRTCPType type, GstRTCPPacket* packet) c_gst_rtcp_buffer_add_packet; ///
-  bool function(GstRTCPBuffer* rtcp, GstRTCPPacket* packet) c_gst_rtcp_buffer_get_first_packet; ///
+  gboolean function(GstRTCPBuffer* rtcp, GstRTCPType type, GstRTCPPacket* packet) c_gst_rtcp_buffer_add_packet; ///
+  gboolean function(GstRTCPBuffer* rtcp, GstRTCPPacket* packet) c_gst_rtcp_buffer_get_first_packet; ///
   uint function(GstRTCPBuffer* rtcp) c_gst_rtcp_buffer_get_packet_count; ///
-  bool function(GstRTCPBuffer* rtcp) c_gst_rtcp_buffer_unmap; ///
-  bool function(GstBuffer* buffer, GstMapFlags flags, GstRTCPBuffer* rtcp) c_gst_rtcp_buffer_map; ///
+  gboolean function(GstRTCPBuffer* rtcp) c_gst_rtcp_buffer_unmap; ///
+  gboolean function(GstBuffer* buffer, GstMapFlags flags, GstRTCPBuffer* rtcp) c_gst_rtcp_buffer_map; ///
   GstBuffer* function(uint mtu) c_gst_rtcp_buffer_new; ///
   GstBuffer* function(const(void)* data, uint len) c_gst_rtcp_buffer_new_copy_data; ///
   GstBuffer* function(void* data, uint len) c_gst_rtcp_buffer_new_take_data; ///
-  bool function(GstBuffer* buffer) c_gst_rtcp_buffer_validate; ///
-  bool function(ubyte* data, uint len) c_gst_rtcp_buffer_validate_data; ///
-  bool function(ubyte* data, uint len) c_gst_rtcp_buffer_validate_data_reduced; ///
-  bool function(GstBuffer* buffer) c_gst_rtcp_buffer_validate_reduced; ///
+  gboolean function(GstBuffer* buffer) c_gst_rtcp_buffer_validate; ///
+  gboolean function(ubyte* data, uint len) c_gst_rtcp_buffer_validate_data; ///
+  gboolean function(ubyte* data, uint len) c_gst_rtcp_buffer_validate_data_reduced; ///
+  gboolean function(GstBuffer* buffer) c_gst_rtcp_buffer_validate_reduced; ///
 
   // RTCPPacket
-  bool function(GstRTCPPacket* packet, const(ubyte)* data, uint len) c_gst_rtcp_packet_add_profile_specific_ext; ///
-  bool function(GstRTCPPacket* packet, uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr) c_gst_rtcp_packet_add_rb; ///
+  gboolean function(GstRTCPPacket* packet, const(ubyte)* data, uint len) c_gst_rtcp_packet_add_profile_specific_ext; ///
+  gboolean function(GstRTCPPacket* packet, uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr) c_gst_rtcp_packet_add_rb; ///
   ubyte* function(GstRTCPPacket* packet) c_gst_rtcp_packet_app_get_data; ///
   ushort function(GstRTCPPacket* packet) c_gst_rtcp_packet_app_get_data_length; ///
   const(char)* function(GstRTCPPacket* packet) c_gst_rtcp_packet_app_get_name; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_app_get_ssrc; ///
   ubyte function(GstRTCPPacket* packet) c_gst_rtcp_packet_app_get_subtype; ///
-  bool function(GstRTCPPacket* packet, ushort wordlen) c_gst_rtcp_packet_app_set_data_length; ///
+  gboolean function(GstRTCPPacket* packet, ushort wordlen) c_gst_rtcp_packet_app_set_data_length; ///
   void function(GstRTCPPacket* packet, const(char)* name) c_gst_rtcp_packet_app_set_name; ///
   void function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_app_set_ssrc; ///
   void function(GstRTCPPacket* packet, ubyte subtype) c_gst_rtcp_packet_app_set_subtype; ///
-  bool function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_bye_add_ssrc; ///
-  bool function(GstRTCPPacket* packet, uint* ssrc, uint len) c_gst_rtcp_packet_bye_add_ssrcs; ///
+  gboolean function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_bye_add_ssrc; ///
+  gboolean function(GstRTCPPacket* packet, uint* ssrc, uint len) c_gst_rtcp_packet_bye_add_ssrcs; ///
   uint function(GstRTCPPacket* packet, uint nth) c_gst_rtcp_packet_bye_get_nth_ssrc; ///
   char* function(GstRTCPPacket* packet) c_gst_rtcp_packet_bye_get_reason; ///
   ubyte function(GstRTCPPacket* packet) c_gst_rtcp_packet_bye_get_reason_len; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_bye_get_ssrc_count; ///
-  bool function(GstRTCPPacket* packet, const(char)* reason) c_gst_rtcp_packet_bye_set_reason; ///
-  bool function(GstRTCPPacket* packet, ubyte** data, uint* len) c_gst_rtcp_packet_copy_profile_specific_ext; ///
+  gboolean function(GstRTCPPacket* packet, const(char)* reason) c_gst_rtcp_packet_bye_set_reason; ///
+  gboolean function(GstRTCPPacket* packet, ubyte** data, uint* len) c_gst_rtcp_packet_copy_profile_specific_ext; ///
   ubyte* function(GstRTCPPacket* packet) c_gst_rtcp_packet_fb_get_fci; ///
   ushort function(GstRTCPPacket* packet) c_gst_rtcp_packet_fb_get_fci_length; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_fb_get_media_ssrc; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_fb_get_sender_ssrc; ///
   GstRTCPFBType function(GstRTCPPacket* packet) c_gst_rtcp_packet_fb_get_type; ///
-  bool function(GstRTCPPacket* packet, ushort wordlen) c_gst_rtcp_packet_fb_set_fci_length; ///
+  gboolean function(GstRTCPPacket* packet, ushort wordlen) c_gst_rtcp_packet_fb_set_fci_length; ///
   void function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_fb_set_media_ssrc; ///
   void function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_fb_set_sender_ssrc; ///
   void function(GstRTCPPacket* packet, GstRTCPFBType type) c_gst_rtcp_packet_fb_set_type; ///
   ubyte function(GstRTCPPacket* packet) c_gst_rtcp_packet_get_count; ///
   ushort function(GstRTCPPacket* packet) c_gst_rtcp_packet_get_length; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_get_padding; ///
-  bool function(GstRTCPPacket* packet, ubyte** data, uint* len) c_gst_rtcp_packet_get_profile_specific_ext; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_get_padding; ///
+  gboolean function(GstRTCPPacket* packet, ubyte** data, uint* len) c_gst_rtcp_packet_get_profile_specific_ext; ///
   ushort function(GstRTCPPacket* packet) c_gst_rtcp_packet_get_profile_specific_ext_length; ///
   void function(GstRTCPPacket* packet, uint nth, uint* ssrc, ubyte* fractionlost, int* packetslost, uint* exthighestseq, uint* jitter, uint* lsr, uint* dlsr) c_gst_rtcp_packet_get_rb; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_get_rb_count; ///
   GstRTCPType function(GstRTCPPacket* packet) c_gst_rtcp_packet_get_type; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_move_to_next; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_remove; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_move_to_next; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_remove; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_rr_get_ssrc; ///
   void function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_rr_set_ssrc; ///
-  bool function(GstRTCPPacket* packet, GstRTCPSDESType type, ubyte len, const(ubyte)* data) c_gst_rtcp_packet_sdes_add_entry; ///
-  bool function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_sdes_add_item; ///
-  bool function(GstRTCPPacket* packet, GstRTCPSDESType* type, ubyte* len, ubyte** data) c_gst_rtcp_packet_sdes_copy_entry; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_first_entry; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_first_item; ///
-  bool function(GstRTCPPacket* packet, GstRTCPSDESType* type, ubyte* len, ubyte** data) c_gst_rtcp_packet_sdes_get_entry; ///
+  gboolean function(GstRTCPPacket* packet, GstRTCPSDESType type, ubyte len, const(ubyte)* data) c_gst_rtcp_packet_sdes_add_entry; ///
+  gboolean function(GstRTCPPacket* packet, uint ssrc) c_gst_rtcp_packet_sdes_add_item; ///
+  gboolean function(GstRTCPPacket* packet, GstRTCPSDESType* type, ubyte* len, ubyte** data) c_gst_rtcp_packet_sdes_copy_entry; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_first_entry; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_first_item; ///
+  gboolean function(GstRTCPPacket* packet, GstRTCPSDESType* type, ubyte* len, ubyte** data) c_gst_rtcp_packet_sdes_get_entry; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_get_item_count; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_get_ssrc; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_next_entry; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_next_item; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_next_entry; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_sdes_next_item; ///
   void function(GstRTCPPacket* packet, uint nth, uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr) c_gst_rtcp_packet_set_rb; ///
   void function(GstRTCPPacket* packet, uint* ssrc, ulong* ntptime, uint* rtptime, uint* packetCount, uint* octetCount) c_gst_rtcp_packet_sr_get_sender_info; ///
   void function(GstRTCPPacket* packet, uint ssrc, ulong ntptime, uint rtptime, uint packetCount, uint octetCount) c_gst_rtcp_packet_sr_set_sender_info; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_xr_first_rb; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_xr_first_rb; ///
   ushort function(GstRTCPPacket* packet) c_gst_rtcp_packet_xr_get_block_length; ///
   GstRTCPXRType function(GstRTCPPacket* packet) c_gst_rtcp_packet_xr_get_block_type; ///
-  bool function(GstRTCPPacket* packet, uint nth, uint* ssrc, uint* lastRr, uint* delay) c_gst_rtcp_packet_xr_get_dlrr_block; ///
-  bool function(GstRTCPPacket* packet, ushort seq, uint* receiptTime) c_gst_rtcp_packet_xr_get_prt_by_seq; ///
-  bool function(GstRTCPPacket* packet, uint* ssrc, ubyte* thinning, ushort* beginSeq, ushort* endSeq) c_gst_rtcp_packet_xr_get_prt_info; ///
-  bool function(GstRTCPPacket* packet, uint* ssrc, ubyte* thinning, ushort* beginSeq, ushort* endSeq, uint* chunkCount) c_gst_rtcp_packet_xr_get_rle_info; ///
-  bool function(GstRTCPPacket* packet, uint nth, ushort* chunk) c_gst_rtcp_packet_xr_get_rle_nth_chunk; ///
-  bool function(GstRTCPPacket* packet, ulong* timestamp) c_gst_rtcp_packet_xr_get_rrt; ///
+  gboolean function(GstRTCPPacket* packet, uint nth, uint* ssrc, uint* lastRr, uint* delay) c_gst_rtcp_packet_xr_get_dlrr_block; ///
+  gboolean function(GstRTCPPacket* packet, ushort seq, uint* receiptTime) c_gst_rtcp_packet_xr_get_prt_by_seq; ///
+  gboolean function(GstRTCPPacket* packet, uint* ssrc, ubyte* thinning, ushort* beginSeq, ushort* endSeq) c_gst_rtcp_packet_xr_get_prt_info; ///
+  gboolean function(GstRTCPPacket* packet, uint* ssrc, ubyte* thinning, ushort* beginSeq, ushort* endSeq, uint* chunkCount) c_gst_rtcp_packet_xr_get_rle_info; ///
+  gboolean function(GstRTCPPacket* packet, uint nth, ushort* chunk) c_gst_rtcp_packet_xr_get_rle_nth_chunk; ///
+  gboolean function(GstRTCPPacket* packet, ulong* timestamp) c_gst_rtcp_packet_xr_get_rrt; ///
   uint function(GstRTCPPacket* packet) c_gst_rtcp_packet_xr_get_ssrc; ///
-  bool function(GstRTCPPacket* packet, uint* ssrc, ushort* beginSeq, ushort* endSeq) c_gst_rtcp_packet_xr_get_summary_info; ///
-  bool function(GstRTCPPacket* packet, uint* minJitter, uint* maxJitter, uint* meanJitter, uint* devJitter) c_gst_rtcp_packet_xr_get_summary_jitter; ///
-  bool function(GstRTCPPacket* packet, uint* lostPackets, uint* dupPackets) c_gst_rtcp_packet_xr_get_summary_pkt; ///
-  bool function(GstRTCPPacket* packet, bool* isIpv4, ubyte* minTtl, ubyte* maxTtl, ubyte* meanTtl, ubyte* devTtl) c_gst_rtcp_packet_xr_get_summary_ttl; ///
-  bool function(GstRTCPPacket* packet, ubyte* burstDensity, ubyte* gapDensity, ushort* burstDuration, ushort* gapDuration) c_gst_rtcp_packet_xr_get_voip_burst_metrics; ///
-  bool function(GstRTCPPacket* packet, ubyte* gmin, ubyte* rxConfig) c_gst_rtcp_packet_xr_get_voip_configuration_params; ///
-  bool function(GstRTCPPacket* packet, ushort* roundtripDelay, ushort* endSystemDelay) c_gst_rtcp_packet_xr_get_voip_delay_metrics; ///
-  bool function(GstRTCPPacket* packet, ushort* jbNominal, ushort* jbMaximum, ushort* jbAbsMax) c_gst_rtcp_packet_xr_get_voip_jitter_buffer_params; ///
-  bool function(GstRTCPPacket* packet, uint* ssrc) c_gst_rtcp_packet_xr_get_voip_metrics_ssrc; ///
-  bool function(GstRTCPPacket* packet, ubyte* lossRate, ubyte* discardRate) c_gst_rtcp_packet_xr_get_voip_packet_metrics; ///
-  bool function(GstRTCPPacket* packet, ubyte* rFactor, ubyte* extRFactor, ubyte* mosLq, ubyte* mosCq) c_gst_rtcp_packet_xr_get_voip_quality_metrics; ///
-  bool function(GstRTCPPacket* packet, ubyte* signalLevel, ubyte* noiseLevel, ubyte* rerl, ubyte* gmin) c_gst_rtcp_packet_xr_get_voip_signal_metrics; ///
-  bool function(GstRTCPPacket* packet) c_gst_rtcp_packet_xr_next_rb; ///
+  gboolean function(GstRTCPPacket* packet, uint* ssrc, ushort* beginSeq, ushort* endSeq) c_gst_rtcp_packet_xr_get_summary_info; ///
+  gboolean function(GstRTCPPacket* packet, uint* minJitter, uint* maxJitter, uint* meanJitter, uint* devJitter) c_gst_rtcp_packet_xr_get_summary_jitter; ///
+  gboolean function(GstRTCPPacket* packet, uint* lostPackets, uint* dupPackets) c_gst_rtcp_packet_xr_get_summary_pkt; ///
+  gboolean function(GstRTCPPacket* packet, gboolean* isIpv4, ubyte* minTtl, ubyte* maxTtl, ubyte* meanTtl, ubyte* devTtl) c_gst_rtcp_packet_xr_get_summary_ttl; ///
+  gboolean function(GstRTCPPacket* packet, ubyte* burstDensity, ubyte* gapDensity, ushort* burstDuration, ushort* gapDuration) c_gst_rtcp_packet_xr_get_voip_burst_metrics; ///
+  gboolean function(GstRTCPPacket* packet, ubyte* gmin, ubyte* rxConfig) c_gst_rtcp_packet_xr_get_voip_configuration_params; ///
+  gboolean function(GstRTCPPacket* packet, ushort* roundtripDelay, ushort* endSystemDelay) c_gst_rtcp_packet_xr_get_voip_delay_metrics; ///
+  gboolean function(GstRTCPPacket* packet, ushort* jbNominal, ushort* jbMaximum, ushort* jbAbsMax) c_gst_rtcp_packet_xr_get_voip_jitter_buffer_params; ///
+  gboolean function(GstRTCPPacket* packet, uint* ssrc) c_gst_rtcp_packet_xr_get_voip_metrics_ssrc; ///
+  gboolean function(GstRTCPPacket* packet, ubyte* lossRate, ubyte* discardRate) c_gst_rtcp_packet_xr_get_voip_packet_metrics; ///
+  gboolean function(GstRTCPPacket* packet, ubyte* rFactor, ubyte* extRFactor, ubyte* mosLq, ubyte* mosCq) c_gst_rtcp_packet_xr_get_voip_quality_metrics; ///
+  gboolean function(GstRTCPPacket* packet, ubyte* signalLevel, ubyte* noiseLevel, ubyte* rerl, ubyte* gmin) c_gst_rtcp_packet_xr_get_voip_signal_metrics; ///
+  gboolean function(GstRTCPPacket* packet) c_gst_rtcp_packet_xr_next_rb; ///
 
   // RTPBaseAudioPayload
   GType function() c_gst_rtp_base_audio_payload_get_type; ///
@@ -123,41 +123,41 @@ __gshared extern(C)
   GType function() c_gst_rtp_base_depayload_get_type; ///
   void function(GstRTPBaseDepayload* depayload) c_gst_rtp_base_depayload_delayed; ///
   void function(GstRTPBaseDepayload* depayload) c_gst_rtp_base_depayload_dropped; ///
-  void function(GstRTPBaseDepayload* depayload, bool keepCurrent) c_gst_rtp_base_depayload_flush; ///
-  bool function(GstRTPBaseDepayload* depayload) c_gst_rtp_base_depayload_is_aggregate_hdrext_enabled; ///
-  bool function(GstRTPBaseDepayload* depayload) c_gst_rtp_base_depayload_is_source_info_enabled; ///
+  void function(GstRTPBaseDepayload* depayload, gboolean keepCurrent) c_gst_rtp_base_depayload_flush; ///
+  gboolean function(GstRTPBaseDepayload* depayload) c_gst_rtp_base_depayload_is_aggregate_hdrext_enabled; ///
+  gboolean function(GstRTPBaseDepayload* depayload) c_gst_rtp_base_depayload_is_source_info_enabled; ///
   GstFlowReturn function(GstRTPBaseDepayload* filter, GstBuffer* outBuf) c_gst_rtp_base_depayload_push; ///
   GstFlowReturn function(GstRTPBaseDepayload* filter, GstBufferList* outList) c_gst_rtp_base_depayload_push_list; ///
-  void function(GstRTPBaseDepayload* depayload, bool enable) c_gst_rtp_base_depayload_set_aggregate_hdrext_enabled; ///
-  void function(GstRTPBaseDepayload* depayload, bool enable) c_gst_rtp_base_depayload_set_source_info_enabled; ///
+  void function(GstRTPBaseDepayload* depayload, gboolean enable) c_gst_rtp_base_depayload_set_aggregate_hdrext_enabled; ///
+  void function(GstRTPBaseDepayload* depayload, gboolean enable) c_gst_rtp_base_depayload_set_source_info_enabled; ///
 
   // RTPBasePayload
   GType function() c_gst_rtp_base_payload_get_type; ///
   GstBuffer* function(GstRTPBasePayload* payload, uint payloadLen, ubyte padLen, ubyte csrcCount) c_gst_rtp_base_payload_allocate_output_buffer; ///
   uint function(GstRTPBasePayload* payload, GstBuffer* buffer) c_gst_rtp_base_payload_get_source_count; ///
-  bool function(GstRTPBasePayload* payload, uint size, GstClockTime duration) c_gst_rtp_base_payload_is_filled; ///
-  bool function(GstRTPBasePayload* payload) c_gst_rtp_base_payload_is_source_info_enabled; ///
+  gboolean function(GstRTPBasePayload* payload, uint size, GstClockTime duration) c_gst_rtp_base_payload_is_filled; ///
+  gboolean function(GstRTPBasePayload* payload) c_gst_rtp_base_payload_is_source_info_enabled; ///
   GstFlowReturn function(GstRTPBasePayload* payload, GstBuffer* buffer) c_gst_rtp_base_payload_push; ///
   GstFlowReturn function(GstRTPBasePayload* payload, GstBufferList* list) c_gst_rtp_base_payload_push_list; ///
-  void function(GstRTPBasePayload* payload, const(char)* media, bool dynamic, const(char)* encodingName, uint clockRate) c_gst_rtp_base_payload_set_options; ///
-  bool function(GstRTPBasePayload* payload, const(char)* fieldname,  ...) c_gst_rtp_base_payload_set_outcaps; ///
-  bool function(GstRTPBasePayload* payload, GstStructure* s) c_gst_rtp_base_payload_set_outcaps_structure; ///
-  void function(GstRTPBasePayload* payload, bool enable) c_gst_rtp_base_payload_set_source_info_enabled; ///
+  void function(GstRTPBasePayload* payload, const(char)* media, gboolean dynamic, const(char)* encodingName, uint clockRate) c_gst_rtp_base_payload_set_options; ///
+  gboolean function(GstRTPBasePayload* payload, const(char)* fieldname,  ...) c_gst_rtp_base_payload_set_outcaps; ///
+  gboolean function(GstRTPBasePayload* payload, GstStructure* s) c_gst_rtp_base_payload_set_outcaps_structure; ///
+  void function(GstRTPBasePayload* payload, gboolean enable) c_gst_rtp_base_payload_set_source_info_enabled; ///
 
   // RTPBuffer
-  bool function(GstRTPBuffer* rtp, ubyte id, const(void)* data, uint size) c_gst_rtp_buffer_add_extension_onebyte_header; ///
-  bool function(GstRTPBuffer* rtp, ubyte appbits, ubyte id, const(void)* data, uint size) c_gst_rtp_buffer_add_extension_twobytes_header; ///
+  gboolean function(GstRTPBuffer* rtp, ubyte id, const(void)* data, uint size) c_gst_rtp_buffer_add_extension_onebyte_header; ///
+  gboolean function(GstRTPBuffer* rtp, ubyte appbits, ubyte id, const(void)* data, uint size) c_gst_rtp_buffer_add_extension_twobytes_header; ///
   uint function(GstRTPBuffer* rtp, ubyte idx) c_gst_rtp_buffer_get_csrc; ///
   ubyte function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_csrc_count; ///
-  bool function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_extension; ///
+  gboolean function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_extension; ///
   GBytes* function(GstRTPBuffer* rtp, ushort* bits) c_gst_rtp_buffer_get_extension_bytes; ///
-  bool function(GstRTPBuffer* rtp, ushort* bits, void** data, uint* wordlen) c_gst_rtp_buffer_get_extension_data; ///
-  bool function(GstRTPBuffer* rtp, ubyte id, uint nth, void** data, uint* size) c_gst_rtp_buffer_get_extension_onebyte_header; ///
-  bool function(GstRTPBuffer* rtp, ubyte* appbits, ubyte id, uint nth, void** data, uint* size) c_gst_rtp_buffer_get_extension_twobytes_header; ///
+  gboolean function(GstRTPBuffer* rtp, ushort* bits, void** data, uint* wordlen) c_gst_rtp_buffer_get_extension_data; ///
+  gboolean function(GstRTPBuffer* rtp, ubyte id, uint nth, void** data, uint* size) c_gst_rtp_buffer_get_extension_onebyte_header; ///
+  gboolean function(GstRTPBuffer* rtp, ubyte* appbits, ubyte id, uint nth, void** data, uint* size) c_gst_rtp_buffer_get_extension_twobytes_header; ///
   uint function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_header_len; ///
-  bool function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_marker; ///
+  gboolean function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_marker; ///
   uint function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_packet_len; ///
-  bool function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_padding; ///
+  gboolean function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_padding; ///
   void* function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_payload; ///
   GstBuffer* function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_payload_buffer; ///
   GBytes* function(GstRTPBuffer* rtp) c_gst_rtp_buffer_get_payload_bytes; ///
@@ -171,11 +171,11 @@ __gshared extern(C)
   void function(GstRTPBuffer* rtp, uint len) c_gst_rtp_buffer_pad_to; ///
   void function(GstRTPBuffer* rtp) c_gst_rtp_buffer_remove_extension_data; ///
   void function(GstRTPBuffer* rtp, ubyte idx, uint csrc) c_gst_rtp_buffer_set_csrc; ///
-  void function(GstRTPBuffer* rtp, bool extension) c_gst_rtp_buffer_set_extension; ///
-  bool function(GstRTPBuffer* rtp, ushort bits, ushort length) c_gst_rtp_buffer_set_extension_data; ///
-  void function(GstRTPBuffer* rtp, bool marker) c_gst_rtp_buffer_set_marker; ///
+  void function(GstRTPBuffer* rtp, gboolean extension) c_gst_rtp_buffer_set_extension; ///
+  gboolean function(GstRTPBuffer* rtp, ushort bits, ushort length) c_gst_rtp_buffer_set_extension_data; ///
+  void function(GstRTPBuffer* rtp, gboolean marker) c_gst_rtp_buffer_set_marker; ///
   void function(GstRTPBuffer* rtp, uint len) c_gst_rtp_buffer_set_packet_len; ///
-  void function(GstRTPBuffer* rtp, bool padding) c_gst_rtp_buffer_set_padding; ///
+  void function(GstRTPBuffer* rtp, gboolean padding) c_gst_rtp_buffer_set_padding; ///
   void function(GstRTPBuffer* rtp, ubyte payloadType) c_gst_rtp_buffer_set_payload_type; ///
   void function(GstRTPBuffer* rtp, ushort seq) c_gst_rtp_buffer_set_seq; ///
   void function(GstRTPBuffer* rtp, uint ssrc) c_gst_rtp_buffer_set_ssrc; ///
@@ -189,8 +189,8 @@ __gshared extern(C)
   int function(ushort seqnum1, ushort seqnum2) c_gst_rtp_buffer_compare_seqnum; ///
   uint function(ubyte payloadType) c_gst_rtp_buffer_default_clock_rate; ///
   ulong function(ulong* exttimestamp, uint timestamp) c_gst_rtp_buffer_ext_timestamp; ///
-  bool function(GBytes* bytes, ushort bitPattern, ubyte id, uint nth, void** data, uint* size) c_gst_rtp_buffer_get_extension_onebyte_header_from_bytes; ///
-  bool function(GstBuffer* buffer, GstMapFlags flags, GstRTPBuffer* rtp) c_gst_rtp_buffer_map; ///
+  gboolean function(GBytes* bytes, ushort bitPattern, ubyte id, uint nth, void** data, uint* size) c_gst_rtp_buffer_get_extension_onebyte_header_from_bytes; ///
+  gboolean function(GstBuffer* buffer, GstMapFlags flags, GstRTPBuffer* rtp) c_gst_rtp_buffer_map; ///
   GstBuffer* function(uint payloadLen, ubyte padLen, ubyte csrcCount) c_gst_rtp_buffer_new_allocate; ///
   GstBuffer* function(uint packetLen, ubyte padLen, ubyte csrcCount) c_gst_rtp_buffer_new_allocate_len; ///
   GstBuffer* function(const(void)* data, size_t len) c_gst_rtp_buffer_new_copy_data; ///
@@ -205,16 +205,16 @@ __gshared extern(C)
   char* function(GstRTPHeaderExtension* ext) c_gst_rtp_header_extension_get_sdp_caps_field_name; ///
   GstRTPHeaderExtensionFlags function(GstRTPHeaderExtension* ext) c_gst_rtp_header_extension_get_supported_flags; ///
   const(char)* function(GstRTPHeaderExtension* ext) c_gst_rtp_header_extension_get_uri; ///
-  bool function(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionFlags readFlags, const(ubyte)* data, size_t size, GstBuffer* buffer) c_gst_rtp_header_extension_read; ///
-  bool function(GstRTPHeaderExtension* ext, const(GstCaps)* caps) c_gst_rtp_header_extension_set_attributes_from_caps; ///
-  bool function(GstRTPHeaderExtension* ext, GstCaps* caps) c_gst_rtp_header_extension_set_caps_from_attributes; ///
-  bool function(GstRTPHeaderExtension* ext, GstCaps* caps, const(char)* attributes) c_gst_rtp_header_extension_set_caps_from_attributes_helper; ///
+  gboolean function(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionFlags readFlags, const(ubyte)* data, size_t size, GstBuffer* buffer) c_gst_rtp_header_extension_read; ///
+  gboolean function(GstRTPHeaderExtension* ext, const(GstCaps)* caps) c_gst_rtp_header_extension_set_attributes_from_caps; ///
+  gboolean function(GstRTPHeaderExtension* ext, GstCaps* caps) c_gst_rtp_header_extension_set_caps_from_attributes; ///
+  gboolean function(GstRTPHeaderExtension* ext, GstCaps* caps, const(char)* attributes) c_gst_rtp_header_extension_set_caps_from_attributes_helper; ///
   void function(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionDirection direction) c_gst_rtp_header_extension_set_direction; ///
   void function(GstRTPHeaderExtension* ext, uint extId) c_gst_rtp_header_extension_set_id; ///
-  bool function(GstRTPHeaderExtension* ext, const(GstCaps)* caps) c_gst_rtp_header_extension_set_non_rtp_sink_caps; ///
-  void function(GstRTPHeaderExtension* ext, bool state) c_gst_rtp_header_extension_set_wants_update_non_rtp_src_caps; ///
-  bool function(GstRTPHeaderExtension* ext, GstCaps* caps) c_gst_rtp_header_extension_update_non_rtp_src_caps; ///
-  bool function(GstRTPHeaderExtension* ext) c_gst_rtp_header_extension_wants_update_non_rtp_src_caps; ///
+  gboolean function(GstRTPHeaderExtension* ext, const(GstCaps)* caps) c_gst_rtp_header_extension_set_non_rtp_sink_caps; ///
+  void function(GstRTPHeaderExtension* ext, gboolean state) c_gst_rtp_header_extension_set_wants_update_non_rtp_src_caps; ///
+  gboolean function(GstRTPHeaderExtension* ext, GstCaps* caps) c_gst_rtp_header_extension_update_non_rtp_src_caps; ///
+  gboolean function(GstRTPHeaderExtension* ext) c_gst_rtp_header_extension_wants_update_non_rtp_src_caps; ///
   ptrdiff_t function(GstRTPHeaderExtension* ext, const(GstBuffer)* inputMeta, GstRTPHeaderExtensionFlags writeFlags, GstBuffer* output, ubyte* data, size_t size) c_gst_rtp_header_extension_write; ///
 
   // RTPHeaderExtensionClass
@@ -225,9 +225,9 @@ __gshared extern(C)
   const(GstRTPPayloadInfo)* function(ubyte payloadType) c_gst_rtp_payload_info_for_pt; ///
 
   // RTPSourceMeta
-  bool function(GstRTPSourceMeta* meta, const(uint)* csrc, uint csrcCount) c_gst_rtp_source_meta_append_csrc; ///
+  gboolean function(GstRTPSourceMeta* meta, const(uint)* csrc, uint csrcCount) c_gst_rtp_source_meta_append_csrc; ///
   uint function(const(GstRTPSourceMeta)* meta) c_gst_rtp_source_meta_get_source_count; ///
-  bool function(GstRTPSourceMeta* meta, uint* ssrc) c_gst_rtp_source_meta_set_ssrc; ///
+  gboolean function(GstRTPSourceMeta* meta, uint* ssrc) c_gst_rtp_source_meta_set_ssrc; ///
   const(GstMetaInfo)* function() c_gst_rtp_source_meta_get_info; ///
 
   // global
@@ -238,10 +238,10 @@ __gshared extern(C)
   const(char)* function(GstRTCPSDESType type) c_gst_rtcp_sdes_type_to_name; ///
   ulong function(ulong unixtime) c_gst_rtcp_unix_to_ntp; ///
   GList* function() c_gst_rtp_get_header_extension_list; ///
-  bool function(void* data, uint size, ulong* ntptime) c_gst_rtp_hdrext_get_ntp_56; ///
-  bool function(void* data, uint size, ulong* ntptime) c_gst_rtp_hdrext_get_ntp_64; ///
-  bool function(void* data, uint size, ulong ntptime) c_gst_rtp_hdrext_set_ntp_56; ///
-  bool function(void* data, uint size, ulong ntptime) c_gst_rtp_hdrext_set_ntp_64; ///
+  gboolean function(void* data, uint size, ulong* ntptime) c_gst_rtp_hdrext_get_ntp_56; ///
+  gboolean function(void* data, uint size, ulong* ntptime) c_gst_rtp_hdrext_get_ntp_64; ///
+  gboolean function(void* data, uint size, ulong ntptime) c_gst_rtp_hdrext_set_ntp_56; ///
+  gboolean function(void* data, uint size, ulong ntptime) c_gst_rtp_hdrext_set_ntp_64; ///
   GType function() c_gst_rtp_source_meta_api_get_type; ///
 }
 

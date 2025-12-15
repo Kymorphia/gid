@@ -374,7 +374,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getResizeEndChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_resize_end_child(cast(GtkPaned*)this._cPtr);
+    _retval = cast(bool)gtk_paned_get_resize_end_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getResizeStartChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_resize_start_child(cast(GtkPaned*)this._cPtr);
+    _retval = cast(bool)gtk_paned_get_resize_start_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getShrinkEndChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_shrink_end_child(cast(GtkPaned*)this._cPtr);
+    _retval = cast(bool)gtk_paned_get_shrink_end_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getShrinkStartChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_shrink_start_child(cast(GtkPaned*)this._cPtr);
+    _retval = cast(bool)gtk_paned_get_shrink_start_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -430,7 +430,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getWideHandle()
   {
     bool _retval;
-    _retval = gtk_paned_get_wide_handle(cast(GtkPaned*)this._cPtr);
+    _retval = cast(bool)gtk_paned_get_wide_handle(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 

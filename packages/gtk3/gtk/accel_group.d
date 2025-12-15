@@ -112,7 +112,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool activate(glib.types.Quark accelQuark, gobject.object.ObjectWrap acceleratable, uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
-    _retval = gtk_accel_group_activate(cast(GtkAccelGroup*)this._cPtr, accelQuark, acceleratable ? cast(GObject*)acceleratable._cPtr(No.Dup) : null, accelKey, accelMods);
+    _retval = cast(bool)gtk_accel_group_activate(cast(GtkAccelGroup*)this._cPtr, accelQuark, acceleratable ? cast(GObject*)acceleratable._cPtr(No.Dup) : null, accelKey, accelMods);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool disconnect(gobject.closure.Closure closure = null)
   {
     bool _retval;
-    _retval = gtk_accel_group_disconnect(cast(GtkAccelGroup*)this._cPtr, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_accel_group_disconnect(cast(GtkAccelGroup*)this._cPtr, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool disconnectKey(uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
-    _retval = gtk_accel_group_disconnect_key(cast(GtkAccelGroup*)this._cPtr, accelKey, accelMods);
+    _retval = cast(bool)gtk_accel_group_disconnect_key(cast(GtkAccelGroup*)this._cPtr, accelKey, accelMods);
     return _retval;
   }
 
@@ -209,11 +209,11 @@ class AccelGroup : gobject.object.ObjectWrap
   */
   gtk.types.AccelKey find(gtk.types.AccelGroupFindFunc findFunc)
   {
-    extern(C) bool _findFuncCallback(GtkAccelKey* key, GClosure* closure, void* data)
+    extern(C) gboolean _findFuncCallback(GtkAccelKey* key, GClosure* closure, void* data)
     {
       auto _dlg = cast(gtk.types.AccelGroupFindFunc*)data;
 
-      bool _retval = (*_dlg)(*key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
+      gboolean _retval = (*_dlg)(*key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
       return _retval;
     }
     auto _findFuncCB = findFunc ? &_findFuncCallback : null;
@@ -236,7 +236,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool getIsLocked()
   {
     bool _retval;
-    _retval = gtk_accel_group_get_is_locked(cast(GtkAccelGroup*)this._cPtr);
+    _retval = cast(bool)gtk_accel_group_get_is_locked(cast(GtkAccelGroup*)this._cPtr);
     return _retval;
   }
 

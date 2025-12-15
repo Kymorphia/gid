@@ -39,7 +39,7 @@ template TreeSortableT()
   override bool getSortColumnId(out int sortColumnId, out gtk.types.SortType order)
   {
     bool _retval;
-    _retval = gtk_tree_sortable_get_sort_column_id(cast(GtkTreeSortable*)this._cPtr, cast(int*)&sortColumnId, &order);
+    _retval = cast(bool)gtk_tree_sortable_get_sort_column_id(cast(GtkTreeSortable*)this._cPtr, cast(int*)&sortColumnId, &order);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ template TreeSortableT()
   override bool hasDefaultSortFunc()
   {
     bool _retval;
-    _retval = gtk_tree_sortable_has_default_sort_func(cast(GtkTreeSortable*)this._cPtr);
+    _retval = cast(bool)gtk_tree_sortable_has_default_sort_func(cast(GtkTreeSortable*)this._cPtr);
     return _retval;
   }
 

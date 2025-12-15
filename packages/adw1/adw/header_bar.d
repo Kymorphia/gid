@@ -392,7 +392,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowBackButton()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_back_button(cast(AdwHeaderBar*)this._cPtr);
+    _retval = cast(bool)adw_header_bar_get_show_back_button(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowEndTitleButtons()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_end_title_buttons(cast(AdwHeaderBar*)this._cPtr);
+    _retval = cast(bool)adw_header_bar_get_show_end_title_buttons(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowStartTitleButtons()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_start_title_buttons(cast(AdwHeaderBar*)this._cPtr);
+    _retval = cast(bool)adw_header_bar_get_show_start_title_buttons(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowTitle()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_title(cast(AdwHeaderBar*)this._cPtr);
+    _retval = cast(bool)adw_header_bar_get_show_title(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 

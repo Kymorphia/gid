@@ -86,7 +86,7 @@ class Region : gobject.object.ObjectWrap
     bool _retval;
     GtkTextIter _start;
     GtkTextIter _end;
-    _retval = gtk_source_region_get_bounds(cast(GtkSourceRegion*)this._cPtr, &_start, &_end);
+    _retval = cast(bool)gtk_source_region_get_bounds(cast(GtkSourceRegion*)this._cPtr, &_start, &_end);
     start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
     end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
@@ -157,7 +157,7 @@ class Region : gobject.object.ObjectWrap
   bool isEmpty()
   {
     bool _retval;
-    _retval = gtk_source_region_is_empty(cast(GtkSourceRegion*)this._cPtr);
+    _retval = cast(bool)gtk_source_region_is_empty(cast(GtkSourceRegion*)this._cPtr);
     return _retval;
   }
 

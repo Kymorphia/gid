@@ -192,7 +192,7 @@ class Caps : gobject.boxed.Boxed
   bool canIntersect(gst.caps.Caps caps2)
   {
     bool _retval;
-    _retval = gst_caps_can_intersect(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_can_intersect(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -241,11 +241,11 @@ class Caps : gobject.boxed.Boxed
   */
   void filterAndMapInPlace(gst.types.CapsFilterMapFunc func)
   {
-    extern(C) bool _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
+    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
     {
       auto _dlg = cast(gst.types.CapsFilterMapFunc*)userData;
 
-      bool _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      gboolean _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -290,18 +290,18 @@ class Caps : gobject.boxed.Boxed
   */
   bool foreach_(gst.types.CapsForeachFunc func)
   {
-    extern(C) bool _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
+    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
     {
       auto _dlg = cast(gst.types.CapsForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      gboolean _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_caps_foreach(cast(const(GstCaps)*)this._cPtr, _funcCB, _func);
+    _retval = cast(bool)gst_caps_foreach(cast(const(GstCaps)*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -412,7 +412,7 @@ class Caps : gobject.boxed.Boxed
   bool isAlwaysCompatible(gst.caps.Caps caps2)
   {
     bool _retval;
-    _retval = gst_caps_is_always_compatible(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_always_compatible(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ class Caps : gobject.boxed.Boxed
   bool isAny()
   {
     bool _retval;
-    _retval = gst_caps_is_any(cast(const(GstCaps)*)this._cPtr);
+    _retval = cast(bool)gst_caps_is_any(cast(const(GstCaps)*)this._cPtr);
     return _retval;
   }
 
@@ -434,7 +434,7 @@ class Caps : gobject.boxed.Boxed
   bool isEmpty()
   {
     bool _retval;
-    _retval = gst_caps_is_empty(cast(const(GstCaps)*)this._cPtr);
+    _retval = cast(bool)gst_caps_is_empty(cast(const(GstCaps)*)this._cPtr);
     return _retval;
   }
 
@@ -448,7 +448,7 @@ class Caps : gobject.boxed.Boxed
   bool isEqual(gst.caps.Caps caps2)
   {
     bool _retval;
-    _retval = gst_caps_is_equal(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_equal(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -463,7 +463,7 @@ class Caps : gobject.boxed.Boxed
   bool isEqualFixed(gst.caps.Caps caps2)
   {
     bool _retval;
-    _retval = gst_caps_is_equal_fixed(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_equal_fixed(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -476,7 +476,7 @@ class Caps : gobject.boxed.Boxed
   bool isFixed()
   {
     bool _retval;
-    _retval = gst_caps_is_fixed(cast(const(GstCaps)*)this._cPtr);
+    _retval = cast(bool)gst_caps_is_fixed(cast(const(GstCaps)*)this._cPtr);
     return _retval;
   }
 
@@ -490,7 +490,7 @@ class Caps : gobject.boxed.Boxed
   bool isStrictlyEqual(gst.caps.Caps caps2)
   {
     bool _retval;
-    _retval = gst_caps_is_strictly_equal(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_strictly_equal(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -504,7 +504,7 @@ class Caps : gobject.boxed.Boxed
   bool isSubset(gst.caps.Caps superset)
   {
     bool _retval;
-    _retval = gst_caps_is_subset(cast(const(GstCaps)*)this._cPtr, superset ? cast(const(GstCaps)*)superset._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_subset(cast(const(GstCaps)*)this._cPtr, superset ? cast(const(GstCaps)*)superset._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class Caps : gobject.boxed.Boxed
   bool isSubsetStructure(gst.structure.Structure structure)
   {
     bool _retval;
-    _retval = gst_caps_is_subset_structure(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_subset_structure(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -535,7 +535,7 @@ class Caps : gobject.boxed.Boxed
   bool isSubsetStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null)
   {
     bool _retval;
-    _retval = gst_caps_is_subset_structure_full(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, features ? cast(const(GstCapsFeatures)*)features._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_subset_structure_full(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, features ? cast(const(GstCapsFeatures)*)features._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -551,18 +551,18 @@ class Caps : gobject.boxed.Boxed
   */
   bool mapInPlace(gst.types.CapsMapFunc func)
   {
-    extern(C) bool _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
+    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
     {
       auto _dlg = cast(gst.types.CapsMapFunc*)userData;
 
-      bool _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      gboolean _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_caps_map_in_place(cast(GstCaps*)this._cPtr, _funcCB, _func);
+    _retval = cast(bool)gst_caps_map_in_place(cast(GstCaps*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 

@@ -108,7 +108,7 @@ class StreamMem : gmime.stream.Stream
   bool getOwner()
   {
     bool _retval;
-    _retval = g_mime_stream_mem_get_owner(cast(GMimeStreamMem*)this._cPtr);
+    _retval = cast(bool)g_mime_stream_mem_get_owner(cast(GMimeStreamMem*)this._cPtr);
     return _retval;
   }
 

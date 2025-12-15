@@ -91,7 +91,7 @@ class CustomMeta
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_custom_meta_has_name(cast(GstCustomMeta*)this._cPtr, _name);
+    _retval = cast(bool)gst_custom_meta_has_name(cast(GstCustomMeta*)this._cPtr, _name);
     return _retval;
   }
 }

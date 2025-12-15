@@ -88,7 +88,7 @@ template URIHandlerT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gst_uri_handler_set_uri(cast(GstURIHandler*)this._cPtr, _uri, &_err);
+    _retval = cast(bool)gst_uri_handler_set_uri(cast(GstURIHandler*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

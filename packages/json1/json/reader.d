@@ -193,7 +193,7 @@ class Reader : gobject.object.ObjectWrap
   bool getBooleanValue()
   {
     bool _retval;
-    _retval = json_reader_get_boolean_value(cast(JsonReader*)this._cPtr);
+    _retval = cast(bool)json_reader_get_boolean_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class Reader : gobject.object.ObjectWrap
   bool getNullValue()
   {
     bool _retval;
-    _retval = json_reader_get_null_value(cast(JsonReader*)this._cPtr);
+    _retval = cast(bool)json_reader_get_null_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class Reader : gobject.object.ObjectWrap
   bool isArray()
   {
     bool _retval;
-    _retval = json_reader_is_array(cast(JsonReader*)this._cPtr);
+    _retval = cast(bool)json_reader_is_array(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class Reader : gobject.object.ObjectWrap
   bool isObject()
   {
     bool _retval;
-    _retval = json_reader_is_object(cast(JsonReader*)this._cPtr);
+    _retval = cast(bool)json_reader_is_object(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class Reader : gobject.object.ObjectWrap
   bool isValue()
   {
     bool _retval;
-    _retval = json_reader_is_value(cast(JsonReader*)this._cPtr);
+    _retval = cast(bool)json_reader_is_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -422,7 +422,7 @@ class Reader : gobject.object.ObjectWrap
   bool readElement(uint index)
   {
     bool _retval;
-    _retval = json_reader_read_element(cast(JsonReader*)this._cPtr, index);
+    _retval = cast(bool)json_reader_read_element(cast(JsonReader*)this._cPtr, index);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class Reader : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
-    _retval = json_reader_read_member(cast(JsonReader*)this._cPtr, _memberName);
+    _retval = cast(bool)json_reader_read_member(cast(JsonReader*)this._cPtr, _memberName);
     return _retval;
   }
 

@@ -235,7 +235,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   bool getRenderRectangle(out int renderX, out int renderY, out uint renderWidth, out uint renderHeight)
   {
     bool _retval;
-    _retval = gst_video_overlay_rectangle_get_render_rectangle(cast(GstVideoOverlayRectangle*)this._cPtr, cast(int*)&renderX, cast(int*)&renderY, cast(uint*)&renderWidth, cast(uint*)&renderHeight);
+    _retval = cast(bool)gst_video_overlay_rectangle_get_render_rectangle(cast(GstVideoOverlayRectangle*)this._cPtr, cast(int*)&renderX, cast(int*)&renderY, cast(uint*)&renderWidth, cast(uint*)&renderHeight);
     return _retval;
   }
 

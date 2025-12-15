@@ -36,7 +36,7 @@ bool codecUtilsAacCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] audioConfig
     _len = cast(uint)audioConfig.length;
 
   auto _audioConfig = cast(const(ubyte)*)audioConfig.ptr;
-  _retval = gst_codec_utils_aac_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _audioConfig, _len);
+  _retval = cast(bool)gst_codec_utils_aac_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _audioConfig, _len);
   return _retval;
 }
 
@@ -233,7 +233,7 @@ bool codecUtilsH264CapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] sps)
     _len = cast(uint)sps.length;
 
   auto _sps = cast(const(ubyte)*)sps.ptr;
-  _retval = gst_codec_utils_h264_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _sps, _len);
+  _retval = cast(bool)gst_codec_utils_h264_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _sps, _len);
   return _retval;
 }
 
@@ -333,7 +333,7 @@ bool codecUtilsH264GetProfileFlagsLevel(ubyte[] codecData, out ubyte profile, ou
     _len = cast(uint)codecData.length;
 
   auto _codecData = cast(const(ubyte)*)codecData.ptr;
-  _retval = gst_codec_utils_h264_get_profile_flags_level(_codecData, _len, cast(ubyte*)&profile, cast(ubyte*)&flags, cast(ubyte*)&level);
+  _retval = cast(bool)gst_codec_utils_h264_get_profile_flags_level(_codecData, _len, cast(ubyte*)&profile, cast(ubyte*)&flags, cast(ubyte*)&level);
   return _retval;
 }
 
@@ -357,7 +357,7 @@ bool codecUtilsH265CapsSetLevelTierAndProfile(gst.caps.Caps caps, ubyte[] profil
     _len = cast(uint)profileTierLevel.length;
 
   auto _profileTierLevel = cast(const(ubyte)*)profileTierLevel.ptr;
-  _retval = gst_codec_utils_h265_caps_set_level_tier_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _profileTierLevel, _len);
+  _retval = cast(bool)gst_codec_utils_h265_caps_set_level_tier_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _profileTierLevel, _len);
   return _retval;
 }
 
@@ -480,7 +480,7 @@ bool codecUtilsMpeg4videoCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] visO
     _len = cast(uint)visObjSeq.length;
 
   auto _visObjSeq = cast(const(ubyte)*)visObjSeq.ptr;
-  _retval = gst_codec_utils_mpeg4video_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _visObjSeq, _len);
+  _retval = cast(bool)gst_codec_utils_mpeg4video_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _visObjSeq, _len);
   return _retval;
 }
 
@@ -637,7 +637,7 @@ gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstp
 bool installPluginsInstallationInProgress()
 {
   bool _retval;
-  _retval = gst_install_plugins_installation_in_progress();
+  _retval = cast(bool)gst_install_plugins_installation_in_progress();
   return _retval;
 }
 
@@ -651,7 +651,7 @@ bool installPluginsInstallationInProgress()
 bool installPluginsSupported()
 {
   bool _retval;
-  _retval = gst_install_plugins_supported();
+  _retval = cast(bool)gst_install_plugins_supported();
   return _retval;
 }
 
@@ -694,7 +694,7 @@ gstpbutils.types.InstallPluginsReturn installPluginsSync(string[] details, gstpb
 bool isMissingPluginMessage(gst.message.Message msg)
 {
   bool _retval;
-  _retval = gst_is_missing_plugin_message(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_missing_plugin_message(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -973,7 +973,7 @@ bool pbUtilsAddCodecDescriptionToTagList(gst.tag_list.TagList taglist, string co
 {
   bool _retval;
   const(char)* _codecTag = codecTag.toCString(No.Alloc);
-  _retval = gst_pb_utils_add_codec_description_to_tag_list(taglist ? cast(GstTagList*)taglist._cPtr(No.Dup) : null, _codecTag, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_pb_utils_add_codec_description_to_tag_list(taglist ? cast(GstTagList*)taglist._cPtr(No.Dup) : null, _codecTag, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   return _retval;
 }
 

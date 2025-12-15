@@ -165,7 +165,7 @@ class PreferencesDialog : adw.dialog.Dialog
   bool getSearchEnabled()
   {
     bool _retval;
-    _retval = adw_preferences_dialog_get_search_enabled(cast(AdwPreferencesDialog*)this._cPtr);
+    _retval = cast(bool)adw_preferences_dialog_get_search_enabled(cast(AdwPreferencesDialog*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class PreferencesDialog : adw.dialog.Dialog
   bool popSubpage()
   {
     bool _retval;
-    _retval = adw_preferences_dialog_pop_subpage(cast(AdwPreferencesDialog*)this._cPtr);
+    _retval = cast(bool)adw_preferences_dialog_pop_subpage(cast(AdwPreferencesDialog*)this._cPtr);
     return _retval;
   }
 

@@ -129,7 +129,7 @@ class ContentFormats : gobject.boxed.Boxed
   bool containGtype(gobject.types.GType type)
   {
     bool _retval;
-    _retval = gdk_content_formats_contain_gtype(cast(const(GdkContentFormats)*)this._cPtr, type);
+    _retval = cast(bool)gdk_content_formats_contain_gtype(cast(const(GdkContentFormats)*)this._cPtr, type);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class ContentFormats : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    _retval = gdk_content_formats_contain_mime_type(cast(const(GdkContentFormats)*)this._cPtr, _mimeType);
+    _retval = cast(bool)gdk_content_formats_contain_mime_type(cast(const(GdkContentFormats)*)this._cPtr, _mimeType);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class ContentFormats : gobject.boxed.Boxed
   bool match(gdk.content_formats.ContentFormats second)
   {
     bool _retval;
-    _retval = gdk_content_formats_match(cast(const(GdkContentFormats)*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_content_formats_match(cast(const(GdkContentFormats)*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
     return _retval;
   }
 

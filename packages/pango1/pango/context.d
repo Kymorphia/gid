@@ -245,7 +245,7 @@ class Context : gobject.object.ObjectWrap
   bool getRoundGlyphPositions()
   {
     bool _retval;
-    _retval = pango_context_get_round_glyph_positions(cast(PangoContext*)this._cPtr);
+    _retval = cast(bool)pango_context_get_round_glyph_positions(cast(PangoContext*)this._cPtr);
     return _retval;
   }
 

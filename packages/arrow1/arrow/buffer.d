@@ -76,7 +76,7 @@ class Buffer : gobject.object.ObjectWrap
   bool equal(arrow.buffer.Buffer otherBuffer)
   {
     bool _retval;
-    _retval = garrow_buffer_equal(cast(GArrowBuffer*)this._cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_buffer_equal(cast(GArrowBuffer*)this._cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class Buffer : gobject.object.ObjectWrap
   bool equalNBytes(arrow.buffer.Buffer otherBuffer, long nBytes)
   {
     bool _retval;
-    _retval = garrow_buffer_equal_n_bytes(cast(GArrowBuffer*)this._cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer._cPtr(No.Dup) : null, nBytes);
+    _retval = cast(bool)garrow_buffer_equal_n_bytes(cast(GArrowBuffer*)this._cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer._cPtr(No.Dup) : null, nBytes);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Buffer : gobject.object.ObjectWrap
   bool isMutable()
   {
     bool _retval;
-    _retval = garrow_buffer_is_mutable(cast(GArrowBuffer*)this._cPtr);
+    _retval = cast(bool)garrow_buffer_is_mutable(cast(GArrowBuffer*)this._cPtr);
     return _retval;
   }
 

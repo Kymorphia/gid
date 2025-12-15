@@ -507,7 +507,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool getHighlightSyntax()
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_get_highlight_syntax(cast(GtkSourcePrintCompositor*)this._cPtr);
+    _retval = cast(bool)gtk_source_print_compositor_get_highlight_syntax(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -573,7 +573,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool getPrintFooter()
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_get_print_footer(cast(GtkSourcePrintCompositor*)this._cPtr);
+    _retval = cast(bool)gtk_source_print_compositor_get_print_footer(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -587,7 +587,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool getPrintHeader()
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_get_print_header(cast(GtkSourcePrintCompositor*)this._cPtr);
+    _retval = cast(bool)gtk_source_print_compositor_get_print_header(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -725,7 +725,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool paginate(gtk.print_context.PrintContext context)
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_paginate(cast(GtkSourcePrintCompositor*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_print_compositor_paginate(cast(GtkSourcePrintCompositor*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 

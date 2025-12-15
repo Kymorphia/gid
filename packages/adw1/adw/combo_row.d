@@ -315,7 +315,7 @@ class ComboRow : adw.action_row.ActionRow
   bool getEnableSearch()
   {
     bool _retval;
-    _retval = adw_combo_row_get_enable_search(cast(AdwComboRow*)this._cPtr);
+    _retval = cast(bool)adw_combo_row_get_enable_search(cast(AdwComboRow*)this._cPtr);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class ComboRow : adw.action_row.ActionRow
   bool getUseSubtitle()
   {
     bool _retval;
-    _retval = adw_combo_row_get_use_subtitle(cast(AdwComboRow*)this._cPtr);
+    _retval = cast(bool)adw_combo_row_get_use_subtitle(cast(AdwComboRow*)this._cPtr);
     return _retval;
   }
 

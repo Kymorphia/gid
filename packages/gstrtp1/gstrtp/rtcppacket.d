@@ -78,7 +78,7 @@ class RTCPPacket
       _len = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_rtcp_packet_add_profile_specific_ext(cast(GstRTCPPacket*)this._cPtr, _data, _len);
+    _retval = cast(bool)gst_rtcp_packet_add_profile_specific_ext(cast(GstRTCPPacket*)this._cPtr, _data, _len);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class RTCPPacket
   bool addRb(uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_add_rb(cast(GstRTCPPacket*)this._cPtr, ssrc, fractionlost, packetslost, exthighestseq, jitter, lsr, dlsr);
+    _retval = cast(bool)gst_rtcp_packet_add_rb(cast(GstRTCPPacket*)this._cPtr, ssrc, fractionlost, packetslost, exthighestseq, jitter, lsr, dlsr);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class RTCPPacket
   bool appSetDataLength(ushort wordlen)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_app_set_data_length(cast(GstRTCPPacket*)this._cPtr, wordlen);
+    _retval = cast(bool)gst_rtcp_packet_app_set_data_length(cast(GstRTCPPacket*)this._cPtr, wordlen);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class RTCPPacket
   bool byeAddSsrc(uint ssrc)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_bye_add_ssrc(cast(GstRTCPPacket*)this._cPtr, ssrc);
+    _retval = cast(bool)gst_rtcp_packet_bye_add_ssrc(cast(GstRTCPPacket*)this._cPtr, ssrc);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class RTCPPacket
       _len = cast(uint)ssrc.length;
 
     auto _ssrc = cast(uint*)ssrc.ptr;
-    _retval = gst_rtcp_packet_bye_add_ssrcs(cast(GstRTCPPacket*)this._cPtr, _ssrc, _len);
+    _retval = cast(bool)gst_rtcp_packet_bye_add_ssrcs(cast(GstRTCPPacket*)this._cPtr, _ssrc, _len);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class RTCPPacket
   {
     bool _retval;
     const(char)* _reason = reason.toCString(No.Alloc);
-    _retval = gst_rtcp_packet_bye_set_reason(cast(GstRTCPPacket*)this._cPtr, _reason);
+    _retval = cast(bool)gst_rtcp_packet_bye_set_reason(cast(GstRTCPPacket*)this._cPtr, _reason);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class RTCPPacket
     bool _retval;
     uint _len;
     ubyte* _data;
-    _retval = gst_rtcp_packet_copy_profile_specific_ext(cast(GstRTCPPacket*)this._cPtr, &_data, &_len);
+    _retval = cast(bool)gst_rtcp_packet_copy_profile_specific_ext(cast(GstRTCPPacket*)this._cPtr, &_data, &_len);
     data.length = _len;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
     gFree(cast(void*)_data);
@@ -399,7 +399,7 @@ class RTCPPacket
   bool fbSetFciLength(ushort wordlen)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_fb_set_fci_length(cast(GstRTCPPacket*)this._cPtr, wordlen);
+    _retval = cast(bool)gst_rtcp_packet_fb_set_fci_length(cast(GstRTCPPacket*)this._cPtr, wordlen);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class RTCPPacket
   bool getPadding()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_get_padding(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_get_padding(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -477,7 +477,7 @@ class RTCPPacket
     bool _retval;
     uint _len;
     ubyte* _data;
-    _retval = gst_rtcp_packet_get_profile_specific_ext(cast(GstRTCPPacket*)this._cPtr, &_data, &_len);
+    _retval = cast(bool)gst_rtcp_packet_get_profile_specific_ext(cast(GstRTCPPacket*)this._cPtr, &_data, &_len);
     data.length = _len;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
     return _retval;
@@ -543,7 +543,7 @@ class RTCPPacket
   bool moveToNext()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_move_to_next(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_move_to_next(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class RTCPPacket
   bool remove()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_remove(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_remove(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class RTCPPacket
       _len = cast(ubyte)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_rtcp_packet_sdes_add_entry(cast(GstRTCPPacket*)this._cPtr, type, _len, _data);
+    _retval = cast(bool)gst_rtcp_packet_sdes_add_entry(cast(GstRTCPPacket*)this._cPtr, type, _len, _data);
     return _retval;
   }
 
@@ -613,7 +613,7 @@ class RTCPPacket
   bool sdesAddItem(uint ssrc)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_sdes_add_item(cast(GstRTCPPacket*)this._cPtr, ssrc);
+    _retval = cast(bool)gst_rtcp_packet_sdes_add_item(cast(GstRTCPPacket*)this._cPtr, ssrc);
     return _retval;
   }
 
@@ -631,7 +631,7 @@ class RTCPPacket
     bool _retval;
     ubyte _len;
     ubyte* _data;
-    _retval = gst_rtcp_packet_sdes_copy_entry(cast(GstRTCPPacket*)this._cPtr, &type, &_len, &_data);
+    _retval = cast(bool)gst_rtcp_packet_sdes_copy_entry(cast(GstRTCPPacket*)this._cPtr, &type, &_len, &_data);
     data.length = _len;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
     gFree(cast(void*)_data);
@@ -645,7 +645,7 @@ class RTCPPacket
   bool sdesFirstEntry()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_sdes_first_entry(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_sdes_first_entry(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -656,7 +656,7 @@ class RTCPPacket
   bool sdesFirstItem()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_sdes_first_item(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_sdes_first_item(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -679,7 +679,7 @@ class RTCPPacket
     bool _retval;
     ubyte _len;
     ubyte* _data;
-    _retval = gst_rtcp_packet_sdes_get_entry(cast(GstRTCPPacket*)this._cPtr, &type, &_len, &_data);
+    _retval = cast(bool)gst_rtcp_packet_sdes_get_entry(cast(GstRTCPPacket*)this._cPtr, &type, &_len, &_data);
     data.length = _len;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
     return _retval;
@@ -714,7 +714,7 @@ class RTCPPacket
   bool sdesNextEntry()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_sdes_next_entry(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_sdes_next_entry(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -725,7 +725,7 @@ class RTCPPacket
   bool sdesNextItem()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_sdes_next_item(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_sdes_next_item(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -786,7 +786,7 @@ class RTCPPacket
   bool xrFirstRb()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_first_rb(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_xr_first_rb(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 
@@ -823,7 +823,7 @@ class RTCPPacket
   bool xrGetDlrrBlock(uint nth, out uint ssrc, out uint lastRr, out uint delay)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_dlrr_block(cast(GstRTCPPacket*)this._cPtr, nth, cast(uint*)&ssrc, cast(uint*)&lastRr, cast(uint*)&delay);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_dlrr_block(cast(GstRTCPPacket*)this._cPtr, nth, cast(uint*)&ssrc, cast(uint*)&lastRr, cast(uint*)&delay);
     return _retval;
   }
 
@@ -838,7 +838,7 @@ class RTCPPacket
   bool xrGetPrtBySeq(ushort seq, out uint receiptTime)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_prt_by_seq(cast(GstRTCPPacket*)this._cPtr, seq, cast(uint*)&receiptTime);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_prt_by_seq(cast(GstRTCPPacket*)this._cPtr, seq, cast(uint*)&receiptTime);
     return _retval;
   }
 
@@ -855,7 +855,7 @@ class RTCPPacket
   bool xrGetPrtInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_prt_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_prt_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
     return _retval;
   }
 
@@ -873,7 +873,7 @@ class RTCPPacket
   bool xrGetRleInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq, out uint chunkCount)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_rle_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq, cast(uint*)&chunkCount);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_rle_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq, cast(uint*)&chunkCount);
     return _retval;
   }
 
@@ -888,7 +888,7 @@ class RTCPPacket
   bool xrGetRleNthChunk(uint nth, out ushort chunk)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_rle_nth_chunk(cast(GstRTCPPacket*)this._cPtr, nth, cast(ushort*)&chunk);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_rle_nth_chunk(cast(GstRTCPPacket*)this._cPtr, nth, cast(ushort*)&chunk);
     return _retval;
   }
 
@@ -896,7 +896,7 @@ class RTCPPacket
   bool xrGetRrt(out ulong timestamp)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_rrt(cast(GstRTCPPacket*)this._cPtr, cast(ulong*)&timestamp);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_rrt(cast(GstRTCPPacket*)this._cPtr, cast(ulong*)&timestamp);
     return _retval;
   }
 
@@ -923,7 +923,7 @@ class RTCPPacket
   bool xrGetSummaryInfo(out uint ssrc, out ushort beginSeq, out ushort endSeq)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_summary_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_summary_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
     return _retval;
   }
 
@@ -941,7 +941,7 @@ class RTCPPacket
   bool xrGetSummaryJitter(out uint minJitter, out uint maxJitter, out uint meanJitter, out uint devJitter)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_summary_jitter(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&minJitter, cast(uint*)&maxJitter, cast(uint*)&meanJitter, cast(uint*)&devJitter);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_summary_jitter(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&minJitter, cast(uint*)&maxJitter, cast(uint*)&meanJitter, cast(uint*)&devJitter);
     return _retval;
   }
 
@@ -957,7 +957,7 @@ class RTCPPacket
   bool xrGetSummaryPkt(out uint lostPackets, out uint dupPackets)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_summary_pkt(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&lostPackets, cast(uint*)&dupPackets);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_summary_pkt(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&lostPackets, cast(uint*)&dupPackets);
     return _retval;
   }
 
@@ -975,7 +975,9 @@ class RTCPPacket
   bool xrGetSummaryTtl(out bool isIpv4, out ubyte minTtl, out ubyte maxTtl, out ubyte meanTtl, out ubyte devTtl)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_summary_ttl(cast(GstRTCPPacket*)this._cPtr, cast(bool*)&isIpv4, cast(ubyte*)&minTtl, cast(ubyte*)&maxTtl, cast(ubyte*)&meanTtl, cast(ubyte*)&devTtl);
+    gboolean _isIpv4;
+    _retval = cast(bool)gst_rtcp_packet_xr_get_summary_ttl(cast(GstRTCPPacket*)this._cPtr, &_isIpv4, cast(ubyte*)&minTtl, cast(ubyte*)&maxTtl, cast(ubyte*)&meanTtl, cast(ubyte*)&devTtl);
+    isIpv4 = cast(bool)_isIpv4;
     return _retval;
   }
 
@@ -983,7 +985,7 @@ class RTCPPacket
   bool xrGetVoipBurstMetrics(out ubyte burstDensity, out ubyte gapDensity, out ushort burstDuration, out ushort gapDuration)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_burst_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&burstDensity, cast(ubyte*)&gapDensity, cast(ushort*)&burstDuration, cast(ushort*)&gapDuration);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_burst_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&burstDensity, cast(ubyte*)&gapDensity, cast(ushort*)&burstDuration, cast(ushort*)&gapDuration);
     return _retval;
   }
 
@@ -991,7 +993,7 @@ class RTCPPacket
   bool xrGetVoipConfigurationParams(out ubyte gmin, out ubyte rxConfig)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_configuration_params(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&gmin, cast(ubyte*)&rxConfig);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_configuration_params(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&gmin, cast(ubyte*)&rxConfig);
     return _retval;
   }
 
@@ -999,7 +1001,7 @@ class RTCPPacket
   bool xrGetVoipDelayMetrics(out ushort roundtripDelay, out ushort endSystemDelay)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_delay_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ushort*)&roundtripDelay, cast(ushort*)&endSystemDelay);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_delay_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ushort*)&roundtripDelay, cast(ushort*)&endSystemDelay);
     return _retval;
   }
 
@@ -1007,7 +1009,7 @@ class RTCPPacket
   bool xrGetVoipJitterBufferParams(out ushort jbNominal, out ushort jbMaximum, out ushort jbAbsMax)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_jitter_buffer_params(cast(GstRTCPPacket*)this._cPtr, cast(ushort*)&jbNominal, cast(ushort*)&jbMaximum, cast(ushort*)&jbAbsMax);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_jitter_buffer_params(cast(GstRTCPPacket*)this._cPtr, cast(ushort*)&jbNominal, cast(ushort*)&jbMaximum, cast(ushort*)&jbAbsMax);
     return _retval;
   }
 
@@ -1015,7 +1017,7 @@ class RTCPPacket
   bool xrGetVoipMetricsSsrc(out uint ssrc)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_metrics_ssrc(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_metrics_ssrc(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc);
     return _retval;
   }
 
@@ -1023,7 +1025,7 @@ class RTCPPacket
   bool xrGetVoipPacketMetrics(out ubyte lossRate, out ubyte discardRate)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_packet_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&lossRate, cast(ubyte*)&discardRate);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_packet_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&lossRate, cast(ubyte*)&discardRate);
     return _retval;
   }
 
@@ -1031,7 +1033,7 @@ class RTCPPacket
   bool xrGetVoipQualityMetrics(out ubyte rFactor, out ubyte extRFactor, out ubyte mosLq, out ubyte mosCq)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_quality_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&rFactor, cast(ubyte*)&extRFactor, cast(ubyte*)&mosLq, cast(ubyte*)&mosCq);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_quality_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&rFactor, cast(ubyte*)&extRFactor, cast(ubyte*)&mosLq, cast(ubyte*)&mosCq);
     return _retval;
   }
 
@@ -1039,7 +1041,7 @@ class RTCPPacket
   bool xrGetVoipSignalMetrics(out ubyte signalLevel, out ubyte noiseLevel, out ubyte rerl, out ubyte gmin)
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_get_voip_signal_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&signalLevel, cast(ubyte*)&noiseLevel, cast(ubyte*)&rerl, cast(ubyte*)&gmin);
+    _retval = cast(bool)gst_rtcp_packet_xr_get_voip_signal_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&signalLevel, cast(ubyte*)&noiseLevel, cast(ubyte*)&rerl, cast(ubyte*)&gmin);
     return _retval;
   }
 
@@ -1050,7 +1052,7 @@ class RTCPPacket
   bool xrNextRb()
   {
     bool _retval;
-    _retval = gst_rtcp_packet_xr_next_rb(cast(GstRTCPPacket*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_packet_xr_next_rb(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
   }
 }

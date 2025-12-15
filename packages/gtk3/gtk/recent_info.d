@@ -86,7 +86,7 @@ class RecentInfo : gobject.boxed.Boxed
   bool exists()
   {
     bool _retval;
-    _retval = gtk_recent_info_exists(cast(GtkRecentInfo*)this._cPtr);
+    _retval = cast(bool)gtk_recent_info_exists(cast(GtkRecentInfo*)this._cPtr);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class RecentInfo : gobject.boxed.Boxed
     bool _retval;
     const(char)* _appName = appName.toCString(No.Alloc);
     char* _appExec;
-    _retval = gtk_recent_info_get_application_info(cast(GtkRecentInfo*)this._cPtr, _appName, &_appExec, cast(uint*)&count, cast(long*)&time);
+    _retval = cast(bool)gtk_recent_info_get_application_info(cast(GtkRecentInfo*)this._cPtr, _appName, &_appExec, cast(uint*)&count, cast(long*)&time);
     appExec = _appExec.fromCString(No.Free);
     return _retval;
   }
@@ -282,7 +282,7 @@ class RecentInfo : gobject.boxed.Boxed
   bool getPrivateHint()
   {
     bool _retval;
-    _retval = gtk_recent_info_get_private_hint(cast(GtkRecentInfo*)this._cPtr);
+    _retval = cast(bool)gtk_recent_info_get_private_hint(cast(GtkRecentInfo*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class RecentInfo : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _appName = appName.toCString(No.Alloc);
-    _retval = gtk_recent_info_has_application(cast(GtkRecentInfo*)this._cPtr, _appName);
+    _retval = cast(bool)gtk_recent_info_has_application(cast(GtkRecentInfo*)this._cPtr, _appName);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ class RecentInfo : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
-    _retval = gtk_recent_info_has_group(cast(GtkRecentInfo*)this._cPtr, _groupName);
+    _retval = cast(bool)gtk_recent_info_has_group(cast(GtkRecentInfo*)this._cPtr, _groupName);
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class RecentInfo : gobject.boxed.Boxed
   bool isLocal()
   {
     bool _retval;
-    _retval = gtk_recent_info_is_local(cast(GtkRecentInfo*)this._cPtr);
+    _retval = cast(bool)gtk_recent_info_is_local(cast(GtkRecentInfo*)this._cPtr);
     return _retval;
   }
 
@@ -412,7 +412,7 @@ class RecentInfo : gobject.boxed.Boxed
   bool match(gtk.recent_info.RecentInfo infoB)
   {
     bool _retval;
-    _retval = gtk_recent_info_match(cast(GtkRecentInfo*)this._cPtr, infoB ? cast(GtkRecentInfo*)infoB._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_recent_info_match(cast(GtkRecentInfo*)this._cPtr, infoB ? cast(GtkRecentInfo*)infoB._cPtr(No.Dup) : null);
     return _retval;
   }
 }

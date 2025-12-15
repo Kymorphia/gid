@@ -23,7 +23,7 @@ import gmime.types;
 bool checkVersion(uint major, uint minor, uint micro)
 {
   bool _retval;
-  _retval = g_mime_check_version(major, minor, micro);
+  _retval = cast(bool)g_mime_check_version(major, minor, micro);
   return _retval;
 }
 
@@ -438,7 +438,7 @@ bool utilsTextIs8bit(ubyte[] text)
     _len = cast(size_t)text.length;
 
   auto _text = cast(const(ubyte)*)text.ptr;
-  _retval = g_mime_utils_text_is_8bit(_text, _len);
+  _retval = cast(bool)g_mime_utils_text_is_8bit(_text, _len);
   return _retval;
 }
 

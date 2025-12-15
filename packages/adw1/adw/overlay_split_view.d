@@ -500,7 +500,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getCollapsed()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_collapsed(cast(AdwOverlaySplitView*)this._cPtr);
+    _retval = cast(bool)adw_overlay_split_view_get_collapsed(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getEnableHideGesture()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_enable_hide_gesture(cast(AdwOverlaySplitView*)this._cPtr);
+    _retval = cast(bool)adw_overlay_split_view_get_enable_hide_gesture(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -534,7 +534,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getEnableShowGesture()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_enable_show_gesture(cast(AdwOverlaySplitView*)this._cPtr);
+    _retval = cast(bool)adw_overlay_split_view_get_enable_show_gesture(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getPinSidebar()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_pin_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
+    _retval = cast(bool)adw_overlay_split_view_get_pin_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -578,7 +578,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getShowSidebar()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_show_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
+    _retval = cast(bool)adw_overlay_split_view_get_show_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 

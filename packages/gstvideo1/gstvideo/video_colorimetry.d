@@ -123,7 +123,7 @@ class VideoColorimetry
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
-    _retval = gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)this._cPtr, _color);
+    _retval = cast(bool)gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)this._cPtr, _color);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class VideoColorimetry
   bool isEqual(gstvideo.video_colorimetry.VideoColorimetry other)
   {
     bool _retval;
-    _retval = gst_video_colorimetry_is_equal(cast(const(GstVideoColorimetry)*)this._cPtr, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null);
+    _retval = cast(bool)gst_video_colorimetry_is_equal(cast(const(GstVideoColorimetry)*)this._cPtr, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class VideoColorimetry
   bool isEquivalent(uint bitdepth, gstvideo.video_colorimetry.VideoColorimetry other, uint otherBitdepth)
   {
     bool _retval;
-    _retval = gst_video_colorimetry_is_equivalent(cast(const(GstVideoColorimetry)*)this._cPtr, bitdepth, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null, otherBitdepth);
+    _retval = cast(bool)gst_video_colorimetry_is_equivalent(cast(const(GstVideoColorimetry)*)this._cPtr, bitdepth, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null, otherBitdepth);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class VideoColorimetry
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
-    _retval = gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)this._cPtr, _color);
+    _retval = cast(bool)gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)this._cPtr, _color);
     return _retval;
   }
 

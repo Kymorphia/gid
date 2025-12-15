@@ -590,7 +590,7 @@ class Uri : gobject.boxed.Boxed
     bool _retval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
     GError *_err;
-    _retval = g_uri_is_valid(_uriString, flags, &_err);
+    _retval = cast(bool)g_uri_is_valid(_uriString, flags, &_err);
     if (_err)
       throw new UriException(_err);
     return _retval;
@@ -916,7 +916,7 @@ class Uri : gobject.boxed.Boxed
     char* _query;
     char* _fragment;
     GError *_err;
-    _retval = g_uri_split(_uriRef, flags, &_scheme, &_userinfo, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
+    _retval = cast(bool)g_uri_split(_uriRef, flags, &_scheme, &_userinfo, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
     if (_err)
       throw new UriException(_err);
     scheme = _scheme.fromCString(Yes.Free);
@@ -956,7 +956,7 @@ class Uri : gobject.boxed.Boxed
     char* _scheme;
     char* _host;
     GError *_err;
-    _retval = g_uri_split_network(_uriString, flags, &_scheme, &_host, cast(int*)&port, &_err);
+    _retval = cast(bool)g_uri_split_network(_uriString, flags, &_scheme, &_host, cast(int*)&port, &_err);
     if (_err)
       throw new UriException(_err);
     scheme = _scheme.fromCString(Yes.Free);
@@ -1015,7 +1015,7 @@ class Uri : gobject.boxed.Boxed
     char* _query;
     char* _fragment;
     GError *_err;
-    _retval = g_uri_split_with_user(_uriRef, flags, &_scheme, &_user, &_password, &_authParams, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
+    _retval = cast(bool)g_uri_split_with_user(_uriRef, flags, &_scheme, &_user, &_password, &_authParams, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
     if (_err)
       throw new UriException(_err);
     scheme = _scheme.fromCString(Yes.Free);

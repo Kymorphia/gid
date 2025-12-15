@@ -62,7 +62,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   bool processTextures(gst.buffer.Buffer outbuf)
   {
     bool _retval;
-    _retval = gst_gl_mixer_process_textures(cast(GstGLMixer*)this._cPtr, outbuf ? cast(GstBuffer*)outbuf._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_mixer_process_textures(cast(GstGLMixer*)this._cPtr, outbuf ? cast(GstBuffer*)outbuf._cPtr(No.Dup) : null);
     return _retval;
   }
 }

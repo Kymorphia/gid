@@ -50,7 +50,7 @@ template MountT()
   override bool canEject()
   {
     bool _retval;
-    _retval = g_mount_can_eject(cast(GMount*)this._cPtr);
+    _retval = cast(bool)g_mount_can_eject(cast(GMount*)this._cPtr);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ template MountT()
   override bool canUnmount()
   {
     bool _retval;
-    _retval = g_mount_can_unmount(cast(GMount*)this._cPtr);
+    _retval = cast(bool)g_mount_can_unmount(cast(GMount*)this._cPtr);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_eject_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_mount_eject_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -153,7 +153,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_eject_with_operation_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_mount_eject_with_operation_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -433,7 +433,7 @@ template MountT()
   override bool isShadowed()
   {
     bool _retval;
-    _retval = g_mount_is_shadowed(cast(GMount*)this._cPtr);
+    _retval = cast(bool)g_mount_is_shadowed(cast(GMount*)this._cPtr);
     return _retval;
   }
 
@@ -483,7 +483,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_remount_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_mount_remount_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -542,7 +542,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_unmount_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_mount_unmount_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -588,7 +588,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_unmount_with_operation_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_mount_unmount_with_operation_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

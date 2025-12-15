@@ -531,7 +531,7 @@ class Date : gobject.boxed.Boxed
   bool isFirstOfMonth()
   {
     bool _retval;
-    _retval = g_date_is_first_of_month(cast(const(GDate)*)this._cPtr);
+    _retval = cast(bool)g_date_is_first_of_month(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -543,7 +543,7 @@ class Date : gobject.boxed.Boxed
   bool isLastOfMonth()
   {
     bool _retval;
-    _retval = g_date_is_last_of_month(cast(const(GDate)*)this._cPtr);
+    _retval = cast(bool)g_date_is_last_of_month(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -760,7 +760,7 @@ class Date : gobject.boxed.Boxed
   bool valid()
   {
     bool _retval;
-    _retval = g_date_valid(cast(const(GDate)*)this._cPtr);
+    _retval = cast(bool)g_date_valid(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -835,7 +835,7 @@ class Date : gobject.boxed.Boxed
   static bool isLeapYear(glib.types.DateYear year)
   {
     bool _retval;
-    _retval = g_date_is_leap_year(year);
+    _retval = cast(bool)g_date_is_leap_year(year);
     return _retval;
   }
 
@@ -850,7 +850,7 @@ class Date : gobject.boxed.Boxed
   static bool validDay(glib.types.DateDay day)
   {
     bool _retval;
-    _retval = g_date_valid_day(day);
+    _retval = cast(bool)g_date_valid_day(day);
     return _retval;
   }
 
@@ -868,7 +868,7 @@ class Date : gobject.boxed.Boxed
   static bool validDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear year)
   {
     bool _retval;
-    _retval = g_date_valid_dmy(day, month, year);
+    _retval = cast(bool)g_date_valid_dmy(day, month, year);
     return _retval;
   }
 
@@ -883,7 +883,7 @@ class Date : gobject.boxed.Boxed
   static bool validJulian(uint julianDate)
   {
     bool _retval;
-    _retval = g_date_valid_julian(julianDate);
+    _retval = cast(bool)g_date_valid_julian(julianDate);
     return _retval;
   }
 
@@ -898,7 +898,7 @@ class Date : gobject.boxed.Boxed
   static bool validMonth(glib.types.DateMonth month)
   {
     bool _retval;
-    _retval = g_date_valid_month(month);
+    _retval = cast(bool)g_date_valid_month(month);
     return _retval;
   }
 
@@ -913,7 +913,7 @@ class Date : gobject.boxed.Boxed
   static bool validWeekday(glib.types.DateWeekday weekday)
   {
     bool _retval;
-    _retval = g_date_valid_weekday(weekday);
+    _retval = cast(bool)g_date_valid_weekday(weekday);
     return _retval;
   }
 
@@ -928,7 +928,7 @@ class Date : gobject.boxed.Boxed
   static bool validYear(glib.types.DateYear year)
   {
     bool _retval;
-    _retval = g_date_valid_year(year);
+    _retval = cast(bool)g_date_valid_year(year);
     return _retval;
   }
 }

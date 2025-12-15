@@ -27,36 +27,36 @@ __gshared extern(C)
   RsvgHandle* function(GFile* file, RsvgHandleFlags flags, GCancellable* cancellable, GError** _err) c_rsvg_handle_new_from_gfile_sync; ///
   RsvgHandle* function(GInputStream* inputStream, GFile* baseFile, RsvgHandleFlags flags, GCancellable* cancellable, GError** _err) c_rsvg_handle_new_from_stream_sync; ///
   RsvgHandle* function(RsvgHandleFlags flags) c_rsvg_handle_new_with_flags; ///
-  bool function(RsvgHandle* handle, GError** _err) c_rsvg_handle_close; ///
+  gboolean function(RsvgHandle* handle, GError** _err) c_rsvg_handle_close; ///
   void function(RsvgHandle* handle) c_rsvg_handle_free; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_base_uri; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_desc; ///
   void function(RsvgHandle* handle, RsvgDimensionData* dimensionData) c_rsvg_handle_get_dimensions; ///
-  bool function(RsvgHandle* handle, RsvgDimensionData* dimensionData, const(char)* id) c_rsvg_handle_get_dimensions_sub; ///
-  bool function(RsvgHandle* handle, const(char)* id, RsvgRectangle* outInkRect, RsvgRectangle* outLogicalRect, GError** _err) c_rsvg_handle_get_geometry_for_element; ///
-  bool function(RsvgHandle* handle, const(char)* id, const(RsvgRectangle)* viewport, RsvgRectangle* outInkRect, RsvgRectangle* outLogicalRect, GError** _err) c_rsvg_handle_get_geometry_for_layer; ///
-  void function(RsvgHandle* handle, bool* outHasWidth, RsvgLength* outWidth, bool* outHasHeight, RsvgLength* outHeight, bool* outHasViewbox, RsvgRectangle* outViewbox) c_rsvg_handle_get_intrinsic_dimensions; ///
-  bool function(RsvgHandle* handle, double* outWidth, double* outHeight) c_rsvg_handle_get_intrinsic_size_in_pixels; ///
+  gboolean function(RsvgHandle* handle, RsvgDimensionData* dimensionData, const(char)* id) c_rsvg_handle_get_dimensions_sub; ///
+  gboolean function(RsvgHandle* handle, const(char)* id, RsvgRectangle* outInkRect, RsvgRectangle* outLogicalRect, GError** _err) c_rsvg_handle_get_geometry_for_element; ///
+  gboolean function(RsvgHandle* handle, const(char)* id, const(RsvgRectangle)* viewport, RsvgRectangle* outInkRect, RsvgRectangle* outLogicalRect, GError** _err) c_rsvg_handle_get_geometry_for_layer; ///
+  void function(RsvgHandle* handle, gboolean* outHasWidth, RsvgLength* outWidth, gboolean* outHasHeight, RsvgLength* outHeight, gboolean* outHasViewbox, RsvgRectangle* outViewbox) c_rsvg_handle_get_intrinsic_dimensions; ///
+  gboolean function(RsvgHandle* handle, double* outWidth, double* outHeight) c_rsvg_handle_get_intrinsic_size_in_pixels; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_metadata; ///
   GdkPixbuf* function(RsvgHandle* handle) c_rsvg_handle_get_pixbuf; ///
   GdkPixbuf* function(RsvgHandle* handle, const(char)* id) c_rsvg_handle_get_pixbuf_sub; ///
-  bool function(RsvgHandle* handle, RsvgPositionData* positionData, const(char)* id) c_rsvg_handle_get_position_sub; ///
+  gboolean function(RsvgHandle* handle, RsvgPositionData* positionData, const(char)* id) c_rsvg_handle_get_position_sub; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_title; ///
-  bool function(RsvgHandle* handle, const(char)* id) c_rsvg_handle_has_sub; ///
-  void function(RsvgHandle* handle, bool testing) c_rsvg_handle_internal_set_testing; ///
-  bool function(RsvgHandle* handle, GInputStream* stream, GCancellable* cancellable, GError** _err) c_rsvg_handle_read_stream_sync; ///
-  bool function(RsvgHandle* handle, cairo_t* cr) c_rsvg_handle_render_cairo; ///
-  bool function(RsvgHandle* handle, cairo_t* cr, const(char)* id) c_rsvg_handle_render_cairo_sub; ///
-  bool function(RsvgHandle* handle, cairo_t* cr, const(RsvgRectangle)* viewport, GError** _err) c_rsvg_handle_render_document; ///
-  bool function(RsvgHandle* handle, cairo_t* cr, const(char)* id, const(RsvgRectangle)* elementViewport, GError** _err) c_rsvg_handle_render_element; ///
-  bool function(RsvgHandle* handle, cairo_t* cr, const(char)* id, const(RsvgRectangle)* viewport, GError** _err) c_rsvg_handle_render_layer; ///
+  gboolean function(RsvgHandle* handle, const(char)* id) c_rsvg_handle_has_sub; ///
+  void function(RsvgHandle* handle, gboolean testing) c_rsvg_handle_internal_set_testing; ///
+  gboolean function(RsvgHandle* handle, GInputStream* stream, GCancellable* cancellable, GError** _err) c_rsvg_handle_read_stream_sync; ///
+  gboolean function(RsvgHandle* handle, cairo_t* cr) c_rsvg_handle_render_cairo; ///
+  gboolean function(RsvgHandle* handle, cairo_t* cr, const(char)* id) c_rsvg_handle_render_cairo_sub; ///
+  gboolean function(RsvgHandle* handle, cairo_t* cr, const(RsvgRectangle)* viewport, GError** _err) c_rsvg_handle_render_document; ///
+  gboolean function(RsvgHandle* handle, cairo_t* cr, const(char)* id, const(RsvgRectangle)* elementViewport, GError** _err) c_rsvg_handle_render_element; ///
+  gboolean function(RsvgHandle* handle, cairo_t* cr, const(char)* id, const(RsvgRectangle)* viewport, GError** _err) c_rsvg_handle_render_layer; ///
   void function(RsvgHandle* handle, GFile* baseFile) c_rsvg_handle_set_base_gfile; ///
   void function(RsvgHandle* handle, const(char)* baseUri) c_rsvg_handle_set_base_uri; ///
   void function(RsvgHandle* handle, double dpi) c_rsvg_handle_set_dpi; ///
   void function(RsvgHandle* handle, double dpiX, double dpiY) c_rsvg_handle_set_dpi_x_y; ///
   void function(RsvgHandle* handle, RsvgSizeFunc sizeFunc, void* userData, GDestroyNotify userDataDestroy) c_rsvg_handle_set_size_callback; ///
-  bool function(RsvgHandle* handle, const(ubyte)* css, size_t cssLen, GError** _err) c_rsvg_handle_set_stylesheet; ///
-  bool function(RsvgHandle* handle, const(ubyte)* buf, size_t count, GError** _err) c_rsvg_handle_write; ///
+  gboolean function(RsvgHandle* handle, const(ubyte)* css, size_t cssLen, GError** _err) c_rsvg_handle_set_stylesheet; ///
+  gboolean function(RsvgHandle* handle, const(ubyte)* buf, size_t count, GError** _err) c_rsvg_handle_write; ///
 
   // global
   void function() c_rsvg_cleanup; ///

@@ -178,7 +178,7 @@ class DsdInfo : gobject.boxed.Boxed
   */
   @property bool reversedBytes()
   {
-    return (cast(GstDsdInfo*)this._cPtr).reversedBytes;
+    return cast(bool)(cast(GstDsdInfo*)this._cPtr).reversedBytes;
   }
 
   /**
@@ -253,7 +253,7 @@ class DsdInfo : gobject.boxed.Boxed
   bool isEqual(gstaudio.dsd_info.DsdInfo other)
   {
     bool _retval;
-    _retval = gst_dsd_info_is_equal(cast(const(GstDsdInfo)*)this._cPtr, other ? cast(const(GstDsdInfo)*)other._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_dsd_info_is_equal(cast(const(GstDsdInfo)*)this._cPtr, other ? cast(const(GstDsdInfo)*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -300,7 +300,7 @@ class DsdInfo : gobject.boxed.Boxed
   {
     bool _retval;
     GstDsdInfo _info;
-    _retval = gst_dsd_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_dsd_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     info = new gstaudio.dsd_info.DsdInfo(cast(void*)&_info, No.Take);
     return _retval;
   }

@@ -318,7 +318,7 @@ class DropTarget : gtk.event_controller.EventController
   bool getPreload()
   {
     bool _retval;
-    _retval = gtk_drop_target_get_preload(cast(GtkDropTarget*)this._cPtr);
+    _retval = cast(bool)gtk_drop_target_get_preload(cast(GtkDropTarget*)this._cPtr);
     return _retval;
   }
 

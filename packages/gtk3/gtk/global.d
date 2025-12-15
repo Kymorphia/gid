@@ -63,7 +63,7 @@ import pango.types;
 bool accelGroupsActivate(gobject.object.ObjectWrap object, uint accelKey, gdk.types.ModifierType accelMods)
 {
   bool _retval;
-  _retval = gtk_accel_groups_activate(object ? cast(GObject*)object._cPtr(No.Dup) : null, accelKey, accelMods);
+  _retval = cast(bool)gtk_accel_groups_activate(object ? cast(GObject*)object._cPtr(No.Dup) : null, accelKey, accelMods);
   return _retval;
 }
 
@@ -286,7 +286,7 @@ void acceleratorSetDefaultModMask(gdk.types.ModifierType defaultModMask)
 bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_accelerator_valid(keyval, modifiers);
+  _retval = cast(bool)gtk_accelerator_valid(keyval, modifiers);
   return _retval;
 }
 
@@ -310,7 +310,7 @@ bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
 bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
 {
   bool _retval;
-  _retval = gtk_alternative_dialog_button_order(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
+  _retval = cast(bool)gtk_alternative_dialog_button_order(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -327,7 +327,7 @@ bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
 bool bindingsActivate(gobject.object.ObjectWrap object, uint keyval, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_bindings_activate(object ? cast(GObject*)object._cPtr(No.Dup) : null, keyval, modifiers);
+  _retval = cast(bool)gtk_bindings_activate(object ? cast(GObject*)object._cPtr(No.Dup) : null, keyval, modifiers);
   return _retval;
 }
 
@@ -343,7 +343,7 @@ bool bindingsActivate(gobject.object.ObjectWrap object, uint keyval, gdk.types.M
 bool bindingsActivateEvent(gobject.object.ObjectWrap object, gdk.event_key.EventKey event)
 {
   bool _retval;
-  _retval = gtk_bindings_activate_event(object ? cast(GObject*)object._cPtr(No.Dup) : null, event ? cast(GdkEventKey*)event._cPtr : null);
+  _retval = cast(bool)gtk_bindings_activate_event(object ? cast(GObject*)object._cPtr(No.Dup) : null, event ? cast(GdkEventKey*)event._cPtr : null);
   return _retval;
 }
 
@@ -367,7 +367,7 @@ bool bindingsActivateEvent(gobject.object.ObjectWrap object, gdk.event_key.Event
 bool cairoShouldDrawWindow(cairo.context.Context cr, gdk.window.Window window)
 {
   bool _retval;
-  _retval = gtk_cairo_should_draw_window(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
+  _retval = cast(bool)gtk_cairo_should_draw_window(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -721,7 +721,7 @@ void drawInsertionCursor(gtk.widget.Widget widget, cairo.context.Context cr, gdk
 bool eventsPending()
 {
   bool _retval;
-  _retval = gtk_events_pending();
+  _retval = cast(bool)gtk_events_pending();
   return _retval;
 }
 
@@ -733,7 +733,7 @@ bool eventsPending()
 bool false_()
 {
   bool _retval;
-  _retval = gtk_false();
+  _retval = cast(bool)gtk_false();
   return _retval;
 }
 
@@ -795,7 +795,7 @@ gdk.device.Device getCurrentEventDevice()
 bool getCurrentEventState(out gdk.types.ModifierType state)
 {
   bool _retval;
-  _retval = gtk_get_current_event_state(&state);
+  _retval = cast(bool)gtk_get_current_event_state(&state);
   return _retval;
 }
 
@@ -1082,7 +1082,7 @@ void mainDoEvent(gdk.event.Event event)
 bool mainIteration()
 {
   bool _retval;
-  _retval = gtk_main_iteration();
+  _retval = cast(bool)gtk_main_iteration();
   return _retval;
 }
 
@@ -1099,7 +1099,7 @@ bool mainIteration()
 bool mainIterationDo(bool blocking)
 {
   bool _retval;
-  _retval = gtk_main_iteration_do(blocking);
+  _retval = cast(bool)gtk_main_iteration_do(blocking);
   return _retval;
 }
 
@@ -2045,7 +2045,7 @@ void rcParseString(string rcString)
 bool rcReparseAll()
 {
   bool _retval;
-  _retval = gtk_rc_reparse_all();
+  _retval = cast(bool)gtk_rc_reparse_all();
   return _retval;
 }
 
@@ -2064,7 +2064,7 @@ bool rcReparseAll()
 bool rcReparseAllForSettings(gtk.settings.Settings settings, bool forceLoad)
 {
   bool _retval;
-  _retval = gtk_rc_reparse_all_for_settings(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, forceLoad);
+  _retval = cast(bool)gtk_rc_reparse_all_for_settings(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, forceLoad);
   return _retval;
 }
 
@@ -2588,7 +2588,7 @@ void selectionClearTargets(gtk.widget.Widget widget, gdk.atom.Atom selection)
 bool selectionConvert(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.atom.Atom target, uint time)
 {
   bool _retval;
-  _retval = gtk_selection_convert(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, target ? cast(GdkAtom)target._cPtr : null, time);
+  _retval = cast(bool)gtk_selection_convert(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, target ? cast(GdkAtom)target._cPtr : null, time);
   return _retval;
 }
 
@@ -2605,7 +2605,7 @@ bool selectionConvert(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.ato
 bool selectionOwnerSet(gtk.widget.Widget widget, gdk.atom.Atom selection, uint time)
 {
   bool _retval;
-  _retval = gtk_selection_owner_set(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time);
+  _retval = cast(bool)gtk_selection_owner_set(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time);
   return _retval;
 }
 
@@ -2623,7 +2623,7 @@ bool selectionOwnerSet(gtk.widget.Widget widget, gdk.atom.Atom selection, uint t
 bool selectionOwnerSetForDisplay(gdk.display.Display display, gtk.widget.Widget widget, gdk.atom.Atom selection, uint time)
 {
   bool _retval;
-  _retval = gtk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time);
+  _retval = cast(bool)gtk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time);
   return _retval;
 }
 
@@ -2676,7 +2676,7 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
   bool _retval;
   const(char)* _uri = uri.toCString(No.Alloc);
   GError *_err;
-  _retval = gtk_show_uri(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, _uri, timestamp, &_err);
+  _retval = cast(bool)gtk_show_uri(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -2713,7 +2713,7 @@ bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
   bool _retval;
   const(char)* _uri = uri.toCString(No.Alloc);
   GError *_err;
-  _retval = gtk_show_uri_on_window(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _uri, timestamp, &_err);
+  _retval = cast(bool)gtk_show_uri_on_window(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -2747,7 +2747,7 @@ bool stockLookup(string stockId, out gtk.stock_item.StockItem item)
   bool _retval;
   const(char)* _stockId = stockId.toCString(No.Alloc);
   GtkStockItem _item;
-  _retval = gtk_stock_lookup(_stockId, &_item);
+  _retval = cast(bool)gtk_stock_lookup(_stockId, &_item);
   item = new gtk.stock_item.StockItem(cast(void*)&_item, No.Take);
   return _retval;
 }
@@ -3035,7 +3035,7 @@ void testSliderSetPerc(gtk.widget.Widget widget, double percentage)
 bool testSpinButtonClick(gtk.spin_button.SpinButton spinner, uint button, bool upwards)
 {
   bool _retval;
-  _retval = gtk_test_spin_button_click(spinner ? cast(GtkSpinButton*)spinner._cPtr(No.Dup) : null, button, upwards);
+  _retval = cast(bool)gtk_test_spin_button_click(spinner ? cast(GtkSpinButton*)spinner._cPtr(No.Dup) : null, button, upwards);
   return _retval;
 }
 
@@ -3095,7 +3095,7 @@ void testTextSet(gtk.widget.Widget widget, string string_)
 bool testWidgetClick(gtk.widget.Widget widget, uint button, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_test_widget_click(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, button, modifiers);
+  _retval = cast(bool)gtk_test_widget_click(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, button, modifiers);
   return _retval;
 }
 
@@ -3118,7 +3118,7 @@ bool testWidgetClick(gtk.widget.Widget widget, uint button, gdk.types.ModifierTy
 bool testWidgetSendKey(gtk.widget.Widget widget, uint keyval, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_test_widget_send_key(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, keyval, modifiers);
+  _retval = cast(bool)gtk_test_widget_send_key(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, keyval, modifiers);
   return _retval;
 }
 
@@ -3162,7 +3162,7 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
   bool _retval;
   GtkTreeModel* _treeModel;
   GtkTreePath* _path;
-  _retval = gtk_tree_get_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, &_treeModel, &_path);
+  _retval = cast(bool)gtk_tree_get_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, &_treeModel, &_path);
   treeModel = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
   path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   return _retval;
@@ -3181,7 +3181,7 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
 bool treeSetRowDragData(gtk.selection_data.SelectionData selectionData, gtk.tree_model.TreeModel treeModel, gtk.tree_path.TreePath path)
 {
   bool _retval;
-  _retval = gtk_tree_set_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+  _retval = cast(bool)gtk_tree_set_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3232,6 +3232,6 @@ bool treeSetRowDragData(gtk.selection_data.SelectionData selectionData, gtk.tree
 bool true_()
 {
   bool _retval;
-  _retval = gtk_true();
+  _retval = cast(bool)gtk_true();
   return _retval;
 }

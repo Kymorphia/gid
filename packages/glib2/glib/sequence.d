@@ -213,7 +213,7 @@ class Sequence
   bool isEmpty()
   {
     bool _retval;
-    _retval = g_sequence_is_empty(cast(GSequence*)this._cPtr);
+    _retval = cast(bool)g_sequence_is_empty(cast(GSequence*)this._cPtr);
     return _retval;
   }
 

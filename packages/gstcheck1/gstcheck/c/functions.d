@@ -28,13 +28,13 @@ __gshared extern(C)
   void function(GstHarness* h, const(char)* sinkElementName) c_gst_harness_add_sink; ///
   void function(GstHarness* h, GstHarness* sinkHarness) c_gst_harness_add_sink_harness; ///
   void function(GstHarness* h, const(char)* launchline) c_gst_harness_add_sink_parse; ///
-  void function(GstHarness* h, const(char)* srcElementName, bool hasClockWait) c_gst_harness_add_src; ///
-  void function(GstHarness* h, GstHarness* srcHarness, bool hasClockWait) c_gst_harness_add_src_harness; ///
-  void function(GstHarness* h, const(char)* launchline, bool hasClockWait) c_gst_harness_add_src_parse; ///
+  void function(GstHarness* h, const(char)* srcElementName, gboolean hasClockWait) c_gst_harness_add_src; ///
+  void function(GstHarness* h, GstHarness* srcHarness, gboolean hasClockWait) c_gst_harness_add_src_harness; ///
+  void function(GstHarness* h, const(char)* launchline, gboolean hasClockWait) c_gst_harness_add_src_parse; ///
   uint function(GstHarness* h) c_gst_harness_buffers_in_queue; ///
   uint function(GstHarness* h) c_gst_harness_buffers_received; ///
-  bool function(GstHarness* h, uint waits) c_gst_harness_crank_multiple_clock_waits; ///
-  bool function(GstHarness* h) c_gst_harness_crank_single_clock_wait; ///
+  gboolean function(GstHarness* h, uint waits) c_gst_harness_crank_multiple_clock_waits; ///
+  gboolean function(GstHarness* h) c_gst_harness_crank_single_clock_wait; ///
   GstBuffer* function(GstHarness* h, size_t size) c_gst_harness_create_buffer; ///
   void function(GstHarness* h, const(char)* filename) c_gst_harness_dump_to_file; ///
   uint function(GstHarness* h) c_gst_harness_events_in_queue; ///
@@ -47,32 +47,32 @@ __gshared extern(C)
   void function(GstHarness* h) c_gst_harness_play; ///
   GstBuffer* function(GstHarness* h) c_gst_harness_pull; ///
   GstEvent* function(GstHarness* h) c_gst_harness_pull_event; ///
-  bool function(GstHarness* h, GstBuffer** buf) c_gst_harness_pull_until_eos; ///
+  gboolean function(GstHarness* h, GstBuffer** buf) c_gst_harness_pull_until_eos; ///
   GstEvent* function(GstHarness* h) c_gst_harness_pull_upstream_event; ///
   GstFlowReturn function(GstHarness* h, GstBuffer* buffer) c_gst_harness_push; ///
   GstBuffer* function(GstHarness* h, GstBuffer* buffer) c_gst_harness_push_and_pull; ///
-  bool function(GstHarness* h, GstEvent* event) c_gst_harness_push_event; ///
+  gboolean function(GstHarness* h, GstEvent* event) c_gst_harness_push_event; ///
   GstFlowReturn function(GstHarness* h) c_gst_harness_push_from_src; ///
   GstFlowReturn function(GstHarness* h) c_gst_harness_push_to_sink; ///
-  bool function(GstHarness* h, GstEvent* event) c_gst_harness_push_upstream_event; ///
+  gboolean function(GstHarness* h, GstEvent* event) c_gst_harness_push_upstream_event; ///
   GstClockTime function(GstHarness* h) c_gst_harness_query_latency; ///
   void function(GstHarness* h, const(char)* elementName, const(char)* firstPropertyName,  ...) c_gst_harness_set; ///
   void function(GstHarness* h) c_gst_harness_set_blocking_push_mode; ///
   void function(GstHarness* h, GstCaps* in_, GstCaps* out_) c_gst_harness_set_caps; ///
   void function(GstHarness* h, const(char)* in_, const(char)* out_) c_gst_harness_set_caps_str; ///
-  void function(GstHarness* h, bool dropBuffers) c_gst_harness_set_drop_buffers; ///
-  void function(GstHarness* h, bool forwarding) c_gst_harness_set_forwarding; ///
-  void function(GstHarness* h, bool isLive) c_gst_harness_set_live; ///
+  void function(GstHarness* h, gboolean dropBuffers) c_gst_harness_set_drop_buffers; ///
+  void function(GstHarness* h, gboolean forwarding) c_gst_harness_set_forwarding; ///
+  void function(GstHarness* h, gboolean isLive) c_gst_harness_set_live; ///
   void function(GstHarness* h, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_harness_set_propose_allocator; ///
   void function(GstHarness* h, GstCaps* caps) c_gst_harness_set_sink_caps; ///
   void function(GstHarness* h, const(char)* str) c_gst_harness_set_sink_caps_str; ///
   void function(GstHarness* h, GstCaps* caps) c_gst_harness_set_src_caps; ///
   void function(GstHarness* h, const(char)* str) c_gst_harness_set_src_caps_str; ///
-  bool function(GstHarness* h, GstClockTime time) c_gst_harness_set_time; ///
+  gboolean function(GstHarness* h, GstClockTime time) c_gst_harness_set_time; ///
   void function(GstHarness* h, GstClockTime latency) c_gst_harness_set_upstream_latency; ///
   GstFlowReturn function(GstHarness* h, int pushes) c_gst_harness_sink_push_many; ///
   GstFlowReturn function(GstHarness* h, int cranks, int pushes) c_gst_harness_src_crank_and_push_many; ///
-  bool function(GstHarness* h) c_gst_harness_src_push_event; ///
+  gboolean function(GstHarness* h) c_gst_harness_src_push_event; ///
   GstHarnessThread* function(GstHarness* h, GFunc init_, GFunc callback, void* data, gulong sleep) c_gst_harness_stress_custom_start; ///
   GstHarnessThread* function(GstHarness* h, const(char)* name, const(GValue)* value, gulong sleep) c_gst_harness_stress_property_start_full; ///
   GstHarnessThread* function(GstHarness* h, GstCaps* caps, const(GstSegment)* segment, GstBuffer* buf, gulong sleep) c_gst_harness_stress_push_buffer_start_full; ///
@@ -81,7 +81,7 @@ __gshared extern(C)
   GstHarnessThread* function(GstHarness* h, GstHarnessPrepareEventFunc func, void* data, GDestroyNotify notify, gulong sleep) c_gst_harness_stress_push_event_with_cb_start_full; ///
   GstHarnessThread* function(GstHarness* h, GstEvent* event, gulong sleep) c_gst_harness_stress_push_upstream_event_start_full; ///
   GstHarnessThread* function(GstHarness* h, GstHarnessPrepareEventFunc func, void* data, GDestroyNotify notify, gulong sleep) c_gst_harness_stress_push_upstream_event_with_cb_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstPadTemplate* templ, const(char)* name, GstCaps* caps, bool release, gulong sleep) c_gst_harness_stress_requestpad_start_full; ///
+  GstHarnessThread* function(GstHarness* h, GstPadTemplate* templ, const(char)* name, GstCaps* caps, gboolean release, gulong sleep) c_gst_harness_stress_requestpad_start_full; ///
   GstHarnessThread* function(GstHarness* h, gulong sleep) c_gst_harness_stress_statechange_start_full; ///
   ubyte* function(GstHarness* h, size_t* size) c_gst_harness_take_all_data; ///
   GstBuffer* function(GstHarness* h) c_gst_harness_take_all_data_as_buffer; ///
@@ -94,7 +94,7 @@ __gshared extern(C)
   uint function(GstHarness* h) c_gst_harness_upstream_events_received; ///
   void function(GstHarness* h) c_gst_harness_use_systemclock; ///
   void function(GstHarness* h) c_gst_harness_use_testclock; ///
-  bool function(GstHarness* h, uint waits, uint timeout) c_gst_harness_wait_for_clock_id_waits; ///
+  gboolean function(GstHarness* h, uint waits, uint timeout) c_gst_harness_wait_for_clock_id_waits; ///
   GstHarness* function(const(char)* elementName) c_gst_harness_new; ///
   GstHarness* function() c_gst_harness_new_empty; ///
   GstHarness* function(GstElement* element, GstStaticPadTemplate* hsrc, const(char)* elementSinkpadName, GstStaticPadTemplate* hsink, const(char)* elementSrcpadName) c_gst_harness_new_full; ///
@@ -110,16 +110,16 @@ __gshared extern(C)
   GstClock* function(GstClockTime startTime) c_gst_test_clock_new_with_start_time; ///
   GstClockTime function(const(GList)* pendingList) c_gst_test_clock_id_list_get_latest_time; ///
   void function(GstTestClock* testClock, GstClockTimeDiff delta) c_gst_test_clock_advance_time; ///
-  bool function(GstTestClock* testClock) c_gst_test_clock_crank; ///
+  gboolean function(GstTestClock* testClock) c_gst_test_clock_crank; ///
   GstClockTime function(GstTestClock* testClock) c_gst_test_clock_get_next_entry_time; ///
-  bool function(GstTestClock* testClock, GstClockID id) c_gst_test_clock_has_id; ///
+  gboolean function(GstTestClock* testClock, GstClockID id) c_gst_test_clock_has_id; ///
   uint function(GstTestClock* testClock) c_gst_test_clock_peek_id_count; ///
-  bool function(GstTestClock* testClock, GstClockID* pendingId) c_gst_test_clock_peek_next_pending_id; ///
-  bool function(GstTestClock* testClock, GstClockID pendingId) c_gst_test_clock_process_id; ///
+  gboolean function(GstTestClock* testClock, GstClockID* pendingId) c_gst_test_clock_peek_next_pending_id; ///
+  gboolean function(GstTestClock* testClock, GstClockID pendingId) c_gst_test_clock_process_id; ///
   uint function(GstTestClock* testClock, const(GList)* pendingList) c_gst_test_clock_process_id_list; ///
   GstClockID function(GstTestClock* testClock) c_gst_test_clock_process_next_clock_id; ///
   void function(GstTestClock* testClock, GstClockTime newTime) c_gst_test_clock_set_time; ///
-  bool function(GstTestClock* testClock, uint count, uint timeoutMs, GList** pendingList) c_gst_test_clock_timed_wait_for_multiple_pending_ids; ///
+  gboolean function(GstTestClock* testClock, uint count, uint timeoutMs, GList** pendingList) c_gst_test_clock_timed_wait_for_multiple_pending_ids; ///
   void function(GstTestClock* testClock, uint count, GList** pendingList) c_gst_test_clock_wait_for_multiple_pending_ids; ///
   void function(GstTestClock* testClock, GstClockID* pendingId) c_gst_test_clock_wait_for_next_pending_id; ///
   void function(GstTestClock* testClock, uint count) c_gst_test_clock_wait_for_pending_id_count; ///
@@ -128,7 +128,7 @@ __gshared extern(C)
   GstBuffer* function(GstElement* bin, GstPad* pad) c_gst_buffer_straw_get_buffer; ///
   void function(GstElement* bin, GstPad* pad) c_gst_buffer_straw_start_pipeline; ///
   void function(GstElement* bin, GstPad* pad) c_gst_buffer_straw_stop_pipeline; ///
-  void function(GstCheckABIStruct* list, bool haveAbiSizes) c_gst_check_abi_list; ///
+  void function(GstCheckABIStruct* list, gboolean haveAbiSizes) c_gst_check_abi_list; ///
   GstCheckLogFilter* function(const(char)* logDomain, GLogLevelFlags logLevel, GRegex* regex, GstCheckLogFilterFunc func, void* userData, GDestroyNotify destroyData) c_gst_check_add_log_filter; ///
   void function(GstBuffer* buffer, const(void)* data, size_t size) c_gst_check_buffer_data; ///
   void function(GstCaps* caps1, GstCaps* caps2) c_gst_check_caps_equal; ///
@@ -157,7 +157,7 @@ __gshared extern(C)
   void function(GstElement* element, const(char)* name) c_gst_check_teardown_pad_by_name; ///
   void function(GstElement* element) c_gst_check_teardown_sink_pad; ///
   void function(GstElement* element) c_gst_check_teardown_src_pad; ///
-  bool function(GstStreamConsistency* consist, GstPad* pad) c_gst_consistency_checker_add_pad; ///
+  gboolean function(GstStreamConsistency* consist, GstPad* pad) c_gst_consistency_checker_add_pad; ///
   void function(GstStreamConsistency* consist) c_gst_consistency_checker_free; ///
   GstStreamConsistency* function(GstPad* pad) c_gst_consistency_checker_new; ///
   void function(GstStreamConsistency* consist) c_gst_consistency_checker_reset; ///

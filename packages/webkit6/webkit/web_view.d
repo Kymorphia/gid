@@ -516,7 +516,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_web_view_can_execute_editing_command_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_web_view_can_execute_editing_command_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -529,7 +529,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool canGoBack()
   {
     bool _retval;
-    _retval = webkit_web_view_can_go_back(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_can_go_back(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -540,7 +540,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool canGoForward()
   {
     bool _retval;
-    _retval = webkit_web_view_can_go_forward(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_can_go_forward(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    _retval = webkit_web_view_can_show_mime_type(cast(WebKitWebView*)this._cPtr, _mimeType);
+    _retval = cast(bool)webkit_web_view_can_show_mime_type(cast(WebKitWebView*)this._cPtr, _mimeType);
     return _retval;
   }
 
@@ -910,7 +910,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool getIsMuted()
   {
     bool _retval;
-    _retval = webkit_web_view_get_is_muted(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_get_is_muted(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -921,7 +921,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool getIsWebProcessResponsive()
   {
     bool _retval;
-    _retval = webkit_web_view_get_is_web_process_responsive(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_get_is_web_process_responsive(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1106,7 +1106,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     GTlsCertificate* _certificate;
-    _retval = webkit_web_view_get_tls_info(cast(WebKitWebView*)this._cPtr, &_certificate, &errors);
+    _retval = cast(bool)webkit_web_view_get_tls_info(cast(WebKitWebView*)this._cPtr, &_certificate, &errors);
     certificate = new gio.tls_certificate.TlsCertificate(cast(void*)_certificate, No.Take);
     return _retval;
   }
@@ -1294,7 +1294,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isControlledByAutomation()
   {
     bool _retval;
-    _retval = webkit_web_view_is_controlled_by_automation(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_is_controlled_by_automation(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1309,7 +1309,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isEditable()
   {
     bool _retval;
-    _retval = webkit_web_view_is_editable(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_is_editable(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1326,7 +1326,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isLoading()
   {
     bool _retval;
-    _retval = webkit_web_view_is_loading(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_is_loading(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1342,7 +1342,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isPlayingAudio()
   {
     bool _retval;
-    _retval = webkit_web_view_is_playing_audio(cast(WebKitWebView*)this._cPtr);
+    _retval = cast(bool)webkit_web_view_is_playing_audio(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1581,7 +1581,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_web_view_save_to_file_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_web_view_save_to_file_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

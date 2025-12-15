@@ -125,7 +125,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   {
     bool _retval;
     const(char)* _domain = domain.toCString(No.Alloc);
-    _retval = soup_hsts_enforcer_has_valid_policy(cast(SoupHSTSEnforcer*)this._cPtr, _domain);
+    _retval = cast(bool)soup_hsts_enforcer_has_valid_policy(cast(SoupHSTSEnforcer*)this._cPtr, _domain);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   bool isPersistent()
   {
     bool _retval;
-    _retval = soup_hsts_enforcer_is_persistent(cast(SoupHSTSEnforcer*)this._cPtr);
+    _retval = cast(bool)soup_hsts_enforcer_is_persistent(cast(SoupHSTSEnforcer*)this._cPtr);
     return _retval;
   }
 

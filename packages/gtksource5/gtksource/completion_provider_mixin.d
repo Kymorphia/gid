@@ -123,7 +123,7 @@ template CompletionProviderT()
   override bool isTrigger(gtk.text_iter.TextIter iter, dchar ch)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_is_trigger(cast(GtkSourceCompletionProvider*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, ch);
+    _retval = cast(bool)gtk_source_completion_provider_is_trigger(cast(GtkSourceCompletionProvider*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, ch);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ template CompletionProviderT()
   override bool keyActivates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, uint keyval, gdk.types.ModifierType state)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_key_activates(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, keyval, state);
+    _retval = cast(bool)gtk_source_completion_provider_key_activates(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, keyval, state);
     return _retval;
   }
 

@@ -198,7 +198,7 @@ class Node : gobject.boxed.Boxed
   bool equal(json.node.Node b)
   {
     bool _retval;
-    _retval = json_node_equal(cast(JsonNode*)this._cPtr, b ? cast(JsonNode*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)json_node_equal(cast(JsonNode*)this._cPtr, b ? cast(JsonNode*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class Node : gobject.boxed.Boxed
   bool getBoolean()
   {
     bool _retval;
-    _retval = json_node_get_boolean(cast(JsonNode*)this._cPtr);
+    _retval = cast(bool)json_node_get_boolean(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -528,7 +528,7 @@ class Node : gobject.boxed.Boxed
   bool isImmutable()
   {
     bool _retval;
-    _retval = json_node_is_immutable(cast(JsonNode*)this._cPtr);
+    _retval = cast(bool)json_node_is_immutable(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class Node : gobject.boxed.Boxed
   bool isNull()
   {
     bool _retval;
-    _retval = json_node_is_null(cast(JsonNode*)this._cPtr);
+    _retval = cast(bool)json_node_is_null(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 

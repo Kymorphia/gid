@@ -162,7 +162,7 @@ class ObjectWrap
   }
 
   // Toggle ref callback
-  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, bool isLastRef)
+  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, gboolean isLastRef)
   {
     debug
     {
@@ -665,7 +665,7 @@ class ObjectWrap
   bool isFloating()
   {
     bool _retval;
-    _retval = g_object_is_floating(cast(GObject*)this._cPtr);
+    _retval = cast(bool)g_object_is_floating(cast(GObject*)this._cPtr);
     return _retval;
   }
 

@@ -134,7 +134,7 @@ class GLShader : gst.object.ObjectWrap
   bool attach(gstgl.glslstage.GLSLStage stage)
   {
     bool _retval;
-    _retval = gst_gl_shader_attach(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_shader_attach(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class GLShader : gst.object.ObjectWrap
   bool attachUnlocked(gstgl.glslstage.GLSLStage stage)
   {
     bool _retval;
-    _retval = gst_gl_shader_attach_unlocked(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_shader_attach_unlocked(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class GLShader : gst.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_shader_compile_attach_stage(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gst_gl_shader_compile_attach_stage(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -255,7 +255,7 @@ class GLShader : gst.object.ObjectWrap
   bool isLinked()
   {
     bool _retval;
-    _retval = gst_gl_shader_is_linked(cast(GstGLShader*)this._cPtr);
+    _retval = cast(bool)gst_gl_shader_is_linked(cast(GstGLShader*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class GLShader : gst.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_shader_link(cast(GstGLShader*)this._cPtr, &_err);
+    _retval = cast(bool)gst_gl_shader_link(cast(GstGLShader*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

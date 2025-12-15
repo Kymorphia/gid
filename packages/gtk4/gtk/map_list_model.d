@@ -140,7 +140,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
   bool hasMap()
   {
     bool _retval;
-    _retval = gtk_map_list_model_has_map(cast(GtkMapListModel*)this._cPtr);
+    _retval = cast(bool)gtk_map_list_model_has_map(cast(GtkMapListModel*)this._cPtr);
     return _retval;
   }
 

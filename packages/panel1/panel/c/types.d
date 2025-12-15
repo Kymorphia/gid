@@ -128,7 +128,7 @@ struct PanelDocumentWorkspaceClass
   extern(C) PanelFrame* function(PanelDocumentWorkspace* self, PanelPosition* position) createFrame;
 
   /** */
-  extern(C) bool function(PanelDocumentWorkspace* self, PanelWidget* widget, PanelPosition* position) addWidget;
+  extern(C) gboolean function(PanelDocumentWorkspace* self, PanelWidget* widget, PanelPosition* position) addWidget;
 
   /** */
   void*[16] Reserved;
@@ -158,7 +158,7 @@ struct PanelFrameClass
   extern(C) void function(PanelFrame* self, PanelWidget* widget) pageClosed;
 
   /** */
-  extern(C) bool function(PanelFrame* self, PanelWidget* widget) adoptWidget;
+  extern(C) gboolean function(PanelFrame* self, PanelWidget* widget) adoptWidget;
 
   /** */
   void*[6] Reserved;
@@ -195,7 +195,7 @@ struct PanelFrameHeaderInterface
   extern(C) void function(PanelFrameHeader* self, PanelWidget* widget) pageChanged;
 
   /** */
-  extern(C) bool function(PanelFrameHeader* self, PanelWidget* widget) canDrop;
+  extern(C) gboolean function(PanelFrameHeader* self, PanelWidget* widget) canDrop;
 
   /** */
   extern(C) void function(PanelFrameHeader* self, int priority, GtkWidget* child) addPrefix;
@@ -394,10 +394,10 @@ struct PanelSaveDelegateClass
   extern(C) void function(PanelSaveDelegate* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) saveAsync;
 
   /** */
-  extern(C) bool function(PanelSaveDelegate* self, GAsyncResult* result, GError** _err) saveFinish;
+  extern(C) gboolean function(PanelSaveDelegate* self, GAsyncResult* result, GError** _err) saveFinish;
 
   /** */
-  extern(C) bool function(PanelSaveDelegate* self, GTask* task) save;
+  extern(C) gboolean function(PanelSaveDelegate* self, GTask* task) save;
 
   /** */
   extern(C) void function(PanelSaveDelegate* self) discard;
@@ -550,7 +550,7 @@ struct PanelWorkbenchClass
   extern(C) void function(PanelWorkbench* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) unloadAsync;
 
   /** */
-  extern(C) bool function(PanelWorkbench* self, GAsyncResult* result, GError** _err) unloadFinish;
+  extern(C) gboolean function(PanelWorkbench* self, GAsyncResult* result, GError** _err) unloadFinish;
 
   /** */
   void*[8] Reserved;

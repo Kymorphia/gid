@@ -57,7 +57,7 @@ class StreamNull : gmime.stream.Stream
   bool getCountNewlines()
   {
     bool _retval;
-    _retval = g_mime_stream_null_get_count_newlines(cast(GMimeStreamNull*)this._cPtr);
+    _retval = cast(bool)g_mime_stream_null_get_count_newlines(cast(GMimeStreamNull*)this._cPtr);
     return _retval;
   }
 

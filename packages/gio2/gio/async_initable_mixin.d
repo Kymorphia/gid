@@ -192,7 +192,7 @@ template AsyncInitableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_async_initable_init_finish(cast(GAsyncInitable*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

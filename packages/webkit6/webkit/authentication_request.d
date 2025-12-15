@@ -83,7 +83,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   bool canSaveCredentials()
   {
     bool _retval;
-    _retval = webkit_authentication_request_can_save_credentials(cast(WebKitAuthenticationRequest*)this._cPtr);
+    _retval = cast(bool)webkit_authentication_request_can_save_credentials(cast(WebKitAuthenticationRequest*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   bool isForProxy()
   {
     bool _retval;
-    _retval = webkit_authentication_request_is_for_proxy(cast(WebKitAuthenticationRequest*)this._cPtr);
+    _retval = cast(bool)webkit_authentication_request_is_for_proxy(cast(WebKitAuthenticationRequest*)this._cPtr);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   bool isRetry()
   {
     bool _retval;
-    _retval = webkit_authentication_request_is_retry(cast(WebKitAuthenticationRequest*)this._cPtr);
+    _retval = cast(bool)webkit_authentication_request_is_retry(cast(WebKitAuthenticationRequest*)this._cPtr);
     return _retval;
   }
 

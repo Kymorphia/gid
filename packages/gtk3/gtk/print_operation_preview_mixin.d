@@ -35,7 +35,7 @@ template PrintOperationPreviewT()
   override bool isSelected(int pageNr)
   {
     bool _retval;
-    _retval = gtk_print_operation_preview_is_selected(cast(GtkPrintOperationPreview*)this._cPtr, pageNr);
+    _retval = cast(bool)gtk_print_operation_preview_is_selected(cast(GtkPrintOperationPreview*)this._cPtr, pageNr);
     return _retval;
   }
 

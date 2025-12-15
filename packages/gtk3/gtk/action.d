@@ -729,7 +729,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getAlwaysShowImage()
   {
     bool _retval;
-    _retval = gtk_action_get_always_show_image(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_get_always_show_image(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -775,7 +775,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getIsImportant()
   {
     bool _retval;
-    _retval = gtk_action_get_is_important(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_get_is_important(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -836,7 +836,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getSensitive()
   {
     bool _retval;
-    _retval = gtk_action_get_sensitive(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_get_sensitive(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -897,7 +897,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_action_get_visible(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_get_visible(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -911,7 +911,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getVisibleHorizontal()
   {
     bool _retval;
-    _retval = gtk_action_get_visible_horizontal(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_get_visible_horizontal(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -925,7 +925,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getVisibleVertical()
   {
     bool _retval;
-    _retval = gtk_action_get_visible_vertical(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_get_visible_vertical(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -940,7 +940,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool isSensitive()
   {
     bool _retval;
-    _retval = gtk_action_is_sensitive(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_is_sensitive(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -955,7 +955,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool isVisible()
   {
     bool _retval;
-    _retval = gtk_action_is_visible(cast(GtkAction*)this._cPtr);
+    _retval = cast(bool)gtk_action_is_visible(cast(GtkAction*)this._cPtr);
     return _retval;
   }
 

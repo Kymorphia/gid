@@ -1205,7 +1205,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool activate()
   {
     bool _retval;
-    _retval = gtk_widget_activate(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_activate(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -1231,7 +1231,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_widget_activate_action_variant(cast(GtkWidget*)this._cPtr, _name, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_widget_activate_action_variant(cast(GtkWidget*)this._cPtr, _name, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1325,11 +1325,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   uint addTickCallback(gtk.types.TickCallback callback)
   {
-    extern(C) bool _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData)
+    extern(C) gboolean _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData)
     {
       auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -1393,7 +1393,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool childFocus(gtk.types.DirectionType direction)
   {
     bool _retval;
-    _retval = gtk_widget_child_focus(cast(GtkWidget*)this._cPtr, direction);
+    _retval = cast(bool)gtk_widget_child_focus(cast(GtkWidget*)this._cPtr, direction);
     return _retval;
   }
 
@@ -1420,7 +1420,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     bool _retval;
     graphene_rect_t _outBounds;
-    _retval = gtk_widget_compute_bounds(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, &_outBounds);
+    _retval = cast(bool)gtk_widget_compute_bounds(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, &_outBounds);
     outBounds = new graphene.rect.Rect(cast(void*)&_outBounds, No.Take);
     return _retval;
   }
@@ -1447,7 +1447,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool computeExpand(gtk.types.Orientation orientation)
   {
     bool _retval;
-    _retval = gtk_widget_compute_expand(cast(GtkWidget*)this._cPtr, orientation);
+    _retval = cast(bool)gtk_widget_compute_expand(cast(GtkWidget*)this._cPtr, orientation);
     return _retval;
   }
 
@@ -1470,7 +1470,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     bool _retval;
     graphene_point_t _outPoint;
-    _retval = gtk_widget_compute_point(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null, &_outPoint);
+    _retval = cast(bool)gtk_widget_compute_point(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null, &_outPoint);
     outPoint = new graphene.point.Point(cast(void*)&_outPoint, No.Take);
     return _retval;
   }
@@ -1496,7 +1496,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     bool _retval;
     graphene_matrix_t _outTransform;
-    _retval = gtk_widget_compute_transform(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, &_outTransform);
+    _retval = cast(bool)gtk_widget_compute_transform(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, &_outTransform);
     outTransform = new graphene.matrix.Matrix(cast(void*)&_outTransform, No.Take);
     return _retval;
   }
@@ -1515,7 +1515,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool contains(double x, double y)
   {
     bool _retval;
-    _retval = gtk_widget_contains(cast(GtkWidget*)this._cPtr, x, y);
+    _retval = cast(bool)gtk_widget_contains(cast(GtkWidget*)this._cPtr, x, y);
     return _retval;
   }
 
@@ -1606,7 +1606,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool dragCheckThreshold(int startX, int startY, int currentX, int currentY)
   {
     bool _retval;
-    _retval = gtk_drag_check_threshold(cast(GtkWidget*)this._cPtr, startX, startY, currentX, currentY);
+    _retval = cast(bool)gtk_drag_check_threshold(cast(GtkWidget*)this._cPtr, startX, startY, currentX, currentY);
     return _retval;
   }
 
@@ -1722,7 +1722,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getCanFocus()
   {
     bool _retval;
-    _retval = gtk_widget_get_can_focus(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_can_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -1733,7 +1733,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getCanTarget()
   {
     bool _retval;
-    _retval = gtk_widget_get_can_target(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_can_target(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -1750,7 +1750,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getChildVisible()
   {
     bool _retval;
-    _retval = gtk_widget_get_child_visible(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_child_visible(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -1915,7 +1915,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getFocusOnClick()
   {
     bool _retval;
-    _retval = gtk_widget_get_focus_on_click(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_focus_on_click(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -1928,7 +1928,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getFocusable()
   {
     bool _retval;
-    _retval = gtk_widget_get_focusable(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_focusable(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2019,7 +2019,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getHasTooltip()
   {
     bool _retval;
-    _retval = gtk_widget_get_has_tooltip(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_has_tooltip(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2065,7 +2065,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getHexpand()
   {
     bool _retval;
-    _retval = gtk_widget_get_hexpand(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_hexpand(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2085,7 +2085,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getHexpandSet()
   {
     bool _retval;
-    _retval = gtk_widget_get_hexpand_set(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_hexpand_set(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2124,7 +2124,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getMapped()
   {
     bool _retval;
-    _retval = gtk_widget_get_mapped(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_mapped(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2343,7 +2343,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getRealized()
   {
     bool _retval;
-    _retval = gtk_widget_get_realized(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_realized(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2359,7 +2359,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getReceivesDefault()
   {
     bool _retval;
-    _retval = gtk_widget_get_receives_default(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_receives_default(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2429,7 +2429,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getSensitive()
   {
     bool _retval;
-    _retval = gtk_widget_get_sensitive(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_sensitive(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2613,7 +2613,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getVexpand()
   {
     bool _retval;
-    _retval = gtk_widget_get_vexpand(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_vexpand(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2627,7 +2627,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getVexpandSet()
   {
     bool _retval;
-    _retval = gtk_widget_get_vexpand_set(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_vexpand_set(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2647,7 +2647,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_widget_get_visible(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_get_visible(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2685,7 +2685,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool grabFocus()
   {
     bool _retval;
-    _retval = gtk_widget_grab_focus(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_grab_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2702,7 +2702,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     bool _retval;
     const(char)* _cssClass = cssClass.toCString(No.Alloc);
-    _retval = gtk_widget_has_css_class(cast(GtkWidget*)this._cPtr, _cssClass);
+    _retval = cast(bool)gtk_widget_has_css_class(cast(GtkWidget*)this._cPtr, _cssClass);
     return _retval;
   }
 
@@ -2715,7 +2715,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool hasDefault()
   {
     bool _retval;
-    _retval = gtk_widget_has_default(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_has_default(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2730,7 +2730,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool hasFocus()
   {
     bool _retval;
-    _retval = gtk_widget_has_focus(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_has_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2750,7 +2750,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool hasVisibleFocus()
   {
     bool _retval;
-    _retval = gtk_widget_has_visible_focus(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_has_visible_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2776,7 +2776,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool inDestruction()
   {
     bool _retval;
-    _retval = gtk_widget_in_destruction(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_in_destruction(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2896,7 +2896,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool isAncestor(gtk.widget.Widget ancestor)
   {
     bool _retval;
-    _retval = gtk_widget_is_ancestor(cast(GtkWidget*)this._cPtr, ancestor ? cast(GtkWidget*)ancestor._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_widget_is_ancestor(cast(GtkWidget*)this._cPtr, ancestor ? cast(GtkWidget*)ancestor._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2909,7 +2909,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool isDrawable()
   {
     bool _retval;
-    _retval = gtk_widget_is_drawable(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_is_drawable(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2926,7 +2926,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool isFocus()
   {
     bool _retval;
-    _retval = gtk_widget_is_focus(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_is_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2940,7 +2940,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool isSensitive()
   {
     bool _retval;
-    _retval = gtk_widget_is_sensitive(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_is_sensitive(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2957,7 +2957,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool isVisible()
   {
     bool _retval;
-    _retval = gtk_widget_is_visible(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_is_visible(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2999,7 +2999,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool keynavFailed(gtk.types.DirectionType direction)
   {
     bool _retval;
-    _retval = gtk_widget_keynav_failed(cast(GtkWidget*)this._cPtr, direction);
+    _retval = cast(bool)gtk_widget_keynav_failed(cast(GtkWidget*)this._cPtr, direction);
     return _retval;
   }
 
@@ -3078,7 +3078,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool mnemonicActivate(bool groupCycling)
   {
     bool _retval;
-    _retval = gtk_widget_mnemonic_activate(cast(GtkWidget*)this._cPtr, groupCycling);
+    _retval = cast(bool)gtk_widget_mnemonic_activate(cast(GtkWidget*)this._cPtr, groupCycling);
     return _retval;
   }
 
@@ -3945,7 +3945,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool shouldLayout()
   {
     bool _retval;
-    _retval = gtk_widget_should_layout(cast(GtkWidget*)this._cPtr);
+    _retval = cast(bool)gtk_widget_should_layout(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -4032,7 +4032,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool translateCoordinates(gtk.widget.Widget destWidget, double srcX, double srcY, out double destX, out double destY)
   {
     bool _retval;
-    _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)this._cPtr, destWidget ? cast(GtkWidget*)destWidget._cPtr(No.Dup) : null, srcX, srcY, cast(double*)&destX, cast(double*)&destY);
+    _retval = cast(bool)gtk_widget_translate_coordinates(cast(GtkWidget*)this._cPtr, destWidget ? cast(GtkWidget*)destWidget._cPtr(No.Dup) : null, srcX, srcY, cast(double*)&destX, cast(double*)&destY);
     return _retval;
   }
 

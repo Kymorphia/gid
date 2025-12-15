@@ -97,7 +97,7 @@ class TocEntry : gobject.boxed.Boxed
   bool getLoop(out gst.types.TocLoopType loopType, out int repeatCount)
   {
     bool _retval;
-    _retval = gst_toc_entry_get_loop(cast(const(GstTocEntry)*)this._cPtr, &loopType, cast(int*)&repeatCount);
+    _retval = cast(bool)gst_toc_entry_get_loop(cast(const(GstTocEntry)*)this._cPtr, &loopType, cast(int*)&repeatCount);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class TocEntry : gobject.boxed.Boxed
   bool getStartStopTimes(out long start, out long stop)
   {
     bool _retval;
-    _retval = gst_toc_entry_get_start_stop_times(cast(const(GstTocEntry)*)this._cPtr, cast(long*)&start, cast(long*)&stop);
+    _retval = cast(bool)gst_toc_entry_get_start_stop_times(cast(const(GstTocEntry)*)this._cPtr, cast(long*)&start, cast(long*)&stop);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class TocEntry : gobject.boxed.Boxed
   bool isAlternative()
   {
     bool _retval;
-    _retval = gst_toc_entry_is_alternative(cast(const(GstTocEntry)*)this._cPtr);
+    _retval = cast(bool)gst_toc_entry_is_alternative(cast(const(GstTocEntry)*)this._cPtr);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class TocEntry : gobject.boxed.Boxed
   bool isSequence()
   {
     bool _retval;
-    _retval = gst_toc_entry_is_sequence(cast(const(GstTocEntry)*)this._cPtr);
+    _retval = cast(bool)gst_toc_entry_is_sequence(cast(const(GstTocEntry)*)this._cPtr);
     return _retval;
   }
 

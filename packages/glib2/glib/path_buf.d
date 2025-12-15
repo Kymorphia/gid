@@ -162,7 +162,7 @@ class PathBuf
   bool pop()
   {
     bool _retval;
-    _retval = g_path_buf_pop(cast(GPathBuf*)this._cPtr);
+    _retval = cast(bool)g_path_buf_pop(cast(GPathBuf*)this._cPtr);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class PathBuf
   {
     bool _retval;
     const(char)* _extension = extension.toCString(No.Alloc);
-    _retval = g_path_buf_set_extension(cast(GPathBuf*)this._cPtr, _extension);
+    _retval = cast(bool)g_path_buf_set_extension(cast(GPathBuf*)this._cPtr, _extension);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class PathBuf
   {
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
-    _retval = g_path_buf_set_filename(cast(GPathBuf*)this._cPtr, _fileName);
+    _retval = cast(bool)g_path_buf_set_filename(cast(GPathBuf*)this._cPtr, _fileName);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class PathBuf
   static bool equal(const(void)* v1, const(void)* v2)
   {
     bool _retval;
-    _retval = g_path_buf_equal(v1, v2);
+    _retval = cast(bool)g_path_buf_equal(v1, v2);
     return _retval;
   }
 }

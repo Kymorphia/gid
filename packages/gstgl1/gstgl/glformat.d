@@ -26,7 +26,7 @@ struct GLFormat
   static bool isSupported(gstgl.glcontext.GLContext context, gstgl.types.GLFormat format)
   {
     bool _retval;
-    _retval = gst_gl_format_is_supported(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, format);
+    _retval = cast(bool)gst_gl_format_is_supported(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, format);
     return _retval;
   }
 

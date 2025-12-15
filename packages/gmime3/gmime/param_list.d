@@ -146,7 +146,7 @@ class ParamList : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_mime_param_list_remove(cast(GMimeParamList*)this._cPtr, _name);
+    _retval = cast(bool)g_mime_param_list_remove(cast(GMimeParamList*)this._cPtr, _name);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class ParamList : gobject.object.ObjectWrap
   bool removeAt(int index)
   {
     bool _retval;
-    _retval = g_mime_param_list_remove_at(cast(GMimeParamList*)this._cPtr, index);
+    _retval = cast(bool)g_mime_param_list_remove_at(cast(GMimeParamList*)this._cPtr, index);
     return _retval;
   }
 

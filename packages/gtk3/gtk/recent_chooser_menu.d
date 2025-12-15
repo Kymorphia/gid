@@ -139,7 +139,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   bool getShowNumbers()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_menu_get_show_numbers(cast(GtkRecentChooserMenu*)this._cPtr);
+    _retval = cast(bool)gtk_recent_chooser_menu_get_show_numbers(cast(GtkRecentChooserMenu*)this._cPtr);
     return _retval;
   }
 

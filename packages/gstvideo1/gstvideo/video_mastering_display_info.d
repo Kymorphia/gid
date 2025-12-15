@@ -106,7 +106,7 @@ class VideoMasteringDisplayInfo
   bool addToCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_add_to_caps(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_mastering_display_info_add_to_caps(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class VideoMasteringDisplayInfo
   bool fromCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_from_caps(cast(GstVideoMasteringDisplayInfo*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_mastering_display_info_from_caps(cast(GstVideoMasteringDisplayInfo*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class VideoMasteringDisplayInfo
   bool isEqual(gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo other)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_is_equal(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, other ? cast(const(GstVideoMasteringDisplayInfo)*)other._cPtr : null);
+    _retval = cast(bool)gst_video_mastering_display_info_is_equal(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, other ? cast(const(GstVideoMasteringDisplayInfo)*)other._cPtr : null);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class VideoMasteringDisplayInfo
     bool _retval;
     GstVideoMasteringDisplayInfo _minfo;
     const(char)* _mastering = mastering.toCString(No.Alloc);
-    _retval = gst_video_mastering_display_info_from_string(&_minfo, _mastering);
+    _retval = cast(bool)gst_video_mastering_display_info_from_string(&_minfo, _mastering);
     minfo = new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(void*)&_minfo, No.Take);
     return _retval;
   }

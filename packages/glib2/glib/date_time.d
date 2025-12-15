@@ -650,7 +650,7 @@ class DateTime : gobject.boxed.Boxed
   bool equal(glib.date_time.DateTime dt2)
   {
     bool _retval;
-    _retval = g_date_time_equal(cast(GDateTime*)this._cPtr, dt2 ? cast(GDateTime*)dt2._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_date_time_equal(cast(GDateTime*)this._cPtr, dt2 ? cast(GDateTime*)dt2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1086,7 +1086,7 @@ class DateTime : gobject.boxed.Boxed
   bool isDaylightSavings()
   {
     bool _retval;
-    _retval = g_date_time_is_daylight_savings(cast(GDateTime*)this._cPtr);
+    _retval = cast(bool)g_date_time_is_daylight_savings(cast(GDateTime*)this._cPtr);
     return _retval;
   }
 
@@ -1132,7 +1132,7 @@ class DateTime : gobject.boxed.Boxed
   bool toTimeval(glib.time_val.TimeVal tv)
   {
     bool _retval;
-    _retval = g_date_time_to_timeval(cast(GDateTime*)this._cPtr, tv ? cast(GTimeVal*)tv._cPtr : null);
+    _retval = cast(bool)g_date_time_to_timeval(cast(GDateTime*)this._cPtr, tv ? cast(GTimeVal*)tv._cPtr : null);
     return _retval;
   }
 

@@ -320,13 +320,13 @@ struct GstAudioVisualizerClass
   GstElementClass parentClass;
 
   /** */
-  extern(C) bool function(GstAudioVisualizer* scope_) setup;
+  extern(C) gboolean function(GstAudioVisualizer* scope_) setup;
 
   /** */
-  extern(C) bool function(GstAudioVisualizer* scope_, GstBuffer* audio, GstVideoFrame* video) render;
+  extern(C) gboolean function(GstAudioVisualizer* scope_, GstBuffer* audio, GstVideoFrame* video) render;
 
   /** */
-  extern(C) bool function(GstAudioVisualizer* scope_, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstAudioVisualizer* scope_, GstQuery* query) decideAllocation;
 }
 
 /** */

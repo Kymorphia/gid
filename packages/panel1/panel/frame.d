@@ -136,7 +136,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   bool getCloseable()
   {
     bool _retval;
-    _retval = panel_frame_get_closeable(cast(PanelFrame*)this._cPtr);
+    _retval = cast(bool)panel_frame_get_closeable(cast(PanelFrame*)this._cPtr);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   bool getEmpty()
   {
     bool _retval;
-    _retval = panel_frame_get_empty(cast(PanelFrame*)this._cPtr);
+    _retval = cast(bool)panel_frame_get_empty(cast(PanelFrame*)this._cPtr);
     return _retval;
   }
 

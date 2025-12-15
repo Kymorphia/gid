@@ -176,7 +176,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool hasAnyClass(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_has_any_class(cast(GtkSourceGutterLines*)this._cPtr, line);
+    _retval = cast(bool)gtk_source_gutter_lines_has_any_class(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class GutterLines : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_source_gutter_lines_has_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
+    _retval = cast(bool)gtk_source_gutter_lines_has_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool hasQclass(uint line, glib.types.Quark qname)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_has_qclass(cast(GtkSourceGutterLines*)this._cPtr, line, qname);
+    _retval = cast(bool)gtk_source_gutter_lines_has_qclass(cast(GtkSourceGutterLines*)this._cPtr, line, qname);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool isCursor(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_is_cursor(cast(GtkSourceGutterLines*)this._cPtr, line);
+    _retval = cast(bool)gtk_source_gutter_lines_is_cursor(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool isPrelit(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_is_prelit(cast(GtkSourceGutterLines*)this._cPtr, line);
+    _retval = cast(bool)gtk_source_gutter_lines_is_prelit(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool isSelected(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_is_selected(cast(GtkSourceGutterLines*)this._cPtr, line);
+    _retval = cast(bool)gtk_source_gutter_lines_is_selected(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 

@@ -99,7 +99,7 @@ class MetaTableColumn
   */
   @property bool pkey()
   {
-    return (cast(GdaMetaTableColumn*)this._cPtr).pkey;
+    return cast(bool)(cast(GdaMetaTableColumn*)this._cPtr).pkey;
   }
 
   /**
@@ -118,7 +118,7 @@ class MetaTableColumn
   */
   @property bool nullok()
   {
-    return (cast(GdaMetaTableColumn*)this._cPtr).nullok;
+    return cast(bool)(cast(GdaMetaTableColumn*)this._cPtr).nullok;
   }
 
   /**

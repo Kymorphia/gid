@@ -94,7 +94,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   bool getLoop()
   {
     bool _retval;
-    _retval = gdk_pixbuf_simple_anim_get_loop(cast(GdkPixbufSimpleAnim*)this._cPtr);
+    _retval = cast(bool)gdk_pixbuf_simple_anim_get_loop(cast(GdkPixbufSimpleAnim*)this._cPtr);
     return _retval;
   }
 

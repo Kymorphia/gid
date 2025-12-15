@@ -65,7 +65,7 @@ class RoundedRect
   bool containsPoint(graphene.point.Point point)
   {
     bool _retval;
-    _retval = gsk_rounded_rect_contains_point(cast(const(GskRoundedRect)*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)gsk_rounded_rect_contains_point(cast(const(GskRoundedRect)*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class RoundedRect
   bool containsRect(graphene.rect.Rect rect)
   {
     bool _retval;
-    _retval = gsk_rounded_rect_contains_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
+    _retval = cast(bool)gsk_rounded_rect_contains_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class RoundedRect
   bool intersectsRect(graphene.rect.Rect rect)
   {
     bool _retval;
-    _retval = gsk_rounded_rect_intersects_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
+    _retval = cast(bool)gsk_rounded_rect_intersects_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class RoundedRect
   bool isRectilinear()
   {
     bool _retval;
-    _retval = gsk_rounded_rect_is_rectilinear(cast(const(GskRoundedRect)*)this._cPtr);
+    _retval = cast(bool)gsk_rounded_rect_is_rectilinear(cast(const(GskRoundedRect)*)this._cPtr);
     return _retval;
   }
 

@@ -444,7 +444,7 @@ class Harness
   bool crankMultipleClockWaits(uint waits)
   {
     bool _retval;
-    _retval = gst_harness_crank_multiple_clock_waits(cast(GstHarness*)this._cPtr, waits);
+    _retval = cast(bool)gst_harness_crank_multiple_clock_waits(cast(GstHarness*)this._cPtr, waits);
     return _retval;
   }
 
@@ -464,7 +464,7 @@ class Harness
   bool crankSingleClockWait()
   {
     bool _retval;
-    _retval = gst_harness_crank_single_clock_wait(cast(GstHarness*)this._cPtr);
+    _retval = cast(bool)gst_harness_crank_single_clock_wait(cast(GstHarness*)this._cPtr);
     return _retval;
   }
 
@@ -662,7 +662,7 @@ class Harness
   {
     bool _retval;
     GstBuffer* _buf;
-    _retval = gst_harness_pull_until_eos(cast(GstHarness*)this._cPtr, &_buf);
+    _retval = cast(bool)gst_harness_pull_until_eos(cast(GstHarness*)this._cPtr, &_buf);
     buf = new gst.buffer.Buffer(cast(void*)_buf, Yes.Take);
     return _retval;
   }
@@ -731,7 +731,7 @@ class Harness
   bool pushEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_harness_push_event(cast(GstHarness*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_harness_push_event(cast(GstHarness*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -781,7 +781,7 @@ class Harness
   bool pushUpstreamEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_harness_push_upstream_event(cast(GstHarness*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_harness_push_upstream_event(cast(GstHarness*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -976,7 +976,7 @@ class Harness
   bool setTime(gst.types.ClockTime time)
   {
     bool _retval;
-    _retval = gst_harness_set_time(cast(GstHarness*)this._cPtr, time);
+    _retval = cast(bool)gst_harness_set_time(cast(GstHarness*)this._cPtr, time);
     return _retval;
   }
 
@@ -1043,7 +1043,7 @@ class Harness
   bool srcPushEvent()
   {
     bool _retval;
-    _retval = gst_harness_src_push_event(cast(GstHarness*)this._cPtr);
+    _retval = cast(bool)gst_harness_src_push_event(cast(GstHarness*)this._cPtr);
     return _retval;
   }
 
@@ -1195,7 +1195,7 @@ class Harness
   bool waitForClockIdWaits(uint waits, uint timeout)
   {
     bool _retval;
-    _retval = gst_harness_wait_for_clock_id_waits(cast(GstHarness*)this._cPtr, waits, timeout);
+    _retval = cast(bool)gst_harness_wait_for_clock_id_waits(cast(GstHarness*)this._cPtr, waits, timeout);
     return _retval;
   }
 

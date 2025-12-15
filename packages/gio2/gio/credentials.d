@@ -141,7 +141,7 @@ class Credentials : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_credentials_is_same_user(cast(GCredentials*)this._cPtr, otherCredentials ? cast(GCredentials*)otherCredentials._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_credentials_is_same_user(cast(GCredentials*)this._cPtr, otherCredentials ? cast(GCredentials*)otherCredentials._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -182,7 +182,7 @@ class Credentials : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_credentials_set_unix_user(cast(GCredentials*)this._cPtr, uid, &_err);
+    _retval = cast(bool)g_credentials_set_unix_user(cast(GCredentials*)this._cPtr, uid, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

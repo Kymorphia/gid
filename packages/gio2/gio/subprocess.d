@@ -190,7 +190,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GBytes* _stdoutBuf;
     GBytes* _stderrBuf;
     GError *_err;
-    _retval = g_subprocess_communicate(cast(GSubprocess*)this._cPtr, stdinBuf ? cast(GBytes*)stdinBuf._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
+    _retval = cast(bool)g_subprocess_communicate(cast(GSubprocess*)this._cPtr, stdinBuf ? cast(GBytes*)stdinBuf._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
@@ -238,7 +238,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GBytes* _stdoutBuf;
     GBytes* _stderrBuf;
     GError *_err;
-    _retval = g_subprocess_communicate_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
+    _retval = cast(bool)g_subprocess_communicate_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
@@ -268,7 +268,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     char* _stdoutBuf;
     char* _stderrBuf;
     GError *_err;
-    _retval = g_subprocess_communicate_utf8(cast(GSubprocess*)this._cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
+    _retval = cast(bool)g_subprocess_communicate_utf8(cast(GSubprocess*)this._cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     stdoutBuf = _stdoutBuf.fromCString(Yes.Free);
@@ -317,7 +317,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     char* _stdoutBuf;
     char* _stderrBuf;
     GError *_err;
-    _retval = g_subprocess_communicate_utf8_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
+    _retval = cast(bool)g_subprocess_communicate_utf8_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     stdoutBuf = _stdoutBuf.fromCString(Yes.Free);
@@ -385,7 +385,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   bool getIfExited()
   {
     bool _retval;
-    _retval = g_subprocess_get_if_exited(cast(GSubprocess*)this._cPtr);
+    _retval = cast(bool)g_subprocess_get_if_exited(cast(GSubprocess*)this._cPtr);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   bool getIfSignaled()
   {
     bool _retval;
-    _retval = g_subprocess_get_if_signaled(cast(GSubprocess*)this._cPtr);
+    _retval = cast(bool)g_subprocess_get_if_signaled(cast(GSubprocess*)this._cPtr);
     return _retval;
   }
 
@@ -486,7 +486,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   bool getSuccessful()
   {
     bool _retval;
-    _retval = g_subprocess_get_successful(cast(GSubprocess*)this._cPtr);
+    _retval = cast(bool)g_subprocess_get_successful(cast(GSubprocess*)this._cPtr);
     return _retval;
   }
 
@@ -546,7 +546,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait(cast(GSubprocess*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_subprocess_wait(cast(GSubprocess*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -589,7 +589,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait_check(cast(GSubprocess*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_subprocess_wait_check(cast(GSubprocess*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -632,7 +632,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait_check_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_subprocess_wait_check_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -651,7 +651,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_subprocess_wait_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

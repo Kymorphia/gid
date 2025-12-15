@@ -73,7 +73,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gparquet_arrow_file_writer_close(cast(GParquetArrowFileWriter*)this._cPtr, &_err);
+    _retval = cast(bool)gparquet_arrow_file_writer_close(cast(GParquetArrowFileWriter*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -97,7 +97,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gparquet_arrow_file_writer_new_buffered_row_group(cast(GParquetArrowFileWriter*)this._cPtr, &_err);
+    _retval = cast(bool)gparquet_arrow_file_writer_new_buffered_row_group(cast(GParquetArrowFileWriter*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -115,7 +115,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gparquet_arrow_file_writer_new_row_group(cast(GParquetArrowFileWriter*)this._cPtr, chunkSize, &_err);
+    _retval = cast(bool)gparquet_arrow_file_writer_new_row_group(cast(GParquetArrowFileWriter*)this._cPtr, chunkSize, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -133,7 +133,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gparquet_arrow_file_writer_write_chunked_array(cast(GParquetArrowFileWriter*)this._cPtr, chunkedArray ? cast(GArrowChunkedArray*)chunkedArray._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gparquet_arrow_file_writer_write_chunked_array(cast(GParquetArrowFileWriter*)this._cPtr, chunkedArray ? cast(GArrowChunkedArray*)chunkedArray._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -162,7 +162,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gparquet_arrow_file_writer_write_record_batch(cast(GParquetArrowFileWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gparquet_arrow_file_writer_write_record_batch(cast(GParquetArrowFileWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -173,7 +173,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gparquet_arrow_file_writer_write_table(cast(GParquetArrowFileWriter*)this._cPtr, table ? cast(GArrowTable*)table._cPtr(No.Dup) : null, chunkSize, &_err);
+    _retval = cast(bool)gparquet_arrow_file_writer_write_table(cast(GParquetArrowFileWriter*)this._cPtr, table ? cast(GArrowTable*)table._cPtr(No.Dup) : null, chunkSize, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

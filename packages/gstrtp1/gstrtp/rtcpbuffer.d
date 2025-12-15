@@ -76,7 +76,7 @@ class RTCPBuffer
   bool addPacket(gstrtp.types.RTCPType type, gstrtp.rtcppacket.RTCPPacket packet)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_add_packet(cast(GstRTCPBuffer*)this._cPtr, type, packet ? cast(GstRTCPPacket*)packet._cPtr : null);
+    _retval = cast(bool)gst_rtcp_buffer_add_packet(cast(GstRTCPBuffer*)this._cPtr, type, packet ? cast(GstRTCPPacket*)packet._cPtr : null);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class RTCPBuffer
   bool getFirstPacket(gstrtp.rtcppacket.RTCPPacket packet)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_get_first_packet(cast(GstRTCPBuffer*)this._cPtr, packet ? cast(GstRTCPPacket*)packet._cPtr : null);
+    _retval = cast(bool)gst_rtcp_buffer_get_first_packet(cast(GstRTCPBuffer*)this._cPtr, packet ? cast(GstRTCPPacket*)packet._cPtr : null);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class RTCPBuffer
   bool unmap()
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_unmap(cast(GstRTCPBuffer*)this._cPtr);
+    _retval = cast(bool)gst_rtcp_buffer_unmap(cast(GstRTCPBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class RTCPBuffer
   static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, gstrtp.rtcpbuffer.RTCPBuffer rtcp)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, rtcp ? cast(GstRTCPBuffer*)rtcp._cPtr : null);
+    _retval = cast(bool)gst_rtcp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, rtcp ? cast(GstRTCPBuffer*)rtcp._cPtr : null);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class RTCPBuffer
   static bool validate(gst.buffer.Buffer buffer)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_validate(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_rtcp_buffer_validate(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class RTCPBuffer
       _len = cast(uint)data.length;
 
     auto _data = cast(ubyte*)data.ptr;
-    _retval = gst_rtcp_buffer_validate_data(_data, _len);
+    _retval = cast(bool)gst_rtcp_buffer_validate_data(_data, _len);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class RTCPBuffer
       _len = cast(uint)data.length;
 
     auto _data = cast(ubyte*)data.ptr;
-    _retval = gst_rtcp_buffer_validate_data_reduced(_data, _len);
+    _retval = cast(bool)gst_rtcp_buffer_validate_data_reduced(_data, _len);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class RTCPBuffer
   static bool validateReduced(gst.buffer.Buffer buffer)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_validate_reduced(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_rtcp_buffer_validate_reduced(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
     return _retval;
   }
 }

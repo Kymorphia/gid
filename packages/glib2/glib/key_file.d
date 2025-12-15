@@ -214,7 +214,7 @@ class KeyFile : gobject.boxed.Boxed
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_get_boolean(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
+    _retval = cast(bool)g_key_file_get_boolean(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -239,7 +239,7 @@ class KeyFile : gobject.boxed.Boxed
   */
   bool[] getBooleanList(string groupName, string key)
   {
-    bool* _cretval;
+    gboolean* _cretval;
     size_t _cretlength;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -251,7 +251,9 @@ class KeyFile : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(bool[])_cretval[0 .. _cretlength].dup;
+      _retval = new bool[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = cast(bool)_cretval[i];
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -757,7 +759,7 @@ class KeyFile : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
-    _retval = g_key_file_has_group(cast(GKeyFile*)this._cPtr, _groupName);
+    _retval = cast(bool)g_key_file_has_group(cast(GKeyFile*)this._cPtr, _groupName);
     return _retval;
   }
 
@@ -775,7 +777,7 @@ class KeyFile : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = g_key_file_load_from_bytes(cast(GKeyFile*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, flags, &_err);
+    _retval = cast(bool)g_key_file_load_from_bytes(cast(GKeyFile*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -797,7 +799,7 @@ class KeyFile : gobject.boxed.Boxed
     bool _retval;
     const(char)* _data = data.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_load_from_data(cast(GKeyFile*)this._cPtr, _data, length, flags, &_err);
+    _retval = cast(bool)g_key_file_load_from_data(cast(GKeyFile*)this._cPtr, _data, length, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -824,7 +826,7 @@ class KeyFile : gobject.boxed.Boxed
     const(char)* _file = file.toCString(No.Alloc);
     char* _fullPath;
     GError *_err;
-    _retval = g_key_file_load_from_data_dirs(cast(GKeyFile*)this._cPtr, _file, &_fullPath, flags, &_err);
+    _retval = cast(bool)g_key_file_load_from_data_dirs(cast(GKeyFile*)this._cPtr, _file, &_fullPath, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
     fullPath = _fullPath.fromCString(Yes.Free);
@@ -863,7 +865,7 @@ class KeyFile : gobject.boxed.Boxed
 
     char* _fullPath;
     GError *_err;
-    _retval = g_key_file_load_from_dirs(cast(GKeyFile*)this._cPtr, _file, _searchDirs, &_fullPath, flags, &_err);
+    _retval = cast(bool)g_key_file_load_from_dirs(cast(GKeyFile*)this._cPtr, _file, _searchDirs, &_fullPath, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
     fullPath = _fullPath.fromCString(Yes.Free);
@@ -891,7 +893,7 @@ class KeyFile : gobject.boxed.Boxed
     bool _retval;
     const(char)* _file = file.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_load_from_file(cast(GKeyFile*)this._cPtr, _file, flags, &_err);
+    _retval = cast(bool)g_key_file_load_from_file(cast(GKeyFile*)this._cPtr, _file, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -915,7 +917,7 @@ class KeyFile : gobject.boxed.Boxed
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_remove_comment(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
+    _retval = cast(bool)g_key_file_remove_comment(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -935,7 +937,7 @@ class KeyFile : gobject.boxed.Boxed
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_remove_group(cast(GKeyFile*)this._cPtr, _groupName, &_err);
+    _retval = cast(bool)g_key_file_remove_group(cast(GKeyFile*)this._cPtr, _groupName, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -956,7 +958,7 @@ class KeyFile : gobject.boxed.Boxed
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_remove_key(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
+    _retval = cast(bool)g_key_file_remove_key(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -981,7 +983,7 @@ class KeyFile : gobject.boxed.Boxed
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_save_to_file(cast(GKeyFile*)this._cPtr, _filename, &_err);
+    _retval = cast(bool)g_key_file_save_to_file(cast(GKeyFile*)this._cPtr, _filename, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;
@@ -1021,7 +1023,7 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    auto _list = cast(bool*)list.ptr;
+    auto _list = cast(gboolean*)list.ptr;
     g_key_file_set_boolean_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 
@@ -1049,7 +1051,7 @@ class KeyFile : gobject.boxed.Boxed
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _comment = comment.toCString(No.Alloc);
     GError *_err;
-    _retval = g_key_file_set_comment(cast(GKeyFile*)this._cPtr, _groupName, _key, _comment, &_err);
+    _retval = cast(bool)g_key_file_set_comment(cast(GKeyFile*)this._cPtr, _groupName, _key, _comment, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;

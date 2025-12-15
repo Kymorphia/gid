@@ -111,7 +111,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_acquire(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_permission_acquire(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -158,7 +158,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_acquire_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_permission_acquire_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -173,7 +173,7 @@ class Permission : gobject.object.ObjectWrap
   bool getAllowed()
   {
     bool _retval;
-    _retval = g_permission_get_allowed(cast(GPermission*)this._cPtr);
+    _retval = cast(bool)g_permission_get_allowed(cast(GPermission*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Permission : gobject.object.ObjectWrap
   bool getCanAcquire()
   {
     bool _retval;
-    _retval = g_permission_get_can_acquire(cast(GPermission*)this._cPtr);
+    _retval = cast(bool)g_permission_get_can_acquire(cast(GPermission*)this._cPtr);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class Permission : gobject.object.ObjectWrap
   bool getCanRelease()
   {
     bool _retval;
-    _retval = g_permission_get_can_release(cast(GPermission*)this._cPtr);
+    _retval = cast(bool)g_permission_get_can_release(cast(GPermission*)this._cPtr);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_release(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_permission_release(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -293,7 +293,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_release_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_permission_release_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

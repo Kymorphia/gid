@@ -63,7 +63,7 @@ class MetaDbObject
   */
   @property bool outdated()
   {
-    return (cast(GdaMetaDbObject*)this._cPtr).outdated;
+    return cast(bool)(cast(GdaMetaDbObject*)this._cPtr).outdated;
   }
 
   /**

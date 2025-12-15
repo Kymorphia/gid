@@ -175,7 +175,7 @@ class Generator : gobject.object.ObjectWrap
   bool getPretty()
   {
     bool _retval;
-    _retval = json_generator_get_pretty(cast(JsonGenerator*)this._cPtr);
+    _retval = cast(bool)json_generator_get_pretty(cast(JsonGenerator*)this._cPtr);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class Generator : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = json_generator_to_file(cast(JsonGenerator*)this._cPtr, _filename, &_err);
+    _retval = cast(bool)json_generator_to_file(cast(JsonGenerator*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -314,7 +314,7 @@ class Generator : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = json_generator_to_stream(cast(JsonGenerator*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)json_generator_to_stream(cast(JsonGenerator*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

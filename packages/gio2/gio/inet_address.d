@@ -230,7 +230,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool equal(gio.inet_address.InetAddress otherAddress)
   {
     bool _retval;
-    _retval = g_inet_address_equal(cast(GInetAddress*)this._cPtr, otherAddress ? cast(GInetAddress*)otherAddress._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_inet_address_equal(cast(GInetAddress*)this._cPtr, otherAddress ? cast(GInetAddress*)otherAddress._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsAny()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_any(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_any(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsLinkLocal()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_link_local(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_link_local(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsLoopback()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_loopback(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_loopback(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsMcGlobal()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_mc_global(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_mc_global(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsMcLinkLocal()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_mc_link_local(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_mc_link_local(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsMcNodeLocal()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_mc_node_local(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_mc_node_local(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsMcOrgLocal()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_mc_org_local(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_mc_org_local(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsMcSiteLocal()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_mc_site_local(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_mc_site_local(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsMulticast()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_multicast(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_multicast(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class InetAddress : gobject.object.ObjectWrap
   bool getIsSiteLocal()
   {
     bool _retval;
-    _retval = g_inet_address_get_is_site_local(cast(GInetAddress*)this._cPtr);
+    _retval = cast(bool)g_inet_address_get_is_site_local(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 

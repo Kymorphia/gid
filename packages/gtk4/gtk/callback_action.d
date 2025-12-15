@@ -51,11 +51,11 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   */
   this(gtk.types.ShortcutFunc callback = null)
   {
-    extern(C) bool _callbackCallback(GtkWidget* widget, GVariant* args, void* userData)
+    extern(C) gboolean _callbackCallback(GtkWidget* widget, GVariant* args, void* userData)
     {
       auto _dlg = cast(gtk.types.ShortcutFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

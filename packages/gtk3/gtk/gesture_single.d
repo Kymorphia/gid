@@ -154,7 +154,7 @@ class GestureSingle : gtk.gesture.Gesture
   bool getExclusive()
   {
     bool _retval;
-    _retval = gtk_gesture_single_get_exclusive(cast(GtkGestureSingle*)this._cPtr);
+    _retval = cast(bool)gtk_gesture_single_get_exclusive(cast(GtkGestureSingle*)this._cPtr);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class GestureSingle : gtk.gesture.Gesture
   bool getTouchOnly()
   {
     bool _retval;
-    _retval = gtk_gesture_single_get_touch_only(cast(GtkGestureSingle*)this._cPtr);
+    _retval = cast(bool)gtk_gesture_single_get_touch_only(cast(GtkGestureSingle*)this._cPtr);
     return _retval;
   }
 

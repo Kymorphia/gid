@@ -209,7 +209,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = gtk_stack_page_get_needs_attention(cast(GtkStackPage*)this._cPtr);
+    _retval = cast(bool)gtk_stack_page_get_needs_attention(cast(GtkStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_stack_page_get_use_underline(cast(GtkStackPage*)this._cPtr);
+    _retval = cast(bool)gtk_stack_page_get_use_underline(cast(GtkStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_stack_page_get_visible(cast(GtkStackPage*)this._cPtr);
+    _retval = cast(bool)gtk_stack_page_get_visible(cast(GtkStackPage*)this._cPtr);
     return _retval;
   }
 

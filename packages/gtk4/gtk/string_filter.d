@@ -164,7 +164,7 @@ class StringFilter : gtk.filter.Filter
   bool getIgnoreCase()
   {
     bool _retval;
-    _retval = gtk_string_filter_get_ignore_case(cast(GtkStringFilter*)this._cPtr);
+    _retval = cast(bool)gtk_string_filter_get_ignore_case(cast(GtkStringFilter*)this._cPtr);
     return _retval;
   }
 

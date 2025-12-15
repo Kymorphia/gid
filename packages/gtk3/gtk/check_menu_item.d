@@ -155,7 +155,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_check_menu_item_get_active(cast(GtkCheckMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_check_menu_item_get_active(cast(GtkCheckMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   bool getDrawAsRadio()
   {
     bool _retval;
-    _retval = gtk_check_menu_item_get_draw_as_radio(cast(GtkCheckMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_check_menu_item_get_draw_as_radio(cast(GtkCheckMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   bool getInconsistent()
   {
     bool _retval;
-    _retval = gtk_check_menu_item_get_inconsistent(cast(GtkCheckMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_check_menu_item_get_inconsistent(cast(GtkCheckMenuItem*)this._cPtr);
     return _retval;
   }
 

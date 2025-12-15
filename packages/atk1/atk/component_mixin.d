@@ -48,7 +48,7 @@ template ComponentT()
   override bool contains(int x, int y, atk.types.CoordType coordType)
   {
     bool _retval;
-    _retval = atk_component_contains(cast(AtkComponent*)this._cPtr, x, y, coordType);
+    _retval = cast(bool)atk_component_contains(cast(AtkComponent*)this._cPtr, x, y, coordType);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ template ComponentT()
   override bool grabFocus()
   {
     bool _retval;
-    _retval = atk_component_grab_focus(cast(AtkComponent*)this._cPtr);
+    _retval = cast(bool)atk_component_grab_focus(cast(AtkComponent*)this._cPtr);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ template ComponentT()
   override bool scrollTo(atk.types.ScrollType type)
   {
     bool _retval;
-    _retval = atk_component_scroll_to(cast(AtkComponent*)this._cPtr, type);
+    _retval = cast(bool)atk_component_scroll_to(cast(AtkComponent*)this._cPtr, type);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ template ComponentT()
   override bool scrollToPoint(atk.types.CoordType coords, int x, int y)
   {
     bool _retval;
-    _retval = atk_component_scroll_to_point(cast(AtkComponent*)this._cPtr, coords, x, y);
+    _retval = cast(bool)atk_component_scroll_to_point(cast(AtkComponent*)this._cPtr, coords, x, y);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ template ComponentT()
   override bool setExtents(int x, int y, int width, int height, atk.types.CoordType coordType)
   {
     bool _retval;
-    _retval = atk_component_set_extents(cast(AtkComponent*)this._cPtr, x, y, width, height, coordType);
+    _retval = cast(bool)atk_component_set_extents(cast(AtkComponent*)this._cPtr, x, y, width, height, coordType);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ template ComponentT()
   override bool setPosition(int x, int y, atk.types.CoordType coordType)
   {
     bool _retval;
-    _retval = atk_component_set_position(cast(AtkComponent*)this._cPtr, x, y, coordType);
+    _retval = cast(bool)atk_component_set_position(cast(AtkComponent*)this._cPtr, x, y, coordType);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ template ComponentT()
   override bool setSize(int width, int height)
   {
     bool _retval;
-    _retval = atk_component_set_size(cast(AtkComponent*)this._cPtr, width, height);
+    _retval = cast(bool)atk_component_set_size(cast(AtkComponent*)this._cPtr, width, height);
     return _retval;
   }
 

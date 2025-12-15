@@ -1267,5 +1267,5 @@ struct GskVulkanRendererClass;
 
 alias extern(C) void function(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData) GskParseErrorFunc;
 
-alias extern(C) bool function(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData) GskPathForeachFunc;
+alias extern(C) gboolean function(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData) GskPathForeachFunc;
 

@@ -144,7 +144,7 @@ class Element : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_element_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
+    _retval = cast(bool)gst_element_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class Element : gst.object.ObjectWrap
   bool addPad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_element_add_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_add_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -394,18 +394,18 @@ class Element : gst.object.ObjectWrap
   */
   bool foreachPad(gst.types.ElementForeachPadFunc func)
   {
-    extern(C) bool _funcCallback(GstElement* element, GstPad* pad, void* userData)
+    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_element_foreach_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
+    _retval = cast(bool)gst_element_foreach_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -424,18 +424,18 @@ class Element : gst.object.ObjectWrap
   */
   bool foreachSinkPad(gst.types.ElementForeachPadFunc func)
   {
-    extern(C) bool _funcCallback(GstElement* element, GstPad* pad, void* userData)
+    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_element_foreach_sink_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
+    _retval = cast(bool)gst_element_foreach_sink_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -454,18 +454,18 @@ class Element : gst.object.ObjectWrap
   */
   bool foreachSrcPad(gst.types.ElementForeachPadFunc func)
   {
-    extern(C) bool _funcCallback(GstElement* element, GstPad* pad, void* userData)
+    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_element_foreach_src_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
+    _retval = cast(bool)gst_element_foreach_src_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -813,7 +813,7 @@ class Element : gst.object.ObjectWrap
   bool isLockedState()
   {
     bool _retval;
-    _retval = gst_element_is_locked_state(cast(GstElement*)this._cPtr);
+    _retval = cast(bool)gst_element_is_locked_state(cast(GstElement*)this._cPtr);
     return _retval;
   }
 
@@ -887,7 +887,7 @@ class Element : gst.object.ObjectWrap
   bool link(gst.element.Element dest)
   {
     bool _retval;
-    _retval = gst_element_link(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_link(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -910,7 +910,7 @@ class Element : gst.object.ObjectWrap
   bool linkFiltered(gst.element.Element dest, gst.caps.Caps filter = null)
   {
     bool _retval;
-    _retval = gst_element_link_filtered(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_link_filtered(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -933,7 +933,7 @@ class Element : gst.object.ObjectWrap
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname);
+    _retval = cast(bool)gst_element_link_pads(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname);
     return _retval;
   }
 
@@ -958,7 +958,7 @@ class Element : gst.object.ObjectWrap
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads_filtered(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_link_pads_filtered(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -988,7 +988,7 @@ class Element : gst.object.ObjectWrap
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads_full(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, flags);
+    _retval = cast(bool)gst_element_link_pads_full(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, flags);
     return _retval;
   }
 
@@ -1107,7 +1107,7 @@ class Element : gst.object.ObjectWrap
   bool postMessage(gst.message.Message message)
   {
     bool _retval;
-    _retval = gst_element_post_message(cast(GstElement*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_element_post_message(cast(GstElement*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1146,7 +1146,7 @@ class Element : gst.object.ObjectWrap
   bool query(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_element_query(cast(GstElement*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_query(cast(GstElement*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1163,7 +1163,7 @@ class Element : gst.object.ObjectWrap
   bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
     bool _retval;
-    _retval = gst_element_query_convert(cast(GstElement*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
+    _retval = cast(bool)gst_element_query_convert(cast(GstElement*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
     return _retval;
   }
 
@@ -1185,7 +1185,7 @@ class Element : gst.object.ObjectWrap
   bool queryDuration(gst.types.Format format, out long duration)
   {
     bool _retval;
-    _retval = gst_element_query_duration(cast(GstElement*)this._cPtr, format, cast(long*)&duration);
+    _retval = cast(bool)gst_element_query_duration(cast(GstElement*)this._cPtr, format, cast(long*)&duration);
     return _retval;
   }
 
@@ -1209,7 +1209,7 @@ class Element : gst.object.ObjectWrap
   bool queryPosition(gst.types.Format format, out long cur)
   {
     bool _retval;
-    _retval = gst_element_query_position(cast(GstElement*)this._cPtr, format, cast(long*)&cur);
+    _retval = cast(bool)gst_element_query_position(cast(GstElement*)this._cPtr, format, cast(long*)&cur);
     return _retval;
   }
 
@@ -1259,7 +1259,7 @@ class Element : gst.object.ObjectWrap
   bool removePad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_element_remove_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_remove_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1343,7 +1343,7 @@ class Element : gst.object.ObjectWrap
   bool seek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, long start, gst.types.SeekType stopType, long stop)
   {
     bool _retval;
-    _retval = gst_element_seek(cast(GstElement*)this._cPtr, rate, format, flags, startType, start, stopType, stop);
+    _retval = cast(bool)gst_element_seek(cast(GstElement*)this._cPtr, rate, format, flags, startType, start, stopType, stop);
     return _retval;
   }
 
@@ -1377,7 +1377,7 @@ class Element : gst.object.ObjectWrap
   bool seekSimple(gst.types.Format format, gst.types.SeekFlags seekFlags, long seekPos)
   {
     bool _retval;
-    _retval = gst_element_seek_simple(cast(GstElement*)this._cPtr, format, seekFlags, seekPos);
+    _retval = cast(bool)gst_element_seek_simple(cast(GstElement*)this._cPtr, format, seekFlags, seekPos);
     return _retval;
   }
 
@@ -1399,7 +1399,7 @@ class Element : gst.object.ObjectWrap
   bool sendEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_element_send_event(cast(GstElement*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_element_send_event(cast(GstElement*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1446,7 +1446,7 @@ class Element : gst.object.ObjectWrap
   bool setClock(gst.clock.Clock clock = null)
   {
     bool _retval;
-    _retval = gst_element_set_clock(cast(GstElement*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_set_clock(cast(GstElement*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1481,7 +1481,7 @@ class Element : gst.object.ObjectWrap
   bool setLockedState(bool lockedState)
   {
     bool _retval;
-    _retval = gst_element_set_locked_state(cast(GstElement*)this._cPtr, lockedState);
+    _retval = cast(bool)gst_element_set_locked_state(cast(GstElement*)this._cPtr, lockedState);
     return _retval;
   }
 
@@ -1546,7 +1546,7 @@ class Element : gst.object.ObjectWrap
   bool syncStateWithParent()
   {
     bool _retval;
-    _retval = gst_element_sync_state_with_parent(cast(GstElement*)this._cPtr);
+    _retval = cast(bool)gst_element_sync_state_with_parent(cast(GstElement*)this._cPtr);
     return _retval;
   }
 

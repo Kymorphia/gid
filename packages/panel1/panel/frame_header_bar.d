@@ -103,7 +103,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getShowIcon()
   {
     bool _retval;
-    _retval = panel_frame_header_bar_get_show_icon(cast(PanelFrameHeaderBar*)this._cPtr);
+    _retval = cast(bool)panel_frame_header_bar_get_show_icon(cast(PanelFrameHeaderBar*)this._cPtr);
     return _retval;
   }
 

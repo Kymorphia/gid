@@ -20,7 +20,7 @@ __gshared extern(C)
   GstAllocator* function(const(char)* drmDevicePath) c_gst_drm_dumb_allocator_new_with_device_path; ///
   GstAllocator* function(int drmFd) c_gst_drm_dumb_allocator_new_with_fd; ///
   GstMemory* function(GstAllocator* allocator, uint drmFourcc, uint width, uint height, uint* outPitch) c_gst_drm_dumb_allocator_alloc; ///
-  bool function(GstAllocator* allocator) c_gst_drm_dumb_allocator_has_prime_export; ///
+  gboolean function(GstAllocator* allocator) c_gst_drm_dumb_allocator_has_prime_export; ///
 
   // DmaBufAllocator
   GType function() c_gst_dmabuf_allocator_get_type; ///
@@ -46,10 +46,10 @@ __gshared extern(C)
   GstMemory* function(GstMemory* mem) c_gst_drm_dumb_memory_export_dmabuf; ///
   uint function(GstMemory* mem) c_gst_drm_dumb_memory_get_handle; ///
   int function(GstMemory* mem) c_gst_fd_memory_get_fd; ///
-  bool function(GstMemory* mem) c_gst_is_dmabuf_memory; ///
-  bool function(GstMemory* mem) c_gst_is_drm_dumb_memory; ///
-  bool function(GstMemory* mem) c_gst_is_fd_memory; ///
-  bool function(GstMemory* mem) c_gst_is_phys_memory; ///
+  gboolean function(GstMemory* mem) c_gst_is_dmabuf_memory; ///
+  gboolean function(GstMemory* mem) c_gst_is_drm_dumb_memory; ///
+  gboolean function(GstMemory* mem) c_gst_is_fd_memory; ///
+  gboolean function(GstMemory* mem) c_gst_is_phys_memory; ///
   size_t function(GstMemory* mem) c_gst_phys_memory_get_phys_addr; ///
 }
 

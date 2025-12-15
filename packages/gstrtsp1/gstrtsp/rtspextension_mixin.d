@@ -43,7 +43,7 @@ template RTSPExtensionT()
   override bool configureStream(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_rtsp_extension_configure_stream(cast(GstRTSPExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_rtsp_extension_configure_stream(cast(GstRTSPExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ template RTSPExtensionT()
   override bool detectServer(gstrtsp.rtspmessage.RTSPMessage resp)
   {
     bool _retval;
-    _retval = gst_rtsp_extension_detect_server(cast(GstRTSPExtension*)this._cPtr, resp ? cast(GstRTSPMessage*)resp._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_rtsp_extension_detect_server(cast(GstRTSPExtension*)this._cPtr, resp ? cast(GstRTSPMessage*)resp._cPtr(No.Dup) : null);
     return _retval;
   }
 

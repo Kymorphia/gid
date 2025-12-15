@@ -112,7 +112,7 @@ class OptionContext
   bool getHelpEnabled()
   {
     bool _retval;
-    _retval = g_option_context_get_help_enabled(cast(GOptionContext*)this._cPtr);
+    _retval = cast(bool)g_option_context_get_help_enabled(cast(GOptionContext*)this._cPtr);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class OptionContext
   bool getIgnoreUnknownOptions()
   {
     bool _retval;
-    _retval = g_option_context_get_ignore_unknown_options(cast(GOptionContext*)this._cPtr);
+    _retval = cast(bool)g_option_context_get_ignore_unknown_options(cast(GOptionContext*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class OptionContext
   bool getStrictPosix()
   {
     bool _retval;
-    _retval = g_option_context_get_strict_posix(cast(GOptionContext*)this._cPtr);
+    _retval = cast(bool)g_option_context_get_strict_posix(cast(GOptionContext*)this._cPtr);
     return _retval;
   }
 

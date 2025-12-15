@@ -37,7 +37,7 @@ template PollableOutputStreamT()
   override bool canPoll()
   {
     bool _retval;
-    _retval = g_pollable_output_stream_can_poll(cast(GPollableOutputStream*)this._cPtr);
+    _retval = cast(bool)g_pollable_output_stream_can_poll(cast(GPollableOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ template PollableOutputStreamT()
   override bool isWritable()
   {
     bool _retval;
-    _retval = g_pollable_output_stream_is_writable(cast(GPollableOutputStream*)this._cPtr);
+    _retval = cast(bool)g_pollable_output_stream_is_writable(cast(GPollableOutputStream*)this._cPtr);
     return _retval;
   }
 

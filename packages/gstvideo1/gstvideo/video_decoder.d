@@ -581,7 +581,7 @@ class VideoDecoder : gst.element.Element
   bool getNeedsFormat()
   {
     bool _retval;
-    _retval = gst_video_decoder_get_needs_format(cast(GstVideoDecoder*)this._cPtr);
+    _retval = cast(bool)gst_video_decoder_get_needs_format(cast(GstVideoDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -593,7 +593,7 @@ class VideoDecoder : gst.element.Element
   bool getNeedsSyncPoint()
   {
     bool _retval;
-    _retval = gst_video_decoder_get_needs_sync_point(cast(GstVideoDecoder*)this._cPtr);
+    _retval = cast(bool)gst_video_decoder_get_needs_sync_point(cast(GstVideoDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -629,7 +629,7 @@ class VideoDecoder : gst.element.Element
   bool getPacketized()
   {
     bool _retval;
-    _retval = gst_video_decoder_get_packetized(cast(GstVideoDecoder*)this._cPtr);
+    _retval = cast(bool)gst_video_decoder_get_packetized(cast(GstVideoDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -677,7 +677,7 @@ class VideoDecoder : gst.element.Element
   bool getSubframeMode()
   {
     bool _retval;
-    _retval = gst_video_decoder_get_subframe_mode(cast(GstVideoDecoder*)this._cPtr);
+    _retval = cast(bool)gst_video_decoder_get_subframe_mode(cast(GstVideoDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class VideoDecoder : gst.element.Element
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_video_decoder_negotiate(cast(GstVideoDecoder*)this._cPtr);
+    _retval = cast(bool)gst_video_decoder_negotiate(cast(GstVideoDecoder*)this._cPtr);
     return _retval;
   }
 

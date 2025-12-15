@@ -74,7 +74,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
   bool cancel(uint id)
   {
     bool _retval;
-    _retval = gda_thread_wrapper_cancel(cast(GdaThreadWrapper*)this._cPtr, id);
+    _retval = cast(bool)gda_thread_wrapper_cancel(cast(GdaThreadWrapper*)this._cPtr, id);
     return _retval;
   }
 

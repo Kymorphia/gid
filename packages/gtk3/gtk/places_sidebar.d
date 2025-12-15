@@ -266,7 +266,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getLocalOnly()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_local_only(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_local_only(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowConnectToServer()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_connect_to_server(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_show_connect_to_server(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowDesktop()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_desktop(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_show_desktop(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowEnterLocation()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_enter_location(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_show_enter_location(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowOtherLocations()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_other_locations(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_show_other_locations(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowRecent()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_recent(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_show_recent(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowStarredLocation()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_starred_location(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_show_starred_location(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowTrash()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_trash(cast(GtkPlacesSidebar*)this._cPtr);
+    _retval = cast(bool)gtk_places_sidebar_get_show_trash(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 

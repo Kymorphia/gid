@@ -259,7 +259,7 @@ class InfoBar : gtk.box.Box
   bool getRevealed()
   {
     bool _retval;
-    _retval = gtk_info_bar_get_revealed(cast(GtkInfoBar*)this._cPtr);
+    _retval = cast(bool)gtk_info_bar_get_revealed(cast(GtkInfoBar*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class InfoBar : gtk.box.Box
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_info_bar_get_show_close_button(cast(GtkInfoBar*)this._cPtr);
+    _retval = cast(bool)gtk_info_bar_get_show_close_button(cast(GtkInfoBar*)this._cPtr);
     return _retval;
   }
 

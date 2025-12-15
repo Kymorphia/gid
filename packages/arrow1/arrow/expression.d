@@ -40,7 +40,7 @@ class Expression : gobject.object.ObjectWrap
   bool equal(arrow.expression.Expression otherExpression)
   {
     bool _retval;
-    _retval = garrow_expression_equal(cast(GArrowExpression*)this._cPtr, otherExpression ? cast(GArrowExpression*)otherExpression._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_expression_equal(cast(GArrowExpression*)this._cPtr, otherExpression ? cast(GArrowExpression*)otherExpression._cPtr(No.Dup) : null);
     return _retval;
   }
 

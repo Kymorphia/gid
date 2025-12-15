@@ -60,7 +60,7 @@ class SqlParamSpec
   /** */
   @property bool isParam()
   {
-    return (cast(GdaSqlParamSpec*)this._cPtr).isParam;
+    return cast(bool)(cast(GdaSqlParamSpec*)this._cPtr).isParam;
   }
 
   /** */
@@ -72,7 +72,7 @@ class SqlParamSpec
   /** */
   @property bool nullok()
   {
-    return (cast(GdaSqlParamSpec*)this._cPtr).nullok;
+    return cast(bool)(cast(GdaSqlParamSpec*)this._cPtr).nullok;
   }
 
   /** */

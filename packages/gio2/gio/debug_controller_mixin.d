@@ -56,7 +56,7 @@ template DebugControllerT()
   override bool getDebugEnabled()
   {
     bool _retval;
-    _retval = g_debug_controller_get_debug_enabled(cast(GDebugController*)this._cPtr);
+    _retval = cast(bool)g_debug_controller_get_debug_enabled(cast(GDebugController*)this._cPtr);
     return _retval;
   }
 

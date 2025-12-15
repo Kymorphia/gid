@@ -58,7 +58,7 @@ class Info : gobject.object.ObjectWrap
   bool equal(arrowflight.info.Info otherInfo)
   {
     bool _retval;
-    _retval = gaflight_info_equal(cast(GAFlightInfo*)this._cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo._cPtr(No.Dup) : null);
+    _retval = cast(bool)gaflight_info_equal(cast(GAFlightInfo*)this._cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo._cPtr(No.Dup) : null);
     return _retval;
   }
 

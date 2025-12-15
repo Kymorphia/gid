@@ -70,7 +70,7 @@ class EventControllerKey : gtk.event_controller.EventController
   bool forward(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_event_controller_key_forward(cast(GtkEventControllerKey*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 

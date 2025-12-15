@@ -189,7 +189,7 @@ class Value : Boxed
   bool fitsPointer()
   {
     bool _retval;
-    _retval = g_value_fits_pointer(cast(const(GValue)*)this._cPtr);
+    _retval = cast(bool)g_value_fits_pointer(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Value : Boxed
   bool getBoolean()
   {
     bool _retval;
-    _retval = g_value_get_boolean(cast(const(GValue)*)this._cPtr);
+    _retval = cast(bool)g_value_get_boolean(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -902,7 +902,7 @@ class Value : Boxed
   bool transform(gobject.value.Value destValue)
   {
     bool _retval;
-    _retval = g_value_transform(cast(const(GValue)*)this._cPtr, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_value_transform(cast(const(GValue)*)this._cPtr, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -929,7 +929,7 @@ class Value : Boxed
   static bool typeCompatible(gobject.types.GType srcType, gobject.types.GType destType)
   {
     bool _retval;
-    _retval = g_value_type_compatible(srcType, destType);
+    _retval = cast(bool)g_value_type_compatible(srcType, destType);
     return _retval;
   }
 
@@ -947,7 +947,7 @@ class Value : Boxed
   static bool typeTransformable(gobject.types.GType srcType, gobject.types.GType destType)
   {
     bool _retval;
-    _retval = g_value_type_transformable(srcType, destType);
+    _retval = cast(bool)g_value_type_transformable(srcType, destType);
     return _retval;
   }
 }
@@ -1007,7 +1007,7 @@ void initVal(T)(GValue* gval)
 T getVal(T)(const(GValue)* gval)
 {
   static if (is(T == bool))
-    return g_value_get_boolean(gval);
+    return cast(bool)g_value_get_boolean(gval);
   else static if (is(T == byte))
     return g_value_get_schar(gval);
   else static if (is(T == ubyte))
@@ -1064,7 +1064,7 @@ T getVal(T)(const(GValue)* gval)
 void setVal(T)(GValue* gval, T v)
 {
   static if (is(T == bool))
-    g_value_set_boolean(gval, v);
+    g_value_set_boolean(gval, cast(gboolean)v);
   else static if (is(T == byte))
     g_value_set_schar(gval, v);
   else static if (is(T == ubyte))

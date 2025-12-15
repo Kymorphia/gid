@@ -105,7 +105,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   bool getUseFallback()
   {
     bool _retval;
-    _retval = g_charset_converter_get_use_fallback(cast(GCharsetConverter*)this._cPtr);
+    _retval = cast(bool)g_charset_converter_get_use_fallback(cast(GCharsetConverter*)this._cPtr);
     return _retval;
   }
 

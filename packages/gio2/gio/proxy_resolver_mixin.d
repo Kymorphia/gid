@@ -34,7 +34,7 @@ template ProxyResolverT()
   override bool isSupported()
   {
     bool _retval;
-    _retval = g_proxy_resolver_is_supported(cast(GProxyResolver*)this._cPtr);
+    _retval = cast(bool)g_proxy_resolver_is_supported(cast(GProxyResolver*)this._cPtr);
     return _retval;
   }
 

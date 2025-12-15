@@ -67,7 +67,7 @@ struct IconSize
   static bool lookup(gtk.types.IconSize size, out int width, out int height)
   {
     bool _retval;
-    _retval = gtk_icon_size_lookup(size, cast(int*)&width, cast(int*)&height);
+    _retval = cast(bool)gtk_icon_size_lookup(size, cast(int*)&width, cast(int*)&height);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ struct IconSize
   static bool lookupForSettings(gtk.settings.Settings settings, gtk.types.IconSize size, out int width, out int height)
   {
     bool _retval;
-    _retval = gtk_icon_size_lookup_for_settings(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, size, cast(int*)&width, cast(int*)&height);
+    _retval = cast(bool)gtk_icon_size_lookup_for_settings(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, size, cast(int*)&width, cast(int*)&height);
     return _retval;
   }
 

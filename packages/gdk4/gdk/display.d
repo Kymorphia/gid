@@ -198,7 +198,7 @@ class Display : gobject.object.ObjectWrap
   bool deviceIsGrabbed(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_display_device_is_grabbed(cast(GdkDisplay*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class Display : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gdk_display_get_setting(cast(GdkDisplay*)this._cPtr, _name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_display_get_setting(cast(GdkDisplay*)this._cPtr, _name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class Display : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = gdk_display_is_closed(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_is_closed(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -402,7 +402,7 @@ class Display : gobject.object.ObjectWrap
   bool isComposited()
   {
     bool _retval;
-    _retval = gdk_display_is_composited(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_is_composited(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -424,7 +424,7 @@ class Display : gobject.object.ObjectWrap
   bool isRgba()
   {
     bool _retval;
-    _retval = gdk_display_is_rgba(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_is_rgba(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -466,7 +466,7 @@ class Display : gobject.object.ObjectWrap
     int _nEntries;
     GdkKeymapKey* _keys;
     uint* _keyvals;
-    _retval = gdk_display_map_keycode(cast(GdkDisplay*)this._cPtr, keycode, &_keys, &_keyvals, &_nEntries);
+    _retval = cast(bool)gdk_display_map_keycode(cast(GdkDisplay*)this._cPtr, keycode, &_keys, &_keyvals, &_nEntries);
     keys.length = _nEntries;
     keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nEntries];
     gFree(cast(void*)_keys);
@@ -504,7 +504,7 @@ class Display : gobject.object.ObjectWrap
     bool _retval;
     int _nKeys;
     GdkKeymapKey* _keys;
-    _retval = gdk_display_map_keyval(cast(GdkDisplay*)this._cPtr, keyval, &_keys, &_nKeys);
+    _retval = cast(bool)gdk_display_map_keyval(cast(GdkDisplay*)this._cPtr, keyval, &_keys, &_nKeys);
     keys.length = _nKeys;
     keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nKeys];
     gFree(cast(void*)_keys);
@@ -554,7 +554,7 @@ class Display : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_display_prepare_gl(cast(GdkDisplay*)this._cPtr, &_err);
+    _retval = cast(bool)gdk_display_prepare_gl(cast(GdkDisplay*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -586,7 +586,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsInputShapes()
   {
     bool _retval;
-    _retval = gdk_display_supports_input_shapes(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_input_shapes(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -601,7 +601,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsShadowWidth()
   {
     bool _retval;
-    _retval = gdk_display_supports_shadow_width(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_shadow_width(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -657,7 +657,7 @@ class Display : gobject.object.ObjectWrap
   bool translateKey(uint keycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumed)
   {
     bool _retval;
-    _retval = gdk_display_translate_key(cast(GdkDisplay*)this._cPtr, keycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumed);
+    _retval = cast(bool)gdk_display_translate_key(cast(GdkDisplay*)this._cPtr, keycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumed);
     return _retval;
   }
 

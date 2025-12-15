@@ -148,7 +148,7 @@ class Plug : gtk.window.Window
   bool getEmbedded()
   {
     bool _retval;
-    _retval = gtk_plug_get_embedded(cast(GtkPlug*)this._cPtr);
+    _retval = cast(bool)gtk_plug_get_embedded(cast(GtkPlug*)this._cPtr);
     return _retval;
   }
 

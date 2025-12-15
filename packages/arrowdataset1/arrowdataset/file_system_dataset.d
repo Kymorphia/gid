@@ -44,7 +44,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_system_dataset_write_scanner(scanner ? cast(GADatasetScanner*)scanner._cPtr(No.Dup) : null, options ? cast(GADatasetFileSystemDatasetWriteOptions*)options._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gadataset_file_system_dataset_write_scanner(scanner ? cast(GADatasetScanner*)scanner._cPtr(No.Dup) : null, options ? cast(GADatasetFileSystemDatasetWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

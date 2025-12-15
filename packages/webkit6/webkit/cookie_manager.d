@@ -88,7 +88,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_cookie_manager_add_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_cookie_manager_add_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -132,7 +132,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_cookie_manager_delete_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_cookie_manager_delete_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -325,7 +325,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_cookie_manager_replace_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)webkit_cookie_manager_replace_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

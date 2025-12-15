@@ -95,7 +95,7 @@ class MainContext : gobject.boxed.Boxed
   bool acquire()
   {
     bool _retval;
-    _retval = g_main_context_acquire(cast(GMainContext*)this._cPtr);
+    _retval = cast(bool)g_main_context_acquire(cast(GMainContext*)this._cPtr);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class MainContext : gobject.boxed.Boxed
       _nFds = cast(int)fds.length;
 
     auto _fds = cast(GPollFD*)fds.ptr;
-    _retval = g_main_context_check(cast(GMainContext*)this._cPtr, maxPriority, _fds, _nFds);
+    _retval = cast(bool)g_main_context_check(cast(GMainContext*)this._cPtr, maxPriority, _fds, _nFds);
     return _retval;
   }
 
@@ -238,11 +238,11 @@ class MainContext : gobject.boxed.Boxed
   */
   void invokeFull(int priority, glib.types.SourceFunc function_)
   {
-    extern(C) bool _function_Callback(void* userData)
+    extern(C) gboolean _function_Callback(void* userData)
     {
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      bool _retval = (*_dlg)();
+      gboolean _retval = (*_dlg)();
       return _retval;
     }
     auto _function_CB = function_ ? &_function_Callback : null;
@@ -262,7 +262,7 @@ class MainContext : gobject.boxed.Boxed
   bool isOwner()
   {
     bool _retval;
-    _retval = g_main_context_is_owner(cast(GMainContext*)this._cPtr);
+    _retval = cast(bool)g_main_context_is_owner(cast(GMainContext*)this._cPtr);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class MainContext : gobject.boxed.Boxed
   bool iteration(bool mayBlock)
   {
     bool _retval;
-    _retval = g_main_context_iteration(cast(GMainContext*)this._cPtr, mayBlock);
+    _retval = cast(bool)g_main_context_iteration(cast(GMainContext*)this._cPtr, mayBlock);
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class MainContext : gobject.boxed.Boxed
   bool pending()
   {
     bool _retval;
-    _retval = g_main_context_pending(cast(GMainContext*)this._cPtr);
+    _retval = cast(bool)g_main_context_pending(cast(GMainContext*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class MainContext : gobject.boxed.Boxed
   bool prepare(out int priority)
   {
     bool _retval;
-    _retval = g_main_context_prepare(cast(GMainContext*)this._cPtr, cast(int*)&priority);
+    _retval = cast(bool)g_main_context_prepare(cast(GMainContext*)this._cPtr, cast(int*)&priority);
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class MainContext : gobject.boxed.Boxed
   bool wait(glib.cond.Cond cond, glib.mutex.Mutex mutex)
   {
     bool _retval;
-    _retval = g_main_context_wait(cast(GMainContext*)this._cPtr, cond ? cast(GCond*)cond._cPtr : null, mutex ? cast(GMutex*)mutex._cPtr : null);
+    _retval = cast(bool)g_main_context_wait(cast(GMainContext*)this._cPtr, cond ? cast(GCond*)cond._cPtr : null, mutex ? cast(GMutex*)mutex._cPtr : null);
     return _retval;
   }
 

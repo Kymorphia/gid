@@ -61,7 +61,7 @@ class ControlSource : gst.object.ObjectWrap
   bool controlSourceGetValue(gst.types.ClockTime timestamp, out double value)
   {
     bool _retval;
-    _retval = gst_control_source_get_value(cast(GstControlSource*)this._cPtr, timestamp, cast(double*)&value);
+    _retval = cast(bool)gst_control_source_get_value(cast(GstControlSource*)this._cPtr, timestamp, cast(double*)&value);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class ControlSource : gst.object.ObjectWrap
       _nValues = cast(uint)values.length;
 
     auto _values = cast(double*)values.ptr;
-    _retval = gst_control_source_get_value_array(cast(GstControlSource*)this._cPtr, timestamp, interval, _nValues, _values);
+    _retval = cast(bool)gst_control_source_get_value_array(cast(GstControlSource*)this._cPtr, timestamp, interval, _nValues, _values);
     return _retval;
   }
 }

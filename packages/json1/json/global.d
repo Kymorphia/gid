@@ -24,7 +24,7 @@ import json.types;
 bool boxedCanDeserialize(gobject.types.GType gboxedType, json.types.NodeType nodeType)
 {
   bool _retval;
-  _retval = json_boxed_can_deserialize(gboxedType, nodeType);
+  _retval = cast(bool)json_boxed_can_deserialize(gboxedType, nodeType);
   return _retval;
 }
 
@@ -44,7 +44,7 @@ bool boxedCanDeserialize(gobject.types.GType gboxedType, json.types.NodeType nod
 bool boxedCanSerialize(gobject.types.GType gboxedType, out json.types.NodeType nodeType)
 {
   bool _retval;
-  _retval = json_boxed_can_serialize(gboxedType, &nodeType);
+  _retval = cast(bool)json_boxed_can_serialize(gboxedType, &nodeType);
   return _retval;
 }
 
@@ -396,7 +396,7 @@ bool stringEqual(string a, string b)
   bool _retval;
   const(void)* _a = a.toCString(No.Alloc);
   const(void)* _b = b.toCString(No.Alloc);
-  _retval = json_string_equal(_a, _b);
+  _retval = cast(bool)json_string_equal(_a, _b);
   return _retval;
 }
 

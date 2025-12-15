@@ -82,7 +82,7 @@ class FontDescription : gobject.boxed.Boxed
   bool betterMatch(pango.font_description.FontDescription oldMatch, pango.font_description.FontDescription newMatch)
   {
     bool _retval;
-    _retval = pango_font_description_better_match(cast(const(PangoFontDescription)*)this._cPtr, oldMatch ? cast(const(PangoFontDescription)*)oldMatch._cPtr(No.Dup) : null, newMatch ? cast(const(PangoFontDescription)*)newMatch._cPtr(No.Dup) : null);
+    _retval = cast(bool)pango_font_description_better_match(cast(const(PangoFontDescription)*)this._cPtr, oldMatch ? cast(const(PangoFontDescription)*)oldMatch._cPtr(No.Dup) : null, newMatch ? cast(const(PangoFontDescription)*)newMatch._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class FontDescription : gobject.boxed.Boxed
   bool equal(pango.font_description.FontDescription desc2)
   {
     bool _retval;
-    _retval = pango_font_description_equal(cast(const(PangoFontDescription)*)this._cPtr, desc2 ? cast(const(PangoFontDescription)*)desc2._cPtr(No.Dup) : null);
+    _retval = cast(bool)pango_font_description_equal(cast(const(PangoFontDescription)*)this._cPtr, desc2 ? cast(const(PangoFontDescription)*)desc2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class FontDescription : gobject.boxed.Boxed
   bool getSizeIsAbsolute()
   {
     bool _retval;
-    _retval = pango_font_description_get_size_is_absolute(cast(const(PangoFontDescription)*)this._cPtr);
+    _retval = cast(bool)pango_font_description_get_size_is_absolute(cast(const(PangoFontDescription)*)this._cPtr);
     return _retval;
   }
 

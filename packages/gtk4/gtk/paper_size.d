@@ -334,7 +334,7 @@ class PaperSize : gobject.boxed.Boxed
   bool isCustom()
   {
     bool _retval;
-    _retval = gtk_paper_size_is_custom(cast(GtkPaperSize*)this._cPtr);
+    _retval = cast(bool)gtk_paper_size_is_custom(cast(GtkPaperSize*)this._cPtr);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class PaperSize : gobject.boxed.Boxed
   bool isEqual(gtk.paper_size.PaperSize size2)
   {
     bool _retval;
-    _retval = gtk_paper_size_is_equal(cast(GtkPaperSize*)this._cPtr, size2 ? cast(GtkPaperSize*)size2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_paper_size_is_equal(cast(GtkPaperSize*)this._cPtr, size2 ? cast(GtkPaperSize*)size2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class PaperSize : gobject.boxed.Boxed
   bool isIpp()
   {
     bool _retval;
-    _retval = gtk_paper_size_is_ipp(cast(GtkPaperSize*)this._cPtr);
+    _retval = cast(bool)gtk_paper_size_is_ipp(cast(GtkPaperSize*)this._cPtr);
     return _retval;
   }
 

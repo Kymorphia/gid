@@ -204,7 +204,7 @@ class ButtonContent : gtk.widget.Widget
   bool getCanShrink()
   {
     bool _retval;
-    _retval = adw_button_content_get_can_shrink(cast(AdwButtonContent*)this._cPtr);
+    _retval = cast(bool)adw_button_content_get_can_shrink(cast(AdwButtonContent*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class ButtonContent : gtk.widget.Widget
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_button_content_get_use_underline(cast(AdwButtonContent*)this._cPtr);
+    _retval = cast(bool)adw_button_content_get_use_underline(cast(AdwButtonContent*)this._cPtr);
     return _retval;
   }
 

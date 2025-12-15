@@ -214,7 +214,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getEnded()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_ended(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_get_ended(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getLoop()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_loop(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_get_loop(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getMuted()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_muted(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_get_muted(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getPlaying()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_playing(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_get_playing(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -312,7 +312,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool hasAudio()
   {
     bool _retval;
-    _retval = gtk_media_stream_has_audio(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_has_audio(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool hasVideo()
   {
     bool _retval;
-    _retval = gtk_media_stream_has_video(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_has_video(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool isPrepared()
   {
     bool _retval;
-    _retval = gtk_media_stream_is_prepared(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_is_prepared(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool isSeekable()
   {
     bool _retval;
-    _retval = gtk_media_stream_is_seekable(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_is_seekable(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool isSeeking()
   {
     bool _retval;
-    _retval = gtk_media_stream_is_seeking(cast(GtkMediaStream*)this._cPtr);
+    _retval = cast(bool)gtk_media_stream_is_seeking(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 

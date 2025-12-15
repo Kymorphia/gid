@@ -190,7 +190,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   {
     bool _retval;
     GtkTreeIter _sortIter;
-    _retval = gtk_tree_model_sort_convert_child_iter_to_iter(cast(GtkTreeModelSort*)this._cPtr, &_sortIter, childIter ? cast(GtkTreeIter*)childIter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_sort_convert_child_iter_to_iter(cast(GtkTreeModelSort*)this._cPtr, &_sortIter, childIter ? cast(GtkTreeIter*)childIter._cPtr(No.Dup) : null);
     sortIter = new gtk.tree_iter.TreeIter(cast(void*)&_sortIter, No.Take);
     return _retval;
   }
@@ -271,7 +271,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   bool iterIsValid(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_model_sort_iter_is_valid(cast(GtkTreeModelSort*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_sort_iter_is_valid(cast(GtkTreeModelSort*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

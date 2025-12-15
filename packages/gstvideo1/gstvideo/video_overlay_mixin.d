@@ -347,7 +347,7 @@ template VideoOverlayT()
   override bool setRenderRectangle(int x, int y, int width, int height)
   {
     bool _retval;
-    _retval = gst_video_overlay_set_render_rectangle(cast(GstVideoOverlay*)this._cPtr, x, y, width, height);
+    _retval = cast(bool)gst_video_overlay_set_render_rectangle(cast(GstVideoOverlay*)this._cPtr, x, y, width, height);
     return _retval;
   }
 

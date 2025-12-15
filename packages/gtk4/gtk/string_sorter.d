@@ -164,7 +164,7 @@ class StringSorter : gtk.sorter.Sorter
   bool getIgnoreCase()
   {
     bool _retval;
-    _retval = gtk_string_sorter_get_ignore_case(cast(GtkStringSorter*)this._cPtr);
+    _retval = cast(bool)gtk_string_sorter_get_ignore_case(cast(GtkStringSorter*)this._cPtr);
     return _retval;
   }
 

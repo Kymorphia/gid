@@ -102,7 +102,7 @@ class Keymap : gobject.object.ObjectWrap
   bool getCapsLockState()
   {
     bool _retval;
-    _retval = gdk_keymap_get_caps_lock_state(cast(GdkKeymap*)this._cPtr);
+    _retval = cast(bool)gdk_keymap_get_caps_lock_state(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Keymap : gobject.object.ObjectWrap
     int _nEntries;
     GdkKeymapKey* _keys;
     uint* _keyvals;
-    _retval = gdk_keymap_get_entries_for_keycode(cast(GdkKeymap*)this._cPtr, hardwareKeycode, &_keys, &_keyvals, &_nEntries);
+    _retval = cast(bool)gdk_keymap_get_entries_for_keycode(cast(GdkKeymap*)this._cPtr, hardwareKeycode, &_keys, &_keyvals, &_nEntries);
     keys.length = _nEntries;
     keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nEntries];
     gFree(cast(void*)_keys);
@@ -176,7 +176,7 @@ class Keymap : gobject.object.ObjectWrap
     bool _retval;
     int _nKeys;
     GdkKeymapKey* _keys;
-    _retval = gdk_keymap_get_entries_for_keyval(cast(GdkKeymap*)this._cPtr, keyval, &_keys, &_nKeys);
+    _retval = cast(bool)gdk_keymap_get_entries_for_keyval(cast(GdkKeymap*)this._cPtr, keyval, &_keys, &_nKeys);
     keys.length = _nKeys;
     keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nKeys];
     gFree(cast(void*)_keys);
@@ -224,7 +224,7 @@ class Keymap : gobject.object.ObjectWrap
   bool getNumLockState()
   {
     bool _retval;
-    _retval = gdk_keymap_get_num_lock_state(cast(GdkKeymap*)this._cPtr);
+    _retval = cast(bool)gdk_keymap_get_num_lock_state(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class Keymap : gobject.object.ObjectWrap
   bool getScrollLockState()
   {
     bool _retval;
-    _retval = gdk_keymap_get_scroll_lock_state(cast(GdkKeymap*)this._cPtr);
+    _retval = cast(bool)gdk_keymap_get_scroll_lock_state(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Keymap : gobject.object.ObjectWrap
   bool haveBidiLayouts()
   {
     bool _retval;
-    _retval = gdk_keymap_have_bidi_layouts(cast(GdkKeymap*)this._cPtr);
+    _retval = cast(bool)gdk_keymap_have_bidi_layouts(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class Keymap : gobject.object.ObjectWrap
   bool mapVirtualModifiers(ref gdk.types.ModifierType state)
   {
     bool _retval;
-    _retval = gdk_keymap_map_virtual_modifiers(cast(GdkKeymap*)this._cPtr, &state);
+    _retval = cast(bool)gdk_keymap_map_virtual_modifiers(cast(GdkKeymap*)this._cPtr, &state);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class Keymap : gobject.object.ObjectWrap
   bool translateKeyboardState(uint hardwareKeycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumedModifiers)
   {
     bool _retval;
-    _retval = gdk_keymap_translate_keyboard_state(cast(GdkKeymap*)this._cPtr, hardwareKeycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumedModifiers);
+    _retval = cast(bool)gdk_keymap_translate_keyboard_state(cast(GdkKeymap*)this._cPtr, hardwareKeycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumedModifiers);
     return _retval;
   }
 

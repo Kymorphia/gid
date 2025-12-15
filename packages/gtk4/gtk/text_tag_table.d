@@ -92,7 +92,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool add(gtk.text_tag.TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_tag_table_add(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 

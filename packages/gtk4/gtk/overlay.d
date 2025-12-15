@@ -146,7 +146,7 @@ class Overlay : gtk.widget.Widget
   bool getClipOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_overlay_get_clip_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Overlay : gtk.widget.Widget
   bool getMeasureOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_overlay_get_measure_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 

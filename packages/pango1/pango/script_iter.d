@@ -107,7 +107,7 @@ class ScriptIter : gobject.boxed.Boxed
   bool next()
   {
     bool _retval;
-    _retval = pango_script_iter_next(cast(PangoScriptIter*)this._cPtr);
+    _retval = cast(bool)pango_script_iter_next(cast(PangoScriptIter*)this._cPtr);
     return _retval;
   }
 }

@@ -44,7 +44,7 @@ class AudioCdSrcTrack
   */
   @property bool isAudio()
   {
-    return (cast(GstAudioCdSrcTrack*)this._cPtr).isAudio;
+    return cast(bool)(cast(GstAudioCdSrcTrack*)this._cPtr).isAudio;
   }
 
   /**

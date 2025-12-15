@@ -613,7 +613,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -635,7 +635,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -672,7 +672,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -708,7 +708,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getAcceptsTab()
   {
     bool _retval;
-    _retval = gtk_text_view_get_accepts_tab(cast(GtkTextView*)this._cPtr);
+    _retval = cast(bool)gtk_text_view_get_accepts_tab(cast(GtkTextView*)this._cPtr);
     return _retval;
   }
 
@@ -781,7 +781,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getCursorVisible()
   {
     bool _retval;
-    _retval = gtk_text_view_get_cursor_visible(cast(GtkTextView*)this._cPtr);
+    _retval = cast(bool)gtk_text_view_get_cursor_visible(cast(GtkTextView*)this._cPtr);
     return _retval;
   }
 
@@ -794,7 +794,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getEditable()
   {
     bool _retval;
-    _retval = gtk_text_view_get_editable(cast(GtkTextView*)this._cPtr);
+    _retval = cast(bool)gtk_text_view_get_editable(cast(GtkTextView*)this._cPtr);
     return _retval;
   }
 
@@ -887,7 +887,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, &_iter, x, y);
+    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, &_iter, x, y);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -918,7 +918,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, &_iter, cast(int*)&trailing, x, y);
+    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, &_iter, cast(int*)&trailing, x, y);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -1028,7 +1028,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getMonospace()
   {
     bool _retval;
-    _retval = gtk_text_view_get_monospace(cast(GtkTextView*)this._cPtr);
+    _retval = cast(bool)gtk_text_view_get_monospace(cast(GtkTextView*)this._cPtr);
     return _retval;
   }
 
@@ -1039,7 +1039,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getOverwrite()
   {
     bool _retval;
-    _retval = gtk_text_view_get_overwrite(cast(GtkTextView*)this._cPtr);
+    _retval = cast(bool)gtk_text_view_get_overwrite(cast(GtkTextView*)this._cPtr);
     return _retval;
   }
 
@@ -1209,7 +1209,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool imContextFilterKeypress(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1224,7 +1224,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool moveMarkOnscreen(gtk.text_mark.TextMark mark)
   {
     bool _retval;
-    _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_move_mark_onscreen(cast(GtkTextView*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1266,7 +1266,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
     bool _retval;
-    _retval = gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, count);
+    _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, count);
     return _retval;
   }
 
@@ -1278,7 +1278,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool placeCursorOnscreen()
   {
     bool _retval;
-    _retval = gtk_text_view_place_cursor_onscreen(cast(GtkTextView*)this._cPtr);
+    _retval = cast(bool)gtk_text_view_place_cursor_onscreen(cast(GtkTextView*)this._cPtr);
     return _retval;
   }
 
@@ -1360,7 +1360,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
-    _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
+    _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
     return _retval;
   }
 
@@ -1697,7 +1697,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

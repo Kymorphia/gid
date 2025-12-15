@@ -101,7 +101,7 @@ class TextNode : gsk.render_node.RenderNode
   bool hasColorGlyphs()
   {
     bool _retval;
-    _retval = gsk_text_node_has_color_glyphs(cast(const(GskRenderNode)*)this._cPtr);
+    _retval = cast(bool)gsk_text_node_has_color_glyphs(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 }

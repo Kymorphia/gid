@@ -342,7 +342,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   bool getSubtitleSelectable()
   {
     bool _retval;
-    _retval = adw_action_row_get_subtitle_selectable(cast(AdwActionRow*)this._cPtr);
+    _retval = cast(bool)adw_action_row_get_subtitle_selectable(cast(AdwActionRow*)this._cPtr);
     return _retval;
   }
 

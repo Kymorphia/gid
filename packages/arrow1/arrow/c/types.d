@@ -1994,7 +1994,7 @@ struct GArrowExtensionDataTypeClass
       It must returns true only when the both data types equal, false
         otherwise.
   */
-  extern(C) bool function(GArrowExtensionDataType* dataType, GArrowExtensionDataType* otherDataType) equal;
+  extern(C) gboolean function(GArrowExtensionDataType* dataType, GArrowExtensionDataType* otherDataType) equal;
 
   /**
       It must returns a serialized #GArrowDataType from the given
@@ -4043,13 +4043,13 @@ struct GArrowStreamListenerClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GArrowStreamListener* listener, GError** _err) onEos;
+  extern(C) gboolean function(GArrowStreamListener* listener, GError** _err) onEos;
 
   /** */
-  extern(C) bool function(GArrowStreamListener* listener, GArrowRecordBatch* recordBatch, GHashTable* metadata, GError** _err) onRecordBatchDecoded;
+  extern(C) gboolean function(GArrowStreamListener* listener, GArrowRecordBatch* recordBatch, GHashTable* metadata, GError** _err) onRecordBatchDecoded;
 
   /** */
-  extern(C) bool function(GArrowStreamListener* listener, GArrowSchema* schema, GArrowSchema* filteredSchema, GError** _err) onSchemaDecoded;
+  extern(C) gboolean function(GArrowStreamListener* listener, GArrowSchema* schema, GArrowSchema* filteredSchema, GError** _err) onSchemaDecoded;
 }
 
 /** */

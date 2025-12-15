@@ -380,7 +380,7 @@ class IconTheme : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    _retval = gtk_icon_theme_has_icon(cast(GtkIconTheme*)this._cPtr, _iconName);
+    _retval = cast(bool)gtk_icon_theme_has_icon(cast(GtkIconTheme*)this._cPtr, _iconName);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class IconTheme : gobject.object.ObjectWrap
   bool rescanIfNeeded()
   {
     bool _retval;
-    _retval = gtk_icon_theme_rescan_if_needed(cast(GtkIconTheme*)this._cPtr);
+    _retval = cast(bool)gtk_icon_theme_rescan_if_needed(cast(GtkIconTheme*)this._cPtr);
     return _retval;
   }
 

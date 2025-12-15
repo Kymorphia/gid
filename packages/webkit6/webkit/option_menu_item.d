@@ -92,7 +92,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isEnabled()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_enabled(cast(WebKitOptionMenuItem*)this._cPtr);
+    _retval = cast(bool)webkit_option_menu_item_is_enabled(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isGroupChild()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_group_child(cast(WebKitOptionMenuItem*)this._cPtr);
+    _retval = cast(bool)webkit_option_menu_item_is_group_child(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isGroupLabel()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_group_label(cast(WebKitOptionMenuItem*)this._cPtr);
+    _retval = cast(bool)webkit_option_menu_item_is_group_label(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isSelected()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_selected(cast(WebKitOptionMenuItem*)this._cPtr);
+    _retval = cast(bool)webkit_option_menu_item_is_selected(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 }

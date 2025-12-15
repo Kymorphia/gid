@@ -136,7 +136,7 @@ class LeafletPage : gobject.object.ObjectWrap
   bool getNavigatable()
   {
     bool _retval;
-    _retval = adw_leaflet_page_get_navigatable(cast(AdwLeafletPage*)this._cPtr);
+    _retval = cast(bool)adw_leaflet_page_get_navigatable(cast(AdwLeafletPage*)this._cPtr);
     return _retval;
   }
 

@@ -368,35 +368,35 @@ struct GstAggregatorClass
                        Called when an event is received on a sink pad, the subclass
                        should always chain up.
   */
-  extern(C) bool function(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstEvent* event) sinkEvent;
 
   /**
       Optional.
                        Called when a query is received on a sink pad, the subclass
                        should always chain up.
   */
-  extern(C) bool function(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstQuery* query) sinkQuery;
+  extern(C) gboolean function(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstQuery* query) sinkQuery;
 
   /**
       Optional.
                        Called when an event is received on the src pad, the subclass
                        should always chain up.
   */
-  extern(C) bool function(GstAggregator* aggregator, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstAggregator* aggregator, GstEvent* event) srcEvent;
 
   /**
       Optional.
                        Called when a query is received on the src pad, the subclass
                        should always chain up.
   */
-  extern(C) bool function(GstAggregator* aggregator, GstQuery* query) srcQuery;
+  extern(C) gboolean function(GstAggregator* aggregator, GstQuery* query) srcQuery;
 
   /**
       Optional.
                        Called when the src pad is activated, it will start/stop its
                        pad task right after that call.
   */
-  extern(C) bool function(GstAggregator* aggregator, GstPadMode mode, bool active) srcActivate;
+  extern(C) gboolean function(GstAggregator* aggregator, GstPadMode mode, gboolean active) srcActivate;
 
   /**
       Mandatory.
@@ -407,14 +407,14 @@ struct GstAggregatorClass
                        of. Once / if a buffer has been constructed from the
                        aggregated buffers, the subclass should call _finish_buffer.
   */
-  extern(C) GstFlowReturn function(GstAggregator* aggregator, bool timeout) aggregate;
+  extern(C) GstFlowReturn function(GstAggregator* aggregator, gboolean timeout) aggregate;
 
   /**
       Optional.
                        Called when the element goes from PAUSED to READY.
                        The subclass should free all resources and reset its state.
   */
-  extern(C) bool function(GstAggregator* aggregator) stop;
+  extern(C) gboolean function(GstAggregator* aggregator) stop;
 
   /**
       Optional.
@@ -422,7 +422,7 @@ struct GstAggregatorClass
                        The subclass should get ready to process
                        aggregated buffers.
   */
-  extern(C) bool function(GstAggregator* aggregator) start;
+  extern(C) gboolean function(GstAggregator* aggregator) start;
 
   /**
       Optional.
@@ -464,7 +464,7 @@ struct GstAggregatorClass
       Optional.
                             Notifies subclasses what caps format has been negotiated
   */
-  extern(C) bool function(GstAggregator* self, GstCaps* caps) negotiatedSrcCaps;
+  extern(C) gboolean function(GstAggregator* self, GstCaps* caps) negotiatedSrcCaps;
 
   /**
       Optional.
@@ -473,19 +473,19 @@ struct GstAggregatorClass
                           buffers. The passed in query contains the result of the
                           downstream allocation query.
   */
-  extern(C) bool function(GstAggregator* self, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstAggregator* self, GstQuery* query) decideAllocation;
 
   /**
       Optional.
                           Allows the subclass to handle the allocation query from upstream.
   */
-  extern(C) bool function(GstAggregator* self, GstAggregatorPad* pad, GstQuery* decideQuery, GstQuery* query) proposeAllocation;
+  extern(C) gboolean function(GstAggregator* self, GstAggregatorPad* pad, GstQuery* decideQuery, GstQuery* query) proposeAllocation;
 
   /**
       Optional.
                   Negotiate the caps with the peer (Since: 1.18).
   */
-  extern(C) bool function(GstAggregator* self) negotiate;
+  extern(C) gboolean function(GstAggregator* self) negotiate;
 
   /**
       Optional.
@@ -499,7 +499,7 @@ struct GstAggregatorClass
                              Called when a query is received on a sink pad before queueing up
                              serialized queries. The subclass should always chain up (Since: 1.18).
   */
-  extern(C) bool function(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstQuery* query) sinkQueryPreQueue;
+  extern(C) gboolean function(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstQuery* query) sinkQueryPreQueue;
 
   /** */
   extern(C) GstFlowReturn function(GstAggregator* aggregator, GstBufferList* bufferlist) finishBufferList;
@@ -552,7 +552,7 @@ struct GstAggregatorPadClass
                     Called before input buffers are queued in the pad, return true
                     if the buffer should be skipped.
   */
-  extern(C) bool function(GstAggregatorPad* aggpad, GstAggregator* aggregator, GstBuffer* buffer) skipBuffer;
+  extern(C) gboolean function(GstAggregatorPad* aggpad, GstAggregator* aggregator, GstBuffer* buffer) skipBuffer;
 
   /** */
   void*[20] GstReserved;
@@ -753,20 +753,20 @@ struct GstBaseParseClass
                        Called when the element starts processing.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstBaseParse* parse) start;
+  extern(C) gboolean function(GstBaseParse* parse) start;
 
   /**
       Optional.
                        Called when the element stops processing.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstBaseParse* parse) stop;
+  extern(C) gboolean function(GstBaseParse* parse) stop;
 
   /**
       Optional.
                        Allows the subclass to be notified of the actual caps set.
   */
-  extern(C) bool function(GstBaseParse* parse, GstCaps* caps) setSinkCaps;
+  extern(C) gboolean function(GstBaseParse* parse, GstCaps* caps) setSinkCaps;
 
   /**
       Parses the input data into valid frames as defined by subclass
@@ -796,7 +796,7 @@ struct GstBaseParseClass
       Optional.
                        Convert between formats.
   */
-  extern(C) bool function(GstBaseParse* parse, GstFormat srcFormat, long srcValue, GstFormat destFormat, long* destValue) convert;
+  extern(C) gboolean function(GstBaseParse* parse, GstFormat srcFormat, long srcValue, GstFormat destFormat, long* destValue) convert;
 
   /**
       Optional.
@@ -804,14 +804,14 @@ struct GstBaseParseClass
                        up to the parent implementation to let the default handler
                        run.
   */
-  extern(C) bool function(GstBaseParse* parse, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstBaseParse* parse, GstEvent* event) sinkEvent;
 
   /**
       Optional.
                        Event handler on the source pad. Should chain up to the
                        parent to let the default handler run.
   */
-  extern(C) bool function(GstBaseParse* parse, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstBaseParse* parse, GstEvent* event) srcEvent;
 
   /**
       Optional.
@@ -833,14 +833,14 @@ struct GstBaseParseClass
                         up to the parent implementation to let the default handler
                         run (Since: 1.2)
   */
-  extern(C) bool function(GstBaseParse* parse, GstQuery* query) sinkQuery;
+  extern(C) gboolean function(GstBaseParse* parse, GstQuery* query) sinkQuery;
 
   /**
       Optional.
                         Query handler on the source pad. Should chain up to the
                         parent to let the default handler run (Since: 1.2)
   */
-  extern(C) bool function(GstBaseParse* parse, GstQuery* query) srcQuery;
+  extern(C) gboolean function(GstBaseParse* parse, GstQuery* query) srcQuery;
 
   /** */
   void*[18] GstReserved;
@@ -1034,10 +1034,10 @@ struct GstBaseSink
   ulong offset;
 
   /** */
-  bool canActivatePull;
+  gboolean canActivatePull;
 
   /** */
-  bool canActivatePush;
+  gboolean canActivatePush;
 
   /** */
   GMutex prerollLock;
@@ -1046,19 +1046,19 @@ struct GstBaseSink
   GCond prerollCond;
 
   /** */
-  bool eos;
+  gboolean eos;
 
   /** */
-  bool needPreroll;
+  gboolean needPreroll;
 
   /** */
-  bool havePreroll;
+  gboolean havePreroll;
 
   /** */
-  bool playingAsync;
+  gboolean playingAsync;
 
   /** */
-  bool haveNewsegment;
+  gboolean haveNewsegment;
 
   /** */
   GstSegment segment;
@@ -1067,13 +1067,13 @@ struct GstBaseSink
   GstClockID clockId;
 
   /** */
-  bool sync;
+  gboolean sync;
 
   /** */
-  bool flushing;
+  gboolean flushing;
 
   /** */
-  bool running;
+  gboolean running;
 
   /** */
   long maxLateness;
@@ -1105,7 +1105,7 @@ struct GstBaseSinkClass
   /**
       Notify subclass of changed caps
   */
-  extern(C) bool function(GstBaseSink* sink, GstCaps* caps) setCaps;
+  extern(C) gboolean function(GstBaseSink* sink, GstCaps* caps) setCaps;
 
   /**
       Only useful in pull mode. Implement if you have
@@ -1120,7 +1120,7 @@ struct GstBaseSinkClass
           "active" argument. Called after actually activating the sink pad in pull
           mode. The default implementation starts a task on the sink pad.
   */
-  extern(C) bool function(GstBaseSink* sink, bool active) activatePull;
+  extern(C) gboolean function(GstBaseSink* sink, gboolean active) activatePull;
 
   /**
       Called to get the start and end times for synchronising
@@ -1131,23 +1131,23 @@ struct GstBaseSinkClass
   /**
       configure the allocation query
   */
-  extern(C) bool function(GstBaseSink* sink, GstQuery* query) proposeAllocation;
+  extern(C) gboolean function(GstBaseSink* sink, GstQuery* query) proposeAllocation;
 
   /**
       Start processing. Ideal for opening resources in the subclass
   */
-  extern(C) bool function(GstBaseSink* sink) start;
+  extern(C) gboolean function(GstBaseSink* sink) start;
 
   /**
       Stop processing. Subclasses should use this to close resources.
   */
-  extern(C) bool function(GstBaseSink* sink) stop;
+  extern(C) gboolean function(GstBaseSink* sink) stop;
 
   /**
       Unlock any pending access to the resource. Subclasses should
           unblock any blocked function ASAP and call [gstbase.base_sink.BaseSink.waitPreroll]
   */
-  extern(C) bool function(GstBaseSink* sink) unlock;
+  extern(C) gboolean function(GstBaseSink* sink) unlock;
 
   /**
       Clear the previous unlock request. Subclasses should clear
@@ -1156,17 +1156,17 @@ struct GstBaseSinkClass
           [gstbase.base_sink.BaseSink.wait] or gst_wait_sink_wait_clock() return or
           #GstBaseSinkClass::render is called again.
   */
-  extern(C) bool function(GstBaseSink* sink) unlockStop;
+  extern(C) gboolean function(GstBaseSink* sink) unlockStop;
 
   /**
       perform a #GstQuery on the element.
   */
-  extern(C) bool function(GstBaseSink* sink, GstQuery* query) query;
+  extern(C) gboolean function(GstBaseSink* sink, GstQuery* query) query;
 
   /**
       Override this to handle events arriving on the sink pad
   */
-  extern(C) bool function(GstBaseSink* sink, GstEvent* event) event;
+  extern(C) gboolean function(GstBaseSink* sink, GstEvent* event) event;
 
   /**
       Override this to implement custom logic to wait for the event
@@ -1346,19 +1346,19 @@ struct GstBaseSrc
   GCond liveCond;
 
   /** */
-  bool isLive;
+  gboolean isLive;
 
   /** */
-  bool liveRunning;
+  gboolean liveRunning;
 
   /** */
   uint blocksize;
 
   /** */
-  bool canActivatePush;
+  gboolean canActivatePush;
 
   /** */
-  bool randomAccess;
+  gboolean randomAccess;
 
   /** */
   GstClockID clockId;
@@ -1367,7 +1367,7 @@ struct GstBaseSrc
   GstSegment segment;
 
   /** */
-  bool needNewsegment;
+  gboolean needNewsegment;
 
   /** */
   int numBuffers;
@@ -1376,10 +1376,10 @@ struct GstBaseSrc
   int numBuffersLeft;
 
   /** */
-  bool typefind;
+  gboolean typefind;
 
   /** */
-  bool running;
+  gboolean running;
 
   /** */
   GstEvent* pendingSeek;
@@ -1411,7 +1411,7 @@ struct GstBaseSrcClass
   /**
       Negotiated the caps with the peer.
   */
-  extern(C) bool function(GstBaseSrc* src) negotiate;
+  extern(C) gboolean function(GstBaseSrc* src) negotiate;
 
   /**
       Called during negotiation if caps need fixating. Implement instead of
@@ -1422,12 +1422,12 @@ struct GstBaseSrcClass
   /**
       Notify subclass of changed output caps
   */
-  extern(C) bool function(GstBaseSrc* src, GstCaps* caps) setCaps;
+  extern(C) gboolean function(GstBaseSrc* src, GstCaps* caps) setCaps;
 
   /**
       configure the allocation query
   */
-  extern(C) bool function(GstBaseSrc* src, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstBaseSrc* src, GstQuery* query) decideAllocation;
 
   /**
       Start processing. Subclasses should open resources and prepare
@@ -1435,12 +1435,12 @@ struct GstBaseSrcClass
          when the operation completes, either from the current thread or any other
          thread that finishes the start operation asynchronously.
   */
-  extern(C) bool function(GstBaseSrc* src) start;
+  extern(C) gboolean function(GstBaseSrc* src) start;
 
   /**
       Stop processing. Subclasses should use this to close resources.
   */
-  extern(C) bool function(GstBaseSrc* src) stop;
+  extern(C) gboolean function(GstBaseSrc* src) stop;
 
   /**
       Given a buffer, return the start and stop time when it
@@ -1453,12 +1453,12 @@ struct GstBaseSrcClass
       Return the total size of the resource, in the format set by
           [gstbase.base_src.BaseSrc.setFormat].
   */
-  extern(C) bool function(GstBaseSrc* src, ulong* size) getSize;
+  extern(C) gboolean function(GstBaseSrc* src, ulong* size) getSize;
 
   /**
       Check if the source can seek
   */
-  extern(C) bool function(GstBaseSrc* src) isSeekable;
+  extern(C) gboolean function(GstBaseSrc* src) isSeekable;
 
   /**
       Prepare the #GstSegment that will be passed to the
@@ -1468,12 +1468,12 @@ struct GstBaseSrcClass
         convert the seek arguments to the configured native format and prepare a
         segment in that format.
   */
-  extern(C) bool function(GstBaseSrc* src, GstEvent* seek, GstSegment* segment) prepareSeekSegment;
+  extern(C) gboolean function(GstBaseSrc* src, GstEvent* seek, GstSegment* segment) prepareSeekSegment;
 
   /**
       Perform seeking on the resource to the indicated segment.
   */
-  extern(C) bool function(GstBaseSrc* src, GstSegment* segment) doSeek;
+  extern(C) gboolean function(GstBaseSrc* src, GstSegment* segment) doSeek;
 
   /**
       Unlock any pending access to the resource. Subclasses should unblock
@@ -1483,24 +1483,24 @@ struct GstBaseSrcClass
          GST_FLOW_FLUSHING until the #GstBaseSrcClass::unlock_stop function has
          been called.
   */
-  extern(C) bool function(GstBaseSrc* src) unlock;
+  extern(C) gboolean function(GstBaseSrc* src) unlock;
 
   /**
       Clear the previous unlock request. Subclasses should clear any
          state they set during #GstBaseSrcClass::unlock, such as clearing command
          queues.
   */
-  extern(C) bool function(GstBaseSrc* src) unlockStop;
+  extern(C) gboolean function(GstBaseSrc* src) unlockStop;
 
   /**
       Handle a requested query.
   */
-  extern(C) bool function(GstBaseSrc* src, GstQuery* query) query;
+  extern(C) gboolean function(GstBaseSrc* src, GstQuery* query) query;
 
   /**
       Override this to implement custom event handling.
   */
-  extern(C) bool function(GstBaseSrc* src, GstEvent* event) event;
+  extern(C) gboolean function(GstBaseSrc* src, GstEvent* event) event;
 
   /**
       Ask the subclass to create a buffer with offset and size.  When the
@@ -1664,7 +1664,7 @@ struct GstBaseTransform
   GstPad* srcpad;
 
   /** */
-  bool haveSegment;
+  gboolean haveSegment;
 
   /** */
   GstSegment segment;
@@ -1697,7 +1697,7 @@ struct GstBaseTransformClass
                                  automatically enabled if the caps are the same.
                                  Set to false by default.
   */
-  bool passthroughOnSameCaps;
+  gboolean passthroughOnSameCaps;
 
   /**
       If set to true, @transform_ip will be called in
@@ -1706,7 +1706,7 @@ struct GstBaseTransformClass
                                 @transform_ip will be called in passthrough mode.
                                 Set to true by default.
   */
-  bool transformIpOnPassthrough;
+  gboolean transformIpOnPassthrough;
 
   /**
       Optional.  Given the pad in this direction and the given
@@ -1729,12 +1729,12 @@ struct GstBaseTransformClass
                        handled by the element. The default implementation might not be
                        the most optimal way to check this in all cases.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps) acceptCaps;
+  extern(C) gboolean function(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps) acceptCaps;
 
   /**
       Allows the subclass to be notified of the actual caps set.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstCaps* incaps, GstCaps* outcaps) setCaps;
+  extern(C) gboolean function(GstBaseTransform* trans, GstCaps* incaps, GstCaps* outcaps) setCaps;
 
   /**
       Optional.
@@ -1742,7 +1742,7 @@ struct GstBaseTransformClass
                        must chain up to the parent if they didn't handle the
                        query
   */
-  extern(C) bool function(GstBaseTransform* trans, GstPadDirection direction, GstQuery* query) query;
+  extern(C) gboolean function(GstBaseTransform* trans, GstPadDirection direction, GstQuery* query) query;
 
   /**
       Setup the allocation parameters for allocating output
@@ -1754,14 +1754,14 @@ struct GstBaseTransformClass
                          be called for all metadata API in the downstream query,
                          otherwise the metadata API is removed.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstBaseTransform* trans, GstQuery* query) decideAllocation;
 
   /**
       Return true if the metadata API should be proposed in the
                     upstream allocation query. The default implementation is null
                     and will cause all metadata to be removed.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstQuery* query, GType api, const(GstStructure)* params) filterMeta;
+  extern(C) gboolean function(GstBaseTransform* trans, GstQuery* query, GType api, const(GstStructure)* params) filterMeta;
 
   /**
       Propose buffer allocation parameters for upstream elements.
@@ -1773,7 +1773,7 @@ struct GstBaseTransformClass
                            passthrough mode and will copy all the filtered metadata
                            API in non-passthrough mode.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstQuery* decideQuery, GstQuery* query) proposeAllocation;
+  extern(C) gboolean function(GstBaseTransform* trans, GstQuery* decideQuery, GstQuery* query) proposeAllocation;
 
   /**
       Optional. Given the size of a buffer in the given direction
@@ -1782,41 +1782,41 @@ struct GstBaseTransformClass
                        The default implementation uses get_unit_size and keeps
                        the number of units the same.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps, size_t size, GstCaps* othercaps, size_t* othersize) transformSize;
+  extern(C) gboolean function(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps, size_t size, GstCaps* othercaps, size_t* othersize) transformSize;
 
   /**
       Required if the transform is not in-place.
                        Get the size in bytes of one unit for the given caps.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstCaps* caps, size_t* size) getUnitSize;
+  extern(C) gboolean function(GstBaseTransform* trans, GstCaps* caps, size_t* size) getUnitSize;
 
   /**
       Optional.
                        Called when the element starts processing.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstBaseTransform* trans) start;
+  extern(C) gboolean function(GstBaseTransform* trans) start;
 
   /**
       Optional.
                        Called when the element stops processing.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstBaseTransform* trans) stop;
+  extern(C) gboolean function(GstBaseTransform* trans) stop;
 
   /**
       Optional.
                        Event handler on the sink pad. The default implementation
                        handles the event and forwards it downstream.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstBaseTransform* trans, GstEvent* event) sinkEvent;
 
   /**
       Optional.
                        Event handler on the source pad. The default implementation
                        handles the event and forwards it upstream.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstBaseTransform* trans, GstEvent* event) srcEvent;
 
   /**
       Optional.
@@ -1837,7 +1837,7 @@ struct GstBaseTransformClass
                       The default implementation will copy the flags, timestamps and
                       offsets of the buffer.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstBuffer* input, GstBuffer* outbuf) copyMetadata;
+  extern(C) gboolean function(GstBaseTransform* trans, GstBuffer* input, GstBuffer* outbuf) copyMetadata;
 
   /**
       Optional. Transform the metadata on the input buffer to the
@@ -1845,7 +1845,7 @@ struct GstBaseTransformClass
                        tags. Subclasses can implement this method and return true if
                        the metadata is to be copied.
   */
-  extern(C) bool function(GstBaseTransform* trans, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) transformMeta;
+  extern(C) gboolean function(GstBaseTransform* trans, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) transformMeta;
 
   /**
       Optional.
@@ -1878,7 +1878,7 @@ struct GstBaseTransformClass
                        contiguous with any previous input buffer, then @is_discont
                        is set to true. (Since: 1.6)
   */
-  extern(C) GstFlowReturn function(GstBaseTransform* trans, bool isDiscont, GstBuffer* input) submitInputBuffer;
+  extern(C) GstFlowReturn function(GstBaseTransform* trans, gboolean isDiscont, GstBuffer* input) submitInputBuffer;
 
   /**
       Called after each new input buffer is submitted repeatedly
@@ -1953,10 +1953,10 @@ struct GstBitWriter
   uint bitCapacity;
 
   /** */
-  bool autoGrow;
+  gboolean autoGrow;
 
   /** */
-  bool owned;
+  gboolean owned;
 
   /** */
   void*[4] GstReserved;
@@ -2015,12 +2015,12 @@ struct GstByteWriter
   /**
       If true no reallocations are allowed
   */
-  bool fixed;
+  gboolean fixed;
 
   /**
       If false no reallocations are allowed and copies of data are returned
   */
-  bool owned;
+  gboolean owned;
 
   /** */
   void*[4] GstReserved;
@@ -2220,7 +2220,7 @@ struct GstDataQueueItem
   /**
       true if @object should be considered as a visible object.
   */
-  bool visible;
+  gboolean visible;
 
   /**
       The #GDestroyNotify function to use to free the #GstDataQueueItem.
@@ -2380,15 +2380,15 @@ alias extern(C) GstFlowReturn function(GstCollectPads* pads, GstCollectData* dat
 
 alias extern(C) int function(GstCollectPads* pads, GstCollectData* data1, GstClockTime timestamp1, GstCollectData* data2, GstClockTime timestamp2, void* userData) GstCollectPadsCompareFunction;
 
-alias extern(C) bool function(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData) GstCollectPadsEventFunction;
+alias extern(C) gboolean function(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData) GstCollectPadsEventFunction;
 
 alias extern(C) void function(GstCollectPads* pads, void* userData) GstCollectPadsFlushFunction;
 
 alias extern(C) GstFlowReturn function(GstCollectPads* pads, void* userData) GstCollectPadsFunction;
 
-alias extern(C) bool function(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData) GstCollectPadsQueryFunction;
+alias extern(C) gboolean function(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData) GstCollectPadsQueryFunction;
 
-alias extern(C) bool function(GstDataQueue* queue, uint visible, uint bytes, ulong time, void* checkdata) GstDataQueueCheckFullFunction;
+alias extern(C) gboolean function(GstDataQueue* queue, uint visible, uint bytes, ulong time, void* checkdata) GstDataQueueCheckFullFunction;
 
 alias extern(C) void function(GstDataQueue* queue, void* checkdata) GstDataQueueEmptyCallback;
 

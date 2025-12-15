@@ -189,7 +189,7 @@ class Point3D : gobject.boxed.Boxed
   bool equal(graphene.point3_d.Point3D b)
   {
     bool _retval;
-    _retval = graphene_point3d_equal(cast(const(graphene_point3d_t)*)this._cPtr, b ? cast(const(graphene_point3d_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_point3d_equal(cast(const(graphene_point3d_t)*)this._cPtr, b ? cast(const(graphene_point3d_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Point3D : gobject.boxed.Boxed
   bool near(graphene.point3_d.Point3D b, float epsilon)
   {
     bool _retval;
-    _retval = graphene_point3d_near(cast(const(graphene_point3d_t)*)this._cPtr, b ? cast(const(graphene_point3d_t)*)b._cPtr(No.Dup) : null, epsilon);
+    _retval = cast(bool)graphene_point3d_near(cast(const(graphene_point3d_t)*)this._cPtr, b ? cast(const(graphene_point3d_t)*)b._cPtr(No.Dup) : null, epsilon);
     return _retval;
   }
 

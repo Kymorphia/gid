@@ -96,7 +96,7 @@ class InputStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_input_stream_close(cast(GInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_input_stream_close(cast(GInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -147,7 +147,7 @@ class InputStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_input_stream_close_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_input_stream_close_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -160,7 +160,7 @@ class InputStream : gobject.object.ObjectWrap
   bool hasPending()
   {
     bool _retval;
-    _retval = g_input_stream_has_pending(cast(GInputStream*)this._cPtr);
+    _retval = cast(bool)g_input_stream_has_pending(cast(GInputStream*)this._cPtr);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class InputStream : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = g_input_stream_is_closed(cast(GInputStream*)this._cPtr);
+    _retval = cast(bool)g_input_stream_is_closed(cast(GInputStream*)this._cPtr);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class InputStream : gobject.object.ObjectWrap
     size_t _count;
     _count = cast(size_t)buffer.length;
     GError *_err;
-    _retval = g_input_stream_read_all(cast(GInputStream*)this._cPtr, buffer.ptr, _count, cast(size_t*)&bytesRead, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_input_stream_read_all(cast(GInputStream*)this._cPtr, buffer.ptr, _count, cast(size_t*)&bytesRead, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -313,7 +313,7 @@ class InputStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_input_stream_read_all_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&bytesRead, &_err);
+    _retval = cast(bool)g_input_stream_read_all_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&bytesRead, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -504,7 +504,7 @@ class InputStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_input_stream_set_pending(cast(GInputStream*)this._cPtr, &_err);
+    _retval = cast(bool)g_input_stream_set_pending(cast(GInputStream*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

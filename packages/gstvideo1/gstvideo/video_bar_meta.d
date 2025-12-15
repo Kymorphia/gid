@@ -78,7 +78,7 @@ class VideoBarMeta
   */
   @property bool isLetterbox()
   {
-    return (cast(GstVideoBarMeta*)this._cPtr).isLetterbox;
+    return cast(bool)(cast(GstVideoBarMeta*)this._cPtr).isLetterbox;
   }
 
   /**

@@ -204,7 +204,7 @@ template TlsClientConnectionT()
   override bool getUseSsl3()
   {
     bool _retval;
-    _retval = g_tls_client_connection_get_use_ssl3(cast(GTlsClientConnection*)this._cPtr);
+    _retval = cast(bool)g_tls_client_connection_get_use_ssl3(cast(GTlsClientConnection*)this._cPtr);
     return _retval;
   }
 

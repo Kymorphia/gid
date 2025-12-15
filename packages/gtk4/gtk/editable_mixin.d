@@ -314,7 +314,7 @@ template EditableT()
   override bool delegateGetAccessiblePlatformState(gtk.types.AccessiblePlatformState state)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_get_accessible_platform_state(cast(GtkEditable*)this._cPtr, state);
+    _retval = cast(bool)gtk_editable_delegate_get_accessible_platform_state(cast(GtkEditable*)this._cPtr, state);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ template EditableT()
   override bool getEditable()
   {
     bool _retval;
-    _retval = gtk_editable_get_editable(cast(GtkEditable*)this._cPtr);
+    _retval = cast(bool)gtk_editable_get_editable(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ template EditableT()
   override bool getEnableUndo()
   {
     bool _retval;
-    _retval = gtk_editable_get_enable_undo(cast(GtkEditable*)this._cPtr);
+    _retval = cast(bool)gtk_editable_get_enable_undo(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ template EditableT()
   override bool getSelectionBounds(out int startPos, out int endPos)
   {
     bool _retval;
-    _retval = gtk_editable_get_selection_bounds(cast(GtkEditable*)this._cPtr, cast(int*)&startPos, cast(int*)&endPos);
+    _retval = cast(bool)gtk_editable_get_selection_bounds(cast(GtkEditable*)this._cPtr, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
 

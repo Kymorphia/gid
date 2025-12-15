@@ -182,7 +182,7 @@ class AudioBuffer
   {
     bool _retval;
     GstAudioBuffer _buffer;
-    _retval = gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer._cPtr(No.Dup) : null, flags);
+    _retval = cast(bool)gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer._cPtr(No.Dup) : null, flags);
     buffer = new gstaudio.audio_buffer.AudioBuffer(cast(void*)&_buffer, No.Take);
     return _retval;
   }
@@ -212,7 +212,7 @@ class AudioBuffer
       _channels = cast(int)to.length;
 
     auto _to = cast(const(GstAudioChannelPosition)*)to.ptr;
-    _retval = gst_audio_buffer_reorder_channels(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, format, _channels, _from, _to);
+    _retval = cast(bool)gst_audio_buffer_reorder_channels(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, format, _channels, _from, _to);
     return _retval;
   }
 

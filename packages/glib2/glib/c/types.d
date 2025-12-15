@@ -5100,7 +5100,7 @@ struct GHashTableIter
   int dummy4;
 
   /** */
-  bool dummy5;
+  gboolean dummy5;
 
   /** */
   void* dummy6;
@@ -6613,7 +6613,7 @@ struct GSourceFuncs
           timeout and the source also has a ready time set, then the
           lower of the two will be used.
   */
-  extern(C) bool function(GSource* source, int* timeout) prepare;
+  extern(C) gboolean function(GSource* source, int* timeout) prepare;
 
   /**
       Called after all the file descriptors are polled. The source
@@ -6623,7 +6623,7 @@ struct GSourceFuncs
           be null, in which case the effect is as if the function always returns
           false.
   */
-  extern(C) bool function(GSource* source) check;
+  extern(C) gboolean function(GSource* source) check;
 
   /**
       Called to dispatch the event source, after it has returned
@@ -6636,7 +6636,7 @@ struct GSourceFuncs
           return value of the @dispatch function should be `G_SOURCE_REMOVE` if the
           source should be removed or `G_SOURCE_CONTINUE` to keep it.
   */
-  extern(C) bool function(GSource* source, GSourceFunc callback, void* userData) dispatch;
+  extern(C) gboolean function(GSource* source, GSourceFunc callback, void* userData) dispatch;
 
   /**
       Called when the source is finalized. At this point, the source
@@ -6842,7 +6842,7 @@ struct GStaticRWLock
   uint readCounter;
 
   /** */
-  bool haveWriter;
+  gboolean haveWriter;
 
   /** */
   uint wantToRead;
@@ -6963,22 +6963,22 @@ struct GTestCase;
 struct GTestConfig
 {
   /** */
-  bool testInitialized;
+  gboolean testInitialized;
 
   /** */
-  bool testQuick;
+  gboolean testQuick;
 
   /** */
-  bool testPerf;
+  gboolean testPerf;
 
   /** */
-  bool testVerbose;
+  gboolean testVerbose;
 
   /** */
-  bool testQuiet;
+  gboolean testQuiet;
 
   /** */
-  bool testUndefined;
+  gboolean testUndefined;
 }
 
 /** */
@@ -7039,7 +7039,7 @@ struct GThread
   void* data;
 
   /** */
-  bool joinable;
+  gboolean joinable;
 
   /** */
   GThreadPriority priority;
@@ -7064,7 +7064,7 @@ struct GThreadFunctions
   /**
       virtual function pointer for [glib.mutex.Mutex.trylock]
   */
-  extern(C) bool function(GMutex* mutex) mutexTrylock;
+  extern(C) gboolean function(GMutex* mutex) mutexTrylock;
 
   /**
       virtual function pointer for [glib.mutex.Mutex.unlock]
@@ -7099,7 +7099,7 @@ struct GThreadFunctions
   /**
       virtual function pointer for [glib.cond.Cond.timedWait]
   */
-  extern(C) bool function(GCond* cond, GMutex* mutex, GTimeVal* endTime) condTimedWait;
+  extern(C) gboolean function(GCond* cond, GMutex* mutex, GTimeVal* endTime) condTimedWait;
 
   /**
       virtual function pointer for [glib.cond.Cond.free]
@@ -7124,7 +7124,7 @@ struct GThreadFunctions
   /**
       virtual function pointer for [glib.thread.Thread.create]
   */
-  extern(C) void function(GThreadFunc func, void* data, gulong stackSize, bool joinable, bool bound, GThreadPriority priority, void* thread, GError** _err) threadCreate;
+  extern(C) void function(GThreadFunc func, void* data, gulong stackSize, gboolean joinable, gboolean bound, GThreadPriority priority, void* thread, GError** _err) threadCreate;
 
   /**
       virtual function pointer for [glib.thread.Thread.yield]
@@ -7156,7 +7156,7 @@ struct GThreadFunctions
       used internally by recursive mutex locks and by some
                      assertion checks
   */
-  extern(C) bool function(void* thread1, void* thread2) threadEqual;
+  extern(C) gboolean function(void* thread1, void* thread2) threadEqual;
 }
 
 /**
@@ -7202,7 +7202,7 @@ struct GThreadPool
   /**
       are all threads exclusive to this pool
   */
-  bool exclusive;
+  gboolean exclusive;
 }
 
 /**
@@ -8172,9 +8172,9 @@ alias extern(C) void function(void* data) GDestroyNotify;
 
 alias extern(C) void* function(void* data, void* userData) GDuplicateFunc;
 
-alias extern(C) bool function(const(void)* a, const(void)* b) GEqualFunc;
+alias extern(C) gboolean function(const(void)* a, const(void)* b) GEqualFunc;
 
-alias extern(C) bool function(const(void)* a, const(void)* b, void* userData) GEqualFuncFull;
+alias extern(C) gboolean function(const(void)* a, const(void)* b, void* userData) GEqualFuncFull;
 
 alias extern(C) void function(GError* error) GErrorClearFunc;
 
@@ -8188,25 +8188,25 @@ alias extern(C) void function(void* data, void* userData) GFunc;
 
 alias extern(C) void function(void* key, void* value, void* userData) GHFunc;
 
-alias extern(C) bool function(void* key, void* value, void* userData) GHRFunc;
+alias extern(C) gboolean function(void* key, void* value, void* userData) GHRFunc;
 
 alias extern(C) uint function(const(void)* key) GHashFunc;
 
-alias extern(C) bool function(void* data) GHookCheckFunc;
+alias extern(C) gboolean function(void* data) GHookCheckFunc;
 
-alias extern(C) bool function(GHook* hook, void* marshalData) GHookCheckMarshaller;
+alias extern(C) gboolean function(GHook* hook, void* marshalData) GHookCheckMarshaller;
 
 alias extern(C) int function(GHook* newHook, GHook* sibling) GHookCompareFunc;
 
 alias extern(C) void function(GHookList* hookList, GHook* hook) GHookFinalizeFunc;
 
-alias extern(C) bool function(GHook* hook, void* data) GHookFindFunc;
+alias extern(C) gboolean function(GHook* hook, void* data) GHookFindFunc;
 
 alias extern(C) void function(void* data) GHookFunc;
 
 alias extern(C) void function(GHook* hook, void* marshalData) GHookMarshaller;
 
-alias extern(C) bool function(GIOChannel* source, GIOCondition condition, void* data) GIOFunc;
+alias extern(C) gboolean function(GIOChannel* source, GIOCondition condition, void* data) GIOFunc;
 
 alias extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) GLogFunc;
 
@@ -8214,21 +8214,21 @@ alias extern(C) GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogFie
 
 alias extern(C) void function(GNode* node, void* data) GNodeForeachFunc;
 
-alias extern(C) bool function(GNode* node, void* data) GNodeTraverseFunc;
+alias extern(C) gboolean function(GNode* node, void* data) GNodeTraverseFunc;
 
-alias extern(C) bool function(const(char)* optionName, const(char)* value, void* data, GError** _err) GOptionArgFunc;
+alias extern(C) gboolean function(const(char)* optionName, const(char)* value, void* data, GError** _err) GOptionArgFunc;
 
 alias extern(C) void function(GOptionContext* context, GOptionGroup* group, void* data, GError** _err) GOptionErrorFunc;
 
-alias extern(C) bool function(GOptionContext* context, GOptionGroup* group, void* data, GError** _err) GOptionParseFunc;
+alias extern(C) gboolean function(GOptionContext* context, GOptionGroup* group, void* data, GError** _err) GOptionParseFunc;
 
 alias extern(C) int function(GPollFD* ufds, uint nfsd, int timeout) GPollFunc;
 
 alias extern(C) void function(const(char)* string_) GPrintFunc;
 
-alias extern(C) bool function(const(GMatchInfo)* matchInfo, GString* result, void* userData) GRegexEvalCallback;
+alias extern(C) gboolean function(const(GMatchInfo)* matchInfo, GString* result, void* userData) GRegexEvalCallback;
 
-alias extern(C) void function(GScanner* scanner, char* message, bool error) GScannerMsgFunc;
+alias extern(C) void function(GScanner* scanner, char* message, gboolean error) GScannerMsgFunc;
 
 alias extern(C) int function(GSequenceIter* a, GSequenceIter* b, void* data) GSequenceIterCompareFunc;
 
@@ -8236,7 +8236,7 @@ alias extern(C) void function(GSource* source) GSourceDisposeFunc;
 
 alias extern(C) void function() GSourceDummyMarshal;
 
-alias extern(C) bool function(void* userData) GSourceFunc;
+alias extern(C) gboolean function(void* userData) GSourceFunc;
 
 alias extern(C) void function(void* userData) GSourceOnceFunc;
 
@@ -8248,17 +8248,17 @@ alias extern(C) void function(void* fixture, const(void)* userData) GTestFixture
 
 alias extern(C) void function() GTestFunc;
 
-alias extern(C) bool function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) GTestLogFatalFunc;
+alias extern(C) gboolean function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) GTestLogFatalFunc;
 
 alias extern(C) void* function(void* data) GThreadFunc;
 
 alias extern(C) const(char)* function(const(char)* str, void* data) GTranslateFunc;
 
-alias extern(C) bool function(void* key, void* value, void* data) GTraverseFunc;
+alias extern(C) gboolean function(void* key, void* value, void* data) GTraverseFunc;
 
-alias extern(C) bool function(GTreeNode* node, void* data) GTraverseNodeFunc;
+alias extern(C) gboolean function(GTreeNode* node, void* data) GTraverseNodeFunc;
 
-alias extern(C) bool function(int fd, GIOCondition condition, void* userData) GUnixFDSourceFunc;
+alias extern(C) gboolean function(int fd, GIOCondition condition, void* userData) GUnixFDSourceFunc;
 
 alias extern(C) void function() GVoidFunc;
 

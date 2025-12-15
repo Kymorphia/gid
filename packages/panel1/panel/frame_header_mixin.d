@@ -72,7 +72,7 @@ template FrameHeaderT()
   override bool canDrop(panel.widget.Widget widget)
   {
     bool _retval;
-    _retval = panel_frame_header_can_drop(cast(PanelFrameHeader*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
+    _retval = cast(bool)panel_frame_header_can_drop(cast(PanelFrameHeader*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 

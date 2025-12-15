@@ -196,7 +196,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   bool rangeCheck(glib.variant.Variant value)
   {
     bool _retval;
-    _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 }

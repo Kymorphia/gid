@@ -261,7 +261,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   bool getShrinkCenterLast()
   {
     bool _retval;
-    _retval = gtk_center_box_get_shrink_center_last(cast(GtkCenterBox*)this._cPtr);
+    _retval = cast(bool)gtk_center_box_get_shrink_center_last(cast(GtkCenterBox*)this._cPtr);
     return _retval;
   }
 

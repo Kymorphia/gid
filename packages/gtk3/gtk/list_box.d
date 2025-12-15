@@ -194,7 +194,7 @@ class ListBox : gtk.container.Container
   bool getActivateOnSingleClick()
   {
     bool _retval;
-    _retval = gtk_list_box_get_activate_on_single_click(cast(GtkListBox*)this._cPtr);
+    _retval = cast(bool)gtk_list_box_get_activate_on_single_click(cast(GtkListBox*)this._cPtr);
     return _retval;
   }
 
@@ -435,11 +435,11 @@ class ListBox : gtk.container.Container
   */
   void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc = null)
   {
-    extern(C) bool _filterFuncCallback(GtkListBoxRow* row, void* userData)
+    extern(C) gboolean _filterFuncCallback(GtkListBoxRow* row, void* userData)
     {
       auto _dlg = cast(gtk.types.ListBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;

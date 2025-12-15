@@ -137,7 +137,7 @@ class NavigationAction : gobject.boxed.Boxed
   bool isRedirect()
   {
     bool _retval;
-    _retval = webkit_navigation_action_is_redirect(cast(WebKitNavigationAction*)this._cPtr);
+    _retval = cast(bool)webkit_navigation_action_is_redirect(cast(WebKitNavigationAction*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class NavigationAction : gobject.boxed.Boxed
   bool isUserGesture()
   {
     bool _retval;
-    _retval = webkit_navigation_action_is_user_gesture(cast(WebKitNavigationAction*)this._cPtr);
+    _retval = cast(bool)webkit_navigation_action_is_user_gesture(cast(WebKitNavigationAction*)this._cPtr);
     return _retval;
   }
 }

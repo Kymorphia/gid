@@ -294,7 +294,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
   bool isStaticImage()
   {
     bool _retval;
-    _retval = gdk_pixbuf_animation_is_static_image(cast(GdkPixbufAnimation*)this._cPtr);
+    _retval = cast(bool)gdk_pixbuf_animation_is_static_image(cast(GdkPixbufAnimation*)this._cPtr);
     return _retval;
   }
 }

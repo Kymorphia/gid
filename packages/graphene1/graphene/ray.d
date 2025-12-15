@@ -87,7 +87,7 @@ class Ray : gobject.boxed.Boxed
   bool equal(graphene.ray.Ray b)
   {
     bool _retval;
-    _retval = graphene_ray_equal(cast(const(graphene_ray_t)*)this._cPtr, b ? cast(const(graphene_ray_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_ray_equal(cast(const(graphene_ray_t)*)this._cPtr, b ? cast(const(graphene_ray_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class Ray : gobject.boxed.Boxed
   bool intersectsBox(graphene.box.Box b)
   {
     bool _retval;
-    _retval = graphene_ray_intersects_box(cast(const(graphene_ray_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_ray_intersects_box(cast(const(graphene_ray_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -313,7 +313,7 @@ class Ray : gobject.boxed.Boxed
   bool intersectsSphere(graphene.sphere.Sphere s)
   {
     bool _retval;
-    _retval = graphene_ray_intersects_sphere(cast(const(graphene_ray_t)*)this._cPtr, s ? cast(const(graphene_sphere_t)*)s._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_ray_intersects_sphere(cast(const(graphene_ray_t)*)this._cPtr, s ? cast(const(graphene_sphere_t)*)s._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class Ray : gobject.boxed.Boxed
   bool intersectsTriangle(graphene.triangle.Triangle t)
   {
     bool _retval;
-    _retval = graphene_ray_intersects_triangle(cast(const(graphene_ray_t)*)this._cPtr, t ? cast(const(graphene_triangle_t)*)t._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_ray_intersects_triangle(cast(const(graphene_ray_t)*)this._cPtr, t ? cast(const(graphene_triangle_t)*)t._cPtr(No.Dup) : null);
     return _retval;
   }
 }

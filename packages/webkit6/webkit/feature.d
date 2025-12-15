@@ -105,7 +105,7 @@ class Feature : gobject.boxed.Boxed
   bool getDefaultValue()
   {
     bool _retval;
-    _retval = webkit_feature_get_default_value(cast(WebKitFeature*)this._cPtr);
+    _retval = cast(bool)webkit_feature_get_default_value(cast(WebKitFeature*)this._cPtr);
     return _retval;
   }
 

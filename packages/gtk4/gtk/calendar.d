@@ -271,7 +271,7 @@ class Calendar : gtk.widget.Widget
   bool getDayIsMarked(uint day)
   {
     bool _retval;
-    _retval = gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
+    _retval = cast(bool)gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class Calendar : gtk.widget.Widget
   bool getShowDayNames()
   {
     bool _retval;
-    _retval = gtk_calendar_get_show_day_names(cast(GtkCalendar*)this._cPtr);
+    _retval = cast(bool)gtk_calendar_get_show_day_names(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class Calendar : gtk.widget.Widget
   bool getShowHeading()
   {
     bool _retval;
-    _retval = gtk_calendar_get_show_heading(cast(GtkCalendar*)this._cPtr);
+    _retval = cast(bool)gtk_calendar_get_show_heading(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class Calendar : gtk.widget.Widget
   bool getShowWeekNumbers()
   {
     bool _retval;
-    _retval = gtk_calendar_get_show_week_numbers(cast(GtkCalendar*)this._cPtr);
+    _retval = cast(bool)gtk_calendar_get_show_week_numbers(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 

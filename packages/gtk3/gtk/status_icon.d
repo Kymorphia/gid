@@ -483,7 +483,9 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   static void positionMenu(gtk.menu.Menu menu, ref int x, ref int y, out bool pushIn, gtk.status_icon.StatusIcon userData)
   {
-    gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu._cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, cast(bool*)&pushIn, userData ? cast(GtkStatusIcon*)userData._cPtr(No.Dup) : null);
+    gboolean _pushIn;
+    gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu._cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &_pushIn, userData ? cast(GtkStatusIcon*)userData._cPtr(No.Dup) : null);
+    pushIn = cast(bool)_pushIn;
   }
 
   /**
@@ -522,7 +524,7 @@ class StatusIcon : gobject.object.ObjectWrap
     bool _retval;
     GdkScreen* _screen;
     GdkRectangle _area;
-    _retval = gtk_status_icon_get_geometry(cast(GtkStatusIcon*)this._cPtr, &_screen, &_area, &orientation);
+    _retval = cast(bool)gtk_status_icon_get_geometry(cast(GtkStatusIcon*)this._cPtr, &_screen, &_area, &orientation);
     screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
     area = new gdk.rectangle.Rectangle(cast(void*)&_area, No.Take);
     return _retval;
@@ -562,7 +564,7 @@ class StatusIcon : gobject.object.ObjectWrap
   bool getHasTooltip()
   {
     bool _retval;
-    _retval = gtk_status_icon_get_has_tooltip(cast(GtkStatusIcon*)this._cPtr);
+    _retval = cast(bool)gtk_status_icon_get_has_tooltip(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 
@@ -748,7 +750,7 @@ class StatusIcon : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_status_icon_get_visible(cast(GtkStatusIcon*)this._cPtr);
+    _retval = cast(bool)gtk_status_icon_get_visible(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 
@@ -791,7 +793,7 @@ class StatusIcon : gobject.object.ObjectWrap
   bool isEmbedded()
   {
     bool _retval;
-    _retval = gtk_status_icon_is_embedded(cast(GtkStatusIcon*)this._cPtr);
+    _retval = cast(bool)gtk_status_icon_is_embedded(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 

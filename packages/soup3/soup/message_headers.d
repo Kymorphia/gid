@@ -176,7 +176,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     char* _disposition;
     GHashTable* _params;
-    _retval = soup_message_headers_get_content_disposition(cast(SoupMessageHeaders*)this._cPtr, &_disposition, &_params);
+    _retval = cast(bool)soup_message_headers_get_content_disposition(cast(SoupMessageHeaders*)this._cPtr, &_disposition, &_params);
     disposition = _disposition.fromCString(Yes.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
@@ -212,7 +212,7 @@ class MessageHeaders : gobject.boxed.Boxed
   bool getContentRange(out long start, out long end, out long totalLength)
   {
     bool _retval;
-    _retval = soup_message_headers_get_content_range(cast(SoupMessageHeaders*)this._cPtr, cast(long*)&start, cast(long*)&end, cast(long*)&totalLength);
+    _retval = cast(bool)soup_message_headers_get_content_range(cast(SoupMessageHeaders*)this._cPtr, cast(long*)&start, cast(long*)&end, cast(long*)&totalLength);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     int _length;
     SoupRange* _ranges;
-    _retval = soup_message_headers_get_ranges(cast(SoupMessageHeaders*)this._cPtr, totalLength, &_ranges, &_length);
+    _retval = cast(bool)soup_message_headers_get_ranges(cast(SoupMessageHeaders*)this._cPtr, totalLength, &_ranges, &_length);
     ranges.length = _length;
     ranges[0 .. $] = (cast(soup.types.Range*)_ranges)[0 .. _length];
     gFree(cast(void*)_ranges);
@@ -404,7 +404,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _token = token.toCString(No.Alloc);
-    _retval = soup_message_headers_header_contains(cast(SoupMessageHeaders*)this._cPtr, _name, _token);
+    _retval = cast(bool)soup_message_headers_header_contains(cast(SoupMessageHeaders*)this._cPtr, _name, _token);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    _retval = soup_message_headers_header_equals(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
+    _retval = cast(bool)soup_message_headers_header_equals(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
     return _retval;
   }
 

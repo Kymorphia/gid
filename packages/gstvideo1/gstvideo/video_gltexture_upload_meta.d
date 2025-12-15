@@ -95,7 +95,7 @@ class VideoGLTextureUploadMeta
     bool _retval;
     assert(!textureId || textureId.length == 4);
     auto _textureId = cast(uint*)textureId.ptr;
-    _retval = gst_video_gl_texture_upload_meta_upload(cast(GstVideoGLTextureUploadMeta*)this._cPtr, _textureId);
+    _retval = cast(bool)gst_video_gl_texture_upload_meta_upload(cast(GstVideoGLTextureUploadMeta*)this._cPtr, _textureId);
     return _retval;
   }
 

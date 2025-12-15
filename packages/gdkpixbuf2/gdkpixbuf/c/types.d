@@ -376,7 +376,7 @@ struct GdkPixbufAnimationClass
   /**
       returns whether the given animation is just a static image.
   */
-  extern(C) bool function(GdkPixbufAnimation* animation) isStaticImage;
+  extern(C) gboolean function(GdkPixbufAnimation* animation) isStaticImage;
 
   /**
       returns a static image representing the given animation.
@@ -431,13 +431,13 @@ struct GdkPixbufAnimationIterClass
       returns whether the current frame of @iter is
        being loaded.
   */
-  extern(C) bool function(GdkPixbufAnimationIter* iter) onCurrentlyLoadingFrame;
+  extern(C) gboolean function(GdkPixbufAnimationIter* iter) onCurrentlyLoadingFrame;
 
   /**
       advances the iterator to @current_time, possibly changing the
        current frame.
   */
-  extern(C) bool function(GdkPixbufAnimationIter* iter, const(GTimeVal)* currentTime) advance;
+  extern(C) gboolean function(GdkPixbufAnimationIter* iter, const(GTimeVal)* currentTime) advance;
 }
 
 /**
@@ -488,7 +488,7 @@ struct GdkPixbufFormat
   /**
       a boolean determining whether the loader is disabled`
   */
-  bool disabled;
+  gboolean disabled;
 
   /**
       a string containing license information, typically set to
@@ -777,7 +777,7 @@ alias extern(C) void function(GdkPixbufFormat* info) GdkPixbufModuleFillInfoFunc
 
 alias extern(C) void function(GdkPixbufModule* module_) GdkPixbufModuleFillVtableFunc;
 
-alias extern(C) bool function(void* context, const(ubyte)* buf, uint size, GError** _err) GdkPixbufModuleIncrementLoadFunc;
+alias extern(C) gboolean function(void* context, const(ubyte)* buf, uint size, GError** _err) GdkPixbufModuleIncrementLoadFunc;
 
 alias extern(C) GdkPixbufAnimation* function(void* f, GError** _err) GdkPixbufModuleLoadAnimationFunc;
 
@@ -787,17 +787,17 @@ alias extern(C) GdkPixbuf* function(const(char*)* data) GdkPixbufModuleLoadXpmDa
 
 alias extern(C) void function(GdkPixbuf* pixbuf, GdkPixbufAnimation* anim, void* userData) GdkPixbufModulePreparedFunc;
 
-alias extern(C) bool function(GdkPixbufSaveFunc saveFunc, void* userData, GdkPixbuf* pixbuf, char** optionKeys, char** optionValues, GError** _err) GdkPixbufModuleSaveCallbackFunc;
+alias extern(C) gboolean function(GdkPixbufSaveFunc saveFunc, void* userData, GdkPixbuf* pixbuf, char** optionKeys, char** optionValues, GError** _err) GdkPixbufModuleSaveCallbackFunc;
 
-alias extern(C) bool function(void* f, GdkPixbuf* pixbuf, char** paramKeys, char** paramValues, GError** _err) GdkPixbufModuleSaveFunc;
+alias extern(C) gboolean function(void* f, GdkPixbuf* pixbuf, char** paramKeys, char** paramValues, GError** _err) GdkPixbufModuleSaveFunc;
 
-alias extern(C) bool function(const(char)* optionKey) GdkPixbufModuleSaveOptionSupportedFunc;
+alias extern(C) gboolean function(const(char)* optionKey) GdkPixbufModuleSaveOptionSupportedFunc;
 
 alias extern(C) void function(int* width, int* height, void* userData) GdkPixbufModuleSizeFunc;
 
-alias extern(C) bool function(void* context, GError** _err) GdkPixbufModuleStopLoadFunc;
+alias extern(C) gboolean function(void* context, GError** _err) GdkPixbufModuleStopLoadFunc;
 
 alias extern(C) void function(GdkPixbuf* pixbuf, int x, int y, int width, int height, void* userData) GdkPixbufModuleUpdatedFunc;
 
-alias extern(C) bool function(const(ubyte)* buf, size_t count, GError** error, void* data) GdkPixbufSaveFunc;
+alias extern(C) gboolean function(const(ubyte)* buf, size_t count, GError** error, void* data) GdkPixbufSaveFunc;
 

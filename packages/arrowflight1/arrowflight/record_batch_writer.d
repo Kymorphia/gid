@@ -55,7 +55,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_begin(cast(GAFlightRecordBatchWriter*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gaflight_record_batch_writer_begin(cast(GAFlightRecordBatchWriter*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -73,7 +73,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_write_metadata(cast(GAFlightRecordBatchWriter*)this._cPtr, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gaflight_record_batch_writer_write_metadata(cast(GAFlightRecordBatchWriter*)this._cPtr, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -94,7 +94,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_write_record_batch(cast(GAFlightRecordBatchWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gaflight_record_batch_writer_write_record_batch(cast(GAFlightRecordBatchWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

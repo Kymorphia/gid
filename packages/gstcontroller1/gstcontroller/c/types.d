@@ -213,7 +213,7 @@ struct GstDirectControlBinding
     struct AbiType
     {
       /** */
-      bool wantAbsolute;
+      gboolean wantAbsolute;
     }
 
     AbiType abi;
@@ -362,7 +362,7 @@ struct GstTimedValueControlSource
   int nvalues;
 
   /** */
-  bool validCache;
+  gboolean validCache;
 
   /** */
   GstTimedValueControlSourcePrivate* priv;

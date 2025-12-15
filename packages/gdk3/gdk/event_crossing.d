@@ -261,7 +261,7 @@ class EventCrossing
   */
   @property bool focus()
   {
-    return (cast(GdkEventCrossing*)this._cPtr).focus;
+    return cast(bool)(cast(GdkEventCrossing*)this._cPtr).focus;
   }
 
   /**

@@ -205,7 +205,7 @@ class Set : gobject.object.ObjectWrap
   bool addHolder(gda.holder.Holder holder)
   {
     bool _retval;
-    _retval = gda_set_add_holder(cast(GdaSet*)this._cPtr, holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null);
+    _retval = cast(bool)gda_set_add_holder(cast(GdaSet*)this._cPtr, holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class Set : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_set_is_valid(cast(GdaSet*)this._cPtr, &_err);
+    _retval = cast(bool)gda_set_is_valid(cast(GdaSet*)this._cPtr, &_err);
     if (_err)
       throw new SetException(_err);
     return _retval;

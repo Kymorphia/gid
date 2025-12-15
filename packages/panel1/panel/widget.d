@@ -293,7 +293,7 @@ class Widget : gtk.widget.Widget
   bool focusDefault()
   {
     bool _retval;
-    _retval = panel_widget_focus_default(cast(PanelWidget*)this._cPtr);
+    _retval = cast(bool)panel_widget_focus_default(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Widget : gtk.widget.Widget
   bool getBusy()
   {
     bool _retval;
-    _retval = panel_widget_get_busy(cast(PanelWidget*)this._cPtr);
+    _retval = cast(bool)panel_widget_get_busy(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class Widget : gtk.widget.Widget
   bool getCanMaximize()
   {
     bool _retval;
-    _retval = panel_widget_get_can_maximize(cast(PanelWidget*)this._cPtr);
+    _retval = cast(bool)panel_widget_get_can_maximize(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ class Widget : gtk.widget.Widget
   bool getModified()
   {
     bool _retval;
-    _retval = panel_widget_get_modified(cast(PanelWidget*)this._cPtr);
+    _retval = cast(bool)panel_widget_get_modified(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class Widget : gtk.widget.Widget
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = panel_widget_get_needs_attention(cast(PanelWidget*)this._cPtr);
+    _retval = cast(bool)panel_widget_get_needs_attention(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class Widget : gtk.widget.Widget
   bool getReorderable()
   {
     bool _retval;
-    _retval = panel_widget_get_reorderable(cast(PanelWidget*)this._cPtr);
+    _retval = cast(bool)panel_widget_get_reorderable(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 

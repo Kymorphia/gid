@@ -308,7 +308,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   bool getHasMipmap()
   {
     bool _retval;
-    _retval = gdk_gl_texture_builder_get_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr);
+    _retval = cast(bool)gdk_gl_texture_builder_get_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr);
     return _retval;
   }
 

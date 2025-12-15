@@ -369,7 +369,7 @@ class GLArea : gtk.widget.Widget
   bool getAutoRender()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_auto_render(cast(GtkGLArea*)this._cPtr);
+    _retval = cast(bool)gtk_gl_area_get_auto_render(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -404,7 +404,7 @@ class GLArea : gtk.widget.Widget
   bool getHasDepthBuffer()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_has_depth_buffer(cast(GtkGLArea*)this._cPtr);
+    _retval = cast(bool)gtk_gl_area_get_has_depth_buffer(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -415,7 +415,7 @@ class GLArea : gtk.widget.Widget
   bool getHasStencilBuffer()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_has_stencil_buffer(cast(GtkGLArea*)this._cPtr);
+    _retval = cast(bool)gtk_gl_area_get_has_stencil_buffer(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class GLArea : gtk.widget.Widget
   bool getUseEs()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_use_es(cast(GtkGLArea*)this._cPtr);
+    _retval = cast(bool)gtk_gl_area_get_use_es(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 

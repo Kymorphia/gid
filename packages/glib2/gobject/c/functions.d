@@ -141,15 +141,15 @@ __gshared extern(C)
   void* function(GObject* object, GQuark quark) c_g_object_get_qdata; ///
   void function(GObject* object, const(char)* firstPropertyName, void* varArgs) c_g_object_get_valist; ///
   void function(GObject* object, uint nProperties, const(char*)* names, GValue* values) c_g_object_getv; ///
-  bool function(GObject* object) c_g_object_is_floating; ///
+  gboolean function(GObject* object) c_g_object_is_floating; ///
   void function(GObject* object, const(char)* propertyName) c_g_object_notify; ///
   void function(GObject* object, GParamSpec* pspec) c_g_object_notify_by_pspec; ///
   GObject* function(GObject* object) c_g_object_ref; ///
   GObject* function(GObject* object) c_g_object_ref_sink; ///
   void function(GObject* object, GToggleNotify notify, void* data) c_g_object_remove_toggle_ref; ///
   void function(GObject* object, void** weakPointerLocation) c_g_object_remove_weak_pointer; ///
-  bool function(GObject* object, const(char)* key, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_data; ///
-  bool function(GObject* object, GQuark quark, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_qdata; ///
+  gboolean function(GObject* object, const(char)* key, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_data; ///
+  gboolean function(GObject* object, GQuark quark, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_qdata; ///
   void function(GObject* object) c_g_object_run_dispose; ///
   void function(GObject* object, const(char)* firstPropertyName,  ...) c_g_object_set; ///
   void function(GObject* object, const(char)* key, void* data) c_g_object_set_data; ///
@@ -170,7 +170,7 @@ __gshared extern(C)
 
   // ParamSpec
   GParamSpec* function(GType paramType, const(char)* name, const(char)* nick, const(char)* blurb, GParamFlags flags) c_g_param_spec_internal; ///
-  bool function(const(char)* name) c_g_param_spec_is_valid_name; ///
+  gboolean function(const(char)* name) c_g_param_spec_is_valid_name; ///
   const(char)* function(GParamSpec* pspec) c_g_param_spec_get_blurb; ///
   const(GValue)* function(GParamSpec* pspec) c_g_param_spec_get_default_value; ///
   const(char)* function(GParamSpec* pspec) c_g_param_spec_get_name; ///
@@ -191,9 +191,9 @@ __gshared extern(C)
   void function(GParamSpecPool* pool, GParamSpec* pspec, GType ownerType) c_g_param_spec_pool_insert; ///
   GParamSpec** function(GParamSpecPool* pool, GType ownerType, uint* nPspecsP) c_g_param_spec_pool_list; ///
   GList* function(GParamSpecPool* pool, GType ownerType) c_g_param_spec_pool_list_owned; ///
-  GParamSpec* function(GParamSpecPool* pool, const(char)* paramName, GType ownerType, bool walkAncestors) c_g_param_spec_pool_lookup; ///
+  GParamSpec* function(GParamSpecPool* pool, const(char)* paramName, GType ownerType, gboolean walkAncestors) c_g_param_spec_pool_lookup; ///
   void function(GParamSpecPool* pool, GParamSpec* pspec) c_g_param_spec_pool_remove; ///
-  GParamSpecPool* function(bool typePrefixing) c_g_param_spec_pool_new; ///
+  GParamSpecPool* function(gboolean typePrefixing) c_g_param_spec_pool_new; ///
 
   // SignalGroup
   GType function() c_g_signal_group_get_type; ///
@@ -201,7 +201,7 @@ __gshared extern(C)
   void function(GSignalGroup* self) c_g_signal_group_block; ///
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* data) c_g_signal_group_connect; ///
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* data) c_g_signal_group_connect_after; ///
-  void function(GSignalGroup* self, const(char)* detailedSignal, GClosure* closure, bool after) c_g_signal_group_connect_closure; ///
+  void function(GSignalGroup* self, const(char)* detailedSignal, GClosure* closure, gboolean after) c_g_signal_group_connect_closure; ///
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* data, GClosureNotify notify, GConnectFlags flags) c_g_signal_group_connect_data; ///
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* object, GConnectFlags flags) c_g_signal_group_connect_object; ///
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* data) c_g_signal_group_connect_swapped; ///
@@ -240,7 +240,7 @@ __gshared extern(C)
   GType function(GTypeModule* module_, GType parentType, const(char)* typeName, const(GTypeInfo)* typeInfo, GTypeFlags flags) c_g_type_module_register_type; ///
   void function(GTypeModule* module_, const(char)* name) c_g_type_module_set_name; ///
   void function(GTypeModule* module_) c_g_type_module_unuse; ///
-  bool function(GTypeModule* module_) c_g_type_module_use; ///
+  gboolean function(GTypeModule* module_) c_g_type_module_use; ///
 
   // TypePlugin
   GType function() c_g_type_plugin_get_type; ///
@@ -260,8 +260,8 @@ __gshared extern(C)
   GParamSpec* function(const(GValue)* value) c_g_value_dup_param; ///
   char* function(const(GValue)* value) c_g_value_dup_string; ///
   GVariant* function(const(GValue)* value) c_g_value_dup_variant; ///
-  bool function(const(GValue)* value) c_g_value_fits_pointer; ///
-  bool function(const(GValue)* value) c_g_value_get_boolean; ///
+  gboolean function(const(GValue)* value) c_g_value_fits_pointer; ///
+  gboolean function(const(GValue)* value) c_g_value_get_boolean; ///
   void* function(const(GValue)* value) c_g_value_get_boxed; ///
   char function(const(GValue)* value) c_g_value_get_char; ///
   double function(const(GValue)* value) c_g_value_get_double; ///
@@ -286,7 +286,7 @@ __gshared extern(C)
   void function(GValue* value, GTypeInstance* instance) c_g_value_init_from_instance; ///
   void* function(const(GValue)* value) c_g_value_peek_pointer; ///
   GValue* function(GValue* value) c_g_value_reset; ///
-  void function(GValue* value, bool vBoolean) c_g_value_set_boolean; ///
+  void function(GValue* value, gboolean vBoolean) c_g_value_set_boolean; ///
   void function(GValue* value, const(void)* vBoxed) c_g_value_set_boxed; ///
   void function(GValue* value, const(void)* vBoxed) c_g_value_set_boxed_take_ownership; ///
   void function(GValue* value, char vChar) c_g_value_set_char; ///
@@ -321,11 +321,11 @@ __gshared extern(C)
   void function(GValue* value, GParamSpec* param) c_g_value_take_param; ///
   void function(GValue* value, char* vString) c_g_value_take_string; ///
   void function(GValue* value, GVariant* variant) c_g_value_take_variant; ///
-  bool function(const(GValue)* srcValue, GValue* destValue) c_g_value_transform; ///
+  gboolean function(const(GValue)* srcValue, GValue* destValue) c_g_value_transform; ///
   void function(GValue* value) c_g_value_unset; ///
   void function(GType srcType, GType destType, GValueTransform transformFunc) c_g_value_register_transform_func; ///
-  bool function(GType srcType, GType destType) c_g_value_type_compatible; ///
-  bool function(GType srcType, GType destType) c_g_value_type_transformable; ///
+  gboolean function(GType srcType, GType destType) c_g_value_type_compatible; ///
+  gboolean function(GType srcType, GType destType) c_g_value_type_transformable; ///
 
   // ValueArray
   GType function() c_g_value_array_get_type; ///
@@ -367,7 +367,7 @@ __gshared extern(C)
   GType function(const(char)* name, const(GFlagsValue)* constStaticValues) c_g_flags_register_static; ///
   char* function(GType flagsType, uint value) c_g_flags_to_string; ///
   GType function() c_g_gtype_get_type; ///
-  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, bool defaultValue, GParamFlags flags) c_g_param_spec_boolean; ///
+  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, gboolean defaultValue, GParamFlags flags) c_g_param_spec_boolean; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, GType boxedType, GParamFlags flags) c_g_param_spec_boxed; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, byte minimum, byte maximum, byte defaultValue, GParamFlags flags) c_g_param_spec_char; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, double minimum, double maximum, double defaultValue, GParamFlags flags) c_g_param_spec_double; ///
@@ -391,20 +391,20 @@ __gshared extern(C)
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, GParamSpec* elementSpec, GParamFlags flags) c_g_param_spec_value_array; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, const(GVariantType)* type, GVariant* defaultValue, GParamFlags flags) c_g_param_spec_variant; ///
   GType function(const(char)* name, const(GParamSpecTypeInfo)* pspecInfo) c_g_param_type_register_static; ///
-  bool function(GParamSpec* pspec, const(GValue)* srcValue, GValue* destValue, bool strictValidation) c_g_param_value_convert; ///
-  bool function(GParamSpec* pspec, const(GValue)* value) c_g_param_value_defaults; ///
-  bool function(GParamSpec* pspec, const(GValue)* value) c_g_param_value_is_valid; ///
+  gboolean function(GParamSpec* pspec, const(GValue)* srcValue, GValue* destValue, gboolean strictValidation) c_g_param_value_convert; ///
+  gboolean function(GParamSpec* pspec, const(GValue)* value) c_g_param_value_defaults; ///
+  gboolean function(GParamSpec* pspec, const(GValue)* value) c_g_param_value_is_valid; ///
   void function(GParamSpec* pspec, GValue* value) c_g_param_value_set_default; ///
-  bool function(GParamSpec* pspec, GValue* value) c_g_param_value_validate; ///
+  gboolean function(GParamSpec* pspec, GValue* value) c_g_param_value_validate; ///
   int function(GParamSpec* pspec, const(GValue)* value1, const(GValue)* value2) c_g_param_values_cmp; ///
   GType function(const(char)* name) c_g_pointer_type_register_static; ///
-  bool function(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* dummy) c_g_signal_accumulator_first_wins; ///
-  bool function(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* dummy) c_g_signal_accumulator_true_handled; ///
+  gboolean function(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* dummy) c_g_signal_accumulator_first_wins; ///
+  gboolean function(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* dummy) c_g_signal_accumulator_true_handled; ///
   gulong function(uint signalId, GQuark detail, GSignalEmissionHook hookFunc, void* hookData, GDestroyNotify dataDestroy) c_g_signal_add_emission_hook; ///
   void function(const(GValue)* instanceAndParams, GValue* returnValue) c_g_signal_chain_from_overridden; ///
   void function(GTypeInstance* instance,  ...) c_g_signal_chain_from_overridden_handler; ///
-  gulong function(GObject* instance, const(char)* detailedSignal, GClosure* closure, bool after) c_g_signal_connect_closure; ///
-  gulong function(GObject* instance, uint signalId, GQuark detail, GClosure* closure, bool after) c_g_signal_connect_closure_by_id; ///
+  gulong function(GObject* instance, const(char)* detailedSignal, GClosure* closure, gboolean after) c_g_signal_connect_closure; ///
+  gulong function(GObject* instance, uint signalId, GQuark detail, GClosure* closure, gboolean after) c_g_signal_connect_closure_by_id; ///
   gulong function(GObject* instance, const(char)* detailedSignal, GCallback cHandler, void* data, GClosureNotify destroyData, GConnectFlags connectFlags) c_g_signal_connect_data; ///
   gulong function(GTypeInstance* instance, const(char)* detailedSignal, GCallback cHandler, GObject* gobject, GConnectFlags connectFlags) c_g_signal_connect_object; ///
   void function(GObject* instance, uint signalId, GQuark detail,  ...) c_g_signal_emit; ///
@@ -415,14 +415,14 @@ __gshared extern(C)
   void function(GObject* instance, gulong handlerId) c_g_signal_handler_block; ///
   void function(GObject* instance, gulong handlerId) c_g_signal_handler_disconnect; ///
   gulong function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handler_find; ///
-  bool function(GObject* instance, gulong handlerId) c_g_signal_handler_is_connected; ///
+  gboolean function(GObject* instance, gulong handlerId) c_g_signal_handler_is_connected; ///
   void function(GObject* instance, gulong handlerId) c_g_signal_handler_unblock; ///
   uint function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_block_matched; ///
   void function(GObject* instance) c_g_signal_handlers_destroy; ///
   uint function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_disconnect_matched; ///
   uint function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_unblock_matched; ///
-  bool function(GObject* instance, uint signalId, GQuark detail, bool mayBeBlocked) c_g_signal_has_handler_pending; ///
-  bool function(const(char)* name) c_g_signal_is_valid_name; ///
+  gboolean function(GObject* instance, uint signalId, GQuark detail, gboolean mayBeBlocked) c_g_signal_has_handler_pending; ///
+  gboolean function(const(char)* name) c_g_signal_is_valid_name; ///
   uint* function(GType itype, uint* nIds) c_g_signal_list_ids; ///
   uint function(const(char)* name, GType itype) c_g_signal_lookup; ///
   const(char)* function(uint signalId) c_g_signal_name; ///
@@ -432,7 +432,7 @@ __gshared extern(C)
   uint function(const(char)* signalName, GType itype, GSignalFlags signalFlags, GClosure* classClosure, GSignalAccumulator accumulator, void* accuData, GSignalCMarshaller cMarshaller, GType returnType, uint nParams, GType* paramTypes) c_g_signal_newv; ///
   void function(uint signalId, GType instanceType, GClosure* classClosure) c_g_signal_override_class_closure; ///
   void function(const(char)* signalName, GType instanceType, GCallback classHandler) c_g_signal_override_class_handler; ///
-  bool function(const(char)* detailedSignal, GType itype, uint* signalIdP, GQuark* detailP, bool forceDetailQuark) c_g_signal_parse_name; ///
+  gboolean function(const(char)* detailedSignal, GType itype, uint* signalIdP, GQuark* detailP, gboolean forceDetailQuark) c_g_signal_parse_name; ///
   void function(uint signalId, GSignalQuery* query) c_g_signal_query; ///
   void function(uint signalId, gulong hookId) c_g_signal_remove_emission_hook; ///
   void function(uint signalId, GType instanceType, GSignalCVaMarshaller vaMarshaller) c_g_signal_set_va_marshaller; ///
@@ -447,14 +447,14 @@ __gshared extern(C)
   void function(GType instanceType, GType interfaceType, GTypePlugin* plugin) c_g_type_add_interface_dynamic; ///
   void function(GType instanceType, GType interfaceType, const(GInterfaceInfo)* info) c_g_type_add_interface_static; ///
   GTypeClass* function(GTypeClass* gClass, GType isAType) c_g_type_check_class_cast; ///
-  bool function(GTypeClass* gClass, GType isAType) c_g_type_check_class_is_a; ///
-  bool function(GTypeInstance* instance) c_g_type_check_instance; ///
+  gboolean function(GTypeClass* gClass, GType isAType) c_g_type_check_class_is_a; ///
+  gboolean function(GTypeInstance* instance) c_g_type_check_instance; ///
   GTypeInstance* function(GTypeInstance* instance, GType ifaceType) c_g_type_check_instance_cast; ///
-  bool function(GTypeInstance* instance, GType ifaceType) c_g_type_check_instance_is_a; ///
-  bool function(GTypeInstance* instance, GType fundamentalType) c_g_type_check_instance_is_fundamentally_a; ///
-  bool function(GType type) c_g_type_check_is_value_type; ///
-  bool function(const(GValue)* value) c_g_type_check_value; ///
-  bool function(const(GValue)* value, GType type) c_g_type_check_value_holds; ///
+  gboolean function(GTypeInstance* instance, GType ifaceType) c_g_type_check_instance_is_a; ///
+  gboolean function(GTypeInstance* instance, GType fundamentalType) c_g_type_check_instance_is_fundamentally_a; ///
+  gboolean function(GType type) c_g_type_check_is_value_type; ///
+  gboolean function(const(GValue)* value) c_g_type_check_value; ///
+  gboolean function(const(GValue)* value, GType type) c_g_type_check_value_holds; ///
   GType* function(GType type, uint* nChildren) c_g_type_children; ///
   GTypeInstance* function(GType type) c_g_type_create_instance; ///
   GTypeInterface* function(GType gType) c_g_type_default_interface_peek; ///
@@ -473,7 +473,7 @@ __gshared extern(C)
   void function() c_g_type_init; ///
   void function(GTypeDebugFlags debugFlags) c_g_type_init_with_debug_flags; ///
   GType* function(GType type, uint* nInterfaces) c_g_type_interfaces; ///
-  bool function(GType type, GType isAType) c_g_type_is_a; ///
+  gboolean function(GType type, GType isAType) c_g_type_is_a; ///
   const(char)* function(GType type) c_g_type_name; ///
   const(char)* function(GTypeClass* gClass) c_g_type_name_from_class; ///
   const(char)* function(GTypeInstance* instance) c_g_type_name_from_instance; ///
@@ -488,7 +488,7 @@ __gshared extern(C)
   void function(void* cacheData, GTypeClassCacheFunc cacheFunc) c_g_type_remove_class_cache_func; ///
   void function(void* checkData, GTypeInterfaceCheckFunc checkFunc) c_g_type_remove_interface_check; ///
   void function(GType type, GQuark quark, void* data) c_g_type_set_qdata; ///
-  bool function(GType type, uint flags) c_g_type_test_flags; ///
+  gboolean function(GType type, uint flags) c_g_type_test_flags; ///
 }
 
 // Binding

@@ -83,7 +83,7 @@ class StreamMmap : gmime.stream.Stream
   bool getOwner()
   {
     bool _retval;
-    _retval = g_mime_stream_mmap_get_owner(cast(GMimeStreamMmap*)this._cPtr);
+    _retval = cast(bool)g_mime_stream_mmap_get_owner(cast(GMimeStreamMmap*)this._cPtr);
     return _retval;
   }
 

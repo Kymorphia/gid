@@ -99,7 +99,7 @@ template AppInfoT()
     bool _retval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     GError *_err;
-    _retval = g_app_info_add_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
+    _retval = cast(bool)g_app_info_add_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -113,7 +113,7 @@ template AppInfoT()
   override bool canDelete()
   {
     bool _retval;
-    _retval = g_app_info_can_delete(cast(GAppInfo*)this._cPtr);
+    _retval = cast(bool)g_app_info_can_delete(cast(GAppInfo*)this._cPtr);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ template AppInfoT()
   override bool canRemoveSupportsType()
   {
     bool _retval;
-    _retval = g_app_info_can_remove_supports_type(cast(GAppInfo*)this._cPtr);
+    _retval = cast(bool)g_app_info_can_remove_supports_type(cast(GAppInfo*)this._cPtr);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ template AppInfoT()
   override bool delete_()
   {
     bool _retval;
-    _retval = g_app_info_delete(cast(GAppInfo*)this._cPtr);
+    _retval = cast(bool)g_app_info_delete(cast(GAppInfo*)this._cPtr);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ template AppInfoT()
   override bool equal(gio.app_info.AppInfo appinfo2)
   {
     bool _retval;
-    _retval = g_app_info_equal(cast(GAppInfo*)this._cPtr, appinfo2 ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)appinfo2)._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_app_info_equal(cast(GAppInfo*)this._cPtr, appinfo2 ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)appinfo2)._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ template AppInfoT()
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
     GError *_err;
-    _retval = g_app_info_launch(cast(GAppInfo*)this._cPtr, _files, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_app_info_launch(cast(GAppInfo*)this._cPtr, _files, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -375,7 +375,7 @@ template AppInfoT()
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
     GError *_err;
-    _retval = g_app_info_launch_uris(cast(GAppInfo*)this._cPtr, _uris, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_app_info_launch_uris(cast(GAppInfo*)this._cPtr, _uris, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -424,7 +424,7 @@ template AppInfoT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_app_info_launch_uris_finish(cast(GAppInfo*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_app_info_launch_uris_finish(cast(GAppInfo*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -443,7 +443,7 @@ template AppInfoT()
     bool _retval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     GError *_err;
-    _retval = g_app_info_remove_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
+    _retval = cast(bool)g_app_info_remove_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -463,7 +463,7 @@ template AppInfoT()
     bool _retval;
     const(char)* _extension = extension.toCString(No.Alloc);
     GError *_err;
-    _retval = g_app_info_set_as_default_for_extension(cast(GAppInfo*)this._cPtr, _extension, &_err);
+    _retval = cast(bool)g_app_info_set_as_default_for_extension(cast(GAppInfo*)this._cPtr, _extension, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -482,7 +482,7 @@ template AppInfoT()
     bool _retval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     GError *_err;
-    _retval = g_app_info_set_as_default_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
+    _retval = cast(bool)g_app_info_set_as_default_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -504,7 +504,7 @@ template AppInfoT()
     bool _retval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     GError *_err;
-    _retval = g_app_info_set_as_last_used_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
+    _retval = cast(bool)g_app_info_set_as_last_used_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -518,7 +518,7 @@ template AppInfoT()
   override bool shouldShow()
   {
     bool _retval;
-    _retval = g_app_info_should_show(cast(GAppInfo*)this._cPtr);
+    _retval = cast(bool)g_app_info_should_show(cast(GAppInfo*)this._cPtr);
     return _retval;
   }
 
@@ -529,7 +529,7 @@ template AppInfoT()
   override bool supportsFiles()
   {
     bool _retval;
-    _retval = g_app_info_supports_files(cast(GAppInfo*)this._cPtr);
+    _retval = cast(bool)g_app_info_supports_files(cast(GAppInfo*)this._cPtr);
     return _retval;
   }
 
@@ -540,7 +540,7 @@ template AppInfoT()
   override bool supportsUris()
   {
     bool _retval;
-    _retval = g_app_info_supports_uris(cast(GAppInfo*)this._cPtr);
+    _retval = cast(bool)g_app_info_supports_uris(cast(GAppInfo*)this._cPtr);
     return _retval;
   }
 }

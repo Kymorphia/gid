@@ -103,7 +103,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   bool addWidget(panel.widget.Widget widget, panel.position.Position position = null)
   {
     bool _retval;
-    _retval = panel_document_workspace_add_widget(cast(PanelDocumentWorkspace*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null, position ? cast(PanelPosition*)position._cPtr(No.Dup) : null);
+    _retval = cast(bool)panel_document_workspace_add_widget(cast(PanelDocumentWorkspace*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null, position ? cast(PanelPosition*)position._cPtr(No.Dup) : null);
     return _retval;
   }
 

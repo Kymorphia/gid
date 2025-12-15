@@ -53,7 +53,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal128*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_decimal128_array_builder_append(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal128*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -66,7 +66,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append_value(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal128*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_decimal128_array_builder_append_value(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal128*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -103,9 +103,9 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(bool)*)isValids.ptr;
+    auto _isValids = cast(const(gboolean)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append_values(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = cast(bool)garrow_decimal128_array_builder_append_values(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

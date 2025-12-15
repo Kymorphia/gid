@@ -94,7 +94,7 @@ class Rect : gobject.boxed.Boxed
   bool containsPoint(graphene.point.Point p)
   {
     bool _retval;
-    _retval = graphene_rect_contains_point(cast(const(graphene_rect_t)*)this._cPtr, p ? cast(const(graphene_point_t)*)p._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_rect_contains_point(cast(const(graphene_rect_t)*)this._cPtr, p ? cast(const(graphene_point_t)*)p._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Rect : gobject.boxed.Boxed
   bool containsRect(graphene.rect.Rect b)
   {
     bool _retval;
-    _retval = graphene_rect_contains_rect(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_rect_contains_rect(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class Rect : gobject.boxed.Boxed
   bool equal(graphene.rect.Rect b)
   {
     bool _retval;
-    _retval = graphene_rect_equal(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_rect_equal(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class Rect : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_rect_t _res;
-    _retval = graphene_rect_intersection(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_rect_intersection(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null, &_res);
     res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
     return _retval;
   }

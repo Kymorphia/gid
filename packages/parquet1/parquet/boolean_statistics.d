@@ -40,7 +40,7 @@ class BooleanStatistics : parquet.statistics.Statistics
   bool getMax()
   {
     bool _retval;
-    _retval = gparquet_boolean_statistics_get_max(cast(GParquetBooleanStatistics*)this._cPtr);
+    _retval = cast(bool)gparquet_boolean_statistics_get_max(cast(GParquetBooleanStatistics*)this._cPtr);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class BooleanStatistics : parquet.statistics.Statistics
   bool getMin()
   {
     bool _retval;
-    _retval = gparquet_boolean_statistics_get_min(cast(GParquetBooleanStatistics*)this._cPtr);
+    _retval = cast(bool)gparquet_boolean_statistics_get_min(cast(GParquetBooleanStatistics*)this._cPtr);
     return _retval;
   }
 }

@@ -17,13 +17,13 @@ __gshared extern(C)
 {
   // Action
   GType function() c_atk_action_get_type; ///
-  bool function(AtkAction* action, int i) c_atk_action_do_action; ///
+  gboolean function(AtkAction* action, int i) c_atk_action_do_action; ///
   const(char)* function(AtkAction* action, int i) c_atk_action_get_description; ///
   const(char)* function(AtkAction* action, int i) c_atk_action_get_keybinding; ///
   const(char)* function(AtkAction* action, int i) c_atk_action_get_localized_name; ///
   int function(AtkAction* action) c_atk_action_get_n_actions; ///
   const(char)* function(AtkAction* action, int i) c_atk_action_get_name; ///
-  bool function(AtkAction* action, int i, const(char)* desc) c_atk_action_set_description; ///
+  gboolean function(AtkAction* action, int i, const(char)* desc) c_atk_action_set_description; ///
 
   // Attribute
   void function(AtkAttributeSet* attribSet) c_atk_attribute_set_free; ///
@@ -31,21 +31,21 @@ __gshared extern(C)
   // Component
   GType function() c_atk_component_get_type; ///
   uint function(AtkComponent* component, AtkFocusHandler handler) c_atk_component_add_focus_handler; ///
-  bool function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_contains; ///
+  gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_contains; ///
   double function(AtkComponent* component) c_atk_component_get_alpha; ///
   void function(AtkComponent* component, int* x, int* y, int* width, int* height, AtkCoordType coordType) c_atk_component_get_extents; ///
   AtkLayer function(AtkComponent* component) c_atk_component_get_layer; ///
   int function(AtkComponent* component) c_atk_component_get_mdi_zorder; ///
   void function(AtkComponent* component, int* x, int* y, AtkCoordType coordType) c_atk_component_get_position; ///
   void function(AtkComponent* component, int* width, int* height) c_atk_component_get_size; ///
-  bool function(AtkComponent* component) c_atk_component_grab_focus; ///
+  gboolean function(AtkComponent* component) c_atk_component_grab_focus; ///
   AtkObject* function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_ref_accessible_at_point; ///
   void function(AtkComponent* component, uint handlerId) c_atk_component_remove_focus_handler; ///
-  bool function(AtkComponent* component, AtkScrollType type) c_atk_component_scroll_to; ///
-  bool function(AtkComponent* component, AtkCoordType coords, int x, int y) c_atk_component_scroll_to_point; ///
-  bool function(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) c_atk_component_set_extents; ///
-  bool function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_set_position; ///
-  bool function(AtkComponent* component, int width, int height) c_atk_component_set_size; ///
+  gboolean function(AtkComponent* component, AtkScrollType type) c_atk_component_scroll_to; ///
+  gboolean function(AtkComponent* component, AtkCoordType coords, int x, int y) c_atk_component_scroll_to_point; ///
+  gboolean function(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) c_atk_component_set_extents; ///
+  gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_set_position; ///
+  gboolean function(AtkComponent* component, int width, int height) c_atk_component_set_size; ///
 
   // Document
   GType function() c_atk_document_get_type; ///
@@ -57,8 +57,8 @@ __gshared extern(C)
   const(char)* function(AtkDocument* document) c_atk_document_get_locale; ///
   int function(AtkDocument* document) c_atk_document_get_page_count; ///
   GArray* function(AtkDocument* document) c_atk_document_get_text_selections; ///
-  bool function(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) c_atk_document_set_attribute_value; ///
-  bool function(AtkDocument* document, GArray* selections) c_atk_document_set_text_selections; ///
+  gboolean function(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) c_atk_document_set_attribute_value; ///
+  gboolean function(AtkDocument* document, GArray* selections) c_atk_document_set_text_selections; ///
 
   // EditableText
   GType function() c_atk_editable_text_get_type; ///
@@ -67,7 +67,7 @@ __gshared extern(C)
   void function(AtkEditableText* text, int startPos, int endPos) c_atk_editable_text_delete_text; ///
   void function(AtkEditableText* text, const(char)* string_, int length, int* position) c_atk_editable_text_insert_text; ///
   void function(AtkEditableText* text, int position) c_atk_editable_text_paste_text; ///
-  bool function(AtkEditableText* text, AtkAttributeSet* attribSet, int startOffset, int endOffset) c_atk_editable_text_set_run_attributes; ///
+  gboolean function(AtkEditableText* text, AtkAttributeSet* attribSet, int startOffset, int endOffset) c_atk_editable_text_set_run_attributes; ///
   void function(AtkEditableText* text, const(char)* string_) c_atk_editable_text_set_text_contents; ///
 
   // GObjectAccessible
@@ -82,9 +82,9 @@ __gshared extern(C)
   AtkObject* function(AtkHyperlink* link, int i) c_atk_hyperlink_get_object; ///
   int function(AtkHyperlink* link) c_atk_hyperlink_get_start_index; ///
   char* function(AtkHyperlink* link, int i) c_atk_hyperlink_get_uri; ///
-  bool function(AtkHyperlink* link) c_atk_hyperlink_is_inline; ///
-  bool function(AtkHyperlink* link) c_atk_hyperlink_is_selected_link; ///
-  bool function(AtkHyperlink* link) c_atk_hyperlink_is_valid; ///
+  gboolean function(AtkHyperlink* link) c_atk_hyperlink_is_inline; ///
+  gboolean function(AtkHyperlink* link) c_atk_hyperlink_is_selected_link; ///
+  gboolean function(AtkHyperlink* link) c_atk_hyperlink_is_valid; ///
 
   // HyperlinkImpl
   GType function() c_atk_hyperlink_impl_get_type; ///
@@ -102,7 +102,7 @@ __gshared extern(C)
   const(char)* function(AtkImage* image) c_atk_image_get_image_locale; ///
   void function(AtkImage* image, int* x, int* y, AtkCoordType coordType) c_atk_image_get_image_position; ///
   void function(AtkImage* image, int* width, int* height) c_atk_image_get_image_size; ///
-  bool function(AtkImage* image, const(char)* description) c_atk_image_set_image_description; ///
+  gboolean function(AtkImage* image, const(char)* description) c_atk_image_set_image_description; ///
 
   // Implementor
   AtkObject* function(AtkImplementor* implementor) c_atk_implementor_ref_accessible; ///
@@ -132,7 +132,7 @@ __gshared extern(C)
 
   // ObjectWrap
   GType function() c_atk_object_get_type; ///
-  bool function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_add_relationship; ///
+  gboolean function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_add_relationship; ///
   uint function(AtkObject* accessible, AtkPropertyChangeHandler* handler) c_atk_object_connect_property_change_handler; ///
   const(char)* function(AtkObject* accessible) c_atk_object_get_accessible_id; ///
   AtkAttributeSet* function(AtkObject* accessible) c_atk_object_get_attributes; ///
@@ -147,13 +147,13 @@ __gshared extern(C)
   AtkObject* function(AtkObject* accessible) c_atk_object_get_parent; ///
   AtkRole function(AtkObject* accessible) c_atk_object_get_role; ///
   void function(AtkObject* accessible, void* data) c_atk_object_initialize; ///
-  void function(AtkObject* accessible, AtkState state, bool value) c_atk_object_notify_state_change; ///
+  void function(AtkObject* accessible, AtkState state, gboolean value) c_atk_object_notify_state_change; ///
   AtkObject* function(AtkObject* accessible) c_atk_object_peek_parent; ///
   AtkObject* function(AtkObject* accessible, int i) c_atk_object_ref_accessible_child; ///
   AtkRelationSet* function(AtkObject* accessible) c_atk_object_ref_relation_set; ///
   AtkStateSet* function(AtkObject* accessible) c_atk_object_ref_state_set; ///
   void function(AtkObject* accessible, uint handlerId) c_atk_object_remove_property_change_handler; ///
-  bool function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_remove_relationship; ///
+  gboolean function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_remove_relationship; ///
   void function(AtkObject* accessible, const(char)* id) c_atk_object_set_accessible_id; ///
   void function(AtkObject* accessible, const(char)* description) c_atk_object_set_description; ///
   void function(AtkObject* accessible, const(char)* helpText) c_atk_object_set_help_text; ///
@@ -191,15 +191,15 @@ __gshared extern(C)
   void function(AtkRelation* relation, AtkObject* target) c_atk_relation_add_target; ///
   AtkRelationType function(AtkRelation* relation) c_atk_relation_get_relation_type; ///
   GPtrArray* function(AtkRelation* relation) c_atk_relation_get_target; ///
-  bool function(AtkRelation* relation, AtkObject* target) c_atk_relation_remove_target; ///
+  gboolean function(AtkRelation* relation, AtkObject* target) c_atk_relation_remove_target; ///
 
   // RelationSet
   GType function() c_atk_relation_set_get_type; ///
   AtkRelationSet* function() c_atk_relation_set_new; ///
   void function(AtkRelationSet* set, AtkRelation* relation) c_atk_relation_set_add; ///
   void function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) c_atk_relation_set_add_relation_by_type; ///
-  bool function(AtkRelationSet* set, AtkRelationType relationship) c_atk_relation_set_contains; ///
-  bool function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) c_atk_relation_set_contains_target; ///
+  gboolean function(AtkRelationSet* set, AtkRelationType relationship) c_atk_relation_set_contains; ///
+  gboolean function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) c_atk_relation_set_contains_target; ///
   int function(AtkRelationSet* set) c_atk_relation_set_get_n_relations; ///
   AtkRelation* function(AtkRelationSet* set, int i) c_atk_relation_set_get_relation; ///
   AtkRelation* function(AtkRelationSet* set, AtkRelationType relationship) c_atk_relation_set_get_relation_by_type; ///
@@ -207,32 +207,32 @@ __gshared extern(C)
 
   // Selection
   GType function() c_atk_selection_get_type; ///
-  bool function(AtkSelection* selection, int i) c_atk_selection_add_selection; ///
-  bool function(AtkSelection* selection) c_atk_selection_clear_selection; ///
+  gboolean function(AtkSelection* selection, int i) c_atk_selection_add_selection; ///
+  gboolean function(AtkSelection* selection) c_atk_selection_clear_selection; ///
   int function(AtkSelection* selection) c_atk_selection_get_selection_count; ///
-  bool function(AtkSelection* selection, int i) c_atk_selection_is_child_selected; ///
+  gboolean function(AtkSelection* selection, int i) c_atk_selection_is_child_selected; ///
   AtkObject* function(AtkSelection* selection, int i) c_atk_selection_ref_selection; ///
-  bool function(AtkSelection* selection, int i) c_atk_selection_remove_selection; ///
-  bool function(AtkSelection* selection) c_atk_selection_select_all_selection; ///
+  gboolean function(AtkSelection* selection, int i) c_atk_selection_remove_selection; ///
+  gboolean function(AtkSelection* selection) c_atk_selection_select_all_selection; ///
 
   // Socket
   GType function() c_atk_socket_get_type; ///
   AtkObject* function() c_atk_socket_new; ///
   void function(AtkSocket* obj, const(char)* plugId) c_atk_socket_embed; ///
-  bool function(AtkSocket* obj) c_atk_socket_is_occupied; ///
+  gboolean function(AtkSocket* obj) c_atk_socket_is_occupied; ///
 
   // StateSet
   GType function() c_atk_state_set_get_type; ///
   AtkStateSet* function() c_atk_state_set_new; ///
-  bool function(AtkStateSet* set, AtkStateType type) c_atk_state_set_add_state; ///
+  gboolean function(AtkStateSet* set, AtkStateType type) c_atk_state_set_add_state; ///
   void function(AtkStateSet* set, AtkStateType* types, int nTypes) c_atk_state_set_add_states; ///
   AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_and_sets; ///
   void function(AtkStateSet* set) c_atk_state_set_clear_states; ///
-  bool function(AtkStateSet* set, AtkStateType type) c_atk_state_set_contains_state; ///
-  bool function(AtkStateSet* set, AtkStateType* types, int nTypes) c_atk_state_set_contains_states; ///
-  bool function(AtkStateSet* set) c_atk_state_set_is_empty; ///
+  gboolean function(AtkStateSet* set, AtkStateType type) c_atk_state_set_contains_state; ///
+  gboolean function(AtkStateSet* set, AtkStateType* types, int nTypes) c_atk_state_set_contains_states; ///
+  gboolean function(AtkStateSet* set) c_atk_state_set_is_empty; ///
   AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_or_sets; ///
-  bool function(AtkStateSet* set, AtkStateType type) c_atk_state_set_remove_state; ///
+  gboolean function(AtkStateSet* set, AtkStateType type) c_atk_state_set_remove_state; ///
   AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_xor_sets; ///
 
   // StreamableContent
@@ -244,8 +244,8 @@ __gshared extern(C)
 
   // Table
   GType function() c_atk_table_get_type; ///
-  bool function(AtkTable* table, int column) c_atk_table_add_column_selection; ///
-  bool function(AtkTable* table, int row) c_atk_table_add_row_selection; ///
+  gboolean function(AtkTable* table, int column) c_atk_table_add_column_selection; ///
+  gboolean function(AtkTable* table, int row) c_atk_table_add_row_selection; ///
   AtkObject* function(AtkTable* table) c_atk_table_get_caption; ///
   int function(AtkTable* table, int index) c_atk_table_get_column_at_index; ///
   const(char)* function(AtkTable* table, int column) c_atk_table_get_column_description; ///
@@ -261,12 +261,12 @@ __gshared extern(C)
   int function(AtkTable* table, int** selected) c_atk_table_get_selected_columns; ///
   int function(AtkTable* table, int** selected) c_atk_table_get_selected_rows; ///
   AtkObject* function(AtkTable* table) c_atk_table_get_summary; ///
-  bool function(AtkTable* table, int column) c_atk_table_is_column_selected; ///
-  bool function(AtkTable* table, int row) c_atk_table_is_row_selected; ///
-  bool function(AtkTable* table, int row, int column) c_atk_table_is_selected; ///
+  gboolean function(AtkTable* table, int column) c_atk_table_is_column_selected; ///
+  gboolean function(AtkTable* table, int row) c_atk_table_is_row_selected; ///
+  gboolean function(AtkTable* table, int row, int column) c_atk_table_is_selected; ///
   AtkObject* function(AtkTable* table, int row, int column) c_atk_table_ref_at; ///
-  bool function(AtkTable* table, int column) c_atk_table_remove_column_selection; ///
-  bool function(AtkTable* table, int row) c_atk_table_remove_row_selection; ///
+  gboolean function(AtkTable* table, int column) c_atk_table_remove_column_selection; ///
+  gboolean function(AtkTable* table, int row) c_atk_table_remove_row_selection; ///
   void function(AtkTable* table, AtkObject* caption) c_atk_table_set_caption; ///
   void function(AtkTable* table, int column, const(char)* description) c_atk_table_set_column_description; ///
   void function(AtkTable* table, int column, AtkObject* header) c_atk_table_set_column_header; ///
@@ -278,8 +278,8 @@ __gshared extern(C)
   GType function() c_atk_table_cell_get_type; ///
   GPtrArray* function(AtkTableCell* cell) c_atk_table_cell_get_column_header_cells; ///
   int function(AtkTableCell* cell) c_atk_table_cell_get_column_span; ///
-  bool function(AtkTableCell* cell, int* row, int* column) c_atk_table_cell_get_position; ///
-  bool function(AtkTableCell* cell, int* row, int* column, int* rowSpan, int* columnSpan) c_atk_table_cell_get_row_column_span; ///
+  gboolean function(AtkTableCell* cell, int* row, int* column) c_atk_table_cell_get_position; ///
+  gboolean function(AtkTableCell* cell, int* row, int* column, int* rowSpan, int* columnSpan) c_atk_table_cell_get_row_column_span; ///
   GPtrArray* function(AtkTableCell* cell) c_atk_table_cell_get_row_header_cells; ///
   int function(AtkTableCell* cell) c_atk_table_cell_get_row_span; ///
   AtkObject* function(AtkTableCell* cell) c_atk_table_cell_get_table; ///
@@ -287,7 +287,7 @@ __gshared extern(C)
   // Text
   GType function() c_atk_text_get_type; ///
   void function(AtkTextRange** ranges) c_atk_text_free_ranges; ///
-  bool function(AtkText* text, int startOffset, int endOffset) c_atk_text_add_selection; ///
+  gboolean function(AtkText* text, int startOffset, int endOffset) c_atk_text_add_selection; ///
   AtkTextRange** function(AtkText* text, AtkTextRectangle* rect, AtkCoordType coordType, AtkTextClipType xClipType, AtkTextClipType yClipType) c_atk_text_get_bounded_ranges; ///
   int function(AtkText* text) c_atk_text_get_caret_offset; ///
   dchar function(AtkText* text, int offset) c_atk_text_get_character_at_offset; ///
@@ -304,11 +304,11 @@ __gshared extern(C)
   char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_after_offset; ///
   char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_at_offset; ///
   char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_before_offset; ///
-  bool function(AtkText* text, int selectionNum) c_atk_text_remove_selection; ///
-  bool function(AtkText* text, int startOffset, int endOffset, AtkScrollType type) c_atk_text_scroll_substring_to; ///
-  bool function(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) c_atk_text_scroll_substring_to_point; ///
-  bool function(AtkText* text, int offset) c_atk_text_set_caret_offset; ///
-  bool function(AtkText* text, int selectionNum, int startOffset, int endOffset) c_atk_text_set_selection; ///
+  gboolean function(AtkText* text, int selectionNum) c_atk_text_remove_selection; ///
+  gboolean function(AtkText* text, int startOffset, int endOffset, AtkScrollType type) c_atk_text_scroll_substring_to; ///
+  gboolean function(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) c_atk_text_scroll_substring_to_point; ///
+  gboolean function(AtkText* text, int offset) c_atk_text_set_caret_offset; ///
+  gboolean function(AtkText* text, int selectionNum, int startOffset, int endOffset) c_atk_text_set_selection; ///
 
   // TextRange
   GType function() c_atk_text_range_get_type; ///
@@ -326,7 +326,7 @@ __gshared extern(C)
   AtkRange* function(AtkValue* obj) c_atk_value_get_range; ///
   GSList* function(AtkValue* obj) c_atk_value_get_sub_ranges; ///
   void function(AtkValue* obj, double* value, char** text) c_atk_value_get_value_and_text; ///
-  bool function(AtkValue* obj, const(GValue)* value) c_atk_value_set_current_value; ///
+  gboolean function(AtkValue* obj, const(GValue)* value) c_atk_value_set_current_value; ///
   void function(AtkValue* obj, double newValue) c_atk_value_set_value; ///
 
   // Window

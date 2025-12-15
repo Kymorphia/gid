@@ -293,7 +293,7 @@ class PopoverMenu : gtk.popover.Popover
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
-    _retval = gtk_popover_menu_add_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _id);
+    _retval = cast(bool)gtk_popover_menu_add_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _id);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class PopoverMenu : gtk.popover.Popover
   bool removeChild(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 

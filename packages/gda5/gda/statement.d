@@ -83,7 +83,7 @@ class Statement : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_statement_check_structure(cast(GdaStatement*)this._cPtr, &_err);
+    _retval = cast(bool)gda_statement_check_structure(cast(GdaStatement*)this._cPtr, &_err);
     if (_err)
       throw new StatementException(_err);
     return _retval;
@@ -106,7 +106,7 @@ class Statement : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_statement_check_validity(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_statement_check_validity(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new StatementException(_err);
     return _retval;
@@ -140,7 +140,7 @@ class Statement : gobject.object.ObjectWrap
     bool _retval;
     GdaSet* _outParams;
     GError *_err;
-    _retval = gda_statement_get_parameters(cast(GdaStatement*)this._cPtr, &_outParams, &_err);
+    _retval = cast(bool)gda_statement_get_parameters(cast(GdaStatement*)this._cPtr, &_outParams, &_err);
     if (_err)
       throw new StatementException(_err);
     outParams = new gda.set.Set(cast(void*)_outParams, Yes.Take);
@@ -168,7 +168,7 @@ class Statement : gobject.object.ObjectWrap
   bool isUseless()
   {
     bool _retval;
-    _retval = gda_statement_is_useless(cast(GdaStatement*)this._cPtr);
+    _retval = cast(bool)gda_statement_is_useless(cast(GdaStatement*)this._cPtr);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Statement : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_statement_normalize(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_statement_normalize(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new StatementException(_err);
     return _retval;

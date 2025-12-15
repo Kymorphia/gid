@@ -201,7 +201,7 @@ class VideoMeta
   }
 
   /** Function alias for field `unmap` */
-  alias UnmapFuncType = extern(C) bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info);
+  alias UnmapFuncType = extern(C) gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info);
 
   /**
       Get `unmap` field.
@@ -239,7 +239,7 @@ class VideoMeta
   bool getPlaneHeight(ref uint[] planeHeight)
   {
     bool _retval;
-    _retval = gst_video_meta_get_plane_height(cast(GstVideoMeta*)this._cPtr, planeHeight.ptr);
+    _retval = cast(bool)gst_video_meta_get_plane_height(cast(GstVideoMeta*)this._cPtr, planeHeight.ptr);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class VideoMeta
   bool getPlaneSize(ref size_t[] planeSize)
   {
     bool _retval;
-    _retval = gst_video_meta_get_plane_size(cast(GstVideoMeta*)this._cPtr, planeSize.ptr);
+    _retval = cast(bool)gst_video_meta_get_plane_size(cast(GstVideoMeta*)this._cPtr, planeSize.ptr);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class VideoMeta
   bool map(uint plane, gst.map_info.MapInfo info, out void* data, out int stride, gst.types.MapFlags flags)
   {
     bool _retval;
-    _retval = gst_video_meta_map(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null, cast(void**)&data, cast(int*)&stride, flags);
+    _retval = cast(bool)gst_video_meta_map(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null, cast(void**)&data, cast(int*)&stride, flags);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class VideoMeta
   bool unmap(uint plane, gst.map_info.MapInfo info)
   {
     bool _retval;
-    _retval = gst_video_meta_unmap(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null);
+    _retval = cast(bool)gst_video_meta_unmap(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null);
     return _retval;
   }
 

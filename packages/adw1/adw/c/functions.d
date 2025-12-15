@@ -124,14 +124,14 @@ __gshared extern(C)
   const(char)* function(AdwActionRow* self) c_adw_action_row_get_icon_name; ///
   const(char)* function(AdwActionRow* self) c_adw_action_row_get_subtitle; ///
   int function(AdwActionRow* self) c_adw_action_row_get_subtitle_lines; ///
-  bool function(AdwActionRow* self) c_adw_action_row_get_subtitle_selectable; ///
+  gboolean function(AdwActionRow* self) c_adw_action_row_get_subtitle_selectable; ///
   int function(AdwActionRow* self) c_adw_action_row_get_title_lines; ///
   void function(AdwActionRow* self, GtkWidget* widget) c_adw_action_row_remove; ///
   void function(AdwActionRow* self, GtkWidget* widget) c_adw_action_row_set_activatable_widget; ///
   void function(AdwActionRow* self, const(char)* iconName) c_adw_action_row_set_icon_name; ///
   void function(AdwActionRow* self, const(char)* subtitle) c_adw_action_row_set_subtitle; ///
   void function(AdwActionRow* self, int subtitleLines) c_adw_action_row_set_subtitle_lines; ///
-  void function(AdwActionRow* self, bool subtitleSelectable) c_adw_action_row_set_subtitle_selectable; ///
+  void function(AdwActionRow* self, gboolean subtitleSelectable) c_adw_action_row_set_subtitle_selectable; ///
   void function(AdwActionRow* self, int titleLines) c_adw_action_row_set_title_lines; ///
 
   // AlertDialog
@@ -146,31 +146,31 @@ __gshared extern(C)
   void function(AdwAlertDialog* self, const(char)* format,  ...) c_adw_alert_dialog_format_heading; ///
   void function(AdwAlertDialog* self, const(char)* format,  ...) c_adw_alert_dialog_format_heading_markup; ///
   const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_body; ///
-  bool function(AdwAlertDialog* self) c_adw_alert_dialog_get_body_use_markup; ///
+  gboolean function(AdwAlertDialog* self) c_adw_alert_dialog_get_body_use_markup; ///
   const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_close_response; ///
   const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_default_response; ///
   GtkWidget* function(AdwAlertDialog* self) c_adw_alert_dialog_get_extra_child; ///
   const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_heading; ///
-  bool function(AdwAlertDialog* self) c_adw_alert_dialog_get_heading_use_markup; ///
+  gboolean function(AdwAlertDialog* self) c_adw_alert_dialog_get_heading_use_markup; ///
   AdwResponseAppearance function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_appearance; ///
-  bool function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_enabled; ///
+  gboolean function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_enabled; ///
   const(char)* function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_label; ///
-  bool function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_has_response; ///
+  gboolean function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_has_response; ///
   void function(AdwAlertDialog* self, const(char)* id) c_adw_alert_dialog_remove_response; ///
   void function(AdwAlertDialog* self, const(char)* body_) c_adw_alert_dialog_set_body; ///
-  void function(AdwAlertDialog* self, bool useMarkup) c_adw_alert_dialog_set_body_use_markup; ///
+  void function(AdwAlertDialog* self, gboolean useMarkup) c_adw_alert_dialog_set_body_use_markup; ///
   void function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_set_close_response; ///
   void function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_set_default_response; ///
   void function(AdwAlertDialog* self, GtkWidget* child) c_adw_alert_dialog_set_extra_child; ///
   void function(AdwAlertDialog* self, const(char)* heading) c_adw_alert_dialog_set_heading; ///
-  void function(AdwAlertDialog* self, bool useMarkup) c_adw_alert_dialog_set_heading_use_markup; ///
+  void function(AdwAlertDialog* self, gboolean useMarkup) c_adw_alert_dialog_set_heading_use_markup; ///
   void function(AdwAlertDialog* self, const(char)* response, AdwResponseAppearance appearance) c_adw_alert_dialog_set_response_appearance; ///
-  void function(AdwAlertDialog* self, const(char)* response, bool enabled) c_adw_alert_dialog_set_response_enabled; ///
+  void function(AdwAlertDialog* self, const(char)* response, gboolean enabled) c_adw_alert_dialog_set_response_enabled; ///
   void function(AdwAlertDialog* self, const(char)* response, const(char)* label) c_adw_alert_dialog_set_response_label; ///
 
   // Animation
   GType function() c_adw_animation_get_type; ///
-  bool function(AdwAnimation* self) c_adw_animation_get_follow_enable_animations_setting; ///
+  gboolean function(AdwAnimation* self) c_adw_animation_get_follow_enable_animations_setting; ///
   AdwAnimationState function(AdwAnimation* self) c_adw_animation_get_state; ///
   AdwAnimationTarget* function(AdwAnimation* self) c_adw_animation_get_target; ///
   double function(AdwAnimation* self) c_adw_animation_get_value; ///
@@ -179,7 +179,7 @@ __gshared extern(C)
   void function(AdwAnimation* self) c_adw_animation_play; ///
   void function(AdwAnimation* self) c_adw_animation_reset; ///
   void function(AdwAnimation* self) c_adw_animation_resume; ///
-  void function(AdwAnimation* self, bool setting) c_adw_animation_set_follow_enable_animations_setting; ///
+  void function(AdwAnimation* self, gboolean setting) c_adw_animation_set_follow_enable_animations_setting; ///
   void function(AdwAnimation* self, AdwAnimationTarget* target) c_adw_animation_set_target; ///
   void function(AdwAnimation* self) c_adw_animation_skip; ///
 
@@ -203,16 +203,16 @@ __gshared extern(C)
 
   // Avatar
   GType function() c_adw_avatar_get_type; ///
-  GtkWidget* function(int size, const(char)* text, bool showInitials) c_adw_avatar_new; ///
+  GtkWidget* function(int size, const(char)* text, gboolean showInitials) c_adw_avatar_new; ///
   GdkTexture* function(AdwAvatar* self, int scaleFactor) c_adw_avatar_draw_to_texture; ///
   GdkPaintable* function(AdwAvatar* self) c_adw_avatar_get_custom_image; ///
   const(char)* function(AdwAvatar* self) c_adw_avatar_get_icon_name; ///
-  bool function(AdwAvatar* self) c_adw_avatar_get_show_initials; ///
+  gboolean function(AdwAvatar* self) c_adw_avatar_get_show_initials; ///
   int function(AdwAvatar* self) c_adw_avatar_get_size; ///
   const(char)* function(AdwAvatar* self) c_adw_avatar_get_text; ///
   void function(AdwAvatar* self, GdkPaintable* customImage) c_adw_avatar_set_custom_image; ///
   void function(AdwAvatar* self, const(char)* iconName) c_adw_avatar_set_icon_name; ///
-  void function(AdwAvatar* self, bool showInitials) c_adw_avatar_set_show_initials; ///
+  void function(AdwAvatar* self, gboolean showInitials) c_adw_avatar_set_show_initials; ///
   void function(AdwAvatar* self, int size) c_adw_avatar_set_size; ///
   void function(AdwAvatar* self, const(char)* text) c_adw_avatar_set_text; ///
 
@@ -220,13 +220,13 @@ __gshared extern(C)
   GType function() c_adw_banner_get_type; ///
   GtkWidget* function(const(char)* title) c_adw_banner_new; ///
   const(char)* function(AdwBanner* self) c_adw_banner_get_button_label; ///
-  bool function(AdwBanner* self) c_adw_banner_get_revealed; ///
+  gboolean function(AdwBanner* self) c_adw_banner_get_revealed; ///
   const(char)* function(AdwBanner* self) c_adw_banner_get_title; ///
-  bool function(AdwBanner* self) c_adw_banner_get_use_markup; ///
+  gboolean function(AdwBanner* self) c_adw_banner_get_use_markup; ///
   void function(AdwBanner* self, const(char)* label) c_adw_banner_set_button_label; ///
-  void function(AdwBanner* self, bool revealed) c_adw_banner_set_revealed; ///
+  void function(AdwBanner* self, gboolean revealed) c_adw_banner_set_revealed; ///
   void function(AdwBanner* self, const(char)* title) c_adw_banner_set_title; ///
-  void function(AdwBanner* self, bool useMarkup) c_adw_banner_set_use_markup; ///
+  void function(AdwBanner* self, gboolean useMarkup) c_adw_banner_set_use_markup; ///
 
   // Bin
   GType function() c_adw_bin_get_type; ///
@@ -267,14 +267,14 @@ __gshared extern(C)
   // ButtonContent
   GType function() c_adw_button_content_get_type; ///
   GtkWidget* function() c_adw_button_content_new; ///
-  bool function(AdwButtonContent* self) c_adw_button_content_get_can_shrink; ///
+  gboolean function(AdwButtonContent* self) c_adw_button_content_get_can_shrink; ///
   const(char)* function(AdwButtonContent* self) c_adw_button_content_get_icon_name; ///
   const(char)* function(AdwButtonContent* self) c_adw_button_content_get_label; ///
-  bool function(AdwButtonContent* self) c_adw_button_content_get_use_underline; ///
-  void function(AdwButtonContent* self, bool canShrink) c_adw_button_content_set_can_shrink; ///
+  gboolean function(AdwButtonContent* self) c_adw_button_content_get_use_underline; ///
+  void function(AdwButtonContent* self, gboolean canShrink) c_adw_button_content_set_can_shrink; ///
   void function(AdwButtonContent* self, const(char)* iconName) c_adw_button_content_set_icon_name; ///
   void function(AdwButtonContent* self, const(char)* label) c_adw_button_content_set_label; ///
-  void function(AdwButtonContent* self, bool useUnderline) c_adw_button_content_set_use_underline; ///
+  void function(AdwButtonContent* self, gboolean useUnderline) c_adw_button_content_set_use_underline; ///
 
   // CallbackAnimationTarget
   GType function() c_adw_callback_animation_target_get_type; ///
@@ -284,10 +284,10 @@ __gshared extern(C)
   GType function() c_adw_carousel_get_type; ///
   GtkWidget* function() c_adw_carousel_new; ///
   void function(AdwCarousel* self, GtkWidget* child) c_adw_carousel_append; ///
-  bool function(AdwCarousel* self) c_adw_carousel_get_allow_long_swipes; ///
-  bool function(AdwCarousel* self) c_adw_carousel_get_allow_mouse_drag; ///
-  bool function(AdwCarousel* self) c_adw_carousel_get_allow_scroll_wheel; ///
-  bool function(AdwCarousel* self) c_adw_carousel_get_interactive; ///
+  gboolean function(AdwCarousel* self) c_adw_carousel_get_allow_long_swipes; ///
+  gboolean function(AdwCarousel* self) c_adw_carousel_get_allow_mouse_drag; ///
+  gboolean function(AdwCarousel* self) c_adw_carousel_get_allow_scroll_wheel; ///
+  gboolean function(AdwCarousel* self) c_adw_carousel_get_interactive; ///
   uint function(AdwCarousel* self) c_adw_carousel_get_n_pages; ///
   GtkWidget* function(AdwCarousel* self, uint n) c_adw_carousel_get_nth_page; ///
   double function(AdwCarousel* self) c_adw_carousel_get_position; ///
@@ -298,11 +298,11 @@ __gshared extern(C)
   void function(AdwCarousel* self, GtkWidget* child) c_adw_carousel_prepend; ///
   void function(AdwCarousel* self, GtkWidget* child) c_adw_carousel_remove; ///
   void function(AdwCarousel* self, GtkWidget* child, int position) c_adw_carousel_reorder; ///
-  void function(AdwCarousel* self, GtkWidget* widget, bool animate) c_adw_carousel_scroll_to; ///
-  void function(AdwCarousel* self, bool allowLongSwipes) c_adw_carousel_set_allow_long_swipes; ///
-  void function(AdwCarousel* self, bool allowMouseDrag) c_adw_carousel_set_allow_mouse_drag; ///
-  void function(AdwCarousel* self, bool allowScrollWheel) c_adw_carousel_set_allow_scroll_wheel; ///
-  void function(AdwCarousel* self, bool interactive) c_adw_carousel_set_interactive; ///
+  void function(AdwCarousel* self, GtkWidget* widget, gboolean animate) c_adw_carousel_scroll_to; ///
+  void function(AdwCarousel* self, gboolean allowLongSwipes) c_adw_carousel_set_allow_long_swipes; ///
+  void function(AdwCarousel* self, gboolean allowMouseDrag) c_adw_carousel_set_allow_mouse_drag; ///
+  void function(AdwCarousel* self, gboolean allowScrollWheel) c_adw_carousel_set_allow_scroll_wheel; ///
+  void function(AdwCarousel* self, gboolean interactive) c_adw_carousel_set_interactive; ///
   void function(AdwCarousel* self, uint revealDuration) c_adw_carousel_set_reveal_duration; ///
   void function(AdwCarousel* self, AdwSpringParams* params) c_adw_carousel_set_scroll_params; ///
   void function(AdwCarousel* self, uint spacing) c_adw_carousel_set_spacing; ///
@@ -356,46 +356,46 @@ __gshared extern(C)
   // ComboRow
   GType function() c_adw_combo_row_get_type; ///
   GtkWidget* function() c_adw_combo_row_new; ///
-  bool function(AdwComboRow* self) c_adw_combo_row_get_enable_search; ///
+  gboolean function(AdwComboRow* self) c_adw_combo_row_get_enable_search; ///
   GtkExpression* function(AdwComboRow* self) c_adw_combo_row_get_expression; ///
   GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_factory; ///
   GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_list_factory; ///
   GListModel* function(AdwComboRow* self) c_adw_combo_row_get_model; ///
   uint function(AdwComboRow* self) c_adw_combo_row_get_selected; ///
   GObject* function(AdwComboRow* self) c_adw_combo_row_get_selected_item; ///
-  bool function(AdwComboRow* self) c_adw_combo_row_get_use_subtitle; ///
-  void function(AdwComboRow* self, bool enableSearch) c_adw_combo_row_set_enable_search; ///
+  gboolean function(AdwComboRow* self) c_adw_combo_row_get_use_subtitle; ///
+  void function(AdwComboRow* self, gboolean enableSearch) c_adw_combo_row_set_enable_search; ///
   void function(AdwComboRow* self, GtkExpression* expression) c_adw_combo_row_set_expression; ///
   void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_factory; ///
   void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_list_factory; ///
   void function(AdwComboRow* self, GListModel* model) c_adw_combo_row_set_model; ///
   void function(AdwComboRow* self, uint position) c_adw_combo_row_set_selected; ///
-  void function(AdwComboRow* self, bool useSubtitle) c_adw_combo_row_set_use_subtitle; ///
+  void function(AdwComboRow* self, gboolean useSubtitle) c_adw_combo_row_set_use_subtitle; ///
 
   // Dialog
   GType function() c_adw_dialog_get_type; ///
   AdwDialog* function() c_adw_dialog_new; ///
   void function(AdwDialog* self, AdwBreakpoint* breakpoint) c_adw_dialog_add_breakpoint; ///
-  bool function(AdwDialog* self) c_adw_dialog_close; ///
+  gboolean function(AdwDialog* self) c_adw_dialog_close; ///
   void function(AdwDialog* self) c_adw_dialog_force_close; ///
-  bool function(AdwDialog* self) c_adw_dialog_get_can_close; ///
+  gboolean function(AdwDialog* self) c_adw_dialog_get_can_close; ///
   GtkWidget* function(AdwDialog* self) c_adw_dialog_get_child; ///
   int function(AdwDialog* self) c_adw_dialog_get_content_height; ///
   int function(AdwDialog* self) c_adw_dialog_get_content_width; ///
   AdwBreakpoint* function(AdwDialog* self) c_adw_dialog_get_current_breakpoint; ///
   GtkWidget* function(AdwDialog* self) c_adw_dialog_get_default_widget; ///
   GtkWidget* function(AdwDialog* self) c_adw_dialog_get_focus; ///
-  bool function(AdwDialog* self) c_adw_dialog_get_follows_content_size; ///
+  gboolean function(AdwDialog* self) c_adw_dialog_get_follows_content_size; ///
   AdwDialogPresentationMode function(AdwDialog* self) c_adw_dialog_get_presentation_mode; ///
   const(char)* function(AdwDialog* self) c_adw_dialog_get_title; ///
   void function(AdwDialog* self, GtkWidget* parent) c_adw_dialog_present; ///
-  void function(AdwDialog* self, bool canClose) c_adw_dialog_set_can_close; ///
+  void function(AdwDialog* self, gboolean canClose) c_adw_dialog_set_can_close; ///
   void function(AdwDialog* self, GtkWidget* child) c_adw_dialog_set_child; ///
   void function(AdwDialog* self, int contentHeight) c_adw_dialog_set_content_height; ///
   void function(AdwDialog* self, int contentWidth) c_adw_dialog_set_content_width; ///
   void function(AdwDialog* self, GtkWidget* defaultWidget) c_adw_dialog_set_default_widget; ///
   void function(AdwDialog* self, GtkWidget* focus) c_adw_dialog_set_focus; ///
-  void function(AdwDialog* self, bool followsContentSize) c_adw_dialog_set_follows_content_size; ///
+  void function(AdwDialog* self, gboolean followsContentSize) c_adw_dialog_set_follows_content_size; ///
   void function(AdwDialog* self, AdwDialogPresentationMode presentationMode) c_adw_dialog_set_presentation_mode; ///
   void function(AdwDialog* self, const(char)* title) c_adw_dialog_set_title; ///
 
@@ -404,21 +404,21 @@ __gshared extern(C)
   GtkWidget* function() c_adw_entry_row_new; ///
   void function(AdwEntryRow* self, GtkWidget* widget) c_adw_entry_row_add_prefix; ///
   void function(AdwEntryRow* self, GtkWidget* widget) c_adw_entry_row_add_suffix; ///
-  bool function(AdwEntryRow* self) c_adw_entry_row_get_activates_default; ///
+  gboolean function(AdwEntryRow* self) c_adw_entry_row_get_activates_default; ///
   PangoAttrList* function(AdwEntryRow* self) c_adw_entry_row_get_attributes; ///
-  bool function(AdwEntryRow* self) c_adw_entry_row_get_enable_emoji_completion; ///
+  gboolean function(AdwEntryRow* self) c_adw_entry_row_get_enable_emoji_completion; ///
   GtkInputHints function(AdwEntryRow* self) c_adw_entry_row_get_input_hints; ///
   GtkInputPurpose function(AdwEntryRow* self) c_adw_entry_row_get_input_purpose; ///
-  bool function(AdwEntryRow* self) c_adw_entry_row_get_show_apply_button; ///
+  gboolean function(AdwEntryRow* self) c_adw_entry_row_get_show_apply_button; ///
   uint function(AdwEntryRow* self) c_adw_entry_row_get_text_length; ///
-  bool function(AdwEntryRow* self) c_adw_entry_row_grab_focus_without_selecting; ///
+  gboolean function(AdwEntryRow* self) c_adw_entry_row_grab_focus_without_selecting; ///
   void function(AdwEntryRow* self, GtkWidget* widget) c_adw_entry_row_remove; ///
-  void function(AdwEntryRow* self, bool activates) c_adw_entry_row_set_activates_default; ///
+  void function(AdwEntryRow* self, gboolean activates) c_adw_entry_row_set_activates_default; ///
   void function(AdwEntryRow* self, PangoAttrList* attributes) c_adw_entry_row_set_attributes; ///
-  void function(AdwEntryRow* self, bool enableEmojiCompletion) c_adw_entry_row_set_enable_emoji_completion; ///
+  void function(AdwEntryRow* self, gboolean enableEmojiCompletion) c_adw_entry_row_set_enable_emoji_completion; ///
   void function(AdwEntryRow* self, GtkInputHints hints) c_adw_entry_row_set_input_hints; ///
   void function(AdwEntryRow* self, GtkInputPurpose purpose) c_adw_entry_row_set_input_purpose; ///
-  void function(AdwEntryRow* self, bool showApplyButton) c_adw_entry_row_set_show_apply_button; ///
+  void function(AdwEntryRow* self, gboolean showApplyButton) c_adw_entry_row_set_show_apply_button; ///
 
   // EnumListItem
   GType function() c_adw_enum_list_item_get_type; ///
@@ -439,18 +439,18 @@ __gshared extern(C)
   void function(AdwExpanderRow* self, GtkWidget* widget) c_adw_expander_row_add_prefix; ///
   void function(AdwExpanderRow* self, GtkWidget* child) c_adw_expander_row_add_row; ///
   void function(AdwExpanderRow* self, GtkWidget* widget) c_adw_expander_row_add_suffix; ///
-  bool function(AdwExpanderRow* self) c_adw_expander_row_get_enable_expansion; ///
-  bool function(AdwExpanderRow* self) c_adw_expander_row_get_expanded; ///
+  gboolean function(AdwExpanderRow* self) c_adw_expander_row_get_enable_expansion; ///
+  gboolean function(AdwExpanderRow* self) c_adw_expander_row_get_expanded; ///
   const(char)* function(AdwExpanderRow* self) c_adw_expander_row_get_icon_name; ///
-  bool function(AdwExpanderRow* self) c_adw_expander_row_get_show_enable_switch; ///
+  gboolean function(AdwExpanderRow* self) c_adw_expander_row_get_show_enable_switch; ///
   const(char)* function(AdwExpanderRow* self) c_adw_expander_row_get_subtitle; ///
   int function(AdwExpanderRow* self) c_adw_expander_row_get_subtitle_lines; ///
   int function(AdwExpanderRow* self) c_adw_expander_row_get_title_lines; ///
   void function(AdwExpanderRow* self, GtkWidget* child) c_adw_expander_row_remove; ///
-  void function(AdwExpanderRow* self, bool enableExpansion) c_adw_expander_row_set_enable_expansion; ///
-  void function(AdwExpanderRow* self, bool expanded) c_adw_expander_row_set_expanded; ///
+  void function(AdwExpanderRow* self, gboolean enableExpansion) c_adw_expander_row_set_enable_expansion; ///
+  void function(AdwExpanderRow* self, gboolean expanded) c_adw_expander_row_set_expanded; ///
   void function(AdwExpanderRow* self, const(char)* iconName) c_adw_expander_row_set_icon_name; ///
-  void function(AdwExpanderRow* self, bool showEnableSwitch) c_adw_expander_row_set_show_enable_switch; ///
+  void function(AdwExpanderRow* self, gboolean showEnableSwitch) c_adw_expander_row_set_show_enable_switch; ///
   void function(AdwExpanderRow* self, const(char)* subtitle) c_adw_expander_row_set_subtitle; ///
   void function(AdwExpanderRow* self, int subtitleLines) c_adw_expander_row_set_subtitle_lines; ///
   void function(AdwExpanderRow* self, int titleLines) c_adw_expander_row_set_title_lines; ///
@@ -464,15 +464,15 @@ __gshared extern(C)
   uint function(AdwFlap* self) c_adw_flap_get_fold_duration; ///
   AdwFlapFoldPolicy function(AdwFlap* self) c_adw_flap_get_fold_policy; ///
   AdwFoldThresholdPolicy function(AdwFlap* self) c_adw_flap_get_fold_threshold_policy; ///
-  bool function(AdwFlap* self) c_adw_flap_get_folded; ///
-  bool function(AdwFlap* self) c_adw_flap_get_locked; ///
-  bool function(AdwFlap* self) c_adw_flap_get_modal; ///
-  bool function(AdwFlap* self) c_adw_flap_get_reveal_flap; ///
+  gboolean function(AdwFlap* self) c_adw_flap_get_folded; ///
+  gboolean function(AdwFlap* self) c_adw_flap_get_locked; ///
+  gboolean function(AdwFlap* self) c_adw_flap_get_modal; ///
+  gboolean function(AdwFlap* self) c_adw_flap_get_reveal_flap; ///
   AdwSpringParams* function(AdwFlap* self) c_adw_flap_get_reveal_params; ///
   double function(AdwFlap* self) c_adw_flap_get_reveal_progress; ///
   GtkWidget* function(AdwFlap* self) c_adw_flap_get_separator; ///
-  bool function(AdwFlap* self) c_adw_flap_get_swipe_to_close; ///
-  bool function(AdwFlap* self) c_adw_flap_get_swipe_to_open; ///
+  gboolean function(AdwFlap* self) c_adw_flap_get_swipe_to_close; ///
+  gboolean function(AdwFlap* self) c_adw_flap_get_swipe_to_open; ///
   AdwFlapTransitionType function(AdwFlap* self) c_adw_flap_get_transition_type; ///
   void function(AdwFlap* self, GtkWidget* content) c_adw_flap_set_content; ///
   void function(AdwFlap* self, GtkWidget* flap) c_adw_flap_set_flap; ///
@@ -480,13 +480,13 @@ __gshared extern(C)
   void function(AdwFlap* self, uint duration) c_adw_flap_set_fold_duration; ///
   void function(AdwFlap* self, AdwFlapFoldPolicy policy) c_adw_flap_set_fold_policy; ///
   void function(AdwFlap* self, AdwFoldThresholdPolicy policy) c_adw_flap_set_fold_threshold_policy; ///
-  void function(AdwFlap* self, bool locked) c_adw_flap_set_locked; ///
-  void function(AdwFlap* self, bool modal) c_adw_flap_set_modal; ///
-  void function(AdwFlap* self, bool revealFlap) c_adw_flap_set_reveal_flap; ///
+  void function(AdwFlap* self, gboolean locked) c_adw_flap_set_locked; ///
+  void function(AdwFlap* self, gboolean modal) c_adw_flap_set_modal; ///
+  void function(AdwFlap* self, gboolean revealFlap) c_adw_flap_set_reveal_flap; ///
   void function(AdwFlap* self, AdwSpringParams* params) c_adw_flap_set_reveal_params; ///
   void function(AdwFlap* self, GtkWidget* separator) c_adw_flap_set_separator; ///
-  void function(AdwFlap* self, bool swipeToClose) c_adw_flap_set_swipe_to_close; ///
-  void function(AdwFlap* self, bool swipeToOpen) c_adw_flap_set_swipe_to_open; ///
+  void function(AdwFlap* self, gboolean swipeToClose) c_adw_flap_set_swipe_to_close; ///
+  void function(AdwFlap* self, gboolean swipeToOpen) c_adw_flap_set_swipe_to_open; ///
   void function(AdwFlap* self, AdwFlapTransitionType transitionType) c_adw_flap_set_transition_type; ///
 
   // HeaderBar
@@ -494,20 +494,20 @@ __gshared extern(C)
   GtkWidget* function() c_adw_header_bar_new; ///
   AdwCenteringPolicy function(AdwHeaderBar* self) c_adw_header_bar_get_centering_policy; ///
   const(char)* function(AdwHeaderBar* self) c_adw_header_bar_get_decoration_layout; ///
-  bool function(AdwHeaderBar* self) c_adw_header_bar_get_show_back_button; ///
-  bool function(AdwHeaderBar* self) c_adw_header_bar_get_show_end_title_buttons; ///
-  bool function(AdwHeaderBar* self) c_adw_header_bar_get_show_start_title_buttons; ///
-  bool function(AdwHeaderBar* self) c_adw_header_bar_get_show_title; ///
+  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_back_button; ///
+  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_end_title_buttons; ///
+  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_start_title_buttons; ///
+  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_title; ///
   GtkWidget* function(AdwHeaderBar* self) c_adw_header_bar_get_title_widget; ///
   void function(AdwHeaderBar* self, GtkWidget* child) c_adw_header_bar_pack_end; ///
   void function(AdwHeaderBar* self, GtkWidget* child) c_adw_header_bar_pack_start; ///
   void function(AdwHeaderBar* self, GtkWidget* child) c_adw_header_bar_remove; ///
   void function(AdwHeaderBar* self, AdwCenteringPolicy centeringPolicy) c_adw_header_bar_set_centering_policy; ///
   void function(AdwHeaderBar* self, const(char)* layout) c_adw_header_bar_set_decoration_layout; ///
-  void function(AdwHeaderBar* self, bool showBackButton) c_adw_header_bar_set_show_back_button; ///
-  void function(AdwHeaderBar* self, bool setting) c_adw_header_bar_set_show_end_title_buttons; ///
-  void function(AdwHeaderBar* self, bool setting) c_adw_header_bar_set_show_start_title_buttons; ///
-  void function(AdwHeaderBar* self, bool showTitle) c_adw_header_bar_set_show_title; ///
+  void function(AdwHeaderBar* self, gboolean showBackButton) c_adw_header_bar_set_show_back_button; ///
+  void function(AdwHeaderBar* self, gboolean setting) c_adw_header_bar_set_show_end_title_buttons; ///
+  void function(AdwHeaderBar* self, gboolean setting) c_adw_header_bar_set_show_start_title_buttons; ///
+  void function(AdwHeaderBar* self, gboolean showTitle) c_adw_header_bar_set_show_title; ///
   void function(AdwHeaderBar* self, GtkWidget* titleWidget) c_adw_header_bar_set_title_widget; ///
 
   // Leaflet
@@ -515,15 +515,15 @@ __gshared extern(C)
   GtkWidget* function() c_adw_leaflet_new; ///
   AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_append; ///
   GtkWidget* function(AdwLeaflet* self, AdwNavigationDirection direction) c_adw_leaflet_get_adjacent_child; ///
-  bool function(AdwLeaflet* self) c_adw_leaflet_get_can_navigate_back; ///
-  bool function(AdwLeaflet* self) c_adw_leaflet_get_can_navigate_forward; ///
-  bool function(AdwLeaflet* self) c_adw_leaflet_get_can_unfold; ///
+  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_can_navigate_back; ///
+  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_can_navigate_forward; ///
+  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_can_unfold; ///
   GtkWidget* function(AdwLeaflet* self, const(char)* name) c_adw_leaflet_get_child_by_name; ///
   AdwSpringParams* function(AdwLeaflet* self) c_adw_leaflet_get_child_transition_params; ///
-  bool function(AdwLeaflet* self) c_adw_leaflet_get_child_transition_running; ///
+  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_child_transition_running; ///
   AdwFoldThresholdPolicy function(AdwLeaflet* self) c_adw_leaflet_get_fold_threshold_policy; ///
-  bool function(AdwLeaflet* self) c_adw_leaflet_get_folded; ///
-  bool function(AdwLeaflet* self) c_adw_leaflet_get_homogeneous; ///
+  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_folded; ///
+  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_homogeneous; ///
   uint function(AdwLeaflet* self) c_adw_leaflet_get_mode_transition_duration; ///
   AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_get_page; ///
   GtkSelectionModel* function(AdwLeaflet* self) c_adw_leaflet_get_pages; ///
@@ -531,16 +531,16 @@ __gshared extern(C)
   GtkWidget* function(AdwLeaflet* self) c_adw_leaflet_get_visible_child; ///
   const(char)* function(AdwLeaflet* self) c_adw_leaflet_get_visible_child_name; ///
   AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child, GtkWidget* sibling) c_adw_leaflet_insert_child_after; ///
-  bool function(AdwLeaflet* self, AdwNavigationDirection direction) c_adw_leaflet_navigate; ///
+  gboolean function(AdwLeaflet* self, AdwNavigationDirection direction) c_adw_leaflet_navigate; ///
   AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_prepend; ///
   void function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_remove; ///
   void function(AdwLeaflet* self, GtkWidget* child, GtkWidget* sibling) c_adw_leaflet_reorder_child_after; ///
-  void function(AdwLeaflet* self, bool canNavigateBack) c_adw_leaflet_set_can_navigate_back; ///
-  void function(AdwLeaflet* self, bool canNavigateForward) c_adw_leaflet_set_can_navigate_forward; ///
-  void function(AdwLeaflet* self, bool canUnfold) c_adw_leaflet_set_can_unfold; ///
+  void function(AdwLeaflet* self, gboolean canNavigateBack) c_adw_leaflet_set_can_navigate_back; ///
+  void function(AdwLeaflet* self, gboolean canNavigateForward) c_adw_leaflet_set_can_navigate_forward; ///
+  void function(AdwLeaflet* self, gboolean canUnfold) c_adw_leaflet_set_can_unfold; ///
   void function(AdwLeaflet* self, AdwSpringParams* params) c_adw_leaflet_set_child_transition_params; ///
   void function(AdwLeaflet* self, AdwFoldThresholdPolicy policy) c_adw_leaflet_set_fold_threshold_policy; ///
-  void function(AdwLeaflet* self, bool homogeneous) c_adw_leaflet_set_homogeneous; ///
+  void function(AdwLeaflet* self, gboolean homogeneous) c_adw_leaflet_set_homogeneous; ///
   void function(AdwLeaflet* self, uint duration) c_adw_leaflet_set_mode_transition_duration; ///
   void function(AdwLeaflet* self, AdwLeafletTransitionType transition) c_adw_leaflet_set_transition_type; ///
   void function(AdwLeaflet* self, GtkWidget* visibleChild) c_adw_leaflet_set_visible_child; ///
@@ -550,9 +550,9 @@ __gshared extern(C)
   GType function() c_adw_leaflet_page_get_type; ///
   GtkWidget* function(AdwLeafletPage* self) c_adw_leaflet_page_get_child; ///
   const(char)* function(AdwLeafletPage* self) c_adw_leaflet_page_get_name; ///
-  bool function(AdwLeafletPage* self) c_adw_leaflet_page_get_navigatable; ///
+  gboolean function(AdwLeafletPage* self) c_adw_leaflet_page_get_navigatable; ///
   void function(AdwLeafletPage* self, const(char)* name) c_adw_leaflet_page_set_name; ///
-  void function(AdwLeafletPage* self, bool navigatable) c_adw_leaflet_page_set_navigatable; ///
+  void function(AdwLeafletPage* self, gboolean navigatable) c_adw_leaflet_page_set_navigatable; ///
 
   // MessageDialog
   GType function() c_adw_message_dialog_get_type; ///
@@ -566,38 +566,38 @@ __gshared extern(C)
   void function(AdwMessageDialog* self, const(char)* format,  ...) c_adw_message_dialog_format_heading; ///
   void function(AdwMessageDialog* self, const(char)* format,  ...) c_adw_message_dialog_format_heading_markup; ///
   const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_body; ///
-  bool function(AdwMessageDialog* self) c_adw_message_dialog_get_body_use_markup; ///
+  gboolean function(AdwMessageDialog* self) c_adw_message_dialog_get_body_use_markup; ///
   const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_close_response; ///
   const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_default_response; ///
   GtkWidget* function(AdwMessageDialog* self) c_adw_message_dialog_get_extra_child; ///
   const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_heading; ///
-  bool function(AdwMessageDialog* self) c_adw_message_dialog_get_heading_use_markup; ///
+  gboolean function(AdwMessageDialog* self) c_adw_message_dialog_get_heading_use_markup; ///
   AdwResponseAppearance function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_get_response_appearance; ///
-  bool function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_get_response_enabled; ///
+  gboolean function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_get_response_enabled; ///
   const(char)* function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_get_response_label; ///
-  bool function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_has_response; ///
+  gboolean function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_has_response; ///
   void function(AdwMessageDialog* self, const(char)* id) c_adw_message_dialog_remove_response; ///
   void function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_response; ///
   void function(AdwMessageDialog* self, const(char)* body_) c_adw_message_dialog_set_body; ///
-  void function(AdwMessageDialog* self, bool useMarkup) c_adw_message_dialog_set_body_use_markup; ///
+  void function(AdwMessageDialog* self, gboolean useMarkup) c_adw_message_dialog_set_body_use_markup; ///
   void function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_set_close_response; ///
   void function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_set_default_response; ///
   void function(AdwMessageDialog* self, GtkWidget* child) c_adw_message_dialog_set_extra_child; ///
   void function(AdwMessageDialog* self, const(char)* heading) c_adw_message_dialog_set_heading; ///
-  void function(AdwMessageDialog* self, bool useMarkup) c_adw_message_dialog_set_heading_use_markup; ///
+  void function(AdwMessageDialog* self, gboolean useMarkup) c_adw_message_dialog_set_heading_use_markup; ///
   void function(AdwMessageDialog* self, const(char)* response, AdwResponseAppearance appearance) c_adw_message_dialog_set_response_appearance; ///
-  void function(AdwMessageDialog* self, const(char)* response, bool enabled) c_adw_message_dialog_set_response_enabled; ///
+  void function(AdwMessageDialog* self, const(char)* response, gboolean enabled) c_adw_message_dialog_set_response_enabled; ///
   void function(AdwMessageDialog* self, const(char)* response, const(char)* label) c_adw_message_dialog_set_response_label; ///
 
   // NavigationPage
   GType function() c_adw_navigation_page_get_type; ///
   AdwNavigationPage* function(GtkWidget* child, const(char)* title) c_adw_navigation_page_new; ///
   AdwNavigationPage* function(GtkWidget* child, const(char)* title, const(char)* tag) c_adw_navigation_page_new_with_tag; ///
-  bool function(AdwNavigationPage* self) c_adw_navigation_page_get_can_pop; ///
+  gboolean function(AdwNavigationPage* self) c_adw_navigation_page_get_can_pop; ///
   GtkWidget* function(AdwNavigationPage* self) c_adw_navigation_page_get_child; ///
   const(char)* function(AdwNavigationPage* self) c_adw_navigation_page_get_tag; ///
   const(char)* function(AdwNavigationPage* self) c_adw_navigation_page_get_title; ///
-  void function(AdwNavigationPage* self, bool canPop) c_adw_navigation_page_set_can_pop; ///
+  void function(AdwNavigationPage* self, gboolean canPop) c_adw_navigation_page_set_can_pop; ///
   void function(AdwNavigationPage* self, GtkWidget* child) c_adw_navigation_page_set_child; ///
   void function(AdwNavigationPage* self, const(char)* tag) c_adw_navigation_page_set_tag; ///
   void function(AdwNavigationPage* self, const(char)* title) c_adw_navigation_page_set_title; ///
@@ -605,19 +605,19 @@ __gshared extern(C)
   // NavigationSplitView
   GType function() c_adw_navigation_split_view_get_type; ///
   GtkWidget* function() c_adw_navigation_split_view_new; ///
-  bool function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_collapsed; ///
+  gboolean function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_collapsed; ///
   AdwNavigationPage* function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_content; ///
   double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_max_sidebar_width; ///
   double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_min_sidebar_width; ///
-  bool function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_show_content; ///
+  gboolean function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_show_content; ///
   AdwNavigationPage* function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar; ///
   double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_width_fraction; ///
   AdwLengthUnit function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_width_unit; ///
-  void function(AdwNavigationSplitView* self, bool collapsed) c_adw_navigation_split_view_set_collapsed; ///
+  void function(AdwNavigationSplitView* self, gboolean collapsed) c_adw_navigation_split_view_set_collapsed; ///
   void function(AdwNavigationSplitView* self, AdwNavigationPage* content) c_adw_navigation_split_view_set_content; ///
   void function(AdwNavigationSplitView* self, double width) c_adw_navigation_split_view_set_max_sidebar_width; ///
   void function(AdwNavigationSplitView* self, double width) c_adw_navigation_split_view_set_min_sidebar_width; ///
-  void function(AdwNavigationSplitView* self, bool showContent) c_adw_navigation_split_view_set_show_content; ///
+  void function(AdwNavigationSplitView* self, gboolean showContent) c_adw_navigation_split_view_set_show_content; ///
   void function(AdwNavigationSplitView* self, AdwNavigationPage* sidebar) c_adw_navigation_split_view_set_sidebar; ///
   void function(AdwNavigationSplitView* self, double fraction) c_adw_navigation_split_view_set_sidebar_width_fraction; ///
   void function(AdwNavigationSplitView* self, AdwLengthUnit unit) c_adw_navigation_split_view_set_sidebar_width_unit; ///
@@ -627,45 +627,45 @@ __gshared extern(C)
   GtkWidget* function() c_adw_navigation_view_new; ///
   void function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_add; ///
   AdwNavigationPage* function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_find_page; ///
-  bool function(AdwNavigationView* self) c_adw_navigation_view_get_animate_transitions; ///
+  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_animate_transitions; ///
   GListModel* function(AdwNavigationView* self) c_adw_navigation_view_get_navigation_stack; ///
-  bool function(AdwNavigationView* self) c_adw_navigation_view_get_pop_on_escape; ///
+  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_pop_on_escape; ///
   AdwNavigationPage* function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_get_previous_page; ///
   AdwNavigationPage* function(AdwNavigationView* self) c_adw_navigation_view_get_visible_page; ///
-  bool function(AdwNavigationView* self) c_adw_navigation_view_pop; ///
-  bool function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_pop_to_page; ///
-  bool function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_pop_to_tag; ///
+  gboolean function(AdwNavigationView* self) c_adw_navigation_view_pop; ///
+  gboolean function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_pop_to_page; ///
+  gboolean function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_pop_to_tag; ///
   void function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_push; ///
   void function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_push_by_tag; ///
   void function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_remove; ///
   void function(AdwNavigationView* self, AdwNavigationPage** pages, int nPages) c_adw_navigation_view_replace; ///
   void function(AdwNavigationView* self, const(char*)* tags, int nTags) c_adw_navigation_view_replace_with_tags; ///
-  void function(AdwNavigationView* self, bool animateTransitions) c_adw_navigation_view_set_animate_transitions; ///
-  void function(AdwNavigationView* self, bool popOnEscape) c_adw_navigation_view_set_pop_on_escape; ///
+  void function(AdwNavigationView* self, gboolean animateTransitions) c_adw_navigation_view_set_animate_transitions; ///
+  void function(AdwNavigationView* self, gboolean popOnEscape) c_adw_navigation_view_set_pop_on_escape; ///
 
   // OverlaySplitView
   GType function() c_adw_overlay_split_view_get_type; ///
   GtkWidget* function() c_adw_overlay_split_view_new; ///
-  bool function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_collapsed; ///
+  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_collapsed; ///
   GtkWidget* function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_content; ///
-  bool function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_enable_hide_gesture; ///
-  bool function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_enable_show_gesture; ///
+  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_enable_hide_gesture; ///
+  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_enable_show_gesture; ///
   double function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_max_sidebar_width; ///
   double function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_min_sidebar_width; ///
-  bool function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_pin_sidebar; ///
-  bool function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_show_sidebar; ///
+  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_pin_sidebar; ///
+  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_show_sidebar; ///
   GtkWidget* function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar; ///
   GtkPackType function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar_position; ///
   double function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar_width_fraction; ///
   AdwLengthUnit function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar_width_unit; ///
-  void function(AdwOverlaySplitView* self, bool collapsed) c_adw_overlay_split_view_set_collapsed; ///
+  void function(AdwOverlaySplitView* self, gboolean collapsed) c_adw_overlay_split_view_set_collapsed; ///
   void function(AdwOverlaySplitView* self, GtkWidget* content) c_adw_overlay_split_view_set_content; ///
-  void function(AdwOverlaySplitView* self, bool enableHideGesture) c_adw_overlay_split_view_set_enable_hide_gesture; ///
-  void function(AdwOverlaySplitView* self, bool enableShowGesture) c_adw_overlay_split_view_set_enable_show_gesture; ///
+  void function(AdwOverlaySplitView* self, gboolean enableHideGesture) c_adw_overlay_split_view_set_enable_hide_gesture; ///
+  void function(AdwOverlaySplitView* self, gboolean enableShowGesture) c_adw_overlay_split_view_set_enable_show_gesture; ///
   void function(AdwOverlaySplitView* self, double width) c_adw_overlay_split_view_set_max_sidebar_width; ///
   void function(AdwOverlaySplitView* self, double width) c_adw_overlay_split_view_set_min_sidebar_width; ///
-  void function(AdwOverlaySplitView* self, bool pinSidebar) c_adw_overlay_split_view_set_pin_sidebar; ///
-  void function(AdwOverlaySplitView* self, bool showSidebar) c_adw_overlay_split_view_set_show_sidebar; ///
+  void function(AdwOverlaySplitView* self, gboolean pinSidebar) c_adw_overlay_split_view_set_pin_sidebar; ///
+  void function(AdwOverlaySplitView* self, gboolean showSidebar) c_adw_overlay_split_view_set_show_sidebar; ///
   void function(AdwOverlaySplitView* self, GtkWidget* sidebar) c_adw_overlay_split_view_set_sidebar; ///
   void function(AdwOverlaySplitView* self, GtkPackType position) c_adw_overlay_split_view_set_sidebar_position; ///
   void function(AdwOverlaySplitView* self, double fraction) c_adw_overlay_split_view_set_sidebar_width_fraction; ///
@@ -680,13 +680,13 @@ __gshared extern(C)
   AdwDialog* function() c_adw_preferences_dialog_new; ///
   void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) c_adw_preferences_dialog_add; ///
   void function(AdwPreferencesDialog* self, AdwToast* toast) c_adw_preferences_dialog_add_toast; ///
-  bool function(AdwPreferencesDialog* self) c_adw_preferences_dialog_get_search_enabled; ///
+  gboolean function(AdwPreferencesDialog* self) c_adw_preferences_dialog_get_search_enabled; ///
   AdwPreferencesPage* function(AdwPreferencesDialog* self) c_adw_preferences_dialog_get_visible_page; ///
   const(char)* function(AdwPreferencesDialog* self) c_adw_preferences_dialog_get_visible_page_name; ///
-  bool function(AdwPreferencesDialog* self) c_adw_preferences_dialog_pop_subpage; ///
+  gboolean function(AdwPreferencesDialog* self) c_adw_preferences_dialog_pop_subpage; ///
   void function(AdwPreferencesDialog* self, AdwNavigationPage* page) c_adw_preferences_dialog_push_subpage; ///
   void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) c_adw_preferences_dialog_remove; ///
-  void function(AdwPreferencesDialog* self, bool searchEnabled) c_adw_preferences_dialog_set_search_enabled; ///
+  void function(AdwPreferencesDialog* self, gboolean searchEnabled) c_adw_preferences_dialog_set_search_enabled; ///
   void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) c_adw_preferences_dialog_set_visible_page; ///
   void function(AdwPreferencesDialog* self, const(char)* name) c_adw_preferences_dialog_set_visible_page_name; ///
 
@@ -710,26 +710,26 @@ __gshared extern(C)
   const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_icon_name; ///
   const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_name; ///
   const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_title; ///
-  bool function(AdwPreferencesPage* self) c_adw_preferences_page_get_use_underline; ///
+  gboolean function(AdwPreferencesPage* self) c_adw_preferences_page_get_use_underline; ///
   void function(AdwPreferencesPage* self, AdwPreferencesGroup* group) c_adw_preferences_page_remove; ///
   void function(AdwPreferencesPage* self) c_adw_preferences_page_scroll_to_top; ///
   void function(AdwPreferencesPage* self, const(char)* description) c_adw_preferences_page_set_description; ///
   void function(AdwPreferencesPage* self, const(char)* iconName) c_adw_preferences_page_set_icon_name; ///
   void function(AdwPreferencesPage* self, const(char)* name) c_adw_preferences_page_set_name; ///
   void function(AdwPreferencesPage* self, const(char)* title) c_adw_preferences_page_set_title; ///
-  void function(AdwPreferencesPage* self, bool useUnderline) c_adw_preferences_page_set_use_underline; ///
+  void function(AdwPreferencesPage* self, gboolean useUnderline) c_adw_preferences_page_set_use_underline; ///
 
   // PreferencesRow
   GType function() c_adw_preferences_row_get_type; ///
   GtkWidget* function() c_adw_preferences_row_new; ///
   const(char)* function(AdwPreferencesRow* self) c_adw_preferences_row_get_title; ///
-  bool function(AdwPreferencesRow* self) c_adw_preferences_row_get_title_selectable; ///
-  bool function(AdwPreferencesRow* self) c_adw_preferences_row_get_use_markup; ///
-  bool function(AdwPreferencesRow* self) c_adw_preferences_row_get_use_underline; ///
+  gboolean function(AdwPreferencesRow* self) c_adw_preferences_row_get_title_selectable; ///
+  gboolean function(AdwPreferencesRow* self) c_adw_preferences_row_get_use_markup; ///
+  gboolean function(AdwPreferencesRow* self) c_adw_preferences_row_get_use_underline; ///
   void function(AdwPreferencesRow* self, const(char)* title) c_adw_preferences_row_set_title; ///
-  void function(AdwPreferencesRow* self, bool titleSelectable) c_adw_preferences_row_set_title_selectable; ///
-  void function(AdwPreferencesRow* self, bool useMarkup) c_adw_preferences_row_set_use_markup; ///
-  void function(AdwPreferencesRow* self, bool useUnderline) c_adw_preferences_row_set_use_underline; ///
+  void function(AdwPreferencesRow* self, gboolean titleSelectable) c_adw_preferences_row_set_title_selectable; ///
+  void function(AdwPreferencesRow* self, gboolean useMarkup) c_adw_preferences_row_set_use_markup; ///
+  void function(AdwPreferencesRow* self, gboolean useUnderline) c_adw_preferences_row_set_use_underline; ///
 
   // PreferencesWindow
   GType function() c_adw_preferences_window_get_type; ///
@@ -737,16 +737,16 @@ __gshared extern(C)
   void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) c_adw_preferences_window_add; ///
   void function(AdwPreferencesWindow* self, AdwToast* toast) c_adw_preferences_window_add_toast; ///
   void function(AdwPreferencesWindow* self) c_adw_preferences_window_close_subpage; ///
-  bool function(AdwPreferencesWindow* self) c_adw_preferences_window_get_can_navigate_back; ///
-  bool function(AdwPreferencesWindow* self) c_adw_preferences_window_get_search_enabled; ///
+  gboolean function(AdwPreferencesWindow* self) c_adw_preferences_window_get_can_navigate_back; ///
+  gboolean function(AdwPreferencesWindow* self) c_adw_preferences_window_get_search_enabled; ///
   AdwPreferencesPage* function(AdwPreferencesWindow* self) c_adw_preferences_window_get_visible_page; ///
   const(char)* function(AdwPreferencesWindow* self) c_adw_preferences_window_get_visible_page_name; ///
-  bool function(AdwPreferencesWindow* self) c_adw_preferences_window_pop_subpage; ///
+  gboolean function(AdwPreferencesWindow* self) c_adw_preferences_window_pop_subpage; ///
   void function(AdwPreferencesWindow* self, GtkWidget* subpage) c_adw_preferences_window_present_subpage; ///
   void function(AdwPreferencesWindow* self, AdwNavigationPage* page) c_adw_preferences_window_push_subpage; ///
   void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) c_adw_preferences_window_remove; ///
-  void function(AdwPreferencesWindow* self, bool canNavigateBack) c_adw_preferences_window_set_can_navigate_back; ///
-  void function(AdwPreferencesWindow* self, bool searchEnabled) c_adw_preferences_window_set_search_enabled; ///
+  void function(AdwPreferencesWindow* self, gboolean canNavigateBack) c_adw_preferences_window_set_can_navigate_back; ///
+  void function(AdwPreferencesWindow* self, gboolean searchEnabled) c_adw_preferences_window_set_search_enabled; ///
   void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) c_adw_preferences_window_set_visible_page; ///
   void function(AdwPreferencesWindow* self, const(char)* name) c_adw_preferences_window_set_visible_page_name; ///
 
@@ -765,26 +765,26 @@ __gshared extern(C)
   GtkAdjustment* function(AdwSpinRow* self) c_adw_spin_row_get_adjustment; ///
   double function(AdwSpinRow* self) c_adw_spin_row_get_climb_rate; ///
   uint function(AdwSpinRow* self) c_adw_spin_row_get_digits; ///
-  bool function(AdwSpinRow* self) c_adw_spin_row_get_numeric; ///
-  bool function(AdwSpinRow* self) c_adw_spin_row_get_snap_to_ticks; ///
+  gboolean function(AdwSpinRow* self) c_adw_spin_row_get_numeric; ///
+  gboolean function(AdwSpinRow* self) c_adw_spin_row_get_snap_to_ticks; ///
   GtkSpinButtonUpdatePolicy function(AdwSpinRow* self) c_adw_spin_row_get_update_policy; ///
   double function(AdwSpinRow* self) c_adw_spin_row_get_value; ///
-  bool function(AdwSpinRow* self) c_adw_spin_row_get_wrap; ///
+  gboolean function(AdwSpinRow* self) c_adw_spin_row_get_wrap; ///
   void function(AdwSpinRow* self, GtkAdjustment* adjustment) c_adw_spin_row_set_adjustment; ///
   void function(AdwSpinRow* self, double climbRate) c_adw_spin_row_set_climb_rate; ///
   void function(AdwSpinRow* self, uint digits) c_adw_spin_row_set_digits; ///
-  void function(AdwSpinRow* self, bool numeric) c_adw_spin_row_set_numeric; ///
+  void function(AdwSpinRow* self, gboolean numeric) c_adw_spin_row_set_numeric; ///
   void function(AdwSpinRow* self, double min, double max) c_adw_spin_row_set_range; ///
-  void function(AdwSpinRow* self, bool snapToTicks) c_adw_spin_row_set_snap_to_ticks; ///
+  void function(AdwSpinRow* self, gboolean snapToTicks) c_adw_spin_row_set_snap_to_ticks; ///
   void function(AdwSpinRow* self, GtkSpinButtonUpdatePolicy policy) c_adw_spin_row_set_update_policy; ///
   void function(AdwSpinRow* self, double value) c_adw_spin_row_set_value; ///
-  void function(AdwSpinRow* self, bool wrap) c_adw_spin_row_set_wrap; ///
+  void function(AdwSpinRow* self, gboolean wrap) c_adw_spin_row_set_wrap; ///
   void function(AdwSpinRow* self) c_adw_spin_row_update; ///
 
   // SplitButton
   GType function() c_adw_split_button_get_type; ///
   GtkWidget* function() c_adw_split_button_new; ///
-  bool function(AdwSplitButton* self) c_adw_split_button_get_can_shrink; ///
+  gboolean function(AdwSplitButton* self) c_adw_split_button_get_can_shrink; ///
   GtkWidget* function(AdwSplitButton* self) c_adw_split_button_get_child; ///
   GtkArrowType function(AdwSplitButton* self) c_adw_split_button_get_direction; ///
   const(char)* function(AdwSplitButton* self) c_adw_split_button_get_dropdown_tooltip; ///
@@ -792,10 +792,10 @@ __gshared extern(C)
   const(char)* function(AdwSplitButton* self) c_adw_split_button_get_label; ///
   GMenuModel* function(AdwSplitButton* self) c_adw_split_button_get_menu_model; ///
   GtkPopover* function(AdwSplitButton* self) c_adw_split_button_get_popover; ///
-  bool function(AdwSplitButton* self) c_adw_split_button_get_use_underline; ///
+  gboolean function(AdwSplitButton* self) c_adw_split_button_get_use_underline; ///
   void function(AdwSplitButton* self) c_adw_split_button_popdown; ///
   void function(AdwSplitButton* self) c_adw_split_button_popup; ///
-  void function(AdwSplitButton* self, bool canShrink) c_adw_split_button_set_can_shrink; ///
+  void function(AdwSplitButton* self, gboolean canShrink) c_adw_split_button_set_can_shrink; ///
   void function(AdwSplitButton* self, GtkWidget* child) c_adw_split_button_set_child; ///
   void function(AdwSplitButton* self, GtkArrowType direction) c_adw_split_button_set_direction; ///
   void function(AdwSplitButton* self, const(char)* tooltip) c_adw_split_button_set_dropdown_tooltip; ///
@@ -803,14 +803,14 @@ __gshared extern(C)
   void function(AdwSplitButton* self, const(char)* label) c_adw_split_button_set_label; ///
   void function(AdwSplitButton* self, GMenuModel* menuModel) c_adw_split_button_set_menu_model; ///
   void function(AdwSplitButton* self, GtkPopover* popover) c_adw_split_button_set_popover; ///
-  void function(AdwSplitButton* self, bool useUnderline) c_adw_split_button_set_use_underline; ///
+  void function(AdwSplitButton* self, gboolean useUnderline) c_adw_split_button_set_use_underline; ///
 
   // SpringAnimation
   GType function() c_adw_spring_animation_get_type; ///
   AdwAnimation* function(GtkWidget* widget, double from, double to, AdwSpringParams* springParams, AdwAnimationTarget* target) c_adw_spring_animation_new; ///
   double function(AdwSpringAnimation* self, uint time) c_adw_spring_animation_calculate_value; ///
   double function(AdwSpringAnimation* self, uint time) c_adw_spring_animation_calculate_velocity; ///
-  bool function(AdwSpringAnimation* self) c_adw_spring_animation_get_clamp; ///
+  gboolean function(AdwSpringAnimation* self) c_adw_spring_animation_get_clamp; ///
   double function(AdwSpringAnimation* self) c_adw_spring_animation_get_epsilon; ///
   uint function(AdwSpringAnimation* self) c_adw_spring_animation_get_estimated_duration; ///
   double function(AdwSpringAnimation* self) c_adw_spring_animation_get_initial_velocity; ///
@@ -818,7 +818,7 @@ __gshared extern(C)
   double function(AdwSpringAnimation* self) c_adw_spring_animation_get_value_from; ///
   double function(AdwSpringAnimation* self) c_adw_spring_animation_get_value_to; ///
   double function(AdwSpringAnimation* self) c_adw_spring_animation_get_velocity; ///
-  void function(AdwSpringAnimation* self, bool clamp) c_adw_spring_animation_set_clamp; ///
+  void function(AdwSpringAnimation* self, gboolean clamp) c_adw_spring_animation_set_clamp; ///
   void function(AdwSpringAnimation* self, double epsilon) c_adw_spring_animation_set_epsilon; ///
   void function(AdwSpringAnimation* self, double velocity) c_adw_spring_animation_set_initial_velocity; ///
   void function(AdwSpringAnimation* self, AdwSpringParams* springParams) c_adw_spring_animation_set_spring_params; ///
@@ -840,22 +840,22 @@ __gshared extern(C)
   GType function() c_adw_squeezer_get_type; ///
   GtkWidget* function() c_adw_squeezer_new; ///
   AdwSqueezerPage* function(AdwSqueezer* self, GtkWidget* child) c_adw_squeezer_add; ///
-  bool function(AdwSqueezer* self) c_adw_squeezer_get_allow_none; ///
-  bool function(AdwSqueezer* self) c_adw_squeezer_get_homogeneous; ///
-  bool function(AdwSqueezer* self) c_adw_squeezer_get_interpolate_size; ///
+  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_allow_none; ///
+  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_homogeneous; ///
+  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_interpolate_size; ///
   AdwSqueezerPage* function(AdwSqueezer* self, GtkWidget* child) c_adw_squeezer_get_page; ///
   GtkSelectionModel* function(AdwSqueezer* self) c_adw_squeezer_get_pages; ///
   AdwFoldThresholdPolicy function(AdwSqueezer* self) c_adw_squeezer_get_switch_threshold_policy; ///
   uint function(AdwSqueezer* self) c_adw_squeezer_get_transition_duration; ///
-  bool function(AdwSqueezer* self) c_adw_squeezer_get_transition_running; ///
+  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_transition_running; ///
   AdwSqueezerTransitionType function(AdwSqueezer* self) c_adw_squeezer_get_transition_type; ///
   GtkWidget* function(AdwSqueezer* self) c_adw_squeezer_get_visible_child; ///
   float function(AdwSqueezer* self) c_adw_squeezer_get_xalign; ///
   float function(AdwSqueezer* self) c_adw_squeezer_get_yalign; ///
   void function(AdwSqueezer* self, GtkWidget* child) c_adw_squeezer_remove; ///
-  void function(AdwSqueezer* self, bool allowNone) c_adw_squeezer_set_allow_none; ///
-  void function(AdwSqueezer* self, bool homogeneous) c_adw_squeezer_set_homogeneous; ///
-  void function(AdwSqueezer* self, bool interpolateSize) c_adw_squeezer_set_interpolate_size; ///
+  void function(AdwSqueezer* self, gboolean allowNone) c_adw_squeezer_set_allow_none; ///
+  void function(AdwSqueezer* self, gboolean homogeneous) c_adw_squeezer_set_homogeneous; ///
+  void function(AdwSqueezer* self, gboolean interpolateSize) c_adw_squeezer_set_interpolate_size; ///
   void function(AdwSqueezer* self, AdwFoldThresholdPolicy policy) c_adw_squeezer_set_switch_threshold_policy; ///
   void function(AdwSqueezer* self, uint duration) c_adw_squeezer_set_transition_duration; ///
   void function(AdwSqueezer* self, AdwSqueezerTransitionType transition) c_adw_squeezer_set_transition_type; ///
@@ -865,8 +865,8 @@ __gshared extern(C)
   // SqueezerPage
   GType function() c_adw_squeezer_page_get_type; ///
   GtkWidget* function(AdwSqueezerPage* self) c_adw_squeezer_page_get_child; ///
-  bool function(AdwSqueezerPage* self) c_adw_squeezer_page_get_enabled; ///
-  void function(AdwSqueezerPage* self, bool enabled) c_adw_squeezer_page_set_enabled; ///
+  gboolean function(AdwSqueezerPage* self) c_adw_squeezer_page_get_enabled; ///
+  void function(AdwSqueezerPage* self, gboolean enabled) c_adw_squeezer_page_set_enabled; ///
 
   // StatusPage
   GType function() c_adw_status_page_get_type; ///
@@ -887,30 +887,30 @@ __gshared extern(C)
   AdwStyleManager* function() c_adw_style_manager_get_default; ///
   AdwStyleManager* function(GdkDisplay* display) c_adw_style_manager_get_for_display; ///
   AdwColorScheme function(AdwStyleManager* self) c_adw_style_manager_get_color_scheme; ///
-  bool function(AdwStyleManager* self) c_adw_style_manager_get_dark; ///
+  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_dark; ///
   GdkDisplay* function(AdwStyleManager* self) c_adw_style_manager_get_display; ///
-  bool function(AdwStyleManager* self) c_adw_style_manager_get_high_contrast; ///
-  bool function(AdwStyleManager* self) c_adw_style_manager_get_system_supports_color_schemes; ///
+  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_high_contrast; ///
+  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_system_supports_color_schemes; ///
   void function(AdwStyleManager* self, AdwColorScheme colorScheme) c_adw_style_manager_set_color_scheme; ///
 
   // SwipeTracker
   GType function() c_adw_swipe_tracker_get_type; ///
   AdwSwipeTracker* function(AdwSwipeable* swipeable) c_adw_swipe_tracker_new; ///
-  bool function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_long_swipes; ///
-  bool function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_mouse_drag; ///
-  bool function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_window_handle; ///
-  bool function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_enabled; ///
-  bool function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_lower_overshoot; ///
-  bool function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_reversed; ///
+  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_long_swipes; ///
+  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_mouse_drag; ///
+  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_window_handle; ///
+  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_enabled; ///
+  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_lower_overshoot; ///
+  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_reversed; ///
   AdwSwipeable* function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_swipeable; ///
-  bool function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_upper_overshoot; ///
-  void function(AdwSwipeTracker* self, bool allowLongSwipes) c_adw_swipe_tracker_set_allow_long_swipes; ///
-  void function(AdwSwipeTracker* self, bool allowMouseDrag) c_adw_swipe_tracker_set_allow_mouse_drag; ///
-  void function(AdwSwipeTracker* self, bool allowWindowHandle) c_adw_swipe_tracker_set_allow_window_handle; ///
-  void function(AdwSwipeTracker* self, bool enabled) c_adw_swipe_tracker_set_enabled; ///
-  void function(AdwSwipeTracker* self, bool overshoot) c_adw_swipe_tracker_set_lower_overshoot; ///
-  void function(AdwSwipeTracker* self, bool reversed) c_adw_swipe_tracker_set_reversed; ///
-  void function(AdwSwipeTracker* self, bool overshoot) c_adw_swipe_tracker_set_upper_overshoot; ///
+  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_upper_overshoot; ///
+  void function(AdwSwipeTracker* self, gboolean allowLongSwipes) c_adw_swipe_tracker_set_allow_long_swipes; ///
+  void function(AdwSwipeTracker* self, gboolean allowMouseDrag) c_adw_swipe_tracker_set_allow_mouse_drag; ///
+  void function(AdwSwipeTracker* self, gboolean allowWindowHandle) c_adw_swipe_tracker_set_allow_window_handle; ///
+  void function(AdwSwipeTracker* self, gboolean enabled) c_adw_swipe_tracker_set_enabled; ///
+  void function(AdwSwipeTracker* self, gboolean overshoot) c_adw_swipe_tracker_set_lower_overshoot; ///
+  void function(AdwSwipeTracker* self, gboolean reversed) c_adw_swipe_tracker_set_reversed; ///
+  void function(AdwSwipeTracker* self, gboolean overshoot) c_adw_swipe_tracker_set_upper_overshoot; ///
   void function(AdwSwipeTracker* self, double delta) c_adw_swipe_tracker_shift_position; ///
 
   // Swipeable
@@ -919,32 +919,32 @@ __gshared extern(C)
   double function(AdwSwipeable* self) c_adw_swipeable_get_distance; ///
   double function(AdwSwipeable* self) c_adw_swipeable_get_progress; ///
   double* function(AdwSwipeable* self, int* nSnapPoints) c_adw_swipeable_get_snap_points; ///
-  void function(AdwSwipeable* self, AdwNavigationDirection navigationDirection, bool isDrag, GdkRectangle* rect) c_adw_swipeable_get_swipe_area; ///
+  void function(AdwSwipeable* self, AdwNavigationDirection navigationDirection, gboolean isDrag, GdkRectangle* rect) c_adw_swipeable_get_swipe_area; ///
 
   // SwitchRow
   GType function() c_adw_switch_row_get_type; ///
   GtkWidget* function() c_adw_switch_row_new; ///
-  bool function(AdwSwitchRow* self) c_adw_switch_row_get_active; ///
-  void function(AdwSwitchRow* self, bool isActive) c_adw_switch_row_set_active; ///
+  gboolean function(AdwSwitchRow* self) c_adw_switch_row_get_active; ///
+  void function(AdwSwitchRow* self, gboolean isActive) c_adw_switch_row_set_active; ///
 
   // TabBar
   GType function() c_adw_tab_bar_get_type; ///
   AdwTabBar* function() c_adw_tab_bar_new; ///
-  bool function(AdwTabBar* self) c_adw_tab_bar_get_autohide; ///
+  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_autohide; ///
   GtkWidget* function(AdwTabBar* self) c_adw_tab_bar_get_end_action_widget; ///
-  bool function(AdwTabBar* self) c_adw_tab_bar_get_expand_tabs; ///
+  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_expand_tabs; ///
   GdkDragAction function(AdwTabBar* self) c_adw_tab_bar_get_extra_drag_preferred_action; ///
-  bool function(AdwTabBar* self) c_adw_tab_bar_get_extra_drag_preload; ///
-  bool function(AdwTabBar* self) c_adw_tab_bar_get_inverted; ///
-  bool function(AdwTabBar* self) c_adw_tab_bar_get_is_overflowing; ///
+  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_extra_drag_preload; ///
+  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_inverted; ///
+  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_is_overflowing; ///
   GtkWidget* function(AdwTabBar* self) c_adw_tab_bar_get_start_action_widget; ///
-  bool function(AdwTabBar* self) c_adw_tab_bar_get_tabs_revealed; ///
+  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_tabs_revealed; ///
   AdwTabView* function(AdwTabBar* self) c_adw_tab_bar_get_view; ///
-  void function(AdwTabBar* self, bool autohide) c_adw_tab_bar_set_autohide; ///
+  void function(AdwTabBar* self, gboolean autohide) c_adw_tab_bar_set_autohide; ///
   void function(AdwTabBar* self, GtkWidget* widget) c_adw_tab_bar_set_end_action_widget; ///
-  void function(AdwTabBar* self, bool expandTabs) c_adw_tab_bar_set_expand_tabs; ///
-  void function(AdwTabBar* self, bool preload) c_adw_tab_bar_set_extra_drag_preload; ///
-  void function(AdwTabBar* self, bool inverted) c_adw_tab_bar_set_inverted; ///
+  void function(AdwTabBar* self, gboolean expandTabs) c_adw_tab_bar_set_expand_tabs; ///
+  void function(AdwTabBar* self, gboolean preload) c_adw_tab_bar_set_extra_drag_preload; ///
+  void function(AdwTabBar* self, gboolean inverted) c_adw_tab_bar_set_inverted; ///
   void function(AdwTabBar* self, GtkWidget* widget) c_adw_tab_bar_set_start_action_widget; ///
   void function(AdwTabBar* self, AdwTabView* view) c_adw_tab_bar_set_view; ///
   void function(AdwTabBar* self, GdkDragAction actions, GType* types, size_t nTypes) c_adw_tab_bar_setup_extra_drop_target; ///
@@ -959,26 +959,26 @@ __gshared extern(C)
   GType function() c_adw_tab_overview_get_type; ///
   GtkWidget* function() c_adw_tab_overview_new; ///
   GtkWidget* function(AdwTabOverview* self) c_adw_tab_overview_get_child; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_enable_new_tab; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_enable_search; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_enable_new_tab; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_enable_search; ///
   GdkDragAction function(AdwTabOverview* self) c_adw_tab_overview_get_extra_drag_preferred_action; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_extra_drag_preload; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_inverted; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_open; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_search_active; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_extra_drag_preload; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_inverted; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_open; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_search_active; ///
   GMenuModel* function(AdwTabOverview* self) c_adw_tab_overview_get_secondary_menu; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_show_end_title_buttons; ///
-  bool function(AdwTabOverview* self) c_adw_tab_overview_get_show_start_title_buttons; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_show_end_title_buttons; ///
+  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_show_start_title_buttons; ///
   AdwTabView* function(AdwTabOverview* self) c_adw_tab_overview_get_view; ///
   void function(AdwTabOverview* self, GtkWidget* child) c_adw_tab_overview_set_child; ///
-  void function(AdwTabOverview* self, bool enableNewTab) c_adw_tab_overview_set_enable_new_tab; ///
-  void function(AdwTabOverview* self, bool enableSearch) c_adw_tab_overview_set_enable_search; ///
-  void function(AdwTabOverview* self, bool preload) c_adw_tab_overview_set_extra_drag_preload; ///
-  void function(AdwTabOverview* self, bool inverted) c_adw_tab_overview_set_inverted; ///
-  void function(AdwTabOverview* self, bool open) c_adw_tab_overview_set_open; ///
+  void function(AdwTabOverview* self, gboolean enableNewTab) c_adw_tab_overview_set_enable_new_tab; ///
+  void function(AdwTabOverview* self, gboolean enableSearch) c_adw_tab_overview_set_enable_search; ///
+  void function(AdwTabOverview* self, gboolean preload) c_adw_tab_overview_set_extra_drag_preload; ///
+  void function(AdwTabOverview* self, gboolean inverted) c_adw_tab_overview_set_inverted; ///
+  void function(AdwTabOverview* self, gboolean open) c_adw_tab_overview_set_open; ///
   void function(AdwTabOverview* self, GMenuModel* secondaryMenu) c_adw_tab_overview_set_secondary_menu; ///
-  void function(AdwTabOverview* self, bool showEndTitleButtons) c_adw_tab_overview_set_show_end_title_buttons; ///
-  void function(AdwTabOverview* self, bool showStartTitleButtons) c_adw_tab_overview_set_show_start_title_buttons; ///
+  void function(AdwTabOverview* self, gboolean showEndTitleButtons) c_adw_tab_overview_set_show_end_title_buttons; ///
+  void function(AdwTabOverview* self, gboolean showStartTitleButtons) c_adw_tab_overview_set_show_start_title_buttons; ///
   void function(AdwTabOverview* self, AdwTabView* view) c_adw_tab_overview_set_view; ///
   void function(AdwTabOverview* self, GdkDragAction actions, GType* types, size_t nTypes) c_adw_tab_overview_setup_extra_drop_target; ///
 
@@ -986,29 +986,29 @@ __gshared extern(C)
   GType function() c_adw_tab_page_get_type; ///
   GtkWidget* function(AdwTabPage* self) c_adw_tab_page_get_child; ///
   GIcon* function(AdwTabPage* self) c_adw_tab_page_get_icon; ///
-  bool function(AdwTabPage* self) c_adw_tab_page_get_indicator_activatable; ///
+  gboolean function(AdwTabPage* self) c_adw_tab_page_get_indicator_activatable; ///
   GIcon* function(AdwTabPage* self) c_adw_tab_page_get_indicator_icon; ///
   const(char)* function(AdwTabPage* self) c_adw_tab_page_get_indicator_tooltip; ///
   const(char)* function(AdwTabPage* self) c_adw_tab_page_get_keyword; ///
-  bool function(AdwTabPage* self) c_adw_tab_page_get_live_thumbnail; ///
-  bool function(AdwTabPage* self) c_adw_tab_page_get_loading; ///
-  bool function(AdwTabPage* self) c_adw_tab_page_get_needs_attention; ///
+  gboolean function(AdwTabPage* self) c_adw_tab_page_get_live_thumbnail; ///
+  gboolean function(AdwTabPage* self) c_adw_tab_page_get_loading; ///
+  gboolean function(AdwTabPage* self) c_adw_tab_page_get_needs_attention; ///
   AdwTabPage* function(AdwTabPage* self) c_adw_tab_page_get_parent; ///
-  bool function(AdwTabPage* self) c_adw_tab_page_get_pinned; ///
-  bool function(AdwTabPage* self) c_adw_tab_page_get_selected; ///
+  gboolean function(AdwTabPage* self) c_adw_tab_page_get_pinned; ///
+  gboolean function(AdwTabPage* self) c_adw_tab_page_get_selected; ///
   float function(AdwTabPage* self) c_adw_tab_page_get_thumbnail_xalign; ///
   float function(AdwTabPage* self) c_adw_tab_page_get_thumbnail_yalign; ///
   const(char)* function(AdwTabPage* self) c_adw_tab_page_get_title; ///
   const(char)* function(AdwTabPage* self) c_adw_tab_page_get_tooltip; ///
   void function(AdwTabPage* self) c_adw_tab_page_invalidate_thumbnail; ///
   void function(AdwTabPage* self, GIcon* icon) c_adw_tab_page_set_icon; ///
-  void function(AdwTabPage* self, bool activatable) c_adw_tab_page_set_indicator_activatable; ///
+  void function(AdwTabPage* self, gboolean activatable) c_adw_tab_page_set_indicator_activatable; ///
   void function(AdwTabPage* self, GIcon* indicatorIcon) c_adw_tab_page_set_indicator_icon; ///
   void function(AdwTabPage* self, const(char)* tooltip) c_adw_tab_page_set_indicator_tooltip; ///
   void function(AdwTabPage* self, const(char)* keyword) c_adw_tab_page_set_keyword; ///
-  void function(AdwTabPage* self, bool liveThumbnail) c_adw_tab_page_set_live_thumbnail; ///
-  void function(AdwTabPage* self, bool loading) c_adw_tab_page_set_loading; ///
-  void function(AdwTabPage* self, bool needsAttention) c_adw_tab_page_set_needs_attention; ///
+  void function(AdwTabPage* self, gboolean liveThumbnail) c_adw_tab_page_set_live_thumbnail; ///
+  void function(AdwTabPage* self, gboolean loading) c_adw_tab_page_set_loading; ///
+  void function(AdwTabPage* self, gboolean needsAttention) c_adw_tab_page_set_needs_attention; ///
   void function(AdwTabPage* self, float xalign) c_adw_tab_page_set_thumbnail_xalign; ///
   void function(AdwTabPage* self, float yalign) c_adw_tab_page_set_thumbnail_yalign; ///
   void function(AdwTabPage* self, const(char)* title) c_adw_tab_page_set_title; ///
@@ -1023,11 +1023,11 @@ __gshared extern(C)
   AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_append_pinned; ///
   void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_other_pages; ///
   void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_page; ///
-  void function(AdwTabView* self, AdwTabPage* page, bool confirm) c_adw_tab_view_close_page_finish; ///
+  void function(AdwTabView* self, AdwTabPage* page, gboolean confirm) c_adw_tab_view_close_page_finish; ///
   void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_pages_after; ///
   void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_pages_before; ///
   GIcon* function(AdwTabView* self) c_adw_tab_view_get_default_icon; ///
-  bool function(AdwTabView* self) c_adw_tab_view_get_is_transferring_page; ///
+  gboolean function(AdwTabView* self) c_adw_tab_view_get_is_transferring_page; ///
   GMenuModel* function(AdwTabView* self) c_adw_tab_view_get_menu_model; ///
   int function(AdwTabView* self) c_adw_tab_view_get_n_pages; ///
   int function(AdwTabView* self) c_adw_tab_view_get_n_pinned_pages; ///
@@ -1043,16 +1043,16 @@ __gshared extern(C)
   AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_prepend; ///
   AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_prepend_pinned; ///
   void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) c_adw_tab_view_remove_shortcuts; ///
-  bool function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_backward; ///
-  bool function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_first; ///
-  bool function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_forward; ///
-  bool function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_last; ///
-  bool function(AdwTabView* self, AdwTabPage* page, int position) c_adw_tab_view_reorder_page; ///
-  bool function(AdwTabView* self) c_adw_tab_view_select_next_page; ///
-  bool function(AdwTabView* self) c_adw_tab_view_select_previous_page; ///
+  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_backward; ///
+  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_first; ///
+  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_forward; ///
+  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_last; ///
+  gboolean function(AdwTabView* self, AdwTabPage* page, int position) c_adw_tab_view_reorder_page; ///
+  gboolean function(AdwTabView* self) c_adw_tab_view_select_next_page; ///
+  gboolean function(AdwTabView* self) c_adw_tab_view_select_previous_page; ///
   void function(AdwTabView* self, GIcon* defaultIcon) c_adw_tab_view_set_default_icon; ///
   void function(AdwTabView* self, GMenuModel* menuModel) c_adw_tab_view_set_menu_model; ///
-  void function(AdwTabView* self, AdwTabPage* page, bool pinned) c_adw_tab_view_set_page_pinned; ///
+  void function(AdwTabView* self, AdwTabPage* page, gboolean pinned) c_adw_tab_view_set_page_pinned; ///
   void function(AdwTabView* self, AdwTabPage* selectedPage) c_adw_tab_view_set_selected_page; ///
   void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) c_adw_tab_view_set_shortcuts; ///
   void function(AdwTabView* self, AdwTabPage* page, AdwTabView* otherView, int position) c_adw_tab_view_transfer_page; ///
@@ -1060,18 +1060,18 @@ __gshared extern(C)
   // TimedAnimation
   GType function() c_adw_timed_animation_get_type; ///
   AdwAnimation* function(GtkWidget* widget, double from, double to, uint duration, AdwAnimationTarget* target) c_adw_timed_animation_new; ///
-  bool function(AdwTimedAnimation* self) c_adw_timed_animation_get_alternate; ///
+  gboolean function(AdwTimedAnimation* self) c_adw_timed_animation_get_alternate; ///
   uint function(AdwTimedAnimation* self) c_adw_timed_animation_get_duration; ///
   AdwEasing function(AdwTimedAnimation* self) c_adw_timed_animation_get_easing; ///
   uint function(AdwTimedAnimation* self) c_adw_timed_animation_get_repeat_count; ///
-  bool function(AdwTimedAnimation* self) c_adw_timed_animation_get_reverse; ///
+  gboolean function(AdwTimedAnimation* self) c_adw_timed_animation_get_reverse; ///
   double function(AdwTimedAnimation* self) c_adw_timed_animation_get_value_from; ///
   double function(AdwTimedAnimation* self) c_adw_timed_animation_get_value_to; ///
-  void function(AdwTimedAnimation* self, bool alternate) c_adw_timed_animation_set_alternate; ///
+  void function(AdwTimedAnimation* self, gboolean alternate) c_adw_timed_animation_set_alternate; ///
   void function(AdwTimedAnimation* self, uint duration) c_adw_timed_animation_set_duration; ///
   void function(AdwTimedAnimation* self, AdwEasing easing) c_adw_timed_animation_set_easing; ///
   void function(AdwTimedAnimation* self, uint repeatCount) c_adw_timed_animation_set_repeat_count; ///
-  void function(AdwTimedAnimation* self, bool reverse) c_adw_timed_animation_set_reverse; ///
+  void function(AdwTimedAnimation* self, gboolean reverse) c_adw_timed_animation_set_reverse; ///
   void function(AdwTimedAnimation* self, double value) c_adw_timed_animation_set_value_from; ///
   void function(AdwTimedAnimation* self, double value) c_adw_timed_animation_set_value_to; ///
 
@@ -1087,7 +1087,7 @@ __gshared extern(C)
   AdwToastPriority function(AdwToast* self) c_adw_toast_get_priority; ///
   uint function(AdwToast* self) c_adw_toast_get_timeout; ///
   const(char)* function(AdwToast* self) c_adw_toast_get_title; ///
-  bool function(AdwToast* self) c_adw_toast_get_use_markup; ///
+  gboolean function(AdwToast* self) c_adw_toast_get_use_markup; ///
   void function(AdwToast* self, const(char)* actionName) c_adw_toast_set_action_name; ///
   void function(AdwToast* self, const(char)* formatString,  ...) c_adw_toast_set_action_target; ///
   void function(AdwToast* self, GVariant* actionTarget) c_adw_toast_set_action_target_value; ///
@@ -1097,7 +1097,7 @@ __gshared extern(C)
   void function(AdwToast* self, AdwToastPriority priority) c_adw_toast_set_priority; ///
   void function(AdwToast* self, uint timeout) c_adw_toast_set_timeout; ///
   void function(AdwToast* self, const(char)* title) c_adw_toast_set_title; ///
-  void function(AdwToast* self, bool useMarkup) c_adw_toast_set_use_markup; ///
+  void function(AdwToast* self, gboolean useMarkup) c_adw_toast_set_use_markup; ///
 
   // ToastOverlay
   GType function() c_adw_toast_overlay_get_type; ///
@@ -1114,19 +1114,19 @@ __gshared extern(C)
   int function(AdwToolbarView* self) c_adw_toolbar_view_get_bottom_bar_height; ///
   AdwToolbarStyle function(AdwToolbarView* self) c_adw_toolbar_view_get_bottom_bar_style; ///
   GtkWidget* function(AdwToolbarView* self) c_adw_toolbar_view_get_content; ///
-  bool function(AdwToolbarView* self) c_adw_toolbar_view_get_extend_content_to_bottom_edge; ///
-  bool function(AdwToolbarView* self) c_adw_toolbar_view_get_extend_content_to_top_edge; ///
-  bool function(AdwToolbarView* self) c_adw_toolbar_view_get_reveal_bottom_bars; ///
-  bool function(AdwToolbarView* self) c_adw_toolbar_view_get_reveal_top_bars; ///
+  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_extend_content_to_bottom_edge; ///
+  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_extend_content_to_top_edge; ///
+  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_reveal_bottom_bars; ///
+  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_reveal_top_bars; ///
   int function(AdwToolbarView* self) c_adw_toolbar_view_get_top_bar_height; ///
   AdwToolbarStyle function(AdwToolbarView* self) c_adw_toolbar_view_get_top_bar_style; ///
   void function(AdwToolbarView* self, GtkWidget* widget) c_adw_toolbar_view_remove; ///
   void function(AdwToolbarView* self, AdwToolbarStyle style) c_adw_toolbar_view_set_bottom_bar_style; ///
   void function(AdwToolbarView* self, GtkWidget* content) c_adw_toolbar_view_set_content; ///
-  void function(AdwToolbarView* self, bool extend) c_adw_toolbar_view_set_extend_content_to_bottom_edge; ///
-  void function(AdwToolbarView* self, bool extend) c_adw_toolbar_view_set_extend_content_to_top_edge; ///
-  void function(AdwToolbarView* self, bool reveal) c_adw_toolbar_view_set_reveal_bottom_bars; ///
-  void function(AdwToolbarView* self, bool reveal) c_adw_toolbar_view_set_reveal_top_bars; ///
+  void function(AdwToolbarView* self, gboolean extend) c_adw_toolbar_view_set_extend_content_to_bottom_edge; ///
+  void function(AdwToolbarView* self, gboolean extend) c_adw_toolbar_view_set_extend_content_to_top_edge; ///
+  void function(AdwToolbarView* self, gboolean reveal) c_adw_toolbar_view_set_reveal_bottom_bars; ///
+  void function(AdwToolbarView* self, gboolean reveal) c_adw_toolbar_view_set_reveal_top_bars; ///
   void function(AdwToolbarView* self, AdwToolbarStyle style) c_adw_toolbar_view_set_top_bar_style; ///
 
   // ViewStack
@@ -1137,15 +1137,15 @@ __gshared extern(C)
   AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title) c_adw_view_stack_add_titled; ///
   AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title, const(char)* iconName) c_adw_view_stack_add_titled_with_icon; ///
   GtkWidget* function(AdwViewStack* self, const(char)* name) c_adw_view_stack_get_child_by_name; ///
-  bool function(AdwViewStack* self) c_adw_view_stack_get_hhomogeneous; ///
+  gboolean function(AdwViewStack* self) c_adw_view_stack_get_hhomogeneous; ///
   AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_get_page; ///
   GtkSelectionModel* function(AdwViewStack* self) c_adw_view_stack_get_pages; ///
-  bool function(AdwViewStack* self) c_adw_view_stack_get_vhomogeneous; ///
+  gboolean function(AdwViewStack* self) c_adw_view_stack_get_vhomogeneous; ///
   GtkWidget* function(AdwViewStack* self) c_adw_view_stack_get_visible_child; ///
   const(char)* function(AdwViewStack* self) c_adw_view_stack_get_visible_child_name; ///
   void function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_remove; ///
-  void function(AdwViewStack* self, bool hhomogeneous) c_adw_view_stack_set_hhomogeneous; ///
-  void function(AdwViewStack* self, bool vhomogeneous) c_adw_view_stack_set_vhomogeneous; ///
+  void function(AdwViewStack* self, gboolean hhomogeneous) c_adw_view_stack_set_hhomogeneous; ///
+  void function(AdwViewStack* self, gboolean vhomogeneous) c_adw_view_stack_set_vhomogeneous; ///
   void function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_set_visible_child; ///
   void function(AdwViewStack* self, const(char)* name) c_adw_view_stack_set_visible_child_name; ///
 
@@ -1155,17 +1155,17 @@ __gshared extern(C)
   GtkWidget* function(AdwViewStackPage* self) c_adw_view_stack_page_get_child; ///
   const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_icon_name; ///
   const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_name; ///
-  bool function(AdwViewStackPage* self) c_adw_view_stack_page_get_needs_attention; ///
+  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_needs_attention; ///
   const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_title; ///
-  bool function(AdwViewStackPage* self) c_adw_view_stack_page_get_use_underline; ///
-  bool function(AdwViewStackPage* self) c_adw_view_stack_page_get_visible; ///
+  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_use_underline; ///
+  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_visible; ///
   void function(AdwViewStackPage* self, uint badgeNumber) c_adw_view_stack_page_set_badge_number; ///
   void function(AdwViewStackPage* self, const(char)* iconName) c_adw_view_stack_page_set_icon_name; ///
   void function(AdwViewStackPage* self, const(char)* name) c_adw_view_stack_page_set_name; ///
-  void function(AdwViewStackPage* self, bool needsAttention) c_adw_view_stack_page_set_needs_attention; ///
+  void function(AdwViewStackPage* self, gboolean needsAttention) c_adw_view_stack_page_set_needs_attention; ///
   void function(AdwViewStackPage* self, const(char)* title) c_adw_view_stack_page_set_title; ///
-  void function(AdwViewStackPage* self, bool useUnderline) c_adw_view_stack_page_set_use_underline; ///
-  void function(AdwViewStackPage* self, bool visible) c_adw_view_stack_page_set_visible; ///
+  void function(AdwViewStackPage* self, gboolean useUnderline) c_adw_view_stack_page_set_use_underline; ///
+  void function(AdwViewStackPage* self, gboolean visible) c_adw_view_stack_page_set_visible; ///
 
   // ViewStackPages
   GType function() c_adw_view_stack_pages_get_type; ///
@@ -1183,9 +1183,9 @@ __gshared extern(C)
   // ViewSwitcherBar
   GType function() c_adw_view_switcher_bar_get_type; ///
   GtkWidget* function() c_adw_view_switcher_bar_new; ///
-  bool function(AdwViewSwitcherBar* self) c_adw_view_switcher_bar_get_reveal; ///
+  gboolean function(AdwViewSwitcherBar* self) c_adw_view_switcher_bar_get_reveal; ///
   AdwViewStack* function(AdwViewSwitcherBar* self) c_adw_view_switcher_bar_get_stack; ///
-  void function(AdwViewSwitcherBar* self, bool reveal) c_adw_view_switcher_bar_set_reveal; ///
+  void function(AdwViewSwitcherBar* self, gboolean reveal) c_adw_view_switcher_bar_set_reveal; ///
   void function(AdwViewSwitcherBar* self, AdwViewStack* stack) c_adw_view_switcher_bar_set_stack; ///
 
   // ViewSwitcherTitle
@@ -1194,12 +1194,12 @@ __gshared extern(C)
   AdwViewStack* function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_stack; ///
   const(char)* function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_subtitle; ///
   const(char)* function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_title; ///
-  bool function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_title_visible; ///
-  bool function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_view_switcher_enabled; ///
+  gboolean function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_title_visible; ///
+  gboolean function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_view_switcher_enabled; ///
   void function(AdwViewSwitcherTitle* self, AdwViewStack* stack) c_adw_view_switcher_title_set_stack; ///
   void function(AdwViewSwitcherTitle* self, const(char)* subtitle) c_adw_view_switcher_title_set_subtitle; ///
   void function(AdwViewSwitcherTitle* self, const(char)* title) c_adw_view_switcher_title_set_title; ///
-  void function(AdwViewSwitcherTitle* self, bool enabled) c_adw_view_switcher_title_set_view_switcher_enabled; ///
+  void function(AdwViewSwitcherTitle* self, gboolean enabled) c_adw_view_switcher_title_set_view_switcher_enabled; ///
 
   // Window
   GType function() c_adw_window_get_type; ///
@@ -1220,12 +1220,12 @@ __gshared extern(C)
   void function(AdwWindowTitle* self, const(char)* title) c_adw_window_title_set_title; ///
 
   // global
-  bool function(GtkWidget* widget) c_adw_get_enable_animations; ///
+  gboolean function(GtkWidget* widget) c_adw_get_enable_animations; ///
   uint function() c_adw_get_major_version; ///
   uint function() c_adw_get_micro_version; ///
   uint function() c_adw_get_minor_version; ///
   void function() c_adw_init; ///
-  bool function() c_adw_is_initialized; ///
+  gboolean function() c_adw_is_initialized; ///
   double function(double a, double b, double t) c_adw_lerp; ///
   void function(GtkWidget* parent, const(char)* firstPropertyName,  ...) c_adw_show_about_dialog; ///
   void function(GtkWidget* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) c_adw_show_about_dialog_from_appdata; ///

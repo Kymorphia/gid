@@ -730,7 +730,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = gdk_pixbuf_init_modules(_path, &_err);
+    _retval = cast(bool)gdk_pixbuf_init_modules(_path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -811,7 +811,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_pixbuf_save_to_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)asyncResult)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gdk_pixbuf_save_to_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)asyncResult)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1015,7 +1015,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   bool copyOptions(gdkpixbuf.pixbuf.Pixbuf destPixbuf)
   {
     bool _retval;
-    _retval = gdk_pixbuf_copy_options(cast(GdkPixbuf*)this._cPtr, destPixbuf ? cast(GdkPixbuf*)destPixbuf._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_pixbuf_copy_options(cast(GdkPixbuf*)this._cPtr, destPixbuf ? cast(GdkPixbuf*)destPixbuf._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1092,7 +1092,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   bool getHasAlpha()
   {
     bool _retval;
-    _retval = gdk_pixbuf_get_has_alpha(cast(const(GdkPixbuf)*)this._cPtr);
+    _retval = cast(bool)gdk_pixbuf_get_has_alpha(cast(const(GdkPixbuf)*)this._cPtr);
     return _retval;
   }
 
@@ -1280,7 +1280,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gdk_pixbuf_remove_option(cast(GdkPixbuf*)this._cPtr, _key);
+    _retval = cast(bool)gdk_pixbuf_remove_option(cast(GdkPixbuf*)this._cPtr, _key);
     return _retval;
   }
 
@@ -1363,7 +1363,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     char** _optionValues = _tmpoptionValues.ptr;
 
     GError *_err;
-    _retval = gdk_pixbuf_save_to_bufferv(cast(GdkPixbuf*)this._cPtr, &_buffer, &_bufferSize, _type, _optionKeys, _optionValues, &_err);
+    _retval = cast(bool)gdk_pixbuf_save_to_bufferv(cast(GdkPixbuf*)this._cPtr, &_buffer, &_bufferSize, _type, _optionKeys, _optionValues, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     buffer.length = _bufferSize;
@@ -1393,7 +1393,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   */
   bool saveToCallbackv(gdkpixbuf.types.PixbufSaveFunc saveFunc, string type, string[] optionKeys = null, string[] optionValues = null)
   {
-    extern(C) bool _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data)
+    extern(C) gboolean _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data)
     {
       auto _dlg = cast(gdkpixbuf.types.PixbufSaveFunc*)data;
       ubyte[] _buf;
@@ -1401,7 +1401,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       _buf[0 .. count] = buf[0 .. count];
       auto _error = new glib.error.ErrorWrap(error, No.Take);
 
-      bool _retval = (*_dlg)(_buf, _error);
+      gboolean _retval = (*_dlg)(_buf, _error);
       *error = *cast(GError**)_error._cPtr;
 
       return _retval;
@@ -1424,7 +1424,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     char** _optionValues = _tmpoptionValues.ptr;
 
     GError *_err;
-    _retval = gdk_pixbuf_save_to_callbackv(cast(GdkPixbuf*)this._cPtr, _saveFuncCB, _saveFunc, _type, _optionKeys, _optionValues, &_err);
+    _retval = cast(bool)gdk_pixbuf_save_to_callbackv(cast(GdkPixbuf*)this._cPtr, _saveFuncCB, _saveFunc, _type, _optionKeys, _optionValues, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1465,7 +1465,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     char** _optionValues = _tmpoptionValues.ptr;
 
     GError *_err;
-    _retval = gdk_pixbuf_save_to_streamv(cast(GdkPixbuf*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _type, _optionKeys, _optionValues, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gdk_pixbuf_save_to_streamv(cast(GdkPixbuf*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _type, _optionKeys, _optionValues, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1553,7 +1553,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     char** _optionValues = _tmpoptionValues.ptr;
 
     GError *_err;
-    _retval = gdk_pixbuf_savev(cast(GdkPixbuf*)this._cPtr, _filename, _type, _optionKeys, _optionValues, &_err);
+    _retval = cast(bool)gdk_pixbuf_savev(cast(GdkPixbuf*)this._cPtr, _filename, _type, _optionKeys, _optionValues, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1641,7 +1641,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    _retval = gdk_pixbuf_set_option(cast(GdkPixbuf*)this._cPtr, _key, _value);
+    _retval = cast(bool)gdk_pixbuf_set_option(cast(GdkPixbuf*)this._cPtr, _key, _value);
     return _retval;
   }
 }

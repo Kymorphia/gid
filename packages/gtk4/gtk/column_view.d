@@ -361,7 +361,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableRubberband()
   {
     bool _retval;
-    _retval = gtk_column_view_get_enable_rubberband(cast(GtkColumnView*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_get_enable_rubberband(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getReorderable()
   {
     bool _retval;
-    _retval = gtk_column_view_get_reorderable(cast(GtkColumnView*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_get_reorderable(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -420,7 +420,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getShowColumnSeparators()
   {
     bool _retval;
-    _retval = gtk_column_view_get_show_column_separators(cast(GtkColumnView*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_get_show_column_separators(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -432,7 +432,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getShowRowSeparators()
   {
     bool _retval;
-    _retval = gtk_column_view_get_show_row_separators(cast(GtkColumnView*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_get_show_row_separators(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getSingleClickActivate()
   {
     bool _retval;
-    _retval = gtk_column_view_get_single_click_activate(cast(GtkColumnView*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_get_single_click_activate(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 

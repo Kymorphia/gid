@@ -188,7 +188,7 @@ bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.v
   bool _retval;
   GValue _value;
   GError *_err;
-  _retval = gdk_content_deserialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_value, &_err);
+  _retval = cast(bool)gdk_content_deserialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_value, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -241,7 +241,7 @@ bool contentSerializeFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
   GError *_err;
-  _retval = gdk_content_serialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+  _retval = cast(bool)gdk_content_serialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -274,7 +274,7 @@ gobject.types.GType dragSurfaceSizeGetType()
 bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double angle)
 {
   bool _retval;
-  _retval = gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&angle);
+  _retval = cast(bool)gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&angle);
   return _retval;
 }
 
@@ -294,7 +294,7 @@ bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double a
 bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double x, out double y)
 {
   bool _retval;
-  _retval = gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
+  _retval = cast(bool)gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
   return _retval;
 }
 
@@ -313,7 +313,7 @@ bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double 
 bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out double distance)
 {
   bool _retval;
-  _retval = gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&distance);
+  _retval = cast(bool)gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&distance);
   return _retval;
 }
 
@@ -383,7 +383,7 @@ uint keyvalFromName(string keyvalName)
 bool keyvalIsLower(uint keyval)
 {
   bool _retval;
-  _retval = gdk_keyval_is_lower(keyval);
+  _retval = cast(bool)gdk_keyval_is_lower(keyval);
   return _retval;
 }
 
@@ -398,7 +398,7 @@ bool keyvalIsLower(uint keyval)
 bool keyvalIsUpper(uint keyval)
 {
   bool _retval;
-  _retval = gdk_keyval_is_upper(keyval);
+  _retval = cast(bool)gdk_keyval_is_upper(keyval);
   return _retval;
 }
 

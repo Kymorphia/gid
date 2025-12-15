@@ -106,7 +106,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
   bool isOccupied()
   {
     bool _retval;
-    _retval = atk_socket_is_occupied(cast(AtkSocket*)this._cPtr);
+    _retval = cast(bool)atk_socket_is_occupied(cast(AtkSocket*)this._cPtr);
     return _retval;
   }
 }

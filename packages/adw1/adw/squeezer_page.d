@@ -105,7 +105,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   bool getEnabled()
   {
     bool _retval;
-    _retval = adw_squeezer_page_get_enabled(cast(AdwSqueezerPage*)this._cPtr);
+    _retval = cast(bool)adw_squeezer_page_get_enabled(cast(AdwSqueezerPage*)this._cPtr);
     return _retval;
   }
 

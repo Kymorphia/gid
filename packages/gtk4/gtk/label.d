@@ -995,7 +995,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_label_get_selectable(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_selectable(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -1010,7 +1010,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   bool getSelectionBounds(out int start, out int end)
   {
     bool _retval;
-    _retval = gtk_label_get_selection_bounds(cast(GtkLabel*)this._cPtr, cast(int*)&start, cast(int*)&end);
+    _retval = cast(bool)gtk_label_get_selection_bounds(cast(GtkLabel*)this._cPtr, cast(int*)&start, cast(int*)&end);
     return _retval;
   }
 
@@ -1021,7 +1021,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   bool getSingleLineMode()
   {
     bool _retval;
-    _retval = gtk_label_get_single_line_mode(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_single_line_mode(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -1068,7 +1068,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = gtk_label_get_use_markup(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_use_markup(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -1082,7 +1082,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_label_get_use_underline(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_use_underline(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -1108,7 +1108,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   bool getWrap()
   {
     bool _retval;
-    _retval = gtk_label_get_wrap(cast(GtkLabel*)this._cPtr);
+    _retval = cast(bool)gtk_label_get_wrap(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 

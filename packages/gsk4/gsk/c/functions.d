@@ -111,11 +111,11 @@ __gshared extern(C)
   GType function() c_gsk_gl_shader_get_type; ///
   GskGLShader* function(GBytes* sourcecode) c_gsk_gl_shader_new_from_bytes; ///
   GskGLShader* function(const(char)* resourcePath) c_gsk_gl_shader_new_from_resource; ///
-  bool function(GskGLShader* shader, GskRenderer* renderer, GError** _err) c_gsk_gl_shader_compile; ///
+  gboolean function(GskGLShader* shader, GskRenderer* renderer, GError** _err) c_gsk_gl_shader_compile; ///
   int function(GskGLShader* shader, const(char)* name) c_gsk_gl_shader_find_uniform_by_name; ///
   GBytes* function(GskGLShader* shader,  ...) c_gsk_gl_shader_format_args; ///
   GBytes* function(GskGLShader* shader, void* uniforms) c_gsk_gl_shader_format_args_va; ///
-  bool function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_bool; ///
+  gboolean function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_bool; ///
   float function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_float; ///
   int function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_int; ///
   uint function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_uint; ///
@@ -186,15 +186,15 @@ __gshared extern(C)
 
   // Path
   GType function() c_gsk_path_get_type; ///
-  bool function(GskPath* self, GskPathForeachFlags flags, GskPathForeachFunc func, void* userData) c_gsk_path_foreach; ///
-  bool function(GskPath* self, graphene_rect_t* bounds) c_gsk_path_get_bounds; ///
-  bool function(GskPath* self, const(graphene_point_t)* point, float threshold, GskPathPoint* result, float* distance) c_gsk_path_get_closest_point; ///
-  bool function(GskPath* self, GskPathPoint* result) c_gsk_path_get_end_point; ///
-  bool function(GskPath* self, GskPathPoint* result) c_gsk_path_get_start_point; ///
-  bool function(GskPath* self, const(GskStroke)* stroke, graphene_rect_t* bounds) c_gsk_path_get_stroke_bounds; ///
-  bool function(GskPath* self, const(graphene_point_t)* point, GskFillRule fillRule) c_gsk_path_in_fill; ///
-  bool function(GskPath* self) c_gsk_path_is_closed; ///
-  bool function(GskPath* self) c_gsk_path_is_empty; ///
+  gboolean function(GskPath* self, GskPathForeachFlags flags, GskPathForeachFunc func, void* userData) c_gsk_path_foreach; ///
+  gboolean function(GskPath* self, graphene_rect_t* bounds) c_gsk_path_get_bounds; ///
+  gboolean function(GskPath* self, const(graphene_point_t)* point, float threshold, GskPathPoint* result, float* distance) c_gsk_path_get_closest_point; ///
+  gboolean function(GskPath* self, GskPathPoint* result) c_gsk_path_get_end_point; ///
+  gboolean function(GskPath* self, GskPathPoint* result) c_gsk_path_get_start_point; ///
+  gboolean function(GskPath* self, const(GskStroke)* stroke, graphene_rect_t* bounds) c_gsk_path_get_stroke_bounds; ///
+  gboolean function(GskPath* self, const(graphene_point_t)* point, GskFillRule fillRule) c_gsk_path_in_fill; ///
+  gboolean function(GskPath* self) c_gsk_path_is_closed; ///
+  gboolean function(GskPath* self) c_gsk_path_is_empty; ///
   void function(GskPath* self, GString* string_) c_gsk_path_print; ///
   GskPath* function(GskPath* self) c_gsk_path_ref; ///
   void function(GskPath* self, cairo_t* cr) c_gsk_path_to_cairo; ///
@@ -231,8 +231,8 @@ __gshared extern(C)
   void function(GskPathBuilder* self, float x, float y) c_gsk_path_builder_rel_line_to; ///
   void function(GskPathBuilder* self, float x, float y) c_gsk_path_builder_rel_move_to; ///
   void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) c_gsk_path_builder_rel_quad_to; ///
-  void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y) c_gsk_path_builder_rel_svg_arc_to; ///
-  void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y) c_gsk_path_builder_svg_arc_to; ///
+  void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, gboolean largeArc, gboolean positiveSweep, float x, float y) c_gsk_path_builder_rel_svg_arc_to; ///
+  void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, gboolean largeArc, gboolean positiveSweep, float x, float y) c_gsk_path_builder_svg_arc_to; ///
   GskPath* function(GskPathBuilder* self) c_gsk_path_builder_to_path; ///
   void function(GskPathBuilder* self) c_gsk_path_builder_unref; ///
 
@@ -242,7 +242,7 @@ __gshared extern(C)
   GskPathMeasure* function(GskPath* path, float tolerance) c_gsk_path_measure_new_with_tolerance; ///
   float function(GskPathMeasure* self) c_gsk_path_measure_get_length; ///
   GskPath* function(GskPathMeasure* self) c_gsk_path_measure_get_path; ///
-  bool function(GskPathMeasure* self, float distance, GskPathPoint* result) c_gsk_path_measure_get_point; ///
+  gboolean function(GskPathMeasure* self, float distance, GskPathPoint* result) c_gsk_path_measure_get_point; ///
   float function(GskPathMeasure* self) c_gsk_path_measure_get_tolerance; ///
   GskPathMeasure* function(GskPathMeasure* self) c_gsk_path_measure_ref; ///
   void function(GskPathMeasure* self) c_gsk_path_measure_unref; ///
@@ -251,7 +251,7 @@ __gshared extern(C)
   GType function() c_gsk_path_point_get_type; ///
   int function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) c_gsk_path_point_compare; ///
   GskPathPoint* function(GskPathPoint* point) c_gsk_path_point_copy; ///
-  bool function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) c_gsk_path_point_equal; ///
+  gboolean function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) c_gsk_path_point_equal; ///
   void function(GskPathPoint* point) c_gsk_path_point_free; ///
   float function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction, graphene_point_t* center) c_gsk_path_point_get_curvature; ///
   float function(const(GskPathPoint)* point, GskPathMeasure* measure) c_gsk_path_point_get_distance; ///
@@ -279,15 +279,15 @@ __gshared extern(C)
   GskRenderNode* function(GskRenderNode* node) c_gsk_render_node_ref; ///
   GBytes* function(GskRenderNode* node) c_gsk_render_node_serialize; ///
   void function(GskRenderNode* node) c_gsk_render_node_unref; ///
-  bool function(GskRenderNode* node, const(char)* filename, GError** _err) c_gsk_render_node_write_to_file; ///
+  gboolean function(GskRenderNode* node, const(char)* filename, GError** _err) c_gsk_render_node_write_to_file; ///
 
   // Renderer
   GType function() c_gsk_renderer_get_type; ///
   GskRenderer* function(GdkSurface* surface) c_gsk_renderer_new_for_surface; ///
   GdkSurface* function(GskRenderer* renderer) c_gsk_renderer_get_surface; ///
-  bool function(GskRenderer* renderer) c_gsk_renderer_is_realized; ///
-  bool function(GskRenderer* renderer, GdkSurface* surface, GError** _err) c_gsk_renderer_realize; ///
-  bool function(GskRenderer* renderer, GdkDisplay* display, GError** _err) c_gsk_renderer_realize_for_display; ///
+  gboolean function(GskRenderer* renderer) c_gsk_renderer_is_realized; ///
+  gboolean function(GskRenderer* renderer, GdkSurface* surface, GError** _err) c_gsk_renderer_realize; ///
+  gboolean function(GskRenderer* renderer, GdkDisplay* display, GError** _err) c_gsk_renderer_realize_for_display; ///
   void function(GskRenderer* renderer, GskRenderNode* root, const(cairo_region_t)* region) c_gsk_renderer_render; ///
   GdkTexture* function(GskRenderer* renderer, GskRenderNode* root, const(graphene_rect_t)* viewport) c_gsk_renderer_render_texture; ///
   void function(GskRenderer* renderer) c_gsk_renderer_unrealize; ///
@@ -313,13 +313,13 @@ __gshared extern(C)
   const(GskRoundedRect)* function(const(GskRenderNode)* node) c_gsk_rounded_clip_node_get_clip; ///
 
   // RoundedRect
-  bool function(const(GskRoundedRect)* self, const(graphene_point_t)* point) c_gsk_rounded_rect_contains_point; ///
-  bool function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) c_gsk_rounded_rect_contains_rect; ///
+  gboolean function(const(GskRoundedRect)* self, const(graphene_point_t)* point) c_gsk_rounded_rect_contains_point; ///
+  gboolean function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) c_gsk_rounded_rect_contains_rect; ///
   GskRoundedRect* function(GskRoundedRect* self, const(graphene_rect_t)* bounds, const(graphene_size_t)* topLeft, const(graphene_size_t)* topRight, const(graphene_size_t)* bottomRight, const(graphene_size_t)* bottomLeft) c_gsk_rounded_rect_init; ///
   GskRoundedRect* function(GskRoundedRect* self, const(GskRoundedRect)* src) c_gsk_rounded_rect_init_copy; ///
   GskRoundedRect* function(GskRoundedRect* self, const(graphene_rect_t)* bounds, float radius) c_gsk_rounded_rect_init_from_rect; ///
-  bool function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) c_gsk_rounded_rect_intersects_rect; ///
-  bool function(const(GskRoundedRect)* self) c_gsk_rounded_rect_is_rectilinear; ///
+  gboolean function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) c_gsk_rounded_rect_intersects_rect; ///
+  gboolean function(const(GskRoundedRect)* self) c_gsk_rounded_rect_is_rectilinear; ///
   GskRoundedRect* function(GskRoundedRect* self) c_gsk_rounded_rect_normalize; ///
   GskRoundedRect* function(GskRoundedRect* self, float dx, float dy) c_gsk_rounded_rect_offset; ///
   GskRoundedRect* function(GskRoundedRect* self, float top, float right, float bottom, float left) c_gsk_rounded_rect_shrink; ///
@@ -329,7 +329,7 @@ __gshared extern(C)
   GskShaderArgsBuilder* function(GskGLShader* shader, GBytes* initialValues) c_gsk_shader_args_builder_new; ///
   GBytes* function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_free_to_args; ///
   GskShaderArgsBuilder* function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_ref; ///
-  void function(GskShaderArgsBuilder* builder, int idx, bool value) c_gsk_shader_args_builder_set_bool; ///
+  void function(GskShaderArgsBuilder* builder, int idx, gboolean value) c_gsk_shader_args_builder_set_bool; ///
   void function(GskShaderArgsBuilder* builder, int idx, float value) c_gsk_shader_args_builder_set_float; ///
   void function(GskShaderArgsBuilder* builder, int idx, int value) c_gsk_shader_args_builder_set_int; ///
   void function(GskShaderArgsBuilder* builder, int idx, uint value) c_gsk_shader_args_builder_set_uint; ///
@@ -364,7 +364,7 @@ __gshared extern(C)
   void function(GskStroke* self, float lineWidth) c_gsk_stroke_set_line_width; ///
   void function(GskStroke* self, float limit) c_gsk_stroke_set_miter_limit; ///
   void function(const(GskStroke)* self, cairo_t* cr) c_gsk_stroke_to_cairo; ///
-  bool function(const(void)* stroke1, const(void)* stroke2) c_gsk_stroke_equal; ///
+  gboolean function(const(void)* stroke1, const(void)* stroke2) c_gsk_stroke_equal; ///
 
   // StrokeNode
   GType function() c_gsk_stroke_node_get_type; ///
@@ -387,7 +387,7 @@ __gshared extern(C)
   const(PangoGlyphInfo)* function(const(GskRenderNode)* node, uint* nGlyphs) c_gsk_text_node_get_glyphs; ///
   uint function(const(GskRenderNode)* node) c_gsk_text_node_get_num_glyphs; ///
   const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_text_node_get_offset; ///
-  bool function(const(GskRenderNode)* node) c_gsk_text_node_has_color_glyphs; ///
+  gboolean function(const(GskRenderNode)* node) c_gsk_text_node_has_color_glyphs; ///
 
   // TextureNode
   GType function() c_gsk_texture_node_get_type; ///
@@ -403,7 +403,7 @@ __gshared extern(C)
   // Transform
   GType function() c_gsk_transform_get_type; ///
   GskTransform* function() c_gsk_transform_new; ///
-  bool function(GskTransform* first, GskTransform* second) c_gsk_transform_equal; ///
+  gboolean function(GskTransform* first, GskTransform* second) c_gsk_transform_equal; ///
   GskTransformCategory function(GskTransform* self) c_gsk_transform_get_category; ///
   GskTransform* function(GskTransform* self) c_gsk_transform_invert; ///
   GskTransform* function(GskTransform* next, const(graphene_matrix_t)* matrix) c_gsk_transform_matrix; ///
@@ -427,7 +427,7 @@ __gshared extern(C)
   GskTransform* function(GskTransform* next, const(graphene_point_t)* point) c_gsk_transform_translate; ///
   GskTransform* function(GskTransform* next, const(graphene_point3d_t)* point) c_gsk_transform_translate_3d; ///
   void function(GskTransform* self) c_gsk_transform_unref; ///
-  bool function(const(char)* string_, GskTransform** outTransform) c_gsk_transform_parse; ///
+  gboolean function(const(char)* string_, GskTransform** outTransform) c_gsk_transform_parse; ///
 
   // TransformNode
   GType function() c_gsk_transform_node_get_type; ///

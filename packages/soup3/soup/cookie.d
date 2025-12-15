@@ -125,7 +125,7 @@ class Cookie : gobject.boxed.Boxed
   bool appliesToUri(glib.uri.Uri uri)
   {
     bool _retval;
-    _retval = soup_cookie_applies_to_uri(cast(SoupCookie*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
+    _retval = cast(bool)soup_cookie_applies_to_uri(cast(SoupCookie*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Cookie : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _host = host.toCString(No.Alloc);
-    _retval = soup_cookie_domain_matches(cast(SoupCookie*)this._cPtr, _host);
+    _retval = cast(bool)soup_cookie_domain_matches(cast(SoupCookie*)this._cPtr, _host);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Cookie : gobject.boxed.Boxed
   bool equal(soup.cookie.Cookie cookie2)
   {
     bool _retval;
-    _retval = soup_cookie_equal(cast(SoupCookie*)this._cPtr, cookie2 ? cast(SoupCookie*)cookie2._cPtr(No.Dup) : null);
+    _retval = cast(bool)soup_cookie_equal(cast(SoupCookie*)this._cPtr, cookie2 ? cast(SoupCookie*)cookie2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Cookie : gobject.boxed.Boxed
   bool getHttpOnly()
   {
     bool _retval;
-    _retval = soup_cookie_get_http_only(cast(SoupCookie*)this._cPtr);
+    _retval = cast(bool)soup_cookie_get_http_only(cast(SoupCookie*)this._cPtr);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class Cookie : gobject.boxed.Boxed
   bool getSecure()
   {
     bool _retval;
-    _retval = soup_cookie_get_secure(cast(SoupCookie*)this._cPtr);
+    _retval = cast(bool)soup_cookie_get_secure(cast(SoupCookie*)this._cPtr);
     return _retval;
   }
 

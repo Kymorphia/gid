@@ -146,7 +146,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   /** */
   @property bool renderbufferWrapped()
   {
-    return (cast(GstGLRenderbuffer*)this._cPtr).renderbufferWrapped;
+    return cast(bool)(cast(GstGLRenderbuffer*)this._cPtr).renderbufferWrapped;
   }
 
   /** */

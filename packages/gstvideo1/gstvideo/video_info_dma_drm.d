@@ -157,7 +157,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfo _info;
-    _retval = gst_video_info_dma_drm_to_video_info(cast(const(GstVideoInfoDmaDrm)*)this._cPtr, &_info);
+    _retval = cast(bool)gst_video_info_dma_drm_to_video_info(cast(const(GstVideoInfoDmaDrm)*)this._cPtr, &_info);
     info = new gstvideo.video_info.VideoInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
@@ -176,7 +176,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfoDmaDrm _drmInfo;
-    _retval = gst_video_info_dma_drm_from_caps(&_drmInfo, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_info_dma_drm_from_caps(&_drmInfo, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     drmInfo = new gstvideo.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)&_drmInfo, No.Take);
     return _retval;
   }
@@ -195,7 +195,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfoDmaDrm _drmInfo;
-    _retval = gst_video_info_dma_drm_from_video_info(&_drmInfo, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, modifier);
+    _retval = cast(bool)gst_video_info_dma_drm_from_video_info(&_drmInfo, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, modifier);
     drmInfo = new gstvideo.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)&_drmInfo, No.Take);
     return _retval;
   }

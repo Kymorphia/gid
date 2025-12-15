@@ -101,7 +101,7 @@ template ImageT()
   {
     bool _retval;
     const(char)* _description = description.toCString(No.Alloc);
-    _retval = atk_image_set_image_description(cast(AtkImage*)this._cPtr, _description);
+    _retval = cast(bool)atk_image_set_image_description(cast(AtkImage*)this._cPtr, _description);
     return _retval;
   }
 }

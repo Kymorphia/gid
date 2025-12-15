@@ -162,7 +162,7 @@ template ChildProxyT()
     const(char)* _name = name.toCString(No.Alloc);
     GObject* _target;
     GParamSpec* _pspec;
-    _retval = gst_child_proxy_lookup(cast(GstChildProxy*)this._cPtr, _name, &_target, &_pspec);
+    _retval = cast(bool)gst_child_proxy_lookup(cast(GstChildProxy*)this._cPtr, _name, &_target, &_pspec);
     target = new gobject.object.ObjectWrap(cast(void*)_target, Yes.Take);
     pspec = new gobject.param_spec.ParamSpec(cast(void*)_pspec, No.Take);
     return _retval;

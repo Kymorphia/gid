@@ -327,7 +327,7 @@ class LayoutLine : gobject.boxed.Boxed
   bool xToIndex(int xPos, out int index, out int trailing)
   {
     bool _retval;
-    _retval = pango_layout_line_x_to_index(cast(PangoLayoutLine*)this._cPtr, xPos, cast(int*)&index, cast(int*)&trailing);
+    _retval = cast(bool)pango_layout_line_x_to_index(cast(PangoLayoutLine*)this._cPtr, xPos, cast(int*)&index, cast(int*)&trailing);
     return _retval;
   }
 }

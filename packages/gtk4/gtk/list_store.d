@@ -359,7 +359,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool iterIsValid(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_list_store_iter_is_valid(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_list_store_iter_is_valid(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool remove(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_list_store_remove(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_list_store_remove(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

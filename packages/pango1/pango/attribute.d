@@ -285,7 +285,7 @@ class Attribute : gobject.boxed.Boxed
   bool equal(pango.attribute.Attribute attr2)
   {
     bool _retval;
-    _retval = pango_attribute_equal(cast(const(PangoAttribute)*)this._cPtr, attr2 ? cast(const(PangoAttribute)*)attr2._cPtr(No.Dup) : null);
+    _retval = cast(bool)pango_attribute_equal(cast(const(PangoAttribute)*)this._cPtr, attr2 ? cast(const(PangoAttribute)*)attr2._cPtr(No.Dup) : null);
     return _retval;
   }
 }

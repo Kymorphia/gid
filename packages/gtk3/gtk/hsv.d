@@ -118,7 +118,7 @@ class HSV : gtk.widget.Widget
   bool isAdjusting()
   {
     bool _retval;
-    _retval = gtk_hsv_is_adjusting(cast(GtkHSV*)this._cPtr);
+    _retval = cast(bool)gtk_hsv_is_adjusting(cast(GtkHSV*)this._cPtr);
     return _retval;
   }
 

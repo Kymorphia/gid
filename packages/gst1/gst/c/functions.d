@@ -45,7 +45,7 @@ __gshared extern(C)
   // Bin
   GType function() c_gst_bin_get_type; ///
   GstElement* function(const(char)* name) c_gst_bin_new; ///
-  bool function(GstBin* bin, GstElement* element) c_gst_bin_add; ///
+  gboolean function(GstBin* bin, GstElement* element) c_gst_bin_add; ///
   void function(GstBin* bin, GstElement* element1,  ...) c_gst_bin_add_many; ///
   GstPad* function(GstBin* bin, GstPadDirection direction) c_gst_bin_find_unlinked_pad; ///
   GstElement* function(GstBin* bin, GType iface) c_gst_bin_get_by_interface; ///
@@ -59,11 +59,11 @@ __gshared extern(C)
   GstIterator* function(GstBin* bin) c_gst_bin_iterate_sinks; ///
   GstIterator* function(GstBin* bin) c_gst_bin_iterate_sorted; ///
   GstIterator* function(GstBin* bin) c_gst_bin_iterate_sources; ///
-  bool function(GstBin* bin) c_gst_bin_recalculate_latency; ///
-  bool function(GstBin* bin, GstElement* element) c_gst_bin_remove; ///
+  gboolean function(GstBin* bin) c_gst_bin_recalculate_latency; ///
+  gboolean function(GstBin* bin, GstElement* element) c_gst_bin_remove; ///
   void function(GstBin* bin, GstElement* element1,  ...) c_gst_bin_remove_many; ///
   void function(GstBin* bin, GstElementFlags flags) c_gst_bin_set_suppressed_flags; ///
-  bool function(GstBin* bin) c_gst_bin_sync_children_states; ///
+  gboolean function(GstBin* bin) c_gst_bin_sync_children_states; ///
 
   // Bitmask
   GType function() c_gst_bitmask_get_type; ///
@@ -85,13 +85,13 @@ __gshared extern(C)
   void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_append_memory; ///
   GstBuffer* function(GstBuffer* buf1, GstBuffer* buf2, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_append_region; ///
   GstBuffer* function(const(GstBuffer)* buf) c_gst_buffer_copy_deep; ///
-  bool function(GstBuffer* dest, GstBuffer* src, GstBufferCopyFlags flags, size_t offset, size_t size) c_gst_buffer_copy_into; ///
+  gboolean function(GstBuffer* dest, GstBuffer* src, GstBufferCopyFlags flags, size_t offset, size_t size) c_gst_buffer_copy_into; ///
   GstBuffer* function(GstBuffer* parent, GstBufferCopyFlags flags, size_t offset, size_t size) c_gst_buffer_copy_region; ///
   size_t function(GstBuffer* buffer, size_t offset, void* dest, size_t size) c_gst_buffer_extract; ///
   void function(GstBuffer* buffer, size_t offset, size_t size, void** dest, size_t* destSize) c_gst_buffer_extract_dup; ///
   size_t function(GstBuffer* buffer, size_t offset, const(void)* src, size_t size) c_gst_buffer_fill; ///
-  bool function(GstBuffer* buffer, size_t offset, size_t size, uint* idx, uint* length, size_t* skip) c_gst_buffer_find_memory; ///
-  bool function(GstBuffer* buffer, GstBufferForeachMetaFunc func, void* userData) c_gst_buffer_foreach_meta; ///
+  gboolean function(GstBuffer* buffer, size_t offset, size_t size, uint* idx, uint* length, size_t* skip) c_gst_buffer_find_memory; ///
+  gboolean function(GstBuffer* buffer, GstBufferForeachMetaFunc func, void* userData) c_gst_buffer_foreach_meta; ///
   GstMemory* function(GstBuffer* buffer) c_gst_buffer_get_all_memory; ///
   GstCustomMeta* function(GstBuffer* buffer, const(char)* name) c_gst_buffer_get_custom_meta; ///
   GstBufferFlags function(GstBuffer* buffer) c_gst_buffer_get_flags; ///
@@ -103,14 +103,14 @@ __gshared extern(C)
   size_t function(GstBuffer* buffer) c_gst_buffer_get_size; ///
   size_t function(GstBuffer* buffer, size_t* offset, size_t* maxsize) c_gst_buffer_get_sizes; ///
   size_t function(GstBuffer* buffer, uint idx, int length, size_t* offset, size_t* maxsize) c_gst_buffer_get_sizes_range; ///
-  bool function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_has_flags; ///
+  gboolean function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_has_flags; ///
   void function(GstBuffer* buffer, int idx, GstMemory* mem) c_gst_buffer_insert_memory; ///
-  bool function(GstBuffer* buffer) c_gst_buffer_is_all_memory_writable; ///
-  bool function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_is_memory_range_writable; ///
+  gboolean function(GstBuffer* buffer) c_gst_buffer_is_all_memory_writable; ///
+  gboolean function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_is_memory_range_writable; ///
   GstMeta* function(GstBuffer* buffer, void** state) c_gst_buffer_iterate_meta; ///
   GstMeta* function(GstBuffer* buffer, void** state, GType metaApiType) c_gst_buffer_iterate_meta_filtered; ///
-  bool function(GstBuffer* buffer, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map; ///
-  bool function(GstBuffer* buffer, uint idx, int length, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map_range; ///
+  gboolean function(GstBuffer* buffer, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map; ///
+  gboolean function(GstBuffer* buffer, uint idx, int length, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map_range; ///
   int function(GstBuffer* buffer, size_t offset, const(void)* mem, size_t size) c_gst_buffer_memcmp; ///
   size_t function(GstBuffer* buffer, size_t offset, ubyte val, size_t size) c_gst_buffer_memset; ///
   uint function(GstBuffer* buffer) c_gst_buffer_n_memory; ///
@@ -119,16 +119,16 @@ __gshared extern(C)
   void function(GstBuffer* buffer) c_gst_buffer_remove_all_memory; ///
   void function(GstBuffer* buffer, uint idx) c_gst_buffer_remove_memory; ///
   void function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_remove_memory_range; ///
-  bool function(GstBuffer* buffer, GstMeta* meta) c_gst_buffer_remove_meta; ///
+  gboolean function(GstBuffer* buffer, GstMeta* meta) c_gst_buffer_remove_meta; ///
   void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_replace_all_memory; ///
   void function(GstBuffer* buffer, uint idx, GstMemory* mem) c_gst_buffer_replace_memory; ///
   void function(GstBuffer* buffer, uint idx, int length, GstMemory* mem) c_gst_buffer_replace_memory_range; ///
   void function(GstBuffer* buffer, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_resize; ///
-  bool function(GstBuffer* buffer, uint idx, int length, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_resize_range; ///
-  bool function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_set_flags; ///
+  gboolean function(GstBuffer* buffer, uint idx, int length, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_resize_range; ///
+  gboolean function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_set_flags; ///
   void function(GstBuffer* buffer, ptrdiff_t size) c_gst_buffer_set_size; ///
   void function(GstBuffer* buffer, GstMapInfo* info) c_gst_buffer_unmap; ///
-  bool function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_unset_flags; ///
+  gboolean function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_unset_flags; ///
   uint function() c_gst_buffer_get_max_memory; ///
 
   // BufferList
@@ -137,7 +137,7 @@ __gshared extern(C)
   GstBufferList* function(uint size) c_gst_buffer_list_new_sized; ///
   size_t function(GstBufferList* list) c_gst_buffer_list_calculate_size; ///
   GstBufferList* function(const(GstBufferList)* list) c_gst_buffer_list_copy_deep; ///
-  bool function(GstBufferList* list, GstBufferListFunc func, void* userData) c_gst_buffer_list_foreach; ///
+  gboolean function(GstBufferList* list, GstBufferListFunc func, void* userData) c_gst_buffer_list_foreach; ///
   GstBuffer* function(GstBufferList* list, uint idx) c_gst_buffer_list_get; ///
   GstBuffer* function(GstBufferList* list, uint idx) c_gst_buffer_list_get_writable; ///
   void function(GstBufferList* list, int idx, GstBuffer* buffer) c_gst_buffer_list_insert; ///
@@ -148,23 +148,23 @@ __gshared extern(C)
   GType function() c_gst_buffer_pool_get_type; ///
   GstBufferPool* function() c_gst_buffer_pool_new; ///
   void function(GstStructure* config, const(char)* option) c_gst_buffer_pool_config_add_option; ///
-  bool function(GstStructure* config, GstAllocator** allocator, GstAllocationParams* params) c_gst_buffer_pool_config_get_allocator; ///
+  gboolean function(GstStructure* config, GstAllocator** allocator, GstAllocationParams* params) c_gst_buffer_pool_config_get_allocator; ///
   const(char)* function(GstStructure* config, uint index) c_gst_buffer_pool_config_get_option; ///
-  bool function(GstStructure* config, GstCaps** caps, uint* size, uint* minBuffers, uint* maxBuffers) c_gst_buffer_pool_config_get_params; ///
-  bool function(GstStructure* config, const(char)* option) c_gst_buffer_pool_config_has_option; ///
+  gboolean function(GstStructure* config, GstCaps** caps, uint* size, uint* minBuffers, uint* maxBuffers) c_gst_buffer_pool_config_get_params; ///
+  gboolean function(GstStructure* config, const(char)* option) c_gst_buffer_pool_config_has_option; ///
   uint function(GstStructure* config) c_gst_buffer_pool_config_n_options; ///
   void function(GstStructure* config, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_buffer_pool_config_set_allocator; ///
   void function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) c_gst_buffer_pool_config_set_params; ///
-  bool function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) c_gst_buffer_pool_config_validate_params; ///
+  gboolean function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) c_gst_buffer_pool_config_validate_params; ///
   GstFlowReturn function(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) c_gst_buffer_pool_acquire_buffer; ///
   GstStructure* function(GstBufferPool* pool) c_gst_buffer_pool_get_config; ///
   const(char*)* function(GstBufferPool* pool) c_gst_buffer_pool_get_options; ///
-  bool function(GstBufferPool* pool, const(char)* option) c_gst_buffer_pool_has_option; ///
-  bool function(GstBufferPool* pool) c_gst_buffer_pool_is_active; ///
+  gboolean function(GstBufferPool* pool, const(char)* option) c_gst_buffer_pool_has_option; ///
+  gboolean function(GstBufferPool* pool) c_gst_buffer_pool_is_active; ///
   void function(GstBufferPool* pool, GstBuffer* buffer) c_gst_buffer_pool_release_buffer; ///
-  bool function(GstBufferPool* pool, bool active) c_gst_buffer_pool_set_active; ///
-  bool function(GstBufferPool* pool, GstStructure* config) c_gst_buffer_pool_set_config; ///
-  void function(GstBufferPool* pool, bool flushing) c_gst_buffer_pool_set_flushing; ///
+  gboolean function(GstBufferPool* pool, gboolean active) c_gst_buffer_pool_set_active; ///
+  gboolean function(GstBufferPool* pool, GstStructure* config) c_gst_buffer_pool_set_config; ///
+  void function(GstBufferPool* pool, gboolean flushing) c_gst_buffer_pool_set_flushing; ///
 
   // Bus
   GType function() c_gst_bus_get_type; ///
@@ -173,20 +173,20 @@ __gshared extern(C)
   void function(GstBus* bus, int priority) c_gst_bus_add_signal_watch_full; ///
   uint function(GstBus* bus, GstBusFunc func, void* userData) c_gst_bus_add_watch; ///
   uint function(GstBus* bus, int priority, GstBusFunc func, void* userData, GDestroyNotify notify) c_gst_bus_add_watch_full; ///
-  bool function(GstBus* bus, GstMessage* message, void* data) c_gst_bus_async_signal_func; ///
+  gboolean function(GstBus* bus, GstMessage* message, void* data) c_gst_bus_async_signal_func; ///
   GSource* function(GstBus* bus) c_gst_bus_create_watch; ///
   void function(GstBus* bus) c_gst_bus_disable_sync_message_emission; ///
   void function(GstBus* bus) c_gst_bus_enable_sync_message_emission; ///
   void function(GstBus* bus, GPollFD* fd) c_gst_bus_get_pollfd; ///
-  bool function(GstBus* bus) c_gst_bus_have_pending; ///
+  gboolean function(GstBus* bus) c_gst_bus_have_pending; ///
   GstMessage* function(GstBus* bus) c_gst_bus_peek; ///
   GstMessage* function(GstBus* bus, GstMessageType events, GstClockTime timeout) c_gst_bus_poll; ///
   GstMessage* function(GstBus* bus) c_gst_bus_pop; ///
   GstMessage* function(GstBus* bus, GstMessageType types) c_gst_bus_pop_filtered; ///
-  bool function(GstBus* bus, GstMessage* message) c_gst_bus_post; ///
+  gboolean function(GstBus* bus, GstMessage* message) c_gst_bus_post; ///
   void function(GstBus* bus) c_gst_bus_remove_signal_watch; ///
-  bool function(GstBus* bus) c_gst_bus_remove_watch; ///
-  void function(GstBus* bus, bool flushing) c_gst_bus_set_flushing; ///
+  gboolean function(GstBus* bus) c_gst_bus_remove_watch; ///
+  void function(GstBus* bus, gboolean flushing) c_gst_bus_set_flushing; ///
   void function(GstBus* bus, GstBusSyncHandler func, void* userData, GDestroyNotify notify) c_gst_bus_set_sync_handler; ///
   GstBusSyncReply function(GstBus* bus, GstMessage* message, void* data) c_gst_bus_sync_signal_handler; ///
   GstMessage* function(GstBus* bus, GstClockTime timeout) c_gst_bus_timed_pop; ///
@@ -203,28 +203,28 @@ __gshared extern(C)
   void function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_append; ///
   void function(GstCaps* caps, GstStructure* structure) c_gst_caps_append_structure; ///
   void function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) c_gst_caps_append_structure_full; ///
-  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_can_intersect; ///
+  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_can_intersect; ///
   GstCaps* function(const(GstCaps)* caps) c_gst_caps_copy; ///
   GstCaps* function(const(GstCaps)* caps, uint nth) c_gst_caps_copy_nth; ///
   void function(GstCaps* caps, GstCapsFilterMapFunc func, void* userData) c_gst_caps_filter_and_map_in_place; ///
   GstCaps* function(GstCaps* caps) c_gst_caps_fixate; ///
-  bool function(const(GstCaps)* caps, GstCapsForeachFunc func, void* userData) c_gst_caps_foreach; ///
+  gboolean function(const(GstCaps)* caps, GstCapsForeachFunc func, void* userData) c_gst_caps_foreach; ///
   GstCapsFeatures* function(const(GstCaps)* caps, uint index) c_gst_caps_get_features; ///
   uint function(const(GstCaps)* caps) c_gst_caps_get_size; ///
   GstStructure* function(const(GstCaps)* caps, uint index) c_gst_caps_get_structure; ///
   GstCaps* function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_intersect; ///
   GstCaps* function(GstCaps* caps1, GstCaps* caps2, GstCapsIntersectMode mode) c_gst_caps_intersect_full; ///
-  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_always_compatible; ///
-  bool function(const(GstCaps)* caps) c_gst_caps_is_any; ///
-  bool function(const(GstCaps)* caps) c_gst_caps_is_empty; ///
-  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal; ///
-  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal_fixed; ///
-  bool function(const(GstCaps)* caps) c_gst_caps_is_fixed; ///
-  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_strictly_equal; ///
-  bool function(const(GstCaps)* subset, const(GstCaps)* superset) c_gst_caps_is_subset; ///
-  bool function(const(GstCaps)* caps, const(GstStructure)* structure) c_gst_caps_is_subset_structure; ///
-  bool function(const(GstCaps)* caps, const(GstStructure)* structure, const(GstCapsFeatures)* features) c_gst_caps_is_subset_structure_full; ///
-  bool function(GstCaps* caps, GstCapsMapFunc func, void* userData) c_gst_caps_map_in_place; ///
+  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_always_compatible; ///
+  gboolean function(const(GstCaps)* caps) c_gst_caps_is_any; ///
+  gboolean function(const(GstCaps)* caps) c_gst_caps_is_empty; ///
+  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal; ///
+  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal_fixed; ///
+  gboolean function(const(GstCaps)* caps) c_gst_caps_is_fixed; ///
+  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_strictly_equal; ///
+  gboolean function(const(GstCaps)* subset, const(GstCaps)* superset) c_gst_caps_is_subset; ///
+  gboolean function(const(GstCaps)* caps, const(GstStructure)* structure) c_gst_caps_is_subset_structure; ///
+  gboolean function(const(GstCaps)* caps, const(GstStructure)* structure, const(GstCapsFeatures)* features) c_gst_caps_is_subset_structure_full; ///
+  gboolean function(GstCaps* caps, GstCapsMapFunc func, void* userData) c_gst_caps_map_in_place; ///
   GstCaps* function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_merge; ///
   GstCaps* function(GstCaps* caps, GstStructure* structure) c_gst_caps_merge_structure; ///
   GstCaps* function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) c_gst_caps_merge_structure_full; ///
@@ -254,18 +254,18 @@ __gshared extern(C)
   GstCapsFeatures* function(const(char)* feature1, void* varargs) c_gst_caps_features_new_valist; ///
   void function(GstCapsFeatures* features, const(char)* feature) c_gst_caps_features_add; ///
   void function(GstCapsFeatures* features, GQuark feature) c_gst_caps_features_add_id; ///
-  bool function(const(GstCapsFeatures)* features, const(char)* feature) c_gst_caps_features_contains; ///
-  bool function(const(GstCapsFeatures)* features, GQuark feature) c_gst_caps_features_contains_id; ///
+  gboolean function(const(GstCapsFeatures)* features, const(char)* feature) c_gst_caps_features_contains; ///
+  gboolean function(const(GstCapsFeatures)* features, GQuark feature) c_gst_caps_features_contains_id; ///
   GstCapsFeatures* function(const(GstCapsFeatures)* features) c_gst_caps_features_copy; ///
   void function(GstCapsFeatures* features) c_gst_caps_features_free; ///
   const(char)* function(const(GstCapsFeatures)* features, uint i) c_gst_caps_features_get_nth; ///
   GQuark function(const(GstCapsFeatures)* features, uint i) c_gst_caps_features_get_nth_id; ///
   uint function(const(GstCapsFeatures)* features) c_gst_caps_features_get_size; ///
-  bool function(const(GstCapsFeatures)* features) c_gst_caps_features_is_any; ///
-  bool function(const(GstCapsFeatures)* features1, const(GstCapsFeatures)* features2) c_gst_caps_features_is_equal; ///
+  gboolean function(const(GstCapsFeatures)* features) c_gst_caps_features_is_any; ///
+  gboolean function(const(GstCapsFeatures)* features1, const(GstCapsFeatures)* features2) c_gst_caps_features_is_equal; ///
   void function(GstCapsFeatures* features, const(char)* feature) c_gst_caps_features_remove; ///
   void function(GstCapsFeatures* features, GQuark feature) c_gst_caps_features_remove_id; ///
-  bool function(GstCapsFeatures* features, int* refcount) c_gst_caps_features_set_parent_refcount; ///
+  gboolean function(GstCapsFeatures* features, int* refcount) c_gst_caps_features_set_parent_refcount; ///
   char* function(const(GstCapsFeatures)* features) c_gst_caps_features_to_string; ///
   GstCapsFeatures* function(const(char)* features) c_gst_caps_features_from_string; ///
 
@@ -280,7 +280,7 @@ __gshared extern(C)
   uint function(GstChildProxy* parent) c_gst_child_proxy_get_children_count; ///
   void function(GstChildProxy* object, const(char)* name, GValue* value) c_gst_child_proxy_get_property; ///
   void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) c_gst_child_proxy_get_valist; ///
-  bool function(GstChildProxy* object, const(char)* name, GObject** target, GParamSpec** pspec) c_gst_child_proxy_lookup; ///
+  gboolean function(GstChildProxy* object, const(char)* name, GObject** target, GParamSpec** pspec) c_gst_child_proxy_lookup; ///
   void function(GstChildProxy* object, const(char)* firstPropertyName,  ...) c_gst_child_proxy_set; ///
   void function(GstChildProxy* object, const(char)* name, const(GValue)* value) c_gst_child_proxy_set_property; ///
   void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) c_gst_child_proxy_set_valist; ///
@@ -293,11 +293,11 @@ __gshared extern(C)
   GstClockID function(GstClockID id) c_gst_clock_id_ref; ///
   void function(GstClockID id) c_gst_clock_id_unref; ///
   void function(GstClockID id) c_gst_clock_id_unschedule; ///
-  bool function(GstClockID id, GstClock* clock) c_gst_clock_id_uses_clock; ///
+  gboolean function(GstClockID id, GstClock* clock) c_gst_clock_id_uses_clock; ///
   GstClockReturn function(GstClockID id, GstClockTimeDiff* jitter) c_gst_clock_id_wait; ///
   GstClockReturn function(GstClockID id, GstClockCallback func, void* userData, GDestroyNotify destroyData) c_gst_clock_id_wait_async; ///
-  bool function(GstClock* clock, GstClockTime slave, GstClockTime master, double* rSquared) c_gst_clock_add_observation; ///
-  bool function(GstClock* clock, GstClockTime slave, GstClockTime master, double* rSquared, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) c_gst_clock_add_observation_unapplied; ///
+  gboolean function(GstClock* clock, GstClockTime slave, GstClockTime master, double* rSquared) c_gst_clock_add_observation; ///
+  gboolean function(GstClock* clock, GstClockTime slave, GstClockTime master, double* rSquared, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) c_gst_clock_add_observation_unapplied; ///
   GstClockTime function(GstClock* clock, GstClockTime internal) c_gst_clock_adjust_unlocked; ///
   GstClockTime function(GstClock* clock, GstClockTime internalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) c_gst_clock_adjust_with_calibration; ///
   void function(GstClock* clock, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) c_gst_clock_get_calibration; ///
@@ -306,46 +306,46 @@ __gshared extern(C)
   GstClockTime function(GstClock* clock) c_gst_clock_get_resolution; ///
   GstClockTime function(GstClock* clock) c_gst_clock_get_time; ///
   GstClockTime function(GstClock* clock) c_gst_clock_get_timeout; ///
-  bool function(GstClock* clock) c_gst_clock_is_synced; ///
+  gboolean function(GstClock* clock) c_gst_clock_is_synced; ///
   GstClockID function(GstClock* clock, GstClockTime startTime, GstClockTime interval) c_gst_clock_new_periodic_id; ///
   GstClockID function(GstClock* clock, GstClockTime time) c_gst_clock_new_single_shot_id; ///
-  bool function(GstClock* clock, GstClockID id, GstClockTime startTime, GstClockTime interval) c_gst_clock_periodic_id_reinit; ///
+  gboolean function(GstClock* clock, GstClockID id, GstClockTime startTime, GstClockTime interval) c_gst_clock_periodic_id_reinit; ///
   void function(GstClock* clock, GstClockTime internal, GstClockTime external, GstClockTime rateNum, GstClockTime rateDenom) c_gst_clock_set_calibration; ///
-  bool function(GstClock* clock, GstClock* master) c_gst_clock_set_master; ///
+  gboolean function(GstClock* clock, GstClock* master) c_gst_clock_set_master; ///
   GstClockTime function(GstClock* clock, GstClockTime resolution) c_gst_clock_set_resolution; ///
-  void function(GstClock* clock, bool synced) c_gst_clock_set_synced; ///
+  void function(GstClock* clock, gboolean synced) c_gst_clock_set_synced; ///
   void function(GstClock* clock, GstClockTime timeout) c_gst_clock_set_timeout; ///
-  bool function(GstClock* clock, GstClockID id, GstClockTime time) c_gst_clock_single_shot_id_reinit; ///
+  gboolean function(GstClock* clock, GstClockID id, GstClockTime time) c_gst_clock_single_shot_id_reinit; ///
   GstClockTime function(GstClock* clock, GstClockTime external) c_gst_clock_unadjust_unlocked; ///
   GstClockTime function(GstClock* clock, GstClockTime externalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) c_gst_clock_unadjust_with_calibration; ///
-  bool function(GstClock* clock, GstClockTime timeout) c_gst_clock_wait_for_sync; ///
+  gboolean function(GstClock* clock, GstClockTime timeout) c_gst_clock_wait_for_sync; ///
 
   // Context
   GType function() c_gst_context_get_type; ///
-  GstContext* function(const(char)* contextType, bool persistent) c_gst_context_new; ///
+  GstContext* function(const(char)* contextType, gboolean persistent) c_gst_context_new; ///
   const(char)* function(const(GstContext)* context) c_gst_context_get_context_type; ///
   const(GstStructure)* function(const(GstContext)* context) c_gst_context_get_structure; ///
-  bool function(const(GstContext)* context, const(char)* contextType) c_gst_context_has_context_type; ///
-  bool function(const(GstContext)* context) c_gst_context_is_persistent; ///
+  gboolean function(const(GstContext)* context, const(char)* contextType) c_gst_context_has_context_type; ///
+  gboolean function(const(GstContext)* context) c_gst_context_is_persistent; ///
   GstStructure* function(GstContext* context) c_gst_context_writable_structure; ///
 
   // ControlBinding
   GType function() c_gst_control_binding_get_type; ///
-  bool function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_control_binding_get_g_value_array; ///
+  gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_control_binding_get_g_value_array; ///
   GValue* function(GstControlBinding* binding, GstClockTime timestamp) c_gst_control_binding_get_value; ///
-  bool function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_control_binding_get_value_array; ///
-  bool function(GstControlBinding* binding) c_gst_control_binding_is_disabled; ///
-  void function(GstControlBinding* binding, bool disabled) c_gst_control_binding_set_disabled; ///
-  bool function(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) c_gst_control_binding_sync_values; ///
+  gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_control_binding_get_value_array; ///
+  gboolean function(GstControlBinding* binding) c_gst_control_binding_is_disabled; ///
+  void function(GstControlBinding* binding, gboolean disabled) c_gst_control_binding_set_disabled; ///
+  gboolean function(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) c_gst_control_binding_sync_values; ///
 
   // ControlSource
   GType function() c_gst_control_source_get_type; ///
-  bool function(GstControlSource* self, GstClockTime timestamp, double* value) c_gst_control_source_get_value; ///
-  bool function(GstControlSource* self, GstClockTime timestamp, GstClockTime interval, uint nValues, double* values) c_gst_control_source_get_value_array; ///
+  gboolean function(GstControlSource* self, GstClockTime timestamp, double* value) c_gst_control_source_get_value; ///
+  gboolean function(GstControlSource* self, GstClockTime timestamp, GstClockTime interval, uint nValues, double* values) c_gst_control_source_get_value_array; ///
 
   // CustomMeta
   GstStructure* function(GstCustomMeta* meta) c_gst_custom_meta_get_structure; ///
-  bool function(GstCustomMeta* meta, const(char)* name) c_gst_custom_meta_has_name; ///
+  gboolean function(GstCustomMeta* meta, const(char)* name) c_gst_custom_meta_has_name; ///
 
   // DateTime
   GType function() c_gst_date_time_get_type; ///
@@ -370,11 +370,11 @@ __gshared extern(C)
   int function(const(GstDateTime)* datetime) c_gst_date_time_get_second; ///
   float function(const(GstDateTime)* datetime) c_gst_date_time_get_time_zone_offset; ///
   int function(const(GstDateTime)* datetime) c_gst_date_time_get_year; ///
-  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_day; ///
-  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_month; ///
-  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_second; ///
-  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_time; ///
-  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_year; ///
+  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_day; ///
+  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_month; ///
+  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_second; ///
+  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_time; ///
+  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_year; ///
   GstDateTime* function(GstDateTime* datetime) c_gst_date_time_ref; ///
   GDateTime* function(GstDateTime* datetime) c_gst_date_time_to_g_date_time; ///
   char* function(GstDateTime* datetime) c_gst_date_time_to_iso8601_string; ///
@@ -400,9 +400,9 @@ __gshared extern(C)
   char* function(GstDevice* device) c_gst_device_get_device_class; ///
   char* function(GstDevice* device) c_gst_device_get_display_name; ///
   GstStructure* function(GstDevice* device) c_gst_device_get_properties; ///
-  bool function(GstDevice* device, const(char)* classes) c_gst_device_has_classes; ///
-  bool function(GstDevice* device, char** classes) c_gst_device_has_classesv; ///
-  bool function(GstDevice* device, GstElement* element) c_gst_device_reconfigure_element; ///
+  gboolean function(GstDevice* device, const(char)* classes) c_gst_device_has_classes; ///
+  gboolean function(GstDevice* device, char** classes) c_gst_device_has_classesv; ///
+  gboolean function(GstDevice* device, GstElement* element) c_gst_device_reconfigure_element; ///
 
   // DeviceMonitor
   GType function() c_gst_device_monitor_get_type; ///
@@ -411,16 +411,16 @@ __gshared extern(C)
   GstBus* function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_bus; ///
   GList* function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_devices; ///
   char** function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_providers; ///
-  bool function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_show_all_devices; ///
-  bool function(GstDeviceMonitor* monitor, uint filterId) c_gst_device_monitor_remove_filter; ///
-  void function(GstDeviceMonitor* monitor, bool showAll) c_gst_device_monitor_set_show_all_devices; ///
-  bool function(GstDeviceMonitor* monitor) c_gst_device_monitor_start; ///
+  gboolean function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_show_all_devices; ///
+  gboolean function(GstDeviceMonitor* monitor, uint filterId) c_gst_device_monitor_remove_filter; ///
+  void function(GstDeviceMonitor* monitor, gboolean showAll) c_gst_device_monitor_set_show_all_devices; ///
+  gboolean function(GstDeviceMonitor* monitor) c_gst_device_monitor_start; ///
   void function(GstDeviceMonitor* monitor) c_gst_device_monitor_stop; ///
 
   // DeviceProvider
   GType function() c_gst_device_provider_get_type; ///
-  bool function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_device_provider_register; ///
-  bool function(GstDeviceProvider* provider) c_gst_device_provider_can_monitor; ///
+  gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_device_provider_register; ///
+  gboolean function(GstDeviceProvider* provider) c_gst_device_provider_can_monitor; ///
   void function(GstDeviceProvider* provider, GstDevice* device) c_gst_device_provider_device_add; ///
   void function(GstDeviceProvider* provider, GstDevice* device, GstDevice* changedDevice) c_gst_device_provider_device_changed; ///
   void function(GstDeviceProvider* provider, GstDevice* device) c_gst_device_provider_device_remove; ///
@@ -430,8 +430,8 @@ __gshared extern(C)
   char** function(GstDeviceProvider* provider) c_gst_device_provider_get_hidden_providers; ///
   const(char)* function(GstDeviceProvider* provider, const(char)* key) c_gst_device_provider_get_metadata; ///
   void function(GstDeviceProvider* provider, const(char)* name) c_gst_device_provider_hide_provider; ///
-  bool function(GstDeviceProvider* provider) c_gst_device_provider_is_started; ///
-  bool function(GstDeviceProvider* provider) c_gst_device_provider_start; ///
+  gboolean function(GstDeviceProvider* provider) c_gst_device_provider_is_started; ///
+  gboolean function(GstDeviceProvider* provider) c_gst_device_provider_start; ///
   void function(GstDeviceProvider* provider) c_gst_device_provider_stop; ///
   void function(GstDeviceProvider* provider, const(char)* name) c_gst_device_provider_unhide_provider; ///
 
@@ -451,8 +451,8 @@ __gshared extern(C)
   GType function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get_device_provider_type; ///
   const(char)* function(GstDeviceProviderFactory* factory, const(char)* key) c_gst_device_provider_factory_get_metadata; ///
   char** function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get_metadata_keys; ///
-  bool function(GstDeviceProviderFactory* factory, const(char)* classes) c_gst_device_provider_factory_has_classes; ///
-  bool function(GstDeviceProviderFactory* factory, char** classes) c_gst_device_provider_factory_has_classesv; ///
+  gboolean function(GstDeviceProviderFactory* factory, const(char)* classes) c_gst_device_provider_factory_has_classes; ///
+  gboolean function(GstDeviceProviderFactory* factory, char** classes) c_gst_device_provider_factory_has_classesv; ///
 
   // DoubleRange
   GType function() c_gst_double_range_get_type; ///
@@ -464,14 +464,14 @@ __gshared extern(C)
   // Element
   GType function() c_gst_element_get_type; ///
   GstElement* function(GstURIType type, const(char)* uri, const(char)* elementname, GError** _err) c_gst_element_make_from_uri; ///
-  bool function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_element_register; ///
+  gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_element_register; ///
   const(char)* function(GstStateChangeReturn stateRet) c_gst_element_state_change_return_get_name; ///
   const(char)* function(GstState state) c_gst_element_state_get_name; ///
   void function(GType type) c_gst_element_type_set_skip_documentation; ///
   void function(GstElement* element) c_gst_element_abort_state; ///
-  bool function(GstElement* element, GstPad* pad) c_gst_element_add_pad; ///
-  gulong function(GstElement* element, const(char)* propertyName, bool includeValue) c_gst_element_add_property_deep_notify_watch; ///
-  gulong function(GstElement* element, const(char)* propertyName, bool includeValue) c_gst_element_add_property_notify_watch; ///
+  gboolean function(GstElement* element, GstPad* pad) c_gst_element_add_pad; ///
+  gulong function(GstElement* element, const(char)* propertyName, gboolean includeValue) c_gst_element_add_property_deep_notify_watch; ///
+  gulong function(GstElement* element, const(char)* propertyName, gboolean includeValue) c_gst_element_add_property_notify_watch; ///
   void function(GstElement* element, GstElementCallAsyncFunc func, void* userData, GDestroyNotify destroyNotify) c_gst_element_call_async; ///
   GstStateChangeReturn function(GstElement* element, GstStateChange transition) c_gst_element_change_state; ///
   GstStateChangeReturn function(GstElement* element, GstStateChangeReturn ret) c_gst_element_continue_state; ///
@@ -479,9 +479,9 @@ __gshared extern(C)
   char* function(GstElement* element, const(char)* streamId) c_gst_element_decorate_stream_id; ///
   char* function(GstElement* element, const(char)* format,  ...) c_gst_element_decorate_stream_id_printf; ///
   char* function(GstElement* element, const(char)* format, void* varArgs) c_gst_element_decorate_stream_id_printf_valist; ///
-  bool function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_pad; ///
-  bool function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_sink_pad; ///
-  bool function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_src_pad; ///
+  gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_pad; ///
+  gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_sink_pad; ///
+  gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_src_pad; ///
   GstClockTime function(GstElement* element) c_gst_element_get_base_time; ///
   GstBus* function(GstElement* element) c_gst_element_get_bus; ///
   GstClock* function(GstElement* element) c_gst_element_get_clock; ///
@@ -500,42 +500,42 @@ __gshared extern(C)
   GstClockTime function(GstElement* element) c_gst_element_get_start_time; ///
   GstStateChangeReturn function(GstElement* element, GstState* state, GstState* pending, GstClockTime timeout) c_gst_element_get_state; ///
   GstPad* function(GstElement* element, const(char)* name) c_gst_element_get_static_pad; ///
-  bool function(GstElement* element) c_gst_element_is_locked_state; ///
+  gboolean function(GstElement* element) c_gst_element_is_locked_state; ///
   GstIterator* function(GstElement* element) c_gst_element_iterate_pads; ///
   GstIterator* function(GstElement* element) c_gst_element_iterate_sink_pads; ///
   GstIterator* function(GstElement* element) c_gst_element_iterate_src_pads; ///
-  bool function(GstElement* src, GstElement* dest) c_gst_element_link; ///
-  bool function(GstElement* src, GstElement* dest, GstCaps* filter) c_gst_element_link_filtered; ///
-  bool function(GstElement* element1, GstElement* element2,  ...) c_gst_element_link_many; ///
-  bool function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) c_gst_element_link_pads; ///
-  bool function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstCaps* filter) c_gst_element_link_pads_filtered; ///
-  bool function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstPadLinkCheck flags) c_gst_element_link_pads_full; ///
+  gboolean function(GstElement* src, GstElement* dest) c_gst_element_link; ///
+  gboolean function(GstElement* src, GstElement* dest, GstCaps* filter) c_gst_element_link_filtered; ///
+  gboolean function(GstElement* element1, GstElement* element2,  ...) c_gst_element_link_many; ///
+  gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) c_gst_element_link_pads; ///
+  gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstCaps* filter) c_gst_element_link_pads_filtered; ///
+  gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstPadLinkCheck flags) c_gst_element_link_pads_full; ///
   void function(GstElement* element) c_gst_element_lost_state; ///
   void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line) c_gst_element_message_full; ///
   void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line, GstStructure* structure) c_gst_element_message_full_with_details; ///
   void function(GstElement* element) c_gst_element_no_more_pads; ///
-  bool function(GstElement* element, GstMessage* message) c_gst_element_post_message; ///
+  gboolean function(GstElement* element, GstMessage* message) c_gst_element_post_message; ///
   GstClock* function(GstElement* element) c_gst_element_provide_clock; ///
-  bool function(GstElement* element, GstQuery* query) c_gst_element_query; ///
-  bool function(GstElement* element, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_element_query_convert; ///
-  bool function(GstElement* element, GstFormat format, long* duration) c_gst_element_query_duration; ///
-  bool function(GstElement* element, GstFormat format, long* cur) c_gst_element_query_position; ///
+  gboolean function(GstElement* element, GstQuery* query) c_gst_element_query; ///
+  gboolean function(GstElement* element, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_element_query_convert; ///
+  gboolean function(GstElement* element, GstFormat format, long* duration) c_gst_element_query_duration; ///
+  gboolean function(GstElement* element, GstFormat format, long* cur) c_gst_element_query_position; ///
   void function(GstElement* element, GstPad* pad) c_gst_element_release_request_pad; ///
-  bool function(GstElement* element, GstPad* pad) c_gst_element_remove_pad; ///
+  gboolean function(GstElement* element, GstPad* pad) c_gst_element_remove_pad; ///
   void function(GstElement* element, gulong watchId) c_gst_element_remove_property_notify_watch; ///
   GstPad* function(GstElement* element, GstPadTemplate* templ, const(char)* name, const(GstCaps)* caps) c_gst_element_request_pad; ///
   GstPad* function(GstElement* element, const(char)* name) c_gst_element_request_pad_simple; ///
-  bool function(GstElement* element, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) c_gst_element_seek; ///
-  bool function(GstElement* element, GstFormat format, GstSeekFlags seekFlags, long seekPos) c_gst_element_seek_simple; ///
-  bool function(GstElement* element, GstEvent* event) c_gst_element_send_event; ///
+  gboolean function(GstElement* element, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) c_gst_element_seek; ///
+  gboolean function(GstElement* element, GstFormat format, GstSeekFlags seekFlags, long seekPos) c_gst_element_seek_simple; ///
+  gboolean function(GstElement* element, GstEvent* event) c_gst_element_send_event; ///
   void function(GstElement* element, GstClockTime time) c_gst_element_set_base_time; ///
   void function(GstElement* element, GstBus* bus) c_gst_element_set_bus; ///
-  bool function(GstElement* element, GstClock* clock) c_gst_element_set_clock; ///
+  gboolean function(GstElement* element, GstClock* clock) c_gst_element_set_clock; ///
   void function(GstElement* element, GstContext* context) c_gst_element_set_context; ///
-  bool function(GstElement* element, bool lockedState) c_gst_element_set_locked_state; ///
+  gboolean function(GstElement* element, gboolean lockedState) c_gst_element_set_locked_state; ///
   void function(GstElement* element, GstClockTime time) c_gst_element_set_start_time; ///
   GstStateChangeReturn function(GstElement* element, GstState state) c_gst_element_set_state; ///
-  bool function(GstElement* element) c_gst_element_sync_state_with_parent; ///
+  gboolean function(GstElement* element) c_gst_element_sync_state_with_parent; ///
   void function(GstElement* src, GstElement* dest) c_gst_element_unlink; ///
   void function(GstElement* element1, GstElement* element2,  ...) c_gst_element_unlink_many; ///
   void function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) c_gst_element_unlink_pads; ///
@@ -555,16 +555,16 @@ __gshared extern(C)
   // ElementFactory
   GType function() c_gst_element_factory_get_type; ///
   GstElementFactory* function(const(char)* name) c_gst_element_factory_find; ///
-  GList* function(GList* list, const(GstCaps)* caps, GstPadDirection direction, bool subsetonly) c_gst_element_factory_list_filter; ///
+  GList* function(GList* list, const(GstCaps)* caps, GstPadDirection direction, gboolean subsetonly) c_gst_element_factory_list_filter; ///
   GList* function(GstElementFactoryListType type, GstRank minrank) c_gst_element_factory_list_get_elements; ///
   GstElement* function(const(char)* factoryname, const(char)* name) c_gst_element_factory_make; ///
   GstElement* function(const(char)* factoryname, const(char)* first,  ...) c_gst_element_factory_make_full; ///
   GstElement* function(const(char)* factoryname, const(char)* first, void* properties) c_gst_element_factory_make_valist; ///
   GstElement* function(const(char)* factoryname, uint n, const(char*)* names, const(GValue)* values) c_gst_element_factory_make_with_properties; ///
-  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_all_caps; ///
-  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_any_caps; ///
-  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_all_caps; ///
-  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_any_caps; ///
+  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_all_caps; ///
+  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_any_caps; ///
+  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_all_caps; ///
+  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_any_caps; ///
   GstElement* function(GstElementFactory* factory, const(char)* name) c_gst_element_factory_create; ///
   GstElement* function(GstElementFactory* factory, const(char)* first,  ...) c_gst_element_factory_create_full; ///
   GstElement* function(GstElementFactory* factory, const(char)* first, void* properties) c_gst_element_factory_create_valist; ///
@@ -573,21 +573,21 @@ __gshared extern(C)
   const(char)* function(GstElementFactory* factory, const(char)* key) c_gst_element_factory_get_metadata; ///
   char** function(GstElementFactory* factory) c_gst_element_factory_get_metadata_keys; ///
   uint function(GstElementFactory* factory) c_gst_element_factory_get_num_pad_templates; ///
-  bool function(GstElementFactory* factory) c_gst_element_factory_get_skip_documentation; ///
+  gboolean function(GstElementFactory* factory) c_gst_element_factory_get_skip_documentation; ///
   const(GList)* function(GstElementFactory* factory) c_gst_element_factory_get_static_pad_templates; ///
   const(char*)* function(GstElementFactory* factory) c_gst_element_factory_get_uri_protocols; ///
   GstURIType function(GstElementFactory* factory) c_gst_element_factory_get_uri_type; ///
-  bool function(GstElementFactory* factory, const(char)* interfacename) c_gst_element_factory_has_interface; ///
-  bool function(GstElementFactory* factory, GstElementFactoryListType type) c_gst_element_factory_list_is_type; ///
+  gboolean function(GstElementFactory* factory, const(char)* interfacename) c_gst_element_factory_has_interface; ///
+  gboolean function(GstElementFactory* factory, GstElementFactoryListType type) c_gst_element_factory_list_is_type; ///
 
   // Event
   GType function() c_gst_event_get_type; ///
-  GstEvent* function(GstFormat format, long minsize, long maxsize, bool async) c_gst_event_new_buffer_size; ///
+  GstEvent* function(GstFormat format, long minsize, long maxsize, gboolean async) c_gst_event_new_buffer_size; ///
   GstEvent* function(GstCaps* caps) c_gst_event_new_caps; ///
   GstEvent* function(GstEventType type, GstStructure* structure) c_gst_event_new_custom; ///
   GstEvent* function() c_gst_event_new_eos; ///
   GstEvent* function() c_gst_event_new_flush_start; ///
-  GstEvent* function(bool resetTime) c_gst_event_new_flush_stop; ///
+  GstEvent* function(gboolean resetTime) c_gst_event_new_flush_stop; ///
   GstEvent* function(GstClockTime timestamp, GstClockTime duration) c_gst_event_new_gap; ///
   GstEvent* function(double rateMultiplier, GstSegmentFlags newFlags) c_gst_event_new_instant_rate_change; ///
   GstEvent* function(double rateMultiplier, GstClockTime runningTime, GstClockTime upstreamRunningTime) c_gst_event_new_instant_rate_sync_time; ///
@@ -601,25 +601,25 @@ __gshared extern(C)
   GstEvent* function(GstFormat format, long position) c_gst_event_new_segment_done; ///
   GstEvent* function(GList* streams) c_gst_event_new_select_streams; ///
   GstEvent* function(const(char)* name, GstMessage* msg) c_gst_event_new_sink_message; ///
-  GstEvent* function(GstFormat format, ulong amount, double rate, bool flush, bool intermediate) c_gst_event_new_step; ///
+  GstEvent* function(GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate) c_gst_event_new_step; ///
   GstEvent* function(GstStreamCollection* collection) c_gst_event_new_stream_collection; ///
   GstEvent* function(uint groupId) c_gst_event_new_stream_group_done; ///
   GstEvent* function(const(char)* streamId) c_gst_event_new_stream_start; ///
   GstEvent* function(GstTagList* taglist) c_gst_event_new_tag; ///
-  GstEvent* function(GstToc* toc, bool updated) c_gst_event_new_toc; ///
+  GstEvent* function(GstToc* toc, gboolean updated) c_gst_event_new_toc; ///
   GstEvent* function(const(char)* uid) c_gst_event_new_toc_select; ///
   void function(GstEvent* event, GstSegment* segment) c_gst_event_copy_segment; ///
   long function(GstEvent* event) c_gst_event_get_running_time_offset; ///
   uint function(GstEvent* event) c_gst_event_get_seqnum; ///
   const(GstStructure)* function(GstEvent* event) c_gst_event_get_structure; ///
-  bool function(GstEvent* event, const(char)* name) c_gst_event_has_name; ///
-  bool function(GstEvent* event, GQuark name) c_gst_event_has_name_id; ///
-  void function(GstEvent* event, GstFormat* format, long* minsize, long* maxsize, bool* async) c_gst_event_parse_buffer_size; ///
+  gboolean function(GstEvent* event, const(char)* name) c_gst_event_has_name; ///
+  gboolean function(GstEvent* event, GQuark name) c_gst_event_has_name_id; ///
+  void function(GstEvent* event, GstFormat* format, long* minsize, long* maxsize, gboolean* async) c_gst_event_parse_buffer_size; ///
   void function(GstEvent* event, GstCaps** caps) c_gst_event_parse_caps; ///
-  void function(GstEvent* event, bool* resetTime) c_gst_event_parse_flush_stop; ///
+  void function(GstEvent* event, gboolean* resetTime) c_gst_event_parse_flush_stop; ///
   void function(GstEvent* event, GstClockTime* timestamp, GstClockTime* duration) c_gst_event_parse_gap; ///
   void function(GstEvent* event, GstGapFlags* flags) c_gst_event_parse_gap_flags; ///
-  bool function(GstEvent* event, uint* groupId) c_gst_event_parse_group_id; ///
+  gboolean function(GstEvent* event, uint* groupId) c_gst_event_parse_group_id; ///
   void function(GstEvent* event, double* rateMultiplier, GstSegmentFlags* newFlags) c_gst_event_parse_instant_rate_change; ///
   void function(GstEvent* event, double* rateMultiplier, GstClockTime* runningTime, GstClockTime* upstreamRunningTime) c_gst_event_parse_instant_rate_sync_time; ///
   void function(GstEvent* event, GstClockTime* latency) c_gst_event_parse_latency; ///
@@ -631,14 +631,14 @@ __gshared extern(C)
   void function(GstEvent* event, GstFormat* format, long* position) c_gst_event_parse_segment_done; ///
   void function(GstEvent* event, GList** streams) c_gst_event_parse_select_streams; ///
   void function(GstEvent* event, GstMessage** msg) c_gst_event_parse_sink_message; ///
-  void function(GstEvent* event, GstFormat* format, ulong* amount, double* rate, bool* flush, bool* intermediate) c_gst_event_parse_step; ///
+  void function(GstEvent* event, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate) c_gst_event_parse_step; ///
   void function(GstEvent* event, GstStream** stream) c_gst_event_parse_stream; ///
   void function(GstEvent* event, GstStreamCollection** collection) c_gst_event_parse_stream_collection; ///
   void function(GstEvent* event, GstStreamFlags* flags) c_gst_event_parse_stream_flags; ///
   void function(GstEvent* event, uint* groupId) c_gst_event_parse_stream_group_done; ///
   void function(GstEvent* event, const(char*)* streamId) c_gst_event_parse_stream_start; ///
   void function(GstEvent* event, GstTagList** taglist) c_gst_event_parse_tag; ///
-  void function(GstEvent* event, GstToc** toc, bool* updated) c_gst_event_parse_toc; ///
+  void function(GstEvent* event, GstToc** toc, gboolean* updated) c_gst_event_parse_toc; ///
   void function(GstEvent* event, char** uid) c_gst_event_parse_toc_select; ///
   void function(GstEvent* event, GstGapFlags flags) c_gst_event_set_gap_flags; ///
   void function(GstEvent* event, uint groupId) c_gst_event_set_group_id; ///
@@ -665,11 +665,11 @@ __gshared extern(C)
   GstPad* function(const(char)* name, GstPad* target, GstPadTemplate* templ) c_gst_ghost_pad_new_from_template; ///
   GstPad* function(const(char)* name, GstPadDirection dir) c_gst_ghost_pad_new_no_target; ///
   GstPad* function(const(char)* name, GstPadTemplate* templ) c_gst_ghost_pad_new_no_target_from_template; ///
-  bool function(GstPad* pad, GstObject* parent, GstPadMode mode, bool active) c_gst_ghost_pad_activate_mode_default; ///
-  bool function(GstPad* pad, GstObject* parent, GstPadMode mode, bool active) c_gst_ghost_pad_internal_activate_mode_default; ///
-  bool function(GstGhostPad* gpad) c_gst_ghost_pad_construct; ///
+  gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) c_gst_ghost_pad_activate_mode_default; ///
+  gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) c_gst_ghost_pad_internal_activate_mode_default; ///
+  gboolean function(GstGhostPad* gpad) c_gst_ghost_pad_construct; ///
   GstPad* function(GstGhostPad* gpad) c_gst_ghost_pad_get_target; ///
-  bool function(GstGhostPad* gpad, GstPad* newtarget) c_gst_ghost_pad_set_target; ///
+  gboolean function(GstGhostPad* gpad, GstPad* newtarget) c_gst_ghost_pad_set_target; ///
 
   // Int64Range
   GType function() c_gst_int64_range_get_type; ///
@@ -684,7 +684,7 @@ __gshared extern(C)
   GstIterator* function(GType type, const(GValue)* object) c_gst_iterator_new_single; ///
   GstIterator* function(const(GstIterator)* it) c_gst_iterator_copy; ///
   GstIterator* function(GstIterator* it, GCompareFunc func, const(GValue)* userData) c_gst_iterator_filter; ///
-  bool function(GstIterator* it, GCompareFunc func, GValue* elem, void* userData) c_gst_iterator_find_custom; ///
+  gboolean function(GstIterator* it, GCompareFunc func, GValue* elem, void* userData) c_gst_iterator_find_custom; ///
   GstIteratorResult function(GstIterator* it, GstIteratorFoldFunction func, GValue* ret, void* userData) c_gst_iterator_fold; ///
   GstIteratorResult function(GstIterator* it, GstIteratorForeachFunction func, void* userData) c_gst_iterator_foreach; ///
   void function(GstIterator* it) c_gst_iterator_free; ///
@@ -698,10 +698,10 @@ __gshared extern(C)
   GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) c_gst_memory_copy; ///
   size_t function(GstMemory* mem, size_t* offset, size_t* maxsize) c_gst_memory_get_sizes; ///
   void function(GstMemory* mem, GstMemoryFlags flags, GstAllocator* allocator, GstMemory* parent, size_t maxsize, size_t align_, size_t offset, size_t size) c_gst_memory_init; ///
-  bool function(GstMemory* mem1, GstMemory* mem2, size_t* offset) c_gst_memory_is_span; ///
-  bool function(GstMemory* mem, const(char)* memType) c_gst_memory_is_type; ///
+  gboolean function(GstMemory* mem1, GstMemory* mem2, size_t* offset) c_gst_memory_is_span; ///
+  gboolean function(GstMemory* mem, const(char)* memType) c_gst_memory_is_type; ///
   GstMemory* function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) c_gst_memory_make_mapped; ///
-  bool function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) c_gst_memory_map; ///
+  gboolean function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) c_gst_memory_map; ///
   void function(GstMemory* mem, ptrdiff_t offset, size_t size) c_gst_memory_resize; ///
   GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) c_gst_memory_share; ///
   void function(GstMemory* mem, GstMapInfo* info) c_gst_memory_unmap; ///
@@ -713,7 +713,7 @@ __gshared extern(C)
   GstMessage* function(GstObject* src) c_gst_message_new_async_start; ///
   GstMessage* function(GstObject* src, int percent) c_gst_message_new_buffering; ///
   GstMessage* function(GstObject* src, GstClock* clock) c_gst_message_new_clock_lost; ///
-  GstMessage* function(GstObject* src, GstClock* clock, bool ready) c_gst_message_new_clock_provide; ///
+  GstMessage* function(GstObject* src, GstClock* clock, gboolean ready) c_gst_message_new_clock_provide; ///
   GstMessage* function(GstMessageType type, GstObject* src, GstStructure* structure) c_gst_message_new_custom; ///
   GstMessage* function(GstObject* src, GstDevice* device) c_gst_message_new_device_added; ///
   GstMessage* function(GstObject* src, GstDevice* device, GstDevice* changedDevice) c_gst_message_new_device_changed; ///
@@ -732,7 +732,7 @@ __gshared extern(C)
   GstMessage* function(GstObject* src, GstClock* clock) c_gst_message_new_new_clock; ///
   GstMessage* function(GstObject* src, GstProgressType type, const(char)* code, const(char)* text) c_gst_message_new_progress; ///
   GstMessage* function(GstObject* src, const(char)* propertyName, GValue* val) c_gst_message_new_property_notify; ///
-  GstMessage* function(GstObject* src, bool live, ulong runningTime, ulong streamTime, ulong timestamp, ulong duration) c_gst_message_new_qos; ///
+  GstMessage* function(GstObject* src, gboolean live, ulong runningTime, ulong streamTime, ulong timestamp, ulong duration) c_gst_message_new_qos; ///
   GstMessage* function(GstObject* src, const(char)* location, GstTagList* tagList, const(GstStructure)* entryStruct) c_gst_message_new_redirect; ///
   GstMessage* function(GstObject* src, GstState state) c_gst_message_new_request_state; ///
   GstMessage* function(GstObject* src, GstClockTime runningTime) c_gst_message_new_reset_time; ///
@@ -740,15 +740,15 @@ __gshared extern(C)
   GstMessage* function(GstObject* src, GstFormat format, long position) c_gst_message_new_segment_start; ///
   GstMessage* function(GstObject* src, GstState oldstate, GstState newstate, GstState pending) c_gst_message_new_state_changed; ///
   GstMessage* function(GstObject* src) c_gst_message_new_state_dirty; ///
-  GstMessage* function(GstObject* src, GstFormat format, ulong amount, double rate, bool flush, bool intermediate, ulong duration, bool eos) c_gst_message_new_step_done; ///
-  GstMessage* function(GstObject* src, bool active, GstFormat format, ulong amount, double rate, bool flush, bool intermediate) c_gst_message_new_step_start; ///
+  GstMessage* function(GstObject* src, GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate, ulong duration, gboolean eos) c_gst_message_new_step_done; ///
+  GstMessage* function(GstObject* src, gboolean active, GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate) c_gst_message_new_step_start; ///
   GstMessage* function(GstObject* src, GstStreamCollection* collection) c_gst_message_new_stream_collection; ///
   GstMessage* function(GstObject* src) c_gst_message_new_stream_start; ///
   GstMessage* function(GstObject* src, GstStreamStatusType type, GstElement* owner) c_gst_message_new_stream_status; ///
   GstMessage* function(GstObject* src, GstStreamCollection* collection) c_gst_message_new_streams_selected; ///
-  GstMessage* function(GstObject* src, GstStructureChangeType type, GstElement* owner, bool busy) c_gst_message_new_structure_change; ///
+  GstMessage* function(GstObject* src, GstStructureChangeType type, GstElement* owner, gboolean busy) c_gst_message_new_structure_change; ///
   GstMessage* function(GstObject* src, GstTagList* tagList) c_gst_message_new_tag; ///
-  GstMessage* function(GstObject* src, GstToc* toc, bool updated) c_gst_message_new_toc; ///
+  GstMessage* function(GstObject* src, GstToc* toc, gboolean updated) c_gst_message_new_toc; ///
   GstMessage* function(GstObject* src, GError* error, const(char)* debug_) c_gst_message_new_warning; ///
   GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) c_gst_message_new_warning_with_details; ///
   void function(GstMessage* message, const(char)* location, GstTagList* tagList, const(GstStructure)* entryStruct) c_gst_message_add_redirect_entry; ///
@@ -757,19 +757,19 @@ __gshared extern(C)
   uint function(GstMessage* message) c_gst_message_get_seqnum; ///
   const(GValue)* function(GstMessage* message) c_gst_message_get_stream_status_object; ///
   const(GstStructure)* function(GstMessage* message) c_gst_message_get_structure; ///
-  bool function(GstMessage* message, const(char)* name) c_gst_message_has_name; ///
+  gboolean function(GstMessage* message, const(char)* name) c_gst_message_has_name; ///
   void function(GstMessage* message, GstClockTime* runningTime) c_gst_message_parse_async_done; ///
   void function(GstMessage* message, int* percent) c_gst_message_parse_buffering; ///
   void function(GstMessage* message, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) c_gst_message_parse_buffering_stats; ///
   void function(GstMessage* message, GstClock** clock) c_gst_message_parse_clock_lost; ///
-  void function(GstMessage* message, GstClock** clock, bool* ready) c_gst_message_parse_clock_provide; ///
-  bool function(GstMessage* message, const(char*)* contextType) c_gst_message_parse_context_type; ///
+  void function(GstMessage* message, GstClock** clock, gboolean* ready) c_gst_message_parse_clock_provide; ///
+  gboolean function(GstMessage* message, const(char*)* contextType) c_gst_message_parse_context_type; ///
   void function(GstMessage* message, GstDevice** device) c_gst_message_parse_device_added; ///
   void function(GstMessage* message, GstDevice** device, GstDevice** changedDevice) c_gst_message_parse_device_changed; ///
   void function(GstMessage* message, GstDevice** device) c_gst_message_parse_device_removed; ///
   void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_error; ///
   void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_error_details; ///
-  bool function(GstMessage* message, uint* groupId) c_gst_message_parse_group_id; ///
+  gboolean function(GstMessage* message, uint* groupId) c_gst_message_parse_group_id; ///
   void function(GstMessage* message, GstContext** context) c_gst_message_parse_have_context; ///
   void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_info; ///
   void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_info_details; ///
@@ -777,7 +777,7 @@ __gshared extern(C)
   void function(GstMessage* message, GstClock** clock) c_gst_message_parse_new_clock; ///
   void function(GstMessage* message, GstProgressType* type, char** code, char** text) c_gst_message_parse_progress; ///
   void function(GstMessage* message, GstObject** object, const(char*)* propertyName, const(GValue*)* propertyValue) c_gst_message_parse_property_notify; ///
-  void function(GstMessage* message, bool* live, ulong* runningTime, ulong* streamTime, ulong* timestamp, ulong* duration) c_gst_message_parse_qos; ///
+  void function(GstMessage* message, gboolean* live, ulong* runningTime, ulong* streamTime, ulong* timestamp, ulong* duration) c_gst_message_parse_qos; ///
   void function(GstMessage* message, GstFormat* format, ulong* processed, ulong* dropped) c_gst_message_parse_qos_stats; ///
   void function(GstMessage* message, long* jitter, double* proportion, int* quality) c_gst_message_parse_qos_values; ///
   void function(GstMessage* message, size_t entryIndex, const(char*)* location, GstTagList** tagList, const(GstStructure*)* entryStruct) c_gst_message_parse_redirect_entry; ///
@@ -786,14 +786,14 @@ __gshared extern(C)
   void function(GstMessage* message, GstFormat* format, long* position) c_gst_message_parse_segment_done; ///
   void function(GstMessage* message, GstFormat* format, long* position) c_gst_message_parse_segment_start; ///
   void function(GstMessage* message, GstState* oldstate, GstState* newstate, GstState* pending) c_gst_message_parse_state_changed; ///
-  void function(GstMessage* message, GstFormat* format, ulong* amount, double* rate, bool* flush, bool* intermediate, ulong* duration, bool* eos) c_gst_message_parse_step_done; ///
-  void function(GstMessage* message, bool* active, GstFormat* format, ulong* amount, double* rate, bool* flush, bool* intermediate) c_gst_message_parse_step_start; ///
+  void function(GstMessage* message, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate, ulong* duration, gboolean* eos) c_gst_message_parse_step_done; ///
+  void function(GstMessage* message, gboolean* active, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate) c_gst_message_parse_step_start; ///
   void function(GstMessage* message, GstStreamCollection** collection) c_gst_message_parse_stream_collection; ///
   void function(GstMessage* message, GstStreamStatusType* type, GstElement** owner) c_gst_message_parse_stream_status; ///
   void function(GstMessage* message, GstStreamCollection** collection) c_gst_message_parse_streams_selected; ///
-  void function(GstMessage* message, GstStructureChangeType* type, GstElement** owner, bool* busy) c_gst_message_parse_structure_change; ///
+  void function(GstMessage* message, GstStructureChangeType* type, GstElement** owner, gboolean* busy) c_gst_message_parse_structure_change; ///
   void function(GstMessage* message, GstTagList** tagList) c_gst_message_parse_tag; ///
-  void function(GstMessage* message, GstToc** toc, bool* updated) c_gst_message_parse_toc; ///
+  void function(GstMessage* message, GstToc** toc, gboolean* updated) c_gst_message_parse_toc; ///
   void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_warning; ///
   void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_warning_details; ///
   void function(GstMessage* message, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) c_gst_message_set_buffering_stats; ///
@@ -806,15 +806,15 @@ __gshared extern(C)
   uint function(GstMessage* message) c_gst_message_streams_selected_get_size; ///
   GstStream* function(GstMessage* message, uint idx) c_gst_message_streams_selected_get_stream; ///
   GstStructure* function(GstMessage* message) c_gst_message_writable_structure; ///
-  bool function(GstMessage** oldMessage, GstMessage* newMessage) c_gst_message_replace; ///
+  gboolean function(GstMessage** oldMessage, GstMessage* newMessage) c_gst_message_replace; ///
 
   // Meta
   int function(const(GstMeta)* meta1, const(GstMeta)* meta2) c_gst_meta_compare_seqnum; ///
   ulong function(const(GstMeta)* meta) c_gst_meta_get_seqnum; ///
-  bool function(const(GstMeta)* meta, GstByteArrayInterface* data) c_gst_meta_serialize; ///
-  bool function(const(GstMeta)* meta, GByteArray* data) c_gst_meta_serialize_simple; ///
+  gboolean function(const(GstMeta)* meta, GstByteArrayInterface* data) c_gst_meta_serialize; ///
+  gboolean function(const(GstMeta)* meta, GByteArray* data) c_gst_meta_serialize_simple; ///
   const(char*)* function(GType api) c_gst_meta_api_type_get_tags; ///
-  bool function(GType api, GQuark tag) c_gst_meta_api_type_has_tag; ///
+  gboolean function(GType api, GQuark tag) c_gst_meta_api_type_has_tag; ///
   GType function(const(char)* api, const(char*)* tags) c_gst_meta_api_type_register; ///
   GstMeta* function(GstBuffer* buffer, const(ubyte)* data, size_t size, uint* consumed) c_gst_meta_deserialize; ///
   const(GstMetaInfo)* function(const(char)* impl) c_gst_meta_get_info; ///
@@ -823,7 +823,7 @@ __gshared extern(C)
   const(GstMetaInfo)* function(const(char)* name) c_gst_meta_register_custom_simple; ///
 
   // MetaInfo
-  bool function(const(GstMetaInfo)* info) c_gst_meta_info_is_custom; ///
+  gboolean function(const(GstMetaInfo)* info) c_gst_meta_info_is_custom; ///
   const(GstMetaInfo)* function(GstMetaInfo* info) c_gst_meta_info_register; ///
   GstMetaInfo* function(GType api, const(char)* impl, size_t size) c_gst_meta_info_new; ///
 
@@ -833,8 +833,8 @@ __gshared extern(C)
   GstMiniObject* function(const(GstMiniObject)* miniObject) c_gst_mini_object_copy; ///
   void* function(GstMiniObject* object, GQuark quark) c_gst_mini_object_get_qdata; ///
   void function(GstMiniObject* miniObject, uint flags, GType type, GstMiniObjectCopyFunction copyFunc, GstMiniObjectDisposeFunction disposeFunc, GstMiniObjectFreeFunction freeFunc) c_gst_mini_object_init; ///
-  bool function(const(GstMiniObject)* miniObject) c_gst_mini_object_is_writable; ///
-  bool function(GstMiniObject* object, GstLockFlags flags) c_gst_mini_object_lock; ///
+  gboolean function(const(GstMiniObject)* miniObject) c_gst_mini_object_is_writable; ///
+  gboolean function(GstMiniObject* object, GstLockFlags flags) c_gst_mini_object_lock; ///
   GstMiniObject* function(GstMiniObject* miniObject) c_gst_mini_object_make_writable; ///
   GstMiniObject* function(GstMiniObject* miniObject) c_gst_mini_object_ref; ///
   void function(GstMiniObject* object, GstMiniObject* parent) c_gst_mini_object_remove_parent; ///
@@ -844,39 +844,39 @@ __gshared extern(C)
   void function(GstMiniObject* miniObject) c_gst_mini_object_unref; ///
   void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) c_gst_mini_object_weak_ref; ///
   void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) c_gst_mini_object_weak_unref; ///
-  bool function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_replace; ///
+  gboolean function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_replace; ///
   GstMiniObject* function(GstMiniObject** olddata) c_gst_mini_object_steal; ///
-  bool function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_take; ///
+  gboolean function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_take; ///
 
   // ObjectWrap
   GType function() c_gst_object_get_type; ///
-  bool function(GList* list, const(char)* name) c_gst_object_check_uniqueness; ///
+  gboolean function(GList* list, const(char)* name) c_gst_object_check_uniqueness; ///
   void function(GObject* object, GstObject* orig, GParamSpec* pspec, char** excludedProps) c_gst_object_default_deep_notify; ///
   void* function(void* object) c_gst_object_ref_sink; ///
-  bool function(GstObject** oldobj, GstObject* newobj) c_gst_object_replace; ///
-  bool function(GstObject* object, GstControlBinding* binding) c_gst_object_add_control_binding; ///
+  gboolean function(GstObject** oldobj, GstObject* newobj) c_gst_object_replace; ///
+  gboolean function(GstObject* object, GstControlBinding* binding) c_gst_object_add_control_binding; ///
   void function(GstObject* source, const(GError)* error, const(char)* debug_) c_gst_object_default_error; ///
   GstControlBinding* function(GstObject* object, const(char)* propertyName) c_gst_object_get_control_binding; ///
   GstClockTime function(GstObject* object) c_gst_object_get_control_rate; ///
-  bool function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_object_get_g_value_array; ///
+  gboolean function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_object_get_g_value_array; ///
   char* function(GstObject* object) c_gst_object_get_name; ///
   GstObject* function(GstObject* object) c_gst_object_get_parent; ///
   char* function(GstObject* object) c_gst_object_get_path_string; ///
   GValue* function(GstObject* object, const(char)* propertyName, GstClockTime timestamp) c_gst_object_get_value; ///
-  bool function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_object_get_value_array; ///
-  bool function(GstObject* object) c_gst_object_has_active_control_bindings; ///
-  bool function(GstObject* object, GstObject* ancestor) c_gst_object_has_ancestor; ///
-  bool function(GstObject* object, GstObject* ancestor) c_gst_object_has_as_ancestor; ///
-  bool function(GstObject* object, GstObject* parent) c_gst_object_has_as_parent; ///
+  gboolean function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_object_get_value_array; ///
+  gboolean function(GstObject* object) c_gst_object_has_active_control_bindings; ///
+  gboolean function(GstObject* object, GstObject* ancestor) c_gst_object_has_ancestor; ///
+  gboolean function(GstObject* object, GstObject* ancestor) c_gst_object_has_as_ancestor; ///
+  gboolean function(GstObject* object, GstObject* parent) c_gst_object_has_as_parent; ///
   GstObject* function(GstObject* object) c_gst_object_ref; ///
-  bool function(GstObject* object, GstControlBinding* binding) c_gst_object_remove_control_binding; ///
-  void function(GstObject* object, const(char)* propertyName, bool disabled) c_gst_object_set_control_binding_disabled; ///
-  void function(GstObject* object, bool disabled) c_gst_object_set_control_bindings_disabled; ///
+  gboolean function(GstObject* object, GstControlBinding* binding) c_gst_object_remove_control_binding; ///
+  void function(GstObject* object, const(char)* propertyName, gboolean disabled) c_gst_object_set_control_binding_disabled; ///
+  void function(GstObject* object, gboolean disabled) c_gst_object_set_control_bindings_disabled; ///
   void function(GstObject* object, GstClockTime controlRate) c_gst_object_set_control_rate; ///
-  bool function(GstObject* object, const(char)* name) c_gst_object_set_name; ///
-  bool function(GstObject* object, GstObject* parent) c_gst_object_set_parent; ///
+  gboolean function(GstObject* object, const(char)* name) c_gst_object_set_name; ///
+  gboolean function(GstObject* object, GstObject* parent) c_gst_object_set_parent; ///
   GstClockTime function(GstObject* object) c_gst_object_suggest_next_sync; ///
-  bool function(GstObject* object, GstClockTime timestamp) c_gst_object_sync_values; ///
+  gboolean function(GstObject* object, GstClockTime timestamp) c_gst_object_sync_values; ///
   void function(GstObject* object) c_gst_object_unparent; ///
   void function(GstObject* object) c_gst_object_unref; ///
 
@@ -886,17 +886,17 @@ __gshared extern(C)
   GstPad* function(GstStaticPadTemplate* templ, const(char)* name) c_gst_pad_new_from_static_template; ///
   GstPad* function(GstPadTemplate* templ, const(char)* name) c_gst_pad_new_from_template; ///
   const(char)* function(GstPadLinkReturn ret) c_gst_pad_link_get_name; ///
-  bool function(GstPad* pad, GstPadMode mode, bool active) c_gst_pad_activate_mode; ///
+  gboolean function(GstPad* pad, GstPadMode mode, gboolean active) c_gst_pad_activate_mode; ///
   gulong function(GstPad* pad, GstPadProbeType mask, GstPadProbeCallback callback, void* userData, GDestroyNotify destroyData) c_gst_pad_add_probe; ///
-  bool function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_can_link; ///
+  gboolean function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_can_link; ///
   GstFlowReturn function(GstPad* pad, GstBuffer* buffer) c_gst_pad_chain; ///
   GstFlowReturn function(GstPad* pad, GstBufferList* list) c_gst_pad_chain_list; ///
-  bool function(GstPad* pad) c_gst_pad_check_reconfigure; ///
+  gboolean function(GstPad* pad) c_gst_pad_check_reconfigure; ///
   char* function(GstPad* pad, GstElement* parent, const(char)* streamId) c_gst_pad_create_stream_id; ///
   char* function(GstPad* pad, GstElement* parent, const(char)* streamId,  ...) c_gst_pad_create_stream_id_printf; ///
   char* function(GstPad* pad, GstElement* parent, const(char)* streamId, void* varArgs) c_gst_pad_create_stream_id_printf_valist; ///
-  bool function(GstPad* pad, GstObject* parent, GstEvent* event) c_gst_pad_event_default; ///
-  bool function(GstPad* pad, GstPadForwardFunction forward, void* userData) c_gst_pad_forward; ///
+  gboolean function(GstPad* pad, GstObject* parent, GstEvent* event) c_gst_pad_event_default; ///
+  gboolean function(GstPad* pad, GstPadForwardFunction forward, void* userData) c_gst_pad_forward; ///
   GstCaps* function(GstPad* pad) c_gst_pad_get_allowed_caps; ///
   GstCaps* function(GstPad* pad) c_gst_pad_get_current_caps; ///
   GstPadDirection function(GstPad* pad) c_gst_pad_get_direction; ///
@@ -913,44 +913,44 @@ __gshared extern(C)
   GstStream* function(GstPad* pad) c_gst_pad_get_stream; ///
   char* function(GstPad* pad) c_gst_pad_get_stream_id; ///
   GstTaskState function(GstPad* pad) c_gst_pad_get_task_state; ///
-  bool function(GstPad* pad) c_gst_pad_has_current_caps; ///
-  bool function(GstPad* pad) c_gst_pad_is_active; ///
-  bool function(GstPad* pad) c_gst_pad_is_blocked; ///
-  bool function(GstPad* pad) c_gst_pad_is_blocking; ///
-  bool function(GstPad* pad) c_gst_pad_is_linked; ///
+  gboolean function(GstPad* pad) c_gst_pad_has_current_caps; ///
+  gboolean function(GstPad* pad) c_gst_pad_is_active; ///
+  gboolean function(GstPad* pad) c_gst_pad_is_blocked; ///
+  gboolean function(GstPad* pad) c_gst_pad_is_blocking; ///
+  gboolean function(GstPad* pad) c_gst_pad_is_linked; ///
   GstIterator* function(GstPad* pad) c_gst_pad_iterate_internal_links; ///
   GstIterator* function(GstPad* pad, GstObject* parent) c_gst_pad_iterate_internal_links_default; ///
   GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_link; ///
   GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad, GstPadLinkCheck flags) c_gst_pad_link_full; ///
-  bool function(GstPad* src, GstPad* sink) c_gst_pad_link_maybe_ghosting; ///
-  bool function(GstPad* src, GstPad* sink, GstPadLinkCheck flags) c_gst_pad_link_maybe_ghosting_full; ///
+  gboolean function(GstPad* src, GstPad* sink) c_gst_pad_link_maybe_ghosting; ///
+  gboolean function(GstPad* src, GstPad* sink, GstPadLinkCheck flags) c_gst_pad_link_maybe_ghosting_full; ///
   void function(GstPad* pad) c_gst_pad_mark_reconfigure; ///
-  bool function(GstPad* pad) c_gst_pad_needs_reconfigure; ///
-  bool function(GstPad* pad) c_gst_pad_pause_task; ///
-  bool function(GstPad* pad, GstQuery* query) c_gst_pad_peer_query; ///
-  bool function(GstPad* pad, GstCaps* caps) c_gst_pad_peer_query_accept_caps; ///
+  gboolean function(GstPad* pad) c_gst_pad_needs_reconfigure; ///
+  gboolean function(GstPad* pad) c_gst_pad_pause_task; ///
+  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_peer_query; ///
+  gboolean function(GstPad* pad, GstCaps* caps) c_gst_pad_peer_query_accept_caps; ///
   GstCaps* function(GstPad* pad, GstCaps* filter) c_gst_pad_peer_query_caps; ///
-  bool function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_peer_query_convert; ///
-  bool function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_peer_query_duration; ///
-  bool function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_peer_query_position; ///
-  bool function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_accept_caps; ///
-  bool function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_caps; ///
+  gboolean function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_peer_query_convert; ///
+  gboolean function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_peer_query_duration; ///
+  gboolean function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_peer_query_position; ///
+  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_accept_caps; ///
+  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_caps; ///
   GstFlowReturn function(GstPad* pad, ulong offset, uint size, GstBuffer** buffer) c_gst_pad_pull_range; ///
   GstFlowReturn function(GstPad* pad, GstBuffer* buffer) c_gst_pad_push; ///
-  bool function(GstPad* pad, GstEvent* event) c_gst_pad_push_event; ///
+  gboolean function(GstPad* pad, GstEvent* event) c_gst_pad_push_event; ///
   GstFlowReturn function(GstPad* pad, GstBufferList* list) c_gst_pad_push_list; ///
-  bool function(GstPad* pad, GstQuery* query) c_gst_pad_query; ///
-  bool function(GstPad* pad, GstCaps* caps) c_gst_pad_query_accept_caps; ///
+  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_query; ///
+  gboolean function(GstPad* pad, GstCaps* caps) c_gst_pad_query_accept_caps; ///
   GstCaps* function(GstPad* pad, GstCaps* filter) c_gst_pad_query_caps; ///
-  bool function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_query_convert; ///
-  bool function(GstPad* pad, GstObject* parent, GstQuery* query) c_gst_pad_query_default; ///
-  bool function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_query_duration; ///
-  bool function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_query_position; ///
+  gboolean function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_query_convert; ///
+  gboolean function(GstPad* pad, GstObject* parent, GstQuery* query) c_gst_pad_query_default; ///
+  gboolean function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_query_duration; ///
+  gboolean function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_query_position; ///
   void function(GstPad* pad, gulong id) c_gst_pad_remove_probe; ///
-  bool function(GstPad* pad, GstEvent* event) c_gst_pad_send_event; ///
+  gboolean function(GstPad* pad, GstEvent* event) c_gst_pad_send_event; ///
   void function(GstPad* pad, GstPadActivateFunction activate, void* userData, GDestroyNotify notify) c_gst_pad_set_activate_function_full; ///
   void function(GstPad* pad, GstPadActivateModeFunction activatemode, void* userData, GDestroyNotify notify) c_gst_pad_set_activatemode_function_full; ///
-  bool function(GstPad* pad, bool active) c_gst_pad_set_active; ///
+  gboolean function(GstPad* pad, gboolean active) c_gst_pad_set_active; ///
   void function(GstPad* pad, GstPadChainFunction chain, void* userData, GDestroyNotify notify) c_gst_pad_set_chain_function_full; ///
   void function(GstPad* pad, GstPadChainListFunction chainlist, void* userData, GDestroyNotify notify) c_gst_pad_set_chain_list_function_full; ///
   void function(GstPad* pad, void* priv) c_gst_pad_set_element_private; ///
@@ -962,11 +962,11 @@ __gshared extern(C)
   void function(GstPad* pad, long offset) c_gst_pad_set_offset; ///
   void function(GstPad* pad, GstPadQueryFunction query, void* userData, GDestroyNotify notify) c_gst_pad_set_query_function_full; ///
   void function(GstPad* pad, GstPadUnlinkFunction unlink, void* userData, GDestroyNotify notify) c_gst_pad_set_unlink_function_full; ///
-  bool function(GstPad* pad, GstTaskFunction func, void* userData, GDestroyNotify notify) c_gst_pad_start_task; ///
+  gboolean function(GstPad* pad, GstTaskFunction func, void* userData, GDestroyNotify notify) c_gst_pad_start_task; ///
   void function(GstPad* pad, GstPadStickyEventsForeachFunction foreachFunc, void* userData) c_gst_pad_sticky_events_foreach; ///
-  bool function(GstPad* pad) c_gst_pad_stop_task; ///
+  gboolean function(GstPad* pad) c_gst_pad_stop_task; ///
   GstFlowReturn function(GstPad* pad, GstEvent* event) c_gst_pad_store_sticky_event; ///
-  bool function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_unlink; ///
+  gboolean function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_unlink; ///
   void function(GstPad* pad) c_gst_pad_use_fixed_caps; ///
 
   // PadProbeInfo
@@ -1005,16 +1005,16 @@ __gshared extern(C)
   GType function() c_gst_pipeline_get_type; ///
   GstElement* function(const(char)* name) c_gst_pipeline_new; ///
   void function(GstPipeline* pipeline) c_gst_pipeline_auto_clock; ///
-  bool function(GstPipeline* pipeline) c_gst_pipeline_get_auto_flush_bus; ///
+  gboolean function(GstPipeline* pipeline) c_gst_pipeline_get_auto_flush_bus; ///
   GstBus* function(GstPipeline* pipeline) c_gst_pipeline_get_bus; ///
   GstClock* function(GstPipeline* pipeline) c_gst_pipeline_get_clock; ///
   GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_configured_latency; ///
   GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_delay; ///
   GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_latency; ///
   GstClock* function(GstPipeline* pipeline) c_gst_pipeline_get_pipeline_clock; ///
-  bool function(GstPipeline* pipeline) c_gst_pipeline_is_live; ///
-  void function(GstPipeline* pipeline, bool autoFlush) c_gst_pipeline_set_auto_flush_bus; ///
-  bool function(GstPipeline* pipeline, GstClock* clock) c_gst_pipeline_set_clock; ///
+  gboolean function(GstPipeline* pipeline) c_gst_pipeline_is_live; ///
+  void function(GstPipeline* pipeline, gboolean autoFlush) c_gst_pipeline_set_auto_flush_bus; ///
+  gboolean function(GstPipeline* pipeline, GstClock* clock) c_gst_pipeline_set_clock; ///
   void function(GstPipeline* pipeline, GstClockTime delay) c_gst_pipeline_set_delay; ///
   void function(GstPipeline* pipeline, GstClockTime latency) c_gst_pipeline_set_latency; ///
   void function(GstPipeline* pipeline, GstClock* clock) c_gst_pipeline_use_clock; ///
@@ -1024,8 +1024,8 @@ __gshared extern(C)
   void function(GList* list) c_gst_plugin_list_free; ///
   GstPlugin* function(const(char)* name) c_gst_plugin_load_by_name; ///
   GstPlugin* function(const(char)* filename, GError** _err) c_gst_plugin_load_file; ///
-  bool function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFunc initFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin) c_gst_plugin_register_static; ///
-  bool function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFullFunc initFullFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin, void* userData) c_gst_plugin_register_static_full; ///
+  gboolean function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFunc initFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin) c_gst_plugin_register_static; ///
+  gboolean function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFullFunc initFullFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin, void* userData) c_gst_plugin_register_static_full; ///
   void function(GstPlugin* plugin, const(char*)* envVars, const(char*)* paths, const(char*)* names, GstPluginDependencyFlags flags) c_gst_plugin_add_dependency; ///
   void function(GstPlugin* plugin, const(char)* envVars, const(char)* paths, const(char)* names, GstPluginDependencyFlags flags) c_gst_plugin_add_dependency_simple; ///
   void function(GstPlugin* plugin, const(char)* message) c_gst_plugin_add_status_error; ///
@@ -1044,7 +1044,7 @@ __gshared extern(C)
   char** function(GstPlugin* plugin) c_gst_plugin_get_status_infos; ///
   char** function(GstPlugin* plugin) c_gst_plugin_get_status_warnings; ///
   const(char)* function(GstPlugin* plugin) c_gst_plugin_get_version; ///
-  bool function(GstPlugin* plugin) c_gst_plugin_is_loaded; ///
+  gboolean function(GstPlugin* plugin) c_gst_plugin_is_loaded; ///
   GstPlugin* function(GstPlugin* plugin) c_gst_plugin_load; ///
   void function(GstPlugin* plugin, GstStructure* cacheData) c_gst_plugin_set_cache_data; ///
 
@@ -1054,7 +1054,7 @@ __gshared extern(C)
   void function(GList* list) c_gst_plugin_feature_list_debug; ///
   void function(GList* list) c_gst_plugin_feature_list_free; ///
   int function(const(void)* p1, const(void)* p2) c_gst_plugin_feature_rank_compare_func; ///
-  bool function(GstPluginFeature* feature, uint minMajor, uint minMinor, uint minMicro) c_gst_plugin_feature_check_version; ///
+  gboolean function(GstPluginFeature* feature, uint minMajor, uint minMinor, uint minMicro) c_gst_plugin_feature_check_version; ///
   GstPlugin* function(GstPluginFeature* feature) c_gst_plugin_feature_get_plugin; ///
   const(char)* function(GstPluginFeature* feature) c_gst_plugin_feature_get_plugin_name; ///
   uint function(GstPluginFeature* feature) c_gst_plugin_feature_get_rank; ///
@@ -1062,26 +1062,26 @@ __gshared extern(C)
   void function(GstPluginFeature* feature, uint rank) c_gst_plugin_feature_set_rank; ///
 
   // Poll
-  bool function(GstPoll* set, GstPollFD* fd) c_gst_poll_add_fd; ///
-  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_read; ///
-  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_write; ///
-  bool function(GstPoll* set, GstPollFD* fd, bool active) c_gst_poll_fd_ctl_pri; ///
-  bool function(GstPoll* set, GstPollFD* fd, bool active) c_gst_poll_fd_ctl_read; ///
-  bool function(GstPoll* set, GstPollFD* fd, bool active) c_gst_poll_fd_ctl_write; ///
-  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_closed; ///
-  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_error; ///
-  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_pri; ///
+  gboolean function(GstPoll* set, GstPollFD* fd) c_gst_poll_add_fd; ///
+  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_read; ///
+  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_write; ///
+  gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) c_gst_poll_fd_ctl_pri; ///
+  gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) c_gst_poll_fd_ctl_read; ///
+  gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) c_gst_poll_fd_ctl_write; ///
+  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_closed; ///
+  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_error; ///
+  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_pri; ///
   void function(GstPoll* set, GstPollFD* fd) c_gst_poll_fd_ignored; ///
   void function(GstPoll* set) c_gst_poll_free; ///
   void function(GstPoll* set, GPollFD* fd) c_gst_poll_get_read_gpollfd; ///
-  bool function(GstPoll* set) c_gst_poll_read_control; ///
-  bool function(GstPoll* set, GstPollFD* fd) c_gst_poll_remove_fd; ///
+  gboolean function(GstPoll* set) c_gst_poll_read_control; ///
+  gboolean function(GstPoll* set, GstPollFD* fd) c_gst_poll_remove_fd; ///
   void function(GstPoll* set) c_gst_poll_restart; ///
-  bool function(GstPoll* set, bool controllable) c_gst_poll_set_controllable; ///
-  void function(GstPoll* set, bool flushing) c_gst_poll_set_flushing; ///
+  gboolean function(GstPoll* set, gboolean controllable) c_gst_poll_set_controllable; ///
+  void function(GstPoll* set, gboolean flushing) c_gst_poll_set_flushing; ///
   int function(GstPoll* set, GstClockTime timeout) c_gst_poll_wait; ///
-  bool function(GstPoll* set) c_gst_poll_write_control; ///
-  GstPoll* function(bool controllable) c_gst_poll_new; ///
+  gboolean function(GstPoll* set) c_gst_poll_write_control; ///
+  GstPoll* function(gboolean controllable) c_gst_poll_new; ///
   GstPoll* function() c_gst_poll_new_timer; ///
 
   // PollFD
@@ -1090,16 +1090,16 @@ __gshared extern(C)
   // Preset
   GType function() c_gst_preset_get_type; ///
   const(char)* function() c_gst_preset_get_app_dir; ///
-  bool function(const(char)* appDir) c_gst_preset_set_app_dir; ///
-  bool function(GstPreset* preset, const(char)* name) c_gst_preset_delete_preset; ///
-  bool function(GstPreset* preset, const(char)* name, const(char)* tag, char** value) c_gst_preset_get_meta; ///
+  gboolean function(const(char)* appDir) c_gst_preset_set_app_dir; ///
+  gboolean function(GstPreset* preset, const(char)* name) c_gst_preset_delete_preset; ///
+  gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, char** value) c_gst_preset_get_meta; ///
   char** function(GstPreset* preset) c_gst_preset_get_preset_names; ///
   char** function(GstPreset* preset) c_gst_preset_get_property_names; ///
-  bool function(GstPreset* preset) c_gst_preset_is_editable; ///
-  bool function(GstPreset* preset, const(char)* name) c_gst_preset_load_preset; ///
-  bool function(GstPreset* preset, const(char)* oldName, const(char)* newName) c_gst_preset_rename_preset; ///
-  bool function(GstPreset* preset, const(char)* name) c_gst_preset_save_preset; ///
-  bool function(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) c_gst_preset_set_meta; ///
+  gboolean function(GstPreset* preset) c_gst_preset_is_editable; ///
+  gboolean function(GstPreset* preset, const(char)* name) c_gst_preset_load_preset; ///
+  gboolean function(GstPreset* preset, const(char)* oldName, const(char)* newName) c_gst_preset_rename_preset; ///
+  gboolean function(GstPreset* preset, const(char)* name) c_gst_preset_save_preset; ///
+  gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) c_gst_preset_set_meta; ///
 
   // Promise
   GType function() c_gst_promise_get_type; ///
@@ -1125,7 +1125,7 @@ __gshared extern(C)
   // Query
   GType function() c_gst_query_get_type; ///
   GstQuery* function(GstCaps* caps) c_gst_query_new_accept_caps; ///
-  GstQuery* function(GstCaps* caps, bool needPool) c_gst_query_new_allocation; ///
+  GstQuery* function(GstCaps* caps, gboolean needPool) c_gst_query_new_allocation; ///
   GstQuery* function() c_gst_query_new_bitrate; ///
   GstQuery* function(GstFormat format) c_gst_query_new_buffering; ///
   GstQuery* function(GstCaps* filter) c_gst_query_new_caps; ///
@@ -1145,52 +1145,52 @@ __gshared extern(C)
   void function(GstQuery* query, GType api, const(GstStructure)* params) c_gst_query_add_allocation_meta; ///
   void function(GstQuery* query, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_query_add_allocation_param; ///
   void function(GstQuery* query, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) c_gst_query_add_allocation_pool; ///
-  bool function(GstQuery* query, long start, long stop) c_gst_query_add_buffering_range; ///
+  gboolean function(GstQuery* query, long start, long stop) c_gst_query_add_buffering_range; ///
   void function(GstQuery* query, GstPadMode mode) c_gst_query_add_scheduling_mode; ///
-  bool function(GstQuery* query, GType api, uint* index) c_gst_query_find_allocation_meta; ///
+  gboolean function(GstQuery* query, GType api, uint* index) c_gst_query_find_allocation_meta; ///
   uint function(GstQuery* query) c_gst_query_get_n_allocation_metas; ///
   uint function(GstQuery* query) c_gst_query_get_n_allocation_params; ///
   uint function(GstQuery* query) c_gst_query_get_n_allocation_pools; ///
   uint function(GstQuery* query) c_gst_query_get_n_buffering_ranges; ///
   uint function(GstQuery* query) c_gst_query_get_n_scheduling_modes; ///
   const(GstStructure)* function(GstQuery* query) c_gst_query_get_structure; ///
-  bool function(GstQuery* query, GstPadMode mode) c_gst_query_has_scheduling_mode; ///
-  bool function(GstQuery* query, GstPadMode mode, GstSchedulingFlags flags) c_gst_query_has_scheduling_mode_with_flags; ///
+  gboolean function(GstQuery* query, GstPadMode mode) c_gst_query_has_scheduling_mode; ///
+  gboolean function(GstQuery* query, GstPadMode mode, GstSchedulingFlags flags) c_gst_query_has_scheduling_mode_with_flags; ///
   void function(GstQuery* query, GstCaps** caps) c_gst_query_parse_accept_caps; ///
-  void function(GstQuery* query, bool* result) c_gst_query_parse_accept_caps_result; ///
-  void function(GstQuery* query, GstCaps** caps, bool* needPool) c_gst_query_parse_allocation; ///
+  void function(GstQuery* query, gboolean* result) c_gst_query_parse_accept_caps_result; ///
+  void function(GstQuery* query, GstCaps** caps, gboolean* needPool) c_gst_query_parse_allocation; ///
   void function(GstQuery* query, uint* nominalBitrate) c_gst_query_parse_bitrate; ///
-  void function(GstQuery* query, bool* busy, int* percent) c_gst_query_parse_buffering_percent; ///
+  void function(GstQuery* query, gboolean* busy, int* percent) c_gst_query_parse_buffering_percent; ///
   void function(GstQuery* query, GstFormat* format, long* start, long* stop, long* estimatedTotal) c_gst_query_parse_buffering_range; ///
   void function(GstQuery* query, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) c_gst_query_parse_buffering_stats; ///
   void function(GstQuery* query, GstCaps** filter) c_gst_query_parse_caps; ///
   void function(GstQuery* query, GstCaps** caps) c_gst_query_parse_caps_result; ///
   void function(GstQuery* query, GstContext** context) c_gst_query_parse_context; ///
-  bool function(GstQuery* query, const(char*)* contextType) c_gst_query_parse_context_type; ///
+  gboolean function(GstQuery* query, const(char*)* contextType) c_gst_query_parse_context_type; ///
   void function(GstQuery* query, GstFormat* srcFormat, long* srcValue, GstFormat* destFormat, long* destValue) c_gst_query_parse_convert; ///
   void function(GstQuery* query, GstFormat* format, long* duration) c_gst_query_parse_duration; ///
-  void function(GstQuery* query, bool* live, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_query_parse_latency; ///
+  void function(GstQuery* query, gboolean* live, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_query_parse_latency; ///
   void function(GstQuery* query, uint* nFormats) c_gst_query_parse_n_formats; ///
   GType function(GstQuery* query, uint index, const(GstStructure*)* params) c_gst_query_parse_nth_allocation_meta; ///
   void function(GstQuery* query, uint index, GstAllocator** allocator, GstAllocationParams* params) c_gst_query_parse_nth_allocation_param; ///
   void function(GstQuery* query, uint index, GstBufferPool** pool, uint* size, uint* minBuffers, uint* maxBuffers) c_gst_query_parse_nth_allocation_pool; ///
-  bool function(GstQuery* query, uint index, long* start, long* stop) c_gst_query_parse_nth_buffering_range; ///
+  gboolean function(GstQuery* query, uint index, long* start, long* stop) c_gst_query_parse_nth_buffering_range; ///
   void function(GstQuery* query, uint nth, GstFormat* format) c_gst_query_parse_nth_format; ///
   GstPadMode function(GstQuery* query, uint index) c_gst_query_parse_nth_scheduling_mode; ///
   void function(GstQuery* query, GstFormat* format, long* cur) c_gst_query_parse_position; ///
   void function(GstQuery* query, GstSchedulingFlags* flags, int* minsize, int* maxsize, int* align_) c_gst_query_parse_scheduling; ///
-  void function(GstQuery* query, GstFormat* format, bool* seekable, long* segmentStart, long* segmentEnd) c_gst_query_parse_seeking; ///
+  void function(GstQuery* query, GstFormat* format, gboolean* seekable, long* segmentStart, long* segmentEnd) c_gst_query_parse_seeking; ///
   void function(GstQuery* query, double* rate, GstFormat* format, long* startValue, long* stopValue) c_gst_query_parse_segment; ///
-  void function(GstQuery* query, bool* selectable) c_gst_query_parse_selectable; ///
+  void function(GstQuery* query, gboolean* selectable) c_gst_query_parse_selectable; ///
   void function(GstQuery* query, char** uri) c_gst_query_parse_uri; ///
   void function(GstQuery* query, char** uri) c_gst_query_parse_uri_redirection; ///
-  void function(GstQuery* query, bool* permanent) c_gst_query_parse_uri_redirection_permanent; ///
+  void function(GstQuery* query, gboolean* permanent) c_gst_query_parse_uri_redirection_permanent; ///
   void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_meta; ///
   void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_param; ///
   void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_pool; ///
-  void function(GstQuery* query, bool result) c_gst_query_set_accept_caps_result; ///
+  void function(GstQuery* query, gboolean result) c_gst_query_set_accept_caps_result; ///
   void function(GstQuery* query, uint nominalBitrate) c_gst_query_set_bitrate; ///
-  void function(GstQuery* query, bool busy, int percent) c_gst_query_set_buffering_percent; ///
+  void function(GstQuery* query, gboolean busy, int percent) c_gst_query_set_buffering_percent; ///
   void function(GstQuery* query, GstFormat format, long start, long stop, long estimatedTotal) c_gst_query_set_buffering_range; ///
   void function(GstQuery* query, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) c_gst_query_set_buffering_stats; ///
   void function(GstQuery* query, GstCaps* caps) c_gst_query_set_caps_result; ///
@@ -1199,17 +1199,17 @@ __gshared extern(C)
   void function(GstQuery* query, GstFormat format, long duration) c_gst_query_set_duration; ///
   void function(GstQuery* query, int nFormats,  ...) c_gst_query_set_formats; ///
   void function(GstQuery* query, int nFormats, const(GstFormat)* formats) c_gst_query_set_formatsv; ///
-  void function(GstQuery* query, bool live, GstClockTime minLatency, GstClockTime maxLatency) c_gst_query_set_latency; ///
+  void function(GstQuery* query, gboolean live, GstClockTime minLatency, GstClockTime maxLatency) c_gst_query_set_latency; ///
   void function(GstQuery* query, uint index, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_query_set_nth_allocation_param; ///
   void function(GstQuery* query, uint index, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) c_gst_query_set_nth_allocation_pool; ///
   void function(GstQuery* query, GstFormat format, long cur) c_gst_query_set_position; ///
   void function(GstQuery* query, GstSchedulingFlags flags, int minsize, int maxsize, int align_) c_gst_query_set_scheduling; ///
-  void function(GstQuery* query, GstFormat format, bool seekable, long segmentStart, long segmentEnd) c_gst_query_set_seeking; ///
+  void function(GstQuery* query, GstFormat format, gboolean seekable, long segmentStart, long segmentEnd) c_gst_query_set_seeking; ///
   void function(GstQuery* query, double rate, GstFormat format, long startValue, long stopValue) c_gst_query_set_segment; ///
-  void function(GstQuery* query, bool selectable) c_gst_query_set_selectable; ///
+  void function(GstQuery* query, gboolean selectable) c_gst_query_set_selectable; ///
   void function(GstQuery* query, const(char)* uri) c_gst_query_set_uri; ///
   void function(GstQuery* query, const(char)* uri) c_gst_query_set_uri_redirection; ///
-  void function(GstQuery* query, bool permanent) c_gst_query_set_uri_redirection_permanent; ///
+  void function(GstQuery* query, gboolean permanent) c_gst_query_set_uri_redirection_permanent; ///
   GstStructure* function(GstQuery* query) c_gst_query_writable_structure; ///
 
   // ReferenceTimestampMeta
@@ -1217,13 +1217,13 @@ __gshared extern(C)
 
   // Registry
   GType function() c_gst_registry_get_type; ///
-  bool function() c_gst_registry_fork_is_enabled; ///
-  void function(bool enabled) c_gst_registry_fork_set_enabled; ///
+  gboolean function() c_gst_registry_fork_is_enabled; ///
+  void function(gboolean enabled) c_gst_registry_fork_set_enabled; ///
   GstRegistry* function() c_gst_registry_get; ///
-  bool function(GstRegistry* registry, GstPluginFeature* feature) c_gst_registry_add_feature; ///
-  bool function(GstRegistry* registry, GstPlugin* plugin) c_gst_registry_add_plugin; ///
-  bool function(GstRegistry* registry, const(char)* featureName, uint minMajor, uint minMinor, uint minMicro) c_gst_registry_check_feature_version; ///
-  GList* function(GstRegistry* registry, GstPluginFeatureFilter filter, bool first, void* userData) c_gst_registry_feature_filter; ///
+  gboolean function(GstRegistry* registry, GstPluginFeature* feature) c_gst_registry_add_feature; ///
+  gboolean function(GstRegistry* registry, GstPlugin* plugin) c_gst_registry_add_plugin; ///
+  gboolean function(GstRegistry* registry, const(char)* featureName, uint minMajor, uint minMinor, uint minMicro) c_gst_registry_check_feature_version; ///
+  GList* function(GstRegistry* registry, GstPluginFeatureFilter filter, gboolean first, void* userData) c_gst_registry_feature_filter; ///
   GstPluginFeature* function(GstRegistry* registry, const(char)* name, GType type) c_gst_registry_find_feature; ///
   GstPlugin* function(GstRegistry* registry, const(char)* name) c_gst_registry_find_plugin; ///
   GList* function(GstRegistry* registry, GType type) c_gst_registry_get_feature_list; ///
@@ -1232,10 +1232,10 @@ __gshared extern(C)
   GList* function(GstRegistry* registry) c_gst_registry_get_plugin_list; ///
   GstPlugin* function(GstRegistry* registry, const(char)* filename) c_gst_registry_lookup; ///
   GstPluginFeature* function(GstRegistry* registry, const(char)* name) c_gst_registry_lookup_feature; ///
-  GList* function(GstRegistry* registry, GstPluginFilter filter, bool first, void* userData) c_gst_registry_plugin_filter; ///
+  GList* function(GstRegistry* registry, GstPluginFilter filter, gboolean first, void* userData) c_gst_registry_plugin_filter; ///
   void function(GstRegistry* registry, GstPluginFeature* feature) c_gst_registry_remove_feature; ///
   void function(GstRegistry* registry, GstPlugin* plugin) c_gst_registry_remove_plugin; ///
-  bool function(GstRegistry* registry, const(char)* path) c_gst_registry_scan_path; ///
+  gboolean function(GstRegistry* registry, const(char)* path) c_gst_registry_scan_path; ///
 
   // Sample
   GType function() c_gst_sample_get_type; ///
@@ -1248,25 +1248,25 @@ __gshared extern(C)
   void function(GstSample* sample, GstBuffer* buffer) c_gst_sample_set_buffer; ///
   void function(GstSample* sample, GstBufferList* bufferList) c_gst_sample_set_buffer_list; ///
   void function(GstSample* sample, GstCaps* caps) c_gst_sample_set_caps; ///
-  bool function(GstSample* sample, GstStructure* info) c_gst_sample_set_info; ///
+  gboolean function(GstSample* sample, GstStructure* info) c_gst_sample_set_info; ///
   void function(GstSample* sample, const(GstSegment)* segment) c_gst_sample_set_segment; ///
 
   // Segment
   GType function() c_gst_segment_get_type; ///
   GstSegment* function() c_gst_segment_new; ///
-  bool function(const(GstSegment)* segment, GstFormat format, ulong start, ulong stop, ulong* clipStart, ulong* clipStop) c_gst_segment_clip; ///
+  gboolean function(const(GstSegment)* segment, GstFormat format, ulong start, ulong stop, ulong* clipStart, ulong* clipStop) c_gst_segment_clip; ///
   GstSegment* function(const(GstSegment)* segment) c_gst_segment_copy; ///
   void function(const(GstSegment)* src, GstSegment* dest) c_gst_segment_copy_into; ///
-  bool function(GstSegment* segment, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, ulong start, GstSeekType stopType, ulong stop, bool* update) c_gst_segment_do_seek; ///
+  gboolean function(GstSegment* segment, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, ulong start, GstSeekType stopType, ulong stop, gboolean* update) c_gst_segment_do_seek; ///
   void function(GstSegment* segment) c_gst_segment_free; ///
   void function(GstSegment* segment, GstFormat format) c_gst_segment_init; ///
-  bool function(const(GstSegment)* s0, const(GstSegment)* s1) c_gst_segment_is_equal; ///
-  bool function(GstSegment* segment, GstFormat format, long offset) c_gst_segment_offset_running_time; ///
+  gboolean function(const(GstSegment)* s0, const(GstSegment)* s1) c_gst_segment_is_equal; ///
+  gboolean function(GstSegment* segment, GstFormat format, long offset) c_gst_segment_offset_running_time; ///
   ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) c_gst_segment_position_from_running_time; ///
   int function(const(GstSegment)* segment, GstFormat format, ulong runningTime, ulong* position) c_gst_segment_position_from_running_time_full; ///
   ulong function(const(GstSegment)* segment, GstFormat format, ulong streamTime) c_gst_segment_position_from_stream_time; ///
   int function(const(GstSegment)* segment, GstFormat format, ulong streamTime, ulong* position) c_gst_segment_position_from_stream_time_full; ///
-  bool function(GstSegment* segment, GstFormat format, ulong runningTime) c_gst_segment_set_running_time; ///
+  gboolean function(GstSegment* segment, GstFormat format, ulong runningTime) c_gst_segment_set_running_time; ///
   ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) c_gst_segment_to_position; ///
   ulong function(const(GstSegment)* segment, GstFormat format, ulong position) c_gst_segment_to_running_time; ///
   int function(const(GstSegment)* segment, GstFormat format, ulong position, ulong* runningTime) c_gst_segment_to_running_time_full; ///
@@ -1303,7 +1303,7 @@ __gshared extern(C)
   // StreamCollection
   GType function() c_gst_stream_collection_get_type; ///
   GstStreamCollection* function(const(char)* upstreamId) c_gst_stream_collection_new; ///
-  bool function(GstStreamCollection* collection, GstStream* stream) c_gst_stream_collection_add_stream; ///
+  gboolean function(GstStreamCollection* collection, GstStream* stream) c_gst_stream_collection_add_stream; ///
   uint function(GstStreamCollection* collection) c_gst_stream_collection_get_size; ///
   GstStream* function(GstStreamCollection* collection, uint index) c_gst_stream_collection_get_stream; ///
   const(char)* function(GstStreamCollection* collection) c_gst_stream_collection_get_upstream_id; ///
@@ -1317,56 +1317,56 @@ __gshared extern(C)
   GstStructure* function(GQuark nameQuark, GQuark fieldQuark,  ...) c_gst_structure_new_id; ///
   GstStructure* function(GQuark quark) c_gst_structure_new_id_empty; ///
   GstStructure* function(const(char)* name, const(char)* firstfield, void* varargs) c_gst_structure_new_valist; ///
-  bool function(const(GstStructure)* struct1, const(GstStructure)* struct2) c_gst_structure_can_intersect; ///
+  gboolean function(const(GstStructure)* struct1, const(GstStructure)* struct2) c_gst_structure_can_intersect; ///
   GstStructure* function(const(GstStructure)* structure) c_gst_structure_copy; ///
   void function(GstStructure* structure, GstStructureFilterMapFunc func, void* userData) c_gst_structure_filter_and_map_in_place; ///
   void function(GstStructure* structure) c_gst_structure_fixate; ///
-  bool function(GstStructure* structure, const(char)* fieldName) c_gst_structure_fixate_field; ///
-  bool function(GstStructure* structure, const(char)* fieldName, bool target) c_gst_structure_fixate_field_boolean; ///
-  bool function(GstStructure* structure, const(char)* fieldName, double target) c_gst_structure_fixate_field_nearest_double; ///
-  bool function(GstStructure* structure, const(char)* fieldName, int targetNumerator, int targetDenominator) c_gst_structure_fixate_field_nearest_fraction; ///
-  bool function(GstStructure* structure, const(char)* fieldName, int target) c_gst_structure_fixate_field_nearest_int; ///
-  bool function(GstStructure* structure, const(char)* fieldName, const(char)* target) c_gst_structure_fixate_field_string; ///
-  bool function(const(GstStructure)* structure, GstStructureForeachFunc func, void* userData) c_gst_structure_foreach; ///
+  gboolean function(GstStructure* structure, const(char)* fieldName) c_gst_structure_fixate_field; ///
+  gboolean function(GstStructure* structure, const(char)* fieldName, gboolean target) c_gst_structure_fixate_field_boolean; ///
+  gboolean function(GstStructure* structure, const(char)* fieldName, double target) c_gst_structure_fixate_field_nearest_double; ///
+  gboolean function(GstStructure* structure, const(char)* fieldName, int targetNumerator, int targetDenominator) c_gst_structure_fixate_field_nearest_fraction; ///
+  gboolean function(GstStructure* structure, const(char)* fieldName, int target) c_gst_structure_fixate_field_nearest_int; ///
+  gboolean function(GstStructure* structure, const(char)* fieldName, const(char)* target) c_gst_structure_fixate_field_string; ///
+  gboolean function(const(GstStructure)* structure, GstStructureForeachFunc func, void* userData) c_gst_structure_foreach; ///
   void function(GstStructure* structure) c_gst_structure_free; ///
-  bool function(const(GstStructure)* structure, const(char)* firstFieldname,  ...) c_gst_structure_get; ///
-  bool function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_array; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, bool* value) c_gst_structure_get_boolean; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, GstClockTime* value) c_gst_structure_get_clock_time; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, GDate** value) c_gst_structure_get_date; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, GstDateTime** value) c_gst_structure_get_date_time; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, double* value) c_gst_structure_get_double; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, GType enumtype, int* value) c_gst_structure_get_enum; ///
+  gboolean function(const(GstStructure)* structure, const(char)* firstFieldname,  ...) c_gst_structure_get; ///
+  gboolean function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_array; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, gboolean* value) c_gst_structure_get_boolean; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GstClockTime* value) c_gst_structure_get_clock_time; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GDate** value) c_gst_structure_get_date; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GstDateTime** value) c_gst_structure_get_date_time; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, double* value) c_gst_structure_get_double; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType enumtype, int* value) c_gst_structure_get_enum; ///
   GType function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_field_type; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, GType flagsType, uint* value) c_gst_structure_get_flags; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, uint* valueFlags, uint* valueMask) c_gst_structure_get_flagset; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, int* valueNumerator, int* valueDenominator) c_gst_structure_get_fraction; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, int* value) c_gst_structure_get_int; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, long* value) c_gst_structure_get_int64; ///
-  bool function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_list; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType flagsType, uint* value) c_gst_structure_get_flags; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, uint* valueFlags, uint* valueMask) c_gst_structure_get_flagset; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, int* valueNumerator, int* valueDenominator) c_gst_structure_get_fraction; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, int* value) c_gst_structure_get_int; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, long* value) c_gst_structure_get_int64; ///
+  gboolean function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_list; ///
   const(char)* function(const(GstStructure)* structure) c_gst_structure_get_name; ///
   GQuark function(const(GstStructure)* structure) c_gst_structure_get_name_id; ///
   const(char)* function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_string; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, uint* value) c_gst_structure_get_uint; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, ulong* value) c_gst_structure_get_uint64; ///
-  bool function(const(GstStructure)* structure, const(char)* firstFieldname, void* args) c_gst_structure_get_valist; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, uint* value) c_gst_structure_get_uint; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, ulong* value) c_gst_structure_get_uint64; ///
+  gboolean function(const(GstStructure)* structure, const(char)* firstFieldname, void* args) c_gst_structure_get_valist; ///
   const(GValue)* function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_value; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_has_field; ///
-  bool function(const(GstStructure)* structure, const(char)* fieldname, GType type) c_gst_structure_has_field_typed; ///
-  bool function(const(GstStructure)* structure, const(char)* name) c_gst_structure_has_name; ///
-  bool function(const(GstStructure)* structure, GQuark firstFieldId,  ...) c_gst_structure_id_get; ///
-  bool function(const(GstStructure)* structure, GQuark firstFieldId, void* args) c_gst_structure_id_get_valist; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_has_field; ///
+  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType type) c_gst_structure_has_field_typed; ///
+  gboolean function(const(GstStructure)* structure, const(char)* name) c_gst_structure_has_name; ///
+  gboolean function(const(GstStructure)* structure, GQuark firstFieldId,  ...) c_gst_structure_id_get; ///
+  gboolean function(const(GstStructure)* structure, GQuark firstFieldId, void* args) c_gst_structure_id_get_valist; ///
   const(GValue)* function(const(GstStructure)* structure, GQuark field) c_gst_structure_id_get_value; ///
-  bool function(const(GstStructure)* structure, GQuark field) c_gst_structure_id_has_field; ///
-  bool function(const(GstStructure)* structure, GQuark field, GType type) c_gst_structure_id_has_field_typed; ///
+  gboolean function(const(GstStructure)* structure, GQuark field) c_gst_structure_id_has_field; ///
+  gboolean function(const(GstStructure)* structure, GQuark field, GType type) c_gst_structure_id_has_field_typed; ///
   void function(GstStructure* structure, GQuark fieldname,  ...) c_gst_structure_id_set; ///
   void function(GstStructure* structure, GQuark fieldname, void* varargs) c_gst_structure_id_set_valist; ///
   void function(GstStructure* structure, GQuark field, const(GValue)* value) c_gst_structure_id_set_value; ///
   void function(GstStructure* structure, GQuark field, GValue* value) c_gst_structure_id_take_value; ///
   GstStructure* function(const(GstStructure)* struct1, const(GstStructure)* struct2) c_gst_structure_intersect; ///
-  bool function(const(GstStructure)* structure1, const(GstStructure)* structure2) c_gst_structure_is_equal; ///
-  bool function(const(GstStructure)* subset, const(GstStructure)* superset) c_gst_structure_is_subset; ///
-  bool function(GstStructure* structure, GstStructureMapFunc func, void* userData) c_gst_structure_map_in_place; ///
+  gboolean function(const(GstStructure)* structure1, const(GstStructure)* structure2) c_gst_structure_is_equal; ///
+  gboolean function(const(GstStructure)* subset, const(GstStructure)* superset) c_gst_structure_is_subset; ///
+  gboolean function(GstStructure* structure, GstStructureMapFunc func, void* userData) c_gst_structure_map_in_place; ///
   int function(const(GstStructure)* structure) c_gst_structure_n_fields; ///
   const(char)* function(const(GstStructure)* structure, uint index) c_gst_structure_nth_field_name; ///
   void function(GstStructure* structure) c_gst_structure_remove_all_fields; ///
@@ -1379,12 +1379,12 @@ __gshared extern(C)
   void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) c_gst_structure_set_array; ///
   void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) c_gst_structure_set_list; ///
   void function(GstStructure* structure, const(char)* name) c_gst_structure_set_name; ///
-  bool function(GstStructure* structure, int* refcount) c_gst_structure_set_parent_refcount; ///
+  gboolean function(GstStructure* structure, int* refcount) c_gst_structure_set_parent_refcount; ///
   void function(GstStructure* structure, const(char)* fieldname, void* varargs) c_gst_structure_set_valist; ///
   void function(GstStructure* structure, const(char)* fieldname, const(GValue)* value) c_gst_structure_set_value; ///
   void function(GstStructure* structure, const(char)* fieldname, GValue* value) c_gst_structure_take_value; ///
   char* function(const(GstStructure)* structure) c_gst_structure_to_string; ///
-  bool function(GstStructure** oldstrPtr, GstStructure* newstr) c_gst_structure_take; ///
+  gboolean function(GstStructure** oldstrPtr, GstStructure* newstr) c_gst_structure_take; ///
 
   // SystemClock
   GType function() c_gst_system_clock_get_type; ///
@@ -1404,44 +1404,44 @@ __gshared extern(C)
   void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_list_add_values; ///
   GstTagList* function(const(GstTagList)* taglist) c_gst_tag_list_copy; ///
   void function(const(GstTagList)* list, GstTagForeachFunc func, void* userData) c_gst_tag_list_foreach; ///
-  bool function(const(GstTagList)* list, const(char)* tag, bool* value) c_gst_tag_list_get_boolean; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, bool* value) c_gst_tag_list_get_boolean_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, GDate** value) c_gst_tag_list_get_date; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, GDate** value) c_gst_tag_list_get_date_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, GstDateTime** value) c_gst_tag_list_get_date_time; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, GstDateTime** value) c_gst_tag_list_get_date_time_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, double* value) c_gst_tag_list_get_double; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, double* value) c_gst_tag_list_get_double_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, float* value) c_gst_tag_list_get_float; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, float* value) c_gst_tag_list_get_float_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, int* value) c_gst_tag_list_get_int; ///
-  bool function(const(GstTagList)* list, const(char)* tag, long* value) c_gst_tag_list_get_int64; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, long* value) c_gst_tag_list_get_int64_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, int* value) c_gst_tag_list_get_int_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, void** value) c_gst_tag_list_get_pointer; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, void** value) c_gst_tag_list_get_pointer_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, GstSample** sample) c_gst_tag_list_get_sample; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, GstSample** sample) c_gst_tag_list_get_sample_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, gboolean* value) c_gst_tag_list_get_boolean; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, gboolean* value) c_gst_tag_list_get_boolean_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, GDate** value) c_gst_tag_list_get_date; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GDate** value) c_gst_tag_list_get_date_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, GstDateTime** value) c_gst_tag_list_get_date_time; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GstDateTime** value) c_gst_tag_list_get_date_time_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, double* value) c_gst_tag_list_get_double; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, double* value) c_gst_tag_list_get_double_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, float* value) c_gst_tag_list_get_float; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, float* value) c_gst_tag_list_get_float_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, int* value) c_gst_tag_list_get_int; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, long* value) c_gst_tag_list_get_int64; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, long* value) c_gst_tag_list_get_int64_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, int* value) c_gst_tag_list_get_int_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, void** value) c_gst_tag_list_get_pointer; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, void** value) c_gst_tag_list_get_pointer_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, GstSample** sample) c_gst_tag_list_get_sample; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GstSample** sample) c_gst_tag_list_get_sample_index; ///
   GstTagScope function(const(GstTagList)* list) c_gst_tag_list_get_scope; ///
-  bool function(const(GstTagList)* list, const(char)* tag, char** value) c_gst_tag_list_get_string; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, char** value) c_gst_tag_list_get_string_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, char** value) c_gst_tag_list_get_string; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, char** value) c_gst_tag_list_get_string_index; ///
   uint function(const(GstTagList)* list, const(char)* tag) c_gst_tag_list_get_tag_size; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint* value) c_gst_tag_list_get_uint; ///
-  bool function(const(GstTagList)* list, const(char)* tag, ulong* value) c_gst_tag_list_get_uint64; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, ulong* value) c_gst_tag_list_get_uint64_index; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, uint* value) c_gst_tag_list_get_uint_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint* value) c_gst_tag_list_get_uint; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, ulong* value) c_gst_tag_list_get_uint64; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, ulong* value) c_gst_tag_list_get_uint64_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, uint* value) c_gst_tag_list_get_uint_index; ///
   const(GValue)* function(const(GstTagList)* list, const(char)* tag, uint index) c_gst_tag_list_get_value_index; ///
   void function(GstTagList* into, const(GstTagList)* from, GstTagMergeMode mode) c_gst_tag_list_insert; ///
-  bool function(const(GstTagList)* list) c_gst_tag_list_is_empty; ///
-  bool function(const(GstTagList)* list1, const(GstTagList)* list2) c_gst_tag_list_is_equal; ///
+  gboolean function(const(GstTagList)* list) c_gst_tag_list_is_empty; ///
+  gboolean function(const(GstTagList)* list1, const(GstTagList)* list2) c_gst_tag_list_is_equal; ///
   GstTagList* function(const(GstTagList)* list1, const(GstTagList)* list2, GstTagMergeMode mode) c_gst_tag_list_merge; ///
   int function(const(GstTagList)* list) c_gst_tag_list_n_tags; ///
   const(char)* function(const(GstTagList)* list, uint index) c_gst_tag_list_nth_tag_name; ///
-  bool function(const(GstTagList)* list, const(char)* tag, uint index, const(char*)* value) c_gst_tag_list_peek_string_index; ///
+  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, const(char*)* value) c_gst_tag_list_peek_string_index; ///
   void function(GstTagList* list, const(char)* tag) c_gst_tag_list_remove_tag; ///
   void function(GstTagList* list, GstTagScope scope_) c_gst_tag_list_set_scope; ///
   char* function(const(GstTagList)* list) c_gst_tag_list_to_string; ///
-  bool function(GValue* dest, const(GstTagList)* list, const(char)* tag) c_gst_tag_list_copy_value; ///
+  gboolean function(GValue* dest, const(GstTagList)* list, const(char)* tag) c_gst_tag_list_copy_value; ///
 
   // TagSetter
   GType function() c_gst_tag_setter_get_type; ///
@@ -1462,16 +1462,16 @@ __gshared extern(C)
   void function() c_gst_task_cleanup_all; ///
   GstTaskPool* function(GstTask* task) c_gst_task_get_pool; ///
   GstTaskState function(GstTask* task) c_gst_task_get_state; ///
-  bool function(GstTask* task) c_gst_task_join; ///
-  bool function(GstTask* task) c_gst_task_pause; ///
-  bool function(GstTask* task) c_gst_task_resume; ///
+  gboolean function(GstTask* task) c_gst_task_join; ///
+  gboolean function(GstTask* task) c_gst_task_pause; ///
+  gboolean function(GstTask* task) c_gst_task_resume; ///
   void function(GstTask* task, GstTaskThreadFunc enterFunc, void* userData, GDestroyNotify notify) c_gst_task_set_enter_callback; ///
   void function(GstTask* task, GstTaskThreadFunc leaveFunc, void* userData, GDestroyNotify notify) c_gst_task_set_leave_callback; ///
   void function(GstTask* task, GRecMutex* mutex) c_gst_task_set_lock; ///
   void function(GstTask* task, GstTaskPool* pool) c_gst_task_set_pool; ///
-  bool function(GstTask* task, GstTaskState state) c_gst_task_set_state; ///
-  bool function(GstTask* task) c_gst_task_start; ///
-  bool function(GstTask* task) c_gst_task_stop; ///
+  gboolean function(GstTask* task, GstTaskState state) c_gst_task_set_state; ///
+  gboolean function(GstTask* task) c_gst_task_start; ///
+  gboolean function(GstTask* task) c_gst_task_stop; ///
 
   // TaskPool
   GType function() c_gst_task_pool_get_type; ///
@@ -1499,15 +1499,15 @@ __gshared extern(C)
   GstTocEntry* function(GstTocEntryType type, const(char)* uid) c_gst_toc_entry_new; ///
   void function(GstTocEntry* entry, GstTocEntry* subentry) c_gst_toc_entry_append_sub_entry; ///
   GstTocEntryType function(const(GstTocEntry)* entry) c_gst_toc_entry_get_entry_type; ///
-  bool function(const(GstTocEntry)* entry, GstTocLoopType* loopType, int* repeatCount) c_gst_toc_entry_get_loop; ///
+  gboolean function(const(GstTocEntry)* entry, GstTocLoopType* loopType, int* repeatCount) c_gst_toc_entry_get_loop; ///
   GstTocEntry* function(GstTocEntry* entry) c_gst_toc_entry_get_parent; ///
-  bool function(const(GstTocEntry)* entry, long* start, long* stop) c_gst_toc_entry_get_start_stop_times; ///
+  gboolean function(const(GstTocEntry)* entry, long* start, long* stop) c_gst_toc_entry_get_start_stop_times; ///
   GList* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_sub_entries; ///
   GstTagList* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_tags; ///
   GstToc* function(GstTocEntry* entry) c_gst_toc_entry_get_toc; ///
   const(char)* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_uid; ///
-  bool function(const(GstTocEntry)* entry) c_gst_toc_entry_is_alternative; ///
-  bool function(const(GstTocEntry)* entry) c_gst_toc_entry_is_sequence; ///
+  gboolean function(const(GstTocEntry)* entry) c_gst_toc_entry_is_alternative; ///
+  gboolean function(const(GstTocEntry)* entry) c_gst_toc_entry_is_sequence; ///
   void function(GstTocEntry* entry, GstTagList* tags, GstTagMergeMode mode) c_gst_toc_entry_merge_tags; ///
   void function(GstTocEntry* entry, GstTocLoopType loopType, int repeatCount) c_gst_toc_entry_set_loop; ///
   void function(GstTocEntry* entry, long start, long stop) c_gst_toc_entry_set_start_stop_times; ///
@@ -1521,7 +1521,7 @@ __gshared extern(C)
 
   // Tracer
   GType function() c_gst_tracer_get_type; ///
-  bool function(GstPlugin* plugin, const(char)* name, GType type) c_gst_tracer_register; ///
+  gboolean function(GstPlugin* plugin, const(char)* name, GType type) c_gst_tracer_register; ///
 
   // TracerFactory
   GType function() c_gst_tracer_factory_get_type; ///
@@ -1539,7 +1539,7 @@ __gshared extern(C)
   void function(GstTypeFind* find, uint probability, GstCaps* caps) c_gst_type_find_suggest; ///
   void function(GstTypeFind* find, uint probability, const(char)* mediaType) c_gst_type_find_suggest_empty_simple; ///
   void function(GstTypeFind* find, uint probability, const(char)* mediaType, const(char)* fieldname,  ...) c_gst_type_find_suggest_simple; ///
-  bool function(GstPlugin* plugin, const(char)* name, uint rank, GstTypeFindFunction func, const(char)* extensions, GstCaps* possibleCaps, void* data, GDestroyNotify dataNotify) c_gst_type_find_register; ///
+  gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GstTypeFindFunction func, const(char)* extensions, GstCaps* possibleCaps, void* data, GDestroyNotify dataNotify) c_gst_type_find_register; ///
 
   // TypeFindFactory
   GType function() c_gst_type_find_factory_get_type; ///
@@ -1547,21 +1547,21 @@ __gshared extern(C)
   void function(GstTypeFindFactory* factory, GstTypeFind* find) c_gst_type_find_factory_call_function; ///
   GstCaps* function(GstTypeFindFactory* factory) c_gst_type_find_factory_get_caps; ///
   const(char*)* function(GstTypeFindFactory* factory) c_gst_type_find_factory_get_extensions; ///
-  bool function(GstTypeFindFactory* factory) c_gst_type_find_factory_has_function; ///
+  gboolean function(GstTypeFindFactory* factory) c_gst_type_find_factory_has_function; ///
 
   // URIHandler
   GType function() c_gst_uri_handler_get_type; ///
   const(char*)* function(GstURIHandler* handler) c_gst_uri_handler_get_protocols; ///
   char* function(GstURIHandler* handler) c_gst_uri_handler_get_uri; ///
   GstURIType function(GstURIHandler* handler) c_gst_uri_handler_get_uri_type; ///
-  bool function(GstURIHandler* handler, const(char)* uri, GError** _err) c_gst_uri_handler_set_uri; ///
+  gboolean function(GstURIHandler* handler, const(char)* uri, GError** _err) c_gst_uri_handler_set_uri; ///
 
   // Uri
   GType function() c_gst_uri_get_type; ///
   GstUri* function(const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) c_gst_uri_new; ///
-  bool function(GstUri* uri, const(char)* relativePath) c_gst_uri_append_path; ///
-  bool function(GstUri* uri, const(char)* pathSegment) c_gst_uri_append_path_segment; ///
-  bool function(const(GstUri)* first, const(GstUri)* second) c_gst_uri_equal; ///
+  gboolean function(GstUri* uri, const(char)* relativePath) c_gst_uri_append_path; ///
+  gboolean function(GstUri* uri, const(char)* pathSegment) c_gst_uri_append_path_segment; ///
+  gboolean function(const(GstUri)* first, const(GstUri)* second) c_gst_uri_equal; ///
   GstUri* function(GstUri* base, const(char)* uri) c_gst_uri_from_string_with_base; ///
   const(char)* function(const(GstUri)* uri) c_gst_uri_get_fragment; ///
   const(char)* function(const(GstUri)* uri) c_gst_uri_get_host; ///
@@ -1577,25 +1577,25 @@ __gshared extern(C)
   const(char)* function(const(GstUri)* uri, const(char)* queryKey) c_gst_uri_get_query_value; ///
   const(char)* function(const(GstUri)* uri) c_gst_uri_get_scheme; ///
   const(char)* function(const(GstUri)* uri) c_gst_uri_get_userinfo; ///
-  bool function(const(GstUri)* uri) c_gst_uri_is_normalized; ///
-  bool function(const(GstUri)* uri) c_gst_uri_is_writable; ///
+  gboolean function(const(GstUri)* uri) c_gst_uri_is_normalized; ///
+  gboolean function(const(GstUri)* uri) c_gst_uri_is_writable; ///
   GstUri* function(GstUri* baseUri, GstUri* refUri) c_gst_uri_join; ///
   GstUri* function(GstUri* uri) c_gst_uri_make_writable; ///
   GstUri* function(GstUri* base, const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) c_gst_uri_new_with_base; ///
-  bool function(GstUri* uri) c_gst_uri_normalize; ///
-  bool function(const(GstUri)* uri, const(char)* queryKey) c_gst_uri_query_has_key; ///
-  bool function(GstUri* uri, const(char)* queryKey) c_gst_uri_remove_query_key; ///
-  bool function(GstUri* uri, const(char)* fragment) c_gst_uri_set_fragment; ///
-  bool function(GstUri* uri, const(char)* host) c_gst_uri_set_host; ///
-  bool function(GstUri* uri, const(char)* path) c_gst_uri_set_path; ///
-  bool function(GstUri* uri, GList* pathSegments) c_gst_uri_set_path_segments; ///
-  bool function(GstUri* uri, const(char)* path) c_gst_uri_set_path_string; ///
-  bool function(GstUri* uri, uint port) c_gst_uri_set_port; ///
-  bool function(GstUri* uri, const(char)* query) c_gst_uri_set_query_string; ///
-  bool function(GstUri* uri, GHashTable* queryTable) c_gst_uri_set_query_table; ///
-  bool function(GstUri* uri, const(char)* queryKey, const(char)* queryValue) c_gst_uri_set_query_value; ///
-  bool function(GstUri* uri, const(char)* scheme) c_gst_uri_set_scheme; ///
-  bool function(GstUri* uri, const(char)* userinfo) c_gst_uri_set_userinfo; ///
+  gboolean function(GstUri* uri) c_gst_uri_normalize; ///
+  gboolean function(const(GstUri)* uri, const(char)* queryKey) c_gst_uri_query_has_key; ///
+  gboolean function(GstUri* uri, const(char)* queryKey) c_gst_uri_remove_query_key; ///
+  gboolean function(GstUri* uri, const(char)* fragment) c_gst_uri_set_fragment; ///
+  gboolean function(GstUri* uri, const(char)* host) c_gst_uri_set_host; ///
+  gboolean function(GstUri* uri, const(char)* path) c_gst_uri_set_path; ///
+  gboolean function(GstUri* uri, GList* pathSegments) c_gst_uri_set_path_segments; ///
+  gboolean function(GstUri* uri, const(char)* path) c_gst_uri_set_path_string; ///
+  gboolean function(GstUri* uri, uint port) c_gst_uri_set_port; ///
+  gboolean function(GstUri* uri, const(char)* query) c_gst_uri_set_query_string; ///
+  gboolean function(GstUri* uri, GHashTable* queryTable) c_gst_uri_set_query_table; ///
+  gboolean function(GstUri* uri, const(char)* queryKey, const(char)* queryValue) c_gst_uri_set_query_value; ///
+  gboolean function(GstUri* uri, const(char)* scheme) c_gst_uri_set_scheme; ///
+  gboolean function(GstUri* uri, const(char)* userinfo) c_gst_uri_set_userinfo; ///
   char* function(const(GstUri)* uri) c_gst_uri_to_string; ///
   char* function(const(GstUri)* uri, const(GList)* keys) c_gst_uri_to_string_with_keys; ///
   char* function(const(char)* protocol, const(char)* location) c_gst_uri_construct; ///
@@ -1603,11 +1603,11 @@ __gshared extern(C)
   GstUri* function(const(char)* uri) c_gst_uri_from_string_escaped; ///
   char* function(const(char)* uri) c_gst_uri_get_location; ///
   char* function(const(char)* uri) c_gst_uri_get_protocol; ///
-  bool function(const(char)* uri, const(char)* protocol) c_gst_uri_has_protocol; ///
-  bool function(const(char)* uri) c_gst_uri_is_valid; ///
+  gboolean function(const(char)* uri, const(char)* protocol) c_gst_uri_has_protocol; ///
+  gboolean function(const(char)* uri) c_gst_uri_is_valid; ///
   char* function(const(char)* baseUri, const(char)* refUri) c_gst_uri_join_strings; ///
-  bool function(GstURIType type, const(char)* protocol) c_gst_uri_protocol_is_supported; ///
-  bool function(const(char)* protocol) c_gst_uri_protocol_is_valid; ///
+  gboolean function(GstURIType type, const(char)* protocol) c_gst_uri_protocol_is_supported; ///
+  gboolean function(const(char)* protocol) c_gst_uri_protocol_is_valid; ///
 
   // ValueArray
   GType function() c_gst_value_array_get_type; ///
@@ -1630,7 +1630,7 @@ __gshared extern(C)
   void function(GValue* value, const(GValue)* prependValue) c_gst_value_list_prepend_value; ///
 
   // global
-  bool function(const(GstClockTime)* xy, GstClockTime* temp, uint n, GstClockTime* mNum, GstClockTime* mDenom, GstClockTime* b, GstClockTime* xbase, double* rSquared) c_gst_calculate_linear_regression; ///
+  gboolean function(const(GstClockTime)* xy, GstClockTime* temp, uint n, GstClockTime* mNum, GstClockTime* mDenom, GstClockTime* b, GstClockTime* xbase, double* rSquared) c_gst_calculate_linear_regression; ///
   void function(GstMiniObject** objectPtr) c_gst_clear_mini_object; ///
   void function(GstObject** objectPtr) c_gst_clear_object; ///
   void function(GstStructure** structurePtr) c_gst_clear_structure; ///
@@ -1645,8 +1645,8 @@ __gshared extern(C)
   GstDebugColorMode function() c_gst_debug_get_color_mode; ///
   GstDebugLevel function() c_gst_debug_get_default_threshold; ///
   char* function(GstStackTraceFlags flags) c_gst_debug_get_stack_trace; ///
-  bool function() c_gst_debug_is_active; ///
-  bool function() c_gst_debug_is_colored; ///
+  gboolean function() c_gst_debug_is_active; ///
+  gboolean function() c_gst_debug_is_colored; ///
   void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format,  ...) c_gst_debug_log; ///
   void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) c_gst_debug_log_default; ///
   char* function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message) c_gst_debug_log_get_line; ///
@@ -1660,36 +1660,36 @@ __gshared extern(C)
   uint function(void* data) c_gst_debug_remove_log_function_by_data; ///
   void function() c_gst_debug_remove_ring_buffer_logger; ///
   char** function() c_gst_debug_ring_buffer_logger_get_logs; ///
-  void function(bool active) c_gst_debug_set_active; ///
+  void function(gboolean active) c_gst_debug_set_active; ///
   void function(GstDebugColorMode mode) c_gst_debug_set_color_mode; ///
   void function(const(char)* mode) c_gst_debug_set_color_mode_from_string; ///
-  void function(bool colored) c_gst_debug_set_colored; ///
+  void function(gboolean colored) c_gst_debug_set_colored; ///
   void function(GstDebugLevel level) c_gst_debug_set_default_threshold; ///
   void function(const(char)* name, GstDebugLevel level) c_gst_debug_set_threshold_for_name; ///
-  void function(const(char)* list, bool reset) c_gst_debug_set_threshold_from_string; ///
+  void function(const(char)* list, gboolean reset) c_gst_debug_set_threshold_from_string; ///
   void function(const(char)* name) c_gst_debug_unset_threshold_for_name; ///
   void function() c_gst_deinit; ///
-  bool function(GstPlugin* plugin, GType type) c_gst_dynamic_type_register; ///
+  gboolean function(GstPlugin* plugin, GType type) c_gst_dynamic_type_register; ///
   char* function(GQuark domain, int code) c_gst_error_get_message; ///
   char* function(const(char)* filename, GError** _err) c_gst_filename_to_uri; ///
   const(char)* function(GstFlowReturn ret) c_gst_flow_get_name; ///
   GQuark function(GstFlowReturn ret) c_gst_flow_to_quark; ///
-  bool function(const(GstFormat)* formats, GstFormat format) c_gst_formats_contains; ///
+  gboolean function(const(GstFormat)* formats, GstFormat format) c_gst_formats_contains; ///
   const(char)* function() c_gst_get_main_executable_path; ///
   char* function(const(char)* format,  ...) c_gst_info_strdup_printf; ///
   char* function(const(char)* format, void* args) c_gst_info_strdup_vprintf; ///
   int function(char** result, const(char)* format, void* args) c_gst_info_vasprintf; ///
   void function(int* argc, char*** argv) c_gst_init; ///
-  bool function(int* argc, char*** argv, GError** _err) c_gst_init_check; ///
+  gboolean function(int* argc, char*** argv, GError** _err) c_gst_init_check; ///
   GOptionGroup* function() c_gst_init_get_option_group; ///
-  bool function(const(void)* obj) c_gst_is_caps_features; ///
-  bool function() c_gst_is_initialized; ///
+  gboolean function(const(void)* obj) c_gst_is_caps_features; ///
+  gboolean function() c_gst_is_initialized; ///
   GstStructure* function(const(char)* name,  ...) c_gst_make_element_message_details; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, GParamSpec* elementSpec, GParamFlags flags) c_gst_param_spec_array; ///
   GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, int minNum, int minDenom, int maxNum, int maxDenom, int defaultNum, int defaultDenom, GParamFlags flags) c_gst_param_spec_fraction; ///
   GType function() c_gst_parent_buffer_meta_api_get_type; ///
-  GstElement* function(const(char)* binDescription, bool ghostUnlinkedPads, GError** _err) c_gst_parse_bin_from_description; ///
-  GstElement* function(const(char)* binDescription, bool ghostUnlinkedPads, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_bin_from_description_full; ///
+  GstElement* function(const(char)* binDescription, gboolean ghostUnlinkedPads, GError** _err) c_gst_parse_bin_from_description; ///
+  GstElement* function(const(char)* binDescription, gboolean ghostUnlinkedPads, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_bin_from_description_full; ///
   GstElement* function(const(char)* pipelineDescription, GError** _err) c_gst_parse_launch; ///
   GstElement* function(const(char)* pipelineDescription, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_launch_full; ///
   GstElement* function(const(char*)* argv, GError** _err) c_gst_parse_launchv; ///
@@ -1702,16 +1702,16 @@ __gshared extern(C)
   GType function() c_gst_protection_meta_api_get_type; ///
   const(char)* function(const(char*)* systemIdentifiers) c_gst_protection_select_system; ///
   GType function() c_gst_reference_timestamp_meta_api_get_type; ///
-  bool function() c_gst_segtrap_is_enabled; ///
-  void function(bool enabled) c_gst_segtrap_set_enabled; ///
+  gboolean function() c_gst_segtrap_is_enabled; ///
+  void function(gboolean enabled) c_gst_segtrap_set_enabled; ///
   GType function() c_gst_static_caps_get_type; ///
   GType function() c_gst_static_pad_template_get_type; ///
-  bool function(const(char)* tag) c_gst_tag_exists; ///
+  gboolean function(const(char)* tag) c_gst_tag_exists; ///
   const(char)* function(const(char)* tag) c_gst_tag_get_description; ///
   GstTagFlag function(const(char)* tag) c_gst_tag_get_flag; ///
   const(char)* function(const(char)* tag) c_gst_tag_get_nick; ///
   GType function(const(char)* tag) c_gst_tag_get_type; ///
-  bool function(const(char)* tag) c_gst_tag_is_fixed; ///
+  gboolean function(const(char)* tag) c_gst_tag_is_fixed; ///
   void function(GValue* dest, const(GValue)* src) c_gst_tag_merge_strings_with_comma; ///
   void function(GValue* dest, const(GValue)* src) c_gst_tag_merge_use_first; ///
   void function(const(char)* name, GstTagFlag flag, GType type, const(char)* nick, const(char)* blurb, GstTagMergeFunc func) c_gst_tag_register; ///
@@ -1719,21 +1719,21 @@ __gshared extern(C)
   GList* function() c_gst_tracing_get_active_tracers; ///
   void function(GstTracer* tracer, const(char)* detail, GCallback func) c_gst_tracing_register_hook; ///
   GType function() c_gst_type_find_get_type; ///
-  bool function(GType type, GstPluginAPIFlags* flags) c_gst_type_is_plugin_api; ///
+  gboolean function(GType type, GstPluginAPIFlags* flags) c_gst_type_is_plugin_api; ///
   void function(GType type, GstPluginAPIFlags flags) c_gst_type_mark_as_plugin_api; ///
-  bool function() c_gst_update_registry; ///
+  gboolean function() c_gst_update_registry; ///
   void* function(void* array, uint numElements, size_t elementSize, GCompareDataFunc searchFunc, GstSearchMode mode, const(void)* searchData, void* userData) c_gst_util_array_binary_search; ///
   uint function(uint v) c_gst_util_ceil_log2; ///
   void function(double src, int* destN, int* destD) c_gst_util_double_to_fraction; ///
   void function(GstBuffer* buf) c_gst_util_dump_buffer; ///
   void function(const(ubyte)* mem, uint size) c_gst_util_dump_mem; ///
   int function(const(char)* a, const(char)* b) c_gst_util_filename_compare; ///
-  bool function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_add; ///
+  gboolean function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_add; ///
   int function(int aN, int aD, int bN, int bD) c_gst_util_fraction_compare; ///
-  bool function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_multiply; ///
+  gboolean function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_multiply; ///
   void function(int srcN, int srcD, double* dest) c_gst_util_fraction_to_double; ///
   ulong function(double value) c_gst_util_gdouble_to_guint64; ///
-  bool function(GObject* object, const(char)* name, GValueArray** array) c_gst_util_get_object_array; ///
+  gboolean function(GObject* object, const(char)* name, GValueArray** array) c_gst_util_get_object_array; ///
   GstClockTime function() c_gst_util_get_timestamp; ///
   int function(int a, int b) c_gst_util_greatest_common_divisor; ///
   long function(long a, long b) c_gst_util_greatest_common_divisor_int64; ///
@@ -1742,7 +1742,7 @@ __gshared extern(C)
   int function(uint s1, uint s2) c_gst_util_seqnum_compare; ///
   uint function() c_gst_util_seqnum_next; ///
   void function(GObject* object, const(char)* name, const(char)* value) c_gst_util_set_object_arg; ///
-  bool function(GObject* object, const(char)* name, const(GValueArray)* array) c_gst_util_set_object_array; ///
+  gboolean function(GObject* object, const(char)* name, const(GValueArray)* array) c_gst_util_set_object_array; ///
   void function(GValue* value, const(char)* valueStr) c_gst_util_set_value_from_string; ///
   void function(int* numerator, int* denominator, uint nTerms, uint threshold) c_gst_util_simplify_fraction; ///
   ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale; ///
@@ -1751,16 +1751,16 @@ __gshared extern(C)
   ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int_ceil; ///
   ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int_round; ///
   ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale_round; ///
-  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_compare; ///
-  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_intersect; ///
-  bool function(const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_can_subtract; ///
-  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_union; ///
+  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_compare; ///
+  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_intersect; ///
+  gboolean function(const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_can_subtract; ///
+  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_union; ///
   int function(const(GValue)* value1, const(GValue)* value2) c_gst_value_compare; ///
-  bool function(GValue* dest, const(char)* src) c_gst_value_deserialize; ///
-  bool function(GValue* dest, const(char)* src, GParamSpec* pspec) c_gst_value_deserialize_with_pspec; ///
-  bool function(GValue* dest, const(GValue)* src) c_gst_value_fixate; ///
-  bool function(GValue* product, const(GValue)* factor1, const(GValue)* factor2) c_gst_value_fraction_multiply; ///
-  bool function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_fraction_subtract; ///
+  gboolean function(GValue* dest, const(char)* src) c_gst_value_deserialize; ///
+  gboolean function(GValue* dest, const(char)* src, GParamSpec* pspec) c_gst_value_deserialize_with_pspec; ///
+  gboolean function(GValue* dest, const(GValue)* src) c_gst_value_fixate; ///
+  gboolean function(GValue* product, const(GValue)* factor1, const(GValue)* factor2) c_gst_value_fraction_multiply; ///
+  gboolean function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_fraction_subtract; ///
   ulong function(const(GValue)* value) c_gst_value_get_bitmask; ///
   const(GstCaps)* function(const(GValue)* value) c_gst_value_get_caps; ///
   const(GstCapsFeatures)* function(const(GValue)* value) c_gst_value_get_caps_features; ///
@@ -1780,9 +1780,9 @@ __gshared extern(C)
   int function(const(GValue)* value) c_gst_value_get_int_range_step; ///
   const(GstStructure)* function(const(GValue)* value) c_gst_value_get_structure; ///
   void function(GValue* dest, const(GValue)* src) c_gst_value_init_and_copy; ///
-  bool function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_intersect; ///
-  bool function(const(GValue)* value) c_gst_value_is_fixed; ///
-  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_is_subset; ///
+  gboolean function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_intersect; ///
+  gboolean function(const(GValue)* value) c_gst_value_is_fixed; ///
+  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_is_subset; ///
   void function(const(GstValueTable)* table) c_gst_value_register; ///
   char* function(const(GValue)* value) c_gst_value_serialize; ///
   void function(GValue* value, ulong bitmask) c_gst_value_set_bitmask; ///
@@ -1798,8 +1798,8 @@ __gshared extern(C)
   void function(GValue* value, int start, int end) c_gst_value_set_int_range; ///
   void function(GValue* value, int start, int end, int step) c_gst_value_set_int_range_step; ///
   void function(GValue* value, const(GstStructure)* structure) c_gst_value_set_structure; ///
-  bool function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_subtract; ///
-  bool function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_union; ///
+  gboolean function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_subtract; ///
+  gboolean function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_union; ///
   void function(uint* major, uint* minor, uint* micro, uint* nano) c_gst_version; ///
   char* function() c_gst_version_string; ///
 

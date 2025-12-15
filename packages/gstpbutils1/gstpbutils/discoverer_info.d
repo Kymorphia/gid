@@ -114,7 +114,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   bool getLive()
   {
     bool _retval;
-    _retval = gst_discoverer_info_get_live(cast(const(GstDiscovererInfo)*)this._cPtr);
+    _retval = cast(bool)gst_discoverer_info_get_live(cast(const(GstDiscovererInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   bool getSeekable()
   {
     bool _retval;
-    _retval = gst_discoverer_info_get_seekable(cast(const(GstDiscovererInfo)*)this._cPtr);
+    _retval = cast(bool)gst_discoverer_info_get_seekable(cast(const(GstDiscovererInfo)*)this._cPtr);
     return _retval;
   }
 

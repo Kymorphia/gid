@@ -159,7 +159,7 @@ class IMContext : gobject.object.ObjectWrap
   bool deleteSurrounding(int offset, int nChars)
   {
     bool _retval;
-    _retval = gtk_im_context_delete_surrounding(cast(GtkIMContext*)this._cPtr, offset, nChars);
+    _retval = cast(bool)gtk_im_context_delete_surrounding(cast(GtkIMContext*)this._cPtr, offset, nChars);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class IMContext : gobject.object.ObjectWrap
   bool filterKeypress(gdk.event_key.EventKey event)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
+    _retval = cast(bool)gtk_im_context_filter_keypress(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _text;
-    _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex);
+    _retval = cast(bool)gtk_im_context_get_surrounding(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex);
     text = _text.fromCString(Yes.Free);
     return _retval;
   }

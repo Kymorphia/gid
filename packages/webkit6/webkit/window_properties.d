@@ -99,7 +99,7 @@ class WindowProperties : gobject.object.ObjectWrap
   bool getFullscreen()
   {
     bool _retval;
-    _retval = webkit_window_properties_get_fullscreen(cast(WebKitWindowProperties*)this._cPtr);
+    _retval = cast(bool)webkit_window_properties_get_fullscreen(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class WindowProperties : gobject.object.ObjectWrap
   bool getLocationbarVisible()
   {
     bool _retval;
-    _retval = webkit_window_properties_get_locationbar_visible(cast(WebKitWindowProperties*)this._cPtr);
+    _retval = cast(bool)webkit_window_properties_get_locationbar_visible(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class WindowProperties : gobject.object.ObjectWrap
   bool getMenubarVisible()
   {
     bool _retval;
-    _retval = webkit_window_properties_get_menubar_visible(cast(WebKitWindowProperties*)this._cPtr);
+    _retval = cast(bool)webkit_window_properties_get_menubar_visible(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class WindowProperties : gobject.object.ObjectWrap
   bool getResizable()
   {
     bool _retval;
-    _retval = webkit_window_properties_get_resizable(cast(WebKitWindowProperties*)this._cPtr);
+    _retval = cast(bool)webkit_window_properties_get_resizable(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class WindowProperties : gobject.object.ObjectWrap
   bool getScrollbarsVisible()
   {
     bool _retval;
-    _retval = webkit_window_properties_get_scrollbars_visible(cast(WebKitWindowProperties*)this._cPtr);
+    _retval = cast(bool)webkit_window_properties_get_scrollbars_visible(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class WindowProperties : gobject.object.ObjectWrap
   bool getStatusbarVisible()
   {
     bool _retval;
-    _retval = webkit_window_properties_get_statusbar_visible(cast(WebKitWindowProperties*)this._cPtr);
+    _retval = cast(bool)webkit_window_properties_get_statusbar_visible(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class WindowProperties : gobject.object.ObjectWrap
   bool getToolbarVisible()
   {
     bool _retval;
-    _retval = webkit_window_properties_get_toolbar_visible(cast(WebKitWindowProperties*)this._cPtr);
+    _retval = cast(bool)webkit_window_properties_get_toolbar_visible(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
   }
 }

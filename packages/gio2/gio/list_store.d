@@ -74,18 +74,18 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     static bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_equalFunc;
 
-    extern(C) bool _equalFuncCallback(const(void)* a, const(void)* b)
+    extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b)
     {
-      bool _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+      gboolean _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
       gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
       return _retval;
     }
 
     _static_equalFunc = equalFunc;
-    bool _retval;
+    gboolean _retval;
     _retval = g_list_store_find_with_equal_func(cast(GListStore*)_cPtr, item ? cast(GObject*)item._cPtr : null, &_equalFuncCallback, cast(uint*)&position);
     _static_equalFunc = null;
-    return _retval;
+    return cast(bool)_retval;
   }
 
   /**
@@ -187,7 +187,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool find(gobject.object.ObjectWrap item, out uint position)
   {
     bool _retval;
-    _retval = g_list_store_find(cast(GListStore*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null, cast(uint*)&position);
+    _retval = cast(bool)g_list_store_find(cast(GListStore*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null, cast(uint*)&position);
     return _retval;
   }
 

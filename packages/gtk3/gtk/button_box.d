@@ -81,7 +81,7 @@ class ButtonBox : gtk.box.Box
   bool getChildNonHomogeneous(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_button_box_get_child_non_homogeneous(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_button_box_get_child_non_homogeneous(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class ButtonBox : gtk.box.Box
   bool getChildSecondary(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_button_box_get_child_secondary(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_button_box_get_child_secondary(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 

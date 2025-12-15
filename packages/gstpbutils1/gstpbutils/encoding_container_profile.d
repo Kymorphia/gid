@@ -73,7 +73,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_container_profile_add_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_encoding_container_profile_add_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   bool containsProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_container_profile_contains_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_encoding_container_profile_contains_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(No.Dup) : null);
     return _retval;
   }
 

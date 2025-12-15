@@ -286,7 +286,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _styleClass = styleClass.toCString(No.Alloc);
-    _retval = gtk_theming_engine_has_class(cast(GtkThemingEngine*)this._cPtr, _styleClass);
+    _retval = cast(bool)gtk_theming_engine_has_class(cast(GtkThemingEngine*)this._cPtr, _styleClass);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _styleRegion = styleRegion.toCString(No.Alloc);
-    _retval = gtk_theming_engine_has_region(cast(GtkThemingEngine*)this._cPtr, _styleRegion, &flags);
+    _retval = cast(bool)gtk_theming_engine_has_region(cast(GtkThemingEngine*)this._cPtr, _styleRegion, &flags);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class ThemingEngine : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkRGBA _color;
-    _retval = gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)this._cPtr, _colorName, &_color);
+    _retval = cast(bool)gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)this._cPtr, _colorName, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }
@@ -346,7 +346,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   bool stateIsRunning(gtk.types.StateType state, out double progress)
   {
     bool _retval;
-    _retval = gtk_theming_engine_state_is_running(cast(GtkThemingEngine*)this._cPtr, state, cast(double*)&progress);
+    _retval = cast(bool)gtk_theming_engine_state_is_running(cast(GtkThemingEngine*)this._cPtr, state, cast(double*)&progress);
     return _retval;
   }
 }

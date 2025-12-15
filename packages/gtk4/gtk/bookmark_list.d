@@ -179,7 +179,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isLoading()
   {
     bool _retval;
-    _retval = gtk_bookmark_list_is_loading(cast(GtkBookmarkList*)this._cPtr);
+    _retval = cast(bool)gtk_bookmark_list_is_loading(cast(GtkBookmarkList*)this._cPtr);
     return _retval;
   }
 

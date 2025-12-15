@@ -88,7 +88,7 @@ class ThreadPool
   */
   @property bool exclusive()
   {
-    return (cast(GThreadPool*)this._cPtr).exclusive;
+    return cast(bool)(cast(GThreadPool*)this._cPtr).exclusive;
   }
 
   /**
@@ -141,7 +141,7 @@ class ThreadPool
   bool moveToFront(void* data = null)
   {
     bool _retval;
-    _retval = g_thread_pool_move_to_front(cast(GThreadPool*)this._cPtr, data);
+    _retval = cast(bool)g_thread_pool_move_to_front(cast(GThreadPool*)this._cPtr, data);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class ThreadPool
   {
     bool _retval;
     GError *_err;
-    _retval = g_thread_pool_push(cast(GThreadPool*)this._cPtr, data, &_err);
+    _retval = cast(bool)g_thread_pool_push(cast(GThreadPool*)this._cPtr, data, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -208,7 +208,7 @@ class ThreadPool
   {
     bool _retval;
     GError *_err;
-    _retval = g_thread_pool_set_max_threads(cast(GThreadPool*)this._cPtr, maxThreads, &_err);
+    _retval = cast(bool)g_thread_pool_set_max_threads(cast(GThreadPool*)this._cPtr, maxThreads, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

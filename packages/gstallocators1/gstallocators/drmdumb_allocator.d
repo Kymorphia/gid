@@ -108,7 +108,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   bool hasPrimeExport()
   {
     bool _retval;
-    _retval = gst_drm_dumb_allocator_has_prime_export(cast(GstAllocator*)this._cPtr);
+    _retval = cast(bool)gst_drm_dumb_allocator_has_prime_export(cast(GstAllocator*)this._cPtr);
     return _retval;
   }
 }

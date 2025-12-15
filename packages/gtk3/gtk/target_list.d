@@ -175,7 +175,7 @@ class TargetList : gobject.boxed.Boxed
   bool find(gdk.atom.Atom target, out uint info)
   {
     bool _retval;
-    _retval = gtk_target_list_find(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, cast(uint*)&info);
+    _retval = cast(bool)gtk_target_list_find(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, cast(uint*)&info);
     return _retval;
   }
 

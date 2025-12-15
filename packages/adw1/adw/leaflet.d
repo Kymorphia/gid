@@ -547,7 +547,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getCanNavigateBack()
   {
     bool _retval;
-    _retval = adw_leaflet_get_can_navigate_back(cast(AdwLeaflet*)this._cPtr);
+    _retval = cast(bool)adw_leaflet_get_can_navigate_back(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -560,7 +560,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getCanNavigateForward()
   {
     bool _retval;
-    _retval = adw_leaflet_get_can_navigate_forward(cast(AdwLeaflet*)this._cPtr);
+    _retval = cast(bool)adw_leaflet_get_can_navigate_forward(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -573,7 +573,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getCanUnfold()
   {
     bool _retval;
-    _retval = adw_leaflet_get_can_unfold(cast(AdwLeaflet*)this._cPtr);
+    _retval = cast(bool)adw_leaflet_get_can_unfold(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -622,7 +622,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getChildTransitionRunning()
   {
     bool _retval;
-    _retval = adw_leaflet_get_child_transition_running(cast(AdwLeaflet*)this._cPtr);
+    _retval = cast(bool)adw_leaflet_get_child_transition_running(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -653,7 +653,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getFolded()
   {
     bool _retval;
-    _retval = adw_leaflet_get_folded(cast(AdwLeaflet*)this._cPtr);
+    _retval = cast(bool)adw_leaflet_get_folded(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -666,7 +666,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = adw_leaflet_get_homogeneous(cast(AdwLeaflet*)this._cPtr);
+    _retval = cast(bool)adw_leaflet_get_homogeneous(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -798,7 +798,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool navigate(adw.types.NavigationDirection direction)
   {
     bool _retval;
-    _retval = adw_leaflet_navigate(cast(AdwLeaflet*)this._cPtr, direction);
+    _retval = cast(bool)adw_leaflet_navigate(cast(AdwLeaflet*)this._cPtr, direction);
     return _retval;
   }
 

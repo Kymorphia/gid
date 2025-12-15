@@ -192,7 +192,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_pixbuf_loader_close(cast(GdkPixbufLoader*)this._cPtr, &_err);
+    _retval = cast(bool)gdk_pixbuf_loader_close(cast(GdkPixbufLoader*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -295,7 +295,7 @@ class PixbufLoader : gobject.object.ObjectWrap
 
     auto _buf = cast(const(ubyte)*)buf.ptr;
     GError *_err;
-    _retval = gdk_pixbuf_loader_write(cast(GdkPixbufLoader*)this._cPtr, _buf, _count, &_err);
+    _retval = cast(bool)gdk_pixbuf_loader_write(cast(GdkPixbufLoader*)this._cPtr, _buf, _count, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -314,7 +314,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_pixbuf_loader_write_bytes(cast(GdkPixbufLoader*)this._cPtr, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gdk_pixbuf_loader_write_bytes(cast(GdkPixbufLoader*)this._cPtr, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -99,13 +99,13 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   */
   void setAuthCallback(soup.types.AuthDomainBasicAuthCallback callback)
   {
-    extern(C) bool _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData)
+    extern(C) gboolean _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData)
     {
       auto _dlg = cast(soup.types.AuthDomainBasicAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
       string _password = password.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

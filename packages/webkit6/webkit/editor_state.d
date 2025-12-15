@@ -76,7 +76,7 @@ class EditorState : gobject.object.ObjectWrap
   bool isCopyAvailable()
   {
     bool _retval;
-    _retval = webkit_editor_state_is_copy_available(cast(WebKitEditorState*)this._cPtr);
+    _retval = cast(bool)webkit_editor_state_is_copy_available(cast(WebKitEditorState*)this._cPtr);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class EditorState : gobject.object.ObjectWrap
   bool isCutAvailable()
   {
     bool _retval;
-    _retval = webkit_editor_state_is_cut_available(cast(WebKitEditorState*)this._cPtr);
+    _retval = cast(bool)webkit_editor_state_is_cut_available(cast(WebKitEditorState*)this._cPtr);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class EditorState : gobject.object.ObjectWrap
   bool isPasteAvailable()
   {
     bool _retval;
-    _retval = webkit_editor_state_is_paste_available(cast(WebKitEditorState*)this._cPtr);
+    _retval = cast(bool)webkit_editor_state_is_paste_available(cast(WebKitEditorState*)this._cPtr);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class EditorState : gobject.object.ObjectWrap
   bool isRedoAvailable()
   {
     bool _retval;
-    _retval = webkit_editor_state_is_redo_available(cast(WebKitEditorState*)this._cPtr);
+    _retval = cast(bool)webkit_editor_state_is_redo_available(cast(WebKitEditorState*)this._cPtr);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class EditorState : gobject.object.ObjectWrap
   bool isUndoAvailable()
   {
     bool _retval;
-    _retval = webkit_editor_state_is_undo_available(cast(WebKitEditorState*)this._cPtr);
+    _retval = cast(bool)webkit_editor_state_is_undo_available(cast(WebKitEditorState*)this._cPtr);
     return _retval;
   }
 

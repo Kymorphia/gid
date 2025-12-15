@@ -304,7 +304,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   bool getReserveIndicator()
   {
     bool _retval;
-    _retval = gtk_menu_item_get_reserve_indicator(cast(GtkMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_menu_item_get_reserve_indicator(cast(GtkMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   bool getRightJustified()
   {
     bool _retval;
-    _retval = gtk_menu_item_get_right_justified(cast(GtkMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_menu_item_get_right_justified(cast(GtkMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_menu_item_get_use_underline(cast(GtkMenuItem*)this._cPtr);
+    _retval = cast(bool)gtk_menu_item_get_use_underline(cast(GtkMenuItem*)this._cPtr);
     return _retval;
   }
 

@@ -49,9 +49,9 @@ __gshared extern(C)
   GSequenceIter* function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_find_control_point_iter; ///
   GList* function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_all; ///
   int function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_count; ///
-  bool function(GstTimedValueControlSource* self, GstClockTime timestamp, double value) c_gst_timed_value_control_source_set; ///
-  bool function(GstTimedValueControlSource* self, const(GSList)* timedvalues) c_gst_timed_value_control_source_set_from_list; ///
-  bool function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_unset; ///
+  gboolean function(GstTimedValueControlSource* self, GstClockTime timestamp, double value) c_gst_timed_value_control_source_set; ///
+  gboolean function(GstTimedValueControlSource* self, const(GSList)* timedvalues) c_gst_timed_value_control_source_set_from_list; ///
+  gboolean function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_unset; ///
   void function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_unset_all; ///
 
   // TriggerControlSource

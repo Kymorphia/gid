@@ -94,7 +94,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool equal(gdk.toplevel_layout.ToplevelLayout other)
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)this._cPtr, other ? cast(GdkToplevelLayout*)other._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)this._cPtr, other ? cast(GdkToplevelLayout*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -110,7 +110,9 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool getFullscreen(out bool fullscreen)
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_get_fullscreen(cast(GdkToplevelLayout*)this._cPtr, cast(bool*)&fullscreen);
+    gboolean _fullscreen;
+    _retval = cast(bool)gdk_toplevel_layout_get_fullscreen(cast(GdkToplevelLayout*)this._cPtr, &_fullscreen);
+    fullscreen = cast(bool)_fullscreen;
     return _retval;
   }
 
@@ -139,7 +141,9 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool getMaximized(out bool maximized)
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_get_maximized(cast(GdkToplevelLayout*)this._cPtr, cast(bool*)&maximized);
+    gboolean _maximized;
+    _retval = cast(bool)gdk_toplevel_layout_get_maximized(cast(GdkToplevelLayout*)this._cPtr, &_maximized);
+    maximized = cast(bool)_maximized;
     return _retval;
   }
 
@@ -151,7 +155,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool getResizable()
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_get_resizable(cast(GdkToplevelLayout*)this._cPtr);
+    _retval = cast(bool)gdk_toplevel_layout_get_resizable(cast(GdkToplevelLayout*)this._cPtr);
     return _retval;
   }
 

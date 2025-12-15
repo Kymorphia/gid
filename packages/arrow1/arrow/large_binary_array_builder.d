@@ -56,7 +56,7 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _value = cast(const(ubyte)*)value.ptr;
     GError *_err;
-    _retval = garrow_large_binary_array_builder_append_value(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
+    _retval = cast(bool)garrow_large_binary_array_builder_append_value(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -67,7 +67,7 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_large_binary_array_builder_append_value_bytes(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, value ? cast(GBytes*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_large_binary_array_builder_append_value_bytes(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, value ? cast(GBytes*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -102,9 +102,9 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(bool)*)isValids.ptr;
+    auto _isValids = cast(const(gboolean)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_large_binary_array_builder_append_values(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = cast(bool)garrow_large_binary_array_builder_append_values(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

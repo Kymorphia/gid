@@ -53,7 +53,7 @@ class Location : gobject.object.ObjectWrap
   bool equal(arrowflight.location.Location otherLocation)
   {
     bool _retval;
-    _retval = gaflight_location_equal(cast(GAFlightLocation*)this._cPtr, otherLocation ? cast(GAFlightLocation*)otherLocation._cPtr(No.Dup) : null);
+    _retval = cast(bool)gaflight_location_equal(cast(GAFlightLocation*)this._cPtr, otherLocation ? cast(GAFlightLocation*)otherLocation._cPtr(No.Dup) : null);
     return _retval;
   }
 

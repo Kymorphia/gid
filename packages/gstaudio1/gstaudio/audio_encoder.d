@@ -271,7 +271,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool getDrainable()
   {
     bool _retval;
-    _retval = gst_audio_encoder_get_drainable(cast(GstAudioEncoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_encoder_get_drainable(cast(GstAudioEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool getHardMin()
   {
     bool _retval;
-    _retval = gst_audio_encoder_get_hard_min(cast(GstAudioEncoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_encoder_get_hard_min(cast(GstAudioEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool getHardResync()
   {
     bool _retval;
-    _retval = gst_audio_encoder_get_hard_resync(cast(GstAudioEncoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_encoder_get_hard_resync(cast(GstAudioEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool getMarkGranule()
   {
     bool _retval;
-    _retval = gst_audio_encoder_get_mark_granule(cast(GstAudioEncoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_encoder_get_mark_granule(cast(GstAudioEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool getPerfectTimestamp()
   {
     bool _retval;
-    _retval = gst_audio_encoder_get_perfect_timestamp(cast(GstAudioEncoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_encoder_get_perfect_timestamp(cast(GstAudioEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -409,7 +409,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_audio_encoder_negotiate(cast(GstAudioEncoder*)this._cPtr);
+    _retval = cast(bool)gst_audio_encoder_negotiate(cast(GstAudioEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -585,7 +585,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool setOutputFormat(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_audio_encoder_set_output_format(cast(GstAudioEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_audio_encoder_set_output_format(cast(GstAudioEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 

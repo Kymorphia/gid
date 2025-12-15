@@ -57,7 +57,7 @@ struct VideoColorPrimaries
   static bool isEquivalent(gstvideo.types.VideoColorPrimaries primaries, gstvideo.types.VideoColorPrimaries other)
   {
     bool _retval;
-    _retval = gst_video_color_primaries_is_equivalent(primaries, other);
+    _retval = cast(bool)gst_video_color_primaries_is_equivalent(primaries, other);
     return _retval;
   }
 

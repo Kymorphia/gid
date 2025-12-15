@@ -166,7 +166,7 @@ class ToggleActionEntry
   */
   @property bool isActive()
   {
-    return (cast(GtkToggleActionEntry*)this._cPtr).isActive;
+    return cast(bool)(cast(GtkToggleActionEntry*)this._cPtr).isActive;
   }
 
   /**

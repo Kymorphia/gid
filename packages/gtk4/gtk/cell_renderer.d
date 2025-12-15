@@ -280,7 +280,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = gtk_cell_renderer_activate(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags);
+    _retval = cast(bool)gtk_cell_renderer_activate(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   bool getIsExpanded()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_get_is_expanded(cast(GtkCellRenderer*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_get_is_expanded(cast(GtkCellRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   bool getIsExpander()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_get_is_expander(cast(GtkCellRenderer*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_get_is_expander(cast(GtkCellRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   bool getSensitive()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_get_sensitive(cast(GtkCellRenderer*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_get_sensitive(cast(GtkCellRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -483,7 +483,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_get_visible(cast(GtkCellRenderer*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_get_visible(cast(GtkCellRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -494,7 +494,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   bool isActivatable()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_is_activatable(cast(GtkCellRenderer*)this._cPtr);
+    _retval = cast(bool)gtk_cell_renderer_is_activatable(cast(GtkCellRenderer*)this._cPtr);
     return _retval;
   }
 

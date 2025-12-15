@@ -293,7 +293,7 @@ template ValueT()
   override bool setCurrentValue(gobject.value.Value value)
   {
     bool _retval;
-    _retval = atk_value_set_current_value(cast(AtkValue*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+    _retval = cast(bool)atk_value_set_current_value(cast(AtkValue*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 

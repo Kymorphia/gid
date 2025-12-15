@@ -65,7 +65,7 @@ class EventControllerFocus : gtk.event_controller.EventController
   bool containsFocus()
   {
     bool _retval;
-    _retval = gtk_event_controller_focus_contains_focus(cast(GtkEventControllerFocus*)this._cPtr);
+    _retval = cast(bool)gtk_event_controller_focus_contains_focus(cast(GtkEventControllerFocus*)this._cPtr);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class EventControllerFocus : gtk.event_controller.EventController
   bool isFocus()
   {
     bool _retval;
-    _retval = gtk_event_controller_focus_is_focus(cast(GtkEventControllerFocus*)this._cPtr);
+    _retval = cast(bool)gtk_event_controller_focus_is_focus(cast(GtkEventControllerFocus*)this._cPtr);
     return _retval;
   }
 

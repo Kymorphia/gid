@@ -212,7 +212,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   bool getShowAllDevices()
   {
     bool _retval;
-    _retval = gst_device_monitor_get_show_all_devices(cast(GstDeviceMonitor*)this._cPtr);
+    _retval = cast(bool)gst_device_monitor_get_show_all_devices(cast(GstDeviceMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   bool removeFilter(uint filterId)
   {
     bool _retval;
-    _retval = gst_device_monitor_remove_filter(cast(GstDeviceMonitor*)this._cPtr, filterId);
+    _retval = cast(bool)gst_device_monitor_remove_filter(cast(GstDeviceMonitor*)this._cPtr, filterId);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   bool start()
   {
     bool _retval;
-    _retval = gst_device_monitor_start(cast(GstDeviceMonitor*)this._cPtr);
+    _retval = cast(bool)gst_device_monitor_start(cast(GstDeviceMonitor*)this._cPtr);
     return _retval;
   }
 

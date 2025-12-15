@@ -245,7 +245,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_app_chooser_button_get_modal(cast(GtkAppChooserButton*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_button_get_modal(cast(GtkAppChooserButton*)this._cPtr);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   bool getShowDefaultItem()
   {
     bool _retval;
-    _retval = gtk_app_chooser_button_get_show_default_item(cast(GtkAppChooserButton*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_button_get_show_default_item(cast(GtkAppChooserButton*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   bool getShowDialogItem()
   {
     bool _retval;
-    _retval = gtk_app_chooser_button_get_show_dialog_item(cast(GtkAppChooserButton*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_button_get_show_dialog_item(cast(GtkAppChooserButton*)this._cPtr);
     return _retval;
   }
 

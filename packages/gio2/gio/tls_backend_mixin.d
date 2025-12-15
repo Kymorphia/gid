@@ -129,7 +129,7 @@ template TlsBackendT()
   override bool supportsDtls()
   {
     bool _retval;
-    _retval = g_tls_backend_supports_dtls(cast(GTlsBackend*)this._cPtr);
+    _retval = cast(bool)g_tls_backend_supports_dtls(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ template TlsBackendT()
   override bool supportsTls()
   {
     bool _retval;
-    _retval = g_tls_backend_supports_tls(cast(GTlsBackend*)this._cPtr);
+    _retval = cast(bool)g_tls_backend_supports_tls(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 }

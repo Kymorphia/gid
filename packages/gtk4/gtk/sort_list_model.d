@@ -199,7 +199,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   bool getIncremental()
   {
     bool _retval;
-    _retval = gtk_sort_list_model_get_incremental(cast(GtkSortListModel*)this._cPtr);
+    _retval = cast(bool)gtk_sort_list_model_get_incremental(cast(GtkSortListModel*)this._cPtr);
     return _retval;
   }
 

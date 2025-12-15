@@ -150,7 +150,7 @@ class DsnInfo : gobject.boxed.Boxed
   */
   @property bool isSystem()
   {
-    return (cast(GdaDsnInfo*)this._cPtr).isSystem;
+    return cast(bool)(cast(GdaDsnInfo*)this._cPtr).isSystem;
   }
 
   /**

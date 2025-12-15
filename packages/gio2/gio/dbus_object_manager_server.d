@@ -162,7 +162,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   bool isExported(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
     bool _retval;
-    _retval = g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)this._cPtr, object ? cast(GDBusObjectSkeleton*)object._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)this._cPtr, object ? cast(GDBusObjectSkeleton*)object._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   {
     bool _retval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    _retval = g_dbus_object_manager_server_unexport(cast(GDBusObjectManagerServer*)this._cPtr, _objectPath);
+    _retval = cast(bool)g_dbus_object_manager_server_unexport(cast(GDBusObjectManagerServer*)this._cPtr, _objectPath);
     return _retval;
   }
 }

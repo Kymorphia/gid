@@ -141,7 +141,7 @@ struct GstAppSinkCallbacks
             false otherwise.
             Since: 1.20
   */
-  extern(C) bool function(GstAppSink* appsink, void* userData) newEvent;
+  extern(C) gboolean function(GstAppSink* appsink, void* userData) newEvent;
 
   /**
       Called when the propose_allocation query is available.
@@ -151,7 +151,7 @@ struct GstAppSinkCallbacks
             or from any other thread.
             Since: 1.24
   */
-  extern(C) bool function(GstAppSink* appsink, GstQuery* query, void* userData) proposeAllocation;
+  extern(C) gboolean function(GstAppSink* appsink, GstQuery* query, void* userData) proposeAllocation;
 
   /** */
   void*[2] GstReserved;
@@ -298,7 +298,7 @@ struct GstAppSrcCallbacks
          The next push-buffer should produce buffers from the new @offset.
          This callback is only called for seekable stream types.
   */
-  extern(C) bool function(GstAppSrc* src, ulong offset, void* userData) seekData;
+  extern(C) gboolean function(GstAppSrc* src, ulong offset, void* userData) seekData;
 
   /** */
   void*[4] GstReserved;
@@ -317,7 +317,7 @@ struct GstAppSrcClass
   extern(C) void function(GstAppSrc* appsrc) enoughData;
 
   /** */
-  extern(C) bool function(GstAppSrc* appsrc, ulong offset) seekData;
+  extern(C) gboolean function(GstAppSrc* appsrc, ulong offset) seekData;
 
   /** */
   extern(C) GstFlowReturn function(GstAppSrc* appsrc, GstBuffer* buffer) pushBuffer;

@@ -655,7 +655,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getFolded()
   {
     bool _retval;
-    _retval = adw_flap_get_folded(cast(AdwFlap*)this._cPtr);
+    _retval = cast(bool)adw_flap_get_folded(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -668,7 +668,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getLocked()
   {
     bool _retval;
-    _retval = adw_flap_get_locked(cast(AdwFlap*)this._cPtr);
+    _retval = cast(bool)adw_flap_get_locked(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -681,7 +681,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getModal()
   {
     bool _retval;
-    _retval = adw_flap_get_modal(cast(AdwFlap*)this._cPtr);
+    _retval = cast(bool)adw_flap_get_modal(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getRevealFlap()
   {
     bool _retval;
-    _retval = adw_flap_get_reveal_flap(cast(AdwFlap*)this._cPtr);
+    _retval = cast(bool)adw_flap_get_reveal_flap(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -752,7 +752,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getSwipeToClose()
   {
     bool _retval;
-    _retval = adw_flap_get_swipe_to_close(cast(AdwFlap*)this._cPtr);
+    _retval = cast(bool)adw_flap_get_swipe_to_close(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -765,7 +765,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getSwipeToOpen()
   {
     bool _retval;
-    _retval = adw_flap_get_swipe_to_open(cast(AdwFlap*)this._cPtr);
+    _retval = cast(bool)adw_flap_get_swipe_to_open(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 

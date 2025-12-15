@@ -3227,7 +3227,7 @@ struct GActionGroupInterface
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.hasAction]
   */
-  extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName) hasAction;
+  extern(C) gboolean function(GActionGroup* actionGroup, const(char)* actionName) hasAction;
 
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.listActions]
@@ -3237,7 +3237,7 @@ struct GActionGroupInterface
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.getActionEnabled]
   */
-  extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName) getActionEnabled;
+  extern(C) gboolean function(GActionGroup* actionGroup, const(char)* actionName) getActionEnabled;
 
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.getActionParameterType]
@@ -3282,7 +3282,7 @@ struct GActionGroupInterface
   /**
       the class closure for the #GActionGroup::action-enabled-changed signal
   */
-  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, bool enabled) actionEnabledChanged;
+  extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, gboolean enabled) actionEnabledChanged;
 
   /**
       the class closure for the #GActionGroup::action-enabled-changed signal
@@ -3292,7 +3292,7 @@ struct GActionGroupInterface
   /**
       the virtual function pointer for [gio.action_group.ActionGroup.queryAction]
   */
-  extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName, bool* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, GVariant** stateHint, GVariant** state) queryAction;
+  extern(C) gboolean function(GActionGroup* actionGroup, const(char)* actionName, gboolean* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, GVariant** stateHint, GVariant** state) queryAction;
 }
 
 /**
@@ -3326,7 +3326,7 @@ struct GActionInterface
   /**
       the virtual function pointer for [gio.action.Action.getEnabled]
   */
-  extern(C) bool function(GAction* action) getEnabled;
+  extern(C) gboolean function(GAction* action) getEnabled;
 
   /**
       the virtual function pointer for [gio.action.Action.getState]
@@ -3457,7 +3457,7 @@ struct GAppInfoIface
   /**
       Checks two #GAppInfos for equality.
   */
-  extern(C) bool function(GAppInfo* appinfo1, GAppInfo* appinfo2) equal;
+  extern(C) gboolean function(GAppInfo* appinfo1, GAppInfo* appinfo2) equal;
 
   /**
       Gets a string identifier for a #GAppInfo.
@@ -3487,63 +3487,63 @@ struct GAppInfoIface
   /**
       Launches an application specified by the #GAppInfo.
   */
-  extern(C) bool function(GAppInfo* appinfo, GList* files, GAppLaunchContext* context, GError** _err) launch;
+  extern(C) gboolean function(GAppInfo* appinfo, GList* files, GAppLaunchContext* context, GError** _err) launch;
 
   /**
       Indicates whether the application specified supports launching URIs.
   */
-  extern(C) bool function(GAppInfo* appinfo) supportsUris;
+  extern(C) gboolean function(GAppInfo* appinfo) supportsUris;
 
   /**
       Indicates whether the application specified accepts filename arguments.
   */
-  extern(C) bool function(GAppInfo* appinfo) supportsFiles;
+  extern(C) gboolean function(GAppInfo* appinfo) supportsFiles;
 
   /**
       Launches an application with a list of URIs.
   */
-  extern(C) bool function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GError** _err) launchUris;
+  extern(C) gboolean function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GError** _err) launchUris;
 
   /**
       Returns whether an application should be shown (e.g. when getting a list of installed applications).
       [FreeDesktop.Org Startup Notification Specification](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
   */
-  extern(C) bool function(GAppInfo* appinfo) shouldShow;
+  extern(C) gboolean function(GAppInfo* appinfo) shouldShow;
 
   /**
       Sets an application as default for a given content type.
   */
-  extern(C) bool function(GAppInfo* appinfo, const(char)* contentType, GError** _err) setAsDefaultForType;
+  extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) setAsDefaultForType;
 
   /**
       Sets an application as default for a given file extension.
   */
-  extern(C) bool function(GAppInfo* appinfo, const(char)* extension, GError** _err) setAsDefaultForExtension;
+  extern(C) gboolean function(GAppInfo* appinfo, const(char)* extension, GError** _err) setAsDefaultForExtension;
 
   /**
       Adds to the #GAppInfo information about supported file types.
   */
-  extern(C) bool function(GAppInfo* appinfo, const(char)* contentType, GError** _err) addSupportsType;
+  extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) addSupportsType;
 
   /**
       Checks for support for removing supported file types from a #GAppInfo.
   */
-  extern(C) bool function(GAppInfo* appinfo) canRemoveSupportsType;
+  extern(C) gboolean function(GAppInfo* appinfo) canRemoveSupportsType;
 
   /**
       Removes a supported application type from a #GAppInfo.
   */
-  extern(C) bool function(GAppInfo* appinfo, const(char)* contentType, GError** _err) removeSupportsType;
+  extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) removeSupportsType;
 
   /**
       Checks if a #GAppInfo can be deleted. Since 2.20
   */
-  extern(C) bool function(GAppInfo* appinfo) canDelete;
+  extern(C) gboolean function(GAppInfo* appinfo) canDelete;
 
   /**
       Deletes a #GAppInfo. Since 2.20
   */
-  extern(C) bool function(GAppInfo* appinfo) doDelete;
+  extern(C) gboolean function(GAppInfo* appinfo) doDelete;
 
   /**
       Gets the commandline for the #GAppInfo. Since 2.20
@@ -3558,7 +3558,7 @@ struct GAppInfoIface
   /**
       Sets the application as the last used. See [gio.app_info.AppInfo.setAsLastUsedForType].
   */
-  extern(C) bool function(GAppInfo* appinfo, const(char)* contentType, GError** _err) setAsLastUsedForType;
+  extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) setAsLastUsedForType;
 
   /**
       Retrieves the list of content types that @app_info claims to support.
@@ -3573,7 +3573,7 @@ struct GAppInfoIface
   /**
       Finishes an operation started with @launch_uris_async. (Since: 2.60)
   */
-  extern(C) bool function(GAppInfo* appinfo, GAsyncResult* result, GError** _err) launchUrisFinish;
+  extern(C) gboolean function(GAppInfo* appinfo, GAsyncResult* result, GError** _err) launchUrisFinish;
 }
 
 /**
@@ -3841,7 +3841,7 @@ struct GApplicationClass
           #GApplication::handle-local-options signal, which is a simpler
           alternative to handling some commandline options locally
   */
-  extern(C) bool function(GApplication* application, char*** arguments, int* exitStatus) localCommandLine;
+  extern(C) gboolean function(GApplication* application, char*** arguments, int* exitStatus) localCommandLine;
 
   /**
       invoked on the primary instance before 'activate', 'open',
@@ -3893,7 +3893,7 @@ struct GApplicationClass
           If this function returns true, registration will proceed; otherwise
           registration will abort. Since: 2.34
   */
-  extern(C) bool function(GApplication* application, GDBusConnection* connection, const(char)* objectPath, GError** _err) dbusRegister;
+  extern(C) gboolean function(GApplication* application, GDBusConnection* connection, const(char)* objectPath, GError** _err) dbusRegister;
 
   /**
       invoked locally during unregistration, if the application
@@ -3911,7 +3911,7 @@ struct GApplicationClass
   /**
       invoked when another instance is taking over the name. Since: 2.60
   */
-  extern(C) bool function(GApplication* application) nameLost;
+  extern(C) gboolean function(GApplication* application) nameLost;
 
   /** */
   void*[7] padding;
@@ -4251,7 +4251,7 @@ struct GAsyncInitableIface
   /**
       Finishes initialization of the object.
   */
-  extern(C) bool function(GAsyncInitable* initable, GAsyncResult* res, GError** _err) initFinish;
+  extern(C) gboolean function(GAsyncInitable* initable, GAsyncResult* res, GError** _err) initFinish;
 }
 
 /**
@@ -4366,7 +4366,7 @@ struct GAsyncResultIface
   /**
       Checks if a result is tagged with a particular source.
   */
-  extern(C) bool function(GAsyncResult* res, void* sourceTag) isTagged;
+  extern(C) gboolean function(GAsyncResult* res, void* sourceTag) isTagged;
 }
 
 /**
@@ -5016,7 +5016,7 @@ struct GDBusInterfaceSkeletonClass
   /**
       Signal class handler for the #GDBusInterfaceSkeleton::g-authorize-method signal.
   */
-  extern(C) bool function(GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) gAuthorizeMethod;
+  extern(C) gboolean function(GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) gAuthorizeMethod;
 
   /** */
   void*[8] signalPadding;
@@ -5508,7 +5508,7 @@ struct GDBusObjectSkeletonClass
   /**
       Signal class handler for the #GDBusObjectSkeleton::authorize-method signal.
   */
-  extern(C) bool function(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) authorizeMethod;
+  extern(C) gboolean function(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) authorizeMethod;
 
   /** */
   void*[8] padding;
@@ -5871,7 +5871,7 @@ struct GDatagramBasedInterface
       Virtual method for
         [gio.datagram_based.DatagramBased.conditionWait].
   */
-  extern(C) bool function(GDatagramBased* datagramBased, GIOCondition condition, long timeout, GCancellable* cancellable, GError** _err) conditionWait;
+  extern(C) gboolean function(GDatagramBased* datagramBased, GIOCondition condition, long timeout, GCancellable* cancellable, GError** _err) conditionWait;
 }
 
 /**
@@ -6025,7 +6025,7 @@ struct GDebugControllerDBusClass
   /**
       Default handler for the #GDebugControllerDBus::authorize signal.
   */
-  extern(C) bool function(GDebugControllerDBus* controller, GDBusMethodInvocation* invocation) authorize;
+  extern(C) gboolean function(GDebugControllerDBus* controller, GDBusMethodInvocation* invocation) authorize;
 
   /** */
   void*[12] padding;
@@ -6152,7 +6152,7 @@ struct GDriveIface
   /**
       Returns true if the #GDrive has mountable volumes.
   */
-  extern(C) bool function(GDrive* drive) hasVolumes;
+  extern(C) gboolean function(GDrive* drive) hasVolumes;
 
   /**
       Returns a list #GList of #GVolume for the #GDrive.
@@ -6162,27 +6162,27 @@ struct GDriveIface
   /**
       Returns true if the #GDrive supports removal and insertion of media.
   */
-  extern(C) bool function(GDrive* drive) isMediaRemovable;
+  extern(C) gboolean function(GDrive* drive) isMediaRemovable;
 
   /**
       Returns true if the #GDrive has media inserted.
   */
-  extern(C) bool function(GDrive* drive) hasMedia;
+  extern(C) gboolean function(GDrive* drive) hasMedia;
 
   /**
       Returns true if the #GDrive is capable of automatically detecting media changes.
   */
-  extern(C) bool function(GDrive* drive) isMediaCheckAutomatic;
+  extern(C) gboolean function(GDrive* drive) isMediaCheckAutomatic;
 
   /**
       Returns true if the #GDrive can eject media.
   */
-  extern(C) bool function(GDrive* drive) canEject;
+  extern(C) gboolean function(GDrive* drive) canEject;
 
   /**
       Returns true if the #GDrive is capable of manually polling for media change.
   */
-  extern(C) bool function(GDrive* drive) canPollForMedia;
+  extern(C) gboolean function(GDrive* drive) canPollForMedia;
 
   /**
       Ejects a #GDrive.
@@ -6192,7 +6192,7 @@ struct GDriveIface
   /**
       Finishes an eject operation.
   */
-  extern(C) bool function(GDrive* drive, GAsyncResult* result, GError** _err) ejectFinish;
+  extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) ejectFinish;
 
   /**
       Poll for media insertion/removal on a #GDrive.
@@ -6202,7 +6202,7 @@ struct GDriveIface
   /**
       Finishes a media poll operation.
   */
-  extern(C) bool function(GDrive* drive, GAsyncResult* result, GError** _err) pollForMediaFinish;
+  extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) pollForMediaFinish;
 
   /**
       Returns the identifier of the given kind, or null if
@@ -6224,12 +6224,12 @@ struct GDriveIface
   /**
       Returns true if a #GDrive can be started. Since 2.22.
   */
-  extern(C) bool function(GDrive* drive) canStart;
+  extern(C) gboolean function(GDrive* drive) canStart;
 
   /**
       Returns true if a #GDrive can be started degraded. Since 2.22.
   */
-  extern(C) bool function(GDrive* drive) canStartDegraded;
+  extern(C) gboolean function(GDrive* drive) canStartDegraded;
 
   /**
       Starts a #GDrive. Since 2.22.
@@ -6239,12 +6239,12 @@ struct GDriveIface
   /**
       Finishes a start operation. Since 2.22.
   */
-  extern(C) bool function(GDrive* drive, GAsyncResult* result, GError** _err) startFinish;
+  extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) startFinish;
 
   /**
       Returns true if a #GDrive can be stopped. Since 2.22.
   */
-  extern(C) bool function(GDrive* drive) canStop;
+  extern(C) gboolean function(GDrive* drive) canStop;
 
   /**
       Stops a #GDrive. Since 2.22.
@@ -6254,7 +6254,7 @@ struct GDriveIface
   /**
       Finishes a stop operation. Since 2.22.
   */
-  extern(C) bool function(GDrive* drive, GAsyncResult* result, GError** _err) stopFinish;
+  extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) stopFinish;
 
   /**
       Signal emitted when the physical stop button (if any) of a drive have been pressed. Since 2.22.
@@ -6269,7 +6269,7 @@ struct GDriveIface
   /**
       Finishes an eject operation using a #GMountOperation. Since 2.22.
   */
-  extern(C) bool function(GDrive* drive, GAsyncResult* result, GError** _err) ejectWithOperationFinish;
+  extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) ejectWithOperationFinish;
 
   /**
       Gets a key used for sorting #GDrive instances or null if no such key exists. Since 2.32.
@@ -6284,7 +6284,7 @@ struct GDriveIface
   /**
       Returns true if the #GDrive and/or its media is considered removable by the user. Since 2.50.
   */
-  extern(C) bool function(GDrive* drive) isRemovable;
+  extern(C) gboolean function(GDrive* drive) isRemovable;
 }
 
 /**
@@ -6342,12 +6342,12 @@ struct GDtlsConnectionInterface
   /**
       Check whether to accept a certificate.
   */
-  extern(C) bool function(GDtlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) acceptCertificate;
+  extern(C) gboolean function(GDtlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) acceptCertificate;
 
   /**
       Perform a handshake operation.
   */
-  extern(C) bool function(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) handshake;
+  extern(C) gboolean function(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) handshake;
 
   /**
       Start an asynchronous handshake operation.
@@ -6357,22 +6357,22 @@ struct GDtlsConnectionInterface
   /**
       Finish an asynchronous handshake operation.
   */
-  extern(C) bool function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) handshakeFinish;
+  extern(C) gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) handshakeFinish;
 
   /**
       Shut down one or both directions of the connection.
   */
-  extern(C) bool function(GDtlsConnection* conn, bool shutdownRead, bool shutdownWrite, GCancellable* cancellable, GError** _err) shutdown;
+  extern(C) gboolean function(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, GCancellable* cancellable, GError** _err) shutdown;
 
   /**
       Start an asynchronous shutdown operation.
   */
-  extern(C) void function(GDtlsConnection* conn, bool shutdownRead, bool shutdownWrite, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) shutdownAsync;
+  extern(C) void function(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) shutdownAsync;
 
   /**
       Finish an asynchronous shutdown operation.
   */
-  extern(C) bool function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) shutdownFinish;
+  extern(C) gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) shutdownFinish;
 
   /**
       Set APLN protocol list (Since: 2.60)
@@ -6387,7 +6387,7 @@ struct GDtlsConnectionInterface
   /**
       Retrieve TLS channel binding data (Since: 2.66)
   */
-  extern(C) bool function(GDtlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) getBindingData;
+  extern(C) gboolean function(GDtlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) getBindingData;
 }
 
 /**
@@ -6664,7 +6664,7 @@ struct GFileEnumeratorClass
   extern(C) GFileInfo* function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) nextFile;
 
   /** */
-  extern(C) bool function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) closeFn;
+  extern(C) gboolean function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) closeFn;
 
   /** */
   extern(C) void function(GFileEnumerator* enumerator, int numFiles, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nextFilesAsync;
@@ -6676,7 +6676,7 @@ struct GFileEnumeratorClass
   extern(C) void function(GFileEnumerator* enumerator, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) closeAsync;
 
   /** */
-  extern(C) bool function(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) closeFinish;
+  extern(C) gboolean function(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) closeFinish;
 
   /** */
   extern(C) void function() GReserved1;
@@ -6743,16 +6743,16 @@ struct GFileIOStreamClass
   extern(C) long function(GFileIOStream* stream) tell;
 
   /** */
-  extern(C) bool function(GFileIOStream* stream) canSeek;
+  extern(C) gboolean function(GFileIOStream* stream) canSeek;
 
   /** */
-  extern(C) bool function(GFileIOStream* stream, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
+  extern(C) gboolean function(GFileIOStream* stream, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
 
   /** */
-  extern(C) bool function(GFileIOStream* stream) canTruncate;
+  extern(C) gboolean function(GFileIOStream* stream) canTruncate;
 
   /** */
-  extern(C) bool function(GFileIOStream* stream, long size, GCancellable* cancellable, GError** _err) truncateFn;
+  extern(C) gboolean function(GFileIOStream* stream, long size, GCancellable* cancellable, GError** _err) truncateFn;
 
   /** */
   extern(C) GFileInfo* function(GFileIOStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) queryInfo;
@@ -6819,17 +6819,17 @@ struct GFileIface
   /**
       Checks equality of two given #GFiles.
   */
-  extern(C) bool function(GFile* file1, GFile* file2) equal;
+  extern(C) gboolean function(GFile* file1, GFile* file2) equal;
 
   /**
       Checks to see if a file is native to the system.
   */
-  extern(C) bool function(GFile* file) isNative;
+  extern(C) gboolean function(GFile* file) isNative;
 
   /**
       Checks to see if a #GFile has a given URI scheme.
   */
-  extern(C) bool function(GFile* file, const(char)* uriScheme) hasUriScheme;
+  extern(C) gboolean function(GFile* file, const(char)* uriScheme) hasUriScheme;
 
   /**
       Gets the URI scheme for a #GFile.
@@ -6864,7 +6864,7 @@ struct GFileIface
   /**
       Checks whether a #GFile contains a specified file.
   */
-  extern(C) bool function(GFile* prefix, GFile* file) prefixMatches;
+  extern(C) gboolean function(GFile* prefix, GFile* file) prefixMatches;
 
   /**
       Gets the path for a #GFile relative to a given path.
@@ -6989,12 +6989,12 @@ struct GFileIface
   /**
       Sets a #GFileAttributeInfo.
   */
-  extern(C) bool function(GFile* file, const(char)* attribute, GFileAttributeType type, void* valueP, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) setAttribute;
+  extern(C) gboolean function(GFile* file, const(char)* attribute, GFileAttributeType type, void* valueP, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) setAttribute;
 
   /**
       Sets a #GFileAttributeInfo with information from a #GFileInfo.
   */
-  extern(C) bool function(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) setAttributesFromInfo;
+  extern(C) gboolean function(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) setAttributesFromInfo;
 
   /**
       Asynchronously sets a file's attributes.
@@ -7004,7 +7004,7 @@ struct GFileIface
   /**
       Finishes setting a file's attributes asynchronously.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GFileInfo** info, GError** _err) setAttributesFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GFileInfo** info, GError** _err) setAttributesFinish;
 
   /**
       Reads a file asynchronously.
@@ -7054,12 +7054,12 @@ struct GFileIface
   /**
       Replaces the contents of a file.
   */
-  extern(C) GFileOutputStream* function(GFile* file, const(char)* etag, bool makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) replace;
+  extern(C) GFileOutputStream* function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) replace;
 
   /**
       Asynchronously replaces the contents of a file.
   */
-  extern(C) void function(GFile* file, const(char)* etag, bool makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) replaceAsync;
+  extern(C) void function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) replaceAsync;
 
   /**
       Finishes asynchronously replacing a file.
@@ -7069,7 +7069,7 @@ struct GFileIface
   /**
       Deletes a file.
   */
-  extern(C) bool function(GFile* file, GCancellable* cancellable, GError** _err) deleteFile;
+  extern(C) gboolean function(GFile* file, GCancellable* cancellable, GError** _err) deleteFile;
 
   /**
       Asynchronously deletes a file.
@@ -7079,12 +7079,12 @@ struct GFileIface
   /**
       Finishes an asynchronous delete.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) deleteFileFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) deleteFileFinish;
 
   /**
       Sends a #GFile to the Trash location.
   */
-  extern(C) bool function(GFile* file, GCancellable* cancellable, GError** _err) trash;
+  extern(C) gboolean function(GFile* file, GCancellable* cancellable, GError** _err) trash;
 
   /**
       Asynchronously sends a #GFile to the Trash location.
@@ -7094,12 +7094,12 @@ struct GFileIface
   /**
       Finishes an asynchronous file trashing operation.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) trashFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) trashFinish;
 
   /**
       Makes a directory.
   */
-  extern(C) bool function(GFile* file, GCancellable* cancellable, GError** _err) makeDirectory;
+  extern(C) gboolean function(GFile* file, GCancellable* cancellable, GError** _err) makeDirectory;
 
   /**
       Asynchronously makes a directory.
@@ -7109,13 +7109,13 @@ struct GFileIface
   /**
       Finishes making a directory asynchronously.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) makeDirectoryFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) makeDirectoryFinish;
 
   /**
       Makes a symbolic link. null if symbolic
          links are unsupported.
   */
-  extern(C) bool function(GFile* file, const(char)* symlinkValue, GCancellable* cancellable, GError** _err) makeSymbolicLink;
+  extern(C) gboolean function(GFile* file, const(char)* symlinkValue, GCancellable* cancellable, GError** _err) makeSymbolicLink;
 
   /**
       Asynchronously makes a symbolic link
@@ -7125,14 +7125,14 @@ struct GFileIface
   /**
       Finishes making a symbolic link asynchronously.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) makeSymbolicLinkFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) makeSymbolicLinkFinish;
 
   /**
       Copies a file. null if copying is unsupported, which will
           cause [gio.file.File] to use a fallback copy method where it reads from the
           source and writes to the destination.
   */
-  extern(C) bool function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) copy;
+  extern(C) gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) copy;
 
   /**
       Asynchronously copies a file.
@@ -7142,12 +7142,12 @@ struct GFileIface
   /**
       Finishes an asynchronous copy operation.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* res, GError** _err) copyFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* res, GError** _err) copyFinish;
 
   /**
       Moves a file.
   */
-  extern(C) bool function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) move;
+  extern(C) gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) move;
 
   /**
       Asynchronously moves a file. Since: 2.72
@@ -7157,7 +7157,7 @@ struct GFileIface
   /**
       Finishes an asynchronous move operation. Since: 2.72
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) moveFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) moveFinish;
 
   /**
       Mounts a mountable object.
@@ -7177,7 +7177,7 @@ struct GFileIface
   /**
       Finishes an unmount operation.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) unmountMountableFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) unmountMountableFinish;
 
   /**
       Ejects a mountable.
@@ -7187,7 +7187,7 @@ struct GFileIface
   /**
       Finishes an eject operation.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) ejectMountableFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) ejectMountableFinish;
 
   /**
       Mounts a specified location.
@@ -7197,7 +7197,7 @@ struct GFileIface
   /**
       Finishes mounting a specified location.
   */
-  extern(C) bool function(GFile* location, GAsyncResult* result, GError** _err) mountEnclosingVolumeFinish;
+  extern(C) gboolean function(GFile* location, GAsyncResult* result, GError** _err) mountEnclosingVolumeFinish;
 
   /**
       Creates a #GFileMonitor for the location.
@@ -7242,12 +7242,12 @@ struct GFileIface
   /**
       Replaces file read/write. Since 2.22.
   */
-  extern(C) GFileIOStream* function(GFile* file, const(char)* etag, bool makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) replaceReadwrite;
+  extern(C) GFileIOStream* function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) replaceReadwrite;
 
   /**
       Asynchronously replaces file read/write. Since 2.22.
   */
-  extern(C) void function(GFile* file, const(char)* etag, bool makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) replaceReadwriteAsync;
+  extern(C) void function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) replaceReadwriteAsync;
 
   /**
       Finishes an asynchronous replace read/write. Since 2.22.
@@ -7262,7 +7262,7 @@ struct GFileIface
   /**
       Finishes a start operation. Since 2.22.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) startMountableFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) startMountableFinish;
 
   /**
       Stops a mountable. Since 2.22.
@@ -7272,12 +7272,12 @@ struct GFileIface
   /**
       Finishes a stop operation. Since 2.22.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) stopMountableFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) stopMountableFinish;
 
   /**
       a boolean that indicates whether the #GFile implementation supports thread-default contexts. Since 2.22.
   */
-  bool supportsThreadContexts;
+  gboolean supportsThreadContexts;
 
   /**
       Unmounts a mountable object using a #GMountOperation. Since 2.22.
@@ -7287,7 +7287,7 @@ struct GFileIface
   /**
       Finishes an unmount operation using a #GMountOperation. Since 2.22.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) unmountMountableWithOperationFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) unmountMountableWithOperationFinish;
 
   /**
       Ejects a mountable object using a #GMountOperation. Since 2.22.
@@ -7297,7 +7297,7 @@ struct GFileIface
   /**
       Finishes an eject operation using a #GMountOperation. Since 2.22.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) ejectMountableWithOperationFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) ejectMountableWithOperationFinish;
 
   /**
       Polls a mountable object for media changes. Since 2.22.
@@ -7307,12 +7307,12 @@ struct GFileIface
   /**
       Finishes a poll operation for media changes. Since 2.22.
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, GError** _err) pollMountableFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) pollMountableFinish;
 
   /**
       Recursively measures the disk usage of @file. Since 2.38
   */
-  extern(C) bool function(GFile* file, GFileMeasureFlags flags, GCancellable* cancellable, GFileMeasureProgressCallback progressCallback, void* progressData, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) measureDiskUsage;
+  extern(C) gboolean function(GFile* file, GFileMeasureFlags flags, GCancellable* cancellable, GFileMeasureProgressCallback progressCallback, void* progressData, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) measureDiskUsage;
 
   /**
       Asynchronously recursively measures the disk usage of @file. Since 2.38
@@ -7322,7 +7322,7 @@ struct GFileIface
   /**
       Finishes an asynchronous recursive measurement of the disk usage of @file. Since 2.38
   */
-  extern(C) bool function(GFile* file, GAsyncResult* result, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) measureDiskUsageFinish;
+  extern(C) gboolean function(GFile* file, GAsyncResult* result, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) measureDiskUsageFinish;
 }
 
 /**
@@ -7398,10 +7398,10 @@ struct GFileInputStreamClass
   extern(C) long function(GFileInputStream* stream) tell;
 
   /** */
-  extern(C) bool function(GFileInputStream* stream) canSeek;
+  extern(C) gboolean function(GFileInputStream* stream) canSeek;
 
   /** */
-  extern(C) bool function(GFileInputStream* stream, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
+  extern(C) gboolean function(GFileInputStream* stream, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
 
   /** */
   extern(C) GFileInfo* function(GFileInputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) queryInfo;
@@ -7465,7 +7465,7 @@ struct GFileMonitorClass
   extern(C) void function(GFileMonitor* monitor, GFile* file, GFile* otherFile, GFileMonitorEvent eventType) changed;
 
   /** */
-  extern(C) bool function(GFileMonitor* monitor) cancel;
+  extern(C) gboolean function(GFileMonitor* monitor) cancel;
 
   /** */
   extern(C) void function() GReserved1;
@@ -7521,16 +7521,16 @@ struct GFileOutputStreamClass
   extern(C) long function(GFileOutputStream* stream) tell;
 
   /** */
-  extern(C) bool function(GFileOutputStream* stream) canSeek;
+  extern(C) gboolean function(GFileOutputStream* stream) canSeek;
 
   /** */
-  extern(C) bool function(GFileOutputStream* stream, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
+  extern(C) gboolean function(GFileOutputStream* stream, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
 
   /** */
-  extern(C) bool function(GFileOutputStream* stream) canTruncate;
+  extern(C) gboolean function(GFileOutputStream* stream) canTruncate;
 
   /** */
-  extern(C) bool function(GFileOutputStream* stream, long size, GCancellable* cancellable, GError** _err) truncateFn;
+  extern(C) gboolean function(GFileOutputStream* stream, long size, GCancellable* cancellable, GError** _err) truncateFn;
 
   /** */
   extern(C) GFileInfo* function(GFileOutputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) queryInfo;
@@ -7814,13 +7814,13 @@ struct GIOStreamClass
   extern(C) GOutputStream* function(GIOStream* stream) getOutputStream;
 
   /** */
-  extern(C) bool function(GIOStream* stream, GCancellable* cancellable, GError** _err) closeFn;
+  extern(C) gboolean function(GIOStream* stream, GCancellable* cancellable, GError** _err) closeFn;
 
   /** */
   extern(C) void function(GIOStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) closeAsync;
 
   /** */
-  extern(C) bool function(GIOStream* stream, GAsyncResult* result, GError** _err) closeFinish;
+  extern(C) gboolean function(GIOStream* stream, GAsyncResult* result, GError** _err) closeFinish;
 
   /** */
   extern(C) void function() GReserved1;
@@ -7910,14 +7910,14 @@ struct GIconIface
   /**
       Checks if two #GIcons are equal.
   */
-  extern(C) bool function(GIcon* icon1, GIcon* icon2) equal;
+  extern(C) gboolean function(GIcon* icon1, GIcon* icon2) equal;
 
   /**
       Serializes a #GIcon into tokens. The tokens must not
       contain any whitespace. Don't implement if the #GIcon can't be
       serialized (Since 2.20).
   */
-  extern(C) bool function(GIcon* icon, GPtrArray* tokens, int* outVersion) toTokens;
+  extern(C) gboolean function(GIcon* icon, GPtrArray* tokens, int* outVersion) toTokens;
 
   /**
       Constructs a #GIcon from tokens. Set the #GError if
@@ -8062,7 +8062,7 @@ struct GInitableIface
   /**
       Initializes the object.
   */
-  extern(C) bool function(GInitable* initable, GCancellable* cancellable, GError** _err) init_;
+  extern(C) gboolean function(GInitable* initable, GCancellable* cancellable, GError** _err) init_;
 }
 
 /**
@@ -8167,7 +8167,7 @@ struct GInputStreamClass
   extern(C) ptrdiff_t function(GInputStream* stream, size_t count, GCancellable* cancellable, GError** _err) skip;
 
   /** */
-  extern(C) bool function(GInputStream* stream, GCancellable* cancellable, GError** _err) closeFn;
+  extern(C) gboolean function(GInputStream* stream, GCancellable* cancellable, GError** _err) closeFn;
 
   /** */
   extern(C) void function(GInputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) readAsync;
@@ -8185,7 +8185,7 @@ struct GInputStreamClass
   extern(C) void function(GInputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) closeAsync;
 
   /** */
-  extern(C) bool function(GInputStream* stream, GAsyncResult* result, GError** _err) closeFinish;
+  extern(C) gboolean function(GInputStream* stream, GAsyncResult* result, GError** _err) closeFinish;
 
   /** */
   extern(C) void function() GReserved1;
@@ -8552,7 +8552,7 @@ struct GMenuAttributeIterClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GMenuAttributeIter* iter, const(char*)* outName, GVariant** value) getNext;
+  extern(C) gboolean function(GMenuAttributeIter* iter, const(char*)* outName, GVariant** value) getNext;
 }
 
 /** */
@@ -8584,7 +8584,7 @@ struct GMenuLinkIterClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GMenuLinkIter* iter, const(char*)* outLink, GMenuModel** value) getNext;
+  extern(C) gboolean function(GMenuLinkIter* iter, const(char*)* outLink, GMenuModel** value) getNext;
 }
 
 /** */
@@ -8726,7 +8726,7 @@ struct GMenuModelClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GMenuModel* model) isMutable;
+  extern(C) gboolean function(GMenuModel* model) isMutable;
 
   /** */
   extern(C) int function(GMenuModel* model) getNItems;
@@ -8831,12 +8831,12 @@ struct GMountIface
   /**
       Checks if a #GMount can be unmounted.
   */
-  extern(C) bool function(GMount* mount) canUnmount;
+  extern(C) gboolean function(GMount* mount) canUnmount;
 
   /**
       Checks if a #GMount can be ejected.
   */
-  extern(C) bool function(GMount* mount) canEject;
+  extern(C) gboolean function(GMount* mount) canEject;
 
   /**
       Starts unmounting a #GMount.
@@ -8846,7 +8846,7 @@ struct GMountIface
   /**
       Finishes an unmounting operation.
   */
-  extern(C) bool function(GMount* mount, GAsyncResult* result, GError** _err) unmountFinish;
+  extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) unmountFinish;
 
   /**
       Starts ejecting a #GMount.
@@ -8856,7 +8856,7 @@ struct GMountIface
   /**
       Finishes an eject operation.
   */
-  extern(C) bool function(GMount* mount, GAsyncResult* result, GError** _err) ejectFinish;
+  extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) ejectFinish;
 
   /**
       Starts remounting a #GMount.
@@ -8866,14 +8866,14 @@ struct GMountIface
   /**
       Finishes a remounting operation.
   */
-  extern(C) bool function(GMount* mount, GAsyncResult* result, GError** _err) remountFinish;
+  extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) remountFinish;
 
   /**
       Starts guessing the type of the content of a #GMount.
           See [gio.mount.Mount.guessContentType] for more information on content
           type guessing. This operation was added in 2.18.
   */
-  extern(C) void function(GMount* mount, bool forceRescan, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) guessContentType;
+  extern(C) void function(GMount* mount, gboolean forceRescan, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) guessContentType;
 
   /**
       Finishes a content type guessing operation. Added in 2.18.
@@ -8883,7 +8883,7 @@ struct GMountIface
   /**
       Synchronous variant of @guess_content_type. Added in 2.18
   */
-  extern(C) char** function(GMount* mount, bool forceRescan, GCancellable* cancellable, GError** _err) guessContentTypeSync;
+  extern(C) char** function(GMount* mount, gboolean forceRescan, GCancellable* cancellable, GError** _err) guessContentTypeSync;
 
   /**
       The ::pre-unmount signal that is emitted when the #GMount will soon be emitted. If the recipient is somehow holding the mount open by keeping an open file on it it should close the file.
@@ -8898,7 +8898,7 @@ struct GMountIface
   /**
       Finishes an unmounting operation using a #GMountOperation. Since 2.22.
   */
-  extern(C) bool function(GMount* mount, GAsyncResult* result, GError** _err) unmountWithOperationFinish;
+  extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) unmountWithOperationFinish;
 
   /**
       Starts ejecting a #GMount using a #GMountOperation. Since 2.22.
@@ -8908,7 +8908,7 @@ struct GMountIface
   /**
       Finishes an eject operation using a #GMountOperation. Since 2.22.
   */
-  extern(C) bool function(GMount* mount, GAsyncResult* result, GError** _err) ejectWithOperationFinish;
+  extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) ejectWithOperationFinish;
 
   /**
       Gets a #GFile indication a start location that can be use as the entry point for this mount. Since 2.24.
@@ -9111,12 +9111,12 @@ struct GNetworkMonitorInterface
       the virtual function pointer for the
        GNetworkMonitor::network-changed signal.
   */
-  extern(C) void function(GNetworkMonitor* monitor, bool networkAvailable) networkChanged;
+  extern(C) void function(GNetworkMonitor* monitor, gboolean networkAvailable) networkChanged;
 
   /**
       the virtual function pointer for [gio.network_monitor.NetworkMonitor.canReach]
   */
-  extern(C) bool function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) canReach;
+  extern(C) gboolean function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) canReach;
 
   /**
       the virtual function pointer for
@@ -9128,7 +9128,7 @@ struct GNetworkMonitorInterface
       the virtual function pointer for
        [gio.network_monitor.NetworkMonitor.canReachFinish]
   */
-  extern(C) bool function(GNetworkMonitor* monitor, GAsyncResult* result, GError** _err) canReachFinish;
+  extern(C) gboolean function(GNetworkMonitor* monitor, GAsyncResult* result, GError** _err) canReachFinish;
 }
 
 /**
@@ -9295,10 +9295,10 @@ struct GOutputStreamClass
   extern(C) ptrdiff_t function(GOutputStream* stream, GInputStream* source, GOutputStreamSpliceFlags flags, GCancellable* cancellable, GError** _err) splice;
 
   /** */
-  extern(C) bool function(GOutputStream* stream, GCancellable* cancellable, GError** _err) flush;
+  extern(C) gboolean function(GOutputStream* stream, GCancellable* cancellable, GError** _err) flush;
 
   /** */
-  extern(C) bool function(GOutputStream* stream, GCancellable* cancellable, GError** _err) closeFn;
+  extern(C) gboolean function(GOutputStream* stream, GCancellable* cancellable, GError** _err) closeFn;
 
   /** */
   extern(C) void function(GOutputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) writeAsync;
@@ -9316,22 +9316,22 @@ struct GOutputStreamClass
   extern(C) void function(GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) flushAsync;
 
   /** */
-  extern(C) bool function(GOutputStream* stream, GAsyncResult* result, GError** _err) flushFinish;
+  extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, GError** _err) flushFinish;
 
   /** */
   extern(C) void function(GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) closeAsync;
 
   /** */
-  extern(C) bool function(GOutputStream* stream, GAsyncResult* result, GError** _err) closeFinish;
+  extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, GError** _err) closeFinish;
 
   /** */
-  extern(C) bool function(GOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) writevFn;
+  extern(C) gboolean function(GOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) writevFn;
 
   /** */
   extern(C) void function(GOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) writevAsync;
 
   /** */
-  extern(C) bool function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) writevFinish;
+  extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) writevFinish;
 
   /** */
   extern(C) void function() GReserved4;
@@ -9404,22 +9404,22 @@ struct GPermissionClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GPermission* permission, GCancellable* cancellable, GError** _err) acquire;
+  extern(C) gboolean function(GPermission* permission, GCancellable* cancellable, GError** _err) acquire;
 
   /** */
   extern(C) void function(GPermission* permission, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) acquireAsync;
 
   /** */
-  extern(C) bool function(GPermission* permission, GAsyncResult* result, GError** _err) acquireFinish;
+  extern(C) gboolean function(GPermission* permission, GAsyncResult* result, GError** _err) acquireFinish;
 
   /** */
-  extern(C) bool function(GPermission* permission, GCancellable* cancellable, GError** _err) release;
+  extern(C) gboolean function(GPermission* permission, GCancellable* cancellable, GError** _err) release;
 
   /** */
   extern(C) void function(GPermission* permission, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) releaseAsync;
 
   /** */
-  extern(C) bool function(GPermission* permission, GAsyncResult* result, GError** _err) releaseFinish;
+  extern(C) gboolean function(GPermission* permission, GAsyncResult* result, GError** _err) releaseFinish;
 
   /** */
   void*[16] reserved;
@@ -9463,12 +9463,12 @@ struct GPollableInputStreamInterface
   /**
       Checks if the #GPollableInputStream instance is actually pollable
   */
-  extern(C) bool function(GPollableInputStream* stream) canPoll;
+  extern(C) gboolean function(GPollableInputStream* stream) canPoll;
 
   /**
       Checks if the stream is readable
   */
-  extern(C) bool function(GPollableInputStream* stream) isReadable;
+  extern(C) gboolean function(GPollableInputStream* stream) isReadable;
 
   /**
       Creates a #GSource to poll the stream
@@ -9523,12 +9523,12 @@ struct GPollableOutputStreamInterface
   /**
       Checks if the #GPollableOutputStream instance is actually pollable
   */
-  extern(C) bool function(GPollableOutputStream* stream) canPoll;
+  extern(C) gboolean function(GPollableOutputStream* stream) canPoll;
 
   /**
       Checks if the stream is writable
   */
-  extern(C) bool function(GPollableOutputStream* stream) isWritable;
+  extern(C) gboolean function(GPollableOutputStream* stream) isWritable;
 
   /**
       Creates a #GSource to poll the stream
@@ -9761,7 +9761,7 @@ struct GProxyInterface
   /**
       Returns whether the proxy supports hostname lookups.
   */
-  extern(C) bool function(GProxy* proxy) supportsHostname;
+  extern(C) gboolean function(GProxy* proxy) supportsHostname;
 }
 
 /**
@@ -9789,7 +9789,7 @@ struct GProxyResolverInterface
   /**
       the virtual function pointer for [gio.proxy_resolver.ProxyResolver.isSupported]
   */
-  extern(C) bool function(GProxyResolver* resolver) isSupported;
+  extern(C) gboolean function(GProxyResolver* resolver) isSupported;
 
   /**
       the virtual function pointer for [gio.proxy_resolver.ProxyResolver.lookup]
@@ -10144,22 +10144,22 @@ struct GSeekableIface
   /**
       Checks if seeking is supported by the stream.
   */
-  extern(C) bool function(GSeekable* seekable) canSeek;
+  extern(C) gboolean function(GSeekable* seekable) canSeek;
 
   /**
       Seeks to a location within a stream.
   */
-  extern(C) bool function(GSeekable* seekable, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
+  extern(C) gboolean function(GSeekable* seekable, long offset, GSeekType type, GCancellable* cancellable, GError** _err) seek;
 
   /**
       Checks if truncation is supported by the stream.
   */
-  extern(C) bool function(GSeekable* seekable) canTruncate;
+  extern(C) gboolean function(GSeekable* seekable) canTruncate;
 
   /**
       Truncates a stream.
   */
-  extern(C) bool function(GSeekable* seekable, long offset, GCancellable* cancellable, GError** _err) truncateFn;
+  extern(C) gboolean function(GSeekable* seekable, long offset, GCancellable* cancellable, GError** _err) truncateFn;
 }
 
 /**
@@ -10507,22 +10507,22 @@ struct GSettingsBackendClass
   /**
       virtual method to read a key's value
   */
-  extern(C) GVariant* function(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType, bool defaultValue) read;
+  extern(C) GVariant* function(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType, gboolean defaultValue) read;
 
   /**
       virtual method to get if a key is writable
   */
-  extern(C) bool function(GSettingsBackend* backend, const(char)* key) getWritable;
+  extern(C) gboolean function(GSettingsBackend* backend, const(char)* key) getWritable;
 
   /**
       virtual method to change key's value
   */
-  extern(C) bool function(GSettingsBackend* backend, const(char)* key, GVariant* value, void* originTag) write;
+  extern(C) gboolean function(GSettingsBackend* backend, const(char)* key, GVariant* value, void* originTag) write;
 
   /**
       virtual method to change a tree of keys
   */
-  extern(C) bool function(GSettingsBackend* backend, GTree* tree, void* originTag) writeTree;
+  extern(C) gboolean function(GSettingsBackend* backend, GTree* tree, void* originTag) writeTree;
 
   /**
       virtual method to reset state
@@ -10574,10 +10574,10 @@ struct GSettingsClass
   extern(C) void function(GSettings* settings, const(char)* key) changed;
 
   /** */
-  extern(C) bool function(GSettings* settings, GQuark key) writableChangeEvent;
+  extern(C) gboolean function(GSettings* settings, GQuark key) writableChangeEvent;
 
   /** */
-  extern(C) bool function(GSettings* settings, const(GQuark)* keys, int nKeys) changeEvent;
+  extern(C) gboolean function(GSettings* settings, const(GQuark)* keys, int nKeys) changeEvent;
 
   /** */
   void*[20] padding;
@@ -11072,7 +11072,7 @@ struct GSocketAddressClass
   extern(C) ptrdiff_t function(GSocketAddress* address) getNativeSize;
 
   /** */
-  extern(C) bool function(GSocketAddress* address, void* dest, size_t destlen, GError** _err) toNative;
+  extern(C) gboolean function(GSocketAddress* address, void* dest, size_t destlen, GError** _err) toNative;
 }
 
 /**
@@ -11547,7 +11547,7 @@ struct GSocketServiceClass
   /**
       signal emitted when new connections are accepted
   */
-  extern(C) bool function(GSocketService* service, GSocketConnection* connection, GObject* sourceObject) incoming;
+  extern(C) gboolean function(GSocketService* service, GSocketConnection* connection, GObject* sourceObject) incoming;
 
   /** */
   extern(C) void function() GReserved1;
@@ -12415,7 +12415,7 @@ struct GThreadedSocketServiceClass
   GSocketServiceClass parentClass;
 
   /** */
-  extern(C) bool function(GThreadedSocketService* service, GSocketConnection* connection, GObject* sourceObject) run;
+  extern(C) gboolean function(GThreadedSocketService* service, GSocketConnection* connection, GObject* sourceObject) run;
 
   /** */
   extern(C) void function() GReserved1;
@@ -12456,7 +12456,7 @@ struct GTlsBackendInterface
   /**
       returns whether the backend supports TLS.
   */
-  extern(C) bool function(GTlsBackend* backend) supportsTls;
+  extern(C) gboolean function(GTlsBackend* backend) supportsTls;
 
   /**
       returns the #GTlsCertificate implementation type
@@ -12486,7 +12486,7 @@ struct GTlsBackendInterface
   /**
       returns whether the backend supports DTLS
   */
-  extern(C) bool function(GTlsBackend* backend) supportsDtls;
+  extern(C) gboolean function(GTlsBackend* backend) supportsDtls;
 
   /**
       returns the #GDtlsClientConnection implementation type
@@ -12584,12 +12584,12 @@ struct GTlsConnectionClass
   /**
       Check whether to accept a certificate.
   */
-  extern(C) bool function(GTlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) acceptCertificate;
+  extern(C) gboolean function(GTlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) acceptCertificate;
 
   /**
       Perform a handshake operation.
   */
-  extern(C) bool function(GTlsConnection* conn, GCancellable* cancellable, GError** _err) handshake;
+  extern(C) gboolean function(GTlsConnection* conn, GCancellable* cancellable, GError** _err) handshake;
 
   /**
       Start an asynchronous handshake operation.
@@ -12599,12 +12599,12 @@ struct GTlsConnectionClass
   /**
       Finish an asynchronous handshake operation.
   */
-  extern(C) bool function(GTlsConnection* conn, GAsyncResult* result, GError** _err) handshakeFinish;
+  extern(C) gboolean function(GTlsConnection* conn, GAsyncResult* result, GError** _err) handshakeFinish;
 
   /**
       Retrieve TLS channel binding data (Since: 2.66)
   */
-  extern(C) bool function(GTlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) getBindingData;
+  extern(C) gboolean function(GTlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) getBindingData;
 
   /**
       Get ALPN-negotiated protocol (Since: 2.70)
@@ -13253,7 +13253,7 @@ struct GVfsClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GVfs* vfs) isActive;
+  extern(C) gboolean function(GVfs* vfs) isActive;
 
   /** */
   extern(C) GFile* function(GVfs* vfs, const(char)* path) getFileForPath;
@@ -13274,7 +13274,7 @@ struct GVfsClass
   extern(C) void function(GVfs* vfs, GFileAttributeInfoList* list) addWritableNamespaces;
 
   /** */
-  extern(C) bool function(GVfs* vfs, const(char)* filename, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) localFileSetAttributes;
+  extern(C) gboolean function(GVfs* vfs, const(char)* filename, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) localFileSetAttributes;
 
   /** */
   extern(C) void function(GVfs* vfs, const(char)* filename) localFileRemoved;
@@ -13397,12 +13397,12 @@ struct GVolumeIface
   /**
       Returns true if the #GVolume can be mounted.
   */
-  extern(C) bool function(GVolume* volume) canMount;
+  extern(C) gboolean function(GVolume* volume) canMount;
 
   /**
       Checks if a #GVolume can be ejected.
   */
-  extern(C) bool function(GVolume* volume) canEject;
+  extern(C) gboolean function(GVolume* volume) canEject;
 
   /**
       Mounts a given #GVolume.
@@ -13415,7 +13415,7 @@ struct GVolumeIface
   /**
       Finishes a mount operation.
   */
-  extern(C) bool function(GVolume* volume, GAsyncResult* result, GError** _err) mountFinish;
+  extern(C) gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) mountFinish;
 
   /**
       Ejects a given #GVolume.
@@ -13425,7 +13425,7 @@ struct GVolumeIface
   /**
       Finishes an eject operation.
   */
-  extern(C) bool function(GVolume* volume, GAsyncResult* result, GError** _err) ejectFinish;
+  extern(C) gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) ejectFinish;
 
   /**
       Returns the [identifier](#volume-identifiers) of the given kind, or null if
@@ -13442,7 +13442,7 @@ struct GVolumeIface
   /**
       Returns true if the #GVolume should be automatically mounted.
   */
-  extern(C) bool function(GVolume* volume) shouldAutomount;
+  extern(C) gboolean function(GVolume* volume) shouldAutomount;
 
   /**
       Returns the activation root for the #GVolume if it is known in advance or null if
@@ -13458,7 +13458,7 @@ struct GVolumeIface
   /**
       Finishes an eject operation using a #GMountOperation. Since 2.22.
   */
-  extern(C) bool function(GVolume* volume, GAsyncResult* result, GError** _err) ejectWithOperationFinish;
+  extern(C) gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) ejectWithOperationFinish;
 
   /**
       Gets a key used for sorting #GVolume instance or null if no such key exists. Since 2.32.
@@ -13530,7 +13530,7 @@ struct GVolumeMonitorClass
   extern(C) void function(GVolumeMonitor* volumeMonitor, GDrive* drive) driveChanged;
 
   /** */
-  extern(C) bool function() isSupported;
+  extern(C) gboolean function() isSupported;
 
   /** */
   extern(C) GList* function(GVolumeMonitor* volumeMonitor) getConnectedDrives;
@@ -13613,15 +13613,15 @@ alias extern(C) void function(GDBusConnection* connection, const(char)* name, vo
 
 alias extern(C) void function(GDBusConnection* connection, const(char)* name, void* userData) GBusNameVanishedCallback;
 
-alias extern(C) bool function(GCancellable* cancellable, void* data) GCancellableSourceFunc;
+alias extern(C) gboolean function(GCancellable* cancellable, void* data) GCancellableSourceFunc;
 
 alias extern(C) GVariant* function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GError** error, void* userData) GDBusInterfaceGetPropertyFunc;
 
 alias extern(C) void function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, GDBusMethodInvocation* invocation, void* userData) GDBusInterfaceMethodCallFunc;
 
-alias extern(C) bool function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GVariant* value, GError** error, void* userData) GDBusInterfaceSetPropertyFunc;
+alias extern(C) gboolean function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GVariant* value, GError** error, void* userData) GDBusInterfaceSetPropertyFunc;
 
-alias extern(C) GDBusMessage* function(GDBusConnection* connection, GDBusMessage* message, bool incoming, void* userData) GDBusMessageFilterFunction;
+alias extern(C) GDBusMessage* function(GDBusConnection* connection, GDBusMessage* message, gboolean incoming, void* userData) GDBusMessageFilterFunction;
 
 alias extern(C) GType function(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data) GDBusProxyTypeFunc;
 
@@ -13633,31 +13633,31 @@ alias extern(C) char** function(GDBusConnection* connection, const(char)* sender
 
 alias extern(C) GDBusInterfaceInfo** function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* node, void* userData) GDBusSubtreeIntrospectFunc;
 
-alias extern(C) bool function(GDatagramBased* datagramBased, GIOCondition condition, void* data) GDatagramBasedSourceFunc;
+alias extern(C) gboolean function(GDatagramBased* datagramBased, GIOCondition condition, void* data) GDatagramBasedSourceFunc;
 
 alias extern(C) void function(GDesktopAppInfo* appinfo, GPid pid, void* userData) GDesktopAppLaunchCallback;
 
-alias extern(C) void function(bool reporting, ulong currentSize, ulong numDirs, ulong numFiles, void* data) GFileMeasureProgressCallback;
+alias extern(C) void function(gboolean reporting, ulong currentSize, ulong numDirs, ulong numFiles, void* data) GFileMeasureProgressCallback;
 
 alias extern(C) void function(long currentNumBytes, long totalNumBytes, void* data) GFileProgressCallback;
 
-alias extern(C) bool function(const(char)* fileContents, long fileSize, void* callbackData) GFileReadMoreCallback;
+alias extern(C) gboolean function(const(char)* fileContents, long fileSize, void* callbackData) GFileReadMoreCallback;
 
-alias extern(C) bool function(GIOSchedulerJob* job, GCancellable* cancellable, void* data) GIOSchedulerJobFunc;
+alias extern(C) gboolean function(GIOSchedulerJob* job, GCancellable* cancellable, void* data) GIOSchedulerJobFunc;
 
-alias extern(C) bool function(GObject* pollableStream, void* data) GPollableSourceFunc;
+alias extern(C) gboolean function(GObject* pollableStream, void* data) GPollableSourceFunc;
 
 alias extern(C) void* function(void* data, size_t size) GReallocFunc;
 
-alias extern(C) bool function(GValue* value, GVariant* variant, void* userData) GSettingsBindGetMapping;
+alias extern(C) gboolean function(GValue* value, GVariant* variant, void* userData) GSettingsBindGetMapping;
 
 alias extern(C) GVariant* function(const(GValue)* value, const(GVariantType)* expectedType, void* userData) GSettingsBindSetMapping;
 
-alias extern(C) bool function(GVariant* value, void** result, void* userData) GSettingsGetMapping;
+alias extern(C) gboolean function(GVariant* value, void** result, void* userData) GSettingsGetMapping;
 
 alias extern(C) void function(GSimpleAsyncResult* res, GObject* object, GCancellable* cancellable) GSimpleAsyncThreadFunc;
 
-alias extern(C) bool function(GSocket* socket, GIOCondition condition, void* data) GSocketSourceFunc;
+alias extern(C) gboolean function(GSocket* socket, GIOCondition condition, void* data) GSocketSourceFunc;
 
 alias extern(C) void function(GTask* task, GObject* sourceObject, void* taskData, GCancellable* cancellable) GTaskThreadFunc;
 

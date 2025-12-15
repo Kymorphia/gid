@@ -82,7 +82,7 @@ bool initCheck(ref string[] argv)
     _argv[i] = toCString(a, No.Alloc);
 
   GError *_err;
-  bool _retval = gst_init_check(&_argc, &_argv, &_err);
+  gboolean _retval = gst_init_check(&_argc, &_argv, &_err);
 
   if (_err)
     throw new ErrorWrap(_err);
@@ -91,7 +91,7 @@ bool initCheck(ref string[] argv)
   foreach (i; 0 .. _argc)
     argv[i] = fromCString(_argv[i], No.Free);
 
-  return _retval;
+  return cast(bool)_retval;
 }
 
 
@@ -267,7 +267,7 @@ string debugGetStackTrace(gst.types.StackTraceFlags flags)
 bool debugIsActive()
 {
   bool _retval;
-  _retval = gst_debug_is_active();
+  _retval = cast(bool)gst_debug_is_active();
   return _retval;
 }
 
@@ -278,7 +278,7 @@ bool debugIsActive()
 bool debugIsColored()
 {
   bool _retval;
-  _retval = gst_debug_is_colored();
+  _retval = cast(bool)gst_debug_is_colored();
   return _retval;
 }
 
@@ -607,7 +607,7 @@ void deinit()
 bool dynamicTypeRegister(gst.plugin.Plugin plugin, gobject.types.GType type)
 {
   bool _retval;
-  _retval = gst_dynamic_type_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, type);
+  _retval = cast(bool)gst_dynamic_type_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, type);
   return _retval;
 }
 
@@ -696,7 +696,7 @@ bool formatsContains(gst.types.Format[] formats, gst.types.Format format)
 {
   bool _retval;
   auto _formats = cast(const(GstFormat)*)(formats ~ GstFormat.init).ptr;
-  _retval = gst_formats_contains(_formats, format);
+  _retval = cast(bool)gst_formats_contains(_formats, format);
   return _retval;
 }
 
@@ -729,7 +729,7 @@ string getMainExecutablePath()
 bool isCapsFeatures(const(void)* obj = null)
 {
   bool _retval;
-  _retval = gst_is_caps_features(obj);
+  _retval = cast(bool)gst_is_caps_features(obj);
   return _retval;
 }
 
@@ -741,7 +741,7 @@ bool isCapsFeatures(const(void)* obj = null)
 bool isInitialized()
 {
   bool _retval;
-  _retval = gst_is_initialized();
+  _retval = cast(bool)gst_is_initialized();
   return _retval;
 }
 
@@ -1090,7 +1090,7 @@ gobject.types.GType referenceTimestampMetaApiGetType()
 bool segtrapIsEnabled()
 {
   bool _retval;
-  _retval = gst_segtrap_is_enabled();
+  _retval = cast(bool)gst_segtrap_is_enabled();
   return _retval;
 }
 
@@ -1133,7 +1133,7 @@ bool tagExists(string tag)
 {
   bool _retval;
   const(char)* _tag = tag.toCString(No.Alloc);
-  _retval = gst_tag_exists(_tag);
+  _retval = cast(bool)gst_tag_exists(_tag);
   return _retval;
 }
 
@@ -1214,7 +1214,7 @@ bool tagIsFixed(string tag)
 {
   bool _retval;
   const(char)* _tag = tag.toCString(No.Alloc);
-  _retval = gst_tag_is_fixed(_tag);
+  _retval = cast(bool)gst_tag_is_fixed(_tag);
   return _retval;
 }
 
@@ -1283,7 +1283,7 @@ gobject.types.GType typeFindGetType()
 bool typeIsPluginApi(gobject.types.GType type, out gst.types.PluginAPIFlags flags)
 {
   bool _retval;
-  _retval = gst_type_is_plugin_api(type, &flags);
+  _retval = cast(bool)gst_type_is_plugin_api(type, &flags);
   return _retval;
 }
 
@@ -1331,7 +1331,7 @@ void typeMarkAsPluginApi(gobject.types.GType type, gst.types.PluginAPIFlags flag
 bool updateRegistry()
 {
   bool _retval;
-  _retval = gst_update_registry();
+  _retval = cast(bool)gst_update_registry();
   return _retval;
 }
 
@@ -1458,7 +1458,7 @@ int utilFilenameCompare(string a, string b)
 bool utilFractionAdd(int aN, int aD, int bN, int bD, out int resN, out int resD)
 {
   bool _retval;
-  _retval = gst_util_fraction_add(aN, aD, bN, bD, cast(int*)&resN, cast(int*)&resD);
+  _retval = cast(bool)gst_util_fraction_add(aN, aD, bN, bD, cast(int*)&resN, cast(int*)&resD);
   return _retval;
 }
 
@@ -1496,7 +1496,7 @@ int utilFractionCompare(int aN, int aD, int bN, int bD)
 bool utilFractionMultiply(int aN, int aD, int bN, int bD, out int resN, out int resD)
 {
   bool _retval;
-  _retval = gst_util_fraction_multiply(aN, aD, bN, bD, cast(int*)&resN, cast(int*)&resD);
+  _retval = cast(bool)gst_util_fraction_multiply(aN, aD, bN, bD, cast(int*)&resN, cast(int*)&resD);
   return _retval;
 }
 
@@ -1537,7 +1537,7 @@ bool utilGetObjectArray(gobject.object.ObjectWrap object, string name, out gobje
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
   GValueArray* _array;
-  _retval = gst_util_get_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, &_array);
+  _retval = cast(bool)gst_util_get_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, &_array);
   array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
   return _retval;
 }
@@ -1683,7 +1683,7 @@ bool utilSetObjectArray(gobject.object.ObjectWrap object, string name, gobject.v
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = gst_util_set_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, array ? cast(const(GValueArray)*)array._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_util_set_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, array ? cast(const(GValueArray)*)array._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1883,7 +1883,7 @@ ulong utilUint64ScaleRound(ulong val, ulong num, ulong denom)
 bool valueCanCompare(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_can_compare(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_can_compare(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1900,7 +1900,7 @@ bool valueCanCompare(gobject.value.Value value1, gobject.value.Value value2)
 bool valueCanIntersect(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_can_intersect(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_can_intersect(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1915,7 +1915,7 @@ bool valueCanIntersect(gobject.value.Value value1, gobject.value.Value value2)
 bool valueCanSubtract(gobject.value.Value minuend, gobject.value.Value subtrahend)
 {
   bool _retval;
-  _retval = gst_value_can_subtract(minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_can_subtract(minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1937,7 +1937,7 @@ bool valueCanSubtract(gobject.value.Value minuend, gobject.value.Value subtrahen
 bool valueCanUnion(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_can_union(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_can_union(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1975,7 +1975,7 @@ bool valueDeserialize(out gobject.value.Value dest, string src)
   bool _retval;
   GValue _dest;
   const(char)* _src = src.toCString(No.Alloc);
-  _retval = gst_value_deserialize(&_dest, _src);
+  _retval = cast(bool)gst_value_deserialize(&_dest, _src);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
 }
@@ -1997,7 +1997,7 @@ bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject
   bool _retval;
   GValue _dest;
   const(char)* _src = src.toCString(No.Alloc);
-  _retval = gst_value_deserialize_with_pspec(&_dest, _src, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_deserialize_with_pspec(&_dest, _src, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
 }
@@ -2016,7 +2016,7 @@ bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject
 bool valueFixate(gobject.value.Value dest, gobject.value.Value src)
 {
   bool _retval;
-  _retval = gst_value_fixate(dest ? cast(GValue*)dest._cPtr(No.Dup) : null, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_fixate(dest ? cast(GValue*)dest._cPtr(No.Dup) : null, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2033,7 +2033,7 @@ bool valueFixate(gobject.value.Value dest, gobject.value.Value src)
 bool valueFractionMultiply(gobject.value.Value product, gobject.value.Value factor1, gobject.value.Value factor2)
 {
   bool _retval;
-  _retval = gst_value_fraction_multiply(product ? cast(GValue*)product._cPtr(No.Dup) : null, factor1 ? cast(const(GValue)*)factor1._cPtr(No.Dup) : null, factor2 ? cast(const(GValue)*)factor2._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_fraction_multiply(product ? cast(GValue*)product._cPtr(No.Dup) : null, factor1 ? cast(const(GValue)*)factor1._cPtr(No.Dup) : null, factor2 ? cast(const(GValue)*)factor2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2049,7 +2049,7 @@ bool valueFractionMultiply(gobject.value.Value product, gobject.value.Value fact
 bool valueFractionSubtract(gobject.value.Value dest, gobject.value.Value minuend, gobject.value.Value subtrahend)
 {
   bool _retval;
-  _retval = gst_value_fraction_subtract(dest ? cast(GValue*)dest._cPtr(No.Dup) : null, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_fraction_subtract(dest ? cast(GValue*)dest._cPtr(No.Dup) : null, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2345,7 +2345,7 @@ bool valueIntersect(out gobject.value.Value dest, gobject.value.Value value1, go
 {
   bool _retval;
   GValue _dest;
-  _retval = gst_value_intersect(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_intersect(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, Yes.Take);
   return _retval;
 }
@@ -2363,7 +2363,7 @@ bool valueIntersect(out gobject.value.Value dest, gobject.value.Value value1, go
 bool valueIsFixed(gobject.value.Value value)
 {
   bool _retval;
-  _retval = gst_value_is_fixed(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_is_fixed(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2378,7 +2378,7 @@ bool valueIsFixed(gobject.value.Value value)
 bool valueIsSubset(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_is_subset(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_is_subset(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2605,7 +2605,7 @@ bool valueSubtract(out gobject.value.Value dest, gobject.value.Value minuend, go
 {
   bool _retval;
   GValue _dest;
-  _retval = gst_value_subtract(&_dest, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_subtract(&_dest, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
 }
@@ -2623,7 +2623,7 @@ bool valueUnion(out gobject.value.Value dest, gobject.value.Value value1, gobjec
 {
   bool _retval;
   GValue _dest;
-  _retval = gst_value_union(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_value_union(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
 }

@@ -99,7 +99,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   bool getSelected()
   {
     bool _retval;
-    _retval = gtk_source_style_scheme_preview_get_selected(cast(GtkSourceStyleSchemePreview*)this._cPtr);
+    _retval = cast(bool)gtk_source_style_scheme_preview_get_selected(cast(GtkSourceStyleSchemePreview*)this._cPtr);
     return _retval;
   }
 

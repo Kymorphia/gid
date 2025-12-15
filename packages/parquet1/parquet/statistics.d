@@ -40,7 +40,7 @@ class Statistics : gobject.object.ObjectWrap
   bool equal(parquet.statistics.Statistics otherStatistics)
   {
     bool _retval;
-    _retval = gparquet_statistics_equal(cast(GParquetStatistics*)this._cPtr, otherStatistics ? cast(GParquetStatistics*)otherStatistics._cPtr(No.Dup) : null);
+    _retval = cast(bool)gparquet_statistics_equal(cast(GParquetStatistics*)this._cPtr, otherStatistics ? cast(GParquetStatistics*)otherStatistics._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class Statistics : gobject.object.ObjectWrap
   bool hasMinMax()
   {
     bool _retval;
-    _retval = gparquet_statistics_has_min_max(cast(GParquetStatistics*)this._cPtr);
+    _retval = cast(bool)gparquet_statistics_has_min_max(cast(GParquetStatistics*)this._cPtr);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class Statistics : gobject.object.ObjectWrap
   bool hasNDistinctValues()
   {
     bool _retval;
-    _retval = gparquet_statistics_has_n_distinct_values(cast(GParquetStatistics*)this._cPtr);
+    _retval = cast(bool)gparquet_statistics_has_n_distinct_values(cast(GParquetStatistics*)this._cPtr);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class Statistics : gobject.object.ObjectWrap
   bool hasNNulls()
   {
     bool _retval;
-    _retval = gparquet_statistics_has_n_nulls(cast(GParquetStatistics*)this._cPtr);
+    _retval = cast(bool)gparquet_statistics_has_n_nulls(cast(GParquetStatistics*)this._cPtr);
     return _retval;
   }
 }

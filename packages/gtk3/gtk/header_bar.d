@@ -251,7 +251,7 @@ class HeaderBar : gtk.container.Container
   bool getHasSubtitle()
   {
     bool _retval;
-    _retval = gtk_header_bar_get_has_subtitle(cast(GtkHeaderBar*)this._cPtr);
+    _retval = cast(bool)gtk_header_bar_get_has_subtitle(cast(GtkHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class HeaderBar : gtk.container.Container
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_header_bar_get_show_close_button(cast(GtkHeaderBar*)this._cPtr);
+    _retval = cast(bool)gtk_header_bar_get_show_close_button(cast(GtkHeaderBar*)this._cPtr);
     return _retval;
   }
 

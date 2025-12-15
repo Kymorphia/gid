@@ -947,7 +947,7 @@ class Variant
   {
     bool _retval;
     const(char)* _formatString = formatString.toCString(No.Alloc);
-    _retval = g_variant_check_format_string(cast(GVariant*)this._cPtr, _formatString, copyOnly);
+    _retval = cast(bool)g_variant_check_format_string(cast(GVariant*)this._cPtr, _formatString, copyOnly);
     return _retval;
   }
 
@@ -1122,7 +1122,7 @@ class Variant
   bool equal(glib.variant.Variant two)
   {
     bool _retval;
-    _retval = g_variant_equal(cast(GVariant*)this._cPtr, two ? cast(GVariant*)two._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_variant_equal(cast(GVariant*)this._cPtr, two ? cast(GVariant*)two._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1136,7 +1136,7 @@ class Variant
   bool getBoolean()
   {
     bool _retval;
-    _retval = g_variant_get_boolean(cast(GVariant*)this._cPtr);
+    _retval = cast(bool)g_variant_get_boolean(cast(GVariant*)this._cPtr);
     return _retval;
   }
 
@@ -1648,7 +1648,7 @@ class Variant
   bool isContainer()
   {
     bool _retval;
-    _retval = g_variant_is_container(cast(GVariant*)this._cPtr);
+    _retval = cast(bool)g_variant_is_container(cast(GVariant*)this._cPtr);
     return _retval;
   }
 
@@ -1667,7 +1667,7 @@ class Variant
   bool isFloating()
   {
     bool _retval;
-    _retval = g_variant_is_floating(cast(GVariant*)this._cPtr);
+    _retval = cast(bool)g_variant_is_floating(cast(GVariant*)this._cPtr);
     return _retval;
   }
 
@@ -1690,7 +1690,7 @@ class Variant
   bool isNormalForm()
   {
     bool _retval;
-    _retval = g_variant_is_normal_form(cast(GVariant*)this._cPtr);
+    _retval = cast(bool)g_variant_is_normal_form(cast(GVariant*)this._cPtr);
     return _retval;
   }
 
@@ -1704,7 +1704,7 @@ class Variant
   bool isOfType(glib.variant_type.VariantType type)
   {
     bool _retval;
-    _retval = g_variant_is_of_type(cast(GVariant*)this._cPtr, type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_variant_is_of_type(cast(GVariant*)this._cPtr, type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1903,7 +1903,7 @@ class Variant
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _retval = g_variant_is_object_path(_string_);
+    _retval = cast(bool)g_variant_is_object_path(_string_);
     return _retval;
   }
 
@@ -1923,7 +1923,7 @@ class Variant
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _retval = g_variant_is_signature(_string_);
+    _retval = cast(bool)g_variant_is_signature(_string_);
     return _retval;
   }
 

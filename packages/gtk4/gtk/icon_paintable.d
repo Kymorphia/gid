@@ -116,7 +116,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   bool isSymbolic()
   {
     bool _retval;
-    _retval = gtk_icon_paintable_is_symbolic(cast(GtkIconPaintable*)this._cPtr);
+    _retval = cast(bool)gtk_icon_paintable_is_symbolic(cast(GtkIconPaintable*)this._cPtr);
     return _retval;
   }
 }

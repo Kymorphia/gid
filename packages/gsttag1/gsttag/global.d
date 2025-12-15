@@ -27,7 +27,7 @@ bool tagCheckLanguageCode(string langCode)
 {
   bool _retval;
   const(char)* _langCode = langCode.toCString(No.Alloc);
-  _retval = gst_tag_check_language_code(_langCode);
+  _retval = cast(bool)gst_tag_check_language_code(_langCode);
   return _retval;
 }
 
@@ -489,7 +489,7 @@ bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id
     _imageDataLen = cast(uint)imageData.length;
 
   auto _imageData = cast(const(ubyte)*)imageData.ptr;
-  _retval = gst_tag_list_add_id3_image(tagList ? cast(GstTagList*)tagList._cPtr(No.Dup) : null, _imageData, _imageDataLen, id3PictureType);
+  _retval = cast(bool)gst_tag_list_add_id3_image(tagList ? cast(GstTagList*)tagList._cPtr(No.Dup) : null, _imageData, _imageDataLen, id3PictureType);
   return _retval;
 }
 
@@ -743,7 +743,7 @@ bool tagParseExtendedComment(string extComment, out string key, out string lang,
   char* _key;
   char* _lang;
   char* _value;
-  _retval = gst_tag_parse_extended_comment(_extComment, &_key, &_lang, &_value, failIfNoKey);
+  _retval = cast(bool)gst_tag_parse_extended_comment(_extComment, &_key, &_lang, &_value, failIfNoKey);
   key = _key.fromCString(Yes.Free);
   lang = _lang.fromCString(Yes.Free);
   value = _value.fromCString(Yes.Free);

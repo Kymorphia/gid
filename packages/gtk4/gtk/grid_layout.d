@@ -178,7 +178,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   bool getColumnHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_layout_get_column_homogeneous(cast(GtkGridLayout*)this._cPtr);
+    _retval = cast(bool)gtk_grid_layout_get_column_homogeneous(cast(GtkGridLayout*)this._cPtr);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   bool getRowHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_layout_get_row_homogeneous(cast(GtkGridLayout*)this._cPtr);
+    _retval = cast(bool)gtk_grid_layout_get_row_homogeneous(cast(GtkGridLayout*)this._cPtr);
     return _retval;
   }
 

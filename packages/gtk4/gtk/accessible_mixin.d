@@ -145,7 +145,7 @@ template AccessibleT()
   override bool getBounds(out int x, out int y, out int width, out int height)
   {
     bool _retval;
-    _retval = gtk_accessible_get_bounds(cast(GtkAccessible*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
+    _retval = cast(bool)gtk_accessible_get_bounds(cast(GtkAccessible*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ template AccessibleT()
   override bool getPlatformState(gtk.types.AccessiblePlatformState state)
   {
     bool _retval;
-    _retval = gtk_accessible_get_platform_state(cast(GtkAccessible*)this._cPtr, state);
+    _retval = cast(bool)gtk_accessible_get_platform_state(cast(GtkAccessible*)this._cPtr, state);
     return _retval;
   }
 

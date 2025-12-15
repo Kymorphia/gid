@@ -316,7 +316,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   bool getColumnHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_get_column_homogeneous(cast(GtkGrid*)this._cPtr);
+    _retval = cast(bool)gtk_grid_get_column_homogeneous(cast(GtkGrid*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   bool getRowHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_get_row_homogeneous(cast(GtkGrid*)this._cPtr);
+    _retval = cast(bool)gtk_grid_get_row_homogeneous(cast(GtkGrid*)this._cPtr);
     return _retval;
   }
 

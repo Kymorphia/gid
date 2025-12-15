@@ -23,7 +23,7 @@ import gtksource.types;
 bool checkVersion(uint major, uint minor, uint micro)
 {
   bool _retval;
-  _retval = gtk_source_check_version(major, minor, micro);
+  _retval = cast(bool)gtk_source_check_version(major, minor, micro);
   return _retval;
 }
 
@@ -111,12 +111,12 @@ void init_()
 */
 size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
 {
-  extern(C) bool _callbackCallback(long deadline, void* userData)
+  extern(C) gboolean _callbackCallback(long deadline, void* userData)
   {
     ptrThawGC(userData);
     auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
-    bool _retval = (*_dlg)(deadline);
+    gboolean _retval = (*_dlg)(deadline);
     return _retval;
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
@@ -144,11 +144,11 @@ size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
 */
 size_t schedulerAddFull(gtksource.types.SchedulerCallback callback)
 {
-  extern(C) bool _callbackCallback(long deadline, void* userData)
+  extern(C) gboolean _callbackCallback(long deadline, void* userData)
   {
     auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
-    bool _retval = (*_dlg)(deadline);
+    gboolean _retval = (*_dlg)(deadline);
     return _retval;
   }
   auto _callbackCB = callback ? &_callbackCallback : null;

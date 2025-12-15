@@ -148,7 +148,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_cors_enabled(cast(WebKitSecurityManager*)this._cPtr, _scheme);
+    _retval = cast(bool)webkit_security_manager_uri_scheme_is_cors_enabled(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_display_isolated(cast(WebKitSecurityManager*)this._cPtr, _scheme);
+    _retval = cast(bool)webkit_security_manager_uri_scheme_is_display_isolated(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_empty_document(cast(WebKitSecurityManager*)this._cPtr, _scheme);
+    _retval = cast(bool)webkit_security_manager_uri_scheme_is_empty_document(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_local(cast(WebKitSecurityManager*)this._cPtr, _scheme);
+    _retval = cast(bool)webkit_security_manager_uri_scheme_is_local(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_no_access(cast(WebKitSecurityManager*)this._cPtr, _scheme);
+    _retval = cast(bool)webkit_security_manager_uri_scheme_is_no_access(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
+    _retval = cast(bool)webkit_security_manager_uri_scheme_is_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 }

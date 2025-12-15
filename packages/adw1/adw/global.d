@@ -21,7 +21,7 @@ import gtk.widget;
 bool getEnableAnimations(gtk.widget.Widget widget)
 {
   bool _retval;
-  _retval = adw_get_enable_animations(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  _retval = cast(bool)adw_get_enable_animations(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -105,7 +105,7 @@ void init_()
 bool isInitialized()
 {
   bool _retval;
-  _retval = adw_is_initialized();
+  _retval = cast(bool)adw_is_initialized();
   return _retval;
 }
 

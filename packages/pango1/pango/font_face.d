@@ -99,7 +99,7 @@ class FontFace : gobject.object.ObjectWrap
   bool isSynthesized()
   {
     bool _retval;
-    _retval = pango_font_face_is_synthesized(cast(PangoFontFace*)this._cPtr);
+    _retval = cast(bool)pango_font_face_is_synthesized(cast(PangoFontFace*)this._cPtr);
     return _retval;
   }
 

@@ -153,7 +153,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_get_size(cast(VtePty*)this._cPtr, cast(int*)&rows, cast(int*)&columns, &_err);
+    _retval = cast(bool)vte_pty_get_size(cast(VtePty*)this._cPtr, cast(int*)&rows, cast(int*)&columns, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -175,7 +175,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_set_size(cast(VtePty*)this._cPtr, rows, columns, &_err);
+    _retval = cast(bool)vte_pty_set_size(cast(VtePty*)this._cPtr, rows, columns, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -195,7 +195,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_set_utf8(cast(VtePty*)this._cPtr, utf8, &_err);
+    _retval = cast(bool)vte_pty_set_utf8(cast(VtePty*)this._cPtr, utf8, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -261,7 +261,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_spawn_finish(cast(VtePty*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
+    _retval = cast(bool)vte_pty_spawn_finish(cast(VtePty*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

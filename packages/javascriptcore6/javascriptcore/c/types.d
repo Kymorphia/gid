@@ -335,19 +335,19 @@ struct JSCWeakValueClass
   GObjectClass parentClass;
 }
 
-alias extern(C) bool function(JSCClass* jscClass, JSCContext* context, void* instance, const(char)* name) JSCClassDeletePropertyFunction;
+alias extern(C) gboolean function(JSCClass* jscClass, JSCContext* context, void* instance, const(char)* name) JSCClassDeletePropertyFunction;
 
 alias extern(C) char** function(JSCClass* jscClass, JSCContext* context, void* instance) JSCClassEnumeratePropertiesFunction;
 
 alias extern(C) JSCValue* function(JSCClass* jscClass, JSCContext* context, void* instance, const(char)* name) JSCClassGetPropertyFunction;
 
-alias extern(C) bool function(JSCClass* jscClass, JSCContext* context, void* instance, const(char)* name) JSCClassHasPropertyFunction;
+alias extern(C) gboolean function(JSCClass* jscClass, JSCContext* context, void* instance, const(char)* name) JSCClassHasPropertyFunction;
 
-alias extern(C) bool function(JSCClass* jscClass, JSCContext* context, void* instance, const(char)* name, JSCValue* value) JSCClassSetPropertyFunction;
+alias extern(C) gboolean function(JSCClass* jscClass, JSCContext* context, void* instance, const(char)* name, JSCValue* value) JSCClassSetPropertyFunction;
 
 alias extern(C) void function(JSCContext* context, JSCException* exception, void* userData) JSCExceptionHandler;
 
 alias extern(C) void function(JSCValue* resolve, JSCValue* reject, void* userData) JSCExecutor;
 
-alias extern(C) bool function(const(char)* option, JSCOptionType type, const(char)* description, void* userData) JSCOptionsFunc;
+alias extern(C) gboolean function(const(char)* option, JSCOptionType type, const(char)* description, void* userData) JSCOptionsFunc;
 

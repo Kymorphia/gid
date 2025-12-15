@@ -70,7 +70,7 @@ template VolumeT()
   override bool canEject()
   {
     bool _retval;
-    _retval = g_volume_can_eject(cast(GVolume*)this._cPtr);
+    _retval = cast(bool)g_volume_can_eject(cast(GVolume*)this._cPtr);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ template VolumeT()
   override bool canMount()
   {
     bool _retval;
-    _retval = g_volume_can_mount(cast(GVolume*)this._cPtr);
+    _retval = cast(bool)g_volume_can_mount(cast(GVolume*)this._cPtr);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_volume_eject_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -173,7 +173,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_with_operation_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_volume_eject_with_operation_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -405,7 +405,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_mount_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_volume_mount_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -418,7 +418,7 @@ template VolumeT()
   override bool shouldAutomount()
   {
     bool _retval;
-    _retval = g_volume_should_automount(cast(GVolume*)this._cPtr);
+    _retval = cast(bool)g_volume_should_automount(cast(GVolume*)this._cPtr);
     return _retval;
   }
 

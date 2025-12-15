@@ -114,7 +114,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   bool isImage()
   {
     bool _retval;
-    _retval = gst_discoverer_video_info_is_image(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
+    _retval = cast(bool)gst_discoverer_video_info_is_image(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   bool isInterlaced()
   {
     bool _retval;
-    _retval = gst_discoverer_video_info_is_interlaced(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
+    _retval = cast(bool)gst_discoverer_video_info_is_interlaced(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
     return _retval;
   }
 }

@@ -85,7 +85,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close(cast(GFileEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_enumerator_close(cast(GFileEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -141,7 +141,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close_finish(cast(GFileEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_enumerator_close_finish(cast(GFileEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -194,7 +194,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   bool hasPending()
   {
     bool _retval;
-    _retval = g_file_enumerator_has_pending(cast(GFileEnumerator*)this._cPtr);
+    _retval = cast(bool)g_file_enumerator_has_pending(cast(GFileEnumerator*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = g_file_enumerator_is_closed(cast(GFileEnumerator*)this._cPtr);
+    _retval = cast(bool)g_file_enumerator_is_closed(cast(GFileEnumerator*)this._cPtr);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class FileEnumerator : gobject.object.ObjectWrap
     GFileInfo* _outInfo;
     GFile* _outChild;
     GError *_err;
-    _retval = g_file_enumerator_iterate(cast(GFileEnumerator*)this._cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_file_enumerator_iterate(cast(GFileEnumerator*)this._cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     outInfo = new gio.file_info.FileInfo(cast(void*)_outInfo, No.Take);

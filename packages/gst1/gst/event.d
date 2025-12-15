@@ -963,7 +963,7 @@ class Event : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_event_has_name(cast(GstEvent*)this._cPtr, _name);
+    _retval = cast(bool)gst_event_has_name(cast(GstEvent*)this._cPtr, _name);
     return _retval;
   }
 
@@ -978,7 +978,7 @@ class Event : gobject.boxed.Boxed
   bool hasNameId(glib.types.Quark name)
   {
     bool _retval;
-    _retval = gst_event_has_name_id(cast(GstEvent*)this._cPtr, name);
+    _retval = cast(bool)gst_event_has_name_id(cast(GstEvent*)this._cPtr, name);
     return _retval;
   }
 
@@ -993,7 +993,9 @@ class Event : gobject.boxed.Boxed
   */
   void parseBufferSize(out gst.types.Format format, out long minsize, out long maxsize, out bool async)
   {
-    gst_event_parse_buffer_size(cast(GstEvent*)this._cPtr, &format, cast(long*)&minsize, cast(long*)&maxsize, cast(bool*)&async);
+    gboolean _async;
+    gst_event_parse_buffer_size(cast(GstEvent*)this._cPtr, &format, cast(long*)&minsize, cast(long*)&maxsize, &_async);
+    async = cast(bool)_async;
   }
 
   /**
@@ -1018,7 +1020,9 @@ class Event : gobject.boxed.Boxed
   */
   void parseFlushStop(out bool resetTime)
   {
-    gst_event_parse_flush_stop(cast(GstEvent*)this._cPtr, cast(bool*)&resetTime);
+    gboolean _resetTime;
+    gst_event_parse_flush_stop(cast(GstEvent*)this._cPtr, &_resetTime);
+    resetTime = cast(bool)_resetTime;
   }
 
   /**
@@ -1051,7 +1055,7 @@ class Event : gobject.boxed.Boxed
   bool parseGroupId(out uint groupId)
   {
     bool _retval;
-    _retval = gst_event_parse_group_id(cast(GstEvent*)this._cPtr, cast(uint*)&groupId);
+    _retval = cast(bool)gst_event_parse_group_id(cast(GstEvent*)this._cPtr, cast(uint*)&groupId);
     return _retval;
   }
 
@@ -1233,7 +1237,11 @@ class Event : gobject.boxed.Boxed
   */
   void parseStep(out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate)
   {
-    gst_event_parse_step(cast(GstEvent*)this._cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate);
+    gboolean _flush;
+    gboolean _intermediate;
+    gst_event_parse_step(cast(GstEvent*)this._cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, &_flush, &_intermediate);
+    flush = cast(bool)_flush;
+    intermediate = cast(bool)_intermediate;
   }
 
   /**
@@ -1322,8 +1330,10 @@ class Event : gobject.boxed.Boxed
   void parseToc(out gst.toc.Toc toc, out bool updated)
   {
     GstToc* _toc;
-    gst_event_parse_toc(cast(GstEvent*)this._cPtr, &_toc, cast(bool*)&updated);
+    gboolean _updated;
+    gst_event_parse_toc(cast(GstEvent*)this._cPtr, &_toc, &_updated);
     toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
+    updated = cast(bool)_updated;
   }
 
   /**

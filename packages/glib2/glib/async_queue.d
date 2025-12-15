@@ -265,7 +265,7 @@ class AsyncQueue
   bool remove(void* item)
   {
     bool _retval;
-    _retval = g_async_queue_remove(cast(GAsyncQueue*)this._cPtr, item);
+    _retval = cast(bool)g_async_queue_remove(cast(GAsyncQueue*)this._cPtr, item);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class AsyncQueue
   bool removeUnlocked(void* item = null)
   {
     bool _retval;
-    _retval = g_async_queue_remove_unlocked(cast(GAsyncQueue*)this._cPtr, item);
+    _retval = cast(bool)g_async_queue_remove_unlocked(cast(GAsyncQueue*)this._cPtr, item);
     return _retval;
   }
 

@@ -593,7 +593,7 @@ class Clipboard : gobject.object.ObjectWrap
   bool waitIsImageAvailable()
   {
     bool _retval;
-    _retval = gtk_clipboard_wait_is_image_available(cast(GtkClipboard*)this._cPtr);
+    _retval = cast(bool)gtk_clipboard_wait_is_image_available(cast(GtkClipboard*)this._cPtr);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class Clipboard : gobject.object.ObjectWrap
   bool waitIsRichTextAvailable(gtk.text_buffer.TextBuffer buffer)
   {
     bool _retval;
-    _retval = gtk_clipboard_wait_is_rich_text_available(cast(GtkClipboard*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_clipboard_wait_is_rich_text_available(cast(GtkClipboard*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -634,7 +634,7 @@ class Clipboard : gobject.object.ObjectWrap
   bool waitIsTargetAvailable(gdk.atom.Atom target)
   {
     bool _retval;
-    _retval = gtk_clipboard_wait_is_target_available(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
+    _retval = cast(bool)gtk_clipboard_wait_is_target_available(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
     return _retval;
   }
 
@@ -653,7 +653,7 @@ class Clipboard : gobject.object.ObjectWrap
   bool waitIsTextAvailable()
   {
     bool _retval;
-    _retval = gtk_clipboard_wait_is_text_available(cast(GtkClipboard*)this._cPtr);
+    _retval = cast(bool)gtk_clipboard_wait_is_text_available(cast(GtkClipboard*)this._cPtr);
     return _retval;
   }
 
@@ -672,7 +672,7 @@ class Clipboard : gobject.object.ObjectWrap
   bool waitIsUrisAvailable()
   {
     bool _retval;
-    _retval = gtk_clipboard_wait_is_uris_available(cast(GtkClipboard*)this._cPtr);
+    _retval = cast(bool)gtk_clipboard_wait_is_uris_available(cast(GtkClipboard*)this._cPtr);
     return _retval;
   }
 

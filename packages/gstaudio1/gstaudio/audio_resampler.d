@@ -104,7 +104,7 @@ class AudioResampler
   bool update(int inRate, int outRate, gst.structure.Structure options)
   {
     bool _retval;
-    _retval = gst_audio_resampler_update(cast(GstAudioResampler*)this._cPtr, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_audio_resampler_update(cast(GstAudioResampler*)this._cPtr, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -70,7 +70,7 @@ class AncillaryMeta
   */
   @property bool cNotYChannel()
   {
-    return (cast(GstAncillaryMeta*)this._cPtr).cNotYChannel;
+    return cast(bool)(cast(GstAncillaryMeta*)this._cPtr).cNotYChannel;
   }
 
   /**

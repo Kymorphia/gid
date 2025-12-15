@@ -135,7 +135,7 @@ template DatagramBasedT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_datagram_based_condition_wait(cast(GDatagramBased*)this._cPtr, condition, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_datagram_based_condition_wait(cast(GDatagramBased*)this._cPtr, condition, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

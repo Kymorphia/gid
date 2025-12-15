@@ -52,7 +52,7 @@ class RecordBatchIterator : gobject.object.ObjectWrap
   bool equal(arrow.record_batch_iterator.RecordBatchIterator otherIterator)
   {
     bool _retval;
-    _retval = garrow_record_batch_iterator_equal(cast(GArrowRecordBatchIterator*)this._cPtr, otherIterator ? cast(GArrowRecordBatchIterator*)otherIterator._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_record_batch_iterator_equal(cast(GArrowRecordBatchIterator*)this._cPtr, otherIterator ? cast(GArrowRecordBatchIterator*)otherIterator._cPtr(No.Dup) : null);
     return _retval;
   }
 

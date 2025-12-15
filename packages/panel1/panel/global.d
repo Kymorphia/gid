@@ -14,7 +14,7 @@ import panel.types;
 bool checkVersion(uint major, uint minor, uint micro)
 {
   bool _retval;
-  _retval = panel_check_version(major, minor, micro);
+  _retval = cast(bool)panel_check_version(major, minor, micro);
   return _retval;
 }
 

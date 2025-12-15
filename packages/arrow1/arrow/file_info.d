@@ -153,7 +153,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool equal(arrow.file_info.FileInfo otherFileInfo)
   {
     bool _retval;
-    _retval = garrow_file_info_equal(cast(GArrowFileInfo*)this._cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_file_info_equal(cast(GArrowFileInfo*)this._cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool isDir()
   {
     bool _retval;
-    _retval = garrow_file_info_is_dir(cast(GArrowFileInfo*)this._cPtr);
+    _retval = cast(bool)garrow_file_info_is_dir(cast(GArrowFileInfo*)this._cPtr);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool isFile()
   {
     bool _retval;
-    _retval = garrow_file_info_is_file(cast(GArrowFileInfo*)this._cPtr);
+    _retval = cast(bool)garrow_file_info_is_file(cast(GArrowFileInfo*)this._cPtr);
     return _retval;
   }
 

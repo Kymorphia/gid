@@ -285,7 +285,7 @@ class Stroke : gobject.boxed.Boxed
   static bool equal(const(void)* stroke1 = null, const(void)* stroke2 = null)
   {
     bool _retval;
-    _retval = gsk_stroke_equal(stroke1, stroke2);
+    _retval = cast(bool)gsk_stroke_equal(stroke1, stroke2);
     return _retval;
   }
 }

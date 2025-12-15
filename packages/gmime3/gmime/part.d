@@ -204,7 +204,7 @@ class Part : gmime.object.ObjectWrap
   bool isAttachment()
   {
     bool _retval;
-    _retval = g_mime_part_is_attachment(cast(GMimePart*)this._cPtr);
+    _retval = cast(bool)g_mime_part_is_attachment(cast(GMimePart*)this._cPtr);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Part : gmime.object.ObjectWrap
     auto _recipients = gPtrArrayFromD!(string, false)(recipients);
     scope(exit) containerFree!(GPtrArray*, string, GidOwnership.None)(_recipients);
     GError *_err;
-    _retval = g_mime_part_openpgp_encrypt(cast(GMimePart*)this._cPtr, sign, _userid, flags, _recipients, &_err);
+    _retval = cast(bool)g_mime_part_openpgp_encrypt(cast(GMimePart*)this._cPtr, sign, _userid, flags, _recipients, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -269,7 +269,7 @@ class Part : gmime.object.ObjectWrap
     bool _retval;
     const(char)* _userid = userid.toCString(No.Alloc);
     GError *_err;
-    _retval = g_mime_part_openpgp_sign(cast(GMimePart*)this._cPtr, _userid, &_err);
+    _retval = cast(bool)g_mime_part_openpgp_sign(cast(GMimePart*)this._cPtr, _userid, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -400,7 +400,7 @@ class Part : gmime.object.ObjectWrap
   bool verifyContentMd5()
   {
     bool _retval;
-    _retval = g_mime_part_verify_content_md5(cast(GMimePart*)this._cPtr);
+    _retval = cast(bool)g_mime_part_verify_content_md5(cast(GMimePart*)this._cPtr);
     return _retval;
   }
 }

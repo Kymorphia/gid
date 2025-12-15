@@ -85,7 +85,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   bool getClipOverlay()
   {
     bool _retval;
-    _retval = gtk_overlay_layout_child_get_clip_overlay(cast(GtkOverlayLayoutChild*)this._cPtr);
+    _retval = cast(bool)gtk_overlay_layout_child_get_clip_overlay(cast(GtkOverlayLayoutChild*)this._cPtr);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   bool getMeasure()
   {
     bool _retval;
-    _retval = gtk_overlay_layout_child_get_measure(cast(GtkOverlayLayoutChild*)this._cPtr);
+    _retval = cast(bool)gtk_overlay_layout_child_get_measure(cast(GtkOverlayLayoutChild*)this._cPtr);
     return _retval;
   }
 

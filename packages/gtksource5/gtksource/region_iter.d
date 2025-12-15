@@ -48,7 +48,7 @@ class RegionIter
     bool _retval;
     GtkTextIter _start;
     GtkTextIter _end;
-    _retval = gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)this._cPtr, &_start, &_end);
+    _retval = cast(bool)gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)this._cPtr, &_start, &_end);
     start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
     end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
@@ -58,7 +58,7 @@ class RegionIter
   bool isEnd()
   {
     bool _retval;
-    _retval = gtk_source_region_iter_is_end(cast(GtkSourceRegionIter*)this._cPtr);
+    _retval = cast(bool)gtk_source_region_iter_is_end(cast(GtkSourceRegionIter*)this._cPtr);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class RegionIter
   bool next()
   {
     bool _retval;
-    _retval = gtk_source_region_iter_next(cast(GtkSourceRegionIter*)this._cPtr);
+    _retval = cast(bool)gtk_source_region_iter_next(cast(GtkSourceRegionIter*)this._cPtr);
     return _retval;
   }
 }

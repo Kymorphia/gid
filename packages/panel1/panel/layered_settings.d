@@ -82,11 +82,11 @@ class LayeredSettings : gobject.object.ObjectWrap
   */
   void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping, gio.types.SettingsBindSetMapping setMapping)
   {
-    extern(C) bool _getMappingCallback(GValue* value, GVariant* variant, void* userData)
+    extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData)
     {
       auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
 
-      bool _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+      gboolean _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
       return _retval;
     }
     auto _getMappingCB = getMapping ? &_getMappingCallback : null;
@@ -115,7 +115,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_layered_settings_get_boolean(cast(PanelLayeredSettings*)this._cPtr, _key);
+    _retval = cast(bool)panel_layered_settings_get_boolean(cast(PanelLayeredSettings*)this._cPtr, _key);
     return _retval;
   }
 

@@ -176,7 +176,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool getDebugEnabled()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)this._cPtr);
+    _retval = cast(bool)gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool getForwardCompatible()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)this._cPtr);
+    _retval = cast(bool)gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool getUseEs()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_use_es(cast(GdkGLContext*)this._cPtr);
+    _retval = cast(bool)gdk_gl_context_get_use_es(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool isLegacy()
   {
     bool _retval;
-    _retval = gdk_gl_context_is_legacy(cast(GdkGLContext*)this._cPtr);
+    _retval = cast(bool)gdk_gl_context_is_legacy(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool isShared(gdk.glcontext.GLContext other)
   {
     bool _retval;
-    _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)this._cPtr, other ? cast(GdkGLContext*)other._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_gl_context_is_shared(cast(GdkGLContext*)this._cPtr, other ? cast(GdkGLContext*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class GLContext : gdk.draw_context.DrawContext
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_gl_context_realize(cast(GdkGLContext*)this._cPtr, &_err);
+    _retval = cast(bool)gdk_gl_context_realize(cast(GdkGLContext*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

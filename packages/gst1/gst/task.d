@@ -175,7 +175,7 @@ class Task : gst.object.ObjectWrap
   bool join()
   {
     bool _retval;
-    _retval = gst_task_join(cast(GstTask*)this._cPtr);
+    _retval = cast(bool)gst_task_join(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class Task : gst.object.ObjectWrap
   bool pause()
   {
     bool _retval;
-    _retval = gst_task_pause(cast(GstTask*)this._cPtr);
+    _retval = cast(bool)gst_task_pause(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Task : gst.object.ObjectWrap
   bool resume()
   {
     bool _retval;
-    _retval = gst_task_resume(cast(GstTask*)this._cPtr);
+    _retval = cast(bool)gst_task_resume(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class Task : gst.object.ObjectWrap
   bool setState(gst.types.TaskState state)
   {
     bool _retval;
-    _retval = gst_task_set_state(cast(GstTask*)this._cPtr, state);
+    _retval = cast(bool)gst_task_set_state(cast(GstTask*)this._cPtr, state);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class Task : gst.object.ObjectWrap
   bool start()
   {
     bool _retval;
-    _retval = gst_task_start(cast(GstTask*)this._cPtr);
+    _retval = cast(bool)gst_task_start(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class Task : gst.object.ObjectWrap
   bool stop()
   {
     bool _retval;
-    _retval = gst_task_stop(cast(GstTask*)this._cPtr);
+    _retval = cast(bool)gst_task_stop(cast(GstTask*)this._cPtr);
     return _retval;
   }
 }

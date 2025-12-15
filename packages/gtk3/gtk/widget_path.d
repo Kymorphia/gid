@@ -194,7 +194,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool hasParent(gobject.types.GType type)
   {
     bool _retval;
-    _retval = gtk_widget_path_has_parent(cast(const(GtkWidgetPath)*)this._cPtr, type);
+    _retval = cast(bool)gtk_widget_path_has_parent(cast(const(GtkWidgetPath)*)this._cPtr, type);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool isType(gobject.types.GType type)
   {
     bool _retval;
-    _retval = gtk_widget_path_is_type(cast(const(GtkWidgetPath)*)this._cPtr, type);
+    _retval = cast(bool)gtk_widget_path_is_type(cast(const(GtkWidgetPath)*)this._cPtr, type);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_widget_path_iter_has_class(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
+    _retval = cast(bool)gtk_widget_path_iter_has_class(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_widget_path_iter_has_name(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
+    _retval = cast(bool)gtk_widget_path_iter_has_name(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
     return _retval;
   }
 
@@ -419,7 +419,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasQclass(int pos, glib.types.Quark qname)
   {
     bool _retval;
-    _retval = gtk_widget_path_iter_has_qclass(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
+    _retval = cast(bool)gtk_widget_path_iter_has_qclass(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasQname(int pos, glib.types.Quark qname)
   {
     bool _retval;
-    _retval = gtk_widget_path_iter_has_qname(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
+    _retval = cast(bool)gtk_widget_path_iter_has_qname(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasQregion(int pos, glib.types.Quark qname, out gtk.types.RegionFlags flags)
   {
     bool _retval;
-    _retval = gtk_widget_path_iter_has_qregion(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname, &flags);
+    _retval = cast(bool)gtk_widget_path_iter_has_qregion(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname, &flags);
     return _retval;
   }
 
@@ -474,7 +474,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_widget_path_iter_has_region(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name, &flags);
+    _retval = cast(bool)gtk_widget_path_iter_has_region(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name, &flags);
     return _retval;
   }
 

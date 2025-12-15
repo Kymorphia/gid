@@ -139,7 +139,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   bool getEnableMatrix()
   {
     bool _retval;
-    _retval = gtk_source_space_drawer_get_enable_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr);
+    _retval = cast(bool)gtk_source_space_drawer_get_enable_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr);
     return _retval;
   }
 

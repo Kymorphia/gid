@@ -451,7 +451,7 @@ struct GtkSourceCompletionClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GtkSourceCompletion* completion, GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal) proposalActivated;
+  extern(C) gboolean function(GtkSourceCompletion* completion, GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal) proposalActivated;
 
   /** */
   extern(C) void function(GtkSourceCompletion* completion) show;
@@ -588,7 +588,7 @@ struct GtkSourceCompletionProposalIface
   extern(C) uint function(GtkSourceCompletionProposal* proposal) hash;
 
   /** */
-  extern(C) bool function(GtkSourceCompletionProposal* proposal, GtkSourceCompletionProposal* other) equal;
+  extern(C) gboolean function(GtkSourceCompletionProposal* proposal, GtkSourceCompletionProposal* other) equal;
 
   /** */
   extern(C) void function(GtkSourceCompletionProposal* proposal) changed;
@@ -623,7 +623,7 @@ struct GtkSourceCompletionProviderIface
   extern(C) void function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context) populate;
 
   /** */
-  extern(C) bool function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context) match;
+  extern(C) gboolean function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context) match;
 
   /** */
   extern(C) GtkSourceCompletionActivation function(GtkSourceCompletionProvider* provider) getActivation;
@@ -635,10 +635,10 @@ struct GtkSourceCompletionProviderIface
   extern(C) void function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal, GtkSourceCompletionInfo* info) updateInfo;
 
   /** */
-  extern(C) bool function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal, GtkTextIter* iter) getStartIter;
+  extern(C) gboolean function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal, GtkTextIter* iter) getStartIter;
 
   /** */
-  extern(C) bool function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal, GtkTextIter* iter) activateProposal;
+  extern(C) gboolean function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal, GtkTextIter* iter) activateProposal;
 
   /** */
   extern(C) int function(GtkSourceCompletionProvider* provider) getInteractiveDelay;
@@ -794,7 +794,7 @@ struct GtkSourceGutterRendererClass
   extern(C) void function(GtkSourceGutterRenderer* renderer, GtkTextBuffer* oldBuffer) changeBuffer;
 
   /** */
-  extern(C) bool function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, GdkEvent* event) queryActivatable;
+  extern(C) gboolean function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, GdkEvent* event) queryActivatable;
 
   /** */
   extern(C) void function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, GdkEvent* event) activate;
@@ -803,7 +803,7 @@ struct GtkSourceGutterRendererClass
   extern(C) void function(GtkSourceGutterRenderer* renderer) queueDraw;
 
   /** */
-  extern(C) bool function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, int x, int y, GtkTooltip* tooltip) queryTooltip;
+  extern(C) gboolean function(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, int x, int y, GtkTooltip* tooltip) queryTooltip;
 
   /** */
   extern(C) void function(GtkSourceGutterRenderer* renderer, GtkTextIter* start, GtkTextIter* end, GtkSourceGutterRendererState state) queryData;
@@ -1227,10 +1227,10 @@ struct GtkSourceUndoManagerIface
   GTypeInterface parent;
 
   /** */
-  extern(C) bool function(GtkSourceUndoManager* manager) canUndo;
+  extern(C) gboolean function(GtkSourceUndoManager* manager) canUndo;
 
   /** */
-  extern(C) bool function(GtkSourceUndoManager* manager) canRedo;
+  extern(C) gboolean function(GtkSourceUndoManager* manager) canRedo;
 
   /** */
   extern(C) void function(GtkSourceUndoManager* manager) undo;
@@ -1280,7 +1280,7 @@ struct GtkSourceViewClass
   extern(C) void function(GtkSourceView* view) showCompletion;
 
   /** */
-  extern(C) void function(GtkSourceView* view, bool down) moveLines;
+  extern(C) void function(GtkSourceView* view, gboolean down) moveLines;
 
   /** */
   extern(C) void function(GtkSourceView* view, int step) moveWords;

@@ -99,7 +99,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getCollate()
   {
     bool _retval;
-    _retval = gtk_print_job_get_collate(cast(GtkPrintJob*)this._cPtr);
+    _retval = cast(bool)gtk_print_job_get_collate(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getReverse()
   {
     bool _retval;
-    _retval = gtk_print_job_get_reverse(cast(GtkPrintJob*)this._cPtr);
+    _retval = cast(bool)gtk_print_job_get_reverse(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getRotate()
   {
     bool _retval;
-    _retval = gtk_print_job_get_rotate(cast(GtkPrintJob*)this._cPtr);
+    _retval = cast(bool)gtk_print_job_get_rotate(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getTrackPrintStatus()
   {
     bool _retval;
-    _retval = gtk_print_job_get_track_print_status(cast(GtkPrintJob*)this._cPtr);
+    _retval = cast(bool)gtk_print_job_get_track_print_status(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class PrintJob : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_print_job_set_source_fd(cast(GtkPrintJob*)this._cPtr, fd, &_err);
+    _retval = cast(bool)gtk_print_job_set_source_fd(cast(GtkPrintJob*)this._cPtr, fd, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -462,7 +462,7 @@ class PrintJob : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_job_set_source_file(cast(GtkPrintJob*)this._cPtr, _filename, &_err);
+    _retval = cast(bool)gtk_print_job_set_source_file(cast(GtkPrintJob*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

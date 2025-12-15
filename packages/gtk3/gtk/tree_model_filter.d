@@ -143,7 +143,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
   {
     bool _retval;
     GtkTreeIter _filterIter;
-    _retval = gtk_tree_model_filter_convert_child_iter_to_iter(cast(GtkTreeModelFilter*)this._cPtr, &_filterIter, childIter ? cast(GtkTreeIter*)childIter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_filter_convert_child_iter_to_iter(cast(GtkTreeModelFilter*)this._cPtr, &_filterIter, childIter ? cast(GtkTreeIter*)childIter._cPtr(No.Dup) : null);
     filterIter = new gtk.tree_iter.TreeIter(cast(void*)&_filterIter, No.Take);
     return _retval;
   }
@@ -319,11 +319,11 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
   */
   void setVisibleFunc(gtk.types.TreeModelFilterVisibleFunc func)
   {
-    extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
       auto _dlg = cast(gtk.types.TreeModelFilterVisibleFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

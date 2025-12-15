@@ -820,7 +820,7 @@ void getLogAttrs(string text, int level, pango.language.Language language, pango
 bool isZeroWidth(dchar ch)
 {
   bool _retval;
-  _retval = pango_is_zero_width(ch);
+  _retval = cast(bool)pango_is_zero_width(ch);
   return _retval;
 }
 
@@ -912,7 +912,7 @@ bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, ou
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
-  _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context._cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
+  _retval = cast(bool)pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context._cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
@@ -983,7 +983,7 @@ bool parseEnum(gobject.types.GType type, string str, out int value, bool warn, o
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
   char* _possibleValues;
-  _retval = pango_parse_enum(type, _str, cast(int*)&value, warn, &_possibleValues);
+  _retval = cast(bool)pango_parse_enum(type, _str, cast(int*)&value, warn, &_possibleValues);
   possibleValues = _possibleValues.fromCString(Yes.Free);
   return _retval;
 }
@@ -1027,7 +1027,7 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
-  _retval = pango_parse_markup(_markupText, _length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
+  _retval = cast(bool)pango_parse_markup(_markupText, _length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
@@ -1054,7 +1054,7 @@ bool parseStretch(string str, out pango.types.Stretch stretch, bool warn)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = pango_parse_stretch(_str, &stretch, warn);
+  _retval = cast(bool)pango_parse_stretch(_str, &stretch, warn);
   return _retval;
 }
 
@@ -1075,7 +1075,7 @@ bool parseStyle(string str, out pango.types.Style style, bool warn)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = pango_parse_style(_str, &style, warn);
+  _retval = cast(bool)pango_parse_style(_str, &style, warn);
   return _retval;
 }
 
@@ -1096,7 +1096,7 @@ bool parseVariant(string str, out pango.types.Variant variant, bool warn)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = pango_parse_variant(_str, &variant, warn);
+  _retval = cast(bool)pango_parse_variant(_str, &variant, warn);
   return _retval;
 }
 
@@ -1117,7 +1117,7 @@ bool parseWeight(string str, out pango.types.Weight weight, bool warn)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = pango_parse_weight(_str, &weight, warn);
+  _retval = cast(bool)pango_parse_weight(_str, &weight, warn);
   return _retval;
 }
 

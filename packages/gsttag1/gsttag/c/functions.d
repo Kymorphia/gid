@@ -26,13 +26,13 @@ __gshared extern(C)
   GType function() c_gst_tag_xmp_writer_get_type; ///
   void function(GstTagXmpWriter* config) c_gst_tag_xmp_writer_add_all_schemas; ///
   void function(GstTagXmpWriter* config, const(char)* schema) c_gst_tag_xmp_writer_add_schema; ///
-  bool function(GstTagXmpWriter* config, const(char)* schema) c_gst_tag_xmp_writer_has_schema; ///
+  gboolean function(GstTagXmpWriter* config, const(char)* schema) c_gst_tag_xmp_writer_has_schema; ///
   void function(GstTagXmpWriter* config) c_gst_tag_xmp_writer_remove_all_schemas; ///
   void function(GstTagXmpWriter* config, const(char)* schema) c_gst_tag_xmp_writer_remove_schema; ///
-  GstBuffer* function(GstTagXmpWriter* config, const(GstTagList)* taglist, bool readOnly) c_gst_tag_xmp_writer_tag_list_to_xmp_buffer; ///
+  GstBuffer* function(GstTagXmpWriter* config, const(GstTagList)* taglist, gboolean readOnly) c_gst_tag_xmp_writer_tag_list_to_xmp_buffer; ///
 
   // global
-  bool function(const(char)* langCode) c_gst_tag_check_language_code; ///
+  gboolean function(const(char)* langCode) c_gst_tag_check_language_code; ///
   char* function(const(char)* data, int size, const(char*)* envVars) c_gst_tag_freeform_string_to_utf8; ///
   const(char)* function(const(char)* id3Tag) c_gst_tag_from_id3_tag; ///
   const(char)* function(const(char)* type, const(char)* id3UserTag) c_gst_tag_from_id3_user_tag; ///
@@ -53,7 +53,7 @@ __gshared extern(C)
   uint function() c_gst_tag_id3_genre_count; ///
   const(char)* function(uint id) c_gst_tag_id3_genre_get; ///
   GstSample* function(const(ubyte)* imageData, uint imageDataLen, GstTagImageType imageType) c_gst_tag_image_data_to_image_sample; ///
-  bool function(GstTagList* tagList, const(ubyte)* imageData, uint imageDataLen, uint id3PictureType) c_gst_tag_list_add_id3_image; ///
+  gboolean function(GstTagList* tagList, const(ubyte)* imageData, uint imageDataLen, uint id3PictureType) c_gst_tag_list_add_id3_image; ///
   GstTagList* function(GstBuffer* buffer, int byteOrder, uint baseOffset) c_gst_tag_list_from_exif_buffer; ///
   GstTagList* function(GstBuffer* buffer) c_gst_tag_list_from_exif_buffer_with_tiff_header; ///
   GstTagList* function(GstBuffer* buffer) c_gst_tag_list_from_id3v2_tag; ///
@@ -64,8 +64,8 @@ __gshared extern(C)
   GstBuffer* function(const(GstTagList)* taglist, int byteOrder, uint baseOffset) c_gst_tag_list_to_exif_buffer; ///
   GstBuffer* function(const(GstTagList)* taglist) c_gst_tag_list_to_exif_buffer_with_tiff_header; ///
   GstBuffer* function(const(GstTagList)* list, const(ubyte)* idData, uint idDataLength, const(char)* vendorString) c_gst_tag_list_to_vorbiscomment_buffer; ///
-  GstBuffer* function(const(GstTagList)* list, bool readOnly, const(char*)* schemas) c_gst_tag_list_to_xmp_buffer; ///
-  bool function(const(char)* extComment, char** key, char** lang, char** value, bool failIfNoKey) c_gst_tag_parse_extended_comment; ///
+  GstBuffer* function(const(GstTagList)* list, gboolean readOnly, const(char*)* schemas) c_gst_tag_list_to_xmp_buffer; ///
+  gboolean function(const(char)* extComment, char** key, char** lang, char** value, gboolean failIfNoKey) c_gst_tag_parse_extended_comment; ///
   void function() c_gst_tag_register_musicbrainz_tags; ///
   const(char)* function(const(char)* gstTag) c_gst_tag_to_id3_tag; ///
   GList* function(const(GstTagList)* list, const(char)* tag) c_gst_tag_to_vorbis_comments; ///

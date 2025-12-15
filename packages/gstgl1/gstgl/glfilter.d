@@ -65,7 +65,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   bool filterTexture(gst.buffer.Buffer input, gst.buffer.Buffer output)
   {
     bool _retval;
-    _retval = gst_gl_filter_filter_texture(cast(GstGLFilter*)this._cPtr, input ? cast(GstBuffer*)input._cPtr(No.Dup) : null, output ? cast(GstBuffer*)output._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_filter_filter_texture(cast(GstGLFilter*)this._cPtr, input ? cast(GstBuffer*)input._cPtr(No.Dup) : null, output ? cast(GstBuffer*)output._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -80,18 +80,18 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   */
   bool renderToTarget(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.types.GLFilterRenderFunc func)
   {
-    extern(C) bool _funcCallback(GstGLFilter* filter, GstGLMemory* inTex, void* userData)
+    extern(C) gboolean _funcCallback(GstGLFilter* filter, GstGLMemory* inTex, void* userData)
     {
       auto _dlg = cast(gstgl.types.GLFilterRenderFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_gl_filter_render_to_target(cast(GstGLFilter*)this._cPtr, input ? cast(GstGLMemory*)input._cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output._cPtr(No.Dup) : null, _funcCB, _func);
+    _retval = cast(bool)gst_gl_filter_render_to_target(cast(GstGLFilter*)this._cPtr, input ? cast(GstGLMemory*)input._cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output._cPtr(No.Dup) : null, _funcCB, _func);
     return _retval;
   }
 

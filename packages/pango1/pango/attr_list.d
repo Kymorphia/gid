@@ -123,7 +123,7 @@ class AttrList : gobject.boxed.Boxed
   bool equal(pango.attr_list.AttrList otherList)
   {
     bool _retval;
-    _retval = pango_attr_list_equal(cast(PangoAttrList*)this._cPtr, otherList ? cast(PangoAttrList*)otherList._cPtr(No.Dup) : null);
+    _retval = cast(bool)pango_attr_list_equal(cast(PangoAttrList*)this._cPtr, otherList ? cast(PangoAttrList*)otherList._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -141,11 +141,11 @@ class AttrList : gobject.boxed.Boxed
   */
   pango.attr_list.AttrList filter(pango.types.AttrFilterFunc func)
   {
-    extern(C) bool _funcCallback(PangoAttribute* attribute, void* userData)
+    extern(C) gboolean _funcCallback(PangoAttribute* attribute, void* userData)
     {
       auto _dlg = cast(pango.types.AttrFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
+      gboolean _retval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

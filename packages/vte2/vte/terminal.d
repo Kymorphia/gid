@@ -1074,7 +1074,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getAllowBold()
   {
     bool _retval;
-    _retval = vte_terminal_get_allow_bold(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_allow_bold(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1085,7 +1085,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getAllowHyperlink()
   {
     bool _retval;
-    _retval = vte_terminal_get_allow_hyperlink(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_allow_hyperlink(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1097,7 +1097,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getAudibleBell()
   {
     bool _retval;
-    _retval = vte_terminal_get_audible_bell(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_audible_bell(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1110,7 +1110,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getBoldIsBright()
   {
     bool _retval;
-    _retval = vte_terminal_get_bold_is_bright(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_bold_is_bright(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1290,7 +1290,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableA11y()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_a11y(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_enable_a11y(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1301,7 +1301,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableBidi()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_bidi(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_enable_bidi(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1309,7 +1309,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableFallbackScrolling()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1320,7 +1320,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableShaping()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_shaping(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_enable_shaping(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1328,7 +1328,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableSixel()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_sixel(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_enable_sixel(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1408,7 +1408,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getHasSelection()
   {
     bool _retval;
-    _retval = vte_terminal_get_has_selection(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_has_selection(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1428,7 +1428,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getInputEnabled()
   {
     bool _retval;
-    _retval = vte_terminal_get_input_enabled(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_input_enabled(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1442,7 +1442,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getMouseAutohide()
   {
     bool _retval;
-    _retval = vte_terminal_get_mouse_autohide(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_mouse_autohide(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1465,7 +1465,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getRewrapOnResize()
   {
     bool _retval;
-    _retval = vte_terminal_get_rewrap_on_resize(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_rewrap_on_resize(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1481,7 +1481,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollOnInsert()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_on_insert(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_scroll_on_insert(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1489,7 +1489,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollOnKeystroke()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_on_keystroke(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_scroll_on_keystroke(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1497,7 +1497,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollOnOutput()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_on_output(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_scroll_on_output(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1505,7 +1505,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollUnitIsPixels()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_unit_is_pixels(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_scroll_unit_is_pixels(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1637,7 +1637,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getXfill()
   {
     bool _retval;
-    _retval = vte_terminal_get_xfill(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_xfill(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1654,7 +1654,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getYfill()
   {
     bool _retval;
-    _retval = vte_terminal_get_yfill(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_get_yfill(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1916,7 +1916,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool searchFindNext()
   {
     bool _retval;
-    _retval = vte_terminal_search_find_next(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_search_find_next(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1928,7 +1928,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool searchFindPrevious()
   {
     bool _retval;
-    _retval = vte_terminal_search_find_previous(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_search_find_previous(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1954,7 +1954,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool searchGetWrapAround()
   {
     bool _retval;
-    _retval = vte_terminal_search_get_wrap_around(cast(VteTerminal*)this._cPtr);
+    _retval = cast(bool)vte_terminal_search_get_wrap_around(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -2399,7 +2399,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     bool _retval;
     const(char)* _codeset = codeset.toCString(No.Alloc);
     GError *_err;
-    _retval = vte_terminal_set_encoding(cast(VteTerminal*)this._cPtr, _codeset, &_err);
+    _retval = cast(bool)vte_terminal_set_encoding(cast(VteTerminal*)this._cPtr, _codeset, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2807,7 +2807,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     auto _childSetup = childSetup ? cast(void*)&(childSetup) : null;
     GError *_err;
-    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)this._cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)vte_terminal_spawn_sync(cast(VteTerminal*)this._cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2976,7 +2976,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_terminal_write_contents_sync(cast(VteTerminal*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)vte_terminal_write_contents_sync(cast(VteTerminal*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

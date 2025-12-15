@@ -149,7 +149,7 @@ class Device : gobject.object.ObjectWrap
   bool getCapsLockState()
   {
     bool _retval;
-    _retval = gdk_device_get_caps_lock_state(cast(GdkDevice*)this._cPtr);
+    _retval = cast(bool)gdk_device_get_caps_lock_state(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Device : gobject.object.ObjectWrap
   bool getHasCursor()
   {
     bool _retval;
-    _retval = gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
+    _retval = cast(bool)gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class Device : gobject.object.ObjectWrap
   bool getNumLockState()
   {
     bool _retval;
-    _retval = gdk_device_get_num_lock_state(cast(GdkDevice*)this._cPtr);
+    _retval = cast(bool)gdk_device_get_num_lock_state(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class Device : gobject.object.ObjectWrap
   bool getScrollLockState()
   {
     bool _retval;
-    _retval = gdk_device_get_scroll_lock_state(cast(GdkDevice*)this._cPtr);
+    _retval = cast(bool)gdk_device_get_scroll_lock_state(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -399,7 +399,7 @@ class Device : gobject.object.ObjectWrap
   bool hasBidiLayouts()
   {
     bool _retval;
-    _retval = gdk_device_has_bidi_layouts(cast(GdkDevice*)this._cPtr);
+    _retval = cast(bool)gdk_device_has_bidi_layouts(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 

@@ -242,7 +242,7 @@ class Expression
   bool evaluate(gobject.object.ObjectWrap this_, gobject.value.Value value)
   {
     bool _retval;
-    _retval = gtk_expression_evaluate(cast(GtkExpression*)this._cPtr, this_ ? cast(GObject*)this_._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_expression_evaluate(cast(GtkExpression*)this._cPtr, this_ ? cast(GObject*)this_._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Expression
   bool isStatic()
   {
     bool _retval;
-    _retval = gtk_expression_is_static(cast(GtkExpression*)this._cPtr);
+    _retval = cast(bool)gtk_expression_is_static(cast(GtkExpression*)this._cPtr);
     return _retval;
   }
 

@@ -173,7 +173,7 @@ class ContentType : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _type = type.toCString(No.Alloc);
     const(char)* _subtype = subtype.toCString(No.Alloc);
-    _retval = g_mime_content_type_is_type(cast(GMimeContentType*)this._cPtr, _type, _subtype);
+    _retval = cast(bool)g_mime_content_type_is_type(cast(GMimeContentType*)this._cPtr, _type, _subtype);
     return _retval;
   }
 

@@ -373,7 +373,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _header = header.toCString(No.Alloc);
-    _retval = g_mime_object_remove_header(cast(GMimeObject*)this._cPtr, _header);
+    _retval = cast(bool)g_mime_object_remove_header(cast(GMimeObject*)this._cPtr, _header);
     return _retval;
   }
 

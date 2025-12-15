@@ -101,7 +101,7 @@ class Batch : gobject.object.ObjectWrap
     bool _retval;
     GdaSet* _outParams;
     GError *_err;
-    _retval = gda_batch_get_parameters(cast(GdaBatch*)this._cPtr, &_outParams, &_err);
+    _retval = cast(bool)gda_batch_get_parameters(cast(GdaBatch*)this._cPtr, &_outParams, &_err);
     if (_err)
       throw new BatchException(_err);
     outParams = new gda.set.Set(cast(void*)_outParams, Yes.Take);

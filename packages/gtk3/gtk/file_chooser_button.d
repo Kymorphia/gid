@@ -173,7 +173,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   override bool getFocusOnClick()
   {
     bool _retval;
-    _retval = gtk_file_chooser_button_get_focus_on_click(cast(GtkFileChooserButton*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_button_get_focus_on_click(cast(GtkFileChooserButton*)this._cPtr);
     return _retval;
   }
 

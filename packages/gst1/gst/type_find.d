@@ -127,7 +127,7 @@ class TypeFind
     const(char)* _extensions = extensions.toCString(No.Alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _retval = gst_type_find_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, _funcCB, _extensions, possibleCaps ? cast(GstCaps*)possibleCaps._cPtr(No.Dup) : null, _func, _funcDestroyCB);
+    _retval = cast(bool)gst_type_find_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, _funcCB, _extensions, possibleCaps ? cast(GstCaps*)possibleCaps._cPtr(No.Dup) : null, _func, _funcDestroyCB);
     return _retval;
   }
 }

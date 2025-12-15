@@ -146,7 +146,7 @@ class Display : gobject.object.ObjectWrap
   bool deviceIsGrabbed(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_display_device_is_grabbed(cast(GdkDisplay*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -450,7 +450,7 @@ class Display : gobject.object.ObjectWrap
   bool hasPending()
   {
     bool _retval;
-    _retval = gdk_display_has_pending(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_has_pending(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -461,7 +461,7 @@ class Display : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = gdk_display_is_closed(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_is_closed(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -552,7 +552,7 @@ class Display : gobject.object.ObjectWrap
   bool pointerIsGrabbed()
   {
     bool _retval;
-    _retval = gdk_display_pointer_is_grabbed(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_pointer_is_grabbed(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -595,7 +595,7 @@ class Display : gobject.object.ObjectWrap
   bool requestSelectionNotification(gdk.atom.Atom selection)
   {
     bool _retval;
-    _retval = gdk_display_request_selection_notification(cast(GdkDisplay*)this._cPtr, selection ? cast(GdkAtom)selection._cPtr : null);
+    _retval = cast(bool)gdk_display_request_selection_notification(cast(GdkDisplay*)this._cPtr, selection ? cast(GdkAtom)selection._cPtr : null);
     return _retval;
   }
 
@@ -638,7 +638,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsClipboardPersistence()
   {
     bool _retval;
-    _retval = gdk_display_supports_clipboard_persistence(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_clipboard_persistence(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -656,7 +656,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsComposite()
   {
     bool _retval;
-    _retval = gdk_display_supports_composite(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_composite(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsCursorAlpha()
   {
     bool _retval;
-    _retval = gdk_display_supports_cursor_alpha(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_cursor_alpha(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -682,7 +682,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsCursorColor()
   {
     bool _retval;
-    _retval = gdk_display_supports_cursor_color(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_cursor_color(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsInputShapes()
   {
     bool _retval;
-    _retval = gdk_display_supports_input_shapes(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_input_shapes(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -707,7 +707,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsSelectionNotification()
   {
     bool _retval;
-    _retval = gdk_display_supports_selection_notification(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_selection_notification(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -719,7 +719,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsShapes()
   {
     bool _retval;
-    _retval = gdk_display_supports_shapes(cast(GdkDisplay*)this._cPtr);
+    _retval = cast(bool)gdk_display_supports_shapes(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 

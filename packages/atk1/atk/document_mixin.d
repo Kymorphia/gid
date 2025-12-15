@@ -133,7 +133,7 @@ template DocumentT()
     bool _retval;
     const(char)* _attributeName = attributeName.toCString(No.Alloc);
     const(char)* _attributeValue = attributeValue.toCString(No.Alloc);
-    _retval = atk_document_set_attribute_value(cast(AtkDocument*)this._cPtr, _attributeName, _attributeValue);
+    _retval = cast(bool)atk_document_set_attribute_value(cast(AtkDocument*)this._cPtr, _attributeName, _attributeValue);
     return _retval;
   }
 

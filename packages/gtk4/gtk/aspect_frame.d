@@ -199,7 +199,7 @@ class AspectFrame : gtk.widget.Widget
   bool getObeyChild()
   {
     bool _retval;
-    _retval = gtk_aspect_frame_get_obey_child(cast(GtkAspectFrame*)this._cPtr);
+    _retval = cast(bool)gtk_aspect_frame_get_obey_child(cast(GtkAspectFrame*)this._cPtr);
     return _retval;
   }
 

@@ -357,7 +357,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   bool getNumeric()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_numeric(cast(GtkSpinButton*)this._cPtr);
+    _retval = cast(bool)gtk_spin_button_get_numeric(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   bool getSnapToTicks()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_snap_to_ticks(cast(GtkSpinButton*)this._cPtr);
+    _retval = cast(bool)gtk_spin_button_get_snap_to_ticks(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -430,7 +430,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   bool getWrap()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_wrap(cast(GtkSpinButton*)this._cPtr);
+    _retval = cast(bool)gtk_spin_button_get_wrap(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 

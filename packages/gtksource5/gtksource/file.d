@@ -180,7 +180,7 @@ class File : gobject.object.ObjectWrap
   bool isDeleted()
   {
     bool _retval;
-    _retval = gtk_source_file_is_deleted(cast(GtkSourceFile*)this._cPtr);
+    _retval = cast(bool)gtk_source_file_is_deleted(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class File : gobject.object.ObjectWrap
   bool isExternallyModified()
   {
     bool _retval;
-    _retval = gtk_source_file_is_externally_modified(cast(GtkSourceFile*)this._cPtr);
+    _retval = cast(bool)gtk_source_file_is_externally_modified(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class File : gobject.object.ObjectWrap
   bool isLocal()
   {
     bool _retval;
-    _retval = gtk_source_file_is_local(cast(GtkSourceFile*)this._cPtr);
+    _retval = cast(bool)gtk_source_file_is_local(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class File : gobject.object.ObjectWrap
   bool isReadonly()
   {
     bool _retval;
-    _retval = gtk_source_file_is_readonly(cast(GtkSourceFile*)this._cPtr);
+    _retval = cast(bool)gtk_source_file_is_readonly(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 

@@ -52,7 +52,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_output_stream_align(cast(GArrowOutputStream*)this._cPtr, alignment, &_err);
+    _retval = cast(bool)garrow_output_stream_align(cast(GArrowOutputStream*)this._cPtr, alignment, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -997,7 +997,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool getActivatesDefault()
   {
     bool _retval;
-    _retval = gtk_entry_get_activates_default(cast(GtkEntry*)this._cPtr);
+    _retval = cast(bool)gtk_entry_get_activates_default(cast(GtkEntry*)this._cPtr);
     return _retval;
   }
 
@@ -1089,7 +1089,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool getHasFrame()
   {
     bool _retval;
-    _retval = gtk_entry_get_has_frame(cast(GtkEntry*)this._cPtr);
+    _retval = cast(bool)gtk_entry_get_has_frame(cast(GtkEntry*)this._cPtr);
     return _retval;
   }
 
@@ -1103,7 +1103,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool getIconActivatable(gtk.types.EntryIconPosition iconPos)
   {
     bool _retval;
-    _retval = gtk_entry_get_icon_activatable(cast(GtkEntry*)this._cPtr, iconPos);
+    _retval = cast(bool)gtk_entry_get_icon_activatable(cast(GtkEntry*)this._cPtr, iconPos);
     return _retval;
   }
 
@@ -1214,7 +1214,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool getIconSensitive(gtk.types.EntryIconPosition iconPos)
   {
     bool _retval;
-    _retval = gtk_entry_get_icon_sensitive(cast(GtkEntry*)this._cPtr, iconPos);
+    _retval = cast(bool)gtk_entry_get_icon_sensitive(cast(GtkEntry*)this._cPtr, iconPos);
     return _retval;
   }
 
@@ -1327,7 +1327,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool getOverwriteMode()
   {
     bool _retval;
-    _retval = gtk_entry_get_overwrite_mode(cast(GtkEntry*)this._cPtr);
+    _retval = cast(bool)gtk_entry_get_overwrite_mode(cast(GtkEntry*)this._cPtr);
     return _retval;
   }
 
@@ -1411,7 +1411,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool getVisibility()
   {
     bool _retval;
-    _retval = gtk_entry_get_visibility(cast(GtkEntry*)this._cPtr);
+    _retval = cast(bool)gtk_entry_get_visibility(cast(GtkEntry*)this._cPtr);
     return _retval;
   }
 
@@ -1427,7 +1427,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool grabFocusWithoutSelecting()
   {
     bool _retval;
-    _retval = gtk_entry_grab_focus_without_selecting(cast(GtkEntry*)this._cPtr);
+    _retval = cast(bool)gtk_entry_grab_focus_without_selecting(cast(GtkEntry*)this._cPtr);
     return _retval;
   }
 

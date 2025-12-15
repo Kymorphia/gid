@@ -347,7 +347,7 @@ struct GAFlightServerClass
   /**
       A virtual function to implement `DoPut` API.
   */
-  extern(C) bool function(GAFlightServer* server, GAFlightServerCallContext* context, GAFlightMessageReader* reader, GAFlightMetadataWriter* writer, GError** _err) doPut;
+  extern(C) gboolean function(GAFlightServer* server, GAFlightServerCallContext* context, GAFlightMessageReader* reader, GAFlightMetadataWriter* writer, GError** _err) doPut;
 }
 
 /** */

@@ -295,7 +295,7 @@ class TlsConnection : gio.iostream.IOStream
   bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
   {
     bool _retval;
-    _retval = g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
+    _retval = cast(bool)g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
     return _retval;
   }
 
@@ -448,7 +448,7 @@ class TlsConnection : gio.iostream.IOStream
   bool getRequireCloseNotify()
   {
     bool _retval;
-    _retval = g_tls_connection_get_require_close_notify(cast(GTlsConnection*)this._cPtr);
+    _retval = cast(bool)g_tls_connection_get_require_close_notify(cast(GTlsConnection*)this._cPtr);
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class TlsConnection : gio.iostream.IOStream
   bool getUseSystemCertdb()
   {
     bool _retval;
-    _retval = g_tls_connection_get_use_system_certdb(cast(GTlsConnection*)this._cPtr);
+    _retval = cast(bool)g_tls_connection_get_use_system_certdb(cast(GTlsConnection*)this._cPtr);
     return _retval;
   }
 
@@ -508,7 +508,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_tls_connection_handshake(cast(GTlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_tls_connection_handshake(cast(GTlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -552,7 +552,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_tls_connection_handshake_finish(cast(GTlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_tls_connection_handshake_finish(cast(GTlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

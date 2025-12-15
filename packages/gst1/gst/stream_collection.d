@@ -101,7 +101,7 @@ class StreamCollection : gst.object.ObjectWrap
   bool addStream(gst.stream.Stream stream)
   {
     bool _retval;
-    _retval = gst_stream_collection_add_stream(cast(GstStreamCollection*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_stream_collection_add_stream(cast(GstStreamCollection*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(Yes.Dup) : null);
     return _retval;
   }
 

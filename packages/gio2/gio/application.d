@@ -409,7 +409,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     bool _retval;
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
-    _retval = g_application_id_is_valid(_applicationId);
+    _retval = cast(bool)g_application_id_is_valid(_applicationId);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   bool getIsBusy()
   {
     bool _retval;
-    _retval = g_application_get_is_busy(cast(GApplication*)this._cPtr);
+    _retval = cast(bool)g_application_get_is_busy(cast(GApplication*)this._cPtr);
     return _retval;
   }
 
@@ -692,7 +692,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   bool getIsRegistered()
   {
     bool _retval;
-    _retval = g_application_get_is_registered(cast(GApplication*)this._cPtr);
+    _retval = cast(bool)g_application_get_is_registered(cast(GApplication*)this._cPtr);
     return _retval;
   }
 
@@ -712,7 +712,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   bool getIsRemote()
   {
     bool _retval;
-    _retval = g_application_get_is_remote(cast(GApplication*)this._cPtr);
+    _retval = cast(bool)g_application_get_is_remote(cast(GApplication*)this._cPtr);
     return _retval;
   }
 
@@ -871,7 +871,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     bool _retval;
     GError *_err;
-    _retval = g_application_register(cast(GApplication*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_application_register(cast(GApplication*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

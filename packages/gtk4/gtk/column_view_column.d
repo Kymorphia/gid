@@ -294,7 +294,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   bool getExpand()
   {
     bool _retval;
-    _retval = gtk_column_view_column_get_expand(cast(GtkColumnViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_column_get_expand(cast(GtkColumnViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   bool getResizable()
   {
     bool _retval;
-    _retval = gtk_column_view_column_get_resizable(cast(GtkColumnViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_column_get_resizable(cast(GtkColumnViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_column_view_column_get_visible(cast(GtkColumnViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_column_view_column_get_visible(cast(GtkColumnViewColumn*)this._cPtr);
     return _retval;
   }
 

@@ -285,7 +285,7 @@ class ServerMessage : gobject.object.ObjectWrap
   bool isOptionsPing()
   {
     bool _retval;
-    _retval = soup_server_message_is_options_ping(cast(SoupServerMessage*)this._cPtr);
+    _retval = cast(bool)soup_server_message_is_options_ping(cast(SoupServerMessage*)this._cPtr);
     return _retval;
   }
 

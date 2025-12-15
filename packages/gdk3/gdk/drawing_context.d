@@ -100,7 +100,7 @@ class DrawingContext : gobject.object.ObjectWrap
   bool isValid()
   {
     bool _retval;
-    _retval = gdk_drawing_context_is_valid(cast(GdkDrawingContext*)this._cPtr);
+    _retval = cast(bool)gdk_drawing_context_is_valid(cast(GdkDrawingContext*)this._cPtr);
     return _retval;
   }
 }

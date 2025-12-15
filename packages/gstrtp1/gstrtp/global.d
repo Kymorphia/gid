@@ -128,7 +128,7 @@ bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime)
     _size = cast(uint)data.length;
 
   auto _data = cast(void*)data.ptr;
-  _retval = gst_rtp_hdrext_get_ntp_56(_data, _size, cast(ulong*)&ntptime);
+  _retval = cast(bool)gst_rtp_hdrext_get_ntp_56(_data, _size, cast(ulong*)&ntptime);
   return _retval;
 }
 
@@ -149,7 +149,7 @@ bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime)
     _size = cast(uint)data.length;
 
   auto _data = cast(void*)data.ptr;
-  _retval = gst_rtp_hdrext_get_ntp_64(_data, _size, cast(ulong*)&ntptime);
+  _retval = cast(bool)gst_rtp_hdrext_get_ntp_64(_data, _size, cast(ulong*)&ntptime);
   return _retval;
 }
 
@@ -166,7 +166,7 @@ bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime)
 bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime)
 {
   bool _retval;
-  _retval = gst_rtp_hdrext_set_ntp_56(data, size, ntptime);
+  _retval = cast(bool)gst_rtp_hdrext_set_ntp_56(data, size, ntptime);
   return _retval;
 }
 
@@ -183,7 +183,7 @@ bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime)
 bool rtpHdrextSetNtp64(void* data, uint size, ulong ntptime)
 {
   bool _retval;
-  _retval = gst_rtp_hdrext_set_ntp_64(data, size, ntptime);
+  _retval = cast(bool)gst_rtp_hdrext_set_ntp_64(data, size, ntptime);
   return _retval;
 }
 

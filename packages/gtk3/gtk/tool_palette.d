@@ -306,7 +306,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   bool getExclusive(gtk.tool_item_group.ToolItemGroup group)
   {
     bool _retval;
-    _retval = gtk_tool_palette_get_exclusive(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tool_palette_get_exclusive(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   bool getExpand(gtk.tool_item_group.ToolItemGroup group)
   {
     bool _retval;
-    _retval = gtk_tool_palette_get_expand(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tool_palette_get_expand(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
     return _retval;
   }
 

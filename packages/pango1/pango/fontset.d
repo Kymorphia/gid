@@ -56,11 +56,11 @@ class Fontset : gobject.object.ObjectWrap
   */
   void foreach_(pango.types.FontsetForeachFunc func)
   {
-    extern(C) bool _funcCallback(PangoFontset* fontset, PangoFont* font, void* userData)
+    extern(C) gboolean _funcCallback(PangoFontset* fontset, PangoFont* font, void* userData)
     {
       auto _dlg = cast(pango.types.FontsetForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

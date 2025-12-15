@@ -64,7 +64,7 @@ class BitWriter
   bool alignBytes(ubyte trailingBit)
   {
     bool _retval;
-    _retval = gst_bit_writer_align_bytes(cast(GstBitWriter*)this._cPtr, trailingBit);
+    _retval = cast(bool)gst_bit_writer_align_bytes(cast(GstBitWriter*)this._cPtr, trailingBit);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class BitWriter
   bool putBitsUint16(ushort value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint16(cast(GstBitWriter*)this._cPtr, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint16(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class BitWriter
   bool putBitsUint32(uint value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint32(cast(GstBitWriter*)this._cPtr, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint32(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class BitWriter
   bool putBitsUint64(ulong value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint64(cast(GstBitWriter*)this._cPtr, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint64(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class BitWriter
   bool putBitsUint8(ubyte value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint8(cast(GstBitWriter*)this._cPtr, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint8(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class BitWriter
       _nbytes = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_bit_writer_put_bytes(cast(GstBitWriter*)this._cPtr, _data, _nbytes);
+    _retval = cast(bool)gst_bit_writer_put_bytes(cast(GstBitWriter*)this._cPtr, _data, _nbytes);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class BitWriter
   bool setPos(uint pos)
   {
     bool _retval;
-    _retval = gst_bit_writer_set_pos(cast(GstBitWriter*)this._cPtr, pos);
+    _retval = cast(bool)gst_bit_writer_set_pos(cast(GstBitWriter*)this._cPtr, pos);
     return _retval;
   }
 }

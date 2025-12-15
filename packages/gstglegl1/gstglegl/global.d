@@ -21,6 +21,6 @@ string eglGetErrorString(int err)
 bool isGlMemoryEgl(gst.memory.Memory mem)
 {
   bool _retval;
-  _retval = gst_is_gl_memory_egl(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_gl_memory_egl(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
   return _retval;
 }

@@ -134,11 +134,11 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   */
   void addCustom(gtk.types.FileFilterFlags needed, gtk.types.FileFilterFunc func)
   {
-    extern(C) bool _funcCallback(const(GtkFileFilterInfo)* filterInfo, void* data)
+    extern(C) gboolean _funcCallback(const(GtkFileFilterInfo)* filterInfo, void* data)
     {
       auto _dlg = cast(gtk.types.FileFilterFunc*)data;
 
-      bool _retval = (*_dlg)(filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      gboolean _retval = (*_dlg)(filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -198,7 +198,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   bool filter(gtk.file_filter_info.FileFilterInfo filterInfo)
   {
     bool _retval;
-    _retval = gtk_file_filter_filter(cast(GtkFileFilter*)this._cPtr, filterInfo ? cast(const(GtkFileFilterInfo)*)filterInfo._cPtr : null);
+    _retval = cast(bool)gtk_file_filter_filter(cast(GtkFileFilter*)this._cPtr, filterInfo ? cast(const(GtkFileFilterInfo)*)filterInfo._cPtr : null);
     return _retval;
   }
 

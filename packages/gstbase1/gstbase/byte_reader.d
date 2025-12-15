@@ -100,7 +100,7 @@ class ByteReader
   {
     bool _retval;
     ushort* _str;
-    _retval = gst_byte_reader_dup_string_utf16(cast(GstByteReader*)this._cPtr, &_str);
+    _retval = cast(bool)gst_byte_reader_dup_string_utf16(cast(GstByteReader*)this._cPtr, &_str);
     uint _lenstr;
     if (_str)
     {
@@ -140,7 +140,7 @@ class ByteReader
   {
     bool _retval;
     uint* _str;
-    _retval = gst_byte_reader_dup_string_utf32(cast(GstByteReader*)this._cPtr, &_str);
+    _retval = cast(bool)gst_byte_reader_dup_string_utf32(cast(GstByteReader*)this._cPtr, &_str);
     uint _lenstr;
     if (_str)
     {
@@ -174,7 +174,7 @@ class ByteReader
   {
     bool _retval;
     char* _str;
-    _retval = gst_byte_reader_dup_string_utf8(cast(GstByteReader*)this._cPtr, &_str);
+    _retval = cast(bool)gst_byte_reader_dup_string_utf8(cast(GstByteReader*)this._cPtr, &_str);
     str = _str.fromCString(Yes.Free);
     return _retval;
   }
@@ -190,7 +190,7 @@ class ByteReader
   bool getFloat32Be(out float val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_float32_be(cast(GstByteReader*)this._cPtr, cast(float*)&val);
+    _retval = cast(bool)gst_byte_reader_get_float32_be(cast(GstByteReader*)this._cPtr, cast(float*)&val);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class ByteReader
   bool getFloat32Le(out float val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_float32_le(cast(GstByteReader*)this._cPtr, cast(float*)&val);
+    _retval = cast(bool)gst_byte_reader_get_float32_le(cast(GstByteReader*)this._cPtr, cast(float*)&val);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class ByteReader
   bool getFloat64Be(out double val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_float64_be(cast(GstByteReader*)this._cPtr, cast(double*)&val);
+    _retval = cast(bool)gst_byte_reader_get_float64_be(cast(GstByteReader*)this._cPtr, cast(double*)&val);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class ByteReader
   bool getFloat64Le(out double val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_float64_le(cast(GstByteReader*)this._cPtr, cast(double*)&val);
+    _retval = cast(bool)gst_byte_reader_get_float64_le(cast(GstByteReader*)this._cPtr, cast(double*)&val);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class ByteReader
   bool getInt16Be(out short val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int16_be(cast(GstByteReader*)this._cPtr, cast(short*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int16_be(cast(GstByteReader*)this._cPtr, cast(short*)&val);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class ByteReader
   bool getInt16Le(out short val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int16_le(cast(GstByteReader*)this._cPtr, cast(short*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int16_le(cast(GstByteReader*)this._cPtr, cast(short*)&val);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class ByteReader
   bool getInt24Be(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int24_be(cast(GstByteReader*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int24_be(cast(GstByteReader*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class ByteReader
   bool getInt24Le(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int24_le(cast(GstByteReader*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int24_le(cast(GstByteReader*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class ByteReader
   bool getInt32Be(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int32_be(cast(GstByteReader*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int32_be(cast(GstByteReader*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class ByteReader
   bool getInt32Le(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int32_le(cast(GstByteReader*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int32_le(cast(GstByteReader*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class ByteReader
   bool getInt64Be(out long val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int64_be(cast(GstByteReader*)this._cPtr, cast(long*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int64_be(cast(GstByteReader*)this._cPtr, cast(long*)&val);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class ByteReader
   bool getInt64Le(out long val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int64_le(cast(GstByteReader*)this._cPtr, cast(long*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int64_le(cast(GstByteReader*)this._cPtr, cast(long*)&val);
     return _retval;
   }
 
@@ -369,7 +369,7 @@ class ByteReader
   bool getInt8(out byte val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_int8(cast(GstByteReader*)this._cPtr, cast(byte*)&val);
+    _retval = cast(bool)gst_byte_reader_get_int8(cast(GstByteReader*)this._cPtr, cast(byte*)&val);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class ByteReader
   {
     bool _retval;
     char* _str;
-    _retval = gst_byte_reader_get_string_utf8(cast(GstByteReader*)this._cPtr, &_str);
+    _retval = cast(bool)gst_byte_reader_get_string_utf8(cast(GstByteReader*)this._cPtr, &_str);
     str = _str.fromCString(No.Free);
     return _retval;
   }
@@ -442,7 +442,7 @@ class ByteReader
   bool getUint16Be(out ushort val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint16_be(cast(GstByteReader*)this._cPtr, cast(ushort*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint16_be(cast(GstByteReader*)this._cPtr, cast(ushort*)&val);
     return _retval;
   }
 
@@ -457,7 +457,7 @@ class ByteReader
   bool getUint16Le(out ushort val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint16_le(cast(GstByteReader*)this._cPtr, cast(ushort*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint16_le(cast(GstByteReader*)this._cPtr, cast(ushort*)&val);
     return _retval;
   }
 
@@ -472,7 +472,7 @@ class ByteReader
   bool getUint24Be(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint24_be(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint24_be(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -487,7 +487,7 @@ class ByteReader
   bool getUint24Le(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint24_le(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint24_le(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ class ByteReader
   bool getUint32Be(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint32_be(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint32_be(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -517,7 +517,7 @@ class ByteReader
   bool getUint32Le(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint32_le(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint32_le(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -532,7 +532,7 @@ class ByteReader
   bool getUint64Be(out ulong val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint64_be(cast(GstByteReader*)this._cPtr, cast(ulong*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint64_be(cast(GstByteReader*)this._cPtr, cast(ulong*)&val);
     return _retval;
   }
 
@@ -547,7 +547,7 @@ class ByteReader
   bool getUint64Le(out ulong val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint64_le(cast(GstByteReader*)this._cPtr, cast(ulong*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint64_le(cast(GstByteReader*)this._cPtr, cast(ulong*)&val);
     return _retval;
   }
 
@@ -561,7 +561,7 @@ class ByteReader
   bool getUint8(out ubyte val)
   {
     bool _retval;
-    _retval = gst_byte_reader_get_uint8(cast(GstByteReader*)this._cPtr, cast(ubyte*)&val);
+    _retval = cast(bool)gst_byte_reader_get_uint8(cast(GstByteReader*)this._cPtr, cast(ubyte*)&val);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class ByteReader
   bool peekFloat32Be(out float val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_float32_be(cast(const(GstByteReader)*)this._cPtr, cast(float*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_float32_be(cast(const(GstByteReader)*)this._cPtr, cast(float*)&val);
     return _retval;
   }
 
@@ -684,7 +684,7 @@ class ByteReader
   bool peekFloat32Le(out float val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_float32_le(cast(const(GstByteReader)*)this._cPtr, cast(float*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_float32_le(cast(const(GstByteReader)*)this._cPtr, cast(float*)&val);
     return _retval;
   }
 
@@ -699,7 +699,7 @@ class ByteReader
   bool peekFloat64Be(out double val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_float64_be(cast(const(GstByteReader)*)this._cPtr, cast(double*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_float64_be(cast(const(GstByteReader)*)this._cPtr, cast(double*)&val);
     return _retval;
   }
 
@@ -714,7 +714,7 @@ class ByteReader
   bool peekFloat64Le(out double val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_float64_le(cast(const(GstByteReader)*)this._cPtr, cast(double*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_float64_le(cast(const(GstByteReader)*)this._cPtr, cast(double*)&val);
     return _retval;
   }
 
@@ -729,7 +729,7 @@ class ByteReader
   bool peekInt16Be(out short val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int16_be(cast(const(GstByteReader)*)this._cPtr, cast(short*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int16_be(cast(const(GstByteReader)*)this._cPtr, cast(short*)&val);
     return _retval;
   }
 
@@ -744,7 +744,7 @@ class ByteReader
   bool peekInt16Le(out short val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int16_le(cast(const(GstByteReader)*)this._cPtr, cast(short*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int16_le(cast(const(GstByteReader)*)this._cPtr, cast(short*)&val);
     return _retval;
   }
 
@@ -759,7 +759,7 @@ class ByteReader
   bool peekInt24Be(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int24_be(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int24_be(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -774,7 +774,7 @@ class ByteReader
   bool peekInt24Le(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int24_le(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int24_le(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -789,7 +789,7 @@ class ByteReader
   bool peekInt32Be(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int32_be(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int32_be(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -804,7 +804,7 @@ class ByteReader
   bool peekInt32Le(out int val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int32_le(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int32_le(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
     return _retval;
   }
 
@@ -819,7 +819,7 @@ class ByteReader
   bool peekInt64Be(out long val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int64_be(cast(const(GstByteReader)*)this._cPtr, cast(long*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int64_be(cast(const(GstByteReader)*)this._cPtr, cast(long*)&val);
     return _retval;
   }
 
@@ -834,7 +834,7 @@ class ByteReader
   bool peekInt64Le(out long val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int64_le(cast(const(GstByteReader)*)this._cPtr, cast(long*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int64_le(cast(const(GstByteReader)*)this._cPtr, cast(long*)&val);
     return _retval;
   }
 
@@ -848,7 +848,7 @@ class ByteReader
   bool peekInt8(out byte val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_int8(cast(const(GstByteReader)*)this._cPtr, cast(byte*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_int8(cast(const(GstByteReader)*)this._cPtr, cast(byte*)&val);
     return _retval;
   }
 
@@ -872,7 +872,7 @@ class ByteReader
   {
     bool _retval;
     char* _str;
-    _retval = gst_byte_reader_peek_string_utf8(cast(const(GstByteReader)*)this._cPtr, &_str);
+    _retval = cast(bool)gst_byte_reader_peek_string_utf8(cast(const(GstByteReader)*)this._cPtr, &_str);
     str = _str.fromCString(No.Free);
     return _retval;
   }
@@ -888,7 +888,7 @@ class ByteReader
   bool peekUint16Be(out ushort val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint16_be(cast(const(GstByteReader)*)this._cPtr, cast(ushort*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint16_be(cast(const(GstByteReader)*)this._cPtr, cast(ushort*)&val);
     return _retval;
   }
 
@@ -903,7 +903,7 @@ class ByteReader
   bool peekUint16Le(out ushort val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint16_le(cast(const(GstByteReader)*)this._cPtr, cast(ushort*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint16_le(cast(const(GstByteReader)*)this._cPtr, cast(ushort*)&val);
     return _retval;
   }
 
@@ -918,7 +918,7 @@ class ByteReader
   bool peekUint24Be(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint24_be(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint24_be(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -933,7 +933,7 @@ class ByteReader
   bool peekUint24Le(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint24_le(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint24_le(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -948,7 +948,7 @@ class ByteReader
   bool peekUint32Be(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint32_be(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint32_be(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -963,7 +963,7 @@ class ByteReader
   bool peekUint32Le(out uint val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint32_le(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint32_le(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
     return _retval;
   }
 
@@ -978,7 +978,7 @@ class ByteReader
   bool peekUint64Be(out ulong val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint64_be(cast(const(GstByteReader)*)this._cPtr, cast(ulong*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint64_be(cast(const(GstByteReader)*)this._cPtr, cast(ulong*)&val);
     return _retval;
   }
 
@@ -993,7 +993,7 @@ class ByteReader
   bool peekUint64Le(out ulong val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint64_le(cast(const(GstByteReader)*)this._cPtr, cast(ulong*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint64_le(cast(const(GstByteReader)*)this._cPtr, cast(ulong*)&val);
     return _retval;
   }
 
@@ -1007,7 +1007,7 @@ class ByteReader
   bool peekUint8(out ubyte val)
   {
     bool _retval;
-    _retval = gst_byte_reader_peek_uint8(cast(const(GstByteReader)*)this._cPtr, cast(ubyte*)&val);
+    _retval = cast(bool)gst_byte_reader_peek_uint8(cast(const(GstByteReader)*)this._cPtr, cast(ubyte*)&val);
     return _retval;
   }
 
@@ -1022,7 +1022,7 @@ class ByteReader
   bool setPos(uint pos)
   {
     bool _retval;
-    _retval = gst_byte_reader_set_pos(cast(GstByteReader*)this._cPtr, pos);
+    _retval = cast(bool)gst_byte_reader_set_pos(cast(GstByteReader*)this._cPtr, pos);
     return _retval;
   }
 
@@ -1036,7 +1036,7 @@ class ByteReader
   bool skip(uint nbytes)
   {
     bool _retval;
-    _retval = gst_byte_reader_skip(cast(GstByteReader*)this._cPtr, nbytes);
+    _retval = cast(bool)gst_byte_reader_skip(cast(GstByteReader*)this._cPtr, nbytes);
     return _retval;
   }
 
@@ -1052,7 +1052,7 @@ class ByteReader
   bool skipStringUtf16()
   {
     bool _retval;
-    _retval = gst_byte_reader_skip_string_utf16(cast(GstByteReader*)this._cPtr);
+    _retval = cast(bool)gst_byte_reader_skip_string_utf16(cast(GstByteReader*)this._cPtr);
     return _retval;
   }
 
@@ -1068,7 +1068,7 @@ class ByteReader
   bool skipStringUtf32()
   {
     bool _retval;
-    _retval = gst_byte_reader_skip_string_utf32(cast(GstByteReader*)this._cPtr);
+    _retval = cast(bool)gst_byte_reader_skip_string_utf32(cast(GstByteReader*)this._cPtr);
     return _retval;
   }
 
@@ -1084,7 +1084,7 @@ class ByteReader
   bool skipStringUtf8()
   {
     bool _retval;
-    _retval = gst_byte_reader_skip_string_utf8(cast(GstByteReader*)this._cPtr);
+    _retval = cast(bool)gst_byte_reader_skip_string_utf8(cast(GstByteReader*)this._cPtr);
     return _retval;
   }
 }

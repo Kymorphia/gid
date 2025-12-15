@@ -261,7 +261,7 @@ class FontSelection : gtk.box.Box
   {
     bool _retval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
-    _retval = gtk_font_selection_set_font_name(cast(GtkFontSelection*)this._cPtr, _fontname);
+    _retval = cast(bool)gtk_font_selection_set_font_name(cast(GtkFontSelection*)this._cPtr, _fontname);
     return _retval;
   }
 

@@ -140,7 +140,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   {
     bool _retval;
     GdkRGBA _background;
-    _retval = gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)this._cPtr, &_background);
+    _retval = cast(bool)gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)this._cPtr, &_background);
     background = new gdk.rgba.RGBA(cast(void*)&_background, No.Take);
     return _retval;
   }

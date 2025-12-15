@@ -4143,17 +4143,17 @@ struct GstBin
   /**
       the bin is currently calculating its state
   */
-  bool polling;
+  gboolean polling;
 
   /**
       the bin needs to recalculate its state (deprecated)
   */
-  bool stateDirty;
+  gboolean stateDirty;
 
   /**
       the bin needs to select a new clock
   */
-  bool clockDirty;
+  gboolean clockDirty;
 
   /**
       the last clock selected
@@ -4202,16 +4202,16 @@ struct GstBinClass
   extern(C) void function(GstBin* bin, GstElement* child) elementRemoved;
 
   /** */
-  extern(C) bool function(GstBin* bin, GstElement* element) addElement;
+  extern(C) gboolean function(GstBin* bin, GstElement* element) addElement;
 
   /** */
-  extern(C) bool function(GstBin* bin, GstElement* element) removeElement;
+  extern(C) gboolean function(GstBin* bin, GstElement* element) removeElement;
 
   /** */
   extern(C) void function(GstBin* bin, GstMessage* message) handleMessage;
 
   /** */
-  extern(C) bool function(GstBin* bin) doLatency;
+  extern(C) gboolean function(GstBin* bin) doLatency;
 
   /** */
   extern(C) void function(GstBin* bin, GstBin* subBin, GstElement* child) deepElementAdded;
@@ -4485,13 +4485,13 @@ struct GstBufferPoolClass
   extern(C) const(char*)* function(GstBufferPool* pool) getOptions;
 
   /** */
-  extern(C) bool function(GstBufferPool* pool, GstStructure* config) setConfig;
+  extern(C) gboolean function(GstBufferPool* pool, GstStructure* config) setConfig;
 
   /** */
-  extern(C) bool function(GstBufferPool* pool) start;
+  extern(C) gboolean function(GstBufferPool* pool) start;
 
   /** */
-  extern(C) bool function(GstBufferPool* pool) stop;
+  extern(C) gboolean function(GstBufferPool* pool) stop;
 
   /** */
   extern(C) GstFlowReturn function(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) acquireBuffer;
@@ -4623,7 +4623,7 @@ struct GstByteArrayInterface
   /**
       Reallocate @data.
   */
-  extern(C) bool function(GstByteArrayInterface* self, size_t length) resize;
+  extern(C) gboolean function(GstByteArrayInterface* self, size_t length) resize;
 
   /** */
   void*[4] GstReserved;
@@ -4911,10 +4911,10 @@ struct GstClockEntry
   GDestroyNotify destroyData;
 
   /** */
-  bool unscheduled;
+  gboolean unscheduled;
 
   /** */
-  bool wokenUp;
+  gboolean wokenUp;
 
   /** */
   void*[4] GstReserved;
@@ -4983,7 +4983,7 @@ struct GstControlBinding
   GstObject* object;
 
   /** */
-  bool disabled;
+  gboolean disabled;
 
   /** */
   /** */
@@ -5017,16 +5017,16 @@ struct GstControlBindingClass
   GstObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) syncValues;
+  extern(C) gboolean function(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) syncValues;
 
   /** */
   extern(C) GValue* function(GstControlBinding* binding, GstClockTime timestamp) getValue;
 
   /** */
-  extern(C) bool function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) getValueArray;
+  extern(C) gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) getValueArray;
 
   /** */
-  extern(C) bool function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) getGValueArray;
+  extern(C) gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) getGValueArray;
 
   /** */
   void*[4] GstReserved;
@@ -5183,7 +5183,7 @@ struct GstDeviceClass
        element can be reconfigured to use a different device. See the documentation
        for [gst.device.Device.reconfigureElement].
   */
-  extern(C) bool function(GstDevice* device, GstElement* element) reconfigureElement;
+  extern(C) gboolean function(GstDevice* device, GstElement* element) reconfigureElement;
 
   /** */
   void*[4] GstReserved;
@@ -5343,7 +5343,7 @@ struct GstDeviceProviderClass
       Starts monitoring for new devices. Only subclasses that can know
        that devices have been added or remove need to implement this method.
   */
-  extern(C) bool function(GstDeviceProvider* provider) start;
+  extern(C) gboolean function(GstDeviceProvider* provider) start;
 
   /**
       Stops monitoring for new devices. Only subclasses that implement
@@ -5664,23 +5664,23 @@ struct GstElementClass
   /**
       set the #GstClock on the element
   */
-  extern(C) bool function(GstElement* element, GstClock* clock) setClock;
+  extern(C) gboolean function(GstElement* element, GstClock* clock) setClock;
 
   /**
       send a #GstEvent to the element
   */
-  extern(C) bool function(GstElement* element, GstEvent* event) sendEvent;
+  extern(C) gboolean function(GstElement* element, GstEvent* event) sendEvent;
 
   /**
       perform a #GstQuery on the element
   */
-  extern(C) bool function(GstElement* element, GstQuery* query) query;
+  extern(C) gboolean function(GstElement* element, GstQuery* query) query;
 
   /**
       called when a message is posted on the element. Chain up to
                      the parent class' handler to have it posted on the bus.
   */
-  extern(C) bool function(GstElement* element, GstMessage* message) postMessage;
+  extern(C) gboolean function(GstElement* element, GstMessage* message) postMessage;
 
   /**
       set a #GstContext on the element
@@ -6251,7 +6251,7 @@ struct GstMetaTransformCopy
   /**
       true if only region is copied
   */
-  bool region;
+  gboolean region;
 
   /**
       the offset to copy, 0 if @region is false, otherwise > 0
@@ -7260,32 +7260,32 @@ struct GstPresetInterface
   /**
       virtual methods to load a preset into properties
   */
-  extern(C) bool function(GstPreset* preset, const(char)* name) loadPreset;
+  extern(C) gboolean function(GstPreset* preset, const(char)* name) loadPreset;
 
   /**
       virtual methods to save properties into a preset
   */
-  extern(C) bool function(GstPreset* preset, const(char)* name) savePreset;
+  extern(C) gboolean function(GstPreset* preset, const(char)* name) savePreset;
 
   /**
       virtual methods to rename a preset
   */
-  extern(C) bool function(GstPreset* preset, const(char)* oldName, const(char)* newName) renamePreset;
+  extern(C) gboolean function(GstPreset* preset, const(char)* oldName, const(char)* newName) renamePreset;
 
   /**
       virtual methods to remove a preset
   */
-  extern(C) bool function(GstPreset* preset, const(char)* name) deletePreset;
+  extern(C) gboolean function(GstPreset* preset, const(char)* name) deletePreset;
 
   /**
       virtual methods to set textual meta data to a preset
   */
-  extern(C) bool function(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) setMeta;
+  extern(C) gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) setMeta;
 
   /**
       virtual methods to get textual meta data from a preset
   */
-  extern(C) bool function(GstPreset* preset, const(char)* name, const(char)* tag, char** value) getMeta;
+  extern(C) gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, char** value) getMeta;
 
   /** */
   void*[4] GstReserved;
@@ -8210,7 +8210,7 @@ struct GstTask
   /**
       a flag indicating that the task is running
   */
-  bool running;
+  gboolean running;
 
   /** */
   GThread* thread;
@@ -8565,7 +8565,7 @@ struct GstURIHandlerInterface
   /**
       Method to set a new URI.
   */
-  extern(C) bool function(GstURIHandler* handler, const(char)* uri, GError** _err) setUri;
+  extern(C) gboolean function(GstURIHandler* handler, const(char)* uri, GError** _err) setUri;
 }
 
 /**
@@ -8619,39 +8619,39 @@ struct GstValueTable
   void*[3] GstReserved;
 }
 
-alias extern(C) bool function(GstBuffer* buffer, GstMeta** meta, void* userData) GstBufferForeachMetaFunc;
+alias extern(C) gboolean function(GstBuffer* buffer, GstMeta** meta, void* userData) GstBufferForeachMetaFunc;
 
-alias extern(C) bool function(GstBuffer** buffer, uint idx, void* userData) GstBufferListFunc;
+alias extern(C) gboolean function(GstBuffer** buffer, uint idx, void* userData) GstBufferListFunc;
 
-alias extern(C) bool function(GstBus* bus, GstMessage* message, void* userData) GstBusFunc;
+alias extern(C) gboolean function(GstBus* bus, GstMessage* message, void* userData) GstBusFunc;
 
 alias extern(C) GstBusSyncReply function(GstBus* bus, GstMessage* message, void* userData) GstBusSyncHandler;
 
-alias extern(C) bool function(GstCapsFeatures* features, GstStructure* structure, void* userData) GstCapsFilterMapFunc;
+alias extern(C) gboolean function(GstCapsFeatures* features, GstStructure* structure, void* userData) GstCapsFilterMapFunc;
 
-alias extern(C) bool function(GstCapsFeatures* features, GstStructure* structure, void* userData) GstCapsForeachFunc;
+alias extern(C) gboolean function(GstCapsFeatures* features, GstStructure* structure, void* userData) GstCapsForeachFunc;
 
-alias extern(C) bool function(GstCapsFeatures* features, GstStructure* structure, void* userData) GstCapsMapFunc;
+alias extern(C) gboolean function(GstCapsFeatures* features, GstStructure* structure, void* userData) GstCapsMapFunc;
 
-alias extern(C) bool function(GstClock* clock, GstClockTime time, GstClockID id, void* userData) GstClockCallback;
+alias extern(C) gboolean function(GstClock* clock, GstClockTime time, GstClockID id, void* userData) GstClockCallback;
 
 alias extern(C) void function(GstControlBinding* binding, double srcValue, GValue* destValue) GstControlBindingConvert;
 
-alias extern(C) bool function(GstControlSource* self, GstClockTime timestamp, double* value) GstControlSourceGetValue;
+alias extern(C) gboolean function(GstControlSource* self, GstClockTime timestamp, double* value) GstControlSourceGetValue;
 
-alias extern(C) bool function(GstControlSource* self, GstClockTime timestamp, GstClockTime interval, uint nValues, double* values) GstControlSourceGetValueArray;
+alias extern(C) gboolean function(GstControlSource* self, GstClockTime timestamp, GstClockTime interval, uint nValues, double* values) GstControlSourceGetValueArray;
 
-alias extern(C) bool function(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData) GstCustomMetaTransformFunction;
+alias extern(C) gboolean function(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData) GstCustomMetaTransformFunction;
 
 alias extern(C) void function() GstDebugFuncPtr;
 
 alias extern(C) void function(GstElement* element, void* userData) GstElementCallAsyncFunc;
 
-alias extern(C) bool function(GstElement* element, GstPad* pad, void* userData) GstElementForeachPadFunc;
+alias extern(C) gboolean function(GstElement* element, GstPad* pad, void* userData) GstElementForeachPadFunc;
 
 alias extern(C) void function(const(GstIterator)* it, GstIterator* copy) GstIteratorCopyFunction;
 
-alias extern(C) bool function(const(GValue)* item, GValue* ret, void* userData) GstIteratorFoldFunction;
+alias extern(C) gboolean function(const(GValue)* item, GValue* ret, void* userData) GstIteratorFoldFunction;
 
 alias extern(C) void function(const(GValue)* item, void* userData) GstIteratorForeachFunction;
 
@@ -8667,7 +8667,7 @@ alias extern(C) void function(GstDebugCategory* category, GstDebugLevel level, c
 
 alias extern(C) GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) GstMemoryCopyFunction;
 
-alias extern(C) bool function(GstMemory* mem1, GstMemory* mem2, size_t* offset) GstMemoryIsSpanFunction;
+alias extern(C) gboolean function(GstMemory* mem1, GstMemory* mem2, size_t* offset) GstMemoryIsSpanFunction;
 
 alias extern(C) void* function(GstMemory* mem, GstMapInfo* info, size_t maxsize) GstMemoryMapFullFunction;
 
@@ -8685,23 +8685,23 @@ alias extern(C) GstMeta* function(const(GstMetaInfo)* info, GstBuffer* buffer, c
 
 alias extern(C) void function(GstMeta* meta, GstBuffer* buffer) GstMetaFreeFunction;
 
-alias extern(C) bool function(GstMeta* meta, void* params, GstBuffer* buffer) GstMetaInitFunction;
+alias extern(C) gboolean function(GstMeta* meta, void* params, GstBuffer* buffer) GstMetaInitFunction;
 
-alias extern(C) bool function(const(GstMeta)* meta, GstByteArrayInterface* data, ubyte* version_) GstMetaSerializeFunction;
+alias extern(C) gboolean function(const(GstMeta)* meta, GstByteArrayInterface* data, ubyte* version_) GstMetaSerializeFunction;
 
-alias extern(C) bool function(GstBuffer* transbuf, GstMeta* meta, GstBuffer* buffer, GQuark type, void* data) GstMetaTransformFunction;
+alias extern(C) gboolean function(GstBuffer* transbuf, GstMeta* meta, GstBuffer* buffer, GQuark type, void* data) GstMetaTransformFunction;
 
 alias extern(C) GstMiniObject* function(const(GstMiniObject)* obj) GstMiniObjectCopyFunction;
 
-alias extern(C) bool function(GstMiniObject* obj) GstMiniObjectDisposeFunction;
+alias extern(C) gboolean function(GstMiniObject* obj) GstMiniObjectDisposeFunction;
 
 alias extern(C) void function(GstMiniObject* obj) GstMiniObjectFreeFunction;
 
 alias extern(C) void function(void* userData, GstMiniObject* obj) GstMiniObjectNotify;
 
-alias extern(C) bool function(GstPad* pad, GstObject* parent) GstPadActivateFunction;
+alias extern(C) gboolean function(GstPad* pad, GstObject* parent) GstPadActivateFunction;
 
-alias extern(C) bool function(GstPad* pad, GstObject* parent, GstPadMode mode, bool active) GstPadActivateModeFunction;
+alias extern(C) gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) GstPadActivateModeFunction;
 
 alias extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, GstBuffer* buffer) GstPadChainFunction;
 
@@ -8709,9 +8709,9 @@ alias extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, GstBuffer
 
 alias extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, GstEvent* event) GstPadEventFullFunction;
 
-alias extern(C) bool function(GstPad* pad, GstObject* parent, GstEvent* event) GstPadEventFunction;
+alias extern(C) gboolean function(GstPad* pad, GstObject* parent, GstEvent* event) GstPadEventFunction;
 
-alias extern(C) bool function(GstPad* pad, void* userData) GstPadForwardFunction;
+alias extern(C) gboolean function(GstPad* pad, void* userData) GstPadForwardFunction;
 
 alias extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) GstPadGetRangeFunction;
 
@@ -8721,27 +8721,27 @@ alias extern(C) GstPadLinkReturn function(GstPad* pad, GstObject* parent, GstPad
 
 alias extern(C) GstPadProbeReturn function(GstPad* pad, GstPadProbeInfo* info, void* userData) GstPadProbeCallback;
 
-alias extern(C) bool function(GstPad* pad, GstObject* parent, GstQuery* query) GstPadQueryFunction;
+alias extern(C) gboolean function(GstPad* pad, GstObject* parent, GstQuery* query) GstPadQueryFunction;
 
-alias extern(C) bool function(GstPad* pad, GstEvent** event, void* userData) GstPadStickyEventsForeachFunction;
+alias extern(C) gboolean function(GstPad* pad, GstEvent** event, void* userData) GstPadStickyEventsForeachFunction;
 
 alias extern(C) void function(GstPad* pad, GstObject* parent) GstPadUnlinkFunction;
 
-alias extern(C) bool function(GstPluginFeature* feature, void* userData) GstPluginFeatureFilter;
+alias extern(C) gboolean function(GstPluginFeature* feature, void* userData) GstPluginFeatureFilter;
 
-alias extern(C) bool function(GstPlugin* plugin, void* userData) GstPluginFilter;
+alias extern(C) gboolean function(GstPlugin* plugin, void* userData) GstPluginFilter;
 
-alias extern(C) bool function(GstPlugin* plugin, void* userData) GstPluginInitFullFunc;
+alias extern(C) gboolean function(GstPlugin* plugin, void* userData) GstPluginInitFullFunc;
 
-alias extern(C) bool function(GstPlugin* plugin) GstPluginInitFunc;
+alias extern(C) gboolean function(GstPlugin* plugin) GstPluginInitFunc;
 
 alias extern(C) void function(GstPromise* promise, void* userData) GstPromiseChangeFunc;
 
-alias extern(C) bool function(GQuark fieldId, GValue* value, void* userData) GstStructureFilterMapFunc;
+alias extern(C) gboolean function(GQuark fieldId, GValue* value, void* userData) GstStructureFilterMapFunc;
 
-alias extern(C) bool function(GQuark fieldId, const(GValue)* value, void* userData) GstStructureForeachFunc;
+alias extern(C) gboolean function(GQuark fieldId, const(GValue)* value, void* userData) GstStructureForeachFunc;
 
-alias extern(C) bool function(GQuark fieldId, GValue* value, void* userData) GstStructureMapFunc;
+alias extern(C) gboolean function(GQuark fieldId, GValue* value, void* userData) GstStructureMapFunc;
 
 alias extern(C) void function(const(GstTagList)* list, const(char)* tag, void* userData) GstTagForeachFunc;
 
@@ -8757,9 +8757,9 @@ alias extern(C) void function(GstTypeFind* find, void* userData) GstTypeFindFunc
 
 alias extern(C) int function(const(GValue)* value1, const(GValue)* value2) GstValueCompareFunc;
 
-alias extern(C) bool function(GValue* dest, const(char)* s) GstValueDeserializeFunc;
+alias extern(C) gboolean function(GValue* dest, const(char)* s) GstValueDeserializeFunc;
 
-alias extern(C) bool function(GValue* dest, const(char)* s, GParamSpec* pspec) GstValueDeserializeWithPSpecFunc;
+alias extern(C) gboolean function(GValue* dest, const(char)* s, GParamSpec* pspec) GstValueDeserializeWithPSpecFunc;
 
 alias extern(C) char* function(const(GValue)* value1) GstValueSerializeFunc;
 

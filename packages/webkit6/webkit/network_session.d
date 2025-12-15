@@ -179,7 +179,7 @@ class NetworkSession : gobject.object.ObjectWrap
   bool getItpEnabled()
   {
     bool _retval;
-    _retval = webkit_network_session_get_itp_enabled(cast(WebKitNetworkSession*)this._cPtr);
+    _retval = cast(bool)webkit_network_session_get_itp_enabled(cast(WebKitNetworkSession*)this._cPtr);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class NetworkSession : gobject.object.ObjectWrap
   bool getPersistentCredentialStorageEnabled()
   {
     bool _retval;
-    _retval = webkit_network_session_get_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr);
+    _retval = cast(bool)webkit_network_session_get_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class NetworkSession : gobject.object.ObjectWrap
   bool isEphemeral()
   {
     bool _retval;
-    _retval = webkit_network_session_is_ephemeral(cast(WebKitNetworkSession*)this._cPtr);
+    _retval = cast(bool)webkit_network_session_is_ephemeral(cast(WebKitNetworkSession*)this._cPtr);
     return _retval;
   }
 

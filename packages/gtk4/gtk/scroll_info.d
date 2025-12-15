@@ -66,7 +66,7 @@ class ScrollInfo : gobject.boxed.Boxed
   bool getEnableHorizontal()
   {
     bool _retval;
-    _retval = gtk_scroll_info_get_enable_horizontal(cast(GtkScrollInfo*)this._cPtr);
+    _retval = cast(bool)gtk_scroll_info_get_enable_horizontal(cast(GtkScrollInfo*)this._cPtr);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class ScrollInfo : gobject.boxed.Boxed
   bool getEnableVertical()
   {
     bool _retval;
-    _retval = gtk_scroll_info_get_enable_vertical(cast(GtkScrollInfo*)this._cPtr);
+    _retval = cast(bool)gtk_scroll_info_get_enable_vertical(cast(GtkScrollInfo*)this._cPtr);
     return _retval;
   }
 

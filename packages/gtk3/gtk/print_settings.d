@@ -193,7 +193,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_get_bool(cast(GtkPrintSettings*)this._cPtr, _key);
+    _retval = cast(bool)gtk_print_settings_get_bool(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool getCollate()
   {
     bool _retval;
-    _retval = gtk_print_settings_get_collate(cast(GtkPrintSettings*)this._cPtr);
+    _retval = cast(bool)gtk_print_settings_get_collate(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -579,7 +579,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool getReverse()
   {
     bool _retval;
-    _retval = gtk_print_settings_get_reverse(cast(GtkPrintSettings*)this._cPtr);
+    _retval = cast(bool)gtk_print_settings_get_reverse(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -601,7 +601,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool getUseColor()
   {
     bool _retval;
-    _retval = gtk_print_settings_get_use_color(cast(GtkPrintSettings*)this._cPtr);
+    _retval = cast(bool)gtk_print_settings_get_use_color(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_has_key(cast(GtkPrintSettings*)this._cPtr, _key);
+    _retval = cast(bool)gtk_print_settings_has_key(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -635,7 +635,7 @@ class PrintSettings : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_settings_load_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
+    _retval = cast(bool)gtk_print_settings_load_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -658,7 +658,7 @@ class PrintSettings : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_settings_load_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
+    _retval = cast(bool)gtk_print_settings_load_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1044,7 +1044,7 @@ class PrintSettings : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_settings_to_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
+    _retval = cast(bool)gtk_print_settings_to_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

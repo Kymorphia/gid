@@ -539,7 +539,7 @@ class Handle : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = rsvg_handle_close(cast(RsvgHandle*)this._cPtr, &_err);
+    _retval = cast(bool)rsvg_handle_close(cast(RsvgHandle*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -609,7 +609,7 @@ class Handle : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
-    _retval = rsvg_handle_get_dimensions_sub(cast(RsvgHandle*)this._cPtr, &dimensionData, _id);
+    _retval = cast(bool)rsvg_handle_get_dimensions_sub(cast(RsvgHandle*)this._cPtr, &dimensionData, _id);
     return _retval;
   }
 
@@ -664,7 +664,7 @@ class Handle : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
-    _retval = rsvg_handle_get_geometry_for_element(cast(RsvgHandle*)this._cPtr, _id, &outInkRect, &outLogicalRect, &_err);
+    _retval = cast(bool)rsvg_handle_get_geometry_for_element(cast(RsvgHandle*)this._cPtr, _id, &outInkRect, &outLogicalRect, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -716,7 +716,7 @@ class Handle : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
-    _retval = rsvg_handle_get_geometry_for_layer(cast(RsvgHandle*)this._cPtr, _id, &viewport, &outInkRect, &outLogicalRect, &_err);
+    _retval = cast(bool)rsvg_handle_get_geometry_for_layer(cast(RsvgHandle*)this._cPtr, _id, &viewport, &outInkRect, &outLogicalRect, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -779,7 +779,13 @@ class Handle : gobject.object.ObjectWrap
   */
   void getIntrinsicDimensions(out bool outHasWidth, out rsvg.types.Length outWidth, out bool outHasHeight, out rsvg.types.Length outHeight, out bool outHasViewbox, out rsvg.types.Rectangle outViewbox)
   {
-    rsvg_handle_get_intrinsic_dimensions(cast(RsvgHandle*)this._cPtr, cast(bool*)&outHasWidth, &outWidth, cast(bool*)&outHasHeight, &outHeight, cast(bool*)&outHasViewbox, &outViewbox);
+    gboolean _outHasWidth;
+    gboolean _outHasHeight;
+    gboolean _outHasViewbox;
+    rsvg_handle_get_intrinsic_dimensions(cast(RsvgHandle*)this._cPtr, &_outHasWidth, &outWidth, &_outHasHeight, &outHeight, &_outHasViewbox, &outViewbox);
+    outHasWidth = cast(bool)_outHasWidth;
+    outHasHeight = cast(bool)_outHasHeight;
+    outHasViewbox = cast(bool)_outHasViewbox;
   }
 
   /**
@@ -843,7 +849,7 @@ class Handle : gobject.object.ObjectWrap
   bool getIntrinsicSizeInPixels(out double outWidth, out double outHeight)
   {
     bool _retval;
-    _retval = rsvg_handle_get_intrinsic_size_in_pixels(cast(RsvgHandle*)this._cPtr, cast(double*)&outWidth, cast(double*)&outHeight);
+    _retval = cast(bool)rsvg_handle_get_intrinsic_size_in_pixels(cast(RsvgHandle*)this._cPtr, cast(double*)&outWidth, cast(double*)&outHeight);
     return _retval;
   }
 
@@ -939,7 +945,7 @@ class Handle : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
-    _retval = rsvg_handle_get_position_sub(cast(RsvgHandle*)this._cPtr, &positionData, _id);
+    _retval = cast(bool)rsvg_handle_get_position_sub(cast(RsvgHandle*)this._cPtr, &positionData, _id);
     return _retval;
   }
 
@@ -969,7 +975,7 @@ class Handle : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
-    _retval = rsvg_handle_has_sub(cast(RsvgHandle*)this._cPtr, _id);
+    _retval = cast(bool)rsvg_handle_has_sub(cast(RsvgHandle*)this._cPtr, _id);
     return _retval;
   }
 
@@ -1010,7 +1016,7 @@ class Handle : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = rsvg_handle_read_stream_sync(cast(RsvgHandle*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)rsvg_handle_read_stream_sync(cast(RsvgHandle*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1070,7 +1076,7 @@ class Handle : gobject.object.ObjectWrap
   bool renderCairo(cairo.context.Context cr)
   {
     bool _retval;
-    _retval = rsvg_handle_render_cairo(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
+    _retval = cast(bool)rsvg_handle_render_cairo(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1140,7 +1146,7 @@ class Handle : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
-    _retval = rsvg_handle_render_cairo_sub(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id);
+    _retval = cast(bool)rsvg_handle_render_cairo_sub(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id);
     return _retval;
   }
 
@@ -1169,7 +1175,7 @@ class Handle : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = rsvg_handle_render_document(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, &viewport, &_err);
+    _retval = cast(bool)rsvg_handle_render_document(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, &viewport, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1214,7 +1220,7 @@ class Handle : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
-    _retval = rsvg_handle_render_element(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &elementViewport, &_err);
+    _retval = cast(bool)rsvg_handle_render_element(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &elementViewport, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1262,7 +1268,7 @@ class Handle : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
-    _retval = rsvg_handle_render_layer(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &viewport, &_err);
+    _retval = cast(bool)rsvg_handle_render_layer(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &viewport, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1399,7 +1405,7 @@ class Handle : gobject.object.ObjectWrap
 
     auto _css = cast(const(ubyte)*)css.ptr;
     GError *_err;
-    _retval = rsvg_handle_set_stylesheet(cast(RsvgHandle*)this._cPtr, _css, _cssLen, &_err);
+    _retval = cast(bool)rsvg_handle_set_stylesheet(cast(RsvgHandle*)this._cPtr, _css, _cssLen, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1437,7 +1443,7 @@ class Handle : gobject.object.ObjectWrap
 
     auto _buf = cast(const(ubyte)*)buf.ptr;
     GError *_err;
-    _retval = rsvg_handle_write(cast(RsvgHandle*)this._cPtr, _buf, _count, &_err);
+    _retval = cast(bool)rsvg_handle_write(cast(RsvgHandle*)this._cPtr, _buf, _count, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

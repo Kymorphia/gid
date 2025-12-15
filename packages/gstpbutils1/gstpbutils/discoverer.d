@@ -160,7 +160,7 @@ class Discoverer : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gst_discoverer_discover_uri_async(cast(GstDiscoverer*)this._cPtr, _uri);
+    _retval = cast(bool)gst_discoverer_discover_uri_async(cast(GstDiscoverer*)this._cPtr, _uri);
     return _retval;
   }
 

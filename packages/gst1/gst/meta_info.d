@@ -200,7 +200,7 @@ class MetaInfo
   bool isCustom()
   {
     bool _retval;
-    _retval = gst_meta_info_is_custom(cast(const(GstMetaInfo)*)this._cPtr);
+    _retval = cast(bool)gst_meta_info_is_custom(cast(const(GstMetaInfo)*)this._cPtr);
     return _retval;
   }
 

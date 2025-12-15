@@ -145,7 +145,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   bool getShrinkCenterLast()
   {
     bool _retval;
-    _retval = gtk_center_layout_get_shrink_center_last(cast(GtkCenterLayout*)this._cPtr);
+    _retval = cast(bool)gtk_center_layout_get_shrink_center_last(cast(GtkCenterLayout*)this._cPtr);
     return _retval;
   }
 

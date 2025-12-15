@@ -226,7 +226,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_list_item_get_activatable(cast(GtkListItem*)this._cPtr);
+    _retval = cast(bool)gtk_list_item_get_activatable(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getFocusable()
   {
     bool _retval;
-    _retval = gtk_list_item_get_focusable(cast(GtkListItem*)this._cPtr);
+    _retval = cast(bool)gtk_list_item_get_focusable(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_list_item_get_selectable(cast(GtkListItem*)this._cPtr);
+    _retval = cast(bool)gtk_list_item_get_selectable(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getSelected()
   {
     bool _retval;
-    _retval = gtk_list_item_get_selected(cast(GtkListItem*)this._cPtr);
+    _retval = cast(bool)gtk_list_item_get_selected(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 

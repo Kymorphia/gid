@@ -117,7 +117,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
   bool blend(gstvideo.video_frame.VideoFrame videoBuf)
   {
     bool _retval;
-    _retval = gst_video_overlay_composition_blend(cast(GstVideoOverlayComposition*)this._cPtr, videoBuf ? cast(GstVideoFrame*)videoBuf._cPtr : null);
+    _retval = cast(bool)gst_video_overlay_composition_blend(cast(GstVideoOverlayComposition*)this._cPtr, videoBuf ? cast(GstVideoFrame*)videoBuf._cPtr : null);
     return _retval;
   }
 

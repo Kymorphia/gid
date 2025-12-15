@@ -103,7 +103,7 @@ class EventGrabBroken
   */
   @property bool keyboard()
   {
-    return (cast(GdkEventGrabBroken*)this._cPtr).keyboard;
+    return cast(bool)(cast(GdkEventGrabBroken*)this._cPtr).keyboard;
   }
 
   /**
@@ -123,7 +123,7 @@ class EventGrabBroken
   */
   @property bool implicit()
   {
-    return (cast(GdkEventGrabBroken*)this._cPtr).implicit;
+    return cast(bool)(cast(GdkEventGrabBroken*)this._cPtr).implicit;
   }
 
   /**

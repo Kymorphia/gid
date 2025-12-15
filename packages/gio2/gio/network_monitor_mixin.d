@@ -119,7 +119,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_network_monitor_can_reach(cast(GNetworkMonitor*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -170,7 +170,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -216,7 +216,7 @@ template NetworkMonitorT()
   override bool getNetworkAvailable()
   {
     bool _retval;
-    _retval = g_network_monitor_get_network_available(cast(GNetworkMonitor*)this._cPtr);
+    _retval = cast(bool)g_network_monitor_get_network_available(cast(GNetworkMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ template NetworkMonitorT()
   override bool getNetworkMetered()
   {
     bool _retval;
-    _retval = g_network_monitor_get_network_metered(cast(GNetworkMonitor*)this._cPtr);
+    _retval = cast(bool)g_network_monitor_get_network_metered(cast(GNetworkMonitor*)this._cPtr);
     return _retval;
   }
 

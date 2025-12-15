@@ -136,8 +136,10 @@ class Device : gobject.object.ObjectWrap
   {
     bool _retval;
     GdkWindow* _grabWindow;
-    _retval = gdk_device_grab_info_libgtk_only(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, &_grabWindow, cast(bool*)&ownerEvents);
+    gboolean _ownerEvents;
+    _retval = cast(bool)gdk_device_grab_info_libgtk_only(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, &_grabWindow, &_ownerEvents);
     grabWindow = new gdk.window.Window(cast(void*)_grabWindow, No.Take);
+    ownerEvents = cast(bool)_ownerEvents;
     return _retval;
   }
 
@@ -222,7 +224,7 @@ class Device : gobject.object.ObjectWrap
   bool getHasCursor()
   {
     bool _retval;
-    _retval = gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
+    _retval = cast(bool)gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +241,7 @@ class Device : gobject.object.ObjectWrap
   bool getKey(uint index, out uint keyval, out gdk.types.ModifierType modifiers)
   {
     bool _retval;
-    _retval = gdk_device_get_key(cast(GdkDevice*)this._cPtr, index, cast(uint*)&keyval, &modifiers);
+    _retval = cast(bool)gdk_device_get_key(cast(GdkDevice*)this._cPtr, index, cast(uint*)&keyval, &modifiers);
     return _retval;
   }
 
@@ -579,7 +581,7 @@ class Device : gobject.object.ObjectWrap
   bool setMode(gdk.types.InputMode mode)
   {
     bool _retval;
-    _retval = gdk_device_set_mode(cast(GdkDevice*)this._cPtr, mode);
+    _retval = cast(bool)gdk_device_set_mode(cast(GdkDevice*)this._cPtr, mode);
     return _retval;
   }
 

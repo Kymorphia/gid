@@ -137,7 +137,7 @@ class NetTimePacket : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = gst_net_time_packet_send(cast(const(GstNetTimePacket)*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, destAddress ? cast(GSocketAddress*)destAddress._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gst_net_time_packet_send(cast(const(GstNetTimePacket)*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, destAddress ? cast(GSocketAddress*)destAddress._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

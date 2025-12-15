@@ -67,7 +67,7 @@ class AudioLevelMeta
   */
   @property bool voiceActivity()
   {
-    return (cast(GstAudioLevelMeta*)this._cPtr).voiceActivity;
+    return cast(bool)(cast(GstAudioLevelMeta*)this._cPtr).voiceActivity;
   }
 
   /**

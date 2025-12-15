@@ -451,7 +451,7 @@ class View : gtk.text_view.TextView
   bool getAutoIndent()
   {
     bool _retval;
-    _retval = gtk_source_view_get_auto_indent(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_auto_indent(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -493,7 +493,7 @@ class View : gtk.text_view.TextView
   bool getEnableSnippets()
   {
     bool _retval;
-    _retval = gtk_source_view_get_enable_snippets(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_enable_snippets(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class View : gtk.text_view.TextView
   bool getHighlightCurrentLine()
   {
     bool _retval;
-    _retval = gtk_source_view_get_highlight_current_line(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_highlight_current_line(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -550,7 +550,7 @@ class View : gtk.text_view.TextView
   bool getIndentOnTab()
   {
     bool _retval;
-    _retval = gtk_source_view_get_indent_on_tab(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_indent_on_tab(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -587,7 +587,7 @@ class View : gtk.text_view.TextView
   bool getInsertSpacesInsteadOfTabs()
   {
     bool _retval;
-    _retval = gtk_source_view_get_insert_spaces_instead_of_tabs(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_insert_spaces_instead_of_tabs(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -627,7 +627,7 @@ class View : gtk.text_view.TextView
   bool getShowLineMarks()
   {
     bool _retval;
-    _retval = gtk_source_view_get_show_line_marks(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_show_line_marks(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -638,7 +638,7 @@ class View : gtk.text_view.TextView
   bool getShowLineNumbers()
   {
     bool _retval;
-    _retval = gtk_source_view_get_show_line_numbers(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_show_line_numbers(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -649,7 +649,7 @@ class View : gtk.text_view.TextView
   bool getShowRightMargin()
   {
     bool _retval;
-    _retval = gtk_source_view_get_show_right_margin(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_show_right_margin(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -661,7 +661,7 @@ class View : gtk.text_view.TextView
   bool getSmartBackspace()
   {
     bool _retval;
-    _retval = gtk_source_view_get_smart_backspace(cast(GtkSourceView*)this._cPtr);
+    _retval = cast(bool)gtk_source_view_get_smart_backspace(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 

@@ -214,7 +214,7 @@ class RTSPConnection
   bool getIgnoreXServerReply()
   {
     bool _retval;
-    _retval = gst_rtsp_connection_get_ignore_x_server_reply(cast(const(GstRTSPConnection)*)this._cPtr);
+    _retval = cast(bool)gst_rtsp_connection_get_ignore_x_server_reply(cast(const(GstRTSPConnection)*)this._cPtr);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class RTSPConnection
   bool getRememberSessionId()
   {
     bool _retval;
-    _retval = gst_rtsp_connection_get_remember_session_id(cast(GstRTSPConnection*)this._cPtr);
+    _retval = cast(bool)gst_rtsp_connection_get_remember_session_id(cast(GstRTSPConnection*)this._cPtr);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class RTSPConnection
   bool isTunneled()
   {
     bool _retval;
-    _retval = gst_rtsp_connection_is_tunneled(cast(const(GstRTSPConnection)*)this._cPtr);
+    _retval = cast(bool)gst_rtsp_connection_is_tunneled(cast(const(GstRTSPConnection)*)this._cPtr);
     return _retval;
   }
 
@@ -662,11 +662,11 @@ class RTSPConnection
   */
   void setAcceptCertificateFunc(gstrtsp.types.RTSPConnectionAcceptCertificateFunc func)
   {
-    extern(C) bool _funcCallback(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData)
+    extern(C) gboolean _funcCallback(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData)
     {
       auto _dlg = cast(gstrtsp.types.RTSPConnectionAcceptCertificateFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -858,7 +858,7 @@ class RTSPConnection
   bool setTlsValidationFlags(gio.types.TlsCertificateFlags flags)
   {
     bool _retval;
-    _retval = gst_rtsp_connection_set_tls_validation_flags(cast(GstRTSPConnection*)this._cPtr, flags);
+    _retval = cast(bool)gst_rtsp_connection_set_tls_validation_flags(cast(GstRTSPConnection*)this._cPtr, flags);
     return _retval;
   }
 

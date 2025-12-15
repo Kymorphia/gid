@@ -146,7 +146,7 @@ class ErrorWrap : Exception
   bool matches(Quark domain, int code)
   {
     bool _retval;
-    _retval = g_error_matches(errPtr, domain, code);
+    _retval = cast(bool)g_error_matches(errPtr, domain, code);
     return _retval;
   }
 }

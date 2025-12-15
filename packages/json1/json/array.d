@@ -223,7 +223,7 @@ class Array : gobject.boxed.Boxed
   bool equal(json.array.Array b)
   {
     bool _retval;
-    _retval = json_array_equal(cast(JsonArray*)this._cPtr, b ? cast(JsonArray*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)json_array_equal(cast(JsonArray*)this._cPtr, b ? cast(JsonArray*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Array : gobject.boxed.Boxed
   bool getBooleanElement(uint index)
   {
     bool _retval;
-    _retval = json_array_get_boolean_element(cast(JsonArray*)this._cPtr, index);
+    _retval = cast(bool)json_array_get_boolean_element(cast(JsonArray*)this._cPtr, index);
     return _retval;
   }
 
@@ -372,7 +372,7 @@ class Array : gobject.boxed.Boxed
   bool getNullElement(uint index)
   {
     bool _retval;
-    _retval = json_array_get_null_element(cast(JsonArray*)this._cPtr, index);
+    _retval = cast(bool)json_array_get_null_element(cast(JsonArray*)this._cPtr, index);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class Array : gobject.boxed.Boxed
   bool isImmutable()
   {
     bool _retval;
-    _retval = json_array_is_immutable(cast(JsonArray*)this._cPtr);
+    _retval = cast(bool)json_array_is_immutable(cast(JsonArray*)this._cPtr);
     return _retval;
   }
 

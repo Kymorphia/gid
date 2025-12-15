@@ -192,7 +192,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   bool isSeparator()
   {
     bool _retval;
-    _retval = webkit_context_menu_item_is_separator(cast(WebKitContextMenuItem*)this._cPtr);
+    _retval = cast(bool)webkit_context_menu_item_is_separator(cast(WebKitContextMenuItem*)this._cPtr);
     return _retval;
   }
 

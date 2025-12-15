@@ -84,7 +84,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   bool equal(arrow.chunked_array.ChunkedArray otherChunkedArray)
   {
     bool _retval;
-    _retval = garrow_chunked_array_equal(cast(GArrowChunkedArray*)this._cPtr, otherChunkedArray ? cast(GArrowChunkedArray*)otherChunkedArray._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_chunked_array_equal(cast(GArrowChunkedArray*)this._cPtr, otherChunkedArray ? cast(GArrowChunkedArray*)otherChunkedArray._cPtr(No.Dup) : null);
     return _retval;
   }
 

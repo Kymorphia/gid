@@ -118,12 +118,12 @@ class BufferList : gobject.boxed.Boxed
   */
   bool foreach_(gst.types.BufferListFunc func)
   {
-    extern(C) bool _funcCallback(GstBuffer** buffer, uint idx, void* userData)
+    extern(C) gboolean _funcCallback(GstBuffer** buffer, uint idx, void* userData)
     {
       auto _dlg = cast(gst.types.BufferListFunc*)userData;
       auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
 
-      bool _retval = (*_dlg)(_buffer, idx);
+      gboolean _retval = (*_dlg)(_buffer, idx);
       *buffer = *cast(GstBuffer**)_buffer._cPtr;
 
       return _retval;
@@ -132,7 +132,7 @@ class BufferList : gobject.boxed.Boxed
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_buffer_list_foreach(cast(GstBufferList*)this._cPtr, _funcCB, _func);
+    _retval = cast(bool)gst_buffer_list_foreach(cast(GstBufferList*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 

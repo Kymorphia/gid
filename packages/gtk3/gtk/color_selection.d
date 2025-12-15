@@ -151,7 +151,7 @@ class ColorSelection : gtk.box.Box
     const(char)* _str = str.toCString(No.Alloc);
     int _nColors;
     GdkColor* _colors;
-    _retval = gtk_color_selection_palette_from_string(_str, &_colors, &_nColors);
+    _retval = cast(bool)gtk_color_selection_palette_from_string(_str, &_colors, &_nColors);
     colors.length = _nColors;
     foreach (i; 0 .. _nColors)
       colors[i] = new gdk.color.Color(cast(void*)&_colors[i], Yes.Take);
@@ -229,7 +229,7 @@ class ColorSelection : gtk.box.Box
   bool getHasOpacityControl()
   {
     bool _retval;
-    _retval = gtk_color_selection_get_has_opacity_control(cast(GtkColorSelection*)this._cPtr);
+    _retval = cast(bool)gtk_color_selection_get_has_opacity_control(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class ColorSelection : gtk.box.Box
   bool getHasPalette()
   {
     bool _retval;
-    _retval = gtk_color_selection_get_has_palette(cast(GtkColorSelection*)this._cPtr);
+    _retval = cast(bool)gtk_color_selection_get_has_palette(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class ColorSelection : gtk.box.Box
   bool isAdjusting()
   {
     bool _retval;
-    _retval = gtk_color_selection_is_adjusting(cast(GtkColorSelection*)this._cPtr);
+    _retval = cast(bool)gtk_color_selection_is_adjusting(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 

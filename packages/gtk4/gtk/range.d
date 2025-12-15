@@ -219,7 +219,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getFlippable()
   {
     bool _retval;
-    _retval = gtk_range_get_flippable(cast(GtkRange*)this._cPtr);
+    _retval = cast(bool)gtk_range_get_flippable(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getInverted()
   {
     bool _retval;
-    _retval = gtk_range_get_inverted(cast(GtkRange*)this._cPtr);
+    _retval = cast(bool)gtk_range_get_inverted(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getRestrictToFillLevel()
   {
     bool _retval;
-    _retval = gtk_range_get_restrict_to_fill_level(cast(GtkRange*)this._cPtr);
+    _retval = cast(bool)gtk_range_get_restrict_to_fill_level(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getShowFillLevel()
   {
     bool _retval;
-    _retval = gtk_range_get_show_fill_level(cast(GtkRange*)this._cPtr);
+    _retval = cast(bool)gtk_range_get_show_fill_level(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -312,7 +312,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getSliderSizeFixed()
   {
     bool _retval;
-    _retval = gtk_range_get_slider_size_fixed(cast(GtkRange*)this._cPtr);
+    _retval = cast(bool)gtk_range_get_slider_size_fixed(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 

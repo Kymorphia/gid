@@ -345,7 +345,7 @@ class Scanner
   bool eof()
   {
     bool _retval;
-    _retval = g_scanner_eof(cast(GScanner*)this._cPtr);
+    _retval = cast(bool)g_scanner_eof(cast(GScanner*)this._cPtr);
     return _retval;
   }
 

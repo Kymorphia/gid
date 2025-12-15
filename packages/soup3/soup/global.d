@@ -33,7 +33,7 @@ import soup.types;
 bool checkVersion(uint major, uint minor, uint micro)
 {
   bool _retval;
-  _retval = soup_check_version(major, minor, micro);
+  _retval = cast(bool)soup_check_version(major, minor, micro);
   return _retval;
 }
 
@@ -336,7 +336,7 @@ bool headerContains(string header, string token)
   bool _retval;
   const(char)* _header = header.toCString(No.Alloc);
   const(char)* _token = token.toCString(No.Alloc);
-  _retval = soup_header_contains(_header, _token);
+  _retval = cast(bool)soup_header_contains(_header, _token);
   return _retval;
 }
 
@@ -565,7 +565,7 @@ bool headersParse(string str, int len, soup.message_headers.MessageHeaders dest)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = soup_headers_parse(_str, len, dest ? cast(SoupMessageHeaders*)dest._cPtr(No.Dup) : null);
+  _retval = cast(bool)soup_headers_parse(_str, len, dest ? cast(SoupMessageHeaders*)dest._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -623,7 +623,7 @@ bool headersParseResponse(string str, int len, soup.message_headers.MessageHeade
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
   char* _reasonPhrase;
-  _retval = soup_headers_parse_response(_str, len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
+  _retval = cast(bool)soup_headers_parse_response(_str, len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
   reasonPhrase = _reasonPhrase.fromCString(Yes.Free);
   return _retval;
 }
@@ -649,7 +649,7 @@ bool headersParseStatusLine(string statusLine, out soup.types.HTTPVersion ver, o
   bool _retval;
   const(char)* _statusLine = statusLine.toCString(No.Alloc);
   char* _reasonPhrase;
-  _retval = soup_headers_parse_status_line(_statusLine, &ver, cast(uint*)&statusCode, &_reasonPhrase);
+  _retval = cast(bool)soup_headers_parse_status_line(_statusLine, &ver, cast(uint*)&statusCode, &_reasonPhrase);
   reasonPhrase = _reasonPhrase.fromCString(Yes.Free);
   return _retval;
 }
@@ -670,7 +670,7 @@ bool tldDomainIsPublicSuffix(string domain)
 {
   bool _retval;
   const(char)* _domain = domain.toCString(No.Alloc);
-  _retval = soup_tld_domain_is_public_suffix(_domain);
+  _retval = cast(bool)soup_tld_domain_is_public_suffix(_domain);
   return _retval;
 }
 
@@ -739,6 +739,6 @@ glib.bytes.Bytes uriDecodeDataUri(string uri, out string contentType)
 bool uriEqual(glib.uri.Uri uri1, glib.uri.Uri uri2)
 {
   bool _retval;
-  _retval = soup_uri_equal(uri1 ? cast(GUri*)uri1._cPtr(No.Dup) : null, uri2 ? cast(GUri*)uri2._cPtr(No.Dup) : null);
+  _retval = cast(bool)soup_uri_equal(uri1 ? cast(GUri*)uri1._cPtr(No.Dup) : null, uri2 ? cast(GUri*)uri2._cPtr(No.Dup) : null);
   return _retval;
 }

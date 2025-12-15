@@ -233,7 +233,7 @@ class ExecutePlan : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_execute_plan_validate(cast(GArrowExecutePlan*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_execute_plan_validate(cast(GArrowExecutePlan*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -248,7 +248,7 @@ class ExecutePlan : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_execute_plan_wait(cast(GArrowExecutePlan*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_execute_plan_wait(cast(GArrowExecutePlan*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

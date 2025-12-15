@@ -127,7 +127,7 @@ class PopoverMenuBar : gtk.widget.Widget
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
-    _retval = gtk_popover_menu_bar_add_child(cast(GtkPopoverMenuBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _id);
+    _retval = cast(bool)gtk_popover_menu_bar_add_child(cast(GtkPopoverMenuBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _id);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class PopoverMenuBar : gtk.widget.Widget
   bool removeChild(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_popover_menu_bar_remove_child(cast(GtkPopoverMenuBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_popover_menu_bar_remove_child(cast(GtkPopoverMenuBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -80,7 +80,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
     bool _retval;
     char* _outLink;
     GMenuModel* _value;
-    _retval = g_menu_link_iter_get_next(cast(GMenuLinkIter*)this._cPtr, &_outLink, &_value);
+    _retval = cast(bool)g_menu_link_iter_get_next(cast(GMenuLinkIter*)this._cPtr, &_outLink, &_value);
     outLink = _outLink.fromCString(No.Free);
     value = new gio.menu_model.MenuModel(cast(void*)_value, Yes.Take);
     return _retval;
@@ -114,7 +114,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
   bool next()
   {
     bool _retval;
-    _retval = g_menu_link_iter_next(cast(GMenuLinkIter*)this._cPtr);
+    _retval = cast(bool)g_menu_link_iter_next(cast(GMenuLinkIter*)this._cPtr);
     return _retval;
   }
 }

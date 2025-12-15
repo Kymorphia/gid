@@ -193,7 +193,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   bool getShowPeekIcon()
   {
     bool _retval;
-    _retval = gtk_password_entry_get_show_peek_icon(cast(GtkPasswordEntry*)this._cPtr);
+    _retval = cast(bool)gtk_password_entry_get_show_peek_icon(cast(GtkPasswordEntry*)this._cPtr);
     return _retval;
   }
 

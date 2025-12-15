@@ -803,7 +803,7 @@ struct GstGLBaseFilterClass
   /**
       called in the GL thread to setup the element GL state.
   */
-  extern(C) bool function(GstGLBaseFilter* filter) glStart;
+  extern(C) gboolean function(GstGLBaseFilter* filter) glStart;
 
   /**
       called in the GL thread to setup the element GL state.
@@ -815,7 +815,7 @@ struct GstGLBaseFilterClass
                     Note: this will also be called when changing OpenGL contexts
                     where #GstBaseTransform::set_caps may not.
   */
-  extern(C) bool function(GstGLBaseFilter* filter, GstCaps* incaps, GstCaps* outcaps) glSetCaps;
+  extern(C) gboolean function(GstGLBaseFilter* filter, GstCaps* incaps, GstCaps* outcaps) glSetCaps;
 
   /** */
   void*[4] Padding;
@@ -976,7 +976,7 @@ struct GstGLBaseMixerClass
   GstGLAPI supportedGlApi;
 
   /** */
-  extern(C) bool function(GstGLBaseMixer* mix) glStart;
+  extern(C) gboolean function(GstGLBaseMixer* mix) glStart;
 
   /** */
   extern(C) void function(GstGLBaseMixer* mix) glStop;
@@ -1071,7 +1071,7 @@ struct GstGLBaseSrcClass
   /**
       called in the GL thread to setup the element GL state.
   */
-  extern(C) bool function(GstGLBaseSrc* src) glStart;
+  extern(C) gboolean function(GstGLBaseSrc* src) glStart;
 
   /**
       called in the GL thread to setup the element GL state.
@@ -1081,7 +1081,7 @@ struct GstGLBaseSrcClass
   /**
       called in the GL thread to fill the current video texture.
   */
-  extern(C) bool function(GstGLBaseSrc* src, GstGLMemory* mem) fillGlMemory;
+  extern(C) gboolean function(GstGLBaseSrc* src, GstGLMemory* mem) fillGlMemory;
 
   /** */
   void*[4] Padding;
@@ -1231,10 +1231,10 @@ struct GstGLColorConvert
   GstVideoInfo outInfo;
 
   /** */
-  bool initted;
+  gboolean initted;
 
   /** */
-  bool passthrough;
+  gboolean passthrough;
 
   /** */
   GstBuffer* inbuf;
@@ -1346,17 +1346,17 @@ struct GstGLContextClass
   /**
       call eglMakeCurrent or similar
   */
-  extern(C) bool function(GstGLContext* context, bool activate) activate;
+  extern(C) gboolean function(GstGLContext* context, gboolean activate) activate;
 
   /**
       choose a format for the framebuffer
   */
-  extern(C) bool function(GstGLContext* context, GError** _err) chooseFormat;
+  extern(C) gboolean function(GstGLContext* context, GError** _err) chooseFormat;
 
   /**
       create the OpenGL context
   */
-  extern(C) bool function(GstGLContext* context, GstGLAPI glApi, GstGLContext* otherContext, GError** _err) createContext;
+  extern(C) gboolean function(GstGLContext* context, GstGLAPI glApi, GstGLContext* otherContext, GError** _err) createContext;
 
   /**
       destroy the OpenGL context
@@ -1369,7 +1369,7 @@ struct GstGLContextClass
   extern(C) void function(GstGLContext* context) swapBuffers;
 
   /** */
-  extern(C) bool function(GstGLContext* context, const(char)* feature) checkFeature;
+  extern(C) gboolean function(GstGLContext* context, const(char)* feature) checkFeature;
 
   /** */
   extern(C) void function(GstGLContext* context, int* major, int* minor) getGlPlatformVersion;
@@ -1378,7 +1378,7 @@ struct GstGLContextClass
   extern(C) GstStructure* function(GstGLContext* context) getConfig;
 
   /** */
-  extern(C) bool function(GstGLContext* context, GstStructure* glConfig) requestConfig;
+  extern(C) gboolean function(GstGLContext* context, GstStructure* glConfig) requestConfig;
 
   /** */
   void*[2] Reserved;
@@ -1494,7 +1494,7 @@ struct GstGLFilter
   GstGLFramebuffer* fbo;
 
   /** */
-  bool glResult;
+  gboolean glResult;
 
   /** */
   GstBuffer* inbuf;
@@ -1506,7 +1506,7 @@ struct GstGLFilter
   GstGLShader* defaultShader;
 
   /** */
-  bool validAttributes;
+  gboolean validAttributes;
 
   /** */
   uint vao;
@@ -1536,7 +1536,7 @@ struct GstGLFilterClass
   /**
       mirror from #GstBaseTransform
   */
-  extern(C) bool function(GstGLFilter* filter, GstCaps* incaps, GstCaps* outcaps) setCaps;
+  extern(C) gboolean function(GstGLFilter* filter, GstCaps* incaps, GstCaps* outcaps) setCaps;
 
   /**
       perform operations on the input and output buffers.  In general,
@@ -1544,18 +1544,18 @@ struct GstGLFilterClass
                use-case for using this is keeping previous buffers for future calculations.
                Note: If @filter exists, then @filter_texture is not run
   */
-  extern(C) bool function(GstGLFilter* filter, GstBuffer* inbuf, GstBuffer* outbuf) filter;
+  extern(C) gboolean function(GstGLFilter* filter, GstBuffer* inbuf, GstBuffer* outbuf) filter;
 
   /**
       given @in_tex, transform it into @out_tex.  Not used
                        if @filter exists
   */
-  extern(C) bool function(GstGLFilter* filter, GstGLMemory* input, GstGLMemory* output) filterTexture;
+  extern(C) gboolean function(GstGLFilter* filter, GstGLMemory* input, GstGLMemory* output) filterTexture;
 
   /**
       perform initialization when the Framebuffer object is created
   */
-  extern(C) bool function(GstGLFilter* filter) initFbo;
+  extern(C) gboolean function(GstGLFilter* filter) initFbo;
 
   /**
       Perform sub-class specific modifications of the
@@ -1681,7 +1681,7 @@ struct GstGLMemory
   float[2] texScaling;
 
   /** */
-  bool textureWrapped;
+  gboolean textureWrapped;
 
   /** */
   uint unpackLength;
@@ -1799,10 +1799,10 @@ struct GstGLMixerClass
   GstGLBaseMixerClass parentClass;
 
   /** */
-  extern(C) bool function(GstGLMixer* mix, GstBuffer* outbuf) processBuffers;
+  extern(C) gboolean function(GstGLMixer* mix, GstBuffer* outbuf) processBuffers;
 
   /** */
-  extern(C) bool function(GstGLMixer* mix, GstGLMemory* outTex) processTextures;
+  extern(C) gboolean function(GstGLMixer* mix, GstGLMemory* outTex) processTextures;
 
   /** */
   void*[4] Padding;
@@ -1899,10 +1899,10 @@ struct GstGLQuery
   uint queryId;
 
   /** */
-  bool supported;
+  gboolean supported;
 
   /** */
-  bool startCalled;
+  gboolean startCalled;
 
   /** */
   GstGLAsyncDebug debug_;
@@ -1944,7 +1944,7 @@ struct GstGLRenderbuffer
   uint height;
 
   /** */
-  bool renderbufferWrapped;
+  gboolean renderbufferWrapped;
 
   /** */
   void*[4] Padding;
@@ -2241,13 +2241,13 @@ struct GstGLViewConvert
   GstGLTextureTarget toTextureTarget;
 
   /** */
-  bool capsPassthrough;
+  gboolean capsPassthrough;
 
   /** */
-  bool initted;
+  gboolean initted;
 
   /** */
-  bool reconfigure;
+  gboolean reconfigure;
 
   /** */
   GstGLFramebuffer* fbo;
@@ -2293,7 +2293,7 @@ struct GstGLWindow
   GWeakRef contextRef;
 
   /** */
-  bool isDrawing;
+  gboolean isDrawing;
 
   /** */
   GstGLWindowCB draw;
@@ -2323,7 +2323,7 @@ struct GstGLWindow
   GDestroyNotify resizeNotify;
 
   /** */
-  bool queueResize;
+  gboolean queueResize;
 
   /** */
   GMainContext* mainContext;
@@ -2389,7 +2389,7 @@ struct GstGLWindowClass
   /**
       open the connection to the display
   */
-  extern(C) bool function(GstGLWindow* window, GError** _err) open;
+  extern(C) gboolean function(GstGLWindow* window, GError** _err) open;
 
   /**
       close the connection to the display
@@ -2401,7 +2401,7 @@ struct GstGLWindowClass
                       Basic events like surface moves and resizes are still valid
                       things to listen for.
   */
-  extern(C) void function(GstGLWindow* window, bool handleEvents) handleEvents;
+  extern(C) void function(GstGLWindow* window, gboolean handleEvents) handleEvents;
 
   /**
       request that the window change surface size.  The
@@ -2417,7 +2417,7 @@ struct GstGLWindowClass
   /**
       request a rectangle to render into.  See #GstVideoOverlay
   */
-  extern(C) bool function(GstGLWindow* window, int x, int y, int width, int height) setRenderRectangle;
+  extern(C) gboolean function(GstGLWindow* window, int x, int y, int width, int height) setRenderRectangle;
 
   /**
       request a resize to occur when possible
@@ -2428,12 +2428,12 @@ struct GstGLWindowClass
       Whether the window takes care of glViewport setup.
                           and the user does not need to deal with viewports
   */
-  extern(C) bool function(GstGLWindow* window) controlsViewport;
+  extern(C) gboolean function(GstGLWindow* window) controlsViewport;
 
   /**
       Whether the window has output surface or not. (Since: 1.18)
   */
-  extern(C) bool function(GstGLWindow* window) hasOutputSurface;
+  extern(C) gboolean function(GstGLWindow* window) hasOutputSurface;
 
   /** */
   void*[2] Reserved;
@@ -2452,7 +2452,7 @@ alias extern(C) GstGLBaseMemory* function(GstGLBaseMemoryAllocator* allocator, G
 
 alias extern(C) GstGLBaseMemory* function(GstGLBaseMemory* mem, ptrdiff_t offset, ptrdiff_t size) GstGLBaseMemoryAllocatorCopyFunction;
 
-alias extern(C) bool function(GstGLBaseMemory* mem, GError** _err) GstGLBaseMemoryAllocatorCreateFunction;
+alias extern(C) gboolean function(GstGLBaseMemory* mem, GError** _err) GstGLBaseMemoryAllocatorCreateFunction;
 
 alias extern(C) void function(GstGLBaseMemory* mem) GstGLBaseMemoryAllocatorDestroyFunction;
 
@@ -2462,9 +2462,9 @@ alias extern(C) void function(GstGLBaseMemory* mem, GstMapInfo* info) GstGLBaseM
 
 alias extern(C) void function(GstGLContext* context, void* data) GstGLContextThreadFunc;
 
-alias extern(C) bool function(GstGLFilter* filter, GstGLMemory* inTex, void* userData) GstGLFilterRenderFunc;
+alias extern(C) gboolean function(GstGLFilter* filter, GstGLMemory* inTex, void* userData) GstGLFilterRenderFunc;
 
-alias extern(C) bool function(void* stuff) GstGLFramebufferFunc;
+alias extern(C) gboolean function(void* stuff) GstGLFramebufferFunc;
 
 alias extern(C) void function(void* data) GstGLWindowCB;
 

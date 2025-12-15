@@ -243,7 +243,7 @@ class TreeExpander : gtk.widget.Widget
   bool getHideExpander()
   {
     bool _retval;
-    _retval = gtk_tree_expander_get_hide_expander(cast(GtkTreeExpander*)this._cPtr);
+    _retval = cast(bool)gtk_tree_expander_get_hide_expander(cast(GtkTreeExpander*)this._cPtr);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class TreeExpander : gtk.widget.Widget
   bool getIndentForDepth()
   {
     bool _retval;
-    _retval = gtk_tree_expander_get_indent_for_depth(cast(GtkTreeExpander*)this._cPtr);
+    _retval = cast(bool)gtk_tree_expander_get_indent_for_depth(cast(GtkTreeExpander*)this._cPtr);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class TreeExpander : gtk.widget.Widget
   bool getIndentForIcon()
   {
     bool _retval;
-    _retval = gtk_tree_expander_get_indent_for_icon(cast(GtkTreeExpander*)this._cPtr);
+    _retval = cast(bool)gtk_tree_expander_get_indent_for_icon(cast(GtkTreeExpander*)this._cPtr);
     return _retval;
   }
 

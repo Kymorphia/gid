@@ -88,7 +88,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   bool getVariableframerate()
   {
     bool _retval;
-    _retval = gst_encoding_video_profile_get_variableframerate(cast(GstEncodingVideoProfile*)this._cPtr);
+    _retval = cast(bool)gst_encoding_video_profile_get_variableframerate(cast(GstEncodingVideoProfile*)this._cPtr);
     return _retval;
   }
 

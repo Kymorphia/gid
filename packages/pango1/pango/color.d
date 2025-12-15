@@ -155,7 +155,7 @@ class Color : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = pango_color_parse(cast(PangoColor*)this._cPtr, _spec);
+    _retval = cast(bool)pango_color_parse(cast(PangoColor*)this._cPtr, _spec);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Color : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = pango_color_parse_with_alpha(cast(PangoColor*)this._cPtr, cast(ushort*)&alpha, _spec);
+    _retval = cast(bool)pango_color_parse_with_alpha(cast(PangoColor*)this._cPtr, cast(ushort*)&alpha, _spec);
     return _retval;
   }
 

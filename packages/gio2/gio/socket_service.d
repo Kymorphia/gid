@@ -112,7 +112,7 @@ class SocketService : gio.socket_listener.SocketListener
   bool isActive()
   {
     bool _retval;
-    _retval = g_socket_service_is_active(cast(GSocketService*)this._cPtr);
+    _retval = cast(bool)g_socket_service_is_active(cast(GSocketService*)this._cPtr);
     return _retval;
   }
 

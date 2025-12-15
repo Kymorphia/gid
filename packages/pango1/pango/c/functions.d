@@ -31,7 +31,7 @@ __gshared extern(C)
   PangoAttribute* function(PangoAttrIterator* iterator, PangoAttrType type) c_pango_attr_iterator_get; ///
   GSList* function(PangoAttrIterator* iterator) c_pango_attr_iterator_get_attrs; ///
   void function(PangoAttrIterator* iterator, PangoFontDescription* desc, PangoLanguage** language, GSList** extraAttrs) c_pango_attr_iterator_get_font; ///
-  bool function(PangoAttrIterator* iterator) c_pango_attr_iterator_next; ///
+  gboolean function(PangoAttrIterator* iterator) c_pango_attr_iterator_next; ///
   void function(PangoAttrIterator* iterator, int* start, int* end) c_pango_attr_iterator_range; ///
 
   // AttrLanguage
@@ -42,7 +42,7 @@ __gshared extern(C)
   PangoAttrList* function() c_pango_attr_list_new; ///
   void function(PangoAttrList* list, PangoAttribute* attr) c_pango_attr_list_change; ///
   PangoAttrList* function(PangoAttrList* list) c_pango_attr_list_copy; ///
-  bool function(PangoAttrList* list, PangoAttrList* otherList) c_pango_attr_list_equal; ///
+  gboolean function(PangoAttrList* list, PangoAttrList* otherList) c_pango_attr_list_equal; ///
   PangoAttrList* function(PangoAttrList* list, PangoAttrFilterFunc func, void* data) c_pango_attr_list_filter; ///
   GSList* function(PangoAttrList* list) c_pango_attr_list_get_attributes; ///
   PangoAttrIterator* function(PangoAttrList* list) c_pango_attr_list_get_iterator; ///
@@ -76,15 +76,15 @@ __gshared extern(C)
   PangoAttrString* function(PangoAttribute* attr) c_pango_attribute_as_string; ///
   PangoAttribute* function(const(PangoAttribute)* attr) c_pango_attribute_copy; ///
   void function(PangoAttribute* attr) c_pango_attribute_destroy; ///
-  bool function(const(PangoAttribute)* attr1, const(PangoAttribute)* attr2) c_pango_attribute_equal; ///
+  gboolean function(const(PangoAttribute)* attr1, const(PangoAttribute)* attr2) c_pango_attribute_equal; ///
   void function(PangoAttribute* attr, const(PangoAttrClass)* klass) c_pango_attribute_init; ///
 
   // Color
   GType function() c_pango_color_get_type; ///
   PangoColor* function(const(PangoColor)* src) c_pango_color_copy; ///
   void function(PangoColor* color) c_pango_color_free; ///
-  bool function(PangoColor* color, const(char)* spec) c_pango_color_parse; ///
-  bool function(PangoColor* color, ushort* alpha, const(char)* spec) c_pango_color_parse_with_alpha; ///
+  gboolean function(PangoColor* color, const(char)* spec) c_pango_color_parse; ///
+  gboolean function(PangoColor* color, ushort* alpha, const(char)* spec) c_pango_color_parse_with_alpha; ///
   char* function(const(PangoColor)* color) c_pango_color_to_string; ///
 
   // Context
@@ -100,7 +100,7 @@ __gshared extern(C)
   PangoLanguage* function(PangoContext* context) c_pango_context_get_language; ///
   const(PangoMatrix)* function(PangoContext* context) c_pango_context_get_matrix; ///
   PangoFontMetrics* function(PangoContext* context, const(PangoFontDescription)* desc, PangoLanguage* language) c_pango_context_get_metrics; ///
-  bool function(PangoContext* context) c_pango_context_get_round_glyph_positions; ///
+  gboolean function(PangoContext* context) c_pango_context_get_round_glyph_positions; ///
   uint function(PangoContext* context) c_pango_context_get_serial; ///
   void function(PangoContext* context, PangoFontFamily*** families, int* nFamilies) c_pango_context_list_families; ///
   PangoFont* function(PangoContext* context, const(PangoFontDescription)* desc) c_pango_context_load_font; ///
@@ -112,7 +112,7 @@ __gshared extern(C)
   void function(PangoContext* context, PangoGravityHint hint) c_pango_context_set_gravity_hint; ///
   void function(PangoContext* context, PangoLanguage* language) c_pango_context_set_language; ///
   void function(PangoContext* context, const(PangoMatrix)* matrix) c_pango_context_set_matrix; ///
-  void function(PangoContext* context, bool roundPositions) c_pango_context_set_round_glyph_positions; ///
+  void function(PangoContext* context, gboolean roundPositions) c_pango_context_set_round_glyph_positions; ///
 
   // Coverage
   GType function() c_pango_coverage_get_type; ///
@@ -140,30 +140,30 @@ __gshared extern(C)
   hb_font_t* function(PangoFont* font) c_pango_font_get_hb_font; ///
   PangoLanguage** function(PangoFont* font) c_pango_font_get_languages; ///
   PangoFontMetrics* function(PangoFont* font, PangoLanguage* language) c_pango_font_get_metrics; ///
-  bool function(PangoFont* font, dchar wc) c_pango_font_has_char; ///
+  gboolean function(PangoFont* font, dchar wc) c_pango_font_has_char; ///
   GBytes* function(PangoFont* font) c_pango_font_serialize; ///
 
   // FontDescription
   GType function() c_pango_font_description_get_type; ///
   PangoFontDescription* function() c_pango_font_description_new; ///
-  bool function(const(PangoFontDescription)* desc, const(PangoFontDescription)* oldMatch, const(PangoFontDescription)* newMatch) c_pango_font_description_better_match; ///
+  gboolean function(const(PangoFontDescription)* desc, const(PangoFontDescription)* oldMatch, const(PangoFontDescription)* newMatch) c_pango_font_description_better_match; ///
   PangoFontDescription* function(const(PangoFontDescription)* desc) c_pango_font_description_copy; ///
   PangoFontDescription* function(const(PangoFontDescription)* desc) c_pango_font_description_copy_static; ///
-  bool function(const(PangoFontDescription)* desc1, const(PangoFontDescription)* desc2) c_pango_font_description_equal; ///
+  gboolean function(const(PangoFontDescription)* desc1, const(PangoFontDescription)* desc2) c_pango_font_description_equal; ///
   void function(PangoFontDescription* desc) c_pango_font_description_free; ///
   const(char)* function(const(PangoFontDescription)* desc) c_pango_font_description_get_family; ///
   PangoGravity function(const(PangoFontDescription)* desc) c_pango_font_description_get_gravity; ///
   PangoFontMask function(const(PangoFontDescription)* desc) c_pango_font_description_get_set_fields; ///
   int function(const(PangoFontDescription)* desc) c_pango_font_description_get_size; ///
-  bool function(const(PangoFontDescription)* desc) c_pango_font_description_get_size_is_absolute; ///
+  gboolean function(const(PangoFontDescription)* desc) c_pango_font_description_get_size_is_absolute; ///
   PangoStretch function(const(PangoFontDescription)* desc) c_pango_font_description_get_stretch; ///
   PangoStyle function(const(PangoFontDescription)* desc) c_pango_font_description_get_style; ///
   PangoVariant function(const(PangoFontDescription)* desc) c_pango_font_description_get_variant; ///
   const(char)* function(const(PangoFontDescription)* desc) c_pango_font_description_get_variations; ///
   PangoWeight function(const(PangoFontDescription)* desc) c_pango_font_description_get_weight; ///
   uint function(const(PangoFontDescription)* desc) c_pango_font_description_hash; ///
-  void function(PangoFontDescription* desc, const(PangoFontDescription)* descToMerge, bool replaceExisting) c_pango_font_description_merge; ///
-  void function(PangoFontDescription* desc, const(PangoFontDescription)* descToMerge, bool replaceExisting) c_pango_font_description_merge_static; ///
+  void function(PangoFontDescription* desc, const(PangoFontDescription)* descToMerge, gboolean replaceExisting) c_pango_font_description_merge; ///
+  void function(PangoFontDescription* desc, const(PangoFontDescription)* descToMerge, gboolean replaceExisting) c_pango_font_description_merge_static; ///
   void function(PangoFontDescription* desc, double size) c_pango_font_description_set_absolute_size; ///
   void function(PangoFontDescription* desc, const(char)* family) c_pango_font_description_set_family; ///
   void function(PangoFontDescription* desc, const(char)* family) c_pango_font_description_set_family_static; ///
@@ -185,15 +185,15 @@ __gshared extern(C)
   PangoFontDescription* function(PangoFontFace* face) c_pango_font_face_describe; ///
   const(char)* function(PangoFontFace* face) c_pango_font_face_get_face_name; ///
   PangoFontFamily* function(PangoFontFace* face) c_pango_font_face_get_family; ///
-  bool function(PangoFontFace* face) c_pango_font_face_is_synthesized; ///
+  gboolean function(PangoFontFace* face) c_pango_font_face_is_synthesized; ///
   void function(PangoFontFace* face, int** sizes, int* nSizes) c_pango_font_face_list_sizes; ///
 
   // FontFamily
   GType function() c_pango_font_family_get_type; ///
   PangoFontFace* function(PangoFontFamily* family, const(char)* name) c_pango_font_family_get_face; ///
   const(char)* function(PangoFontFamily* family) c_pango_font_family_get_name; ///
-  bool function(PangoFontFamily* family) c_pango_font_family_is_monospace; ///
-  bool function(PangoFontFamily* family) c_pango_font_family_is_variable; ///
+  gboolean function(PangoFontFamily* family) c_pango_font_family_is_monospace; ///
+  gboolean function(PangoFontFamily* family) c_pango_font_family_is_variable; ///
   void function(PangoFontFamily* family, PangoFontFace*** faces, int* nFaces) c_pango_font_family_list_faces; ///
 
   // FontMap
@@ -246,10 +246,10 @@ __gshared extern(C)
   GType function() c_pango_glyph_item_iter_get_type; ///
   PangoGlyphItemIter* function(PangoGlyphItemIter* orig) c_pango_glyph_item_iter_copy; ///
   void function(PangoGlyphItemIter* iter) c_pango_glyph_item_iter_free; ///
-  bool function(PangoGlyphItemIter* iter, PangoGlyphItem* glyphItem, const(char)* text) c_pango_glyph_item_iter_init_end; ///
-  bool function(PangoGlyphItemIter* iter, PangoGlyphItem* glyphItem, const(char)* text) c_pango_glyph_item_iter_init_start; ///
-  bool function(PangoGlyphItemIter* iter) c_pango_glyph_item_iter_next_cluster; ///
-  bool function(PangoGlyphItemIter* iter) c_pango_glyph_item_iter_prev_cluster; ///
+  gboolean function(PangoGlyphItemIter* iter, PangoGlyphItem* glyphItem, const(char)* text) c_pango_glyph_item_iter_init_end; ///
+  gboolean function(PangoGlyphItemIter* iter, PangoGlyphItem* glyphItem, const(char)* text) c_pango_glyph_item_iter_init_start; ///
+  gboolean function(PangoGlyphItemIter* iter) c_pango_glyph_item_iter_next_cluster; ///
+  gboolean function(PangoGlyphItemIter* iter) c_pango_glyph_item_iter_prev_cluster; ///
 
   // GlyphString
   GType function() c_pango_glyph_string_get_type; ///
@@ -260,8 +260,8 @@ __gshared extern(C)
   void function(PangoGlyphString* string_) c_pango_glyph_string_free; ///
   void function(PangoGlyphString* glyphs, const(char)* text, int length, int embeddingLevel, int* logicalWidths) c_pango_glyph_string_get_logical_widths; ///
   int function(PangoGlyphString* glyphs) c_pango_glyph_string_get_width; ///
-  void function(PangoGlyphString* glyphs, const(char)* text, int length, PangoAnalysis* analysis, int index, bool trailing, int* xPos) c_pango_glyph_string_index_to_x; ///
-  void function(PangoGlyphString* glyphs, const(char)* text, int length, PangoAnalysis* analysis, PangoLogAttr* attrs, int index, bool trailing, int* xPos) c_pango_glyph_string_index_to_x_full; ///
+  void function(PangoGlyphString* glyphs, const(char)* text, int length, PangoAnalysis* analysis, int index, gboolean trailing, int* xPos) c_pango_glyph_string_index_to_x; ///
+  void function(PangoGlyphString* glyphs, const(char)* text, int length, PangoAnalysis* analysis, PangoLogAttr* attrs, int index, gboolean trailing, int* xPos) c_pango_glyph_string_index_to_x_full; ///
   void function(PangoGlyphString* string_, int newLen) c_pango_glyph_string_set_size; ///
   void function(PangoGlyphString* glyphs, const(char)* text, int length, PangoAnalysis* analysis, int xPos, int* index, int* trailing) c_pango_glyph_string_x_to_index; ///
 
@@ -277,8 +277,8 @@ __gshared extern(C)
   GType function() c_pango_language_get_type; ///
   const(char)* function(PangoLanguage* language) c_pango_language_get_sample_string; ///
   const(PangoScript)* function(PangoLanguage* language, int* numScripts) c_pango_language_get_scripts; ///
-  bool function(PangoLanguage* language, PangoScript script) c_pango_language_includes_script; ///
-  bool function(PangoLanguage* language, const(char)* rangeList) c_pango_language_matches; ///
+  gboolean function(PangoLanguage* language, PangoScript script) c_pango_language_includes_script; ///
+  gboolean function(PangoLanguage* language, const(char)* rangeList) c_pango_language_matches; ///
   const(char)* function(PangoLanguage* language) c_pango_language_to_string; ///
   PangoLanguage* function(const(char)* language) c_pango_language_from_string; ///
   PangoLanguage* function() c_pango_language_get_default; ///
@@ -292,7 +292,7 @@ __gshared extern(C)
   PangoLayout* function(PangoLayout* src) c_pango_layout_copy; ///
   PangoAlignment function(PangoLayout* layout) c_pango_layout_get_alignment; ///
   PangoAttrList* function(PangoLayout* layout) c_pango_layout_get_attributes; ///
-  bool function(PangoLayout* layout) c_pango_layout_get_auto_dir; ///
+  gboolean function(PangoLayout* layout) c_pango_layout_get_auto_dir; ///
   int function(PangoLayout* layout) c_pango_layout_get_baseline; ///
   void function(PangoLayout* layout, int index, PangoRectangle* strongPos, PangoRectangle* weakPos) c_pango_layout_get_caret_pos; ///
   int function(PangoLayout* layout) c_pango_layout_get_character_count; ///
@@ -305,8 +305,8 @@ __gshared extern(C)
   int function(PangoLayout* layout) c_pango_layout_get_height; ///
   int function(PangoLayout* layout) c_pango_layout_get_indent; ///
   PangoLayoutIter* function(PangoLayout* layout) c_pango_layout_get_iter; ///
-  bool function(PangoLayout* layout) c_pango_layout_get_justify; ///
-  bool function(PangoLayout* layout) c_pango_layout_get_justify_last_line; ///
+  gboolean function(PangoLayout* layout) c_pango_layout_get_justify; ///
+  gboolean function(PangoLayout* layout) c_pango_layout_get_justify_last_line; ///
   PangoLayoutLine* function(PangoLayout* layout, int line) c_pango_layout_get_line; ///
   int function(PangoLayout* layout) c_pango_layout_get_line_count; ///
   PangoLayoutLine* function(PangoLayout* layout, int line) c_pango_layout_get_line_readonly; ///
@@ -318,7 +318,7 @@ __gshared extern(C)
   void function(PangoLayout* layout, PangoRectangle* inkRect, PangoRectangle* logicalRect) c_pango_layout_get_pixel_extents; ///
   void function(PangoLayout* layout, int* width, int* height) c_pango_layout_get_pixel_size; ///
   uint function(PangoLayout* layout) c_pango_layout_get_serial; ///
-  bool function(PangoLayout* layout) c_pango_layout_get_single_paragraph_mode; ///
+  gboolean function(PangoLayout* layout) c_pango_layout_get_single_paragraph_mode; ///
   void function(PangoLayout* layout, int* width, int* height) c_pango_layout_get_size; ///
   int function(PangoLayout* layout) c_pango_layout_get_spacing; ///
   PangoTabArray* function(PangoLayout* layout) c_pango_layout_get_tabs; ///
@@ -326,36 +326,36 @@ __gshared extern(C)
   int function(PangoLayout* layout) c_pango_layout_get_unknown_glyphs_count; ///
   int function(PangoLayout* layout) c_pango_layout_get_width; ///
   PangoWrapMode function(PangoLayout* layout) c_pango_layout_get_wrap; ///
-  void function(PangoLayout* layout, int index, bool trailing, int* line, int* xPos) c_pango_layout_index_to_line_x; ///
+  void function(PangoLayout* layout, int index, gboolean trailing, int* line, int* xPos) c_pango_layout_index_to_line_x; ///
   void function(PangoLayout* layout, int index, PangoRectangle* pos) c_pango_layout_index_to_pos; ///
-  bool function(PangoLayout* layout) c_pango_layout_is_ellipsized; ///
-  bool function(PangoLayout* layout) c_pango_layout_is_wrapped; ///
-  void function(PangoLayout* layout, bool strong, int oldIndex, int oldTrailing, int direction, int* newIndex, int* newTrailing) c_pango_layout_move_cursor_visually; ///
+  gboolean function(PangoLayout* layout) c_pango_layout_is_ellipsized; ///
+  gboolean function(PangoLayout* layout) c_pango_layout_is_wrapped; ///
+  void function(PangoLayout* layout, gboolean strong, int oldIndex, int oldTrailing, int direction, int* newIndex, int* newTrailing) c_pango_layout_move_cursor_visually; ///
   GBytes* function(PangoLayout* layout, PangoLayoutSerializeFlags flags) c_pango_layout_serialize; ///
   void function(PangoLayout* layout, PangoAlignment alignment) c_pango_layout_set_alignment; ///
   void function(PangoLayout* layout, PangoAttrList* attrs) c_pango_layout_set_attributes; ///
-  void function(PangoLayout* layout, bool autoDir) c_pango_layout_set_auto_dir; ///
+  void function(PangoLayout* layout, gboolean autoDir) c_pango_layout_set_auto_dir; ///
   void function(PangoLayout* layout, PangoEllipsizeMode ellipsize) c_pango_layout_set_ellipsize; ///
   void function(PangoLayout* layout, const(PangoFontDescription)* desc) c_pango_layout_set_font_description; ///
   void function(PangoLayout* layout, int height) c_pango_layout_set_height; ///
   void function(PangoLayout* layout, int indent) c_pango_layout_set_indent; ///
-  void function(PangoLayout* layout, bool justify) c_pango_layout_set_justify; ///
-  void function(PangoLayout* layout, bool justify) c_pango_layout_set_justify_last_line; ///
+  void function(PangoLayout* layout, gboolean justify) c_pango_layout_set_justify; ///
+  void function(PangoLayout* layout, gboolean justify) c_pango_layout_set_justify_last_line; ///
   void function(PangoLayout* layout, float factor) c_pango_layout_set_line_spacing; ///
   void function(PangoLayout* layout, const(char)* markup, int length) c_pango_layout_set_markup; ///
   void function(PangoLayout* layout, const(char)* markup, int length, dchar accelMarker, dchar* accelChar) c_pango_layout_set_markup_with_accel; ///
-  void function(PangoLayout* layout, bool setting) c_pango_layout_set_single_paragraph_mode; ///
+  void function(PangoLayout* layout, gboolean setting) c_pango_layout_set_single_paragraph_mode; ///
   void function(PangoLayout* layout, int spacing) c_pango_layout_set_spacing; ///
   void function(PangoLayout* layout, PangoTabArray* tabs) c_pango_layout_set_tabs; ///
   void function(PangoLayout* layout, char* text, int length) c_pango_layout_set_text; ///
   void function(PangoLayout* layout, int width) c_pango_layout_set_width; ///
   void function(PangoLayout* layout, PangoWrapMode wrap) c_pango_layout_set_wrap; ///
-  bool function(PangoLayout* layout, PangoLayoutSerializeFlags flags, const(char)* filename, GError** _err) c_pango_layout_write_to_file; ///
-  bool function(PangoLayout* layout, int x, int y, int* index, int* trailing) c_pango_layout_xy_to_index; ///
+  gboolean function(PangoLayout* layout, PangoLayoutSerializeFlags flags, const(char)* filename, GError** _err) c_pango_layout_write_to_file; ///
+  gboolean function(PangoLayout* layout, int x, int y, int* index, int* trailing) c_pango_layout_xy_to_index; ///
 
   // LayoutIter
   GType function() c_pango_layout_iter_get_type; ///
-  bool function(PangoLayoutIter* iter) c_pango_layout_iter_at_last_line; ///
+  gboolean function(PangoLayoutIter* iter) c_pango_layout_iter_at_last_line; ///
   PangoLayoutIter* function(PangoLayoutIter* iter) c_pango_layout_iter_copy; ///
   void function(PangoLayoutIter* iter) c_pango_layout_iter_free; ///
   int function(PangoLayoutIter* iter) c_pango_layout_iter_get_baseline; ///
@@ -372,10 +372,10 @@ __gshared extern(C)
   int function(PangoLayoutIter* iter) c_pango_layout_iter_get_run_baseline; ///
   void function(PangoLayoutIter* iter, PangoRectangle* inkRect, PangoRectangle* logicalRect) c_pango_layout_iter_get_run_extents; ///
   PangoLayoutRun* function(PangoLayoutIter* iter) c_pango_layout_iter_get_run_readonly; ///
-  bool function(PangoLayoutIter* iter) c_pango_layout_iter_next_char; ///
-  bool function(PangoLayoutIter* iter) c_pango_layout_iter_next_cluster; ///
-  bool function(PangoLayoutIter* iter) c_pango_layout_iter_next_line; ///
-  bool function(PangoLayoutIter* iter) c_pango_layout_iter_next_run; ///
+  gboolean function(PangoLayoutIter* iter) c_pango_layout_iter_next_char; ///
+  gboolean function(PangoLayoutIter* iter) c_pango_layout_iter_next_cluster; ///
+  gboolean function(PangoLayoutIter* iter) c_pango_layout_iter_next_line; ///
+  gboolean function(PangoLayoutIter* iter) c_pango_layout_iter_next_run; ///
 
   // LayoutLine
   GType function() c_pango_layout_line_get_type; ///
@@ -386,11 +386,11 @@ __gshared extern(C)
   PangoDirection function(PangoLayoutLine* line) c_pango_layout_line_get_resolved_direction; ///
   int function(PangoLayoutLine* line) c_pango_layout_line_get_start_index; ///
   void function(PangoLayoutLine* line, int startIndex, int endIndex, int** ranges, int* nRanges) c_pango_layout_line_get_x_ranges; ///
-  void function(PangoLayoutLine* line, int index, bool trailing, int* xPos) c_pango_layout_line_index_to_x; ///
-  bool function(PangoLayoutLine* line) c_pango_layout_line_is_paragraph_start; ///
+  void function(PangoLayoutLine* line, int index, gboolean trailing, int* xPos) c_pango_layout_line_index_to_x; ///
+  gboolean function(PangoLayoutLine* line) c_pango_layout_line_is_paragraph_start; ///
   PangoLayoutLine* function(PangoLayoutLine* line) c_pango_layout_line_ref; ///
   void function(PangoLayoutLine* line) c_pango_layout_line_unref; ///
-  bool function(PangoLayoutLine* line, int xPos, int* index, int* trailing) c_pango_layout_line_x_to_index; ///
+  gboolean function(PangoLayoutLine* line, int xPos, int* index, int* trailing) c_pango_layout_line_x_to_index; ///
 
   // Matrix
   GType function() c_pango_matrix_get_type; ///
@@ -435,41 +435,41 @@ __gshared extern(C)
   PangoScriptIter* function(const(char)* text, int length) c_pango_script_iter_new; ///
   void function(PangoScriptIter* iter) c_pango_script_iter_free; ///
   void function(PangoScriptIter* iter, const(char*)* start, const(char*)* end, PangoScript* script) c_pango_script_iter_get_range; ///
-  bool function(PangoScriptIter* iter) c_pango_script_iter_next; ///
+  gboolean function(PangoScriptIter* iter) c_pango_script_iter_next; ///
 
   // TabArray
   GType function() c_pango_tab_array_get_type; ///
-  PangoTabArray* function(int initialSize, bool positionsInPixels) c_pango_tab_array_new; ///
-  PangoTabArray* function(int size, bool positionsInPixels, PangoTabAlign firstAlignment, int firstPosition,  ...) c_pango_tab_array_new_with_positions; ///
+  PangoTabArray* function(int initialSize, gboolean positionsInPixels) c_pango_tab_array_new; ///
+  PangoTabArray* function(int size, gboolean positionsInPixels, PangoTabAlign firstAlignment, int firstPosition,  ...) c_pango_tab_array_new_with_positions; ///
   PangoTabArray* function(PangoTabArray* src) c_pango_tab_array_copy; ///
   void function(PangoTabArray* tabArray) c_pango_tab_array_free; ///
   dchar function(PangoTabArray* tabArray, int tabIndex) c_pango_tab_array_get_decimal_point; ///
-  bool function(PangoTabArray* tabArray) c_pango_tab_array_get_positions_in_pixels; ///
+  gboolean function(PangoTabArray* tabArray) c_pango_tab_array_get_positions_in_pixels; ///
   int function(PangoTabArray* tabArray) c_pango_tab_array_get_size; ///
   void function(PangoTabArray* tabArray, int tabIndex, PangoTabAlign* alignment, int* location) c_pango_tab_array_get_tab; ///
   void function(PangoTabArray* tabArray, PangoTabAlign** alignments, int** locations) c_pango_tab_array_get_tabs; ///
   void function(PangoTabArray* tabArray, int newSize) c_pango_tab_array_resize; ///
   void function(PangoTabArray* tabArray, int tabIndex, dchar decimalPoint) c_pango_tab_array_set_decimal_point; ///
-  void function(PangoTabArray* tabArray, bool positionsInPixels) c_pango_tab_array_set_positions_in_pixels; ///
+  void function(PangoTabArray* tabArray, gboolean positionsInPixels) c_pango_tab_array_set_positions_in_pixels; ///
   void function(PangoTabArray* tabArray, int tabIndex, PangoTabAlign alignment, int location) c_pango_tab_array_set_tab; ///
   void function(PangoTabArray* tabArray) c_pango_tab_array_sort; ///
   char* function(PangoTabArray* tabArray) c_pango_tab_array_to_string; ///
   PangoTabArray* function(const(char)* text) c_pango_tab_array_from_string; ///
 
   // global
-  PangoAttribute* function(bool allowBreaks) c_pango_attr_allow_breaks_new; ///
+  PangoAttribute* function(gboolean allowBreaks) c_pango_attr_allow_breaks_new; ///
   PangoAttribute* function(ushort alpha) c_pango_attr_background_alpha_new; ///
   PangoAttribute* function(ushort red, ushort green, ushort blue) c_pango_attr_background_new; ///
   PangoAttribute* function(int shift) c_pango_attr_baseline_shift_new; ///
   void function(const(char)* text, int length, PangoAttrList* attrList, int offset, PangoLogAttr* attrs, int attrsLen) c_pango_attr_break; ///
-  PangoAttribute* function(bool enableFallback) c_pango_attr_fallback_new; ///
+  PangoAttribute* function(gboolean enableFallback) c_pango_attr_fallback_new; ///
   PangoAttribute* function(const(char)* family) c_pango_attr_family_new; ///
   PangoAttribute* function(PangoFontScale scale) c_pango_attr_font_scale_new; ///
   PangoAttribute* function(ushort alpha) c_pango_attr_foreground_alpha_new; ///
   PangoAttribute* function(ushort red, ushort green, ushort blue) c_pango_attr_foreground_new; ///
   PangoAttribute* function(PangoGravityHint hint) c_pango_attr_gravity_hint_new; ///
   PangoAttribute* function(PangoGravity gravity) c_pango_attr_gravity_new; ///
-  PangoAttribute* function(bool insertHyphens) c_pango_attr_insert_hyphens_new; ///
+  PangoAttribute* function(gboolean insertHyphens) c_pango_attr_insert_hyphens_new; ///
   PangoAttribute* function(int letterSpacing) c_pango_attr_letter_spacing_new; ///
   PangoAttribute* function(double factor) c_pango_attr_line_height_new; ///
   PangoAttribute* function(int height) c_pango_attr_line_height_new_absolute; ///
@@ -481,7 +481,7 @@ __gshared extern(C)
   PangoAttribute* function(PangoShowFlags flags) c_pango_attr_show_new; ///
   PangoAttribute* function(PangoStretch stretch) c_pango_attr_stretch_new; ///
   PangoAttribute* function(ushort red, ushort green, ushort blue) c_pango_attr_strikethrough_color_new; ///
-  PangoAttribute* function(bool strikethrough) c_pango_attr_strikethrough_new; ///
+  PangoAttribute* function(gboolean strikethrough) c_pango_attr_strikethrough_new; ///
   PangoAttribute* function(PangoStyle style) c_pango_attr_style_new; ///
   PangoAttribute* function(PangoTextTransform transform) c_pango_attr_text_transform_new; ///
   PangoAttribute* function(ushort red, ushort green, ushort blue) c_pango_attr_underline_color_new; ///
@@ -495,30 +495,30 @@ __gshared extern(C)
   PangoDirection function(const(char)* text, int length) c_pango_find_base_dir; ///
   void function(const(char)* text, int length, int* paragraphDelimiterIndex, int* nextParagraphStart) c_pango_find_paragraph_boundary; ///
   void function(const(char)* text, int length, int level, PangoLanguage* language, PangoLogAttr* attrs, int attrsLen) c_pango_get_log_attrs; ///
-  bool function(dchar ch, dchar* mirroredCh) c_pango_get_mirror_char; ///
-  bool function(dchar ch) c_pango_is_zero_width; ///
+  gboolean function(dchar ch, dchar* mirroredCh) c_pango_get_mirror_char; ///
+  gboolean function(dchar ch) c_pango_is_zero_width; ///
   GList* function(PangoContext* context, const(char)* text, int startIndex, int length, PangoAttrList* attrs, PangoAttrIterator* cachedIter) c_pango_itemize; ///
   GList* function(PangoContext* context, PangoDirection baseDir, const(char)* text, int startIndex, int length, PangoAttrList* attrs, PangoAttrIterator* cachedIter) c_pango_itemize_with_base_dir; ///
   ubyte* function(const(char)* text, int length, PangoDirection* pbaseDir) c_pango_log2vis_get_embedding_levels; ///
-  bool function(GMarkupParseContext* context, PangoAttrList** attrList, char** text, dchar* accelChar, GError** _err) c_pango_markup_parser_finish; ///
+  gboolean function(GMarkupParseContext* context, PangoAttrList** attrList, char** text, dchar* accelChar, GError** _err) c_pango_markup_parser_finish; ///
   GMarkupParseContext* function(dchar accelMarker) c_pango_markup_parser_new; ///
-  bool function(GType type, const(char)* str, int* value, bool warn, char** possibleValues) c_pango_parse_enum; ///
-  bool function(const(char)* markupText, int length, dchar accelMarker, PangoAttrList** attrList, char** text, dchar* accelChar, GError** _err) c_pango_parse_markup; ///
-  bool function(const(char)* str, PangoStretch* stretch, bool warn) c_pango_parse_stretch; ///
-  bool function(const(char)* str, PangoStyle* style, bool warn) c_pango_parse_style; ///
-  bool function(const(char)* str, PangoVariant* variant, bool warn) c_pango_parse_variant; ///
-  bool function(const(char)* str, PangoWeight* weight, bool warn) c_pango_parse_weight; ///
+  gboolean function(GType type, const(char)* str, int* value, gboolean warn, char** possibleValues) c_pango_parse_enum; ///
+  gboolean function(const(char)* markupText, int length, dchar accelMarker, PangoAttrList** attrList, char** text, dchar* accelChar, GError** _err) c_pango_parse_markup; ///
+  gboolean function(const(char)* str, PangoStretch* stretch, gboolean warn) c_pango_parse_stretch; ///
+  gboolean function(const(char)* str, PangoStyle* style, gboolean warn) c_pango_parse_style; ///
+  gboolean function(const(char)* str, PangoVariant* variant, gboolean warn) c_pango_parse_variant; ///
+  gboolean function(const(char)* str, PangoWeight* weight, gboolean warn) c_pango_parse_weight; ///
   void function(int* thickness, int* position) c_pango_quantize_line_geometry; ///
   int function(void* stream, GString* str) c_pango_read_line; ///
   GList* function(GList* items) c_pango_reorder_items; ///
-  bool function(const(char*)* pos, int* out_) c_pango_scan_int; ///
-  bool function(const(char*)* pos, GString* out_) c_pango_scan_string; ///
-  bool function(const(char*)* pos, GString* out_) c_pango_scan_word; ///
+  gboolean function(const(char*)* pos, int* out_) c_pango_scan_int; ///
+  gboolean function(const(char*)* pos, GString* out_) c_pango_scan_string; ///
+  gboolean function(const(char*)* pos, GString* out_) c_pango_scan_word; ///
   void function(const(char)* text, int length, const(PangoAnalysis)* analysis, PangoGlyphString* glyphs) c_pango_shape; ///
   void function(const(char)* itemText, int itemLength, const(char)* paragraphText, int paragraphLength, const(PangoAnalysis)* analysis, PangoGlyphString* glyphs) c_pango_shape_full; ///
   void function(PangoItem* item, const(char)* paragraphText, int paragraphLength, PangoLogAttr* logAttrs, PangoGlyphString* glyphs, PangoShapeFlags flags) c_pango_shape_item; ///
   void function(const(char)* itemText, int itemLength, const(char)* paragraphText, int paragraphLength, const(PangoAnalysis)* analysis, PangoGlyphString* glyphs, PangoShapeFlags flags) c_pango_shape_with_flags; ///
-  bool function(const(char*)* pos) c_pango_skip_space; ///
+  gboolean function(const(char*)* pos) c_pango_skip_space; ///
   char** function(const(char)* str) c_pango_split_file_list; ///
   void function(const(char)* text, int length, PangoAnalysis* analysis, int offset, PangoLogAttr* attrs, int attrsLen) c_pango_tailor_break; ///
   char* function(const(char)* str) c_pango_trim_string; ///
@@ -539,7 +539,7 @@ __gshared extern(C)
   // Gravity
   PangoGravity function(const(PangoMatrix)* matrix) c_pango_gravity_get_for_matrix; ///
   PangoGravity function(PangoScript script, PangoGravity baseGravity, PangoGravityHint hint) c_pango_gravity_get_for_script; ///
-  PangoGravity function(PangoScript script, bool wide, PangoGravity baseGravity, PangoGravityHint hint) c_pango_gravity_get_for_script_and_width; ///
+  PangoGravity function(PangoScript script, gboolean wide, PangoGravity baseGravity, PangoGravityHint hint) c_pango_gravity_get_for_script_and_width; ///
   double function(PangoGravity gravity) c_pango_gravity_to_rotation; ///
 
   // LayoutDeserializeError

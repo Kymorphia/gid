@@ -67,7 +67,7 @@ class WebFormManager : gobject.object.ObjectWrap
   static bool inputElementIsAutoFilled(javascriptcore.value.Value element)
   {
     bool _retval;
-    _retval = webkit_web_form_manager_input_element_is_auto_filled(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
+    _retval = cast(bool)webkit_web_form_manager_input_element_is_auto_filled(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class WebFormManager : gobject.object.ObjectWrap
   static bool inputElementIsUserEdited(javascriptcore.value.Value element)
   {
     bool _retval;
-    _retval = webkit_web_form_manager_input_element_is_user_edited(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
+    _retval = cast(bool)webkit_web_form_manager_input_element_is_user_edited(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 

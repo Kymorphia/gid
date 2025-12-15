@@ -264,7 +264,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   bool getDrawSensitive()
   {
     bool _retval;
-    _retval = gtk_cell_view_get_draw_sensitive(cast(GtkCellView*)this._cPtr);
+    _retval = cast(bool)gtk_cell_view_get_draw_sensitive(cast(GtkCellView*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   bool getFitModel()
   {
     bool _retval;
-    _retval = gtk_cell_view_get_fit_model(cast(GtkCellView*)this._cPtr);
+    _retval = cast(bool)gtk_cell_view_get_fit_model(cast(GtkCellView*)this._cPtr);
     return _retval;
   }
 

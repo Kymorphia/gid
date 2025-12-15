@@ -277,7 +277,7 @@ class BaseSrc : gst.element.Element
   bool getDoTimestamp()
   {
     bool _retval;
-    _retval = gst_base_src_get_do_timestamp(cast(GstBaseSrc*)this._cPtr);
+    _retval = cast(bool)gst_base_src_get_do_timestamp(cast(GstBaseSrc*)this._cPtr);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class BaseSrc : gst.element.Element
   bool isAsync()
   {
     bool _retval;
-    _retval = gst_base_src_is_async(cast(GstBaseSrc*)this._cPtr);
+    _retval = cast(bool)gst_base_src_is_async(cast(GstBaseSrc*)this._cPtr);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class BaseSrc : gst.element.Element
   bool isLive()
   {
     bool _retval;
-    _retval = gst_base_src_is_live(cast(GstBaseSrc*)this._cPtr);
+    _retval = cast(bool)gst_base_src_is_live(cast(GstBaseSrc*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class BaseSrc : gst.element.Element
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_base_src_negotiate(cast(GstBaseSrc*)this._cPtr);
+    _retval = cast(bool)gst_base_src_negotiate(cast(GstBaseSrc*)this._cPtr);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class BaseSrc : gst.element.Element
   bool newSeamlessSegment(long start, long stop, long time)
   {
     bool _retval;
-    _retval = gst_base_src_new_seamless_segment(cast(GstBaseSrc*)this._cPtr, start, stop, time);
+    _retval = cast(bool)gst_base_src_new_seamless_segment(cast(GstBaseSrc*)this._cPtr, start, stop, time);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class BaseSrc : gst.element.Element
   bool newSegment(gst.segment.Segment segment)
   {
     bool _retval;
-    _retval = gst_base_src_new_segment(cast(GstBaseSrc*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_base_src_new_segment(cast(GstBaseSrc*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class BaseSrc : gst.element.Element
   bool pushSegment(gst.segment.Segment segment)
   {
     bool _retval;
-    _retval = gst_base_src_push_segment(cast(GstBaseSrc*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_base_src_push_segment(cast(GstBaseSrc*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -409,7 +409,9 @@ class BaseSrc : gst.element.Element
   bool queryLatency(out bool live, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
   {
     bool _retval;
-    _retval = gst_base_src_query_latency(cast(GstBaseSrc*)this._cPtr, cast(bool*)&live, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    gboolean _live;
+    _retval = cast(bool)gst_base_src_query_latency(cast(GstBaseSrc*)this._cPtr, &_live, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    live = cast(bool)_live;
     return _retval;
   }
 
@@ -469,7 +471,7 @@ class BaseSrc : gst.element.Element
   bool setCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_base_src_set_caps(cast(GstBaseSrc*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_base_src_set_caps(cast(GstBaseSrc*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 

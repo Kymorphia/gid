@@ -53,7 +53,7 @@ class DataType : gobject.object.ObjectWrap
   bool equal(arrow.data_type.DataType otherDataType)
   {
     bool _retval;
-    _retval = garrow_data_type_equal(cast(GArrowDataType*)this._cPtr, otherDataType ? cast(GArrowDataType*)otherDataType._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_data_type_equal(cast(GArrowDataType*)this._cPtr, otherDataType ? cast(GArrowDataType*)otherDataType._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -362,7 +362,7 @@ template FileChooserT()
     bool _retval;
     const(char)* _folder = folder.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
+    _retval = cast(bool)gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -385,7 +385,7 @@ template FileChooserT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_file_chooser_add_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
+    _retval = cast(bool)gtk_file_chooser_add_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -428,7 +428,7 @@ template FileChooserT()
   override bool getCreateFolders()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_create_folders(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_create_folders(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -527,7 +527,7 @@ template FileChooserT()
   override bool getDoOverwriteConfirmation()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_do_overwrite_confirmation(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_do_overwrite_confirmation(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -636,7 +636,7 @@ template FileChooserT()
   override bool getLocalOnly()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_local_only(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_local_only(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -705,7 +705,7 @@ template FileChooserT()
   override bool getPreviewWidgetActive()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_preview_widget_active(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_preview_widget_active(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -717,7 +717,7 @@ template FileChooserT()
   override bool getSelectMultiple()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_select_multiple(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_select_multiple(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -729,7 +729,7 @@ template FileChooserT()
   override bool getShowHidden()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_show_hidden(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_show_hidden(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -777,7 +777,7 @@ template FileChooserT()
   override bool getUsePreviewLabel()
   {
     bool _retval;
-    _retval = gtk_file_chooser_get_use_preview_label(cast(GtkFileChooser*)this._cPtr);
+    _retval = cast(bool)gtk_file_chooser_get_use_preview_label(cast(GtkFileChooser*)this._cPtr);
     return _retval;
   }
 
@@ -867,7 +867,7 @@ template FileChooserT()
     bool _retval;
     const(char)* _folder = folder.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
+    _retval = cast(bool)gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -889,7 +889,7 @@ template FileChooserT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_file_chooser_remove_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
+    _retval = cast(bool)gtk_file_chooser_remove_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -916,7 +916,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_select_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_chooser_select_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -937,7 +937,7 @@ template FileChooserT()
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
-    _retval = gtk_file_chooser_select_filename(cast(GtkFileChooser*)this._cPtr, _filename);
+    _retval = cast(bool)gtk_file_chooser_select_filename(cast(GtkFileChooser*)this._cPtr, _filename);
     return _retval;
   }
 
@@ -954,7 +954,7 @@ template FileChooserT()
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_file_chooser_select_uri(cast(GtkFileChooser*)this._cPtr, _uri);
+    _retval = cast(bool)gtk_file_chooser_select_uri(cast(GtkFileChooser*)this._cPtr, _uri);
     return _retval;
   }
 
@@ -1019,7 +1019,7 @@ template FileChooserT()
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
-    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)this._cPtr, _filename);
+    _retval = cast(bool)gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)this._cPtr, _filename);
     return _retval;
   }
 
@@ -1037,7 +1037,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_current_folder_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_chooser_set_current_folder_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1061,7 +1061,7 @@ template FileChooserT()
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_file_chooser_set_current_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri);
+    _retval = cast(bool)gtk_file_chooser_set_current_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri);
     return _retval;
   }
 
@@ -1162,7 +1162,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_chooser_set_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1210,7 +1210,7 @@ template FileChooserT()
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
-    _retval = gtk_file_chooser_set_filename(cast(GtkFileChooser*)this._cPtr, _filename);
+    _retval = cast(bool)gtk_file_chooser_set_filename(cast(GtkFileChooser*)this._cPtr, _filename);
     return _retval;
   }
 
@@ -1357,7 +1357,7 @@ template FileChooserT()
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_file_chooser_set_uri(cast(GtkFileChooser*)this._cPtr, _uri);
+    _retval = cast(bool)gtk_file_chooser_set_uri(cast(GtkFileChooser*)this._cPtr, _uri);
     return _retval;
   }
 

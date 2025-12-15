@@ -1974,9 +1974,9 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     static gtk.types.RcPropertyParser _static_parser;
 
-    extern(C) bool _parserCallback(const(GParamSpec)* pspec, const(GString)* rcString, GValue* propertyValue)
+    extern(C) gboolean _parserCallback(const(GParamSpec)* pspec, const(GString)* rcString, GValue* propertyValue)
     {
-      bool _retval = _static_parser(pspec ? new gobject.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null, rcString ? new glib.string_.String(cast(void*)rcString, No.Take) : null, propertyValue ? new gobject.value.Value(cast(void*)propertyValue, No.Take) : null);
+      gboolean _retval = _static_parser(pspec ? new gobject.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null, rcString ? new glib.string_.String(cast(void*)rcString, No.Take) : null, propertyValue ? new gobject.value.Value(cast(void*)propertyValue, No.Take) : null);
       return _retval;
     }
     auto _parserCB = parser ? &_parserCallback : null;

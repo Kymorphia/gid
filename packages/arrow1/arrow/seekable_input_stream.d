@@ -59,7 +59,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
   bool getSupportZeroCopy()
   {
     bool _retval;
-    _retval = garrow_seekable_input_stream_get_support_zero_copy(cast(GArrowSeekableInputStream*)this._cPtr);
+    _retval = cast(bool)garrow_seekable_input_stream_get_support_zero_copy(cast(GArrowSeekableInputStream*)this._cPtr);
     return _retval;
   }
 

@@ -331,7 +331,7 @@ class ViewStack : gtk.widget.Widget
   bool getHhomogeneous()
   {
     bool _retval;
-    _retval = adw_view_stack_get_hhomogeneous(cast(AdwViewStack*)this._cPtr);
+    _retval = cast(bool)adw_view_stack_get_hhomogeneous(cast(AdwViewStack*)this._cPtr);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class ViewStack : gtk.widget.Widget
   bool getVhomogeneous()
   {
     bool _retval;
-    _retval = adw_view_stack_get_vhomogeneous(cast(AdwViewStack*)this._cPtr);
+    _retval = cast(bool)adw_view_stack_get_vhomogeneous(cast(AdwViewStack*)this._cPtr);
     return _retval;
   }
 

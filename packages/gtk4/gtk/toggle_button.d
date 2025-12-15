@@ -210,7 +210,7 @@ class ToggleButton : gtk.button.Button
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_toggle_button_get_active(cast(GtkToggleButton*)this._cPtr);
+    _retval = cast(bool)gtk_toggle_button_get_active(cast(GtkToggleButton*)this._cPtr);
     return _retval;
   }
 

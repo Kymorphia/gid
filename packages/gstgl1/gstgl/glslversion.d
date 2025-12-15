@@ -35,7 +35,7 @@ struct GLSLVersion
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _retval = gst_glsl_version_profile_from_string(_string_, &versionRet, &profileRet);
+    _retval = cast(bool)gst_glsl_version_profile_from_string(_string_, &versionRet, &profileRet);
     return _retval;
   }
 

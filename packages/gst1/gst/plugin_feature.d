@@ -112,7 +112,7 @@ class PluginFeature : gst.object.ObjectWrap
   bool checkVersion(uint minMajor, uint minMinor, uint minMicro)
   {
     bool _retval;
-    _retval = gst_plugin_feature_check_version(cast(GstPluginFeature*)this._cPtr, minMajor, minMinor, minMicro);
+    _retval = cast(bool)gst_plugin_feature_check_version(cast(GstPluginFeature*)this._cPtr, minMajor, minMinor, minMicro);
     return _retval;
   }
 

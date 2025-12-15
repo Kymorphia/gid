@@ -510,7 +510,7 @@ class Toast : gobject.object.ObjectWrap
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = adw_toast_get_use_markup(cast(AdwToast*)this._cPtr);
+    _retval = cast(bool)adw_toast_get_use_markup(cast(AdwToast*)this._cPtr);
     return _retval;
   }
 

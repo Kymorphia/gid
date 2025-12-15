@@ -100,7 +100,7 @@ class Multipart : gmime.object.ObjectWrap
   bool contains(gmime.object.ObjectWrap part)
   {
     bool _retval;
-    _retval = g_mime_multipart_contains(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_mime_multipart_contains(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Multipart : gmime.object.ObjectWrap
   bool remove(gmime.object.ObjectWrap part)
   {
     bool _retval;
-    _retval = g_mime_multipart_remove(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_mime_multipart_remove(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
     return _retval;
   }
 

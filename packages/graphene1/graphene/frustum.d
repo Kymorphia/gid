@@ -87,7 +87,7 @@ class Frustum : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
-    _retval = graphene_frustum_contains_point(cast(const(graphene_frustum_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_frustum_contains_point(cast(const(graphene_frustum_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class Frustum : gobject.boxed.Boxed
   bool equal(graphene.frustum.Frustum b)
   {
     bool _retval;
-    _retval = graphene_frustum_equal(cast(const(graphene_frustum_t)*)this._cPtr, b ? cast(const(graphene_frustum_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_frustum_equal(cast(const(graphene_frustum_t)*)this._cPtr, b ? cast(const(graphene_frustum_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Frustum : gobject.boxed.Boxed
   bool intersectsBox(graphene.box.Box box)
   {
     bool _retval;
-    _retval = graphene_frustum_intersects_box(cast(const(graphene_frustum_t)*)this._cPtr, box ? cast(const(graphene_box_t)*)box._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_frustum_intersects_box(cast(const(graphene_frustum_t)*)this._cPtr, box ? cast(const(graphene_box_t)*)box._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Frustum : gobject.boxed.Boxed
   bool intersectsSphere(graphene.sphere.Sphere sphere)
   {
     bool _retval;
-    _retval = graphene_frustum_intersects_sphere(cast(const(graphene_frustum_t)*)this._cPtr, sphere ? cast(const(graphene_sphere_t)*)sphere._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_frustum_intersects_sphere(cast(const(graphene_frustum_t)*)this._cPtr, sphere ? cast(const(graphene_sphere_t)*)sphere._cPtr(No.Dup) : null);
     return _retval;
   }
 }

@@ -320,7 +320,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   bool getDrawSensitive()
   {
     bool _retval;
-    _retval = gtk_cell_view_get_draw_sensitive(cast(GtkCellView*)this._cPtr);
+    _retval = cast(bool)gtk_cell_view_get_draw_sensitive(cast(GtkCellView*)this._cPtr);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   bool getFitModel()
   {
     bool _retval;
-    _retval = gtk_cell_view_get_fit_model(cast(GtkCellView*)this._cPtr);
+    _retval = cast(bool)gtk_cell_view_get_fit_model(cast(GtkCellView*)this._cPtr);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   {
     bool _retval;
     GtkRequisition _requisition;
-    _retval = gtk_cell_view_get_size_of_row(cast(GtkCellView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, &_requisition);
+    _retval = cast(bool)gtk_cell_view_get_size_of_row(cast(GtkCellView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, &_requisition);
     requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
     return _retval;
   }

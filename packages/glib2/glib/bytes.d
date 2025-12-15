@@ -126,7 +126,7 @@ class Bytes : gobject.boxed.Boxed
   bool equal(glib.bytes.Bytes bytes2)
   {
     bool _retval;
-    _retval = g_bytes_equal(cast(GBytes*)this._cPtr, bytes2 ? cast(GBytes*)bytes2._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_bytes_equal(cast(GBytes*)this._cPtr, bytes2 ? cast(GBytes*)bytes2._cPtr(No.Dup) : null);
     return _retval;
   }
 

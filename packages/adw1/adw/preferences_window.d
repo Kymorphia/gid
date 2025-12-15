@@ -240,7 +240,7 @@ class PreferencesWindow : adw.window.Window
   bool getCanNavigateBack()
   {
     bool _retval;
-    _retval = adw_preferences_window_get_can_navigate_back(cast(AdwPreferencesWindow*)this._cPtr);
+    _retval = cast(bool)adw_preferences_window_get_can_navigate_back(cast(AdwPreferencesWindow*)this._cPtr);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class PreferencesWindow : adw.window.Window
   bool getSearchEnabled()
   {
     bool _retval;
-    _retval = adw_preferences_window_get_search_enabled(cast(AdwPreferencesWindow*)this._cPtr);
+    _retval = cast(bool)adw_preferences_window_get_search_enabled(cast(AdwPreferencesWindow*)this._cPtr);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class PreferencesWindow : adw.window.Window
   bool popSubpage()
   {
     bool _retval;
-    _retval = adw_preferences_window_pop_subpage(cast(AdwPreferencesWindow*)this._cPtr);
+    _retval = cast(bool)adw_preferences_window_pop_subpage(cast(AdwPreferencesWindow*)this._cPtr);
     return _retval;
   }
 

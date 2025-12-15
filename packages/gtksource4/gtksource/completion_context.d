@@ -123,7 +123,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)this._cPtr, &_iter);
+    _retval = cast(bool)gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)this._cPtr, &_iter);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }

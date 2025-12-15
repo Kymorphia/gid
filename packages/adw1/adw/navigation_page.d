@@ -231,7 +231,7 @@ class NavigationPage : gtk.widget.Widget
   bool getCanPop()
   {
     bool _retval;
-    _retval = adw_navigation_page_get_can_pop(cast(AdwNavigationPage*)this._cPtr);
+    _retval = cast(bool)adw_navigation_page_get_can_pop(cast(AdwNavigationPage*)this._cPtr);
     return _retval;
   }
 

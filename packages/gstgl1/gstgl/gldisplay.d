@@ -97,7 +97,7 @@ class GLDisplay : gst.object.ObjectWrap
   bool addContext(gstgl.glcontext.GLContext context)
   {
     bool _retval;
-    _retval = gst_gl_display_add_context(cast(GstGLDisplay*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_display_add_context(cast(GstGLDisplay*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class GLDisplay : gst.object.ObjectWrap
     bool _retval;
     GstGLContext* _pContext;
     GError *_err;
-    _retval = gst_gl_display_create_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_pContext, &_err);
+    _retval = cast(bool)gst_gl_display_create_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_pContext, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     pContext = new gstgl.glcontext.GLContext(cast(void*)_pContext, Yes.Take);
@@ -145,7 +145,7 @@ class GLDisplay : gst.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_display_ensure_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, context ? cast(GstGLContext**)context._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gst_gl_display_ensure_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, context ? cast(GstGLContext**)context._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -259,7 +259,7 @@ class GLDisplay : gst.object.ObjectWrap
   bool removeWindow(gstgl.glwindow.GLWindow window)
   {
     bool _retval;
-    _retval = gst_gl_display_remove_window(cast(GstGLDisplay*)this._cPtr, window ? cast(GstGLWindow*)window._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_gl_display_remove_window(cast(GstGLDisplay*)this._cPtr, window ? cast(GstGLWindow*)window._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -233,7 +233,7 @@ class PreferencesPage : gtk.widget.Widget
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_preferences_page_get_use_underline(cast(AdwPreferencesPage*)this._cPtr);
+    _retval = cast(bool)adw_preferences_page_get_use_underline(cast(AdwPreferencesPage*)this._cPtr);
     return _retval;
   }
 

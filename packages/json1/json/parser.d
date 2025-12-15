@@ -178,7 +178,7 @@ class Parser : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _variableName;
-    _retval = json_parser_has_assignment(cast(JsonParser*)this._cPtr, &_variableName);
+    _retval = cast(bool)json_parser_has_assignment(cast(JsonParser*)this._cPtr, &_variableName);
     variableName = _variableName.fromCString(No.Free);
     return _retval;
   }
@@ -200,7 +200,7 @@ class Parser : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _data = data.toCString(No.Alloc);
     GError *_err;
-    _retval = json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, length, &_err);
+    _retval = cast(bool)json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -225,7 +225,7 @@ class Parser : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = json_parser_load_from_file(cast(JsonParser*)this._cPtr, _filename, &_err);
+    _retval = cast(bool)json_parser_load_from_file(cast(JsonParser*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -250,7 +250,7 @@ class Parser : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = json_parser_load_from_mapped_file(cast(JsonParser*)this._cPtr, _filename, &_err);
+    _retval = cast(bool)json_parser_load_from_mapped_file(cast(JsonParser*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -275,7 +275,7 @@ class Parser : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = json_parser_load_from_stream(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)json_parser_load_from_stream(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -325,7 +325,7 @@ class Parser : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = json_parser_load_from_stream_finish(cast(JsonParser*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)json_parser_load_from_stream_finish(cast(JsonParser*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

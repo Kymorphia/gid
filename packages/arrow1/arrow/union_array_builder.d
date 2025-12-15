@@ -67,7 +67,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_union_array_builder_append_value(cast(GArrowUnionArrayBuilder*)this._cPtr, value, &_err);
+    _retval = cast(bool)garrow_union_array_builder_append_value(cast(GArrowUnionArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

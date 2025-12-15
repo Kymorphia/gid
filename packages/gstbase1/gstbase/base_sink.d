@@ -444,7 +444,7 @@ class BaseSink : gst.element.Element
   bool getDropOutOfSegment()
   {
     bool _retval;
-    _retval = gst_base_sink_get_drop_out_of_segment(cast(GstBaseSink*)this._cPtr);
+    _retval = cast(bool)gst_base_sink_get_drop_out_of_segment(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class BaseSink : gst.element.Element
   bool getSync()
   {
     bool _retval;
-    _retval = gst_base_sink_get_sync(cast(GstBaseSink*)this._cPtr);
+    _retval = cast(bool)gst_base_sink_get_sync(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class BaseSink : gst.element.Element
   bool isAsyncEnabled()
   {
     bool _retval;
-    _retval = gst_base_sink_is_async_enabled(cast(GstBaseSink*)this._cPtr);
+    _retval = cast(bool)gst_base_sink_is_async_enabled(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -603,7 +603,7 @@ class BaseSink : gst.element.Element
   bool isLastSampleEnabled()
   {
     bool _retval;
-    _retval = gst_base_sink_is_last_sample_enabled(cast(GstBaseSink*)this._cPtr);
+    _retval = cast(bool)gst_base_sink_is_last_sample_enabled(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class BaseSink : gst.element.Element
   bool isQosEnabled()
   {
     bool _retval;
-    _retval = gst_base_sink_is_qos_enabled(cast(GstBaseSink*)this._cPtr);
+    _retval = cast(bool)gst_base_sink_is_qos_enabled(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -641,7 +641,11 @@ class BaseSink : gst.element.Element
   bool queryLatency(out bool live, out bool upstreamLive, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
   {
     bool _retval;
-    _retval = gst_base_sink_query_latency(cast(GstBaseSink*)this._cPtr, cast(bool*)&live, cast(bool*)&upstreamLive, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    gboolean _live;
+    gboolean _upstreamLive;
+    _retval = cast(bool)gst_base_sink_query_latency(cast(GstBaseSink*)this._cPtr, &_live, &_upstreamLive, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    live = cast(bool)_live;
+    upstreamLive = cast(bool)_upstreamLive;
     return _retval;
   }
 

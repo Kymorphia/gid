@@ -85,7 +85,7 @@ class VideoVBIEncoder : gobject.boxed.Boxed
       _dataCount = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_video_vbi_encoder_add_ancillary(cast(GstVideoVBIEncoder*)this._cPtr, composite, DID, SDIDBlockNumber, _data, _dataCount);
+    _retval = cast(bool)gst_video_vbi_encoder_add_ancillary(cast(GstVideoVBIEncoder*)this._cPtr, composite, DID, SDIDBlockNumber, _data, _dataCount);
     return _retval;
   }
 

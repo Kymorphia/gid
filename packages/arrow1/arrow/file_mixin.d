@@ -17,7 +17,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_file_close(cast(GArrowFile*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_file_close(cast(GArrowFile*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -36,7 +36,7 @@ template FileT()
   override bool isClosed()
   {
     bool _retval;
-    _retval = garrow_file_is_closed(cast(GArrowFile*)this._cPtr);
+    _retval = cast(bool)garrow_file_is_closed(cast(GArrowFile*)this._cPtr);
     return _retval;
   }
 

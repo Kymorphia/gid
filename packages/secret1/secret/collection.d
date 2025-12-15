@@ -363,7 +363,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_delete_finish(cast(SecretCollection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)secret_collection_delete_finish(cast(SecretCollection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -385,7 +385,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_delete_sync(cast(SecretCollection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)secret_collection_delete_sync(cast(SecretCollection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -460,7 +460,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   bool getLocked()
   {
     bool _retval;
-    _retval = secret_collection_get_locked(cast(SecretCollection*)this._cPtr);
+    _retval = cast(bool)secret_collection_get_locked(cast(SecretCollection*)this._cPtr);
     return _retval;
   }
 
@@ -533,7 +533,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_load_items_finish(cast(SecretCollection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)secret_collection_load_items_finish(cast(SecretCollection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -559,7 +559,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_load_items_sync(cast(SecretCollection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)secret_collection_load_items_sync(cast(SecretCollection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -714,7 +714,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   {
     bool _retval;
     GError *_err;
-    _retval = secret_collection_set_label_finish(cast(SecretCollection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)secret_collection_set_label_finish(cast(SecretCollection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -737,7 +737,7 @@ class Collection : gio.dbus_proxy.DBusProxy
     bool _retval;
     const(char)* _label = label.toCString(No.Alloc);
     GError *_err;
-    _retval = secret_collection_set_label_sync(cast(SecretCollection*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)secret_collection_set_label_sync(cast(SecretCollection*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

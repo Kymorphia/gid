@@ -367,7 +367,7 @@ class Event
   bool getAxis(gdk.types.AxisUse axisUse, out double value)
   {
     bool _retval;
-    _retval = gdk_event_get_axis(cast(const(GdkEvent)*)this._cPtr, axisUse, cast(double*)&value);
+    _retval = cast(bool)gdk_event_get_axis(cast(const(GdkEvent)*)this._cPtr, axisUse, cast(double*)&value);
     return _retval;
   }
 
@@ -381,7 +381,7 @@ class Event
   bool getButton(out uint button)
   {
     bool _retval;
-    _retval = gdk_event_get_button(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&button);
+    _retval = cast(bool)gdk_event_get_button(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&button);
     return _retval;
   }
 
@@ -395,7 +395,7 @@ class Event
   bool getClickCount(out uint clickCount)
   {
     bool _retval;
-    _retval = gdk_event_get_click_count(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&clickCount);
+    _retval = cast(bool)gdk_event_get_click_count(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&clickCount);
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class Event
   bool getCoords(out double xWin, out double yWin)
   {
     bool _retval;
-    _retval = gdk_event_get_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xWin, cast(double*)&yWin);
+    _retval = cast(bool)gdk_event_get_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xWin, cast(double*)&yWin);
     return _retval;
   }
 
@@ -484,7 +484,7 @@ class Event
   bool getKeycode(out ushort keycode)
   {
     bool _retval;
-    _retval = gdk_event_get_keycode(cast(const(GdkEvent)*)this._cPtr, cast(ushort*)&keycode);
+    _retval = cast(bool)gdk_event_get_keycode(cast(const(GdkEvent)*)this._cPtr, cast(ushort*)&keycode);
     return _retval;
   }
 
@@ -498,7 +498,7 @@ class Event
   bool getKeyval(out uint keyval)
   {
     bool _retval;
-    _retval = gdk_event_get_keyval(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&keyval);
+    _retval = cast(bool)gdk_event_get_keyval(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&keyval);
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class Event
   bool getPointerEmulated()
   {
     bool _retval;
-    _retval = gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class Event
   bool getRootCoords(out double xRoot, out double yRoot)
   {
     bool _retval;
-    _retval = gdk_event_get_root_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xRoot, cast(double*)&yRoot);
+    _retval = cast(bool)gdk_event_get_root_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xRoot, cast(double*)&yRoot);
     return _retval;
   }
 
@@ -577,7 +577,7 @@ class Event
   bool getScrollDeltas(out double deltaX, out double deltaY)
   {
     bool _retval;
-    _retval = gdk_event_get_scroll_deltas(cast(const(GdkEvent)*)this._cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
+    _retval = cast(bool)gdk_event_get_scroll_deltas(cast(const(GdkEvent)*)this._cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
     return _retval;
   }
 
@@ -629,7 +629,7 @@ class Event
   bool getScrollDirection(out gdk.types.ScrollDirection direction)
   {
     bool _retval;
-    _retval = gdk_event_get_scroll_direction(cast(const(GdkEvent)*)this._cPtr, &direction);
+    _retval = cast(bool)gdk_event_get_scroll_direction(cast(const(GdkEvent)*)this._cPtr, &direction);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Event
   bool getState(out gdk.types.ModifierType state)
   {
     bool _retval;
-    _retval = gdk_event_get_state(cast(const(GdkEvent)*)this._cPtr, &state);
+    _retval = cast(bool)gdk_event_get_state(cast(const(GdkEvent)*)this._cPtr, &state);
     return _retval;
   }
 
@@ -719,7 +719,7 @@ class Event
   bool isScrollStopEvent()
   {
     bool _retval;
-    _retval = gdk_event_is_scroll_stop_event(cast(const(GdkEvent)*)this._cPtr);
+    _retval = cast(bool)gdk_event_is_scroll_stop_event(cast(const(GdkEvent)*)this._cPtr);
     return _retval;
   }
 
@@ -799,7 +799,7 @@ class Event
   bool triggersContextMenu()
   {
     bool _retval;
-    _retval = gdk_event_triggers_context_menu(cast(const(GdkEvent)*)this._cPtr);
+    _retval = cast(bool)gdk_event_triggers_context_menu(cast(const(GdkEvent)*)this._cPtr);
     return _retval;
   }
 

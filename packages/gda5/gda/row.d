@@ -121,7 +121,7 @@ class Row : gobject.object.ObjectWrap
   bool valueIsValid(gobject.value.Value value)
   {
     bool _retval;
-    _retval = gda_row_value_is_valid(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    _retval = cast(bool)gda_row_value_is_valid(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class Row : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_row_value_is_valid_e(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_row_value_is_valid_e(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -119,11 +119,11 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   */
   void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null)
   {
-    extern(C) bool _getMappingCallback(GValue* value, GVariant* variant, void* userData)
+    extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData)
     {
       auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
 
-      bool _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+      gboolean _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
       return _retval;
     }
     auto _getMappingCB = getMapping ? &_getMappingCallback : null;
@@ -152,7 +152,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_settings_get_boolean(cast(PanelSettings*)this._cPtr, _key);
+    _retval = cast(bool)panel_settings_get_boolean(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
 

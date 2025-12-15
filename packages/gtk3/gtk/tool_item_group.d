@@ -139,7 +139,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   bool getCollapsed()
   {
     bool _retval;
-    _retval = gtk_tool_item_group_get_collapsed(cast(GtkToolItemGroup*)this._cPtr);
+    _retval = cast(bool)gtk_tool_item_group_get_collapsed(cast(GtkToolItemGroup*)this._cPtr);
     return _retval;
   }
 

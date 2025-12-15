@@ -84,7 +84,7 @@ class SignatureList : gobject.object.ObjectWrap
   bool contains(gmime.signature.Signature sig)
   {
     bool _retval;
-    _retval = g_mime_signature_list_contains(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_mime_signature_list_contains(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class SignatureList : gobject.object.ObjectWrap
   bool remove(gmime.signature.Signature sig)
   {
     bool _retval;
-    _retval = g_mime_signature_list_remove(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_mime_signature_list_remove(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class SignatureList : gobject.object.ObjectWrap
   bool removeAt(int index)
   {
     bool _retval;
-    _retval = g_mime_signature_list_remove_at(cast(GMimeSignatureList*)this._cPtr, index);
+    _retval = cast(bool)g_mime_signature_list_remove_at(cast(GMimeSignatureList*)this._cPtr, index);
     return _retval;
   }
 

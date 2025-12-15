@@ -72,7 +72,7 @@ class BlobOp : gobject.object.ObjectWrap
   bool readAll(gda.blob.Blob blob)
   {
     bool _retval;
-    _retval = gda_blob_op_read_all(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null);
+    _retval = cast(bool)gda_blob_op_read_all(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class BlobOp : gobject.object.ObjectWrap
   bool writeAll(gda.blob.Blob blob)
   {
     bool _retval;
-    _retval = gda_blob_op_write_all(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null);
+    _retval = cast(bool)gda_blob_op_write_all(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null);
     return _retval;
   }
 }

@@ -36,22 +36,22 @@ __gshared extern(C)
 
   // FileFormat
   GType function() c_gadataset_file_format_get_type; ///
-  bool function(GADatasetFileFormat* format, GADatasetFileFormat* otherFormat) c_gadataset_file_format_equal; ///
+  gboolean function(GADatasetFileFormat* format, GADatasetFileFormat* otherFormat) c_gadataset_file_format_equal; ///
   GADatasetFileWriteOptions* function(GADatasetFileFormat* format) c_gadataset_file_format_get_default_write_options; ///
   char* function(GADatasetFileFormat* format) c_gadataset_file_format_get_type_name; ///
   GADatasetFileWriter* function(GADatasetFileFormat* format, GArrowOutputStream* destination, GArrowFileSystem* fileSystem, const(char)* path, GArrowSchema* schema, GADatasetFileWriteOptions* options, GError** _err) c_gadataset_file_format_open_writer; ///
 
   // FileSystemDataset
   GType function() c_gadataset_file_system_dataset_get_type; ///
-  bool function(GADatasetScanner* scanner, GADatasetFileSystemDatasetWriteOptions* options, GError** _err) c_gadataset_file_system_dataset_write_scanner; ///
+  gboolean function(GADatasetScanner* scanner, GADatasetFileSystemDatasetWriteOptions* options, GError** _err) c_gadataset_file_system_dataset_write_scanner; ///
 
   // FileSystemDatasetFactory
   GType function() c_gadataset_file_system_dataset_factory_get_type; ///
   GADatasetFileSystemDatasetFactory* function(GADatasetFileFormat* fileFormat) c_gadataset_file_system_dataset_factory_new; ///
-  bool function(GADatasetFileSystemDatasetFactory* factory, const(char)* path, GError** _err) c_gadataset_file_system_dataset_factory_add_path; ///
+  gboolean function(GADatasetFileSystemDatasetFactory* factory, const(char)* path, GError** _err) c_gadataset_file_system_dataset_factory_add_path; ///
   GADatasetFileSystemDataset* function(GADatasetFileSystemDatasetFactory* factory, GADatasetFinishOptions* options, GError** _err) c_gadataset_file_system_dataset_factory_finish; ///
-  bool function(GADatasetFileSystemDatasetFactory* factory, GArrowFileSystem* fileSystem, GError** _err) c_gadataset_file_system_dataset_factory_set_file_system; ///
-  bool function(GADatasetFileSystemDatasetFactory* factory, const(char)* uri, GError** _err) c_gadataset_file_system_dataset_factory_set_file_system_uri; ///
+  gboolean function(GADatasetFileSystemDatasetFactory* factory, GArrowFileSystem* fileSystem, GError** _err) c_gadataset_file_system_dataset_factory_set_file_system; ///
+  gboolean function(GADatasetFileSystemDatasetFactory* factory, const(char)* uri, GError** _err) c_gadataset_file_system_dataset_factory_set_file_system_uri; ///
 
   // FileSystemDatasetWriteOptions
   GType function() c_gadataset_file_system_dataset_write_options_get_type; ///
@@ -62,9 +62,9 @@ __gshared extern(C)
 
   // FileWriter
   GType function() c_gadataset_file_writer_get_type; ///
-  bool function(GADatasetFileWriter* writer, GError** _err) c_gadataset_file_writer_finish; ///
-  bool function(GADatasetFileWriter* writer, GArrowRecordBatch* recordBatch, GError** _err) c_gadataset_file_writer_write_record_batch; ///
-  bool function(GADatasetFileWriter* writer, GArrowRecordBatchReader* reader, GError** _err) c_gadataset_file_writer_write_record_batch_reader; ///
+  gboolean function(GADatasetFileWriter* writer, GError** _err) c_gadataset_file_writer_finish; ///
+  gboolean function(GADatasetFileWriter* writer, GArrowRecordBatch* recordBatch, GError** _err) c_gadataset_file_writer_write_record_batch; ///
+  gboolean function(GADatasetFileWriter* writer, GArrowRecordBatchReader* reader, GError** _err) c_gadataset_file_writer_write_record_batch_reader; ///
 
   // FinishOptions
   GType function() c_gadataset_finish_options_get_type; ///
@@ -120,7 +120,7 @@ __gshared extern(C)
   GADatasetScannerBuilder* function(GADatasetDataset* dataset, GError** _err) c_gadataset_scanner_builder_new; ///
   GADatasetScannerBuilder* function(GArrowRecordBatchReader* reader) c_gadataset_scanner_builder_new_record_batch_reader; ///
   GADatasetScanner* function(GADatasetScannerBuilder* builder, GError** _err) c_gadataset_scanner_builder_finish; ///
-  bool function(GADatasetScannerBuilder* builder, GArrowExpression* expression, GError** _err) c_gadataset_scanner_builder_set_filter; ///
+  gboolean function(GADatasetScannerBuilder* builder, GArrowExpression* expression, GError** _err) c_gadataset_scanner_builder_set_filter; ///
 }
 
 // CSVFileFormat

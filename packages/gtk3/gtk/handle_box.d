@@ -145,7 +145,7 @@ class HandleBox : gtk.bin.Bin
   bool getChildDetached()
   {
     bool _retval;
-    _retval = gtk_handle_box_get_child_detached(cast(GtkHandleBox*)this._cPtr);
+    _retval = cast(bool)gtk_handle_box_get_child_detached(cast(GtkHandleBox*)this._cPtr);
     return _retval;
   }
 

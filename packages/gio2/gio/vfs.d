@@ -134,7 +134,7 @@ class Vfs : gobject.object.ObjectWrap
   bool isActive()
   {
     bool _retval;
-    _retval = g_vfs_is_active(cast(GVfs*)this._cPtr);
+    _retval = cast(bool)g_vfs_is_active(cast(GVfs*)this._cPtr);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class Vfs : gobject.object.ObjectWrap
     GDestroyNotify _uriFuncDestroyCB = uriFunc ? &thawDelegate : null;
     auto _parseNameFunc = parseNameFunc ? freezeDelegate(cast(void*)&parseNameFunc) : null;
     GDestroyNotify _parseNameFuncDestroyCB = parseNameFunc ? &thawDelegate : null;
-    _retval = g_vfs_register_uri_scheme(cast(GVfs*)this._cPtr, _scheme, _uriFuncCB, _uriFunc, _uriFuncDestroyCB, _parseNameFuncCB, _parseNameFunc, _parseNameFuncDestroyCB);
+    _retval = cast(bool)g_vfs_register_uri_scheme(cast(GVfs*)this._cPtr, _scheme, _uriFuncCB, _uriFunc, _uriFuncDestroyCB, _parseNameFuncCB, _parseNameFunc, _parseNameFuncDestroyCB);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Vfs : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = g_vfs_unregister_uri_scheme(cast(GVfs*)this._cPtr, _scheme);
+    _retval = cast(bool)g_vfs_unregister_uri_scheme(cast(GVfs*)this._cPtr, _scheme);
     return _retval;
   }
 }

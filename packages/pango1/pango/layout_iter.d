@@ -59,7 +59,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool atLastLine()
   {
     bool _retval;
-    _retval = pango_layout_iter_at_last_line(cast(PangoLayoutIter*)this._cPtr);
+    _retval = cast(bool)pango_layout_iter_at_last_line(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextChar()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_char(cast(PangoLayoutIter*)this._cPtr);
+    _retval = cast(bool)pango_layout_iter_next_char(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextCluster()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_cluster(cast(PangoLayoutIter*)this._cPtr);
+    _retval = cast(bool)pango_layout_iter_next_cluster(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextLine()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_line(cast(PangoLayoutIter*)this._cPtr);
+    _retval = cast(bool)pango_layout_iter_next_line(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextRun()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_run(cast(PangoLayoutIter*)this._cPtr);
+    _retval = cast(bool)pango_layout_iter_next_run(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 }

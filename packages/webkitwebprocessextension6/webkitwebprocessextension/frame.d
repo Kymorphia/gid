@@ -104,7 +104,7 @@ class Frame : gobject.object.ObjectWrap
   bool isMainFrame()
   {
     bool _retval;
-    _retval = webkit_frame_is_main_frame(cast(WebKitFrame*)this._cPtr);
+    _retval = cast(bool)webkit_frame_is_main_frame(cast(WebKitFrame*)this._cPtr);
     return _retval;
   }
 }

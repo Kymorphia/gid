@@ -241,7 +241,7 @@ class Video : gtk.widget.Widget
   bool getAutoplay()
   {
     bool _retval;
-    _retval = gtk_video_get_autoplay(cast(GtkVideo*)this._cPtr);
+    _retval = cast(bool)gtk_video_get_autoplay(cast(GtkVideo*)this._cPtr);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class Video : gtk.widget.Widget
   bool getLoop()
   {
     bool _retval;
-    _retval = gtk_video_get_loop(cast(GtkVideo*)this._cPtr);
+    _retval = cast(bool)gtk_video_get_loop(cast(GtkVideo*)this._cPtr);
     return _retval;
   }
 

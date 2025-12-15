@@ -217,7 +217,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   bool getProvideClock()
   {
     bool _retval;
-    _retval = gst_audio_base_sink_get_provide_clock(cast(GstAudioBaseSink*)this._cPtr);
+    _retval = cast(bool)gst_audio_base_sink_get_provide_clock(cast(GstAudioBaseSink*)this._cPtr);
     return _retval;
   }
 

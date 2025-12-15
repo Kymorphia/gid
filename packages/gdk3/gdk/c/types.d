@@ -3479,7 +3479,7 @@ struct GdkEventCrossing
   /**
       true if @window is the focus window or an inferior.
   */
-  bool focus;
+  gboolean focus;
 
   /**
       a bit-mask representing the state of
@@ -3630,12 +3630,12 @@ struct GdkEventGrabBroken
       true if a keyboard grab was broken, false if a pointer
         grab was broken
   */
-  bool keyboard;
+  gboolean keyboard;
 
   /**
       true if the broken grab was implicit
   */
-  bool implicit;
+  gboolean implicit;
 
   /**
       If this event is caused by another grab in the same
@@ -4289,7 +4289,7 @@ struct GdkEventTouch
       whether the event should be used for emulating
         pointer event
   */
-  bool emulatingPointer;
+  gboolean emulatingPointer;
 
   /**
       the master device that the event originated from. Use
@@ -5002,7 +5002,7 @@ struct GdkWindowAttr
   /**
       true to bypass the window manager
   */
-  bool overrideRedirect;
+  gboolean overrideRedirect;
 
   /**
       a hint of the function of the window
@@ -5062,7 +5062,7 @@ alias extern(C) GdkFilterReturn function(GdkXEvent* xevent, GdkEvent* event, voi
 
 alias extern(C) void function(GdkSeat* seat, GdkWindow* window, void* userData) GdkSeatGrabPrepareFunc;
 
-alias extern(C) bool function(GdkWindow* window, void* userData) GdkWindowChildFunc;
+alias extern(C) gboolean function(GdkWindow* window, void* userData) GdkWindowChildFunc;
 
 alias extern(C) void function(GdkWindow* window, cairo_region_t* region) GdkWindowInvalidateHandlerFunc;
 

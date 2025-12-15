@@ -76,7 +76,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_do_put(cast(GAFlightServer*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, reader ? cast(GAFlightMessageReader*)reader._cPtr(No.Dup) : null, writer ? cast(GAFlightMetadataWriter*)writer._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gaflight_server_do_put(cast(GAFlightServer*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, reader ? cast(GAFlightMessageReader*)reader._cPtr(No.Dup) : null, writer ? cast(GAFlightMetadataWriter*)writer._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -119,7 +119,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_listen(cast(GAFlightServer*)this._cPtr, options ? cast(GAFlightServerOptions*)options._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gaflight_server_listen(cast(GAFlightServer*)this._cPtr, options ? cast(GAFlightServerOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -135,7 +135,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_shutdown(cast(GAFlightServer*)this._cPtr, &_err);
+    _retval = cast(bool)gaflight_server_shutdown(cast(GAFlightServer*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -146,7 +146,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_wait(cast(GAFlightServer*)this._cPtr, &_err);
+    _retval = cast(bool)gaflight_server_wait(cast(GAFlightServer*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

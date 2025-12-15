@@ -99,7 +99,7 @@ class Timer
   bool isActive()
   {
     bool _retval;
-    _retval = g_timer_is_active(cast(GTimer*)this._cPtr);
+    _retval = cast(bool)g_timer_is_active(cast(GTimer*)this._cPtr);
     return _retval;
   }
 

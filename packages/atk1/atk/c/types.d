@@ -1741,7 +1741,7 @@ struct AtkActionIface
   GTypeInterface parent;
 
   /** */
-  extern(C) bool function(AtkAction* action, int i) doAction;
+  extern(C) gboolean function(AtkAction* action, int i) doAction;
 
   /** */
   extern(C) int function(AtkAction* action) getNActions;
@@ -1756,7 +1756,7 @@ struct AtkActionIface
   extern(C) const(char)* function(AtkAction* action, int i) getKeybinding;
 
   /** */
-  extern(C) bool function(AtkAction* action, int i, const(char)* desc) setDescription;
+  extern(C) gboolean function(AtkAction* action, int i, const(char)* desc) setDescription;
 
   /** */
   extern(C) const(char)* function(AtkAction* action, int i) getLocalizedName;
@@ -1825,7 +1825,7 @@ struct AtkComponentIface
   extern(C) uint function(AtkComponent* component, AtkFocusHandler handler) addFocusHandler;
 
   /** */
-  extern(C) bool function(AtkComponent* component, int x, int y, AtkCoordType coordType) contains;
+  extern(C) gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) contains;
 
   /** */
   extern(C) AtkObject* function(AtkComponent* component, int x, int y, AtkCoordType coordType) refAccessibleAtPoint;
@@ -1846,7 +1846,7 @@ struct AtkComponentIface
   extern(C) void function(AtkComponent* component, int* width, int* height) getSize;
 
   /** */
-  extern(C) bool function(AtkComponent* component) grabFocus;
+  extern(C) gboolean function(AtkComponent* component) grabFocus;
 
   /**
       This virtual function is deprecated since
@@ -1856,13 +1856,13 @@ struct AtkComponentIface
   extern(C) void function(AtkComponent* component, uint handlerId) removeFocusHandler;
 
   /** */
-  extern(C) bool function(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) setExtents;
+  extern(C) gboolean function(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) setExtents;
 
   /** */
-  extern(C) bool function(AtkComponent* component, int x, int y, AtkCoordType coordType) setPosition;
+  extern(C) gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) setPosition;
 
   /** */
-  extern(C) bool function(AtkComponent* component, int width, int height) setSize;
+  extern(C) gboolean function(AtkComponent* component, int width, int height) setSize;
 
   /** */
   extern(C) AtkLayer function(AtkComponent* component) getLayer;
@@ -1877,10 +1877,10 @@ struct AtkComponentIface
   extern(C) double function(AtkComponent* component) getAlpha;
 
   /** */
-  extern(C) bool function(AtkComponent* component, AtkScrollType type) scrollTo;
+  extern(C) gboolean function(AtkComponent* component, AtkScrollType type) scrollTo;
 
   /** */
-  extern(C) bool function(AtkComponent* component, AtkCoordType coords, int x, int y) scrollToPoint;
+  extern(C) gboolean function(AtkComponent* component, AtkCoordType coords, int x, int y) scrollToPoint;
 }
 
 /**
@@ -1939,7 +1939,7 @@ struct AtkDocumentIface
       sets the value of an attribute. Returns
         TRUE on success, FALSE otherwise
   */
-  extern(C) bool function(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) setDocumentAttribute;
+  extern(C) gboolean function(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) setDocumentAttribute;
 
   /**
       gets the current page number. Since 2.12
@@ -1955,7 +1955,7 @@ struct AtkDocumentIface
   extern(C) GArray* function(AtkDocument* document) getTextSelections;
 
   /** */
-  extern(C) bool function(AtkDocument* document, GArray* selections) setTextSelections;
+  extern(C) gboolean function(AtkDocument* document, GArray* selections) setTextSelections;
 }
 
 /**
@@ -1980,7 +1980,7 @@ struct AtkEditableTextIface
   GTypeInterface parentInterface;
 
   /** */
-  extern(C) bool function(AtkEditableText* text, AtkAttributeSet* attribSet, int startOffset, int endOffset) setRunAttributes;
+  extern(C) gboolean function(AtkEditableText* text, AtkAttributeSet* attribSet, int startOffset, int endOffset) setRunAttributes;
 
   /** */
   extern(C) void function(AtkEditableText* text, const(char)* string_) setTextContents;
@@ -2063,7 +2063,7 @@ struct AtkHyperlinkClass
   extern(C) int function(AtkHyperlink* link) getStartIndex;
 
   /** */
-  extern(C) bool function(AtkHyperlink* link) isValid;
+  extern(C) gboolean function(AtkHyperlink* link) isValid;
 
   /** */
   extern(C) int function(AtkHyperlink* link) getNAnchors;
@@ -2072,7 +2072,7 @@ struct AtkHyperlinkClass
   extern(C) uint function(AtkHyperlink* link) linkState;
 
   /** */
-  extern(C) bool function(AtkHyperlink* link) isSelectedLink;
+  extern(C) gboolean function(AtkHyperlink* link) isSelectedLink;
 
   /** */
   extern(C) void function(AtkHyperlink* link) linkActivated;
@@ -2169,7 +2169,7 @@ struct AtkImageIface
   extern(C) void function(AtkImage* image, int* width, int* height) getImageSize;
 
   /** */
-  extern(C) bool function(AtkImage* image, const(char)* description) setImageDescription;
+  extern(C) gboolean function(AtkImage* image, const(char)* description) setImageDescription;
 
   /** */
   extern(C) const(char)* function(AtkImage* image) getImageLocale;
@@ -2390,13 +2390,13 @@ struct AtkObjectClass
         since 2.9.4 and it should not be overriden. Use
         the #AtkObject::state-change "focused" signal instead.
   */
-  extern(C) void function(AtkObject* accessible, bool focusIn) focusEvent;
+  extern(C) void function(AtkObject* accessible, gboolean focusIn) focusEvent;
 
   /** */
   extern(C) void function(AtkObject* accessible, AtkPropertyValues* values) propertyChange;
 
   /** */
-  extern(C) void function(AtkObject* accessible, const(char)* name, bool stateSet) stateChange;
+  extern(C) void function(AtkObject* accessible, const(char)* name, gboolean stateSet) stateChange;
 
   /** */
   extern(C) void function(AtkObject* accessible) visibleDataChanged;
@@ -2699,10 +2699,10 @@ struct AtkSelectionIface
   GTypeInterface parent;
 
   /** */
-  extern(C) bool function(AtkSelection* selection, int i) addSelection;
+  extern(C) gboolean function(AtkSelection* selection, int i) addSelection;
 
   /** */
-  extern(C) bool function(AtkSelection* selection) clearSelection;
+  extern(C) gboolean function(AtkSelection* selection) clearSelection;
 
   /** */
   extern(C) AtkObject* function(AtkSelection* selection, int i) refSelection;
@@ -2711,13 +2711,13 @@ struct AtkSelectionIface
   extern(C) int function(AtkSelection* selection) getSelectionCount;
 
   /** */
-  extern(C) bool function(AtkSelection* selection, int i) isChildSelected;
+  extern(C) gboolean function(AtkSelection* selection, int i) isChildSelected;
 
   /** */
-  extern(C) bool function(AtkSelection* selection, int i) removeSelection;
+  extern(C) gboolean function(AtkSelection* selection, int i) removeSelection;
 
   /** */
-  extern(C) bool function(AtkSelection* selection) selectAllSelection;
+  extern(C) gboolean function(AtkSelection* selection) selectAllSelection;
 
   /** */
   extern(C) void function(AtkSelection* selection) selectionChanged;
@@ -2909,7 +2909,7 @@ struct AtkTableCellIface
       virtual function that retrieves the tabular position
         of this cell
   */
-  extern(C) bool function(AtkTableCell* cell, int* row, int* column) getPosition;
+  extern(C) gboolean function(AtkTableCell* cell, int* row, int* column) getPosition;
 
   /**
       virtual function that returns the number of rows
@@ -2927,7 +2927,7 @@ struct AtkTableCellIface
       virtual function that get the row an column
         indexes and span of this cell
   */
-  extern(C) bool function(AtkTableCell* cell, int* row, int* column, int* rowSpan, int* columnSpan) getRowColumnSpan;
+  extern(C) gboolean function(AtkTableCell* cell, int* row, int* column, int* rowSpan, int* columnSpan) getRowColumnSpan;
 
   /**
       virtual function that returns a reference to the
@@ -3009,25 +3009,25 @@ struct AtkTableIface
   extern(C) int function(AtkTable* table, int** selected) getSelectedRows;
 
   /** */
-  extern(C) bool function(AtkTable* table, int column) isColumnSelected;
+  extern(C) gboolean function(AtkTable* table, int column) isColumnSelected;
 
   /** */
-  extern(C) bool function(AtkTable* table, int row) isRowSelected;
+  extern(C) gboolean function(AtkTable* table, int row) isRowSelected;
 
   /** */
-  extern(C) bool function(AtkTable* table, int row, int column) isSelected;
+  extern(C) gboolean function(AtkTable* table, int row, int column) isSelected;
 
   /** */
-  extern(C) bool function(AtkTable* table, int row) addRowSelection;
+  extern(C) gboolean function(AtkTable* table, int row) addRowSelection;
 
   /** */
-  extern(C) bool function(AtkTable* table, int row) removeRowSelection;
+  extern(C) gboolean function(AtkTable* table, int row) removeRowSelection;
 
   /** */
-  extern(C) bool function(AtkTable* table, int column) addColumnSelection;
+  extern(C) gboolean function(AtkTable* table, int column) addColumnSelection;
 
   /** */
-  extern(C) bool function(AtkTable* table, int column) removeColumnSelection;
+  extern(C) gboolean function(AtkTable* table, int column) removeColumnSelection;
 
   /** */
   extern(C) void function(AtkTable* table, int row, int numInserted) rowInserted;
@@ -3131,16 +3131,16 @@ struct AtkTextIface
   extern(C) char* function(AtkText* text, int selectionNum, int* startOffset, int* endOffset) getSelection;
 
   /** */
-  extern(C) bool function(AtkText* text, int startOffset, int endOffset) addSelection;
+  extern(C) gboolean function(AtkText* text, int startOffset, int endOffset) addSelection;
 
   /** */
-  extern(C) bool function(AtkText* text, int selectionNum) removeSelection;
+  extern(C) gboolean function(AtkText* text, int selectionNum) removeSelection;
 
   /** */
-  extern(C) bool function(AtkText* text, int selectionNum, int startOffset, int endOffset) setSelection;
+  extern(C) gboolean function(AtkText* text, int selectionNum, int startOffset, int endOffset) setSelection;
 
   /** */
-  extern(C) bool function(AtkText* text, int offset) setCaretOffset;
+  extern(C) gboolean function(AtkText* text, int offset) setCaretOffset;
 
   /**
       the signal handler which is executed when there is a
@@ -3173,10 +3173,10 @@ struct AtkTextIface
   extern(C) char* function(AtkText* text, int offset, AtkTextGranularity granularity, int* startOffset, int* endOffset) getStringAtOffset;
 
   /** */
-  extern(C) bool function(AtkText* text, int startOffset, int endOffset, AtkScrollType type) scrollSubstringTo;
+  extern(C) gboolean function(AtkText* text, int startOffset, int endOffset, AtkScrollType type) scrollSubstringTo;
 
   /** */
-  extern(C) bool function(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) scrollSubstringToPoint;
+  extern(C) gboolean function(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) scrollSubstringToPoint;
 }
 
 /**
@@ -3279,7 +3279,7 @@ struct AtkTextSelection
       a gboolean indicating whether the start of the selection
                        is the active point.
   */
-  bool startIsActive;
+  gboolean startIsActive;
 }
 
 /**
@@ -3521,7 +3521,7 @@ struct AtkValueIface
       This virtual function is deprecated since 2.12
        and it should not be overriden.
   */
-  extern(C) bool function(AtkValue* obj, const(GValue)* value) setCurrentValue;
+  extern(C) gboolean function(AtkValue* obj, const(GValue)* value) setCurrentValue;
 
   /**
       This virtual function is deprecated since
@@ -3583,9 +3583,9 @@ alias extern(C) void function(AtkObject* obj) AtkEventListener;
 
 alias extern(C) void function() AtkEventListenerInit;
 
-alias extern(C) void function(AtkObject* object, bool focusIn) AtkFocusHandler;
+alias extern(C) void function(AtkObject* object, gboolean focusIn) AtkFocusHandler;
 
-alias extern(C) bool function(void* userData) AtkFunction;
+alias extern(C) gboolean function(void* userData) AtkFunction;
 
 alias extern(C) int function(AtkKeyEventStruct* event, void* userData) AtkKeySnoopFunc;
 

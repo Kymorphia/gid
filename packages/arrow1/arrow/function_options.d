@@ -40,7 +40,7 @@ class FunctionOptions : gobject.object.ObjectWrap
   bool equal(arrow.function_options.FunctionOptions otherOptions = null)
   {
     bool _retval;
-    _retval = garrow_function_options_equal(cast(GArrowFunctionOptions*)this._cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_function_options_equal(cast(GArrowFunctionOptions*)this._cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions._cPtr(No.Dup) : null);
     return _retval;
   }
 

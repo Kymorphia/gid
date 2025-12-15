@@ -414,7 +414,7 @@ struct VteTerminalClass
 /** */
 struct VteTerminalClassPrivate;
 
-alias extern(C) bool function(VteTerminal* terminal, glong column, glong row, void* data) VteSelectionFunc;
+alias extern(C) gboolean function(VteTerminal* terminal, glong column, glong row, void* data) VteSelectionFunc;
 
 alias extern(C) void function(VteTerminal* terminal, GPid pid, GError* error, void* userData) VteTerminalSpawnAsyncCallback;
 

@@ -116,7 +116,9 @@ class Language : gobject.boxed.Boxed
 
     if (_cretval)
     {
-      _retval = cast(pango.types.Script[])_cretval[0 .. _cretlength].dup;
+      _retval = new pango.types.Script[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = cast(pango.types.Script)(_cretval[i]);
     }
     return _retval;
   }
@@ -145,7 +147,7 @@ class Language : gobject.boxed.Boxed
   bool includesScript(pango.types.Script script)
   {
     bool _retval;
-    _retval = pango_language_includes_script(cast(PangoLanguage*)this._cPtr, script);
+    _retval = cast(bool)pango_language_includes_script(cast(PangoLanguage*)this._cPtr, script);
     return _retval;
   }
 
@@ -168,7 +170,7 @@ class Language : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _rangeList = rangeList.toCString(No.Alloc);
-    _retval = pango_language_matches(cast(PangoLanguage*)this._cPtr, _rangeList);
+    _retval = cast(bool)pango_language_matches(cast(PangoLanguage*)this._cPtr, _rangeList);
     return _retval;
   }
 

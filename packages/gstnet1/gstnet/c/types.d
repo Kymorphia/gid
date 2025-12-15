@@ -223,5 +223,5 @@ struct GstPtpClockClass
 /** */
 struct GstPtpClockPrivate;
 
-alias extern(C) bool function(ubyte domain, const(GstStructure)* stats, void* userData) GstPtpStatisticsCallback;
+alias extern(C) gboolean function(ubyte domain, const(GstStructure)* stats, void* userData) GstPtpStatisticsCallback;
 

@@ -358,7 +358,7 @@ template ActivatableT()
   override bool getUseActionAppearance()
   {
     bool _retval;
-    _retval = gtk_activatable_get_use_action_appearance(cast(GtkActivatable*)this._cPtr);
+    _retval = cast(bool)gtk_activatable_get_use_action_appearance(cast(GtkActivatable*)this._cPtr);
     return _retval;
   }
 

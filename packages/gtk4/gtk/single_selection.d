@@ -180,7 +180,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   bool getAutoselect()
   {
     bool _retval;
-    _retval = gtk_single_selection_get_autoselect(cast(GtkSingleSelection*)this._cPtr);
+    _retval = cast(bool)gtk_single_selection_get_autoselect(cast(GtkSingleSelection*)this._cPtr);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   bool getCanUnselect()
   {
     bool _retval;
-    _retval = gtk_single_selection_get_can_unselect(cast(GtkSingleSelection*)this._cPtr);
+    _retval = cast(bool)gtk_single_selection_get_can_unselect(cast(GtkSingleSelection*)this._cPtr);
     return _retval;
   }
 

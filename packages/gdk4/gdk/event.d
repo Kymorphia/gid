@@ -67,7 +67,7 @@ class Event
     bool _retval;
     uint _nAxes;
     double* _axes;
-    _retval = gdk_event_get_axes(cast(GdkEvent*)this._cPtr, &_axes, &_nAxes);
+    _retval = cast(bool)gdk_event_get_axes(cast(GdkEvent*)this._cPtr, &_axes, &_nAxes);
     axes.length = _nAxes;
     axes[0 .. $] = (cast(double*)_axes)[0 .. _nAxes];
     return _retval;
@@ -88,7 +88,7 @@ class Event
   bool getAxis(gdk.types.AxisUse axisUse, out double value)
   {
     bool _retval;
-    _retval = gdk_event_get_axis(cast(GdkEvent*)this._cPtr, axisUse, cast(double*)&value);
+    _retval = cast(bool)gdk_event_get_axis(cast(GdkEvent*)this._cPtr, axisUse, cast(double*)&value);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Event
   bool getPointerEmulated()
   {
     bool _retval;
-    _retval = gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Event
   bool getPosition(out double x, out double y)
   {
     bool _retval;
-    _retval = gdk_event_get_position(cast(GdkEvent*)this._cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = cast(bool)gdk_event_get_position(cast(GdkEvent*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class Event
   bool triggersContextMenu()
   {
     bool _retval;
-    _retval = gdk_event_triggers_context_menu(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_event_triggers_context_menu(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

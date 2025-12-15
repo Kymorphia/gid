@@ -278,7 +278,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool isAncestor(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter descendant)
   {
     bool _retval;
-    _retval = gtk_tree_store_is_ancestor(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, descendant ? cast(GtkTreeIter*)descendant._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_store_is_ancestor(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, descendant ? cast(GtkTreeIter*)descendant._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool iterIsValid(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_store_iter_is_valid(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_store_iter_is_valid(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -397,7 +397,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool remove(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_store_remove(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_store_remove(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

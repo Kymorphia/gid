@@ -85,7 +85,7 @@ class Gutter : gtk.widget.Widget
   bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     bool _retval;
-    _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
+    _retval = cast(bool)gtk_source_gutter_insert(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
     return _retval;
   }
 

@@ -1073,7 +1073,7 @@ struct GParamSpecBoolean
   /**
       default value for the property specified
   */
-  bool defaultValue;
+  gboolean defaultValue;
 }
 
 /**
@@ -1148,7 +1148,7 @@ struct GParamSpecClass
        specifications set out by this type (optional), see
        [gobject.global.paramValueValidate].
   */
-  extern(C) bool function(GParamSpec* pspec, GValue* value) valueValidate;
+  extern(C) gboolean function(GParamSpec* pspec, GValue* value) valueValidate;
 
   /**
       Compares @value1 with @value2 according to this type
@@ -1161,7 +1161,7 @@ struct GParamSpecClass
         set out by this type, without modifying the value. This vfunc is optional.
         If it isn't set, GObject will use @value_validate. Since 2.74
   */
-  extern(C) bool function(GParamSpec* pspec, const(GValue)* value) valueIsValid;
+  extern(C) gboolean function(GParamSpec* pspec, const(GValue)* value) valueIsValid;
 
   /** */
   void*[3] dummy;
@@ -1525,7 +1525,7 @@ struct GParamSpecTypeInfo
        specifications set out by @pspec (optional), see
        [gobject.global.paramValueValidate].
   */
-  extern(C) bool function(GParamSpec* pspec, GValue* value) valueValidate;
+  extern(C) gboolean function(GParamSpec* pspec, GValue* value) valueValidate;
 
   /**
       Compares @value1 with @value2 according to @pspec
@@ -2038,7 +2038,7 @@ struct GTypeModuleClass
       loads the module and registers one or more types using
        [gobject.type_module.TypeModule.registerType].
   */
-  extern(C) bool function(GTypeModule* module_) load;
+  extern(C) gboolean function(GTypeModule* module_) load;
 
   /**
       unloads the module
@@ -2376,7 +2376,7 @@ alias extern(C) void function(GTypeClass* gClass) GBaseFinalizeFunc;
 
 alias extern(C) void function(GTypeClass* gClass) GBaseInitFunc;
 
-alias extern(C) bool function(GBinding* binding, const(GValue)* fromValue, GValue* toValue, void* userData) GBindingTransformFunc;
+alias extern(C) gboolean function(GBinding* binding, const(GValue)* fromValue, GValue* toValue, void* userData) GBindingTransformFunc;
 
 alias extern(C) void* function(void* boxed) GBoxedCopyFunc;
 
@@ -2404,13 +2404,13 @@ alias extern(C) void function(GObject* object, uint propertyId, GValue* value, G
 
 alias extern(C) void function(GObject* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) GObjectSetPropertyFunc;
 
-alias extern(C) bool function(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data) GSignalAccumulator;
+alias extern(C) gboolean function(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data) GSignalAccumulator;
 
-alias extern(C) bool function(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data) GSignalEmissionHook;
+alias extern(C) gboolean function(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data) GSignalEmissionHook;
 
-alias extern(C) void function(void* data, GObject* object, bool isLastRef) GToggleNotify;
+alias extern(C) void function(void* data, GObject* object, gboolean isLastRef) GToggleNotify;
 
-alias extern(C) bool function(void* cacheData, GTypeClass* gClass) GTypeClassCacheFunc;
+alias extern(C) gboolean function(void* cacheData, GTypeClass* gClass) GTypeClassCacheFunc;
 
 alias extern(C) void function(void* checkData, GTypeInterface* gIface) GTypeInterfaceCheckFunc;
 

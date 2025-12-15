@@ -165,7 +165,7 @@ class RGBA : gobject.boxed.Boxed
   bool equal(gdk.rgba.RGBA p2)
   {
     bool _retval;
-    _retval = gdk_rgba_equal(cast(GdkRGBA*)this._cPtr, p2 ? cast(GdkRGBA*)p2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_rgba_equal(cast(GdkRGBA*)this._cPtr, p2 ? cast(GdkRGBA*)p2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class RGBA : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = gdk_rgba_parse(cast(GdkRGBA*)this._cPtr, _spec);
+    _retval = cast(bool)gdk_rgba_parse(cast(GdkRGBA*)this._cPtr, _spec);
     return _retval;
   }
 

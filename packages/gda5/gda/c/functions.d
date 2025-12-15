@@ -24,7 +24,7 @@ __gshared extern(C)
   const(GValue)* function(GdaAttributesManager* mgr, void* ptr, const(char)* attName) c_gda_attributes_manager_get; ///
   void function(GdaAttributesManager* mgr, void* ptr, const(char)* attName, const(GValue)* value) c_gda_attributes_manager_set; ///
   void function(GdaAttributesManager* mgr, void* ptr, const(char)* attName, const(GValue)* value, GDestroyNotify destroy) c_gda_attributes_manager_set_full; ///
-  GdaAttributesManager* function(bool forObjects, GdaAttributesManagerSignal signalFunc, void* signalData) c_gda_attributes_manager_new; ///
+  GdaAttributesManager* function(gboolean forObjects, GdaAttributesManagerSignal signalFunc, void* signalData) c_gda_attributes_manager_new; ///
 
   // Batch
   GType function() c_gda_batch_get_type; ///
@@ -32,7 +32,7 @@ __gshared extern(C)
   GQuark function() c_gda_batch_error_quark; ///
   void function(GdaBatch* batch, GdaStatement* stmt) c_gda_batch_add_statement; ///
   GdaBatch* function(GdaBatch* orig) c_gda_batch_copy; ///
-  bool function(GdaBatch* batch, GdaSet** outParams, GError** _err) c_gda_batch_get_parameters; ///
+  gboolean function(GdaBatch* batch, GdaSet** outParams, GError** _err) c_gda_batch_get_parameters; ///
   const(GSList)* function(GdaBatch* batch) c_gda_batch_get_statements; ///
   void function(GdaBatch* batch, GdaStatement* stmt) c_gda_batch_remove_statement; ///
   char* function(GdaBatch* batch) c_gda_batch_serialize; ///
@@ -54,26 +54,26 @@ __gshared extern(C)
   GType function() c_gda_blob_op_get_type; ///
   glong function(GdaBlobOp* op) c_gda_blob_op_get_length; ///
   glong function(GdaBlobOp* op, GdaBlob* blob, glong offset, glong size) c_gda_blob_op_read; ///
-  bool function(GdaBlobOp* op, GdaBlob* blob) c_gda_blob_op_read_all; ///
+  gboolean function(GdaBlobOp* op, GdaBlob* blob) c_gda_blob_op_read_all; ///
   glong function(GdaBlobOp* op, GdaBlob* blob, glong offset) c_gda_blob_op_write; ///
-  bool function(GdaBlobOp* op, GdaBlob* blob) c_gda_blob_op_write_all; ///
+  gboolean function(GdaBlobOp* op, GdaBlob* blob) c_gda_blob_op_write_all; ///
 
   // Column
   GType function() c_gda_column_get_type; ///
   GdaColumn* function() c_gda_column_new; ///
   GdaColumn* function(GdaColumn* column) c_gda_column_copy; ///
-  bool function(GdaColumn* column) c_gda_column_get_allow_null; ///
+  gboolean function(GdaColumn* column) c_gda_column_get_allow_null; ///
   const(GValue)* function(GdaColumn* column, const(char)* attribute) c_gda_column_get_attribute; ///
-  bool function(GdaColumn* column) c_gda_column_get_auto_increment; ///
+  gboolean function(GdaColumn* column) c_gda_column_get_auto_increment; ///
   const(char)* function(GdaColumn* column) c_gda_column_get_dbms_type; ///
   const(GValue)* function(GdaColumn* column) c_gda_column_get_default_value; ///
   const(char)* function(GdaColumn* column) c_gda_column_get_description; ///
   GType function(GdaColumn* column) c_gda_column_get_g_type; ///
   const(char)* function(GdaColumn* column) c_gda_column_get_name; ///
   int function(GdaColumn* column) c_gda_column_get_position; ///
-  void function(GdaColumn* column, bool allow) c_gda_column_set_allow_null; ///
+  void function(GdaColumn* column, gboolean allow) c_gda_column_set_allow_null; ///
   void function(GdaColumn* column, const(char)* attribute, const(GValue)* value, GDestroyNotify destroy) c_gda_column_set_attribute; ///
-  void function(GdaColumn* column, bool isAuto) c_gda_column_set_auto_increment; ///
+  void function(GdaColumn* column, gboolean isAuto) c_gda_column_set_auto_increment; ///
   void function(GdaColumn* column, const(char)* dbmsType) c_gda_column_set_dbms_type; ///
   void function(GdaColumn* column, const(GValue)* defaultValue) c_gda_column_set_default_value; ///
   void function(GdaColumn* column, const(char)* title) c_gda_column_set_description; ///
@@ -83,9 +83,9 @@ __gshared extern(C)
 
   // Config
   GType function() c_gda_config_get_type; ///
-  bool function() c_gda_config_can_modify_system_config; ///
-  bool function(const(GdaDsnInfo)* info, GError** _err) c_gda_config_define_dsn; ///
-  bool function(const(char)* dsnName) c_gda_config_dsn_needs_authentication; ///
+  gboolean function() c_gda_config_can_modify_system_config; ///
+  gboolean function(const(GdaDsnInfo)* info, GError** _err) c_gda_config_define_dsn; ///
+  gboolean function(const(char)* dsnName) c_gda_config_dsn_needs_authentication; ///
   GQuark function() c_gda_config_error_quark; ///
   GdaConfig* function() c_gda_config_get; ///
   GdaDsnInfo* function(const(char)* dsnName) c_gda_config_get_dsn_info; ///
@@ -96,7 +96,7 @@ __gshared extern(C)
   GdaProviderInfo* function(const(char)* providerName) c_gda_config_get_provider_info; ///
   GdaDataModel* function() c_gda_config_list_dsn; ///
   GdaDataModel* function() c_gda_config_list_providers; ///
-  bool function(const(char)* dsnName, GError** _err) c_gda_config_remove_dsn; ///
+  gboolean function(const(char)* dsnName, GError** _err) c_gda_config_remove_dsn; ///
 
   // Connection
   GType function() c_gda_connection_get_type; ///
@@ -105,31 +105,31 @@ __gshared extern(C)
   GQuark function() c_gda_connection_error_quark; ///
   GdaConnection* function(const(char)* dsn, const(char)* authString, GdaConnectionOptions options, GError** _err) c_gda_connection_open_from_dsn; ///
   GdaConnection* function(const(char)* providerName, const(char)* cncString, const(char)* authString, GdaConnectionOptions options, GError** _err) c_gda_connection_open_from_string; ///
-  GdaConnection* function(const(char)* directory, const(char)* filename, bool autoUnlink) c_gda_connection_open_sqlite; ///
+  GdaConnection* function(const(char)* directory, const(char)* filename, gboolean autoUnlink) c_gda_connection_open_sqlite; ///
   void function(const(char)* string_, char** outCncParams, char** outProvider, char** outUsername, char** outPassword) c_gda_connection_string_split; ///
   void function(GdaConnection* cnc, GdaConnectionEvent* event) c_gda_connection_add_event; ///
   GdaConnectionEvent* function(GdaConnection* cnc, const(char)* str,  ...) c_gda_connection_add_event_string; ///
   void function(GdaConnection* cnc, GdaStatement* gdaStmt, GdaPStmt* preparedStmt) c_gda_connection_add_prepared_statement; ///
-  bool function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_add_savepoint; ///
-  bool function(GdaConnection* cnc, uint taskId, GError** _err) c_gda_connection_async_cancel; ///
+  gboolean function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_add_savepoint; ///
+  gboolean function(GdaConnection* cnc, uint taskId, GError** _err) c_gda_connection_async_cancel; ///
   GObject* function(GdaConnection* cnc, uint taskId, GdaSet** lastInsertRow, GError** _err) c_gda_connection_async_fetch_result; ///
-  uint function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementModelUsage modelUsage, GType* colTypes, bool needLastInsertRow, GError** _err) c_gda_connection_async_statement_execute; ///
+  uint function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementModelUsage modelUsage, GType* colTypes, gboolean needLastInsertRow, GError** _err) c_gda_connection_async_statement_execute; ///
   GSList* function(GdaConnection* cnc, GdaBatch* batch, GdaSet* params, GdaStatementModelUsage modelUsage, GError** _err) c_gda_connection_batch_execute; ///
-  bool function(GdaConnection* cnc, const(char)* name, GdaTransactionIsolation level, GError** _err) c_gda_connection_begin_transaction; ///
+  gboolean function(GdaConnection* cnc, const(char)* name, GdaTransactionIsolation level, GError** _err) c_gda_connection_begin_transaction; ///
   void function(GdaConnection* cnc) c_gda_connection_clear_events_list; ///
   void function(GdaConnection* cnc) c_gda_connection_close; ///
   void function(GdaConnection* cnc) c_gda_connection_close_no_warning; ///
-  bool function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_commit_transaction; ///
+  gboolean function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_commit_transaction; ///
   GdaServerOperation* function(GdaConnection* cnc, GdaServerOperationType type, GdaSet* options, GError** _err) c_gda_connection_create_operation; ///
   GdaSqlParser* function(GdaConnection* cnc) c_gda_connection_create_parser; ///
   void function(GdaConnection* cnc, GdaStatement* gdaStmt) c_gda_connection_del_prepared_statement; ///
-  bool function(GdaConnection* cnc, const(char)* table, const(char)* conditionColumnName, GValue* conditionValue, GError** _err) c_gda_connection_delete_row_from_table; ///
-  bool function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_delete_savepoint; ///
+  gboolean function(GdaConnection* cnc, const(char)* table, const(char)* conditionColumnName, GValue* conditionValue, GError** _err) c_gda_connection_delete_row_from_table; ///
+  gboolean function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_delete_savepoint; ///
   int function(GdaConnection* cnc, const(char)* sql, GError** _err) c_gda_connection_execute_non_select_command; ///
   GdaDataModel* function(GdaConnection* cnc, const(char)* sql, GError** _err) c_gda_connection_execute_select_command; ///
   const(char)* function(GdaConnection* cnc) c_gda_connection_get_authentication; ///
   const(char)* function(GdaConnection* cnc) c_gda_connection_get_cnc_string; ///
-  bool function(GdaConnection* cnc, GDateDMY* outFirst, GDateDMY* outSecond, GDateDMY* outThird, char* outSep, GError** _err) c_gda_connection_get_date_format; ///
+  gboolean function(GdaConnection* cnc, GDateDMY* outFirst, GDateDMY* outSecond, GDateDMY* outThird, char* outSep, GError** _err) c_gda_connection_get_date_format; ///
   const(char)* function(GdaConnection* cnc) c_gda_connection_get_dsn; ///
   const(GList)* function(GdaConnection* cnc) c_gda_connection_get_events; ///
   GdaMetaStore* function(GdaConnection* cnc) c_gda_connection_get_meta_store; ///
@@ -140,8 +140,8 @@ __gshared extern(C)
   GdaServerProvider* function(GdaConnection* cnc) c_gda_connection_get_provider; ///
   const(char)* function(GdaConnection* cnc) c_gda_connection_get_provider_name; ///
   GdaTransactionStatus* function(GdaConnection* cnc) c_gda_connection_get_transaction_status; ///
-  bool function(GdaConnection* cnc, const(char)* table, GError** error,  ...) c_gda_connection_insert_row_into_table; ///
-  bool function(GdaConnection* cnc, const(char)* table, GSList* colNames, GSList* values, GError** _err) c_gda_connection_insert_row_into_table_v; ///
+  gboolean function(GdaConnection* cnc, const(char)* table, GError** error,  ...) c_gda_connection_insert_row_into_table; ///
+  gboolean function(GdaConnection* cnc, const(char)* table, GSList* colNames, GSList* values, GError** _err) c_gda_connection_insert_row_into_table_v; ///
   void function(GdaConnection* cnc, GdaTransactionStatusState newstate) c_gda_connection_internal_change_transaction_state; ///
   void* function(GdaConnection* cnc) c_gda_connection_internal_get_provider_data; ///
   void* function(GdaConnection* cnc, GError** _err) c_gda_connection_internal_get_provider_data_error; ///
@@ -154,26 +154,26 @@ __gshared extern(C)
   void function(GdaConnection* cnc, const(char)* transName) c_gda_connection_internal_transaction_committed; ///
   void function(GdaConnection* cnc, const(char)* transName) c_gda_connection_internal_transaction_rolledback; ///
   void function(GdaConnection* cnc, const(char)* parentTrans, const(char)* transName, GdaTransactionIsolation isolLevel) c_gda_connection_internal_transaction_started; ///
-  bool function(GdaConnection* cnc) c_gda_connection_is_opened; ///
-  bool function(GdaConnection* cnc, GError** _err) c_gda_connection_open; ///
+  gboolean function(GdaConnection* cnc) c_gda_connection_is_opened; ///
+  gboolean function(GdaConnection* cnc, GError** _err) c_gda_connection_open; ///
   GdaStatement* function(GdaConnection* cnc, const(char)* sql, GdaSet** params, GError** _err) c_gda_connection_parse_sql_string; ///
-  bool function(GdaConnection* cnc, GdaServerOperation* op, GError** _err) c_gda_connection_perform_operation; ///
+  gboolean function(GdaConnection* cnc, GdaServerOperation* op, GError** _err) c_gda_connection_perform_operation; ///
   GdaConnectionEvent* function(GdaConnection* cnc, GdaConnectionEventType type) c_gda_connection_point_available_event; ///
   char* function(GdaConnection* cnc, const(char)* id) c_gda_connection_quote_sql_identifier; ///
-  GSList* function(GdaConnection* cnc, GdaRepetitiveStatement* rstmt, GdaStatementModelUsage modelUsage, GType* colTypes, bool stopOnError, GError** _err) c_gda_connection_repetitive_statement_execute; ///
-  bool function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_rollback_savepoint; ///
-  bool function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_rollback_transaction; ///
+  GSList* function(GdaConnection* cnc, GdaRepetitiveStatement* rstmt, GdaStatementModelUsage modelUsage, GType* colTypes, gboolean stopOnError, GError** _err) c_gda_connection_repetitive_statement_execute; ///
+  gboolean function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_rollback_savepoint; ///
+  gboolean function(GdaConnection* cnc, const(char)* name, GError** _err) c_gda_connection_rollback_transaction; ///
   GObject* function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementModelUsage modelUsage, GdaSet** lastInsertRow, GError** _err) c_gda_connection_statement_execute; ///
   int function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaSet** lastInsertRow, GError** _err) c_gda_connection_statement_execute_non_select; ///
   GdaDataModel* function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GError** _err) c_gda_connection_statement_execute_select; ///
   GdaDataModel* function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementModelUsage modelUsage, GType* colTypes, GError** _err) c_gda_connection_statement_execute_select_full; ///
   GdaDataModel* function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementModelUsage modelUsage, GError** error,  ...) c_gda_connection_statement_execute_select_fullv; ///
-  bool function(GdaConnection* cnc, GdaStatement* stmt, GError** _err) c_gda_connection_statement_prepare; ///
+  gboolean function(GdaConnection* cnc, GdaStatement* stmt, GError** _err) c_gda_connection_statement_prepare; ///
   char* function(GdaConnection* cnc, GdaStatement* stmt, GdaSet* params, GdaStatementSqlFlag flags, GSList** paramsUsed, GError** _err) c_gda_connection_statement_to_sql; ///
-  bool function(GdaConnection* cnc, GdaConnectionFeature feature) c_gda_connection_supports_feature; ///
-  bool function(GdaConnection* cnc, GdaMetaContext* context, GError** _err) c_gda_connection_update_meta_store; ///
-  bool function(GdaConnection* cnc, const(char)* table, const(char)* conditionColumnName, GValue* conditionValue, GError** error,  ...) c_gda_connection_update_row_in_table; ///
-  bool function(GdaConnection* cnc, const(char)* table, const(char)* conditionColumnName, GValue* conditionValue, GSList* colNames, GSList* values, GError** _err) c_gda_connection_update_row_in_table_v; ///
+  gboolean function(GdaConnection* cnc, GdaConnectionFeature feature) c_gda_connection_supports_feature; ///
+  gboolean function(GdaConnection* cnc, GdaMetaContext* context, GError** _err) c_gda_connection_update_meta_store; ///
+  gboolean function(GdaConnection* cnc, const(char)* table, const(char)* conditionColumnName, GValue* conditionValue, GError** error,  ...) c_gda_connection_update_row_in_table; ///
+  gboolean function(GdaConnection* cnc, const(char)* table, const(char)* conditionColumnName, GValue* conditionValue, GSList* colNames, GSList* values, GError** _err) c_gda_connection_update_row_in_table_v; ///
   char* function(GdaConnection* cnc, GValue* from) c_gda_connection_value_to_sql_string; ///
 
   // ConnectionEvent
@@ -194,13 +194,13 @@ __gshared extern(C)
   // DataAccessWrapper
   GType function() c_gda_data_access_wrapper_get_type; ///
   GdaDataModel* function(GdaDataModel* model) c_gda_data_access_wrapper_new; ///
-  bool function(GdaDataAccessWrapper* wrapper, const(int)* mapping, int mappingSize) c_gda_data_access_wrapper_set_mapping; ///
+  gboolean function(GdaDataAccessWrapper* wrapper, const(int)* mapping, int mappingSize) c_gda_data_access_wrapper_set_mapping; ///
 
   // DataComparator
   GType function() c_gda_data_comparator_get_type; ///
   GObject* function(GdaDataModel* oldModel, GdaDataModel* newModel) c_gda_data_comparator_new; ///
   GQuark function() c_gda_data_comparator_error_quark; ///
-  bool function(GdaDataComparator* comp, GError** _err) c_gda_data_comparator_compute_diff; ///
+  gboolean function(GdaDataComparator* comp, GError** _err) c_gda_data_comparator_compute_diff; ///
   const(GdaDiff)* function(GdaDataComparator* comp, int pos) c_gda_data_comparator_get_diff; ///
   int function(GdaDataComparator* comp) c_gda_data_comparator_get_n_diffs; ///
   void function(GdaDataComparator* comp, const(int)* colNumbers, int nbCols) c_gda_data_comparator_set_key_columns; ///
@@ -208,7 +208,7 @@ __gshared extern(C)
   // DataHandler
   GType function() c_gda_data_handler_get_type; ///
   GdaDataHandler* function(GType forType) c_gda_data_handler_get_default; ///
-  bool function(GdaDataHandler* dh, GType type) c_gda_data_handler_accepts_g_type; ///
+  gboolean function(GdaDataHandler* dh, GType type) c_gda_data_handler_accepts_g_type; ///
   const(char)* function(GdaDataHandler* dh) c_gda_data_handler_get_descr; ///
   GValue* function(GdaDataHandler* dh, GType type) c_gda_data_handler_get_sane_init_value; ///
   char* function(GdaDataHandler* dh, const(GValue)* value) c_gda_data_handler_get_sql_from_value; ///
@@ -219,7 +219,7 @@ __gshared extern(C)
   // DataModel
   GType function() c_gda_data_model_get_type; ///
   GQuark function() c_gda_data_model_error_quark; ///
-  bool function(GdaDataModel* model, xmlNodePtr node, GError** _err) c_gda_data_model_add_data_from_xml_node; ///
+  gboolean function(GdaDataModel* model, xmlNodePtr node, GError** _err) c_gda_data_model_add_data_from_xml_node; ///
   int function(GdaDataModel* model, GError** _err) c_gda_data_model_append_row; ///
   int function(GdaDataModel* model, const(GList)* values, GError** _err) c_gda_data_model_append_values; ///
   GdaDataModelArray* function(GdaDataModel* src, GError** _err) c_gda_data_model_array_copy_model; ///
@@ -228,7 +228,7 @@ __gshared extern(C)
   GdaColumn* function(GdaDataModel* model, int col) c_gda_data_model_describe_column; ///
   void function(GdaDataModel* model, void* toStream) c_gda_data_model_dump; ///
   char* function(GdaDataModel* model) c_gda_data_model_dump_as_string; ///
-  bool function(GdaDataModel* model, GdaDataModelIOFormat format, const(char)* file, const(int)* cols, int nbCols, const(int)* rows, int nbRows, GdaSet* options, GError** _err) c_gda_data_model_export_to_file; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIOFormat format, const(char)* file, const(int)* cols, int nbCols, const(int)* rows, int nbRows, GdaSet* options, GError** _err) c_gda_data_model_export_to_file; ///
   char* function(GdaDataModel* model, GdaDataModelIOFormat format, const(int)* cols, int nbCols, const(int)* rows, int nbRows, GdaSet* options) c_gda_data_model_export_to_string; ///
   void function(GdaDataModel* model) c_gda_data_model_freeze; ///
   GdaDataModelAccessFlags function(GdaDataModel* model) c_gda_data_model_get_access_flags; ///
@@ -239,21 +239,21 @@ __gshared extern(C)
   GError** function(GdaDataModel* model) c_gda_data_model_get_exceptions; ///
   int function(GdaDataModel* model) c_gda_data_model_get_n_columns; ///
   int function(GdaDataModel* model) c_gda_data_model_get_n_rows; ///
-  bool function(GdaDataModel* model) c_gda_data_model_get_notify; ///
+  gboolean function(GdaDataModel* model) c_gda_data_model_get_notify; ///
   int function(GdaDataModel* model, GSList* values, int* colsIndex) c_gda_data_model_get_row_from_values; ///
-  const(GValue)* function(GdaDataModel* model, int col, int row, GType expectedType, bool nullok, GError** _err) c_gda_data_model_get_typed_value_at; ///
+  const(GValue)* function(GdaDataModel* model, int col, int row, GType expectedType, gboolean nullok, GError** _err) c_gda_data_model_get_typed_value_at; ///
   const(GValue)* function(GdaDataModel* model, int col, int row, GError** _err) c_gda_data_model_get_value_at; ///
-  bool function(GdaDataModel* model, const(char)* file, GHashTable* colsTrans, GdaSet* options, GError** _err) c_gda_data_model_import_from_file; ///
-  bool function(GdaDataModel* to, GdaDataModel* from, bool overwrite, GHashTable* colsTrans, GError** _err) c_gda_data_model_import_from_model; ///
-  bool function(GdaDataModel* model, const(char)* string_, GHashTable* colsTrans, GdaSet* options, GError** _err) c_gda_data_model_import_from_string; ///
-  bool function(GdaDataModel* model, GdaDataModelIter* iter, int row) c_gda_data_model_iter_at_row; ///
-  bool function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_move_next_default; ///
-  bool function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_move_prev_default; ///
-  bool function(GdaDataModel* model, GdaDataModelIter* iter, int row) c_gda_data_model_iter_move_to_row_default; ///
-  bool function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_next; ///
-  bool function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_prev; ///
-  bool function(GdaDataModel* model, GdaDataModelIter* iter, int col, const(GValue)* value, GError** _err) c_gda_data_model_iter_set_value; ///
-  bool function(GdaDataModel* model, int row, GError** _err) c_gda_data_model_remove_row; ///
+  gboolean function(GdaDataModel* model, const(char)* file, GHashTable* colsTrans, GdaSet* options, GError** _err) c_gda_data_model_import_from_file; ///
+  gboolean function(GdaDataModel* to, GdaDataModel* from, gboolean overwrite, GHashTable* colsTrans, GError** _err) c_gda_data_model_import_from_model; ///
+  gboolean function(GdaDataModel* model, const(char)* string_, GHashTable* colsTrans, GdaSet* options, GError** _err) c_gda_data_model_import_from_string; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIter* iter, int row) c_gda_data_model_iter_at_row; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_move_next_default; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_move_prev_default; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIter* iter, int row) c_gda_data_model_iter_move_to_row_default; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_next; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIter* iter) c_gda_data_model_iter_prev; ///
+  gboolean function(GdaDataModel* model, GdaDataModelIter* iter, int col, const(GValue)* value, GError** _err) c_gda_data_model_iter_set_value; ///
+  gboolean function(GdaDataModel* model, int row, GError** _err) c_gda_data_model_remove_row; ///
   void function(GdaDataModel* model) c_gda_data_model_reset; ///
   void function(GdaDataModel* model, int row) c_gda_data_model_row_inserted; ///
   void function(GdaDataModel* model, int row) c_gda_data_model_row_removed; ///
@@ -261,9 +261,9 @@ __gshared extern(C)
   void function(GdaDataModel* model, GdaDataModelHint hint, const(GValue)* hintValue) c_gda_data_model_send_hint; ///
   void function(GdaDataModel* model, int col, const(char)* name) c_gda_data_model_set_column_name; ///
   void function(GdaDataModel* model, int col, const(char)* title) c_gda_data_model_set_column_title; ///
-  void function(GdaDataModel* model, bool doNotifyChanges) c_gda_data_model_set_notify; ///
-  bool function(GdaDataModel* model, int col, int row, const(GValue)* value, GError** _err) c_gda_data_model_set_value_at; ///
-  bool function(GdaDataModel* model, int row, GList* values, GError** _err) c_gda_data_model_set_values; ///
+  void function(GdaDataModel* model, gboolean doNotifyChanges) c_gda_data_model_set_notify; ///
+  gboolean function(GdaDataModel* model, int col, int row, const(GValue)* value, GError** _err) c_gda_data_model_set_value_at; ///
+  gboolean function(GdaDataModel* model, int row, GList* values, GError** _err) c_gda_data_model_set_values; ///
   void function(GdaDataModel* model) c_gda_data_model_thaw; ///
 
   // DataModelArray
@@ -283,8 +283,8 @@ __gshared extern(C)
 
   // DataModelImport
   GType function() c_gda_data_model_import_get_type; ///
-  GdaDataModel* function(const(char)* filename, bool randomAccess, GdaSet* options) c_gda_data_model_import_new_file; ///
-  GdaDataModel* function(const(char)* data, bool randomAccess, GdaSet* options) c_gda_data_model_import_new_mem; ///
+  GdaDataModel* function(const(char)* filename, gboolean randomAccess, GdaSet* options) c_gda_data_model_import_new_file; ///
+  GdaDataModel* function(const(char)* data, gboolean randomAccess, GdaSet* options) c_gda_data_model_import_new_mem; ///
   GdaDataModel* function(xmlNodePtr node) c_gda_data_model_import_new_xml_node; ///
   void function(GdaDataModelImport* model) c_gda_data_model_import_clean_errors; ///
   GSList* function(GdaDataModelImport* model) c_gda_data_model_import_get_errors; ///
@@ -299,19 +299,19 @@ __gshared extern(C)
   const(GValue)* function(GdaDataModelIter* iter, int col, GError** _err) c_gda_data_model_iter_get_value_at_e; ///
   const(GValue)* function(GdaDataModelIter* iter, const(char)* fieldName) c_gda_data_model_iter_get_value_for_field; ///
   void function(GdaDataModelIter* iter) c_gda_data_model_iter_invalidate_contents; ///
-  bool function(GdaDataModelIter* iter) c_gda_data_model_iter_is_valid; ///
-  bool function(GdaDataModelIter* iter) c_gda_data_model_iter_move_next; ///
-  bool function(GdaDataModelIter* iter) c_gda_data_model_iter_move_prev; ///
-  bool function(GdaDataModelIter* iter, int row) c_gda_data_model_iter_move_to_row; ///
-  bool function(GdaDataModelIter* iter, int col, const(GValue)* value, GError** _err) c_gda_data_model_iter_set_value_at; ///
+  gboolean function(GdaDataModelIter* iter) c_gda_data_model_iter_is_valid; ///
+  gboolean function(GdaDataModelIter* iter) c_gda_data_model_iter_move_next; ///
+  gboolean function(GdaDataModelIter* iter) c_gda_data_model_iter_move_prev; ///
+  gboolean function(GdaDataModelIter* iter, int row) c_gda_data_model_iter_move_to_row; ///
+  gboolean function(GdaDataModelIter* iter, int col, const(GValue)* value, GError** _err) c_gda_data_model_iter_set_value_at; ///
 
   // DataPivot
   GType function() c_gda_data_pivot_get_type; ///
   GQuark function() c_gda_data_pivot_error_quark; ///
   GdaDataModel* function(GdaDataModel* model) c_gda_data_pivot_new; ///
-  bool function(GdaDataPivot* pivot, GdaDataPivotAggregate aggregateType, const(char)* field, const(char)* alias_, GError** _err) c_gda_data_pivot_add_data; ///
-  bool function(GdaDataPivot* pivot, GdaDataPivotFieldType fieldType, const(char)* field, const(char)* alias_, GError** _err) c_gda_data_pivot_add_field; ///
-  bool function(GdaDataPivot* pivot, GError** _err) c_gda_data_pivot_populate; ///
+  gboolean function(GdaDataPivot* pivot, GdaDataPivotAggregate aggregateType, const(char)* field, const(char)* alias_, GError** _err) c_gda_data_pivot_add_data; ///
+  gboolean function(GdaDataPivot* pivot, GdaDataPivotFieldType fieldType, const(char)* field, const(char)* alias_, GError** _err) c_gda_data_pivot_add_field; ///
+  gboolean function(GdaDataPivot* pivot, GError** _err) c_gda_data_pivot_populate; ///
 
   // DataProxy
   GType function() c_gda_data_proxy_get_type; ///
@@ -319,9 +319,9 @@ __gshared extern(C)
   GdaDataProxy* function(GdaDataModel* model) c_gda_data_proxy_new_with_data_model; ///
   GQuark function() c_gda_data_proxy_error_quark; ///
   void function(GdaDataProxy* proxy, int proxyRow, int col, GdaValueAttribute alterFlags) c_gda_data_proxy_alter_value_attributes; ///
-  bool function(GdaDataProxy* proxy, GError** _err) c_gda_data_proxy_apply_all_changes; ///
-  bool function(GdaDataProxy* proxy, int proxyRow, GError** _err) c_gda_data_proxy_apply_row_changes; ///
-  bool function(GdaDataProxy* proxy) c_gda_data_proxy_cancel_all_changes; ///
+  gboolean function(GdaDataProxy* proxy, GError** _err) c_gda_data_proxy_apply_all_changes; ///
+  gboolean function(GdaDataProxy* proxy, int proxyRow, GError** _err) c_gda_data_proxy_apply_row_changes; ///
+  gboolean function(GdaDataProxy* proxy) c_gda_data_proxy_cancel_all_changes; ///
   void function(GdaDataProxy* proxy, int proxyRow, int col) c_gda_data_proxy_cancel_row_changes; ///
   void function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_delete; ///
   const(char)* function(GdaDataProxy* proxy) c_gda_data_proxy_get_filter_expr; ///
@@ -337,13 +337,13 @@ __gshared extern(C)
   int function(GdaDataProxy* proxy) c_gda_data_proxy_get_sample_start; ///
   GdaValueAttribute function(GdaDataProxy* proxy, int proxyRow, int col) c_gda_data_proxy_get_value_attributes; ///
   GSList* function(GdaDataProxy* proxy, int proxyRow, int* colsIndex, int nCols) c_gda_data_proxy_get_values; ///
-  bool function(GdaDataProxy* proxy) c_gda_data_proxy_has_changed; ///
-  bool function(GdaDataProxy* proxy) c_gda_data_proxy_is_read_only; ///
-  bool function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_row_has_changed; ///
-  bool function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_row_is_deleted; ///
-  bool function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_row_is_inserted; ///
-  bool function(GdaDataProxy* proxy, const(char)* filterExpr, GError** _err) c_gda_data_proxy_set_filter_expr; ///
-  bool function(GdaDataProxy* proxy, int col, GError** _err) c_gda_data_proxy_set_ordering_column; ///
+  gboolean function(GdaDataProxy* proxy) c_gda_data_proxy_has_changed; ///
+  gboolean function(GdaDataProxy* proxy) c_gda_data_proxy_is_read_only; ///
+  gboolean function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_row_has_changed; ///
+  gboolean function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_row_is_deleted; ///
+  gboolean function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_row_is_inserted; ///
+  gboolean function(GdaDataProxy* proxy, const(char)* filterExpr, GError** _err) c_gda_data_proxy_set_filter_expr; ///
+  gboolean function(GdaDataProxy* proxy, int col, GError** _err) c_gda_data_proxy_set_ordering_column; ///
   void function(GdaDataProxy* proxy, int sampleSize) c_gda_data_proxy_set_sample_size; ///
   void function(GdaDataProxy* proxy, int sampleStart) c_gda_data_proxy_set_sample_start; ///
   void function(GdaDataProxy* proxy, int proxyRow) c_gda_data_proxy_undelete; ///
@@ -351,17 +351,17 @@ __gshared extern(C)
   // DataSelect
   GType function() c_gda_data_select_get_type; ///
   GQuark function() c_gda_data_select_error_quark; ///
-  bool function(GdaDataSelect* model, GError** _err) c_gda_data_select_compute_columns_attributes; ///
-  bool function(GdaDataSelect* model, GError** _err) c_gda_data_select_compute_modification_statements; ///
-  bool function(GdaDataSelect* model, GdaDataSelectConditionType condType, GError** _err) c_gda_data_select_compute_modification_statements_ext; ///
-  bool function(GdaDataSelect* model, GError** _err) c_gda_data_select_compute_row_selection_condition; ///
+  gboolean function(GdaDataSelect* model, GError** _err) c_gda_data_select_compute_columns_attributes; ///
+  gboolean function(GdaDataSelect* model, GError** _err) c_gda_data_select_compute_modification_statements; ///
+  gboolean function(GdaDataSelect* model, GdaDataSelectConditionType condType, GError** _err) c_gda_data_select_compute_modification_statements_ext; ///
+  gboolean function(GdaDataSelect* model, GError** _err) c_gda_data_select_compute_row_selection_condition; ///
   GdaConnection* function(GdaDataSelect* model) c_gda_data_select_get_connection; ///
-  bool function(GdaDataSelect* model, GError** _err) c_gda_data_select_prepare_for_offline; ///
-  bool function(GdaDataSelect* model, GError** _err) c_gda_data_select_rerun; ///
-  bool function(GdaDataSelect* model, GdaStatement* modStmt, GError** _err) c_gda_data_select_set_modification_statement; ///
-  bool function(GdaDataSelect* model, const(char)* sql, GError** _err) c_gda_data_select_set_modification_statement_sql; ///
-  bool function(GdaDataSelect* model, GdaSqlExpr* expr, GError** _err) c_gda_data_select_set_row_selection_condition; ///
-  bool function(GdaDataSelect* model, const(char)* sqlWhere, GError** _err) c_gda_data_select_set_row_selection_condition_sql; ///
+  gboolean function(GdaDataSelect* model, GError** _err) c_gda_data_select_prepare_for_offline; ///
+  gboolean function(GdaDataSelect* model, GError** _err) c_gda_data_select_rerun; ///
+  gboolean function(GdaDataSelect* model, GdaStatement* modStmt, GError** _err) c_gda_data_select_set_modification_statement; ///
+  gboolean function(GdaDataSelect* model, const(char)* sql, GError** _err) c_gda_data_select_set_modification_statement_sql; ///
+  gboolean function(GdaDataSelect* model, GdaSqlExpr* expr, GError** _err) c_gda_data_select_set_row_selection_condition; ///
+  gboolean function(GdaDataSelect* model, const(char)* sqlWhere, GError** _err) c_gda_data_select_set_row_selection_condition_sql; ///
 
   // DsnInfo
   GType function() c_gda_dsn_info_get_type; ///
@@ -397,8 +397,8 @@ __gshared extern(C)
   GdaDataHandler* function() c_gda_handler_time_new_no_locale; ///
   char* function(GdaHandlerTime* dh, GType type) c_gda_handler_time_get_format; ///
   char* function(GdaHandlerTime* dh, const(GValue)* value) c_gda_handler_time_get_no_locale_str_from_value; ///
-  void function(GdaHandlerTime* dh, GDateDMY first, GDateDMY sec, GDateDMY third, char separator, bool twodigitsYears) c_gda_handler_time_set_sql_spec; ///
-  void function(GdaHandlerTime* dh, GDateDMY first, GDateDMY sec, GDateDMY third, char separator, bool twodigitsYears) c_gda_handler_time_set_str_spec; ///
+  void function(GdaHandlerTime* dh, GDateDMY first, GDateDMY sec, GDateDMY third, char separator, gboolean twodigitsYears) c_gda_handler_time_set_sql_spec; ///
+  void function(GdaHandlerTime* dh, GDateDMY first, GDateDMY sec, GDateDMY third, char separator, gboolean twodigitsYears) c_gda_handler_time_set_str_spec; ///
 
   // HandlerType
   GType function() c_gda_handler_type_get_type; ///
@@ -418,28 +418,28 @@ __gshared extern(C)
   const(GValue)* function(GdaHolder* holder) c_gda_holder_get_default_value; ///
   GType function(GdaHolder* holder) c_gda_holder_get_g_type; ///
   const(char)* function(GdaHolder* holder) c_gda_holder_get_id; ///
-  bool function(GdaHolder* holder) c_gda_holder_get_not_null; ///
+  gboolean function(GdaHolder* holder) c_gda_holder_get_not_null; ///
   GdaDataModel* function(GdaHolder* holder, int* col) c_gda_holder_get_source_model; ///
   const(GValue)* function(GdaHolder* holder) c_gda_holder_get_value; ///
   char* function(GdaHolder* holder, GdaDataHandler* dh) c_gda_holder_get_value_str; ///
-  bool function(GdaHolder* holder) c_gda_holder_is_valid; ///
-  bool function(GdaHolder* holder, GError** _err) c_gda_holder_is_valid_e; ///
+  gboolean function(GdaHolder* holder) c_gda_holder_is_valid; ///
+  gboolean function(GdaHolder* holder, GError** _err) c_gda_holder_is_valid_e; ///
   void function(GdaHolder* holder, const(char)* attribute, const(GValue)* value, GDestroyNotify destroy) c_gda_holder_set_attribute; ///
-  bool function(GdaHolder* holder, GdaHolder* bindTo, GError** _err) c_gda_holder_set_bind; ///
+  gboolean function(GdaHolder* holder, GdaHolder* bindTo, GError** _err) c_gda_holder_set_bind; ///
   void function(GdaHolder* holder, const(GValue)* value) c_gda_holder_set_default_value; ///
-  void function(GdaHolder* holder, bool notNull) c_gda_holder_set_not_null; ///
-  bool function(GdaHolder* holder, GdaDataModel* model, int col, GError** _err) c_gda_holder_set_source_model; ///
-  bool function(GdaHolder* holder, const(GValue)* value, GError** _err) c_gda_holder_set_value; ///
-  bool function(GdaHolder* holder, GdaDataHandler* dh, const(char)* value, GError** _err) c_gda_holder_set_value_str; ///
-  bool function(GdaHolder* holder) c_gda_holder_set_value_to_default; ///
-  GValue* function(GdaHolder* holder, const(GValue)* value, bool* valueChanged, GError** _err) c_gda_holder_take_static_value; ///
-  bool function(GdaHolder* holder, GValue* value, GError** _err) c_gda_holder_take_value; ///
-  bool function(GdaHolder* holder) c_gda_holder_value_is_default; ///
+  void function(GdaHolder* holder, gboolean notNull) c_gda_holder_set_not_null; ///
+  gboolean function(GdaHolder* holder, GdaDataModel* model, int col, GError** _err) c_gda_holder_set_source_model; ///
+  gboolean function(GdaHolder* holder, const(GValue)* value, GError** _err) c_gda_holder_set_value; ///
+  gboolean function(GdaHolder* holder, GdaDataHandler* dh, const(char)* value, GError** _err) c_gda_holder_set_value_str; ///
+  gboolean function(GdaHolder* holder) c_gda_holder_set_value_to_default; ///
+  GValue* function(GdaHolder* holder, const(GValue)* value, gboolean* valueChanged, GError** _err) c_gda_holder_take_static_value; ///
+  gboolean function(GdaHolder* holder, GValue* value, GError** _err) c_gda_holder_take_value; ///
+  gboolean function(GdaHolder* holder) c_gda_holder_value_is_default; ///
 
   // Lockable
   GType function() c_gda_lockable_get_type; ///
   void function(GdaLockable* lockable) c_gda_lockable_lock; ///
-  bool function(GdaLockable* lockable) c_gda_lockable_trylock; ///
+  gboolean function(GdaLockable* lockable) c_gda_lockable_trylock; ///
   void function(GdaLockable* lockable) c_gda_lockable_unlock; ///
 
   // MetaContext
@@ -459,40 +459,40 @@ __gshared extern(C)
   GQuark function() c_gda_meta_store_error_quark; ///
   char* function(const(char)* id, GdaConnection* cnc) c_gda_meta_store_sql_identifier_quote; ///
   GdaDataModel* function(GdaMetaStore* store, const(char)* tableName) c_gda_meta_store_create_modify_data_model; ///
-  bool function(GdaMetaStore* store, GdaMetaStruct* mstruct, const(char)* fkName, const(char)* catalog, const(char)* schema, const(char)* table, const(char)* refCatalog, const(char)* refSchema, const(char)* refTable, uint nbCols, char** colnames, char** refColnames, GError** _err) c_gda_meta_store_declare_foreign_key; ///
+  gboolean function(GdaMetaStore* store, GdaMetaStruct* mstruct, const(char)* fkName, const(char)* catalog, const(char)* schema, const(char)* table, const(char)* refCatalog, const(char)* refSchema, const(char)* refTable, uint nbCols, char** colnames, char** refColnames, GError** _err) c_gda_meta_store_declare_foreign_key; ///
   GdaDataModel* function(GdaMetaStore* store, const(char)* selectSql, GError** error,  ...) c_gda_meta_store_extract; ///
   GdaDataModel* function(GdaMetaStore* store, const(char)* selectSql, GHashTable* vars, GError** _err) c_gda_meta_store_extract_v; ///
-  bool function(GdaMetaStore* store, const(char)* attName, char** attValue, GError** _err) c_gda_meta_store_get_attribute_value; ///
+  gboolean function(GdaMetaStore* store, const(char)* attName, char** attValue, GError** _err) c_gda_meta_store_get_attribute_value; ///
   GdaConnection* function(GdaMetaStore* store) c_gda_meta_store_get_internal_connection; ///
   int function(GdaMetaStore* store) c_gda_meta_store_get_version; ///
-  bool function(GdaMetaStore* store, const(char)* tableName, GdaDataModel* newData, const(char)* condition, GError** error,  ...) c_gda_meta_store_modify; ///
-  bool function(GdaMetaStore* store, const(char)* tableName, GdaDataModel* newData, const(char)* condition, int nvalues, const(char*)* valueNames, const(GValue*)* values, GError** _err) c_gda_meta_store_modify_v; ///
-  bool function(GdaMetaStore* store, GdaMetaContext* context, GdaDataModel* newData, GError** _err) c_gda_meta_store_modify_with_context; ///
-  bool function(GdaMetaStore* store, const(char)* xmlDescription, GError** _err) c_gda_meta_store_schema_add_custom_object; ///
+  gboolean function(GdaMetaStore* store, const(char)* tableName, GdaDataModel* newData, const(char)* condition, GError** error,  ...) c_gda_meta_store_modify; ///
+  gboolean function(GdaMetaStore* store, const(char)* tableName, GdaDataModel* newData, const(char)* condition, int nvalues, const(char*)* valueNames, const(GValue*)* values, GError** _err) c_gda_meta_store_modify_v; ///
+  gboolean function(GdaMetaStore* store, GdaMetaContext* context, GdaDataModel* newData, GError** _err) c_gda_meta_store_modify_with_context; ///
+  gboolean function(GdaMetaStore* store, const(char)* xmlDescription, GError** _err) c_gda_meta_store_schema_add_custom_object; ///
   GSList* function(GdaMetaStore* store) c_gda_meta_store_schema_get_all_tables; ///
   GSList* function(GdaMetaStore* store, const(char)* tableName) c_gda_meta_store_schema_get_depend_tables; ///
   GdaMetaStruct* function(GdaMetaStore* store, GError** _err) c_gda_meta_store_schema_get_structure; ///
-  bool function(GdaMetaStore* store, const(char)* objName, GError** _err) c_gda_meta_store_schema_remove_custom_object; ///
-  bool function(GdaMetaStore* store, const(char)* attName, const(char)* attValue, GError** _err) c_gda_meta_store_set_attribute_value; ///
+  gboolean function(GdaMetaStore* store, const(char)* objName, GError** _err) c_gda_meta_store_schema_remove_custom_object; ///
+  gboolean function(GdaMetaStore* store, const(char)* attName, const(char)* attValue, GError** _err) c_gda_meta_store_set_attribute_value; ///
   void function(GdaMetaStore* store, GdaSqlIdentifierStyle style) c_gda_meta_store_set_identifiers_style; ///
   void function(GdaMetaStore* store, GdaSqlReservedKeywordsFunc func) c_gda_meta_store_set_reserved_keywords_func; ///
-  bool function(GdaMetaStore* store, GdaMetaStruct* mstruct, const(char)* fkName, const(char)* catalog, const(char)* schema, const(char)* table, const(char)* refCatalog, const(char)* refSchema, const(char)* refTable, GError** _err) c_gda_meta_store_undeclare_foreign_key; ///
+  gboolean function(GdaMetaStore* store, GdaMetaStruct* mstruct, const(char)* fkName, const(char)* catalog, const(char)* schema, const(char)* table, const(char)* refCatalog, const(char)* refSchema, const(char)* refTable, GError** _err) c_gda_meta_store_undeclare_foreign_key; ///
 
   // MetaStruct
   GType function() c_gda_meta_struct_get_type; ///
   GdaMetaStruct* function(GdaMetaStore* store, GdaMetaStructFeature features) c_gda_meta_struct_new; ///
   GQuark function() c_gda_meta_struct_error_quark; ///
   GdaMetaDbObject* function(GdaMetaStruct* mstruct, GdaMetaDbObjectType type, const(GValue)* catalog, const(GValue)* schema, const(GValue)* name, GError** _err) c_gda_meta_struct_complement; ///
-  bool function(GdaMetaStruct* mstruct, GError** _err) c_gda_meta_struct_complement_all; ///
-  bool function(GdaMetaStruct* mstruct, GError** _err) c_gda_meta_struct_complement_default; ///
-  bool function(GdaMetaStruct* mstruct, GdaMetaDbObject* dbo, GError** _err) c_gda_meta_struct_complement_depend; ///
-  bool function(GdaMetaStruct* mstruct, const(GValue)* catalog, const(GValue)* schema, GError** _err) c_gda_meta_struct_complement_schema; ///
+  gboolean function(GdaMetaStruct* mstruct, GError** _err) c_gda_meta_struct_complement_all; ///
+  gboolean function(GdaMetaStruct* mstruct, GError** _err) c_gda_meta_struct_complement_default; ///
+  gboolean function(GdaMetaStruct* mstruct, GdaMetaDbObject* dbo, GError** _err) c_gda_meta_struct_complement_depend; ///
+  gboolean function(GdaMetaStruct* mstruct, const(GValue)* catalog, const(GValue)* schema, GError** _err) c_gda_meta_struct_complement_schema; ///
   char* function(GdaMetaStruct* mstruct, GdaMetaGraphInfo info, GError** _err) c_gda_meta_struct_dump_as_graph; ///
   GSList* function(GdaMetaStruct* mstruct) c_gda_meta_struct_get_all_db_objects; ///
   GdaMetaDbObject* function(GdaMetaStruct* mstruct, const(GValue)* catalog, const(GValue)* schema, const(GValue)* name) c_gda_meta_struct_get_db_object; ///
   GdaMetaTableColumn* function(GdaMetaStruct* mstruct, GdaMetaTable* table, const(GValue)* colName) c_gda_meta_struct_get_table_column; ///
-  bool function(GdaMetaStruct* mstruct, const(char)* catalog, const(char)* schema, const(char)* xmlSpecFile, GError** _err) c_gda_meta_struct_load_from_xml_file; ///
-  bool function(GdaMetaStruct* mstruct, GdaMetaSortType sortType, GError** _err) c_gda_meta_struct_sort_db_objects; ///
+  gboolean function(GdaMetaStruct* mstruct, const(char)* catalog, const(char)* schema, const(char)* xmlSpecFile, GError** _err) c_gda_meta_struct_load_from_xml_file; ///
+  gboolean function(GdaMetaStruct* mstruct, GdaMetaSortType sortType, GError** _err) c_gda_meta_struct_sort_db_objects; ///
 
   // MetaTableColumn
   void function(GdaMetaTableColumn* tcol, GdaAttributesManagerFunc func, void* data) c_gda_meta_table_column_foreach_attribute; ///
@@ -523,7 +523,7 @@ __gshared extern(C)
   GType function() c_gda_quark_list_get_type; ///
   GdaQuarkList* function() c_gda_quark_list_new; ///
   GdaQuarkList* function(const(char)* string_) c_gda_quark_list_new_from_string; ///
-  void function(GdaQuarkList* qlist, const(char)* string_, bool cleanup) c_gda_quark_list_add_from_string; ///
+  void function(GdaQuarkList* qlist, const(char)* string_, gboolean cleanup) c_gda_quark_list_add_from_string; ///
   void function(GdaQuarkList* qlist) c_gda_quark_list_clear; ///
   GdaQuarkList* function(GdaQuarkList* qlist) c_gda_quark_list_copy; ///
   const(char)* function(GdaQuarkList* qlist, const(char)* name) c_gda_quark_list_find; ///
@@ -535,9 +535,9 @@ __gshared extern(C)
   // RepetitiveStatement
   GType function() c_gda_repetitive_statement_get_type; ///
   GdaRepetitiveStatement* function(GdaStatement* stmt) c_gda_repetitive_statement_new; ///
-  bool function(GdaRepetitiveStatement* rstmt, GdaSet* values, bool makeCopy) c_gda_repetitive_statement_append_set; ///
+  gboolean function(GdaRepetitiveStatement* rstmt, GdaSet* values, gboolean makeCopy) c_gda_repetitive_statement_append_set; ///
   GSList* function(GdaRepetitiveStatement* rstmt) c_gda_repetitive_statement_get_all_sets; ///
-  bool function(GdaRepetitiveStatement* rstmt, GdaSet** set, GError** _err) c_gda_repetitive_statement_get_template_set; ///
+  gboolean function(GdaRepetitiveStatement* rstmt, GdaSet** set, GError** _err) c_gda_repetitive_statement_get_template_set; ///
 
   // Row
   GType function() c_gda_row_get_type; ///
@@ -546,8 +546,8 @@ __gshared extern(C)
   GValue* function(GdaRow* row, int num) c_gda_row_get_value; ///
   void function(GdaRow* row, GValue* value) c_gda_row_invalidate_value; ///
   void function(GdaRow* row, GValue* value, GError* error) c_gda_row_invalidate_value_e; ///
-  bool function(GdaRow* row, GValue* value) c_gda_row_value_is_valid; ///
-  bool function(GdaRow* row, GValue* value, GError** _err) c_gda_row_value_is_valid_e; ///
+  gboolean function(GdaRow* row, GValue* value) c_gda_row_value_is_valid; ///
+  gboolean function(GdaRow* row, GValue* value, GError** _err) c_gda_row_value_is_valid_e; ///
 
   // ServerOperation
   GType function() c_gda_server_operation_get_type; ///
@@ -560,7 +560,7 @@ __gshared extern(C)
   GdaServerOperation* function(GdaConnection* cnc, const(char)* tableName, GError** _err) c_gda_server_operation_prepare_drop_table; ///
   GdaServerOperationType function(const(char)* str) c_gda_server_operation_string_to_op_type; ///
   uint function(GdaServerOperation* op, const(char)* seqPath) c_gda_server_operation_add_item_to_sequence; ///
-  bool function(GdaServerOperation* op, const(char)* itemPath) c_gda_server_operation_del_item_from_sequence; ///
+  gboolean function(GdaServerOperation* op, const(char)* itemPath) c_gda_server_operation_del_item_from_sequence; ///
   GdaServerOperationNode* function(GdaServerOperation* op, const(char)* pathFormat,  ...) c_gda_server_operation_get_node_info; ///
   char* function(GdaServerOperation* op, const(char)* path) c_gda_server_operation_get_node_parent; ///
   char* function(GdaServerOperation* op, const(char)* path) c_gda_server_operation_get_node_path_portion; ///
@@ -576,15 +576,15 @@ __gshared extern(C)
   char* function(GdaServerOperation* op, GdaConnection* cnc, GdaServerProvider* prov, const(char)* path) c_gda_server_operation_get_sql_identifier_at_path; ///
   const(GValue)* function(GdaServerOperation* op, const(char)* pathFormat,  ...) c_gda_server_operation_get_value_at; ///
   const(GValue)* function(GdaServerOperation* op, const(char)* path) c_gda_server_operation_get_value_at_path; ///
-  bool function(GdaServerOperation* op, const(char)* xmlFile, GError** _err) c_gda_server_operation_is_valid; ///
-  bool function(GdaServerOperation* op, xmlNodePtr node, GError** _err) c_gda_server_operation_load_data_from_xml; ///
-  bool function(GdaServerOperation* op, const(char)* provider, GError** _err) c_gda_server_operation_perform_create_database; ///
-  bool function(GdaServerOperation* op, GError** _err) c_gda_server_operation_perform_create_table; ///
-  bool function(GdaServerOperation* op, const(char)* provider, GError** _err) c_gda_server_operation_perform_drop_database; ///
-  bool function(GdaServerOperation* op, GError** _err) c_gda_server_operation_perform_drop_table; ///
+  gboolean function(GdaServerOperation* op, const(char)* xmlFile, GError** _err) c_gda_server_operation_is_valid; ///
+  gboolean function(GdaServerOperation* op, xmlNodePtr node, GError** _err) c_gda_server_operation_load_data_from_xml; ///
+  gboolean function(GdaServerOperation* op, const(char)* provider, GError** _err) c_gda_server_operation_perform_create_database; ///
+  gboolean function(GdaServerOperation* op, GError** _err) c_gda_server_operation_perform_create_table; ///
+  gboolean function(GdaServerOperation* op, const(char)* provider, GError** _err) c_gda_server_operation_perform_drop_database; ///
+  gboolean function(GdaServerOperation* op, GError** _err) c_gda_server_operation_perform_drop_table; ///
   xmlNodePtr function(GdaServerOperation* op, GError** _err) c_gda_server_operation_save_data_to_xml; ///
-  bool function(GdaServerOperation* op, const(char)* value, GError** error, const(char)* pathFormat,  ...) c_gda_server_operation_set_value_at; ///
-  bool function(GdaServerOperation* op, const(char)* value, const(char)* path, GError** _err) c_gda_server_operation_set_value_at_path; ///
+  gboolean function(GdaServerOperation* op, const(char)* value, GError** error, const(char)* pathFormat,  ...) c_gda_server_operation_set_value_at; ///
+  gboolean function(GdaServerOperation* op, const(char)* value, const(char)* path, GError** _err) c_gda_server_operation_set_value_at_path; ///
 
   // ServerProvider
   GType function() c_gda_server_provider_get_type; ///
@@ -605,12 +605,12 @@ __gshared extern(C)
   GdaDataHandler* function(GdaServerProvider* prov, GdaConnection* cnc, GType gType, const(char)* dbmsType) c_gda_server_provider_handler_find; ///
   GdaDataHandler* function(GdaServerProvider* provider, GType type) c_gda_server_provider_handler_use_default; ///
   GdaSqlParser* function(GdaServerProvider* prov) c_gda_server_provider_internal_get_parser; ///
-  bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, GError** _err) c_gda_server_provider_perform_operation; ///
-  bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, GError** _err) c_gda_server_provider_perform_operation_default; ///
+  gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, GError** _err) c_gda_server_provider_perform_operation; ///
+  gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, GError** _err) c_gda_server_provider_perform_operation_default; ///
   char* function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperation* op, GError** _err) c_gda_server_provider_render_operation; ///
   GValue* function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* string_, GType preferredType, char** dbmsType) c_gda_server_provider_string_to_value; ///
-  bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaConnectionFeature feature) c_gda_server_provider_supports_feature; ///
-  bool function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperationType type, GdaSet* options) c_gda_server_provider_supports_operation; ///
+  gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaConnectionFeature feature) c_gda_server_provider_supports_feature; ///
+  gboolean function(GdaServerProvider* provider, GdaConnection* cnc, GdaServerOperationType type, GdaSet* options) c_gda_server_provider_supports_operation; ///
   char* function(GdaServerProvider* provider, GdaConnection* cnc, const(char)* str) c_gda_server_provider_unescape_string; ///
   char* function(GdaServerProvider* provider, GdaConnection* cnc, GValue* from) c_gda_server_provider_value_to_sql_string; ///
 
@@ -622,7 +622,7 @@ __gshared extern(C)
   GdaSet* function(int nb,  ...) c_gda_set_new_inline; ///
   GdaSet* function(GSList* holders) c_gda_set_new_read_only; ///
   GQuark function() c_gda_set_error_quark; ///
-  bool function(GdaSet* set, GdaHolder* holder) c_gda_set_add_holder; ///
+  gboolean function(GdaSet* set, GdaHolder* holder) c_gda_set_add_holder; ///
   GdaSet* function(GdaSet* set) c_gda_set_copy; ///
   GdaSetGroup* function(GdaSet* set, GdaHolder* holder) c_gda_set_get_group; ///
   GdaHolder* function(GdaSet* set, const(char)* holderId) c_gda_set_get_holder; ///
@@ -631,11 +631,11 @@ __gshared extern(C)
   GdaHolder* function(GdaSet* set, int pos) c_gda_set_get_nth_holder; ///
   GdaSetSource* function(GdaSet* set, GdaHolder* holder) c_gda_set_get_source; ///
   GdaSetSource* function(GdaSet* set, GdaDataModel* model) c_gda_set_get_source_for_model; ///
-  bool function(GdaSet* set, GError** _err) c_gda_set_is_valid; ///
+  gboolean function(GdaSet* set, GError** _err) c_gda_set_is_valid; ///
   void function(GdaSet* set, GdaSet* setToMerge) c_gda_set_merge_with_set; ///
   void function(GdaSet* set, GdaHolder* holder) c_gda_set_remove_holder; ///
   void function(GdaSet* set, GdaSetSource* source, GdaDataModel* model) c_gda_set_replace_source_model; ///
-  bool function(GdaSet* set, GError** error, const(char)* holderId,  ...) c_gda_set_set_holder_value; ///
+  gboolean function(GdaSet* set, GError** error, const(char)* holderId,  ...) c_gda_set_set_holder_value; ///
 
   // SetGroup
   GType function() c_gda_set_group_get_type; ///
@@ -676,8 +676,8 @@ __gshared extern(C)
   GType function() c_gda_short_get_type; ///
 
   // SqlAnyPart
-  bool function(GdaSqlAnyPart* node, GError** _err) c_gda_sql_any_part_check_structure; ///
-  bool function(GdaSqlAnyPart* node, GdaSqlForeachFunc func, void* data, GError** _err) c_gda_sql_any_part_foreach; ///
+  gboolean function(GdaSqlAnyPart* node, GError** _err) c_gda_sql_any_part_check_structure; ///
+  gboolean function(GdaSqlAnyPart* node, GdaSqlForeachFunc func, void* data, GError** _err) c_gda_sql_any_part_foreach; ///
 
   // SqlBuilder
   GType function() c_gda_sql_builder_get_type; ///
@@ -696,7 +696,7 @@ __gshared extern(C)
   GdaSqlBuilderId function(GdaSqlBuilder* builder, const(char)* funcName,  ...) c_gda_sql_builder_add_function; ///
   GdaSqlBuilderId function(GdaSqlBuilder* builder, const(char)* funcName, const(GdaSqlBuilderId)* args, int argsSize) c_gda_sql_builder_add_function_v; ///
   GdaSqlBuilderId function(GdaSqlBuilder* builder, const(char)* str) c_gda_sql_builder_add_id; ///
-  GdaSqlBuilderId function(GdaSqlBuilder* builder, const(char)* paramName, GType type, bool nullok) c_gda_sql_builder_add_param; ///
+  GdaSqlBuilderId function(GdaSqlBuilder* builder, const(char)* paramName, GType type, gboolean nullok) c_gda_sql_builder_add_param; ///
   GdaSqlBuilderId function(GdaSqlBuilder* builder, GdaSqlStatement* sqlst) c_gda_sql_builder_add_sub_select; ///
   void function(GdaSqlBuilder* builder, GdaSqlStatement* sqlst) c_gda_sql_builder_compound_add_sub_select; ///
   void function(GdaSqlBuilder* builder, GdaSqlBuilder* subselect) c_gda_sql_builder_compound_add_sub_select_from_builder; ///
@@ -712,8 +712,8 @@ __gshared extern(C)
   GdaSqlBuilderId function(GdaSqlBuilder* builder, GdaSqlBuilderId tableId, const(char)* alias_) c_gda_sql_builder_select_add_target_id; ///
   void function(GdaSqlBuilder* builder, GdaSqlBuilderId exprId) c_gda_sql_builder_select_group_by; ///
   GdaSqlBuilderId function(GdaSqlBuilder* builder, GdaSqlBuilderId leftTargetId, GdaSqlBuilderId rightTargetId, GdaSqlSelectJoinType joinType, GdaSqlBuilderId joinExpr) c_gda_sql_builder_select_join_targets; ///
-  void function(GdaSqlBuilder* builder, GdaSqlBuilderId exprId, bool asc, const(char)* collationName) c_gda_sql_builder_select_order_by; ///
-  void function(GdaSqlBuilder* builder, bool distinct, GdaSqlBuilderId exprId) c_gda_sql_builder_select_set_distinct; ///
+  void function(GdaSqlBuilder* builder, GdaSqlBuilderId exprId, gboolean asc, const(char)* collationName) c_gda_sql_builder_select_order_by; ///
+  void function(GdaSqlBuilder* builder, gboolean distinct, GdaSqlBuilderId exprId) c_gda_sql_builder_select_set_distinct; ///
   void function(GdaSqlBuilder* builder, GdaSqlBuilderId condId) c_gda_sql_builder_select_set_having; ///
   void function(GdaSqlBuilder* builder, GdaSqlBuilderId limitCountExprId, GdaSqlBuilderId limitOffsetExprId) c_gda_sql_builder_select_set_limit; ///
   void function(GdaSqlBuilder* builder, const(char)* tableName) c_gda_sql_builder_set_table; ///
@@ -820,9 +820,9 @@ __gshared extern(C)
   GType function() c_gda_sql_statement_get_type; ///
   GdaSqlStatement* function(GdaSqlStatementType type) c_gda_sql_statement_new; ///
   void function(GdaSqlStatement* stmt) c_gda_sql_statement_check_clean; ///
-  bool function(GdaSqlStatement* stmt, GError** _err) c_gda_sql_statement_check_structure; ///
-  bool function(GdaSqlStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_sql_statement_check_validity; ///
-  bool function(GdaSqlStatement* stmt, GdaMetaStruct* mstruct, GError** _err) c_gda_sql_statement_check_validity_m; ///
+  gboolean function(GdaSqlStatement* stmt, GError** _err) c_gda_sql_statement_check_structure; ///
+  gboolean function(GdaSqlStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_sql_statement_check_validity; ///
+  gboolean function(GdaSqlStatement* stmt, GdaMetaStruct* mstruct, GError** _err) c_gda_sql_statement_check_validity_m; ///
   void function(GdaSqlStatement* stmt, GdaSqlStatementCompoundType type) c_gda_sql_statement_compound_set_type; ///
   void function(GdaSqlStatement* stmt, GdaSqlStatement* s) c_gda_sql_statement_compound_take_stmt; ///
   GdaSqlStatement* function(GdaSqlStatement* stmt) c_gda_sql_statement_copy; ///
@@ -835,8 +835,8 @@ __gshared extern(C)
   void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_insert_take_on_conflict; ///
   void function(GdaSqlStatement* stmt, GdaSqlStatement* select) c_gda_sql_statement_insert_take_select; ///
   void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_insert_take_table_name; ///
-  bool function(GdaSqlStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_sql_statement_normalize; ///
-  void function(GdaSqlStatement* stmt, bool distinct, GdaSqlExpr* distinctExpr) c_gda_sql_statement_select_take_distinct; ///
+  gboolean function(GdaSqlStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_sql_statement_normalize; ///
+  void function(GdaSqlStatement* stmt, gboolean distinct, GdaSqlExpr* distinctExpr) c_gda_sql_statement_select_take_distinct; ///
   void function(GdaSqlStatement* stmt, GSList* exprList) c_gda_sql_statement_select_take_expr_list; ///
   void function(GdaSqlStatement* stmt, GdaSqlSelectFrom* from) c_gda_sql_statement_select_take_from; ///
   void function(GdaSqlStatement* stmt, GSList* groupBy) c_gda_sql_statement_select_take_group_by; ///
@@ -868,14 +868,14 @@ __gshared extern(C)
   GType function() c_gda_statement_get_type; ///
   GdaStatement* function() c_gda_statement_new; ///
   GQuark function() c_gda_statement_error_quark; ///
-  bool function(GdaStatement* stmt, GError** _err) c_gda_statement_check_structure; ///
-  bool function(GdaStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_statement_check_validity; ///
+  gboolean function(GdaStatement* stmt, GError** _err) c_gda_statement_check_structure; ///
+  gboolean function(GdaStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_statement_check_validity; ///
   GdaStatement* function(GdaStatement* orig) c_gda_statement_copy; ///
-  bool function(GdaStatement* stmt, GdaSet** outParams, GError** _err) c_gda_statement_get_parameters; ///
+  gboolean function(GdaStatement* stmt, GdaSet** outParams, GError** _err) c_gda_statement_get_parameters; ///
   GdaSqlStatementType function(GdaStatement* stmt) c_gda_statement_get_statement_type; ///
-  bool function(GdaStatement* stmt) c_gda_statement_is_useless; ///
-  bool function(GdaStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_statement_normalize; ///
-  GdaSqlStatement* function(GdaStatement* stmt, GdaSet* params, bool remove, GError** _err) c_gda_statement_rewrite_for_default_values; ///
+  gboolean function(GdaStatement* stmt) c_gda_statement_is_useless; ///
+  gboolean function(GdaStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_statement_normalize; ///
+  GdaSqlStatement* function(GdaStatement* stmt, GdaSet* params, gboolean remove, GError** _err) c_gda_statement_rewrite_for_default_values; ///
   char* function(GdaStatement* stmt) c_gda_statement_serialize; ///
   char* function(GdaStatement* stmt, GdaConnection* cnc, GdaSet* params, GdaStatementSqlFlag flags, GSList** paramsUsed, GError** _err) c_gda_statement_to_sql_extended; ///
   char* function(GdaStatement* stmt, GdaSqlRenderingContext* context, GError** _err) c_gda_statement_to_sql_real; ///
@@ -884,29 +884,29 @@ __gshared extern(C)
   GType function() c_gda_thread_wrapper_get_type; ///
   GdaThreadWrapper* function() c_gda_thread_wrapper_new; ///
   GQuark function() c_gda_thread_wrapper_error_quark; ///
-  bool function(GdaThreadWrapper* wrapper, uint id) c_gda_thread_wrapper_cancel; ///
-  gulong function(GdaThreadWrapper* wrapper, void* instance, const(char)* sigName, bool privateThread, bool privateJob, GdaThreadWrapperCallback callback, void* data) c_gda_thread_wrapper_connect_raw; ///
+  gboolean function(GdaThreadWrapper* wrapper, uint id) c_gda_thread_wrapper_cancel; ///
+  gulong function(GdaThreadWrapper* wrapper, void* instance, const(char)* sigName, gboolean privateThread, gboolean privateJob, GdaThreadWrapperCallback callback, void* data) c_gda_thread_wrapper_connect_raw; ///
   void function(GdaThreadWrapper* wrapper, gulong id) c_gda_thread_wrapper_disconnect; ///
   uint function(GdaThreadWrapper* wrapper, GdaThreadWrapperFunc func, void* arg, GDestroyNotify argDestroyFunc, GError** _err) c_gda_thread_wrapper_execute; ///
   uint function(GdaThreadWrapper* wrapper, GdaThreadWrapperVoidFunc func, void* arg, GDestroyNotify argDestroyFunc, GError** _err) c_gda_thread_wrapper_execute_void; ///
-  void* function(GdaThreadWrapper* wrapper, bool mayLock, uint expId, GError** _err) c_gda_thread_wrapper_fetch_result; ///
+  void* function(GdaThreadWrapper* wrapper, gboolean mayLock, uint expId, GError** _err) c_gda_thread_wrapper_fetch_result; ///
   GIOChannel* function(GdaThreadWrapper* wrapper) c_gda_thread_wrapper_get_io_channel; ///
   int function(GdaThreadWrapper* wrapper) c_gda_thread_wrapper_get_waiting_size; ///
-  void function(GdaThreadWrapper* wrapper, bool mayBlock) c_gda_thread_wrapper_iterate; ///
+  void function(GdaThreadWrapper* wrapper, gboolean mayBlock) c_gda_thread_wrapper_iterate; ///
   void function(GdaThreadWrapper* wrapper, gulong id) c_gda_thread_wrapper_steal_signal; ///
   void function(GdaThreadWrapper* wrapper) c_gda_thread_wrapper_unset_io_channel; ///
 
   // Time
   GType function() c_gda_time_get_type; ///
   void function(GdaTime* time, glong ntz) c_gda_time_change_timezone; ///
-  bool function(const(GdaTime)* time) c_gda_time_valid; ///
+  gboolean function(const(GdaTime)* time) c_gda_time_valid; ///
   void* function(void* boxed) c_gda_time_copy; ///
   void function(void* boxed) c_gda_time_free; ///
 
   // Timestamp
   GType function() c_gda_timestamp_get_type; ///
   void function(GdaTimestamp* ts, glong ntz) c_gda_timestamp_change_timezone; ///
-  bool function(const(GdaTimestamp)* timestamp) c_gda_timestamp_valid; ///
+  gboolean function(const(GdaTimestamp)* timestamp) c_gda_timestamp_valid; ///
   void* function(void* boxed) c_gda_timestamp_copy; ///
   void function(void* boxed) c_gda_timestamp_free; ///
 
@@ -917,8 +917,8 @@ __gshared extern(C)
   GdaTransactionStatusEvent* function(GdaTransactionStatus* tstatus, GdaTransactionStatus* subTrans) c_gda_transaction_status_add_event_sub; ///
   GdaTransactionStatusEvent* function(GdaTransactionStatus* tstatus, const(char)* svpName) c_gda_transaction_status_add_event_svp; ///
   GdaTransactionStatus* function(GdaTransactionStatus* tstatus, const(char)* str, GdaTransactionStatusEvent** destev) c_gda_transaction_status_find; ///
-  GdaTransactionStatus* function(GdaTransactionStatus* tstatus, GdaTransactionStatusEvent** destev, bool unnamedOnly) c_gda_transaction_status_find_current; ///
-  void function(GdaTransactionStatus* tstatus, GdaTransactionStatusEvent* event, bool freeAfter) c_gda_transaction_status_free_events; ///
+  GdaTransactionStatus* function(GdaTransactionStatus* tstatus, GdaTransactionStatusEvent** destev, gboolean unnamedOnly) c_gda_transaction_status_find_current; ///
+  void function(GdaTransactionStatus* tstatus, GdaTransactionStatusEvent* event, gboolean freeAfter) c_gda_transaction_status_free_events; ///
 
   // Tree
   GType function() c_gda_tree_get_type; ///
@@ -927,14 +927,14 @@ __gshared extern(C)
   void function(GdaTree* tree, GdaTreeManager* manager) c_gda_tree_add_manager; ///
   void function(GdaTree* tree) c_gda_tree_clean; ///
   void function(GdaTree* tree, GdaTreeNode* node, void* stream) c_gda_tree_dump; ///
-  GdaTreeNode* function(GdaTree* tree, const(char)* treePath, bool useNames) c_gda_tree_get_node; ///
+  GdaTreeNode* function(GdaTree* tree, const(char)* treePath, gboolean useNames) c_gda_tree_get_node; ///
   GdaTreeManager* function(GdaTree* tree, GdaTreeNode* node) c_gda_tree_get_node_manager; ///
   char* function(GdaTree* tree, GdaTreeNode* node) c_gda_tree_get_node_path; ///
-  GSList* function(GdaTree* tree, const(char)* treePath, bool useNames) c_gda_tree_get_nodes_in_path; ///
+  GSList* function(GdaTree* tree, const(char)* treePath, gboolean useNames) c_gda_tree_get_nodes_in_path; ///
   void function(GdaTree* tree, const(char)* attribute, const(GValue)* value, GDestroyNotify destroy) c_gda_tree_set_attribute; ///
-  bool function(GdaTree* tree, GError** _err) c_gda_tree_update_all; ///
-  bool function(GdaTree* tree, GdaTreeNode* node, GError** _err) c_gda_tree_update_children; ///
-  bool function(GdaTree* tree, GdaTreeNode* node, GError** _err) c_gda_tree_update_part; ///
+  gboolean function(GdaTree* tree, GError** _err) c_gda_tree_update_all; ///
+  gboolean function(GdaTree* tree, GdaTreeNode* node, GError** _err) c_gda_tree_update_children; ///
+  gboolean function(GdaTree* tree, GdaTreeNode* node, GError** _err) c_gda_tree_update_part; ///
 
   // TreeManager
   GType function() c_gda_tree_manager_get_type; ///
@@ -987,11 +987,11 @@ __gshared extern(C)
   GdaXaTransaction* function(uint format, const(char)* globalTransactionId) c_gda_xa_transaction_new; ///
   GQuark function() c_gda_xa_transaction_error_quark; ///
   GdaXaTransactionId* function(const(char)* str) c_gda_xa_transaction_string_to_id; ///
-  bool function(GdaXaTransaction* xaTrans, GError** _err) c_gda_xa_transaction_begin; ///
-  bool function(GdaXaTransaction* xaTrans, GSList** cncToRecover, GError** _err) c_gda_xa_transaction_commit; ///
-  bool function(GdaXaTransaction* xaTrans, GSList** cncToRecover, GError** _err) c_gda_xa_transaction_commit_recovered; ///
-  bool function(GdaXaTransaction* xaTrans, GdaConnection* cnc, const(char)* branch, GError** _err) c_gda_xa_transaction_register_connection; ///
-  bool function(GdaXaTransaction* xaTrans, GError** _err) c_gda_xa_transaction_rollback; ///
+  gboolean function(GdaXaTransaction* xaTrans, GError** _err) c_gda_xa_transaction_begin; ///
+  gboolean function(GdaXaTransaction* xaTrans, GSList** cncToRecover, GError** _err) c_gda_xa_transaction_commit; ///
+  gboolean function(GdaXaTransaction* xaTrans, GSList** cncToRecover, GError** _err) c_gda_xa_transaction_commit_recovered; ///
+  gboolean function(GdaXaTransaction* xaTrans, GdaConnection* cnc, const(char)* branch, GError** _err) c_gda_xa_transaction_register_connection; ///
+  gboolean function(GdaXaTransaction* xaTrans, GError** _err) c_gda_xa_transaction_rollback; ///
   void function(GdaXaTransaction* xaTrans, GdaConnection* cnc) c_gda_xa_transaction_unregister_connection; ///
 
   // XaTransactionId
@@ -1002,53 +1002,53 @@ __gshared extern(C)
   char* function(const(char)* string_) c_gda_default_unescape_string; ///
   char* function(char* text) c_gda_alphanum_to_text; ///
   char** function(GdaConnection* cnc, const(char)* sql, int start, int end) c_gda_completion_list_get; ///
-  bool function(GdaConnection* cnc, GdaStatement* selectStmt, bool requirePk, GdaStatement** insertStmt, GdaStatement** updateStmt, GdaStatement** deleteStmt, GError** _err) c_gda_compute_dml_statements; ///
+  gboolean function(GdaConnection* cnc, GdaStatement* selectStmt, gboolean requirePk, GdaStatement** insertStmt, GdaStatement** updateStmt, GdaStatement** deleteStmt, GError** _err) c_gda_compute_dml_statements; ///
   GdaSqlStatement* function(GdaStatement* updateStmt, GError** _err) c_gda_compute_select_statement_from_update; ///
-  GdaSqlExpr* function(GdaSqlStatementSelect* stsel, GdaMetaTable* mtable, bool requirePk, GError** _err) c_gda_compute_unique_table_row_condition; ///
-  GdaSqlExpr* function(GdaConnection* cnc, GdaSqlStatementSelect* stsel, GdaMetaTable* mtable, bool requirePk, GError** _err) c_gda_compute_unique_table_row_condition_with_cnc; ///
+  GdaSqlExpr* function(GdaSqlStatementSelect* stsel, GdaMetaTable* mtable, gboolean requirePk, GError** _err) c_gda_compute_unique_table_row_condition; ///
+  GdaSqlExpr* function(GdaConnection* cnc, GdaSqlStatementSelect* stsel, GdaMetaTable* mtable, gboolean requirePk, GError** _err) c_gda_compute_unique_table_row_condition_with_cnc; ///
   void function(const(char)* string_, char** outDsn, char** outUsername, char** outPassword) c_gda_dsn_split; ///
   GType function(const(char)* str) c_gda_g_type_from_string; ///
   const(char)* function(GType type) c_gda_g_type_to_string; ///
   char* function(const(char)* appName) c_gda_get_application_exec_path; ///
-  bool function(const(char)* id1, const(char)* id2) c_gda_identifier_equal; ///
+  gboolean function(const(char)* id1, const(char)* id2) c_gda_identifier_equal; ///
   uint function(const(char)* id) c_gda_identifier_hash; ///
   void function() c_gda_init; ///
   void function() c_gda_locale_changed; ///
   void function() c_gda_log_disable; ///
   void function() c_gda_log_enable; ///
   void function(const(char)* format,  ...) c_gda_log_error; ///
-  bool function() c_gda_log_is_enabled; ///
+  gboolean function() c_gda_log_is_enabled; ///
   void function(const(char)* format,  ...) c_gda_log_message; ///
   void function(GdaMutex* mutex) c_gda_mutex_free; ///
   void function(GdaMutex* mutex) c_gda_mutex_lock; ///
   GdaMutex* function() c_gda_mutex_new; ///
-  bool function(GdaMutex* mutex) c_gda_mutex_trylock; ///
+  gboolean function(GdaMutex* mutex) c_gda_mutex_trylock; ///
   void function(GdaMutex* mutex) c_gda_mutex_unlock; ///
-  bool function(GDate* gdate, const(char)* value, GDateDMY first, GDateDMY second, GDateDMY third, char sep) c_gda_parse_formatted_date; ///
-  bool function(GdaTime* timegda, const(char)* value, char sep) c_gda_parse_formatted_time; ///
-  bool function(GdaTimestamp* timestamp, const(char)* value, GDateDMY first, GDateDMY second, GDateDMY third, char sep) c_gda_parse_formatted_timestamp; ///
-  bool function(GDate* gdate, const(char)* value) c_gda_parse_iso8601_date; ///
-  bool function(GdaTime* timegda, const(char)* value) c_gda_parse_iso8601_time; ///
-  bool function(GdaTimestamp* timestamp, const(char)* value) c_gda_parse_iso8601_timestamp; ///
-  GdaSqlStatement* function(GdaSqlStatement* sqlst, GdaSet* params, bool* outModified, GError** _err) c_gda_rewrite_sql_statement_for_null_parameters; ///
-  bool function(GdaStatement* stmt, GdaSet* params, GdaStatement** outStmt, GError** _err) c_gda_rewrite_statement_for_null_parameters; ///
-  bool function(char* string_) c_gda_rfc1738_decode; ///
+  gboolean function(GDate* gdate, const(char)* value, GDateDMY first, GDateDMY second, GDateDMY third, char sep) c_gda_parse_formatted_date; ///
+  gboolean function(GdaTime* timegda, const(char)* value, char sep) c_gda_parse_formatted_time; ///
+  gboolean function(GdaTimestamp* timestamp, const(char)* value, GDateDMY first, GDateDMY second, GDateDMY third, char sep) c_gda_parse_formatted_timestamp; ///
+  gboolean function(GDate* gdate, const(char)* value) c_gda_parse_iso8601_date; ///
+  gboolean function(GdaTime* timegda, const(char)* value) c_gda_parse_iso8601_time; ///
+  gboolean function(GdaTimestamp* timestamp, const(char)* value) c_gda_parse_iso8601_timestamp; ///
+  GdaSqlStatement* function(GdaSqlStatement* sqlst, GdaSet* params, gboolean* outModified, GError** _err) c_gda_rewrite_sql_statement_for_null_parameters; ///
+  gboolean function(GdaStatement* stmt, GdaSet* params, GdaStatement** outStmt, GError** _err) c_gda_rewrite_statement_for_null_parameters; ///
+  gboolean function(char* string_) c_gda_rfc1738_decode; ///
   char* function(const(char)* string_) c_gda_rfc1738_encode; ///
   GdaStatement* function(GdaStatement* stmt, GError** _err) c_gda_select_alter_select_for_empty; ///
   GQuark function() c_gda_sql_error_quark; ///
   char* function(const(char)* str) c_gda_sql_identifier_force_quotes; ///
   char* function(char* str) c_gda_sql_identifier_prepare_for_compare; ///
-  char* function(const(char)* id, GdaConnection* cnc, GdaServerProvider* prov, bool metaStoreConvention, bool forceQuotes) c_gda_sql_identifier_quote; ///
+  char* function(const(char)* id, GdaConnection* cnc, GdaServerProvider* prov, gboolean metaStoreConvention, gboolean forceQuotes) c_gda_sql_identifier_quote; ///
   char** function(const(char)* id) c_gda_sql_identifier_split; ///
   char* function(const(GValue)* value) c_gda_sql_value_stringify; ///
   GdaBinary* function(const(char)* str) c_gda_string_to_binary; ///
   GdaBlob* function(const(char)* str) c_gda_string_to_blob; ///
   char* function(const(char)* text) c_gda_text_to_alphanum; ///
-  bool function(GdaDataModel* model, int nbcols,  ...) c_gda_utility_check_data_model; ///
-  bool function(GdaDataModel* model, int nbcols, GType* types) c_gda_utility_check_data_model_v; ///
-  bool function(GdaDataModel* model, xmlNodePtr parent, const(int)* cols, int nbCols, const(int)* rows, int nbRows, bool useColIds) c_gda_utility_data_model_dump_data_to_xml; ///
+  gboolean function(GdaDataModel* model, int nbcols,  ...) c_gda_utility_check_data_model; ///
+  gboolean function(GdaDataModel* model, int nbcols, GType* types) c_gda_utility_check_data_model_v; ///
+  gboolean function(GdaDataModel* model, xmlNodePtr parent, const(int)* cols, int nbCols, const(int)* rows, int nbRows, gboolean useColIds) c_gda_utility_data_model_dump_data_to_xml; ///
   const(char)* function(GdaDataSelect* model, const(char)* fieldName) c_gda_utility_data_model_find_column_description; ///
-  bool function(GdaHolder* holder, xmlNodePtr node, GSList* sources, GError** _err) c_gda_utility_holder_load_attributes; ///
+  gboolean function(GdaHolder* holder, xmlNodePtr node, GSList* sources, GError** _err) c_gda_utility_holder_load_attributes; ///
   int function(const(GValue)* value1, const(GValue)* value2) c_gda_value_compare; ///
   GValue* function(const(GValue)* value) c_gda_value_copy; ///
   int function(const(GValue)* value1, const(GValue)* value2) c_gda_value_differ; ///
@@ -1061,8 +1061,8 @@ __gshared extern(C)
   const(GdaTime)* function(const(GValue)* value) c_gda_value_get_time; ///
   const(GdaTimestamp)* function(const(GValue)* value) c_gda_value_get_timestamp; ///
   ushort function(const(GValue)* value) c_gda_value_get_ushort; ///
-  bool function(const(GValue)* value) c_gda_value_is_null; ///
-  bool function(const(GValue)* value) c_gda_value_is_number; ///
+  gboolean function(const(GValue)* value) c_gda_value_is_null; ///
+  gboolean function(const(GValue)* value) c_gda_value_is_number; ///
   GValue* function(GType type) c_gda_value_new; ///
   GValue* function(const(ubyte)* val, glong size) c_gda_value_new_binary; ///
   GValue* function(const(ubyte)* val, glong size) c_gda_value_new_blob; ///
@@ -1075,8 +1075,8 @@ __gshared extern(C)
   void function(GValue* value, GType type) c_gda_value_reset_with_type; ///
   void function(GValue* value, const(GdaBinary)* binary) c_gda_value_set_binary; ///
   void function(GValue* value, const(GdaBlob)* blob) c_gda_value_set_blob; ///
-  bool function(GValue* value, const(char)* asString, GType type) c_gda_value_set_from_string; ///
-  bool function(GValue* value, const(GValue)* from) c_gda_value_set_from_value; ///
+  gboolean function(GValue* value, const(char)* asString, GType type) c_gda_value_set_from_string; ///
+  gboolean function(GValue* value, const(GValue)* from) c_gda_value_set_from_value; ///
   void function(GValue* value, const(GdaGeometricPoint)* val) c_gda_value_set_geometric_point; ///
   void function(GValue* value) c_gda_value_set_null; ///
   void function(GValue* value, const(GdaNumeric)* val) c_gda_value_set_numeric; ///

@@ -90,7 +90,7 @@ gobject.types.GType netControlMessageMetaApiGetType()
 bool netUtilsSetSocketTos(gio.socket.Socket socket, int qosDscp)
 {
   bool _retval;
-  _retval = gst_net_utils_set_socket_tos(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, qosDscp);
+  _retval = cast(bool)gst_net_utils_set_socket_tos(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, qosDscp);
   return _retval;
 }
 
@@ -128,7 +128,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
     _tmpinterfaces ~= s.toCString(No.Alloc);
   _tmpinterfaces ~= null;
   char** _interfaces = _tmpinterfaces.ptr;
-  _retval = gst_ptp_init(clockId, _interfaces);
+  _retval = cast(bool)gst_ptp_init(clockId, _interfaces);
   return _retval;
 }
 
@@ -158,7 +158,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
 bool ptpInitFull(gst.structure.Structure config)
 {
   bool _retval;
-  _retval = gst_ptp_init_full(config ? cast(const(GstStructure)*)config._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_ptp_init_full(config ? cast(const(GstStructure)*)config._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -169,7 +169,7 @@ bool ptpInitFull(gst.structure.Structure config)
 bool ptpIsInitialized()
 {
   bool _retval;
-  _retval = gst_ptp_is_initialized();
+  _retval = cast(bool)gst_ptp_is_initialized();
   return _retval;
 }
 
@@ -182,7 +182,7 @@ bool ptpIsInitialized()
 bool ptpIsSupported()
 {
   bool _retval;
-  _retval = gst_ptp_is_supported();
+  _retval = cast(bool)gst_ptp_is_supported();
   return _retval;
 }
 
@@ -197,11 +197,11 @@ bool ptpIsSupported()
 */
 gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
 {
-  extern(C) bool _callbackCallback(ubyte domain, const(GstStructure)* stats, void* userData)
+  extern(C) gboolean _callbackCallback(ubyte domain, const(GstStructure)* stats, void* userData)
   {
     auto _dlg = cast(gstnet.types.PtpStatisticsCallback*)userData;
 
-    bool _retval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.Take) : null);
+    gboolean _retval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.Take) : null);
     return _retval;
   }
   auto _callbackCB = callback ? &_callbackCallback : null;

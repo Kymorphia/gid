@@ -201,7 +201,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getIgnoreHidden()
   {
     bool _retval;
-    _retval = gtk_size_group_get_ignore_hidden(cast(GtkSizeGroup*)this._cPtr);
+    _retval = cast(bool)gtk_size_group_get_ignore_hidden(cast(GtkSizeGroup*)this._cPtr);
     return _retval;
   }
 

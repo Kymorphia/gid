@@ -174,7 +174,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_scale_button_get_active(cast(GtkScaleButton*)this._cPtr);
+    _retval = cast(bool)gtk_scale_button_get_active(cast(GtkScaleButton*)this._cPtr);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   bool getHasFrame()
   {
     bool _retval;
-    _retval = gtk_scale_button_get_has_frame(cast(GtkScaleButton*)this._cPtr);
+    _retval = cast(bool)gtk_scale_button_get_has_frame(cast(GtkScaleButton*)this._cPtr);
     return _retval;
   }
 

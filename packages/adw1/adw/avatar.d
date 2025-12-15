@@ -247,7 +247,7 @@ class Avatar : gtk.widget.Widget
   bool getShowInitials()
   {
     bool _retval;
-    _retval = adw_avatar_get_show_initials(cast(AdwAvatar*)this._cPtr);
+    _retval = cast(bool)adw_avatar_get_show_initials(cast(AdwAvatar*)this._cPtr);
     return _retval;
   }
 

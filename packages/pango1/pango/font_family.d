@@ -131,7 +131,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isMonospace()
   {
     bool _retval;
-    _retval = pango_font_family_is_monospace(cast(PangoFontFamily*)this._cPtr);
+    _retval = cast(bool)pango_font_family_is_monospace(cast(PangoFontFamily*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isVariable()
   {
     bool _retval;
-    _retval = pango_font_family_is_variable(cast(PangoFontFamily*)this._cPtr);
+    _retval = cast(bool)pango_font_family_is_variable(cast(PangoFontFamily*)this._cPtr);
     return _retval;
   }
 

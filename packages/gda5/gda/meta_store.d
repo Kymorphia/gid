@@ -186,7 +186,7 @@ class MetaStore : gobject.object.ObjectWrap
     char** _refColnames = _tmprefColnames.ptr;
 
     GError *_err;
-    _retval = gda_meta_store_declare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, _nbCols, _colnames, _refColnames, &_err);
+    _retval = cast(bool)gda_meta_store_declare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, _nbCols, _colnames, _refColnames, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     return _retval;
@@ -215,7 +215,7 @@ class MetaStore : gobject.object.ObjectWrap
     const(char)* _attName = attName.toCString(No.Alloc);
     char* _attValue;
     GError *_err;
-    _retval = gda_meta_store_get_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, &_attValue, &_err);
+    _retval = cast(bool)gda_meta_store_get_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, &_attValue, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     attValue = _attValue.fromCString(Yes.Free);
@@ -287,7 +287,7 @@ class MetaStore : gobject.object.ObjectWrap
     const(GValue*)* _values = _tmpvalues.ptr;
 
     GError *_err;
-    _retval = gda_meta_store_modify_v(cast(GdaMetaStore*)this._cPtr, _tableName, newData ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newData)._cPtr(No.Dup) : null, _condition, _nvalues, _valueNames, _values, &_err);
+    _retval = cast(bool)gda_meta_store_modify_v(cast(GdaMetaStore*)this._cPtr, _tableName, newData ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newData)._cPtr(No.Dup) : null, _condition, _nvalues, _valueNames, _values, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     return _retval;
@@ -308,7 +308,7 @@ class MetaStore : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_meta_store_modify_with_context(cast(GdaMetaStore*)this._cPtr, context ? cast(GdaMetaContext*)context._cPtr(No.Dup) : null, newData ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newData)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_meta_store_modify_with_context(cast(GdaMetaStore*)this._cPtr, context ? cast(GdaMetaContext*)context._cPtr(No.Dup) : null, newData ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newData)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     return _retval;
@@ -375,7 +375,7 @@ class MetaStore : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _xmlDescription = xmlDescription.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_meta_store_schema_add_custom_object(cast(GdaMetaStore*)this._cPtr, _xmlDescription, &_err);
+    _retval = cast(bool)gda_meta_store_schema_add_custom_object(cast(GdaMetaStore*)this._cPtr, _xmlDescription, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     return _retval;
@@ -443,7 +443,7 @@ class MetaStore : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _objName = objName.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_meta_store_schema_remove_custom_object(cast(GdaMetaStore*)this._cPtr, _objName, &_err);
+    _retval = cast(bool)gda_meta_store_schema_remove_custom_object(cast(GdaMetaStore*)this._cPtr, _objName, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     return _retval;
@@ -465,7 +465,7 @@ class MetaStore : gobject.object.ObjectWrap
     const(char)* _attName = attName.toCString(No.Alloc);
     const(char)* _attValue = attValue.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_meta_store_set_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, _attValue, &_err);
+    _retval = cast(bool)gda_meta_store_set_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, _attValue, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     return _retval;
@@ -496,11 +496,11 @@ class MetaStore : gobject.object.ObjectWrap
   {
     static gda.types.SqlReservedKeywordsFunc _static_func;
 
-    extern(C) bool _funcCallback(const(char)* word)
+    extern(C) gboolean _funcCallback(const(char)* word)
     {
       string _word = word.fromCString(No.Free);
 
-      bool _retval = _static_func(_word);
+      gboolean _retval = _static_func(_word);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -547,7 +547,7 @@ class MetaStore : gobject.object.ObjectWrap
     const(char)* _refSchema = refSchema.toCString(No.Alloc);
     const(char)* _refTable = refTable.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_meta_store_undeclare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, &_err);
+    _retval = cast(bool)gda_meta_store_undeclare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, &_err);
     if (_err)
       throw new MetaStoreException(_err);
     return _retval;

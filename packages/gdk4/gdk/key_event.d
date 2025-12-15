@@ -92,7 +92,7 @@ class KeyEvent : gdk.event.Event
   bool getMatch(out uint keyval, out gdk.types.ModifierType modifiers)
   {
     bool _retval;
-    _retval = gdk_key_event_get_match(cast(GdkEvent*)this._cPtr, cast(uint*)&keyval, &modifiers);
+    _retval = cast(bool)gdk_key_event_get_match(cast(GdkEvent*)this._cPtr, cast(uint*)&keyval, &modifiers);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class KeyEvent : gdk.event.Event
   bool isModifier()
   {
     bool _retval;
-    _retval = gdk_key_event_is_modifier(cast(GdkEvent*)this._cPtr);
+    _retval = cast(bool)gdk_key_event_is_modifier(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 

@@ -76,7 +76,7 @@ class Transform : gobject.boxed.Boxed
   bool equal(gsk.transform.Transform second = null)
   {
     bool _retval;
-    _retval = gsk_transform_equal(cast(GskTransform*)this._cPtr, second ? cast(GskTransform*)second._cPtr(No.Dup) : null);
+    _retval = cast(bool)gsk_transform_equal(cast(GskTransform*)this._cPtr, second ? cast(GskTransform*)second._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -500,7 +500,7 @@ class Transform : gobject.boxed.Boxed
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     GskTransform* _outTransform;
-    _retval = gsk_transform_parse(_string_, &_outTransform);
+    _retval = cast(bool)gsk_transform_parse(_string_, &_outTransform);
     outTransform = new gsk.transform.Transform(cast(void*)_outTransform, Yes.Take);
     return _retval;
   }

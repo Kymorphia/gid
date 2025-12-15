@@ -48,7 +48,7 @@ class BooleanScalar : arrow.scalar.Scalar
   bool getValue()
   {
     bool _retval;
-    _retval = garrow_boolean_scalar_get_value(cast(GArrowBooleanScalar*)this._cPtr);
+    _retval = cast(bool)garrow_boolean_scalar_get_value(cast(GArrowBooleanScalar*)this._cPtr);
     return _retval;
   }
 }

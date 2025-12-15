@@ -97,7 +97,7 @@ class PatternSpec : gobject.boxed.Boxed
   bool equal(glib.pattern_spec.PatternSpec pspec2)
   {
     bool _retval;
-    _retval = g_pattern_spec_equal(cast(GPatternSpec*)this._cPtr, pspec2 ? cast(GPatternSpec*)pspec2._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_pattern_spec_equal(cast(GPatternSpec*)this._cPtr, pspec2 ? cast(GPatternSpec*)pspec2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class PatternSpec : gobject.boxed.Boxed
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     const(char)* _stringReversed = stringReversed.toCString(No.Alloc);
-    _retval = g_pattern_spec_match(cast(GPatternSpec*)this._cPtr, stringLength, _string_, _stringReversed);
+    _retval = cast(bool)g_pattern_spec_match(cast(GPatternSpec*)this._cPtr, stringLength, _string_, _stringReversed);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class PatternSpec : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _retval = g_pattern_spec_match_string(cast(GPatternSpec*)this._cPtr, _string_);
+    _retval = cast(bool)g_pattern_spec_match_string(cast(GPatternSpec*)this._cPtr, _string_);
     return _retval;
   }
 }

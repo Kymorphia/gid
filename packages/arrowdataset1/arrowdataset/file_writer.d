@@ -44,7 +44,7 @@ class FileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_finish(cast(GADatasetFileWriter*)this._cPtr, &_err);
+    _retval = cast(bool)gadataset_file_writer_finish(cast(GADatasetFileWriter*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -55,7 +55,7 @@ class FileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_write_record_batch(cast(GADatasetFileWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gadataset_file_writer_write_record_batch(cast(GADatasetFileWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -66,7 +66,7 @@ class FileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_write_record_batch_reader(cast(GADatasetFileWriter*)this._cPtr, reader ? cast(GArrowRecordBatchReader*)reader._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gadataset_file_writer_write_record_batch_reader(cast(GADatasetFileWriter*)this._cPtr, reader ? cast(GArrowRecordBatchReader*)reader._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

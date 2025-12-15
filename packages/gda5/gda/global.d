@@ -126,7 +126,7 @@ bool computeDmlStatements(gda.connection.Connection cnc, gda.statement.Statement
 {
   bool _retval;
   GError *_err;
-  _retval = gda_compute_dml_statements(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, selectStmt ? cast(GdaStatement*)selectStmt._cPtr(No.Dup) : null, requirePk, insertStmt ? cast(GdaStatement**)insertStmt._cPtr(Yes.Dup) : null, updateStmt ? cast(GdaStatement**)updateStmt._cPtr(Yes.Dup) : null, deleteStmt ? cast(GdaStatement**)deleteStmt._cPtr(Yes.Dup) : null, &_err);
+  _retval = cast(bool)gda_compute_dml_statements(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, selectStmt ? cast(GdaStatement*)selectStmt._cPtr(No.Dup) : null, requirePk, insertStmt ? cast(GdaStatement**)insertStmt._cPtr(Yes.Dup) : null, updateStmt ? cast(GdaStatement**)updateStmt._cPtr(Yes.Dup) : null, deleteStmt ? cast(GdaStatement**)deleteStmt._cPtr(Yes.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -247,7 +247,7 @@ bool identifierEqual(string id1, string id2)
   bool _retval;
   const(char)* _id1 = id1.toCString(No.Alloc);
   const(char)* _id2 = id2.toCString(No.Alloc);
-  _retval = gda_identifier_equal(_id1, _id2);
+  _retval = cast(bool)gda_identifier_equal(_id1, _id2);
   return _retval;
 }
 
@@ -310,7 +310,7 @@ void logEnable()
 bool logIsEnabled()
 {
   bool _retval;
-  _retval = gda_log_is_enabled();
+  _retval = cast(bool)gda_log_is_enabled();
   return _retval;
 }
 
@@ -330,7 +330,7 @@ void mutexLock(gda.types.Mutex mutex)
 bool mutexTrylock(gda.types.Mutex mutex)
 {
   bool _retval;
-  _retval = gda_mutex_trylock(mutex ? cast(GdaMutex*)mutex._cPtr : null);
+  _retval = cast(bool)gda_mutex_trylock(mutex ? cast(GdaMutex*)mutex._cPtr : null);
   return _retval;
 }
 
@@ -357,7 +357,7 @@ bool parseFormattedDate(glib.date.Date gdate, string value, glib.types.DateDMY f
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = gda_parse_formatted_date(gdate ? cast(GDate*)gdate._cPtr(No.Dup) : null, _value, first, second, third, sep);
+  _retval = cast(bool)gda_parse_formatted_date(gdate ? cast(GDate*)gdate._cPtr(No.Dup) : null, _value, first, second, third, sep);
   return _retval;
 }
 
@@ -366,7 +366,7 @@ bool parseFormattedTime(gda.time.Time timegda, string value, char sep)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = gda_parse_formatted_time(timegda ? cast(GdaTime*)timegda._cPtr(No.Dup) : null, _value, sep);
+  _retval = cast(bool)gda_parse_formatted_time(timegda ? cast(GdaTime*)timegda._cPtr(No.Dup) : null, _value, sep);
   return _retval;
 }
 
@@ -387,7 +387,7 @@ bool parseFormattedTimestamp(gda.timestamp.Timestamp timestamp, string value, gl
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = gda_parse_formatted_timestamp(timestamp ? cast(GdaTimestamp*)timestamp._cPtr(No.Dup) : null, _value, first, second, third, sep);
+  _retval = cast(bool)gda_parse_formatted_timestamp(timestamp ? cast(GdaTimestamp*)timestamp._cPtr(No.Dup) : null, _value, first, second, third, sep);
   return _retval;
 }
 
@@ -407,7 +407,7 @@ bool parseIso8601Date(glib.date.Date gdate, string value)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = gda_parse_iso8601_date(gdate ? cast(GDate*)gdate._cPtr(No.Dup) : null, _value);
+  _retval = cast(bool)gda_parse_iso8601_date(gdate ? cast(GDate*)gdate._cPtr(No.Dup) : null, _value);
   return _retval;
 }
 
@@ -425,7 +425,7 @@ bool parseIso8601Time(gda.time.Time timegda, string value)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = gda_parse_iso8601_time(timegda ? cast(GdaTime*)timegda._cPtr(No.Dup) : null, _value);
+  _retval = cast(bool)gda_parse_iso8601_time(timegda ? cast(GdaTime*)timegda._cPtr(No.Dup) : null, _value);
   return _retval;
 }
 
@@ -443,7 +443,7 @@ bool parseIso8601Timestamp(gda.timestamp.Timestamp timestamp, string value)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = gda_parse_iso8601_timestamp(timestamp ? cast(GdaTimestamp*)timestamp._cPtr(No.Dup) : null, _value);
+  _retval = cast(bool)gda_parse_iso8601_timestamp(timestamp ? cast(GdaTimestamp*)timestamp._cPtr(No.Dup) : null, _value);
   return _retval;
 }
 
@@ -480,7 +480,7 @@ bool rewriteStatementForNullParameters(gda.statement.Statement stmt, gda.set.Set
 {
   bool _retval;
   GError *_err;
-  _retval = gda_rewrite_statement_for_null_parameters(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, outStmt ? cast(GdaStatement**)outStmt._cPtr(Yes.Dup) : null, &_err);
+  _retval = cast(bool)gda_rewrite_statement_for_null_parameters(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, outStmt ? cast(GdaStatement**)outStmt._cPtr(Yes.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -506,7 +506,7 @@ bool rfc1738Decode(string string_)
 {
   bool _retval;
   char* _string_ = string_.toCString(No.Alloc);
-  _retval = gda_rfc1738_decode(_string_);
+  _retval = cast(bool)gda_rfc1738_decode(_string_);
   return _retval;
 }
 
@@ -913,7 +913,7 @@ bool utilityCheckDataModel(gda.data_model.DataModel model, gobject.types.GType[]
     _nbcols = cast(int)types.length;
 
   auto _types = cast(GType*)types.ptr;
-  _retval = gda_utility_check_data_model_v(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, _nbcols, _types);
+  _retval = cast(bool)gda_utility_check_data_model_v(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, _nbcols, _types);
   return _retval;
 }
 
@@ -946,7 +946,7 @@ bool utilityDataModelDumpDataToXml(gda.data_model.DataModel model, libxml2.types
     _nbRows = cast(int)rows.length;
 
   auto _rows = cast(const(int)*)rows.ptr;
-  _retval = gda_utility_data_model_dump_data_to_xml(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, parent, _cols, _nbCols, _rows, _nbRows, useColIds);
+  _retval = cast(bool)gda_utility_data_model_dump_data_to_xml(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, parent, _cols, _nbCols, _rows, _nbRows, useColIds);
   return _retval;
 }
 
@@ -983,7 +983,7 @@ bool utilityHolderLoadAttributes(gda.holder.Holder holder, libxml2.types.NodePtr
   auto _sources = gSListFromD!(gda.data_model.DataModel)(sources);
   scope(exit) containerFree!(GSList*, gda.data_model.DataModel, GidOwnership.None)(_sources);
   GError *_err;
-  _retval = gda_utility_holder_load_attributes(holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null, node, _sources, &_err);
+  _retval = cast(bool)gda_utility_holder_load_attributes(holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null, node, _sources, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -1048,7 +1048,7 @@ int valueDiffer(gobject.value.Value value1, gobject.value.Value value2)
 bool valueIsNull(gobject.value.Value value)
 {
   bool _retval;
-  _retval = gda_value_is_null(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  _retval = cast(bool)gda_value_is_null(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 

@@ -114,7 +114,7 @@ class OpenPGPMarker
   */
   @property bool isEndMarker()
   {
-    return (cast(GMimeOpenPGPMarker*)this._cPtr).isEndMarker;
+    return cast(bool)(cast(GMimeOpenPGPMarker*)this._cPtr).isEndMarker;
   }
 
   /**

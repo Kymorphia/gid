@@ -348,7 +348,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool cellGetPosition(gtk.cell_renderer.CellRenderer cellRenderer, out int xOffset, out int width)
   {
     bool _retval;
-    _retval = gtk_tree_view_column_cell_get_position(cast(GtkTreeViewColumn*)this._cPtr, cellRenderer ? cast(GtkCellRenderer*)cellRenderer._cPtr(No.Dup) : null, cast(int*)&xOffset, cast(int*)&width);
+    _retval = cast(bool)gtk_tree_view_column_cell_get_position(cast(GtkTreeViewColumn*)this._cPtr, cellRenderer ? cast(GtkCellRenderer*)cellRenderer._cPtr(No.Dup) : null, cast(int*)&xOffset, cast(int*)&width);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool cellIsVisible()
   {
     bool _retval;
-    _retval = gtk_tree_view_column_cell_is_visible(cast(GtkTreeViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_tree_view_column_cell_is_visible(cast(GtkTreeViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -489,7 +489,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool getClickable()
   {
     bool _retval;
-    _retval = gtk_tree_view_column_get_clickable(cast(GtkTreeViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_tree_view_column_get_clickable(cast(GtkTreeViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool getExpand()
   {
     bool _retval;
-    _retval = gtk_tree_view_column_get_expand(cast(GtkTreeViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_tree_view_column_get_expand(cast(GtkTreeViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -557,7 +557,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool getReorderable()
   {
     bool _retval;
-    _retval = gtk_tree_view_column_get_reorderable(cast(GtkTreeViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_tree_view_column_get_reorderable(cast(GtkTreeViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -570,7 +570,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool getResizable()
   {
     bool _retval;
-    _retval = gtk_tree_view_column_get_resizable(cast(GtkTreeViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_tree_view_column_get_resizable(cast(GtkTreeViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -614,7 +614,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool getSortIndicator()
   {
     bool _retval;
-    _retval = gtk_tree_view_column_get_sort_indicator(cast(GtkTreeViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_tree_view_column_get_sort_indicator(cast(GtkTreeViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -687,7 +687,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_tree_view_column_get_visible(cast(GtkTreeViewColumn*)this._cPtr);
+    _retval = cast(bool)gtk_tree_view_column_get_visible(cast(GtkTreeViewColumn*)this._cPtr);
     return _retval;
   }
 

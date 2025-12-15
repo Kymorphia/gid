@@ -241,11 +241,11 @@ template TreeModelT()
   */
   override void foreach_(gtk.types.TreeModelForeachFunc func)
   {
-    extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data)
     {
       auto _dlg = cast(gtk.types.TreeModelForeachFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -297,7 +297,7 @@ template TreeModelT()
   {
     bool _retval;
     GtkTreeIter _iter;
-    _retval = gtk_tree_model_get_iter(cast(GtkTreeModel*)this._cPtr, &_iter, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_get_iter(cast(GtkTreeModel*)this._cPtr, &_iter, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -315,7 +315,7 @@ template TreeModelT()
   {
     bool _retval;
     GtkTreeIter _iter;
-    _retval = gtk_tree_model_get_iter_first(cast(GtkTreeModel*)this._cPtr, &_iter);
+    _retval = cast(bool)gtk_tree_model_get_iter_first(cast(GtkTreeModel*)this._cPtr, &_iter);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -334,7 +334,7 @@ template TreeModelT()
     bool _retval;
     GtkTreeIter _iter;
     const(char)* _pathString = pathString.toCString(No.Alloc);
-    _retval = gtk_tree_model_get_iter_from_string(cast(GtkTreeModel*)this._cPtr, &_iter, _pathString);
+    _retval = cast(bool)gtk_tree_model_get_iter_from_string(cast(GtkTreeModel*)this._cPtr, &_iter, _pathString);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -424,7 +424,7 @@ template TreeModelT()
   {
     bool _retval;
     GtkTreeIter _iter;
-    _retval = gtk_tree_model_iter_children(cast(GtkTreeModel*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_iter_children(cast(GtkTreeModel*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -439,7 +439,7 @@ template TreeModelT()
   override bool iterHasChild(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_model_iter_has_child(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_iter_has_child(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ template TreeModelT()
   override bool iterNext(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_model_iter_next(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_iter_next(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -496,7 +496,7 @@ template TreeModelT()
   {
     bool _retval;
     GtkTreeIter _iter;
-    _retval = gtk_tree_model_iter_nth_child(cast(GtkTreeModel*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, n);
+    _retval = cast(bool)gtk_tree_model_iter_nth_child(cast(GtkTreeModel*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, n);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -521,7 +521,7 @@ template TreeModelT()
   {
     bool _retval;
     GtkTreeIter _iter;
-    _retval = gtk_tree_model_iter_parent(cast(GtkTreeModel*)this._cPtr, &_iter, child ? cast(GtkTreeIter*)child._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_iter_parent(cast(GtkTreeModel*)this._cPtr, &_iter, child ? cast(GtkTreeIter*)child._cPtr(No.Dup) : null);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -539,7 +539,7 @@ template TreeModelT()
   override bool iterPrevious(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_model_iter_previous(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_iter_previous(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

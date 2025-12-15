@@ -154,7 +154,7 @@ class TreeRowReference : gobject.boxed.Boxed
   bool valid()
   {
     bool _retval;
-    _retval = gtk_tree_row_reference_valid(cast(GtkTreeRowReference*)this._cPtr);
+    _retval = cast(bool)gtk_tree_row_reference_valid(cast(GtkTreeRowReference*)this._cPtr);
     return _retval;
   }
 

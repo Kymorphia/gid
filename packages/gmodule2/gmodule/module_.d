@@ -42,7 +42,7 @@ class Module
   bool close()
   {
     bool _retval;
-    _retval = g_module_close(cast(ModuleC*)this._cPtr);
+    _retval = cast(bool)g_module_close(cast(ModuleC*)this._cPtr);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class Module
   {
     bool _retval;
     const(char)* _symbolName = symbolName.toCString(No.Alloc);
-    _retval = g_module_symbol(cast(ModuleC*)this._cPtr, _symbolName, cast(void**)&symbol);
+    _retval = cast(bool)g_module_symbol(cast(ModuleC*)this._cPtr, _symbolName, cast(void**)&symbol);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class Module
   static bool supported()
   {
     bool _retval;
-    _retval = g_module_supported();
+    _retval = cast(bool)g_module_supported();
     return _retval;
   }
 }

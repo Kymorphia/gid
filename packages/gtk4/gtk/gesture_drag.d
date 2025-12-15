@@ -73,7 +73,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   bool getOffset(out double x, out double y)
   {
     bool _retval;
-    _retval = gtk_gesture_drag_get_offset(cast(GtkGestureDrag*)this._cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = cast(bool)gtk_gesture_drag_get_offset(cast(GtkGestureDrag*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   bool getStartPoint(out double x, out double y)
   {
     bool _retval;
-    _retval = gtk_gesture_drag_get_start_point(cast(GtkGestureDrag*)this._cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = cast(bool)gtk_gesture_drag_get_start_point(cast(GtkGestureDrag*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 

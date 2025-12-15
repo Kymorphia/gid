@@ -113,7 +113,7 @@ class TextMark : gobject.object.ObjectWrap
   bool getDeleted()
   {
     bool _retval;
-    _retval = gtk_text_mark_get_deleted(cast(GtkTextMark*)this._cPtr);
+    _retval = cast(bool)gtk_text_mark_get_deleted(cast(GtkTextMark*)this._cPtr);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class TextMark : gobject.object.ObjectWrap
   bool getLeftGravity()
   {
     bool _retval;
-    _retval = gtk_text_mark_get_left_gravity(cast(GtkTextMark*)this._cPtr);
+    _retval = cast(bool)gtk_text_mark_get_left_gravity(cast(GtkTextMark*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class TextMark : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_text_mark_get_visible(cast(GtkTextMark*)this._cPtr);
+    _retval = cast(bool)gtk_text_mark_get_visible(cast(GtkTextMark*)this._cPtr);
     return _retval;
   }
 

@@ -211,7 +211,7 @@ class DataModelIter : gda.set.Set
   override bool isValid()
   {
     bool _retval;
-    _retval = gda_data_model_iter_is_valid(cast(GdaDataModelIter*)this._cPtr);
+    _retval = cast(bool)gda_data_model_iter_is_valid(cast(GdaDataModelIter*)this._cPtr);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class DataModelIter : gda.set.Set
   bool moveNext()
   {
     bool _retval;
-    _retval = gda_data_model_iter_move_next(cast(GdaDataModelIter*)this._cPtr);
+    _retval = cast(bool)gda_data_model_iter_move_next(cast(GdaDataModelIter*)this._cPtr);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class DataModelIter : gda.set.Set
   bool movePrev()
   {
     bool _retval;
-    _retval = gda_data_model_iter_move_prev(cast(GdaDataModelIter*)this._cPtr);
+    _retval = cast(bool)gda_data_model_iter_move_prev(cast(GdaDataModelIter*)this._cPtr);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class DataModelIter : gda.set.Set
   bool moveToRow(int row)
   {
     bool _retval;
-    _retval = gda_data_model_iter_move_to_row(cast(GdaDataModelIter*)this._cPtr, row);
+    _retval = cast(bool)gda_data_model_iter_move_to_row(cast(GdaDataModelIter*)this._cPtr, row);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class DataModelIter : gda.set.Set
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_model_iter_set_value_at(cast(GdaDataModelIter*)this._cPtr, col, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_data_model_iter_set_value_at(cast(GdaDataModelIter*)this._cPtr, col, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new DataModelIterException(_err);
     return _retval;

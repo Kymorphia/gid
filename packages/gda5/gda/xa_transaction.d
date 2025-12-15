@@ -76,7 +76,7 @@ class XaTransaction : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_xa_transaction_begin(cast(GdaXaTransaction*)this._cPtr, &_err);
+    _retval = cast(bool)gda_xa_transaction_begin(cast(GdaXaTransaction*)this._cPtr, &_err);
     if (_err)
       throw new XaTransactionException(_err);
     return _retval;
@@ -104,7 +104,7 @@ class XaTransaction : gobject.object.ObjectWrap
     bool _retval;
     GSList* _cncToRecover;
     GError *_err;
-    _retval = gda_xa_transaction_commit(cast(GdaXaTransaction*)this._cPtr, &_cncToRecover, &_err);
+    _retval = cast(bool)gda_xa_transaction_commit(cast(GdaXaTransaction*)this._cPtr, &_cncToRecover, &_err);
     if (_err)
       throw new XaTransactionException(_err);
     cncToRecover = gSListToD!(gda.connection.Connection, GidOwnership.Full)(_cncToRecover);
@@ -126,7 +126,7 @@ class XaTransaction : gobject.object.ObjectWrap
     bool _retval;
     GSList* _cncToRecover;
     GError *_err;
-    _retval = gda_xa_transaction_commit_recovered(cast(GdaXaTransaction*)this._cPtr, &_cncToRecover, &_err);
+    _retval = cast(bool)gda_xa_transaction_commit_recovered(cast(GdaXaTransaction*)this._cPtr, &_cncToRecover, &_err);
     if (_err)
       throw new XaTransactionException(_err);
     cncToRecover = gSListToD!(gda.connection.Connection, GidOwnership.Full)(_cncToRecover);
@@ -151,7 +151,7 @@ class XaTransaction : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _branch = branch.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_xa_transaction_register_connection(cast(GdaXaTransaction*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _branch, &_err);
+    _retval = cast(bool)gda_xa_transaction_register_connection(cast(GdaXaTransaction*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _branch, &_err);
     if (_err)
       throw new XaTransactionException(_err);
     return _retval;
@@ -166,7 +166,7 @@ class XaTransaction : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gda_xa_transaction_rollback(cast(GdaXaTransaction*)this._cPtr, &_err);
+    _retval = cast(bool)gda_xa_transaction_rollback(cast(GdaXaTransaction*)this._cPtr, &_err);
     if (_err)
       throw new XaTransactionException(_err);
     return _retval;

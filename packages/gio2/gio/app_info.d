@@ -345,7 +345,7 @@ interface AppInfo
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = g_app_info_launch_default_for_uri(_uri, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_app_info_launch_default_for_uri(_uri, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -397,7 +397,7 @@ interface AppInfo
   {
     bool _retval;
     GError *_err;
-    _retval = g_app_info_launch_default_for_uri_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_app_info_launch_default_for_uri_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

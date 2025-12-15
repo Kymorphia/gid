@@ -102,7 +102,7 @@ bool contextGetGlDisplay(gst.context.Context context, out gstgl.gldisplay.GLDisp
 {
   bool _retval;
   GstGLDisplay* _display;
-  _retval = gst_context_get_gl_display(context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display);
+  _retval = cast(bool)gst_context_get_gl_display(context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display);
   display = new gstgl.gldisplay.GLDisplay(cast(void*)_display, Yes.Take);
   return _retval;
 }
@@ -125,7 +125,7 @@ bool glCheckExtension(string name, string ext)
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _ext = ext.toCString(No.Alloc);
-  _retval = gst_gl_check_extension(_name, _ext);
+  _retval = cast(bool)gst_gl_check_extension(_name, _ext);
   return _retval;
 }
 
@@ -162,7 +162,7 @@ void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldispl
 bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay displayPtr, gstgl.glcontext.GLContext otherContextPtr)
 {
   bool _retval;
-  _retval = gst_gl_ensure_element_data(element ? cast(GstElement*)element._cPtr(No.Dup) : null, displayPtr ? cast(GstGLDisplay**)displayPtr._cPtr(No.Dup) : null, otherContextPtr ? cast(GstGLContext**)otherContextPtr._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_gl_ensure_element_data(element ? cast(GstElement*)element._cPtr(No.Dup) : null, displayPtr ? cast(GstGLDisplay**)displayPtr._cPtr(No.Dup) : null, otherContextPtr ? cast(GstGLContext**)otherContextPtr._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -214,7 +214,7 @@ size_t glGetPlaneStart(gstvideo.video_info.VideoInfo info, gstvideo.video_alignm
 bool glHandleContextQuery(gst.element.Element element, gst.query.Query query, gstgl.gldisplay.GLDisplay display = null, gstgl.glcontext.GLContext context = null, gstgl.glcontext.GLContext otherContext = null)
 {
   bool _retval;
-  _retval = gst_gl_handle_context_query(element ? cast(GstElement*)element._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_gl_handle_context_query(element ? cast(GstElement*)element._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -237,7 +237,7 @@ bool glHandleSetContext(gst.element.Element element, gst.context.Context context
   bool _retval;
   GstGLDisplay* _display;
   GstGLContext* _otherContext;
-  _retval = gst_gl_handle_set_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display, &_otherContext);
+  _retval = cast(bool)gst_gl_handle_set_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display, &_otherContext);
   display = new gstgl.gldisplay.GLDisplay(cast(void*)_display, Yes.Take);
   otherContext = new gstgl.glcontext.GLContext(cast(void*)_otherContext, Yes.Take);
   return _retval;
@@ -320,7 +320,7 @@ gstgl.types.GLTextureTarget glValueGetTextureTargetMask(gobject.value.Value valu
 bool glValueSetTextureTarget(gobject.value.Value value, gstgl.types.GLTextureTarget target)
 {
   bool _retval;
-  _retval = gst_gl_value_set_texture_target(value ? cast(GValue*)value._cPtr(No.Dup) : null, target);
+  _retval = cast(bool)gst_gl_value_set_texture_target(value ? cast(GValue*)value._cPtr(No.Dup) : null, target);
   return _retval;
 }
 
@@ -336,7 +336,7 @@ bool glValueSetTextureTarget(gobject.value.Value value, gstgl.types.GLTextureTar
 bool glValueSetTextureTargetFromMask(gobject.value.Value value, gstgl.types.GLTextureTarget targetMask)
 {
   bool _retval;
-  _retval = gst_gl_value_set_texture_target_from_mask(value ? cast(GValue*)value._cPtr(No.Dup) : null, targetMask);
+  _retval = cast(bool)gst_gl_value_set_texture_target_from_mask(value ? cast(GValue*)value._cPtr(No.Dup) : null, targetMask);
   return _retval;
 }
 
@@ -363,7 +363,7 @@ bool glslStringGetVersionProfile(string s, out gstgl.types.GLSLVersion version_,
 {
   bool _retval;
   const(char)* _s = s.toCString(No.Alloc);
-  _retval = gst_glsl_string_get_version_profile(_s, &version_, &profile);
+  _retval = cast(bool)gst_glsl_string_get_version_profile(_s, &version_, &profile);
   return _retval;
 }
 
@@ -371,7 +371,7 @@ bool glslStringGetVersionProfile(string s, out gstgl.types.GLSLVersion version_,
 bool isGlBaseMemory(gst.memory.Memory mem)
 {
   bool _retval;
-  _retval = gst_is_gl_base_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_gl_base_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -379,7 +379,7 @@ bool isGlBaseMemory(gst.memory.Memory mem)
 bool isGlBuffer(gst.memory.Memory mem)
 {
   bool _retval;
-  _retval = gst_is_gl_buffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_gl_buffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -387,7 +387,7 @@ bool isGlBuffer(gst.memory.Memory mem)
 bool isGlMemory(gst.memory.Memory mem)
 {
   bool _retval;
-  _retval = gst_is_gl_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_gl_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -395,7 +395,7 @@ bool isGlMemory(gst.memory.Memory mem)
 bool isGlMemoryPbo(gst.memory.Memory mem)
 {
   bool _retval;
-  _retval = gst_is_gl_memory_pbo(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_gl_memory_pbo(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -403,6 +403,6 @@ bool isGlMemoryPbo(gst.memory.Memory mem)
 bool isGlRenderbuffer(gst.memory.Memory mem)
 {
   bool _retval;
-  _retval = gst_is_gl_renderbuffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_is_gl_renderbuffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
   return _retval;
 }

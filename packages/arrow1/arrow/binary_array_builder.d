@@ -56,7 +56,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _value = cast(const(ubyte)*)value.ptr;
     GError *_err;
-    _retval = garrow_binary_array_builder_append(cast(GArrowBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
+    _retval = cast(bool)garrow_binary_array_builder_append(cast(GArrowBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -72,7 +72,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _value = cast(const(ubyte)*)value.ptr;
     GError *_err;
-    _retval = garrow_binary_array_builder_append_value(cast(GArrowBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
+    _retval = cast(bool)garrow_binary_array_builder_append_value(cast(GArrowBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -83,7 +83,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_binary_array_builder_append_value_bytes(cast(GArrowBinaryArrayBuilder*)this._cPtr, value ? cast(GBytes*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_binary_array_builder_append_value_bytes(cast(GArrowBinaryArrayBuilder*)this._cPtr, value ? cast(GBytes*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -118,9 +118,9 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(bool)*)isValids.ptr;
+    auto _isValids = cast(const(gboolean)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_binary_array_builder_append_values(cast(GArrowBinaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = cast(bool)garrow_binary_array_builder_append_values(cast(GArrowBinaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

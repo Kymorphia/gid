@@ -146,7 +146,7 @@ template ActionT()
   override bool getEnabled()
   {
     bool _retval;
-    _retval = g_action_get_enabled(cast(GAction*)this._cPtr);
+    _retval = cast(bool)g_action_get_enabled(cast(GAction*)this._cPtr);
     return _retval;
   }
 

@@ -274,7 +274,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_close(cast(GDtlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dtls_connection_close(cast(GDtlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -318,7 +318,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_close_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dtls_connection_close_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -337,7 +337,7 @@ template DtlsConnectionT()
   override bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
   {
     bool _retval;
-    _retval = g_dtls_connection_emit_accept_certificate(cast(GDtlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
+    _retval = cast(bool)g_dtls_connection_emit_accept_certificate(cast(GDtlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
     return _retval;
   }
 
@@ -487,7 +487,7 @@ template DtlsConnectionT()
   override bool getRequireCloseNotify()
   {
     bool _retval;
-    _retval = g_dtls_connection_get_require_close_notify(cast(GDtlsConnection*)this._cPtr);
+    _retval = cast(bool)g_dtls_connection_get_require_close_notify(cast(GDtlsConnection*)this._cPtr);
     return _retval;
   }
 
@@ -528,7 +528,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_handshake(cast(GDtlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dtls_connection_handshake(cast(GDtlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -572,7 +572,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_handshake_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dtls_connection_handshake_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -751,7 +751,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_shutdown(cast(GDtlsConnection*)this._cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dtls_connection_shutdown(cast(GDtlsConnection*)this._cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -797,7 +797,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

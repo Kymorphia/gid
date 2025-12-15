@@ -41,7 +41,7 @@ class ColumnChunkMetadata : gobject.object.ObjectWrap
   bool canDecompress()
   {
     bool _retval;
-    _retval = gparquet_column_chunk_metadata_can_decompress(cast(GParquetColumnChunkMetadata*)this._cPtr);
+    _retval = cast(bool)gparquet_column_chunk_metadata_can_decompress(cast(GParquetColumnChunkMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ class ColumnChunkMetadata : gobject.object.ObjectWrap
   bool equal(parquet.column_chunk_metadata.ColumnChunkMetadata otherMetadata)
   {
     bool _retval;
-    _retval = gparquet_column_chunk_metadata_equal(cast(GParquetColumnChunkMetadata*)this._cPtr, otherMetadata ? cast(GParquetColumnChunkMetadata*)otherMetadata._cPtr(No.Dup) : null);
+    _retval = cast(bool)gparquet_column_chunk_metadata_equal(cast(GParquetColumnChunkMetadata*)this._cPtr, otherMetadata ? cast(GParquetColumnChunkMetadata*)otherMetadata._cPtr(No.Dup) : null);
     return _retval;
   }
 

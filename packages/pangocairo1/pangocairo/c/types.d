@@ -24,5 +24,5 @@ struct PangoCairoFont;
 */
 struct PangoCairoFontMap;
 
-alias extern(C) void function(cairo_t* cr, PangoAttrShape* attr, bool doPath, void* data) PangoCairoShapeRendererFunc;
+alias extern(C) void function(cairo_t* cr, PangoAttrShape* attr, gboolean doPath, void* data) PangoCairoShapeRendererFunc;
 

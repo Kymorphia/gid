@@ -267,7 +267,7 @@ class Font : gobject.object.ObjectWrap
   bool hasChar(dchar wc)
   {
     bool _retval;
-    _retval = pango_font_has_char(cast(PangoFont*)this._cPtr, wc);
+    _retval = cast(bool)pango_font_has_char(cast(PangoFont*)this._cPtr, wc);
     return _retval;
   }
 

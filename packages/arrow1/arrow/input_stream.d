@@ -57,7 +57,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_input_stream_advance(cast(GArrowInputStream*)this._cPtr, nBytes, &_err);
+    _retval = cast(bool)garrow_input_stream_advance(cast(GArrowInputStream*)this._cPtr, nBytes, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -68,7 +68,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_input_stream_align(cast(GArrowInputStream*)this._cPtr, alignment, &_err);
+    _retval = cast(bool)garrow_input_stream_align(cast(GArrowInputStream*)this._cPtr, alignment, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

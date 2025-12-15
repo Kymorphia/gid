@@ -274,7 +274,7 @@ class TestClock : gst.clock.Clock
   bool crank()
   {
     bool _retval;
-    _retval = gst_test_clock_crank(cast(GstTestClock*)this._cPtr);
+    _retval = cast(bool)gst_test_clock_crank(cast(GstTestClock*)this._cPtr);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class TestClock : gst.clock.Clock
   bool hasId(gst.types.ClockID id)
   {
     bool _retval;
-    _retval = gst_test_clock_has_id(cast(GstTestClock*)this._cPtr, id);
+    _retval = cast(bool)gst_test_clock_has_id(cast(GstTestClock*)this._cPtr, id);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class TestClock : gst.clock.Clock
   bool peekNextPendingId(out gst.types.ClockID pendingId)
   {
     bool _retval;
-    _retval = gst_test_clock_peek_next_pending_id(cast(GstTestClock*)this._cPtr, cast(GstClockID*)&pendingId);
+    _retval = cast(bool)gst_test_clock_peek_next_pending_id(cast(GstTestClock*)this._cPtr, cast(GstClockID*)&pendingId);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class TestClock : gst.clock.Clock
   bool processId(gst.types.ClockID pendingId)
   {
     bool _retval;
-    _retval = gst_test_clock_process_id(cast(GstTestClock*)this._cPtr, pendingId);
+    _retval = cast(bool)gst_test_clock_process_id(cast(GstTestClock*)this._cPtr, pendingId);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class TestClock : gst.clock.Clock
   {
     bool _retval;
     GList* _pendingList;
-    _retval = gst_test_clock_timed_wait_for_multiple_pending_ids(cast(GstTestClock*)this._cPtr, count, timeoutMs, &_pendingList);
+    _retval = cast(bool)gst_test_clock_timed_wait_for_multiple_pending_ids(cast(GstTestClock*)this._cPtr, count, timeoutMs, &_pendingList);
     pendingList = gListToD!(gst.types.ClockID, GidOwnership.Full)(_pendingList);
     return _retval;
   }

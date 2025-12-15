@@ -66,7 +66,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_consume_buffer(cast(GArrowStreamDecoder*)this._cPtr, buffer ? cast(GArrowBuffer*)buffer._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_stream_decoder_consume_buffer(cast(GArrowStreamDecoder*)this._cPtr, buffer ? cast(GArrowBuffer*)buffer._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -88,7 +88,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_consume_bytes(cast(GArrowStreamDecoder*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_stream_decoder_consume_bytes(cast(GArrowStreamDecoder*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -180,7 +180,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_reset(cast(GArrowStreamDecoder*)this._cPtr, &_err);
+    _retval = cast(bool)garrow_stream_decoder_reset(cast(GArrowStreamDecoder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

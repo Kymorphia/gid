@@ -153,7 +153,7 @@ class DrawContext : gobject.object.ObjectWrap
   bool isInFrame()
   {
     bool _retval;
-    _retval = gdk_draw_context_is_in_frame(cast(GdkDrawContext*)this._cPtr);
+    _retval = cast(bool)gdk_draw_context_is_in_frame(cast(GdkDrawContext*)this._cPtr);
     return _retval;
   }
 }

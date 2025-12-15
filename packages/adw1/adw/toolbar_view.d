@@ -531,7 +531,7 @@ class ToolbarView : gtk.widget.Widget
   bool getExtendContentToBottomEdge()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_extend_content_to_bottom_edge(cast(AdwToolbarView*)this._cPtr);
+    _retval = cast(bool)adw_toolbar_view_get_extend_content_to_bottom_edge(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class ToolbarView : gtk.widget.Widget
   bool getExtendContentToTopEdge()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_extend_content_to_top_edge(cast(AdwToolbarView*)this._cPtr);
+    _retval = cast(bool)adw_toolbar_view_get_extend_content_to_top_edge(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -553,7 +553,7 @@ class ToolbarView : gtk.widget.Widget
   bool getRevealBottomBars()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_reveal_bottom_bars(cast(AdwToolbarView*)this._cPtr);
+    _retval = cast(bool)adw_toolbar_view_get_reveal_bottom_bars(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class ToolbarView : gtk.widget.Widget
   bool getRevealTopBars()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_reveal_top_bars(cast(AdwToolbarView*)this._cPtr);
+    _retval = cast(bool)adw_toolbar_view_get_reveal_top_bars(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 

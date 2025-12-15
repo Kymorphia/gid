@@ -32,7 +32,7 @@ bool getEncodingSupported(string encoding)
 {
   bool _retval;
   const(char)* _encoding = encoding.toCString(No.Alloc);
-  _retval = vte_get_encoding_supported(_encoding);
+  _retval = cast(bool)vte_get_encoding_supported(_encoding);
   return _retval;
 }
 

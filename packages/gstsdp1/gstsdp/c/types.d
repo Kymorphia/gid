@@ -427,7 +427,7 @@ struct GstMIKEYMessage
   /**
       verify flag
   */
-  bool V;
+  gboolean V;
 
   /**
       a #GstMIKEYPRFFunc

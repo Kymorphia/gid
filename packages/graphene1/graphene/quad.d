@@ -94,7 +94,7 @@ class Quad : gobject.boxed.Boxed
   bool contains(graphene.point.Point p)
   {
     bool _retval;
-    _retval = graphene_quad_contains(cast(const(graphene_quad_t)*)this._cPtr, p ? cast(const(graphene_point_t)*)p._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_quad_contains(cast(const(graphene_quad_t)*)this._cPtr, p ? cast(const(graphene_point_t)*)p._cPtr(No.Dup) : null);
     return _retval;
   }
 

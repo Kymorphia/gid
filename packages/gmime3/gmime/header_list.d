@@ -93,7 +93,7 @@ class HeaderList : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_mime_header_list_contains(cast(GMimeHeaderList*)this._cPtr, _name);
+    _retval = cast(bool)g_mime_header_list_contains(cast(GMimeHeaderList*)this._cPtr, _name);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class HeaderList : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_mime_header_list_remove(cast(GMimeHeaderList*)this._cPtr, _name);
+    _retval = cast(bool)g_mime_header_list_remove(cast(GMimeHeaderList*)this._cPtr, _name);
     return _retval;
   }
 

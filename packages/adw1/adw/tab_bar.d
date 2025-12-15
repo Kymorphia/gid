@@ -283,7 +283,7 @@ class TabBar : gtk.widget.Widget
   bool getAutohide()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_autohide(cast(AdwTabBar*)this._cPtr);
+    _retval = cast(bool)adw_tab_bar_get_autohide(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class TabBar : gtk.widget.Widget
   bool getExpandTabs()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_expand_tabs(cast(AdwTabBar*)this._cPtr);
+    _retval = cast(bool)adw_tab_bar_get_expand_tabs(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class TabBar : gtk.widget.Widget
   bool getExtraDragPreload()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_extra_drag_preload(cast(AdwTabBar*)this._cPtr);
+    _retval = cast(bool)adw_tab_bar_get_extra_drag_preload(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class TabBar : gtk.widget.Widget
   bool getInverted()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_inverted(cast(AdwTabBar*)this._cPtr);
+    _retval = cast(bool)adw_tab_bar_get_inverted(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class TabBar : gtk.widget.Widget
   bool getIsOverflowing()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_is_overflowing(cast(AdwTabBar*)this._cPtr);
+    _retval = cast(bool)adw_tab_bar_get_is_overflowing(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ class TabBar : gtk.widget.Widget
   bool getTabsRevealed()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_tabs_revealed(cast(AdwTabBar*)this._cPtr);
+    _retval = cast(bool)adw_tab_bar_get_tabs_revealed(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 

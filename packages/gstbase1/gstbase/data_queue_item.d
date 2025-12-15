@@ -99,7 +99,7 @@ class DataQueueItem
   */
   @property bool visible()
   {
-    return (cast(GstDataQueueItem*)this._cPtr).visible;
+    return cast(bool)(cast(GstDataQueueItem*)this._cPtr).visible;
   }
 
   /**

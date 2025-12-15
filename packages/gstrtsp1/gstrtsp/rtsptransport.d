@@ -154,7 +154,7 @@ class RTSPTransport
   */
   @property bool modePlay()
   {
-    return (cast(GstRTSPTransport*)this._cPtr).modePlay;
+    return cast(bool)(cast(GstRTSPTransport*)this._cPtr).modePlay;
   }
 
   /**
@@ -173,7 +173,7 @@ class RTSPTransport
   */
   @property bool modeRecord()
   {
-    return (cast(GstRTSPTransport*)this._cPtr).modeRecord;
+    return cast(bool)(cast(GstRTSPTransport*)this._cPtr).modeRecord;
   }
 
   /**
@@ -192,7 +192,7 @@ class RTSPTransport
   */
   @property bool append()
   {
-    return (cast(GstRTSPTransport*)this._cPtr).append;
+    return cast(bool)(cast(GstRTSPTransport*)this._cPtr).append;
   }
 
   /**

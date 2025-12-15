@@ -58,7 +58,7 @@ class AuthNegotiate : soup.auth.Auth
   static bool supported()
   {
     bool _retval;
-    _retval = soup_auth_negotiate_supported();
+    _retval = cast(bool)soup_auth_negotiate_supported();
     return _retval;
   }
 }

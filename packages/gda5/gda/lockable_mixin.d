@@ -38,7 +38,7 @@ template LockableT()
   override bool trylock()
   {
     bool _retval;
-    _retval = gda_lockable_trylock(cast(GdaLockable*)this._cPtr);
+    _retval = cast(bool)gda_lockable_trylock(cast(GdaLockable*)this._cPtr);
     return _retval;
   }
 

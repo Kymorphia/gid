@@ -77,7 +77,7 @@ class StreamFilter : gmime.stream.Stream
   bool getOwner()
   {
     bool _retval;
-    _retval = g_mime_stream_filter_get_owner(cast(GMimeStreamFilter*)this._cPtr);
+    _retval = cast(bool)g_mime_stream_filter_get_owner(cast(GMimeStreamFilter*)this._cPtr);
     return _retval;
   }
 

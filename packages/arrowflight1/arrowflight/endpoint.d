@@ -61,7 +61,7 @@ class Endpoint : gobject.object.ObjectWrap
   bool equal(arrowflight.endpoint.Endpoint otherEndpoint)
   {
     bool _retval;
-    _retval = gaflight_endpoint_equal(cast(GAFlightEndpoint*)this._cPtr, otherEndpoint ? cast(GAFlightEndpoint*)otherEndpoint._cPtr(No.Dup) : null);
+    _retval = cast(bool)gaflight_endpoint_equal(cast(GAFlightEndpoint*)this._cPtr, otherEndpoint ? cast(GAFlightEndpoint*)otherEndpoint._cPtr(No.Dup) : null);
     return _retval;
   }
 

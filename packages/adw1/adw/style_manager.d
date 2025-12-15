@@ -222,7 +222,7 @@ class StyleManager : gobject.object.ObjectWrap
   bool getDark()
   {
     bool _retval;
-    _retval = adw_style_manager_get_dark(cast(AdwStyleManager*)this._cPtr);
+    _retval = cast(bool)adw_style_manager_get_dark(cast(AdwStyleManager*)this._cPtr);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class StyleManager : gobject.object.ObjectWrap
   bool getHighContrast()
   {
     bool _retval;
-    _retval = adw_style_manager_get_high_contrast(cast(AdwStyleManager*)this._cPtr);
+    _retval = cast(bool)adw_style_manager_get_high_contrast(cast(AdwStyleManager*)this._cPtr);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class StyleManager : gobject.object.ObjectWrap
   bool getSystemSupportsColorSchemes()
   {
     bool _retval;
-    _retval = adw_style_manager_get_system_supports_color_schemes(cast(AdwStyleManager*)this._cPtr);
+    _retval = cast(bool)adw_style_manager_get_system_supports_color_schemes(cast(AdwStyleManager*)this._cPtr);
     return _retval;
   }
 

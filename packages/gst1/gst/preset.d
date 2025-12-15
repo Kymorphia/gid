@@ -69,7 +69,7 @@ interface Preset
   {
     bool _retval;
     const(char)* _appDir = appDir.toCString(No.Alloc);
-    _retval = gst_preset_set_app_dir(_appDir);
+    _retval = cast(bool)gst_preset_set_app_dir(_appDir);
     return _retval;
   }
 

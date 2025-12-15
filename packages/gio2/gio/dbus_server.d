@@ -177,7 +177,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   bool isActive()
   {
     bool _retval;
-    _retval = g_dbus_server_is_active(cast(GDBusServer*)this._cPtr);
+    _retval = cast(bool)g_dbus_server_is_active(cast(GDBusServer*)this._cPtr);
     return _retval;
   }
 

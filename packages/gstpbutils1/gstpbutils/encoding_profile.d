@@ -145,7 +145,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool getAllowDynamicOutput()
   {
     bool _retval;
-    _retval = gst_encoding_profile_get_allow_dynamic_output(cast(GstEncodingProfile*)this._cPtr);
+    _retval = cast(bool)gst_encoding_profile_get_allow_dynamic_output(cast(GstEncodingProfile*)this._cPtr);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool getSingleSegment()
   {
     bool _retval;
-    _retval = gst_encoding_profile_get_single_segment(cast(GstEncodingProfile*)this._cPtr);
+    _retval = cast(bool)gst_encoding_profile_get_single_segment(cast(GstEncodingProfile*)this._cPtr);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool isEnabled()
   {
     bool _retval;
-    _retval = gst_encoding_profile_is_enabled(cast(GstEncodingProfile*)this._cPtr);
+    _retval = cast(bool)gst_encoding_profile_is_enabled(cast(GstEncodingProfile*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool isEqual(gstpbutils.encoding_profile.EncodingProfile b)
   {
     bool _retval;
-    _retval = gst_encoding_profile_is_equal(cast(GstEncodingProfile*)this._cPtr, b ? cast(GstEncodingProfile*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_encoding_profile_is_equal(cast(GstEncodingProfile*)this._cPtr, b ? cast(GstEncodingProfile*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 

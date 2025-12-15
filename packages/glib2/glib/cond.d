@@ -232,7 +232,7 @@ class Cond
   bool waitUntil(glib.mutex.Mutex mutex, long endTime)
   {
     bool _retval;
-    _retval = g_cond_wait_until(cast(GCond*)this._cPtr, mutex ? cast(GMutex*)mutex._cPtr : null, endTime);
+    _retval = cast(bool)g_cond_wait_until(cast(GCond*)this._cPtr, mutex ? cast(GMutex*)mutex._cPtr : null, endTime);
     return _retval;
   }
 }

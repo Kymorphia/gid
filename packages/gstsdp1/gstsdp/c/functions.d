@@ -21,49 +21,49 @@ __gshared extern(C)
   GstMIKEYMessage* function(GBytes* bytes, GstMIKEYDecryptInfo* info, GError** _err) c_gst_mikey_message_new_from_bytes; ///
   GstMIKEYMessage* function(GstCaps* caps) c_gst_mikey_message_new_from_caps; ///
   GstMIKEYMessage* function(const(void)* data, size_t size, GstMIKEYDecryptInfo* info, GError** _err) c_gst_mikey_message_new_from_data; ///
-  bool function(GstMIKEYMessage* msg, ubyte policy, uint ssrc, uint roc) c_gst_mikey_message_add_cs_srtp; ///
-  bool function(GstMIKEYMessage* msg, GstMIKEYPayload* payload) c_gst_mikey_message_add_payload; ///
-  bool function(GstMIKEYMessage* msg, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) c_gst_mikey_message_add_pke; ///
-  bool function(GstMIKEYMessage* msg, ubyte len, const(ubyte)* rand) c_gst_mikey_message_add_rand; ///
-  bool function(GstMIKEYMessage* msg, ubyte len) c_gst_mikey_message_add_rand_len; ///
-  bool function(GstMIKEYMessage* msg, GstMIKEYTSType type, const(ubyte)* tsValue) c_gst_mikey_message_add_t; ///
-  bool function(GstMIKEYMessage* msg) c_gst_mikey_message_add_t_now_ntp_utc; ///
+  gboolean function(GstMIKEYMessage* msg, ubyte policy, uint ssrc, uint roc) c_gst_mikey_message_add_cs_srtp; ///
+  gboolean function(GstMIKEYMessage* msg, GstMIKEYPayload* payload) c_gst_mikey_message_add_payload; ///
+  gboolean function(GstMIKEYMessage* msg, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) c_gst_mikey_message_add_pke; ///
+  gboolean function(GstMIKEYMessage* msg, ubyte len, const(ubyte)* rand) c_gst_mikey_message_add_rand; ///
+  gboolean function(GstMIKEYMessage* msg, ubyte len) c_gst_mikey_message_add_rand_len; ///
+  gboolean function(GstMIKEYMessage* msg, GstMIKEYTSType type, const(ubyte)* tsValue) c_gst_mikey_message_add_t; ///
+  gboolean function(GstMIKEYMessage* msg) c_gst_mikey_message_add_t_now_ntp_utc; ///
   char* function(GstMIKEYMessage* msg) c_gst_mikey_message_base64_encode; ///
   const(GstMIKEYPayload)* function(const(GstMIKEYMessage)* msg, GstMIKEYPayloadType type, uint nth) c_gst_mikey_message_find_payload; ///
   const(GstMIKEYMapSRTP)* function(const(GstMIKEYMessage)* msg, uint idx) c_gst_mikey_message_get_cs_srtp; ///
   uint function(const(GstMIKEYMessage)* msg) c_gst_mikey_message_get_n_cs; ///
   uint function(const(GstMIKEYMessage)* msg) c_gst_mikey_message_get_n_payloads; ///
   const(GstMIKEYPayload)* function(const(GstMIKEYMessage)* msg, uint idx) c_gst_mikey_message_get_payload; ///
-  bool function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) c_gst_mikey_message_insert_cs_srtp; ///
-  bool function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) c_gst_mikey_message_insert_payload; ///
-  bool function(GstMIKEYMessage* msg, int idx) c_gst_mikey_message_remove_cs_srtp; ///
-  bool function(GstMIKEYMessage* msg, uint idx) c_gst_mikey_message_remove_payload; ///
-  bool function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) c_gst_mikey_message_replace_cs_srtp; ///
-  bool function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) c_gst_mikey_message_replace_payload; ///
-  bool function(GstMIKEYMessage* msg, ubyte version_, GstMIKEYType type, bool V, GstMIKEYPRFFunc prfFunc, uint CSBId, GstMIKEYMapType mapType) c_gst_mikey_message_set_info; ///
+  gboolean function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) c_gst_mikey_message_insert_cs_srtp; ///
+  gboolean function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) c_gst_mikey_message_insert_payload; ///
+  gboolean function(GstMIKEYMessage* msg, int idx) c_gst_mikey_message_remove_cs_srtp; ///
+  gboolean function(GstMIKEYMessage* msg, uint idx) c_gst_mikey_message_remove_payload; ///
+  gboolean function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) c_gst_mikey_message_replace_cs_srtp; ///
+  gboolean function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) c_gst_mikey_message_replace_payload; ///
+  gboolean function(GstMIKEYMessage* msg, ubyte version_, GstMIKEYType type, gboolean V, GstMIKEYPRFFunc prfFunc, uint CSBId, GstMIKEYMapType mapType) c_gst_mikey_message_set_info; ///
   GBytes* function(GstMIKEYMessage* msg, GstMIKEYEncryptInfo* info, GError** _err) c_gst_mikey_message_to_bytes; ///
-  bool function(const(GstMIKEYMessage)* msg, GstCaps* caps) c_gst_mikey_message_to_caps; ///
+  gboolean function(const(GstMIKEYMessage)* msg, GstCaps* caps) c_gst_mikey_message_to_caps; ///
 
   // MIKEYPayload
   GType function() c_gst_mikey_payload_get_type; ///
   GstMIKEYPayload* function(GstMIKEYPayloadType type) c_gst_mikey_payload_new; ///
-  bool function(GstMIKEYPayload* payload, GstMIKEYPayload* newpay) c_gst_mikey_payload_kemac_add_sub; ///
+  gboolean function(GstMIKEYPayload* payload, GstMIKEYPayload* newpay) c_gst_mikey_payload_kemac_add_sub; ///
   uint function(const(GstMIKEYPayload)* payload) c_gst_mikey_payload_kemac_get_n_sub; ///
   const(GstMIKEYPayload)* function(const(GstMIKEYPayload)* payload, uint idx) c_gst_mikey_payload_kemac_get_sub; ///
-  bool function(GstMIKEYPayload* payload, uint idx) c_gst_mikey_payload_kemac_remove_sub; ///
-  bool function(GstMIKEYPayload* payload, GstMIKEYEncAlg encAlg, GstMIKEYMacAlg macAlg) c_gst_mikey_payload_kemac_set; ///
-  bool function(GstMIKEYPayload* payload, ubyte vfLen, const(ubyte)* vfData, ubyte vtLen, const(ubyte)* vtData) c_gst_mikey_payload_key_data_set_interval; ///
-  bool function(GstMIKEYPayload* payload, GstMIKEYKeyDataType keyType, ushort keyLen, const(ubyte)* keyData) c_gst_mikey_payload_key_data_set_key; ///
-  bool function(GstMIKEYPayload* payload, ushort saltLen, const(ubyte)* saltData) c_gst_mikey_payload_key_data_set_salt; ///
-  bool function(GstMIKEYPayload* payload, ubyte spiLen, const(ubyte)* spiData) c_gst_mikey_payload_key_data_set_spi; ///
-  bool function(GstMIKEYPayload* payload, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) c_gst_mikey_payload_pke_set; ///
-  bool function(GstMIKEYPayload* payload, ubyte len, const(ubyte)* rand) c_gst_mikey_payload_rand_set; ///
-  bool function(GstMIKEYPayload* payload, ubyte type, ubyte len, const(ubyte)* val) c_gst_mikey_payload_sp_add_param; ///
+  gboolean function(GstMIKEYPayload* payload, uint idx) c_gst_mikey_payload_kemac_remove_sub; ///
+  gboolean function(GstMIKEYPayload* payload, GstMIKEYEncAlg encAlg, GstMIKEYMacAlg macAlg) c_gst_mikey_payload_kemac_set; ///
+  gboolean function(GstMIKEYPayload* payload, ubyte vfLen, const(ubyte)* vfData, ubyte vtLen, const(ubyte)* vtData) c_gst_mikey_payload_key_data_set_interval; ///
+  gboolean function(GstMIKEYPayload* payload, GstMIKEYKeyDataType keyType, ushort keyLen, const(ubyte)* keyData) c_gst_mikey_payload_key_data_set_key; ///
+  gboolean function(GstMIKEYPayload* payload, ushort saltLen, const(ubyte)* saltData) c_gst_mikey_payload_key_data_set_salt; ///
+  gboolean function(GstMIKEYPayload* payload, ubyte spiLen, const(ubyte)* spiData) c_gst_mikey_payload_key_data_set_spi; ///
+  gboolean function(GstMIKEYPayload* payload, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) c_gst_mikey_payload_pke_set; ///
+  gboolean function(GstMIKEYPayload* payload, ubyte len, const(ubyte)* rand) c_gst_mikey_payload_rand_set; ///
+  gboolean function(GstMIKEYPayload* payload, ubyte type, ubyte len, const(ubyte)* val) c_gst_mikey_payload_sp_add_param; ///
   uint function(const(GstMIKEYPayload)* payload) c_gst_mikey_payload_sp_get_n_params; ///
   const(GstMIKEYPayloadSPParam)* function(const(GstMIKEYPayload)* payload, uint idx) c_gst_mikey_payload_sp_get_param; ///
-  bool function(GstMIKEYPayload* payload, uint idx) c_gst_mikey_payload_sp_remove_param; ///
-  bool function(GstMIKEYPayload* payload, uint policy, GstMIKEYSecProto proto) c_gst_mikey_payload_sp_set; ///
-  bool function(GstMIKEYPayload* payload, GstMIKEYTSType type, const(ubyte)* tsValue) c_gst_mikey_payload_t_set; ///
+  gboolean function(GstMIKEYPayload* payload, uint idx) c_gst_mikey_payload_sp_remove_param; ///
+  gboolean function(GstMIKEYPayload* payload, uint policy, GstMIKEYSecProto proto) c_gst_mikey_payload_sp_set; ///
+  gboolean function(GstMIKEYPayload* payload, GstMIKEYTSType type, const(ubyte)* tsValue) c_gst_mikey_payload_t_set; ///
 
   // SDPAttribute
   GstSDPResult function(GstSDPAttribute* attr) c_gst_sdp_attribute_clear; ///
@@ -207,7 +207,7 @@ __gshared extern(C)
   GstSDPResult function(GstSDPZone* zone, const(char)* adjTime, const(char)* typedTime) c_gst_sdp_zone_set; ///
 
   // global
-  bool function(const(char)* nettype, const(char)* addrtype, const(char)* addr) c_gst_sdp_address_is_multicast; ///
+  gboolean function(const(char)* nettype, const(char)* addrtype, const(char)* addr) c_gst_sdp_address_is_multicast; ///
   char* function(const(char)* uri, const(char)* base64) c_gst_sdp_make_keymgmt; ///
 }
 

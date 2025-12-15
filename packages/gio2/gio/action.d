@@ -105,7 +105,7 @@ interface Action
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _retval = g_action_name_is_valid(_actionName);
+    _retval = cast(bool)g_action_name_is_valid(_actionName);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ interface Action
     char* _actionName;
     GVariant* _targetValue;
     GError *_err;
-    _retval = g_action_parse_detailed_name(_detailedName, &_actionName, &_targetValue, &_err);
+    _retval = cast(bool)g_action_parse_detailed_name(_detailedName, &_actionName, &_targetValue, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     actionName = _actionName.fromCString(Yes.Free);

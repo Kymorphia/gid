@@ -68,7 +68,7 @@ class MetaView
   */
   @property bool isUpdatable()
   {
-    return (cast(GdaMetaView*)this._cPtr).isUpdatable;
+    return cast(bool)(cast(GdaMetaView*)this._cPtr).isUpdatable;
   }
 
   /**

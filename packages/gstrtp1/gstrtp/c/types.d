@@ -587,7 +587,7 @@ struct GstRTCPPacket
   uint offset;
 
   /** */
-  bool padding;
+  gboolean padding;
 
   /** */
   ubyte count;
@@ -732,7 +732,7 @@ struct GstRTPBaseDepayload
   GstSegment segment;
 
   /** */
-  bool needNewsegment;
+  gboolean needNewsegment;
 
   /** */
   GstRTPBaseDepayloadPrivate* priv;
@@ -754,7 +754,7 @@ struct GstRTPBaseDepayloadClass
   /**
       configure the depayloader
   */
-  extern(C) bool function(GstRTPBaseDepayload* filter, GstCaps* caps) setCaps;
+  extern(C) gboolean function(GstRTPBaseDepayload* filter, GstCaps* caps) setCaps;
 
   /**
       process incoming rtp packets. Subclass must implement either
@@ -768,12 +768,12 @@ struct GstRTPBaseDepayloadClass
   /**
       signal the depayloader about packet loss
   */
-  extern(C) bool function(GstRTPBaseDepayload* filter, GstEvent* event) packetLost;
+  extern(C) gboolean function(GstRTPBaseDepayload* filter, GstEvent* event) packetLost;
 
   /**
       custom event handling
   */
-  extern(C) bool function(GstRTPBaseDepayload* filter, GstEvent* event) handleEvent;
+  extern(C) gboolean function(GstRTPBaseDepayload* filter, GstEvent* event) handleEvent;
 
   /**
       Same as the process virtual function, but slightly more
@@ -821,7 +821,7 @@ struct GstRTPBasePayload
   char* encodingName;
 
   /** */
-  bool dynamic;
+  gboolean dynamic;
 
   /** */
   uint clockRate;
@@ -890,7 +890,7 @@ struct GstRTPBasePayloadClass
   /**
       configure the payloader
   */
-  extern(C) bool function(GstRTPBasePayload* payload, GstCaps* caps) setCaps;
+  extern(C) gboolean function(GstRTPBasePayload* payload, GstCaps* caps) setCaps;
 
   /**
       process data
@@ -900,17 +900,17 @@ struct GstRTPBasePayloadClass
   /**
       custom event handling on the sinkpad
   */
-  extern(C) bool function(GstRTPBasePayload* payload, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstRTPBasePayload* payload, GstEvent* event) sinkEvent;
 
   /**
       custom event handling on the srcpad
   */
-  extern(C) bool function(GstRTPBasePayload* payload, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstRTPBasePayload* payload, GstEvent* event) srcEvent;
 
   /**
       custom query handling
   */
-  extern(C) bool function(GstRTPBasePayload* payload, GstPad* pad, GstQuery* query) query;
+  extern(C) gboolean function(GstRTPBasePayload* payload, GstPad* pad, GstQuery* query) query;
 
   /** */
   void*[4] GstReserved;
@@ -1002,31 +1002,31 @@ struct GstRTPHeaderExtensionClass
       read from a rtp payloaded buffer and extract the extension
           information, optionally adding some meta onto the output buffer.
   */
-  extern(C) bool function(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionFlags readFlags, const(ubyte)* data, size_t size, GstBuffer* buffer) read;
+  extern(C) gboolean function(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionFlags readFlags, const(ubyte)* data, size_t size, GstBuffer* buffer) read;
 
   /**
       read any information from sink caps that the header
           extension needs for its function.
   */
-  extern(C) bool function(GstRTPHeaderExtension* ext, const(GstCaps)* caps) setNonRtpSinkCaps;
+  extern(C) gboolean function(GstRTPHeaderExtension* ext, const(GstCaps)* caps) setNonRtpSinkCaps;
 
   /**
       update depayloader non-RTP (depayloaded) caps with
           the information parsed from RTP header.
   */
-  extern(C) bool function(GstRTPHeaderExtension* ext, GstCaps* caps) updateNonRtpSrcCaps;
+  extern(C) gboolean function(GstRTPHeaderExtension* ext, GstCaps* caps) updateNonRtpSrcCaps;
 
   /**
       set the necessary attributes that may be signaled e.g. with
           an SDP.
   */
-  extern(C) bool function(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionDirection direction, const(char)* attributes) setAttributes;
+  extern(C) gboolean function(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionDirection direction, const(char)* attributes) setAttributes;
 
   /**
       write the necessary caps field/s for the configured
           attributes e.g. as signalled with SDP.
   */
-  extern(C) bool function(GstRTPHeaderExtension* ext, GstCaps* caps) setCapsFromAttributes;
+  extern(C) gboolean function(GstRTPHeaderExtension* ext, GstCaps* caps) setCapsFromAttributes;
 
   /** */
   void*[20] GstReserved;
@@ -1091,7 +1091,7 @@ struct GstRTPSourceMeta
   /**
       whether @ssrc is set and valid
   */
-  bool ssrcValid;
+  gboolean ssrcValid;
 
   /**
       pointer to the CSRCs

@@ -88,7 +88,7 @@ class Once
   static bool initEnter(ref void* location)
   {
     bool _retval;
-    _retval = g_once_init_enter(cast(void*)&location);
+    _retval = cast(bool)g_once_init_enter(cast(void*)&location);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Once
   static bool initEnterImpl(out size_t location)
   {
     bool _retval;
-    _retval = g_once_init_enter_impl(cast(size_t*)&location);
+    _retval = cast(bool)g_once_init_enter_impl(cast(size_t*)&location);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class Once
   static bool initEnterPointer(void* location)
   {
     bool _retval;
-    _retval = g_once_init_enter_pointer(location);
+    _retval = cast(bool)g_once_init_enter_pointer(location);
     return _retval;
   }
 

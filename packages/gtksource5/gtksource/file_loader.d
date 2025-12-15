@@ -220,7 +220,7 @@ class FileLoader : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_file_loader_load_finish(cast(GtkSourceFileLoader*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_source_file_loader_load_finish(cast(GtkSourceFileLoader*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

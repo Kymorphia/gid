@@ -185,7 +185,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_desktop_app_info_get_boolean(cast(GDesktopAppInfo*)this._cPtr, _key);
+    _retval = cast(bool)g_desktop_app_info_get_boolean(cast(GDesktopAppInfo*)this._cPtr, _key);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   bool getIsHidden()
   {
     bool _retval;
-    _retval = g_desktop_app_info_get_is_hidden(cast(GDesktopAppInfo*)this._cPtr);
+    _retval = cast(bool)g_desktop_app_info_get_is_hidden(cast(GDesktopAppInfo*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   bool getNodisplay()
   {
     bool _retval;
-    _retval = g_desktop_app_info_get_nodisplay(cast(GDesktopAppInfo*)this._cPtr);
+    _retval = cast(bool)g_desktop_app_info_get_nodisplay(cast(GDesktopAppInfo*)this._cPtr);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   {
     bool _retval;
     const(char)* _desktopEnv = desktopEnv.toCString(No.Alloc);
-    _retval = g_desktop_app_info_get_show_in(cast(GDesktopAppInfo*)this._cPtr, _desktopEnv);
+    _retval = cast(bool)g_desktop_app_info_get_show_in(cast(GDesktopAppInfo*)this._cPtr, _desktopEnv);
     return _retval;
   }
 
@@ -397,7 +397,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_desktop_app_info_has_key(cast(GDesktopAppInfo*)this._cPtr, _key);
+    _retval = cast(bool)g_desktop_app_info_has_key(cast(GDesktopAppInfo*)this._cPtr, _key);
     return _retval;
   }
 
@@ -481,7 +481,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
     auto _userSetup = userSetup ? freezeDelegate(cast(void*)&userSetup) : null;
     auto _pidCallback = pidCallback ? cast(void*)&(pidCallback) : null;
     GError *_err;
-    _retval = g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)this._cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext._cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, &_err);
+    _retval = cast(bool)g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)this._cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext._cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -533,7 +533,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
     auto _userSetup = userSetup ? freezeDelegate(cast(void*)&userSetup) : null;
     auto _pidCallback = pidCallback ? cast(void*)&(pidCallback) : null;
     GError *_err;
-    _retval = g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)this._cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext._cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
+    _retval = cast(bool)g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)this._cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext._cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

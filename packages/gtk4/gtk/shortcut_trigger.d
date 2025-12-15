@@ -117,7 +117,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   bool equal(gtk.shortcut_trigger.ShortcutTrigger trigger2)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   bool printLabel(gdk.display.Display display, glib.string_.String string_)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
     return _retval;
   }
 

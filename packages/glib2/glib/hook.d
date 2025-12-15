@@ -157,7 +157,7 @@ class Hook
   static bool destroy(glib.hook_list.HookList hookList, gulong hookId)
   {
     bool _retval;
-    _retval = g_hook_destroy(hookList ? cast(GHookList*)hookList._cPtr : null, hookId);
+    _retval = cast(bool)g_hook_destroy(hookList ? cast(GHookList*)hookList._cPtr : null, hookId);
     return _retval;
   }
 

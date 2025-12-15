@@ -336,7 +336,7 @@ class IconTheme : gobject.object.ObjectWrap
   bool hasGicon(gio.icon.Icon gicon)
   {
     bool _retval;
-    _retval = gtk_icon_theme_has_gicon(cast(GtkIconTheme*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_icon_theme_has_gicon(cast(GtkIconTheme*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class IconTheme : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    _retval = gtk_icon_theme_has_icon(cast(GtkIconTheme*)this._cPtr, _iconName);
+    _retval = cast(bool)gtk_icon_theme_has_icon(cast(GtkIconTheme*)this._cPtr, _iconName);
     return _retval;
   }
 

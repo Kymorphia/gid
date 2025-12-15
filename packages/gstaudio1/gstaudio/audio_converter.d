@@ -98,7 +98,7 @@ class AudioConverter : gobject.boxed.Boxed
     auto _in_ = cast(void*)in_.ptr;
     size_t _outSize;
     void* _out_;
-    _retval = gst_audio_converter_convert(cast(GstAudioConverter*)this._cPtr, flags, _in_, _inSize, &_out_, &_outSize);
+    _retval = cast(bool)gst_audio_converter_convert(cast(GstAudioConverter*)this._cPtr, flags, _in_, _inSize, &_out_, &_outSize);
     out_.length = _outSize;
     out_[0 .. $] = (cast(ubyte*)_out_)[0 .. _outSize];
     gFree(cast(void*)_out_);
@@ -173,7 +173,7 @@ class AudioConverter : gobject.boxed.Boxed
   bool isPassthrough()
   {
     bool _retval;
-    _retval = gst_audio_converter_is_passthrough(cast(GstAudioConverter*)this._cPtr);
+    _retval = cast(bool)gst_audio_converter_is_passthrough(cast(GstAudioConverter*)this._cPtr);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class AudioConverter : gobject.boxed.Boxed
   bool supportsInplace()
   {
     bool _retval;
-    _retval = gst_audio_converter_supports_inplace(cast(GstAudioConverter*)this._cPtr);
+    _retval = cast(bool)gst_audio_converter_supports_inplace(cast(GstAudioConverter*)this._cPtr);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class AudioConverter : gobject.boxed.Boxed
   bool updateConfig(int inRate, int outRate, gst.structure.Structure config = null)
   {
     bool _retval;
-    _retval = gst_audio_converter_update_config(cast(GstAudioConverter*)this._cPtr, inRate, outRate, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_audio_converter_update_config(cast(GstAudioConverter*)this._cPtr, inRate, outRate, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
     return _retval;
   }
 }

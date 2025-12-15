@@ -356,7 +356,7 @@ class DropDown : gtk.widget.Widget
   bool getEnableSearch()
   {
     bool _retval;
-    _retval = gtk_drop_down_get_enable_search(cast(GtkDropDown*)this._cPtr);
+    _retval = cast(bool)gtk_drop_down_get_enable_search(cast(GtkDropDown*)this._cPtr);
     return _retval;
   }
 
@@ -469,7 +469,7 @@ class DropDown : gtk.widget.Widget
   bool getShowArrow()
   {
     bool _retval;
-    _retval = gtk_drop_down_get_show_arrow(cast(GtkDropDown*)this._cPtr);
+    _retval = cast(bool)gtk_drop_down_get_show_arrow(cast(GtkDropDown*)this._cPtr);
     return _retval;
   }
 

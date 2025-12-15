@@ -151,7 +151,7 @@ class RecentData
   */
   @property bool isPrivate()
   {
-    return (cast(GtkRecentData*)this._cPtr).isPrivate;
+    return cast(bool)(cast(GtkRecentData*)this._cPtr).isPrivate;
   }
 
   /**

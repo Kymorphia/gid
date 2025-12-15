@@ -134,7 +134,7 @@ class IMContext : gobject.object.ObjectWrap
   bool activateOsk(gdk.event.Event event = null)
   {
     bool _retval;
-    _retval = gtk_im_context_activate_osk(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_im_context_activate_osk(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class IMContext : gobject.object.ObjectWrap
   bool deleteSurrounding(int offset, int nChars)
   {
     bool _retval;
-    _retval = gtk_im_context_delete_surrounding(cast(GtkIMContext*)this._cPtr, offset, nChars);
+    _retval = cast(bool)gtk_im_context_delete_surrounding(cast(GtkIMContext*)this._cPtr, offset, nChars);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class IMContext : gobject.object.ObjectWrap
   bool filterKey(bool press, gdk.surface.Surface surface, gdk.device.Device device, uint time, uint keycode, gdk.types.ModifierType state, int group)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_key(cast(GtkIMContext*)this._cPtr, press, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, time, keycode, state, group);
+    _retval = cast(bool)gtk_im_context_filter_key(cast(GtkIMContext*)this._cPtr, press, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, time, keycode, state, group);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class IMContext : gobject.object.ObjectWrap
   bool filterKeypress(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_im_context_filter_keypress(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _text;
-    _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex);
+    _retval = cast(bool)gtk_im_context_get_surrounding(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex);
     text = _text.fromCString(Yes.Free);
     return _retval;
   }
@@ -329,7 +329,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _text;
-    _retval = gtk_im_context_get_surrounding_with_selection(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex, cast(int*)&anchorIndex);
+    _retval = cast(bool)gtk_im_context_get_surrounding_with_selection(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex, cast(int*)&anchorIndex);
     text = _text.fromCString(Yes.Free);
     return _retval;
   }

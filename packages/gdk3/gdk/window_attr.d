@@ -274,7 +274,7 @@ class WindowAttr
   */
   @property bool overrideRedirect()
   {
-    return (cast(GdkWindowAttr*)this._cPtr).overrideRedirect;
+    return cast(bool)(cast(GdkWindowAttr*)this._cPtr).overrideRedirect;
   }
 
   /**

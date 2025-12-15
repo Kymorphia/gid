@@ -205,7 +205,7 @@ class Constraint : gobject.object.ObjectWrap
   bool isAttached()
   {
     bool _retval;
-    _retval = gtk_constraint_is_attached(cast(GtkConstraint*)this._cPtr);
+    _retval = cast(bool)gtk_constraint_is_attached(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Constraint : gobject.object.ObjectWrap
   bool isConstant()
   {
     bool _retval;
-    _retval = gtk_constraint_is_constant(cast(GtkConstraint*)this._cPtr);
+    _retval = cast(bool)gtk_constraint_is_constant(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Constraint : gobject.object.ObjectWrap
   bool isRequired()
   {
     bool _retval;
-    _retval = gtk_constraint_is_required(cast(GtkConstraint*)this._cPtr);
+    _retval = cast(bool)gtk_constraint_is_required(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 }

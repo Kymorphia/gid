@@ -116,7 +116,7 @@ class VideoFrame
   bool copy(gstvideo.video_frame.VideoFrame src)
   {
     bool _retval;
-    _retval = gst_video_frame_copy(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null);
+    _retval = cast(bool)gst_video_frame_copy(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class VideoFrame
   bool copyPlane(gstvideo.video_frame.VideoFrame src, uint plane)
   {
     bool _retval;
-    _retval = gst_video_frame_copy_plane(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null, plane);
+    _retval = cast(bool)gst_video_frame_copy_plane(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null, plane);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class VideoFrame
   {
     bool _retval;
     GstVideoFrame _frame;
-    _retval = gst_video_frame_map(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags);
+    _retval = cast(bool)gst_video_frame_map(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags);
     frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame, No.Take);
     return _retval;
   }
@@ -229,7 +229,7 @@ class VideoFrame
   {
     bool _retval;
     GstVideoFrame _frame;
-    _retval = gst_video_frame_map_id(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id, flags);
+    _retval = cast(bool)gst_video_frame_map_id(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id, flags);
     frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame, No.Take);
     return _retval;
   }

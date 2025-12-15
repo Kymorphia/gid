@@ -62,7 +62,7 @@ class FilterOutputStream : gio.output_stream.OutputStream
   bool getCloseBaseStream()
   {
     bool _retval;
-    _retval = g_filter_output_stream_get_close_base_stream(cast(GFilterOutputStream*)this._cPtr);
+    _retval = cast(bool)g_filter_output_stream_get_close_base_stream(cast(GFilterOutputStream*)this._cPtr);
     return _retval;
   }
 

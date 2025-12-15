@@ -53,7 +53,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsEditable()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_editable(cast(WebKitWebHitTestResult*)this._cPtr);
+    _retval = cast(bool)webkit_web_hit_test_result_context_is_editable(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsImage()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_image(cast(WebKitWebHitTestResult*)this._cPtr);
+    _retval = cast(bool)webkit_web_hit_test_result_context_is_image(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsLink()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_link(cast(WebKitWebHitTestResult*)this._cPtr);
+    _retval = cast(bool)webkit_web_hit_test_result_context_is_link(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsMedia()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_media(cast(WebKitWebHitTestResult*)this._cPtr);
+    _retval = cast(bool)webkit_web_hit_test_result_context_is_media(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsScrollbar()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_scrollbar(cast(WebKitWebHitTestResult*)this._cPtr);
+    _retval = cast(bool)webkit_web_hit_test_result_context_is_scrollbar(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsSelection()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_selection(cast(WebKitWebHitTestResult*)this._cPtr);
+    _retval = cast(bool)webkit_web_hit_test_result_context_is_selection(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 

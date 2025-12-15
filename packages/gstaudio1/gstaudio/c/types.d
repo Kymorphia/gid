@@ -1141,7 +1141,7 @@ struct GstAudioAggregatorClass
        the size of a sample times the number of channels. Returns TRUE if
        any non-silence was added to the buffer
   */
-  extern(C) bool function(GstAudioAggregator* aagg, GstAudioAggregatorPad* pad, GstBuffer* inbuf, uint inOffset, GstBuffer* outbuf, uint outOffset, uint numFrames) aggregateOneBuffer;
+  extern(C) gboolean function(GstAudioAggregator* aagg, GstAudioAggregatorPad* pad, GstBuffer* inbuf, uint inOffset, GstBuffer* outbuf, uint outOffset, uint numFrames) aggregateOneBuffer;
 
   /** */
   void*[20] GstReserved;
@@ -1250,7 +1250,7 @@ struct GstAudioBaseSink
   GstClock* providedClock;
 
   /** */
-  bool eosRendering;
+  gboolean eosRendering;
 
   /** */
   GstAudioBaseSinkPrivate* priv;
@@ -1472,7 +1472,7 @@ struct GstAudioCdSrcClass
   /**
       opening the device
   */
-  extern(C) bool function(GstAudioCdSrc* src, const(char)* device) open;
+  extern(C) gboolean function(GstAudioCdSrc* src, const(char)* device) open;
 
   /**
       closing the device
@@ -1505,7 +1505,7 @@ struct GstAudioCdSrcTrack
   /**
       Whether this is an audio track
   */
-  bool isAudio;
+  gboolean isAudio;
 
   /**
       Track number in TOC (usually starts from 1, but not always)
@@ -1770,19 +1770,19 @@ struct GstAudioDecoderClass
                        Called when the element starts processing.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstAudioDecoder* dec) start;
+  extern(C) gboolean function(GstAudioDecoder* dec) start;
 
   /**
       Optional.
                        Called when the element stops processing.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstAudioDecoder* dec) stop;
+  extern(C) gboolean function(GstAudioDecoder* dec) stop;
 
   /**
       Notifies subclass of incoming data format (caps).
   */
-  extern(C) bool function(GstAudioDecoder* dec, GstCaps* caps) setFormat;
+  extern(C) gboolean function(GstAudioDecoder* dec, GstCaps* caps) setFormat;
 
   /**
       Optional.
@@ -1809,7 +1809,7 @@ struct GstAudioDecoderClass
                        @hard indicates whether a FLUSH is being processed,
                        or otherwise a DISCONT (or conceptually similar).
   */
-  extern(C) void function(GstAudioDecoder* dec, bool hard) flush;
+  extern(C) void function(GstAudioDecoder* dec, gboolean hard) flush;
 
   /**
       Optional.
@@ -1824,28 +1824,28 @@ struct GstAudioDecoderClass
                        Event handler on the sink pad. Subclasses should chain up to
                        the parent implementation to invoke the default handler.
   */
-  extern(C) bool function(GstAudioDecoder* dec, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstAudioDecoder* dec, GstEvent* event) sinkEvent;
 
   /**
       Optional.
                        Event handler on the src pad. Subclasses should chain up to
                        the parent implementation to invoke the default handler.
   */
-  extern(C) bool function(GstAudioDecoder* dec, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstAudioDecoder* dec, GstEvent* event) srcEvent;
 
   /**
       Optional.
                        Called when the element changes to GST_STATE_READY.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstAudioDecoder* dec) open;
+  extern(C) gboolean function(GstAudioDecoder* dec) open;
 
   /**
       Optional.
                        Called when the element changes to GST_STATE_NULL.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstAudioDecoder* dec) close;
+  extern(C) gboolean function(GstAudioDecoder* dec) close;
 
   /**
       Optional.
@@ -1853,7 +1853,7 @@ struct GstAudioDecoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstAudioDecoder* dec) negotiate;
+  extern(C) gboolean function(GstAudioDecoder* dec) negotiate;
 
   /**
       Optional.
@@ -1863,7 +1863,7 @@ struct GstAudioDecoderClass
                           Subclasses should chain up to the parent implementation to
                           invoke the default handler.
   */
-  extern(C) bool function(GstAudioDecoder* dec, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstAudioDecoder* dec, GstQuery* query) decideAllocation;
 
   /**
       Optional.
@@ -1871,7 +1871,7 @@ struct GstAudioDecoderClass
                            Subclasses should chain up to the parent implementation to
                            invoke the default handler.
   */
-  extern(C) bool function(GstAudioDecoder* dec, GstQuery* query) proposeAllocation;
+  extern(C) gboolean function(GstAudioDecoder* dec, GstQuery* query) proposeAllocation;
 
   /**
       Optional.
@@ -1880,7 +1880,7 @@ struct GstAudioDecoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.6
   */
-  extern(C) bool function(GstAudioDecoder* dec, GstQuery* query) sinkQuery;
+  extern(C) gboolean function(GstAudioDecoder* dec, GstQuery* query) sinkQuery;
 
   /**
       Optional.
@@ -1889,7 +1889,7 @@ struct GstAudioDecoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.6
   */
-  extern(C) bool function(GstAudioDecoder* dec, GstQuery* query) srcQuery;
+  extern(C) gboolean function(GstAudioDecoder* dec, GstQuery* query) srcQuery;
 
   /**
       Optional.
@@ -1907,7 +1907,7 @@ struct GstAudioDecoderClass
                        implement this method and return true if the metadata is to be
                        copied. Since: 1.6
   */
-  extern(C) bool function(GstAudioDecoder* enc, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) transformMeta;
+  extern(C) gboolean function(GstAudioDecoder* enc, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) transformMeta;
 
   /** */
   void*[16] GstReserved;
@@ -2104,20 +2104,20 @@ struct GstAudioEncoderClass
                        Called when the element starts processing.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstAudioEncoder* enc) start;
+  extern(C) gboolean function(GstAudioEncoder* enc) start;
 
   /**
       Optional.
                        Called when the element stops processing.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstAudioEncoder* enc) stop;
+  extern(C) gboolean function(GstAudioEncoder* enc) stop;
 
   /**
       Notifies subclass of incoming data format.
                        GstAudioInfo contains the format according to provided caps.
   */
-  extern(C) bool function(GstAudioEncoder* enc, GstAudioInfo* info) setFormat;
+  extern(C) gboolean function(GstAudioEncoder* enc, GstAudioInfo* info) setFormat;
 
   /**
       Provides input samples (or NULL to clear any remaining data)
@@ -2149,14 +2149,14 @@ struct GstAudioEncoderClass
                        Event handler on the sink pad. Subclasses should chain up to
                        the parent implementation to invoke the default handler.
   */
-  extern(C) bool function(GstAudioEncoder* enc, GstEvent* event) sinkEvent;
+  extern(C) gboolean function(GstAudioEncoder* enc, GstEvent* event) sinkEvent;
 
   /**
       Optional.
                        Event handler on the src pad. Subclasses should chain up to
                        the parent implementation to invoke the default handler.
   */
-  extern(C) bool function(GstAudioEncoder* enc, GstEvent* event) srcEvent;
+  extern(C) gboolean function(GstAudioEncoder* enc, GstEvent* event) srcEvent;
 
   /**
       Optional.
@@ -2172,14 +2172,14 @@ struct GstAudioEncoderClass
                        Called when the element changes to GST_STATE_READY.
                        Allows opening external resources.
   */
-  extern(C) bool function(GstAudioEncoder* enc) open;
+  extern(C) gboolean function(GstAudioEncoder* enc) open;
 
   /**
       Optional.
                        Called when the element changes to GST_STATE_NULL.
                        Allows closing external resources.
   */
-  extern(C) bool function(GstAudioEncoder* enc) close;
+  extern(C) gboolean function(GstAudioEncoder* enc) close;
 
   /**
       Optional.
@@ -2187,7 +2187,7 @@ struct GstAudioEncoderClass
                        Subclasses should chain up to the parent implementation to
                        invoke the default handler.
   */
-  extern(C) bool function(GstAudioEncoder* enc) negotiate;
+  extern(C) gboolean function(GstAudioEncoder* enc) negotiate;
 
   /**
       Optional.
@@ -2197,7 +2197,7 @@ struct GstAudioEncoderClass
                           Subclasses should chain up to the parent implementation to
                           invoke the default handler.
   */
-  extern(C) bool function(GstAudioEncoder* enc, GstQuery* query) decideAllocation;
+  extern(C) gboolean function(GstAudioEncoder* enc, GstQuery* query) decideAllocation;
 
   /**
       Optional.
@@ -2205,7 +2205,7 @@ struct GstAudioEncoderClass
                            Subclasses should chain up to the parent implementation to
                            invoke the default handler.
   */
-  extern(C) bool function(GstAudioEncoder* enc, GstQuery* query) proposeAllocation;
+  extern(C) gboolean function(GstAudioEncoder* enc, GstQuery* query) proposeAllocation;
 
   /**
       Optional. Transform the metadata on the input buffer to the
@@ -2214,7 +2214,7 @@ struct GstAudioEncoderClass
                        implement this method and return true if the metadata is to be
                        copied. Since: 1.6
   */
-  extern(C) bool function(GstAudioEncoder* enc, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) transformMeta;
+  extern(C) gboolean function(GstAudioEncoder* enc, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) transformMeta;
 
   /**
       Optional.
@@ -2223,7 +2223,7 @@ struct GstAudioEncoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.6
   */
-  extern(C) bool function(GstAudioEncoder* encoder, GstQuery* query) sinkQuery;
+  extern(C) gboolean function(GstAudioEncoder* encoder, GstQuery* query) sinkQuery;
 
   /**
       Optional.
@@ -2232,7 +2232,7 @@ struct GstAudioEncoderClass
                        should chain up to the parent implementation to invoke the
                        default handler. Since: 1.6
   */
-  extern(C) bool function(GstAudioEncoder* encoder, GstQuery* query) srcQuery;
+  extern(C) gboolean function(GstAudioEncoder* encoder, GstQuery* query) srcQuery;
 
   /** */
   void*[17] GstReserved;
@@ -2283,7 +2283,7 @@ struct GstAudioFilterClass
   /**
       virtual function called whenever the format changes
   */
-  extern(C) bool function(GstAudioFilter* filter, const(GstAudioInfo)* info) setup;
+  extern(C) gboolean function(GstAudioFilter* filter, const(GstAudioInfo)* info) setup;
 
   /** */
   void*[4] GstReserved;
@@ -2419,7 +2419,7 @@ struct GstAudioLevelMeta
   /**
       whether the buffer contains voice activity
   */
-  bool voiceActivity;
+  gboolean voiceActivity;
 }
 
 /**
@@ -2490,12 +2490,12 @@ struct GstAudioRingBuffer
   /**
       boolean indicating that the ringbuffer is open
   */
-  bool open;
+  gboolean open;
 
   /**
       boolean indicating that the ringbuffer is acquired
   */
-  bool acquired;
+  gboolean acquired;
 
   /**
       data in the ringbuffer
@@ -2552,19 +2552,19 @@ struct GstAudioRingBuffer
   void* cbData;
 
   /** */
-  bool needReorder;
+  gboolean needReorder;
 
   /** */
   int[64] channelReorderMap;
 
   /** */
-  bool flushing;
+  gboolean flushing;
 
   /** */
   int mayStart;
 
   /** */
-  bool active;
+  gboolean active;
 
   /** */
   GDestroyNotify cbDataNotify;
@@ -2586,42 +2586,42 @@ struct GstAudioRingBufferClass
   /**
       open the device, don't set any params or allocate anything
   */
-  extern(C) bool function(GstAudioRingBuffer* buf) openDevice;
+  extern(C) gboolean function(GstAudioRingBuffer* buf) openDevice;
 
   /**
       allocate the resources for the ringbuffer using the given spec
   */
-  extern(C) bool function(GstAudioRingBuffer* buf, GstAudioRingBufferSpec* spec) acquire;
+  extern(C) gboolean function(GstAudioRingBuffer* buf, GstAudioRingBufferSpec* spec) acquire;
 
   /**
       free resources of the ringbuffer
   */
-  extern(C) bool function(GstAudioRingBuffer* buf) release;
+  extern(C) gboolean function(GstAudioRingBuffer* buf) release;
 
   /**
       close the device
   */
-  extern(C) bool function(GstAudioRingBuffer* buf) closeDevice;
+  extern(C) gboolean function(GstAudioRingBuffer* buf) closeDevice;
 
   /**
       start processing of samples
   */
-  extern(C) bool function(GstAudioRingBuffer* buf) start;
+  extern(C) gboolean function(GstAudioRingBuffer* buf) start;
 
   /**
       pause processing of samples
   */
-  extern(C) bool function(GstAudioRingBuffer* buf) pause;
+  extern(C) gboolean function(GstAudioRingBuffer* buf) pause;
 
   /**
       resume processing of samples after pause
   */
-  extern(C) bool function(GstAudioRingBuffer* buf) resume;
+  extern(C) gboolean function(GstAudioRingBuffer* buf) resume;
 
   /**
       stop processing of samples
   */
-  extern(C) bool function(GstAudioRingBuffer* buf) stop;
+  extern(C) gboolean function(GstAudioRingBuffer* buf) stop;
 
   /**
       get number of frames queued in device
@@ -2632,7 +2632,7 @@ struct GstAudioRingBufferClass
       activate the thread that starts pulling and monitoring the
       consumed segments in the device.
   */
-  extern(C) bool function(GstAudioRingBuffer* buf, bool active) activate;
+  extern(C) gboolean function(GstAudioRingBuffer* buf, gboolean active) activate;
 
   /**
       write samples into the ringbuffer
@@ -2773,22 +2773,22 @@ struct GstAudioSinkClass
       Open the device. No configuration needs to be done at this point.
              This function is also used to check if the device is available.
   */
-  extern(C) bool function(GstAudioSink* sink) open;
+  extern(C) gboolean function(GstAudioSink* sink) open;
 
   /**
       Prepare the device to operate with the specified parameters.
   */
-  extern(C) bool function(GstAudioSink* sink, GstAudioRingBufferSpec* spec) prepare;
+  extern(C) gboolean function(GstAudioSink* sink, GstAudioRingBufferSpec* spec) prepare;
 
   /**
       Undo operations done in prepare.
   */
-  extern(C) bool function(GstAudioSink* sink) unprepare;
+  extern(C) gboolean function(GstAudioSink* sink) unprepare;
 
   /**
       Close the device.
   */
-  extern(C) bool function(GstAudioSink* sink) close;
+  extern(C) gboolean function(GstAudioSink* sink) close;
 
   /**
       Write data to the device.
@@ -2888,22 +2888,22 @@ struct GstAudioSrcClass
   /**
       open the device with the specified caps
   */
-  extern(C) bool function(GstAudioSrc* src) open;
+  extern(C) gboolean function(GstAudioSrc* src) open;
 
   /**
       configure device with format
   */
-  extern(C) bool function(GstAudioSrc* src, GstAudioRingBufferSpec* spec) prepare;
+  extern(C) gboolean function(GstAudioSrc* src, GstAudioRingBufferSpec* spec) prepare;
 
   /**
       undo the configuration
   */
-  extern(C) bool function(GstAudioSrc* src) unprepare;
+  extern(C) gboolean function(GstAudioSrc* src) unprepare;
 
   /**
       close the device
   */
-  extern(C) bool function(GstAudioSrc* src) close;
+  extern(C) gboolean function(GstAudioSrc* src) close;
 
   /**
       read samples from the audio device
@@ -3013,7 +3013,7 @@ struct GstDsdInfo
       true if the DSD bits in the data bytes are reversed,
         that is, the least significant bit comes first
   */
-  bool reversedBytes;
+  gboolean reversedBytes;
 
   /**
       positions for each channel

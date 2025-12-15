@@ -109,7 +109,7 @@ class Filter : gobject.object.ObjectWrap
   bool match(gobject.object.ObjectWrap item)
   {
     bool _retval;
-    _retval = gtk_filter_match(cast(GtkFilter*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_filter_match(cast(GtkFilter*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null);
     return _retval;
   }
 

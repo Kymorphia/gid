@@ -83,7 +83,7 @@ class Triangle : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D p)
   {
     bool _retval;
-    _retval = graphene_triangle_contains_point(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_triangle_contains_point(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class Triangle : gobject.boxed.Boxed
   bool equal(graphene.triangle.Triangle b)
   {
     bool _retval;
-    _retval = graphene_triangle_equal(cast(const(graphene_triangle_t)*)this._cPtr, b ? cast(const(graphene_triangle_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_triangle_equal(cast(const(graphene_triangle_t)*)this._cPtr, b ? cast(const(graphene_triangle_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Triangle : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_vec2_t _res;
-    _retval = graphene_triangle_get_barycoords(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_triangle_get_barycoords(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null, &_res);
     res = new graphene.vec2.Vec2(cast(void*)&_res, No.Take);
     return _retval;
   }
@@ -255,7 +255,7 @@ class Triangle : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_vec2_t _res;
-    _retval = graphene_triangle_get_uv(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null, uvA ? cast(const(graphene_vec2_t)*)uvA._cPtr(No.Dup) : null, uvB ? cast(const(graphene_vec2_t)*)uvB._cPtr(No.Dup) : null, uvC ? cast(const(graphene_vec2_t)*)uvC._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_triangle_get_uv(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null, uvA ? cast(const(graphene_vec2_t)*)uvA._cPtr(No.Dup) : null, uvB ? cast(const(graphene_vec2_t)*)uvB._cPtr(No.Dup) : null, uvC ? cast(const(graphene_vec2_t)*)uvC._cPtr(No.Dup) : null, &_res);
     res = new graphene.vec2.Vec2(cast(void*)&_res, No.Take);
     return _retval;
   }

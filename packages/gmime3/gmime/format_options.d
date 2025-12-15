@@ -153,7 +153,7 @@ class FormatOptions : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _header = header.toCString(No.Alloc);
-    _retval = g_mime_format_options_is_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
+    _retval = cast(bool)g_mime_format_options_is_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
     return _retval;
   }
 

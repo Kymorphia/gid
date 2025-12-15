@@ -101,7 +101,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
     bool _retval;
     const(char)* _property = property.toCString(No.Alloc);
     GValue _value;
-    _retval = gtk_style_properties_get_property(cast(GtkStyleProperties*)this._cPtr, _property, state, &_value);
+    _retval = cast(bool)gtk_style_properties_get_property(cast(GtkStyleProperties*)this._cPtr, _property, state, &_value);
     value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
     return _retval;
   }

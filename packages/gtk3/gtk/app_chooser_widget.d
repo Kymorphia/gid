@@ -257,7 +257,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   bool getShowAll()
   {
     bool _retval;
-    _retval = gtk_app_chooser_widget_get_show_all(cast(GtkAppChooserWidget*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_all(cast(GtkAppChooserWidget*)this._cPtr);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   bool getShowDefault()
   {
     bool _retval;
-    _retval = gtk_app_chooser_widget_get_show_default(cast(GtkAppChooserWidget*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_default(cast(GtkAppChooserWidget*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   bool getShowFallback()
   {
     bool _retval;
-    _retval = gtk_app_chooser_widget_get_show_fallback(cast(GtkAppChooserWidget*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_fallback(cast(GtkAppChooserWidget*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   bool getShowOther()
   {
     bool _retval;
-    _retval = gtk_app_chooser_widget_get_show_other(cast(GtkAppChooserWidget*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_other(cast(GtkAppChooserWidget*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   bool getShowRecommended()
   {
     bool _retval;
-    _retval = gtk_app_chooser_widget_get_show_recommended(cast(GtkAppChooserWidget*)this._cPtr);
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_recommended(cast(GtkAppChooserWidget*)this._cPtr);
     return _retval;
   }
 

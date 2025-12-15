@@ -323,7 +323,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool align_(gstvideo.video_alignment.VideoAlignment align_)
   {
     bool _retval;
-    _retval = gst_video_info_align(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
+    _retval = cast(bool)gst_video_info_align(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool alignFull(gstvideo.video_alignment.VideoAlignment align_, out size_t planeSize)
   {
     bool _retval;
-    _retval = gst_video_info_align_full(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null, cast(size_t*)&planeSize);
+    _retval = cast(bool)gst_video_info_align_full(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null, cast(size_t*)&planeSize);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool convert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue)
   {
     bool _retval;
-    _retval = gst_video_info_convert(cast(const(GstVideoInfo)*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
+    _retval = cast(bool)gst_video_info_convert(cast(const(GstVideoInfo)*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool isEqual(gstvideo.video_info.VideoInfo other)
   {
     bool _retval;
-    _retval = gst_video_info_is_equal(cast(const(GstVideoInfo)*)this._cPtr, other ? cast(const(GstVideoInfo)*)other._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_info_is_equal(cast(const(GstVideoInfo)*)this._cPtr, other ? cast(const(GstVideoInfo)*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool setFormat(gstvideo.types.VideoFormat format, uint width, uint height)
   {
     bool _retval;
-    _retval = gst_video_info_set_format(cast(GstVideoInfo*)this._cPtr, format, width, height);
+    _retval = cast(bool)gst_video_info_set_format(cast(GstVideoInfo*)this._cPtr, format, width, height);
     return _retval;
   }
 
@@ -433,7 +433,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool setInterlacedFormat(gstvideo.types.VideoFormat format, gstvideo.types.VideoInterlaceMode mode, uint width, uint height)
   {
     bool _retval;
-    _retval = gst_video_info_set_interlaced_format(cast(GstVideoInfo*)this._cPtr, format, mode, width, height);
+    _retval = cast(bool)gst_video_info_set_interlaced_format(cast(GstVideoInfo*)this._cPtr, format, mode, width, height);
     return _retval;
   }
 
@@ -461,7 +461,7 @@ class VideoInfo : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfo _info;
-    _retval = gst_video_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_video_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     info = new gstvideo.video_info.VideoInfo(cast(void*)&_info, No.Take);
     return _retval;
   }

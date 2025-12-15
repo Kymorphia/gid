@@ -321,7 +321,7 @@ class SpringAnimation : adw.animation.Animation
   bool getClamp()
   {
     bool _retval;
-    _retval = adw_spring_animation_get_clamp(cast(AdwSpringAnimation*)this._cPtr);
+    _retval = cast(bool)adw_spring_animation_get_clamp(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 

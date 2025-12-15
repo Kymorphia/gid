@@ -300,7 +300,7 @@ class Resource : gobject.boxed.Boxed
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = g_resource_get_info(cast(GResource*)this._cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
+    _retval = cast(bool)g_resource_get_info(cast(GResource*)this._cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

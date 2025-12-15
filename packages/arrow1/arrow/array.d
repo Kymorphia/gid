@@ -137,7 +137,7 @@ class Array : gobject.object.ObjectWrap
   bool equal(arrow.array.Array otherArray)
   {
     bool _retval;
-    _retval = garrow_array_equal(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_array_equal(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Array : gobject.object.ObjectWrap
   bool equalApprox(arrow.array.Array otherArray)
   {
     bool _retval;
-    _retval = garrow_array_equal_approx(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_array_equal_approx(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Array : gobject.object.ObjectWrap
   bool equalOptions(arrow.array.Array otherArray, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
-    _retval = garrow_array_equal_options(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_array_equal_options(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Array : gobject.object.ObjectWrap
   bool equalRange(long startIndex, arrow.array.Array otherArray, long otherStartIndex, long endIndex, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
-    _retval = garrow_array_equal_range(cast(GArrowArray*)this._cPtr, startIndex, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null, otherStartIndex, endIndex, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_array_equal_range(cast(GArrowArray*)this._cPtr, startIndex, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null, otherStartIndex, endIndex, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Array : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_array_export(cast(GArrowArray*)this._cPtr, cast(void**)&cAbiArray, cast(void**)&cAbiSchema, &_err);
+    _retval = cast(bool)garrow_array_export(cast(GArrowArray*)this._cPtr, cast(void**)&cAbiArray, cast(void**)&cAbiSchema, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -267,7 +267,7 @@ class Array : gobject.object.ObjectWrap
   bool isNull(long i)
   {
     bool _retval;
-    _retval = garrow_array_is_null(cast(GArrowArray*)this._cPtr, i);
+    _retval = cast(bool)garrow_array_is_null(cast(GArrowArray*)this._cPtr, i);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class Array : gobject.object.ObjectWrap
   bool isValid(long i)
   {
     bool _retval;
-    _retval = garrow_array_is_valid(cast(GArrowArray*)this._cPtr, i);
+    _retval = cast(bool)garrow_array_is_valid(cast(GArrowArray*)this._cPtr, i);
     return _retval;
   }
 

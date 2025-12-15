@@ -438,7 +438,7 @@ void checkTeardownSrcPad(gst.element.Element element)
 bool consistencyCheckerAddPad(gstcheck.types.StreamConsistency consist, gst.pad.Pad pad)
 {
   bool _retval;
-  _retval = gst_consistency_checker_add_pad(consist, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_consistency_checker_add_pad(consist, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   return _retval;
 }
 

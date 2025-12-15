@@ -135,7 +135,7 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
   bool addTrack(gstaudio.audio_cd_src_track.AudioCdSrcTrack track)
   {
     bool _retval;
-    _retval = gst_audio_cd_src_add_track(cast(GstAudioCdSrc*)this._cPtr, track ? cast(GstAudioCdSrcTrack*)track._cPtr : null);
+    _retval = cast(bool)gst_audio_cd_src_add_track(cast(GstAudioCdSrc*)this._cPtr, track ? cast(GstAudioCdSrcTrack*)track._cPtr : null);
     return _retval;
   }
 }

@@ -307,7 +307,7 @@ class StyleContext : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _className = className.toCString(No.Alloc);
-    _retval = gtk_style_context_has_class(cast(GtkStyleContext*)this._cPtr, _className);
+    _retval = cast(bool)gtk_style_context_has_class(cast(GtkStyleContext*)this._cPtr, _className);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class StyleContext : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkRGBA _color;
-    _retval = gtk_style_context_lookup_color(cast(GtkStyleContext*)this._cPtr, _colorName, &_color);
+    _retval = cast(bool)gtk_style_context_lookup_color(cast(GtkStyleContext*)this._cPtr, _colorName, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }

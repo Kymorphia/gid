@@ -285,7 +285,7 @@ bool asciiStringToSigned(string str, uint base, long min, long max, out long out
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
   GError *_err;
-  _retval = g_ascii_string_to_signed(_str, base, min, max, cast(long*)&outNum, &_err);
+  _retval = cast(bool)g_ascii_string_to_signed(_str, base, min, max, cast(long*)&outNum, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -329,7 +329,7 @@ bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulon
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
   GError *_err;
-  _retval = g_ascii_string_to_unsigned(_str, base, min, max, cast(ulong*)&outNum, &_err);
+  _retval = cast(bool)g_ascii_string_to_unsigned(_str, base, min, max, cast(ulong*)&outNum, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -721,7 +721,7 @@ uint atomicIntAnd(ref uint atomic, uint val)
 bool atomicIntCompareAndExchange(ref int atomic, int oldval, int newval)
 {
   bool _retval;
-  _retval = g_atomic_int_compare_and_exchange(cast(int*)&atomic, oldval, newval);
+  _retval = cast(bool)g_atomic_int_compare_and_exchange(cast(int*)&atomic, oldval, newval);
   return _retval;
 }
 
@@ -749,7 +749,7 @@ bool atomicIntCompareAndExchange(ref int atomic, int oldval, int newval)
 bool atomicIntCompareAndExchangeFull(ref int atomic, int oldval, int newval, out int preval)
 {
   bool _retval;
-  _retval = g_atomic_int_compare_and_exchange_full(cast(int*)&atomic, oldval, newval, cast(int*)&preval);
+  _retval = cast(bool)g_atomic_int_compare_and_exchange_full(cast(int*)&atomic, oldval, newval, cast(int*)&preval);
   return _retval;
 }
 
@@ -771,7 +771,7 @@ bool atomicIntCompareAndExchangeFull(ref int atomic, int oldval, int newval, out
 bool atomicIntDecAndTest(ref int atomic)
 {
   bool _retval;
-  _retval = g_atomic_int_dec_and_test(cast(int*)&atomic);
+  _retval = cast(bool)g_atomic_int_dec_and_test(cast(int*)&atomic);
   return _retval;
 }
 
@@ -998,7 +998,7 @@ size_t atomicPointerAnd(void* atomic, size_t val)
 bool atomicPointerCompareAndExchange(void* atomic, void* oldval = null, void* newval = null)
 {
   bool _retval;
-  _retval = g_atomic_pointer_compare_and_exchange(atomic, oldval, newval);
+  _retval = cast(bool)g_atomic_pointer_compare_and_exchange(atomic, oldval, newval);
   return _retval;
 }
 
@@ -1026,7 +1026,7 @@ bool atomicPointerCompareAndExchange(void* atomic, void* oldval = null, void* ne
 bool atomicPointerCompareAndExchangeFull(void* atomic, void* oldval, void* newval, out void* preval)
 {
   bool _retval;
-  _retval = g_atomic_pointer_compare_and_exchange_full(atomic, oldval, newval, cast(void*)&preval);
+  _retval = cast(bool)g_atomic_pointer_compare_and_exchange_full(atomic, oldval, newval, cast(void*)&preval);
   return _retval;
 }
 
@@ -1280,7 +1280,7 @@ void atomicRcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc)
 bool atomicRefCountCompare(ref int arc, int val)
 {
   bool _retval;
-  _retval = g_atomic_ref_count_compare(cast(int*)&arc, val);
+  _retval = cast(bool)g_atomic_ref_count_compare(cast(int*)&arc, val);
   return _retval;
 }
 
@@ -1298,7 +1298,7 @@ bool atomicRefCountCompare(ref int arc, int val)
 bool atomicRefCountDec(ref int arc)
 {
   bool _retval;
-  _retval = g_atomic_ref_count_dec(cast(int*)&arc);
+  _retval = cast(bool)g_atomic_ref_count_dec(cast(int*)&arc);
   return _retval;
 }
 
@@ -1500,7 +1500,7 @@ uint bitStorage(gulong number)
 bool bitTrylock(ref int address, int lockBit)
 {
   bool _retval;
-  _retval = g_bit_trylock(cast(int*)&address, lockBit);
+  _retval = cast(bool)g_bit_trylock(cast(int*)&address, lockBit);
   return _retval;
 }
 
@@ -1846,7 +1846,7 @@ bool close(int fd)
 {
   bool _retval;
   GError *_err;
-  _retval = g_close(fd, &_err);
+  _retval = cast(bool)g_close(fd, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -2349,7 +2349,7 @@ string dgettext(string domain, string msgid)
 bool directEqual(const(void)* v1 = null, const(void)* v2 = null)
 {
   bool _retval;
-  _retval = g_direct_equal(v1, v2);
+  _retval = cast(bool)g_direct_equal(v1, v2);
   return _retval;
 }
 
@@ -2415,7 +2415,7 @@ string dngettext(string domain, string msgid, string msgidPlural, gulong n)
 bool doubleEqual(const(void)* v1, const(void)* v2)
 {
   bool _retval;
-  _retval = g_double_equal(v1, v2);
+  _retval = cast(bool)g_double_equal(v1, v2);
   return _retval;
 }
 
@@ -2611,7 +2611,7 @@ bool fileGetContents(string filename, out ubyte[] contents)
   size_t _length;
   ubyte* _contents;
   GError *_err;
-  _retval = g_file_get_contents(_filename, &_contents, &_length, &_err);
+  _retval = cast(bool)g_file_get_contents(_filename, &_contents, &_length, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   contents.length = _length;
@@ -2728,7 +2728,7 @@ bool fileSetContents(string filename, ubyte[] contents)
 
   auto _contents = cast(const(ubyte)*)contents.ptr;
   GError *_err;
-  _retval = g_file_set_contents(_filename, _contents, _length, &_err);
+  _retval = cast(bool)g_file_set_contents(_filename, _contents, _length, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -2811,7 +2811,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
 
   auto _contents = cast(const(ubyte)*)contents.ptr;
   GError *_err;
-  _retval = g_file_set_contents_full(_filename, _contents, _length, flags, mode, &_err);
+  _retval = cast(bool)g_file_set_contents_full(_filename, _contents, _length, flags, mode, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -2888,7 +2888,7 @@ bool fileTest(string filename, glib.types.FileTest test)
 {
   bool _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
-  _retval = g_file_test(_filename, test);
+  _retval = cast(bool)g_file_test(_filename, test);
   return _retval;
 }
 
@@ -3394,7 +3394,7 @@ bool getCharset(out string charset)
 {
   bool _retval;
   char* _charset;
-  _retval = g_get_charset(&_charset);
+  _retval = cast(bool)g_get_charset(&_charset);
   charset = _charset.fromCString(No.Free);
   return _retval;
 }
@@ -3440,7 +3440,7 @@ bool getConsoleCharset(out string charset)
 {
   bool _retval;
   char* _charset;
-  _retval = g_get_console_charset(&_charset);
+  _retval = cast(bool)g_get_console_charset(&_charset);
   charset = _charset.fromCString(No.Free);
   return _retval;
 }
@@ -3548,7 +3548,7 @@ bool getFilenameCharsets(out string[] filenameCharsets)
 {
   bool _retval;
   const(char*)* _filenameCharsets;
-  _retval = g_get_filename_charsets(&_filenameCharsets);
+  _retval = cast(bool)g_get_filename_charsets(&_filenameCharsets);
   uint _lenfilenameCharsets;
   if (_filenameCharsets)
   {
@@ -4193,7 +4193,7 @@ bool hostnameIsAsciiEncoded(string hostname)
 {
   bool _retval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
-  _retval = g_hostname_is_ascii_encoded(_hostname);
+  _retval = cast(bool)g_hostname_is_ascii_encoded(_hostname);
   return _retval;
 }
 
@@ -4211,7 +4211,7 @@ bool hostnameIsIpAddress(string hostname)
 {
   bool _retval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
-  _retval = g_hostname_is_ip_address(_hostname);
+  _retval = cast(bool)g_hostname_is_ip_address(_hostname);
   return _retval;
 }
 
@@ -4232,7 +4232,7 @@ bool hostnameIsNonAscii(string hostname)
 {
   bool _retval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
-  _retval = g_hostname_is_non_ascii(_hostname);
+  _retval = cast(bool)g_hostname_is_non_ascii(_hostname);
   return _retval;
 }
 
@@ -4302,11 +4302,11 @@ string hostnameToUnicode(string hostname)
 */
 uint idleAdd(int priority, glib.types.SourceFunc function_)
 {
-  extern(C) bool _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData)
   {
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    bool _retval = (*_dlg)();
+    gboolean _retval = (*_dlg)();
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
@@ -4328,7 +4328,7 @@ uint idleAdd(int priority, glib.types.SourceFunc function_)
 bool idleRemoveByData(void* data = null)
 {
   bool _retval;
-  _retval = g_idle_remove_by_data(data);
+  _retval = cast(bool)g_idle_remove_by_data(data);
   return _retval;
 }
 
@@ -4365,7 +4365,7 @@ glib.source.Source idleSourceNew()
 bool int64Equal(const(void)* v1, const(void)* v2)
 {
   bool _retval;
-  _retval = g_int64_equal(v1, v2);
+  _retval = cast(bool)g_int64_equal(v1, v2);
   return _retval;
 }
 
@@ -4406,7 +4406,7 @@ uint int64Hash(const(void)* v)
 bool intEqual(const(void)* v1, const(void)* v2)
 {
   bool _retval;
-  _retval = g_int_equal(v1, v2);
+  _retval = cast(bool)g_int_equal(v1, v2);
   return _retval;
 }
 
@@ -4492,11 +4492,11 @@ string internString(string string_ = null)
 */
 uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCondition condition, glib.types.IOFunc func)
 {
-  extern(C) bool _funcCallback(GIOChannel* source, GIOCondition condition, void* data)
+  extern(C) gboolean _funcCallback(GIOChannel* source, GIOCondition condition, void* data)
   {
     auto _dlg = cast(glib.types.IOFunc*)data;
 
-    bool _retval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
+    gboolean _retval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
@@ -4727,7 +4727,7 @@ void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, stri
 bool logGetDebugEnabled()
 {
   bool _retval;
-  _retval = g_log_get_debug_enabled();
+  _retval = cast(bool)g_log_get_debug_enabled();
   return _retval;
 }
 
@@ -4979,7 +4979,7 @@ bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDoma
 {
   bool _retval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
-  _retval = g_log_writer_default_would_drop(logLevel, _logDomain);
+  _retval = cast(bool)g_log_writer_default_would_drop(logLevel, _logDomain);
   return _retval;
 }
 
@@ -5001,7 +5001,7 @@ bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDoma
 bool logWriterIsJournald(int outputFd)
 {
   bool _retval;
-  _retval = g_log_writer_is_journald(outputFd);
+  _retval = cast(bool)g_log_writer_is_journald(outputFd);
   return _retval;
 }
 
@@ -5018,7 +5018,7 @@ bool logWriterIsJournald(int outputFd)
 bool logWriterSupportsColor(int outputFd)
 {
   bool _retval;
-  _retval = g_log_writer_supports_color(outputFd);
+  _retval = cast(bool)g_log_writer_supports_color(outputFd);
   return _retval;
 }
 
@@ -5292,7 +5292,7 @@ string markupEscapeText(string text, ptrdiff_t length)
 bool memIsSystemMalloc()
 {
   bool _retval;
-  _retval = g_mem_is_system_malloc();
+  _retval = cast(bool)g_mem_is_system_malloc();
   return _retval;
 }
 
@@ -5628,7 +5628,7 @@ bool pathIsAbsolute(string fileName)
 {
   bool _retval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
-  _retval = g_path_is_absolute(_fileName);
+  _retval = cast(bool)g_path_is_absolute(_fileName);
   return _retval;
 }
 
@@ -5667,7 +5667,7 @@ bool patternMatchSimple(string pattern, string string_)
   bool _retval;
   const(char)* _pattern = pattern.toCString(No.Alloc);
   const(char)* _string_ = string_.toCString(No.Alloc);
-  _retval = g_pattern_match_simple(_pattern, _string_);
+  _retval = cast(bool)g_pattern_match_simple(_pattern, _string_);
   return _retval;
 }
 
@@ -5753,7 +5753,7 @@ void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMa
 bool pointerBitTrylock(void* address, int lockBit)
 {
   bool _retval;
-  _retval = g_pointer_bit_trylock(address, lockBit);
+  _retval = cast(bool)g_pointer_bit_trylock(address, lockBit);
   return _retval;
 }
 
@@ -6213,7 +6213,7 @@ void* reallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
 bool refCountCompare(ref int rc, int val)
 {
   bool _retval;
-  _retval = g_ref_count_compare(cast(int*)&rc, val);
+  _retval = cast(bool)g_ref_count_compare(cast(int*)&rc, val);
   return _retval;
 }
 
@@ -6231,7 +6231,7 @@ bool refCountCompare(ref int rc, int val)
 bool refCountDec(ref int rc)
 {
   bool _retval;
-  _retval = g_ref_count_dec(cast(int*)&rc);
+  _retval = cast(bool)g_ref_count_dec(cast(int*)&rc);
   return _retval;
 }
 
@@ -6551,7 +6551,7 @@ bool setenv(string variable, string value, bool overwrite)
   bool _retval;
   const(char)* _variable = variable.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = g_setenv(_variable, _value, overwrite);
+  _retval = cast(bool)g_setenv(_variable, _value, overwrite);
   return _retval;
 }
 
@@ -6596,7 +6596,7 @@ bool shellParseArgv(string commandLine, out string[] argvp)
   int _argcp;
   char** _argvp;
   GError *_err;
-  _retval = g_shell_parse_argv(_commandLine, &_argcp, &_argvp, &_err);
+  _retval = cast(bool)g_shell_parse_argv(_commandLine, &_argcp, &_argvp, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   argvp.length = _argcp;
@@ -6890,7 +6890,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
 
   auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
-  _retval = g_spawn_async(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, &_err);
+  _retval = cast(bool)g_spawn_async(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -6944,7 +6944,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
 
   auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
-  _retval = g_spawn_async_with_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, stdinFd, stdoutFd, stderrFd, &_err);
+  _retval = cast(bool)g_spawn_async_with_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, stdinFd, stdoutFd, stderrFd, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -6998,7 +6998,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
 
   auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
-  _retval = g_spawn_async_with_pipes(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cast(int*)&standardInput, cast(int*)&standardOutput, cast(int*)&standardError, &_err);
+  _retval = cast(bool)g_spawn_async_with_pipes(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cast(int*)&standardInput, cast(int*)&standardOutput, cast(int*)&standardError, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -7260,7 +7260,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
 
   auto _targetFds = cast(const(int)*)targetFds.ptr;
   GError *_err;
-  _retval = g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
+  _retval = cast(bool)g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -7288,7 +7288,7 @@ bool spawnCheckExitStatus(int waitStatus)
 {
   bool _retval;
   GError *_err;
-  _retval = g_spawn_check_exit_status(waitStatus, &_err);
+  _retval = cast(bool)g_spawn_check_exit_status(waitStatus, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -7345,7 +7345,7 @@ bool spawnCheckWaitStatus(int waitStatus)
 {
   bool _retval;
   GError *_err;
-  _retval = g_spawn_check_wait_status(waitStatus, &_err);
+  _retval = cast(bool)g_spawn_check_wait_status(waitStatus, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -7387,7 +7387,7 @@ bool spawnCommandLineAsync(string commandLine)
   bool _retval;
   const(char)* _commandLine = commandLine.toCString(No.Alloc);
   GError *_err;
-  _retval = g_spawn_command_line_async(_commandLine, &_err);
+  _retval = cast(bool)g_spawn_command_line_async(_commandLine, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -7439,7 +7439,7 @@ bool spawnCommandLineSync(string commandLine, out string standardOutput, out str
   char* _standardOutput;
   char* _standardError;
   GError *_err;
-  _retval = g_spawn_command_line_sync(_commandLine, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
+  _retval = cast(bool)g_spawn_command_line_sync(_commandLine, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   standardOutput = _standardOutput.fromCString(Yes.Free);
@@ -7530,7 +7530,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
   char* _standardOutput;
   char* _standardError;
   GError *_err;
-  _retval = g_spawn_sync(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
+  _retval = cast(bool)g_spawn_sync(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   standardOutput = _standardOutput.fromCString(Yes.Free);
@@ -7615,7 +7615,7 @@ string stpcpy(string dest, string src)
 bool strEqual(const(void)* v1, const(void)* v2)
 {
   bool _retval;
-  _retval = g_str_equal(v1, v2);
+  _retval = cast(bool)g_str_equal(v1, v2);
   return _retval;
 }
 
@@ -7632,7 +7632,7 @@ bool strHasPrefix(string str, string prefix)
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
   const(char)* _prefix = prefix.toCString(No.Alloc);
-  _retval = g_str_has_prefix(_str, _prefix);
+  _retval = cast(bool)g_str_has_prefix(_str, _prefix);
   return _retval;
 }
 
@@ -7649,7 +7649,7 @@ bool strHasSuffix(string str, string suffix)
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
   const(char)* _suffix = suffix.toCString(No.Alloc);
-  _retval = g_str_has_suffix(_str, _suffix);
+  _retval = cast(bool)g_str_has_suffix(_str, _suffix);
   return _retval;
 }
 
@@ -7692,7 +7692,7 @@ bool strIsAscii(string str)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = g_str_is_ascii(_str);
+  _retval = cast(bool)g_str_is_ascii(_str);
   return _retval;
 }
 
@@ -7731,7 +7731,7 @@ bool strMatchString(string searchTerm, string potentialHit, bool acceptAlternate
   bool _retval;
   const(char)* _searchTerm = searchTerm.toCString(No.Alloc);
   const(char)* _potentialHit = potentialHit.toCString(No.Alloc);
-  _retval = g_str_match_string(_searchTerm, _potentialHit, acceptAlternates);
+  _retval = cast(bool)g_str_match_string(_searchTerm, _potentialHit, acceptAlternates);
   return _retval;
 }
 
@@ -8599,7 +8599,7 @@ bool strvContains(string[] strv, string str)
   const(char*)* _strv = _tmpstrv.ptr;
 
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = g_strv_contains(_strv, _str);
+  _retval = cast(bool)g_strv_contains(_strv, _str);
   return _retval;
 }
 
@@ -8637,7 +8637,7 @@ bool strvEqual(string[] strv1, string[] strv2)
     _tmpstrv2 ~= s.toCString(No.Alloc);
   _tmpstrv2 ~= null;
   const(char*)* _strv2 = _tmpstrv2.ptr;
-  _retval = g_strv_equal(_strv1, _strv2);
+  _retval = cast(bool)g_strv_equal(_strv1, _strv2);
   return _retval;
 }
 
@@ -8863,7 +8863,7 @@ void testFail()
 bool testFailed()
 {
   bool _retval;
-  _retval = g_test_failed();
+  _retval = cast(bool)g_test_failed();
   return _retval;
 }
 
@@ -9122,7 +9122,7 @@ void testSkip(string msg = null)
 bool testSubprocess()
 {
   bool _retval;
-  _retval = g_test_subprocess();
+  _retval = cast(bool)g_test_subprocess();
   return _retval;
 }
 
@@ -9243,7 +9243,7 @@ void testTrapAssertions(string domain, string file, int line, string func, ulong
 bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags)
 {
   bool _retval;
-  _retval = g_test_trap_fork(usecTimeout, testTrapFlags);
+  _retval = cast(bool)g_test_trap_fork(usecTimeout, testTrapFlags);
   return _retval;
 }
 
@@ -9254,7 +9254,7 @@ bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags)
 bool testTrapHasPassed()
 {
   bool _retval;
-  _retval = g_test_trap_has_passed();
+  _retval = cast(bool)g_test_trap_has_passed();
   return _retval;
 }
 
@@ -9265,7 +9265,7 @@ bool testTrapHasPassed()
 bool testTrapReachedTimeout()
 {
   bool _retval;
-  _retval = g_test_trap_reached_timeout();
+  _retval = cast(bool)g_test_trap_reached_timeout();
   return _retval;
 }
 
@@ -9433,11 +9433,11 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
 */
 uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
 {
-  extern(C) bool _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData)
   {
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    bool _retval = (*_dlg)();
+    gboolean _retval = (*_dlg)();
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
@@ -9499,11 +9499,11 @@ uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
 */
 uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc function_)
 {
-  extern(C) bool _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData)
   {
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    bool _retval = (*_dlg)();
+    gboolean _retval = (*_dlg)();
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
@@ -9790,7 +9790,7 @@ int unicharCombiningClass(dchar uc)
 bool unicharCompose(dchar a, dchar b, out dchar ch)
 {
   bool _retval;
-  _retval = g_unichar_compose(a, b, cast(dchar*)&ch);
+  _retval = cast(bool)g_unichar_compose(a, b, cast(dchar*)&ch);
   return _retval;
 }
 
@@ -9828,7 +9828,7 @@ bool unicharCompose(dchar a, dchar b, out dchar ch)
 bool unicharDecompose(dchar ch, out dchar a, out dchar b)
 {
   bool _retval;
-  _retval = g_unichar_decompose(ch, cast(dchar*)&a, cast(dchar*)&b);
+  _retval = cast(bool)g_unichar_decompose(ch, cast(dchar*)&a, cast(dchar*)&b);
   return _retval;
 }
 
@@ -9902,7 +9902,7 @@ size_t unicharFullyDecompose(dchar ch, bool compat, out dchar result, size_t res
 bool unicharGetMirrorChar(dchar ch, out dchar mirroredCh)
 {
   bool _retval;
-  _retval = g_unichar_get_mirror_char(ch, cast(dchar*)&mirroredCh);
+  _retval = cast(bool)g_unichar_get_mirror_char(ch, cast(dchar*)&mirroredCh);
   return _retval;
 }
 
@@ -9939,7 +9939,7 @@ glib.types.UnicodeScript unicharGetScript(dchar ch)
 bool unicharIsalnum(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isalnum(c);
+  _retval = cast(bool)g_unichar_isalnum(c);
   return _retval;
 }
 
@@ -9955,7 +9955,7 @@ bool unicharIsalnum(dchar c)
 bool unicharIsalpha(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isalpha(c);
+  _retval = cast(bool)g_unichar_isalpha(c);
   return _retval;
 }
 
@@ -9971,7 +9971,7 @@ bool unicharIsalpha(dchar c)
 bool unicharIscntrl(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_iscntrl(c);
+  _retval = cast(bool)g_unichar_iscntrl(c);
   return _retval;
 }
 
@@ -9986,7 +9986,7 @@ bool unicharIscntrl(dchar c)
 bool unicharIsdefined(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isdefined(c);
+  _retval = cast(bool)g_unichar_isdefined(c);
   return _retval;
 }
 
@@ -10002,7 +10002,7 @@ bool unicharIsdefined(dchar c)
 bool unicharIsdigit(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isdigit(c);
+  _retval = cast(bool)g_unichar_isdigit(c);
   return _retval;
 }
 
@@ -10020,7 +10020,7 @@ bool unicharIsdigit(dchar c)
 bool unicharIsgraph(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isgraph(c);
+  _retval = cast(bool)g_unichar_isgraph(c);
   return _retval;
 }
 
@@ -10036,7 +10036,7 @@ bool unicharIsgraph(dchar c)
 bool unicharIslower(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_islower(c);
+  _retval = cast(bool)g_unichar_islower(c);
   return _retval;
 }
 
@@ -10058,7 +10058,7 @@ bool unicharIslower(dchar c)
 bool unicharIsmark(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_ismark(c);
+  _retval = cast(bool)g_unichar_ismark(c);
   return _retval;
 }
 
@@ -10075,7 +10075,7 @@ bool unicharIsmark(dchar c)
 bool unicharIsprint(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isprint(c);
+  _retval = cast(bool)g_unichar_isprint(c);
   return _retval;
 }
 
@@ -10091,7 +10091,7 @@ bool unicharIsprint(dchar c)
 bool unicharIspunct(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_ispunct(c);
+  _retval = cast(bool)g_unichar_ispunct(c);
   return _retval;
 }
 
@@ -10111,7 +10111,7 @@ bool unicharIspunct(dchar c)
 bool unicharIsspace(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isspace(c);
+  _retval = cast(bool)g_unichar_isspace(c);
   return _retval;
 }
 
@@ -10130,7 +10130,7 @@ bool unicharIsspace(dchar c)
 bool unicharIstitle(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_istitle(c);
+  _retval = cast(bool)g_unichar_istitle(c);
   return _retval;
 }
 
@@ -10144,7 +10144,7 @@ bool unicharIstitle(dchar c)
 bool unicharIsupper(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isupper(c);
+  _retval = cast(bool)g_unichar_isupper(c);
   return _retval;
 }
 
@@ -10159,7 +10159,7 @@ bool unicharIsupper(dchar c)
 bool unicharIswide(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_iswide(c);
+  _retval = cast(bool)g_unichar_iswide(c);
   return _retval;
 }
 
@@ -10182,7 +10182,7 @@ bool unicharIswide(dchar c)
 bool unicharIswideCjk(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_iswide_cjk(c);
+  _retval = cast(bool)g_unichar_iswide_cjk(c);
   return _retval;
 }
 
@@ -10196,7 +10196,7 @@ bool unicharIswideCjk(dchar c)
 bool unicharIsxdigit(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_isxdigit(c);
+  _retval = cast(bool)g_unichar_isxdigit(c);
   return _retval;
 }
 
@@ -10218,7 +10218,7 @@ bool unicharIsxdigit(dchar c)
 bool unicharIszerowidth(dchar c)
 {
   bool _retval;
-  _retval = g_unichar_iszerowidth(c);
+  _retval = cast(bool)g_unichar_iszerowidth(c);
   return _retval;
 }
 
@@ -10297,7 +10297,7 @@ glib.types.UnicodeType unicharType(dchar c)
 bool unicharValidate(dchar ch)
 {
   bool _retval;
-  _retval = g_unichar_validate(ch);
+  _retval = cast(bool)g_unichar_validate(ch);
   return _retval;
 }
 
@@ -10386,11 +10386,11 @@ glib.types.Quark unixErrorQuark()
 */
 uint unixFdAddFull(int priority, int fd, glib.types.IOCondition condition, glib.types.UnixFDSourceFunc function_)
 {
-  extern(C) bool _function_Callback(int fd, GIOCondition condition, void* userData)
+  extern(C) gboolean _function_Callback(int fd, GIOCondition condition, void* userData)
   {
     auto _dlg = cast(glib.types.UnixFDSourceFunc*)userData;
 
-    bool _retval = (*_dlg)(fd, condition);
+    gboolean _retval = (*_dlg)(fd, condition);
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
@@ -10486,7 +10486,7 @@ bool unixOpenPipe(int[] fds, int flags)
   assert(!fds || fds.length == 2);
   auto _fds = cast(int*)fds.ptr;
   GError *_err;
-  _retval = g_unix_open_pipe(_fds, flags, &_err);
+  _retval = cast(bool)g_unix_open_pipe(_fds, flags, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -10507,7 +10507,7 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
 {
   bool _retval;
   GError *_err;
-  _retval = g_unix_set_fd_nonblocking(fd, nonblock, &_err);
+  _retval = cast(bool)g_unix_set_fd_nonblocking(fd, nonblock, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -10527,11 +10527,11 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
 */
 uint unixSignalAdd(int priority, int signum, glib.types.SourceFunc handler)
 {
-  extern(C) bool _handlerCallback(void* userData)
+  extern(C) gboolean _handlerCallback(void* userData)
   {
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    bool _retval = (*_dlg)();
+    gboolean _retval = (*_dlg)();
     return _retval;
   }
   auto _handlerCB = handler ? &_handlerCallback : null;
@@ -11430,7 +11430,7 @@ bool utf8Validate(ubyte[] str, out string end)
 
   auto _str = cast(const(ubyte)*)str.ptr;
   char* _end;
-  _retval = g_utf8_validate(_str, _maxLen, &_end);
+  _retval = cast(bool)g_utf8_validate(_str, _maxLen, &_end);
   end = _end.fromCString(No.Free);
   return _retval;
 }
@@ -11455,7 +11455,7 @@ bool utf8ValidateLen(ubyte[] str, out string end)
 
   auto _str = cast(const(ubyte)*)str.ptr;
   char* _end;
-  _retval = g_utf8_validate_len(_str, _maxLen, &_end);
+  _retval = cast(bool)g_utf8_validate_len(_str, _maxLen, &_end);
   end = _end.fromCString(No.Free);
   return _retval;
 }
@@ -11480,7 +11480,7 @@ bool uuidStringIsValid(string str)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = g_uuid_string_is_valid(_str);
+  _retval = cast(bool)g_uuid_string_is_valid(_str);
   return _retval;
 }
 

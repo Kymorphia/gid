@@ -83,7 +83,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
     bool _retval;
     char* _outName;
     GVariant* _value;
-    _retval = g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)this._cPtr, &_outName, &_value);
+    _retval = cast(bool)g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)this._cPtr, &_outName, &_value);
     outName = _outName.fromCString(No.Free);
     value = new glib.variant.Variant(cast(void*)_value, Yes.Take);
     return _retval;
@@ -118,7 +118,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   bool next()
   {
     bool _retval;
-    _retval = g_menu_attribute_iter_next(cast(GMenuAttributeIter*)this._cPtr);
+    _retval = cast(bool)g_menu_attribute_iter_next(cast(GMenuAttributeIter*)this._cPtr);
     return _retval;
   }
 }

@@ -22,7 +22,7 @@ template WritableFileT()
 
     auto _data = cast(const(ubyte)*)data.ptr;
     GError *_err;
-    _retval = garrow_writable_file_write_at(cast(GArrowWritableFile*)this._cPtr, position, _data, _nBytes, &_err);
+    _retval = cast(bool)garrow_writable_file_write_at(cast(GArrowWritableFile*)this._cPtr, position, _data, _nBytes, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -420,12 +420,12 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   */
   uint addFilter(gio.types.DBusMessageFilterFunction filterFunction)
   {
-    extern(C) GDBusMessage* _filterFunctionCallback(GDBusConnection* connection, GDBusMessage* message, bool incoming, void* userData)
+    extern(C) GDBusMessage* _filterFunctionCallback(GDBusConnection* connection, GDBusMessage* message, gboolean incoming, void* userData)
     {
       gio.dbus_message.DBusMessage _dretval;
       auto _dlg = cast(gio.types.DBusMessageFilterFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(void*)message, Yes.Take), incoming);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(void*)message, Yes.Take), cast(bool)incoming);
       GDBusMessage* _retval = cast(GDBusMessage*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
@@ -804,7 +804,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   {
     bool _retval;
     GError *_err;
-    _retval = g_dbus_connection_close_finish(cast(GDBusConnection*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dbus_connection_close_finish(cast(GDBusConnection*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -825,7 +825,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   {
     bool _retval;
     GError *_err;
-    _retval = g_dbus_connection_close_sync(cast(GDBusConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dbus_connection_close_sync(cast(GDBusConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -859,7 +859,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     const(char)* _signalName = signalName.toCString(No.Alloc);
     GError *_err;
-    _retval = g_dbus_connection_emit_signal(cast(GDBusConnection*)this._cPtr, _destinationBusName, _objectPath, _interfaceName, _signalName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dbus_connection_emit_signal(cast(GDBusConnection*)this._cPtr, _destinationBusName, _objectPath, _interfaceName, _signalName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -989,7 +989,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   {
     bool _retval;
     GError *_err;
-    _retval = g_dbus_connection_flush_finish(cast(GDBusConnection*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dbus_connection_flush_finish(cast(GDBusConnection*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1010,7 +1010,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   {
     bool _retval;
     GError *_err;
-    _retval = g_dbus_connection_flush_sync(cast(GDBusConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_dbus_connection_flush_sync(cast(GDBusConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1038,7 +1038,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   bool getExitOnClose()
   {
     bool _retval;
-    _retval = g_dbus_connection_get_exit_on_close(cast(GDBusConnection*)this._cPtr);
+    _retval = cast(bool)g_dbus_connection_get_exit_on_close(cast(GDBusConnection*)this._cPtr);
     return _retval;
   }
 
@@ -1144,7 +1144,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   bool isClosed()
   {
     bool _retval;
-    _retval = g_dbus_connection_is_closed(cast(GDBusConnection*)this._cPtr);
+    _retval = cast(bool)g_dbus_connection_is_closed(cast(GDBusConnection*)this._cPtr);
     return _retval;
   }
 
@@ -1294,7 +1294,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   {
     bool _retval;
     GError *_err;
-    _retval = g_dbus_connection_send_message(cast(GDBusConnection*)this._cPtr, message ? cast(GDBusMessage*)message._cPtr(No.Dup) : null, flags, cast(uint*)&outSerial, &_err);
+    _retval = cast(bool)g_dbus_connection_send_message(cast(GDBusConnection*)this._cPtr, message ? cast(GDBusMessage*)message._cPtr(No.Dup) : null, flags, cast(uint*)&outSerial, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1632,7 +1632,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   bool unregisterObject(uint registrationId)
   {
     bool _retval;
-    _retval = g_dbus_connection_unregister_object(cast(GDBusConnection*)this._cPtr, registrationId);
+    _retval = cast(bool)g_dbus_connection_unregister_object(cast(GDBusConnection*)this._cPtr, registrationId);
     return _retval;
   }
 
@@ -1647,7 +1647,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   bool unregisterSubtree(uint registrationId)
   {
     bool _retval;
-    _retval = g_dbus_connection_unregister_subtree(cast(GDBusConnection*)this._cPtr, registrationId);
+    _retval = cast(bool)g_dbus_connection_unregister_subtree(cast(GDBusConnection*)this._cPtr, registrationId);
     return _retval;
   }
 

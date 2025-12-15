@@ -173,7 +173,7 @@ class Multipart : gobject.boxed.Boxed
     bool _retval;
     SoupMessageHeaders* _headers;
     GBytes* _body_;
-    _retval = soup_multipart_get_part(cast(SoupMultipart*)this._cPtr, part, &_headers, &_body_);
+    _retval = cast(bool)soup_multipart_get_part(cast(SoupMultipart*)this._cPtr, part, &_headers, &_body_);
     headers = new soup.message_headers.MessageHeaders(cast(void*)_headers, No.Take);
     body_ = new glib.bytes.Bytes(cast(void*)_body_, No.Take);
     return _retval;

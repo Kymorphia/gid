@@ -503,7 +503,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getIndicatorActivatable()
   {
     bool _retval;
-    _retval = adw_tab_page_get_indicator_activatable(cast(AdwTabPage*)this._cPtr);
+    _retval = cast(bool)adw_tab_page_get_indicator_activatable(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -550,7 +550,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getLiveThumbnail()
   {
     bool _retval;
-    _retval = adw_tab_page_get_live_thumbnail(cast(AdwTabPage*)this._cPtr);
+    _retval = cast(bool)adw_tab_page_get_live_thumbnail(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -561,7 +561,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getLoading()
   {
     bool _retval;
-    _retval = adw_tab_page_get_loading(cast(AdwTabPage*)this._cPtr);
+    _retval = cast(bool)adw_tab_page_get_loading(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -572,7 +572,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = adw_tab_page_get_needs_attention(cast(AdwTabPage*)this._cPtr);
+    _retval = cast(bool)adw_tab_page_get_needs_attention(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -599,7 +599,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getPinned()
   {
     bool _retval;
-    _retval = adw_tab_page_get_pinned(cast(AdwTabPage*)this._cPtr);
+    _retval = cast(bool)adw_tab_page_get_pinned(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -610,7 +610,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getSelected()
   {
     bool _retval;
-    _retval = adw_tab_page_get_selected(cast(AdwTabPage*)this._cPtr);
+    _retval = cast(bool)adw_tab_page_get_selected(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 

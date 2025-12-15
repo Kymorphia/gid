@@ -84,6 +84,7 @@ version(Windows)
 else // Linux or OSX
 {
   import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
+  import core.stdc.limits : PATH_MAX;
 
   void*[] gidResolveLibs(immutable(string[]) libs)
   {
@@ -94,7 +95,27 @@ else // Linux or OSX
       version (OSX) lib = lib.buildPath(basePath, lib);
 
       if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
+      {
+        debug
+        {
+          if (gidLoaderDebug)
+          {
+            char[PATH_MAX + 1] path;
+
+            version(linux)
+            {
+              import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
+
+              if (dlinfo(handle, RTLD_DI_ORIGIN, path.ptr) == 0)
+                stderr.writeln("Found ", lib, " at ", path.fromStringz.idup);
+              else
+                stderr.writeln("dlinfo() returned error: ", dlerror().fromStringz.idup);
+            }
+          }
+        }
+
         libHandles ~= handle;
+      }
       else
       {
         debug

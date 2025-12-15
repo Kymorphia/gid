@@ -1199,7 +1199,7 @@ class Message : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_message_has_name(cast(GstMessage*)this._cPtr, _name);
+    _retval = cast(bool)gst_message_has_name(cast(GstMessage*)this._cPtr, _name);
     return _retval;
   }
 
@@ -1275,8 +1275,10 @@ class Message : gobject.boxed.Boxed
   void parseClockProvide(out gst.clock.Clock clock, out bool ready)
   {
     GstClock* _clock;
-    gst_message_parse_clock_provide(cast(GstMessage*)this._cPtr, &_clock, cast(bool*)&ready);
+    gboolean _ready;
+    gst_message_parse_clock_provide(cast(GstMessage*)this._cPtr, &_clock, &_ready);
     clock = new gst.clock.Clock(cast(void*)_clock, No.Take);
+    ready = cast(bool)_ready;
   }
 
   /**
@@ -1290,7 +1292,7 @@ class Message : gobject.boxed.Boxed
   {
     bool _retval;
     char* _contextType;
-    _retval = gst_message_parse_context_type(cast(GstMessage*)this._cPtr, &_contextType);
+    _retval = cast(bool)gst_message_parse_context_type(cast(GstMessage*)this._cPtr, &_contextType);
     contextType = _contextType.fromCString(No.Free);
     return _retval;
   }
@@ -1416,7 +1418,7 @@ class Message : gobject.boxed.Boxed
   bool parseGroupId(out uint groupId)
   {
     bool _retval;
-    _retval = gst_message_parse_group_id(cast(GstMessage*)this._cPtr, cast(uint*)&groupId);
+    _retval = cast(bool)gst_message_parse_group_id(cast(GstMessage*)this._cPtr, cast(uint*)&groupId);
     return _retval;
   }
 
@@ -1563,7 +1565,9 @@ class Message : gobject.boxed.Boxed
   */
   void parseQos(out bool live, out ulong runningTime, out ulong streamTime, out ulong timestamp, out ulong duration)
   {
-    gst_message_parse_qos(cast(GstMessage*)this._cPtr, cast(bool*)&live, cast(ulong*)&runningTime, cast(ulong*)&streamTime, cast(ulong*)&timestamp, cast(ulong*)&duration);
+    gboolean _live;
+    gst_message_parse_qos(cast(GstMessage*)this._cPtr, &_live, cast(ulong*)&runningTime, cast(ulong*)&streamTime, cast(ulong*)&timestamp, cast(ulong*)&duration);
+    live = cast(bool)_live;
   }
 
   /**
@@ -1739,7 +1743,13 @@ class Message : gobject.boxed.Boxed
   */
   void parseStepDone(out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate, out ulong duration, out bool eos)
   {
-    gst_message_parse_step_done(cast(GstMessage*)this._cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate, cast(ulong*)&duration, cast(bool*)&eos);
+    gboolean _flush;
+    gboolean _intermediate;
+    gboolean _eos;
+    gst_message_parse_step_done(cast(GstMessage*)this._cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, &_flush, &_intermediate, cast(ulong*)&duration, &_eos);
+    flush = cast(bool)_flush;
+    intermediate = cast(bool)_intermediate;
+    eos = cast(bool)_eos;
   }
 
   /**
@@ -1757,7 +1767,13 @@ class Message : gobject.boxed.Boxed
   */
   void parseStepStart(out bool active, out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate)
   {
-    gst_message_parse_step_start(cast(GstMessage*)this._cPtr, cast(bool*)&active, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate);
+    gboolean _active;
+    gboolean _flush;
+    gboolean _intermediate;
+    gst_message_parse_step_start(cast(GstMessage*)this._cPtr, &_active, &format, cast(ulong*)&amount, cast(double*)&rate, &_flush, &_intermediate);
+    active = cast(bool)_active;
+    flush = cast(bool)_flush;
+    intermediate = cast(bool)_intermediate;
   }
 
   /**
@@ -1821,8 +1837,10 @@ class Message : gobject.boxed.Boxed
   void parseStructureChange(out gst.types.StructureChangeType type, out gst.element.Element owner, out bool busy)
   {
     GstElement* _owner;
-    gst_message_parse_structure_change(cast(GstMessage*)this._cPtr, &type, &_owner, cast(bool*)&busy);
+    gboolean _busy;
+    gst_message_parse_structure_change(cast(GstMessage*)this._cPtr, &type, &_owner, &_busy);
     owner = new gst.element.Element(cast(void*)_owner, No.Take);
+    busy = cast(bool)_busy;
   }
 
   /**
@@ -1873,8 +1891,10 @@ class Message : gobject.boxed.Boxed
   void parseToc(out gst.toc.Toc toc, out bool updated)
   {
     GstToc* _toc;
-    gst_message_parse_toc(cast(GstMessage*)this._cPtr, &_toc, cast(bool*)&updated);
+    gboolean _updated;
+    gst_message_parse_toc(cast(GstMessage*)this._cPtr, &_toc, &_updated);
     toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
+    updated = cast(bool)_updated;
   }
 
   /**

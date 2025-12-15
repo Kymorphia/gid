@@ -82,7 +82,7 @@ class Euler : gobject.boxed.Boxed
   bool equal(graphene.euler.Euler b)
   {
     bool _retval;
-    _retval = graphene_euler_equal(cast(const(graphene_euler_t)*)this._cPtr, b ? cast(const(graphene_euler_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_euler_equal(cast(const(graphene_euler_t)*)this._cPtr, b ? cast(const(graphene_euler_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -64,7 +64,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   bool equal(arrow.sort_options.SortOptions otherOptions)
   {
     bool _retval;
-    _retval = garrow_sort_options_equal(cast(GArrowSortOptions*)this._cPtr, otherOptions ? cast(GArrowSortOptions*)otherOptions._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_sort_options_equal(cast(GArrowSortOptions*)this._cPtr, otherOptions ? cast(GArrowSortOptions*)otherOptions._cPtr(No.Dup) : null);
     return _retval;
   }
 

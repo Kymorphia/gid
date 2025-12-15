@@ -92,7 +92,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   */
   @property bool V()
   {
-    return (cast(GstMIKEYMessage*)this._cPtr).V;
+    return cast(bool)(cast(GstMIKEYMessage*)this._cPtr).V;
   }
 
   /**
@@ -253,7 +253,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool addCsSrtp(ubyte policy, uint ssrc, uint roc)
   {
     bool _retval;
-    _retval = gst_mikey_message_add_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, policy, ssrc, roc);
+    _retval = cast(bool)gst_mikey_message_add_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, policy, ssrc, roc);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool addPayload(gstsdp.mikeypayload.MIKEYPayload payload)
   {
     bool _retval;
-    _retval = gst_mikey_message_add_payload(cast(GstMIKEYMessage*)this._cPtr, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_mikey_message_add_payload(cast(GstMIKEYMessage*)this._cPtr, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       _dataLen = cast(ushort)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_mikey_message_add_pke(cast(GstMIKEYMessage*)this._cPtr, C, _dataLen, _data);
+    _retval = cast(bool)gst_mikey_message_add_pke(cast(GstMIKEYMessage*)this._cPtr, C, _dataLen, _data);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       _len = cast(ubyte)rand.length;
 
     auto _rand = cast(const(ubyte)*)rand.ptr;
-    _retval = gst_mikey_message_add_rand(cast(GstMIKEYMessage*)this._cPtr, _len, _rand);
+    _retval = cast(bool)gst_mikey_message_add_rand(cast(GstMIKEYMessage*)this._cPtr, _len, _rand);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool addRandLen(ubyte len)
   {
     bool _retval;
-    _retval = gst_mikey_message_add_rand_len(cast(GstMIKEYMessage*)this._cPtr, len);
+    _retval = cast(bool)gst_mikey_message_add_rand_len(cast(GstMIKEYMessage*)this._cPtr, len);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool addTNowNtpUtc()
   {
     bool _retval;
-    _retval = gst_mikey_message_add_t_now_ntp_utc(cast(GstMIKEYMessage*)this._cPtr);
+    _retval = cast(bool)gst_mikey_message_add_t_now_ntp_utc(cast(GstMIKEYMessage*)this._cPtr);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool insertCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map)
   {
     bool _retval;
-    _retval = gst_mikey_message_insert_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
+    _retval = cast(bool)gst_mikey_message_insert_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool insertPayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
   {
     bool _retval;
-    _retval = gst_mikey_message_insert_payload(cast(GstMIKEYMessage*)this._cPtr, idx, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_mikey_message_insert_payload(cast(GstMIKEYMessage*)this._cPtr, idx, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -459,7 +459,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool removeCsSrtp(int idx)
   {
     bool _retval;
-    _retval = gst_mikey_message_remove_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx);
+    _retval = cast(bool)gst_mikey_message_remove_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool removePayload(uint idx)
   {
     bool _retval;
-    _retval = gst_mikey_message_remove_payload(cast(GstMIKEYMessage*)this._cPtr, idx);
+    _retval = cast(bool)gst_mikey_message_remove_payload(cast(GstMIKEYMessage*)this._cPtr, idx);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool replaceCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map)
   {
     bool _retval;
-    _retval = gst_mikey_message_replace_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
+    _retval = cast(bool)gst_mikey_message_replace_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool replacePayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
   {
     bool _retval;
-    _retval = gst_mikey_message_replace_payload(cast(GstMIKEYMessage*)this._cPtr, idx, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_mikey_message_replace_payload(cast(GstMIKEYMessage*)this._cPtr, idx, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -522,7 +522,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool setInfo(ubyte version_, gstsdp.types.MIKEYType type, bool V, gstsdp.types.MIKEYPRFFunc prfFunc, uint CSBId, gstsdp.types.MIKEYMapType mapType)
   {
     bool _retval;
-    _retval = gst_mikey_message_set_info(cast(GstMIKEYMessage*)this._cPtr, version_, type, V, prfFunc, CSBId, mapType);
+    _retval = cast(bool)gst_mikey_message_set_info(cast(GstMIKEYMessage*)this._cPtr, version_, type, V, prfFunc, CSBId, mapType);
     return _retval;
   }
 
@@ -549,7 +549,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool toCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_mikey_message_to_caps(cast(const(GstMIKEYMessage)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_mikey_message_to_caps(cast(const(GstMIKEYMessage)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 }

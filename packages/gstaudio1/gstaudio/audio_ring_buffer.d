@@ -82,7 +82,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   static bool parseCaps(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec, gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_parse_caps(spec ? cast(GstAudioRingBufferSpec*)spec._cPtr : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_audio_ring_buffer_parse_caps(spec ? cast(GstAudioRingBufferSpec*)spec._cPtr : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool acquire(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec)
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_acquire(cast(GstAudioRingBuffer*)this._cPtr, spec ? cast(GstAudioRingBufferSpec*)spec._cPtr : null);
+    _retval = cast(bool)gst_audio_ring_buffer_acquire(cast(GstAudioRingBuffer*)this._cPtr, spec ? cast(GstAudioRingBufferSpec*)spec._cPtr : null);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool activate(bool active)
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_activate(cast(GstAudioRingBuffer*)this._cPtr, active);
+    _retval = cast(bool)gst_audio_ring_buffer_activate(cast(GstAudioRingBuffer*)this._cPtr, active);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool closeDevice()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_close_device(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_close_device(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool convert(gst.types.Format srcFmt, long srcVal, gst.types.Format destFmt, out long destVal)
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_convert(cast(GstAudioRingBuffer*)this._cPtr, srcFmt, srcVal, destFmt, cast(long*)&destVal);
+    _retval = cast(bool)gst_audio_ring_buffer_convert(cast(GstAudioRingBuffer*)this._cPtr, srcFmt, srcVal, destFmt, cast(long*)&destVal);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool deviceIsOpen()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_device_is_open(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_device_is_open(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool isAcquired()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_is_acquired(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_is_acquired(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool isActive()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_is_active(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_is_active(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool isFlushing()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_is_flushing(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_is_flushing(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool openDevice()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_open_device(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_open_device(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool pause()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_pause(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_pause(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
     bool _retval;
     int _len;
     ubyte* _readptr;
-    _retval = gst_audio_ring_buffer_prepare_read(cast(GstAudioRingBuffer*)this._cPtr, cast(int*)&segment, &_readptr, &_len);
+    _retval = cast(bool)gst_audio_ring_buffer_prepare_read(cast(GstAudioRingBuffer*)this._cPtr, cast(int*)&segment, &_readptr, &_len);
     readptr.length = _len;
     readptr[0 .. $] = (cast(ubyte*)_readptr)[0 .. _len];
     gFree(cast(void*)_readptr);
@@ -413,7 +413,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool release()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_release(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_release(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool start()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_start(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_start(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -528,7 +528,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   bool stop()
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_stop(cast(GstAudioRingBuffer*)this._cPtr);
+    _retval = cast(bool)gst_audio_ring_buffer_stop(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 }

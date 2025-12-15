@@ -35,38 +35,38 @@ __gshared extern(C)
   GstClockTime function(GstAudioBaseSink* sink) c_gst_audio_base_sink_get_alignment_threshold; ///
   GstClockTime function(GstAudioBaseSink* sink) c_gst_audio_base_sink_get_discont_wait; ///
   long function(GstAudioBaseSink* sink) c_gst_audio_base_sink_get_drift_tolerance; ///
-  bool function(GstAudioBaseSink* sink) c_gst_audio_base_sink_get_provide_clock; ///
+  gboolean function(GstAudioBaseSink* sink) c_gst_audio_base_sink_get_provide_clock; ///
   GstAudioBaseSinkSlaveMethod function(GstAudioBaseSink* sink) c_gst_audio_base_sink_get_slave_method; ///
   void function(GstAudioBaseSink* sink) c_gst_audio_base_sink_report_device_failure; ///
   void function(GstAudioBaseSink* sink, GstClockTime alignmentThreshold) c_gst_audio_base_sink_set_alignment_threshold; ///
   void function(GstAudioBaseSink* sink, GstAudioBaseSinkCustomSlavingCallback callback, void* userData, GDestroyNotify notify) c_gst_audio_base_sink_set_custom_slaving_callback; ///
   void function(GstAudioBaseSink* sink, GstClockTime discontWait) c_gst_audio_base_sink_set_discont_wait; ///
   void function(GstAudioBaseSink* sink, long driftTolerance) c_gst_audio_base_sink_set_drift_tolerance; ///
-  void function(GstAudioBaseSink* sink, bool provide) c_gst_audio_base_sink_set_provide_clock; ///
+  void function(GstAudioBaseSink* sink, gboolean provide) c_gst_audio_base_sink_set_provide_clock; ///
   void function(GstAudioBaseSink* sink, GstAudioBaseSinkSlaveMethod method) c_gst_audio_base_sink_set_slave_method; ///
 
   // AudioBaseSrc
   GType function() c_gst_audio_base_src_get_type; ///
   GstAudioRingBuffer* function(GstAudioBaseSrc* src) c_gst_audio_base_src_create_ringbuffer; ///
-  bool function(GstAudioBaseSrc* src) c_gst_audio_base_src_get_provide_clock; ///
+  gboolean function(GstAudioBaseSrc* src) c_gst_audio_base_src_get_provide_clock; ///
   GstAudioBaseSrcSlaveMethod function(GstAudioBaseSrc* src) c_gst_audio_base_src_get_slave_method; ///
-  void function(GstAudioBaseSrc* src, bool provide) c_gst_audio_base_src_set_provide_clock; ///
+  void function(GstAudioBaseSrc* src, gboolean provide) c_gst_audio_base_src_set_provide_clock; ///
   void function(GstAudioBaseSrc* src, GstAudioBaseSrcSlaveMethod method) c_gst_audio_base_src_set_slave_method; ///
 
   // AudioBuffer
   void function(GstAudioBuffer* buffer) c_gst_audio_buffer_unmap; ///
   GstBuffer* function(GstBuffer* buffer, const(GstSegment)* segment, int rate, int bpf) c_gst_audio_buffer_clip; ///
-  bool function(GstAudioBuffer* buffer, const(GstAudioInfo)* info, GstBuffer* gstbuffer, GstMapFlags flags) c_gst_audio_buffer_map; ///
-  bool function(GstBuffer* buffer, GstAudioFormat format, int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to) c_gst_audio_buffer_reorder_channels; ///
+  gboolean function(GstAudioBuffer* buffer, const(GstAudioInfo)* info, GstBuffer* gstbuffer, GstMapFlags flags) c_gst_audio_buffer_map; ///
+  gboolean function(GstBuffer* buffer, GstAudioFormat format, int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to) c_gst_audio_buffer_reorder_channels; ///
   GstBuffer* function(GstBuffer* buffer, int bpf, size_t trim, size_t samples) c_gst_audio_buffer_truncate; ///
 
   // AudioCdSrc
   GType function() c_gst_audio_cd_src_get_type; ///
-  bool function(GstAudioCdSrc* src, GstAudioCdSrcTrack* track) c_gst_audio_cd_src_add_track; ///
+  gboolean function(GstAudioCdSrc* src, GstAudioCdSrcTrack* track) c_gst_audio_cd_src_add_track; ///
 
   // AudioChannelMixer
   void function(GstAudioChannelMixer* mix) c_gst_audio_channel_mixer_free; ///
-  bool function(GstAudioChannelMixer* mix) c_gst_audio_channel_mixer_is_passthrough; ///
+  gboolean function(GstAudioChannelMixer* mix) c_gst_audio_channel_mixer_is_passthrough; ///
   void function(GstAudioChannelMixer* mix, const(void*)* in_, void** out_, int samples) c_gst_audio_channel_mixer_samples; ///
   GstAudioChannelMixer* function(GstAudioChannelMixerFlags flags, GstAudioFormat format, int inChannels, GstAudioChannelPosition* inPosition, int outChannels, GstAudioChannelPosition* outPosition) c_gst_audio_channel_mixer_new; ///
   GstAudioChannelMixer* function(GstAudioChannelMixerFlags flags, GstAudioFormat format, int inChannels, int outChannels, float** matrix) c_gst_audio_channel_mixer_new_with_matrix; ///
@@ -85,17 +85,17 @@ __gshared extern(C)
   // AudioConverter
   GType function() c_gst_audio_converter_get_type; ///
   GstAudioConverter* function(GstAudioConverterFlags flags, GstAudioInfo* inInfo, GstAudioInfo* outInfo, GstStructure* config) c_gst_audio_converter_new; ///
-  bool function(GstAudioConverter* convert, GstAudioConverterFlags flags, void* in_, size_t inSize, void** out_, size_t* outSize) c_gst_audio_converter_convert; ///
+  gboolean function(GstAudioConverter* convert, GstAudioConverterFlags flags, void* in_, size_t inSize, void** out_, size_t* outSize) c_gst_audio_converter_convert; ///
   void function(GstAudioConverter* convert) c_gst_audio_converter_free; ///
   const(GstStructure)* function(GstAudioConverter* convert, int* inRate, int* outRate) c_gst_audio_converter_get_config; ///
   size_t function(GstAudioConverter* convert, size_t outFrames) c_gst_audio_converter_get_in_frames; ///
   size_t function(GstAudioConverter* convert) c_gst_audio_converter_get_max_latency; ///
   size_t function(GstAudioConverter* convert, size_t inFrames) c_gst_audio_converter_get_out_frames; ///
-  bool function(GstAudioConverter* convert) c_gst_audio_converter_is_passthrough; ///
+  gboolean function(GstAudioConverter* convert) c_gst_audio_converter_is_passthrough; ///
   void function(GstAudioConverter* convert) c_gst_audio_converter_reset; ///
-  bool function(GstAudioConverter* convert, GstAudioConverterFlags flags, void** in_, size_t inFrames, void** out_, size_t outFrames) c_gst_audio_converter_samples; ///
-  bool function(GstAudioConverter* convert) c_gst_audio_converter_supports_inplace; ///
-  bool function(GstAudioConverter* convert, int inRate, int outRate, GstStructure* config) c_gst_audio_converter_update_config; ///
+  gboolean function(GstAudioConverter* convert, GstAudioConverterFlags flags, void** in_, size_t inFrames, void** out_, size_t outFrames) c_gst_audio_converter_samples; ///
+  gboolean function(GstAudioConverter* convert) c_gst_audio_converter_supports_inplace; ///
+  gboolean function(GstAudioConverter* convert, int inRate, int outRate, GstStructure* config) c_gst_audio_converter_update_config; ///
 
   // AudioDecoder
   GType function() c_gst_audio_decoder_get_type; ///
@@ -105,32 +105,32 @@ __gshared extern(C)
   void function(GstAudioDecoder* dec, GstAllocator** allocator, GstAllocationParams* params) c_gst_audio_decoder_get_allocator; ///
   GstAudioInfo* function(GstAudioDecoder* dec) c_gst_audio_decoder_get_audio_info; ///
   int function(GstAudioDecoder* dec) c_gst_audio_decoder_get_delay; ///
-  bool function(GstAudioDecoder* dec) c_gst_audio_decoder_get_drainable; ///
+  gboolean function(GstAudioDecoder* dec) c_gst_audio_decoder_get_drainable; ///
   int function(GstAudioDecoder* dec) c_gst_audio_decoder_get_estimate_rate; ///
   void function(GstAudioDecoder* dec, GstClockTime* min, GstClockTime* max) c_gst_audio_decoder_get_latency; ///
   int function(GstAudioDecoder* dec) c_gst_audio_decoder_get_max_errors; ///
   GstClockTime function(GstAudioDecoder* dec) c_gst_audio_decoder_get_min_latency; ///
-  bool function(GstAudioDecoder* dec) c_gst_audio_decoder_get_needs_format; ///
-  void function(GstAudioDecoder* dec, bool* sync, bool* eos) c_gst_audio_decoder_get_parse_state; ///
-  bool function(GstAudioDecoder* dec) c_gst_audio_decoder_get_plc; ///
+  gboolean function(GstAudioDecoder* dec) c_gst_audio_decoder_get_needs_format; ///
+  void function(GstAudioDecoder* dec, gboolean* sync, gboolean* eos) c_gst_audio_decoder_get_parse_state; ///
+  gboolean function(GstAudioDecoder* dec) c_gst_audio_decoder_get_plc; ///
   int function(GstAudioDecoder* dec) c_gst_audio_decoder_get_plc_aware; ///
   GstClockTime function(GstAudioDecoder* dec) c_gst_audio_decoder_get_tolerance; ///
   void function(GstAudioDecoder* dec, const(GstTagList)* tags, GstTagMergeMode mode) c_gst_audio_decoder_merge_tags; ///
-  bool function(GstAudioDecoder* dec) c_gst_audio_decoder_negotiate; ///
+  gboolean function(GstAudioDecoder* dec) c_gst_audio_decoder_negotiate; ///
   GstCaps* function(GstAudioDecoder* decoder, GstCaps* caps, GstCaps* filter) c_gst_audio_decoder_proxy_getcaps; ///
   void function(GstAudioDecoder* dec, GstCaps* allocationCaps) c_gst_audio_decoder_set_allocation_caps; ///
-  void function(GstAudioDecoder* dec, bool enabled) c_gst_audio_decoder_set_drainable; ///
-  void function(GstAudioDecoder* dec, bool enabled) c_gst_audio_decoder_set_estimate_rate; ///
+  void function(GstAudioDecoder* dec, gboolean enabled) c_gst_audio_decoder_set_drainable; ///
+  void function(GstAudioDecoder* dec, gboolean enabled) c_gst_audio_decoder_set_estimate_rate; ///
   void function(GstAudioDecoder* dec, GstClockTime min, GstClockTime max) c_gst_audio_decoder_set_latency; ///
   void function(GstAudioDecoder* dec, int num) c_gst_audio_decoder_set_max_errors; ///
   void function(GstAudioDecoder* dec, GstClockTime num) c_gst_audio_decoder_set_min_latency; ///
-  void function(GstAudioDecoder* dec, bool enabled) c_gst_audio_decoder_set_needs_format; ///
-  bool function(GstAudioDecoder* dec, GstCaps* caps) c_gst_audio_decoder_set_output_caps; ///
-  bool function(GstAudioDecoder* dec, const(GstAudioInfo)* info) c_gst_audio_decoder_set_output_format; ///
-  void function(GstAudioDecoder* dec, bool enabled) c_gst_audio_decoder_set_plc; ///
-  void function(GstAudioDecoder* dec, bool plc) c_gst_audio_decoder_set_plc_aware; ///
+  void function(GstAudioDecoder* dec, gboolean enabled) c_gst_audio_decoder_set_needs_format; ///
+  gboolean function(GstAudioDecoder* dec, GstCaps* caps) c_gst_audio_decoder_set_output_caps; ///
+  gboolean function(GstAudioDecoder* dec, const(GstAudioInfo)* info) c_gst_audio_decoder_set_output_format; ///
+  void function(GstAudioDecoder* dec, gboolean enabled) c_gst_audio_decoder_set_plc; ///
+  void function(GstAudioDecoder* dec, gboolean plc) c_gst_audio_decoder_set_plc_aware; ///
   void function(GstAudioDecoder* dec, GstClockTime tolerance) c_gst_audio_decoder_set_tolerance; ///
-  void function(GstAudioDecoder* decoder, bool use) c_gst_audio_decoder_set_use_default_pad_acceptcaps; ///
+  void function(GstAudioDecoder* decoder, gboolean use) c_gst_audio_decoder_set_use_default_pad_acceptcaps; ///
 
   // AudioDownmixMeta
   const(GstMetaInfo)* function() c_gst_audio_downmix_meta_get_info; ///
@@ -141,33 +141,33 @@ __gshared extern(C)
   GstFlowReturn function(GstAudioEncoder* enc, GstBuffer* buffer, int samples) c_gst_audio_encoder_finish_frame; ///
   void function(GstAudioEncoder* enc, GstAllocator** allocator, GstAllocationParams* params) c_gst_audio_encoder_get_allocator; ///
   GstAudioInfo* function(GstAudioEncoder* enc) c_gst_audio_encoder_get_audio_info; ///
-  bool function(GstAudioEncoder* enc) c_gst_audio_encoder_get_drainable; ///
+  gboolean function(GstAudioEncoder* enc) c_gst_audio_encoder_get_drainable; ///
   int function(GstAudioEncoder* enc) c_gst_audio_encoder_get_frame_max; ///
   int function(GstAudioEncoder* enc) c_gst_audio_encoder_get_frame_samples_max; ///
   int function(GstAudioEncoder* enc) c_gst_audio_encoder_get_frame_samples_min; ///
-  bool function(GstAudioEncoder* enc) c_gst_audio_encoder_get_hard_min; ///
-  bool function(GstAudioEncoder* enc) c_gst_audio_encoder_get_hard_resync; ///
+  gboolean function(GstAudioEncoder* enc) c_gst_audio_encoder_get_hard_min; ///
+  gboolean function(GstAudioEncoder* enc) c_gst_audio_encoder_get_hard_resync; ///
   void function(GstAudioEncoder* enc, GstClockTime* min, GstClockTime* max) c_gst_audio_encoder_get_latency; ///
   int function(GstAudioEncoder* enc) c_gst_audio_encoder_get_lookahead; ///
-  bool function(GstAudioEncoder* enc) c_gst_audio_encoder_get_mark_granule; ///
-  bool function(GstAudioEncoder* enc) c_gst_audio_encoder_get_perfect_timestamp; ///
+  gboolean function(GstAudioEncoder* enc) c_gst_audio_encoder_get_mark_granule; ///
+  gboolean function(GstAudioEncoder* enc) c_gst_audio_encoder_get_perfect_timestamp; ///
   GstClockTime function(GstAudioEncoder* enc) c_gst_audio_encoder_get_tolerance; ///
   void function(GstAudioEncoder* enc, const(GstTagList)* tags, GstTagMergeMode mode) c_gst_audio_encoder_merge_tags; ///
-  bool function(GstAudioEncoder* enc) c_gst_audio_encoder_negotiate; ///
+  gboolean function(GstAudioEncoder* enc) c_gst_audio_encoder_negotiate; ///
   GstCaps* function(GstAudioEncoder* enc, GstCaps* caps, GstCaps* filter) c_gst_audio_encoder_proxy_getcaps; ///
   void function(GstAudioEncoder* enc, GstCaps* allocationCaps) c_gst_audio_encoder_set_allocation_caps; ///
-  void function(GstAudioEncoder* enc, bool enabled) c_gst_audio_encoder_set_drainable; ///
+  void function(GstAudioEncoder* enc, gboolean enabled) c_gst_audio_encoder_set_drainable; ///
   void function(GstAudioEncoder* enc, int num) c_gst_audio_encoder_set_frame_max; ///
   void function(GstAudioEncoder* enc, int num) c_gst_audio_encoder_set_frame_samples_max; ///
   void function(GstAudioEncoder* enc, int num) c_gst_audio_encoder_set_frame_samples_min; ///
-  void function(GstAudioEncoder* enc, bool enabled) c_gst_audio_encoder_set_hard_min; ///
-  void function(GstAudioEncoder* enc, bool enabled) c_gst_audio_encoder_set_hard_resync; ///
+  void function(GstAudioEncoder* enc, gboolean enabled) c_gst_audio_encoder_set_hard_min; ///
+  void function(GstAudioEncoder* enc, gboolean enabled) c_gst_audio_encoder_set_hard_resync; ///
   void function(GstAudioEncoder* enc, GList* headers) c_gst_audio_encoder_set_headers; ///
   void function(GstAudioEncoder* enc, GstClockTime min, GstClockTime max) c_gst_audio_encoder_set_latency; ///
   void function(GstAudioEncoder* enc, int num) c_gst_audio_encoder_set_lookahead; ///
-  void function(GstAudioEncoder* enc, bool enabled) c_gst_audio_encoder_set_mark_granule; ///
-  bool function(GstAudioEncoder* enc, GstCaps* caps) c_gst_audio_encoder_set_output_format; ///
-  void function(GstAudioEncoder* enc, bool enabled) c_gst_audio_encoder_set_perfect_timestamp; ///
+  void function(GstAudioEncoder* enc, gboolean enabled) c_gst_audio_encoder_set_mark_granule; ///
+  gboolean function(GstAudioEncoder* enc, GstCaps* caps) c_gst_audio_encoder_set_output_format; ///
+  void function(GstAudioEncoder* enc, gboolean enabled) c_gst_audio_encoder_set_perfect_timestamp; ///
   void function(GstAudioEncoder* enc, GstClockTime tolerance) c_gst_audio_encoder_set_tolerance; ///
 
   // AudioFilter
@@ -183,13 +183,13 @@ __gshared extern(C)
   GType function() c_gst_audio_info_get_type; ///
   GstAudioInfo* function() c_gst_audio_info_new; ///
   GstAudioInfo* function(const(GstCaps)* caps) c_gst_audio_info_new_from_caps; ///
-  bool function(const(GstAudioInfo)* info, GstFormat srcFmt, long srcVal, GstFormat destFmt, long* destVal) c_gst_audio_info_convert; ///
+  gboolean function(const(GstAudioInfo)* info, GstFormat srcFmt, long srcVal, GstFormat destFmt, long* destVal) c_gst_audio_info_convert; ///
   GstAudioInfo* function(const(GstAudioInfo)* info) c_gst_audio_info_copy; ///
   void function(GstAudioInfo* info) c_gst_audio_info_free; ///
-  bool function(const(GstAudioInfo)* info, const(GstAudioInfo)* other) c_gst_audio_info_is_equal; ///
+  gboolean function(const(GstAudioInfo)* info, const(GstAudioInfo)* other) c_gst_audio_info_is_equal; ///
   void function(GstAudioInfo* info, GstAudioFormat format, int rate, int channels, const(GstAudioChannelPosition)* position) c_gst_audio_info_set_format; ///
   GstCaps* function(const(GstAudioInfo)* info) c_gst_audio_info_to_caps; ///
-  bool function(GstAudioInfo* info, const(GstCaps)* caps) c_gst_audio_info_from_caps; ///
+  gboolean function(GstAudioInfo* info, const(GstCaps)* caps) c_gst_audio_info_from_caps; ///
   void function(GstAudioInfo* info) c_gst_audio_info_init; ///
 
   // AudioLevelMeta
@@ -211,7 +211,7 @@ __gshared extern(C)
   size_t function(GstAudioResampler* resampler, size_t inFrames) c_gst_audio_resampler_get_out_frames; ///
   void function(GstAudioResampler* resampler, void** in_, size_t inFrames, void** out_, size_t outFrames) c_gst_audio_resampler_resample; ///
   void function(GstAudioResampler* resampler) c_gst_audio_resampler_reset; ///
-  bool function(GstAudioResampler* resampler, int inRate, int outRate, GstStructure* options) c_gst_audio_resampler_update; ///
+  gboolean function(GstAudioResampler* resampler, int inRate, int outRate, GstStructure* options) c_gst_audio_resampler_update; ///
   GstAudioResampler* function(GstAudioResamplerMethod method, GstAudioResamplerFlags flags, GstAudioFormat format, int channels, int inRate, int outRate, GstStructure* options) c_gst_audio_resampler_new; ///
   void function(GstAudioResamplerMethod method, uint quality, int inRate, int outRate, GstStructure* options) c_gst_audio_resampler_options_set_quality; ///
 
@@ -219,36 +219,36 @@ __gshared extern(C)
   GType function() c_gst_audio_ring_buffer_get_type; ///
   void function(GstAudioRingBufferSpec* spec) c_gst_audio_ring_buffer_debug_spec_buff; ///
   void function(GstAudioRingBufferSpec* spec) c_gst_audio_ring_buffer_debug_spec_caps; ///
-  bool function(GstAudioRingBufferSpec* spec, GstCaps* caps) c_gst_audio_ring_buffer_parse_caps; ///
-  bool function(GstAudioRingBuffer* buf, GstAudioRingBufferSpec* spec) c_gst_audio_ring_buffer_acquire; ///
-  bool function(GstAudioRingBuffer* buf, bool active) c_gst_audio_ring_buffer_activate; ///
+  gboolean function(GstAudioRingBufferSpec* spec, GstCaps* caps) c_gst_audio_ring_buffer_parse_caps; ///
+  gboolean function(GstAudioRingBuffer* buf, GstAudioRingBufferSpec* spec) c_gst_audio_ring_buffer_acquire; ///
+  gboolean function(GstAudioRingBuffer* buf, gboolean active) c_gst_audio_ring_buffer_activate; ///
   void function(GstAudioRingBuffer* buf, uint advance) c_gst_audio_ring_buffer_advance; ///
   void function(GstAudioRingBuffer* buf, int segment) c_gst_audio_ring_buffer_clear; ///
   void function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_clear_all; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_close_device; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_close_device; ///
   uint function(GstAudioRingBuffer* buf, ulong* sample, ubyte* data, int inSamples, int outSamples, int* accum) c_gst_audio_ring_buffer_commit; ///
-  bool function(GstAudioRingBuffer* buf, GstFormat srcFmt, long srcVal, GstFormat destFmt, long* destVal) c_gst_audio_ring_buffer_convert; ///
+  gboolean function(GstAudioRingBuffer* buf, GstFormat srcFmt, long srcVal, GstFormat destFmt, long* destVal) c_gst_audio_ring_buffer_convert; ///
   uint function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_delay; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_device_is_open; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_acquired; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_active; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_flushing; ///
-  void function(GstAudioRingBuffer* buf, bool allowed) c_gst_audio_ring_buffer_may_start; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_open_device; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_pause; ///
-  bool function(GstAudioRingBuffer* buf, int* segment, ubyte** readptr, int* len) c_gst_audio_ring_buffer_prepare_read; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_device_is_open; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_acquired; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_active; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_flushing; ///
+  void function(GstAudioRingBuffer* buf, gboolean allowed) c_gst_audio_ring_buffer_may_start; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_open_device; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_pause; ///
+  gboolean function(GstAudioRingBuffer* buf, int* segment, ubyte** readptr, int* len) c_gst_audio_ring_buffer_prepare_read; ///
   uint function(GstAudioRingBuffer* buf, ulong sample, ubyte* data, uint len, GstClockTime* timestamp) c_gst_audio_ring_buffer_read; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_release; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_release; ///
   ulong function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_samples_done; ///
   void function(GstAudioRingBuffer* buf, GstAudioRingBufferCallback cb, void* userData) c_gst_audio_ring_buffer_set_callback; ///
   void function(GstAudioRingBuffer* buf, GstAudioRingBufferCallback cb, void* userData, GDestroyNotify notify) c_gst_audio_ring_buffer_set_callback_full; ///
   void function(GstAudioRingBuffer* buf, const(GstAudioChannelPosition)* position) c_gst_audio_ring_buffer_set_channel_positions; ///
   void function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_set_errored; ///
-  void function(GstAudioRingBuffer* buf, bool flushing) c_gst_audio_ring_buffer_set_flushing; ///
+  void function(GstAudioRingBuffer* buf, gboolean flushing) c_gst_audio_ring_buffer_set_flushing; ///
   void function(GstAudioRingBuffer* buf, ulong sample) c_gst_audio_ring_buffer_set_sample; ///
   void function(GstAudioRingBuffer* buf, int readseg, GstClockTime timestamp) c_gst_audio_ring_buffer_set_timestamp; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_start; ///
-  bool function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_stop; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_start; ///
+  gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_stop; ///
 
   // AudioSink
   GType function() c_gst_audio_sink_get_type; ///
@@ -267,7 +267,7 @@ __gshared extern(C)
   ulong function(const(GstAudioStreamAlign)* align_) c_gst_audio_stream_align_get_samples_since_discont; ///
   GstClockTime function(const(GstAudioStreamAlign)* align_) c_gst_audio_stream_align_get_timestamp_at_discont; ///
   void function(GstAudioStreamAlign* align_) c_gst_audio_stream_align_mark_discont; ///
-  bool function(GstAudioStreamAlign* align_, bool discont, GstClockTime timestamp, uint nSamples, GstClockTime* outTimestamp, GstClockTime* outDuration, ulong* outSamplePosition) c_gst_audio_stream_align_process; ///
+  gboolean function(GstAudioStreamAlign* align_, gboolean discont, GstClockTime timestamp, uint nSamples, GstClockTime* outTimestamp, GstClockTime* outDuration, ulong* outSamplePosition) c_gst_audio_stream_align_process; ///
   void function(GstAudioStreamAlign* align_, GstClockTime alignmentThreshold) c_gst_audio_stream_align_set_alignment_threshold; ///
   void function(GstAudioStreamAlign* align_, GstClockTime discontWait) c_gst_audio_stream_align_set_discont_wait; ///
   void function(GstAudioStreamAlign* align_, int rate) c_gst_audio_stream_align_set_rate; ///
@@ -278,10 +278,10 @@ __gshared extern(C)
   GstDsdInfo* function(const(GstCaps)* caps) c_gst_dsd_info_new_from_caps; ///
   GstDsdInfo* function(const(GstDsdInfo)* info) c_gst_dsd_info_copy; ///
   void function(GstDsdInfo* info) c_gst_dsd_info_free; ///
-  bool function(const(GstDsdInfo)* info, const(GstDsdInfo)* other) c_gst_dsd_info_is_equal; ///
+  gboolean function(const(GstDsdInfo)* info, const(GstDsdInfo)* other) c_gst_dsd_info_is_equal; ///
   void function(GstDsdInfo* info, GstDsdFormat format, int rate, int channels, const(GstAudioChannelPosition)* positions) c_gst_dsd_info_set_format; ///
   GstCaps* function(const(GstDsdInfo)* info) c_gst_dsd_info_to_caps; ///
-  bool function(GstDsdInfo* info, const(GstCaps)* caps) c_gst_dsd_info_from_caps; ///
+  gboolean function(GstDsdInfo* info, const(GstCaps)* caps) c_gst_dsd_info_from_caps; ///
   void function(GstDsdInfo* info) c_gst_dsd_info_init; ///
 
   // DsdPlaneOffsetMeta
@@ -290,41 +290,41 @@ __gshared extern(C)
   // StreamVolume
   GType function() c_gst_stream_volume_get_type; ///
   double function(GstStreamVolumeFormat from, GstStreamVolumeFormat to, double val) c_gst_stream_volume_convert_volume; ///
-  bool function(GstStreamVolume* volume) c_gst_stream_volume_get_mute; ///
+  gboolean function(GstStreamVolume* volume) c_gst_stream_volume_get_mute; ///
   double function(GstStreamVolume* volume, GstStreamVolumeFormat format) c_gst_stream_volume_get_volume; ///
-  void function(GstStreamVolume* volume, bool mute) c_gst_stream_volume_set_mute; ///
+  void function(GstStreamVolume* volume, gboolean mute) c_gst_stream_volume_set_mute; ///
   void function(GstStreamVolume* volume, GstStreamVolumeFormat format, double val) c_gst_stream_volume_set_volume; ///
 
   // global
   ulong function(int channels) c_gst_audio_channel_get_fallback_mask; ///
-  bool function(int channels, ulong channelMask, GstAudioChannelPosition* position) c_gst_audio_channel_positions_from_mask; ///
-  bool function(const(GstAudioChannelPosition)* position, int channels, bool forceOrder, ulong* channelMask) c_gst_audio_channel_positions_to_mask; ///
+  gboolean function(int channels, ulong channelMask, GstAudioChannelPosition* position) c_gst_audio_channel_positions_from_mask; ///
+  gboolean function(const(GstAudioChannelPosition)* position, int channels, gboolean forceOrder, ulong* channelMask) c_gst_audio_channel_positions_to_mask; ///
   char* function(const(GstAudioChannelPosition)* position, int channels) c_gst_audio_channel_positions_to_string; ///
-  bool function(GstAudioChannelPosition* position, int channels) c_gst_audio_channel_positions_to_valid_order; ///
-  bool function(const(GstAudioChannelPosition)* position, int channels, bool forceOrder) c_gst_audio_check_valid_channel_positions; ///
+  gboolean function(GstAudioChannelPosition* position, int channels) c_gst_audio_channel_positions_to_valid_order; ///
+  gboolean function(const(GstAudioChannelPosition)* position, int channels, gboolean forceOrder) c_gst_audio_check_valid_channel_positions; ///
   GType function() c_gst_audio_clipping_meta_api_get_type; ///
   GType function() c_gst_audio_downmix_meta_api_get_type; ///
   GType function() c_gst_audio_format_info_get_type; ///
   const(GstAudioFormat)* function(uint* len) c_gst_audio_formats_raw; ///
-  bool function(int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to, int* reorderMap) c_gst_audio_get_channel_reorder_map; ///
+  gboolean function(int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to, int* reorderMap) c_gst_audio_get_channel_reorder_map; ///
   uint function(const(GstAudioRingBufferSpec)* spec) c_gst_audio_iec61937_frame_size; ///
-  bool function(const(ubyte)* src, uint srcN, ubyte* dst, uint dstN, const(GstAudioRingBufferSpec)* spec, int endianness) c_gst_audio_iec61937_payload; ///
+  gboolean function(const(ubyte)* src, uint srcN, ubyte* dst, uint dstN, const(GstAudioRingBufferSpec)* spec, int endianness) c_gst_audio_iec61937_payload; ///
   GType function() c_gst_audio_level_meta_api_get_type; ///
   GstCaps* function(const(GstAudioFormat)* formats, uint len, GstAudioLayout layout) c_gst_audio_make_raw_caps; ///
   GType function() c_gst_audio_meta_api_get_type; ///
-  bool function(void* data, size_t size, GstAudioFormat format, int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to) c_gst_audio_reorder_channels; ///
+  gboolean function(void* data, size_t size, GstAudioFormat format, int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to) c_gst_audio_reorder_channels; ///
   GstAudioClippingMeta* function(GstBuffer* buffer, GstFormat format, ulong start, ulong end) c_gst_buffer_add_audio_clipping_meta; ///
   GstAudioDownmixMeta* function(GstBuffer* buffer, const(GstAudioChannelPosition)* fromPosition, int fromChannels, const(GstAudioChannelPosition)* toPosition, int toChannels, const(float*)* matrix) c_gst_buffer_add_audio_downmix_meta; ///
-  GstAudioLevelMeta* function(GstBuffer* buffer, ubyte level, bool voiceActivity) c_gst_buffer_add_audio_level_meta; ///
+  GstAudioLevelMeta* function(GstBuffer* buffer, ubyte level, gboolean voiceActivity) c_gst_buffer_add_audio_level_meta; ///
   GstAudioMeta* function(GstBuffer* buffer, const(GstAudioInfo)* info, size_t samples, size_t* offsets) c_gst_buffer_add_audio_meta; ///
   GstDsdPlaneOffsetMeta* function(GstBuffer* buffer, int numChannels, size_t numBytesPerChannel, size_t* offsets) c_gst_buffer_add_dsd_plane_offset_meta; ///
   GstAudioDownmixMeta* function(GstBuffer* buffer, const(GstAudioChannelPosition)* toPosition, int toChannels) c_gst_buffer_get_audio_downmix_meta_for_channels; ///
   GstAudioLevelMeta* function(GstBuffer* buffer) c_gst_buffer_get_audio_level_meta; ///
-  void function(const(ubyte)* inputData, ubyte* outputData, GstDsdFormat inputFormat, GstDsdFormat outputFormat, GstAudioLayout inputLayout, GstAudioLayout outputLayout, const(size_t)* inputPlaneOffsets, const(size_t)* outputPlaneOffsets, size_t numDsdBytes, int numChannels, bool reverseByteBits) c_gst_dsd_convert; ///
+  void function(const(ubyte)* inputData, ubyte* outputData, GstDsdFormat inputFormat, GstDsdFormat outputFormat, GstAudioLayout inputLayout, GstAudioLayout outputLayout, const(size_t)* inputPlaneOffsets, const(size_t)* outputPlaneOffsets, size_t numDsdBytes, int numChannels, gboolean reverseByteBits) c_gst_dsd_convert; ///
   GType function() c_gst_dsd_plane_offset_meta_api_get_type; ///
 
   // AudioFormat
-  GstAudioFormat function(bool sign, int endianness, int width, int depth) c_gst_audio_format_build_integer; ///
+  GstAudioFormat function(gboolean sign, int endianness, int width, int depth) c_gst_audio_format_build_integer; ///
   void function(const(GstAudioFormatInfo)* info, void* dest, size_t length) c_gst_audio_format_fill_silence; ///
   GstAudioFormat function(const(char)* format) c_gst_audio_format_from_string; ///
   const(GstAudioFormatInfo)* function(GstAudioFormat format) c_gst_audio_format_get_info; ///

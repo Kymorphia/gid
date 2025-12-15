@@ -171,7 +171,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_recent_manager_add_full(cast(GtkRecentManager*)this._cPtr, _uri, recentData ? cast(const(GtkRecentData)*)recentData._cPtr : null);
+    _retval = cast(bool)gtk_recent_manager_add_full(cast(GtkRecentManager*)this._cPtr, _uri, recentData ? cast(const(GtkRecentData)*)recentData._cPtr : null);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_recent_manager_add_item(cast(GtkRecentManager*)this._cPtr, _uri);
+    _retval = cast(bool)gtk_recent_manager_add_item(cast(GtkRecentManager*)this._cPtr, _uri);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_recent_manager_has_item(cast(GtkRecentManager*)this._cPtr, _uri);
+    _retval = cast(bool)gtk_recent_manager_has_item(cast(GtkRecentManager*)this._cPtr, _uri);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class RecentManager : gobject.object.ObjectWrap
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _newUri = newUri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_manager_move_item(cast(GtkRecentManager*)this._cPtr, _uri, _newUri, &_err);
+    _retval = cast(bool)gtk_recent_manager_move_item(cast(GtkRecentManager*)this._cPtr, _uri, _newUri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -311,7 +311,7 @@ class RecentManager : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_manager_remove_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
+    _retval = cast(bool)gtk_recent_manager_remove_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

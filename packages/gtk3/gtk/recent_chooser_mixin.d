@@ -292,7 +292,7 @@ template RecentChooserT()
   override bool getLocalOnly()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_local_only(cast(GtkRecentChooser*)this._cPtr);
+    _retval = cast(bool)gtk_recent_chooser_get_local_only(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ template RecentChooserT()
   override bool getSelectMultiple()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_select_multiple(cast(GtkRecentChooser*)this._cPtr);
+    _retval = cast(bool)gtk_recent_chooser_get_select_multiple(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ template RecentChooserT()
   override bool getShowIcons()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_icons(cast(GtkRecentChooser*)this._cPtr);
+    _retval = cast(bool)gtk_recent_chooser_get_show_icons(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ template RecentChooserT()
   override bool getShowNotFound()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_not_found(cast(GtkRecentChooser*)this._cPtr);
+    _retval = cast(bool)gtk_recent_chooser_get_show_not_found(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ template RecentChooserT()
   override bool getShowPrivate()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_private(cast(GtkRecentChooser*)this._cPtr);
+    _retval = cast(bool)gtk_recent_chooser_get_show_private(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ template RecentChooserT()
   override bool getShowTips()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_tips(cast(GtkRecentChooser*)this._cPtr);
+    _retval = cast(bool)gtk_recent_chooser_get_show_tips(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -443,7 +443,7 @@ template RecentChooserT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
+    _retval = cast(bool)gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -462,7 +462,7 @@ template RecentChooserT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
+    _retval = cast(bool)gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

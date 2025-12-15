@@ -109,7 +109,7 @@ class SocketConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connection_connect(cast(GSocketConnection*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_socket_connection_connect(cast(GSocketConnection*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -159,7 +159,7 @@ class SocketConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connection_connect_finish(cast(GSocketConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_socket_connection_connect_finish(cast(GSocketConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -228,7 +228,7 @@ class SocketConnection : gio.iostream.IOStream
   bool isConnected()
   {
     bool _retval;
-    _retval = g_socket_connection_is_connected(cast(GSocketConnection*)this._cPtr);
+    _retval = cast(bool)g_socket_connection_is_connected(cast(GSocketConnection*)this._cPtr);
     return _retval;
   }
 }

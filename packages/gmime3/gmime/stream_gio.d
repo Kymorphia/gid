@@ -81,7 +81,7 @@ class StreamGIO : gmime.stream.Stream
   bool getOwner()
   {
     bool _retval;
-    _retval = g_mime_stream_gio_get_owner(cast(GMimeStreamGIO*)this._cPtr);
+    _retval = cast(bool)g_mime_stream_gio_get_owner(cast(GMimeStreamGIO*)this._cPtr);
     return _retval;
   }
 

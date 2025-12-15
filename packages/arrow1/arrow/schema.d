@@ -76,7 +76,7 @@ class Schema : gobject.object.ObjectWrap
   bool equal(arrow.schema.Schema otherSchema)
   {
     bool _retval;
-    _retval = garrow_schema_equal(cast(GArrowSchema*)this._cPtr, otherSchema ? cast(GArrowSchema*)otherSchema._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_schema_equal(cast(GArrowSchema*)this._cPtr, otherSchema ? cast(GArrowSchema*)otherSchema._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Schema : gobject.object.ObjectWrap
   bool hasMetadata()
   {
     bool _retval;
-    _retval = garrow_schema_has_metadata(cast(GArrowSchema*)this._cPtr);
+    _retval = cast(bool)garrow_schema_has_metadata(cast(GArrowSchema*)this._cPtr);
     return _retval;
   }
 

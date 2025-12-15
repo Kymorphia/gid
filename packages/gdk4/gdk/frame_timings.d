@@ -71,7 +71,7 @@ class FrameTimings : gobject.boxed.Boxed
   bool getComplete()
   {
     bool _retval;
-    _retval = gdk_frame_timings_get_complete(cast(GdkFrameTimings*)this._cPtr);
+    _retval = cast(bool)gdk_frame_timings_get_complete(cast(GdkFrameTimings*)this._cPtr);
     return _retval;
   }
 

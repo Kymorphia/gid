@@ -117,7 +117,7 @@ class Registry : gst.object.ObjectWrap
   static bool forkIsEnabled()
   {
     bool _retval;
-    _retval = gst_registry_fork_is_enabled();
+    _retval = cast(bool)gst_registry_fork_is_enabled();
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class Registry : gst.object.ObjectWrap
   bool addFeature(gst.plugin_feature.PluginFeature feature)
   {
     bool _retval;
-    _retval = gst_registry_add_feature(cast(GstRegistry*)this._cPtr, feature ? cast(GstPluginFeature*)feature._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_registry_add_feature(cast(GstRegistry*)this._cPtr, feature ? cast(GstPluginFeature*)feature._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class Registry : gst.object.ObjectWrap
   bool addPlugin(gst.plugin.Plugin plugin)
   {
     bool _retval;
-    _retval = gst_registry_add_plugin(cast(GstRegistry*)this._cPtr, plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_registry_add_plugin(cast(GstRegistry*)this._cPtr, plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Registry : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _featureName = featureName.toCString(No.Alloc);
-    _retval = gst_registry_check_feature_version(cast(GstRegistry*)this._cPtr, _featureName, minMajor, minMinor, minMicro);
+    _retval = cast(bool)gst_registry_check_feature_version(cast(GstRegistry*)this._cPtr, _featureName, minMajor, minMinor, minMicro);
     return _retval;
   }
 
@@ -223,11 +223,11 @@ class Registry : gst.object.ObjectWrap
   */
   gst.plugin_feature.PluginFeature[] featureFilter(gst.types.PluginFeatureFilter filter, bool first)
   {
-    extern(C) bool _filterCallback(GstPluginFeature* feature, void* userData)
+    extern(C) gboolean _filterCallback(GstPluginFeature* feature, void* userData)
     {
       auto _dlg = cast(gst.types.PluginFeatureFilter*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -398,11 +398,11 @@ class Registry : gst.object.ObjectWrap
   */
   gst.plugin.Plugin[] pluginFilter(gst.types.PluginFilter filter, bool first)
   {
-    extern(C) bool _filterCallback(GstPlugin* plugin, void* userData)
+    extern(C) gboolean _filterCallback(GstPlugin* plugin, void* userData)
     {
       auto _dlg = cast(gst.types.PluginFilter*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -452,7 +452,7 @@ class Registry : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = gst_registry_scan_path(cast(GstRegistry*)this._cPtr, _path);
+    _retval = cast(bool)gst_registry_scan_path(cast(GstRegistry*)this._cPtr, _path);
     return _retval;
   }
 

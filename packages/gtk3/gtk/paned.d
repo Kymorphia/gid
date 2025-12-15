@@ -279,7 +279,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   bool getWideHandle()
   {
     bool _retval;
-    _retval = gtk_paned_get_wide_handle(cast(GtkPaned*)this._cPtr);
+    _retval = cast(bool)gtk_paned_get_wide_handle(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 

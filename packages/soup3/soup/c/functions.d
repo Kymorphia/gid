@@ -19,7 +19,7 @@ __gshared extern(C)
   GType function() c_soup_auth_get_type; ///
   SoupAuth* function(GType type, SoupMessage* msg, const(char)* authHeader) c_soup_auth_new; ///
   void function(SoupAuth* auth, const(char)* username, const(char)* password) c_soup_auth_authenticate; ///
-  bool function(SoupAuth* auth) c_soup_auth_can_authenticate; ///
+  gboolean function(SoupAuth* auth) c_soup_auth_can_authenticate; ///
   void function(SoupAuth* auth) c_soup_auth_cancel; ///
   void function(SoupAuth* auth, GSList* space) c_soup_auth_free_protection_space; ///
   const(char)* function(SoupAuth* auth) c_soup_auth_get_authority; ///
@@ -28,11 +28,11 @@ __gshared extern(C)
   GSList* function(SoupAuth* auth, GUri* sourceUri) c_soup_auth_get_protection_space; ///
   const(char)* function(SoupAuth* auth) c_soup_auth_get_realm; ///
   const(char)* function(SoupAuth* auth) c_soup_auth_get_scheme_name; ///
-  bool function(SoupAuth* auth) c_soup_auth_is_authenticated; ///
-  bool function(SoupAuth* auth) c_soup_auth_is_cancelled; ///
-  bool function(SoupAuth* auth) c_soup_auth_is_for_proxy; ///
-  bool function(SoupAuth* auth, SoupMessage* msg) c_soup_auth_is_ready; ///
-  bool function(SoupAuth* auth, SoupMessage* msg, const(char)* authHeader) c_soup_auth_update; ///
+  gboolean function(SoupAuth* auth) c_soup_auth_is_authenticated; ///
+  gboolean function(SoupAuth* auth) c_soup_auth_is_cancelled; ///
+  gboolean function(SoupAuth* auth) c_soup_auth_is_for_proxy; ///
+  gboolean function(SoupAuth* auth, SoupMessage* msg) c_soup_auth_is_ready; ///
+  gboolean function(SoupAuth* auth, SoupMessage* msg, const(char)* authHeader) c_soup_auth_update; ///
 
   // AuthBasic
   GType function() c_soup_auth_basic_get_type; ///
@@ -45,8 +45,8 @@ __gshared extern(C)
   char* function(SoupAuthDomain* domain, SoupServerMessage* msg) c_soup_auth_domain_accepts; ///
   void function(SoupAuthDomain* domain, const(char)* path) c_soup_auth_domain_add_path; ///
   void function(SoupAuthDomain* domain, SoupServerMessage* msg) c_soup_auth_domain_challenge; ///
-  bool function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) c_soup_auth_domain_check_password; ///
-  bool function(SoupAuthDomain* domain, SoupServerMessage* msg) c_soup_auth_domain_covers; ///
+  gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) c_soup_auth_domain_check_password; ///
+  gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg) c_soup_auth_domain_covers; ///
   const(char)* function(SoupAuthDomain* domain) c_soup_auth_domain_get_realm; ///
   void function(SoupAuthDomain* domain, const(char)* path) c_soup_auth_domain_remove_path; ///
   void function(SoupAuthDomain* domain, SoupAuthDomainFilter filter, void* filterData, GDestroyNotify dnotify) c_soup_auth_domain_set_filter; ///
@@ -73,7 +73,7 @@ __gshared extern(C)
 
   // AuthNegotiate
   GType function() c_soup_auth_negotiate_get_type; ///
-  bool function() c_soup_auth_negotiate_supported; ///
+  gboolean function() c_soup_auth_negotiate_supported; ///
 
   // Cache
   GType function() c_soup_cache_get_type; ///
@@ -96,27 +96,27 @@ __gshared extern(C)
   // Cookie
   GType function() c_soup_cookie_get_type; ///
   SoupCookie* function(const(char)* name, const(char)* value, const(char)* domain, const(char)* path, int maxAge) c_soup_cookie_new; ///
-  bool function(SoupCookie* cookie, GUri* uri) c_soup_cookie_applies_to_uri; ///
+  gboolean function(SoupCookie* cookie, GUri* uri) c_soup_cookie_applies_to_uri; ///
   SoupCookie* function(SoupCookie* cookie) c_soup_cookie_copy; ///
-  bool function(SoupCookie* cookie, const(char)* host) c_soup_cookie_domain_matches; ///
-  bool function(SoupCookie* cookie1, SoupCookie* cookie2) c_soup_cookie_equal; ///
+  gboolean function(SoupCookie* cookie, const(char)* host) c_soup_cookie_domain_matches; ///
+  gboolean function(SoupCookie* cookie1, SoupCookie* cookie2) c_soup_cookie_equal; ///
   void function(SoupCookie* cookie) c_soup_cookie_free; ///
   const(char)* function(SoupCookie* cookie) c_soup_cookie_get_domain; ///
   GDateTime* function(SoupCookie* cookie) c_soup_cookie_get_expires; ///
-  bool function(SoupCookie* cookie) c_soup_cookie_get_http_only; ///
+  gboolean function(SoupCookie* cookie) c_soup_cookie_get_http_only; ///
   const(char)* function(SoupCookie* cookie) c_soup_cookie_get_name; ///
   const(char)* function(SoupCookie* cookie) c_soup_cookie_get_path; ///
   SoupSameSitePolicy function(SoupCookie* cookie) c_soup_cookie_get_same_site_policy; ///
-  bool function(SoupCookie* cookie) c_soup_cookie_get_secure; ///
+  gboolean function(SoupCookie* cookie) c_soup_cookie_get_secure; ///
   const(char)* function(SoupCookie* cookie) c_soup_cookie_get_value; ///
   void function(SoupCookie* cookie, const(char)* domain) c_soup_cookie_set_domain; ///
   void function(SoupCookie* cookie, GDateTime* expires) c_soup_cookie_set_expires; ///
-  void function(SoupCookie* cookie, bool httpOnly) c_soup_cookie_set_http_only; ///
+  void function(SoupCookie* cookie, gboolean httpOnly) c_soup_cookie_set_http_only; ///
   void function(SoupCookie* cookie, int maxAge) c_soup_cookie_set_max_age; ///
   void function(SoupCookie* cookie, const(char)* name) c_soup_cookie_set_name; ///
   void function(SoupCookie* cookie, const(char)* path) c_soup_cookie_set_path; ///
   void function(SoupCookie* cookie, SoupSameSitePolicy policy) c_soup_cookie_set_same_site_policy; ///
-  void function(SoupCookie* cookie, bool secure) c_soup_cookie_set_secure; ///
+  void function(SoupCookie* cookie, gboolean secure) c_soup_cookie_set_secure; ///
   void function(SoupCookie* cookie, const(char)* value) c_soup_cookie_set_value; ///
   char* function(SoupCookie* cookie) c_soup_cookie_to_cookie_header; ///
   char* function(SoupCookie* cookie) c_soup_cookie_to_set_cookie_header; ///
@@ -131,31 +131,31 @@ __gshared extern(C)
   GSList* function(SoupCookieJar* jar) c_soup_cookie_jar_all_cookies; ///
   void function(SoupCookieJar* jar, SoupCookie* cookie) c_soup_cookie_jar_delete_cookie; ///
   SoupCookieJarAcceptPolicy function(SoupCookieJar* jar) c_soup_cookie_jar_get_accept_policy; ///
-  GSList* function(SoupCookieJar* jar, GUri* uri, bool forHttp) c_soup_cookie_jar_get_cookie_list; ///
-  GSList* function(SoupCookieJar* jar, GUri* uri, GUri* topLevel, GUri* siteForCookies, bool forHttp, bool isSafeMethod, bool isTopLevelNavigation) c_soup_cookie_jar_get_cookie_list_with_same_site_info; ///
-  char* function(SoupCookieJar* jar, GUri* uri, bool forHttp) c_soup_cookie_jar_get_cookies; ///
-  bool function(SoupCookieJar* jar) c_soup_cookie_jar_is_persistent; ///
+  GSList* function(SoupCookieJar* jar, GUri* uri, gboolean forHttp) c_soup_cookie_jar_get_cookie_list; ///
+  GSList* function(SoupCookieJar* jar, GUri* uri, GUri* topLevel, GUri* siteForCookies, gboolean forHttp, gboolean isSafeMethod, gboolean isTopLevelNavigation) c_soup_cookie_jar_get_cookie_list_with_same_site_info; ///
+  char* function(SoupCookieJar* jar, GUri* uri, gboolean forHttp) c_soup_cookie_jar_get_cookies; ///
+  gboolean function(SoupCookieJar* jar) c_soup_cookie_jar_is_persistent; ///
   void function(SoupCookieJar* jar, SoupCookieJarAcceptPolicy policy) c_soup_cookie_jar_set_accept_policy; ///
   void function(SoupCookieJar* jar, GUri* uri, const(char)* cookie) c_soup_cookie_jar_set_cookie; ///
   void function(SoupCookieJar* jar, GUri* uri, GUri* firstParty, const(char)* cookie) c_soup_cookie_jar_set_cookie_with_first_party; ///
 
   // CookieJarDB
   GType function() c_soup_cookie_jar_db_get_type; ///
-  SoupCookieJar* function(const(char)* filename, bool readOnly) c_soup_cookie_jar_db_new; ///
+  SoupCookieJar* function(const(char)* filename, gboolean readOnly) c_soup_cookie_jar_db_new; ///
 
   // CookieJarText
   GType function() c_soup_cookie_jar_text_get_type; ///
-  SoupCookieJar* function(const(char)* filename, bool readOnly) c_soup_cookie_jar_text_new; ///
+  SoupCookieJar* function(const(char)* filename, gboolean readOnly) c_soup_cookie_jar_text_new; ///
 
   // HSTSEnforcer
   GType function() c_soup_hsts_enforcer_get_type; ///
   SoupHSTSEnforcer* function() c_soup_hsts_enforcer_new; ///
-  GList* function(SoupHSTSEnforcer* hstsEnforcer, bool sessionPolicies) c_soup_hsts_enforcer_get_domains; ///
-  GList* function(SoupHSTSEnforcer* hstsEnforcer, bool sessionPolicies) c_soup_hsts_enforcer_get_policies; ///
-  bool function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) c_soup_hsts_enforcer_has_valid_policy; ///
-  bool function(SoupHSTSEnforcer* hstsEnforcer) c_soup_hsts_enforcer_is_persistent; ///
+  GList* function(SoupHSTSEnforcer* hstsEnforcer, gboolean sessionPolicies) c_soup_hsts_enforcer_get_domains; ///
+  GList* function(SoupHSTSEnforcer* hstsEnforcer, gboolean sessionPolicies) c_soup_hsts_enforcer_get_policies; ///
+  gboolean function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) c_soup_hsts_enforcer_has_valid_policy; ///
+  gboolean function(SoupHSTSEnforcer* hstsEnforcer) c_soup_hsts_enforcer_is_persistent; ///
   void function(SoupHSTSEnforcer* hstsEnforcer, SoupHSTSPolicy* policy) c_soup_hsts_enforcer_set_policy; ///
-  void function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain, bool includeSubdomains) c_soup_hsts_enforcer_set_session_policy; ///
+  void function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain, gboolean includeSubdomains) c_soup_hsts_enforcer_set_session_policy; ///
 
   // HSTSEnforcerDB
   GType function() c_soup_hsts_enforcer_db_get_type; ///
@@ -163,19 +163,19 @@ __gshared extern(C)
 
   // HSTSPolicy
   GType function() c_soup_hsts_policy_get_type; ///
-  SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, bool includeSubdomains) c_soup_hsts_policy_new; ///
+  SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, gboolean includeSubdomains) c_soup_hsts_policy_new; ///
   SoupHSTSPolicy* function(SoupMessage* msg) c_soup_hsts_policy_new_from_response; ///
-  SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, GDateTime* expires, bool includeSubdomains) c_soup_hsts_policy_new_full; ///
-  SoupHSTSPolicy* function(const(char)* domain, bool includeSubdomains) c_soup_hsts_policy_new_session_policy; ///
+  SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, GDateTime* expires, gboolean includeSubdomains) c_soup_hsts_policy_new_full; ///
+  SoupHSTSPolicy* function(const(char)* domain, gboolean includeSubdomains) c_soup_hsts_policy_new_session_policy; ///
   SoupHSTSPolicy* function(SoupHSTSPolicy* policy) c_soup_hsts_policy_copy; ///
-  bool function(SoupHSTSPolicy* policy1, SoupHSTSPolicy* policy2) c_soup_hsts_policy_equal; ///
+  gboolean function(SoupHSTSPolicy* policy1, SoupHSTSPolicy* policy2) c_soup_hsts_policy_equal; ///
   void function(SoupHSTSPolicy* policy) c_soup_hsts_policy_free; ///
   const(char)* function(SoupHSTSPolicy* policy) c_soup_hsts_policy_get_domain; ///
   GDateTime* function(SoupHSTSPolicy* policy) c_soup_hsts_policy_get_expires; ///
   gulong function(SoupHSTSPolicy* policy) c_soup_hsts_policy_get_max_age; ///
-  bool function(SoupHSTSPolicy* policy) c_soup_hsts_policy_includes_subdomains; ///
-  bool function(SoupHSTSPolicy* policy) c_soup_hsts_policy_is_expired; ///
-  bool function(SoupHSTSPolicy* policy) c_soup_hsts_policy_is_session_policy; ///
+  gboolean function(SoupHSTSPolicy* policy) c_soup_hsts_policy_includes_subdomains; ///
+  gboolean function(SoupHSTSPolicy* policy) c_soup_hsts_policy_is_expired; ///
+  gboolean function(SoupHSTSPolicy* policy) c_soup_hsts_policy_is_session_policy; ///
 
   // Logger
   GType function() c_soup_logger_get_type; ///
@@ -200,10 +200,10 @@ __gshared extern(C)
   ulong function(SoupMessage* msg) c_soup_message_get_connection_id; ///
   GUri* function(SoupMessage* msg) c_soup_message_get_first_party; ///
   SoupMessageFlags function(SoupMessage* msg) c_soup_message_get_flags; ///
-  bool function(SoupMessage* msg) c_soup_message_get_force_http1; ///
+  gboolean function(SoupMessage* msg) c_soup_message_get_force_http1; ///
   SoupHTTPVersion function(SoupMessage* msg) c_soup_message_get_http_version; ///
-  bool function(SoupMessage* msg) c_soup_message_get_is_options_ping; ///
-  bool function(SoupMessage* msg) c_soup_message_get_is_top_level_navigation; ///
+  gboolean function(SoupMessage* msg) c_soup_message_get_is_options_ping; ///
+  gboolean function(SoupMessage* msg) c_soup_message_get_is_top_level_navigation; ///
   const(char)* function(SoupMessage* msg) c_soup_message_get_method; ///
   SoupMessageMetrics* function(SoupMessage* msg) c_soup_message_get_metrics; ///
   SoupMessagePriority function(SoupMessage* msg) c_soup_message_get_priority; ///
@@ -218,15 +218,15 @@ __gshared extern(C)
   GTlsCertificateFlags function(SoupMessage* msg) c_soup_message_get_tls_peer_certificate_errors; ///
   GTlsProtocolVersion function(SoupMessage* msg) c_soup_message_get_tls_protocol_version; ///
   GUri* function(SoupMessage* msg) c_soup_message_get_uri; ///
-  bool function(SoupMessage* msg, GType featureType) c_soup_message_is_feature_disabled; ///
-  bool function(SoupMessage* msg) c_soup_message_is_keepalive; ///
-  bool function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_query_flags; ///
+  gboolean function(SoupMessage* msg, GType featureType) c_soup_message_is_feature_disabled; ///
+  gboolean function(SoupMessage* msg) c_soup_message_is_keepalive; ///
+  gboolean function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_query_flags; ///
   void function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_remove_flags; ///
   void function(SoupMessage* msg, GUri* firstParty) c_soup_message_set_first_party; ///
   void function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_set_flags; ///
-  void function(SoupMessage* msg, bool value) c_soup_message_set_force_http1; ///
-  void function(SoupMessage* msg, bool isOptionsPing) c_soup_message_set_is_options_ping; ///
-  void function(SoupMessage* msg, bool isTopLevelNavigation) c_soup_message_set_is_top_level_navigation; ///
+  void function(SoupMessage* msg, gboolean value) c_soup_message_set_force_http1; ///
+  void function(SoupMessage* msg, gboolean isOptionsPing) c_soup_message_set_is_options_ping; ///
+  void function(SoupMessage* msg, gboolean isTopLevelNavigation) c_soup_message_set_is_top_level_navigation; ///
   void function(SoupMessage* msg, const(char)* method) c_soup_message_set_method; ///
   void function(SoupMessage* msg, SoupMessagePriority priority) c_soup_message_set_priority; ///
   void function(SoupMessage* msg, const(char)* contentType, GInputStream* stream, ptrdiff_t contentLength) c_soup_message_set_request_body; ///
@@ -244,11 +244,11 @@ __gshared extern(C)
   void function(SoupMessageBody* body_, ubyte* data, size_t length) c_soup_message_body_append_take; ///
   void function(SoupMessageBody* body_) c_soup_message_body_complete; ///
   GBytes* function(SoupMessageBody* body_) c_soup_message_body_flatten; ///
-  bool function(SoupMessageBody* body_) c_soup_message_body_get_accumulate; ///
+  gboolean function(SoupMessageBody* body_) c_soup_message_body_get_accumulate; ///
   GBytes* function(SoupMessageBody* body_, long offset) c_soup_message_body_get_chunk; ///
   void function(SoupMessageBody* body_, GBytes* chunk) c_soup_message_body_got_chunk; ///
   SoupMessageBody* function(SoupMessageBody* body_) c_soup_message_body_ref; ///
-  void function(SoupMessageBody* body_, bool accumulate) c_soup_message_body_set_accumulate; ///
+  void function(SoupMessageBody* body_, gboolean accumulate) c_soup_message_body_set_accumulate; ///
   void function(SoupMessageBody* body_) c_soup_message_body_truncate; ///
   void function(SoupMessageBody* body_) c_soup_message_body_unref; ///
   void function(SoupMessageBody* body_, GBytes* chunk) c_soup_message_body_wrote_chunk; ///
@@ -261,18 +261,18 @@ __gshared extern(C)
   void function(SoupMessageHeaders* hdrs) c_soup_message_headers_clear; ///
   void function(SoupMessageHeaders* hdrs, SoupMessageHeadersForeachFunc func, void* userData) c_soup_message_headers_foreach; ///
   void function(SoupMessageHeaders* hdrs, SoupRange* ranges) c_soup_message_headers_free_ranges; ///
-  bool function(SoupMessageHeaders* hdrs, char** disposition, GHashTable** params) c_soup_message_headers_get_content_disposition; ///
+  gboolean function(SoupMessageHeaders* hdrs, char** disposition, GHashTable** params) c_soup_message_headers_get_content_disposition; ///
   long function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_content_length; ///
-  bool function(SoupMessageHeaders* hdrs, long* start, long* end, long* totalLength) c_soup_message_headers_get_content_range; ///
+  gboolean function(SoupMessageHeaders* hdrs, long* start, long* end, long* totalLength) c_soup_message_headers_get_content_range; ///
   const(char)* function(SoupMessageHeaders* hdrs, GHashTable** params) c_soup_message_headers_get_content_type; ///
   SoupEncoding function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_encoding; ///
   SoupExpectation function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_expectations; ///
   SoupMessageHeadersType function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_headers_type; ///
   const(char)* function(SoupMessageHeaders* hdrs, const(char)* name) c_soup_message_headers_get_list; ///
   const(char)* function(SoupMessageHeaders* hdrs, const(char)* name) c_soup_message_headers_get_one; ///
-  bool function(SoupMessageHeaders* hdrs, long totalLength, SoupRange** ranges, int* length) c_soup_message_headers_get_ranges; ///
-  bool function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* token) c_soup_message_headers_header_contains; ///
-  bool function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) c_soup_message_headers_header_equals; ///
+  gboolean function(SoupMessageHeaders* hdrs, long totalLength, SoupRange** ranges, int* length) c_soup_message_headers_get_ranges; ///
+  gboolean function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* token) c_soup_message_headers_header_contains; ///
+  gboolean function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) c_soup_message_headers_header_equals; ///
   SoupMessageHeaders* function(SoupMessageHeaders* hdrs) c_soup_message_headers_ref; ///
   void function(SoupMessageHeaders* hdrs, const(char)* name) c_soup_message_headers_remove; ///
   void function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) c_soup_message_headers_replace; ///
@@ -287,7 +287,7 @@ __gshared extern(C)
   void function(SoupMessageHeaders* hdrs) c_soup_message_headers_unref; ///
 
   // MessageHeadersIter
-  bool function(SoupMessageHeadersIter* iter, const(char*)* name, const(char*)* value) c_soup_message_headers_iter_next; ///
+  gboolean function(SoupMessageHeadersIter* iter, const(char*)* name, const(char*)* value) c_soup_message_headers_iter_next; ///
   void function(SoupMessageHeadersIter* iter, SoupMessageHeaders* hdrs) c_soup_message_headers_iter_init; ///
 
   // MessageMetrics
@@ -319,7 +319,7 @@ __gshared extern(C)
   void function(SoupMultipart* multipart, SoupMessageHeaders* headers, GBytes* body_) c_soup_multipart_append_part; ///
   void function(SoupMultipart* multipart) c_soup_multipart_free; ///
   int function(SoupMultipart* multipart) c_soup_multipart_get_length; ///
-  bool function(SoupMultipart* multipart, int part, SoupMessageHeaders** headers, GBytes** body_) c_soup_multipart_get_part; ///
+  gboolean function(SoupMultipart* multipart, int part, SoupMessageHeaders** headers, GBytes** body_) c_soup_multipart_get_part; ///
   void function(SoupMultipart* multipart, SoupMessageHeaders* destHeaders, GBytes** destBody) c_soup_multipart_to_message; ///
 
   // MultipartInputStream
@@ -333,7 +333,7 @@ __gshared extern(C)
   // Server
   GType function() c_soup_server_get_type; ///
   SoupServer* function(const(char)* optname1,  ...) c_soup_server_new; ///
-  bool function(SoupServer* server, GIOStream* stream, GSocketAddress* localAddr, GSocketAddress* remoteAddr, GError** _err) c_soup_server_accept_iostream; ///
+  gboolean function(SoupServer* server, GIOStream* stream, GSocketAddress* localAddr, GSocketAddress* remoteAddr, GError** _err) c_soup_server_accept_iostream; ///
   void function(SoupServer* server, SoupAuthDomain* authDomain) c_soup_server_add_auth_domain; ///
   void function(SoupServer* server, const(char)* path, SoupServerCallback callback, void* userData, GDestroyNotify destroy) c_soup_server_add_early_handler; ///
   void function(SoupServer* server, const(char)* path, SoupServerCallback callback, void* userData, GDestroyNotify destroy) c_soup_server_add_handler; ///
@@ -345,11 +345,11 @@ __gshared extern(C)
   GTlsCertificate* function(SoupServer* server) c_soup_server_get_tls_certificate; ///
   GTlsDatabase* function(SoupServer* server) c_soup_server_get_tls_database; ///
   GSList* function(SoupServer* server) c_soup_server_get_uris; ///
-  bool function(SoupServer* server) c_soup_server_is_https; ///
-  bool function(SoupServer* server, GSocketAddress* address, SoupServerListenOptions options, GError** _err) c_soup_server_listen; ///
-  bool function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) c_soup_server_listen_all; ///
-  bool function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) c_soup_server_listen_local; ///
-  bool function(SoupServer* server, GSocket* socket, SoupServerListenOptions options, GError** _err) c_soup_server_listen_socket; ///
+  gboolean function(SoupServer* server) c_soup_server_is_https; ///
+  gboolean function(SoupServer* server, GSocketAddress* address, SoupServerListenOptions options, GError** _err) c_soup_server_listen; ///
+  gboolean function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) c_soup_server_listen_all; ///
+  gboolean function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) c_soup_server_listen_local; ///
+  gboolean function(SoupServer* server, GSocket* socket, SoupServerListenOptions options, GError** _err) c_soup_server_listen_socket; ///
   void function(SoupServer* server, SoupServerMessage* msg) c_soup_server_pause_message; ///
   void function(SoupServer* server, SoupAuthDomain* authDomain) c_soup_server_remove_auth_domain; ///
   void function(SoupServer* server, const(char)* path) c_soup_server_remove_handler; ///
@@ -376,7 +376,7 @@ __gshared extern(C)
   GTlsCertificate* function(SoupServerMessage* msg) c_soup_server_message_get_tls_peer_certificate; ///
   GTlsCertificateFlags function(SoupServerMessage* msg) c_soup_server_message_get_tls_peer_certificate_errors; ///
   GUri* function(SoupServerMessage* msg) c_soup_server_message_get_uri; ///
-  bool function(SoupServerMessage* msg) c_soup_server_message_is_options_ping; ///
+  gboolean function(SoupServerMessage* msg) c_soup_server_message_is_options_ping; ///
   void function(SoupServerMessage* msg) c_soup_server_message_pause; ///
   void function(SoupServerMessage* msg, SoupHTTPVersion version_) c_soup_server_message_set_http_version; ///
   void function(SoupServerMessage* msg, uint statusCode, const(char)* redirectUri) c_soup_server_message_set_redirect; ///
@@ -393,7 +393,7 @@ __gshared extern(C)
   void function(SoupSession* session, SoupSessionFeature* feature) c_soup_session_add_feature; ///
   void function(SoupSession* session, GType featureType) c_soup_session_add_feature_by_type; ///
   const(char)* function(SoupSession* session) c_soup_session_get_accept_language; ///
-  bool function(SoupSession* session) c_soup_session_get_accept_language_auto; ///
+  gboolean function(SoupSession* session) c_soup_session_get_accept_language_auto; ///
   SoupMessage* function(SoupSession* session, GAsyncResult* result) c_soup_session_get_async_result_message; ///
   SoupSessionFeature* function(SoupSession* session, GType featureType) c_soup_session_get_feature; ///
   SoupSessionFeature* function(SoupSession* session, GType featureType, SoupMessage* msg) c_soup_session_get_feature_for_message; ///
@@ -407,9 +407,9 @@ __gshared extern(C)
   GTlsDatabase* function(SoupSession* session) c_soup_session_get_tls_database; ///
   GTlsInteraction* function(SoupSession* session) c_soup_session_get_tls_interaction; ///
   const(char)* function(SoupSession* session) c_soup_session_get_user_agent; ///
-  bool function(SoupSession* session, GType featureType) c_soup_session_has_feature; ///
+  gboolean function(SoupSession* session, GType featureType) c_soup_session_has_feature; ///
   void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_soup_session_preconnect_async; ///
-  bool function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_preconnect_finish; ///
+  gboolean function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_preconnect_finish; ///
   void function(SoupSession* session, SoupSessionFeature* feature) c_soup_session_remove_feature; ///
   void function(SoupSession* session, GType featureType) c_soup_session_remove_feature_by_type; ///
   GInputStream* function(SoupSession* session, SoupMessage* msg, GCancellable* cancellable, GError** _err) c_soup_session_send; ///
@@ -422,7 +422,7 @@ __gshared extern(C)
   void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_soup_session_send_async; ///
   GInputStream* function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_send_finish; ///
   void function(SoupSession* session, const(char)* acceptLanguage) c_soup_session_set_accept_language; ///
-  void function(SoupSession* session, bool acceptLanguageAuto) c_soup_session_set_accept_language_auto; ///
+  void function(SoupSession* session, gboolean acceptLanguageAuto) c_soup_session_set_accept_language_auto; ///
   void function(SoupSession* session, uint timeout) c_soup_session_set_idle_timeout; ///
   void function(SoupSession* session, GProxyResolver* proxyResolver) c_soup_session_set_proxy_resolver; ///
   void function(SoupSession* session, uint timeout) c_soup_session_set_timeout; ///
@@ -458,7 +458,7 @@ __gshared extern(C)
 
   // WebsocketExtension
   GType function() c_soup_websocket_extension_get_type; ///
-  bool function(SoupWebsocketExtension* extension, SoupWebsocketConnectionType connectionType, GHashTable* params, GError** _err) c_soup_websocket_extension_configure; ///
+  gboolean function(SoupWebsocketExtension* extension, SoupWebsocketConnectionType connectionType, GHashTable* params, GError** _err) c_soup_websocket_extension_configure; ///
   char* function(SoupWebsocketExtension* extension) c_soup_websocket_extension_get_request_params; ///
   char* function(SoupWebsocketExtension* extension) c_soup_websocket_extension_get_response_params; ///
   GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) c_soup_websocket_extension_process_incoming_message; ///
@@ -471,7 +471,7 @@ __gshared extern(C)
   GType function() c_soup_websocket_extension_manager_get_type; ///
 
   // global
-  bool function(uint major, uint minor, uint micro) c_soup_check_version; ///
+  gboolean function(uint major, uint minor, uint micro) c_soup_check_version; ///
   void function(GSList* cookies) c_soup_cookies_free; ///
   GSList* function(SoupMessage* msg) c_soup_cookies_from_request; ///
   GSList* function(SoupMessage* msg) c_soup_cookies_from_response; ///
@@ -489,7 +489,7 @@ __gshared extern(C)
   uint function() c_soup_get_major_version; ///
   uint function() c_soup_get_micro_version; ///
   uint function() c_soup_get_minor_version; ///
-  bool function(const(char)* header, const(char)* token) c_soup_header_contains; ///
+  gboolean function(const(char)* header, const(char)* token) c_soup_header_contains; ///
   void function(GSList* list) c_soup_header_free_list; ///
   void function(GHashTable* paramList) c_soup_header_free_param_list; ///
   void function(GString* string_, const(char)* name, const(char)* value) c_soup_header_g_string_append_param; ///
@@ -500,19 +500,19 @@ __gshared extern(C)
   GSList* function(const(char)* header, GSList** unacceptable) c_soup_header_parse_quality_list; ///
   GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list; ///
   GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list_strict; ///
-  bool function(const(char)* str, int len, SoupMessageHeaders* dest) c_soup_headers_parse; ///
+  gboolean function(const(char)* str, int len, SoupMessageHeaders* dest) c_soup_headers_parse; ///
   uint function(const(char)* str, int len, SoupMessageHeaders* reqHeaders, char** reqMethod, char** reqPath, SoupHTTPVersion* ver) c_soup_headers_parse_request; ///
-  bool function(const(char)* str, int len, SoupMessageHeaders* headers, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_response; ///
-  bool function(const(char)* statusLine, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_status_line; ///
-  bool function(const(char)* domain) c_soup_tld_domain_is_public_suffix; ///
+  gboolean function(const(char)* str, int len, SoupMessageHeaders* headers, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_response; ///
+  gboolean function(const(char)* statusLine, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_status_line; ///
+  gboolean function(const(char)* domain) c_soup_tld_domain_is_public_suffix; ///
   const(char)* function(const(char)* hostname, GError** _err) c_soup_tld_get_base_domain; ///
   GUri* function(GUri* uri, SoupURIComponent firstComponent,  ...) c_soup_uri_copy; ///
   GBytes* function(const(char)* uri, char** contentType) c_soup_uri_decode_data_uri; ///
-  bool function(GUri* uri1, GUri* uri2) c_soup_uri_equal; ///
+  gboolean function(GUri* uri1, GUri* uri2) c_soup_uri_equal; ///
   void function(SoupMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions) c_soup_websocket_client_prepare_handshake; ///
-  bool function(SoupMessage* msg, GPtrArray* supportedExtensions, GList** acceptedExtensions, GError** _err) c_soup_websocket_client_verify_handshake; ///
-  bool function(SoupServerMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions, GError** _err) c_soup_websocket_server_check_handshake; ///
-  bool function(SoupServerMessage* msg, const(char)* expectedOrigin, char** protocols, GPtrArray* supportedExtensions, GList** acceptedExtensions) c_soup_websocket_server_process_handshake; ///
+  gboolean function(SoupMessage* msg, GPtrArray* supportedExtensions, GList** acceptedExtensions, GError** _err) c_soup_websocket_client_verify_handshake; ///
+  gboolean function(SoupServerMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions, GError** _err) c_soup_websocket_server_check_handshake; ///
+  gboolean function(SoupServerMessage* msg, const(char)* expectedOrigin, char** protocols, GPtrArray* supportedExtensions, GList** acceptedExtensions) c_soup_websocket_server_process_handshake; ///
 
   // SessionError
   GQuark function() c_soup_session_error_quark; ///

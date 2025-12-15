@@ -277,7 +277,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_tool_button_get_use_underline(cast(GtkToolButton*)this._cPtr);
+    _retval = cast(bool)gtk_tool_button_get_use_underline(cast(GtkToolButton*)this._cPtr);
     return _retval;
   }
 

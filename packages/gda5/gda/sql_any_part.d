@@ -72,7 +72,7 @@ class SqlAnyPart
   {
     bool _retval;
     GError *_err;
-    _retval = gda_sql_any_part_check_structure(cast(GdaSqlAnyPart*)this._cPtr, &_err);
+    _retval = cast(bool)gda_sql_any_part_check_structure(cast(GdaSqlAnyPart*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

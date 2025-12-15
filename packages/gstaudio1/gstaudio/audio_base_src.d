@@ -135,7 +135,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   bool getProvideClock()
   {
     bool _retval;
-    _retval = gst_audio_base_src_get_provide_clock(cast(GstAudioBaseSrc*)this._cPtr);
+    _retval = cast(bool)gst_audio_base_src_get_provide_clock(cast(GstAudioBaseSrc*)this._cPtr);
     return _retval;
   }
 

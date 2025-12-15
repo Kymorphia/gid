@@ -357,7 +357,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   bool getUsePopover()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_use_popover(cast(GtkMenuButton*)this._cPtr);
+    _retval = cast(bool)gtk_menu_button_get_use_popover(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 

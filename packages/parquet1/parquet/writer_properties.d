@@ -106,7 +106,7 @@ class WriterProperties : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = gparquet_writer_properties_is_dictionary_enabled(cast(GParquetWriterProperties*)this._cPtr, _path);
+    _retval = cast(bool)gparquet_writer_properties_is_dictionary_enabled(cast(GParquetWriterProperties*)this._cPtr, _path);
     return _retval;
   }
 

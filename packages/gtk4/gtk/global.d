@@ -176,7 +176,7 @@ bool acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types
 {
   bool _retval;
   const(char)* _accelerator = accelerator.toCString(No.Alloc);
-  _retval = gtk_accelerator_parse(_accelerator, cast(uint*)&acceleratorKey, &acceleratorMods);
+  _retval = cast(bool)gtk_accelerator_parse(_accelerator, cast(uint*)&acceleratorKey, &acceleratorMods);
   return _retval;
 }
 
@@ -210,7 +210,7 @@ bool acceleratorParseWithKeycode(string accelerator, gdk.display.Display display
   bool _retval;
   const(char)* _accelerator = accelerator.toCString(No.Alloc);
   uint* _acceleratorCodes;
-  _retval = gtk_accelerator_parse_with_keycode(_accelerator, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, cast(uint*)&acceleratorKey, &_acceleratorCodes, &acceleratorMods);
+  _retval = cast(bool)gtk_accelerator_parse_with_keycode(_accelerator, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, cast(uint*)&acceleratorKey, &_acceleratorCodes, &acceleratorMods);
   uint _lenacceleratorCodes;
   if (_acceleratorCodes)
   {
@@ -240,7 +240,7 @@ bool acceleratorParseWithKeycode(string accelerator, gdk.display.Display display
 bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_accelerator_valid(keyval, modifiers);
+  _retval = cast(bool)gtk_accelerator_valid(keyval, modifiers);
   return _retval;
 }
 
@@ -357,11 +357,11 @@ int distributeNaturalAllocation(int extraSpace, gtk.types.RequestedSize[] sizes)
 */
 void enumeratePrinters(gtk.types.PrinterFunc func, bool wait)
 {
-  extern(C) bool _funcCallback(GtkPrinter* printer, void* data)
+  extern(C) gboolean _funcCallback(GtkPrinter* printer, void* data)
   {
     auto _dlg = cast(gtk.types.PrinterFunc*)data;
 
-    bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.printer.Printer)(cast(void*)printer, No.Take));
+    gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.printer.Printer)(cast(void*)printer, No.Take));
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
@@ -585,7 +585,7 @@ void init_()
 bool initCheck()
 {
   bool _retval;
-  _retval = gtk_init_check();
+  _retval = cast(bool)gtk_init_check();
   return _retval;
 }
 
@@ -598,7 +598,7 @@ bool initCheck()
 bool isInitialized()
 {
   bool _retval;
-  _retval = gtk_is_initialized();
+  _retval = cast(bool)gtk_is_initialized();
   return _retval;
 }
 
@@ -1019,7 +1019,7 @@ bool showUriFullFinish(gtk.window.Window parent, gio.async_result.AsyncResult re
 {
   bool _retval;
   GError *_err;
-  _retval = gtk_show_uri_full_finish(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+  _retval = cast(bool)gtk_show_uri_full_finish(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;
@@ -1046,7 +1046,7 @@ void testAccessibleAssertionMessageRole(string domain, string file, int line, st
 bool testAccessibleHasProperty(gtk.accessible.Accessible accessible, gtk.types.AccessibleProperty property)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_property(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, property);
+  _retval = cast(bool)gtk_test_accessible_has_property(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, property);
   return _retval;
 }
 
@@ -1061,7 +1061,7 @@ bool testAccessibleHasProperty(gtk.accessible.Accessible accessible, gtk.types.A
 bool testAccessibleHasRelation(gtk.accessible.Accessible accessible, gtk.types.AccessibleRelation relation)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_relation(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, relation);
+  _retval = cast(bool)gtk_test_accessible_has_relation(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, relation);
   return _retval;
 }
 
@@ -1077,7 +1077,7 @@ bool testAccessibleHasRelation(gtk.accessible.Accessible accessible, gtk.types.A
 bool testAccessibleHasRole(gtk.accessible.Accessible accessible, gtk.types.AccessibleRole role)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_role(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, role);
+  _retval = cast(bool)gtk_test_accessible_has_role(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, role);
   return _retval;
 }
 
@@ -1092,7 +1092,7 @@ bool testAccessibleHasRole(gtk.accessible.Accessible accessible, gtk.types.Acces
 bool testAccessibleHasState(gtk.accessible.Accessible accessible, gtk.types.AccessibleState state)
 {
   bool _retval;
-  _retval = gtk_test_accessible_has_state(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, state);
+  _retval = cast(bool)gtk_test_accessible_has_state(accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, state);
   return _retval;
 }
 
@@ -1182,7 +1182,7 @@ bool treeGetRowDragData(gobject.value.Value value, out gtk.tree_model.TreeModel 
   bool _retval;
   GtkTreeModel* _treeModel;
   GtkTreePath* _path;
-  _retval = gtk_tree_get_row_drag_data(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_treeModel, &_path);
+  _retval = cast(bool)gtk_tree_get_row_drag_data(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_treeModel, &_path);
   treeModel = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
   path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   return _retval;

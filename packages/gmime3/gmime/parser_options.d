@@ -99,7 +99,7 @@ class ParserOptions : gobject.boxed.Boxed
   bool getAllowAddressesWithoutDomain()
   {
     bool _retval;
-    _retval = g_mime_parser_options_get_allow_addresses_without_domain(cast(GMimeParserOptions*)this._cPtr);
+    _retval = cast(bool)g_mime_parser_options_get_allow_addresses_without_domain(cast(GMimeParserOptions*)this._cPtr);
     return _retval;
   }
 

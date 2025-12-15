@@ -125,7 +125,7 @@ class SearchBar : gtk.bin.Bin
   bool getSearchMode()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
+    _retval = cast(bool)gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class SearchBar : gtk.bin.Bin
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
+    _retval = cast(bool)gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class SearchBar : gtk.bin.Bin
   bool handleEvent(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_search_bar_handle_event(cast(GtkSearchBar*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gtk_search_bar_handle_event(cast(GtkSearchBar*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 

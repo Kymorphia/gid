@@ -98,7 +98,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   bool getCloseAfterSave()
   {
     bool _retval;
-    _retval = panel_save_dialog_get_close_after_save(cast(PanelSaveDialog*)this._cPtr);
+    _retval = cast(bool)panel_save_dialog_get_close_after_save(cast(PanelSaveDialog*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   {
     bool _retval;
     GError *_err;
-    _retval = panel_save_dialog_run_finish(cast(PanelSaveDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)panel_save_dialog_run_finish(cast(PanelSaveDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -212,7 +212,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowTitleButtons()
   {
     bool _retval;
-    _retval = gtk_header_bar_get_show_title_buttons(cast(GtkHeaderBar*)this._cPtr);
+    _retval = cast(bool)gtk_header_bar_get_show_title_buttons(cast(GtkHeaderBar*)this._cPtr);
     return _retval;
   }
 

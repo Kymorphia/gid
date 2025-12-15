@@ -369,7 +369,7 @@ class String : gobject.boxed.Boxed
   bool equal(glib.string_.String v2)
   {
     bool _retval;
-    _retval = g_string_equal(cast(const(GString)*)this._cPtr, v2 ? cast(const(GString)*)v2._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_string_equal(cast(const(GString)*)this._cPtr, v2 ? cast(const(GString)*)v2._cPtr(No.Dup) : null);
     return _retval;
   }
 

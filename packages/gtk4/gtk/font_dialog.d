@@ -364,7 +364,7 @@ class FontDialog : gobject.object.ObjectWrap
     char* _fontFeatures;
     PangoLanguage* _language;
     GError *_err;
-    _retval = gtk_font_dialog_choose_font_and_features_finish(cast(GtkFontDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_fontDesc, &_fontFeatures, &_language, &_err);
+    _retval = cast(bool)gtk_font_dialog_choose_font_and_features_finish(cast(GtkFontDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_fontDesc, &_fontFeatures, &_language, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
@@ -440,7 +440,7 @@ class FontDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_font_dialog_get_modal(cast(GtkFontDialog*)this._cPtr);
+    _retval = cast(bool)gtk_font_dialog_get_modal(cast(GtkFontDialog*)this._cPtr);
     return _retval;
   }
 

@@ -51,7 +51,7 @@ template SerializableT()
   {
     bool _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _retval = json_serializable_default_deserialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, propertyNode ? cast(JsonNode*)propertyNode._cPtr(No.Dup) : null);
+    _retval = cast(bool)json_serializable_default_deserialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, propertyNode ? cast(JsonNode*)propertyNode._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ template SerializableT()
     bool _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     GValue _value;
-    _retval = json_serializable_deserialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, &_value, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, propertyNode ? cast(JsonNode*)propertyNode._cPtr(No.Dup) : null);
+    _retval = cast(bool)json_serializable_deserialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, &_value, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, propertyNode ? cast(JsonNode*)propertyNode._cPtr(No.Dup) : null);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }

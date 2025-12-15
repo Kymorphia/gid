@@ -506,7 +506,7 @@ class Message : gobject.object.ObjectWrap
   bool getForceHttp1()
   {
     bool _retval;
-    _retval = soup_message_get_force_http1(cast(SoupMessage*)this._cPtr);
+    _retval = cast(bool)soup_message_get_force_http1(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -532,7 +532,7 @@ class Message : gobject.object.ObjectWrap
   bool getIsOptionsPing()
   {
     bool _retval;
-    _retval = soup_message_get_is_options_ping(cast(SoupMessage*)this._cPtr);
+    _retval = cast(bool)soup_message_get_is_options_ping(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class Message : gobject.object.ObjectWrap
   bool getIsTopLevelNavigation()
   {
     bool _retval;
-    _retval = soup_message_get_is_top_level_navigation(cast(SoupMessage*)this._cPtr);
+    _retval = cast(bool)soup_message_get_is_top_level_navigation(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -752,7 +752,7 @@ class Message : gobject.object.ObjectWrap
   bool isFeatureDisabled(gobject.types.GType featureType)
   {
     bool _retval;
-    _retval = soup_message_is_feature_disabled(cast(SoupMessage*)this._cPtr, featureType);
+    _retval = cast(bool)soup_message_is_feature_disabled(cast(SoupMessage*)this._cPtr, featureType);
     return _retval;
   }
 
@@ -766,7 +766,7 @@ class Message : gobject.object.ObjectWrap
   bool isKeepalive()
   {
     bool _retval;
-    _retval = soup_message_is_keepalive(cast(SoupMessage*)this._cPtr);
+    _retval = cast(bool)soup_message_is_keepalive(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -780,7 +780,7 @@ class Message : gobject.object.ObjectWrap
   bool queryFlags(soup.types.MessageFlags flags)
   {
     bool _retval;
-    _retval = soup_message_query_flags(cast(SoupMessage*)this._cPtr, flags);
+    _retval = cast(bool)soup_message_query_flags(cast(SoupMessage*)this._cPtr, flags);
     return _retval;
   }
 

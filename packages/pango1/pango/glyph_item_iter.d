@@ -234,7 +234,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = pango_glyph_item_iter_init_end(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
+    _retval = cast(bool)pango_glyph_item_iter_init_end(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = pango_glyph_item_iter_init_start(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
+    _retval = cast(bool)pango_glyph_item_iter_init_start(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool nextCluster()
   {
     bool _retval;
-    _retval = pango_glyph_item_iter_next_cluster(cast(PangoGlyphItemIter*)this._cPtr);
+    _retval = cast(bool)pango_glyph_item_iter_next_cluster(cast(PangoGlyphItemIter*)this._cPtr);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool prevCluster()
   {
     bool _retval;
-    _retval = pango_glyph_item_iter_prev_cluster(cast(PangoGlyphItemIter*)this._cPtr);
+    _retval = cast(bool)pango_glyph_item_iter_prev_cluster(cast(PangoGlyphItemIter*)this._cPtr);
     return _retval;
   }
 }

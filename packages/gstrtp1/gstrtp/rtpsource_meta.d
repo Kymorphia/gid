@@ -67,7 +67,7 @@ class RTPSourceMeta
   */
   @property bool ssrcValid()
   {
-    return (cast(GstRTPSourceMeta*)this._cPtr).ssrcValid;
+    return cast(bool)(cast(GstRTPSourceMeta*)this._cPtr).ssrcValid;
   }
 
   /**
@@ -114,7 +114,7 @@ class RTPSourceMeta
       _csrcCount = cast(uint)csrc.length;
 
     auto _csrc = cast(const(uint)*)csrc.ptr;
-    _retval = gst_rtp_source_meta_append_csrc(cast(GstRTPSourceMeta*)this._cPtr, _csrc, _csrcCount);
+    _retval = cast(bool)gst_rtp_source_meta_append_csrc(cast(GstRTPSourceMeta*)this._cPtr, _csrc, _csrcCount);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class RTPSourceMeta
   bool setSsrc(out uint ssrc)
   {
     bool _retval;
-    _retval = gst_rtp_source_meta_set_ssrc(cast(GstRTPSourceMeta*)this._cPtr, cast(uint*)&ssrc);
+    _retval = cast(bool)gst_rtp_source_meta_set_ssrc(cast(GstRTPSourceMeta*)this._cPtr, cast(uint*)&ssrc);
     return _retval;
   }
 

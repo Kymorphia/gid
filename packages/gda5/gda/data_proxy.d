@@ -193,7 +193,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_proxy_apply_all_changes(cast(GdaDataProxy*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_proxy_apply_all_changes(cast(GdaDataProxy*)this._cPtr, &_err);
     if (_err)
       throw new DataProxyException(_err);
     return _retval;
@@ -211,7 +211,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_proxy_apply_row_changes(cast(GdaDataProxy*)this._cPtr, proxyRow, &_err);
+    _retval = cast(bool)gda_data_proxy_apply_row_changes(cast(GdaDataProxy*)this._cPtr, proxyRow, &_err);
     if (_err)
       throw new DataProxyException(_err);
     return _retval;
@@ -227,7 +227,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool cancelAllChanges()
   {
     bool _retval;
-    _retval = gda_data_proxy_cancel_all_changes(cast(GdaDataProxy*)this._cPtr);
+    _retval = cast(bool)gda_data_proxy_cancel_all_changes(cast(GdaDataProxy*)this._cPtr);
     return _retval;
   }
 
@@ -434,7 +434,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool hasChanged()
   {
     bool _retval;
-    _retval = gda_data_proxy_has_changed(cast(GdaDataProxy*)this._cPtr);
+    _retval = cast(bool)gda_data_proxy_has_changed(cast(GdaDataProxy*)this._cPtr);
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool isReadOnly()
   {
     bool _retval;
-    _retval = gda_data_proxy_is_read_only(cast(GdaDataProxy*)this._cPtr);
+    _retval = cast(bool)gda_data_proxy_is_read_only(cast(GdaDataProxy*)this._cPtr);
     return _retval;
   }
 
@@ -456,7 +456,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool rowHasChanged(int proxyRow)
   {
     bool _retval;
-    _retval = gda_data_proxy_row_has_changed(cast(GdaDataProxy*)this._cPtr, proxyRow);
+    _retval = cast(bool)gda_data_proxy_row_has_changed(cast(GdaDataProxy*)this._cPtr, proxyRow);
     return _retval;
   }
 
@@ -470,7 +470,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool rowIsDeleted(int proxyRow)
   {
     bool _retval;
-    _retval = gda_data_proxy_row_is_deleted(cast(GdaDataProxy*)this._cPtr, proxyRow);
+    _retval = cast(bool)gda_data_proxy_row_is_deleted(cast(GdaDataProxy*)this._cPtr, proxyRow);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool rowIsInserted(int proxyRow)
   {
     bool _retval;
-    _retval = gda_data_proxy_row_is_inserted(cast(GdaDataProxy*)this._cPtr, proxyRow);
+    _retval = cast(bool)gda_data_proxy_row_is_inserted(cast(GdaDataProxy*)this._cPtr, proxyRow);
     return _retval;
   }
 
@@ -512,7 +512,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
     bool _retval;
     const(char)* _filterExpr = filterExpr.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_data_proxy_set_filter_expr(cast(GdaDataProxy*)this._cPtr, _filterExpr, &_err);
+    _retval = cast(bool)gda_data_proxy_set_filter_expr(cast(GdaDataProxy*)this._cPtr, _filterExpr, &_err);
     if (_err)
       throw new DataProxyException(_err);
     return _retval;
@@ -530,7 +530,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_proxy_set_ordering_column(cast(GdaDataProxy*)this._cPtr, col, &_err);
+    _retval = cast(bool)gda_data_proxy_set_ordering_column(cast(GdaDataProxy*)this._cPtr, col, &_err);
     if (_err)
       throw new DataProxyException(_err);
     return _retval;

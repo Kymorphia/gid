@@ -127,9 +127,9 @@ class Plugin : gst.object.ObjectWrap
   {
     static gst.types.PluginInitFunc _static_initFunc;
 
-    extern(C) bool _initFuncCallback(GstPlugin* plugin)
+    extern(C) gboolean _initFuncCallback(GstPlugin* plugin)
     {
-      bool _retval = _static_initFunc(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      gboolean _retval = _static_initFunc(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
       return _retval;
     }
     auto _initFuncCB = initFunc ? &_initFuncCallback : null;
@@ -143,7 +143,7 @@ class Plugin : gst.object.ObjectWrap
     const(char)* _source = source.toCString(No.Alloc);
     const(char)* _package_ = package_.toCString(No.Alloc);
     const(char)* _origin = origin.toCString(No.Alloc);
-    _retval = gst_plugin_register_static(majorVersion, minorVersion, _name, _description, _initFuncCB, _version_, _license, _source, _package_, _origin);
+    _retval = cast(bool)gst_plugin_register_static(majorVersion, minorVersion, _name, _description, _initFuncCB, _version_, _license, _source, _package_, _origin);
     _static_initFunc = null;
     return _retval;
   }
@@ -179,11 +179,11 @@ class Plugin : gst.object.ObjectWrap
   */
   static bool registerStaticFull(int majorVersion, int minorVersion, string name, string description, gst.types.PluginInitFullFunc initFullFunc, string version_, string license, string source, string package_, string origin)
   {
-    extern(C) bool _initFullFuncCallback(GstPlugin* plugin, void* userData)
+    extern(C) gboolean _initFullFuncCallback(GstPlugin* plugin, void* userData)
     {
       auto _dlg = cast(gst.types.PluginInitFullFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
       return _retval;
     }
     auto _initFullFuncCB = initFullFunc ? &_initFullFuncCallback : null;
@@ -197,7 +197,7 @@ class Plugin : gst.object.ObjectWrap
     const(char)* _package_ = package_.toCString(No.Alloc);
     const(char)* _origin = origin.toCString(No.Alloc);
     auto _initFullFunc = initFullFunc ? cast(void*)&(initFullFunc) : null;
-    _retval = gst_plugin_register_static_full(majorVersion, minorVersion, _name, _description, _initFullFuncCB, _version_, _license, _source, _package_, _origin, _initFullFunc);
+    _retval = cast(bool)gst_plugin_register_static_full(majorVersion, minorVersion, _name, _description, _initFullFuncCB, _version_, _license, _source, _package_, _origin, _initFullFunc);
     return _retval;
   }
 
@@ -501,7 +501,7 @@ class Plugin : gst.object.ObjectWrap
   bool isLoaded()
   {
     bool _retval;
-    _retval = gst_plugin_is_loaded(cast(GstPlugin*)this._cPtr);
+    _retval = cast(bool)gst_plugin_is_loaded(cast(GstPlugin*)this._cPtr);
     return _retval;
   }
 

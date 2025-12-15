@@ -160,7 +160,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_select_compute_columns_attributes(cast(GdaDataSelect*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_select_compute_columns_attributes(cast(GdaDataSelect*)this._cPtr, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -179,7 +179,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_select_compute_modification_statements(cast(GdaDataSelect*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_select_compute_modification_statements(cast(GdaDataSelect*)this._cPtr, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -198,7 +198,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_select_compute_modification_statements_ext(cast(GdaDataSelect*)this._cPtr, condType, &_err);
+    _retval = cast(bool)gda_data_select_compute_modification_statements_ext(cast(GdaDataSelect*)this._cPtr, condType, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -220,7 +220,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_select_compute_row_selection_condition(cast(GdaDataSelect*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_select_compute_row_selection_condition(cast(GdaDataSelect*)this._cPtr, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -263,7 +263,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_select_prepare_for_offline(cast(GdaDataSelect*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_select_prepare_for_offline(cast(GdaDataSelect*)this._cPtr, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -279,7 +279,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_select_rerun(cast(GdaDataSelect*)this._cPtr, &_err);
+    _retval = cast(bool)gda_data_select_rerun(cast(GdaDataSelect*)this._cPtr, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -342,7 +342,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     bool _retval;
     GError *_err;
-    _retval = gda_data_select_set_modification_statement(cast(GdaDataSelect*)this._cPtr, modStmt ? cast(GdaStatement*)modStmt._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_data_select_set_modification_statement(cast(GdaDataSelect*)this._cPtr, modStmt ? cast(GdaStatement*)modStmt._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -361,7 +361,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
     bool _retval;
     const(char)* _sql = sql.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_data_select_set_modification_statement_sql(cast(GdaDataSelect*)this._cPtr, _sql, &_err);
+    _retval = cast(bool)gda_data_select_set_modification_statement_sql(cast(GdaDataSelect*)this._cPtr, _sql, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
@@ -392,7 +392,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
     bool _retval;
     const(char)* _sqlWhere = sqlWhere.toCString(No.Alloc);
     GError *_err;
-    _retval = gda_data_select_set_row_selection_condition_sql(cast(GdaDataSelect*)this._cPtr, _sqlWhere, &_err);
+    _retval = cast(bool)gda_data_select_set_row_selection_condition_sql(cast(GdaDataSelect*)this._cPtr, _sqlWhere, &_err);
     if (_err)
       throw new DataSelectException(_err);
     return _retval;

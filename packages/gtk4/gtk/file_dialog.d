@@ -333,7 +333,7 @@ class FileDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_file_dialog_get_modal(cast(GtkFileDialog*)this._cPtr);
+    _retval = cast(bool)gtk_file_dialog_get_modal(cast(GtkFileDialog*)this._cPtr);
     return _retval;
   }
 

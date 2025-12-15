@@ -196,7 +196,7 @@ class SettingsSchema : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_settings_schema_has_key(cast(GSettingsSchema*)this._cPtr, _name);
+    _retval = cast(bool)g_settings_schema_has_key(cast(GSettingsSchema*)this._cPtr, _name);
     return _retval;
   }
 

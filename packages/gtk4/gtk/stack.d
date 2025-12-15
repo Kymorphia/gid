@@ -338,7 +338,7 @@ class Stack : gtk.widget.Widget
   bool getHhomogeneous()
   {
     bool _retval;
-    _retval = gtk_stack_get_hhomogeneous(cast(GtkStack*)this._cPtr);
+    _retval = cast(bool)gtk_stack_get_hhomogeneous(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class Stack : gtk.widget.Widget
   bool getInterpolateSize()
   {
     bool _retval;
-    _retval = gtk_stack_get_interpolate_size(cast(GtkStack*)this._cPtr);
+    _retval = cast(bool)gtk_stack_get_interpolate_size(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Stack : gtk.widget.Widget
   bool getTransitionRunning()
   {
     bool _retval;
-    _retval = gtk_stack_get_transition_running(cast(GtkStack*)this._cPtr);
+    _retval = cast(bool)gtk_stack_get_transition_running(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class Stack : gtk.widget.Widget
   bool getVhomogeneous()
   {
     bool _retval;
-    _retval = gtk_stack_get_vhomogeneous(cast(GtkStack*)this._cPtr);
+    _retval = cast(bool)gtk_stack_get_vhomogeneous(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 

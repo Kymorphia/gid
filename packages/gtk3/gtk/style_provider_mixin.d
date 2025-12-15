@@ -73,7 +73,7 @@ template StyleProviderT()
   {
     bool _retval;
     GValue _value;
-    _retval = gtk_style_provider_get_style_property(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null, state, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, &_value);
+    _retval = cast(bool)gtk_style_provider_get_style_property(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null, state, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }

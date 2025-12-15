@@ -91,7 +91,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   static bool isSupported()
   {
     bool _retval;
-    _retval = g_unix_credentials_message_is_supported();
+    _retval = cast(bool)g_unix_credentials_message_is_supported();
     return _retval;
   }
 

@@ -101,7 +101,7 @@ class RankOptions : arrow.function_options.FunctionOptions
   bool equal(arrow.rank_options.RankOptions otherOptions)
   {
     bool _retval;
-    _retval = garrow_rank_options_equal(cast(GArrowRankOptions*)this._cPtr, otherOptions ? cast(GArrowRankOptions*)otherOptions._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_rank_options_equal(cast(GArrowRankOptions*)this._cPtr, otherOptions ? cast(GArrowRankOptions*)otherOptions._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -55,7 +55,7 @@ bool audioChannelPositionsFromMask(ulong channelMask, gstaudio.types.AudioChanne
     _channels = cast(int)position.length;
 
   auto _position = cast(GstAudioChannelPosition*)position.ptr;
-  _retval = gst_audio_channel_positions_from_mask(_channels, channelMask, _position);
+  _retval = cast(bool)gst_audio_channel_positions_from_mask(_channels, channelMask, _position);
   return _retval;
 }
 
@@ -79,7 +79,7 @@ bool audioChannelPositionsToMask(gstaudio.types.AudioChannelPosition[] position,
     _channels = cast(int)position.length;
 
   auto _position = cast(const(GstAudioChannelPosition)*)position.ptr;
-  _retval = gst_audio_channel_positions_to_mask(_position, _channels, forceOrder, cast(ulong*)&channelMask);
+  _retval = cast(bool)gst_audio_channel_positions_to_mask(_position, _channels, forceOrder, cast(ulong*)&channelMask);
   return _retval;
 }
 
@@ -124,7 +124,7 @@ bool audioChannelPositionsToValidOrder(gstaudio.types.AudioChannelPosition[] pos
     _channels = cast(int)position.length;
 
   auto _position = cast(GstAudioChannelPosition*)position.ptr;
-  _retval = gst_audio_channel_positions_to_valid_order(_position, _channels);
+  _retval = cast(bool)gst_audio_channel_positions_to_valid_order(_position, _channels);
   return _retval;
 }
 
@@ -147,7 +147,7 @@ bool audioCheckValidChannelPositions(gstaudio.types.AudioChannelPosition[] posit
     _channels = cast(int)position.length;
 
   auto _position = cast(const(GstAudioChannelPosition)*)position.ptr;
-  _retval = gst_audio_check_valid_channel_positions(_position, _channels, forceOrder);
+  _retval = cast(bool)gst_audio_check_valid_channel_positions(_position, _channels, forceOrder);
   return _retval;
 }
 
@@ -188,7 +188,9 @@ gstaudio.types.AudioFormat[] audioFormatsRaw()
 
   if (_cretval)
   {
-    _retval = cast(gstaudio.types.AudioFormat[])_cretval[0 .. _cretlength].dup;
+    _retval = new gstaudio.types.AudioFormat[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = cast(gstaudio.types.AudioFormat)(_cretval[i]);
   }
   return _retval;
 }
@@ -226,7 +228,7 @@ bool audioGetChannelReorderMap(gstaudio.types.AudioChannelPosition[] from, gstau
     _channels = cast(int)reorderMap.length;
 
   auto _reorderMap = cast(int*)reorderMap.ptr;
-  _retval = gst_audio_get_channel_reorder_map(_channels, _from, _to, _reorderMap);
+  _retval = cast(bool)gst_audio_get_channel_reorder_map(_channels, _from, _to, _reorderMap);
   return _retval;
 }
 
@@ -273,7 +275,7 @@ bool audioIec61937Payload(ubyte[] src, ubyte[] dst, gstaudio.audio_ring_buffer_s
     _dstN = cast(uint)dst.length;
 
   auto _dst = cast(ubyte*)dst.ptr;
-  _retval = gst_audio_iec61937_payload(_src, _srcN, _dst, _dstN, spec ? cast(const(GstAudioRingBufferSpec)*)spec._cPtr : null, endianness);
+  _retval = cast(bool)gst_audio_iec61937_payload(_src, _srcN, _dst, _dstN, spec ? cast(const(GstAudioRingBufferSpec)*)spec._cPtr : null, endianness);
   return _retval;
 }
 
@@ -351,7 +353,7 @@ bool audioReorderChannels(ubyte[] data, gstaudio.types.AudioFormat format, gstau
     _channels = cast(int)to.length;
 
   auto _to = cast(const(GstAudioChannelPosition)*)to.ptr;
-  _retval = gst_audio_reorder_channels(_data, _size, format, _channels, _from, _to);
+  _retval = cast(bool)gst_audio_reorder_channels(_data, _size, format, _channels, _from, _to);
   return _retval;
 }
 

@@ -206,7 +206,7 @@ class IOChannel : gobject.boxed.Boxed
   bool getBuffered()
   {
     bool _retval;
-    _retval = g_io_channel_get_buffered(cast(GIOChannel*)this._cPtr);
+    _retval = cast(bool)g_io_channel_get_buffered(cast(GIOChannel*)this._cPtr);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class IOChannel : gobject.boxed.Boxed
   bool getCloseOnUnref()
   {
     bool _retval;
-    _retval = g_io_channel_get_close_on_unref(cast(GIOChannel*)this._cPtr);
+    _retval = cast(bool)g_io_channel_get_close_on_unref(cast(GIOChannel*)this._cPtr);
     return _retval;
   }
 

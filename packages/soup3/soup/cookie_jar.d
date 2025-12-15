@@ -282,7 +282,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   bool isPersistent()
   {
     bool _retval;
-    _retval = soup_cookie_jar_is_persistent(cast(SoupCookieJar*)this._cPtr);
+    _retval = cast(bool)soup_cookie_jar_is_persistent(cast(SoupCookieJar*)this._cPtr);
     return _retval;
   }
 

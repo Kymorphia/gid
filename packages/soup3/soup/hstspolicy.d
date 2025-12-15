@@ -179,7 +179,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool equal(soup.hstspolicy.HSTSPolicy policy2)
   {
     bool _retval;
-    _retval = soup_hsts_policy_equal(cast(SoupHSTSPolicy*)this._cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2._cPtr(No.Dup) : null);
+    _retval = cast(bool)soup_hsts_policy_equal(cast(SoupHSTSPolicy*)this._cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool includesSubdomains()
   {
     bool _retval;
-    _retval = soup_hsts_policy_includes_subdomains(cast(SoupHSTSPolicy*)this._cPtr);
+    _retval = cast(bool)soup_hsts_policy_includes_subdomains(cast(SoupHSTSPolicy*)this._cPtr);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool isExpired()
   {
     bool _retval;
-    _retval = soup_hsts_policy_is_expired(cast(SoupHSTSPolicy*)this._cPtr);
+    _retval = cast(bool)soup_hsts_policy_is_expired(cast(SoupHSTSPolicy*)this._cPtr);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool isSessionPolicy()
   {
     bool _retval;
-    _retval = soup_hsts_policy_is_session_policy(cast(SoupHSTSPolicy*)this._cPtr);
+    _retval = cast(bool)soup_hsts_policy_is_session_policy(cast(SoupHSTSPolicy*)this._cPtr);
     return _retval;
   }
 }

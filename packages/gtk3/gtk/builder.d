@@ -770,7 +770,7 @@ class Builder : gobject.object.ObjectWrap
     const(char)* _string_ = string_.toCString(No.Alloc);
     GValue _value;
     GError *_err;
-    _retval = gtk_builder_value_from_string(cast(GtkBuilder*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _string_, &_value, &_err);
+    _retval = cast(bool)gtk_builder_value_from_string(cast(GtkBuilder*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _string_, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -799,7 +799,7 @@ class Builder : gobject.object.ObjectWrap
     const(char)* _string_ = string_.toCString(No.Alloc);
     GValue _value;
     GError *_err;
-    _retval = gtk_builder_value_from_string_type(cast(GtkBuilder*)this._cPtr, type, _string_, &_value, &_err);
+    _retval = cast(bool)gtk_builder_value_from_string_type(cast(GtkBuilder*)this._cPtr, type, _string_, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);

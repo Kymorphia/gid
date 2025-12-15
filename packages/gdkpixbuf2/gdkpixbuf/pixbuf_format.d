@@ -165,7 +165,7 @@ class PixbufFormat : gobject.boxed.Boxed
   */
   @property bool disabled()
   {
-    return (cast(GdkPixbufFormat*)this._cPtr).disabled;
+    return cast(bool)(cast(GdkPixbufFormat*)this._cPtr).disabled;
   }
 
   /**
@@ -309,7 +309,7 @@ class PixbufFormat : gobject.boxed.Boxed
   bool isDisabled()
   {
     bool _retval;
-    _retval = gdk_pixbuf_format_is_disabled(cast(GdkPixbufFormat*)this._cPtr);
+    _retval = cast(bool)gdk_pixbuf_format_is_disabled(cast(GdkPixbufFormat*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _optionKey = optionKey.toCString(No.Alloc);
-    _retval = gdk_pixbuf_format_is_save_option_supported(cast(GdkPixbufFormat*)this._cPtr, _optionKey);
+    _retval = cast(bool)gdk_pixbuf_format_is_save_option_supported(cast(GdkPixbufFormat*)this._cPtr, _optionKey);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class PixbufFormat : gobject.boxed.Boxed
   bool isScalable()
   {
     bool _retval;
-    _retval = gdk_pixbuf_format_is_scalable(cast(GdkPixbufFormat*)this._cPtr);
+    _retval = cast(bool)gdk_pixbuf_format_is_scalable(cast(GdkPixbufFormat*)this._cPtr);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class PixbufFormat : gobject.boxed.Boxed
   bool isWritable()
   {
     bool _retval;
-    _retval = gdk_pixbuf_format_is_writable(cast(GdkPixbufFormat*)this._cPtr);
+    _retval = cast(bool)gdk_pixbuf_format_is_writable(cast(GdkPixbufFormat*)this._cPtr);
     return _retval;
   }
 

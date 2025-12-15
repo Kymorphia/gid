@@ -366,7 +366,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   bool getIsRemote()
   {
     bool _retval;
-    _retval = g_application_command_line_get_is_remote(cast(GApplicationCommandLine*)this._cPtr);
+    _retval = cast(bool)g_application_command_line_get_is_remote(cast(GApplicationCommandLine*)this._cPtr);
     return _retval;
   }
 

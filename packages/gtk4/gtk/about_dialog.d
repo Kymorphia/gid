@@ -711,7 +711,7 @@ class AboutDialog : gtk.window.Window
   bool getWrapLicense()
   {
     bool _retval;
-    _retval = gtk_about_dialog_get_wrap_license(cast(GtkAboutDialog*)this._cPtr);
+    _retval = cast(bool)gtk_about_dialog_get_wrap_license(cast(GtkAboutDialog*)this._cPtr);
     return _retval;
   }
 

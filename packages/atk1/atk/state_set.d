@@ -69,7 +69,7 @@ class StateSet : gobject.object.ObjectWrap
   bool addState(atk.types.StateType type)
   {
     bool _retval;
-    _retval = atk_state_set_add_state(cast(AtkStateSet*)this._cPtr, type);
+    _retval = cast(bool)atk_state_set_add_state(cast(AtkStateSet*)this._cPtr, type);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class StateSet : gobject.object.ObjectWrap
   bool containsState(atk.types.StateType type)
   {
     bool _retval;
-    _retval = atk_state_set_contains_state(cast(AtkStateSet*)this._cPtr, type);
+    _retval = cast(bool)atk_state_set_contains_state(cast(AtkStateSet*)this._cPtr, type);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class StateSet : gobject.object.ObjectWrap
       _nTypes = cast(int)types.length;
 
     auto _types = cast(AtkStateType*)types.ptr;
-    _retval = atk_state_set_contains_states(cast(AtkStateSet*)this._cPtr, _types, _nTypes);
+    _retval = cast(bool)atk_state_set_contains_states(cast(AtkStateSet*)this._cPtr, _types, _nTypes);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class StateSet : gobject.object.ObjectWrap
   bool isEmpty()
   {
     bool _retval;
-    _retval = atk_state_set_is_empty(cast(AtkStateSet*)this._cPtr);
+    _retval = cast(bool)atk_state_set_is_empty(cast(AtkStateSet*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class StateSet : gobject.object.ObjectWrap
   bool removeState(atk.types.StateType type)
   {
     bool _retval;
-    _retval = atk_state_set_remove_state(cast(AtkStateSet*)this._cPtr, type);
+    _retval = cast(bool)atk_state_set_remove_state(cast(AtkStateSet*)this._cPtr, type);
     return _retval;
   }
 

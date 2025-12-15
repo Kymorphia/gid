@@ -97,7 +97,7 @@ class RTPBuffer
       _size = cast(uint)data.length;
 
     auto _data = cast(const(void)*)data.ptr;
-    _retval = gst_rtp_buffer_add_extension_onebyte_header(cast(GstRTPBuffer*)this._cPtr, id, _data, _size);
+    _retval = cast(bool)gst_rtp_buffer_add_extension_onebyte_header(cast(GstRTPBuffer*)this._cPtr, id, _data, _size);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class RTPBuffer
       _size = cast(uint)data.length;
 
     auto _data = cast(const(void)*)data.ptr;
-    _retval = gst_rtp_buffer_add_extension_twobytes_header(cast(GstRTPBuffer*)this._cPtr, appbits, id, _data, _size);
+    _retval = cast(bool)gst_rtp_buffer_add_extension_twobytes_header(cast(GstRTPBuffer*)this._cPtr, appbits, id, _data, _size);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class RTPBuffer
   bool getExtension()
   {
     bool _retval;
-    _retval = gst_rtp_buffer_get_extension(cast(GstRTPBuffer*)this._cPtr);
+    _retval = cast(bool)gst_rtp_buffer_get_extension(cast(GstRTPBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class RTPBuffer
     bool _retval;
     uint _size;
     void* _data;
-    _retval = gst_rtp_buffer_get_extension_onebyte_header(cast(GstRTPBuffer*)this._cPtr, id, nth, &_data, &_size);
+    _retval = cast(bool)gst_rtp_buffer_get_extension_onebyte_header(cast(GstRTPBuffer*)this._cPtr, id, nth, &_data, &_size);
     data.length = _size;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _size];
     return _retval;
@@ -224,7 +224,7 @@ class RTPBuffer
     bool _retval;
     uint _size;
     void* _data;
-    _retval = gst_rtp_buffer_get_extension_twobytes_header(cast(GstRTPBuffer*)this._cPtr, cast(ubyte*)&appbits, id, nth, &_data, &_size);
+    _retval = cast(bool)gst_rtp_buffer_get_extension_twobytes_header(cast(GstRTPBuffer*)this._cPtr, cast(ubyte*)&appbits, id, nth, &_data, &_size);
     data.length = _size;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _size];
     return _retval;
@@ -249,7 +249,7 @@ class RTPBuffer
   bool getMarker()
   {
     bool _retval;
-    _retval = gst_rtp_buffer_get_marker(cast(GstRTPBuffer*)this._cPtr);
+    _retval = cast(bool)gst_rtp_buffer_get_marker(cast(GstRTPBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class RTPBuffer
   bool getPadding()
   {
     bool _retval;
-    _retval = gst_rtp_buffer_get_padding(cast(GstRTPBuffer*)this._cPtr);
+    _retval = cast(bool)gst_rtp_buffer_get_padding(cast(GstRTPBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ class RTPBuffer
   bool setExtensionData(ushort bits, ushort length)
   {
     bool _retval;
-    _retval = gst_rtp_buffer_set_extension_data(cast(GstRTPBuffer*)this._cPtr, bits, length);
+    _retval = cast(bool)gst_rtp_buffer_set_extension_data(cast(GstRTPBuffer*)this._cPtr, bits, length);
     return _retval;
   }
 
@@ -696,7 +696,7 @@ class RTPBuffer
     bool _retval;
     uint _size;
     void* _data;
-    _retval = gst_rtp_buffer_get_extension_onebyte_header_from_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, bitPattern, id, nth, &_data, &_size);
+    _retval = cast(bool)gst_rtp_buffer_get_extension_onebyte_header_from_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, bitPattern, id, nth, &_data, &_size);
     data.length = _size;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _size];
     return _retval;
@@ -715,7 +715,7 @@ class RTPBuffer
   {
     bool _retval;
     GstRTPBuffer _rtp;
-    _retval = gst_rtp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, &_rtp);
+    _retval = cast(bool)gst_rtp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, &_rtp);
     rtp = new gstrtp.rtpbuffer.RTPBuffer(cast(void*)&_rtp, No.Take);
     return _retval;
   }

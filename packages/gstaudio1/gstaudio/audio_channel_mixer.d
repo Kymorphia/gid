@@ -46,7 +46,7 @@ class AudioChannelMixer
   bool isPassthrough()
   {
     bool _retval;
-    _retval = gst_audio_channel_mixer_is_passthrough(cast(GstAudioChannelMixer*)this._cPtr);
+    _retval = cast(bool)gst_audio_channel_mixer_is_passthrough(cast(GstAudioChannelMixer*)this._cPtr);
     return _retval;
   }
 }

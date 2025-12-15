@@ -288,7 +288,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   bool getInverted()
   {
     bool _retval;
-    _retval = gtk_progress_bar_get_inverted(cast(GtkProgressBar*)this._cPtr);
+    _retval = cast(bool)gtk_progress_bar_get_inverted(cast(GtkProgressBar*)this._cPtr);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   bool getShowText()
   {
     bool _retval;
-    _retval = gtk_progress_bar_get_show_text(cast(GtkProgressBar*)this._cPtr);
+    _retval = cast(bool)gtk_progress_bar_get_show_text(cast(GtkProgressBar*)this._cPtr);
     return _retval;
   }
 

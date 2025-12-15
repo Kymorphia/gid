@@ -149,7 +149,7 @@ class UserContentManager : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
-    _retval = webkit_user_content_manager_register_script_message_handler(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
+    _retval = cast(bool)webkit_user_content_manager_register_script_message_handler(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class UserContentManager : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
-    _retval = webkit_user_content_manager_register_script_message_handler_with_reply(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
+    _retval = cast(bool)webkit_user_content_manager_register_script_message_handler_with_reply(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
     return _retval;
   }
 

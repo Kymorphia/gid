@@ -178,7 +178,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   bool getTitleSelectable()
   {
     bool _retval;
-    _retval = adw_preferences_row_get_title_selectable(cast(AdwPreferencesRow*)this._cPtr);
+    _retval = cast(bool)adw_preferences_row_get_title_selectable(cast(AdwPreferencesRow*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = adw_preferences_row_get_use_markup(cast(AdwPreferencesRow*)this._cPtr);
+    _retval = cast(bool)adw_preferences_row_get_use_markup(cast(AdwPreferencesRow*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_preferences_row_get_use_underline(cast(AdwPreferencesRow*)this._cPtr);
+    _retval = cast(bool)adw_preferences_row_get_use_underline(cast(AdwPreferencesRow*)this._cPtr);
     return _retval;
   }
 

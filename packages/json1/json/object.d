@@ -120,7 +120,7 @@ class ObjectWrap : gobject.boxed.Boxed
   bool equal(json.object.ObjectWrap b)
   {
     bool _retval;
-    _retval = json_object_equal(cast(JsonObject*)this._cPtr, b ? cast(JsonObject*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)json_object_equal(cast(JsonObject*)this._cPtr, b ? cast(JsonObject*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class ObjectWrap : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
-    _retval = json_object_get_boolean_member(cast(JsonObject*)this._cPtr, _memberName);
+    _retval = cast(bool)json_object_get_boolean_member(cast(JsonObject*)this._cPtr, _memberName);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class ObjectWrap : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
-    _retval = json_object_get_boolean_member_with_default(cast(JsonObject*)this._cPtr, _memberName, defaultValue);
+    _retval = cast(bool)json_object_get_boolean_member_with_default(cast(JsonObject*)this._cPtr, _memberName, defaultValue);
     return _retval;
   }
 
@@ -346,7 +346,7 @@ class ObjectWrap : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
-    _retval = json_object_get_null_member(cast(JsonObject*)this._cPtr, _memberName);
+    _retval = cast(bool)json_object_get_null_member(cast(JsonObject*)this._cPtr, _memberName);
     return _retval;
   }
 
@@ -451,7 +451,7 @@ class ObjectWrap : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
-    _retval = json_object_has_member(cast(JsonObject*)this._cPtr, _memberName);
+    _retval = cast(bool)json_object_has_member(cast(JsonObject*)this._cPtr, _memberName);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class ObjectWrap : gobject.boxed.Boxed
   bool isImmutable()
   {
     bool _retval;
-    _retval = json_object_is_immutable(cast(JsonObject*)this._cPtr);
+    _retval = cast(bool)json_object_is_immutable(cast(JsonObject*)this._cPtr);
     return _retval;
   }
 

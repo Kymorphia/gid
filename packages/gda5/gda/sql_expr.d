@@ -163,7 +163,7 @@ class SqlExpr : gobject.boxed.Boxed
   */
   @property bool valueIsIdent()
   {
-    return (cast(GdaSqlExpr*)this._cPtr).valueIsIdent;
+    return cast(bool)(cast(GdaSqlExpr*)this._cPtr).valueIsIdent;
   }
 
   /**

@@ -57,14 +57,14 @@ __gshared extern(C)
   GstFlowReturn function(GstAggregator* aggregator, GstBufferList* bufferlist) c_gst_aggregator_finish_buffer_list; ///
   void function(GstAggregator* self, GstAllocator** allocator, GstAllocationParams* params) c_gst_aggregator_get_allocator; ///
   GstBufferPool* function(GstAggregator* self) c_gst_aggregator_get_buffer_pool; ///
-  bool function(GstAggregator* self) c_gst_aggregator_get_force_live; ///
-  bool function(GstAggregator* self) c_gst_aggregator_get_ignore_inactive_pads; ///
+  gboolean function(GstAggregator* self) c_gst_aggregator_get_force_live; ///
+  gboolean function(GstAggregator* self) c_gst_aggregator_get_ignore_inactive_pads; ///
   GstClockTime function(GstAggregator* self) c_gst_aggregator_get_latency; ///
-  bool function(GstAggregator* self) c_gst_aggregator_negotiate; ///
+  gboolean function(GstAggregator* self) c_gst_aggregator_negotiate; ///
   GstSample* function(GstAggregator* self, GstAggregatorPad* pad) c_gst_aggregator_peek_next_sample; ///
   void function(GstAggregator* self, GstClockTime pts, GstClockTime dts, GstClockTime duration, GstStructure* info) c_gst_aggregator_selected_samples; ///
-  void function(GstAggregator* self, bool forceLive) c_gst_aggregator_set_force_live; ///
-  void function(GstAggregator* self, bool ignore) c_gst_aggregator_set_ignore_inactive_pads; ///
+  void function(GstAggregator* self, gboolean forceLive) c_gst_aggregator_set_force_live; ///
+  void function(GstAggregator* self, gboolean ignore) c_gst_aggregator_set_ignore_inactive_pads; ///
   void function(GstAggregator* self, GstClockTime minLatency, GstClockTime maxLatency) c_gst_aggregator_set_latency; ///
   void function(GstAggregator* self, GstCaps* caps) c_gst_aggregator_set_src_caps; ///
   GstClockTime function(GstAggregator* self) c_gst_aggregator_simple_get_next_time; ///
@@ -72,17 +72,17 @@ __gshared extern(C)
 
   // AggregatorPad
   GType function() c_gst_aggregator_pad_get_type; ///
-  bool function(GstAggregatorPad* pad) c_gst_aggregator_pad_drop_buffer; ///
-  bool function(GstAggregatorPad* pad) c_gst_aggregator_pad_has_buffer; ///
-  bool function(GstAggregatorPad* pad) c_gst_aggregator_pad_is_eos; ///
-  bool function(GstAggregatorPad* pad) c_gst_aggregator_pad_is_inactive; ///
+  gboolean function(GstAggregatorPad* pad) c_gst_aggregator_pad_drop_buffer; ///
+  gboolean function(GstAggregatorPad* pad) c_gst_aggregator_pad_has_buffer; ///
+  gboolean function(GstAggregatorPad* pad) c_gst_aggregator_pad_is_eos; ///
+  gboolean function(GstAggregatorPad* pad) c_gst_aggregator_pad_is_inactive; ///
   GstBuffer* function(GstAggregatorPad* pad) c_gst_aggregator_pad_peek_buffer; ///
   GstBuffer* function(GstAggregatorPad* pad) c_gst_aggregator_pad_pop_buffer; ///
 
   // BaseParse
   GType function() c_gst_base_parse_get_type; ///
-  bool function(GstBaseParse* parse, ulong offset, GstClockTime ts, bool key, bool force) c_gst_base_parse_add_index_entry; ///
-  bool function(GstBaseParse* parse, GstFormat srcFormat, long srcValue, GstFormat destFormat, long* destValue) c_gst_base_parse_convert_default; ///
+  gboolean function(GstBaseParse* parse, ulong offset, GstClockTime ts, gboolean key, gboolean force) c_gst_base_parse_add_index_entry; ///
+  gboolean function(GstBaseParse* parse, GstFormat srcFormat, long srcValue, GstFormat destFormat, long* destValue) c_gst_base_parse_convert_default; ///
   void function(GstBaseParse* parse) c_gst_base_parse_drain; ///
   GstFlowReturn function(GstBaseParse* parse, GstBaseParseFrame* frame, int size) c_gst_base_parse_finish_frame; ///
   void function(GstBaseParse* parse, GstTagList* tags, GstTagMergeMode mode) c_gst_base_parse_merge_tags; ///
@@ -90,13 +90,13 @@ __gshared extern(C)
   void function(GstBaseParse* parse, uint bitrate) c_gst_base_parse_set_average_bitrate; ///
   void function(GstBaseParse* parse, GstFormat fmt, long duration, int interval) c_gst_base_parse_set_duration; ///
   void function(GstBaseParse* parse, uint fpsNum, uint fpsDen, uint leadIn, uint leadOut) c_gst_base_parse_set_frame_rate; ///
-  void function(GstBaseParse* parse, bool hasTiming) c_gst_base_parse_set_has_timing_info; ///
-  void function(GstBaseParse* parse, bool inferTs) c_gst_base_parse_set_infer_ts; ///
+  void function(GstBaseParse* parse, gboolean hasTiming) c_gst_base_parse_set_has_timing_info; ///
+  void function(GstBaseParse* parse, gboolean inferTs) c_gst_base_parse_set_infer_ts; ///
   void function(GstBaseParse* parse, GstClockTime minLatency, GstClockTime maxLatency) c_gst_base_parse_set_latency; ///
   void function(GstBaseParse* parse, uint minSize) c_gst_base_parse_set_min_frame_size; ///
-  void function(GstBaseParse* parse, bool passthrough) c_gst_base_parse_set_passthrough; ///
-  void function(GstBaseParse* parse, bool ptsInterpolate) c_gst_base_parse_set_pts_interpolation; ///
-  void function(GstBaseParse* parse, bool syncable) c_gst_base_parse_set_syncable; ///
+  void function(GstBaseParse* parse, gboolean passthrough) c_gst_base_parse_set_passthrough; ///
+  void function(GstBaseParse* parse, gboolean ptsInterpolate) c_gst_base_parse_set_pts_interpolation; ///
+  void function(GstBaseParse* parse, gboolean syncable) c_gst_base_parse_set_syncable; ///
   void function(GstBaseParse* parse, size_t offset) c_gst_base_parse_set_ts_at_offset; ///
 
   // BaseParseFrame
@@ -110,7 +110,7 @@ __gshared extern(C)
   GType function() c_gst_base_sink_get_type; ///
   GstFlowReturn function(GstBaseSink* sink, GstMiniObject* obj) c_gst_base_sink_do_preroll; ///
   uint function(GstBaseSink* sink) c_gst_base_sink_get_blocksize; ///
-  bool function(GstBaseSink* sink) c_gst_base_sink_get_drop_out_of_segment; ///
+  gboolean function(GstBaseSink* sink) c_gst_base_sink_get_drop_out_of_segment; ///
   GstSample* function(GstBaseSink* sink) c_gst_base_sink_get_last_sample; ///
   GstClockTime function(GstBaseSink* sink) c_gst_base_sink_get_latency; ///
   ulong function(GstBaseSink* sink) c_gst_base_sink_get_max_bitrate; ///
@@ -118,23 +118,23 @@ __gshared extern(C)
   GstClockTime function(GstBaseSink* sink) c_gst_base_sink_get_processing_deadline; ///
   GstClockTime function(GstBaseSink* sink) c_gst_base_sink_get_render_delay; ///
   GstStructure* function(GstBaseSink* sink) c_gst_base_sink_get_stats; ///
-  bool function(GstBaseSink* sink) c_gst_base_sink_get_sync; ///
+  gboolean function(GstBaseSink* sink) c_gst_base_sink_get_sync; ///
   ulong function(GstBaseSink* sink) c_gst_base_sink_get_throttle_time; ///
   GstClockTimeDiff function(GstBaseSink* sink) c_gst_base_sink_get_ts_offset; ///
-  bool function(GstBaseSink* sink) c_gst_base_sink_is_async_enabled; ///
-  bool function(GstBaseSink* sink) c_gst_base_sink_is_last_sample_enabled; ///
-  bool function(GstBaseSink* sink) c_gst_base_sink_is_qos_enabled; ///
-  bool function(GstBaseSink* sink, bool* live, bool* upstreamLive, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_base_sink_query_latency; ///
-  void function(GstBaseSink* sink, bool enabled) c_gst_base_sink_set_async_enabled; ///
+  gboolean function(GstBaseSink* sink) c_gst_base_sink_is_async_enabled; ///
+  gboolean function(GstBaseSink* sink) c_gst_base_sink_is_last_sample_enabled; ///
+  gboolean function(GstBaseSink* sink) c_gst_base_sink_is_qos_enabled; ///
+  gboolean function(GstBaseSink* sink, gboolean* live, gboolean* upstreamLive, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_base_sink_query_latency; ///
+  void function(GstBaseSink* sink, gboolean enabled) c_gst_base_sink_set_async_enabled; ///
   void function(GstBaseSink* sink, uint blocksize) c_gst_base_sink_set_blocksize; ///
-  void function(GstBaseSink* sink, bool dropOutOfSegment) c_gst_base_sink_set_drop_out_of_segment; ///
-  void function(GstBaseSink* sink, bool enabled) c_gst_base_sink_set_last_sample_enabled; ///
+  void function(GstBaseSink* sink, gboolean dropOutOfSegment) c_gst_base_sink_set_drop_out_of_segment; ///
+  void function(GstBaseSink* sink, gboolean enabled) c_gst_base_sink_set_last_sample_enabled; ///
   void function(GstBaseSink* sink, ulong maxBitrate) c_gst_base_sink_set_max_bitrate; ///
   void function(GstBaseSink* sink, long maxLateness) c_gst_base_sink_set_max_lateness; ///
   void function(GstBaseSink* sink, GstClockTime processingDeadline) c_gst_base_sink_set_processing_deadline; ///
-  void function(GstBaseSink* sink, bool enabled) c_gst_base_sink_set_qos_enabled; ///
+  void function(GstBaseSink* sink, gboolean enabled) c_gst_base_sink_set_qos_enabled; ///
   void function(GstBaseSink* sink, GstClockTime delay) c_gst_base_sink_set_render_delay; ///
-  void function(GstBaseSink* sink, bool sync) c_gst_base_sink_set_sync; ///
+  void function(GstBaseSink* sink, gboolean sync) c_gst_base_sink_set_sync; ///
   void function(GstBaseSink* sink, ulong throttle) c_gst_base_sink_set_throttle_time; ///
   void function(GstBaseSink* sink, GstClockTimeDiff offset) c_gst_base_sink_set_ts_offset; ///
   GstFlowReturn function(GstBaseSink* sink, GstClockTime time, GstClockTimeDiff* jitter) c_gst_base_sink_wait; ///
@@ -146,22 +146,22 @@ __gshared extern(C)
   void function(GstBaseSrc* src, GstAllocator** allocator, GstAllocationParams* params) c_gst_base_src_get_allocator; ///
   uint function(GstBaseSrc* src) c_gst_base_src_get_blocksize; ///
   GstBufferPool* function(GstBaseSrc* src) c_gst_base_src_get_buffer_pool; ///
-  bool function(GstBaseSrc* src) c_gst_base_src_get_do_timestamp; ///
-  bool function(GstBaseSrc* src) c_gst_base_src_is_async; ///
-  bool function(GstBaseSrc* src) c_gst_base_src_is_live; ///
-  bool function(GstBaseSrc* src) c_gst_base_src_negotiate; ///
-  bool function(GstBaseSrc* src, long start, long stop, long time) c_gst_base_src_new_seamless_segment; ///
-  bool function(GstBaseSrc* src, const(GstSegment)* segment) c_gst_base_src_new_segment; ///
-  bool function(GstBaseSrc* src, const(GstSegment)* segment) c_gst_base_src_push_segment; ///
-  bool function(GstBaseSrc* src, bool* live, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_base_src_query_latency; ///
-  void function(GstBaseSrc* src, bool async) c_gst_base_src_set_async; ///
-  void function(GstBaseSrc* src, bool automaticEos) c_gst_base_src_set_automatic_eos; ///
+  gboolean function(GstBaseSrc* src) c_gst_base_src_get_do_timestamp; ///
+  gboolean function(GstBaseSrc* src) c_gst_base_src_is_async; ///
+  gboolean function(GstBaseSrc* src) c_gst_base_src_is_live; ///
+  gboolean function(GstBaseSrc* src) c_gst_base_src_negotiate; ///
+  gboolean function(GstBaseSrc* src, long start, long stop, long time) c_gst_base_src_new_seamless_segment; ///
+  gboolean function(GstBaseSrc* src, const(GstSegment)* segment) c_gst_base_src_new_segment; ///
+  gboolean function(GstBaseSrc* src, const(GstSegment)* segment) c_gst_base_src_push_segment; ///
+  gboolean function(GstBaseSrc* src, gboolean* live, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_base_src_query_latency; ///
+  void function(GstBaseSrc* src, gboolean async) c_gst_base_src_set_async; ///
+  void function(GstBaseSrc* src, gboolean automaticEos) c_gst_base_src_set_automatic_eos; ///
   void function(GstBaseSrc* src, uint blocksize) c_gst_base_src_set_blocksize; ///
-  bool function(GstBaseSrc* src, GstCaps* caps) c_gst_base_src_set_caps; ///
-  void function(GstBaseSrc* src, bool timestamp) c_gst_base_src_set_do_timestamp; ///
-  void function(GstBaseSrc* src, bool dynamic) c_gst_base_src_set_dynamic_size; ///
+  gboolean function(GstBaseSrc* src, GstCaps* caps) c_gst_base_src_set_caps; ///
+  void function(GstBaseSrc* src, gboolean timestamp) c_gst_base_src_set_do_timestamp; ///
+  void function(GstBaseSrc* src, gboolean dynamic) c_gst_base_src_set_dynamic_size; ///
   void function(GstBaseSrc* src, GstFormat format) c_gst_base_src_set_format; ///
-  void function(GstBaseSrc* src, bool live) c_gst_base_src_set_live; ///
+  void function(GstBaseSrc* src, gboolean live) c_gst_base_src_set_live; ///
   void function(GstBaseSrc* basesrc, GstFlowReturn ret) c_gst_base_src_start_complete; ///
   GstFlowReturn function(GstBaseSrc* basesrc) c_gst_base_src_start_wait; ///
   void function(GstBaseSrc* src, GstBufferList* bufferList) c_gst_base_src_submit_buffer_list; ///
@@ -171,41 +171,41 @@ __gshared extern(C)
   GType function() c_gst_base_transform_get_type; ///
   void function(GstBaseTransform* trans, GstAllocator** allocator, GstAllocationParams* params) c_gst_base_transform_get_allocator; ///
   GstBufferPool* function(GstBaseTransform* trans) c_gst_base_transform_get_buffer_pool; ///
-  bool function(GstBaseTransform* trans) c_gst_base_transform_is_in_place; ///
-  bool function(GstBaseTransform* trans) c_gst_base_transform_is_passthrough; ///
-  bool function(GstBaseTransform* trans) c_gst_base_transform_is_qos_enabled; ///
-  bool function(GstBaseTransform* trans) c_gst_base_transform_reconfigure; ///
+  gboolean function(GstBaseTransform* trans) c_gst_base_transform_is_in_place; ///
+  gboolean function(GstBaseTransform* trans) c_gst_base_transform_is_passthrough; ///
+  gboolean function(GstBaseTransform* trans) c_gst_base_transform_is_qos_enabled; ///
+  gboolean function(GstBaseTransform* trans) c_gst_base_transform_reconfigure; ///
   void function(GstBaseTransform* trans) c_gst_base_transform_reconfigure_sink; ///
   void function(GstBaseTransform* trans) c_gst_base_transform_reconfigure_src; ///
-  void function(GstBaseTransform* trans, bool gapAware) c_gst_base_transform_set_gap_aware; ///
-  void function(GstBaseTransform* trans, bool inPlace) c_gst_base_transform_set_in_place; ///
-  void function(GstBaseTransform* trans, bool passthrough) c_gst_base_transform_set_passthrough; ///
-  void function(GstBaseTransform* trans, bool preferPassthrough) c_gst_base_transform_set_prefer_passthrough; ///
-  void function(GstBaseTransform* trans, bool enabled) c_gst_base_transform_set_qos_enabled; ///
+  void function(GstBaseTransform* trans, gboolean gapAware) c_gst_base_transform_set_gap_aware; ///
+  void function(GstBaseTransform* trans, gboolean inPlace) c_gst_base_transform_set_in_place; ///
+  void function(GstBaseTransform* trans, gboolean passthrough) c_gst_base_transform_set_passthrough; ///
+  void function(GstBaseTransform* trans, gboolean preferPassthrough) c_gst_base_transform_set_prefer_passthrough; ///
+  void function(GstBaseTransform* trans, gboolean enabled) c_gst_base_transform_set_qos_enabled; ///
   void function(GstBaseTransform* trans, double proportion, GstClockTimeDiff diff, GstClockTime timestamp) c_gst_base_transform_update_qos; ///
-  bool function(GstBaseTransform* trans, GstCaps* updatedCaps) c_gst_base_transform_update_src_caps; ///
+  gboolean function(GstBaseTransform* trans, GstCaps* updatedCaps) c_gst_base_transform_update_src_caps; ///
 
   // BitReader
   void function(GstBitReader* reader) c_gst_bit_reader_free; ///
-  bool function(GstBitReader* reader, ushort* val, uint nbits) c_gst_bit_reader_get_bits_uint16; ///
-  bool function(GstBitReader* reader, uint* val, uint nbits) c_gst_bit_reader_get_bits_uint32; ///
-  bool function(GstBitReader* reader, ulong* val, uint nbits) c_gst_bit_reader_get_bits_uint64; ///
-  bool function(GstBitReader* reader, ubyte* val, uint nbits) c_gst_bit_reader_get_bits_uint8; ///
+  gboolean function(GstBitReader* reader, ushort* val, uint nbits) c_gst_bit_reader_get_bits_uint16; ///
+  gboolean function(GstBitReader* reader, uint* val, uint nbits) c_gst_bit_reader_get_bits_uint32; ///
+  gboolean function(GstBitReader* reader, ulong* val, uint nbits) c_gst_bit_reader_get_bits_uint64; ///
+  gboolean function(GstBitReader* reader, ubyte* val, uint nbits) c_gst_bit_reader_get_bits_uint8; ///
   uint function(const(GstBitReader)* reader) c_gst_bit_reader_get_pos; ///
   uint function(const(GstBitReader)* reader) c_gst_bit_reader_get_remaining; ///
   uint function(const(GstBitReader)* reader) c_gst_bit_reader_get_size; ///
   void function(GstBitReader* reader, const(ubyte)* data, uint size) c_gst_bit_reader_init; ///
-  bool function(const(GstBitReader)* reader, ushort* val, uint nbits) c_gst_bit_reader_peek_bits_uint16; ///
-  bool function(const(GstBitReader)* reader, uint* val, uint nbits) c_gst_bit_reader_peek_bits_uint32; ///
-  bool function(const(GstBitReader)* reader, ulong* val, uint nbits) c_gst_bit_reader_peek_bits_uint64; ///
-  bool function(const(GstBitReader)* reader, ubyte* val, uint nbits) c_gst_bit_reader_peek_bits_uint8; ///
-  bool function(GstBitReader* reader, uint pos) c_gst_bit_reader_set_pos; ///
-  bool function(GstBitReader* reader, uint nbits) c_gst_bit_reader_skip; ///
-  bool function(GstBitReader* reader) c_gst_bit_reader_skip_to_byte; ///
+  gboolean function(const(GstBitReader)* reader, ushort* val, uint nbits) c_gst_bit_reader_peek_bits_uint16; ///
+  gboolean function(const(GstBitReader)* reader, uint* val, uint nbits) c_gst_bit_reader_peek_bits_uint32; ///
+  gboolean function(const(GstBitReader)* reader, ulong* val, uint nbits) c_gst_bit_reader_peek_bits_uint64; ///
+  gboolean function(const(GstBitReader)* reader, ubyte* val, uint nbits) c_gst_bit_reader_peek_bits_uint8; ///
+  gboolean function(GstBitReader* reader, uint pos) c_gst_bit_reader_set_pos; ///
+  gboolean function(GstBitReader* reader, uint nbits) c_gst_bit_reader_skip; ///
+  gboolean function(GstBitReader* reader) c_gst_bit_reader_skip_to_byte; ///
   GstBitReader* function(const(ubyte)* data, uint size) c_gst_bit_reader_new; ///
 
   // BitWriter
-  bool function(GstBitWriter* bitwriter, ubyte trailingBit) c_gst_bit_writer_align_bytes; ///
+  gboolean function(GstBitWriter* bitwriter, ubyte trailingBit) c_gst_bit_writer_align_bytes; ///
   void function(GstBitWriter* bitwriter) c_gst_bit_writer_free; ///
   GstBuffer* function(GstBitWriter* bitwriter) c_gst_bit_writer_free_and_get_buffer; ///
   ubyte* function(GstBitWriter* bitwriter) c_gst_bit_writer_free_and_get_data; ///
@@ -213,157 +213,157 @@ __gshared extern(C)
   uint function(const(GstBitWriter)* bitwriter) c_gst_bit_writer_get_remaining; ///
   uint function(const(GstBitWriter)* bitwriter) c_gst_bit_writer_get_size; ///
   void function(GstBitWriter* bitwriter) c_gst_bit_writer_init; ///
-  void function(GstBitWriter* bitwriter, ubyte* data, uint size, bool initialized) c_gst_bit_writer_init_with_data; ///
-  void function(GstBitWriter* bitwriter, uint size, bool fixed) c_gst_bit_writer_init_with_size; ///
-  bool function(GstBitWriter* bitwriter, ushort value, uint nbits) c_gst_bit_writer_put_bits_uint16; ///
-  bool function(GstBitWriter* bitwriter, uint value, uint nbits) c_gst_bit_writer_put_bits_uint32; ///
-  bool function(GstBitWriter* bitwriter, ulong value, uint nbits) c_gst_bit_writer_put_bits_uint64; ///
-  bool function(GstBitWriter* bitwriter, ubyte value, uint nbits) c_gst_bit_writer_put_bits_uint8; ///
-  bool function(GstBitWriter* bitwriter, const(ubyte)* data, uint nbytes) c_gst_bit_writer_put_bytes; ///
+  void function(GstBitWriter* bitwriter, ubyte* data, uint size, gboolean initialized) c_gst_bit_writer_init_with_data; ///
+  void function(GstBitWriter* bitwriter, uint size, gboolean fixed) c_gst_bit_writer_init_with_size; ///
+  gboolean function(GstBitWriter* bitwriter, ushort value, uint nbits) c_gst_bit_writer_put_bits_uint16; ///
+  gboolean function(GstBitWriter* bitwriter, uint value, uint nbits) c_gst_bit_writer_put_bits_uint32; ///
+  gboolean function(GstBitWriter* bitwriter, ulong value, uint nbits) c_gst_bit_writer_put_bits_uint64; ///
+  gboolean function(GstBitWriter* bitwriter, ubyte value, uint nbits) c_gst_bit_writer_put_bits_uint8; ///
+  gboolean function(GstBitWriter* bitwriter, const(ubyte)* data, uint nbytes) c_gst_bit_writer_put_bytes; ///
   void function(GstBitWriter* bitwriter) c_gst_bit_writer_reset; ///
   GstBuffer* function(GstBitWriter* bitwriter) c_gst_bit_writer_reset_and_get_buffer; ///
   ubyte* function(GstBitWriter* bitwriter) c_gst_bit_writer_reset_and_get_data; ///
-  bool function(GstBitWriter* bitwriter, uint pos) c_gst_bit_writer_set_pos; ///
+  gboolean function(GstBitWriter* bitwriter, uint pos) c_gst_bit_writer_set_pos; ///
   GstBitWriter* function() c_gst_bit_writer_new; ///
-  GstBitWriter* function(ubyte* data, uint size, bool initialized) c_gst_bit_writer_new_with_data; ///
-  GstBitWriter* function(uint size, bool fixed) c_gst_bit_writer_new_with_size; ///
+  GstBitWriter* function(ubyte* data, uint size, gboolean initialized) c_gst_bit_writer_new_with_data; ///
+  GstBitWriter* function(uint size, gboolean fixed) c_gst_bit_writer_new_with_size; ///
 
   // ByteReader
-  bool function(GstByteReader* reader, uint size, ubyte** val) c_gst_byte_reader_dup_data; ///
-  bool function(GstByteReader* reader, ushort** str) c_gst_byte_reader_dup_string_utf16; ///
-  bool function(GstByteReader* reader, uint** str) c_gst_byte_reader_dup_string_utf32; ///
-  bool function(GstByteReader* reader, char** str) c_gst_byte_reader_dup_string_utf8; ///
+  gboolean function(GstByteReader* reader, uint size, ubyte** val) c_gst_byte_reader_dup_data; ///
+  gboolean function(GstByteReader* reader, ushort** str) c_gst_byte_reader_dup_string_utf16; ///
+  gboolean function(GstByteReader* reader, uint** str) c_gst_byte_reader_dup_string_utf32; ///
+  gboolean function(GstByteReader* reader, char** str) c_gst_byte_reader_dup_string_utf8; ///
   void function(GstByteReader* reader) c_gst_byte_reader_free; ///
-  bool function(GstByteReader* reader, uint size, const(ubyte*)* val) c_gst_byte_reader_get_data; ///
-  bool function(GstByteReader* reader, float* val) c_gst_byte_reader_get_float32_be; ///
-  bool function(GstByteReader* reader, float* val) c_gst_byte_reader_get_float32_le; ///
-  bool function(GstByteReader* reader, double* val) c_gst_byte_reader_get_float64_be; ///
-  bool function(GstByteReader* reader, double* val) c_gst_byte_reader_get_float64_le; ///
-  bool function(GstByteReader* reader, short* val) c_gst_byte_reader_get_int16_be; ///
-  bool function(GstByteReader* reader, short* val) c_gst_byte_reader_get_int16_le; ///
-  bool function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int24_be; ///
-  bool function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int24_le; ///
-  bool function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int32_be; ///
-  bool function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int32_le; ///
-  bool function(GstByteReader* reader, long* val) c_gst_byte_reader_get_int64_be; ///
-  bool function(GstByteReader* reader, long* val) c_gst_byte_reader_get_int64_le; ///
-  bool function(GstByteReader* reader, byte* val) c_gst_byte_reader_get_int8; ///
+  gboolean function(GstByteReader* reader, uint size, const(ubyte*)* val) c_gst_byte_reader_get_data; ///
+  gboolean function(GstByteReader* reader, float* val) c_gst_byte_reader_get_float32_be; ///
+  gboolean function(GstByteReader* reader, float* val) c_gst_byte_reader_get_float32_le; ///
+  gboolean function(GstByteReader* reader, double* val) c_gst_byte_reader_get_float64_be; ///
+  gboolean function(GstByteReader* reader, double* val) c_gst_byte_reader_get_float64_le; ///
+  gboolean function(GstByteReader* reader, short* val) c_gst_byte_reader_get_int16_be; ///
+  gboolean function(GstByteReader* reader, short* val) c_gst_byte_reader_get_int16_le; ///
+  gboolean function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int24_be; ///
+  gboolean function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int24_le; ///
+  gboolean function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int32_be; ///
+  gboolean function(GstByteReader* reader, int* val) c_gst_byte_reader_get_int32_le; ///
+  gboolean function(GstByteReader* reader, long* val) c_gst_byte_reader_get_int64_be; ///
+  gboolean function(GstByteReader* reader, long* val) c_gst_byte_reader_get_int64_le; ///
+  gboolean function(GstByteReader* reader, byte* val) c_gst_byte_reader_get_int8; ///
   uint function(const(GstByteReader)* reader) c_gst_byte_reader_get_pos; ///
   uint function(const(GstByteReader)* reader) c_gst_byte_reader_get_remaining; ///
   uint function(const(GstByteReader)* reader) c_gst_byte_reader_get_size; ///
-  bool function(GstByteReader* reader, const(char*)* str) c_gst_byte_reader_get_string_utf8; ///
-  bool function(GstByteReader* reader, GstByteReader* subReader, uint size) c_gst_byte_reader_get_sub_reader; ///
-  bool function(GstByteReader* reader, ushort* val) c_gst_byte_reader_get_uint16_be; ///
-  bool function(GstByteReader* reader, ushort* val) c_gst_byte_reader_get_uint16_le; ///
-  bool function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint24_be; ///
-  bool function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint24_le; ///
-  bool function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint32_be; ///
-  bool function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint32_le; ///
-  bool function(GstByteReader* reader, ulong* val) c_gst_byte_reader_get_uint64_be; ///
-  bool function(GstByteReader* reader, ulong* val) c_gst_byte_reader_get_uint64_le; ///
-  bool function(GstByteReader* reader, ubyte* val) c_gst_byte_reader_get_uint8; ///
+  gboolean function(GstByteReader* reader, const(char*)* str) c_gst_byte_reader_get_string_utf8; ///
+  gboolean function(GstByteReader* reader, GstByteReader* subReader, uint size) c_gst_byte_reader_get_sub_reader; ///
+  gboolean function(GstByteReader* reader, ushort* val) c_gst_byte_reader_get_uint16_be; ///
+  gboolean function(GstByteReader* reader, ushort* val) c_gst_byte_reader_get_uint16_le; ///
+  gboolean function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint24_be; ///
+  gboolean function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint24_le; ///
+  gboolean function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint32_be; ///
+  gboolean function(GstByteReader* reader, uint* val) c_gst_byte_reader_get_uint32_le; ///
+  gboolean function(GstByteReader* reader, ulong* val) c_gst_byte_reader_get_uint64_be; ///
+  gboolean function(GstByteReader* reader, ulong* val) c_gst_byte_reader_get_uint64_le; ///
+  gboolean function(GstByteReader* reader, ubyte* val) c_gst_byte_reader_get_uint8; ///
   void function(GstByteReader* reader, const(ubyte)* data, uint size) c_gst_byte_reader_init; ///
   uint function(const(GstByteReader)* reader, uint mask, uint pattern, uint offset, uint size) c_gst_byte_reader_masked_scan_uint32; ///
   uint function(const(GstByteReader)* reader, uint mask, uint pattern, uint offset, uint size, uint* value) c_gst_byte_reader_masked_scan_uint32_peek; ///
-  bool function(const(GstByteReader)* reader, uint size, const(ubyte*)* val) c_gst_byte_reader_peek_data; ///
-  bool function(const(GstByteReader)* reader, float* val) c_gst_byte_reader_peek_float32_be; ///
-  bool function(const(GstByteReader)* reader, float* val) c_gst_byte_reader_peek_float32_le; ///
-  bool function(const(GstByteReader)* reader, double* val) c_gst_byte_reader_peek_float64_be; ///
-  bool function(const(GstByteReader)* reader, double* val) c_gst_byte_reader_peek_float64_le; ///
-  bool function(const(GstByteReader)* reader, short* val) c_gst_byte_reader_peek_int16_be; ///
-  bool function(const(GstByteReader)* reader, short* val) c_gst_byte_reader_peek_int16_le; ///
-  bool function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int24_be; ///
-  bool function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int24_le; ///
-  bool function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int32_be; ///
-  bool function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int32_le; ///
-  bool function(const(GstByteReader)* reader, long* val) c_gst_byte_reader_peek_int64_be; ///
-  bool function(const(GstByteReader)* reader, long* val) c_gst_byte_reader_peek_int64_le; ///
-  bool function(const(GstByteReader)* reader, byte* val) c_gst_byte_reader_peek_int8; ///
-  bool function(const(GstByteReader)* reader, const(char*)* str) c_gst_byte_reader_peek_string_utf8; ///
-  bool function(GstByteReader* reader, GstByteReader* subReader, uint size) c_gst_byte_reader_peek_sub_reader; ///
-  bool function(const(GstByteReader)* reader, ushort* val) c_gst_byte_reader_peek_uint16_be; ///
-  bool function(const(GstByteReader)* reader, ushort* val) c_gst_byte_reader_peek_uint16_le; ///
-  bool function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint24_be; ///
-  bool function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint24_le; ///
-  bool function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint32_be; ///
-  bool function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint32_le; ///
-  bool function(const(GstByteReader)* reader, ulong* val) c_gst_byte_reader_peek_uint64_be; ///
-  bool function(const(GstByteReader)* reader, ulong* val) c_gst_byte_reader_peek_uint64_le; ///
-  bool function(const(GstByteReader)* reader, ubyte* val) c_gst_byte_reader_peek_uint8; ///
-  bool function(GstByteReader* reader, uint pos) c_gst_byte_reader_set_pos; ///
-  bool function(GstByteReader* reader, uint nbytes) c_gst_byte_reader_skip; ///
-  bool function(GstByteReader* reader) c_gst_byte_reader_skip_string_utf16; ///
-  bool function(GstByteReader* reader) c_gst_byte_reader_skip_string_utf32; ///
-  bool function(GstByteReader* reader) c_gst_byte_reader_skip_string_utf8; ///
+  gboolean function(const(GstByteReader)* reader, uint size, const(ubyte*)* val) c_gst_byte_reader_peek_data; ///
+  gboolean function(const(GstByteReader)* reader, float* val) c_gst_byte_reader_peek_float32_be; ///
+  gboolean function(const(GstByteReader)* reader, float* val) c_gst_byte_reader_peek_float32_le; ///
+  gboolean function(const(GstByteReader)* reader, double* val) c_gst_byte_reader_peek_float64_be; ///
+  gboolean function(const(GstByteReader)* reader, double* val) c_gst_byte_reader_peek_float64_le; ///
+  gboolean function(const(GstByteReader)* reader, short* val) c_gst_byte_reader_peek_int16_be; ///
+  gboolean function(const(GstByteReader)* reader, short* val) c_gst_byte_reader_peek_int16_le; ///
+  gboolean function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int24_be; ///
+  gboolean function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int24_le; ///
+  gboolean function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int32_be; ///
+  gboolean function(const(GstByteReader)* reader, int* val) c_gst_byte_reader_peek_int32_le; ///
+  gboolean function(const(GstByteReader)* reader, long* val) c_gst_byte_reader_peek_int64_be; ///
+  gboolean function(const(GstByteReader)* reader, long* val) c_gst_byte_reader_peek_int64_le; ///
+  gboolean function(const(GstByteReader)* reader, byte* val) c_gst_byte_reader_peek_int8; ///
+  gboolean function(const(GstByteReader)* reader, const(char*)* str) c_gst_byte_reader_peek_string_utf8; ///
+  gboolean function(GstByteReader* reader, GstByteReader* subReader, uint size) c_gst_byte_reader_peek_sub_reader; ///
+  gboolean function(const(GstByteReader)* reader, ushort* val) c_gst_byte_reader_peek_uint16_be; ///
+  gboolean function(const(GstByteReader)* reader, ushort* val) c_gst_byte_reader_peek_uint16_le; ///
+  gboolean function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint24_be; ///
+  gboolean function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint24_le; ///
+  gboolean function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint32_be; ///
+  gboolean function(const(GstByteReader)* reader, uint* val) c_gst_byte_reader_peek_uint32_le; ///
+  gboolean function(const(GstByteReader)* reader, ulong* val) c_gst_byte_reader_peek_uint64_be; ///
+  gboolean function(const(GstByteReader)* reader, ulong* val) c_gst_byte_reader_peek_uint64_le; ///
+  gboolean function(const(GstByteReader)* reader, ubyte* val) c_gst_byte_reader_peek_uint8; ///
+  gboolean function(GstByteReader* reader, uint pos) c_gst_byte_reader_set_pos; ///
+  gboolean function(GstByteReader* reader, uint nbytes) c_gst_byte_reader_skip; ///
+  gboolean function(GstByteReader* reader) c_gst_byte_reader_skip_string_utf16; ///
+  gboolean function(GstByteReader* reader) c_gst_byte_reader_skip_string_utf32; ///
+  gboolean function(GstByteReader* reader) c_gst_byte_reader_skip_string_utf8; ///
   GstByteReader* function(const(ubyte)* data, uint size) c_gst_byte_reader_new; ///
 
   // ByteWriter
-  bool function(GstByteWriter* writer, uint size) c_gst_byte_writer_ensure_free_space; ///
-  bool function(GstByteWriter* writer, ubyte value, uint size) c_gst_byte_writer_fill; ///
+  gboolean function(GstByteWriter* writer, uint size) c_gst_byte_writer_ensure_free_space; ///
+  gboolean function(GstByteWriter* writer, ubyte value, uint size) c_gst_byte_writer_fill; ///
   void function(GstByteWriter* writer) c_gst_byte_writer_free; ///
   GstBuffer* function(GstByteWriter* writer) c_gst_byte_writer_free_and_get_buffer; ///
   ubyte* function(GstByteWriter* writer) c_gst_byte_writer_free_and_get_data; ///
   uint function(const(GstByteWriter)* writer) c_gst_byte_writer_get_remaining; ///
   void function(GstByteWriter* writer) c_gst_byte_writer_init; ///
-  void function(GstByteWriter* writer, ubyte* data, uint size, bool initialized) c_gst_byte_writer_init_with_data; ///
-  void function(GstByteWriter* writer, uint size, bool fixed) c_gst_byte_writer_init_with_size; ///
-  bool function(GstByteWriter* writer, GstBuffer* buffer, size_t offset, ptrdiff_t size) c_gst_byte_writer_put_buffer; ///
-  bool function(GstByteWriter* writer, const(ubyte)* data, uint size) c_gst_byte_writer_put_data; ///
-  bool function(GstByteWriter* writer, float val) c_gst_byte_writer_put_float32_be; ///
-  bool function(GstByteWriter* writer, float val) c_gst_byte_writer_put_float32_le; ///
-  bool function(GstByteWriter* writer, double val) c_gst_byte_writer_put_float64_be; ///
-  bool function(GstByteWriter* writer, double val) c_gst_byte_writer_put_float64_le; ///
-  bool function(GstByteWriter* writer, short val) c_gst_byte_writer_put_int16_be; ///
-  bool function(GstByteWriter* writer, short val) c_gst_byte_writer_put_int16_le; ///
-  bool function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int24_be; ///
-  bool function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int24_le; ///
-  bool function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int32_be; ///
-  bool function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int32_le; ///
-  bool function(GstByteWriter* writer, long val) c_gst_byte_writer_put_int64_be; ///
-  bool function(GstByteWriter* writer, long val) c_gst_byte_writer_put_int64_le; ///
-  bool function(GstByteWriter* writer, byte val) c_gst_byte_writer_put_int8; ///
-  bool function(GstByteWriter* writer, const(ushort)* data) c_gst_byte_writer_put_string_utf16; ///
-  bool function(GstByteWriter* writer, const(uint)* data) c_gst_byte_writer_put_string_utf32; ///
-  bool function(GstByteWriter* writer, const(char)* data) c_gst_byte_writer_put_string_utf8; ///
-  bool function(GstByteWriter* writer, ushort val) c_gst_byte_writer_put_uint16_be; ///
-  bool function(GstByteWriter* writer, ushort val) c_gst_byte_writer_put_uint16_le; ///
-  bool function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint24_be; ///
-  bool function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint24_le; ///
-  bool function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint32_be; ///
-  bool function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint32_le; ///
-  bool function(GstByteWriter* writer, ulong val) c_gst_byte_writer_put_uint64_be; ///
-  bool function(GstByteWriter* writer, ulong val) c_gst_byte_writer_put_uint64_le; ///
-  bool function(GstByteWriter* writer, ubyte val) c_gst_byte_writer_put_uint8; ///
+  void function(GstByteWriter* writer, ubyte* data, uint size, gboolean initialized) c_gst_byte_writer_init_with_data; ///
+  void function(GstByteWriter* writer, uint size, gboolean fixed) c_gst_byte_writer_init_with_size; ///
+  gboolean function(GstByteWriter* writer, GstBuffer* buffer, size_t offset, ptrdiff_t size) c_gst_byte_writer_put_buffer; ///
+  gboolean function(GstByteWriter* writer, const(ubyte)* data, uint size) c_gst_byte_writer_put_data; ///
+  gboolean function(GstByteWriter* writer, float val) c_gst_byte_writer_put_float32_be; ///
+  gboolean function(GstByteWriter* writer, float val) c_gst_byte_writer_put_float32_le; ///
+  gboolean function(GstByteWriter* writer, double val) c_gst_byte_writer_put_float64_be; ///
+  gboolean function(GstByteWriter* writer, double val) c_gst_byte_writer_put_float64_le; ///
+  gboolean function(GstByteWriter* writer, short val) c_gst_byte_writer_put_int16_be; ///
+  gboolean function(GstByteWriter* writer, short val) c_gst_byte_writer_put_int16_le; ///
+  gboolean function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int24_be; ///
+  gboolean function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int24_le; ///
+  gboolean function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int32_be; ///
+  gboolean function(GstByteWriter* writer, int val) c_gst_byte_writer_put_int32_le; ///
+  gboolean function(GstByteWriter* writer, long val) c_gst_byte_writer_put_int64_be; ///
+  gboolean function(GstByteWriter* writer, long val) c_gst_byte_writer_put_int64_le; ///
+  gboolean function(GstByteWriter* writer, byte val) c_gst_byte_writer_put_int8; ///
+  gboolean function(GstByteWriter* writer, const(ushort)* data) c_gst_byte_writer_put_string_utf16; ///
+  gboolean function(GstByteWriter* writer, const(uint)* data) c_gst_byte_writer_put_string_utf32; ///
+  gboolean function(GstByteWriter* writer, const(char)* data) c_gst_byte_writer_put_string_utf8; ///
+  gboolean function(GstByteWriter* writer, ushort val) c_gst_byte_writer_put_uint16_be; ///
+  gboolean function(GstByteWriter* writer, ushort val) c_gst_byte_writer_put_uint16_le; ///
+  gboolean function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint24_be; ///
+  gboolean function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint24_le; ///
+  gboolean function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint32_be; ///
+  gboolean function(GstByteWriter* writer, uint val) c_gst_byte_writer_put_uint32_le; ///
+  gboolean function(GstByteWriter* writer, ulong val) c_gst_byte_writer_put_uint64_be; ///
+  gboolean function(GstByteWriter* writer, ulong val) c_gst_byte_writer_put_uint64_le; ///
+  gboolean function(GstByteWriter* writer, ubyte val) c_gst_byte_writer_put_uint8; ///
   void function(GstByteWriter* writer) c_gst_byte_writer_reset; ///
   GstBuffer* function(GstByteWriter* writer) c_gst_byte_writer_reset_and_get_buffer; ///
   ubyte* function(GstByteWriter* writer) c_gst_byte_writer_reset_and_get_data; ///
   GstByteWriter* function() c_gst_byte_writer_new; ///
-  GstByteWriter* function(ubyte* data, uint size, bool initialized) c_gst_byte_writer_new_with_data; ///
-  GstByteWriter* function(uint size, bool fixed) c_gst_byte_writer_new_with_size; ///
+  GstByteWriter* function(ubyte* data, uint size, gboolean initialized) c_gst_byte_writer_new_with_data; ///
+  GstByteWriter* function(uint size, gboolean fixed) c_gst_byte_writer_new_with_size; ///
 
   // CollectPads
   GType function() c_gst_collect_pads_get_type; ///
   GstCollectPads* function() c_gst_collect_pads_new; ///
-  GstCollectData* function(GstCollectPads* pads, GstPad* pad, uint size, GstCollectDataDestroyNotify destroyNotify, bool lock) c_gst_collect_pads_add_pad; ///
+  GstCollectData* function(GstCollectPads* pads, GstPad* pad, uint size, GstCollectDataDestroyNotify destroyNotify, gboolean lock) c_gst_collect_pads_add_pad; ///
   uint function(GstCollectPads* pads) c_gst_collect_pads_available; ///
   GstFlowReturn function(GstCollectPads* pads, GstCollectData* cdata, GstBuffer* buf, GstBuffer** outbuf, void* userData) c_gst_collect_pads_clip_running_time; ///
-  bool function(GstCollectPads* pads, GstCollectData* data, GstEvent* event, bool discard) c_gst_collect_pads_event_default; ///
+  gboolean function(GstCollectPads* pads, GstCollectData* data, GstEvent* event, gboolean discard) c_gst_collect_pads_event_default; ///
   uint function(GstCollectPads* pads, GstCollectData* data, uint size) c_gst_collect_pads_flush; ///
   GstBuffer* function(GstCollectPads* pads, GstCollectData* data) c_gst_collect_pads_peek; ///
   GstBuffer* function(GstCollectPads* pads, GstCollectData* data) c_gst_collect_pads_pop; ///
-  bool function(GstCollectPads* pads, GstCollectData* data, GstQuery* query, bool discard) c_gst_collect_pads_query_default; ///
+  gboolean function(GstCollectPads* pads, GstCollectData* data, GstQuery* query, gboolean discard) c_gst_collect_pads_query_default; ///
   GstBuffer* function(GstCollectPads* pads, GstCollectData* data, uint size) c_gst_collect_pads_read_buffer; ///
-  bool function(GstCollectPads* pads, GstPad* pad) c_gst_collect_pads_remove_pad; ///
+  gboolean function(GstCollectPads* pads, GstPad* pad) c_gst_collect_pads_remove_pad; ///
   void function(GstCollectPads* pads, GstCollectPadsBufferFunction func, void* userData) c_gst_collect_pads_set_buffer_function; ///
   void function(GstCollectPads* pads, GstCollectPadsClipFunction clipfunc, void* userData) c_gst_collect_pads_set_clip_function; ///
   void function(GstCollectPads* pads, GstCollectPadsCompareFunction func, void* userData) c_gst_collect_pads_set_compare_function; ///
   void function(GstCollectPads* pads, GstCollectPadsEventFunction func, void* userData) c_gst_collect_pads_set_event_function; ///
   void function(GstCollectPads* pads, GstCollectPadsFlushFunction func, void* userData) c_gst_collect_pads_set_flush_function; ///
-  void function(GstCollectPads* pads, bool flushing) c_gst_collect_pads_set_flushing; ///
+  void function(GstCollectPads* pads, gboolean flushing) c_gst_collect_pads_set_flushing; ///
   void function(GstCollectPads* pads, GstCollectPadsFunction func, void* userData) c_gst_collect_pads_set_function; ///
   void function(GstCollectPads* pads, GstCollectPadsQueryFunction func, void* userData) c_gst_collect_pads_set_query_function; ///
-  void function(GstCollectPads* pads, GstCollectData* data, bool waiting) c_gst_collect_pads_set_waiting; ///
-  bool function(GstCollectPads* pads, GstPad* pad, GstEvent* event) c_gst_collect_pads_src_event_default; ///
+  void function(GstCollectPads* pads, GstCollectData* data, gboolean waiting) c_gst_collect_pads_set_waiting; ///
+  gboolean function(GstCollectPads* pads, GstPad* pad, GstEvent* event) c_gst_collect_pads_src_event_default; ///
   void function(GstCollectPads* pads) c_gst_collect_pads_start; ///
   void function(GstCollectPads* pads) c_gst_collect_pads_stop; ///
   GstBuffer* function(GstCollectPads* pads, GstCollectData* data, uint size) c_gst_collect_pads_take_buffer; ///
@@ -371,17 +371,17 @@ __gshared extern(C)
   // DataQueue
   GType function() c_gst_data_queue_get_type; ///
   GstDataQueue* function(GstDataQueueCheckFullFunction checkfull, GstDataQueueFullCallback fullcallback, GstDataQueueEmptyCallback emptycallback, void* checkdata) c_gst_data_queue_new; ///
-  bool function(GstDataQueue* queue, GType type) c_gst_data_queue_drop_head; ///
+  gboolean function(GstDataQueue* queue, GType type) c_gst_data_queue_drop_head; ///
   void function(GstDataQueue* queue) c_gst_data_queue_flush; ///
   void function(GstDataQueue* queue, GstDataQueueSize* level) c_gst_data_queue_get_level; ///
-  bool function(GstDataQueue* queue) c_gst_data_queue_is_empty; ///
-  bool function(GstDataQueue* queue) c_gst_data_queue_is_full; ///
+  gboolean function(GstDataQueue* queue) c_gst_data_queue_is_empty; ///
+  gboolean function(GstDataQueue* queue) c_gst_data_queue_is_full; ///
   void function(GstDataQueue* queue) c_gst_data_queue_limits_changed; ///
-  bool function(GstDataQueue* queue, GstDataQueueItem** item) c_gst_data_queue_peek; ///
-  bool function(GstDataQueue* queue, GstDataQueueItem** item) c_gst_data_queue_pop; ///
-  bool function(GstDataQueue* queue, GstDataQueueItem* item) c_gst_data_queue_push; ///
-  bool function(GstDataQueue* queue, GstDataQueueItem* item) c_gst_data_queue_push_force; ///
-  void function(GstDataQueue* queue, bool flushing) c_gst_data_queue_set_flushing; ///
+  gboolean function(GstDataQueue* queue, GstDataQueueItem** item) c_gst_data_queue_peek; ///
+  gboolean function(GstDataQueue* queue, GstDataQueueItem** item) c_gst_data_queue_pop; ///
+  gboolean function(GstDataQueue* queue, GstDataQueueItem* item) c_gst_data_queue_push; ///
+  gboolean function(GstDataQueue* queue, GstDataQueueItem* item) c_gst_data_queue_push_force; ///
+  void function(GstDataQueue* queue, gboolean flushing) c_gst_data_queue_set_flushing; ///
 
   // FlowCombiner
   GType function() c_gst_flow_combiner_get_type; ///
@@ -402,11 +402,11 @@ __gshared extern(C)
   // QueueArray
   void function(GstQueueArray* array) c_gst_queue_array_clear; ///
   void* function(GstQueueArray* array, uint idx) c_gst_queue_array_drop_element; ///
-  bool function(GstQueueArray* array, uint idx, void* pStruct) c_gst_queue_array_drop_struct; ///
+  gboolean function(GstQueueArray* array, uint idx, void* pStruct) c_gst_queue_array_drop_struct; ///
   uint function(GstQueueArray* array, GCompareFunc func, void* data) c_gst_queue_array_find; ///
   void function(GstQueueArray* array) c_gst_queue_array_free; ///
   uint function(GstQueueArray* array) c_gst_queue_array_get_length; ///
-  bool function(GstQueueArray* array) c_gst_queue_array_is_empty; ///
+  gboolean function(GstQueueArray* array) c_gst_queue_array_is_empty; ///
   void* function(GstQueueArray* array) c_gst_queue_array_peek_head; ///
   void* function(GstQueueArray* array) c_gst_queue_array_peek_head_struct; ///
   void* function(GstQueueArray* array, uint idx) c_gst_queue_array_peek_nth; ///

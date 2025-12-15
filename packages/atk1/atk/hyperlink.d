@@ -163,7 +163,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   bool isInline()
   {
     bool _retval;
-    _retval = atk_hyperlink_is_inline(cast(AtkHyperlink*)this._cPtr);
+    _retval = cast(bool)atk_hyperlink_is_inline(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   bool isSelectedLink()
   {
     bool _retval;
-    _retval = atk_hyperlink_is_selected_link(cast(AtkHyperlink*)this._cPtr);
+    _retval = cast(bool)atk_hyperlink_is_selected_link(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   bool isValid()
   {
     bool _retval;
-    _retval = atk_hyperlink_is_valid(cast(AtkHyperlink*)this._cPtr);
+    _retval = cast(bool)atk_hyperlink_is_valid(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 

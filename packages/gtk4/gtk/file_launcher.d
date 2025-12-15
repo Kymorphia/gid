@@ -135,7 +135,7 @@ class FileLauncher : gobject.object.ObjectWrap
   bool getAlwaysAsk()
   {
     bool _retval;
-    _retval = gtk_file_launcher_get_always_ask(cast(GtkFileLauncher*)this._cPtr);
+    _retval = cast(bool)gtk_file_launcher_get_always_ask(cast(GtkFileLauncher*)this._cPtr);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class FileLauncher : gobject.object.ObjectWrap
   bool getWritable()
   {
     bool _retval;
-    _retval = gtk_file_launcher_get_writable(cast(GtkFileLauncher*)this._cPtr);
+    _retval = cast(bool)gtk_file_launcher_get_writable(cast(GtkFileLauncher*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class FileLauncher : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -255,7 +255,7 @@ class FileLauncher : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

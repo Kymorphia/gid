@@ -25,7 +25,7 @@ template DataHandlerT()
   override bool acceptsGType(gobject.types.GType type)
   {
     bool _retval;
-    _retval = gda_data_handler_accepts_g_type(cast(GdaDataHandler*)this._cPtr, type);
+    _retval = cast(bool)gda_data_handler_accepts_g_type(cast(GdaDataHandler*)this._cPtr, type);
     return _retval;
   }
 

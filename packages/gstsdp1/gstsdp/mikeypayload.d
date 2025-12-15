@@ -106,7 +106,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   bool kemacAddSub(gstsdp.mikeypayload.MIKEYPayload newpay)
   {
     bool _retval;
-    _retval = gst_mikey_payload_kemac_add_sub(cast(GstMIKEYPayload*)this._cPtr, newpay ? cast(GstMIKEYPayload*)newpay._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_mikey_payload_kemac_add_sub(cast(GstMIKEYPayload*)this._cPtr, newpay ? cast(GstMIKEYPayload*)newpay._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   bool kemacRemoveSub(uint idx)
   {
     bool _retval;
-    _retval = gst_mikey_payload_kemac_remove_sub(cast(GstMIKEYPayload*)this._cPtr, idx);
+    _retval = cast(bool)gst_mikey_payload_kemac_remove_sub(cast(GstMIKEYPayload*)this._cPtr, idx);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   bool kemacSet(gstsdp.types.MIKEYEncAlg encAlg, gstsdp.types.MIKEYMacAlg macAlg)
   {
     bool _retval;
-    _retval = gst_mikey_payload_kemac_set(cast(GstMIKEYPayload*)this._cPtr, encAlg, macAlg);
+    _retval = cast(bool)gst_mikey_payload_kemac_set(cast(GstMIKEYPayload*)this._cPtr, encAlg, macAlg);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       _vtLen = cast(ubyte)vtData.length;
 
     auto _vtData = cast(const(ubyte)*)vtData.ptr;
-    _retval = gst_mikey_payload_key_data_set_interval(cast(GstMIKEYPayload*)this._cPtr, _vfLen, _vfData, _vtLen, _vtData);
+    _retval = cast(bool)gst_mikey_payload_key_data_set_interval(cast(GstMIKEYPayload*)this._cPtr, _vfLen, _vfData, _vtLen, _vtData);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       _keyLen = cast(ushort)keyData.length;
 
     auto _keyData = cast(const(ubyte)*)keyData.ptr;
-    _retval = gst_mikey_payload_key_data_set_key(cast(GstMIKEYPayload*)this._cPtr, keyType, _keyLen, _keyData);
+    _retval = cast(bool)gst_mikey_payload_key_data_set_key(cast(GstMIKEYPayload*)this._cPtr, keyType, _keyLen, _keyData);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       _saltLen = cast(ushort)saltData.length;
 
     auto _saltData = cast(const(ubyte)*)saltData.ptr;
-    _retval = gst_mikey_payload_key_data_set_salt(cast(GstMIKEYPayload*)this._cPtr, _saltLen, _saltData);
+    _retval = cast(bool)gst_mikey_payload_key_data_set_salt(cast(GstMIKEYPayload*)this._cPtr, _saltLen, _saltData);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       _spiLen = cast(ubyte)spiData.length;
 
     auto _spiData = cast(const(ubyte)*)spiData.ptr;
-    _retval = gst_mikey_payload_key_data_set_spi(cast(GstMIKEYPayload*)this._cPtr, _spiLen, _spiData);
+    _retval = cast(bool)gst_mikey_payload_key_data_set_spi(cast(GstMIKEYPayload*)this._cPtr, _spiLen, _spiData);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       _dataLen = cast(ushort)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_mikey_payload_pke_set(cast(GstMIKEYPayload*)this._cPtr, C, _dataLen, _data);
+    _retval = cast(bool)gst_mikey_payload_pke_set(cast(GstMIKEYPayload*)this._cPtr, C, _dataLen, _data);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       _len = cast(ubyte)rand.length;
 
     auto _rand = cast(const(ubyte)*)rand.ptr;
-    _retval = gst_mikey_payload_rand_set(cast(GstMIKEYPayload*)this._cPtr, _len, _rand);
+    _retval = cast(bool)gst_mikey_payload_rand_set(cast(GstMIKEYPayload*)this._cPtr, _len, _rand);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       _len = cast(ubyte)val.length;
 
     auto _val = cast(const(ubyte)*)val.ptr;
-    _retval = gst_mikey_payload_sp_add_param(cast(GstMIKEYPayload*)this._cPtr, type, _len, _val);
+    _retval = cast(bool)gst_mikey_payload_sp_add_param(cast(GstMIKEYPayload*)this._cPtr, type, _len, _val);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   bool spRemoveParam(uint idx)
   {
     bool _retval;
-    _retval = gst_mikey_payload_sp_remove_param(cast(GstMIKEYPayload*)this._cPtr, idx);
+    _retval = cast(bool)gst_mikey_payload_sp_remove_param(cast(GstMIKEYPayload*)this._cPtr, idx);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   bool spSet(uint policy, gstsdp.types.MIKEYSecProto proto)
   {
     bool _retval;
-    _retval = gst_mikey_payload_sp_set(cast(GstMIKEYPayload*)this._cPtr, policy, proto);
+    _retval = cast(bool)gst_mikey_payload_sp_set(cast(GstMIKEYPayload*)this._cPtr, policy, proto);
     return _retval;
   }
 }

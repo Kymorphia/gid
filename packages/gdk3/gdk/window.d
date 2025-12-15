@@ -635,7 +635,7 @@ class Window : gobject.object.ObjectWrap
   bool ensureNative()
   {
     bool _retval;
-    _retval = gdk_window_ensure_native(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_ensure_native(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -744,7 +744,7 @@ class Window : gobject.object.ObjectWrap
   bool getAcceptFocus()
   {
     bool _retval;
-    _retval = gdk_window_get_accept_focus(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_get_accept_focus(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -832,7 +832,7 @@ class Window : gobject.object.ObjectWrap
   bool getComposited()
   {
     bool _retval;
-    _retval = gdk_window_get_composited(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_get_composited(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -865,7 +865,7 @@ class Window : gobject.object.ObjectWrap
   bool getDecorations(out gdk.types.WMDecoration decorations)
   {
     bool _retval;
-    _retval = gdk_window_get_decorations(cast(GdkWindow*)this._cPtr, &decorations);
+    _retval = cast(bool)gdk_window_get_decorations(cast(GdkWindow*)this._cPtr, &decorations);
     return _retval;
   }
 
@@ -1022,7 +1022,7 @@ class Window : gobject.object.ObjectWrap
   bool getEventCompression()
   {
     bool _retval;
-    _retval = gdk_window_get_event_compression(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_get_event_compression(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1048,7 +1048,7 @@ class Window : gobject.object.ObjectWrap
   bool getFocusOnMap()
   {
     bool _retval;
-    _retval = gdk_window_get_focus_on_map(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_get_focus_on_map(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1162,7 +1162,7 @@ class Window : gobject.object.ObjectWrap
   bool getModalHint()
   {
     bool _retval;
-    _retval = gdk_window_get_modal_hint(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_get_modal_hint(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1216,7 +1216,7 @@ class Window : gobject.object.ObjectWrap
   bool getPassThrough()
   {
     bool _retval;
-    _retval = gdk_window_get_pass_through(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_get_pass_through(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1365,7 +1365,7 @@ class Window : gobject.object.ObjectWrap
   bool getSupportMultidevice()
   {
     bool _retval;
-    _retval = gdk_window_get_support_multidevice(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_get_support_multidevice(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1494,7 +1494,7 @@ class Window : gobject.object.ObjectWrap
   bool hasNative()
   {
     bool _retval;
-    _retval = gdk_window_has_native(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_has_native(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1574,11 +1574,11 @@ class Window : gobject.object.ObjectWrap
   */
   void invalidateMaybeRecurse(cairo.region.Region region, gdk.types.WindowChildFunc childFunc = null)
   {
-    extern(C) bool _childFuncCallback(GdkWindow* window, void* userData)
+    extern(C) gboolean _childFuncCallback(GdkWindow* window, void* userData)
     {
       auto _dlg = cast(gdk.types.WindowChildFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
       return _retval;
     }
     auto _childFuncCB = childFunc ? &_childFuncCallback : null;
@@ -1637,7 +1637,7 @@ class Window : gobject.object.ObjectWrap
   bool isDestroyed()
   {
     bool _retval;
-    _retval = gdk_window_is_destroyed(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_is_destroyed(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1648,7 +1648,7 @@ class Window : gobject.object.ObjectWrap
   bool isInputOnly()
   {
     bool _retval;
-    _retval = gdk_window_is_input_only(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_is_input_only(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1659,7 +1659,7 @@ class Window : gobject.object.ObjectWrap
   bool isShaped()
   {
     bool _retval;
-    _retval = gdk_window_is_shaped(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_is_shaped(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1673,7 +1673,7 @@ class Window : gobject.object.ObjectWrap
   bool isViewable()
   {
     bool _retval;
-    _retval = gdk_window_is_viewable(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_is_viewable(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1685,7 +1685,7 @@ class Window : gobject.object.ObjectWrap
   bool isVisible()
   {
     bool _retval;
-    _retval = gdk_window_is_visible(cast(GdkWindow*)this._cPtr);
+    _retval = cast(bool)gdk_window_is_visible(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -2663,7 +2663,7 @@ class Window : gobject.object.ObjectWrap
   bool setStaticGravities(bool useStatic)
   {
     bool _retval;
-    _retval = gdk_window_set_static_gravities(cast(GdkWindow*)this._cPtr, useStatic);
+    _retval = cast(bool)gdk_window_set_static_gravities(cast(GdkWindow*)this._cPtr, useStatic);
     return _retval;
   }
 
@@ -2829,7 +2829,7 @@ class Window : gobject.object.ObjectWrap
   bool showWindowMenu(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gdk_window_show_window_menu(cast(GdkWindow*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gdk_window_show_window_menu(cast(GdkWindow*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 

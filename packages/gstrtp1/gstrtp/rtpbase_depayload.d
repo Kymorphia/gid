@@ -243,7 +243,7 @@ class RTPBaseDepayload : gst.element.Element
   bool isAggregateHdrextEnabled()
   {
     bool _retval;
-    _retval = gst_rtp_base_depayload_is_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
+    _retval = cast(bool)gst_rtp_base_depayload_is_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class RTPBaseDepayload : gst.element.Element
   bool isSourceInfoEnabled()
   {
     bool _retval;
-    _retval = gst_rtp_base_depayload_is_source_info_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
+    _retval = cast(bool)gst_rtp_base_depayload_is_source_info_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
     return _retval;
   }
 

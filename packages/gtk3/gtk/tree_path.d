@@ -205,7 +205,7 @@ class TreePath : gobject.boxed.Boxed
   bool isAncestor(gtk.tree_path.TreePath descendant)
   {
     bool _retval;
-    _retval = gtk_tree_path_is_ancestor(cast(GtkTreePath*)this._cPtr, descendant ? cast(GtkTreePath*)descendant._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_path_is_ancestor(cast(GtkTreePath*)this._cPtr, descendant ? cast(GtkTreePath*)descendant._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class TreePath : gobject.boxed.Boxed
   bool isDescendant(gtk.tree_path.TreePath ancestor)
   {
     bool _retval;
-    _retval = gtk_tree_path_is_descendant(cast(GtkTreePath*)this._cPtr, ancestor ? cast(GtkTreePath*)ancestor._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_path_is_descendant(cast(GtkTreePath*)this._cPtr, ancestor ? cast(GtkTreePath*)ancestor._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class TreePath : gobject.boxed.Boxed
   bool prev()
   {
     bool _retval;
-    _retval = gtk_tree_path_prev(cast(GtkTreePath*)this._cPtr);
+    _retval = cast(bool)gtk_tree_path_prev(cast(GtkTreePath*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class TreePath : gobject.boxed.Boxed
   bool up()
   {
     bool _retval;
-    _retval = gtk_tree_path_up(cast(GtkTreePath*)this._cPtr);
+    _retval = cast(bool)gtk_tree_path_up(cast(GtkTreePath*)this._cPtr);
     return _retval;
   }
 }

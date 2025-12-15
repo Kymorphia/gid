@@ -472,7 +472,7 @@ class AlertDialog : adw.dialog.Dialog
   bool getBodyUseMarkup()
   {
     bool _retval;
-    _retval = adw_alert_dialog_get_body_use_markup(cast(AdwAlertDialog*)this._cPtr);
+    _retval = cast(bool)adw_alert_dialog_get_body_use_markup(cast(AdwAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class AlertDialog : adw.dialog.Dialog
   bool getHeadingUseMarkup()
   {
     bool _retval;
-    _retval = adw_alert_dialog_get_heading_use_markup(cast(AdwAlertDialog*)this._cPtr);
+    _retval = cast(bool)adw_alert_dialog_get_heading_use_markup(cast(AdwAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -566,7 +566,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_alert_dialog_get_response_enabled(cast(AdwAlertDialog*)this._cPtr, _response);
+    _retval = cast(bool)adw_alert_dialog_get_response_enabled(cast(AdwAlertDialog*)this._cPtr, _response);
     return _retval;
   }
 
@@ -599,7 +599,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_alert_dialog_has_response(cast(AdwAlertDialog*)this._cPtr, _response);
+    _retval = cast(bool)adw_alert_dialog_has_response(cast(AdwAlertDialog*)this._cPtr, _response);
     return _retval;
   }
 

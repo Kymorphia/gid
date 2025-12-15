@@ -247,7 +247,7 @@ class Clock : gst.object.ObjectWrap
   static bool idUsesClock(gst.types.ClockID id, gst.clock.Clock clock)
   {
     bool _retval;
-    _retval = gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -300,11 +300,11 @@ class Clock : gst.object.ObjectWrap
   */
   static gst.types.ClockReturn idWaitAsync(gst.types.ClockID id, gst.types.ClockCallback func)
   {
-    extern(C) bool _funcCallback(GstClock* clock, GstClockTime time, GstClockID id, void* userData)
+    extern(C) gboolean _funcCallback(GstClock* clock, GstClockTime time, GstClockID id, void* userData)
     {
       auto _dlg = cast(gst.types.ClockCallback*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -339,7 +339,7 @@ class Clock : gst.object.ObjectWrap
   bool addObservation(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared)
   {
     bool _retval;
-    _retval = gst_clock_add_observation(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared);
+    _retval = cast(bool)gst_clock_add_observation(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class Clock : gst.object.ObjectWrap
   bool addObservationUnapplied(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared, out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom)
   {
     bool _retval;
-    _retval = gst_clock_add_observation_unapplied(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
+    _retval = cast(bool)gst_clock_add_observation_unapplied(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class Clock : gst.object.ObjectWrap
   bool isSynced()
   {
     bool _retval;
-    _retval = gst_clock_is_synced(cast(GstClock*)this._cPtr);
+    _retval = cast(bool)gst_clock_is_synced(cast(GstClock*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class Clock : gst.object.ObjectWrap
   bool periodicIdReinit(gst.types.ClockID id, gst.types.ClockTime startTime, gst.types.ClockTime interval)
   {
     bool _retval;
-    _retval = gst_clock_periodic_id_reinit(cast(GstClock*)this._cPtr, id, startTime, interval);
+    _retval = cast(bool)gst_clock_periodic_id_reinit(cast(GstClock*)this._cPtr, id, startTime, interval);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class Clock : gst.object.ObjectWrap
   bool setMaster(gst.clock.Clock master = null)
   {
     bool _retval;
-    _retval = gst_clock_set_master(cast(GstClock*)this._cPtr, master ? cast(GstClock*)master._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_clock_set_master(cast(GstClock*)this._cPtr, master ? cast(GstClock*)master._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -677,7 +677,7 @@ class Clock : gst.object.ObjectWrap
   bool singleShotIdReinit(gst.types.ClockID id, gst.types.ClockTime time)
   {
     bool _retval;
-    _retval = gst_clock_single_shot_id_reinit(cast(GstClock*)this._cPtr, id, time);
+    _retval = cast(bool)gst_clock_single_shot_id_reinit(cast(GstClock*)this._cPtr, id, time);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class Clock : gst.object.ObjectWrap
   bool waitForSync(gst.types.ClockTime timeout)
   {
     bool _retval;
-    _retval = gst_clock_wait_for_sync(cast(GstClock*)this._cPtr, timeout);
+    _retval = cast(bool)gst_clock_wait_for_sync(cast(GstClock*)this._cPtr, timeout);
     return _retval;
   }
 

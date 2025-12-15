@@ -137,7 +137,7 @@ class TextSelection
   */
   @property bool startIsActive()
   {
-    return (cast(AtkTextSelection*)this._cPtr).startIsActive;
+    return cast(bool)(cast(AtkTextSelection*)this._cPtr).startIsActive;
   }
 
   /**

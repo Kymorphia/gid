@@ -436,7 +436,7 @@ class Segment : gobject.boxed.Boxed
   bool clip(gst.types.Format format, ulong start, ulong stop, out ulong clipStart, out ulong clipStop)
   {
     bool _retval;
-    _retval = gst_segment_clip(cast(const(GstSegment)*)this._cPtr, format, start, stop, cast(ulong*)&clipStart, cast(ulong*)&clipStop);
+    _retval = cast(bool)gst_segment_clip(cast(const(GstSegment)*)this._cPtr, format, start, stop, cast(ulong*)&clipStart, cast(ulong*)&clipStop);
     return _retval;
   }
 
@@ -508,7 +508,9 @@ class Segment : gobject.boxed.Boxed
   bool doSeek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, ulong start, gst.types.SeekType stopType, ulong stop, out bool update)
   {
     bool _retval;
-    _retval = gst_segment_do_seek(cast(GstSegment*)this._cPtr, rate, format, flags, startType, start, stopType, stop, cast(bool*)&update);
+    gboolean _update;
+    _retval = cast(bool)gst_segment_do_seek(cast(GstSegment*)this._cPtr, rate, format, flags, startType, start, stopType, stop, &_update);
+    update = cast(bool)_update;
     return _retval;
   }
 
@@ -538,7 +540,7 @@ class Segment : gobject.boxed.Boxed
   bool isEqual(gst.segment.Segment s1)
   {
     bool _retval;
-    _retval = gst_segment_is_equal(cast(const(GstSegment)*)this._cPtr, s1 ? cast(const(GstSegment)*)s1._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_segment_is_equal(cast(const(GstSegment)*)this._cPtr, s1 ? cast(const(GstSegment)*)s1._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -555,7 +557,7 @@ class Segment : gobject.boxed.Boxed
   bool offsetRunningTime(gst.types.Format format, long offset)
   {
     bool _retval;
-    _retval = gst_segment_offset_running_time(cast(GstSegment*)this._cPtr, format, offset);
+    _retval = cast(bool)gst_segment_offset_running_time(cast(GstSegment*)this._cPtr, format, offset);
     return _retval;
   }
 
@@ -667,7 +669,7 @@ class Segment : gobject.boxed.Boxed
   bool setRunningTime(gst.types.Format format, ulong runningTime)
   {
     bool _retval;
-    _retval = gst_segment_set_running_time(cast(GstSegment*)this._cPtr, format, runningTime);
+    _retval = cast(bool)gst_segment_set_running_time(cast(GstSegment*)this._cPtr, format, runningTime);
     return _retval;
   }
 

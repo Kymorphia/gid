@@ -70,7 +70,7 @@ class Ticket : gobject.object.ObjectWrap
   bool equal(arrowflight.ticket.Ticket otherTicket)
   {
     bool _retval;
-    _retval = gaflight_ticket_equal(cast(GAFlightTicket*)this._cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket._cPtr(No.Dup) : null);
+    _retval = cast(bool)gaflight_ticket_equal(cast(GAFlightTicket*)this._cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket._cPtr(No.Dup) : null);
     return _retval;
   }
 }

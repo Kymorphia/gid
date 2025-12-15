@@ -58,7 +58,7 @@ class GLWindow : gst.object.ObjectWrap
   bool controlsViewport()
   {
     bool _retval;
-    _retval = gst_gl_window_controls_viewport(cast(GstGLWindow*)this._cPtr);
+    _retval = cast(bool)gst_gl_window_controls_viewport(cast(GstGLWindow*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class GLWindow : gst.object.ObjectWrap
   bool hasOutputSurface()
   {
     bool _retval;
-    _retval = gst_gl_window_has_output_surface(cast(GstGLWindow*)this._cPtr);
+    _retval = cast(bool)gst_gl_window_has_output_surface(cast(GstGLWindow*)this._cPtr);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class GLWindow : gst.object.ObjectWrap
   bool setRenderRectangle(int x, int y, int width, int height)
   {
     bool _retval;
-    _retval = gst_gl_window_set_render_rectangle(cast(GstGLWindow*)this._cPtr, x, y, width, height);
+    _retval = cast(bool)gst_gl_window_set_render_rectangle(cast(GstGLWindow*)this._cPtr, x, y, width, height);
     return _retval;
   }
 

@@ -120,7 +120,7 @@ class Rectangle : gobject.boxed.Boxed
   bool equal(gdk.rectangle.Rectangle rect2)
   {
     bool _retval;
-    _retval = gdk_rectangle_equal(cast(const(GdkRectangle)*)this._cPtr, rect2 ? cast(const(GdkRectangle)*)rect2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_rectangle_equal(cast(const(GdkRectangle)*)this._cPtr, rect2 ? cast(const(GdkRectangle)*)rect2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Rectangle : gobject.boxed.Boxed
   {
     bool _retval;
     GdkRectangle _dest;
-    _retval = gdk_rectangle_intersect(cast(const(GdkRectangle)*)this._cPtr, src2 ? cast(const(GdkRectangle)*)src2._cPtr(No.Dup) : null, &_dest);
+    _retval = cast(bool)gdk_rectangle_intersect(cast(const(GdkRectangle)*)this._cPtr, src2 ? cast(const(GdkRectangle)*)src2._cPtr(No.Dup) : null, &_dest);
     dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
     return _retval;
   }

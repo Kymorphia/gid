@@ -56,7 +56,7 @@ class Encoding
   */
   @property bool encode()
   {
-    return (cast(GMimeEncoding*)this._cPtr).encode;
+    return cast(bool)(cast(GMimeEncoding*)this._cPtr).encode;
   }
 
   /**

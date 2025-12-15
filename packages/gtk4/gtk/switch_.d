@@ -141,7 +141,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_switch_get_active(cast(GtkSwitch*)this._cPtr);
+    _retval = cast(bool)gtk_switch_get_active(cast(GtkSwitch*)this._cPtr);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   bool getState()
   {
     bool _retval;
-    _retval = gtk_switch_get_state(cast(GtkSwitch*)this._cPtr);
+    _retval = cast(bool)gtk_switch_get_state(cast(GtkSwitch*)this._cPtr);
     return _retval;
   }
 

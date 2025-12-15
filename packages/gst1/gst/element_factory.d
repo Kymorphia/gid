@@ -202,7 +202,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSinkAllCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_sink_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_factory_can_sink_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSinkAnyCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_sink_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_factory_can_sink_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSrcAllCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_src_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_factory_can_src_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSrcAnyCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_src_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_element_factory_can_src_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool getSkipDocumentation()
   {
     bool _retval;
-    _retval = gst_element_factory_get_skip_documentation(cast(GstElementFactory*)this._cPtr);
+    _retval = cast(bool)gst_element_factory_get_skip_documentation(cast(GstElementFactory*)this._cPtr);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   {
     bool _retval;
     const(char)* _interfacename = interfacename.toCString(No.Alloc);
-    _retval = gst_element_factory_has_interface(cast(GstElementFactory*)this._cPtr, _interfacename);
+    _retval = cast(bool)gst_element_factory_has_interface(cast(GstElementFactory*)this._cPtr, _interfacename);
     return _retval;
   }
 
@@ -443,7 +443,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool listIsType(gst.types.ElementFactoryListType type)
   {
     bool _retval;
-    _retval = gst_element_factory_list_is_type(cast(GstElementFactory*)this._cPtr, type);
+    _retval = cast(bool)gst_element_factory_list_is_type(cast(GstElementFactory*)this._cPtr, type);
     return _retval;
   }
 }

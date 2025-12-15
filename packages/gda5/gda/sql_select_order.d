@@ -68,7 +68,7 @@ class SqlSelectOrder
   */
   @property bool asc()
   {
-    return (cast(GdaSqlSelectOrder*)this._cPtr).asc;
+    return cast(bool)(cast(GdaSqlSelectOrder*)this._cPtr).asc;
   }
 
   /**

@@ -98,7 +98,7 @@ struct VideoTransferFunction
   static bool isEquivalent(gstvideo.types.VideoTransferFunction fromFunc, uint fromBpp, gstvideo.types.VideoTransferFunction toFunc, uint toBpp)
   {
     bool _retval;
-    _retval = gst_video_transfer_function_is_equivalent(fromFunc, fromBpp, toFunc, toBpp);
+    _retval = cast(bool)gst_video_transfer_function_is_equivalent(fromFunc, fromBpp, toFunc, toBpp);
     return _retval;
   }
 

@@ -148,7 +148,7 @@ class Mutex
   bool trylock()
   {
     bool _retval;
-    _retval = g_mutex_trylock(cast(GMutex*)this._cPtr);
+    _retval = cast(bool)g_mutex_trylock(cast(GMutex*)this._cPtr);
     return _retval;
   }
 

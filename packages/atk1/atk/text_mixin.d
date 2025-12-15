@@ -46,7 +46,7 @@ template TextT()
   override bool addSelection(int startOffset, int endOffset)
   {
     bool _retval;
-    _retval = atk_text_add_selection(cast(AtkText*)this._cPtr, startOffset, endOffset);
+    _retval = cast(bool)atk_text_add_selection(cast(AtkText*)this._cPtr, startOffset, endOffset);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ template TextT()
   override bool textRemoveSelection(int selectionNum)
   {
     bool _retval;
-    _retval = atk_text_remove_selection(cast(AtkText*)this._cPtr, selectionNum);
+    _retval = cast(bool)atk_text_remove_selection(cast(AtkText*)this._cPtr, selectionNum);
     return _retval;
   }
 
@@ -404,7 +404,7 @@ template TextT()
   override bool scrollSubstringTo(int startOffset, int endOffset, atk.types.ScrollType type)
   {
     bool _retval;
-    _retval = atk_text_scroll_substring_to(cast(AtkText*)this._cPtr, startOffset, endOffset, type);
+    _retval = cast(bool)atk_text_scroll_substring_to(cast(AtkText*)this._cPtr, startOffset, endOffset, type);
     return _retval;
   }
 
@@ -424,7 +424,7 @@ template TextT()
   override bool scrollSubstringToPoint(int startOffset, int endOffset, atk.types.CoordType coords, int x, int y)
   {
     bool _retval;
-    _retval = atk_text_scroll_substring_to_point(cast(AtkText*)this._cPtr, startOffset, endOffset, coords, x, y);
+    _retval = cast(bool)atk_text_scroll_substring_to_point(cast(AtkText*)this._cPtr, startOffset, endOffset, coords, x, y);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ template TextT()
   override bool setCaretOffset(int offset)
   {
     bool _retval;
-    _retval = atk_text_set_caret_offset(cast(AtkText*)this._cPtr, offset);
+    _retval = cast(bool)atk_text_set_caret_offset(cast(AtkText*)this._cPtr, offset);
     return _retval;
   }
 
@@ -475,7 +475,7 @@ template TextT()
   override bool setSelection(int selectionNum, int startOffset, int endOffset)
   {
     bool _retval;
-    _retval = atk_text_set_selection(cast(AtkText*)this._cPtr, selectionNum, startOffset, endOffset);
+    _retval = cast(bool)atk_text_set_selection(cast(AtkText*)this._cPtr, selectionNum, startOffset, endOffset);
     return _retval;
   }
 

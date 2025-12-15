@@ -250,7 +250,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = adw_view_stack_page_get_needs_attention(cast(AdwViewStackPage*)this._cPtr);
+    _retval = cast(bool)adw_view_stack_page_get_needs_attention(cast(AdwViewStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_view_stack_page_get_use_underline(cast(AdwViewStackPage*)this._cPtr);
+    _retval = cast(bool)adw_view_stack_page_get_use_underline(cast(AdwViewStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getVisible()
   {
     bool _retval;
-    _retval = adw_view_stack_page_get_visible(cast(AdwViewStackPage*)this._cPtr);
+    _retval = cast(bool)adw_view_stack_page_get_visible(cast(AdwViewStackPage*)this._cPtr);
     return _retval;
   }
 

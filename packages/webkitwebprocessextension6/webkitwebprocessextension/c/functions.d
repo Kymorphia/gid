@@ -56,7 +56,7 @@ __gshared extern(C)
   GAction* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_gaction; ///
   WebKitContextMenuAction function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_stock_action; ///
   WebKitContextMenu* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_submenu; ///
-  bool function(WebKitContextMenuItem* item) c_webkit_context_menu_item_is_separator; ///
+  gboolean function(WebKitContextMenuItem* item) c_webkit_context_menu_item_is_separator; ///
   void function(WebKitContextMenuItem* item, WebKitContextMenu* submenu) c_webkit_context_menu_item_set_submenu; ///
 
   // Frame
@@ -65,16 +65,16 @@ __gshared extern(C)
   JSCContext* function(WebKitFrame* frame) c_webkit_frame_get_js_context; ///
   JSCContext* function(WebKitFrame* frame, WebKitScriptWorld* world) c_webkit_frame_get_js_context_for_script_world; ///
   const(char)* function(WebKitFrame* frame) c_webkit_frame_get_uri; ///
-  bool function(WebKitFrame* frame) c_webkit_frame_is_main_frame; ///
+  gboolean function(WebKitFrame* frame) c_webkit_frame_is_main_frame; ///
 
   // HitTestResult
   GType function() c_webkit_hit_test_result_get_type; ///
-  bool function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_editable; ///
-  bool function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_image; ///
-  bool function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_link; ///
-  bool function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_media; ///
-  bool function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_scrollbar; ///
-  bool function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_selection; ///
+  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_editable; ///
+  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_image; ///
+  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_link; ///
+  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_media; ///
+  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_scrollbar; ///
+  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_selection; ///
   uint function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_context; ///
   const(char)* function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_image_uri; ///
   const(char)* function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_link_label; ///
@@ -122,17 +122,17 @@ __gshared extern(C)
   // WebFormManager
   GType function() c_webkit_web_form_manager_get_type; ///
   void function(JSCValue* element, const(char)* value) c_webkit_web_form_manager_input_element_auto_fill; ///
-  bool function(JSCValue* element) c_webkit_web_form_manager_input_element_is_auto_filled; ///
-  bool function(JSCValue* element) c_webkit_web_form_manager_input_element_is_user_edited; ///
+  gboolean function(JSCValue* element) c_webkit_web_form_manager_input_element_is_auto_filled; ///
+  gboolean function(JSCValue* element) c_webkit_web_form_manager_input_element_is_user_edited; ///
 
   // WebHitTestResult
   GType function() c_webkit_web_hit_test_result_get_type; ///
-  bool function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_editable; ///
-  bool function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_image; ///
-  bool function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_link; ///
-  bool function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_media; ///
-  bool function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_scrollbar; ///
-  bool function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_selection; ///
+  gboolean function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_editable; ///
+  gboolean function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_image; ///
+  gboolean function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_link; ///
+  gboolean function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_media; ///
+  gboolean function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_scrollbar; ///
+  gboolean function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_context_is_selection; ///
   uint function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_get_context; ///
   const(char)* function(WebKitWebHitTestResult* webHitTestResult) c_webkit_web_hit_test_result_get_image_uri; ///
   JSCValue* function(WebKitWebHitTestResult* webHitTestResult, WebKitScriptWorld* world) c_webkit_web_hit_test_result_get_js_node; ///

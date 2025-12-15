@@ -152,7 +152,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollToFocus()
   {
     bool _retval;
-    _retval = gtk_viewport_get_scroll_to_focus(cast(GtkViewport*)this._cPtr);
+    _retval = cast(bool)gtk_viewport_get_scroll_to_focus(cast(GtkViewport*)this._cPtr);
     return _retval;
   }
 

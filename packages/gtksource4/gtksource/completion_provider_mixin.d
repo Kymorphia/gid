@@ -40,7 +40,7 @@ template CompletionProviderT()
   override bool activateProposal(gtksource.completion_proposal.CompletionProposal proposal, gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_activate_proposal(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_completion_provider_activate_proposal(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ template CompletionProviderT()
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_source_completion_provider_get_start_iter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, &_iter);
+    _retval = cast(bool)gtk_source_completion_provider_get_start_iter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, &_iter);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -206,7 +206,7 @@ template CompletionProviderT()
   override bool match(gtksource.completion_context.CompletionContext context)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_match(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_completion_provider_match(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 

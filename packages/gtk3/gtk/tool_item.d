@@ -130,7 +130,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getExpand()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_expand(cast(GtkToolItem*)this._cPtr);
+    _retval = cast(bool)gtk_tool_item_get_expand(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_homogeneous(cast(GtkToolItem*)this._cPtr);
+    _retval = cast(bool)gtk_tool_item_get_homogeneous(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getIsImportant()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_is_important(cast(GtkToolItem*)this._cPtr);
+    _retval = cast(bool)gtk_tool_item_get_is_important(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getUseDragWindow()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_use_drag_window(cast(GtkToolItem*)this._cPtr);
+    _retval = cast(bool)gtk_tool_item_get_use_drag_window(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getVisibleHorizontal()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_visible_horizontal(cast(GtkToolItem*)this._cPtr);
+    _retval = cast(bool)gtk_tool_item_get_visible_horizontal(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getVisibleVertical()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_visible_vertical(cast(GtkToolItem*)this._cPtr);
+    _retval = cast(bool)gtk_tool_item_get_visible_vertical(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 

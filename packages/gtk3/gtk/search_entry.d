@@ -105,7 +105,7 @@ class SearchEntry : gtk.entry.Entry
   bool handleEvent(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_search_entry_handle_event(cast(GtkSearchEntry*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gtk_search_entry_handle_event(cast(GtkSearchEntry*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 

@@ -123,7 +123,7 @@ class Meta
     bool _retval;
     auto _data = gByteArrayFromD(data);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_data);
-    _retval = gst_meta_serialize_simple(cast(const(GstMeta)*)this._cPtr, _data);
+    _retval = cast(bool)gst_meta_serialize_simple(cast(const(GstMeta)*)this._cPtr, _data);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class Meta
   static bool apiTypeHasTag(gobject.types.GType api, glib.types.Quark tag)
   {
     bool _retval;
-    _retval = gst_meta_api_type_has_tag(api, tag);
+    _retval = cast(bool)gst_meta_api_type_has_tag(api, tag);
     return _retval;
   }
 
@@ -255,11 +255,11 @@ class Meta
   */
   static gst.meta_info.MetaInfo registerCustom(string name, string[] tags, gst.types.CustomMetaTransformFunction transformFunc = null)
   {
-    extern(C) bool _transformFuncCallback(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData)
+    extern(C) gboolean _transformFuncCallback(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData)
     {
       auto _dlg = cast(gst.types.CustomMetaTransformFunction*)userData;
 
-      bool _retval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+      gboolean _retval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
       return _retval;
     }
     auto _transformFuncCB = transformFunc ? &_transformFuncCallback : null;

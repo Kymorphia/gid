@@ -512,7 +512,7 @@ class Application : gio.application.Application
   bool isInhibited(gtk.types.ApplicationInhibitFlags flags)
   {
     bool _retval;
-    _retval = gtk_application_is_inhibited(cast(GtkApplication*)this._cPtr, flags);
+    _retval = cast(bool)gtk_application_is_inhibited(cast(GtkApplication*)this._cPtr, flags);
     return _retval;
   }
 
@@ -581,7 +581,7 @@ class Application : gio.application.Application
   bool prefersAppMenu()
   {
     bool _retval;
-    _retval = gtk_application_prefers_app_menu(cast(GtkApplication*)this._cPtr);
+    _retval = cast(bool)gtk_application_prefers_app_menu(cast(GtkApplication*)this._cPtr);
     return _retval;
   }
 

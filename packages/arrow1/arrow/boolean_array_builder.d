@@ -50,7 +50,7 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_boolean_array_builder_append(cast(GArrowBooleanArrayBuilder*)this._cPtr, value, &_err);
+    _retval = cast(bool)garrow_boolean_array_builder_append(cast(GArrowBooleanArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -61,7 +61,7 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_boolean_array_builder_append_value(cast(GArrowBooleanArrayBuilder*)this._cPtr, value, &_err);
+    _retval = cast(bool)garrow_boolean_array_builder_append_value(cast(GArrowBooleanArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -87,14 +87,14 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    auto _values = cast(const(bool)*)values.ptr;
+    auto _values = cast(const(gboolean)*)values.ptr;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(bool)*)isValids.ptr;
+    auto _isValids = cast(const(gboolean)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_boolean_array_builder_append_values(cast(GArrowBooleanArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = cast(bool)garrow_boolean_array_builder_append_values(cast(GArrowBooleanArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

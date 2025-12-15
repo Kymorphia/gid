@@ -102,11 +102,11 @@ void contextSetResolution(pango.context.Context context, double dpi)
 */
 void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.ShapeRendererFunc func = null)
 {
-  extern(C) void _funcCallback(cairo_t* cr, PangoAttrShape* attr, bool doPath, void* data)
+  extern(C) void _funcCallback(cairo_t* cr, PangoAttrShape* attr, gboolean doPath, void* data)
   {
     auto _dlg = cast(pangocairo.types.ShapeRendererFunc*)data;
 
-    (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, attr ? new pango.attr_shape.AttrShape(cast(void*)attr, No.Take) : null, doPath);
+    (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, attr ? new pango.attr_shape.AttrShape(cast(void*)attr, No.Take) : null, cast(bool)doPath);
   }
   auto _funcCB = func ? &_funcCallback : null;
 

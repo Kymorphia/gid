@@ -375,7 +375,7 @@ class Dialog : gtk.widget.Widget
   bool close()
   {
     bool _retval;
-    _retval = adw_dialog_close(cast(AdwDialog*)this._cPtr);
+    _retval = cast(bool)adw_dialog_close(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 
@@ -397,7 +397,7 @@ class Dialog : gtk.widget.Widget
   bool getCanClose()
   {
     bool _retval;
-    _retval = adw_dialog_get_can_close(cast(AdwDialog*)this._cPtr);
+    _retval = cast(bool)adw_dialog_get_can_close(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class Dialog : gtk.widget.Widget
   bool getFollowsContentSize()
   {
     bool _retval;
-    _retval = adw_dialog_get_follows_content_size(cast(AdwDialog*)this._cPtr);
+    _retval = cast(bool)adw_dialog_get_follows_content_size(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 

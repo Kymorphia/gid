@@ -137,7 +137,7 @@ class MessageBody : gobject.boxed.Boxed
   bool getAccumulate()
   {
     bool _retval;
-    _retval = soup_message_body_get_accumulate(cast(SoupMessageBody*)this._cPtr);
+    _retval = cast(bool)soup_message_body_get_accumulate(cast(SoupMessageBody*)this._cPtr);
     return _retval;
   }
 

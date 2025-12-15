@@ -288,7 +288,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool getActivatesDefault()
   {
     bool _retval;
-    _retval = adw_entry_row_get_activates_default(cast(AdwEntryRow*)this._cPtr);
+    _retval = cast(bool)adw_entry_row_get_activates_default(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool getEnableEmojiCompletion()
   {
     bool _retval;
-    _retval = adw_entry_row_get_enable_emoji_completion(cast(AdwEntryRow*)this._cPtr);
+    _retval = cast(bool)adw_entry_row_get_enable_emoji_completion(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -346,7 +346,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool getShowApplyButton()
   {
     bool _retval;
-    _retval = adw_entry_row_get_show_apply_button(cast(AdwEntryRow*)this._cPtr);
+    _retval = cast(bool)adw_entry_row_get_show_apply_button(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool grabFocusWithoutSelecting()
   {
     bool _retval;
-    _retval = adw_entry_row_grab_focus_without_selecting(cast(AdwEntryRow*)this._cPtr);
+    _retval = cast(bool)adw_entry_row_grab_focus_without_selecting(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 

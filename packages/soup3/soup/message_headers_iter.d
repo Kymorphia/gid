@@ -59,7 +59,7 @@ class MessageHeadersIter
     bool _retval;
     char* _name;
     char* _value;
-    _retval = soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)this._cPtr, &_name, &_value);
+    _retval = cast(bool)soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)this._cPtr, &_name, &_value);
     name = _name.fromCString(No.Free);
     value = _value.fromCString(No.Free);
     return _retval;

@@ -315,7 +315,7 @@ class Calendar : gtk.widget.Widget
   bool getDayIsMarked(uint day)
   {
     bool _retval;
-    _retval = gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
+    _retval = cast(bool)gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
     return _retval;
   }
 

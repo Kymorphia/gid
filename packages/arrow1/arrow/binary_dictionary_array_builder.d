@@ -53,7 +53,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_binary_dictionary_array_builder_append_array(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, array ? cast(GArrowBinaryArray*)array._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_binary_dictionary_array_builder_append_array(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, array ? cast(GArrowBinaryArray*)array._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -83,9 +83,9 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(bool)*)isValids.ptr;
+    auto _isValids = cast(const(gboolean)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_binary_dictionary_array_builder_append_indices(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = cast(bool)garrow_binary_dictionary_array_builder_append_indices(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -101,7 +101,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _value = cast(const(ubyte)*)value.ptr;
     GError *_err;
-    _retval = garrow_binary_dictionary_array_builder_append_value(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, _value, _length, &_err);
+    _retval = cast(bool)garrow_binary_dictionary_array_builder_append_value(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -112,7 +112,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_binary_dictionary_array_builder_append_value_bytes(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, value ? cast(GBytes*)value._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_binary_dictionary_array_builder_append_value_bytes(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, value ? cast(GBytes*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -125,7 +125,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GArrowArray* _outIndices;
     GArrowArray* _outDelta;
     GError *_err;
-    _retval = garrow_binary_dictionary_array_builder_finish_delta(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, &_outIndices, &_outDelta, &_err);
+    _retval = cast(bool)garrow_binary_dictionary_array_builder_finish_delta(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, &_outIndices, &_outDelta, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     outIndices = new arrow.array.Array(cast(void*)_outIndices, Yes.Take);
@@ -146,7 +146,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_binary_dictionary_array_builder_insert_memo_values(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, values ? cast(GArrowBinaryArray*)values._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)garrow_binary_dictionary_array_builder_insert_memo_values(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, values ? cast(GArrowBinaryArray*)values._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

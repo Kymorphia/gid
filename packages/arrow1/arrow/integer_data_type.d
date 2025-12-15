@@ -40,7 +40,7 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
   bool isSigned()
   {
     bool _retval;
-    _retval = garrow_integer_data_type_is_signed(cast(GArrowIntegerDataType*)this._cPtr);
+    _retval = cast(bool)garrow_integer_data_type_is_signed(cast(GArrowIntegerDataType*)this._cPtr);
     return _retval;
   }
 }

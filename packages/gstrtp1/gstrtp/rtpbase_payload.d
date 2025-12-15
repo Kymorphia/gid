@@ -388,7 +388,7 @@ class RTPBasePayload : gst.element.Element
   bool isFilled(uint size, gst.types.ClockTime duration)
   {
     bool _retval;
-    _retval = gst_rtp_base_payload_is_filled(cast(GstRTPBasePayload*)this._cPtr, size, duration);
+    _retval = cast(bool)gst_rtp_base_payload_is_filled(cast(GstRTPBasePayload*)this._cPtr, size, duration);
     return _retval;
   }
 
@@ -400,7 +400,7 @@ class RTPBasePayload : gst.element.Element
   bool isSourceInfoEnabled()
   {
     bool _retval;
-    _retval = gst_rtp_base_payload_is_source_info_enabled(cast(GstRTPBasePayload*)this._cPtr);
+    _retval = cast(bool)gst_rtp_base_payload_is_source_info_enabled(cast(GstRTPBasePayload*)this._cPtr);
     return _retval;
   }
 
@@ -468,7 +468,7 @@ class RTPBasePayload : gst.element.Element
   bool setOutcapsStructure(gst.structure.Structure s = null)
   {
     bool _retval;
-    _retval = gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
     return _retval;
   }
 

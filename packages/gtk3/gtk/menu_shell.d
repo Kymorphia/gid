@@ -231,7 +231,7 @@ class MenuShell : gtk.container.Container
   bool getTakeFocus()
   {
     bool _retval;
-    _retval = gtk_menu_shell_get_take_focus(cast(GtkMenuShell*)this._cPtr);
+    _retval = cast(bool)gtk_menu_shell_get_take_focus(cast(GtkMenuShell*)this._cPtr);
     return _retval;
   }
 

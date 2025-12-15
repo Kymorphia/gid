@@ -257,7 +257,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   bool isPrimary()
   {
     bool _retval;
-    _retval = gdk_monitor_is_primary(cast(GdkMonitor*)this._cPtr);
+    _retval = cast(bool)gdk_monitor_is_primary(cast(GdkMonitor*)this._cPtr);
     return _retval;
   }
 

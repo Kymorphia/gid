@@ -166,11 +166,11 @@ class Bus : gst.object.ObjectWrap
   */
   uint addWatch(int priority, gst.types.BusFunc func)
   {
-    extern(C) bool _funcCallback(GstBus* bus, GstMessage* message, void* userData)
+    extern(C) gboolean _funcCallback(GstBus* bus, GstMessage* message, void* userData)
     {
       auto _dlg = cast(gst.types.BusFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -194,7 +194,7 @@ class Bus : gst.object.ObjectWrap
   bool asyncSignalFunc(gst.message.Message message, void* data = null)
   {
     bool _retval;
-    _retval = gst_bus_async_signal_func(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null, data);
+    _retval = cast(bool)gst_bus_async_signal_func(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null, data);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class Bus : gst.object.ObjectWrap
   bool havePending()
   {
     bool _retval;
-    _retval = gst_bus_have_pending(cast(GstBus*)this._cPtr);
+    _retval = cast(bool)gst_bus_have_pending(cast(GstBus*)this._cPtr);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class Bus : gst.object.ObjectWrap
   bool post(gst.message.Message message)
   {
     bool _retval;
-    _retval = gst_bus_post(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_bus_post(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class Bus : gst.object.ObjectWrap
   bool removeWatch()
   {
     bool _retval;
-    _retval = gst_bus_remove_watch(cast(GstBus*)this._cPtr);
+    _retval = cast(bool)gst_bus_remove_watch(cast(GstBus*)this._cPtr);
     return _retval;
   }
 

@@ -162,7 +162,7 @@ class TreeListRow : gobject.object.ObjectWrap
   bool getExpanded()
   {
     bool _retval;
-    _retval = gtk_tree_list_row_get_expanded(cast(GtkTreeListRow*)this._cPtr);
+    _retval = cast(bool)gtk_tree_list_row_get_expanded(cast(GtkTreeListRow*)this._cPtr);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class TreeListRow : gobject.object.ObjectWrap
   bool isExpandable()
   {
     bool _retval;
-    _retval = gtk_tree_list_row_is_expandable(cast(GtkTreeListRow*)this._cPtr);
+    _retval = cast(bool)gtk_tree_list_row_is_expandable(cast(GtkTreeListRow*)this._cPtr);
     return _retval;
   }
 

@@ -831,7 +831,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getDecorated()
   {
     bool _retval;
-    _retval = gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -873,7 +873,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getDeletable()
   {
     bool _retval;
-    _retval = gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -884,7 +884,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getDestroyWithParent()
   {
     bool _retval;
-    _retval = gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -913,7 +913,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getFocusVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -940,7 +940,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getHandleMenubarAccel()
   {
     bool _retval;
-    _retval = gtk_window_get_handle_menubar_accel(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_handle_menubar_accel(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -951,7 +951,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getHideOnClose()
   {
     bool _retval;
-    _retval = gtk_window_get_hide_on_close(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_hide_on_close(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -975,7 +975,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getMnemonicsVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -987,7 +987,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -998,7 +998,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getResizable()
   {
     bool _retval;
-    _retval = gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1046,7 +1046,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool hasGroup()
   {
     bool _retval;
-    _retval = gtk_window_has_group(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_has_group(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1063,7 +1063,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isActive()
   {
     bool _retval;
-    _retval = gtk_window_is_active(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_is_active(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1083,7 +1083,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isFullscreen()
   {
     bool _retval;
-    _retval = gtk_window_is_fullscreen(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_is_fullscreen(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1103,7 +1103,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isMaximized()
   {
     bool _retval;
-    _retval = gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1117,7 +1117,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isSuspended()
   {
     bool _retval;
-    _retval = gtk_window_is_suspended(cast(GtkWindow*)this._cPtr);
+    _retval = cast(bool)gtk_window_is_suspended(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 

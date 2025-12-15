@@ -158,7 +158,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   static bool abstractNamesSupported()
   {
     bool _retval;
-    _retval = g_unix_socket_address_abstract_names_supported();
+    _retval = cast(bool)g_unix_socket_address_abstract_names_supported();
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   bool getIsAbstract()
   {
     bool _retval;
-    _retval = g_unix_socket_address_get_is_abstract(cast(GUnixSocketAddress*)this._cPtr);
+    _retval = cast(bool)g_unix_socket_address_get_is_abstract(cast(GUnixSocketAddress*)this._cPtr);
     return _retval;
   }
 

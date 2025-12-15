@@ -132,7 +132,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   bool getAutoGrow()
   {
     bool _retval;
-    _retval = g_buffered_output_stream_get_auto_grow(cast(GBufferedOutputStream*)this._cPtr);
+    _retval = cast(bool)g_buffered_output_stream_get_auto_grow(cast(GBufferedOutputStream*)this._cPtr);
     return _retval;
   }
 

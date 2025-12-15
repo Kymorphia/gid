@@ -70,7 +70,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
   bool equal(arrow.array_sort_options.ArraySortOptions otherOptions)
   {
     bool _retval;
-    _retval = garrow_array_sort_options_equal(cast(GArrowArraySortOptions*)this._cPtr, otherOptions ? cast(GArrowArraySortOptions*)otherOptions._cPtr(No.Dup) : null);
+    _retval = cast(bool)garrow_array_sort_options_equal(cast(GArrowArraySortOptions*)this._cPtr, otherOptions ? cast(GArrowArraySortOptions*)otherOptions._cPtr(No.Dup) : null);
     return _retval;
   }
 }

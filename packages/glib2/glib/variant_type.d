@@ -440,7 +440,7 @@ class VariantType : Boxed
   bool equal(glib.variant_type.VariantType type2)
   {
     bool _retval;
-    _retval = g_variant_type_equal(cast(GVariantType*)this._cPtr, type2 ? cast(GVariantType*)type2._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_variant_type_equal(cast(GVariantType*)this._cPtr, type2 ? cast(GVariantType*)type2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -517,7 +517,7 @@ class VariantType : Boxed
   bool isArray()
   {
     bool _retval;
-    _retval = g_variant_type_is_array(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_array(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -538,7 +538,7 @@ class VariantType : Boxed
   bool isBasic()
   {
     bool _retval;
-    _retval = g_variant_type_is_basic(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_basic(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -558,7 +558,7 @@ class VariantType : Boxed
   bool isContainer()
   {
     bool _retval;
-    _retval = g_variant_type_is_container(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_container(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -580,7 +580,7 @@ class VariantType : Boxed
   bool isDefinite()
   {
     bool _retval;
-    _retval = g_variant_type_is_definite(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_definite(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class VariantType : Boxed
   bool isDictEntry()
   {
     bool _retval;
-    _retval = g_variant_type_is_dict_entry(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_dict_entry(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class VariantType : Boxed
   bool isMaybe()
   {
     bool _retval;
-    _retval = g_variant_type_is_maybe(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_maybe(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -636,7 +636,7 @@ class VariantType : Boxed
   bool isSubtypeOf(glib.variant_type.VariantType supertype)
   {
     bool _retval;
-    _retval = g_variant_type_is_subtype_of(cast(const(GVariantType)*)this._cPtr, supertype ? cast(const(GVariantType)*)supertype._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_variant_type_is_subtype_of(cast(const(GVariantType)*)this._cPtr, supertype ? cast(const(GVariantType)*)supertype._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -655,7 +655,7 @@ class VariantType : Boxed
   bool isTuple()
   {
     bool _retval;
-    _retval = g_variant_type_is_tuple(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_tuple(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -668,7 +668,7 @@ class VariantType : Boxed
   bool isVariant()
   {
     bool _retval;
-    _retval = g_variant_type_is_variant(cast(const(GVariantType)*)this._cPtr);
+    _retval = cast(bool)g_variant_type_is_variant(cast(const(GVariantType)*)this._cPtr);
     return _retval;
   }
 
@@ -785,7 +785,7 @@ class VariantType : Boxed
   {
     bool _retval;
     const(char)* _typeString = typeString.toCString(No.Alloc);
-    _retval = g_variant_type_string_is_valid(_typeString);
+    _retval = cast(bool)g_variant_type_string_is_valid(_typeString);
     return _retval;
   }
 
@@ -816,7 +816,7 @@ class VariantType : Boxed
     const(char)* _string_ = string_.toCString(No.Alloc);
     const(char)* _limit = limit.toCString(No.Alloc);
     char* _endptr;
-    _retval = g_variant_type_string_scan(_string_, _limit, &_endptr);
+    _retval = cast(bool)g_variant_type_string_scan(_string_, _limit, &_endptr);
     endptr = _endptr.fromCString(Yes.Free);
     return _retval;
   }

@@ -119,7 +119,7 @@ class Size : gobject.boxed.Boxed
   bool equal(graphene.size.Size b)
   {
     bool _retval;
-    _retval = graphene_size_equal(cast(const(graphene_size_t)*)this._cPtr, b ? cast(const(graphene_size_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_size_equal(cast(const(graphene_size_t)*)this._cPtr, b ? cast(const(graphene_size_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 

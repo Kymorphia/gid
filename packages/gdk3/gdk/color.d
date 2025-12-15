@@ -177,7 +177,7 @@ class Color : gobject.boxed.Boxed
   bool equal(gdk.color.Color colorb)
   {
     bool _retval;
-    _retval = gdk_color_equal(cast(const(GdkColor)*)this._cPtr, colorb ? cast(const(GdkColor)*)colorb._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_color_equal(cast(const(GdkColor)*)this._cPtr, colorb ? cast(const(GdkColor)*)colorb._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Color : gobject.boxed.Boxed
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
     GdkColor _color;
-    _retval = gdk_color_parse(_spec, &_color);
+    _retval = cast(bool)gdk_color_parse(_spec, &_color);
     color = new gdk.color.Color(cast(void*)&_color, No.Take);
     return _retval;
   }

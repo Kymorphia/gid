@@ -148,7 +148,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   bool equal(gio.inet_address_mask.InetAddressMask mask2)
   {
     bool _retval;
-    _retval = g_inet_address_mask_equal(cast(GInetAddressMask*)this._cPtr, mask2 ? cast(GInetAddressMask*)mask2._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_inet_address_mask_equal(cast(GInetAddressMask*)this._cPtr, mask2 ? cast(GInetAddressMask*)mask2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   bool matches(gio.inet_address.InetAddress address)
   {
     bool _retval;
-    _retval = g_inet_address_mask_matches(cast(GInetAddressMask*)this._cPtr, address ? cast(GInetAddress*)address._cPtr(No.Dup) : null);
+    _retval = cast(bool)g_inet_address_mask_matches(cast(GInetAddressMask*)this._cPtr, address ? cast(GInetAddress*)address._cPtr(No.Dup) : null);
     return _retval;
   }
 

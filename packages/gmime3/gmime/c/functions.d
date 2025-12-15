@@ -36,13 +36,13 @@ __gshared extern(C)
   GDateTime* function(GMimeAutocryptHeader* ah) c_g_mime_autocrypt_header_get_effective_date; ///
   GBytes* function(GMimeAutocryptHeader* ah) c_g_mime_autocrypt_header_get_keydata; ///
   GMimeAutocryptPreferEncrypt function(GMimeAutocryptHeader* ah) c_g_mime_autocrypt_header_get_prefer_encrypt; ///
-  bool function(GMimeAutocryptHeader* ah) c_g_mime_autocrypt_header_is_complete; ///
+  gboolean function(GMimeAutocryptHeader* ah) c_g_mime_autocrypt_header_is_complete; ///
   void function(GMimeAutocryptHeader* ah, GMimeInternetAddressMailbox* address) c_g_mime_autocrypt_header_set_address; ///
   void function(GMimeAutocryptHeader* ah, const(char)* address) c_g_mime_autocrypt_header_set_address_from_string; ///
   void function(GMimeAutocryptHeader* ah, GDateTime* effectiveDate) c_g_mime_autocrypt_header_set_effective_date; ///
   void function(GMimeAutocryptHeader* ah, GBytes* keydata) c_g_mime_autocrypt_header_set_keydata; ///
   void function(GMimeAutocryptHeader* ah, GMimeAutocryptPreferEncrypt pref) c_g_mime_autocrypt_header_set_prefer_encrypt; ///
-  char* function(GMimeAutocryptHeader* ah, bool gossip) c_g_mime_autocrypt_header_to_string; ///
+  char* function(GMimeAutocryptHeader* ah, gboolean gossip) c_g_mime_autocrypt_header_to_string; ///
 
   // AutocryptHeaderList
   GType function() c_g_mime_autocrypt_header_list_get_type; ///
@@ -91,18 +91,18 @@ __gshared extern(C)
   GMimeCertificateList* function() c_g_mime_certificate_list_new; ///
   int function(GMimeCertificateList* list, GMimeCertificate* cert) c_g_mime_certificate_list_add; ///
   void function(GMimeCertificateList* list) c_g_mime_certificate_list_clear; ///
-  bool function(GMimeCertificateList* list, GMimeCertificate* cert) c_g_mime_certificate_list_contains; ///
+  gboolean function(GMimeCertificateList* list, GMimeCertificate* cert) c_g_mime_certificate_list_contains; ///
   GMimeCertificate* function(GMimeCertificateList* list, int index) c_g_mime_certificate_list_get_certificate; ///
   int function(GMimeCertificateList* list, GMimeCertificate* cert) c_g_mime_certificate_list_index_of; ///
   void function(GMimeCertificateList* list, int index, GMimeCertificate* cert) c_g_mime_certificate_list_insert; ///
   int function(GMimeCertificateList* list) c_g_mime_certificate_list_length; ///
-  bool function(GMimeCertificateList* list, GMimeCertificate* cert) c_g_mime_certificate_list_remove; ///
-  bool function(GMimeCertificateList* list, int index) c_g_mime_certificate_list_remove_at; ///
+  gboolean function(GMimeCertificateList* list, GMimeCertificate* cert) c_g_mime_certificate_list_remove; ///
+  gboolean function(GMimeCertificateList* list, int index) c_g_mime_certificate_list_remove_at; ///
   void function(GMimeCertificateList* list, int index, GMimeCertificate* cert) c_g_mime_certificate_list_set_certificate; ///
 
   // Charset
   const(char)* function(GMimeCharset* charset) c_g_mime_charset_best_name; ///
-  bool function(GMimeCharset* mask, const(char)* charset, const(char)* text, size_t len) c_g_mime_charset_can_encode; ///
+  gboolean function(GMimeCharset* mask, const(char)* charset, const(char)* text, size_t len) c_g_mime_charset_can_encode; ///
   void function(GMimeCharset* charset) c_g_mime_charset_init; ///
   void function(GMimeCharset* charset, const(char)* inbuf, size_t inlen) c_g_mime_charset_step; ///
   const(char)* function(const(char)* inbuf, size_t inlen) c_g_mime_charset_best; ///
@@ -123,7 +123,7 @@ __gshared extern(C)
   const(char)* function(GMimeContentDisposition* disposition) c_g_mime_content_disposition_get_disposition; ///
   const(char)* function(GMimeContentDisposition* disposition, const(char)* name) c_g_mime_content_disposition_get_parameter; ///
   GMimeParamList* function(GMimeContentDisposition* disposition) c_g_mime_content_disposition_get_parameters; ///
-  bool function(GMimeContentDisposition* disposition) c_g_mime_content_disposition_is_attachment; ///
+  gboolean function(GMimeContentDisposition* disposition) c_g_mime_content_disposition_is_attachment; ///
   void function(GMimeContentDisposition* disposition, const(char)* value) c_g_mime_content_disposition_set_disposition; ///
   void function(GMimeContentDisposition* disposition, const(char)* name, const(char)* value) c_g_mime_content_disposition_set_parameter; ///
 
@@ -137,7 +137,7 @@ __gshared extern(C)
   char* function(GMimeContentType* contentType) c_g_mime_content_type_get_mime_type; ///
   const(char)* function(GMimeContentType* contentType, const(char)* name) c_g_mime_content_type_get_parameter; ///
   GMimeParamList* function(GMimeContentType* contentType) c_g_mime_content_type_get_parameters; ///
-  bool function(GMimeContentType* contentType, const(char)* type, const(char)* subtype) c_g_mime_content_type_is_type; ///
+  gboolean function(GMimeContentType* contentType, const(char)* type, const(char)* subtype) c_g_mime_content_type_is_type; ///
   void function(GMimeContentType* contentType, const(char)* subtype) c_g_mime_content_type_set_media_subtype; ///
   void function(GMimeContentType* contentType, const(char)* type) c_g_mime_content_type_set_media_type; ///
   void function(GMimeContentType* contentType, const(char)* name, const(char)* value) c_g_mime_content_type_set_parameter; ///
@@ -149,14 +149,14 @@ __gshared extern(C)
   GMimeDecryptResult* function(GMimeCryptoContext* ctx, GMimeDecryptFlags flags, const(char)* sessionKey, GMimeStream* istream, GMimeStream* ostream, GError** _err) c_g_mime_crypto_context_decrypt; ///
   GMimeDigestAlgo function(GMimeCryptoContext* ctx, const(char)* name) c_g_mime_crypto_context_digest_id; ///
   const(char)* function(GMimeCryptoContext* ctx, GMimeDigestAlgo digest) c_g_mime_crypto_context_digest_name; ///
-  int function(GMimeCryptoContext* ctx, bool sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GMimeStream* istream, GMimeStream* ostream, GError** _err) c_g_mime_crypto_context_encrypt; ///
+  int function(GMimeCryptoContext* ctx, gboolean sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GMimeStream* istream, GMimeStream* ostream, GError** _err) c_g_mime_crypto_context_encrypt; ///
   int function(GMimeCryptoContext* ctx, const(char*)* keys, GMimeStream* ostream, GError** _err) c_g_mime_crypto_context_export_keys; ///
   const(char)* function(GMimeCryptoContext* ctx) c_g_mime_crypto_context_get_encryption_protocol; ///
   const(char)* function(GMimeCryptoContext* ctx) c_g_mime_crypto_context_get_key_exchange_protocol; ///
   const(char)* function(GMimeCryptoContext* ctx) c_g_mime_crypto_context_get_signature_protocol; ///
   int function(GMimeCryptoContext* ctx, GMimeStream* istream, GError** _err) c_g_mime_crypto_context_import_keys; ///
   void function(GMimeCryptoContext* ctx, GMimePasswordRequestFunc requestPasswd) c_g_mime_crypto_context_set_request_password; ///
-  int function(GMimeCryptoContext* ctx, bool detach, const(char)* userid, GMimeStream* istream, GMimeStream* ostream, GError** _err) c_g_mime_crypto_context_sign; ///
+  int function(GMimeCryptoContext* ctx, gboolean detach, const(char)* userid, GMimeStream* istream, GMimeStream* ostream, GError** _err) c_g_mime_crypto_context_sign; ///
   GMimeSignatureList* function(GMimeCryptoContext* ctx, GMimeVerifyFlags flags, GMimeStream* istream, GMimeStream* sigstream, GMimeStream* ostream, GError** _err) c_g_mime_crypto_context_verify; ///
 
   // DataWrapper
@@ -207,11 +207,11 @@ __gshared extern(C)
   GMimeFilter* function(GMimeFilter* filter) c_g_mime_filter_copy; ///
   void function(GMimeFilter* filter, ubyte* inbuf, size_t inlen, size_t prespace, ubyte** outbuf, size_t* outlen, size_t* outprespace) c_g_mime_filter_filter; ///
   void function(GMimeFilter* filter) c_g_mime_filter_reset; ///
-  void function(GMimeFilter* filter, size_t size, bool keep) c_g_mime_filter_set_size; ///
+  void function(GMimeFilter* filter, size_t size, gboolean keep) c_g_mime_filter_set_size; ///
 
   // FilterBasic
   GType function() c_g_mime_filter_basic_get_type; ///
-  GMimeFilter* function(GMimeContentEncoding encoding, bool encode) c_g_mime_filter_basic_new; ///
+  GMimeFilter* function(GMimeContentEncoding encoding, gboolean encode) c_g_mime_filter_basic_new; ///
 
   // FilterBest
   GType function() c_g_mime_filter_best_get_type; ///
@@ -231,7 +231,7 @@ __gshared extern(C)
 
   // FilterDos2Unix
   GType function() c_g_mime_filter_dos2unix_get_type; ///
-  GMimeFilter* function(bool ensureNewline) c_g_mime_filter_dos2unix_new; ///
+  GMimeFilter* function(gboolean ensureNewline) c_g_mime_filter_dos2unix_new; ///
 
   // FilterEnriched
   GType function() c_g_mime_filter_enriched_get_type; ///
@@ -270,17 +270,17 @@ __gshared extern(C)
 
   // FilterUnix2Dos
   GType function() c_g_mime_filter_unix2dos_get_type; ///
-  GMimeFilter* function(bool ensureNewline) c_g_mime_filter_unix2dos_new; ///
+  GMimeFilter* function(gboolean ensureNewline) c_g_mime_filter_unix2dos_new; ///
 
   // FilterWindows
   GType function() c_g_mime_filter_windows_get_type; ///
   GMimeFilter* function(const(char)* claimedCharset) c_g_mime_filter_windows_new; ///
-  bool function(GMimeFilterWindows* filter) c_g_mime_filter_windows_is_windows_charset; ///
+  gboolean function(GMimeFilterWindows* filter) c_g_mime_filter_windows_is_windows_charset; ///
   const(char)* function(GMimeFilterWindows* filter) c_g_mime_filter_windows_real_charset; ///
 
   // FilterYenc
   GType function() c_g_mime_filter_yenc_get_type; ///
-  GMimeFilter* function(bool encode) c_g_mime_filter_yenc_new; ///
+  GMimeFilter* function(gboolean encode) c_g_mime_filter_yenc_new; ///
   uint function(GMimeFilterYenc* yenc) c_g_mime_filter_yenc_get_crc; ///
   uint function(GMimeFilterYenc* yenc) c_g_mime_filter_yenc_get_pcrc; ///
   void function(GMimeFilterYenc* yenc, uint crc) c_g_mime_filter_yenc_set_crc; ///
@@ -292,12 +292,12 @@ __gshared extern(C)
   void function(GMimeFormatOptions* options, const(char)* header) c_g_mime_format_options_add_hidden_header; ///
   void function(GMimeFormatOptions* options) c_g_mime_format_options_clear_hidden_headers; ///
   GMimeFormatOptions* function(GMimeFormatOptions* options) c_g_mime_format_options_clone; ///
-  GMimeFilter* function(GMimeFormatOptions* options, bool ensureNewline) c_g_mime_format_options_create_newline_filter; ///
+  GMimeFilter* function(GMimeFormatOptions* options, gboolean ensureNewline) c_g_mime_format_options_create_newline_filter; ///
   void function(GMimeFormatOptions* options) c_g_mime_format_options_free; ///
   const(char)* function(GMimeFormatOptions* options) c_g_mime_format_options_get_newline; ///
   GMimeNewLineFormat function(GMimeFormatOptions* options) c_g_mime_format_options_get_newline_format; ///
   GMimeParamEncodingMethod function(GMimeFormatOptions* options) c_g_mime_format_options_get_param_encoding_method; ///
-  bool function(GMimeFormatOptions* options, const(char)* header) c_g_mime_format_options_is_hidden_header; ///
+  gboolean function(GMimeFormatOptions* options, const(char)* header) c_g_mime_format_options_is_hidden_header; ///
   void function(GMimeFormatOptions* options, const(char)* header) c_g_mime_format_options_remove_hidden_header; ///
   void function(GMimeFormatOptions* options, GMimeNewLineFormat newline) c_g_mime_format_options_set_newline_format; ///
   void function(GMimeFormatOptions* options, GMimeParamEncodingMethod method) c_g_mime_format_options_set_param_encoding_method; ///
@@ -331,12 +331,12 @@ __gshared extern(C)
   GMimeHeaderList* function(GMimeParserOptions* options) c_g_mime_header_list_new; ///
   void function(GMimeHeaderList* headers, const(char)* name, const(char)* value, const(char)* charset) c_g_mime_header_list_append; ///
   void function(GMimeHeaderList* headers) c_g_mime_header_list_clear; ///
-  bool function(GMimeHeaderList* headers, const(char)* name) c_g_mime_header_list_contains; ///
+  gboolean function(GMimeHeaderList* headers, const(char)* name) c_g_mime_header_list_contains; ///
   int function(GMimeHeaderList* headers) c_g_mime_header_list_get_count; ///
   GMimeHeader* function(GMimeHeaderList* headers, const(char)* name) c_g_mime_header_list_get_header; ///
   GMimeHeader* function(GMimeHeaderList* headers, int index) c_g_mime_header_list_get_header_at; ///
   void function(GMimeHeaderList* headers, const(char)* name, const(char)* value, const(char)* charset) c_g_mime_header_list_prepend; ///
-  bool function(GMimeHeaderList* headers, const(char)* name) c_g_mime_header_list_remove; ///
+  gboolean function(GMimeHeaderList* headers, const(char)* name) c_g_mime_header_list_remove; ///
   void function(GMimeHeaderList* headers, int index) c_g_mime_header_list_remove_at; ///
   void function(GMimeHeaderList* headers, const(char)* name, const(char)* value, const(char)* charset) c_g_mime_header_list_set; ///
   char* function(GMimeHeaderList* headers, GMimeFormatOptions* options) c_g_mime_header_list_to_string; ///
@@ -348,7 +348,7 @@ __gshared extern(C)
   const(char)* function(GMimeInternetAddress* ia) c_internet_address_get_name; ///
   void function(GMimeInternetAddress* ia, const(char)* charset) c_internet_address_set_charset; ///
   void function(GMimeInternetAddress* ia, const(char)* name) c_internet_address_set_name; ///
-  char* function(GMimeInternetAddress* ia, GMimeFormatOptions* options, bool encode) c_internet_address_to_string; ///
+  char* function(GMimeInternetAddress* ia, GMimeFormatOptions* options, gboolean encode) c_internet_address_to_string; ///
 
   // InternetAddressGroup
   GType function() c_internet_address_group_get_type; ///
@@ -365,17 +365,17 @@ __gshared extern(C)
   void function(GMimeInternetAddressList* list, GMimeInternetAddressList* append) c_internet_address_list_append; ///
   void function(GMimeInternetAddressList* list, GMimeParserOptions* options, const(char)* str) c_internet_address_list_append_parse; ///
   void function(GMimeInternetAddressList* list) c_internet_address_list_clear; ///
-  bool function(GMimeInternetAddressList* list, GMimeInternetAddress* ia) c_internet_address_list_contains; ///
+  gboolean function(GMimeInternetAddressList* list, GMimeInternetAddress* ia) c_internet_address_list_contains; ///
   void function(GMimeInternetAddressList* list, GMimeFormatOptions* options, GString* str) c_internet_address_list_encode; ///
   GMimeInternetAddress* function(GMimeInternetAddressList* list, int index) c_internet_address_list_get_address; ///
   int function(GMimeInternetAddressList* list, GMimeInternetAddress* ia) c_internet_address_list_index_of; ///
   void function(GMimeInternetAddressList* list, int index, GMimeInternetAddress* ia) c_internet_address_list_insert; ///
   int function(GMimeInternetAddressList* list) c_internet_address_list_length; ///
   void function(GMimeInternetAddressList* list, GMimeInternetAddressList* prepend) c_internet_address_list_prepend; ///
-  bool function(GMimeInternetAddressList* list, GMimeInternetAddress* ia) c_internet_address_list_remove; ///
-  bool function(GMimeInternetAddressList* list, int index) c_internet_address_list_remove_at; ///
+  gboolean function(GMimeInternetAddressList* list, GMimeInternetAddress* ia) c_internet_address_list_remove; ///
+  gboolean function(GMimeInternetAddressList* list, int index) c_internet_address_list_remove_at; ///
   void function(GMimeInternetAddressList* list, int index, GMimeInternetAddress* ia) c_internet_address_list_set_address; ///
-  char* function(GMimeInternetAddressList* list, GMimeFormatOptions* options, bool encode) c_internet_address_list_to_string; ///
+  char* function(GMimeInternetAddressList* list, GMimeFormatOptions* options, gboolean encode) c_internet_address_list_to_string; ///
 
   // InternetAddressMailbox
   GType function() c_internet_address_mailbox_get_type; ///
@@ -386,7 +386,7 @@ __gshared extern(C)
 
   // Message
   GType function() c_g_mime_message_get_type; ///
-  GMimeMessage* function(bool prettyHeaders) c_g_mime_message_new; ///
+  GMimeMessage* function(gboolean prettyHeaders) c_g_mime_message_new; ///
   void function(GMimeMessage* message, GMimeAddressType type, const(char)* name, const(char)* addr) c_g_mime_message_add_mailbox; ///
   void function(GMimeMessage* message, GMimeObjectForeachFunc callback, void* userData) c_g_mime_message_foreach; ///
   GMimeInternetAddressList* function(GMimeMessage* message, GMimeAddressType type) c_g_mime_message_get_addresses; ///
@@ -432,7 +432,7 @@ __gshared extern(C)
   GMimeMultipart* function(const(char)* subtype) c_g_mime_multipart_new_with_subtype; ///
   void function(GMimeMultipart* multipart, GMimeObject* part) c_g_mime_multipart_add; ///
   void function(GMimeMultipart* multipart) c_g_mime_multipart_clear; ///
-  bool function(GMimeMultipart* multipart, GMimeObject* part) c_g_mime_multipart_contains; ///
+  gboolean function(GMimeMultipart* multipart, GMimeObject* part) c_g_mime_multipart_contains; ///
   void function(GMimeMultipart* multipart, GMimeObjectForeachFunc callback, void* userData) c_g_mime_multipart_foreach; ///
   const(char)* function(GMimeMultipart* multipart) c_g_mime_multipart_get_boundary; ///
   int function(GMimeMultipart* multipart) c_g_mime_multipart_get_count; ///
@@ -442,7 +442,7 @@ __gshared extern(C)
   GMimeObject* function(GMimeMultipart* multipart, const(char)* contentId) c_g_mime_multipart_get_subpart_from_content_id; ///
   int function(GMimeMultipart* multipart, GMimeObject* part) c_g_mime_multipart_index_of; ///
   void function(GMimeMultipart* multipart, int index, GMimeObject* part) c_g_mime_multipart_insert; ///
-  bool function(GMimeMultipart* multipart, GMimeObject* part) c_g_mime_multipart_remove; ///
+  gboolean function(GMimeMultipart* multipart, GMimeObject* part) c_g_mime_multipart_remove; ///
   GMimeObject* function(GMimeMultipart* multipart, int index) c_g_mime_multipart_remove_at; ///
   GMimeObject* function(GMimeMultipart* multipart, int index, GMimeObject* replacement) c_g_mime_multipart_replace; ///
   void function(GMimeMultipart* multipart, const(char)* boundary) c_g_mime_multipart_set_boundary; ///
@@ -452,7 +452,7 @@ __gshared extern(C)
   // MultipartEncrypted
   GType function() c_g_mime_multipart_encrypted_get_type; ///
   GMimeMultipartEncrypted* function() c_g_mime_multipart_encrypted_new; ///
-  GMimeMultipartEncrypted* function(GMimeCryptoContext* ctx, GMimeObject* entity, bool sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GError** _err) c_g_mime_multipart_encrypted_encrypt; ///
+  GMimeMultipartEncrypted* function(GMimeCryptoContext* ctx, GMimeObject* entity, gboolean sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GError** _err) c_g_mime_multipart_encrypted_encrypt; ///
   GMimeObject* function(GMimeMultipartEncrypted* encrypted, GMimeDecryptFlags flags, const(char)* sessionKey, GMimeDecryptResult** result, GError** _err) c_g_mime_multipart_encrypted_decrypt; ///
 
   // MultipartSigned
@@ -470,7 +470,7 @@ __gshared extern(C)
   void function() c_g_mime_object_type_registry_shutdown; ///
   void function(GMimeObject* object, const(char)* header, const(char)* value, const(char)* charset) c_g_mime_object_append_header; ///
   void function(GMimeObject* object, GMimeEncodingConstraint constraint) c_g_mime_object_encode; ///
-  GMimeAutocryptHeaderList* function(GMimeObject* mimePart, GDateTime* effectiveDate, const(char)* matchheader, GMimeInternetAddressList* addresses, bool keepIncomplete) c_g_mime_object_get_autocrypt_headers; ///
+  GMimeAutocryptHeaderList* function(GMimeObject* mimePart, GDateTime* effectiveDate, const(char)* matchheader, GMimeInternetAddressList* addresses, gboolean keepIncomplete) c_g_mime_object_get_autocrypt_headers; ///
   GMimeContentDisposition* function(GMimeObject* object) c_g_mime_object_get_content_disposition; ///
   const(char)* function(GMimeObject* object, const(char)* name) c_g_mime_object_get_content_disposition_parameter; ///
   const(char)* function(GMimeObject* object) c_g_mime_object_get_content_id; ///
@@ -481,7 +481,7 @@ __gshared extern(C)
   GMimeHeaderList* function(GMimeObject* object) c_g_mime_object_get_header_list; ///
   char* function(GMimeObject* object, GMimeFormatOptions* options) c_g_mime_object_get_headers; ///
   void function(GMimeObject* object, const(char)* header, const(char)* value, const(char)* charset) c_g_mime_object_prepend_header; ///
-  bool function(GMimeObject* object, const(char)* header) c_g_mime_object_remove_header; ///
+  gboolean function(GMimeObject* object, const(char)* header) c_g_mime_object_remove_header; ///
   void function(GMimeObject* object, GMimeContentDisposition* disposition) c_g_mime_object_set_content_disposition; ///
   void function(GMimeObject* object, const(char)* name, const(char)* value) c_g_mime_object_set_content_disposition_parameter; ///
   void function(GMimeObject* object, const(char)* contentId) c_g_mime_object_set_content_id; ///
@@ -510,12 +510,12 @@ __gshared extern(C)
   GMimeParamList* function() c_g_mime_param_list_new; ///
   GMimeParamList* function(GMimeParserOptions* options, const(char)* str) c_g_mime_param_list_parse; ///
   void function(GMimeParamList* list) c_g_mime_param_list_clear; ///
-  void function(GMimeParamList* list, GMimeFormatOptions* options, bool fold, GString* str) c_g_mime_param_list_encode; ///
+  void function(GMimeParamList* list, GMimeFormatOptions* options, gboolean fold, GString* str) c_g_mime_param_list_encode; ///
   GMimeParam* function(GMimeParamList* list, const(char)* name) c_g_mime_param_list_get_parameter; ///
   GMimeParam* function(GMimeParamList* list, int index) c_g_mime_param_list_get_parameter_at; ///
   int function(GMimeParamList* list) c_g_mime_param_list_length; ///
-  bool function(GMimeParamList* list, const(char)* name) c_g_mime_param_list_remove; ///
-  bool function(GMimeParamList* list, int index) c_g_mime_param_list_remove_at; ///
+  gboolean function(GMimeParamList* list, const(char)* name) c_g_mime_param_list_remove; ///
+  gboolean function(GMimeParamList* list, int index) c_g_mime_param_list_remove_at; ///
   void function(GMimeParamList* list, const(char)* name, const(char)* value) c_g_mime_param_list_set_parameter; ///
 
   // Parser
@@ -524,19 +524,19 @@ __gshared extern(C)
   GMimeParser* function(GMimeStream* stream) c_g_mime_parser_new_with_stream; ///
   GMimeMessage* function(GMimeParser* parser, GMimeParserOptions* options) c_g_mime_parser_construct_message; ///
   GMimeObject* function(GMimeParser* parser, GMimeParserOptions* options) c_g_mime_parser_construct_part; ///
-  bool function(GMimeParser* parser) c_g_mime_parser_eos; ///
+  gboolean function(GMimeParser* parser) c_g_mime_parser_eos; ///
   GMimeFormat function(GMimeParser* parser) c_g_mime_parser_get_format; ///
   long function(GMimeParser* parser) c_g_mime_parser_get_headers_begin; ///
   long function(GMimeParser* parser) c_g_mime_parser_get_headers_end; ///
   char* function(GMimeParser* parser) c_g_mime_parser_get_mbox_marker; ///
   long function(GMimeParser* parser) c_g_mime_parser_get_mbox_marker_offset; ///
-  bool function(GMimeParser* parser) c_g_mime_parser_get_persist_stream; ///
-  bool function(GMimeParser* parser) c_g_mime_parser_get_respect_content_length; ///
+  gboolean function(GMimeParser* parser) c_g_mime_parser_get_persist_stream; ///
+  gboolean function(GMimeParser* parser) c_g_mime_parser_get_respect_content_length; ///
   void function(GMimeParser* parser, GMimeStream* stream) c_g_mime_parser_init_with_stream; ///
   void function(GMimeParser* parser, GMimeFormat format) c_g_mime_parser_set_format; ///
   void function(GMimeParser* parser, const(char)* regex, GMimeParserHeaderRegexFunc headerCb, void* userData) c_g_mime_parser_set_header_regex; ///
-  void function(GMimeParser* parser, bool persist) c_g_mime_parser_set_persist_stream; ///
-  void function(GMimeParser* parser, bool respectContentLength) c_g_mime_parser_set_respect_content_length; ///
+  void function(GMimeParser* parser, gboolean persist) c_g_mime_parser_set_persist_stream; ///
+  void function(GMimeParser* parser, gboolean respectContentLength) c_g_mime_parser_set_respect_content_length; ///
   long function(GMimeParser* parser) c_g_mime_parser_tell; ///
 
   // ParserOptions
@@ -545,13 +545,13 @@ __gshared extern(C)
   GMimeParserOptions* function(GMimeParserOptions* options) c_g_mime_parser_options_clone; ///
   void function(GMimeParserOptions* options) c_g_mime_parser_options_free; ///
   GMimeRfcComplianceMode function(GMimeParserOptions* options) c_g_mime_parser_options_get_address_compliance_mode; ///
-  bool function(GMimeParserOptions* options) c_g_mime_parser_options_get_allow_addresses_without_domain; ///
+  gboolean function(GMimeParserOptions* options) c_g_mime_parser_options_get_allow_addresses_without_domain; ///
   const(char*)* function(GMimeParserOptions* options) c_g_mime_parser_options_get_fallback_charsets; ///
   GMimeRfcComplianceMode function(GMimeParserOptions* options) c_g_mime_parser_options_get_parameter_compliance_mode; ///
   GMimeRfcComplianceMode function(GMimeParserOptions* options) c_g_mime_parser_options_get_rfc2047_compliance_mode; ///
   GMimeParserWarningFunc function(GMimeParserOptions* options) c_g_mime_parser_options_get_warning_callback; ///
   void function(GMimeParserOptions* options, GMimeRfcComplianceMode mode) c_g_mime_parser_options_set_address_compliance_mode; ///
-  void function(GMimeParserOptions* options, bool allow) c_g_mime_parser_options_set_allow_addresses_without_domain; ///
+  void function(GMimeParserOptions* options, gboolean allow) c_g_mime_parser_options_set_allow_addresses_without_domain; ///
   void function(GMimeParserOptions* options, const(char*)* charsets) c_g_mime_parser_options_set_fallback_charsets; ///
   void function(GMimeParserOptions* options, GMimeRfcComplianceMode mode) c_g_mime_parser_options_set_parameter_compliance_mode; ///
   void function(GMimeParserOptions* options, GMimeRfcComplianceMode mode) c_g_mime_parser_options_set_rfc2047_compliance_mode; ///
@@ -571,10 +571,10 @@ __gshared extern(C)
   const(char)* function(GMimePart* mimePart) c_g_mime_part_get_content_md5; ///
   const(char)* function(GMimePart* mimePart) c_g_mime_part_get_filename; ///
   GMimeOpenPGPData function(GMimePart* mimePart) c_g_mime_part_get_openpgp_data; ///
-  bool function(GMimePart* mimePart) c_g_mime_part_is_attachment; ///
+  gboolean function(GMimePart* mimePart) c_g_mime_part_is_attachment; ///
   GMimeDecryptResult* function(GMimePart* mimePart, GMimeDecryptFlags flags, const(char)* sessionKey, GError** _err) c_g_mime_part_openpgp_decrypt; ///
-  bool function(GMimePart* mimePart, bool sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GError** _err) c_g_mime_part_openpgp_encrypt; ///
-  bool function(GMimePart* mimePart, const(char)* userid, GError** _err) c_g_mime_part_openpgp_sign; ///
+  gboolean function(GMimePart* mimePart, gboolean sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GError** _err) c_g_mime_part_openpgp_encrypt; ///
+  gboolean function(GMimePart* mimePart, const(char)* userid, GError** _err) c_g_mime_part_openpgp_sign; ///
   GMimeSignatureList* function(GMimePart* mimePart, GMimeVerifyFlags flags, GError** _err) c_g_mime_part_openpgp_verify; ///
   void function(GMimePart* mimePart, GMimeDataWrapper* content) c_g_mime_part_set_content; ///
   void function(GMimePart* mimePart, const(char)* description) c_g_mime_part_set_content_description; ///
@@ -584,7 +584,7 @@ __gshared extern(C)
   void function(GMimePart* mimePart, const(char)* contentMd5) c_g_mime_part_set_content_md5; ///
   void function(GMimePart* mimePart, const(char)* filename) c_g_mime_part_set_filename; ///
   void function(GMimePart* mimePart, GMimeOpenPGPData data) c_g_mime_part_set_openpgp_data; ///
-  bool function(GMimePart* mimePart) c_g_mime_part_verify_content_md5; ///
+  gboolean function(GMimePart* mimePart) c_g_mime_part_verify_content_md5; ///
 
   // PartIter
   GType function() c_g_mime_part_iter_get_type; ///
@@ -595,12 +595,12 @@ __gshared extern(C)
   GMimeObject* function(GMimePartIter* iter) c_g_mime_part_iter_get_parent; ///
   char* function(GMimePartIter* iter) c_g_mime_part_iter_get_path; ///
   GMimeObject* function(GMimePartIter* iter) c_g_mime_part_iter_get_toplevel; ///
-  bool function(GMimePartIter* iter) c_g_mime_part_iter_is_valid; ///
-  bool function(GMimePartIter* iter, const(char)* path) c_g_mime_part_iter_jump_to; ///
-  bool function(GMimePartIter* iter) c_g_mime_part_iter_next; ///
-  bool function(GMimePartIter* iter) c_g_mime_part_iter_prev; ///
-  bool function(GMimePartIter* iter) c_g_mime_part_iter_remove; ///
-  bool function(GMimePartIter* iter, GMimeObject* replacement) c_g_mime_part_iter_replace; ///
+  gboolean function(GMimePartIter* iter) c_g_mime_part_iter_is_valid; ///
+  gboolean function(GMimePartIter* iter, const(char)* path) c_g_mime_part_iter_jump_to; ///
+  gboolean function(GMimePartIter* iter) c_g_mime_part_iter_next; ///
+  gboolean function(GMimePartIter* iter) c_g_mime_part_iter_prev; ///
+  gboolean function(GMimePartIter* iter) c_g_mime_part_iter_remove; ///
+  gboolean function(GMimePartIter* iter, GMimeObject* replacement) c_g_mime_part_iter_replace; ///
   void function(GMimePartIter* iter) c_g_mime_part_iter_reset; ///
 
   // Pkcs7Context
@@ -638,13 +638,13 @@ __gshared extern(C)
   GMimeSignatureList* function() c_g_mime_signature_list_new; ///
   int function(GMimeSignatureList* list, GMimeSignature* sig) c_g_mime_signature_list_add; ///
   void function(GMimeSignatureList* list) c_g_mime_signature_list_clear; ///
-  bool function(GMimeSignatureList* list, GMimeSignature* sig) c_g_mime_signature_list_contains; ///
+  gboolean function(GMimeSignatureList* list, GMimeSignature* sig) c_g_mime_signature_list_contains; ///
   GMimeSignature* function(GMimeSignatureList* list, int index) c_g_mime_signature_list_get_signature; ///
   int function(GMimeSignatureList* list, GMimeSignature* sig) c_g_mime_signature_list_index_of; ///
   void function(GMimeSignatureList* list, int index, GMimeSignature* sig) c_g_mime_signature_list_insert; ///
   int function(GMimeSignatureList* list) c_g_mime_signature_list_length; ///
-  bool function(GMimeSignatureList* list, GMimeSignature* sig) c_g_mime_signature_list_remove; ///
-  bool function(GMimeSignatureList* list, int index) c_g_mime_signature_list_remove_at; ///
+  gboolean function(GMimeSignatureList* list, GMimeSignature* sig) c_g_mime_signature_list_remove; ///
+  gboolean function(GMimeSignatureList* list, int index) c_g_mime_signature_list_remove_at; ///
   void function(GMimeSignatureList* list, int index, GMimeSignature* sig) c_g_mime_signature_list_set_signature; ///
 
   // Stream
@@ -653,7 +653,7 @@ __gshared extern(C)
   void function(GMimeStream* stream, GByteArray* buffer) c_g_mime_stream_buffer_readln; ///
   int function(GMimeStream* stream) c_g_mime_stream_close; ///
   void function(GMimeStream* stream, long start, long end) c_g_mime_stream_construct; ///
-  bool function(GMimeStream* stream) c_g_mime_stream_eos; ///
+  gboolean function(GMimeStream* stream) c_g_mime_stream_eos; ///
   int function(GMimeStream* stream) c_g_mime_stream_flush; ///
   long function(GMimeStream* stream) c_g_mime_stream_length; ///
   ptrdiff_t function(GMimeStream* stream, const(char)* fmt,  ...) c_g_mime_stream_printf; ///
@@ -682,31 +682,31 @@ __gshared extern(C)
   GMimeStream* function(void* fp) c_g_mime_stream_file_new; ///
   GMimeStream* function(void* fp, long start, long end) c_g_mime_stream_file_new_with_bounds; ///
   GMimeStream* function(const(char)* path, const(char)* mode, GError** _err) c_g_mime_stream_file_open; ///
-  bool function(GMimeStreamFile* stream) c_g_mime_stream_file_get_owner; ///
-  void function(GMimeStreamFile* stream, bool owner) c_g_mime_stream_file_set_owner; ///
+  gboolean function(GMimeStreamFile* stream) c_g_mime_stream_file_get_owner; ///
+  void function(GMimeStreamFile* stream, gboolean owner) c_g_mime_stream_file_set_owner; ///
 
   // StreamFilter
   GType function() c_g_mime_stream_filter_get_type; ///
   GMimeStream* function(GMimeStream* stream) c_g_mime_stream_filter_new; ///
   int function(GMimeStreamFilter* stream, GMimeFilter* filter) c_g_mime_stream_filter_add; ///
-  bool function(GMimeStreamFilter* stream) c_g_mime_stream_filter_get_owner; ///
+  gboolean function(GMimeStreamFilter* stream) c_g_mime_stream_filter_get_owner; ///
   void function(GMimeStreamFilter* stream, int id) c_g_mime_stream_filter_remove; ///
-  void function(GMimeStreamFilter* stream, bool owner) c_g_mime_stream_filter_set_owner; ///
+  void function(GMimeStreamFilter* stream, gboolean owner) c_g_mime_stream_filter_set_owner; ///
 
   // StreamFs
   GType function() c_g_mime_stream_fs_get_type; ///
   GMimeStream* function(int fd) c_g_mime_stream_fs_new; ///
   GMimeStream* function(int fd, long start, long end) c_g_mime_stream_fs_new_with_bounds; ///
   GMimeStream* function(const(char)* path, int flags, int mode, GError** _err) c_g_mime_stream_fs_open; ///
-  bool function(GMimeStreamFs* stream) c_g_mime_stream_fs_get_owner; ///
-  void function(GMimeStreamFs* stream, bool owner) c_g_mime_stream_fs_set_owner; ///
+  gboolean function(GMimeStreamFs* stream) c_g_mime_stream_fs_get_owner; ///
+  void function(GMimeStreamFs* stream, gboolean owner) c_g_mime_stream_fs_set_owner; ///
 
   // StreamGIO
   GType function() c_g_mime_stream_gio_get_type; ///
   GMimeStream* function(GFile* file) c_g_mime_stream_gio_new; ///
   GMimeStream* function(GFile* file, long start, long end) c_g_mime_stream_gio_new_with_bounds; ///
-  bool function(GMimeStreamGIO* stream) c_g_mime_stream_gio_get_owner; ///
-  void function(GMimeStreamGIO* stream, bool owner) c_g_mime_stream_gio_set_owner; ///
+  gboolean function(GMimeStreamGIO* stream) c_g_mime_stream_gio_get_owner; ///
+  void function(GMimeStreamGIO* stream, gboolean owner) c_g_mime_stream_gio_set_owner; ///
 
   // StreamMem
   GType function() c_g_mime_stream_mem_get_type; ///
@@ -714,28 +714,28 @@ __gshared extern(C)
   GMimeStream* function(const(ubyte)* buffer, size_t len) c_g_mime_stream_mem_new_with_buffer; ///
   GMimeStream* function(GByteArray* array) c_g_mime_stream_mem_new_with_byte_array; ///
   GByteArray* function(GMimeStreamMem* mem) c_g_mime_stream_mem_get_byte_array; ///
-  bool function(GMimeStreamMem* mem) c_g_mime_stream_mem_get_owner; ///
+  gboolean function(GMimeStreamMem* mem) c_g_mime_stream_mem_get_owner; ///
   void function(GMimeStreamMem* mem, GByteArray* array) c_g_mime_stream_mem_set_byte_array; ///
-  void function(GMimeStreamMem* mem, bool owner) c_g_mime_stream_mem_set_owner; ///
+  void function(GMimeStreamMem* mem, gboolean owner) c_g_mime_stream_mem_set_owner; ///
 
   // StreamMmap
   GType function() c_g_mime_stream_mmap_get_type; ///
   GMimeStream* function(int fd, int prot, int flags) c_g_mime_stream_mmap_new; ///
   GMimeStream* function(int fd, int prot, int flags, long start, long end) c_g_mime_stream_mmap_new_with_bounds; ///
-  bool function(GMimeStreamMmap* stream) c_g_mime_stream_mmap_get_owner; ///
-  void function(GMimeStreamMmap* stream, bool owner) c_g_mime_stream_mmap_set_owner; ///
+  gboolean function(GMimeStreamMmap* stream) c_g_mime_stream_mmap_get_owner; ///
+  void function(GMimeStreamMmap* stream, gboolean owner) c_g_mime_stream_mmap_set_owner; ///
 
   // StreamNull
   GType function() c_g_mime_stream_null_get_type; ///
   GMimeStream* function() c_g_mime_stream_null_new; ///
-  bool function(GMimeStreamNull* stream) c_g_mime_stream_null_get_count_newlines; ///
-  void function(GMimeStreamNull* stream, bool count) c_g_mime_stream_null_set_count_newlines; ///
+  gboolean function(GMimeStreamNull* stream) c_g_mime_stream_null_get_count_newlines; ///
+  void function(GMimeStreamNull* stream, gboolean count) c_g_mime_stream_null_set_count_newlines; ///
 
   // StreamPipe
   GType function() c_g_mime_stream_pipe_get_type; ///
   GMimeStream* function(int fd) c_g_mime_stream_pipe_new; ///
-  bool function(GMimeStreamPipe* stream) c_g_mime_stream_pipe_get_owner; ///
-  void function(GMimeStreamPipe* stream, bool owner) c_g_mime_stream_pipe_set_owner; ///
+  gboolean function(GMimeStreamPipe* stream) c_g_mime_stream_pipe_get_owner; ///
+  void function(GMimeStreamPipe* stream, gboolean owner) c_g_mime_stream_pipe_set_owner; ///
 
   // TextPart
   GType function() c_g_mime_text_part_get_type; ///
@@ -747,7 +747,7 @@ __gshared extern(C)
   void function(GMimeTextPart* mimePart, const(char)* text) c_g_mime_text_part_set_text; ///
 
   // global
-  bool function(uint major, uint minor, uint micro) c_g_mime_check_version; ///
+  gboolean function(uint major, uint minor, uint micro) c_g_mime_check_version; ///
   GMimeContentEncoding function(const(char)* str) c_g_mime_content_encoding_from_string; ///
   const(char)* function(GMimeContentEncoding encoding) c_g_mime_content_encoding_to_string; ///
   int function(void* cd) c_g_mime_iconv_close; ///
@@ -776,7 +776,7 @@ __gshared extern(C)
   char* function(const(char)* value) c_g_mime_utils_header_unfold; ///
   char* function(const(char)* str) c_g_mime_utils_quote_string; ///
   char* function(GMimeParserOptions* options, GMimeFormatOptions* format, const(char)* header) c_g_mime_utils_structured_header_fold; ///
-  bool function(const(ubyte)* text, size_t len) c_g_mime_utils_text_is_8bit; ///
+  gboolean function(const(ubyte)* text, size_t len) c_g_mime_utils_text_is_8bit; ///
   void function(char* str) c_g_mime_utils_unquote_string; ///
   char* function(GMimeParserOptions* options, GMimeFormatOptions* format, const(char)* header) c_g_mime_utils_unstructured_header_fold; ///
   size_t function(const(ubyte)* inbuf, size_t inlen, ubyte* outbuf, int* state, uint* pcrc, uint* crc) c_g_mime_ydecode_step; ///

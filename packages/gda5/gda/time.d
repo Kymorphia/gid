@@ -177,7 +177,7 @@ class Time : gobject.boxed.Boxed
   bool valid()
   {
     bool _retval;
-    _retval = gda_time_valid(cast(const(GdaTime)*)this._cPtr);
+    _retval = cast(bool)gda_time_valid(cast(const(GdaTime)*)this._cPtr);
     return _retval;
   }
 

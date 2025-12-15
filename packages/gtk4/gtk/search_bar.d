@@ -226,7 +226,7 @@ class SearchBar : gtk.widget.Widget
   bool getSearchMode()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
+    _retval = cast(bool)gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class SearchBar : gtk.widget.Widget
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
+    _retval = cast(bool)gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 

@@ -77,7 +77,7 @@ class GeolocationManager : gobject.object.ObjectWrap
   bool getEnableHighAccuracy()
   {
     bool _retval;
-    _retval = webkit_geolocation_manager_get_enable_high_accuracy(cast(WebKitGeolocationManager*)this._cPtr);
+    _retval = cast(bool)webkit_geolocation_manager_get_enable_high_accuracy(cast(WebKitGeolocationManager*)this._cPtr);
     return _retval;
   }
 

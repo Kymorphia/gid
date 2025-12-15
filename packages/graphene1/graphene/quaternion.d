@@ -111,7 +111,7 @@ class Quaternion : gobject.boxed.Boxed
   bool equal(graphene.quaternion.Quaternion b)
   {
     bool _retval;
-    _retval = graphene_quaternion_equal(cast(const(graphene_quaternion_t)*)this._cPtr, b ? cast(const(graphene_quaternion_t)*)b._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_quaternion_equal(cast(const(graphene_quaternion_t)*)this._cPtr, b ? cast(const(graphene_quaternion_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 

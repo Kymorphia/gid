@@ -83,7 +83,7 @@ class MainLoop : gobject.boxed.Boxed
   bool isRunning()
   {
     bool _retval;
-    _retval = g_main_loop_is_running(cast(GMainLoop*)this._cPtr);
+    _retval = cast(bool)g_main_loop_is_running(cast(GMainLoop*)this._cPtr);
     return _retval;
   }
 

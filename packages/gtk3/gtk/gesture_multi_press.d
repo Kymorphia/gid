@@ -79,7 +79,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_gesture_multi_press_get_area(cast(GtkGestureMultiPress*)this._cPtr, &_rect);
+    _retval = cast(bool)gtk_gesture_multi_press_get_area(cast(GtkGestureMultiPress*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }

@@ -129,7 +129,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   bool contains(gmime.internet_address.InternetAddress ia)
   {
     bool _retval;
-    _retval = internet_address_list_contains(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
+    _retval = cast(bool)internet_address_list_contains(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   bool remove(gmime.internet_address.InternetAddress ia)
   {
     bool _retval;
-    _retval = internet_address_list_remove(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
+    _retval = cast(bool)internet_address_list_remove(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   bool removeAt(int index)
   {
     bool _retval;
-    _retval = internet_address_list_remove_at(cast(GMimeInternetAddressList*)this._cPtr, index);
+    _retval = cast(bool)internet_address_list_remove_at(cast(GMimeInternetAddressList*)this._cPtr, index);
     return _retval;
   }
 

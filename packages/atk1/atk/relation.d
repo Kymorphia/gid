@@ -142,7 +142,7 @@ class Relation : gobject.object.ObjectWrap
   bool removeTarget(atk.object.ObjectWrap target)
   {
     bool _retval;
-    _retval = atk_relation_remove_target(cast(AtkRelation*)this._cPtr, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
+    _retval = cast(bool)atk_relation_remove_target(cast(AtkRelation*)this._cPtr, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
   }
 }

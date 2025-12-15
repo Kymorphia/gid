@@ -129,7 +129,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -187,7 +187,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close(cast(GIOStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_io_stream_close(cast(GIOStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -238,7 +238,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close_finish(cast(GIOStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)g_io_stream_close_finish(cast(GIOStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -279,7 +279,7 @@ class IOStream : gobject.object.ObjectWrap
   bool hasPending()
   {
     bool _retval;
-    _retval = g_io_stream_has_pending(cast(GIOStream*)this._cPtr);
+    _retval = cast(bool)g_io_stream_has_pending(cast(GIOStream*)this._cPtr);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class IOStream : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = g_io_stream_is_closed(cast(GIOStream*)this._cPtr);
+    _retval = cast(bool)g_io_stream_is_closed(cast(GIOStream*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_set_pending(cast(GIOStream*)this._cPtr, &_err);
+    _retval = cast(bool)g_io_stream_set_pending(cast(GIOStream*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -203,11 +203,11 @@ class HookList
   */
   void marshalCheck(bool mayRecurse, glib.types.HookCheckMarshaller marshaller)
   {
-    extern(C) bool _marshallerCallback(GHook* hook, void* marshalData)
+    extern(C) gboolean _marshallerCallback(GHook* hook, void* marshalData)
     {
       auto _dlg = cast(glib.types.HookCheckMarshaller*)marshalData;
 
-      bool _retval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
+      gboolean _retval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
       return _retval;
     }
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;

@@ -162,7 +162,7 @@ class ViewSwitcherBar : gtk.widget.Widget
   bool getReveal()
   {
     bool _retval;
-    _retval = adw_view_switcher_bar_get_reveal(cast(AdwViewSwitcherBar*)this._cPtr);
+    _retval = cast(bool)adw_view_switcher_bar_get_reveal(cast(AdwViewSwitcherBar*)this._cPtr);
     return _retval;
   }
 

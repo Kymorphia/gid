@@ -140,7 +140,7 @@ class Gradient : gobject.boxed.Boxed
   {
     bool _retval;
     cairo_pattern_t* _resolvedGradient;
-    _retval = gtk_gradient_resolve(cast(GtkGradient*)this._cPtr, props ? cast(GtkStyleProperties*)props._cPtr(No.Dup) : null, &_resolvedGradient);
+    _retval = cast(bool)gtk_gradient_resolve(cast(GtkGradient*)this._cPtr, props ? cast(GtkStyleProperties*)props._cPtr(No.Dup) : null, &_resolvedGradient);
     resolvedGradient = new cairo.pattern.Pattern(cast(void*)_resolvedGradient, Yes.Take);
     return _retval;
   }

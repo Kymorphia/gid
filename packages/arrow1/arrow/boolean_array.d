@@ -63,21 +63,23 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
   bool getValue(long i)
   {
     bool _retval;
-    _retval = garrow_boolean_array_get_value(cast(GArrowBooleanArray*)this._cPtr, i);
+    _retval = cast(bool)garrow_boolean_array_get_value(cast(GArrowBooleanArray*)this._cPtr, i);
     return _retval;
   }
 
   /** */
   bool[] getValues()
   {
-    bool* _cretval;
+    gboolean* _cretval;
     long _cretlength;
     _cretval = garrow_boolean_array_get_values(cast(GArrowBooleanArray*)this._cPtr, &_cretlength);
     bool[] _retval;
 
     if (_cretval)
     {
-      _retval = cast(bool[])_cretval[0 .. _cretlength].dup;
+      _retval = new bool[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = cast(bool)_cretval[i];
       gFree(cast(void*)_cretval);
     }
     return _retval;

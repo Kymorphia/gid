@@ -1992,7 +1992,7 @@ struct WebKitInputMethodContextClass
       Called via [webkit.input_method_context.InputMethodContext.setEnablePreedit] to
         control the use of the preedit string.
   */
-  extern(C) void function(WebKitInputMethodContext* context, bool enabled) setEnablePreedit;
+  extern(C) void function(WebKitInputMethodContext* context, gboolean enabled) setEnablePreedit;
 
   /**
       Called via [webkit.input_method_context.InputMethodContext.getPreedit] to
@@ -2013,7 +2013,7 @@ struct WebKitInputMethodContextClass
         resulting text back to the editable element. Alternatively, false may be
         returned to indicate that the event wasn’t handled by the input method.
   */
-  extern(C) bool function(WebKitInputMethodContext* context, GdkEvent* keyEvent) filterKeyEvent;
+  extern(C) gboolean function(WebKitInputMethodContext* context, GdkEvent* keyEvent) filterKeyEvent;
 
   /**
       Called via [webkit.input_method_context.InputMethodContext.notifyFocusIn] when
@@ -2809,7 +2809,7 @@ struct WebKitWebViewClass
   extern(C) void function(WebKitWebView* webView, WebKitLoadEvent loadEvent) loadChanged;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitLoadEvent loadEvent, const(char)* failingUri, GError* error) loadFailed;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitLoadEvent loadEvent, const(char)* failingUri, GError* error) loadFailed;
 
   /** */
   extern(C) GtkWidget* function(WebKitWebView* webView, WebKitNavigationAction* navigationAction) create;
@@ -2824,34 +2824,34 @@ struct WebKitWebViewClass
   extern(C) void function(WebKitWebView* webView) close;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitScriptDialog* dialog) scriptDialog;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitScriptDialog* dialog) scriptDialog;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitPolicyDecision* decision, WebKitPolicyDecisionType type) decidePolicy;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitPolicyDecision* decision, WebKitPolicyDecisionType type) decidePolicy;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitPermissionRequest* permissionRequest) permissionRequest;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitPermissionRequest* permissionRequest) permissionRequest;
 
   /** */
   extern(C) void function(WebKitWebView* webView, WebKitHitTestResult* hitTestResult, uint modifiers) mouseTargetChanged;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitPrintOperation* printOperation) print;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitPrintOperation* printOperation) print;
 
   /** */
   extern(C) void function(WebKitWebView* webView, WebKitWebResource* resource, WebKitURIRequest* request) resourceLoadStarted;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView) enterFullscreen;
+  extern(C) gboolean function(WebKitWebView* webView) enterFullscreen;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView) leaveFullscreen;
+  extern(C) gboolean function(WebKitWebView* webView) leaveFullscreen;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitFileChooserRequest* request) runFileChooser;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitFileChooserRequest* request) runFileChooser;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitContextMenu* contextMenu, WebKitHitTestResult* hitTestResult) contextMenu;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitContextMenu* contextMenu, WebKitHitTestResult* hitTestResult) contextMenu;
 
   /** */
   extern(C) void function(WebKitWebView* webView) contextMenuDismissed;
@@ -2863,31 +2863,31 @@ struct WebKitWebViewClass
   extern(C) void function(WebKitWebView* webView, WebKitInsecureContentEvent event) insecureContentDetected;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView) webProcessCrashed;
+  extern(C) gboolean function(WebKitWebView* webView) webProcessCrashed;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitAuthenticationRequest* request) authenticate;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitAuthenticationRequest* request) authenticate;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, const(char)* failingUri, GTlsCertificate* certificate, GTlsCertificateFlags errors) loadFailedWithTlsErrors;
+  extern(C) gboolean function(WebKitWebView* webView, const(char)* failingUri, GTlsCertificate* certificate, GTlsCertificateFlags errors) loadFailedWithTlsErrors;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitNotification* notification) showNotification;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitNotification* notification) showNotification;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitColorChooserRequest* request) runColorChooser;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitColorChooserRequest* request) runColorChooser;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitOptionMenu* menu, GdkRectangle* rectangle) showOptionMenu;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitOptionMenu* menu, GdkRectangle* rectangle) showOptionMenu;
 
   /** */
   extern(C) void function(WebKitWebView* webView, WebKitWebProcessTerminationReason reason) webProcessTerminated;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitUserMessage* message) userMessageReceived;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitUserMessage* message) userMessageReceived;
 
   /** */
-  extern(C) bool function(WebKitWebView* webView, WebKitPermissionStateQuery* query) queryPermissionState;
+  extern(C) gboolean function(WebKitWebView* webView, WebKitPermissionStateQuery* query) queryPermissionState;
 
   /** */
   extern(C) void function() WebkitReserved0;

@@ -238,7 +238,7 @@ class Timestamp : gobject.boxed.Boxed
   bool valid()
   {
     bool _retval;
-    _retval = gda_timestamp_valid(cast(const(GdaTimestamp)*)this._cPtr);
+    _retval = cast(bool)gda_timestamp_valid(cast(const(GdaTimestamp)*)this._cPtr);
     return _retval;
   }
 

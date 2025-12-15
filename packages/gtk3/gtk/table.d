@@ -265,7 +265,7 @@ class Table : gtk.container.Container
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_table_get_homogeneous(cast(GtkTable*)this._cPtr);
+    _retval = cast(bool)gtk_table_get_homogeneous(cast(GtkTable*)this._cPtr);
     return _retval;
   }
 

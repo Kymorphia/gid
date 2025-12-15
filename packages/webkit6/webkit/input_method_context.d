@@ -101,7 +101,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   bool filterKeyEvent(gdk.event.Event keyEvent)
   {
     bool _retval;
-    _retval = webkit_input_method_context_filter_key_event(cast(WebKitInputMethodContext*)this._cPtr, keyEvent ? cast(GdkEvent*)keyEvent._cPtr(No.Dup) : null);
+    _retval = cast(bool)webkit_input_method_context_filter_key_event(cast(WebKitInputMethodContext*)this._cPtr, keyEvent ? cast(GdkEvent*)keyEvent._cPtr(No.Dup) : null);
     return _retval;
   }
 

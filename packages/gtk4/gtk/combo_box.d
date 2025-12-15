@@ -449,7 +449,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   {
     bool _retval;
     GtkTreeIter _iter;
-    _retval = gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, &_iter);
+    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, &_iter);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -510,7 +510,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   bool getHasEntry()
   {
     bool _retval;
-    _retval = gtk_combo_box_get_has_entry(cast(GtkComboBox*)this._cPtr);
+    _retval = cast(bool)gtk_combo_box_get_has_entry(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -552,7 +552,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   bool getPopupFixedWidth()
   {
     bool _retval;
-    _retval = gtk_combo_box_get_popup_fixed_width(cast(GtkComboBox*)this._cPtr);
+    _retval = cast(bool)gtk_combo_box_get_popup_fixed_width(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -639,7 +639,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   {
     bool _retval;
     const(char)* _activeId = activeId.toCString(No.Alloc);
-    _retval = gtk_combo_box_set_active_id(cast(GtkComboBox*)this._cPtr, _activeId);
+    _retval = cast(bool)gtk_combo_box_set_active_id(cast(GtkComboBox*)this._cPtr, _activeId);
     return _retval;
   }
 
@@ -776,11 +776,11 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null)
   {
-    extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

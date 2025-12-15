@@ -1272,13 +1272,13 @@ struct GMimeCryptoContextClass
   extern(C) const(char)* function(GMimeCryptoContext* ctx) getKeyExchangeProtocol;
 
   /** */
-  extern(C) int function(GMimeCryptoContext* ctx, bool detach, const(char)* userid, GMimeStream* istream, GMimeStream* ostream, GError** _err) sign;
+  extern(C) int function(GMimeCryptoContext* ctx, gboolean detach, const(char)* userid, GMimeStream* istream, GMimeStream* ostream, GError** _err) sign;
 
   /** */
   extern(C) GMimeSignatureList* function(GMimeCryptoContext* ctx, GMimeVerifyFlags flags, GMimeStream* istream, GMimeStream* sigstream, GMimeStream* ostream, GError** _err) verify;
 
   /** */
-  extern(C) int function(GMimeCryptoContext* ctx, bool sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GMimeStream* istream, GMimeStream* ostream, GError** _err) encrypt;
+  extern(C) int function(GMimeCryptoContext* ctx, gboolean sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GMimeStream* istream, GMimeStream* ostream, GError** _err) encrypt;
 
   /** */
   extern(C) GMimeDecryptResult* function(GMimeCryptoContext* ctx, GMimeDecryptFlags flags, const(char)* sessionKey, GMimeStream* istream, GMimeStream* ostream, GError** _err) decrypt;
@@ -1382,7 +1382,7 @@ struct GMimeEncoding
   /**
       true if encoding or false if decoding
   */
-  bool encode;
+  gboolean encode;
 
   /**
       saved bytes from the previous step
@@ -1624,7 +1624,7 @@ struct GMimeFilterDos2Unix
   /**
       true if the filter should ensure that the stream ends with a new line
   */
-  bool ensureNewline;
+  gboolean ensureNewline;
 
   /**
       the previous character encountered
@@ -1686,7 +1686,7 @@ struct GMimeFilterFrom
   /**
       true if in the middle of a line
   */
-  bool midline;
+  gboolean midline;
 }
 
 /** */
@@ -1791,10 +1791,10 @@ struct GMimeFilterOpenPGP
   GMimeOpenPGPState state;
 
   /** */
-  bool seenEndMarker;
+  gboolean seenEndMarker;
 
   /** */
-  bool midline;
+  gboolean midline;
 
   /** */
   long beginOffset;
@@ -1829,7 +1829,7 @@ struct GMimeFilterSmtpData
   /**
       beginning-of-line state.
   */
-  bool bol;
+  gboolean bol;
 }
 
 /** */
@@ -1873,7 +1873,7 @@ struct GMimeFilterUnix2Dos
   /**
       true if the filter should ensure that the stream ends with a new line
   */
-  bool ensureNewline;
+  gboolean ensureNewline;
 
   /**
       the previous character encountered
@@ -1903,7 +1903,7 @@ struct GMimeFilterWindows
   /**
       true if the stream is detected to be a windows-cp125x charset
   */
-  bool isWindows;
+  gboolean isWindows;
 
   /**
       charset the text stream is claimed to be
@@ -1931,7 +1931,7 @@ struct GMimeFilterYenc
   /**
       encode vs decode
   */
-  bool encode;
+  gboolean encode;
 
   /**
       part id
@@ -1999,7 +1999,7 @@ struct GMimeHeader
   GMimeParserOptions* options;
 
   /** */
-  bool reformat;
+  gboolean reformat;
 
   /** */
   void* changed;
@@ -2301,7 +2301,7 @@ struct GMimeMultipart
   char* epilogue;
 
   /** */
-  bool writeEndBoundary;
+  gboolean writeEndBoundary;
 }
 
 /** */
@@ -2320,7 +2320,7 @@ struct GMimeMultipartClass
   extern(C) void function(GMimeMultipart* multipart, int index, GMimeObject* part) insert;
 
   /** */
-  extern(C) bool function(GMimeMultipart* multipart, GMimeObject* part) remove;
+  extern(C) gboolean function(GMimeMultipart* multipart, GMimeObject* part) remove;
 
   /** */
   extern(C) GMimeObject* function(GMimeMultipart* multipart, int index) removeAt;
@@ -2329,7 +2329,7 @@ struct GMimeMultipartClass
   extern(C) GMimeObject* function(GMimeMultipart* multipart, int index) getPart;
 
   /** */
-  extern(C) bool function(GMimeMultipart* multipart, GMimeObject* part) contains;
+  extern(C) gboolean function(GMimeMultipart* multipart, GMimeObject* part) contains;
 
   /** */
   extern(C) int function(GMimeMultipart* multipart, GMimeObject* part) indexOf;
@@ -2405,7 +2405,7 @@ struct GMimeObjectClass
   extern(C) char* function(GMimeObject* object, GMimeFormatOptions* options) getHeaders;
 
   /** */
-  extern(C) ptrdiff_t function(GMimeObject* object, GMimeFormatOptions* options, bool contentOnly, GMimeStream* stream) writeToStream;
+  extern(C) ptrdiff_t function(GMimeObject* object, GMimeFormatOptions* options, gboolean contentOnly, GMimeStream* stream) writeToStream;
 
   /** */
   extern(C) void function(GMimeObject* object, GMimeEncodingConstraint constraint) encode;
@@ -2442,7 +2442,7 @@ struct GMimeObject
   char* contentId;
 
   /** */
-  bool ensureNewline;
+  gboolean ensureNewline;
 }
 
 /**
@@ -2473,7 +2473,7 @@ struct GMimeOpenPGPMarker
   /**
       true if the marker is an end marker; otherwise, false.
   */
-  bool isEndMarker;
+  gboolean isEndMarker;
 }
 
 /**
@@ -2823,7 +2823,7 @@ struct GMimeStreamClass
   extern(C) int function(GMimeStream* stream) close;
 
   /** */
-  extern(C) bool function(GMimeStream* stream) eos;
+  extern(C) gboolean function(GMimeStream* stream) eos;
 
   /** */
   extern(C) int function(GMimeStream* stream) reset;
@@ -2854,7 +2854,7 @@ struct GMimeStreamFile
   /**
       true if this stream owns @fd
   */
-  bool owner;
+  gboolean owner;
 
   /**
       standard-c FILE pointer
@@ -2890,7 +2890,7 @@ struct GMimeStreamFilter
   GMimeStream* source;
 
   /** */
-  bool owner;
+  gboolean owner;
 }
 
 /** */
@@ -2913,12 +2913,12 @@ struct GMimeStreamFs
   /**
       true if this stream owns @fd
   */
-  bool owner;
+  gboolean owner;
 
   /**
       true if end-of-stream
   */
-  bool eos;
+  gboolean eos;
 
   /**
       file descriptor
@@ -2961,12 +2961,12 @@ struct GMimeStreamGIO
   /**
       true if this stream owns the #GFile or false otherwise
   */
-  bool owner;
+  gboolean owner;
 
   /**
       true if the end of the stream has been reached or false otherwise
   */
-  bool eos;
+  gboolean eos;
 }
 
 /** */
@@ -3010,7 +3010,7 @@ struct GMimeStreamMem
   /**
       true if this stream owns the memory buffer
   */
-  bool owner;
+  gboolean owner;
 }
 
 /** */
@@ -3033,12 +3033,12 @@ struct GMimeStreamMmap
   /**
       true if this stream owns the memory map
   */
-  bool owner;
+  gboolean owner;
 
   /**
       true if end-of-stream
   */
-  bool eos;
+  gboolean eos;
 
   /**
       file descriptor
@@ -3086,7 +3086,7 @@ struct GMimeStreamNull
   /**
       whether or not the stream should count newlines
   */
-  bool countNewlines;
+  gboolean countNewlines;
 }
 
 /** */
@@ -3109,12 +3109,12 @@ struct GMimeStreamPipe
   /**
       true if this stream owns @fd
   */
-  bool owner;
+  gboolean owner;
 
   /**
       true if end-of-stream
   */
-  bool eos;
+  gboolean eos;
 
   /**
       pipe descriptor
@@ -3157,5 +3157,5 @@ alias extern(C) void function(GMimeParser* parser, const(char)* header, const(ch
 
 alias extern(C) void function(long offset, GMimeParserWarning errcode, const(char)* item, void* userData) GMimeParserWarningFunc;
 
-alias extern(C) bool function(GMimeCryptoContext* ctx, const(char)* userId, const(char)* prompt, bool reprompt, GMimeStream* response, GError** _err) GMimePasswordRequestFunc;
+alias extern(C) gboolean function(GMimeCryptoContext* ctx, const(char)* userId, const(char)* prompt, gboolean reprompt, GMimeStream* response, GError** _err) GMimePasswordRequestFunc;
 

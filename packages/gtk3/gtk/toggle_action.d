@@ -118,7 +118,7 @@ class ToggleAction : gtk.action.Action
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_toggle_action_get_active(cast(GtkToggleAction*)this._cPtr);
+    _retval = cast(bool)gtk_toggle_action_get_active(cast(GtkToggleAction*)this._cPtr);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class ToggleAction : gtk.action.Action
   bool getDrawAsRadio()
   {
     bool _retval;
-    _retval = gtk_toggle_action_get_draw_as_radio(cast(GtkToggleAction*)this._cPtr);
+    _retval = cast(bool)gtk_toggle_action_get_draw_as_radio(cast(GtkToggleAction*)this._cPtr);
     return _retval;
   }
 

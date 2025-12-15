@@ -157,7 +157,7 @@ class NativeDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_native_dialog_get_modal(cast(GtkNativeDialog*)this._cPtr);
+    _retval = cast(bool)gtk_native_dialog_get_modal(cast(GtkNativeDialog*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class NativeDialog : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_native_dialog_get_visible(cast(GtkNativeDialog*)this._cPtr);
+    _retval = cast(bool)gtk_native_dialog_get_visible(cast(GtkNativeDialog*)this._cPtr);
     return _retval;
   }
 

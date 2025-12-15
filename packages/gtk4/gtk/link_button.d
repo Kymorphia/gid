@@ -173,7 +173,7 @@ class LinkButton : gtk.button.Button
   bool getVisited()
   {
     bool _retval;
-    _retval = gtk_link_button_get_visited(cast(GtkLinkButton*)this._cPtr);
+    _retval = cast(bool)gtk_link_button_get_visited(cast(GtkLinkButton*)this._cPtr);
     return _retval;
   }
 

@@ -392,7 +392,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   bool initFromDateTimeFull(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
   {
     bool _retval;
-    _retval = gst_video_time_code_init_from_date_time_full(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
+    _retval = cast(bool)gst_video_time_code_init_from_date_time_full(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
     return _retval;
   }
 
@@ -400,7 +400,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   bool isValid()
   {
     bool _retval;
-    _retval = gst_video_time_code_is_valid(cast(const(GstVideoTimeCode)*)this._cPtr);
+    _retval = cast(bool)gst_video_time_code_is_valid(cast(const(GstVideoTimeCode)*)this._cPtr);
     return _retval;
   }
 

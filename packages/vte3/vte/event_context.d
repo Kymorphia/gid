@@ -35,7 +35,7 @@ class EventContext
   bool getCoordinates(out double x, out double y)
   {
     bool _retval;
-    _retval = vte_event_context_get_coordinates(cast(const(VteEventContext)*)this._cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = cast(bool)vte_event_context_get_coordinates(cast(const(VteEventContext)*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 }

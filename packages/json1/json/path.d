@@ -226,7 +226,7 @@ class Path : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _expression = expression.toCString(No.Alloc);
     GError *_err;
-    _retval = json_path_compile(cast(JsonPath*)this._cPtr, _expression, &_err);
+    _retval = cast(bool)json_path_compile(cast(JsonPath*)this._cPtr, _expression, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

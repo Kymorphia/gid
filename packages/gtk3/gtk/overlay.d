@@ -108,7 +108,7 @@ class Overlay : gtk.bin.Bin
   bool getOverlayPassThrough(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_overlay_pass_through(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_overlay_get_overlay_pass_through(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 

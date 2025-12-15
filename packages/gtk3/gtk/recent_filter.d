@@ -150,11 +150,11 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addCustom(gtk.types.RecentFilterFlags needed, gtk.types.RecentFilterFunc func)
   {
-    extern(C) bool _funcCallback(const(GtkRecentFilterInfo)* filterInfo, void* userData)
+    extern(C) gboolean _funcCallback(const(GtkRecentFilterInfo)* filterInfo, void* userData)
     {
       auto _dlg = cast(gtk.types.RecentFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      gboolean _retval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -230,7 +230,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   bool filter(gtk.recent_filter_info.RecentFilterInfo filterInfo)
   {
     bool _retval;
-    _retval = gtk_recent_filter_filter(cast(GtkRecentFilter*)this._cPtr, filterInfo ? cast(const(GtkRecentFilterInfo)*)filterInfo._cPtr : null);
+    _retval = cast(bool)gtk_recent_filter_filter(cast(GtkRecentFilter*)this._cPtr, filterInfo ? cast(const(GtkRecentFilterInfo)*)filterInfo._cPtr : null);
     return _retval;
   }
 

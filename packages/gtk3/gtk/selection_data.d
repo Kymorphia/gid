@@ -241,7 +241,7 @@ class SelectionData : gobject.boxed.Boxed
   bool setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     bool _retval;
-    _retval = gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _str = str.toCString(No.Alloc);
-    _retval = gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, len);
+    _retval = cast(bool)gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, len);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class SelectionData : gobject.boxed.Boxed
       _tmpuris ~= s.toCString(No.Alloc);
     _tmpuris ~= null;
     char** _uris = _tmpuris.ptr;
-    _retval = gtk_selection_data_set_uris(cast(GtkSelectionData*)this._cPtr, _uris);
+    _retval = cast(bool)gtk_selection_data_set_uris(cast(GtkSelectionData*)this._cPtr, _uris);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeImage(bool writable)
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_image(cast(const(GtkSelectionData)*)this._cPtr, writable);
+    _retval = cast(bool)gtk_selection_data_targets_include_image(cast(const(GtkSelectionData)*)this._cPtr, writable);
     return _retval;
   }
 
@@ -322,7 +322,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeRichText(gtk.text_buffer.TextBuffer buffer)
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeText()
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_text(cast(const(GtkSelectionData)*)this._cPtr);
+    _retval = cast(bool)gtk_selection_data_targets_include_text(cast(const(GtkSelectionData)*)this._cPtr);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeUri()
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_uri(cast(const(GtkSelectionData)*)this._cPtr);
+    _retval = cast(bool)gtk_selection_data_targets_include_uri(cast(const(GtkSelectionData)*)this._cPtr);
     return _retval;
   }
 }

@@ -66,7 +66,7 @@ class FilterWindows : gmime.filter.Filter
   bool isWindowsCharset()
   {
     bool _retval;
-    _retval = g_mime_filter_windows_is_windows_charset(cast(GMimeFilterWindows*)this._cPtr);
+    _retval = cast(bool)g_mime_filter_windows_is_windows_charset(cast(GMimeFilterWindows*)this._cPtr);
     return _retval;
   }
 

@@ -131,7 +131,7 @@ class Device : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _classes = classes.toCString(No.Alloc);
-    _retval = gst_device_has_classes(cast(GstDevice*)this._cPtr, _classes);
+    _retval = cast(bool)gst_device_has_classes(cast(GstDevice*)this._cPtr, _classes);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Device : gst.object.ObjectWrap
       _tmpclasses ~= s.toCString(No.Alloc);
     _tmpclasses ~= null;
     char** _classes = _tmpclasses.ptr;
-    _retval = gst_device_has_classesv(cast(GstDevice*)this._cPtr, _classes);
+    _retval = cast(bool)gst_device_has_classesv(cast(GstDevice*)this._cPtr, _classes);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Device : gst.object.ObjectWrap
   bool reconfigureElement(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_device_reconfigure_element(cast(GstDevice*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_device_reconfigure_element(cast(GstDevice*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 

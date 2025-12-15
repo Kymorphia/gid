@@ -74,7 +74,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     bool _retval;
     auto _axes = cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr;
     double* _values;
-    _retval = gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)this._cPtr, _axes, &_values);
+    _retval = cast(bool)gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)this._cPtr, _axes, &_values);
     values.length = axes.length;
     values[0 .. $] = (cast(double*)_values)[0 .. axes.length];
     gFree(cast(void*)_values);
@@ -95,7 +95,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   bool getAxis(gdk.types.AxisUse axis, out double value)
   {
     bool _retval;
-    _retval = gtk_gesture_stylus_get_axis(cast(GtkGestureStylus*)this._cPtr, axis, cast(double*)&value);
+    _retval = cast(bool)gtk_gesture_stylus_get_axis(cast(GtkGestureStylus*)this._cPtr, axis, cast(double*)&value);
     return _retval;
   }
 

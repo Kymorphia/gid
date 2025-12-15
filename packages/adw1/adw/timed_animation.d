@@ -260,7 +260,7 @@ class TimedAnimation : adw.animation.Animation
   bool getAlternate()
   {
     bool _retval;
-    _retval = adw_timed_animation_get_alternate(cast(AdwTimedAnimation*)this._cPtr);
+    _retval = cast(bool)adw_timed_animation_get_alternate(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class TimedAnimation : adw.animation.Animation
   bool getReverse()
   {
     bool _retval;
-    _retval = adw_timed_animation_get_reverse(cast(AdwTimedAnimation*)this._cPtr);
+    _retval = cast(bool)adw_timed_animation_get_reverse(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 

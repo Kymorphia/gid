@@ -176,11 +176,11 @@ class Iterator : gobject.boxed.Boxed
   */
   gst.types.IteratorResult fold(gst.types.IteratorFoldFunction func, gobject.value.Value ret)
   {
-    extern(C) bool _funcCallback(const(GValue)* item, GValue* ret, void* userData)
+    extern(C) gboolean _funcCallback(const(GValue)* item, GValue* ret, void* userData)
     {
       auto _dlg = cast(gst.types.IteratorFoldFunction*)userData;
 
-      bool _retval = (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null, ret ? new gobject.value.Value(cast(void*)ret, No.Take) : null);
+      gboolean _retval = (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null, ret ? new gobject.value.Value(cast(void*)ret, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

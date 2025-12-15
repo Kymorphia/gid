@@ -104,7 +104,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   bool isMainFrameMainResource()
   {
     bool _retval;
-    _retval = webkit_response_policy_decision_is_main_frame_main_resource(cast(WebKitResponsePolicyDecision*)this._cPtr);
+    _retval = cast(bool)webkit_response_policy_decision_is_main_frame_main_resource(cast(WebKitResponsePolicyDecision*)this._cPtr);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   bool isMimeTypeSupported()
   {
     bool _retval;
-    _retval = webkit_response_policy_decision_is_mime_type_supported(cast(WebKitResponsePolicyDecision*)this._cPtr);
+    _retval = cast(bool)webkit_response_policy_decision_is_mime_type_supported(cast(WebKitResponsePolicyDecision*)this._cPtr);
     return _retval;
   }
 }

@@ -89,7 +89,7 @@ class EventBox : gtk.bin.Bin
   bool getAboveChild()
   {
     bool _retval;
-    _retval = gtk_event_box_get_above_child(cast(GtkEventBox*)this._cPtr);
+    _retval = cast(bool)gtk_event_box_get_above_child(cast(GtkEventBox*)this._cPtr);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class EventBox : gtk.bin.Bin
   bool getVisibleWindow()
   {
     bool _retval;
-    _retval = gtk_event_box_get_visible_window(cast(GtkEventBox*)this._cPtr);
+    _retval = cast(bool)gtk_event_box_get_visible_window(cast(GtkEventBox*)this._cPtr);
     return _retval;
   }
 

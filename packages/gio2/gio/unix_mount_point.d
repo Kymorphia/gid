@@ -129,7 +129,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool guessCanEject()
   {
     bool _retval;
-    _retval = g_unix_mount_point_guess_can_eject(cast(GUnixMountPoint*)this._cPtr);
+    _retval = cast(bool)g_unix_mount_point_guess_can_eject(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool isLoopback()
   {
     bool _retval;
-    _retval = g_unix_mount_point_is_loopback(cast(GUnixMountPoint*)this._cPtr);
+    _retval = cast(bool)g_unix_mount_point_is_loopback(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool isReadonly()
   {
     bool _retval;
-    _retval = g_unix_mount_point_is_readonly(cast(GUnixMountPoint*)this._cPtr);
+    _retval = cast(bool)g_unix_mount_point_is_readonly(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool isUserMountable()
   {
     bool _retval;
-    _retval = g_unix_mount_point_is_user_mountable(cast(GUnixMountPoint*)this._cPtr);
+    _retval = cast(bool)g_unix_mount_point_is_user_mountable(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 
