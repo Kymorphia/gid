@@ -12,3 +12,5 @@ else
   alias gulong = ulong;
   alias glong = long;
 }
+
+alias gboolean = int;

@@ -126,7 +126,7 @@ class ObjectWrap
   }
 
   // Toggle ref callback
-  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, bool isLastRef)
+  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, gboolean isLastRef)
   {
     debug
     {

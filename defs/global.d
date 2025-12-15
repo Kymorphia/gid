@@ -119,7 +119,6 @@
 //!subtype FILE void
 //!subtype filename string
 //!subtype gatomicrefcount int
-//!subtype gboolean bool
 //!subtype gchar char
 //!subtype gconstpointer const(void)*
 //!subtype gdouble double
@@ -166,6 +165,12 @@
 //!subtype unsigned uint
 //!subtype utf8 string
 //!subtype va_list void*
+
+//# gboolean is an integer (4 bytes), D bool is 1 byte
+//# C functions must use integer size or risk uninitialized upper 3 bytes!
+//# gboolean is defined in gid-basictypes.d
+//!subctype gboolean gboolean
+//!subdtype gboolean bool
 
 //# These are defined to different sizes depending on the platform
 //!subtype "unsigned long" gulong

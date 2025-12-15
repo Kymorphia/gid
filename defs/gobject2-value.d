@@ -122,7 +122,7 @@ void initVal(T)(GValue* gval)
 T getVal(T)(const(GValue)* gval)
 {
   static if (is(T == bool))
-    return g_value_get_boolean(gval);
+    return cast(bool)g_value_get_boolean(gval);
   else static if (is(T == byte))
     return g_value_get_schar(gval);
   else static if (is(T == ubyte))
@@ -179,7 +179,7 @@ T getVal(T)(const(GValue)* gval)
 void setVal(T)(GValue* gval, T v)
 {
   static if (is(T == bool))
-    g_value_set_boolean(gval, v);
+    g_value_set_boolean(gval, cast(gboolean)v);
   else static if (is(T == byte))
     g_value_set_schar(gval, v);
   else static if (is(T == ubyte))

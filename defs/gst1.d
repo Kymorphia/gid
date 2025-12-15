@@ -115,7 +115,7 @@ bool initCheck(ref string[] argv)
     _argv[i] = toCString(a, No.Alloc);
 
   GError *_err;
-  bool _retval = gst_init_check(&_argc, &_argv, &_err);
+  gboolean _retval = gst_init_check(&_argc, &_argv, &_err);
 
   if (_err)
     throw new ErrorWrap(_err);
@@ -124,6 +124,6 @@ bool initCheck(ref string[] argv)
   foreach (i; 0 .. _argc)
     argv[i] = fromCString(_argv[i], No.Free);
 
-  return _retval;
+  return cast(bool)_retval;
 }
 
