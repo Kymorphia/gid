@@ -22,7 +22,7 @@ class MessageHeaders : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -127,7 +127,6 @@ class MessageHeaders : gobject.boxed.Boxed
       (*_dlg)(_name, _value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     soup_message_headers_foreach(cast(SoupMessageHeaders*)this._cPtr, _funcCB, _func);
   }

@@ -29,7 +29,7 @@ template RetrievableT()
   /**
       Get `created` property.
       Returns: The date and time (in seconds since the UNIX epoch) that this
-      item was created.
+        item was created.
   */
   @property ulong created()
   {
@@ -40,7 +40,7 @@ template RetrievableT()
       Set `created` property.
       Params:
         propval = The date and time (in seconds since the UNIX epoch) that this
-        item was created.
+          item was created.
   */
   @property void created(ulong propval)
   {
@@ -69,7 +69,7 @@ template RetrievableT()
   /**
       Get `modified` property.
       Returns: The date and time (in seconds since the UNIX epoch) that this
-      item was last modified.
+        item was last modified.
   */
   @property ulong modified()
   {
@@ -80,7 +80,7 @@ template RetrievableT()
       Set `modified` property.
       Params:
         propval = The date and time (in seconds since the UNIX epoch) that this
-        item was last modified.
+          item was last modified.
   */
   @property void modified(ulong propval)
   {
@@ -169,7 +169,6 @@ template RetrievableT()
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_retrievable_retrieve_secret(cast(SecretRetrievable*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

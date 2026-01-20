@@ -188,7 +188,6 @@ class GLDisplay : gst.object.ObjectWrap
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
-
     _static_compareFunc = compareFunc;
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_find_window(cast(GstGLDisplay*)this._cPtr, data, _compareFuncCB);
@@ -222,7 +221,7 @@ class GLDisplay : gst.object.ObjectWrap
   gstgl.glcontext.GLContext getGlContextForThread(glib.thread.Thread thread)
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)this._cPtr, thread ? cast(GThread*)thread._cPtr(No.Dup) : null);
+    _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)this._cPtr, cast(GThread*)&thread);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
@@ -284,7 +283,6 @@ class GLDisplay : gst.object.ObjectWrap
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
-
     _static_compareFunc = compareFunc;
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_retrieve_window(cast(GstGLDisplay*)this._cPtr, data, _compareFuncCB);
@@ -297,8 +295,8 @@ class GLDisplay : gst.object.ObjectWrap
       Connect to `CreateContext` signal.
   
       Overrides the GstGLContext creation mechanism.
-      It can be called in any thread and it is emitted with
-      display's object lock held.
+        It can be called in any thread and it is emitted with
+        display's object lock held.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -15,7 +15,7 @@ import glib.types;
 */
 class IOSchedulerJob
 {
-  GIOSchedulerJob* cInstancePtr;
+  GIOSchedulerJob* _cInstancePtr;
   bool owned;
 
   /** */
@@ -24,7 +24,7 @@ class IOSchedulerJob
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.ioscheduler_job.IOSchedulerJob");
 
-    cInstancePtr = cast(GIOSchedulerJob*)ptr;
+    _cInstancePtr = cast(GIOSchedulerJob*)ptr;
 
     owned = take;
   }
@@ -32,7 +32,7 @@ class IOSchedulerJob
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -50,13 +50,15 @@ class IOSchedulerJob
   {
     extern(C) gboolean _funcCallback(void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      gboolean _retval = (*_dlg)();
+      _dretval = (*_dlg)();
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -84,13 +86,15 @@ class IOSchedulerJob
   {
     extern(C) gboolean _funcCallback(void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      gboolean _retval = (*_dlg)();
+      _dretval = (*_dlg)();
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     g_io_scheduler_job_send_to_mainloop_async(cast(GIOSchedulerJob*)this._cPtr, _funcCB, _func, _funcDestroyCB);

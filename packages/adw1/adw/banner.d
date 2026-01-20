@@ -71,11 +71,11 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `buttonLabel` property.
       Returns: The label to show on the button.
-      
-      If set to `""` or `NULL`, the button won't be shown.
-      
-      The button can be used with a [gio.action.Action], or with the
-      `signal@Banner::button-clicked` signal.
+        
+        If set to `""` or `NULL`, the button won't be shown.
+        
+        The button can be used with a [gio.action.Action], or with the
+        `signal@Banner::button-clicked` signal.
   */
   @property string buttonLabel()
   {
@@ -86,11 +86,11 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
       Set `buttonLabel` property.
       Params:
         propval = The label to show on the button.
-        
-        If set to `""` or `NULL`, the button won't be shown.
-        
-        The button can be used with a [gio.action.Action], or with the
-        `signal@Banner::button-clicked` signal.
+          
+          If set to `""` or `NULL`, the button won't be shown.
+          
+          The button can be used with a [gio.action.Action], or with the
+          `signal@Banner::button-clicked` signal.
   */
   @property void buttonLabel(string propval)
   {
@@ -119,8 +119,8 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `title` property.
       Returns: The title for this banner.
-      
-      See also: `property@Banner:use-markup`.
+        
+        See also: `property@Banner:use-markup`.
   */
   @property string title()
   {
@@ -131,8 +131,8 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
       Set `title` property.
       Params:
         propval = The title for this banner.
-        
-        See also: `property@Banner:use-markup`.
+          
+          See also: `property@Banner:use-markup`.
   */
   @property void title(string propval)
   {
@@ -142,8 +142,8 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `useMarkup` property.
       Returns: Whether to use Pango markup for the banner title.
-      
-      See also `func@Pango.parse_markup`.
+        
+        See also `func@Pango.parse_markup`.
   */
   @property bool useMarkup()
   {
@@ -154,8 +154,8 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
       Set `useMarkup` property.
       Params:
         propval = Whether to use Pango markup for the banner title.
-        
-        See also `func@Pango.parse_markup`.
+          
+          See also `func@Pango.parse_markup`.
   */
   @property void useMarkup(bool propval)
   {
@@ -284,8 +284,8 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
       Connect to `ButtonClicked` signal.
   
       This signal is emitted after the action button has been clicked.
-      
-      It can be used as an alternative to setting an action.
+        
+        It can be used as an alternative to setting an action.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -123,7 +123,6 @@ class ThreadWrapper : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gda.thread_wrapper.ThreadWrapper)(cast(void*)wrapper, No.Take), instance, _signame, nParamValues, paramValues ? new gobject.value.Value(cast(void*)paramValues, No.Take) : null, gdaReserved);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     gulong _retval;
     const(char)* _sigName = sigName.toCString(No.Alloc);
     auto _callback = callback ? cast(void*)&(callback) : null;

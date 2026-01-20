@@ -80,12 +80,12 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `canShrink` property.
       Returns: Whether the size of the button can be made smaller than the natural
-      size of its contents.
-      
-      For text buttons, setting this property will allow ellipsizing the label.
-      
-      If the contents of a button are an icon or a custom widget, setting this
-      property has no effect.
+        size of its contents.
+        
+        For text buttons, setting this property will allow ellipsizing the label.
+        
+        If the contents of a button are an icon or a custom widget, setting this
+        property has no effect.
   */
   @property bool canShrink()
   {
@@ -96,12 +96,12 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Set `canShrink` property.
       Params:
         propval = Whether the size of the button can be made smaller than the natural
-        size of its contents.
-        
-        For text buttons, setting this property will allow ellipsizing the label.
-        
-        If the contents of a button are an icon or a custom widget, setting this
-        property has no effect.
+          size of its contents.
+          
+          For text buttons, setting this property will allow ellipsizing the label.
+          
+          If the contents of a button are an icon or a custom widget, setting this
+          property has no effect.
   */
   @property void canShrink(bool propval)
   {
@@ -187,7 +187,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `useUnderline` property.
       Returns: If set, an underline in the text indicates that the following character is
-      to be used as mnemonic.
+        to be used as mnemonic.
   */
   @property bool useUnderline()
   {
@@ -198,7 +198,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Set `useUnderline` property.
       Params:
         propval = If set, an underline in the text indicates that the following character is
-        to be used as mnemonic.
+          to be used as mnemonic.
   */
   @property void useUnderline(bool propval)
   {
@@ -454,12 +454,12 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Connect to `Activate` signal.
   
       Emitted to animate press then release.
-      
-      This is an action signal. Applications should never connect
-      to this signal, but use the [gtk.button.Button.clicked] signal.
-      
-      The default bindings for this signal are all forms of the
-      <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
+        
+        This is an action signal. Applications should never connect
+        to this signal, but use the [gtk.button.Button.clicked] signal.
+        
+        The default bindings for this signal are all forms of the
+        <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
   
       Params:
         callback = signal callback delegate or function to connect

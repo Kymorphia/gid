@@ -9,7 +9,7 @@ import gid.gid;
 /** */
 class SqlStatementSelect
 {
-  GdaSqlStatementSelect cInstance;
+  GdaSqlStatementSelect _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class SqlStatementSelect
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_statement_select.SqlStatementSelect");
 
-    cInstance = *cast(GdaSqlStatementSelect*)ptr;
+    _cInstance = *cast(GdaSqlStatementSelect*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,7 +26,7 @@ class SqlStatementSelect
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

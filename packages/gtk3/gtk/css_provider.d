@@ -225,16 +225,16 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Connect to `ParsingError` signal.
   
       Signals that a parsing error occurred. the path, line and position
-      describe the actual location of the error as accurately as possible.
-      
-      Parsing errors are never fatal, so the parsing will resume after
-      the error. Errors may however cause parts of the given
-      data or even all of it to not be parsed at all. So it is a useful idea
-      to check that the parsing succeeds by connecting to this signal.
-      
-      Note that this signal may be emitted at any time as the css provider
-      may opt to defer parsing parts or all of the input to a later time
-      than when a loading function was called.
+        describe the actual location of the error as accurately as possible.
+        
+        Parsing errors are never fatal, so the parsing will resume after
+        the error. Errors may however cause parts of the given
+        data or even all of it to not be parsed at all. So it is a useful idea
+        to check that the parsing succeeds by connecting to this signal.
+        
+        Note that this signal may be emitted at any time as the css provider
+        may opt to defer parsing parts or all of the input to a later time
+        than when a loading function was called.
   
       Params:
         callback = signal callback delegate or function to connect

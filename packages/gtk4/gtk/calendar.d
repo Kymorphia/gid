@@ -116,8 +116,8 @@ class Calendar : gtk.widget.Widget
   /**
       Get `month` property.
       Returns: The selected month (as a number between 0 and 11).
-      
-      This property gets initially set to the current month.
+        
+        This property gets initially set to the current month.
   */
   @property int month()
   {
@@ -128,8 +128,8 @@ class Calendar : gtk.widget.Widget
       Set `month` property.
       Params:
         propval = The selected month (as a number between 0 and 11).
-        
-        This property gets initially set to the current month.
+          
+          This property gets initially set to the current month.
   */
   @property void month(int propval)
   {
@@ -196,8 +196,8 @@ class Calendar : gtk.widget.Widget
   /**
       Get `year` property.
       Returns: The selected year.
-      
-      This property gets initially set to the current year.
+        
+        This property gets initially set to the current year.
   */
   @property int year()
   {
@@ -208,8 +208,8 @@ class Calendar : gtk.widget.Widget
       Set `year` property.
       Params:
         propval = The selected year.
-        
-        This property gets initially set to the current year.
+          
+          This property gets initially set to the current year.
   */
   @property void year(int propval)
   {

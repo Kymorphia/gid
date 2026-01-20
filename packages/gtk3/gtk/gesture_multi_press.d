@@ -78,9 +78,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   bool getArea(out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
-    GdkRectangle _rect;
-    _retval = cast(bool)gtk_gesture_multi_press_get_area(cast(GtkGestureMultiPress*)this._cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    _retval = cast(bool)gtk_gesture_multi_press_get_area(cast(GtkGestureMultiPress*)this._cPtr, cast(GdkRectangle*)&rect);
     return _retval;
   }
 
@@ -98,9 +96,9 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
       Params:
         rect = rectangle to receive coordinates on
   */
-  void setArea(gdk.rectangle.Rectangle rect = null)
+  void setArea(gdk.rectangle.Rectangle rect)
   {
-    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null);
+    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)this._cPtr, cast(const(GdkRectangle)*)&rect);
   }
 
   /**
@@ -165,9 +163,9 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
       Connect to `Released` signal.
   
       This signal is emitted when a button or touch is released. n_press
-      will report the number of press that is paired to this event, note
-      that #GtkGestureMultiPress::stopped may have been emitted between the
-      press and its release, n_press will only start over at the next press.
+        will report the number of press that is paired to this event, note
+        that #GtkGestureMultiPress::stopped may have been emitted between the
+        press and its release, n_press will only start over at the next press.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -226,7 +224,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
       Connect to `Stopped` signal.
   
       This signal is emitted whenever any time/distance threshold has
-      been exceeded.
+        been exceeded.
   
       Params:
         callback = signal callback delegate or function to connect

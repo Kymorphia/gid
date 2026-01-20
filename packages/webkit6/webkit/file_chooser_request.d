@@ -59,8 +59,8 @@ class FileChooserRequest : gobject.object.ObjectWrap
   /**
       Get `filter` property.
       Returns: The filter currently associated with the request. See
-      [webkit.file_chooser_request.FileChooserRequest.getMimeTypesFilter] for more
-      details.
+        [webkit.file_chooser_request.FileChooserRequest.getMimeTypesFilter] for more
+        details.
   */
   @property gtk.file_filter.FileFilter filter()
   {
@@ -70,9 +70,9 @@ class FileChooserRequest : gobject.object.ObjectWrap
   /**
       Get `selectMultiple` property.
       Returns: Whether the file chooser should allow selecting multiple
-      files. See
-      [webkit.file_chooser_request.FileChooserRequest.getSelectMultiple] for
-      more details.
+        files. See
+        [webkit.file_chooser_request.FileChooserRequest.getSelectMultiple] for
+        more details.
   */
   @property bool selectMultiple()
   {
@@ -116,8 +116,8 @@ class FileChooserRequest : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -191,8 +191,8 @@ class FileChooserRequest : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -215,6 +215,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
       _tmpfiles ~= s.toCString(No.Alloc);
     _tmpfiles ~= null;
     const(char*)* _files = _tmpfiles.ptr;
+
     webkit_file_chooser_request_select_files(cast(WebKitFileChooserRequest*)this._cPtr, _files);
   }
 }

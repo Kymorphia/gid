@@ -257,7 +257,7 @@ class Statement : gobject.object.ObjectWrap
       Connect to `Checked` signal.
   
       Gets emitted whenever the structure and contents
-      of the statement have been verified (emitted after [gda.statement.Statement.checkValidity]).
+        of the statement have been verified (emitted after [gda.statement.Statement.checkValidity]).
   
       Params:
         callback = signal callback delegate or function to connect

@@ -1,8 +1,7 @@
-/// Module for [Color] class
+/// Module for [Color] struct
 module pango.color;
 
 import gid.gid;
-import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
 import pango.types;
@@ -11,111 +10,22 @@ import pango.types;
     The [pango.color.Color] structure is used to
     represent a color in an uncalibrated RGB color-space.
 */
-class Color : gobject.boxed.Boxed
+struct Color
 {
+  /**
+      value of red component
+  */
+  ushort red;
 
   /**
-      Create a `color.Color` boxed type.
-      Params:
-        red = value of red component
-        green = value of green component
-        blue = value of blue component
+      value of green component
   */
-  this(ushort red = ushort.init, ushort green = ushort.init, ushort blue = ushort.init)
-  {
-    super(gMalloc(PangoColor.sizeof), Yes.Take);
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())pango_color_get_type != &gidSymbolNotFound ? pango_color_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Color self()
-  {
-    return this;
-  }
+  ushort green;
 
   /**
-      Get `red` field.
-      Returns: value of red component
+      value of blue component
   */
-  @property ushort red()
-  {
-    return (cast(PangoColor*)this._cPtr).red;
-  }
-
-  /**
-      Set `red` field.
-      Params:
-        propval = value of red component
-  */
-  @property void red(ushort propval)
-  {
-    (cast(PangoColor*)this._cPtr).red = propval;
-  }
-
-  /**
-      Get `green` field.
-      Returns: value of green component
-  */
-  @property ushort green()
-  {
-    return (cast(PangoColor*)this._cPtr).green;
-  }
-
-  /**
-      Set `green` field.
-      Params:
-        propval = value of green component
-  */
-  @property void green(ushort propval)
-  {
-    (cast(PangoColor*)this._cPtr).green = propval;
-  }
-
-  /**
-      Get `blue` field.
-      Returns: value of blue component
-  */
-  @property ushort blue()
-  {
-    return (cast(PangoColor*)this._cPtr).blue;
-  }
-
-  /**
-      Set `blue` field.
-      Params:
-        propval = value of blue component
-  */
-  @property void blue(ushort propval)
-  {
-    (cast(PangoColor*)this._cPtr).blue = propval;
-  }
+  ushort blue;
 
   /**
       Creates a copy of src.
@@ -130,8 +40,10 @@ class Color : gobject.boxed.Boxed
   pango.color.Color copy()
   {
     PangoColor* _cretval;
-    _cretval = pango_color_copy(cast(const(PangoColor)*)this._cPtr);
-    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = pango_color_copy(cast(const(PangoColor)*)&this);
+    pango.color.Color _retval;
+    if (_cretval)
+      _retval = *cast(pango.color.Color*)_cretval;
     return _retval;
   }
 
@@ -155,7 +67,7 @@ class Color : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = cast(bool)pango_color_parse(cast(PangoColor*)this._cPtr, _spec);
+    _retval = cast(bool)pango_color_parse(cast(PangoColor*)&this, _spec);
     return _retval;
   }
 
@@ -186,7 +98,7 @@ class Color : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = cast(bool)pango_color_parse_with_alpha(cast(PangoColor*)this._cPtr, cast(ushort*)&alpha, _spec);
+    _retval = cast(bool)pango_color_parse_with_alpha(cast(PangoColor*)&this, cast(ushort*)&alpha, _spec);
     return _retval;
   }
 
@@ -202,7 +114,7 @@ class Color : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = pango_color_to_string(cast(const(PangoColor)*)this._cPtr);
+    _cretval = pango_color_to_string(cast(const(PangoColor)*)&this);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

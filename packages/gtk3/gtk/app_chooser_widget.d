@@ -73,9 +73,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   /**
       Get `defaultText` property.
       Returns: The #GtkAppChooserWidget:default-text property determines the text
-      that appears in the widget when there are no applications for the
-      given content type.
-      See also [gtk.app_chooser_widget.AppChooserWidget.setDefaultText].
+        that appears in the widget when there are no applications for the
+        given content type.
+        See also [gtk.app_chooser_widget.AppChooserWidget.setDefaultText].
   */
   @property string defaultText()
   {
@@ -86,9 +86,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Set `defaultText` property.
       Params:
         propval = The #GtkAppChooserWidget:default-text property determines the text
-        that appears in the widget when there are no applications for the
-        given content type.
-        See also [gtk.app_chooser_widget.AppChooserWidget.setDefaultText].
+          that appears in the widget when there are no applications for the
+          given content type.
+          See also [gtk.app_chooser_widget.AppChooserWidget.setDefaultText].
   */
   @property void defaultText(string propval)
   {
@@ -100,8 +100,8 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   /**
       Get `showAll` property.
       Returns: If the #GtkAppChooserWidget:show-all property is true, the app
-      chooser presents all applications in a single list, without
-      subsections for default, recommended or related applications.
+        chooser presents all applications in a single list, without
+        subsections for default, recommended or related applications.
   */
   @property bool showAll()
   {
@@ -114,8 +114,8 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Set `showAll` property.
       Params:
         propval = If the #GtkAppChooserWidget:show-all property is true, the app
-        chooser presents all applications in a single list, without
-        subsections for default, recommended or related applications.
+          chooser presents all applications in a single list, without
+          subsections for default, recommended or related applications.
   */
   @property void showAll(bool propval)
   {
@@ -125,9 +125,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   /**
       Get `showDefault` property.
       Returns: The ::show-default property determines whether the app chooser
-      should show the default handler for the content type in a
-      separate section. If false, the default handler is listed
-      among the recommended applications.
+        should show the default handler for the content type in a
+        separate section. If false, the default handler is listed
+        among the recommended applications.
   */
   @property bool showDefault()
   {
@@ -138,9 +138,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Set `showDefault` property.
       Params:
         propval = The ::show-default property determines whether the app chooser
-        should show the default handler for the content type in a
-        separate section. If false, the default handler is listed
-        among the recommended applications.
+          should show the default handler for the content type in a
+          separate section. If false, the default handler is listed
+          among the recommended applications.
   */
   @property void showDefault(bool propval)
   {
@@ -150,9 +150,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   /**
       Get `showFallback` property.
       Returns: The #GtkAppChooserWidget:show-fallback property determines whether
-      the app chooser should show a section for fallback applications.
-      If false, the fallback applications are listed among the other
-      applications.
+        the app chooser should show a section for fallback applications.
+        If false, the fallback applications are listed among the other
+        applications.
   */
   @property bool showFallback()
   {
@@ -163,9 +163,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Set `showFallback` property.
       Params:
         propval = The #GtkAppChooserWidget:show-fallback property determines whether
-        the app chooser should show a section for fallback applications.
-        If false, the fallback applications are listed among the other
-        applications.
+          the app chooser should show a section for fallback applications.
+          If false, the fallback applications are listed among the other
+          applications.
   */
   @property void showFallback(bool propval)
   {
@@ -175,7 +175,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   /**
       Get `showOther` property.
       Returns: The #GtkAppChooserWidget:show-other property determines whether
-      the app chooser should show a section for other applications.
+        the app chooser should show a section for other applications.
   */
   @property bool showOther()
   {
@@ -186,7 +186,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Set `showOther` property.
       Params:
         propval = The #GtkAppChooserWidget:show-other property determines whether
-        the app chooser should show a section for other applications.
+          the app chooser should show a section for other applications.
   */
   @property void showOther(bool propval)
   {
@@ -196,9 +196,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   /**
       Get `showRecommended` property.
       Returns: The #GtkAppChooserWidget:show-recommended property determines
-      whether the app chooser should show a section for recommended
-      applications. If false, the recommended applications are listed
-      among the other applications.
+        whether the app chooser should show a section for recommended
+        applications. If false, the recommended applications are listed
+        among the other applications.
   */
   @property bool showRecommended()
   {
@@ -209,9 +209,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Set `showRecommended` property.
       Params:
         propval = The #GtkAppChooserWidget:show-recommended property determines
-        whether the app chooser should show a section for recommended
-        applications. If false, the recommended applications are listed
-        among the other applications.
+          whether the app chooser should show a section for recommended
+          applications. If false, the recommended applications are listed
+          among the other applications.
   */
   @property void showRecommended(bool propval)
   {
@@ -386,10 +386,10 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Connect to `ApplicationActivated` signal.
   
       Emitted when an application item is activated from the widget's list.
-      
-      This usually happens when the user double clicks an item, or an item
-      is selected and the user presses one of the keys Space, Shift+Space,
-      Return or Enter.
+        
+        This usually happens when the user double clicks an item, or an item
+        is selected and the user presses one of the keys Space, Shift+Space,
+        Return or Enter.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -478,9 +478,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Connect to `PopulatePopup` signal.
   
       Emitted when a context menu is about to popup over an application item.
-      Clients can insert menu items into the provided #GtkMenu object in the
-      callback of this signal; the context menu will be shown over the item
-      if at least one item has been added to the menu.
+        Clients can insert menu items into the provided #GtkMenu object in the
+        callback of this signal; the context menu will be shown over the item
+        if at least one item has been added to the menu.
   
       Params:
         callback = signal callback delegate or function to connect

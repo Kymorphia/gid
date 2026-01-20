@@ -51,8 +51,8 @@ class CellAreaContext : gobject.object.ObjectWrap
   /**
       Get `minimumHeight` property.
       Returns: The minimum height for the #GtkCellArea in this context
-      for all #GtkTreeModel rows that this context was requested
-      for using [gtk.cell_area.CellArea.getPreferredHeight].
+        for all #GtkTreeModel rows that this context was requested
+        for using [gtk.cell_area.CellArea.getPreferredHeight].
   */
   @property int minimumHeight()
   {
@@ -62,8 +62,8 @@ class CellAreaContext : gobject.object.ObjectWrap
   /**
       Get `minimumWidth` property.
       Returns: The minimum width for the #GtkCellArea in this context
-      for all #GtkTreeModel rows that this context was requested
-      for using [gtk.cell_area.CellArea.getPreferredWidth].
+        for all #GtkTreeModel rows that this context was requested
+        for using [gtk.cell_area.CellArea.getPreferredWidth].
   */
   @property int minimumWidth()
   {
@@ -73,8 +73,8 @@ class CellAreaContext : gobject.object.ObjectWrap
   /**
       Get `naturalHeight` property.
       Returns: The natural height for the #GtkCellArea in this context
-      for all #GtkTreeModel rows that this context was requested
-      for using [gtk.cell_area.CellArea.getPreferredHeight].
+        for all #GtkTreeModel rows that this context was requested
+        for using [gtk.cell_area.CellArea.getPreferredHeight].
   */
   @property int naturalHeight()
   {
@@ -84,8 +84,8 @@ class CellAreaContext : gobject.object.ObjectWrap
   /**
       Get `naturalWidth` property.
       Returns: The natural width for the #GtkCellArea in this context
-      for all #GtkTreeModel rows that this context was requested
-      for using [gtk.cell_area.CellArea.getPreferredWidth].
+        for all #GtkTreeModel rows that this context was requested
+        for using [gtk.cell_area.CellArea.getPreferredWidth].
   */
   @property int naturalWidth()
   {

@@ -39,7 +39,7 @@ class Array : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -247,7 +247,6 @@ class Array : gobject.boxed.Boxed
       (*_dlg)(array ? new json.array.Array(cast(void*)array, No.Take) : null, index, elementNode ? new json.node.Node(cast(void*)elementNode, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     json_array_foreach_element(cast(JsonArray*)this._cPtr, _funcCB, _func);
   }

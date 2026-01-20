@@ -532,7 +532,7 @@ interface DataModel
       Connect to `AccessChanged` signal.
   
       Gets emitted when model's access flags have changed. Use
-      [gda.data_model.DataModel.getAccessFlags] to get the access flags.
+        [gda.data_model.DataModel.getAccessFlags] to get the access flags.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -567,7 +567,7 @@ interface DataModel
       Connect to `Reset` signal.
   
       Gets emitted when model's contents has been completely reset (the number and
-      type of columns may also have changed)
+        type of columns may also have changed)
   
       Params:
         callback = signal callback delegate or function to connect

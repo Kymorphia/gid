@@ -105,9 +105,9 @@ interface Toplevel
   /**
       Get `startupId` property.
       Returns: The startup ID of the surface.
-      
-      See [gdk.app_launch_context.AppLaunchContext] for more information about
-      startup feedback.
+        
+        See [gdk.app_launch_context.AppLaunchContext] for more information about
+        startup feedback.
   */
   @property string startupId();
 
@@ -115,9 +115,9 @@ interface Toplevel
       Set `startupId` property.
       Params:
         propval = The startup ID of the surface.
-        
-        See [gdk.app_launch_context.AppLaunchContext] for more information about
-        startup feedback.
+          
+          See [gdk.app_launch_context.AppLaunchContext] for more information about
+          startup feedback.
   */
   @property void startupId(string propval);
 
@@ -396,18 +396,18 @@ interface Toplevel
       Connect to `ComputeSize` signal.
   
       Emitted when the size for the surface needs to be computed, when
-      it is present.
-      
-      This signal will normally be emitted during or after a call to
-      [gdk.toplevel.Toplevel.present], depending on the configuration
-      received by the windowing system. It may also be emitted at any
-      other point in time, in response to the windowing system
-      spontaneously changing the configuration of the toplevel surface.
-      
-      It is the responsibility of the toplevel user to handle this signal
-      and compute the desired size of the toplevel, given the information
-      passed via the [gdk.toplevel_size.ToplevelSize] object. Failing to do so
-      will result in an arbitrary size being used as a result.
+        it is present.
+        
+        This signal will normally be emitted during or after a call to
+        [gdk.toplevel.Toplevel.present], depending on the configuration
+        received by the windowing system. It may also be emitted at any
+        other point in time, in response to the windowing system
+        spontaneously changing the configuration of the toplevel surface.
+        
+        It is the responsibility of the toplevel user to handle this signal
+        and compute the desired size of the toplevel, given the information
+        passed via the [gdk.toplevel_size.ToplevelSize] object. Failing to do so
+        will result in an arbitrary size being used as a result.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -11,7 +11,7 @@ import gobject.types;
 /** */
 class ServerProviderHandlerInfo
 {
-  GdaServerProviderHandlerInfo cInstance;
+  GdaServerProviderHandlerInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class ServerProviderHandlerInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.server_provider_handler_info.ServerProviderHandlerInfo");
 
-    cInstance = *cast(GdaServerProviderHandlerInfo*)ptr;
+    _cInstance = *cast(GdaServerProviderHandlerInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class ServerProviderHandlerInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

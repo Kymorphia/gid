@@ -46,7 +46,7 @@ class VideoSink : gstbase.base_sink.BaseSink
   /**
       Get `showPrerollFrame` property.
       Returns: Whether to show video frames during preroll. If set to false, video
-      frames will only be rendered in PLAYING state.
+        frames will only be rendered in PLAYING state.
   */
   @property bool showPrerollFrame()
   {
@@ -57,7 +57,7 @@ class VideoSink : gstbase.base_sink.BaseSink
       Set `showPrerollFrame` property.
       Params:
         propval = Whether to show video frames during preroll. If set to false, video
-        frames will only be rendered in PLAYING state.
+          frames will only be rendered in PLAYING state.
   */
   @property void showPrerollFrame(bool propval)
   {

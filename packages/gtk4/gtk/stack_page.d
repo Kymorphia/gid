@@ -82,10 +82,10 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Get `needsAttention` property.
       Returns: Whether the page requires the user attention.
-      
-      This is used by the [gtk.stack_switcher.StackSwitcher] to change the
-      appearance of the corresponding button when a page needs
-      attention and it is not the current one.
+        
+        This is used by the [gtk.stack_switcher.StackSwitcher] to change the
+        appearance of the corresponding button when a page needs
+        attention and it is not the current one.
   */
   @property bool needsAttention()
   {
@@ -96,10 +96,10 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Set `needsAttention` property.
       Params:
         propval = Whether the page requires the user attention.
-        
-        This is used by the [gtk.stack_switcher.StackSwitcher] to change the
-        appearance of the corresponding button when a page needs
-        attention and it is not the current one.
+          
+          This is used by the [gtk.stack_switcher.StackSwitcher] to change the
+          appearance of the corresponding button when a page needs
+          attention and it is not the current one.
   */
   @property void needsAttention(bool propval)
   {

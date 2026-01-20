@@ -549,7 +549,7 @@ class View : gtk.text_view.TextView
   uint getVisualColumn(gtk.text_iter.TextIter iter)
   {
     uint _retval;
-    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, cast(const(GtkTextIter)*)&iter);
     return _retval;
   }
 
@@ -563,7 +563,7 @@ class View : gtk.text_view.TextView
   */
   void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
   }
 
   /**
@@ -771,7 +771,7 @@ class View : gtk.text_view.TextView
   */
   void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
   }
 
   /**
@@ -903,8 +903,8 @@ class View : gtk.text_view.TextView
       Connect to `LineMarkActivated` signal.
   
       Emitted when a line mark has been activated (for instance when there
-      was a button press in the line marks gutter). You can use iter to
-      determine on which line the activation took place.
+        was a button press in the line marks gutter). You can use iter to
+        determine on which line the activation took place.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -956,9 +956,9 @@ class View : gtk.text_view.TextView
       Connect to `MoveLines` signal.
   
       The ::move-lines signal is a keybinding which gets emitted
-      when the user initiates moving a line. The default binding key
-      is Alt+Up/Down arrow. And moves the currently selected lines,
-      or the current line up or down by one line.
+        when the user initiates moving a line. The default binding key
+        is Alt+Up/Down arrow. And moves the currently selected lines,
+        or the current line up or down by one line.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1047,9 +1047,9 @@ class View : gtk.text_view.TextView
       Connect to `MoveWords` signal.
   
       The ::move-words signal is a keybinding which gets emitted
-      when the user initiates moving a word. The default binding key
-      is Alt+Left/Right Arrow and moves the current selection, or the current
-      word by one word.
+        when the user initiates moving a word. The default binding key
+        is Alt+Left/Right Arrow and moves the current selection, or the current
+        word by one word.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1131,15 +1131,15 @@ class View : gtk.text_view.TextView
       Connect to `ShowCompletion` signal.
   
       The ::show-completion signal is a key binding signal which gets
-      emitted when the user requests a completion, by pressing
-      <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
-      
-      This will create a #GtkSourceCompletionContext with the activation
-      type as [gtksource.types.CompletionActivation.UserRequested].
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to activate the completion by
-      another means, for example with another key binding or a menu entry.
+        emitted when the user requests a completion, by pressing
+        <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
+        
+        This will create a #GtkSourceCompletionContext with the activation
+        type as [gtksource.types.CompletionActivation.UserRequested].
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to activate the completion by
+        another means, for example with another key binding or a menu entry.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1177,10 +1177,10 @@ class View : gtk.text_view.TextView
       Connect to `SmartHomeEnd` signal.
   
       Emitted when a the cursor was moved according to the smart home
-      end setting. The signal is emitted after the cursor is moved, but
-      during the GtkTextView::move-cursor action. This can be used to find
-      out whether the cursor was moved by a normal home/end or by a smart
-      home/end.
+        end setting. The signal is emitted after the cursor is moved, but
+        during the GtkTextView::move-cursor action. This can be used to find
+        out whether the cursor was moved by a normal home/end or by a smart
+        home/end.
   
       Params:
         callback = signal callback delegate or function to connect

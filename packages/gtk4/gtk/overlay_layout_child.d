@@ -60,7 +60,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   /**
       Get `measure` property.
       Returns: Whether the child size should contribute to the [gtk.overlay_layout.OverlayLayout]'s
-      measurement.
+        measurement.
   */
   @property bool measure()
   {
@@ -71,7 +71,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Set `measure` property.
       Params:
         propval = Whether the child size should contribute to the [gtk.overlay_layout.OverlayLayout]'s
-        measurement.
+          measurement.
   */
   @property void measure(bool propval)
   {

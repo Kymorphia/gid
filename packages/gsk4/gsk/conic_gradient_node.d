@@ -47,7 +47,9 @@ class ConicGradientNode : gsk.render_node.RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_conic_gradient_node_get_center(cast(const(GskRenderNode)*)this._cPtr);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
+    graphene.point.Point _retval;
+    if (_cretval)
+      _retval = *cast(graphene.point.Point*)_cretval;
     return _retval;
   }
 

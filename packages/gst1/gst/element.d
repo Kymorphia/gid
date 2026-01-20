@@ -288,7 +288,6 @@ class Element : gst.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gst_element_call_async(cast(GstElement*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -396,13 +395,15 @@ class Element : gst.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_element_foreach_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
@@ -426,13 +427,15 @@ class Element : gst.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_element_foreach_sink_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
@@ -456,13 +459,15 @@ class Element : gst.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_element_foreach_src_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
@@ -1073,7 +1078,7 @@ class Element : gst.object.ObjectWrap
     char* _debug_ = debug_.toCString(Yes.Alloc);
     const(char)* _file = file.toCString(No.Alloc);
     const(char)* _function_ = function_.toCString(No.Alloc);
-    gst_element_message_full_with_details(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
+    gst_element_message_full_with_details(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line, cast(GstStructure*)&structure);
   }
 
   /**
@@ -1586,8 +1591,8 @@ class Element : gst.object.ObjectWrap
       Connect to `NoMorePads` signal.
   
       This signals that the element will not generate more dynamic pads.
-      Note that this signal will usually be emitted from the context of
-      the streaming thread.
+        Note that this signal will usually be emitted from the context of
+        the streaming thread.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1625,10 +1630,10 @@ class Element : gst.object.ObjectWrap
       Connect to `PadAdded` signal.
   
       a new #GstPad has been added to the element. Note that this signal will
-      usually be emitted from the context of the streaming thread. Also keep in
-      mind that if you add new elements to the pipeline in the signal handler
-      you will need to set them to the desired target state with
-      [gst.element.Element.setState] or [gst.element.Element.syncStateWithParent].
+        usually be emitted from the context of the streaming thread. Also keep in
+        mind that if you add new elements to the pipeline in the signal handler
+        you will need to set them to the desired target state with
+        [gst.element.Element.setState] or [gst.element.Element.syncStateWithParent].
   
       Params:
         callback = signal callback delegate or function to connect

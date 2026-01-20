@@ -60,8 +60,8 @@ class WebEditor : gobject.object.ObjectWrap
       Connect to `SelectionChanged` signal.
   
       This signal is emitted for every selection change inside a #WebKitWebPage
-      as well as for every caret position change as the caret is a collapsed
-      selection.
+        as well as for every caret position change as the caret is a collapsed
+        selection.
   
       Params:
         callback = signal callback delegate or function to connect

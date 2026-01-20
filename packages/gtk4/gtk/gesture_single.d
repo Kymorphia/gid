@@ -74,8 +74,8 @@ class GestureSingle : gtk.gesture.Gesture
   /**
       Get `exclusive` property.
       Returns: Whether the gesture is exclusive.
-      
-      Exclusive gestures only listen to pointer and pointer emulated events.
+        
+        Exclusive gestures only listen to pointer and pointer emulated events.
   */
   @property bool exclusive()
   {
@@ -86,8 +86,8 @@ class GestureSingle : gtk.gesture.Gesture
       Set `exclusive` property.
       Params:
         propval = Whether the gesture is exclusive.
-        
-        Exclusive gestures only listen to pointer and pointer emulated events.
+          
+          Exclusive gestures only listen to pointer and pointer emulated events.
   */
   @property void exclusive(bool propval)
   {

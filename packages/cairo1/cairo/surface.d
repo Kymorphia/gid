@@ -5,7 +5,6 @@ import cairo.c.functions;
 import cairo.c.types;
 import cairo.device;
 import cairo.font_options;
-import cairo.rectangle_int;
 import cairo.types;
 import gid.gid;
 import gobject.boxed;
@@ -45,7 +44,7 @@ class Surface : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -422,10 +421,10 @@ class Surface : gobject.boxed.Boxed
         error status, it is guaranteed to be an image surface whose format
         is not [cairo.types.Format.Invalid].
   */
-  cairo.surface.Surface mapToImage(cairo.rectangle_int.RectangleInt extents)
+  cairo.surface.Surface mapToImage(cairo.types.RectangleInt extents)
   {
     cairo_surface_t* _cretval;
-    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)this._cPtr, extents ? cast(const(cairo_rectangle_int_t)*)extents._cPtr(No.Dup) : null);
+    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)this._cPtr, &extents);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -494,7 +493,6 @@ class Surface : gobject.boxed.Boxed
       return _retval;
     }
     auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
-
     cairo_status_t _cretval;
     auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
     _cretval = cairo_surface_observer_print(cast(cairo_surface_t*)this._cPtr, _writeFuncCB, _writeFunc);
@@ -631,7 +629,6 @@ class Surface : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     cairo_status_t _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gulong _length;
@@ -758,7 +755,6 @@ class Surface : gobject.boxed.Boxed
       return _retval;
     }
     auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
-
     cairo_status_t _cretval;
     auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
     _cretval = cairo_surface_write_to_png_stream(cast(cairo_surface_t*)this._cPtr, _writeFuncCB, _writeFunc);

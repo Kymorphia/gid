@@ -178,7 +178,7 @@ class VideoDecoder : gst.element.Element
   /**
       Get `automaticRequestSyncPointFlags` property.
       Returns: GstVideoDecoderRequestSyncPointFlags to use for the automatically
-      requested sync points if `automatic-request-sync-points` is enabled.
+        requested sync points if `automatic-request-sync-points` is enabled.
   */
   @property gstvideo.types.VideoDecoderRequestSyncPointFlags automaticRequestSyncPointFlags()
   {
@@ -189,7 +189,7 @@ class VideoDecoder : gst.element.Element
       Set `automaticRequestSyncPointFlags` property.
       Params:
         propval = GstVideoDecoderRequestSyncPointFlags to use for the automatically
-        requested sync points if `automatic-request-sync-points` is enabled.
+          requested sync points if `automatic-request-sync-points` is enabled.
   */
   @property void automaticRequestSyncPointFlags(gstvideo.types.VideoDecoderRequestSyncPointFlags propval)
   {
@@ -199,8 +199,8 @@ class VideoDecoder : gst.element.Element
   /**
       Get `automaticRequestSyncPoints` property.
       Returns: If set to true the decoder will automatically request sync points when
-      it seems like a good idea, e.g. if the first frames are not key frames or
-      if packet loss was reported by upstream.
+        it seems like a good idea, e.g. if the first frames are not key frames or
+        if packet loss was reported by upstream.
   */
   @property bool automaticRequestSyncPoints()
   {
@@ -211,8 +211,8 @@ class VideoDecoder : gst.element.Element
       Set `automaticRequestSyncPoints` property.
       Params:
         propval = If set to true the decoder will automatically request sync points when
-        it seems like a good idea, e.g. if the first frames are not key frames or
-        if packet loss was reported by upstream.
+          it seems like a good idea, e.g. if the first frames are not key frames or
+          if packet loss was reported by upstream.
   */
   @property void automaticRequestSyncPoints(bool propval)
   {
@@ -222,7 +222,7 @@ class VideoDecoder : gst.element.Element
   /**
       Get `discardCorruptedFrames` property.
       Returns: If set to true the decoder will discard frames that are marked as
-      corrupted instead of outputting them.
+        corrupted instead of outputting them.
   */
   @property bool discardCorruptedFrames()
   {
@@ -233,7 +233,7 @@ class VideoDecoder : gst.element.Element
       Set `discardCorruptedFrames` property.
       Params:
         propval = If set to true the decoder will discard frames that are marked as
-        corrupted instead of outputting them.
+          corrupted instead of outputting them.
   */
   @property void discardCorruptedFrames(bool propval)
   {
@@ -243,7 +243,7 @@ class VideoDecoder : gst.element.Element
   /**
       Get `maxErrors` property.
       Returns: Maximum number of tolerated consecutive decode errors. See
-      [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
+        [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
   */
   @property int maxErrors()
   {
@@ -254,7 +254,7 @@ class VideoDecoder : gst.element.Element
       Set `maxErrors` property.
       Params:
         propval = Maximum number of tolerated consecutive decode errors. See
-        [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
+          [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
   */
   @property void maxErrors(int propval)
   {
@@ -264,11 +264,11 @@ class VideoDecoder : gst.element.Element
   /**
       Get `minForceKeyUnitInterval` property.
       Returns: Minimum interval between force-key-unit events sent upstream by the
-      decoder. Setting this to 0 will cause every event to be handled, setting
-      this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
-      
-      See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
-      force-key-unit events.
+        decoder. Setting this to 0 will cause every event to be handled, setting
+        this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
+        
+        See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
+        force-key-unit events.
   */
   @property ulong minForceKeyUnitInterval()
   {
@@ -279,11 +279,11 @@ class VideoDecoder : gst.element.Element
       Set `minForceKeyUnitInterval` property.
       Params:
         propval = Minimum interval between force-key-unit events sent upstream by the
-        decoder. Setting this to 0 will cause every event to be handled, setting
-        this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
-        
-        See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
-        force-key-unit events.
+          decoder. Setting this to 0 will cause every event to be handled, setting
+          this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
+          
+          See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
+          force-key-unit events.
   */
   @property void minForceKeyUnitInterval(ulong propval)
   {
@@ -293,9 +293,9 @@ class VideoDecoder : gst.element.Element
   /**
       Get `qos` property.
       Returns: If set to true the decoder will handle QoS events received
-      from downstream elements.
-      This includes dropping output frames which are detected as late
-      using the metrics reported by those events.
+        from downstream elements.
+        This includes dropping output frames which are detected as late
+        using the metrics reported by those events.
   */
   @property bool qos()
   {
@@ -306,9 +306,9 @@ class VideoDecoder : gst.element.Element
       Set `qos` property.
       Params:
         propval = If set to true the decoder will handle QoS events received
-        from downstream elements.
-        This includes dropping output frames which are detected as late
-        using the metrics reported by those events.
+          from downstream elements.
+          This includes dropping output frames which are detected as late
+          using the metrics reported by those events.
   */
   @property void qos(bool propval)
   {
@@ -469,10 +469,8 @@ class VideoDecoder : gst.element.Element
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_video_decoder_get_allocator(cast(GstVideoDecoder*)this._cPtr, &_allocator, &_params);
+    gst_video_decoder_get_allocator(cast(GstVideoDecoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.Take);
   }
 
   /** */

@@ -40,7 +40,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   /**
       Get `interpolation` property.
       Returns: Interpolation method to use when quantile lies between two data
-      points.
+        points.
   */
   @property arrow.types.QuantileInterpolation interpolation()
   {
@@ -51,7 +51,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
       Set `interpolation` property.
       Params:
         propval = Interpolation method to use when quantile lies between two data
-        points.
+          points.
   */
   @property void interpolation(arrow.types.QuantileInterpolation propval)
   {
@@ -80,7 +80,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   /**
       Get `skipNulls` property.
       Returns: If true (the default), null values are ignored. Otherwise, if any
-      value is null, emit null.
+        value is null, emit null.
   */
   @property bool skipNulls()
   {
@@ -91,7 +91,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
       Set `skipNulls` property.
       Params:
         propval = If true (the default), null values are ignored. Otherwise, if any
-        value is null, emit null.
+          value is null, emit null.
   */
   @property void skipNulls(bool propval)
   {

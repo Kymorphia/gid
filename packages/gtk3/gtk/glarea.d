@@ -147,14 +147,14 @@ class GLArea : gtk.widget.Widget
   /**
       Get `autoRender` property.
       Returns: If set to true the #GtkGLArea::render signal will be emitted every time
-      the widget draws. This is the default and is useful if drawing the widget
-      is faster.
-      
-      If set to false the data from previous rendering is kept around and will
-      be used for drawing the widget the next time, unless the window is resized.
-      In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
-      This mode is useful when the scene changes seldomly, but takes a long time
-      to redraw.
+        the widget draws. This is the default and is useful if drawing the widget
+        is faster.
+        
+        If set to false the data from previous rendering is kept around and will
+        be used for drawing the widget the next time, unless the window is resized.
+        In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+        This mode is useful when the scene changes seldomly, but takes a long time
+        to redraw.
   */
   @property bool autoRender()
   {
@@ -165,14 +165,14 @@ class GLArea : gtk.widget.Widget
       Set `autoRender` property.
       Params:
         propval = If set to true the #GtkGLArea::render signal will be emitted every time
-        the widget draws. This is the default and is useful if drawing the widget
-        is faster.
-        
-        If set to false the data from previous rendering is kept around and will
-        be used for drawing the widget the next time, unless the window is resized.
-        In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
-        This mode is useful when the scene changes seldomly, but takes a long time
-        to redraw.
+          the widget draws. This is the default and is useful if drawing the widget
+          is faster.
+          
+          If set to false the data from previous rendering is kept around and will
+          be used for drawing the widget the next time, unless the window is resized.
+          In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+          This mode is useful when the scene changes seldomly, but takes a long time
+          to redraw.
   */
   @property void autoRender(bool propval)
   {
@@ -182,10 +182,10 @@ class GLArea : gtk.widget.Widget
   /**
       Get `context` property.
       Returns: The #GdkGLContext used by the #GtkGLArea widget.
-      
-      The #GtkGLArea widget is responsible for creating the #GdkGLContext
-      instance. If you need to render with other kinds of buffers (stencil,
-      depth, etc), use render buffers.
+        
+        The #GtkGLArea widget is responsible for creating the #GdkGLContext
+        instance. If you need to render with other kinds of buffers (stencil,
+        depth, etc), use render buffers.
   */
   @property gdk.glcontext.GLContext context()
   {
@@ -195,11 +195,11 @@ class GLArea : gtk.widget.Widget
   /**
       Get `hasAlpha` property.
       Returns: If set to true the buffer allocated by the widget will have an alpha channel
-      component, and when rendering to the window the result will be composited over
-      whatever is below the widget.
-      
-      If set to false there will be no alpha channel, and the buffer will fully
-      replace anything below the widget.
+        component, and when rendering to the window the result will be composited over
+        whatever is below the widget.
+        
+        If set to false there will be no alpha channel, and the buffer will fully
+        replace anything below the widget.
   */
   @property bool hasAlpha()
   {
@@ -210,11 +210,11 @@ class GLArea : gtk.widget.Widget
       Set `hasAlpha` property.
       Params:
         propval = If set to true the buffer allocated by the widget will have an alpha channel
-        component, and when rendering to the window the result will be composited over
-        whatever is below the widget.
-        
-        If set to false there will be no alpha channel, and the buffer will fully
-        replace anything below the widget.
+          component, and when rendering to the window the result will be composited over
+          whatever is below the widget.
+          
+          If set to false there will be no alpha channel, and the buffer will fully
+          replace anything below the widget.
   */
   @property void hasAlpha(bool propval)
   {
@@ -224,7 +224,7 @@ class GLArea : gtk.widget.Widget
   /**
       Get `hasDepthBuffer` property.
       Returns: If set to true the widget will allocate and enable a depth buffer for the
-      target framebuffer.
+        target framebuffer.
   */
   @property bool hasDepthBuffer()
   {
@@ -235,7 +235,7 @@ class GLArea : gtk.widget.Widget
       Set `hasDepthBuffer` property.
       Params:
         propval = If set to true the widget will allocate and enable a depth buffer for the
-        target framebuffer.
+          target framebuffer.
   */
   @property void hasDepthBuffer(bool propval)
   {
@@ -245,7 +245,7 @@ class GLArea : gtk.widget.Widget
   /**
       Get `hasStencilBuffer` property.
       Returns: If set to true the widget will allocate and enable a stencil buffer for the
-      target framebuffer.
+        target framebuffer.
   */
   @property bool hasStencilBuffer()
   {
@@ -256,7 +256,7 @@ class GLArea : gtk.widget.Widget
       Set `hasStencilBuffer` property.
       Params:
         propval = If set to true the widget will allocate and enable a stencil buffer for the
-        target framebuffer.
+          target framebuffer.
   */
   @property void hasStencilBuffer(bool propval)
   {
@@ -266,9 +266,9 @@ class GLArea : gtk.widget.Widget
   /**
       Get `useEs` property.
       Returns: If set to true the widget will try to create a #GdkGLContext using
-      OpenGL ES instead of OpenGL.
-      
-      See also: [gdk.glcontext.GLContext.setUseEs]
+        OpenGL ES instead of OpenGL.
+        
+        See also: [gdk.glcontext.GLContext.setUseEs]
   */
   @property bool useEs()
   {
@@ -279,9 +279,9 @@ class GLArea : gtk.widget.Widget
       Set `useEs` property.
       Params:
         propval = If set to true the widget will try to create a #GdkGLContext using
-        OpenGL ES instead of OpenGL.
-        
-        See also: [gdk.glcontext.GLContext.setUseEs]
+          OpenGL ES instead of OpenGL.
+          
+          See also: [gdk.glcontext.GLContext.setUseEs]
   */
   @property void useEs(bool propval)
   {
@@ -540,14 +540,14 @@ class GLArea : gtk.widget.Widget
       Connect to `CreateContext` signal.
   
       The ::create-context signal is emitted when the widget is being
-      realized, and allows you to override how the GL context is
-      created. This is useful when you want to reuse an existing GL
-      context, or if you want to try creating different kinds of GL
-      options.
-      
-      If context creation fails then the signal handler can use
-      [gtk.glarea.GLArea.setError] to register a more detailed error
-      of how the construction failed.
+        realized, and allows you to override how the GL context is
+        created. This is useful when you want to reuse an existing GL
+        context, or if you want to try creating different kinds of GL
+        options.
+        
+        If context creation fails then the signal handler can use
+        [gtk.glarea.GLArea.setError] to register a more detailed error
+        of how the construction failed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -557,7 +557,7 @@ class GLArea : gtk.widget.Widget
           `gLArea` the instance the signal is connected to (optional)
   
           `Returns` a newly created #GdkGLContext;
-              the #GtkGLArea widget will take ownership of the returned value.
+                the #GtkGLArea widget will take ownership of the returned value.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -588,10 +588,10 @@ class GLArea : gtk.widget.Widget
       Connect to `Render` signal.
   
       The ::render signal is emitted every time the contents
-      of the #GtkGLArea should be redrawn.
-      
-      The context is bound to the area prior to emitting this function,
-      and the buffers are painted to the window once the emission terminates.
+        of the #GtkGLArea should be redrawn.
+        
+        The context is bound to the area prior to emitting this function,
+        and the buffers are painted to the window once the emission terminates.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -603,7 +603,7 @@ class GLArea : gtk.widget.Widget
           `gLArea` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -639,14 +639,14 @@ class GLArea : gtk.widget.Widget
       Connect to `Resize` signal.
   
       The ::resize signal is emitted once when the widget is realized, and
-      then each time the widget is changed while realized. This is useful
-      in order to keep GL state up to date with the widget size, like for
-      instance camera properties which may depend on the width/height ratio.
-      
-      The GL context for the area is guaranteed to be current when this signal
-      is emitted.
-      
-      The default handler sets up the GL viewport.
+        then each time the widget is changed while realized. This is useful
+        in order to keep GL state up to date with the widget size, like for
+        instance camera properties which may depend on the width/height ratio.
+        
+        The GL context for the area is guaranteed to be current when this signal
+        is emitted.
+        
+        The default handler sets up the GL viewport.
   
       Params:
         callback = signal callback delegate or function to connect

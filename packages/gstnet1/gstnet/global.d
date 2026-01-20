@@ -128,6 +128,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
     _tmpinterfaces ~= s.toCString(No.Alloc);
   _tmpinterfaces ~= null;
   char** _interfaces = _tmpinterfaces.ptr;
+
   _retval = cast(bool)gst_ptp_init(clockId, _interfaces);
   return _retval;
 }
@@ -158,7 +159,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
 bool ptpInitFull(gst.structure.Structure config)
 {
   bool _retval;
-  _retval = cast(bool)gst_ptp_init_full(config ? cast(const(GstStructure)*)config._cPtr(No.Dup) : null);
+  _retval = cast(bool)gst_ptp_init_full(cast(const(GstStructure)*)&config);
   return _retval;
 }
 
@@ -199,13 +200,15 @@ gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
 {
   extern(C) gboolean _callbackCallback(ubyte domain, const(GstStructure)* stats, void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(gstnet.types.PtpStatisticsCallback*)userData;
 
-    gboolean _retval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.Take) : null);
+    _dretval = (*_dlg)(domain, *cast(gst.structure.Structure*)stats);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   gulong _retval;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;

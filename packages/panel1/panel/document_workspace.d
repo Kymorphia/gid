@@ -165,7 +165,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Connect to `AddWidget` signal.
   
       This signal is used to add a #PanelWidget to the document workspace,
-      generally in the document grid.
+        generally in the document grid.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -179,7 +179,7 @@ class DocumentWorkspace : panel.workspace.Workspace
           `documentWorkspace` the instance the signal is connected to (optional)
   
           `Returns` true if the widget was added and no more signal handlers
-             will be notified.
+               will be notified.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

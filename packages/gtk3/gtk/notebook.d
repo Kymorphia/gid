@@ -967,13 +967,13 @@ class Notebook : gtk.container.Container
       Connect to `CreateWindow` signal.
   
       The ::create-window signal is emitted when a detachable
-      tab is dropped on the root window.
-      
-      A handler for this signal can create a window containing
-      a notebook where the tab will be attached. It is also
-      responsible for moving/resizing the window and adding the
-      necessary properties to the notebook (e.g. the
-      #GtkNotebook:group-name ).
+        tab is dropped on the root window.
+        
+        A handler for this signal can create a window containing
+        a notebook where the tab will be attached. It is also
+        responsible for moving/resizing the window and adding the
+        necessary properties to the notebook (e.g. the
+        #GtkNotebook:group-name ).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -989,7 +989,7 @@ class Notebook : gtk.container.Container
           `notebook` the instance the signal is connected to (optional)
   
           `Returns` a #GtkNotebook that page should be
-              added to, or null.
+                added to, or null.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1125,7 +1125,7 @@ class Notebook : gtk.container.Container
       Connect to `PageAdded` signal.
   
       the ::page-added signal is emitted in the notebook
-      right after a page is added to the notebook.
+        right after a page is added to the notebook.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1177,7 +1177,7 @@ class Notebook : gtk.container.Container
       Connect to `PageRemoved` signal.
   
       the ::page-removed signal is emitted in the notebook
-      right after a page is removed from the notebook.
+        right after a page is removed from the notebook.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1229,7 +1229,7 @@ class Notebook : gtk.container.Container
       Connect to `PageReordered` signal.
   
       the ::page-reordered signal is emitted in the notebook
-      right after a page has been reordered.
+        right after a page has been reordered.
   
       Params:
         callback = signal callback delegate or function to connect

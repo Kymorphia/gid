@@ -11,7 +11,7 @@ import gobject.object;
 /** */
 class Implementor
 {
-  AtkImplementor* cInstancePtr;
+  AtkImplementor* _cInstancePtr;
   bool owned;
 
   /** */
@@ -20,7 +20,7 @@ class Implementor
     if (!ptr)
       throw new GidConstructException("Null instance pointer for atk.implementor.Implementor");
 
-    cInstancePtr = cast(AtkImplementor*)ptr;
+    _cInstancePtr = cast(AtkImplementor*)ptr;
 
     owned = take;
   }
@@ -28,7 +28,7 @@ class Implementor
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

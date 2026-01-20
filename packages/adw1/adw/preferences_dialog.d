@@ -103,8 +103,8 @@ class PreferencesDialog : adw.dialog.Dialog
   /**
       Get `visiblePageName` property.
       Returns: The name of the currently visible page.
-      
-      See `property@AdwPreferencesDialog:visible-page`.
+        
+        See `property@AdwPreferencesDialog:visible-page`.
   */
   @property string visiblePageName()
   {
@@ -115,8 +115,8 @@ class PreferencesDialog : adw.dialog.Dialog
       Set `visiblePageName` property.
       Params:
         propval = The name of the currently visible page.
-        
-        See `property@AdwPreferencesDialog:visible-page`.
+          
+          See `property@AdwPreferencesDialog:visible-page`.
   */
   @property void visiblePageName(string propval)
   {

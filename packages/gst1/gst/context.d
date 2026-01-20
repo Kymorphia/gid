@@ -51,7 +51,7 @@ class Context : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -111,7 +111,9 @@ class Context : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_context_get_structure(cast(const(GstContext)*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -152,7 +154,9 @@ class Context : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_context_writable_structure(cast(GstContext*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 }

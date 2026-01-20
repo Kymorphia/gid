@@ -321,10 +321,10 @@ class RecentManager : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Emitted when the current recently used resources manager changes
-      its contents.
-      
-      This can happen either by calling [gtk.recent_manager.RecentManager.addItem]
-      or by another application.
+        its contents.
+        
+        This can happen either by calling [gtk.recent_manager.RecentManager.addItem]
+        or by another application.
   
       Params:
         callback = signal callback delegate or function to connect

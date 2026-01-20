@@ -300,8 +300,8 @@ interface Volume
       Connect to `Removed` signal.
   
       This signal is emitted when the #GVolume have been removed. If
-      the recipient is holding references to the object they should
-      release them so the object can be finalized.
+        the recipient is holding references to the object they should
+        release them so the object can be finalized.
   
       Params:
         callback = signal callback delegate or function to connect

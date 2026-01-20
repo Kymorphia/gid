@@ -52,8 +52,8 @@ class Download : gobject.object.ObjectWrap
   /**
       Get `allowOverwrite` property.
       Returns: Whether or not the download is allowed to overwrite an existing file on
-      disk. If this property is false and the destination already exists,
-      the download will fail.
+        disk. If this property is false and the destination already exists,
+        the download will fail.
   */
   @property bool allowOverwrite()
   {
@@ -64,8 +64,8 @@ class Download : gobject.object.ObjectWrap
       Set `allowOverwrite` property.
       Params:
         propval = Whether or not the download is allowed to overwrite an existing file on
-        disk. If this property is false and the destination already exists,
-        the download will fail.
+          disk. If this property is false and the destination already exists,
+          the download will fail.
   */
   @property void allowOverwrite(bool propval)
   {
@@ -84,11 +84,11 @@ class Download : gobject.object.ObjectWrap
   /**
       Get `estimatedProgress` property.
       Returns: An estimate of the percent completion for the download operation.
-      This value will range from 0.0 to 1.0. The value is an estimate
-      based on the total number of bytes expected to be received for
-      a download.
-      If you need a more accurate progress information you can connect to
-      #WebKitDownload::received-data signal to track the progress.
+        This value will range from 0.0 to 1.0. The value is an estimate
+        based on the total number of bytes expected to be received for
+        a download.
+        If you need a more accurate progress information you can connect to
+        #WebKitDownload::received-data signal to track the progress.
   */
   @property double estimatedProgress()
   {
@@ -279,8 +279,8 @@ class Download : gobject.object.ObjectWrap
       Connect to `CreatedDestination` signal.
   
       This signal is emitted after #WebKitDownload::decide-destination and before
-      #WebKitDownload::received-data to notify that destination file has been
-      created successfully at destination.
+        #WebKitDownload::received-data to notify that destination file has been
+        created successfully at destination.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -325,16 +325,16 @@ class Download : gobject.object.ObjectWrap
       Connect to `DecideDestination` signal.
   
       This signal is emitted after response is received to
-      decide a destination for the download using
-      [webkit.download.Download.setDestination]. If this signal is not
-      handled, the file will be downloaded to `G_USER_DIRECTORY_DOWNLOAD`
-      directory using suggested_filename.
-      
-      Since 2.40, you may handle this signal asynchronously by
-      returning true without calling [webkit.download.Download.setDestination].
-      This indicates intent to eventually call [webkit.download.Download.setDestination].
-      In this case, the download will not proceed until the destination is set
-      or cancelled with [webkit.download.Download.cancel].
+        decide a destination for the download using
+        [webkit.download.Download.setDestination]. If this signal is not
+        handled, the file will be downloaded to `G_USER_DIRECTORY_DOWNLOAD`
+        directory using suggested_filename.
+        
+        Since 2.40, you may handle this signal asynchronously by
+        returning true without calling [webkit.download.Download.setDestination].
+        This indicates intent to eventually call [webkit.download.Download.setDestination].
+        In this case, the download will not proceed until the destination is set
+        or cancelled with [webkit.download.Download.cancel].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -346,7 +346,7 @@ class Download : gobject.object.ObjectWrap
           `download` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event,
-            or false to propagate the event further.
+              or false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -382,11 +382,11 @@ class Download : gobject.object.ObjectWrap
       Connect to `Failed` signal.
   
       This signal is emitted when an error occurs during the download
-      operation. The given error, of the domain `WEBKIT_DOWNLOAD_ERROR`,
-      contains further details of the failure. If the download is cancelled
-      with [webkit.download.Download.cancel], this signal is emitted with error
-      [webkit.types.DownloadError.CancelledByUser]. The download operation finishes
-      after an error and #WebKitDownload::finished signal is emitted after this one.
+        operation. The given error, of the domain `WEBKIT_DOWNLOAD_ERROR`,
+        contains further details of the failure. If the download is cancelled
+        with [webkit.download.Download.cancel], this signal is emitted with error
+        [webkit.types.DownloadError.CancelledByUser]. The download operation finishes
+        after an error and #WebKitDownload::finished signal is emitted after this one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -431,7 +431,7 @@ class Download : gobject.object.ObjectWrap
       Connect to `Finished` signal.
   
       This signal is emitted when download finishes successfully or due to an error.
-      In case of errors #WebKitDownload::failed signal is emitted before this one.
+        In case of errors #WebKitDownload::failed signal is emitted before this one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -469,8 +469,8 @@ class Download : gobject.object.ObjectWrap
       Connect to `ReceivedData` signal.
   
       This signal is emitted after response is received,
-      every time new data has been written to the destination. It's
-      useful to know the progress of the download operation.
+        every time new data has been written to the destination. It's
+        useful to know the progress of the download operation.
   
       Params:
         callback = signal callback delegate or function to connect

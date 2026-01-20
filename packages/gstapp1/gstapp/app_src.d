@@ -114,8 +114,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `block` property.
       Returns: When max-bytes are queued and after the enough-data signal has been emitted,
-      block any further push-buffer calls until the amount of queued bytes drops
-      below the max-bytes limit.
+        block any further push-buffer calls until the amount of queued bytes drops
+        below the max-bytes limit.
   */
   @property bool block()
   {
@@ -126,8 +126,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `block` property.
       Params:
         propval = When max-bytes are queued and after the enough-data signal has been emitted,
-        block any further push-buffer calls until the amount of queued bytes drops
-        below the max-bytes limit.
+          block any further push-buffer calls until the amount of queued bytes drops
+          below the max-bytes limit.
   */
   @property void block(bool propval)
   {
@@ -137,7 +137,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `caps` property.
       Returns: The GstCaps that will negotiated downstream and will be put
-      on outgoing buffers.
+        on outgoing buffers.
   */
   @property gst.caps.Caps caps()
   {
@@ -148,7 +148,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `caps` property.
       Params:
         propval = The GstCaps that will negotiated downstream and will be put
-        on outgoing buffers.
+          on outgoing buffers.
   */
   @property void caps(gst.caps.Caps propval)
   {
@@ -185,7 +185,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `duration` property.
       Returns: The total duration in nanoseconds of the data stream. If the total duration is known, it
-      is recommended to configure it with this property.
+        is recommended to configure it with this property.
   */
   @property ulong duration()
   {
@@ -196,7 +196,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `duration` property.
       Params:
         propval = The total duration in nanoseconds of the data stream. If the total duration is known, it
-        is recommended to configure it with this property.
+          is recommended to configure it with this property.
   */
   @property void duration(ulong propval)
   {
@@ -206,8 +206,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `emitSignals` property.
       Returns: Make appsrc emit the "need-data", "enough-data" and "seek-data" signals.
-      This option is by default enabled for backwards compatibility reasons but
-      can disabled when needed because signal emission is expensive.
+        This option is by default enabled for backwards compatibility reasons but
+        can disabled when needed because signal emission is expensive.
   */
   @property bool emitSignals()
   {
@@ -218,8 +218,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `emitSignals` property.
       Params:
         propval = Make appsrc emit the "need-data", "enough-data" and "seek-data" signals.
-        This option is by default enabled for backwards compatibility reasons but
-        can disabled when needed because signal emission is expensive.
+          This option is by default enabled for backwards compatibility reasons but
+          can disabled when needed because signal emission is expensive.
   */
   @property void emitSignals(bool propval)
   {
@@ -229,7 +229,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `format` property.
       Returns: The format to use for segment events. When the source is producing
-      timestamped buffers this property should be set to GST_FORMAT_TIME.
+        timestamped buffers this property should be set to GST_FORMAT_TIME.
   */
   @property gst.types.Format format()
   {
@@ -240,7 +240,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `format` property.
       Params:
         propval = The format to use for segment events. When the source is producing
-        timestamped buffers this property should be set to GST_FORMAT_TIME.
+          timestamped buffers this property should be set to GST_FORMAT_TIME.
   */
   @property void format(gst.types.Format propval)
   {
@@ -250,13 +250,13 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `handleSegmentChange` property.
       Returns: When enabled, appsrc will check GstSegment in GstSample which was
-      pushed via [gstapp.app_src.AppSrc.pushSample] or "push-sample" signal action.
-      If a GstSegment is changed, corresponding segment event will be followed
-      by next data flow.
-      
-      FIXME: currently only GST_FORMAT_TIME format is supported and therefore
-      GstAppSrc::format should be time. However, possibly #GstAppSrc can support
-      other formats.
+        pushed via [gstapp.app_src.AppSrc.pushSample] or "push-sample" signal action.
+        If a GstSegment is changed, corresponding segment event will be followed
+        by next data flow.
+        
+        FIXME: currently only GST_FORMAT_TIME format is supported and therefore
+        GstAppSrc::format should be time. However, possibly #GstAppSrc can support
+        other formats.
   */
   @property bool handleSegmentChange()
   {
@@ -267,13 +267,13 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `handleSegmentChange` property.
       Params:
         propval = When enabled, appsrc will check GstSegment in GstSample which was
-        pushed via [gstapp.app_src.AppSrc.pushSample] or "push-sample" signal action.
-        If a GstSegment is changed, corresponding segment event will be followed
-        by next data flow.
-        
-        FIXME: currently only GST_FORMAT_TIME format is supported and therefore
-        GstAppSrc::format should be time. However, possibly #GstAppSrc can support
-        other formats.
+          pushed via [gstapp.app_src.AppSrc.pushSample] or "push-sample" signal action.
+          If a GstSegment is changed, corresponding segment event will be followed
+          by next data flow.
+          
+          FIXME: currently only GST_FORMAT_TIME format is supported and therefore
+          GstAppSrc::format should be time. However, possibly #GstAppSrc can support
+          other formats.
   */
   @property void handleSegmentChange(bool propval)
   {
@@ -283,7 +283,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `isLive` property.
       Returns: Instruct the source to behave like a live source. This includes that it
-      will only push out buffers in the PLAYING state.
+        will only push out buffers in the PLAYING state.
   */
   override @property bool isLive()
   {
@@ -296,7 +296,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `isLive` property.
       Params:
         propval = Instruct the source to behave like a live source. This includes that it
-        will only push out buffers in the PLAYING state.
+          will only push out buffers in the PLAYING state.
   */
   @property void isLive(bool propval)
   {
@@ -306,9 +306,9 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `leakyType` property.
       Returns: When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsrc
-      will drop any buffers that are pushed into it once its internal queue is
-      full. The selected type defines whether to drop the oldest or new
-      buffers.
+        will drop any buffers that are pushed into it once its internal queue is
+        full. The selected type defines whether to drop the oldest or new
+        buffers.
   */
   @property gstapp.types.AppLeakyType leakyType()
   {
@@ -319,9 +319,9 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `leakyType` property.
       Params:
         propval = When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsrc
-        will drop any buffers that are pushed into it once its internal queue is
-        full. The selected type defines whether to drop the oldest or new
-        buffers.
+          will drop any buffers that are pushed into it once its internal queue is
+          full. The selected type defines whether to drop the oldest or new
+          buffers.
   */
   @property void leakyType(gstapp.types.AppLeakyType propval)
   {
@@ -331,8 +331,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `maxBuffers` property.
       Returns: The maximum amount of buffers that can be queued internally.
-      After the maximum amount of buffers are queued, appsrc will emit the
-      "enough-data" signal.
+        After the maximum amount of buffers are queued, appsrc will emit the
+        "enough-data" signal.
   */
   @property ulong maxBuffers()
   {
@@ -343,8 +343,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `maxBuffers` property.
       Params:
         propval = The maximum amount of buffers that can be queued internally.
-        After the maximum amount of buffers are queued, appsrc will emit the
-        "enough-data" signal.
+          After the maximum amount of buffers are queued, appsrc will emit the
+          "enough-data" signal.
   */
   @property void maxBuffers(ulong propval)
   {
@@ -354,8 +354,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `maxBytes` property.
       Returns: The maximum amount of bytes that can be queued internally.
-      After the maximum amount of bytes are queued, appsrc will emit the
-      "enough-data" signal.
+        After the maximum amount of bytes are queued, appsrc will emit the
+        "enough-data" signal.
   */
   @property ulong maxBytes()
   {
@@ -366,8 +366,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `maxBytes` property.
       Params:
         propval = The maximum amount of bytes that can be queued internally.
-        After the maximum amount of bytes are queued, appsrc will emit the
-        "enough-data" signal.
+          After the maximum amount of bytes are queued, appsrc will emit the
+          "enough-data" signal.
   */
   @property void maxBytes(ulong propval)
   {
@@ -389,8 +389,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `maxTime` property.
       Returns: The maximum amount of time that can be queued internally.
-      After the maximum amount of time are queued, appsrc will emit the
-      "enough-data" signal.
+        After the maximum amount of time are queued, appsrc will emit the
+        "enough-data" signal.
   */
   @property ulong maxTime()
   {
@@ -401,8 +401,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `maxTime` property.
       Params:
         propval = The maximum amount of time that can be queued internally.
-        After the maximum amount of time are queued, appsrc will emit the
-        "enough-data" signal.
+          After the maximum amount of time are queued, appsrc will emit the
+          "enough-data" signal.
   */
   @property void maxTime(ulong propval)
   {
@@ -412,7 +412,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `minLatency` property.
       Returns: The minimum latency of the source. A value of -1 will use the default
-      latency calculations of #GstBaseSrc.
+        latency calculations of #GstBaseSrc.
   */
   @property long minLatency()
   {
@@ -423,7 +423,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `minLatency` property.
       Params:
         propval = The minimum latency of the source. A value of -1 will use the default
-        latency calculations of #GstBaseSrc.
+          latency calculations of #GstBaseSrc.
   */
   @property void minLatency(long propval)
   {
@@ -433,7 +433,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `minPercent` property.
       Returns: Make appsrc emit the "need-data" signal when the amount of bytes in the
-      queue drops below this percentage of max-bytes.
+        queue drops below this percentage of max-bytes.
   */
   @property uint minPercent()
   {
@@ -444,7 +444,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `minPercent` property.
       Params:
         propval = Make appsrc emit the "need-data" signal when the amount of bytes in the
-        queue drops below this percentage of max-bytes.
+          queue drops below this percentage of max-bytes.
   */
   @property void minPercent(uint propval)
   {
@@ -454,7 +454,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `size` property.
       Returns: The total size in bytes of the data stream. If the total size is known, it
-      is recommended to configure it with this property.
+        is recommended to configure it with this property.
   */
   @property long size()
   {
@@ -465,7 +465,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `size` property.
       Params:
         propval = The total size in bytes of the data stream. If the total size is known, it
-        is recommended to configure it with this property.
+          is recommended to configure it with this property.
   */
   @property void size(long propval)
   {
@@ -475,7 +475,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   /**
       Get `streamType` property.
       Returns: The type of stream that this source is producing.  For seekable streams the
-      application should connect to the seek-data signal.
+        application should connect to the seek-data signal.
   */
   @property gstapp.types.AppStreamType streamType()
   {
@@ -486,7 +486,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Set `streamType` property.
       Params:
         propval = The type of stream that this source is producing.  For seekable streams the
-        application should connect to the seek-data signal.
+          application should connect to the seek-data signal.
   */
   @property void streamType(gstapp.types.AppStreamType propval)
   {
@@ -907,8 +907,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Connect to `EnoughData` signal.
   
       Signal that the source has enough data. It is recommended that the
-      application stops calling push-buffer until the need-data signal is
-      emitted again to avoid excessive buffer queueing.
+        application stops calling push-buffer until the need-data signal is
+        emitted again to avoid excessive buffer queueing.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -946,13 +946,13 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Connect to `NeedData` signal.
   
       Signal that the source needs more data. In the callback or from another
-      thread you should call push-buffer or end-of-stream.
-      
-      length is just a hint and when it is set to -1, any number of bytes can be
-      pushed into appsrc.
-      
-      You can call push-buffer multiple times until the enough-data signal is
-      fired.
+        thread you should call push-buffer or end-of-stream.
+        
+        length is just a hint and when it is set to -1, any number of bytes can be
+        pushed into appsrc.
+        
+        You can call push-buffer multiple times until the enough-data signal is
+        fired.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -997,14 +997,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Connect to `PushBuffer` signal.
   
       Adds a buffer to the queue of buffers that the appsrc element will
-      push to its source pad.
-      
-      This function does not take ownership of the buffer, but it takes a
-      reference so the buffer can be unreffed at any time after calling this
-      function.
-      
-      When the block property is TRUE, this function can block until free space
-      becomes available in the queue.
+        push to its source pad.
+        
+        This function does not take ownership of the buffer, but it takes a
+        reference so the buffer can be unreffed at any time after calling this
+        function.
+        
+        When the block property is TRUE, this function can block until free space
+        becomes available in the queue.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1051,14 +1051,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Connect to `PushBufferList` signal.
   
       Adds a buffer list to the queue of buffers and buffer lists that the
-      appsrc element will push to its source pad.
-      
-      This function does not take ownership of the buffer list, but it takes a
-      reference so the buffer list can be unreffed at any time after calling
-      this function.
-      
-      When the block property is TRUE, this function can block until free space
-      becomes available in the queue.
+        appsrc element will push to its source pad.
+        
+        This function does not take ownership of the buffer list, but it takes a
+        reference so the buffer list can be unreffed at any time after calling
+        this function.
+        
+        When the block property is TRUE, this function can block until free space
+        becomes available in the queue.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1105,18 +1105,18 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Connect to `PushSample` signal.
   
       Extract a buffer from the provided sample and adds the extracted buffer
-      to the queue of buffers that the appsrc element will
-      push to its source pad. This function set the appsrc caps based on the caps
-      in the sample and reset the caps if they change.
-      Only the caps and the buffer of the provided sample are used and not
-      for example the segment in the sample.
-      
-      This function does not take ownership of the sample, but it takes a
-      reference so the sample can be unreffed at any time after calling this
-      function.
-      
-      When the block property is TRUE, this function can block until free space
-      becomes available in the queue.
+        to the queue of buffers that the appsrc element will
+        push to its source pad. This function set the appsrc caps based on the caps
+        in the sample and reset the caps if they change.
+        Only the caps and the buffer of the provided sample are used and not
+        for example the segment in the sample.
+        
+        This function does not take ownership of the sample, but it takes a
+        reference so the sample can be unreffed at any time after calling this
+        function.
+        
+        When the block property is TRUE, this function can block until free space
+        becomes available in the queue.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1163,8 +1163,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Connect to `SeekData` signal.
   
       Seek to the given offset. The next push-buffer should produce buffers from
-      the new offset.
-      This callback is only called for seekable stream types.
+        the new offset.
+        This callback is only called for seekable stream types.
   
       Params:
         callback = signal callback delegate or function to connect

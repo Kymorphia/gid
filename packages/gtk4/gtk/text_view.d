@@ -114,12 +114,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `bottomMargin` property.
       Returns: The bottom margin for text in the text view.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
-      
-      Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
   */
   @property int bottomMargin()
   {
@@ -130,12 +130,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `bottomMargin` property.
       Params:
         propval = The bottom margin for text in the text view.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
-        
-        Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
   */
   @property void bottomMargin(int propval)
   {
@@ -214,11 +214,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `imModule` property.
       Returns: Which IM (input method) module should be used for this text_view.
-      
-      See [gtk.immulticontext.IMMulticontext].
-      
-      Setting this to a non-null value overrides the system-wide IM module
-      setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+        
+        See [gtk.immulticontext.IMMulticontext].
+        
+        Setting this to a non-null value overrides the system-wide IM module
+        setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
   */
   @property string imModule()
   {
@@ -229,11 +229,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `imModule` property.
       Params:
         propval = Which IM (input method) module should be used for this text_view.
-        
-        See [gtk.immulticontext.IMMulticontext].
-        
-        Setting this to a non-null value overrides the system-wide IM module
-        setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+          
+          See [gtk.immulticontext.IMMulticontext].
+          
+          Setting this to a non-null value overrides the system-wide IM module
+          setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
   */
   @property void imModule(string propval)
   {
@@ -243,10 +243,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `indent` property.
       Returns: Amount to indent the paragraph, in pixels.
-      
-      A negative value of indent will produce a hanging indentation.
-      That is, the first line will have the full width, and subsequent
-      lines will be indented by the absolute value of indent.
+        
+        A negative value of indent will produce a hanging indentation.
+        That is, the first line will have the full width, and subsequent
+        lines will be indented by the absolute value of indent.
   */
   @property int indent()
   {
@@ -257,10 +257,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `indent` property.
       Params:
         propval = Amount to indent the paragraph, in pixels.
-        
-        A negative value of indent will produce a hanging indentation.
-        That is, the first line will have the full width, and subsequent
-        lines will be indented by the absolute value of indent.
+          
+          A negative value of indent will produce a hanging indentation.
+          That is, the first line will have the full width, and subsequent
+          lines will be indented by the absolute value of indent.
   */
   @property void indent(int propval)
   {
@@ -270,7 +270,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `inputHints` property.
       Returns: Additional hints (beyond `property@Gtk.TextView:input-purpose`)
-      that allow input methods to fine-tune their behaviour.
+        that allow input methods to fine-tune their behaviour.
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -281,7 +281,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `inputHints` property.
       Params:
         propval = Additional hints (beyond `property@Gtk.TextView:input-purpose`)
-        that allow input methods to fine-tune their behaviour.
+          that allow input methods to fine-tune their behaviour.
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -291,9 +291,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `inputPurpose` property.
       Returns: The purpose of this text field.
-      
-      This property can be used by on-screen keyboards and other input
-      methods to adjust their behaviour.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -304,9 +304,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `inputPurpose` property.
       Params:
         propval = The purpose of this text field.
-        
-        This property can be used by on-screen keyboards and other input
-        methods to adjust their behaviour.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -328,12 +328,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `leftMargin` property.
       Returns: The default left margin for text in the text view.
-      
-      Tags in the buffer may override the default.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
+        
+        Tags in the buffer may override the default.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
   */
   @property int leftMargin()
   {
@@ -344,12 +344,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `leftMargin` property.
       Params:
         propval = The default left margin for text in the text view.
-        
-        Tags in the buffer may override the default.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
+          
+          Tags in the buffer may override the default.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
   */
   @property void leftMargin(int propval)
   {
@@ -359,9 +359,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `monospace` property.
       Returns: Whether text should be displayed in a monospace font.
-      
-      If true, set the .monospace style class on the
-      text view to indicate that a monospace font is desired.
+        
+        If true, set the .monospace style class on the
+        text view to indicate that a monospace font is desired.
   */
   @property bool monospace()
   {
@@ -372,9 +372,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `monospace` property.
       Params:
         propval = Whether text should be displayed in a monospace font.
-        
-        If true, set the .monospace style class on the
-        text view to indicate that a monospace font is desired.
+          
+          If true, set the .monospace style class on the
+          text view to indicate that a monospace font is desired.
   */
   @property void monospace(bool propval)
   {
@@ -439,12 +439,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `rightMargin` property.
       Returns: The default right margin for text in the text view.
-      
-      Tags in the buffer may override the default.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
+        
+        Tags in the buffer may override the default.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
   */
   @property int rightMargin()
   {
@@ -455,12 +455,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `rightMargin` property.
       Params:
         propval = The default right margin for text in the text view.
-        
-        Tags in the buffer may override the default.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
+          
+          Tags in the buffer may override the default.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
   */
   @property void rightMargin(int propval)
   {
@@ -482,12 +482,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Get `topMargin` property.
       Returns: The top margin for text in the text view.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
-      
-      Don't confuse this property with `property@Gtk.Widget:margin-top`.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with `property@Gtk.Widget:margin-top`.
   */
   @property int topMargin()
   {
@@ -498,12 +498,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Set `topMargin` property.
       Params:
         propval = The top margin for text in the text view.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
-        
-        Don't confuse this property with `property@Gtk.Widget:margin-top`.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with `property@Gtk.Widget:margin-top`.
   */
   @property void topMargin(int propval)
   {
@@ -613,7 +613,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -635,7 +635,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -672,7 +672,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -767,11 +767,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void getCursorLocations(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle strong, out gdk.rectangle.Rectangle weak)
   {
-    GdkRectangle _strong;
-    GdkRectangle _weak;
-    gtk_text_view_get_cursor_locations(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, &_strong, &_weak);
-    strong = new gdk.rectangle.Rectangle(cast(void*)&_strong, No.Take);
-    weak = new gdk.rectangle.Rectangle(cast(void*)&_weak, No.Take);
+    gtk_text_view_get_cursor_locations(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GdkRectangle*)&strong, cast(GdkRectangle*)&weak);
   }
 
   /**
@@ -886,9 +882,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y)
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, &_iter, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, x, y);
     return _retval;
   }
 
@@ -917,9 +911,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y)
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, &_iter, cast(int*)&trailing, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, cast(int*)&trailing, x, y);
     return _retval;
   }
 
@@ -936,9 +928,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
   {
-    GdkRectangle _location;
-    gtk_text_view_get_iter_location(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, &_location);
-    location = new gdk.rectangle.Rectangle(cast(void*)&_location, No.Take);
+    gtk_text_view_get_iter_location(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GdkRectangle*)&location);
   }
 
   /**
@@ -984,9 +974,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop)
   {
-    GtkTextIter _targetIter;
-    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, &_targetIter, y, cast(int*)&lineTop);
-    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.Take);
+    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&targetIter, y, cast(int*)&lineTop);
   }
 
   /**
@@ -1003,7 +991,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
   {
-    gtk_text_view_get_line_yrange(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
+    gtk_text_view_get_line_yrange(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -1152,9 +1140,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
   {
-    GdkRectangle _visibleRect;
-    gtk_text_view_get_visible_rect(cast(GtkTextView*)this._cPtr, &_visibleRect);
-    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.Take);
+    gtk_text_view_get_visible_rect(cast(GtkTextView*)this._cPtr, cast(GdkRectangle*)&visibleRect);
   }
 
   /**
@@ -1266,7 +1252,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, count);
+    _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, count);
     return _retval;
   }
 
@@ -1360,7 +1346,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
+    _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, withinMargin, useAlign, xalign, yalign);
     return _retval;
   }
 
@@ -1697,7 +1683,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter);
     return _retval;
   }
 
@@ -1721,11 +1707,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `Backspace` signal.
   
       Gets emitted when the user asks for it.
-      
-      The ::backspace signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
+        
+        The ::backspace signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1763,12 +1749,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `CopyClipboard` signal.
   
       Gets emitted to copy the selection to the clipboard.
-      
-      The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>c</kbd> and
-      <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
+        
+        The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>c</kbd> and
+        <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1806,12 +1792,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `CutClipboard` signal.
   
       Gets emitted to cut the selection to the clipboard.
-      
-      The ::cut-clipboard signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>x</kbd> and
-      <kbd>Shift</kbd>+<kbd>Delete</kbd>.
+        
+        The ::cut-clipboard signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>x</kbd> and
+        <kbd>Shift</kbd>+<kbd>Delete</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1849,17 +1835,17 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `DeleteFromCursor` signal.
   
       Gets emitted when the user initiates a text deletion.
-      
-      The ::delete-from-cursor signal is a [keybinding signal](class.SignalAction.html).
-      
-      If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
-      if there is one, otherwise it deletes the requested number
-      of characters.
-      
-      The default bindings for this signal are <kbd>Delete</kbd> for
-      deleting a character, <kbd>Ctrl</kbd>+<kbd>Delete</kbd> for
-      deleting a word and <kbd>Ctrl</kbd>+<kbd>Backspace</kbd> for
-      deleting a word backwards.
+        
+        The ::delete-from-cursor signal is a [keybinding signal](class.SignalAction.html).
+        
+        If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
+        if there is one, otherwise it deletes the requested number
+        of characters.
+        
+        The default bindings for this signal are <kbd>Delete</kbd> for
+        deleting a character, <kbd>Ctrl</kbd>+<kbd>Delete</kbd> for
+        deleting a word and <kbd>Ctrl</kbd>+<kbd>Backspace</kbd> for
+        deleting a word backwards.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1928,7 +1914,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
           `textView` the instance the signal is connected to (optional)
   
           `Returns` `GDK_EVENT_STOP` to stop other handlers from being invoked for the
-            event. `GDK_EVENT_PROPAGATE` to propagate the event further.
+              event. `GDK_EVENT_PROPAGATE` to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1979,11 +1965,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `InsertAtCursor` signal.
   
       Gets emitted when the user initiates the insertion of a
-      fixed string at the cursor.
-      
-      The ::insert-at-cursor signal is a [keybinding signal](class.SignalAction.html).
-      
-      This signal has no default bindings.
+        fixed string at the cursor.
+        
+        The ::insert-at-cursor signal is a [keybinding signal](class.SignalAction.html).
+        
+        This signal has no default bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2028,12 +2014,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `InsertEmoji` signal.
   
       Gets emitted to present the Emoji chooser for the text_view.
-      
-      The ::insert-emoji signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>.</kbd> and
-      <kbd>Ctrl</kbd>+<kbd>;</kbd>
+        
+        The ::insert-emoji signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>.</kbd> and
+        <kbd>Ctrl</kbd>+<kbd>;</kbd>
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2071,30 +2057,30 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `MoveCursor` signal.
   
       Gets emitted when the user initiates a cursor movement.
-      
-      The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
-      If the cursor is not visible in text_view, this signal causes
-      the viewport to be moved instead.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      
-      The default bindings for this signal come in two variants,
-      the variant with the <kbd>Shift</kbd> modifier extends the
-      selection, the variant without it does not.
-      There are too many key combinations to list them all here.
-      
-      $(LIST
-        * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
-          move by individual characters/lines
-        * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
-        * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
-        * <kbd>PgUp</kbd> and <kbd>PgDn</kbd> move vertically by pages
-        * <kbd>Ctrl</kbd>+<kbd>PgUp</kbd> and <kbd>Ctrl</kbd>+<kbd>PgDn</kbd>
-          move horizontally by pages
-      )
+        
+        The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
+        If the cursor is not visible in text_view, this signal causes
+        the viewport to be moved instead.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        
+        The default bindings for this signal come in two variants,
+        the variant with the <kbd>Shift</kbd> modifier extends the
+        selection, the variant without it does not.
+        There are too many key combinations to list them all here.
+        
+        $(LIST
+          * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+            move by individual characters/lines
+          * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
+          * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
+          * <kbd>PgUp</kbd> and <kbd>PgDn</kbd> move vertically by pages
+          * <kbd>Ctrl</kbd>+<kbd>PgUp</kbd> and <kbd>Ctrl</kbd>+<kbd>PgDn</kbd>
+            move horizontally by pages
+        )
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2153,13 +2139,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `MoveViewport` signal.
   
       Gets emitted to move the viewport.
-      
-      The ::move-viewport signal is a [keybinding signal](class.SignalAction.html),
-      which can be bound to key combinations to allow the user to move the viewport,
-      i.e. change what part of the text view is visible in a containing scrolled
-      window.
-      
-      There are no default bindings for this signal.
+        
+        The ::move-viewport signal is a [keybinding signal](class.SignalAction.html),
+        which can be bound to key combinations to allow the user to move the viewport,
+        i.e. change what part of the text view is visible in a containing scrolled
+        window.
+        
+        There are no default bindings for this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2211,13 +2197,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `PasteClipboard` signal.
   
       Gets emitted to paste the contents of the clipboard
-      into the text view.
-      
-      The ::paste-clipboard signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>v</kbd> and
-      <kbd>Shift</kbd>+<kbd>Insert</kbd>.
+        into the text view.
+        
+        The ::paste-clipboard signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>v</kbd> and
+        <kbd>Shift</kbd>+<kbd>Insert</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2255,13 +2241,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `PreeditChanged` signal.
   
       Emitted when preedit text of the active IM changes.
-      
-      If an input method is used, the typed text will not immediately
-      be committed to the buffer. So if you are interested in the text,
-      connect to this signal.
-      
-      This signal is only emitted if the text at the given position
-      is actually editable.
+        
+        If an input method is used, the typed text will not immediately
+        be committed to the buffer. So if you are interested in the text,
+        connect to this signal.
+        
+        This signal is only emitted if the text at the given position
+        is actually editable.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2306,14 +2292,14 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `SelectAll` signal.
   
       Gets emitted to select or unselect the complete contents of the text view.
-      
-      The ::select-all signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>a</kbd> and
-      <kbd>Ctrl</kbd>+<kbd>/</kbd> for selecting and
-      <kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>a</kbd> and
-      <kbd>Ctrl</kbd>+<kbd>\</kbd> for unselecting.
+        
+        The ::select-all signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>a</kbd> and
+        <kbd>Ctrl</kbd>+<kbd>/</kbd> for selecting and
+        <kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>a</kbd> and
+        <kbd>Ctrl</kbd>+<kbd>\</kbd> for unselecting.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2358,13 +2344,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `SetAnchor` signal.
   
       Gets emitted when the user initiates settings the "anchor" mark.
-      
-      The ::set-anchor signal is a [keybinding signal](class.SignalAction.html)
-      which gets emitted when the user initiates setting the "anchor"
-      mark. The "anchor" mark gets placed at the same position as the
-      "insert" mark.
-      
-      This signal has no default bindings.
+        
+        The ::set-anchor signal is a [keybinding signal](class.SignalAction.html)
+        which gets emitted when the user initiates setting the "anchor"
+        mark. The "anchor" mark gets placed at the same position as the
+        "insert" mark.
+        
+        This signal has no default bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2402,11 +2388,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `ToggleCursorVisible` signal.
   
       Gets emitted to toggle the `cursor-visible` property.
-      
-      The ::toggle-cursor-visible signal is a
-      [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>F7</kbd>.
+        
+        The ::toggle-cursor-visible signal is a
+        [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>F7</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2444,10 +2430,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       Connect to `ToggleOverwrite` signal.
   
       Gets emitted to toggle the overwrite mode of the text view.
-      
-      The ::toggle-overwrite signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>Insert</kbd>.
+        
+        The ::toggle-overwrite signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Insert</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

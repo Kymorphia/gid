@@ -48,7 +48,7 @@ class ShortcutLabel : gtk.box.Box
   /**
       Get `accelerator` property.
       Returns: The accelerator that @self displays. See #GtkShortcutsShortcut:accelerator
-      for the accepted syntax.
+        for the accepted syntax.
   */
   @property string accelerator()
   {
@@ -59,7 +59,7 @@ class ShortcutLabel : gtk.box.Box
       Set `accelerator` property.
       Params:
         propval = The accelerator that @self displays. See #GtkShortcutsShortcut:accelerator
-        for the accepted syntax.
+          for the accepted syntax.
   */
   @property void accelerator(string propval)
   {

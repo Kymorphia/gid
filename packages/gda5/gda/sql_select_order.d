@@ -3,7 +3,6 @@ module gda.sql_select_order;
 
 import gda.c.functions;
 import gda.c.types;
-import gda.sql_any_part;
 import gda.sql_expr;
 import gda.types;
 import gid.gid;
@@ -13,7 +12,7 @@ import gid.gid;
 */
 class SqlSelectOrder
 {
-  GdaSqlSelectOrder cInstance;
+  GdaSqlSelectOrder _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +20,7 @@ class SqlSelectOrder
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_select_order.SqlSelectOrder");
 
-    cInstance = *cast(GdaSqlSelectOrder*)ptr;
+    _cInstance = *cast(GdaSqlSelectOrder*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,16 +29,7 @@ class SqlSelectOrder
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
-  }
-
-  /**
-      Get `any` field.
-      Returns: inheritance structure
-  */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlSelectOrder*)this._cPtr).any, No.Take);
+    return cast(void*)&_cInstance;
   }
 
   /**

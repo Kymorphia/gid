@@ -246,9 +246,9 @@ template PaintableT()
       Connect to `InvalidateContents` signal.
   
       Emitted when the contents of the paintable change.
-      
-      Examples for such an event would be videos changing to the next frame or
-      the icon theme for an icon changing.
+        
+        Examples for such an event would be videos changing to the next frame or
+        the icon theme for an icon changing.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -286,15 +286,15 @@ template PaintableT()
       Connect to `InvalidateSize` signal.
   
       Emitted when the intrinsic size of the paintable changes.
-      
-      This means the values reported by at least one of
-      [gdk.paintable.Paintable.getIntrinsicWidth],
-      [gdk.paintable.Paintable.getIntrinsicHeight] or
-      [gdk.paintable.Paintable.getIntrinsicAspectRatio]
-      has changed.
-      
-      Examples for such an event would be a paintable displaying
-      the contents of a toplevel surface being resized.
+        
+        This means the values reported by at least one of
+        [gdk.paintable.Paintable.getIntrinsicWidth],
+        [gdk.paintable.Paintable.getIntrinsicHeight] or
+        [gdk.paintable.Paintable.getIntrinsicAspectRatio]
+        has changed.
+        
+        Examples for such an event would be a paintable displaying
+        the contents of a toplevel surface being resized.
   
       Params:
         callback = signal callback delegate or function to connect

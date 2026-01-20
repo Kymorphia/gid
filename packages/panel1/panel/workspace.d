@@ -61,9 +61,9 @@ class Workspace : adw.application_window.ApplicationWindow
   /**
       Get `id` property.
       Returns: The "id" of the workspace.
-      
-      This is generally used by applications to help destinguish between
-      types of workspaces, particularly when saving session state.
+        
+        This is generally used by applications to help destinguish between
+        types of workspaces, particularly when saving session state.
   */
   @property string id()
   {
@@ -74,9 +74,9 @@ class Workspace : adw.application_window.ApplicationWindow
       Set `id` property.
       Params:
         propval = The "id" of the workspace.
-        
-        This is generally used by applications to help destinguish between
-        types of workspaces, particularly when saving session state.
+          
+          This is generally used by applications to help destinguish between
+          types of workspaces, particularly when saving session state.
   */
   @property void id(string propval)
   {

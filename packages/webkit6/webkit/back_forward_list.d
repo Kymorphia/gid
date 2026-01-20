@@ -182,10 +182,10 @@ class BackForwardList : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       This signal is emitted when back_forward_list changes. This happens
-      when the current item is updated, a new item is added or one or more
-      items are removed. Note that both item_added and items_removed can
-      null when only the current item is updated. Items are only removed
-      when the list is cleared or the maximum items limit is reached.
+        when the current item is updated, a new item is added or one or more
+        items are removed. Note that both item_added and items_removed can
+        null when only the current item is updated. Items are only removed
+        when the list is cleared or the maximum items limit is reached.
   
       Params:
         callback = signal callback delegate or function to connect

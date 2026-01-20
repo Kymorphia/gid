@@ -39,7 +39,7 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
   /**
       Get `segmentEncoding` property.
       Returns: After splitting a path into components, decode the path
-      components before parsing according to this scheme.
+        components before parsing according to this scheme.
   */
   @property arrowdataset.types.SegmentEncoding segmentEncoding()
   {
@@ -50,7 +50,7 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
       Set `segmentEncoding` property.
       Params:
         propval = After splitting a path into components, decode the path
-        components before parsing according to this scheme.
+          components before parsing according to this scheme.
   */
   @property void segmentEncoding(arrowdataset.types.SegmentEncoding propval)
   {

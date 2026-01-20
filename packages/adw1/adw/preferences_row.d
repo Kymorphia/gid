@@ -57,9 +57,9 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   /**
       Get `title` property.
       Returns: The title of the preference represented by this row.
-      
-      The title is interpreted as Pango markup unless
-      `property@PreferencesRow:use-markup` is set to `FALSE`.
+        
+        The title is interpreted as Pango markup unless
+        `property@PreferencesRow:use-markup` is set to `FALSE`.
   */
   @property string title()
   {
@@ -70,9 +70,9 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Set `title` property.
       Params:
         propval = The title of the preference represented by this row.
-        
-        The title is interpreted as Pango markup unless
-        `property@PreferencesRow:use-markup` is set to `FALSE`.
+          
+          The title is interpreted as Pango markup unless
+          `property@PreferencesRow:use-markup` is set to `FALSE`.
   */
   @property void title(string propval)
   {
@@ -82,8 +82,8 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   /**
       Get `titleSelectable` property.
       Returns: Whether the user can copy the title from the label.
-      
-      See also [gtk.label.Label.selectable].
+        
+        See also [gtk.label.Label.selectable].
   */
   @property bool titleSelectable()
   {
@@ -94,8 +94,8 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Set `titleSelectable` property.
       Params:
         propval = Whether the user can copy the title from the label.
-        
-        See also [gtk.label.Label.selectable].
+          
+          See also [gtk.label.Label.selectable].
   */
   @property void titleSelectable(bool propval)
   {
@@ -105,10 +105,10 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   /**
       Get `useMarkup` property.
       Returns: Whether to use Pango markup for the title label.
-      
-      Subclasses may also use it for other labels, such as subtitle.
-      
-      See also `func@Pango.parse_markup`.
+        
+        Subclasses may also use it for other labels, such as subtitle.
+        
+        See also `func@Pango.parse_markup`.
   */
   @property bool useMarkup()
   {
@@ -119,10 +119,10 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Set `useMarkup` property.
       Params:
         propval = Whether to use Pango markup for the title label.
-        
-        Subclasses may also use it for other labels, such as subtitle.
-        
-        See also `func@Pango.parse_markup`.
+          
+          Subclasses may also use it for other labels, such as subtitle.
+          
+          See also `func@Pango.parse_markup`.
   */
   @property void useMarkup(bool propval)
   {

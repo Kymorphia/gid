@@ -79,8 +79,8 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   /**
       Get `heading` property.
       Returns: The text to show at the top of the dialog.
-      
-      The string may contain Pango markup.
+        
+        The string may contain Pango markup.
   */
   @property string heading()
   {
@@ -91,8 +91,8 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
       Set `heading` property.
       Params:
         propval = The text to show at the top of the dialog.
-        
-        The string may contain Pango markup.
+          
+          The string may contain Pango markup.
   */
   @property void heading(string propval)
   {

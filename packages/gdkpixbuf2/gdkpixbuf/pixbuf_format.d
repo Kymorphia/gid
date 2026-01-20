@@ -49,7 +49,7 @@ class PixbufFormat : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -181,7 +181,7 @@ class PixbufFormat : gobject.boxed.Boxed
   /**
       Get `license` field.
       Returns: a string containing license information, typically set to
-        shorthands like "GPL", "LGPL", etc.
+          shorthands like "GPL", "LGPL", etc.
   */
   @property string license()
   {
@@ -192,7 +192,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Set `license` field.
       Params:
         propval = a string containing license information, typically set to
-          shorthands like "GPL", "LGPL", etc.
+            shorthands like "GPL", "LGPL", etc.
   */
   @property void license(string propval)
   {
@@ -240,8 +240,8 @@ class PixbufFormat : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -278,8 +278,8 @@ class PixbufFormat : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);

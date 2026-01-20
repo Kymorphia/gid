@@ -52,7 +52,7 @@ class GlyphItem : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -117,7 +117,7 @@ class GlyphItem : gobject.boxed.Boxed
   /**
       Get `yOffset` field.
       Returns: shift of the baseline, relative to the baseline
-        of the containing line. Positive values shift upwards
+          of the containing line. Positive values shift upwards
   */
   @property int yOffset()
   {
@@ -128,7 +128,7 @@ class GlyphItem : gobject.boxed.Boxed
       Set `yOffset` field.
       Params:
         propval = shift of the baseline, relative to the baseline
-          of the containing line. Positive values shift upwards
+            of the containing line. Positive values shift upwards
   */
   @property void yOffset(int propval)
   {
@@ -138,7 +138,7 @@ class GlyphItem : gobject.boxed.Boxed
   /**
       Get `startXOffset` field.
       Returns: horizontal displacement to apply before the
-        glyph item. Positive values shift right
+          glyph item. Positive values shift right
   */
   @property int startXOffset()
   {
@@ -149,7 +149,7 @@ class GlyphItem : gobject.boxed.Boxed
       Set `startXOffset` field.
       Params:
         propval = horizontal displacement to apply before the
-          glyph item. Positive values shift right
+            glyph item. Positive values shift right
   */
   @property void startXOffset(int propval)
   {
@@ -159,7 +159,7 @@ class GlyphItem : gobject.boxed.Boxed
   /**
       Get `endXOffset` field.
       Returns: horizontal displacement to apply after th
-        glyph item. Positive values shift right
+          glyph item. Positive values shift right
   */
   @property int endXOffset()
   {
@@ -170,7 +170,7 @@ class GlyphItem : gobject.boxed.Boxed
       Set `endXOffset` field.
       Params:
         propval = horizontal displacement to apply after th
-          glyph item. Positive values shift right
+            glyph item. Positive values shift right
   */
   @property void endXOffset(int propval)
   {

@@ -5,11 +5,8 @@ import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
-import glib.hook;
-import glib.hook_list;
 import glib.iochannel;
 import glib.match_info;
-import glib.node;
 import glib.option_context;
 import glib.option_group;
 import glib.scanner;
@@ -616,63 +613,16 @@ alias HashFunc = uint delegate(const(void)* key);
 
 /**
     Defines the type of a hook function that can be invoked
-    by [glib.hook_list.HookList.invokeCheck].
+    by [glib.types.HookList.invokeCheck].
     Returns: false if the #GHook should be destroyed
 */
 alias HookCheckFunc = bool delegate();
 
 /**
-    Defines the type of function used by [glib.hook_list.HookList.marshalCheck].
-
-    Params:
-      hook = a #GHook
-    Returns: false if hook should be destroyed
-*/
-alias HookCheckMarshaller = bool delegate(glib.hook.Hook hook);
-
-/**
-    Defines the type of function used to compare #GHook elements in
-    [glib.hook.Hook.insertSorted].
-
-    Params:
-      newHook = the #GHook being inserted
-      sibling = the #GHook to compare with new_hook
-    Returns: a value <= 0 if new_hook should be before sibling
-*/
-alias HookCompareFunc = int delegate(glib.hook.Hook newHook, glib.hook.Hook sibling);
-
-/**
-    Defines the type of function to be called when a hook in a
-    list of hooks gets finalized.
-
-    Params:
-      hookList = a #GHookList
-      hook = the hook in hook_list that gets finalized
-*/
-alias HookFinalizeFunc = void delegate(glib.hook_list.HookList hookList, glib.hook.Hook hook);
-
-/**
-    Defines the type of the function passed to [glib.hook.Hook.find].
-
-    Params:
-      hook = a #GHook
-    Returns: true if the required #GHook has been found
-*/
-alias HookFindFunc = bool delegate(glib.hook.Hook hook);
-
-/**
     Defines the type of a hook function that can be invoked
-    by [glib.hook_list.HookList.invoke].
+    by [glib.types.HookList.invoke].
 */
 alias HookFunc = void delegate();
-
-/**
-    Defines the type of function used by [glib.hook_list.HookList.marshal].
-
-    Params:
-      hook = a #GHook
-*/
-alias HookMarshaller = void delegate(glib.hook.Hook hook);
 
 /**
     Specifies the type of function passed to [glib.global.ioAddWatch] or
@@ -706,28 +656,6 @@ alias IOFunc = bool delegate(glib.iochannel.IOChannel source, glib.types.IOCondi
       message = the message to process
 */
 alias LogFunc = void delegate(string logDomain, glib.types.LogLevelFlags logLevel, string message);
-
-/**
-    Specifies the type of function passed to [glib.node.Node.childrenForeach].
-    The function is called with each child node, together with the user
-    data passed to [glib.node.Node.childrenForeach].
-
-    Params:
-      node = a #GNode.
-*/
-alias NodeForeachFunc = void delegate(glib.node.Node node);
-
-/**
-    Specifies the type of function passed to [glib.node.Node.traverse]. The
-    function is called with each of the nodes visited, together with the
-    user data passed to [glib.node.Node.traverse]. If the function returns
-    true, then the traversal is stopped.
-
-    Params:
-      node = a #GNode.
-    Returns: true to stop the traversal.
-*/
-alias NodeTraverseFunc = bool delegate(glib.node.Node node);
 
 /**
     The type of function to be passed as callback for `G_OPTION_ARG_CALLBACK`

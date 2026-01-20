@@ -83,7 +83,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   /**
       Get `discontWait` property.
       Returns: A window of time in nanoseconds to wait before creating a discontinuity as
-      a result of breaching the drift-tolerance.
+        a result of breaching the drift-tolerance.
   */
   @property ulong discontWait()
   {
@@ -94,7 +94,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Set `discontWait` property.
       Params:
         propval = A window of time in nanoseconds to wait before creating a discontinuity as
-        a result of breaching the drift-tolerance.
+          a result of breaching the drift-tolerance.
   */
   @property void discontWait(ulong propval)
   {
@@ -104,7 +104,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   /**
       Get `driftTolerance` property.
       Returns: Controls the amount of time in microseconds that clocks are allowed
-      to drift before resynchronisation happens.
+        to drift before resynchronisation happens.
   */
   @property long driftTolerance()
   {
@@ -115,7 +115,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Set `driftTolerance` property.
       Params:
         propval = Controls the amount of time in microseconds that clocks are allowed
-        to drift before resynchronisation happens.
+          to drift before resynchronisation happens.
   */
   @property void driftTolerance(long propval)
   {
@@ -278,7 +278,6 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gst_audio_base_sink_set_custom_slaving_callback(cast(GstAudioBaseSink*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);

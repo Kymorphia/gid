@@ -201,26 +201,26 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Connect to `NewConnection` signal.
   
       Emitted when a new authenticated connection has been made. Use
-      [gio.dbus_connection.DBusConnection.getPeerCredentials] to figure out what
-      identity (if any), was authenticated.
-      
-      If you want to accept the connection, take a reference to the
-      connection object and return true. When you are done with the
-      connection call [gio.dbus_connection.DBusConnection.close] and give up your
-      reference. Note that the other peer may disconnect at any time -
-      a typical thing to do when accepting a connection is to listen to
-      the #GDBusConnection::closed signal.
-      
-      If #GDBusServer:flags contains [gio.types.DBusServerFlags.RunInThread]
-      then the signal is emitted in a new thread dedicated to the
-      connection. Otherwise the signal is emitted in the
-      [thread-default main context][g-main-context-push-thread-default]
-      of the thread that server was constructed in.
-      
-      You are guaranteed that signal handlers for this signal runs
-      before incoming messages on connection are processed. This means
-      that it's suitable to call [gio.dbus_connection.DBusConnection.registerObject] or
-      similar from the signal handler.
+        [gio.dbus_connection.DBusConnection.getPeerCredentials] to figure out what
+        identity (if any), was authenticated.
+        
+        If you want to accept the connection, take a reference to the
+        connection object and return true. When you are done with the
+        connection call [gio.dbus_connection.DBusConnection.close] and give up your
+        reference. Note that the other peer may disconnect at any time -
+        a typical thing to do when accepting a connection is to listen to
+        the #GDBusConnection::closed signal.
+        
+        If #GDBusServer:flags contains [gio.types.DBusServerFlags.RunInThread]
+        then the signal is emitted in a new thread dedicated to the
+        connection. Otherwise the signal is emitted in the
+        [thread-default main context][g-main-context-push-thread-default]
+        of the thread that server was constructed in.
+        
+        You are guaranteed that signal handlers for this signal runs
+        before incoming messages on connection are processed. This means
+        that it's suitable to call [gio.dbus_connection.DBusConnection.registerObject] or
+        similar from the signal handler.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -232,7 +232,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
           `dBusServer` the instance the signal is connected to (optional)
   
           `Returns` true to claim connection, false to let other handlers
-          run.
+            run.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

@@ -13,7 +13,7 @@ import gid.gid;
 */
 class EventDND
 {
-  GdkEventDND cInstance;
+  GdkEventDND _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class EventDND
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_dnd.EventDND");
 
-    cInstance = *cast(GdkEventDND*)ptr;
+    _cInstance = *cast(GdkEventDND*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,14 +30,14 @@ class EventDND
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
-        [gdk.types.EventType.DragMotion], [gdk.types.EventType.DragStatus], [gdk.types.EventType.DropStart] or
-        [gdk.types.EventType.DropFinished]).
+          [gdk.types.EventType.DragMotion], [gdk.types.EventType.DragStatus], [gdk.types.EventType.DropStart] or
+          [gdk.types.EventType.DropFinished]).
   */
   @property gdk.types.EventType type()
   {
@@ -48,8 +48,8 @@ class EventDND
       Set `type` field.
       Params:
         propval = the type of the event ([gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
-          [gdk.types.EventType.DragMotion], [gdk.types.EventType.DragStatus], [gdk.types.EventType.DropStart] or
-          [gdk.types.EventType.DropFinished]).
+            [gdk.types.EventType.DragMotion], [gdk.types.EventType.DragStatus], [gdk.types.EventType.DropStart] or
+            [gdk.types.EventType.DropFinished]).
   */
   @property void type(gdk.types.EventType propval)
   {
@@ -137,7 +137,7 @@ class EventDND
   /**
       Get `xRoot` field.
       Returns: the x coordinate of the pointer relative to the root of the
-        screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+          screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
   */
   @property short xRoot()
   {
@@ -148,7 +148,7 @@ class EventDND
       Set `xRoot` field.
       Params:
         propval = the x coordinate of the pointer relative to the root of the
-          screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+            screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
   */
   @property void xRoot(short propval)
   {
@@ -158,7 +158,7 @@ class EventDND
   /**
       Get `yRoot` field.
       Returns: the y coordinate of the pointer relative to the root of the
-        screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+          screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
   */
   @property short yRoot()
   {
@@ -169,7 +169,7 @@ class EventDND
       Set `yRoot` field.
       Params:
         propval = the y coordinate of the pointer relative to the root of the
-          screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+            screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
   */
   @property void yRoot(short propval)
   {

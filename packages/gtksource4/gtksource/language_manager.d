@@ -98,8 +98,8 @@ class LanguageManager : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -122,8 +122,8 @@ class LanguageManager : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -206,6 +206,7 @@ class LanguageManager : gobject.object.ObjectWrap
       _tmpdirs ~= s.toCString(No.Alloc);
     _tmpdirs ~= null;
     char** _dirs = _tmpdirs.ptr;
+
     gtk_source_language_manager_set_search_path(cast(GtkSourceLanguageManager*)this._cPtr, _dirs);
   }
 }

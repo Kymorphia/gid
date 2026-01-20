@@ -21,7 +21,7 @@ import gid.gid;
 */
 class EventProximity
 {
-  GdkEventProximity cInstance;
+  GdkEventProximity _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -29,7 +29,7 @@ class EventProximity
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_proximity.EventProximity");
 
-    cInstance = *cast(GdkEventProximity*)ptr;
+    _cInstance = *cast(GdkEventProximity*)ptr;
 
     if (take)
       gFree(ptr);
@@ -38,7 +38,7 @@ class EventProximity
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -121,7 +121,7 @@ class EventProximity
   /**
       Get `device` field.
       Returns: the master device that the event originated from. Use
-      [gdk.event.Event.getSourceDevice] to get the slave device.
+        [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property gdk.device.Device device()
   {
@@ -132,7 +132,7 @@ class EventProximity
       Set `device` field.
       Params:
         propval = the master device that the event originated from. Use
-        [gdk.event.Event.getSourceDevice] to get the slave device.
+          [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property void device(gdk.device.Device propval)
   {

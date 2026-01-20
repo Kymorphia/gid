@@ -49,9 +49,9 @@ class ShortcutLabel : gtk.widget.Widget
   /**
       Get `accelerator` property.
       Returns: The accelerator that @self displays.
-      
-      See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
-      for the accepted syntax.
+        
+        See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
+        for the accepted syntax.
   */
   @property string accelerator()
   {
@@ -62,9 +62,9 @@ class ShortcutLabel : gtk.widget.Widget
       Set `accelerator` property.
       Params:
         propval = The accelerator that @self displays.
-        
-        See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
-        for the accepted syntax.
+          
+          See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
+          for the accepted syntax.
   */
   @property void accelerator(string propval)
   {

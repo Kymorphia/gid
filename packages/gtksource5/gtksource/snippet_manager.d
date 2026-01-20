@@ -77,8 +77,8 @@ class SnippetManager : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -141,8 +141,8 @@ class SnippetManager : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -201,6 +201,7 @@ class SnippetManager : gobject.object.ObjectWrap
       _tmpdirs ~= s.toCString(No.Alloc);
     _tmpdirs ~= null;
     const(char*)* _dirs = _tmpdirs.ptr;
+
     gtk_source_snippet_manager_set_search_path(cast(GtkSourceSnippetManager*)this._cPtr, _dirs);
   }
 }

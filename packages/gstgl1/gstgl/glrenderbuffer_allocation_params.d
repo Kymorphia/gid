@@ -25,7 +25,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -108,7 +108,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   this(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height)
   {
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, renderbufferFormat, width, height);
+    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, renderbufferFormat, width, height);
     this(_cretval, Yes.Take);
   }
 
@@ -123,9 +123,8 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
+    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
     auto _retval = _cretval ? new gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

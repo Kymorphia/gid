@@ -12,7 +12,7 @@ import gstsdp.types;
 */
 class SDPTime
 {
-  GstSDPTime cInstance;
+  GstSDPTime _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class SDPTime
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdptime.SDPTime");
 
-    cInstance = *cast(GstSDPTime*)ptr;
+    _cInstance = *cast(GstSDPTime*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,13 +29,13 @@ class SDPTime
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `start` field.
       Returns: start time for the conference. The value is the decimal
-          representation of Network Time Protocol (NTP) time values in seconds
+            representation of Network Time Protocol (NTP) time values in seconds
   */
   @property string start()
   {
@@ -46,7 +46,7 @@ class SDPTime
       Set `start` field.
       Params:
         propval = start time for the conference. The value is the decimal
-            representation of Network Time Protocol (NTP) time values in seconds
+              representation of Network Time Protocol (NTP) time values in seconds
   */
   @property void start(string propval)
   {
@@ -57,7 +57,7 @@ class SDPTime
   /**
       Get `stop` field.
       Returns: stop time for the conference. The value is the decimal
-          representation of Network Time Protocol (NTP) time values in seconds
+            representation of Network Time Protocol (NTP) time values in seconds
   */
   @property string stop()
   {
@@ -68,7 +68,7 @@ class SDPTime
       Set `stop` field.
       Params:
         propval = stop time for the conference. The value is the decimal
-            representation of Network Time Protocol (NTP) time values in seconds
+              representation of Network Time Protocol (NTP) time values in seconds
   */
   @property void stop(string propval)
   {
@@ -107,6 +107,7 @@ class SDPTime
       _tmprepeat ~= s.toCString(No.Alloc);
     _tmprepeat ~= null;
     const(char*)* _repeat = _tmprepeat.ptr;
+
     _cretval = gst_sdp_time_set(cast(GstSDPTime*)this._cPtr, _start, _stop, _repeat);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

@@ -182,9 +182,9 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Get `nPlanes` property.
       Returns: The number of planes of the texture.
-      
-      Note that you can set properties for other planes,
-      but they will be ignored when constructing the texture.
+        
+        Note that you can set properties for other planes,
+        but they will be ignored when constructing the texture.
   */
   @property uint nPlanes()
   {
@@ -195,9 +195,9 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Set `nPlanes` property.
       Params:
         propval = The number of planes of the texture.
-        
-        Note that you can set properties for other planes,
-        but they will be ignored when constructing the texture.
+          
+          Note that you can set properties for other planes,
+          but they will be ignored when constructing the texture.
   */
   @property void nPlanes(uint propval)
   {
@@ -207,8 +207,8 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Get `premultiplied` property.
       Returns: Whether the alpha channel is premultiplied into the others.
-      
-      Only relevant if the format has alpha.
+        
+        Only relevant if the format has alpha.
   */
   @property bool premultiplied()
   {
@@ -219,8 +219,8 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Set `premultiplied` property.
       Params:
         propval = Whether the alpha channel is premultiplied into the others.
-        
-        Only relevant if the format has alpha.
+          
+          Only relevant if the format has alpha.
   */
   @property void premultiplied(bool propval)
   {
@@ -333,7 +333,6 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     GdkTexture* _cretval;
     GError *_err;
     _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)this._cPtr, _destroyCB, data, &_err);

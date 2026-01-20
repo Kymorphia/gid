@@ -46,11 +46,13 @@ class Query : gobject.boxed.Boxed
   /**
       Create a `query.Query` boxed type.
       Params:
+        miniObject = The parent #GstMiniObject type
         type = the #GstQueryType
   */
-  this(gst.types.QueryType type = gst.types.QueryType.init)
+  this(gst.mini_object.MiniObject miniObject = gst.mini_object.MiniObject.init, gst.types.QueryType type = gst.types.QueryType.init)
   {
     super(gMalloc(GstQuery.sizeof), Yes.Take);
+    this.miniObject = miniObject;
     this.type = type;
   }
 
@@ -63,7 +65,7 @@ class Query : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -92,6 +94,16 @@ class Query : gobject.boxed.Boxed
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstQuery*)this._cPtr).miniObject);
+  }
+
+  /**
+      Set `miniObject` field.
+      Params:
+        propval = The parent #GstMiniObject type
+  */
+  @property void miniObject(gst.mini_object.MiniObject propval)
+  {
+    (cast(GstQuery*)this._cPtr).miniObject = cast(GstMiniObject)propval;
   }
 
   /**
@@ -264,10 +276,10 @@ class Query : gobject.boxed.Boxed
         structure = a structure for the query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newCustom(gst.types.QueryType type, gst.structure.Structure structure = null)
+  static gst.query.Query newCustom(gst.types.QueryType type, gst.structure.Structure structure)
   {
     GstQuery* _cretval;
-    _cretval = gst_query_new_custom(type, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
+    _cretval = gst_query_new_custom(type, cast(GstStructure*)&structure);
     auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -444,9 +456,9 @@ class Query : gobject.boxed.Boxed
         api = the metadata API
         params = API specific parameters
   */
-  void addAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
+  void addAllocationMeta(gobject.types.GType api, gst.structure.Structure params)
   {
-    gst_query_add_allocation_meta(cast(GstQuery*)this._cPtr, api, params ? cast(const(GstStructure)*)params._cPtr(No.Dup) : null);
+    gst_query_add_allocation_meta(cast(GstQuery*)this._cPtr, api, cast(const(GstStructure)*)&params);
   }
 
   /**
@@ -456,9 +468,9 @@ class Query : gobject.boxed.Boxed
         allocator = the memory allocator
         params = a #GstAllocationParams
   */
-  void addAllocationParam(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
+  void addAllocationParam(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params)
   {
-    gst_query_add_allocation_param(cast(GstQuery*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params._cPtr(No.Dup) : null);
+    gst_query_add_allocation_param(cast(GstQuery*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
   }
 
   /**
@@ -594,7 +606,9 @@ class Query : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_query_get_structure(cast(GstQuery*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -872,7 +886,7 @@ class Query : gobject.boxed.Boxed
     gobject.types.GType _retval;
     const(GstStructure)* _params;
     _retval = gst_query_parse_nth_allocation_meta(cast(GstQuery*)this._cPtr, index, &_params);
-    params = new gst.structure.Structure(cast(void*)_params, No.Take);
+    params = *cast(Structure*)_params;
     return _retval;
   }
 
@@ -888,10 +902,8 @@ class Query : gobject.boxed.Boxed
   void parseNthAllocationParam(uint index, out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_query_parse_nth_allocation_param(cast(GstQuery*)this._cPtr, index, &_allocator, &_params);
+    gst_query_parse_nth_allocation_param(cast(GstQuery*)this._cPtr, index, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /**
@@ -1274,9 +1286,9 @@ class Query : gobject.boxed.Boxed
         allocator = new allocator to set
         params = parameters for the allocator
   */
-  void setNthAllocationParam(uint index, gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
+  void setNthAllocationParam(uint index, gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params)
   {
-    gst_query_set_nth_allocation_param(cast(GstQuery*)this._cPtr, index, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params._cPtr(No.Dup) : null);
+    gst_query_set_nth_allocation_param(cast(GstQuery*)this._cPtr, index, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
   }
 
   /**
@@ -1417,7 +1429,9 @@ class Query : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_query_writable_structure(cast(GstQuery*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 }

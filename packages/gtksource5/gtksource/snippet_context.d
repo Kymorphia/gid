@@ -154,9 +154,9 @@ class SnippetContext : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       The signal is emitted when a change has been
-      discovered in one of the chunks of the snippet which has
-      caused a variable or other dynamic data within the context
-      to have changed.
+        discovered in one of the chunks of the snippet which has
+        caused a variable or other dynamic data within the context
+        to have changed.
   
       Params:
         callback = signal callback delegate or function to connect

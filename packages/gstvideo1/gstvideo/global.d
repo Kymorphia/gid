@@ -415,7 +415,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
 bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
   bool _retval;
-  _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
+  _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(cast(GstStructure*)&config, cast(GstVideoAlignment*)&align_);
   return _retval;
 }
 
@@ -429,7 +429,7 @@ bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.
 */
 void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
-  gst_buffer_pool_config_set_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, align_ ? cast(const(GstVideoAlignment)*)align_._cPtr : null);
+  gst_buffer_pool_config_set_video_alignment(cast(GstStructure*)&config, cast(const(GstVideoAlignment)*)&align_);
 }
 
 /**
@@ -680,7 +680,6 @@ void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst
     (*_dlg)(sample ? new gst.sample.Sample(cast(void*)sample, No.Take) : null, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
   gst_video_convert_sample_async(sample ? cast(GstSample*)sample._cPtr(No.Dup) : null, toCaps ? cast(const(GstCaps)*)toCaps._cPtr(No.Dup) : null, timeout, _callbackCB, _callback, _callbackDestroyCB);

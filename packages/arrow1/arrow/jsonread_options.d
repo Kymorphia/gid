@@ -40,7 +40,7 @@ class JSONReadOptions : gobject.object.ObjectWrap
   /**
       Get `allowNewlinesInValues` property.
       Returns: Whether objects may be printed across multiple lines (for example pretty printed).
-      if false, input must end with an empty line.
+        if false, input must end with an empty line.
   */
   @property bool allowNewlinesInValues()
   {
@@ -51,7 +51,7 @@ class JSONReadOptions : gobject.object.ObjectWrap
       Set `allowNewlinesInValues` property.
       Params:
         propval = Whether objects may be printed across multiple lines (for example pretty printed).
-        if false, input must end with an empty line.
+          if false, input must end with an empty line.
   */
   @property void allowNewlinesInValues(bool propval)
   {
@@ -61,7 +61,7 @@ class JSONReadOptions : gobject.object.ObjectWrap
   /**
       Get `blockSize` property.
       Returns: Block size we request from the IO layer; also determines the size
-      of chunks when #GArrowJSONReadOptions:use-threads is true.
+        of chunks when #GArrowJSONReadOptions:use-threads is true.
   */
   @property int blockSize()
   {
@@ -72,7 +72,7 @@ class JSONReadOptions : gobject.object.ObjectWrap
       Set `blockSize` property.
       Params:
         propval = Block size we request from the IO layer; also determines the size
-        of chunks when #GArrowJSONReadOptions:use-threads is true.
+          of chunks when #GArrowJSONReadOptions:use-threads is true.
   */
   @property void blockSize(int propval)
   {

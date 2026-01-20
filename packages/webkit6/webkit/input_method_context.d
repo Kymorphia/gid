@@ -243,8 +243,8 @@ class InputMethodContext : gobject.object.ObjectWrap
       Connect to `Committed` signal.
   
       Emitted when a complete input sequence has been entered by the user.
-      This can be a single character immediately after a key press or the
-      final result of preediting.
+        This can be a single character immediately after a key press or the
+        final result of preediting.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -289,7 +289,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Connect to `DeleteSurrounding` signal.
   
       Emitted when the input method wants to delete the context surrounding the cursor.
-      If offset is a negative value, it means a position before the cursor.
+        If offset is a negative value, it means a position before the cursor.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -341,8 +341,8 @@ class InputMethodContext : gobject.object.ObjectWrap
       Connect to `PreeditChanged` signal.
   
       Emitted whenever the preedit sequence currently being entered has changed.
-      It is also emitted at the end of a preedit sequence, in which case
-      [webkit.input_method_context.InputMethodContext.getPreedit] returns the empty string.
+        It is also emitted at the end of a preedit sequence, in which case
+        [webkit.input_method_context.InputMethodContext.getPreedit] returns the empty string.
   
       Params:
         callback = signal callback delegate or function to connect

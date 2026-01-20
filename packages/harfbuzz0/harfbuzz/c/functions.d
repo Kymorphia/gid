@@ -31,9 +31,6 @@ __gshared extern(C)
   // DrawFuncs
   GType function() c_hb_gobject_draw_funcs_get_type; ///
 
-  // DrawState
-  GType function() c_hb_gobject_draw_state_get_type; ///
-
   // Face
   GType function() c_hb_gobject_face_get_type; ///
 
@@ -45,12 +42,6 @@ __gshared extern(C)
 
   // FontFuncs
   GType function() c_hb_gobject_font_funcs_get_type; ///
-
-  // GlyphInfo
-  GType function() c_hb_gobject_glyph_info_get_type; ///
-
-  // GlyphPosition
-  GType function() c_hb_gobject_glyph_position_get_type; ///
 
   // Map
   GType function() c_hb_gobject_map_get_type; ///
@@ -81,6 +72,9 @@ __gshared extern(C)
 
   // UserDataKey
   GType function() c_hb_gobject_user_data_key_get_type; ///
+
+  // DrawState
+  GType function() c_hb_gobject_draw_state_get_type; ///
 
   // global
   hb_ot_name_id_t function(hb_face_t* face, hb_aat_layout_feature_type_t featureType) c_hb_aat_layout_feature_type_get_name_id; ///
@@ -581,6 +575,12 @@ __gshared extern(C)
   hb_script_t function(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode) c_hb_unicode_script; ///
   hb_bool_t function(const(ubyte)* str, int len, hb_variation_t* variation) c_hb_variation_from_string; ///
   void function(hb_variation_t* variation, char* buf, uint size) c_hb_variation_to_string; ///
+
+  // GlyphInfo
+  GType function() c_hb_gobject_glyph_info_get_type; ///
+
+  // GlyphPosition
+  GType function() c_hb_gobject_glyph_position_get_type; ///
 }
 
 // Blob
@@ -608,11 +608,6 @@ alias hb_gobject_color_stop_get_type = c_hb_gobject_color_stop_get_type;
 /** */
 alias hb_gobject_draw_funcs_get_type = c_hb_gobject_draw_funcs_get_type;
 
-// DrawState
-
-/** */
-alias hb_gobject_draw_state_get_type = c_hb_gobject_draw_state_get_type;
-
 // Face
 
 /** */
@@ -632,16 +627,6 @@ alias hb_gobject_font_get_type = c_hb_gobject_font_get_type;
 
 /** */
 alias hb_gobject_font_funcs_get_type = c_hb_gobject_font_funcs_get_type;
-
-// GlyphInfo
-
-/** */
-alias hb_gobject_glyph_info_get_type = c_hb_gobject_glyph_info_get_type;
-
-// GlyphPosition
-
-/** */
-alias hb_gobject_glyph_position_get_type = c_hb_gobject_glyph_position_get_type;
 
 // Map
 
@@ -692,6 +677,11 @@ alias hb_gobject_unicode_funcs_get_type = c_hb_gobject_unicode_funcs_get_type;
 
 /** */
 alias hb_gobject_user_data_key_get_type = c_hb_gobject_user_data_key_get_type;
+
+// DrawState
+
+/** */
+alias hb_gobject_draw_state_get_type = c_hb_gobject_draw_state_get_type;
 
 // global
 
@@ -2189,6 +2179,16 @@ alias hb_variation_from_string = c_hb_variation_from_string;
 /** */
 alias hb_variation_to_string = c_hb_variation_to_string;
 
+// GlyphInfo
+
+/** */
+alias hb_gobject_glyph_info_get_type = c_hb_gobject_glyph_info_get_type;
+
+// GlyphPosition
+
+/** */
+alias hb_gobject_glyph_position_get_type = c_hb_gobject_glyph_position_get_type;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -2208,9 +2208,6 @@ shared static this()
   // DrawFuncs
   gidLink(cast(void**)&hb_gobject_draw_funcs_get_type, "hb_gobject_draw_funcs_get_type", libs);
 
-  // DrawState
-  gidLink(cast(void**)&hb_gobject_draw_state_get_type, "hb_gobject_draw_state_get_type", libs);
-
   // Face
   gidLink(cast(void**)&hb_gobject_face_get_type, "hb_gobject_face_get_type", libs);
 
@@ -2222,12 +2219,6 @@ shared static this()
 
   // FontFuncs
   gidLink(cast(void**)&hb_gobject_font_funcs_get_type, "hb_gobject_font_funcs_get_type", libs);
-
-  // GlyphInfo
-  gidLink(cast(void**)&hb_gobject_glyph_info_get_type, "hb_gobject_glyph_info_get_type", libs);
-
-  // GlyphPosition
-  gidLink(cast(void**)&hb_gobject_glyph_position_get_type, "hb_gobject_glyph_position_get_type", libs);
 
   // Map
   gidLink(cast(void**)&hb_gobject_map_get_type, "hb_gobject_map_get_type", libs);
@@ -2258,6 +2249,9 @@ shared static this()
 
   // UserDataKey
   gidLink(cast(void**)&hb_gobject_user_data_key_get_type, "hb_gobject_user_data_key_get_type", libs);
+
+  // DrawState
+  gidLink(cast(void**)&hb_gobject_draw_state_get_type, "hb_gobject_draw_state_get_type", libs);
 
   // global
   gidLink(cast(void**)&hb_aat_layout_feature_type_get_name_id, "hb_aat_layout_feature_type_get_name_id", libs);
@@ -2758,4 +2752,10 @@ shared static this()
   gidLink(cast(void**)&hb_unicode_script, "hb_unicode_script", libs);
   gidLink(cast(void**)&hb_variation_from_string, "hb_variation_from_string", libs);
   gidLink(cast(void**)&hb_variation_to_string, "hb_variation_to_string", libs);
+
+  // GlyphInfo
+  gidLink(cast(void**)&hb_gobject_glyph_info_get_type, "hb_gobject_glyph_info_get_type", libs);
+
+  // GlyphPosition
+  gidLink(cast(void**)&hb_gobject_glyph_position_get_type, "hb_gobject_glyph_position_get_type", libs);
 }

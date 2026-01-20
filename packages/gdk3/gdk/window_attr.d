@@ -13,7 +13,7 @@ import gid.gid;
 */
 class WindowAttr
 {
-  GdkWindowAttr cInstance;
+  GdkWindowAttr _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class WindowAttr
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.window_attr.WindowAttr");
 
-    cInstance = *cast(GdkWindowAttr*)ptr;
+    _cInstance = *cast(GdkWindowAttr*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class WindowAttr
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -151,7 +151,7 @@ class WindowAttr
   /**
       Get `wclass` field.
       Returns: #GDK_INPUT_OUTPUT (normal window) or #GDK_INPUT_ONLY (invisible
-       window that receives events)
+         window that receives events)
   */
   @property gdk.types.WindowWindowClass wclass()
   {
@@ -162,7 +162,7 @@ class WindowAttr
       Set `wclass` field.
       Params:
         propval = #GDK_INPUT_OUTPUT (normal window) or #GDK_INPUT_ONLY (invisible
-         window that receives events)
+           window that receives events)
   */
   @property void wclass(gdk.types.WindowWindowClass propval)
   {

@@ -77,7 +77,7 @@ class ColorDialog : gobject.object.ObjectWrap
   /**
       Get `title` property.
       Returns: A title that may be shown on the color chooser
-      dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+        dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
   */
   @property string title()
   {
@@ -88,7 +88,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Set `title` property.
       Params:
         propval = A title that may be shown on the color chooser
-        dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+          dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
   */
   @property void title(string propval)
   {
@@ -98,9 +98,9 @@ class ColorDialog : gobject.object.ObjectWrap
   /**
       Get `withAlpha` property.
       Returns: Whether colors may have alpha (translucency).
-      
-      When with-alpha is false, the color that is selected
-      will be forced to have alpha == 1.
+        
+        When with-alpha is false, the color that is selected
+        will be forced to have alpha == 1.
   */
   @property bool withAlpha()
   {
@@ -111,9 +111,9 @@ class ColorDialog : gobject.object.ObjectWrap
       Set `withAlpha` property.
       Params:
         propval = Whether colors may have alpha (translucency).
-        
-        When with-alpha is false, the color that is selected
-        will be forced to have alpha == 1.
+          
+          When with-alpha is false, the color that is selected
+          will be forced to have alpha == 1.
   */
   @property void withAlpha(bool propval)
   {
@@ -145,7 +145,7 @@ class ColorDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void chooseRgba(gtk.window.Window parent = null, gdk.rgba.RGBA initialColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void chooseRgba(gtk.window.Window parent, gdk.rgba.RGBA initialColor, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
@@ -155,9 +155,8 @@ class ColorDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, initialColor ? cast(const(GdkRGBA)*)initialColor._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&initialColor, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -177,7 +176,9 @@ class ColorDialog : gobject.object.ObjectWrap
     _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
+    gdk.rgba.RGBA _retval;
+    if (_cretval)
+      _retval = *cast(gdk.rgba.RGBA*)_cretval;
     return _retval;
   }
 

@@ -153,8 +153,8 @@ class Expander : gtk.bin.Bin
   /**
       Get `labelFill` property.
       Returns: Whether the label widget should fill all available horizontal space.
-      
-      Note that this property is ignored since 3.20.
+        
+        Note that this property is ignored since 3.20.
   */
   @property bool labelFill()
   {
@@ -165,8 +165,8 @@ class Expander : gtk.bin.Bin
       Set `labelFill` property.
       Params:
         propval = Whether the label widget should fill all available horizontal space.
-        
-        Note that this property is ignored since 3.20.
+          
+          Note that this property is ignored since 3.20.
   */
   @property void labelFill(bool propval)
   {
@@ -188,7 +188,7 @@ class Expander : gtk.bin.Bin
   /**
       Get `resizeToplevel` property.
       Returns: When this property is true, the expander will resize the toplevel
-      widget containing the expander upon expanding and collapsing.
+        widget containing the expander upon expanding and collapsing.
   */
   @property bool resizeToplevel()
   {
@@ -199,7 +199,7 @@ class Expander : gtk.bin.Bin
       Set `resizeToplevel` property.
       Params:
         propval = When this property is true, the expander will resize the toplevel
-        widget containing the expander upon expanding and collapsing.
+          widget containing the expander upon expanding and collapsing.
   */
   @property void resizeToplevel(bool propval)
   {
@@ -209,10 +209,10 @@ class Expander : gtk.bin.Bin
   /**
       Get `spacing` property.
       Returns: Space to put between the label and the child when the
-      expander is expanded.
+        expander is expanded.
   
       Deprecated: This property is deprecated and ignored.
-          Use margins on the child instead.
+            Use margins on the child instead.
   */
   @property int spacing()
   {
@@ -223,10 +223,10 @@ class Expander : gtk.bin.Bin
       Set `spacing` property.
       Params:
         propval = Space to put between the label and the child when the
-        expander is expanded.
+          expander is expanded.
   
       Deprecated: This property is deprecated and ignored.
-          Use margins on the child instead.
+            Use margins on the child instead.
   */
   @property void spacing(int propval)
   {

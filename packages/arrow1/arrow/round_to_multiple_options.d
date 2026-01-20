@@ -60,11 +60,11 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
   /**
       Get `multiple` property.
       Returns: The rounding scale (multiple to round to).
-      
-      Should be a scalar of a type compatible with the argument to be rounded.
-      For example, rounding a decimal value means a decimal multiple is
-      required. Rounding a floating point or integer value means a floating
-      point scalar is required.
+        
+        Should be a scalar of a type compatible with the argument to be rounded.
+        For example, rounding a decimal value means a decimal multiple is
+        required. Rounding a floating point or integer value means a floating
+        point scalar is required.
   */
   @property arrow.scalar.Scalar multiple()
   {
@@ -75,11 +75,11 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
       Set `multiple` property.
       Params:
         propval = The rounding scale (multiple to round to).
-        
-        Should be a scalar of a type compatible with the argument to be rounded.
-        For example, rounding a decimal value means a decimal multiple is
-        required. Rounding a floating point or integer value means a floating
-        point scalar is required.
+          
+          Should be a scalar of a type compatible with the argument to be rounded.
+          For example, rounding a decimal value means a decimal multiple is
+          required. Rounding a floating point or integer value means a floating
+          point scalar is required.
   */
   @property void multiple(arrow.scalar.Scalar propval)
   {

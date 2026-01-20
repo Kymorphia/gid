@@ -13,7 +13,7 @@ import gstsdp.types;
 */
 class SDPOrigin
 {
-  GstSDPOrigin cInstance;
+  GstSDPOrigin _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class SDPOrigin
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdporigin.SDPOrigin");
 
-    cInstance = *cast(GstSDPOrigin*)ptr;
+    _cInstance = *cast(GstSDPOrigin*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,13 +30,13 @@ class SDPOrigin
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `username` field.
       Returns: the user's login on the originating host, or it is "-"
-         if the originating host does not support the concept of user ids.
+           if the originating host does not support the concept of user ids.
   */
   @property string username()
   {
@@ -47,7 +47,7 @@ class SDPOrigin
       Set `username` field.
       Params:
         propval = the user's login on the originating host, or it is "-"
-           if the originating host does not support the concept of user ids.
+             if the originating host does not support the concept of user ids.
   */
   @property void username(string propval)
   {
@@ -58,8 +58,8 @@ class SDPOrigin
   /**
       Get `sessId` field.
       Returns: is a numeric string such that the tuple of @username, @sess_id,
-         @nettype, @addrtype and @addr form a globally unique identifier for the
-         session.
+           @nettype, @addrtype and @addr form a globally unique identifier for the
+           session.
   */
   @property string sessId()
   {
@@ -70,8 +70,8 @@ class SDPOrigin
       Set `sessId` field.
       Params:
         propval = is a numeric string such that the tuple of @username, @sess_id,
-           @nettype, @addrtype and @addr form a globally unique identifier for the
-           session.
+             @nettype, @addrtype and @addr form a globally unique identifier for the
+             session.
   */
   @property void sessId(string propval)
   {
@@ -102,7 +102,7 @@ class SDPOrigin
   /**
       Get `nettype` field.
       Returns: the type of network. "IN" is defined to have the meaning
-         "Internet".
+           "Internet".
   */
   @property string nettype()
   {
@@ -113,7 +113,7 @@ class SDPOrigin
       Set `nettype` field.
       Params:
         propval = the type of network. "IN" is defined to have the meaning
-           "Internet".
+             "Internet".
   */
   @property void nettype(string propval)
   {
@@ -144,7 +144,7 @@ class SDPOrigin
   /**
       Get `addr` field.
       Returns: the globally unique address of the machine from which the session was
-          created.
+            created.
   */
   @property string addr()
   {
@@ -155,7 +155,7 @@ class SDPOrigin
       Set `addr` field.
       Params:
         propval = the globally unique address of the machine from which the session was
-            created.
+              created.
   */
   @property void addr(string propval)
   {

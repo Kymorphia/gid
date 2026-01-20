@@ -96,9 +96,9 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   /**
       Get `enabled` property.
       Returns: If @action is currently enabled.
-      
-      If the action is disabled then calls to [gio.action.Action.activate] and
-      [gio.action.Action.changeState] have no effect.
+        
+        If the action is disabled then calls to [gio.action.Action.activate] and
+        [gio.action.Action.changeState] have no effect.
   */
   @property bool enabled()
   {
@@ -108,7 +108,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   /**
       Get `parameterType` property.
       Returns: The type of the parameter that must be given when activating the
-      action.
+        action.
   */
   @property glib.variant_type.VariantType parameterType()
   {
@@ -127,7 +127,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   /**
       Get `stateType` property.
       Returns: The #GVariantType of the state that the action has, or null if the
-      action is stateless.
+        action is stateless.
   */
   @property glib.variant_type.VariantType stateType()
   {

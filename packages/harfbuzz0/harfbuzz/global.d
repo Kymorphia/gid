@@ -9,8 +9,6 @@ import harfbuzz.blob;
 import harfbuzz.buffer;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
-import harfbuzz.color_line;
-import harfbuzz.color_stop;
 import harfbuzz.draw_funcs;
 import harfbuzz.draw_state;
 import harfbuzz.face;
@@ -20,9 +18,6 @@ import harfbuzz.font_funcs;
 import harfbuzz.glyph_info;
 import harfbuzz.glyph_position;
 import harfbuzz.map;
-import harfbuzz.ot_math_glyph_part;
-import harfbuzz.ot_math_glyph_variant;
-import harfbuzz.ot_var_axis_info;
 import harfbuzz.paint_funcs;
 import harfbuzz.segment_properties;
 import harfbuzz.set;
@@ -1029,8 +1024,8 @@ string[] bufferSerializeListFormats()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -1185,14 +1180,16 @@ void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMe
 {
   extern(C) hb_bool_t _funcCallback(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.BufferMessageFunc*)userData;
     string _message = message.fromCString(No.Free);
 
-    hb_bool_t _retval = (*_dlg)(buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, No.Take) : null, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, _message);
+    _dretval = (*_dlg)(buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, No.Take) : null, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, _message);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_buffer_set_message_func(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -1345,16 +1342,12 @@ ubyte colorGetRed(harfbuzz.types.Color color)
       colorStops = Array of #hb_color_stop_t to populate
     Returns: the total number of color stops in color_line
 */
-uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start, ref harfbuzz.color_stop.ColorStop[] colorStops)
+uint colorLineGetColorStops(harfbuzz.types.ColorLine colorLine, uint start, ref harfbuzz.types.ColorStop[] colorStops)
 {
   uint _retval;
   uint _count;
-  hb_color_stop_t[] _colorStops;
-  _colorStops.length = _count;
-  _retval = hb_color_line_get_color_stops(colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, start, &_count, _colorStops.ptr);
-  colorStops.length = _count;
-  foreach (i; 0 .. _count)
-    colorStops[i] = new harfbuzz.color_stop.ColorStop(cast(void*)&_colorStops[i], No.Take);
+  _count = cast(uint)colorStops.length;
+  _retval = hb_color_line_get_color_stops(&colorLine, start, &_count, colorStops.ptr);
   return _retval;
 }
 
@@ -1365,10 +1358,10 @@ uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start,
       colorLine = a #hb_color_line_t object
     Returns: the extend mode of color_line
 */
-harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.color_line.ColorLine colorLine)
+harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.types.ColorLine colorLine)
 {
   hb_paint_extend_t _cretval;
-  _cretval = hb_color_line_get_extend(colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null);
+  _cretval = hb_color_line_get_extend(&colorLine);
   harfbuzz.types.PaintExtend _retval = cast(harfbuzz.types.PaintExtend)_cretval;
   return _retval;
 }
@@ -1514,7 +1507,6 @@ void drawFuncsSetClosePathFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.ty
     (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_draw_funcs_set_close_path_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -1536,7 +1528,6 @@ void drawFuncsSetCubicToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.type
     (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_draw_funcs_set_cubic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -1558,7 +1549,6 @@ void drawFuncsSetLineToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
     (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_draw_funcs_set_line_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -1580,7 +1570,6 @@ void drawFuncsSetMoveToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
     (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_draw_funcs_set_move_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -1602,7 +1591,6 @@ void drawFuncsSetQuadraticToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.
     (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, controlX, controlY, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_draw_funcs_set_quadratic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -1766,12 +1754,11 @@ harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referen
     auto _dlg = cast(harfbuzz.types.ReferenceTableFunc*)userData;
 
     _dretval = (*_dlg)(face ? new harfbuzz.face.Face(cast(void*)face, No.Take) : null, tag);
-    hb_blob_t* _retval = cast(hb_blob_t*)_dretval._cPtr(Yes.Dup);
+    auto _retval = cast(hb_blob_t*)_dretval._cPtr(Yes.Dup);
 
     return _retval;
   }
   auto _referenceTableFuncCB = referenceTableFunc ? &_referenceTableFuncCallback : null;
-
   hb_face_t* _cretval;
   auto _referenceTableFunc = referenceTableFunc ? freezeDelegate(cast(void*)&referenceTableFunc) : null;
   GDestroyNotify _referenceTableFuncDestroyCB = referenceTableFunc ? &thawDelegate : null;
@@ -2013,9 +2000,7 @@ harfbuzz.types.Bool featureFromString(ubyte[] str, out harfbuzz.feature.Feature 
     _len = cast(int)str.length;
 
   auto _str = cast(const(ubyte)*)str.ptr;
-  hb_feature_t _feature;
-  _retval = hb_feature_from_string(_str, _len, &_feature);
-  feature = new harfbuzz.feature.Feature(cast(void*)&_feature, No.Take);
+  _retval = hb_feature_from_string(_str, _len, cast(hb_feature_t*)&feature);
   return _retval;
 }
 
@@ -2173,7 +2158,6 @@ void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
     (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2190,13 +2174,15 @@ void fontFuncsSetFontHExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetFontHExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *extents);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_font_h_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2213,13 +2199,15 @@ void fontFuncsSetFontVExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetFontVExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *extents);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_font_v_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2236,13 +2224,15 @@ void fontFuncsSetGlyphContourPointFunc(harfbuzz.font_funcs.FontFuncs ffuncs, har
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, uint pointIndex, hb_position_t* x, hb_position_t* y, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphContourPointFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_contour_point_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2259,13 +2249,15 @@ void fontFuncsSetGlyphExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_glyph_extents_t* extents, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *extents);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *cast(harfbuzz.types.GlyphExtents*)extents);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2282,16 +2274,18 @@ void fontFuncsSetGlyphFromNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, const(char)* name, int len, hb_codepoint_t* glyph, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphFromNameFunc*)userData;
     char[] _name;
     _name.length = len;
     _name[0 .. len] = name[0 .. len];
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_from_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2309,13 +2303,15 @@ void fontFuncsSetGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2332,13 +2328,15 @@ void fontFuncsSetGlyphHAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData)
   {
+    harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHAdvanceFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    auto _retval = cast(hb_position_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_h_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2355,13 +2353,15 @@ void fontFuncsSetGlyphHKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData)
   {
+    harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHKerningFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    auto _retval = cast(hb_position_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_h_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2378,13 +2378,15 @@ void fontFuncsSetGlyphHOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHOriginFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_h_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2401,17 +2403,18 @@ void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, char* name, uint size, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphNameFunc*)userData;
     char[] _name;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, _name);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, _name);
+    auto _retval = cast(hb_bool_t)_dretval;
     size = cast(uint)_name.length;
     name = arrayDtoC!(char, Yes.Alloc, No.ZeroTerm)(_name);
 
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2436,7 +2439,6 @@ void fontFuncsSetGlyphShapeFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
     (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_shape_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2453,13 +2455,15 @@ void fontFuncsSetGlyphVAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData)
   {
+    harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVAdvanceFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    auto _retval = cast(hb_position_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_v_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2476,13 +2480,15 @@ void fontFuncsSetGlyphVKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData)
   {
+    harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVKerningFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    auto _retval = cast(hb_position_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_v_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2499,13 +2505,15 @@ void fontFuncsSetGlyphVOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVOriginFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_glyph_v_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2522,13 +2530,15 @@ void fontFuncsSetNominalGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t* glyph, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetNominalGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_nominal_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2550,7 +2560,6 @@ void fontFuncsSetPaintGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
     (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -2567,13 +2576,15 @@ void fontFuncsSetVariationGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbu
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetVariationGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_variation_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -3466,6 +3477,27 @@ void fontSetVarNamedInstance(harfbuzz.font.Font font, uint instanceIndex)
 void fontSetVariation(harfbuzz.font.Font font, harfbuzz.types.Tag tag, float value)
 {
   hb_font_set_variation(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, tag, value);
+}
+
+/**
+    Applies a list of font-variation settings to a font.
+    
+    Note that this overrides all existing variations set on font.
+    Axes not included in variations will be effectively set to their
+    default values.
+
+    Params:
+      font = #hb_font_t to work upon
+      variations = Array of variation settings to apply
+*/
+void fontSetVariations(harfbuzz.font.Font font, harfbuzz.variation.Variation[] variations)
+{
+  uint _variationsLength;
+  if (variations)
+    _variationsLength = cast(uint)variations.length;
+
+  auto _variations = cast(const(hb_variation_t)*)variations.ptr;
+  hb_font_set_variations(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, _variations, _variationsLength);
 }
 
 /**
@@ -5117,16 +5149,12 @@ harfbuzz.types.Position otMathGetConstant(harfbuzz.font.Font font, harfbuzz.type
       italicsCorrection = italics correction of the glyph assembly
     Returns: the total number of parts in the glyph assembly
 */
-uint otMathGetGlyphAssembly(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.ot_math_glyph_part.OtMathGlyphPart[] parts, out harfbuzz.types.Position italicsCorrection)
+uint otMathGetGlyphAssembly(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.types.OtMathGlyphPart[] parts, out harfbuzz.types.Position italicsCorrection)
 {
   uint _retval;
   uint _partsCount;
-  hb_ot_math_glyph_part_t[] _parts;
-  _parts.length = _partsCount;
-  _retval = hb_ot_math_get_glyph_assembly(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, startOffset, &_partsCount, _parts.ptr, cast(hb_position_t*)&italicsCorrection);
-  parts.length = _partsCount;
-  foreach (i; 0 .. _partsCount)
-    parts[i] = new harfbuzz.ot_math_glyph_part.OtMathGlyphPart(cast(void*)&_parts[i], No.Take);
+  _partsCount = cast(uint)parts.length;
+  _retval = hb_ot_math_get_glyph_assembly(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, startOffset, &_partsCount, parts.ptr, cast(hb_position_t*)&italicsCorrection);
   return _retval;
 }
 
@@ -5243,16 +5271,12 @@ harfbuzz.types.Position otMathGetGlyphTopAccentAttachment(harfbuzz.font.Font fon
       variants = array of variants returned
     Returns: the total number of size variants available or zero
 */
-uint otMathGetGlyphVariants(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.ot_math_glyph_variant.OtMathGlyphVariant[] variants)
+uint otMathGetGlyphVariants(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.types.OtMathGlyphVariant[] variants)
 {
   uint _retval;
   uint _variantsCount;
-  hb_ot_math_glyph_variant_t[] _variants;
-  _variants.length = _variantsCount;
-  _retval = hb_ot_math_get_glyph_variants(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, startOffset, &_variantsCount, _variants.ptr);
-  variants.length = _variantsCount;
-  foreach (i; 0 .. _variantsCount)
-    variants[i] = new harfbuzz.ot_math_glyph_variant.OtMathGlyphVariant(cast(void*)&_variants[i], No.Take);
+  _variantsCount = cast(uint)variants.length;
+  _retval = hb_ot_math_get_glyph_variants(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, startOffset, &_variantsCount, variants.ptr);
   return _retval;
 }
 
@@ -5506,12 +5530,10 @@ void otTagsToScriptAndLanguage(harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag 
       axisInfo = The #hb_ot_var_axis_info_t of the axis tag queried
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otVarFindAxisInfo(harfbuzz.face.Face face, harfbuzz.types.Tag axisTag, out harfbuzz.ot_var_axis_info.OtVarAxisInfo axisInfo)
+harfbuzz.types.Bool otVarFindAxisInfo(harfbuzz.face.Face face, harfbuzz.types.Tag axisTag, out harfbuzz.types.OtVarAxisInfo axisInfo)
 {
   harfbuzz.types.Bool _retval;
-  hb_ot_var_axis_info_t _axisInfo;
-  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, axisTag, &_axisInfo);
-  axisInfo = new harfbuzz.ot_var_axis_info.OtVarAxisInfo(cast(void*)&_axisInfo, No.Take);
+  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, axisTag, &axisInfo);
   return _retval;
 }
 
@@ -5560,16 +5582,12 @@ uint otVarGetAxisCount(harfbuzz.face.Face face)
       axesArray = The array of variation axes found
     Returns: the number of variation axes in the face
 */
-uint otVarGetAxisInfos(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.ot_var_axis_info.OtVarAxisInfo[] axesArray)
+uint otVarGetAxisInfos(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.OtVarAxisInfo[] axesArray)
 {
   uint _retval;
   uint _axesCount;
-  hb_ot_var_axis_info_t[] _axesArray;
-  _axesArray.length = _axesCount;
-  _retval = hb_ot_var_get_axis_infos(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, startOffset, &_axesCount, _axesArray.ptr);
-  axesArray.length = _axesCount;
-  foreach (i; 0 .. _axesCount)
-    axesArray[i] = new harfbuzz.ot_var_axis_info.OtVarAxisInfo(cast(void*)&_axesArray[i], No.Take);
+  _axesCount = cast(uint)axesArray.length;
+  _retval = hb_ot_var_get_axis_infos(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, startOffset, &_axesCount, axesArray.ptr);
   return _retval;
 }
 
@@ -5799,7 +5817,6 @@ void paintFuncsSetColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, isForeground, color);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_color_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5816,13 +5833,15 @@ void paintFuncsSetColorGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz
 {
   extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintColorGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+    _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_color_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5839,13 +5858,15 @@ void paintFuncsSetCustomPaletteColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, 
 {
   extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, uint colorIndex, hb_color_t* color, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintCustomPaletteColorFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
+    _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_custom_palette_color_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5862,13 +5883,15 @@ void paintFuncsSetImageFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
 {
   extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_blob_t* image, uint width, uint height, hb_tag_t format, float slant, hb_glyph_extents_t* extents, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintImageFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new harfbuzz.blob.Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *extents);
+    _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new harfbuzz.blob.Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *cast(harfbuzz.types.GlyphExtents*)extents);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_image_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5887,10 +5910,9 @@ void paintFuncsSetLinearGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   {
     auto _dlg = cast(harfbuzz.types.PaintLinearGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, *cast(harfbuzz.types.ColorLine*)colorLine, x0, y0, x1, y1, x2, y2);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_linear_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5912,7 +5934,6 @@ void paintFuncsSetPopClipFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.ty
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_pop_clip_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5934,7 +5955,6 @@ void paintFuncsSetPopGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.t
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, mode);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_pop_group_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5956,7 +5976,6 @@ void paintFuncsSetPopTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbu
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_pop_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -5978,7 +5997,6 @@ void paintFuncsSetPushClipGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_push_clip_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -6000,7 +6018,6 @@ void paintFuncsSetPushClipRectangleFunc(harfbuzz.paint_funcs.PaintFuncs funcs, h
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xmin, ymin, xmax, ymax);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_push_clip_rectangle_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -6022,7 +6039,6 @@ void paintFuncsSetPushGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_push_group_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -6044,7 +6060,6 @@ void paintFuncsSetPushTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
     (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xx, yx, xy, yy, dx, dy);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_push_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -6063,10 +6078,9 @@ void paintFuncsSetRadialGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   {
     auto _dlg = cast(harfbuzz.types.PaintRadialGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, *cast(harfbuzz.types.ColorLine*)colorLine, x0, y0, r0, x1, y1, r1);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_radial_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -6085,10 +6099,9 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   {
     auto _dlg = cast(harfbuzz.types.PaintSweepGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, *cast(harfbuzz.types.ColorLine*)colorLine, x0, y0, startAngle, endAngle);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_paint_funcs_set_sweep_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -6126,9 +6139,9 @@ void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz
       x2 = X coordinate of the third point
       y2 = Y coordinate of the third point
 */
-void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2)
+void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2)
 {
-  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, x1, y1, x2, y2);
+  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, &colorLine, x0, y0, x1, y1, x2, y2);
 }
 
 /**
@@ -6242,9 +6255,9 @@ void paintPushTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
       y1 = Y coordinate of the second circle's center
       r1 = radius of the second circle
 */
-void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1)
+void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1)
 {
-  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, r0, x1, y1, r1);
+  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, &colorLine, x0, y0, r0, x1, y1, r1);
 }
 
 /**
@@ -6259,9 +6272,9 @@ void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData,
       startAngle = the start angle
       endAngle = the end angle
 */
-void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle)
+void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle)
 {
-  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, startAngle, endAngle);
+  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, &colorLine, x0, y0, startAngle, endAngle);
 }
 
 /**
@@ -6845,10 +6858,7 @@ void shape(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feat
   if (features)
     _numFeatures = cast(uint)features.length;
 
-  hb_feature_t[] _tmpfeatures;
-  foreach (obj; features)
-    _tmpfeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _features = _tmpfeatures.ptr;
+  auto _features = cast(const(hb_feature_t)*)features.ptr;
   hb_shape(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _features, _numFeatures);
 }
 
@@ -6873,16 +6883,13 @@ harfbuzz.types.Bool shapeFull(harfbuzz.font.Font font, harfbuzz.buffer.Buffer bu
   if (features)
     _numFeatures = cast(uint)features.length;
 
-  hb_feature_t[] _tmpfeatures;
-  foreach (obj; features)
-    _tmpfeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _features = _tmpfeatures.ptr;
-
+  auto _features = cast(const(hb_feature_t)*)features.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
     _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
+
   _retval = hb_shape_full(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _features, _numFeatures, _shaperList);
   return _retval;
 }
@@ -6923,16 +6930,13 @@ harfbuzz.types.Bool shapeJustify(harfbuzz.font.Font font, harfbuzz.buffer.Buffer
   if (features)
     _numFeatures = cast(uint)features.length;
 
-  hb_feature_t[] _tmpfeatures;
-  foreach (obj; features)
-    _tmpfeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _features = _tmpfeatures.ptr;
-
+  auto _features = cast(const(hb_feature_t)*)features.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
     _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
+
   _retval = hb_shape_justify(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _features, _numFeatures, _shaperList, minTargetAdvance, maxTargetAdvance, cast(float*)&advance, cast(hb_tag_t*)&varTag, cast(float*)&varValue);
   return _retval;
 }
@@ -6951,8 +6955,8 @@ string[] shapeListShapers()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -6978,16 +6982,13 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate(harfbuzz.face.Face face, harfbuzz.
   if (userFeatures)
     _numUserFeatures = cast(uint)userFeatures.length;
 
-  hb_feature_t[] _tmpuserFeatures;
-  foreach (obj; userFeatures)
-    _tmpuserFeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _userFeatures = _tmpuserFeatures.ptr;
-
+  auto _userFeatures = cast(const(hb_feature_t)*)userFeatures.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
     _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
+
   _cretval = hb_shape_plan_create(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props._cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _shaperList);
   auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -7013,11 +7014,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate2(harfbuzz.face.Face face, harfbuzz
   if (userFeatures)
     _numUserFeatures = cast(uint)userFeatures.length;
 
-  hb_feature_t[] _tmpuserFeatures;
-  foreach (obj; userFeatures)
-    _tmpuserFeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _userFeatures = _tmpuserFeatures.ptr;
-
+  auto _userFeatures = cast(const(hb_feature_t)*)userFeatures.ptr;
   uint _numCoords;
   if (coords)
     _numCoords = cast(uint)coords.length;
@@ -7028,6 +7025,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate2(harfbuzz.face.Face face, harfbuzz
     _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
+
   _cretval = hb_shape_plan_create2(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props._cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
   auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -7051,16 +7049,13 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached(harfbuzz.face.Face face, har
   if (userFeatures)
     _numUserFeatures = cast(uint)userFeatures.length;
 
-  hb_feature_t[] _tmpuserFeatures;
-  foreach (obj; userFeatures)
-    _tmpuserFeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _userFeatures = _tmpuserFeatures.ptr;
-
+  auto _userFeatures = cast(const(hb_feature_t)*)userFeatures.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
     _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
+
   _cretval = hb_shape_plan_create_cached(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props._cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _shaperList);
   auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -7087,11 +7082,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached2(harfbuzz.face.Face face, ha
   if (userFeatures)
     _numUserFeatures = cast(uint)userFeatures.length;
 
-  hb_feature_t[] _tmpuserFeatures;
-  foreach (obj; userFeatures)
-    _tmpuserFeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _userFeatures = _tmpuserFeatures.ptr;
-
+  auto _userFeatures = cast(const(hb_feature_t)*)userFeatures.ptr;
   uint _numCoords;
   if (coords)
     _numCoords = cast(uint)coords.length;
@@ -7102,6 +7093,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached2(harfbuzz.face.Face face, ha
     _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
+
   _cretval = hb_shape_plan_create_cached2(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props._cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
   auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -7125,10 +7117,7 @@ harfbuzz.types.Bool shapePlanExecute(harfbuzz.shape_plan.ShapePlan shapePlan, ha
   if (features)
     _numFeatures = cast(uint)features.length;
 
-  hb_feature_t[] _tmpfeatures;
-  foreach (obj; features)
-    _tmpfeatures ~= *cast(hb_feature_t*)obj._cPtr;
-  const(hb_feature_t)* _features = _tmpfeatures.ptr;
+  auto _features = cast(const(hb_feature_t)*)features.ptr;
   _retval = hb_shape_plan_execute(shapePlan ? cast(hb_shape_plan_t*)shapePlan._cPtr(No.Dup) : null, font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _features, _numFeatures);
   return _retval;
 }
@@ -7392,7 +7381,6 @@ void unicodeFuncsSetCombiningClassFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_unicode_funcs_set_combining_class_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -7409,13 +7397,15 @@ void unicodeFuncsSetComposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harf
 {
   extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t a, hb_codepoint_t b, hb_codepoint_t* ab, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeComposeFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
+    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_unicode_funcs_set_compose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -7432,13 +7422,15 @@ void unicodeFuncsSetDecomposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
 {
   extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t ab, hb_codepoint_t* a, hb_codepoint_t* b, void* userData)
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeDecomposeFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
+    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
+    auto _retval = cast(hb_bool_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_unicode_funcs_set_decompose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -7461,7 +7453,6 @@ void unicodeFuncsSetEastasianWidthFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_unicode_funcs_set_eastasian_width_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -7487,7 +7478,6 @@ void unicodeFuncsSetGeneralCategoryFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufun
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_unicode_funcs_set_general_category_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -7504,13 +7494,15 @@ void unicodeFuncsSetMirroringFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
 {
   extern(C) hb_codepoint_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData)
   {
+    harfbuzz.types.Codepoint _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeMirroringFunc*)userData;
 
-    hb_codepoint_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    auto _retval = cast(hb_codepoint_t)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_unicode_funcs_set_mirroring_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -7536,7 +7528,6 @@ void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfb
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_unicode_funcs_set_script_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -7615,8 +7606,6 @@ harfbuzz.types.Bool variationFromString(ubyte[] str, out harfbuzz.variation.Vari
     _len = cast(int)str.length;
 
   auto _str = cast(const(ubyte)*)str.ptr;
-  hb_variation_t _variation;
-  _retval = hb_variation_from_string(_str, _len, &_variation);
-  variation = new harfbuzz.variation.Variation(cast(void*)&_variation, No.Take);
+  _retval = hb_variation_from_string(_str, _len, cast(hb_variation_t*)&variation);
   return _retval;
 }

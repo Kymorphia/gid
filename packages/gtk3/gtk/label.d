@@ -228,9 +228,9 @@ class Label : gtk.misc.Misc
   /**
       Get `angle` property.
       Returns: The angle that the baseline of the label makes with the horizontal,
-      in degrees, measured counterclockwise. An angle of 90 reads from
-      from bottom to top, an angle of 270, from top to bottom. Ignored
-      if the label is selectable.
+        in degrees, measured counterclockwise. An angle of 90 reads from
+        from bottom to top, an angle of 270, from top to bottom. Ignored
+        if the label is selectable.
   */
   @property double angle()
   {
@@ -241,9 +241,9 @@ class Label : gtk.misc.Misc
       Set `angle` property.
       Params:
         propval = The angle that the baseline of the label makes with the horizontal,
-        in degrees, measured counterclockwise. An angle of 90 reads from
-        from bottom to top, an angle of 270, from top to bottom. Ignored
-        if the label is selectable.
+          in degrees, measured counterclockwise. An angle of 90 reads from
+          from bottom to top, an angle of 270, from top to bottom. Ignored
+          if the label is selectable.
   */
   @property void angle(double propval)
   {
@@ -271,26 +271,6 @@ class Label : gtk.misc.Misc
   /**
       Get `ellipsize` property.
       Returns: The preferred place to ellipsize the string, if the label does
-      not have enough room to display the entire string, specified as a
-      #PangoEllipsizeMode.
-      
-      Note that setting this property to a value other than
-      [pango.types.EllipsizeMode.None] has the side-effect that the label requests
-      only enough space to display the ellipsis "...". In particular, this
-      means that ellipsizing labels do not work well in notebook tabs, unless
-      the #GtkNotebook tab-expand child property is set to true. Other ways
-      to set a label's width are [gtk.widget.Widget.setSizeRequest] and
-      [gtk.label.Label.setWidthChars].
-  */
-  @property pango.types.EllipsizeMode ellipsize()
-  {
-    return getEllipsize();
-  }
-
-  /**
-      Set `ellipsize` property.
-      Params:
-        propval = The preferred place to ellipsize the string, if the label does
         not have enough room to display the entire string, specified as a
         #PangoEllipsizeMode.
         
@@ -301,6 +281,26 @@ class Label : gtk.misc.Misc
         the #GtkNotebook tab-expand child property is set to true. Other ways
         to set a label's width are [gtk.widget.Widget.setSizeRequest] and
         [gtk.label.Label.setWidthChars].
+  */
+  @property pango.types.EllipsizeMode ellipsize()
+  {
+    return getEllipsize();
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string, if the label does
+          not have enough room to display the entire string, specified as a
+          #PangoEllipsizeMode.
+          
+          Note that setting this property to a value other than
+          [pango.types.EllipsizeMode.None] has the side-effect that the label requests
+          only enough space to display the ellipsis "...". In particular, this
+          means that ellipsizing labels do not work well in notebook tabs, unless
+          the #GtkNotebook tab-expand child property is set to true. Other ways
+          to set a label's width are [gtk.widget.Widget.setSizeRequest] and
+          [gtk.label.Label.setWidthChars].
   */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
@@ -322,26 +322,6 @@ class Label : gtk.misc.Misc
   /**
       Get `label` property.
       Returns: The contents of the label.
-      
-      If the string contains [Pango XML markup][PangoMarkupFormat], you will
-      have to set the #GtkLabel:use-markup property to true in order for the
-      label to display the markup attributes. See also [gtk.label.Label.setMarkup]
-      for a convenience function that sets both this property and the
-      #GtkLabel:use-markup property at the same time.
-      
-      If the string contains underlines acting as mnemonics, you will have to
-      set the #GtkLabel:use-underline property to true in order for the label
-      to display them.
-  */
-  @property string label()
-  {
-    return getLabel();
-  }
-
-  /**
-      Set `label` property.
-      Params:
-        propval = The contents of the label.
         
         If the string contains [Pango XML markup][PangoMarkupFormat], you will
         have to set the #GtkLabel:use-markup property to true in order for the
@@ -353,6 +333,26 @@ class Label : gtk.misc.Misc
         set the #GtkLabel:use-underline property to true in order for the label
         to display them.
   */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The contents of the label.
+          
+          If the string contains [Pango XML markup][PangoMarkupFormat], you will
+          have to set the #GtkLabel:use-markup property to true in order for the
+          label to display the markup attributes. See also [gtk.label.Label.setMarkup]
+          for a convenience function that sets both this property and the
+          #GtkLabel:use-markup property at the same time.
+          
+          If the string contains underlines acting as mnemonics, you will have to
+          set the #GtkLabel:use-underline property to true in order for the label
+          to display them.
+  */
   @property void label(string propval)
   {
     return setLabel(propval);
@@ -361,9 +361,9 @@ class Label : gtk.misc.Misc
   /**
       Get `lines` property.
       Returns: The number of lines to which an ellipsized, wrapping label
-      should be limited. This property has no effect if the
-      label is not wrapping or ellipsized. Set this property to
-      -1 if you don't want to limit the number of lines.
+        should be limited. This property has no effect if the
+        label is not wrapping or ellipsized. Set this property to
+        -1 if you don't want to limit the number of lines.
   */
   @property int lines()
   {
@@ -374,9 +374,9 @@ class Label : gtk.misc.Misc
       Set `lines` property.
       Params:
         propval = The number of lines to which an ellipsized, wrapping label
-        should be limited. This property has no effect if the
-        label is not wrapping or ellipsized. Set this property to
-        -1 if you don't want to limit the number of lines.
+          should be limited. This property has no effect if the
+          label is not wrapping or ellipsized. Set this property to
+          -1 if you don't want to limit the number of lines.
   */
   @property void lines(int propval)
   {
@@ -386,11 +386,11 @@ class Label : gtk.misc.Misc
   /**
       Get `maxWidthChars` property.
       Returns: The desired maximum width of the label, in characters. If this property
-      is set to -1, the width will be calculated automatically.
-      
-      See the section on [text layout][label-text-layout]
-      for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
-      determine the width of ellipsized and wrapped labels.
+        is set to -1, the width will be calculated automatically.
+        
+        See the section on [text layout][label-text-layout]
+        for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+        determine the width of ellipsized and wrapped labels.
   */
   @property int maxWidthChars()
   {
@@ -401,11 +401,11 @@ class Label : gtk.misc.Misc
       Set `maxWidthChars` property.
       Params:
         propval = The desired maximum width of the label, in characters. If this property
-        is set to -1, the width will be calculated automatically.
-        
-        See the section on [text layout][label-text-layout]
-        for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
-        determine the width of ellipsized and wrapped labels.
+          is set to -1, the width will be calculated automatically.
+          
+          See the section on [text layout][label-text-layout]
+          for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+          determine the width of ellipsized and wrapped labels.
   */
   @property void maxWidthChars(int propval)
   {
@@ -457,10 +457,10 @@ class Label : gtk.misc.Misc
   /**
       Get `singleLineMode` property.
       Returns: Whether the label is in single line mode. In single line mode,
-      the height of the label does not depend on the actual text, it
-      is always set to ascent + descent of the font. This can be an
-      advantage in situations where resizing the label because of text
-      changes would be distracting, e.g. in a statusbar.
+        the height of the label does not depend on the actual text, it
+        is always set to ascent + descent of the font. This can be an
+        advantage in situations where resizing the label because of text
+        changes would be distracting, e.g. in a statusbar.
   */
   @property bool singleLineMode()
   {
@@ -471,10 +471,10 @@ class Label : gtk.misc.Misc
       Set `singleLineMode` property.
       Params:
         propval = Whether the label is in single line mode. In single line mode,
-        the height of the label does not depend on the actual text, it
-        is always set to ascent + descent of the font. This can be an
-        advantage in situations where resizing the label because of text
-        changes would be distracting, e.g. in a statusbar.
+          the height of the label does not depend on the actual text, it
+          is always set to ascent + descent of the font. This can be an
+          advantage in situations where resizing the label because of text
+          changes would be distracting, e.g. in a statusbar.
   */
   @property void singleLineMode(bool propval)
   {
@@ -484,8 +484,8 @@ class Label : gtk.misc.Misc
   /**
       Get `trackVisitedLinks` property.
       Returns: Set this property to true to make the label track which links
-      have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
-      when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
+        have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
+        when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
   */
   @property bool trackVisitedLinks()
   {
@@ -496,8 +496,8 @@ class Label : gtk.misc.Misc
       Set `trackVisitedLinks` property.
       Params:
         propval = Set this property to true to make the label track which links
-        have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
-        when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
+          have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
+          when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
   */
   @property void trackVisitedLinks(bool propval)
   {
@@ -531,11 +531,11 @@ class Label : gtk.misc.Misc
   /**
       Get `widthChars` property.
       Returns: The desired width of the label, in characters. If this property is set to
-      -1, the width will be calculated automatically.
-      
-      See the section on [text layout][label-text-layout]
-      for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
-      determine the width of ellipsized and wrapped labels.
+        -1, the width will be calculated automatically.
+        
+        See the section on [text layout][label-text-layout]
+        for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+        determine the width of ellipsized and wrapped labels.
   */
   @property int widthChars()
   {
@@ -546,11 +546,11 @@ class Label : gtk.misc.Misc
       Set `widthChars` property.
       Params:
         propval = The desired width of the label, in characters. If this property is set to
-        -1, the width will be calculated automatically.
-        
-        See the section on [text layout][label-text-layout]
-        for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
-        determine the width of ellipsized and wrapped labels.
+          -1, the width will be calculated automatically.
+          
+          See the section on [text layout][label-text-layout]
+          for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+          determine the width of ellipsized and wrapped labels.
   */
   @property void widthChars(int propval)
   {
@@ -572,8 +572,8 @@ class Label : gtk.misc.Misc
   /**
       Get `wrapMode` property.
       Returns: If line wrapping is on (see the #GtkLabel:wrap property) this controls
-      how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
-      means wrap on word boundaries.
+        how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
+        means wrap on word boundaries.
   */
   @property pango.types.WrapMode wrapMode()
   {
@@ -584,8 +584,8 @@ class Label : gtk.misc.Misc
       Set `wrapMode` property.
       Params:
         propval = If line wrapping is on (see the #GtkLabel:wrap property) this controls
-        how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
-        means wrap on word boundaries.
+          how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
+          means wrap on word boundaries.
   */
   @property void wrapMode(pango.types.WrapMode propval)
   {
@@ -595,9 +595,9 @@ class Label : gtk.misc.Misc
   /**
       Get `xalign` property.
       Returns: The xalign property determines the horizontal aligment of the label text
-      inside the labels size allocation. Compare this to #GtkWidget:halign,
-      which determines how the labels size allocation is positioned in the
-      space available for the label.
+        inside the labels size allocation. Compare this to #GtkWidget:halign,
+        which determines how the labels size allocation is positioned in the
+        space available for the label.
   */
   override @property float xalign()
   {
@@ -608,9 +608,9 @@ class Label : gtk.misc.Misc
       Set `xalign` property.
       Params:
         propval = The xalign property determines the horizontal aligment of the label text
-        inside the labels size allocation. Compare this to #GtkWidget:halign,
-        which determines how the labels size allocation is positioned in the
-        space available for the label.
+          inside the labels size allocation. Compare this to #GtkWidget:halign,
+          which determines how the labels size allocation is positioned in the
+          space available for the label.
   */
   override @property void xalign(float propval)
   {
@@ -620,9 +620,9 @@ class Label : gtk.misc.Misc
   /**
       Get `yalign` property.
       Returns: The yalign property determines the vertical aligment of the label text
-      inside the labels size allocation. Compare this to #GtkWidget:valign,
-      which determines how the labels size allocation is positioned in the
-      space available for the label.
+        inside the labels size allocation. Compare this to #GtkWidget:valign,
+        which determines how the labels size allocation is positioned in the
+        space available for the label.
   */
   override @property float yalign()
   {
@@ -633,9 +633,9 @@ class Label : gtk.misc.Misc
       Set `yalign` property.
       Params:
         propval = The yalign property determines the vertical aligment of the label text
-        inside the labels size allocation. Compare this to #GtkWidget:valign,
-        which determines how the labels size allocation is positioned in the
-        space available for the label.
+          inside the labels size allocation. Compare this to #GtkWidget:valign,
+          which determines how the labels size allocation is positioned in the
+          space available for the label.
   */
   override @property void yalign(float propval)
   {
@@ -1392,12 +1392,12 @@ class Label : gtk.misc.Misc
       Connect to `ActivateCurrentLink` signal.
   
       A [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user activates a link in the label.
-      
-      Applications may also emit the signal with [gobject.global.signalEmitByName]
-      if they need to control activation of URIs programmatically.
-      
-      The default bindings for this signal are all forms of the Enter key.
+        which gets emitted when the user activates a link in the label.
+        
+        Applications may also emit the signal with [gobject.global.signalEmitByName]
+        if they need to control activation of URIs programmatically.
+        
+        The default bindings for this signal are all forms of the Enter key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1435,8 +1435,8 @@ class Label : gtk.misc.Misc
       Connect to `ActivateLink` signal.
   
       The signal which gets emitted to activate a URI.
-      Applications may connect to it to override the default behaviour,
-      which is to call [gtk.global.showUriOnWindow].
+        Applications may connect to it to override the default behaviour,
+        which is to call [gtk.global.showUriOnWindow].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1483,10 +1483,10 @@ class Label : gtk.misc.Misc
       Connect to `CopyClipboard` signal.
   
       The ::copy-clipboard signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to copy the selection to the clipboard.
-      
-      The default binding for this signal is Ctrl-c.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to copy the selection to the clipboard.
+        
+        The default binding for this signal is Ctrl-c.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1524,24 +1524,24 @@ class Label : gtk.misc.Misc
       Connect to `MoveCursor` signal.
   
       The ::move-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a cursor movement.
-      If the cursor is not visible in entry, this signal causes
-      the viewport to be moved instead.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal come in two variants,
-      the variant with the Shift modifier extends the selection,
-      the variant without the Shift modifer does not.
-      There are too many key combinations to list them all here.
-      $(LIST
-        * Arrow keys move by individual characters/lines
-        * Ctrl-arrow key combinations move by words/paragraphs
-        * Home/End keys move to the ends of the buffer
-      )
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates a cursor movement.
+        If the cursor is not visible in entry, this signal causes
+        the viewport to be moved instead.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal come in two variants,
+        the variant with the Shift modifier extends the selection,
+        the variant without the Shift modifer does not.
+        There are too many key combinations to list them all here.
+        $(LIST
+          * Arrow keys move by individual characters/lines
+          * Ctrl-arrow key combinations move by words/paragraphs
+          * Home/End keys move to the ends of the buffer
+        )
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1600,11 +1600,11 @@ class Label : gtk.misc.Misc
       Connect to `PopulatePopup` signal.
   
       The ::populate-popup signal gets emitted before showing the
-      context menu of the label. Note that only selectable labels
-      have context menus.
-      
-      If you need to add items to the context menu, connect
-      to this signal and append your menuitems to the menu.
+        context menu of the label. Note that only selectable labels
+        have context menus.
+        
+        If you need to add items to the context menu, connect
+        to this signal and append your menuitems to the menu.
   
       Params:
         callback = signal callback delegate or function to connect

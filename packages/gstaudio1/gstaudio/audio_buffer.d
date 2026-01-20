@@ -22,7 +22,7 @@ import gstaudio.types;
 */
 class AudioBuffer
 {
-  GstAudioBuffer cInstance;
+  GstAudioBuffer _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -30,7 +30,7 @@ class AudioBuffer
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_buffer.AudioBuffer");
 
-    cInstance = *cast(GstAudioBuffer*)ptr;
+    _cInstance = *cast(GstAudioBuffer*)ptr;
 
     if (take)
       gFree(ptr);
@@ -39,7 +39,7 @@ class AudioBuffer
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -140,7 +140,7 @@ class AudioBuffer
   static gst.buffer.Buffer clip(gst.buffer.Buffer buffer, gst.segment.Segment segment, int rate, int bpf)
   {
     GstBuffer* _cretval;
-    _cretval = gst_audio_buffer_clip(buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null, rate, bpf);
+    _cretval = gst_audio_buffer_clip(buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null, cast(const(GstSegment)*)&segment, rate, bpf);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

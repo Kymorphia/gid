@@ -15,7 +15,7 @@ import gstrtsp.types;
 */
 class RTSPWatch
 {
-  GstRTSPWatch* cInstancePtr;
+  GstRTSPWatch* _cInstancePtr;
   bool owned;
 
   /** */
@@ -24,7 +24,7 @@ class RTSPWatch
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtsp.rtspwatch.RTSPWatch");
 
-    cInstancePtr = cast(GstRTSPWatch*)ptr;
+    _cInstancePtr = cast(GstRTSPWatch*)ptr;
 
     owned = take;
   }
@@ -32,7 +32,7 @@ class RTSPWatch
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -117,6 +117,7 @@ class RTSPWatch
     foreach (obj; messages)
       _tmpmessages ~= *cast(GstRTSPMessage*)obj._cPtr;
     GstRTSPMessage* _messages = _tmpmessages.ptr;
+
     _cretval = gst_rtsp_watch_send_messages(cast(GstRTSPWatch*)this._cPtr, _messages, _nMessages, cast(uint*)&id);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -173,7 +174,7 @@ class RTSPWatch
   gstrtsp.types.RTSPResult waitBacklog(glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_watch_wait_backlog(cast(GstRTSPWatch*)this._cPtr, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_watch_wait_backlog(cast(GstRTSPWatch*)this._cPtr, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

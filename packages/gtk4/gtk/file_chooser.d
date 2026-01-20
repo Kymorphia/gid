@@ -88,7 +88,7 @@ interface FileChooser
   /**
       Get `createFolders` property.
       Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
-      will offer the user to create new folders.
+        will offer the user to create new folders.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -98,7 +98,7 @@ interface FileChooser
       Set `createFolders` property.
       Params:
         propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
-        will offer the user to create new folders.
+          will offer the user to create new folders.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -124,10 +124,10 @@ interface FileChooser
   /**
       Get `filters` property.
       Returns: A [gio.list_model.ListModel] containing the filters that have been
-      added with [gtk.file_chooser.FileChooser.addFilter].
-      
-      The returned object should not be modified. It may
-      or may not be updated for later changes.
+        added with [gtk.file_chooser.FileChooser.addFilter].
+        
+        The returned object should not be modified. It may
+        or may not be updated for later changes.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -153,10 +153,10 @@ interface FileChooser
   /**
       Get `shortcutFolders` property.
       Returns: A [gio.list_model.ListModel] containing the shortcut folders that have been
-      added with [gtk.file_chooser.FileChooser.addShortcutFolder].
-      
-      The returned object should not be modified. It may
-      or may not be updated for later changes.
+        added with [gtk.file_chooser.FileChooser.addShortcutFolder].
+        
+        The returned object should not be modified. It may
+        or may not be updated for later changes.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */

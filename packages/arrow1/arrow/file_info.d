@@ -104,7 +104,7 @@ class FileInfo : gobject.object.ObjectWrap
   /**
       Get `size` property.
       Returns: The size in bytes, if available
-      Only regular files are guaranteed to have a size.
+        Only regular files are guaranteed to have a size.
   */
   @property long size()
   {
@@ -115,7 +115,7 @@ class FileInfo : gobject.object.ObjectWrap
       Set `size` property.
       Params:
         propval = The size in bytes, if available
-        Only regular files are guaranteed to have a size.
+          Only regular files are guaranteed to have a size.
   */
   @property void size(long propval)
   {

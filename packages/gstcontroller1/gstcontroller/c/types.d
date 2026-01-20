@@ -161,7 +161,7 @@ struct GstControlPoint
       double c3s;
     }
 
-    CubicMonotonicType cubic_monotonic;
+    CubicMonotonicType cubicMonotonic;
 
     /** */
     ubyte[64] GstReserved;

@@ -348,7 +348,9 @@ class GLContext : gst.object.ObjectWrap
   {
     GstStructure* _cretval;
     _cretval = gst_gl_context_get_config(cast(GstGLContext*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -463,7 +465,9 @@ class GLContext : gst.object.ObjectWrap
   {
     GThread* _cretval;
     _cretval = gst_gl_context_get_thread(cast(GstGLContext*)this._cPtr);
-    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.Take) : null;
+    glib.thread.Thread _retval;
+    if (_cretval)
+      _retval = *cast(glib.thread.Thread*)_cretval;
     return _retval;
   }
 
@@ -503,10 +507,10 @@ class GLContext : gst.object.ObjectWrap
                       configuring the OpenGL context
       Returns: whether gl_config could be successfully set on context
   */
-  bool requestConfig(gst.structure.Structure glConfig = null)
+  bool requestConfig(gst.structure.Structure glConfig)
   {
     bool _retval;
-    _retval = cast(bool)gst_gl_context_request_config(cast(GstGLContext*)this._cPtr, glConfig ? cast(GstStructure*)glConfig._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_gl_context_request_config(cast(GstGLContext*)this._cPtr, cast(GstStructure*)&glConfig);
     return _retval;
   }
 
@@ -587,7 +591,6 @@ class GLContext : gst.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_gl_context_thread_add(cast(GstGLContext*)this._cPtr, _funcCB, _func);
   }

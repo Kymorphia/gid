@@ -12,7 +12,7 @@ import gtk.types;
 */
 class RecentFilterInfo
 {
-  GtkRecentFilterInfo cInstance;
+  GtkRecentFilterInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class RecentFilterInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.recent_filter_info.RecentFilterInfo");
 
-    cInstance = *cast(GtkRecentFilterInfo*)ptr;
+    _cInstance = *cast(GtkRecentFilterInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class RecentFilterInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -74,7 +74,7 @@ class RecentFilterInfo
   /**
       Get `displayName` field.
       Returns: The string that will be used to display
-         the file in the recent chooser.
+           the file in the recent chooser.
   */
   @property string displayName()
   {
@@ -85,7 +85,7 @@ class RecentFilterInfo
       Set `displayName` field.
       Params:
         propval = The string that will be used to display
-           the file in the recent chooser.
+             the file in the recent chooser.
   */
   @property void displayName(string propval)
   {
@@ -116,7 +116,7 @@ class RecentFilterInfo
   /**
       Get `age` field.
       Returns: The number of days elapsed since the file has been
-         registered.
+           registered.
   */
   @property int age()
   {
@@ -127,7 +127,7 @@ class RecentFilterInfo
       Set `age` field.
       Params:
         propval = The number of days elapsed since the file has been
-           registered.
+             registered.
   */
   @property void age(int propval)
   {

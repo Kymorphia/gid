@@ -41,7 +41,7 @@ class ObjectWrap : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -148,7 +148,6 @@ class ObjectWrap : gobject.boxed.Boxed
       (*_dlg)(object ? new json.object.ObjectWrap(cast(void*)object, No.Take) : null, _memberName, memberNode ? new json.node.Node(cast(void*)memberNode, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     json_object_foreach_member(cast(JsonObject*)this._cPtr, _funcCB, _func);
   }

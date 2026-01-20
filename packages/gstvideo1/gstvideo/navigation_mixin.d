@@ -95,7 +95,7 @@ template NavigationT()
   /** */
   override void sendEvent(gst.structure.Structure structure)
   {
-    gst_navigation_send_event(cast(GstNavigation*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(No.Dup) : null);
+    gst_navigation_send_event(cast(GstNavigation*)this._cPtr, cast(GstStructure*)&structure);
   }
 
   /**

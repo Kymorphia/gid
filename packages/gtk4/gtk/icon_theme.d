@@ -95,10 +95,10 @@ class IconTheme : gobject.object.ObjectWrap
   /**
       Get `themeName` property.
       Returns: The name of the icon theme that is being used.
-      
-      Unless set to a different value, this will be the value of
-      the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
-      object associated to the display of the icontheme object.
+        
+        Unless set to a different value, this will be the value of
+        the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
+        object associated to the display of the icontheme object.
   */
   @property string themeName()
   {
@@ -109,10 +109,10 @@ class IconTheme : gobject.object.ObjectWrap
       Set `themeName` property.
       Params:
         propval = The name of the icon theme that is being used.
-        
-        Unless set to a different value, this will be the value of
-        the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
-        object associated to the display of the icontheme object.
+          
+          Unless set to a different value, this will be the value of
+          the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
+          object associated to the display of the icontheme object.
   */
   @property void themeName(string propval)
   {
@@ -219,8 +219,8 @@ class IconTheme : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -253,8 +253,8 @@ class IconTheme : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] != 0; _cretlength++)
-        break;
+      while (_cretval[_cretlength] != 0)
+        _cretlength++;
       _retval = cast(int[])_cretval[0 .. _cretlength].dup;
       gFree(cast(void*)_cretval);
     }
@@ -276,8 +276,8 @@ class IconTheme : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -301,8 +301,8 @@ class IconTheme : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -417,6 +417,7 @@ class IconTheme : gobject.object.ObjectWrap
       _tmpfallbacks ~= s.toCString(No.Alloc);
     _tmpfallbacks ~= null;
     const(char*)* _fallbacks = _tmpfallbacks.ptr;
+
     _cretval = gtk_icon_theme_lookup_icon(cast(GtkIconTheme*)this._cPtr, _iconName, _fallbacks, size, scale, direction, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
@@ -446,6 +447,7 @@ class IconTheme : gobject.object.ObjectWrap
       _tmppath ~= s.toCString(No.Alloc);
     _tmppath ~= null;
     const(char*)* _path = _tmppath.ptr;
+
     gtk_icon_theme_set_resource_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -477,6 +479,7 @@ class IconTheme : gobject.object.ObjectWrap
       _tmppath ~= s.toCString(No.Alloc);
     _tmppath ~= null;
     const(char*)* _path = _tmppath.ptr;
+
     gtk_icon_theme_set_search_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -501,10 +504,10 @@ class IconTheme : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Emitted when the icon theme changes.
-      
-      This can happen because current icon theme is switched or
-      because GTK detects that a change has occurred in the
-      contents of the current icon theme.
+        
+        This can happen because current icon theme is switched or
+        because GTK detects that a change has occurred in the
+        contents of the current icon theme.
   
       Params:
         callback = signal callback delegate or function to connect

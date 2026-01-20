@@ -201,7 +201,9 @@ class Context : gobject.object.ObjectWrap
   {
     const(PangoMatrix)* _cretval;
     _cretval = pango_context_get_matrix(cast(PangoContext*)this._cPtr);
-    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
+    pango.matrix.Matrix _retval;
+    if (_cretval)
+      _retval = *cast(pango.matrix.Matrix*)_cretval;
     return _retval;
   }
 
@@ -233,7 +235,9 @@ class Context : gobject.object.ObjectWrap
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_context_get_metrics(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
+    pango.font_metrics.FontMetrics _retval;
+    if (_cretval)
+      _retval = *cast(pango.font_metrics.FontMetrics*)_cretval;
     return _retval;
   }
 
@@ -427,9 +431,9 @@ class Context : gobject.object.ObjectWrap
         matrix = a [pango.matrix.Matrix], or null to unset any existing
           matrix. (No matrix set is the same as setting the identity matrix.)
   */
-  void setMatrix(pango.matrix.Matrix matrix = null)
+  void setMatrix(pango.matrix.Matrix matrix)
   {
-    pango_context_set_matrix(cast(PangoContext*)this._cPtr, matrix ? cast(const(PangoMatrix)*)matrix._cPtr(No.Dup) : null);
+    pango_context_set_matrix(cast(PangoContext*)this._cPtr, cast(const(PangoMatrix)*)&matrix);
   }
 
   /**

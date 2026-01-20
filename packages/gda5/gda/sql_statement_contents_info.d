@@ -11,7 +11,7 @@ import gid.gid;
 */
 class SqlStatementContentsInfo
 {
-  GdaSqlStatementContentsInfo cInstance;
+  GdaSqlStatementContentsInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class SqlStatementContentsInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_statement_contents_info.SqlStatementContentsInfo");
 
-    cInstance = *cast(GdaSqlStatementContentsInfo*)ptr;
+    _cInstance = *cast(GdaSqlStatementContentsInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class SqlStatementContentsInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

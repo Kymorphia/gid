@@ -54,9 +54,9 @@ class VolumeButton : gtk.scale_button.ScaleButton
   /**
       Get `useSymbolic` property.
       Returns: Whether to use symbolic icons as the icons. Note that
-      if the symbolic icons are not available in your installed
-      theme, then the normal (potentially colorful) icons will
-      be used.
+        if the symbolic icons are not available in your installed
+        theme, then the normal (potentially colorful) icons will
+        be used.
   */
   @property bool useSymbolic()
   {
@@ -67,9 +67,9 @@ class VolumeButton : gtk.scale_button.ScaleButton
       Set `useSymbolic` property.
       Params:
         propval = Whether to use symbolic icons as the icons. Note that
-        if the symbolic icons are not available in your installed
-        theme, then the normal (potentially colorful) icons will
-        be used.
+          if the symbolic icons are not available in your installed
+          theme, then the normal (potentially colorful) icons will
+          be used.
   */
   @property void useSymbolic(bool propval)
   {

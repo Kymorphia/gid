@@ -118,9 +118,9 @@ class HeaderBar : gtk.widget.Widget
   /**
       Get `decorationLayout` property.
       Returns: The decoration layout for buttons.
-      
-      If this property is not set, the
-      `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+        
+        If this property is not set, the
+        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
   */
   @property string decorationLayout()
   {
@@ -131,9 +131,9 @@ class HeaderBar : gtk.widget.Widget
       Set `decorationLayout` property.
       Params:
         propval = The decoration layout for buttons.
-        
-        If this property is not set, the
-        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          
+          If this property is not set, the
+          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
   */
   @property void decorationLayout(string propval)
   {
@@ -143,11 +143,11 @@ class HeaderBar : gtk.widget.Widget
   /**
       Get `showTitleButtons` property.
       Returns: Whether to show title buttons like close, minimize, maximize.
-      
-      Which buttons are actually shown and where is determined
-      by the `property@Gtk.HeaderBar:decoration-layout` property,
-      and by the state of the window (e.g. a close button will not
-      be shown if the window can't be closed).
+        
+        Which buttons are actually shown and where is determined
+        by the `property@Gtk.HeaderBar:decoration-layout` property,
+        and by the state of the window (e.g. a close button will not
+        be shown if the window can't be closed).
   */
   @property bool showTitleButtons()
   {
@@ -158,11 +158,11 @@ class HeaderBar : gtk.widget.Widget
       Set `showTitleButtons` property.
       Params:
         propval = Whether to show title buttons like close, minimize, maximize.
-        
-        Which buttons are actually shown and where is determined
-        by the `property@Gtk.HeaderBar:decoration-layout` property,
-        and by the state of the window (e.g. a close button will not
-        be shown if the window can't be closed).
+          
+          Which buttons are actually shown and where is determined
+          by the `property@Gtk.HeaderBar:decoration-layout` property,
+          and by the state of the window (e.g. a close button will not
+          be shown if the window can't be closed).
   */
   @property void showTitleButtons(bool propval)
   {

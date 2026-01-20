@@ -44,9 +44,9 @@ class Workbench : gtk.window_group.WindowGroup
   /**
       Get `id` property.
       Returns: The "id" of the workbench.
-      
-      This is generally used by applications to help destinguish between
-      projects, so that the project-id matches the workbench-id.
+        
+        This is generally used by applications to help destinguish between
+        projects, so that the project-id matches the workbench-id.
   */
   @property string id()
   {
@@ -57,9 +57,9 @@ class Workbench : gtk.window_group.WindowGroup
       Set `id` property.
       Params:
         propval = The "id" of the workbench.
-        
-        This is generally used by applications to help destinguish between
-        projects, so that the project-id matches the workbench-id.
+          
+          This is generally used by applications to help destinguish between
+          projects, so that the project-id matches the workbench-id.
   */
   @property void id(string propval)
   {
@@ -144,7 +144,6 @@ class Workbench : gtk.window_group.WindowGroup
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.workspace.Workspace)(cast(void*)workspace, No.Take));
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
-
     auto _foreachFunc = foreachFunc ? cast(void*)&(foreachFunc) : null;
     panel_workbench_foreach_workspace(cast(PanelWorkbench*)this._cPtr, _foreachFuncCB, _foreachFunc);
   }

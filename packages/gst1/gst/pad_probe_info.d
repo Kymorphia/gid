@@ -15,7 +15,7 @@ import gst.types;
 */
 class PadProbeInfo
 {
-  GstPadProbeInfo cInstance;
+  GstPadProbeInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class PadProbeInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.pad_probe_info.PadProbeInfo");
 
-    cInstance = *cast(GstPadProbeInfo*)ptr;
+    _cInstance = *cast(GstPadProbeInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class PadProbeInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -76,7 +76,7 @@ class PadProbeInfo
   /**
       Get `offset` field.
       Returns: offset of pull probe, this field is valid when @type contains
-         #GST_PAD_PROBE_TYPE_PULL
+           #GST_PAD_PROBE_TYPE_PULL
   */
   @property ulong offset()
   {
@@ -87,7 +87,7 @@ class PadProbeInfo
       Set `offset` field.
       Params:
         propval = offset of pull probe, this field is valid when @type contains
-           #GST_PAD_PROBE_TYPE_PULL
+             #GST_PAD_PROBE_TYPE_PULL
   */
   @property void offset(ulong propval)
   {
@@ -97,7 +97,7 @@ class PadProbeInfo
   /**
       Get `size` field.
       Returns: size of pull probe, this field is valid when @type contains
-         #GST_PAD_PROBE_TYPE_PULL
+           #GST_PAD_PROBE_TYPE_PULL
   */
   @property uint size()
   {
@@ -108,7 +108,7 @@ class PadProbeInfo
       Set `size` field.
       Params:
         propval = size of pull probe, this field is valid when @type contains
-           #GST_PAD_PROBE_TYPE_PULL
+             #GST_PAD_PROBE_TYPE_PULL
   */
   @property void size(uint propval)
   {

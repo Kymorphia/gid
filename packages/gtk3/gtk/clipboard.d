@@ -255,7 +255,6 @@ class Clipboard : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), selectionData ? new gtk.selection_data.SelectionData(cast(void*)selectionData, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_clipboard_request_contents(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, _callbackCB, _callback);
   }
@@ -285,7 +284,6 @@ class Clipboard : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(void*)pixbuf, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_clipboard_request_image(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
   }
@@ -318,7 +316,6 @@ class Clipboard : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), format ? new gdk.atom.Atom(cast(void*)format, No.Take) : null, _text);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_clipboard_request_rich_text(cast(GtkClipboard*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -348,7 +345,6 @@ class Clipboard : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _text);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_clipboard_request_text(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
   }
@@ -384,7 +380,6 @@ class Clipboard : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _uris);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_clipboard_request_uris(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
   }
@@ -412,6 +407,7 @@ class Clipboard : gobject.object.ObjectWrap
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_clipboard_set_can_store(cast(GtkClipboard*)this._cPtr, _targets, _nTargets);
   }
 
@@ -568,8 +564,8 @@ class Clipboard : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -680,8 +676,8 @@ class Clipboard : gobject.object.ObjectWrap
       Connect to `OwnerChange` signal.
   
       The ::owner-change signal is emitted when GTK+ receives an
-      event that indicates that the ownership of the selection
-      associated with clipboard has changed.
+        event that indicates that the ownership of the selection
+        associated with clipboard has changed.
   
       Params:
         callback = signal callback delegate or function to connect

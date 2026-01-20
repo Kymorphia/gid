@@ -106,9 +106,9 @@ class ShortcutsWindow : gtk.window.Window
   /**
       Get `sectionName` property.
       Returns: The name of the section to show.
-      
-      This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
-      objects that are in this shortcuts window.
+        
+        This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
+        objects that are in this shortcuts window.
   */
   @property string sectionName()
   {
@@ -119,9 +119,9 @@ class ShortcutsWindow : gtk.window.Window
       Set `sectionName` property.
       Params:
         propval = The name of the section to show.
-        
-        This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
-        objects that are in this shortcuts window.
+          
+          This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
+          objects that are in this shortcuts window.
   */
   @property void sectionName(string propval)
   {
@@ -131,12 +131,12 @@ class ShortcutsWindow : gtk.window.Window
   /**
       Get `viewName` property.
       Returns: The view name by which to filter the contents.
-      
-      This should correspond to the [gtk.shortcuts_group.ShortcutsGroup.view]
-      property of some of the [gtk.shortcuts_group.ShortcutsGroup] objects that
-      are inside this shortcuts window.
-      
-      Set this to null to show all groups.
+        
+        This should correspond to the [gtk.shortcuts_group.ShortcutsGroup.view]
+        property of some of the [gtk.shortcuts_group.ShortcutsGroup] objects that
+        are inside this shortcuts window.
+        
+        Set this to null to show all groups.
   */
   @property string viewName()
   {
@@ -147,12 +147,12 @@ class ShortcutsWindow : gtk.window.Window
       Set `viewName` property.
       Params:
         propval = The view name by which to filter the contents.
-        
-        This should correspond to the [gtk.shortcuts_group.ShortcutsGroup.view]
-        property of some of the [gtk.shortcuts_group.ShortcutsGroup] objects that
-        are inside this shortcuts window.
-        
-        Set this to null to show all groups.
+          
+          This should correspond to the [gtk.shortcuts_group.ShortcutsGroup.view]
+          property of some of the [gtk.shortcuts_group.ShortcutsGroup] objects that
+          are inside this shortcuts window.
+          
+          Set this to null to show all groups.
   */
   @property void viewName(string propval)
   {
@@ -180,10 +180,10 @@ class ShortcutsWindow : gtk.window.Window
       Connect to `Close` signal.
   
       Emitted when the user uses a keybinding to close the window.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is the Escape key.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is the Escape key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -221,10 +221,10 @@ class ShortcutsWindow : gtk.window.Window
       Connect to `Search` signal.
   
       Emitted when the user uses a keybinding to start a search.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is Control-F.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is Control-F.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -65,7 +65,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `allowBold` property.
       Returns: Controls whether or not the terminal will attempt to draw bold text,
-      by using a bold font variant.
+        by using a bold font variant.
   
       Deprecated: There's probably no reason for this feature to exist.
   */
@@ -78,7 +78,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `allowBold` property.
       Params:
         propval = Controls whether or not the terminal will attempt to draw bold text,
-        by using a bold font variant.
+          by using a bold font variant.
   
       Deprecated: There's probably no reason for this feature to exist.
   */
@@ -109,7 +109,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `audibleBell` property.
       Returns: Controls whether or not the terminal will beep when the child outputs the
-      "bl" sequence.
+        "bl" sequence.
   */
   @property bool audibleBell()
   {
@@ -120,7 +120,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `audibleBell` property.
       Params:
         propval = Controls whether or not the terminal will beep when the child outputs the
-        "bl" sequence.
+          "bl" sequence.
   */
   @property void audibleBell(bool propval)
   {
@@ -130,7 +130,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `backspaceBinding` property.
       Returns: Controls what string or control sequence the terminal sends to its child
-      when the user presses the backspace key.
+        when the user presses the backspace key.
   */
   @property vte.types.EraseBinding backspaceBinding()
   {
@@ -141,7 +141,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `backspaceBinding` property.
       Params:
         propval = Controls what string or control sequence the terminal sends to its child
-        when the user presses the backspace key.
+          when the user presses the backspace key.
   */
   @property void backspaceBinding(vte.types.EraseBinding propval)
   {
@@ -151,8 +151,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `boldIsBright` property.
       Returns: Whether the SGR 1 attribute also switches to the bright counterpart
-      of the first 8 palette colors, in addition to making them bold (legacy behavior)
-      or if SGR 1 only enables bold and leaves the color intact.
+        of the first 8 palette colors, in addition to making them bold (legacy behavior)
+        or if SGR 1 only enables bold and leaves the color intact.
   */
   @property bool boldIsBright()
   {
@@ -163,8 +163,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `boldIsBright` property.
       Params:
         propval = Whether the SGR 1 attribute also switches to the bright counterpart
-        of the first 8 palette colors, in addition to making them bold (legacy behavior)
-        or if SGR 1 only enables bold and leaves the color intact.
+          of the first 8 palette colors, in addition to making them bold (legacy behavior)
+          or if SGR 1 only enables bold and leaves the color intact.
   */
   @property void boldIsBright(bool propval)
   {
@@ -212,12 +212,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `cjkAmbiguousWidth` property.
       Returns: This setting controls whether ambiguous-width characters are narrow or wide.
-      (Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
-      the width of ambiguous-width characters is fixed and determined by the encoding
-      itself.)
-      
-      This setting only takes effect the next time the terminal is reset, either
-      via escape sequence or with [vte.terminal.Terminal.reset].
+        (Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
+        the width of ambiguous-width characters is fixed and determined by the encoding
+        itself.)
+        
+        This setting only takes effect the next time the terminal is reset, either
+        via escape sequence or with [vte.terminal.Terminal.reset].
   */
   @property int cjkAmbiguousWidth()
   {
@@ -228,12 +228,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `cjkAmbiguousWidth` property.
       Params:
         propval = This setting controls whether ambiguous-width characters are narrow or wide.
-        (Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
-        the width of ambiguous-width characters is fixed and determined by the encoding
-        itself.)
-        
-        This setting only takes effect the next time the terminal is reset, either
-        via escape sequence or with [vte.terminal.Terminal.reset].
+          (Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
+          the width of ambiguous-width characters is fixed and determined by the encoding
+          itself.)
+          
+          This setting only takes effect the next time the terminal is reset, either
+          via escape sequence or with [vte.terminal.Terminal.reset].
   */
   @property void cjkAmbiguousWidth(int propval)
   {
@@ -243,8 +243,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `contextMenu` property.
       Returns: The menu used for context menus. Note that context menu model set with the
-      #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
-      takes precedence over this.
+        #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
+        takes precedence over this.
   */
   @property gtk.menu.Menu contextMenu()
   {
@@ -255,8 +255,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `contextMenu` property.
       Params:
         propval = The menu used for context menus. Note that context menu model set with the
-        #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
-        takes precedence over this.
+          #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
+          takes precedence over this.
   */
   @property void contextMenu(gtk.menu.Menu propval)
   {
@@ -266,8 +266,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `contextMenuModel` property.
       Returns: The menu model used for context menus. If non-null, the context menu is
-      generated from this model, and overrides a context menu set with the
-      #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
+        generated from this model, and overrides a context menu set with the
+        #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
   */
   @property gio.menu_model.MenuModel contextMenuModel()
   {
@@ -278,8 +278,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `contextMenuModel` property.
       Params:
         propval = The menu model used for context menus. If non-null, the context menu is
-        generated from this model, and overrides a context menu set with the
-        #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
+          generated from this model, and overrides a context menu set with the
+          #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
   */
   @property void contextMenuModel(gio.menu_model.MenuModel propval)
   {
@@ -298,7 +298,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `currentContainerRuntime` property.
       Returns: The name of the runtime toolset used to set up the current
-      container, or null if unset.
+        container, or null if unset.
   */
   @property string currentContainerRuntime()
   {
@@ -326,7 +326,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `cursorBlinkMode` property.
       Returns: Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
-      will use the #GtkSettings:gtk-cursor-blink setting.
+        will use the #GtkSettings:gtk-cursor-blink setting.
   */
   @property vte.types.CursorBlinkMode cursorBlinkMode()
   {
@@ -337,7 +337,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `cursorBlinkMode` property.
       Params:
         propval = Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
-        will use the #GtkSettings:gtk-cursor-blink setting.
+          will use the #GtkSettings:gtk-cursor-blink setting.
   */
   @property void cursorBlinkMode(vte.types.CursorBlinkMode propval)
   {
@@ -366,7 +366,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `deleteBinding` property.
       Returns: Controls what string or control sequence the terminal sends to its child
-      when the user presses the delete key.
+        when the user presses the delete key.
   */
   @property vte.types.EraseBinding deleteBinding()
   {
@@ -377,7 +377,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `deleteBinding` property.
       Params:
         propval = Controls what string or control sequence the terminal sends to its child
-        when the user presses the delete key.
+          when the user presses the delete key.
   */
   @property void deleteBinding(vte.types.EraseBinding propval)
   {
@@ -475,12 +475,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `encoding` property.
       Returns: Controls the encoding the terminal will expect data from the child to
-      be encoded with.  For certain terminal types, applications executing in the
-      terminal can change the encoding.  The default is defined by the
-      application's locale settings.
+        be encoded with.  For certain terminal types, applications executing in the
+        terminal can change the encoding.  The default is defined by the
+        application's locale settings.
   
       Deprecated: Instead of using this, you should use a tool like
-        luit(1) when support for non-UTF-8 is required
+          luit(1) when support for non-UTF-8 is required
   */
   @property string encoding()
   {
@@ -491,12 +491,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `encoding` property.
       Params:
         propval = Controls the encoding the terminal will expect data from the child to
-        be encoded with.  For certain terminal types, applications executing in the
-        terminal can change the encoding.  The default is defined by the
-        application's locale settings.
+          be encoded with.  For certain terminal types, applications executing in the
+          terminal can change the encoding.  The default is defined by the
+          application's locale settings.
   
       Deprecated: Instead of using this, you should use a tool like
-        luit(1) when support for non-UTF-8 is required
+          luit(1) when support for non-UTF-8 is required
   */
   @property void encoding(string propval)
   {
@@ -506,10 +506,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `fontDesc` property.
       Returns: Specifies the font used for rendering all text displayed by the terminal,
-      overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
-      will immediately attempt to load the desired font, retrieve its
-      metrics, and attempt to resize itself to keep the same number of rows
-      and columns.
+        overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
+        will immediately attempt to load the desired font, retrieve its
+        metrics, and attempt to resize itself to keep the same number of rows
+        and columns.
   */
   @property pango.font_description.FontDescription fontDesc()
   {
@@ -520,10 +520,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `fontDesc` property.
       Params:
         propval = Specifies the font used for rendering all text displayed by the terminal,
-        overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
-        will immediately attempt to load the desired font, retrieve its
-        metrics, and attempt to resize itself to keep the same number of rows
-        and columns.
+          overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
+          will immediately attempt to load the desired font, retrieve its
+          metrics, and attempt to resize itself to keep the same number of rows
+          and columns.
   */
   @property void fontDesc(pango.font_description.FontDescription propval)
   {
@@ -533,11 +533,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `fontOptions` property.
       Returns: The terminal's font options, or null to use the default font options.
-      
-      Note that on GTK4, the terminal by default uses font options
-      with [cairo.types.HintMetrics.On] set; to override that, use this
-      function to set a #cairo_font_options_t that has
-      [cairo.types.HintMetrics.Off] set.
+        
+        Note that on GTK4, the terminal by default uses font options
+        with [cairo.types.HintMetrics.On] set; to override that, use this
+        function to set a #cairo_font_options_t that has
+        [cairo.types.HintMetrics.Off] set.
   */
   @property cairo.font_options.FontOptions fontOptions()
   {
@@ -548,11 +548,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `fontOptions` property.
       Params:
         propval = The terminal's font options, or null to use the default font options.
-        
-        Note that on GTK4, the terminal by default uses font options
-        with [cairo.types.HintMetrics.On] set; to override that, use this
-        function to set a #cairo_font_options_t that has
-        [cairo.types.HintMetrics.Off] set.
+          
+          Note that on GTK4, the terminal by default uses font options
+          with [cairo.types.HintMetrics.On] set; to override that, use this
+          function to set a #cairo_font_options_t that has
+          [cairo.types.HintMetrics.Off] set.
   */
   @property void fontOptions(cairo.font_options.FontOptions propval)
   {
@@ -596,8 +596,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `inputEnabled` property.
       Returns: Controls whether the terminal allows user input. When user input is disabled,
-      key press and mouse button press and motion events are not sent to the
-      terminal's child.
+        key press and mouse button press and motion events are not sent to the
+        terminal's child.
   */
   @property bool inputEnabled()
   {
@@ -608,8 +608,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `inputEnabled` property.
       Params:
         propval = Controls whether the terminal allows user input. When user input is disabled,
-        key press and mouse button press and motion events are not sent to the
-        terminal's child.
+          key press and mouse button press and motion events are not sent to the
+          terminal's child.
   */
   @property void inputEnabled(bool propval)
   {
@@ -619,8 +619,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `pointerAutohide` property.
       Returns: Controls the value of the terminal's mouse autohide setting.  When autohiding
-      is enabled, the mouse cursor will be hidden when the user presses a key and
-      shown when the user moves the mouse.
+        is enabled, the mouse cursor will be hidden when the user presses a key and
+        shown when the user moves the mouse.
   */
   @property bool pointerAutohide()
   {
@@ -631,8 +631,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `pointerAutohide` property.
       Params:
         propval = Controls the value of the terminal's mouse autohide setting.  When autohiding
-        is enabled, the mouse cursor will be hidden when the user presses a key and
-        shown when the user moves the mouse.
+          is enabled, the mouse cursor will be hidden when the user presses a key and
+          shown when the user moves the mouse.
   */
   @property void pointerAutohide(bool propval)
   {
@@ -661,7 +661,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `rewrapOnResize` property.
       Returns: Controls whether or not the terminal will rewrap its contents, including
-      the scrollback buffer, whenever the terminal's width changes.
+        the scrollback buffer, whenever the terminal's width changes.
   */
   @property bool rewrapOnResize()
   {
@@ -672,7 +672,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `rewrapOnResize` property.
       Params:
         propval = Controls whether or not the terminal will rewrap its contents, including
-        the scrollback buffer, whenever the terminal's width changes.
+          the scrollback buffer, whenever the terminal's width changes.
   */
   @property void rewrapOnResize(bool propval)
   {
@@ -682,7 +682,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `scrollOnInsert` property.
       Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
-      the viewable history when the text is inserted (e.g. by a paste).
+        the viewable history when the text is inserted (e.g. by a paste).
   */
   @property bool scrollOnInsert()
   {
@@ -693,7 +693,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `scrollOnInsert` property.
       Params:
         propval = Controls whether or not the terminal will forcibly scroll to the bottom of
-        the viewable history when the text is inserted (e.g. by a paste).
+          the viewable history when the text is inserted (e.g. by a paste).
   */
   @property void scrollOnInsert(bool propval)
   {
@@ -703,8 +703,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `scrollOnKeystroke` property.
       Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
-      the viewable history when the user presses a key.  Modifier keys do not
-      trigger this behavior.
+        the viewable history when the user presses a key.  Modifier keys do not
+        trigger this behavior.
   */
   @property bool scrollOnKeystroke()
   {
@@ -715,8 +715,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `scrollOnKeystroke` property.
       Params:
         propval = Controls whether or not the terminal will forcibly scroll to the bottom of
-        the viewable history when the user presses a key.  Modifier keys do not
-        trigger this behavior.
+          the viewable history when the user presses a key.  Modifier keys do not
+          trigger this behavior.
   */
   @property void scrollOnKeystroke(bool propval)
   {
@@ -726,7 +726,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `scrollOnOutput` property.
       Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
-      the viewable history when the new data is received from the child.
+        the viewable history when the new data is received from the child.
   */
   @property bool scrollOnOutput()
   {
@@ -737,7 +737,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `scrollOnOutput` property.
       Params:
         propval = Controls whether or not the terminal will forcibly scroll to the bottom of
-        the viewable history when the new data is received from the child.
+          the viewable history when the new data is received from the child.
   */
   @property void scrollOnOutput(bool propval)
   {
@@ -747,8 +747,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `scrollUnitIsPixels` property.
       Returns: Controls whether the terminal's GtkAdjustment values unit is lines
-      or pixels. This can be enabled when the terminal is the child of a
-      GtkScrolledWindow to fix some bugs with its kinetic scrolling.
+        or pixels. This can be enabled when the terminal is the child of a
+        GtkScrolledWindow to fix some bugs with its kinetic scrolling.
   */
   @property bool scrollUnitIsPixels()
   {
@@ -759,8 +759,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `scrollUnitIsPixels` property.
       Params:
         propval = Controls whether the terminal's GtkAdjustment values unit is lines
-        or pixels. This can be enabled when the terminal is the child of a
-        GtkScrolledWindow to fix some bugs with its kinetic scrolling.
+          or pixels. This can be enabled when the terminal is the child of a
+          GtkScrolledWindow to fix some bugs with its kinetic scrolling.
   */
   @property void scrollUnitIsPixels(bool propval)
   {
@@ -770,11 +770,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `scrollbackLines` property.
       Returns: The length of the scrollback buffer used by the terminal.  The size of
-      the scrollback buffer will be set to the larger of this value and the number
-      of visible rows the widget can display, so 0 can safely be used to disable
-      scrollback.  Note that this setting only affects the normal screen buffer.
-      For terminal types which have an alternate screen buffer, no scrollback is
-      allowed on the alternate screen buffer.
+        the scrollback buffer will be set to the larger of this value and the number
+        of visible rows the widget can display, so 0 can safely be used to disable
+        scrollback.  Note that this setting only affects the normal screen buffer.
+        For terminal types which have an alternate screen buffer, no scrollback is
+        allowed on the alternate screen buffer.
   */
   @property uint scrollbackLines()
   {
@@ -785,11 +785,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `scrollbackLines` property.
       Params:
         propval = The length of the scrollback buffer used by the terminal.  The size of
-        the scrollback buffer will be set to the larger of this value and the number
-        of visible rows the widget can display, so 0 can safely be used to disable
-        scrollback.  Note that this setting only affects the normal screen buffer.
-        For terminal types which have an alternate screen buffer, no scrollback is
-        allowed on the alternate screen buffer.
+          the scrollback buffer will be set to the larger of this value and the number
+          of visible rows the widget can display, so 0 can safely be used to disable
+          scrollback.  Note that this setting only affects the normal screen buffer.
+          For terminal types which have an alternate screen buffer, no scrollback is
+          allowed on the alternate screen buffer.
   */
   @property void scrollbackLines(uint propval)
   {
@@ -827,10 +827,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `wordCharExceptions` property.
       Returns: The set of characters which will be considered parts of a word
-      when doing word-wise selection, in addition to the default which only
-      considers alphanumeric characters part of a word.
-      
-      If null, a built-in set is used.
+        when doing word-wise selection, in addition to the default which only
+        considers alphanumeric characters part of a word.
+        
+        If null, a built-in set is used.
   */
   @property string wordCharExceptions()
   {
@@ -897,9 +897,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `yfill` property.
       Returns: The vertical fillment of @terminal within its allocation.
-      Note that #VteTerminal:yfill=true is only supported with
-      #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
-      all other yalign values.
+        Note that #VteTerminal:yfill=true is only supported with
+        #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
+        all other yalign values.
   */
   @property bool yfill()
   {
@@ -910,9 +910,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `yfill` property.
       Params:
         propval = The vertical fillment of @terminal within its allocation.
-        Note that #VteTerminal:yfill=true is only supported with
-        #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
-        all other yalign values.
+          Note that #VteTerminal:yfill=true is only supported with
+          #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
+          all other yalign values.
   */
   @property void yfill(bool propval)
   {
@@ -999,7 +999,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     foreach (obj; regexes)
       _tmpregexes ~= cast(VteRegex*)obj._cPtr;
     VteRegex** _regexes = _tmpregexes.ptr;
-    _cretval = vte_terminal_event_check_regex_array(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null, _regexes, _nRegexes, matchFlags, &_cretlength);
+
+    _cretval = vte_terminal_event_check_regex_array(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, _regexes, _nRegexes, matchFlags, &_cretlength);
     string[] _retval;
 
     if (_cretval)
@@ -1177,9 +1178,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void getColorBackgroundForDraw(out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    vte_terminal_get_color_background_for_draw(cast(VteTerminal*)this._cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    vte_terminal_get_color_background_for_draw(cast(VteTerminal*)this._cPtr, cast(GdkRGBA*)&color);
   }
 
   /** */
@@ -1674,7 +1673,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string hyperlinkCheckEvent(gdk.event.Event event)
   {
     char* _cretval;
-    _cretval = vte_terminal_hyperlink_check_event(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _cretval = vte_terminal_hyperlink_check_event(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1762,7 +1761,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string matchCheckEvent(gdk.event.Event event, out int tag)
   {
     char* _cretval;
-    _cretval = vte_terminal_match_check_event(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null, cast(int*)&tag);
+    _cretval = vte_terminal_match_check_event(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cast(int*)&tag);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -2137,7 +2136,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorBackground(gdk.rgba.RGBA background)
   {
-    vte_terminal_set_color_background(cast(VteTerminal*)this._cPtr, background ? cast(const(GdkRGBA)*)background._cPtr(No.Dup) : null);
+    vte_terminal_set_color_background(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&background);
   }
 
   /**
@@ -2147,9 +2146,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         bold = the new bold color or null
   */
-  void setColorBold(gdk.rgba.RGBA bold = null)
+  void setColorBold(gdk.rgba.RGBA bold)
   {
-    vte_terminal_set_color_bold(cast(VteTerminal*)this._cPtr, bold ? cast(const(GdkRGBA)*)bold._cPtr(No.Dup) : null);
+    vte_terminal_set_color_bold(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&bold);
   }
 
   /**
@@ -2160,9 +2159,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         cursorBackground = the new color to use for the text cursor, or null
   */
-  void setColorCursor(gdk.rgba.RGBA cursorBackground = null)
+  void setColorCursor(gdk.rgba.RGBA cursorBackground)
   {
-    vte_terminal_set_color_cursor(cast(VteTerminal*)this._cPtr, cursorBackground ? cast(const(GdkRGBA)*)cursorBackground._cPtr(No.Dup) : null);
+    vte_terminal_set_color_cursor(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&cursorBackground);
   }
 
   /**
@@ -2173,9 +2172,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         cursorForeground = the new color to use for the text cursor, or null
   */
-  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground = null)
+  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground)
   {
-    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)this._cPtr, cursorForeground ? cast(const(GdkRGBA)*)cursorForeground._cPtr(No.Dup) : null);
+    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&cursorForeground);
   }
 
   /**
@@ -2186,7 +2185,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorForeground(gdk.rgba.RGBA foreground)
   {
-    vte_terminal_set_color_foreground(cast(VteTerminal*)this._cPtr, foreground ? cast(const(GdkRGBA)*)foreground._cPtr(No.Dup) : null);
+    vte_terminal_set_color_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&foreground);
   }
 
   /**
@@ -2198,9 +2197,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         highlightBackground = the new color to use for highlighted text, or null
   */
-  void setColorHighlight(gdk.rgba.RGBA highlightBackground = null)
+  void setColorHighlight(gdk.rgba.RGBA highlightBackground)
   {
-    vte_terminal_set_color_highlight(cast(VteTerminal*)this._cPtr, highlightBackground ? cast(const(GdkRGBA)*)highlightBackground._cPtr(No.Dup) : null);
+    vte_terminal_set_color_highlight(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&highlightBackground);
   }
 
   /**
@@ -2212,9 +2211,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         highlightForeground = the new color to use for highlighted text, or null
   */
-  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground = null)
+  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground)
   {
-    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)this._cPtr, highlightForeground ? cast(const(GdkRGBA)*)highlightForeground._cPtr(No.Dup) : null);
+    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&highlightForeground);
   }
 
   /**
@@ -2233,17 +2232,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         background = the new background color, or null
         palette = the color palette
   */
-  void setColors(gdk.rgba.RGBA foreground = null, gdk.rgba.RGBA background = null, gdk.rgba.RGBA[] palette = null)
+  void setColors(gdk.rgba.RGBA foreground, gdk.rgba.RGBA background, gdk.rgba.RGBA[] palette = null)
   {
     size_t _paletteSize;
     if (palette)
       _paletteSize = cast(size_t)palette.length;
 
-    GdkRGBA[] _tmppalette;
-    foreach (obj; palette)
-      _tmppalette ~= *cast(GdkRGBA*)obj._cPtr;
-    const(GdkRGBA)* _palette = _tmppalette.ptr;
-    vte_terminal_set_colors(cast(VteTerminal*)this._cPtr, foreground ? cast(const(GdkRGBA)*)foreground._cPtr(No.Dup) : null, background ? cast(const(GdkRGBA)*)background._cPtr(No.Dup) : null, _palette, _paletteSize);
+    auto _palette = cast(const(GdkRGBA)*)palette.ptr;
+    vte_terminal_set_colors(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&foreground, cast(const(GdkRGBA)*)&background, _palette, _paletteSize);
   }
 
   /**
@@ -2711,7 +2707,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       (*_dlg)();
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
       ptrThawGC(userData);
@@ -2720,7 +2715,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
     foreach (s; argv)
@@ -2790,7 +2784,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       (*_dlg)();
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
     bool _retval;
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
@@ -2883,7 +2876,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       (*_dlg)();
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
       ptrThawGC(userData);
@@ -2892,7 +2884,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     const(char)*[] _tmpargv;
     foreach (s; argv)
@@ -2986,7 +2977,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `Bell` signal.
   
       This signal is emitted when the a child sends a bell request to the
-      terminal.
+        terminal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3024,9 +3015,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `CharSizeChanged` signal.
   
       Emitted whenever the cell size changes, e.g. due to a change in
-      font, font-scale or cell-width/height-scale.
-      
-      Note that this signal should rather be called "cell-size-changed".
+        font, font-scale or cell-width/height-scale.
+        
+        Note that this signal should rather be called "cell-size-changed".
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3078,7 +3069,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `ChildExited` signal.
   
       This signal is emitted when the terminal detects that a child
-      watched using [vte.terminal.Terminal.watchChild] has exited.
+        watched using [vte.terminal.Terminal.watchChild] has exited.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3123,7 +3114,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `Commit` signal.
   
       Emitted whenever the terminal receives input from the user and
-      prepares to send it to the child process.
+        prepares to send it to the child process.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3175,7 +3166,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `ContentsChanged` signal.
   
       Emitted whenever the visible appearance of the terminal has changed.
-      Used primarily by #VteTerminalAccessible.
+        Used primarily by #VteTerminalAccessible.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3324,7 +3315,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `CursorMoved` signal.
   
       Emitted whenever the cursor moves to a new character cell.  Used
-      primarily by #VteTerminalAccessible.
+        primarily by #VteTerminalAccessible.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3436,8 +3427,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `EncodingChanged` signal.
   
       Emitted whenever the terminal's current encoding has changed.
-      
-      Note: support for non-UTF-8 is deprecated.
+        
+        Note: support for non-UTF-8 is deprecated.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3475,8 +3466,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `Eof` signal.
   
       Emitted when the terminal receives an end-of-file from a child which
-      is running in the terminal.  This signal is frequently (but not
-      always) emitted with a #VteTerminal::child-exited signal.
+        is running in the terminal.  This signal is frequently (but not
+        always) emitted with a #VteTerminal::child-exited signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3514,12 +3505,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `HyperlinkHoverUriChanged` signal.
   
       Emitted when the hovered hyperlink changes.
-      
-      uri and bbox are owned by VTE, must not be modified, and might
-      change after the signal handlers returns.
-      
-      The signal is not re-emitted when the bounding box changes for the
-      same hyperlink. This might change in a future VTE version without notice.
+        
+        uri and bbox are owned by VTE, must not be modified, and might
+        change after the signal handlers returns.
+        
+        The signal is not re-emitted when the bounding box changes for the
+        same hyperlink. This might change in a future VTE version without notice.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3809,7 +3800,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `NotificationReceived` signal.
   
       Emitted when a process running in the terminal wants to
-      send a notification to the desktop environment.
+        send a notification to the desktop environment.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4097,17 +4088,17 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `SetupContextMenu` signal.
   
       Emitted with non-null context before terminal shows a context menu.
-      The handler may set either a menu model using
-      [vte.terminal.Terminal.setContextMenuModel], or a menu using
-      [vte.terminal.Terminal.setContextMenu], which will then be used as context
-      menu.
-      If neither a menu model nor a menu are set, a context menu
-      will not be shown.
-      
-      Note that context is only valid during the signal emission; you may
-      not retain it to call methods on it afterwards.
-      
-      Also emitted with null context after the context menu has been dismissed.
+        The handler may set either a menu model using
+        [vte.terminal.Terminal.setContextMenuModel], or a menu using
+        [vte.terminal.Terminal.setContextMenu], which will then be used as context
+        menu.
+        If neither a menu model nor a menu are set, a context menu
+        will not be shown.
+        
+        Note that context is only valid during the signal emission; you may
+        not retain it to call methods on it afterwards.
+        
+        Also emitted with null context after the context menu has been dismissed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4152,7 +4143,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `ShellPrecmd` signal.
   
       Emitted right before an interactive shell shows a
-      first-level prompt.
+        first-level prompt.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4190,7 +4181,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Connect to `ShellPreexec` signal.
   
       Emitted when the interactive shell has read in a complete
-      command and is about to execute it.
+        command and is about to execute it.
   
       Params:
         callback = signal callback delegate or function to connect

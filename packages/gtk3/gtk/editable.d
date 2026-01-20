@@ -197,13 +197,13 @@ interface Editable
       Connect to `Changed` signal.
   
       The ::changed signal is emitted at the end of a single
-      user-visible operation on the contents of the #GtkEditable.
-      
-      E.g., a paste operation that replaces the contents of the
-      selection will cause only one signal emission (even though it
-      is implemented by first deleting the selection, then inserting
-      the new content, and may cause multiple ::notify::text signals
-      to be emitted).
+        user-visible operation on the contents of the #GtkEditable.
+        
+        E.g., a paste operation that replaces the contents of the
+        selection will cause only one signal emission (even though it
+        is implemented by first deleting the selection, then inserting
+        the new content, and may cause multiple ::notify::text signals
+        to be emitted).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -221,14 +221,14 @@ interface Editable
       Connect to `DeleteText` signal.
   
       This signal is emitted when text is deleted from
-      the widget by the user. The default handler for
-      this signal will normally be responsible for deleting
-      the text, so by connecting to this signal and then
-      stopping the signal with [gobject.global.signalStopEmission], it
-      is possible to modify the range of deleted text, or
-      prevent it from being deleted entirely. The start_pos
-      and end_pos parameters are interpreted as for
-      [gtk.editable.Editable.deleteText].
+        the widget by the user. The default handler for
+        this signal will normally be responsible for deleting
+        the text, so by connecting to this signal and then
+        stopping the signal with [gobject.global.signalStopEmission], it
+        is possible to modify the range of deleted text, or
+        prevent it from being deleted entirely. The start_pos
+        and end_pos parameters are interpreted as for
+        [gtk.editable.Editable.deleteText].
   
       Params:
         callback = signal callback delegate or function to connect

@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventTouchpadPinch
 {
-  GdkEventTouchpadPinch cInstance;
+  GdkEventTouchpadPinch _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventTouchpadPinch
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_touchpad_pinch.EventTouchpadPinch");
 
-    cInstance = *cast(GdkEventTouchpadPinch*)ptr;
+    _cInstance = *cast(GdkEventTouchpadPinch*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventTouchpadPinch
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -226,7 +226,7 @@ class EventTouchpadPinch
   /**
       Get `angleDelta` field.
       Returns: The angle change in radians, negative angles
-        denote counter-clockwise movements
+          denote counter-clockwise movements
   */
   @property double angleDelta()
   {
@@ -237,7 +237,7 @@ class EventTouchpadPinch
       Set `angleDelta` field.
       Params:
         propval = The angle change in radians, negative angles
-          denote counter-clockwise movements
+            denote counter-clockwise movements
   */
   @property void angleDelta(double propval)
   {
@@ -247,7 +247,7 @@ class EventTouchpadPinch
   /**
       Get `scale` field.
       Returns: The current scale, relative to that at the time of
-        the corresponding [gdk.types.TouchpadGesturePhase.Begin] event
+          the corresponding [gdk.types.TouchpadGesturePhase.Begin] event
   */
   @property double scale()
   {
@@ -258,7 +258,7 @@ class EventTouchpadPinch
       Set `scale` field.
       Params:
         propval = The current scale, relative to that at the time of
-          the corresponding [gdk.types.TouchpadGesturePhase.Begin] event
+            the corresponding [gdk.types.TouchpadGesturePhase.Begin] event
   */
   @property void scale(double propval)
   {
@@ -268,7 +268,7 @@ class EventTouchpadPinch
   /**
       Get `xRoot` field.
       Returns: The X coordinate of the pointer, relative to the
-        root of the screen.
+          root of the screen.
   */
   @property double xRoot()
   {
@@ -279,7 +279,7 @@ class EventTouchpadPinch
       Set `xRoot` field.
       Params:
         propval = The X coordinate of the pointer, relative to the
-          root of the screen.
+            root of the screen.
   */
   @property void xRoot(double propval)
   {
@@ -289,7 +289,7 @@ class EventTouchpadPinch
   /**
       Get `yRoot` field.
       Returns: The Y coordinate of the pointer, relative to the
-        root of the screen.
+          root of the screen.
   */
   @property double yRoot()
   {
@@ -300,7 +300,7 @@ class EventTouchpadPinch
       Set `yRoot` field.
       Params:
         propval = The Y coordinate of the pointer, relative to the
-          root of the screen.
+            root of the screen.
   */
   @property void yRoot(double propval)
   {
@@ -310,8 +310,8 @@ class EventTouchpadPinch
   /**
       Get `state` field.
       Returns: a bit-mask representing the state of
-        the modifier keys (e.g. Control, Shift and Alt) and the pointer
-        buttons. See #GdkModifierType.
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
   */
   @property gdk.types.ModifierType state()
   {
@@ -322,8 +322,8 @@ class EventTouchpadPinch
       Set `state` field.
       Params:
         propval = a bit-mask representing the state of
-          the modifier keys (e.g. Control, Shift and Alt) and the pointer
-          buttons. See #GdkModifierType.
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
   */
   @property void state(gdk.types.ModifierType propval)
   {

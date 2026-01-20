@@ -254,8 +254,8 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -466,7 +466,6 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       (*_dlg)();
     }
     auto _userSetupCB = userSetup ? &_userSetupCallback : null;
-
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
@@ -474,7 +473,6 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
-
     bool _retval;
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
@@ -518,7 +516,6 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       (*_dlg)();
     }
     auto _userSetupCB = userSetup ? &_userSetupCallback : null;
-
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
@@ -526,7 +523,6 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
-
     bool _retval;
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
@@ -556,8 +552,8 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);

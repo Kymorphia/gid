@@ -105,6 +105,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       _tmpstrings ~= s.toCString(No.Alloc);
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
+
     _cretval = gtk_string_list_new(_strings);
     this(_cretval, Yes.Take);
   }
@@ -184,6 +185,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       _tmpadditions ~= s.toCString(No.Alloc);
     _tmpadditions ~= null;
     const(char*)* _additions = _tmpadditions.ptr;
+
     gtk_string_list_splice(cast(GtkStringList*)this._cPtr, position, nRemovals, _additions);
   }
 

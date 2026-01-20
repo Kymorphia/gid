@@ -90,9 +90,9 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   /**
       Get `name` property.
       Returns: The human-readable name of the filter.
-      
-      This is the string that will be displayed in the file chooser
-      user interface if there is a selectable list of filters.
+        
+        This is the string that will be displayed in the file chooser
+        user interface if there is a selectable list of filters.
   */
   @property string name()
   {
@@ -103,9 +103,9 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Set `name` property.
       Params:
         propval = The human-readable name of the filter.
-        
-        This is the string that will be displayed in the file chooser
-        user interface if there is a selectable list of filters.
+          
+          This is the string that will be displayed in the file chooser
+          user interface if there is a selectable list of filters.
   */
   @property void name(string propval)
   {
@@ -232,8 +232,8 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);

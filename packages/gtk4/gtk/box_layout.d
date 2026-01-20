@@ -57,11 +57,11 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   /**
       Get `baselineChild` property.
       Returns: The child that determines the baseline of the box
-      in vertical layout.
-      
-      If the child does baseline positioning, then its baseline
-      is lined up with the baseline of the box. If it doesn't, then
-      the bottom edge of the child is used.
+        in vertical layout.
+        
+        If the child does baseline positioning, then its baseline
+        is lined up with the baseline of the box. If it doesn't, then
+        the bottom edge of the child is used.
   */
   @property int baselineChild()
   {
@@ -72,11 +72,11 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Set `baselineChild` property.
       Params:
         propval = The child that determines the baseline of the box
-        in vertical layout.
-        
-        If the child does baseline positioning, then its baseline
-        is lined up with the baseline of the box. If it doesn't, then
-        the bottom edge of the child is used.
+          in vertical layout.
+          
+          If the child does baseline positioning, then its baseline
+          is lined up with the baseline of the box. If it doesn't, then
+          the bottom edge of the child is used.
   */
   @property void baselineChild(int propval)
   {
@@ -86,10 +86,10 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   /**
       Get `baselinePosition` property.
       Returns: The position of the allocated baseline within the extra space
-      allocated to each child.
-      
-      This property is only relevant for horizontal layouts containing
-      at least one child with a baseline alignment.
+        allocated to each child.
+        
+        This property is only relevant for horizontal layouts containing
+        at least one child with a baseline alignment.
   */
   @property gtk.types.BaselinePosition baselinePosition()
   {
@@ -100,10 +100,10 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Set `baselinePosition` property.
       Params:
         propval = The position of the allocated baseline within the extra space
-        allocated to each child.
-        
-        This property is only relevant for horizontal layouts containing
-        at least one child with a baseline alignment.
+          allocated to each child.
+          
+          This property is only relevant for horizontal layouts containing
+          at least one child with a baseline alignment.
   */
   @property void baselinePosition(gtk.types.BaselinePosition propval)
   {
@@ -113,7 +113,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   /**
       Get `homogeneous` property.
       Returns: Whether the box layout should distribute the available space
-      equally among the children.
+        equally among the children.
   */
   @property bool homogeneous()
   {
@@ -124,7 +124,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Set `homogeneous` property.
       Params:
         propval = Whether the box layout should distribute the available space
-        equally among the children.
+          equally among the children.
   */
   @property void homogeneous(bool propval)
   {

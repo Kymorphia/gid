@@ -1,11 +1,10 @@
-/// Module for [RGBA] class
+/// Module for [RGBA] struct
 module gdk.rgba;
 
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
-import gobject.boxed;
 
 /**
     A [gdk.rgba.RGBA] is used to represent a color, in a way that is compatible
@@ -18,135 +17,28 @@ import gobject.boxed;
     (1.0, 1.0, 1.0, 1.0) is opaque white. Other values will
     be clamped to this range when drawing.
 */
-class RGBA : gobject.boxed.Boxed
+struct RGBA
 {
-
   /**
-      Create a `rgba.RGBA` boxed type.
-      Params:
-        red = The intensity of the red channel from 0.0 to 1.0 inclusive
-        green = The intensity of the green channel from 0.0 to 1.0 inclusive
-        blue = The intensity of the blue channel from 0.0 to 1.0 inclusive
-        alpha = The opacity of the color from 0.0 for completely translucent to
-            1.0 for opaque
+      The intensity of the red channel from 0.0 to 1.0 inclusive
   */
-  this(float red = 0.0, float green = 0.0, float blue = 0.0, float alpha = 0.0)
-  {
-    super(gMalloc(GdkRGBA.sizeof), Yes.Take);
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
-    this.alpha = alpha;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gdk_rgba_get_type != &gidSymbolNotFound ? gdk_rgba_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override RGBA self()
-  {
-    return this;
-  }
+  float red;
 
   /**
-      Get `red` field.
-      Returns: The intensity of the red channel from 0.0 to 1.0 inclusive
+      The intensity of the green channel from 0.0 to 1.0 inclusive
   */
-  @property float red()
-  {
-    return (cast(GdkRGBA*)this._cPtr).red;
-  }
+  float green;
 
   /**
-      Set `red` field.
-      Params:
-        propval = The intensity of the red channel from 0.0 to 1.0 inclusive
+      The intensity of the blue channel from 0.0 to 1.0 inclusive
   */
-  @property void red(float propval)
-  {
-    (cast(GdkRGBA*)this._cPtr).red = propval;
-  }
+  float blue;
 
   /**
-      Get `green` field.
-      Returns: The intensity of the green channel from 0.0 to 1.0 inclusive
-  */
-  @property float green()
-  {
-    return (cast(GdkRGBA*)this._cPtr).green;
-  }
-
-  /**
-      Set `green` field.
-      Params:
-        propval = The intensity of the green channel from 0.0 to 1.0 inclusive
-  */
-  @property void green(float propval)
-  {
-    (cast(GdkRGBA*)this._cPtr).green = propval;
-  }
-
-  /**
-      Get `blue` field.
-      Returns: The intensity of the blue channel from 0.0 to 1.0 inclusive
-  */
-  @property float blue()
-  {
-    return (cast(GdkRGBA*)this._cPtr).blue;
-  }
-
-  /**
-      Set `blue` field.
-      Params:
-        propval = The intensity of the blue channel from 0.0 to 1.0 inclusive
-  */
-  @property void blue(float propval)
-  {
-    (cast(GdkRGBA*)this._cPtr).blue = propval;
-  }
-
-  /**
-      Get `alpha` field.
-      Returns: The opacity of the color from 0.0 for completely translucent to
+      The opacity of the color from 0.0 for completely translucent to
         1.0 for opaque
   */
-  @property float alpha()
-  {
-    return (cast(GdkRGBA*)this._cPtr).alpha;
-  }
-
-  /**
-      Set `alpha` field.
-      Params:
-        propval = The opacity of the color from 0.0 for completely translucent to
-          1.0 for opaque
-  */
-  @property void alpha(float propval)
-  {
-    (cast(GdkRGBA*)this._cPtr).alpha = propval;
-  }
+  float alpha;
 
   /**
       Makes a copy of a [gdk.rgba.RGBA].
@@ -157,8 +49,10 @@ class RGBA : gobject.boxed.Boxed
   gdk.rgba.RGBA copy()
   {
     GdkRGBA* _cretval;
-    _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)this._cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)&this);
+    gdk.rgba.RGBA _retval;
+    if (_cretval)
+      _retval = *cast(gdk.rgba.RGBA*)_cretval;
     return _retval;
   }
 
@@ -172,7 +66,7 @@ class RGBA : gobject.boxed.Boxed
   bool equal(gdk.rgba.RGBA p2)
   {
     bool _retval;
-    _retval = cast(bool)gdk_rgba_equal(cast(GdkRGBA*)this._cPtr, p2 ? cast(GdkRGBA*)p2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_rgba_equal(cast(GdkRGBA*)&this, cast(GdkRGBA*)&p2);
     return _retval;
   }
 
@@ -184,7 +78,7 @@ class RGBA : gobject.boxed.Boxed
   uint hash()
   {
     uint _retval;
-    _retval = gdk_rgba_hash(cast(GdkRGBA*)this._cPtr);
+    _retval = gdk_rgba_hash(cast(GdkRGBA*)&this);
     return _retval;
   }
 
@@ -197,7 +91,7 @@ class RGBA : gobject.boxed.Boxed
   bool isClear()
   {
     bool _retval;
-    _retval = cast(bool)gdk_rgba_is_clear(cast(const(GdkRGBA)*)this._cPtr);
+    _retval = cast(bool)gdk_rgba_is_clear(cast(const(GdkRGBA)*)&this);
     return _retval;
   }
 
@@ -211,7 +105,7 @@ class RGBA : gobject.boxed.Boxed
   bool isOpaque()
   {
     bool _retval;
-    _retval = cast(bool)gdk_rgba_is_opaque(cast(const(GdkRGBA)*)this._cPtr);
+    _retval = cast(bool)gdk_rgba_is_opaque(cast(const(GdkRGBA)*)&this);
     return _retval;
   }
 
@@ -247,7 +141,7 @@ class RGBA : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = cast(bool)gdk_rgba_parse(cast(GdkRGBA*)this._cPtr, _spec);
+    _retval = cast(bool)gdk_rgba_parse(cast(GdkRGBA*)&this, _spec);
     return _retval;
   }
 
@@ -270,7 +164,7 @@ class RGBA : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)this._cPtr);
+    _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)&this);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

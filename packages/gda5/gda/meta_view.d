@@ -13,7 +13,7 @@ import gid.gid;
 */
 class MetaView
 {
-  GdaMetaView cInstance;
+  GdaMetaView _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class MetaView
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_view.MetaView");
 
-    cInstance = *cast(GdaMetaView*)ptr;
+    _cInstance = *cast(GdaMetaView*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class MetaView
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

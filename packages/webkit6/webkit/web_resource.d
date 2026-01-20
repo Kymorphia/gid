@@ -68,7 +68,7 @@ class WebResource : gobject.object.ObjectWrap
   /**
       Get `uri` property.
       Returns: The current active URI of the #WebKitWebResource.
-      See [webkit.web_resource.WebResource.getUri] for more details.
+        See [webkit.web_resource.WebResource.getUri] for more details.
   */
   @property string uri()
   {
@@ -97,7 +97,6 @@ class WebResource : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_resource_get_data(cast(WebKitWebResource*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -189,7 +188,7 @@ class WebResource : gobject.object.ObjectWrap
       Connect to `Failed` signal.
   
       This signal is emitted when an error occurs during the resource
-      load operation.
+        load operation.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -285,8 +284,8 @@ class WebResource : gobject.object.ObjectWrap
       Connect to `Finished` signal.
   
       This signal is emitted when the resource load finishes successfully
-      or due to an error. In case of errors #WebKitWebResource::failed signal
-      is emitted before this one.
+        or due to an error. In case of errors #WebKitWebResource::failed signal
+        is emitted before this one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -324,11 +323,11 @@ class WebResource : gobject.object.ObjectWrap
       Connect to `SentRequest` signal.
   
       This signal is emitted when request has been sent to the
-      server. In case of a server redirection this signal is
-      emitted again with the request argument containing the new
-      request sent to the server due to the redirection and the
-      redirected_response parameter containing the response
-      received by the server for the initial request.
+        server. In case of a server redirection this signal is
+        emitted again with the request argument containing the new
+        request sent to the server due to the redirection and the
+        redirected_response parameter containing the response
+        received by the server for the initial request.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -13,7 +13,7 @@ import gobject.types;
 */
 class SignalQuery
 {
-  GSignalQuery cInstance;
+  GSignalQuery _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class SignalQuery
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.signal_query.SignalQuery");
 
-    cInstance = *cast(GSignalQuery*)ptr;
+    _cInstance = *cast(GSignalQuery*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,13 +30,13 @@ class SignalQuery
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `signalId` field.
       Returns: The signal id of the signal being queried, or 0 if the
-       signal to be queried was unknown.
+         signal to be queried was unknown.
   */
   @property uint signalId()
   {
@@ -47,7 +47,7 @@ class SignalQuery
       Set `signalId` field.
       Params:
         propval = The signal id of the signal being queried, or 0 if the
-         signal to be queried was unknown.
+           signal to be queried was unknown.
   */
   @property void signalId(uint propval)
   {

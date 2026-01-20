@@ -154,7 +154,7 @@ class Widget : gtk.widget.Widget
   /**
       Get `menuModel` property.
       Returns: A menu model to display additional options for the page to the user via
-      menus.
+        menus.
   */
   @property gio.menu_model.MenuModel menuModel()
   {
@@ -165,7 +165,7 @@ class Widget : gtk.widget.Widget
       Set `menuModel` property.
       Params:
         propval = A menu model to display additional options for the page to the user via
-        menus.
+          menus.
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
@@ -673,8 +673,8 @@ class Widget : gtk.widget.Widget
       Connect to `GetDefaultFocus` signal.
   
       Gets the default widget to focus within the #PanelWidget. The first
-      handler for this signal is expected to return a widget, or null if
-      there is nothing to focus.
+        handler for this signal is expected to return a widget, or null if
+        there is nothing to focus.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -684,7 +684,7 @@ class Widget : gtk.widget.Widget
           `widget` the instance the signal is connected to (optional)
   
           `Returns` a #GtkWidget within #PanelWidget
-            or null.
+              or null.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -715,7 +715,7 @@ class Widget : gtk.widget.Widget
       Connect to `Presented` signal.
   
       The "presented" signal is emitted when the widget is brought
-      to the front of a frame.
+        to the front of a frame.
   
       Params:
         callback = signal callback delegate or function to connect

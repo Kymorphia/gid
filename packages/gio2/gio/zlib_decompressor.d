@@ -45,9 +45,9 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   /**
       Get `fileInfo` property.
       Returns: A #GFileInfo containing the information found in the GZIP header
-      of the data stream processed, or null if the header was not yet
-      fully processed, is not present at all, or the compressor's
-      #GZlibDecompressor:format property is not [gio.types.ZlibCompressorFormat.Gzip].
+        of the data stream processed, or null if the header was not yet
+        fully processed, is not present at all, or the compressor's
+        #GZlibDecompressor:format property is not [gio.types.ZlibCompressorFormat.Gzip].
   */
   @property gio.file_info.FileInfo fileInfo()
   {

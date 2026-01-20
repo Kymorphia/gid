@@ -50,7 +50,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   /**
       Get `issuerName` property.
       Returns: The issuer from the certificate,
-      null if unavailable.
+        null if unavailable.
   */
   @property string issuerName()
   {
@@ -60,7 +60,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   /**
       Get `notValidAfter` property.
       Returns: The time at which this cert is no longer valid,
-      null if unavailable.
+        null if unavailable.
   */
   @property glib.date_time.DateTime notValidAfter()
   {
@@ -70,7 +70,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   /**
       Get `notValidBefore` property.
       Returns: The time at which this cert is considered to be valid,
-      null if unavailable.
+        null if unavailable.
   */
   @property glib.date_time.DateTime notValidBefore()
   {
@@ -80,7 +80,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   /**
       Get `subjectName` property.
       Returns: The subject from the cert,
-      null if unavailable.
+        null if unavailable.
   */
   @property string subjectName()
   {

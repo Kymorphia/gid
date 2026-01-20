@@ -61,10 +61,10 @@ class Discoverer : gobject.object.ObjectWrap
   /**
       Get `timeout` property.
       Returns: The duration (in nanoseconds) after which the discovery of an individual
-      URI will timeout.
-      
-      If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
-      set on the result flags.
+        URI will timeout.
+        
+        If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
+        set on the result flags.
   */
   @property ulong timeout()
   {
@@ -75,10 +75,10 @@ class Discoverer : gobject.object.ObjectWrap
       Set `timeout` property.
       Params:
         propval = The duration (in nanoseconds) after which the discovery of an individual
-        URI will timeout.
-        
-        If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
-        set on the result flags.
+          URI will timeout.
+          
+          If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
+          set on the result flags.
   */
   @property void timeout(ulong propval)
   {
@@ -187,10 +187,10 @@ class Discoverer : gobject.object.ObjectWrap
       Connect to `Discovered` signal.
   
       Will be emitted in async mode when all information on a URI could be
-      discovered, or an error occurred.
-      
-      When an error occurs, info might still contain some partial information,
-      depending on the circumstances of the error.
+        discovered, or an error occurred.
+        
+        When an error occurs, info might still contain some partial information,
+        depending on the circumstances of the error.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -200,10 +200,10 @@ class Discoverer : gobject.object.ObjectWrap
           `info` the results #GstDiscovererInfo (optional)
   
           `error` #GError, which will be non-NULL
-                                                  if an error occurred during
-                                                  discovery. You must not free
-                                                  this #GError, it will be freed by
-                                                  the discoverer. (optional)
+                                                    if an error occurred during
+                                                    discovery. You must not free
+                                                    this #GError, it will be freed by
+                                                    the discoverer. (optional)
   
           `discoverer` the instance the signal is connected to (optional)
   
@@ -283,8 +283,8 @@ class Discoverer : gobject.object.ObjectWrap
       Connect to `LoadSerializedInfo` signal.
   
       Retrieves information about a URI from and external source of information,
-      like a cache file. This is used by the discoverer to speed up the
-      discovery.
+        like a cache file. This is used by the discoverer to speed up the
+        discovery.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -296,7 +296,7 @@ class Discoverer : gobject.object.ObjectWrap
           `discoverer` the instance the signal is connected to (optional)
   
           `Returns` The #GstDiscovererInfo representing
-          uri, or null if no information
+            uri, or null if no information
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -332,12 +332,12 @@ class Discoverer : gobject.object.ObjectWrap
       Connect to `SourceSetup` signal.
   
       This signal is emitted after the source element has been created for, so
-      the URI being discovered, so it can be configured by setting additional
-      properties (e.g. set a proxy server for an http source, or set the device
-      and read speed for an audio cd source).
-      
-      This signal is usually emitted from the context of a GStreamer streaming
-      thread.
+        the URI being discovered, so it can be configured by setting additional
+        properties (e.g. set a proxy server for an http source, or set the device
+        and read speed for an audio cd source).
+        
+        This signal is usually emitted from the context of a GStreamer streaming
+        thread.
   
       Params:
         callback = signal callback delegate or function to connect

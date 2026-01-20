@@ -18,7 +18,7 @@ import gst.types;
 */
 class CustomMeta
 {
-  GstCustomMeta cInstance;
+  GstCustomMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -26,7 +26,7 @@ class CustomMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.custom_meta.CustomMeta");
 
-    cInstance = *cast(GstCustomMeta*)ptr;
+    _cInstance = *cast(GstCustomMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -35,7 +35,7 @@ class CustomMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -57,17 +57,6 @@ class CustomMeta
   }
 
   /**
-      Set `structure` field.
-      Params:
-        propval = #GstStructure containing custom metadata.
-  */
-  @property void structure(gst.structure.Structure propval)
-  {
-    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)this._cPtr).structure);
-    dToC(propval, cast(void*)&(cast(GstCustomMeta*)this._cPtr).structure);
-  }
-
-  /**
       Retrieve the #GstStructure backing a custom meta, the structure's mutability
       is conditioned to the writability of the #GstBuffer meta is attached to.
       Returns: the #GstStructure backing meta
@@ -76,7 +65,9 @@ class CustomMeta
   {
     GstStructure* _cretval;
     _cretval = gst_custom_meta_get_structure(cast(GstCustomMeta*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 

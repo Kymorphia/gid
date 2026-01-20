@@ -108,8 +108,8 @@ interface TreeSortable
       Connect to `SortColumnChanged` signal.
   
       The ::sort-column-changed signal is emitted when the sort column
-      or sort order of sortable is changed. The signal is emitted before
-      the contents of sortable are resorted.
+        or sort order of sortable is changed. The signal is emitted before
+        the contents of sortable are resorted.
   
       Params:
         callback = signal callback delegate or function to connect

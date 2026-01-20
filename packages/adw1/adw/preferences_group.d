@@ -97,11 +97,11 @@ class PreferencesGroup : gtk.widget.Widget
   /**
       Get `headerSuffix` property.
       Returns: The header suffix widget.
-      
-      Displayed above the list, next to the title and description.
-      
-      Suffixes are commonly used to show a button or a spinner for the whole
-      group.
+        
+        Displayed above the list, next to the title and description.
+        
+        Suffixes are commonly used to show a button or a spinner for the whole
+        group.
   */
   @property gtk.widget.Widget headerSuffix()
   {
@@ -112,11 +112,11 @@ class PreferencesGroup : gtk.widget.Widget
       Set `headerSuffix` property.
       Params:
         propval = The header suffix widget.
-        
-        Displayed above the list, next to the title and description.
-        
-        Suffixes are commonly used to show a button or a spinner for the whole
-        group.
+          
+          Displayed above the list, next to the title and description.
+          
+          Suffixes are commonly used to show a button or a spinner for the whole
+          group.
   */
   @property void headerSuffix(gtk.widget.Widget propval)
   {

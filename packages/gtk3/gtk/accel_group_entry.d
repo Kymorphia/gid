@@ -11,7 +11,7 @@ import gtk.types;
 /** */
 class AccelGroupEntry
 {
-  GtkAccelGroupEntry cInstance;
+  GtkAccelGroupEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class AccelGroupEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.accel_group_entry.AccelGroupEntry");
 
-    cInstance = *cast(GtkAccelGroupEntry*)ptr;
+    _cInstance = *cast(GtkAccelGroupEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class AccelGroupEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */
@@ -40,7 +40,7 @@ class AccelGroupEntry
   /** */
   @property void key(gtk.types.AccelKey propval)
   {
-    (cast(GtkAccelGroupEntry*)this._cPtr).key = propval;
+    (cast(GtkAccelGroupEntry*)this._cPtr).key = cast(GtkAccelKey)propval;
   }
 
   /** */

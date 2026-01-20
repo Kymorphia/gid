@@ -17,7 +17,7 @@ import gid.gid;
 */
 class EventVisibility
 {
-  GdkEventVisibility cInstance;
+  GdkEventVisibility _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -25,7 +25,7 @@ class EventVisibility
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_visibility.EventVisibility");
 
-    cInstance = *cast(GdkEventVisibility*)ptr;
+    _cInstance = *cast(GdkEventVisibility*)ptr;
 
     if (take)
       gFree(ptr);
@@ -34,7 +34,7 @@ class EventVisibility
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -98,7 +98,7 @@ class EventVisibility
   /**
       Get `state` field.
       Returns: the new visibility state ([gdk.types.VisibilityState.FullyObscured],
-        [gdk.types.VisibilityState.Partial] or [gdk.types.VisibilityState.Unobscured]).
+          [gdk.types.VisibilityState.Partial] or [gdk.types.VisibilityState.Unobscured]).
   */
   @property gdk.types.VisibilityState state()
   {
@@ -109,7 +109,7 @@ class EventVisibility
       Set `state` field.
       Params:
         propval = the new visibility state ([gdk.types.VisibilityState.FullyObscured],
-          [gdk.types.VisibilityState.Partial] or [gdk.types.VisibilityState.Unobscured]).
+            [gdk.types.VisibilityState.Partial] or [gdk.types.VisibilityState.Unobscured]).
   */
   @property void state(gdk.types.VisibilityState propval)
   {

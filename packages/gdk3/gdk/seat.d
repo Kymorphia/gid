@@ -169,10 +169,9 @@ class Seat : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.seat.Seat)(cast(void*)seat, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
     }
     auto _prepareFuncCB = prepareFunc ? &_prepareFuncCallback : null;
-
     GdkGrabStatus _cretval;
     auto _prepareFunc = prepareFunc ? cast(void*)&(prepareFunc) : null;
-    _cretval = gdk_seat_grab(cast(GdkSeat*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, capabilities, ownerEvents, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null, event ? cast(const(GdkEvent)*)event._cPtr : null, _prepareFuncCB, _prepareFunc);
+    _cretval = gdk_seat_grab(cast(GdkSeat*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, capabilities, ownerEvents, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null, event ? cast(const(GdkEvent)*)event._cPtr(No.Dup) : null, _prepareFuncCB, _prepareFunc);
     gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
     return _retval;
   }
@@ -189,7 +188,7 @@ class Seat : gobject.object.ObjectWrap
       Connect to `DeviceAdded` signal.
   
       The ::device-added signal is emitted when a new input
-      device is related to this seat.
+        device is related to this seat.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -234,7 +233,7 @@ class Seat : gobject.object.ObjectWrap
       Connect to `DeviceRemoved` signal.
   
       The ::device-removed signal is emitted when an
-      input device is removed (e.g. unplugged).
+        input device is removed (e.g. unplugged).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -279,11 +278,11 @@ class Seat : gobject.object.ObjectWrap
       Connect to `ToolAdded` signal.
   
       The ::tool-added signal is emitted whenever a new tool
-      is made known to the seat. The tool may later be assigned
-      to a device (i.e. on proximity with a tablet). The device
-      will emit the #GdkDevice::tool-changed signal accordingly.
-      
-      A same tool may be used by several devices.
+        is made known to the seat. The tool may later be assigned
+        to a device (i.e. on proximity with a tablet). The device
+        will emit the #GdkDevice::tool-changed signal accordingly.
+        
+        A same tool may be used by several devices.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -328,7 +327,7 @@ class Seat : gobject.object.ObjectWrap
       Connect to `ToolRemoved` signal.
   
       This signal is emitted whenever a tool is no longer known
-      to this seat.
+        to this seat.
   
       Params:
         callback = signal callback delegate or function to connect

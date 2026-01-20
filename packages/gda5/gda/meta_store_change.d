@@ -9,7 +9,7 @@ import gid.gid;
 /** */
 class MetaStoreChange
 {
-  GdaMetaStoreChange cInstance;
+  GdaMetaStoreChange _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class MetaStoreChange
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_store_change.MetaStoreChange");
 
-    cInstance = *cast(GdaMetaStoreChange*)ptr;
+    _cInstance = *cast(GdaMetaStoreChange*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,7 +26,7 @@ class MetaStoreChange
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

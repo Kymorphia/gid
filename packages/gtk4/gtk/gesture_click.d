@@ -120,11 +120,11 @@ class GestureClick : gtk.gesture_single.GestureSingle
       Connect to `Released` signal.
   
       Emitted when a button or touch is released.
-      
-      n_press will report the number of press that is paired to
-      this event, note that [gtk.gesture_click.GestureClick.stopped] may
-      have been emitted between the press and its release, n_press
-      will only start over at the next press.
+        
+        n_press will report the number of press that is paired to
+        this event, note that [gtk.gesture_click.GestureClick.stopped] may
+        have been emitted between the press and its release, n_press
+        will only start over at the next press.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -220,11 +220,11 @@ class GestureClick : gtk.gesture_single.GestureSingle
       Connect to `UnpairedRelease` signal.
   
       Emitted whenever the gesture receives a release
-      event that had no previous corresponding press.
-      
-      Due to implicit grabs, this can only happen on situations
-      where input is grabbed elsewhere mid-press or the pressed
-      widget voluntarily relinquishes its implicit grab.
+        event that had no previous corresponding press.
+        
+        Due to implicit grabs, this can only happen on situations
+        where input is grabbed elsewhere mid-press or the pressed
+        widget voluntarily relinquishes its implicit grab.
   
       Params:
         callback = signal callback delegate or function to connect

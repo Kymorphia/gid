@@ -488,7 +488,7 @@ template TableT()
       Connect to `ColumnDeleted` signal.
   
       The "column-deleted" signal is emitted by an object which
-      implements the AtkTable interface when a column is deleted.
+        implements the AtkTable interface when a column is deleted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -540,7 +540,7 @@ template TableT()
       Connect to `ColumnInserted` signal.
   
       The "column-inserted" signal is emitted by an object which
-      implements the AtkTable interface when a column is inserted.
+        implements the AtkTable interface when a column is inserted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -592,8 +592,8 @@ template TableT()
       Connect to `ColumnReordered` signal.
   
       The "column-reordered" signal is emitted by an object which
-      implements the AtkTable interface when the columns are
-      reordered.
+        implements the AtkTable interface when the columns are
+        reordered.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -631,8 +631,8 @@ template TableT()
       Connect to `ModelChanged` signal.
   
       The "model-changed" signal is emitted by an object which
-      implements the AtkTable interface when the model displayed by
-      the table changes.
+        implements the AtkTable interface when the model displayed by
+        the table changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -670,7 +670,7 @@ template TableT()
       Connect to `RowDeleted` signal.
   
       The "row-deleted" signal is emitted by an object which
-      implements the AtkTable interface when a row is deleted.
+        implements the AtkTable interface when a row is deleted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -722,7 +722,7 @@ template TableT()
       Connect to `RowInserted` signal.
   
       The "row-inserted" signal is emitted by an object which
-      implements the AtkTable interface when a row is inserted.
+        implements the AtkTable interface when a row is inserted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -774,8 +774,8 @@ template TableT()
       Connect to `RowReordered` signal.
   
       The "row-reordered" signal is emitted by an object which
-      implements the AtkTable interface when the rows are
-      reordered.
+        implements the AtkTable interface when the rows are
+        reordered.
   
       Params:
         callback = signal callback delegate or function to connect

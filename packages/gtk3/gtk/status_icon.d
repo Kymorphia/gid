@@ -97,7 +97,7 @@ class StatusIcon : gobject.object.ObjectWrap
   /**
       Get `gicon` property.
       Returns: The #GIcon displayed in the #GtkStatusIcon. For themed icons,
-      the image will be updated automatically if the theme changes.
+        the image will be updated automatically if the theme changes.
   */
   @property gio.icon.Icon gicon()
   {
@@ -108,7 +108,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Set `gicon` property.
       Params:
         propval = The #GIcon displayed in the #GtkStatusIcon. For themed icons,
-        the image will be updated automatically if the theme changes.
+          the image will be updated automatically if the theme changes.
   */
   @property void gicon(gio.icon.Icon propval)
   {
@@ -118,28 +118,6 @@ class StatusIcon : gobject.object.ObjectWrap
   /**
       Get `hasTooltip` property.
       Returns: Enables or disables the emission of #GtkStatusIcon::query-tooltip on
-      @status_icon.  A value of true indicates that @status_icon can have a
-      tooltip, in this case the status icon will be queried using
-      #GtkStatusIcon::query-tooltip to determine whether it will provide a
-      tooltip or not.
-      
-      Note that setting this property to true for the first time will change
-      the event masks of the windows of this status icon to include leave-notify
-      and motion-notify events. This will not be undone when the property is set
-      to false again.
-      
-      Whether this property is respected is platform dependent.
-      For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
-  */
-  @property bool hasTooltip()
-  {
-    return getHasTooltip();
-  }
-
-  /**
-      Set `hasTooltip` property.
-      Params:
-        propval = Enables or disables the emission of #GtkStatusIcon::query-tooltip on
         @status_icon.  A value of true indicates that @status_icon can have a
         tooltip, in this case the status icon will be queried using
         #GtkStatusIcon::query-tooltip to determine whether it will provide a
@@ -152,6 +130,28 @@ class StatusIcon : gobject.object.ObjectWrap
         
         Whether this property is respected is platform dependent.
         For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
+  */
+  @property bool hasTooltip()
+  {
+    return getHasTooltip();
+  }
+
+  /**
+      Set `hasTooltip` property.
+      Params:
+        propval = Enables or disables the emission of #GtkStatusIcon::query-tooltip on
+          @status_icon.  A value of true indicates that @status_icon can have a
+          tooltip, in this case the status icon will be queried using
+          #GtkStatusIcon::query-tooltip to determine whether it will provide a
+          tooltip or not.
+          
+          Note that setting this property to true for the first time will change
+          the event masks of the windows of this status icon to include leave-notify
+          and motion-notify events. This will not be undone when the property is set
+          to false again.
+          
+          Whether this property is respected is platform dependent.
+          For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
   */
   @property void hasTooltip(bool propval)
   {
@@ -173,7 +173,7 @@ class StatusIcon : gobject.object.ObjectWrap
   /**
       Get `orientation` property.
       Returns: The orientation of the tray in which the statusicon
-      is embedded.
+        is embedded.
   */
   @property gtk.types.Orientation orientation()
   {
@@ -231,8 +231,8 @@ class StatusIcon : gobject.object.ObjectWrap
   /**
       Get `title` property.
       Returns: The title of this tray icon. This should be a short, human-readable,
-      localized string describing the tray icon. It may be used by tools
-      like screen readers to render the tray icon.
+        localized string describing the tray icon. It may be used by tools
+        like screen readers to render the tray icon.
   */
   @property string title()
   {
@@ -243,8 +243,8 @@ class StatusIcon : gobject.object.ObjectWrap
       Set `title` property.
       Params:
         propval = The title of this tray icon. This should be a short, human-readable,
-        localized string describing the tray icon. It may be used by tools
-        like screen readers to render the tray icon.
+          localized string describing the tray icon. It may be used by tools
+          like screen readers to render the tray icon.
   */
   @property void title(string propval)
   {
@@ -254,26 +254,6 @@ class StatusIcon : gobject.object.ObjectWrap
   /**
       Get `tooltipMarkup` property.
       Returns: Sets the text of tooltip to be the given string, which is marked up
-      with the [Pango text markup language][PangoMarkupFormat].
-      Also see [gtk.tooltip.Tooltip.setMarkup].
-      
-      This is a convenience property which will take care of getting the
-      tooltip shown if the given string is not null.
-      #GtkStatusIcon:has-tooltip will automatically be set to true and
-      the default handler for the #GtkStatusIcon::query-tooltip signal
-      will take care of displaying the tooltip.
-      
-      On some platforms, embedded markup will be ignored.
-  */
-  @property string tooltipMarkup()
-  {
-    return getTooltipMarkup();
-  }
-
-  /**
-      Set `tooltipMarkup` property.
-      Params:
-        propval = Sets the text of tooltip to be the given string, which is marked up
         with the [Pango text markup language][PangoMarkupFormat].
         Also see [gtk.tooltip.Tooltip.setMarkup].
         
@@ -285,6 +265,26 @@ class StatusIcon : gobject.object.ObjectWrap
         
         On some platforms, embedded markup will be ignored.
   */
+  @property string tooltipMarkup()
+  {
+    return getTooltipMarkup();
+  }
+
+  /**
+      Set `tooltipMarkup` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string, which is marked up
+          with the [Pango text markup language][PangoMarkupFormat].
+          Also see [gtk.tooltip.Tooltip.setMarkup].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null.
+          #GtkStatusIcon:has-tooltip will automatically be set to true and
+          the default handler for the #GtkStatusIcon::query-tooltip signal
+          will take care of displaying the tooltip.
+          
+          On some platforms, embedded markup will be ignored.
+  */
   @property void tooltipMarkup(string propval)
   {
     return setTooltipMarkup(propval);
@@ -293,28 +293,6 @@ class StatusIcon : gobject.object.ObjectWrap
   /**
       Get `tooltipText` property.
       Returns: Sets the text of tooltip to be the given string.
-      
-      Also see [gtk.tooltip.Tooltip.setText].
-      
-      This is a convenience property which will take care of getting the
-      tooltip shown if the given string is not null.
-      #GtkStatusIcon:has-tooltip will automatically be set to true and
-      the default handler for the #GtkStatusIcon::query-tooltip signal
-      will take care of displaying the tooltip.
-      
-      Note that some platforms have limitations on the length of tooltips
-      that they allow on status icons, e.g. Windows only shows the first
-      64 characters.
-  */
-  @property string tooltipText()
-  {
-    return getTooltipText();
-  }
-
-  /**
-      Set `tooltipText` property.
-      Params:
-        propval = Sets the text of tooltip to be the given string.
         
         Also see [gtk.tooltip.Tooltip.setText].
         
@@ -327,6 +305,28 @@ class StatusIcon : gobject.object.ObjectWrap
         Note that some platforms have limitations on the length of tooltips
         that they allow on status icons, e.g. Windows only shows the first
         64 characters.
+  */
+  @property string tooltipText()
+  {
+    return getTooltipText();
+  }
+
+  /**
+      Set `tooltipText` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string.
+          
+          Also see [gtk.tooltip.Tooltip.setText].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null.
+          #GtkStatusIcon:has-tooltip will automatically be set to true and
+          the default handler for the #GtkStatusIcon::query-tooltip signal
+          will take care of displaying the tooltip.
+          
+          Note that some platforms have limitations on the length of tooltips
+          that they allow on status icons, e.g. Windows only shows the first
+          64 characters.
   */
   @property void tooltipText(string propval)
   {
@@ -523,10 +523,8 @@ class StatusIcon : gobject.object.ObjectWrap
   {
     bool _retval;
     GdkScreen* _screen;
-    GdkRectangle _area;
-    _retval = cast(bool)gtk_status_icon_get_geometry(cast(GtkStatusIcon*)this._cPtr, &_screen, &_area, &orientation);
+    _retval = cast(bool)gtk_status_icon_get_geometry(cast(GtkStatusIcon*)this._cPtr, &_screen, cast(GdkRectangle*)&area, &orientation);
     screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
-    area = new gdk.rectangle.Rectangle(cast(void*)&_area, No.Take);
     return _retval;
   }
 
@@ -1018,10 +1016,10 @@ class StatusIcon : gobject.object.ObjectWrap
       Connect to `Activate` signal.
   
       Gets emitted when the user activates the status icon.
-      If and how status icons can activated is platform-dependent.
-      
-      Unlike most G_SIGNAL_ACTION signals, this signal is meant to
-      be used by applications and should be wrapped by language bindings.
+        If and how status icons can activated is platform-dependent.
+        
+        Unlike most G_SIGNAL_ACTION signals, this signal is meant to
+        be used by applications and should be wrapped by language bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1059,10 +1057,10 @@ class StatusIcon : gobject.object.ObjectWrap
       Connect to `ButtonPressEvent` signal.
   
       The ::button-press-event signal will be emitted when a button
-      (typically from a mouse) is pressed.
-      
-      Whether this event is emitted is platform-dependent.  Use the ::activate
-      and ::popup-menu signals in preference.
+        (typically from a mouse) is pressed.
+        
+        Whether this event is emitted is platform-dependent.  Use the ::activate
+        and ::popup-menu signals in preference.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1070,12 +1068,12 @@ class StatusIcon : gobject.object.ObjectWrap
           $(D bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon))
   
           `event` the #GdkEventButton which triggered
-                                          this signal (optional)
+                                            this signal (optional)
   
           `statusIcon` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked
-          for the event. false to propagate the event further.
+            for the event. false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1111,10 +1109,10 @@ class StatusIcon : gobject.object.ObjectWrap
       Connect to `ButtonReleaseEvent` signal.
   
       The ::button-release-event signal will be emitted when a button
-      (typically from a mouse) is released.
-      
-      Whether this event is emitted is platform-dependent.  Use the ::activate
-      and ::popup-menu signals in preference.
+        (typically from a mouse) is released.
+        
+        Whether this event is emitted is platform-dependent.  Use the ::activate
+        and ::popup-menu signals in preference.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1122,12 +1120,12 @@ class StatusIcon : gobject.object.ObjectWrap
           $(D bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon))
   
           `event` the #GdkEventButton which triggered
-                                          this signal (optional)
+                                            this signal (optional)
   
           `statusIcon` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked
-          for the event. false to propagate the event further.
+            for the event. false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1163,14 +1161,14 @@ class StatusIcon : gobject.object.ObjectWrap
       Connect to `PopupMenu` signal.
   
       Gets emitted when the user brings up the context menu
-      of the status icon. Whether status icons can have context
-      menus and how these are activated is platform-dependent.
-      
-      The button and activate_time parameters should be
-      passed as the last to arguments to [gtk.menu.Menu.popup].
-      
-      Unlike most G_SIGNAL_ACTION signals, this signal is meant to
-      be used by applications and should be wrapped by language bindings.
+        of the status icon. Whether status icons can have context
+        menus and how these are activated is platform-dependent.
+        
+        The button and activate_time parameters should be
+        passed as the last to arguments to [gtk.menu.Menu.popup].
+        
+        Unlike most G_SIGNAL_ACTION signals, this signal is meant to
+        be used by applications and should be wrapped by language bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1178,10 +1176,10 @@ class StatusIcon : gobject.object.ObjectWrap
           $(D void callback(uint button, uint activateTime, gtk.status_icon.StatusIcon statusIcon))
   
           `button` the button that was pressed, or 0 if the
-            signal is not emitted in response to a button press event (optional)
+              signal is not emitted in response to a button press event (optional)
   
           `activateTime` the timestamp of the event that
-            triggered the signal emission (optional)
+              triggered the signal emission (optional)
   
           `statusIcon` the instance the signal is connected to (optional)
   
@@ -1224,20 +1222,20 @@ class StatusIcon : gobject.object.ObjectWrap
       Connect to `QueryTooltip` signal.
   
       Emitted when the hover timeout has expired with the
-      cursor hovering above status_icon; or emitted when status_icon got
-      focus in keyboard mode.
-      
-      Using the given coordinates, the signal handler should determine
-      whether a tooltip should be shown for status_icon. If this is
-      the case true should be returned, false otherwise. Note that if
-      keyboard_mode is true, the values of `x` and `y` are undefined and
-      should not be used.
-      
-      The signal handler is free to manipulate tooltip with the therefore
-      destined function calls.
-      
-      Whether this signal is emitted is platform-dependent.
-      For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
+        cursor hovering above status_icon; or emitted when status_icon got
+        focus in keyboard mode.
+        
+        Using the given coordinates, the signal handler should determine
+        whether a tooltip should be shown for status_icon. If this is
+        the case true should be returned, false otherwise. Note that if
+        keyboard_mode is true, the values of `x` and `y` are undefined and
+        should not be used.
+        
+        The signal handler is free to manipulate tooltip with the therefore
+        destined function calls.
+        
+        Whether this signal is emitted is platform-dependent.
+        For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1245,10 +1243,10 @@ class StatusIcon : gobject.object.ObjectWrap
           $(D bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.status_icon.StatusIcon statusIcon))
   
           `x` the x coordinate of the cursor position where the request has been
-              emitted, relative to status_icon (optional)
+                emitted, relative to status_icon (optional)
   
           `y` the y coordinate of the cursor position where the request has been
-              emitted, relative to status_icon (optional)
+                emitted, relative to status_icon (optional)
   
           `keyboardMode` true if the tooltip was trigged using the keyboard (optional)
   
@@ -1307,10 +1305,10 @@ class StatusIcon : gobject.object.ObjectWrap
       Connect to `ScrollEvent` signal.
   
       The ::scroll-event signal is emitted when a button in the 4 to 7
-      range is pressed. Wheel mice are usually configured to generate
-      button press events for buttons 4 and 5 when the wheel is turned.
-      
-      Whether this event is emitted is platform-dependent.
+        range is pressed. Wheel mice are usually configured to generate
+        button press events for buttons 4 and 5 when the wheel is turned.
+        
+        Whether this event is emitted is platform-dependent.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1318,12 +1316,12 @@ class StatusIcon : gobject.object.ObjectWrap
           $(D bool callback(gdk.event_scroll.EventScroll event, gtk.status_icon.StatusIcon statusIcon))
   
           `event` the #GdkEventScroll which triggered
-                                          this signal (optional)
+                                            this signal (optional)
   
           `statusIcon` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1359,7 +1357,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Connect to `SizeChanged` signal.
   
       Gets emitted when the size available for the image
-      changes, e.g. because the notification area got resized.
+        changes, e.g. because the notification area got resized.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1371,7 +1369,7 @@ class StatusIcon : gobject.object.ObjectWrap
           `statusIcon` the instance the signal is connected to (optional)
   
           `Returns` true if the icon was updated for the new
-          size. Otherwise, GTK+ will scale the icon as necessary.
+            size. Otherwise, GTK+ will scale the icon as necessary.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

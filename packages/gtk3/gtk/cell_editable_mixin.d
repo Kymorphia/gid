@@ -71,23 +71,23 @@ template CellEditableT()
   */
   override void startEditing(gdk.event.Event event = null)
   {
-    gtk_cell_editable_start_editing(cast(GtkCellEditable*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    gtk_cell_editable_start_editing(cast(GtkCellEditable*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
 
   /**
       Connect to `EditingDone` signal.
   
       This signal is a sign for the cell renderer to update its
-      value from the cell_editable.
-      
-      Implementations of #GtkCellEditable are responsible for
-      emitting this signal when they are done editing, e.g.
-      #GtkEntry emits this signal when the user presses Enter. Typical things to
-      do in a handler for ::editing-done are to capture the edited value,
-      disconnect the cell_editable from signals on the #GtkCellRenderer, etc.
-      
-      [gtk.cell_editable.CellEditable.editingDone] is a convenience method
-      for emitting #GtkCellEditable::editing-done.
+        value from the cell_editable.
+        
+        Implementations of #GtkCellEditable are responsible for
+        emitting this signal when they are done editing, e.g.
+        #GtkEntry emits this signal when the user presses Enter. Typical things to
+        do in a handler for ::editing-done are to capture the edited value,
+        disconnect the cell_editable from signals on the #GtkCellRenderer, etc.
+        
+        [gtk.cell_editable.CellEditable.editingDone] is a convenience method
+        for emitting #GtkCellEditable::editing-done.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -125,17 +125,17 @@ template CellEditableT()
       Connect to `RemoveWidget` signal.
   
       This signal is meant to indicate that the cell is finished
-      editing, and the cell_editable widget is being removed and may
-      subsequently be destroyed.
-      
-      Implementations of #GtkCellEditable are responsible for
-      emitting this signal when they are done editing. It must
-      be emitted after the #GtkCellEditable::editing-done signal,
-      to give the cell renderer a chance to update the cell's value
-      before the widget is removed.
-      
-      [gtk.cell_editable.CellEditable.removeWidget] is a convenience method
-      for emitting #GtkCellEditable::remove-widget.
+        editing, and the cell_editable widget is being removed and may
+        subsequently be destroyed.
+        
+        Implementations of #GtkCellEditable are responsible for
+        emitting this signal when they are done editing. It must
+        be emitted after the #GtkCellEditable::editing-done signal,
+        to give the cell renderer a chance to update the cell's value
+        before the widget is removed.
+        
+        [gtk.cell_editable.CellEditable.removeWidget] is a convenience method
+        for emitting #GtkCellEditable::remove-widget.
   
       Params:
         callback = signal callback delegate or function to connect

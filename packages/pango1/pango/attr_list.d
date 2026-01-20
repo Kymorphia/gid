@@ -34,7 +34,7 @@ class AttrList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -143,13 +143,15 @@ class AttrList : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(PangoAttribute* attribute, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(pango.types.AttrFilterFunc*)userData;
 
-      gboolean _retval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
+      _dretval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     PangoAttrList* _cretval;
     auto _func = func ? cast(void*)&(func) : null;
     _cretval = pango_attr_list_filter(cast(PangoAttrList*)this._cPtr, _funcCB, _func);

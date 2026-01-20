@@ -5,7 +5,6 @@ import cairo.c.functions;
 import cairo.c.types;
 import cairo.context;
 import cairo.pattern;
-import cairo.rectangle_int;
 import cairo.scaled_font;
 import cairo.surface;
 import gid.gid;
@@ -120,6 +119,12 @@ alias TextClusterFlags = cairo_text_cluster_flags_t;
 alias FontExtents = cairo_font_extents_t;
 
 /** */
+alias Rectangle = cairo_rectangle_t;
+
+/** */
+alias RectangleInt = cairo_rectangle_int_t;
+
+/** */
 alias TextExtents = cairo_text_extents_t;
 
 /** */
@@ -154,7 +159,7 @@ alias DestroyFunc = void delegate();
       extents = rectangular region of interest in pixels in sample space
     Returns: a #cairo_surface_t
 */
-alias RasterSourceAcquireFunc = cairo.surface.Surface delegate(cairo.pattern.Pattern pattern, cairo.surface.Surface target, cairo.rectangle_int.RectangleInt extents);
+alias RasterSourceAcquireFunc = cairo.surface.Surface delegate(cairo.pattern.Pattern pattern, cairo.surface.Surface target, cairo.types.RectangleInt extents);
 
 /**
     #cairo_raster_source_copy_func_t is the type of function which is

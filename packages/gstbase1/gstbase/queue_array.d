@@ -13,7 +13,7 @@ import gstbase.types;
 */
 class QueueArray
 {
-  GstQueueArray* cInstancePtr;
+  GstQueueArray* _cInstancePtr;
   bool owned;
 
   /** */
@@ -22,7 +22,7 @@ class QueueArray
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstbase.queue_array.QueueArray");
 
-    cInstancePtr = cast(GstQueueArray*)ptr;
+    _cInstancePtr = cast(GstQueueArray*)ptr;
 
     owned = take;
   }
@@ -30,7 +30,7 @@ class QueueArray
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /** */

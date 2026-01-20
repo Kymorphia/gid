@@ -77,7 +77,7 @@ class IMContext : gobject.object.ObjectWrap
   /**
       Get `inputHints` property.
       Returns: Additional hints that allow input methods to fine-tune
-      their behaviour.
+        their behaviour.
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -88,7 +88,7 @@ class IMContext : gobject.object.ObjectWrap
       Set `inputHints` property.
       Params:
         propval = Additional hints that allow input methods to fine-tune
-        their behaviour.
+          their behaviour.
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -98,9 +98,9 @@ class IMContext : gobject.object.ObjectWrap
   /**
       Get `inputPurpose` property.
       Returns: The purpose of the text field that the `GtkIMContext is connected to.
-      
-      This property can be used by on-screen keyboards and other input
-      methods to adjust their behaviour.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -111,9 +111,9 @@ class IMContext : gobject.object.ObjectWrap
       Set `inputPurpose` property.
       Params:
         propval = The purpose of the text field that the `GtkIMContext is connected to.
-        
-        This property can be used by on-screen keyboards and other input
-        methods to adjust their behaviour.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -372,7 +372,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void setCursorLocation(gdk.rectangle.Rectangle area)
   {
-    gtk_im_context_set_cursor_location(cast(GtkIMContext*)this._cPtr, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null);
+    gtk_im_context_set_cursor_location(cast(GtkIMContext*)this._cPtr, cast(const(GdkRectangle)*)&area);
   }
 
   /**
@@ -442,13 +442,13 @@ class IMContext : gobject.object.ObjectWrap
       Connect to `Commit` signal.
   
       The ::commit signal is emitted when a complete input sequence
-      has been entered by the user.
-      
-      If the commit comes after a preediting sequence, the
-      ::commit signal is emitted after ::preedit-end.
-      
-      This can be a single character immediately after a key press or
-      the final result of preediting.
+        has been entered by the user.
+        
+        If the commit comes after a preediting sequence, the
+        ::commit signal is emitted after ::preedit-end.
+        
+        This can be a single character immediately after a key press or
+        the final result of preediting.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -493,7 +493,7 @@ class IMContext : gobject.object.ObjectWrap
       Connect to `DeleteSurrounding` signal.
   
       The ::delete-surrounding signal is emitted when the input method
-      needs to delete all or part of the context surrounding the cursor.
+        needs to delete all or part of the context surrounding the cursor.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -501,8 +501,8 @@ class IMContext : gobject.object.ObjectWrap
           $(D bool callback(int offset, int nChars, gtk.imcontext.IMContext iMContext))
   
           `offset` the character offset from the cursor position of the text
-            to be deleted. A negative value indicates a position before
-            the cursor. (optional)
+              to be deleted. A negative value indicates a position before
+              the cursor. (optional)
   
           `nChars` the number of characters to be deleted (optional)
   
@@ -549,10 +549,10 @@ class IMContext : gobject.object.ObjectWrap
       Connect to `PreeditChanged` signal.
   
       The ::preedit-changed signal is emitted whenever the preedit sequence
-      currently being entered has changed.
-      
-      It is also emitted at the end of a preedit sequence, in which case
-      [gtk.imcontext.IMContext.getPreeditString] returns the empty string.
+        currently being entered has changed.
+        
+        It is also emitted at the end of a preedit sequence, in which case
+        [gtk.imcontext.IMContext.getPreeditString] returns the empty string.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -590,7 +590,7 @@ class IMContext : gobject.object.ObjectWrap
       Connect to `PreeditEnd` signal.
   
       The ::preedit-end signal is emitted when a preediting sequence
-      has been completed or canceled.
+        has been completed or canceled.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -628,7 +628,7 @@ class IMContext : gobject.object.ObjectWrap
       Connect to `PreeditStart` signal.
   
       The ::preedit-start signal is emitted when a new preediting sequence
-      starts.
+        starts.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -666,10 +666,10 @@ class IMContext : gobject.object.ObjectWrap
       Connect to `RetrieveSurrounding` signal.
   
       The ::retrieve-surrounding signal is emitted when the input method
-      requires the context surrounding the cursor.
-      
-      The callback should set the input method surrounding context by
-      calling the [gtk.imcontext.IMContext.setSurrounding] method.
+        requires the context surrounding the cursor.
+        
+        The callback should set the input method surrounding context by
+        calling the [gtk.imcontext.IMContext.setSurrounding] method.
   
       Params:
         callback = signal callback delegate or function to connect

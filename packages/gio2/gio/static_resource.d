@@ -13,7 +13,7 @@ import gio.types;
 */
 class StaticResource
 {
-  GStaticResource cInstance;
+  GStaticResource _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class StaticResource
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.static_resource.StaticResource");
 
-    cInstance = *cast(GStaticResource*)ptr;
+    _cInstance = *cast(GStaticResource*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class StaticResource
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

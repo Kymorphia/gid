@@ -289,9 +289,9 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
       Connect to `Activate` signal.
   
       Emitted to when the font button is activated.
-      
-      The `::activate` signal on [gtk.font_button.FontButton] is an action signal and
-      emitting it causes the button to present its dialog.
+        
+        The `::activate` signal on [gtk.font_button.FontButton] is an action signal and
+        emitting it causes the button to present its dialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -329,13 +329,13 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
       Connect to `FontSet` signal.
   
       Emitted when the user selects a font.
-      
-      When handling this signal, use [gtk.font_chooser.FontChooser.getFont]
-      to find out which font was just selected.
-      
-      Note that this signal is only emitted when the user changes the font.
-      If you need to react to programmatic font changes as well, use
-      the notify::font signal.
+        
+        When handling this signal, use [gtk.font_chooser.FontChooser.getFont]
+        to find out which font was just selected.
+        
+        Note that this signal is only emitted when the user changes the font.
+        If you need to react to programmatic font changes as well, use
+        the notify::font signal.
   
       Params:
         callback = signal callback delegate or function to connect

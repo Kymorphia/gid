@@ -12,7 +12,7 @@ import gtk.types;
 */
 class ActionEntry
 {
-  GtkActionEntry cInstance;
+  GtkActionEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class ActionEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.action_entry.ActionEntry");
 
-    cInstance = *cast(GtkActionEntry*)ptr;
+    _cInstance = *cast(GtkActionEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class ActionEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -55,7 +55,7 @@ class ActionEntry
   /**
       Get `stockId` field.
       Returns: The stock id for the action, or the name of an icon from the
-       icon theme.
+         icon theme.
   */
   @property string stockId()
   {
@@ -66,7 +66,7 @@ class ActionEntry
       Set `stockId` field.
       Params:
         propval = The stock id for the action, or the name of an icon from the
-         icon theme.
+           icon theme.
   */
   @property void stockId(string propval)
   {
@@ -77,8 +77,8 @@ class ActionEntry
   /**
       Get `label` field.
       Returns: The label for the action. This field should typically be marked
-       for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
-       @label is null, the label of the stock item with id @stock_id is used.
+         for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
+         @label is null, the label of the stock item with id @stock_id is used.
   */
   @property string label()
   {
@@ -89,8 +89,8 @@ class ActionEntry
       Set `label` field.
       Params:
         propval = The label for the action. This field should typically be marked
-         for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
-         @label is null, the label of the stock item with id @stock_id is used.
+           for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
+           @label is null, the label of the stock item with id @stock_id is used.
   */
   @property void label(string propval)
   {
@@ -101,7 +101,7 @@ class ActionEntry
   /**
       Get `accelerator` field.
       Returns: The accelerator for the action, in the format understood by
-       [gtk.global.acceleratorParse].
+         [gtk.global.acceleratorParse].
   */
   @property string accelerator()
   {
@@ -112,7 +112,7 @@ class ActionEntry
       Set `accelerator` field.
       Params:
         propval = The accelerator for the action, in the format understood by
-         [gtk.global.acceleratorParse].
+           [gtk.global.acceleratorParse].
   */
   @property void accelerator(string propval)
   {
@@ -123,7 +123,7 @@ class ActionEntry
   /**
       Get `tooltip` field.
       Returns: The tooltip for the action. This field should typically be
-       marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+         marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property string tooltip()
   {
@@ -134,7 +134,7 @@ class ActionEntry
       Set `tooltip` field.
       Params:
         propval = The tooltip for the action. This field should typically be
-         marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+           marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property void tooltip(string propval)
   {

@@ -12,7 +12,7 @@ import gid.gid;
 */
 class ToplevelSize
 {
-  GdkToplevelSize* cInstancePtr;
+  GdkToplevelSize* _cInstancePtr;
   bool owned;
 
   /** */
@@ -21,7 +21,7 @@ class ToplevelSize
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.toplevel_size.ToplevelSize");
 
-    cInstancePtr = cast(GdkToplevelSize*)ptr;
+    _cInstancePtr = cast(GdkToplevelSize*)ptr;
 
     owned = take;
   }
@@ -29,7 +29,7 @@ class ToplevelSize
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

@@ -211,13 +211,15 @@ class AccelGroup : gobject.object.ObjectWrap
   {
     extern(C) gboolean _findFuncCallback(GtkAccelKey* key, GClosure* closure, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.AccelGroupFindFunc*)data;
 
-      gboolean _retval = (*_dlg)(*key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
+      _dretval = (*_dlg)(*cast(gtk.types.AccelKey*)key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _findFuncCB = findFunc ? &_findFuncCallback : null;
-
     GtkAccelKey* _cretval;
     auto _findFunc = findFunc ? cast(void*)&(findFunc) : null;
     _cretval = gtk_accel_group_find(cast(GtkAccelGroup*)this._cPtr, _findFuncCB, _findFunc);
@@ -281,7 +283,7 @@ class AccelGroup : gobject.object.ObjectWrap
       Connect to `AccelActivate` signal.
   
       The accel-activate signal is an implementation detail of
-      #GtkAccelGroup and not meant to be used by applications.
+        #GtkAccelGroup and not meant to be used by applications.
   
       Params:
         detail = Signal detail or null (default)
@@ -343,11 +345,11 @@ class AccelGroup : gobject.object.ObjectWrap
       Connect to `AccelChanged` signal.
   
       The accel-changed signal is emitted when an entry
-      is added to or removed from the accel group.
-      
-      Widgets like #GtkAccelLabel which display an associated
-      accelerator should connect to this signal, and rebuild
-      their visual representation if the accel_closure is theirs.
+        is added to or removed from the accel group.
+        
+        Widgets like #GtkAccelLabel which display an associated
+        accelerator should connect to this signal, and rebuild
+        their visual representation if the accel_closure is theirs.
   
       Params:
         detail = Signal detail or null (default)

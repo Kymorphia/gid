@@ -82,13 +82,15 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   {
     extern(C) gboolean _funcCallback(GstGLFilter* filter, GstGLMemory* inTex, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gstgl.types.GLFilterRenderFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_gl_filter_render_to_target(cast(GstGLFilter*)this._cPtr, input ? cast(GstGLMemory*)input._cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output._cPtr(No.Dup) : null, _funcCB, _func);

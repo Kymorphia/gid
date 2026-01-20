@@ -254,7 +254,7 @@ class HandleBox : gtk.bin.Bin
       Connect to `ChildAttached` signal.
   
       This signal is emitted when the contents of the
-      handlebox are reattached to the main window.
+        handlebox are reattached to the main window.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -262,8 +262,8 @@ class HandleBox : gtk.bin.Bin
           $(D void callback(gtk.widget.Widget widget, gtk.handle_box.HandleBox handleBox))
   
           `widget` the child widget of the handlebox.
-            (this argument provides no extra information
-            and is here only for backwards-compatibility) (optional)
+              (this argument provides no extra information
+              and is here only for backwards-compatibility) (optional)
   
           `handleBox` the instance the signal is connected to (optional)
   
@@ -303,7 +303,7 @@ class HandleBox : gtk.bin.Bin
       Connect to `ChildDetached` signal.
   
       This signal is emitted when the contents of the
-      handlebox are detached from the main window.
+        handlebox are detached from the main window.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -311,8 +311,8 @@ class HandleBox : gtk.bin.Bin
           $(D void callback(gtk.widget.Widget widget, gtk.handle_box.HandleBox handleBox))
   
           `widget` the child widget of the handlebox.
-            (this argument provides no extra information
-            and is here only for backwards-compatibility) (optional)
+              (this argument provides no extra information
+              and is here only for backwards-compatibility) (optional)
   
           `handleBox` the instance the signal is connected to (optional)
   

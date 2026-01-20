@@ -45,8 +45,8 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   /**
       Get `fileInfo` property.
       Returns: If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
-      [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
-      and modification time from the file info to the GZIP header.
+        [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
+        and modification time from the file info to the GZIP header.
   */
   @property gio.file_info.FileInfo fileInfo()
   {
@@ -57,8 +57,8 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Set `fileInfo` property.
       Params:
         propval = If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
-        [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
-        and modification time from the file info to the GZIP header.
+          [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
+          and modification time from the file info to the GZIP header.
   */
   @property void fileInfo(gio.file_info.FileInfo propval)
   {

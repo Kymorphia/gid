@@ -107,9 +107,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `active` property.
       Returns: If the check button is active.
-      
-      Setting `active` to true will add the `:checked:` state to both
-      the check button and the indicator CSS node.
+        
+        Setting `active` to true will add the `:checked:` state to both
+        the check button and the indicator CSS node.
   */
   @property bool active()
   {
@@ -120,9 +120,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `active` property.
       Params:
         propval = If the check button is active.
-        
-        Setting `active` to true will add the `:checked:` state to both
-        the check button and the indicator CSS node.
+          
+          Setting `active` to true will add the `:checked:` state to both
+          the check button and the indicator CSS node.
   */
   @property void active(bool propval)
   {
@@ -161,9 +161,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `inconsistent` property.
       Returns: If the check button is in an “in between” state.
-      
-      The inconsistent state only affects visual appearance,
-      not the semantics of the button.
+        
+        The inconsistent state only affects visual appearance,
+        not the semantics of the button.
   */
   @property bool inconsistent()
   {
@@ -174,9 +174,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `inconsistent` property.
       Params:
         propval = If the check button is in an “in between” state.
-        
-        The inconsistent state only affects visual appearance,
-        not the semantics of the button.
+          
+          The inconsistent state only affects visual appearance,
+          not the semantics of the button.
   */
   @property void inconsistent(bool propval)
   {
@@ -205,7 +205,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `useUnderline` property.
       Returns: If set, an underline in the text indicates that the following
-      character is to be used as mnemonic.
+        character is to be used as mnemonic.
   */
   @property bool useUnderline()
   {
@@ -216,7 +216,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `useUnderline` property.
       Params:
         propval = If set, an underline in the text indicates that the following
-        character is to be used as mnemonic.
+          character is to be used as mnemonic.
   */
   @property void useUnderline(bool propval)
   {
@@ -433,15 +433,15 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Connect to `Activate` signal.
   
       Emitted to when the check button is activated.
-      
-      The `::activate` signal on [gtk.check_button.CheckButton] is an action signal and
-      emitting it causes the button to animate press then release.
-      
-      Applications should never connect to this signal, but use the
-      [gtk.check_button.CheckButton.toggled] signal.
-      
-      The default bindings for this signal are all forms of the
-      <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
+        
+        The `::activate` signal on [gtk.check_button.CheckButton] is an action signal and
+        emitting it causes the button to animate press then release.
+        
+        Applications should never connect to this signal, but use the
+        [gtk.check_button.CheckButton.toggled] signal.
+        
+        The default bindings for this signal are all forms of the
+        <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -479,7 +479,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Connect to `Toggled` signal.
   
       Emitted when the buttons's [gtk.check_button.CheckButton.active]
-      property changes.
+        property changes.
   
       Params:
         callback = signal callback delegate or function to connect

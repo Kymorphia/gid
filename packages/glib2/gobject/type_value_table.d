@@ -12,7 +12,7 @@ import gobject.types;
 */
 class TypeValueTable
 {
-  GTypeValueTable cInstance;
+  GTypeValueTable _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class TypeValueTable
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.type_value_table.TypeValueTable");
 
-    cInstance = *cast(GTypeValueTable*)ptr;
+    _cInstance = *cast(GTypeValueTable*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class TypeValueTable
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -95,7 +95,7 @@ class TypeValueTable
   /**
       Get `valuePeekPointer` field.
       Returns: Function to peek the contents of a GValue if they fit
-        into a pointer
+          into a pointer
   */
   @property GTypeValuePeekPointerFunc valuePeekPointer()
   {
@@ -106,7 +106,7 @@ class TypeValueTable
       Set `valuePeekPointer` field.
       Params:
         propval = Function to peek the contents of a GValue if they fit
-          into a pointer
+            into a pointer
   */
 
   @property void valuePeekPointer(GTypeValuePeekPointerFunc propval)
@@ -117,29 +117,6 @@ class TypeValueTable
   /**
       Get `collectFormat` field.
       Returns: A string format describing how to collect the contents of
-        this value bit-by-bit. Each character in the format represents
-        an argument to be collected, and the characters themselves indicate
-        the type of the argument. Currently supported arguments are:
-         $(LIST
-              * `'i'`: Integers, passed as `collect_values[].v_int`
-              * `'l'`: Longs, passed as `collect_values[].v_long`
-              * `'d'`: Doubles, passed as `collect_values[].v_double`
-              * `'p'`: Pointers, passed as `collect_values[].v_pointer`
-         )
-        It should be noted that for variable argument list construction,
-        ANSI C promotes every type smaller than an integer to an int, and
-        floats to doubles. So for collection of short int or char, `'i'`
-        needs to be used, and for collection of floats `'d'`.
-  */
-  @property string collectFormat()
-  {
-    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
-  }
-
-  /**
-      Set `collectFormat` field.
-      Params:
-        propval = A string format describing how to collect the contents of
           this value bit-by-bit. Each character in the format represents
           an argument to be collected, and the characters themselves indicate
           the type of the argument. Currently supported arguments are:
@@ -154,6 +131,29 @@ class TypeValueTable
           floats to doubles. So for collection of short int or char, `'i'`
           needs to be used, and for collection of floats `'d'`.
   */
+  @property string collectFormat()
+  {
+    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
+  }
+
+  /**
+      Set `collectFormat` field.
+      Params:
+        propval = A string format describing how to collect the contents of
+            this value bit-by-bit. Each character in the format represents
+            an argument to be collected, and the characters themselves indicate
+            the type of the argument. Currently supported arguments are:
+             $(LIST
+                  * `'i'`: Integers, passed as `collect_values[].v_int`
+                  * `'l'`: Longs, passed as `collect_values[].v_long`
+                  * `'d'`: Doubles, passed as `collect_values[].v_double`
+                  * `'p'`: Pointers, passed as `collect_values[].v_pointer`
+             )
+            It should be noted that for variable argument list construction,
+            ANSI C promotes every type smaller than an integer to an int, and
+            floats to doubles. So for collection of short int or char, `'i'`
+            needs to be used, and for collection of floats `'d'`.
+  */
   @property void collectFormat(string propval)
   {
     cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
@@ -163,7 +163,7 @@ class TypeValueTable
   /**
       Get `collectValue` field.
       Returns: Function to initialize a GValue from the values
-        collected from variadic arguments
+          collected from variadic arguments
   */
   @property GTypeValueCollectFunc collectValue()
   {
@@ -174,7 +174,7 @@ class TypeValueTable
       Set `collectValue` field.
       Params:
         propval = Function to initialize a GValue from the values
-          collected from variadic arguments
+            collected from variadic arguments
   */
 
   @property void collectValue(GTypeValueCollectFunc propval)
@@ -185,8 +185,8 @@ class TypeValueTable
   /**
       Get `lcopyFormat` field.
       Returns: Format description of the arguments to collect for @lcopy_value,
-        analogous to @collect_format. Usually, @lcopy_format string consists
-        only of `'p'`s to provide lcopy_value() with pointers to storage locations.
+          analogous to @collect_format. Usually, @lcopy_format string consists
+          only of `'p'`s to provide lcopy_value() with pointers to storage locations.
   */
   @property string lcopyFormat()
   {
@@ -197,8 +197,8 @@ class TypeValueTable
       Set `lcopyFormat` field.
       Params:
         propval = Format description of the arguments to collect for @lcopy_value,
-          analogous to @collect_format. Usually, @lcopy_format string consists
-          only of `'p'`s to provide lcopy_value() with pointers to storage locations.
+            analogous to @collect_format. Usually, @lcopy_format string consists
+            only of `'p'`s to provide lcopy_value() with pointers to storage locations.
   */
   @property void lcopyFormat(string propval)
   {
@@ -209,7 +209,7 @@ class TypeValueTable
   /**
       Get `lcopyValue` field.
       Returns: Function to store the contents of a value into the
-        locations collected from variadic arguments
+          locations collected from variadic arguments
   */
   @property GTypeValueLCopyFunc lcopyValue()
   {
@@ -220,7 +220,7 @@ class TypeValueTable
       Set `lcopyValue` field.
       Params:
         propval = Function to store the contents of a value into the
-          locations collected from variadic arguments
+            locations collected from variadic arguments
   */
 
   @property void lcopyValue(GTypeValueLCopyFunc propval)

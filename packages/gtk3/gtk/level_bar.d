@@ -141,7 +141,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `inverted` property.
       Returns: Level bars normally grow from top to bottom or left to right.
-      Inverted level bars grow in the opposite direction.
+        Inverted level bars grow in the opposite direction.
   */
   @property bool inverted()
   {
@@ -152,7 +152,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Set `inverted` property.
       Params:
         propval = Level bars normally grow from top to bottom or left to right.
-        Inverted level bars grow in the opposite direction.
+          Inverted level bars grow in the opposite direction.
   */
   @property void inverted(bool propval)
   {
@@ -162,7 +162,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `maxValue` property.
       Returns: The #GtkLevelBar:max-value property determaxes the maximum value of
-      the interval that can be displayed by the bar.
+        the interval that can be displayed by the bar.
   */
   @property double maxValue()
   {
@@ -173,7 +173,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Set `maxValue` property.
       Params:
         propval = The #GtkLevelBar:max-value property determaxes the maximum value of
-        the interval that can be displayed by the bar.
+          the interval that can be displayed by the bar.
   */
   @property void maxValue(double propval)
   {
@@ -183,7 +183,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `minValue` property.
       Returns: The #GtkLevelBar:min-value property determines the minimum value of
-      the interval that can be displayed by the bar.
+        the interval that can be displayed by the bar.
   */
   @property double minValue()
   {
@@ -194,7 +194,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Set `minValue` property.
       Params:
         propval = The #GtkLevelBar:min-value property determines the minimum value of
-        the interval that can be displayed by the bar.
+          the interval that can be displayed by the bar.
   */
   @property void minValue(double propval)
   {
@@ -204,13 +204,13 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `mode` property.
       Returns: The #GtkLevelBar:mode property determines the way #GtkLevelBar
-      interprets the value properties to draw the level fill area.
-      Specifically, when the value is #GTK_LEVEL_BAR_MODE_CONTINUOUS,
-      #GtkLevelBar will draw a single block representing the current value in
-      that area; when the value is #GTK_LEVEL_BAR_MODE_DISCRETE,
-      the widget will draw a succession of separate blocks filling the
-      draw area, with the number of blocks being equal to the units separating
-      the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
+        interprets the value properties to draw the level fill area.
+        Specifically, when the value is #GTK_LEVEL_BAR_MODE_CONTINUOUS,
+        #GtkLevelBar will draw a single block representing the current value in
+        that area; when the value is #GTK_LEVEL_BAR_MODE_DISCRETE,
+        the widget will draw a succession of separate blocks filling the
+        draw area, with the number of blocks being equal to the units separating
+        the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
   */
   @property gtk.types.LevelBarMode mode()
   {
@@ -221,13 +221,13 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Set `mode` property.
       Params:
         propval = The #GtkLevelBar:mode property determines the way #GtkLevelBar
-        interprets the value properties to draw the level fill area.
-        Specifically, when the value is #GTK_LEVEL_BAR_MODE_CONTINUOUS,
-        #GtkLevelBar will draw a single block representing the current value in
-        that area; when the value is #GTK_LEVEL_BAR_MODE_DISCRETE,
-        the widget will draw a succession of separate blocks filling the
-        draw area, with the number of blocks being equal to the units separating
-        the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
+          interprets the value properties to draw the level fill area.
+          Specifically, when the value is #GTK_LEVEL_BAR_MODE_CONTINUOUS,
+          #GtkLevelBar will draw a single block representing the current value in
+          that area; when the value is #GTK_LEVEL_BAR_MODE_DISCRETE,
+          the widget will draw a succession of separate blocks filling the
+          draw area, with the number of blocks being equal to the units separating
+          the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
   */
   @property void mode(gtk.types.LevelBarMode propval)
   {
@@ -237,7 +237,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `value` property.
       Returns: The #GtkLevelBar:value property determines the currently
-      filled value of the level bar.
+        filled value of the level bar.
   */
   @property double value()
   {
@@ -248,7 +248,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Set `value` property.
       Params:
         propval = The #GtkLevelBar:value property determines the currently
-        filled value of the level bar.
+          filled value of the level bar.
   */
   @property void value(double propval)
   {
@@ -457,11 +457,11 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `OffsetChanged` signal.
   
       Emitted when an offset specified on the bar changes value as an
-      effect to [gtk.level_bar.LevelBar.addOffsetValue] being called.
-      
-      The signal supports detailed connections; you can connect to the
-      detailed signal "changed::x" in order to only receive callbacks when
-      the value of offset "x" changes.
+        effect to [gtk.level_bar.LevelBar.addOffsetValue] being called.
+        
+        The signal supports detailed connections; you can connect to the
+        detailed signal "changed::x" in order to only receive callbacks when
+        the value of offset "x" changes.
   
       Params:
         detail = Signal detail or null (default)

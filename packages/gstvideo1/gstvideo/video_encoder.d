@@ -117,7 +117,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   /**
       Get `minForceKeyUnitInterval` property.
       Returns: Minimum interval between force-keyunit requests in nanoseconds. See
-      [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
+        [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
   */
   @property ulong minForceKeyUnitInterval()
   {
@@ -128,7 +128,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Set `minForceKeyUnitInterval` property.
       Params:
         propval = Minimum interval between force-keyunit requests in nanoseconds. See
-        [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
+          [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
   */
   @property void minForceKeyUnitInterval(ulong propval)
   {
@@ -247,10 +247,8 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_video_encoder_get_allocator(cast(GstVideoEncoder*)this._cPtr, &_allocator, &_params);
+    gst_video_encoder_get_allocator(cast(GstVideoEncoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.Take);
   }
 
   /**

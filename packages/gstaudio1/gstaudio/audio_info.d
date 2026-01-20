@@ -28,7 +28,7 @@ class AudioInfo : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -138,7 +138,7 @@ class AudioInfo : gobject.boxed.Boxed
   /**
       Get `bpf` field.
       Returns: the number of bytes for one frame, this is the size of one
-              sample * @channels
+                sample * @channels
   */
   @property int bpf()
   {
@@ -149,7 +149,7 @@ class AudioInfo : gobject.boxed.Boxed
       Set `bpf` field.
       Params:
         propval = the number of bytes for one frame, this is the size of one
-                sample * @channels
+                  sample * @channels
   */
   @property void bpf(int propval)
   {

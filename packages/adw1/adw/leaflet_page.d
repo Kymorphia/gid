@@ -67,12 +67,12 @@ class LeafletPage : gobject.object.ObjectWrap
   /**
       Get `navigatable` property.
       Returns: Whether the child can be navigated to when folded.
-      
-      If `FALSE`, the child will be ignored by
-      [adw.leaflet.Leaflet.getAdjacentChild], [adw.leaflet.Leaflet.navigate], and swipe
-      gestures.
-      
-      This can be used used to prevent switching to widgets like separators.
+        
+        If `FALSE`, the child will be ignored by
+        [adw.leaflet.Leaflet.getAdjacentChild], [adw.leaflet.Leaflet.navigate], and swipe
+        gestures.
+        
+        This can be used used to prevent switching to widgets like separators.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
@@ -85,12 +85,12 @@ class LeafletPage : gobject.object.ObjectWrap
       Set `navigatable` property.
       Params:
         propval = Whether the child can be navigated to when folded.
-        
-        If `FALSE`, the child will be ignored by
-        [adw.leaflet.Leaflet.getAdjacentChild], [adw.leaflet.Leaflet.navigate], and swipe
-        gestures.
-        
-        This can be used used to prevent switching to widgets like separators.
+          
+          If `FALSE`, the child will be ignored by
+          [adw.leaflet.Leaflet.getAdjacentChild], [adw.leaflet.Leaflet.navigate], and swipe
+          gestures.
+          
+          This can be used used to prevent switching to widgets like separators.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */

@@ -39,7 +39,7 @@ class EqualOptions : gobject.object.ObjectWrap
   /**
       Get `absoluteTolerance` property.
       Returns: The absolute tolerance for approximate comparison of
-      floating-point values.
+        floating-point values.
   */
   @property double absoluteTolerance()
   {
@@ -50,7 +50,7 @@ class EqualOptions : gobject.object.ObjectWrap
       Set `absoluteTolerance` property.
       Params:
         propval = The absolute tolerance for approximate comparison of
-        floating-point values.
+          floating-point values.
   */
   @property void absoluteTolerance(double propval)
   {

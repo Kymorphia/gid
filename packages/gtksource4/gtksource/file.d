@@ -50,7 +50,7 @@ class File : gobject.object.ObjectWrap
   /**
       Get `encoding` property.
       Returns: The character encoding, initially null. After a successful file
-      loading or saving operation, the encoding is non-null.
+        loading or saving operation, the encoding is non-null.
   */
   @property gtksource.encoding.Encoding encoding()
   {
@@ -88,7 +88,7 @@ class File : gobject.object.ObjectWrap
   /**
       Get `readOnly` property.
       Returns: Whether the file is read-only or not. The value of this property is
-      not updated automatically (there is no file monitors).
+        not updated automatically (there is no file monitors).
   */
   @property bool readOnly()
   {

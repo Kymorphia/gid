@@ -145,9 +145,9 @@ class Application : gio.application.Application
   /**
       Get `registerSession` property.
       Returns: Set this property to `TRUE` to register with the session manager.
-      
-      This will make GTK track the session state (such as the
-      `property@Gtk.Application:screensaver-active` property).
+        
+        This will make GTK track the session state (such as the
+        `property@Gtk.Application:screensaver-active` property).
   */
   @property bool registerSession()
   {
@@ -158,9 +158,9 @@ class Application : gio.application.Application
       Set `registerSession` property.
       Params:
         propval = Set this property to `TRUE` to register with the session manager.
-        
-        This will make GTK track the session state (such as the
-        `property@Gtk.Application:screensaver-active` property).
+          
+          This will make GTK track the session state (such as the
+          `property@Gtk.Application:screensaver-active` property).
   */
   @property void registerSession(bool propval)
   {
@@ -170,13 +170,13 @@ class Application : gio.application.Application
   /**
       Get `screensaverActive` property.
       Returns: This property is `TRUE` if GTK believes that the screensaver is
-      currently active.
-      
-      GTK only tracks session state (including this) when
-      `property@Gtk.Application:register-session` is set to true.
-      
-      Tracking the screensaver state is currently only supported on
-      Linux.
+        currently active.
+        
+        GTK only tracks session state (including this) when
+        `property@Gtk.Application:register-session` is set to true.
+        
+        Tracking the screensaver state is currently only supported on
+        Linux.
   */
   @property bool screensaverActive()
   {
@@ -260,8 +260,8 @@ class Application : gio.application.Application
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -303,8 +303,8 @@ class Application : gio.application.Application
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -460,8 +460,8 @@ class Application : gio.application.Application
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -515,6 +515,7 @@ class Application : gio.application.Application
       _tmpaccels ~= s.toCString(No.Alloc);
     _tmpaccels ~= null;
     const(char*)* _accels = _tmpaccels.ptr;
+
     gtk_application_set_accels_for_action(cast(GtkApplication*)this._cPtr, _detailedActionName, _accels);
   }
 
@@ -565,11 +566,11 @@ class Application : gio.application.Application
       Connect to `QueryEnd` signal.
   
       Emitted when the session manager is about to end the session.
-      
-      This signal is only emitted if `propertyGtk.Application:register-session`
-      is `TRUE`. Applications can connect to this signal and call
-      [gtk.application.Application.inhibit] with [gtk.types.ApplicationInhibitFlags.Logout]
-      to delay the end of the session until state has been saved.
+        
+        This signal is only emitted if `propertyGtk.Application:register-session`
+        is `TRUE`. Applications can connect to this signal and call
+        [gtk.application.Application.inhibit] with [gtk.types.ApplicationInhibitFlags.Logout]
+        to delay the end of the session until state has been saved.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -607,7 +608,7 @@ class Application : gio.application.Application
       Connect to `WindowAdded` signal.
   
       Emitted when a [gtk.window.Window] is added to `application` through
-      [gtk.application.Application.addWindow].
+        [gtk.application.Application.addWindow].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -652,9 +653,9 @@ class Application : gio.application.Application
       Connect to `WindowRemoved` signal.
   
       Emitted when a [gtk.window.Window] is removed from `application`.
-      
-      This can happen as a side-effect of the window being destroyed
-      or explicitly through [gtk.application.Application.removeWindow].
+        
+        This can happen as a side-effect of the window being destroyed
+        or explicitly through [gtk.application.Application.removeWindow].
   
       Params:
         callback = signal callback delegate or function to connect

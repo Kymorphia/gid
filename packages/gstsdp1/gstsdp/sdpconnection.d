@@ -11,7 +11,7 @@ import gstsdp.types;
 */
 class SDPConnection
 {
-  GstSDPConnection cInstance;
+  GstSDPConnection _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class SDPConnection
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdpconnection.SDPConnection");
 
-    cInstance = *cast(GstSDPConnection*)ptr;
+    _cInstance = *cast(GstSDPConnection*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,13 +28,13 @@ class SDPConnection
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `nettype` field.
       Returns: the type of network. "IN" is defined to have the meaning
-         "Internet".
+           "Internet".
   */
   @property string nettype()
   {
@@ -45,7 +45,7 @@ class SDPConnection
       Set `nettype` field.
       Params:
         propval = the type of network. "IN" is defined to have the meaning
-           "Internet".
+             "Internet".
   */
   @property void nettype(string propval)
   {

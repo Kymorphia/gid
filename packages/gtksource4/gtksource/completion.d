@@ -49,8 +49,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `accelerators` property.
       Returns: Number of keyboard accelerators to show for the first proposals. For
-      example, to activate the first proposal, the user can press
-      <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
+        example, to activate the first proposal, the user can press
+        <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
   */
   @property uint accelerators()
   {
@@ -61,8 +61,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `accelerators` property.
       Params:
         propval = Number of keyboard accelerators to show for the first proposals. For
-        example, to activate the first proposal, the user can press
-        <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
+          example, to activate the first proposal, the user can press
+          <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
   */
   @property void accelerators(uint propval)
   {
@@ -72,7 +72,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `autoCompleteDelay` property.
       Returns: Determines the popup delay (in milliseconds) at which the completion
-      will be shown for interactive completion.
+        will be shown for interactive completion.
   */
   @property uint autoCompleteDelay()
   {
@@ -83,7 +83,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `autoCompleteDelay` property.
       Params:
         propval = Determines the popup delay (in milliseconds) at which the completion
-        will be shown for interactive completion.
+          will be shown for interactive completion.
   */
   @property void autoCompleteDelay(uint propval)
   {
@@ -93,12 +93,12 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `proposalPageSize` property.
       Returns: The scroll page size of the proposals in the completion window. In
-      other words, when <keycap>PageDown</keycap> or
-      <keycap>PageUp</keycap> is pressed, the selected
-      proposal becomes the one which is located one page size backward or
-      forward.
-      
-      See also the #GtkSourceCompletion::move-cursor signal.
+        other words, when <keycap>PageDown</keycap> or
+        <keycap>PageUp</keycap> is pressed, the selected
+        proposal becomes the one which is located one page size backward or
+        forward.
+        
+        See also the #GtkSourceCompletion::move-cursor signal.
   */
   @property uint proposalPageSize()
   {
@@ -109,12 +109,12 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `proposalPageSize` property.
       Params:
         propval = The scroll page size of the proposals in the completion window. In
-        other words, when <keycap>PageDown</keycap> or
-        <keycap>PageUp</keycap> is pressed, the selected
-        proposal becomes the one which is located one page size backward or
-        forward.
-        
-        See also the #GtkSourceCompletion::move-cursor signal.
+          other words, when <keycap>PageDown</keycap> or
+          <keycap>PageUp</keycap> is pressed, the selected
+          proposal becomes the one which is located one page size backward or
+          forward.
+          
+          See also the #GtkSourceCompletion::move-cursor signal.
   */
   @property void proposalPageSize(uint propval)
   {
@@ -124,8 +124,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `providerPageSize` property.
       Returns: The scroll page size of the provider pages in the completion window.
-      
-      See the #GtkSourceCompletion::move-page signal.
+        
+        See the #GtkSourceCompletion::move-page signal.
   */
   @property uint providerPageSize()
   {
@@ -136,8 +136,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `providerPageSize` property.
       Params:
         propval = The scroll page size of the provider pages in the completion window.
-        
-        See the #GtkSourceCompletion::move-page signal.
+          
+          See the #GtkSourceCompletion::move-page signal.
   */
   @property void providerPageSize(uint propval)
   {
@@ -147,8 +147,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `rememberInfoVisibility` property.
       Returns: Determines whether the visibility of the info window should be
-      saved when the completion is hidden, and restored when the completion
-      is shown again.
+        saved when the completion is hidden, and restored when the completion
+        is shown again.
   */
   @property bool rememberInfoVisibility()
   {
@@ -159,8 +159,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `rememberInfoVisibility` property.
       Params:
         propval = Determines whether the visibility of the info window should be
-        saved when the completion is hidden, and restored when the completion
-        is shown again.
+          saved when the completion is hidden, and restored when the completion
+          is shown again.
   */
   @property void rememberInfoVisibility(bool propval)
   {
@@ -170,7 +170,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `selectOnShow` property.
       Returns: Determines whether the first proposal should be selected when the
-      completion is first shown.
+        completion is first shown.
   */
   @property bool selectOnShow()
   {
@@ -181,7 +181,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `selectOnShow` property.
       Params:
         propval = Determines whether the first proposal should be selected when the
-        completion is first shown.
+          completion is first shown.
   */
   @property void selectOnShow(bool propval)
   {
@@ -191,7 +191,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `showHeaders` property.
       Returns: Determines whether provider headers should be shown in the proposal
-      list. It can be useful to disable when there is only one provider.
+        list. It can be useful to disable when there is only one provider.
   */
   @property bool showHeaders()
   {
@@ -202,7 +202,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `showHeaders` property.
       Params:
         propval = Determines whether provider headers should be shown in the proposal
-        list. It can be useful to disable when there is only one provider.
+          list. It can be useful to disable when there is only one provider.
   */
   @property void showHeaders(bool propval)
   {
@@ -212,7 +212,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `showIcons` property.
       Returns: Determines whether provider and proposal icons should be shown in
-      the completion popup.
+        the completion popup.
   */
   @property bool showIcons()
   {
@@ -223,7 +223,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `showIcons` property.
       Params:
         propval = Determines whether provider and proposal icons should be shown in
-        the completion popup.
+          the completion popup.
   */
   @property void showIcons(bool propval)
   {
@@ -280,10 +280,10 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         so if you invoke [gtksource.completion.Completion.start] with this context
         you don't need to unref it.
   */
-  gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position = null)
+  gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position)
   {
     GtkSourceCompletionContext* _cretval;
-    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)this._cPtr, position ? cast(GtkTextIter*)position._cPtr(No.Dup) : null);
+    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)this._cPtr, cast(GtkTextIter*)&position);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.Take);
     return _retval;
   }
@@ -396,12 +396,12 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `ActivateProposal` signal.
   
       The #GtkSourceCompletion::activate-proposal signal is a
-      keybinding signal which gets emitted when the user initiates
-      a proposal activation.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the proposal
-      activation programmatically.
+        keybinding signal which gets emitted when the user initiates
+        a proposal activation.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the proposal
+        activation programmatically.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -439,7 +439,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `Hide` signal.
   
       Emitted when the completion window is hidden. The default handler
-      will actually hide the window.
+        will actually hide the window.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -477,21 +477,21 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `MoveCursor` signal.
   
       The #GtkSourceCompletion::move-cursor signal is a keybinding
-      signal which gets emitted when the user initiates a cursor
-      movement.
-      
-      The <keycap>Up</keycap>, <keycap>Down</keycap>,
-      <keycap>PageUp</keycap>, <keycap>PageDown</keycap>,
-      <keycap>Home</keycap> and <keycap>End</keycap> keys are bound to the
-      normal behavior expected by those keys.
-      
-      When step is equal to [gtk.types.ScrollStep.Pages], the page size is defined by
-      the #GtkSourceCompletion:proposal-page-size property. It is used for
-      the <keycap>PageDown</keycap> and <keycap>PageUp</keycap> keys.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
+        signal which gets emitted when the user initiates a cursor
+        movement.
+        
+        The <keycap>Up</keycap>, <keycap>Down</keycap>,
+        <keycap>PageUp</keycap>, <keycap>PageDown</keycap>,
+        <keycap>Home</keycap> and <keycap>End</keycap> keys are bound to the
+        normal behavior expected by those keys.
+        
+        When step is equal to [gtk.types.ScrollStep.Pages], the page size is defined by
+        the #GtkSourceCompletion:proposal-page-size property. It is used for
+        the <keycap>PageDown</keycap> and <keycap>PageUp</keycap> keys.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -543,24 +543,24 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `MovePage` signal.
   
       The #GtkSourceCompletion::move-page signal is a keybinding
-      signal which gets emitted when the user initiates a page
-      movement (i.e. switches between provider pages).
-      
-      <keycombo><keycap>Control</keycap><keycap>Left</keycap></keycombo>
-      is for going to the previous provider.
-      <keycombo><keycap>Control</keycap><keycap>Right</keycap></keycombo>
-      is for going to the next provider.
-      <keycombo><keycap>Control</keycap><keycap>Home</keycap></keycombo>
-      is for displaying all the providers.
-      <keycombo><keycap>Control</keycap><keycap>End</keycap></keycombo>
-      is for going to the last provider.
-      
-      When step is equal to #GTK_SCROLL_PAGES, the page size is defined by
-      the #GtkSourceCompletion:provider-page-size property.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the page selection
-      programmatically.
+        signal which gets emitted when the user initiates a page
+        movement (i.e. switches between provider pages).
+        
+        <keycombo><keycap>Control</keycap><keycap>Left</keycap></keycombo>
+        is for going to the previous provider.
+        <keycombo><keycap>Control</keycap><keycap>Right</keycap></keycombo>
+        is for going to the next provider.
+        <keycombo><keycap>Control</keycap><keycap>Home</keycap></keycombo>
+        is for displaying all the providers.
+        <keycombo><keycap>Control</keycap><keycap>End</keycap></keycombo>
+        is for going to the last provider.
+        
+        When step is equal to #GTK_SCROLL_PAGES, the page size is defined by
+        the #GtkSourceCompletion:provider-page-size property.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the page selection
+        programmatically.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -612,7 +612,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `PopulateContext` signal.
   
       Emitted just before starting to populate the completion with providers.
-      You can use this signal to add additional attributes in the context.
+        You can use this signal to add additional attributes in the context.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -657,7 +657,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `Show` signal.
   
       Emitted when the completion window is shown. The default handler
-      will actually show the window.
+        will actually show the window.
   
       Params:
         callback = signal callback delegate or function to connect

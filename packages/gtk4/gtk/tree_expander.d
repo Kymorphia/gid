@@ -121,11 +121,11 @@ class TreeExpander : gtk.widget.Widget
   /**
       Get `hideExpander` property.
       Returns: Whether the expander icon should be hidden in a GtkTreeListRow.
-      Note that this property simply hides the icon.  The actions and keybinding
-      (i.e. collapse and expand) are not affected by this property.
-      
-      A common use for this property would be to bind to the number of children in a
-      GtkTreeListRow's model in order to hide the expander when a row has no children.
+        Note that this property simply hides the icon.  The actions and keybinding
+        (i.e. collapse and expand) are not affected by this property.
+        
+        A common use for this property would be to bind to the number of children in a
+        GtkTreeListRow's model in order to hide the expander when a row has no children.
   */
   @property bool hideExpander()
   {
@@ -136,11 +136,11 @@ class TreeExpander : gtk.widget.Widget
       Set `hideExpander` property.
       Params:
         propval = Whether the expander icon should be hidden in a GtkTreeListRow.
-        Note that this property simply hides the icon.  The actions and keybinding
-        (i.e. collapse and expand) are not affected by this property.
-        
-        A common use for this property would be to bind to the number of children in a
-        GtkTreeListRow's model in order to hide the expander when a row has no children.
+          Note that this property simply hides the icon.  The actions and keybinding
+          (i.e. collapse and expand) are not affected by this property.
+          
+          A common use for this property would be to bind to the number of children in a
+          GtkTreeListRow's model in order to hide the expander when a row has no children.
   */
   @property void hideExpander(bool propval)
   {

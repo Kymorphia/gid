@@ -38,7 +38,7 @@ class PathPoint : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -138,9 +138,7 @@ class PathPoint : gobject.boxed.Boxed
   float getCurvature(gsk.path.Path path, gsk.types.PathDirection direction, out graphene.point.Point center)
   {
     float _retval;
-    graphene_point_t _center;
-    _retval = gsk_path_point_get_curvature(cast(const(GskPathPoint)*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, direction, &_center);
-    center = new graphene.point.Point(cast(void*)&_center, No.Take);
+    _retval = gsk_path_point_get_curvature(cast(const(GskPathPoint)*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, direction, cast(graphene_point_t*)&center);
     return _retval;
   }
 
@@ -169,9 +167,7 @@ class PathPoint : gobject.boxed.Boxed
   */
   void getPosition(gsk.path.Path path, out graphene.point.Point position)
   {
-    graphene_point_t _position;
-    gsk_path_point_get_position(cast(const(GskPathPoint)*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, &_position);
-    position = new graphene.point.Point(cast(void*)&_position, No.Take);
+    gsk_path_point_get_position(cast(const(GskPathPoint)*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, cast(graphene_point_t*)&position);
   }
 
   /**

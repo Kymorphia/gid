@@ -416,11 +416,11 @@ class Dialog : gtk.window.Window
       Connect to `Close` signal.
   
       The ::close signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user uses a keybinding to close
-      the dialog.
-      
-      The default binding for this signal is the Escape key.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user uses a keybinding to close
+        the dialog.
+        
+        The default binding for this signal is the Escape key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -458,9 +458,9 @@ class Dialog : gtk.window.Window
       Connect to `Response` signal.
   
       Emitted when an action widget is clicked, the dialog receives a
-      delete event, or the application programmer calls [gtk.dialog.Dialog.response].
-      On a delete event, the response ID is #GTK_RESPONSE_DELETE_EVENT.
-      Otherwise, it depends on which action widget was clicked.
+        delete event, or the application programmer calls [gtk.dialog.Dialog.response].
+        On a delete event, the response ID is #GTK_RESPONSE_DELETE_EVENT.
+        Otherwise, it depends on which action widget was clicked.
   
       Params:
         callback = signal callback delegate or function to connect

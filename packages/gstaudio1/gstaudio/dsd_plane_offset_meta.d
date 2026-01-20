@@ -31,7 +31,7 @@ import gstaudio.types;
 */
 class DsdPlaneOffsetMeta
 {
-  GstDsdPlaneOffsetMeta cInstance;
+  GstDsdPlaneOffsetMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -39,7 +39,7 @@ class DsdPlaneOffsetMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.dsd_plane_offset_meta.DsdPlaneOffsetMeta");
 
-    cInstance = *cast(GstDsdPlaneOffsetMeta*)ptr;
+    _cInstance = *cast(GstDsdPlaneOffsetMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -48,7 +48,7 @@ class DsdPlaneOffsetMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -103,7 +103,9 @@ class DsdPlaneOffsetMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_dsd_plane_offset_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

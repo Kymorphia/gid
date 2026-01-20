@@ -152,13 +152,13 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Connect to `AuthorizeMethod` signal.
   
       Emitted when a method is invoked by a remote caller and used to
-      determine if the method call is authorized.
-      
-      This signal is like #GDBusInterfaceSkeleton's
-      #GDBusInterfaceSkeleton::g-authorize-method signal,
-      except that it is for the enclosing object.
-      
-      The default class handler just returns true.
+        determine if the method call is authorized.
+        
+        This signal is like #GDBusInterfaceSkeleton's
+        #GDBusInterfaceSkeleton::g-authorize-method signal,
+        except that it is for the enclosing object.
+        
+        The default class handler just returns true.
   
       Params:
         callback = signal callback delegate or function to connect

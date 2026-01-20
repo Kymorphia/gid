@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventPadAxis
 {
-  GdkEventPadAxis cInstance;
+  GdkEventPadAxis _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventPadAxis
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_pad_axis.EventPadAxis");
 
-    cInstance = *cast(GdkEventPadAxis*)ptr;
+    _cInstance = *cast(GdkEventPadAxis*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventPadAxis
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -112,8 +112,8 @@ class EventPadAxis
   /**
       Get `group` field.
       Returns: the pad group the ring/strip belongs to. A [gdk.types.InputSource.TabletPad]
-        device may have one or more groups containing a set of buttons/rings/strips
-        each.
+          device may have one or more groups containing a set of buttons/rings/strips
+          each.
   */
   @property uint group()
   {
@@ -124,8 +124,8 @@ class EventPadAxis
       Set `group` field.
       Params:
         propval = the pad group the ring/strip belongs to. A [gdk.types.InputSource.TabletPad]
-          device may have one or more groups containing a set of buttons/rings/strips
-          each.
+            device may have one or more groups containing a set of buttons/rings/strips
+            each.
   */
   @property void group(uint propval)
   {
@@ -154,7 +154,7 @@ class EventPadAxis
   /**
       Get `mode` field.
       Returns: The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
-        device may have different current modes.
+          device may have different current modes.
   */
   @property uint mode()
   {
@@ -165,7 +165,7 @@ class EventPadAxis
       Set `mode` field.
       Params:
         propval = The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
-          device may have different current modes.
+            device may have different current modes.
   */
   @property void mode(uint propval)
   {

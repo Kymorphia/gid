@@ -16,7 +16,7 @@ import gid.gid;
 */
 class EventGrabBroken
 {
-  GdkEventGrabBroken cInstance;
+  GdkEventGrabBroken _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -24,7 +24,7 @@ class EventGrabBroken
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_grab_broken.EventGrabBroken");
 
-    cInstance = *cast(GdkEventGrabBroken*)ptr;
+    _cInstance = *cast(GdkEventGrabBroken*)ptr;
 
     if (take)
       gFree(ptr);
@@ -33,7 +33,7 @@ class EventGrabBroken
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -58,7 +58,7 @@ class EventGrabBroken
   /**
       Get `window` field.
       Returns: the window which received the event, i.e. the window
-        that previously owned the grab
+          that previously owned the grab
   */
   @property gdk.window.Window window()
   {
@@ -69,7 +69,7 @@ class EventGrabBroken
       Set `window` field.
       Params:
         propval = the window which received the event, i.e. the window
-          that previously owned the grab
+            that previously owned the grab
   */
   @property void window(gdk.window.Window propval)
   {
@@ -99,7 +99,7 @@ class EventGrabBroken
   /**
       Get `keyboard` field.
       Returns: true if a keyboard grab was broken, false if a pointer
-        grab was broken
+          grab was broken
   */
   @property bool keyboard()
   {
@@ -110,7 +110,7 @@ class EventGrabBroken
       Set `keyboard` field.
       Params:
         propval = true if a keyboard grab was broken, false if a pointer
-          grab was broken
+            grab was broken
   */
   @property void keyboard(bool propval)
   {
@@ -139,8 +139,8 @@ class EventGrabBroken
   /**
       Get `grabWindow` field.
       Returns: If this event is caused by another grab in the same
-        application, @grab_window contains the new grab window. Otherwise
-        @grab_window is null.
+          application, @grab_window contains the new grab window. Otherwise
+          @grab_window is null.
   */
   @property gdk.window.Window grabWindow()
   {
@@ -151,8 +151,8 @@ class EventGrabBroken
       Set `grabWindow` field.
       Params:
         propval = If this event is caused by another grab in the same
-          application, @grab_window contains the new grab window. Otherwise
-          @grab_window is null.
+            application, @grab_window contains the new grab window. Otherwise
+            @grab_window is null.
   */
   @property void grabWindow(gdk.window.Window propval)
   {

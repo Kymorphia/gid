@@ -39,7 +39,7 @@ class TextRange : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -77,7 +77,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property void bounds(atk.types.TextRectangle propval)
   {
-    (cast(AtkTextRange*)this._cPtr).bounds = propval;
+    (cast(AtkTextRange*)this._cPtr).bounds = cast(AtkTextRectangle)propval;
   }
 
   /**

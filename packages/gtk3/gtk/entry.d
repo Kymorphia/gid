@@ -148,11 +148,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `attributes` property.
       Returns: A list of Pango attributes to apply to the text of the entry.
-      
-      This is mainly useful to change the size or weight of the text.
-      
-      The #PangoAttribute's @start_index and @end_index must refer to the
-      #GtkEntryBuffer text, i.e. without the preedit string.
+        
+        This is mainly useful to change the size or weight of the text.
+        
+        The #PangoAttribute's @start_index and @end_index must refer to the
+        #GtkEntryBuffer text, i.e. without the preedit string.
   */
   @property pango.attr_list.AttrList attributes()
   {
@@ -163,11 +163,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `attributes` property.
       Params:
         propval = A list of Pango attributes to apply to the text of the entry.
-        
-        This is mainly useful to change the size or weight of the text.
-        
-        The #PangoAttribute's @start_index and @end_index must refer to the
-        #GtkEntryBuffer text, i.e. without the preedit string.
+          
+          This is mainly useful to change the size or weight of the text.
+          
+          The #PangoAttribute's @start_index and @end_index must refer to the
+          #GtkEntryBuffer text, i.e. without the preedit string.
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
@@ -189,10 +189,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `capsLockWarning` property.
       Returns: Whether password entries will show a warning when Caps Lock is on.
-      
-      Note that the warning is shown using a secondary icon, and thus
-      does not work if you are using the secondary icon position for some
-      other purpose.
+        
+        Note that the warning is shown using a secondary icon, and thus
+        does not work if you are using the secondary icon position for some
+        other purpose.
   */
   @property bool capsLockWarning()
   {
@@ -203,10 +203,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `capsLockWarning` property.
       Params:
         propval = Whether password entries will show a warning when Caps Lock is on.
-        
-        Note that the warning is shown using a secondary icon, and thus
-        does not work if you are using the secondary icon position for some
-        other purpose.
+          
+          Note that the warning is shown using a secondary icon, and thus
+          does not work if you are using the secondary icon position for some
+          other purpose.
   */
   @property void capsLockWarning(bool propval)
   {
@@ -277,11 +277,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `imModule` property.
       Returns: Which IM (input method) module should be used for this entry.
-      See #GtkIMContext.
-      
-      Setting this to a non-null value overrides the
-      system-wide IM module setting. See the GtkSettings
-      #GtkSettings:gtk-im-module property.
+        See #GtkIMContext.
+        
+        Setting this to a non-null value overrides the
+        system-wide IM module setting. See the GtkSettings
+        #GtkSettings:gtk-im-module property.
   */
   @property string imModule()
   {
@@ -292,11 +292,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `imModule` property.
       Params:
         propval = Which IM (input method) module should be used for this entry.
-        See #GtkIMContext.
-        
-        Setting this to a non-null value overrides the
-        system-wide IM module setting. See the GtkSettings
-        #GtkSettings:gtk-im-module property.
+          See #GtkIMContext.
+          
+          Setting this to a non-null value overrides the
+          system-wide IM module setting. See the GtkSettings
+          #GtkSettings:gtk-im-module property.
   */
   @property void imModule(string propval)
   {
@@ -308,8 +308,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: Sets the text area's border between the text and the frame.
   
       Deprecated: Use the standard border and padding CSS properties
-        (through objects like #GtkStyleContext and #GtkCssProvider); the value
-        of this style property is ignored.
+          (through objects like #GtkStyleContext and #GtkCssProvider); the value
+          of this style property is ignored.
   */
   @property gtk.border.Border innerBorder()
   {
@@ -322,8 +322,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         propval = Sets the text area's border between the text and the frame.
   
       Deprecated: Use the standard border and padding CSS properties
-        (through objects like #GtkStyleContext and #GtkCssProvider); the value
-        of this style property is ignored.
+          (through objects like #GtkStyleContext and #GtkCssProvider); the value
+          of this style property is ignored.
   */
   @property void innerBorder(gtk.border.Border propval)
   {
@@ -333,7 +333,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `inputHints` property.
       Returns: Additional hints (beyond #GtkEntry:input-purpose) that
-      allow input methods to fine-tune their behaviour.
+        allow input methods to fine-tune their behaviour.
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -344,7 +344,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `inputHints` property.
       Params:
         propval = Additional hints (beyond #GtkEntry:input-purpose) that
-        allow input methods to fine-tune their behaviour.
+          allow input methods to fine-tune their behaviour.
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -354,13 +354,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `inputPurpose` property.
       Returns: The purpose of this text field.
-      
-      This property can be used by on-screen keyboards and other input
-      methods to adjust their behaviour.
-      
-      Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-      [gtk.types.InputPurpose.Pin] is independent from setting
-      #GtkEntry:visibility.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+        
+        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+        [gtk.types.InputPurpose.Pin] is independent from setting
+        #GtkEntry:visibility.
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -371,13 +371,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `inputPurpose` property.
       Params:
         propval = The purpose of this text field.
-        
-        This property can be used by on-screen keyboards and other input
-        methods to adjust their behaviour.
-        
-        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-        [gtk.types.InputPurpose.Pin] is independent from setting
-        #GtkEntry:visibility.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+          
+          Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+          [gtk.types.InputPurpose.Pin] is independent from setting
+          #GtkEntry:visibility.
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -387,13 +387,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `invisibleChar` property.
       Returns: The invisible character is used when masking entry contents (in
-      \"password mode\")"). When it is not explicitly set with the
-      #GtkEntry:invisible-char property, GTK+ determines the character
-      to use from a list of possible candidates, depending on availability
-      in the current font.
-      
-      This style property allows the theme to prepend a character
-      to the list of candidates.
+        \"password mode\")"). When it is not explicitly set with the
+        #GtkEntry:invisible-char property, GTK+ determines the character
+        to use from a list of possible candidates, depending on availability
+        in the current font.
+        
+        This style property allows the theme to prepend a character
+        to the list of candidates.
   */
   @property uint invisibleChar()
   {
@@ -404,13 +404,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `invisibleChar` property.
       Params:
         propval = The invisible character is used when masking entry contents (in
-        \"password mode\")"). When it is not explicitly set with the
-        #GtkEntry:invisible-char property, GTK+ determines the character
-        to use from a list of possible candidates, depending on availability
-        in the current font.
-        
-        This style property allows the theme to prepend a character
-        to the list of candidates.
+          \"password mode\")"). When it is not explicitly set with the
+          #GtkEntry:invisible-char property, GTK+ determines the character
+          to use from a list of possible candidates, depending on availability
+          in the current font.
+          
+          This style property allows the theme to prepend a character
+          to the list of candidates.
   */
   @property void invisibleChar(uint propval)
   {
@@ -451,8 +451,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `maxWidthChars` property.
       Returns: The desired maximum width of the entry, in characters.
-      If this property is set to -1, the width will be calculated
-      automatically.
+        If this property is set to -1, the width will be calculated
+        automatically.
   */
   @property int maxWidthChars()
   {
@@ -463,8 +463,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `maxWidthChars` property.
       Params:
         propval = The desired maximum width of the entry, in characters.
-        If this property is set to -1, the width will be calculated
-        automatically.
+          If this property is set to -1, the width will be calculated
+          automatically.
   */
   @property void maxWidthChars(int propval)
   {
@@ -493,7 +493,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `placeholderText` property.
       Returns: The text that will be displayed in the #GtkEntry when it is empty
-      and unfocused.
+        and unfocused.
   */
   @property string placeholderText()
   {
@@ -504,7 +504,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `placeholderText` property.
       Params:
         propval = The text that will be displayed in the #GtkEntry when it is empty
-        and unfocused.
+          and unfocused.
   */
   @property void placeholderText(string propval)
   {
@@ -514,7 +514,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `populateAll` property.
       Returns: If :populate-all is true, the #GtkEntry::populate-popup
-      signal is also emitted for touch popups.
+        signal is also emitted for touch popups.
   */
   @property bool populateAll()
   {
@@ -525,7 +525,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `populateAll` property.
       Params:
         propval = If :populate-all is true, the #GtkEntry::populate-popup
-        signal is also emitted for touch popups.
+          signal is also emitted for touch popups.
   */
   @property void populateAll(bool propval)
   {
@@ -535,12 +535,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconActivatable` property.
       Returns: Whether the primary icon is activatable.
-      
-      GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
-      signals only on sensitive, activatable icons.
-      
-      Sensitive, but non-activatable icons can be used for purely
-      informational purposes.
+        
+        GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+        signals only on sensitive, activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
   */
   @property bool primaryIconActivatable()
   {
@@ -551,12 +551,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconActivatable` property.
       Params:
         propval = Whether the primary icon is activatable.
-        
-        GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
-        signals only on sensitive, activatable icons.
-        
-        Sensitive, but non-activatable icons can be used for purely
-        informational purposes.
+          
+          GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+          signals only on sensitive, activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
   */
   @property void primaryIconActivatable(bool propval)
   {
@@ -623,13 +623,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconSensitive` property.
       Returns: Whether the primary icon is sensitive.
-      
-      An insensitive icon appears grayed out. GTK+ does not emit the
-      #GtkEntry::icon-press and #GtkEntry::icon-release signals and
-      does not allow DND from insensitive icons.
-      
-      An icon should be set insensitive if the action that would trigger
-      when clicked is currently not available.
+        
+        An insensitive icon appears grayed out. GTK+ does not emit the
+        #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+        does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
   */
   @property bool primaryIconSensitive()
   {
@@ -640,13 +640,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconSensitive` property.
       Params:
         propval = Whether the primary icon is sensitive.
-        
-        An insensitive icon appears grayed out. GTK+ does not emit the
-        #GtkEntry::icon-press and #GtkEntry::icon-release signals and
-        does not allow DND from insensitive icons.
-        
-        An icon should be set insensitive if the action that would trigger
-        when clicked is currently not available.
+          
+          An insensitive icon appears grayed out. GTK+ does not emit the
+          #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+          does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
   */
   @property void primaryIconSensitive(bool propval)
   {
@@ -688,9 +688,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconTooltipMarkup` property.
       Returns: The contents of the tooltip on the primary icon, which is marked up
-      with the [Pango text markup language][PangoMarkupFormat].
-      
-      Also see [gtk.entry.Entry.setIconTooltipMarkup].
+        with the [Pango text markup language][PangoMarkupFormat].
+        
+        Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property string primaryIconTooltipMarkup()
   {
@@ -701,9 +701,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconTooltipMarkup` property.
       Params:
         propval = The contents of the tooltip on the primary icon, which is marked up
-        with the [Pango text markup language][PangoMarkupFormat].
-        
-        Also see [gtk.entry.Entry.setIconTooltipMarkup].
+          with the [Pango text markup language][PangoMarkupFormat].
+          
+          Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property void primaryIconTooltipMarkup(string propval)
   {
@@ -713,8 +713,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconTooltipText` property.
       Returns: The contents of the tooltip on the primary icon.
-      
-      Also see [gtk.entry.Entry.setIconTooltipText].
+        
+        Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property string primaryIconTooltipText()
   {
@@ -725,8 +725,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconTooltipText` property.
       Params:
         propval = The contents of the tooltip on the primary icon.
-        
-        Also see [gtk.entry.Entry.setIconTooltipText].
+          
+          Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property void primaryIconTooltipText(string propval)
   {
@@ -755,7 +755,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `progressPulseStep` property.
       Returns: The fraction of total entry width to move the progress
-      bouncing block for each call to [gtk.entry.Entry.progressPulse].
+        bouncing block for each call to [gtk.entry.Entry.progressPulse].
   */
   @property double progressPulseStep()
   {
@@ -766,7 +766,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `progressPulseStep` property.
       Params:
         propval = The fraction of total entry width to move the progress
-        bouncing block for each call to [gtk.entry.Entry.progressPulse].
+          bouncing block for each call to [gtk.entry.Entry.progressPulse].
   */
   @property void progressPulseStep(double propval)
   {
@@ -782,12 +782,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconActivatable` property.
       Returns: Whether the secondary icon is activatable.
-      
-      GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
-      signals only on sensitive, activatable icons.
-      
-      Sensitive, but non-activatable icons can be used for purely
-      informational purposes.
+        
+        GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+        signals only on sensitive, activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
   */
   @property bool secondaryIconActivatable()
   {
@@ -798,12 +798,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconActivatable` property.
       Params:
         propval = Whether the secondary icon is activatable.
-        
-        GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
-        signals only on sensitive, activatable icons.
-        
-        Sensitive, but non-activatable icons can be used for purely
-        informational purposes.
+          
+          GTK+ emits the #GtkEntry::icon-press and #GtkEntry::icon-release
+          signals only on sensitive, activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
   */
   @property void secondaryIconActivatable(bool propval)
   {
@@ -870,13 +870,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconSensitive` property.
       Returns: Whether the secondary icon is sensitive.
-      
-      An insensitive icon appears grayed out. GTK+ does not emit the
-      #GtkEntry::icon-press and #GtkEntry::icon-release signals and
-      does not allow DND from insensitive icons.
-      
-      An icon should be set insensitive if the action that would trigger
-      when clicked is currently not available.
+        
+        An insensitive icon appears grayed out. GTK+ does not emit the
+        #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+        does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
   */
   @property bool secondaryIconSensitive()
   {
@@ -887,13 +887,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconSensitive` property.
       Params:
         propval = Whether the secondary icon is sensitive.
-        
-        An insensitive icon appears grayed out. GTK+ does not emit the
-        #GtkEntry::icon-press and #GtkEntry::icon-release signals and
-        does not allow DND from insensitive icons.
-        
-        An icon should be set insensitive if the action that would trigger
-        when clicked is currently not available.
+          
+          An insensitive icon appears grayed out. GTK+ does not emit the
+          #GtkEntry::icon-press and #GtkEntry::icon-release signals and
+          does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
   */
   @property void secondaryIconSensitive(bool propval)
   {
@@ -935,9 +935,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconTooltipMarkup` property.
       Returns: The contents of the tooltip on the secondary icon, which is marked up
-      with the [Pango text markup language][PangoMarkupFormat].
-      
-      Also see [gtk.entry.Entry.setIconTooltipMarkup].
+        with the [Pango text markup language][PangoMarkupFormat].
+        
+        Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property string secondaryIconTooltipMarkup()
   {
@@ -948,9 +948,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconTooltipMarkup` property.
       Params:
         propval = The contents of the tooltip on the secondary icon, which is marked up
-        with the [Pango text markup language][PangoMarkupFormat].
-        
-        Also see [gtk.entry.Entry.setIconTooltipMarkup].
+          with the [Pango text markup language][PangoMarkupFormat].
+          
+          Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property void secondaryIconTooltipMarkup(string propval)
   {
@@ -960,8 +960,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconTooltipText` property.
       Returns: The contents of the tooltip on the secondary icon.
-      
-      Also see [gtk.entry.Entry.setIconTooltipText].
+        
+        Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property string secondaryIconTooltipText()
   {
@@ -972,8 +972,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconTooltipText` property.
       Params:
         propval = The contents of the tooltip on the secondary icon.
-        
-        Also see [gtk.entry.Entry.setIconTooltipText].
+          
+          Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property void secondaryIconTooltipText(string propval)
   {
@@ -989,10 +989,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `shadowType` property.
       Returns: Which kind of shadow to draw around the entry when
-      #GtkEntry:has-frame is set to true.
+        #GtkEntry:has-frame is set to true.
   
       Deprecated: Use CSS to determine the style of the border;
-          the value of this style property is ignored.
+            the value of this style property is ignored.
   */
   @property gtk.types.ShadowType shadowType()
   {
@@ -1003,10 +1003,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `shadowType` property.
       Params:
         propval = Which kind of shadow to draw around the entry when
-        #GtkEntry:has-frame is set to true.
+          #GtkEntry:has-frame is set to true.
   
       Deprecated: Use CSS to determine the style of the border;
-          the value of this style property is ignored.
+            the value of this style property is ignored.
   */
   @property void shadowType(gtk.types.ShadowType propval)
   {
@@ -1104,7 +1104,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `xalign` property.
       Returns: The horizontal alignment, from 0 (left) to 1 (right).
-      Reversed for RTL layouts.
+        Reversed for RTL layouts.
   */
   @property float xalign()
   {
@@ -1115,7 +1115,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `xalign` property.
       Params:
         propval = The horizontal alignment, from 0 (left) to 1 (right).
-        Reversed for RTL layouts.
+          Reversed for RTL layouts.
   */
   @property void xalign(float propval)
   {
@@ -1285,9 +1285,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void getIconArea(gtk.types.EntryIconPosition iconPos, out gdk.rectangle.Rectangle iconArea)
   {
-    GdkRectangle _iconArea;
-    gtk_entry_get_icon_area(cast(GtkEntry*)this._cPtr, iconPos, &_iconArea);
-    iconArea = new gdk.rectangle.Rectangle(cast(void*)&_iconArea, No.Take);
+    gtk_entry_get_icon_area(cast(GtkEntry*)this._cPtr, iconPos, cast(GdkRectangle*)&iconArea);
   }
 
   /**
@@ -1464,7 +1462,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     const(GtkBorder)* _cretval;
     _cretval = gtk_entry_get_inner_border(cast(GtkEntry*)this._cPtr);
-    auto _retval = _cretval ? new gtk.border.Border(cast(void*)_cretval, No.Take) : null;
+    gtk.border.Border _retval;
+    if (_cretval)
+      _retval = *cast(gtk.border.Border*)_cretval;
     return _retval;
   }
 
@@ -1676,9 +1676,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void getTextArea(out gdk.rectangle.Rectangle textArea)
   {
-    GdkRectangle _textArea;
-    gtk_entry_get_text_area(cast(GtkEntry*)this._cPtr, &_textArea);
-    textArea = new gdk.rectangle.Rectangle(cast(void*)&_textArea, No.Take);
+    gtk_entry_get_text_area(cast(GtkEntry*)this._cPtr, cast(GdkRectangle*)&textArea);
   }
 
   /**
@@ -2076,9 +2074,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           objects like #GtkStyleContext and #GtkCssProvider); the value set with
           this function is ignored by #GtkEntry.
   */
-  void setInnerBorder(gtk.border.Border border = null)
+  void setInnerBorder(gtk.border.Border border)
   {
-    gtk_entry_set_inner_border(cast(GtkEntry*)this._cPtr, border ? cast(const(GtkBorder)*)border._cPtr(No.Dup) : null);
+    gtk_entry_set_inner_border(cast(GtkEntry*)this._cPtr, cast(const(GtkBorder)*)&border);
   }
 
   /**
@@ -2306,14 +2304,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `Activate` signal.
   
       The ::activate signal is emitted when the user hits
-      the Enter key.
-      
-      While this signal is used as a
-      [keybinding signal][GtkBindingSignal],
-      it is also commonly used by applications to intercept
-      activation of entries.
-      
-      The default bindings for this signal are all forms of the Enter key.
+        the Enter key.
+        
+        While this signal is used as a
+        [keybinding signal][GtkBindingSignal],
+        it is also commonly used by applications to intercept
+        activation of entries.
+        
+        The default bindings for this signal are all forms of the Enter key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2351,11 +2349,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `Backspace` signal.
   
       The ::backspace signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user asks for it.
-      
-      The default bindings for this signal are
-      Backspace and Shift-Backspace.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user asks for it.
+        
+        The default bindings for this signal are
+        Backspace and Shift-Backspace.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2393,11 +2391,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `CopyClipboard` signal.
   
       The ::copy-clipboard signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to copy the selection to the clipboard.
-      
-      The default bindings for this signal are
-      Ctrl-c and Ctrl-Insert.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to copy the selection to the clipboard.
+        
+        The default bindings for this signal are
+        Ctrl-c and Ctrl-Insert.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2435,11 +2433,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `CutClipboard` signal.
   
       The ::cut-clipboard signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to cut the selection to the clipboard.
-      
-      The default bindings for this signal are
-      Ctrl-x and Shift-Delete.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to cut the selection to the clipboard.
+        
+        The default bindings for this signal are
+        Ctrl-x and Shift-Delete.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2477,16 +2475,16 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `DeleteFromCursor` signal.
   
       The ::delete-from-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a text deletion.
-      
-      If the type is [gtk.types.DeleteType.Chars], GTK+ deletes the selection
-      if there is one, otherwise it deletes the requested number
-      of characters.
-      
-      The default bindings for this signal are
-      Delete for deleting a character and Ctrl-Delete for
-      deleting a word.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates a text deletion.
+        
+        If the type is [gtk.types.DeleteType.Chars], GTK+ deletes the selection
+        if there is one, otherwise it deletes the requested number
+        of characters.
+        
+        The default bindings for this signal are
+        Delete for deleting a character and Ctrl-Delete for
+        deleting a word.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2538,7 +2536,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `IconPress` signal.
   
       The ::icon-press signal is emitted when an activatable icon
-      is clicked.
+        is clicked.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2590,7 +2588,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `IconRelease` signal.
   
       The ::icon-release signal is emitted on the button release from a
-      mouse click over an activatable icon.
+        mouse click over an activatable icon.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2642,11 +2640,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `InsertAtCursor` signal.
   
       The ::insert-at-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates the insertion of a
-      fixed string at the cursor.
-      
-      This signal has no default bindings.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates the insertion of a
+        fixed string at the cursor.
+        
+        This signal has no default bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2691,10 +2689,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `InsertEmoji` signal.
   
       The ::insert-emoji signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to present the Emoji chooser for the entry.
-      
-      The default bindings for this signal are Ctrl-. and Ctrl-;
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to present the Emoji chooser for the entry.
+        
+        The default bindings for this signal are Ctrl-. and Ctrl-;
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2732,24 +2730,24 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `MoveCursor` signal.
   
       The ::move-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a cursor movement.
-      If the cursor is not visible in entry, this signal causes
-      the viewport to be moved instead.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal come in two variants,
-      the variant with the Shift modifier extends the selection,
-      the variant without the Shift modifer does not.
-      There are too many key combinations to list them all here.
-      $(LIST
-        * Arrow keys move by individual characters/lines
-        * Ctrl-arrow key combinations move by words/paragraphs
-        * Home/End keys move to the ends of the buffer
-      )
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates a cursor movement.
+        If the cursor is not visible in entry, this signal causes
+        the viewport to be moved instead.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal come in two variants,
+        the variant with the Shift modifier extends the selection,
+        the variant without the Shift modifer does not.
+        There are too many key combinations to list them all here.
+        $(LIST
+          * Arrow keys move by individual characters/lines
+          * Ctrl-arrow key combinations move by words/paragraphs
+          * Home/End keys move to the ends of the buffer
+        )
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2808,12 +2806,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `PasteClipboard` signal.
   
       The ::paste-clipboard signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to paste the contents of the clipboard
-      into the text view.
-      
-      The default bindings for this signal are
-      Ctrl-v and Shift-Insert.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to paste the contents of the clipboard
+        into the text view.
+        
+        The default bindings for this signal are
+        Ctrl-v and Shift-Insert.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2851,17 +2849,17 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `PopulatePopup` signal.
   
       The ::populate-popup signal gets emitted before showing the
-      context menu of the entry.
-      
-      If you need to add items to the context menu, connect
-      to this signal and append your items to the widget, which
-      will be a #GtkMenu in this case.
-      
-      If #GtkEntry:populate-all is true, this signal will
-      also be emitted to populate touch popups. In this case,
-      widget will be a different container, e.g. a #GtkToolbar.
-      The signal handler should not make assumptions about the
-      type of widget.
+        context menu of the entry.
+        
+        If you need to add items to the context menu, connect
+        to this signal and append your items to the widget, which
+        will be a #GtkMenu in this case.
+        
+        If #GtkEntry:populate-all is true, this signal will
+        also be emitted to populate touch popups. In this case,
+        widget will be a different container, e.g. a #GtkToolbar.
+        The signal handler should not make assumptions about the
+        type of widget.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2906,8 +2904,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `PreeditChanged` signal.
   
       If an input method is used, the typed text will not immediately
-      be committed to the buffer. So if you are interested in the text,
-      connect to this signal.
+        be committed to the buffer. So if you are interested in the text,
+        connect to this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2952,10 +2950,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `ToggleOverwrite` signal.
   
       The ::toggle-overwrite signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to toggle the overwrite mode of the entry.
-      
-      The default bindings for this signal is Insert.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to toggle the overwrite mode of the entry.
+        
+        The default bindings for this signal is Insert.
   
       Params:
         callback = signal callback delegate or function to connect

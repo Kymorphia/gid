@@ -107,9 +107,9 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   /**
       Get `attributes` property.
       Returns: A list of Pango attributes to apply to the text of the embedded entry.
-      
-      The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
-      the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+        
+        The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
+        the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
   @property pango.attr_list.AttrList attributes()
   {
@@ -120,9 +120,9 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Set `attributes` property.
       Params:
         propval = A list of Pango attributes to apply to the text of the embedded entry.
-        
-        The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
-        the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+          
+          The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
+          the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
@@ -132,8 +132,8 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   /**
       Get `enableEmojiCompletion` property.
       Returns: Whether to suggest emoji replacements on the entry row.
-      
-      Emoji replacement is done with :-delimited names, like `:heart:`.
+        
+        Emoji replacement is done with :-delimited names, like `:heart:`.
   */
   @property bool enableEmojiCompletion()
   {
@@ -144,8 +144,8 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Set `enableEmojiCompletion` property.
       Params:
         propval = Whether to suggest emoji replacements on the entry row.
-        
-        Emoji replacement is done with :-delimited names, like `:heart:`.
+          
+          Emoji replacement is done with :-delimited names, like `:heart:`.
   */
   @property void enableEmojiCompletion(bool propval)
   {
@@ -155,10 +155,10 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   /**
       Get `inputHints` property.
       Returns: Additional input hints for the entry row.
-      
-      Input hints allow input methods to fine-tune their behavior.
-      
-      See also: `property@Adw.EntryRow:input-purpose`
+        
+        Input hints allow input methods to fine-tune their behavior.
+        
+        See also: `property@Adw.EntryRow:input-purpose`
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -169,10 +169,10 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Set `inputHints` property.
       Params:
         propval = Additional input hints for the entry row.
-        
-        Input hints allow input methods to fine-tune their behavior.
-        
-        See also: `property@Adw.EntryRow:input-purpose`
+          
+          Input hints allow input methods to fine-tune their behavior.
+          
+          See also: `property@Adw.EntryRow:input-purpose`
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -182,8 +182,8 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   /**
       Get `inputPurpose` property.
       Returns: The input purpose of the entry row.
-      
-      The input purpose can be used by input methods to adjust their behavior.
+        
+        The input purpose can be used by input methods to adjust their behavior.
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -194,8 +194,8 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Set `inputPurpose` property.
       Params:
         propval = The input purpose of the entry row.
-        
-        The input purpose can be used by input methods to adjust their behavior.
+          
+          The input purpose can be used by input methods to adjust their behavior.
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -205,14 +205,14 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   /**
       Get `showApplyButton` property.
       Returns: Whether to show the apply button.
-      
-      When set to `TRUE`, typing text in the entry will reveal an apply button.
-      Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-      emit the `signal@EntryRow::apply` signal.
-      
-      This is useful if changing the entry contents can trigger an expensive
-      operation, e.g. network activity, to avoid triggering it after typing every
-      character.
+        
+        When set to `TRUE`, typing text in the entry will reveal an apply button.
+        Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
+        emit the `signal@EntryRow::apply` signal.
+        
+        This is useful if changing the entry contents can trigger an expensive
+        operation, e.g. network activity, to avoid triggering it after typing every
+        character.
   */
   @property bool showApplyButton()
   {
@@ -223,14 +223,14 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Set `showApplyButton` property.
       Params:
         propval = Whether to show the apply button.
-        
-        When set to `TRUE`, typing text in the entry will reveal an apply button.
-        Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-        emit the `signal@EntryRow::apply` signal.
-        
-        This is useful if changing the entry contents can trigger an expensive
-        operation, e.g. network activity, to avoid triggering it after typing every
-        character.
+          
+          When set to `TRUE`, typing text in the entry will reveal an apply button.
+          Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
+          emit the `signal@EntryRow::apply` signal.
+          
+          This is useful if changing the entry contents can trigger an expensive
+          operation, e.g. network activity, to avoid triggering it after typing every
+          character.
   */
   @property void showApplyButton(bool propval)
   {
@@ -474,8 +474,8 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Connect to `Apply` signal.
   
       Emitted when the apply button is pressed.
-      
-      See `propertyEntryRow:show-apply-button`.
+        
+        See `propertyEntryRow:show-apply-button`.
   
       Params:
         callback = signal callback delegate or function to connect

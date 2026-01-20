@@ -11,7 +11,7 @@ import gio.types;
 */
 class DBusErrorEntry
 {
-  GDBusErrorEntry cInstance;
+  GDBusErrorEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class DBusErrorEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.dbus_error_entry.DBusErrorEntry");
 
-    cInstance = *cast(GDBusErrorEntry*)ptr;
+    _cInstance = *cast(GDBusErrorEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class DBusErrorEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

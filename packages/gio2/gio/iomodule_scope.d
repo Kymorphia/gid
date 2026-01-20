@@ -15,7 +15,7 @@ import gio.types;
 */
 class IOModuleScope
 {
-  GIOModuleScope* cInstancePtr;
+  GIOModuleScope* _cInstancePtr;
   bool owned;
 
   /** */
@@ -24,7 +24,7 @@ class IOModuleScope
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.iomodule_scope.IOModuleScope");
 
-    cInstancePtr = cast(GIOModuleScope*)ptr;
+    _cInstancePtr = cast(GIOModuleScope*)ptr;
 
     owned = take;
   }
@@ -32,7 +32,7 @@ class IOModuleScope
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

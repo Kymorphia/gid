@@ -14,7 +14,7 @@ import gid.gid;
 */
 class SqlStatementCheckValidityData
 {
-  GdaSqlStatementCheckValidityData cInstance;
+  GdaSqlStatementCheckValidityData _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class SqlStatementCheckValidityData
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_statement_check_validity_data.SqlStatementCheckValidityData");
 
-    cInstance = *cast(GdaSqlStatementCheckValidityData*)ptr;
+    _cInstance = *cast(GdaSqlStatementCheckValidityData*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class SqlStatementCheckValidityData
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

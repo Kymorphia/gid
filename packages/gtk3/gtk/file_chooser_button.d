@@ -244,9 +244,9 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Connect to `FileSet` signal.
   
       The ::file-set signal is emitted when the user selects a file.
-      
-      Note that this signal is only emitted when the user
-      changes the file.
+        
+        Note that this signal is only emitted when the user
+        changes the file.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -33,10 +33,14 @@
 //!set record[Context].method[fill_extents].parameters.parameter[y1][direction] out
 //!set record[Context].method[fill_extents].parameters.parameter[x2][direction] out
 //!set record[Context].method[fill_extents].parameters.parameter[y2][direction] out
+//!set record[Context].method[font_extents].parameters.parameter[extents][direction] out
 //!set record[Context].method[get_current_point].parameters.parameter[x][direction] out
 //!set record[Context].method[get_current_point].parameters.parameter[y][direction] out
 //!set record[Context].method[get_dash].parameters.parameter[dashes][direction] out
 //!set record[Context].method[get_dash].parameters.parameter[offset][direction] out
+//!set record[Context].method[get_font_matrix].parameters.parameter[matrix][direction] out
+//!set record[Context].method[get_matrix].parameters.parameter[matrix][direction] out
+//!set record[Context].method[glyph_extents].parameters.parameter[extents][direction] out
 //!set record[Context].method[path_extents].parameters.parameter[x1][direction] out
 //!set record[Context].method[path_extents].parameters.parameter[y1][direction] out
 //!set record[Context].method[path_extents].parameters.parameter[x2][direction] out
@@ -45,6 +49,7 @@
 //!set record[Context].method[stroke_extents].parameters.parameter[y1][direction] out
 //!set record[Context].method[stroke_extents].parameters.parameter[x2][direction] out
 //!set record[Context].method[stroke_extents].parameters.parameter[y2][direction] out
+//!set record[Context].method[text_extents].parameters.parameter[extents][direction] out
 //!set record[Context].method[user_to_device].parameters.parameter[x][direction] out
 //!set record[Context].method[user_to_device].parameters.parameter[y][direction] out
 //!set record[Context].method[user_to_device_distance].parameters.parameter[dx][direction] out
@@ -60,6 +65,7 @@
 //!set function[mesh_pattern_get_corner_color_rgba].parameters.parameter[blue][direction] out
 //!set function[mesh_pattern_get_corner_color_rgba].parameters.parameter[alpha][direction] out
 //!set function[mesh_pattern_get_patch_count].parameters.parameter[count][direction] out
+//!set function[recording_surface_get_extents].parameters.parameter[extents][direction] out
 //!set function[recording_surface_ink_extents].parameters.parameter[x0][direction] out
 //!set function[recording_surface_ink_extents].parameters.parameter[y0][direction] out
 //!set function[recording_surface_ink_extents].parameters.parameter[width][direction] out
@@ -78,6 +84,7 @@
 //!set record[Pattern].method[get_linear_points].parameters.parameter[y0][direction] out
 //!set record[Pattern].method[get_linear_points].parameters.parameter[x1][direction] out
 //!set record[Pattern].method[get_linear_points].parameters.parameter[y1][direction] out
+//!set record[Pattern].method[get_matrix].parameters.parameter[matrix][direction] out
 //!set record[Pattern].method[get_radial_circles].parameters.parameter[x0][direction] out
 //!set record[Pattern].method[get_radial_circles].parameters.parameter[y0][direction] out
 //!set record[Pattern].method[get_radial_circles].parameters.parameter[r0][direction] out
@@ -88,6 +95,14 @@
 //!set record[Pattern].method[get_rgba].parameters.parameter[green][direction] out
 //!set record[Pattern].method[get_rgba].parameters.parameter[blue][direction] out
 //!set record[Pattern].method[get_rgba].parameters.parameter[alpha][direction] out
+//!set record[Region].method[get_extents].parameters.parameter[extents][direction] out
+//!set record[Region].method[get_rectangle].parameters.parameter[rectangle][direction] out
+//!set record[ScaledFont].method[extents].parameters.parameter[extents][direction] out
+//!set record[ScaledFont].method[get_ctm].parameters.parameter[ctm][direction] out
+//!set record[ScaledFont].method[get_font_matrix].parameters.parameter[font_matrix][direction] out
+//!set record[ScaledFont].method[get_scale_matrix].parameters.parameter[scale_matrix][direction] out
+//!set record[ScaledFont].method[glyph_extents].parameters.parameter[extents][direction] out
+//!set record[ScaledFont].method[text_extents].parameters.parameter[extents][direction] out
 //!set record[Surface].method[get_device_offset].parameters.parameter[x_offset][direction] out
 //!set record[Surface].method[get_device_offset].parameters.parameter[y_offset][direction] out
 //!set record[Surface].method[get_device_scale].parameters.parameter[x_scale][direction] out

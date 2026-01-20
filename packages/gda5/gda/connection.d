@@ -94,7 +94,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   /**
       Get `eventsHistorySize` property.
       Returns: Defines the number of #GdaConnectionEvent objects kept in memory which can
-      be fetched using [gda.connection.Connection.getEvents].
+        be fetched using [gda.connection.Connection.getEvents].
   */
   @property int eventsHistorySize()
   {
@@ -105,7 +105,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Set `eventsHistorySize` property.
       Params:
         propval = Defines the number of #GdaConnectionEvent objects kept in memory which can
-        be fetched using [gda.connection.Connection.getEvents].
+          be fetched using [gda.connection.Connection.getEvents].
   */
   @property void eventsHistorySize(int propval)
   {
@@ -115,8 +115,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   /**
       Get `executionSlowdown` property.
       Returns: Artificially slows down the execution of queries. This property can be used to
-      debug some problems. If non zero, this value is the number of microseconds waited before actually
-      executing each query.
+        debug some problems. If non zero, this value is the number of microseconds waited before actually
+        executing each query.
   */
   @property uint executionSlowdown()
   {
@@ -127,8 +127,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Set `executionSlowdown` property.
       Params:
         propval = Artificially slows down the execution of queries. This property can be used to
-        debug some problems. If non zero, this value is the number of microseconds waited before actually
-        executing each query.
+          debug some problems. If non zero, this value is the number of microseconds waited before actually
+          executing each query.
   */
   @property void executionSlowdown(uint propval)
   {
@@ -157,11 +157,11 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   /**
       Get `isWrapper` property.
       Returns: This property, if set to true, specifies that the connection is not a real connection, but rather
-      a #GdaConnection object which "proxies" all the calls to another connection which executes in a sub
-      thread.
-      
-      Note: this property is used internally by Libgda and should not be directly used by any programs. Setting
-      this property has no effect, reading it is supported, though.
+        a #GdaConnection object which "proxies" all the calls to another connection which executes in a sub
+        thread.
+        
+        Note: this property is used internally by Libgda and should not be directly used by any programs. Setting
+        this property has no effect, reading it is supported, though.
   */
   @property bool isWrapper()
   {
@@ -172,11 +172,11 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Set `isWrapper` property.
       Params:
         propval = This property, if set to true, specifies that the connection is not a real connection, but rather
-        a #GdaConnection object which "proxies" all the calls to another connection which executes in a sub
-        thread.
-        
-        Note: this property is used internally by Libgda and should not be directly used by any programs. Setting
-        this property has no effect, reading it is supported, though.
+          a #GdaConnection object which "proxies" all the calls to another connection which executes in a sub
+          thread.
+          
+          Note: this property is used internally by Libgda and should not be directly used by any programs. Setting
+          this property has no effect, reading it is supported, though.
   */
   @property void isWrapper(bool propval)
   {
@@ -198,9 +198,9 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   /**
       Get `monitorWrappedInMainloop` property.
       Returns: Useful only when there is a mainloop and when the connection acts as a thread wrapper around another connection,
-      it sets up a timeout to handle signals coming from the wrapped connection.
-      
-      If the connection is not a thread wrapper, then this property has no effect.
+        it sets up a timeout to handle signals coming from the wrapped connection.
+        
+        If the connection is not a thread wrapper, then this property has no effect.
   */
   @property bool monitorWrappedInMainloop()
   {
@@ -211,9 +211,9 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Set `monitorWrappedInMainloop` property.
       Params:
         propval = Useful only when there is a mainloop and when the connection acts as a thread wrapper around another connection,
-        it sets up a timeout to handle signals coming from the wrapped connection.
-        
-        If the connection is not a thread wrapper, then this property has no effect.
+          it sets up a timeout to handle signals coming from the wrapped connection.
+          
+          If the connection is not a thread wrapper, then this property has no effect.
   */
   @property void monitorWrappedInMainloop(bool propval)
   {
@@ -1635,7 +1635,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Connect to `Error` signal.
   
       Gets emitted whenever a connection event occurs. Check the nature of event to
-      see if it's an error or a simple notification
+        see if it's an error or a simple notification
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1680,7 +1680,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Connect to `TransactionStatusChanged` signal.
   
       Gets emitted when the transaction status of cnc has changed (a transaction has been
-      started, rolled back, a savepoint added,...)
+        started, rolled back, a savepoint added,...)
   
       Params:
         callback = signal callback delegate or function to connect

@@ -51,16 +51,16 @@ class DropControllerMotion : gtk.event_controller.EventController
   /**
       Get `drop` property.
       Returns: The ongoing drop operation over the controller's widget or
-      its descendant.
-      
-      If no drop operation is going on, this property returns null.
-      
-      The event controller should not modify the @drop, but it might
-      want to query its properties.
-      
-      When handling crossing events, this property is updated
-      before [gtk.drop_controller_motion.DropControllerMotion.enter], but after
-      [gtk.drop_controller_motion.DropControllerMotion.leave] is emitted.
+        its descendant.
+        
+        If no drop operation is going on, this property returns null.
+        
+        The event controller should not modify the @drop, but it might
+        want to query its properties.
+        
+        When handling crossing events, this property is updated
+        before [gtk.drop_controller_motion.DropControllerMotion.enter], but after
+        [gtk.drop_controller_motion.DropControllerMotion.leave] is emitted.
   */
   @property gdk.drop.Drop drop()
   {

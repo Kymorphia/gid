@@ -1,8 +1,7 @@
-/// Module for [BitsetIter] class
+/// Module for [BitsetIter] struct
 module gtk.bitset_iter;
 
 import gid.gid;
-import gobject.boxed;
 import gtk.bitset;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,47 +15,10 @@ import gtk.types;
     [gtk.bitset_iter.BitsetIter.initFirst], [gtk.bitset_iter.BitsetIter.initLast]
     or [gtk.bitset_iter.BitsetIter.initAt].
 */
-class BitsetIter : gobject.boxed.Boxed
+struct BitsetIter
 {
-
-  /**
-      Create a `bitset_iter.BitsetIter` boxed type.
-  */
-  this()
-  {
-    super(gMalloc(GtkBitsetIter.sizeof), Yes.Take);
-  }
-
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gtk_bitset_iter_get_type != &gidSymbolNotFound ? gtk_bitset_iter_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override BitsetIter self()
-  {
-    return this;
-  }
+  void*[10] privateData;
 
   /**
       Gets the current value that iter points to.
@@ -68,7 +30,7 @@ class BitsetIter : gobject.boxed.Boxed
   uint getValue()
   {
     uint _retval;
-    _retval = gtk_bitset_iter_get_value(cast(const(GtkBitsetIter)*)this._cPtr);
+    _retval = gtk_bitset_iter_get_value(cast(const(GtkBitsetIter)*)&this);
     return _retval;
   }
 
@@ -79,7 +41,7 @@ class BitsetIter : gobject.boxed.Boxed
   bool isValid()
   {
     bool _retval;
-    _retval = cast(bool)gtk_bitset_iter_is_valid(cast(const(GtkBitsetIter)*)this._cPtr);
+    _retval = cast(bool)gtk_bitset_iter_is_valid(cast(const(GtkBitsetIter)*)&this);
     return _retval;
   }
 
@@ -96,7 +58,7 @@ class BitsetIter : gobject.boxed.Boxed
   bool next(out uint value)
   {
     bool _retval;
-    _retval = cast(bool)gtk_bitset_iter_next(cast(GtkBitsetIter*)this._cPtr, cast(uint*)&value);
+    _retval = cast(bool)gtk_bitset_iter_next(cast(GtkBitsetIter*)&this, cast(uint*)&value);
     return _retval;
   }
 
@@ -113,7 +75,7 @@ class BitsetIter : gobject.boxed.Boxed
   bool previous(out uint value)
   {
     bool _retval;
-    _retval = cast(bool)gtk_bitset_iter_previous(cast(GtkBitsetIter*)this._cPtr, cast(uint*)&value);
+    _retval = cast(bool)gtk_bitset_iter_previous(cast(GtkBitsetIter*)&this, cast(uint*)&value);
     return _retval;
   }
 
@@ -133,9 +95,7 @@ class BitsetIter : gobject.boxed.Boxed
   static bool initAt(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, uint target, out uint value)
   {
     bool _retval;
-    GtkBitsetIter _iter;
-    _retval = cast(bool)gtk_bitset_iter_init_at(&_iter, set ? cast(const(GtkBitset)*)set._cPtr(No.Dup) : null, target, cast(uint*)&value);
-    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_bitset_iter_init_at(cast(GtkBitsetIter*)&iter, set ? cast(const(GtkBitset)*)set._cPtr(No.Dup) : null, target, cast(uint*)&value);
     return _retval;
   }
 
@@ -154,9 +114,7 @@ class BitsetIter : gobject.boxed.Boxed
   static bool initFirst(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, out uint value)
   {
     bool _retval;
-    GtkBitsetIter _iter;
-    _retval = cast(bool)gtk_bitset_iter_init_first(&_iter, set ? cast(const(GtkBitset)*)set._cPtr(No.Dup) : null, cast(uint*)&value);
-    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_bitset_iter_init_first(cast(GtkBitsetIter*)&iter, set ? cast(const(GtkBitset)*)set._cPtr(No.Dup) : null, cast(uint*)&value);
     return _retval;
   }
 
@@ -175,9 +133,7 @@ class BitsetIter : gobject.boxed.Boxed
   static bool initLast(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, out uint value)
   {
     bool _retval;
-    GtkBitsetIter _iter;
-    _retval = cast(bool)gtk_bitset_iter_init_last(&_iter, set ? cast(const(GtkBitset)*)set._cPtr(No.Dup) : null, cast(uint*)&value);
-    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_bitset_iter_init_last(cast(GtkBitsetIter*)&iter, set ? cast(const(GtkBitset)*)set._cPtr(No.Dup) : null, cast(uint*)&value);
     return _retval;
   }
 }

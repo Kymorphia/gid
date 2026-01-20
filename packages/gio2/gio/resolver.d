@@ -66,15 +66,15 @@ class Resolver : gobject.object.ObjectWrap
   /**
       Get `timeout` property.
       Returns: The timeout applied to all resolver lookups, in milliseconds.
-      
-      This may be changed through the lifetime of the #GResolver. The new value
-      will apply to any lookups started after the change, but not to any
-      already-ongoing lookups.
-      
-      If this is `0`, no timeout is applied to lookups.
-      
-      No timeout was applied to lookups before this property was added in
-      GLib 2.78.
+        
+        This may be changed through the lifetime of the #GResolver. The new value
+        will apply to any lookups started after the change, but not to any
+        already-ongoing lookups.
+        
+        If this is `0`, no timeout is applied to lookups.
+        
+        No timeout was applied to lookups before this property was added in
+        GLib 2.78.
   */
   @property uint timeout()
   {
@@ -85,15 +85,15 @@ class Resolver : gobject.object.ObjectWrap
       Set `timeout` property.
       Params:
         propval = The timeout applied to all resolver lookups, in milliseconds.
-        
-        This may be changed through the lifetime of the #GResolver. The new value
-        will apply to any lookups started after the change, but not to any
-        already-ongoing lookups.
-        
-        If this is `0`, no timeout is applied to lookups.
-        
-        No timeout was applied to lookups before this property was added in
-        GLib 2.78.
+          
+          This may be changed through the lifetime of the #GResolver. The new value
+          will apply to any lookups started after the change, but not to any
+          already-ongoing lookups.
+          
+          If this is `0`, no timeout is applied to lookups.
+          
+          No timeout was applied to lookups before this property was added in
+          GLib 2.78.
   */
   @property void timeout(uint propval)
   {
@@ -174,7 +174,6 @@ class Resolver : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_by_address_async(cast(GResolver*)this._cPtr, address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -271,7 +270,6 @@ class Resolver : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _hostname = hostname.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_by_name_async(cast(GResolver*)this._cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -352,7 +350,6 @@ class Resolver : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _hostname = hostname.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)this._cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -440,7 +437,6 @@ class Resolver : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _rrname = rrname.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_records_async(cast(GResolver*)this._cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -547,7 +543,6 @@ class Resolver : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _service = service.toCString(No.Alloc);
     const(char)* _protocol = protocol.toCString(No.Alloc);
     const(char)* _domain = domain.toCString(No.Alloc);
@@ -612,7 +607,7 @@ class Resolver : gobject.object.ObjectWrap
       Connect to `Reload` signal.
   
       Emitted when the resolver notices that the system resolver
-      configuration has changed.
+        configuration has changed.
   
       Params:
         callback = signal callback delegate or function to connect

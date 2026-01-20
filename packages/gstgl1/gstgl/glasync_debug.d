@@ -12,7 +12,7 @@ import gstgl.types;
 */
 class GLAsyncDebug
 {
-  GstGLAsyncDebug cInstance;
+  GstGLAsyncDebug _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class GLAsyncDebug
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstgl.glasync_debug.GLAsyncDebug");
 
-    cInstance = *cast(GstGLAsyncDebug*)ptr;
+    _cInstance = *cast(GstGLAsyncDebug*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class GLAsyncDebug
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

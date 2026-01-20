@@ -13,7 +13,7 @@ import gid.gid;
 /** */
 class ServerOperationNode
 {
-  GdaServerOperationNode cInstance;
+  GdaServerOperationNode _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class ServerOperationNode
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.server_operation_node.ServerOperationNode");
 
-    cInstance = *cast(GdaServerOperationNode*)ptr;
+    _cInstance = *cast(GdaServerOperationNode*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class ServerOperationNode
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

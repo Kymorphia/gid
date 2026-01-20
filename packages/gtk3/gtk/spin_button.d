@@ -572,13 +572,13 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Connect to `ChangeValue` signal.
   
       The ::change-value signal is a [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a value change.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal are Up/Down and PageUp and/PageDown.
+        which gets emitted when the user initiates a value change.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal are Up/Down and PageUp and/PageDown.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -623,26 +623,26 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Connect to `Output` signal.
   
       The ::output signal can be used to change to formatting
-      of the value that is displayed in the spin buttons entry.
-      ```c
-      // show leading zeros
-      static gboolean
-      on_output (GtkSpinButton *spin,
-                 gpointer       data)
-      {
-         GtkAdjustment *adjustment;
-         gchar *text;
-         int value;
-      
-         adjustment = gtk_spin_button_get_adjustment (spin);
-         value = (int)gtk_adjustment_get_value (adjustment);
-         text = g_strdup_printf ("%02d", value);
-         gtk_entry_set_text (GTK_ENTRY (spin), text);
-         g_free (text);
-      
-         return TRUE;
-      }
-      ```
+        of the value that is displayed in the spin buttons entry.
+        ```c
+        // show leading zeros
+        static gboolean
+        on_output (GtkSpinButton *spin,
+                   gpointer       data)
+        {
+           GtkAdjustment *adjustment;
+           gchar *text;
+           int value;
+        
+           adjustment = gtk_spin_button_get_adjustment (spin);
+           value = (int)gtk_adjustment_get_value (adjustment);
+           text = g_strdup_printf ("%02d", value);
+           gtk_entry_set_text (GTK_ENTRY (spin), text);
+           g_free (text);
+        
+           return TRUE;
+        }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -682,7 +682,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Connect to `ValueChanged` signal.
   
       The ::value-changed signal is emitted when the value represented by
-      spinbutton changes. Also see the #GtkSpinButton::output signal.
+        spinbutton changes. Also see the #GtkSpinButton::output signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -720,7 +720,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Connect to `Wrapped` signal.
   
       The ::wrapped signal is emitted right after the spinbutton wraps
-      from its maximum to minimum value or vice-versa.
+        from its maximum to minimum value or vice-versa.
   
       Params:
         callback = signal callback delegate or function to connect

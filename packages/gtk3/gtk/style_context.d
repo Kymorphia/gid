@@ -129,7 +129,7 @@ class StyleContext : gobject.object.ObjectWrap
   /**
       Get `parent` property.
       Returns: Sets or gets the style context’s parent. See [gtk.style_context.StyleContext.setParent]
-      for details.
+        for details.
   */
   @property gtk.style_context.StyleContext parent()
   {
@@ -140,7 +140,7 @@ class StyleContext : gobject.object.ObjectWrap
       Set `parent` property.
       Params:
         propval = Sets or gets the style context’s parent. See [gtk.style_context.StyleContext.setParent]
-        for details.
+          for details.
   */
   @property void parent(gtk.style_context.StyleContext propval)
   {
@@ -357,9 +357,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getBackgroundColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_style_context_get_background_color(cast(GtkStyleContext*)this._cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_style_context_get_background_color(cast(GtkStyleContext*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -374,9 +372,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getBorder(gtk.types.StateFlags state, out gtk.border.Border border)
   {
-    GtkBorder _border;
-    gtk_style_context_get_border(cast(GtkStyleContext*)this._cPtr, state, &_border);
-    border = new gtk.border.Border(cast(void*)&_border, No.Take);
+    gtk_style_context_get_border(cast(GtkStyleContext*)this._cPtr, state, cast(GtkBorder*)&border);
   }
 
   /**
@@ -390,9 +386,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getBorderColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_style_context_get_border_color(cast(GtkStyleContext*)this._cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_style_context_get_border_color(cast(GtkStyleContext*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -407,9 +401,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_style_context_get_color(cast(GtkStyleContext*)this._cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_style_context_get_color(cast(GtkStyleContext*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -486,9 +478,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getMargin(gtk.types.StateFlags state, out gtk.border.Border margin)
   {
-    GtkBorder _margin;
-    gtk_style_context_get_margin(cast(GtkStyleContext*)this._cPtr, state, &_margin);
-    margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
+    gtk_style_context_get_margin(cast(GtkStyleContext*)this._cPtr, state, cast(GtkBorder*)&margin);
   }
 
   /**
@@ -502,9 +492,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getPadding(gtk.types.StateFlags state, out gtk.border.Border padding)
   {
-    GtkBorder _padding;
-    gtk_style_context_get_padding(cast(GtkStyleContext*)this._cPtr, state, &_padding);
-    padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
+    gtk_style_context_get_padding(cast(GtkStyleContext*)this._cPtr, state, cast(GtkBorder*)&padding);
   }
 
   /**
@@ -734,9 +722,7 @@ class StyleContext : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
-    GdkRGBA _color;
-    _retval = cast(bool)gtk_style_context_lookup_color(cast(GtkStyleContext*)this._cPtr, _colorName, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    _retval = cast(bool)gtk_style_context_lookup_color(cast(GtkStyleContext*)this._cPtr, _colorName, cast(GdkRGBA*)&color);
     return _retval;
   }
 
@@ -1124,12 +1110,12 @@ class StyleContext : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       The ::changed signal is emitted when there is a change in the
-      #GtkStyleContext.
-      
-      For a #GtkStyleContext returned by [gtk.widget.Widget.getStyleContext], the
-      #GtkWidget::style-updated signal/vfunc might be more convenient to use.
-      
-      This signal is useful when using the theming layer standalone.
+        #GtkStyleContext.
+        
+        For a #GtkStyleContext returned by [gtk.widget.Widget.getStyleContext], the
+        #GtkWidget::style-updated signal/vfunc might be more convenient to use.
+        
+        This signal is useful when using the theming layer standalone.
   
       Params:
         callback = signal callback delegate or function to connect

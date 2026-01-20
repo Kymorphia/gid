@@ -187,7 +187,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   /**
       Get `strength` property.
       Returns: The [gtk.types.ConstraintStrength] to be used for the constraint on
-      the natural size of the guide.
+        the natural size of the guide.
   */
   @property gtk.types.ConstraintStrength strength()
   {
@@ -198,7 +198,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Set `strength` property.
       Params:
         propval = The [gtk.types.ConstraintStrength] to be used for the constraint on
-        the natural size of the guide.
+          the natural size of the guide.
   */
   @property void strength(gtk.types.ConstraintStrength propval)
   {

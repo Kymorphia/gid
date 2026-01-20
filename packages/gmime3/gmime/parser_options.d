@@ -22,7 +22,7 @@ class ParserOptions : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -117,8 +117,8 @@ class ParserOptions : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -214,6 +214,7 @@ class ParserOptions : gobject.boxed.Boxed
       _tmpcharsets ~= s.toCString(No.Alloc);
     _tmpcharsets ~= null;
     const(char*)* _charsets = _tmpcharsets.ptr;
+
     g_mime_parser_options_set_fallback_charsets(cast(GMimeParserOptions*)this._cPtr, _charsets);
   }
 
@@ -272,7 +273,6 @@ class ParserOptions : gobject.boxed.Boxed
       (*_dlg)(offset, errcode, _item);
     }
     auto _warningCbCB = warningCb ? &_warningCbCallback : null;
-
     auto _warningCb = warningCb ? freezeDelegate(cast(void*)&warningCb) : null;
     GDestroyNotify _warningCbDestroyCB = warningCb ? &thawDelegate : null;
     g_mime_parser_options_set_warning_callback(cast(GMimeParserOptions*)this._cPtr, _warningCbCB, _warningCb, _warningCbDestroyCB);

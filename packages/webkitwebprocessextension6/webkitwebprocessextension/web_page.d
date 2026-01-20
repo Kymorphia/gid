@@ -150,7 +150,6 @@ class WebPage : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_page_send_message_to_view(cast(WebKitWebPage*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -178,9 +177,9 @@ class WebPage : gobject.object.ObjectWrap
       Connect to `ConsoleMessageSent` signal.
   
       Emitted when a message is sent to the console. This can be a message
-      produced by the use of JavaScript console API, a JavaScript exception,
-      a security error or other errors, warnings, debug or log messages.
-      The console_message contains information of the message.
+        produced by the use of JavaScript console API, a JavaScript exception,
+        a security error or other errors, warnings, debug or log messages.
+        The console_message contains information of the message.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -225,13 +224,13 @@ class WebPage : gobject.object.ObjectWrap
       Connect to `ContextMenu` signal.
   
       Emitted before a context menu is displayed in the UI Process to
-      give the application a chance to customize the proposed menu,
-      build its own context menu or pass user data to the UI Process.
-      This signal is useful when the information available in the UI Process
-      is not enough to build or customize the context menu, for example, to
-      add menu entries depending on the node at the coordinates of the
-      hit_test_result. Otherwise, it's recommended to use #WebKitWebView::context-menu
-      signal instead.
+        give the application a chance to customize the proposed menu,
+        build its own context menu or pass user data to the UI Process.
+        This signal is useful when the information available in the UI Process
+        is not enough to build or customize the context menu, for example, to
+        add menu entries depending on the node at the coordinates of the
+        hit_test_result. Otherwise, it's recommended to use #WebKitWebView::context-menu
+        signal instead.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -285,9 +284,9 @@ class WebPage : gobject.object.ObjectWrap
       Connect to `DocumentLoaded` signal.
   
       This signal is emitted when the DOM document of a #WebKitWebPage has been
-      loaded.
-      
-      You can wait for this signal to get the DOM document
+        loaded.
+        
+        You can wait for this signal to get the DOM document
   
       Params:
         callback = signal callback delegate or function to connect
@@ -325,19 +324,19 @@ class WebPage : gobject.object.ObjectWrap
       Connect to `SendRequest` signal.
   
       This signal is emitted when request is about to be sent to
-      the server. This signal can be used to modify the #WebKitURIRequest
-      that will be sent to the server. You can also cancel the resource load
-      operation by connecting to this signal and returning true.
-      
-      In case of a server redirection this signal is
-      emitted again with the request argument containing the new
-      request to be sent to the server due to the redirection and the
-      redirected_response parameter containing the response
-      received by the server for the initial request.
-      
-      Modifications to the #WebKitURIRequest and its associated
-      #SoupMessageHeaders will be taken into account when the request
-      is sent over the network.
+        the server. This signal can be used to modify the #WebKitURIRequest
+        that will be sent to the server. You can also cancel the resource load
+        operation by connecting to this signal and returning true.
+        
+        In case of a server redirection this signal is
+        emitted again with the request argument containing the new
+        request to be sent to the server due to the redirection and the
+        redirected_response parameter containing the response
+        received by the server for the initial request.
+        
+        Modifications to the #WebKitURIRequest and its associated
+        #SoupMessageHeaders will be taken into account when the request
+        is sent over the network.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -351,7 +350,7 @@ class WebPage : gobject.object.ObjectWrap
           `webPage` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to continue emission of the event.
+               false to continue emission of the event.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -392,13 +391,13 @@ class WebPage : gobject.object.ObjectWrap
       Connect to `UserMessageReceived` signal.
   
       This signal is emitted when a #WebKitUserMessage is received from the
-      #WebKitWebView corresponding to web_page. You can reply to the message
-      using [webkitwebprocessextension.user_message.UserMessage.sendReply].
-      
-      You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
-      message and returning true. If the last reference of message is removed
-      and the message has been replied, the operation in the #WebKitWebView will
-      finish with error [webkit.types.UserMessageError.Message].
+        #WebKitWebView corresponding to web_page. You can reply to the message
+        using [webkitwebprocessextension.user_message.UserMessage.sendReply].
+        
+        You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
+        message and returning true. If the last reference of message is removed
+        and the message has been replied, the operation in the #WebKitWebView will
+        finish with error [webkit.types.UserMessageError.Message].
   
       Params:
         callback = signal callback delegate or function to connect

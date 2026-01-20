@@ -45,15 +45,15 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   /**
       Get `cacheChanges` property.
       Returns: Defines how changes kept in the data proxy are handled when the proxied data model
-      is changed (using the "model" property). The default is to silently discard all the
-      changes, but if this property is set to true, then the changes are cached.
-      
-      If set to true, each cached change will be re-applied to a newly set proxied data model if
-      the change's number of columns match the proxied data model's number of columns and based on:
-      <itemizedlist>
-        <listitem><para>the contents of the proxied data model's modified row for updates and deletes</para></listitem>
-        <listitem><para>the inserts are always kept</para></listitem>
-      </itemizedlist>
+        is changed (using the "model" property). The default is to silently discard all the
+        changes, but if this property is set to true, then the changes are cached.
+        
+        If set to true, each cached change will be re-applied to a newly set proxied data model if
+        the change's number of columns match the proxied data model's number of columns and based on:
+        <itemizedlist>
+          <listitem><para>the contents of the proxied data model's modified row for updates and deletes</para></listitem>
+          <listitem><para>the inserts are always kept</para></listitem>
+        </itemizedlist>
   */
   @property bool cacheChanges()
   {
@@ -64,15 +64,15 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Set `cacheChanges` property.
       Params:
         propval = Defines how changes kept in the data proxy are handled when the proxied data model
-        is changed (using the "model" property). The default is to silently discard all the
-        changes, but if this property is set to true, then the changes are cached.
-        
-        If set to true, each cached change will be re-applied to a newly set proxied data model if
-        the change's number of columns match the proxied data model's number of columns and based on:
-        <itemizedlist>
-          <listitem><para>the contents of the proxied data model's modified row for updates and deletes</para></listitem>
-          <listitem><para>the inserts are always kept</para></listitem>
-        </itemizedlist>
+          is changed (using the "model" property). The default is to silently discard all the
+          changes, but if this property is set to true, then the changes are cached.
+          
+          If set to true, each cached change will be re-applied to a newly set proxied data model if
+          the change's number of columns match the proxied data model's number of columns and based on:
+          <itemizedlist>
+            <listitem><para>the contents of the proxied data model's modified row for updates and deletes</para></listitem>
+            <listitem><para>the inserts are always kept</para></listitem>
+          </itemizedlist>
   */
   @property void cacheChanges(bool propval)
   {
@@ -722,7 +722,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Connect to `SampleChanged` signal.
   
       Gets emitted whenever proxy's sample size has been changed. sample_start and sample_end are
-      in reference to the proxied data model.
+        in reference to the proxied data model.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -818,7 +818,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Connect to `ValidateRowChanges` signal.
   
       Gets emitted when proxy is about to commit a row change to the proxied data model. If any
-      callback returns a non null value, then the change commit fails with the returned #GError
+        callback returns a non null value, then the change commit fails with the returned #GError
   
       Params:
         callback = signal callback delegate or function to connect

@@ -13,7 +13,7 @@ import glib.types;
 */
 class ScannerConfig
 {
-  GScannerConfig cInstance;
+  GScannerConfig _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class ScannerConfig
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.scanner_config.ScannerConfig");
 
-    cInstance = *cast(GScannerConfig*)ptr;
+    _cInstance = *cast(GScannerConfig*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,14 +30,14 @@ class ScannerConfig
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `csetSkipCharacters` field.
       Returns: specifies which characters should be skipped
-          by the scanner (the default is the whitespace characters: space,
-          tab, carriage-return and line-feed).
+            by the scanner (the default is the whitespace characters: space,
+            tab, carriage-return and line-feed).
   */
   @property string csetSkipCharacters()
   {
@@ -48,8 +48,8 @@ class ScannerConfig
       Set `csetSkipCharacters` field.
       Params:
         propval = specifies which characters should be skipped
-            by the scanner (the default is the whitespace characters: space,
-            tab, carriage-return and line-feed).
+              by the scanner (the default is the whitespace characters: space,
+              tab, carriage-return and line-feed).
   */
   @property void csetSkipCharacters(string propval)
   {
@@ -60,7 +60,7 @@ class ScannerConfig
   /**
       Get `csetIdentifierFirst` field.
       Returns: specifies the characters which can start
-          identifiers (the default is `G_CSET_a_2_z`, "_", and `G_CSET_A_2_Z`).
+            identifiers (the default is `G_CSET_a_2_z`, "_", and `G_CSET_A_2_Z`).
   */
   @property string csetIdentifierFirst()
   {
@@ -71,7 +71,7 @@ class ScannerConfig
       Set `csetIdentifierFirst` field.
       Params:
         propval = specifies the characters which can start
-            identifiers (the default is `G_CSET_a_2_z`, "_", and `G_CSET_A_2_Z`).
+              identifiers (the default is `G_CSET_a_2_z`, "_", and `G_CSET_A_2_Z`).
   */
   @property void csetIdentifierFirst(string propval)
   {
@@ -82,9 +82,9 @@ class ScannerConfig
   /**
       Get `csetIdentifierNth` field.
       Returns: specifies the characters which can be used
-          in identifiers, after the first character (the default is
-          `G_CSET_a_2_z`, "_0123456789", `G_CSET_A_2_Z`, `G_CSET_LATINS`,
-          `G_CSET_LATINC`).
+            in identifiers, after the first character (the default is
+            `G_CSET_a_2_z`, "_0123456789", `G_CSET_A_2_Z`, `G_CSET_LATINS`,
+            `G_CSET_LATINC`).
   */
   @property string csetIdentifierNth()
   {
@@ -95,9 +95,9 @@ class ScannerConfig
       Set `csetIdentifierNth` field.
       Params:
         propval = specifies the characters which can be used
-            in identifiers, after the first character (the default is
-            `G_CSET_a_2_z`, "_0123456789", `G_CSET_A_2_Z`, `G_CSET_LATINS`,
-            `G_CSET_LATINC`).
+              in identifiers, after the first character (the default is
+              `G_CSET_a_2_z`, "_0123456789", `G_CSET_A_2_Z`, `G_CSET_LATINS`,
+              `G_CSET_LATINC`).
   */
   @property void csetIdentifierNth(string propval)
   {
@@ -108,9 +108,9 @@ class ScannerConfig
   /**
       Get `cpairCommentSingle` field.
       Returns: specifies the characters at the start and
-          end of single-line comments. The default is "#\n" which means
-          that single-line comments start with a '#' and continue until
-          a '\n' (end of line).
+            end of single-line comments. The default is "#\n" which means
+            that single-line comments start with a '#' and continue until
+            a '\n' (end of line).
   */
   @property string cpairCommentSingle()
   {
@@ -121,9 +121,9 @@ class ScannerConfig
       Set `cpairCommentSingle` field.
       Params:
         propval = specifies the characters at the start and
-            end of single-line comments. The default is "#\n" which means
-            that single-line comments start with a '#' and continue until
-            a '\n' (end of line).
+              end of single-line comments. The default is "#\n" which means
+              that single-line comments start with a '#' and continue until
+              a '\n' (end of line).
   */
   @property void cpairCommentSingle(string propval)
   {
@@ -134,7 +134,7 @@ class ScannerConfig
   /**
       Get `caseSensitive` field.
       Returns: specifies if symbols are case sensitive (the
-          default is false).
+            default is false).
   */
   @property uint caseSensitive()
   {
@@ -145,7 +145,7 @@ class ScannerConfig
       Set `caseSensitive` field.
       Params:
         propval = specifies if symbols are case sensitive (the
-            default is false).
+              default is false).
   */
   @property void caseSensitive(uint propval)
   {
@@ -155,7 +155,7 @@ class ScannerConfig
   /**
       Get `skipCommentMulti` field.
       Returns: specifies if multi-line comments are skipped
-          and not returned as tokens (the default is true).
+            and not returned as tokens (the default is true).
   */
   @property uint skipCommentMulti()
   {
@@ -166,7 +166,7 @@ class ScannerConfig
       Set `skipCommentMulti` field.
       Params:
         propval = specifies if multi-line comments are skipped
-            and not returned as tokens (the default is true).
+              and not returned as tokens (the default is true).
   */
   @property void skipCommentMulti(uint propval)
   {
@@ -176,7 +176,7 @@ class ScannerConfig
   /**
       Get `skipCommentSingle` field.
       Returns: specifies if single-line comments are skipped
-          and not returned as tokens (the default is true).
+            and not returned as tokens (the default is true).
   */
   @property uint skipCommentSingle()
   {
@@ -187,7 +187,7 @@ class ScannerConfig
       Set `skipCommentSingle` field.
       Params:
         propval = specifies if single-line comments are skipped
-            and not returned as tokens (the default is true).
+              and not returned as tokens (the default is true).
   */
   @property void skipCommentSingle(uint propval)
   {
@@ -197,7 +197,7 @@ class ScannerConfig
   /**
       Get `scanCommentMulti` field.
       Returns: specifies if multi-line comments are recognized
-          (the default is true).
+            (the default is true).
   */
   @property uint scanCommentMulti()
   {
@@ -208,7 +208,7 @@ class ScannerConfig
       Set `scanCommentMulti` field.
       Params:
         propval = specifies if multi-line comments are recognized
-            (the default is true).
+              (the default is true).
   */
   @property void scanCommentMulti(uint propval)
   {
@@ -218,7 +218,7 @@ class ScannerConfig
   /**
       Get `scanIdentifier` field.
       Returns: specifies if identifiers are recognized (the
-          default is true).
+            default is true).
   */
   @property uint scanIdentifier()
   {
@@ -229,7 +229,7 @@ class ScannerConfig
       Set `scanIdentifier` field.
       Params:
         propval = specifies if identifiers are recognized (the
-            default is true).
+              default is true).
   */
   @property void scanIdentifier(uint propval)
   {
@@ -239,7 +239,7 @@ class ScannerConfig
   /**
       Get `scanIdentifier1char` field.
       Returns: specifies if single-character
-          identifiers are recognized (the default is false).
+            identifiers are recognized (the default is false).
   */
   @property uint scanIdentifier1char()
   {
@@ -250,7 +250,7 @@ class ScannerConfig
       Set `scanIdentifier1char` field.
       Params:
         propval = specifies if single-character
-            identifiers are recognized (the default is false).
+              identifiers are recognized (the default is false).
   */
   @property void scanIdentifier1char(uint propval)
   {
@@ -260,7 +260,7 @@ class ScannerConfig
   /**
       Get `scanIdentifierNULL` field.
       Returns: specifies if null is reported as
-          `G_TOKEN_IDENTIFIER_NULL` (the default is false).
+            `G_TOKEN_IDENTIFIER_NULL` (the default is false).
   */
   @property uint scanIdentifierNULL()
   {
@@ -271,7 +271,7 @@ class ScannerConfig
       Set `scanIdentifierNULL` field.
       Params:
         propval = specifies if null is reported as
-            `G_TOKEN_IDENTIFIER_NULL` (the default is false).
+              `G_TOKEN_IDENTIFIER_NULL` (the default is false).
   */
   @property void scanIdentifierNULL(uint propval)
   {
@@ -281,7 +281,7 @@ class ScannerConfig
   /**
       Get `scanSymbols` field.
       Returns: specifies if symbols are recognized (the default
-          is true).
+            is true).
   */
   @property uint scanSymbols()
   {
@@ -292,7 +292,7 @@ class ScannerConfig
       Set `scanSymbols` field.
       Params:
         propval = specifies if symbols are recognized (the default
-            is true).
+              is true).
   */
   @property void scanSymbols(uint propval)
   {
@@ -302,7 +302,7 @@ class ScannerConfig
   /**
       Get `scanBinary` field.
       Returns: specifies if binary numbers are recognized (the
-          default is false).
+            default is false).
   */
   @property uint scanBinary()
   {
@@ -313,7 +313,7 @@ class ScannerConfig
       Set `scanBinary` field.
       Params:
         propval = specifies if binary numbers are recognized (the
-            default is false).
+              default is false).
   */
   @property void scanBinary(uint propval)
   {
@@ -323,7 +323,7 @@ class ScannerConfig
   /**
       Get `scanOctal` field.
       Returns: specifies if octal numbers are recognized (the
-          default is true).
+            default is true).
   */
   @property uint scanOctal()
   {
@@ -334,7 +334,7 @@ class ScannerConfig
       Set `scanOctal` field.
       Params:
         propval = specifies if octal numbers are recognized (the
-            default is true).
+              default is true).
   */
   @property void scanOctal(uint propval)
   {
@@ -344,7 +344,7 @@ class ScannerConfig
   /**
       Get `scanFloat` field.
       Returns: specifies if floating point numbers are recognized
-          (the default is true).
+            (the default is true).
   */
   @property uint scanFloat()
   {
@@ -355,7 +355,7 @@ class ScannerConfig
       Set `scanFloat` field.
       Params:
         propval = specifies if floating point numbers are recognized
-            (the default is true).
+              (the default is true).
   */
   @property void scanFloat(uint propval)
   {
@@ -365,7 +365,7 @@ class ScannerConfig
   /**
       Get `scanHex` field.
       Returns: specifies if hexadecimal numbers are recognized (the
-          default is true).
+            default is true).
   */
   @property uint scanHex()
   {
@@ -376,7 +376,7 @@ class ScannerConfig
       Set `scanHex` field.
       Params:
         propval = specifies if hexadecimal numbers are recognized (the
-            default is true).
+              default is true).
   */
   @property void scanHex(uint propval)
   {
@@ -386,7 +386,7 @@ class ScannerConfig
   /**
       Get `scanHexDollar` field.
       Returns: specifies if '$' is recognized as a prefix for
-          hexadecimal numbers (the default is false).
+            hexadecimal numbers (the default is false).
   */
   @property uint scanHexDollar()
   {
@@ -397,7 +397,7 @@ class ScannerConfig
       Set `scanHexDollar` field.
       Params:
         propval = specifies if '$' is recognized as a prefix for
-            hexadecimal numbers (the default is false).
+              hexadecimal numbers (the default is false).
   */
   @property void scanHexDollar(uint propval)
   {
@@ -407,7 +407,7 @@ class ScannerConfig
   /**
       Get `scanStringSq` field.
       Returns: specifies if strings can be enclosed in single
-          quotes (the default is true).
+            quotes (the default is true).
   */
   @property uint scanStringSq()
   {
@@ -418,7 +418,7 @@ class ScannerConfig
       Set `scanStringSq` field.
       Params:
         propval = specifies if strings can be enclosed in single
-            quotes (the default is true).
+              quotes (the default is true).
   */
   @property void scanStringSq(uint propval)
   {
@@ -428,7 +428,7 @@ class ScannerConfig
   /**
       Get `scanStringDq` field.
       Returns: specifies if strings can be enclosed in double
-          quotes (the default is true).
+            quotes (the default is true).
   */
   @property uint scanStringDq()
   {
@@ -439,7 +439,7 @@ class ScannerConfig
       Set `scanStringDq` field.
       Params:
         propval = specifies if strings can be enclosed in double
-            quotes (the default is true).
+              quotes (the default is true).
   */
   @property void scanStringDq(uint propval)
   {
@@ -449,7 +449,7 @@ class ScannerConfig
   /**
       Get `numbers2Int` field.
       Returns: specifies if binary, octal and hexadecimal numbers
-          are reported as `G_TOKEN_INT` (the default is true).
+            are reported as `G_TOKEN_INT` (the default is true).
   */
   @property uint numbers2Int()
   {
@@ -460,7 +460,7 @@ class ScannerConfig
       Set `numbers2Int` field.
       Params:
         propval = specifies if binary, octal and hexadecimal numbers
-            are reported as `G_TOKEN_INT` (the default is true).
+              are reported as `G_TOKEN_INT` (the default is true).
   */
   @property void numbers2Int(uint propval)
   {
@@ -470,7 +470,7 @@ class ScannerConfig
   /**
       Get `int2Float` field.
       Returns: specifies if all numbers are reported as `G_TOKEN_FLOAT`
-          (the default is false).
+            (the default is false).
   */
   @property uint int2Float()
   {
@@ -481,7 +481,7 @@ class ScannerConfig
       Set `int2Float` field.
       Params:
         propval = specifies if all numbers are reported as `G_TOKEN_FLOAT`
-            (the default is false).
+              (the default is false).
   */
   @property void int2Float(uint propval)
   {
@@ -491,7 +491,7 @@ class ScannerConfig
   /**
       Get `identifier2String` field.
       Returns: specifies if identifiers are reported as strings
-          (the default is false).
+            (the default is false).
   */
   @property uint identifier2String()
   {
@@ -502,7 +502,7 @@ class ScannerConfig
       Set `identifier2String` field.
       Params:
         propval = specifies if identifiers are reported as strings
-            (the default is false).
+              (the default is false).
   */
   @property void identifier2String(uint propval)
   {
@@ -512,7 +512,7 @@ class ScannerConfig
   /**
       Get `char2Token` field.
       Returns: specifies if characters are reported by setting
-          `token = ch` or as `G_TOKEN_CHAR` (the default is true).
+            `token = ch` or as `G_TOKEN_CHAR` (the default is true).
   */
   @property uint char2Token()
   {
@@ -523,7 +523,7 @@ class ScannerConfig
       Set `char2Token` field.
       Params:
         propval = specifies if characters are reported by setting
-            `token = ch` or as `G_TOKEN_CHAR` (the default is true).
+              `token = ch` or as `G_TOKEN_CHAR` (the default is true).
   */
   @property void char2Token(uint propval)
   {
@@ -533,7 +533,7 @@ class ScannerConfig
   /**
       Get `symbol2Token` field.
       Returns: specifies if symbols are reported by setting
-          `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
+            `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
   */
   @property uint symbol2Token()
   {
@@ -544,7 +544,7 @@ class ScannerConfig
       Set `symbol2Token` field.
       Params:
         propval = specifies if symbols are reported by setting
-            `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
+              `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
   */
   @property void symbol2Token(uint propval)
   {
@@ -554,7 +554,7 @@ class ScannerConfig
   /**
       Get `scope0Fallback` field.
       Returns: specifies if a symbol is searched for in the
-          default scope in addition to the current scope (the default is false).
+            default scope in addition to the current scope (the default is false).
   */
   @property uint scope0Fallback()
   {
@@ -565,7 +565,7 @@ class ScannerConfig
       Set `scope0Fallback` field.
       Params:
         propval = specifies if a symbol is searched for in the
-            default scope in addition to the current scope (the default is false).
+              default scope in addition to the current scope (the default is false).
   */
   @property void scope0Fallback(uint propval)
   {

@@ -251,10 +251,10 @@ template ActivatableT()
   /**
       Get `relatedAction` property.
       Returns: The action that this activatable will activate and receive
-      updates from for various states and possibly appearance.
-      
-      > #GtkActivatable implementors need to handle the this property and
-      > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
+        updates from for various states and possibly appearance.
+        
+        > #GtkActivatable implementors need to handle the this property and
+        > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
   */
   @property gtk.action.Action relatedAction()
   {
@@ -265,10 +265,10 @@ template ActivatableT()
       Set `relatedAction` property.
       Params:
         propval = The action that this activatable will activate and receive
-        updates from for various states and possibly appearance.
-        
-        > #GtkActivatable implementors need to handle the this property and
-        > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
+          updates from for various states and possibly appearance.
+          
+          > #GtkActivatable implementors need to handle the this property and
+          > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
   */
   @property void relatedAction(gtk.action.Action propval)
   {
@@ -278,15 +278,15 @@ template ActivatableT()
   /**
       Get `useActionAppearance` property.
       Returns: Whether this activatable should reset its layout
-      and appearance when setting the related action or when
-      the action changes appearance.
-      
-      See the #GtkAction documentation directly to find which properties
-      should be ignored by the #GtkActivatable when this property is false.
-      
-      > #GtkActivatable implementors need to handle this property
-      > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
-      > widget when it changes.
+        and appearance when setting the related action or when
+        the action changes appearance.
+        
+        See the #GtkAction documentation directly to find which properties
+        should be ignored by the #GtkActivatable when this property is false.
+        
+        > #GtkActivatable implementors need to handle this property
+        > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
+        > widget when it changes.
   */
   @property bool useActionAppearance()
   {
@@ -297,15 +297,15 @@ template ActivatableT()
       Set `useActionAppearance` property.
       Params:
         propval = Whether this activatable should reset its layout
-        and appearance when setting the related action or when
-        the action changes appearance.
-        
-        See the #GtkAction documentation directly to find which properties
-        should be ignored by the #GtkActivatable when this property is false.
-        
-        > #GtkActivatable implementors need to handle this property
-        > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
-        > widget when it changes.
+          and appearance when setting the related action or when
+          the action changes appearance.
+          
+          See the #GtkAction documentation directly to find which properties
+          should be ignored by the #GtkActivatable when this property is false.
+          
+          > #GtkActivatable implementors need to handle this property
+          > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
+          > widget when it changes.
   */
   @property void useActionAppearance(bool propval)
   {

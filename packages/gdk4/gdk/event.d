@@ -23,7 +23,7 @@ import gobject.object;
 */
 class Event
 {
-  GdkEvent* cInstancePtr;
+  GdkEvent* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -31,15 +31,15 @@ class Event
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event.Event");
 
-    cInstancePtr = cast(GdkEvent*)ptr;
+    _cInstancePtr = cast(GdkEvent*)ptr;
 
     if (!take)
-      gdk_event_ref(cInstancePtr);
+      gdk_event_ref(_cInstancePtr);
   }
 
   ~this()
   {
-    gdk_event_unref(cInstancePtr);
+    gdk_event_unref(_cInstancePtr);
   }
 
 
@@ -47,9 +47,9 @@ class Event
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
-      gdk_event_ref(cInstancePtr);
+      gdk_event_ref(_cInstancePtr);
 
-    return cInstancePtr;
+    return _cInstancePtr;
   }
 
   /**

@@ -59,15 +59,15 @@ interface FontChooser
   /**
       Get `fontFeatures` property.
       Returns: The selected font features, in a format that is compatible with
-      CSS and with Pango attributes.
+        CSS and with Pango attributes.
   */
   @property string fontFeatures();
 
   /**
       Get `language` property.
       Returns: The language for which the #GtkFontChooser:font-features were
-      selected, in a format that is compatible with CSS and with Pango
-      attributes.
+        selected, in a format that is compatible with CSS and with Pango
+        attributes.
   */
   @property string language();
 
@@ -75,8 +75,8 @@ interface FontChooser
       Set `language` property.
       Params:
         propval = The language for which the #GtkFontChooser:font-features were
-        selected, in a format that is compatible with CSS and with Pango
-        attributes.
+          selected, in a format that is compatible with CSS and with Pango
+          attributes.
   */
   @property void language(string propval);
 
@@ -313,9 +313,9 @@ interface FontChooser
       Connect to `FontActivated` signal.
   
       Emitted when a font is activated.
-      This usually happens when the user double clicks an item,
-      or an item is selected and the user presses one of the keys
-      Space, Shift+Space, Return or Enter.
+        This usually happens when the user double clicks an item,
+        or an item is selected and the user presses one of the keys
+        Space, Shift+Space, Return or Enter.
   
       Params:
         callback = signal callback delegate or function to connect

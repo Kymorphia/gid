@@ -71,7 +71,7 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
   /**
       Get `reverse` property.
       Returns: Start splitting from the end of the string (only relevant when
-      max_splits != -1)
+        max_splits != -1)
   */
   @property bool reverse()
   {
@@ -82,7 +82,7 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
       Set `reverse` property.
       Params:
         propval = Start splitting from the end of the string (only relevant when
-        max_splits != -1)
+          max_splits != -1)
   */
   @property void reverse(bool propval)
   {

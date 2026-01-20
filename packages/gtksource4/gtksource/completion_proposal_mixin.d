@@ -157,7 +157,7 @@ template CompletionProposalT()
       Connect to `Changed` signal.
   
       Emitted when the proposal has changed. The completion popup
-      will react to this by updating the shown information.
+        will react to this by updating the shown information.
   
       Params:
         callback = signal callback delegate or function to connect

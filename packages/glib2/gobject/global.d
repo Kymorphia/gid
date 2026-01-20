@@ -150,8 +150,10 @@ void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectWrap insta
 gobject.enum_value.EnumValue enumGetValue(gobject.enum_class.EnumClass enumClass, int value)
 {
   GEnumValue* _cretval;
-  _cretval = g_enum_get_value(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, value);
-  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval, No.Take) : null;
+  _cretval = g_enum_get_value(cast(GEnumClass*)&enumClass, value);
+  gobject.enum_value.EnumValue _retval;
+  if (_cretval)
+    _retval = *cast(gobject.enum_value.EnumValue*)_cretval;
   return _retval;
 }
 
@@ -169,8 +171,10 @@ gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enu
 {
   GEnumValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = g_enum_get_value_by_name(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, _name);
-  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval, No.Take) : null;
+  _cretval = g_enum_get_value_by_name(cast(GEnumClass*)&enumClass, _name);
+  gobject.enum_value.EnumValue _retval;
+  if (_cretval)
+    _retval = *cast(gobject.enum_value.EnumValue*)_cretval;
   return _retval;
 }
 
@@ -188,8 +192,10 @@ gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enu
 {
   GEnumValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
-  _cretval = g_enum_get_value_by_nick(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, _nick);
-  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval, No.Take) : null;
+  _cretval = g_enum_get_value_by_nick(cast(GEnumClass*)&enumClass, _nick);
+  gobject.enum_value.EnumValue _retval;
+  if (_cretval)
+    _retval = *cast(gobject.enum_value.EnumValue*)_cretval;
   return _retval;
 }
 
@@ -212,7 +218,7 @@ gobject.types.GType enumRegisterStatic(string name, gobject.enum_value.EnumValue
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = g_enum_register_static(_name, constStaticValues ? cast(const(GEnumValue)*)constStaticValues._cPtr : null);
+  _retval = g_enum_register_static(_name, cast(const(GEnumValue)*)&constStaticValues);
   return _retval;
 }
 
@@ -247,8 +253,10 @@ string enumToString(gobject.types.GType gEnumType, int value)
 gobject.flags_value.FlagsValue flagsGetFirstValue(gobject.flags_class.FlagsClass flagsClass, uint value)
 {
   GFlagsValue* _cretval;
-  _cretval = g_flags_get_first_value(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, value);
-  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval, No.Take) : null;
+  _cretval = g_flags_get_first_value(cast(GFlagsClass*)&flagsClass, value);
+  gobject.flags_value.FlagsValue _retval;
+  if (_cretval)
+    _retval = *cast(gobject.flags_value.FlagsValue*)_cretval;
   return _retval;
 }
 
@@ -265,8 +273,10 @@ gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClas
 {
   GFlagsValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = g_flags_get_value_by_name(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, _name);
-  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval, No.Take) : null;
+  _cretval = g_flags_get_value_by_name(cast(GFlagsClass*)&flagsClass, _name);
+  gobject.flags_value.FlagsValue _retval;
+  if (_cretval)
+    _retval = *cast(gobject.flags_value.FlagsValue*)_cretval;
   return _retval;
 }
 
@@ -283,8 +293,10 @@ gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClas
 {
   GFlagsValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
-  _cretval = g_flags_get_value_by_nick(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, _nick);
-  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval, No.Take) : null;
+  _cretval = g_flags_get_value_by_nick(cast(GFlagsClass*)&flagsClass, _nick);
+  gobject.flags_value.FlagsValue _retval;
+  if (_cretval)
+    _retval = *cast(gobject.flags_value.FlagsValue*)_cretval;
   return _retval;
 }
 
@@ -306,7 +318,7 @@ gobject.types.GType flagsRegisterStatic(string name, gobject.flags_value.FlagsVa
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = g_flags_register_static(_name, constStaticValues ? cast(const(GFlagsValue)*)constStaticValues._cPtr : null);
+  _retval = g_flags_register_static(_name, cast(const(GFlagsValue)*)&constStaticValues);
   return _retval;
 }
 
@@ -1092,17 +1104,19 @@ gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.typ
 {
   extern(C) gboolean _hookFuncCallback(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data)
   {
+    bool _dretval;
     auto _dlg = cast(gobject.types.SignalEmissionHook*)data;
     gobject.value.Value[] _paramValues;
     _paramValues.length = nParamValues;
     foreach (i; 0 .. nParamValues)
       _paramValues[i] = new gobject.value.Value(cast(GValue*)&paramValues[i], No.Take);
 
-    gboolean _retval = (*_dlg)(*ihint, _paramValues);
+    _dretval = (*_dlg)(*cast(gobject.types.SignalInvocationHint*)ihint, _paramValues);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _hookFuncCB = hookFunc ? &_hookFuncCallback : null;
-
   gulong _retval;
   auto _hookFunc = hookFunc ? freezeDelegate(cast(void*)&hookFunc) : null;
   GDestroyNotify _hookFuncDestroyCB = hookFunc ? &thawDelegate : null;
@@ -1510,13 +1524,15 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
 {
   extern(C) gboolean _accumulatorCallback(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data)
   {
+    bool _dretval;
     auto _dlg = cast(gobject.types.SignalAccumulator*)data;
 
-    gboolean _retval = (*_dlg)(*ihint, returnAccu ? new gobject.value.Value(cast(void*)returnAccu, No.Take) : null, handlerReturn ? new gobject.value.Value(cast(void*)handlerReturn, No.Take) : null);
+    _dretval = (*_dlg)(*cast(gobject.types.SignalInvocationHint*)ihint, returnAccu ? new gobject.value.Value(cast(void*)returnAccu, No.Take) : null, handlerReturn ? new gobject.value.Value(cast(void*)handlerReturn, No.Take) : null);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _accumulatorCB = accumulator ? &_accumulatorCallback : null;
-
   extern(C) void _cMarshallerCallback(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData)
   {
     auto _dlg = cast(gobject.types.SignalCMarshaller*)marshalData;
@@ -1528,7 +1544,6 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
     (*_dlg)(closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null, returnValue ? new gobject.value.Value(cast(void*)returnValue, No.Take) : null, _paramValues, invocationHint);
   }
   auto _cMarshallerCB = cMarshaller ? &_cMarshallerCallback : null;
-
   uint _retval;
   const(char)* _signalName = signalName.toCString(No.Alloc);
   auto _accumulator = accumulator ? freezeDelegate(cast(void*)&accumulator) : null;

@@ -4504,58 +4504,6 @@ struct hb_color_stop_t
 struct hb_draw_funcs_t;
 
 /**
-    Current drawing state.
-*/
-struct hb_draw_state_t
-{
-  /**
-      Whether there is an open path
-  */
-  hb_bool_t pathOpen;
-
-  /**
-      X component of the start of current path
-  */
-  float pathStartX;
-
-  /**
-      Y component of the start of current path
-  */
-  float pathStartY;
-
-  /**
-      X component of current point
-  */
-  float currentX;
-
-  /**
-      Y component of current point
-  */
-  float currentY;
-
-  /** */
-  hb_var_num_t reserved1;
-
-  /** */
-  hb_var_num_t reserved2;
-
-  /** */
-  hb_var_num_t reserved3;
-
-  /** */
-  hb_var_num_t reserved4;
-
-  /** */
-  hb_var_num_t reserved5;
-
-  /** */
-  hb_var_num_t reserved6;
-
-  /** */
-  hb_var_num_t reserved7;
-}
-
-/**
     Data type for holding font faces.
 */
 struct hb_face_t;
@@ -4686,78 +4634,6 @@ struct hb_glyph_extents_t
       Distance from the top extremum of the glyph to the bottom extremum.
   */
   hb_position_t height;
-}
-
-/**
-    The #hb_glyph_info_t is the structure that holds information about the
-    glyphs and their relation to input text.
-*/
-struct hb_glyph_info_t
-{
-  /**
-      either a Unicode code point (before shaping) or a glyph index
-                  (after shaping).
-  */
-  hb_codepoint_t codepoint;
-
-  /** */
-  hb_mask_t mask;
-
-  /**
-      the index of the character in the original text that corresponds
-                to this #hb_glyph_info_t, or whatever the client passes to
-                [harfbuzz.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
-                @cluster value, if they resulted from the same character (e.g. one
-                to many glyph substitution), and when more than one character gets
-                merged in the same glyph (e.g. many to one glyph substitution) the
-                #hb_glyph_info_t will have the smallest cluster value of them.
-                By default some characters are merged into the same cluster
-                (e.g. combining marks have the same cluster as their bases)
-                even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
-                allow selecting more fine-grained cluster handling.
-  */
-  uint cluster;
-
-  /** */
-  hb_var_int_t var1;
-
-  /** */
-  hb_var_int_t var2;
-}
-
-/**
-    The #hb_glyph_position_t is the structure that holds the positions of the
-    glyph in both horizontal and vertical directions. All positions in
-    #hb_glyph_position_t are relative to the current point.
-*/
-struct hb_glyph_position_t
-{
-  /**
-      how much the line advances after drawing this glyph when setting
-                  text in horizontal direction.
-  */
-  hb_position_t xAdvance;
-
-  /**
-      how much the line advances after drawing this glyph when setting
-                  text in vertical direction.
-  */
-  hb_position_t yAdvance;
-
-  /**
-      how much the glyph moves on the X-axis before drawing it, this
-                 should not affect how much the line advances.
-  */
-  hb_position_t xOffset;
-
-  /**
-      how much the glyph moves on the Y-axis before drawing it, this
-                 should not affect how much the line advances.
-  */
-  hb_position_t yOffset;
-
-  /** */
-  hb_var_int_t var;
 }
 
 /**
@@ -5115,6 +4991,130 @@ struct hb_variation_t
       The value of the variation axis
   */
   float value;
+}
+
+/**
+    Current drawing state.
+*/
+struct hb_draw_state_t
+{
+  /**
+      Whether there is an open path
+  */
+  hb_bool_t pathOpen;
+
+  /**
+      X component of the start of current path
+  */
+  float pathStartX;
+
+  /**
+      Y component of the start of current path
+  */
+  float pathStartY;
+
+  /**
+      X component of current point
+  */
+  float currentX;
+
+  /**
+      Y component of current point
+  */
+  float currentY;
+
+  /** */
+  hb_var_num_t reserved1;
+
+  /** */
+  hb_var_num_t reserved2;
+
+  /** */
+  hb_var_num_t reserved3;
+
+  /** */
+  hb_var_num_t reserved4;
+
+  /** */
+  hb_var_num_t reserved5;
+
+  /** */
+  hb_var_num_t reserved6;
+
+  /** */
+  hb_var_num_t reserved7;
+}
+
+/**
+    The #hb_glyph_info_t is the structure that holds information about the
+    glyphs and their relation to input text.
+*/
+struct hb_glyph_info_t
+{
+  /**
+      either a Unicode code point (before shaping) or a glyph index
+                  (after shaping).
+  */
+  hb_codepoint_t codepoint;
+
+  /** */
+  hb_mask_t mask;
+
+  /**
+      the index of the character in the original text that corresponds
+                to this #hb_glyph_info_t, or whatever the client passes to
+                [harfbuzz.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
+                @cluster value, if they resulted from the same character (e.g. one
+                to many glyph substitution), and when more than one character gets
+                merged in the same glyph (e.g. many to one glyph substitution) the
+                #hb_glyph_info_t will have the smallest cluster value of them.
+                By default some characters are merged into the same cluster
+                (e.g. combining marks have the same cluster as their bases)
+                even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
+                allow selecting more fine-grained cluster handling.
+  */
+  uint cluster;
+
+  /** */
+  hb_var_int_t var1;
+
+  /** */
+  hb_var_int_t var2;
+}
+
+/**
+    The #hb_glyph_position_t is the structure that holds the positions of the
+    glyph in both horizontal and vertical directions. All positions in
+    #hb_glyph_position_t are relative to the current point.
+*/
+struct hb_glyph_position_t
+{
+  /**
+      how much the line advances after drawing this glyph when setting
+                  text in horizontal direction.
+  */
+  hb_position_t xAdvance;
+
+  /**
+      how much the line advances after drawing this glyph when setting
+                  text in vertical direction.
+  */
+  hb_position_t yAdvance;
+
+  /**
+      how much the glyph moves on the X-axis before drawing it, this
+                 should not affect how much the line advances.
+  */
+  hb_position_t xOffset;
+
+  /**
+      how much the glyph moves on the Y-axis before drawing it, this
+                 should not affect how much the line advances.
+  */
+  hb_position_t yOffset;
+
+  /** */
+  hb_var_int_t var;
 }
 
 alias extern(C) hb_bool_t function(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData) hb_buffer_message_func_t;

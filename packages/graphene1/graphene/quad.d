@@ -35,7 +35,7 @@ class Quad : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -94,7 +94,7 @@ class Quad : gobject.boxed.Boxed
   bool contains(graphene.point.Point p)
   {
     bool _retval;
-    _retval = cast(bool)graphene_quad_contains(cast(const(graphene_quad_t)*)this._cPtr, p ? cast(const(graphene_point_t)*)p._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_quad_contains(cast(const(graphene_quad_t)*)this._cPtr, cast(const(graphene_point_t)*)&p);
     return _retval;
   }
 
@@ -109,7 +109,9 @@ class Quad : gobject.boxed.Boxed
   {
     const(graphene_point_t)* _cretval;
     _cretval = graphene_quad_get_point(cast(const(graphene_quad_t)*)this._cPtr, index);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
+    graphene.point.Point _retval;
+    if (_cretval)
+      _retval = *cast(graphene.point.Point*)_cretval;
     return _retval;
   }
 
@@ -126,7 +128,7 @@ class Quad : gobject.boxed.Boxed
   graphene.quad.Quad init_(graphene.point.Point p1, graphene.point.Point p2, graphene.point.Point p3, graphene.point.Point p4)
   {
     graphene_quad_t* _cretval;
-    _cretval = graphene_quad_init(cast(graphene_quad_t*)this._cPtr, p1 ? cast(const(graphene_point_t)*)p1._cPtr(No.Dup) : null, p2 ? cast(const(graphene_point_t)*)p2._cPtr(No.Dup) : null, p3 ? cast(const(graphene_point_t)*)p3._cPtr(No.Dup) : null, p4 ? cast(const(graphene_point_t)*)p4._cPtr(No.Dup) : null);
+    _cretval = graphene_quad_init(cast(graphene_quad_t*)this._cPtr, cast(const(graphene_point_t)*)&p1, cast(const(graphene_point_t)*)&p2, cast(const(graphene_point_t)*)&p3, cast(const(graphene_point_t)*)&p4);
     auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -142,10 +144,7 @@ class Quad : gobject.boxed.Boxed
   {
     graphene_quad_t* _cretval;
     assert(!points || points.length == 4);
-    graphene_point_t[] _tmppoints;
-    foreach (obj; points)
-      _tmppoints ~= *cast(graphene_point_t*)obj._cPtr;
-    const(graphene_point_t)* _points = _tmppoints.ptr;
+    auto _points = cast(const(graphene_point_t)*)points.ptr;
     _cretval = graphene_quad_init_from_points(cast(graphene_quad_t*)this._cPtr, _points);
     auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, No.Take) : null;
     return _retval;

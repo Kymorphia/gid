@@ -1,114 +1,28 @@
-/// Module for [Rectangle] class
+/// Module for [Rectangle] struct
 module gdk.rectangle;
 
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
-import gobject.boxed;
 
 /**
     Defines the position and size of a rectangle. It is identical to
     #cairo_rectangle_int_t.
 */
-class Rectangle : gobject.boxed.Boxed
+struct Rectangle
 {
-
-  /**
-      Create a `rectangle.Rectangle` boxed type.
-      Params:
-        x = 
-        y = 
-        width = 
-        height = 
-  */
-  this(int x = int.init, int y = int.init, int width = int.init, int height = int.init)
-  {
-    super(gMalloc(GdkRectangle.sizeof), Yes.Take);
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-  }
+  /** */
+  int x;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
+  int y;
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
+  int width;
 
   /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gdk_rectangle_get_type != &gidSymbolNotFound ? gdk_rectangle_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Rectangle self()
-  {
-    return this;
-  }
-
-  /** */
-  @property int x()
-  {
-    return (cast(GdkRectangle*)this._cPtr).x;
-  }
-
-  /** */
-  @property void x(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).x = propval;
-  }
-
-  /** */
-  @property int y()
-  {
-    return (cast(GdkRectangle*)this._cPtr).y;
-  }
-
-  /** */
-  @property void y(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).y = propval;
-  }
-
-  /** */
-  @property int width()
-  {
-    return (cast(GdkRectangle*)this._cPtr).width;
-  }
-
-  /** */
-  @property void width(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).width = propval;
-  }
-
-  /** */
-  @property int height()
-  {
-    return (cast(GdkRectangle*)this._cPtr).height;
-  }
-
-  /** */
-  @property void height(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).height = propval;
-  }
+  int height;
 
   /**
       Checks if the two given rectangles are equal.
@@ -120,7 +34,7 @@ class Rectangle : gobject.boxed.Boxed
   bool equal(gdk.rectangle.Rectangle rect2)
   {
     bool _retval;
-    _retval = cast(bool)gdk_rectangle_equal(cast(const(GdkRectangle)*)this._cPtr, rect2 ? cast(const(GdkRectangle)*)rect2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_rectangle_equal(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&rect2);
     return _retval;
   }
 
@@ -141,9 +55,7 @@ class Rectangle : gobject.boxed.Boxed
   bool intersect(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
   {
     bool _retval;
-    GdkRectangle _dest;
-    _retval = cast(bool)gdk_rectangle_intersect(cast(const(GdkRectangle)*)this._cPtr, src2 ? cast(const(GdkRectangle)*)src2._cPtr(No.Dup) : null, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
+    _retval = cast(bool)gdk_rectangle_intersect(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&src2, cast(GdkRectangle*)&dest);
     return _retval;
   }
 
@@ -162,8 +74,6 @@ class Rectangle : gobject.boxed.Boxed
   */
   void union_(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
   {
-    GdkRectangle _dest;
-    gdk_rectangle_union(cast(const(GdkRectangle)*)this._cPtr, src2 ? cast(const(GdkRectangle)*)src2._cPtr(No.Dup) : null, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
+    gdk_rectangle_union(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&src2, cast(GdkRectangle*)&dest);
   }
 }

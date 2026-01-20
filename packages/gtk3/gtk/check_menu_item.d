@@ -233,9 +233,9 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Connect to `Toggled` signal.
   
       This signal is emitted when the state of the check box is changed.
-      
-      A signal handler can use [gtk.check_menu_item.CheckMenuItem.getActive]
-      to discover the new state.
+        
+        A signal handler can use [gtk.check_menu_item.CheckMenuItem.getActive]
+        to discover the new state.
   
       Params:
         callback = signal callback delegate or function to connect

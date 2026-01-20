@@ -8448,12 +8448,12 @@ struct GstTypeFind
   /**
       Method to peek data.
   */
-  extern(C) const(ubyte)* function(void* data, long offset, uint size) peek;
+  extern(C) const(ubyte)* function(void* data, long offset, uint size) peekFunc;
 
   /**
       Method to suggest #GstCaps with a given probability.
   */
-  extern(C) void function(void* data, uint probability, GstCaps* caps) suggest;
+  extern(C) void function(void* data, uint probability, GstCaps* caps) suggestFunc;
 
   /**
       The data used by the caller of the typefinding function.
@@ -8463,7 +8463,7 @@ struct GstTypeFind
   /**
       Returns the length of current data.
   */
-  extern(C) ulong function(void* data) getLength;
+  extern(C) ulong function(void* data) getLengthFunc;
 
   /** */
   void*[4] GstReserved;

@@ -48,7 +48,7 @@ class DateTime : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -207,7 +207,7 @@ class DateTime : gobject.boxed.Boxed
   static glib.date_time.DateTime newFromTimevalLocal(glib.time_val.TimeVal tv)
   {
     GDateTime* _cretval;
-    _cretval = g_date_time_new_from_timeval_local(tv ? cast(const(GTimeVal)*)tv._cPtr : null);
+    _cretval = g_date_time_new_from_timeval_local(cast(const(GTimeVal)*)&tv);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -234,7 +234,7 @@ class DateTime : gobject.boxed.Boxed
   static glib.date_time.DateTime newFromTimevalUtc(glib.time_val.TimeVal tv)
   {
     GDateTime* _cretval;
-    _cretval = g_date_time_new_from_timeval_utc(tv ? cast(const(GTimeVal)*)tv._cPtr : null);
+    _cretval = g_date_time_new_from_timeval_utc(cast(const(GTimeVal)*)&tv);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1132,7 +1132,7 @@ class DateTime : gobject.boxed.Boxed
   bool toTimeval(glib.time_val.TimeVal tv)
   {
     bool _retval;
-    _retval = cast(bool)g_date_time_to_timeval(cast(GDateTime*)this._cPtr, tv ? cast(GTimeVal*)tv._cPtr : null);
+    _retval = cast(bool)g_date_time_to_timeval(cast(GDateTime*)this._cPtr, cast(GTimeVal*)&tv);
     return _retval;
   }
 

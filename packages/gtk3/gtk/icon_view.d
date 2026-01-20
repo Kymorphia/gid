@@ -81,7 +81,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `activateOnSingleClick` property.
       Returns: The activate-on-single-click property specifies whether the "item-activated" signal
-      will be emitted after a single click.
+        will be emitted after a single click.
   */
   @property bool activateOnSingleClick()
   {
@@ -92,7 +92,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `activateOnSingleClick` property.
       Params:
         propval = The activate-on-single-click property specifies whether the "item-activated" signal
-        will be emitted after a single click.
+          will be emitted after a single click.
   */
   @property void activateOnSingleClick(bool propval)
   {
@@ -102,7 +102,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `columnSpacing` property.
       Returns: The column-spacing property specifies the space which is inserted between
-      the columns of the icon view.
+        the columns of the icon view.
   */
   @property int columnSpacing()
   {
@@ -113,7 +113,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `columnSpacing` property.
       Params:
         propval = The column-spacing property specifies the space which is inserted between
-        the columns of the icon view.
+          the columns of the icon view.
   */
   @property void columnSpacing(int propval)
   {
@@ -123,8 +123,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `columns` property.
       Returns: The columns property contains the number of the columns in which the
-      items should be displayed. If it is -1, the number of columns will
-      be chosen automatically to fill the available area.
+        items should be displayed. If it is -1, the number of columns will
+        be chosen automatically to fill the available area.
   */
   @property int columns()
   {
@@ -135,8 +135,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `columns` property.
       Params:
         propval = The columns property contains the number of the columns in which the
-        items should be displayed. If it is -1, the number of columns will
-        be chosen automatically to fill the available area.
+          items should be displayed. If it is -1, the number of columns will
+          be chosen automatically to fill the available area.
   */
   @property void columns(int propval)
   {
@@ -146,7 +146,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `itemOrientation` property.
       Returns: The item-orientation property specifies how the cells (i.e. the icon and
-      the text) of the item are positioned relative to each other.
+        the text) of the item are positioned relative to each other.
   */
   @property gtk.types.Orientation itemOrientation()
   {
@@ -157,7 +157,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `itemOrientation` property.
       Params:
         propval = The item-orientation property specifies how the cells (i.e. the icon and
-        the text) of the item are positioned relative to each other.
+          the text) of the item are positioned relative to each other.
   */
   @property void itemOrientation(gtk.types.Orientation propval)
   {
@@ -167,7 +167,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `itemPadding` property.
       Returns: The item-padding property specifies the padding around each
-      of the icon view's item.
+        of the icon view's item.
   */
   @property int itemPadding()
   {
@@ -178,7 +178,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `itemPadding` property.
       Params:
         propval = The item-padding property specifies the padding around each
-        of the icon view's item.
+          of the icon view's item.
   */
   @property void itemPadding(int propval)
   {
@@ -188,8 +188,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `itemWidth` property.
       Returns: The item-width property specifies the width to use for each item.
-      If it is set to -1, the icon view will automatically determine a
-      suitable item size.
+        If it is set to -1, the icon view will automatically determine a
+        suitable item size.
   */
   @property int itemWidth()
   {
@@ -200,8 +200,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `itemWidth` property.
       Params:
         propval = The item-width property specifies the width to use for each item.
-        If it is set to -1, the icon view will automatically determine a
-        suitable item size.
+          If it is set to -1, the icon view will automatically determine a
+          suitable item size.
   */
   @property void itemWidth(int propval)
   {
@@ -211,7 +211,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `margin` property.
       Returns: The margin property specifies the space which is inserted
-      at the edges of the icon view.
+        at the edges of the icon view.
   */
   override @property int margin()
   {
@@ -222,7 +222,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `margin` property.
       Params:
         propval = The margin property specifies the space which is inserted
-        at the edges of the icon view.
+          at the edges of the icon view.
   */
   override @property void margin(int propval)
   {
@@ -232,10 +232,10 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `markupColumn` property.
       Returns: The ::markup-column property contains the number of the model column
-      containing markup information to be displayed. The markup column must be
-      of type #G_TYPE_STRING. If this property and the :text-column property
-      are both set to column numbers, it overrides the text column.
-      If both are set to -1, no texts are displayed.
+        containing markup information to be displayed. The markup column must be
+        of type #G_TYPE_STRING. If this property and the :text-column property
+        are both set to column numbers, it overrides the text column.
+        If both are set to -1, no texts are displayed.
   */
   @property int markupColumn()
   {
@@ -246,10 +246,10 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `markupColumn` property.
       Params:
         propval = The ::markup-column property contains the number of the model column
-        containing markup information to be displayed. The markup column must be
-        of type #G_TYPE_STRING. If this property and the :text-column property
-        are both set to column numbers, it overrides the text column.
-        If both are set to -1, no texts are displayed.
+          containing markup information to be displayed. The markup column must be
+          of type #G_TYPE_STRING. If this property and the :text-column property
+          are both set to column numbers, it overrides the text column.
+          If both are set to -1, no texts are displayed.
   */
   @property void markupColumn(int propval)
   {
@@ -271,9 +271,9 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `pixbufColumn` property.
       Returns: The ::pixbuf-column property contains the number of the model column
-      containing the pixbufs which are displayed. The pixbuf column must be
-      of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
-      display of pixbufs.
+        containing the pixbufs which are displayed. The pixbuf column must be
+        of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
+        display of pixbufs.
   */
   @property int pixbufColumn()
   {
@@ -284,9 +284,9 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `pixbufColumn` property.
       Params:
         propval = The ::pixbuf-column property contains the number of the model column
-        containing the pixbufs which are displayed. The pixbuf column must be
-        of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
-        display of pixbufs.
+          containing the pixbufs which are displayed. The pixbuf column must be
+          of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
+          display of pixbufs.
   */
   @property void pixbufColumn(int propval)
   {
@@ -296,7 +296,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `reorderable` property.
       Returns: The reorderable property specifies if the items can be reordered
-      by DND.
+        by DND.
   */
   @property bool reorderable()
   {
@@ -307,7 +307,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `reorderable` property.
       Params:
         propval = The reorderable property specifies if the items can be reordered
-        by DND.
+          by DND.
   */
   @property void reorderable(bool propval)
   {
@@ -317,7 +317,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `rowSpacing` property.
       Returns: The row-spacing property specifies the space which is inserted between
-      the rows of the icon view.
+        the rows of the icon view.
   */
   @property int rowSpacing()
   {
@@ -328,7 +328,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `rowSpacing` property.
       Params:
         propval = The row-spacing property specifies the space which is inserted between
-        the rows of the icon view.
+          the rows of the icon view.
   */
   @property void rowSpacing(int propval)
   {
@@ -338,8 +338,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `selectionMode` property.
       Returns: The ::selection-mode property specifies the selection mode of
-      icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
-      is enabled, for the other modes, only keyboard selection is possible.
+        icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
+        is enabled, for the other modes, only keyboard selection is possible.
   */
   @property gtk.types.SelectionMode selectionMode()
   {
@@ -350,8 +350,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `selectionMode` property.
       Params:
         propval = The ::selection-mode property specifies the selection mode of
-        icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
-        is enabled, for the other modes, only keyboard selection is possible.
+          icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
+          is enabled, for the other modes, only keyboard selection is possible.
   */
   @property void selectionMode(gtk.types.SelectionMode propval)
   {
@@ -361,7 +361,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `spacing` property.
       Returns: The spacing property specifies the space which is inserted between
-      the cells (i.e. the icon and the text) of an item.
+        the cells (i.e. the icon and the text) of an item.
   */
   @property int spacing()
   {
@@ -372,7 +372,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `spacing` property.
       Params:
         propval = The spacing property specifies the space which is inserted between
-        the cells (i.e. the icon and the text) of an item.
+          the cells (i.e. the icon and the text) of an item.
   */
   @property void spacing(int propval)
   {
@@ -382,9 +382,9 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Get `textColumn` property.
       Returns: The ::text-column property contains the number of the model column
-      containing the texts which are displayed. The text column must be
-      of type #G_TYPE_STRING. If this property and the :markup-column
-      property are both set to -1, no texts are displayed.
+        containing the texts which are displayed. The text column must be
+        of type #G_TYPE_STRING. If this property and the :markup-column
+        property are both set to -1, no texts are displayed.
   */
   @property int textColumn()
   {
@@ -395,9 +395,9 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Set `textColumn` property.
       Params:
         propval = The ::text-column property contains the number of the model column
-        containing the texts which are displayed. The text column must be
-        of type #G_TYPE_STRING. If this property and the :markup-column
-        property are both set to -1, no texts are displayed.
+          containing the texts which are displayed. The text column must be
+          of type #G_TYPE_STRING. If this property and the :markup-column
+          property are both set to -1, no texts are displayed.
   */
   @property void textColumn(int propval)
   {
@@ -512,6 +512,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)this._cPtr, _targets, _nTargets, actions);
   }
 
@@ -536,6 +537,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)this._cPtr, startButtonMask, _targets, _nTargets, actions);
   }
 
@@ -565,9 +567,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   bool getCellRect(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
-    GdkRectangle _rect;
-    _retval = cast(bool)gtk_icon_view_get_cell_rect(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    _retval = cast(bool)gtk_icon_view_get_cell_rect(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, cast(GdkRectangle*)&rect);
     return _retval;
   }
 
@@ -931,11 +931,9 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     bool _retval;
     GtkTreeModel* _model;
     GtkTreePath* _path;
-    GtkTreeIter _iter;
-    _retval = cast(bool)gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, cast(int*)&x, cast(int*)&y, keyboardTip, &_model, &_path, &_iter);
+    _retval = cast(bool)gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, cast(int*)&x, cast(int*)&y, keyboardTip, &_model, &_path, cast(GtkTreeIter*)&iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -1051,7 +1049,6 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gtk_icon_view_selected_foreach(cast(GtkIconView*)this._cPtr, _funcCB, _func);
   }
@@ -1378,14 +1375,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `ActivateCursorItem` signal.
   
       A [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user activates the currently
-      focused item.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control activation
-      programmatically.
-      
-      The default bindings for this signal are Space, Return and Enter.
+        which gets emitted when the user activates the currently
+        focused item.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control activation
+        programmatically.
+        
+        The default bindings for this signal are Space, Return and Enter.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1425,12 +1422,12 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `ItemActivated` signal.
   
       The ::item-activated signal is emitted when the method
-      [gtk.icon_view.IconView.itemActivated] is called, when the user double
-      clicks an item with the "activate-on-single-click" property set
-      to false, or when the user single clicks an item when the
-      "activate-on-single-click" property set to true. It is also
-      emitted when a non-editable item is selected and one of the keys:
-      Space, Return or Enter is pressed.
+        [gtk.icon_view.IconView.itemActivated] is called, when the user double
+        clicks an item with the "activate-on-single-click" property set
+        to false, or when the user single clicks an item when the
+        "activate-on-single-click" property set to true. It is also
+        emitted when a non-editable item is selected and one of the keys:
+        Space, Return or Enter is pressed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1475,21 +1472,21 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `MoveCursor` signal.
   
       The ::move-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a cursor movement.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal include
-      $(LIST
-        * Arrow keys which move by individual steps
-        * Home/End keys which move to the first/last item
-        * PageUp/PageDown which move by "pages"
-      )
-      All of these will extend the selection when combined with
-      the Shift modifier.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates a cursor movement.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal include
+        $(LIST
+          * Arrow keys which move by individual steps
+          * Home/End keys which move to the first/last item
+          * PageUp/PageDown which move by "pages"
+        )
+        All of these will extend the selection when combined with
+        the Shift modifier.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1543,13 +1540,13 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `SelectAll` signal.
   
       A [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user selects all items.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control selection
-      programmatically.
-      
-      The default binding for this signal is Ctrl-a.
+        which gets emitted when the user selects all items.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control selection
+        programmatically.
+        
+        The default binding for this signal is Ctrl-a.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1587,14 +1584,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `SelectCursorItem` signal.
   
       A [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user selects the item that is currently
-      focused.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control selection
-      programmatically.
-      
-      There is no default binding for this signal.
+        which gets emitted when the user selects the item that is currently
+        focused.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control selection
+        programmatically.
+        
+        There is no default binding for this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1632,7 +1629,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `SelectionChanged` signal.
   
       The ::selection-changed signal is emitted when the selection
-      (i.e. the set of selected items) changes.
+        (i.e. the set of selected items) changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1670,15 +1667,15 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `ToggleCursorItem` signal.
   
       A [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user toggles whether the currently
-      focused item is selected or not. The exact effect of this
-      depend on the selection mode.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control selection
-      programmatically.
-      
-      There is no default binding for this signal is Ctrl-Space.
+        which gets emitted when the user toggles whether the currently
+        focused item is selected or not. The exact effect of this
+        depend on the selection mode.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control selection
+        programmatically.
+        
+        There is no default binding for this signal is Ctrl-Space.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1716,13 +1713,13 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Connect to `UnselectAll` signal.
   
       A [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user unselects all items.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control selection
-      programmatically.
-      
-      The default binding for this signal is Ctrl-Shift-a.
+        which gets emitted when the user unselects all items.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control selection
+        programmatically.
+        
+        The default binding for this signal is Ctrl-Shift-a.
   
       Params:
         callback = signal callback delegate or function to connect

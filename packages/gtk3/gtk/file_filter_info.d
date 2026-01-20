@@ -12,7 +12,7 @@ import gtk.types;
 */
 class FileFilterInfo
 {
-  GtkFileFilterInfo cInstance;
+  GtkFileFilterInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class FileFilterInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.file_filter_info.FileFilterInfo");
 
-    cInstance = *cast(GtkFileFilterInfo*)ptr;
+    _cInstance = *cast(GtkFileFilterInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,13 +29,13 @@ class FileFilterInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `contains` field.
       Returns: Flags indicating which of the following fields need
-        are filled
+          are filled
   */
   @property gtk.types.FileFilterFlags contains()
   {
@@ -46,7 +46,7 @@ class FileFilterInfo
       Set `contains` field.
       Params:
         propval = Flags indicating which of the following fields need
-          are filled
+            are filled
   */
   @property void contains(gtk.types.FileFilterFlags propval)
   {
@@ -96,7 +96,7 @@ class FileFilterInfo
   /**
       Get `displayName` field.
       Returns: the string that will be used to display the file
-        in the file chooser
+          in the file chooser
   */
   @property string displayName()
   {
@@ -107,7 +107,7 @@ class FileFilterInfo
       Set `displayName` field.
       Params:
         propval = the string that will be used to display the file
-          in the file chooser
+            in the file chooser
   */
   @property void displayName(string propval)
   {

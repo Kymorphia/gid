@@ -187,6 +187,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
+
     _cretval = gst_element_factory_make_with_properties(_factoryname, _n, _names, _values);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
@@ -297,6 +298,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
+
     _cretval = gst_element_factory_create_with_properties(cast(GstElementFactory*)this._cPtr, _n, _names, _values);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
@@ -347,8 +349,8 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -397,8 +399,8 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);

@@ -67,7 +67,7 @@ class PathBuilder : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -130,7 +130,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addCircle(graphene.point.Point center, float radius)
   {
-    gsk_path_builder_add_circle(cast(GskPathBuilder*)this._cPtr, center ? cast(const(graphene_point_t)*)center._cPtr(No.Dup) : null, radius);
+    gsk_path_builder_add_circle(cast(GskPathBuilder*)this._cPtr, cast(const(graphene_point_t)*)&center, radius);
   }
 
   /**
@@ -327,7 +327,9 @@ class PathBuilder : gobject.boxed.Boxed
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_path_builder_get_current_point(cast(GskPathBuilder*)this._cPtr);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
+    graphene.point.Point _retval;
+    if (_cretval)
+      _retval = *cast(graphene.point.Point*)_cretval;
     return _retval;
   }
 

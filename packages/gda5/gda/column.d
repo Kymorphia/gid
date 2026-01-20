@@ -210,7 +210,6 @@ class Column : gobject.object.ObjectWrap
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     const(char)* _attribute = attribute.toCString(No.Alloc);
     gda_column_set_attribute(cast(GdaColumn*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }

@@ -9,7 +9,7 @@ import gstvideo.types;
 /** */
 class VideoChromaResample
 {
-  GstVideoChromaResample* cInstancePtr;
+  GstVideoChromaResample* _cInstancePtr;
   bool owned;
 
   /** */
@@ -18,7 +18,7 @@ class VideoChromaResample
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_chroma_resample.VideoChromaResample");
 
-    cInstancePtr = cast(GstVideoChromaResample*)ptr;
+    _cInstancePtr = cast(GstVideoChromaResample*)ptr;
 
     owned = take;
   }
@@ -26,7 +26,7 @@ class VideoChromaResample
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

@@ -5,7 +5,6 @@ public import atk.component_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.object;
-public import atk.rectangle;
 public import atk.types;
 public import gid.gid;
 public import gobject.dclosure;
@@ -289,12 +288,12 @@ template ComponentT()
       Connect to `BoundsChanged` signal.
   
       The 'bounds-changed" signal is emitted when the position or
-      size of the component changes.
+        size of the component changes.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.rectangle.Rectangle arg1, atk.component.Component component))
+          $(D void callback(atk.types.Rectangle arg1, atk.component.Component component))
   
           `arg1` The AtkRectangle giving the new position and size. (optional)
   
@@ -306,7 +305,7 @@ template ComponentT()
   ulong connectBoundsChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == atk.rectangle.Rectangle)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == atk.types.Rectangle)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.component.Component)))
   && Parameters!T.length < 3)
   {

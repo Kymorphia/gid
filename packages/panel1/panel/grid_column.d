@@ -67,7 +67,6 @@ class GridColumn : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
     panel_grid_column_foreach_frame(cast(PanelGridColumn*)this._cPtr, _callbackCB, _callback);
   }

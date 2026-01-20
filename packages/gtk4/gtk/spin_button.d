@@ -169,8 +169,8 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   /**
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when the spin button is activated.
-      
-      See [gtk.spin_button.SpinButton.activate] for what counts as activation.
+        
+        See [gtk.spin_button.SpinButton.activate] for what counts as activation.
   */
   @property bool activatesDefault()
   {
@@ -181,8 +181,8 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Set `activatesDefault` property.
       Params:
         propval = Whether to activate the default widget when the spin button is activated.
-        
-        See [gtk.spin_button.SpinButton.activate] for what counts as activation.
+          
+          See [gtk.spin_button.SpinButton.activate] for what counts as activation.
   */
   @property void activatesDefault(bool propval)
   {
@@ -268,7 +268,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   /**
       Get `snapToTicks` property.
       Returns: Whether erroneous values are automatically changed to the spin buttons
-      nearest step increment.
+        nearest step increment.
   */
   @property bool snapToTicks()
   {
@@ -279,7 +279,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Set `snapToTicks` property.
       Params:
         propval = Whether erroneous values are automatically changed to the spin buttons
-        nearest step increment.
+          nearest step increment.
   */
   @property void snapToTicks(bool propval)
   {
@@ -289,7 +289,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   /**
       Get `updatePolicy` property.
       Returns: Whether the spin button should update always, or only when the value
-      is acceptable.
+        is acceptable.
   */
   @property gtk.types.SpinButtonUpdatePolicy updatePolicy()
   {
@@ -300,7 +300,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Set `updatePolicy` property.
       Params:
         propval = Whether the spin button should update always, or only when the value
-        is acceptable.
+          is acceptable.
   */
   @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
   {
@@ -727,12 +727,12 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Connect to `Activate` signal.
   
       Emitted when the spin button is activated.
-      
-      The keybindings for this signal are all forms of the <kbd>Enter</kbd> key.
-      
-      If the <kbd>Enter</kbd> key results in the value being committed to the
-      spin button, then activation does not occur until <kbd>Enter</kbd> is
-      pressed again.
+        
+        The keybindings for this signal are all forms of the <kbd>Enter</kbd> key.
+        
+        If the <kbd>Enter</kbd> key results in the value being committed to the
+        spin button, then activation does not occur until <kbd>Enter</kbd> is
+        pressed again.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -770,14 +770,14 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Connect to `ChangeValue` signal.
   
       Emitted when the user initiates a value change.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal are Up/Down and PageUp/PageDown.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal are Up/Down and PageUp/PageDown.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -822,24 +822,24 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Connect to `Output` signal.
   
       Emitted to tweak the formatting of the value for display.
-      
-      ```c
-      // show leading zeros
-      static gboolean
-      on_output (GtkSpinButton *spin,
-                 gpointer       data)
-      {
-         char *text;
-         int value;
-      
-         value = gtk_spin_button_get_value_as_int (spin);
-         text = g_strdup_printf ("%02d", value);
-         gtk_editable_set_text (GTK_EDITABLE (spin), text):
-         g_free (text);
-      
-         return TRUE;
-      }
-      ```
+        
+        ```c
+        // show leading zeros
+        static gboolean
+        on_output (GtkSpinButton *spin,
+                   gpointer       data)
+        {
+           char *text;
+           int value;
+        
+           value = gtk_spin_button_get_value_as_int (spin);
+           text = g_strdup_printf ("%02d", value);
+           gtk_editable_set_text (GTK_EDITABLE (spin), text):
+           g_free (text);
+        
+           return TRUE;
+        }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -879,8 +879,8 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Connect to `ValueChanged` signal.
   
       Emitted when the value is changed.
-      
-      Also see the [gtk.spin_button.SpinButton.output] signal.
+        
+        Also see the [gtk.spin_button.SpinButton.output] signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -918,7 +918,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Connect to `Wrapped` signal.
   
       Emitted right after the spinbutton wraps from its maximum
-      to its minimum value or vice-versa.
+        to its minimum value or vice-versa.
   
       Params:
         callback = signal callback delegate or function to connect

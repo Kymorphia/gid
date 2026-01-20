@@ -281,9 +281,9 @@ class EntryBuffer : gobject.object.ObjectWrap
       Connect to `DeletedText` signal.
   
       The text is altered in the default handler for this signal.
-      
-      If you want access to the text after the text has been modified,
-      use `G_CONNECT_AFTER`.
+        
+        If you want access to the text after the text has been modified,
+        use `G_CONNECT_AFTER`.
   
       Params:
         callback = signal callback delegate or function to connect

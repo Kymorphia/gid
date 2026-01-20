@@ -1,4 +1,4 @@
-/// Module for [RWLock] class
+/// Module for [RWLock] struct
 module glib.rwlock;
 
 import gid.gid;
@@ -71,27 +71,13 @@ import glib.types;
     
     A GRWLock should only be accessed with the g_rw_lock_ functions.
 */
-class RWLock
+struct RWLock
 {
-  GRWLock cInstance;
+  /** */
+  void* p;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.rwlock.RWLock");
-
-    cInstance = *cast(GRWLock*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  uint[2] i;
 
   /**
       Frees the resources allocated to a lock with [glib.rwlock.RWLock.init_].
@@ -104,7 +90,7 @@ class RWLock
   */
   void clear()
   {
-    g_rw_lock_clear(cast(GRWLock*)this._cPtr);
+    g_rw_lock_clear(cast(GRWLock*)&this);
   }
 
   /**
@@ -135,7 +121,7 @@ class RWLock
   */
   void init_()
   {
-    g_rw_lock_init(cast(GRWLock*)this._cPtr);
+    g_rw_lock_init(cast(GRWLock*)&this);
   }
 
   /**
@@ -157,7 +143,7 @@ class RWLock
   */
   void readerLock()
   {
-    g_rw_lock_reader_lock(cast(GRWLock*)this._cPtr);
+    g_rw_lock_reader_lock(cast(GRWLock*)&this);
   }
 
   /**
@@ -169,7 +155,7 @@ class RWLock
   bool readerTrylock()
   {
     bool _retval;
-    _retval = cast(bool)g_rw_lock_reader_trylock(cast(GRWLock*)this._cPtr);
+    _retval = cast(bool)g_rw_lock_reader_trylock(cast(GRWLock*)&this);
     return _retval;
   }
 
@@ -181,7 +167,7 @@ class RWLock
   */
   void readerUnlock()
   {
-    g_rw_lock_reader_unlock(cast(GRWLock*)this._cPtr);
+    g_rw_lock_reader_unlock(cast(GRWLock*)&this);
   }
 
   /**
@@ -194,7 +180,7 @@ class RWLock
   */
   void writerLock()
   {
-    g_rw_lock_writer_lock(cast(GRWLock*)this._cPtr);
+    g_rw_lock_writer_lock(cast(GRWLock*)&this);
   }
 
   /**
@@ -207,7 +193,7 @@ class RWLock
   bool writerTrylock()
   {
     bool _retval;
-    _retval = cast(bool)g_rw_lock_writer_trylock(cast(GRWLock*)this._cPtr);
+    _retval = cast(bool)g_rw_lock_writer_trylock(cast(GRWLock*)&this);
     return _retval;
   }
 
@@ -219,6 +205,6 @@ class RWLock
   */
   void writerUnlock()
   {
-    g_rw_lock_writer_unlock(cast(GRWLock*)this._cPtr);
+    g_rw_lock_writer_unlock(cast(GRWLock*)&this);
   }
 }

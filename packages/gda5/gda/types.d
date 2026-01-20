@@ -9,15 +9,11 @@ import gda.sql_rendering_context;
 import gda.thread_wrapper;
 import gid.gid;
 import glib.error;
-import glib.rec_mutex;
 import gobject.object;
 import gobject.value;
 
 
 // Aliases
-
-/** */
-alias Mutex = glib.rec_mutex.RecMutex;
 
 /** */
 alias SqlBuilderId = GdaSqlBuilderId;

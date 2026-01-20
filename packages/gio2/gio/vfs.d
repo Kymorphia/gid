@@ -117,8 +117,8 @@ class Vfs : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -195,12 +195,11 @@ class Vfs : gobject.object.ObjectWrap
       string _identifier = identifier.fromCString(No.Free);
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
-      GFile* _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
+      auto _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _uriFuncCB = uriFunc ? &_uriFuncCallback : null;
-
     extern(C) GFile* _parseNameFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
     {
       gio.file.File _dretval;
@@ -208,12 +207,11 @@ class Vfs : gobject.object.ObjectWrap
       string _identifier = identifier.fromCString(No.Free);
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
-      GFile* _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
+      auto _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _parseNameFuncCB = parseNameFunc ? &_parseNameFuncCallback : null;
-
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
     auto _uriFunc = uriFunc ? freezeDelegate(cast(void*)&uriFunc) : null;

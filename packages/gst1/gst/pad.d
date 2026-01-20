@@ -277,7 +277,6 @@ class Pad : gst.object.ObjectWrap
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     gulong _retval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
@@ -444,13 +443,15 @@ class Pad : gst.object.ObjectWrap
   {
     extern(C) gboolean _forwardCallback(GstPad* pad, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.PadForwardFunction*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _forwardCB = forward ? &_forwardCallback : null;
-
     bool _retval;
     auto _forward = forward ? cast(void*)&(forward) : null;
     _retval = cast(bool)gst_pad_forward(cast(GstPad*)this._cPtr, _forwardCB, _forward);
@@ -1480,7 +1481,6 @@ class Pad : gst.object.ObjectWrap
       (*_dlg)();
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -1500,13 +1500,15 @@ class Pad : gst.object.ObjectWrap
   {
     extern(C) gboolean _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.PadStickyEventsForeachFunction*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
-
     auto _foreachFunc = foreachFunc ? cast(void*)&(foreachFunc) : null;
     gst_pad_sticky_events_foreach(cast(GstPad*)this._cPtr, _foreachFuncCB, _foreachFunc);
   }

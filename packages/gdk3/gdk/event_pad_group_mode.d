@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventPadGroupMode
 {
-  GdkEventPadGroupMode cInstance;
+  GdkEventPadGroupMode _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventPadGroupMode
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_pad_group_mode.EventPadGroupMode");
 
-    cInstance = *cast(GdkEventPadGroupMode*)ptr;
+    _cInstance = *cast(GdkEventPadGroupMode*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventPadGroupMode
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -112,8 +112,8 @@ class EventPadGroupMode
   /**
       Get `group` field.
       Returns: the pad group that is switching mode. A [gdk.types.InputSource.TabletPad]
-        device may have one or more groups containing a set of buttons/rings/strips
-        each.
+          device may have one or more groups containing a set of buttons/rings/strips
+          each.
   */
   @property uint group()
   {
@@ -124,8 +124,8 @@ class EventPadGroupMode
       Set `group` field.
       Params:
         propval = the pad group that is switching mode. A [gdk.types.InputSource.TabletPad]
-          device may have one or more groups containing a set of buttons/rings/strips
-          each.
+            device may have one or more groups containing a set of buttons/rings/strips
+            each.
   */
   @property void group(uint propval)
   {
@@ -135,7 +135,7 @@ class EventPadGroupMode
   /**
       Get `mode` field.
       Returns: The new mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
-        device may have different current modes.
+          device may have different current modes.
   */
   @property uint mode()
   {
@@ -146,7 +146,7 @@ class EventPadGroupMode
       Set `mode` field.
       Params:
         propval = The new mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
-          device may have different current modes.
+            device may have different current modes.
   */
   @property void mode(uint propval)
   {

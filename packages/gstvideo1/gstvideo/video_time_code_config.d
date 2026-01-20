@@ -15,7 +15,7 @@ import gstvideo.types;
 */
 class VideoTimeCodeConfig
 {
-  GstVideoTimeCodeConfig cInstance;
+  GstVideoTimeCodeConfig _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class VideoTimeCodeConfig
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_time_code_config.VideoTimeCodeConfig");
 
-    cInstance = *cast(GstVideoTimeCodeConfig*)ptr;
+    _cInstance = *cast(GstVideoTimeCodeConfig*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class VideoTimeCodeConfig
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

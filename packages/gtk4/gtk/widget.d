@@ -469,10 +469,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `canFocus` property.
       Returns: Whether the widget or any of its descendents can accept
-      the input focus.
-      
-      This property is meant to be set by widget implementations,
-      typically in their instance init function.
+        the input focus.
+        
+        This property is meant to be set by widget implementations,
+        typically in their instance init function.
   */
   @property bool canFocus()
   {
@@ -483,10 +483,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `canFocus` property.
       Params:
         propval = Whether the widget or any of its descendents can accept
-        the input focus.
-        
-        This property is meant to be set by widget implementations,
-        typically in their instance init function.
+          the input focus.
+          
+          This property is meant to be set by widget implementations,
+          typically in their instance init function.
   */
   @property void canFocus(bool propval)
   {
@@ -534,8 +534,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `focusOnClick` property.
       Returns: Whether the widget should grab focus when it is clicked with the mouse.
-      
-      This property is only relevant for widgets that can take focus.
+        
+        This property is only relevant for widgets that can take focus.
   */
   @property bool focusOnClick()
   {
@@ -546,8 +546,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `focusOnClick` property.
       Params:
         propval = Whether the widget should grab focus when it is clicked with the mouse.
-        
-        This property is only relevant for widgets that can take focus.
+          
+          This property is only relevant for widgets that can take focus.
   */
   @property void focusOnClick(bool propval)
   {
@@ -595,10 +595,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `hasTooltip` property.
       Returns: Enables or disables the emission of the ::query-tooltip signal on @widget.
-      
-      A value of true indicates that @widget can have a tooltip, in this case
-      the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
-      determine whether it will provide a tooltip or not.
+        
+        A value of true indicates that @widget can have a tooltip, in this case
+        the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
+        determine whether it will provide a tooltip or not.
   */
   @property bool hasTooltip()
   {
@@ -609,10 +609,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `hasTooltip` property.
       Params:
         propval = Enables or disables the emission of the ::query-tooltip signal on @widget.
-        
-        A value of true indicates that @widget can have a tooltip, in this case
-        the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
-        determine whether it will provide a tooltip or not.
+          
+          A value of true indicates that @widget can have a tooltip, in this case
+          the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
+          determine whether it will provide a tooltip or not.
   */
   @property void hasTooltip(bool propval)
   {
@@ -622,8 +622,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `heightRequest` property.
       Returns: Override for height request of the widget.
-      
-      If this is -1, the natural request will be used.
+        
+        If this is -1, the natural request will be used.
   */
   @property int heightRequest()
   {
@@ -634,8 +634,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `heightRequest` property.
       Params:
         propval = Override for height request of the widget.
-        
-        If this is -1, the natural request will be used.
+          
+          If this is -1, the natural request will be used.
   */
   @property void heightRequest(int propval)
   {
@@ -683,10 +683,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `layoutManager` property.
       Returns: The [gtk.layout_manager.LayoutManager] instance to use to compute the preferred size
-      of the widget, and allocate its children.
-      
-      This property is meant to be set by widget implementations,
-      typically in their instance init function.
+        of the widget, and allocate its children.
+        
+        This property is meant to be set by widget implementations,
+        typically in their instance init function.
   */
   @property gtk.layout_manager.LayoutManager layoutManager()
   {
@@ -697,10 +697,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `layoutManager` property.
       Params:
         propval = The [gtk.layout_manager.LayoutManager] instance to use to compute the preferred size
-        of the widget, and allocate its children.
-        
-        This property is meant to be set by widget implementations,
-        typically in their instance init function.
+          of the widget, and allocate its children.
+          
+          This property is meant to be set by widget implementations,
+          typically in their instance init function.
   */
   @property void layoutManager(gtk.layout_manager.LayoutManager propval)
   {
@@ -710,10 +710,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `marginBottom` property.
       Returns: Margin on bottom side of widget.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginBottom()
   {
@@ -724,10 +724,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `marginBottom` property.
       Params:
         propval = Margin on bottom side of widget.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginBottom(int propval)
   {
@@ -737,13 +737,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `marginEnd` property.
       Returns: Margin on end of widget, horizontally.
-      
-      This property supports left-to-right and right-to-left text
-      directions.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property supports left-to-right and right-to-left text
+        directions.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginEnd()
   {
@@ -754,13 +754,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `marginEnd` property.
       Params:
         propval = Margin on end of widget, horizontally.
-        
-        This property supports left-to-right and right-to-left text
-        directions.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property supports left-to-right and right-to-left text
+          directions.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginEnd(int propval)
   {
@@ -770,13 +770,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `marginStart` property.
       Returns: Margin on start of widget, horizontally.
-      
-      This property supports left-to-right and right-to-left text
-      directions.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property supports left-to-right and right-to-left text
+        directions.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginStart()
   {
@@ -787,13 +787,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `marginStart` property.
       Params:
         propval = Margin on start of widget, horizontally.
-        
-        This property supports left-to-right and right-to-left text
-        directions.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property supports left-to-right and right-to-left text
+          directions.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginStart(int propval)
   {
@@ -803,10 +803,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `marginTop` property.
       Returns: Margin on top side of widget.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginTop()
   {
@@ -817,10 +817,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `marginTop` property.
       Params:
         propval = Margin on top side of widget.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginTop(int propval)
   {
@@ -868,9 +868,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `overflow` property.
       Returns: How content outside the widget's content area is treated.
-      
-      This property is meant to be set by widget implementations,
-      typically in their instance init function.
+        
+        This property is meant to be set by widget implementations,
+        typically in their instance init function.
   */
   @property gtk.types.Overflow overflow()
   {
@@ -881,9 +881,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `overflow` property.
       Params:
         propval = How content outside the widget's content area is treated.
-        
-        This property is meant to be set by widget implementations,
-        typically in their instance init function.
+          
+          This property is meant to be set by widget implementations,
+          typically in their instance init function.
   */
   @property void overflow(gtk.types.Overflow propval)
   {
@@ -921,8 +921,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `root` property.
       Returns: The [gtk.root.Root] widget of the widget tree containing this widget.
-      
-      This will be null if the widget is not contained in a root widget.
+        
+        This will be null if the widget is not contained in a root widget.
   */
   @property gtk.root.Root root()
   {
@@ -960,28 +960,6 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `tooltipMarkup` property.
       Returns: Sets the text of tooltip to be the given string, which is marked up
-      with Pango markup.
-      
-      Also see [gtk.tooltip.Tooltip.setMarkup].
-      
-      This is a convenience property which will take care of getting the
-      tooltip shown if the given string is not null:
-      `property@Gtk.Widget:has-tooltip` will automatically be set to true
-      and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
-      the default signal handler.
-      
-      Note that if both `property@Gtk.Widget:tooltip-text` and
-      `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
-  */
-  @property string tooltipMarkup()
-  {
-    return getTooltipMarkup();
-  }
-
-  /**
-      Set `tooltipMarkup` property.
-      Params:
-        propval = Sets the text of tooltip to be the given string, which is marked up
         with Pango markup.
         
         Also see [gtk.tooltip.Tooltip.setMarkup].
@@ -995,6 +973,28 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         Note that if both `property@Gtk.Widget:tooltip-text` and
         `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
   */
+  @property string tooltipMarkup()
+  {
+    return getTooltipMarkup();
+  }
+
+  /**
+      Set `tooltipMarkup` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string, which is marked up
+          with Pango markup.
+          
+          Also see [gtk.tooltip.Tooltip.setMarkup].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null:
+          `property@Gtk.Widget:has-tooltip` will automatically be set to true
+          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          the default signal handler.
+          
+          Note that if both `property@Gtk.Widget:tooltip-text` and
+          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+  */
   @property void tooltipMarkup(string propval)
   {
     return setTooltipMarkup(propval);
@@ -1003,27 +1003,6 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `tooltipText` property.
       Returns: Sets the text of tooltip to be the given string.
-      
-      Also see [gtk.tooltip.Tooltip.setText].
-      
-      This is a convenience property which will take care of getting the
-      tooltip shown if the given string is not null:
-      `property@Gtk.Widget:has-tooltip` will automatically be set to true
-      and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
-      the default signal handler.
-      
-      Note that if both `property@Gtk.Widget:tooltip-text` and
-      `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
-  */
-  @property string tooltipText()
-  {
-    return getTooltipText();
-  }
-
-  /**
-      Set `tooltipText` property.
-      Params:
-        propval = Sets the text of tooltip to be the given string.
         
         Also see [gtk.tooltip.Tooltip.setText].
         
@@ -1035,6 +1014,27 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         
         Note that if both `property@Gtk.Widget:tooltip-text` and
         `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+  */
+  @property string tooltipText()
+  {
+    return getTooltipText();
+  }
+
+  /**
+      Set `tooltipText` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string.
+          
+          Also see [gtk.tooltip.Tooltip.setText].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null:
+          `property@Gtk.Widget:has-tooltip` will automatically be set to true
+          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          the default signal handler.
+          
+          Note that if both `property@Gtk.Widget:tooltip-text` and
+          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
   */
   @property void tooltipText(string propval)
   {
@@ -1120,8 +1120,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Get `widthRequest` property.
       Returns: Override for width request of the widget.
-      
-      If this is -1, the natural request will be used.
+        
+        If this is -1, the natural request will be used.
   */
   @property int widthRequest()
   {
@@ -1132,8 +1132,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Set `widthRequest` property.
       Params:
         propval = Override for width request of the widget.
-        
-        If this is -1, the natural request will be used.
+          
+          If this is -1, the natural request will be used.
   */
   @property void widthRequest(int propval)
   {
@@ -1327,13 +1327,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     extern(C) gboolean _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     uint _retval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
@@ -1469,9 +1471,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool computePoint(gtk.widget.Widget target, graphene.point.Point point, out graphene.point.Point outPoint)
   {
     bool _retval;
-    graphene_point_t _outPoint;
-    _retval = cast(bool)gtk_widget_compute_point(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null, &_outPoint);
-    outPoint = new graphene.point.Point(cast(void*)&_outPoint, No.Take);
+    _retval = cast(bool)gtk_widget_compute_point(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&point, cast(graphene_point_t*)&outPoint);
     return _retval;
   }
 
@@ -1675,6 +1675,34 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
+      Retrieves the widget’s allocation.
+      
+      Note, when implementing a layout container: a widget’s allocation
+      will be its “adjusted” allocation, that is, the widget’s parent
+      typically calls [gtk.widget.Widget.sizeAllocate] with an allocation,
+      and that allocation is then adjusted (to handle margin
+      and alignment for example) before assignment to the widget.
+      [gtk.widget.Widget.getAllocation] returns the adjusted allocation that
+      was actually assigned to the widget. The adjusted allocation is
+      guaranteed to be completely contained within the
+      [gtk.widget.Widget.sizeAllocate] allocation, however.
+      
+      So a layout container is guaranteed that its children stay inside
+      the assigned bounds, but not that they have exactly the bounds the
+      container assigned.
+  
+      Params:
+        allocation = a pointer to a `GtkAllocation` to copy to
+  
+      Deprecated: Use [gtk.widget.Widget.computeBounds],
+        [gtk.widget.Widget.getWidth] or [gtk.widget.Widget.getHeight] instead.
+  */
+  void getAllocation(out gtk.types.Allocation allocation)
+  {
+    gtk_widget_get_allocation(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation);
+  }
+
+  /**
       Gets the first ancestor of widget with type widget_type.
       
       For example, `gtk_widget_get_ancestor (widget, GTK_TYPE_BOX)`
@@ -1785,9 +1813,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void getColor(out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_widget_get_color(cast(GtkWidget*)this._cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_widget_get_color(cast(GtkWidget*)this._cPtr, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -1805,8 +1831,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -2297,11 +2323,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void getPreferredSize(out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize)
   {
-    GtkRequisition _minimumSize;
-    GtkRequisition _naturalSize;
-    gtk_widget_get_preferred_size(cast(GtkWidget*)this._cPtr, &_minimumSize, &_naturalSize);
-    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
-    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
+    gtk_widget_get_preferred_size(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&minimumSize, cast(GtkRequisition*)&naturalSize);
   }
 
   /**
@@ -3362,6 +3384,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       _tmpclasses ~= s.toCString(No.Alloc);
     _tmpclasses ~= null;
     const(char*)* _classes = _tmpclasses.ptr;
+
     gtk_widget_set_css_classes(cast(GtkWidget*)this._cPtr, _classes);
   }
 
@@ -3980,7 +4003,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void sizeAllocate(gtk.types.Allocation allocation, int baseline)
   {
-    gtk_widget_size_allocate(cast(GtkWidget*)this._cPtr, allocation ? cast(const(GtkAllocation)*)allocation._cPtr(No.Dup) : null, baseline);
+    gtk_widget_size_allocate(cast(GtkWidget*)this._cPtr, cast(const(GtkAllocation)*)&allocation, baseline);
   }
 
   /**
@@ -4096,11 +4119,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `Destroy` signal.
   
       Signals that all holders of a reference to the widget should release
-      the reference that they hold.
-      
-      May result in finalization of the widget if all references are released.
-      
-      This signal is not suitable for saving widget state.
+        the reference that they hold.
+        
+        May result in finalization of the widget if all references are released.
+        
+        This signal is not suitable for saving widget state.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4219,8 +4242,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `KeynavFailed` signal.
   
       Emitted if keyboard navigation fails.
-      
-      See [gtk.widget.Widget.keynavFailed] for details.
+        
+        See [gtk.widget.Widget.keynavFailed] for details.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4232,8 +4255,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true if stopping keyboard navigation is fine, false
-            if the emitting widget should try to handle the keyboard
-            navigation attempt in its parent widget(s).
+              if the emitting widget should try to handle the keyboard
+              navigation attempt in its parent widget(s).
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -4269,14 +4292,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `Map` signal.
   
       Emitted when widget is going to be mapped.
-      
-      A widget is mapped when the widget is visible (which is controlled with
-      [gtk.widget.Widget.visible]) and all its parents up to the toplevel widget
-      are also visible.
-      
-      The ::map signal can be used to determine whether a widget will be drawn,
-      for instance it can resume an animation that was stopped during the
-      emission of [gtk.widget.Widget.unmap].
+        
+        A widget is mapped when the widget is visible (which is controlled with
+        [gtk.widget.Widget.visible]) and all its parents up to the toplevel widget
+        are also visible.
+        
+        The ::map signal can be used to determine whether a widget will be drawn,
+        for instance it can resume an animation that was stopped during the
+        emission of [gtk.widget.Widget.unmap].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4314,9 +4337,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `MnemonicActivate` signal.
   
       Emitted when a widget is activated via a mnemonic.
-      
-      The default handler for this signal activates widget if group_cycling
-      is false, or just makes widget grab focus if group_cycling is true.
+        
+        The default handler for this signal activates widget if group_cycling
+        is false, or just makes widget grab focus if group_cycling is true.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4328,7 +4351,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-          false to propagate the event further.
+            false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -4364,11 +4387,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `MoveFocus` signal.
   
       Emitted when the focus is moved.
-      
-      The ::move-focus signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are <kbd>Tab</kbd> to move forward,
-      and <kbd>Shift</kbd>+<kbd>Tab</kbd> to move backward.
+        
+        The ::move-focus signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are <kbd>Tab</kbd> to move forward,
+        and <kbd>Shift</kbd>+<kbd>Tab</kbd> to move backward.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4413,19 +4436,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `QueryTooltip` signal.
   
       Emitted when the widget’s tooltip is about to be shown.
-      
-      This happens when the `propertyGtk.Widget:has-tooltip` property
-      is true and the hover timeout has expired with the cursor hovering
-      "above" widget; or emitted when widget got focus in keyboard mode.
-      
-      Using the given coordinates, the signal handler should determine
-      whether a tooltip should be shown for widget. If this is the case
-      true should be returned, false otherwise.  Note that if
-      keyboard_mode is true, the values of `x` and `y` are undefined and
-      should not be used.
-      
-      The signal handler is free to manipulate tooltip with the therefore
-      destined function calls.
+        
+        This happens when the `propertyGtk.Widget:has-tooltip` property
+        is true and the hover timeout has expired with the cursor hovering
+        "above" widget; or emitted when widget got focus in keyboard mode.
+        
+        Using the given coordinates, the signal handler should determine
+        whether a tooltip should be shown for widget. If this is the case
+        true should be returned, false otherwise.  Note that if
+        keyboard_mode is true, the values of `x` and `y` are undefined and
+        should not be used.
+        
+        The signal handler is free to manipulate tooltip with the therefore
+        destined function calls.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4433,10 +4456,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
           $(D bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget))
   
           `x` the x coordinate of the cursor position where the request has
-            been emitted, relative to widget's left side (optional)
+              been emitted, relative to widget's left side (optional)
   
           `y` the y coordinate of the cursor position where the request has
-            been emitted, relative to widget's top (optional)
+              been emitted, relative to widget's top (optional)
   
           `keyboardMode` true if the tooltip was triggered using the keyboard (optional)
   
@@ -4495,9 +4518,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `Realize` signal.
   
       Emitted when widget is associated with a [gdk.surface.Surface].
-      
-      This means that [gtk.widget.Widget.realize] has been called
-      or the widget has been mapped (that is, it is going to be drawn).
+        
+        This means that [gtk.widget.Widget.realize] has been called
+        or the widget has been mapped (that is, it is going to be drawn).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4572,8 +4595,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `StateFlagsChanged` signal.
   
       Emitted when the widget state changes.
-      
-      See [gtk.widget.Widget.getStateFlags].
+        
+        See [gtk.widget.Widget.getStateFlags].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4618,12 +4641,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `Unmap` signal.
   
       Emitted when widget is going to be unmapped.
-      
-      A widget is unmapped when either it or any of its parents up to the
-      toplevel widget have been set as hidden.
-      
-      As ::unmap indicates that a widget will not be shown any longer,
-      it can be used to, for example, stop an animation on the widget.
+        
+        A widget is unmapped when either it or any of its parents up to the
+        toplevel widget have been set as hidden.
+        
+        As ::unmap indicates that a widget will not be shown any longer,
+        it can be used to, for example, stop an animation on the widget.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -4661,9 +4684,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Connect to `Unrealize` signal.
   
       Emitted when the [gdk.surface.Surface] associated with widget is destroyed.
-      
-      This means that [gtk.widget.Widget.unrealize] has been called
-      or the widget has been unmapped (that is, it is going to be hidden).
+        
+        This means that [gtk.widget.Widget.unrealize] has been called
+        or the widget has been unmapped (that is, it is going to be hidden).
   
       Params:
         callback = signal callback delegate or function to connect

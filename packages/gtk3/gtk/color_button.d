@@ -123,11 +123,11 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   /**
       Get `showEditor` property.
       Returns: Set this property to true to skip the palette
-      in the dialog and go directly to the color editor.
-      
-      This property should be used in cases where the palette
-      in the editor would be redundant, such as when the color
-      button is already part of a palette.
+        in the dialog and go directly to the color editor.
+        
+        This property should be used in cases where the palette
+        in the editor would be redundant, such as when the color
+        button is already part of a palette.
   */
   @property bool showEditor()
   {
@@ -138,11 +138,11 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Set `showEditor` property.
       Params:
         propval = Set this property to true to skip the palette
-        in the dialog and go directly to the color editor.
-        
-        This property should be used in cases where the palette
-        in the editor would be redundant, such as when the color
-        button is already part of a palette.
+          in the dialog and go directly to the color editor.
+          
+          This property should be used in cases where the palette
+          in the editor would be redundant, such as when the color
+          button is already part of a palette.
   */
   @property void showEditor(bool propval)
   {
@@ -171,8 +171,8 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   /**
       Get `useAlpha` property.
       Returns: If this property is set to true, the color swatch on the button is
-      rendered against a checkerboard background to show its opacity and
-      the opacity slider is displayed in the color selection dialog.
+        rendered against a checkerboard background to show its opacity and
+        the opacity slider is displayed in the color selection dialog.
   */
   @property bool useAlpha()
   {
@@ -183,8 +183,8 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Set `useAlpha` property.
       Params:
         propval = If this property is set to true, the color swatch on the button is
-        rendered against a checkerboard background to show its opacity and
-        the opacity slider is displayed in the color selection dialog.
+          rendered against a checkerboard background to show its opacity and
+          the opacity slider is displayed in the color selection dialog.
   */
   @property void useAlpha(bool propval)
   {
@@ -222,7 +222,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   static gtk.color_button.ColorButton newWithColor(gdk.color.Color color)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_color(color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    _cretval = gtk_color_button_new_with_color(cast(const(GdkColor)*)&color);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
@@ -237,7 +237,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    _cretval = gtk_color_button_new_with_rgba(cast(const(GdkRGBA)*)&rgba);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
@@ -265,9 +265,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   void getColor(out gdk.color.Color color)
   {
-    GdkColor _color;
-    gtk_color_button_get_color(cast(GtkColorButton*)this._cPtr, &_color);
-    color = new gdk.color.Color(cast(void*)&_color, No.Take);
+    gtk_color_button_get_color(cast(GtkColorButton*)this._cPtr, cast(GdkColor*)&color);
   }
 
   /**
@@ -318,7 +316,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   void setColor(gdk.color.Color color)
   {
-    gtk_color_button_set_color(cast(GtkColorButton*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gtk_color_button_set_color(cast(GtkColorButton*)this._cPtr, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -350,12 +348,12 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Connect to `ColorSet` signal.
   
       The ::color-set signal is emitted when the user selects a color.
-      When handling this signal, use [gtk.color_button.ColorButton.getRgba] to
-      find out which color was just selected.
-      
-      Note that this signal is only emitted when the user
-      changes the color. If you need to react to programmatic color changes
-      as well, use the notify::color signal.
+        When handling this signal, use [gtk.color_button.ColorButton.getRgba] to
+        find out which color was just selected.
+        
+        Note that this signal is only emitted when the user
+        changes the color. If you need to react to programmatic color changes
+        as well, use the notify::color signal.
   
       Params:
         callback = signal callback delegate or function to connect

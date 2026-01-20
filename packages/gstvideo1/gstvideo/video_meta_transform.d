@@ -14,7 +14,7 @@ import gstvideo.video_info;
 */
 class VideoMetaTransform
 {
-  GstVideoMetaTransform cInstance;
+  GstVideoMetaTransform _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class VideoMetaTransform
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_meta_transform.VideoMetaTransform");
 
-    cInstance = *cast(GstVideoMetaTransform*)ptr;
+    _cInstance = *cast(GstVideoMetaTransform*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class VideoMetaTransform
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

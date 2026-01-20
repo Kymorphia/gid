@@ -57,9 +57,9 @@ class VolumeButton : gtk.scale_button.ScaleButton
   /**
       Get `useSymbolic` property.
       Returns: Whether to use symbolic icons as the icons.
-      
-      Note that if the symbolic icons are not available in your installed
-      theme, then the normal (potentially colorful) icons will be used.
+        
+        Note that if the symbolic icons are not available in your installed
+        theme, then the normal (potentially colorful) icons will be used.
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -72,9 +72,9 @@ class VolumeButton : gtk.scale_button.ScaleButton
       Set `useSymbolic` property.
       Params:
         propval = Whether to use symbolic icons as the icons.
-        
-        Note that if the symbolic icons are not available in your installed
-        theme, then the normal (potentially colorful) icons will be used.
+          
+          Note that if the symbolic icons are not available in your installed
+          theme, then the normal (potentially colorful) icons will be used.
   
       Deprecated: This widget will be removed in GTK 5
   */

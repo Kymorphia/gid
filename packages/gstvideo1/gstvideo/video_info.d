@@ -32,7 +32,7 @@ class VideoInfo : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -202,7 +202,17 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.video_colorimetry.VideoColorimetry colorimetry()
   {
-    return new gstvideo.video_colorimetry.VideoColorimetry(cast(GstVideoColorimetry*)&(cast(GstVideoInfo*)this._cPtr).colorimetry, No.Take);
+    return cToD!(gstvideo.video_colorimetry.VideoColorimetry)(cast(void*)&(cast(GstVideoInfo*)this._cPtr).colorimetry);
+  }
+
+  /**
+      Set `colorimetry` field.
+      Params:
+        propval = the colorimetry info
+  */
+  @property void colorimetry(gstvideo.video_colorimetry.VideoColorimetry propval)
+  {
+    (cast(GstVideoInfo*)this._cPtr).colorimetry = cast(GstVideoColorimetry)propval;
   }
 
   /**
@@ -323,7 +333,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool align_(gstvideo.video_alignment.VideoAlignment align_)
   {
     bool _retval;
-    _retval = cast(bool)gst_video_info_align(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
+    _retval = cast(bool)gst_video_info_align(cast(GstVideoInfo*)this._cPtr, cast(GstVideoAlignment*)&align_);
     return _retval;
   }
 
@@ -347,7 +357,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool alignFull(gstvideo.video_alignment.VideoAlignment align_, out size_t planeSize)
   {
     bool _retval;
-    _retval = cast(bool)gst_video_info_align_full(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null, cast(size_t*)&planeSize);
+    _retval = cast(bool)gst_video_info_align_full(cast(GstVideoInfo*)this._cPtr, cast(GstVideoAlignment*)&align_, cast(size_t*)&planeSize);
     return _retval;
   }
 

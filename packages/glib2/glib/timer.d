@@ -15,7 +15,7 @@ import glib.types;
 */
 class Timer
 {
-  GTimer* cInstancePtr;
+  GTimer* _cInstancePtr;
   bool owned;
 
   /** */
@@ -24,7 +24,7 @@ class Timer
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.timer.Timer");
 
-    cInstancePtr = cast(GTimer*)ptr;
+    _cInstancePtr = cast(GTimer*)ptr;
 
     owned = take;
   }
@@ -32,7 +32,7 @@ class Timer
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

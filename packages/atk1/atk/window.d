@@ -31,7 +31,7 @@ interface Window
       Connect to `Activate` signal.
   
       The signal #AtkWindow::activate is emitted when a window
-      becomes the active window of the application or session.
+        becomes the active window of the application or session.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -49,7 +49,7 @@ interface Window
       Connect to `Create` signal.
   
       The signal #AtkWindow::create is emitted when a new window
-      is created.
+        is created.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -67,7 +67,7 @@ interface Window
       Connect to `Deactivate` signal.
   
       The signal #AtkWindow::deactivate is emitted when a window is
-      no longer the active window of the application or session.
+        no longer the active window of the application or session.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -85,7 +85,7 @@ interface Window
       Connect to `Destroy` signal.
   
       The signal #AtkWindow::destroy is emitted when a window is
-      destroyed.
+        destroyed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -103,7 +103,7 @@ interface Window
       Connect to `Maximize` signal.
   
       The signal #AtkWindow::maximize is emitted when a window
-      is maximized.
+        is maximized.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -121,7 +121,7 @@ interface Window
       Connect to `Minimize` signal.
   
       The signal #AtkWindow::minimize is emitted when a window
-      is minimized.
+        is minimized.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -139,7 +139,7 @@ interface Window
       Connect to `Move` signal.
   
       The signal #AtkWindow::move is emitted when a window
-      is moved.
+        is moved.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -157,7 +157,7 @@ interface Window
       Connect to `Resize` signal.
   
       The signal #AtkWindow::resize is emitted when a window
-      is resized.
+        is resized.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -175,7 +175,7 @@ interface Window
       Connect to `Restore` signal.
   
       The signal #AtkWindow::restore is emitted when a window
-      is restored.
+        is restored.
   
       Params:
         callback = signal callback delegate or function to connect

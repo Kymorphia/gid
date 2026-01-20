@@ -309,7 +309,7 @@ class DataModelIter : gda.set.Set
       Connect to `EndOfData` signal.
   
       Gets emitted when iter has reached the end of available data (which means the previous
-      row it was on was the last one).
+        row it was on was the last one).
   
       Params:
         callback = signal callback delegate or function to connect

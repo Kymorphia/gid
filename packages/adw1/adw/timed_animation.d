@@ -77,11 +77,11 @@ class TimedAnimation : adw.animation.Animation
   /**
       Get `duration` property.
       Returns: Duration of the animation, in milliseconds.
-      
-      Describes how much time the animation will take.
-      
-      If the animation repeats more than once, describes the duration of one
-      iteration.
+        
+        Describes how much time the animation will take.
+        
+        If the animation repeats more than once, describes the duration of one
+        iteration.
   */
   @property uint duration()
   {
@@ -92,11 +92,11 @@ class TimedAnimation : adw.animation.Animation
       Set `duration` property.
       Params:
         propval = Duration of the animation, in milliseconds.
-        
-        Describes how much time the animation will take.
-        
-        If the animation repeats more than once, describes the duration of one
-        iteration.
+          
+          Describes how much time the animation will take.
+          
+          If the animation repeats more than once, describes the duration of one
+          iteration.
   */
   @property void duration(uint propval)
   {
@@ -106,10 +106,10 @@ class TimedAnimation : adw.animation.Animation
   /**
       Get `easing` property.
       Returns: Easing function used in the animation.
-      
-      Describes the curve the value is interpolated on.
-      
-      See `enum@Easing` for the description of specific easing functions.
+        
+        Describes the curve the value is interpolated on.
+        
+        See `enum@Easing` for the description of specific easing functions.
   */
   @property adw.types.Easing easing()
   {
@@ -120,10 +120,10 @@ class TimedAnimation : adw.animation.Animation
       Set `easing` property.
       Params:
         propval = Easing function used in the animation.
-        
-        Describes the curve the value is interpolated on.
-        
-        See `enum@Easing` for the description of specific easing functions.
+          
+          Describes the curve the value is interpolated on.
+          
+          See `enum@Easing` for the description of specific easing functions.
   */
   @property void easing(adw.types.Easing propval)
   {
@@ -133,8 +133,8 @@ class TimedAnimation : adw.animation.Animation
   /**
       Get `repeatCount` property.
       Returns: Number of times the animation will play.
-      
-      If set to 0, the animation will repeat endlessly.
+        
+        If set to 0, the animation will repeat endlessly.
   */
   @property uint repeatCount()
   {
@@ -145,8 +145,8 @@ class TimedAnimation : adw.animation.Animation
       Set `repeatCount` property.
       Params:
         propval = Number of times the animation will play.
-        
-        If set to 0, the animation will repeat endlessly.
+          
+          If set to 0, the animation will repeat endlessly.
   */
   @property void repeatCount(uint propval)
   {
@@ -175,12 +175,12 @@ class TimedAnimation : adw.animation.Animation
   /**
       Get `valueFrom` property.
       Returns: The value to animate from.
-      
-      The animation will start at this value and end at
-      `property@TimedAnimation:value-to`.
-      
-      If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
-      this value instead.
+        
+        The animation will start at this value and end at
+        `property@TimedAnimation:value-to`.
+        
+        If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
+        this value instead.
   */
   @property double valueFrom()
   {
@@ -191,12 +191,12 @@ class TimedAnimation : adw.animation.Animation
       Set `valueFrom` property.
       Params:
         propval = The value to animate from.
-        
-        The animation will start at this value and end at
-        `property@TimedAnimation:value-to`.
-        
-        If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
-        this value instead.
+          
+          The animation will start at this value and end at
+          `property@TimedAnimation:value-to`.
+          
+          If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
+          this value instead.
   */
   @property void valueFrom(double propval)
   {
@@ -206,12 +206,12 @@ class TimedAnimation : adw.animation.Animation
   /**
       Get `valueTo` property.
       Returns: The value to animate to.
-      
-      The animation will start at `property@TimedAnimation:value-from` and end at
-      this value.
-      
-      If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
-      at this value instead.
+        
+        The animation will start at `property@TimedAnimation:value-from` and end at
+        this value.
+        
+        If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
+        at this value instead.
   */
   @property double valueTo()
   {
@@ -222,12 +222,12 @@ class TimedAnimation : adw.animation.Animation
       Set `valueTo` property.
       Params:
         propval = The value to animate to.
-        
-        The animation will start at `property@TimedAnimation:value-from` and end at
-        this value.
-        
-        If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
-        at this value instead.
+          
+          The animation will start at `property@TimedAnimation:value-from` and end at
+          this value.
+          
+          If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
+          at this value instead.
   */
   @property void valueTo(double propval)
   {

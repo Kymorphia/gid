@@ -72,8 +72,8 @@ class Avatar : gtk.widget.Widget
   /**
       Get `customImage` property.
       Returns: A custom image paintable.
-      
-      Custom image is displayed instead of initials or icon.
+        
+        Custom image is displayed instead of initials or icon.
   */
   @property gdk.paintable.Paintable customImage()
   {
@@ -84,8 +84,8 @@ class Avatar : gtk.widget.Widget
       Set `customImage` property.
       Params:
         propval = A custom image paintable.
-        
-        Custom image is displayed instead of initials or icon.
+          
+          Custom image is displayed instead of initials or icon.
   */
   @property void customImage(gdk.paintable.Paintable propval)
   {
@@ -95,8 +95,8 @@ class Avatar : gtk.widget.Widget
   /**
       Get `iconName` property.
       Returns: The name of an icon to use as a fallback.
-      
-      If no name is set, `avatar-default-symbolic` will be used.
+        
+        If no name is set, `avatar-default-symbolic` will be used.
   */
   @property string iconName()
   {
@@ -107,8 +107,8 @@ class Avatar : gtk.widget.Widget
       Set `iconName` property.
       Params:
         propval = The name of an icon to use as a fallback.
-        
-        If no name is set, `avatar-default-symbolic` will be used.
+          
+          If no name is set, `avatar-default-symbolic` will be used.
   */
   @property void iconName(string propval)
   {
@@ -118,8 +118,8 @@ class Avatar : gtk.widget.Widget
   /**
       Get `showInitials` property.
       Returns: Whether initials are used instead of an icon on the fallback avatar.
-      
-      See `property@Avatar:icon-name` for how to change the fallback icon.
+        
+        See `property@Avatar:icon-name` for how to change the fallback icon.
   */
   @property bool showInitials()
   {
@@ -130,8 +130,8 @@ class Avatar : gtk.widget.Widget
       Set `showInitials` property.
       Params:
         propval = Whether initials are used instead of an icon on the fallback avatar.
-        
-        See `property@Avatar:icon-name` for how to change the fallback icon.
+          
+          See `property@Avatar:icon-name` for how to change the fallback icon.
   */
   @property void showInitials(bool propval)
   {
@@ -160,9 +160,9 @@ class Avatar : gtk.widget.Widget
   /**
       Get `text` property.
       Returns: Sets the text used to generate the fallback initials and color.
-      
-      It's only used to generate the color if `property@Avatar:show-initials` is
-      `FALSE`.
+        
+        It's only used to generate the color if `property@Avatar:show-initials` is
+        `FALSE`.
   */
   @property string text()
   {
@@ -173,9 +173,9 @@ class Avatar : gtk.widget.Widget
       Set `text` property.
       Params:
         propval = Sets the text used to generate the fallback initials and color.
-        
-        It's only used to generate the color if `property@Avatar:show-initials` is
-        `FALSE`.
+          
+          It's only used to generate the color if `property@Avatar:show-initials` is
+          `FALSE`.
   */
   @property void text(string propval)
   {

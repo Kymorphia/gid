@@ -15,7 +15,7 @@ import gtk.types;
 */
 class RcProperty
 {
-  GtkRcProperty cInstance;
+  GtkRcProperty _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class RcProperty
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.rc_property.RcProperty");
 
-    cInstance = *cast(GtkRcProperty*)ptr;
+    _cInstance = *cast(GtkRcProperty*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class RcProperty
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -57,7 +57,7 @@ class RcProperty
   /**
       Get `propertyName` field.
       Returns: quark-ified property identifier like
-        “GtkScrollbar::spacing”
+          “GtkScrollbar::spacing”
   */
   @property glib.types.Quark propertyName()
   {
@@ -68,7 +68,7 @@ class RcProperty
       Set `propertyName` field.
       Params:
         propval = quark-ified property identifier like
-          “GtkScrollbar::spacing”
+            “GtkScrollbar::spacing”
   */
   @property void propertyName(glib.types.Quark propval)
   {

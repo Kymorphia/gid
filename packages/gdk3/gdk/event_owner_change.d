@@ -15,7 +15,7 @@ import gid.gid;
 */
 class EventOwnerChange
 {
-  GdkEventOwnerChange cInstance;
+  GdkEventOwnerChange _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class EventOwnerChange
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_owner_change.EventOwnerChange");
 
-    cInstance = *cast(GdkEventOwnerChange*)ptr;
+    _cInstance = *cast(GdkEventOwnerChange*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class EventOwnerChange
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -163,7 +163,7 @@ class EventOwnerChange
   /**
       Get `selectionTime` field.
       Returns: the time at which the selection ownership was taken
-        over
+          over
   */
   @property uint selectionTime()
   {
@@ -174,7 +174,7 @@ class EventOwnerChange
       Set `selectionTime` field.
       Params:
         propval = the time at which the selection ownership was taken
-          over
+            over
   */
   @property void selectionTime(uint propval)
   {

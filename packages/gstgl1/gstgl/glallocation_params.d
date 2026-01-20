@@ -21,18 +21,16 @@ class GLAllocationParams : gobject.boxed.Boxed
         free = a #GstGLAllocationParamsFreeFunc
         allocFlags = allocation flags
         allocSize = the allocation size
-        allocParams = the #GstAllocationParams
         context = a #GstGLContext
         notify = a #GDestroyNotify
   */
-  this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, gst.allocation_params.AllocationParams allocParams = gst.allocation_params.AllocationParams.init, gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, GDestroyNotify notify = GDestroyNotify.init)
+  this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, GDestroyNotify notify = GDestroyNotify.init)
   {
     super(gMalloc(GstGLAllocationParams.sizeof), Yes.Take);
     this.structSize = structSize;
     this.free = free;
     this.allocFlags = allocFlags;
     this.allocSize = allocSize;
-    this.allocParams = allocParams;
     this.context = context;
     this.notify = notify;
   }
@@ -46,7 +44,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -152,17 +150,6 @@ class GLAllocationParams : gobject.boxed.Boxed
   @property gst.allocation_params.AllocationParams allocParams()
   {
     return cToD!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).allocParams);
-  }
-
-  /**
-      Set `allocParams` field.
-      Params:
-        propval = the #GstAllocationParams
-  */
-  @property void allocParams(gst.allocation_params.AllocationParams propval)
-  {
-    cValueFree!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).allocParams);
-    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)this._cPtr).allocParams);
   }
 
   /**

@@ -98,12 +98,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `bottomMargin` property.
       Returns: The bottom margin for text in the text view.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
-      
-      Don't confuse this property with #GtkWidget:margin-bottom.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with #GtkWidget:margin-bottom.
   */
   @property int bottomMargin()
   {
@@ -114,12 +114,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `bottomMargin` property.
       Params:
         propval = The bottom margin for text in the text view.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
-        
-        Don't confuse this property with #GtkWidget:margin-bottom.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with #GtkWidget:margin-bottom.
   */
   @property void bottomMargin(int propval)
   {
@@ -165,11 +165,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `imModule` property.
       Returns: Which IM (input method) module should be used for this text_view.
-      See #GtkIMContext.
-      
-      Setting this to a non-null value overrides the
-      system-wide IM module setting. See the GtkSettings
-      #GtkSettings:gtk-im-module property.
+        See #GtkIMContext.
+        
+        Setting this to a non-null value overrides the
+        system-wide IM module setting. See the GtkSettings
+        #GtkSettings:gtk-im-module property.
   */
   @property string imModule()
   {
@@ -180,11 +180,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `imModule` property.
       Params:
         propval = Which IM (input method) module should be used for this text_view.
-        See #GtkIMContext.
-        
-        Setting this to a non-null value overrides the
-        system-wide IM module setting. See the GtkSettings
-        #GtkSettings:gtk-im-module property.
+          See #GtkIMContext.
+          
+          Setting this to a non-null value overrides the
+          system-wide IM module setting. See the GtkSettings
+          #GtkSettings:gtk-im-module property.
   */
   @property void imModule(string propval)
   {
@@ -206,7 +206,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `inputHints` property.
       Returns: Additional hints (beyond #GtkTextView:input-purpose) that
-      allow input methods to fine-tune their behaviour.
+        allow input methods to fine-tune their behaviour.
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -217,7 +217,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `inputHints` property.
       Params:
         propval = Additional hints (beyond #GtkTextView:input-purpose) that
-        allow input methods to fine-tune their behaviour.
+          allow input methods to fine-tune their behaviour.
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -227,9 +227,9 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `inputPurpose` property.
       Returns: The purpose of this text field.
-      
-      This property can be used by on-screen keyboards and other input
-      methods to adjust their behaviour.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -240,9 +240,9 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `inputPurpose` property.
       Params:
         propval = The purpose of this text field.
-        
-        This property can be used by on-screen keyboards and other input
-        methods to adjust their behaviour.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -264,13 +264,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `leftMargin` property.
       Returns: The default left margin for text in the text view.
-      Tags in the buffer may override the default.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
-      
-      Don't confuse this property with #GtkWidget:margin-left.
+        Tags in the buffer may override the default.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with #GtkWidget:margin-left.
   */
   @property int leftMargin()
   {
@@ -281,13 +281,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `leftMargin` property.
       Params:
         propval = The default left margin for text in the text view.
-        Tags in the buffer may override the default.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
-        
-        Don't confuse this property with #GtkWidget:margin-left.
+          Tags in the buffer may override the default.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with #GtkWidget:margin-left.
   */
   @property void leftMargin(int propval)
   {
@@ -357,7 +357,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `populateAll` property.
       Returns: If :populate-all is true, the #GtkTextView::populate-popup
-      signal is also emitted for touch popups.
+        signal is also emitted for touch popups.
   */
   @property bool populateAll()
   {
@@ -368,7 +368,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `populateAll` property.
       Params:
         propval = If :populate-all is true, the #GtkTextView::populate-popup
-        signal is also emitted for touch popups.
+          signal is also emitted for touch popups.
   */
   @property void populateAll(bool propval)
   {
@@ -378,13 +378,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `rightMargin` property.
       Returns: The default right margin for text in the text view.
-      Tags in the buffer may override the default.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
-      
-      Don't confuse this property with #GtkWidget:margin-right.
+        Tags in the buffer may override the default.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with #GtkWidget:margin-right.
   */
   @property int rightMargin()
   {
@@ -395,13 +395,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `rightMargin` property.
       Params:
         propval = The default right margin for text in the text view.
-        Tags in the buffer may override the default.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
-        
-        Don't confuse this property with #GtkWidget:margin-right.
+          Tags in the buffer may override the default.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with #GtkWidget:margin-right.
   */
   @property void rightMargin(int propval)
   {
@@ -423,12 +423,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `topMargin` property.
       Returns: The top margin for text in the text view.
-      
-      Note that this property is confusingly named. In CSS terms,
-      the value set here is padding, and it is applied in addition
-      to the padding from the theme.
-      
-      Don't confuse this property with #GtkWidget:margin-top.
+        
+        Note that this property is confusingly named. In CSS terms,
+        the value set here is padding, and it is applied in addition
+        to the padding from the theme.
+        
+        Don't confuse this property with #GtkWidget:margin-top.
   */
   @property int topMargin()
   {
@@ -439,12 +439,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `topMargin` property.
       Params:
         propval = The top margin for text in the text view.
-        
-        Note that this property is confusingly named. In CSS terms,
-        the value set here is padding, and it is applied in addition
-        to the padding from the theme.
-        
-        Don't confuse this property with #GtkWidget:margin-top.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with #GtkWidget:margin-top.
   */
   @property void topMargin(int propval)
   {
@@ -551,7 +551,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -572,7 +572,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -612,7 +612,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -633,7 +633,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -720,11 +720,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getCursorLocations(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle strong, out gdk.rectangle.Rectangle weak)
   {
-    GdkRectangle _strong;
-    GdkRectangle _weak;
-    gtk_text_view_get_cursor_locations(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, &_strong, &_weak);
-    strong = new gdk.rectangle.Rectangle(cast(void*)&_strong, No.Take);
-    weak = new gdk.rectangle.Rectangle(cast(void*)&_weak, No.Take);
+    gtk_text_view_get_cursor_locations(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GdkRectangle*)&strong, cast(GdkRectangle*)&weak);
   }
 
   /**
@@ -836,9 +832,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y)
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, &_iter, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, x, y);
     return _retval;
   }
 
@@ -867,9 +861,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y)
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, &_iter, cast(int*)&trailing, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, cast(int*)&trailing, x, y);
     return _retval;
   }
 
@@ -885,9 +877,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
   {
-    GdkRectangle _location;
-    gtk_text_view_get_iter_location(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, &_location);
-    location = new gdk.rectangle.Rectangle(cast(void*)&_location, No.Take);
+    gtk_text_view_get_iter_location(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GdkRectangle*)&location);
   }
 
   /**
@@ -929,9 +919,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop)
   {
-    GtkTextIter _targetIter;
-    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, &_targetIter, y, cast(int*)&lineTop);
-    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.Take);
+    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&targetIter, y, cast(int*)&lineTop);
   }
 
   /**
@@ -946,7 +934,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
   {
-    gtk_text_view_get_line_yrange(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
+    gtk_text_view_get_line_yrange(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -1072,9 +1060,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
   {
-    GdkRectangle _visibleRect;
-    gtk_text_view_get_visible_rect(cast(GtkTextView*)this._cPtr, &_visibleRect);
-    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.Take);
+    gtk_text_view_get_visible_rect(cast(GtkTextView*)this._cPtr, cast(GdkRectangle*)&visibleRect);
   }
 
   alias getWindow = gtk.widget.Widget.getWindow;
@@ -1222,7 +1208,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, count);
+    _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, count);
     return _retval;
   }
 
@@ -1303,7 +1289,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
+    _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, withinMargin, useAlign, xalign, yalign);
     return _retval;
   }
 
@@ -1611,7 +1597,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter);
     return _retval;
   }
 
@@ -1638,11 +1624,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `Backspace` signal.
   
       The ::backspace signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user asks for it.
-      
-      The default bindings for this signal are
-      Backspace and Shift-Backspace.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user asks for it.
+        
+        The default bindings for this signal are
+        Backspace and Shift-Backspace.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1680,11 +1666,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `CopyClipboard` signal.
   
       The ::copy-clipboard signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to copy the selection to the clipboard.
-      
-      The default bindings for this signal are
-      Ctrl-c and Ctrl-Insert.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to copy the selection to the clipboard.
+        
+        The default bindings for this signal are
+        Ctrl-c and Ctrl-Insert.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1722,11 +1708,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `CutClipboard` signal.
   
       The ::cut-clipboard signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to cut the selection to the clipboard.
-      
-      The default bindings for this signal are
-      Ctrl-x and Shift-Delete.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to cut the selection to the clipboard.
+        
+        The default bindings for this signal are
+        Ctrl-x and Shift-Delete.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1764,17 +1750,17 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `DeleteFromCursor` signal.
   
       The ::delete-from-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a text deletion.
-      
-      If the type is [gtk.types.DeleteType.Chars], GTK+ deletes the selection
-      if there is one, otherwise it deletes the requested number
-      of characters.
-      
-      The default bindings for this signal are
-      Delete for deleting a character, Ctrl-Delete for
-      deleting a word and Ctrl-Backspace for deleting a word
-      backwords.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates a text deletion.
+        
+        If the type is [gtk.types.DeleteType.Chars], GTK+ deletes the selection
+        if there is one, otherwise it deletes the requested number
+        of characters.
+        
+        The default bindings for this signal are
+        Delete for deleting a character, Ctrl-Delete for
+        deleting a word and Ctrl-Backspace for deleting a word
+        backwords.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1826,7 +1812,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `ExtendSelection` signal.
   
       The ::extend-selection signal is emitted when the selection needs to be
-      extended at location.
+        extended at location.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1844,7 +1830,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
           `textView` the instance the signal is connected to (optional)
   
           `Returns` `GDK_EVENT_STOP` to stop other handlers from being invoked for the
-            event. `GDK_EVENT_PROPAGATE` to propagate the event further.
+              event. `GDK_EVENT_PROPAGATE` to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1895,11 +1881,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `InsertAtCursor` signal.
   
       The ::insert-at-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates the insertion of a
-      fixed string at the cursor.
-      
-      This signal has no default bindings.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates the insertion of a
+        fixed string at the cursor.
+        
+        This signal has no default bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1944,10 +1930,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `InsertEmoji` signal.
   
       The ::insert-emoji signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to present the Emoji chooser for the text_view.
-      
-      The default bindings for this signal are Ctrl-. and Ctrl-;
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to present the Emoji chooser for the text_view.
+        
+        The default bindings for this signal are Ctrl-. and Ctrl-;
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1985,26 +1971,26 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `MoveCursor` signal.
   
       The ::move-cursor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a cursor movement.
-      If the cursor is not visible in text_view, this signal causes
-      the viewport to be moved instead.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal come in two variants,
-      the variant with the Shift modifier extends the selection,
-      the variant without the Shift modifer does not.
-      There are too many key combinations to list them all here.
-      $(LIST
-        * Arrow keys move by individual characters/lines
-        * Ctrl-arrow key combinations move by words/paragraphs
-        * Home/End keys move to the ends of the buffer
-        * PageUp/PageDown keys move vertically by pages
-        * Ctrl-PageUp/PageDown keys move horizontally by pages
-      )
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates a cursor movement.
+        If the cursor is not visible in text_view, this signal causes
+        the viewport to be moved instead.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal come in two variants,
+        the variant with the Shift modifier extends the selection,
+        the variant without the Shift modifer does not.
+        There are too many key combinations to list them all here.
+        $(LIST
+          * Arrow keys move by individual characters/lines
+          * Ctrl-arrow key combinations move by words/paragraphs
+          * Home/End keys move to the ends of the buffer
+          * PageUp/PageDown keys move vertically by pages
+          * Ctrl-PageUp/PageDown keys move horizontally by pages
+        )
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2063,12 +2049,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `MoveViewport` signal.
   
       The ::move-viewport signal is a
-      [keybinding signal][GtkBindingSignal]
-      which can be bound to key combinations to allow the user
-      to move the viewport, i.e. change what part of the text view
-      is visible in a containing scrolled window.
-      
-      There are no default bindings for this signal.
+        [keybinding signal][GtkBindingSignal]
+        which can be bound to key combinations to allow the user
+        to move the viewport, i.e. change what part of the text view
+        is visible in a containing scrolled window.
+        
+        There are no default bindings for this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2120,12 +2106,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `PasteClipboard` signal.
   
       The ::paste-clipboard signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to paste the contents of the clipboard
-      into the text view.
-      
-      The default bindings for this signal are
-      Ctrl-v and Shift-Insert.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to paste the contents of the clipboard
+        into the text view.
+        
+        The default bindings for this signal are
+        Ctrl-v and Shift-Insert.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2163,19 +2149,19 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `PopulatePopup` signal.
   
       The ::populate-popup signal gets emitted before showing the
-      context menu of the text view.
-      
-      If you need to add items to the context menu, connect
-      to this signal and append your items to the popup, which
-      will be a #GtkMenu in this case.
-      
-      If #GtkTextView:populate-all is true, this signal will
-      also be emitted to populate touch popups. In this case,
-      popup will be a different container, e.g. a #GtkToolbar.
-      
-      The signal handler should not make assumptions about the
-      type of widget, but check whether popup is a #GtkMenu
-      or #GtkToolbar or another kind of container.
+        context menu of the text view.
+        
+        If you need to add items to the context menu, connect
+        to this signal and append your items to the popup, which
+        will be a #GtkMenu in this case.
+        
+        If #GtkTextView:populate-all is true, this signal will
+        also be emitted to populate touch popups. In this case,
+        popup will be a different container, e.g. a #GtkToolbar.
+        
+        The signal handler should not make assumptions about the
+        type of widget, but check whether popup is a #GtkMenu
+        or #GtkToolbar or another kind of container.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2220,11 +2206,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `PreeditChanged` signal.
   
       If an input method is used, the typed text will not immediately
-      be committed to the buffer. So if you are interested in the text,
-      connect to this signal.
-      
-      This signal is only emitted if the text at the given position
-      is actually editable.
+        be committed to the buffer. So if you are interested in the text,
+        connect to this signal.
+        
+        This signal is only emitted if the text at the given position
+        is actually editable.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2269,12 +2255,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `SelectAll` signal.
   
       The ::select-all signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to select or unselect the complete
-      contents of the text view.
-      
-      The default bindings for this signal are Ctrl-a and Ctrl-/
-      for selecting and Shift-Ctrl-a and Ctrl-\ for unselecting.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to select or unselect the complete
+        contents of the text view.
+        
+        The default bindings for this signal are Ctrl-a and Ctrl-/
+        for selecting and Shift-Ctrl-a and Ctrl-\ for unselecting.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2319,12 +2305,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `SetAnchor` signal.
   
       The ::set-anchor signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates setting the "anchor"
-      mark. The "anchor" mark gets placed at the same position as the
-      "insert" mark.
-      
-      This signal has no default bindings.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user initiates setting the "anchor"
+        mark. The "anchor" mark gets placed at the same position as the
+        "insert" mark.
+        
+        This signal has no default bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2362,11 +2348,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `ToggleCursorVisible` signal.
   
       The ::toggle-cursor-visible signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to toggle the #GtkTextView:cursor-visible
-      property.
-      
-      The default binding for this signal is F7.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to toggle the #GtkTextView:cursor-visible
+        property.
+        
+        The default binding for this signal is F7.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2404,10 +2390,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `ToggleOverwrite` signal.
   
       The ::toggle-overwrite signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to toggle the overwrite mode of the text view.
-      
-      The default bindings for this signal is Insert.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to toggle the overwrite mode of the text view.
+        
+        The default bindings for this signal is Insert.
   
       Params:
         callback = signal callback delegate or function to connect

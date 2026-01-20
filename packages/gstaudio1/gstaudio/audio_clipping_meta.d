@@ -24,7 +24,7 @@ import gstaudio.types;
 */
 class AudioClippingMeta
 {
-  GstAudioClippingMeta cInstance;
+  GstAudioClippingMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -32,7 +32,7 @@ class AudioClippingMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_clipping_meta.AudioClippingMeta");
 
-    cInstance = *cast(GstAudioClippingMeta*)ptr;
+    _cInstance = *cast(GstAudioClippingMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -41,7 +41,7 @@ class AudioClippingMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -115,7 +115,9 @@ class AudioClippingMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_audio_clipping_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

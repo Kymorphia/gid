@@ -49,7 +49,7 @@ class ValueArray : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -256,7 +256,6 @@ class ValueArray : gobject.boxed.Boxed
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
-
     GValueArray* _cretval;
     auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
     _cretval = g_value_array_sort_with_data(cast(GValueArray*)this._cPtr, _compareFuncCB, _compareFunc);

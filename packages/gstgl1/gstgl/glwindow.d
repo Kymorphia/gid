@@ -188,7 +188,6 @@ class GLWindow : gst.object.ObjectWrap
       (*_dlg)();
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gst_gl_window_send_message(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback);
   }
@@ -209,7 +208,6 @@ class GLWindow : gst.object.ObjectWrap
       (*_dlg)();
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gst_gl_window_send_message_async(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
@@ -252,7 +250,6 @@ class GLWindow : gst.object.ObjectWrap
       (*_dlg)();
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gst_gl_window_set_close_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
@@ -273,7 +270,6 @@ class GLWindow : gst.object.ObjectWrap
       (*_dlg)();
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gst_gl_window_set_draw_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
@@ -325,7 +321,6 @@ class GLWindow : gst.object.ObjectWrap
       (*_dlg)(width, height);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gst_gl_window_set_resize_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
@@ -536,9 +531,9 @@ class GLWindow : gst.object.ObjectWrap
       Connect to `WindowHandleChanged` signal.
   
       Will be emitted when the window handle has been set into the native
-      implementation, but before the context is re-activated. By using this
-      signal, elements can refresh associated resource without relying on
-      direct handle comparision.
+        implementation, but before the context is re-activated. By using this
+        signal, elements can refresh associated resource without relying on
+        direct handle comparision.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -69,8 +69,8 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
   /**
       Get `showEditor` property.
       Returns: The ::show-editor property is true when the color chooser
-      is showing the single-color editor. It can be set to switch
-      the color chooser into single-color editing mode.
+        is showing the single-color editor. It can be set to switch
+        the color chooser into single-color editing mode.
   */
   @property bool showEditor()
   {
@@ -81,8 +81,8 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
       Set `showEditor` property.
       Params:
         propval = The ::show-editor property is true when the color chooser
-        is showing the single-color editor. It can be set to switch
-        the color chooser into single-color editing mode.
+          is showing the single-color editor. It can be set to switch
+          the color chooser into single-color editing mode.
   */
   @property void showEditor(bool propval)
   {

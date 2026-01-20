@@ -129,11 +129,14 @@ class Plugin : gst.object.ObjectWrap
 
     extern(C) gboolean _initFuncCallback(GstPlugin* plugin)
     {
-      gboolean _retval = _static_initFunc(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      bool _dretval;
+
+      _dretval = _static_initFunc(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _initFuncCB = initFunc ? &_initFuncCallback : null;
-
     _static_initFunc = initFunc;
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -181,13 +184,15 @@ class Plugin : gst.object.ObjectWrap
   {
     extern(C) gboolean _initFullFuncCallback(GstPlugin* plugin, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.PluginInitFullFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _initFullFuncCB = initFullFunc ? &_initFullFuncCallback : null;
-
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _description = description.toCString(No.Alloc);
@@ -246,6 +251,7 @@ class Plugin : gst.object.ObjectWrap
       _tmpnames ~= s.toCString(No.Alloc);
     _tmpnames ~= null;
     const(char*)* _names = _tmpnames.ptr;
+
     gst_plugin_add_dependency(cast(GstPlugin*)this._cPtr, _envVars, _paths, _names, flags);
   }
 
@@ -314,7 +320,9 @@ class Plugin : gst.object.ObjectWrap
   {
     const(GstStructure)* _cretval;
     _cretval = gst_plugin_get_cache_data(cast(GstPlugin*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -432,8 +440,8 @@ class Plugin : gst.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -452,8 +460,8 @@ class Plugin : gst.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -472,8 +480,8 @@ class Plugin : gst.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -538,6 +546,6 @@ class Plugin : gst.object.ObjectWrap
   */
   void setCacheData(gst.structure.Structure cacheData)
   {
-    gst_plugin_set_cache_data(cast(GstPlugin*)this._cPtr, cacheData ? cast(GstStructure*)cacheData._cPtr(Yes.Dup) : null);
+    gst_plugin_set_cache_data(cast(GstPlugin*)this._cPtr, cast(GstStructure*)&cacheData);
   }
 }

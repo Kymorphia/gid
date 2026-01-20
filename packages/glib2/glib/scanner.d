@@ -26,7 +26,7 @@ import glib.types;
 */
 class Scanner
 {
-  GScanner cInstance;
+  GScanner _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -34,7 +34,7 @@ class Scanner
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.scanner.Scanner");
 
-    cInstance = *cast(GScanner*)ptr;
+    _cInstance = *cast(GScanner*)ptr;
 
     if (take)
       gFree(ptr);
@@ -42,13 +42,13 @@ class Scanner
 
   ~this()
   {
-    g_scanner_destroy(&cInstance);
+    g_scanner_destroy(&_cInstance);
   }
 
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -116,16 +116,6 @@ class Scanner
   @property glib.types.Data qdata()
   {
     return (cast(GScanner*)this._cPtr).qdata;
-  }
-
-  /**
-      Set `qdata` field.
-      Params:
-        propval = quarked data
-  */
-  @property void qdata(glib.types.Data propval)
-  {
-    (cast(GScanner*)this._cPtr).qdata = propval;
   }
 
   /**
@@ -460,7 +450,6 @@ class Scanner
       (*_dlg)(key, value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_scanner_scope_foreach_symbol(cast(GScanner*)this._cPtr, scopeId, _funcCB, _func);
   }

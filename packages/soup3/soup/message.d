@@ -77,7 +77,7 @@ class Message : gobject.object.ObjectWrap
   /**
       Get `firstParty` property.
       Returns: The [glib.uri.Uri] loaded in the application when the message was
-      queued.
+        queued.
   */
   @property glib.uri.Uri firstParty()
   {
@@ -88,7 +88,7 @@ class Message : gobject.object.ObjectWrap
       Set `firstParty` property.
       Params:
         propval = The [glib.uri.Uri] loaded in the application when the message was
-        queued.
+          queued.
   */
   @property void firstParty(glib.uri.Uri propval)
   {
@@ -126,11 +126,11 @@ class Message : gobject.object.ObjectWrap
   /**
       Get `isOptionsPing` property.
       Returns: Whether the message is an OPTIONS ping.
-      
-      The #SoupMessage is intended to be used to send
-      `OPTIONS *` to a server. When set to true, the
-      path of `property@Message:uri` will be ignored and
-      `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+        
+        The #SoupMessage is intended to be used to send
+        `OPTIONS *` to a server. When set to true, the
+        path of `property@Message:uri` will be ignored and
+        `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
   */
   @property bool isOptionsPing()
   {
@@ -141,11 +141,11 @@ class Message : gobject.object.ObjectWrap
       Set `isOptionsPing` property.
       Params:
         propval = Whether the message is an OPTIONS ping.
-        
-        The #SoupMessage is intended to be used to send
-        `OPTIONS *` to a server. When set to true, the
-        path of `property@Message:uri` will be ignored and
-        `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+          
+          The #SoupMessage is intended to be used to send
+          `OPTIONS *` to a server. When set to true, the
+          path of `property@Message:uri` will be ignored and
+          `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
   */
   @property void isOptionsPing(bool propval)
   {
@@ -193,7 +193,7 @@ class Message : gobject.object.ObjectWrap
   /**
       Get `priority` property.
       Returns: Sets the priority of the #SoupMessage. See
-      [soup.message.Message.setPriority] for further details.
+        [soup.message.Message.setPriority] for further details.
   */
   @property soup.types.MessagePriority priority()
   {
@@ -204,7 +204,7 @@ class Message : gobject.object.ObjectWrap
       Set `priority` property.
       Params:
         propval = Sets the priority of the #SoupMessage. See
-        [soup.message.Message.setPriority] for further details.
+          [soup.message.Message.setPriority] for further details.
   */
   @property void priority(soup.types.MessagePriority propval)
   {
@@ -223,7 +223,7 @@ class Message : gobject.object.ObjectWrap
   /**
       Get `remoteAddress` property.
       Returns: The remote [gio.socket_address.SocketAddress] of the connection associated
-      with the message.
+        with the message.
   */
   @property gio.socket_address.SocketAddress remoteAddress()
   {
@@ -1000,10 +1000,10 @@ class Message : gobject.object.ObjectWrap
       Connect to `AcceptCertificate` signal.
   
       Emitted during the msg's connection TLS handshake
-      after an unacceptable TLS certificate has been received.
-      
-      You can return true to accept tls_certificate despite
-      tls_errors.
+        after an unacceptable TLS certificate has been received.
+        
+        You can return true to accept tls_certificate despite
+        tls_errors.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1017,8 +1017,8 @@ class Message : gobject.object.ObjectWrap
           `message` the instance the signal is connected to (optional)
   
           `Returns` true to accept the TLS certificate and stop other
-            handlers from being invoked, or false to propagate the
-            event further.
+              handlers from being invoked, or false to propagate the
+              event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1059,19 +1059,19 @@ class Message : gobject.object.ObjectWrap
       Connect to `Authenticate` signal.
   
       Emitted when the message requires authentication.
-      
-      If credentials are available call [soup.auth.Auth.authenticate] on
-      auth. If these credentials fail, the signal will be emitted again,
-      with retrying set to true, which will continue until you return
-      without calling [soup.auth.Auth.authenticate] on auth.
-      
-      Note that this may be emitted before msg's body has been
-      fully read.
-      
-      You can authenticate auth asynchronously by calling
-      [gobject.object.ObjectWrap.ref_] on auth and returning true. The operation will
-      complete once either [soup.auth.Auth.authenticate] or
-      [soup.auth.Auth.cancel] are called.
+        
+        If credentials are available call [soup.auth.Auth.authenticate] on
+        auth. If these credentials fail, the signal will be emitted again,
+        with retrying set to true, which will continue until you return
+        without calling [soup.auth.Auth.authenticate] on auth.
+        
+        Note that this may be emitted before msg's body has been
+        fully read.
+        
+        You can authenticate auth asynchronously by calling
+        [gobject.object.ObjectWrap.ref_] on auth and returning true. The operation will
+        complete once either [soup.auth.Auth.authenticate] or
+        [soup.auth.Auth.cancel] are called.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1085,7 +1085,7 @@ class Message : gobject.object.ObjectWrap
           `message` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked
-            or false to propagate the event further.
+              or false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1126,12 +1126,12 @@ class Message : gobject.object.ObjectWrap
       Connect to `ContentSniffed` signal.
   
       This signal is emitted after `signalMessage::got-headers`.
-      
-      If content sniffing is disabled, or no content sniffing will be
-      performed, due to the sniffer deciding to trust the
-      Content-Type sent by the server, this signal is emitted
-      immediately after `signalMessage::got-headers`, and type is
-      null.
+        
+        If content sniffing is disabled, or no content sniffing will be
+        performed, due to the sniffer deciding to trust the
+        Content-Type sent by the server, this signal is emitted
+        immediately after `signalMessage::got-headers`, and type is
+        null.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1182,8 +1182,8 @@ class Message : gobject.object.ObjectWrap
       Connect to `Finished` signal.
   
       Emitted when all HTTP processing is finished for a message.
-      
-      (After `signalMessage::got_body`).
+        
+        (After `signalMessage::got_body`).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1258,7 +1258,7 @@ class Message : gobject.object.ObjectWrap
       Connect to `GotBodyData` signal.
   
       Emitted after reading a portion of the message
-      body from the network.
+        body from the network.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1303,19 +1303,19 @@ class Message : gobject.object.ObjectWrap
       Connect to `GotHeaders` signal.
   
       Emitted after receiving the Status-Line and response headers.
-      
-      See also [soup.message.Message.addHeaderHandler] and
-      [soup.message.Message.addStatusCodeHandler], which can be used to
-      connect to a subset of emissions of this signal.
-      
-      If you cancel or requeue msg while processing this signal,
-      then the current HTTP I/O will be stopped after this signal
-      emission finished, and msg's connection will be closed.
-      (If you need to requeue a message--eg, after handling
-      authentication or redirection--it is usually better to
-      requeue it from a `signalMessage::got-body` handler rather
-      than a `signalMessage::got_headers` handler, so that the
-      existing HTTP connection can be reused.)
+        
+        See also [soup.message.Message.addHeaderHandler] and
+        [soup.message.Message.addStatusCodeHandler], which can be used to
+        connect to a subset of emissions of this signal.
+        
+        If you cancel or requeue msg while processing this signal,
+        then the current HTTP I/O will be stopped after this signal
+        emission finished, and msg's connection will be closed.
+        (If you need to requeue a message--eg, after handling
+        authentication or redirection--it is usually better to
+        requeue it from a `signalMessage::got-body` handler rather
+        than a `signalMessage::got_headers` handler, so that the
+        existing HTTP connection can be reused.)
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1353,15 +1353,15 @@ class Message : gobject.object.ObjectWrap
       Connect to `GotInformational` signal.
   
       Emitted after receiving a 1xx (Informational) response for
-      a (client-side) message.
-      
-      The response_headers will be filled in with the headers associated
-      with the informational response; however, those header values will be
-      erased after this signal is done.
-      
-      If you cancel or requeue msg while processing this signal,
-      then the current HTTP I/O will be stopped after this signal
-      emission finished, and msg's connection will be closed.
+        a (client-side) message.
+        
+        The response_headers will be filled in with the headers associated
+        with the informational response; however, those header values will be
+        erased after this signal is done.
+        
+        If you cancel or requeue msg while processing this signal,
+        then the current HTTP I/O will be stopped after this signal
+        emission finished, and msg's connection will be closed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1399,8 +1399,8 @@ class Message : gobject.object.ObjectWrap
       Connect to `HstsEnforced` signal.
   
       Emitted when `classHSTSEnforcer` has upgraded the protocol
-      for msg to HTTPS as a result of matching its domain with
-      a HSTS policy.
+        for msg to HTTPS as a result of matching its domain with
+        a HSTS policy.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1438,17 +1438,17 @@ class Message : gobject.object.ObjectWrap
       Connect to `NetworkEvent` signal.
   
       Emitted to indicate that some network-related event
-      related to msg has occurred.
-      
-      This essentially proxies the [gio.socket_client.SocketClient.event] signal,
-      but only for events that occur while msg "owns" the connection; if
-      msg is sent on an existing persistent connection, then this signal
-      will not be emitted. (If you want to force the message to be sent on
-      a new connection, set the [soup.types.MessageFlags.NewConnection] flag on it.)
-      
-      See [gio.socket_client.SocketClient.event] for more information on what
-      the different values of event correspond to, and what
-      connection will be in each case.
+        related to msg has occurred.
+        
+        This essentially proxies the [gio.socket_client.SocketClient.event] signal,
+        but only for events that occur while msg "owns" the connection; if
+        msg is sent on an existing persistent connection, then this signal
+        will not be emitted. (If you want to force the message to be sent on
+        a new connection, set the [soup.types.MessageFlags.NewConnection] flag on it.)
+        
+        See [gio.socket_client.SocketClient.event] for more information on what
+        the different values of event correspond to, and what
+        connection will be in each case.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1500,16 +1500,16 @@ class Message : gobject.object.ObjectWrap
       Connect to `RequestCertificate` signal.
   
       Emitted during the msg's connection TLS handshake when
-      tls_connection requests a certificate from the client.
-      
-      You can set the client certificate by calling
-      [soup.message.Message.setTlsClientCertificate] and returning true. It's
-      possible to handle the request asynchornously by returning true and
-      call [soup.message.Message.setTlsClientCertificate] later once the
-      certificate is available. Note that this signal is not emitted if
-      `propertySession:tls-interaction` was set, or if
-      [soup.message.Message.setTlsClientCertificate] was called before the
-      connection TLS handshake started.
+        tls_connection requests a certificate from the client.
+        
+        You can set the client certificate by calling
+        [soup.message.Message.setTlsClientCertificate] and returning true. It's
+        possible to handle the request asynchornously by returning true and
+        call [soup.message.Message.setTlsClientCertificate] later once the
+        certificate is available. Note that this signal is not emitted if
+        `propertySession:tls-interaction` was set, or if
+        [soup.message.Message.setTlsClientCertificate] was called before the
+        connection TLS handshake started.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1521,7 +1521,7 @@ class Message : gobject.object.ObjectWrap
           `message` the instance the signal is connected to (optional)
   
           `Returns` true to handle the request, or false to make the connection
-            fail with [gio.types.TlsError.CertificateRequired].
+              fail with [gio.types.TlsError.CertificateRequired].
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1557,17 +1557,17 @@ class Message : gobject.object.ObjectWrap
       Connect to `RequestCertificatePassword` signal.
   
       Emitted during the msg's connection TLS handshake when
-      tls_connection requests a certificate password from the client.
-      
-      You can set the certificate password on password, then call
-      [soup.message.Message.tlsClientCertificatePasswordRequestComplete] and
-      return true to handle the signal synchronously. It's possible to
-      handle the request asynchornously by calling
-      [gobject.object.ObjectWrap.ref_] on password, then returning true and
-      call
-      [soup.message.Message.tlsClientCertificatePasswordRequestComplete]
-      later after setting the password on password. Note that this signal
-      is not emitted if `propertySession:tls-interaction` was set.
+        tls_connection requests a certificate password from the client.
+        
+        You can set the certificate password on password, then call
+        [soup.message.Message.tlsClientCertificatePasswordRequestComplete] and
+        return true to handle the signal synchronously. It's possible to
+        handle the request asynchornously by calling
+        [gobject.object.ObjectWrap.ref_] on password, then returning true and
+        call
+        [soup.message.Message.tlsClientCertificatePasswordRequestComplete]
+        later after setting the password on password. Note that this signal
+        is not emitted if `propertySession:tls-interaction` was set.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1579,7 +1579,7 @@ class Message : gobject.object.ObjectWrap
           `message` the instance the signal is connected to (optional)
   
           `Returns` true to handle the request, or false to make the connection
-            fail with [gio.types.TlsError.CertificateRequired].
+              fail with [gio.types.TlsError.CertificateRequired].
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1615,11 +1615,11 @@ class Message : gobject.object.ObjectWrap
       Connect to `Restarted` signal.
   
       Emitted when a request that was already sent once is now
-      being sent again.
-      
-      e.g. because the first attempt received a
-      redirection response, or because we needed to use
-      authentication.
+        being sent again.
+        
+        e.g. because the first attempt received a
+        redirection response, or because we needed to use
+        authentication.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1694,7 +1694,7 @@ class Message : gobject.object.ObjectWrap
       Connect to `WroteBody` signal.
   
       Emitted immediately after writing the complete body for a
-      message.
+        message.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1732,7 +1732,7 @@ class Message : gobject.object.ObjectWrap
       Connect to `WroteBodyData` signal.
   
       Emitted immediately after writing a portion of the message
-      body to the network.
+        body to the network.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1777,7 +1777,7 @@ class Message : gobject.object.ObjectWrap
       Connect to `WroteHeaders` signal.
   
       Emitted immediately after writing the request headers for a
-      message.
+        message.
   
       Params:
         callback = signal callback delegate or function to connect

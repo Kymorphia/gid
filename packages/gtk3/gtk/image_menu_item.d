@@ -124,12 +124,12 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   /**
       Get `alwaysShowImage` property.
       Returns: If true, the menu item will always show the image, if available.
-      
-      Use this property only if the menuitem would be useless or hard to use
-      without the image.
+        
+        Use this property only if the menuitem would be useless or hard to use
+        without the image.
   
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
-        a #GtkAccelLabel and a #GtkImage instead
+          a #GtkAccelLabel and a #GtkImage instead
   */
   @property bool alwaysShowImage()
   {
@@ -140,12 +140,12 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Set `alwaysShowImage` property.
       Params:
         propval = If true, the menu item will always show the image, if available.
-        
-        Use this property only if the menuitem would be useless or hard to use
-        without the image.
+          
+          Use this property only if the menuitem would be useless or hard to use
+          without the image.
   
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
-        a #GtkAccelLabel and a #GtkImage instead
+          a #GtkAccelLabel and a #GtkImage instead
   */
   @property void alwaysShowImage(bool propval)
   {
@@ -157,7 +157,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Returns: Child widget to appear next to the menu text.
   
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
-        a #GtkAccelLabel and a #GtkImage instead
+          a #GtkAccelLabel and a #GtkImage instead
   */
   @property gtk.widget.Widget image()
   {
@@ -170,7 +170,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
         propval = Child widget to appear next to the menu text.
   
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
-        a #GtkAccelLabel and a #GtkImage instead
+          a #GtkAccelLabel and a #GtkImage instead
   */
   @property void image(gtk.widget.Widget propval)
   {
@@ -180,7 +180,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   /**
       Get `useStock` property.
       Returns: If true, the label set in the menuitem is used as a
-      stock id to select the stock item for the item.
+        stock id to select the stock item for the item.
   
       Deprecated: Use a named icon from the #GtkIconTheme instead
   */
@@ -193,7 +193,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Set `useStock` property.
       Params:
         propval = If true, the label set in the menuitem is used as a
-        stock id to select the stock item for the item.
+          stock id to select the stock item for the item.
   
       Deprecated: Use a named icon from the #GtkIconTheme instead
   */

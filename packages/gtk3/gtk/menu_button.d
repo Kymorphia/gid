@@ -164,7 +164,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   /**
       Get `direction` property.
       Returns: The #GtkArrowType representing the direction in which the
-      menu or popover will be popped out.
+        menu or popover will be popped out.
   */
   @property gtk.types.ArrowType direction()
   {
@@ -175,7 +175,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Set `direction` property.
       Params:
         propval = The #GtkArrowType representing the direction in which the
-        menu or popover will be popped out.
+          menu or popover will be popped out.
   */
   @property void direction(gtk.types.ArrowType propval)
   {
@@ -185,11 +185,11 @@ class MenuButton : gtk.toggle_button.ToggleButton
   /**
       Get `menuModel` property.
       Returns: The #GMenuModel from which the popup will be created.
-      Depending on the #GtkMenuButton:use-popover property, that may
-      be a menu or a popover.
-      
-      See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
-      #GtkMenuButton:popup property.
+        Depending on the #GtkMenuButton:use-popover property, that may
+        be a menu or a popover.
+        
+        See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
+        #GtkMenuButton:popup property.
   */
   @property gio.menu_model.MenuModel menuModel()
   {
@@ -200,11 +200,11 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Set `menuModel` property.
       Params:
         propval = The #GMenuModel from which the popup will be created.
-        Depending on the #GtkMenuButton:use-popover property, that may
-        be a menu or a popover.
-        
-        See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
-        #GtkMenuButton:popup property.
+          Depending on the #GtkMenuButton:use-popover property, that may
+          be a menu or a popover.
+          
+          See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
+          #GtkMenuButton:popup property.
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
@@ -252,7 +252,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   /**
       Get `usePopover` property.
       Returns: Whether to construct a #GtkPopover from the menu model,
-      or a #GtkMenu.
+        or a #GtkMenu.
   */
   @property bool usePopover()
   {
@@ -263,7 +263,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Set `usePopover` property.
       Params:
         propval = Whether to construct a #GtkPopover from the menu model,
-        or a #GtkMenu.
+          or a #GtkMenu.
   */
   @property void usePopover(bool propval)
   {

@@ -122,9 +122,9 @@ class MonitorWrap : gobject.object.ObjectWrap
   /**
       Get `scaleFactor` property.
       Returns: The scale factor.
-      
-      The scale factor is the next larger integer,
-      compared to [gdk.surface.Surface.scale].
+        
+        The scale factor is the next larger integer,
+        compared to [gdk.surface.Surface.scale].
   */
   @property int scaleFactor()
   {
@@ -212,9 +212,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   */
   void getGeometry(out gdk.rectangle.Rectangle geometry)
   {
-    GdkRectangle _geometry;
-    gdk_monitor_get_geometry(cast(GdkMonitor*)this._cPtr, &_geometry);
-    geometry = new gdk.rectangle.Rectangle(cast(void*)&_geometry, No.Take);
+    gdk_monitor_get_geometry(cast(GdkMonitor*)this._cPtr, cast(GdkRectangle*)&geometry);
   }
 
   /**

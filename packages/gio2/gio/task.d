@@ -573,23 +573,23 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   /**
       Get `completed` property.
       Returns: Whether the task has completed, meaning its callback (if set) has been
-      invoked.
-      
-      This can only happen after [gio.task.Task.returnPointer],
-      [gio.task.Task.returnError] or one of the other return functions have been called
-      on the task. However, it is not guaranteed to happen immediately after
-      those functions are called, as the task’s callback may need to be scheduled
-      to run in a different thread.
-      
-      That means it is **not safe** to use this property to track whether a
-      return function has been called on the #GTask. Callers must do that
-      tracking themselves, typically by linking the lifetime of the #GTask to the
-      control flow of their code.
-      
-      This property is guaranteed to change from false to true exactly once.
-      
-      The #GObject::notify signal for this change is emitted in the same main
-      context as the task’s callback, immediately after that callback is invoked.
+        invoked.
+        
+        This can only happen after [gio.task.Task.returnPointer],
+        [gio.task.Task.returnError] or one of the other return functions have been called
+        on the task. However, it is not guaranteed to happen immediately after
+        those functions are called, as the task’s callback may need to be scheduled
+        to run in a different thread.
+        
+        That means it is **not safe** to use this property to track whether a
+        return function has been called on the #GTask. Callers must do that
+        tracking themselves, typically by linking the lifetime of the #GTask to the
+        control flow of their code.
+        
+        This property is guaranteed to change from false to true exactly once.
+        
+        The #GObject::notify signal for this change is emitted in the same main
+        context as the task’s callback, immediately after that callback is invoked.
   */
   @property bool completed()
   {
@@ -633,7 +633,6 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     GTask* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     _cretval = g_task_new(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -686,7 +685,6 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_task_report_error(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error._cPtr : null);
   }

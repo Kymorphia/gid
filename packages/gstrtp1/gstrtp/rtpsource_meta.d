@@ -13,7 +13,7 @@ import gstrtp.types;
 */
 class RTPSourceMeta
 {
-  GstRTPSourceMeta cInstance;
+  GstRTPSourceMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class RTPSourceMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtpsource_meta.RTPSourceMeta");
 
-    cInstance = *cast(GstRTPSourceMeta*)ptr;
+    _cInstance = *cast(GstRTPSourceMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class RTPSourceMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -148,7 +148,9 @@ class RTPSourceMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_rtp_source_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

@@ -10,7 +10,7 @@ import gtk.widget;
 /** */
 class TableChild
 {
-  GtkTableChild cInstance;
+  GtkTableChild _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -18,7 +18,7 @@ class TableChild
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.table_child.TableChild");
 
-    cInstance = *cast(GtkTableChild*)ptr;
+    _cInstance = *cast(GtkTableChild*)ptr;
 
     if (take)
       gFree(ptr);
@@ -27,7 +27,7 @@ class TableChild
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

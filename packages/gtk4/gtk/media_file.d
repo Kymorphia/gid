@@ -72,8 +72,8 @@ class MediaFile : gtk.media_stream.MediaStream
   /**
       Get `inputStream` property.
       Returns: The stream being played back or null if not playing a stream.
-      
-      This is null when playing a file.
+        
+        This is null when playing a file.
   */
   @property gio.input_stream.InputStream inputStream()
   {
@@ -84,8 +84,8 @@ class MediaFile : gtk.media_stream.MediaStream
       Set `inputStream` property.
       Params:
         propval = The stream being played back or null if not playing a stream.
-        
-        This is null when playing a file.
+          
+          This is null when playing a file.
   */
   @property void inputStream(gio.input_stream.InputStream propval)
   {

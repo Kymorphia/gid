@@ -13,7 +13,7 @@ import gobject.types;
 */
 class TypeQuery
 {
-  GTypeQuery cInstance;
+  GTypeQuery _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class TypeQuery
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.type_query.TypeQuery");
 
-    cInstance = *cast(GTypeQuery*)ptr;
+    _cInstance = *cast(GTypeQuery*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class TypeQuery
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

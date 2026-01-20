@@ -1,11 +1,10 @@
-/// Module for [Color] class
+/// Module for [Color] struct
 module gdk.color;
 
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
-import gobject.boxed;
 
 /**
     A #GdkColor is used to describe a color,
@@ -13,141 +12,30 @@ import gobject.boxed;
 
     Deprecated: Use #GdkRGBA
 */
-class Color : gobject.boxed.Boxed
+struct Color
 {
-
   /**
-      Create a `color.Color` boxed type.
-      Params:
-        pixel = For allocated colors, the pixel value used to
-              draw this color on the screen. Not used anymore.
-        red = The red component of the color. This is
-              a value between 0 and 65535, with 65535 indicating
-              full intensity
-        green = The green component of the color
-        blue = The blue component of the color
-  */
-  this(uint pixel = uint.init, ushort red = ushort.init, ushort green = ushort.init, ushort blue = ushort.init)
-  {
-    super(gMalloc(GdkColor.sizeof), Yes.Take);
-    this.pixel = pixel;
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gdk_color_get_type != &gidSymbolNotFound ? gdk_color_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Color self()
-  {
-    return this;
-  }
-
-  /**
-      Get `pixel` field.
-      Returns: For allocated colors, the pixel value used to
+      For allocated colors, the pixel value used to
           draw this color on the screen. Not used anymore.
   */
-  @property uint pixel()
-  {
-    return (cast(GdkColor*)this._cPtr).pixel;
-  }
+  uint pixel;
 
   /**
-      Set `pixel` field.
-      Params:
-        propval = For allocated colors, the pixel value used to
-            draw this color on the screen. Not used anymore.
-  */
-  @property void pixel(uint propval)
-  {
-    (cast(GdkColor*)this._cPtr).pixel = propval;
-  }
-
-  /**
-      Get `red` field.
-      Returns: The red component of the color. This is
+      The red component of the color. This is
           a value between 0 and 65535, with 65535 indicating
           full intensity
   */
-  @property ushort red()
-  {
-    return (cast(GdkColor*)this._cPtr).red;
-  }
+  ushort red;
 
   /**
-      Set `red` field.
-      Params:
-        propval = The red component of the color. This is
-            a value between 0 and 65535, with 65535 indicating
-            full intensity
+      The green component of the color
   */
-  @property void red(ushort propval)
-  {
-    (cast(GdkColor*)this._cPtr).red = propval;
-  }
+  ushort green;
 
   /**
-      Get `green` field.
-      Returns: The green component of the color
+      The blue component of the color
   */
-  @property ushort green()
-  {
-    return (cast(GdkColor*)this._cPtr).green;
-  }
-
-  /**
-      Set `green` field.
-      Params:
-        propval = The green component of the color
-  */
-  @property void green(ushort propval)
-  {
-    (cast(GdkColor*)this._cPtr).green = propval;
-  }
-
-  /**
-      Get `blue` field.
-      Returns: The blue component of the color
-  */
-  @property ushort blue()
-  {
-    return (cast(GdkColor*)this._cPtr).blue;
-  }
-
-  /**
-      Set `blue` field.
-      Params:
-        propval = The blue component of the color
-  */
-  @property void blue(ushort propval)
-  {
-    (cast(GdkColor*)this._cPtr).blue = propval;
-  }
+  ushort blue;
 
   /**
       Makes a copy of a #GdkColor.
@@ -160,8 +48,10 @@ class Color : gobject.boxed.Boxed
   gdk.color.Color copy()
   {
     GdkColor* _cretval;
-    _cretval = gdk_color_copy(cast(const(GdkColor)*)this._cPtr);
-    auto _retval = _cretval ? new gdk.color.Color(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gdk_color_copy(cast(const(GdkColor)*)&this);
+    gdk.color.Color _retval;
+    if (_cretval)
+      _retval = *cast(gdk.color.Color*)_cretval;
     return _retval;
   }
 
@@ -177,7 +67,7 @@ class Color : gobject.boxed.Boxed
   bool equal(gdk.color.Color colorb)
   {
     bool _retval;
-    _retval = cast(bool)gdk_color_equal(cast(const(GdkColor)*)this._cPtr, colorb ? cast(const(GdkColor)*)colorb._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_color_equal(cast(const(GdkColor)*)&this, cast(const(GdkColor)*)&colorb);
     return _retval;
   }
 
@@ -191,7 +81,7 @@ class Color : gobject.boxed.Boxed
   uint hash()
   {
     uint _retval;
-    _retval = gdk_color_hash(cast(const(GdkColor)*)this._cPtr);
+    _retval = gdk_color_hash(cast(const(GdkColor)*)&this);
     return _retval;
   }
 
@@ -208,7 +98,7 @@ class Color : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gdk_color_to_string(cast(const(GdkColor)*)this._cPtr);
+    _cretval = gdk_color_to_string(cast(const(GdkColor)*)&this);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -236,9 +126,7 @@ class Color : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    GdkColor _color;
-    _retval = cast(bool)gdk_color_parse(_spec, &_color);
-    color = new gdk.color.Color(cast(void*)&_color, No.Take);
+    _retval = cast(bool)gdk_color_parse(_spec, cast(GdkColor*)&color);
     return _retval;
   }
 }

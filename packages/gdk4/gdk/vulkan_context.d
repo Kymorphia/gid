@@ -55,9 +55,9 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
       Connect to `ImagesUpdated` signal.
   
       Emitted when the images managed by this context have changed.
-      
-      Usually this means that the swapchain had to be recreated,
-      for example in response to a change of the surface size.
+        
+        Usually this means that the swapchain had to be recreated,
+        for example in response to a change of the surface size.
   
       Params:
         callback = signal callback delegate or function to connect

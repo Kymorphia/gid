@@ -14,7 +14,7 @@ import gstvideo.video_info;
 */
 class VideoFrame
 {
-  GstVideoFrame cInstance;
+  GstVideoFrame _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class VideoFrame
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_frame.VideoFrame");
 
-    cInstance = *cast(GstVideoFrame*)ptr;
+    _cInstance = *cast(GstVideoFrame*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class VideoFrame
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -85,7 +85,7 @@ class VideoFrame
   /**
       Get `id` field.
       Returns: id of the mapped frame. the id can for example be used to
-        identify the frame in case of multiview video.
+          identify the frame in case of multiview video.
   */
   @property int id()
   {
@@ -96,7 +96,7 @@ class VideoFrame
       Set `id` field.
       Params:
         propval = id of the mapped frame. the id can for example be used to
-          identify the frame in case of multiview video.
+            identify the frame in case of multiview video.
   */
   @property void id(int propval)
   {

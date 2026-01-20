@@ -149,9 +149,9 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   /**
       Get `inverted` property.
       Returns: Whether the `GtkLeveBar` is inverted.
-      
-      Level bars normally grow from top to bottom or left to right.
-      Inverted level bars grow in the opposite direction.
+        
+        Level bars normally grow from top to bottom or left to right.
+        Inverted level bars grow in the opposite direction.
   */
   @property bool inverted()
   {
@@ -162,9 +162,9 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
       Set `inverted` property.
       Params:
         propval = Whether the `GtkLeveBar` is inverted.
-        
-        Level bars normally grow from top to bottom or left to right.
-        Inverted level bars grow in the opposite direction.
+          
+          Level bars normally grow from top to bottom or left to right.
+          Inverted level bars grow in the opposite direction.
   */
   @property void inverted(bool propval)
   {
@@ -212,15 +212,15 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   /**
       Get `mode` property.
       Returns: Determines the way [gtk.level_bar.LevelBar] interprets the value properties to draw the
-      level fill area.
-      
-      Specifically, when the value is [gtk.types.LevelBarMode.Continuous],
-      [gtk.level_bar.LevelBar] will draw a single block representing the current value in
-      that area; when the value is [gtk.types.LevelBarMode.Discrete],
-      the widget will draw a succession of separate blocks filling the
-      draw area, with the number of blocks being equal to the units separating
-      the integral roundings of `property@Gtk.LevelBar:min-value` and
-      `property@Gtk.LevelBar:max-value`.
+        level fill area.
+        
+        Specifically, when the value is [gtk.types.LevelBarMode.Continuous],
+        [gtk.level_bar.LevelBar] will draw a single block representing the current value in
+        that area; when the value is [gtk.types.LevelBarMode.Discrete],
+        the widget will draw a succession of separate blocks filling the
+        draw area, with the number of blocks being equal to the units separating
+        the integral roundings of `property@Gtk.LevelBar:min-value` and
+        `property@Gtk.LevelBar:max-value`.
   */
   @property gtk.types.LevelBarMode mode()
   {
@@ -231,15 +231,15 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
       Set `mode` property.
       Params:
         propval = Determines the way [gtk.level_bar.LevelBar] interprets the value properties to draw the
-        level fill area.
-        
-        Specifically, when the value is [gtk.types.LevelBarMode.Continuous],
-        [gtk.level_bar.LevelBar] will draw a single block representing the current value in
-        that area; when the value is [gtk.types.LevelBarMode.Discrete],
-        the widget will draw a succession of separate blocks filling the
-        draw area, with the number of blocks being equal to the units separating
-        the integral roundings of `property@Gtk.LevelBar:min-value` and
-        `property@Gtk.LevelBar:max-value`.
+          level fill area.
+          
+          Specifically, when the value is [gtk.types.LevelBarMode.Continuous],
+          [gtk.level_bar.LevelBar] will draw a single block representing the current value in
+          that area; when the value is [gtk.types.LevelBarMode.Discrete],
+          the widget will draw a succession of separate blocks filling the
+          draw area, with the number of blocks being equal to the units separating
+          the integral roundings of `property@Gtk.LevelBar:min-value` and
+          `property@Gtk.LevelBar:max-value`.
   */
   @property void mode(gtk.types.LevelBarMode propval)
   {
@@ -470,13 +470,13 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
       Connect to `OffsetChanged` signal.
   
       Emitted when an offset specified on the bar changes value.
-      
-      This typically is the result of a [gtk.level_bar.LevelBar.addOffsetValue]
-      call.
-      
-      The signal supports detailed connections; you can connect to the
-      detailed signal "changed::x" in order to only receive callbacks when
-      the value of offset "x" changes.
+        
+        This typically is the result of a [gtk.level_bar.LevelBar.addOffsetValue]
+        call.
+        
+        The signal supports detailed connections; you can connect to the
+        detailed signal "changed::x" in order to only receive callbacks when
+        the value of offset "x" changes.
   
       Params:
         detail = Signal detail or null (default)

@@ -503,26 +503,26 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Connect to `CreateMenuProxy` signal.
   
       This signal is emitted when the toolbar needs information from tool_item
-      about whether the item should appear in the toolbar overflow menu. In
-      response the tool item should either
-      
-      $(LIST
-        * call [gtk.tool_item.ToolItem.setProxyMenuItem] with a null
-          pointer and return true to indicate that the item should not appear
-          in the overflow menu
+        about whether the item should appear in the toolbar overflow menu. In
+        response the tool item should either
         
-        * call [gtk.tool_item.ToolItem.setProxyMenuItem] with a new menu
-          item and return true, or
-        
-        * return false to indicate that the signal was not handled by the item.
-          This means that the item will not appear in the overflow menu unless
-          a later handler installs a menu item.
-      )
-        
-      The toolbar may cache the result of this signal. When the tool item changes
-      how it will respond to this signal it must call [gtk.tool_item.ToolItem.rebuildMenu]
-      to invalidate the cache and ensure that the toolbar rebuilds its overflow
-      menu.
+        $(LIST
+          * call [gtk.tool_item.ToolItem.setProxyMenuItem] with a null
+            pointer and return true to indicate that the item should not appear
+            in the overflow menu
+          
+          * call [gtk.tool_item.ToolItem.setProxyMenuItem] with a new menu
+            item and return true, or
+          
+          * return false to indicate that the signal was not handled by the item.
+            This means that the item will not appear in the overflow menu unless
+            a later handler installs a menu item.
+        )
+          
+        The toolbar may cache the result of this signal. When the tool item changes
+        how it will respond to this signal it must call [gtk.tool_item.ToolItem.rebuildMenu]
+        to invalidate the cache and ensure that the toolbar rebuilds its overflow
+        menu.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -562,16 +562,16 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Connect to `ToolbarReconfigured` signal.
   
       This signal is emitted when some property of the toolbar that the
-      item is a child of changes. For custom subclasses of #GtkToolItem,
-      the default handler of this signal use the functions
-      $(LIST
-        * [gtk.tool_shell.ToolShell.toolShellGetOrientation]
-        * [gtk.tool_shell.ToolShell.getStyle]
-        * [gtk.tool_shell.ToolShell.getIconSize]
-        * [gtk.tool_shell.ToolShell.getReliefStyle]
-      )
-      to find out what the toolbar should look like and change
-      themselves accordingly.
+        item is a child of changes. For custom subclasses of #GtkToolItem,
+        the default handler of this signal use the functions
+        $(LIST
+          * [gtk.tool_shell.ToolShell.toolShellGetOrientation]
+          * [gtk.tool_shell.ToolShell.getStyle]
+          * [gtk.tool_shell.ToolShell.getIconSize]
+          * [gtk.tool_shell.ToolShell.getReliefStyle]
+        )
+        to find out what the toolbar should look like and change
+        themselves accordingly.
   
       Params:
         callback = signal callback delegate or function to connect

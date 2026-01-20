@@ -103,8 +103,8 @@ class StatusPage : gtk.widget.Widget
   /**
       Get `iconName` property.
       Returns: The name of the icon to be used.
-      
-      Changing this will set `property@StatusPage:paintable` to `NULL`.
+        
+        Changing this will set `property@StatusPage:paintable` to `NULL`.
   */
   @property string iconName()
   {
@@ -115,8 +115,8 @@ class StatusPage : gtk.widget.Widget
       Set `iconName` property.
       Params:
         propval = The name of the icon to be used.
-        
-        Changing this will set `property@StatusPage:paintable` to `NULL`.
+          
+          Changing this will set `property@StatusPage:paintable` to `NULL`.
   */
   @property void iconName(string propval)
   {
@@ -126,8 +126,8 @@ class StatusPage : gtk.widget.Widget
   /**
       Get `paintable` property.
       Returns: The paintable to be used.
-      
-      Changing this will set `property@StatusPage:icon-name` to `NULL`.
+        
+        Changing this will set `property@StatusPage:icon-name` to `NULL`.
   */
   @property gdk.paintable.Paintable paintable()
   {
@@ -138,8 +138,8 @@ class StatusPage : gtk.widget.Widget
       Set `paintable` property.
       Params:
         propval = The paintable to be used.
-        
-        Changing this will set `property@StatusPage:icon-name` to `NULL`.
+          
+          Changing this will set `property@StatusPage:icon-name` to `NULL`.
   */
   @property void paintable(gdk.paintable.Paintable propval)
   {
@@ -149,8 +149,8 @@ class StatusPage : gtk.widget.Widget
   /**
       Get `title` property.
       Returns: The title to be displayed below the icon.
-      
-      It is not parsed as Pango markup.
+        
+        It is not parsed as Pango markup.
   */
   @property string title()
   {
@@ -161,8 +161,8 @@ class StatusPage : gtk.widget.Widget
       Set `title` property.
       Params:
         propval = The title to be displayed below the icon.
-        
-        It is not parsed as Pango markup.
+          
+          It is not parsed as Pango markup.
   */
   @property void title(string propval)
   {

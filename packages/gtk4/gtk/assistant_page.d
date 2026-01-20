@@ -44,9 +44,9 @@ class AssistantPage : gobject.object.ObjectWrap
   /**
       Get `complete` property.
       Returns: Whether all required fields are filled in.
-      
-      GTK uses this information to control the sensitivity
-      of the navigation buttons.
+        
+        GTK uses this information to control the sensitivity
+        of the navigation buttons.
   
       Deprecated: This object will be removed in GTK 5
   */
@@ -59,9 +59,9 @@ class AssistantPage : gobject.object.ObjectWrap
       Set `complete` property.
       Params:
         propval = Whether all required fields are filled in.
-        
-        GTK uses this information to control the sensitivity
-        of the navigation buttons.
+          
+          GTK uses this information to control the sensitivity
+          of the navigation buttons.
   
       Deprecated: This object will be removed in GTK 5
   */

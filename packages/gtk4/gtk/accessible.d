@@ -56,8 +56,8 @@ interface Accessible
   /**
       Get `accessibleRole` property.
       Returns: The accessible role of the given [gtk.accessible.Accessible] implementation.
-      
-      The accessible role cannot be changed once set.
+        
+        The accessible role cannot be changed once set.
   */
   @property gtk.types.AccessibleRole accessibleRole();
 
@@ -65,8 +65,8 @@ interface Accessible
       Set `accessibleRole` property.
       Params:
         propval = The accessible role of the given [gtk.accessible.Accessible] implementation.
-        
-        The accessible role cannot be changed once set.
+          
+          The accessible role cannot be changed once set.
   */
   @property void accessibleRole(gtk.types.AccessibleRole propval);
 

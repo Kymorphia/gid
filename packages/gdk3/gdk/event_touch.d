@@ -23,7 +23,7 @@ import gid.gid;
 */
 class EventTouch
 {
-  GdkEventTouch cInstance;
+  GdkEventTouch _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -31,7 +31,7 @@ class EventTouch
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_touch.EventTouch");
 
-    cInstance = *cast(GdkEventTouch*)ptr;
+    _cInstance = *cast(GdkEventTouch*)ptr;
 
     if (take)
       gFree(ptr);
@@ -40,13 +40,13 @@ class EventTouch
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
-        [gdk.types.EventType.TouchEnd], [gdk.types.EventType.TouchCancel])
+          [gdk.types.EventType.TouchEnd], [gdk.types.EventType.TouchCancel])
   */
   @property gdk.types.EventType type()
   {
@@ -57,7 +57,7 @@ class EventTouch
       Set `type` field.
       Params:
         propval = the type of the event ([gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
-          [gdk.types.EventType.TouchEnd], [gdk.types.EventType.TouchCancel])
+            [gdk.types.EventType.TouchEnd], [gdk.types.EventType.TouchCancel])
   */
   @property void type(gdk.types.EventType propval)
   {
@@ -163,8 +163,8 @@ class EventTouch
   /**
       Get `state` field.
       Returns: a bit-mask representing the state of
-        the modifier keys (e.g. Control, Shift and Alt) and the pointer
-        buttons. See #GdkModifierType
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType
   */
   @property gdk.types.ModifierType state()
   {
@@ -175,8 +175,8 @@ class EventTouch
       Set `state` field.
       Params:
         propval = a bit-mask representing the state of
-          the modifier keys (e.g. Control, Shift and Alt) and the pointer
-          buttons. See #GdkModifierType
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType
   */
   @property void state(gdk.types.ModifierType propval)
   {
@@ -206,7 +206,7 @@ class EventTouch
   /**
       Get `emulatingPointer` field.
       Returns: whether the event should be used for emulating
-        pointer event
+          pointer event
   */
   @property bool emulatingPointer()
   {
@@ -217,7 +217,7 @@ class EventTouch
       Set `emulatingPointer` field.
       Params:
         propval = whether the event should be used for emulating
-          pointer event
+            pointer event
   */
   @property void emulatingPointer(bool propval)
   {
@@ -227,7 +227,7 @@ class EventTouch
   /**
       Get `device` field.
       Returns: the master device that the event originated from. Use
-      [gdk.event.Event.getSourceDevice] to get the slave device.
+        [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property gdk.device.Device device()
   {
@@ -238,7 +238,7 @@ class EventTouch
       Set `device` field.
       Params:
         propval = the master device that the event originated from. Use
-        [gdk.event.Event.getSourceDevice] to get the slave device.
+          [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property void device(gdk.device.Device propval)
   {
@@ -249,7 +249,7 @@ class EventTouch
   /**
       Get `xRoot` field.
       Returns: the x coordinate of the pointer relative to the root of the
-        screen
+          screen
   */
   @property double xRoot()
   {
@@ -260,7 +260,7 @@ class EventTouch
       Set `xRoot` field.
       Params:
         propval = the x coordinate of the pointer relative to the root of the
-          screen
+            screen
   */
   @property void xRoot(double propval)
   {
@@ -270,7 +270,7 @@ class EventTouch
   /**
       Get `yRoot` field.
       Returns: the y coordinate of the pointer relative to the root of the
-        screen
+          screen
   */
   @property double yRoot()
   {
@@ -281,7 +281,7 @@ class EventTouch
       Set `yRoot` field.
       Params:
         propval = the y coordinate of the pointer relative to the root of the
-          screen
+            screen
   */
   @property void yRoot(double propval)
   {

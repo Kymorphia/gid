@@ -58,7 +58,7 @@ class FileLauncher : gobject.object.ObjectWrap
   /**
       Get `alwaysAsk` property.
       Returns: Whether to ask the user to choose an app for opening the file. If `FALSE`,
-      the file might be opened with a default app or the previous choice.
+        the file might be opened with a default app or the previous choice.
   */
   @property bool alwaysAsk()
   {
@@ -69,7 +69,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Set `alwaysAsk` property.
       Params:
         propval = Whether to ask the user to choose an app for opening the file. If `FALSE`,
-        the file might be opened with a default app or the previous choice.
+          the file might be opened with a default app or the previous choice.
   */
   @property void alwaysAsk(bool propval)
   {
@@ -186,7 +186,6 @@ class FileLauncher : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_file_launcher_launch(cast(GtkFileLauncher*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -236,7 +235,6 @@ class FileLauncher : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_file_launcher_open_containing_folder(cast(GtkFileLauncher*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

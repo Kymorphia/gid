@@ -39,7 +39,7 @@ class LocalFileSystemOptions : gobject.object.ObjectWrap
   /**
       Get `useMmap` property.
       Returns: Whether open_input_stream and open_input_file return a mmap'ed file,
-      or a regular one.
+        or a regular one.
   */
   @property bool useMmap()
   {
@@ -50,7 +50,7 @@ class LocalFileSystemOptions : gobject.object.ObjectWrap
       Set `useMmap` property.
       Params:
         propval = Whether open_input_stream and open_input_file return a mmap'ed file,
-        or a regular one.
+          or a regular one.
   */
   @property void useMmap(bool propval)
   {

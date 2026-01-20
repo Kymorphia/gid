@@ -11,7 +11,7 @@ import gstaudio.types;
 */
 class AudioFormatInfo
 {
-  GstAudioFormatInfo cInstance;
+  GstAudioFormatInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class AudioFormatInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_format_info.AudioFormatInfo");
 
-    cInstance = *cast(GstAudioFormatInfo*)ptr;
+    _cInstance = *cast(GstAudioFormatInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class AudioFormatInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

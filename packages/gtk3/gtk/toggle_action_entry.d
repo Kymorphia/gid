@@ -12,7 +12,7 @@ import gtk.types;
 */
 class ToggleActionEntry
 {
-  GtkToggleActionEntry cInstance;
+  GtkToggleActionEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class ToggleActionEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.toggle_action_entry.ToggleActionEntry");
 
-    cInstance = *cast(GtkToggleActionEntry*)ptr;
+    _cInstance = *cast(GtkToggleActionEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class ToggleActionEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -55,7 +55,7 @@ class ToggleActionEntry
   /**
       Get `stockId` field.
       Returns: The stock id for the action, or the name of an icon from the
-       icon theme.
+         icon theme.
   */
   @property string stockId()
   {
@@ -66,7 +66,7 @@ class ToggleActionEntry
       Set `stockId` field.
       Params:
         propval = The stock id for the action, or the name of an icon from the
-         icon theme.
+           icon theme.
   */
   @property void stockId(string propval)
   {
@@ -77,7 +77,7 @@ class ToggleActionEntry
   /**
       Get `label` field.
       Returns: The label for the action. This field should typically be marked
-       for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+         for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property string label()
   {
@@ -88,7 +88,7 @@ class ToggleActionEntry
       Set `label` field.
       Params:
         propval = The label for the action. This field should typically be marked
-         for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+           for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property void label(string propval)
   {
@@ -99,7 +99,7 @@ class ToggleActionEntry
   /**
       Get `accelerator` field.
       Returns: The accelerator for the action, in the format understood by
-       [gtk.global.acceleratorParse].
+         [gtk.global.acceleratorParse].
   */
   @property string accelerator()
   {
@@ -110,7 +110,7 @@ class ToggleActionEntry
       Set `accelerator` field.
       Params:
         propval = The accelerator for the action, in the format understood by
-         [gtk.global.acceleratorParse].
+           [gtk.global.acceleratorParse].
   */
   @property void accelerator(string propval)
   {
@@ -121,7 +121,7 @@ class ToggleActionEntry
   /**
       Get `tooltip` field.
       Returns: The tooltip for the action. This field should typically be
-       marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+         marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property string tooltip()
   {
@@ -132,7 +132,7 @@ class ToggleActionEntry
       Set `tooltip` field.
       Params:
         propval = The tooltip for the action. This field should typically be
-         marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+           marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property void tooltip(string propval)
   {

@@ -319,7 +319,6 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.Objec
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   _static_func = func;
   GstCaps* _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);
@@ -372,7 +371,6 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   _static_func = func;
   GstFlowReturn _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);

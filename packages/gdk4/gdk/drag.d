@@ -319,8 +319,8 @@ class Drag : gobject.object.ObjectWrap
       Connect to `DndFinished` signal.
   
       Emitted when the destination side has finished reading all data.
-      
-      The drag object can now free all miscellaneous data.
+        
+        The drag object can now free all miscellaneous data.
   
       Params:
         callback = signal callback delegate or function to connect

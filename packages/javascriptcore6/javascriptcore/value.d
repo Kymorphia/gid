@@ -86,7 +86,6 @@ class Value : gobject.object.ObjectWrap
       (*_dlg)();
     }
     auto _destroyNotifyCB = destroyNotify ? &_destroyNotifyCallback : null;
-
     JSCValue* _cretval;
     auto _destroyNotify = destroyNotify ? freezeDelegate(cast(void*)&destroyNotify) : null;
     _cretval = jsc_value_new_array_buffer(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, data, size, _destroyNotifyCB, _destroyNotify);
@@ -131,6 +130,7 @@ class Value : gobject.object.ObjectWrap
       _tmpstrv ~= s.toCString(No.Alloc);
     _tmpstrv ~= null;
     const(char*)* _strv = _tmpstrv.ptr;
+
     _cretval = jsc_value_new_array_from_strv(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _strv);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -240,7 +240,6 @@ class Value : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(void*)resolve, No.Take), gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(void*)reject, No.Take));
     }
     auto _executorCB = executor ? &_executorCallback : null;
-
     JSCValue* _cretval;
     auto _executor = executor ? cast(void*)&(executor) : null;
     _cretval = jsc_value_new_promise(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _executorCB, _executor);
@@ -354,6 +353,7 @@ class Value : gobject.object.ObjectWrap
     foreach (obj; parameters)
       _tmpparameters ~= obj ? cast(JSCValue*)obj._cPtr : null;
     JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
+
     _cretval = jsc_value_constructor_callv(cast(JSCValue*)this._cPtr, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -381,6 +381,7 @@ class Value : gobject.object.ObjectWrap
     foreach (obj; parameters)
       _tmpparameters ~= obj ? cast(JSCValue*)obj._cPtr : null;
     JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
+
     _cretval = jsc_value_function_callv(cast(JSCValue*)this._cPtr, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -595,8 +596,8 @@ class Value : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -678,6 +679,7 @@ class Value : gobject.object.ObjectWrap
     foreach (obj; parameters)
       _tmpparameters ~= obj ? cast(JSCValue*)obj._cPtr : null;
     JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
+
     _cretval = jsc_value_object_invoke_methodv(cast(JSCValue*)this._cPtr, _name, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;

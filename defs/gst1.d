@@ -19,7 +19,14 @@
 
 //# Ignore "protected/private" structure fields
 //!set record[Iterator].*field[][ignore] 1
-//!set record[TypeFind].*field[][ignore] 1
+
+//# Rename callback fields in TypeFind which conflict with method names
+//!set record[TypeFind].field[get_length].callback[get_length][name] get_length_func
+//!set record[TypeFind].field[get_length][name] get_length_func
+//!set record[TypeFind].field[peek].callback[peek][name] peek_func
+//!set record[TypeFind].field[peek][name] peek_func
+//!set record[TypeFind].field[suggest].callback[suggest][name] suggest_func
+//!set record[TypeFind].field[suggest][name] suggest_func
 
 //# Change ChildProxy.getProperty to getChildProxyProperty, conflicts with ObjectWrap.getProperty and could not get it to work with an alias
 //!set interface[ChildProxy].method[get_property][name] getChildProxyProperty
@@ -53,6 +60,9 @@
 //# Disable unnecessary ByteArrayInterface functions (can use GArray versions instead)
 //!set record[Meta].method[serialize][ignore] 1
 //!set callback[MetaSerializeFunction][ignore] 1
+
+//# Disable CustomMeta.structure field writing (struct pointer)
+//!set record[CustomMeta].field[structure][writable] 0
 
 //!set function[init][ignore] 1
 //!set function[init_check][ignore] 1

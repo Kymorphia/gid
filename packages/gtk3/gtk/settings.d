@@ -95,8 +95,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkAlternativeSortArrows` property.
       Returns: Controls the direction of the sort indicators in sorted list and tree
-      views. By default an arrow pointing down means the column is sorted
-      in ascending order. When set to true, this order will be inverted.
+        views. By default an arrow pointing down means the column is sorted
+        in ascending order. When set to true, this order will be inverted.
   */
   @property bool gtkAlternativeSortArrows()
   {
@@ -107,8 +107,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkAlternativeSortArrows` property.
       Params:
         propval = Controls the direction of the sort indicators in sorted list and tree
-        views. By default an arrow pointing down means the column is sorted
-        in ascending order. When set to true, this order will be inverted.
+          views. By default an arrow pointing down means the column is sorted
+          in ascending order. When set to true, this order will be inverted.
   */
   @property void gtkAlternativeSortArrows(bool propval)
   {
@@ -118,26 +118,6 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkApplicationPreferDarkTheme` property.
       Returns: Whether the application prefers to use a dark theme. If a GTK+ theme
-      includes a dark variant, it will be used instead of the configured
-      theme.
-      
-      Some applications benefit from minimizing the amount of light pollution that
-      interferes with the content. Good candidates for dark themes are photo and
-      video editors that make the actual content get all the attention and minimize
-      the distraction of the chrome.
-      
-      Dark themes should not be used for documents, where large spaces are white/light
-      and the dark chrome creates too much contrast (web browser, text editor...).
-  */
-  @property bool gtkApplicationPreferDarkTheme()
-  {
-    return gobject.object.ObjectWrap.getProperty!(bool)("gtk-application-prefer-dark-theme");
-  }
-
-  /**
-      Set `gtkApplicationPreferDarkTheme` property.
-      Params:
-        propval = Whether the application prefers to use a dark theme. If a GTK+ theme
         includes a dark variant, it will be used instead of the configured
         theme.
         
@@ -149,6 +129,26 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Dark themes should not be used for documents, where large spaces are white/light
         and the dark chrome creates too much contrast (web browser, text editor...).
   */
+  @property bool gtkApplicationPreferDarkTheme()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("gtk-application-prefer-dark-theme");
+  }
+
+  /**
+      Set `gtkApplicationPreferDarkTheme` property.
+      Params:
+        propval = Whether the application prefers to use a dark theme. If a GTK+ theme
+          includes a dark variant, it will be used instead of the configured
+          theme.
+          
+          Some applications benefit from minimizing the amount of light pollution that
+          interferes with the content. Good candidates for dark themes are photo and
+          video editors that make the actual content get all the attention and minimize
+          the distraction of the chrome.
+          
+          Dark themes should not be used for documents, where large spaces are white/light
+          and the dark chrome creates too much contrast (web browser, text editor...).
+  */
   @property void gtkApplicationPreferDarkTheme(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-application-prefer-dark-theme", propval);
@@ -157,7 +157,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkAutoMnemonics` property.
       Returns: Whether mnemonics should be automatically shown and hidden when the user
-      presses the mnemonic activator.
+        presses the mnemonic activator.
   
       Deprecated: This setting is ignored
   */
@@ -170,7 +170,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkAutoMnemonics` property.
       Params:
         propval = Whether mnemonics should be automatically shown and hidden when the user
-        presses the mnemonic activator.
+          presses the mnemonic activator.
   
       Deprecated: This setting is ignored
   */
@@ -184,10 +184,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Whether images should be shown on buttons
   
       Deprecated: This setting is deprecated. Application developers
-        control whether a button should show an icon or not, on a
-        per-button basis. If a #GtkButton should show an icon, use the
-        #GtkButton:always-show-image property of #GtkButton, and pack a
-        #GtkImage inside the #GtkButton
+          control whether a button should show an icon or not, on a
+          per-button basis. If a #GtkButton should show an icon, use the
+          #GtkButton:always-show-image property of #GtkButton, and pack a
+          #GtkImage inside the #GtkButton
   */
   @property bool gtkButtonImages()
   {
@@ -200,10 +200,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Whether images should be shown on buttons
   
       Deprecated: This setting is deprecated. Application developers
-        control whether a button should show an icon or not, on a
-        per-button basis. If a #GtkButton should show an icon, use the
-        #GtkButton:always-show-image property of #GtkButton, and pack a
-        #GtkImage inside the #GtkButton
+          control whether a button should show an icon or not, on a
+          per-button basis. If a #GtkButton should show an icon, use the
+          #GtkButton:always-show-image property of #GtkButton, and pack a
+          #GtkImage inside the #GtkButton
   */
   @property void gtkButtonImages(bool propval)
   {
@@ -259,38 +259,6 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkColorScheme` property.
       Returns: A palette of named colors for use in themes. The format of the string is
-      ```
-      name1: color1
-      name2: color2
-      ...
-      ```
-      Color names must be acceptable as identifiers in the
-      [gtkrc][gtk3-Resource-Files] syntax, and
-      color specifications must be in the format accepted by
-      [gdk.color.Color.parse].
-      
-      Note that due to the way the color tables from different sources are
-      merged, color specifications will be converted to hexadecimal form
-      when getting this property.
-      
-      Starting with GTK+ 2.12, the entries can alternatively be separated
-      by ';' instead of newlines:
-      ```
-      name1: color1; name2: color2; ...
-      ```
-  
-      Deprecated: Color scheme support was dropped and is no longer supported.
-          You can still set this property, but it will be ignored.
-  */
-  @property string gtkColorScheme()
-  {
-    return gobject.object.ObjectWrap.getProperty!(string)("gtk-color-scheme");
-  }
-
-  /**
-      Set `gtkColorScheme` property.
-      Params:
-        propval = A palette of named colors for use in themes. The format of the string is
         ```
         name1: color1
         name2: color2
@@ -312,7 +280,39 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         ```
   
       Deprecated: Color scheme support was dropped and is no longer supported.
-          You can still set this property, but it will be ignored.
+            You can still set this property, but it will be ignored.
+  */
+  @property string gtkColorScheme()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("gtk-color-scheme");
+  }
+
+  /**
+      Set `gtkColorScheme` property.
+      Params:
+        propval = A palette of named colors for use in themes. The format of the string is
+          ```
+          name1: color1
+          name2: color2
+          ...
+          ```
+          Color names must be acceptable as identifiers in the
+          [gtkrc][gtk3-Resource-Files] syntax, and
+          color specifications must be in the format accepted by
+          [gdk.color.Color.parse].
+          
+          Note that due to the way the color tables from different sources are
+          merged, color specifications will be converted to hexadecimal form
+          when getting this property.
+          
+          Starting with GTK+ 2.12, the entries can alternatively be separated
+          by ';' instead of newlines:
+          ```
+          name1: color1; name2: color2; ...
+          ```
+  
+      Deprecated: Color scheme support was dropped and is no longer supported.
+            You can still set this property, but it will be ignored.
   */
   @property void gtkColorScheme(string propval)
   {
@@ -334,9 +334,9 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkCursorBlink` property.
       Returns: Whether the cursor should blink.
-      
-      Also see the #GtkSettings:gtk-cursor-blink-timeout setting,
-      which allows more flexible control over cursor blinking.
+        
+        Also see the #GtkSettings:gtk-cursor-blink-timeout setting,
+        which allows more flexible control over cursor blinking.
   */
   @property bool gtkCursorBlink()
   {
@@ -347,9 +347,9 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkCursorBlink` property.
       Params:
         propval = Whether the cursor should blink.
-        
-        Also see the #GtkSettings:gtk-cursor-blink-timeout setting,
-        which allows more flexible control over cursor blinking.
+          
+          Also see the #GtkSettings:gtk-cursor-blink-timeout setting,
+          which allows more flexible control over cursor blinking.
   */
   @property void gtkCursorBlink(bool propval)
   {
@@ -371,10 +371,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkCursorBlinkTimeout` property.
       Returns: Time after which the cursor stops blinking, in seconds.
-      The timer is reset after each user interaction.
-      
-      Setting this to zero has the same effect as setting
-      #GtkSettings:gtk-cursor-blink to false.
+        The timer is reset after each user interaction.
+        
+        Setting this to zero has the same effect as setting
+        #GtkSettings:gtk-cursor-blink to false.
   */
   @property int gtkCursorBlinkTimeout()
   {
@@ -385,10 +385,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkCursorBlinkTimeout` property.
       Params:
         propval = Time after which the cursor stops blinking, in seconds.
-        The timer is reset after each user interaction.
-        
-        Setting this to zero has the same effect as setting
-        #GtkSettings:gtk-cursor-blink to false.
+          The timer is reset after each user interaction.
+          
+          Setting this to zero has the same effect as setting
+          #GtkSettings:gtk-cursor-blink to false.
   */
   @property void gtkCursorBlinkTimeout(int propval)
   {
@@ -422,35 +422,6 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkDecorationLayout` property.
       Returns: This setting determines which buttons should be put in the
-      titlebar of client-side decorated windows, and whether they
-      should be placed at the left of right.
-      
-      The format of the string is button names, separated by commas.
-      A colon separates the buttons that should appear on the left
-      from those on the right. Recognized button names are minimize,
-      maximize, close, icon (the window icon) and menu (a menu button
-      for the fallback app menu).
-      
-      For example, "menu:minimize,maximize,close" specifies a menu
-      on the left, and minimize, maximize and close buttons on the right.
-      
-      Note that buttons will only be shown when they are meaningful.
-      E.g. a menu button only appears when the desktop shell does not
-      show the app menu, and a close button only appears on a window
-      that can be closed.
-      
-      Also note that the setting can be overridden with the
-      #GtkHeaderBar:decoration-layout property.
-  */
-  @property string gtkDecorationLayout()
-  {
-    return gobject.object.ObjectWrap.getProperty!(string)("gtk-decoration-layout");
-  }
-
-  /**
-      Set `gtkDecorationLayout` property.
-      Params:
-        propval = This setting determines which buttons should be put in the
         titlebar of client-side decorated windows, and whether they
         should be placed at the left of right.
         
@@ -471,6 +442,35 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Also note that the setting can be overridden with the
         #GtkHeaderBar:decoration-layout property.
   */
+  @property string gtkDecorationLayout()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("gtk-decoration-layout");
+  }
+
+  /**
+      Set `gtkDecorationLayout` property.
+      Params:
+        propval = This setting determines which buttons should be put in the
+          titlebar of client-side decorated windows, and whether they
+          should be placed at the left of right.
+          
+          The format of the string is button names, separated by commas.
+          A colon separates the buttons that should appear on the left
+          from those on the right. Recognized button names are minimize,
+          maximize, close, icon (the window icon) and menu (a menu button
+          for the fallback app menu).
+          
+          For example, "menu:minimize,maximize,close" specifies a menu
+          on the left, and minimize, maximize and close buttons on the right.
+          
+          Note that buttons will only be shown when they are meaningful.
+          E.g. a menu button only appears when the desktop shell does not
+          show the app menu, and a close button only appears on a window
+          that can be closed.
+          
+          Also note that the setting can be overridden with the
+          #GtkHeaderBar:decoration-layout property.
+  */
   @property void gtkDecorationLayout(string propval)
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-decoration-layout", propval);
@@ -479,11 +479,11 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkDialogsUseHeader` property.
       Returns: Whether builtin GTK+ dialogs such as the file chooser, the
-      color chooser or the font chooser will use a header bar at
-      the top to show action widgets, or an action area at the bottom.
-      
-      This setting does not affect custom dialogs using GtkDialog
-      directly, or message dialogs.
+        color chooser or the font chooser will use a header bar at
+        the top to show action widgets, or an action area at the bottom.
+        
+        This setting does not affect custom dialogs using GtkDialog
+        directly, or message dialogs.
   */
   @property bool gtkDialogsUseHeader()
   {
@@ -494,11 +494,11 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkDialogsUseHeader` property.
       Params:
         propval = Whether builtin GTK+ dialogs such as the file chooser, the
-        color chooser or the font chooser will use a header bar at
-        the top to show action widgets, or an action area at the bottom.
-        
-        This setting does not affect custom dialogs using GtkDialog
-        directly, or message dialogs.
+          color chooser or the font chooser will use a header bar at
+          the top to show action widgets, or an action area at the bottom.
+          
+          This setting does not affect custom dialogs using GtkDialog
+          directly, or message dialogs.
   */
   @property void gtkDialogsUseHeader(bool propval)
   {
@@ -544,7 +544,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkEnableAccels` property.
       Returns: Whether menu items should have visible accelerators which can be
-      activated.
+        activated.
   */
   @property bool gtkEnableAccels()
   {
@@ -555,7 +555,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkEnableAccels` property.
       Params:
         propval = Whether menu items should have visible accelerators which can be
-        activated.
+          activated.
   */
   @property void gtkEnableAccels(bool propval)
   {
@@ -577,12 +577,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkEnableEventSounds` property.
       Returns: Whether to play any event sounds at all.
-      
-      See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
-      for more information on event sounds and sound themes.
-      
-      GTK+ itself does not support event sounds, you have to use a loadable
-      module like the one that comes with libcanberra.
+        
+        See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+        for more information on event sounds and sound themes.
+        
+        GTK+ itself does not support event sounds, you have to use a loadable
+        module like the one that comes with libcanberra.
   */
   @property bool gtkEnableEventSounds()
   {
@@ -593,12 +593,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkEnableEventSounds` property.
       Params:
         propval = Whether to play any event sounds at all.
-        
-        See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
-        for more information on event sounds and sound themes.
-        
-        GTK+ itself does not support event sounds, you have to use a loadable
-        module like the one that comes with libcanberra.
+          
+          See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+          for more information on event sounds and sound themes.
+          
+          GTK+ itself does not support event sounds, you have to use a loadable
+          module like the one that comes with libcanberra.
   */
   @property void gtkEnableEventSounds(bool propval)
   {
@@ -608,12 +608,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkEnableInputFeedbackSounds` property.
       Returns: Whether to play event sounds as feedback to user input.
-      
-      See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
-      for more information on event sounds and sound themes.
-      
-      GTK+ itself does not support event sounds, you have to use a loadable
-      module like the one that comes with libcanberra.
+        
+        See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+        for more information on event sounds and sound themes.
+        
+        GTK+ itself does not support event sounds, you have to use a loadable
+        module like the one that comes with libcanberra.
   */
   @property bool gtkEnableInputFeedbackSounds()
   {
@@ -624,12 +624,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkEnableInputFeedbackSounds` property.
       Params:
         propval = Whether to play event sounds as feedback to user input.
-        
-        See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
-        for more information on event sounds and sound themes.
-        
-        GTK+ itself does not support event sounds, you have to use a loadable
-        module like the one that comes with libcanberra.
+          
+          See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+          for more information on event sounds and sound themes.
+          
+          GTK+ itself does not support event sounds, you have to use a loadable
+          module like the one that comes with libcanberra.
   */
   @property void gtkEnableInputFeedbackSounds(bool propval)
   {
@@ -639,10 +639,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkEnableMnemonics` property.
       Returns: Whether labels and menu items should have visible mnemonics which
-      can be activated.
+        can be activated.
   
       Deprecated: This setting can still be used for application
-           overrides, but will be ignored in the future
+             overrides, but will be ignored in the future
   */
   @property bool gtkEnableMnemonics()
   {
@@ -653,10 +653,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkEnableMnemonics` property.
       Params:
         propval = Whether labels and menu items should have visible mnemonics which
-        can be activated.
+          can be activated.
   
       Deprecated: This setting can still be used for application
-           overrides, but will be ignored in the future
+             overrides, but will be ignored in the future
   */
   @property void gtkEnableMnemonics(bool propval)
   {
@@ -666,7 +666,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkEnablePrimaryPaste` property.
       Returns: Whether a middle click on a mouse should paste the
-      'PRIMARY' clipboard content at the cursor location.
+        'PRIMARY' clipboard content at the cursor location.
   */
   @property bool gtkEnablePrimaryPaste()
   {
@@ -677,7 +677,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkEnablePrimaryPaste` property.
       Params:
         propval = Whether a middle click on a mouse should paste the
-        'PRIMARY' clipboard content at the cursor location.
+          'PRIMARY' clipboard content at the cursor location.
   */
   @property void gtkEnablePrimaryPaste(bool propval)
   {
@@ -710,8 +710,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkEntryPasswordHintTimeout` property.
       Returns: How long to show the last input character in hidden
-      entries. This value is in milliseconds. 0 disables showing the
-      last char. 600 is a good value for enabling it.
+        entries. This value is in milliseconds. 0 disables showing the
+        last char. 600 is a good value for enabling it.
   */
   @property uint gtkEntryPasswordHintTimeout()
   {
@@ -722,8 +722,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkEntryPasswordHintTimeout` property.
       Params:
         propval = How long to show the last input character in hidden
-        entries. This value is in milliseconds. 0 disables showing the
-        last char. 600 is a good value for enabling it.
+          entries. This value is in milliseconds. 0 disables showing the
+          last char. 600 is a good value for enabling it.
   */
   @property void gtkEntryPasswordHintTimeout(uint propval)
   {
@@ -745,10 +745,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkErrorBell` property.
       Returns: When true, keyboard navigation and other input-related errors
-      will cause a beep. Since the error bell is implemented using
-      [gdk.window.Window.beep], the windowing system may offer ways to
-      configure the error bell in many ways, such as flashing the
-      window or similar visual effects.
+        will cause a beep. Since the error bell is implemented using
+        [gdk.window.Window.beep], the windowing system may offer ways to
+        configure the error bell in many ways, such as flashing the
+        window or similar visual effects.
   */
   @property bool gtkErrorBell()
   {
@@ -759,10 +759,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkErrorBell` property.
       Params:
         propval = When true, keyboard navigation and other input-related errors
-        will cause a beep. Since the error bell is implemented using
-        [gdk.window.Window.beep], the windowing system may offer ways to
-        configure the error bell in many ways, such as flashing the
-        window or similar visual effects.
+          will cause a beep. Since the error bell is implemented using
+          [gdk.window.Window.beep], the windowing system may offer ways to
+          configure the error bell in many ways, such as flashing the
+          window or similar visual effects.
   */
   @property void gtkErrorBell(bool propval)
   {
@@ -849,15 +849,15 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkIconSizes` property.
       Returns: A list of icon sizes. The list is separated by colons, and
-      item has the form:
-      
-      `size-name` = `width` , `height`
-      
-      E.g. "gtk-menu=16,16:gtk-button=20,20:gtk-dialog=48,48".
-      GTK+ itself use the following named icon sizes: gtk-menu,
-      gtk-button, gtk-small-toolbar, gtk-large-toolbar, gtk-dnd,
-      gtk-dialog. Applications can register their own named icon
-      sizes with [gtk.global.iconSizeRegister].
+        item has the form:
+        
+        `size-name` = `width` , `height`
+        
+        E.g. "gtk-menu=16,16:gtk-button=20,20:gtk-dialog=48,48".
+        GTK+ itself use the following named icon sizes: gtk-menu,
+        gtk-button, gtk-small-toolbar, gtk-large-toolbar, gtk-dnd,
+        gtk-dialog. Applications can register their own named icon
+        sizes with [gtk.global.iconSizeRegister].
   
       Deprecated: This setting is ignored.
   */
@@ -870,15 +870,15 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkIconSizes` property.
       Params:
         propval = A list of icon sizes. The list is separated by colons, and
-        item has the form:
-        
-        `size-name` = `width` , `height`
-        
-        E.g. "gtk-menu=16,16:gtk-button=20,20:gtk-dialog=48,48".
-        GTK+ itself use the following named icon sizes: gtk-menu,
-        gtk-button, gtk-small-toolbar, gtk-large-toolbar, gtk-dnd,
-        gtk-dialog. Applications can register their own named icon
-        sizes with [gtk.global.iconSizeRegister].
+          item has the form:
+          
+          `size-name` = `width` , `height`
+          
+          E.g. "gtk-menu=16,16:gtk-button=20,20:gtk-dialog=48,48".
+          GTK+ itself use the following named icon sizes: gtk-menu,
+          gtk-button, gtk-small-toolbar, gtk-large-toolbar, gtk-dnd,
+          gtk-dialog. Applications can register their own named icon
+          sizes with [gtk.global.iconSizeRegister].
   
       Deprecated: This setting is ignored.
   */
@@ -902,12 +902,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkImModule` property.
       Returns: Which IM (input method) module should be used by default. This is the
-      input method that will be used if the user has not explicitly chosen
-      another input method from the IM context menu.
-      This also can be a colon-separated list of input methods, which GTK+
-      will try in turn until it finds one available on the system.
-      
-      See #GtkIMContext.
+        input method that will be used if the user has not explicitly chosen
+        another input method from the IM context menu.
+        This also can be a colon-separated list of input methods, which GTK+
+        will try in turn until it finds one available on the system.
+        
+        See #GtkIMContext.
   */
   @property string gtkImModule()
   {
@@ -918,12 +918,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkImModule` property.
       Params:
         propval = Which IM (input method) module should be used by default. This is the
-        input method that will be used if the user has not explicitly chosen
-        another input method from the IM context menu.
-        This also can be a colon-separated list of input methods, which GTK+
-        will try in turn until it finds one available on the system.
-        
-        See #GtkIMContext.
+          input method that will be used if the user has not explicitly chosen
+          another input method from the IM context menu.
+          This also can be a colon-separated list of input methods, which GTK+
+          will try in turn until it finds one available on the system.
+          
+          See #GtkIMContext.
   */
   @property void gtkImModule(string propval)
   {
@@ -991,11 +991,11 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkKeynavCursorOnly` property.
       Returns: When true, keyboard navigation should be able to reach all widgets
-      by using the cursor keys only. Tab, Shift etc. keys can't be expected
-      to be present on the used input device.
+        by using the cursor keys only. Tab, Shift etc. keys can't be expected
+        to be present on the used input device.
   
       Deprecated: Generally, the behavior for touchscreen input should be
-                  performed dynamically based on [gdk.event.Event.getSourceDevice].
+                    performed dynamically based on [gdk.event.Event.getSourceDevice].
   */
   @property bool gtkKeynavCursorOnly()
   {
@@ -1006,11 +1006,11 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkKeynavCursorOnly` property.
       Params:
         propval = When true, keyboard navigation should be able to reach all widgets
-        by using the cursor keys only. Tab, Shift etc. keys can't be expected
-        to be present on the used input device.
+          by using the cursor keys only. Tab, Shift etc. keys can't be expected
+          to be present on the used input device.
   
       Deprecated: Generally, the behavior for touchscreen input should be
-                  performed dynamically based on [gdk.event.Event.getSourceDevice].
+                    performed dynamically based on [gdk.event.Event.getSourceDevice].
   */
   @property void gtkKeynavCursorOnly(bool propval)
   {
@@ -1020,8 +1020,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkKeynavUseCaret` property.
       Returns: Whether GTK+ should make sure that text can be navigated with
-      a caret, even if it is not editable. This is useful when using
-      a screen reader.
+        a caret, even if it is not editable. This is useful when using
+        a screen reader.
   */
   @property bool gtkKeynavUseCaret()
   {
@@ -1032,8 +1032,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkKeynavUseCaret` property.
       Params:
         propval = Whether GTK+ should make sure that text can be navigated with
-        a caret, even if it is not editable. This is useful when using
-        a screen reader.
+          a caret, even if it is not editable. This is useful when using
+          a screen reader.
   */
   @property void gtkKeynavUseCaret(bool propval)
   {
@@ -1043,7 +1043,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkKeynavWrapAround` property.
       Returns: When true, some widgets will wrap around when doing keyboard
-      navigation, such as menus, menubars and notebooks.
+        navigation, such as menus, menubars and notebooks.
   
       Deprecated: This setting is ignored.
   */
@@ -1056,7 +1056,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkKeynavWrapAround` property.
       Params:
         propval = When true, some widgets will wrap around when doing keyboard
-        navigation, such as menus, menubars and notebooks.
+          navigation, such as menus, menubars and notebooks.
   
       Deprecated: This setting is ignored.
   */
@@ -1101,7 +1101,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Keybinding to activate the menu bar.
   
       Deprecated: This setting can still be used for application
-           overrides, but will be ignored in the future
+             overrides, but will be ignored in the future
   */
   @property string gtkMenuBarAccel()
   {
@@ -1114,7 +1114,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Keybinding to activate the menu bar.
   
       Deprecated: This setting can still be used for application
-           overrides, but will be ignored in the future
+             overrides, but will be ignored in the future
   */
   @property void gtkMenuBarAccel(string propval)
   {
@@ -1149,10 +1149,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Whether images should be shown in menu items
   
       Deprecated: This setting is deprecated. Application developers
-        control whether or not a #GtkMenuItem should have an icon or not,
-        on a per widget basis. Either use a #GtkMenuItem with a #GtkBox
-        containing a #GtkImage and a #GtkAccelLabel, or describe your menus
-        using a #GMenu XML description
+          control whether or not a #GtkMenuItem should have an icon or not,
+          on a per widget basis. Either use a #GtkMenuItem with a #GtkBox
+          containing a #GtkImage and a #GtkAccelLabel, or describe your menus
+          using a #GMenu XML description
   */
   @property bool gtkMenuImages()
   {
@@ -1165,10 +1165,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Whether images should be shown in menu items
   
       Deprecated: This setting is deprecated. Application developers
-        control whether or not a #GtkMenuItem should have an icon or not,
-        on a per widget basis. Either use a #GtkMenuItem with a #GtkBox
-        containing a #GtkImage and a #GtkAccelLabel, or describe your menus
-        using a #GMenu XML description
+          control whether or not a #GtkMenuItem should have an icon or not,
+          on a per widget basis. Either use a #GtkMenuItem with a #GtkBox
+          containing a #GtkImage and a #GtkAccelLabel, or describe your menus
+          using a #GMenu XML description
   */
   @property void gtkMenuImages(bool propval)
   {
@@ -1236,8 +1236,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkOverlayScrolling` property.
       Returns: Whether scrolled windows may use overlayed scrolling indicators.
-      If this is set to false, scrolled windows will have permanent
-      scrollbars.
+        If this is set to false, scrolled windows will have permanent
+        scrollbars.
   */
   @property bool gtkOverlayScrolling()
   {
@@ -1248,8 +1248,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkOverlayScrolling` property.
       Params:
         propval = Whether scrolled windows may use overlayed scrolling indicators.
-        If this is set to false, scrolled windows will have permanent
-        scrollbars.
+          If this is set to false, scrolled windows will have permanent
+          scrollbars.
   */
   @property void gtkOverlayScrolling(bool propval)
   {
@@ -1259,13 +1259,13 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkPrimaryButtonWarpsSlider` property.
       Returns: If the value of this setting is true, clicking the primary button in a
-      #GtkRange trough will move the slider, and hence set the range’s value, to
-      the point that you clicked. If it is false, a primary click will cause the
-      slider/value to move by the range’s page-size towards the point clicked.
-      
-      Whichever action you choose for the primary button, the other action will
-      be available by holding Shift and primary-clicking, or (since GTK+ 3.22.25)
-      clicking the middle mouse button.
+        #GtkRange trough will move the slider, and hence set the range’s value, to
+        the point that you clicked. If it is false, a primary click will cause the
+        slider/value to move by the range’s page-size towards the point clicked.
+        
+        Whichever action you choose for the primary button, the other action will
+        be available by holding Shift and primary-clicking, or (since GTK+ 3.22.25)
+        clicking the middle mouse button.
   */
   @property bool gtkPrimaryButtonWarpsSlider()
   {
@@ -1276,13 +1276,13 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkPrimaryButtonWarpsSlider` property.
       Params:
         propval = If the value of this setting is true, clicking the primary button in a
-        #GtkRange trough will move the slider, and hence set the range’s value, to
-        the point that you clicked. If it is false, a primary click will cause the
-        slider/value to move by the range’s page-size towards the point clicked.
-        
-        Whichever action you choose for the primary button, the other action will
-        be available by holding Shift and primary-clicking, or (since GTK+ 3.22.25)
-        clicking the middle mouse button.
+          #GtkRange trough will move the slider, and hence set the range’s value, to
+          the point that you clicked. If it is false, a primary click will cause the
+          slider/value to move by the range’s page-size towards the point clicked.
+          
+          Whichever action you choose for the primary button, the other action will
+          be available by holding Shift and primary-clicking, or (since GTK+ 3.22.25)
+          clicking the middle mouse button.
   */
   @property void gtkPrimaryButtonWarpsSlider(bool propval)
   {
@@ -1292,8 +1292,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkPrintBackends` property.
       Returns: A comma-separated list of print backends to use in the print
-      dialog. Available print backends depend on the GTK+ installation,
-      and may include "file", "cups", "lpr" or "papi".
+        dialog. Available print backends depend on the GTK+ installation,
+        and may include "file", "cups", "lpr" or "papi".
   */
   @property string gtkPrintBackends()
   {
@@ -1304,8 +1304,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkPrintBackends` property.
       Params:
         propval = A comma-separated list of print backends to use in the print
-        dialog. Available print backends depend on the GTK+ installation,
-        and may include "file", "cups", "lpr" or "papi".
+          dialog. Available print backends depend on the GTK+ installation,
+          and may include "file", "cups", "lpr" or "papi".
   */
   @property void gtkPrintBackends(string propval)
   {
@@ -1315,14 +1315,14 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkPrintPreviewCommand` property.
       Returns: A command to run for displaying the print preview. The command
-      should contain a ``f`` placeholder, which will get replaced by
-      the path to the pdf file. The command may also contain a ``s``
-      placeholder, which will get replaced by the path to a file
-      containing the print settings in the format produced by
-      [gtk.print_settings.PrintSettings.toFile].
-      
-      The preview application is responsible for removing the pdf file
-      and the print settings file when it is done.
+        should contain a ``f`` placeholder, which will get replaced by
+        the path to the pdf file. The command may also contain a ``s``
+        placeholder, which will get replaced by the path to a file
+        containing the print settings in the format produced by
+        [gtk.print_settings.PrintSettings.toFile].
+        
+        The preview application is responsible for removing the pdf file
+        and the print settings file when it is done.
   */
   @property string gtkPrintPreviewCommand()
   {
@@ -1333,14 +1333,14 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkPrintPreviewCommand` property.
       Params:
         propval = A command to run for displaying the print preview. The command
-        should contain a ``f`` placeholder, which will get replaced by
-        the path to the pdf file. The command may also contain a ``s``
-        placeholder, which will get replaced by the path to a file
-        containing the print settings in the format produced by
-        [gtk.print_settings.PrintSettings.toFile].
-        
-        The preview application is responsible for removing the pdf file
-        and the print settings file when it is done.
+          should contain a ``f`` placeholder, which will get replaced by
+          the path to the pdf file. The command may also contain a ``s``
+          placeholder, which will get replaced by the path to a file
+          containing the print settings in the format produced by
+          [gtk.print_settings.PrintSettings.toFile].
+          
+          The preview application is responsible for removing the pdf file
+          and the print settings file when it is done.
   */
   @property void gtkPrintPreviewCommand(string propval)
   {
@@ -1350,7 +1350,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkRecentFilesEnabled` property.
       Returns: Whether GTK+ should keep track of items inside the recently used
-      resources list. If set to false, the list will always be empty.
+        resources list. If set to false, the list will always be empty.
   */
   @property bool gtkRecentFilesEnabled()
   {
@@ -1361,7 +1361,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkRecentFilesEnabled` property.
       Params:
         propval = Whether GTK+ should keep track of items inside the recently used
-        resources list. If set to false, the list will always be empty.
+          resources list. If set to false, the list will always be empty.
   */
   @property void gtkRecentFilesEnabled(bool propval)
   {
@@ -1371,8 +1371,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkRecentFilesLimit` property.
       Returns: The number of recently used files that should be displayed by default by
-      #GtkRecentChooser implementations and by the #GtkFileChooser. A value of
-      -1 means every recently used file stored.
+        #GtkRecentChooser implementations and by the #GtkFileChooser. A value of
+        -1 means every recently used file stored.
   
       Deprecated: This setting is ignored
   */
@@ -1385,8 +1385,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkRecentFilesLimit` property.
       Params:
         propval = The number of recently used files that should be displayed by default by
-        #GtkRecentChooser implementations and by the #GtkFileChooser. A value of
-        -1 means every recently used file stored.
+          #GtkRecentChooser implementations and by the #GtkFileChooser. A value of
+          -1 means every recently used file stored.
   
       Deprecated: This setting is ignored
   */
@@ -1398,9 +1398,9 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkRecentFilesMaxAge` property.
       Returns: The maximum age, in days, of the items inside the recently used
-      resources list. Items older than this setting will be excised
-      from the list. If set to 0, the list will always be empty; if
-      set to -1, no item will be removed.
+        resources list. Items older than this setting will be excised
+        from the list. If set to 0, the list will always be empty; if
+        set to -1, no item will be removed.
   */
   @property int gtkRecentFilesMaxAge()
   {
@@ -1411,9 +1411,9 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkRecentFilesMaxAge` property.
       Params:
         propval = The maximum age, in days, of the items inside the recently used
-        resources list. Items older than this setting will be excised
-        from the list. If set to 0, the list will always be empty; if
-        set to -1, no item will be removed.
+          resources list. Items older than this setting will be excised
+          from the list. If set to 0, the list will always be empty; if
+          set to -1, no item will be removed.
   */
   @property void gtkRecentFilesMaxAge(int propval)
   {
@@ -1423,7 +1423,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkScrolledWindowPlacement` property.
       Returns: Where the contents of scrolled windows are located with respect to the
-      scrollbars, if not overridden by the scrolled window's own placement.
+        scrollbars, if not overridden by the scrolled window's own placement.
   
       Deprecated: This setting is ignored.
   */
@@ -1436,7 +1436,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkScrolledWindowPlacement` property.
       Params:
         propval = Where the contents of scrolled windows are located with respect to the
-        scrollbars, if not overridden by the scrolled window's own placement.
+          scrollbars, if not overridden by the scrolled window's own placement.
   
       Deprecated: This setting is ignored.
   */
@@ -1508,12 +1508,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkSoundThemeName` property.
       Returns: The XDG sound theme to use for event sounds.
-      
-      See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
-      for more information on event sounds and sound themes.
-      
-      GTK+ itself does not support event sounds, you have to use a loadable
-      module like the one that comes with libcanberra.
+        
+        See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+        for more information on event sounds and sound themes.
+        
+        GTK+ itself does not support event sounds, you have to use a loadable
+        module like the one that comes with libcanberra.
   */
   @property string gtkSoundThemeName()
   {
@@ -1524,12 +1524,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkSoundThemeName` property.
       Params:
         propval = The XDG sound theme to use for event sounds.
-        
-        See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
-        for more information on event sounds and sound themes.
-        
-        GTK+ itself does not support event sounds, you have to use a loadable
-        module like the one that comes with libcanberra.
+          
+          See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+          for more information on event sounds and sound themes.
+          
+          GTK+ itself does not support event sounds, you have to use a loadable
+          module like the one that comes with libcanberra.
   */
   @property void gtkSoundThemeName(string propval)
   {
@@ -1599,10 +1599,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkTitlebarDoubleClick` property.
       Returns: This setting determines the action to take when a double-click
-      occurs on the titlebar of client-side decorated windows.
-      
-      Recognized actions are minimize, toggle-maximize, menu, lower
-      or none.
+        occurs on the titlebar of client-side decorated windows.
+        
+        Recognized actions are minimize, toggle-maximize, menu, lower
+        or none.
   */
   @property string gtkTitlebarDoubleClick()
   {
@@ -1613,10 +1613,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkTitlebarDoubleClick` property.
       Params:
         propval = This setting determines the action to take when a double-click
-        occurs on the titlebar of client-side decorated windows.
-        
-        Recognized actions are minimize, toggle-maximize, menu, lower
-        or none.
+          occurs on the titlebar of client-side decorated windows.
+          
+          Recognized actions are minimize, toggle-maximize, menu, lower
+          or none.
   */
   @property void gtkTitlebarDoubleClick(string propval)
   {
@@ -1626,10 +1626,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkTitlebarMiddleClick` property.
       Returns: This setting determines the action to take when a middle-click
-      occurs on the titlebar of client-side decorated windows.
-      
-      Recognized actions are minimize, toggle-maximize, menu, lower
-      or none.
+        occurs on the titlebar of client-side decorated windows.
+        
+        Recognized actions are minimize, toggle-maximize, menu, lower
+        or none.
   */
   @property string gtkTitlebarMiddleClick()
   {
@@ -1640,10 +1640,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkTitlebarMiddleClick` property.
       Params:
         propval = This setting determines the action to take when a middle-click
-        occurs on the titlebar of client-side decorated windows.
-        
-        Recognized actions are minimize, toggle-maximize, menu, lower
-        or none.
+          occurs on the titlebar of client-side decorated windows.
+          
+          Recognized actions are minimize, toggle-maximize, menu, lower
+          or none.
   */
   @property void gtkTitlebarMiddleClick(string propval)
   {
@@ -1653,10 +1653,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkTitlebarRightClick` property.
       Returns: This setting determines the action to take when a right-click
-      occurs on the titlebar of client-side decorated windows.
-      
-      Recognized actions are minimize, toggle-maximize, menu, lower
-      or none.
+        occurs on the titlebar of client-side decorated windows.
+        
+        Recognized actions are minimize, toggle-maximize, menu, lower
+        or none.
   */
   @property string gtkTitlebarRightClick()
   {
@@ -1667,10 +1667,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkTitlebarRightClick` property.
       Params:
         propval = This setting determines the action to take when a right-click
-        occurs on the titlebar of client-side decorated windows.
-        
-        Recognized actions are minimize, toggle-maximize, menu, lower
-        or none.
+          occurs on the titlebar of client-side decorated windows.
+          
+          Recognized actions are minimize, toggle-maximize, menu, lower
+          or none.
   */
   @property void gtkTitlebarRightClick(string propval)
   {
@@ -1726,10 +1726,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkTooltipBrowseModeTimeout` property.
       Returns: Amount of time, in milliseconds, after which the browse mode
-      will be disabled.
-      
-      See #GtkSettings:gtk-tooltip-browse-timeout for more information
-      about browse mode.
+        will be disabled.
+        
+        See #GtkSettings:gtk-tooltip-browse-timeout for more information
+        about browse mode.
   
       Deprecated: This setting is ignored.
   */
@@ -1742,10 +1742,10 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkTooltipBrowseModeTimeout` property.
       Params:
         propval = Amount of time, in milliseconds, after which the browse mode
-        will be disabled.
-        
-        See #GtkSettings:gtk-tooltip-browse-timeout for more information
-        about browse mode.
+          will be disabled.
+          
+          See #GtkSettings:gtk-tooltip-browse-timeout for more information
+          about browse mode.
   
       Deprecated: This setting is ignored.
   */
@@ -1757,14 +1757,14 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkTooltipBrowseTimeout` property.
       Returns: Controls the time after which tooltips will appear when
-      browse mode is enabled, in milliseconds.
-      
-      Browse mode is enabled when the mouse pointer moves off an object
-      where a tooltip was currently being displayed. If the mouse pointer
-      hits another object before the browse mode timeout expires (see
-      #GtkSettings:gtk-tooltip-browse-mode-timeout), it will take the
-      amount of milliseconds specified by this setting to popup the tooltip
-      for the new object.
+        browse mode is enabled, in milliseconds.
+        
+        Browse mode is enabled when the mouse pointer moves off an object
+        where a tooltip was currently being displayed. If the mouse pointer
+        hits another object before the browse mode timeout expires (see
+        #GtkSettings:gtk-tooltip-browse-mode-timeout), it will take the
+        amount of milliseconds specified by this setting to popup the tooltip
+        for the new object.
   
       Deprecated: This setting is ignored.
   */
@@ -1777,14 +1777,14 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkTooltipBrowseTimeout` property.
       Params:
         propval = Controls the time after which tooltips will appear when
-        browse mode is enabled, in milliseconds.
-        
-        Browse mode is enabled when the mouse pointer moves off an object
-        where a tooltip was currently being displayed. If the mouse pointer
-        hits another object before the browse mode timeout expires (see
-        #GtkSettings:gtk-tooltip-browse-mode-timeout), it will take the
-        amount of milliseconds specified by this setting to popup the tooltip
-        for the new object.
+          browse mode is enabled, in milliseconds.
+          
+          Browse mode is enabled when the mouse pointer moves off an object
+          where a tooltip was currently being displayed. If the mouse pointer
+          hits another object before the browse mode timeout expires (see
+          #GtkSettings:gtk-tooltip-browse-mode-timeout), it will take the
+          amount of milliseconds specified by this setting to popup the tooltip
+          for the new object.
   
       Deprecated: This setting is ignored.
   */
@@ -1796,7 +1796,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkTooltipTimeout` property.
       Returns: Time, in milliseconds, after which a tooltip could appear if the
-      cursor is hovering on top of a widget.
+        cursor is hovering on top of a widget.
   
       Deprecated: This setting is ignored.
   */
@@ -1809,7 +1809,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkTooltipTimeout` property.
       Params:
         propval = Time, in milliseconds, after which a tooltip could appear if the
-        cursor is hovering on top of a widget.
+          cursor is hovering on top of a widget.
   
       Deprecated: This setting is ignored.
   */
@@ -1821,11 +1821,11 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkTouchscreenMode` property.
       Returns: When true, there are no motion notify events delivered on this screen,
-      and widgets can't use the pointer hovering them for any essential
-      functionality.
+        and widgets can't use the pointer hovering them for any essential
+        functionality.
   
       Deprecated: Generally, the behavior for touchscreen input should be
-                  performed dynamically based on [gdk.event.Event.getSourceDevice].
+                    performed dynamically based on [gdk.event.Event.getSourceDevice].
   */
   @property bool gtkTouchscreenMode()
   {
@@ -1836,11 +1836,11 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkTouchscreenMode` property.
       Params:
         propval = When true, there are no motion notify events delivered on this screen,
-        and widgets can't use the pointer hovering them for any essential
-        functionality.
+          and widgets can't use the pointer hovering them for any essential
+          functionality.
   
       Deprecated: Generally, the behavior for touchscreen input should be
-                  performed dynamically based on [gdk.event.Event.getSourceDevice].
+                    performed dynamically based on [gdk.event.Event.getSourceDevice].
   */
   @property void gtkTouchscreenMode(bool propval)
   {
@@ -1850,7 +1850,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /**
       Get `gtkVisibleFocus` property.
       Returns: Whether 'focus rectangles' should be always visible, never visible,
-      or hidden until the user starts to use the keyboard.
+        or hidden until the user starts to use the keyboard.
   
       Deprecated: This setting is ignored
   */
@@ -1863,7 +1863,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Set `gtkVisibleFocus` property.
       Params:
         propval = Whether 'focus rectangles' should be always visible, never visible,
-        or hidden until the user starts to use the keyboard.
+          or hidden until the user starts to use the keyboard.
   
       Deprecated: This setting is ignored
   */
@@ -1976,11 +1976,14 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 
     extern(C) gboolean _parserCallback(const(GParamSpec)* pspec, const(GString)* rcString, GValue* propertyValue)
     {
-      gboolean _retval = _static_parser(pspec ? new gobject.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null, rcString ? new glib.string_.String(cast(void*)rcString, No.Take) : null, propertyValue ? new gobject.value.Value(cast(void*)propertyValue, No.Take) : null);
+      bool _dretval;
+
+      _dretval = _static_parser(pspec ? new gobject.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null, rcString ? new glib.string_.String(cast(void*)rcString, No.Take) : null, propertyValue ? new gobject.value.Value(cast(void*)propertyValue, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _parserCB = parser ? &_parserCallback : null;
-
     _static_parser = parser;
     gtk_settings_install_property_parser(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _parserCB);
     _static_parser = null;

@@ -109,10 +109,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `active` property.
       Returns: The item which is currently active. If the model is a non-flat treemodel,
-      and the active item is not an immediate child of the root of the tree,
-      this property has the value
-      `gtk_tree_path_get_indices (path)[0]`,
-      where `path` is the #GtkTreePath of the active item.
+        and the active item is not an immediate child of the root of the tree,
+        this property has the value
+        `gtk_tree_path_get_indices (path)[0]`,
+        where `path` is the #GtkTreePath of the active item.
   */
   @property int active()
   {
@@ -123,10 +123,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `active` property.
       Params:
         propval = The item which is currently active. If the model is a non-flat treemodel,
-        and the active item is not an immediate child of the root of the tree,
-        this property has the value
-        `gtk_tree_path_get_indices (path)[0]`,
-        where `path` is the #GtkTreePath of the active item.
+          and the active item is not an immediate child of the root of the tree,
+          this property has the value
+          `gtk_tree_path_get_indices (path)[0]`,
+          where `path` is the #GtkTreePath of the active item.
   */
   @property void active(int propval)
   {
@@ -155,9 +155,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `addTearoffs` property.
       Returns: The add-tearoffs property controls whether generated menus
-      have tearoff menu items.
-      
-      Note that this only affects menu style combo boxes.
+        have tearoff menu items.
+        
+        Note that this only affects menu style combo boxes.
   */
   @property bool addTearoffs()
   {
@@ -168,9 +168,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `addTearoffs` property.
       Params:
         propval = The add-tearoffs property controls whether generated menus
-        have tearoff menu items.
-        
-        Note that this only affects menu style combo boxes.
+          have tearoff menu items.
+          
+          Note that this only affects menu style combo boxes.
   */
   @property void addTearoffs(bool propval)
   {
@@ -180,7 +180,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `buttonSensitivity` property.
       Returns: Whether the dropdown button is sensitive when
-      the model is empty.
+        the model is empty.
   */
   @property gtk.types.SensitivityType buttonSensitivity()
   {
@@ -191,7 +191,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `buttonSensitivity` property.
       Params:
         propval = Whether the dropdown button is sensitive when
-        the model is empty.
+          the model is empty.
   */
   @property void buttonSensitivity(gtk.types.SensitivityType propval)
   {
@@ -201,10 +201,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `columnSpanColumn` property.
       Returns: If this is set to a non-negative value, it must be the index of a column
-      of type `G_TYPE_INT` in the model. The value in that column for each item
-      will determine how many columns that item will span in the popup.
-      Therefore, values in this column must be greater than zero, and the sum of
-      an item’s column position + span should not exceed #GtkComboBox:wrap-width.
+        of type `G_TYPE_INT` in the model. The value in that column for each item
+        will determine how many columns that item will span in the popup.
+        Therefore, values in this column must be greater than zero, and the sum of
+        an item’s column position + span should not exceed #GtkComboBox:wrap-width.
   */
   @property int columnSpanColumn()
   {
@@ -215,10 +215,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `columnSpanColumn` property.
       Params:
         propval = If this is set to a non-negative value, it must be the index of a column
-        of type `G_TYPE_INT` in the model. The value in that column for each item
-        will determine how many columns that item will span in the popup.
-        Therefore, values in this column must be greater than zero, and the sum of
-        an item’s column position + span should not exceed #GtkComboBox:wrap-width.
+          of type `G_TYPE_INT` in the model. The value in that column for each item
+          will determine how many columns that item will span in the popup.
+          Therefore, values in this column must be greater than zero, and the sum of
+          an item’s column position + span should not exceed #GtkComboBox:wrap-width.
   */
   @property void columnSpanColumn(int propval)
   {
@@ -228,7 +228,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `entryTextColumn` property.
       Returns: The column in the combo box's model to associate with strings from the entry
-      if the combo was created with #GtkComboBox:has-entry = true.
+        if the combo was created with #GtkComboBox:has-entry = true.
   */
   @property int entryTextColumn()
   {
@@ -239,7 +239,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `entryTextColumn` property.
       Params:
         propval = The column in the combo box's model to associate with strings from the entry
-        if the combo was created with #GtkComboBox:has-entry = true.
+          if the combo was created with #GtkComboBox:has-entry = true.
   */
   @property void entryTextColumn(int propval)
   {
@@ -249,7 +249,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `hasFrame` property.
       Returns: The has-frame property controls whether a frame
-      is drawn around the entry.
+        is drawn around the entry.
   */
   @property bool hasFrame()
   {
@@ -260,7 +260,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `hasFrame` property.
       Params:
         propval = The has-frame property controls whether a frame
-        is drawn around the entry.
+          is drawn around the entry.
   */
   @property void hasFrame(bool propval)
   {
@@ -270,7 +270,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `idColumn` property.
       Returns: The column in the combo box's model that provides string
-      IDs for the values in the model, if != -1.
+        IDs for the values in the model, if != -1.
   */
   @property int idColumn()
   {
@@ -281,7 +281,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `idColumn` property.
       Params:
         propval = The column in the combo box's model that provides string
-        IDs for the values in the model, if != -1.
+          IDs for the values in the model, if != -1.
   */
   @property void idColumn(int propval)
   {
@@ -291,7 +291,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `model` property.
       Returns: The model from which the combo box takes the values shown
-      in the list.
+        in the list.
   */
   @property gtk.tree_model.TreeModel model()
   {
@@ -302,7 +302,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `model` property.
       Params:
         propval = The model from which the combo box takes the values shown
-        in the list.
+          in the list.
   */
   @property void model(gtk.tree_model.TreeModel propval)
   {
@@ -312,7 +312,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `popupFixedWidth` property.
       Returns: Whether the popup's width should be a fixed width matching the
-      allocated width of the combo box.
+        allocated width of the combo box.
   */
   @property bool popupFixedWidth()
   {
@@ -323,7 +323,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `popupFixedWidth` property.
       Params:
         propval = Whether the popup's width should be a fixed width matching the
-        allocated width of the combo box.
+          allocated width of the combo box.
   */
   @property void popupFixedWidth(bool propval)
   {
@@ -333,8 +333,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `popupShown` property.
       Returns: Whether the combo boxes dropdown is popped up.
-      Note that this property is mainly useful, because
-      it allows you to connect to notify::popup-shown.
+        Note that this property is mainly useful, because
+        it allows you to connect to notify::popup-shown.
   */
   @property bool popupShown()
   {
@@ -344,9 +344,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `rowSpanColumn` property.
       Returns: If this is set to a non-negative value, it must be the index of a column
-      of type `G_TYPE_INT` in the model. The value in that column for each item
-      will determine how many rows that item will span in the popup. Therefore,
-      values in this column must be greater than zero.
+        of type `G_TYPE_INT` in the model. The value in that column for each item
+        will determine how many rows that item will span in the popup. Therefore,
+        values in this column must be greater than zero.
   */
   @property int rowSpanColumn()
   {
@@ -357,9 +357,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `rowSpanColumn` property.
       Params:
         propval = If this is set to a non-negative value, it must be the index of a column
-        of type `G_TYPE_INT` in the model. The value in that column for each item
-        will determine how many rows that item will span in the popup. Therefore,
-        values in this column must be greater than zero.
+          of type `G_TYPE_INT` in the model. The value in that column for each item
+          will determine how many rows that item will span in the popup. Therefore,
+          values in this column must be greater than zero.
   */
   @property void rowSpanColumn(int propval)
   {
@@ -369,7 +369,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `tearoffTitle` property.
       Returns: A title that may be displayed by the window manager
-      when the popup is torn-off.
+        when the popup is torn-off.
   */
   @property string tearoffTitle()
   {
@@ -380,7 +380,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `tearoffTitle` property.
       Params:
         propval = A title that may be displayed by the window manager
-        when the popup is torn-off.
+          when the popup is torn-off.
   */
   @property void tearoffTitle(string propval)
   {
@@ -390,7 +390,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Get `wrapWidth` property.
       Returns: If wrap-width is set to a positive value, items in the popup will be laid
-      out along multiple columns, starting a new row on reaching the wrap width.
+        out along multiple columns, starting a new row on reaching the wrap width.
   */
   @property int wrapWidth()
   {
@@ -401,7 +401,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Set `wrapWidth` property.
       Params:
         propval = If wrap-width is set to a positive value, items in the popup will be laid
-        out along multiple columns, starting a new row on reaching the wrap width.
+          out along multiple columns, starting a new row on reaching the wrap width.
   */
   @property void wrapWidth(int propval)
   {
@@ -546,9 +546,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   bool getActiveIter(out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    GtkTreeIter _iter;
-    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, &_iter);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, cast(GtkTreeIter*)&iter);
     return _retval;
   }
 
@@ -798,9 +796,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         iter = The #GtkTreeIter, or null
   */
-  void setActiveIter(gtk.tree_iter.TreeIter iter = null)
+  void setActiveIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, cast(GtkTreeIter*)&iter);
   }
 
   /**
@@ -928,13 +926,15 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_combo_box_set_row_separator_func(cast(GtkComboBox*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -982,11 +982,11 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Connect to `Changed` signal.
   
       The changed signal is emitted when the active
-      item is changed. The can be due to the user selecting
-      a different item from the list, or due to a
-      call to [gtk.combo_box.ComboBox.setActiveIter].
-      It will also be emitted while typing into the entry of a combo box
-      with an entry.
+        item is changed. The can be due to the user selecting
+        a different item from the list, or due to a
+        call to [gtk.combo_box.ComboBox.setActiveIter].
+        It will also be emitted while typing into the entry of a combo box
+        with an entry.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1024,37 +1024,37 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Connect to `FormatEntryText` signal.
   
       For combo boxes that are created with an entry (See GtkComboBox:has-entry).
-      
-      A signal which allows you to change how the text displayed in a combo box's
-      entry is displayed.
-      
-      Connect a signal handler which returns an allocated string representing
-      path. That string will then be used to set the text in the combo box's entry.
-      The default signal handler uses the text from the GtkComboBox::entry-text-column
-      model column.
-      
-      Here's an example signal handler which fetches data from the model and
-      displays it in the entry.
-      ```c
-      static gchar*
-      format_entry_text_callback (GtkComboBox *combo,
-                                  const gchar *path,
-                                  gpointer     user_data)
-      {
-        GtkTreeIter iter;
-        GtkTreeModel model;
-        gdouble      value;
-      
-        model = gtk_combo_box_get_model (combo);
-      
-        gtk_tree_model_get_iter_from_string (model, &iter, path);
-        gtk_tree_model_get (model, &iter,
-                            THE_DOUBLE_VALUE_COLUMN, &value,
-                            -1);
-      
-        return g_strdup_printf ("%g", value);
-      }
-      ```
+        
+        A signal which allows you to change how the text displayed in a combo box's
+        entry is displayed.
+        
+        Connect a signal handler which returns an allocated string representing
+        path. That string will then be used to set the text in the combo box's entry.
+        The default signal handler uses the text from the GtkComboBox::entry-text-column
+        model column.
+        
+        Here's an example signal handler which fetches data from the model and
+        displays it in the entry.
+        ```c
+        static gchar*
+        format_entry_text_callback (GtkComboBox *combo,
+                                    const gchar *path,
+                                    gpointer     user_data)
+        {
+          GtkTreeIter iter;
+          GtkTreeModel model;
+          gdouble      value;
+        
+          model = gtk_combo_box_get_model (combo);
+        
+          gtk_tree_model_get_iter_from_string (model, &iter, path);
+          gtk_tree_model_get (model, &iter,
+                              THE_DOUBLE_VALUE_COLUMN, &value,
+                              -1);
+        
+          return g_strdup_printf ("%g", value);
+        }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1066,7 +1066,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
           `comboBox` the instance the signal is connected to (optional)
   
           `Returns` a newly allocated string representing path
-          for the current GtkComboBox model.
+            for the current GtkComboBox model.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1102,8 +1102,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Connect to `MoveActive` signal.
   
       The ::move-active signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to move the active selection.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to move the active selection.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1148,10 +1148,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Connect to `Popdown` signal.
   
       The ::popdown signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to popdown the combo box list.
-      
-      The default bindings for this signal are Alt+Up and Escape.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to popdown the combo box list.
+        
+        The default bindings for this signal are Alt+Up and Escape.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1191,10 +1191,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Connect to `Popup` signal.
   
       The ::popup signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to popup the combo box list.
-      
-      The default binding for this signal is Alt+Down.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to popup the combo box list.
+        
+        The default binding for this signal is Alt+Down.
   
       Params:
         callback = signal callback delegate or function to connect

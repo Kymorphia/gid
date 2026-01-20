@@ -291,9 +291,9 @@ class UserContentManager : gobject.object.ObjectWrap
       Connect to `ScriptMessageReceived` signal.
   
       This signal is emitted when JavaScript in a web view calls
-      <code>window.webkit.messageHandlers.<name>.postMessage()</code>, after registering
-      <code><name></code> using
-      [webkit.user_content_manager.UserContentManager.registerScriptMessageHandler]
+        <code>window.webkit.messageHandlers.<name>.postMessage()</code>, after registering
+        <code><name></code> using
+        [webkit.user_content_manager.UserContentManager.registerScriptMessageHandler]
   
       Params:
         detail = Signal detail or null (default)
@@ -339,17 +339,17 @@ class UserContentManager : gobject.object.ObjectWrap
       Connect to `ScriptMessageWithReplyReceived` signal.
   
       This signal is emitted when JavaScript in a web view calls
-      <code>window.webkit.messageHandlers.<name>.postMessage()</code>, after registering
-      <code><name></code> using
-      [webkit.user_content_manager.UserContentManager.registerScriptMessageHandlerWithReply]
-      
-      The given reply can be used to send a return value with
-      [webkit.script_message_reply.ScriptMessageReply.returnValue] or an error message with
-      [webkit.script_message_reply.ScriptMessageReply.returnErrorMessage]. If none of them are
-      called, an automatic reply with an undefined value will be sent.
-      
-      It is possible to handle the reply asynchronously, by simply calling
-      [gobject.object.ObjectWrap.ref_] on the reply and returning true.
+        <code>window.webkit.messageHandlers.<name>.postMessage()</code>, after registering
+        <code><name></code> using
+        [webkit.user_content_manager.UserContentManager.registerScriptMessageHandlerWithReply]
+        
+        The given reply can be used to send a return value with
+        [webkit.script_message_reply.ScriptMessageReply.returnValue] or an error message with
+        [webkit.script_message_reply.ScriptMessageReply.returnErrorMessage]. If none of them are
+        called, an automatic reply with an undefined value will be sent.
+        
+        It is possible to handle the reply asynchronously, by simply calling
+        [gobject.object.ObjectWrap.ref_] on the reply and returning true.
   
       Params:
         detail = Signal detail or null (default)
@@ -364,7 +364,7 @@ class UserContentManager : gobject.object.ObjectWrap
           `userContentManager` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

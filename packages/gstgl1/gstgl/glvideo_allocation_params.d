@@ -26,7 +26,7 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -102,7 +102,7 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
   */
   @property gstvideo.video_alignment.VideoAlignment valign()
   {
-    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)(cast(GstGLVideoAllocationParams*)this._cPtr).valign, No.Take);
+    return cToD!(gstvideo.video_alignment.VideoAlignment)(cast(void*)(cast(GstGLVideoAllocationParams*)this._cPtr).valign);
   }
 
   /**
@@ -147,7 +147,7 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
   this(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstvideo.video_info.VideoInfo vInfo, uint plane, gstvideo.video_alignment.VideoAlignment valign, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat)
   {
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign._cPtr : null, target, texFormat);
+    _cretval = gst_gl_video_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)&valign, target, texFormat);
     this(_cretval, Yes.Take);
   }
 
@@ -162,9 +162,8 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new_wrapped_data(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign._cPtr : null, target, texFormat, wrappedData, userData, _notifyCB);
+    _cretval = gst_gl_video_allocation_params_new_wrapped_data(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)&valign, target, texFormat, wrappedData, userData, _notifyCB);
     auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -197,9 +196,8 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new_wrapped_gl_handle(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign._cPtr : null, target, texFormat, glHandle, userData, _notifyCB);
+    _cretval = gst_gl_video_allocation_params_new_wrapped_gl_handle(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)&valign, target, texFormat, glHandle, userData, _notifyCB);
     auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -215,9 +213,8 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new_wrapped_texture(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign._cPtr : null, target, texFormat, texId, userData, _notifyCB);
+    _cretval = gst_gl_video_allocation_params_new_wrapped_texture(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)&valign, target, texFormat, texId, userData, _notifyCB);
     auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

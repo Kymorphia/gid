@@ -255,15 +255,15 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `ellipsize` property.
       Returns: The preferred place to ellipsize the string, if the label does
-      not have enough room to display the entire string.
-      
-      Note that setting this property to a value other than
-      [pango.types.EllipsizeMode.None] has the side-effect that the label requests
-      only enough space to display the ellipsis "...". In particular, this
-      means that ellipsizing labels do not work well in notebook tabs, unless
-      the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
-      Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
-      and [gtk.label.Label.setWidthChars].
+        not have enough room to display the entire string.
+        
+        Note that setting this property to a value other than
+        [pango.types.EllipsizeMode.None] has the side-effect that the label requests
+        only enough space to display the ellipsis "...". In particular, this
+        means that ellipsizing labels do not work well in notebook tabs, unless
+        the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
+        Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
+        and [gtk.label.Label.setWidthChars].
   */
   @property pango.types.EllipsizeMode ellipsize()
   {
@@ -274,15 +274,15 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `ellipsize` property.
       Params:
         propval = The preferred place to ellipsize the string, if the label does
-        not have enough room to display the entire string.
-        
-        Note that setting this property to a value other than
-        [pango.types.EllipsizeMode.None] has the side-effect that the label requests
-        only enough space to display the ellipsis "...". In particular, this
-        means that ellipsizing labels do not work well in notebook tabs, unless
-        the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
-        Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
-        and [gtk.label.Label.setWidthChars].
+          not have enough room to display the entire string.
+          
+          Note that setting this property to a value other than
+          [pango.types.EllipsizeMode.None] has the side-effect that the label requests
+          only enough space to display the ellipsis "...". In particular, this
+          means that ellipsizing labels do not work well in notebook tabs, unless
+          the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
+          Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
+          and [gtk.label.Label.setWidthChars].
   */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
@@ -311,9 +311,9 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `justify` property.
       Returns: The alignment of the lines in the text of the label, relative to each other.
-      
-      This does *not* affect the alignment of the label within its allocation.
-      See [gtk.label.Label.xalign] for that.
+        
+        This does *not* affect the alignment of the label within its allocation.
+        See [gtk.label.Label.xalign] for that.
   */
   @property gtk.types.Justification justify()
   {
@@ -324,9 +324,9 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `justify` property.
       Params:
         propval = The alignment of the lines in the text of the label, relative to each other.
-        
-        This does *not* affect the alignment of the label within its allocation.
-        See [gtk.label.Label.xalign] for that.
+          
+          This does *not* affect the alignment of the label within its allocation.
+          See [gtk.label.Label.xalign] for that.
   */
   @property void justify(gtk.types.Justification propval)
   {
@@ -336,27 +336,6 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `label` property.
       Returns: The contents of the label.
-      
-      If the string contains Pango markup (see `func@Pango.parse_markup`),
-      you will have to set the `property@Gtk.Label:use-markup` property to
-      true in order for the label to display the markup attributes. See also
-      [gtk.label.Label.setMarkup] for a convenience function that sets both
-      this property and the `property@Gtk.Label:use-markup` property at the
-      same time.
-      
-      If the string contains underlines acting as mnemonics, you will have to
-      set the `property@Gtk.Label:use-underline` property to true in order
-      for the label to display them.
-  */
-  @property string label()
-  {
-    return getLabel();
-  }
-
-  /**
-      Set `label` property.
-      Params:
-        propval = The contents of the label.
         
         If the string contains Pango markup (see `func@Pango.parse_markup`),
         you will have to set the `property@Gtk.Label:use-markup` property to
@@ -369,6 +348,27 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         set the `property@Gtk.Label:use-underline` property to true in order
         for the label to display them.
   */
+  @property string label()
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The contents of the label.
+          
+          If the string contains Pango markup (see `func@Pango.parse_markup`),
+          you will have to set the `property@Gtk.Label:use-markup` property to
+          true in order for the label to display the markup attributes. See also
+          [gtk.label.Label.setMarkup] for a convenience function that sets both
+          this property and the `property@Gtk.Label:use-markup` property at the
+          same time.
+          
+          If the string contains underlines acting as mnemonics, you will have to
+          set the `property@Gtk.Label:use-underline` property to true in order
+          for the label to display them.
+  */
   @property void label(string propval)
   {
     return setLabel(propval);
@@ -377,10 +377,10 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `lines` property.
       Returns: The number of lines to which an ellipsized, wrapping label
-      should be limited.
-      
-      This property has no effect if the label is not wrapping or ellipsized.
-      Set this property to -1 if you don't want to limit the number of lines.
+        should be limited.
+        
+        This property has no effect if the label is not wrapping or ellipsized.
+        Set this property to -1 if you don't want to limit the number of lines.
   */
   @property int lines()
   {
@@ -391,10 +391,10 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `lines` property.
       Params:
         propval = The number of lines to which an ellipsized, wrapping label
-        should be limited.
-        
-        This property has no effect if the label is not wrapping or ellipsized.
-        Set this property to -1 if you don't want to limit the number of lines.
+          should be limited.
+          
+          This property has no effect if the label is not wrapping or ellipsized.
+          Set this property to -1 if you don't want to limit the number of lines.
   */
   @property void lines(int propval)
   {
@@ -404,12 +404,12 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `maxWidthChars` property.
       Returns: The desired maximum width of the label, in characters.
-      
-      If this property is set to -1, the width will be calculated automatically.
-      
-      See the section on [text layout](class.Label.html#text-layout) for details of how
-      `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
-      determine the width of ellipsized and wrapped labels.
+        
+        If this property is set to -1, the width will be calculated automatically.
+        
+        See the section on [text layout](class.Label.html#text-layout) for details of how
+        `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+        determine the width of ellipsized and wrapped labels.
   */
   @property int maxWidthChars()
   {
@@ -420,12 +420,12 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `maxWidthChars` property.
       Params:
         propval = The desired maximum width of the label, in characters.
-        
-        If this property is set to -1, the width will be calculated automatically.
-        
-        See the section on [text layout](class.Label.html#text-layout) for details of how
-        `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
-        determine the width of ellipsized and wrapped labels.
+          
+          If this property is set to -1, the width will be calculated automatically.
+          
+          See the section on [text layout](class.Label.html#text-layout) for details of how
+          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          determine the width of ellipsized and wrapped labels.
   */
   @property void maxWidthChars(int propval)
   {
@@ -463,12 +463,12 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `naturalWrapMode` property.
       Returns: Select the line wrapping for the natural size request.
-      
-      This only affects the natural size requested. For the actual wrapping used,
-      see the [gtk.label.Label.wrap] property.
-      
-      The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
-      [gtk.label.Label.wrap] property.
+        
+        This only affects the natural size requested. For the actual wrapping used,
+        see the [gtk.label.Label.wrap] property.
+        
+        The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
+        [gtk.label.Label.wrap] property.
   */
   @property gtk.types.NaturalWrapMode naturalWrapMode()
   {
@@ -479,12 +479,12 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `naturalWrapMode` property.
       Params:
         propval = Select the line wrapping for the natural size request.
-        
-        This only affects the natural size requested. For the actual wrapping used,
-        see the [gtk.label.Label.wrap] property.
-        
-        The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
-        [gtk.label.Label.wrap] property.
+          
+          This only affects the natural size requested. For the actual wrapping used,
+          see the [gtk.label.Label.wrap] property.
+          
+          The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
+          [gtk.label.Label.wrap] property.
   */
   @property void naturalWrapMode(gtk.types.NaturalWrapMode propval)
   {
@@ -513,11 +513,11 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `singleLineMode` property.
       Returns: Whether the label is in single line mode.
-      
-      In single line mode, the height of the label does not depend on the
-      actual text, it is always set to ascent + descent of the font. This
-      can be an advantage in situations where resizing the label because
-      of text changes would be distracting, e.g. in a statusbar.
+        
+        In single line mode, the height of the label does not depend on the
+        actual text, it is always set to ascent + descent of the font. This
+        can be an advantage in situations where resizing the label because
+        of text changes would be distracting, e.g. in a statusbar.
   */
   @property bool singleLineMode()
   {
@@ -528,11 +528,11 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `singleLineMode` property.
       Params:
         propval = Whether the label is in single line mode.
-        
-        In single line mode, the height of the label does not depend on the
-        actual text, it is always set to ascent + descent of the font. This
-        can be an advantage in situations where resizing the label because
-        of text changes would be distracting, e.g. in a statusbar.
+          
+          In single line mode, the height of the label does not depend on the
+          actual text, it is always set to ascent + descent of the font. This
+          can be an advantage in situations where resizing the label because
+          of text changes would be distracting, e.g. in a statusbar.
   */
   @property void singleLineMode(bool propval)
   {
@@ -561,8 +561,8 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `useMarkup` property.
       Returns: true if the text of the label includes Pango markup.
-      
-      See `func@Pango.parse_markup`.
+        
+        See `func@Pango.parse_markup`.
   */
   @property bool useMarkup()
   {
@@ -573,8 +573,8 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `useMarkup` property.
       Params:
         propval = true if the text of the label includes Pango markup.
-        
-        See `func@Pango.parse_markup`.
+          
+          See `func@Pango.parse_markup`.
   */
   @property void useMarkup(bool propval)
   {
@@ -584,7 +584,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `useUnderline` property.
       Returns: true if the text of the label indicates a mnemonic with an _
-      before the mnemonic character.
+        before the mnemonic character.
   */
   @property bool useUnderline()
   {
@@ -595,7 +595,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `useUnderline` property.
       Params:
         propval = true if the text of the label indicates a mnemonic with an _
-        before the mnemonic character.
+          before the mnemonic character.
   */
   @property void useUnderline(bool propval)
   {
@@ -605,12 +605,12 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `widthChars` property.
       Returns: The desired width of the label, in characters.
-      
-      If this property is set to -1, the width will be calculated automatically.
-      
-      See the section on [text layout](class.Label.html#text-layout) for details of how
-      `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
-      determine the width of ellipsized and wrapped labels.
+        
+        If this property is set to -1, the width will be calculated automatically.
+        
+        See the section on [text layout](class.Label.html#text-layout) for details of how
+        `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+        determine the width of ellipsized and wrapped labels.
   */
   @property int widthChars()
   {
@@ -621,12 +621,12 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `widthChars` property.
       Params:
         propval = The desired width of the label, in characters.
-        
-        If this property is set to -1, the width will be calculated automatically.
-        
-        See the section on [text layout](class.Label.html#text-layout) for details of how
-        `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
-        determine the width of ellipsized and wrapped labels.
+          
+          If this property is set to -1, the width will be calculated automatically.
+          
+          See the section on [text layout](class.Label.html#text-layout) for details of how
+          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          determine the width of ellipsized and wrapped labels.
   */
   @property void widthChars(int propval)
   {
@@ -655,13 +655,13 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `wrapMode` property.
       Returns: Controls how the line wrapping is done.
-      
-      This only affects the formatting if line wrapping is on (see the
-      [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
-      which means wrap on word boundaries.
-      
-      For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
-      property.
+        
+        This only affects the formatting if line wrapping is on (see the
+        [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
+        which means wrap on word boundaries.
+        
+        For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
+        property.
   */
   @property pango.types.WrapMode wrapMode()
   {
@@ -672,13 +672,13 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `wrapMode` property.
       Params:
         propval = Controls how the line wrapping is done.
-        
-        This only affects the formatting if line wrapping is on (see the
-        [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
-        which means wrap on word boundaries.
-        
-        For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
-        property.
+          
+          This only affects the formatting if line wrapping is on (see the
+          [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
+          which means wrap on word boundaries.
+          
+          For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
+          property.
   */
   @property void wrapMode(pango.types.WrapMode propval)
   {
@@ -688,9 +688,9 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `xalign` property.
       Returns: The horizontal alignment of the label text inside its size allocation.
-      
-      Compare this to [gtk.widget.Widget.halign], which determines how the
-      labels size allocation is positioned in the space available for the label.
+        
+        Compare this to [gtk.widget.Widget.halign], which determines how the
+        labels size allocation is positioned in the space available for the label.
   */
   @property float xalign()
   {
@@ -701,9 +701,9 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `xalign` property.
       Params:
         propval = The horizontal alignment of the label text inside its size allocation.
-        
-        Compare this to [gtk.widget.Widget.halign], which determines how the
-        labels size allocation is positioned in the space available for the label.
+          
+          Compare this to [gtk.widget.Widget.halign], which determines how the
+          labels size allocation is positioned in the space available for the label.
   */
   @property void xalign(float propval)
   {
@@ -713,9 +713,9 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Get `yalign` property.
       Returns: The vertical alignment of the label text inside its size allocation.
-      
-      Compare this to [gtk.widget.Widget.valign], which determines how the
-      labels size allocation is positioned in the space available for the label.
+        
+        Compare this to [gtk.widget.Widget.valign], which determines how the
+        labels size allocation is positioned in the space available for the label.
   */
   @property float yalign()
   {
@@ -726,9 +726,9 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Set `yalign` property.
       Params:
         propval = The vertical alignment of the label text inside its size allocation.
-        
-        Compare this to [gtk.widget.Widget.valign], which determines how the
-        labels size allocation is positioned in the space available for the label.
+          
+          Compare this to [gtk.widget.Widget.valign], which determines how the
+          labels size allocation is positioned in the space available for the label.
   */
   @property void yalign(float propval)
   {
@@ -1551,13 +1551,13 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Connect to `ActivateCurrentLink` signal.
   
       Gets emitted when the user activates a link in the label.
-      
-      The ::activate-current-link is a [keybinding signal](class.SignalAction.html).
-      
-      Applications may also emit the signal with [gobject.global.signalEmitByName]
-      if they need to control activation of URIs programmatically.
-      
-      The default bindings for this signal are all forms of the <kbd>Enter</kbd> key.
+        
+        The ::activate-current-link is a [keybinding signal](class.SignalAction.html).
+        
+        Applications may also emit the signal with [gobject.global.signalEmitByName]
+        if they need to control activation of URIs programmatically.
+        
+        The default bindings for this signal are all forms of the <kbd>Enter</kbd> key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1595,9 +1595,9 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Connect to `ActivateLink` signal.
   
       Gets emitted to activate a URI.
-      
-      Applications may connect to it to override the default behaviour,
-      which is to call [gtk.file_launcher.FileLauncher.launch].
+        
+        Applications may connect to it to override the default behaviour,
+        which is to call [gtk.file_launcher.FileLauncher.launch].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1644,10 +1644,10 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Connect to `CopyClipboard` signal.
   
       Gets emitted to copy the selection to the clipboard.
-      
-      The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>Ctrl</kbd>+<kbd>c</kbd>.
+        
+        The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Ctrl</kbd>+<kbd>c</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1685,26 +1685,26 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Connect to `MoveCursor` signal.
   
       Gets emitted when the user initiates a cursor movement.
-      
-      The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
-      If the cursor is not visible in entry, this signal causes the viewport to
-      be moved instead.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal come in two variants,
-      the variant with the Shift modifier extends the selection,
-      the variant without the Shift modifier does not.
-      There are too many key combinations to list them all here.
-      
-      $(LIST
-        * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
-          move by individual characters/lines
-        * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
-        * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
-      )
+        
+        The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
+        If the cursor is not visible in entry, this signal causes the viewport to
+        be moved instead.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal come in two variants,
+        the variant with the Shift modifier extends the selection,
+        the variant without the Shift modifier does not.
+        There are too many key combinations to list them all here.
+        
+        $(LIST
+          * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+            move by individual characters/lines
+          * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
+          * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
+        )
   
       Params:
         callback = signal callback delegate or function to connect

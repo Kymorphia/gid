@@ -68,8 +68,8 @@ class LFOControlSource : gst.control_source.ControlSource
   /**
       Get `frequency` property.
       Returns: Specifies the frequency that should be used for the waveform
-      of this #GstLFOControlSource. It should be large enough
-      so that the period is longer than one nanosecond.
+        of this #GstLFOControlSource. It should be large enough
+        so that the period is longer than one nanosecond.
   */
   @property double frequency()
   {
@@ -80,8 +80,8 @@ class LFOControlSource : gst.control_source.ControlSource
       Set `frequency` property.
       Params:
         propval = Specifies the frequency that should be used for the waveform
-        of this #GstLFOControlSource. It should be large enough
-        so that the period is longer than one nanosecond.
+          of this #GstLFOControlSource. It should be large enough
+          so that the period is longer than one nanosecond.
   */
   @property void frequency(double propval)
   {
@@ -110,10 +110,10 @@ class LFOControlSource : gst.control_source.ControlSource
   /**
       Get `timeshift` property.
       Returns: Specifies the timeshift to the right that should be used for the waveform
-      of this #GstLFOControlSource in nanoseconds.
-      
-      To get a n nanosecond shift to the left use
-      "(GST_SECOND / frequency) - n".
+        of this #GstLFOControlSource in nanoseconds.
+        
+        To get a n nanosecond shift to the left use
+        "(GST_SECOND / frequency) - n".
   */
   @property ulong timeshift()
   {
@@ -124,10 +124,10 @@ class LFOControlSource : gst.control_source.ControlSource
       Set `timeshift` property.
       Params:
         propval = Specifies the timeshift to the right that should be used for the waveform
-        of this #GstLFOControlSource in nanoseconds.
-        
-        To get a n nanosecond shift to the left use
-        "(GST_SECOND / frequency) - n".
+          of this #GstLFOControlSource in nanoseconds.
+          
+          To get a n nanosecond shift to the left use
+          "(GST_SECOND / frequency) - n".
   */
   @property void timeshift(ulong propval)
   {

@@ -96,17 +96,17 @@ class AutomationSession : gobject.object.ObjectWrap
       Connect to `CreateWebView` signal.
   
       This signal is emitted when the automation client requests a new
-      browsing context to interact with it. The callback handler should
-      return a #WebKitWebView created with #WebKitWebView:is-controlled-by-automation
-      construct property enabled and #WebKitWebView:automation-presentation-type construct
-      property set if needed.
-      
-      If the signal is emitted with "tab" detail, the returned #WebKitWebView should be
-      a new web view added to a new tab of the current browsing context window.
-      If the signal is emitted with "window" detail, the returned #WebKitWebView should be
-      a new web view added to a new window.
-      When creating a new web view and there's an active browsing context, the new window
-      or tab shouldn't be focused.
+        browsing context to interact with it. The callback handler should
+        return a #WebKitWebView created with #WebKitWebView:is-controlled-by-automation
+        construct property enabled and #WebKitWebView:automation-presentation-type construct
+        property set if needed.
+        
+        If the signal is emitted with "tab" detail, the returned #WebKitWebView should be
+        a new web view added to a new tab of the current browsing context window.
+        If the signal is emitted with "window" detail, the returned #WebKitWebView should be
+        a new web view added to a new window.
+        When creating a new web view and there's an active browsing context, the new window
+        or tab shouldn't be focused.
   
       Params:
         detail = Signal detail or null (default)
@@ -147,7 +147,7 @@ class AutomationSession : gobject.object.ObjectWrap
       Connect to `WillClose` signal.
   
       This signal is emitted when the given automation session is about to finish.
-      It allows clients to perform any cleanup tasks before the session is destroyed.
+        It allows clients to perform any cleanup tasks before the session is destroyed.
   
       Params:
         callback = signal callback delegate or function to connect

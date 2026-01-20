@@ -175,9 +175,7 @@ class IconInfo : gobject.object.ObjectWrap
   bool getEmbeddedRect(out gdk.rectangle.Rectangle rectangle)
   {
     bool _retval;
-    GdkRectangle _rectangle;
-    _retval = cast(bool)gtk_icon_info_get_embedded_rect(cast(GtkIconInfo*)this._cPtr, &_rectangle);
-    rectangle = new gdk.rectangle.Rectangle(cast(void*)&_rectangle, No.Take);
+    _retval = cast(bool)gtk_icon_info_get_embedded_rect(cast(GtkIconInfo*)this._cPtr, cast(GdkRectangle*)&rectangle);
     return _retval;
   }
 
@@ -263,7 +261,6 @@ class IconInfo : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_icon_info_load_icon_async(cast(GtkIconInfo*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -359,7 +356,7 @@ class IconInfo : gobject.object.ObjectWrap
     GdkPixbuf* _cretval;
     gboolean _wasSymbolic;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic(cast(GtkIconInfo*)this._cPtr, fg ? cast(const(GdkRGBA)*)fg._cPtr(No.Dup) : null, successColor ? cast(const(GdkRGBA)*)successColor._cPtr(No.Dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor._cPtr(No.Dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor._cPtr(No.Dup) : null, &_wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic(cast(GtkIconInfo*)this._cPtr, cast(const(GdkRGBA)*)&fg, cast(const(GdkRGBA)*)&successColor, cast(const(GdkRGBA)*)&warningColor, cast(const(GdkRGBA)*)&errorColor, &_wasSymbolic, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
@@ -387,7 +384,7 @@ class IconInfo : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback to call when the
               request is satisfied
   */
-  void loadSymbolicAsync(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor = null, gdk.rgba.RGBA warningColor = null, gdk.rgba.RGBA errorColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void loadSymbolicAsync(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor, gdk.rgba.RGBA warningColor, gdk.rgba.RGBA errorColor, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
@@ -397,9 +394,8 @@ class IconInfo : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_icon_info_load_symbolic_async(cast(GtkIconInfo*)this._cPtr, fg ? cast(const(GdkRGBA)*)fg._cPtr(No.Dup) : null, successColor ? cast(const(GdkRGBA)*)successColor._cPtr(No.Dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor._cPtr(No.Dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_icon_info_load_symbolic_async(cast(GtkIconInfo*)this._cPtr, cast(const(GdkRGBA)*)&fg, cast(const(GdkRGBA)*)&successColor, cast(const(GdkRGBA)*)&warningColor, cast(const(GdkRGBA)*)&errorColor, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -486,7 +482,6 @@ class IconInfo : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_icon_info_load_symbolic_for_context_async(cast(GtkIconInfo*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

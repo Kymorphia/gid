@@ -145,7 +145,7 @@ class AudioDecoder : gst.element.Element
   /**
       Get `maxErrors` property.
       Returns: Maximum number of tolerated consecutive decode errors. See
-      [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
+        [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
   */
   @property int maxErrors()
   {
@@ -156,7 +156,7 @@ class AudioDecoder : gst.element.Element
       Set `maxErrors` property.
       Params:
         propval = Maximum number of tolerated consecutive decode errors. See
-        [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
+          [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
   */
   @property void maxErrors(int propval)
   {
@@ -282,10 +282,8 @@ class AudioDecoder : gst.element.Element
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_audio_decoder_get_allocator(cast(GstAudioDecoder*)this._cPtr, &_allocator, &_params);
+    gst_audio_decoder_get_allocator(cast(GstAudioDecoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.Take);
   }
 
   /** */

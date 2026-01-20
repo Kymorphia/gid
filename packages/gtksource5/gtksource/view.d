@@ -163,12 +163,12 @@ class View : gtk.text_view.TextView
   /**
       Get `enableSnippets` property.
       Returns: The property denotes if snippets should be
-      expanded when the user presses Tab after having typed a word
-      matching the snippets found in `class@SnippetManager`.
-      
-      The user may tab through focus-positions of the snippet if any
-      are available by pressing Tab repeatedly until the desired focus
-      position is selected.
+        expanded when the user presses Tab after having typed a word
+        matching the snippets found in `class@SnippetManager`.
+        
+        The user may tab through focus-positions of the snippet if any
+        are available by pressing Tab repeatedly until the desired focus
+        position is selected.
   */
   @property bool enableSnippets()
   {
@@ -179,12 +179,12 @@ class View : gtk.text_view.TextView
       Set `enableSnippets` property.
       Params:
         propval = The property denotes if snippets should be
-        expanded when the user presses Tab after having typed a word
-        matching the snippets found in `class@SnippetManager`.
-        
-        The user may tab through focus-positions of the snippet if any
-        are available by pressing Tab repeatedly until the desired focus
-        position is selected.
+          expanded when the user presses Tab after having typed a word
+          matching the snippets found in `class@SnippetManager`.
+          
+          The user may tab through focus-positions of the snippet if any
+          are available by pressing Tab repeatedly until the desired focus
+          position is selected.
   */
   @property void enableSnippets(bool propval)
   {
@@ -237,7 +237,7 @@ class View : gtk.text_view.TextView
   /**
       Get `indenter` property.
       Returns: The property is a `iface@Indenter` to use to indent
-      as the user types into the `class@View`.
+        as the user types into the `class@View`.
   */
   @property gtksource.indenter.Indenter indenter()
   {
@@ -248,7 +248,7 @@ class View : gtk.text_view.TextView
       Set `indenter` property.
       Params:
         propval = The property is a `iface@Indenter` to use to indent
-        as the user types into the `class@View`.
+          as the user types into the `class@View`.
   */
   @property void indenter(gtksource.indenter.Indenter propval)
   {
@@ -715,7 +715,7 @@ class View : gtk.text_view.TextView
   uint getVisualColumn(gtk.text_iter.TextIter iter)
   {
     uint _retval;
-    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, cast(const(GtkTextIter)*)&iter);
     return _retval;
   }
 
@@ -729,7 +729,7 @@ class View : gtk.text_view.TextView
   */
   void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
   }
 
   /**
@@ -743,9 +743,9 @@ class View : gtk.text_view.TextView
         snippet = a #GtkSourceSnippet
         location = a #GtkTextIter or null for the cursor position
   */
-  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location = null)
+  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location)
   {
-    gtk_source_view_push_snippet(cast(GtkSourceView*)this._cPtr, snippet ? cast(GtkSourceSnippet*)snippet._cPtr(No.Dup) : null, location ? cast(GtkTextIter*)location._cPtr(No.Dup) : null);
+    gtk_source_view_push_snippet(cast(GtkSourceView*)this._cPtr, snippet ? cast(GtkSourceSnippet*)snippet._cPtr(No.Dup) : null, cast(GtkTextIter*)&location);
   }
 
   /**
@@ -986,7 +986,7 @@ class View : gtk.text_view.TextView
   */
   void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
   }
 
   /**
@@ -1118,9 +1118,9 @@ class View : gtk.text_view.TextView
       Connect to `LineMarkActivated` signal.
   
       Emitted when a line mark has been activated (for instance when there
-      was a button press in the line marks gutter).
-      
-      You can use iter to determine on which line the activation took place.
+        was a button press in the line marks gutter).
+        
+        You can use iter to determine on which line the activation took place.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1186,9 +1186,9 @@ class View : gtk.text_view.TextView
       Connect to `MoveLines` signal.
   
       The signal is a keybinding which gets emitted when the user initiates moving a line.
-      
-      The default binding key is Alt+Up/Down arrow. And moves the currently selected lines,
-      or the current line up or down by one line.
+        
+        The default binding key is Alt+Up/Down arrow. And moves the currently selected lines,
+        or the current line up or down by one line.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1277,9 +1277,9 @@ class View : gtk.text_view.TextView
       Connect to `MoveWords` signal.
   
       The signal is a keybinding which gets emitted when the user initiates moving a word.
-      
-      The default binding key is Alt+Left/Right Arrow and moves the current selection, or the current
-      word by one word.
+        
+        The default binding key is Alt+Left/Right Arrow and moves the current selection, or the current
+        word by one word.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1324,15 +1324,15 @@ class View : gtk.text_view.TextView
       Connect to `ShowCompletion` signal.
   
       The signal is a key binding signal which gets
-      emitted when the user requests a completion, by pressing
-      <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
-      
-      This will create a `classCompletionContext` with the activation
-      type as [gtksource.types.CompletionActivation.UserRequested].
-      
-      Applications should not connect to it, but may emit it with
-      `funcGObject.signal_emit_by_name` if they need to activate the completion by
-      another means, for example with another key binding or a menu entry.
+        emitted when the user requests a completion, by pressing
+        <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
+        
+        This will create a `classCompletionContext` with the activation
+        type as [gtksource.types.CompletionActivation.UserRequested].
+        
+        Applications should not connect to it, but may emit it with
+        `funcGObject.signal_emit_by_name` if they need to activate the completion by
+        another means, for example with another key binding or a menu entry.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1370,11 +1370,11 @@ class View : gtk.text_view.TextView
       Connect to `SmartHomeEnd` signal.
   
       Emitted when a the cursor was moved according to the smart home end setting.
-      
-      The signal is emitted after the cursor is moved, but
-      during the `signalGtk.TextView::move-cursor` action. This can be used to find
-      out whether the cursor was moved by a normal home/end or by a smart
-      home/end.
+        
+        The signal is emitted after the cursor is moved, but
+        during the `signalGtk.TextView::move-cursor` action. This can be used to find
+        out whether the cursor was moved by a normal home/end or by a smart
+        home/end.
   
       Params:
         callback = signal callback delegate or function to connect

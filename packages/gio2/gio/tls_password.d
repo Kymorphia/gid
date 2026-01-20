@@ -243,7 +243,6 @@ class TlsPassword : gobject.object.ObjectWrap
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     ptrdiff_t _length;
     if (value)
       _length = cast(ptrdiff_t)value.length;

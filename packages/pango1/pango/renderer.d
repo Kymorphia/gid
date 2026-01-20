@@ -267,7 +267,9 @@ class Renderer : gobject.object.ObjectWrap
   {
     PangoColor* _cretval;
     _cretval = pango_renderer_get_color(cast(PangoRenderer*)this._cPtr, part);
-    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, No.Take) : null;
+    pango.color.Color _retval;
+    if (_cretval)
+      _retval = *cast(pango.color.Color*)_cretval;
     return _retval;
   }
 
@@ -322,7 +324,9 @@ class Renderer : gobject.object.ObjectWrap
   {
     const(PangoMatrix)* _cretval;
     _cretval = pango_renderer_get_matrix(cast(PangoRenderer*)this._cPtr);
-    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
+    pango.matrix.Matrix _retval;
+    if (_cretval)
+      _retval = *cast(pango.matrix.Matrix*)_cretval;
     return _retval;
   }
 
@@ -375,9 +379,9 @@ class Renderer : gobject.object.ObjectWrap
         part = the part to change the color of
         color = the new color or null to unset the current color
   */
-  void setColor(pango.types.RenderPart part, pango.color.Color color = null)
+  void setColor(pango.types.RenderPart part, pango.color.Color color)
   {
-    pango_renderer_set_color(cast(PangoRenderer*)this._cPtr, part, color ? cast(const(PangoColor)*)color._cPtr(No.Dup) : null);
+    pango_renderer_set_color(cast(PangoRenderer*)this._cPtr, part, cast(const(PangoColor)*)&color);
   }
 
   /**
@@ -387,8 +391,8 @@ class Renderer : gobject.object.ObjectWrap
         matrix = a [pango.matrix.Matrix], or null to unset any existing matrix
            (No matrix set is the same as setting the identity matrix.)
   */
-  void setMatrix(pango.matrix.Matrix matrix = null)
+  void setMatrix(pango.matrix.Matrix matrix)
   {
-    pango_renderer_set_matrix(cast(PangoRenderer*)this._cPtr, matrix ? cast(const(PangoMatrix)*)matrix._cPtr(No.Dup) : null);
+    pango_renderer_set_matrix(cast(PangoRenderer*)this._cPtr, cast(const(PangoMatrix)*)&matrix);
   }
 }

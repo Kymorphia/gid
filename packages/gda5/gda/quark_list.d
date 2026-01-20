@@ -21,7 +21,7 @@ class QuarkList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -162,7 +162,6 @@ class QuarkList : gobject.boxed.Boxed
       (*_dlg)(key, value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gda_quark_list_foreach(cast(GdaQuarkList*)this._cPtr, _funcCB, _func);
   }

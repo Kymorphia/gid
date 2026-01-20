@@ -52,7 +52,7 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
   /**
       Get `orientation` property.
       Returns: The orientation of the list. See GtkOrientable:orientation
-      for details.
+        for details.
   */
   @property gtk.types.Orientation orientation()
   {
@@ -63,7 +63,7 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
       Set `orientation` property.
       Params:
         propval = The orientation of the list. See GtkOrientable:orientation
-        for details.
+          for details.
   */
   @property void orientation(gtk.types.Orientation propval)
   {

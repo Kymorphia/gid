@@ -15,7 +15,7 @@ import gstbase.types;
 */
 class CollectData
 {
-  GstCollectData cInstance;
+  GstCollectData _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class CollectData
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstbase.collect_data.CollectData");
 
-    cInstance = *cast(GstCollectData*)ptr;
+    _cInstance = *cast(GstCollectData*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class CollectData
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -121,5 +121,15 @@ class CollectData
   @property gst.segment.Segment segment()
   {
     return cToD!(gst.segment.Segment)(cast(void*)&(cast(GstCollectData*)this._cPtr).segment);
+  }
+
+  /**
+      Set `segment` field.
+      Params:
+        propval = last segment received.
+  */
+  @property void segment(gst.segment.Segment propval)
+  {
+    (cast(GstCollectData*)this._cPtr).segment = cast(GstSegment)propval;
   }
 }

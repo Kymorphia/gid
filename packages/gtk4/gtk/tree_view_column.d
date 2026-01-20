@@ -172,7 +172,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /**
       Get `sortColumnId` property.
       Returns: Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
-      clickable. Set to -1 to make the column unsortable.
+        clickable. Set to -1 to make the column unsortable.
   */
   @property int sortColumnId()
   {
@@ -183,7 +183,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
       Set `sortColumnId` property.
       Params:
         propval = Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
-        clickable. Set to -1 to make the column unsortable.
+          clickable. Set to -1 to make the column unsortable.
   */
   @property void sortColumnId(int propval)
   {
@@ -400,7 +400,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   */
   void cellSetCellData(gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded)
   {
-    gtk_tree_view_column_cell_set_cell_data(cast(GtkTreeViewColumn*)this._cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, isExpander, isExpanded);
+    gtk_tree_view_column_cell_set_cell_data(cast(GtkTreeViewColumn*)this._cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, cast(GtkTreeIter*)&iter, isExpander, isExpanded);
   }
 
   /**
@@ -812,10 +812,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
     {
       auto _dlg = cast(gtk.types.TreeCellDataFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_view_column_set_cell_data_func(cast(GtkTreeViewColumn*)this._cPtr, cellRenderer ? cast(GtkCellRenderer*)cellRenderer._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);

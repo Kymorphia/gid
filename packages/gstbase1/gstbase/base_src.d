@@ -244,10 +244,8 @@ class BaseSrc : gst.element.Element
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_base_src_get_allocator(cast(GstBaseSrc*)this._cPtr, &_allocator, &_params);
+    gst_base_src_get_allocator(cast(GstBaseSrc*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /**
@@ -361,7 +359,7 @@ class BaseSrc : gst.element.Element
   bool newSegment(gst.segment.Segment segment)
   {
     bool _retval;
-    _retval = cast(bool)gst_base_src_new_segment(cast(GstBaseSrc*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_base_src_new_segment(cast(GstBaseSrc*)this._cPtr, cast(const(GstSegment)*)&segment);
     return _retval;
   }
 
@@ -388,7 +386,7 @@ class BaseSrc : gst.element.Element
   bool pushSegment(gst.segment.Segment segment)
   {
     bool _retval;
-    _retval = cast(bool)gst_base_src_push_segment(cast(GstBaseSrc*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_base_src_push_segment(cast(GstBaseSrc*)this._cPtr, cast(const(GstSegment)*)&segment);
     return _retval;
   }
 

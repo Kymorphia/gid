@@ -124,9 +124,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   */
   void getGeometry(out gdk.rectangle.Rectangle geometry)
   {
-    GdkRectangle _geometry;
-    gdk_monitor_get_geometry(cast(GdkMonitor*)this._cPtr, &_geometry);
-    geometry = new gdk.rectangle.Rectangle(cast(void*)&_geometry, No.Take);
+    gdk_monitor_get_geometry(cast(GdkMonitor*)this._cPtr, cast(GdkRectangle*)&geometry);
   }
 
   /**
@@ -244,9 +242,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   */
   void getWorkarea(out gdk.rectangle.Rectangle workarea)
   {
-    GdkRectangle _workarea;
-    gdk_monitor_get_workarea(cast(GdkMonitor*)this._cPtr, &_workarea);
-    workarea = new gdk.rectangle.Rectangle(cast(void*)&_workarea, No.Take);
+    gdk_monitor_get_workarea(cast(GdkMonitor*)this._cPtr, cast(GdkRectangle*)&workarea);
   }
 
   /**

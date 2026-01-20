@@ -18,7 +18,7 @@ import gstnet.types;
 */
 class NetControlMessageMeta
 {
-  GstNetControlMessageMeta cInstance;
+  GstNetControlMessageMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -26,7 +26,7 @@ class NetControlMessageMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstnet.net_control_message_meta.NetControlMessageMeta");
 
-    cInstance = *cast(GstNetControlMessageMeta*)ptr;
+    _cInstance = *cast(GstNetControlMessageMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -35,7 +35,7 @@ class NetControlMessageMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -72,7 +72,9 @@ class NetControlMessageMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_net_control_message_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

@@ -196,9 +196,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getBorder(out gtk.border.Border border)
   {
-    GtkBorder _border;
-    gtk_style_context_get_border(cast(GtkStyleContext*)this._cPtr, &_border);
-    border = new gtk.border.Border(cast(void*)&_border, No.Take);
+    gtk_style_context_get_border(cast(GtkStyleContext*)this._cPtr, cast(GtkBorder*)&border);
   }
 
   /**
@@ -211,9 +209,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getColor(out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_style_context_get_color(cast(GtkStyleContext*)this._cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_style_context_get_color(cast(GtkStyleContext*)this._cPtr, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -240,9 +236,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getMargin(out gtk.border.Border margin)
   {
-    GtkBorder _margin;
-    gtk_style_context_get_margin(cast(GtkStyleContext*)this._cPtr, &_margin);
-    margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
+    gtk_style_context_get_margin(cast(GtkStyleContext*)this._cPtr, cast(GtkBorder*)&margin);
   }
 
   /**
@@ -255,9 +249,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getPadding(out gtk.border.Border padding)
   {
-    GtkBorder _padding;
-    gtk_style_context_get_padding(cast(GtkStyleContext*)this._cPtr, &_padding);
-    padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
+    gtk_style_context_get_padding(cast(GtkStyleContext*)this._cPtr, cast(GtkBorder*)&padding);
   }
 
   /**
@@ -325,9 +317,7 @@ class StyleContext : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
-    GdkRGBA _color;
-    _retval = cast(bool)gtk_style_context_lookup_color(cast(GtkStyleContext*)this._cPtr, _colorName, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    _retval = cast(bool)gtk_style_context_lookup_color(cast(GtkStyleContext*)this._cPtr, _colorName, cast(GdkRGBA*)&color);
     return _retval;
   }
 

@@ -107,7 +107,7 @@ class AppInfoMonitor : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Signal emitted when the app info database changes, when applications are
-      installed or removed.
+        installed or removed.
   
       Params:
         callback = signal callback delegate or function to connect

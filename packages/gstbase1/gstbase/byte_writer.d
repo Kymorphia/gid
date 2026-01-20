@@ -18,7 +18,7 @@ import gstbase.types;
 */
 class ByteWriter
 {
-  GstByteWriter cInstance;
+  GstByteWriter _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -26,7 +26,7 @@ class ByteWriter
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstbase.byte_writer.ByteWriter");
 
-    cInstance = *cast(GstByteWriter*)ptr;
+    _cInstance = *cast(GstByteWriter*)ptr;
 
     if (take)
       gFree(ptr);
@@ -35,7 +35,7 @@ class ByteWriter
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -44,7 +44,17 @@ class ByteWriter
   */
   @property gstbase.byte_reader.ByteReader parent()
   {
-    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent, No.Take);
+    return cToD!(gstbase.byte_reader.ByteReader)(cast(void*)&(cast(GstByteWriter*)this._cPtr).parent);
+  }
+
+  /**
+      Set `parent` field.
+      Params:
+        propval = #GstByteReader parent
+  */
+  @property void parent(gstbase.byte_reader.ByteReader propval)
+  {
+    (cast(GstByteWriter*)this._cPtr).parent = cast(GstByteReader)propval;
   }
 
   /**

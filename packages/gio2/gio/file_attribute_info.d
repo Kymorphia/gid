@@ -11,7 +11,7 @@ import gio.types;
 */
 class FileAttributeInfo
 {
-  GFileAttributeInfo cInstance;
+  GFileAttributeInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class FileAttributeInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.file_attribute_info.FileAttributeInfo");
 
-    cInstance = *cast(GFileAttributeInfo*)ptr;
+    _cInstance = *cast(GFileAttributeInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class FileAttributeInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

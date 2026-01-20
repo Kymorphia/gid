@@ -84,7 +84,7 @@ import glib.types;
 */
 class StaticRWLock
 {
-  GStaticRWLock cInstance;
+  GStaticRWLock _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -92,7 +92,7 @@ class StaticRWLock
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.static_rwlock.StaticRWLock");
 
-    cInstance = *cast(GStaticRWLock*)ptr;
+    _cInstance = *cast(GStaticRWLock*)ptr;
 
     if (take)
       gFree(ptr);
@@ -101,6 +101,6 @@ class StaticRWLock
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

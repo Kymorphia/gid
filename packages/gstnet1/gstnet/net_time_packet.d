@@ -1,11 +1,10 @@
-/// Module for [NetTimePacket] class
+/// Module for [NetTimePacket] struct
 module gstnet.net_time_packet;
 
 import gid.gid;
 import gio.socket;
 import gio.socket_address;
 import glib.error;
-import gobject.boxed;
 import gst.types;
 import gstnet.c.functions;
 import gstnet.c.types;
@@ -15,100 +14,17 @@ import gstnet.types;
     Various functions for receiving, sending an serializing #GstNetTimePacket
     structures.
 */
-class NetTimePacket : gobject.boxed.Boxed
+struct NetTimePacket
 {
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_net_time_packet_get_type != &gidSymbolNotFound ? gst_net_time_packet_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override NetTimePacket self()
-  {
-    return this;
-  }
+  /**
+      the local time when this packet was sent
+  */
+  ClockTime localTime;
 
   /**
-      Get `localTime` field.
-      Returns: the local time when this packet was sent
+      the remote time observation
   */
-  @property gst.types.ClockTime localTime()
-  {
-    return (cast(GstNetTimePacket*)this._cPtr).localTime;
-  }
-
-  /**
-      Set `localTime` field.
-      Params:
-        propval = the local time when this packet was sent
-  */
-  @property void localTime(gst.types.ClockTime propval)
-  {
-    (cast(GstNetTimePacket*)this._cPtr).localTime = propval;
-  }
-
-  /**
-      Get `remoteTime` field.
-      Returns: the remote time observation
-  */
-  @property gst.types.ClockTime remoteTime()
-  {
-    return (cast(GstNetTimePacket*)this._cPtr).remoteTime;
-  }
-
-  /**
-      Set `remoteTime` field.
-      Params:
-        propval = the remote time observation
-  */
-  @property void remoteTime(gst.types.ClockTime propval)
-  {
-    (cast(GstNetTimePacket*)this._cPtr).remoteTime = propval;
-  }
-
-  /**
-      Creates a new #GstNetTimePacket from a buffer received over the network. The
-      caller is responsible for ensuring that buffer is at least
-      #GST_NET_TIME_PACKET_SIZE bytes long.
-      
-      If buffer is null, the local and remote times will be set to
-      #GST_CLOCK_TIME_NONE.
-      
-      MT safe. Caller owns return value (gst_net_time_packet_free to free).
-  
-      Params:
-        buffer = a buffer from which to construct the packet, or NULL
-      Returns: The new #GstNetTimePacket.
-  */
-  this(ubyte[] buffer = null)
-  {
-    GstNetTimePacket* _cretval;
-    assert(!buffer || buffer.length == 16);
-    auto _buffer = cast(const(ubyte)*)buffer.ptr;
-    _cretval = gst_net_time_packet_new(_buffer);
-    this(_cretval, Yes.Take);
-  }
+  ClockTime remoteTime;
 
   /**
       Make a copy of packet.
@@ -117,8 +33,10 @@ class NetTimePacket : gobject.boxed.Boxed
   gstnet.net_time_packet.NetTimePacket copy()
   {
     GstNetTimePacket* _cretval;
-    _cretval = gst_net_time_packet_copy(cast(const(GstNetTimePacket)*)this._cPtr);
-    auto _retval = _cretval ? new gstnet.net_time_packet.NetTimePacket(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_net_time_packet_copy(cast(const(GstNetTimePacket)*)&this);
+    gstnet.net_time_packet.NetTimePacket _retval;
+    if (_cretval)
+      _retval = *cast(gstnet.net_time_packet.NetTimePacket*)_cretval;
     return _retval;
   }
 
@@ -137,7 +55,7 @@ class NetTimePacket : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = cast(bool)gst_net_time_packet_send(cast(const(GstNetTimePacket)*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, destAddress ? cast(GSocketAddress*)destAddress._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gst_net_time_packet_send(cast(const(GstNetTimePacket)*)&this, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, destAddress ? cast(GSocketAddress*)destAddress._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -155,7 +73,7 @@ class NetTimePacket : gobject.boxed.Boxed
   ubyte[] serialize()
   {
     ubyte* _cretval;
-    _cretval = gst_net_time_packet_serialize(cast(const(GstNetTimePacket)*)this._cPtr);
+    _cretval = gst_net_time_packet_serialize(cast(const(GstNetTimePacket)*)&this);
     ubyte[] _retval;
 
     if (_cretval)
@@ -185,7 +103,9 @@ class NetTimePacket : gobject.boxed.Boxed
     _cretval = gst_net_time_packet_receive(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, &_srcAddress, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = _cretval ? new gstnet.net_time_packet.NetTimePacket(cast(void*)_cretval, Yes.Take) : null;
+    gstnet.net_time_packet.NetTimePacket _retval;
+    if (_cretval)
+      _retval = *cast(gstnet.net_time_packet.NetTimePacket*)_cretval;
     srcAddress = new gio.socket_address.SocketAddress(cast(void*)_srcAddress, Yes.Take);
     return _retval;
   }

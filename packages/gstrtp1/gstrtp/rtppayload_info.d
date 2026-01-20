@@ -11,7 +11,7 @@ import gstrtp.types;
 */
 class RTPPayloadInfo
 {
-  GstRTPPayloadInfo cInstance;
+  GstRTPPayloadInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class RTPPayloadInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtppayload_info.RTPPayloadInfo");
 
-    cInstance = *cast(GstRTPPayloadInfo*)ptr;
+    _cInstance = *cast(GstRTPPayloadInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class RTPPayloadInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -53,7 +53,7 @@ class RTPPayloadInfo
   /**
       Get `media` field.
       Returns: the media type(s), usually "audio", "video", "application", "text",
-      "message".
+        "message".
   */
   @property string media()
   {
@@ -64,7 +64,7 @@ class RTPPayloadInfo
       Set `media` field.
       Params:
         propval = the media type(s), usually "audio", "video", "application", "text",
-        "message".
+          "message".
   */
   @property void media(string propval)
   {
@@ -114,7 +114,7 @@ class RTPPayloadInfo
   /**
       Get `encodingParameters` field.
       Returns: encoding parameters. For audio this is the number of
-      channels. NULL = not applicable.
+        channels. NULL = not applicable.
   */
   @property string encodingParameters()
   {
@@ -125,7 +125,7 @@ class RTPPayloadInfo
       Set `encodingParameters` field.
       Params:
         propval = encoding parameters. For audio this is the number of
-        channels. NULL = not applicable.
+          channels. NULL = not applicable.
   */
   @property void encodingParameters(string propval)
   {

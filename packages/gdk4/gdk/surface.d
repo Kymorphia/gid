@@ -109,9 +109,9 @@ class Surface : gobject.object.ObjectWrap
   /**
       Get `scaleFactor` property.
       Returns: The scale factor of the surface.
-      
-      The scale factor is the next larger integer,
-      compared to [gdk.surface.Surface.scale].
+        
+        The scale factor is the next larger integer,
+        compared to [gdk.surface.Surface.scale].
   */
   @property int scaleFactor()
   {
@@ -690,10 +690,10 @@ class Surface : gobject.object.ObjectWrap
       Connect to `Layout` signal.
   
       Emitted when the size of surface is changed, or when relayout should
-      be performed.
-      
-      Surface size is reported in ”application pixels”, not
-      ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
+        be performed.
+        
+        Surface size is reported in ”application pixels”, not
+        ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
   
       Params:
         callback = signal callback delegate or function to connect

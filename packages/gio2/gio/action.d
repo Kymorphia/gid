@@ -54,24 +54,24 @@ interface Action
   /**
       Get `enabled` property.
       Returns: If @action is currently enabled.
-      
-      If the action is disabled then calls to [gio.action.Action.activate] and
-      [gio.action.Action.changeState] have no effect.
+        
+        If the action is disabled then calls to [gio.action.Action.activate] and
+        [gio.action.Action.changeState] have no effect.
   */
   @property bool enabled();
 
   /**
       Get `name` property.
       Returns: The name of the action.  This is mostly meaningful for identifying
-      the action once it has been added to a #GActionGroup. It is immutable.
+        the action once it has been added to a #GActionGroup. It is immutable.
   */
   @property string name();
 
   /**
       Get `parameterType` property.
       Returns: The type of the parameter that must be given when activating the
-      action. This is immutable, and may be null if no parameter is needed when
-      activating the action.
+        action. This is immutable, and may be null if no parameter is needed when
+        activating the action.
   */
   @property glib.variant_type.VariantType parameterType();
 
@@ -84,7 +84,7 @@ interface Action
   /**
       Get `stateType` property.
       Returns: The #GVariantType of the state that the action has, or null if the
-      action is stateless. This is immutable.
+        action is stateless. This is immutable.
   */
   @property glib.variant_type.VariantType stateType();
 

@@ -129,9 +129,7 @@ void cairoDrawFromGl(cairo.context.Context cr, gdk.window.Window window, int sou
 bool cairoGetClipRectangle(cairo.context.Context cr, out gdk.rectangle.Rectangle rect)
 {
   bool _retval;
-  GdkRectangle _rect;
-  _retval = cast(bool)gdk_cairo_get_clip_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, &_rect);
-  rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+  _retval = cast(bool)gdk_cairo_get_clip_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&rect);
   return _retval;
 }
 
@@ -160,7 +158,7 @@ gdk.drawing_context.DrawingContext cairoGetDrawingContext(cairo.context.Context 
 */
 void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
 {
-  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, rectangle ? cast(const(GdkRectangle)*)rectangle._cPtr(No.Dup) : null);
+  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&rectangle);
 }
 
 /**
@@ -205,7 +203,7 @@ cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
 */
 void cairoSetSourceColor(cairo.context.Context cr, gdk.color.Color color)
 {
-  gdk_cairo_set_source_color(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+  gdk_cairo_set_source_color(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkColor)*)&color);
 }
 
 /**
@@ -234,7 +232,7 @@ void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixb
 */
 void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
 {
-  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&rgba);
 }
 
 /**
@@ -559,7 +557,7 @@ void errorTrapPush()
 bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double angle)
 {
   bool _retval;
-  _retval = cast(bool)gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&angle);
+  _retval = cast(bool)gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&angle);
   return _retval;
 }
 
@@ -577,7 +575,7 @@ bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double a
 bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double x, out double y)
 {
   bool _retval;
-  _retval = cast(bool)gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&x, cast(double*)&y);
+  _retval = cast(bool)gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
   return _retval;
 }
 
@@ -594,7 +592,7 @@ bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double 
 bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out double distance)
 {
   bool _retval;
-  _retval = cast(bool)gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr : null, event2 ? cast(GdkEvent*)event2._cPtr : null, cast(double*)&distance);
+  _retval = cast(bool)gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&distance);
   return _retval;
 }
 
@@ -1705,6 +1703,7 @@ int textPropertyToUtf8ListForDisplay(gdk.display.Display display, gdk.atom.Atom 
     {
     }
   }
+
   list.length = _lenlist;
   foreach (i; 0 .. _lenlist)
     list[i] = _list[i].fromCString(Yes.Free);
@@ -1765,13 +1764,15 @@ uint threadsAddIdle(int priority, glib.types.SourceFunc function_)
 {
   extern(C) gboolean _function_Callback(void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)();
+    _dretval = (*_dlg)();
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
@@ -1836,13 +1837,15 @@ uint threadsAddTimeout(int priority, uint interval, glib.types.SourceFunc functi
 {
   extern(C) gboolean _function_Callback(void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)();
+    _dretval = (*_dlg)();
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
@@ -1866,13 +1869,15 @@ uint threadsAddTimeoutSeconds(int priority, uint interval, glib.types.SourceFunc
 {
   extern(C) gboolean _function_Callback(void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)();
+    _dretval = (*_dlg)();
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;

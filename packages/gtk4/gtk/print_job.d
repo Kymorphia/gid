@@ -56,7 +56,7 @@ class PrintJob : gobject.object.ObjectWrap
   /**
       Get `trackPrintStatus` property.
       Returns: true if the print job will continue to emit status-changed
-      signals after the print data has been setn to the printer.
+        signals after the print data has been setn to the printer.
   */
   @property bool trackPrintStatus()
   {
@@ -67,7 +67,7 @@ class PrintJob : gobject.object.ObjectWrap
       Set `trackPrintStatus` property.
       Params:
         propval = true if the print job will continue to emit status-changed
-        signals after the print data has been setn to the printer.
+          signals after the print data has been setn to the printer.
   */
   @property void trackPrintStatus(bool propval)
   {
@@ -308,7 +308,6 @@ class PrintJob : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gtk_print_job_send(cast(GtkPrintJob*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
@@ -490,9 +489,9 @@ class PrintJob : gobject.object.ObjectWrap
       Connect to `StatusChanged` signal.
   
       Emitted when the status of a job changes.
-      
-      The signal handler can use [gtk.print_job.PrintJob.getStatus]
-      to obtain the new status.
+        
+        The signal handler can use [gtk.print_job.PrintJob.getStatus]
+        to obtain the new status.
   
       Params:
         callback = signal callback delegate or function to connect

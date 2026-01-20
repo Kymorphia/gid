@@ -60,7 +60,7 @@ class Window : gobject.object.ObjectWrap
   /**
       Get `cursor` property.
       Returns: The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
-      [gdk.window.Window.getCursor] for details.
+        [gdk.window.Window.getCursor] for details.
   */
   @property gdk.cursor.Cursor cursor()
   {
@@ -71,7 +71,7 @@ class Window : gobject.object.ObjectWrap
       Set `cursor` property.
       Params:
         propval = The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
-        [gdk.window.Window.getCursor] for details.
+          [gdk.window.Window.getCursor] for details.
   */
   @property void cursor(gdk.cursor.Cursor propval)
   {
@@ -281,7 +281,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beginPaintRect(gdk.rectangle.Rectangle rectangle)
   {
-    gdk_window_begin_paint_rect(cast(GdkWindow*)this._cPtr, rectangle ? cast(const(GdkRectangle)*)rectangle._cPtr(No.Dup) : null);
+    gdk_window_begin_paint_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)&rectangle);
   }
 
   /**
@@ -1077,9 +1077,7 @@ class Window : gobject.object.ObjectWrap
   */
   void getFrameExtents(out gdk.rectangle.Rectangle rect)
   {
-    GdkRectangle _rect;
-    gdk_window_get_frame_extents(cast(GdkWindow*)this._cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    gdk_window_get_frame_extents(cast(GdkWindow*)this._cPtr, cast(GdkRectangle*)&rect);
   }
 
   /**
@@ -1576,13 +1574,15 @@ class Window : gobject.object.ObjectWrap
   {
     extern(C) gboolean _childFuncCallback(GdkWindow* window, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gdk.types.WindowChildFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _childFuncCB = childFunc ? &_childFuncCallback : null;
-
     auto _childFunc = childFunc ? cast(void*)&(childFunc) : null;
     gdk_window_invalidate_maybe_recurse(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null, _childFuncCB, _childFunc);
   }
@@ -1599,7 +1599,7 @@ class Window : gobject.object.ObjectWrap
   */
   void invalidateRect(gdk.rectangle.Rectangle rect, bool invalidateChildren)
   {
-    gdk_window_invalidate_rect(cast(GdkWindow*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null, invalidateChildren);
+    gdk_window_invalidate_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)&rect, invalidateChildren);
   }
 
   /**
@@ -1853,7 +1853,7 @@ class Window : gobject.object.ObjectWrap
   */
   void moveToRect(gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity windowAnchor, gdk.types.AnchorHints anchorHints, int rectAnchorDx, int rectAnchorDy)
   {
-    gdk_window_move_to_rect(cast(GdkWindow*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null, rectAnchor, windowAnchor, anchorHints, rectAnchorDx, rectAnchorDy);
+    gdk_window_move_to_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)&rect, rectAnchor, windowAnchor, anchorHints, rectAnchorDx, rectAnchorDy);
   }
 
   /**
@@ -2015,7 +2015,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setBackground(gdk.color.Color color)
   {
-    gdk_window_set_background(cast(GdkWindow*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gdk_window_set_background(cast(GdkWindow*)this._cPtr, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -2050,7 +2050,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setBackgroundRgba(gdk.rgba.RGBA rgba)
   {
-    gdk_window_set_background_rgba(cast(GdkWindow*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    gdk_window_set_background_rgba(cast(GdkWindow*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
 
   /**
@@ -2829,7 +2829,7 @@ class Window : gobject.object.ObjectWrap
   bool showWindowMenu(gdk.event.Event event)
   {
     bool _retval;
-    _retval = cast(bool)gdk_window_show_window_menu(cast(GdkWindow*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gdk_window_show_window_menu(cast(GdkWindow*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2929,15 +2929,15 @@ class Window : gobject.object.ObjectWrap
       Connect to `CreateSurface` signal.
   
       The ::create-surface signal is emitted when an offscreen window
-      needs its surface (re)created, which happens either when the
-      window is first drawn to, or when the window is being
-      resized. The first signal handler that returns a non-null
-      surface will stop any further signal emission, and its surface
-      will be used.
-      
-      Note that it is not possible to access the window's previous
-      surface from within any callback of this signal. Calling
-      [gdk.global.offscreenWindowGetSurface] will lead to a crash.
+        needs its surface (re)created, which happens either when the
+        window is first drawn to, or when the window is being
+        resized. The first signal handler that returns a non-null
+        surface will stop any further signal emission, and its surface
+        will be used.
+        
+        Note that it is not possible to access the window's previous
+        surface from within any callback of this signal. Calling
+        [gdk.global.offscreenWindowGetSurface] will lead to a crash.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2991,16 +2991,16 @@ class Window : gobject.object.ObjectWrap
       Connect to `MovedToRect` signal.
   
       Emitted when the position of window is finalized after being moved to a
-      destination rectangle.
-      
-      window might be flipped over the destination rectangle in order to keep
-      it on-screen, in which case flipped_x and flipped_y will be set to true
-      accordingly.
-      
-      flipped_rect is the ideal position of window after any possible
-      flipping, but before any possible sliding. final_rect is flipped_rect,
-      but possibly translated in the case that flipping is still ineffective in
-      keeping window on-screen.
+        destination rectangle.
+        
+        window might be flipped over the destination rectangle in order to keep
+        it on-screen, in which case flipped_x and flipped_y will be set to true
+        accordingly.
+        
+        flipped_rect is the ideal position of window after any possible
+        flipping, but before any possible sliding. final_rect is flipped_rect,
+        but possibly translated in the case that flipping is still ineffective in
+        keeping window on-screen.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3008,10 +3008,10 @@ class Window : gobject.object.ObjectWrap
           $(D void callback(void* flippedRect, void* finalRect, bool flippedX, bool flippedY, gdk.window.Window window))
   
           `flippedRect` the position of window after any possible
-                         flipping or null if the backend can't obtain it (optional)
+                           flipping or null if the backend can't obtain it (optional)
   
           `finalRect` the final position of window or null if the
-                       backend can't obtain it (optional)
+                         backend can't obtain it (optional)
   
           `flippedX` true if the anchors were flipped horizontally (optional)
   
@@ -3068,7 +3068,7 @@ class Window : gobject.object.ObjectWrap
       Connect to `PickEmbeddedChild` signal.
   
       The ::pick-embedded-child signal is emitted to find an embedded
-      child at the given position.
+        child at the given position.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3082,7 +3082,7 @@ class Window : gobject.object.ObjectWrap
           `window` the instance the signal is connected to (optional)
   
           `Returns` the #GdkWindow of the
-              embedded child at `x`, `y`, or null
+                embedded child at `x`, `y`, or null
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

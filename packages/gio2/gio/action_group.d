@@ -330,8 +330,8 @@ interface ActionGroup
       Connect to `ActionAdded` signal.
   
       Signals that a new action was just added to the group.
-      This signal is emitted after the action has been added
-      and is now visible.
+        This signal is emitted after the action has been added
+        and is now visible.
   
       Params:
         detail = Signal detail or null (default)
@@ -374,8 +374,8 @@ interface ActionGroup
       Connect to `ActionRemoved` signal.
   
       Signals that an action is just about to be removed from the group.
-      This signal is emitted before the action is removed, so the action
-      is still visible and can be queried from the signal handler.
+        This signal is emitted before the action is removed, so the action
+        is still visible and can be queried from the signal handler.
   
       Params:
         detail = Signal detail or null (default)

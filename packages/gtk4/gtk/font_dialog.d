@@ -63,7 +63,7 @@ class FontDialog : gobject.object.ObjectWrap
   /**
       Get `filter` property.
       Returns: Sets a filter to restrict what fonts are shown
-      in the font chooser dialog.
+        in the font chooser dialog.
   */
   @property gtk.filter.Filter filter()
   {
@@ -74,7 +74,7 @@ class FontDialog : gobject.object.ObjectWrap
       Set `filter` property.
       Params:
         propval = Sets a filter to restrict what fonts are shown
-        in the font chooser dialog.
+          in the font chooser dialog.
   */
   @property void filter(gtk.filter.Filter propval)
   {
@@ -84,9 +84,9 @@ class FontDialog : gobject.object.ObjectWrap
   /**
       Get `fontMap` property.
       Returns: Sets a custom font map to select fonts from.
-      
-      A custom font map can be used to present application-specific
-      fonts instead of or in addition to the normal system fonts.
+        
+        A custom font map can be used to present application-specific
+        fonts instead of or in addition to the normal system fonts.
   */
   @property pango.font_map.FontMap fontMap()
   {
@@ -97,9 +97,9 @@ class FontDialog : gobject.object.ObjectWrap
       Set `fontMap` property.
       Params:
         propval = Sets a custom font map to select fonts from.
-        
-        A custom font map can be used to present application-specific
-        fonts instead of or in addition to the normal system fonts.
+          
+          A custom font map can be used to present application-specific
+          fonts instead of or in addition to the normal system fonts.
   */
   @property void fontMap(pango.font_map.FontMap propval)
   {
@@ -147,7 +147,7 @@ class FontDialog : gobject.object.ObjectWrap
   /**
       Get `title` property.
       Returns: A title that may be shown on the font chooser
-      dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
+        dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
   */
   @property string title()
   {
@@ -158,7 +158,7 @@ class FontDialog : gobject.object.ObjectWrap
       Set `title` property.
       Params:
         propval = A title that may be shown on the font chooser
-        dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
+          dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
   */
   @property void title(string propval)
   {
@@ -201,7 +201,6 @@ class FontDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_font_dialog_choose_face(cast(GtkFontDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, initialValue ? cast(PangoFontFace*)initialValue._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -250,7 +249,6 @@ class FontDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_font_dialog_choose_family(cast(GtkFontDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, initialValue ? cast(PangoFontFamily*)initialValue._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -306,7 +304,6 @@ class FontDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_font_dialog_choose_font(cast(GtkFontDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, initialValue ? cast(PangoFontDescription*)initialValue._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -339,7 +336,6 @@ class FontDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_font_dialog_choose_font_and_features(cast(GtkFontDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, initialValue ? cast(PangoFontDescription*)initialValue._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

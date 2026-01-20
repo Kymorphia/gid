@@ -53,7 +53,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   /**
       Get `childPackDirection` property.
       Returns: The child pack direction of the menubar. It determines how
-      the widgets contained in child menuitems are arranged.
+        the widgets contained in child menuitems are arranged.
   */
   @property gtk.types.PackDirection childPackDirection()
   {
@@ -64,7 +64,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Set `childPackDirection` property.
       Params:
         propval = The child pack direction of the menubar. It determines how
-        the widgets contained in child menuitems are arranged.
+          the widgets contained in child menuitems are arranged.
   */
   @property void childPackDirection(gtk.types.PackDirection propval)
   {
@@ -74,7 +74,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   /**
       Get `packDirection` property.
       Returns: The pack direction of the menubar. It determines how
-      menuitems are arranged in the menubar.
+        menuitems are arranged in the menubar.
   */
   @property gtk.types.PackDirection packDirection()
   {
@@ -85,7 +85,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Set `packDirection` property.
       Params:
         propval = The pack direction of the menubar. It determines how
-        menuitems are arranged in the menubar.
+          menuitems are arranged in the menubar.
   */
   @property void packDirection(gtk.types.PackDirection propval)
   {

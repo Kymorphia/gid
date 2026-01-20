@@ -11,7 +11,7 @@ import glib.types;
 */
 class TokenValue
 {
-  GTokenValue cInstance;
+  GTokenValue _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class TokenValue
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.token_value.TokenValue");
 
-    cInstance = *cast(GTokenValue*)ptr;
+    _cInstance = *cast(GTokenValue*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class TokenValue
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

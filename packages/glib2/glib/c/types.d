@@ -2818,7 +2818,7 @@ enum GTokenType
 
 /**
     Specifies which nodes are visited during several of the tree
-    functions, including [glib.node.Node.traverse] and [glib.node.Node.find].
+    functions, including [glib.types.Node.traverse] and [glib.types.Node.find].
 */
 enum GTraverseFlags : uint
 {
@@ -2859,7 +2859,7 @@ enum GTraverseFlags : uint
 
 /**
     Specifies the type of traversal performed by [glib.tree.Tree.traverse],
-    [glib.node.Node.traverse] and [glib.node.Node.find]. The different orders are
+    [glib.types.Node.traverse] and [glib.types.Node.find]. The different orders are
     illustrated here:
     $(LIST
       * In order: A, B, C, D, E, F, G, H, I
@@ -7338,21 +7338,21 @@ union GTokenValue
 }
 
 /**
-    A [glib.trash_stack.TrashStack] is an efficient way to keep a stack of unused allocated
+    A [glib.types.TrashStack] is an efficient way to keep a stack of unused allocated
     memory chunks. Each memory chunk is required to be large enough to hold
     a [xlib.types.void*]. This allows the stack to be maintained without any space
     overhead, since the stack pointers can be stored inside the memory chunks.
     
-    There is no function to create a [glib.trash_stack.TrashStack]. A `NULL` `GTrashStack*`
+    There is no function to create a [glib.types.TrashStack]. A `NULL` `GTrashStack*`
     is a perfectly valid empty stack.
     
     Each piece of memory that is pushed onto the stack is cast to a
     `GTrashStack*`.
     
-    There is no longer any good reason to use [glib.trash_stack.TrashStack].  If you have
+    There is no longer any good reason to use [glib.types.TrashStack].  If you have
     extra pieces of memory, `free()` them and allocate them again later.
 
-    Deprecated: [glib.trash_stack.TrashStack] is deprecated without replacement
+    Deprecated: [glib.types.TrashStack] is deprecated without replacement
 */
 struct GTrashStack
 {

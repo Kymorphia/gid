@@ -149,8 +149,8 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   /**
       Get `cascadePopdown` property.
       Returns: Whether the popover pops down after a child popover.
-      
-      This is used to implement the expected behavior of submenus.
+        
+        This is used to implement the expected behavior of submenus.
   */
   @property bool cascadePopdown()
   {
@@ -161,8 +161,8 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Set `cascadePopdown` property.
       Params:
         propval = Whether the popover pops down after a child popover.
-        
-        This is used to implement the expected behavior of submenus.
+          
+          This is used to implement the expected behavior of submenus.
   */
   @property void cascadePopdown(bool propval)
   {
@@ -385,9 +385,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getPointingTo(out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
-    GdkRectangle _rect;
-    _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, cast(GdkRectangle*)&rect);
     return _retval;
   }
 
@@ -543,9 +541,9 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         rect = rectangle to point to
   */
-  void setPointingTo(gdk.rectangle.Rectangle rect = null)
+  void setPointingTo(gdk.rectangle.Rectangle rect)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, cast(const(GdkRectangle)*)&rect);
   }
 
   /**
@@ -570,8 +568,8 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Connect to `ActivateDefault` signal.
   
       Emitted whend the user activates the default widget.
-      
-      This is a [keybinding signal](class.SignalAction.html).
+        
+        This is a [keybinding signal](class.SignalAction.html).
   
       Params:
         callback = signal callback delegate or function to connect

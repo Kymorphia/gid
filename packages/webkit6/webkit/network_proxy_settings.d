@@ -26,7 +26,7 @@ class NetworkProxySettings : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -95,6 +95,7 @@ class NetworkProxySettings : gobject.boxed.Boxed
       _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     const(char*)* _ignoreHosts = _tmpignoreHosts.ptr;
+
     _cretval = webkit_network_proxy_settings_new(_defaultProxyUri, _ignoreHosts);
     this(_cretval, Yes.Take);
   }

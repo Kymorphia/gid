@@ -14,7 +14,7 @@ import gid.gid;
 */
 class EventAny
 {
-  GdkEventAny cInstance;
+  GdkEventAny _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class EventAny
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_any.EventAny");
 
-    cInstance = *cast(GdkEventAny*)ptr;
+    _cInstance = *cast(GdkEventAny*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class EventAny
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

@@ -74,9 +74,9 @@ class ColumnViewSorter : gtk.sorter.Sorter
   /**
       Get `primarySortColumn` property.
       Returns: The primary sort column.
-      
-      The primary sort column is the one that displays the triangle
-      in a column view header.
+        
+        The primary sort column is the one that displays the triangle
+        in a column view header.
   */
   @property gtk.column_view_column.ColumnViewColumn primarySortColumn()
   {
@@ -86,10 +86,10 @@ class ColumnViewSorter : gtk.sorter.Sorter
   /**
       Get `primarySortOrder` property.
       Returns: The primary sort order.
-      
-      The primary sort order determines whether the triangle displayed
-      in the column view header of the primary sort column points upwards
-      or downwards.
+        
+        The primary sort order determines whether the triangle displayed
+        in the column view header of the primary sort column points upwards
+        or downwards.
   */
   @property gtk.types.SortType primarySortOrder()
   {

@@ -14,7 +14,7 @@ import glib.types;
 */
 class OptionContext
 {
-  GOptionContext* cInstancePtr;
+  GOptionContext* _cInstancePtr;
   bool owned;
 
   /** */
@@ -23,7 +23,7 @@ class OptionContext
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.option_context.OptionContext");
 
-    cInstancePtr = cast(GOptionContext*)ptr;
+    _cInstancePtr = cast(GOptionContext*)ptr;
 
     owned = take;
   }
@@ -31,13 +31,13 @@ class OptionContext
   ~this()
   {
     if (owned)
-      g_option_context_free(cInstancePtr);
+      g_option_context_free(_cInstancePtr);
   }
 
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -307,12 +307,11 @@ class OptionContext
       string _str = str.fromCString(No.Free);
 
       _dretval = (*_dlg)(_str);
-      const(char)* _retval = _dretval.toCString(No.Alloc);
+      auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     g_option_context_set_translate_func(cast(GOptionContext*)this._cPtr, _funcCB, _func, _funcDestroyCB);

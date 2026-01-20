@@ -245,8 +245,8 @@ class FrameClock : gobject.object.ObjectWrap
       Connect to `AfterPaint` signal.
   
       This signal ends processing of the frame.
-      
-      Applications should generally not handle this signal.
+        
+        Applications should generally not handle this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -284,8 +284,8 @@ class FrameClock : gobject.object.ObjectWrap
       Connect to `BeforePaint` signal.
   
       Begins processing of the frame.
-      
-      Applications should generally not handle this signal.
+        
+        Applications should generally not handle this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -323,9 +323,9 @@ class FrameClock : gobject.object.ObjectWrap
       Connect to `FlushEvents` signal.
   
       Used to flush pending motion events that are being batched up and
-      compressed together.
-      
-      Applications should not handle this signal.
+        compressed together.
+        
+        Applications should not handle this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -363,10 +363,10 @@ class FrameClock : gobject.object.ObjectWrap
       Connect to `Layout` signal.
   
       Emitted as the second step of toolkit and application processing
-      of the frame.
-      
-      Any work to update sizes and positions of application elements
-      should be performed. GTK normally handles this internally.
+        of the frame.
+        
+        Any work to update sizes and positions of application elements
+        should be performed. GTK normally handles this internally.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -404,12 +404,12 @@ class FrameClock : gobject.object.ObjectWrap
       Connect to `Paint` signal.
   
       Emitted as the third step of toolkit and application processing
-      of the frame.
-      
-      The frame is repainted. GDK normally handles this internally and
-      emits [gdk.surface.Surface.render] signals which are turned into
-      [GtkWidget::snapshot](../gtk4/signal.Widget.snapshot.html) signals
-      by GTK.
+        of the frame.
+        
+        The frame is repainted. GDK normally handles this internally and
+        emits [gdk.surface.Surface.render] signals which are turned into
+        [GtkWidget::snapshot](../gtk4/signal.Widget.snapshot.html) signals
+        by GTK.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -447,9 +447,9 @@ class FrameClock : gobject.object.ObjectWrap
       Connect to `ResumeEvents` signal.
   
       Emitted after processing of the frame is finished.
-      
-      This signal is handled internally by GTK to resume normal
-      event processing. Applications should not handle this signal.
+        
+        This signal is handled internally by GTK to resume normal
+        event processing. Applications should not handle this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -487,12 +487,12 @@ class FrameClock : gobject.object.ObjectWrap
       Connect to `Update` signal.
   
       Emitted as the first step of toolkit and application processing
-      of the frame.
-      
-      Animations should be updated using [gdk.frame_clock.FrameClock.getFrameTime].
-      Applications can connect directly to this signal, or use
-      [[gtk.widget.Widget.addTickCallback]](../gtk4/method.Widget.add_tick_callback.html)
-      as a more convenient interface.
+        of the frame.
+        
+        Animations should be updated using [gdk.frame_clock.FrameClock.getFrameTime].
+        Applications can connect directly to this signal, or use
+        [[gtk.widget.Widget.addTickCallback]](../gtk4/method.Widget.add_tick_callback.html)
+        as a more convenient interface.
   
       Params:
         callback = signal callback delegate or function to connect

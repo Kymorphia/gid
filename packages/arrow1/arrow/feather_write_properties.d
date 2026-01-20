@@ -39,13 +39,13 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
   /**
       Get `compression` property.
       Returns: Compression type to use. Only
-      [arrow.types.CompressionType.Uncompressed],
-      [arrow.types.CompressionType.Lz4] and [arrow.types.CompressionType.Zstd]
-      are supported. The default compression is
-      [arrow.types.CompressionType.Lz4] if Apache Arrow C++ is built with
-      support for it, otherwise [arrow.types.CompressionType.Uncompressed].
-      [arrow.types.CompressionType.Uncompressed] is set as the object
-      default here.
+        [arrow.types.CompressionType.Uncompressed],
+        [arrow.types.CompressionType.Lz4] and [arrow.types.CompressionType.Zstd]
+        are supported. The default compression is
+        [arrow.types.CompressionType.Lz4] if Apache Arrow C++ is built with
+        support for it, otherwise [arrow.types.CompressionType.Uncompressed].
+        [arrow.types.CompressionType.Uncompressed] is set as the object
+        default here.
   */
   @property arrow.types.CompressionType compression()
   {
@@ -56,13 +56,13 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
       Set `compression` property.
       Params:
         propval = Compression type to use. Only
-        [arrow.types.CompressionType.Uncompressed],
-        [arrow.types.CompressionType.Lz4] and [arrow.types.CompressionType.Zstd]
-        are supported. The default compression is
-        [arrow.types.CompressionType.Lz4] if Apache Arrow C++ is built with
-        support for it, otherwise [arrow.types.CompressionType.Uncompressed].
-        [arrow.types.CompressionType.Uncompressed] is set as the object
-        default here.
+          [arrow.types.CompressionType.Uncompressed],
+          [arrow.types.CompressionType.Lz4] and [arrow.types.CompressionType.Zstd]
+          are supported. The default compression is
+          [arrow.types.CompressionType.Lz4] if Apache Arrow C++ is built with
+          support for it, otherwise [arrow.types.CompressionType.Uncompressed].
+          [arrow.types.CompressionType.Uncompressed] is set as the object
+          default here.
   */
   @property void compression(arrow.types.CompressionType propval)
   {

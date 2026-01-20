@@ -14,7 +14,7 @@ import gobject.value;
 */
 class PropertyValues
 {
-  AtkPropertyValues cInstance;
+  AtkPropertyValues _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class PropertyValues
     if (!ptr)
       throw new GidConstructException("Null instance pointer for atk.property_values.PropertyValues");
 
-    cInstance = *cast(AtkPropertyValues*)ptr;
+    _cInstance = *cast(AtkPropertyValues*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class PropertyValues
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

@@ -176,10 +176,10 @@ class Application : gio.application.Application
   /**
       Get `screensaverActive` property.
       Returns: This property is true if GTK+ believes that the screensaver is
-      currently active. GTK+ only tracks session state (including this)
-      when #GtkApplication::register-session is set to true.
-      
-      Tracking the screensaver state is supported on Linux.
+        currently active. GTK+ only tracks session state (including this)
+        when #GtkApplication::register-session is set to true.
+        
+        Tracking the screensaver state is supported on Linux.
   */
   @property bool screensaverActive()
   {
@@ -303,8 +303,8 @@ class Application : gio.application.Application
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -344,8 +344,8 @@ class Application : gio.application.Application
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -531,8 +531,8 @@ class Application : gio.application.Application
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -645,6 +645,7 @@ class Application : gio.application.Application
       _tmpaccels ~= s.toCString(No.Alloc);
     _tmpaccels ~= null;
     const(char*)* _accels = _tmpaccels.ptr;
+
     gtk_application_set_accels_for_action(cast(GtkApplication*)this._cPtr, _detailedActionName, _accels);
   }
 
@@ -719,10 +720,10 @@ class Application : gio.application.Application
       Connect to `QueryEnd` signal.
   
       Emitted when the session manager is about to end the session, only
-      if #GtkApplication::register-session is true. Applications can
-      connect to this signal and call [gtk.application.Application.inhibit] with
-      [gtk.types.ApplicationInhibitFlags.Logout] to delay the end of the session
-      until state has been saved.
+        if #GtkApplication::register-session is true. Applications can
+        connect to this signal and call [gtk.application.Application.inhibit] with
+        [gtk.types.ApplicationInhibitFlags.Logout] to delay the end of the session
+        until state has been saved.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -760,7 +761,7 @@ class Application : gio.application.Application
       Connect to `WindowAdded` signal.
   
       Emitted when a #GtkWindow is added to application through
-      [gtk.application.Application.addWindow].
+        [gtk.application.Application.addWindow].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -805,8 +806,8 @@ class Application : gio.application.Application
       Connect to `WindowRemoved` signal.
   
       Emitted when a #GtkWindow is removed from application,
-      either as a side-effect of being destroyed or explicitly
-      through [gtk.application.Application.removeWindow].
+        either as a side-effect of being destroyed or explicitly
+        through [gtk.application.Application.removeWindow].
   
       Params:
         callback = signal callback delegate or function to connect

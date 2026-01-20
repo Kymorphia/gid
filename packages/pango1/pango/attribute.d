@@ -52,7 +52,7 @@ class Attribute : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -96,7 +96,7 @@ class Attribute : gobject.boxed.Boxed
   /**
       Get `endIndex` field.
       Returns: end index of the range (in bytes). The character at this index
-        is not included in the range.
+          is not included in the range.
   */
   @property uint endIndex()
   {
@@ -107,7 +107,7 @@ class Attribute : gobject.boxed.Boxed
       Set `endIndex` field.
       Params:
         propval = end index of the range (in bytes). The character at this index
-          is not included in the range.
+            is not included in the range.
   */
   @property void endIndex(uint propval)
   {

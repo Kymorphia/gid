@@ -111,10 +111,10 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   /**
       Get `parent` property.
       Returns: The parent of the object. Please note, that when changing the 'parent'
-      property, we don't emit #GObject::notify and #GstObject::deep-notify
-      signals due to locking issues. In some cases one can use
-      #GstBin::element-added or #GstBin::element-removed signals on the parent to
-      achieve a similar effect.
+        property, we don't emit #GObject::notify and #GstObject::deep-notify
+        signals due to locking issues. In some cases one can use
+        #GstBin::element-added or #GstBin::element-removed signals on the parent to
+        achieve a similar effect.
   */
   @property gst.object.ObjectWrap parent()
   {
@@ -125,10 +125,10 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Set `parent` property.
       Params:
         propval = The parent of the object. Please note, that when changing the 'parent'
-        property, we don't emit #GObject::notify and #GstObject::deep-notify
-        signals due to locking issues. In some cases one can use
-        #GstBin::element-added or #GstBin::element-removed signals on the parent to
-        achieve a similar effect.
+          property, we don't emit #GObject::notify and #GstObject::deep-notify
+          signals due to locking issues. In some cases one can use
+          #GstBin::element-added or #GstBin::element-removed signals on the parent to
+          achieve a similar effect.
   */
   @property void parent(gst.object.ObjectWrap propval)
   {
@@ -184,6 +184,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       _tmpexcludedProps ~= s.toCString(No.Alloc);
     _tmpexcludedProps ~= null;
     char** _excludedProps = _tmpexcludedProps.ptr;
+
     gst_object_default_deep_notify(object ? cast(GObject*)object._cPtr(No.Dup) : null, orig ? cast(GstObject*)orig._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _excludedProps);
   }
 
@@ -307,6 +308,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
+
     _retval = cast(bool)gst_object_get_g_value_array(cast(GstObject*)this._cPtr, _propertyName, timestamp, interval, _nValues, _values);
     return _retval;
   }
@@ -597,8 +599,8 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Connect to `DeepNotify` signal.
   
       The deep notify signal is used to be notified of property changes. It is
-      typically attached to the toplevel bin to receive notifications from all
-      the elements contained in that bin.
+        typically attached to the toplevel bin to receive notifications from all
+        the elements contained in that bin.
   
       Params:
         detail = Signal detail or null (default)

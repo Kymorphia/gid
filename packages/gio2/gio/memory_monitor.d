@@ -87,9 +87,9 @@ interface MemoryMonitor
       Connect to `LowMemoryWarning` signal.
   
       Emitted when the system is running low on free memory. The signal
-      handler should then take the appropriate action depending on the
-      warning level. See the #GMemoryMonitorWarningLevel documentation for
-      details.
+        handler should then take the appropriate action depending on the
+        warning level. See the #GMemoryMonitorWarningLevel documentation for
+        details.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -73,11 +73,11 @@ class HeaderBar : gtk.container.Container
   /**
       Get `decorationLayout` property.
       Returns: The decoration layout for buttons. If this property is
-      not set, the #GtkSettings:gtk-decoration-layout setting
-      is used.
-      
-      See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
-      about the format of this string.
+        not set, the #GtkSettings:gtk-decoration-layout setting
+        is used.
+        
+        See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
+        about the format of this string.
   */
   @property string decorationLayout()
   {
@@ -88,11 +88,11 @@ class HeaderBar : gtk.container.Container
       Set `decorationLayout` property.
       Params:
         propval = The decoration layout for buttons. If this property is
-        not set, the #GtkSettings:gtk-decoration-layout setting
-        is used.
-        
-        See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
-        about the format of this string.
+          not set, the #GtkSettings:gtk-decoration-layout setting
+          is used.
+          
+          See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
+          about the format of this string.
   */
   @property void decorationLayout(string propval)
   {
@@ -121,7 +121,7 @@ class HeaderBar : gtk.container.Container
   /**
       Get `hasSubtitle` property.
       Returns: If true, reserve space for a subtitle, even if none
-      is currently set.
+        is currently set.
   */
   @property bool hasSubtitle()
   {
@@ -132,7 +132,7 @@ class HeaderBar : gtk.container.Container
       Set `hasSubtitle` property.
       Params:
         propval = If true, reserve space for a subtitle, even if none
-        is currently set.
+          is currently set.
   */
   @property void hasSubtitle(bool propval)
   {
@@ -142,11 +142,11 @@ class HeaderBar : gtk.container.Container
   /**
       Get `showCloseButton` property.
       Returns: Whether to show window decorations.
-      
-      Which buttons are actually shown and where is determined
-      by the #GtkHeaderBar:decoration-layout property, and by
-      the state of the window (e.g. a close button will not be
-      shown if the window can't be closed).
+        
+        Which buttons are actually shown and where is determined
+        by the #GtkHeaderBar:decoration-layout property, and by
+        the state of the window (e.g. a close button will not be
+        shown if the window can't be closed).
   */
   @property bool showCloseButton()
   {
@@ -157,11 +157,11 @@ class HeaderBar : gtk.container.Container
       Set `showCloseButton` property.
       Params:
         propval = Whether to show window decorations.
-        
-        Which buttons are actually shown and where is determined
-        by the #GtkHeaderBar:decoration-layout property, and by
-        the state of the window (e.g. a close button will not be
-        shown if the window can't be closed).
+          
+          Which buttons are actually shown and where is determined
+          by the #GtkHeaderBar:decoration-layout property, and by
+          the state of the window (e.g. a close button will not be
+          shown if the window can't be closed).
   */
   @property void showCloseButton(bool propval)
   {

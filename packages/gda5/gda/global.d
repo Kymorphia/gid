@@ -97,8 +97,8 @@ string[] completionListGet(gda.connection.Connection cnc, string sql, int start,
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -314,32 +314,6 @@ bool logIsEnabled()
   return _retval;
 }
 
-/** */
-void mutexFree(gda.types.Mutex mutex)
-{
-  gda_mutex_free(mutex ? cast(GdaMutex*)mutex._cPtr : null);
-}
-
-/** */
-void mutexLock(gda.types.Mutex mutex)
-{
-  gda_mutex_lock(mutex ? cast(GdaMutex*)mutex._cPtr : null);
-}
-
-/** */
-bool mutexTrylock(gda.types.Mutex mutex)
-{
-  bool _retval;
-  _retval = cast(bool)gda_mutex_trylock(mutex ? cast(GdaMutex*)mutex._cPtr : null);
-  return _retval;
-}
-
-/** */
-void mutexUnlock(gda.types.Mutex mutex)
-{
-  gda_mutex_unlock(mutex ? cast(GdaMutex*)mutex._cPtr : null);
-}
-
 /**
     This function is similar to [gda.global.parseIso8601Date] (with first being G_DATE_YEAR, second being G_DATE_MONTH,
     third being G_DATE_DAY and sep being '-') but allows one to specify the expected date format.
@@ -357,7 +331,7 @@ bool parseFormattedDate(glib.date.Date gdate, string value, glib.types.DateDMY f
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = cast(bool)gda_parse_formatted_date(gdate ? cast(GDate*)gdate._cPtr(No.Dup) : null, _value, first, second, third, sep);
+  _retval = cast(bool)gda_parse_formatted_date(cast(GDate*)&gdate, _value, first, second, third, sep);
   return _retval;
 }
 
@@ -366,7 +340,7 @@ bool parseFormattedTime(gda.time.Time timegda, string value, char sep)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = cast(bool)gda_parse_formatted_time(timegda ? cast(GdaTime*)timegda._cPtr(No.Dup) : null, _value, sep);
+  _retval = cast(bool)gda_parse_formatted_time(cast(GdaTime*)&timegda, _value, sep);
   return _retval;
 }
 
@@ -387,7 +361,7 @@ bool parseFormattedTimestamp(gda.timestamp.Timestamp timestamp, string value, gl
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = cast(bool)gda_parse_formatted_timestamp(timestamp ? cast(GdaTimestamp*)timestamp._cPtr(No.Dup) : null, _value, first, second, third, sep);
+  _retval = cast(bool)gda_parse_formatted_timestamp(cast(GdaTimestamp*)&timestamp, _value, first, second, third, sep);
   return _retval;
 }
 
@@ -407,7 +381,7 @@ bool parseIso8601Date(glib.date.Date gdate, string value)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = cast(bool)gda_parse_iso8601_date(gdate ? cast(GDate*)gdate._cPtr(No.Dup) : null, _value);
+  _retval = cast(bool)gda_parse_iso8601_date(cast(GDate*)&gdate, _value);
   return _retval;
 }
 
@@ -425,7 +399,7 @@ bool parseIso8601Time(gda.time.Time timegda, string value)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = cast(bool)gda_parse_iso8601_time(timegda ? cast(GdaTime*)timegda._cPtr(No.Dup) : null, _value);
+  _retval = cast(bool)gda_parse_iso8601_time(cast(GdaTime*)&timegda, _value);
   return _retval;
 }
 
@@ -443,7 +417,7 @@ bool parseIso8601Timestamp(gda.timestamp.Timestamp timestamp, string value)
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
-  _retval = cast(bool)gda_parse_iso8601_timestamp(timestamp ? cast(GdaTimestamp*)timestamp._cPtr(No.Dup) : null, _value);
+  _retval = cast(bool)gda_parse_iso8601_timestamp(cast(GdaTimestamp*)&timestamp, _value);
   return _retval;
 }
 
@@ -818,8 +792,8 @@ string[] sqlIdentifierSplit(string id)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -859,7 +833,9 @@ gda.binary.Binary stringToBinary(string str = null)
   GdaBinary* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = gda_string_to_binary(_str);
-  auto _retval = _cretval ? new gda.binary.Binary(cast(void*)_cretval, Yes.Take) : null;
+  gda.binary.Binary _retval;
+  if (_cretval)
+    _retval = *cast(gda.binary.Binary*)_cretval;
   return _retval;
 }
 

@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventKey
 {
-  GdkEventKey cInstance;
+  GdkEventKey _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventKey
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_key.EventKey");
 
-    cInstance = *cast(GdkEventKey*)ptr;
+    _cInstance = *cast(GdkEventKey*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventKey
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -112,8 +112,8 @@ class EventKey
   /**
       Get `state` field.
       Returns: a bit-mask representing the state of
-        the modifier keys (e.g. Control, Shift and Alt) and the pointer
-        buttons. See #GdkModifierType.
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
   */
   @property gdk.types.ModifierType state()
   {
@@ -124,8 +124,8 @@ class EventKey
       Set `state` field.
       Params:
         propval = a bit-mask representing the state of
-          the modifier keys (e.g. Control, Shift and Alt) and the pointer
-          buttons. See #GdkModifierType.
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
   */
   @property void state(gdk.types.ModifierType propval)
   {
@@ -135,8 +135,8 @@ class EventKey
   /**
       Get `keyval` field.
       Returns: the key that was pressed or released. See the
-        `gdk/gdkkeysyms.h` header file for a
-        complete list of GDK key codes.
+          `gdk/gdkkeysyms.h` header file for a
+          complete list of GDK key codes.
   */
   @property uint keyval()
   {
@@ -147,8 +147,8 @@ class EventKey
       Set `keyval` field.
       Params:
         propval = the key that was pressed or released. See the
-          `gdk/gdkkeysyms.h` header file for a
-          complete list of GDK key codes.
+            `gdk/gdkkeysyms.h` header file for a
+            complete list of GDK key codes.
   */
   @property void keyval(uint propval)
   {
@@ -177,26 +177,6 @@ class EventKey
   /**
       Get `string_` field.
       Returns: a string containing an approximation of the text that
-        would result from this keypress. The only correct way to handle text
-        input of text is using input methods (see #GtkIMContext), so this
-        field is deprecated and should never be used.
-        ([gdk.global.unicodeToKeyval] provides a non-deprecated way of getting
-        an approximate translation for a key.) The string is encoded in the
-        encoding of the current locale (Note: this for backwards compatibility:
-        strings in GTK+ and GDK are typically in UTF-8.) and NUL-terminated.
-        In some cases, the translation of the key code will be a single
-        NUL byte, in which case looking at @length is necessary to distinguish
-        it from the an empty translation.
-  */
-  @property string string_()
-  {
-    return cToD!(string)(cast(void*)(cast(GdkEventKey*)this._cPtr).string_);
-  }
-
-  /**
-      Set `string_` field.
-      Params:
-        propval = a string containing an approximation of the text that
           would result from this keypress. The only correct way to handle text
           input of text is using input methods (see #GtkIMContext), so this
           field is deprecated and should never be used.
@@ -207,6 +187,26 @@ class EventKey
           In some cases, the translation of the key code will be a single
           NUL byte, in which case looking at @length is necessary to distinguish
           it from the an empty translation.
+  */
+  @property string string_()
+  {
+    return cToD!(string)(cast(void*)(cast(GdkEventKey*)this._cPtr).string_);
+  }
+
+  /**
+      Set `string_` field.
+      Params:
+        propval = a string containing an approximation of the text that
+            would result from this keypress. The only correct way to handle text
+            input of text is using input methods (see #GtkIMContext), so this
+            field is deprecated and should never be used.
+            ([gdk.global.unicodeToKeyval] provides a non-deprecated way of getting
+            an approximate translation for a key.) The string is encoded in the
+            encoding of the current locale (Note: this for backwards compatibility:
+            strings in GTK+ and GDK are typically in UTF-8.) and NUL-terminated.
+            In some cases, the translation of the key code will be a single
+            NUL byte, in which case looking at @length is necessary to distinguish
+            it from the an empty translation.
   */
   @property void string_(string propval)
   {
@@ -255,7 +255,7 @@ class EventKey
   /**
       Get `isModifier` field.
       Returns: a flag that indicates if @hardware_keycode is mapped to a
-        modifier. Since 2.10
+          modifier. Since 2.10
   */
   @property uint isModifier()
   {
@@ -266,7 +266,7 @@ class EventKey
       Set `isModifier` field.
       Params:
         propval = a flag that indicates if @hardware_keycode is mapped to a
-          modifier. Since 2.10
+            modifier. Since 2.10
   */
   @property void isModifier(uint propval)
   {

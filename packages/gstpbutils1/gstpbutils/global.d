@@ -615,7 +615,6 @@ gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstp
     (*_dlg)(result);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   GstInstallPluginsReturn _cretval;
   char*[] _tmpdetails;
   foreach (s; details)
@@ -679,6 +678,7 @@ gstpbutils.types.InstallPluginsReturn installPluginsSync(string[] details, gstpb
     _tmpdetails ~= s.toCString(No.Alloc);
   _tmpdetails ~= null;
   const(char*)* _details = _tmpdetails.ptr;
+
   _cretval = gst_install_plugins_sync(_details, ctx ? cast(GstInstallPluginsContext*)ctx._cPtr(No.Dup) : null);
   gstpbutils.types.InstallPluginsReturn _retval = cast(gstpbutils.types.InstallPluginsReturn)_cretval;
   return _retval;

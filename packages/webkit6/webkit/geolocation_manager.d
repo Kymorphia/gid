@@ -50,8 +50,8 @@ class GeolocationManager : gobject.object.ObjectWrap
   /**
       Get `enableHighAccuracy` property.
       Returns: Whether high accuracy is enabled. This is a read-only property that will be
-      set to true when a #WebKitGeolocationManager needs to get accurate position updates.
-      You can connect to notify::enable-high-accuracy signal to monitor it.
+        set to true when a #WebKitGeolocationManager needs to get accurate position updates.
+        You can connect to notify::enable-high-accuracy signal to monitor it.
   */
   @property bool enableHighAccuracy()
   {
@@ -96,13 +96,13 @@ class GeolocationManager : gobject.object.ObjectWrap
       Connect to `Start` signal.
   
       The signal is emitted to notify that manager needs to start receiving
-      position updates. After this signal is emitted the user should provide
-      the updates using [webkit.geolocation_manager.GeolocationManager.updatePosition] every time
-      the position changes, or use [webkit.geolocation_manager.GeolocationManager.failed] in case
-      it isn't possible to determine the current position.
-      
-      If the signal is not handled, WebKit will try to determine the position
-      using GeoClue if available.
+        position updates. After this signal is emitted the user should provide
+        the updates using [webkit.geolocation_manager.GeolocationManager.updatePosition] every time
+        the position changes, or use [webkit.geolocation_manager.GeolocationManager.failed] in case
+        it isn't possible to determine the current position.
+        
+        If the signal is not handled, WebKit will try to determine the position
+        using GeoClue if available.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -112,7 +112,7 @@ class GeolocationManager : gobject.object.ObjectWrap
           `geolocationManager` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -143,7 +143,7 @@ class GeolocationManager : gobject.object.ObjectWrap
       Connect to `Stop` signal.
   
       The signal is emitted to notify that manager doesn't need to receive
-      position updates anymore.
+        position updates anymore.
   
       Params:
         callback = signal callback delegate or function to connect

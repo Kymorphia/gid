@@ -338,12 +338,11 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       string _path = path.fromCString(No.Free);
 
       _dretval = (*_dlg)(_path);
-      char* _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_action_group_set_translate_func(cast(GtkActionGroup*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -400,16 +399,16 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `ConnectProxy` signal.
   
       The ::connect-proxy signal is emitted after connecting a proxy to
-      an action in the group. Note that the proxy may have been connected
-      to a different action before.
-      
-      This is intended for simple customizations for which a custom action
-      class would be too clumsy, e.g. showing tooltips for menuitems in the
-      statusbar.
-      
-      #GtkUIManager proxies the signal and provides global notification
-      just before any action is connected to a proxy, which is probably more
-      convenient to use.
+        an action in the group. Note that the proxy may have been connected
+        to a different action before.
+        
+        This is intended for simple customizations for which a custom action
+        class would be too clumsy, e.g. showing tooltips for menuitems in the
+        statusbar.
+        
+        #GtkUIManager proxies the signal and provides global notification
+        just before any action is connected to a proxy, which is probably more
+        convenient to use.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -461,11 +460,11 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `DisconnectProxy` signal.
   
       The ::disconnect-proxy signal is emitted after disconnecting a proxy
-      from an action in the group.
-      
-      #GtkUIManager proxies the signal and provides global notification
-      just before any action is connected to a proxy, which is probably more
-      convenient to use.
+        from an action in the group.
+        
+        #GtkUIManager proxies the signal and provides global notification
+        just before any action is connected to a proxy, which is probably more
+        convenient to use.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -517,10 +516,10 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `PostActivate` signal.
   
       The ::post-activate signal is emitted just after the action in the
-      action_group is activated
-      
-      This is intended for #GtkUIManager to proxy the signal and provide global
-      notification just after any action is activated.
+        action_group is activated
+        
+        This is intended for #GtkUIManager to proxy the signal and provide global
+        notification just after any action is activated.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -565,10 +564,10 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `PreActivate` signal.
   
       The ::pre-activate signal is emitted just before the action in the
-      action_group is activated
-      
-      This is intended for #GtkUIManager to proxy the signal and provide global
-      notification just before any action is activated.
+        action_group is activated
+        
+        This is intended for #GtkUIManager to proxy the signal and provide global
+        notification just before any action is activated.
   
       Params:
         callback = signal callback delegate or function to connect

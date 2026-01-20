@@ -87,9 +87,9 @@ class GutterRenderer : gtk.widget.Widget
   /**
       Get `alignmentMode` property.
       Returns: The alignment mode of the renderer.
-      
-      This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
-      the alignment should work on either the full cell, the first line or the last line.
+        
+        This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
+        the alignment should work on either the full cell, the first line or the last line.
   */
   @property gtksource.types.GutterRendererAlignmentMode alignmentMode()
   {
@@ -100,9 +100,9 @@ class GutterRenderer : gtk.widget.Widget
       Set `alignmentMode` property.
       Params:
         propval = The alignment mode of the renderer.
-        
-        This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
-        the alignment should work on either the full cell, the first line or the last line.
+          
+          This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
+          the alignment should work on either the full cell, the first line or the last line.
   */
   @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
   {
@@ -112,8 +112,8 @@ class GutterRenderer : gtk.widget.Widget
   /**
       Get `lines` property.
       Returns: Contains information about the lines to be rendered.
-      
-      It should be used by #GtkSourceGutterRenderer implementations from `vfunc@Gtk.Widget.snapshot`.
+        
+        It should be used by #GtkSourceGutterRenderer implementations from `vfunc@Gtk.Widget.snapshot`.
   */
   @property gtksource.gutter_lines.GutterLines lines()
   {
@@ -132,9 +132,9 @@ class GutterRenderer : gtk.widget.Widget
   /**
       Get `xalign` property.
       Returns: The horizontal alignment of the renderer.
-      
-      Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
-      A value lower than 0 doesn't modify the alignment.
+        
+        Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
+        A value lower than 0 doesn't modify the alignment.
   */
   @property float xalign()
   {
@@ -145,9 +145,9 @@ class GutterRenderer : gtk.widget.Widget
       Set `xalign` property.
       Params:
         propval = The horizontal alignment of the renderer.
-        
-        Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
-        A value lower than 0 doesn't modify the alignment.
+          
+          Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
+          A value lower than 0 doesn't modify the alignment.
   */
   @property void xalign(float propval)
   {
@@ -176,9 +176,9 @@ class GutterRenderer : gtk.widget.Widget
   /**
       Get `yalign` property.
       Returns: The vertical alignment of the renderer.
-      
-      Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
-      A value lower than 0 doesn't modify the alignment.
+        
+        Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+        A value lower than 0 doesn't modify the alignment.
   */
   @property float yalign()
   {
@@ -189,9 +189,9 @@ class GutterRenderer : gtk.widget.Widget
       Set `yalign` property.
       Params:
         propval = The vertical alignment of the renderer.
-        
-        Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
-        A value lower than 0 doesn't modify the alignment.
+          
+          Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+          A value lower than 0 doesn't modify the alignment.
   */
   @property void yalign(float propval)
   {
@@ -232,7 +232,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null, button, state, nPresses);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(const(GdkRectangle)*)&area, button, state, nPresses);
   }
 
   /**
@@ -362,7 +362,7 @@ class GutterRenderer : gtk.widget.Widget
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area)
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(const(GdkRectangle)*)&area);
     return _retval;
   }
 

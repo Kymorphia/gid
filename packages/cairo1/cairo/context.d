@@ -40,7 +40,7 @@ class Context : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -456,7 +456,7 @@ class Context : gobject.boxed.Boxed
         extents = a #cairo_font_extents_t object into which the results
           will be stored.
   */
-  void fontExtents(cairo.types.FontExtents extents)
+  void fontExtents(out cairo.types.FontExtents extents)
   {
     cairo_font_extents(cast(cairo_t*)this._cPtr, &extents);
   }
@@ -577,9 +577,9 @@ class Context : gobject.boxed.Boxed
       Params:
         matrix = return value for the matrix
   */
-  void getFontMatrix(cairo.matrix.Matrix matrix)
+  void getFontMatrix(out cairo.matrix.Matrix matrix)
   {
-    cairo_get_font_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(cairo_matrix_t*)matrix._cPtr(No.Dup) : null);
+    cairo_get_font_matrix(cast(cairo_t*)this._cPtr, cast(cairo_matrix_t*)&matrix);
   }
 
   /**
@@ -674,9 +674,9 @@ class Context : gobject.boxed.Boxed
       Params:
         matrix = return value for the matrix
   */
-  void getMatrix(cairo.matrix.Matrix matrix)
+  void getMatrix(out cairo.matrix.Matrix matrix)
   {
-    cairo_get_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(cairo_matrix_t*)matrix._cPtr(No.Dup) : null);
+    cairo_get_matrix(cast(cairo_t*)this._cPtr, cast(cairo_matrix_t*)&matrix);
   }
 
   /**
@@ -786,9 +786,9 @@ class Context : gobject.boxed.Boxed
         extents = a #cairo_text_extents_t object into which the results
           will be stored
   */
-  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, cairo.types.TextExtents extents)
+  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, out cairo.types.TextExtents extents)
   {
-    cairo_glyph_extents(cast(cairo_t*)this._cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs, &extents);
+    cairo_glyph_extents(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, &extents);
   }
 
   /**
@@ -802,7 +802,7 @@ class Context : gobject.boxed.Boxed
   */
   void glyphPath(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_glyph_path(cast(cairo_t*)this._cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs);
+    cairo_glyph_path(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs);
   }
 
   /**
@@ -1479,7 +1479,7 @@ class Context : gobject.boxed.Boxed
   */
   void setFontMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_font_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
+    cairo_set_font_matrix(cast(cairo_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
 
   /**
@@ -1623,7 +1623,7 @@ class Context : gobject.boxed.Boxed
   */
   void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
+    cairo_set_matrix(cast(cairo_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
 
   /**
@@ -1815,7 +1815,7 @@ class Context : gobject.boxed.Boxed
   */
   void showGlyphs(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_show_glyphs(cast(cairo_t*)this._cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs);
+    cairo_show_glyphs(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs);
   }
 
   /**
@@ -1896,7 +1896,7 @@ class Context : gobject.boxed.Boxed
   void showTextGlyphs(string utf8, int utf8Len, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, utf8Len, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs, clusters ? cast(const(cairo_text_cluster_t)*)clusters._cPtr(No.Dup) : null, numClusters, clusterFlags);
+    cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, utf8Len, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(const(cairo_text_cluster_t)*)&clusters, numClusters, clusterFlags);
   }
 
   /**
@@ -2068,7 +2068,7 @@ class Context : gobject.boxed.Boxed
         extents = a #cairo_text_extents_t object into which the results
           will be stored
   */
-  void textExtents(string utf8, cairo.types.TextExtents extents)
+  void textExtents(string utf8, out cairo.types.TextExtents extents)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_text_extents(cast(cairo_t*)this._cPtr, _utf8, &extents);
@@ -2113,7 +2113,7 @@ class Context : gobject.boxed.Boxed
   */
   void transform(cairo.matrix.Matrix matrix)
   {
-    cairo_transform(cast(cairo_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
+    cairo_transform(cast(cairo_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
 
   /**

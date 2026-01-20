@@ -52,7 +52,7 @@ class VideoCodecState : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -106,7 +106,7 @@ class VideoCodecState : gobject.boxed.Boxed
   /**
       Get `codecData` field.
       Returns: a #GstBuffer corresponding to the
-          'codec_data' field of a stream, or NULL.
+            'codec_data' field of a stream, or NULL.
   */
   @property gst.buffer.Buffer codecData()
   {
@@ -117,7 +117,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Set `codecData` field.
       Params:
         propval = a #GstBuffer corresponding to the
-            'codec_data' field of a stream, or NULL.
+              'codec_data' field of a stream, or NULL.
   */
   @property void codecData(gst.buffer.Buffer propval)
   {
@@ -128,7 +128,7 @@ class VideoCodecState : gobject.boxed.Boxed
   /**
       Get `allocationCaps` field.
       Returns: The #GstCaps for allocation query and pool
-          negotiation. Since: 1.10
+            negotiation. Since: 1.10
   */
   @property gst.caps.Caps allocationCaps()
   {
@@ -139,7 +139,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Set `allocationCaps` field.
       Params:
         propval = The #GstCaps for allocation query and pool
-            negotiation. Since: 1.10
+              negotiation. Since: 1.10
   */
   @property void allocationCaps(gst.caps.Caps propval)
   {
@@ -162,6 +162,6 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gstvideo.video_content_light_level.VideoContentLightLevel contentLightLevel()
   {
-    return new gstvideo.video_content_light_level.VideoContentLightLevel(cast(GstVideoContentLightLevel*)(cast(GstVideoCodecState*)this._cPtr).contentLightLevel, No.Take);
+    return cToD!(gstvideo.video_content_light_level.VideoContentLightLevel)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).contentLightLevel);
   }
 }

@@ -292,7 +292,7 @@ class ToggleButton : gtk.button.Button
       Connect to `Toggled` signal.
   
       Should be connected if you wish to perform an action whenever the
-      #GtkToggleButton's state is changed.
+        #GtkToggleButton's state is changed.
   
       Params:
         callback = signal callback delegate or function to connect

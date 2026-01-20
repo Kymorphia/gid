@@ -34,7 +34,7 @@ import gst.types;
 */
 class Meta
 {
-  GstMeta cInstance;
+  GstMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -42,7 +42,7 @@ class Meta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.meta.Meta");
 
-    cInstance = *cast(GstMeta*)ptr;
+    _cInstance = *cast(GstMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -51,7 +51,7 @@ class Meta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -79,7 +79,7 @@ class Meta
   */
   @property gst.meta_info.MetaInfo info()
   {
-    return new gst.meta_info.MetaInfo(cast(GstMetaInfo*)(cast(GstMeta*)this._cPtr).info, No.Take);
+    return cToD!(gst.meta_info.MetaInfo)(cast(void*)(cast(GstMeta*)this._cPtr).info);
   }
 
   /**
@@ -137,8 +137,8 @@ class Meta
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -179,6 +179,7 @@ class Meta
       _tmptags ~= s.toCString(No.Alloc);
     _tmptags ~= null;
     const(char*)* _tags = _tmptags.ptr;
+
     _retval = gst_meta_api_type_register(_api, _tags);
     return _retval;
   }
@@ -227,7 +228,9 @@ class Meta
     const(GstMetaInfo)* _cretval;
     const(char)* _impl = impl.toCString(No.Alloc);
     _cretval = gst_meta_get_info(_impl);
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 
@@ -257,13 +260,15 @@ class Meta
   {
     extern(C) gboolean _transformFuncCallback(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.CustomMetaTransformFunction*)userData;
 
-      gboolean _retval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+      _dretval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _transformFuncCB = transformFunc ? &_transformFuncCallback : null;
-
     const(GstMetaInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     char*[] _tmptags;
@@ -275,7 +280,9 @@ class Meta
     auto _transformFunc = transformFunc ? freezeDelegate(cast(void*)&transformFunc) : null;
     GDestroyNotify _transformFuncDestroyCB = transformFunc ? &thawDelegate : null;
     _cretval = gst_meta_register_custom(_name, _tags, _transformFuncCB, _transformFunc, _transformFuncDestroyCB);
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 
@@ -292,7 +299,9 @@ class Meta
     const(GstMetaInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_meta_register_custom_simple(_name);
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

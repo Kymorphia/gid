@@ -188,7 +188,6 @@ class Tree : gobject.object.ObjectWrap
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     const(char)* _attribute = attribute.toCString(No.Alloc);
     gda_tree_set_attribute(cast(GdaTree*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
@@ -338,7 +337,7 @@ class Tree : gobject.object.ObjectWrap
       Connect to `NodeHasChildToggled` signal.
   
       Gets emitted when a node has has a child when it did not have any or when it
-      does not have a ny children anymore when it had some
+        does not have a ny children anymore when it had some
   
       Params:
         callback = signal callback delegate or function to connect
@@ -346,7 +345,7 @@ class Tree : gobject.object.ObjectWrap
           $(D void callback(gda.tree_node.TreeNode node, gda.tree.Tree tree))
   
           `node` the #GdaTreeNode which changed from having children to being a
-                 leaf or the other way around (optional)
+                   leaf or the other way around (optional)
   
           `tree` the instance the signal is connected to (optional)
   

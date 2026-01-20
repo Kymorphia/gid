@@ -24,7 +24,7 @@ import gstrtsp.types;
 */
 class RTSPConnection
 {
-  GstRTSPConnection* cInstancePtr;
+  GstRTSPConnection* _cInstancePtr;
   bool owned;
 
   /** */
@@ -33,7 +33,7 @@ class RTSPConnection
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtsp.rtspconnection.RTSPConnection");
 
-    cInstancePtr = cast(GstRTSPConnection*)ptr;
+    _cInstancePtr = cast(GstRTSPConnection*)ptr;
 
     owned = take;
   }
@@ -41,7 +41,7 @@ class RTSPConnection
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -97,7 +97,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult connect(glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_connect(cast(GstRTSPConnection*)this._cPtr, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_connection_connect(cast(GstRTSPConnection*)this._cPtr, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -139,7 +139,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult connectWithResponse(glib.time_val.TimeVal timeout, gstrtsp.rtspmessage.RTSPMessage response)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_connect_with_response(cast(GstRTSPConnection*)this._cPtr, timeout ? cast(GTimeVal*)timeout._cPtr : null, response ? cast(GstRTSPMessage*)response._cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_connection_connect_with_response(cast(GstRTSPConnection*)this._cPtr, cast(GTimeVal*)&timeout, response ? cast(GstRTSPMessage*)response._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -387,7 +387,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult nextTimeout(glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_next_timeout(cast(GstRTSPConnection*)this._cPtr, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_connection_next_timeout(cast(GstRTSPConnection*)this._cPtr, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -422,7 +422,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult poll(gstrtsp.types.RTSPEvent events, out gstrtsp.types.RTSPEvent revents, glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_poll(cast(GstRTSPConnection*)this._cPtr, events, &revents, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_connection_poll(cast(GstRTSPConnection*)this._cPtr, events, &revents, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -471,7 +471,7 @@ class RTSPConnection
       _size = cast(uint)data.length;
 
     auto _data = cast(ubyte*)data.ptr;
-    _cretval = gst_rtsp_connection_read(cast(GstRTSPConnection*)this._cPtr, _data, _size, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_connection_read(cast(GstRTSPConnection*)this._cPtr, _data, _size, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -516,7 +516,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult receive(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_receive(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_connection_receive(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -568,7 +568,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult send(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_send(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_connection_send(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -596,7 +596,8 @@ class RTSPConnection
     foreach (obj; messages)
       _tmpmessages ~= *cast(GstRTSPMessage*)obj._cPtr;
     GstRTSPMessage* _messages = _tmpmessages.ptr;
-    _cretval = gst_rtsp_connection_send_messages(cast(GstRTSPConnection*)this._cPtr, _messages, _nMessages, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+
+    _cretval = gst_rtsp_connection_send_messages(cast(GstRTSPConnection*)this._cPtr, _messages, _nMessages, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -624,6 +625,7 @@ class RTSPConnection
     foreach (obj; messages)
       _tmpmessages ~= *cast(GstRTSPMessage*)obj._cPtr;
     GstRTSPMessage* _messages = _tmpmessages.ptr;
+
     _cretval = gst_rtsp_connection_send_messages_usec(cast(GstRTSPConnection*)this._cPtr, _messages, _nMessages, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -664,13 +666,15 @@ class RTSPConnection
   {
     extern(C) gboolean _funcCallback(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gstrtsp.types.RTSPConnectionAcceptCertificateFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gst_rtsp_connection_set_accept_certificate_func(cast(GstRTSPConnection*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -894,7 +898,7 @@ class RTSPConnection
       _size = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _cretval = gst_rtsp_connection_write(cast(GstRTSPConnection*)this._cPtr, _data, _size, timeout ? cast(GTimeVal*)timeout._cPtr : null);
+    _cretval = gst_rtsp_connection_write(cast(GstRTSPConnection*)this._cPtr, _data, _size, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

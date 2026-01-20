@@ -129,8 +129,8 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `enableNewTab` property.
       Returns: Whether to enable new tab button.
-      
-      Connect to the `signal@TabOverview::create-tab` signal to use it.
+        
+        Connect to the `signal@TabOverview::create-tab` signal to use it.
   */
   @property bool enableNewTab()
   {
@@ -141,8 +141,8 @@ class TabOverview : gtk.widget.Widget
       Set `enableNewTab` property.
       Params:
         propval = Whether to enable new tab button.
-        
-        Connect to the `signal@TabOverview::create-tab` signal to use it.
+          
+          Connect to the `signal@TabOverview::create-tab` signal to use it.
   */
   @property void enableNewTab(bool propval)
   {
@@ -152,25 +152,6 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `enableSearch` property.
       Returns: Whether to enable search in tabs.
-      
-      Search matches tab titles and tooltips, as well as keywords, set via
-      `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
-      web browser.
-      
-      During search, tab reordering and drag-n-drop are disabled.
-      
-      Use `property@TabOverview:search-active` to check out if search is
-      currently active.
-  */
-  @property bool enableSearch()
-  {
-    return getEnableSearch();
-  }
-
-  /**
-      Set `enableSearch` property.
-      Params:
-        propval = Whether to enable search in tabs.
         
         Search matches tab titles and tooltips, as well as keywords, set via
         `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
@@ -181,6 +162,25 @@ class TabOverview : gtk.widget.Widget
         Use `property@TabOverview:search-active` to check out if search is
         currently active.
   */
+  @property bool enableSearch()
+  {
+    return getEnableSearch();
+  }
+
+  /**
+      Set `enableSearch` property.
+      Params:
+        propval = Whether to enable search in tabs.
+          
+          Search matches tab titles and tooltips, as well as keywords, set via
+          `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
+          web browser.
+          
+          During search, tab reordering and drag-n-drop are disabled.
+          
+          Use `property@TabOverview:search-active` to check out if search is
+          currently active.
+  */
   @property void enableSearch(bool propval)
   {
     return setEnableSearch(propval);
@@ -189,11 +189,11 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `extraDragPreferredAction` property.
       Returns: The unique action on the `current-drop` of the
-      `signal@TabOverview::extra-drag-drop`.
-      
-      This property should only be used during a
-      `signal@TabOverview::extra-drag-drop` and is always a subset of what was
-      originally passed to [adw.tab_overview.TabOverview.setupExtraDropTarget].
+        `signal@TabOverview::extra-drag-drop`.
+        
+        This property should only be used during a
+        `signal@TabOverview::extra-drag-drop` and is always a subset of what was
+        originally passed to [adw.tab_overview.TabOverview.setupExtraDropTarget].
   */
   @property gdk.types.DragAction extraDragPreferredAction()
   {
@@ -203,8 +203,8 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `extraDragPreload` property.
       Returns: Whether the drop data should be preloaded on hover.
-      
-      See [gtk.drop_target.DropTarget.preload].
+        
+        See [gtk.drop_target.DropTarget.preload].
   */
   @property bool extraDragPreload()
   {
@@ -215,8 +215,8 @@ class TabOverview : gtk.widget.Widget
       Set `extraDragPreload` property.
       Params:
         propval = Whether the drop data should be preloaded on hover.
-        
-        See [gtk.drop_target.DropTarget.preload].
+          
+          See [gtk.drop_target.DropTarget.preload].
   */
   @property void extraDragPreload(bool propval)
   {
@@ -226,9 +226,9 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `inverted` property.
       Returns: Whether thumbnails use inverted layout.
-      
-      If set to `TRUE`, thumbnails will have the close or unpin buttons at the
-      beginning and the indicator at the end rather than the other way around.
+        
+        If set to `TRUE`, thumbnails will have the close or unpin buttons at the
+        beginning and the indicator at the end rather than the other way around.
   */
   @property bool inverted()
   {
@@ -239,9 +239,9 @@ class TabOverview : gtk.widget.Widget
       Set `inverted` property.
       Params:
         propval = Whether thumbnails use inverted layout.
-        
-        If set to `TRUE`, thumbnails will have the close or unpin buttons at the
-        beginning and the indicator at the end rather than the other way around.
+          
+          If set to `TRUE`, thumbnails will have the close or unpin buttons at the
+          beginning and the indicator at the end rather than the other way around.
   */
   @property void inverted(bool propval)
   {
@@ -270,8 +270,8 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `searchActive` property.
       Returns: Whether search is currently active.
-      
-      See `property@TabOverview:enable-search`.
+        
+        See `property@TabOverview:enable-search`.
   */
   @property bool searchActive()
   {
@@ -281,8 +281,8 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `secondaryMenu` property.
       Returns: The secondary menu model.
-      
-      Use it to add extra actions, e.g. to open a new window or undo closed tab.
+        
+        Use it to add extra actions, e.g. to open a new window or undo closed tab.
   */
   @property gio.menu_model.MenuModel secondaryMenu()
   {
@@ -293,8 +293,8 @@ class TabOverview : gtk.widget.Widget
       Set `secondaryMenu` property.
       Params:
         propval = The secondary menu model.
-        
-        Use it to add extra actions, e.g. to open a new window or undo closed tab.
+          
+          Use it to add extra actions, e.g. to open a new window or undo closed tab.
   */
   @property void secondaryMenu(gio.menu_model.MenuModel propval)
   {
@@ -304,8 +304,8 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `showEndTitleButtons` property.
       Returns: Whether to show end title buttons in the overview's header bar.
-      
-      See `property@HeaderBar:show-start-title-buttons` for the other side.
+        
+        See `property@HeaderBar:show-start-title-buttons` for the other side.
   */
   @property bool showEndTitleButtons()
   {
@@ -316,8 +316,8 @@ class TabOverview : gtk.widget.Widget
       Set `showEndTitleButtons` property.
       Params:
         propval = Whether to show end title buttons in the overview's header bar.
-        
-        See `property@HeaderBar:show-start-title-buttons` for the other side.
+          
+          See `property@HeaderBar:show-start-title-buttons` for the other side.
   */
   @property void showEndTitleButtons(bool propval)
   {
@@ -327,8 +327,8 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `showStartTitleButtons` property.
       Returns: Whether to show start title buttons in the overview's header bar.
-      
-      See `property@HeaderBar:show-end-title-buttons` for the other side.
+        
+        See `property@HeaderBar:show-end-title-buttons` for the other side.
   */
   @property bool showStartTitleButtons()
   {
@@ -339,8 +339,8 @@ class TabOverview : gtk.widget.Widget
       Set `showStartTitleButtons` property.
       Params:
         propval = Whether to show start title buttons in the overview's header bar.
-        
-        See `property@HeaderBar:show-end-title-buttons` for the other side.
+          
+          See `property@HeaderBar:show-end-title-buttons` for the other side.
   */
   @property void showStartTitleButtons(bool propval)
   {
@@ -350,8 +350,8 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `view` property.
       Returns: The tab view the overview controls.
-      
-      The view must be inside the tab overview, see `property@TabOverview:child`.
+        
+        The view must be inside the tab overview, see `property@TabOverview:child`.
   */
   @property adw.tab_view.TabView view()
   {
@@ -362,8 +362,8 @@ class TabOverview : gtk.widget.Widget
       Set `view` property.
       Params:
         propval = The tab view the overview controls.
-        
-        The view must be inside the tab overview, see `property@TabOverview:child`.
+          
+          The view must be inside the tab overview, see `property@TabOverview:child`.
   */
   @property void view(adw.tab_view.TabView propval)
   {
@@ -685,12 +685,12 @@ class TabOverview : gtk.widget.Widget
       Connect to `CreateTab` signal.
   
       Emitted when a tab needs to be created.
-      
-      This can happen after the new tab button has been pressed, see
-      `propertyTabOverview:enable-new-tab`.
-      
-      The signal handler is expected to create a new page in the corresponding
-      `classTabView` and return it.
+        
+        This can happen after the new tab button has been pressed, see
+        `propertyTabOverview:enable-new-tab`.
+        
+        The signal handler is expected to create a new page in the corresponding
+        `classTabView` and return it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -730,11 +730,11 @@ class TabOverview : gtk.widget.Widget
       Connect to `ExtraDragDrop` signal.
   
       This signal is emitted when content is dropped onto a tab.
-      
-      The content must be of one of the types set up via
-      [adw.tab_overview.TabOverview.setupExtraDropTarget].
-      
-      See [gtk.drop_target.DropTarget.drop].
+        
+        The content must be of one of the types set up via
+        [adw.tab_overview.TabOverview.setupExtraDropTarget].
+        
+        See [gtk.drop_target.DropTarget.drop].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -788,14 +788,14 @@ class TabOverview : gtk.widget.Widget
       Connect to `ExtraDragValue` signal.
   
       This signal is emitted when the dropped content is preloaded.
-      
-      In order for data to be preloaded, `propertyTabOverview:extra-drag-preload`
-      must be set to `TRUE`.
-      
-      The content must be of one of the types set up via
-      [adw.tab_overview.TabOverview.setupExtraDropTarget].
-      
-      See [gtk.drop_target.DropTarget.value].
+        
+        In order for data to be preloaded, `propertyTabOverview:extra-drag-preload`
+        must be set to `TRUE`.
+        
+        The content must be of one of the types set up via
+        [adw.tab_overview.TabOverview.setupExtraDropTarget].
+        
+        See [gtk.drop_target.DropTarget.value].
   
       Params:
         callback = signal callback delegate or function to connect

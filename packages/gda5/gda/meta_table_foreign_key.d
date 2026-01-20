@@ -12,7 +12,7 @@ import gid.gid;
 */
 class MetaTableForeignKey
 {
-  GdaMetaTableForeignKey cInstance;
+  GdaMetaTableForeignKey _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class MetaTableForeignKey
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_table_foreign_key.MetaTableForeignKey");
 
-    cInstance = *cast(GdaMetaTableForeignKey*)ptr;
+    _cInstance = *cast(GdaMetaTableForeignKey*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class MetaTableForeignKey
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

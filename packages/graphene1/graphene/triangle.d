@@ -35,7 +35,7 @@ class Triangle : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -83,7 +83,7 @@ class Triangle : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D p)
   {
     bool _retval;
-    _retval = cast(bool)graphene_triangle_contains_point(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_triangle_contains_point(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Triangle : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_vec2_t _res;
-    _retval = cast(bool)graphene_triangle_get_barycoords(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_triangle_get_barycoords(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p, &_res);
     res = new graphene.vec2.Vec2(cast(void*)&_res, No.Take);
     return _retval;
   }
@@ -172,9 +172,7 @@ class Triangle : gobject.boxed.Boxed
   */
   void getMidpoint(out graphene.point3_d.Point3D res)
   {
-    graphene_point3d_t _res;
-    graphene_triangle_get_midpoint(cast(const(graphene_triangle_t)*)this._cPtr, &_res);
-    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.Take);
+    graphene_triangle_get_midpoint(cast(const(graphene_triangle_t)*)this._cPtr, cast(graphene_point3d_t*)&res);
   }
 
   /**
@@ -217,13 +215,7 @@ class Triangle : gobject.boxed.Boxed
   */
   void getPoints(out graphene.point3_d.Point3D a, out graphene.point3_d.Point3D b, out graphene.point3_d.Point3D c)
   {
-    graphene_point3d_t _a;
-    graphene_point3d_t _b;
-    graphene_point3d_t _c;
-    graphene_triangle_get_points(cast(const(graphene_triangle_t)*)this._cPtr, &_a, &_b, &_c);
-    a = new graphene.point3_d.Point3D(cast(void*)&_a, No.Take);
-    b = new graphene.point3_d.Point3D(cast(void*)&_b, No.Take);
-    c = new graphene.point3_d.Point3D(cast(void*)&_c, No.Take);
+    graphene_triangle_get_points(cast(const(graphene_triangle_t)*)this._cPtr, cast(graphene_point3d_t*)&a, cast(graphene_point3d_t*)&b, cast(graphene_point3d_t*)&c);
   }
 
   /**
@@ -255,7 +247,7 @@ class Triangle : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_vec2_t _res;
-    _retval = cast(bool)graphene_triangle_get_uv(cast(const(graphene_triangle_t)*)this._cPtr, p ? cast(const(graphene_point3d_t)*)p._cPtr(No.Dup) : null, uvA ? cast(const(graphene_vec2_t)*)uvA._cPtr(No.Dup) : null, uvB ? cast(const(graphene_vec2_t)*)uvB._cPtr(No.Dup) : null, uvC ? cast(const(graphene_vec2_t)*)uvC._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_triangle_get_uv(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p, uvA ? cast(const(graphene_vec2_t)*)uvA._cPtr(No.Dup) : null, uvB ? cast(const(graphene_vec2_t)*)uvB._cPtr(No.Dup) : null, uvC ? cast(const(graphene_vec2_t)*)uvC._cPtr(No.Dup) : null, &_res);
     res = new graphene.vec2.Vec2(cast(void*)&_res, No.Take);
     return _retval;
   }
@@ -313,10 +305,10 @@ class Triangle : gobject.boxed.Boxed
         c = a #graphene_point3d_t
       Returns: the initialized #graphene_triangle_t
   */
-  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a = null, graphene.point3_d.Point3D b = null, graphene.point3_d.Point3D c = null)
+  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c)
   {
     graphene_triangle_t* _cretval;
-    _cretval = graphene_triangle_init_from_point3d(cast(graphene_triangle_t*)this._cPtr, a ? cast(const(graphene_point3d_t)*)a._cPtr(No.Dup) : null, b ? cast(const(graphene_point3d_t)*)b._cPtr(No.Dup) : null, c ? cast(const(graphene_point3d_t)*)c._cPtr(No.Dup) : null);
+    _cretval = graphene_triangle_init_from_point3d(cast(graphene_triangle_t*)this._cPtr, cast(const(graphene_point3d_t)*)&a, cast(const(graphene_point3d_t)*)&b, cast(const(graphene_point3d_t)*)&c);
     auto _retval = _cretval ? new graphene.triangle.Triangle(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

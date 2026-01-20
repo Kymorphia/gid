@@ -178,17 +178,17 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Connect to `Changed` signal.
   
       Emitted when hsts_enforcer changes.
-      
-      If a policy has been added,
-      new_policy will contain the newly-added policy and
-      old_policy will be null. If a policy has been deleted,
-      old_policy will contain the to-be-deleted policy and
-      new_policy will be null. If a policy has been changed,
-      old_policy will contain its old value, and new_policy its
-      new value.
-      
-      Note that you shouldn't modify the policies from a callback to
-      this signal.
+        
+        If a policy has been added,
+        new_policy will contain the newly-added policy and
+        old_policy will be null. If a policy has been deleted,
+        old_policy will contain the to-be-deleted policy and
+        new_policy will be null. If a policy has been changed,
+        old_policy will contain its old value, and new_policy its
+        new value.
+        
+        Note that you shouldn't modify the policies from a callback to
+        this signal.
   
       Params:
         callback = signal callback delegate or function to connect

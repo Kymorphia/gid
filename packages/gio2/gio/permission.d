@@ -58,7 +58,7 @@ class Permission : gobject.object.ObjectWrap
   /**
       Get `allowed` property.
       Returns: true if the caller currently has permission to perform the action that
-      @permission represents the permission to perform.
+        @permission represents the permission to perform.
   */
   @property bool allowed()
   {
@@ -68,7 +68,7 @@ class Permission : gobject.object.ObjectWrap
   /**
       Get `canAcquire` property.
       Returns: true if it is generally possible to acquire the permission by calling
-      [gio.permission.Permission.acquire].
+        [gio.permission.Permission.acquire].
   */
   @property bool canAcquire()
   {
@@ -78,7 +78,7 @@ class Permission : gobject.object.ObjectWrap
   /**
       Get `canRelease` property.
       Returns: true if it is generally possible to release the permission by calling
-      [gio.permission.Permission.release].
+        [gio.permission.Permission.release].
   */
   @property bool canRelease()
   {
@@ -137,7 +137,6 @@ class Permission : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_permission_acquire_async(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -272,7 +271,6 @@ class Permission : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_permission_release_async(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

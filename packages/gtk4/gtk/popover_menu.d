@@ -169,9 +169,9 @@ class PopoverMenu : gtk.popover.Popover
   /**
       Get `flags` property.
       Returns: The flags that @popover uses to create/display a menu from its model.
-      
-      If a model is set and the flags change, contents are rebuilt, so if setting
-      properties individually, set flags before model to avoid a redundant rebuild.
+        
+        If a model is set and the flags change, contents are rebuilt, so if setting
+        properties individually, set flags before model to avoid a redundant rebuild.
   */
   @property gtk.types.PopoverMenuFlags flags()
   {
@@ -182,9 +182,9 @@ class PopoverMenu : gtk.popover.Popover
       Set `flags` property.
       Params:
         propval = The flags that @popover uses to create/display a menu from its model.
-        
-        If a model is set and the flags change, contents are rebuilt, so if setting
-        properties individually, set flags before model to avoid a redundant rebuild.
+          
+          If a model is set and the flags change, contents are rebuilt, so if setting
+          properties individually, set flags before model to avoid a redundant rebuild.
   */
   @property void flags(gtk.types.PopoverMenuFlags propval)
   {

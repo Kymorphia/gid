@@ -54,8 +54,8 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `accelSizeGroup` property.
       Params:
         propval = The size group for the accelerator portion of this shortcut.
-        
-        This is used internally by GTK, and must not be modified by applications.
+          
+          This is used internally by GTK, and must not be modified by applications.
   */
   @property void accelSizeGroup(gtk.size_group.SizeGroup propval)
   {
@@ -65,44 +65,6 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `accelerator` property.
       Returns: The accelerator(s) represented by this object.
-      
-      This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
-      is set to [gtk.types.ShortcutType.Accelerator].
-      
-      The syntax of this property is (an extension of) the syntax understood
-      by `func@Gtk.accelerator_parse`. Multiple accelerators can be specified
-      by separating them with a space, but keep in mind that the available width
-      is limited.
-      
-      It is also possible to specify ranges of shortcuts, using `...` between
-      the keys. Sequences of keys can be specified using a `+` or `&` between
-      the keys.
-      
-      Examples:
-      
-      $(LIST
-        * A single shortcut: `<ctl><alt>delete`
-        * Two alternative shortcuts: `<shift>a Home`
-        * A range of shortcuts: `<alt>1...<alt>9`
-        * Several keys pressed together: `Control_L&Control_R`
-        * A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
-      )
-        
-      Use "+" instead of "&" when the keys may (or have to be) pressed
-      sequentially (e.g use "t+t" for 'press the t key twice').
-      
-      Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
-      in .ui files.
-  */
-  @property string accelerator()
-  {
-    return gobject.object.ObjectWrap.getProperty!(string)("accelerator");
-  }
-
-  /**
-      Set `accelerator` property.
-      Params:
-        propval = The accelerator(s) represented by this object.
         
         This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
         is set to [gtk.types.ShortcutType.Accelerator].
@@ -132,6 +94,44 @@ class ShortcutsShortcut : gtk.widget.Widget
         Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
         in .ui files.
   */
+  @property string accelerator()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("accelerator");
+  }
+
+  /**
+      Set `accelerator` property.
+      Params:
+        propval = The accelerator(s) represented by this object.
+          
+          This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+          is set to [gtk.types.ShortcutType.Accelerator].
+          
+          The syntax of this property is (an extension of) the syntax understood
+          by `func@Gtk.accelerator_parse`. Multiple accelerators can be specified
+          by separating them with a space, but keep in mind that the available width
+          is limited.
+          
+          It is also possible to specify ranges of shortcuts, using `...` between
+          the keys. Sequences of keys can be specified using a `+` or `&` between
+          the keys.
+          
+          Examples:
+          
+          $(LIST
+            * A single shortcut: `<ctl><alt>delete`
+            * Two alternative shortcuts: `<shift>a Home`
+            * A range of shortcuts: `<alt>1...<alt>9`
+            * Several keys pressed together: `Control_L&Control_R`
+            * A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
+          )
+            
+          Use "+" instead of "&" when the keys may (or have to be) pressed
+          sequentially (e.g use "t+t" for 'press the t key twice').
+          
+          Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
+          in .ui files.
+  */
   @property void accelerator(string propval)
   {
     gobject.object.ObjectWrap.setProperty!(string)("accelerator", propval);
@@ -140,11 +140,11 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `actionName` property.
       Returns: A detailed action name.
-      
-      If this is set for a shortcut of type [gtk.types.ShortcutType.Accelerator],
-      then GTK will use the accelerators that are associated with the
-      action via [gtk.application.Application.setAccelsForAction], and
-      setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
+        
+        If this is set for a shortcut of type [gtk.types.ShortcutType.Accelerator],
+        then GTK will use the accelerators that are associated with the
+        action via [gtk.application.Application.setAccelsForAction], and
+        setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
   */
   @property string actionName()
   {
@@ -155,11 +155,11 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `actionName` property.
       Params:
         propval = A detailed action name.
-        
-        If this is set for a shortcut of type [gtk.types.ShortcutType.Accelerator],
-        then GTK will use the accelerators that are associated with the
-        action via [gtk.application.Application.setAccelsForAction], and
-        setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
+          
+          If this is set for a shortcut of type [gtk.types.ShortcutType.Accelerator],
+          then GTK will use the accelerators that are associated with the
+          action via [gtk.application.Application.setAccelsForAction], and
+          setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
   */
   @property void actionName(string propval)
   {
@@ -169,9 +169,9 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `direction` property.
       Returns: The text direction for which this shortcut is active.
-      
-      If the shortcut is used regardless of the text direction,
-      set this property to [gtk.types.TextDirection.None].
+        
+        If the shortcut is used regardless of the text direction,
+        set this property to [gtk.types.TextDirection.None].
   */
   @property gtk.types.TextDirection direction()
   {
@@ -182,9 +182,9 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `direction` property.
       Params:
         propval = The text direction for which this shortcut is active.
-        
-        If the shortcut is used regardless of the text direction,
-        set this property to [gtk.types.TextDirection.None].
+          
+          If the shortcut is used regardless of the text direction,
+          set this property to [gtk.types.TextDirection.None].
   */
   @property void direction(gtk.types.TextDirection propval)
   {
@@ -194,11 +194,11 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `icon` property.
       Returns: An icon to represent the shortcut or gesture.
-      
-      This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
-      is set to [gtk.types.ShortcutType.Gesture].
-      
-      For the other predefined gesture types, GTK provides an icon on its own.
+        
+        This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+        is set to [gtk.types.ShortcutType.Gesture].
+        
+        For the other predefined gesture types, GTK provides an icon on its own.
   */
   @property gio.icon.Icon icon()
   {
@@ -209,11 +209,11 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `icon` property.
       Params:
         propval = An icon to represent the shortcut or gesture.
-        
-        This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
-        is set to [gtk.types.ShortcutType.Gesture].
-        
-        For the other predefined gesture types, GTK provides an icon on its own.
+          
+          This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+          is set to [gtk.types.ShortcutType.Gesture].
+          
+          For the other predefined gesture types, GTK provides an icon on its own.
   */
   @property void icon(gio.icon.Icon propval)
   {
@@ -261,10 +261,10 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `subtitle` property.
       Returns: The subtitle for the shortcut or gesture.
-      
-      This is typically used for gestures and should be a short, one-line
-      text that describes the gesture itself. For the predefined gesture
-      types, GTK provides a subtitle on its own.
+        
+        This is typically used for gestures and should be a short, one-line
+        text that describes the gesture itself. For the predefined gesture
+        types, GTK provides a subtitle on its own.
   */
   @property string subtitle()
   {
@@ -275,10 +275,10 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `subtitle` property.
       Params:
         propval = The subtitle for the shortcut or gesture.
-        
-        This is typically used for gestures and should be a short, one-line
-        text that describes the gesture itself. For the predefined gesture
-        types, GTK provides a subtitle on its own.
+          
+          This is typically used for gestures and should be a short, one-line
+          text that describes the gesture itself. For the predefined gesture
+          types, GTK provides a subtitle on its own.
   */
   @property void subtitle(string propval)
   {
@@ -307,9 +307,9 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `title` property.
       Returns: The textual description for the shortcut or gesture represented by
-      this object.
-      
-      This should be a short string that can fit in a single line.
+        this object.
+        
+        This should be a short string that can fit in a single line.
   */
   @property string title()
   {
@@ -320,9 +320,9 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `title` property.
       Params:
         propval = The textual description for the shortcut or gesture represented by
-        this object.
-        
-        This should be a short string that can fit in a single line.
+          this object.
+          
+          This should be a short string that can fit in a single line.
   */
   @property void title(string propval)
   {
@@ -333,8 +333,8 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `titleSizeGroup` property.
       Params:
         propval = The size group for the textual portion of this shortcut.
-        
-        This is used internally by GTK, and must not be modified by applications.
+          
+          This is used internally by GTK, and must not be modified by applications.
   */
   @property void titleSizeGroup(gtk.size_group.SizeGroup propval)
   {

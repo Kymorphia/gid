@@ -144,7 +144,6 @@ class SocketListener : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_listener_accept_async(cast(GSocketListener*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -227,7 +226,6 @@ class SocketListener : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_listener_accept_socket_async(cast(GSocketListener*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -415,9 +413,9 @@ class SocketListener : gobject.object.ObjectWrap
       Connect to `Event` signal.
   
       Emitted when listener's activity on socket changes state.
-      Note that when listener is used to listen on both IPv4 and
-      IPv6, a separate set of signals will be emitted for each, and
-      the order they happen in is undefined.
+        Note that when listener is used to listen on both IPv4 and
+        IPv6, a separate set of signals will be emitted for each, and
+        the order they happen in is undefined.
   
       Params:
         callback = signal callback delegate or function to connect

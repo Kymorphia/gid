@@ -114,7 +114,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       Connect to `Pan` signal.
   
       This signal is emitted once a panning gesture along the
-      expected axis is detected.
+        expected axis is detected.
   
       Params:
         callback = signal callback delegate or function to connect

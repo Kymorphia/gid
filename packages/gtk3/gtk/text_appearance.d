@@ -10,7 +10,7 @@ import gtk.types;
 /** */
 class TextAppearance
 {
-  GtkTextAppearance cInstance;
+  GtkTextAppearance _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -18,7 +18,7 @@ class TextAppearance
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.text_appearance.TextAppearance");
 
-    cInstance = *cast(GtkTextAppearance*)ptr;
+    _cInstance = *cast(GtkTextAppearance*)ptr;
 
     if (take)
       gFree(ptr);
@@ -27,7 +27,7 @@ class TextAppearance
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -40,12 +40,32 @@ class TextAppearance
   }
 
   /**
+      Set `bgColor` field.
+      Params:
+        propval = Background #GdkColor.
+  */
+  @property void bgColor(gdk.color.Color propval)
+  {
+    (cast(GtkTextAppearance*)this._cPtr).bgColor = cast(GdkColor)propval;
+  }
+
+  /**
       Get `fgColor` field.
       Returns: Foreground #GdkColor.
   */
   @property gdk.color.Color fgColor()
   {
     return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)this._cPtr).fgColor);
+  }
+
+  /**
+      Set `fgColor` field.
+      Params:
+        propval = Foreground #GdkColor.
+  */
+  @property void fgColor(gdk.color.Color propval)
+  {
+    (cast(GtkTextAppearance*)this._cPtr).fgColor = cast(GdkColor)propval;
   }
 
   /**
@@ -108,9 +128,9 @@ class TextAppearance
   /**
       Get `drawBg` field.
       Returns: Whether to use background-related values; this is
-        irrelevant for the values struct when in a tag, but is used for
-        the composite values struct; it’s true if any of the tags being
-        composited had background stuff set.
+          irrelevant for the values struct when in a tag, but is used for
+          the composite values struct; it’s true if any of the tags being
+          composited had background stuff set.
   */
   @property uint drawBg()
   {
@@ -121,9 +141,9 @@ class TextAppearance
       Set `drawBg` field.
       Params:
         propval = Whether to use background-related values; this is
-          irrelevant for the values struct when in a tag, but is used for
-          the composite values struct; it’s true if any of the tags being
-          composited had background stuff set.
+            irrelevant for the values struct when in a tag, but is used for
+            the composite values struct; it’s true if any of the tags being
+            composited had background stuff set.
   */
   @property void drawBg(uint propval)
   {
@@ -133,8 +153,8 @@ class TextAppearance
   /**
       Get `insideSelection` field.
       Returns: This are only used when we are actually laying
-        out and rendering a paragraph; not when a #GtkTextAppearance is
-        part of a #GtkTextAttributes.
+          out and rendering a paragraph; not when a #GtkTextAppearance is
+          part of a #GtkTextAttributes.
   */
   @property uint insideSelection()
   {
@@ -145,8 +165,8 @@ class TextAppearance
       Set `insideSelection` field.
       Params:
         propval = This are only used when we are actually laying
-          out and rendering a paragraph; not when a #GtkTextAppearance is
-          part of a #GtkTextAttributes.
+            out and rendering a paragraph; not when a #GtkTextAppearance is
+            part of a #GtkTextAttributes.
   */
   @property void insideSelection(uint propval)
   {
@@ -156,8 +176,8 @@ class TextAppearance
   /**
       Get `isText` field.
       Returns: This are only used when we are actually laying
-        out and rendering a paragraph; not when a #GtkTextAppearance is
-        part of a #GtkTextAttributes.
+          out and rendering a paragraph; not when a #GtkTextAppearance is
+          part of a #GtkTextAttributes.
   */
   @property uint isText()
   {
@@ -168,8 +188,8 @@ class TextAppearance
       Set `isText` field.
       Params:
         propval = This are only used when we are actually laying
-          out and rendering a paragraph; not when a #GtkTextAppearance is
-          part of a #GtkTextAttributes.
+            out and rendering a paragraph; not when a #GtkTextAppearance is
+            part of a #GtkTextAttributes.
   */
   @property void isText(uint propval)
   {

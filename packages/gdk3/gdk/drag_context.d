@@ -203,10 +203,10 @@ class DragContext : gobject.object.ObjectWrap
       Connect to `ActionChanged` signal.
   
       A new action is being chosen for the drag and drop operation.
-      
-      This signal will only be emitted if the #GdkDragContext manages
-      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-      for more information.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+        for more information.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -251,10 +251,10 @@ class DragContext : gobject.object.ObjectWrap
       Connect to `Cancel` signal.
   
       The drag and drop operation was cancelled.
-      
-      This signal will only be emitted if the #GdkDragContext manages
-      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-      for more information.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+        for more information.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -299,12 +299,12 @@ class DragContext : gobject.object.ObjectWrap
       Connect to `DndFinished` signal.
   
       The drag and drop operation was finished, the drag destination
-      finished reading all data. The drag source can now free all
-      miscellaneous data.
-      
-      This signal will only be emitted if the #GdkDragContext manages
-      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-      for more information.
+        finished reading all data. The drag source can now free all
+        miscellaneous data.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+        for more information.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -342,10 +342,10 @@ class DragContext : gobject.object.ObjectWrap
       Connect to `DropPerformed` signal.
   
       The drag and drop operation was performed on an accepting client.
-      
-      This signal will only be emitted if the #GdkDragContext manages
-      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-      for more information.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+        for more information.
   
       Params:
         callback = signal callback delegate or function to connect

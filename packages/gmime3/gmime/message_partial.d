@@ -77,6 +77,7 @@ class MessagePartial : gmime.part.Part
     foreach (obj; partials)
       _tmppartials ~= obj ? cast(GMimeMessagePartial*)obj._cPtr : null;
     GMimeMessagePartial** _partials = cast(GMimeMessagePartial**)_tmppartials.ptr;
+
     _cretval = g_mime_message_partial_reconstruct_message(_partials, _num);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.message.Message)(cast(GMimeMessage*)_cretval, Yes.Take);
     return _retval;

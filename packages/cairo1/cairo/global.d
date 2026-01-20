@@ -11,8 +11,6 @@ import cairo.glyph;
 import cairo.matrix;
 import cairo.path;
 import cairo.pattern;
-import cairo.rectangle;
-import cairo.rectangle_int;
 import cairo.region;
 import cairo.scaled_font;
 import cairo.surface;
@@ -164,7 +162,9 @@ cairo.glyph.Glyph glyphAllocate(int numGlyphs)
 {
   cairo_glyph_t* _cretval;
   _cretval = cairo_glyph_allocate(numGlyphs);
-  auto _retval = _cretval ? new cairo.glyph.Glyph(cast(void*)_cretval, Yes.Take) : null;
+  cairo.glyph.Glyph _retval;
+  if (_cretval)
+    _retval = *cast(cairo.glyph.Glyph*)_cretval;
   return _retval;
 }
 
@@ -261,7 +261,6 @@ cairo.surface.Surface imageSurfaceCreateFromPngStream(cairo.types.ReadFunc readF
     return _retval;
   }
   auto _readFuncCB = readFunc ? &_readFuncCallback : null;
-
   cairo_surface_t* _cretval;
   auto _readFunc = readFunc ? cast(void*)&(readFunc) : null;
   _cretval = cairo_image_surface_create_from_png_stream(_readFuncCB, _readFunc);
@@ -1093,7 +1092,6 @@ cairo.surface.Surface pdfSurfaceCreateForStream(cairo.types.WriteFunc writeFunc,
     return _retval;
   }
   auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
-
   cairo_surface_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_pdf_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
@@ -1339,7 +1337,6 @@ cairo.surface.Surface psSurfaceCreateForStream(cairo.types.WriteFunc writeFunc, 
     return _retval;
   }
   auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
-
   cairo_surface_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_ps_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
@@ -1594,10 +1591,10 @@ void rasterSourcePatternSetCallbackData(cairo.pattern.Pattern pattern, void* dat
       owns the surface and should call [cairo.surface.Surface.destroy] when done
       with it.
 */
-cairo.surface.Surface recordingSurfaceCreate(cairo.types.Content content, cairo.rectangle.Rectangle extents)
+cairo.surface.Surface recordingSurfaceCreate(cairo.types.Content content, cairo.types.Rectangle extents)
 {
   cairo_surface_t* _cretval;
-  _cretval = cairo_recording_surface_create(content, extents ? cast(const(cairo_rectangle_t)*)extents._cPtr(No.Dup) : null);
+  _cretval = cairo_recording_surface_create(content, &extents);
   auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1611,10 +1608,10 @@ cairo.surface.Surface recordingSurfaceCreate(cairo.types.Content content, cairo.
     Returns: true if the surface is bounded, of recording type, and
       not in an error state, otherwise false
 */
-cairo.types.Bool recordingSurfaceGetExtents(cairo.surface.Surface surface, cairo.rectangle.Rectangle extents)
+cairo.types.Bool recordingSurfaceGetExtents(cairo.surface.Surface surface, out cairo.types.Rectangle extents)
 {
   cairo.types.Bool _retval;
-  _retval = cairo_recording_surface_get_extents(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, extents ? cast(cairo_rectangle_t*)extents._cPtr(No.Dup) : null);
+  _retval = cairo_recording_surface_get_extents(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, &extents);
   return _retval;
 }
 
@@ -1662,10 +1659,10 @@ cairo.region.Region regionCreate()
         error object is returned where all operations on the object do nothing.
         You can check for this with [cairo.region.Region.status].
 */
-cairo.region.Region regionCreateRectangle(cairo.rectangle_int.RectangleInt rectangle)
+cairo.region.Region regionCreateRectangle(cairo.types.RectangleInt rectangle)
 {
   cairo_region_t* _cretval;
-  _cretval = cairo_region_create_rectangle(rectangle ? cast(const(cairo_rectangle_int_t)*)rectangle._cPtr(No.Dup) : null);
+  _cretval = cairo_region_create_rectangle(&rectangle);
   auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1682,10 +1679,10 @@ cairo.region.Region regionCreateRectangle(cairo.rectangle_int.RectangleInt recta
         error object is returned where all operations on the object do nothing.
         You can check for this with [cairo.region.Region.status].
 */
-cairo.region.Region regionCreateRectangles(cairo.rectangle_int.RectangleInt rects, int count)
+cairo.region.Region regionCreateRectangles(cairo.types.RectangleInt rects, int count)
 {
   cairo_region_t* _cretval;
-  _cretval = cairo_region_create_rectangles(rects ? cast(const(cairo_rectangle_int_t)*)rects._cPtr(No.Dup) : null, count);
+  _cretval = cairo_region_create_rectangles(&rects, count);
   auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1712,7 +1709,7 @@ cairo.region.Region regionCreateRectangles(cairo.rectangle_int.RectangleInt rect
 cairo.scaled_font.ScaledFont scaledFontCreate(cairo.font_face.FontFace fontFace, cairo.matrix.Matrix fontMatrix, cairo.matrix.Matrix ctm, cairo.font_options.FontOptions options)
 {
   cairo_scaled_font_t* _cretval;
-  _cretval = cairo_scaled_font_create(fontFace ? cast(cairo_font_face_t*)fontFace._cPtr(No.Dup) : null, fontMatrix ? cast(const(cairo_matrix_t)*)fontMatrix._cPtr(No.Dup) : null, ctm ? cast(const(cairo_matrix_t)*)ctm._cPtr(No.Dup) : null, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
+  _cretval = cairo_scaled_font_create(fontFace ? cast(cairo_font_face_t*)fontFace._cPtr(No.Dup) : null, cast(const(cairo_matrix_t)*)&fontMatrix, cast(const(cairo_matrix_t)*)&ctm, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1770,7 +1767,6 @@ cairo.device.Device scriptCreateForStream(cairo.types.WriteFunc writeFunc)
     return _retval;
   }
   auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
-
   cairo_device_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_script_create_for_stream(_writeFuncCB, _writeFunc);
@@ -1998,7 +1994,6 @@ cairo.surface.Surface svgSurfaceCreateForStream(cairo.types.WriteFunc writeFunc,
     return _retval;
   }
   auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
-
   cairo_surface_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_svg_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
@@ -2173,7 +2168,9 @@ cairo.text_cluster.TextCluster textClusterAllocate(int numClusters)
 {
   cairo_text_cluster_t* _cretval;
   _cretval = cairo_text_cluster_allocate(numClusters);
-  auto _retval = _cretval ? new cairo.text_cluster.TextCluster(cast(void*)_cretval, Yes.Take) : null;
+  cairo.text_cluster.TextCluster _retval;
+  if (_cretval)
+    _retval = *cast(cairo.text_cluster.TextCluster*)_cretval;
   return _retval;
 }
 

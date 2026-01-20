@@ -35,12 +35,12 @@ interface ColorChooser
   /**
       Get `rgba` property.
       Returns: The currently selected color, as a [gdk.rgba.RGBA] struct.
-      
-      The property can be set to change the current selection
-      programmatically.
+        
+        The property can be set to change the current selection
+        programmatically.
   
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
-        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+          instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
   @property gdk.rgba.RGBA rgba();
 
@@ -48,35 +48,18 @@ interface ColorChooser
       Set `rgba` property.
       Params:
         propval = The currently selected color, as a [gdk.rgba.RGBA] struct.
-        
-        The property can be set to change the current selection
-        programmatically.
+          
+          The property can be set to change the current selection
+          programmatically.
   
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
-        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+          instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
   @property void rgba(gdk.rgba.RGBA propval);
 
   /**
       Get `useAlpha` property.
       Returns: Whether colors may have alpha (translucency).
-      
-      When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
-      via the [gtk.color_chooser.ColorChooser.rgba] property will be
-      forced to have alpha == 1.
-      
-      Implementations are expected to show alpha by rendering the color
-      over a non-uniform background (like a checkerboard pattern).
-  
-      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
-        instead of widgets implementing [gtk.color_chooser.ColorChooser]
-  */
-  @property bool useAlpha();
-
-  /**
-      Set `useAlpha` property.
-      Params:
-        propval = Whether colors may have alpha (translucency).
         
         When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
         via the [gtk.color_chooser.ColorChooser.rgba] property will be
@@ -86,7 +69,24 @@ interface ColorChooser
         over a non-uniform background (like a checkerboard pattern).
   
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
-        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+          instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  @property bool useAlpha();
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+          
+          When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
+          via the [gtk.color_chooser.ColorChooser.rgba] property will be
+          forced to have alpha == 1.
+          
+          Implementations are expected to show alpha by rendering the color
+          over a non-uniform background (like a checkerboard pattern).
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+          instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
   @property void useAlpha(bool propval);
 
@@ -162,10 +162,10 @@ interface ColorChooser
       Connect to `ColorActivated` signal.
   
       Emitted when a color is activated from the color chooser.
-      
-      This usually happens when the user clicks a color swatch,
-      or a color is selected and the user presses one of the keys
-      Space, Shift+Space, Return or Enter.
+        
+        This usually happens when the user clicks a color swatch,
+        or a color is selected and the user presses one of the keys
+        Space, Shift+Space, Return or Enter.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -180,7 +180,7 @@ interface ColorChooser
       Returns: Signal ID
   
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
-        instead of widgets implementing [gtk.color_chooser.ColorChooser]
+          instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
   ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After);
 }

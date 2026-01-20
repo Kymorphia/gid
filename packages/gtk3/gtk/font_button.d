@@ -82,8 +82,8 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   /**
       Get `showSize` property.
       Returns: If this property is set to true, the selected font size will be shown
-      in the label. For a more WYSIWYG way to show the selected size, see the
-      ::use-size property.
+        in the label. For a more WYSIWYG way to show the selected size, see the
+        ::use-size property.
   */
   @property bool showSize()
   {
@@ -94,8 +94,8 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Set `showSize` property.
       Params:
         propval = If this property is set to true, the selected font size will be shown
-        in the label. For a more WYSIWYG way to show the selected size, see the
-        ::use-size property.
+          in the label. For a more WYSIWYG way to show the selected size, see the
+          ::use-size property.
   */
   @property void showSize(bool propval)
   {
@@ -105,8 +105,8 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   /**
       Get `showStyle` property.
       Returns: If this property is set to true, the name of the selected font style
-      will be shown in the label. For a more WYSIWYG way to show the selected
-      style, see the ::use-font property.
+        will be shown in the label. For a more WYSIWYG way to show the selected
+        style, see the ::use-font property.
   */
   @property bool showStyle()
   {
@@ -117,8 +117,8 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Set `showStyle` property.
       Params:
         propval = If this property is set to true, the name of the selected font style
-        will be shown in the label. For a more WYSIWYG way to show the selected
-        style, see the ::use-font property.
+          will be shown in the label. For a more WYSIWYG way to show the selected
+          style, see the ::use-font property.
   */
   @property void showStyle(bool propval)
   {
@@ -147,7 +147,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   /**
       Get `useFont` property.
       Returns: If this property is set to true, the label will be drawn
-      in the selected font.
+        in the selected font.
   */
   @property bool useFont()
   {
@@ -158,7 +158,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Set `useFont` property.
       Params:
         propval = If this property is set to true, the label will be drawn
-        in the selected font.
+          in the selected font.
   */
   @property void useFont(bool propval)
   {
@@ -168,7 +168,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   /**
       Get `useSize` property.
       Returns: If this property is set to true, the label will be drawn
-      with the selected font size.
+        with the selected font size.
   */
   @property bool useSize()
   {
@@ -179,7 +179,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Set `useSize` property.
       Params:
         propval = If this property is set to true, the label will be drawn
-        with the selected font size.
+          with the selected font size.
   */
   @property void useSize(bool propval)
   {
@@ -367,12 +367,12 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Connect to `FontSet` signal.
   
       The ::font-set signal is emitted when the user selects a font.
-      When handling this signal, use [gtk.font_chooser.FontChooser.getFont]
-      to find out which font was just selected.
-      
-      Note that this signal is only emitted when the user
-      changes the font. If you need to react to programmatic font changes
-      as well, use the notify::font signal.
+        When handling this signal, use [gtk.font_chooser.FontChooser.getFont]
+        to find out which font was just selected.
+        
+        Note that this signal is only emitted when the user
+        changes the font. If you need to react to programmatic font changes
+        as well, use the notify::font signal.
   
       Params:
         callback = signal callback delegate or function to connect

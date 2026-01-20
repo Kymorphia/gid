@@ -93,29 +93,6 @@ class TabView : gtk.widget.Widget
   /**
       Get `defaultIcon` property.
       Returns: Default page icon.
-      
-      If a page doesn't provide its own icon via `property@TabPage:icon`, a
-      default icon may be used instead for contexts where having an icon is
-      necessary.
-      
-      `class@TabBar` will use default icon for pinned tabs in case the page is
-      not loading, doesn't have an icon and an indicator. Default icon is never
-      used for tabs that aren't pinned.
-      
-      `class@TabOverview` will use default icon for pages with missing
-      thumbnails.
-      
-      By default, the `adw-tab-icon-missing-symbolic` icon is used.
-  */
-  @property gio.icon.Icon defaultIcon()
-  {
-    return getDefaultIcon();
-  }
-
-  /**
-      Set `defaultIcon` property.
-      Params:
-        propval = Default page icon.
         
         If a page doesn't provide its own icon via `property@TabPage:icon`, a
         default icon may be used instead for contexts where having an icon is
@@ -130,6 +107,29 @@ class TabView : gtk.widget.Widget
         
         By default, the `adw-tab-icon-missing-symbolic` icon is used.
   */
+  @property gio.icon.Icon defaultIcon()
+  {
+    return getDefaultIcon();
+  }
+
+  /**
+      Set `defaultIcon` property.
+      Params:
+        propval = Default page icon.
+          
+          If a page doesn't provide its own icon via `property@TabPage:icon`, a
+          default icon may be used instead for contexts where having an icon is
+          necessary.
+          
+          `class@TabBar` will use default icon for pinned tabs in case the page is
+          not loading, doesn't have an icon and an indicator. Default icon is never
+          used for tabs that aren't pinned.
+          
+          `class@TabOverview` will use default icon for pages with missing
+          thumbnails.
+          
+          By default, the `adw-tab-icon-missing-symbolic` icon is used.
+  */
   @property void defaultIcon(gio.icon.Icon propval)
   {
     return setDefaultIcon(propval);
@@ -138,12 +138,12 @@ class TabView : gtk.widget.Widget
   /**
       Get `isTransferringPage` property.
       Returns: Whether a page is being transferred.
-      
-      This property will be set to `TRUE` when a drag-n-drop tab transfer starts
-      on any [adw.tab_view.TabView], and to `FALSE` after it ends.
-      
-      During the transfer, children cannot receive pointer input and a tab can
-      be safely dropped on the tab view.
+        
+        This property will be set to `TRUE` when a drag-n-drop tab transfer starts
+        on any [adw.tab_view.TabView], and to `FALSE` after it ends.
+        
+        During the transfer, children cannot receive pointer input and a tab can
+        be safely dropped on the tab view.
   */
   @property bool isTransferringPage()
   {
@@ -153,10 +153,10 @@ class TabView : gtk.widget.Widget
   /**
       Get `menuModel` property.
       Returns: Tab context menu model.
-      
-      When a context menu is shown for a tab, it will be constructed from the
-      provided menu model. Use the `signal@TabView::setup-menu` signal to set up
-      the menu actions for the particular tab.
+        
+        When a context menu is shown for a tab, it will be constructed from the
+        provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+        the menu actions for the particular tab.
   */
   @property gio.menu_model.MenuModel menuModel()
   {
@@ -167,10 +167,10 @@ class TabView : gtk.widget.Widget
       Set `menuModel` property.
       Params:
         propval = Tab context menu model.
-        
-        When a context menu is shown for a tab, it will be constructed from the
-        provided menu model. Use the `signal@TabView::setup-menu` signal to set up
-        the menu actions for the particular tab.
+          
+          When a context menu is shown for a tab, it will be constructed from the
+          provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+          the menu actions for the particular tab.
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
@@ -189,8 +189,8 @@ class TabView : gtk.widget.Widget
   /**
       Get `nPinnedPages` property.
       Returns: The number of pinned pages in the tab view.
-      
-      See [adw.tab_view.TabView.setPagePinned].
+        
+        See [adw.tab_view.TabView.setPagePinned].
   */
   @property int nPinnedPages()
   {
@@ -200,10 +200,10 @@ class TabView : gtk.widget.Widget
   /**
       Get `pages` property.
       Returns: A selection model with the tab view's pages.
-      
-      This can be used to keep an up-to-date view. The model also implements
-      [gtk.selection_model.SelectionModel] and can be used to track and change the selected
-      page.
+        
+        This can be used to keep an up-to-date view. The model also implements
+        [gtk.selection_model.SelectionModel] and can be used to track and change the selected
+        page.
   */
   @property gtk.selection_model.SelectionModel pages()
   {
@@ -232,12 +232,12 @@ class TabView : gtk.widget.Widget
   /**
       Get `shortcuts` property.
       Returns: The enabled shortcuts.
-      
-      See `flags@TabViewShortcuts` for the list of the available shortcuts. All
-      of the shortcuts are enabled by default.
-      
-      [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
-      provide a convenient way to manage individual shortcuts.
+        
+        See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+        of the shortcuts are enabled by default.
+        
+        [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
+        provide a convenient way to manage individual shortcuts.
   */
   @property adw.types.TabViewShortcuts shortcuts()
   {
@@ -248,12 +248,12 @@ class TabView : gtk.widget.Widget
       Set `shortcuts` property.
       Params:
         propval = The enabled shortcuts.
-        
-        See `flags@TabViewShortcuts` for the list of the available shortcuts. All
-        of the shortcuts are enabled by default.
-        
-        [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
-        provide a convenient way to manage individual shortcuts.
+          
+          See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+          of the shortcuts are enabled by default.
+          
+          [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
+          provide a convenient way to manage individual shortcuts.
   */
   @property void shortcuts(adw.types.TabViewShortcuts propval)
   {
@@ -888,34 +888,34 @@ class TabView : gtk.widget.Widget
       Connect to `ClosePage` signal.
   
       Emitted after [adw.tab_view.TabView.closePage] has been called for page.
-      
-      The handler is expected to call [adw.tab_view.TabView.closePageFinish] to
-      confirm or reject the closing.
-      
-      The default handler will immediately confirm closing for non-pinned pages,
-      or reject it for pinned pages, equivalent to the following example:
-      
-      ```c
-      static gboolean
-      close_page_cb (AdwTabView *view,
-                     AdwTabPage *page,
-                     gpointer    user_data)
-      {
-        adw_tab_view_close_page_finish (view, page, !adw_tab_page_get_pinned (page));
-      
-        return GDK_EVENT_STOP;
-      }
-      ```
-      
-      The [adw.tab_view.TabView.closePageFinish] call doesn't have to happen inside
-      the handler, so can be used to do asynchronous checks before confirming the
-      closing.
-      
-      A typical reason to connect to this signal is to show a confirmation dialog
-      for closing a tab.
-      
-      The signal handler should return `GDK_EVENT_STOP` to stop propagation or
-      `GDK_EVENT_CONTINUE` to invoke the default handler.
+        
+        The handler is expected to call [adw.tab_view.TabView.closePageFinish] to
+        confirm or reject the closing.
+        
+        The default handler will immediately confirm closing for non-pinned pages,
+        or reject it for pinned pages, equivalent to the following example:
+        
+        ```c
+        static gboolean
+        close_page_cb (AdwTabView *view,
+                       AdwTabPage *page,
+                       gpointer    user_data)
+        {
+          adw_tab_view_close_page_finish (view, page, !adw_tab_page_get_pinned (page));
+        
+          return GDK_EVENT_STOP;
+        }
+        ```
+        
+        The [adw.tab_view.TabView.closePageFinish] call doesn't have to happen inside
+        the handler, so can be used to do asynchronous checks before confirming the
+        closing.
+        
+        A typical reason to connect to this signal is to show a confirmation dialog
+        for closing a tab.
+        
+        The signal handler should return `GDK_EVENT_STOP` to stop propagation or
+        `GDK_EVENT_CONTINUE` to invoke the default handler.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -962,11 +962,11 @@ class TabView : gtk.widget.Widget
       Connect to `CreateWindow` signal.
   
       Emitted when a tab should be transferred into a new window.
-      
-      This can happen after a tab has been dropped on desktop.
-      
-      The signal handler is expected to create a new window, position it as
-      needed and return its [adw.tab_view.TabView] that the page will be transferred into.
+        
+        This can happen after a tab has been dropped on desktop.
+        
+        The signal handler is expected to create a new window, position it as
+        needed and return its [adw.tab_view.TabView] that the page will be transferred into.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1006,9 +1006,9 @@ class TabView : gtk.widget.Widget
       Connect to `IndicatorActivated` signal.
   
       Emitted after the indicator icon on page has been activated.
-      
-      See `propertyTabPage:indicator-icon` and
-      `propertyTabPage:indicator-activatable`.
+        
+        See `propertyTabPage:indicator-icon` and
+        `propertyTabPage:indicator-activatable`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1053,9 +1053,9 @@ class TabView : gtk.widget.Widget
       Connect to `PageAttached` signal.
   
       Emitted when a page has been created or transferred to self.
-      
-      A typical reason to connect to this signal would be to connect to page
-      signals for things such as updating window title.
+        
+        A typical reason to connect to this signal would be to connect to page
+        signals for things such as updating window title.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1107,14 +1107,14 @@ class TabView : gtk.widget.Widget
       Connect to `PageDetached` signal.
   
       Emitted when a page has been removed or transferred to another view.
-      
-      A typical reason to connect to this signal would be to disconnect signal
-      handlers connected in the `signalTabView::page-attached` handler.
-      
-      It is important not to try and destroy the page child in the handler of
-      this function as the child might merely be moved to another window; use
-      child dispose handler for that or do it in sync with your
-      [adw.tab_view.TabView.closePageFinish] calls.
+        
+        A typical reason to connect to this signal would be to disconnect signal
+        handlers connected in the `signalTabView::page-attached` handler.
+        
+        It is important not to try and destroy the page child in the handler of
+        this function as the child might merely be moved to another window; use
+        child dispose handler for that or do it in sync with your
+        [adw.tab_view.TabView.closePageFinish] calls.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1217,11 +1217,11 @@ class TabView : gtk.widget.Widget
       Connect to `SetupMenu` signal.
   
       Emitted when a context menu is opened or closed for page.
-      
-      If the menu has been closed, page will be set to `NULL`.
-      
-      It can be used to set up menu actions before showing the menu, for example
-      disable actions not applicable to page.
+        
+        If the menu has been closed, page will be set to `NULL`.
+        
+        It can be used to set up menu actions before showing the menu, for example
+        disable actions not applicable to page.
   
       Params:
         callback = signal callback delegate or function to connect

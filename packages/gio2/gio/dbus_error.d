@@ -170,8 +170,9 @@ struct DBusError
 
     GDBusErrorEntry[] _tmpentries;
     foreach (obj; entries)
-      _tmpentries ~= obj.cInstance;
+      _tmpentries ~= obj._cInstance;
     const(GDBusErrorEntry)* _entries = _tmpentries.ptr;
+
     g_dbus_error_register_error_domain(_errorDomainQuarkName, cast(size_t*)&quarkVolatile, _entries, _numEntries);
   }
 

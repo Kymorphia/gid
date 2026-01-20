@@ -193,7 +193,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: Accessible table column description.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
-      and [atk.table.Table.setColumnDescription] instead.
+        and [atk.table.Table.setColumnDescription] instead.
   */
   @property string accessibleTableColumnDescription()
   {
@@ -206,7 +206,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         propval = Accessible table column description.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
-      and [atk.table.Table.setColumnDescription] instead.
+        and [atk.table.Table.setColumnDescription] instead.
   */
   @property void accessibleTableColumnDescription(string propval)
   {
@@ -218,7 +218,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: Accessible table column header.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
-      [atk.table.Table.setColumnHeader] instead.
+        [atk.table.Table.setColumnHeader] instead.
   */
   @property atk.object.ObjectWrap accessibleTableColumnHeader()
   {
@@ -231,7 +231,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         propval = Accessible table column header.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
-      [atk.table.Table.setColumnHeader] instead.
+        [atk.table.Table.setColumnHeader] instead.
   */
   @property void accessibleTableColumnHeader(atk.object.ObjectWrap propval)
   {
@@ -243,7 +243,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: Accessible table row description.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
-      [atk.table.Table.setRowDescription] instead.
+        [atk.table.Table.setRowDescription] instead.
   */
   @property string accessibleTableRowDescription()
   {
@@ -256,7 +256,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         propval = Accessible table row description.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
-      [atk.table.Table.setRowDescription] instead.
+        [atk.table.Table.setRowDescription] instead.
   */
   @property void accessibleTableRowDescription(string propval)
   {
@@ -268,7 +268,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: Accessible table row header.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
-      [atk.table.Table.setRowHeader] instead.
+        [atk.table.Table.setRowHeader] instead.
   */
   @property atk.object.ObjectWrap accessibleTableRowHeader()
   {
@@ -281,7 +281,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         propval = Accessible table row header.
   
       Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
-      [atk.table.Table.setRowHeader] instead.
+        [atk.table.Table.setRowHeader] instead.
   */
   @property void accessibleTableRowHeader(atk.object.ObjectWrap propval)
   {
@@ -305,8 +305,8 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: Numeric value of this object, in case being and AtkValue.
   
       Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText] to get
-      the value, and value-changed signal to be notified on their value
-      changes.
+        the value, and value-changed signal to be notified on their value
+        changes.
   */
   @property double accessibleValue()
   {
@@ -319,8 +319,8 @@ class ObjectWrap : gobject.object.ObjectWrap
         propval = Numeric value of this object, in case being and AtkValue.
   
       Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText] to get
-      the value, and value-changed signal to be notified on their value
-      changes.
+        the value, and value-changed signal to be notified on their value
+        changes.
   */
   @property void accessibleValue(double propval)
   {
@@ -700,9 +700,9 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `ActiveDescendantChanged` signal.
   
       The "active-descendant-changed" signal is emitted by an object
-      which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
-      object in the object changes. For instance, a table will emit the
-      signal when the cell in the table which has focus changes.
+        which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
+        object in the object changes. For instance, a table will emit the
+        signal when the cell in the table which has focus changes.
   
       Params:
         detail = Signal detail or null (default)
@@ -748,9 +748,9 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `Announcement` signal.
   
       The "announcement" signal can be emitted to pass an announcement on to
-      be read by a screen reader.
-      
-      Depcrecated (2.50): Use AtkObject::notification instead.
+        be read by a screen reader.
+        
+        Depcrecated (2.50): Use AtkObject::notification instead.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -795,7 +795,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `AttributeChanged` signal.
   
       The "attribute-changed" signal should be emitted when one of an object's
-      attributes changes.
+        attributes changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -803,7 +803,7 @@ class ObjectWrap : gobject.object.ObjectWrap
           $(D void callback(string arg1, string arg2, atk.object.ObjectWrap objectWrap))
   
           `arg1` the name of the attribute being modified, or null if not
-                   available. (optional)
+                     available. (optional)
   
           `arg2` the attribute's new value, or null if not available. (optional)
   
@@ -848,8 +848,8 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `ChildrenChanged` signal.
   
       The signal "children-changed" is emitted when a child is added or
-      removed from an object. It supports two details: "add" and
-      "remove"
+        removed from an object. It supports two details: "add" and
+        "remove"
   
       Params:
         detail = Signal detail or null (default)
@@ -858,13 +858,13 @@ class ObjectWrap : gobject.object.ObjectWrap
           $(D void callback(uint arg1, atk.object.ObjectWrap arg2, atk.object.ObjectWrap objectWrap))
   
           `arg1` The index of the added or removed child. The value can be
-          -1. This is used if the value is not known by the implementor
-          when the child is added/removed or irrelevant. (optional)
+            -1. This is used if the value is not known by the implementor
+            when the child is added/removed or irrelevant. (optional)
   
           `arg2` A gpointer to the child AtkObject which was added or
-          removed. If the child was removed, it is possible that it is not
-          available for the implementor. In that case this pointer can be
-          NULL. (optional)
+            removed. If the child was removed, it is possible that it is not
+            available for the implementor. In that case this pointer can be
+            NULL. (optional)
   
           `objectWrap` the instance the signal is connected to (optional)
   
@@ -907,7 +907,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `FocusEvent` signal.
   
       The signal "focus-event" is emitted when an object gained or lost
-      focus.
+        focus.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -915,7 +915,7 @@ class ObjectWrap : gobject.object.ObjectWrap
           $(D void callback(bool arg1, atk.object.ObjectWrap objectWrap))
   
           `arg1` a boolean value which indicates whether the object gained
-          or lost focus. (optional)
+            or lost focus. (optional)
   
           `objectWrap` the instance the signal is connected to (optional)
   
@@ -955,7 +955,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `Notification` signal.
   
       The "notification" signal can be emitted to pass an announcement on to
-      be read by a screen reader.
+        be read by a screen reader.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -965,7 +965,7 @@ class ObjectWrap : gobject.object.ObjectWrap
           `arg1` the text to be announced. (optional)
   
           `arg2` an #AtkLive specifying the politeness of the notification.
-          Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE. (optional)
+            Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE. (optional)
   
           `objectWrap` the instance the signal is connected to (optional)
   
@@ -1008,18 +1008,18 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `PropertyChange` signal.
   
       The signal "property-change" is emitted when an object's property
-      value changes. arg1 contains an #AtkPropertyValues with the name
-      and the new value of the property whose value has changed. Note
-      that, as with GObject notify, getting this signal does not
-      guarantee that the value of the property has actually changed; it
-      may also be emitted when the setter of the property is called to
-      reinstate the previous value.
-      
-      Toolkit implementor note: ATK implementors should use
-      [gobject.object.ObjectWrap.notify] to emit property-changed
-      notifications. #AtkObject::property-changed is needed by the
-      implementation of [atk.global.addGlobalEventListener] because GObject
-      notify doesn't support emission hooks.
+        value changes. arg1 contains an #AtkPropertyValues with the name
+        and the new value of the property whose value has changed. Note
+        that, as with GObject notify, getting this signal does not
+        guarantee that the value of the property has actually changed; it
+        may also be emitted when the setter of the property is called to
+        reinstate the previous value.
+        
+        Toolkit implementor note: ATK implementors should use
+        [gobject.object.ObjectWrap.notify] to emit property-changed
+        notifications. #AtkObject::property-changed is needed by the
+        implementation of [atk.global.addGlobalEventListener] because GObject
+        notify doesn't support emission hooks.
   
       Params:
         detail = Signal detail or null (default)
@@ -1028,7 +1028,7 @@ class ObjectWrap : gobject.object.ObjectWrap
           $(D void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectWrap objectWrap))
   
           `arg1` an #AtkPropertyValues containing the new
-          value of the property which changed. (optional)
+            value of the property which changed. (optional)
   
           `objectWrap` the instance the signal is connected to (optional)
   
@@ -1066,8 +1066,8 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `StateChange` signal.
   
       The "state-change" signal is emitted when an object's state
-      changes.  The detail value identifies the state type which has
-      changed.
+        changes.  The detail value identifies the state type which has
+        changed.
   
       Params:
         detail = Signal detail or null (default)
@@ -1120,7 +1120,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Connect to `VisibleDataChanged` signal.
   
       The "visible-data-changed" signal is emitted when the visual
-      appearance of the object changed.
+        appearance of the object changed.
   
       Params:
         callback = signal callback delegate or function to connect

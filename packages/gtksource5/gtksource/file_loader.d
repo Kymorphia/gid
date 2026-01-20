@@ -188,7 +188,6 @@ class FileLoader : gobject.object.ObjectWrap
       (*_dlg)(currentNumBytes, totalNumBytes);
     }
     auto _progressCallbackCB = progressCallback ? &_progressCallbackCallback : null;
-
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
@@ -197,7 +196,6 @@ class FileLoader : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
     GDestroyNotify _progressCallbackDestroyCB = progressCallback ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;

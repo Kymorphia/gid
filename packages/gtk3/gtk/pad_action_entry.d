@@ -11,7 +11,7 @@ import gtk.types;
 */
 class PadActionEntry
 {
-  GtkPadActionEntry cInstance;
+  GtkPadActionEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class PadActionEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.pad_action_entry.PadActionEntry");
 
-    cInstance = *cast(GtkPadActionEntry*)ptr;
+    _cInstance = *cast(GtkPadActionEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class PadActionEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -53,7 +53,7 @@ class PadActionEntry
   /**
       Get `index` field.
       Returns: the 0-indexed button/ring/strip number that will trigger this action
-        entry.
+          entry.
   */
   @property int index()
   {
@@ -64,7 +64,7 @@ class PadActionEntry
       Set `index` field.
       Params:
         propval = the 0-indexed button/ring/strip number that will trigger this action
-          entry.
+            entry.
   */
   @property void index(int propval)
   {
@@ -93,7 +93,7 @@ class PadActionEntry
   /**
       Get `label` field.
       Returns: Human readable description of this action entry, this string should
-        be deemed user-visible.
+          be deemed user-visible.
   */
   @property string label()
   {
@@ -104,7 +104,7 @@ class PadActionEntry
       Set `label` field.
       Params:
         propval = Human readable description of this action entry, this string should
-          be deemed user-visible.
+            be deemed user-visible.
   */
   @property void label(string propval)
   {

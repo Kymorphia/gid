@@ -88,14 +88,14 @@ class Animation : gobject.object.ObjectWrap
   /**
       Get `followEnableAnimationsSetting` property.
       Returns: Whether to skip the animation when animations are globally disabled.
-      
-      The default behavior is to skip the animation. Set to `FALSE` to disable
-      this behavior.
-      
-      This can be useful for cases where animation is essential, like spinners,
-      or in demo applications. Most other animations should keep it enabled.
-      
-      See `property@Gtk.Settings:gtk-enable-animations`.
+        
+        The default behavior is to skip the animation. Set to `FALSE` to disable
+        this behavior.
+        
+        This can be useful for cases where animation is essential, like spinners,
+        or in demo applications. Most other animations should keep it enabled.
+        
+        See `property@Gtk.Settings:gtk-enable-animations`.
   */
   @property bool followEnableAnimationsSetting()
   {
@@ -106,14 +106,14 @@ class Animation : gobject.object.ObjectWrap
       Set `followEnableAnimationsSetting` property.
       Params:
         propval = Whether to skip the animation when animations are globally disabled.
-        
-        The default behavior is to skip the animation. Set to `FALSE` to disable
-        this behavior.
-        
-        This can be useful for cases where animation is essential, like spinners,
-        or in demo applications. Most other animations should keep it enabled.
-        
-        See `property@Gtk.Settings:gtk-enable-animations`.
+          
+          The default behavior is to skip the animation. Set to `FALSE` to disable
+          this behavior.
+          
+          This can be useful for cases where animation is essential, like spinners,
+          or in demo applications. Most other animations should keep it enabled.
+          
+          See `property@Gtk.Settings:gtk-enable-animations`.
   */
   @property void followEnableAnimationsSetting(bool propval)
   {
@@ -123,9 +123,9 @@ class Animation : gobject.object.ObjectWrap
   /**
       Get `state` property.
       Returns: The animation state.
-      
-      The state indicates whether the animation is currently playing, paused,
-      finished or hasn't been started yet.
+        
+        The state indicates whether the animation is currently playing, paused,
+        finished or hasn't been started yet.
   */
   @property adw.types.AnimationState state()
   {
@@ -333,7 +333,7 @@ class Animation : gobject.object.ObjectWrap
       Connect to `Done` signal.
   
       This signal is emitted when the animation has been completed, either on its
-      own or via calling [adw.animation.Animation.skip].
+        own or via calling [adw.animation.Animation.skip].
   
       Params:
         callback = signal callback delegate or function to connect

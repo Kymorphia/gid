@@ -185,25 +185,6 @@ class GLArea : gtk.widget.Widget
   /**
       Get `autoRender` property.
       Returns: If set to true the ::render signal will be emitted every time
-      the widget draws.
-      
-      This is the default and is useful if drawing the widget is faster.
-      
-      If set to false the data from previous rendering is kept around and will
-      be used for drawing the widget the next time, unless the window is resized.
-      In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
-      This mode is useful when the scene changes seldom, but takes a long time
-      to redraw.
-  */
-  @property bool autoRender()
-  {
-    return getAutoRender();
-  }
-
-  /**
-      Set `autoRender` property.
-      Params:
-        propval = If set to true the ::render signal will be emitted every time
         the widget draws.
         
         This is the default and is useful if drawing the widget is faster.
@@ -214,6 +195,25 @@ class GLArea : gtk.widget.Widget
         This mode is useful when the scene changes seldom, but takes a long time
         to redraw.
   */
+  @property bool autoRender()
+  {
+    return getAutoRender();
+  }
+
+  /**
+      Set `autoRender` property.
+      Params:
+        propval = If set to true the ::render signal will be emitted every time
+          the widget draws.
+          
+          This is the default and is useful if drawing the widget is faster.
+          
+          If set to false the data from previous rendering is kept around and will
+          be used for drawing the widget the next time, unless the window is resized.
+          In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+          This mode is useful when the scene changes seldom, but takes a long time
+          to redraw.
+  */
   @property void autoRender(bool propval)
   {
     return setAutoRender(propval);
@@ -222,10 +222,10 @@ class GLArea : gtk.widget.Widget
   /**
       Get `context` property.
       Returns: The [gdk.glcontext.GLContext] used by the [gtk.glarea.GLArea] widget.
-      
-      The [gtk.glarea.GLArea] widget is responsible for creating the [gdk.glcontext.GLContext]
-      instance. If you need to render with other kinds of buffers (stencil,
-      depth, etc), use render buffers.
+        
+        The [gtk.glarea.GLArea] widget is responsible for creating the [gdk.glcontext.GLContext]
+        instance. If you need to render with other kinds of buffers (stencil,
+        depth, etc), use render buffers.
   */
   @property gdk.glcontext.GLContext context()
   {
@@ -235,11 +235,11 @@ class GLArea : gtk.widget.Widget
   /**
       Get `hasDepthBuffer` property.
       Returns: If set to true the widget will allocate and enable a depth buffer for the
-      target framebuffer.
-      
-      Setting this property will enable GL's depth testing as a side effect. If
-      you don't need depth testing, you should call `glDisable(GL_DEPTH_TEST)`
-      in your `GtkGLArea::render` handler.
+        target framebuffer.
+        
+        Setting this property will enable GL's depth testing as a side effect. If
+        you don't need depth testing, you should call `glDisable(GL_DEPTH_TEST)`
+        in your `GtkGLArea::render` handler.
   */
   @property bool hasDepthBuffer()
   {
@@ -250,11 +250,11 @@ class GLArea : gtk.widget.Widget
       Set `hasDepthBuffer` property.
       Params:
         propval = If set to true the widget will allocate and enable a depth buffer for the
-        target framebuffer.
-        
-        Setting this property will enable GL's depth testing as a side effect. If
-        you don't need depth testing, you should call `glDisable(GL_DEPTH_TEST)`
-        in your `GtkGLArea::render` handler.
+          target framebuffer.
+          
+          Setting this property will enable GL's depth testing as a side effect. If
+          you don't need depth testing, you should call `glDisable(GL_DEPTH_TEST)`
+          in your `GtkGLArea::render` handler.
   */
   @property void hasDepthBuffer(bool propval)
   {
@@ -264,7 +264,7 @@ class GLArea : gtk.widget.Widget
   /**
       Get `hasStencilBuffer` property.
       Returns: If set to true the widget will allocate and enable a stencil buffer for the
-      target framebuffer.
+        target framebuffer.
   */
   @property bool hasStencilBuffer()
   {
@@ -275,7 +275,7 @@ class GLArea : gtk.widget.Widget
       Set `hasStencilBuffer` property.
       Params:
         propval = If set to true the widget will allocate and enable a stencil buffer for the
-        target framebuffer.
+          target framebuffer.
   */
   @property void hasStencilBuffer(bool propval)
   {
@@ -285,7 +285,7 @@ class GLArea : gtk.widget.Widget
   /**
       Get `useEs` property.
       Returns: If set to true the widget will try to create a [gdk.glcontext.GLContext] using
-      OpenGL ES instead of OpenGL.
+        OpenGL ES instead of OpenGL.
   
       Deprecated: Use `property@Gtk.GLArea:allowed-apis`
   */
@@ -298,7 +298,7 @@ class GLArea : gtk.widget.Widget
       Set `useEs` property.
       Params:
         propval = If set to true the widget will try to create a [gdk.glcontext.GLContext] using
-        OpenGL ES instead of OpenGL.
+          OpenGL ES instead of OpenGL.
   
       Deprecated: Use `property@Gtk.GLArea:allowed-apis`
   */
@@ -595,14 +595,14 @@ class GLArea : gtk.widget.Widget
       Connect to `CreateContext` signal.
   
       Emitted when the widget is being realized.
-      
-      This allows you to override how the GL context is created.
-      This is useful when you want to reuse an existing GL context,
-      or if you want to try creating different kinds of GL options.
-      
-      If context creation fails then the signal handler can use
-      [gtk.glarea.GLArea.setError] to register a more detailed error
-      of how the construction failed.
+        
+        This allows you to override how the GL context is created.
+        This is useful when you want to reuse an existing GL context,
+        or if you want to try creating different kinds of GL options.
+        
+        If context creation fails then the signal handler can use
+        [gtk.glarea.GLArea.setError] to register a more detailed error
+        of how the construction failed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -612,7 +612,7 @@ class GLArea : gtk.widget.Widget
           `gLArea` the instance the signal is connected to (optional)
   
           `Returns` a newly created [gdk.glcontext.GLContext];
-              the [gtk.glarea.GLArea] widget will take ownership of the returned value.
+                the [gtk.glarea.GLArea] widget will take ownership of the returned value.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -643,9 +643,9 @@ class GLArea : gtk.widget.Widget
       Connect to `Render` signal.
   
       Emitted every time the contents of the [gtk.glarea.GLArea] should be redrawn.
-      
-      The context is bound to the area prior to emitting this function,
-      and the buffers are painted to the window once the emission terminates.
+        
+        The context is bound to the area prior to emitting this function,
+        and the buffers are painted to the window once the emission terminates.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -657,7 +657,7 @@ class GLArea : gtk.widget.Widget
           `gLArea` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -693,16 +693,16 @@ class GLArea : gtk.widget.Widget
       Connect to `Resize` signal.
   
       Emitted once when the widget is realized, and then each time the widget
-      is changed while realized.
-      
-      This is useful in order to keep GL state up to date with the widget size,
-      like for instance camera properties which may depend on the width/height
-      ratio.
-      
-      The GL context for the area is guaranteed to be current when this signal
-      is emitted.
-      
-      The default handler sets up the GL viewport.
+        is changed while realized.
+        
+        This is useful in order to keep GL state up to date with the widget size,
+        like for instance camera properties which may depend on the width/height
+        ratio.
+        
+        The GL context for the area is guaranteed to be current when this signal
+        is emitted.
+        
+        The default handler sets up the GL viewport.
   
       Params:
         callback = signal callback delegate or function to connect

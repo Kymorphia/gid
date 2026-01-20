@@ -53,13 +53,15 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   {
     extern(C) gboolean _callbackCallback(GtkWidget* widget, GVariant* args, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.ShortcutFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     GtkShortcutAction* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;

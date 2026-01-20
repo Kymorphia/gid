@@ -9,7 +9,7 @@ import vte.types;
 /** */
 class CharAttributes
 {
-  VteCharAttributes cInstance;
+  VteCharAttributes _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class CharAttributes
     if (!ptr)
       throw new GidConstructException("Null instance pointer for vte.char_attributes.CharAttributes");
 
-    cInstance = *cast(VteCharAttributes*)ptr;
+    _cInstance = *cast(VteCharAttributes*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,6 +26,6 @@ class CharAttributes
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

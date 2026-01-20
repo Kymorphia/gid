@@ -185,9 +185,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   bool convertChildIterToIter(out gtk.tree_iter.TreeIter sortIter, gtk.tree_iter.TreeIter childIter)
   {
     bool _retval;
-    GtkTreeIter _sortIter;
-    _retval = cast(bool)gtk_tree_model_sort_convert_child_iter_to_iter(cast(GtkTreeModelSort*)this._cPtr, &_sortIter, childIter ? cast(GtkTreeIter*)childIter._cPtr(No.Dup) : null);
-    sortIter = new gtk.tree_iter.TreeIter(cast(void*)&_sortIter, No.Take);
+    _retval = cast(bool)gtk_tree_model_sort_convert_child_iter_to_iter(cast(GtkTreeModelSort*)this._cPtr, cast(GtkTreeIter*)&sortIter, cast(GtkTreeIter*)&childIter);
     return _retval;
   }
 
@@ -218,9 +216,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   */
   void convertIterToChildIter(out gtk.tree_iter.TreeIter childIter, gtk.tree_iter.TreeIter sortedIter)
   {
-    GtkTreeIter _childIter;
-    gtk_tree_model_sort_convert_iter_to_child_iter(cast(GtkTreeModelSort*)this._cPtr, &_childIter, sortedIter ? cast(GtkTreeIter*)sortedIter._cPtr(No.Dup) : null);
-    childIter = new gtk.tree_iter.TreeIter(cast(void*)&_childIter, No.Take);
+    gtk_tree_model_sort_convert_iter_to_child_iter(cast(GtkTreeModelSort*)this._cPtr, cast(GtkTreeIter*)&childIter, cast(GtkTreeIter*)&sortedIter);
   }
 
   /**
@@ -267,7 +263,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   bool iterIsValid(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_tree_model_sort_iter_is_valid(cast(GtkTreeModelSort*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_tree_model_sort_iter_is_valid(cast(GtkTreeModelSort*)this._cPtr, cast(GtkTreeIter*)&iter);
     return _retval;
   }
 

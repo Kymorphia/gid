@@ -53,10 +53,13 @@ class Caps : gobject.boxed.Boxed
 
   /**
       Create a `caps.Caps` boxed type.
+      Params:
+        miniObject = the parent type
   */
-  this()
+  this(gst.mini_object.MiniObject miniObject = gst.mini_object.MiniObject.init)
   {
     super(gMalloc(GstCaps.sizeof), Yes.Take);
+    this.miniObject = miniObject;
   }
 
   /** */
@@ -68,7 +71,7 @@ class Caps : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -97,6 +100,16 @@ class Caps : gobject.boxed.Boxed
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstCaps*)this._cPtr).miniObject);
+  }
+
+  /**
+      Set `miniObject` field.
+      Params:
+        propval = the parent type
+  */
+  @property void miniObject(gst.mini_object.MiniObject propval)
+  {
+    (cast(GstCaps*)this._cPtr).miniObject = cast(GstMiniObject)propval;
   }
 
   /**
@@ -165,7 +178,7 @@ class Caps : gobject.boxed.Boxed
   */
   void appendStructure(gst.structure.Structure structure)
   {
-    gst_caps_append_structure(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
+    gst_caps_append_structure(cast(GstCaps*)this._cPtr, cast(GstStructure*)&structure);
   }
 
   /**
@@ -178,7 +191,7 @@ class Caps : gobject.boxed.Boxed
   */
   void appendStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null)
   {
-    gst_caps_append_structure_full(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
+    gst_caps_append_structure_full(cast(GstCaps*)this._cPtr, cast(GstStructure*)&structure, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -243,13 +256,15 @@ class Caps : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.CapsFilterMapFunc*)userData;
 
-      gboolean _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, *cast(gst.structure.Structure*)structure);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_caps_filter_and_map_in_place(cast(GstCaps*)this._cPtr, _funcCB, _func);
   }
@@ -292,13 +307,15 @@ class Caps : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.CapsForeachFunc*)userData;
 
-      gboolean _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, *cast(gst.structure.Structure*)structure);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_caps_foreach(cast(const(GstCaps)*)this._cPtr, _funcCB, _func);
@@ -362,7 +379,9 @@ class Caps : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_caps_get_structure(cast(const(GstCaps)*)this._cPtr, index);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -519,7 +538,7 @@ class Caps : gobject.boxed.Boxed
   bool isSubsetStructure(gst.structure.Structure structure)
   {
     bool _retval;
-    _retval = cast(bool)gst_caps_is_subset_structure(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_subset_structure(cast(const(GstCaps)*)this._cPtr, cast(const(GstStructure)*)&structure);
     return _retval;
   }
 
@@ -535,7 +554,7 @@ class Caps : gobject.boxed.Boxed
   bool isSubsetStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null)
   {
     bool _retval;
-    _retval = cast(bool)gst_caps_is_subset_structure_full(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, features ? cast(const(GstCapsFeatures)*)features._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_caps_is_subset_structure_full(cast(const(GstCaps)*)this._cPtr, cast(const(GstStructure)*)&structure, features ? cast(const(GstCapsFeatures)*)features._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -553,13 +572,15 @@ class Caps : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.CapsMapFunc*)userData;
 
-      gboolean _retval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, *cast(gst.structure.Structure*)structure);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_caps_map_in_place(cast(GstCaps*)this._cPtr, _funcCB, _func);
@@ -594,7 +615,7 @@ class Caps : gobject.boxed.Boxed
   gst.caps.Caps mergeStructure(gst.structure.Structure structure)
   {
     GstCaps* _cretval;
-    _cretval = gst_caps_merge_structure(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
+    _cretval = gst_caps_merge_structure(cast(GstCaps*)this._cPtr, cast(GstStructure*)&structure);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -610,7 +631,7 @@ class Caps : gobject.boxed.Boxed
   gst.caps.Caps mergeStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null)
   {
     GstCaps* _cretval;
-    _cretval = gst_caps_merge_structure_full(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
+    _cretval = gst_caps_merge_structure_full(cast(GstCaps*)this._cPtr, cast(GstStructure*)&structure, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -740,7 +761,9 @@ class Caps : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_caps_steal_structure(cast(GstCaps*)this._cPtr, index);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 

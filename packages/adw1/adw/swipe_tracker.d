@@ -55,9 +55,9 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   /**
       Get `allowLongSwipes` property.
       Returns: Whether to allow swiping for more than one snap point at a time.
-      
-      If the value is `FALSE`, each swipe can only move to the adjacent snap
-      points.
+        
+        If the value is `FALSE`, each swipe can only move to the adjacent snap
+        points.
   */
   @property bool allowLongSwipes()
   {
@@ -68,9 +68,9 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Set `allowLongSwipes` property.
       Params:
         propval = Whether to allow swiping for more than one snap point at a time.
-        
-        If the value is `FALSE`, each swipe can only move to the adjacent snap
-        points.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent snap
+          points.
   */
   @property void allowLongSwipes(bool propval)
   {
@@ -99,8 +99,8 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   /**
       Get `allowWindowHandle` property.
       Returns: Whether to allow touchscreen swiping from [gtk.window_handle.WindowHandle].
-      
-      This will make dragging the window impossible.
+        
+        This will make dragging the window impossible.
   */
   @property bool allowWindowHandle()
   {
@@ -111,8 +111,8 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Set `allowWindowHandle` property.
       Params:
         propval = Whether to allow touchscreen swiping from [gtk.window_handle.WindowHandle].
-        
-        This will make dragging the window impossible.
+          
+          This will make dragging the window impossible.
   */
   @property void allowWindowHandle(bool propval)
   {
@@ -122,9 +122,9 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   /**
       Get `enabled` property.
       Returns: Whether the swipe tracker is enabled.
-      
-      When it's not enabled, no events will be processed. Usually widgets will
-      want to expose this via a property.
+        
+        When it's not enabled, no events will be processed. Usually widgets will
+        want to expose this via a property.
   */
   @property bool enabled()
   {
@@ -135,9 +135,9 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Set `enabled` property.
       Params:
         propval = Whether the swipe tracker is enabled.
-        
-        When it's not enabled, no events will be processed. Usually widgets will
-        want to expose this via a property.
+          
+          When it's not enabled, no events will be processed. Usually widgets will
+          want to expose this via a property.
   */
   @property void enabled(bool propval)
   {
@@ -166,9 +166,9 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   /**
       Get `reversed` property.
       Returns: Whether to reverse the swipe direction.
-      
-      If the swipe tracker is horizontal, it can be used for supporting RTL text
-      direction.
+        
+        If the swipe tracker is horizontal, it can be used for supporting RTL text
+        direction.
   */
   @property bool reversed()
   {
@@ -179,9 +179,9 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Set `reversed` property.
       Params:
         propval = Whether to reverse the swipe direction.
-        
-        If the swipe tracker is horizontal, it can be used for supporting RTL text
-        direction.
+          
+          If the swipe tracker is horizontal, it can be used for supporting RTL text
+          direction.
   */
   @property void reversed(bool propval)
   {
@@ -418,7 +418,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Connect to `BeginSwipe` signal.
   
       This signal is emitted right before a swipe will be started, after the
-      drag threshold has been passed.
+        drag threshold has been passed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -456,11 +456,11 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Connect to `EndSwipe` signal.
   
       This signal is emitted as soon as the gesture has stopped.
-      
-      The user is expected to animate the deceleration from the current progress
-      value to to with an animation using velocity as the initial velocity,
-      provided in pixels per second. `classSpringAnimation` is usually a good
-      fit for this.
+        
+        The user is expected to animate the deceleration from the current progress
+        value to to with an animation using velocity as the initial velocity,
+        provided in pixels per second. `classSpringAnimation` is usually a good
+        fit for this.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -512,9 +512,9 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Connect to `Prepare` signal.
   
       This signal is emitted when a possible swipe is detected.
-      
-      The direction value can be used to restrict the swipe to a certain
-      direction.
+        
+        The direction value can be used to restrict the swipe to a certain
+        direction.
   
       Params:
         callback = signal callback delegate or function to connect

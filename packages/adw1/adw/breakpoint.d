@@ -212,6 +212,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
     foreach (obj; values)
       _tmpvalues ~= cast(GValue*)obj._cPtr;
     const(GValue*)* _values = _tmpvalues.ptr;
+
     adw_breakpoint_add_settersv(cast(AdwBreakpoint*)this._cPtr, _nSetters, _objects, _names, _values);
   }
 
@@ -242,8 +243,8 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `Apply` signal.
   
       Emitted when the breakpoint is applied.
-      
-      This signal is emitted after the setters have been applied.
+        
+        This signal is emitted after the setters have been applied.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -281,8 +282,8 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `Unapply` signal.
   
       Emitted when the breakpoint is unapplied.
-      
-      This signal is emitted before resetting the setter values.
+        
+        This signal is emitted before resetting the setter values.
   
       Params:
         callback = signal callback delegate or function to connect

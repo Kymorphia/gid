@@ -64,9 +64,9 @@ class ToggleAction : gtk.action.Action
   /**
       Get `drawAsRadio` property.
       Returns: Whether the proxies for this action look like radio action proxies.
-      
-      This is an appearance property and thus only applies if
-      #GtkActivatable:use-action-appearance is true.
+        
+        This is an appearance property and thus only applies if
+        #GtkActivatable:use-action-appearance is true.
   */
   @property bool drawAsRadio()
   {
@@ -77,9 +77,9 @@ class ToggleAction : gtk.action.Action
       Set `drawAsRadio` property.
       Params:
         propval = Whether the proxies for this action look like radio action proxies.
-        
-        This is an appearance property and thus only applies if
-        #GtkActivatable:use-action-appearance is true.
+          
+          This is an appearance property and thus only applies if
+          #GtkActivatable:use-action-appearance is true.
   */
   @property void drawAsRadio(bool propval)
   {
@@ -168,7 +168,7 @@ class ToggleAction : gtk.action.Action
       Connect to `Toggled` signal.
   
       Should be connected if you wish to perform an action
-      whenever the #GtkToggleAction state is changed.
+        whenever the #GtkToggleAction state is changed.
   
       Params:
         callback = signal callback delegate or function to connect

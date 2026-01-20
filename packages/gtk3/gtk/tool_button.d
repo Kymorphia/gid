@@ -73,9 +73,9 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   /**
       Get `iconName` property.
       Returns: The name of the themed icon displayed on the item.
-      This property only has an effect if not overridden by
-      #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
-      #GtkToolButton:stock-id properties.
+        This property only has an effect if not overridden by
+        #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
+        #GtkToolButton:stock-id properties.
   */
   @property string iconName()
   {
@@ -86,9 +86,9 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Set `iconName` property.
       Params:
         propval = The name of the themed icon displayed on the item.
-        This property only has an effect if not overridden by
-        #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
-        #GtkToolButton:stock-id properties.
+          This property only has an effect if not overridden by
+          #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
+          #GtkToolButton:stock-id properties.
   */
   @property void iconName(string propval)
   {
@@ -380,7 +380,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Connect to `Clicked` signal.
   
       This signal is emitted when the tool button is clicked with the mouse
-      or activated with the keyboard.
+        or activated with the keyboard.
   
       Params:
         callback = signal callback delegate or function to connect

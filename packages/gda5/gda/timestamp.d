@@ -1,225 +1,55 @@
-/// Module for [Timestamp] class
+/// Module for [Timestamp] struct
 module gda.timestamp;
 
 import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
-import gobject.boxed;
 
 /**
     Represents an instant (a time stamp)
 */
-class Timestamp : gobject.boxed.Boxed
+struct Timestamp
 {
+  /**
+      year representation of the time stamp
+  */
+  short year;
 
   /**
-      Create a `timestamp.Timestamp` boxed type.
-      Params:
-        year = year representation of the time stamp
-        month = month representation of the time stamp, as a number between 1 and 12
-        day = day representation of the time stamp, as a number between 1 and 31
-        hour = hour representation of the time stamp, as a number between 0 and 23
-        minute = minute representation of the time stamp, as a number between 0 and 59
-        second = second representation of the time stamp, as a number between 0 and 59
-        fraction = fractionnal part of the seconds, in millionth' of second
-        timezone = number of seconds added to the GMT timezone
+      month representation of the time stamp, as a number between 1 and 12
   */
-  this(short year = short.init, ushort month = ushort.init, ushort day = ushort.init, ushort hour = ushort.init, ushort minute = ushort.init, ushort second = ushort.init, gulong fraction = gulong.init, glong timezone = glong.init)
-  {
-    super(gMalloc(GdaTimestamp.sizeof), Yes.Take);
-    this.year = year;
-    this.month = month;
-    this.day = day;
-    this.hour = hour;
-    this.minute = minute;
-    this.second = second;
-    this.fraction = fraction;
-    this.timezone = timezone;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gda_timestamp_get_type != &gidSymbolNotFound ? gda_timestamp_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Timestamp self()
-  {
-    return this;
-  }
+  ushort month;
 
   /**
-      Get `year` field.
-      Returns: year representation of the time stamp
+      day representation of the time stamp, as a number between 1 and 31
   */
-  @property short year()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).year;
-  }
+  ushort day;
 
   /**
-      Set `year` field.
-      Params:
-        propval = year representation of the time stamp
+      hour representation of the time stamp, as a number between 0 and 23
   */
-  @property void year(short propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).year = propval;
-  }
+  ushort hour;
 
   /**
-      Get `month` field.
-      Returns: month representation of the time stamp, as a number between 1 and 12
+      minute representation of the time stamp, as a number between 0 and 59
   */
-  @property ushort month()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).month;
-  }
+  ushort minute;
 
   /**
-      Set `month` field.
-      Params:
-        propval = month representation of the time stamp, as a number between 1 and 12
+      second representation of the time stamp, as a number between 0 and 59
   */
-  @property void month(ushort propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).month = propval;
-  }
+  ushort second;
 
   /**
-      Get `day` field.
-      Returns: day representation of the time stamp, as a number between 1 and 31
+      fractionnal part of the seconds, in millionth' of second
   */
-  @property ushort day()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).day;
-  }
+  gulong fraction;
 
   /**
-      Set `day` field.
-      Params:
-        propval = day representation of the time stamp, as a number between 1 and 31
+      number of seconds added to the GMT timezone
   */
-  @property void day(ushort propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).day = propval;
-  }
-
-  /**
-      Get `hour` field.
-      Returns: hour representation of the time stamp, as a number between 0 and 23
-  */
-  @property ushort hour()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).hour;
-  }
-
-  /**
-      Set `hour` field.
-      Params:
-        propval = hour representation of the time stamp, as a number between 0 and 23
-  */
-  @property void hour(ushort propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).hour = propval;
-  }
-
-  /**
-      Get `minute` field.
-      Returns: minute representation of the time stamp, as a number between 0 and 59
-  */
-  @property ushort minute()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).minute;
-  }
-
-  /**
-      Set `minute` field.
-      Params:
-        propval = minute representation of the time stamp, as a number between 0 and 59
-  */
-  @property void minute(ushort propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).minute = propval;
-  }
-
-  /**
-      Get `second` field.
-      Returns: second representation of the time stamp, as a number between 0 and 59
-  */
-  @property ushort second()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).second;
-  }
-
-  /**
-      Set `second` field.
-      Params:
-        propval = second representation of the time stamp, as a number between 0 and 59
-  */
-  @property void second(ushort propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).second = propval;
-  }
-
-  /**
-      Get `fraction` field.
-      Returns: fractionnal part of the seconds, in millionth' of second
-  */
-  @property gulong fraction()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).fraction;
-  }
-
-  /**
-      Set `fraction` field.
-      Params:
-        propval = fractionnal part of the seconds, in millionth' of second
-  */
-  @property void fraction(gulong propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).fraction = propval;
-  }
-
-  /**
-      Get `timezone` field.
-      Returns: number of seconds added to the GMT timezone
-  */
-  @property glong timezone()
-  {
-    return (cast(GdaTimestamp*)this._cPtr).timezone;
-  }
-
-  /**
-      Set `timezone` field.
-      Params:
-        propval = number of seconds added to the GMT timezone
-  */
-  @property void timezone(glong propval)
-  {
-    (cast(GdaTimestamp*)this._cPtr).timezone = propval;
-  }
+  glong timezone;
 
   /**
       This function is similar to [gda.time.Time.changeTimezone] but operates on time stamps.
@@ -231,14 +61,14 @@ class Timestamp : gobject.boxed.Boxed
   */
   void changeTimezone(glong ntz)
   {
-    gda_timestamp_change_timezone(cast(GdaTimestamp*)this._cPtr, ntz);
+    gda_timestamp_change_timezone(cast(GdaTimestamp*)&this, ntz);
   }
 
   /** */
   bool valid()
   {
     bool _retval;
-    _retval = cast(bool)gda_timestamp_valid(cast(const(GdaTimestamp)*)this._cPtr);
+    _retval = cast(bool)gda_timestamp_valid(cast(const(GdaTimestamp)*)&this);
     return _retval;
   }
 

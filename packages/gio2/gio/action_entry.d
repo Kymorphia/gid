@@ -20,7 +20,7 @@ import gio.types;
 */
 class ActionEntry
 {
-  GActionEntry cInstance;
+  GActionEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -28,7 +28,7 @@ class ActionEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.action_entry.ActionEntry");
 
-    cInstance = *cast(GActionEntry*)ptr;
+    _cInstance = *cast(GActionEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -37,7 +37,7 @@ class ActionEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -66,12 +66,12 @@ class ActionEntry
   /**
       Get `activate` field.
       Returns: the callback to connect to the "activate" signal of the
-                 action.  Since GLib 2.40, this can be null for stateful
-                 actions, in which case the default handler is used.  For
-                 boolean-stated actions with no parameter, this is a
-                 toggle.  For other state types (and parameter type equal
-                 to the state type) this will be a function that
-                 just calls @change_state (which you should provide).
+                   action.  Since GLib 2.40, this can be null for stateful
+                   actions, in which case the default handler is used.  For
+                   boolean-stated actions with no parameter, this is a
+                   toggle.  For other state types (and parameter type equal
+                   to the state type) this will be a function that
+                   just calls @change_state (which you should provide).
   */
   @property ActivateFuncType activate()
   {
@@ -81,8 +81,8 @@ class ActionEntry
   /**
       Get `parameterType` field.
       Returns: the type of the parameter that must be passed to the
-                       activate function for this action, given as a single
-                       GVariant type string (or null for no parameter)
+                         activate function for this action, given as a single
+                         GVariant type string (or null for no parameter)
   */
   @property string parameterType()
   {
@@ -93,8 +93,8 @@ class ActionEntry
       Set `parameterType` field.
       Params:
         propval = the type of the parameter that must be passed to the
-                         activate function for this action, given as a single
-                         GVariant type string (or null for no parameter)
+                           activate function for this action, given as a single
+                           GVariant type string (or null for no parameter)
   */
   @property void parameterType(string propval)
   {
@@ -105,10 +105,10 @@ class ActionEntry
   /**
       Get `state` field.
       Returns: the initial state for this action, given in
-              [GVariant text format][gvariant-text].  The state is parsed
-              with no extra type information, so type tags must be added to
-              the string if they are necessary.  Stateless actions should
-              give null here.
+                [GVariant text format][gvariant-text].  The state is parsed
+                with no extra type information, so type tags must be added to
+                the string if they are necessary.  Stateless actions should
+                give null here.
   */
   @property string state()
   {
@@ -119,10 +119,10 @@ class ActionEntry
       Set `state` field.
       Params:
         propval = the initial state for this action, given in
-                [GVariant text format][gvariant-text].  The state is parsed
-                with no extra type information, so type tags must be added to
-                the string if they are necessary.  Stateless actions should
-                give null here.
+                  [GVariant text format][gvariant-text].  The state is parsed
+                  with no extra type information, so type tags must be added to
+                  the string if they are necessary.  Stateless actions should
+                  give null here.
   */
   @property void state(string propval)
   {
@@ -136,8 +136,8 @@ class ActionEntry
   /**
       Get `changeState` field.
       Returns: the callback to connect to the "change-state" signal
-                     of the action.  All stateful actions should provide a
-                     handler here; stateless actions should not.
+                       of the action.  All stateful actions should provide a
+                       handler here; stateless actions should not.
   */
   @property ChangeStateFuncType changeState()
   {

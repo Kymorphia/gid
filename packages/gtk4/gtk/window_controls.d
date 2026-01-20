@@ -96,9 +96,9 @@ class WindowControls : gtk.widget.Widget
   /**
       Get `decorationLayout` property.
       Returns: The decoration layout for window buttons.
-      
-      If this property is not set, the
-      `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+        
+        If this property is not set, the
+        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
   */
   @property string decorationLayout()
   {
@@ -109,9 +109,9 @@ class WindowControls : gtk.widget.Widget
       Set `decorationLayout` property.
       Params:
         propval = The decoration layout for window buttons.
-        
-        If this property is not set, the
-        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          
+          If this property is not set, the
+          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
   */
   @property void decorationLayout(string propval)
   {
@@ -130,8 +130,8 @@ class WindowControls : gtk.widget.Widget
   /**
       Get `side` property.
       Returns: Whether the widget shows start or end side of the decoration layout.
-      
-      See `property@Gtk.WindowControls:decoration_layout`.
+        
+        See `property@Gtk.WindowControls:decoration_layout`.
   */
   @property gtk.types.PackType side()
   {
@@ -142,8 +142,8 @@ class WindowControls : gtk.widget.Widget
       Set `side` property.
       Params:
         propval = Whether the widget shows start or end side of the decoration layout.
-        
-        See `property@Gtk.WindowControls:decoration_layout`.
+          
+          See `property@Gtk.WindowControls:decoration_layout`.
   */
   @property void side(gtk.types.PackType propval)
   {

@@ -400,10 +400,10 @@ interface Mount
       Connect to `PreUnmount` signal.
   
       This signal may be emitted when the #GMount is about to be
-      unmounted.
-      
-      This signal depends on the backend and is only emitted if
-      GIO was used to unmount.
+        unmounted.
+        
+        This signal depends on the backend and is only emitted if
+        GIO was used to unmount.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -421,9 +421,9 @@ interface Mount
       Connect to `Unmounted` signal.
   
       This signal is emitted when the #GMount have been
-      unmounted. If the recipient is holding references to the
-      object they should release them so the object can be
-      finalized.
+        unmounted. If the recipient is holding references to the
+        object they should release them so the object can be
+        finalized.
   
       Params:
         callback = signal callback delegate or function to connect

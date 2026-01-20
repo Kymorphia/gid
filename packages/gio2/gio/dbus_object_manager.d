@@ -71,9 +71,9 @@ interface DBusObjectManager
       Connect to `InterfaceAdded` signal.
   
       Emitted when interface is added to object.
-      
-      This signal exists purely as a convenience to avoid having to
-      connect signals to all objects managed by manager.
+        
+        This signal exists purely as a convenience to avoid having to
+        connect signals to all objects managed by manager.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -95,9 +95,9 @@ interface DBusObjectManager
       Connect to `InterfaceRemoved` signal.
   
       Emitted when interface has been removed from object.
-      
-      This signal exists purely as a convenience to avoid having to
-      connect signals to all objects managed by manager.
+        
+        This signal exists purely as a convenience to avoid having to
+        connect signals to all objects managed by manager.
   
       Params:
         callback = signal callback delegate or function to connect

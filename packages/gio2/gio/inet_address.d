@@ -50,7 +50,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isAny` property.
       Returns: Whether this is the "any" address for its family.
-      See [gio.inet_address.InetAddress.getIsAny].
+        See [gio.inet_address.InetAddress.getIsAny].
   */
   @property bool isAny()
   {
@@ -60,7 +60,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isLinkLocal` property.
       Returns: Whether this is a link-local address.
-      See [gio.inet_address.InetAddress.getIsLinkLocal].
+        See [gio.inet_address.InetAddress.getIsLinkLocal].
   */
   @property bool isLinkLocal()
   {
@@ -70,7 +70,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isLoopback` property.
       Returns: Whether this is the loopback address for its family.
-      See [gio.inet_address.InetAddress.getIsLoopback].
+        See [gio.inet_address.InetAddress.getIsLoopback].
   */
   @property bool isLoopback()
   {
@@ -80,7 +80,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isMcGlobal` property.
       Returns: Whether this is a global multicast address.
-      See [gio.inet_address.InetAddress.getIsMcGlobal].
+        See [gio.inet_address.InetAddress.getIsMcGlobal].
   */
   @property bool isMcGlobal()
   {
@@ -90,7 +90,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isMcLinkLocal` property.
       Returns: Whether this is a link-local multicast address.
-      See [gio.inet_address.InetAddress.getIsMcLinkLocal].
+        See [gio.inet_address.InetAddress.getIsMcLinkLocal].
   */
   @property bool isMcLinkLocal()
   {
@@ -100,7 +100,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isMcNodeLocal` property.
       Returns: Whether this is a node-local multicast address.
-      See [gio.inet_address.InetAddress.getIsMcNodeLocal].
+        See [gio.inet_address.InetAddress.getIsMcNodeLocal].
   */
   @property bool isMcNodeLocal()
   {
@@ -110,7 +110,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isMcOrgLocal` property.
       Returns: Whether this is an organization-local multicast address.
-      See [gio.inet_address.InetAddress.getIsMcOrgLocal].
+        See [gio.inet_address.InetAddress.getIsMcOrgLocal].
   */
   @property bool isMcOrgLocal()
   {
@@ -120,7 +120,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isMcSiteLocal` property.
       Returns: Whether this is a site-local multicast address.
-      See [gio.inet_address.InetAddress.getIsMcSiteLocal].
+        See [gio.inet_address.InetAddress.getIsMcSiteLocal].
   */
   @property bool isMcSiteLocal()
   {
@@ -130,7 +130,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isMulticast` property.
       Returns: Whether this is a multicast address.
-      See [gio.inet_address.InetAddress.getIsMulticast].
+        See [gio.inet_address.InetAddress.getIsMulticast].
   */
   @property bool isMulticast()
   {
@@ -140,7 +140,7 @@ class InetAddress : gobject.object.ObjectWrap
   /**
       Get `isSiteLocal` property.
       Returns: Whether this is a site-local address.
-      See [gio.inet_address.InetAddress.getIsLoopback].
+        See [gio.inet_address.InetAddress.getIsLoopback].
   */
   @property bool isSiteLocal()
   {

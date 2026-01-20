@@ -163,7 +163,7 @@ class Socket : gtk.container.Container
       Connect to `PlugAdded` signal.
   
       This signal is emitted when a client is successfully
-      added to the socket.
+        added to the socket.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -201,8 +201,8 @@ class Socket : gtk.container.Container
       Connect to `PlugRemoved` signal.
   
       This signal is emitted when a client is removed from the socket.
-      The default action is to destroy the #GtkSocket widget, so if you
-      want to reuse it you must add a signal handler that returns true.
+        The default action is to destroy the #GtkSocket widget, so if you
+        want to reuse it you must add a signal handler that returns true.
   
       Params:
         callback = signal callback delegate or function to connect

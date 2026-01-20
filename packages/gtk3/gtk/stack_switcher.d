@@ -70,7 +70,7 @@ class StackSwitcher : gtk.box.Box
   /**
       Get `iconSize` property.
       Returns: Use the "icon-size" property to change the size of the image displayed
-      when a #GtkStackSwitcher is displaying icons.
+        when a #GtkStackSwitcher is displaying icons.
   */
   @property int iconSize()
   {
@@ -81,7 +81,7 @@ class StackSwitcher : gtk.box.Box
       Set `iconSize` property.
       Params:
         propval = Use the "icon-size" property to change the size of the image displayed
-        when a #GtkStackSwitcher is displaying icons.
+          when a #GtkStackSwitcher is displaying icons.
   */
   @property void iconSize(int propval)
   {

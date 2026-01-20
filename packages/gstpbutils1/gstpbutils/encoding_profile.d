@@ -45,13 +45,13 @@ class EncodingProfile : gobject.object.ObjectWrap
   /**
       Get `elementProperties` property.
       Returns: A #GstStructure defining the properties to be set to the element
-      the profile represents.
-      
-      For example for `av1enc`:
-      
-      ```
-      element-properties,row-mt=true, end-usage=vbr
-      ```
+        the profile represents.
+        
+        For example for `av1enc`:
+        
+        ```
+        element-properties,row-mt=true, end-usage=vbr
+        ```
   */
   @property gst.structure.Structure elementProperties()
   {
@@ -62,13 +62,13 @@ class EncodingProfile : gobject.object.ObjectWrap
       Set `elementProperties` property.
       Params:
         propval = A #GstStructure defining the properties to be set to the element
-        the profile represents.
-        
-        For example for `av1enc`:
-        
-        ```
-        element-properties,row-mt=true, end-usage=vbr
-        ```
+          the profile represents.
+          
+          For example for `av1enc`:
+          
+          ```
+          element-properties,row-mt=true, end-usage=vbr
+          ```
   */
   @property void elementProperties(gst.structure.Structure propval)
   {
@@ -163,7 +163,9 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     GstStructure* _cretval;
     _cretval = gst_encoding_profile_get_element_properties(cast(GstEncodingProfile*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -331,7 +333,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setElementProperties(gst.structure.Structure elementProperties)
   {
-    gst_encoding_profile_set_element_properties(cast(GstEncodingProfile*)this._cPtr, elementProperties ? cast(GstStructure*)elementProperties._cPtr(Yes.Dup) : null);
+    gst_encoding_profile_set_element_properties(cast(GstEncodingProfile*)this._cPtr, cast(GstStructure*)&elementProperties);
   }
 
   /**

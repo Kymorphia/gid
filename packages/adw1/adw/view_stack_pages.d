@@ -48,11 +48,11 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   /**
       Get `selectedPage` property.
       Returns: The selected `class@ViewStackPage` within the `class@ViewStackPages`.
-      
-      This can be used to keep an up-to-date view of the `class@ViewStackPage` for
-      The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
-      
-      This can be used to keep an up-to-date view of the visible child.
+        
+        This can be used to keep an up-to-date view of the `class@ViewStackPage` for
+        The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
+        
+        This can be used to keep an up-to-date view of the visible child.
   */
   @property adw.view_stack_page.ViewStackPage selectedPage()
   {
@@ -63,11 +63,11 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Set `selectedPage` property.
       Params:
         propval = The selected `class@ViewStackPage` within the `class@ViewStackPages`.
-        
-        This can be used to keep an up-to-date view of the `class@ViewStackPage` for
-        The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
-        
-        This can be used to keep an up-to-date view of the visible child.
+          
+          This can be used to keep an up-to-date view of the `class@ViewStackPage` for
+          The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
+          
+          This can be used to keep an up-to-date view of the visible child.
   */
   @property void selectedPage(adw.view_stack_page.ViewStackPage propval)
   {

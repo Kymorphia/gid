@@ -39,7 +39,7 @@ class Pattern : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -235,9 +235,9 @@ class Pattern : gobject.boxed.Boxed
       Params:
         matrix = return value for the matrix
   */
-  void getMatrix(cairo.matrix.Matrix matrix)
+  void getMatrix(out cairo.matrix.Matrix matrix)
   {
-    cairo_pattern_get_matrix(cast(cairo_pattern_t*)this._cPtr, matrix ? cast(cairo_matrix_t*)matrix._cPtr(No.Dup) : null);
+    cairo_pattern_get_matrix(cast(cairo_pattern_t*)this._cPtr, cast(cairo_matrix_t*)&matrix);
   }
 
   /**
@@ -422,7 +422,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_pattern_set_matrix(cast(cairo_pattern_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
+    cairo_pattern_set_matrix(cast(cairo_pattern_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
 
   /**

@@ -104,12 +104,12 @@ class FlowBoxChild : gtk.bin.Bin
       Connect to `Activate` signal.
   
       The ::activate signal is emitted when the user activates
-      a child widget in a #GtkFlowBox, either by clicking or
-      double-clicking, or by using the Space or Enter key.
-      
-      While this signal is used as a
-      [keybinding signal][GtkBindingSignal],
-      it can be used by applications for their own purposes.
+        a child widget in a #GtkFlowBox, either by clicking or
+        double-clicking, or by using the Space or Enter key.
+        
+        While this signal is used as a
+        [keybinding signal][GtkBindingSignal],
+        it can be used by applications for their own purposes.
   
       Params:
         callback = signal callback delegate or function to connect

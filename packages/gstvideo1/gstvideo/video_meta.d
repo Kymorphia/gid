@@ -37,7 +37,7 @@ import gstvideo.video_alignment;
 */
 class VideoMeta
 {
-  GstVideoMeta cInstance;
+  GstVideoMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -45,7 +45,7 @@ class VideoMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_meta.VideoMeta");
 
-    cInstance = *cast(GstVideoMeta*)ptr;
+    _cInstance = *cast(GstVideoMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -54,7 +54,7 @@ class VideoMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -215,13 +215,26 @@ class VideoMeta
   /**
       Get `alignment` field.
       Returns: the paddings and alignment constraints of the video buffer.
-      It is up to the caller of `[gstvideo.global.bufferAddVideoMetaFull]` to set it
-      using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
-      to no padding and no alignment. Since: 1.18
+        It is up to the caller of `[gstvideo.global.bufferAddVideoMetaFull]` to set it
+        using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
+        to no padding and no alignment. Since: 1.18
   */
   @property gstvideo.video_alignment.VideoAlignment alignment()
   {
-    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstVideoMeta*)this._cPtr).alignment, No.Take);
+    return cToD!(gstvideo.video_alignment.VideoAlignment)(cast(void*)&(cast(GstVideoMeta*)this._cPtr).alignment);
+  }
+
+  /**
+      Set `alignment` field.
+      Params:
+        propval = the paddings and alignment constraints of the video buffer.
+          It is up to the caller of `[gstvideo.global.bufferAddVideoMetaFull]` to set it
+          using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
+          to no padding and no alignment. Since: 1.18
+  */
+  @property void alignment(gstvideo.video_alignment.VideoAlignment propval)
+  {
+    (cast(GstVideoMeta*)this._cPtr).alignment = cast(GstVideoAlignment)propval;
   }
 
   /**
@@ -298,7 +311,9 @@ class VideoMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

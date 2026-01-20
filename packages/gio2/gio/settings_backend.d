@@ -148,6 +148,7 @@ class SettingsBackend : gobject.object.ObjectWrap
       _tmpitems ~= s.toCString(No.Alloc);
     _tmpitems ~= null;
     const(char*)* _items = _tmpitems.ptr;
+
     g_settings_backend_keys_changed(cast(GSettingsBackend*)this._cPtr, _path, _items, originTag);
   }
 

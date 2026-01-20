@@ -39,17 +39,19 @@ class GLMemory : gobject.boxed.Boxed
         texId = the GL texture id for this memory
         texTarget = the GL texture target for this memory
         texFormat = the texture type
+        valign = data alignment for system memory mapping
         plane = data plane in @info
         textureWrapped = 
         unpackLength = 
         texWidth = 
   */
-  this(uint texId = uint.init, gstgl.types.GLTextureTarget texTarget = gstgl.types.GLTextureTarget.init, gstgl.types.GLFormat texFormat = gstgl.types.GLFormat.init, uint plane = uint.init, bool textureWrapped = bool.init, uint unpackLength = uint.init, uint texWidth = uint.init)
+  this(uint texId = uint.init, gstgl.types.GLTextureTarget texTarget = gstgl.types.GLTextureTarget.init, gstgl.types.GLFormat texFormat = gstgl.types.GLFormat.init, gstvideo.video_alignment.VideoAlignment valign = gstvideo.video_alignment.VideoAlignment.init, uint plane = uint.init, bool textureWrapped = bool.init, uint unpackLength = uint.init, uint texWidth = uint.init)
   {
     super(gMalloc(GstGLMemory.sizeof), Yes.Take);
     this.texId = texId;
     this.texTarget = texTarget;
     this.texFormat = texFormat;
+    this.valign = valign;
     this.plane = plane;
     this.textureWrapped = textureWrapped;
     this.unpackLength = unpackLength;
@@ -65,7 +67,7 @@ class GLMemory : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -168,7 +170,17 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property gstvideo.video_alignment.VideoAlignment valign()
   {
-    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstGLMemory*)this._cPtr).valign, No.Take);
+    return cToD!(gstvideo.video_alignment.VideoAlignment)(cast(void*)&(cast(GstGLMemory*)this._cPtr).valign);
+  }
+
+  /**
+      Set `valign` field.
+      Params:
+        propval = data alignment for system memory mapping
+  */
+  @property void valign(gstvideo.video_alignment.VideoAlignment propval)
+  {
+    (cast(GstGLMemory*)this._cPtr).valign = cast(GstVideoAlignment)propval;
   }
 
   /**
@@ -323,7 +335,7 @@ class GLMemory : gobject.boxed.Boxed
         userData = user data to call notify with
         notify = a #GDestroyNotify
   */
-  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, gst.allocation_params.AllocationParams params, gstvideo.video_info.VideoInfo info, uint plane, gstvideo.video_alignment.VideoAlignment valign = null, void* userData = null, glib.types.DestroyNotify notify = null)
+  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, gst.allocation_params.AllocationParams params, gstvideo.video_info.VideoInfo info, uint plane, gstvideo.video_alignment.VideoAlignment valign, void* userData = null, glib.types.DestroyNotify notify = null)
   {
     extern(C) void _notifyCallback(void* data)
     {
@@ -333,7 +345,7 @@ class GLMemory : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_memory_init(cast(GstGLMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, target, texFormat, params ? cast(const(GstAllocationParams)*)params._cPtr(No.Dup) : null, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign._cPtr : null, userData, _notifyCB);
+    gst_gl_memory_init(cast(GstGLMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, target, texFormat, cast(const(GstAllocationParams)*)&params, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)&valign, userData, _notifyCB);
   }
 
   /**

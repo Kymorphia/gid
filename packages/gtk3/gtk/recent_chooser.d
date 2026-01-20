@@ -33,7 +33,7 @@ interface RecentChooser
   /**
       Get `filter` property.
       Returns: The #GtkRecentFilter object to be used when displaying
-      the recently used resources.
+        the recently used resources.
   */
   @property gtk.recent_filter.RecentFilter filter();
 
@@ -41,14 +41,14 @@ interface RecentChooser
       Set `filter` property.
       Params:
         propval = The #GtkRecentFilter object to be used when displaying
-        the recently used resources.
+          the recently used resources.
   */
   @property void filter(gtk.recent_filter.RecentFilter propval);
 
   /**
       Get `limit` property.
       Returns: The maximum number of recently used resources to be displayed,
-      or -1 to display all items.
+        or -1 to display all items.
   */
   @property int limit();
 
@@ -56,14 +56,14 @@ interface RecentChooser
       Set `limit` property.
       Params:
         propval = The maximum number of recently used resources to be displayed,
-        or -1 to display all items.
+          or -1 to display all items.
   */
   @property void limit(int propval);
 
   /**
       Get `localOnly` property.
       Returns: Whether this #GtkRecentChooser should display only local (file:)
-      resources.
+        resources.
   */
   @property bool localOnly();
 
@@ -71,7 +71,7 @@ interface RecentChooser
       Set `localOnly` property.
       Params:
         propval = Whether this #GtkRecentChooser should display only local (file:)
-        resources.
+          resources.
   */
   @property void localOnly(bool propval);
 
@@ -104,9 +104,9 @@ interface RecentChooser
   /**
       Get `showNotFound` property.
       Returns: Whether this #GtkRecentChooser should display the recently used resources
-      even if not present anymore. Setting this to false will perform a
-      potentially expensive check on every local resource (every remote
-      resource will always be displayed).
+        even if not present anymore. Setting this to false will perform a
+        potentially expensive check on every local resource (every remote
+        resource will always be displayed).
   */
   @property bool showNotFound();
 
@@ -114,9 +114,9 @@ interface RecentChooser
       Set `showNotFound` property.
       Params:
         propval = Whether this #GtkRecentChooser should display the recently used resources
-        even if not present anymore. Setting this to false will perform a
-        potentially expensive check on every local resource (every remote
-        resource will always be displayed).
+          even if not present anymore. Setting this to false will perform a
+          potentially expensive check on every local resource (every remote
+          resource will always be displayed).
   */
   @property void showNotFound(bool propval);
 
@@ -129,7 +129,7 @@ interface RecentChooser
   /**
       Get `showTips` property.
       Returns: Whether this #GtkRecentChooser should display a tooltip containing the
-      full path of the recently used resources.
+        full path of the recently used resources.
   */
   @property bool showTips();
 
@@ -137,7 +137,7 @@ interface RecentChooser
       Set `showTips` property.
       Params:
         propval = Whether this #GtkRecentChooser should display a tooltip containing the
-        full path of the recently used resources.
+          full path of the recently used resources.
   */
   @property void showTips(bool propval);
 
@@ -421,9 +421,9 @@ interface RecentChooser
       Connect to `ItemActivated` signal.
   
       This signal is emitted when the user "activates" a recent item
-      in the recent chooser.  This can happen by double-clicking on an item
-      in the recently used resources list, or by pressing
-      `Enter`.
+        in the recent chooser.  This can happen by double-clicking on an item
+        in the recently used resources list, or by pressing
+        `Enter`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -441,9 +441,9 @@ interface RecentChooser
       Connect to `SelectionChanged` signal.
   
       This signal is emitted when there is a change in the set of
-      selected recently used resources.  This can happen when a user
-      modifies the selection with the mouse or the keyboard, or when
-      explicitly calling functions to change the selection.
+        selected recently used resources.  This can happen when a user
+        modifies the selection with the mouse or the keyboard, or when
+        explicitly calling functions to change the selection.
   
       Params:
         callback = signal callback delegate or function to connect

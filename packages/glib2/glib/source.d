@@ -25,7 +25,7 @@ class Source : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -231,7 +231,7 @@ class Source : gobject.boxed.Boxed
   */
   void getCurrentTime(glib.time_val.TimeVal timeval)
   {
-    g_source_get_current_time(cast(GSource*)this._cPtr, timeval ? cast(GTimeVal*)timeval._cPtr : null);
+    g_source_get_current_time(cast(GSource*)this._cPtr, cast(GTimeVal*)&timeval);
   }
 
   /**
@@ -522,13 +522,15 @@ class Source : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      gboolean _retval = (*_dlg)();
+      _dretval = (*_dlg)();
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     g_source_set_callback(cast(GSource*)this._cPtr, _funcCB, _func, _funcDestroyCB);

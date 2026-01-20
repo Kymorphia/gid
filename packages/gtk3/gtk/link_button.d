@@ -89,7 +89,7 @@ class LinkButton : gtk.button.Button
   /**
       Get `visited` property.
       Returns: The 'visited' state of this button. A visited link is drawn in a
-      different color.
+        different color.
   */
   @property bool visited()
   {
@@ -100,7 +100,7 @@ class LinkButton : gtk.button.Button
       Set `visited` property.
       Params:
         propval = The 'visited' state of this button. A visited link is drawn in a
-        different color.
+          different color.
   */
   @property void visited(bool propval)
   {
@@ -197,14 +197,14 @@ class LinkButton : gtk.button.Button
       Connect to `ActivateLink` signal.
   
       The ::activate-link signal is emitted each time the #GtkLinkButton
-      has been clicked.
-      
-      The default handler will call [gtk.global.showUriOnWindow] with the URI stored inside
-      the #GtkLinkButton:uri property.
-      
-      To override the default behavior, you can connect to the ::activate-link
-      signal and stop the propagation of the signal by returning true from
-      your handler.
+        has been clicked.
+        
+        The default handler will call [gtk.global.showUriOnWindow] with the URI stored inside
+        the #GtkLinkButton:uri property.
+        
+        To override the default behavior, you can connect to the ::activate-link
+        signal and stop the propagation of the signal by returning true from
+        your handler.
   
       Params:
         callback = signal callback delegate or function to connect

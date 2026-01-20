@@ -75,7 +75,7 @@ class Completion : gobject.object.ObjectWrap
   /**
       Get `buffer` property.
       Returns: The #GtkTextBuffer for the #GtkSourceCompletion:view.
-      This is a convenience property for providers.
+        This is a convenience property for providers.
   */
   @property gtk.text_view.TextView buffer()
   {
@@ -104,7 +104,7 @@ class Completion : gobject.object.ObjectWrap
   /**
       Get `rememberInfoVisibility` property.
       Returns: Determines whether the visibility of the info window should be saved when the
-      completion is hidden, and restored when the completion is shown again.
+        completion is hidden, and restored when the completion is shown again.
   */
   @property bool rememberInfoVisibility()
   {
@@ -115,7 +115,7 @@ class Completion : gobject.object.ObjectWrap
       Set `rememberInfoVisibility` property.
       Params:
         propval = Determines whether the visibility of the info window should be saved when the
-        completion is hidden, and restored when the completion is shown again.
+          completion is hidden, and restored when the completion is shown again.
   */
   @property void rememberInfoVisibility(bool propval)
   {
@@ -125,7 +125,7 @@ class Completion : gobject.object.ObjectWrap
   /**
       Get `selectOnShow` property.
       Returns: Determines whether the first proposal should be selected when the completion
-      is first shown.
+        is first shown.
   */
   @property bool selectOnShow()
   {
@@ -136,7 +136,7 @@ class Completion : gobject.object.ObjectWrap
       Set `selectOnShow` property.
       Params:
         propval = Determines whether the first proposal should be selected when the completion
-        is first shown.
+          is first shown.
   */
   @property void selectOnShow(bool propval)
   {
@@ -146,7 +146,7 @@ class Completion : gobject.object.ObjectWrap
   /**
       Get `showIcons` property.
       Returns: The "show-icons" property denotes if icons should be displayed within
-      the list of completions presented to the user.
+        the list of completions presented to the user.
   */
   @property bool showIcons()
   {
@@ -157,7 +157,7 @@ class Completion : gobject.object.ObjectWrap
       Set `showIcons` property.
       Params:
         propval = The "show-icons" property denotes if icons should be displayed within
-        the list of completions presented to the user.
+          the list of completions presented to the user.
   */
   @property void showIcons(bool propval)
   {
@@ -308,7 +308,7 @@ class Completion : gobject.object.ObjectWrap
       Connect to `Hide` signal.
   
       The "hide" signal is emitted when the completion window should
-      be hidden.
+        be hidden.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -346,7 +346,7 @@ class Completion : gobject.object.ObjectWrap
       Connect to `ProviderAdded` signal.
   
       The "provided-added" signal is emitted when a new provider is
-      added to the completion.
+        added to the completion.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -391,7 +391,7 @@ class Completion : gobject.object.ObjectWrap
       Connect to `ProviderRemoved` signal.
   
       The "provided-removed" signal is emitted when a provider has
-      been removed from the completion.
+        been removed from the completion.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -436,7 +436,7 @@ class Completion : gobject.object.ObjectWrap
       Connect to `Show` signal.
   
       The "show" signal is emitted when the completion window should
-      be shown.
+        be shown.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -427,10 +427,10 @@ class Builder : gobject.object.ObjectWrap
   /**
       Get `translationDomain` property.
       Returns: The translation domain used when translating property values that
-      have been marked as translatable.
-      
-      If the translation domain is null, [gtk.builder.Builder] uses gettext(),
-      otherwise [glib.global.dgettext].
+        have been marked as translatable.
+        
+        If the translation domain is null, [gtk.builder.Builder] uses gettext(),
+        otherwise [glib.global.dgettext].
   */
   @property string translationDomain()
   {
@@ -441,10 +441,10 @@ class Builder : gobject.object.ObjectWrap
       Set `translationDomain` property.
       Params:
         propval = The translation domain used when translating property values that
-        have been marked as translatable.
-        
-        If the translation domain is null, [gtk.builder.Builder] uses gettext(),
-        otherwise [glib.global.dgettext].
+          have been marked as translatable.
+          
+          If the translation domain is null, [gtk.builder.Builder] uses gettext(),
+          otherwise [glib.global.dgettext].
   */
   @property void translationDomain(string propval)
   {

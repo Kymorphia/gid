@@ -1,11 +1,10 @@
-/// Module for [Matrix] class
+/// Module for [Matrix] struct
 module cairo.matrix;
 
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
 import gid.gid;
-import gobject.boxed;
 
 /**
     A #cairo_matrix_t holds an affine transformation, such as a scale,
@@ -16,174 +15,37 @@ import gobject.boxed;
         y_new = yx * x + yy * y + y0;
     </programlisting>
 */
-class Matrix : gobject.boxed.Boxed
+struct Matrix
 {
+  /**
+      xx component of the affine transformation
+  */
+  double xx;
 
   /**
-      Create a `matrix.Matrix` boxed type.
-      Params:
-        xx = xx component of the affine transformation
-        yx = yx component of the affine transformation
-        xy = xy component of the affine transformation
-        yy = yy component of the affine transformation
-        x0 = X translation component of the affine transformation
-        y0 = Y translation component of the affine transformation
+      yx component of the affine transformation
   */
-  this(double xx = 0.0, double yx = 0.0, double xy = 0.0, double yy = 0.0, double x0 = 0.0, double y0 = 0.0)
-  {
-    super(gMalloc(cairo_matrix_t.sizeof), Yes.Take);
-    this.xx = xx;
-    this.yx = yx;
-    this.xy = xy;
-    this.yy = yy;
-    this.x0 = x0;
-    this.y0 = y0;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())cairo_gobject_matrix_get_type != &gidSymbolNotFound ? cairo_gobject_matrix_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Matrix self()
-  {
-    return this;
-  }
+  double yx;
 
   /**
-      Get `xx` field.
-      Returns: xx component of the affine transformation
+      xy component of the affine transformation
   */
-  @property double xx()
-  {
-    return (cast(cairo_matrix_t*)this._cPtr).xx;
-  }
+  double xy;
 
   /**
-      Set `xx` field.
-      Params:
-        propval = xx component of the affine transformation
+      yy component of the affine transformation
   */
-  @property void xx(double propval)
-  {
-    (cast(cairo_matrix_t*)this._cPtr).xx = propval;
-  }
+  double yy;
 
   /**
-      Get `yx` field.
-      Returns: yx component of the affine transformation
+      X translation component of the affine transformation
   */
-  @property double yx()
-  {
-    return (cast(cairo_matrix_t*)this._cPtr).yx;
-  }
+  double x0;
 
   /**
-      Set `yx` field.
-      Params:
-        propval = yx component of the affine transformation
+      Y translation component of the affine transformation
   */
-  @property void yx(double propval)
-  {
-    (cast(cairo_matrix_t*)this._cPtr).yx = propval;
-  }
-
-  /**
-      Get `xy` field.
-      Returns: xy component of the affine transformation
-  */
-  @property double xy()
-  {
-    return (cast(cairo_matrix_t*)this._cPtr).xy;
-  }
-
-  /**
-      Set `xy` field.
-      Params:
-        propval = xy component of the affine transformation
-  */
-  @property void xy(double propval)
-  {
-    (cast(cairo_matrix_t*)this._cPtr).xy = propval;
-  }
-
-  /**
-      Get `yy` field.
-      Returns: yy component of the affine transformation
-  */
-  @property double yy()
-  {
-    return (cast(cairo_matrix_t*)this._cPtr).yy;
-  }
-
-  /**
-      Set `yy` field.
-      Params:
-        propval = yy component of the affine transformation
-  */
-  @property void yy(double propval)
-  {
-    (cast(cairo_matrix_t*)this._cPtr).yy = propval;
-  }
-
-  /**
-      Get `x0` field.
-      Returns: X translation component of the affine transformation
-  */
-  @property double x0()
-  {
-    return (cast(cairo_matrix_t*)this._cPtr).x0;
-  }
-
-  /**
-      Set `x0` field.
-      Params:
-        propval = X translation component of the affine transformation
-  */
-  @property void x0(double propval)
-  {
-    (cast(cairo_matrix_t*)this._cPtr).x0 = propval;
-  }
-
-  /**
-      Get `y0` field.
-      Returns: Y translation component of the affine transformation
-  */
-  @property double y0()
-  {
-    return (cast(cairo_matrix_t*)this._cPtr).y0;
-  }
-
-  /**
-      Set `y0` field.
-      Params:
-        propval = Y translation component of the affine transformation
-  */
-  @property void y0(double propval)
-  {
-    (cast(cairo_matrix_t*)this._cPtr).y0 = propval;
-  }
+  double y0;
 
   /**
       Sets matrix to be the affine transformation given by
@@ -204,7 +66,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void init_(double xx, double yx, double xy, double yy, double x0, double y0)
   {
-    cairo_matrix_init(cast(cairo_matrix_t*)this._cPtr, xx, yx, xy, yy, x0, y0);
+    cairo_matrix_init(cast(cairo_matrix_t*)&this, xx, yx, xy, yy, x0, y0);
   }
 
   /**
@@ -212,7 +74,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initIdentity()
   {
-    cairo_matrix_init_identity(cast(cairo_matrix_t*)this._cPtr);
+    cairo_matrix_init_identity(cast(cairo_matrix_t*)&this);
   }
 
   /**
@@ -227,7 +89,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initRotate(double radians)
   {
-    cairo_matrix_init_rotate(cast(cairo_matrix_t*)this._cPtr, radians);
+    cairo_matrix_init_rotate(cast(cairo_matrix_t*)&this, radians);
   }
 
   /**
@@ -240,7 +102,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initScale(double sx, double sy)
   {
-    cairo_matrix_init_scale(cast(cairo_matrix_t*)this._cPtr, sx, sy);
+    cairo_matrix_init_scale(cast(cairo_matrix_t*)&this, sx, sy);
   }
 
   /**
@@ -253,7 +115,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initTranslate(double tx, double ty)
   {
-    cairo_matrix_init_translate(cast(cairo_matrix_t*)this._cPtr, tx, ty);
+    cairo_matrix_init_translate(cast(cairo_matrix_t*)&this, tx, ty);
   }
 
   /**
@@ -268,7 +130,7 @@ class Matrix : gobject.boxed.Boxed
   cairo.types.Status invert()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_matrix_invert(cast(cairo_matrix_t*)this._cPtr);
+    _cretval = cairo_matrix_invert(cast(cairo_matrix_t*)&this);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -288,7 +150,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void multiply(cairo.matrix.Matrix a, cairo.matrix.Matrix b)
   {
-    cairo_matrix_multiply(cast(cairo_matrix_t*)this._cPtr, a ? cast(const(cairo_matrix_t)*)a._cPtr(No.Dup) : null, b ? cast(const(cairo_matrix_t)*)b._cPtr(No.Dup) : null);
+    cairo_matrix_multiply(cast(cairo_matrix_t*)&this, cast(const(cairo_matrix_t)*)&a, cast(const(cairo_matrix_t)*)&b);
   }
 
   /**
@@ -306,7 +168,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void rotate(double radians)
   {
-    cairo_matrix_rotate(cast(cairo_matrix_t*)this._cPtr, radians);
+    cairo_matrix_rotate(cast(cairo_matrix_t*)&this, radians);
   }
 
   /**
@@ -320,7 +182,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void scale(double sx, double sy)
   {
-    cairo_matrix_scale(cast(cairo_matrix_t*)this._cPtr, sx, sy);
+    cairo_matrix_scale(cast(cairo_matrix_t*)&this, sx, sy);
   }
 
   /**
@@ -340,7 +202,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformDistance(out double dx, out double dy)
   {
-    cairo_matrix_transform_distance(cast(const(cairo_matrix_t)*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
+    cairo_matrix_transform_distance(cast(const(cairo_matrix_t)*)&this, cast(double*)&dx, cast(double*)&dy);
   }
 
   /**
@@ -352,7 +214,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformPoint(out double x, out double y)
   {
-    cairo_matrix_transform_point(cast(const(cairo_matrix_t)*)this._cPtr, cast(double*)&x, cast(double*)&y);
+    cairo_matrix_transform_point(cast(const(cairo_matrix_t)*)&this, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -367,6 +229,6 @@ class Matrix : gobject.boxed.Boxed
   */
   void translate(double tx, double ty)
   {
-    cairo_matrix_translate(cast(cairo_matrix_t*)this._cPtr, tx, ty);
+    cairo_matrix_translate(cast(cairo_matrix_t*)&this, tx, ty);
   }
 }

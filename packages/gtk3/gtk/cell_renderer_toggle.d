@@ -198,10 +198,10 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       Connect to `Toggled` signal.
   
       The ::toggled signal is emitted when the cell is toggled.
-      
-      It is the responsibility of the application to update the model
-      with the correct value to store at path.  Often this is simply the
-      opposite of the value currently stored at path.
+        
+        It is the responsibility of the application to update the model
+        with the correct value to store at path.  Often this is simply the
+        opposite of the value currently stored at path.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -209,7 +209,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
           $(D void callback(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle))
   
           `path` string representation of #GtkTreePath describing the
-                 event location (optional)
+                   event location (optional)
   
           `cellRendererToggle` the instance the signal is connected to (optional)
   

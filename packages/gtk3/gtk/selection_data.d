@@ -25,7 +25,7 @@ class SelectionData : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -198,8 +198,8 @@ class SelectionData : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -286,6 +286,7 @@ class SelectionData : gobject.boxed.Boxed
       _tmpuris ~= s.toCString(No.Alloc);
     _tmpuris ~= null;
     char** _uris = _tmpuris.ptr;
+
     _retval = cast(bool)gtk_selection_data_set_uris(cast(GtkSelectionData*)this._cPtr, _uris);
     return _retval;
   }

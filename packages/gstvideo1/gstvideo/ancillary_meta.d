@@ -14,7 +14,7 @@ import gstvideo.types;
 */
 class AncillaryMeta
 {
-  GstAncillaryMeta cInstance;
+  GstAncillaryMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class AncillaryMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.ancillary_meta.AncillaryMeta");
 
-    cInstance = *cast(GstAncillaryMeta*)ptr;
+    _cInstance = *cast(GstAncillaryMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class AncillaryMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -65,8 +65,8 @@ class AncillaryMeta
   /**
       Get `cNotYChannel` field.
       Returns: Which channel (luminance or chrominance) the ancillary
-         data is located. 0 if content is SD or stored in the luminance channel
-         (default). 1 if HD and stored in the chrominance channel.
+           data is located. 0 if content is SD or stored in the luminance channel
+           (default). 1 if HD and stored in the chrominance channel.
   */
   @property bool cNotYChannel()
   {
@@ -77,8 +77,8 @@ class AncillaryMeta
       Set `cNotYChannel` field.
       Params:
         propval = Which channel (luminance or chrominance) the ancillary
-           data is located. 0 if content is SD or stored in the luminance channel
-           (default). 1 if HD and stored in the chrominance channel.
+             data is located. 0 if content is SD or stored in the luminance channel
+             (default). 1 if HD and stored in the chrominance channel.
   */
   @property void cNotYChannel(bool propval)
   {
@@ -88,8 +88,8 @@ class AncillaryMeta
   /**
       Get `line` field.
       Returns: The line on which the ancillary data is located (max 11bit). There
-         are two special values: 0x7ff if no line is specified (default), 0x7fe
-         to specify the ancillary data is on any valid line before active video
+           are two special values: 0x7ff if no line is specified (default), 0x7fe
+           to specify the ancillary data is on any valid line before active video
   */
   @property ushort line()
   {
@@ -100,8 +100,8 @@ class AncillaryMeta
       Set `line` field.
       Params:
         propval = The line on which the ancillary data is located (max 11bit). There
-           are two special values: 0x7ff if no line is specified (default), 0x7fe
-           to specify the ancillary data is on any valid line before active video
+             are two special values: 0x7ff if no line is specified (default), 0x7fe
+             to specify the ancillary data is on any valid line before active video
   */
   @property void line(ushort propval)
   {
@@ -111,11 +111,11 @@ class AncillaryMeta
   /**
       Get `offset` field.
       Returns: The location of the ancillary data packet in a SDI raster relative
-         to the start of active video (max 12bits). A value of 0 means the ADF of
-         the ancillary packet starts immediately following SAV. There are 3
-         special values: 0xfff: No specified location (default), 0xffe: within
-         HANC data space, 0xffd: within the ancillary data space located between
-         SAV and EAV
+           to the start of active video (max 12bits). A value of 0 means the ADF of
+           the ancillary packet starts immediately following SAV. There are 3
+           special values: 0xfff: No specified location (default), 0xffe: within
+           HANC data space, 0xffd: within the ancillary data space located between
+           SAV and EAV
   */
   @property ushort offset()
   {
@@ -126,11 +126,11 @@ class AncillaryMeta
       Set `offset` field.
       Params:
         propval = The location of the ancillary data packet in a SDI raster relative
-           to the start of active video (max 12bits). A value of 0 means the ADF of
-           the ancillary packet starts immediately following SAV. There are 3
-           special values: 0xfff: No specified location (default), 0xffe: within
-           HANC data space, 0xffd: within the ancillary data space located between
-           SAV and EAV
+             to the start of active video (max 12bits). A value of 0 means the ADF of
+             the ancillary packet starts immediately following SAV. There are 3
+             special values: 0xfff: No specified location (default), 0xffe: within
+             HANC data space, 0xffd: within the ancillary data space located between
+             SAV and EAV
   */
   @property void offset(ushort propval)
   {
@@ -159,7 +159,7 @@ class AncillaryMeta
   /**
       Get `SDIDBlockNumber` field.
       Returns: Secondary Data identification (if type 2) or Data block
-         number (if type 1)
+           number (if type 1)
   */
   @property ushort SDIDBlockNumber()
   {
@@ -170,7 +170,7 @@ class AncillaryMeta
       Set `SDIDBlockNumber` field.
       Params:
         propval = Secondary Data identification (if type 2) or Data block
-           number (if type 1)
+             number (if type 1)
   */
   @property void SDIDBlockNumber(ushort propval)
   {
@@ -220,7 +220,9 @@ class AncillaryMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_ancillary_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

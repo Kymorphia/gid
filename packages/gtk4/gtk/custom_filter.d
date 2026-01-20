@@ -56,13 +56,15 @@ class CustomFilter : gtk.filter.Filter
   {
     extern(C) gboolean _matchFuncCallback(GObject* item, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
-
     GtkCustomFilter* _cretval;
     auto _matchFunc = matchFunc ? freezeDelegate(cast(void*)&matchFunc) : null;
     GDestroyNotify _matchFuncDestroyCB = matchFunc ? &thawDelegate : null;
@@ -88,13 +90,15 @@ class CustomFilter : gtk.filter.Filter
   {
     extern(C) gboolean _matchFuncCallback(GObject* item, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
-
     auto _matchFunc = matchFunc ? freezeDelegate(cast(void*)&matchFunc) : null;
     GDestroyNotify _matchFuncDestroyCB = matchFunc ? &thawDelegate : null;
     gtk_custom_filter_set_filter_func(cast(GtkCustomFilter*)this._cPtr, _matchFuncCB, _matchFunc, _matchFuncDestroyCB);

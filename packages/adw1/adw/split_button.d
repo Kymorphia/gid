@@ -89,11 +89,11 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `canShrink` property.
       Returns: Whether the button can be smaller than the natural size of its contents.
-      
-      If set to `TRUE`, the label will ellipsize.
-      
-      See `property@Gtk.Button:can-shrink` and
-      `property@Gtk.MenuButton:can-shrink`.
+        
+        If set to `TRUE`, the label will ellipsize.
+        
+        See `property@Gtk.Button:can-shrink` and
+        `property@Gtk.MenuButton:can-shrink`.
   */
   @property bool canShrink()
   {
@@ -104,11 +104,11 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `canShrink` property.
       Params:
         propval = Whether the button can be smaller than the natural size of its contents.
-        
-        If set to `TRUE`, the label will ellipsize.
-        
-        See `property@Gtk.Button:can-shrink` and
-        `property@Gtk.MenuButton:can-shrink`.
+          
+          If set to `TRUE`, the label will ellipsize.
+          
+          See `property@Gtk.Button:can-shrink` and
+          `property@Gtk.MenuButton:can-shrink`.
   */
   @property void canShrink(bool propval)
   {
@@ -118,9 +118,9 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `child` property.
       Returns: The child widget.
-      
-      Setting the child widget will set `property@SplitButton:label` and
-      `property@SplitButton:icon-name` to `NULL`.
+        
+        Setting the child widget will set `property@SplitButton:label` and
+        `property@SplitButton:icon-name` to `NULL`.
   */
   @property gtk.widget.Widget child()
   {
@@ -131,9 +131,9 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `child` property.
       Params:
         propval = The child widget.
-        
-        Setting the child widget will set `property@SplitButton:label` and
-        `property@SplitButton:icon-name` to `NULL`.
+          
+          Setting the child widget will set `property@SplitButton:label` and
+          `property@SplitButton:icon-name` to `NULL`.
   */
   @property void child(gtk.widget.Widget propval)
   {
@@ -143,13 +143,13 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `direction` property.
       Returns: The direction in which the popup will be popped up.
-      
-      The dropdown arrow icon will point at the same direction.
-      
-      If the does not fit in the available space in the given direction, GTK will
-      try its best to keep it inside the screen and fully visible.
-      
-      If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
+        
+        The dropdown arrow icon will point at the same direction.
+        
+        If the does not fit in the available space in the given direction, GTK will
+        try its best to keep it inside the screen and fully visible.
+        
+        If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
   */
   @property gtk.types.ArrowType direction()
   {
@@ -160,13 +160,13 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `direction` property.
       Params:
         propval = The direction in which the popup will be popped up.
-        
-        The dropdown arrow icon will point at the same direction.
-        
-        If the does not fit in the available space in the given direction, GTK will
-        try its best to keep it inside the screen and fully visible.
-        
-        If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
+          
+          The dropdown arrow icon will point at the same direction.
+          
+          If the does not fit in the available space in the given direction, GTK will
+          try its best to keep it inside the screen and fully visible.
+          
+          If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
   */
   @property void direction(gtk.types.ArrowType propval)
   {
@@ -176,8 +176,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `dropdownTooltip` property.
       Returns: The tooltip of the dropdown button.
-      
-      The tooltip can be marked up with the Pango text markup language.
+        
+        The tooltip can be marked up with the Pango text markup language.
   */
   @property string dropdownTooltip()
   {
@@ -188,8 +188,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `dropdownTooltip` property.
       Params:
         propval = The tooltip of the dropdown button.
-        
-        The tooltip can be marked up with the Pango text markup language.
+          
+          The tooltip can be marked up with the Pango text markup language.
   */
   @property void dropdownTooltip(string propval)
   {
@@ -199,9 +199,9 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `iconName` property.
       Returns: The name of the icon used to automatically populate the button.
-      
-      Setting the icon name will set `property@SplitButton:label` and
-      `property@SplitButton:child` to `NULL`.
+        
+        Setting the icon name will set `property@SplitButton:label` and
+        `property@SplitButton:child` to `NULL`.
   */
   @property string iconName()
   {
@@ -212,9 +212,9 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `iconName` property.
       Params:
         propval = The name of the icon used to automatically populate the button.
-        
-        Setting the icon name will set `property@SplitButton:label` and
-        `property@SplitButton:child` to `NULL`.
+          
+          Setting the icon name will set `property@SplitButton:label` and
+          `property@SplitButton:child` to `NULL`.
   */
   @property void iconName(string propval)
   {
@@ -224,9 +224,9 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `label` property.
       Returns: The label for the button.
-      
-      Setting the label will set `property@SplitButton:icon-name` and
-      `property@SplitButton:child` to `NULL`.
+        
+        Setting the label will set `property@SplitButton:icon-name` and
+        `property@SplitButton:child` to `NULL`.
   */
   @property string label()
   {
@@ -237,9 +237,9 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `label` property.
       Params:
         propval = The label for the button.
-        
-        Setting the label will set `property@SplitButton:icon-name` and
-        `property@SplitButton:child` to `NULL`.
+          
+          Setting the label will set `property@SplitButton:icon-name` and
+          `property@SplitButton:child` to `NULL`.
   */
   @property void label(string propval)
   {
@@ -249,25 +249,6 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `menuModel` property.
       Returns: The [gio.menu_model.MenuModel] from which the popup will be created.
-      
-      If the menu model is `NULL`, the dropdown is disabled.
-      
-      A [gtk.popover.Popover] will be created from the menu model with
-      [gtk.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
-      documented for this function.
-      
-      If `property@SplitButton:popover` is already set, it will be dissociated
-      from the button, and the property is set to `NULL`.
-  */
-  @property gio.menu_model.MenuModel menuModel()
-  {
-    return getMenuModel();
-  }
-
-  /**
-      Set `menuModel` property.
-      Params:
-        propval = The [gio.menu_model.MenuModel] from which the popup will be created.
         
         If the menu model is `NULL`, the dropdown is disabled.
         
@@ -278,6 +259,25 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         If `property@SplitButton:popover` is already set, it will be dissociated
         from the button, and the property is set to `NULL`.
   */
+  @property gio.menu_model.MenuModel menuModel()
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The [gio.menu_model.MenuModel] from which the popup will be created.
+          
+          If the menu model is `NULL`, the dropdown is disabled.
+          
+          A [gtk.popover.Popover] will be created from the menu model with
+          [gtk.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
+          documented for this function.
+          
+          If `property@SplitButton:popover` is already set, it will be dissociated
+          from the button, and the property is set to `NULL`.
+  */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
     return setMenuModel(propval);
@@ -286,11 +286,11 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `popover` property.
       Returns: The [gtk.popover.Popover] that will be popped up when the dropdown is clicked.
-      
-      If the popover is `NULL`, the dropdown is disabled.
-      
-      If `property@SplitButton:menu-model` is set, the menu model is dissociated
-      from the button, and the property is set to `NULL`.
+        
+        If the popover is `NULL`, the dropdown is disabled.
+        
+        If `property@SplitButton:menu-model` is set, the menu model is dissociated
+        from the button, and the property is set to `NULL`.
   */
   @property gtk.popover.Popover popover()
   {
@@ -301,11 +301,11 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `popover` property.
       Params:
         propval = The [gtk.popover.Popover] that will be popped up when the dropdown is clicked.
-        
-        If the popover is `NULL`, the dropdown is disabled.
-        
-        If `property@SplitButton:menu-model` is set, the menu model is dissociated
-        from the button, and the property is set to `NULL`.
+          
+          If the popover is `NULL`, the dropdown is disabled.
+          
+          If `property@SplitButton:menu-model` is set, the menu model is dissociated
+          from the button, and the property is set to `NULL`.
   */
   @property void popover(gtk.popover.Popover propval)
   {
@@ -315,8 +315,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Get `useUnderline` property.
       Returns: Whether an underline in the text indicates a mnemonic.
-      
-      See `property@SplitButton:label`.
+        
+        See `property@SplitButton:label`.
   */
   @property bool useUnderline()
   {
@@ -327,8 +327,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Set `useUnderline` property.
       Params:
         propval = Whether an underline in the text indicates a mnemonic.
-        
-        See `property@SplitButton:label`.
+          
+          See `property@SplitButton:label`.
   */
   @property void useUnderline(bool propval)
   {
@@ -619,9 +619,9 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Connect to `Activate` signal.
   
       Emitted to animate press then release.
-      
-      This is an action signal. Applications should never connect to this signal,
-      but use the `signalSplitButton::clicked` signal.
+        
+        This is an action signal. Applications should never connect to this signal,
+        but use the `signalSplitButton::clicked` signal.
   
       Params:
         callback = signal callback delegate or function to connect

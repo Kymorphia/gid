@@ -35,7 +35,7 @@ import gst.types;
 */
 class Poll
 {
-  GstPoll* cInstancePtr;
+  GstPoll* _cInstancePtr;
   bool owned;
 
   /** */
@@ -44,7 +44,7 @@ class Poll
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.poll.Poll");
 
-    cInstancePtr = cast(GstPoll*)ptr;
+    _cInstancePtr = cast(GstPoll*)ptr;
 
     owned = take;
   }
@@ -52,7 +52,7 @@ class Poll
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -65,7 +65,7 @@ class Poll
   bool addFd(gst.poll_fd.PollFD fd)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_add_fd(cast(GstPoll*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    _retval = cast(bool)gst_poll_add_fd(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class Poll
   bool fdCanRead(gst.poll_fd.PollFD fd)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_can_read(cast(const(GstPoll)*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    _retval = cast(bool)gst_poll_fd_can_read(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Poll
   bool fdCanWrite(gst.poll_fd.PollFD fd)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_can_write(cast(const(GstPoll)*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    _retval = cast(bool)gst_poll_fd_can_write(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Poll
   bool fdCtlPri(gst.poll_fd.PollFD fd, bool active)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_ctl_pri(cast(GstPoll*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null, active);
+    _retval = cast(bool)gst_poll_fd_ctl_pri(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd, active);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class Poll
   bool fdCtlRead(gst.poll_fd.PollFD fd, bool active)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_ctl_read(cast(GstPoll*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null, active);
+    _retval = cast(bool)gst_poll_fd_ctl_read(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd, active);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Poll
   bool fdCtlWrite(gst.poll_fd.PollFD fd, bool active)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_ctl_write(cast(GstPoll*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null, active);
+    _retval = cast(bool)gst_poll_fd_ctl_write(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd, active);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class Poll
   bool fdHasClosed(gst.poll_fd.PollFD fd)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_has_closed(cast(const(GstPoll)*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    _retval = cast(bool)gst_poll_fd_has_closed(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Poll
   bool fdHasError(gst.poll_fd.PollFD fd)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_has_error(cast(const(GstPoll)*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    _retval = cast(bool)gst_poll_fd_has_error(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class Poll
   bool fdHasPri(gst.poll_fd.PollFD fd)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_fd_has_pri(cast(const(GstPoll)*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    _retval = cast(bool)gst_poll_fd_has_pri(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Poll
   */
   void fdIgnored(gst.poll_fd.PollFD fd)
   {
-    gst_poll_fd_ignored(cast(GstPoll*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    gst_poll_fd_ignored(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd);
   }
 
   /**
@@ -248,7 +248,7 @@ class Poll
   bool removeFd(gst.poll_fd.PollFD fd)
   {
     bool _retval;
-    _retval = cast(bool)gst_poll_remove_fd(cast(GstPoll*)this._cPtr, fd ? cast(GstPollFD*)fd._cPtr : null);
+    _retval = cast(bool)gst_poll_remove_fd(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd);
     return _retval;
   }
 

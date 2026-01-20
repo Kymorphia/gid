@@ -74,7 +74,7 @@ class WebInspector : gobject.object.ObjectWrap
   /**
       Get `canAttach` property.
       Returns: Whether the @inspector can be attached to the same window that contains
-      the inspected view.
+        the inspected view.
   */
   @property bool canAttach()
   {
@@ -204,14 +204,14 @@ class WebInspector : gobject.object.ObjectWrap
       Connect to `Attach` signal.
   
       Emitted when the inspector is requested to be attached to the window
-      where the inspected web view is.
-      If this signal is not handled the inspector view will be automatically
-      attached to the inspected view, so you only need to handle this signal
-      if you want to attach the inspector view yourself (for example, to add
-      the inspector view to a browser tab).
-      
-      To prevent the inspector view from being attached you can connect to this
-      signal and simply return true.
+        where the inspected web view is.
+        If this signal is not handled the inspector view will be automatically
+        attached to the inspected view, so you only need to handle this signal
+        if you want to attach the inspector view yourself (for example, to add
+        the inspector view to a browser tab).
+        
+        To prevent the inspector view from being attached you can connect to this
+        signal and simply return true.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -221,7 +221,7 @@ class WebInspector : gobject.object.ObjectWrap
           `webInspector` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -252,16 +252,16 @@ class WebInspector : gobject.object.ObjectWrap
       Connect to `BringToFront` signal.
   
       Emitted when the inspector should be shown.
-      
-      If the inspector is not attached the inspector window should be shown
-      on top of any other windows.
-      If the inspector is attached the inspector view should be made visible.
-      For example, if the inspector view is attached using a tab in a browser
-      window, the browser window should be raised and the tab containing the
-      inspector view should be the active one.
-      In both cases, if this signal is not handled, the default implementation
-      calls [gtk.window.Window.present] on the current toplevel #GtkWindow of the
-      inspector view.
+        
+        If the inspector is not attached the inspector window should be shown
+        on top of any other windows.
+        If the inspector is attached the inspector view should be made visible.
+        For example, if the inspector view is attached using a tab in a browser
+        window, the browser window should be raised and the tab containing the
+        inspector view should be the active one.
+        In both cases, if this signal is not handled, the default implementation
+        calls [gtk.window.Window.present] on the current toplevel #GtkWindow of the
+        inspector view.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -271,7 +271,7 @@ class WebInspector : gobject.object.ObjectWrap
           `webInspector` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -302,8 +302,8 @@ class WebInspector : gobject.object.ObjectWrap
       Connect to `Closed` signal.
   
       Emitted when the inspector page is closed. If you are using your own
-      inspector window, you should connect to this signal and destroy your
-      window.
+        inspector window, you should connect to this signal and destroy your
+        window.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -341,14 +341,14 @@ class WebInspector : gobject.object.ObjectWrap
       Connect to `Detach` signal.
   
       Emitted when the inspector is requested to be detached from the window
-      it is currently attached to. The inspector is detached when the inspector page
-      is about to be closed, and this signal is emitted right before
-      #WebKitWebInspector::closed, or when the user clicks on the detach button
-      in the inspector view to show the inspector in a separate window. In this case
-      the signal #WebKitWebInspector::open-window is emitted after this one.
-      
-      To prevent the inspector view from being detached you can connect to this
-      signal and simply return true.
+        it is currently attached to. The inspector is detached when the inspector page
+        is about to be closed, and this signal is emitted right before
+        #WebKitWebInspector::closed, or when the user clicks on the detach button
+        in the inspector view to show the inspector in a separate window. In this case
+        the signal #WebKitWebInspector::open-window is emitted after this one.
+        
+        To prevent the inspector view from being detached you can connect to this
+        signal and simply return true.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -358,7 +358,7 @@ class WebInspector : gobject.object.ObjectWrap
           `webInspector` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -389,14 +389,14 @@ class WebInspector : gobject.object.ObjectWrap
       Connect to `OpenWindow` signal.
   
       Emitted when the inspector is requested to open in a separate window.
-      If this signal is not handled, a #GtkWindow with the inspector will be
-      created and shown, so you only need to handle this signal if you want
-      to use your own window.
-      This signal is emitted after #WebKitWebInspector::detach to show
-      the inspector in a separate window after being detached.
-      
-      To prevent the inspector from being shown you can connect to this
-      signal and simply return true
+        If this signal is not handled, a #GtkWindow with the inspector will be
+        created and shown, so you only need to handle this signal if you want
+        to use your own window.
+        This signal is emitted after #WebKitWebInspector::detach to show
+        the inspector in a separate window after being detached.
+        
+        To prevent the inspector from being shown you can connect to this
+        signal and simply return true
   
       Params:
         callback = signal callback delegate or function to connect
@@ -406,7 +406,7 @@ class WebInspector : gobject.object.ObjectWrap
           `webInspector` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

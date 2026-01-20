@@ -164,7 +164,7 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `active` property.
       Returns: The index of the currently selected menu item, or -1 if no
-      menu item is selected.
+        menu item is selected.
   */
   @property int active()
   {
@@ -175,7 +175,7 @@ class Menu : gtk.menu_shell.MenuShell
       Set `active` property.
       Params:
         propval = The index of the currently selected menu item, or -1 if no
-        menu item is selected.
+          menu item is selected.
   */
   @property void active(int propval)
   {
@@ -185,29 +185,6 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `anchorHints` property.
       Returns: Positioning hints for aligning the menu relative to a rectangle.
-      
-      These hints determine how the menu should be positioned in the case that
-      the menu would fall off-screen if placed in its ideal position.
-      
-      ![](popup-flip.png)
-      
-      For example, [gdk.types.AnchorHints.FlipY] will replace [gdk.types.Gravity.NorthWest] with
-      [gdk.types.Gravity.SouthWest] and vice versa if the menu extends beyond the
-      bottom edge of the monitor.
-      
-      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-      gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
-      #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
-  */
-  @property gdk.types.AnchorHints anchorHints()
-  {
-    return gobject.object.ObjectWrap.getProperty!(gdk.types.AnchorHints)("anchor-hints");
-  }
-
-  /**
-      Set `anchorHints` property.
-      Params:
-        propval = Positioning hints for aligning the menu relative to a rectangle.
         
         These hints determine how the menu should be positioned in the case that
         the menu would fall off-screen if placed in its ideal position.
@@ -222,6 +199,29 @@ class Menu : gtk.menu_shell.MenuShell
         gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
         #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
+  @property gdk.types.AnchorHints anchorHints()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.AnchorHints)("anchor-hints");
+  }
+
+  /**
+      Set `anchorHints` property.
+      Params:
+        propval = Positioning hints for aligning the menu relative to a rectangle.
+          
+          These hints determine how the menu should be positioned in the case that
+          the menu would fall off-screen if placed in its ideal position.
+          
+          ![](popup-flip.png)
+          
+          For example, [gdk.types.AnchorHints.FlipY] will replace [gdk.types.Gravity.NorthWest] with
+          [gdk.types.Gravity.SouthWest] and vice versa if the menu extends beyond the
+          bottom edge of the monitor.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
+          #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+  */
   @property void anchorHints(gdk.types.AnchorHints propval)
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.AnchorHints)("anchor-hints", propval);
@@ -230,8 +230,8 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `attachWidget` property.
       Returns: The widget the menu is attached to. Setting this property attaches
-      the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
-      use [gtk.menu.Menu.attachToWidget] directly.
+        the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
+        use [gtk.menu.Menu.attachToWidget] directly.
   */
   @property gtk.widget.Widget attachWidget()
   {
@@ -242,8 +242,8 @@ class Menu : gtk.menu_shell.MenuShell
       Set `attachWidget` property.
       Params:
         propval = The widget the menu is attached to. Setting this property attaches
-        the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
-        use [gtk.menu.Menu.attachToWidget] directly.
+          the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
+          use [gtk.menu.Menu.attachToWidget] directly.
   */
   @property void attachWidget(gtk.widget.Widget propval)
   {
@@ -253,10 +253,10 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `menuTypeHint` property.
       Returns: The #GdkWindowTypeHint to use for the menu's #GdkWindow.
-      
-      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-      gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
-      #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+        #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
   */
   @property gdk.types.WindowTypeHint menuTypeHint()
   {
@@ -267,10 +267,10 @@ class Menu : gtk.menu_shell.MenuShell
       Set `menuTypeHint` property.
       Params:
         propval = The #GdkWindowTypeHint to use for the menu's #GdkWindow.
-        
-        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
-        #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+          #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
   */
   @property void menuTypeHint(gdk.types.WindowTypeHint propval)
   {
@@ -299,11 +299,11 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `rectAnchorDx` property.
       Returns: Horizontal offset to apply to the menu, i.e. the rectangle or widget
-      anchor.
-      
-      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-      gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
-      #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+        anchor.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+        #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
   @property int rectAnchorDx()
   {
@@ -314,11 +314,11 @@ class Menu : gtk.menu_shell.MenuShell
       Set `rectAnchorDx` property.
       Params:
         propval = Horizontal offset to apply to the menu, i.e. the rectangle or widget
-        anchor.
-        
-        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
-        #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+          anchor.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+          #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
   @property void rectAnchorDx(int propval)
   {
@@ -328,10 +328,10 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `rectAnchorDy` property.
       Returns: Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.
-      
-      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-      gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
-      #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+        #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
   @property int rectAnchorDy()
   {
@@ -342,10 +342,10 @@ class Menu : gtk.menu_shell.MenuShell
       Set `rectAnchorDy` property.
       Params:
         propval = Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.
-        
-        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
-        #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+          #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
   @property void rectAnchorDy(int propval)
   {
@@ -355,12 +355,12 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `reserveToggleSize` property.
       Returns: A boolean that indicates whether the menu reserves space for
-      toggles and icons, regardless of their actual presence.
-      
-      This property should only be changed from its default value
-      for special-purposes such as tabular menus. Regular menus that
-      are connected to a menu bar or context menus should reserve
-      toggle space for consistency.
+        toggles and icons, regardless of their actual presence.
+        
+        This property should only be changed from its default value
+        for special-purposes such as tabular menus. Regular menus that
+        are connected to a menu bar or context menus should reserve
+        toggle space for consistency.
   */
   @property bool reserveToggleSize()
   {
@@ -371,12 +371,12 @@ class Menu : gtk.menu_shell.MenuShell
       Set `reserveToggleSize` property.
       Params:
         propval = A boolean that indicates whether the menu reserves space for
-        toggles and icons, regardless of their actual presence.
-        
-        This property should only be changed from its default value
-        for special-purposes such as tabular menus. Regular menus that
-        are connected to a menu bar or context menus should reserve
-        toggle space for consistency.
+          toggles and icons, regardless of their actual presence.
+          
+          This property should only be changed from its default value
+          for special-purposes such as tabular menus. Regular menus that
+          are connected to a menu bar or context menus should reserve
+          toggle space for consistency.
   */
   @property void reserveToggleSize(bool propval)
   {
@@ -405,7 +405,7 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Get `tearoffTitle` property.
       Returns: A title that may be displayed by the window manager when this
-      menu is torn-off.
+        menu is torn-off.
   */
   @property string tearoffTitle()
   {
@@ -416,7 +416,7 @@ class Menu : gtk.menu_shell.MenuShell
       Set `tearoffTitle` property.
       Params:
         propval = A title that may be displayed by the window manager when this
-        menu is torn-off.
+          menu is torn-off.
   */
   @property void tearoffTitle(string propval)
   {
@@ -679,7 +679,6 @@ class Menu : gtk.menu_shell.MenuShell
 
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     gtk_menu_popup(cast(GtkMenu*)this._cPtr, parentMenuShell ? cast(GtkWidget*)parentMenuShell._cPtr(No.Dup) : null, parentMenuItem ? cast(GtkWidget*)parentMenuItem._cPtr(No.Dup) : null, _funcCB, _func, button, activateTime);
   }
@@ -704,7 +703,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void popupAtPointer(gdk.event.Event triggerEvent = null)
   {
-    gtk_menu_popup_at_pointer(cast(GtkMenu*)this._cPtr, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr : null);
+    gtk_menu_popup_at_pointer(cast(GtkMenu*)this._cPtr, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -737,7 +736,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void popupAtRect(gdk.window.Window rectWindow, gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
   {
-    gtk_menu_popup_at_rect(cast(GtkMenu*)this._cPtr, rectWindow ? cast(GdkWindow*)rectWindow._cPtr(No.Dup) : null, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null, rectAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr : null);
+    gtk_menu_popup_at_rect(cast(GtkMenu*)this._cPtr, rectWindow ? cast(GdkWindow*)rectWindow._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&rect, rectAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -771,7 +770,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void popupAtWidget(gtk.widget.Widget widget, gdk.types.Gravity widgetAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
   {
-    gtk_menu_popup_at_widget(cast(GtkMenu*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, widgetAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr : null);
+    gtk_menu_popup_at_widget(cast(GtkMenu*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, widgetAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -826,7 +825,6 @@ class Menu : gtk.menu_shell.MenuShell
 
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_menu_popup_for_device(cast(GtkMenu*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, parentMenuShell ? cast(GtkWidget*)parentMenuShell._cPtr(No.Dup) : null, parentMenuItem ? cast(GtkWidget*)parentMenuItem._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB, button, activateTime);
@@ -1041,27 +1039,27 @@ class Menu : gtk.menu_shell.MenuShell
       Connect to `PoppedUp` signal.
   
       Emitted when the position of menu is finalized after being popped up
-      using gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), or
-      gtk_menu_popup_at_pointer ().
-      
-      menu might be flipped over the anchor rectangle in order to keep it
-      on-screen, in which case flipped_x and flipped_y will be set to true
-      accordingly.
-      
-      flipped_rect is the ideal position of menu after any possible flipping,
-      but before any possible sliding. final_rect is flipped_rect, but possibly
-      translated in the case that flipping is still ineffective in keeping menu
-      on-screen.
-      
-      ![](popup-slide.png)
-      
-      The blue menu is menu's ideal position, the green menu is flipped_rect,
-      and the red menu is final_rect.
-      
-      See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
-      gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
-      #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
-      #GtkMenu:menu-type-hint.
+        using gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), or
+        gtk_menu_popup_at_pointer ().
+        
+        menu might be flipped over the anchor rectangle in order to keep it
+        on-screen, in which case flipped_x and flipped_y will be set to true
+        accordingly.
+        
+        flipped_rect is the ideal position of menu after any possible flipping,
+        but before any possible sliding. final_rect is flipped_rect, but possibly
+        translated in the case that flipping is still ineffective in keeping menu
+        on-screen.
+        
+        ![](popup-slide.png)
+        
+        The blue menu is menu's ideal position, the green menu is flipped_rect,
+        and the red menu is final_rect.
+        
+        See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+        gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+        #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
+        #GtkMenu:menu-type-hint.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1069,10 +1067,10 @@ class Menu : gtk.menu_shell.MenuShell
           $(D void callback(void* flippedRect, void* finalRect, bool flippedX, bool flippedY, gtk.menu.Menu menu))
   
           `flippedRect` the position of menu after any possible
-                         flipping or null if the backend can't obtain it (optional)
+                           flipping or null if the backend can't obtain it (optional)
   
           `finalRect` the final position of menu or null if the
-                       backend can't obtain it (optional)
+                         backend can't obtain it (optional)
   
           `flippedX` true if the anchors were flipped horizontally (optional)
   

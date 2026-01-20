@@ -150,8 +150,8 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   /**
       Get `sync` property.
       Returns: An optional `GLSync` object.
-      
-      If this is set, GTK will wait on it before using the texture.
+        
+        If this is set, GTK will wait on it before using the texture.
   */
   @property void* sync()
   {
@@ -162,8 +162,8 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Set `sync` property.
       Params:
         propval = An optional `GLSync` object.
-        
-        If this is set, GTK will wait on it before using the texture.
+          
+          If this is set, GTK will wait on it before using the texture.
   */
   @property void sync(void* propval)
   {
@@ -269,7 +269,6 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     GdkTexture* _cretval;
     _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)this._cPtr, _destroyCB, data);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);

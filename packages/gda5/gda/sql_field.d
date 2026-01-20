@@ -4,7 +4,6 @@ module gda.sql_field;
 import gda.c.functions;
 import gda.c.types;
 import gda.meta_table_column;
-import gda.sql_any_part;
 import gda.types;
 import gid.gid;
 import gobject.value;
@@ -15,7 +14,7 @@ import gobject.value;
 */
 class SqlField
 {
-  GdaSqlField cInstance;
+  GdaSqlField _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +22,7 @@ class SqlField
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_field.SqlField");
 
-    cInstance = *cast(GdaSqlField*)ptr;
+    _cInstance = *cast(GdaSqlField*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,13 +31,7 @@ class SqlField
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
-  }
-
-  /** */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlField*)this._cPtr).any, No.Take);
+    return cast(void*)&_cInstance;
   }
 
   /** */

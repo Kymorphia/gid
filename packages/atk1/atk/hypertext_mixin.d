@@ -73,8 +73,8 @@ template HypertextT()
       Connect to `LinkSelected` signal.
   
       The "link-selected" signal is emitted by an AtkHyperText
-      object when one of the hyperlinks associated with the object
-      is selected.
+        object when one of the hyperlinks associated with the object
+        is selected.
   
       Params:
         callback = signal callback delegate or function to connect

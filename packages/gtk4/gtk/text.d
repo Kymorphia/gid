@@ -138,11 +138,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Get `attributes` property.
       Returns: A list of Pango attributes to apply to the text of the [gtk.text.Text].
-      
-      This is mainly useful to change the size or weight of the text.
-      
-      The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
-      [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+        
+        This is mainly useful to change the size or weight of the text.
+        
+        The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+        [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
   @property pango.attr_list.AttrList attributes()
   {
@@ -153,11 +153,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Set `attributes` property.
       Params:
         propval = A list of Pango attributes to apply to the text of the [gtk.text.Text].
-        
-        This is mainly useful to change the size or weight of the text.
-        
-        The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
-        [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+          
+          This is mainly useful to change the size or weight of the text.
+          
+          The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+          [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
@@ -205,7 +205,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Get `extraMenu` property.
       Returns: A menu model whose contents will be appended to
-      the context menu.
+        the context menu.
   */
   @property gio.menu_model.MenuModel extraMenu()
   {
@@ -216,7 +216,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Set `extraMenu` property.
       Params:
         propval = A menu model whose contents will be appended to
-        the context menu.
+          the context menu.
   */
   @property void extraMenu(gio.menu_model.MenuModel propval)
   {
@@ -226,12 +226,12 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Get `imModule` property.
       Returns: Which IM (input method) module should be used for this self.
-      
-      See [gtk.immulticontext.IMMulticontext].
-      
-      Setting this to a non-null value overrides the system-wide
-      IM module setting. See the `property@Gtk.Settings:gtk-im-module`
-      property.
+        
+        See [gtk.immulticontext.IMMulticontext].
+        
+        Setting this to a non-null value overrides the system-wide
+        IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+        property.
   */
   @property string imModule()
   {
@@ -242,12 +242,12 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Set `imModule` property.
       Params:
         propval = Which IM (input method) module should be used for this self.
-        
-        See [gtk.immulticontext.IMMulticontext].
-        
-        Setting this to a non-null value overrides the system-wide
-        IM module setting. See the `property@Gtk.Settings:gtk-im-module`
-        property.
+          
+          See [gtk.immulticontext.IMMulticontext].
+          
+          Setting this to a non-null value overrides the system-wide
+          IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+          property.
   */
   @property void imModule(string propval)
   {
@@ -257,7 +257,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Get `inputHints` property.
       Returns: Additional hints that allow input methods to fine-tune
-      their behaviour.
+        their behaviour.
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -268,7 +268,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Set `inputHints` property.
       Params:
         propval = Additional hints that allow input methods to fine-tune
-        their behaviour.
+          their behaviour.
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -278,13 +278,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Get `inputPurpose` property.
       Returns: The purpose of this text field.
-      
-      This property can be used by on-screen keyboards and other input
-      methods to adjust their behaviour.
-      
-      Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-      [gtk.types.InputPurpose.Pin] is independent from setting
-      [gtk.text.Text.visibility].
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+        
+        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+        [gtk.types.InputPurpose.Pin] is independent from setting
+        [gtk.text.Text.visibility].
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -295,13 +295,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Set `inputPurpose` property.
       Params:
         propval = The purpose of this text field.
-        
-        This property can be used by on-screen keyboards and other input
-        methods to adjust their behaviour.
-        
-        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-        [gtk.types.InputPurpose.Pin] is independent from setting
-        [gtk.text.Text.visibility].
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+          
+          Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+          [gtk.types.InputPurpose.Pin] is independent from setting
+          [gtk.text.Text.visibility].
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -349,8 +349,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Get `maxLength` property.
       Returns: Maximum number of characters that are allowed.
-      
-      Zero indicates no limit.
+        
+        Zero indicates no limit.
   */
   @property int maxLength()
   {
@@ -361,8 +361,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Set `maxLength` property.
       Params:
         propval = Maximum number of characters that are allowed.
-        
-        Zero indicates no limit.
+          
+          Zero indicates no limit.
   */
   @property void maxLength(int propval)
   {
@@ -391,7 +391,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Get `placeholderText` property.
       Returns: The text that will be displayed in the [gtk.text.Text] when it is empty
-      and unfocused.
+        and unfocused.
   */
   @property string placeholderText()
   {
@@ -402,7 +402,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Set `placeholderText` property.
       Params:
         propval = The text that will be displayed in the [gtk.text.Text] when it is empty
-        and unfocused.
+          and unfocused.
   */
   @property void placeholderText(string propval)
   {
@@ -1011,9 +1011,9 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `Activate` signal.
   
       Emitted when the user hits the <kbd>Enter</kbd> key.
-      
-      The default bindings for this signal are all forms
-      of the <kbd>Enter</kbd> key.
+        
+        The default bindings for this signal are all forms
+        of the <kbd>Enter</kbd> key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1051,11 +1051,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `Backspace` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1093,12 +1093,12 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `CopyClipboard` signal.
   
       Emitted to copy the selection to the clipboard.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>c</kbd> and
-      <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>c</kbd> and
+        <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1136,12 +1136,12 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `CutClipboard` signal.
   
       Emitted to cut the selection to the clipboard.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>x</kbd> and
-      <kbd>Shift</kbd>+<kbd>Delete</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>x</kbd> and
+        <kbd>Shift</kbd>+<kbd>Delete</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1179,16 +1179,16 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `DeleteFromCursor` signal.
   
       Emitted when the user initiates a text deletion.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
-      if there is one, otherwise it deletes the requested number
-      of characters.
-      
-      The default bindings for this signal are <kbd>Delete</kbd>
-      for deleting a character and <kbd>Ctrl</kbd>+<kbd>Delete</kbd>
-      for deleting a word.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
+        if there is one, otherwise it deletes the requested number
+        of characters.
+        
+        The default bindings for this signal are <kbd>Delete</kbd>
+        for deleting a character and <kbd>Ctrl</kbd>+<kbd>Delete</kbd>
+        for deleting a word.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1240,11 +1240,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `InsertAtCursor` signal.
   
       Emitted when the user initiates the insertion of a
-      fixed string at the cursor.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This signal has no default bindings.
+        fixed string at the cursor.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This signal has no default bindings.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1289,12 +1289,12 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `InsertEmoji` signal.
   
       Emitted to present the Emoji chooser for the widget.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>.</kbd> and
-      <kbd>Ctrl</kbd>+<kbd>;</kbd>
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>.</kbd> and
+        <kbd>Ctrl</kbd>+<kbd>;</kbd>
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1332,27 +1332,27 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `MoveCursor` signal.
   
       Emitted when the user initiates a cursor movement.
-      
-      If the cursor is not visible in self, this signal causes
-      the viewport to be moved instead.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal come in two variants,
-      the variant with the <kbd>Shift</kbd> modifier extends the
-      selection, the variant without it does not.
-      There are too many key combinations to list them all here.
-      
-      $(LIST
-        * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
-          move by individual characters/lines
-        * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
-        * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
-      )
+        
+        If the cursor is not visible in self, this signal causes
+        the viewport to be moved instead.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal come in two variants,
+        the variant with the <kbd>Shift</kbd> modifier extends the
+        selection, the variant without it does not.
+        There are too many key combinations to list them all here.
+        
+        $(LIST
+          * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+            move by individual characters/lines
+          * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
+          * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
+        )
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1411,11 +1411,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `PasteClipboard` signal.
   
       Emitted to paste the contents of the clipboard.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are
-      <kbd>Ctrl</kbd>+<kbd>v</kbd> and <kbd>Shift</kbd>+<kbd>Insert</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>v</kbd> and <kbd>Shift</kbd>+<kbd>Insert</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1453,10 +1453,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `PreeditChanged` signal.
   
       Emitted when the preedit text changes.
-      
-      If an input method is used, the typed text will not immediately
-      be committed to the buffer. So if you are interested in the text,
-      connect to this signal.
+        
+        If an input method is used, the typed text will not immediately
+        be committed to the buffer. So if you are interested in the text,
+        connect to this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1501,10 +1501,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Connect to `ToggleOverwrite` signal.
   
       Emitted to toggle the overwrite mode of the [gtk.text.Text].
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal is <kbd>Insert</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal is <kbd>Insert</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

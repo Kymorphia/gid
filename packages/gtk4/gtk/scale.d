@@ -422,12 +422,11 @@ class Scale : gtk.range.Range
       auto _dlg = cast(gtk.types.ScaleFormatValueFunc*)userData;
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.scale.Scale)(cast(void*)scale, No.Take), value);
-      char* _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_scale_set_format_value_func(cast(GtkScale*)this._cPtr, _funcCB, _func, _funcDestroyCB);

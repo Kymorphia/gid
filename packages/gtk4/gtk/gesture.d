@@ -158,9 +158,7 @@ class Gesture : gtk.event_controller.EventController
   bool getBoundingBox(out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
-    GdkRectangle _rect;
-    _retval = cast(bool)gtk_gesture_get_bounding_box(cast(GtkGesture*)this._cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    _retval = cast(bool)gtk_gesture_get_bounding_box(cast(GtkGesture*)this._cPtr, cast(GdkRectangle*)&rect);
     return _retval;
   }
 
@@ -509,14 +507,14 @@ class Gesture : gtk.event_controller.EventController
       Connect to `Begin` signal.
   
       Emitted when the gesture is recognized.
-      
-      This means the number of touch sequences matches
-      `propertyGtk.Gesture:n-points`.
-      
-      Note: These conditions may also happen when an extra touch
-      (eg. a third touch on a 2-touches gesture) is lifted, in that
-      situation sequence won't pertain to the current set of active
-      touches, so don't rely on this being true.
+        
+        This means the number of touch sequences matches
+        `propertyGtk.Gesture:n-points`.
+        
+        Note: These conditions may also happen when an extra touch
+        (eg. a third touch on a 2-touches gesture) is lifted, in that
+        situation sequence won't pertain to the current set of active
+        touches, so don't rely on this being true.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -524,7 +522,7 @@ class Gesture : gtk.event_controller.EventController
           $(D void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture))
   
           `sequence` the [gdk.event_sequence.EventSequence] that made the gesture
-            to be recognized (optional)
+              to be recognized (optional)
   
           `gesture` the instance the signal is connected to (optional)
   
@@ -562,15 +560,15 @@ class Gesture : gtk.event_controller.EventController
       Connect to `Cancel` signal.
   
       Emitted whenever a sequence is cancelled.
-      
-      This usually happens on active touches when
-      [gtk.event_controller.EventController.reset] is called on gesture
-      (manually, due to grabs...), or the individual sequence
-      was claimed by parent widgets' controllers (see
-      [gtk.gesture.Gesture.setSequenceState]).
-      
-      gesture must forget everything about sequence as in
-      response to this signal.
+        
+        This usually happens on active touches when
+        [gtk.event_controller.EventController.reset] is called on gesture
+        (manually, due to grabs...), or the individual sequence
+        was claimed by parent widgets' controllers (see
+        [gtk.gesture.Gesture.setSequenceState]).
+        
+        gesture must forget everything about sequence as in
+        response to this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -615,14 +613,14 @@ class Gesture : gtk.event_controller.EventController
       Connect to `End` signal.
   
       Emitted when gesture either stopped recognizing the event
-      sequences as something to be handled, or the number of touch
-      sequences became higher or lower than `propertyGtk.Gesture:n-points`.
-      
-      Note: sequence might not pertain to the group of sequences that
-      were previously triggering recognition on gesture (ie. a just
-      pressed touch sequence that exceeds `propertyGtk.Gesture:n-points`).
-      This situation may be detected by checking through
-      [gtk.gesture.Gesture.handlesSequence].
+        sequences as something to be handled, or the number of touch
+        sequences became higher or lower than `propertyGtk.Gesture:n-points`.
+        
+        Note: sequence might not pertain to the group of sequences that
+        were previously triggering recognition on gesture (ie. a just
+        pressed touch sequence that exceeds `propertyGtk.Gesture:n-points`).
+        This situation may be detected by checking through
+        [gtk.gesture.Gesture.handlesSequence].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -630,7 +628,7 @@ class Gesture : gtk.event_controller.EventController
           $(D void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture))
   
           `sequence` the [gdk.event_sequence.EventSequence] that made gesture
-            recognition to finish (optional)
+              recognition to finish (optional)
   
           `gesture` the instance the signal is connected to (optional)
   
@@ -668,9 +666,9 @@ class Gesture : gtk.event_controller.EventController
       Connect to `SequenceStateChanged` signal.
   
       Emitted whenever a sequence state changes.
-      
-      See [gtk.gesture.Gesture.setSequenceState] to know
-      more about the expectable sequence lifetimes.
+        
+        See [gtk.gesture.Gesture.setSequenceState] to know
+        more about the expectable sequence lifetimes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -722,8 +720,8 @@ class Gesture : gtk.event_controller.EventController
       Connect to `Update` signal.
   
       Emitted whenever an event is handled while the gesture is recognized.
-      
-      sequence is guaranteed to pertain to the set of active touches.
+        
+        sequence is guaranteed to pertain to the set of active touches.
   
       Params:
         callback = signal callback delegate or function to connect

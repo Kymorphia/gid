@@ -114,13 +114,15 @@ size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
   extern(C) gboolean _callbackCallback(long deadline, void* userData)
   {
     ptrThawGC(userData);
+    bool _dretval;
     auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
-    gboolean _retval = (*_dlg)(deadline);
+    _dretval = (*_dlg)(deadline);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   size_t _retval;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   _retval = gtk_source_scheduler_add(_callbackCB, _callback);
@@ -146,13 +148,15 @@ size_t schedulerAddFull(gtksource.types.SchedulerCallback callback)
 {
   extern(C) gboolean _callbackCallback(long deadline, void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
-    gboolean _retval = (*_dlg)(deadline);
+    _dretval = (*_dlg)(deadline);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   size_t _retval;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;

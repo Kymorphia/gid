@@ -125,11 +125,11 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   /**
       Get `iconSize` property.
       Returns: The size of the icons in a tool palette. When this property is set,
-      it overrides the default setting.
-      
-      This should only be used for special-purpose tool palettes, normal
-      application tool palettes should respect the user preferences for the
-      size of icons.
+        it overrides the default setting.
+        
+        This should only be used for special-purpose tool palettes, normal
+        application tool palettes should respect the user preferences for the
+        size of icons.
   */
   @property gtk.types.IconSize iconSize()
   {
@@ -140,11 +140,11 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Set `iconSize` property.
       Params:
         propval = The size of the icons in a tool palette. When this property is set,
-        it overrides the default setting.
-        
-        This should only be used for special-purpose tool palettes, normal
-        application tool palettes should respect the user preferences for the
-        size of icons.
+          it overrides the default setting.
+          
+          This should only be used for special-purpose tool palettes, normal
+          application tool palettes should respect the user preferences for the
+          size of icons.
   */
   @property void iconSize(gtk.types.IconSize propval)
   {

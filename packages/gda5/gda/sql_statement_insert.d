@@ -35,7 +35,7 @@ import gid.gid;
 */
 class SqlStatementInsert
 {
-  GdaSqlStatementInsert cInstance;
+  GdaSqlStatementInsert _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -43,7 +43,7 @@ class SqlStatementInsert
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_statement_insert.SqlStatementInsert");
 
-    cInstance = *cast(GdaSqlStatementInsert*)ptr;
+    _cInstance = *cast(GdaSqlStatementInsert*)ptr;
 
     if (take)
       gFree(ptr);
@@ -52,7 +52,7 @@ class SqlStatementInsert
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

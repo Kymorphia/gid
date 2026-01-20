@@ -39,7 +39,7 @@ class SearchSettings : gobject.object.ObjectWrap
   /**
       Get `atWordBoundaries` property.
       Returns: If true, a search match must start and end a word. The match can
-      span multiple words.
+        span multiple words.
   */
   @property bool atWordBoundaries()
   {
@@ -50,7 +50,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Set `atWordBoundaries` property.
       Params:
         propval = If true, a search match must start and end a word. The match can
-        span multiple words.
+          span multiple words.
   */
   @property void atWordBoundaries(bool propval)
   {
@@ -79,7 +79,7 @@ class SearchSettings : gobject.object.ObjectWrap
   /**
       Get `regexEnabled` property.
       Returns: Search by regular expressions with
-      #GtkSourceSearchSettings:search-text as the pattern.
+        #GtkSourceSearchSettings:search-text as the pattern.
   */
   @property bool regexEnabled()
   {
@@ -90,7 +90,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Set `regexEnabled` property.
       Params:
         propval = Search by regular expressions with
-        #GtkSourceSearchSettings:search-text as the pattern.
+          #GtkSourceSearchSettings:search-text as the pattern.
   */
   @property void regexEnabled(bool propval)
   {
@@ -100,8 +100,8 @@ class SearchSettings : gobject.object.ObjectWrap
   /**
       Get `searchText` property.
       Returns: A search string, or null if the search is disabled. If the regular
-      expression search is enabled, #GtkSourceSearchSettings:search-text is
-      the pattern.
+        expression search is enabled, #GtkSourceSearchSettings:search-text is
+        the pattern.
   */
   @property string searchText()
   {
@@ -112,8 +112,8 @@ class SearchSettings : gobject.object.ObjectWrap
       Set `searchText` property.
       Params:
         propval = A search string, or null if the search is disabled. If the regular
-        expression search is enabled, #GtkSourceSearchSettings:search-text is
-        the pattern.
+          expression search is enabled, #GtkSourceSearchSettings:search-text is
+          the pattern.
   */
   @property void searchText(string propval)
   {
@@ -123,8 +123,8 @@ class SearchSettings : gobject.object.ObjectWrap
   /**
       Get `wrapAround` property.
       Returns: For a forward search, continue at the beginning of the buffer if no
-      search occurrence is found. For a backward search, continue at the
-      end of the buffer.
+        search occurrence is found. For a backward search, continue at the
+        end of the buffer.
   */
   @property bool wrapAround()
   {
@@ -135,8 +135,8 @@ class SearchSettings : gobject.object.ObjectWrap
       Set `wrapAround` property.
       Params:
         propval = For a forward search, continue at the beginning of the buffer if no
-        search occurrence is found. For a backward search, continue at the
-        end of the buffer.
+          search occurrence is found. For a backward search, continue at the
+          end of the buffer.
   */
   @property void wrapAround(bool propval)
   {

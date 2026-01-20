@@ -71,9 +71,9 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   /**
       Get `accelMode` property.
       Returns: Determines if the edited accelerators are GTK accelerators. If
-      they are, consumed modifiers are suppressed, only accelerators
-      accepted by GTK are allowed, and the accelerators are rendered
-      in the same way as they are in menus.
+        they are, consumed modifiers are suppressed, only accelerators
+        accepted by GTK are allowed, and the accelerators are rendered
+        in the same way as they are in menus.
   */
   @property gtk.types.CellRendererAccelMode accelMode()
   {
@@ -84,9 +84,9 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Set `accelMode` property.
       Params:
         propval = Determines if the edited accelerators are GTK accelerators. If
-        they are, consumed modifiers are suppressed, only accelerators
-        accepted by GTK are allowed, and the accelerators are rendered
-        in the same way as they are in menus.
+          they are, consumed modifiers are suppressed, only accelerators
+          accepted by GTK are allowed, and the accelerators are rendered
+          in the same way as they are in menus.
   */
   @property void accelMode(gtk.types.CellRendererAccelMode propval)
   {
@@ -115,8 +115,8 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   /**
       Get `keycode` property.
       Returns: The hardware keycode of the accelerator. Note that the hardware keycode is
-      only relevant if the key does not have a keyval. Normally, the keyboard
-      configuration should assign keyvals to all keys.
+        only relevant if the key does not have a keyval. Normally, the keyboard
+        configuration should assign keyvals to all keys.
   */
   @property uint keycode()
   {
@@ -127,8 +127,8 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Set `keycode` property.
       Params:
         propval = The hardware keycode of the accelerator. Note that the hardware keycode is
-        only relevant if the key does not have a keyval. Normally, the keyboard
-        configuration should assign keyvals to all keys.
+          only relevant if the key does not have a keyval. Normally, the keyboard
+          configuration should assign keyvals to all keys.
   */
   @property void keycode(uint propval)
   {

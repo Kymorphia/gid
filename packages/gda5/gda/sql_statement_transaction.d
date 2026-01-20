@@ -14,7 +14,7 @@ import gid.gid;
 */
 class SqlStatementTransaction
 {
-  GdaSqlStatementTransaction cInstance;
+  GdaSqlStatementTransaction _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class SqlStatementTransaction
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_statement_transaction.SqlStatementTransaction");
 
-    cInstance = *cast(GdaSqlStatementTransaction*)ptr;
+    _cInstance = *cast(GdaSqlStatementTransaction*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class SqlStatementTransaction
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

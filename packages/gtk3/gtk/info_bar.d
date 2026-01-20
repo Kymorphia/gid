@@ -120,8 +120,8 @@ class InfoBar : gtk.box.Box
   /**
       Get `messageType` property.
       Returns: The type of the message.
-      
-      The type may be used to determine the appearance of the info bar.
+        
+        The type may be used to determine the appearance of the info bar.
   */
   @property gtk.types.MessageType messageType()
   {
@@ -132,8 +132,8 @@ class InfoBar : gtk.box.Box
       Set `messageType` property.
       Params:
         propval = The type of the message.
-        
-        The type may be used to determine the appearance of the info bar.
+          
+          The type may be used to determine the appearance of the info bar.
   */
   @property void messageType(gtk.types.MessageType propval)
   {
@@ -359,11 +359,11 @@ class InfoBar : gtk.box.Box
       Connect to `Close` signal.
   
       The ::close signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user uses a keybinding to dismiss
-      the info bar.
-      
-      The default binding for this signal is the Escape key.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user uses a keybinding to dismiss
+        the info bar.
+        
+        The default binding for this signal is the Escape key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -401,8 +401,8 @@ class InfoBar : gtk.box.Box
       Connect to `Response` signal.
   
       Emitted when an action widget is clicked or the application programmer
-      calls [gtk.dialog.Dialog.response]. The response_id depends on which action
-      widget was clicked.
+        calls [gtk.dialog.Dialog.response]. The response_id depends on which action
+        widget was clicked.
   
       Params:
         callback = signal callback delegate or function to connect

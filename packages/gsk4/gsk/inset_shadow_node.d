@@ -40,7 +40,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   this(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_inset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
+    _cretval = gsk_inset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, cast(const(GdkRGBA)*)&color, dx, dy, spread, blurRadius);
     this(_cretval, Yes.Take);
   }
 
@@ -63,7 +63,9 @@ class InsetShadowNode : gsk.render_node.RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_inset_shadow_node_get_color(cast(const(GskRenderNode)*)this._cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
+    gdk.rgba.RGBA _retval;
+    if (_cretval)
+      _retval = *cast(gdk.rgba.RGBA*)_cretval;
     return _retval;
   }
 

@@ -215,8 +215,8 @@ class PrintOperation : gobject.object.ObjectWrap
       Connect to `Failed` signal.
   
       Emitted when an error occurs while printing. The given error, of the domain
-      `WEBKIT_PRINT_ERROR`, contains further details of the failure.
-      The #WebKitPrintOperation::finished signal is emitted after this one.
+        `WEBKIT_PRINT_ERROR`, contains further details of the failure.
+        The #WebKitPrintOperation::finished signal is emitted after this one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -261,7 +261,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Connect to `Finished` signal.
   
       Emitted when the print operation has finished doing everything
-      required for printing.
+        required for printing.
   
       Params:
         callback = signal callback delegate or function to connect

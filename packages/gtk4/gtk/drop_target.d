@@ -148,33 +148,6 @@ class DropTarget : gtk.event_controller.EventController
   /**
       Get `preload` property.
       Returns: Whether the drop data should be preloaded when the pointer is only
-      hovering over the widget but has not been released.
-      
-      Setting this property allows finer grained reaction to an ongoing
-      drop at the cost of loading more data.
-      
-      The default value for this property is false to avoid downloading
-      huge amounts of data by accident.
-      
-      For example, if somebody drags a full document of gigabytes of text
-      from a text editor across a widget with a preloading drop target,
-      this data will be downloaded, even if the data is ultimately dropped
-      elsewhere.
-      
-      For a lot of data formats, the amount of data is very small (like
-      `GDK_TYPE_RGBA`), so enabling this property does not hurt at all.
-      And for local-only Drag-and-Drop operations, no data transfer is done,
-      so enabling it there is free.
-  */
-  @property bool preload()
-  {
-    return getPreload();
-  }
-
-  /**
-      Set `preload` property.
-      Params:
-        propval = Whether the drop data should be preloaded when the pointer is only
         hovering over the widget but has not been released.
         
         Setting this property allows finer grained reaction to an ongoing
@@ -193,6 +166,33 @@ class DropTarget : gtk.event_controller.EventController
         And for local-only Drag-and-Drop operations, no data transfer is done,
         so enabling it there is free.
   */
+  @property bool preload()
+  {
+    return getPreload();
+  }
+
+  /**
+      Set `preload` property.
+      Params:
+        propval = Whether the drop data should be preloaded when the pointer is only
+          hovering over the widget but has not been released.
+          
+          Setting this property allows finer grained reaction to an ongoing
+          drop at the cost of loading more data.
+          
+          The default value for this property is false to avoid downloading
+          huge amounts of data by accident.
+          
+          For example, if somebody drags a full document of gigabytes of text
+          from a text editor across a widget with a preloading drop target,
+          this data will be downloaded, even if the data is ultimately dropped
+          elsewhere.
+          
+          For a lot of data formats, the amount of data is very small (like
+          `GDK_TYPE_RGBA`), so enabling this property does not hurt at all.
+          And for local-only Drag-and-Drop operations, no data transfer is done,
+          so enabling it there is free.
+  */
   @property void preload(bool propval)
   {
     return setPreload(propval);
@@ -201,14 +201,14 @@ class DropTarget : gtk.event_controller.EventController
   /**
       Get `value` property.
       Returns: The value for this drop operation.
-      
-      This is null if the data has not been loaded yet or no drop
-      operation is going on.
-      
-      Data may be available before the [gtk.drop_target.DropTarget.drop]
-      signal gets emitted - for example when the [gtk.drop_target.DropTarget.preload]
-      property is set. You can use the ::notify signal to be notified
-      of available data.
+        
+        This is null if the data has not been loaded yet or no drop
+        operation is going on.
+        
+        Data may be available before the [gtk.drop_target.DropTarget.drop]
+        signal gets emitted - for example when the [gtk.drop_target.DropTarget.preload]
+        property is set. You can use the ::notify signal to be notified
+        of available data.
   */
   @property gobject.value.Value value()
   {
@@ -392,21 +392,21 @@ class DropTarget : gtk.event_controller.EventController
       Connect to `Accept` signal.
   
       Emitted on the drop site when a drop operation is about to begin.
-      
-      If the drop is not accepted, false will be returned and the drop target
-      will ignore the drop. If true is returned, the drop is accepted for now
-      but may be rejected later via a call to [gtk.drop_target.DropTarget.reject]
-      or ultimately by returning false from a [gtk.drop_target.DropTarget.drop]
-      handler.
-      
-      The default handler for this signal decides whether to accept the drop
-      based on the formats provided by the drop.
-      
-      If the decision whether the drop will be accepted or rejected depends
-      on the data, this function should return true, the
-      [gtk.drop_target.DropTarget.preload] property should be set and the value
-      should be inspected via the ::notify:value signal, calling
-      [gtk.drop_target.DropTarget.reject] if required.
+        
+        If the drop is not accepted, false will be returned and the drop target
+        will ignore the drop. If true is returned, the drop is accepted for now
+        but may be rejected later via a call to [gtk.drop_target.DropTarget.reject]
+        or ultimately by returning false from a [gtk.drop_target.DropTarget.drop]
+        handler.
+        
+        The default handler for this signal decides whether to accept the drop
+        based on the formats provided by the drop.
+        
+        If the decision whether the drop will be accepted or rejected depends
+        on the data, this function should return true, the
+        [gtk.drop_target.DropTarget.preload] property should be set and the value
+        should be inspected via the ::notify:value signal, calling
+        [gtk.drop_target.DropTarget.reject] if required.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -453,14 +453,14 @@ class DropTarget : gtk.event_controller.EventController
       Connect to `Drop` signal.
   
       Emitted on the drop site when the user drops the data onto the widget.
-      
-      The signal handler must determine whether the pointer position is in
-      a drop zone or not. If it is not in a drop zone, it returns false
-      and no further processing is necessary.
-      
-      Otherwise, the handler returns true. In this case, this handler will
-      accept the drop. The handler is responsible for using the given value
-      and performing the drop operation.
+        
+        The signal handler must determine whether the pointer position is in
+        a drop zone or not. If it is not in a drop zone, it returns false
+        and no further processing is necessary.
+        
+        Otherwise, the handler returns true. In this case, this handler will
+        accept the drop. The handler is responsible for using the given value
+        and performing the drop operation.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -521,8 +521,8 @@ class DropTarget : gtk.event_controller.EventController
       Connect to `Enter` signal.
   
       Emitted on the drop site when the pointer enters the widget.
-      
-      It can be used to set up custom highlighting.
+        
+        It can be used to set up custom highlighting.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -536,7 +536,7 @@ class DropTarget : gtk.event_controller.EventController
           `dropTarget` the instance the signal is connected to (optional)
   
           `Returns` Preferred action for this drag operation or 0 if
-            dropping is not supported at the current `x`,`y` location.
+              dropping is not supported at the current `x`,`y` location.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -577,9 +577,9 @@ class DropTarget : gtk.event_controller.EventController
       Connect to `Leave` signal.
   
       Emitted on the drop site when the pointer leaves the widget.
-      
-      Its main purpose it to undo things done in
-      [gtk.drop_target.DropTarget.enter].
+        
+        Its main purpose it to undo things done in
+        [gtk.drop_target.DropTarget.enter].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -630,7 +630,7 @@ class DropTarget : gtk.event_controller.EventController
           `dropTarget` the instance the signal is connected to (optional)
   
           `Returns` Preferred action for this drag operation or 0 if
-            dropping is not supported at the current `x`,`y` location.
+              dropping is not supported at the current `x`,`y` location.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

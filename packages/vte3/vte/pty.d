@@ -227,7 +227,6 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       (*_dlg)();
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
@@ -236,7 +235,6 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
     foreach (s; argv)
@@ -323,7 +321,6 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       (*_dlg)();
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
@@ -332,7 +329,6 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     const(char)*[] _tmpargv;
     foreach (s; argv)

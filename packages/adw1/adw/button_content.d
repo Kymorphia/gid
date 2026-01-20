@@ -93,10 +93,10 @@ class ButtonContent : gtk.widget.Widget
   /**
       Get `canShrink` property.
       Returns: Whether the button can be smaller than the natural size of its contents.
-      
-      If set to `TRUE`, the label will ellipsize.
-      
-      See `property@Gtk.Button:can-shrink`.
+        
+        If set to `TRUE`, the label will ellipsize.
+        
+        See `property@Gtk.Button:can-shrink`.
   */
   @property bool canShrink()
   {
@@ -107,10 +107,10 @@ class ButtonContent : gtk.widget.Widget
       Set `canShrink` property.
       Params:
         propval = Whether the button can be smaller than the natural size of its contents.
-        
-        If set to `TRUE`, the label will ellipsize.
-        
-        See `property@Gtk.Button:can-shrink`.
+          
+          If set to `TRUE`, the label will ellipsize.
+          
+          See `property@Gtk.Button:can-shrink`.
   */
   @property void canShrink(bool propval)
   {
@@ -120,8 +120,8 @@ class ButtonContent : gtk.widget.Widget
   /**
       Get `iconName` property.
       Returns: The name of the displayed icon.
-      
-      If empty, the icon is not shown.
+        
+        If empty, the icon is not shown.
   */
   @property string iconName()
   {
@@ -132,8 +132,8 @@ class ButtonContent : gtk.widget.Widget
       Set `iconName` property.
       Params:
         propval = The name of the displayed icon.
-        
-        If empty, the icon is not shown.
+          
+          If empty, the icon is not shown.
   */
   @property void iconName(string propval)
   {
@@ -162,10 +162,10 @@ class ButtonContent : gtk.widget.Widget
   /**
       Get `useUnderline` property.
       Returns: Whether an underline in the text indicates a mnemonic.
-      
-      The mnemonic can be used to activate the parent button.
-      
-      See `property@ButtonContent:label`.
+        
+        The mnemonic can be used to activate the parent button.
+        
+        See `property@ButtonContent:label`.
   */
   @property bool useUnderline()
   {
@@ -176,10 +176,10 @@ class ButtonContent : gtk.widget.Widget
       Set `useUnderline` property.
       Params:
         propval = Whether an underline in the text indicates a mnemonic.
-        
-        The mnemonic can be used to activate the parent button.
-        
-        See `property@ButtonContent:label`.
+          
+          The mnemonic can be used to activate the parent button.
+          
+          See `property@ButtonContent:label`.
   */
   @property void useUnderline(bool propval)
   {

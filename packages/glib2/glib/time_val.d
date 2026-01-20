@@ -1,4 +1,4 @@
-/// Module for [TimeVal] class
+/// Module for [TimeVal] struct
 module glib.time_val;
 
 import gid.gid;
@@ -20,65 +20,17 @@ import glib.types;
 
     Deprecated: Use #GDateTime or #guint64 instead.
 */
-class TimeVal
+struct TimeVal
 {
-  GTimeVal cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.time_val.TimeVal");
-
-    cInstance = *cast(GTimeVal*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  /**
+      seconds
+  */
+  glong tvSec;
 
   /**
-      Get `tvSec` field.
-      Returns: seconds
+      microseconds
   */
-  @property glong tvSec()
-  {
-    return (cast(GTimeVal*)this._cPtr).tvSec;
-  }
-
-  /**
-      Set `tvSec` field.
-      Params:
-        propval = seconds
-  */
-  @property void tvSec(glong propval)
-  {
-    (cast(GTimeVal*)this._cPtr).tvSec = propval;
-  }
-
-  /**
-      Get `tvUsec` field.
-      Returns: microseconds
-  */
-  @property glong tvUsec()
-  {
-    return (cast(GTimeVal*)this._cPtr).tvUsec;
-  }
-
-  /**
-      Set `tvUsec` field.
-      Params:
-        propval = microseconds
-  */
-  @property void tvUsec(glong propval)
-  {
-    (cast(GTimeVal*)this._cPtr).tvUsec = propval;
-  }
+  glong tvUsec;
 
   /**
       Adds the given number of microseconds to time_. microseconds can
@@ -92,7 +44,7 @@ class TimeVal
   */
   void add(glong microseconds)
   {
-    g_time_val_add(cast(GTimeVal*)this._cPtr, microseconds);
+    g_time_val_add(cast(GTimeVal*)&this, microseconds);
   }
 
   /**
@@ -139,7 +91,7 @@ class TimeVal
   string toIso8601()
   {
     char* _cretval;
-    _cretval = g_time_val_to_iso8601(cast(GTimeVal*)this._cPtr);
+    _cretval = g_time_val_to_iso8601(cast(GTimeVal*)&this);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -175,9 +127,7 @@ class TimeVal
   {
     bool _retval;
     const(char)* _isoDate = isoDate.toCString(No.Alloc);
-    GTimeVal _time;
-    _retval = cast(bool)g_time_val_from_iso8601(_isoDate, &_time);
-    time = new glib.time_val.TimeVal(cast(void*)&_time, No.Take);
+    _retval = cast(bool)g_time_val_from_iso8601(_isoDate, cast(GTimeVal*)&time);
     return _retval;
   }
 }

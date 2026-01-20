@@ -86,9 +86,9 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   /**
       Get `pageSize` property.
       Returns: The page size of the adjustment.
-      Note that the page-size is irrelevant and should be set to zero
-      if the adjustment is used for a simple scalar value, e.g. in a
-      #GtkSpinButton.
+        Note that the page-size is irrelevant and should be set to zero
+        if the adjustment is used for a simple scalar value, e.g. in a
+        #GtkSpinButton.
   */
   @property double pageSize()
   {
@@ -99,9 +99,9 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Set `pageSize` property.
       Params:
         propval = The page size of the adjustment.
-        Note that the page-size is irrelevant and should be set to zero
-        if the adjustment is used for a simple scalar value, e.g. in a
-        #GtkSpinButton.
+          Note that the page-size is irrelevant and should be set to zero
+          if the adjustment is used for a simple scalar value, e.g. in a
+          #GtkSpinButton.
   */
   @property void pageSize(double propval)
   {
@@ -130,9 +130,9 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   /**
       Get `upper` property.
       Returns: The maximum value of the adjustment.
-      Note that values will be restricted by
-      `upper - page-size` if the page-size
-      property is nonzero.
+        Note that values will be restricted by
+        `upper - page-size` if the page-size
+        property is nonzero.
   */
   @property double upper()
   {
@@ -143,9 +143,9 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Set `upper` property.
       Params:
         propval = The maximum value of the adjustment.
-        Note that values will be restricted by
-        `upper - page-size` if the page-size
-        property is nonzero.
+          Note that values will be restricted by
+          `upper - page-size` if the page-size
+          property is nonzero.
   */
   @property void upper(double propval)
   {
@@ -439,7 +439,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Connect to `Changed` signal.
   
       Emitted when one or more of the #GtkAdjustment properties have been
-      changed, other than the #GtkAdjustment:value property.
+        changed, other than the #GtkAdjustment:value property.
   
       Params:
         callback = signal callback delegate or function to connect

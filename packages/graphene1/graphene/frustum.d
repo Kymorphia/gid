@@ -38,7 +38,7 @@ class Frustum : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -87,7 +87,7 @@ class Frustum : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
-    _retval = cast(bool)graphene_frustum_contains_point(cast(const(graphene_frustum_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_frustum_contains_point(cast(const(graphene_frustum_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
     return _retval;
   }
 

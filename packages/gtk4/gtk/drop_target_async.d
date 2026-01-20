@@ -195,20 +195,20 @@ class DropTargetAsync : gtk.event_controller.EventController
       Connect to `Accept` signal.
   
       Emitted on the drop site when a drop operation is about to begin.
-      
-      If the drop is not accepted, false will be returned and the drop target
-      will ignore the drop. If true is returned, the drop is accepted for now
-      but may be rejected later via a call to [gtk.drop_target_async.DropTargetAsync.rejectDrop]
-      or ultimately by returning false from a [gtk.drop_target_async.DropTargetAsync.drop]
-      handler.
-      
-      The default handler for this signal decides whether to accept the drop
-      based on the formats provided by the drop.
-      
-      If the decision whether the drop will be accepted or rejected needs
-      further processing, such as inspecting the data, this function should
-      return true and proceed as is drop was accepted and if it decides to
-      reject the drop later, it should call [gtk.drop_target_async.DropTargetAsync.rejectDrop].
+        
+        If the drop is not accepted, false will be returned and the drop target
+        will ignore the drop. If true is returned, the drop is accepted for now
+        but may be rejected later via a call to [gtk.drop_target_async.DropTargetAsync.rejectDrop]
+        or ultimately by returning false from a [gtk.drop_target_async.DropTargetAsync.drop]
+        handler.
+        
+        The default handler for this signal decides whether to accept the drop
+        based on the formats provided by the drop.
+        
+        If the decision whether the drop will be accepted or rejected needs
+        further processing, such as inspecting the data, this function should
+        return true and proceed as is drop was accepted and if it decides to
+        reject the drop later, it should call [gtk.drop_target_async.DropTargetAsync.rejectDrop].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -255,8 +255,8 @@ class DropTargetAsync : gtk.event_controller.EventController
       Connect to `DragEnter` signal.
   
       Emitted on the drop site when the pointer enters the widget.
-      
-      It can be used to set up custom highlighting.
+        
+        It can be used to set up custom highlighting.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -317,9 +317,9 @@ class DropTargetAsync : gtk.event_controller.EventController
       Connect to `DragLeave` signal.
   
       Emitted on the drop site when the pointer leaves the widget.
-      
-      Its main purpose it to undo things done in
-      [gtk.drop_target_async.DropTargetAsync]::drag-enter.
+        
+        Its main purpose it to undo things done in
+        [gtk.drop_target_async.DropTargetAsync]::drag-enter.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -424,19 +424,19 @@ class DropTargetAsync : gtk.event_controller.EventController
       Connect to `Drop` signal.
   
       Emitted on the drop site when the user drops the data onto the widget.
-      
-      The signal handler must determine whether the pointer position is in a
-      drop zone or not. If it is not in a drop zone, it returns false and no
-      further processing is necessary.
-      
-      Otherwise, the handler returns true. In this case, this handler will
-      accept the drop. The handler must ensure that [gdk.drop.Drop.finish]
-      is called to let the source know that the drop is done. The call to
-      [gdk.drop.Drop.finish] must only be done when all data has been received.
-      
-      To receive the data, use one of the read functions provided by
-      [gdk.drop.Drop] such as [gdk.drop.Drop.readAsync] or
-      [gdk.drop.Drop.readValueAsync].
+        
+        The signal handler must determine whether the pointer position is in a
+        drop zone or not. If it is not in a drop zone, it returns false and no
+        further processing is necessary.
+        
+        Otherwise, the handler returns true. In this case, this handler will
+        accept the drop. The handler must ensure that [gdk.drop.Drop.finish]
+        is called to let the source know that the drop is done. The call to
+        [gdk.drop.Drop.finish] must only be done when all data has been received.
+        
+        To receive the data, use one of the read functions provided by
+        [gdk.drop.Drop] such as [gdk.drop.Drop.readAsync] or
+        [gdk.drop.Drop.readValueAsync].
   
       Params:
         callback = signal callback delegate or function to connect

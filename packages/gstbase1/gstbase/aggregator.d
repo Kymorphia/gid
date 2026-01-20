@@ -147,10 +147,10 @@ class Aggregator : gst.element.Element
   /**
       Get `minUpstreamLatency` property.
       Returns: Force minimum upstream latency (in nanoseconds). When sources with a
-      higher latency are expected to be plugged in dynamically after the
-      aggregator has started playing, this allows overriding the minimum
-      latency reported by the initial source(s). This is only taken into
-      account when larger than the actually reported minimum latency.
+        higher latency are expected to be plugged in dynamically after the
+        aggregator has started playing, this allows overriding the minimum
+        latency reported by the initial source(s). This is only taken into
+        account when larger than the actually reported minimum latency.
   */
   @property ulong minUpstreamLatency()
   {
@@ -161,10 +161,10 @@ class Aggregator : gst.element.Element
       Set `minUpstreamLatency` property.
       Params:
         propval = Force minimum upstream latency (in nanoseconds). When sources with a
-        higher latency are expected to be plugged in dynamically after the
-        aggregator has started playing, this allows overriding the minimum
-        latency reported by the initial source(s). This is only taken into
-        account when larger than the actually reported minimum latency.
+          higher latency are expected to be plugged in dynamically after the
+          aggregator has started playing, this allows overriding the minimum
+          latency reported by the initial source(s). This is only taken into
+          account when larger than the actually reported minimum latency.
   */
   @property void minUpstreamLatency(ulong propval)
   {
@@ -244,10 +244,8 @@ class Aggregator : gst.element.Element
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_aggregator_get_allocator(cast(GstAggregator*)this._cPtr, &_allocator, &_params);
+    gst_aggregator_get_allocator(cast(GstAggregator*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /** */
@@ -347,9 +345,9 @@ class Aggregator : gst.element.Element
         duration = The duration of the next output buffer
         info = a #GstStructure containing additional information
   */
-  void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info = null)
+  void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info)
   {
-    gst_aggregator_selected_samples(cast(GstAggregator*)this._cPtr, pts, dts, duration, info ? cast(GstStructure*)info._cPtr(No.Dup) : null);
+    gst_aggregator_selected_samples(cast(GstAggregator*)this._cPtr, pts, dts, duration, cast(GstStructure*)&info);
   }
 
   /**
@@ -434,15 +432,15 @@ class Aggregator : gst.element.Element
   */
   void updateSegment(gst.segment.Segment segment)
   {
-    gst_aggregator_update_segment(cast(GstAggregator*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
+    gst_aggregator_update_segment(cast(GstAggregator*)this._cPtr, cast(const(GstSegment)*)&segment);
   }
 
   /**
       Connect to `SamplesSelected` signal.
   
       Signals that the #GstAggregator subclass has selected the next set
-      of input samples it will aggregate. Handlers may call
-      [gstbase.aggregator.Aggregator.peekNextSample] at that point.
+        of input samples it will aggregate. Handlers may call
+        [gstbase.aggregator.Aggregator.peekNextSample] at that point.
   
       Params:
         callback = signal callback delegate or function to connect

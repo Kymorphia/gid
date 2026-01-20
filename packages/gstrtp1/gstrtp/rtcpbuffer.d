@@ -24,7 +24,7 @@ import gstrtp.types;
 */
 class RTCPBuffer
 {
-  GstRTCPBuffer cInstance;
+  GstRTCPBuffer _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -32,7 +32,7 @@ class RTCPBuffer
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtcpbuffer.RTCPBuffer");
 
-    cInstance = *cast(GstRTCPBuffer*)ptr;
+    _cInstance = *cast(GstRTCPBuffer*)ptr;
 
     if (take)
       gFree(ptr);
@@ -41,7 +41,7 @@ class RTCPBuffer
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

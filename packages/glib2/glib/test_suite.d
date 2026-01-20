@@ -11,7 +11,7 @@ import glib.types;
 */
 class TestSuite
 {
-  GTestSuite* cInstancePtr;
+  GTestSuite* _cInstancePtr;
   bool owned;
 
   /** */
@@ -20,7 +20,7 @@ class TestSuite
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.test_suite.TestSuite");
 
-    cInstancePtr = cast(GTestSuite*)ptr;
+    _cInstancePtr = cast(GTestSuite*)ptr;
 
     owned = take;
   }
@@ -28,13 +28,13 @@ class TestSuite
   ~this()
   {
     if (owned)
-      g_test_suite_free(cInstancePtr);
+      g_test_suite_free(_cInstancePtr);
   }
 
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

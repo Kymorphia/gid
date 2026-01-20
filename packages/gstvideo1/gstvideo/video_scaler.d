@@ -12,7 +12,7 @@ import gstvideo.types;
 */
 class VideoScaler
 {
-  GstVideoScaler* cInstancePtr;
+  GstVideoScaler* _cInstancePtr;
   bool owned;
 
   /** */
@@ -21,7 +21,7 @@ class VideoScaler
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_scaler.VideoScaler");
 
-    cInstancePtr = cast(GstVideoScaler*)ptr;
+    _cInstancePtr = cast(GstVideoScaler*)ptr;
 
     owned = take;
   }
@@ -29,7 +29,7 @@ class VideoScaler
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

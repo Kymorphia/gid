@@ -87,10 +87,10 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /**
       Get `inlineCompletion` property.
       Returns: Determines whether the common prefix of the possible completions
-      should be inserted automatically in the entry.
-      
-      Note that this requires text-column to be set, even if you are
-      using a custom match function.
+        should be inserted automatically in the entry.
+        
+        Note that this requires text-column to be set, even if you are
+        using a custom match function.
   */
   @property bool inlineCompletion()
   {
@@ -101,10 +101,10 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Set `inlineCompletion` property.
       Params:
         propval = Determines whether the common prefix of the possible completions
-        should be inserted automatically in the entry.
-        
-        Note that this requires text-column to be set, even if you are
-        using a custom match function.
+          should be inserted automatically in the entry.
+          
+          Note that this requires text-column to be set, even if you are
+          using a custom match function.
   */
   @property void inlineCompletion(bool propval)
   {
@@ -114,7 +114,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /**
       Get `inlineSelection` property.
       Returns: Determines whether the possible completions on the popup
-      will appear in the entry as you navigate through them.
+        will appear in the entry as you navigate through them.
   */
   @property bool inlineSelection()
   {
@@ -125,7 +125,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Set `inlineSelection` property.
       Params:
         propval = Determines whether the possible completions on the popup
-        will appear in the entry as you navigate through them.
+          will appear in the entry as you navigate through them.
   */
   @property void inlineSelection(bool propval)
   {
@@ -159,7 +159,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /**
       Get `popupCompletion` property.
       Returns: Determines whether the possible completions should be
-      shown in a popup window.
+        shown in a popup window.
   */
   @property bool popupCompletion()
   {
@@ -170,7 +170,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Set `popupCompletion` property.
       Params:
         propval = Determines whether the possible completions should be
-        shown in a popup window.
+          shown in a popup window.
   */
   @property void popupCompletion(bool propval)
   {
@@ -180,7 +180,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /**
       Get `popupSetWidth` property.
       Returns: Determines whether the completions popup window will be
-      resized to the width of the entry.
+        resized to the width of the entry.
   */
   @property bool popupSetWidth()
   {
@@ -191,7 +191,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Set `popupSetWidth` property.
       Params:
         propval = Determines whether the completions popup window will be
-        resized to the width of the entry.
+          resized to the width of the entry.
   */
   @property void popupSetWidth(bool propval)
   {
@@ -201,10 +201,10 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /**
       Get `popupSingleMatch` property.
       Returns: Determines whether the completions popup window will shown
-      for a single possible completion.
-      
-      You probably want to set this to false if you are using
-      `property@Gtk.EntryCompletion:inline-completion`.
+        for a single possible completion.
+        
+        You probably want to set this to false if you are using
+        `property@Gtk.EntryCompletion:inline-completion`.
   */
   @property bool popupSingleMatch()
   {
@@ -215,10 +215,10 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Set `popupSingleMatch` property.
       Params:
         propval = Determines whether the completions popup window will shown
-        for a single possible completion.
-        
-        You probably want to set this to false if you are using
-        `property@Gtk.EntryCompletion:inline-completion`.
+          for a single possible completion.
+          
+          You probably want to set this to false if you are using
+          `property@Gtk.EntryCompletion:inline-completion`.
   */
   @property void popupSingleMatch(bool propval)
   {
@@ -228,8 +228,8 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /**
       Get `textColumn` property.
       Returns: The column of the model containing the strings.
-      
-      Note that the strings must be UTF-8.
+        
+        Note that the strings must be UTF-8.
   */
   @property int textColumn()
   {
@@ -240,8 +240,8 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Set `textColumn` property.
       Params:
         propval = The column of the model containing the strings.
-        
-        Note that the strings must be UTF-8.
+          
+          Note that the strings must be UTF-8.
   */
   @property void textColumn(int propval)
   {
@@ -516,14 +516,16 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   {
     extern(C) gboolean _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString(No.Free);
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, *cast(gtk.tree_iter.TreeIter*)iter);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_entry_completion_set_match_func(cast(GtkEntryCompletion*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -635,13 +637,13 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Connect to `CursorOnMatch` signal.
   
       Emitted when a match from the cursor is on a match of the list.
-      
-      The default behaviour is to replace the contents
-      of the entry with the contents of the text column in the row
-      pointed to by iter.
-      
-      Note that model is the model that was passed to
-      [gtk.entry_completion.EntryCompletion.setModel].
+        
+        The default behaviour is to replace the contents
+        of the entry with the contents of the text column in the row
+        pointed to by iter.
+        
+        Note that model is the model that was passed to
+        [gtk.entry_completion.EntryCompletion.setModel].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -695,14 +697,14 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Connect to `InsertPrefix` signal.
   
       Emitted when the inline autocompletion is triggered.
-      
-      The default behaviour is to make the entry display the
-      whole prefix and select the newly inserted part.
-      
-      Applications may connect to this signal in order to insert only a
-      smaller part of the prefix into the entry - e.g. the entry used in
-      the [gtk.file_chooser.FileChooser] inserts only the part of the prefix up to the
-      next '/'.
+        
+        The default behaviour is to make the entry display the
+        whole prefix and select the newly inserted part.
+        
+        Applications may connect to this signal in order to insert only a
+        smaller part of the prefix into the entry - e.g. the entry used in
+        the [gtk.file_chooser.FileChooser] inserts only the part of the prefix up to the
+        next '/'.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -749,13 +751,13 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Connect to `MatchSelected` signal.
   
       Emitted when a match from the list is selected.
-      
-      The default behaviour is to replace the contents of the
-      entry with the contents of the text column in the row
-      pointed to by iter.
-      
-      Note that model is the model that was passed to
-      [gtk.entry_completion.EntryCompletion.setModel].
+        
+        The default behaviour is to replace the contents of the
+        entry with the contents of the text column in the row
+        pointed to by iter.
+        
+        Note that model is the model that was passed to
+        [gtk.entry_completion.EntryCompletion.setModel].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -809,9 +811,9 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Connect to `NoMatches` signal.
   
       Emitted when the filter model has zero
-      number of rows in completion_complete method.
-      
-      In other words when [gtk.entry_completion.EntryCompletion] is out of suggestions.
+        number of rows in completion_complete method.
+        
+        In other words when [gtk.entry_completion.EntryCompletion] is out of suggestions.
   
       Params:
         callback = signal callback delegate or function to connect

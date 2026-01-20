@@ -21,7 +21,7 @@ import gst.types;
 */
 class ParentBufferMeta
 {
-  GstParentBufferMeta cInstance;
+  GstParentBufferMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -29,7 +29,7 @@ class ParentBufferMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.parent_buffer_meta.ParentBufferMeta");
 
-    cInstance = *cast(GstParentBufferMeta*)ptr;
+    _cInstance = *cast(GstParentBufferMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -38,7 +38,7 @@ class ParentBufferMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -78,7 +78,9 @@ class ParentBufferMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_parent_buffer_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

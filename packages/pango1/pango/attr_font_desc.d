@@ -14,7 +14,7 @@ import pango.types;
 */
 class AttrFontDesc
 {
-  PangoAttrFontDesc cInstance;
+  PangoAttrFontDesc _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class AttrFontDesc
     if (!ptr)
       throw new GidConstructException("Null instance pointer for pango.attr_font_desc.AttrFontDesc");
 
-    cInstance = *cast(PangoAttrFontDesc*)ptr;
+    _cInstance = *cast(PangoAttrFontDesc*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class AttrFontDesc
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

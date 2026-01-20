@@ -47,7 +47,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   /**
       Get `byteOrder` property.
       Returns: Determines the byte ordering that is used when writing
-      multi-byte entities (such as integers) to the stream.
+        multi-byte entities (such as integers) to the stream.
   */
   @property gio.types.DataStreamByteOrder byteOrder()
   {
@@ -58,7 +58,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
       Set `byteOrder` property.
       Params:
         propval = Determines the byte ordering that is used when writing
-        multi-byte entities (such as integers) to the stream.
+          multi-byte entities (such as integers) to the stream.
   */
   @property void byteOrder(gio.types.DataStreamByteOrder propval)
   {

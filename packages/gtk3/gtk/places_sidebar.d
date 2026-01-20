@@ -122,7 +122,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /**
       Get `populateAll` property.
       Returns: If :populate-all is true, the #GtkPlacesSidebar::populate-popup signal
-      is also emitted for popovers.
+        is also emitted for popovers.
   */
   @property bool populateAll()
   {
@@ -133,7 +133,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Set `populateAll` property.
       Params:
         propval = If :populate-all is true, the #GtkPlacesSidebar::populate-popup signal
-        is also emitted for popovers.
+          is also emitted for popovers.
   */
   @property void populateAll(bool propval)
   {
@@ -612,7 +612,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `DragActionAsk` signal.
   
       The places sidebar emits this signal when it needs to ask the application
-      to pop up a menu to ask the user for which drag action to perform.
+        to pop up a menu to ask the user for which drag action to perform.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -624,7 +624,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
           `placesSidebar` the instance the signal is connected to (optional)
   
           `Returns` the final drag action that the sidebar should pass to the drag side
-          of the drag-and-drop operation.
+            of the drag-and-drop operation.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -660,14 +660,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `DragActionRequested` signal.
   
       When the user starts a drag-and-drop operation and the sidebar needs
-      to ask the application for which drag action to perform, then the
-      sidebar will emit this signal.
-      
-      The application can evaluate the context for customary actions, or
-      it can check the type of the files indicated by source_file_list against the
-      possible actions for the destination dest_file.
-      
-      The drag action to use must be the return value of the signal handler.
+        to ask the application for which drag action to perform, then the
+        sidebar will emit this signal.
+        
+        The application can evaluate the context for customary actions, or
+        it can check the type of the files indicated by source_file_list against the
+        possible actions for the destination dest_file.
+        
+        The drag action to use must be the return value of the signal handler.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -683,8 +683,8 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
           `placesSidebar` the instance the signal is connected to (optional)
   
           `Returns` The drag action to use, for example, #GDK_ACTION_COPY
-          or #GDK_ACTION_MOVE, or 0 if no action is allowed here (i.e. drops
-          are not allowed in the specified dest_file).
+            or #GDK_ACTION_MOVE, or 0 if no action is allowed here (i.e. drops
+            are not allowed in the specified dest_file).
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -729,10 +729,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `DragPerformDrop` signal.
   
       The places sidebar emits this signal when the user completes a
-      drag-and-drop operation and one of the sidebar's items is the
-      destination.  This item is in the dest_file, and the
-      source_file_list has the list of files that are dropped into it and
-      which should be copied/moved/etc. based on the specified action.
+        drag-and-drop operation and one of the sidebar's items is the
+        destination.  This item is in the dest_file, and the
+        source_file_list has the list of files that are dropped into it and
+        which should be copied/moved/etc. based on the specified action.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -790,9 +790,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `Mount` signal.
   
       The places sidebar emits this signal when it starts a new operation
-      because the user clicked on some location that needs mounting.
-      In this way the application using the #GtkPlacesSidebar can track the
-      progress of the operation and, for example, show a notification.
+        because the user clicked on some location that needs mounting.
+        In this way the application using the #GtkPlacesSidebar can track the
+        progress of the operation and, for example, show a notification.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -837,9 +837,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `OpenLocation` signal.
   
       The places sidebar emits this signal when the user selects a location
-      in it.  The calling application should display the contents of that
-      location; for example, a file manager should show a list of files in
-      the specified location.
+        in it.  The calling application should display the contents of that
+        location; for example, a file manager should show a list of files in
+        the specified location.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -891,30 +891,30 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `PopulatePopup` signal.
   
       The places sidebar emits this signal when the user invokes a contextual
-      popup on one of its items. In the signal handler, the application may
-      add extra items to the menu as appropriate. For example, a file manager
-      may want to add a "Properties" command to the menu.
-      
-      It is not necessary to store the selected_item for each menu item;
-      during their callbacks, the application can use [gtk.places_sidebar.PlacesSidebar.getLocation]
-      to get the file to which the item refers.
-      
-      The selected_item argument may be null in case the selection refers to
-      a volume. In this case, selected_volume will be non-null. In this case,
-      the calling application will have to [gobject.object.ObjectWrap.ref_] the selected_volume and
-      keep it around to use it in the callback.
-      
-      The container and all its contents are destroyed after the user
-      dismisses the popup. The popup is re-created (and thus, this signal is
-      emitted) every time the user activates the contextual menu.
-      
-      Before 3.18, the container always was a #GtkMenu, and you were expected
-      to add your items as #GtkMenuItems. Since 3.18, the popup may be implemented
-      as a #GtkPopover, in which case container will be something else, e.g. a
-      #GtkBox, to which you may add #GtkModelButtons or other widgets, such as
-      #GtkEntries, #GtkSpinButtons, etc. If your application can deal with this
-      situation, you can set #GtkPlacesSidebar::populate-all to true to request
-      that this signal is emitted for populating popovers as well.
+        popup on one of its items. In the signal handler, the application may
+        add extra items to the menu as appropriate. For example, a file manager
+        may want to add a "Properties" command to the menu.
+        
+        It is not necessary to store the selected_item for each menu item;
+        during their callbacks, the application can use [gtk.places_sidebar.PlacesSidebar.getLocation]
+        to get the file to which the item refers.
+        
+        The selected_item argument may be null in case the selection refers to
+        a volume. In this case, selected_volume will be non-null. In this case,
+        the calling application will have to [gobject.object.ObjectWrap.ref_] the selected_volume and
+        keep it around to use it in the callback.
+        
+        The container and all its contents are destroyed after the user
+        dismisses the popup. The popup is re-created (and thus, this signal is
+        emitted) every time the user activates the contextual menu.
+        
+        Before 3.18, the container always was a #GtkMenu, and you were expected
+        to add your items as #GtkMenuItems. Since 3.18, the popup may be implemented
+        as a #GtkPopover, in which case container will be something else, e.g. a
+        #GtkBox, to which you may add #GtkModelButtons or other widgets, such as
+        #GtkEntries, #GtkSpinButtons, etc. If your application can deal with this
+        situation, you can set #GtkPlacesSidebar::populate-all to true to request
+        that this signal is emitted for populating popovers as well.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -924,10 +924,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
           `container` a #GtkMenu or another #GtkContainer (optional)
   
           `selectedItem` #GFile with the item to which
-              the popup should refer, or null in the case of a selected_volume. (optional)
+                the popup should refer, or null in the case of a selected_volume. (optional)
   
           `selectedVolume` #GVolume if the selected
-              item is a volume, or null if it is a file. (optional)
+                item is a volume, or null if it is a file. (optional)
   
           `placesSidebar` the instance the signal is connected to (optional)
   
@@ -975,10 +975,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `ShowConnectToServer` signal.
   
       The places sidebar emits this signal when it needs the calling
-      application to present an way to connect directly to a network server.
-      For example, the application may bring up a dialog box asking for
-      a URL like "sftp://ftp.example.com".  It is up to the application to create
-      the corresponding mount by using, for example, [gio.file.File.mountEnclosingVolume].
+        application to present an way to connect directly to a network server.
+        For example, the application may bring up a dialog box asking for
+        a URL like "sftp://ftp.example.com".  It is up to the application to create
+        the corresponding mount by using, for example, [gio.file.File.mountEnclosingVolume].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -991,7 +991,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns: Signal ID
   
       Deprecated: use the #GtkPlacesSidebar::show-other-locations signal
-          to connect to network servers.
+            to connect to network servers.
   */
   ulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
@@ -1019,9 +1019,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `ShowEnterLocation` signal.
   
       The places sidebar emits this signal when it needs the calling
-      application to present an way to directly enter a location.
-      For example, the application may bring up a dialog box asking for
-      a URL like "http://http.example.com".
+        application to present an way to directly enter a location.
+        For example, the application may bring up a dialog box asking for
+        a URL like "http://http.example.com".
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1059,9 +1059,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `ShowErrorMessage` signal.
   
       The places sidebar emits this signal when it needs the calling
-      application to present an error message.  Most of these messages
-      refer to mounting or unmounting media, for example, when a drive
-      cannot be started for some reason.
+        application to present an error message.  Most of these messages
+        refer to mounting or unmounting media, for example, when a drive
+        cannot be started for some reason.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1113,10 +1113,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `ShowOtherLocations` signal.
   
       The places sidebar emits this signal when it needs the calling
-      application to present a way to show other locations e.g. drives
-      and network access points.
-      For example, the application may bring up a page showing persistent
-      volumes and discovered network addresses.
+        application to present a way to show other locations e.g. drives
+        and network access points.
+        For example, the application may bring up a page showing persistent
+        volumes and discovered network addresses.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1129,8 +1129,8 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns: Signal ID
   
       Deprecated: use the #GtkPlacesSidebar::show-other-locations-with-flags
-      which includes the open flags in order to allow the user to specify to open
-      in a new tab or window, in a similar way than #GtkPlacesSidebar::open-location
+        which includes the open flags in order to allow the user to specify to open
+        in a new tab or window, in a similar way than #GtkPlacesSidebar::open-location
   */
   ulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
@@ -1158,10 +1158,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `ShowOtherLocationsWithFlags` signal.
   
       The places sidebar emits this signal when it needs the calling
-      application to present a way to show other locations e.g. drives
-      and network access points.
-      For example, the application may bring up a page showing persistent
-      volumes and discovered network addresses.
+        application to present a way to show other locations e.g. drives
+        and network access points.
+        For example, the application may bring up a page showing persistent
+        volumes and discovered network addresses.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1206,9 +1206,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `ShowStarredLocation` signal.
   
       The places sidebar emits this signal when it needs the calling
-      application to present a way to show the starred files. In GNOME,
-      starred files are implemented by setting the nao:predefined-tag-favorite
-      tag in the tracker database.
+        application to present a way to show the starred files. In GNOME,
+        starred files are implemented by setting the nao:predefined-tag-favorite
+        tag in the tracker database.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1216,7 +1216,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
           $(D void callback(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar))
   
           `openFlags` a single value from #GtkPlacesOpenFlags specifying how the
-            starred file should be opened. (optional)
+              starred file should be opened. (optional)
   
           `placesSidebar` the instance the signal is connected to (optional)
   
@@ -1254,9 +1254,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Connect to `Unmount` signal.
   
       The places sidebar emits this signal when it starts a new operation
-      because the user for example ejected some drive or unmounted a mount.
-      In this way the application using the #GtkPlacesSidebar can track the
-      progress of the operation and, for example, show a notification.
+        because the user for example ejected some drive or unmounted a mount.
+        In this way the application using the #GtkPlacesSidebar can track the
+        progress of the operation and, for example, show a notification.
   
       Params:
         callback = signal callback delegate or function to connect

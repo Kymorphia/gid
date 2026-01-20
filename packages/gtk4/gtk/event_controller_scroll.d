@@ -149,11 +149,11 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `Decelerate` signal.
   
       Emitted after scroll is finished if the
-      [gtk.types.EventControllerScrollFlags.Kinetic] flag is set.
-      
-      vel_x and vel_y express the initial velocity that was
-      imprinted by the scroll events. vel_x and vel_y are expressed in
-      pixels/ms.
+        [gtk.types.EventControllerScrollFlags.Kinetic] flag is set.
+        
+        vel_x and vel_y express the initial velocity that was
+        imprinted by the scroll events. vel_x and vel_y are expressed in
+        pixels/ms.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -205,10 +205,10 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `Scroll` signal.
   
       Signals that the widget should scroll by the
-      amount specified by dx and dy.
-      
-      For the representation unit of the deltas, see
-      [gtk.event_controller_scroll.EventControllerScroll.getUnit].
+        amount specified by dx and dy.
+        
+        For the representation unit of the deltas, see
+        [gtk.event_controller_scroll.EventControllerScroll.getUnit].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -222,7 +222,7 @@ class EventControllerScroll : gtk.event_controller.EventController
           `eventControllerScroll` the instance the signal is connected to (optional)
   
           `Returns` true if the scroll event was handled,
-            false otherwise.
+              false otherwise.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -263,8 +263,8 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `ScrollBegin` signal.
   
       Signals that a new scrolling operation has begun.
-      
-      It will only be emitted on devices capable of it.
+        
+        It will only be emitted on devices capable of it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -302,8 +302,8 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `ScrollEnd` signal.
   
       Signals that a scrolling operation has finished.
-      
-      It will only be emitted on devices capable of it.
+        
+        It will only be emitted on devices capable of it.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -101,15 +101,17 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   {
     extern(C) gboolean _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(soup.types.AuthDomainBasicAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
       string _password = password.fromCString(No.Free);
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_auth_domain_basic_set_auth_callback(cast(SoupAuthDomain*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);

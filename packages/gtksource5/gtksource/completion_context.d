@@ -65,7 +65,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   /**
       Get `busy` property.
       Returns: The "busy" property is true while the completion context is
-      populating completion proposals.
+        populating completion proposals.
   */
   @property bool busy()
   {
@@ -75,9 +75,9 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   /**
       Get `empty` property.
       Returns: The "empty" property is true when there are no results.
-      
-      It will be notified when the first result is added or the last
-      result is removed.
+        
+        It will be notified when the first result is added or the last
+        result is removed.
   */
   @property bool empty()
   {
@@ -117,11 +117,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
   {
     bool _retval;
-    GtkTextIter _begin;
-    GtkTextIter _end;
-    _retval = cast(bool)gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)this._cPtr, &_begin, &_end);
-    begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    _retval = cast(bool)gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)this._cPtr, cast(GtkTextIter*)&begin, cast(GtkTextIter*)&end);
     return _retval;
   }
 
@@ -265,10 +261,10 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Connect to `ProviderModelChanged` signal.
   
       Emitted when a provider changes a model.
-      
-      This signal is primarily useful for #GtkSourceCompletionProvider's
-      that want to track other providers in context. For example, it can
-      be used to create a "top results" provider.
+        
+        This signal is primarily useful for #GtkSourceCompletionProvider's
+        that want to track other providers in context. For example, it can
+        be used to create a "top results" provider.
   
       Params:
         callback = signal callback delegate or function to connect

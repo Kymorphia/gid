@@ -16,7 +16,7 @@ import gstnet.types;
 */
 class NetAddressMeta
 {
-  GstNetAddressMeta cInstance;
+  GstNetAddressMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -24,7 +24,7 @@ class NetAddressMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstnet.net_address_meta.NetAddressMeta");
 
-    cInstance = *cast(GstNetAddressMeta*)ptr;
+    _cInstance = *cast(GstNetAddressMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -33,7 +33,7 @@ class NetAddressMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -70,7 +70,9 @@ class NetAddressMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_net_address_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

@@ -37,7 +37,7 @@ class Plane : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -85,7 +85,7 @@ class Plane : gobject.boxed.Boxed
   float distance(graphene.point3_d.Point3D point)
   {
     float _retval;
-    _retval = graphene_plane_distance(cast(const(graphene_plane_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = graphene_plane_distance(cast(const(graphene_plane_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class Plane : gobject.boxed.Boxed
   graphene.plane.Plane initFromPoint(graphene.vec3.Vec3 normal, graphene.point3_d.Point3D point)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)this._cPtr, normal ? cast(const(graphene_vec3_t)*)normal._cPtr(No.Dup) : null, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)this._cPtr, normal ? cast(const(graphene_vec3_t)*)normal._cPtr(No.Dup) : null, cast(const(graphene_point3d_t)*)&point);
     auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -198,7 +198,7 @@ class Plane : gobject.boxed.Boxed
   graphene.plane.Plane initFromPoints(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)this._cPtr, a ? cast(const(graphene_point3d_t)*)a._cPtr(No.Dup) : null, b ? cast(const(graphene_point3d_t)*)b._cPtr(No.Dup) : null, c ? cast(const(graphene_point3d_t)*)c._cPtr(No.Dup) : null);
+    _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)this._cPtr, cast(const(graphene_point3d_t)*)&a, cast(const(graphene_point3d_t)*)&b, cast(const(graphene_point3d_t)*)&c);
     auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

@@ -168,11 +168,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `attributes` property.
       Returns: A list of Pango attributes to apply to the text of the entry.
-      
-      This is mainly useful to change the size or weight of the text.
-      
-      The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
-      [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+        
+        This is mainly useful to change the size or weight of the text.
+        
+        The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+        [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
   @property pango.attr_list.AttrList attributes()
   {
@@ -183,11 +183,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `attributes` property.
       Params:
         propval = A list of Pango attributes to apply to the text of the entry.
-        
-        This is mainly useful to change the size or weight of the text.
-        
-        The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
-        [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+          
+          This is mainly useful to change the size or weight of the text.
+          
+          The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+          [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
@@ -239,7 +239,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `enableEmojiCompletion` property.
       Returns: Whether to suggest Emoji replacements for :-delimited names
-      like `:heart:`.
+        like `:heart:`.
   */
   @property bool enableEmojiCompletion()
   {
@@ -250,7 +250,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `enableEmojiCompletion` property.
       Params:
         propval = Whether to suggest Emoji replacements for :-delimited names
-        like `:heart:`.
+          like `:heart:`.
   */
   @property void enableEmojiCompletion(bool propval)
   {
@@ -298,12 +298,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `imModule` property.
       Returns: Which IM (input method) module should be used for this entry.
-      
-      See [gtk.imcontext.IMContext].
-      
-      Setting this to a non-null value overrides the system-wide IM
-      module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
-      property.
+        
+        See [gtk.imcontext.IMContext].
+        
+        Setting this to a non-null value overrides the system-wide IM
+        module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
+        property.
   */
   @property string imModule()
   {
@@ -314,12 +314,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `imModule` property.
       Params:
         propval = Which IM (input method) module should be used for this entry.
-        
-        See [gtk.imcontext.IMContext].
-        
-        Setting this to a non-null value overrides the system-wide IM
-        module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
-        property.
+          
+          See [gtk.imcontext.IMContext].
+          
+          Setting this to a non-null value overrides the system-wide IM
+          module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
+          property.
   */
   @property void imModule(string propval)
   {
@@ -329,8 +329,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `inputHints` property.
       Returns: Additional hints that allow input methods to fine-tune their behavior.
-      
-      Also see `property@Gtk.Entry:input-purpose`
+        
+        Also see `property@Gtk.Entry:input-purpose`
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -341,8 +341,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `inputHints` property.
       Params:
         propval = Additional hints that allow input methods to fine-tune their behavior.
-        
-        Also see `property@Gtk.Entry:input-purpose`
+          
+          Also see `property@Gtk.Entry:input-purpose`
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -352,13 +352,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `inputPurpose` property.
       Returns: The purpose of this text field.
-      
-      This property can be used by on-screen keyboards and other input
-      methods to adjust their behaviour.
-      
-      Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-      [gtk.types.InputPurpose.Pin] is independent from setting
-      [gtk.entry.Entry.visibility].
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+        
+        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+        [gtk.types.InputPurpose.Pin] is independent from setting
+        [gtk.entry.Entry.visibility].
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -369,13 +369,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `inputPurpose` property.
       Params:
         propval = The purpose of this text field.
-        
-        This property can be used by on-screen keyboards and other input
-        methods to adjust their behaviour.
-        
-        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-        [gtk.types.InputPurpose.Pin] is independent from setting
-        [gtk.entry.Entry.visibility].
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+          
+          Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+          [gtk.types.InputPurpose.Pin] is independent from setting
+          [gtk.entry.Entry.visibility].
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -461,7 +461,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `placeholderText` property.
       Returns: The text that will be displayed in the [gtk.entry.Entry] when it is empty
-      and unfocused.
+        and unfocused.
   */
   @property string placeholderText()
   {
@@ -472,7 +472,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `placeholderText` property.
       Params:
         propval = The text that will be displayed in the [gtk.entry.Entry] when it is empty
-        and unfocused.
+          and unfocused.
   */
   @property void placeholderText(string propval)
   {
@@ -482,13 +482,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconActivatable` property.
       Returns: Whether the primary icon is activatable.
-      
-      GTK emits the `signal@Gtk.Entry::icon-press` and
-      `signal@Gtk.Entry::icon-release` signals only on sensitive,
-      activatable icons.
-      
-      Sensitive, but non-activatable icons can be used for purely
-      informational purposes.
+        
+        GTK emits the `signal@Gtk.Entry::icon-press` and
+        `signal@Gtk.Entry::icon-release` signals only on sensitive,
+        activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
   */
   @property bool primaryIconActivatable()
   {
@@ -499,13 +499,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconActivatable` property.
       Params:
         propval = Whether the primary icon is activatable.
-        
-        GTK emits the `signal@Gtk.Entry::icon-press` and
-        `signal@Gtk.Entry::icon-release` signals only on sensitive,
-        activatable icons.
-        
-        Sensitive, but non-activatable icons can be used for purely
-        informational purposes.
+          
+          GTK emits the `signal@Gtk.Entry::icon-press` and
+          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
   */
   @property void primaryIconActivatable(bool propval)
   {
@@ -572,13 +572,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconSensitive` property.
       Returns: Whether the primary icon is sensitive.
-      
-      An insensitive icon appears grayed out. GTK does not emit the
-      `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
-      signals and does not allow DND from insensitive icons.
-      
-      An icon should be set insensitive if the action that would trigger
-      when clicked is currently not available.
+        
+        An insensitive icon appears grayed out. GTK does not emit the
+        `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
+        signals and does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
   */
   @property bool primaryIconSensitive()
   {
@@ -589,13 +589,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconSensitive` property.
       Params:
         propval = Whether the primary icon is sensitive.
-        
-        An insensitive icon appears grayed out. GTK does not emit the
-        `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
-        signals and does not allow DND from insensitive icons.
-        
-        An icon should be set insensitive if the action that would trigger
-        when clicked is currently not available.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
   */
   @property void primaryIconSensitive(bool propval)
   {
@@ -614,8 +614,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconTooltipMarkup` property.
       Returns: The contents of the tooltip on the primary icon, with markup.
-      
-      Also see [gtk.entry.Entry.setIconTooltipMarkup].
+        
+        Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property string primaryIconTooltipMarkup()
   {
@@ -626,8 +626,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconTooltipMarkup` property.
       Params:
         propval = The contents of the tooltip on the primary icon, with markup.
-        
-        Also see [gtk.entry.Entry.setIconTooltipMarkup].
+          
+          Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property void primaryIconTooltipMarkup(string propval)
   {
@@ -637,8 +637,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `primaryIconTooltipText` property.
       Returns: The contents of the tooltip on the primary icon.
-      
-      Also see [gtk.entry.Entry.setIconTooltipText].
+        
+        Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property string primaryIconTooltipText()
   {
@@ -649,8 +649,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `primaryIconTooltipText` property.
       Params:
         propval = The contents of the tooltip on the primary icon.
-        
-        Also see [gtk.entry.Entry.setIconTooltipText].
+          
+          Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property void primaryIconTooltipText(string propval)
   {
@@ -679,9 +679,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `progressPulseStep` property.
       Returns: The fraction of total entry width to move the progress
-      bouncing block for each pulse.
-      
-      See [gtk.entry.Entry.progressPulse].
+        bouncing block for each pulse.
+        
+        See [gtk.entry.Entry.progressPulse].
   */
   @property double progressPulseStep()
   {
@@ -692,9 +692,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `progressPulseStep` property.
       Params:
         propval = The fraction of total entry width to move the progress
-        bouncing block for each pulse.
-        
-        See [gtk.entry.Entry.progressPulse].
+          bouncing block for each pulse.
+          
+          See [gtk.entry.Entry.progressPulse].
   */
   @property void progressPulseStep(double propval)
   {
@@ -713,13 +713,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconActivatable` property.
       Returns: Whether the secondary icon is activatable.
-      
-      GTK emits the `signal@Gtk.Entry::icon-press` and
-      `signal@Gtk.Entry::icon-release` signals only on sensitive,
-      activatable icons.
-      
-      Sensitive, but non-activatable icons can be used for purely
-      informational purposes.
+        
+        GTK emits the `signal@Gtk.Entry::icon-press` and
+        `signal@Gtk.Entry::icon-release` signals only on sensitive,
+        activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
   */
   @property bool secondaryIconActivatable()
   {
@@ -730,13 +730,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconActivatable` property.
       Params:
         propval = Whether the secondary icon is activatable.
-        
-        GTK emits the `signal@Gtk.Entry::icon-press` and
-        `signal@Gtk.Entry::icon-release` signals only on sensitive,
-        activatable icons.
-        
-        Sensitive, but non-activatable icons can be used for purely
-        informational purposes.
+          
+          GTK emits the `signal@Gtk.Entry::icon-press` and
+          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
   */
   @property void secondaryIconActivatable(bool propval)
   {
@@ -803,13 +803,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconSensitive` property.
       Returns: Whether the secondary icon is sensitive.
-      
-      An insensitive icon appears grayed out. GTK does not emit the
-      `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
-      signals and does not allow DND from insensitive icons.
-      
-      An icon should be set insensitive if the action that would trigger
-      when clicked is currently not available.
+        
+        An insensitive icon appears grayed out. GTK does not emit the
+        `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
+        signals and does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
   */
   @property bool secondaryIconSensitive()
   {
@@ -820,13 +820,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconSensitive` property.
       Params:
         propval = Whether the secondary icon is sensitive.
-        
-        An insensitive icon appears grayed out. GTK does not emit the
-        `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
-        signals and does not allow DND from insensitive icons.
-        
-        An icon should be set insensitive if the action that would trigger
-        when clicked is currently not available.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
   */
   @property void secondaryIconSensitive(bool propval)
   {
@@ -845,8 +845,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconTooltipMarkup` property.
       Returns: The contents of the tooltip on the secondary icon, with markup.
-      
-      Also see [gtk.entry.Entry.setIconTooltipMarkup].
+        
+        Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property string secondaryIconTooltipMarkup()
   {
@@ -857,8 +857,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconTooltipMarkup` property.
       Params:
         propval = The contents of the tooltip on the secondary icon, with markup.
-        
-        Also see [gtk.entry.Entry.setIconTooltipMarkup].
+          
+          Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
   @property void secondaryIconTooltipMarkup(string propval)
   {
@@ -868,8 +868,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `secondaryIconTooltipText` property.
       Returns: The contents of the tooltip on the secondary icon.
-      
-      Also see [gtk.entry.Entry.setIconTooltipText].
+        
+        Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property string secondaryIconTooltipText()
   {
@@ -880,8 +880,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `secondaryIconTooltipText` property.
       Params:
         propval = The contents of the tooltip on the secondary icon.
-        
-        Also see [gtk.entry.Entry.setIconTooltipText].
+          
+          Also see [gtk.entry.Entry.setIconTooltipText].
   */
   @property void secondaryIconTooltipText(string propval)
   {
@@ -943,7 +943,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /**
       Get `visibility` property.
       Returns: Whether the entry should show the “invisible char” instead of the
-      actual text (“password mode”).
+        actual text (“password mode”).
   */
   @property bool visibility()
   {
@@ -954,7 +954,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Set `visibility` property.
       Params:
         propval = Whether the entry should show the “invisible char” instead of the
-        actual text (“password mode”).
+          actual text (“password mode”).
   */
   @property void visibility(bool propval)
   {
@@ -1124,9 +1124,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void getIconArea(gtk.types.EntryIconPosition iconPos, out gdk.rectangle.Rectangle iconArea)
   {
-    GdkRectangle _iconArea;
-    gtk_entry_get_icon_area(cast(GtkEntry*)this._cPtr, iconPos, &_iconArea);
-    iconArea = new gdk.rectangle.Rectangle(cast(void*)&_iconArea, No.Take);
+    gtk_entry_get_icon_area(cast(GtkEntry*)this._cPtr, iconPos, cast(GdkRectangle*)&iconArea);
   }
 
   /**
@@ -1871,8 +1869,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `Activate` signal.
   
       Emitted when the entry is activated.
-      
-      The keybindings for this signal are all forms of the Enter key.
+        
+        The keybindings for this signal are all forms of the Enter key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1954,7 +1952,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Connect to `IconRelease` signal.
   
       Emitted on the button release from a mouse click
-      over an activatable icon.
+        over an activatable icon.
   
       Params:
         callback = signal callback delegate or function to connect

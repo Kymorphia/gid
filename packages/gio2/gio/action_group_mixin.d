@@ -350,8 +350,8 @@ template ActionGroupT()
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -420,8 +420,8 @@ template ActionGroupT()
       Connect to `ActionAdded` signal.
   
       Signals that a new action was just added to the group.
-      This signal is emitted after the action has been added
-      and is now visible.
+        This signal is emitted after the action has been added
+        and is now visible.
   
       Params:
         detail = Signal detail or null (default)
@@ -519,8 +519,8 @@ template ActionGroupT()
       Connect to `ActionRemoved` signal.
   
       Signals that an action is just about to be removed from the group.
-      This signal is emitted before the action is removed, so the action
-      is still visible and can be queried from the signal handler.
+        This signal is emitted before the action is removed, so the action
+        is still visible and can be queried from the signal handler.
   
       Params:
         detail = Signal detail or null (default)

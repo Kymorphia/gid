@@ -260,38 +260,38 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Connect to `GAuthorizeMethod` signal.
   
       Emitted when a method is invoked by a remote caller and used to
-      determine if the method call is authorized.
-      
-      Note that this signal is emitted in a thread dedicated to
-      handling the method call so handlers are allowed to perform
-      blocking IO. This means that it is appropriate to call e.g.
-      [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
-      with the
-      [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
-      flag set.
-      
-      If false is returned then no further handlers are run and the
-      signal handler must take a reference to invocation and finish
-      handling the call (e.g. return an error via
-      [gio.dbus_method_invocation.DBusMethodInvocation.returnError]).
-      
-      Otherwise, if true is returned, signal emission continues. If no
-      handlers return false, then the method is dispatched. If
-      interface has an enclosing #GDBusObjectSkeleton, then the
-      #GDBusObjectSkeleton::authorize-method signal handlers run before
-      the handlers for this signal.
-      
-      The default class handler just returns true.
-      
-      Please note that the common case is optimized: if no signals
-      handlers are connected and the default class handler isn't
-      overridden (for both interface and the enclosing
-      #GDBusObjectSkeleton, if any) and #GDBusInterfaceSkeleton:g-flags does
-      not have the
-      [gio.types.DBusInterfaceSkeletonFlags.HandleMethodInvocationsInThread]
-      flags set, no dedicated thread is ever used and the call will be
-      handled in the same thread as the object that interface belongs
-      to was exported in.
+        determine if the method call is authorized.
+        
+        Note that this signal is emitted in a thread dedicated to
+        handling the method call so handlers are allowed to perform
+        blocking IO. This means that it is appropriate to call e.g.
+        [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
+        with the
+        [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
+        flag set.
+        
+        If false is returned then no further handlers are run and the
+        signal handler must take a reference to invocation and finish
+        handling the call (e.g. return an error via
+        [gio.dbus_method_invocation.DBusMethodInvocation.returnError]).
+        
+        Otherwise, if true is returned, signal emission continues. If no
+        handlers return false, then the method is dispatched. If
+        interface has an enclosing #GDBusObjectSkeleton, then the
+        #GDBusObjectSkeleton::authorize-method signal handlers run before
+        the handlers for this signal.
+        
+        The default class handler just returns true.
+        
+        Please note that the common case is optimized: if no signals
+        handlers are connected and the default class handler isn't
+        overridden (for both interface and the enclosing
+        #GDBusObjectSkeleton, if any) and #GDBusInterfaceSkeleton:g-flags does
+        not have the
+        [gio.types.DBusInterfaceSkeletonFlags.HandleMethodInvocationsInThread]
+        flags set, no dedicated thread is ever used and the call will be
+        handled in the same thread as the object that interface belongs
+        to was exported in.
   
       Params:
         callback = signal callback delegate or function to connect

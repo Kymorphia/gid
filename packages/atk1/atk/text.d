@@ -376,8 +376,8 @@ interface Text
       Connect to `TextAttributesChanged` signal.
   
       The "text-attributes-changed" signal is emitted when the text
-      attributes of the text of an object which implements AtkText
-      changes.
+        attributes of the text of an object which implements AtkText
+        changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -395,8 +395,8 @@ interface Text
       Connect to `TextCaretMoved` signal.
   
       The "text-caret-moved" signal is emitted when the caret
-      position of the text of an object which implements AtkText
-      changes.
+        position of the text of an object which implements AtkText
+        changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -416,10 +416,10 @@ interface Text
       Connect to `TextChanged` signal.
   
       The "text-changed" signal is emitted when the text of the
-      object which implements the AtkText interface changes, This
-      signal will have a detail which is either "insert" or
-      "delete" which identifies whether the text change was an
-      insertion or a deletion.
+        object which implements the AtkText interface changes, This
+        signal will have a detail which is either "insert" or
+        "delete" which identifies whether the text change was an
+        insertion or a deletion.
   
       Params:
         detail = Signal detail or null (default)
@@ -437,7 +437,7 @@ interface Text
       Returns: Signal ID
   
       Deprecated: Use #AtkObject::text-insert or
-      #AtkObject::text-remove instead.
+        #AtkObject::text-remove instead.
   */
   ulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
 
@@ -445,9 +445,9 @@ interface Text
       Connect to `TextInsert` signal.
   
       The "text-insert" signal is emitted when a new text is
-      inserted. If the signal was not triggered by the user
-      (e.g. typing or pasting text), the "system" detail should be
-      included.
+        inserted. If the signal was not triggered by the user
+        (e.g. typing or pasting text), the "system" detail should be
+        included.
   
       Params:
         detail = Signal detail or null (default)
@@ -472,9 +472,9 @@ interface Text
       Connect to `TextRemove` signal.
   
       The "text-remove" signal is emitted when a new text is
-      removed. If the signal was not triggered by the user
-      (e.g. typing or pasting text), the "system" detail should be
-      included.
+        removed. If the signal was not triggered by the user
+        (e.g. typing or pasting text), the "system" detail should be
+        included.
   
       Params:
         detail = Signal detail or null (default)
@@ -499,7 +499,7 @@ interface Text
       Connect to `TextSelectionChanged` signal.
   
       The "text-selection-changed" signal is emitted when the
-      selected text of an object which implements AtkText changes.
+        selected text of an object which implements AtkText changes.
   
       Params:
         callback = signal callback delegate or function to connect

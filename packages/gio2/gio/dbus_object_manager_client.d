@@ -20,6 +20,7 @@ import glib.error;
 import glib.variant;
 import gobject.dclosure;
 import gobject.object;
+import gobject.types;
 
 /**
     [gio.dbus_object_manager_client.DBusObjectManagerClient] is used to create, monitor and delete object
@@ -132,8 +133,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   /**
       Get `nameOwner` property.
       Returns: The unique name that owns #GDBusObjectManagerClient:name or null if
-      no-one is currently owning the name. Connect to the
-      #GObject::notify signal to track changes to this property.
+        no-one is currently owning the name. Connect to the
+        #GObject::notify signal to track changes to this property.
   */
   @property string nameOwner()
   {
@@ -210,15 +211,17 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
+      gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      auto _retval = cast(GType)_dretval;
+
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
-
     GDBusObjectManager* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -255,15 +258,17 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
+      gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      auto _retval = cast(GType)_dretval;
+
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
-
     GDBusObjectManager* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -300,15 +305,17 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
+      gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      auto _retval = cast(GType)_dretval;
+
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
-
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
@@ -317,7 +324,6 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
@@ -350,15 +356,17 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
+      gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      auto _retval = cast(GType)_dretval;
+
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
-
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
@@ -367,7 +375,6 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
@@ -436,16 +443,16 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       Connect to `InterfaceProxyPropertiesChanged` signal.
   
       Emitted when one or more D-Bus properties on proxy changes. The
-      local cache has already been updated when this signal fires. Note
-      that both changed_properties and invalidated_properties are
-      guaranteed to never be null (either may be empty though).
-      
-      This signal exists purely as a convenience to avoid having to
-      connect signals to all interface proxies managed by manager.
-      
-      This signal is emitted in the
-      [thread-default main context][g-main-context-push-thread-default]
-      that manager was constructed in.
+        local cache has already been updated when this signal fires. Note
+        that both changed_properties and invalidated_properties are
+        guaranteed to never be null (either may be empty though).
+        
+        This signal exists purely as a convenience to avoid having to
+        connect signals to all interface proxies managed by manager.
+        
+        This signal is emitted in the
+        [thread-default main context][g-main-context-push-thread-default]
+        that manager was constructed in.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -459,7 +466,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
           `changedProperties` A #GVariant containing the properties that changed (type: `a{sv}`). (optional)
   
           `invalidatedProperties` A null terminated
-            array of properties that were invalidated. (optional)
+              array of properties that were invalidated. (optional)
   
           `dBusObjectManagerClient` the instance the signal is connected to (optional)
   
@@ -521,13 +528,13 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       Connect to `InterfaceProxySignal` signal.
   
       Emitted when a D-Bus signal is received on interface_proxy.
-      
-      This signal exists purely as a convenience to avoid having to
-      connect signals to all interface proxies managed by manager.
-      
-      This signal is emitted in the
-      [thread-default main context][g-main-context-push-thread-default]
-      that manager was constructed in.
+        
+        This signal exists purely as a convenience to avoid having to
+        connect signals to all interface proxies managed by manager.
+        
+        This signal is emitted in the
+        [thread-default main context][g-main-context-push-thread-default]
+        that manager was constructed in.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -44,14 +44,16 @@ class Message : gobject.boxed.Boxed
   /**
       Create a `message.Message` boxed type.
       Params:
+        miniObject = the parent structure
         type = the #GstMessageType of the message
         timestamp = the timestamp of the message
         src = the src of the message
         seqnum = the sequence number of the message
   */
-  this(gst.types.MessageType type = gst.types.MessageType.init, ulong timestamp = ulong.init, gst.object.ObjectWrap src = gst.object.ObjectWrap.init, uint seqnum = uint.init)
+  this(gst.mini_object.MiniObject miniObject = gst.mini_object.MiniObject.init, gst.types.MessageType type = gst.types.MessageType.init, ulong timestamp = ulong.init, gst.object.ObjectWrap src = gst.object.ObjectWrap.init, uint seqnum = uint.init)
   {
     super(gMalloc(GstMessage.sizeof), Yes.Take);
+    this.miniObject = miniObject;
     this.type = type;
     this.timestamp = timestamp;
     this.src = src;
@@ -67,7 +69,7 @@ class Message : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -96,6 +98,16 @@ class Message : gobject.boxed.Boxed
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMessage*)this._cPtr).miniObject);
+  }
+
+  /**
+      Set `miniObject` field.
+      Params:
+        propval = the parent structure
+  */
+  @property void miniObject(gst.mini_object.MiniObject propval)
+  {
+    (cast(GstMessage*)this._cPtr).miniObject = cast(GstMiniObject)propval;
   }
 
   /**
@@ -190,7 +202,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newApplication(gst.object.ObjectWrap src, gst.structure.Structure structure)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_application(src ? cast(GstObject*)src._cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_application(src ? cast(GstObject*)src._cPtr(No.Dup) : null, cast(GstStructure*)&structure);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -322,10 +334,10 @@ class Message : gobject.boxed.Boxed
         
         MT safe.
   */
-  static gst.message.Message newCustom(gst.types.MessageType type, gst.object.ObjectWrap src = null, gst.structure.Structure structure = null)
+  static gst.message.Message newCustom(gst.types.MessageType type, gst.object.ObjectWrap src, gst.structure.Structure structure)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_custom(type, src ? cast(GstObject*)src._cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_custom(type, src ? cast(GstObject*)src._cPtr(No.Dup) : null, cast(GstStructure*)&structure);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -423,7 +435,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newElement(gst.object.ObjectWrap src, gst.structure.Structure structure)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_element(src ? cast(GstObject*)src._cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_element(src ? cast(GstObject*)src._cPtr(No.Dup) : null, cast(GstStructure*)&structure);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -483,11 +495,11 @@ class Message : gobject.boxed.Boxed
         details = A GstStructure with details
       Returns: the new error message.
   */
-  static gst.message.Message newErrorWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null)
+  static gst.message.Message newErrorWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details)
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, cast(GstStructure*)&details);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -542,11 +554,11 @@ class Message : gobject.boxed.Boxed
         details = A GstStructure with details
       Returns: the new warning message.
   */
-  static gst.message.Message newInfoWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null)
+  static gst.message.Message newInfoWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details)
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, cast(GstStructure*)&details);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -730,11 +742,11 @@ class Message : gobject.boxed.Boxed
         entryStruct = structure for the new entry
       Returns: a newly allocated #GstMessage
   */
-  static gst.message.Message newRedirect(gst.object.ObjectWrap src, string location, gst.tag_list.TagList tagList = null, gst.structure.Structure entryStruct = null)
+  static gst.message.Message newRedirect(gst.object.ObjectWrap src, string location, gst.tag_list.TagList tagList, gst.structure.Structure entryStruct)
   {
     GstMessage* _cretval;
     const(char)* _location = location.toCString(No.Alloc);
-    _cretval = gst_message_new_redirect(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_redirect(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, cast(const(GstStructure)*)&entryStruct);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1098,11 +1110,11 @@ class Message : gobject.boxed.Boxed
         details = A GstStructure with details
       Returns: the new warning message.
   */
-  static gst.message.Message newWarningWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null)
+  static gst.message.Message newWarningWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details)
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, cast(GstStructure*)&details);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1118,10 +1130,10 @@ class Message : gobject.boxed.Boxed
         tagList = tag list for the new entry
         entryStruct = structure for the new entry
   */
-  void addRedirectEntry(string location, gst.tag_list.TagList tagList = null, gst.structure.Structure entryStruct = null)
+  void addRedirectEntry(string location, gst.tag_list.TagList tagList, gst.structure.Structure entryStruct)
   {
     const(char)* _location = location.toCString(No.Alloc);
-    gst_message_add_redirect_entry(cast(GstMessage*)this._cPtr, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
+    gst_message_add_redirect_entry(cast(GstMessage*)this._cPtr, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, cast(const(GstStructure)*)&entryStruct);
   }
 
   /** */
@@ -1183,7 +1195,9 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_message_get_structure(cast(GstMessage*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -1402,7 +1416,7 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _structure;
     gst_message_parse_error_details(cast(GstMessage*)this._cPtr, &_structure);
-    structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+    structure = *cast(Structure*)_structure;
   }
 
   /**
@@ -1469,7 +1483,7 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _structure;
     gst_message_parse_info_details(cast(GstMessage*)this._cPtr, &_structure);
-    structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+    structure = *cast(Structure*)_structure;
   }
 
   /**
@@ -1635,7 +1649,7 @@ class Message : gobject.boxed.Boxed
     gst_message_parse_redirect_entry(cast(GstMessage*)this._cPtr, entryIndex, &_location, &_tagList, &_entryStruct);
     location = _location.fromCString(No.Free);
     tagList = new gst.tag_list.TagList(cast(void*)_tagList, No.Take);
-    entryStruct = new gst.structure.Structure(cast(void*)_entryStruct, No.Take);
+    entryStruct = *cast(Structure*)_entryStruct;
   }
 
   /**
@@ -1928,7 +1942,7 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _structure;
     gst_message_parse_warning_details(cast(GstMessage*)this._cPtr, &_structure);
-    structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+    structure = *cast(Structure*)_structure;
   }
 
   /**
@@ -2084,7 +2098,9 @@ class Message : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_message_writable_structure(cast(GstMessage*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 }

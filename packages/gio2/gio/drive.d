@@ -336,9 +336,9 @@ interface Drive
       Connect to `Disconnected` signal.
   
       This signal is emitted when the #GDrive have been
-      disconnected. If the recipient is holding references to the
-      object they should release them so the object can be
-      finalized.
+        disconnected. If the recipient is holding references to the
+        object they should release them so the object can be
+        finalized.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -356,7 +356,7 @@ interface Drive
       Connect to `EjectButton` signal.
   
       Emitted when the physical eject button (if any) of a drive has
-      been pressed.
+        been pressed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -374,7 +374,7 @@ interface Drive
       Connect to `StopButton` signal.
   
       Emitted when the physical stop button (if any) of a drive has
-      been pressed.
+        been pressed.
   
       Params:
         callback = signal callback delegate or function to connect

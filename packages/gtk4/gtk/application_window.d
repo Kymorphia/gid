@@ -131,12 +131,12 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   /**
       Get `showMenubar` property.
       Returns: If this property is true, the window will display a menubar
-      unless it is shown by the desktop shell.
-      
-      See [gtk.application.Application.setMenubar].
-      
-      If false, the window will not display a menubar, regardless
-      of whether the desktop shell is showing it or not.
+        unless it is shown by the desktop shell.
+        
+        See [gtk.application.Application.setMenubar].
+        
+        If false, the window will not display a menubar, regardless
+        of whether the desktop shell is showing it or not.
   */
   @property bool showMenubar()
   {
@@ -147,12 +147,12 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
       Set `showMenubar` property.
       Params:
         propval = If this property is true, the window will display a menubar
-        unless it is shown by the desktop shell.
-        
-        See [gtk.application.Application.setMenubar].
-        
-        If false, the window will not display a menubar, regardless
-        of whether the desktop shell is showing it or not.
+          unless it is shown by the desktop shell.
+          
+          See [gtk.application.Application.setMenubar].
+          
+          If false, the window will not display a menubar, regardless
+          of whether the desktop shell is showing it or not.
   */
   @property void showMenubar(bool propval)
   {

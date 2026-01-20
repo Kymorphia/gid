@@ -55,7 +55,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   /**
       Get `baselineRow` property.
       Returns: The row to align to the baseline, when `GtkWidget:valign` is set
-      to [gtk.types.Align.Baseline].
+        to [gtk.types.Align.Baseline].
   */
   @property int baselineRow()
   {
@@ -66,7 +66,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Set `baselineRow` property.
       Params:
         propval = The row to align to the baseline, when `GtkWidget:valign` is set
-        to [gtk.types.Align.Baseline].
+          to [gtk.types.Align.Baseline].
   */
   @property void baselineRow(int propval)
   {

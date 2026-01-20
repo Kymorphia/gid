@@ -29,7 +29,7 @@ class Device : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -224,7 +224,6 @@ class Device : gobject.boxed.Boxed
       return _retval;
     }
     auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
-
     cairo_status_t _cretval;
     auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
     _cretval = cairo_device_observer_print(cast(cairo_device_t*)this._cPtr, _writeFuncCB, _writeFunc);

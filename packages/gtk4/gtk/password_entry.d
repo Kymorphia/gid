@@ -102,7 +102,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   /**
       Get `extraMenu` property.
       Returns: A menu model whose contents will be appended to
-      the context menu.
+        the context menu.
   */
   @property gio.menu_model.MenuModel extraMenu()
   {
@@ -113,7 +113,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Set `extraMenu` property.
       Params:
         propval = A menu model whose contents will be appended to
-        the context menu.
+          the context menu.
   */
   @property void extraMenu(gio.menu_model.MenuModel propval)
   {
@@ -123,7 +123,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   /**
       Get `placeholderText` property.
       Returns: The text that will be displayed in the [gtk.password_entry.PasswordEntry]
-      when it is empty and unfocused.
+        when it is empty and unfocused.
   */
   @property string placeholderText()
   {
@@ -134,7 +134,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Set `placeholderText` property.
       Params:
         propval = The text that will be displayed in the [gtk.password_entry.PasswordEntry]
-        when it is empty and unfocused.
+          when it is empty and unfocused.
   */
   @property void placeholderText(string propval)
   {
@@ -227,8 +227,8 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Connect to `Activate` signal.
   
       Emitted when the entry is activated.
-      
-      The keybindings for this signal are all forms of the Enter key.
+        
+        The keybindings for this signal are all forms of the Enter key.
   
       Params:
         callback = signal callback delegate or function to connect

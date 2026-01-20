@@ -12,7 +12,7 @@ import gsk.types;
 */
 class Shadow
 {
-  GskShadow cInstance;
+  GskShadow _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class Shadow
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gsk.shadow.Shadow");
 
-    cInstance = *cast(GskShadow*)ptr;
+    _cInstance = *cast(GskShadow*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class Shadow
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -39,6 +39,16 @@ class Shadow
   @property gdk.rgba.RGBA color()
   {
     return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskShadow*)this._cPtr).color);
+  }
+
+  /**
+      Set `color` field.
+      Params:
+        propval = the color of the shadow
+  */
+  @property void color(gdk.rgba.RGBA propval)
+  {
+    (cast(GskShadow*)this._cPtr).color = cast(GdkRGBA)propval;
   }
 
   /**

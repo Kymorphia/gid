@@ -70,15 +70,17 @@ void optionsForeach(javascriptcore.types.OptionsFunc function_)
 {
   extern(C) gboolean _function_Callback(const(char)* option, JSCOptionType type, const(char)* description, void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(javascriptcore.types.OptionsFunc*)userData;
     string _option = option.fromCString(No.Free);
     string _description = description.fromCString(No.Free);
 
-    gboolean _retval = (*_dlg)(_option, type, _description);
+    _dretval = (*_dlg)(_option, type, _description);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   auto _function_ = function_ ? cast(void*)&(function_) : null;
   jsc_options_foreach(_function_CB, _function_);
 }

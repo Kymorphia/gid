@@ -80,9 +80,9 @@ class RTPBaseDepayload : gst.element.Element
   /**
       Get `autoHeaderExtension` property.
       Returns: If enabled, the depayloader will automatically try to enable all the
-      RTP header extensions provided in the sink caps, saving the application
-      the need to handle these extensions manually using the
-      GstRTPBaseDepayload::request-extension: signal.
+        RTP header extensions provided in the sink caps, saving the application
+        the need to handle these extensions manually using the
+        GstRTPBaseDepayload::request-extension: signal.
   */
   @property bool autoHeaderExtension()
   {
@@ -93,9 +93,9 @@ class RTPBaseDepayload : gst.element.Element
       Set `autoHeaderExtension` property.
       Params:
         propval = If enabled, the depayloader will automatically try to enable all the
-        RTP header extensions provided in the sink caps, saving the application
-        the need to handle these extensions manually using the
-        GstRTPBaseDepayload::request-extension: signal.
+          RTP header extensions provided in the sink caps, saving the application
+          the need to handle these extensions manually using the
+          GstRTPBaseDepayload::request-extension: signal.
   */
   @property void autoHeaderExtension(bool propval)
   {
@@ -105,9 +105,9 @@ class RTPBaseDepayload : gst.element.Element
   /**
       Get `maxReorder` property.
       Returns: Max seqnum reorder before the sender is assumed to have restarted.
-      
-      When max-reorder is set to 0 all reordered/duplicate packets are
-      considered coming from a restarted sender.
+        
+        When max-reorder is set to 0 all reordered/duplicate packets are
+        considered coming from a restarted sender.
   */
   @property int maxReorder()
   {
@@ -118,9 +118,9 @@ class RTPBaseDepayload : gst.element.Element
       Set `maxReorder` property.
       Params:
         propval = Max seqnum reorder before the sender is assumed to have restarted.
-        
-        When max-reorder is set to 0 all reordered/duplicate packets are
-        considered coming from a restarted sender.
+          
+          When max-reorder is set to 0 all reordered/duplicate packets are
+          considered coming from a restarted sender.
   */
   @property void maxReorder(int propval)
   {
@@ -149,23 +149,23 @@ class RTPBaseDepayload : gst.element.Element
   /**
       Get `stats` property.
       Returns: Various depayloader statistics retrieved atomically (and are therefore
-      synchroized with each other). This property return a GstStructure named
-      application/x-rtp-depayload-stats containing the following fields relating to
-      the last processed buffer and current state of the stream being depayloaded:
-      
-        $(LIST
-            * `clock-rate`: #G_TYPE_UINT, clock-rate of the stream
-            * `npt-start`: #G_TYPE_UINT64, time of playback start
-            * `npt-stop`: #G_TYPE_UINT64, time of playback stop
-            * `play-speed`: #G_TYPE_DOUBLE, the playback speed
-            * `play-scale`: #G_TYPE_DOUBLE, the playback scale
-            * `running-time-dts`: #G_TYPE_UINT64, the last running-time of the
-               last DTS
-            * `running-time-pts`: #G_TYPE_UINT64, the last running-time of the
-               last PTS
-            * `seqnum`: #G_TYPE_UINT, the last seen seqnum
-            * `timestamp`: #G_TYPE_UINT, the last seen RTP timestamp
-        )
+        synchroized with each other). This property return a GstStructure named
+        application/x-rtp-depayload-stats containing the following fields relating to
+        the last processed buffer and current state of the stream being depayloaded:
+        
+          $(LIST
+              * `clock-rate`: #G_TYPE_UINT, clock-rate of the stream
+              * `npt-start`: #G_TYPE_UINT64, time of playback start
+              * `npt-stop`: #G_TYPE_UINT64, time of playback stop
+              * `play-speed`: #G_TYPE_DOUBLE, the playback speed
+              * `play-scale`: #G_TYPE_DOUBLE, the playback scale
+              * `running-time-dts`: #G_TYPE_UINT64, the last running-time of the
+                 last DTS
+              * `running-time-pts`: #G_TYPE_UINT64, the last running-time of the
+                 last PTS
+              * `seqnum`: #G_TYPE_UINT, the last seen seqnum
+              * `timestamp`: #G_TYPE_UINT, the last seen RTP timestamp
+          )
   */
   @property gst.structure.Structure stats()
   {
@@ -319,7 +319,7 @@ class RTPBaseDepayload : gst.element.Element
       Connect to `AddExtension` signal.
   
       Add ext as an extension for reading part of an RTP header extension from
-      incoming RTP packets.
+        incoming RTP packets.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -401,7 +401,7 @@ class RTPBaseDepayload : gst.element.Element
       Connect to `RequestExtension` signal.
   
       The returned ext must be configured with the correct ext_id and with the
-      necessary attributes as required by the extension implementation.
+        necessary attributes as required by the extension implementation.
   
       Params:
         callback = signal callback delegate or function to connect

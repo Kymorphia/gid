@@ -84,7 +84,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   /**
       Get `state` property.
       Returns: The backend state that is controlled by the switch.
-      See #GtkSwitch::state-set for details.
+        See #GtkSwitch::state-set for details.
   */
   @property bool state()
   {
@@ -95,7 +95,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Set `state` property.
       Params:
         propval = The backend state that is controlled by the switch.
-        See #GtkSwitch::state-set for details.
+          See #GtkSwitch::state-set for details.
   */
   @property void state(bool propval)
   {
@@ -174,9 +174,9 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Connect to `Activate` signal.
   
       The ::activate signal on GtkSwitch is an action signal and
-      emitting it causes the switch to animate.
-      Applications should never connect to this signal, but use the
-      notify::active signal.
+        emitting it causes the switch to animate.
+        Applications should never connect to this signal, but use the
+        notify::active signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -214,18 +214,18 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Connect to `StateSet` signal.
   
       The ::state-set signal on GtkSwitch is emitted to change the underlying
-      state. It is emitted when the user changes the switch position. The
-      default handler keeps the state in sync with the #GtkSwitch:active
-      property.
-      
-      To implement delayed state change, applications can connect to this signal,
-      initiate the change of the underlying state, and call [gtk.switch_.Switch.setState]
-      when the underlying state change is complete. The signal handler should
-      return true to prevent the default handler from running.
-      
-      Visually, the underlying state is represented by the trough color of
-      the switch, while the #GtkSwitch:active property is represented by the
-      position of the switch.
+        state. It is emitted when the user changes the switch position. The
+        default handler keeps the state in sync with the #GtkSwitch:active
+        property.
+        
+        To implement delayed state change, applications can connect to this signal,
+        initiate the change of the underlying state, and call [gtk.switch_.Switch.setState]
+        when the underlying state change is complete. The signal handler should
+        return true to prevent the default handler from running.
+        
+        Visually, the underlying state is represented by the trough color of
+        the switch, while the #GtkSwitch:active property is represented by the
+        position of the switch.
   
       Params:
         callback = signal callback delegate or function to connect

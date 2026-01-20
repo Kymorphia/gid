@@ -252,8 +252,8 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Connect to `Authenticated` signal.
   
       This signal is emitted when the user authentication request succeeded.
-      Applications handling their own credential storage should connect to
-      this signal to save the credentials.
+        Applications handling their own credential storage should connect to
+        this signal to save the credentials.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -298,8 +298,8 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Connect to `Cancelled` signal.
   
       This signal is emitted when the user authentication request is
-      cancelled. It allows the application to dismiss its authentication
-      dialog in case of page load failure for example.
+        cancelled. It allows the application to dismiss its authentication
+        dialog in case of page load failure for example.
   
       Params:
         callback = signal callback delegate or function to connect

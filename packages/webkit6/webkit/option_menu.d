@@ -135,8 +135,8 @@ class OptionMenu : gobject.object.ObjectWrap
       Connect to `Close` signal.
   
       Emitted when closing a #WebKitOptionMenu is requested. This can happen
-      when the user explicitly calls [webkit.option_menu.OptionMenu.close] or when the
-      element is detached from the current page.
+        when the user explicitly calls [webkit.option_menu.OptionMenu.close] or when the
+        element is detached from the current page.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -111,9 +111,7 @@ class WindowProperties : gobject.object.ObjectWrap
   */
   void getGeometry(out gdk.rectangle.Rectangle geometry)
   {
-    GdkRectangle _geometry;
-    webkit_window_properties_get_geometry(cast(WebKitWindowProperties*)this._cPtr, &_geometry);
-    geometry = new gdk.rectangle.Rectangle(cast(void*)&_geometry, No.Take);
+    webkit_window_properties_get_geometry(cast(WebKitWindowProperties*)this._cPtr, cast(GdkRectangle*)&geometry);
   }
 
   /**

@@ -9,7 +9,7 @@ import glib.types;
 /** */
 class TestLogMsg
 {
-  GTestLogMsg cInstance;
+  GTestLogMsg _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class TestLogMsg
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.test_log_msg.TestLogMsg");
 
-    cInstance = *cast(GTestLogMsg*)ptr;
+    _cInstance = *cast(GTestLogMsg*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,6 +26,6 @@ class TestLogMsg
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

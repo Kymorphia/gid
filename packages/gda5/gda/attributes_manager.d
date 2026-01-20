@@ -11,7 +11,7 @@ import gobject.value;
 /** */
 class AttributesManager
 {
-  GdaAttributesManager* cInstancePtr;
+  GdaAttributesManager* _cInstancePtr;
   bool owned;
 
   /** */
@@ -20,7 +20,7 @@ class AttributesManager
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.attributes_manager.AttributesManager");
 
-    cInstancePtr = cast(GdaAttributesManager*)ptr;
+    _cInstancePtr = cast(GdaAttributesManager*)ptr;
 
     owned = take;
   }
@@ -28,7 +28,7 @@ class AttributesManager
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /** */
@@ -48,7 +48,6 @@ class AttributesManager
       (*_dlg)(_attName, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     gda_attributes_manager_foreach(cast(GdaAttributesManager*)this._cPtr, ptr, _funcCB, _func);
   }
@@ -81,7 +80,6 @@ class AttributesManager
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     const(char)* _attName = attName.toCString(No.Alloc);
     gda_attributes_manager_set_full(cast(GdaAttributesManager*)this._cPtr, ptr, _attName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }

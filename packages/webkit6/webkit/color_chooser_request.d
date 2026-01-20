@@ -109,9 +109,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   */
   void getElementRectangle(out gdk.rectangle.Rectangle rect)
   {
-    GdkRectangle _rect;
-    webkit_color_chooser_request_get_element_rectangle(cast(WebKitColorChooserRequest*)this._cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    webkit_color_chooser_request_get_element_rectangle(cast(WebKitColorChooserRequest*)this._cPtr, cast(GdkRectangle*)&rect);
   }
 
   /**
@@ -122,9 +120,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   */
   void getRgba(out gdk.rgba.RGBA rgba)
   {
-    GdkRGBA _rgba;
-    webkit_color_chooser_request_get_rgba(cast(WebKitColorChooserRequest*)this._cPtr, &_rgba);
-    rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
+    webkit_color_chooser_request_get_rgba(cast(WebKitColorChooserRequest*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
 
   /**
@@ -135,16 +131,16 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   */
   void setRgba(gdk.rgba.RGBA rgba)
   {
-    webkit_color_chooser_request_set_rgba(cast(WebKitColorChooserRequest*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    webkit_color_chooser_request_set_rgba(cast(WebKitColorChooserRequest*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
 
   /**
       Connect to `Finished` signal.
   
       Emitted when the request finishes. This signal can be emitted because the
-      user completed the request calling [webkit.color_chooser_request.ColorChooserRequest.finish],
-      or cancelled it with [webkit.color_chooser_request.ColorChooserRequest.cancel] or because the
-      color input element is removed from the DOM.
+        user completed the request calling [webkit.color_chooser_request.ColorChooserRequest.finish],
+        or cancelled it with [webkit.color_chooser_request.ColorChooserRequest.cancel] or because the
+        color input element is removed from the DOM.
   
       Params:
         callback = signal callback delegate or function to connect

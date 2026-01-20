@@ -69,7 +69,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `fillLevel` property.
       Returns: The fill level (e.g. prebuffering of a network stream).
-      See [gtk.range.Range.setFillLevel].
+        See [gtk.range.Range.setFillLevel].
   */
   @property double fillLevel()
   {
@@ -80,7 +80,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
       Set `fillLevel` property.
       Params:
         propval = The fill level (e.g. prebuffering of a network stream).
-        See [gtk.range.Range.setFillLevel].
+          See [gtk.range.Range.setFillLevel].
   */
   @property void fillLevel(double propval)
   {
@@ -114,8 +114,8 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `restrictToFillLevel` property.
       Returns: The restrict-to-fill-level property controls whether slider
-      movement is restricted to an upper boundary set by the
-      fill level. See [gtk.range.Range.setRestrictToFillLevel].
+        movement is restricted to an upper boundary set by the
+        fill level. See [gtk.range.Range.setRestrictToFillLevel].
   */
   @property bool restrictToFillLevel()
   {
@@ -126,8 +126,8 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
       Set `restrictToFillLevel` property.
       Params:
         propval = The restrict-to-fill-level property controls whether slider
-        movement is restricted to an upper boundary set by the
-        fill level. See [gtk.range.Range.setRestrictToFillLevel].
+          movement is restricted to an upper boundary set by the
+          fill level. See [gtk.range.Range.setRestrictToFillLevel].
   */
   @property void restrictToFillLevel(bool propval)
   {
@@ -137,7 +137,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `roundDigits` property.
       Returns: The number of digits to round the value to when
-      it changes, or -1. See #GtkRange::change-value.
+        it changes, or -1. See #GtkRange::change-value.
   */
   @property int roundDigits()
   {
@@ -148,7 +148,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
       Set `roundDigits` property.
       Params:
         propval = The number of digits to round the value to when
-        it changes, or -1. See #GtkRange::change-value.
+          it changes, or -1. See #GtkRange::change-value.
   */
   @property void roundDigits(int propval)
   {
@@ -158,8 +158,8 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `showFillLevel` property.
       Returns: The show-fill-level property controls whether fill level indicator
-      graphics are displayed on the trough. See
-      [gtk.range.Range.setShowFillLevel].
+        graphics are displayed on the trough. See
+        [gtk.range.Range.setShowFillLevel].
   */
   @property bool showFillLevel()
   {
@@ -170,8 +170,8 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
       Set `showFillLevel` property.
       Params:
         propval = The show-fill-level property controls whether fill level indicator
-        graphics are displayed on the trough. See
-        [gtk.range.Range.setShowFillLevel].
+          graphics are displayed on the trough. See
+          [gtk.range.Range.setShowFillLevel].
   */
   @property void showFillLevel(bool propval)
   {
@@ -280,9 +280,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void getRangeRect(out gdk.rectangle.Rectangle rangeRect)
   {
-    GdkRectangle _rangeRect;
-    gtk_range_get_range_rect(cast(GtkRange*)this._cPtr, &_rangeRect);
-    rangeRect = new gdk.rectangle.Rectangle(cast(void*)&_rangeRect, No.Take);
+    gtk_range_get_range_rect(cast(GtkRange*)this._cPtr, cast(GdkRectangle*)&rangeRect);
   }
 
   /**
@@ -584,7 +582,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `AdjustBounds` signal.
   
       Emitted before clamping a value, to give the application a
-      chance to adjust the bounds.
+        chance to adjust the bounds.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -629,17 +627,17 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `ChangeValue` signal.
   
       The #GtkRange::change-value signal is emitted when a scroll action is
-      performed on a range.  It allows an application to determine the
-      type of scroll event that occurred and the resultant new value.
-      The application can handle the event itself and return true to
-      prevent further processing.  Or, by returning false, it can pass
-      the event to other handlers until the default GTK+ handler is
-      reached.
-      
-      The value parameter is unrounded.  An application that overrides
-      the GtkRange::change-value signal is responsible for clamping the
-      value to the desired number of decimal digits; the default GTK+
-      handler clamps the value based on #GtkRange:round-digits.
+        performed on a range.  It allows an application to determine the
+        type of scroll event that occurred and the resultant new value.
+        The application can handle the event itself and return true to
+        prevent further processing.  Or, by returning false, it can pass
+        the event to other handlers until the default GTK+ handler is
+        reached.
+        
+        The value parameter is unrounded.  An application that overrides
+        the GtkRange::change-value signal is responsible for clamping the
+        value to the desired number of decimal digits; the default GTK+
+        handler clamps the value based on #GtkRange:round-digits.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -653,7 +651,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
           `range` the instance the signal is connected to (optional)
   
           `Returns` true to prevent other handlers from being invoked for
-              the signal, false to propagate the signal further
+                the signal, false to propagate the signal further
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

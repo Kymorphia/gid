@@ -156,7 +156,7 @@ class KeyFile : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -1204,6 +1204,7 @@ class KeyFile : gobject.boxed.Boxed
       _tmplist ~= s.toCString(No.Alloc);
     _tmplist ~= null;
     const(char*)* _list = _tmplist.ptr;
+
     g_key_file_set_locale_string_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _locale, _list, _length);
   }
 
@@ -1250,6 +1251,7 @@ class KeyFile : gobject.boxed.Boxed
       _tmplist ~= s.toCString(No.Alloc);
     _tmplist ~= null;
     const(char*)* _list = _tmplist.ptr;
+
     g_key_file_set_string_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 

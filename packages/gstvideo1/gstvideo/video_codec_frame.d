@@ -61,7 +61,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -86,9 +86,9 @@ class VideoCodecFrame : gobject.boxed.Boxed
   /**
       Get `systemFrameNumber` field.
       Returns: Unique identifier for the frame. Use this if you need
-            to get hold of the frame later (like when data is being decoded).
-            Typical usage in decoders is to set this on the opaque value provided
-            to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
+              to get hold of the frame later (like when data is being decoded).
+              Typical usage in decoders is to set this on the opaque value provided
+              to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
   */
   @property uint systemFrameNumber()
   {
@@ -99,9 +99,9 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Set `systemFrameNumber` field.
       Params:
         propval = Unique identifier for the frame. Use this if you need
-              to get hold of the frame later (like when data is being decoded).
-              Typical usage in decoders is to set this on the opaque value provided
-              to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
+                to get hold of the frame later (like when data is being decoded).
+                Typical usage in decoders is to set this on the opaque value provided
+                to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
   */
   @property void systemFrameNumber(uint propval)
   {
@@ -187,8 +187,8 @@ class VideoCodecFrame : gobject.boxed.Boxed
   /**
       Get `inputBuffer` field.
       Returns: the input #GstBuffer that created this frame. The buffer is owned
-                by the frame and references to the frame instead of the buffer should
-                be kept.
+                  by the frame and references to the frame instead of the buffer should
+                  be kept.
   */
   @property gst.buffer.Buffer inputBuffer()
   {
@@ -199,8 +199,8 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Set `inputBuffer` field.
       Params:
         propval = the input #GstBuffer that created this frame. The buffer is owned
-                  by the frame and references to the frame instead of the buffer should
-                  be kept.
+                    by the frame and references to the frame instead of the buffer should
+                    be kept.
   */
   @property void inputBuffer(gst.buffer.Buffer propval)
   {
@@ -211,11 +211,11 @@ class VideoCodecFrame : gobject.boxed.Boxed
   /**
       Get `outputBuffer` field.
       Returns: the output #GstBuffer. Implementations should set this either
-                directly, or by using the
-                [gstvideo.video_decoder.VideoDecoder.allocateOutputFrame] or
-                [gstvideo.video_decoder.VideoDecoder.allocateOutputBuffer] methods. The buffer is
-                owned by the frame and references to the frame instead of the
-                buffer should be kept.
+                  directly, or by using the
+                  [gstvideo.video_decoder.VideoDecoder.allocateOutputFrame] or
+                  [gstvideo.video_decoder.VideoDecoder.allocateOutputBuffer] methods. The buffer is
+                  owned by the frame and references to the frame instead of the
+                  buffer should be kept.
   */
   @property gst.buffer.Buffer outputBuffer()
   {
@@ -226,11 +226,11 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Set `outputBuffer` field.
       Params:
         propval = the output #GstBuffer. Implementations should set this either
-                  directly, or by using the
-                  [gstvideo.video_decoder.VideoDecoder.allocateOutputFrame] or
-                  [gstvideo.video_decoder.VideoDecoder.allocateOutputBuffer] methods. The buffer is
-                  owned by the frame and references to the frame instead of the
-                  buffer should be kept.
+                    directly, or by using the
+                    [gstvideo.video_decoder.VideoDecoder.allocateOutputFrame] or
+                    [gstvideo.video_decoder.VideoDecoder.allocateOutputBuffer] methods. The buffer is
+                    owned by the frame and references to the frame instead of the
+                    buffer should be kept.
   */
   @property void outputBuffer(gst.buffer.Buffer propval)
   {
@@ -288,7 +288,6 @@ class VideoCodecFrame : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
     gst_video_codec_frame_set_user_data(cast(GstVideoCodecFrame*)this._cPtr, _notify, _notifyCB);
   }

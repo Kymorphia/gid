@@ -157,8 +157,8 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   /**
       Get `asyncHandling` property.
       Returns: If set to true, the bin will handle asynchronous state changes.
-      This should be used only if the bin subclass is modifying the state
-      of its children on its own.
+        This should be used only if the bin subclass is modifying the state
+        of its children on its own.
   */
   @property bool asyncHandling()
   {
@@ -169,8 +169,8 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Set `asyncHandling` property.
       Params:
         propval = If set to true, the bin will handle asynchronous state changes.
-        This should be used only if the bin subclass is modifying the state
-        of its children on its own.
+          This should be used only if the bin subclass is modifying the state
+          of its children on its own.
   */
   @property void asyncHandling(bool propval)
   {
@@ -180,12 +180,12 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   /**
       Get `messageForward` property.
       Returns: Forward all children messages, even those that would normally be filtered by
-      the bin. This can be interesting when one wants to be notified of the EOS
-      state of individual elements, for example.
-      
-      The messages are converted to an ELEMENT message with the bin as the
-      source. The structure of the message is named `GstBinForwarded` and contains
-      a field named `message` that contains the original forwarded #GstMessage.
+        the bin. This can be interesting when one wants to be notified of the EOS
+        state of individual elements, for example.
+        
+        The messages are converted to an ELEMENT message with the bin as the
+        source. The structure of the message is named `GstBinForwarded` and contains
+        a field named `message` that contains the original forwarded #GstMessage.
   */
   @property bool messageForward()
   {
@@ -196,12 +196,12 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Set `messageForward` property.
       Params:
         propval = Forward all children messages, even those that would normally be filtered by
-        the bin. This can be interesting when one wants to be notified of the EOS
-        state of individual elements, for example.
-        
-        The messages are converted to an ELEMENT message with the bin as the
-        source. The structure of the message is named `GstBinForwarded` and contains
-        a field named `message` that contains the original forwarded #GstMessage.
+          the bin. This can be interesting when one wants to be notified of the EOS
+          state of individual elements, for example.
+          
+          The messages are converted to an ELEMENT message with the bin as the
+          source. The structure of the message is named `GstBinForwarded` and contains
+          a field named `message` that contains the original forwarded #GstMessage.
   */
   @property void messageForward(bool propval)
   {
@@ -615,16 +615,16 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Connect to `DoLatency` signal.
   
       Will be emitted when the bin needs to perform latency calculations. This
-      signal is only emitted for toplevel bins or when #GstBin:async-handling is
-      enabled.
-      
-      Only one signal handler is invoked. If no signals are connected, the
-      default handler is invoked, which will query and distribute the lowest
-      possible latency to all sinks.
-      
-      Connect to this signal if the default latency calculations are not
-      sufficient, like when you need different latencies for different sinks in
-      the same pipeline.
+        signal is only emitted for toplevel bins or when #GstBin:async-handling is
+        enabled.
+        
+        Only one signal handler is invoked. If no signals are connected, the
+        default handler is invoked, which will query and distribute the lowest
+        possible latency to all sinks.
+        
+        Connect to this signal if the default latency calculations are not
+        sufficient, like when you need different latencies for different sinks in
+        the same pipeline.
   
       Params:
         callback = signal callback delegate or function to connect

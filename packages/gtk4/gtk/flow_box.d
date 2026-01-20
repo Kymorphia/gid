@@ -111,7 +111,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `activateOnSingleClick` property.
       Returns: Determines whether children can be activated with a single
-      click, or require a double-click.
+        click, or require a double-click.
   */
   @property bool activateOnSingleClick()
   {
@@ -122,7 +122,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Set `activateOnSingleClick` property.
       Params:
         propval = Determines whether children can be activated with a single
-        click, or require a double-click.
+          click, or require a double-click.
   */
   @property void activateOnSingleClick(bool propval)
   {
@@ -151,7 +151,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `homogeneous` property.
       Returns: Determines whether all children should be allocated the
-      same size.
+        same size.
   */
   @property bool homogeneous()
   {
@@ -162,7 +162,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Set `homogeneous` property.
       Params:
         propval = Determines whether all children should be allocated the
-        same size.
+          same size.
   */
   @property void homogeneous(bool propval)
   {
@@ -172,7 +172,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `maxChildrenPerLine` property.
       Returns: The maximum amount of children to request space for consecutively
-      in the given orientation.
+        in the given orientation.
   */
   @property uint maxChildrenPerLine()
   {
@@ -183,7 +183,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Set `maxChildrenPerLine` property.
       Params:
         propval = The maximum amount of children to request space for consecutively
-        in the given orientation.
+          in the given orientation.
   */
   @property void maxChildrenPerLine(uint propval)
   {
@@ -193,11 +193,11 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `minChildrenPerLine` property.
       Returns: The minimum number of children to allocate consecutively
-      in the given orientation.
-      
-      Setting the minimum children per line ensures
-      that a reasonably small height will be requested
-      for the overall minimum width of the box.
+        in the given orientation.
+        
+        Setting the minimum children per line ensures
+        that a reasonably small height will be requested
+        for the overall minimum width of the box.
   */
   @property uint minChildrenPerLine()
   {
@@ -208,11 +208,11 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Set `minChildrenPerLine` property.
       Params:
         propval = The minimum number of children to allocate consecutively
-        in the given orientation.
-        
-        Setting the minimum children per line ensures
-        that a reasonably small height will be requested
-        for the overall minimum width of the box.
+          in the given orientation.
+          
+          Setting the minimum children per line ensures
+          that a reasonably small height will be requested
+          for the overall minimum width of the box.
   */
   @property void minChildrenPerLine(uint propval)
   {
@@ -315,12 +315,11 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       auto _dlg = cast(gtk.types.FlowBoxCreateWidgetFunc*)userData;
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
-      GtkWidget* _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
+      auto _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _createWidgetFuncCB = createWidgetFunc ? &_createWidgetFuncCallback : null;
-
     auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
     GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
     gtk_flow_box_bind_model(cast(GtkFlowBox*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
@@ -574,7 +573,6 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gtk_flow_box_selected_foreach(cast(GtkFlowBox*)this._cPtr, _funcCB, _func);
   }
@@ -625,13 +623,15 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   {
     extern(C) gboolean _filterFuncCallback(GtkFlowBoxChild* child, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.FlowBoxFilterFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
-
     auto _filterFunc = filterFunc ? freezeDelegate(cast(void*)&filterFunc) : null;
     GDestroyNotify _filterFuncDestroyCB = filterFunc ? &thawDelegate : null;
     gtk_flow_box_set_filter_func(cast(GtkFlowBox*)this._cPtr, _filterFuncCB, _filterFunc, _filterFuncDestroyCB);
@@ -748,7 +748,6 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
-
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
     gtk_flow_box_set_sort_func(cast(GtkFlowBox*)this._cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
@@ -801,8 +800,8 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `ActivateCursorChild` signal.
   
       Emitted when the user activates the box.
-      
-      This is a [keybinding signal](class.SignalAction.html).
+        
+        This is a [keybinding signal](class.SignalAction.html).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -884,23 +883,23 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `MoveCursor` signal.
   
       Emitted when the user initiates a cursor movement.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically.
-      
-      The default bindings for this signal come in two variants,
-      the variant with the Shift modifier extends the selection,
-      the variant without the Shift modifier does not.
-      There are too many key combinations to list them all here.
-      
-      $(LIST
-        * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
-          move by individual children
-        * <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
-        * <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
-      )
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically.
+        
+        The default bindings for this signal come in two variants,
+        the variant with the Shift modifier extends the selection,
+        the variant without the Shift modifier does not.
+        There are too many key combinations to list them all here.
+        
+        $(LIST
+          * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+            move by individual children
+          * <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
+          * <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
+        )
   
       Params:
         callback = signal callback delegate or function to connect
@@ -918,7 +917,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
           `flowBox` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-          false to propagate the event further.
+            false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -969,11 +968,11 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `SelectAll` signal.
   
       Emitted to select all children of the box,
-      if the selection mode permits it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
+        if the selection mode permits it.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1011,10 +1010,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `SelectedChildrenChanged` signal.
   
       Emitted when the set of selected children changes.
-      
-      Use [gtk.flow_box.FlowBox.selectedForeach] or
-      [gtk.flow_box.FlowBox.getSelectedChildren] to obtain the
-      selected children.
+        
+        Use [gtk.flow_box.FlowBox.selectedForeach] or
+        [gtk.flow_box.FlowBox.getSelectedChildren] to obtain the
+        selected children.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1052,10 +1051,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `ToggleCursorChild` signal.
   
       Emitted to toggle the selection of the child that has the focus.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>Space</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>Space</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1093,11 +1092,11 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `UnselectAll` signal.
   
       Emitted to unselect all children of the box,
-      if the selection mode permits it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
+        if the selection mode permits it.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -67,9 +67,9 @@ class WebsocketConnection : gobject.object.ObjectWrap
   /**
       Get `keepaliveInterval` property.
       Returns: Interval in seconds on when to send a ping message which will
-      serve as a keepalive message.
-      
-      If set to 0 the keepalive message is disabled.
+        serve as a keepalive message.
+        
+        If set to 0 the keepalive message is disabled.
   */
   @property uint keepaliveInterval()
   {
@@ -80,9 +80,9 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Set `keepaliveInterval` property.
       Params:
         propval = Interval in seconds on when to send a ping message which will
-        serve as a keepalive message.
-        
-        If set to 0 the keepalive message is disabled.
+          serve as a keepalive message.
+          
+          If set to 0 the keepalive message is disabled.
   */
   @property void keepaliveInterval(uint propval)
   {
@@ -92,8 +92,8 @@ class WebsocketConnection : gobject.object.ObjectWrap
   /**
       Get `maxIncomingPayloadSize` property.
       Returns: The maximum payload size for incoming packets.
-      
-      The protocol expects or 0 to not limit it.
+        
+        The protocol expects or 0 to not limit it.
   */
   @property ulong maxIncomingPayloadSize()
   {
@@ -104,8 +104,8 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Set `maxIncomingPayloadSize` property.
       Params:
         propval = The maximum payload size for incoming packets.
-        
-        The protocol expects or 0 to not limit it.
+          
+          The protocol expects or 0 to not limit it.
   */
   @property void maxIncomingPayloadSize(ulong propval)
   {
@@ -370,12 +370,12 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Connect to `Closed` signal.
   
       Emitted when the connection has completely closed.
-      
-      This happens either due to an orderly close from the peer, one
-      initiated via [soup.websocket_connection.WebsocketConnection.close] or a fatal error
-      condition that caused a close.
-      
-      This signal will be emitted once.
+        
+        This happens either due to an orderly close from the peer, one
+        initiated via [soup.websocket_connection.WebsocketConnection.close] or a fatal error
+        condition that caused a close.
+        
+        This signal will be emitted once.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -450,9 +450,9 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Connect to `Error` signal.
   
       Emitted when an error occurred on the WebSocket.
-      
-      This may be fired multiple times. Fatal errors will be followed by
-      the `signalWebsocketConnection::closed` signal being emitted.
+        
+        This may be fired multiple times. Fatal errors will be followed by
+        the `signalWebsocketConnection::closed` signal being emitted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -497,10 +497,10 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Connect to `Message` signal.
   
       Emitted when we receive a message from the peer.
-      
-      As a convenience, the message data will always be
-      null-terminated, but the NUL byte will not be included in
-      the length count.
+        
+        As a convenience, the message data will always be
+        null-terminated, but the NUL byte will not be included in
+        the length count.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -552,11 +552,11 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Connect to `Pong` signal.
   
       Emitted when we receive a Pong frame (solicited or
-      unsolicited) from the peer.
-      
-      As a convenience, the message data will always be
-      null-terminated, but the NUL byte will not be included in
-      the length count.
+        unsolicited) from the peer.
+        
+        As a convenience, the message data will always be
+        null-terminated, but the NUL byte will not be included in
+        the length count.
   
       Params:
         callback = signal callback delegate or function to connect

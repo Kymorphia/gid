@@ -121,10 +121,10 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `endWidget` property.
       Returns: The widget that is placed at the end position.
-      
-      In vertical orientation, the end position is at the bottom.
-      In horizontal orientation, the end position is at the trailing
-      edge wrt. to the text direction.
+        
+        In vertical orientation, the end position is at the bottom.
+        In horizontal orientation, the end position is at the trailing
+        edge wrt. to the text direction.
   */
   @property gtk.widget.Widget endWidget()
   {
@@ -135,10 +135,10 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Set `endWidget` property.
       Params:
         propval = The widget that is placed at the end position.
-        
-        In vertical orientation, the end position is at the bottom.
-        In horizontal orientation, the end position is at the trailing
-        edge wrt. to the text direction.
+          
+          In vertical orientation, the end position is at the bottom.
+          In horizontal orientation, the end position is at the trailing
+          edge wrt. to the text direction.
   */
   @property void endWidget(gtk.widget.Widget propval)
   {
@@ -148,13 +148,13 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `shrinkCenterLast` property.
       Returns: Whether to shrink the center widget after other children.
-      
-      By default, when there's no space to give all three children their
-      natural widths, the start and end widgets start shrinking and the
-      center child keeps natural width until they reach minimum width.
-      
-      If set to `FALSE`, start and end widgets keep natural width and the
-      center widget starts shrinking instead.
+        
+        By default, when there's no space to give all three children their
+        natural widths, the start and end widgets start shrinking and the
+        center child keeps natural width until they reach minimum width.
+        
+        If set to `FALSE`, start and end widgets keep natural width and the
+        center widget starts shrinking instead.
   */
   @property bool shrinkCenterLast()
   {
@@ -165,13 +165,13 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Set `shrinkCenterLast` property.
       Params:
         propval = Whether to shrink the center widget after other children.
-        
-        By default, when there's no space to give all three children their
-        natural widths, the start and end widgets start shrinking and the
-        center child keeps natural width until they reach minimum width.
-        
-        If set to `FALSE`, start and end widgets keep natural width and the
-        center widget starts shrinking instead.
+          
+          By default, when there's no space to give all three children their
+          natural widths, the start and end widgets start shrinking and the
+          center child keeps natural width until they reach minimum width.
+          
+          If set to `FALSE`, start and end widgets keep natural width and the
+          center widget starts shrinking instead.
   */
   @property void shrinkCenterLast(bool propval)
   {
@@ -181,10 +181,10 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `startWidget` property.
       Returns: The widget that is placed at the start position.
-      
-      In vertical orientation, the start position is at the top.
-      In horizontal orientation, the start position is at the leading
-      edge wrt. to the text direction.
+        
+        In vertical orientation, the start position is at the top.
+        In horizontal orientation, the start position is at the leading
+        edge wrt. to the text direction.
   */
   @property gtk.widget.Widget startWidget()
   {
@@ -195,10 +195,10 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Set `startWidget` property.
       Params:
         propval = The widget that is placed at the start position.
-        
-        In vertical orientation, the start position is at the top.
-        In horizontal orientation, the start position is at the leading
-        edge wrt. to the text direction.
+          
+          In vertical orientation, the start position is at the top.
+          In horizontal orientation, the start position is at the leading
+          edge wrt. to the text direction.
   */
   @property void startWidget(gtk.widget.Widget propval)
   {

@@ -13,7 +13,7 @@ import gstvideo.types;
 */
 class VideoCropMeta
 {
-  GstVideoCropMeta cInstance;
+  GstVideoCropMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class VideoCropMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_crop_meta.VideoCropMeta");
 
-    cInstance = *cast(GstVideoCropMeta*)ptr;
+    _cInstance = *cast(GstVideoCropMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class VideoCropMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -123,7 +123,9 @@ class VideoCropMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_crop_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

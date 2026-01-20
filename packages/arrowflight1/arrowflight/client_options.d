@@ -58,7 +58,7 @@ class ClientOptions : gobject.object.ObjectWrap
   /**
       Get `disableServerVerification` property.
       Returns: Whether use TLS without validating the server certificate. Use
-      with caution.
+        with caution.
   */
   @property bool disableServerVerification()
   {
@@ -69,7 +69,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Set `disableServerVerification` property.
       Params:
         propval = Whether use TLS without validating the server certificate. Use
-        with caution.
+          with caution.
   */
   @property void disableServerVerification(bool propval)
   {
@@ -98,7 +98,7 @@ class ClientOptions : gobject.object.ObjectWrap
   /**
       Get `privateKey` property.
       Returns: The private key associated with the client certificate for Mutual
-      TLS.
+        TLS.
   */
   @property string privateKey()
   {
@@ -109,7 +109,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Set `privateKey` property.
       Params:
         propval = The private key associated with the client certificate for Mutual
-        TLS.
+          TLS.
   */
   @property void privateKey(string propval)
   {
@@ -138,10 +138,10 @@ class ClientOptions : gobject.object.ObjectWrap
   /**
       Get `writeSizeLimitBytes` property.
       Returns: A soft limit on the number of bytes to write in a single batch
-      when sending Arrow data to a server.
-      
-      Used to help limit server memory consumption. Only enabled if
-      positive. When enabled, @GARROW_ERROR_IO may be yielded.
+        when sending Arrow data to a server.
+        
+        Used to help limit server memory consumption. Only enabled if
+        positive. When enabled, @GARROW_ERROR_IO may be yielded.
   */
   @property long writeSizeLimitBytes()
   {
@@ -152,10 +152,10 @@ class ClientOptions : gobject.object.ObjectWrap
       Set `writeSizeLimitBytes` property.
       Params:
         propval = A soft limit on the number of bytes to write in a single batch
-        when sending Arrow data to a server.
-        
-        Used to help limit server memory consumption. Only enabled if
-        positive. When enabled, @GARROW_ERROR_IO may be yielded.
+          when sending Arrow data to a server.
+          
+          Used to help limit server memory consumption. Only enabled if
+          positive. When enabled, @GARROW_ERROR_IO may be yielded.
   */
   @property void writeSizeLimitBytes(long propval)
   {

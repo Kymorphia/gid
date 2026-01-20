@@ -12,7 +12,7 @@ import gid.gid;
 */
 class Atom
 {
-  GdkAtom cInstancePtr;
+  GdkAtom _cInstancePtr;
   bool owned;
 
   /** */
@@ -21,7 +21,7 @@ class Atom
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.atom.Atom");
 
-    cInstancePtr = cast(GdkAtom)ptr;
+    _cInstancePtr = cast(GdkAtom)ptr;
 
     owned = take;
   }
@@ -29,7 +29,7 @@ class Atom
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

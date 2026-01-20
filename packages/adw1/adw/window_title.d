@@ -59,8 +59,8 @@ class WindowTitle : gtk.widget.Widget
   /**
       Get `subtitle` property.
       Returns: The subtitle to display.
-      
-      The subtitle should give the user additional details.
+        
+        The subtitle should give the user additional details.
   */
   @property string subtitle()
   {
@@ -71,8 +71,8 @@ class WindowTitle : gtk.widget.Widget
       Set `subtitle` property.
       Params:
         propval = The subtitle to display.
-        
-        The subtitle should give the user additional details.
+          
+          The subtitle should give the user additional details.
   */
   @property void subtitle(string propval)
   {
@@ -82,9 +82,9 @@ class WindowTitle : gtk.widget.Widget
   /**
       Get `title` property.
       Returns: The title to display.
-      
-      The title typically identifies the current view or content item, and
-      generally does not use the application name.
+        
+        The title typically identifies the current view or content item, and
+        generally does not use the application name.
   */
   @property string title()
   {
@@ -95,9 +95,9 @@ class WindowTitle : gtk.widget.Widget
       Set `title` property.
       Params:
         propval = The title to display.
-        
-        The title typically identifies the current view or content item, and
-        generally does not use the application name.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
   */
   @property void title(string propval)
   {

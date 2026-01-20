@@ -12,7 +12,7 @@ import gstsdp.types;
 */
 class SDPBandwidth
 {
-  GstSDPBandwidth cInstance;
+  GstSDPBandwidth _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class SDPBandwidth
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdpbandwidth.SDPBandwidth");
 
-    cInstance = *cast(GstSDPBandwidth*)ptr;
+    _cInstance = *cast(GstSDPBandwidth*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class SDPBandwidth
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

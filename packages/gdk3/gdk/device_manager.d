@@ -214,8 +214,8 @@ class DeviceManager : gobject.object.ObjectWrap
       Connect to `DeviceAdded` signal.
   
       The ::device-added signal is emitted either when a new master
-      pointer is created, or when a slave (Hardware) input device
-      is plugged in.
+        pointer is created, or when a slave (Hardware) input device
+        is plugged in.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -260,15 +260,15 @@ class DeviceManager : gobject.object.ObjectWrap
       Connect to `DeviceChanged` signal.
   
       The ::device-changed signal is emitted whenever a device
-      has changed in the hierarchy, either slave devices being
-      disconnected from their master device or connected to
-      another one, or master devices being added or removed
-      a slave device.
-      
-      If a slave device is detached from all master devices
-      ([gdk.device.Device.getAssociatedDevice] returns null), its
-      #GdkDeviceType will change to [gdk.types.DeviceType.Floating],
-      if it's attached, it will change to [gdk.types.DeviceType.Slave].
+        has changed in the hierarchy, either slave devices being
+        disconnected from their master device or connected to
+        another one, or master devices being added or removed
+        a slave device.
+        
+        If a slave device is detached from all master devices
+        ([gdk.device.Device.getAssociatedDevice] returns null), its
+        #GdkDeviceType will change to [gdk.types.DeviceType.Floating],
+        if it's attached, it will change to [gdk.types.DeviceType.Slave].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -313,8 +313,8 @@ class DeviceManager : gobject.object.ObjectWrap
       Connect to `DeviceRemoved` signal.
   
       The ::device-removed signal is emitted either when a master
-      pointer is removed, or when a slave (Hardware) input device
-      is unplugged.
+        pointer is removed, or when a slave (Hardware) input device
+        is unplugged.
   
       Params:
         callback = signal callback delegate or function to connect

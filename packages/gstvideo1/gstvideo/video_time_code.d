@@ -32,7 +32,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -279,7 +279,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   gstvideo.video_time_code.VideoTimeCode addInterval(gstvideo.video_time_code_interval.VideoTimeCodeInterval tcInter)
   {
     GstVideoTimeCode* _cretval;
-    _cretval = gst_video_time_code_add_interval(cast(const(GstVideoTimeCode)*)this._cPtr, tcInter ? cast(const(GstVideoTimeCodeInterval)*)tcInter._cPtr(No.Dup) : null);
+    _cretval = gst_video_time_code_add_interval(cast(const(GstVideoTimeCode)*)this._cPtr, cast(const(GstVideoTimeCodeInterval)*)&tcInter);
     auto _retval = _cretval ? new gstvideo.video_time_code.VideoTimeCode(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

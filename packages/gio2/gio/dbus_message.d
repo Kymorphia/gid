@@ -306,8 +306,8 @@ class DBusMessage : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] != 0; _cretlength++)
-        break;
+      while (_cretval[_cretlength] != 0)
+        _cretlength++;
       _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;

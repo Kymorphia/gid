@@ -29,7 +29,7 @@ class TextAttributes : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -235,7 +235,7 @@ class TextAttributes : gobject.boxed.Boxed
   /**
       Get `pixelsInsideWrap` field.
       Returns: Pixels of blank space between wrapped lines in
-        a paragraph.
+          a paragraph.
   */
   @property int pixelsInsideWrap()
   {
@@ -246,7 +246,7 @@ class TextAttributes : gobject.boxed.Boxed
       Set `pixelsInsideWrap` field.
       Params:
         propval = Pixels of blank space between wrapped lines in
-          a paragraph.
+            a paragraph.
   */
   @property void pixelsInsideWrap(int propval)
   {
@@ -334,7 +334,7 @@ class TextAttributes : gobject.boxed.Boxed
   /**
       Get `bgFullHeight` field.
       Returns: Background is fit to full line height rather than
-         baseline +/- ascent/descent (font height).
+           baseline +/- ascent/descent (font height).
   */
   @property uint bgFullHeight()
   {
@@ -345,7 +345,7 @@ class TextAttributes : gobject.boxed.Boxed
       Set `bgFullHeight` field.
       Params:
         propval = Background is fit to full line height rather than
-           baseline +/- ascent/descent (font height).
+             baseline +/- ascent/descent (font height).
   */
   @property void bgFullHeight(uint propval)
   {

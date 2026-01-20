@@ -9,7 +9,7 @@ import glib.types;
 /** */
 class MemChunk
 {
-  GMemChunk* cInstancePtr;
+  GMemChunk* _cInstancePtr;
   bool owned;
 
   /** */
@@ -18,7 +18,7 @@ class MemChunk
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.mem_chunk.MemChunk");
 
-    cInstancePtr = cast(GMemChunk*)ptr;
+    _cInstancePtr = cast(GMemChunk*)ptr;
 
     owned = take;
   }
@@ -26,7 +26,7 @@ class MemChunk
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /** */

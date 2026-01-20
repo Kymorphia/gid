@@ -24,7 +24,7 @@ class TargetEntry : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -88,9 +88,9 @@ class TargetEntry : gobject.boxed.Boxed
   /**
       Get `info` field.
       Returns: an application-assigned integer ID which will
-          get passed as a parameter to e.g the #GtkWidget::selection-get
-          signal. It allows the application to identify the target
-          type without extensive string compares.
+            get passed as a parameter to e.g the #GtkWidget::selection-get
+            signal. It allows the application to identify the target
+            type without extensive string compares.
   */
   @property uint info()
   {
@@ -101,9 +101,9 @@ class TargetEntry : gobject.boxed.Boxed
       Set `info` field.
       Params:
         propval = an application-assigned integer ID which will
-            get passed as a parameter to e.g the #GtkWidget::selection-get
-            signal. It allows the application to identify the target
-            type without extensive string compares.
+              get passed as a parameter to e.g the #GtkWidget::selection-get
+              signal. It allows the application to identify the target
+              type without extensive string compares.
   */
   @property void info(uint propval)
   {

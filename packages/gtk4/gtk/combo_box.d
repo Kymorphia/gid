@@ -117,11 +117,11 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   /**
       Get `active` property.
       Returns: The item which is currently active.
-      
-      If the model is a non-flat treemodel, and the active item is not an
-      immediate child of the root of the tree, this property has the value
-      `gtk_tree_path_get_indices (path)[0]`, where `path` is the
-      [gtk.tree_path.TreePath] of the active item.
+        
+        If the model is a non-flat treemodel, and the active item is not an
+        immediate child of the root of the tree, this property has the value
+        `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+        [gtk.tree_path.TreePath] of the active item.
   */
   @property int active()
   {
@@ -132,11 +132,11 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Set `active` property.
       Params:
         propval = The item which is currently active.
-        
-        If the model is a non-flat treemodel, and the active item is not an
-        immediate child of the root of the tree, this property has the value
-        `gtk_tree_path_get_indices (path)[0]`, where `path` is the
-        [gtk.tree_path.TreePath] of the active item.
+          
+          If the model is a non-flat treemodel, and the active item is not an
+          immediate child of the root of the tree, this property has the value
+          `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+          [gtk.tree_path.TreePath] of the active item.
   */
   @property void active(int propval)
   {
@@ -165,7 +165,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   /**
       Get `buttonSensitivity` property.
       Returns: Whether the dropdown button is sensitive when
-      the model is empty.
+        the model is empty.
   */
   @property gtk.types.SensitivityType buttonSensitivity()
   {
@@ -176,7 +176,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Set `buttonSensitivity` property.
       Params:
         propval = Whether the dropdown button is sensitive when
-        the model is empty.
+          the model is empty.
   */
   @property void buttonSensitivity(gtk.types.SensitivityType propval)
   {
@@ -205,9 +205,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   /**
       Get `entryTextColumn` property.
       Returns: The model column to associate with strings from the entry.
-      
-      This is property only relevant if the combo was created with
-      `property@Gtk.ComboBox:has-entry` is true.
+        
+        This is property only relevant if the combo was created with
+        `property@Gtk.ComboBox:has-entry` is true.
   */
   @property int entryTextColumn()
   {
@@ -218,9 +218,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Set `entryTextColumn` property.
       Params:
         propval = The model column to associate with strings from the entry.
-        
-        This is property only relevant if the combo was created with
-        `property@Gtk.ComboBox:has-entry` is true.
+          
+          This is property only relevant if the combo was created with
+          `property@Gtk.ComboBox:has-entry` is true.
   */
   @property void entryTextColumn(int propval)
   {
@@ -249,7 +249,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   /**
       Get `idColumn` property.
       Returns: The model column that provides string IDs for the values
-      in the model, if != -1.
+        in the model, if != -1.
   */
   @property int idColumn()
   {
@@ -260,7 +260,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Set `idColumn` property.
       Params:
         propval = The model column that provides string IDs for the values
-        in the model, if != -1.
+          in the model, if != -1.
   */
   @property void idColumn(int propval)
   {
@@ -289,7 +289,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   /**
       Get `popupFixedWidth` property.
       Returns: Whether the popup's width should be a fixed width matching the
-      allocated width of the combo box.
+        allocated width of the combo box.
   */
   @property bool popupFixedWidth()
   {
@@ -300,7 +300,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Set `popupFixedWidth` property.
       Params:
         propval = Whether the popup's width should be a fixed width matching the
-        allocated width of the combo box.
+          allocated width of the combo box.
   */
   @property void popupFixedWidth(bool propval)
   {
@@ -310,9 +310,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   /**
       Get `popupShown` property.
       Returns: Whether the combo boxes dropdown is popped up.
-      
-      Note that this property is mainly useful, because
-      it allows you to connect to notify::popup-shown.
+        
+        Note that this property is mainly useful, because
+        it allows you to connect to notify::popup-shown.
   */
   @property bool popupShown()
   {
@@ -448,9 +448,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   bool getActiveIter(out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    GtkTreeIter _iter;
-    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, &_iter);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, cast(GtkTreeIter*)&iter);
     return _retval;
   }
 
@@ -653,9 +651,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setActiveIter(gtk.tree_iter.TreeIter iter = null)
+  void setActiveIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, cast(GtkTreeIter*)&iter);
   }
 
   /**
@@ -778,13 +776,15 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   {
     extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_combo_box_set_row_separator_func(cast(GtkComboBox*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -794,9 +794,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Connect to `Activate` signal.
   
       Emitted to when the combo box is activated.
-      
-      The `::activate` signal on [gtk.combo_box.ComboBox] is an action signal and
-      emitting it causes the combo box to pop up its dropdown.
+        
+        The `::activate` signal on [gtk.combo_box.ComboBox] is an action signal and
+        emitting it causes the combo box to pop up its dropdown.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -834,10 +834,10 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Connect to `Changed` signal.
   
       Emitted when the active item is changed.
-      
-      The can be due to the user selecting a different item from the list,
-      or due to a call to [gtk.combo_box.ComboBox.setActiveIter]. It will
-      also be emitted while typing into the entry of a combo box with an entry.
+        
+        The can be due to the user selecting a different item from the list,
+        or due to a call to [gtk.combo_box.ComboBox.setActiveIter]. It will
+        also be emitted while typing into the entry of a combo box with an entry.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -875,36 +875,36 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Connect to `FormatEntryText` signal.
   
       Emitted to allow changing how the text in a combo box's entry is displayed.
-      
-      See `propertyGtk.ComboBox:has-entry`.
-      
-      Connect a signal handler which returns an allocated string representing
-      path. That string will then be used to set the text in the combo box's
-      entry. The default signal handler uses the text from the
-      `propertyGtk.ComboBox:entry-text-column` model column.
-      
-      Here's an example signal handler which fetches data from the model and
-      displays it in the entry.
-      ```c
-      static char *
-      format_entry_text_callback (GtkComboBox *combo,
-                                  const char *path,
-                                  gpointer     user_data)
-      {
-        GtkTreeIter iter;
-        GtkTreeModel model;
-        double       value;
-      
-        model = gtk_combo_box_get_model (combo);
-      
-        gtk_tree_model_get_iter_from_string (model, &iter, path);
-        gtk_tree_model_get (model, &iter,
-                            THE_DOUBLE_VALUE_COLUMN, &value,
-                            -1);
-      
-        return g_strdup_printf ("%g", value);
-      }
-      ```
+        
+        See `propertyGtk.ComboBox:has-entry`.
+        
+        Connect a signal handler which returns an allocated string representing
+        path. That string will then be used to set the text in the combo box's
+        entry. The default signal handler uses the text from the
+        `propertyGtk.ComboBox:entry-text-column` model column.
+        
+        Here's an example signal handler which fetches data from the model and
+        displays it in the entry.
+        ```c
+        static char *
+        format_entry_text_callback (GtkComboBox *combo,
+                                    const char *path,
+                                    gpointer     user_data)
+        {
+          GtkTreeIter iter;
+          GtkTreeModel model;
+          double       value;
+        
+          model = gtk_combo_box_get_model (combo);
+        
+          gtk_tree_model_get_iter_from_string (model, &iter, path);
+          gtk_tree_model_get (model, &iter,
+                              THE_DOUBLE_VALUE_COLUMN, &value,
+                              -1);
+        
+          return g_strdup_printf ("%g", value);
+        }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -912,12 +912,12 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
           $(D string callback(string path, gtk.combo_box.ComboBox comboBox))
   
           `path` the [gtk.tree_path.TreePath] string from the combo box's current model
-            to format text for (optional)
+              to format text for (optional)
   
           `comboBox` the instance the signal is connected to (optional)
   
           `Returns` a newly allocated string representing path
-            for the current [gtk.combo_box.ComboBox] model.
+              for the current [gtk.combo_box.ComboBox] model.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -953,8 +953,8 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Connect to `MoveActive` signal.
   
       Emitted to move the active selection.
-      
-      This is an [keybinding signal](class.SignalAction.html).
+        
+        This is an [keybinding signal](class.SignalAction.html).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -999,10 +999,10 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Connect to `Popdown` signal.
   
       Emitted to popdown the combo box list.
-      
-      This is an [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are Alt+Up and Escape.
+        
+        This is an [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are Alt+Up and Escape.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1042,10 +1042,10 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Connect to `Popup` signal.
   
       Emitted to popup the combo box list.
-      
-      This is an [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is Alt+Down.
+        
+        This is an [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is Alt+Down.
   
       Params:
         callback = signal callback delegate or function to connect

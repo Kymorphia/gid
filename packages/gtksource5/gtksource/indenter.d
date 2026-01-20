@@ -74,7 +74,7 @@ interface Indenter
         view = a #GtkSourceView
         iter = the location of the indentation request
   */
-  void indent(gtksource.view.View view, gtk.text_iter.TextIter iter);
+  void indent(gtksource.view.View view, ref gtk.text_iter.TextIter iter);
 
   /**
       This function is used to determine if a key pressed should cause the

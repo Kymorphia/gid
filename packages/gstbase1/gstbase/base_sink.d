@@ -158,9 +158,9 @@ class BaseSink : gst.element.Element
   /**
       Get `async` property.
       Returns: If set to true, the basesink will perform asynchronous state changes.
-      When set to false, the sink will not signal the parent when it prerolls.
-      Use this option when dealing with sparse streams or when synchronisation is
-      not required.
+        When set to false, the sink will not signal the parent when it prerolls.
+        Use this option when dealing with sparse streams or when synchronisation is
+        not required.
   */
   @property bool async()
   {
@@ -171,9 +171,9 @@ class BaseSink : gst.element.Element
       Set `async` property.
       Params:
         propval = If set to true, the basesink will perform asynchronous state changes.
-        When set to false, the sink will not signal the parent when it prerolls.
-        Use this option when dealing with sparse streams or when synchronisation is
-        not required.
+          When set to false, the sink will not signal the parent when it prerolls.
+          Use this option when dealing with sparse streams or when synchronisation is
+          not required.
   */
   @property void async(bool propval)
   {
@@ -202,9 +202,9 @@ class BaseSink : gst.element.Element
   /**
       Get `enableLastSample` property.
       Returns: Enable the last-sample property. If false, basesink doesn't keep a
-      reference to the last buffer arrived and the last-sample property is always
-      set to null. This can be useful if you need buffers to be released as soon
-      as possible, eg. if you're using a buffer pool.
+        reference to the last buffer arrived and the last-sample property is always
+        set to null. This can be useful if you need buffers to be released as soon
+        as possible, eg. if you're using a buffer pool.
   */
   @property bool enableLastSample()
   {
@@ -215,9 +215,9 @@ class BaseSink : gst.element.Element
       Set `enableLastSample` property.
       Params:
         propval = Enable the last-sample property. If false, basesink doesn't keep a
-        reference to the last buffer arrived and the last-sample property is always
-        set to null. This can be useful if you need buffers to be released as soon
-        as possible, eg. if you're using a buffer pool.
+          reference to the last buffer arrived and the last-sample property is always
+          set to null. This can be useful if you need buffers to be released as soon
+          as possible, eg. if you're using a buffer pool.
   */
   @property void enableLastSample(bool propval)
   {
@@ -227,8 +227,8 @@ class BaseSink : gst.element.Element
   /**
       Get `lastSample` property.
       Returns: The last buffer that arrived in the sink and was used for preroll or for
-      rendering. This property can be used to generate thumbnails. This property
-      can be null when the sink has not yet received a buffer.
+        rendering. This property can be used to generate thumbnails. This property
+        can be null when the sink has not yet received a buffer.
   */
   @property gst.sample.Sample lastSample()
   {
@@ -238,8 +238,8 @@ class BaseSink : gst.element.Element
   /**
       Get `maxBitrate` property.
       Returns: Control the maximum amount of bits that will be rendered per second.
-      Setting this property to a value bigger than 0 will make the sink delay
-      rendering of the buffers when it would exceed to max-bitrate.
+        Setting this property to a value bigger than 0 will make the sink delay
+        rendering of the buffers when it would exceed to max-bitrate.
   */
   @property ulong maxBitrate()
   {
@@ -250,8 +250,8 @@ class BaseSink : gst.element.Element
       Set `maxBitrate` property.
       Params:
         propval = Control the maximum amount of bits that will be rendered per second.
-        Setting this property to a value bigger than 0 will make the sink delay
-        rendering of the buffers when it would exceed to max-bitrate.
+          Setting this property to a value bigger than 0 will make the sink delay
+          rendering of the buffers when it would exceed to max-bitrate.
   */
   @property void maxBitrate(ulong propval)
   {
@@ -273,8 +273,8 @@ class BaseSink : gst.element.Element
   /**
       Get `processingDeadline` property.
       Returns: Maximum amount of time (in nanoseconds) that the pipeline can take
-      for processing the buffer. This is added to the latency of live
-      pipelines.
+        for processing the buffer. This is added to the latency of live
+        pipelines.
   */
   @property ulong processingDeadline()
   {
@@ -285,8 +285,8 @@ class BaseSink : gst.element.Element
       Set `processingDeadline` property.
       Params:
         propval = Maximum amount of time (in nanoseconds) that the pipeline can take
-        for processing the buffer. This is added to the latency of live
-        pipelines.
+          for processing the buffer. This is added to the latency of live
+          pipelines.
   */
   @property void processingDeadline(ulong propval)
   {
@@ -308,8 +308,8 @@ class BaseSink : gst.element.Element
   /**
       Get `renderDelay` property.
       Returns: The additional delay between synchronisation and actual rendering of the
-      media. This property will add additional latency to the device in order to
-      make other sinks compensate for the delay.
+        media. This property will add additional latency to the device in order to
+        make other sinks compensate for the delay.
   */
   @property ulong renderDelay()
   {
@@ -320,8 +320,8 @@ class BaseSink : gst.element.Element
       Set `renderDelay` property.
       Params:
         propval = The additional delay between synchronisation and actual rendering of the
-        media. This property will add additional latency to the device in order to
-        make other sinks compensate for the delay.
+          media. This property will add additional latency to the device in order to
+          make other sinks compensate for the delay.
   */
   @property void renderDelay(ulong propval)
   {
@@ -331,13 +331,13 @@ class BaseSink : gst.element.Element
   /**
       Get `stats` property.
       Returns: Various #GstBaseSink statistics. This property returns a #GstStructure
-      with name `application/x-gst-base-sink-stats` with the following fields:
-      
-      $(LIST
-        * "average-rate"  G_TYPE_DOUBLE   average frame rate
-        * "dropped" G_TYPE_UINT64   Number of dropped frames
-        * "rendered" G_TYPE_UINT64   Number of rendered frames
-      )
+        with name `application/x-gst-base-sink-stats` with the following fields:
+        
+        $(LIST
+          * "average-rate"  G_TYPE_DOUBLE   average frame rate
+          * "dropped" G_TYPE_UINT64   Number of dropped frames
+          * "rendered" G_TYPE_UINT64   Number of rendered frames
+        )
   */
   @property gst.structure.Structure stats()
   {
@@ -359,8 +359,8 @@ class BaseSink : gst.element.Element
   /**
       Get `throttleTime` property.
       Returns: The time to insert between buffers. This property can be used to control
-      the maximum amount of buffers per second to render. Setting this property
-      to a value bigger than 0 will make the sink create THROTTLE QoS events.
+        the maximum amount of buffers per second to render. Setting this property
+        to a value bigger than 0 will make the sink create THROTTLE QoS events.
   */
   @property ulong throttleTime()
   {
@@ -371,8 +371,8 @@ class BaseSink : gst.element.Element
       Set `throttleTime` property.
       Params:
         propval = The time to insert between buffers. This property can be used to control
-        the maximum amount of buffers per second to render. Setting this property
-        to a value bigger than 0 will make the sink create THROTTLE QoS events.
+          the maximum amount of buffers per second to render. Setting this property
+          to a value bigger than 0 will make the sink create THROTTLE QoS events.
   */
   @property void throttleTime(ulong propval)
   {
@@ -382,8 +382,8 @@ class BaseSink : gst.element.Element
   /**
       Get `tsOffset` property.
       Returns: Controls the final synchronisation, a negative value will render the buffer
-      earlier while a positive value delays playback. This property can be
-      used to fix synchronisation in bad files.
+        earlier while a positive value delays playback. This property can be
+        used to fix synchronisation in bad files.
   */
   @property long tsOffset()
   {
@@ -394,8 +394,8 @@ class BaseSink : gst.element.Element
       Set `tsOffset` property.
       Params:
         propval = Controls the final synchronisation, a negative value will render the buffer
-        earlier while a positive value delays playback. This property can be
-        used to fix synchronisation in bad files.
+          earlier while a positive value delays playback. This property can be
+          used to fix synchronisation in bad files.
   */
   @property void tsOffset(long propval)
   {
@@ -418,7 +418,7 @@ class BaseSink : gst.element.Element
   gst.types.FlowReturn doPreroll(gst.mini_object.MiniObject obj)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)this._cPtr, obj ? cast(GstMiniObject*)obj._cPtr(No.Dup) : null);
+    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)this._cPtr, cast(GstMiniObject*)&obj);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -543,7 +543,9 @@ class BaseSink : gst.element.Element
   {
     GstStructure* _cretval;
     _cretval = gst_base_sink_get_stats(cast(GstBaseSink*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 

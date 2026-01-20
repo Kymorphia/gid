@@ -77,7 +77,7 @@ class Regex : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -578,13 +578,15 @@ class Regex : gobject.boxed.Boxed
   {
     extern(C) gboolean _evalCallback(const(GMatchInfo)* matchInfo, GString* result, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(glib.types.RegexEvalCallback*)userData;
 
-      gboolean _retval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new glib.string_.String(cast(void*)result, No.Take) : null);
+      _dretval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new glib.string_.String(cast(void*)result, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _evalCB = eval ? &_evalCallback : null;
-
     char* _cretval;
     ptrdiff_t _stringLen;
     if (string_)
@@ -670,8 +672,8 @@ class Regex : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -730,8 +732,8 @@ class Regex : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -905,8 +907,8 @@ class Regex : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);

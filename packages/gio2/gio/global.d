@@ -54,7 +54,6 @@ void busGet(gio.types.BusType busType, gio.cancellable.Cancellable cancellable =
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   g_bus_get(busType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
@@ -382,8 +381,8 @@ string[] contentTypeGetMimeDirs()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -483,8 +482,8 @@ string[] contentTypeGuessForTree(gio.file.File root)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -587,6 +586,7 @@ void contentTypeSetMimeDirs(string[] dirs = null)
     _tmpdirs ~= s.toCString(No.Alloc);
   _tmpdirs ~= null;
   const(char*)* _dirs = _tmpdirs.ptr;
+
   g_content_type_set_mime_dirs(_dirs);
 }
 
@@ -683,7 +683,6 @@ void dbusAddressGetStream(string address, gio.cancellable.Cancellable cancellabl
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   const(char)* _address = address.toCString(No.Alloc);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   g_dbus_address_get_stream(_address, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -1053,8 +1052,8 @@ ubyte[] dbusUnescapeObjectPath(string s)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] != 0; _cretlength++)
-      break;
+    while (_cretval[_cretlength] != 0)
+      _cretlength++;
     _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
   }
   return _retval;
@@ -1203,13 +1202,15 @@ void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gi
 {
   extern(C) gboolean _jobFuncCallback(GIOSchedulerJob* job, GCancellable* cancellable, void* data)
   {
+    bool _dretval;
     auto _dlg = cast(gio.types.IOSchedulerJobFunc*)data;
 
-    gboolean _retval = (*_dlg)(job ? new gio.ioscheduler_job.IOSchedulerJob(cast(void*)job, No.Take) : null, gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+    _dretval = (*_dlg)(job ? new gio.ioscheduler_job.IOSchedulerJob(cast(void*)job, No.Take) : null, gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _jobFuncCB = jobFunc ? &_jobFuncCallback : null;
-
   auto _jobFunc = jobFunc ? freezeDelegate(cast(void*)&jobFunc) : null;
   GDestroyNotify _jobFuncDestroyCB = jobFunc ? &thawDelegate : null;
   g_io_scheduler_push_job(_jobFuncCB, _jobFunc, _jobFuncDestroyCB, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
@@ -1510,8 +1511,8 @@ string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags l
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -1654,7 +1655,6 @@ void simpleAsyncReportGerrorInIdle(gobject.object.ObjectWrap object, gio.types.A
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   g_simple_async_report_gerror_in_idle(object ? cast(GObject*)object._cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error._cPtr : null);
 }

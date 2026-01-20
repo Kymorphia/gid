@@ -11,7 +11,7 @@ import gmime.types;
 */
 class OpenPGPMarker
 {
-  GMimeOpenPGPMarker cInstance;
+  GMimeOpenPGPMarker _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class OpenPGPMarker
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gmime.open_pgpmarker.OpenPGPMarker");
 
-    cInstance = *cast(GMimeOpenPGPMarker*)ptr;
+    _cInstance = *cast(GMimeOpenPGPMarker*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class OpenPGPMarker
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

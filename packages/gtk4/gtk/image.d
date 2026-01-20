@@ -108,9 +108,9 @@ class Image : gtk.widget.Widget
   /**
       Get `gicon` property.
       Returns: The [gio.icon.Icon] displayed in the GtkImage.
-      
-      For themed icons, If the icon theme is changed, the image will be updated
-      automatically.
+        
+        For themed icons, If the icon theme is changed, the image will be updated
+        automatically.
   */
   @property gio.icon.Icon gicon()
   {
@@ -121,9 +121,9 @@ class Image : gtk.widget.Widget
       Set `gicon` property.
       Params:
         propval = The [gio.icon.Icon] displayed in the GtkImage.
-        
-        For themed icons, If the icon theme is changed, the image will be updated
-        automatically.
+          
+          For themed icons, If the icon theme is changed, the image will be updated
+          automatically.
   */
   @property void gicon(gio.icon.Icon propval)
   {
@@ -133,8 +133,8 @@ class Image : gtk.widget.Widget
   /**
       Get `iconName` property.
       Returns: The name of the icon in the icon theme.
-      
-      If the icon theme is changed, the image will be updated automatically.
+        
+        If the icon theme is changed, the image will be updated automatically.
   */
   @property string iconName()
   {
@@ -145,8 +145,8 @@ class Image : gtk.widget.Widget
       Set `iconName` property.
       Params:
         propval = The name of the icon in the icon theme.
-        
-        If the icon theme is changed, the image will be updated automatically.
+          
+          If the icon theme is changed, the image will be updated automatically.
   */
   @property void iconName(string propval)
   {
@@ -194,10 +194,10 @@ class Image : gtk.widget.Widget
   /**
       Get `pixelSize` property.
       Returns: The size in pixels to display icons at.
-      
-      If set to a value != -1, this property overrides the
-      `property@Gtk.Image:icon-size` property for images of type
-      [gtk.types.ImageType.IconName].
+        
+        If set to a value != -1, this property overrides the
+        `property@Gtk.Image:icon-size` property for images of type
+        [gtk.types.ImageType.IconName].
   */
   @property int pixelSize()
   {
@@ -208,10 +208,10 @@ class Image : gtk.widget.Widget
       Set `pixelSize` property.
       Params:
         propval = The size in pixels to display icons at.
-        
-        If set to a value != -1, this property overrides the
-        `property@Gtk.Image:icon-size` property for images of type
-        [gtk.types.ImageType.IconName].
+          
+          If set to a value != -1, this property overrides the
+          `property@Gtk.Image:icon-size` property for images of type
+          [gtk.types.ImageType.IconName].
   */
   @property void pixelSize(int propval)
   {
@@ -249,10 +249,10 @@ class Image : gtk.widget.Widget
   /**
       Get `useFallback` property.
       Returns: Whether the icon displayed in the [gtk.image.Image] will use
-      standard icon names fallback.
-      
-      The value of this property is only relevant for images of type
-      [gtk.types.ImageType.IconName] and [gtk.types.ImageType.Gicon].
+        standard icon names fallback.
+        
+        The value of this property is only relevant for images of type
+        [gtk.types.ImageType.IconName] and [gtk.types.ImageType.Gicon].
   */
   @property bool useFallback()
   {
@@ -263,10 +263,10 @@ class Image : gtk.widget.Widget
       Set `useFallback` property.
       Params:
         propval = Whether the icon displayed in the [gtk.image.Image] will use
-        standard icon names fallback.
-        
-        The value of this property is only relevant for images of type
-        [gtk.types.ImageType.IconName] and [gtk.types.ImageType.Gicon].
+          standard icon names fallback.
+          
+          The value of this property is only relevant for images of type
+          [gtk.types.ImageType.IconName] and [gtk.types.ImageType.Gicon].
   */
   @property void useFallback(bool propval)
   {

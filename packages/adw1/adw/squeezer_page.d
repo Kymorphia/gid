@@ -44,15 +44,15 @@ class SqueezerPage : gobject.object.ObjectWrap
   /**
       Get `enabled` property.
       Returns: Whether the child is enabled.
-      
-      If a child is disabled, it will be ignored when looking for the child
-      fitting the available size best.
-      
-      This allows to programmatically and prematurely hide a child even if it
-      fits in the available space.
-      
-      This can be used e.g. to ensure a certain child is hidden below a certain
-      window width, or any other constraint you find suitable.
+        
+        If a child is disabled, it will be ignored when looking for the child
+        fitting the available size best.
+        
+        This allows to programmatically and prematurely hide a child even if it
+        fits in the available space.
+        
+        This can be used e.g. to ensure a certain child is hidden below a certain
+        window width, or any other constraint you find suitable.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
@@ -65,15 +65,15 @@ class SqueezerPage : gobject.object.ObjectWrap
       Set `enabled` property.
       Params:
         propval = Whether the child is enabled.
-        
-        If a child is disabled, it will be ignored when looking for the child
-        fitting the available size best.
-        
-        This allows to programmatically and prematurely hide a child even if it
-        fits in the available space.
-        
-        This can be used e.g. to ensure a certain child is hidden below a certain
-        window width, or any other constraint you find suitable.
+          
+          If a child is disabled, it will be ignored when looking for the child
+          fitting the available size best.
+          
+          This allows to programmatically and prematurely hide a child even if it
+          fits in the available space.
+          
+          This can be used e.g. to ensure a certain child is hidden below a certain
+          window width, or any other constraint you find suitable.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */

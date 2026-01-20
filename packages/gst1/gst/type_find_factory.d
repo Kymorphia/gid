@@ -116,7 +116,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   */
   void callFunction(gst.type_find.TypeFind find)
   {
-    gst_type_find_factory_call_function(cast(GstTypeFindFactory*)this._cPtr, find ? cast(GstTypeFind*)find._cPtr : null);
+    gst_type_find_factory_call_function(cast(GstTypeFindFactory*)this._cPtr, cast(GstTypeFind*)&find);
   }
 
   /**
@@ -147,8 +147,8 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);

@@ -361,7 +361,7 @@ interface TreeModel
         parent = the [gtk.tree_iter.TreeIter]
       Returns: true, if iter has been set to the first child
   */
-  bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null);
+  bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent);
 
   /**
       Returns true if iter has children, false otherwise.
@@ -382,7 +382,7 @@ interface TreeModel
         iter = the [gtk.tree_iter.TreeIter]
       Returns: the number of children of iter
   */
-  int iterNChildren(gtk.tree_iter.TreeIter iter = null);
+  int iterNChildren(gtk.tree_iter.TreeIter iter);
 
   /**
       Sets iter to point to the node following it at the current level.
@@ -582,13 +582,13 @@ interface TreeModel
       Connect to `RowDeleted` signal.
   
       This signal is emitted when a row has been deleted.
-      
-      Note that no iterator is passed to the signal handler,
-      since the row is already deleted.
-      
-      This should be called by models after a row has been removed.
-      The location pointed to by path should be the location that
-      the row previously was at. It may not be a valid location anymore.
+        
+        Note that no iterator is passed to the signal handler,
+        since the row is already deleted.
+        
+        This should be called by models after a row has been removed.
+        The location pointed to by path should be the location that
+        the row previously was at. It may not be a valid location anymore.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -608,7 +608,7 @@ interface TreeModel
       Connect to `RowHasChildToggled` signal.
   
       This signal is emitted when a row has gotten the first child
-      row or lost its last child row.
+        row or lost its last child row.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -630,11 +630,11 @@ interface TreeModel
       Connect to `RowInserted` signal.
   
       This signal is emitted when a new row has been inserted in
-      the model.
-      
-      Note that the row may still be empty at this point, since
-      it is a common pattern to first insert an empty row, and
-      then fill it with the desired values.
+        the model.
+        
+        Note that the row may still be empty at this point, since
+        it is a common pattern to first insert an empty row, and
+        then fill it with the desired values.
   
       Params:
         callback = signal callback delegate or function to connect

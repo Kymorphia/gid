@@ -50,6 +50,7 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     foreach (obj; recordBatches)
       _tmprecordBatches ~= obj ? cast(GArrowRecordBatch*)obj._cPtr : null;
     GArrowRecordBatch** _recordBatches = cast(GArrowRecordBatch**)_tmprecordBatches.ptr;
+
     _cretval = gadataset_in_memory_fragment_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _recordBatches, _nRecordBatches);
     this(_cretval, Yes.Take);
   }

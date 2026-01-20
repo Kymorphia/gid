@@ -55,8 +55,8 @@ interface Scrollable
   /**
       Get `hadjustment` property.
       Returns: Horizontal [gtk.adjustment.Adjustment] of the scrollable widget.
-      
-      This adjustment is shared between the scrollable widget and its parent.
+        
+        This adjustment is shared between the scrollable widget and its parent.
   */
   @property gtk.adjustment.Adjustment hadjustment();
 
@@ -64,8 +64,8 @@ interface Scrollable
       Set `hadjustment` property.
       Params:
         propval = Horizontal [gtk.adjustment.Adjustment] of the scrollable widget.
-        
-        This adjustment is shared between the scrollable widget and its parent.
+          
+          This adjustment is shared between the scrollable widget and its parent.
   */
   @property void hadjustment(gtk.adjustment.Adjustment propval);
 
@@ -85,8 +85,8 @@ interface Scrollable
   /**
       Get `vadjustment` property.
       Returns: Vertical [gtk.adjustment.Adjustment] of the scrollable widget.
-      
-      This adjustment is shared between the scrollable widget and its parent.
+        
+        This adjustment is shared between the scrollable widget and its parent.
   */
   @property gtk.adjustment.Adjustment vadjustment();
 
@@ -94,8 +94,8 @@ interface Scrollable
       Set `vadjustment` property.
       Params:
         propval = Vertical [gtk.adjustment.Adjustment] of the scrollable widget.
-        
-        This adjustment is shared between the scrollable widget and its parent.
+          
+          This adjustment is shared between the scrollable widget and its parent.
   */
   @property void vadjustment(gtk.adjustment.Adjustment propval);
 

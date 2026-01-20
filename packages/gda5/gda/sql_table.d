@@ -4,7 +4,6 @@ module gda.sql_table;
 import gda.c.functions;
 import gda.c.types;
 import gda.meta_db_object;
-import gda.sql_any_part;
 import gda.types;
 import gid.gid;
 import gobject.value;
@@ -14,7 +13,7 @@ import gobject.value;
 */
 class SqlTable
 {
-  GdaSqlTable cInstance;
+  GdaSqlTable _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +21,7 @@ class SqlTable
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_table.SqlTable");
 
-    cInstance = *cast(GdaSqlTable*)ptr;
+    _cInstance = *cast(GdaSqlTable*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,13 +30,7 @@ class SqlTable
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
-  }
-
-  /** */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlTable*)this._cPtr).any, No.Take);
+    return cast(void*)&_cInstance;
   }
 
   /** */

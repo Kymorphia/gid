@@ -120,8 +120,8 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Get `maxBodySize` property.
       Returns: If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
-      the maximum number of bytes of the body that will be logged.
-      (-1 means "no limit".)
+        the maximum number of bytes of the body that will be logged.
+        (-1 means "no limit".)
   */
   @property int maxBodySize()
   {
@@ -132,8 +132,8 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Set `maxBodySize` property.
       Params:
         propval = If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
-        the maximum number of bytes of the body that will be logged.
-        (-1 means "no limit".)
+          the maximum number of bytes of the body that will be logged.
+          (-1 means "no limit".)
   */
   @property void maxBodySize(int propval)
   {
@@ -199,7 +199,6 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
     }
     auto _printerCB = printer ? &_printerCallback : null;
-
     auto _printer = printer ? freezeDelegate(cast(void*)&printer) : null;
     GDestroyNotify _printerDestroyCB = printer ? &thawDelegate : null;
     soup_logger_set_printer(cast(SoupLogger*)this._cPtr, _printerCB, _printer, _printerDestroyCB);
@@ -229,7 +228,6 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       return _retval;
     }
     auto _requestFilterCB = requestFilter ? &_requestFilterCallback : null;
-
     auto _requestFilter = requestFilter ? freezeDelegate(cast(void*)&requestFilter) : null;
     GDestroyNotify _requestFilterDestroyCB = requestFilter ? &thawDelegate : null;
     soup_logger_set_request_filter(cast(SoupLogger*)this._cPtr, _requestFilterCB, _requestFilter, _requestFilterDestroyCB);
@@ -259,7 +257,6 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       return _retval;
     }
     auto _responseFilterCB = responseFilter ? &_responseFilterCallback : null;
-
     auto _responseFilter = responseFilter ? freezeDelegate(cast(void*)&responseFilter) : null;
     GDestroyNotify _responseFilterDestroyCB = responseFilter ? &thawDelegate : null;
     soup_logger_set_response_filter(cast(SoupLogger*)this._cPtr, _responseFilterCB, _responseFilter, _responseFilterDestroyCB);

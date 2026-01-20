@@ -154,9 +154,7 @@ class Style : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
-    GdkColor _color;
-    _retval = cast(bool)gtk_style_lookup_color(cast(GtkStyle*)this._cPtr, _colorName, &_color);
-    color = new gdk.color.Color(cast(void*)&_color, No.Take);
+    _retval = cast(bool)gtk_style_lookup_color(cast(GtkStyle*)this._cPtr, _colorName, cast(GdkColor*)&color);
     return _retval;
   }
 
@@ -227,9 +225,9 @@ class Style : gobject.object.ObjectWrap
       Connect to `Realize` signal.
   
       Emitted when the style has been initialized for a particular
-      visual. Connecting to this signal is probably seldom
-      useful since most of the time applications and widgets only
-      deal with styles that have been already realized.
+        visual. Connecting to this signal is probably seldom
+        useful since most of the time applications and widgets only
+        deal with styles that have been already realized.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -267,9 +265,9 @@ class Style : gobject.object.ObjectWrap
       Connect to `Unrealize` signal.
   
       Emitted when the aspects of the style specific to a particular visual
-      is being cleaned up. A connection to this signal can be useful
-      if a widget wants to cache objects as object data on #GtkStyle.
-      This signal provides a convenient place to free such cached objects.
+        is being cleaned up. A connection to this signal can be useful
+        if a widget wants to cache objects as object data on #GtkStyle.
+        This signal provides a convenient place to free such cached objects.
   
       Params:
         callback = signal callback delegate or function to connect

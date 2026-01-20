@@ -76,8 +76,8 @@ class MenuShell : gtk.container.Container
   /**
       Get `takeFocus` property.
       Returns: A boolean that determines whether the menu and its submenus grab the
-      keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
-      [gtk.menu_shell.MenuShell.getTakeFocus].
+        keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
+        [gtk.menu_shell.MenuShell.getTakeFocus].
   */
   @property bool takeFocus()
   {
@@ -88,8 +88,8 @@ class MenuShell : gtk.container.Container
       Set `takeFocus` property.
       Params:
         propval = A boolean that determines whether the menu and its submenus grab the
-        keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
-        [gtk.menu_shell.MenuShell.getTakeFocus].
+          keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
+          [gtk.menu_shell.MenuShell.getTakeFocus].
   */
   @property void takeFocus(bool propval)
   {
@@ -330,7 +330,7 @@ class MenuShell : gtk.container.Container
       Connect to `ActivateCurrent` signal.
   
       An action signal that activates the current menu item within
-      the menu shell.
+        the menu shell.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -375,7 +375,7 @@ class MenuShell : gtk.container.Container
       Connect to `Cancel` signal.
   
       An action signal which cancels the selection within the menu shell.
-      Causes the #GtkMenuShell::selection-done signal to be emitted.
+        Causes the #GtkMenuShell::selection-done signal to be emitted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -413,7 +413,7 @@ class MenuShell : gtk.container.Container
       Connect to `CycleFocus` signal.
   
       A keybinding signal which moves the focus in the
-      given direction.
+        given direction.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -495,11 +495,11 @@ class MenuShell : gtk.container.Container
       Connect to `Insert` signal.
   
       The ::insert signal is emitted when a new #GtkMenuItem is added to
-      a #GtkMenuShell.  A separate signal is used instead of
-      GtkContainer::add because of the need for an additional position
-      parameter.
-      
-      The inverse of this signal is the GtkContainer::removed signal.
+        a #GtkMenuShell.  A separate signal is used instead of
+        GtkContainer::add because of the need for an additional position
+        parameter.
+        
+        The inverse of this signal is the GtkContainer::removed signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -551,7 +551,7 @@ class MenuShell : gtk.container.Container
       Connect to `MoveCurrent` signal.
   
       An keybinding signal which moves the current menu item
-      in the direction specified by direction.
+        in the direction specified by direction.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -596,7 +596,7 @@ class MenuShell : gtk.container.Container
       Connect to `MoveSelected` signal.
   
       The ::move-selected signal is emitted to move the selection to
-      another item.
+        another item.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -643,7 +643,7 @@ class MenuShell : gtk.container.Container
       Connect to `SelectionDone` signal.
   
       This signal is emitted when a selection has been
-      completed within a menu shell.
+        completed within a menu shell.
   
       Params:
         callback = signal callback delegate or function to connect

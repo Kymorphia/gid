@@ -218,6 +218,7 @@ bool acceleratorParseWithKeycode(string accelerator, gdk.display.Display display
     {
     }
   }
+
   acceleratorCodes.length = _lenacceleratorCodes;
   acceleratorCodes[0 .. $] = (cast(uint*)_acceleratorCodes)[0 .. _lenacceleratorCodes];
   gFree(cast(void*)_acceleratorCodes);
@@ -359,13 +360,15 @@ void enumeratePrinters(gtk.types.PrinterFunc func, bool wait)
 {
   extern(C) gboolean _funcCallback(GtkPrinter* printer, void* data)
   {
+    bool _dretval;
     auto _dlg = cast(gtk.types.PrinterFunc*)data;
 
-    gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.printer.Printer)(cast(void*)printer, No.Take));
+    _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.printer.Printer)(cast(void*)printer, No.Take));
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   gtk_enumerate_printers(_funcCB, _func, _funcDestroyCB, wait);
@@ -673,7 +676,6 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
   }
   auto _doneCbCB = doneCb ? &_doneCbCallback : null;
-
   auto _doneCb = doneCb ? freezeDelegate(cast(void*)&doneCb) : null;
   gtk_print_run_page_setup_dialog_async(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null, _doneCbCB, _doneCb);
 }
@@ -995,7 +997,6 @@ void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cance
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   const(char)* _uri = uri.toCString(No.Alloc);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   gtk_show_uri_full(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _uri, timestamp, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);

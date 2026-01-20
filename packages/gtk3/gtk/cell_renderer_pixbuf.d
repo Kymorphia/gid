@@ -56,7 +56,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   /**
       Get `followState` property.
       Returns: Specifies whether the rendered pixbuf should be colorized
-      according to the #GtkCellRendererState.
+        according to the #GtkCellRendererState.
   
       Deprecated: Cell renderers always follow state.
   */
@@ -69,7 +69,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
       Set `followState` property.
       Params:
         propval = Specifies whether the rendered pixbuf should be colorized
-        according to the #GtkCellRendererState.
+          according to the #GtkCellRendererState.
   
       Deprecated: Cell renderers always follow state.
   */
@@ -81,8 +81,8 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   /**
       Get `gicon` property.
       Returns: The GIcon representing the icon to display.
-      If the icon theme is changed, the image will be updated
-      automatically.
+        If the icon theme is changed, the image will be updated
+        automatically.
   */
   @property gio.icon.Icon gicon()
   {
@@ -93,8 +93,8 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
       Set `gicon` property.
       Params:
         propval = The GIcon representing the icon to display.
-        If the icon theme is changed, the image will be updated
-        automatically.
+          If the icon theme is changed, the image will be updated
+          automatically.
   */
   @property void gicon(gio.icon.Icon propval)
   {
@@ -104,8 +104,8 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   /**
       Get `iconName` property.
       Returns: The name of the themed icon to display.
-      This property only has an effect if not overridden by "stock_id"
-      or "pixbuf" properties.
+        This property only has an effect if not overridden by "stock_id"
+        or "pixbuf" properties.
   */
   @property string iconName()
   {
@@ -116,8 +116,8 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
       Set `iconName` property.
       Params:
         propval = The name of the themed icon to display.
-        This property only has an effect if not overridden by "stock_id"
-        or "pixbuf" properties.
+          This property only has an effect if not overridden by "stock_id"
+          or "pixbuf" properties.
   */
   @property void iconName(string propval)
   {

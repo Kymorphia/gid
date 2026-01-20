@@ -60,6 +60,7 @@ class Tensor : gobject.object.ObjectWrap
     foreach (s; dimensionNames)
       _tmpdimensionNames ~= s.toCString(No.Alloc);
     char** _dimensionNames = _tmpdimensionNames.ptr;
+
     _cretval = garrow_tensor_new(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, _shape, _nDimensions, _strides, _nStrides, _dimensionNames, _nDimensionNames);
     this(_cretval, Yes.Take);
   }

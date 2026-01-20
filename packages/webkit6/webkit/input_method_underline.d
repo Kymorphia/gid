@@ -23,7 +23,7 @@ class InputMethodUnderline : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -81,8 +81,8 @@ class InputMethodUnderline : gobject.boxed.Boxed
       Params:
         rgba = a #GdkRGBA or null
   */
-  void setColor(gdk.rgba.RGBA rgba = null)
+  void setColor(gdk.rgba.RGBA rgba)
   {
-    webkit_input_method_underline_set_color(cast(WebKitInputMethodUnderline*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    webkit_input_method_underline_set_color(cast(WebKitInputMethodUnderline*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
 }

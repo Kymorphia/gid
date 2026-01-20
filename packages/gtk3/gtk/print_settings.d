@@ -157,7 +157,6 @@ class PrintSettings : gobject.object.ObjectWrap
       (*_dlg)(_key, _value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gtk_print_settings_foreach(cast(GtkPrintSettings*)this._cPtr, _funcCB, _func);
   }

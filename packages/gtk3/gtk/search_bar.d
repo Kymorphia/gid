@@ -189,7 +189,7 @@ class SearchBar : gtk.bin.Bin
   bool handleEvent(gdk.event.Event event)
   {
     bool _retval;
-    _retval = cast(bool)gtk_search_bar_handle_event(cast(GtkSearchBar*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gtk_search_bar_handle_event(cast(GtkSearchBar*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 

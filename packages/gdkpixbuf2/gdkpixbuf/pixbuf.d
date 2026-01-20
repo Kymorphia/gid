@@ -590,6 +590,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       _tmpdata ~= s.toCString(No.Alloc);
     _tmpdata ~= null;
     const(char*)* _data = _tmpdata.ptr;
+
     _cretval = gdk_pixbuf_new_from_xpm_data(_data);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
@@ -662,7 +663,6 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _filename = filename.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_pixbuf_get_file_info_async(_filename, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -761,7 +761,6 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_pixbuf_new_from_stream_async(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -793,7 +792,6 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_pixbuf_new_from_stream_at_scale_async(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, width, height, preserveAspectRatio, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1395,19 +1393,20 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   {
     extern(C) gboolean _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gdkpixbuf.types.PixbufSaveFunc*)data;
       ubyte[] _buf;
       _buf.length = count;
       _buf[0 .. count] = buf[0 .. count];
       auto _error = new glib.error.ErrorWrap(error, No.Take);
 
-      gboolean _retval = (*_dlg)(_buf, _error);
+      _dretval = (*_dlg)(_buf, _error);
+      auto _retval = cast(gboolean)_dretval;
       *error = *cast(GError**)_error._cPtr;
 
       return _retval;
     }
     auto _saveFuncCB = saveFunc ? &_saveFuncCallback : null;
-
     bool _retval;
     auto _saveFunc = saveFunc ? cast(void*)&(saveFunc) : null;
     const(char)* _type = type.toCString(No.Alloc);
@@ -1500,7 +1499,6 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _type = type.toCString(No.Alloc);
     char*[] _tmpoptionKeys;
     foreach (s; optionKeys)

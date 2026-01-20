@@ -246,7 +246,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   /**
       Get `isBusy` property.
       Returns: Whether the application is currently marked as busy through
-      [gio.application.Application.markBusy] or [gio.application.Application.bindBusyProperty].
+        [gio.application.Application.markBusy] or [gio.application.Application.bindBusyProperty].
   */
   @property bool isBusy()
   {
@@ -982,6 +982,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
     foreach (s; argv)
       _tmpargv ~= s.toCString(No.Alloc);
     char** _argv = _tmpargv.ptr;
+
     _retval = g_application_run(cast(GApplication*)this._cPtr, _argc, _argv);
     return _retval;
   }
@@ -1275,7 +1276,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Connect to `Activate` signal.
   
       The ::activate signal is emitted on the primary instance when an
-      activation occurs. See [gio.application.Application.activate].
+        activation occurs. See [gio.application.Application.activate].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1313,8 +1314,8 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Connect to `CommandLine` signal.
   
       The ::command-line signal is emitted on the primary instance when
-      a commandline is not handled locally. See [gio.application.Application.run] and
-      the #GApplicationCommandLine documentation for more information.
+        a commandline is not handled locally. See [gio.application.Application.run] and
+        the #GApplicationCommandLine documentation for more information.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1322,12 +1323,12 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
           $(D int callback(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.Application application))
   
           `commandLine` a #GApplicationCommandLine representing the
-              passed commandline (optional)
+                passed commandline (optional)
   
           `application` the instance the signal is connected to (optional)
   
           `Returns` An integer that is set as the exit status for the calling
-            process. See [gio.application_command_line.ApplicationCommandLine.setExitStatus].
+              process. See [gio.application_command_line.ApplicationCommandLine.setExitStatus].
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1363,46 +1364,46 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Connect to `HandleLocalOptions` signal.
   
       The ::handle-local-options signal is emitted on the local instance
-      after the parsing of the commandline options has occurred.
-      
-      You can add options to be recognised during commandline option
-      parsing using [gio.application.Application.addMainOptionEntries] and
-      [gio.application.Application.addOptionGroup].
-      
-      Signal handlers can inspect options (along with values pointed to
-      from the arg_data of an installed #GOptionEntrys) in order to
-      decide to perform certain actions, including direct local handling
-      (which may be useful for options like --version).
-      
-      In the event that the application is marked
-      [gio.types.ApplicationFlags.HandlesCommandLine] the "normal processing" will
-      send the options dictionary to the primary instance where it can be
-      read with [gio.application_command_line.ApplicationCommandLine.getOptionsDict].  The signal
-      handler can modify the dictionary before returning, and the
-      modified dictionary will be sent.
-      
-      In the event that [gio.types.ApplicationFlags.HandlesCommandLine] is not set,
-      "normal processing" will treat the remaining uncollected command
-      line arguments as filenames or URIs.  If there are no arguments,
-      the application is activated by [gio.application.Application.activate].  One or
-      more arguments results in a call to [gio.application.Application.open].
-      
-      If you want to handle the local commandline arguments for yourself
-      by converting them to calls to [gio.application.Application.open] or
-      [gio.action_group.ActionGroup.activateAction] then you must be sure to register
-      the application first.  You should probably not call
-      [gio.application.Application.activate] for yourself, however: just return -1 and
-      allow the default handler to do it for you.  This will ensure that
-      the `--gapplication-service` switch works properly (i.e. no activation
-      in that case).
-      
-      Note that this signal is emitted from the default implementation of
-      local_command_line().  If you override that function and don't
-      chain up then this signal will never be emitted.
-      
-      You can override local_command_line() if you need more powerful
-      capabilities than what is provided here, but this should not
-      normally be required.
+        after the parsing of the commandline options has occurred.
+        
+        You can add options to be recognised during commandline option
+        parsing using [gio.application.Application.addMainOptionEntries] and
+        [gio.application.Application.addOptionGroup].
+        
+        Signal handlers can inspect options (along with values pointed to
+        from the arg_data of an installed #GOptionEntrys) in order to
+        decide to perform certain actions, including direct local handling
+        (which may be useful for options like --version).
+        
+        In the event that the application is marked
+        [gio.types.ApplicationFlags.HandlesCommandLine] the "normal processing" will
+        send the options dictionary to the primary instance where it can be
+        read with [gio.application_command_line.ApplicationCommandLine.getOptionsDict].  The signal
+        handler can modify the dictionary before returning, and the
+        modified dictionary will be sent.
+        
+        In the event that [gio.types.ApplicationFlags.HandlesCommandLine] is not set,
+        "normal processing" will treat the remaining uncollected command
+        line arguments as filenames or URIs.  If there are no arguments,
+        the application is activated by [gio.application.Application.activate].  One or
+        more arguments results in a call to [gio.application.Application.open].
+        
+        If you want to handle the local commandline arguments for yourself
+        by converting them to calls to [gio.application.Application.open] or
+        [gio.action_group.ActionGroup.activateAction] then you must be sure to register
+        the application first.  You should probably not call
+        [gio.application.Application.activate] for yourself, however: just return -1 and
+        allow the default handler to do it for you.  This will ensure that
+        the `--gapplication-service` switch works properly (i.e. no activation
+        in that case).
+        
+        Note that this signal is emitted from the default implementation of
+        local_command_line().  If you override that function and don't
+        chain up then this signal will never be emitted.
+        
+        You can override local_command_line() if you need more powerful
+        capabilities than what is provided here, but this should not
+        normally be required.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1414,9 +1415,9 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
           `application` the instance the signal is connected to (optional)
   
           `Returns` an exit code. If you have handled your options and want
-          to exit the process, return a non-negative option, 0 for success,
-          and a positive value for failure. To continue, return -1 to let
-          the default option processing continue.
+            to exit the process, return a non-negative option, 0 for success,
+            and a positive value for failure. To continue, return -1 to let
+            the default option processing continue.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1452,10 +1453,10 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Connect to `NameLost` signal.
   
       The ::name-lost signal is emitted only on the registered primary instance
-      when a new instance has taken over. This can only happen if the application
-      is using the [gio.types.ApplicationFlags.AllowReplacement] flag.
-      
-      The default handler for this signal calls [gio.application.Application.quit].
+        when a new instance has taken over. This can only happen if the application
+        is using the [gio.types.ApplicationFlags.AllowReplacement] flag.
+        
+        The default handler for this signal calls [gio.application.Application.quit].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1495,7 +1496,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Connect to `Open` signal.
   
       The ::open signal is emitted on the primary instance when there are
-      files to open. See [gio.application.Application.open] for more information.
+        files to open. See [gio.application.Application.open] for more information.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1553,7 +1554,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Connect to `Shutdown` signal.
   
       The ::shutdown signal is emitted only on the registered primary instance
-      immediately after the main loop terminates.
+        immediately after the main loop terminates.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1591,7 +1592,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Connect to `Startup` signal.
   
       The ::startup signal is emitted on the primary instance immediately
-      after registration. See [gio.application.Application.register].
+        after registration. See [gio.application.Application.register].
   
       Params:
         callback = signal callback delegate or function to connect

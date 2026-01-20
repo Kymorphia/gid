@@ -15,7 +15,7 @@ import gmodule.types;
 */
 class Module
 {
-  ModuleC* cInstancePtr;
+  ModuleC* _cInstancePtr;
   bool owned;
 
   /** */
@@ -24,7 +24,7 @@ class Module
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gmodule.module_.Module");
 
-    cInstancePtr = cast(ModuleC*)ptr;
+    _cInstancePtr = cast(ModuleC*)ptr;
 
     owned = take;
   }
@@ -32,7 +32,7 @@ class Module
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

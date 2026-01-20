@@ -277,13 +277,13 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `addTearoffs` property.
       Returns: The "add-tearoffs" property controls whether generated menus
-      have tearoff menu items.
-      
-      Note that this only affects regular menus. Generated popup
-      menus never have tearoff menu items.
+        have tearoff menu items.
+        
+        Note that this only affects regular menus. Generated popup
+        menus never have tearoff menu items.
   
       Deprecated: Tearoff menus are deprecated and should not
-          be used in newly written code.
+            be used in newly written code.
   */
   @property bool addTearoffs()
   {
@@ -294,13 +294,13 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `addTearoffs` property.
       Params:
         propval = The "add-tearoffs" property controls whether generated menus
-        have tearoff menu items.
-        
-        Note that this only affects regular menus. Generated popup
-        menus never have tearoff menu items.
+          have tearoff menu items.
+          
+          Note that this only affects regular menus. Generated popup
+          menus never have tearoff menu items.
   
       Deprecated: Tearoff menus are deprecated and should not
-          be used in newly written code.
+            be used in newly written code.
   */
   @property void addTearoffs(bool propval)
   {
@@ -639,7 +639,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `ActionsChanged` signal.
   
       The ::actions-changed signal is emitted whenever the set of actions
-      changes.
+        changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -677,8 +677,8 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `AddWidget` signal.
   
       The ::add-widget signal is emitted for each generated menubar and toolbar.
-      It is not emitted for generated popup menus, which can be obtained by
-      [gtk.uimanager.UIManager.getWidget].
+        It is not emitted for generated popup menus, which can be obtained by
+        [gtk.uimanager.UIManager.getWidget].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -723,11 +723,11 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `ConnectProxy` signal.
   
       The ::connect-proxy signal is emitted after connecting a proxy to
-      an action in the group.
-      
-      This is intended for simple customizations for which a custom action
-      class would be too clumsy, e.g. showing tooltips for menuitems in the
-      statusbar.
+        an action in the group.
+        
+        This is intended for simple customizations for which a custom action
+        class would be too clumsy, e.g. showing tooltips for menuitems in the
+        statusbar.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -779,7 +779,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `DisconnectProxy` signal.
   
       The ::disconnect-proxy signal is emitted after disconnecting a proxy
-      from an action in the group.
+        from an action in the group.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -831,10 +831,10 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `PostActivate` signal.
   
       The ::post-activate signal is emitted just after the action
-      is activated.
-      
-      This is intended for applications to get notification
-      just after any action is activated.
+        is activated.
+        
+        This is intended for applications to get notification
+        just after any action is activated.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -879,10 +879,10 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Connect to `PreActivate` signal.
   
       The ::pre-activate signal is emitted just before the action
-      is activated.
-      
-      This is intended for applications to get notification
-      just before any action is activated.
+        is activated.
+        
+        This is intended for applications to get notification
+        just before any action is activated.
   
       Params:
         callback = signal callback delegate or function to connect

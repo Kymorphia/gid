@@ -85,8 +85,8 @@ class Set : gobject.object.ObjectWrap
   /**
       Get `validateChanges` property.
       Returns: Defines if the "validate-set" signal gets emitted when
-      any holder in the data set changes. This property also affects the
-      GdaHolder:validate-changes property.
+        any holder in the data set changes. This property also affects the
+        GdaHolder:validate-changes property.
   */
   @property bool validateChanges()
   {
@@ -97,8 +97,8 @@ class Set : gobject.object.ObjectWrap
       Set `validateChanges` property.
       Params:
         propval = Defines if the "validate-set" signal gets emitted when
-        any holder in the data set changes. This property also affects the
-        GdaHolder:validate-changes property.
+          any holder in the data set changes. This property also affects the
+          GdaHolder:validate-changes property.
   */
   @property void validateChanges(bool propval)
   {
@@ -497,7 +497,7 @@ class Set : gobject.object.ObjectWrap
       Connect to `HolderTypeSet` signal.
   
       Gets emitted when holder in set has its type finally set, in case
-      it was #GDA_TYPE_NULL
+        it was #GDA_TYPE_NULL
   
       Params:
         callback = signal callback delegate or function to connect
@@ -623,7 +623,7 @@ class Set : gobject.object.ObjectWrap
       Connect to `ValidateHolderChange` signal.
   
       Gets emitted when a #GdaHolder's in set is going to change its value. One can connect to
-      this signal to control which values holder can have (for example to implement some business rules)
+        this signal to control which values holder can have (for example to implement some business rules)
   
       Params:
         callback = signal callback delegate or function to connect
@@ -637,7 +637,7 @@ class Set : gobject.object.ObjectWrap
           `set` the instance the signal is connected to (optional)
   
           `Returns` NULL if holder is allowed to change its value to new_value, or a #GError
-          otherwise.
+            otherwise.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -678,7 +678,7 @@ class Set : gobject.object.ObjectWrap
       Connect to `ValidateSet` signal.
   
       Gets emitted when [gda.set.Set.isValid] is called, use
-      this signal to control which combination of values set's holder can have (for example to implement some business rules)
+        this signal to control which combination of values set's holder can have (for example to implement some business rules)
   
       Params:
         callback = signal callback delegate or function to connect
@@ -688,7 +688,7 @@ class Set : gobject.object.ObjectWrap
           `set` the instance the signal is connected to (optional)
   
           `Returns` NULL if set's contents has been validated, or a #GError
-          otherwise.
+            otherwise.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

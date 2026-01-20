@@ -24,7 +24,7 @@ import gstvideo.types;
 */
 class VideoBarMeta
 {
-  GstVideoBarMeta cInstance;
+  GstVideoBarMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -32,7 +32,7 @@ class VideoBarMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_bar_meta.VideoBarMeta");
 
-    cInstance = *cast(GstVideoBarMeta*)ptr;
+    _cInstance = *cast(GstVideoBarMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -41,7 +41,7 @@ class VideoBarMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -94,9 +94,9 @@ class VideoBarMeta
   /**
       Get `barData1` field.
       Returns: If @is_letterbox is true, then the value specifies the
-           last line of a horizontal letterbox bar area at top of reconstructed frame.
-           Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
-           bar area at the left side of the reconstructed frame
+             last line of a horizontal letterbox bar area at top of reconstructed frame.
+             Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
+             bar area at the left side of the reconstructed frame
   */
   @property uint barData1()
   {
@@ -107,9 +107,9 @@ class VideoBarMeta
       Set `barData1` field.
       Params:
         propval = If @is_letterbox is true, then the value specifies the
-             last line of a horizontal letterbox bar area at top of reconstructed frame.
-             Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
-             bar area at the left side of the reconstructed frame
+               last line of a horizontal letterbox bar area at top of reconstructed frame.
+               Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
+               bar area at the left side of the reconstructed frame
   */
   @property void barData1(uint propval)
   {
@@ -119,9 +119,9 @@ class VideoBarMeta
   /**
       Get `barData2` field.
       Returns: If @is_letterbox is true, then the value specifies the
-           first line of a horizontal letterbox bar area at bottom of reconstructed frame.
-           Otherwise, it specifies the first horizontal
-           luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
+             first line of a horizontal letterbox bar area at bottom of reconstructed frame.
+             Otherwise, it specifies the first horizontal
+             luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
   */
   @property uint barData2()
   {
@@ -132,9 +132,9 @@ class VideoBarMeta
       Set `barData2` field.
       Params:
         propval = If @is_letterbox is true, then the value specifies the
-             first line of a horizontal letterbox bar area at bottom of reconstructed frame.
-             Otherwise, it specifies the first horizontal
-             luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
+               first line of a horizontal letterbox bar area at bottom of reconstructed frame.
+               Otherwise, it specifies the first horizontal
+               luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
   */
   @property void barData2(uint propval)
   {
@@ -146,7 +146,9 @@ class VideoBarMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_bar_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

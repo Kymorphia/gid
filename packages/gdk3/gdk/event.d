@@ -35,6 +35,7 @@ import gdk.seat;
 import gdk.types;
 import gdk.window;
 import gid.gid;
+import gobject.boxed;
 import gobject.object;
 
 /**
@@ -69,26 +70,38 @@ import gobject.object;
       x = event->button.x;
     ```
 */
-class Event
+class Event : gobject.boxed.Boxed
 {
-  GdkEvent cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event.Event");
-
-    cInstance = *cast(GdkEvent*)ptr;
-
-    if (take)
-      gFree(ptr);
+    super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return cast(void*)&cInstance;
+    return dup ? copy_ : _cInstancePtr;
+  }
+
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_event_get_type != &gidSymbolNotFound ? gdk_event_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Event self()
+  {
+    return this;
   }
 
   /**
@@ -351,7 +364,7 @@ class Event
   {
     GdkEvent* _cretval;
     _cretval = gdk_event_copy(cast(const(GdkEvent)*)this._cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -815,7 +828,7 @@ class Event
   {
     GdkEvent* _cretval;
     _cretval = gdk_event_get();
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -839,7 +852,6 @@ class Event
       (*_dlg)(event ? new gdk.event.Event(cast(void*)event, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gdk_event_handler_set(_funcCB, _func, _funcDestroyCB);
@@ -856,7 +868,7 @@ class Event
   {
     GdkEvent* _cretval;
     _cretval = gdk_event_peek();
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

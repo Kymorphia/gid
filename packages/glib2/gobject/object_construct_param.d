@@ -14,7 +14,7 @@ import gobject.value;
 */
 class ObjectConstructParam
 {
-  GObjectConstructParam cInstance;
+  GObjectConstructParam _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class ObjectConstructParam
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.object_construct_param.ObjectConstructParam");
 
-    cInstance = *cast(GObjectConstructParam*)ptr;
+    _cInstance = *cast(GObjectConstructParam*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class ObjectConstructParam
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

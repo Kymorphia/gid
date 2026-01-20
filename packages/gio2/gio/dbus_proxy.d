@@ -100,13 +100,13 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   /**
       Get `gDefaultTimeout` property.
       Returns: The timeout to use if -1 (specifying default timeout) is passed
-      as @timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
-      [gio.dbus_proxy.DBusProxy.callSync] functions.
-      
-      This allows applications to set a proxy-wide timeout for all
-      remote method invocations on the proxy. If this property is -1,
-      the default timeout (typically 25 seconds) is used. If set to
-      `G_MAXINT`, then no timeout is used.
+        as @timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
+        [gio.dbus_proxy.DBusProxy.callSync] functions.
+        
+        This allows applications to set a proxy-wide timeout for all
+        remote method invocations on the proxy. If this property is -1,
+        the default timeout (typically 25 seconds) is used. If set to
+        `G_MAXINT`, then no timeout is used.
   */
   @property int gDefaultTimeout()
   {
@@ -117,13 +117,13 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Set `gDefaultTimeout` property.
       Params:
         propval = The timeout to use if -1 (specifying default timeout) is passed
-        as @timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
-        [gio.dbus_proxy.DBusProxy.callSync] functions.
-        
-        This allows applications to set a proxy-wide timeout for all
-        remote method invocations on the proxy. If this property is -1,
-        the default timeout (typically 25 seconds) is used. If set to
-        `G_MAXINT`, then no timeout is used.
+          as @timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
+          [gio.dbus_proxy.DBusProxy.callSync] functions.
+          
+          This allows applications to set a proxy-wide timeout for all
+          remote method invocations on the proxy. If this property is -1,
+          the default timeout (typically 25 seconds) is used. If set to
+          `G_MAXINT`, then no timeout is used.
   */
   @property void gDefaultTimeout(int propval)
   {
@@ -133,41 +133,6 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   /**
       Get `gInterfaceInfo` property.
       Returns: Ensure that interactions with this proxy conform to the given
-      interface. This is mainly to ensure that malformed data received
-      from the other peer is ignored. The given #GDBusInterfaceInfo is
-      said to be the "expected interface".
-      
-      The checks performed are:
-      $(LIST
-        * When completing a method call, if the type signature of
-          the reply message isn't what's expected, the reply is
-          discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
-        
-        * Received signals that have a type signature mismatch are dropped and
-          a warning is logged via g_warning().
-        
-        * Properties received via the initial `GetAll()` call or via the
-          `::PropertiesChanged` signal (on the
-          [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
-          interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
-          with a type signature mismatch are ignored and a warning is
-          logged via g_warning().
-      )
-        
-      Note that these checks are never done on methods, signals and
-      properties that are not referenced in the given
-      #GDBusInterfaceInfo, since extending a D-Bus interface on the
-      service-side is not considered an ABI break.
-  */
-  @property gio.dbus_interface_info.DBusInterfaceInfo gInterfaceInfo()
-  {
-    return gobject.object.ObjectWrap.getProperty!(gio.dbus_interface_info.DBusInterfaceInfo)("g-interface-info");
-  }
-
-  /**
-      Set `gInterfaceInfo` property.
-      Params:
-        propval = Ensure that interactions with this proxy conform to the given
         interface. This is mainly to ensure that malformed data received
         from the other peer is ignored. The given #GDBusInterfaceInfo is
         said to be the "expected interface".
@@ -194,6 +159,41 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         #GDBusInterfaceInfo, since extending a D-Bus interface on the
         service-side is not considered an ABI break.
   */
+  @property gio.dbus_interface_info.DBusInterfaceInfo gInterfaceInfo()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.dbus_interface_info.DBusInterfaceInfo)("g-interface-info");
+  }
+
+  /**
+      Set `gInterfaceInfo` property.
+      Params:
+        propval = Ensure that interactions with this proxy conform to the given
+          interface. This is mainly to ensure that malformed data received
+          from the other peer is ignored. The given #GDBusInterfaceInfo is
+          said to be the "expected interface".
+          
+          The checks performed are:
+          $(LIST
+            * When completing a method call, if the type signature of
+              the reply message isn't what's expected, the reply is
+              discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
+            
+            * Received signals that have a type signature mismatch are dropped and
+              a warning is logged via g_warning().
+            
+            * Properties received via the initial `GetAll()` call or via the
+              `::PropertiesChanged` signal (on the
+              [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
+              interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
+              with a type signature mismatch are ignored and a warning is
+              logged via g_warning().
+          )
+            
+          Note that these checks are never done on methods, signals and
+          properties that are not referenced in the given
+          #GDBusInterfaceInfo, since extending a D-Bus interface on the
+          service-side is not considered an ABI break.
+  */
   @property void gInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo propval)
   {
     gobject.object.ObjectWrap.setProperty!(gio.dbus_interface_info.DBusInterfaceInfo)("g-interface-info", propval);
@@ -202,8 +202,8 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   /**
       Get `gNameOwner` property.
       Returns: The unique name that owns #GDBusProxy:g-name or null if no-one
-      currently owns that name. You may connect to #GObject::notify signal to
-      track changes to this property.
+        currently owns that name. You may connect to #GObject::notify signal to
+        track changes to this property.
   */
   @property string gNameOwner()
   {
@@ -385,7 +385,6 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
@@ -418,7 +417,6 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
@@ -490,7 +488,6 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _methodName = methodName.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_proxy_call(cast(GDBusProxy*)this._cPtr, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, flags, timeoutMsec, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -602,7 +599,6 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _methodName = methodName.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_proxy_call_with_unix_fd_list(cast(GDBusProxy*)this._cPtr, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, flags, timeoutMsec, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -703,8 +699,8 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -901,17 +897,17 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Connect to `GPropertiesChanged` signal.
   
       Emitted when one or more D-Bus properties on proxy changes. The
-      local cache has already been updated when this signal fires. Note
-      that both changed_properties and invalidated_properties are
-      guaranteed to never be null (either may be empty though).
-      
-      If the proxy has the flag
-      [gio.types.DBusProxyFlags.GetInvalidatedProperties] set, then
-      invalidated_properties will always be empty.
-      
-      This signal corresponds to the
-      `PropertiesChanged` D-Bus signal on the
-      `org.freedesktop.DBus.Properties` interface.
+        local cache has already been updated when this signal fires. Note
+        that both changed_properties and invalidated_properties are
+        guaranteed to never be null (either may be empty though).
+        
+        If the proxy has the flag
+        [gio.types.DBusProxyFlags.GetInvalidatedProperties] set, then
+        invalidated_properties will always be empty.
+        
+        This signal corresponds to the
+        `PropertiesChanged` D-Bus signal on the
+        `org.freedesktop.DBus.Properties` interface.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -972,10 +968,10 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Connect to `GSignal` signal.
   
       Emitted when a signal from the remote object and interface that proxy is for, has been received.
-      
-      Since 2.72 this signal supports detailed connections. You can connect to
-      the detailed signal `g-signal::x` in order to receive callbacks only when
-      signal `x` is received from the remote object.
+        
+        Since 2.72 this signal supports detailed connections. You can connect to
+        the detailed signal `g-signal::x` in order to receive callbacks only when
+        signal `x` is received from the remote object.
   
       Params:
         detail = Signal detail or null (default)

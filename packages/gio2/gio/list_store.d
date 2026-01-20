@@ -263,6 +263,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
     foreach (obj; additions)
       _tmpadditions ~= obj ? cast(GObject*)obj._cPtr : null;
     void** _additions = cast(void**)_tmpadditions.ptr;
+
     g_list_store_splice(cast(GListStore*)this._cPtr, position, nRemovals, _additions, _nAdditions);
   }
 }

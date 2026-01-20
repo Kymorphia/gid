@@ -109,7 +109,6 @@ void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.Sha
     (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, attr ? new pango.attr_shape.AttrShape(cast(void*)attr, No.Take) : null, cast(bool)doPath);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   pango_cairo_context_set_shape_renderer(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);

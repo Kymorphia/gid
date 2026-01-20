@@ -12,7 +12,7 @@ import glib.types;
 */
 class Queue
 {
-  GQueue cInstance;
+  GQueue _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class Queue
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.queue.Queue");
 
-    cInstance = *cast(GQueue*)ptr;
+    _cInstance = *cast(GQueue*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,13 +28,13 @@ class Queue
 
   ~this()
   {
-    g_queue_free(&cInstance);
+    g_queue_free(&_cInstance);
   }
 
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -103,7 +103,6 @@ class Queue
       (*_dlg)(data);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_queue_foreach(cast(GQueue*)this._cPtr, _funcCB, _func);
   }
@@ -188,7 +187,6 @@ class Queue
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_queue_insert_sorted(cast(GQueue*)this._cPtr, data, _funcCB, _func);
   }
@@ -366,7 +364,6 @@ class Queue
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
-
     auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
     g_queue_sort(cast(GQueue*)this._cPtr, _compareFuncCB, _compareFunc);
   }

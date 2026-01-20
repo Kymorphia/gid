@@ -76,9 +76,9 @@ class ThreadedSocketService : gio.socket_service.SocketService
       Connect to `Run` signal.
   
       The ::run signal is emitted in a worker thread in response to an
-      incoming connection. This thread is dedicated to handling
-      connection and may perform blocking IO. The signal handler need
-      not return until the connection is closed.
+        incoming connection. This thread is dedicated to handling
+        connection and may perform blocking IO. The signal handler need
+        not return until the connection is closed.
   
       Params:
         callback = signal callback delegate or function to connect

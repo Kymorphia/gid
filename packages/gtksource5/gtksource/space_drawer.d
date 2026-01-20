@@ -109,28 +109,6 @@ class SpaceDrawer : gobject.object.ObjectWrap
   /**
       Get `matrix` property.
       Returns: The property is a [glib.variant.Variant] property to specify where and
-      what kind of white spaces to draw.
-      
-      The [glib.variant.Variant] is of type `"au"`, an array of unsigned integers. Each
-      integer is a combination of `flags@SpaceTypeFlags`. There is one
-      integer for each `flags@SpaceLocationFlags`, in the same order as
-      they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
-      [gtksource.types.SpaceLocationFlags.All] are not taken into account).
-      
-      If the array is shorter than the number of locations, then the value
-      for the missing locations will be [gtksource.types.SpaceTypeFlags.None].
-      
-      By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.4
-  */
-  @property glib.variant.Variant matrix()
-  {
-    return getMatrix();
-  }
-
-  /**
-      Set `matrix` property.
-      Params:
-        propval = The property is a [glib.variant.Variant] property to specify where and
         what kind of white spaces to draw.
         
         The [glib.variant.Variant] is of type `"au"`, an array of unsigned integers. Each
@@ -143,6 +121,28 @@ class SpaceDrawer : gobject.object.ObjectWrap
         for the missing locations will be [gtksource.types.SpaceTypeFlags.None].
         
         By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.4
+  */
+  @property glib.variant.Variant matrix()
+  {
+    return getMatrix();
+  }
+
+  /**
+      Set `matrix` property.
+      Params:
+        propval = The property is a [glib.variant.Variant] property to specify where and
+          what kind of white spaces to draw.
+          
+          The [glib.variant.Variant] is of type `"au"`, an array of unsigned integers. Each
+          integer is a combination of `flags@SpaceTypeFlags`. There is one
+          integer for each `flags@SpaceLocationFlags`, in the same order as
+          they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
+          [gtksource.types.SpaceLocationFlags.All] are not taken into account).
+          
+          If the array is shorter than the number of locations, then the value
+          for the missing locations will be [gtksource.types.SpaceTypeFlags.None].
+          
+          By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.4
   */
   @property void matrix(glib.variant.Variant propval)
   {

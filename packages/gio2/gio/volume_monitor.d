@@ -505,9 +505,9 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Connect to `MountPreUnmount` signal.
   
       May be emitted when a mount is about to be removed.
-      
-      This signal depends on the backend and is only emitted if
-      GIO was used to unmount.
+        
+        This signal depends on the backend and is only emitted if
+        GIO was used to unmount.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -1,8 +1,7 @@
-/// Module for [FontMetrics] class
+/// Module for [FontMetrics] struct
 module pango.font_metrics;
 
 import gid.gid;
-import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
 import pango.types;
@@ -23,47 +22,37 @@ import pango.types;
       <img alt="Font metrics" src="fontmetrics-light.png">
     </picture>
 */
-class FontMetrics : gobject.boxed.Boxed
+struct FontMetrics
 {
-
-  /**
-      Create a `font_metrics.FontMetrics` boxed type.
-  */
-  this()
-  {
-    super(gMalloc(PangoFontMetrics.sizeof), Yes.Take);
-  }
+  /** */
+  uint refCount;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
+  int ascent;
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
+  int descent;
 
   /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())pango_font_metrics_get_type != &gidSymbolNotFound ? pango_font_metrics_get_type() : cast(GType)0;
-  }
+  int height;
 
   /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
+  int approximateCharWidth;
 
-  /** Returns `this`, for use in `with` statements. */
-  override FontMetrics self()
-  {
-    return this;
-  }
+  /** */
+  int approximateDigitWidth;
+
+  /** */
+  int underlinePosition;
+
+  /** */
+  int underlineThickness;
+
+  /** */
+  int strikethroughPosition;
+
+  /** */
+  int strikethroughThickness;
 
   /**
       Gets the approximate character width for a font metrics structure.
@@ -76,7 +65,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getApproximateCharWidth()
   {
     int _retval;
-    _retval = pango_font_metrics_get_approximate_char_width(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_approximate_char_width(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -93,7 +82,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getApproximateDigitWidth()
   {
     int _retval;
-    _retval = pango_font_metrics_get_approximate_digit_width(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_approximate_digit_width(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -109,7 +98,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getAscent()
   {
     int _retval;
-    _retval = pango_font_metrics_get_ascent(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_ascent(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -125,7 +114,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getDescent()
   {
     int _retval;
-    _retval = pango_font_metrics_get_descent(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_descent(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -141,7 +130,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getHeight()
   {
     int _retval;
-    _retval = pango_font_metrics_get_height(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_height(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -155,7 +144,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getStrikethroughPosition()
   {
     int _retval;
-    _retval = pango_font_metrics_get_strikethrough_position(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_strikethrough_position(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -166,7 +155,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getStrikethroughThickness()
   {
     int _retval;
-    _retval = pango_font_metrics_get_strikethrough_thickness(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_strikethrough_thickness(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -181,7 +170,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getUnderlinePosition()
   {
     int _retval;
-    _retval = pango_font_metrics_get_underline_position(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_underline_position(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 
@@ -192,7 +181,7 @@ class FontMetrics : gobject.boxed.Boxed
   int getUnderlineThickness()
   {
     int _retval;
-    _retval = pango_font_metrics_get_underline_thickness(cast(PangoFontMetrics*)this._cPtr);
+    _retval = pango_font_metrics_get_underline_thickness(cast(PangoFontMetrics*)&this);
     return _retval;
   }
 }

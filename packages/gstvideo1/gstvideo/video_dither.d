@@ -12,7 +12,7 @@ import gstvideo.types;
 */
 class VideoDither
 {
-  GstVideoDither* cInstancePtr;
+  GstVideoDither* _cInstancePtr;
   bool owned;
 
   /** */
@@ -21,7 +21,7 @@ class VideoDither
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_dither.VideoDither");
 
-    cInstancePtr = cast(GstVideoDither*)ptr;
+    _cInstancePtr = cast(GstVideoDither*)ptr;
 
     owned = take;
   }
@@ -29,7 +29,7 @@ class VideoDither
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

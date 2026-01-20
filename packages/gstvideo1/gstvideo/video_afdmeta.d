@@ -26,7 +26,7 @@ import gstvideo.types;
 */
 class VideoAFDMeta
 {
-  GstVideoAFDMeta cInstance;
+  GstVideoAFDMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -34,7 +34,7 @@ class VideoAFDMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_afdmeta.VideoAFDMeta");
 
-    cInstance = *cast(GstVideoAFDMeta*)ptr;
+    _cInstance = *cast(GstVideoAFDMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -43,7 +43,7 @@ class VideoAFDMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -117,7 +117,9 @@ class VideoAFDMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_afd_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

@@ -11,7 +11,7 @@ import gtk.types;
 */
 class MountOperationHandlerSkeleton
 {
-  _GtkMountOperationHandlerSkeleton cInstance;
+  _GtkMountOperationHandlerSkeleton _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class MountOperationHandlerSkeleton
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.__mount_operation_handler_skeleton.MountOperationHandlerSkeleton");
 
-    cInstance = *cast(_GtkMountOperationHandlerSkeleton*)ptr;
+    _cInstance = *cast(_GtkMountOperationHandlerSkeleton*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,6 +28,6 @@ class MountOperationHandlerSkeleton
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

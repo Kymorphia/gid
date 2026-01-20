@@ -29,7 +29,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -94,8 +94,8 @@ class BaseParseFrame : gobject.boxed.Boxed
   /**
       Get `flags` field.
       Returns: a combination of input and output #GstBaseParseFrameFlags that
-       convey additional context to subclass or allow subclass to tune
-       subsequent #GstBaseParse actions.
+         convey additional context to subclass or allow subclass to tune
+         subsequent #GstBaseParse actions.
   */
   @property uint flags()
   {
@@ -106,8 +106,8 @@ class BaseParseFrame : gobject.boxed.Boxed
       Set `flags` field.
       Params:
         propval = a combination of input and output #GstBaseParseFrameFlags that
-         convey additional context to subclass or allow subclass to tune
-         subsequent #GstBaseParse actions.
+           convey additional context to subclass or allow subclass to tune
+           subsequent #GstBaseParse actions.
   */
   @property void flags(uint propval)
   {
@@ -117,7 +117,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   /**
       Get `offset` field.
       Returns: media specific offset of input frame
-        Note that a converter may have a different one on the frame's buffer.
+          Note that a converter may have a different one on the frame's buffer.
   */
   @property ulong offset()
   {
@@ -128,7 +128,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Set `offset` field.
       Params:
         propval = media specific offset of input frame
-          Note that a converter may have a different one on the frame's buffer.
+            Note that a converter may have a different one on the frame's buffer.
   */
   @property void offset(ulong propval)
   {
@@ -138,9 +138,9 @@ class BaseParseFrame : gobject.boxed.Boxed
   /**
       Get `overhead` field.
       Returns: subclass can set this to indicates the metadata overhead
-        for the given frame, which is then used to enable more accurate bitrate
-        computations. If this is -1, it is assumed that this frame should be
-        skipped in bitrate calculation.
+          for the given frame, which is then used to enable more accurate bitrate
+          computations. If this is -1, it is assumed that this frame should be
+          skipped in bitrate calculation.
   */
   @property int overhead()
   {
@@ -151,9 +151,9 @@ class BaseParseFrame : gobject.boxed.Boxed
       Set `overhead` field.
       Params:
         propval = subclass can set this to indicates the metadata overhead
-          for the given frame, which is then used to enable more accurate bitrate
-          computations. If this is -1, it is assumed that this frame should be
-          skipped in bitrate calculation.
+            for the given frame, which is then used to enable more accurate bitrate
+            computations. If this is -1, it is assumed that this frame should be
+            skipped in bitrate calculation.
   */
   @property void overhead(int propval)
   {

@@ -1,4 +1,4 @@
-/// Module for [Charset] class
+/// Module for [Charset] struct
 module gmime.charset;
 
 import gid.gid;
@@ -9,65 +9,17 @@ import gmime.types;
 /**
     State used by [gmime.charset.Charset.best] and [gmime.charset.Charset.bestName].
 */
-class Charset
+struct Charset
 {
-  GMimeCharset cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gmime.charset.Charset");
-
-    cInstance = *cast(GMimeCharset*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  /**
+      charset mask
+  */
+  uint mask;
 
   /**
-      Get `mask` field.
-      Returns: charset mask
+      charset level
   */
-  @property uint mask()
-  {
-    return (cast(GMimeCharset*)this._cPtr).mask;
-  }
-
-  /**
-      Set `mask` field.
-      Params:
-        propval = charset mask
-  */
-  @property void mask(uint propval)
-  {
-    (cast(GMimeCharset*)this._cPtr).mask = propval;
-  }
-
-  /**
-      Get `level` field.
-      Returns: charset level
-  */
-  @property uint level()
-  {
-    return (cast(GMimeCharset*)this._cPtr).level;
-  }
-
-  /**
-      Set `level` field.
-      Params:
-        propval = charset level
-  */
-  @property void level(uint propval)
-  {
-    (cast(GMimeCharset*)this._cPtr).level = propval;
-  }
+  uint level;
 
   /**
       Gets the best charset name based on the charset mask charset.
@@ -77,7 +29,7 @@ class Charset
   string bestName()
   {
     const(char)* _cretval;
-    _cretval = g_mime_charset_best_name(cast(GMimeCharset*)this._cPtr);
+    _cretval = g_mime_charset_best_name(cast(GMimeCharset*)&this);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -97,7 +49,7 @@ class Charset
     bool _retval;
     const(char)* _charset = charset.toCString(No.Alloc);
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = cast(bool)g_mime_charset_can_encode(cast(GMimeCharset*)this._cPtr, _charset, _text, len);
+    _retval = cast(bool)g_mime_charset_can_encode(cast(GMimeCharset*)&this, _charset, _text, len);
     return _retval;
   }
 
@@ -106,7 +58,7 @@ class Charset
   */
   void init_()
   {
-    g_mime_charset_init(cast(GMimeCharset*)this._cPtr);
+    g_mime_charset_init(cast(GMimeCharset*)&this);
   }
 
   /**
@@ -122,7 +74,7 @@ class Charset
   void step(string inbuf, size_t inlen)
   {
     const(char)* _inbuf = inbuf.toCString(No.Alloc);
-    g_mime_charset_step(cast(GMimeCharset*)this._cPtr, _inbuf, inlen);
+    g_mime_charset_step(cast(GMimeCharset*)&this, _inbuf, inlen);
   }
 
   /**

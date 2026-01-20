@@ -15,7 +15,7 @@ import gst.types;
 */
 class PluginDesc
 {
-  GstPluginDesc cInstance;
+  GstPluginDesc _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class PluginDesc
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.plugin_desc.PluginDesc");
 
-    cInstance = *cast(GstPluginDesc*)ptr;
+    _cInstance = *cast(GstPluginDesc*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class PluginDesc
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -236,11 +236,11 @@ class PluginDesc
   /**
       Get `releaseDatetime` field.
       Returns: date time string in ISO 8601
-          format (or rather, a subset thereof), or null. Allowed are the
-          following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
-          'T' a separator and 'Z' indicating UTC/Zulu time). This field
-          should be set via the GST_PACKAGE_RELEASE_DATETIME
-          preprocessor macro.
+            format (or rather, a subset thereof), or null. Allowed are the
+            following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+            'T' a separator and 'Z' indicating UTC/Zulu time). This field
+            should be set via the GST_PACKAGE_RELEASE_DATETIME
+            preprocessor macro.
   */
   @property string releaseDatetime()
   {
@@ -251,11 +251,11 @@ class PluginDesc
       Set `releaseDatetime` field.
       Params:
         propval = date time string in ISO 8601
-            format (or rather, a subset thereof), or null. Allowed are the
-            following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
-            'T' a separator and 'Z' indicating UTC/Zulu time). This field
-            should be set via the GST_PACKAGE_RELEASE_DATETIME
-            preprocessor macro.
+              format (or rather, a subset thereof), or null. Allowed are the
+              following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+              'T' a separator and 'Z' indicating UTC/Zulu time). This field
+              should be set via the GST_PACKAGE_RELEASE_DATETIME
+              preprocessor macro.
   */
   @property void releaseDatetime(string propval)
   {

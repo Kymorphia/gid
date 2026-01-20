@@ -49,8 +49,8 @@ template AccessibleT()
   /**
       Get `accessibleRole` property.
       Returns: The accessible role of the given [gtk.accessible.Accessible] implementation.
-      
-      The accessible role cannot be changed once set.
+        
+        The accessible role cannot be changed once set.
   */
   @property gtk.types.AccessibleRole accessibleRole()
   {
@@ -61,8 +61,8 @@ template AccessibleT()
       Set `accessibleRole` property.
       Params:
         propval = The accessible role of the given [gtk.accessible.Accessible] implementation.
-        
-        The accessible role cannot be changed once set.
+          
+          The accessible role cannot be changed once set.
   */
   @property void accessibleRole(gtk.types.AccessibleRole propval)
   {
@@ -286,6 +286,7 @@ template AccessibleT()
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
+
     gtk_accessible_update_property_value(cast(GtkAccessible*)this._cPtr, _nProperties, _properties, _values);
   }
 
@@ -315,6 +316,7 @@ template AccessibleT()
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
+
     gtk_accessible_update_relation_value(cast(GtkAccessible*)this._cPtr, _nRelations, _relations, _values);
   }
 
@@ -344,6 +346,7 @@ template AccessibleT()
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
+
     gtk_accessible_update_state_value(cast(GtkAccessible*)this._cPtr, _nStates, _states, _values);
   }
 }

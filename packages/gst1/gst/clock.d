@@ -302,13 +302,15 @@ class Clock : gst.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstClock* clock, GstClockTime time, GstClockID id, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.ClockCallback*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     GstClockReturn _cretval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -749,11 +751,11 @@ class Clock : gst.object.ObjectWrap
       Connect to `Synced` signal.
   
       Signaled on clocks with [gst.types.ClockFlags.NeedsStartupSync] set once
-      the clock is synchronized, or when it completely lost synchronization.
-      This signal will not be emitted on clocks without the flag.
-      
-      This signal will be emitted from an arbitrary thread, most likely not
-      the application's main thread.
+        the clock is synchronized, or when it completely lost synchronization.
+        This signal will not be emitted on clocks without the flag.
+        
+        This signal will be emitted from an arbitrary thread, most likely not
+        the application's main thread.
   
       Params:
         callback = signal callback delegate or function to connect

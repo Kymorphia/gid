@@ -11,7 +11,7 @@ import gtk.types;
 */
 class IMContextInfo
 {
-  GtkIMContextInfo cInstance;
+  GtkIMContextInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class IMContextInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.imcontext_info.IMContextInfo");
 
-    cInstance = *cast(GtkIMContextInfo*)ptr;
+    _cInstance = *cast(GtkIMContextInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class IMContextInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -114,7 +114,7 @@ class IMContextInfo
   /**
       Get `defaultLocales` field.
       Returns: A colon-separated list of locales where this input method
-        should be the default. The asterisk “*” sets the default for all locales.
+          should be the default. The asterisk “*” sets the default for all locales.
   */
   @property string defaultLocales()
   {
@@ -125,7 +125,7 @@ class IMContextInfo
       Set `defaultLocales` field.
       Params:
         propval = A colon-separated list of locales where this input method
-          should be the default. The asterisk “*” sets the default for all locales.
+            should be the default. The asterisk “*” sets the default for all locales.
   */
   @property void defaultLocales(string propval)
   {

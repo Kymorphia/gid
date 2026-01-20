@@ -71,34 +71,6 @@ class PreferencesWindow : adw.window.Window
   /**
       Get `canNavigateBack` property.
       Returns: Whether gestures and shortcuts for closing subpages are enabled.
-      
-      The supported gestures are:
-      
-      $(LIST
-        * One-finger swipe on touchscreens
-        * Horizontal scrolling on touchpads (usually two-finger swipe)
-        * Back mouse button
-      )
-        
-      The keyboard back key is also supported, as well as the
-      <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
-      
-      For right-to-left locales, gestures and shortcuts are reversed.
-  
-      Deprecated: Use `property@NavigationPage:can-pop` instead.
-      
-      Has no effect for subpages added with
-      [adw.preferences_window.PreferencesWindow.pushSubpage].
-  */
-  @property bool canNavigateBack()
-  {
-    return getCanNavigateBack();
-  }
-
-  /**
-      Set `canNavigateBack` property.
-      Params:
-        propval = Whether gestures and shortcuts for closing subpages are enabled.
         
         The supported gestures are:
         
@@ -114,9 +86,37 @@ class PreferencesWindow : adw.window.Window
         For right-to-left locales, gestures and shortcuts are reversed.
   
       Deprecated: Use `property@NavigationPage:can-pop` instead.
-      
-      Has no effect for subpages added with
-      [adw.preferences_window.PreferencesWindow.pushSubpage].
+        
+        Has no effect for subpages added with
+        [adw.preferences_window.PreferencesWindow.pushSubpage].
+  */
+  @property bool canNavigateBack()
+  {
+    return getCanNavigateBack();
+  }
+
+  /**
+      Set `canNavigateBack` property.
+      Params:
+        propval = Whether gestures and shortcuts for closing subpages are enabled.
+          
+          The supported gestures are:
+          
+          $(LIST
+            * One-finger swipe on touchscreens
+            * Horizontal scrolling on touchpads (usually two-finger swipe)
+            * Back mouse button
+          )
+            
+          The keyboard back key is also supported, as well as the
+          <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
+          
+          For right-to-left locales, gestures and shortcuts are reversed.
+  
+      Deprecated: Use `property@NavigationPage:can-pop` instead.
+        
+        Has no effect for subpages added with
+        [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
   @property void canNavigateBack(bool propval)
   {
@@ -164,8 +164,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Get `visiblePageName` property.
       Returns: The name of the currently visible page.
-      
-      See `property@PreferencesWindow:visible-page`.
+        
+        See `property@PreferencesWindow:visible-page`.
   */
   @property string visiblePageName()
   {
@@ -176,8 +176,8 @@ class PreferencesWindow : adw.window.Window
       Set `visiblePageName` property.
       Params:
         propval = The name of the currently visible page.
-        
-        See `property@PreferencesWindow:visible-page`.
+          
+          See `property@PreferencesWindow:visible-page`.
   */
   @property void visiblePageName(string propval)
   {

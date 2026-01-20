@@ -40,7 +40,7 @@ class WriteOptions : gobject.object.ObjectWrap
   /**
       Get `alignment` property.
       Returns: Write padding after memory buffers to this multiple of
-      bytes. Generally 8 or 64.
+        bytes. Generally 8 or 64.
   */
   @property int alignment()
   {
@@ -51,7 +51,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Set `alignment` property.
       Params:
         propval = Write padding after memory buffers to this multiple of
-        bytes. Generally 8 or 64.
+          bytes. Generally 8 or 64.
   */
   @property void alignment(int propval)
   {
@@ -61,7 +61,7 @@ class WriteOptions : gobject.object.ObjectWrap
   /**
       Get `allow64bit` property.
       Returns: Whether to allow field lengths that don't fit in a signed 32-bit
-      int. Some implementations may not be able to parse such streams.
+        int. Some implementations may not be able to parse such streams.
   */
   @property bool allow64bit()
   {
@@ -72,7 +72,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Set `allow64bit` property.
       Params:
         propval = Whether to allow field lengths that don't fit in a signed 32-bit
-        int. Some implementations may not be able to parse such streams.
+          int. Some implementations may not be able to parse such streams.
   */
   @property void allow64bit(bool propval)
   {
@@ -82,10 +82,10 @@ class WriteOptions : gobject.object.ObjectWrap
   /**
       Get `codec` property.
       Returns: Codec to use for compressing and decompressing record batch body
-      buffers. This is not part of the Arrow IPC protocol and only for
-      internal use (e.g. Feather files).
-      
-      May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
+        buffers. This is not part of the Arrow IPC protocol and only for
+        internal use (e.g. Feather files).
+        
+        May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
   */
   @property arrow.codec.Codec codec()
   {
@@ -96,10 +96,10 @@ class WriteOptions : gobject.object.ObjectWrap
       Set `codec` property.
       Params:
         propval = Codec to use for compressing and decompressing record batch body
-        buffers. This is not part of the Arrow IPC protocol and only for
-        internal use (e.g. Feather files).
-        
-        May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
+          buffers. This is not part of the Arrow IPC protocol and only for
+          internal use (e.g. Feather files).
+          
+          May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
   */
   @property void codec(arrow.codec.Codec propval)
   {
@@ -147,7 +147,7 @@ class WriteOptions : gobject.object.ObjectWrap
   /**
       Get `writeLegacyIpcFormat` property.
       Returns: Whether to write the pre-0.15.0 encapsulated IPC message format
-      consisting of a 4-byte prefix instead of 8 byte.
+        consisting of a 4-byte prefix instead of 8 byte.
   */
   @property bool writeLegacyIpcFormat()
   {
@@ -158,7 +158,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Set `writeLegacyIpcFormat` property.
       Params:
         propval = Whether to write the pre-0.15.0 encapsulated IPC message format
-        consisting of a 4-byte prefix instead of 8 byte.
+          consisting of a 4-byte prefix instead of 8 byte.
   */
   @property void writeLegacyIpcFormat(bool propval)
   {

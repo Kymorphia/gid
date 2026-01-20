@@ -343,8 +343,8 @@ class FileInfo : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -610,9 +610,7 @@ class FileInfo : gobject.object.ObjectWrap
   */
   void getModificationTime(out glib.time_val.TimeVal result)
   {
-    GTimeVal _result;
-    g_file_info_get_modification_time(cast(GFileInfo*)this._cPtr, &_result);
-    result = new glib.time_val.TimeVal(cast(void*)&_result, No.Take);
+    g_file_info_get_modification_time(cast(GFileInfo*)this._cPtr, cast(GTimeVal*)&result);
   }
 
   /**
@@ -744,8 +742,8 @@ class FileInfo : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -951,6 +949,7 @@ class FileInfo : gobject.object.ObjectWrap
       _tmpattrValue ~= s.toCString(No.Alloc);
     _tmpattrValue ~= null;
     char** _attrValue = _tmpattrValue.ptr;
+
     g_file_info_set_attribute_stringv(cast(GFileInfo*)this._cPtr, _attribute, _attrValue);
   }
 
@@ -1114,7 +1113,7 @@ class FileInfo : gobject.object.ObjectWrap
   */
   void setModificationTime(glib.time_val.TimeVal mtime)
   {
-    g_file_info_set_modification_time(cast(GFileInfo*)this._cPtr, mtime ? cast(GTimeVal*)mtime._cPtr : null);
+    g_file_info_set_modification_time(cast(GFileInfo*)this._cPtr, cast(GTimeVal*)&mtime);
   }
 
   /**

@@ -26,7 +26,7 @@ import gsk.types;
 */
 class RoundedRect
 {
-  GskRoundedRect cInstance;
+  GskRoundedRect _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -34,7 +34,7 @@ class RoundedRect
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gsk.rounded_rect.RoundedRect");
 
-    cInstance = *cast(GskRoundedRect*)ptr;
+    _cInstance = *cast(GskRoundedRect*)ptr;
 
     if (take)
       gFree(ptr);
@@ -43,7 +43,7 @@ class RoundedRect
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -65,7 +65,7 @@ class RoundedRect
   bool containsPoint(graphene.point.Point point)
   {
     bool _retval;
-    _retval = cast(bool)gsk_rounded_rect_contains_point(cast(const(GskRoundedRect)*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)gsk_rounded_rect_contains_point(cast(const(GskRoundedRect)*)this._cPtr, cast(const(graphene_point_t)*)&point);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class RoundedRect
   gsk.rounded_rect.RoundedRect init_(graphene.rect.Rect bounds, graphene.size.Size topLeft, graphene.size.Size topRight, graphene.size.Size bottomRight, graphene.size.Size bottomLeft)
   {
     GskRoundedRect* _cretval;
-    _cretval = gsk_rounded_rect_init(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, topLeft ? cast(const(graphene_size_t)*)topLeft._cPtr(No.Dup) : null, topRight ? cast(const(graphene_size_t)*)topRight._cPtr(No.Dup) : null, bottomRight ? cast(const(graphene_size_t)*)bottomRight._cPtr(No.Dup) : null, bottomLeft ? cast(const(graphene_size_t)*)bottomLeft._cPtr(No.Dup) : null);
+    _cretval = gsk_rounded_rect_init(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_size_t)*)&topLeft, cast(const(graphene_size_t)*)&topRight, cast(const(graphene_size_t)*)&bottomRight, cast(const(graphene_size_t)*)&bottomLeft);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
     return _retval;
   }

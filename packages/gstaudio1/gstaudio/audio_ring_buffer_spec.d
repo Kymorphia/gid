@@ -17,7 +17,7 @@ import gstaudio.types;
 */
 class AudioRingBufferSpec
 {
-  GstAudioRingBufferSpec cInstance;
+  GstAudioRingBufferSpec _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -25,7 +25,7 @@ class AudioRingBufferSpec
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec");
 
-    cInstance = *cast(GstAudioRingBufferSpec*)ptr;
+    _cInstance = *cast(GstAudioRingBufferSpec*)ptr;
 
     if (take)
       gFree(ptr);
@@ -34,7 +34,7 @@ class AudioRingBufferSpec
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -164,7 +164,7 @@ class AudioRingBufferSpec
   /**
       Get `seglatency` field.
       Returns: number of segments queued in the lower level device,
-       defaults to segtotal
+         defaults to segtotal
   */
   @property int seglatency()
   {
@@ -175,7 +175,7 @@ class AudioRingBufferSpec
       Set `seglatency` field.
       Params:
         propval = number of segments queued in the lower level device,
-         defaults to segtotal
+           defaults to segtotal
   */
   @property void seglatency(int propval)
   {

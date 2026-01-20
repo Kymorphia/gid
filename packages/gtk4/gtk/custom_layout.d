@@ -75,7 +75,6 @@ class CustomLayout : gtk.layout_manager.LayoutManager
       return _retval;
     }
     auto _requestModeCB = requestMode ? &_requestModeCallback : null;
-
     _static_requestMode = requestMode;
     static gtk.types.CustomMeasureFunc _static_measure;
 
@@ -84,7 +83,6 @@ class CustomLayout : gtk.layout_manager.LayoutManager
       _static_measure(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
     }
     auto _measureCB = measure ? &_measureCallback : null;
-
     _static_measure = measure;
     static gtk.types.CustomAllocateFunc _static_allocate;
 
@@ -93,7 +91,6 @@ class CustomLayout : gtk.layout_manager.LayoutManager
       _static_allocate(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), width, height, baseline);
     }
     auto _allocateCB = allocate ? &_allocateCallback : null;
-
     _static_allocate = allocate;
     GtkLayoutManager* _cretval;
     _cretval = gtk_custom_layout_new(_requestModeCB, _measureCB, _allocateCB);

@@ -13,7 +13,7 @@ import gtk.types;
 */
 class BindingSignal
 {
-  GtkBindingSignal cInstance;
+  GtkBindingSignal _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class BindingSignal
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.binding_signal.BindingSignal");
 
-    cInstance = *cast(GtkBindingSignal*)ptr;
+    _cInstance = *cast(GtkBindingSignal*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class BindingSignal
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

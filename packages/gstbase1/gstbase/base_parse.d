@@ -189,11 +189,11 @@ class BaseParse : gst.element.Element
   /**
       Get `disablePassthrough` property.
       Returns: If set to true, baseparse will unconditionally force parsing of the
-      incoming data. This can be required in the rare cases where the incoming
-      side-data (caps, pts, dts, ...) is not trusted by the user and wants to
-      force validation and parsing of the incoming data.
-      If set to false, decision of whether to parse the data or not is up to
-      the implementation (standard behaviour).
+        incoming data. This can be required in the rare cases where the incoming
+        side-data (caps, pts, dts, ...) is not trusted by the user and wants to
+        force validation and parsing of the incoming data.
+        If set to false, decision of whether to parse the data or not is up to
+        the implementation (standard behaviour).
   */
   @property bool disablePassthrough()
   {
@@ -204,11 +204,11 @@ class BaseParse : gst.element.Element
       Set `disablePassthrough` property.
       Params:
         propval = If set to true, baseparse will unconditionally force parsing of the
-        incoming data. This can be required in the rare cases where the incoming
-        side-data (caps, pts, dts, ...) is not trusted by the user and wants to
-        force validation and parsing of the incoming data.
-        If set to false, decision of whether to parse the data or not is up to
-        the implementation (standard behaviour).
+          incoming data. This can be required in the rare cases where the incoming
+          side-data (caps, pts, dts, ...) is not trusted by the user and wants to
+          force validation and parsing of the incoming data.
+          If set to false, decision of whether to parse the data or not is up to
+          the implementation (standard behaviour).
   */
   @property void disablePassthrough(bool propval)
   {

@@ -1,8 +1,7 @@
-/// Module for [DsdInfo] class
+/// Module for [DsdInfo] struct
 module gstaudio.dsd_info;
 
 import gid.gid;
-import gobject.boxed;
 import gst.caps;
 import gstaudio.c.functions;
 import gstaudio.c.types;
@@ -61,175 +60,44 @@ import gstaudio.types;
     
     Use the provided macros to access the info in this structure.
 */
-class DsdInfo : gobject.boxed.Boxed
+struct DsdInfo
 {
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_dsd_info_get_type != &gidSymbolNotFound ? gst_dsd_info_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override DsdInfo self()
-  {
-    return this;
-  }
-
   /**
-      Get `format` field.
-      Returns: DSD grouping format
+      DSD grouping format
   */
-  @property gstaudio.types.DsdFormat format()
-  {
-    return cast(gstaudio.types.DsdFormat)(cast(GstDsdInfo*)this._cPtr).format;
-  }
+  DsdFormat format;
 
   /**
-      Set `format` field.
-      Params:
-        propval = DSD grouping format
+      DSD rate
   */
-  @property void format(gstaudio.types.DsdFormat propval)
-  {
-    (cast(GstDsdInfo*)this._cPtr).format = cast(GstDsdFormat)propval;
-  }
+  int rate;
 
   /**
-      Get `rate` field.
-      Returns: DSD rate
+      number of channels (must be at least 1)
   */
-  @property int rate()
-  {
-    return (cast(GstDsdInfo*)this._cPtr).rate;
-  }
+  int channels;
 
   /**
-      Set `rate` field.
-      Params:
-        propval = DSD rate
+      audio layout
   */
-  @property void rate(int propval)
-  {
-    (cast(GstDsdInfo*)this._cPtr).rate = propval;
-  }
+  AudioLayout layout;
 
   /**
-      Get `channels` field.
-      Returns: number of channels (must be at least 1)
-  */
-  @property int channels()
-  {
-    return (cast(GstDsdInfo*)this._cPtr).channels;
-  }
-
-  /**
-      Set `channels` field.
-      Params:
-        propval = number of channels (must be at least 1)
-  */
-  @property void channels(int propval)
-  {
-    (cast(GstDsdInfo*)this._cPtr).channels = propval;
-  }
-
-  /**
-      Get `layout` field.
-      Returns: audio layout
-  */
-  @property gstaudio.types.AudioLayout layout()
-  {
-    return cast(gstaudio.types.AudioLayout)(cast(GstDsdInfo*)this._cPtr).layout;
-  }
-
-  /**
-      Set `layout` field.
-      Params:
-        propval = audio layout
-  */
-  @property void layout(gstaudio.types.AudioLayout propval)
-  {
-    (cast(GstDsdInfo*)this._cPtr).layout = cast(GstAudioLayout)propval;
-  }
-
-  /**
-      Get `reversedBytes` field.
-      Returns: true if the DSD bits in the data bytes are reversed,
+      true if the DSD bits in the data bytes are reversed,
         that is, the least significant bit comes first
   */
-  @property bool reversedBytes()
-  {
-    return cast(bool)(cast(GstDsdInfo*)this._cPtr).reversedBytes;
-  }
+  gboolean reversedBytes;
 
   /**
-      Set `reversedBytes` field.
-      Params:
-        propval = true if the DSD bits in the data bytes are reversed,
-          that is, the least significant bit comes first
+      positions for each channel
   */
-  @property void reversedBytes(bool propval)
-  {
-    (cast(GstDsdInfo*)this._cPtr).reversedBytes = propval;
-  }
+  GstAudioChannelPosition[64] positions;
 
   /** */
-  @property gstaudio.types.AudioFlags flags()
-  {
-    return cast(gstaudio.types.AudioFlags)(cast(GstDsdInfo*)this._cPtr).flags;
-  }
+  AudioFlags flags;
 
   /** */
-  @property void flags(gstaudio.types.AudioFlags propval)
-  {
-    (cast(GstDsdInfo*)this._cPtr).flags = cast(GstAudioFlags)propval;
-  }
-
-  /**
-      Allocate a new #GstDsdInfo that is also initialized with
-      [gstaudio.dsd_info.DsdInfo.init_].
-      Returns: a new #GstDsdInfo. free with [gstaudio.dsd_info.DsdInfo.free].
-  */
-  this()
-  {
-    GstDsdInfo* _cretval;
-    _cretval = gst_dsd_info_new();
-    this(_cretval, Yes.Take);
-  }
-
-  /**
-      Parse caps to generate a #GstDsdInfo.
-  
-      Params:
-        caps = a #GstCaps
-      Returns: A #GstDsdInfo, or null if caps couldn't be parsed
-  */
-  static gstaudio.dsd_info.DsdInfo newFromCaps(gst.caps.Caps caps)
-  {
-    GstDsdInfo* _cretval;
-    _cretval = gst_dsd_info_new_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gstaudio.dsd_info.DsdInfo(cast(void*)_cretval, Yes.Take) : null;
-    return _retval;
-  }
+  void*[4] GstReserved;
 
   /**
       Copy a GstDsdInfo structure.
@@ -238,8 +106,10 @@ class DsdInfo : gobject.boxed.Boxed
   gstaudio.dsd_info.DsdInfo copy()
   {
     GstDsdInfo* _cretval;
-    _cretval = gst_dsd_info_copy(cast(const(GstDsdInfo)*)this._cPtr);
-    auto _retval = _cretval ? new gstaudio.dsd_info.DsdInfo(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_dsd_info_copy(cast(const(GstDsdInfo)*)&this);
+    gstaudio.dsd_info.DsdInfo _retval;
+    if (_cretval)
+      _retval = *cast(gstaudio.dsd_info.DsdInfo*)_cretval;
     return _retval;
   }
 
@@ -253,7 +123,7 @@ class DsdInfo : gobject.boxed.Boxed
   bool isEqual(gstaudio.dsd_info.DsdInfo other)
   {
     bool _retval;
-    _retval = cast(bool)gst_dsd_info_is_equal(cast(const(GstDsdInfo)*)this._cPtr, other ? cast(const(GstDsdInfo)*)other._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_dsd_info_is_equal(cast(const(GstDsdInfo)*)&this, cast(const(GstDsdInfo)*)&other);
     return _retval;
   }
 
@@ -272,7 +142,7 @@ class DsdInfo : gobject.boxed.Boxed
   {
     assert(!positions || positions.length == 64);
     auto _positions = cast(const(GstAudioChannelPosition)*)positions.ptr;
-    gst_dsd_info_set_format(cast(GstDsdInfo*)this._cPtr, format, rate, channels, _positions);
+    gst_dsd_info_set_format(cast(GstDsdInfo*)&this, format, rate, channels, _positions);
   }
 
   /**
@@ -283,7 +153,7 @@ class DsdInfo : gobject.boxed.Boxed
   gst.caps.Caps toCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_dsd_info_to_caps(cast(const(GstDsdInfo)*)this._cPtr);
+    _cretval = gst_dsd_info_to_caps(cast(const(GstDsdInfo)*)&this);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -299,9 +169,7 @@ class DsdInfo : gobject.boxed.Boxed
   static bool fromCaps(out gstaudio.dsd_info.DsdInfo info, gst.caps.Caps caps)
   {
     bool _retval;
-    GstDsdInfo _info;
-    _retval = cast(bool)gst_dsd_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-    info = new gstaudio.dsd_info.DsdInfo(cast(void*)&_info, No.Take);
+    _retval = cast(bool)gst_dsd_info_from_caps(cast(GstDsdInfo*)&info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -313,8 +181,6 @@ class DsdInfo : gobject.boxed.Boxed
   */
   static void init_(out gstaudio.dsd_info.DsdInfo info)
   {
-    GstDsdInfo _info;
-    gst_dsd_info_init(&_info);
-    info = new gstaudio.dsd_info.DsdInfo(cast(void*)&_info, No.Take);
+    gst_dsd_info_init(cast(GstDsdInfo*)&info);
   }
 }

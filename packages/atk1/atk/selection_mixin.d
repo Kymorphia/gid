@@ -143,7 +143,7 @@ template SelectionT()
       Connect to `SelectionChanged` signal.
   
       The "selection-changed" signal is emitted by an object which
-      implements AtkSelection interface when the selection changes.
+        implements AtkSelection interface when the selection changes.
   
       Params:
         callback = signal callback delegate or function to connect

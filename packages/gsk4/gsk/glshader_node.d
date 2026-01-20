@@ -64,6 +64,7 @@ class GLShaderNode : gsk.render_node.RenderNode
     foreach (obj; children)
       _tmpchildren ~= obj ? cast(GskRenderNode*)obj._cPtr : null;
     GskRenderNode** _children = cast(GskRenderNode**)_tmpchildren.ptr;
+
     _cretval = gsk_gl_shader_node_new(shader ? cast(GskGLShader*)shader._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, args ? cast(GBytes*)args._cPtr(No.Dup) : null, _children, _nChildren);
     this(_cretval, Yes.Take);
   }

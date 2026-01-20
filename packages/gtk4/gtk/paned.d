@@ -138,10 +138,10 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `maxPosition` property.
       Returns: The largest possible value for the [gtk.paned.Paned.position]
-      property.
-      
-      This property is derived from the size and shrinkability
-      of the widget's children.
+        property.
+        
+        This property is derived from the size and shrinkability
+        of the widget's children.
   */
   @property int maxPosition()
   {
@@ -151,10 +151,10 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `minPosition` property.
       Returns: The smallest possible value for the [gtk.paned.Paned.position]
-      property.
-      
-      This property is derived from the size and shrinkability
-      of the widget's children.
+        property.
+        
+        This property is derived from the size and shrinkability
+        of the widget's children.
   */
   @property int minPosition()
   {
@@ -202,7 +202,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `resizeEndChild` property.
       Returns: Determines whether the second child expands and shrinks
-      along with the paned widget.
+        along with the paned widget.
   */
   @property bool resizeEndChild()
   {
@@ -213,7 +213,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `resizeEndChild` property.
       Params:
         propval = Determines whether the second child expands and shrinks
-        along with the paned widget.
+          along with the paned widget.
   */
   @property void resizeEndChild(bool propval)
   {
@@ -223,7 +223,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `resizeStartChild` property.
       Returns: Determines whether the first child expands and shrinks
-      along with the paned widget.
+        along with the paned widget.
   */
   @property bool resizeStartChild()
   {
@@ -234,7 +234,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `resizeStartChild` property.
       Params:
         propval = Determines whether the first child expands and shrinks
-        along with the paned widget.
+          along with the paned widget.
   */
   @property void resizeStartChild(bool propval)
   {
@@ -244,7 +244,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `shrinkEndChild` property.
       Returns: Determines whether the second child can be made smaller
-      than its requisition.
+        than its requisition.
   */
   @property bool shrinkEndChild()
   {
@@ -255,7 +255,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `shrinkEndChild` property.
       Params:
         propval = Determines whether the second child can be made smaller
-        than its requisition.
+          than its requisition.
   */
   @property void shrinkEndChild(bool propval)
   {
@@ -265,7 +265,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `shrinkStartChild` property.
       Returns: Determines whether the first child can be made smaller
-      than its requisition.
+        than its requisition.
   */
   @property bool shrinkStartChild()
   {
@@ -276,7 +276,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `shrinkStartChild` property.
       Params:
         propval = Determines whether the first child can be made smaller
-        than its requisition.
+          than its requisition.
   */
   @property void shrinkStartChild(bool propval)
   {
@@ -305,9 +305,9 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `wideHandle` property.
       Returns: Whether the [gtk.paned.Paned] should provide a stronger visual separation.
-      
-      For example, this could be set when a paned contains two
-      [gtk.notebook.Notebook]s, whose tab rows would otherwise merge visually.
+        
+        For example, this could be set when a paned contains two
+        [gtk.notebook.Notebook]s, whose tab rows would otherwise merge visually.
   */
   @property bool wideHandle()
   {
@@ -318,9 +318,9 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `wideHandle` property.
       Params:
         propval = Whether the [gtk.paned.Paned] should provide a stronger visual separation.
-        
-        For example, this could be set when a paned contains two
-        [gtk.notebook.Notebook]s, whose tab rows would otherwise merge visually.
+          
+          For example, this could be set when a paned contains two
+          [gtk.notebook.Notebook]s, whose tab rows would otherwise merge visually.
   */
   @property void wideHandle(bool propval)
   {
@@ -531,12 +531,12 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `AcceptPosition` signal.
   
       Emitted to accept the current position of the handle when
-      moving it using key bindings.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>Return</kbd> or
-      <kbd>Space</kbd>.
+        moving it using key bindings.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Return</kbd> or
+        <kbd>Space</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -576,14 +576,14 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `CancelPosition` signal.
   
       Emitted to cancel moving the position of the handle using key
-      bindings.
-      
-      The position of the handle will be reset to the value prior to
-      moving it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>Escape</kbd>.
+        bindings.
+        
+        The position of the handle will be reset to the value prior to
+        moving it.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Escape</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -623,10 +623,10 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `CycleChildFocus` signal.
   
       Emitted to cycle the focus between the children of the paned.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding is <kbd>F6</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding is <kbd>F6</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -673,11 +673,11 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `CycleHandleFocus` signal.
   
       Emitted to cycle whether the paned should grab focus to allow
-      the user to change position of the handle by using key bindings.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>F8</kbd>.
+        the user to change position of the handle by using key bindings.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>F8</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -724,8 +724,8 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `MoveHandle` signal.
   
       Emitted to move the handle with key bindings.
-      
-      This is a [keybinding signal](class.SignalAction.html).
+        
+        This is a [keybinding signal](class.SignalAction.html).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -772,11 +772,11 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `ToggleHandleFocus` signal.
   
       Emitted to accept the current position of the handle and then
-      move focus to the next widget in the focus chain.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding is <kbd>Tab</kbd>.
+        move focus to the next widget in the focus chain.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding is <kbd>Tab</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

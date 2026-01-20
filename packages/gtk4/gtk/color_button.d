@@ -90,10 +90,10 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   /**
       Get `showEditor` property.
       Returns: Whether the color chooser should open in editor mode.
-      
-      This property should be used in cases where the palette
-      in the editor would be redundant, such as when the color
-      button is already part of a palette.
+        
+        This property should be used in cases where the palette
+        in the editor would be redundant, such as when the color
+        button is already part of a palette.
   */
   @property bool showEditor()
   {
@@ -104,10 +104,10 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Set `showEditor` property.
       Params:
         propval = Whether the color chooser should open in editor mode.
-        
-        This property should be used in cases where the palette
-        in the editor would be redundant, such as when the color
-        button is already part of a palette.
+          
+          This property should be used in cases where the palette
+          in the editor would be redundant, such as when the color
+          button is already part of a palette.
   */
   @property void showEditor(bool propval)
   {
@@ -164,7 +164,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    _cretval = gtk_color_button_new_with_rgba(cast(const(GdkRGBA)*)&rgba);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
@@ -227,9 +227,9 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Connect to `Activate` signal.
   
       Emitted to when the color button is activated.
-      
-      The `::activate` signal on [gtk.menu_button.MenuButton] is an action signal and
-      emitting it causes the button to pop up its dialog.
+        
+        The `::activate` signal on [gtk.menu_button.MenuButton] is an action signal and
+        emitting it causes the button to pop up its dialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -267,13 +267,13 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Connect to `ColorSet` signal.
   
       Emitted when the user selects a color.
-      
-      When handling this signal, use [gtk.color_chooser.ColorChooser.getRgba]
-      to find out which color was just selected.
-      
-      Note that this signal is only emitted when the user changes the color.
-      If you need to react to programmatic color changes as well, use
-      the notify::rgba signal.
+        
+        When handling this signal, use [gtk.color_chooser.ColorChooser.getRgba]
+        to find out which color was just selected.
+        
+        Note that this signal is only emitted when the user changes the color.
+        If you need to react to programmatic color changes as well, use
+        the notify::rgba signal.
   
       Params:
         callback = signal callback delegate or function to connect

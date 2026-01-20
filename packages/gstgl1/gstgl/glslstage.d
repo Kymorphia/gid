@@ -89,6 +89,7 @@ class GLSLStage : gst.object.ObjectWrap
     foreach (s; str)
       _tmpstr ~= s.toCString(No.Alloc);
     const(char*)* _str = _tmpstr.ptr;
+
     _cretval = gst_glsl_stage_new_with_strings(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, type, version_, profile, _nStrings, _str);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
     return _retval;
@@ -159,6 +160,7 @@ class GLSLStage : gst.object.ObjectWrap
     foreach (s; str)
       _tmpstr ~= s.toCString(No.Alloc);
     const(char*)* _str = _tmpstr.ptr;
+
     _retval = cast(bool)gst_glsl_stage_set_strings(cast(GstGLSLStage*)this._cPtr, version_, profile, _nStrings, _str);
     return _retval;
   }

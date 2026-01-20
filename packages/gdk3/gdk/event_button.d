@@ -49,7 +49,7 @@ import gid.gid;
 */
 class EventButton
 {
-  GdkEventButton cInstance;
+  GdkEventButton _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -57,7 +57,7 @@ class EventButton
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_button.EventButton");
 
-    cInstance = *cast(GdkEventButton*)ptr;
+    _cInstance = *cast(GdkEventButton*)ptr;
 
     if (take)
       gFree(ptr);
@@ -66,13 +66,13 @@ class EventButton
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.ButtonPress], [gdk.types.EventType._2buttonPress],
-        [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease]).
+          [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease]).
   */
   @property gdk.types.EventType type()
   {
@@ -83,7 +83,7 @@ class EventButton
       Set `type` field.
       Params:
         propval = the type of the event ([gdk.types.EventType.ButtonPress], [gdk.types.EventType._2buttonPress],
-          [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease]).
+            [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease]).
   */
   @property void type(gdk.types.EventType propval)
   {
@@ -189,8 +189,8 @@ class EventButton
   /**
       Get `state` field.
       Returns: a bit-mask representing the state of
-        the modifier keys (e.g. Control, Shift and Alt) and the pointer
-        buttons. See #GdkModifierType.
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
   */
   @property gdk.types.ModifierType state()
   {
@@ -201,8 +201,8 @@ class EventButton
       Set `state` field.
       Params:
         propval = a bit-mask representing the state of
-          the modifier keys (e.g. Control, Shift and Alt) and the pointer
-          buttons. See #GdkModifierType.
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
   */
   @property void state(gdk.types.ModifierType propval)
   {
@@ -212,9 +212,9 @@ class EventButton
   /**
       Get `button` field.
       Returns: the button which was pressed or released, numbered from 1 to 5.
-        Normally button 1 is the left mouse button, 2 is the middle button,
-        and 3 is the right button. On 2-button mice, the middle button can
-        often be simulated by pressing both mouse buttons together.
+          Normally button 1 is the left mouse button, 2 is the middle button,
+          and 3 is the right button. On 2-button mice, the middle button can
+          often be simulated by pressing both mouse buttons together.
   */
   @property uint button()
   {
@@ -225,9 +225,9 @@ class EventButton
       Set `button` field.
       Params:
         propval = the button which was pressed or released, numbered from 1 to 5.
-          Normally button 1 is the left mouse button, 2 is the middle button,
-          and 3 is the right button. On 2-button mice, the middle button can
-          often be simulated by pressing both mouse buttons together.
+            Normally button 1 is the left mouse button, 2 is the middle button,
+            and 3 is the right button. On 2-button mice, the middle button can
+            often be simulated by pressing both mouse buttons together.
   */
   @property void button(uint propval)
   {
@@ -237,7 +237,7 @@ class EventButton
   /**
       Get `device` field.
       Returns: the master device that the event originated from. Use
-      [gdk.event.Event.getSourceDevice] to get the slave device.
+        [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property gdk.device.Device device()
   {
@@ -248,7 +248,7 @@ class EventButton
       Set `device` field.
       Params:
         propval = the master device that the event originated from. Use
-        [gdk.event.Event.getSourceDevice] to get the slave device.
+          [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property void device(gdk.device.Device propval)
   {
@@ -259,7 +259,7 @@ class EventButton
   /**
       Get `xRoot` field.
       Returns: the x coordinate of the pointer relative to the root of the
-        screen.
+          screen.
   */
   @property double xRoot()
   {
@@ -270,7 +270,7 @@ class EventButton
       Set `xRoot` field.
       Params:
         propval = the x coordinate of the pointer relative to the root of the
-          screen.
+            screen.
   */
   @property void xRoot(double propval)
   {
@@ -280,7 +280,7 @@ class EventButton
   /**
       Get `yRoot` field.
       Returns: the y coordinate of the pointer relative to the root of the
-        screen.
+          screen.
   */
   @property double yRoot()
   {
@@ -291,7 +291,7 @@ class EventButton
       Set `yRoot` field.
       Params:
         propval = the y coordinate of the pointer relative to the root of the
-          screen.
+            screen.
   */
   @property void yRoot(double propval)
   {

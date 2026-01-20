@@ -247,10 +247,8 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_audio_encoder_get_allocator(cast(GstAudioEncoder*)this._cPtr, &_allocator, &_params);
+    gst_audio_encoder_get_allocator(cast(GstAudioEncoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.Take);
   }
 
   /** */

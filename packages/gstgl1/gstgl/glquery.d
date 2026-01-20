@@ -15,7 +15,7 @@ import gstgl.types;
 */
 class GLQuery
 {
-  GstGLQuery cInstance;
+  GstGLQuery _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class GLQuery
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstgl.glquery.GLQuery");
 
-    cInstance = *cast(GstGLQuery*)ptr;
+    _cInstance = *cast(GstGLQuery*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class GLQuery
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

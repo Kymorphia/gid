@@ -51,7 +51,7 @@ import glib.types;
 */
 class Relation
 {
-  GRelation* cInstancePtr;
+  GRelation* _cInstancePtr;
   bool owned;
 
   /** */
@@ -60,7 +60,7 @@ class Relation
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.relation.Relation");
 
-    cInstancePtr = cast(GRelation*)ptr;
+    _cInstancePtr = cast(GRelation*)ptr;
 
     owned = take;
   }
@@ -68,7 +68,7 @@ class Relation
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

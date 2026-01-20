@@ -40,7 +40,7 @@ import gid.gid;
 */
 class PixbufModulePattern
 {
-  GdkPixbufModulePattern cInstance;
+  GdkPixbufModulePattern _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -48,7 +48,7 @@ class PixbufModulePattern
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern");
 
-    cInstance = *cast(GdkPixbufModulePattern*)ptr;
+    _cInstance = *cast(GdkPixbufModulePattern*)ptr;
 
     if (take)
       gFree(ptr);
@@ -57,7 +57,7 @@ class PixbufModulePattern
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -83,7 +83,7 @@ class PixbufModulePattern
   /**
       Get `mask` field.
       Returns: mask containing bytes which modify how the prefix is matched against
-       test data
+         test data
   */
   @property string mask()
   {
@@ -94,7 +94,7 @@ class PixbufModulePattern
       Set `mask` field.
       Params:
         propval = mask containing bytes which modify how the prefix is matched against
-         test data
+           test data
   */
   @property void mask(string propval)
   {

@@ -5,7 +5,6 @@ public import atk.component_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
 import atk.object;
-import atk.rectangle;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
@@ -227,12 +226,12 @@ interface Component
       Connect to `BoundsChanged` signal.
   
       The 'bounds-changed" signal is emitted when the position or
-      size of the component changes.
+        size of the component changes.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.rectangle.Rectangle arg1, atk.component.Component component))
+          $(D void callback(atk.types.Rectangle arg1, atk.component.Component component))
   
           `arg1` The AtkRectangle giving the new position and size. (optional)
   

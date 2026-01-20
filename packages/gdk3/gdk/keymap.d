@@ -363,7 +363,7 @@ class Keymap : gobject.object.ObjectWrap
       Connect to `DirectionChanged` signal.
   
       The ::direction-changed signal gets emitted when the direction of
-      the keymap changes.
+        the keymap changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -401,7 +401,7 @@ class Keymap : gobject.object.ObjectWrap
       Connect to `KeysChanged` signal.
   
       The ::keys-changed signal is emitted when the mapping represented by
-      keymap changes.
+        keymap changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -439,8 +439,8 @@ class Keymap : gobject.object.ObjectWrap
       Connect to `StateChanged` signal.
   
       The ::state-changed signal is emitted when the state of the
-      keyboard changes, e.g when Caps Lock is turned on or off.
-      See [gdk.keymap.Keymap.getCapsLockState].
+        keyboard changes, e.g when Caps Lock is turned on or off.
+        See [gdk.keymap.Keymap.getCapsLockState].
   
       Params:
         callback = signal callback delegate or function to connect

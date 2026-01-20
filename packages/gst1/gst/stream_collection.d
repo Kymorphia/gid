@@ -149,7 +149,7 @@ class StreamCollection : gst.object.ObjectWrap
       Connect to `StreamNotify` signal.
   
       The stream notify signal is used to be notified of property changes to
-      streams within the collection.
+        streams within the collection.
   
       Params:
         detail = Signal detail or null (default)

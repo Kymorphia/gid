@@ -216,7 +216,7 @@ class Expander : gtk.widget.Widget
   /**
       Get `resizeToplevel` property.
       Returns: When this property is true, the expander will resize the toplevel
-      widget containing the expander upon expanding and collapsing.
+        widget containing the expander upon expanding and collapsing.
   */
   @property bool resizeToplevel()
   {
@@ -227,7 +227,7 @@ class Expander : gtk.widget.Widget
       Set `resizeToplevel` property.
       Params:
         propval = When this property is true, the expander will resize the toplevel
-        widget containing the expander upon expanding and collapsing.
+          widget containing the expander upon expanding and collapsing.
   */
   @property void resizeToplevel(bool propval)
   {

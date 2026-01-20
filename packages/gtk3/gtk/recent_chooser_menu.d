@@ -68,7 +68,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   /**
       Get `showNumbers` property.
       Returns: Whether the first ten items in the menu should be prepended by
-      a number acting as a unique mnemonic.
+        a number acting as a unique mnemonic.
   */
   @property bool showNumbers()
   {
@@ -79,7 +79,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
       Set `showNumbers` property.
       Params:
         propval = Whether the first ten items in the menu should be prepended by
-        a number acting as a unique mnemonic.
+          a number acting as a unique mnemonic.
   */
   @property void showNumbers(bool propval)
   {

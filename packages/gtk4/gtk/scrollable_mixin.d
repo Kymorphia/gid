@@ -48,8 +48,8 @@ template ScrollableT()
   /**
       Get `hadjustment` property.
       Returns: Horizontal [gtk.adjustment.Adjustment] of the scrollable widget.
-      
-      This adjustment is shared between the scrollable widget and its parent.
+        
+        This adjustment is shared between the scrollable widget and its parent.
   */
   @property gtk.adjustment.Adjustment hadjustment()
   {
@@ -60,8 +60,8 @@ template ScrollableT()
       Set `hadjustment` property.
       Params:
         propval = Horizontal [gtk.adjustment.Adjustment] of the scrollable widget.
-        
-        This adjustment is shared between the scrollable widget and its parent.
+          
+          This adjustment is shared between the scrollable widget and its parent.
   */
   @property void hadjustment(gtk.adjustment.Adjustment propval)
   {
@@ -90,8 +90,8 @@ template ScrollableT()
   /**
       Get `vadjustment` property.
       Returns: Vertical [gtk.adjustment.Adjustment] of the scrollable widget.
-      
-      This adjustment is shared between the scrollable widget and its parent.
+        
+        This adjustment is shared between the scrollable widget and its parent.
   */
   @property gtk.adjustment.Adjustment vadjustment()
   {
@@ -102,8 +102,8 @@ template ScrollableT()
       Set `vadjustment` property.
       Params:
         propval = Vertical [gtk.adjustment.Adjustment] of the scrollable widget.
-        
-        This adjustment is shared between the scrollable widget and its parent.
+          
+          This adjustment is shared between the scrollable widget and its parent.
   */
   @property void vadjustment(gtk.adjustment.Adjustment propval)
   {
@@ -144,9 +144,7 @@ template ScrollableT()
   override bool getBorder(out gtk.border.Border border)
   {
     bool _retval;
-    GtkBorder _border;
-    _retval = cast(bool)gtk_scrollable_get_border(cast(GtkScrollable*)this._cPtr, &_border);
-    border = new gtk.border.Border(cast(void*)&_border, No.Take);
+    _retval = cast(bool)gtk_scrollable_get_border(cast(GtkScrollable*)this._cPtr, cast(GtkBorder*)&border);
     return _retval;
   }
 

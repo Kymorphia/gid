@@ -182,9 +182,9 @@ class Notification : gobject.object.ObjectWrap
       Connect to `Closed` signal.
   
       Emitted when a notification has been withdrawn.
-      
-      The default handler will close the notification using libnotify, if built with
-      support for it.
+        
+        The default handler will close the notification using libnotify, if built with
+        support for it.
   
       Params:
         callback = signal callback delegate or function to connect

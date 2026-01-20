@@ -9,7 +9,7 @@ import gstaudio.types;
 /** */
 class AudioChannelMixer
 {
-  GstAudioChannelMixer* cInstancePtr;
+  GstAudioChannelMixer* _cInstancePtr;
   bool owned;
 
   /** */
@@ -18,7 +18,7 @@ class AudioChannelMixer
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_channel_mixer.AudioChannelMixer");
 
-    cInstancePtr = cast(GstAudioChannelMixer*)ptr;
+    _cInstancePtr = cast(GstAudioChannelMixer*)ptr;
 
     owned = take;
   }
@@ -26,7 +26,7 @@ class AudioChannelMixer
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

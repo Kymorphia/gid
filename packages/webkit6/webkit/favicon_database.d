@@ -89,7 +89,6 @@ class FaviconDatabase : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _pageUri = pageUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_favicon_database_get_favicon(cast(WebKitFaviconDatabase*)this._cPtr, _pageUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -135,11 +134,11 @@ class FaviconDatabase : gobject.object.ObjectWrap
       Connect to `FaviconChanged` signal.
   
       This signal is emitted when the favicon URI of page_uri has
-      been changed to favicon_uri in the database. You can connect
-      to this signal and call [webkit.favicon_database.FaviconDatabase.getFavicon]
-      to get the favicon. If you are interested in the favicon of a
-      #WebKitWebView it's easier to use the #WebKitWebView:favicon
-      property. See [webkit.web_view.WebView.getFavicon] for more details.
+        been changed to favicon_uri in the database. You can connect
+        to this signal and call [webkit.favicon_database.FaviconDatabase.getFavicon]
+        to get the favicon. If you are interested in the favicon of a
+        #WebKitWebView it's easier to use the #WebKitWebView:favicon
+        property. See [webkit.web_view.WebView.getFavicon] for more details.
   
       Params:
         callback = signal callback delegate or function to connect

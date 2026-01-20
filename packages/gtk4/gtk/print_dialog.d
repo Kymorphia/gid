@@ -58,7 +58,7 @@ class PrintDialog : gobject.object.ObjectWrap
   /**
       Get `acceptLabel` property.
       Returns: A label that may be shown on the accept button of a print dialog
-      that is presented by [gtk.print_dialog.PrintDialog.setup].
+        that is presented by [gtk.print_dialog.PrintDialog.setup].
   */
   @property string acceptLabel()
   {
@@ -69,7 +69,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Set `acceptLabel` property.
       Params:
         propval = A label that may be shown on the accept button of a print dialog
-        that is presented by [gtk.print_dialog.PrintDialog.setup].
+          that is presented by [gtk.print_dialog.PrintDialog.setup].
   */
   @property void acceptLabel(string propval)
   {
@@ -136,7 +136,7 @@ class PrintDialog : gobject.object.ObjectWrap
   /**
       Get `title` property.
       Returns: A title that may be shown on the print dialog that is
-      presented by [gtk.print_dialog.PrintDialog.setup].
+        presented by [gtk.print_dialog.PrintDialog.setup].
   */
   @property string title()
   {
@@ -147,7 +147,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Set `title` property.
       Params:
         propval = A title that may be shown on the print dialog that is
-        presented by [gtk.print_dialog.PrintDialog.setup].
+          presented by [gtk.print_dialog.PrintDialog.setup].
   */
   @property void title(string propval)
   {
@@ -253,7 +253,6 @@ class PrintDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_print_dialog_print(cast(GtkPrintDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, setup ? cast(GtkPrintSetup*)setup._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -284,7 +283,6 @@ class PrintDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_print_dialog_print_file(cast(GtkPrintDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, setup ? cast(GtkPrintSetup*)setup._cPtr(No.Dup) : null, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -429,7 +427,6 @@ class PrintDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_print_dialog_setup(cast(GtkPrintDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

@@ -33,7 +33,7 @@ class Sphere : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -81,7 +81,7 @@ class Sphere : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
-    _retval = cast(bool)graphene_sphere_contains_point(cast(const(graphene_sphere_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_sphere_contains_point(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Sphere : gobject.boxed.Boxed
   float distance(graphene.point3_d.Point3D point)
   {
     float _retval;
-    _retval = graphene_sphere_distance(cast(const(graphene_sphere_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = graphene_sphere_distance(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
     return _retval;
   }
 
@@ -137,9 +137,7 @@ class Sphere : gobject.boxed.Boxed
   */
   void getCenter(out graphene.point3_d.Point3D center)
   {
-    graphene_point3d_t _center;
-    graphene_sphere_get_center(cast(const(graphene_sphere_t)*)this._cPtr, &_center);
-    center = new graphene.point3_d.Point3D(cast(void*)&_center, No.Take);
+    graphene_sphere_get_center(cast(const(graphene_sphere_t)*)this._cPtr, cast(graphene_point3d_t*)&center);
   }
 
   /**
@@ -165,7 +163,7 @@ class Sphere : gobject.boxed.Boxed
   graphene.sphere.Sphere init_(graphene.point3_d.Point3D center, float radius)
   {
     graphene_sphere_t* _cretval;
-    _cretval = graphene_sphere_init(cast(graphene_sphere_t*)this._cPtr, center ? cast(const(graphene_point3d_t)*)center._cPtr(No.Dup) : null, radius);
+    _cretval = graphene_sphere_init(cast(graphene_sphere_t*)this._cPtr, cast(const(graphene_point3d_t)*)&center, radius);
     auto _retval = _cretval ? new graphene.sphere.Sphere(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -182,18 +180,15 @@ class Sphere : gobject.boxed.Boxed
         center = the center of the sphere
       Returns: the initialized #graphene_sphere_t
   */
-  graphene.sphere.Sphere initFromPoints(graphene.point3_d.Point3D[] points, graphene.point3_d.Point3D center = null)
+  graphene.sphere.Sphere initFromPoints(graphene.point3_d.Point3D[] points, graphene.point3_d.Point3D center)
   {
     graphene_sphere_t* _cretval;
     uint _nPoints;
     if (points)
       _nPoints = cast(uint)points.length;
 
-    graphene_point3d_t[] _tmppoints;
-    foreach (obj; points)
-      _tmppoints ~= *cast(graphene_point3d_t*)obj._cPtr;
-    const(graphene_point3d_t)* _points = _tmppoints.ptr;
-    _cretval = graphene_sphere_init_from_points(cast(graphene_sphere_t*)this._cPtr, _nPoints, _points, center ? cast(const(graphene_point3d_t)*)center._cPtr(No.Dup) : null);
+    auto _points = cast(const(graphene_point3d_t)*)points.ptr;
+    _cretval = graphene_sphere_init_from_points(cast(graphene_sphere_t*)this._cPtr, _nPoints, _points, cast(const(graphene_point3d_t)*)&center);
     auto _retval = _cretval ? new graphene.sphere.Sphere(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -210,7 +205,7 @@ class Sphere : gobject.boxed.Boxed
         center = the center of the sphere
       Returns: the initialized #graphene_sphere_t
   */
-  graphene.sphere.Sphere initFromVectors(graphene.vec3.Vec3[] vectors, graphene.point3_d.Point3D center = null)
+  graphene.sphere.Sphere initFromVectors(graphene.vec3.Vec3[] vectors, graphene.point3_d.Point3D center)
   {
     graphene_sphere_t* _cretval;
     uint _nVectors;
@@ -221,7 +216,8 @@ class Sphere : gobject.boxed.Boxed
     foreach (obj; vectors)
       _tmpvectors ~= *cast(graphene_vec3_t*)obj._cPtr;
     const(graphene_vec3_t)* _vectors = _tmpvectors.ptr;
-    _cretval = graphene_sphere_init_from_vectors(cast(graphene_sphere_t*)this._cPtr, _nVectors, _vectors, center ? cast(const(graphene_point3d_t)*)center._cPtr(No.Dup) : null);
+
+    _cretval = graphene_sphere_init_from_vectors(cast(graphene_sphere_t*)this._cPtr, _nVectors, _vectors, cast(const(graphene_point3d_t)*)&center);
     auto _retval = _cretval ? new graphene.sphere.Sphere(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -248,7 +244,7 @@ class Sphere : gobject.boxed.Boxed
   void translate(graphene.point3_d.Point3D point, out graphene.sphere.Sphere res)
   {
     graphene_sphere_t _res;
-    graphene_sphere_translate(cast(const(graphene_sphere_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null, &_res);
+    graphene_sphere_translate(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, &_res);
     res = new graphene.sphere.Sphere(cast(void*)&_res, No.Take);
   }
 }

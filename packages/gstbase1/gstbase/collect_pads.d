@@ -303,7 +303,6 @@ class CollectPads : gst.object.ObjectWrap
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_collect_pads_set_buffer_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
@@ -330,7 +329,6 @@ class CollectPads : gst.object.ObjectWrap
       return _retval;
     }
     auto _clipfuncCB = clipfunc ? &_clipfuncCallback : null;
-
     auto _clipfunc = clipfunc ? cast(void*)&(clipfunc) : null;
     gst_collect_pads_set_clip_function(cast(GstCollectPads*)this._cPtr, _clipfuncCB, _clipfunc);
   }
@@ -353,7 +351,6 @@ class CollectPads : gst.object.ObjectWrap
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_collect_pads_set_compare_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
@@ -375,13 +372,15 @@ class CollectPads : gst.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsEventFunction*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_collect_pads_set_event_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
@@ -403,7 +402,6 @@ class CollectPads : gst.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_collect_pads_set_flush_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
@@ -454,7 +452,6 @@ class CollectPads : gst.object.ObjectWrap
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_collect_pads_set_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
@@ -476,13 +473,15 @@ class CollectPads : gst.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsQueryFunction*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_collect_pads_set_query_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }

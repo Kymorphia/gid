@@ -43,8 +43,8 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   /**
       Get `strict` property.
       Returns: Defines the behaviour in case the imported data contains recoverable errors (usually too
-      many or too few data per row). If set to true, an error will be reported and the import
-      will stop, and if set to false, then the error will be reported but the import will not stop.
+        many or too few data per row). If set to true, an error will be reported and the import
+        will stop, and if set to false, then the error will be reported but the import will not stop.
   */
   @property bool strict()
   {
@@ -55,8 +55,8 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
       Set `strict` property.
       Params:
         propval = Defines the behaviour in case the imported data contains recoverable errors (usually too
-        many or too few data per row). If set to true, an error will be reported and the import
-        will stop, and if set to false, then the error will be reported but the import will not stop.
+          many or too few data per row). If set to true, an error will be reported and the import
+          will stop, and if set to false, then the error will be reported but the import will not stop.
   */
   @property void strict(bool propval)
   {

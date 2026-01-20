@@ -12,6 +12,11 @@
 //!set record[FlagsClass][ignore] 0
 //!set record[TypeClass][ignore] 0
 
+//!kind EnumClass Struct
+//!kind FlagsClass Struct
+//!kind EnumValue Struct
+//!kind FlagsValue Struct
+
 //# Add DClosure class type which is defined in GObject-DClosure.d
 //!add repository.namespace '<class name="DClosure" parent="Closure"></class>'
 

@@ -74,7 +74,7 @@ class GestureRotate : gtk.gesture.Gesture
       Connect to `AngleChanged` signal.
   
       This signal is emitted when the angle between both tracked points
-      changes.
+        changes.
   
       Params:
         callback = signal callback delegate or function to connect

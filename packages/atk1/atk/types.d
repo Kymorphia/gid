@@ -61,6 +61,9 @@ alias ValueType = AtkValueType;
 // Structs
 
 /** */
+alias Rectangle = AtkRectangle;
+
+/** */
 alias TextRectangle = AtkTextRectangle;
 
 // Callbacks

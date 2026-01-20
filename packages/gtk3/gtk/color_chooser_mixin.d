@@ -24,8 +24,8 @@ template ColorChooserT()
   /**
       Get `rgba` property.
       Returns: The ::rgba property contains the currently selected color,
-      as a #GdkRGBA struct. The property can be set to change
-      the current selection programmatically.
+        as a #GdkRGBA struct. The property can be set to change
+        the current selection programmatically.
   */
   @property gdk.rgba.RGBA rgba()
   {
@@ -36,8 +36,8 @@ template ColorChooserT()
       Set `rgba` property.
       Params:
         propval = The ::rgba property contains the currently selected color,
-        as a #GdkRGBA struct. The property can be set to change
-        the current selection programmatically.
+          as a #GdkRGBA struct. The property can be set to change
+          the current selection programmatically.
   */
   @property void rgba(gdk.rgba.RGBA propval)
   {
@@ -47,12 +47,12 @@ template ColorChooserT()
   /**
       Get `useAlpha` property.
       Returns: When ::use-alpha is true, colors may have alpha (translucency)
-      information. When it is false, the #GdkRGBA struct obtained
-      via the #GtkColorChooser:rgba property will be forced to have
-      alpha == 1.
-      
-      Implementations are expected to show alpha by rendering the color
-      over a non-uniform background (like a checkerboard pattern).
+        information. When it is false, the #GdkRGBA struct obtained
+        via the #GtkColorChooser:rgba property will be forced to have
+        alpha == 1.
+        
+        Implementations are expected to show alpha by rendering the color
+        over a non-uniform background (like a checkerboard pattern).
   */
   @property bool useAlpha()
   {
@@ -63,12 +63,12 @@ template ColorChooserT()
       Set `useAlpha` property.
       Params:
         propval = When ::use-alpha is true, colors may have alpha (translucency)
-        information. When it is false, the #GdkRGBA struct obtained
-        via the #GtkColorChooser:rgba property will be forced to have
-        alpha == 1.
-        
-        Implementations are expected to show alpha by rendering the color
-        over a non-uniform background (like a checkerboard pattern).
+          information. When it is false, the #GdkRGBA struct obtained
+          via the #GtkColorChooser:rgba property will be forced to have
+          alpha == 1.
+          
+          Implementations are expected to show alpha by rendering the color
+          over a non-uniform background (like a checkerboard pattern).
   */
   @property void useAlpha(bool propval)
   {
@@ -106,10 +106,7 @@ template ColorChooserT()
     if (colors)
       _nColors = cast(int)colors.length;
 
-    GdkRGBA[] _tmpcolors;
-    foreach (obj; colors)
-      _tmpcolors ~= *cast(GdkRGBA*)obj._cPtr;
-    GdkRGBA* _colors = _tmpcolors.ptr;
+    auto _colors = cast(GdkRGBA*)colors.ptr;
     gtk_color_chooser_add_palette(cast(GtkColorChooser*)this._cPtr, orientation, colorsPerLine, _nColors, _colors);
   }
 
@@ -121,9 +118,7 @@ template ColorChooserT()
   */
   override void getRgba(out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_color_chooser_get_rgba(cast(GtkColorChooser*)this._cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_color_chooser_get_rgba(cast(GtkColorChooser*)this._cPtr, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -146,7 +141,7 @@ template ColorChooserT()
   */
   override void setRgba(gdk.rgba.RGBA color)
   {
-    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)this._cPtr, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
+    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)this._cPtr, cast(const(GdkRGBA)*)&color);
   }
 
   /**
@@ -164,9 +159,9 @@ template ColorChooserT()
       Connect to `ColorActivated` signal.
   
       Emitted when a color is activated from the color chooser.
-      This usually happens when the user clicks a color swatch,
-      or a color is selected and the user presses one of the keys
-      Space, Shift+Space, Return or Enter.
+        This usually happens when the user clicks a color swatch,
+        or a color is selected and the user presses one of the keys
+        Space, Shift+Space, Return or Enter.
   
       Params:
         callback = signal callback delegate or function to connect

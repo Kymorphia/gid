@@ -14,7 +14,7 @@ import gtk.types;
 */
 class TargetPair
 {
-  GtkTargetPair cInstance;
+  GtkTargetPair _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class TargetPair
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.target_pair.TargetPair");
 
-    cInstance = *cast(GtkTargetPair*)ptr;
+    _cInstance = *cast(GtkTargetPair*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class TargetPair
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -65,9 +65,9 @@ class TargetPair
   /**
       Get `info` field.
       Returns: an application-assigned integer ID which will
-          get passed as a parameter to e.g the #GtkWidget::selection-get
-          signal. It allows the application to identify the target
-          type without extensive string compares.
+            get passed as a parameter to e.g the #GtkWidget::selection-get
+            signal. It allows the application to identify the target
+            type without extensive string compares.
   */
   @property uint info()
   {
@@ -78,9 +78,9 @@ class TargetPair
       Set `info` field.
       Params:
         propval = an application-assigned integer ID which will
-            get passed as a parameter to e.g the #GtkWidget::selection-get
-            signal. It allows the application to identify the target
-            type without extensive string compares.
+              get passed as a parameter to e.g the #GtkWidget::selection-get
+              signal. It allows the application to identify the target
+              type without extensive string compares.
   */
   @property void info(uint propval)
   {

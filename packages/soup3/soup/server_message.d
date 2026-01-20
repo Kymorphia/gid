@@ -166,7 +166,9 @@ class ServerMessage : gobject.object.ObjectWrap
   {
     SoupMessageBody* _cretval;
     _cretval = soup_server_message_get_request_body(cast(SoupServerMessage*)this._cPtr);
-    auto _retval = _cretval ? new soup.message_body.MessageBody(cast(void*)_cretval, No.Take) : null;
+    soup.message_body.MessageBody _retval;
+    if (_cretval)
+      _retval = *cast(soup.message_body.MessageBody*)_cretval;
     return _retval;
   }
 
@@ -190,7 +192,9 @@ class ServerMessage : gobject.object.ObjectWrap
   {
     SoupMessageBody* _cretval;
     _cretval = soup_server_message_get_response_body(cast(SoupServerMessage*)this._cPtr);
-    auto _retval = _cretval ? new soup.message_body.MessageBody(cast(void*)_cretval, No.Take) : null;
+    soup.message_body.MessageBody _retval;
+    if (_cretval)
+      _retval = *cast(soup.message_body.MessageBody*)_cretval;
     return _retval;
   }
 
@@ -408,9 +412,9 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `AcceptCertificate` signal.
   
       Emitted during the msg's connection TLS handshake
-      after client TLS certificate has been received.
-      You can return true to accept tls_certificate despite
-      tls_errors.
+        after client TLS certificate has been received.
+        You can return true to accept tls_certificate despite
+        tls_errors.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -424,8 +428,8 @@ class ServerMessage : gobject.object.ObjectWrap
           `serverMessage` the instance the signal is connected to (optional)
   
           `Returns` true to accept the TLS certificate and stop other
-            handlers from being invoked, or false to propagate the
-            event further.
+              handlers from being invoked, or false to propagate the
+              event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -540,7 +544,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `Finished` signal.
   
       Emitted when all HTTP processing is finished for a message.
-      (After `signalServerMessage::wrote-body`).
+        (After `signalServerMessage::wrote-body`).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -615,9 +619,9 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `GotChunk` signal.
   
       Emitted after receiving a chunk of a message body.
-      
-      Note that "chunk" in this context means any subpiece of the body, not
-      necessarily the specific HTTP 1.1 chunks sent by the other side.
+        
+        Note that "chunk" in this context means any subpiece of the body, not
+        necessarily the specific HTTP 1.1 chunks sent by the other side.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -699,7 +703,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `WroteBody` signal.
   
       Emitted immediately after writing the complete response body for a
-      message.
+        message.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -737,7 +741,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `WroteBodyData` signal.
   
       Emitted immediately after writing a portion of the message
-      body to the network.
+        body to the network.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -782,13 +786,13 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `WroteChunk` signal.
   
       Emitted immediately after writing a body chunk for a message.
-      
-      Note that this signal is not parallel to
-      `signalServerMessage::got-chunk`; it is emitted only when a complete
-      chunk (added with [soup.message_body.MessageBody.append] or
-      [soup.message_body.MessageBody.appendBytes] has been written. To get
-      more useful continuous progress information, use
-      `signalServerMessage::wrote-body-data`.
+        
+        Note that this signal is not parallel to
+        `signalServerMessage::got-chunk`; it is emitted only when a complete
+        chunk (added with [soup.message_body.MessageBody.append] or
+        [soup.message_body.MessageBody.appendBytes] has been written. To get
+        more useful continuous progress information, use
+        `signalServerMessage::wrote-body-data`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -826,7 +830,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `WroteHeaders` signal.
   
       Emitted immediately after writing the response headers for a
-      message.
+        message.
   
       Params:
         callback = signal callback delegate or function to connect

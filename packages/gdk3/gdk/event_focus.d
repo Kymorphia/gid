@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventFocus
 {
-  GdkEventFocus cInstance;
+  GdkEventFocus _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventFocus
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_focus.EventFocus");
 
-    cInstance = *cast(GdkEventFocus*)ptr;
+    _cInstance = *cast(GdkEventFocus*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventFocus
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -93,7 +93,7 @@ class EventFocus
   /**
       Get `in_` field.
       Returns: true if the window has gained the keyboard focus, false if
-        it has lost the focus.
+          it has lost the focus.
   */
   @property short in_()
   {
@@ -104,7 +104,7 @@ class EventFocus
       Set `in_` field.
       Params:
         propval = true if the window has gained the keyboard focus, false if
-          it has lost the focus.
+            it has lost the focus.
   */
   @property void in_(short propval)
   {

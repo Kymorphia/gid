@@ -11,7 +11,7 @@ import gstrtsp.types;
 */
 class RTSPTimeRange
 {
-  GstRTSPTimeRange cInstance;
+  GstRTSPTimeRange _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class RTSPTimeRange
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtsp.rtsptime_range.RTSPTimeRange");
 
-    cInstance = *cast(GstRTSPTimeRange*)ptr;
+    _cInstance = *cast(GstRTSPTimeRange*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class RTSPTimeRange
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -66,7 +66,7 @@ class RTSPTimeRange
   */
   @property void min(gstrtsp.types.RTSPTime propval)
   {
-    (cast(GstRTSPTimeRange*)this._cPtr).min = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).min = cast(GstRTSPTime)propval;
   }
 
   /**
@@ -85,7 +85,7 @@ class RTSPTimeRange
   */
   @property void max(gstrtsp.types.RTSPTime propval)
   {
-    (cast(GstRTSPTimeRange*)this._cPtr).max = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).max = cast(GstRTSPTime)propval;
   }
 
   /**
@@ -104,7 +104,7 @@ class RTSPTimeRange
   */
   @property void min2(gstrtsp.types.RTSPTime2 propval)
   {
-    (cast(GstRTSPTimeRange*)this._cPtr).min2 = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).min2 = cast(GstRTSPTime2)propval;
   }
 
   /**
@@ -123,6 +123,6 @@ class RTSPTimeRange
   */
   @property void max2(gstrtsp.types.RTSPTime2 propval)
   {
-    (cast(GstRTSPTimeRange*)this._cPtr).max2 = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).max2 = cast(GstRTSPTime2)propval;
   }
 }

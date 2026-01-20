@@ -181,7 +181,7 @@ class VariantType : Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -367,6 +367,7 @@ class VariantType : Boxed
     foreach (obj; items)
       _tmpitems ~= cast(GVariantType*)obj._cPtr;
     const(GVariantType*)* _items = _tmpitems.ptr;
+
     _cretval = g_variant_type_new_tuple(_items, _length);
     auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

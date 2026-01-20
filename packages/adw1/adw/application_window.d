@@ -93,8 +93,8 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   /**
       Get `content` property.
       Returns: The content widget.
-      
-      This property should always be used instead of [gtk.window.Window.child].
+        
+        This property should always be used instead of [gtk.window.Window.child].
   */
   @property gtk.widget.Widget content()
   {
@@ -105,8 +105,8 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Set `content` property.
       Params:
         propval = The content widget.
-        
-        This property should always be used instead of [gtk.window.Window.child].
+          
+          This property should always be used instead of [gtk.window.Window.child].
   */
   @property void content(gtk.widget.Widget propval)
   {

@@ -88,9 +88,9 @@ class Printer : gobject.object.ObjectWrap
   /**
       Get `paused` property.
       Returns: true if this printer is paused.
-      
-      A paused printer still accepts jobs, but it does
-      not print them.
+        
+        A paused printer still accepts jobs, but it does
+        not print them.
   */
   @property bool paused()
   {
@@ -431,10 +431,10 @@ class Printer : gobject.object.ObjectWrap
       Connect to `DetailsAcquired` signal.
   
       Emitted in response to a request for detailed information
-      about a printer from the print backend.
-      
-      The success parameter indicates if the information was
-      actually obtained.
+        about a printer from the print backend.
+        
+        The success parameter indicates if the information was
+        actually obtained.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -1,8 +1,7 @@
-/// Module for [TreeIter] class
+/// Module for [TreeIter] struct
 module gtk.tree_iter;
 
 import gid.gid;
-import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -14,69 +13,27 @@ import gtk.types;
     model-specific data in the three @user_data
     members.
 */
-class TreeIter : gobject.boxed.Boxed
+struct TreeIter
 {
+  /**
+      a unique stamp to catch invalid iterators
+  */
+  int stamp;
 
   /**
-      Create a `tree_iter.TreeIter` boxed type.
-      Params:
-        stamp = a unique stamp to catch invalid iterators
+      model-specific data
   */
-  this(int stamp = int.init)
-  {
-    super(gMalloc(GtkTreeIter.sizeof), Yes.Take);
-    this.stamp = stamp;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gtk_tree_iter_get_type != &gidSymbolNotFound ? gtk_tree_iter_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override TreeIter self()
-  {
-    return this;
-  }
+  void* userData;
 
   /**
-      Get `stamp` field.
-      Returns: a unique stamp to catch invalid iterators
+      model-specific data
   */
-  @property int stamp()
-  {
-    return (cast(GtkTreeIter*)this._cPtr).stamp;
-  }
+  void* userData2;
 
   /**
-      Set `stamp` field.
-      Params:
-        propval = a unique stamp to catch invalid iterators
+      model-specific data
   */
-  @property void stamp(int propval)
-  {
-    (cast(GtkTreeIter*)this._cPtr).stamp = propval;
-  }
+  void* userData3;
 
   /**
       Creates a dynamically allocated tree iterator as a copy of iter.
@@ -90,8 +47,10 @@ class TreeIter : gobject.boxed.Boxed
   gtk.tree_iter.TreeIter copy()
   {
     GtkTreeIter* _cretval;
-    _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)this._cPtr);
-    auto _retval = _cretval ? new gtk.tree_iter.TreeIter(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)&this);
+    gtk.tree_iter.TreeIter _retval;
+    if (_cretval)
+      _retval = *cast(gtk.tree_iter.TreeIter*)_cretval;
     return _retval;
   }
 }

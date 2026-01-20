@@ -3,7 +3,6 @@ module gda.sql_expr;
 
 import gda.c.functions;
 import gda.c.types;
-import gda.sql_any_part;
 import gda.sql_case;
 import gda.sql_function;
 import gda.sql_operation;
@@ -41,7 +40,7 @@ class SqlExpr : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -61,15 +60,6 @@ class SqlExpr : gobject.boxed.Boxed
   override SqlExpr self()
   {
     return this;
-  }
-
-  /**
-      Get `any` field.
-      Returns: inheritance structure
-  */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlExpr*)this._cPtr).any, No.Take);
   }
 
   /**
@@ -117,15 +107,6 @@ class SqlExpr : gobject.boxed.Boxed
   @property gda.sql_operation.SqlOperation cond()
   {
     return new gda.sql_operation.SqlOperation(cast(GdaSqlOperation*)(cast(GdaSqlExpr*)this._cPtr).cond, No.Take);
-  }
-
-  /**
-      Get `select` field.
-      Returns: not null if expression is a sub select statement (#GdaSqlStatementSelect or #GdaSqlStatementCompound)
-  */
-  @property gda.sql_any_part.SqlAnyPart select()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)(cast(GdaSqlExpr*)this._cPtr).select, No.Take);
   }
 
   /**

@@ -20,14 +20,12 @@ class SegmentProperties : gobject.boxed.Boxed
       Params:
         direction = the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
         script = the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
-        language = the #hb_language_t of the buffer, see [harfbuzz.global.bufferSetLanguage].
   */
-  this(harfbuzz.types.Direction direction = harfbuzz.types.Direction.init, harfbuzz.types.Script script = harfbuzz.types.Script.init, harfbuzz.types.Language language = harfbuzz.types.Language.init)
+  this(harfbuzz.types.Direction direction = harfbuzz.types.Direction.init, harfbuzz.types.Script script = harfbuzz.types.Script.init)
   {
     super(gMalloc(hb_segment_properties_t.sizeof), Yes.Take);
     this.direction = direction;
     this.script = script;
-    this.language = language;
   }
 
   /** */
@@ -39,7 +37,7 @@ class SegmentProperties : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -106,15 +104,5 @@ class SegmentProperties : gobject.boxed.Boxed
   @property harfbuzz.types.Language language()
   {
     return (cast(hb_segment_properties_t*)this._cPtr).language;
-  }
-
-  /**
-      Set `language` field.
-      Params:
-        propval = the #hb_language_t of the buffer, see [harfbuzz.global.bufferSetLanguage].
-  */
-  @property void language(harfbuzz.types.Language propval)
-  {
-    (cast(hb_segment_properties_t*)this._cPtr).language = propval;
   }
 }

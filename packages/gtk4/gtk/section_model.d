@@ -57,15 +57,15 @@ interface SectionModel
       Connect to `SectionsChanged` signal.
   
       Emitted when the start-of-section state of some of the items in model changes.
-      
-      Note that this signal does not specify the new section state of the
-      items, they need to be queried manually. It is also not necessary for
-      a model to change the section state of any of the items in the section
-      model, though it would be rather useless to emit such a signal.
-      
-      The `signalGio.ListModel::items-changed` implies the effect of the
-      `signalGtk.SectionModel::sections-changed` signal for all the items
-      it covers.
+        
+        Note that this signal does not specify the new section state of the
+        items, they need to be queried manually. It is also not necessary for
+        a model to change the section state of any of the items in the section
+        model, though it would be rather useless to emit such a signal.
+        
+        The `signalGio.ListModel::items-changed` implies the effect of the
+        `signalGtk.SectionModel::sections-changed` signal for all the items
+        it covers.
   
       Params:
         callback = signal callback delegate or function to connect

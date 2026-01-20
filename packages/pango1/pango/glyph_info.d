@@ -12,7 +12,7 @@ import pango.types;
 */
 class GlyphInfo
 {
-  PangoGlyphInfo cInstance;
+  PangoGlyphInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class GlyphInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for pango.glyph_info.GlyphInfo");
 
-    cInstance = *cast(PangoGlyphInfo*)ptr;
+    _cInstance = *cast(PangoGlyphInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class GlyphInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -67,7 +67,7 @@ class GlyphInfo
   */
   @property void geometry(pango.types.GlyphGeometry propval)
   {
-    (cast(PangoGlyphInfo*)this._cPtr).geometry = propval;
+    (cast(PangoGlyphInfo*)this._cPtr).geometry = cast(PangoGlyphGeometry)propval;
   }
 
   /**
@@ -86,6 +86,6 @@ class GlyphInfo
   */
   @property void attr(pango.types.GlyphVisAttr propval)
   {
-    (cast(PangoGlyphInfo*)this._cPtr).attr = propval;
+    (cast(PangoGlyphInfo*)this._cPtr).attr = cast(PangoGlyphVisAttr)propval;
   }
 }

@@ -183,9 +183,9 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `collapsed` property.
       Returns: Whether the split view is collapsed.
-      
-      When collapsed, the sidebar widget is presented as an overlay above the
-      content widget, otherwise they are displayed side by side.
+        
+        When collapsed, the sidebar widget is presented as an overlay above the
+        content widget, otherwise they are displayed side by side.
   */
   @property bool collapsed()
   {
@@ -196,9 +196,9 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `collapsed` property.
       Params:
         propval = Whether the split view is collapsed.
-        
-        When collapsed, the sidebar widget is presented as an overlay above the
-        content widget, otherwise they are displayed side by side.
+          
+          When collapsed, the sidebar widget is presented as an overlay above the
+          content widget, otherwise they are displayed side by side.
   */
   @property void collapsed(bool propval)
   {
@@ -227,8 +227,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `enableHideGesture` property.
       Returns: Whether the sidebar can be closed with a swipe gesture.
-      
-      Only touchscreen swipes are supported.
+        
+        Only touchscreen swipes are supported.
   */
   @property bool enableHideGesture()
   {
@@ -239,8 +239,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `enableHideGesture` property.
       Params:
         propval = Whether the sidebar can be closed with a swipe gesture.
-        
-        Only touchscreen swipes are supported.
+          
+          Only touchscreen swipes are supported.
   */
   @property void enableHideGesture(bool propval)
   {
@@ -250,8 +250,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `enableShowGesture` property.
       Returns: Whether the sidebar can be opened with an edge swipe gesture.
-      
-      Only touchscreen swipes are supported.
+        
+        Only touchscreen swipes are supported.
   */
   @property bool enableShowGesture()
   {
@@ -262,8 +262,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `enableShowGesture` property.
       Params:
         propval = Whether the sidebar can be opened with an edge swipe gesture.
-        
-        Only touchscreen swipes are supported.
+          
+          Only touchscreen swipes are supported.
   */
   @property void enableShowGesture(bool propval)
   {
@@ -273,12 +273,12 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `maxSidebarWidth` property.
       Returns: The maximum sidebar width.
-      
-      Maximum width is affected by
-      `property@OverlaySplitView:sidebar-width-unit`.
-      
-      The sidebar widget can still be allocated with larger width if its own
-      minimum width exceeds it.
+        
+        Maximum width is affected by
+        `property@OverlaySplitView:sidebar-width-unit`.
+        
+        The sidebar widget can still be allocated with larger width if its own
+        minimum width exceeds it.
   */
   @property double maxSidebarWidth()
   {
@@ -289,12 +289,12 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `maxSidebarWidth` property.
       Params:
         propval = The maximum sidebar width.
-        
-        Maximum width is affected by
-        `property@OverlaySplitView:sidebar-width-unit`.
-        
-        The sidebar widget can still be allocated with larger width if its own
-        minimum width exceeds it.
+          
+          Maximum width is affected by
+          `property@OverlaySplitView:sidebar-width-unit`.
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
   */
   @property void maxSidebarWidth(double propval)
   {
@@ -304,12 +304,12 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `minSidebarWidth` property.
       Returns: The minimum sidebar width.
-      
-      Minimum width is affected by
-      `property@OverlaySplitView:sidebar-width-unit`.
-      
-      The sidebar widget can still be allocated with larger width if its own
-      minimum width exceeds it.
+        
+        Minimum width is affected by
+        `property@OverlaySplitView:sidebar-width-unit`.
+        
+        The sidebar widget can still be allocated with larger width if its own
+        minimum width exceeds it.
   */
   @property double minSidebarWidth()
   {
@@ -320,12 +320,12 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `minSidebarWidth` property.
       Params:
         propval = The minimum sidebar width.
-        
-        Minimum width is affected by
-        `property@OverlaySplitView:sidebar-width-unit`.
-        
-        The sidebar widget can still be allocated with larger width if its own
-        minimum width exceeds it.
+          
+          Minimum width is affected by
+          `property@OverlaySplitView:sidebar-width-unit`.
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
   */
   @property void minSidebarWidth(double propval)
   {
@@ -335,10 +335,10 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `pinSidebar` property.
       Returns: Whether the sidebar widget is pinned.
-      
-      By default, collapsing @self automatically hides the sidebar widget, and
-      uncollapsing it shows the sidebar. If set to `TRUE`, sidebar visibility
-      never changes on its own.
+        
+        By default, collapsing @self automatically hides the sidebar widget, and
+        uncollapsing it shows the sidebar. If set to `TRUE`, sidebar visibility
+        never changes on its own.
   */
   @property bool pinSidebar()
   {
@@ -349,10 +349,10 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `pinSidebar` property.
       Params:
         propval = Whether the sidebar widget is pinned.
-        
-        By default, collapsing @self automatically hides the sidebar widget, and
-        uncollapsing it shows the sidebar. If set to `TRUE`, sidebar visibility
-        never changes on its own.
+          
+          By default, collapsing @self automatically hides the sidebar widget, and
+          uncollapsing it shows the sidebar. If set to `TRUE`, sidebar visibility
+          never changes on its own.
   */
   @property void pinSidebar(bool propval)
   {
@@ -400,9 +400,9 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `sidebarPosition` property.
       Returns: The sidebar position.
-      
-      If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
-      if [gtk.types.PackType.End], it's displayed after the content.
+        
+        If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
+        if [gtk.types.PackType.End], it's displayed after the content.
   */
   @property gtk.types.PackType sidebarPosition()
   {
@@ -413,9 +413,9 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `sidebarPosition` property.
       Params:
         propval = The sidebar position.
-        
-        If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
-        if [gtk.types.PackType.End], it's displayed after the content.
+          
+          If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
+          if [gtk.types.PackType.End], it's displayed after the content.
   */
   @property void sidebarPosition(gtk.types.PackType propval)
   {
@@ -425,13 +425,13 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `sidebarWidthFraction` property.
       Returns: The preferred sidebar width as a fraction of the total width.
-      
-      The preferred width is additionally limited by
-      `property@OverlaySplitView:min-sidebar-width` and
-      `property@OverlaySplitView:max-sidebar-width`.
-      
-      The sidebar widget can be allocated with larger width if its own minimum
-      width exceeds the preferred width.
+        
+        The preferred width is additionally limited by
+        `property@OverlaySplitView:min-sidebar-width` and
+        `property@OverlaySplitView:max-sidebar-width`.
+        
+        The sidebar widget can be allocated with larger width if its own minimum
+        width exceeds the preferred width.
   */
   @property double sidebarWidthFraction()
   {
@@ -442,13 +442,13 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `sidebarWidthFraction` property.
       Params:
         propval = The preferred sidebar width as a fraction of the total width.
-        
-        The preferred width is additionally limited by
-        `property@OverlaySplitView:min-sidebar-width` and
-        `property@OverlaySplitView:max-sidebar-width`.
-        
-        The sidebar widget can be allocated with larger width if its own minimum
-        width exceeds the preferred width.
+          
+          The preferred width is additionally limited by
+          `property@OverlaySplitView:min-sidebar-width` and
+          `property@OverlaySplitView:max-sidebar-width`.
+          
+          The sidebar widget can be allocated with larger width if its own minimum
+          width exceeds the preferred width.
   */
   @property void sidebarWidthFraction(double propval)
   {
@@ -458,9 +458,9 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `sidebarWidthUnit` property.
       Returns: The length unit for minimum and maximum sidebar widths.
-      
-      See `property@OverlaySplitView:min-sidebar-width` and
-      `property@OverlaySplitView:max-sidebar-width`.
+        
+        See `property@OverlaySplitView:min-sidebar-width` and
+        `property@OverlaySplitView:max-sidebar-width`.
   */
   @property adw.types.LengthUnit sidebarWidthUnit()
   {
@@ -471,9 +471,9 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `sidebarWidthUnit` property.
       Params:
         propval = The length unit for minimum and maximum sidebar widths.
-        
-        See `property@OverlaySplitView:min-sidebar-width` and
-        `property@OverlaySplitView:max-sidebar-width`.
+          
+          See `property@OverlaySplitView:min-sidebar-width` and
+          `property@OverlaySplitView:max-sidebar-width`.
   */
   @property void sidebarWidthUnit(adw.types.LengthUnit propval)
   {

@@ -12,7 +12,7 @@ import gtk.types;
 */
 class RadioActionEntry
 {
-  GtkRadioActionEntry cInstance;
+  GtkRadioActionEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class RadioActionEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.radio_action_entry.RadioActionEntry");
 
-    cInstance = *cast(GtkRadioActionEntry*)ptr;
+    _cInstance = *cast(GtkRadioActionEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class RadioActionEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -55,7 +55,7 @@ class RadioActionEntry
   /**
       Get `stockId` field.
       Returns: The stock id for the action, or the name of an icon from the
-       icon theme.
+         icon theme.
   */
   @property string stockId()
   {
@@ -66,7 +66,7 @@ class RadioActionEntry
       Set `stockId` field.
       Params:
         propval = The stock id for the action, or the name of an icon from the
-         icon theme.
+           icon theme.
   */
   @property void stockId(string propval)
   {
@@ -77,7 +77,7 @@ class RadioActionEntry
   /**
       Get `label` field.
       Returns: The label for the action. This field should typically be marked
-       for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+         for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property string label()
   {
@@ -88,7 +88,7 @@ class RadioActionEntry
       Set `label` field.
       Params:
         propval = The label for the action. This field should typically be marked
-         for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+           for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property void label(string propval)
   {
@@ -99,7 +99,7 @@ class RadioActionEntry
   /**
       Get `accelerator` field.
       Returns: The accelerator for the action, in the format understood by
-       [gtk.global.acceleratorParse].
+         [gtk.global.acceleratorParse].
   */
   @property string accelerator()
   {
@@ -110,7 +110,7 @@ class RadioActionEntry
       Set `accelerator` field.
       Params:
         propval = The accelerator for the action, in the format understood by
-         [gtk.global.acceleratorParse].
+           [gtk.global.acceleratorParse].
   */
   @property void accelerator(string propval)
   {
@@ -121,7 +121,7 @@ class RadioActionEntry
   /**
       Get `tooltip` field.
       Returns: The tooltip for the action. This field should typically be
-       marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+         marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property string tooltip()
   {
@@ -132,7 +132,7 @@ class RadioActionEntry
       Set `tooltip` field.
       Params:
         propval = The tooltip for the action. This field should typically be
-         marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+           marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
   @property void tooltip(string propval)
   {
@@ -143,7 +143,7 @@ class RadioActionEntry
   /**
       Get `value` field.
       Returns: The value to set on the radio action. See
-       [gtk.radio_action.RadioAction.getCurrentValue].
+         [gtk.radio_action.RadioAction.getCurrentValue].
   */
   @property int value()
   {
@@ -154,7 +154,7 @@ class RadioActionEntry
       Set `value` field.
       Params:
         propval = The value to set on the radio action. See
-         [gtk.radio_action.RadioAction.getCurrentValue].
+           [gtk.radio_action.RadioAction.getCurrentValue].
   */
   @property void value(int propval)
   {

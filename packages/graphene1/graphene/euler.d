@@ -36,7 +36,7 @@ class Euler : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -250,7 +250,7 @@ class Euler : gobject.boxed.Boxed
   graphene.euler.Euler initFromQuaternion(graphene.quaternion.Quaternion q, graphene.types.EulerOrder order)
   {
     graphene_euler_t* _cretval;
-    _cretval = graphene_euler_init_from_quaternion(cast(graphene_euler_t*)this._cPtr, q ? cast(const(graphene_quaternion_t)*)q._cPtr(No.Dup) : null, order);
+    _cretval = graphene_euler_init_from_quaternion(cast(graphene_euler_t*)this._cPtr, cast(const(graphene_quaternion_t)*)&q, order);
     auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -370,9 +370,7 @@ class Euler : gobject.boxed.Boxed
   */
   void toQuaternion(out graphene.quaternion.Quaternion res)
   {
-    graphene_quaternion_t _res;
-    graphene_euler_to_quaternion(cast(const(graphene_euler_t)*)this._cPtr, &_res);
-    res = new graphene.quaternion.Quaternion(cast(void*)&_res, No.Take);
+    graphene_euler_to_quaternion(cast(const(graphene_euler_t)*)this._cPtr, cast(graphene_quaternion_t*)&res);
   }
 
   /**

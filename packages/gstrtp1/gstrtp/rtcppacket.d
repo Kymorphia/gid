@@ -13,7 +13,7 @@ import gstrtp.types;
 */
 class RTCPPacket
 {
-  GstRTCPPacket cInstance;
+  GstRTCPPacket _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class RTCPPacket
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtcppacket.RTCPPacket");
 
-    cInstance = *cast(GstRTCPPacket*)ptr;
+    _cInstance = *cast(GstRTCPPacket*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class RTCPPacket
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

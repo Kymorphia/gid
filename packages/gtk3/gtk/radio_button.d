@@ -323,11 +323,11 @@ class RadioButton : gtk.check_button.CheckButton
       Connect to `GroupChanged` signal.
   
       Emitted when the group of radio buttons that a radio button belongs
-      to changes. This is emitted when a radio button switches from
-      being alone to being part of a group of 2 or more buttons, or
-      vice-versa, and when a button is moved from one group of 2 or
-      more buttons to a different one, but not when the composition
-      of the group that a button belongs to changes.
+        to changes. This is emitted when a radio button switches from
+        being alone to being part of a group of 2 or more buttons, or
+        vice-versa, and when a button is moved from one group of 2 or
+        more buttons to a different one, but not when the composition
+        of the group that a button belongs to changes.
   
       Params:
         callback = signal callback delegate or function to connect

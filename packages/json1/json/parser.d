@@ -306,7 +306,6 @@ class Parser : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     json_parser_load_from_stream_async(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -350,7 +349,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ArrayElement` signal.
   
       The `::array-element` signal is emitted each time a parser
-      has successfully parsed a single element of a JSON array.
+        has successfully parsed a single element of a JSON array.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -402,7 +401,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ArrayEnd` signal.
   
       The `::array-end` signal is emitted each time a parser
-      has successfully parsed an entire JSON array.
+        has successfully parsed an entire JSON array.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -447,7 +446,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ArrayStart` signal.
   
       The `::array-start` signal is emitted each time a parser
-      starts parsing a JSON array.
+        starts parsing a JSON array.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -485,7 +484,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `Error` signal.
   
       The `::error` signal is emitted each time a parser encounters
-      an error in a JSON stream.
+        an error in a JSON stream.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -530,7 +529,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ObjectEnd` signal.
   
       The `::object-end` signal is emitted each time a parser
-      has successfully parsed an entire JSON object.
+        has successfully parsed an entire JSON object.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -575,7 +574,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ObjectMember` signal.
   
       The `::object-member` signal is emitted each time a parser
-      has successfully parsed a single member of a JSON object
+        has successfully parsed a single member of a JSON object
   
       Params:
         callback = signal callback delegate or function to connect
@@ -664,7 +663,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ParseEnd` signal.
   
       This signal is emitted when a parser successfully finished parsing a
-      JSON data stream
+        JSON data stream
   
       Params:
         callback = signal callback delegate or function to connect

@@ -138,33 +138,33 @@ class FileMonitor : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Emitted when file has been changed.
-      
-      If using [gio.types.FileMonitorFlags.WatchMoves] on a directory monitor, and
-      the information is available (and if supported by the backend),
-      event_type may be [gio.types.FileMonitorEvent.Renamed],
-      [gio.types.FileMonitorEvent.MovedIn] or [gio.types.FileMonitorEvent.MovedOut].
-      
-      In all cases file will be a child of the monitored directory.  For
-      renames, file will be the old name and other_file is the new
-      name.  For "moved in" events, file is the name of the file that
-      appeared and other_file is the old name that it was moved from (in
-      another directory).  For "moved out" events, file is the name of
-      the file that used to be in this directory and other_file is the
-      name of the file at its new location.
-      
-      It makes sense to treat [gio.types.FileMonitorEvent.MovedIn] as
-      equivalent to [gio.types.FileMonitorEvent.Created] and
-      [gio.types.FileMonitorEvent.MovedOut] as equivalent to
-      [gio.types.FileMonitorEvent.Deleted], with extra information.
-      [gio.types.FileMonitorEvent.Renamed] is equivalent to a delete/create
-      pair.  This is exactly how the events will be reported in the case
-      that the [gio.types.FileMonitorFlags.WatchMoves] flag is not in use.
-      
-      If using the deprecated flag [gio.types.FileMonitorFlags.SendMoved] flag and event_type is
-      [gio.types.FileMonitorEvent.Moved], file will be set to a #GFile containing the
-      old path, and other_file will be set to a #GFile containing the new path.
-      
-      In all the other cases, other_file will be set to #NULL.
+        
+        If using [gio.types.FileMonitorFlags.WatchMoves] on a directory monitor, and
+        the information is available (and if supported by the backend),
+        event_type may be [gio.types.FileMonitorEvent.Renamed],
+        [gio.types.FileMonitorEvent.MovedIn] or [gio.types.FileMonitorEvent.MovedOut].
+        
+        In all cases file will be a child of the monitored directory.  For
+        renames, file will be the old name and other_file is the new
+        name.  For "moved in" events, file is the name of the file that
+        appeared and other_file is the old name that it was moved from (in
+        another directory).  For "moved out" events, file is the name of
+        the file that used to be in this directory and other_file is the
+        name of the file at its new location.
+        
+        It makes sense to treat [gio.types.FileMonitorEvent.MovedIn] as
+        equivalent to [gio.types.FileMonitorEvent.Created] and
+        [gio.types.FileMonitorEvent.MovedOut] as equivalent to
+        [gio.types.FileMonitorEvent.Deleted], with extra information.
+        [gio.types.FileMonitorEvent.Renamed] is equivalent to a delete/create
+        pair.  This is exactly how the events will be reported in the case
+        that the [gio.types.FileMonitorFlags.WatchMoves] flag is not in use.
+        
+        If using the deprecated flag [gio.types.FileMonitorFlags.SendMoved] flag and event_type is
+        [gio.types.FileMonitorEvent.Moved], file will be set to a #GFile containing the
+        old path, and other_file will be set to a #GFile containing the new path.
+        
+        In all the other cases, other_file will be set to #NULL.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -24,7 +24,7 @@ import gobject.value;
 */
 class ParamSpec
 {
-  GParamSpec* cInstancePtr;
+  GParamSpec* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -32,15 +32,15 @@ class ParamSpec
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.param_spec.ParamSpec");
 
-    cInstancePtr = cast(GParamSpec*)ptr;
+    _cInstancePtr = cast(GParamSpec*)ptr;
 
     if (!take)
-      g_param_spec_ref(cInstancePtr);
+      g_param_spec_ref(_cInstancePtr);
   }
 
   ~this()
   {
-    g_param_spec_unref(cInstancePtr);
+    g_param_spec_unref(_cInstancePtr);
   }
 
 
@@ -48,9 +48,9 @@ class ParamSpec
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
-      g_param_spec_ref(cInstancePtr);
+      g_param_spec_ref(_cInstancePtr);
 
-    return cInstancePtr;
+    return _cInstancePtr;
   }
 
   /**

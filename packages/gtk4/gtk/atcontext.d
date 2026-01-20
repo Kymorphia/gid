@@ -49,9 +49,9 @@ class ATContext : gobject.object.ObjectWrap
   /**
       Get `accessibleRole` property.
       Returns: The accessible role used by the AT context.
-      
-      Depending on the given role, different states and properties can be
-      set or retrieved.
+        
+        Depending on the given role, different states and properties can be
+        set or retrieved.
   */
   @property gtk.types.AccessibleRole accessibleRole()
   {
@@ -62,9 +62,9 @@ class ATContext : gobject.object.ObjectWrap
       Set `accessibleRole` property.
       Params:
         propval = The accessible role used by the AT context.
-        
-        Depending on the given role, different states and properties can be
-        set or retrieved.
+          
+          Depending on the given role, different states and properties can be
+          set or retrieved.
   */
   @property void accessibleRole(gtk.types.AccessibleRole propval)
   {
@@ -139,7 +139,7 @@ class ATContext : gobject.object.ObjectWrap
       Connect to `StateChange` signal.
   
       Emitted when the attributes of the accessible for the
-      [gtk.atcontext.ATContext] instance change.
+        [gtk.atcontext.ATContext] instance change.
   
       Params:
         callback = signal callback delegate or function to connect

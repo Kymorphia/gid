@@ -324,11 +324,11 @@ class PixbufLoader : gobject.object.ObjectWrap
       Connect to `AreaPrepared` signal.
   
       This signal is emitted when the pixbuf loader has allocated the
-      pixbuf in the desired size.
-      
-      After this signal is emitted, applications can call
-      [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf] to fetch the partially-loaded
-      pixbuf.
+        pixbuf in the desired size.
+        
+        After this signal is emitted, applications can call
+        [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf] to fetch the partially-loaded
+        pixbuf.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -366,13 +366,13 @@ class PixbufLoader : gobject.object.ObjectWrap
       Connect to `AreaUpdated` signal.
   
       This signal is emitted when a significant area of the image being
-      loaded has been updated.
-      
-      Normally it means that a complete scanline has been read in, but
-      it could be a different area as well.
-      
-      Applications can use this signal to know when to repaint
-      areas of an image that is being loaded.
+        loaded has been updated.
+        
+        Normally it means that a complete scanline has been read in, but
+        it could be a different area as well.
+        
+        Applications can use this signal to know when to repaint
+        areas of an image that is being loaded.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -438,10 +438,10 @@ class PixbufLoader : gobject.object.ObjectWrap
       Connect to `Closed` signal.
   
       This signal is emitted when [gdkpixbuf.pixbuf_loader.PixbufLoader.close] is called.
-      
-      It can be used by different parts of an application to receive
-      notification when an image loader is closed by the code that
-      drives it.
+        
+        It can be used by different parts of an application to receive
+        notification when an image loader is closed by the code that
+        drives it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -479,12 +479,12 @@ class PixbufLoader : gobject.object.ObjectWrap
       Connect to `SizePrepared` signal.
   
       This signal is emitted when the pixbuf loader has been fed the
-      initial amount of data that is required to figure out the size
-      of the image that it will create.
-      
-      Applications can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in response
-      to this signal to set the desired size to which the image
-      should be scaled.
+        initial amount of data that is required to figure out the size
+        of the image that it will create.
+        
+        Applications can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in response
+        to this signal to set the desired size to which the image
+        should be scaled.
   
       Params:
         callback = signal callback delegate or function to connect

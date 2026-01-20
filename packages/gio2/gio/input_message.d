@@ -29,7 +29,7 @@ import gio.types;
 */
 class InputMessage
 {
-  GInputMessage cInstance;
+  GInputMessage _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -37,7 +37,7 @@ class InputMessage
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.input_message.InputMessage");
 
-    cInstance = *cast(GInputMessage*)ptr;
+    _cInstance = *cast(GInputMessage*)ptr;
 
     if (take)
       gFree(ptr);
@@ -46,7 +46,7 @@ class InputMessage
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -71,7 +71,7 @@ class InputMessage
   /**
       Get `bytesReceived` field.
       Returns: will be set to the number of bytes that have been
-        received
+          received
   */
   @property size_t bytesReceived()
   {
@@ -82,7 +82,7 @@ class InputMessage
       Set `bytesReceived` field.
       Params:
         propval = will be set to the number of bytes that have been
-          received
+            received
   */
   @property void bytesReceived(size_t propval)
   {
@@ -92,7 +92,7 @@ class InputMessage
   /**
       Get `flags` field.
       Returns: collection of #GSocketMsgFlags for the received message,
-        outputted by the call
+          outputted by the call
   */
   @property int flags()
   {
@@ -103,7 +103,7 @@ class InputMessage
       Set `flags` field.
       Params:
         propval = collection of #GSocketMsgFlags for the received message,
-          outputted by the call
+            outputted by the call
   */
   @property void flags(int propval)
   {

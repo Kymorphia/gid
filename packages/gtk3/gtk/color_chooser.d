@@ -30,8 +30,8 @@ interface ColorChooser
   /**
       Get `rgba` property.
       Returns: The ::rgba property contains the currently selected color,
-      as a #GdkRGBA struct. The property can be set to change
-      the current selection programmatically.
+        as a #GdkRGBA struct. The property can be set to change
+        the current selection programmatically.
   */
   @property gdk.rgba.RGBA rgba();
 
@@ -39,20 +39,20 @@ interface ColorChooser
       Set `rgba` property.
       Params:
         propval = The ::rgba property contains the currently selected color,
-        as a #GdkRGBA struct. The property can be set to change
-        the current selection programmatically.
+          as a #GdkRGBA struct. The property can be set to change
+          the current selection programmatically.
   */
   @property void rgba(gdk.rgba.RGBA propval);
 
   /**
       Get `useAlpha` property.
       Returns: When ::use-alpha is true, colors may have alpha (translucency)
-      information. When it is false, the #GdkRGBA struct obtained
-      via the #GtkColorChooser:rgba property will be forced to have
-      alpha == 1.
-      
-      Implementations are expected to show alpha by rendering the color
-      over a non-uniform background (like a checkerboard pattern).
+        information. When it is false, the #GdkRGBA struct obtained
+        via the #GtkColorChooser:rgba property will be forced to have
+        alpha == 1.
+        
+        Implementations are expected to show alpha by rendering the color
+        over a non-uniform background (like a checkerboard pattern).
   */
   @property bool useAlpha();
 
@@ -60,12 +60,12 @@ interface ColorChooser
       Set `useAlpha` property.
       Params:
         propval = When ::use-alpha is true, colors may have alpha (translucency)
-        information. When it is false, the #GdkRGBA struct obtained
-        via the #GtkColorChooser:rgba property will be forced to have
-        alpha == 1.
-        
-        Implementations are expected to show alpha by rendering the color
-        over a non-uniform background (like a checkerboard pattern).
+          information. When it is false, the #GdkRGBA struct obtained
+          via the #GtkColorChooser:rgba property will be forced to have
+          alpha == 1.
+          
+          Implementations are expected to show alpha by rendering the color
+          over a non-uniform background (like a checkerboard pattern).
   */
   @property void useAlpha(bool propval);
 
@@ -131,9 +131,9 @@ interface ColorChooser
       Connect to `ColorActivated` signal.
   
       Emitted when a color is activated from the color chooser.
-      This usually happens when the user clicks a color swatch,
-      or a color is selected and the user presses one of the keys
-      Space, Shift+Space, Return or Enter.
+        This usually happens when the user clicks a color swatch,
+        or a color is selected and the user presses one of the keys
+        Space, Shift+Space, Return or Enter.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -453,7 +453,6 @@ class AudioRingBuffer : gst.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(void*)rbuf, No.Take), _data);
     }
     auto _cbCB = cb ? &_cbCallback : null;
-
     auto _cb = cb ? freezeDelegate(cast(void*)&cb) : null;
     GDestroyNotify _cbDestroyCB = cb ? &thawDelegate : null;
     gst_audio_ring_buffer_set_callback_full(cast(GstAudioRingBuffer*)this._cPtr, _cbCB, _cb, _cbDestroyCB);

@@ -23,7 +23,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -96,7 +96,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   this(gstgl.glcontext.GLContext context, size_t allocSize, gst.allocation_params.AllocationParams allocParams, uint glTarget, uint glUsage)
   {
     GstGLBufferAllocationParams* _cretval;
-    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocSize, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, glTarget, glUsage);
+    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocSize, cast(const(GstAllocationParams)*)&allocParams, glTarget, glUsage);
     this(_cretval, Yes.Take);
   }
 }

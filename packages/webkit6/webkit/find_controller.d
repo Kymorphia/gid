@@ -235,8 +235,8 @@ class FindController : gobject.object.ObjectWrap
       Connect to `CountedMatches` signal.
   
       This signal is emitted when the #WebKitFindController has
-      counted the number of matches for a given text after a call
-      to [webkit.find_controller.FindController.countMatches].
+        counted the number of matches for a given text after a call
+        to [webkit.find_controller.FindController.countMatches].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -281,10 +281,10 @@ class FindController : gobject.object.ObjectWrap
       Connect to `FailedToFindText` signal.
   
       This signal is emitted when a search operation does not find
-      any result for the given text. It will be issued if the text
-      is not found asynchronously after a call to
-      [webkit.find_controller.FindController.search], [webkit.find_controller.FindController.searchNext]
-      or [webkit.find_controller.FindController.searchPrevious].
+        any result for the given text. It will be issued if the text
+        is not found asynchronously after a call to
+        [webkit.find_controller.FindController.search], [webkit.find_controller.FindController.searchNext]
+        or [webkit.find_controller.FindController.searchPrevious].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -322,10 +322,10 @@ class FindController : gobject.object.ObjectWrap
       Connect to `FoundText` signal.
   
       This signal is emitted when a given text is found in the web
-      page text. It will be issued if the text is found
-      asynchronously after a call to [webkit.find_controller.FindController.search],
-      [webkit.find_controller.FindController.searchNext] or
-      [webkit.find_controller.FindController.searchPrevious].
+        page text. It will be issued if the text is found
+        asynchronously after a call to [webkit.find_controller.FindController.search],
+        [webkit.find_controller.FindController.searchNext] or
+        [webkit.find_controller.FindController.searchPrevious].
   
       Params:
         callback = signal callback delegate or function to connect

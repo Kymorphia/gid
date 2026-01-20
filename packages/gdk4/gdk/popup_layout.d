@@ -55,7 +55,7 @@ class PopupLayout : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -100,7 +100,7 @@ class PopupLayout : gobject.boxed.Boxed
   this(gdk.rectangle.Rectangle anchorRect, gdk.types.Gravity rectAnchor, gdk.types.Gravity surfaceAnchor)
   {
     GdkPopupLayout* _cretval;
-    _cretval = gdk_popup_layout_new(anchorRect ? cast(const(GdkRectangle)*)anchorRect._cPtr(No.Dup) : null, rectAnchor, surfaceAnchor);
+    _cretval = gdk_popup_layout_new(cast(const(GdkRectangle)*)&anchorRect, rectAnchor, surfaceAnchor);
     this(_cretval, Yes.Take);
   }
 
@@ -151,7 +151,9 @@ class PopupLayout : gobject.boxed.Boxed
   {
     const(GdkRectangle)* _cretval;
     _cretval = gdk_popup_layout_get_anchor_rect(cast(GdkPopupLayout*)this._cPtr);
-    auto _retval = _cretval ? new gdk.rectangle.Rectangle(cast(void*)_cretval, No.Take) : null;
+    gdk.rectangle.Rectangle _retval;
+    if (_cretval)
+      _retval = *cast(gdk.rectangle.Rectangle*)_cretval;
     return _retval;
   }
 
@@ -230,7 +232,7 @@ class PopupLayout : gobject.boxed.Boxed
   */
   void setAnchorRect(gdk.rectangle.Rectangle anchorRect)
   {
-    gdk_popup_layout_set_anchor_rect(cast(GdkPopupLayout*)this._cPtr, anchorRect ? cast(const(GdkRectangle)*)anchorRect._cPtr(No.Dup) : null);
+    gdk_popup_layout_set_anchor_rect(cast(GdkPopupLayout*)this._cPtr, cast(const(GdkRectangle)*)&anchorRect);
   }
 
   /**

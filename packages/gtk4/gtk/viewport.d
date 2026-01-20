@@ -88,10 +88,10 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `scrollToFocus` property.
       Returns: Whether to scroll when the focus changes.
-      
-      Before 4.6.2, this property was mistakenly defaulting to FALSE, so if your
-      code needs to work with older versions, consider setting it explicitly to
-      TRUE.
+        
+        Before 4.6.2, this property was mistakenly defaulting to FALSE, so if your
+        code needs to work with older versions, consider setting it explicitly to
+        TRUE.
   */
   @property bool scrollToFocus()
   {
@@ -102,10 +102,10 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `scrollToFocus` property.
       Params:
         propval = Whether to scroll when the focus changes.
-        
-        Before 4.6.2, this property was mistakenly defaulting to FALSE, so if your
-        code needs to work with older versions, consider setting it explicitly to
-        TRUE.
+          
+          Before 4.6.2, this property was mistakenly defaulting to FALSE, so if your
+          code needs to work with older versions, consider setting it explicitly to
+          TRUE.
   */
   @property void scrollToFocus(bool propval)
   {

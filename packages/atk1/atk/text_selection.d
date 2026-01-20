@@ -30,7 +30,7 @@ import gid.gid;
 */
 class TextSelection
 {
-  AtkTextSelection cInstance;
+  AtkTextSelection _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -38,7 +38,7 @@ class TextSelection
     if (!ptr)
       throw new GidConstructException("Null instance pointer for atk.text_selection.TextSelection");
 
-    cInstance = *cast(AtkTextSelection*)ptr;
+    _cInstance = *cast(AtkTextSelection*)ptr;
 
     if (take)
       gFree(ptr);
@@ -47,7 +47,7 @@ class TextSelection
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -73,7 +73,7 @@ class TextSelection
   /**
       Get `startOffset` field.
       Returns: the text offset of the beginning of the selection within
-                     @start_object.
+                       @start_object.
   */
   @property int startOffset()
   {
@@ -84,7 +84,7 @@ class TextSelection
       Set `startOffset` field.
       Params:
         propval = the text offset of the beginning of the selection within
-                       @start_object.
+                         @start_object.
   */
   @property void startOffset(int propval)
   {
@@ -133,7 +133,7 @@ class TextSelection
   /**
       Get `startIsActive` field.
       Returns: a gboolean indicating whether the start of the selection
-                       is the active point.
+                         is the active point.
   */
   @property bool startIsActive()
   {
@@ -144,7 +144,7 @@ class TextSelection
       Set `startIsActive` field.
       Params:
         propval = a gboolean indicating whether the start of the selection
-                         is the active point.
+                           is the active point.
   */
   @property void startIsActive(bool propval)
   {

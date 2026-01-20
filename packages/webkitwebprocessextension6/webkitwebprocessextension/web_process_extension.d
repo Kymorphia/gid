@@ -153,7 +153,6 @@ class WebProcessExtension : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_process_extension_send_message_to_context(cast(WebKitWebProcessExtension*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -181,7 +180,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
       Connect to `PageCreated` signal.
   
       This signal is emitted when a new #WebKitWebPage is created in
-      the Web Process.
+        the Web Process.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -226,9 +225,9 @@ class WebProcessExtension : gobject.object.ObjectWrap
       Connect to `UserMessageReceived` signal.
   
       This signal is emitted when a #WebKitUserMessage is received from the
-      #WebKitWebContext corresponding to extension. Messages sent by #WebKitWebContext
-      are always broadcasted to all web extensions and they can't be
-      replied to. Calling [webkitwebprocessextension.user_message.UserMessage.sendReply] will do nothing.
+        #WebKitWebContext corresponding to extension. Messages sent by #WebKitWebContext
+        are always broadcasted to all web extensions and they can't be
+        replied to. Calling [webkitwebprocessextension.user_message.UserMessage.sendReply] will do nothing.
   
       Params:
         callback = signal callback delegate or function to connect

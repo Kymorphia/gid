@@ -195,7 +195,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   /**
       Get `acceptLabel` property.
       Returns: The text used for the label on the accept button in the dialog, or
-      null to use the default text.
+        null to use the default text.
   */
   @property string acceptLabel()
   {
@@ -206,7 +206,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
       Set `acceptLabel` property.
       Params:
         propval = The text used for the label on the accept button in the dialog, or
-        null to use the default text.
+          null to use the default text.
   */
   @property void acceptLabel(string propval)
   {
@@ -216,7 +216,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   /**
       Get `cancelLabel` property.
       Returns: The text used for the label on the cancel button in the dialog, or
-      null to use the default text.
+        null to use the default text.
   */
   @property string cancelLabel()
   {
@@ -227,7 +227,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
       Set `cancelLabel` property.
       Params:
         propval = The text used for the label on the cancel button in the dialog, or
-        null to use the default text.
+          null to use the default text.
   */
   @property void cancelLabel(string propval)
   {

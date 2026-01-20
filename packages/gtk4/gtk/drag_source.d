@@ -122,9 +122,9 @@ class DragSource : gtk.gesture_single.GestureSingle
   /**
       Get `actions` property.
       Returns: The actions that are supported by drag operations from the source.
-      
-      Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
-      if the actions include [gdk.types.DragAction.Move].
+        
+        Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+        if the actions include [gdk.types.DragAction.Move].
   */
   @property gdk.types.DragAction actions()
   {
@@ -135,9 +135,9 @@ class DragSource : gtk.gesture_single.GestureSingle
       Set `actions` property.
       Params:
         propval = The actions that are supported by drag operations from the source.
-        
-        Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
-        if the actions include [gdk.types.DragAction.Move].
+          
+          Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+          if the actions include [gdk.types.DragAction.Move].
   */
   @property void actions(gdk.types.DragAction propval)
   {
@@ -284,9 +284,9 @@ class DragSource : gtk.gesture_single.GestureSingle
       Connect to `DragBegin` signal.
   
       Emitted on the drag source when a drag is started.
-      
-      It can be used to e.g. set a custom drag icon with
-      [gtk.drag_source.DragSource.setIcon].
+        
+        It can be used to e.g. set a custom drag icon with
+        [gtk.drag_source.DragSource.setIcon].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -331,10 +331,10 @@ class DragSource : gtk.gesture_single.GestureSingle
       Connect to `DragCancel` signal.
   
       Emitted on the drag source when a drag has failed.
-      
-      The signal handler may handle a failed drag operation based on
-      the type of error. It should return true if the failure has been handled
-      and the default "drag operation failed" animation should not be shown.
+        
+        The signal handler may handle a failed drag operation based on
+        the type of error. It should return true if the failure has been handled
+        and the default "drag operation failed" animation should not be shown.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -388,10 +388,10 @@ class DragSource : gtk.gesture_single.GestureSingle
       Connect to `DragEnd` signal.
   
       Emitted on the drag source when a drag is finished.
-      
-      A typical reason to connect to this signal is to undo
-      things done in [gtk.drag_source.DragSource.prepare] or
-      `signalGtk.DragSource::drag-begin` handlers.
+        
+        A typical reason to connect to this signal is to undo
+        things done in [gtk.drag_source.DragSource.prepare] or
+        `signalGtk.DragSource::drag-begin` handlers.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -401,7 +401,7 @@ class DragSource : gtk.gesture_single.GestureSingle
           `drag` the [gdk.drag.Drag] object (optional)
   
           `deleteData` true if the drag was performing [gdk.types.DragAction.Move],
-             and the data should be deleted (optional)
+               and the data should be deleted (optional)
   
           `dragSource` the instance the signal is connected to (optional)
   
@@ -444,11 +444,11 @@ class DragSource : gtk.gesture_single.GestureSingle
       Connect to `Prepare` signal.
   
       Emitted when a drag is about to be initiated.
-      
-      It returns the [gdk.content_provider.ContentProvider] to use for the drag that is about
-      to start. The default handler for this signal returns the value of
-      the [gtk.drag_source.DragSource.content] property, so if you set up that
-      property ahead of time, you don't need to connect to this signal.
+        
+        It returns the [gdk.content_provider.ContentProvider] to use for the drag that is about
+        to start. The default handler for this signal returns the value of
+        the [gtk.drag_source.DragSource.content] property, so if you set up that
+        property ahead of time, you don't need to connect to this signal.
   
       Params:
         callback = signal callback delegate or function to connect

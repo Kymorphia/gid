@@ -4,6 +4,8 @@
 //!info docs https://www.kymorphia.com/gid/glib.html
 //!info capi https://docs.gtk.org/glib/
 
+//!kind OptionEntry StructAlias
+
 //# Disable binding of container types
 //!set record[Array][ignore] 1
 //!set record[ByteArray][ignore] 1
@@ -45,18 +47,16 @@
 //# Error conflicts with the base D Error type, rename to ErrorG
 //!subtype Error ErrorWrap
 
-//# Override OptionEntry type kind to be a simple struct, not Wrap
-//!kind OptionEntry Simple
-
-//# Override PollFD type kind to be a simple struct, not Boxed
-//!kind PollFD Simple
-
 //# Fix Dir by specifying g_dir_close as the free function and g_dir_open as the constructor
 //!set record[Dir][free-function] g_dir_close
 //!set record[Dir].method[close][ignore] 1
 
 //# Disable binding of unuseful API
 //!set record[Completion][ignore] 1
+//!set union[Mutex][ignore] 1
+//!set record[RecMutex][ignore] 1
+//!set record[StaticMutex][ignore] 1
+//!set record[StaticRecMutex][ignore] 1
 //!set record[TrashStack][ignore] 1
 //!set record[LogField][ignore] 1
 //!set callback[LogWriterFunc][ignore] 1
@@ -145,6 +145,7 @@
 //!set record[VariantBuilder].union[u][private] 1
 
 //# Add missing parameter direction "out"
+//!set function[get_current_time].parameters.parameter[result][direction] out
 //!set record[IOChannel].method[read].parameters.parameter[bytes_read][direction] out
 //!set record[IOChannel].method[read_line_string].parameters.parameter[terminator_pos][direction] out
 //!set record[IOChannel].method[write].parameters.parameter[bytes_written][direction] out
@@ -337,7 +338,7 @@
 
     for (buf.length = 32; buf.length <= 1024; buf.length *= 2) // Increase buffer until output fits
     {
-      auto sizeWritten = g_date_strftime(buf.ptr, buf.length, _format, cast(const(GDate)*)_cPtr(No.Dup));
+      auto sizeWritten = g_date_strftime(buf.ptr, buf.length, _format, cast(const(GDate)*)&this);
 
       if (sizeWritten > 0)
       {

@@ -36,7 +36,7 @@ class ColorNode : gsk.render_node.RenderNode
   this(gdk.rgba.RGBA rgba, graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_node_new(rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
+    _cretval = gsk_color_node_new(cast(const(GdkRGBA)*)&rgba, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -48,7 +48,9 @@ class ColorNode : gsk.render_node.RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_color_node_get_color(cast(const(GskRenderNode)*)this._cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
+    gdk.rgba.RGBA _retval;
+    if (_cretval)
+      _retval = *cast(gdk.rgba.RGBA*)_cretval;
     return _retval;
   }
 }

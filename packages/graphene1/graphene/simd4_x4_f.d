@@ -9,7 +9,7 @@ import graphene.types;
 /** */
 class Simd4X4F
 {
-  graphene_simd4x4f_t cInstance;
+  graphene_simd4x4f_t _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class Simd4X4F
     if (!ptr)
       throw new GidConstructException("Null instance pointer for graphene.simd4_x4_f.Simd4X4F");
 
-    cInstance = *cast(graphene_simd4x4f_t*)ptr;
+    _cInstance = *cast(graphene_simd4x4f_t*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,6 +26,6 @@ class Simd4X4F
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

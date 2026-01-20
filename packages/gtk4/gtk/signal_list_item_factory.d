@@ -96,15 +96,15 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Connect to `Bind` signal.
   
       Emitted when an object has been bound, for example when a
-      new [gtk.list_item.ListItem.item] has been set on a
-      listitem and should be bound for use.
-      
-      After this signal was emitted, the object might be shown in
-      a [gtk.list_view.ListView] or other widget.
-      
-      The [gtk.signal_list_item_factory.SignalListItemFactory.unbind] signal is the
-      opposite of this signal and can be used to undo everything done
-      in this signal.
+        new [gtk.list_item.ListItem.item] has been set on a
+        listitem and should be bound for use.
+        
+        After this signal was emitted, the object might be shown in
+        a [gtk.list_view.ListView] or other widget.
+        
+        The [gtk.signal_list_item_factory.SignalListItemFactory.unbind] signal is the
+        opposite of this signal and can be used to undo everything done
+        in this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -149,11 +149,11 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Connect to `Setup` signal.
   
       Emitted when a new listitem has been created and needs to be setup for use.
-      
-      It is the first signal emitted for every listitem.
-      
-      The [gtk.signal_list_item_factory.SignalListItemFactory.teardown] signal is the opposite
-      of this signal and can be used to undo everything done in this signal.
+        
+        It is the first signal emitted for every listitem.
+        
+        The [gtk.signal_list_item_factory.SignalListItemFactory.teardown] signal is the opposite
+        of this signal and can be used to undo everything done in this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -198,11 +198,11 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Connect to `Teardown` signal.
   
       Emitted when an object is about to be destroyed.
-      
-      It is the last signal ever emitted for this object.
-      
-      This signal is the opposite of the [gtk.signal_list_item_factory.SignalListItemFactory.setup]
-      signal and should be used to undo everything done in that signal.
+        
+        It is the last signal ever emitted for this object.
+        
+        This signal is the opposite of the [gtk.signal_list_item_factory.SignalListItemFactory.setup]
+        signal and should be used to undo everything done in that signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -247,11 +247,11 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Connect to `Unbind` signal.
   
       Emitted when an object has been unbound from its item, for example when
-      a listitem was removed from use in a list widget
-      and its [gtk.list_item.ListItem.item] is about to be unset.
-      
-      This signal is the opposite of the [gtk.signal_list_item_factory.SignalListItemFactory.bind]
-      signal and should be used to undo everything done in that signal.
+        a listitem was removed from use in a list widget
+        and its [gtk.list_item.ListItem.item] is about to be unset.
+        
+        This signal is the opposite of the [gtk.signal_list_item_factory.SignalListItemFactory.bind]
+        signal and should be used to undo everything done in that signal.
   
       Params:
         callback = signal callback delegate or function to connect

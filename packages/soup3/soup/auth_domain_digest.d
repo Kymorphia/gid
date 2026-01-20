@@ -140,12 +140,11 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       string _username = username.fromCString(No.Free);
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
-      char* _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_auth_domain_digest_set_auth_callback(cast(SoupAuthDomain*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);

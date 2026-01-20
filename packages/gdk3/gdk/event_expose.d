@@ -15,7 +15,7 @@ import gid.gid;
 */
 class EventExpose
 {
-  GdkEventExpose cInstance;
+  GdkEventExpose _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class EventExpose
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_expose.EventExpose");
 
-    cInstance = *cast(GdkEventExpose*)ptr;
+    _cInstance = *cast(GdkEventExpose*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class EventExpose
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -103,6 +103,16 @@ class EventExpose
   }
 
   /**
+      Set `area` field.
+      Params:
+        propval = bounding box of @region.
+  */
+  @property void area(gdk.rectangle.Rectangle propval)
+  {
+    (cast(GdkEventExpose*)this._cPtr).area = cast(GdkRectangle)propval;
+  }
+
+  /**
       Get `region` field.
       Returns: the region that needs to be redrawn.
   */
@@ -125,9 +135,9 @@ class EventExpose
   /**
       Get `count` field.
       Returns: the number of contiguous [gdk.types.EventType.Expose] events following this one.
-        The only use for this is “exposure compression”, i.e. handling all
-        contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
-        exposure compression so this is not normally needed.
+          The only use for this is “exposure compression”, i.e. handling all
+          contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
+          exposure compression so this is not normally needed.
   */
   @property int count()
   {
@@ -138,9 +148,9 @@ class EventExpose
       Set `count` field.
       Params:
         propval = the number of contiguous [gdk.types.EventType.Expose] events following this one.
-          The only use for this is “exposure compression”, i.e. handling all
-          contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
-          exposure compression so this is not normally needed.
+            The only use for this is “exposure compression”, i.e. handling all
+            contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
+            exposure compression so this is not normally needed.
   */
   @property void count(int propval)
   {

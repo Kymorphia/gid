@@ -59,7 +59,7 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
   /**
       Get `pattern` property.
       Returns: The exact substring (or regex, depending on kernel) to look for
-      inside input values.
+        inside input values.
   */
   @property string pattern()
   {
@@ -70,7 +70,7 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
       Set `pattern` property.
       Params:
         propval = The exact substring (or regex, depending on kernel) to look for
-        inside input values.
+          inside input values.
   */
   @property void pattern(string propval)
   {

@@ -15,7 +15,7 @@ import gst.types;
 */
 class StaticPadTemplate
 {
-  GstStaticPadTemplate cInstance;
+  GstStaticPadTemplate _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class StaticPadTemplate
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.static_pad_template.StaticPadTemplate");
 
-    cInstance = *cast(GstStaticPadTemplate*)ptr;
+    _cInstance = *cast(GstStaticPadTemplate*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class StaticPadTemplate
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

@@ -69,8 +69,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   /**
       Get `allowLongSwipes` property.
       Returns: Whether to allow swiping for more than one page at a time.
-      
-      If the value is `FALSE`, each swipe can only move to the adjacent pages.
+        
+        If the value is `FALSE`, each swipe can only move to the adjacent pages.
   */
   @property bool allowLongSwipes()
   {
@@ -81,8 +81,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Set `allowLongSwipes` property.
       Params:
         propval = Whether to allow swiping for more than one page at a time.
-        
-        If the value is `FALSE`, each swipe can only move to the adjacent pages.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent pages.
   */
   @property void allowLongSwipes(bool propval)
   {
@@ -92,8 +92,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   /**
       Get `allowMouseDrag` property.
       Returns: Sets whether the [adw.carousel.Carousel] can be dragged with mouse pointer.
-      
-      If the value is `FALSE`, dragging is only available on touch.
+        
+        If the value is `FALSE`, dragging is only available on touch.
   */
   @property bool allowMouseDrag()
   {
@@ -104,8 +104,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Set `allowMouseDrag` property.
       Params:
         propval = Sets whether the [adw.carousel.Carousel] can be dragged with mouse pointer.
-        
-        If the value is `FALSE`, dragging is only available on touch.
+          
+          If the value is `FALSE`, dragging is only available on touch.
   */
   @property void allowMouseDrag(bool propval)
   {
@@ -115,8 +115,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   /**
       Get `allowScrollWheel` property.
       Returns: Whether the widget will respond to scroll wheel events.
-      
-      If the value is `FALSE`, wheel events will be ignored.
+        
+        If the value is `FALSE`, wheel events will be ignored.
   */
   @property bool allowScrollWheel()
   {
@@ -127,8 +127,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Set `allowScrollWheel` property.
       Params:
         propval = Whether the widget will respond to scroll wheel events.
-        
-        If the value is `FALSE`, wheel events will be ignored.
+          
+          If the value is `FALSE`, wheel events will be ignored.
   */
   @property void allowScrollWheel(bool propval)
   {
@@ -138,9 +138,9 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   /**
       Get `interactive` property.
       Returns: Whether the carousel can be navigated.
-      
-      This can be used to temporarily disable the carousel to only allow
-      navigating it in a certain state.
+        
+        This can be used to temporarily disable the carousel to only allow
+        navigating it in a certain state.
   */
   @property bool interactive()
   {
@@ -151,9 +151,9 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Set `interactive` property.
       Params:
         propval = Whether the carousel can be navigated.
-        
-        This can be used to temporarily disable the carousel to only allow
-        navigating it in a certain state.
+          
+          This can be used to temporarily disable the carousel to only allow
+          navigating it in a certain state.
   */
   @property void interactive(bool propval)
   {
@@ -172,8 +172,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   /**
       Get `position` property.
       Returns: Current scrolling position, unitless.
-      
-      1 matches 1 page. Use [adw.carousel.Carousel.scrollTo] for changing it.
+        
+        1 matches 1 page. Use [adw.carousel.Carousel.scrollTo] for changing it.
   */
   @property double position()
   {
@@ -183,8 +183,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   /**
       Get `revealDuration` property.
       Returns: Page reveal duration, in milliseconds.
-      
-      Reveal duration is used when animating adding or removing pages.
+        
+        Reveal duration is used when animating adding or removing pages.
   */
   @property uint revealDuration()
   {
@@ -195,8 +195,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Set `revealDuration` property.
       Params:
         propval = Page reveal duration, in milliseconds.
-        
-        Reveal duration is used when animating adding or removing pages.
+          
+          Reveal duration is used when animating adding or removing pages.
   */
   @property void revealDuration(uint propval)
   {
@@ -206,12 +206,12 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   /**
       Get `scrollParams` property.
       Returns: Scroll animation spring parameters.
-      
-      The default value is equivalent to:
-      
-      ```c
-      adw_spring_params_new (1, 0.5, 500)
-      ```
+        
+        The default value is equivalent to:
+        
+        ```c
+        adw_spring_params_new (1, 0.5, 500)
+        ```
   */
   @property adw.spring_params.SpringParams scrollParams()
   {
@@ -222,12 +222,12 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Set `scrollParams` property.
       Params:
         propval = Scroll animation spring parameters.
-        
-        The default value is equivalent to:
-        
-        ```c
-        adw_spring_params_new (1, 0.5, 500)
-        ```
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
   */
   @property void scrollParams(adw.spring_params.SpringParams propval)
   {
@@ -560,12 +560,12 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Connect to `PageChanged` signal.
   
       This signal is emitted after a page has been changed.
-      
-      It can be used to implement "infinite scrolling" by amending the pages
-      after every scroll.
-      
-      ::: note
-          An empty carousel is indicated by `(int)index == -1`.
+        
+        It can be used to implement "infinite scrolling" by amending the pages
+        after every scroll.
+        
+        ::: note
+            An empty carousel is indicated by `(int)index == -1`.
   
       Params:
         callback = signal callback delegate or function to connect

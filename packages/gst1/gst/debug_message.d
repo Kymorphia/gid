@@ -9,7 +9,7 @@ import gst.types;
 /** */
 class DebugMessage
 {
-  GstDebugMessage* cInstancePtr;
+  GstDebugMessage* _cInstancePtr;
   bool owned;
 
   /** */
@@ -18,7 +18,7 @@ class DebugMessage
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.debug_message.DebugMessage");
 
-    cInstancePtr = cast(GstDebugMessage*)ptr;
+    _cInstancePtr = cast(GstDebugMessage*)ptr;
 
     owned = take;
   }
@@ -26,7 +26,7 @@ class DebugMessage
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

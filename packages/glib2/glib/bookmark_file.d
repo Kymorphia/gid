@@ -60,7 +60,7 @@ class BookmarkFile : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -1046,6 +1046,7 @@ class BookmarkFile : gobject.boxed.Boxed
     foreach (s; groups)
       _tmpgroups ~= s.toCString(No.Alloc);
     const(char*)* _groups = _tmpgroups.ptr;
+
     g_bookmark_file_set_groups(cast(GBookmarkFile*)this._cPtr, _uri, _groups, _length);
   }
 

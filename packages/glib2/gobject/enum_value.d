@@ -1,4 +1,4 @@
-/// Module for [EnumValue] class
+/// Module for [EnumValue] struct
 module gobject.enum_value;
 
 import gid.gid;
@@ -10,84 +10,20 @@ import gobject.types;
     A structure which contains a single enum value, its name, and its
     nickname.
 */
-class EnumValue
+struct EnumValue
 {
-  GEnumValue cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.enum_value.EnumValue");
-
-    cInstance = *cast(GEnumValue*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  /**
+      the enum value
+  */
+  int value;
 
   /**
-      Get `value` field.
-      Returns: the enum value
+      the name of the value
   */
-  @property int value()
-  {
-    return (cast(GEnumValue*)this._cPtr).value;
-  }
+  const(char)* valueName;
 
   /**
-      Set `value` field.
-      Params:
-        propval = the enum value
+      the nickname of the value
   */
-  @property void value(int propval)
-  {
-    (cast(GEnumValue*)this._cPtr).value = propval;
-  }
-
-  /**
-      Get `valueName` field.
-      Returns: the name of the value
-  */
-  @property string valueName()
-  {
-    return cToD!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueName);
-  }
-
-  /**
-      Set `valueName` field.
-      Params:
-        propval = the name of the value
-  */
-  @property void valueName(string propval)
-  {
-    cValueFree!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueName);
-    dToC(propval, cast(void*)&(cast(GEnumValue*)this._cPtr).valueName);
-  }
-
-  /**
-      Get `valueNick` field.
-      Returns: the nickname of the value
-  */
-  @property string valueNick()
-  {
-    return cToD!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueNick);
-  }
-
-  /**
-      Set `valueNick` field.
-      Params:
-        propval = the nickname of the value
-  */
-  @property void valueNick(string propval)
-  {
-    cValueFree!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueNick);
-    dToC(propval, cast(void*)&(cast(GEnumValue*)this._cPtr).valueNick);
-  }
+  const(char)* valueNick;
 }

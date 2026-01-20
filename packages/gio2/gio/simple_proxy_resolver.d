@@ -50,12 +50,12 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   /**
       Get `defaultProxy` property.
       Returns: The default proxy URI that will be used for any URI that doesn't
-      match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
-      of the schemes set with [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
-      
-      Note that as a special case, if this URI starts with
-      "socks://", #GSimpleProxyResolver will treat it as referring
-      to all three of the socks5, socks4a, and socks4 proxy types.
+        match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
+        of the schemes set with [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
+        
+        Note that as a special case, if this URI starts with
+        "socks://", #GSimpleProxyResolver will treat it as referring
+        to all three of the socks5, socks4a, and socks4 proxy types.
   */
   @property string defaultProxy()
   {
@@ -66,12 +66,12 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
       Set `defaultProxy` property.
       Params:
         propval = The default proxy URI that will be used for any URI that doesn't
-        match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
-        of the schemes set with [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
-        
-        Note that as a special case, if this URI starts with
-        "socks://", #GSimpleProxyResolver will treat it as referring
-        to all three of the socks5, socks4a, and socks4 proxy types.
+          match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
+          of the schemes set with [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
+          
+          Note that as a special case, if this URI starts with
+          "socks://", #GSimpleProxyResolver will treat it as referring
+          to all three of the socks5, socks4a, and socks4 proxy types.
   */
   @property void defaultProxy(string propval)
   {
@@ -102,6 +102,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
       _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
+
     _cretval = g_simple_proxy_resolver_new(_defaultProxy, _ignoreHosts);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, Yes.Take);
     return _retval;
@@ -142,6 +143,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
       _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
+
     g_simple_proxy_resolver_set_ignore_hosts(cast(GSimpleProxyResolver*)this._cPtr, _ignoreHosts);
   }
 

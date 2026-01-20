@@ -146,8 +146,8 @@ class Image : gtk.misc.Misc
   /**
       Get `gicon` property.
       Returns: The GIcon displayed in the GtkImage. For themed icons,
-      If the icon theme is changed, the image will be updated
-      automatically.
+        If the icon theme is changed, the image will be updated
+        automatically.
   */
   @property gio.icon.Icon gicon()
   {
@@ -158,8 +158,8 @@ class Image : gtk.misc.Misc
       Set `gicon` property.
       Params:
         propval = The GIcon displayed in the GtkImage. For themed icons,
-        If the icon theme is changed, the image will be updated
-        automatically.
+          If the icon theme is changed, the image will be updated
+          automatically.
   */
   @property void gicon(gio.icon.Icon propval)
   {
@@ -169,7 +169,7 @@ class Image : gtk.misc.Misc
   /**
       Get `iconName` property.
       Returns: The name of the icon in the icon theme. If the icon theme is
-      changed, the image will be updated automatically.
+        changed, the image will be updated automatically.
   */
   @property string iconName()
   {
@@ -180,7 +180,7 @@ class Image : gtk.misc.Misc
       Set `iconName` property.
       Params:
         propval = The name of the icon in the icon theme. If the icon theme is
-        changed, the image will be updated automatically.
+          changed, the image will be updated automatically.
   */
   @property void iconName(string propval)
   {
@@ -238,8 +238,8 @@ class Image : gtk.misc.Misc
   /**
       Get `pixelSize` property.
       Returns: The "pixel-size" property can be used to specify a fixed size
-      overriding the #GtkImage:icon-size property for images of type
-      [gtk.types.ImageType.IconName].
+        overriding the #GtkImage:icon-size property for images of type
+        [gtk.types.ImageType.IconName].
   */
   @property int pixelSize()
   {
@@ -250,8 +250,8 @@ class Image : gtk.misc.Misc
       Set `pixelSize` property.
       Params:
         propval = The "pixel-size" property can be used to specify a fixed size
-        overriding the #GtkImage:icon-size property for images of type
-        [gtk.types.ImageType.IconName].
+          overriding the #GtkImage:icon-size property for images of type
+          [gtk.types.ImageType.IconName].
   */
   @property void pixelSize(int propval)
   {
@@ -310,9 +310,9 @@ class Image : gtk.misc.Misc
   /**
       Get `useFallback` property.
       Returns: Whether the icon displayed in the GtkImage will use
-      standard icon names fallback. The value of this property
-      is only relevant for images of type [gtk.types.ImageType.IconName]
-      and [gtk.types.ImageType.Gicon].
+        standard icon names fallback. The value of this property
+        is only relevant for images of type [gtk.types.ImageType.IconName]
+        and [gtk.types.ImageType.Gicon].
   */
   @property bool useFallback()
   {
@@ -323,9 +323,9 @@ class Image : gtk.misc.Misc
       Set `useFallback` property.
       Params:
         propval = Whether the icon displayed in the GtkImage will use
-        standard icon names fallback. The value of this property
-        is only relevant for images of type [gtk.types.ImageType.IconName]
-        and [gtk.types.ImageType.Gicon].
+          standard icon names fallback. The value of this property
+          is only relevant for images of type [gtk.types.ImageType.IconName]
+          and [gtk.types.ImageType.Gicon].
   */
   @property void useFallback(bool propval)
   {

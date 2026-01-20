@@ -102,11 +102,11 @@ class Dialog : gtk.widget.Widget
   /**
       Get `canClose` property.
       Returns: Whether the dialog can be closed.
-      
-      If set to `FALSE`, the close button, shortcuts and
-      [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
-      emitted instead, and bottom sheet close swipe will be disabled.
-      [adw.dialog.Dialog.forceClose] still works.
+        
+        If set to `FALSE`, the close button, shortcuts and
+        [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+        emitted instead, and bottom sheet close swipe will be disabled.
+        [adw.dialog.Dialog.forceClose] still works.
   */
   @property bool canClose()
   {
@@ -117,11 +117,11 @@ class Dialog : gtk.widget.Widget
       Set `canClose` property.
       Params:
         propval = Whether the dialog can be closed.
-        
-        If set to `FALSE`, the close button, shortcuts and
-        [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
-        emitted instead, and bottom sheet close swipe will be disabled.
-        [adw.dialog.Dialog.forceClose] still works.
+          
+          If set to `FALSE`, the close button, shortcuts and
+          [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+          emitted instead, and bottom sheet close swipe will be disabled.
+          [adw.dialog.Dialog.forceClose] still works.
   */
   @property void canClose(bool propval)
   {
@@ -150,10 +150,10 @@ class Dialog : gtk.widget.Widget
   /**
       Get `contentHeight` property.
       Returns: The height of the dialog's contents.
-      
-      Set it to -1 to reset it to the content's natural height.
-      
-      See also: `property@Gtk.Window:default-height`
+        
+        Set it to -1 to reset it to the content's natural height.
+        
+        See also: `property@Gtk.Window:default-height`
   */
   @property int contentHeight()
   {
@@ -164,10 +164,10 @@ class Dialog : gtk.widget.Widget
       Set `contentHeight` property.
       Params:
         propval = The height of the dialog's contents.
-        
-        Set it to -1 to reset it to the content's natural height.
-        
-        See also: `property@Gtk.Window:default-height`
+          
+          Set it to -1 to reset it to the content's natural height.
+          
+          See also: `property@Gtk.Window:default-height`
   */
   @property void contentHeight(int propval)
   {
@@ -177,10 +177,10 @@ class Dialog : gtk.widget.Widget
   /**
       Get `contentWidth` property.
       Returns: The width of the dialog's contents.
-      
-      Set it to -1 to reset it to the content's natural width.
-      
-      See also: `property@Gtk.Window:default-width`
+        
+        Set it to -1 to reset it to the content's natural width.
+        
+        See also: `property@Gtk.Window:default-width`
   */
   @property int contentWidth()
   {
@@ -191,10 +191,10 @@ class Dialog : gtk.widget.Widget
       Set `contentWidth` property.
       Params:
         propval = The width of the dialog's contents.
-        
-        Set it to -1 to reset it to the content's natural width.
-        
-        See also: `property@Gtk.Window:default-width`
+          
+          Set it to -1 to reset it to the content's natural width.
+          
+          See also: `property@Gtk.Window:default-width`
   */
   @property void contentWidth(int propval)
   {
@@ -213,8 +213,8 @@ class Dialog : gtk.widget.Widget
   /**
       Get `defaultWidget` property.
       Returns: The default widget.
-      
-      It's activated when the user presses Enter.
+        
+        It's activated when the user presses Enter.
   */
   @property gtk.widget.Widget defaultWidget()
   {
@@ -225,8 +225,8 @@ class Dialog : gtk.widget.Widget
       Set `defaultWidget` property.
       Params:
         propval = The default widget.
-        
-        It's activated when the user presses Enter.
+          
+          It's activated when the user presses Enter.
   */
   @property void defaultWidget(gtk.widget.Widget propval)
   {
@@ -255,12 +255,12 @@ class Dialog : gtk.widget.Widget
   /**
       Get `followsContentSize` property.
       Returns: Whether to size content automatically.
-      
-      If set to `TRUE`, always use the content's natural size instead of
-      `property@Dialog:content-width` and `property@Dialog:content-height`. If
-      the content resizes, the dialog will immediately resize as well.
-      
-      See also: [gtk.window.Window.resizable]
+        
+        If set to `TRUE`, always use the content's natural size instead of
+        `property@Dialog:content-width` and `property@Dialog:content-height`. If
+        the content resizes, the dialog will immediately resize as well.
+        
+        See also: [gtk.window.Window.resizable]
   */
   @property bool followsContentSize()
   {
@@ -271,12 +271,12 @@ class Dialog : gtk.widget.Widget
       Set `followsContentSize` property.
       Params:
         propval = Whether to size content automatically.
-        
-        If set to `TRUE`, always use the content's natural size instead of
-        `property@Dialog:content-width` and `property@Dialog:content-height`. If
-        the content resizes, the dialog will immediately resize as well.
-        
-        See also: [gtk.window.Window.resizable]
+          
+          If set to `TRUE`, always use the content's natural size instead of
+          `property@Dialog:content-width` and `property@Dialog:content-height`. If
+          the content resizes, the dialog will immediately resize as well.
+          
+          See also: [gtk.window.Window.resizable]
   */
   @property void followsContentSize(bool propval)
   {
@@ -286,26 +286,6 @@ class Dialog : gtk.widget.Widget
   /**
       Get `presentationMode` property.
       Returns: The dialog's presentation mode.
-      
-      When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
-      the following condition is met: `max-width: 450px or max-height: 360px`,
-      and as a floating window otherwise.
-      
-      Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
-      present it a floating window or a bottom sheet respectively, regardless of
-      available size.
-      
-      Presentation mode does nothing for dialogs presented as a window.
-  */
-  @property adw.types.DialogPresentationMode presentationMode()
-  {
-    return getPresentationMode();
-  }
-
-  /**
-      Set `presentationMode` property.
-      Params:
-        propval = The dialog's presentation mode.
         
         When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
         the following condition is met: `max-width: 450px or max-height: 360px`,
@@ -316,6 +296,26 @@ class Dialog : gtk.widget.Widget
         available size.
         
         Presentation mode does nothing for dialogs presented as a window.
+  */
+  @property adw.types.DialogPresentationMode presentationMode()
+  {
+    return getPresentationMode();
+  }
+
+  /**
+      Set `presentationMode` property.
+      Params:
+        propval = The dialog's presentation mode.
+          
+          When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
+          the following condition is met: `max-width: 450px or max-height: 360px`,
+          and as a floating window otherwise.
+          
+          Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
+          present it a floating window or a bottom sheet respectively, regardless of
+          available size.
+          
+          Presentation mode does nothing for dialogs presented as a window.
   */
   @property void presentationMode(adw.types.DialogPresentationMode propval)
   {
@@ -664,8 +664,8 @@ class Dialog : gtk.widget.Widget
       Connect to `CloseAttempt` signal.
   
       Emitted when the close button or shortcut is used, or
-      [adw.dialog.Dialog.close] is called while `propertyDialog:can-close` is set to
-      `FALSE`.
+        [adw.dialog.Dialog.close] is called while `propertyDialog:can-close` is set to
+        `FALSE`.
   
       Params:
         callback = signal callback delegate or function to connect

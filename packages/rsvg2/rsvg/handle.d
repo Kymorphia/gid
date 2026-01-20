@@ -206,7 +206,7 @@ class Handle : gobject.object.ObjectWrap
   /**
       Get `baseUri` property.
       Returns: Base URI, to be used to resolve relative references for resources.  See the section
-      "Security and locations of referenced files" for details.
+        "Security and locations of referenced files" for details.
   */
   @property string baseUri()
   {
@@ -217,7 +217,7 @@ class Handle : gobject.object.ObjectWrap
       Set `baseUri` property.
       Params:
         propval = Base URI, to be used to resolve relative references for resources.  See the section
-        "Security and locations of referenced files" for details.
+          "Security and locations of referenced files" for details.
   */
   @property void baseUri(string propval)
   {
@@ -276,12 +276,12 @@ class Handle : gobject.object.ObjectWrap
   /**
       Get `em` property.
       Returns: Exact width, in pixels, of the rendered SVG before calling the size callback
-      as specified by [rsvg.handle.Handle.setSizeCallback].
+        as specified by [rsvg.handle.Handle.setSizeCallback].
   
       Deprecated: Reading each of the size properties causes the size of the
-      SVG to be recomputed, so reading both the `em` and
-      `ex` properties will cause two such computations.  Please
-      use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+        SVG to be recomputed, so reading both the `em` and
+        `ex` properties will cause two such computations.  Please
+        use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
   @property double em()
   {
@@ -291,12 +291,12 @@ class Handle : gobject.object.ObjectWrap
   /**
       Get `ex` property.
       Returns: Exact height, in pixels, of the rendered SVG before calling the size callback
-      as specified by [rsvg.handle.Handle.setSizeCallback].
+        as specified by [rsvg.handle.Handle.setSizeCallback].
   
       Deprecated: Reading each of the size properties causes the size of the
-      SVG to be recomputed, so reading both the `em` and
-      `ex` properties will cause two such computations.  Please
-      use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+        SVG to be recomputed, so reading both the `em` and
+        `ex` properties will cause two such computations.  Please
+        use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
   @property double ex()
   {
@@ -306,14 +306,14 @@ class Handle : gobject.object.ObjectWrap
   /**
       Get `height` property.
       Returns: Height, in pixels, of the rendered SVG after calling the size callback
-      as specified by [rsvg.handle.Handle.setSizeCallback].
+        as specified by [rsvg.handle.Handle.setSizeCallback].
   
       Deprecated: For historical reasons, this property is of integer type,
-      which cannot give the exact size of SVG images that are not pixel-aligned.
-      Moreover, reading each of the size properties causes the size of the SVG to
-      be recomputed, so reading both the `width` and
-      `height` properties will cause two such computations.
-      Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+        which cannot give the exact size of SVG images that are not pixel-aligned.
+        Moreover, reading each of the size properties causes the size of the SVG to
+        be recomputed, so reading both the `width` and
+        `height` properties will cause two such computations.
+        Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
   @property int height()
   {
@@ -345,14 +345,14 @@ class Handle : gobject.object.ObjectWrap
   /**
       Get `width` property.
       Returns: Width, in pixels, of the rendered SVG after calling the size callback
-      as specified by [rsvg.handle.Handle.setSizeCallback].
+        as specified by [rsvg.handle.Handle.setSizeCallback].
   
       Deprecated: For historical reasons, this property is of integer type,
-      which cannot give the exact size of SVG images that are not pixel-aligned.
-      Moreover, reading each of the size properties causes the size of the SVG to
-      be recomputed, so reading both the `width` and
-      `height` properties will cause two such computations.
-      Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
+        which cannot give the exact size of SVG images that are not pixel-aligned.
+        Moreover, reading each of the size properties causes the size of the SVG to
+        be recomputed, so reading both the `width` and
+        `height` properties will cause two such computations.
+        Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
   @property int width()
   {
@@ -1372,7 +1372,6 @@ class Handle : gobject.object.ObjectWrap
       (*_dlg)(*width, *height);
     }
     auto _sizeFuncCB = sizeFunc ? &_sizeFuncCallback : null;
-
     auto _sizeFunc = sizeFunc ? freezeDelegate(cast(void*)&sizeFunc) : null;
     GDestroyNotify _sizeFuncDestroyCB = sizeFunc ? &thawDelegate : null;
     rsvg_handle_set_size_callback(cast(RsvgHandle*)this._cPtr, _sizeFuncCB, _sizeFunc, _sizeFuncDestroyCB);

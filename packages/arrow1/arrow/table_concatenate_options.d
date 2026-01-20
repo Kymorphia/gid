@@ -39,9 +39,9 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
   /**
       Get `promoteNullability` property.
       Returns: If true, a #GArrowField of #GArrowNullDataType can be unified
-      with a #GArrowField of another type. The unified field will be of
-      the other type and become nullable. Nullability will be promoted
-      to the looser option (nullable if one is not nullable).
+        with a #GArrowField of another type. The unified field will be of
+        the other type and become nullable. Nullability will be promoted
+        to the looser option (nullable if one is not nullable).
   */
   @property bool promoteNullability()
   {
@@ -52,9 +52,9 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
       Set `promoteNullability` property.
       Params:
         propval = If true, a #GArrowField of #GArrowNullDataType can be unified
-        with a #GArrowField of another type. The unified field will be of
-        the other type and become nullable. Nullability will be promoted
-        to the looser option (nullable if one is not nullable).
+          with a #GArrowField of another type. The unified field will be of
+          the other type and become nullable. Nullability will be promoted
+          to the looser option (nullable if one is not nullable).
   */
   @property void promoteNullability(bool propval)
   {
@@ -64,14 +64,14 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
   /**
       Get `unifySchemas` property.
       Returns: If true, the schemas of the tables will be first unified with
-      fields of the same name being merged, according to
-      #GArrowTableConcatenateOptions:promote-nullability, then each
-      table will be promoted to the unified schema before being
-      concatenated.
-      
-      Otherwise, all tables should have the same schema. Each column in
-      the output table is the result of concatenating the corresponding
-      columns in all input tables.
+        fields of the same name being merged, according to
+        #GArrowTableConcatenateOptions:promote-nullability, then each
+        table will be promoted to the unified schema before being
+        concatenated.
+        
+        Otherwise, all tables should have the same schema. Each column in
+        the output table is the result of concatenating the corresponding
+        columns in all input tables.
   */
   @property bool unifySchemas()
   {
@@ -82,14 +82,14 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
       Set `unifySchemas` property.
       Params:
         propval = If true, the schemas of the tables will be first unified with
-        fields of the same name being merged, according to
-        #GArrowTableConcatenateOptions:promote-nullability, then each
-        table will be promoted to the unified schema before being
-        concatenated.
-        
-        Otherwise, all tables should have the same schema. Each column in
-        the output table is the result of concatenating the corresponding
-        columns in all input tables.
+          fields of the same name being merged, according to
+          #GArrowTableConcatenateOptions:promote-nullability, then each
+          table will be promoted to the unified schema before being
+          concatenated.
+          
+          Otherwise, all tables should have the same schema. Each column in
+          the output table is the result of concatenating the corresponding
+          columns in all input tables.
   */
   @property void unifySchemas(bool propval)
   {

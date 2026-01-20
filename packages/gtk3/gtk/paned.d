@@ -114,8 +114,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   /**
       Get `maxPosition` property.
       Returns: The largest possible value for the position property.
-      This property is derived from the size and shrinkability
-      of the widget's children.
+        This property is derived from the size and shrinkability
+        of the widget's children.
   */
   @property int maxPosition()
   {
@@ -125,8 +125,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   /**
       Get `minPosition` property.
       Returns: The smallest possible value for the position property.
-      This property is derived from the size and shrinkability
-      of the widget's children.
+        This property is derived from the size and shrinkability
+        of the widget's children.
   */
   @property int minPosition()
   {
@@ -160,8 +160,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   /**
       Get `wideHandle` property.
       Returns: Setting this property to true indicates that the paned needs
-      to provide stronger visual separation (e.g. because it separates
-      between two notebooks, whose tab rows would otherwise merge visually).
+        to provide stronger visual separation (e.g. because it separates
+        between two notebooks, whose tab rows would otherwise merge visually).
   */
   @property bool wideHandle()
   {
@@ -172,8 +172,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Set `wideHandle` property.
       Params:
         propval = Setting this property to true indicates that the paned needs
-        to provide stronger visual separation (e.g. because it separates
-        between two notebooks, whose tab rows would otherwise merge visually).
+          to provide stronger visual separation (e.g. because it separates
+          between two notebooks, whose tab rows would otherwise merge visually).
   */
   @property void wideHandle(bool propval)
   {
@@ -336,11 +336,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Connect to `AcceptPosition` signal.
   
       The ::accept-position signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to accept the current position of the handle when
-      moving it using key bindings.
-      
-      The default binding for this signal is Return or Space.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to accept the current position of the handle when
+        moving it using key bindings.
+        
+        The default binding for this signal is Return or Space.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -380,12 +380,12 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Connect to `CancelPosition` signal.
   
       The ::cancel-position signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to cancel moving the position of the handle using key
-      bindings. The position of the handle will be reset to the value prior to
-      moving it.
-      
-      The default binding for this signal is Escape.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to cancel moving the position of the handle using key
+        bindings. The position of the handle will be reset to the value prior to
+        moving it.
+        
+        The default binding for this signal is Escape.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -425,10 +425,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Connect to `CycleChildFocus` signal.
   
       The ::cycle-child-focus signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to cycle the focus between the children of the paned.
-      
-      The default binding is f6.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to cycle the focus between the children of the paned.
+        
+        The default binding is f6.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -475,11 +475,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Connect to `CycleHandleFocus` signal.
   
       The ::cycle-handle-focus signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to cycle whether the paned should grab focus to allow
-      the user to change position of the handle by using key bindings.
-      
-      The default binding for this signal is f8.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to cycle whether the paned should grab focus to allow
+        the user to change position of the handle by using key bindings.
+        
+        The default binding for this signal is f8.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -526,9 +526,9 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Connect to `MoveHandle` signal.
   
       The ::move-handle signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to move the handle when the user is using key bindings
-      to move it.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to move the handle when the user is using key bindings
+        to move it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -575,11 +575,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Connect to `ToggleHandleFocus` signal.
   
       The ::toggle-handle-focus is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to accept the current position of the handle and then
-      move focus to the next widget in the focus chain.
-      
-      The default binding is Tab.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to accept the current position of the handle and then
+        move focus to the next widget in the focus chain.
+        
+        The default binding is Tab.
   
       Params:
         callback = signal callback delegate or function to connect

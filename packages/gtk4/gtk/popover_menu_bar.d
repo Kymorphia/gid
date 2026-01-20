@@ -77,8 +77,8 @@ class PopoverMenuBar : gtk.widget.Widget
   /**
       Get `menuModel` property.
       Returns: The [gio.menu_model.MenuModel] from which the menu bar is created.
-      
-      The model should only contain submenus as toplevel elements.
+        
+        The model should only contain submenus as toplevel elements.
   */
   @property gio.menu_model.MenuModel menuModel()
   {
@@ -89,8 +89,8 @@ class PopoverMenuBar : gtk.widget.Widget
       Set `menuModel` property.
       Params:
         propval = The [gio.menu_model.MenuModel] from which the menu bar is created.
-        
-        The model should only contain submenus as toplevel elements.
+          
+          The model should only contain submenus as toplevel elements.
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {

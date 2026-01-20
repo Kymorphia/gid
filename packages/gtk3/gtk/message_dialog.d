@@ -121,8 +121,8 @@ class MessageDialog : gtk.dialog.Dialog
   /**
       Get `messageArea` property.
       Returns: The #GtkBox that corresponds to the message area of this dialog.  See
-      [gtk.message_dialog.MessageDialog.getMessageArea] for a detailed description of this
-      area.
+        [gtk.message_dialog.MessageDialog.getMessageArea] for a detailed description of this
+        area.
   */
   @property gtk.widget.Widget messageArea()
   {
@@ -170,7 +170,7 @@ class MessageDialog : gtk.dialog.Dialog
   /**
       Get `secondaryUseMarkup` property.
       Returns: true if the secondary text of the dialog includes Pango markup.
-      See [pango.global.parseMarkup].
+        See [pango.global.parseMarkup].
   */
   @property bool secondaryUseMarkup()
   {
@@ -181,7 +181,7 @@ class MessageDialog : gtk.dialog.Dialog
       Set `secondaryUseMarkup` property.
       Params:
         propval = true if the secondary text of the dialog includes Pango markup.
-        See [pango.global.parseMarkup].
+          See [pango.global.parseMarkup].
   */
   @property void secondaryUseMarkup(bool propval)
   {
@@ -191,7 +191,7 @@ class MessageDialog : gtk.dialog.Dialog
   /**
       Get `text` property.
       Returns: The primary text of the message dialog. If the dialog has
-      a secondary text, this will appear as the title.
+        a secondary text, this will appear as the title.
   */
   @property string text()
   {
@@ -202,7 +202,7 @@ class MessageDialog : gtk.dialog.Dialog
       Set `text` property.
       Params:
         propval = The primary text of the message dialog. If the dialog has
-        a secondary text, this will appear as the title.
+          a secondary text, this will appear as the title.
   */
   @property void text(string propval)
   {
@@ -212,7 +212,7 @@ class MessageDialog : gtk.dialog.Dialog
   /**
       Get `useMarkup` property.
       Returns: true if the primary text of the dialog includes Pango markup.
-      See [pango.global.parseMarkup].
+        See [pango.global.parseMarkup].
   */
   @property bool useMarkup()
   {
@@ -223,7 +223,7 @@ class MessageDialog : gtk.dialog.Dialog
       Set `useMarkup` property.
       Params:
         propval = true if the primary text of the dialog includes Pango markup.
-        See [pango.global.parseMarkup].
+          See [pango.global.parseMarkup].
   */
   @property void useMarkup(bool propval)
   {

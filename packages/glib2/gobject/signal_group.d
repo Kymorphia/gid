@@ -166,9 +166,9 @@ class SignalGroup : gobject.object.ObjectWrap
       Connect to `Bind` signal.
   
       This signal is emitted when #GSignalGroup:target is set to a new value
-      other than null. It is similar to #GObject::notify on `target` except it
-      will not emit when #GSignalGroup:target is null and also allows for
-      receiving the #GObject without a data-race.
+        other than null. It is similar to #GObject::notify on `target` except it
+        will not emit when #GSignalGroup:target is null and also allows for
+        receiving the #GObject without a data-race.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -213,10 +213,10 @@ class SignalGroup : gobject.object.ObjectWrap
       Connect to `Unbind` signal.
   
       This signal is emitted when the target instance of self is set to a
-      new #GObject.
-      
-      This signal will only be emitted if the previous target of self is
-      non-null.
+        new #GObject.
+        
+        This signal will only be emitted if the previous target of self is
+        non-null.
   
       Params:
         callback = signal callback delegate or function to connect

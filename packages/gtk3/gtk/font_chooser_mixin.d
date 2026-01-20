@@ -64,7 +64,7 @@ template FontChooserT()
   /**
       Get `fontFeatures` property.
       Returns: The selected font features, in a format that is compatible with
-      CSS and with Pango attributes.
+        CSS and with Pango attributes.
   */
   @property string fontFeatures()
   {
@@ -74,8 +74,8 @@ template FontChooserT()
   /**
       Get `language` property.
       Returns: The language for which the #GtkFontChooser:font-features were
-      selected, in a format that is compatible with CSS and with Pango
-      attributes.
+        selected, in a format that is compatible with CSS and with Pango
+        attributes.
   */
   @property string language()
   {
@@ -86,8 +86,8 @@ template FontChooserT()
       Set `language` property.
       Params:
         propval = The language for which the #GtkFontChooser:font-features were
-        selected, in a format that is compatible with CSS and with Pango
-        attributes.
+          selected, in a format that is compatible with CSS and with Pango
+          attributes.
   */
   @property void language(string propval)
   {
@@ -327,13 +327,15 @@ template FontChooserT()
   {
     extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.FontFilterFunc*)data;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
-
     auto _filter = filter ? freezeDelegate(cast(void*)&filter) : null;
     GDestroyNotify _filterDestroyCB = filter ? &thawDelegate : null;
     gtk_font_chooser_set_filter_func(cast(GtkFontChooser*)this._cPtr, _filterCB, _filter, _filterDestroyCB);
@@ -447,9 +449,9 @@ template FontChooserT()
       Connect to `FontActivated` signal.
   
       Emitted when a font is activated.
-      This usually happens when the user double clicks an item,
-      or an item is selected and the user presses one of the keys
-      Space, Shift+Space, Return or Enter.
+        This usually happens when the user double clicks an item,
+        or an item is selected and the user presses one of the keys
+        Space, Shift+Space, Return or Enter.
   
       Params:
         callback = signal callback delegate or function to connect

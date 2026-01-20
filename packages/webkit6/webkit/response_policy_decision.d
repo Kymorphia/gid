@@ -50,7 +50,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   /**
       Get `request` property.
       Returns: This property contains the #WebKitURIRequest associated with this
-      policy decision.
+        policy decision.
   */
   @property webkit.urirequest.URIRequest request()
   {
@@ -60,7 +60,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   /**
       Get `response` property.
       Returns: This property contains the #WebKitURIResponse associated with this
-      policy decision.
+        policy decision.
   */
   @property webkit.uriresponse.URIResponse response()
   {

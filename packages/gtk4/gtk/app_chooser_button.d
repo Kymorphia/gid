@@ -82,9 +82,9 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `heading` property.
       Returns: The text to show at the top of the dialog that can be
-      opened from the button.
-      
-      The string may contain Pango markup.
+        opened from the button.
+        
+        The string may contain Pango markup.
   */
   @property string heading()
   {
@@ -95,9 +95,9 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `heading` property.
       Params:
         propval = The text to show at the top of the dialog that can be
-        opened from the button.
-        
-        The string may contain Pango markup.
+          opened from the button.
+          
+          The string may contain Pango markup.
   */
   @property void heading(string propval)
   {
@@ -126,7 +126,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `showDefaultItem` property.
       Returns: Determines whether the dropdown menu shows the default application
-      on top for the provided content type.
+        on top for the provided content type.
   */
   @property bool showDefaultItem()
   {
@@ -137,7 +137,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `showDefaultItem` property.
       Params:
         propval = Determines whether the dropdown menu shows the default application
-        on top for the provided content type.
+          on top for the provided content type.
   */
   @property void showDefaultItem(bool propval)
   {
@@ -147,7 +147,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `showDialogItem` property.
       Returns: Determines whether the dropdown menu shows an item to open
-      a [gtk.app_chooser_dialog.AppChooserDialog].
+        a [gtk.app_chooser_dialog.AppChooserDialog].
   */
   @property bool showDialogItem()
   {
@@ -158,7 +158,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `showDialogItem` property.
       Params:
         propval = Determines whether the dropdown menu shows an item to open
-        a [gtk.app_chooser_dialog.AppChooserDialog].
+          a [gtk.app_chooser_dialog.AppChooserDialog].
   */
   @property void showDialogItem(bool propval)
   {
@@ -357,9 +357,9 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Connect to `Activate` signal.
   
       Emitted to when the button is activated.
-      
-      The `::activate` signal on [gtk.app_chooser_button.AppChooserButton] is an action signal and
-      emitting it causes the button to pop up its dialog.
+        
+        The `::activate` signal on [gtk.app_chooser_button.AppChooserButton] is an action signal and
+        emitting it causes the button to pop up its dialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -434,9 +434,9 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Connect to `CustomItemActivated` signal.
   
       Emitted when a custom item is activated.
-      
-      Use [gtk.app_chooser_button.AppChooserButton.appendCustomItem],
-      to add custom items.
+        
+        Use [gtk.app_chooser_button.AppChooserButton.appendCustomItem],
+        to add custom items.
   
       Params:
         detail = Signal detail or null (default)

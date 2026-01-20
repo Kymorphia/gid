@@ -112,7 +112,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
       Connect to `Cancelled` signal.
   
       Emitted whenever a press moved too far, or was released
-      before [gtk.gesture_long_press.GestureLongPress.pressed] happened.
+        before [gtk.gesture_long_press.GestureLongPress.pressed] happened.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -150,7 +150,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
       Connect to `Pressed` signal.
   
       Emitted whenever a press goes unmoved/unreleased longer than
-      what the GTK defaults tell.
+        what the GTK defaults tell.
   
       Params:
         callback = signal callback delegate or function to connect

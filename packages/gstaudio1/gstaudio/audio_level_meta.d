@@ -13,7 +13,7 @@ import gstaudio.types;
 */
 class AudioLevelMeta
 {
-  GstAudioLevelMeta cInstance;
+  GstAudioLevelMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class AudioLevelMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_level_meta.AudioLevelMeta");
 
-    cInstance = *cast(GstAudioLevelMeta*)ptr;
+    _cInstance = *cast(GstAudioLevelMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class AudioLevelMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -88,7 +88,9 @@ class AudioLevelMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_audio_level_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

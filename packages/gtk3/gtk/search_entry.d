@@ -105,7 +105,7 @@ class SearchEntry : gtk.entry.Entry
   bool handleEvent(gdk.event.Event event)
   {
     bool _retval;
-    _retval = cast(bool)gtk_search_entry_handle_event(cast(GtkSearchEntry*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gtk_search_entry_handle_event(cast(GtkSearchEntry*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -113,13 +113,13 @@ class SearchEntry : gtk.entry.Entry
       Connect to `NextMatch` signal.
   
       The ::next-match signal is a [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a move to the next match
-      for the current search string.
-      
-      Applications should connect to it, to implement moving between
-      matches.
-      
-      The default bindings for this signal is Ctrl-g.
+        which gets emitted when the user initiates a move to the next match
+        for the current search string.
+        
+        Applications should connect to it, to implement moving between
+        matches.
+        
+        The default bindings for this signal is Ctrl-g.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -157,13 +157,13 @@ class SearchEntry : gtk.entry.Entry
       Connect to `PreviousMatch` signal.
   
       The ::previous-match signal is a [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user initiates a move to the previous match
-      for the current search string.
-      
-      Applications should connect to it, to implement moving between
-      matches.
-      
-      The default bindings for this signal is Ctrl-Shift-g.
+        which gets emitted when the user initiates a move to the previous match
+        for the current search string.
+        
+        Applications should connect to it, to implement moving between
+        matches.
+        
+        The default bindings for this signal is Ctrl-Shift-g.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -201,7 +201,7 @@ class SearchEntry : gtk.entry.Entry
       Connect to `SearchChanged` signal.
   
       The #GtkSearchEntry::search-changed signal is emitted with a short
-      delay of 150 milliseconds after the last change to the entry text.
+        delay of 150 milliseconds after the last change to the entry text.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -239,12 +239,12 @@ class SearchEntry : gtk.entry.Entry
       Connect to `StopSearch` signal.
   
       The ::stop-search signal is a [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user stops a search via keyboard input.
-      
-      Applications should connect to it, to implement hiding the search
-      entry in this case.
-      
-      The default bindings for this signal is Escape.
+        which gets emitted when the user stops a search via keyboard input.
+        
+        Applications should connect to it, to implement hiding the search
+        entry in this case.
+        
+        The default bindings for this signal is Escape.
   
       Params:
         callback = signal callback delegate or function to connect

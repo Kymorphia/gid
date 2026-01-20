@@ -1068,7 +1068,7 @@ struct GstRTSPMessage
     DataType data;
   }
 
-  TypeDataType type_data;
+  TypeDataType typeData;
 
   /** */
   GArray* hdrFields;

@@ -277,7 +277,6 @@ class Context : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(void*)context, No.Take), gobject.object.ObjectWrap._getDObject!(javascriptcore.exception.ExceptionWrap)(cast(void*)exception, No.Take));
     }
     auto _handlerCB = handler ? &_handlerCallback : null;
-
     auto _handler = handler ? freezeDelegate(cast(void*)&handler) : null;
     GDestroyNotify _handlerDestroyCB = handler ? &thawDelegate : null;
     jsc_context_push_exception_handler(cast(JSCContext*)this._cPtr, _handlerCB, _handler, _handlerDestroyCB);
@@ -308,7 +307,6 @@ class Context : gobject.object.ObjectWrap
       (*_dlg)();
     }
     auto _destroyNotifyCB = destroyNotify ? &_destroyNotifyCallback : null;
-
     JSCClass* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = jsc_context_register_class(cast(JSCContext*)this._cPtr, _name, parentClass ? cast(JSCClass*)parentClass._cPtr(No.Dup) : null, &vtable, _destroyNotifyCB);

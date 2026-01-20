@@ -12,7 +12,7 @@ import gstsdp.types;
 */
 class SDPKey
 {
-  GstSDPKey cInstance;
+  GstSDPKey _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class SDPKey
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdpkey.SDPKey");
 
-    cInstance = *cast(GstSDPKey*)ptr;
+    _cInstance = *cast(GstSDPKey*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class SDPKey
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

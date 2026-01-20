@@ -107,9 +107,9 @@ class DropDown : gtk.widget.Widget
   /**
       Get `enableSearch` property.
       Returns: Whether to show a search entry in the popup.
-      
-      Note that search requires [gtk.drop_down.DropDown.expression]
-      to be set.
+        
+        Note that search requires [gtk.drop_down.DropDown.expression]
+        to be set.
   */
   @property bool enableSearch()
   {
@@ -120,9 +120,9 @@ class DropDown : gtk.widget.Widget
       Set `enableSearch` property.
       Params:
         propval = Whether to show a search entry in the popup.
-        
-        Note that search requires [gtk.drop_down.DropDown.expression]
-        to be set.
+          
+          Note that search requires [gtk.drop_down.DropDown.expression]
+          to be set.
   */
   @property void enableSearch(bool propval)
   {
@@ -132,11 +132,11 @@ class DropDown : gtk.widget.Widget
   /**
       Get `expression` property.
       Returns: An expression to evaluate to obtain strings to match against the search
-      term.
-      
-      See `property@Gtk.DropDown:enable-search` for how to enable search.
-      If [gtk.drop_down.DropDown.factory] is not set, the expression is also
-      used to bind strings to labels produced by a default factory.
+        term.
+        
+        See `property@Gtk.DropDown:enable-search` for how to enable search.
+        If [gtk.drop_down.DropDown.factory] is not set, the expression is also
+        used to bind strings to labels produced by a default factory.
   */
   @property gtk.expression.Expression expression()
   {
@@ -147,11 +147,11 @@ class DropDown : gtk.widget.Widget
       Set `expression` property.
       Params:
         propval = An expression to evaluate to obtain strings to match against the search
-        term.
-        
-        See `property@Gtk.DropDown:enable-search` for how to enable search.
-        If [gtk.drop_down.DropDown.factory] is not set, the expression is also
-        used to bind strings to labels produced by a default factory.
+          term.
+          
+          See `property@Gtk.DropDown:enable-search` for how to enable search.
+          If [gtk.drop_down.DropDown.factory] is not set, the expression is also
+          used to bind strings to labels produced by a default factory.
   */
   @property void expression(gtk.expression.Expression propval)
   {
@@ -199,8 +199,8 @@ class DropDown : gtk.widget.Widget
   /**
       Get `listFactory` property.
       Returns: The factory for populating list items in the popup.
-      
-      If this is not set, [gtk.drop_down.DropDown.factory] is used.
+        
+        If this is not set, [gtk.drop_down.DropDown.factory] is used.
   */
   @property gtk.list_item_factory.ListItemFactory listFactory()
   {
@@ -211,8 +211,8 @@ class DropDown : gtk.widget.Widget
       Set `listFactory` property.
       Params:
         propval = The factory for populating list items in the popup.
-        
-        If this is not set, [gtk.drop_down.DropDown.factory] is used.
+          
+          If this is not set, [gtk.drop_down.DropDown.factory] is used.
   */
   @property void listFactory(gtk.list_item_factory.ListItemFactory propval)
   {
@@ -260,9 +260,9 @@ class DropDown : gtk.widget.Widget
   /**
       Get `selected` property.
       Returns: The position of the selected item.
-      
-      If no item is selected, the property has the value
-      `GTK_INVALID_LIST_POSITION`.
+        
+        If no item is selected, the property has the value
+        `GTK_INVALID_LIST_POSITION`.
   */
   @property uint selected()
   {
@@ -273,9 +273,9 @@ class DropDown : gtk.widget.Widget
       Set `selected` property.
       Params:
         propval = The position of the selected item.
-        
-        If no item is selected, the property has the value
-        `GTK_INVALID_LIST_POSITION`.
+          
+          If no item is selected, the property has the value
+          `GTK_INVALID_LIST_POSITION`.
   */
   @property void selected(uint propval)
   {
@@ -344,6 +344,7 @@ class DropDown : gtk.widget.Widget
       _tmpstrings ~= s.toCString(No.Alloc);
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
+
     _cretval = gtk_drop_down_new_from_strings(_strings);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.drop_down.DropDown)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -583,9 +584,9 @@ class DropDown : gtk.widget.Widget
       Connect to `Activate` signal.
   
       Emitted to when the drop down is activated.
-      
-      The `::activate` signal on [gtk.drop_down.DropDown] is an action signal and
-      emitting it causes the drop down to pop up its dropdown.
+        
+        The `::activate` signal on [gtk.drop_down.DropDown] is an action signal and
+        emitting it causes the drop down to pop up its dropdown.
   
       Params:
         callback = signal callback delegate or function to connect

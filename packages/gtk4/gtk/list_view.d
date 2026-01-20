@@ -494,11 +494,11 @@ class ListView : gtk.list_base.ListBase
       Connect to `Activate` signal.
   
       Emitted when a row has been activated by the user,
-      usually via activating the GtkListView|list.activate-item action.
-      
-      This allows for a convenient way to handle activation in a listview.
-      See [gtk.list_item.ListItem.setActivatable] for details on how to use
-      this signal.
+        usually via activating the GtkListView|list.activate-item action.
+        
+        This allows for a convenient way to handle activation in a listview.
+        See [gtk.list_item.ListItem.setActivatable] for details on how to use
+        this signal.
   
       Params:
         callback = signal callback delegate or function to connect

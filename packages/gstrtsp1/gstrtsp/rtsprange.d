@@ -1,4 +1,4 @@
-/// Module for [RTSPRange] class
+/// Module for [RTSPRange] struct
 module gstrtsp.rtsprange;
 
 import gid.gid;
@@ -11,65 +11,17 @@ import gstrtsp.types;
 /**
     Provides helper functions to deal with time ranges.
 */
-class RTSPRange
+struct RTSPRange
 {
-  GstRTSPRange cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtsp.rtsprange.RTSPRange");
-
-    cInstance = *cast(GstRTSPRange*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  /**
+      minimum value of the range
+  */
+  int min;
 
   /**
-      Get `min` field.
-      Returns: minimum value of the range
+      maximum value of the range
   */
-  @property int min()
-  {
-    return (cast(GstRTSPRange*)this._cPtr).min;
-  }
-
-  /**
-      Set `min` field.
-      Params:
-        propval = minimum value of the range
-  */
-  @property void min(int propval)
-  {
-    (cast(GstRTSPRange*)this._cPtr).min = propval;
-  }
-
-  /**
-      Get `max` field.
-      Returns: maximum value of the range
-  */
-  @property int max()
-  {
-    return (cast(GstRTSPRange*)this._cPtr).max;
-  }
-
-  /**
-      Set `max` field.
-      Params:
-        propval = maximum value of the range
-  */
-  @property void max(int propval)
-  {
-    (cast(GstRTSPRange*)this._cPtr).max = propval;
-  }
+  int max;
 
   /**
       Converts the range in-place between different types of units.

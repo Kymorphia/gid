@@ -136,13 +136,15 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   {
     extern(C) gboolean _funcCallback(const(GtkFileFilterInfo)* filterInfo, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.FileFilterFunc*)data;
 
-      gboolean _retval = (*_dlg)(filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      _dretval = (*_dlg)(filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_file_filter_add_custom(cast(GtkFileFilter*)this._cPtr, needed, _funcCB, _func, _funcDestroyCB);

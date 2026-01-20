@@ -32,7 +32,7 @@ class String : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -57,8 +57,8 @@ class String : gobject.boxed.Boxed
   /**
       Get `str` field.
       Returns: points to the character data. It may move as text is added.
-        The @str field is null-terminated and so
-        can be used as an ordinary C string.
+          The @str field is null-terminated and so
+          can be used as an ordinary C string.
   */
   @property string str()
   {
@@ -69,8 +69,8 @@ class String : gobject.boxed.Boxed
       Set `str` field.
       Params:
         propval = points to the character data. It may move as text is added.
-          The @str field is null-terminated and so
-          can be used as an ordinary C string.
+            The @str field is null-terminated and so
+            can be used as an ordinary C string.
   */
   @property void str(string propval)
   {
@@ -81,7 +81,7 @@ class String : gobject.boxed.Boxed
   /**
       Get `len` field.
       Returns: contains the length of the string, not including the
-        terminating nul byte.
+          terminating nul byte.
   */
   @property size_t len()
   {
@@ -92,7 +92,7 @@ class String : gobject.boxed.Boxed
       Set `len` field.
       Params:
         propval = contains the length of the string, not including the
-          terminating nul byte.
+            terminating nul byte.
   */
   @property void len(size_t propval)
   {
@@ -102,7 +102,7 @@ class String : gobject.boxed.Boxed
   /**
       Get `allocatedLen` field.
       Returns: the number of bytes that can be stored in the
-        string before it needs to be reallocated. May be larger than @len.
+          string before it needs to be reallocated. May be larger than @len.
   */
   @property size_t allocatedLen()
   {
@@ -113,7 +113,7 @@ class String : gobject.boxed.Boxed
       Set `allocatedLen` field.
       Params:
         propval = the number of bytes that can be stored in the
-          string before it needs to be reallocated. May be larger than @len.
+            string before it needs to be reallocated. May be larger than @len.
   */
   @property void allocatedLen(size_t propval)
   {

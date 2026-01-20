@@ -31,7 +31,7 @@ class StrvBuilder : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -94,6 +94,7 @@ class StrvBuilder : gobject.boxed.Boxed
       _tmpvalue ~= s.toCString(No.Alloc);
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
+
     g_strv_builder_addv(cast(GStrvBuilder*)this._cPtr, _value);
   }
 
@@ -114,8 +115,8 @@ class StrvBuilder : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);

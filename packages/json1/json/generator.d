@@ -86,10 +86,10 @@ class Generator : gobject.object.ObjectWrap
   /**
       Get `pretty` property.
       Returns: Whether the output should be "pretty-printed", with indentation and
-      newlines.
-      
-      The indentation level can be controlled by using the
-      [json.generator.Generator.indent] property.
+        newlines.
+        
+        The indentation level can be controlled by using the
+        [json.generator.Generator.indent] property.
   */
   @property bool pretty()
   {
@@ -100,10 +100,10 @@ class Generator : gobject.object.ObjectWrap
       Set `pretty` property.
       Params:
         propval = Whether the output should be "pretty-printed", with indentation and
-        newlines.
-        
-        The indentation level can be controlled by using the
-        [json.generator.Generator.indent] property.
+          newlines.
+          
+          The indentation level can be controlled by using the
+          [json.generator.Generator.indent] property.
   */
   @property void pretty(bool propval)
   {
@@ -113,7 +113,7 @@ class Generator : gobject.object.ObjectWrap
   /**
       Get `root` property.
       Returns: The root node to be used when constructing a JSON data
-      stream.
+        stream.
   */
   @property json.node.Node root()
   {
@@ -124,7 +124,7 @@ class Generator : gobject.object.ObjectWrap
       Set `root` property.
       Params:
         propval = The root node to be used when constructing a JSON data
-        stream.
+          stream.
   */
   @property void root(json.node.Node propval)
   {

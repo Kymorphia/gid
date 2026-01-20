@@ -12,7 +12,7 @@ import gstsdp.types;
 */
 class MIKEYPayloadT
 {
-  GstMIKEYPayloadT cInstance;
+  GstMIKEYPayloadT _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class MIKEYPayloadT
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_t.MIKEYPayloadT");
 
-    cInstance = *cast(GstMIKEYPayloadT*)ptr;
+    _cInstance = *cast(GstMIKEYPayloadT*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class MIKEYPayloadT
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

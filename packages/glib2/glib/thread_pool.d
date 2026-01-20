@@ -1,4 +1,4 @@
-/// Module for [ThreadPool] class
+/// Module for [ThreadPool] struct
 module glib.thread_pool;
 
 import gid.gid;
@@ -35,71 +35,22 @@ import glib.types;
     [glib.thread_pool.ThreadPool.setMaxUnusedThreads]. All currently unused threads
     can be stopped by calling [glib.thread_pool.ThreadPool.stopUnusedThreads].
 */
-class ThreadPool
+struct ThreadPool
 {
-  GThreadPool cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.thread_pool.ThreadPool");
-
-    cInstance = *cast(GThreadPool*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  ~this()
-  {
-    freePool(&cInstance);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  /**
+      the function to execute in the threads of this pool
+  */
+  GFunc func;
 
   /**
-      Get `func` field.
-      Returns: the function to execute in the threads of this pool
+      the user data for the threads of this pool
   */
-  @property GFunc func()
-  {
-    return (cast(GThreadPool*)this._cPtr).func;
-  }
+  void* userData;
 
   /**
-      Set `func` field.
-      Params:
-        propval = the function to execute in the threads of this pool
+      are all threads exclusive to this pool
   */
-
-  @property void func(GFunc propval)
-  {
-    (cast(GThreadPool*)this._cPtr).func = propval;
-  }
-
-  /**
-      Get `exclusive` field.
-      Returns: are all threads exclusive to this pool
-  */
-  @property bool exclusive()
-  {
-    return cast(bool)(cast(GThreadPool*)this._cPtr).exclusive;
-  }
-
-  /**
-      Set `exclusive` field.
-      Params:
-        propval = are all threads exclusive to this pool
-  */
-  @property void exclusive(bool propval)
-  {
-    (cast(GThreadPool*)this._cPtr).exclusive = propval;
-  }
+  gboolean exclusive;
 
   private static void freePool(GThreadPool* pool)
   {
@@ -115,7 +66,7 @@ class ThreadPool
   int getMaxThreads()
   {
     int _retval;
-    _retval = g_thread_pool_get_max_threads(cast(GThreadPool*)this._cPtr);
+    _retval = g_thread_pool_get_max_threads(cast(GThreadPool*)&this);
     return _retval;
   }
 
@@ -126,7 +77,7 @@ class ThreadPool
   uint getNumThreads()
   {
     uint _retval;
-    _retval = g_thread_pool_get_num_threads(cast(GThreadPool*)this._cPtr);
+    _retval = g_thread_pool_get_num_threads(cast(GThreadPool*)&this);
     return _retval;
   }
 
@@ -141,7 +92,7 @@ class ThreadPool
   bool moveToFront(void* data = null)
   {
     bool _retval;
-    _retval = cast(bool)g_thread_pool_move_to_front(cast(GThreadPool*)this._cPtr, data);
+    _retval = cast(bool)g_thread_pool_move_to_front(cast(GThreadPool*)&this, data);
     return _retval;
   }
 
@@ -170,7 +121,7 @@ class ThreadPool
   {
     bool _retval;
     GError *_err;
-    _retval = cast(bool)g_thread_pool_push(cast(GThreadPool*)this._cPtr, data, &_err);
+    _retval = cast(bool)g_thread_pool_push(cast(GThreadPool*)&this, data, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -208,7 +159,7 @@ class ThreadPool
   {
     bool _retval;
     GError *_err;
-    _retval = cast(bool)g_thread_pool_set_max_threads(cast(GThreadPool*)this._cPtr, maxThreads, &_err);
+    _retval = cast(bool)g_thread_pool_set_max_threads(cast(GThreadPool*)&this, maxThreads, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -221,7 +172,7 @@ class ThreadPool
   uint unprocessed()
   {
     uint _retval;
-    _retval = g_thread_pool_unprocessed(cast(GThreadPool*)this._cPtr);
+    _retval = g_thread_pool_unprocessed(cast(GThreadPool*)&this);
     return _retval;
   }
 

@@ -36,7 +36,7 @@ class ScaledFont : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -64,7 +64,7 @@ class ScaledFont : gobject.boxed.Boxed
       Params:
         extents = a #cairo_font_extents_t which to store the retrieved extents.
   */
-  void extents(cairo.types.FontExtents extents)
+  void extents(out cairo.types.FontExtents extents)
   {
     cairo_scaled_font_extents(cast(cairo_scaled_font_t*)this._cPtr, &extents);
   }
@@ -78,9 +78,9 @@ class ScaledFont : gobject.boxed.Boxed
       Params:
         ctm = return value for the CTM
   */
-  void getCtm(cairo.matrix.Matrix ctm)
+  void getCtm(out cairo.matrix.Matrix ctm)
   {
-    cairo_scaled_font_get_ctm(cast(cairo_scaled_font_t*)this._cPtr, ctm ? cast(cairo_matrix_t*)ctm._cPtr(No.Dup) : null);
+    cairo_scaled_font_get_ctm(cast(cairo_scaled_font_t*)this._cPtr, cast(cairo_matrix_t*)&ctm);
   }
 
   /**
@@ -106,9 +106,9 @@ class ScaledFont : gobject.boxed.Boxed
       Params:
         fontMatrix = return value for the matrix
   */
-  void getFontMatrix(cairo.matrix.Matrix fontMatrix)
+  void getFontMatrix(out cairo.matrix.Matrix fontMatrix)
   {
-    cairo_scaled_font_get_font_matrix(cast(cairo_scaled_font_t*)this._cPtr, fontMatrix ? cast(cairo_matrix_t*)fontMatrix._cPtr(No.Dup) : null);
+    cairo_scaled_font_get_font_matrix(cast(cairo_scaled_font_t*)this._cPtr, cast(cairo_matrix_t*)&fontMatrix);
   }
 
   /**
@@ -132,9 +132,9 @@ class ScaledFont : gobject.boxed.Boxed
       Params:
         scaleMatrix = return value for the matrix
   */
-  void getScaleMatrix(cairo.matrix.Matrix scaleMatrix)
+  void getScaleMatrix(out cairo.matrix.Matrix scaleMatrix)
   {
-    cairo_scaled_font_get_scale_matrix(cast(cairo_scaled_font_t*)this._cPtr, scaleMatrix ? cast(cairo_matrix_t*)scaleMatrix._cPtr(No.Dup) : null);
+    cairo_scaled_font_get_scale_matrix(cast(cairo_scaled_font_t*)this._cPtr, cast(cairo_matrix_t*)&scaleMatrix);
   }
 
   /**
@@ -184,9 +184,9 @@ class ScaledFont : gobject.boxed.Boxed
         numGlyphs = the number of glyphs in the glyphs array
         extents = a #cairo_text_extents_t which to store the retrieved extents.
   */
-  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, cairo.types.TextExtents extents)
+  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, out cairo.types.TextExtents extents)
   {
-    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)this._cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs, &extents);
+    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, &extents);
   }
 
   /**
@@ -223,7 +223,7 @@ class ScaledFont : gobject.boxed.Boxed
         utf8 = a NUL-terminated string of text, encoded in UTF-8
         extents = a #cairo_text_extents_t which to store the retrieved extents.
   */
-  void textExtents(string utf8, cairo.types.TextExtents extents)
+  void textExtents(string utf8, out cairo.types.TextExtents extents)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_scaled_font_text_extents(cast(cairo_scaled_font_t*)this._cPtr, _utf8, &extents);

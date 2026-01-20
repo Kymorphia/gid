@@ -110,12 +110,11 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       auto _dlg = cast(gtk.types.TreeListModelCreateModelFunc*)userData;
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
-      GListModel* _retval = cast(GListModel*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
+      auto _retval = cast(GListModel*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _createFuncCB = createFunc ? &_createFuncCallback : null;
-
     GtkTreeListModel* _cretval;
     auto _createFunc = createFunc ? freezeDelegate(cast(void*)&createFunc) : null;
     GDestroyNotify _createFuncDestroyCB = createFunc ? &thawDelegate : null;

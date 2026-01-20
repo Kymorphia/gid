@@ -3,6 +3,7 @@ module cairo.path;
 
 import cairo.c.functions;
 import cairo.c.types;
+import cairo.path_data;
 import cairo.types;
 import gid.gid;
 import gobject.boxed;
@@ -46,7 +47,7 @@ class Path : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -85,6 +86,15 @@ class Path : gobject.boxed.Boxed
   @property void status(cairo.types.Status propval)
   {
     (cast(cairo_path_t*)this._cPtr).status = cast(cairo_status_t)propval;
+  }
+
+  /**
+      Get `data` field.
+      Returns: the elements in the path
+  */
+  @property cairo.path_data.PathData data()
+  {
+    return new cairo.path_data.PathData(cast(cairo_path_data_t*)(cast(cairo_path_t*)this._cPtr).data, No.Take);
   }
 
   /**

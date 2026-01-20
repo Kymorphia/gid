@@ -113,7 +113,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   /**
       Get `inputHints` property.
       Returns: The hints about input for the [gtk.search_entry.SearchEntry] used to alter the
-      behaviour of input methods.
+        behaviour of input methods.
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -124,7 +124,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Set `inputHints` property.
       Params:
         propval = The hints about input for the [gtk.search_entry.SearchEntry] used to alter the
-        behaviour of input methods.
+          behaviour of input methods.
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -134,7 +134,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   /**
       Get `inputPurpose` property.
       Returns: The purpose for the [gtk.search_entry.SearchEntry] input used to alter the
-      behaviour of input methods.
+        behaviour of input methods.
   */
   @property gtk.types.InputPurpose inputPurpose()
   {
@@ -145,7 +145,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Set `inputPurpose` property.
       Params:
         propval = The purpose for the [gtk.search_entry.SearchEntry] input used to alter the
-        behaviour of input methods.
+          behaviour of input methods.
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
@@ -155,7 +155,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   /**
       Get `placeholderText` property.
       Returns: The text that will be displayed in the [gtk.search_entry.SearchEntry]
-      when it is empty and unfocused.
+        when it is empty and unfocused.
   */
   @property string placeholderText()
   {
@@ -166,7 +166,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Set `placeholderText` property.
       Params:
         propval = The text that will be displayed in the [gtk.search_entry.SearchEntry]
-        when it is empty and unfocused.
+          when it is empty and unfocused.
   */
   @property void placeholderText(string propval)
   {
@@ -176,7 +176,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   /**
       Get `searchDelay` property.
       Returns: The delay in milliseconds from last keypress to the search
-      changed signal.
+        changed signal.
   */
   @property uint searchDelay()
   {
@@ -187,7 +187,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Set `searchDelay` property.
       Params:
         propval = The delay in milliseconds from last keypress to the search
-        changed signal.
+          changed signal.
   */
   @property void searchDelay(uint propval)
   {
@@ -344,8 +344,8 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Connect to `Activate` signal.
   
       Emitted when the entry is activated.
-      
-      The keybindings for this signal are all forms of the Enter key.
+        
+        The keybindings for this signal are all forms of the Enter key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -383,14 +383,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Connect to `NextMatch` signal.
   
       Emitted when the user initiates a move to the next match
-      for the current search string.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      Applications should connect to it, to implement moving
-      between matches.
-      
-      The default bindings for this signal is Ctrl-g.
+        for the current search string.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        Applications should connect to it, to implement moving
+        between matches.
+        
+        The default bindings for this signal is Ctrl-g.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -428,14 +428,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Connect to `PreviousMatch` signal.
   
       Emitted when the user initiates a move to the previous match
-      for the current search string.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      Applications should connect to it, to implement moving
-      between matches.
-      
-      The default bindings for this signal is Ctrl-Shift-g.
+        for the current search string.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        Applications should connect to it, to implement moving
+        between matches.
+        
+        The default bindings for this signal is Ctrl-Shift-g.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -473,8 +473,8 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Connect to `SearchChanged` signal.
   
       Emitted with a delay. The length of the delay can be
-      changed with the `propertyGtk.SearchEntry:search-delay`
-      property.
+        changed with the `propertyGtk.SearchEntry:search-delay`
+        property.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -549,13 +549,13 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Connect to `StopSearch` signal.
   
       Emitted when the user stops a search via keyboard input.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      Applications should connect to it, to implement hiding
-      the search entry in this case.
-      
-      The default bindings for this signal is Escape.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        Applications should connect to it, to implement hiding
+        the search entry in this case.
+        
+        The default bindings for this signal is Escape.
   
       Params:
         callback = signal callback delegate or function to connect

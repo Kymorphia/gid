@@ -97,14 +97,14 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   /**
       Get `ellipsize` property.
       Returns: The preferred place to ellipsize the string.
-      
-      The text will be ellipsized if the progress bar does not have enough room
-      to display the entire string, specified as a [pango.types.EllipsizeMode].
-      
-      Note that setting this property to a value other than
-      [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
-      only enough space to display the ellipsis ("..."). Another means to set a
-      progress bar's width is [gtk.widget.Widget.setSizeRequest].
+        
+        The text will be ellipsized if the progress bar does not have enough room
+        to display the entire string, specified as a [pango.types.EllipsizeMode].
+        
+        Note that setting this property to a value other than
+        [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+        only enough space to display the ellipsis ("..."). Another means to set a
+        progress bar's width is [gtk.widget.Widget.setSizeRequest].
   */
   @property pango.types.EllipsizeMode ellipsize()
   {
@@ -115,14 +115,14 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Set `ellipsize` property.
       Params:
         propval = The preferred place to ellipsize the string.
-        
-        The text will be ellipsized if the progress bar does not have enough room
-        to display the entire string, specified as a [pango.types.EllipsizeMode].
-        
-        Note that setting this property to a value other than
-        [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
-        only enough space to display the ellipsis ("..."). Another means to set a
-        progress bar's width is [gtk.widget.Widget.setSizeRequest].
+          
+          The text will be ellipsized if the progress bar does not have enough room
+          to display the entire string, specified as a [pango.types.EllipsizeMode].
+          
+          Note that setting this property to a value other than
+          [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+          only enough space to display the ellipsis ("..."). Another means to set a
+          progress bar's width is [gtk.widget.Widget.setSizeRequest].
   */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
@@ -189,15 +189,15 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   /**
       Get `showText` property.
       Returns: Sets whether the progress bar will show a text in addition
-      to the bar itself.
-      
-      The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
-      property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction]
-      value, as a percentage.
-      
-      To make a progress bar that is styled and sized suitably for showing text
-      (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
-      to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
+        to the bar itself.
+        
+        The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
+        property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction]
+        value, as a percentage.
+        
+        To make a progress bar that is styled and sized suitably for showing text
+        (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+        to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   */
   @property bool showText()
   {
@@ -208,15 +208,15 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Set `showText` property.
       Params:
         propval = Sets whether the progress bar will show a text in addition
-        to the bar itself.
-        
-        The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
-        property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction]
-        value, as a percentage.
-        
-        To make a progress bar that is styled and sized suitably for showing text
-        (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
-        to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
+          to the bar itself.
+          
+          The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
+          property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction]
+          value, as a percentage.
+          
+          To make a progress bar that is styled and sized suitably for showing text
+          (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+          to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   */
   @property void showText(bool propval)
   {

@@ -11,7 +11,7 @@ import gobject.value;
 /** */
 class SqlParamSpec
 {
-  GdaSqlParamSpec cInstance;
+  GdaSqlParamSpec _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class SqlParamSpec
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_param_spec.SqlParamSpec");
 
-    cInstance = *cast(GdaSqlParamSpec*)ptr;
+    _cInstance = *cast(GdaSqlParamSpec*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class SqlParamSpec
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

@@ -12,7 +12,7 @@ import gstvideo.video_info;
 /** */
 class VideoConverter
 {
-  GstVideoConverter* cInstancePtr;
+  GstVideoConverter* _cInstancePtr;
   bool owned;
 
   /** */
@@ -21,7 +21,7 @@ class VideoConverter
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_converter.VideoConverter");
 
-    cInstancePtr = cast(GstVideoConverter*)ptr;
+    _cInstancePtr = cast(GstVideoConverter*)ptr;
 
     owned = take;
   }
@@ -29,7 +29,7 @@ class VideoConverter
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -66,7 +66,9 @@ class VideoConverter
   {
     const(GstStructure)* _cretval;
     _cretval = gst_video_converter_get_config(cast(GstVideoConverter*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -111,7 +113,7 @@ class VideoConverter
   bool setConfig(gst.structure.Structure config)
   {
     bool _retval;
-    _retval = cast(bool)gst_video_converter_set_config(cast(GstVideoConverter*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
+    _retval = cast(bool)gst_video_converter_set_config(cast(GstVideoConverter*)this._cPtr, cast(GstStructure*)&config);
     return _retval;
   }
 }

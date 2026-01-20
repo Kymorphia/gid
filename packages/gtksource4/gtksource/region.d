@@ -67,7 +67,7 @@ class Region : gobject.object.ObjectWrap
   */
   void addSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
-    gtk_source_region_add_subregion(cast(GtkSourceRegion*)this._cPtr, Start ? cast(const(GtkTextIter)*)Start._cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End._cPtr(No.Dup) : null);
+    gtk_source_region_add_subregion(cast(GtkSourceRegion*)this._cPtr, cast(const(GtkTextIter)*)&Start, cast(const(GtkTextIter)*)&End);
   }
 
   /**
@@ -84,11 +84,7 @@ class Region : gobject.object.ObjectWrap
   bool getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
     bool _retval;
-    GtkTextIter _start;
-    GtkTextIter _end;
-    _retval = cast(bool)gtk_source_region_get_bounds(cast(GtkSourceRegion*)this._cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    _retval = cast(bool)gtk_source_region_get_bounds(cast(GtkSourceRegion*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
     return _retval;
   }
 
@@ -110,9 +106,7 @@ class Region : gobject.object.ObjectWrap
   */
   void getStartRegionIter(out gtksource.region_iter.RegionIter iter)
   {
-    GtkSourceRegionIter _iter;
-    gtk_source_region_get_start_region_iter(cast(GtkSourceRegion*)this._cPtr, &_iter);
-    iter = new gtksource.region_iter.RegionIter(cast(void*)&_iter, No.Take);
+    gtk_source_region_get_start_region_iter(cast(GtkSourceRegion*)this._cPtr, cast(GtkSourceRegionIter*)&iter);
   }
 
   /**
@@ -145,7 +139,7 @@ class Region : gobject.object.ObjectWrap
   gtksource.region.Region intersectSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
     GtkSourceRegion* _cretval;
-    _cretval = gtk_source_region_intersect_subregion(cast(GtkSourceRegion*)this._cPtr, Start ? cast(const(GtkTextIter)*)Start._cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End._cPtr(No.Dup) : null);
+    _cretval = gtk_source_region_intersect_subregion(cast(GtkSourceRegion*)this._cPtr, cast(const(GtkTextIter)*)&Start, cast(const(GtkTextIter)*)&End);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.region.Region)(cast(GtkSourceRegion*)_cretval, Yes.Take);
     return _retval;
   }
@@ -183,7 +177,7 @@ class Region : gobject.object.ObjectWrap
   */
   void subtractSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
-    gtk_source_region_subtract_subregion(cast(GtkSourceRegion*)this._cPtr, Start ? cast(const(GtkTextIter)*)Start._cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End._cPtr(No.Dup) : null);
+    gtk_source_region_subtract_subregion(cast(GtkSourceRegion*)this._cPtr, cast(const(GtkTextIter)*)&Start, cast(const(GtkTextIter)*)&End);
   }
 
   /**

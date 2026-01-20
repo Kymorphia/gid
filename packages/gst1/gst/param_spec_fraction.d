@@ -13,7 +13,7 @@ import gst.types;
 */
 class ParamSpecFraction
 {
-  GstParamSpecFraction cInstance;
+  GstParamSpecFraction _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class ParamSpecFraction
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.param_spec_fraction.ParamSpecFraction");
 
-    cInstance = *cast(GstParamSpecFraction*)ptr;
+    _cInstance = *cast(GstParamSpecFraction*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class ParamSpecFraction
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

@@ -153,27 +153,6 @@ class HeaderBar : gtk.widget.Widget
   /**
       Get `decorationLayout` property.
       Returns: The decoration layout for buttons.
-      
-      If this property is not set, the
-      `property@Gtk.Settings:gtk-decoration-layout` setting is used.
-      
-      The format of the string is button names, separated by commas. A colon
-      separates the buttons that should appear at the start from those at the
-      end. Recognized button names are minimize, maximize, close and icon (the
-      window icon).
-      
-      For example, “icon:minimize,maximize,close” specifies an icon at the start,
-      and minimize, maximize and close buttons at the end.
-  */
-  @property string decorationLayout()
-  {
-    return getDecorationLayout();
-  }
-
-  /**
-      Set `decorationLayout` property.
-      Params:
-        propval = The decoration layout for buttons.
         
         If this property is not set, the
         `property@Gtk.Settings:gtk-decoration-layout` setting is used.
@@ -186,6 +165,27 @@ class HeaderBar : gtk.widget.Widget
         For example, “icon:minimize,maximize,close” specifies an icon at the start,
         and minimize, maximize and close buttons at the end.
   */
+  @property string decorationLayout()
+  {
+    return getDecorationLayout();
+  }
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for buttons.
+          
+          If this property is not set, the
+          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          
+          The format of the string is button names, separated by commas. A colon
+          separates the buttons that should appear at the start from those at the
+          end. Recognized button names are minimize, maximize, close and icon (the
+          window icon).
+          
+          For example, “icon:minimize,maximize,close” specifies an icon at the start,
+          and minimize, maximize and close buttons at the end.
+  */
   @property void decorationLayout(string propval)
   {
     return setDecorationLayout(propval);
@@ -194,9 +194,9 @@ class HeaderBar : gtk.widget.Widget
   /**
       Get `showBackButton` property.
       Returns: Whether the header bar can show the back button.
-      
-      The back button will never be shown unless the header bar is placed inside an
-      `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
+        
+        The back button will never be shown unless the header bar is placed inside an
+        `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
   */
   @property bool showBackButton()
   {
@@ -207,9 +207,9 @@ class HeaderBar : gtk.widget.Widget
       Set `showBackButton` property.
       Params:
         propval = Whether the header bar can show the back button.
-        
-        The back button will never be shown unless the header bar is placed inside an
-        `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
+          
+          The back button will never be shown unless the header bar is placed inside an
+          `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
   */
   @property void showBackButton(bool propval)
   {
@@ -219,13 +219,13 @@ class HeaderBar : gtk.widget.Widget
   /**
       Get `showEndTitleButtons` property.
       Returns: Whether to show title buttons at the end of the header bar.
-      
-      See `property@HeaderBar:show-start-title-buttons` for the other side.
-      
-      Which buttons are actually shown and where is determined by the
-      `property@HeaderBar:decoration-layout` property, and by the state of the
-      window (e.g. a close button will not be shown if the window can't be
-      closed).
+        
+        See `property@HeaderBar:show-start-title-buttons` for the other side.
+        
+        Which buttons are actually shown and where is determined by the
+        `property@HeaderBar:decoration-layout` property, and by the state of the
+        window (e.g. a close button will not be shown if the window can't be
+        closed).
   */
   @property bool showEndTitleButtons()
   {
@@ -236,13 +236,13 @@ class HeaderBar : gtk.widget.Widget
       Set `showEndTitleButtons` property.
       Params:
         propval = Whether to show title buttons at the end of the header bar.
-        
-        See `property@HeaderBar:show-start-title-buttons` for the other side.
-        
-        Which buttons are actually shown and where is determined by the
-        `property@HeaderBar:decoration-layout` property, and by the state of the
-        window (e.g. a close button will not be shown if the window can't be
-        closed).
+          
+          See `property@HeaderBar:show-start-title-buttons` for the other side.
+          
+          Which buttons are actually shown and where is determined by the
+          `property@HeaderBar:decoration-layout` property, and by the state of the
+          window (e.g. a close button will not be shown if the window can't be
+          closed).
   */
   @property void showEndTitleButtons(bool propval)
   {
@@ -252,13 +252,13 @@ class HeaderBar : gtk.widget.Widget
   /**
       Get `showStartTitleButtons` property.
       Returns: Whether to show title buttons at the start of the header bar.
-      
-      See `property@HeaderBar:show-end-title-buttons` for the other side.
-      
-      Which buttons are actually shown and where is determined by the
-      `property@HeaderBar:decoration-layout` property, and by the state of the
-      window (e.g. a close button will not be shown if the window can't be
-      closed).
+        
+        See `property@HeaderBar:show-end-title-buttons` for the other side.
+        
+        Which buttons are actually shown and where is determined by the
+        `property@HeaderBar:decoration-layout` property, and by the state of the
+        window (e.g. a close button will not be shown if the window can't be
+        closed).
   */
   @property bool showStartTitleButtons()
   {
@@ -269,13 +269,13 @@ class HeaderBar : gtk.widget.Widget
       Set `showStartTitleButtons` property.
       Params:
         propval = Whether to show title buttons at the start of the header bar.
-        
-        See `property@HeaderBar:show-end-title-buttons` for the other side.
-        
-        Which buttons are actually shown and where is determined by the
-        `property@HeaderBar:decoration-layout` property, and by the state of the
-        window (e.g. a close button will not be shown if the window can't be
-        closed).
+          
+          See `property@HeaderBar:show-end-title-buttons` for the other side.
+          
+          Which buttons are actually shown and where is determined by the
+          `property@HeaderBar:decoration-layout` property, and by the state of the
+          window (e.g. a close button will not be shown if the window can't be
+          closed).
   */
   @property void showStartTitleButtons(bool propval)
   {
@@ -304,31 +304,6 @@ class HeaderBar : gtk.widget.Widget
   /**
       Get `titleWidget` property.
       Returns: The title widget to display.
-      
-      When set to `NULL`, the header bar will display the title of the window it
-      is contained in.
-      
-      To use a different title, use `class@WindowTitle`:
-      
-      ```xml
-      <object class="AdwHeaderBar">
-        <property name="title-widget">
-          <object class="AdwWindowTitle">
-            <property name="title" translatable="yes">Title</property>
-          </object>
-        </property>
-      </object>
-      ```
-  */
-  @property gtk.widget.Widget titleWidget()
-  {
-    return getTitleWidget();
-  }
-
-  /**
-      Set `titleWidget` property.
-      Params:
-        propval = The title widget to display.
         
         When set to `NULL`, the header bar will display the title of the window it
         is contained in.
@@ -344,6 +319,31 @@ class HeaderBar : gtk.widget.Widget
           </property>
         </object>
         ```
+  */
+  @property gtk.widget.Widget titleWidget()
+  {
+    return getTitleWidget();
+  }
+
+  /**
+      Set `titleWidget` property.
+      Params:
+        propval = The title widget to display.
+          
+          When set to `NULL`, the header bar will display the title of the window it
+          is contained in.
+          
+          To use a different title, use `class@WindowTitle`:
+          
+          ```xml
+          <object class="AdwHeaderBar">
+            <property name="title-widget">
+              <object class="AdwWindowTitle">
+                <property name="title" translatable="yes">Title</property>
+              </object>
+            </property>
+          </object>
+          ```
   */
   @property void titleWidget(gtk.widget.Widget propval)
   {

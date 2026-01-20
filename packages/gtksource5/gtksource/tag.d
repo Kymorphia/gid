@@ -48,12 +48,12 @@ class Tag : gtk.text_tag.TextTag
   /**
       Get `drawSpaces` property.
       Returns: Whether to draw white spaces.
-      
-      This property takes precedence over the value defined by the `class@SpaceDrawer`'s
-      `property@SpaceDrawer:matrix` property (only where the tag is applied).
-      
-      Setting this property also changes `property@Tag:draw-spaces-set` to
-      true.
+        
+        This property takes precedence over the value defined by the `class@SpaceDrawer`'s
+        `property@SpaceDrawer:matrix` property (only where the tag is applied).
+        
+        Setting this property also changes `property@Tag:draw-spaces-set` to
+        true.
   */
   @property bool drawSpaces()
   {
@@ -64,12 +64,12 @@ class Tag : gtk.text_tag.TextTag
       Set `drawSpaces` property.
       Params:
         propval = Whether to draw white spaces.
-        
-        This property takes precedence over the value defined by the `class@SpaceDrawer`'s
-        `property@SpaceDrawer:matrix` property (only where the tag is applied).
-        
-        Setting this property also changes `property@Tag:draw-spaces-set` to
-        true.
+          
+          This property takes precedence over the value defined by the `class@SpaceDrawer`'s
+          `property@SpaceDrawer:matrix` property (only where the tag is applied).
+          
+          Setting this property also changes `property@Tag:draw-spaces-set` to
+          true.
   */
   @property void drawSpaces(bool propval)
   {
@@ -79,7 +79,7 @@ class Tag : gtk.text_tag.TextTag
   /**
       Get `drawSpacesSet` property.
       Returns: Whether the `property@Tag:draw-spaces` property is set and must be
-      taken into account.
+        taken into account.
   */
   @property bool drawSpacesSet()
   {
@@ -90,7 +90,7 @@ class Tag : gtk.text_tag.TextTag
       Set `drawSpacesSet` property.
       Params:
         propval = Whether the `property@Tag:draw-spaces` property is set and must be
-        taken into account.
+          taken into account.
   */
   @property void drawSpacesSet(bool propval)
   {

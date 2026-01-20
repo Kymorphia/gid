@@ -1,16 +1,15 @@
-/// Module for [Rectangle] class
+/// Module for [Rectangle] struct
 module gdk.rectangle;
 
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
-import gobject.boxed;
 
 /**
     A [gtk.types.Rectangle] data type for representing rectangles.
     
-    [gtk.types.Rectangle] is identical to [cairo.rectangle.Rectangle]. Together with Cairo’s
+    [gtk.types.Rectangle] is identical to [cairo.types.Rectangle]. Together with Cairo’s
     [cairo.region.Region] data type, these are the central types for representing
     sets of pixels.
     
@@ -24,132 +23,27 @@ import gobject.boxed;
     The Graphene library has a number of other data types for regions and
     volumes in 2D and 3D.
 */
-class Rectangle : gobject.boxed.Boxed
+struct Rectangle
 {
+  /**
+      the x coordinate of the top left corner
+  */
+  int x;
 
   /**
-      Create a `rectangle.Rectangle` boxed type.
-      Params:
-        x = the x coordinate of the top left corner
-        y = the y coordinate of the top left corner
-        width = the width of the rectangle
-        height = the height of the rectangle
+      the y coordinate of the top left corner
   */
-  this(int x = int.init, int y = int.init, int width = int.init, int height = int.init)
-  {
-    super(gMalloc(GdkRectangle.sizeof), Yes.Take);
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gdk_rectangle_get_type != &gidSymbolNotFound ? gdk_rectangle_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Rectangle self()
-  {
-    return this;
-  }
+  int y;
 
   /**
-      Get `x` field.
-      Returns: the x coordinate of the top left corner
+      the width of the rectangle
   */
-  @property int x()
-  {
-    return (cast(GdkRectangle*)this._cPtr).x;
-  }
+  int width;
 
   /**
-      Set `x` field.
-      Params:
-        propval = the x coordinate of the top left corner
+      the height of the rectangle
   */
-  @property void x(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).x = propval;
-  }
-
-  /**
-      Get `y` field.
-      Returns: the y coordinate of the top left corner
-  */
-  @property int y()
-  {
-    return (cast(GdkRectangle*)this._cPtr).y;
-  }
-
-  /**
-      Set `y` field.
-      Params:
-        propval = the y coordinate of the top left corner
-  */
-  @property void y(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).y = propval;
-  }
-
-  /**
-      Get `width` field.
-      Returns: the width of the rectangle
-  */
-  @property int width()
-  {
-    return (cast(GdkRectangle*)this._cPtr).width;
-  }
-
-  /**
-      Set `width` field.
-      Params:
-        propval = the width of the rectangle
-  */
-  @property void width(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).width = propval;
-  }
-
-  /**
-      Get `height` field.
-      Returns: the height of the rectangle
-  */
-  @property int height()
-  {
-    return (cast(GdkRectangle*)this._cPtr).height;
-  }
-
-  /**
-      Set `height` field.
-      Params:
-        propval = the height of the rectangle
-  */
-  @property void height(int propval)
-  {
-    (cast(GdkRectangle*)this._cPtr).height = propval;
-  }
+  int height;
 
   /**
       Returns true if rect contains the point described by `x` and `y`.
@@ -162,7 +56,7 @@ class Rectangle : gobject.boxed.Boxed
   bool containsPoint(int x, int y)
   {
     bool _retval;
-    _retval = cast(bool)gdk_rectangle_contains_point(cast(const(GdkRectangle)*)this._cPtr, x, y);
+    _retval = cast(bool)gdk_rectangle_contains_point(cast(const(GdkRectangle)*)&this, x, y);
     return _retval;
   }
 
@@ -176,7 +70,7 @@ class Rectangle : gobject.boxed.Boxed
   bool equal(gdk.rectangle.Rectangle rect2)
   {
     bool _retval;
-    _retval = cast(bool)gdk_rectangle_equal(cast(const(GdkRectangle)*)this._cPtr, rect2 ? cast(const(GdkRectangle)*)rect2._cPtr(No.Dup) : null);
+    _retval = cast(bool)gdk_rectangle_equal(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&rect2);
     return _retval;
   }
 
@@ -198,9 +92,7 @@ class Rectangle : gobject.boxed.Boxed
   bool intersect(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
   {
     bool _retval;
-    GdkRectangle _dest;
-    _retval = cast(bool)gdk_rectangle_intersect(cast(const(GdkRectangle)*)this._cPtr, src2 ? cast(const(GdkRectangle)*)src2._cPtr(No.Dup) : null, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
+    _retval = cast(bool)gdk_rectangle_intersect(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&src2, cast(GdkRectangle*)&dest);
     return _retval;
   }
 
@@ -220,8 +112,6 @@ class Rectangle : gobject.boxed.Boxed
   */
   void union_(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
   {
-    GdkRectangle _dest;
-    gdk_rectangle_union(cast(const(GdkRectangle)*)this._cPtr, src2 ? cast(const(GdkRectangle)*)src2._cPtr(No.Dup) : null, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
+    gdk_rectangle_union(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&src2, cast(GdkRectangle*)&dest);
   }
 }

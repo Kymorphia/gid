@@ -68,7 +68,7 @@ class FontDialogButton : gtk.widget.Widget
   /**
       Get `dialog` property.
       Returns: The [gtk.font_dialog.FontDialog] that contains parameters for
-      the font chooser dialog.
+        the font chooser dialog.
   */
   @property gtk.font_dialog.FontDialog dialog()
   {
@@ -79,7 +79,7 @@ class FontDialogButton : gtk.widget.Widget
       Set `dialog` property.
       Params:
         propval = The [gtk.font_dialog.FontDialog] that contains parameters for
-        the font chooser dialog.
+          the font chooser dialog.
   */
   @property void dialog(gtk.font_dialog.FontDialog propval)
   {
@@ -89,13 +89,13 @@ class FontDialogButton : gtk.widget.Widget
   /**
       Get `fontDesc` property.
       Returns: The selected font.
-      
-      This property can be set to give the button its initial
-      font, and it will be updated to reflect the users choice
-      in the font chooser dialog.
-      
-      Listen to `notify::font-desc` to get informed about changes
-      to the buttons font.
+        
+        This property can be set to give the button its initial
+        font, and it will be updated to reflect the users choice
+        in the font chooser dialog.
+        
+        Listen to `notify::font-desc` to get informed about changes
+        to the buttons font.
   */
   @property pango.font_description.FontDescription fontDesc()
   {
@@ -106,13 +106,13 @@ class FontDialogButton : gtk.widget.Widget
       Set `fontDesc` property.
       Params:
         propval = The selected font.
-        
-        This property can be set to give the button its initial
-        font, and it will be updated to reflect the users choice
-        in the font chooser dialog.
-        
-        Listen to `notify::font-desc` to get informed about changes
-        to the buttons font.
+          
+          This property can be set to give the button its initial
+          font, and it will be updated to reflect the users choice
+          in the font chooser dialog.
+          
+          Listen to `notify::font-desc` to get informed about changes
+          to the buttons font.
   */
   @property void fontDesc(pango.font_description.FontDescription propval)
   {
@@ -122,12 +122,12 @@ class FontDialogButton : gtk.widget.Widget
   /**
       Get `fontFeatures` property.
       Returns: The selected font features.
-      
-      This property will be updated to reflect the users choice
-      in the font chooser dialog.
-      
-      Listen to `notify::font-features` to get informed about changes
-      to the buttons font features.
+        
+        This property will be updated to reflect the users choice
+        in the font chooser dialog.
+        
+        Listen to `notify::font-features` to get informed about changes
+        to the buttons font features.
   */
   @property string fontFeatures()
   {
@@ -138,12 +138,12 @@ class FontDialogButton : gtk.widget.Widget
       Set `fontFeatures` property.
       Params:
         propval = The selected font features.
-        
-        This property will be updated to reflect the users choice
-        in the font chooser dialog.
-        
-        Listen to `notify::font-features` to get informed about changes
-        to the buttons font features.
+          
+          This property will be updated to reflect the users choice
+          in the font chooser dialog.
+          
+          Listen to `notify::font-features` to get informed about changes
+          to the buttons font features.
   */
   @property void fontFeatures(string propval)
   {
@@ -153,12 +153,12 @@ class FontDialogButton : gtk.widget.Widget
   /**
       Get `language` property.
       Returns: The selected language for font features.
-      
-      This property will be updated to reflect the users choice
-      in the font chooser dialog.
-      
-      Listen to `notify::language` to get informed about changes
-      to the buttons language.
+        
+        This property will be updated to reflect the users choice
+        in the font chooser dialog.
+        
+        Listen to `notify::language` to get informed about changes
+        to the buttons language.
   */
   @property pango.language.Language language()
   {
@@ -169,12 +169,12 @@ class FontDialogButton : gtk.widget.Widget
       Set `language` property.
       Params:
         propval = The selected language for font features.
-        
-        This property will be updated to reflect the users choice
-        in the font chooser dialog.
-        
-        Listen to `notify::language` to get informed about changes
-        to the buttons language.
+          
+          This property will be updated to reflect the users choice
+          in the font chooser dialog.
+          
+          Listen to `notify::language` to get informed about changes
+          to the buttons language.
   */
   @property void language(pango.language.Language propval)
   {
@@ -440,9 +440,9 @@ class FontDialogButton : gtk.widget.Widget
       Connect to `Activate` signal.
   
       Emitted when the font dialog button is activated.
-      
-      The `::activate` signal on [gtk.font_dialog_button.FontDialogButton] is an action signal
-      and emitting it causes the button to pop up its dialog.
+        
+        The `::activate` signal on [gtk.font_dialog_button.FontDialogButton] is an action signal
+        and emitting it causes the button to pop up its dialog.
   
       Params:
         callback = signal callback delegate or function to connect

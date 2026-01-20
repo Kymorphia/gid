@@ -59,25 +59,6 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   /**
       Get `pulse` property.
       Returns: Setting this to a non-negative value causes the cell renderer to
-      enter "activity mode", where a block bounces back and forth to
-      indicate that some progress is made, without specifying exactly how
-      much.
-      
-      Each increment of the property causes the block to move by a little
-      bit.
-      
-      To indicate that the activity has not started yet, set the property
-      to zero. To indicate completion, set the property to `G_MAXINT`.
-  */
-  @property int pulse()
-  {
-    return gobject.object.ObjectWrap.getProperty!(int)("pulse");
-  }
-
-  /**
-      Set `pulse` property.
-      Params:
-        propval = Setting this to a non-negative value causes the cell renderer to
         enter "activity mode", where a block bounces back and forth to
         indicate that some progress is made, without specifying exactly how
         much.
@@ -88,6 +69,25 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
         To indicate that the activity has not started yet, set the property
         to zero. To indicate completion, set the property to `G_MAXINT`.
   */
+  @property int pulse()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("pulse");
+  }
+
+  /**
+      Set `pulse` property.
+      Params:
+        propval = Setting this to a non-negative value causes the cell renderer to
+          enter "activity mode", where a block bounces back and forth to
+          indicate that some progress is made, without specifying exactly how
+          much.
+          
+          Each increment of the property causes the block to move by a little
+          bit.
+          
+          To indicate that the activity has not started yet, set the property
+          to zero. To indicate completion, set the property to `G_MAXINT`.
+  */
   @property void pulse(int propval)
   {
     gobject.object.ObjectWrap.setProperty!(int)("pulse", propval);
@@ -96,9 +96,9 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   /**
       Get `text` property.
       Returns: The "text" property determines the label which will be drawn
-      over the progress bar. Setting this property to null causes the default
-      label to be displayed. Setting this property to an empty string causes
-      no label to be displayed.
+        over the progress bar. Setting this property to null causes the default
+        label to be displayed. Setting this property to an empty string causes
+        no label to be displayed.
   */
   @property string text()
   {
@@ -109,9 +109,9 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
       Set `text` property.
       Params:
         propval = The "text" property determines the label which will be drawn
-        over the progress bar. Setting this property to null causes the default
-        label to be displayed. Setting this property to an empty string causes
-        no label to be displayed.
+          over the progress bar. Setting this property to null causes the default
+          label to be displayed. Setting this property to an empty string causes
+          no label to be displayed.
   */
   @property void text(string propval)
   {
@@ -121,8 +121,8 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   /**
       Get `textXalign` property.
       Returns: The "text-xalign" property controls the horizontal alignment of the
-      text in the progress bar.  Valid values range from 0 (left) to 1
-      (right).  Reserved for RTL layouts.
+        text in the progress bar.  Valid values range from 0 (left) to 1
+        (right).  Reserved for RTL layouts.
   */
   @property float textXalign()
   {
@@ -133,8 +133,8 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
       Set `textXalign` property.
       Params:
         propval = The "text-xalign" property controls the horizontal alignment of the
-        text in the progress bar.  Valid values range from 0 (left) to 1
-        (right).  Reserved for RTL layouts.
+          text in the progress bar.  Valid values range from 0 (left) to 1
+          (right).  Reserved for RTL layouts.
   */
   @property void textXalign(float propval)
   {
@@ -144,8 +144,8 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   /**
       Get `textYalign` property.
       Returns: The "text-yalign" property controls the vertical alignment of the
-      text in the progress bar.  Valid values range from 0 (top) to 1
-      (bottom).
+        text in the progress bar.  Valid values range from 0 (top) to 1
+        (bottom).
   */
   @property float textYalign()
   {
@@ -156,8 +156,8 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
       Set `textYalign` property.
       Params:
         propval = The "text-yalign" property controls the vertical alignment of the
-        text in the progress bar.  Valid values range from 0 (top) to 1
-        (bottom).
+          text in the progress bar.  Valid values range from 0 (top) to 1
+          (bottom).
   */
   @property void textYalign(float propval)
   {
@@ -167,7 +167,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   /**
       Get `value` property.
       Returns: The "value" property determines the percentage to which the
-      progress bar will be "filled in".
+        progress bar will be "filled in".
   */
   @property int value()
   {
@@ -178,7 +178,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
       Set `value` property.
       Params:
         propval = The "value" property determines the percentage to which the
-        progress bar will be "filled in".
+          progress bar will be "filled in".
   */
   @property void value(int propval)
   {

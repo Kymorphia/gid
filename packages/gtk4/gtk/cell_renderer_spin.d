@@ -58,7 +58,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
   /**
       Get `adjustment` property.
       Returns: The adjustment that holds the value of the spinbutton.
-      This must be non-null for the cell renderer to be editable.
+        This must be non-null for the cell renderer to be editable.
   */
   @property gtk.adjustment.Adjustment adjustment()
   {
@@ -69,7 +69,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Set `adjustment` property.
       Params:
         propval = The adjustment that holds the value of the spinbutton.
-        This must be non-null for the cell renderer to be editable.
+          This must be non-null for the cell renderer to be editable.
   */
   @property void adjustment(gtk.adjustment.Adjustment propval)
   {

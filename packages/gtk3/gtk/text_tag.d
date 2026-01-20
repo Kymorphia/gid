@@ -63,10 +63,10 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `accumulativeMargin` property.
       Returns: Whether the margins accumulate or override each other.
-      
-      When set to true the margins of this tag are added to the margins
-      of any other non-accumulative margins present. When set to false
-      the margins override one another (the default).
+        
+        When set to true the margins of this tag are added to the margins
+        of any other non-accumulative margins present. When set to false
+        the margins override one another (the default).
   */
   @property bool accumulativeMargin()
   {
@@ -77,10 +77,10 @@ class TextTag : gobject.object.ObjectWrap
       Set `accumulativeMargin` property.
       Params:
         propval = Whether the margins accumulate or override each other.
-        
-        When set to true the margins of this tag are added to the margins
-        of any other non-accumulative margins present. When set to false
-        the margins override one another (the default).
+          
+          When set to true the margins of this tag are added to the margins
+          of any other non-accumulative margins present. When set to false
+          the margins override one another (the default).
   */
   @property void accumulativeMargin(bool propval)
   {
@@ -210,9 +210,9 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `fallback` property.
       Returns: Whether font fallback is enabled.
-      
-      When set to true, other fonts will be substituted
-      where the current font is missing glyphs.
+        
+        When set to true, other fonts will be substituted
+        where the current font is missing glyphs.
   */
   @property bool fallback()
   {
@@ -223,9 +223,9 @@ class TextTag : gobject.object.ObjectWrap
       Set `fallback` property.
       Params:
         propval = Whether font fallback is enabled.
-        
-        When set to true, other fonts will be substituted
-        where the current font is missing glyphs.
+          
+          When set to true, other fonts will be substituted
+          where the current font is missing glyphs.
   */
   @property void fallback(bool propval)
   {
@@ -271,9 +271,9 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `font` property.
       Returns: Font description as string, e.g. \"Sans Italic 12\".
-      
-      Note that the initial value of this property depends on
-      the internals of #PangoFontDescription.
+        
+        Note that the initial value of this property depends on
+        the internals of #PangoFontDescription.
   */
   @property string font()
   {
@@ -284,9 +284,9 @@ class TextTag : gobject.object.ObjectWrap
       Set `font` property.
       Params:
         propval = Font description as string, e.g. \"Sans Italic 12\".
-        
-        Note that the initial value of this property depends on
-        the internals of #PangoFontDescription.
+          
+          Note that the initial value of this property depends on
+          the internals of #PangoFontDescription.
   */
   @property void font(string propval)
   {
@@ -423,10 +423,10 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `invisible` property.
       Returns: Whether this text is hidden.
-      
-      Note that there may still be problems with the support for invisible
-      text, in particular when navigating programmatically inside a buffer
-      containing invisible segments.
+        
+        Note that there may still be problems with the support for invisible
+        text, in particular when navigating programmatically inside a buffer
+        containing invisible segments.
   */
   @property bool invisible()
   {
@@ -437,10 +437,10 @@ class TextTag : gobject.object.ObjectWrap
       Set `invisible` property.
       Params:
         propval = Whether this text is hidden.
-        
-        Note that there may still be problems with the support for invisible
-        text, in particular when navigating programmatically inside a buffer
-        containing invisible segments.
+          
+          Note that there may still be problems with the support for invisible
+          text, in particular when navigating programmatically inside a buffer
+          containing invisible segments.
   */
   @property void invisible(bool propval)
   {
@@ -486,11 +486,11 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `language` property.
       Returns: The language this text is in, as an ISO code. Pango can use this as a
-      hint when rendering the text. If not set, an appropriate default will be
-      used.
-      
-      Note that the initial value of this property depends on the current
-      locale, see also [gtk.global.getDefaultLanguage].
+        hint when rendering the text. If not set, an appropriate default will be
+        used.
+        
+        Note that the initial value of this property depends on the current
+        locale, see also [gtk.global.getDefaultLanguage].
   */
   @property string language()
   {
@@ -501,11 +501,11 @@ class TextTag : gobject.object.ObjectWrap
       Set `language` property.
       Params:
         propval = The language this text is in, as an ISO code. Pango can use this as a
-        hint when rendering the text. If not set, an appropriate default will be
-        used.
-        
-        Note that the initial value of this property depends on the current
-        locale, see also [gtk.global.getDefaultLanguage].
+          hint when rendering the text. If not set, an appropriate default will be
+          used.
+          
+          Note that the initial value of this property depends on the current
+          locale, see also [gtk.global.getDefaultLanguage].
   */
   @property void language(string propval)
   {
@@ -862,7 +862,7 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `strikethroughRgba` property.
       Returns: This property modifies the color of strikeouts. If not set, strikeouts
-      will use the forground color.
+        will use the forground color.
   */
   @property gdk.rgba.RGBA strikethroughRgba()
   {
@@ -873,7 +873,7 @@ class TextTag : gobject.object.ObjectWrap
       Set `strikethroughRgba` property.
       Params:
         propval = This property modifies the color of strikeouts. If not set, strikeouts
-        will use the forground color.
+          will use the forground color.
   */
   @property void strikethroughRgba(gdk.rgba.RGBA propval)
   {
@@ -974,11 +974,11 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `underlineRgba` property.
       Returns: This property modifies the color of underlines. If not set, underlines
-      will use the forground color.
-      
-      If #GtkTextTag:underline is set to [pango.types.Underline.Error], an alternate
-      color may be applied instead of the foreground. Setting this property
-      will always override those defaults.
+        will use the forground color.
+        
+        If #GtkTextTag:underline is set to [pango.types.Underline.Error], an alternate
+        color may be applied instead of the foreground. Setting this property
+        will always override those defaults.
   */
   @property gdk.rgba.RGBA underlineRgba()
   {
@@ -989,11 +989,11 @@ class TextTag : gobject.object.ObjectWrap
       Set `underlineRgba` property.
       Params:
         propval = This property modifies the color of underlines. If not set, underlines
-        will use the forground color.
-        
-        If #GtkTextTag:underline is set to [pango.types.Underline.Error], an alternate
-        color may be applied instead of the foreground. Setting this property
-        will always override those defaults.
+          will use the forground color.
+          
+          If #GtkTextTag:underline is set to [pango.types.Underline.Error], an alternate
+          color may be applied instead of the foreground. Setting this property
+          will always override those defaults.
   */
   @property void underlineRgba(gdk.rgba.RGBA propval)
   {
@@ -1146,7 +1146,7 @@ class TextTag : gobject.object.ObjectWrap
   bool event(gobject.object.ObjectWrap eventObject, gdk.event.Event event, gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_tag_event(cast(GtkTextTag*)this._cPtr, eventObject ? cast(GObject*)eventObject._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr : null, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_tag_event(cast(GtkTextTag*)this._cPtr, eventObject ? cast(GObject*)eventObject._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cast(const(GtkTextIter)*)&iter);
     return _retval;
   }
 
@@ -1186,7 +1186,7 @@ class TextTag : gobject.object.ObjectWrap
       Connect to `Event` signal.
   
       The ::event signal is emitted when an event occurs on a region of the
-      buffer marked with this tag.
+        buffer marked with this tag.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1202,7 +1202,7 @@ class TextTag : gobject.object.ObjectWrap
           `textTag` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the
-          event. false to propagate the event further.
+            event. false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

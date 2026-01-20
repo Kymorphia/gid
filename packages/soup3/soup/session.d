@@ -91,9 +91,9 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `acceptLanguage` property.
       Returns: If non-null, the value to use for the "Accept-Language" header
-      on `class@Message`s sent from this session.
-      
-      Setting this will disable `property@Session:accept-language-auto`.
+        on `class@Message`s sent from this session.
+        
+        Setting this will disable `property@Session:accept-language-auto`.
   */
   @property string acceptLanguage()
   {
@@ -104,9 +104,9 @@ class Session : gobject.object.ObjectWrap
       Set `acceptLanguage` property.
       Params:
         propval = If non-null, the value to use for the "Accept-Language" header
-        on `class@Message`s sent from this session.
-        
-        Setting this will disable `property@Session:accept-language-auto`.
+          on `class@Message`s sent from this session.
+          
+          Setting this will disable `property@Session:accept-language-auto`.
   */
   @property void acceptLanguage(string propval)
   {
@@ -116,11 +116,11 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `acceptLanguageAuto` property.
       Returns: If true, #SoupSession will automatically set the string
-      for the "Accept-Language" header on every `class@Message`
-      sent, based on the return value of `func@GLib.get_language_names`.
-      
-      Setting this will override any previous value of
-      `property@Session:accept-language`.
+        for the "Accept-Language" header on every `class@Message`
+        sent, based on the return value of `func@GLib.get_language_names`.
+        
+        Setting this will override any previous value of
+        `property@Session:accept-language`.
   */
   @property bool acceptLanguageAuto()
   {
@@ -131,11 +131,11 @@ class Session : gobject.object.ObjectWrap
       Set `acceptLanguageAuto` property.
       Params:
         propval = If true, #SoupSession will automatically set the string
-        for the "Accept-Language" header on every `class@Message`
-        sent, based on the return value of `func@GLib.get_language_names`.
-        
-        Setting this will override any previous value of
-        `property@Session:accept-language`.
+          for the "Accept-Language" header on every `class@Message`
+          sent, based on the return value of `func@GLib.get_language_names`.
+          
+          Setting this will override any previous value of
+          `property@Session:accept-language`.
   */
   @property void acceptLanguageAuto(bool propval)
   {
@@ -145,13 +145,13 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `idleTimeout` property.
       Returns: Connection lifetime (in seconds) when idle. Any connection
-      left idle longer than this will be closed.
-      
-      Although you can change this property at any time, it will
-      only affect newly-created connections, not currently-open
-      ones. You can call [soup.session.Session.abort] after setting this
-      if you want to ensure that all future connections will have
-      this timeout value.
+        left idle longer than this will be closed.
+        
+        Although you can change this property at any time, it will
+        only affect newly-created connections, not currently-open
+        ones. You can call [soup.session.Session.abort] after setting this
+        if you want to ensure that all future connections will have
+        this timeout value.
   */
   @property uint idleTimeout()
   {
@@ -162,13 +162,13 @@ class Session : gobject.object.ObjectWrap
       Set `idleTimeout` property.
       Params:
         propval = Connection lifetime (in seconds) when idle. Any connection
-        left idle longer than this will be closed.
-        
-        Although you can change this property at any time, it will
-        only affect newly-created connections, not currently-open
-        ones. You can call [soup.session.Session.abort] after setting this
-        if you want to ensure that all future connections will have
-        this timeout value.
+          left idle longer than this will be closed.
+          
+          Although you can change this property at any time, it will
+          only affect newly-created connections, not currently-open
+          ones. You can call [soup.session.Session.abort] after setting this
+          if you want to ensure that all future connections will have
+          this timeout value.
   */
   @property void idleTimeout(uint propval)
   {
@@ -178,12 +178,12 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `proxyResolver` property.
       Returns: A [gio.proxy_resolver.ProxyResolver] to use with this session.
-      
-      If no proxy resolver is set, then the default proxy resolver
-      will be used. See [gio.proxy_resolver.ProxyResolver.getDefault].
-      You can set it to null if you don't want to use proxies, or
-      set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
-      what proxies get used.
+        
+        If no proxy resolver is set, then the default proxy resolver
+        will be used. See [gio.proxy_resolver.ProxyResolver.getDefault].
+        You can set it to null if you don't want to use proxies, or
+        set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
+        what proxies get used.
   */
   @property gio.proxy_resolver.ProxyResolver proxyResolver()
   {
@@ -194,12 +194,12 @@ class Session : gobject.object.ObjectWrap
       Set `proxyResolver` property.
       Params:
         propval = A [gio.proxy_resolver.ProxyResolver] to use with this session.
-        
-        If no proxy resolver is set, then the default proxy resolver
-        will be used. See [gio.proxy_resolver.ProxyResolver.getDefault].
-        You can set it to null if you don't want to use proxies, or
-        set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
-        what proxies get used.
+          
+          If no proxy resolver is set, then the default proxy resolver
+          will be used. See [gio.proxy_resolver.ProxyResolver.getDefault].
+          You can set it to null if you don't want to use proxies, or
+          set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
+          what proxies get used.
   */
   @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
   {
@@ -209,28 +209,6 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `timeout` property.
       Returns: The timeout (in seconds) for socket I/O operations
-      (including connecting to a server, and waiting for a reply
-      to an HTTP request).
-      
-      Although you can change this property at any time, it will
-      only affect newly-created connections, not currently-open
-      ones. You can call [soup.session.Session.abort] after setting this
-      if you want to ensure that all future connections will have
-      this timeout value.
-      
-      Not to be confused with `property@Session:idle-timeout` (which is
-      the length of time that idle persistent connections will be
-      kept open).
-  */
-  @property uint timeout()
-  {
-    return getTimeout();
-  }
-
-  /**
-      Set `timeout` property.
-      Params:
-        propval = The timeout (in seconds) for socket I/O operations
         (including connecting to a server, and waiting for a reply
         to an HTTP request).
         
@@ -244,6 +222,28 @@ class Session : gobject.object.ObjectWrap
         the length of time that idle persistent connections will be
         kept open).
   */
+  @property uint timeout()
+  {
+    return getTimeout();
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The timeout (in seconds) for socket I/O operations
+          (including connecting to a server, and waiting for a reply
+          to an HTTP request).
+          
+          Although you can change this property at any time, it will
+          only affect newly-created connections, not currently-open
+          ones. You can call [soup.session.Session.abort] after setting this
+          if you want to ensure that all future connections will have
+          this timeout value.
+          
+          Not to be confused with `property@Session:idle-timeout` (which is
+          the length of time that idle persistent connections will be
+          kept open).
+  */
   @property void timeout(uint propval)
   {
     return setTimeout(propval);
@@ -252,10 +252,10 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `tlsDatabase` property.
       Returns: Sets the [gio.tls_database.TlsDatabase] to use for validating SSL/TLS
-      certificates.
-      
-      If no certificate database is set, then the default database will be
-      used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+        certificates.
+        
+        If no certificate database is set, then the default database will be
+        used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
   */
   @property gio.tls_database.TlsDatabase tlsDatabase()
   {
@@ -266,10 +266,10 @@ class Session : gobject.object.ObjectWrap
       Set `tlsDatabase` property.
       Params:
         propval = Sets the [gio.tls_database.TlsDatabase] to use for validating SSL/TLS
-        certificates.
-        
-        If no certificate database is set, then the default database will be
-        used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+          certificates.
+          
+          If no certificate database is set, then the default database will be
+          used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
   */
   @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
   {
@@ -279,9 +279,9 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `tlsInteraction` property.
       Returns: A [gio.tls_interaction.TlsInteraction] object that will be passed on to any
-      [gio.tls_connection.TlsConnection]s created by the session.
-      
-      This can be used to provide client-side certificates, for example.
+        [gio.tls_connection.TlsConnection]s created by the session.
+        
+        This can be used to provide client-side certificates, for example.
   */
   @property gio.tls_interaction.TlsInteraction tlsInteraction()
   {
@@ -292,9 +292,9 @@ class Session : gobject.object.ObjectWrap
       Set `tlsInteraction` property.
       Params:
         propval = A [gio.tls_interaction.TlsInteraction] object that will be passed on to any
-        [gio.tls_connection.TlsConnection]s created by the session.
-        
-        This can be used to provide client-side certificates, for example.
+          [gio.tls_connection.TlsConnection]s created by the session.
+          
+          This can be used to provide client-side certificates, for example.
   */
   @property void tlsInteraction(gio.tls_interaction.TlsInteraction propval)
   {
@@ -304,40 +304,6 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `userAgent` property.
       Returns: User-Agent string.
-      
-      If non-null, the value to use for the "User-Agent" header
-      on `class@Message`s sent from this session.
-      
-      RFC 2616 says: "The User-Agent request-header field
-      contains information about the user agent originating the
-      request. This is for statistical purposes, the tracing of
-      protocol violations, and automated recognition of user
-      agents for the sake of tailoring responses to avoid
-      particular user agent limitations. User agents SHOULD
-      include this field with requests."
-      
-      The User-Agent header contains a list of one or more
-      product tokens, separated by whitespace, with the most
-      significant product token coming first. The tokens must be
-      brief, ASCII, and mostly alphanumeric (although "-", "_",
-      and "." are also allowed), and may optionally include a "/"
-      followed by a version string. You may also put comments,
-      enclosed in parentheses, between or after the tokens.
-      
-      If you set a `property@Session:user-agent` property that has trailing
-      whitespace, #SoupSession will append its own product token
-      (eg, `libsoup/2.3.2`) to the end of the
-      header for you.
-  */
-  @property string userAgent()
-  {
-    return getUserAgent();
-  }
-
-  /**
-      Set `userAgent` property.
-      Params:
-        propval = User-Agent string.
         
         If non-null, the value to use for the "User-Agent" header
         on `class@Message`s sent from this session.
@@ -362,6 +328,40 @@ class Session : gobject.object.ObjectWrap
         whitespace, #SoupSession will append its own product token
         (eg, `libsoup/2.3.2`) to the end of the
         header for you.
+  */
+  @property string userAgent()
+  {
+    return getUserAgent();
+  }
+
+  /**
+      Set `userAgent` property.
+      Params:
+        propval = User-Agent string.
+          
+          If non-null, the value to use for the "User-Agent" header
+          on `class@Message`s sent from this session.
+          
+          RFC 2616 says: "The User-Agent request-header field
+          contains information about the user agent originating the
+          request. This is for statistical purposes, the tracing of
+          protocol violations, and automated recognition of user
+          agents for the sake of tailoring responses to avoid
+          particular user agent limitations. User agents SHOULD
+          include this field with requests."
+          
+          The User-Agent header contains a list of one or more
+          product tokens, separated by whitespace, with the most
+          significant product token coming first. The tokens must be
+          brief, ASCII, and mostly alphanumeric (although "-", "_",
+          and "." are also allowed), and may optionally include a "/"
+          followed by a version string. You may also put comments,
+          enclosed in parentheses, between or after the tokens.
+          
+          If you set a `property@Session:user-agent` property that has trailing
+          whitespace, #SoupSession will append its own product token
+          (eg, `libsoup/2.3.2`) to the end of the
+          header for you.
   */
   @property void userAgent(string propval)
   {
@@ -669,7 +669,6 @@ class Session : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     soup_session_preconnect_async(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -806,7 +805,6 @@ class Session : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     soup_session_send_and_read_async(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -880,7 +878,6 @@ class Session : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     soup_session_send_and_splice_async(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, outStream ? cast(GOutputStream*)outStream._cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -929,7 +926,6 @@ class Session : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     soup_session_send_async(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1116,7 +1112,6 @@ class Session : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _origin = origin.toCString(No.Alloc);
     char*[] _tmpprotocols;
     foreach (s; protocols)
@@ -1156,33 +1151,33 @@ class Session : gobject.object.ObjectWrap
       Connect to `RequestQueued` signal.
   
       Emitted when a request is queued on session.
-      
-      When sending a request, first `signalSession::request-queued`
-      is emitted, indicating that the session has become aware of
-      the request.
-      
-      After a connection is available to send the request various
-      `classMessage` signals are emitted as the message is
-      processed. If the message is requeued, it will emit
-      `signalMessage::restarted`, which will then be followed by other
-      `classMessage` signals when the message is re-sent.
-      
-      Eventually, the message will emit `signalMessage::finished`.
-      Normally, this signals the completion of message
-      processing. However, it is possible that the application
-      will requeue the message from the "finished" handler.
-      In that case the process will loop back.
-      
-      Eventually, a message will reach "finished" and not be
-      requeued. At that point, the session will emit
-      `signalSession::request-unqueued` to indicate that it is done
-      with the message.
-      
-      To sum up: `signalSession::request-queued` and
-      `signalSession::request-unqueued` are guaranteed to be emitted
-      exactly once, but `signalMessage::finished` (and all of the other
-      `classMessage` signals) may be invoked multiple times for a given
-      message.
+        
+        When sending a request, first `signalSession::request-queued`
+        is emitted, indicating that the session has become aware of
+        the request.
+        
+        After a connection is available to send the request various
+        `classMessage` signals are emitted as the message is
+        processed. If the message is requeued, it will emit
+        `signalMessage::restarted`, which will then be followed by other
+        `classMessage` signals when the message is re-sent.
+        
+        Eventually, the message will emit `signalMessage::finished`.
+        Normally, this signals the completion of message
+        processing. However, it is possible that the application
+        will requeue the message from the "finished" handler.
+        In that case the process will loop back.
+        
+        Eventually, a message will reach "finished" and not be
+        requeued. At that point, the session will emit
+        `signalSession::request-unqueued` to indicate that it is done
+        with the message.
+        
+        To sum up: `signalSession::request-queued` and
+        `signalSession::request-unqueued` are guaranteed to be emitted
+        exactly once, but `signalMessage::finished` (and all of the other
+        `classMessage` signals) may be invoked multiple times for a given
+        message.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1227,10 +1222,10 @@ class Session : gobject.object.ObjectWrap
       Connect to `RequestUnqueued` signal.
   
       Emitted when a request is removed from session's queue,
-      indicating that session is done with it.
-      
-      See `signalSession::request-queued` for a detailed description of
-      the message lifecycle within a session.
+        indicating that session is done with it.
+        
+        See `signalSession::request-queued` for a detailed description of
+        the message lifecycle within a session.
   
       Params:
         callback = signal callback delegate or function to connect

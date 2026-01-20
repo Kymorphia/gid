@@ -10,7 +10,7 @@ import gtk.widget;
 /** */
 class FixedChild
 {
-  GtkFixedChild cInstance;
+  GtkFixedChild _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -18,7 +18,7 @@ class FixedChild
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.fixed_child.FixedChild");
 
-    cInstance = *cast(GtkFixedChild*)ptr;
+    _cInstance = *cast(GtkFixedChild*)ptr;
 
     if (take)
       gFree(ptr);
@@ -27,7 +27,7 @@ class FixedChild
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

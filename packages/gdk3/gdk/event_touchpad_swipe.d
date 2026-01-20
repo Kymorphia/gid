@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventTouchpadSwipe
 {
-  GdkEventTouchpadSwipe cInstance;
+  GdkEventTouchpadSwipe _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventTouchpadSwipe
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_touchpad_swipe.EventTouchpadSwipe");
 
-    cInstance = *cast(GdkEventTouchpadSwipe*)ptr;
+    _cInstance = *cast(GdkEventTouchpadSwipe*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventTouchpadSwipe
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -226,7 +226,7 @@ class EventTouchpadSwipe
   /**
       Get `xRoot` field.
       Returns: The X coordinate of the pointer, relative to the
-        root of the screen.
+          root of the screen.
   */
   @property double xRoot()
   {
@@ -237,7 +237,7 @@ class EventTouchpadSwipe
       Set `xRoot` field.
       Params:
         propval = The X coordinate of the pointer, relative to the
-          root of the screen.
+            root of the screen.
   */
   @property void xRoot(double propval)
   {
@@ -247,7 +247,7 @@ class EventTouchpadSwipe
   /**
       Get `yRoot` field.
       Returns: The Y coordinate of the pointer, relative to the
-        root of the screen.
+          root of the screen.
   */
   @property double yRoot()
   {
@@ -258,7 +258,7 @@ class EventTouchpadSwipe
       Set `yRoot` field.
       Params:
         propval = The Y coordinate of the pointer, relative to the
-          root of the screen.
+            root of the screen.
   */
   @property void yRoot(double propval)
   {
@@ -268,8 +268,8 @@ class EventTouchpadSwipe
   /**
       Get `state` field.
       Returns: a bit-mask representing the state of
-        the modifier keys (e.g. Control, Shift and Alt) and the pointer
-        buttons. See #GdkModifierType.
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
   */
   @property gdk.types.ModifierType state()
   {
@@ -280,8 +280,8 @@ class EventTouchpadSwipe
       Set `state` field.
       Params:
         propval = a bit-mask representing the state of
-          the modifier keys (e.g. Control, Shift and Alt) and the pointer
-          buttons. See #GdkModifierType.
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
   */
   @property void state(gdk.types.ModifierType propval)
   {

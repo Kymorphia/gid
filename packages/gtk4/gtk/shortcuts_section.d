@@ -73,10 +73,10 @@ class ShortcutsSection : gtk.box.Box
   /**
       Get `maxHeight` property.
       Returns: The maximum number of lines to allow per column.
-      
-      This property can be used to influence how the groups in this
-      section are distributed across pages and columns. The default
-      value of 15 should work in most cases.
+        
+        This property can be used to influence how the groups in this
+        section are distributed across pages and columns. The default
+        value of 15 should work in most cases.
   */
   @property uint maxHeight()
   {
@@ -87,10 +87,10 @@ class ShortcutsSection : gtk.box.Box
       Set `maxHeight` property.
       Params:
         propval = The maximum number of lines to allow per column.
-        
-        This property can be used to influence how the groups in this
-        section are distributed across pages and columns. The default
-        value of 15 should work in most cases.
+          
+          This property can be used to influence how the groups in this
+          section are distributed across pages and columns. The default
+          value of 15 should work in most cases.
   */
   @property void maxHeight(uint propval)
   {
@@ -100,10 +100,10 @@ class ShortcutsSection : gtk.box.Box
   /**
       Get `sectionName` property.
       Returns: A unique name to identify this section among the sections
-      added to the [gtk.shortcuts_window.ShortcutsWindow].
-      
-      Setting the `property@Gtk.ShortcutsWindow:section-name` property
-      to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
+        added to the [gtk.shortcuts_window.ShortcutsWindow].
+        
+        Setting the `property@Gtk.ShortcutsWindow:section-name` property
+        to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
   */
   @property string sectionName()
   {
@@ -114,10 +114,10 @@ class ShortcutsSection : gtk.box.Box
       Set `sectionName` property.
       Params:
         propval = A unique name to identify this section among the sections
-        added to the [gtk.shortcuts_window.ShortcutsWindow].
-        
-        Setting the `property@Gtk.ShortcutsWindow:section-name` property
-        to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
+          added to the [gtk.shortcuts_window.ShortcutsWindow].
+          
+          Setting the `property@Gtk.ShortcutsWindow:section-name` property
+          to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
   */
   @property void sectionName(string propval)
   {
@@ -127,10 +127,10 @@ class ShortcutsSection : gtk.box.Box
   /**
       Get `title` property.
       Returns: The string to show in the section selector of the [gtk.shortcuts_window.ShortcutsWindow]
-      for this section.
-      
-      If there is only one section, you don't need to set a title,
-      since the section selector will not be shown in this case.
+        for this section.
+        
+        If there is only one section, you don't need to set a title,
+        since the section selector will not be shown in this case.
   */
   @property string title()
   {
@@ -141,10 +141,10 @@ class ShortcutsSection : gtk.box.Box
       Set `title` property.
       Params:
         propval = The string to show in the section selector of the [gtk.shortcuts_window.ShortcutsWindow]
-        for this section.
-        
-        If there is only one section, you don't need to set a title,
-        since the section selector will not be shown in this case.
+          for this section.
+          
+          If there is only one section, you don't need to set a title,
+          since the section selector will not be shown in this case.
   */
   @property void title(string propval)
   {
@@ -154,12 +154,12 @@ class ShortcutsSection : gtk.box.Box
   /**
       Get `viewName` property.
       Returns: A view name to filter the groups in this section by.
-      
-      See [gtk.shortcuts_group.ShortcutsGroup.view].
-      
-      Applications are expected to use the
-      `property@Gtk.ShortcutsWindow:view-name` property
-      for this purpose.
+        
+        See [gtk.shortcuts_group.ShortcutsGroup.view].
+        
+        Applications are expected to use the
+        `property@Gtk.ShortcutsWindow:view-name` property
+        for this purpose.
   */
   @property string viewName()
   {
@@ -170,12 +170,12 @@ class ShortcutsSection : gtk.box.Box
       Set `viewName` property.
       Params:
         propval = A view name to filter the groups in this section by.
-        
-        See [gtk.shortcuts_group.ShortcutsGroup.view].
-        
-        Applications are expected to use the
-        `property@Gtk.ShortcutsWindow:view-name` property
-        for this purpose.
+          
+          See [gtk.shortcuts_group.ShortcutsGroup.view].
+          
+          Applications are expected to use the
+          `property@Gtk.ShortcutsWindow:view-name` property
+          for this purpose.
   */
   @property void viewName(string propval)
   {

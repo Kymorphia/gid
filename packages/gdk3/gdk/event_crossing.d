@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventCrossing
 {
-  GdkEventCrossing cInstance;
+  GdkEventCrossing _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventCrossing
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_crossing.EventCrossing");
 
-    cInstance = *cast(GdkEventCrossing*)ptr;
+    _cInstance = *cast(GdkEventCrossing*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventCrossing
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -208,10 +208,10 @@ class EventCrossing
   /**
       Get `mode` field.
       Returns: the crossing mode ([gdk.types.CrossingMode.Normal], [gdk.types.CrossingMode.Grab],
-       [gdk.types.CrossingMode.Ungrab], [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab] or
-       [gdk.types.CrossingMode.StateChanged]).  [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab],
-       and [gdk.types.CrossingMode.StateChanged] were added in 2.14 and are always synthesized,
-       never native.
+         [gdk.types.CrossingMode.Ungrab], [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab] or
+         [gdk.types.CrossingMode.StateChanged]).  [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab],
+         and [gdk.types.CrossingMode.StateChanged] were added in 2.14 and are always synthesized,
+         never native.
   */
   @property gdk.types.CrossingMode mode()
   {
@@ -222,10 +222,10 @@ class EventCrossing
       Set `mode` field.
       Params:
         propval = the crossing mode ([gdk.types.CrossingMode.Normal], [gdk.types.CrossingMode.Grab],
-         [gdk.types.CrossingMode.Ungrab], [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab] or
-         [gdk.types.CrossingMode.StateChanged]).  [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab],
-         and [gdk.types.CrossingMode.StateChanged] were added in 2.14 and are always synthesized,
-         never native.
+           [gdk.types.CrossingMode.Ungrab], [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab] or
+           [gdk.types.CrossingMode.StateChanged]).  [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab],
+           and [gdk.types.CrossingMode.StateChanged] were added in 2.14 and are always synthesized,
+           never native.
   */
   @property void mode(gdk.types.CrossingMode propval)
   {
@@ -235,8 +235,8 @@ class EventCrossing
   /**
       Get `detail` field.
       Returns: the kind of crossing that happened ([gdk.types.NotifyType.Inferior],
-       [gdk.types.NotifyType.Ancestor], [gdk.types.NotifyType.Virtual], [gdk.types.NotifyType.Nonlinear] or
-       [gdk.types.NotifyType.NonlinearVirtual]).
+         [gdk.types.NotifyType.Ancestor], [gdk.types.NotifyType.Virtual], [gdk.types.NotifyType.Nonlinear] or
+         [gdk.types.NotifyType.NonlinearVirtual]).
   */
   @property gdk.types.NotifyType detail()
   {
@@ -247,8 +247,8 @@ class EventCrossing
       Set `detail` field.
       Params:
         propval = the kind of crossing that happened ([gdk.types.NotifyType.Inferior],
-         [gdk.types.NotifyType.Ancestor], [gdk.types.NotifyType.Virtual], [gdk.types.NotifyType.Nonlinear] or
-         [gdk.types.NotifyType.NonlinearVirtual]).
+           [gdk.types.NotifyType.Ancestor], [gdk.types.NotifyType.Virtual], [gdk.types.NotifyType.Nonlinear] or
+           [gdk.types.NotifyType.NonlinearVirtual]).
   */
   @property void detail(gdk.types.NotifyType propval)
   {
@@ -277,8 +277,8 @@ class EventCrossing
   /**
       Get `state` field.
       Returns: a bit-mask representing the state of
-        the modifier keys (e.g. Control, Shift and Alt) and the pointer
-        buttons. See #GdkModifierType.
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
   */
   @property gdk.types.ModifierType state()
   {
@@ -289,8 +289,8 @@ class EventCrossing
       Set `state` field.
       Params:
         propval = a bit-mask representing the state of
-          the modifier keys (e.g. Control, Shift and Alt) and the pointer
-          buttons. See #GdkModifierType.
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
   */
   @property void state(gdk.types.ModifierType propval)
   {

@@ -262,7 +262,6 @@ class DrawingArea : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
     }
     auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
-
     auto _drawFunc = drawFunc ? freezeDelegate(cast(void*)&drawFunc) : null;
     GDestroyNotify _drawFuncDestroyCB = drawFunc ? &thawDelegate : null;
     gtk_drawing_area_set_draw_func(cast(GtkDrawingArea*)this._cPtr, _drawFuncCB, _drawFunc, _drawFuncDestroyCB);
@@ -272,10 +271,10 @@ class DrawingArea : gtk.widget.Widget
       Connect to `Resize` signal.
   
       Emitted once when the widget is realized, and then each time the widget
-      is changed while realized.
-      
-      This is useful in order to keep state up to date with the widget size,
-      like for instance a backing surface.
+        is changed while realized.
+        
+        This is useful in order to keep state up to date with the widget size,
+        like for instance a backing surface.
   
       Params:
         callback = signal callback delegate or function to connect

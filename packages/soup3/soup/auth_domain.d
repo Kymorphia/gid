@@ -298,13 +298,15 @@ class AuthDomain : gobject.object.ObjectWrap
   {
     extern(C) gboolean _filterCallback(SoupAuthDomain* domain, SoupServerMessage* msg, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(soup.types.AuthDomainFilter*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
-
     auto _filter = filter ? freezeDelegate(cast(void*)&filter) : null;
     GDestroyNotify _filterDestroyCB = filter ? &thawDelegate : null;
     soup_auth_domain_set_filter(cast(SoupAuthDomain*)this._cPtr, _filterCB, _filter, _filterDestroyCB);
@@ -326,14 +328,16 @@ class AuthDomain : gobject.object.ObjectWrap
   {
     extern(C) gboolean _authCallbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(soup.types.AuthDomainGenericAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _authCallbackCB = authCallback ? &_authCallbackCallback : null;
-
     auto _authCallback = authCallback ? freezeDelegate(cast(void*)&authCallback) : null;
     GDestroyNotify _authCallbackDestroyCB = authCallback ? &thawDelegate : null;
     soup_auth_domain_set_generic_auth_callback(cast(SoupAuthDomain*)this._cPtr, _authCallbackCB, _authCallback, _authCallbackDestroyCB);

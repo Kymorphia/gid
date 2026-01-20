@@ -48,9 +48,9 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   /**
       Get `enabled` property.
       Returns: If @action is currently enabled.
-      
-      If the action is disabled then calls to [gio.action.Action.activate] and
-      [gio.action.Action.changeState] have no effect.
+        
+        If the action is disabled then calls to [gio.action.Action.activate] and
+        [gio.action.Action.changeState] have no effect.
   */
   @property bool enabled()
   {
@@ -61,9 +61,9 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Set `enabled` property.
       Params:
         propval = If @action is currently enabled.
-        
-        If the action is disabled then calls to [gio.action.Action.activate] and
-        [gio.action.Action.changeState] have no effect.
+          
+          If the action is disabled then calls to [gio.action.Action.activate] and
+          [gio.action.Action.changeState] have no effect.
   */
   @property void enabled(bool propval)
   {
@@ -92,7 +92,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   /**
       Get `stateType` property.
       Returns: The #GVariantType of the state that the action has, or null if the
-      action is stateless.
+        action is stateless.
   */
   @property glib.variant_type.VariantType stateType()
   {
@@ -200,18 +200,18 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Connect to `Activate` signal.
   
       Indicates that the action was just activated.
-      
-      parameter will always be of the expected type, i.e. the parameter type
-      specified when the action was created. If an incorrect type is given when
-      activating the action, this signal is not emitted.
-      
-      Since GLib 2.40, if no handler is connected to this signal then the
-      default behaviour for boolean-stated actions with a null parameter
-      type is to toggle them via the #GSimpleAction::change-state signal.
-      For stateful actions where the state type is equal to the parameter
-      type, the default is to forward them directly to
-      #GSimpleAction::change-state.  This should allow almost all users
-      of #GSimpleAction to connect only one handler or the other.
+        
+        parameter will always be of the expected type, i.e. the parameter type
+        specified when the action was created. If an incorrect type is given when
+        activating the action, this signal is not emitted.
+        
+        Since GLib 2.40, if no handler is connected to this signal then the
+        default behaviour for boolean-stated actions with a null parameter
+        type is to toggle them via the #GSimpleAction::change-state signal.
+        For stateful actions where the state type is equal to the parameter
+        type, the default is to forward them directly to
+        #GSimpleAction::change-state.  This should allow almost all users
+        of #GSimpleAction to connect only one handler or the other.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -219,7 +219,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
           $(D void callback(glib.variant.Variant parameter, gio.simple_action.SimpleAction simpleAction))
   
           `parameter` the parameter to the activation, or null if it has
-            no parameter (optional)
+              no parameter (optional)
   
           `simpleAction` the instance the signal is connected to (optional)
   
@@ -257,38 +257,38 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Connect to `ChangeState` signal.
   
       Indicates that the action just received a request to change its
-      state.
-      
-      value will always be of the correct state type, i.e. the type of the
-      initial state passed to [gio.simple_action.SimpleAction.newStateful]. If an incorrect
-      type is given when requesting to change the state, this signal is not
-      emitted.
-      
-      If no handler is connected to this signal then the default
-      behaviour is to call [gio.simple_action.SimpleAction.setState] to set the state
-      to the requested value. If you connect a signal handler then no
-      default action is taken. If the state should change then you must
-      call [gio.simple_action.SimpleAction.setState] from the handler.
-      
-      An example of a 'change-state' handler:
-      ```c
-      static void
-      change_volume_state (GSimpleAction *action,
-                           GVariant      *value,
-                           gpointer       user_data)
-      {
-        gint requested;
-      
-        requested = g_variant_get_int32 (value);
-      
-        // Volume only goes from 0 to 10
-        if (0 <= requested && requested <= 10)
-          g_simple_action_set_state (action, value);
-      }
-      ```
-      
-      The handler need not set the state to the requested value.
-      It could set it to any value at all, or take some other action.
+        state.
+        
+        value will always be of the correct state type, i.e. the type of the
+        initial state passed to [gio.simple_action.SimpleAction.newStateful]. If an incorrect
+        type is given when requesting to change the state, this signal is not
+        emitted.
+        
+        If no handler is connected to this signal then the default
+        behaviour is to call [gio.simple_action.SimpleAction.setState] to set the state
+        to the requested value. If you connect a signal handler then no
+        default action is taken. If the state should change then you must
+        call [gio.simple_action.SimpleAction.setState] from the handler.
+        
+        An example of a 'change-state' handler:
+        ```c
+        static void
+        change_volume_state (GSimpleAction *action,
+                             GVariant      *value,
+                             gpointer       user_data)
+        {
+          gint requested;
+        
+          requested = g_variant_get_int32 (value);
+        
+          // Volume only goes from 0 to 10
+          if (0 <= requested && requested <= 10)
+            g_simple_action_set_state (action, value);
+        }
+        ```
+        
+        The handler need not set the state to the requested value.
+        It could set it to any value at all, or take some other action.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -83,7 +83,7 @@ class MountOperation : gobject.object.ObjectWrap
   /**
       Get `choice` property.
       Returns: The index of the user's choice when a question is asked during the
-      mount operation. See the #GMountOperation::ask-question signal.
+        mount operation. See the #GMountOperation::ask-question signal.
   */
   @property int choice()
   {
@@ -94,7 +94,7 @@ class MountOperation : gobject.object.ObjectWrap
       Set `choice` property.
       Params:
         propval = The index of the user's choice when a question is asked during the
-        mount operation. See the #GMountOperation::ask-question signal.
+          mount operation. See the #GMountOperation::ask-question signal.
   */
   @property void choice(int propval)
   {
@@ -123,7 +123,7 @@ class MountOperation : gobject.object.ObjectWrap
   /**
       Get `isTcryptHiddenVolume` property.
       Returns: Whether the device to be unlocked is a TCRYPT hidden volume.
-      See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
+        See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
   */
   @property bool isTcryptHiddenVolume()
   {
@@ -134,7 +134,7 @@ class MountOperation : gobject.object.ObjectWrap
       Set `isTcryptHiddenVolume` property.
       Params:
         propval = Whether the device to be unlocked is a TCRYPT hidden volume.
-        See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
+          See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
   */
   @property void isTcryptHiddenVolume(bool propval)
   {
@@ -144,10 +144,10 @@ class MountOperation : gobject.object.ObjectWrap
   /**
       Get `isTcryptSystemVolume` property.
       Returns: Whether the device to be unlocked is a TCRYPT system volume.
-      In this context, a system volume is a volume with a bootloader
-      and operating system installed. This is only supported for Windows
-      operating systems. For further documentation, see
-      [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
+        In this context, a system volume is a volume with a bootloader
+        and operating system installed. This is only supported for Windows
+        operating systems. For further documentation, see
+        [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
   */
   @property bool isTcryptSystemVolume()
   {
@@ -158,10 +158,10 @@ class MountOperation : gobject.object.ObjectWrap
       Set `isTcryptSystemVolume` property.
       Params:
         propval = Whether the device to be unlocked is a TCRYPT system volume.
-        In this context, a system volume is a volume with a bootloader
-        and operating system installed. This is only supported for Windows
-        operating systems. For further documentation, see
-        [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
+          In this context, a system volume is a volume with a bootloader
+          and operating system installed. This is only supported for Windows
+          operating systems. For further documentation, see
+          [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
   */
   @property void isTcryptSystemVolume(bool propval)
   {
@@ -171,7 +171,7 @@ class MountOperation : gobject.object.ObjectWrap
   /**
       Get `password` property.
       Returns: The password that is used for authentication when carrying out
-      the mount operation.
+        the mount operation.
   */
   @property string password()
   {
@@ -182,7 +182,7 @@ class MountOperation : gobject.object.ObjectWrap
       Set `password` property.
       Params:
         propval = The password that is used for authentication when carrying out
-        the mount operation.
+          the mount operation.
   */
   @property void password(string propval)
   {
@@ -211,7 +211,7 @@ class MountOperation : gobject.object.ObjectWrap
   /**
       Get `pim` property.
       Returns: The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
-      [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
+        [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
   */
   @property uint pim()
   {
@@ -222,7 +222,7 @@ class MountOperation : gobject.object.ObjectWrap
       Set `pim` property.
       Params:
         propval = The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
-        [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
+          [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
   */
   @property void pim(uint propval)
   {
@@ -232,7 +232,7 @@ class MountOperation : gobject.object.ObjectWrap
   /**
       Get `username` property.
       Returns: The user name that is used for authentication when carrying out
-      the mount operation.
+        the mount operation.
   */
   @property string username()
   {
@@ -243,7 +243,7 @@ class MountOperation : gobject.object.ObjectWrap
       Set `username` property.
       Params:
         propval = The user name that is used for authentication when carrying out
-        the mount operation.
+          the mount operation.
   */
   @property void username(string propval)
   {
@@ -485,10 +485,10 @@ class MountOperation : gobject.object.ObjectWrap
       Connect to `Aborted` signal.
   
       Emitted by the backend when e.g. a device becomes unavailable
-      while a mount operation is in progress.
-      
-      Implementations of GMountOperation should handle this signal
-      by dismissing open password dialogs.
+        while a mount operation is in progress.
+        
+        Implementations of GMountOperation should handle this signal
+        by dismissing open password dialogs.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -526,10 +526,10 @@ class MountOperation : gobject.object.ObjectWrap
       Connect to `AskPassword` signal.
   
       Emitted when a mount operation asks the user for a password.
-      
-      If the message contains a line break, the first line should be
-      presented as a heading. For example, it may be used as the
-      primary text in a #GtkMessageDialog.
+        
+        If the message contains a line break, the first line should be
+        presented as a heading. For example, it may be used as the
+        primary text in a #GtkMessageDialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -595,11 +595,11 @@ class MountOperation : gobject.object.ObjectWrap
       Connect to `AskQuestion` signal.
   
       Emitted when asking the user a question and gives a list of
-      choices for the user to choose from.
-      
-      If the message contains a line break, the first line should be
-      presented as a heading. For example, it may be used as the
-      primary text in a #GtkMessageDialog.
+        choices for the user to choose from.
+        
+        If the message contains a line break, the first line should be
+        presented as a heading. For example, it may be used as the
+        primary text in a #GtkMessageDialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -704,17 +704,17 @@ class MountOperation : gobject.object.ObjectWrap
       Connect to `ShowProcesses` signal.
   
       Emitted when one or more processes are blocking an operation
-      e.g. unmounting/ejecting a #GMount or stopping a #GDrive.
-      
-      Note that this signal may be emitted several times to update the
-      list of blocking processes as processes close files. The
-      application should only respond with [gio.mount_operation.MountOperation.reply] to
-      the latest signal (setting #GMountOperation:choice to the choice
-      the user made).
-      
-      If the message contains a line break, the first line should be
-      presented as a heading. For example, it may be used as the
-      primary text in a #GtkMessageDialog.
+        e.g. unmounting/ejecting a #GMount or stopping a #GDrive.
+        
+        Note that this signal may be emitted several times to update the
+        list of blocking processes as processes close files. The
+        application should only respond with [gio.mount_operation.MountOperation.reply] to
+        the latest signal (setting #GMountOperation:choice to the choice
+        the user made).
+        
+        If the message contains a line break, the first line should be
+        presented as a heading. For example, it may be used as the
+        primary text in a #GtkMessageDialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -724,7 +724,7 @@ class MountOperation : gobject.object.ObjectWrap
           `message` string containing a message to display to the user. (optional)
   
           `processes` an array of #GPid for processes
-            blocking the operation. (optional)
+              blocking the operation. (optional)
   
           `choices` an array of strings for each possible choice. (optional)
   
@@ -782,21 +782,21 @@ class MountOperation : gobject.object.ObjectWrap
       Connect to `ShowUnmountProgress` signal.
   
       Emitted when an unmount operation has been busy for more than some time
-      (typically 1.5 seconds).
-      
-      When unmounting or ejecting a volume, the kernel might need to flush
-      pending data in its buffers to the volume stable storage, and this operation
-      can take a considerable amount of time. This signal may be emitted several
-      times as long as the unmount operation is outstanding, and then one
-      last time when the operation is completed, with bytes_left set to zero.
-      
-      Implementations of GMountOperation should handle this signal by
-      showing an UI notification, and then dismiss it, or show another notification
-      of completion, when bytes_left reaches zero.
-      
-      If the message contains a line break, the first line should be
-      presented as a heading. For example, it may be used as the
-      primary text in a #GtkMessageDialog.
+        (typically 1.5 seconds).
+        
+        When unmounting or ejecting a volume, the kernel might need to flush
+        pending data in its buffers to the volume stable storage, and this operation
+        can take a considerable amount of time. This signal may be emitted several
+        times as long as the unmount operation is outstanding, and then one
+        last time when the operation is completed, with bytes_left set to zero.
+        
+        Implementations of GMountOperation should handle this signal by
+        showing an UI notification, and then dismiss it, or show another notification
+        of completion, when bytes_left reaches zero.
+        
+        If the message contains a line break, the first line should be
+        presented as a heading. For example, it may be used as the
+        primary text in a #GtkMessageDialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -806,11 +806,11 @@ class MountOperation : gobject.object.ObjectWrap
           `message` string containing a message to display to the user (optional)
   
           `timeLeft` the estimated time left before the operation completes,
-              in microseconds, or -1 (optional)
+                in microseconds, or -1 (optional)
   
           `bytesLeft` the amount of bytes to be written before the operation
-              completes (or -1 if such amount is not known), or zero if the operation
-              is completed (optional)
+                completes (or -1 if such amount is not known), or zero if the operation
+                is completed (optional)
   
           `mountOperation` the instance the signal is connected to (optional)
   

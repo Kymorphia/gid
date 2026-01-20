@@ -219,8 +219,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `animateTransitions` property.
       Returns: Whether to animate page transitions.
-      
-      Gesture-based transitions are always animated.
+        
+        Gesture-based transitions are always animated.
   */
   @property bool animateTransitions()
   {
@@ -231,8 +231,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `animateTransitions` property.
       Params:
         propval = Whether to animate page transitions.
-        
-        Gesture-based transitions are always animated.
+          
+          Gesture-based transitions are always animated.
   */
   @property void animateTransitions(bool propval)
   {
@@ -242,10 +242,10 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `navigationStack` property.
       Returns: A list model that contains the pages in navigation stack.
-      
-      The pages are sorted from root page to visible page.
-      
-      This can be used to keep an up-to-date view.
+        
+        The pages are sorted from root page to visible page.
+        
+        This can be used to keep an up-to-date view.
   */
   @property gio.list_model.ListModel navigationStack()
   {
@@ -255,9 +255,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Get `popOnEscape` property.
       Returns: Whether pressing Escape pops the current page.
-      
-      Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
-      disable it.
+        
+        Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
+        disable it.
   */
   @property bool popOnEscape()
   {
@@ -268,9 +268,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Set `popOnEscape` property.
       Params:
         propval = Whether pressing Escape pops the current page.
-        
-        Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
-        disable it.
+          
+          Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
+          disable it.
   */
   @property void popOnEscape(bool propval)
   {
@@ -558,6 +558,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     foreach (obj; pages)
       _tmppages ~= obj ? cast(AdwNavigationPage*)obj._cPtr : null;
     AdwNavigationPage** _pages = cast(AdwNavigationPage**)_tmppages.ptr;
+
     adw_navigation_view_replace(cast(AdwNavigationView*)this._cPtr, _pages, _nPages);
   }
 
@@ -592,6 +593,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     foreach (s; tags)
       _tmptags ~= s.toCString(No.Alloc);
     const(char*)* _tags = _tmptags.ptr;
+
     adw_navigation_view_replace_with_tags(cast(AdwNavigationView*)this._cPtr, _tags, _nTags);
   }
 
@@ -626,16 +628,16 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Connect to `GetNextPage` signal.
   
       Emitted when a push shortcut or a gesture is triggered.
-      
-      To support the push shortcuts and gestures, the application is expected to
-      return the page to push in the handler.
-      
-      This signal can be emitted multiple times for the gestures, for example
-      when the gesture is cancelled by the user. As such, the application must
-      not make any irreversible changes in the handler, such as removing the page
-      from a forward stack.
-      
-      Instead, it should be done in the `signalNavigationView::pushed` handler.
+        
+        To support the push shortcuts and gestures, the application is expected to
+        return the page to push in the handler.
+        
+        This signal can be emitted multiple times for the gestures, for example
+        when the gesture is cancelled by the user. As such, the application must
+        not make any irreversible changes in the handler, such as removing the page
+        from a forward stack.
+        
+        Instead, it should be done in the `signalNavigationView::pushed` handler.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -675,12 +677,12 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Connect to `Popped` signal.
   
       Emitted after page has been popped from the navigation stack.
-      
-      See [adw.navigation_view.NavigationView.pop].
-      
-      When using [adw.navigation_view.NavigationView.popToPage] or
-      [adw.navigation_view.NavigationView.popToTag], this signal is emitted for each of the
-      popped pages.
+        
+        See [adw.navigation_view.NavigationView.pop].
+        
+        When using [adw.navigation_view.NavigationView.popToPage] or
+        [adw.navigation_view.NavigationView.popToTag], this signal is emitted for each of the
+        popped pages.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -725,8 +727,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Connect to `Pushed` signal.
   
       Emitted after a page has been pushed to the navigation stack.
-      
-      See [adw.navigation_view.NavigationView.push].
+        
+        See [adw.navigation_view.NavigationView.push].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -764,8 +766,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Connect to `Replaced` signal.
   
       Emitted after the navigation stack has been replaced.
-      
-      See [adw.navigation_view.NavigationView.replace].
+        
+        See [adw.navigation_view.NavigationView.replace].
   
       Params:
         callback = signal callback delegate or function to connect

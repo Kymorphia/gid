@@ -13,7 +13,7 @@ import gstaudio.types;
 */
 class AudioResampler
 {
-  GstAudioResampler* cInstancePtr;
+  GstAudioResampler* _cInstancePtr;
   bool owned;
 
   /** */
@@ -22,7 +22,7 @@ class AudioResampler
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_resampler.AudioResampler");
 
-    cInstancePtr = cast(GstAudioResampler*)ptr;
+    _cInstancePtr = cast(GstAudioResampler*)ptr;
 
     owned = take;
   }
@@ -30,7 +30,7 @@ class AudioResampler
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -104,7 +104,7 @@ class AudioResampler
   bool update(int inRate, int outRate, gst.structure.Structure options)
   {
     bool _retval;
-    _retval = cast(bool)gst_audio_resampler_update(cast(GstAudioResampler*)this._cPtr, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_audio_resampler_update(cast(GstAudioResampler*)this._cPtr, inRate, outRate, cast(GstStructure*)&options);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class AudioResampler
   static gstaudio.audio_resampler.AudioResampler new_(gstaudio.types.AudioResamplerMethod method, gstaudio.types.AudioResamplerFlags flags, gstaudio.types.AudioFormat format, int channels, int inRate, int outRate, gst.structure.Structure options)
   {
     GstAudioResampler* _cretval;
-    _cretval = gst_audio_resampler_new(method, flags, format, channels, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
+    _cretval = gst_audio_resampler_new(method, flags, format, channels, inRate, outRate, cast(GstStructure*)&options);
     auto _retval = _cretval ? new gstaudio.audio_resampler.AudioResampler(cast(GstAudioResampler*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -142,6 +142,6 @@ class AudioResampler
   */
   static void optionsSetQuality(gstaudio.types.AudioResamplerMethod method, uint quality, int inRate, int outRate, gst.structure.Structure options)
   {
-    gst_audio_resampler_options_set_quality(method, quality, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
+    gst_audio_resampler_options_set_quality(method, quality, inRate, outRate, cast(GstStructure*)&options);
   }
 }

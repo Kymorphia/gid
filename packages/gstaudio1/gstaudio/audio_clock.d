@@ -58,13 +58,15 @@ class AudioClock : gst.system_clock.SystemClock
   {
     extern(C) GstClockTime _funcCallback(GstClock* clock, void* userData)
     {
+      gst.types.ClockTime _dretval;
       auto _dlg = cast(gstaudio.types.AudioClockGetTimeFunc*)userData;
 
-      GstClockTime _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
+      auto _retval = cast(GstClockTime)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     GstClock* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;

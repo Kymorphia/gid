@@ -60,11 +60,11 @@ class Misc : gtk.widget.Widget
   /**
       Get `xalign` property.
       Returns: The horizontal alignment. A value of 0.0 means left alignment (or right
-      on RTL locales); a value of 1.0 means right alignment (or left on RTL
-      locales).
+        on RTL locales); a value of 1.0 means right alignment (or left on RTL
+        locales).
   
       Deprecated: Use [gtk.widget.Widget.setHalign] instead. If you are using
-        #GtkLabel, use #GtkLabel:xalign instead.
+          #GtkLabel, use #GtkLabel:xalign instead.
   */
   @property float xalign()
   {
@@ -75,11 +75,11 @@ class Misc : gtk.widget.Widget
       Set `xalign` property.
       Params:
         propval = The horizontal alignment. A value of 0.0 means left alignment (or right
-        on RTL locales); a value of 1.0 means right alignment (or left on RTL
-        locales).
+          on RTL locales); a value of 1.0 means right alignment (or left on RTL
+          locales).
   
       Deprecated: Use [gtk.widget.Widget.setHalign] instead. If you are using
-        #GtkLabel, use #GtkLabel:xalign instead.
+          #GtkLabel, use #GtkLabel:xalign instead.
   */
   @property void xalign(float propval)
   {
@@ -89,10 +89,10 @@ class Misc : gtk.widget.Widget
   /**
       Get `xpad` property.
       Returns: The amount of space to add on the left and right of the widget, in
-      pixels.
+        pixels.
   
       Deprecated: Use [gtk.widget.Widget.setMarginStart] and
-        [gtk.widget.Widget.setMarginEnd] instead
+          [gtk.widget.Widget.setMarginEnd] instead
   */
   @property int xpad()
   {
@@ -103,10 +103,10 @@ class Misc : gtk.widget.Widget
       Set `xpad` property.
       Params:
         propval = The amount of space to add on the left and right of the widget, in
-        pixels.
+          pixels.
   
       Deprecated: Use [gtk.widget.Widget.setMarginStart] and
-        [gtk.widget.Widget.setMarginEnd] instead
+          [gtk.widget.Widget.setMarginEnd] instead
   */
   @property void xpad(int propval)
   {
@@ -116,10 +116,10 @@ class Misc : gtk.widget.Widget
   /**
       Get `yalign` property.
       Returns: The vertical alignment. A value of 0.0 means top alignment;
-      a value of 1.0 means bottom alignment.
+        a value of 1.0 means bottom alignment.
   
       Deprecated: Use [gtk.widget.Widget.setValign] instead. If you are using
-        #GtkLabel, use #GtkLabel:yalign instead.
+          #GtkLabel, use #GtkLabel:yalign instead.
   */
   @property float yalign()
   {
@@ -130,10 +130,10 @@ class Misc : gtk.widget.Widget
       Set `yalign` property.
       Params:
         propval = The vertical alignment. A value of 0.0 means top alignment;
-        a value of 1.0 means bottom alignment.
+          a value of 1.0 means bottom alignment.
   
       Deprecated: Use [gtk.widget.Widget.setValign] instead. If you are using
-        #GtkLabel, use #GtkLabel:yalign instead.
+          #GtkLabel, use #GtkLabel:yalign instead.
   */
   @property void yalign(float propval)
   {
@@ -143,10 +143,10 @@ class Misc : gtk.widget.Widget
   /**
       Get `ypad` property.
       Returns: The amount of space to add on the top and bottom of the widget, in
-      pixels.
+        pixels.
   
       Deprecated: Use [gtk.widget.Widget.setMarginTop] and
-        [gtk.widget.Widget.setMarginBottom] instead
+          [gtk.widget.Widget.setMarginBottom] instead
   */
   @property int ypad()
   {
@@ -157,10 +157,10 @@ class Misc : gtk.widget.Widget
       Set `ypad` property.
       Params:
         propval = The amount of space to add on the top and bottom of the widget, in
-        pixels.
+          pixels.
   
       Deprecated: Use [gtk.widget.Widget.setMarginTop] and
-        [gtk.widget.Widget.setMarginBottom] instead
+          [gtk.widget.Widget.setMarginBottom] instead
   */
   @property void ypad(int propval)
   {

@@ -33,7 +33,7 @@ import glib.types;
 */
 class StringChunk
 {
-  GStringChunk* cInstancePtr;
+  GStringChunk* _cInstancePtr;
   bool owned;
 
   /** */
@@ -42,7 +42,7 @@ class StringChunk
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.string_chunk.StringChunk");
 
-    cInstancePtr = cast(GStringChunk*)ptr;
+    _cInstancePtr = cast(GStringChunk*)ptr;
 
     owned = take;
   }
@@ -50,13 +50,13 @@ class StringChunk
   ~this()
   {
     if (owned)
-      g_string_chunk_free(cInstancePtr);
+      g_string_chunk_free(_cInstancePtr);
   }
 
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

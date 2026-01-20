@@ -77,7 +77,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `defaultText` property.
       Returns: The text that appears in the widget when there are no applications
-      for the given content type.
+        for the given content type.
   */
   @property string defaultText()
   {
@@ -88,7 +88,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `defaultText` property.
       Params:
         propval = The text that appears in the widget when there are no applications
-        for the given content type.
+          for the given content type.
   */
   @property void defaultText(string propval)
   {
@@ -98,8 +98,8 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `showAll` property.
       Returns: If true, the app chooser presents all applications
-      in a single list, without subsections for default,
-      recommended or related applications.
+        in a single list, without subsections for default,
+        recommended or related applications.
   */
   @property bool showAll()
   {
@@ -110,8 +110,8 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `showAll` property.
       Params:
         propval = If true, the app chooser presents all applications
-        in a single list, without subsections for default,
-        recommended or related applications.
+          in a single list, without subsections for default,
+          recommended or related applications.
   */
   @property void showAll(bool propval)
   {
@@ -121,10 +121,10 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `showDefault` property.
       Returns: Determines whether the app chooser should show the default
-      handler for the content type in a separate section.
-      
-      If false, the default handler is listed among the recommended
-      applications.
+        handler for the content type in a separate section.
+        
+        If false, the default handler is listed among the recommended
+        applications.
   */
   @property bool showDefault()
   {
@@ -135,10 +135,10 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `showDefault` property.
       Params:
         propval = Determines whether the app chooser should show the default
-        handler for the content type in a separate section.
-        
-        If false, the default handler is listed among the recommended
-        applications.
+          handler for the content type in a separate section.
+          
+          If false, the default handler is listed among the recommended
+          applications.
   */
   @property void showDefault(bool propval)
   {
@@ -148,10 +148,10 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `showFallback` property.
       Returns: Determines whether the app chooser should show a section
-      for fallback applications.
-      
-      If false, the fallback applications are listed among the
-      other applications.
+        for fallback applications.
+        
+        If false, the fallback applications are listed among the
+        other applications.
   */
   @property bool showFallback()
   {
@@ -162,10 +162,10 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `showFallback` property.
       Params:
         propval = Determines whether the app chooser should show a section
-        for fallback applications.
-        
-        If false, the fallback applications are listed among the
-        other applications.
+          for fallback applications.
+          
+          If false, the fallback applications are listed among the
+          other applications.
   */
   @property void showFallback(bool propval)
   {
@@ -175,7 +175,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `showOther` property.
       Returns: Determines whether the app chooser should show a section
-      for other applications.
+        for other applications.
   */
   @property bool showOther()
   {
@@ -186,7 +186,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `showOther` property.
       Params:
         propval = Determines whether the app chooser should show a section
-        for other applications.
+          for other applications.
   */
   @property void showOther(bool propval)
   {
@@ -196,10 +196,10 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Get `showRecommended` property.
       Returns: Determines whether the app chooser should show a section
-      for recommended applications.
-      
-      If false, the recommended applications are listed
-      among the other applications.
+        for recommended applications.
+        
+        If false, the recommended applications are listed
+        among the other applications.
   */
   @property bool showRecommended()
   {
@@ -210,10 +210,10 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Set `showRecommended` property.
       Params:
         propval = Determines whether the app chooser should show a section
-        for recommended applications.
-        
-        If false, the recommended applications are listed
-        among the other applications.
+          for recommended applications.
+          
+          If false, the recommended applications are listed
+          among the other applications.
   */
   @property void showRecommended(bool propval)
   {
@@ -414,10 +414,10 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Connect to `ApplicationActivated` signal.
   
       Emitted when an application item is activated from the widget's list.
-      
-      This usually happens when the user double clicks an item, or an item
-      is selected and the user presses one of the keys Space, Shift+Space,
-      Return or Enter.
+        
+        This usually happens when the user double clicks an item, or an item
+        is selected and the user presses one of the keys Space, Shift+Space,
+        Return or Enter.
   
       Params:
         callback = signal callback delegate or function to connect

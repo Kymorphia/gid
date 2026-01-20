@@ -76,7 +76,7 @@ class Promise : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -107,6 +107,16 @@ class Promise : gobject.boxed.Boxed
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstPromise*)this._cPtr).parent);
   }
 
+  /**
+      Set `parent` field.
+      Params:
+        propval = parent #GstMiniObject
+  */
+  @property void parent(gst.mini_object.MiniObject propval)
+  {
+    (cast(GstPromise*)this._cPtr).parent = cast(GstMiniObject)propval;
+  }
+
   /** */
   this()
   {
@@ -133,7 +143,6 @@ class Promise : gobject.boxed.Boxed
       (*_dlg)(promise ? new gst.promise.Promise(cast(void*)promise, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     GstPromise* _cretval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -161,7 +170,9 @@ class Promise : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_promise_get_reply(cast(GstPromise*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -186,9 +197,9 @@ class Promise : gobject.boxed.Boxed
       Params:
         s = a #GstStructure with the the reply contents
   */
-  void reply(gst.structure.Structure s = null)
+  void reply(gst.structure.Structure s)
   {
-    gst_promise_reply(cast(GstPromise*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
+    gst_promise_reply(cast(GstPromise*)this._cPtr, cast(GstStructure*)&s);
   }
 
   /**

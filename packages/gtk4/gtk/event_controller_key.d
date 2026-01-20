@@ -114,10 +114,10 @@ class EventControllerKey : gtk.event_controller.EventController
       Connect to `ImUpdate` signal.
   
       Emitted whenever the input method context filters away
-      a keypress and prevents the controller receiving it.
-      
-      See [gtk.event_controller_key.EventControllerKey.setImContext] and
-      [gtk.imcontext.IMContext.filterKeypress].
+        a keypress and prevents the controller receiving it.
+        
+        See [gtk.event_controller_key.EventControllerKey.setImContext] and
+        [gtk.imcontext.IMContext.filterKeypress].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -280,7 +280,7 @@ class EventControllerKey : gtk.event_controller.EventController
           $(D bool callback(gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey))
   
           `state` the bitmask, representing the new state of modifier keys and
-            pointer buttons. (optional)
+              pointer buttons. (optional)
   
           `eventControllerKey` the instance the signal is connected to (optional)
   

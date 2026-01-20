@@ -150,6 +150,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       _tmpenv ~= s.toCString(No.Alloc);
     _tmpenv ~= null;
     char** _env = _tmpenv.ptr;
+
     g_subprocess_launcher_set_environ(cast(GSubprocessLauncher*)this._cPtr, _env);
   }
 

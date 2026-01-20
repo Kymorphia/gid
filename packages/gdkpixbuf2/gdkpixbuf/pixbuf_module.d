@@ -59,7 +59,7 @@ import gmodule.module_;
 */
 class PixbufModule
 {
-  GdkPixbufModule cInstance;
+  GdkPixbufModule _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -67,7 +67,7 @@ class PixbufModule
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdkpixbuf.pixbuf_module.PixbufModule");
 
-    cInstance = *cast(GdkPixbufModule*)ptr;
+    _cInstance = *cast(GdkPixbufModule*)ptr;
 
     if (take)
       gFree(ptr);
@@ -76,13 +76,13 @@ class PixbufModule
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `moduleName` field.
       Returns: the name of the module, usually the same as the
-       usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
+         usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
   */
   @property string moduleName()
   {
@@ -93,7 +93,7 @@ class PixbufModule
       Set `moduleName` field.
       Params:
         propval = the name of the module, usually the same as the
-         usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
+           usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
   */
   @property void moduleName(string propval)
   {

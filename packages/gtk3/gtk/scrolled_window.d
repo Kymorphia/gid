@@ -149,7 +149,7 @@ class ScrolledWindow : gtk.bin.Bin
   /**
       Get `kineticScrolling` property.
       Returns: Whether kinetic scrolling is enabled or not. Kinetic scrolling
-      only applies to devices with source [gdk.types.InputSource.Touchscreen].
+        only applies to devices with source [gdk.types.InputSource.Touchscreen].
   */
   @property bool kineticScrolling()
   {
@@ -160,7 +160,7 @@ class ScrolledWindow : gtk.bin.Bin
       Set `kineticScrolling` property.
       Params:
         propval = Whether kinetic scrolling is enabled or not. Kinetic scrolling
-        only applies to devices with source [gdk.types.InputSource.Touchscreen].
+          only applies to devices with source [gdk.types.InputSource.Touchscreen].
   */
   @property void kineticScrolling(bool propval)
   {
@@ -246,12 +246,12 @@ class ScrolledWindow : gtk.bin.Bin
   /**
       Get `overlayScrolling` property.
       Returns: Whether overlay scrolling is enabled or not. If it is, the
-      scrollbars are only added as traditional widgets when a mouse
-      is present. Otherwise, they are overlayed on top of the content,
-      as narrow indicators.
-      
-      Note that overlay scrolling can also be globally disabled, with
-      the #GtkSettings::gtk-overlay-scrolling setting.
+        scrollbars are only added as traditional widgets when a mouse
+        is present. Otherwise, they are overlayed on top of the content,
+        as narrow indicators.
+        
+        Note that overlay scrolling can also be globally disabled, with
+        the #GtkSettings::gtk-overlay-scrolling setting.
   */
   @property bool overlayScrolling()
   {
@@ -262,12 +262,12 @@ class ScrolledWindow : gtk.bin.Bin
       Set `overlayScrolling` property.
       Params:
         propval = Whether overlay scrolling is enabled or not. If it is, the
-        scrollbars are only added as traditional widgets when a mouse
-        is present. Otherwise, they are overlayed on top of the content,
-        as narrow indicators.
-        
-        Note that overlay scrolling can also be globally disabled, with
-        the #GtkSettings::gtk-overlay-scrolling setting.
+          scrollbars are only added as traditional widgets when a mouse
+          is present. Otherwise, they are overlayed on top of the content,
+          as narrow indicators.
+          
+          Note that overlay scrolling can also be globally disabled, with
+          the #GtkSettings::gtk-overlay-scrolling setting.
   */
   @property void overlayScrolling(bool propval)
   {
@@ -277,10 +277,10 @@ class ScrolledWindow : gtk.bin.Bin
   /**
       Get `propagateNaturalHeight` property.
       Returns: Whether the natural height of the child should be calculated and propagated
-      through the scrolled window’s requested natural height.
-      
-      This is useful in cases where an attempt should be made to allocate exactly
-      enough space for the natural size of the child.
+        through the scrolled window’s requested natural height.
+        
+        This is useful in cases where an attempt should be made to allocate exactly
+        enough space for the natural size of the child.
   */
   @property bool propagateNaturalHeight()
   {
@@ -291,10 +291,10 @@ class ScrolledWindow : gtk.bin.Bin
       Set `propagateNaturalHeight` property.
       Params:
         propval = Whether the natural height of the child should be calculated and propagated
-        through the scrolled window’s requested natural height.
-        
-        This is useful in cases where an attempt should be made to allocate exactly
-        enough space for the natural size of the child.
+          through the scrolled window’s requested natural height.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
   */
   @property void propagateNaturalHeight(bool propval)
   {
@@ -304,10 +304,10 @@ class ScrolledWindow : gtk.bin.Bin
   /**
       Get `propagateNaturalWidth` property.
       Returns: Whether the natural width of the child should be calculated and propagated
-      through the scrolled window’s requested natural width.
-      
-      This is useful in cases where an attempt should be made to allocate exactly
-      enough space for the natural size of the child.
+        through the scrolled window’s requested natural width.
+        
+        This is useful in cases where an attempt should be made to allocate exactly
+        enough space for the natural size of the child.
   */
   @property bool propagateNaturalWidth()
   {
@@ -318,10 +318,10 @@ class ScrolledWindow : gtk.bin.Bin
       Set `propagateNaturalWidth` property.
       Params:
         propval = Whether the natural width of the child should be calculated and propagated
-        through the scrolled window’s requested natural width.
-        
-        This is useful in cases where an attempt should be made to allocate exactly
-        enough space for the natural size of the child.
+          through the scrolled window’s requested natural width.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
   */
   @property void propagateNaturalWidth(bool propval)
   {
@@ -379,10 +379,10 @@ class ScrolledWindow : gtk.bin.Bin
   /**
       Get `windowPlacementSet` property.
       Returns: Whether "window-placement" should be used to determine the location
-      of the contents with respect to the scrollbars.
+        of the contents with respect to the scrollbars.
   
       Deprecated: This value is ignored and
-      #GtkScrolledWindow:window-placement value is always honored.
+        #GtkScrolledWindow:window-placement value is always honored.
   */
   @property bool windowPlacementSet()
   {
@@ -393,10 +393,10 @@ class ScrolledWindow : gtk.bin.Bin
       Set `windowPlacementSet` property.
       Params:
         propval = Whether "window-placement" should be used to determine the location
-        of the contents with respect to the scrollbars.
+          of the contents with respect to the scrollbars.
   
       Deprecated: This value is ignored and
-      #GtkScrolledWindow:window-placement value is always honored.
+        #GtkScrolledWindow:window-placement value is always honored.
   */
   @property void windowPlacementSet(bool propval)
   {
@@ -872,14 +872,14 @@ class ScrolledWindow : gtk.bin.Bin
       Connect to `EdgeOvershot` signal.
   
       The ::edge-overshot signal is emitted whenever user initiated scrolling
-      makes the scrolled window firmly surpass (i.e. with some edge resistance)
-      the lower or upper limits defined by the adjustment in that orientation.
-      
-      A similar behavior without edge resistance is provided by the
-      #GtkScrolledWindow::edge-reached signal.
-      
-      Note: The pos argument is LTR/RTL aware, so callers should be aware too
-      if intending to provide behavior on horizontal edges.
+        makes the scrolled window firmly surpass (i.e. with some edge resistance)
+        the lower or upper limits defined by the adjustment in that orientation.
+        
+        A similar behavior without edge resistance is provided by the
+        #GtkScrolledWindow::edge-reached signal.
+        
+        Note: The pos argument is LTR/RTL aware, so callers should be aware too
+        if intending to provide behavior on horizontal edges.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -924,14 +924,14 @@ class ScrolledWindow : gtk.bin.Bin
       Connect to `EdgeReached` signal.
   
       The ::edge-reached signal is emitted whenever user-initiated scrolling
-      makes the scrolled window exactly reach the lower or upper limits
-      defined by the adjustment in that orientation.
-      
-      A similar behavior with edge resistance is provided by the
-      #GtkScrolledWindow::edge-overshot signal.
-      
-      Note: The pos argument is LTR/RTL aware, so callers should be aware too
-      if intending to provide behavior on horizontal edges.
+        makes the scrolled window exactly reach the lower or upper limits
+        defined by the adjustment in that orientation.
+        
+        A similar behavior with edge resistance is provided by the
+        #GtkScrolledWindow::edge-overshot signal.
+        
+        Note: The pos argument is LTR/RTL aware, so callers should be aware too
+        if intending to provide behavior on horizontal edges.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -976,12 +976,12 @@ class ScrolledWindow : gtk.bin.Bin
       Connect to `MoveFocusOut` signal.
   
       The ::move-focus-out signal is a
-      [keybinding signal][GtkBindingSignal] which gets
-      emitted when focus is moved away from the scrolled window by a
-      keybinding. The #GtkWidget::move-focus signal is emitted with
-      direction_type on this scrolled window’s toplevel parent in the
-      container hierarchy. The default bindings for this signal are
-      `Ctrl + Tab` to move forward and `Ctrl + Shift + Tab` to move backward.
+        [keybinding signal][GtkBindingSignal] which gets
+        emitted when focus is moved away from the scrolled window by a
+        keybinding. The #GtkWidget::move-focus signal is emitted with
+        direction_type on this scrolled window’s toplevel parent in the
+        container hierarchy. The default bindings for this signal are
+        `Ctrl + Tab` to move forward and `Ctrl + Shift + Tab` to move backward.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -989,7 +989,7 @@ class ScrolledWindow : gtk.bin.Bin
           $(D void callback(gtk.types.DirectionType directionType, gtk.scrolled_window.ScrolledWindow scrolledWindow))
   
           `directionType` either [gtk.types.DirectionType.TabForward] or
-            [gtk.types.DirectionType.TabBackward] (optional)
+              [gtk.types.DirectionType.TabBackward] (optional)
   
           `scrolledWindow` the instance the signal is connected to (optional)
   
@@ -1027,10 +1027,10 @@ class ScrolledWindow : gtk.bin.Bin
       Connect to `ScrollChild` signal.
   
       The ::scroll-child signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when a keybinding that scrolls is pressed.
-      The horizontal or vertical adjustment is updated which triggers a
-      signal that the scrolled window’s child may listen to and scroll itself.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when a keybinding that scrolls is pressed.
+        The horizontal or vertical adjustment is updated which triggers a
+        signal that the scrolled window’s child may listen to and scroll itself.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1040,7 +1040,7 @@ class ScrolledWindow : gtk.bin.Bin
           `scroll` a #GtkScrollType describing how much to scroll (optional)
   
           `horizontal` whether the keybinding scrolls the child
-            horizontally or not (optional)
+              horizontally or not (optional)
   
           `scrolledWindow` the instance the signal is connected to (optional)
   

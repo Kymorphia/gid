@@ -59,6 +59,7 @@ string tagFreeformStringToUtf8(string data, string[] envVars)
     _tmpenvVars ~= s.toCString(No.Alloc);
   _tmpenvVars ~= null;
   const(char*)* _envVars = _tmpenvVars.ptr;
+
   _cretval = gst_tag_freeform_string_to_utf8(_data, _size, _envVars);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -221,8 +222,8 @@ string[] tagGetLanguageCodes()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -388,8 +389,8 @@ string[] tagGetLicenses()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -714,6 +715,7 @@ gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, s
     _tmpschemas ~= s.toCString(No.Alloc);
   _tmpschemas ~= null;
   const(char*)* _schemas = _tmpschemas.ptr;
+
   _cretval = gst_tag_list_to_xmp_buffer(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, readOnly, _schemas);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -826,8 +828,8 @@ string[] tagXmpListSchemas()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);

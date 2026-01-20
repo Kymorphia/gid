@@ -132,15 +132,15 @@ class Sorter : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Emitted whenever the sorter changed.
-      
-      Users of the sorter should then update the sort order
-      again via [gtk.sorter.Sorter.compare].
-      
-      [gtk.sort_list_model.SortListModel] handles this signal automatically.
-      
-      Depending on the change parameter, it may be possible to update
-      the sort order without a full resorting. Refer to the
-      [gtk.types.SorterChange] documentation for details.
+        
+        Users of the sorter should then update the sort order
+        again via [gtk.sorter.Sorter.compare].
+        
+        [gtk.sort_list_model.SortListModel] handles this signal automatically.
+        
+        Depending on the change parameter, it may be possible to update
+        the sort order without a full resorting. Refer to the
+        [gtk.types.SorterChange] documentation for details.
   
       Params:
         callback = signal callback delegate or function to connect

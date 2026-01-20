@@ -123,6 +123,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
+
     _cretval = gtk_scale_button_new(size, min, max, step, _icons);
     this(_cretval, No.Take);
   }
@@ -214,6 +215,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
+
     gtk_scale_button_set_icons(cast(GtkScaleButton*)this._cPtr, _icons);
   }
 
@@ -235,10 +237,10 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Connect to `Popdown` signal.
   
       The ::popdown signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to popdown the scale widget.
-      
-      The default binding for this signal is Escape.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to popdown the scale widget.
+        
+        The default binding for this signal is Escape.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -276,10 +278,10 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Connect to `Popup` signal.
   
       The ::popup signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted to popup the scale widget.
-      
-      The default bindings for this signal are Space, Enter and Return.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted to popup the scale widget.
+        
+        The default bindings for this signal are Space, Enter and Return.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -317,7 +319,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Connect to `ValueChanged` signal.
   
       The ::value-changed signal is emitted when the value field has
-      changed.
+        changed.
   
       Params:
         callback = signal callback delegate or function to connect

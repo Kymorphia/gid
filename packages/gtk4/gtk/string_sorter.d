@@ -49,12 +49,12 @@ class StringSorter : gtk.sorter.Sorter
   /**
       Get `collation` property.
       Returns: The collation method to use for sorting.
-      
-      The [gtk.types.Collation.None] value is useful when the expression already
-      returns collation keys, or strings that need to be compared byte-by-byte.
-      
-      The default value, [gtk.types.Collation.Unicode], compares strings according
-      to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
+        
+        The [gtk.types.Collation.None] value is useful when the expression already
+        returns collation keys, or strings that need to be compared byte-by-byte.
+        
+        The default value, [gtk.types.Collation.Unicode], compares strings according
+        to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
   */
   @property gtk.types.Collation collation()
   {
@@ -65,12 +65,12 @@ class StringSorter : gtk.sorter.Sorter
       Set `collation` property.
       Params:
         propval = The collation method to use for sorting.
-        
-        The [gtk.types.Collation.None] value is useful when the expression already
-        returns collation keys, or strings that need to be compared byte-by-byte.
-        
-        The default value, [gtk.types.Collation.Unicode], compares strings according
-        to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
+          
+          The [gtk.types.Collation.None] value is useful when the expression already
+          returns collation keys, or strings that need to be compared byte-by-byte.
+          
+          The default value, [gtk.types.Collation.Unicode], compares strings according
+          to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
   */
   @property void collation(gtk.types.Collation propval)
   {

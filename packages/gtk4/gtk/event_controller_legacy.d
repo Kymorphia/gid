@@ -70,7 +70,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
           `eventControllerLegacy` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event
-            and the emission of this signal. false to propagate the event further.
+              and the emission of this signal. false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

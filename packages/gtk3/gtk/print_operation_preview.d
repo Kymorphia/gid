@@ -58,11 +58,11 @@ interface PrintOperationPreview
       Connect to `GotPageSize` signal.
   
       The ::got-page-size signal is emitted once for each page
-      that gets rendered to the preview.
-      
-      A handler for this signal should update the context
-      according to page_setup and set up a suitable cairo
-      context, using [gtk.print_context.PrintContext.setCairoContext].
+        that gets rendered to the preview.
+        
+        A handler for this signal should update the context
+        according to page_setup and set up a suitable cairo
+        context, using [gtk.print_context.PrintContext.setCairoContext].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -84,9 +84,9 @@ interface PrintOperationPreview
       Connect to `Ready` signal.
   
       The ::ready signal gets emitted once per preview operation,
-      before the first page is rendered.
-      
-      A handler for this signal can be used for setup tasks.
+        before the first page is rendered.
+        
+        A handler for this signal can be used for setup tasks.
   
       Params:
         callback = signal callback delegate or function to connect

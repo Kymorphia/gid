@@ -3,7 +3,6 @@ module gda.sql_select_from;
 
 import gda.c.functions;
 import gda.c.types;
-import gda.sql_any_part;
 import gda.types;
 import gid.gid;
 
@@ -12,7 +11,7 @@ import gid.gid;
 */
 class SqlSelectFrom
 {
-  GdaSqlSelectFrom cInstance;
+  GdaSqlSelectFrom _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +19,7 @@ class SqlSelectFrom
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_select_from.SqlSelectFrom");
 
-    cInstance = *cast(GdaSqlSelectFrom*)ptr;
+    _cInstance = *cast(GdaSqlSelectFrom*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,16 +28,7 @@ class SqlSelectFrom
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
-  }
-
-  /**
-      Get `any` field.
-      Returns: inheritance structure
-  */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlSelectFrom*)this._cPtr).any, No.Take);
+    return cast(void*)&_cInstance;
   }
 
   /**

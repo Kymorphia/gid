@@ -19,7 +19,7 @@ import gtk.types;
 */
 class BindingSet
 {
-  GtkBindingSet cInstance;
+  GtkBindingSet _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -27,7 +27,7 @@ class BindingSet
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.binding_set.BindingSet");
 
-    cInstance = *cast(GtkBindingSet*)ptr;
+    _cInstance = *cast(GtkBindingSet*)ptr;
 
     if (take)
       gFree(ptr);
@@ -36,7 +36,7 @@ class BindingSet
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

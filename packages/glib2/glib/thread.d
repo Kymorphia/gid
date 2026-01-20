@@ -1,4 +1,4 @@
-/// Module for [Thread] class
+/// Module for [Thread] struct
 module glib.thread;
 
 import gid.gid;
@@ -6,7 +6,6 @@ import glib.c.functions;
 import glib.c.types;
 import glib.error;
 import glib.types;
-import gobject.boxed;
 
 /**
     The #GThread struct represents a running thread. This struct
@@ -23,128 +22,19 @@ import gobject.boxed;
     The structure is opaque -- none of its fields may be directly
     accessed.
 */
-class Thread : gobject.boxed.Boxed
+struct Thread
 {
+  /** */
+  GThreadFunc func;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
+  void* data;
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
+  gboolean joinable;
 
   /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())g_thread_get_type != &gidSymbolNotFound ? g_thread_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Thread self()
-  {
-    return this;
-  }
-
-  /**
-      This function creates a new thread. The new thread starts by invoking
-      func with the argument data. The thread will run until func returns
-      or until [glib.thread.Thread.exit] is called from the new thread. The return value
-      of func becomes the return value of the thread, which can be obtained
-      with [glib.thread.Thread.join].
-      
-      The name can be useful for discriminating threads in a debugger.
-      It is not used for other purposes and does not have to be unique.
-      Some systems restrict the length of name to 16 bytes.
-      
-      If the thread can not be created the program aborts. See
-      [glib.thread.Thread.tryNew] if you want to attempt to deal with failures.
-      
-      If you are using threads to offload (potentially many) short-lived tasks,
-      #GThreadPool may be more appropriate than manually spawning and tracking
-      multiple #GThreads.
-      
-      To free the struct returned by this function, use [glib.thread.Thread.unref].
-      Note that [glib.thread.Thread.join] implicitly unrefs the #GThread as well.
-      
-      New threads by default inherit their scheduler policy (POSIX) or thread
-      priority (Windows) of the thread creating the new thread.
-      
-      This behaviour changed in GLib 2.64: before threads on Windows were not
-      inheriting the thread priority but were spawned with the default priority.
-      Starting with GLib 2.64 the behaviour is now consistent between Windows and
-      POSIX and all threads inherit their parent thread's priority.
-  
-      Params:
-        name = an (optional) name for the new thread
-        func = a function to execute in the new thread
-      Returns: the new #GThread
-  */
-  this(string name, glib.types.ThreadFunc func)
-  {
-    extern(C) void* _funcCallback(void* data)
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.ThreadFunc*)data;
-
-      void* _retval = (*_dlg)();
-      return _retval;
-    }
-    auto _funcCB = func ? &_funcCallback : null;
-
-    GThread* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
-    _cretval = g_thread_new(_name, _funcCB, _func);
-    this(_cretval, Yes.Take);
-  }
-
-  /**
-      This function is the same as [glib.thread.Thread.new_] except that
-      it allows for the possibility of failure.
-      
-      If a thread can not be created (due to resource limits),
-      error is set and null is returned.
-  
-      Params:
-        name = an (optional) name for the new thread
-        func = a function to execute in the new thread
-      Returns: the new #GThread, or null if an error occurred
-      Throws: [ThreadException]
-  */
-  static glib.thread.Thread tryNew(string name, glib.types.ThreadFunc func)
-  {
-    extern(C) void* _funcCallback(void* data)
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.ThreadFunc*)data;
-
-      void* _retval = (*_dlg)();
-      return _retval;
-    }
-    auto _funcCB = func ? &_funcCallback : null;
-
-    GThread* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
-    GError *_err;
-    _cretval = g_thread_try_new(_name, _funcCB, _func, &_err);
-    if (_err)
-      throw new ThreadException(_err);
-    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.Take) : null;
-    return _retval;
-  }
+  ThreadPriority priority;
 
   /**
       Waits until thread finishes, i.e. the function func, as
@@ -167,7 +57,7 @@ class Thread : gobject.boxed.Boxed
   */
   void* join()
   {
-    auto _retval = g_thread_join(cast(GThread*)this._cPtr);
+    auto _retval = g_thread_join(cast(GThread*)&this);
     return _retval;
   }
 
@@ -218,7 +108,9 @@ class Thread : gobject.boxed.Boxed
   {
     GThread* _cretval;
     _cretval = g_thread_self();
-    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, No.Take) : null;
+    glib.thread.Thread _retval;
+    if (_cretval)
+      _retval = *cast(glib.thread.Thread*)_cretval;
     return _retval;
   }
 

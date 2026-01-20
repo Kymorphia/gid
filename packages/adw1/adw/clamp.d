@@ -95,8 +95,8 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `maximumSize` property.
       Returns: The maximum size allocated to the child.
-      
-      It is the width if the clamp is horizontal, or the height if it is vertical.
+        
+        It is the width if the clamp is horizontal, or the height if it is vertical.
   */
   @property int maximumSize()
   {
@@ -107,8 +107,8 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Set `maximumSize` property.
       Params:
         propval = The maximum size allocated to the child.
-        
-        It is the width if the clamp is horizontal, or the height if it is vertical.
+          
+          It is the width if the clamp is horizontal, or the height if it is vertical.
   */
   @property void maximumSize(int propval)
   {
@@ -118,29 +118,6 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `tighteningThreshold` property.
       Returns: The size above which the child is clamped.
-      
-      Starting from this size, the clamp will tighten its grip on the child,
-      slowly allocating less and less of the available size up to the maximum
-      allocated size. Below that threshold and below the maximum size, the child
-      will be allocated all the available size.
-      
-      If the threshold is greater than the maximum size to allocate to the child,
-      the child will be allocated all the size up to the maximum.
-      If the threshold is lower than the minimum size to allocate to the child,
-      that size will be used as the tightening threshold.
-      
-      Effectively, tightening the grip on the child before it reaches its maximum
-      size makes transitions to and from the maximum size smoother when resizing.
-  */
-  @property int tighteningThreshold()
-  {
-    return getTighteningThreshold();
-  }
-
-  /**
-      Set `tighteningThreshold` property.
-      Params:
-        propval = The size above which the child is clamped.
         
         Starting from this size, the clamp will tighten its grip on the child,
         slowly allocating less and less of the available size up to the maximum
@@ -155,6 +132,29 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
         Effectively, tightening the grip on the child before it reaches its maximum
         size makes transitions to and from the maximum size smoother when resizing.
   */
+  @property int tighteningThreshold()
+  {
+    return getTighteningThreshold();
+  }
+
+  /**
+      Set `tighteningThreshold` property.
+      Params:
+        propval = The size above which the child is clamped.
+          
+          Starting from this size, the clamp will tighten its grip on the child,
+          slowly allocating less and less of the available size up to the maximum
+          allocated size. Below that threshold and below the maximum size, the child
+          will be allocated all the available size.
+          
+          If the threshold is greater than the maximum size to allocate to the child,
+          the child will be allocated all the size up to the maximum.
+          If the threshold is lower than the minimum size to allocate to the child,
+          that size will be used as the tightening threshold.
+          
+          Effectively, tightening the grip on the child before it reaches its maximum
+          size makes transitions to and from the maximum size smoother when resizing.
+  */
   @property void tighteningThreshold(int propval)
   {
     return setTighteningThreshold(propval);
@@ -163,8 +163,8 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Get `unit` property.
       Returns: The length unit for maximum size and tightening threshold.
-      
-      Allows the sizes to vary depending on the text scale factor.
+        
+        Allows the sizes to vary depending on the text scale factor.
   */
   @property adw.types.LengthUnit unit()
   {
@@ -175,8 +175,8 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Set `unit` property.
       Params:
         propval = The length unit for maximum size and tightening threshold.
-        
-        Allows the sizes to vary depending on the text scale factor.
+          
+          Allows the sizes to vary depending on the text scale factor.
   */
   @property void unit(adw.types.LengthUnit propval)
   {

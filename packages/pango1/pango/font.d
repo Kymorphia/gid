@@ -149,12 +149,8 @@ class Font : gobject.object.ObjectWrap
   void getFeatures(ref harfbuzz.feature.Feature[] features, ref uint numFeatures)
   {
     uint _len;
-    hb_feature_t[] _features;
-    _features.length = _len;
-    pango_font_get_features(cast(PangoFont*)this._cPtr, _features.ptr, _len, cast(uint*)&numFeatures);
-    features.length = _len;
-    foreach (i; 0 .. _len)
-      features[i] = new harfbuzz.feature.Feature(cast(void*)&_features[i], No.Take);
+    _len = cast(uint)features.length;
+    pango_font_get_features(cast(PangoFont*)this._cPtr, cast(hb_feature_t*)features.ptr, _len, cast(uint*)&numFeatures);
   }
 
   /**
@@ -223,8 +219,8 @@ class Font : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new pango.language.Language[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = new pango.language.Language(cast(void*)_cretval[i], No.Take);
@@ -253,7 +249,9 @@ class Font : gobject.object.ObjectWrap
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_font_get_metrics(cast(PangoFont*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
+    pango.font_metrics.FontMetrics _retval;
+    if (_cretval)
+      _retval = *cast(pango.font_metrics.FontMetrics*)_cretval;
     return _retval;
   }
 

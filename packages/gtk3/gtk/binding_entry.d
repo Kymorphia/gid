@@ -16,7 +16,7 @@ import gtk.types;
 */
 class BindingEntry
 {
-  GtkBindingEntry cInstance;
+  GtkBindingEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -24,7 +24,7 @@ class BindingEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.binding_entry.BindingEntry");
 
-    cInstance = *cast(GtkBindingEntry*)ptr;
+    _cInstance = *cast(GtkBindingEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -33,7 +33,7 @@ class BindingEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

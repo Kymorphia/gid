@@ -9,7 +9,7 @@ import gstcheck.types;
 /** */
 class CheckABIStruct
 {
-  GstCheckABIStruct cInstance;
+  GstCheckABIStruct _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class CheckABIStruct
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstcheck.check_abistruct.CheckABIStruct");
 
-    cInstance = *cast(GstCheckABIStruct*)ptr;
+    _cInstance = *cast(GstCheckABIStruct*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,7 +26,7 @@ class CheckABIStruct
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

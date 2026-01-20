@@ -12,7 +12,7 @@ import gst.types;
 */
 class DebugCategory
 {
-  GstDebugCategory cInstance;
+  GstDebugCategory _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class DebugCategory
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.debug_category.DebugCategory");
 
-    cInstance = *cast(GstDebugCategory*)ptr;
+    _cInstance = *cast(GstDebugCategory*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class DebugCategory
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

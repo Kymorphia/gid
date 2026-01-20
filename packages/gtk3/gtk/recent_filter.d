@@ -152,13 +152,15 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   {
     extern(C) gboolean _funcCallback(const(GtkRecentFilterInfo)* filterInfo, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.RecentFilterFunc*)userData;
 
-      gboolean _retval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      _dretval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_recent_filter_add_custom(cast(GtkRecentFilter*)this._cPtr, needed, _funcCB, _func, _funcDestroyCB);

@@ -635,6 +635,7 @@ void assertionMessageCmpstrv(string domain, string file, int line, string func, 
     _tmparg2 ~= s.toCString(No.Alloc);
   _tmparg2 ~= null;
   const(char*)* _arg2 = _tmparg2.ptr;
+
   g_assertion_message_cmpstrv(_domain, _file, line, _func, _expr, _arg1, _arg2, firstWrongIdx);
 }
 
@@ -1553,6 +1554,7 @@ string buildFilenamev(string[] args)
     _tmpargs ~= s.toCString(No.Alloc);
   _tmpargs ~= null;
   char** _args = _tmpargs.ptr;
+
   _cretval = g_build_filenamev(_args);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -1580,6 +1582,7 @@ string buildPathv(string separator, string[] args)
     _tmpargs ~= s.toCString(No.Alloc);
   _tmpargs ~= null;
   char** _args = _tmpargs.ptr;
+
   _cretval = g_build_pathv(_separator, _args);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -1714,7 +1717,6 @@ uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc f
     (*_dlg)(pid, waitStatus);
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
@@ -2237,7 +2239,6 @@ void datasetForeach(const(void)* datasetLocation, glib.types.DataForeachFunc fun
     (*_dlg)(keyId, data);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? cast(void*)&(func) : null;
   g_dataset_foreach(datasetLocation, _funcCB, _func);
 }
@@ -3477,9 +3478,9 @@ string getCurrentDir()
     Deprecated: #GTimeVal is not year-2038-safe. Use [glib.global.getRealTime]
          instead.
 */
-void getCurrentTime(glib.time_val.TimeVal result)
+void getCurrentTime(out glib.time_val.TimeVal result)
 {
-  g_get_current_time(result ? cast(GTimeVal*)result._cPtr : null);
+  g_get_current_time(cast(GTimeVal*)&result);
 }
 
 /**
@@ -3504,8 +3505,8 @@ string[] getEnviron()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -3556,6 +3557,7 @@ bool getFilenameCharsets(out string[] filenameCharsets)
     {
     }
   }
+
   filenameCharsets.length = _lenfilenameCharsets;
   foreach (i; 0 .. _lenfilenameCharsets)
     filenameCharsets[i] = _filenameCharsets[i].fromCString(No.Free);
@@ -3642,8 +3644,8 @@ string[] getLanguageNames()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -3679,8 +3681,8 @@ string[] getLanguageNamesWithCategory(string categoryName)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -3721,8 +3723,8 @@ string[] getLocaleVariants(string locale)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -3878,8 +3880,8 @@ string[] getSystemConfigDirs()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -3934,8 +3936,8 @@ string[] getSystemDataDirs()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -4304,13 +4306,15 @@ uint idleAdd(int priority, glib.types.SourceFunc function_)
 {
   extern(C) gboolean _function_Callback(void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)();
+    _dretval = (*_dlg)();
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
@@ -4494,13 +4498,15 @@ uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCon
 {
   extern(C) gboolean _funcCallback(GIOChannel* source, GIOCondition condition, void* data)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.IOFunc*)data;
 
-    gboolean _retval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
+    _dretval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   uint _retval;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -4558,8 +4564,8 @@ string[] listenv()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -4855,7 +4861,6 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
     (*_dlg)(_logDomain, logLevel, _message);
   }
   auto _logFuncCB = logFunc ? &_logFuncCallback : null;
-
   uint _retval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   auto _logFunc = logFunc ? freezeDelegate(cast(void*)&logFunc) : null;
@@ -4911,6 +4916,7 @@ void logWriterDefaultSetDebugDomains(string[] domains = null)
     _tmpdomains ~= s.toCString(No.Alloc);
   _tmpdomains ~= null;
   const(char*)* _domains = _tmpdomains.ptr;
+
   g_log_writer_default_set_debug_domains(_domains);
 }
 
@@ -5876,7 +5882,6 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.C
     return _retval;
   }
   auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
-
   auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
   g_qsort_with_data(pbase, totalElems, size, _compareFuncCB, _compareFunc);
 }
@@ -6873,7 +6878,6 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
     (*_dlg)();
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
   char*[] _tmpargv;
@@ -6927,7 +6931,6 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
     (*_dlg)();
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
   char*[] _tmpargv;
@@ -6981,7 +6984,6 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     (*_dlg)();
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
   char*[] _tmpargv;
@@ -7234,7 +7236,6 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
     (*_dlg)();
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
   const(char)*[] _tmpargv;
@@ -7511,7 +7512,6 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
     (*_dlg)();
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
   char*[] _tmpargv;
@@ -7806,8 +7806,8 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -7820,6 +7820,7 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
     {
     }
   }
+
   asciiAlternates.length = _lenasciiAlternates;
   foreach (i; 0 .. _lenasciiAlternates)
     asciiAlternates[i] = _asciiAlternates[i].fromCString(Yes.Free);
@@ -8060,14 +8061,15 @@ string[] strdupv(string[] strArray = null)
     _tmpstrArray ~= s.toCString(No.Alloc);
   _tmpstrArray ~= null;
   char** _strArray = _tmpstrArray.ptr;
+
   _cretval = g_strdupv(_strArray);
   string[] _retval;
 
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -8179,6 +8181,7 @@ string strjoinv(string separator, string[] strArray)
     _tmpstrArray ~= s.toCString(No.Alloc);
   _tmpstrArray ~= null;
   char** _strArray = _tmpstrArray.ptr;
+
   _cretval = g_strjoinv(_separator, _strArray);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -8443,8 +8446,8 @@ string[] strsplit(string string_, string delimiter, int maxTokens)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -8495,8 +8498,8 @@ string[] strsplitSet(string string_, string delimiters, int maxTokens)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -8637,6 +8640,7 @@ bool strvEqual(string[] strv1, string[] strv2)
     _tmpstrv2 ~= s.toCString(No.Alloc);
   _tmpstrv2 ~= null;
   const(char*)* _strv2 = _tmpstrv2.ptr;
+
   _retval = cast(bool)g_strv_equal(_strv1, _strv2);
   return _retval;
 }
@@ -8664,6 +8668,7 @@ uint strvLength(string[] strArray)
     _tmpstrArray ~= s.toCString(No.Alloc);
   _tmpstrArray ~= null;
   char** _strArray = _tmpstrArray.ptr;
+
   _retval = g_strv_length(_strArray);
   return _retval;
 }
@@ -8698,7 +8703,6 @@ void testAddDataFunc(string testpath, const(void)* testData, glib.types.TestData
     (*_dlg)();
   }
   auto _testFuncCB = testFunc ? &_testFuncCallback : null;
-
   const(char)* _testpath = testpath.toCString(No.Alloc);
   g_test_add_data_func(_testpath, testData, _testFuncCB);
 }
@@ -9394,6 +9398,7 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
     _tmpenvp ~= s.toCString(No.Alloc);
   _tmpenvp ~= null;
   const(char*)* _envp = _tmpenvp.ptr;
+
   g_test_trap_subprocess_with_envp(_testPath, _envp, usecTimeout, testFlags);
 }
 
@@ -9435,13 +9440,15 @@ uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
 {
   extern(C) gboolean _function_Callback(void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)();
+    _dretval = (*_dlg)();
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
@@ -9501,13 +9508,15 @@ uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc functi
 {
   extern(C) gboolean _function_Callback(void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)();
+    _dretval = (*_dlg)();
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
@@ -9688,8 +9697,8 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] != 0; _cretlength++)
-      break;
+    while (_cretval[_cretlength] != 0)
+      _cretlength++;
     _retval = cast(ushort[])_cretval[0 .. _cretlength].dup;
     gFree(cast(void*)_cretval);
   }
@@ -10388,13 +10397,15 @@ uint unixFdAddFull(int priority, int fd, glib.types.IOCondition condition, glib.
 {
   extern(C) gboolean _function_Callback(int fd, GIOCondition condition, void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.UnixFDSourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)(fd, condition);
+    _dretval = (*_dlg)(fd, condition);
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _function_CB = function_ ? &_function_Callback : null;
-
   uint _retval;
   auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
   GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
@@ -10529,13 +10540,15 @@ uint unixSignalAdd(int priority, int signum, glib.types.SourceFunc handler)
 {
   extern(C) gboolean _handlerCallback(void* userData)
   {
+    bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    gboolean _retval = (*_dlg)();
+    _dretval = (*_dlg)();
+    auto _retval = cast(gboolean)_dretval;
+
     return _retval;
   }
   auto _handlerCB = handler ? &_handlerCallback : null;
-
   uint _retval;
   auto _handler = handler ? freezeDelegate(cast(void*)&handler) : null;
   GDestroyNotify _handlerDestroyCB = handler ? &thawDelegate : null;

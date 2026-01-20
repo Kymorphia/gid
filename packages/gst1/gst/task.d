@@ -2,7 +2,6 @@
 module gst.task;
 
 import gid.gid;
-import glib.rec_mutex;
 import glib.thread;
 import gobject.object;
 import gst.c.functions;
@@ -110,7 +109,6 @@ class Task : gst.object.ObjectWrap
       (*_dlg)();
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     GstTask* _cretval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -223,10 +221,9 @@ class Task : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), *cast(glib.thread.Thread*)thread);
     }
     auto _enterFuncCB = enterFunc ? &_enterFuncCallback : null;
-
     auto _enterFunc = enterFunc ? freezeDelegate(cast(void*)&enterFunc) : null;
     GDestroyNotify _enterFuncDestroyCB = enterFunc ? &thawDelegate : null;
     gst_task_set_enter_callback(cast(GstTask*)this._cPtr, _enterFuncCB, _enterFunc, _enterFuncDestroyCB);
@@ -246,30 +243,12 @@ class Task : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), *cast(glib.thread.Thread*)thread);
     }
     auto _leaveFuncCB = leaveFunc ? &_leaveFuncCallback : null;
-
     auto _leaveFunc = leaveFunc ? freezeDelegate(cast(void*)&leaveFunc) : null;
     GDestroyNotify _leaveFuncDestroyCB = leaveFunc ? &thawDelegate : null;
     gst_task_set_leave_callback(cast(GstTask*)this._cPtr, _leaveFuncCB, _leaveFunc, _leaveFuncDestroyCB);
-  }
-
-  /**
-      Set the mutex used by the task. The mutex will be acquired before
-      calling the #GstTaskFunction.
-      
-      This function has to be called before calling [gst.task.Task.pause] or
-      [gst.task.Task.start].
-      
-      MT safe.
-  
-      Params:
-        mutex = The #GRecMutex to use
-  */
-  void setLock(glib.rec_mutex.RecMutex mutex)
-  {
-    gst_task_set_lock(cast(GstTask*)this._cPtr, mutex ? cast(GRecMutex*)mutex._cPtr : null);
   }
 
   /**

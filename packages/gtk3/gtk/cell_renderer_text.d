@@ -65,10 +65,10 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   /**
       Get `alignment` property.
       Returns: Specifies how to align the lines of text with respect to each other.
-      
-      Note that this property describes how to align the lines of text in
-      case there are several of them. The "xalign" property of #GtkCellRenderer,
-      on the other hand, sets the horizontal alignment of the whole text.
+        
+        Note that this property describes how to align the lines of text in
+        case there are several of them. The "xalign" property of #GtkCellRenderer,
+        on the other hand, sets the horizontal alignment of the whole text.
   */
   @property pango.types.Alignment alignment()
   {
@@ -79,10 +79,10 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Set `alignment` property.
       Params:
         propval = Specifies how to align the lines of text with respect to each other.
-        
-        Note that this property describes how to align the lines of text in
-        case there are several of them. The "xalign" property of #GtkCellRenderer,
-        on the other hand, sets the horizontal alignment of the whole text.
+          
+          Note that this property describes how to align the lines of text in
+          case there are several of them. The "xalign" property of #GtkCellRenderer,
+          on the other hand, sets the horizontal alignment of the whole text.
   */
   @property void alignment(pango.types.Alignment propval)
   {
@@ -188,9 +188,9 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   /**
       Get `ellipsize` property.
       Returns: Specifies the preferred place to ellipsize the string, if the cell renderer
-      does not have enough room to display the entire string. Setting it to
-      [pango.types.EllipsizeMode.None] turns off ellipsizing. See the wrap-width property
-      for another way of making the text fit into a given width.
+        does not have enough room to display the entire string. Setting it to
+        [pango.types.EllipsizeMode.None] turns off ellipsizing. See the wrap-width property
+        for another way of making the text fit into a given width.
   */
   @property pango.types.EllipsizeMode ellipsize()
   {
@@ -201,9 +201,9 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Set `ellipsize` property.
       Params:
         propval = Specifies the preferred place to ellipsize the string, if the cell renderer
-        does not have enough room to display the entire string. Setting it to
-        [pango.types.EllipsizeMode.None] turns off ellipsizing. See the wrap-width property
-        for another way of making the text fit into a given width.
+          does not have enough room to display the entire string. Setting it to
+          [pango.types.EllipsizeMode.None] turns off ellipsizing. See the wrap-width property
+          for another way of making the text fit into a given width.
   */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
@@ -363,13 +363,13 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   /**
       Get `maxWidthChars` property.
       Returns: The desired maximum width of the cell, in characters. If this property
-      is set to -1, the width will be calculated automatically.
-      
-      For cell renderers that ellipsize or wrap text; this property
-      controls the maximum reported width of the cell. The
-      cell should not receive any greater allocation unless it is
-      set to expand in its #GtkCellLayout and all of the cell's siblings
-      have received their natural width.
+        is set to -1, the width will be calculated automatically.
+        
+        For cell renderers that ellipsize or wrap text; this property
+        controls the maximum reported width of the cell. The
+        cell should not receive any greater allocation unless it is
+        set to expand in its #GtkCellLayout and all of the cell's siblings
+        have received their natural width.
   */
   @property int maxWidthChars()
   {
@@ -380,13 +380,13 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Set `maxWidthChars` property.
       Params:
         propval = The desired maximum width of the cell, in characters. If this property
-        is set to -1, the width will be calculated automatically.
-        
-        For cell renderers that ellipsize or wrap text; this property
-        controls the maximum reported width of the cell. The
-        cell should not receive any greater allocation unless it is
-        set to expand in its #GtkCellLayout and all of the cell's siblings
-        have received their natural width.
+          is set to -1, the width will be calculated automatically.
+          
+          For cell renderers that ellipsize or wrap text; this property
+          controls the maximum reported width of the cell. The
+          cell should not receive any greater allocation unless it is
+          set to expand in its #GtkCellLayout and all of the cell's siblings
+          have received their natural width.
   */
   @property void maxWidthChars(int propval)
   {
@@ -396,9 +396,9 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   /**
       Get `placeholderText` property.
       Returns: The text that will be displayed in the #GtkCellRenderer if
-      #GtkCellRendererText:editable is true and the cell is empty.
-      
-      Since 3.6
+        #GtkCellRendererText:editable is true and the cell is empty.
+        
+        Since 3.6
   */
   @property string placeholderText()
   {
@@ -409,9 +409,9 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Set `placeholderText` property.
       Params:
         propval = The text that will be displayed in the #GtkCellRenderer if
-        #GtkCellRendererText:editable is true and the cell is empty.
-        
-        Since 3.6
+          #GtkCellRendererText:editable is true and the cell is empty.
+          
+          Since 3.6
   */
   @property void placeholderText(string propval)
   {
@@ -673,8 +673,8 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   /**
       Get `widthChars` property.
       Returns: The desired width of the cell, in characters. If this property is set to
-      -1, the width will be calculated automatically, otherwise the cell will
-      request either 3 characters or the property value, whichever is greater.
+        -1, the width will be calculated automatically, otherwise the cell will
+        request either 3 characters or the property value, whichever is greater.
   */
   @property int widthChars()
   {
@@ -685,8 +685,8 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Set `widthChars` property.
       Params:
         propval = The desired width of the cell, in characters. If this property is set to
-        -1, the width will be calculated automatically, otherwise the cell will
-        request either 3 characters or the property value, whichever is greater.
+          -1, the width will be calculated automatically, otherwise the cell will
+          request either 3 characters or the property value, whichever is greater.
   */
   @property void widthChars(int propval)
   {
@@ -696,8 +696,8 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   /**
       Get `wrapMode` property.
       Returns: Specifies how to break the string into multiple lines, if the cell
-      renderer does not have enough room to display the entire string.
-      This property has no effect unless the wrap-width property is set.
+        renderer does not have enough room to display the entire string.
+        This property has no effect unless the wrap-width property is set.
   */
   @property pango.types.WrapMode wrapMode()
   {
@@ -708,8 +708,8 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Set `wrapMode` property.
       Params:
         propval = Specifies how to break the string into multiple lines, if the cell
-        renderer does not have enough room to display the entire string.
-        This property has no effect unless the wrap-width property is set.
+          renderer does not have enough room to display the entire string.
+          This property has no effect unless the wrap-width property is set.
   */
   @property void wrapMode(pango.types.WrapMode propval)
   {
@@ -719,8 +719,8 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   /**
       Get `wrapWidth` property.
       Returns: Specifies the minimum width at which the text is wrapped. The wrap-mode property can
-      be used to influence at what character positions the line breaks can be placed.
-      Setting wrap-width to -1 turns wrapping off.
+        be used to influence at what character positions the line breaks can be placed.
+        Setting wrap-width to -1 turns wrapping off.
   */
   @property int wrapWidth()
   {
@@ -731,8 +731,8 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Set `wrapWidth` property.
       Params:
         propval = Specifies the minimum width at which the text is wrapped. The wrap-mode property can
-        be used to influence at what character positions the line breaks can be placed.
-        Setting wrap-width to -1 turns wrapping off.
+          be used to influence at what character positions the line breaks can be placed.
+          Setting wrap-width to -1 turns wrapping off.
   */
   @property void wrapWidth(int propval)
   {
@@ -777,9 +777,9 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Connect to `Edited` signal.
   
       This signal is emitted after renderer has been edited.
-      
-      It is the responsibility of the application to update the model
-      and store new_text at the position indicated by path.
+        
+        It is the responsibility of the application to update the model
+        and store new_text at the position indicated by path.
   
       Params:
         callback = signal callback delegate or function to connect

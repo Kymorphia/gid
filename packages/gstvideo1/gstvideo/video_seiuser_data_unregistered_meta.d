@@ -13,7 +13,7 @@ import gstvideo.types;
 */
 class VideoSEIUserDataUnregisteredMeta
 {
-  GstVideoSEIUserDataUnregisteredMeta cInstance;
+  GstVideoSEIUserDataUnregisteredMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class VideoSEIUserDataUnregisteredMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta");
 
-    cInstance = *cast(GstVideoSEIUserDataUnregisteredMeta*)ptr;
+    _cInstance = *cast(GstVideoSEIUserDataUnregisteredMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class VideoSEIUserDataUnregisteredMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -66,7 +66,9 @@ class VideoSEIUserDataUnregisteredMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_sei_user_data_unregistered_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

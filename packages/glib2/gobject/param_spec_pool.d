@@ -16,7 +16,7 @@ import gobject.types;
 */
 class ParamSpecPool
 {
-  GParamSpecPool* cInstancePtr;
+  GParamSpecPool* _cInstancePtr;
   bool owned;
 
   /** */
@@ -25,7 +25,7 @@ class ParamSpecPool
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.param_spec_pool.ParamSpecPool");
 
-    cInstancePtr = cast(GParamSpecPool*)ptr;
+    _cInstancePtr = cast(GParamSpecPool*)ptr;
 
     owned = take;
   }
@@ -33,7 +33,7 @@ class ParamSpecPool
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

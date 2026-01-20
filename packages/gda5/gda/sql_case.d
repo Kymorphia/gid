@@ -3,7 +3,6 @@ module gda.sql_case;
 
 import gda.c.functions;
 import gda.c.types;
-import gda.sql_any_part;
 import gda.sql_expr;
 import gda.types;
 import gid.gid;
@@ -13,7 +12,7 @@ import gid.gid;
 */
 class SqlCase
 {
-  GdaSqlCase cInstance;
+  GdaSqlCase _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +20,7 @@ class SqlCase
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_case.SqlCase");
 
-    cInstance = *cast(GdaSqlCase*)ptr;
+    _cInstance = *cast(GdaSqlCase*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,16 +29,7 @@ class SqlCase
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
-  }
-
-  /**
-      Get `any` field.
-      Returns: inheritance structure
-  */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlCase*)this._cPtr).any, No.Take);
+    return cast(void*)&_cInstance;
   }
 
   /**

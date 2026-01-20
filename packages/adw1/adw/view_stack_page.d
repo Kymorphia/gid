@@ -44,11 +44,11 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Get `badgeNumber` property.
       Returns: The badge number for this page.
-      
-      `class@ViewSwitcher` can display it as a badge next to the page icon. It is
-      commonly used to display a number of unread items within the page.
-      
-      It can be used together with `property@ViewStack{age}:needs-attention`.
+        
+        `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+        commonly used to display a number of unread items within the page.
+        
+        It can be used together with `property@ViewStack{age}:needs-attention`.
   */
   @property uint badgeNumber()
   {
@@ -59,11 +59,11 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Set `badgeNumber` property.
       Params:
         propval = The badge number for this page.
-        
-        `class@ViewSwitcher` can display it as a badge next to the page icon. It is
-        commonly used to display a number of unread items within the page.
-        
-        It can be used together with `property@ViewStack{age}:needs-attention`.
+          
+          `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+          commonly used to display a number of unread items within the page.
+          
+          It can be used together with `property@ViewStack{age}:needs-attention`.
   */
   @property void badgeNumber(uint propval)
   {
@@ -111,8 +111,8 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Get `needsAttention` property.
       Returns: Whether the page requires the user attention.
-      
-      `class@ViewSwitcher` will display it as a dot next to the page icon.
+        
+        `class@ViewSwitcher` will display it as a dot next to the page icon.
   */
   @property bool needsAttention()
   {
@@ -123,8 +123,8 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Set `needsAttention` property.
       Params:
         propval = Whether the page requires the user attention.
-        
-        `class@ViewSwitcher` will display it as a dot next to the page icon.
+          
+          `class@ViewSwitcher` will display it as a dot next to the page icon.
   */
   @property void needsAttention(bool propval)
   {
@@ -172,9 +172,9 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Get `visible` property.
       Returns: Whether this page is visible.
-      
-      This is independent from the [gtk.widget.Widget.visible] property of
-      `property@ViewStackPage:child`.
+        
+        This is independent from the [gtk.widget.Widget.visible] property of
+        `property@ViewStackPage:child`.
   */
   @property bool visible()
   {
@@ -185,9 +185,9 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Set `visible` property.
       Params:
         propval = Whether this page is visible.
-        
-        This is independent from the [gtk.widget.Widget.visible] property of
-        `property@ViewStackPage:child`.
+          
+          This is independent from the [gtk.widget.Widget.visible] property of
+          `property@ViewStackPage:child`.
   */
   @property void visible(bool propval)
   {

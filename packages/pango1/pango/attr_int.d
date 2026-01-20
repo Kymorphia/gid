@@ -13,7 +13,7 @@ import pango.types;
 */
 class AttrInt
 {
-  PangoAttrInt cInstance;
+  PangoAttrInt _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class AttrInt
     if (!ptr)
       throw new GidConstructException("Null instance pointer for pango.attr_int.AttrInt");
 
-    cInstance = *cast(PangoAttrInt*)ptr;
+    _cInstance = *cast(PangoAttrInt*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class AttrInt
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

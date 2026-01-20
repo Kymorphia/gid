@@ -160,6 +160,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
+
     _cretval = gtk_scale_button_new(min, max, step, _icons);
     this(_cretval, No.Take);
   }
@@ -290,6 +291,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
+
     gtk_scale_button_set_icons(cast(GtkScaleButton*)this._cPtr, _icons);
   }
 
@@ -314,10 +316,10 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Connect to `Popdown` signal.
   
       Emitted to dismiss the popup.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>Escape</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Escape</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -355,11 +357,11 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Connect to `Popup` signal.
   
       Emitted to popup the scale widget.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are <kbd>Space</kbd>,
-      <kbd>Enter</kbd> and <kbd>Return</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are <kbd>Space</kbd>,
+        <kbd>Enter</kbd> and <kbd>Return</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

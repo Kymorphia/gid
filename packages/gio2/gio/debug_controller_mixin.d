@@ -31,7 +31,7 @@ template DebugControllerT()
   /**
       Get `debugEnabled` property.
       Returns: true if debug output should be exposed (for example by forwarding it to
-      the journal), false otherwise.
+        the journal), false otherwise.
   */
   @property bool debugEnabled()
   {
@@ -42,7 +42,7 @@ template DebugControllerT()
       Set `debugEnabled` property.
       Params:
         propval = true if debug output should be exposed (for example by forwarding it to
-        the journal), false otherwise.
+          the journal), false otherwise.
   */
   @property void debugEnabled(bool propval)
   {

@@ -12,7 +12,7 @@ import gid.gid;
 */
 class DragSurfaceSize
 {
-  GdkDragSurfaceSize* cInstancePtr;
+  GdkDragSurfaceSize* _cInstancePtr;
   bool owned;
 
   /** */
@@ -21,7 +21,7 @@ class DragSurfaceSize
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.drag_surface_size.DragSurfaceSize");
 
-    cInstancePtr = cast(GdkDragSurfaceSize*)ptr;
+    _cInstancePtr = cast(GdkDragSurfaceSize*)ptr;
 
     owned = take;
   }
@@ -29,7 +29,7 @@ class DragSurfaceSize
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

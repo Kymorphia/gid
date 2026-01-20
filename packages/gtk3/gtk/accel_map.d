@@ -359,9 +359,9 @@ class AccelMap : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Notifies of a change in the global accelerator map.
-      The path is also used as the detail for the signal,
-      so it is possible to connect to
-      changed::`accel_path`.
+        The path is also used as the detail for the signal,
+        so it is possible to connect to
+        changed::`accel_path`.
   
       Params:
         detail = Signal detail or null (default)

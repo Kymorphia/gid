@@ -12,7 +12,7 @@ import gstsdp.types;
 */
 class MIKEYPayloadRAND
 {
-  GstMIKEYPayloadRAND cInstance;
+  GstMIKEYPayloadRAND _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class MIKEYPayloadRAND
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_rand.MIKEYPayloadRAND");
 
-    cInstance = *cast(GstMIKEYPayloadRAND*)ptr;
+    _cInstance = *cast(GstMIKEYPayloadRAND*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class MIKEYPayloadRAND
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

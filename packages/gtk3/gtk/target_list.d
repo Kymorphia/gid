@@ -27,7 +27,7 @@ class TargetList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -68,6 +68,7 @@ class TargetList : gobject.boxed.Boxed
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     _cretval = gtk_target_list_new(_targets, _ntargets);
     this(_cretval, Yes.Take);
   }
@@ -132,6 +133,7 @@ class TargetList : gobject.boxed.Boxed
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_target_list_add_table(cast(GtkTargetList*)this._cPtr, _targets, _ntargets);
   }
 

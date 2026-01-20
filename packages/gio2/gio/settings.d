@@ -335,7 +335,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `delayApply` property.
       Returns: Whether the #GSettings object is in 'delay-apply' mode. See
-      [gio.settings.Settings.delay] for details.
+        [gio.settings.Settings.delay] for details.
   */
   @property bool delayApply()
   {
@@ -345,7 +345,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `hasUnapplied` property.
       Returns: If this property is true, the #GSettings object has outstanding
-      changes that will be applied when [gio.settings.Settings.apply] is called.
+        changes that will be applied when [gio.settings.Settings.apply] is called.
   */
   @property bool hasUnapplied()
   {
@@ -513,8 +513,8 @@ class Settings : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -542,8 +542,8 @@ class Settings : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -945,13 +945,15 @@ class Settings : gobject.object.ObjectWrap
   {
     extern(C) gboolean _mappingCallback(GVariant* value, void** result, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gio.types.SettingsGetMapping*)userData;
 
-      gboolean _retval = (*_dlg)(value ? new glib.variant.Variant(cast(void*)value, No.Take) : null, *result);
+      _dretval = (*_dlg)(value ? new glib.variant.Variant(cast(void*)value, No.Take) : null, *result);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _mappingCB = mapping ? &_mappingCallback : null;
-
     const(char)* _key = key.toCString(No.Alloc);
     auto _mapping = mapping ? cast(void*)&(mapping) : null;
     auto _retval = g_settings_get_mapped(cast(GSettings*)this._cPtr, _key, _mappingCB, _mapping);
@@ -1019,8 +1021,8 @@ class Settings : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -1162,8 +1164,8 @@ class Settings : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -1195,8 +1197,8 @@ class Settings : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -1439,6 +1441,7 @@ class Settings : gobject.object.ObjectWrap
       _tmpvalue ~= s.toCString(No.Alloc);
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
+
     _retval = cast(bool)g_settings_set_strv(cast(GSettings*)this._cPtr, _key, _value);
     return _retval;
   }
@@ -1516,20 +1519,20 @@ class Settings : gobject.object.ObjectWrap
       Connect to `ChangeEvent` signal.
   
       The "change-event" signal is emitted once per change event that
-      affects this settings object.  You should connect to this signal
-      only if you are interested in viewing groups of changes before they
-      are split out into multiple emissions of the "changed" signal.
-      For most use cases it is more appropriate to use the "changed" signal.
-      
-      In the event that the change event applies to one or more specified
-      keys, keys will be an array of #GQuark of length n_keys.  In the
-      event that the change event applies to the #GSettings object as a
-      whole (ie: potentially every key has been changed) then keys will
-      be null and n_keys will be 0.
-      
-      The default handler for this signal invokes the "changed" signal
-      for each affected key.  If any other connected handler returns
-      true then this default functionality will be suppressed.
+        affects this settings object.  You should connect to this signal
+        only if you are interested in viewing groups of changes before they
+        are split out into multiple emissions of the "changed" signal.
+        For most use cases it is more appropriate to use the "changed" signal.
+        
+        In the event that the change event applies to one or more specified
+        keys, keys will be an array of #GQuark of length n_keys.  In the
+        event that the change event applies to the #GSettings object as a
+        whole (ie: potentially every key has been changed) then keys will
+        be null and n_keys will be 0.
+        
+        The default handler for this signal invokes the "changed" signal
+        for each affected key.  If any other connected handler returns
+        true then this default functionality will be suppressed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1541,7 +1544,7 @@ class Settings : gobject.object.ObjectWrap
           `settings` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the
-                   event. FALSE to propagate the event further.
+                     event. FALSE to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1582,15 +1585,15 @@ class Settings : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       The "changed" signal is emitted when a key has potentially changed.
-      You should call one of the [gio.settings.Settings.get] calls to check the new
-      value.
-      
-      This signal supports detailed connections.  You can connect to the
-      detailed signal "changed::x" in order to only receive callbacks
-      when key "x" changes.
-      
-      Note that settings only emits this signal if you have read key at
-      least once while a signal handler was already connected for key.
+        You should call one of the [gio.settings.Settings.get] calls to check the new
+        value.
+        
+        This signal supports detailed connections.  You can connect to the
+        detailed signal "changed::x" in order to only receive callbacks
+        when key "x" changes.
+        
+        Note that settings only emits this signal if you have read key at
+        least once while a signal handler was already connected for key.
   
       Params:
         detail = Signal detail or null (default)
@@ -1636,23 +1639,23 @@ class Settings : gobject.object.ObjectWrap
       Connect to `WritableChangeEvent` signal.
   
       The "writable-change-event" signal is emitted once per writability
-      change event that affects this settings object.  You should connect
-      to this signal if you are interested in viewing groups of changes
-      before they are split out into multiple emissions of the
-      "writable-changed" signal.  For most use cases it is more
-      appropriate to use the "writable-changed" signal.
-      
-      In the event that the writability change applies only to a single
-      key, key will be set to the #GQuark for that key.  In the event
-      that the writability change affects the entire settings object,
-      key will be 0.
-      
-      The default handler for this signal invokes the "writable-changed"
-      and "changed" signals for each affected key.  This is done because
-      changes in writability might also imply changes in value (if for
-      example, a new mandatory setting is introduced).  If any other
-      connected handler returns true then this default functionality
-      will be suppressed.
+        change event that affects this settings object.  You should connect
+        to this signal if you are interested in viewing groups of changes
+        before they are split out into multiple emissions of the
+        "writable-changed" signal.  For most use cases it is more
+        appropriate to use the "writable-changed" signal.
+        
+        In the event that the writability change applies only to a single
+        key, key will be set to the #GQuark for that key.  In the event
+        that the writability change affects the entire settings object,
+        key will be 0.
+        
+        The default handler for this signal invokes the "writable-changed"
+        and "changed" signals for each affected key.  This is done because
+        changes in writability might also imply changes in value (if for
+        example, a new mandatory setting is introduced).  If any other
+        connected handler returns true then this default functionality
+        will be suppressed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1664,7 +1667,7 @@ class Settings : gobject.object.ObjectWrap
           `settings` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the
-                   event. FALSE to propagate the event further.
+                     event. FALSE to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1700,12 +1703,12 @@ class Settings : gobject.object.ObjectWrap
       Connect to `WritableChanged` signal.
   
       The "writable-changed" signal is emitted when the writability of a
-      key has potentially changed.  You should call
-      [gio.settings.Settings.isWritable] in order to determine the new status.
-      
-      This signal supports detailed connections.  You can connect to the
-      detailed signal "writable-changed::x" in order to only receive
-      callbacks when the writability of "x" changes.
+        key has potentially changed.  You should call
+        [gio.settings.Settings.isWritable] in order to determine the new status.
+        
+        This signal supports detailed connections.  You can connect to the
+        detailed signal "writable-changed::x" in order to only receive
+        callbacks when the writability of "x" changes.
   
       Params:
         detail = Signal detail or null (default)

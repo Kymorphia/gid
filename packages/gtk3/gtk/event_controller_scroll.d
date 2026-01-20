@@ -135,9 +135,9 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `Decelerate` signal.
   
       Emitted after scroll is finished if the #GTK_EVENT_CONTROLLER_SCROLL_KINETIC
-      flag is set. vel_x and vel_y express the initial velocity that was
-      imprinted by the scroll events. vel_x and vel_y are expressed in
-      pixels/ms.
+        flag is set. vel_x and vel_y express the initial velocity that was
+        imprinted by the scroll events. vel_x and vel_y are expressed in
+        pixels/ms.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -189,7 +189,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `Scroll` signal.
   
       Signals that the widget should scroll by the
-      amount specified by dx and dy.
+        amount specified by dx and dy.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -241,7 +241,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `ScrollBegin` signal.
   
       Signals that a new scrolling operation has begun. It will
-      only be emitted on devices capable of it.
+        only be emitted on devices capable of it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -279,7 +279,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Connect to `ScrollEnd` signal.
   
       Signals that a new scrolling operation has finished. It will
-      only be emitted on devices capable of it.
+        only be emitted on devices capable of it.
   
       Params:
         callback = signal callback delegate or function to connect

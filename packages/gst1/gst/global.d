@@ -113,7 +113,6 @@ void debugAddLogFunction(gst.types.LogFunction func)
     (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   gst_debug_add_log_function(_funcCB, _func, _funcDestroyCB);
@@ -410,7 +409,6 @@ uint debugRemoveLogFunction(gst.types.LogFunction func = null)
     (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   uint _retval;
   _retval = gst_debug_remove_log_function(_funcCB);
   return _retval;
@@ -454,8 +452,8 @@ string[] debugRingBufferLoggerGetLogs()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -1018,14 +1016,15 @@ string[] protectionFilterSystemsByAvailableDecryptors(string[] systemIdentifiers
     _tmpsystemIdentifiers ~= s.toCString(No.Alloc);
   _tmpsystemIdentifiers ~= null;
   const(char*)* _systemIdentifiers = _tmpsystemIdentifiers.ptr;
+
   _cretval = gst_protection_filter_systems_by_available_decryptors(_systemIdentifiers);
   string[] _retval;
 
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -1064,6 +1063,7 @@ string protectionSelectSystem(string[] systemIdentifiers)
     _tmpsystemIdentifiers ~= s.toCString(No.Alloc);
   _tmpsystemIdentifiers ~= null;
   const(char*)* _systemIdentifiers = _tmpsystemIdentifiers.ptr;
+
   _cretval = gst_protection_select_system(_systemIdentifiers);
   string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
@@ -1364,7 +1364,6 @@ void* utilArrayBinarySearch(void* array, uint numElements, size_t elementSize, g
     return _retval;
   }
   auto _searchFuncCB = searchFunc ? &_searchFuncCallback : null;
-
   auto _searchFunc = searchFunc ? cast(void*)&(searchFunc) : null;
   auto _retval = gst_util_array_binary_search(array, numElements, elementSize, _searchFuncCB, mode, searchData, _searchFunc);
   return _retval;
@@ -2308,7 +2307,9 @@ gst.structure.Structure valueGetStructure(gobject.value.Value value)
 {
   const(GstStructure)* _cretval;
   _cretval = gst_value_get_structure(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+  gst.structure.Structure _retval;
+  if (_cretval)
+    _retval = *cast(gst.structure.Structure*)_cretval;
   return _retval;
 }
 
@@ -2585,7 +2586,7 @@ void valueSetIntRangeStep(gobject.value.Value value, int start, int end, int ste
 */
 void valueSetStructure(gobject.value.Value value, gst.structure.Structure structure)
 {
-  gst_value_set_structure(value ? cast(GValue*)value._cPtr(No.Dup) : null, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null);
+  gst_value_set_structure(value ? cast(GValue*)value._cPtr(No.Dup) : null, cast(const(GstStructure)*)&structure);
 }
 
 /**

@@ -14,7 +14,7 @@ import gst.types;
 */
 class StaticCaps
 {
-  GstStaticCaps cInstance;
+  GstStaticCaps _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class StaticCaps
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.static_caps.StaticCaps");
 
-    cInstance = *cast(GstStaticCaps*)ptr;
+    _cInstance = *cast(GstStaticCaps*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class StaticCaps
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

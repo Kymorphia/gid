@@ -44,10 +44,7 @@ template SymbolicPaintableT()
     if (colors)
       _nColors = cast(size_t)colors.length;
 
-    GdkRGBA[] _tmpcolors;
-    foreach (obj; colors)
-      _tmpcolors ~= *cast(GdkRGBA*)obj._cPtr;
-    const(GdkRGBA)* _colors = _tmpcolors.ptr;
+    auto _colors = cast(const(GdkRGBA)*)colors.ptr;
     gtk_symbolic_paintable_snapshot_symbolic(cast(GtkSymbolicPaintable*)this._cPtr, snapshot ? cast(GdkSnapshot*)snapshot._cPtr(No.Dup) : null, width, height, _colors, _nColors);
   }
 }

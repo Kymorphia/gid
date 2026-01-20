@@ -13,7 +13,7 @@ import gstsdp.types;
 */
 class SDPZone
 {
-  GstSDPZone cInstance;
+  GstSDPZone _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class SDPZone
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdpzone.SDPZone");
 
-    cInstance = *cast(GstSDPZone*)ptr;
+    _cInstance = *cast(GstSDPZone*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class SDPZone
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

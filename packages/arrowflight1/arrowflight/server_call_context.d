@@ -53,7 +53,6 @@ class ServerCallContext : gobject.object.ObjectWrap
       (*_dlg)(_name, _value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gaflight_server_call_context_foreach_incoming_header(cast(GAFlightServerCallContext*)this._cPtr, _funcCB, _func);
   }

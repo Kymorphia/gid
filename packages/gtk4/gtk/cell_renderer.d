@@ -280,7 +280,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = cast(bool)gtk_cell_renderer_activate(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags);
+    _retval = cast(bool)gtk_cell_renderer_activate(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags);
     return _retval;
   }
 
@@ -297,9 +297,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getAlignedArea(gtk.widget.Widget widget, gtk.types.CellRendererState flags, gdk.rectangle.Rectangle cellArea, out gdk.rectangle.Rectangle alignedArea)
   {
-    GdkRectangle _alignedArea;
-    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, flags, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, &_alignedArea);
-    alignedArea = new gdk.rectangle.Rectangle(cast(void*)&_alignedArea, No.Take);
+    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, flags, cast(const(GdkRectangle)*)&cellArea, cast(GdkRectangle*)&alignedArea);
   }
 
   /**
@@ -399,11 +397,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getPreferredSize(gtk.widget.Widget widget, out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize)
   {
-    GtkRequisition _minimumSize;
-    GtkRequisition _naturalSize;
-    gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, &_minimumSize, &_naturalSize);
-    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
-    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
+    gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(GtkRequisition*)&minimumSize, cast(GtkRequisition*)&naturalSize);
   }
 
   /**
@@ -597,7 +591,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void snapshot(gtk.snapshot.Snapshot snapshot, gtk.widget.Widget widget, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
-    gtk_cell_renderer_snapshot(cast(GtkCellRenderer*)this._cPtr, snapshot ? cast(GtkSnapshot*)snapshot._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags);
+    gtk_cell_renderer_snapshot(cast(GtkCellRenderer*)this._cPtr, snapshot ? cast(GtkSnapshot*)snapshot._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags);
   }
 
   /**
@@ -619,7 +613,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     GtkCellEditable* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
-    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags);
+    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
     return _retval;
   }
@@ -645,10 +639,10 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Connect to `EditingCanceled` signal.
   
       This signal gets emitted when the user cancels the process of editing a
-      cell.  For example, an editable cell renderer could be written to cancel
-      editing when the user presses Escape.
-      
-      See also: [gtk.cell_renderer.CellRenderer.stopEditing].
+        cell.  For example, an editable cell renderer could be written to cancel
+        editing when the user presses Escape.
+        
+        See also: [gtk.cell_renderer.CellRenderer.stopEditing].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -686,34 +680,34 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Connect to `EditingStarted` signal.
   
       This signal gets emitted when a cell starts to be edited.
-      The intended use of this signal is to do special setup
-      on editable, e.g. adding a [gtk.entry_completion.EntryCompletion] or setting
-      up additional columns in a [gtk.combo_box.ComboBox].
-      
-      See [gtk.cell_editable.CellEditable.startEditing] for information on the lifecycle of
-      the editable and a way to do setup that doesn’t depend on the renderer.
-      
-      Note that GTK doesn't guarantee that cell renderers will
-      continue to use the same kind of widget for editing in future
-      releases, therefore you should check the type of editable
-      before doing any specific setup, as in the following example:
-      ```c
-      static void
-      text_editing_started (GtkCellRenderer *cell,
-                            GtkCellEditable *editable,
-                            const char      *path,
-                            gpointer         data)
-      {
-        if (GTK_IS_ENTRY (editable))
-          {
-            GtkEntry *entry = GTK_ENTRY (editable);
-      
-            // ... create a GtkEntryCompletion
-      
-            gtk_entry_set_completion (entry, completion);
-          }
-      }
-      ```
+        The intended use of this signal is to do special setup
+        on editable, e.g. adding a [gtk.entry_completion.EntryCompletion] or setting
+        up additional columns in a [gtk.combo_box.ComboBox].
+        
+        See [gtk.cell_editable.CellEditable.startEditing] for information on the lifecycle of
+        the editable and a way to do setup that doesn’t depend on the renderer.
+        
+        Note that GTK doesn't guarantee that cell renderers will
+        continue to use the same kind of widget for editing in future
+        releases, therefore you should check the type of editable
+        before doing any specific setup, as in the following example:
+        ```c
+        static void
+        text_editing_started (GtkCellRenderer *cell,
+                              GtkCellEditable *editable,
+                              const char      *path,
+                              gpointer         data)
+        {
+          if (GTK_IS_ENTRY (editable))
+            {
+              GtkEntry *entry = GTK_ENTRY (editable);
+        
+              // ... create a GtkEntryCompletion
+        
+              gtk_entry_set_completion (entry, completion);
+            }
+        }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect

@@ -156,7 +156,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   /**
       Get `validateChanges` property.
       Returns: Defines if the "validate-change" signal gets emitted when
-      the holder's value changes.
+        the holder's value changes.
   */
   @property bool validateChanges()
   {
@@ -167,7 +167,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Set `validateChanges` property.
       Params:
         propval = Defines if the "validate-change" signal gets emitted when
-        the holder's value changes.
+          the holder's value changes.
   */
   @property void validateChanges(bool propval)
   {
@@ -418,7 +418,6 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     const(char)* _attribute = attribute.toCString(No.Alloc);
     gda_holder_set_attribute(cast(GdaHolder*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
@@ -743,7 +742,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Connect to `ValidateChange` signal.
   
       Gets emitted when holder is going to change its value. One can connect to
-      this signal to control which values holder can have (for example to implement some business rules)
+        this signal to control which values holder can have (for example to implement some business rules)
   
       Params:
         callback = signal callback delegate or function to connect
@@ -755,7 +754,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
           `holder` the instance the signal is connected to (optional)
   
           `Returns` NULL if holder is allowed to change its value to new_value, or a #GError
-          otherwise.
+            otherwise.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

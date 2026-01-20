@@ -205,7 +205,6 @@ class Dock : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
     panel_dock_foreach_frame(cast(PanelDock*)this._cPtr, _callbackCB, _callback);
   }
@@ -447,11 +446,11 @@ class Dock : gtk.widget.Widget
       Connect to `AdoptWidget` signal.
   
       Signal is emitted when a widget is requesting to be added via a
-      drag-n-drop event.
-      
-      This is generally propagated via #PanelFrame::adopt-widget to the
-      dock so that applications do not need to attach signal handlers
-      to every #PanelFrame.
+        drag-n-drop event.
+        
+        This is generally propagated via #PanelFrame::adopt-widget to the
+        dock so that applications do not need to attach signal handlers
+        to every #PanelFrame.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -463,7 +462,7 @@ class Dock : gtk.widget.Widget
           `dock` the instance the signal is connected to (optional)
   
           `Returns` `GDK_EVENT_STOP` to prevent dropping, otherwise
-            `GDK_EVENT_PROPAGATE` to allow adopting the widget.
+              `GDK_EVENT_PROPAGATE` to allow adopting the widget.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -589,7 +588,7 @@ class Dock : gtk.widget.Widget
       Connect to `PanelDragEnd` signal.
   
       This signal is emitted when dragging of a panel either
-      completes or was cancelled.
+        completes or was cancelled.
   
       Params:
         callback = signal callback delegate or function to connect

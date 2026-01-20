@@ -58,13 +58,15 @@ class Fontset : gobject.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(PangoFontset* fontset, PangoFont* font, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(pango.types.FontsetForeachFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     pango_fontset_foreach(cast(PangoFontset*)this._cPtr, _funcCB, _func);
   }
@@ -93,7 +95,9 @@ class Fontset : gobject.object.ObjectWrap
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_fontset_get_metrics(cast(PangoFontset*)this._cPtr);
-    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
+    pango.font_metrics.FontMetrics _retval;
+    if (_cretval)
+      _retval = *cast(pango.font_metrics.FontMetrics*)_cretval;
     return _retval;
   }
 }

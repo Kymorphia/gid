@@ -277,11 +277,11 @@ class NativeDialog : gobject.object.ObjectWrap
       Connect to `Response` signal.
   
       Emitted when the user responds to the dialog.
-      
-      When this is called the dialog has been hidden.
-      
-      If you call [gtk.native_dialog.NativeDialog.hide] before the user
-      responds to the dialog this signal will not be emitted.
+        
+        When this is called the dialog has been hidden.
+        
+        If you call [gtk.native_dialog.NativeDialog.hide] before the user
+        responds to the dialog this signal will not be emitted.
   
       Params:
         callback = signal callback delegate or function to connect

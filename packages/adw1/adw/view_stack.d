@@ -103,12 +103,12 @@ class ViewStack : gtk.widget.Widget
   /**
       Get `hhomogeneous` property.
       Returns: Whether the stack is horizontally homogeneous.
-      
-      If the stack is horizontally homogeneous, it allocates the same width for
-      all children.
-      
-      If it's `FALSE`, the stack may change width when a different child becomes
-      visible.
+        
+        If the stack is horizontally homogeneous, it allocates the same width for
+        all children.
+        
+        If it's `FALSE`, the stack may change width when a different child becomes
+        visible.
   */
   @property bool hhomogeneous()
   {
@@ -119,12 +119,12 @@ class ViewStack : gtk.widget.Widget
       Set `hhomogeneous` property.
       Params:
         propval = Whether the stack is horizontally homogeneous.
-        
-        If the stack is horizontally homogeneous, it allocates the same width for
-        all children.
-        
-        If it's `FALSE`, the stack may change width when a different child becomes
-        visible.
+          
+          If the stack is horizontally homogeneous, it allocates the same width for
+          all children.
+          
+          If it's `FALSE`, the stack may change width when a different child becomes
+          visible.
   */
   @property void hhomogeneous(bool propval)
   {
@@ -134,10 +134,10 @@ class ViewStack : gtk.widget.Widget
   /**
       Get `pages` property.
       Returns: A selection model with the stack's pages.
-      
-      This can be used to keep an up-to-date view. The model also implements
-      [gtk.selection_model.SelectionModel] and can be used to track and change the visible
-      page.
+        
+        This can be used to keep an up-to-date view. The model also implements
+        [gtk.selection_model.SelectionModel] and can be used to track and change the visible
+        page.
   */
   @property gtk.selection_model.SelectionModel pages()
   {
@@ -147,12 +147,12 @@ class ViewStack : gtk.widget.Widget
   /**
       Get `vhomogeneous` property.
       Returns: Whether the stack is vertically homogeneous.
-      
-      If the stack is vertically homogeneous, it allocates the same height for
-      all children.
-      
-      If it's `FALSE`, the stack may change height when a different child becomes
-      visible.
+        
+        If the stack is vertically homogeneous, it allocates the same height for
+        all children.
+        
+        If it's `FALSE`, the stack may change height when a different child becomes
+        visible.
   */
   @property bool vhomogeneous()
   {
@@ -163,12 +163,12 @@ class ViewStack : gtk.widget.Widget
       Set `vhomogeneous` property.
       Params:
         propval = Whether the stack is vertically homogeneous.
-        
-        If the stack is vertically homogeneous, it allocates the same height for
-        all children.
-        
-        If it's `FALSE`, the stack may change height when a different child becomes
-        visible.
+          
+          If the stack is vertically homogeneous, it allocates the same height for
+          all children.
+          
+          If it's `FALSE`, the stack may change height when a different child becomes
+          visible.
   */
   @property void vhomogeneous(bool propval)
   {
@@ -197,8 +197,8 @@ class ViewStack : gtk.widget.Widget
   /**
       Get `visibleChildName` property.
       Returns: The name of the widget currently visible in the stack.
-      
-      See `property@ViewStack:visible-child`.
+        
+        See `property@ViewStack:visible-child`.
   */
   @property string visibleChildName()
   {
@@ -209,8 +209,8 @@ class ViewStack : gtk.widget.Widget
       Set `visibleChildName` property.
       Params:
         propval = The name of the widget currently visible in the stack.
-        
-        See `property@ViewStack:visible-child`.
+          
+          See `property@ViewStack:visible-child`.
   */
   @property void visibleChildName(string propval)
   {

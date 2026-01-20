@@ -2,7 +2,6 @@
 module gstgl.glbase_memory;
 
 import gid.gid;
-import glib.mutex;
 import glib.types;
 import gobject.boxed;
 import gst.allocation_params;
@@ -52,7 +51,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -101,12 +100,6 @@ class GLBaseMemory : gobject.boxed.Boxed
   {
     cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLBaseMemory*)this._cPtr).context);
     dToC(propval, cast(void*)&(cast(GstGLBaseMemory*)this._cPtr).context);
-  }
-
-  /** */
-  @property glib.mutex.Mutex lock()
-  {
-    return new glib.mutex.Mutex(cast(GMutex*)&(cast(GstGLBaseMemory*)this._cPtr).lock, No.Take);
   }
 
   /** */
@@ -186,7 +179,7 @@ class GLBaseMemory : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_base_memory_init(cast(GstGLBaseMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params._cPtr(No.Dup) : null, size, userData, _notifyCB);
+    gst_gl_base_memory_init(cast(GstGLBaseMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params, size, userData, _notifyCB);
   }
 
   /** */

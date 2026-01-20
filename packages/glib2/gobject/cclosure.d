@@ -13,7 +13,7 @@ import gobject.value;
 */
 class CClosure
 {
-  GCClosure cInstance;
+  GCClosure _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class CClosure
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.cclosure.CClosure");
 
-    cInstance = *cast(GCClosure*)ptr;
+    _cInstance = *cast(GCClosure*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class CClosure
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

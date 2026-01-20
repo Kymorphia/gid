@@ -75,12 +75,12 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   /**
       Get `iconSize` property.
       Returns: The size of the icons in a toolbar is normally determined by
-      the toolbar-icon-size setting. When this property is set, it
-      overrides the setting.
-      
-      This should only be used for special-purpose toolbars, normal
-      application toolbars should respect the user preferences for the
-      size of icons.
+        the toolbar-icon-size setting. When this property is set, it
+        overrides the setting.
+        
+        This should only be used for special-purpose toolbars, normal
+        application toolbars should respect the user preferences for the
+        size of icons.
   */
   @property gtk.types.IconSize iconSize()
   {
@@ -91,12 +91,12 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Set `iconSize` property.
       Params:
         propval = The size of the icons in a toolbar is normally determined by
-        the toolbar-icon-size setting. When this property is set, it
-        overrides the setting.
-        
-        This should only be used for special-purpose toolbars, normal
-        application toolbars should respect the user preferences for the
-        size of icons.
+          the toolbar-icon-size setting. When this property is set, it
+          overrides the setting.
+          
+          This should only be used for special-purpose toolbars, normal
+          application toolbars should respect the user preferences for the
+          size of icons.
   */
   @property void iconSize(gtk.types.IconSize propval)
   {
@@ -379,7 +379,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Connect to `FocusHomeOrEnd` signal.
   
       A keybinding signal used internally by GTK+. This signal can't
-      be used in application code
+        be used in application code
   
       Params:
         callback = signal callback delegate or function to connect
@@ -470,13 +470,13 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Connect to `PopupContextMenu` signal.
   
       Emitted when the user right-clicks the toolbar or uses the
-      keybinding to display a popup menu.
-      
-      Application developers should handle this signal if they want
-      to display a context menu on the toolbar. The context-menu should
-      appear at the coordinates given by `x` and `y`. The mouse button
-      number is given by the button parameter. If the menu was popped
-      up using the keybaord, button is -1.
+        keybinding to display a popup menu.
+        
+        Application developers should handle this signal if they want
+        to display a context menu on the toolbar. The context-menu should
+        appear at the coordinates given by `x` and `y`. The mouse button
+        number is given by the button parameter. If the menu was popped
+        up using the keybaord, button is -1.
   
       Params:
         callback = signal callback delegate or function to connect

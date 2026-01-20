@@ -11,7 +11,7 @@ import gobject.types;
 */
 class TypeInstance
 {
-  GTypeInstance cInstance;
+  GTypeInstance _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class TypeInstance
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.type_instance.TypeInstance");
 
-    cInstance = *cast(GTypeInstance*)ptr;
+    _cInstance = *cast(GTypeInstance*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class TypeInstance
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

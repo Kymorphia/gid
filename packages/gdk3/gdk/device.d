@@ -53,7 +53,7 @@ class Device : gobject.object.ObjectWrap
   /**
       Get `associatedDevice` property.
       Returns: Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
-      always come in keyboard/pointer pairs. Other device types will have a null associated device.
+        always come in keyboard/pointer pairs. Other device types will have a null associated device.
   */
   @property gdk.device.Device associatedDevice()
   {
@@ -625,12 +625,12 @@ class Device : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       The ::changed signal is emitted either when the #GdkDevice
-      has changed the number of either axes or keys. For example
-      In X this will normally happen when the slave device routing
-      events through the master device changes (for example, user
-      switches from the USB mouse to a tablet), in that case the
-      master device will change to reflect the new slave device
-      axes and keys.
+        has changed the number of either axes or keys. For example
+        In X this will normally happen when the slave device routing
+        events through the master device changes (for example, user
+        switches from the USB mouse to a tablet), in that case the
+        master device will change to reflect the new slave device
+        axes and keys.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -668,7 +668,7 @@ class Device : gobject.object.ObjectWrap
       Connect to `ToolChanged` signal.
   
       The ::tool-changed signal is emitted on pen/eraser
-      #GdkDevices whenever tools enter or leave proximity.
+        #GdkDevices whenever tools enter or leave proximity.
   
       Params:
         callback = signal callback delegate or function to connect

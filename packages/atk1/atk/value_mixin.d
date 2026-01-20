@@ -325,17 +325,17 @@ template ValueT()
       Connect to `ValueChanged` signal.
   
       The 'value-changed' signal is emitted when the current value
-      that represent the object changes. value is the numerical
-      representation of this new value.  text is the human
-      readable text alternative of value, and can be NULL if it is
-      not available. Note that if there is a textual description
-      associated with the new numeric value, that description
-      should be included regardless of whether or not it has also
-      changed.
-      
-      Example: a password meter whose value changes as the user
-      types their new password. Appropiate value text would be
-      "weak", "acceptable" and "strong".
+        that represent the object changes. value is the numerical
+        representation of this new value.  text is the human
+        readable text alternative of value, and can be NULL if it is
+        not available. Note that if there is a textual description
+        associated with the new numeric value, that description
+        should be included regardless of whether or not it has also
+        changed.
+        
+        Example: a password meter whose value changes as the user
+        types their new password. Appropiate value text would be
+        "weak", "acceptable" and "strong".
   
       Params:
         callback = signal callback delegate or function to connect
@@ -345,7 +345,7 @@ template ValueT()
           `value` the new value in a numerical form. (optional)
   
           `text` human readable text alternative (also called
-          description) of this object. NULL if not available. (optional)
+            description) of this object. NULL if not available. (optional)
   
           `value` the instance the signal is connected to (optional)
   

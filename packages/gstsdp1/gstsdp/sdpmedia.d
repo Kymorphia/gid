@@ -17,7 +17,7 @@ import gstsdp.types;
 */
 class SDPMedia
 {
-  GstSDPMedia cInstance;
+  GstSDPMedia _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -25,7 +25,7 @@ class SDPMedia
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdpmedia.SDPMedia");
 
-    cInstance = *cast(GstSDPMedia*)ptr;
+    _cInstance = *cast(GstSDPMedia*)ptr;
 
     if (take)
       gFree(ptr);
@@ -34,7 +34,7 @@ class SDPMedia
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

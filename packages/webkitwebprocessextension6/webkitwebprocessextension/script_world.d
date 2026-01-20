@@ -108,10 +108,10 @@ class ScriptWorld : gobject.object.ObjectWrap
       Connect to `WindowObjectCleared` signal.
   
       Emitted when the JavaScript window object in a #WebKitScriptWorld has been
-      cleared. This is the preferred place to set custom properties on the window
-      object using the JavaScriptCore API. You can get the window object of frame
-      from the JavaScript execution context of world that is returned by
-      [webkitwebprocessextension.frame.Frame.getJsContextForScriptWorld].
+        cleared. This is the preferred place to set custom properties on the window
+        object using the JavaScriptCore API. You can get the window object of frame
+        from the JavaScript execution context of world that is returned by
+        [webkitwebprocessextension.frame.Frame.getJsContextForScriptWorld].
   
       Params:
         callback = signal callback delegate or function to connect

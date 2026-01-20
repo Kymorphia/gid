@@ -9,7 +9,7 @@ import gstaudio.types;
 /** */
 class AudioQuantize
 {
-  GstAudioQuantize* cInstancePtr;
+  GstAudioQuantize* _cInstancePtr;
   bool owned;
 
   /** */
@@ -18,7 +18,7 @@ class AudioQuantize
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_quantize.AudioQuantize");
 
-    cInstancePtr = cast(GstAudioQuantize*)ptr;
+    _cInstancePtr = cast(GstAudioQuantize*)ptr;
 
     owned = take;
   }
@@ -26,7 +26,7 @@ class AudioQuantize
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

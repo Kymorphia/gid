@@ -120,7 +120,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `restrictToFillLevel` property.
       Returns: Controls whether slider movement is restricted to an
-      upper boundary set by the fill level.
+        upper boundary set by the fill level.
   */
   @property bool restrictToFillLevel()
   {
@@ -131,7 +131,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `restrictToFillLevel` property.
       Params:
         propval = Controls whether slider movement is restricted to an
-        upper boundary set by the fill level.
+          upper boundary set by the fill level.
   */
   @property void restrictToFillLevel(bool propval)
   {
@@ -141,9 +141,9 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `roundDigits` property.
       Returns: The number of digits to round the value to when
-      it changes.
-      
-      See `signal@Gtk.Range::change-value`.
+        it changes.
+        
+        See `signal@Gtk.Range::change-value`.
   */
   @property int roundDigits()
   {
@@ -154,9 +154,9 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `roundDigits` property.
       Params:
         propval = The number of digits to round the value to when
-        it changes.
-        
-        See `signal@Gtk.Range::change-value`.
+          it changes.
+          
+          See `signal@Gtk.Range::change-value`.
   */
   @property void roundDigits(int propval)
   {
@@ -166,7 +166,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   /**
       Get `showFillLevel` property.
       Returns: Controls whether fill level indicator graphics are displayed
-      on the trough.
+        on the trough.
   */
   @property bool showFillLevel()
   {
@@ -177,7 +177,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Set `showFillLevel` property.
       Params:
         propval = Controls whether fill level indicator graphics are displayed
-        on the trough.
+          on the trough.
   */
   @property void showFillLevel(bool propval)
   {
@@ -247,9 +247,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void getRangeRect(out gdk.rectangle.Rectangle rangeRect)
   {
-    GdkRectangle _rangeRect;
-    gtk_range_get_range_rect(cast(GtkRange*)this._cPtr, &_rangeRect);
-    rangeRect = new gdk.rectangle.Rectangle(cast(void*)&_rangeRect, No.Take);
+    gtk_range_get_range_rect(cast(GtkRange*)this._cPtr, cast(GdkRectangle*)&rangeRect);
   }
 
   /**
@@ -512,7 +510,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `AdjustBounds` signal.
   
       Emitted before clamping a value, to give the application a
-      chance to adjust the bounds.
+        chance to adjust the bounds.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -557,17 +555,17 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `ChangeValue` signal.
   
       Emitted when a scroll action is performed on a range.
-      
-      It allows an application to determine the type of scroll event
-      that occurred and the resultant new value. The application can
-      handle the event itself and return true to prevent further
-      processing. Or, by returning false, it can pass the event to
-      other handlers until the default GTK handler is reached.
-      
-      The value parameter is unrounded. An application that overrides
-      the ::change-value signal is responsible for clamping the value
-      to the desired number of decimal digits; the default GTK
-      handler clamps the value based on `propertyGtk.Range:round-digits`.
+        
+        It allows an application to determine the type of scroll event
+        that occurred and the resultant new value. The application can
+        handle the event itself and return true to prevent further
+        processing. Or, by returning false, it can pass the event to
+        other handlers until the default GTK handler is reached.
+        
+        The value parameter is unrounded. An application that overrides
+        the ::change-value signal is responsible for clamping the value
+        to the desired number of decimal digits; the default GTK
+        handler clamps the value based on `propertyGtk.Range:round-digits`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -581,7 +579,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
           `range` the instance the signal is connected to (optional)
   
           `Returns` true to prevent other handlers from being invoked for
-              the signal, false to propagate the signal further
+                the signal, false to propagate the signal further
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -622,8 +620,8 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Connect to `MoveSlider` signal.
   
       Virtual function that moves the slider.
-      
-      Used for keybindings.
+        
+        Used for keybindings.
   
       Params:
         callback = signal callback delegate or function to connect

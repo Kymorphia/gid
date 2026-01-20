@@ -40,7 +40,7 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
   /**
       Get `nullFallback` property.
       Returns: The fallback string for null. This is used only by
-      #GADatasetHivePartitioning.
+        #GADatasetHivePartitioning.
   */
   @property string nullFallback()
   {
@@ -51,7 +51,7 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
       Set `nullFallback` property.
       Params:
         propval = The fallback string for null. This is used only by
-        #GADatasetHivePartitioning.
+          #GADatasetHivePartitioning.
   */
   @property void nullFallback(string propval)
   {

@@ -67,8 +67,8 @@ class Calendar : gtk.widget.Widget
   /**
       Get `day` property.
       Returns: The selected day (as a number between 1 and 31, or 0
-      to unselect the currently selected day).
-      This property gets initially set to the current day.
+        to unselect the currently selected day).
+        This property gets initially set to the current day.
   */
   @property int day()
   {
@@ -79,8 +79,8 @@ class Calendar : gtk.widget.Widget
       Set `day` property.
       Params:
         propval = The selected day (as a number between 1 and 31, or 0
-        to unselect the currently selected day).
-        This property gets initially set to the current day.
+          to unselect the currently selected day).
+          This property gets initially set to the current day.
   */
   @property void day(int propval)
   {
@@ -90,7 +90,7 @@ class Calendar : gtk.widget.Widget
   /**
       Get `detailHeightRows` property.
       Returns: Height of a detail cell, in rows.
-      A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+        A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
   */
   @property int detailHeightRows()
   {
@@ -101,7 +101,7 @@ class Calendar : gtk.widget.Widget
       Set `detailHeightRows` property.
       Params:
         propval = Height of a detail cell, in rows.
-        A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+          A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
   */
   @property void detailHeightRows(int propval)
   {
@@ -111,7 +111,7 @@ class Calendar : gtk.widget.Widget
   /**
       Get `detailWidthChars` property.
       Returns: Width of a detail cell, in characters.
-      A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+        A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
   */
   @property int detailWidthChars()
   {
@@ -122,7 +122,7 @@ class Calendar : gtk.widget.Widget
       Set `detailWidthChars` property.
       Params:
         propval = Width of a detail cell, in characters.
-        A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+          A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
   */
   @property void detailWidthChars(int propval)
   {
@@ -132,7 +132,7 @@ class Calendar : gtk.widget.Widget
   /**
       Get `month` property.
       Returns: The selected month (as a number between 0 and 11).
-      This property gets initially set to the current month.
+        This property gets initially set to the current month.
   */
   @property int month()
   {
@@ -143,7 +143,7 @@ class Calendar : gtk.widget.Widget
       Set `month` property.
       Params:
         propval = The selected month (as a number between 0 and 11).
-        This property gets initially set to the current month.
+          This property gets initially set to the current month.
   */
   @property void month(int propval)
   {
@@ -191,8 +191,8 @@ class Calendar : gtk.widget.Widget
   /**
       Get `showDetails` property.
       Returns: Determines whether details are shown directly in the widget, or if they are
-      available only as tooltip. When this property is set days with details are
-      marked.
+        available only as tooltip. When this property is set days with details are
+        marked.
   */
   @property bool showDetails()
   {
@@ -203,8 +203,8 @@ class Calendar : gtk.widget.Widget
       Set `showDetails` property.
       Params:
         propval = Determines whether details are shown directly in the widget, or if they are
-        available only as tooltip. When this property is set days with details are
-        marked.
+          available only as tooltip. When this property is set days with details are
+          marked.
   */
   @property void showDetails(bool propval)
   {
@@ -252,7 +252,7 @@ class Calendar : gtk.widget.Widget
   /**
       Get `year` property.
       Returns: The selected year.
-      This property gets initially set to the current year.
+        This property gets initially set to the current year.
   */
   @property int year()
   {
@@ -263,7 +263,7 @@ class Calendar : gtk.widget.Widget
       Set `year` property.
       Params:
         propval = The selected year.
-        This property gets initially set to the current year.
+          This property gets initially set to the current year.
   */
   @property void year(int propval)
   {
@@ -413,12 +413,11 @@ class Calendar : gtk.widget.Widget
       auto _dlg = cast(gtk.types.CalendarDetailFunc*)userData;
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.calendar.Calendar)(cast(void*)calendar, No.Take), year, month, day);
-      char* _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_calendar_set_detail_func(cast(GtkCalendar*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -549,7 +548,7 @@ class Calendar : gtk.widget.Widget
       Connect to `MonthChanged` signal.
   
       Emitted when the user clicks a button to change the selected month on a
-      calendar.
+        calendar.
   
       Params:
         callback = signal callback delegate or function to connect

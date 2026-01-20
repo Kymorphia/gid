@@ -115,13 +115,13 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   /**
       Get `ignoreInactivePads` property.
       Returns: Don't wait for inactive pads when live. An inactive pad
-      is a pad that hasn't yet received a buffer, but that has
-      been waited on at least once.
-      
-      The purpose of this property is to avoid aggregating on
-      timeout when new pads are requested in advance of receiving
-      data flow, for example the user may decide to connect it later,
-      but wants to configure it already.
+        is a pad that hasn't yet received a buffer, but that has
+        been waited on at least once.
+        
+        The purpose of this property is to avoid aggregating on
+        timeout when new pads are requested in advance of receiving
+        data flow, for example the user may decide to connect it later,
+        but wants to configure it already.
   */
   @property bool ignoreInactivePads()
   {
@@ -132,13 +132,13 @@ class AudioAggregator : gstbase.aggregator.Aggregator
       Set `ignoreInactivePads` property.
       Params:
         propval = Don't wait for inactive pads when live. An inactive pad
-        is a pad that hasn't yet received a buffer, but that has
-        been waited on at least once.
-        
-        The purpose of this property is to avoid aggregating on
-        timeout when new pads are requested in advance of receiving
-        data flow, for example the user may decide to connect it later,
-        but wants to configure it already.
+          is a pad that hasn't yet received a buffer, but that has
+          been waited on at least once.
+          
+          The purpose of this property is to avoid aggregating on
+          timeout when new pads are requested in advance of receiving
+          data flow, for example the user may decide to connect it later,
+          but wants to configure it already.
   */
   @property void ignoreInactivePads(bool propval)
   {

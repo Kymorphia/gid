@@ -75,7 +75,7 @@ class GestureZoom : gtk.gesture.Gesture
       Connect to `ScaleChanged` signal.
   
       This signal is emitted whenever the distance between both tracked
-      sequences changes.
+        sequences changes.
   
       Params:
         callback = signal callback delegate or function to connect

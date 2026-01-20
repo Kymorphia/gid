@@ -121,25 +121,26 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
 
-      gboolean _retval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+      _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _getMappingCB = getMapping ? &_getMappingCallback : null;
-
     extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData)
     {
       glib.variant.Variant _dretval;
       auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
 
       _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
-      GVariant* _retval = cast(GVariant*)_dretval._cPtr(Yes.Dup);
+      auto _retval = cast(GVariant*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _setMappingCB = setMapping ? &_setMappingCallback : null;
-
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
     auto _setMapping = setMapping ? freezeDelegate(cast(void*)&setMapping) : null;

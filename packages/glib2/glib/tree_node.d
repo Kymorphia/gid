@@ -11,7 +11,7 @@ import glib.types;
 */
 class TreeNode
 {
-  GTreeNode* cInstancePtr;
+  GTreeNode* _cInstancePtr;
   bool owned;
 
   /** */
@@ -20,7 +20,7 @@ class TreeNode
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.tree_node.TreeNode");
 
-    cInstancePtr = cast(GTreeNode*)ptr;
+    _cInstancePtr = cast(GTreeNode*)ptr;
 
     owned = take;
   }
@@ -28,7 +28,7 @@ class TreeNode
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

@@ -1,8 +1,7 @@
-/// Module for [Matrix] class
+/// Module for [Matrix] struct
 module pango.matrix;
 
 import gid.gid;
-import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
 import pango.types;
@@ -18,174 +17,37 @@ import pango.types;
     y_device = x_user * matrix->yx + y_user * matrix->yy + matrix->y0;
     ```
 */
-class Matrix : gobject.boxed.Boxed
+struct Matrix
 {
+  /**
+      1st component of the transformation matrix
+  */
+  double xx;
 
   /**
-      Create a `matrix.Matrix` boxed type.
-      Params:
-        xx = 1st component of the transformation matrix
-        xy = 2nd component of the transformation matrix
-        yx = 3rd component of the transformation matrix
-        yy = 4th component of the transformation matrix
-        x0 = x translation
-        y0 = y translation
+      2nd component of the transformation matrix
   */
-  this(double xx = 0.0, double xy = 0.0, double yx = 0.0, double yy = 0.0, double x0 = 0.0, double y0 = 0.0)
-  {
-    super(gMalloc(PangoMatrix.sizeof), Yes.Take);
-    this.xx = xx;
-    this.xy = xy;
-    this.yx = yx;
-    this.yy = yy;
-    this.x0 = x0;
-    this.y0 = y0;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())pango_matrix_get_type != &gidSymbolNotFound ? pango_matrix_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Matrix self()
-  {
-    return this;
-  }
+  double xy;
 
   /**
-      Get `xx` field.
-      Returns: 1st component of the transformation matrix
+      3rd component of the transformation matrix
   */
-  @property double xx()
-  {
-    return (cast(PangoMatrix*)this._cPtr).xx;
-  }
+  double yx;
 
   /**
-      Set `xx` field.
-      Params:
-        propval = 1st component of the transformation matrix
+      4th component of the transformation matrix
   */
-  @property void xx(double propval)
-  {
-    (cast(PangoMatrix*)this._cPtr).xx = propval;
-  }
+  double yy;
 
   /**
-      Get `xy` field.
-      Returns: 2nd component of the transformation matrix
+      x translation
   */
-  @property double xy()
-  {
-    return (cast(PangoMatrix*)this._cPtr).xy;
-  }
+  double x0;
 
   /**
-      Set `xy` field.
-      Params:
-        propval = 2nd component of the transformation matrix
+      y translation
   */
-  @property void xy(double propval)
-  {
-    (cast(PangoMatrix*)this._cPtr).xy = propval;
-  }
-
-  /**
-      Get `yx` field.
-      Returns: 3rd component of the transformation matrix
-  */
-  @property double yx()
-  {
-    return (cast(PangoMatrix*)this._cPtr).yx;
-  }
-
-  /**
-      Set `yx` field.
-      Params:
-        propval = 3rd component of the transformation matrix
-  */
-  @property void yx(double propval)
-  {
-    (cast(PangoMatrix*)this._cPtr).yx = propval;
-  }
-
-  /**
-      Get `yy` field.
-      Returns: 4th component of the transformation matrix
-  */
-  @property double yy()
-  {
-    return (cast(PangoMatrix*)this._cPtr).yy;
-  }
-
-  /**
-      Set `yy` field.
-      Params:
-        propval = 4th component of the transformation matrix
-  */
-  @property void yy(double propval)
-  {
-    (cast(PangoMatrix*)this._cPtr).yy = propval;
-  }
-
-  /**
-      Get `x0` field.
-      Returns: x translation
-  */
-  @property double x0()
-  {
-    return (cast(PangoMatrix*)this._cPtr).x0;
-  }
-
-  /**
-      Set `x0` field.
-      Params:
-        propval = x translation
-  */
-  @property void x0(double propval)
-  {
-    (cast(PangoMatrix*)this._cPtr).x0 = propval;
-  }
-
-  /**
-      Get `y0` field.
-      Returns: y translation
-  */
-  @property double y0()
-  {
-    return (cast(PangoMatrix*)this._cPtr).y0;
-  }
-
-  /**
-      Set `y0` field.
-      Params:
-        propval = y translation
-  */
-  @property void y0(double propval)
-  {
-    (cast(PangoMatrix*)this._cPtr).y0 = propval;
-  }
+  double y0;
 
   /**
       Changes the transformation represented by matrix to be the
@@ -197,7 +59,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void concat(pango.matrix.Matrix newMatrix)
   {
-    pango_matrix_concat(cast(PangoMatrix*)this._cPtr, newMatrix ? cast(const(PangoMatrix)*)newMatrix._cPtr(No.Dup) : null);
+    pango_matrix_concat(cast(PangoMatrix*)&this, cast(const(PangoMatrix)*)&newMatrix);
   }
 
   /**
@@ -207,8 +69,10 @@ class Matrix : gobject.boxed.Boxed
   pango.matrix.Matrix copy()
   {
     PangoMatrix* _cretval;
-    _cretval = pango_matrix_copy(cast(const(PangoMatrix)*)this._cPtr);
-    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = pango_matrix_copy(cast(const(PangoMatrix)*)&this);
+    pango.matrix.Matrix _retval;
+    if (_cretval)
+      _retval = *cast(pango.matrix.Matrix*)_cretval;
     return _retval;
   }
 
@@ -224,7 +88,7 @@ class Matrix : gobject.boxed.Boxed
   double getFontScaleFactor()
   {
     double _retval;
-    _retval = pango_matrix_get_font_scale_factor(cast(const(PangoMatrix)*)this._cPtr);
+    _retval = pango_matrix_get_font_scale_factor(cast(const(PangoMatrix)*)&this);
     return _retval;
   }
 
@@ -243,7 +107,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void getFontScaleFactors(out double xscale, out double yscale)
   {
-    pango_matrix_get_font_scale_factors(cast(const(PangoMatrix)*)this._cPtr, cast(double*)&xscale, cast(double*)&yscale);
+    pango_matrix_get_font_scale_factors(cast(const(PangoMatrix)*)&this, cast(double*)&xscale, cast(double*)&yscale);
   }
 
   /**
@@ -260,7 +124,7 @@ class Matrix : gobject.boxed.Boxed
   double getSlantRatio()
   {
     double _retval;
-    _retval = pango_matrix_get_slant_ratio(cast(const(PangoMatrix)*)this._cPtr);
+    _retval = pango_matrix_get_slant_ratio(cast(const(PangoMatrix)*)&this);
     return _retval;
   }
 
@@ -274,7 +138,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void rotate(double degrees)
   {
-    pango_matrix_rotate(cast(PangoMatrix*)this._cPtr, degrees);
+    pango_matrix_rotate(cast(PangoMatrix*)&this, degrees);
   }
 
   /**
@@ -289,7 +153,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void scale(double scaleX, double scaleY)
   {
-    pango_matrix_scale(cast(PangoMatrix*)this._cPtr, scaleX, scaleY);
+    pango_matrix_scale(cast(PangoMatrix*)&this, scaleX, scaleY);
   }
 
   /**
@@ -315,7 +179,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformDistance(ref double dx, ref double dy)
   {
-    pango_matrix_transform_distance(cast(const(PangoMatrix)*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
+    pango_matrix_transform_distance(cast(const(PangoMatrix)*)&this, cast(double*)&dx, cast(double*)&dy);
   }
 
   /**
@@ -335,7 +199,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformPixelRectangle(ref pango.types.Rectangle rect)
   {
-    pango_matrix_transform_pixel_rectangle(cast(const(PangoMatrix)*)this._cPtr, &rect);
+    pango_matrix_transform_pixel_rectangle(cast(const(PangoMatrix)*)&this, &rect);
   }
 
   /**
@@ -347,7 +211,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformPoint(ref double x, ref double y)
   {
-    pango_matrix_transform_point(cast(const(PangoMatrix)*)this._cPtr, cast(double*)&x, cast(double*)&y);
+    pango_matrix_transform_point(cast(const(PangoMatrix)*)&this, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -375,7 +239,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformRectangle(ref pango.types.Rectangle rect)
   {
-    pango_matrix_transform_rectangle(cast(const(PangoMatrix)*)this._cPtr, &rect);
+    pango_matrix_transform_rectangle(cast(const(PangoMatrix)*)&this, &rect);
   }
 
   /**
@@ -389,6 +253,6 @@ class Matrix : gobject.boxed.Boxed
   */
   void translate(double tx, double ty)
   {
-    pango_matrix_translate(cast(PangoMatrix*)this._cPtr, tx, ty);
+    pango_matrix_translate(cast(PangoMatrix*)&this, tx, ty);
   }
 }

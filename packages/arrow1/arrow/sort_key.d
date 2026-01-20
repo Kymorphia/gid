@@ -40,10 +40,10 @@ class SortKey : gobject.object.ObjectWrap
   /**
       Get `target` property.
       Returns: A name or dot path for the sort target.
-      
-          dot_path = '.' name
-                   | '[' digit+ ']'
-                   | dot_path+
+        
+            dot_path = '.' name
+                     | '[' digit+ ']'
+                     | dot_path+
   */
   @property string target()
   {

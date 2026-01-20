@@ -45,7 +45,7 @@ class GlyphPosition : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -70,7 +70,7 @@ class GlyphPosition : gobject.boxed.Boxed
   /**
       Get `xAdvance` field.
       Returns: how much the line advances after drawing this glyph when setting
-                  text in horizontal direction.
+                    text in horizontal direction.
   */
   @property harfbuzz.types.Position xAdvance()
   {
@@ -81,7 +81,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Set `xAdvance` field.
       Params:
         propval = how much the line advances after drawing this glyph when setting
-                    text in horizontal direction.
+                      text in horizontal direction.
   */
   @property void xAdvance(harfbuzz.types.Position propval)
   {
@@ -91,7 +91,7 @@ class GlyphPosition : gobject.boxed.Boxed
   /**
       Get `yAdvance` field.
       Returns: how much the line advances after drawing this glyph when setting
-                  text in vertical direction.
+                    text in vertical direction.
   */
   @property harfbuzz.types.Position yAdvance()
   {
@@ -102,7 +102,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Set `yAdvance` field.
       Params:
         propval = how much the line advances after drawing this glyph when setting
-                    text in vertical direction.
+                      text in vertical direction.
   */
   @property void yAdvance(harfbuzz.types.Position propval)
   {
@@ -112,7 +112,7 @@ class GlyphPosition : gobject.boxed.Boxed
   /**
       Get `xOffset` field.
       Returns: how much the glyph moves on the X-axis before drawing it, this
-                 should not affect how much the line advances.
+                   should not affect how much the line advances.
   */
   @property harfbuzz.types.Position xOffset()
   {
@@ -123,7 +123,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Set `xOffset` field.
       Params:
         propval = how much the glyph moves on the X-axis before drawing it, this
-                   should not affect how much the line advances.
+                     should not affect how much the line advances.
   */
   @property void xOffset(harfbuzz.types.Position propval)
   {
@@ -133,7 +133,7 @@ class GlyphPosition : gobject.boxed.Boxed
   /**
       Get `yOffset` field.
       Returns: how much the glyph moves on the Y-axis before drawing it, this
-                 should not affect how much the line advances.
+                   should not affect how much the line advances.
   */
   @property harfbuzz.types.Position yOffset()
   {
@@ -144,7 +144,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Set `yOffset` field.
       Params:
         propval = how much the glyph moves on the Y-axis before drawing it, this
-                   should not affect how much the line advances.
+                     should not affect how much the line advances.
   */
   @property void yOffset(harfbuzz.types.Position propval)
   {

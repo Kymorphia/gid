@@ -10,7 +10,7 @@ import gtk.types;
 /** */
 class StockItem
 {
-  GtkStockItem cInstance;
+  GtkStockItem _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -18,7 +18,7 @@ class StockItem
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.stock_item.StockItem");
 
-    cInstance = *cast(GtkStockItem*)ptr;
+    _cInstance = *cast(GtkStockItem*)ptr;
 
     if (take)
       gFree(ptr);
@@ -27,7 +27,7 @@ class StockItem
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

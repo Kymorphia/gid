@@ -115,7 +115,9 @@ class Device : gst.object.ObjectWrap
   {
     GstStructure* _cretval;
     _cretval = gst_device_get_properties(cast(GstDevice*)this._cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    gst.structure.Structure _retval;
+    if (_cretval)
+      _retval = *cast(gst.structure.Structure*)_cretval;
     return _retval;
   }
 
@@ -151,6 +153,7 @@ class Device : gst.object.ObjectWrap
       _tmpclasses ~= s.toCString(No.Alloc);
     _tmpclasses ~= null;
     char** _classes = _tmpclasses.ptr;
+
     _retval = cast(bool)gst_device_has_classesv(cast(GstDevice*)this._cPtr, _classes);
     return _retval;
   }

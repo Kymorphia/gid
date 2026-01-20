@@ -14,7 +14,7 @@ import pango.types;
 */
 class AttrColor
 {
-  PangoAttrColor cInstance;
+  PangoAttrColor _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class AttrColor
     if (!ptr)
       throw new GidConstructException("Null instance pointer for pango.attr_color.AttrColor");
 
-    cInstance = *cast(PangoAttrColor*)ptr;
+    _cInstance = *cast(PangoAttrColor*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class AttrColor
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -50,5 +50,15 @@ class AttrColor
   @property pango.color.Color color()
   {
     return cToD!(pango.color.Color)(cast(void*)&(cast(PangoAttrColor*)this._cPtr).color);
+  }
+
+  /**
+      Set `color` field.
+      Params:
+        propval = the [pango.color.Color] which is the value of the attribute
+  */
+  @property void color(pango.color.Color propval)
+  {
+    (cast(PangoAttrColor*)this._cPtr).color = cast(PangoColor)propval;
   }
 }

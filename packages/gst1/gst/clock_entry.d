@@ -14,7 +14,7 @@ import gst.types;
 */
 class ClockEntry
 {
-  GstClockEntry cInstance;
+  GstClockEntry _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class ClockEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.clock_entry.ClockEntry");
 
-    cInstance = *cast(GstClockEntry*)ptr;
+    _cInstance = *cast(GstClockEntry*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class ClockEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

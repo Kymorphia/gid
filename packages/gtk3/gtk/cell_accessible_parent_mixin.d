@@ -37,9 +37,7 @@ template CellAccessibleParentT()
   /** */
   override void getCellArea(gtk.cell_accessible.CellAccessible cell, out gdk.rectangle.Rectangle cellRect)
   {
-    GdkRectangle _cellRect;
-    gtk_cell_accessible_parent_get_cell_area(cast(GtkCellAccessibleParent*)this._cPtr, cell ? cast(GtkCellAccessible*)cell._cPtr(No.Dup) : null, &_cellRect);
-    cellRect = new gdk.rectangle.Rectangle(cast(void*)&_cellRect, No.Take);
+    gtk_cell_accessible_parent_get_cell_area(cast(GtkCellAccessibleParent*)this._cPtr, cell ? cast(GtkCellAccessible*)cell._cPtr(No.Dup) : null, cast(GdkRectangle*)&cellRect);
   }
 
   /** */

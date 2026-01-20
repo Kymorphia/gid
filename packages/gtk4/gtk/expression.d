@@ -163,7 +163,7 @@ import gtk.types;
 */
 class Expression
 {
-  GtkExpression* cInstancePtr;
+  GtkExpression* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -171,15 +171,15 @@ class Expression
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.expression.Expression");
 
-    cInstancePtr = cast(GtkExpression*)ptr;
+    _cInstancePtr = cast(GtkExpression*)ptr;
 
     if (!take)
-      gtk_expression_ref(cInstancePtr);
+      gtk_expression_ref(_cInstancePtr);
   }
 
   ~this()
   {
-    gtk_expression_unref(cInstancePtr);
+    gtk_expression_unref(_cInstancePtr);
   }
 
 
@@ -187,9 +187,9 @@ class Expression
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
-      gtk_expression_ref(cInstancePtr);
+      gtk_expression_ref(_cInstancePtr);
 
-    return cInstancePtr;
+    return _cInstancePtr;
   }
 
   /**
@@ -306,7 +306,6 @@ class Expression
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-
     GtkExpressionWatch* _cretval;
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
     GDestroyNotify _notifyDestroyCB = notify ? &thawDelegate : null;

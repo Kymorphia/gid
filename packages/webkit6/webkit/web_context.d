@@ -199,8 +199,8 @@ class WebContext : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -316,7 +316,6 @@ class WebContext : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(webkit.urischeme_request.URISchemeRequest)(cast(void*)request, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _scheme = scheme.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
@@ -410,6 +409,7 @@ class WebContext : gobject.object.ObjectWrap
       _tmplanguages ~= s.toCString(No.Alloc);
     _tmplanguages ~= null;
     const(char*)* _languages = _tmplanguages.ptr;
+
     webkit_web_context_set_preferred_languages(cast(WebKitWebContext*)this._cPtr, _languages);
   }
 
@@ -447,6 +447,7 @@ class WebContext : gobject.object.ObjectWrap
       _tmplanguages ~= s.toCString(No.Alloc);
     _tmplanguages ~= null;
     const(char*)* _languages = _tmplanguages.ptr;
+
     webkit_web_context_set_spell_checking_languages(cast(WebKitWebContext*)this._cPtr, _languages);
   }
 
@@ -492,8 +493,8 @@ class WebContext : gobject.object.ObjectWrap
       Connect to `AutomationStarted` signal.
   
       This signal is emitted when a new automation request is made.
-      Note that it will never be emitted if automation is not enabled in context,
-      see [webkit.web_context.WebContext.setAutomationAllowed] for more details.
+        Note that it will never be emitted if automation is not enabled in context,
+        see [webkit.web_context.WebContext.setAutomationAllowed] for more details.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -538,13 +539,13 @@ class WebContext : gobject.object.ObjectWrap
       Connect to `InitializeNotificationPermissions` signal.
   
       This signal is emitted when a #WebKitWebContext needs to set
-      initial notification permissions for a web process. It is emitted
-      when a new web process is about to be launched, and signals the
-      most appropriate moment to use
-      [webkit.web_context.WebContext.initializeNotificationPermissions]. If no
-      notification permissions have changed since the last time this
-      signal was emitted, then there is no need to call
-      [webkit.web_context.WebContext.initializeNotificationPermissions] again.
+        initial notification permissions for a web process. It is emitted
+        when a new web process is about to be launched, and signals the
+        most appropriate moment to use
+        [webkit.web_context.WebContext.initializeNotificationPermissions]. If no
+        notification permissions have changed since the last time this
+        signal was emitted, then there is no need to call
+        [webkit.web_context.WebContext.initializeNotificationPermissions] again.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -582,9 +583,9 @@ class WebContext : gobject.object.ObjectWrap
       Connect to `InitializeWebProcessExtensions` signal.
   
       This signal is emitted when a new web process is about to be
-      launched. It signals the most appropriate moment to use
-      [webkit.web_context.WebContext.setWebProcessExtensionsInitializationUserData]
-      and [webkit.web_context.WebContext.setWebProcessExtensionsDirectory].
+        launched. It signals the most appropriate moment to use
+        [webkit.web_context.WebContext.setWebProcessExtensionsInitializationUserData]
+        and [webkit.web_context.WebContext.setWebProcessExtensionsDirectory].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -622,11 +623,11 @@ class WebContext : gobject.object.ObjectWrap
       Connect to `UserMessageReceived` signal.
   
       This signal is emitted when a #WebKitUserMessage is received from a
-      web process extension. You can reply to the message using
-      [webkitwebprocessextension.user_message.UserMessage.sendReply].
-      
-      You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
-      message and returning true.
+        web process extension. You can reply to the message using
+        [webkitwebprocessextension.user_message.UserMessage.sendReply].
+        
+        You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
+        message and returning true.
   
       Params:
         callback = signal callback delegate or function to connect

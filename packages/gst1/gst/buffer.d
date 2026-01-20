@@ -127,7 +127,7 @@ class Buffer : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -159,6 +159,16 @@ class Buffer : gobject.boxed.Boxed
   }
 
   /**
+      Set `miniObject` field.
+      Params:
+        propval = the parent structure
+  */
+  @property void miniObject(gst.mini_object.MiniObject propval)
+  {
+    (cast(GstBuffer*)this._cPtr).miniObject = cast(GstMiniObject)propval;
+  }
+
+  /**
       Get `pool` field.
       Returns: pointer to the pool owner of the buffer
   */
@@ -181,8 +191,8 @@ class Buffer : gobject.boxed.Boxed
   /**
       Get `pts` field.
       Returns: presentation timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
-          pts is not known or relevant. The pts contains the timestamp when the
-          media should be presented to the user.
+            pts is not known or relevant. The pts contains the timestamp when the
+            media should be presented to the user.
   */
   @property gst.types.ClockTime pts()
   {
@@ -193,8 +203,8 @@ class Buffer : gobject.boxed.Boxed
       Set `pts` field.
       Params:
         propval = presentation timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
-            pts is not known or relevant. The pts contains the timestamp when the
-            media should be presented to the user.
+              pts is not known or relevant. The pts contains the timestamp when the
+              media should be presented to the user.
   */
   @property void pts(gst.types.ClockTime propval)
   {
@@ -204,8 +214,8 @@ class Buffer : gobject.boxed.Boxed
   /**
       Get `dts` field.
       Returns: decoding timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
-          dts is not known or relevant. The dts contains the timestamp when the
-          media should be processed.
+            dts is not known or relevant. The dts contains the timestamp when the
+            media should be processed.
   */
   @property gst.types.ClockTime dts()
   {
@@ -216,8 +226,8 @@ class Buffer : gobject.boxed.Boxed
       Set `dts` field.
       Params:
         propval = decoding timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
-            dts is not known or relevant. The dts contains the timestamp when the
-            media should be processed.
+              dts is not known or relevant. The dts contains the timestamp when the
+              media should be processed.
   */
   @property void dts(gst.types.ClockTime propval)
   {
@@ -227,7 +237,7 @@ class Buffer : gobject.boxed.Boxed
   /**
       Get `duration` field.
       Returns: duration in time of the buffer data, can be #GST_CLOCK_TIME_NONE
-          when the duration is not known or relevant.
+            when the duration is not known or relevant.
   */
   @property gst.types.ClockTime duration()
   {
@@ -238,7 +248,7 @@ class Buffer : gobject.boxed.Boxed
       Set `duration` field.
       Params:
         propval = duration in time of the buffer data, can be #GST_CLOCK_TIME_NONE
-            when the duration is not known or relevant.
+              when the duration is not known or relevant.
   */
   @property void duration(gst.types.ClockTime propval)
   {
@@ -248,10 +258,10 @@ class Buffer : gobject.boxed.Boxed
   /**
       Get `offset` field.
       Returns: a media specific offset for the buffer data.
-          For video frames, this is the frame number of this buffer.
-          For audio samples, this is the offset of the first sample in this buffer.
-          For file data or compressed data this is the byte offset of the first
-            byte in this buffer.
+            For video frames, this is the frame number of this buffer.
+            For audio samples, this is the offset of the first sample in this buffer.
+            For file data or compressed data this is the byte offset of the first
+              byte in this buffer.
   */
   @property ulong offset()
   {
@@ -262,10 +272,10 @@ class Buffer : gobject.boxed.Boxed
       Set `offset` field.
       Params:
         propval = a media specific offset for the buffer data.
-            For video frames, this is the frame number of this buffer.
-            For audio samples, this is the offset of the first sample in this buffer.
-            For file data or compressed data this is the byte offset of the first
-              byte in this buffer.
+              For video frames, this is the frame number of this buffer.
+              For audio samples, this is the offset of the first sample in this buffer.
+              For file data or compressed data this is the byte offset of the first
+                byte in this buffer.
   */
   @property void offset(ulong propval)
   {
@@ -275,7 +285,7 @@ class Buffer : gobject.boxed.Boxed
   /**
       Get `offsetEnd` field.
       Returns: the last offset contained in this buffer. It has the same
-          format as @offset.
+            format as @offset.
   */
   @property ulong offsetEnd()
   {
@@ -286,7 +296,7 @@ class Buffer : gobject.boxed.Boxed
       Set `offsetEnd` field.
       Params:
         propval = the last offset contained in this buffer. It has the same
-            format as @offset.
+              format as @offset.
   */
   @property void offsetEnd(ulong propval)
   {
@@ -320,10 +330,10 @@ class Buffer : gobject.boxed.Boxed
         params = optional parameters
       Returns: a new #GstBuffer
   */
-  static gst.buffer.Buffer newAllocate(gst.allocator.Allocator allocator, size_t size, gst.allocation_params.AllocationParams params = null)
+  static gst.buffer.Buffer newAllocate(gst.allocator.Allocator allocator, size_t size, gst.allocation_params.AllocationParams params)
   {
     GstBuffer* _cretval;
-    _cretval = gst_buffer_new_allocate(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, size, params ? cast(GstAllocationParams*)params._cPtr(No.Dup) : null);
+    _cretval = gst_buffer_new_allocate(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, size, cast(GstAllocationParams*)&params);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -392,7 +402,6 @@ class Buffer : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-
     GstBuffer* _cretval;
     size_t _size;
     if (data)
@@ -433,7 +442,7 @@ class Buffer : gobject.boxed.Boxed
   gst.meta.Meta addMeta(gst.meta_info.MetaInfo info, void* params = null)
   {
     GstMeta* _cretval;
-    _cretval = gst_buffer_add_meta(cast(GstBuffer*)this._cPtr, info ? cast(const(GstMetaInfo)*)info._cPtr : null, params);
+    _cretval = gst_buffer_add_meta(cast(GstBuffer*)this._cPtr, cast(const(GstMetaInfo)*)&info, params);
     auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -466,7 +475,7 @@ class Buffer : gobject.boxed.Boxed
   gst.protection_meta.ProtectionMeta addProtectionMeta(gst.structure.Structure info)
   {
     GstProtectionMeta* _cretval;
-    _cretval = gst_buffer_add_protection_meta(cast(GstBuffer*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
+    _cretval = gst_buffer_add_protection_meta(cast(GstBuffer*)this._cPtr, cast(GstStructure*)&info);
     auto _retval = _cretval ? new gst.protection_meta.ProtectionMeta(cast(GstProtectionMeta*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -688,16 +697,17 @@ class Buffer : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(GstBuffer* buffer, GstMeta** meta, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.BufferForeachMetaFunc*)userData;
       auto _meta = new gst.meta.Meta(meta, No.Take);
 
-      gboolean _retval = (*_dlg)(buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, _meta);
+      _dretval = (*_dlg)(buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, _meta);
+      auto _retval = cast(gboolean)_dretval;
       *meta = *cast(GstMeta**)_meta._cPtr;
 
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_buffer_foreach_meta(cast(GstBuffer*)this._cPtr, _funcCB, _func);

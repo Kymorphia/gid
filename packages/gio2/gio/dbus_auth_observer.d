@@ -194,7 +194,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
       Connect to `AuthorizeAuthenticatedPeer` signal.
   
       Emitted to check if a peer that is successfully authenticated
-      is authorized.
+        is authorized.
   
       Params:
         callback = signal callback delegate or function to connect

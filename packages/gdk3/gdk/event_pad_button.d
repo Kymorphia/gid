@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventPadButton
 {
-  GdkEventPadButton cInstance;
+  GdkEventPadButton _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventPadButton
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_pad_button.EventPadButton");
 
-    cInstance = *cast(GdkEventPadButton*)ptr;
+    _cInstance = *cast(GdkEventPadButton*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventPadButton
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -112,7 +112,7 @@ class EventPadButton
   /**
       Get `group` field.
       Returns: the pad group the button belongs to. A [gdk.types.InputSource.TabletPad] device
-        may have one or more groups containing a set of buttons/rings/strips each.
+          may have one or more groups containing a set of buttons/rings/strips each.
   */
   @property uint group()
   {
@@ -123,7 +123,7 @@ class EventPadButton
       Set `group` field.
       Params:
         propval = the pad group the button belongs to. A [gdk.types.InputSource.TabletPad] device
-          may have one or more groups containing a set of buttons/rings/strips each.
+            may have one or more groups containing a set of buttons/rings/strips each.
   */
   @property void group(uint propval)
   {
@@ -152,7 +152,7 @@ class EventPadButton
   /**
       Get `mode` field.
       Returns: The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
-        device may have different current modes.
+          device may have different current modes.
   */
   @property uint mode()
   {
@@ -163,7 +163,7 @@ class EventPadButton
       Set `mode` field.
       Params:
         propval = The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
-          device may have different current modes.
+            device may have different current modes.
   */
   @property void mode(uint propval)
   {

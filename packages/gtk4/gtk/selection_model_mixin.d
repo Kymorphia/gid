@@ -263,11 +263,11 @@ template SelectionModelT()
       Connect to `SelectionChanged` signal.
   
       Emitted when the selection state of some of the items in model changes.
-      
-      Note that this signal does not specify the new selection state of the
-      items, they need to be queried manually. It is also not necessary for
-      a model to change the selection state of any of the items in the selection
-      model, though it would be rather useless to emit such a signal.
+        
+        Note that this signal does not specify the new selection state of the
+        items, they need to be queried manually. It is also not necessary for
+        a model to change the selection state of any of the items in the selection
+        model, though it would be rather useless to emit such a signal.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -43,7 +43,7 @@ class TreeManager : gobject.object.ObjectWrap
   /**
       Get `func` property.
       Returns: This property specifies the function which needs to be called when the list of #GdaTreeNode nodes
-      managed has to be updated
+        managed has to be updated
   */
   @property void* func()
   {
@@ -54,7 +54,7 @@ class TreeManager : gobject.object.ObjectWrap
       Set `func` property.
       Params:
         propval = This property specifies the function which needs to be called when the list of #GdaTreeNode nodes
-        managed has to be updated
+          managed has to be updated
   */
   @property void func(void* propval)
   {
@@ -64,11 +64,11 @@ class TreeManager : gobject.object.ObjectWrap
   /**
       Get `recursive` property.
       Returns: This property specifies if, when initially creating nodes or updating the list of nodes,
-      the tree manager shoud also request that each node it has created or updated also
-      initially create or update their children.
-      
-      This property can typically set to FALSE if the process of creating children nodes is lenghty
-      and needs to be postponed while an event occurs.
+        the tree manager shoud also request that each node it has created or updated also
+        initially create or update their children.
+        
+        This property can typically set to FALSE if the process of creating children nodes is lenghty
+        and needs to be postponed while an event occurs.
   */
   @property bool recursive()
   {
@@ -79,11 +79,11 @@ class TreeManager : gobject.object.ObjectWrap
       Set `recursive` property.
       Params:
         propval = This property specifies if, when initially creating nodes or updating the list of nodes,
-        the tree manager shoud also request that each node it has created or updated also
-        initially create or update their children.
-        
-        This property can typically set to FALSE if the process of creating children nodes is lenghty
-        and needs to be postponed while an event occurs.
+          the tree manager shoud also request that each node it has created or updated also
+          initially create or update their children.
+          
+          This property can typically set to FALSE if the process of creating children nodes is lenghty
+          and needs to be postponed while an event occurs.
   */
   @property void recursive(bool propval)
   {

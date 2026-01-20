@@ -1,8 +1,7 @@
-/// Module for [Segment] class
+/// Module for [Segment] struct
 module gst.segment;
 
 import gid.gid;
-import gobject.boxed;
 import gst.c.functions;
 import gst.c.types;
 import gst.types;
@@ -57,62 +56,15 @@ import gst.types;
     [gst.segment.Segment.toStreamTime] can be used to convert a timestamp and the segment
     info to stream time (which is always between 0 and the duration of the stream).
 */
-class Segment : gobject.boxed.Boxed
+struct Segment
 {
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_segment_get_type != &gidSymbolNotFound ? gst_segment_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Segment self()
-  {
-    return this;
-  }
-
   /**
-      Get `flags` field.
-      Returns: flags for this segment
+      flags for this segment
   */
-  @property gst.types.SegmentFlags flags()
-  {
-    return cast(gst.types.SegmentFlags)(cast(GstSegment*)this._cPtr).flags;
-  }
+  SegmentFlags flags;
 
   /**
-      Set `flags` field.
-      Params:
-        propval = flags for this segment
-  */
-  @property void flags(gst.types.SegmentFlags propval)
-  {
-    (cast(GstSegment*)this._cPtr).flags = cast(GstSegmentFlags)propval;
-  }
-
-  /**
-      Get `rate` field.
-      Returns: the playback rate of the segment is set in response to a seek
+      the playback rate of the segment is set in response to a seek
                      event and, without any seek, the value should be `1.0`. This
                      value is used by elements that synchronize buffer [running
                      times](additional/design/synchronisation.md#running-time) on
@@ -124,34 +76,10 @@ class Segment : gobject.boxed.Boxed
                      [stream-time](additional/design/synchronisation.md#stream-time)
                      is going backward. The `rate` value should never be `0.0`.
   */
-  @property double rate()
-  {
-    return (cast(GstSegment*)this._cPtr).rate;
-  }
+  double rate;
 
   /**
-      Set `rate` field.
-      Params:
-        propval = the playback rate of the segment is set in response to a seek
-                       event and, without any seek, the value should be `1.0`. This
-                       value is used by elements that synchronize buffer [running
-                       times](additional/design/synchronisation.md#running-time) on
-                       the clock (usually the sink elements), leading to consuming
-                       buffers faster (for a value `> 1.0`) or slower (for `0.0 <
-                       value < 1.0`) than normal playback speed. The rate also
-                       defines the playback direction, meaning that when the value is
-                       lower than `0.0`, the playback happens in reverse, and the
-                       [stream-time](additional/design/synchronisation.md#stream-time)
-                       is going backward. The `rate` value should never be `0.0`.
-  */
-  @property void rate(double propval)
-  {
-    (cast(GstSegment*)this._cPtr).rate = propval;
-  }
-
-  /**
-      Get `appliedRate` field.
-      Returns: The applied rate is the rate that has been applied to the stream.
+      The applied rate is the rate that has been applied to the stream.
                      The effective/resulting playback rate of a stream is
                      `rate * applied_rate`.
                      The applied rate can be set by source elements when a server is
@@ -164,179 +92,55 @@ class Segment : gobject.boxed.Boxed
                      input segment rate to the stream and outputs a segment with
                      rate=1.0 and applied_rate=<inputsegment.rate>.
   */
-  @property double appliedRate()
-  {
-    return (cast(GstSegment*)this._cPtr).appliedRate;
-  }
+  double appliedRate;
 
   /**
-      Set `appliedRate` field.
-      Params:
-        propval = The applied rate is the rate that has been applied to the stream.
-                       The effective/resulting playback rate of a stream is
-                       `rate * applied_rate`.
-                       The applied rate can be set by source elements when a server is
-                       sending the stream with an already modified playback speed
-                       rate. Filter elements that modify the stream in a way that
-                       modifies the playback speed should also modify the applied
-                       rate. For example the #videorate element when its
-                       #videorate:rate property is set will set the applied rate of
-                       the segment it pushed downstream. Also #scaletempo applies the
-                       input segment rate to the stream and outputs a segment with
-                       rate=1.0 and applied_rate=<inputsegment.rate>.
+      the unit used for all of the segment's values.
   */
-  @property void appliedRate(double propval)
-  {
-    (cast(GstSegment*)this._cPtr).appliedRate = propval;
-  }
+  Format format;
 
   /**
-      Get `format` field.
-      Returns: the unit used for all of the segment's values.
-  */
-  @property gst.types.Format format()
-  {
-    return cast(gst.types.Format)(cast(GstSegment*)this._cPtr).format;
-  }
-
-  /**
-      Set `format` field.
-      Params:
-        propval = the unit used for all of the segment's values.
-  */
-  @property void format(gst.types.Format propval)
-  {
-    (cast(GstSegment*)this._cPtr).format = cast(GstFormat)propval;
-  }
-
-  /**
-      Get `base` field.
-      Returns: the running time (plus elapsed time, see offset) of the
+      the running time (plus elapsed time, see offset) of the
                      segment [start](GstSegment.start) ([stop](GstSegment.stop) if
                      rate < 0.0).
   */
-  @property ulong base()
-  {
-    return (cast(GstSegment*)this._cPtr).base;
-  }
+  ulong base;
 
   /**
-      Set `base` field.
-      Params:
-        propval = the running time (plus elapsed time, see offset) of the
-                       segment [start](GstSegment.start) ([stop](GstSegment.stop) if
-                       rate < 0.0).
-  */
-  @property void base(ulong propval)
-  {
-    (cast(GstSegment*)this._cPtr).base = propval;
-  }
-
-  /**
-      Get `offset` field.
-      Returns: the offset expresses the elapsed time (in buffer timestamps)
+      the offset expresses the elapsed time (in buffer timestamps)
                      before a seek with its start (stop if rate < 0.0) seek type
                      set to #GST_SEEK_TYPE_NONE, the value is set to the position
                      of the segment at the time of the seek.
   */
-  @property ulong offset()
-  {
-    return (cast(GstSegment*)this._cPtr).offset;
-  }
+  ulong offset;
 
   /**
-      Set `offset` field.
-      Params:
-        propval = the offset expresses the elapsed time (in buffer timestamps)
-                       before a seek with its start (stop if rate < 0.0) seek type
-                       set to #GST_SEEK_TYPE_NONE, the value is set to the position
-                       of the segment at the time of the seek.
-  */
-  @property void offset(ulong propval)
-  {
-    (cast(GstSegment*)this._cPtr).offset = propval;
-  }
-
-  /**
-      Get `start` field.
-      Returns: the start time of the segment (in buffer timestamps)
+      the start time of the segment (in buffer timestamps)
                      [(PTS)](GstBuffer.pts), that is the timestamp of the first
                      buffer to output inside the segment (last one during
                      reverse playback). For example decoders will
                      [clip](gst_segment_clip) out the buffers before the start
                      time.
   */
-  @property ulong start()
-  {
-    return (cast(GstSegment*)this._cPtr).start;
-  }
+  ulong start;
 
   /**
-      Set `start` field.
-      Params:
-        propval = the start time of the segment (in buffer timestamps)
-                       [(PTS)](GstBuffer.pts), that is the timestamp of the first
-                       buffer to output inside the segment (last one during
-                       reverse playback). For example decoders will
-                       [clip](gst_segment_clip) out the buffers before the start
-                       time.
-  */
-  @property void start(ulong propval)
-  {
-    (cast(GstSegment*)this._cPtr).start = propval;
-  }
-
-  /**
-      Get `stop` field.
-      Returns: the stop time of the segment (in buffer timestamps)
+      the stop time of the segment (in buffer timestamps)
                      [(PTS)](GstBuffer.pts), that is the timestamp of the last
                      buffer to output inside the segment (first one during
                      reverse playback). For example decoders will
                      [clip](gst_segment_clip) out buffers after the stop time.
   */
-  @property ulong stop()
-  {
-    return (cast(GstSegment*)this._cPtr).stop;
-  }
+  ulong stop;
 
   /**
-      Set `stop` field.
-      Params:
-        propval = the stop time of the segment (in buffer timestamps)
-                       [(PTS)](GstBuffer.pts), that is the timestamp of the last
-                       buffer to output inside the segment (first one during
-                       reverse playback). For example decoders will
-                       [clip](gst_segment_clip) out buffers after the stop time.
-  */
-  @property void stop(ulong propval)
-  {
-    (cast(GstSegment*)this._cPtr).stop = propval;
-  }
-
-  /**
-      Get `time` field.
-      Returns: the stream time of the segment [start](GstSegment.start)
+      the stream time of the segment [start](GstSegment.start)
                      ([stop](GstSegment.stop) if rate < 0.0).
   */
-  @property ulong time()
-  {
-    return (cast(GstSegment*)this._cPtr).time;
-  }
+  ulong time;
 
   /**
-      Set `time` field.
-      Params:
-        propval = the stream time of the segment [start](GstSegment.start)
-                       ([stop](GstSegment.stop) if rate < 0.0).
-  */
-  @property void time(ulong propval)
-  {
-    (cast(GstSegment*)this._cPtr).time = propval;
-  }
-
-  /**
-      Get `position` field.
-      Returns: the buffer timestamp position in the segment is supposed to be
+      the buffer timestamp position in the segment is supposed to be
                      updated by elements such as sources, demuxers or parsers to
                      track progress by setting it to the last pushed buffer' end time
                      ([timestamp](GstBuffer.pts) + #GstBuffer.duration) for that
@@ -344,69 +148,20 @@ class Segment : gobject.boxed.Boxed
                      segment with #gst_segment_do_seek when the seek is only
                      updating the segment (see [offset](GstSegment.offset)).
   */
-  @property ulong position()
-  {
-    return (cast(GstSegment*)this._cPtr).position;
-  }
+  ulong position;
 
   /**
-      Set `position` field.
-      Params:
-        propval = the buffer timestamp position in the segment is supposed to be
-                       updated by elements such as sources, demuxers or parsers to
-                       track progress by setting it to the last pushed buffer' end time
-                       ([timestamp](GstBuffer.pts) + #GstBuffer.duration) for that
-                       specific segment. The position is used when reconfiguring the
-                       segment with #gst_segment_do_seek when the seek is only
-                       updating the segment (see [offset](GstSegment.offset)).
-  */
-  @property void position(ulong propval)
-  {
-    (cast(GstSegment*)this._cPtr).position = propval;
-  }
-
-  /**
-      Get `duration` field.
-      Returns: the duration of the segment is the maximum absolute difference
+      the duration of the segment is the maximum absolute difference
                      between #GstSegment.start and #GstSegment.stop if stop is not
                      set, otherwise it should be the difference between those
                      two values. This should be set by elements that know the
                      overall stream duration (like demuxers) and will be used when
                      seeking with #GST_SEEK_TYPE_END.
   */
-  @property ulong duration()
-  {
-    return (cast(GstSegment*)this._cPtr).duration;
-  }
+  ulong duration;
 
-  /**
-      Set `duration` field.
-      Params:
-        propval = the duration of the segment is the maximum absolute difference
-                       between #GstSegment.start and #GstSegment.stop if stop is not
-                       set, otherwise it should be the difference between those
-                       two values. This should be set by elements that know the
-                       overall stream duration (like demuxers) and will be used when
-                       seeking with #GST_SEEK_TYPE_END.
-  */
-  @property void duration(ulong propval)
-  {
-    (cast(GstSegment*)this._cPtr).duration = propval;
-  }
-
-  /**
-      Allocate a new #GstSegment structure and initialize it using
-      [gst.segment.Segment.init_].
-      
-      Free-function: gst_segment_free
-      Returns: a new #GstSegment, free with [gst.segment.Segment.free].
-  */
-  this()
-  {
-    GstSegment* _cretval;
-    _cretval = gst_segment_new();
-    this(_cretval, Yes.Take);
-  }
+  /** */
+  void*[4] GstReserved;
 
   /**
       Clip the given start and stop values to the segment boundaries given
@@ -436,7 +191,7 @@ class Segment : gobject.boxed.Boxed
   bool clip(gst.types.Format format, ulong start, ulong stop, out ulong clipStart, out ulong clipStop)
   {
     bool _retval;
-    _retval = cast(bool)gst_segment_clip(cast(const(GstSegment)*)this._cPtr, format, start, stop, cast(ulong*)&clipStart, cast(ulong*)&clipStop);
+    _retval = cast(bool)gst_segment_clip(cast(const(GstSegment)*)&this, format, start, stop, cast(ulong*)&clipStart, cast(ulong*)&clipStop);
     return _retval;
   }
 
@@ -449,8 +204,10 @@ class Segment : gobject.boxed.Boxed
   gst.segment.Segment copy()
   {
     GstSegment* _cretval;
-    _cretval = gst_segment_copy(cast(const(GstSegment)*)this._cPtr);
-    auto _retval = _cretval ? new gst.segment.Segment(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_segment_copy(cast(const(GstSegment)*)&this);
+    gst.segment.Segment _retval;
+    if (_cretval)
+      _retval = *cast(gst.segment.Segment*)_cretval;
     return _retval;
   }
 
@@ -462,7 +219,7 @@ class Segment : gobject.boxed.Boxed
   */
   void copyInto(gst.segment.Segment dest)
   {
-    gst_segment_copy_into(cast(const(GstSegment)*)this._cPtr, dest ? cast(GstSegment*)dest._cPtr(No.Dup) : null);
+    gst_segment_copy_into(cast(const(GstSegment)*)&this, cast(GstSegment*)&dest);
   }
 
   /**
@@ -509,7 +266,7 @@ class Segment : gobject.boxed.Boxed
   {
     bool _retval;
     gboolean _update;
-    _retval = cast(bool)gst_segment_do_seek(cast(GstSegment*)this._cPtr, rate, format, flags, startType, start, stopType, stop, &_update);
+    _retval = cast(bool)gst_segment_do_seek(cast(GstSegment*)&this, rate, format, flags, startType, start, stopType, stop, &_update);
     update = cast(bool)_update;
     return _retval;
   }
@@ -526,7 +283,7 @@ class Segment : gobject.boxed.Boxed
   */
   void init_(gst.types.Format format)
   {
-    gst_segment_init(cast(GstSegment*)this._cPtr, format);
+    gst_segment_init(cast(GstSegment*)&this, format);
   }
 
   /**
@@ -540,7 +297,7 @@ class Segment : gobject.boxed.Boxed
   bool isEqual(gst.segment.Segment s1)
   {
     bool _retval;
-    _retval = cast(bool)gst_segment_is_equal(cast(const(GstSegment)*)this._cPtr, s1 ? cast(const(GstSegment)*)s1._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_segment_is_equal(cast(const(GstSegment)*)&this, cast(const(GstSegment)*)&s1);
     return _retval;
   }
 
@@ -557,7 +314,7 @@ class Segment : gobject.boxed.Boxed
   bool offsetRunningTime(gst.types.Format format, long offset)
   {
     bool _retval;
-    _retval = cast(bool)gst_segment_offset_running_time(cast(GstSegment*)this._cPtr, format, offset);
+    _retval = cast(bool)gst_segment_offset_running_time(cast(GstSegment*)&this, format, offset);
     return _retval;
   }
 
@@ -574,7 +331,7 @@ class Segment : gobject.boxed.Boxed
   ulong positionFromRunningTime(gst.types.Format format, ulong runningTime)
   {
     ulong _retval;
-    _retval = gst_segment_position_from_running_time(cast(const(GstSegment)*)this._cPtr, format, runningTime);
+    _retval = gst_segment_position_from_running_time(cast(const(GstSegment)*)&this, format, runningTime);
     return _retval;
   }
 
@@ -605,7 +362,7 @@ class Segment : gobject.boxed.Boxed
   int positionFromRunningTimeFull(gst.types.Format format, ulong runningTime, out ulong position)
   {
     int _retval;
-    _retval = gst_segment_position_from_running_time_full(cast(const(GstSegment)*)this._cPtr, format, runningTime, cast(ulong*)&position);
+    _retval = gst_segment_position_from_running_time_full(cast(const(GstSegment)*)&this, format, runningTime, cast(ulong*)&position);
     return _retval;
   }
 
@@ -622,7 +379,7 @@ class Segment : gobject.boxed.Boxed
   ulong positionFromStreamTime(gst.types.Format format, ulong streamTime)
   {
     ulong _retval;
-    _retval = gst_segment_position_from_stream_time(cast(const(GstSegment)*)this._cPtr, format, streamTime);
+    _retval = gst_segment_position_from_stream_time(cast(const(GstSegment)*)&this, format, streamTime);
     return _retval;
   }
 
@@ -652,7 +409,7 @@ class Segment : gobject.boxed.Boxed
   int positionFromStreamTimeFull(gst.types.Format format, ulong streamTime, out ulong position)
   {
     int _retval;
-    _retval = gst_segment_position_from_stream_time_full(cast(const(GstSegment)*)this._cPtr, format, streamTime, cast(ulong*)&position);
+    _retval = gst_segment_position_from_stream_time_full(cast(const(GstSegment)*)&this, format, streamTime, cast(ulong*)&position);
     return _retval;
   }
 
@@ -669,7 +426,7 @@ class Segment : gobject.boxed.Boxed
   bool setRunningTime(gst.types.Format format, ulong runningTime)
   {
     bool _retval;
-    _retval = cast(bool)gst_segment_set_running_time(cast(GstSegment*)this._cPtr, format, runningTime);
+    _retval = cast(bool)gst_segment_set_running_time(cast(GstSegment*)&this, format, runningTime);
     return _retval;
   }
 
@@ -688,7 +445,7 @@ class Segment : gobject.boxed.Boxed
   ulong toPosition(gst.types.Format format, ulong runningTime)
   {
     ulong _retval;
-    _retval = gst_segment_to_position(cast(const(GstSegment)*)this._cPtr, format, runningTime);
+    _retval = gst_segment_to_position(cast(const(GstSegment)*)&this, format, runningTime);
     return _retval;
   }
 
@@ -712,7 +469,7 @@ class Segment : gobject.boxed.Boxed
   ulong toRunningTime(gst.types.Format format, ulong position)
   {
     ulong _retval;
-    _retval = gst_segment_to_running_time(cast(const(GstSegment)*)this._cPtr, format, position);
+    _retval = gst_segment_to_running_time(cast(const(GstSegment)*)&this, format, position);
     return _retval;
   }
 
@@ -742,7 +499,7 @@ class Segment : gobject.boxed.Boxed
   int toRunningTimeFull(gst.types.Format format, ulong position, out ulong runningTime)
   {
     int _retval;
-    _retval = gst_segment_to_running_time_full(cast(const(GstSegment)*)this._cPtr, format, position, cast(ulong*)&runningTime);
+    _retval = gst_segment_to_running_time_full(cast(const(GstSegment)*)&this, format, position, cast(ulong*)&runningTime);
     return _retval;
   }
 
@@ -767,7 +524,7 @@ class Segment : gobject.boxed.Boxed
   ulong toStreamTime(gst.types.Format format, ulong position)
   {
     ulong _retval;
-    _retval = gst_segment_to_stream_time(cast(const(GstSegment)*)this._cPtr, format, position);
+    _retval = gst_segment_to_stream_time(cast(const(GstSegment)*)&this, format, position);
     return _retval;
   }
 
@@ -797,7 +554,7 @@ class Segment : gobject.boxed.Boxed
   int toStreamTimeFull(gst.types.Format format, ulong position, out ulong streamTime)
   {
     int _retval;
-    _retval = gst_segment_to_stream_time_full(cast(const(GstSegment)*)this._cPtr, format, position, cast(ulong*)&streamTime);
+    _retval = gst_segment_to_stream_time_full(cast(const(GstSegment)*)&this, format, position, cast(ulong*)&streamTime);
     return _retval;
   }
 }

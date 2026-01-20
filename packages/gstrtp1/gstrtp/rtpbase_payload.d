@@ -48,9 +48,9 @@ class RTPBasePayload : gst.element.Element
   /**
       Get `autoHeaderExtension` property.
       Returns: If enabled, the payloader will automatically try to enable all the
-      RTP header extensions provided in the src caps, saving the application
-      the need to handle these extensions manually using the
-      GstRTPBasePayload::request-extension: signal.
+        RTP header extensions provided in the src caps, saving the application
+        the need to handle these extensions manually using the
+        GstRTPBasePayload::request-extension: signal.
   */
   @property bool autoHeaderExtension()
   {
@@ -61,9 +61,9 @@ class RTPBasePayload : gst.element.Element
       Set `autoHeaderExtension` property.
       Params:
         propval = If enabled, the payloader will automatically try to enable all the
-        RTP header extensions provided in the src caps, saving the application
-        the need to handle these extensions manually using the
-        GstRTPBasePayload::request-extension: signal.
+          RTP header extensions provided in the src caps, saving the application
+          the need to handle these extensions manually using the
+          GstRTPBasePayload::request-extension: signal.
   */
   @property void autoHeaderExtension(bool propval)
   {
@@ -116,7 +116,7 @@ class RTPBasePayload : gst.element.Element
   /**
       Get `onvifNoRateControl` property.
       Returns: Make the payloader timestamp packets according to the Rate-Control=no
-      behaviour specified in the ONVIF replay spec.
+        behaviour specified in the ONVIF replay spec.
   */
   @property bool onvifNoRateControl()
   {
@@ -127,7 +127,7 @@ class RTPBasePayload : gst.element.Element
       Set `onvifNoRateControl` property.
       Params:
         propval = Make the payloader timestamp packets according to the Rate-Control=no
-        behaviour specified in the ONVIF replay spec.
+          behaviour specified in the ONVIF replay spec.
   */
   @property void onvifNoRateControl(bool propval)
   {
@@ -137,30 +137,6 @@ class RTPBasePayload : gst.element.Element
   /**
       Get `perfectRtptime` property.
       Returns: Try to use the offset fields to generate perfect RTP timestamps. When this
-      option is disabled, RTP timestamps are generated from GST_BUFFER_PTS of
-      each payloaded buffer. The PTSes of buffers may not necessarily increment
-      with the amount of data in each input buffer, consider e.g. the case where
-      the buffer arrives from a network which means that the PTS is unrelated to
-      the amount of data. Because the RTP timestamps are generated from
-      GST_BUFFER_PTS this can result in RTP timestamps that also don't increment
-      with the amount of data in the payloaded packet. To circumvent this it is
-      possible to set the perfect rtptime option enabled. When this option is
-      enabled the payloader will increment the RTP timestamps based on
-      GST_BUFFER_OFFSET which relates to the amount of data in each packet
-      rather than the GST_BUFFER_PTS of each buffer and therefore the RTP
-      timestamps will more closely correlate with the amount of data in each
-      buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
-      timestamps for audio streams.
-  */
-  @property bool perfectRtptime()
-  {
-    return gobject.object.ObjectWrap.getProperty!(bool)("perfect-rtptime");
-  }
-
-  /**
-      Set `perfectRtptime` property.
-      Params:
-        propval = Try to use the offset fields to generate perfect RTP timestamps. When this
         option is disabled, RTP timestamps are generated from GST_BUFFER_PTS of
         each payloaded buffer. The PTSes of buffers may not necessarily increment
         with the amount of data in each input buffer, consider e.g. the case where
@@ -175,6 +151,30 @@ class RTPBasePayload : gst.element.Element
         timestamps will more closely correlate with the amount of data in each
         buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
         timestamps for audio streams.
+  */
+  @property bool perfectRtptime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("perfect-rtptime");
+  }
+
+  /**
+      Set `perfectRtptime` property.
+      Params:
+        propval = Try to use the offset fields to generate perfect RTP timestamps. When this
+          option is disabled, RTP timestamps are generated from GST_BUFFER_PTS of
+          each payloaded buffer. The PTSes of buffers may not necessarily increment
+          with the amount of data in each input buffer, consider e.g. the case where
+          the buffer arrives from a network which means that the PTS is unrelated to
+          the amount of data. Because the RTP timestamps are generated from
+          GST_BUFFER_PTS this can result in RTP timestamps that also don't increment
+          with the amount of data in the payloaded packet. To circumvent this it is
+          possible to set the perfect rtptime option enabled. When this option is
+          enabled the payloader will increment the RTP timestamps based on
+          GST_BUFFER_OFFSET which relates to the amount of data in each packet
+          rather than the GST_BUFFER_PTS of each buffer and therefore the RTP
+          timestamps will more closely correlate with the amount of data in each
+          buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
+          timestamps for audio streams.
   */
   @property void perfectRtptime(bool propval)
   {
@@ -215,13 +215,13 @@ class RTPBasePayload : gst.element.Element
   /**
       Get `scaleRtptime` property.
       Returns: Make the RTP packets' timestamps be scaled with the segment's rate
-      (corresponding to RTSP speed parameter). Disabling this property means
-      the timestamps will not be affected by the set delivery speed (RTSP speed).
-      
-      Example: A server wants to allow streaming a recorded video in double
-      speed but still have the timestamps correspond to the position in the
-      video. This is achieved by the client setting RTSP Speed to 2 while the
-      server has this property disabled.
+        (corresponding to RTSP speed parameter). Disabling this property means
+        the timestamps will not be affected by the set delivery speed (RTSP speed).
+        
+        Example: A server wants to allow streaming a recorded video in double
+        speed but still have the timestamps correspond to the position in the
+        video. This is achieved by the client setting RTSP Speed to 2 while the
+        server has this property disabled.
   */
   @property bool scaleRtptime()
   {
@@ -232,13 +232,13 @@ class RTPBasePayload : gst.element.Element
       Set `scaleRtptime` property.
       Params:
         propval = Make the RTP packets' timestamps be scaled with the segment's rate
-        (corresponding to RTSP speed parameter). Disabling this property means
-        the timestamps will not be affected by the set delivery speed (RTSP speed).
-        
-        Example: A server wants to allow streaming a recorded video in double
-        speed but still have the timestamps correspond to the position in the
-        video. This is achieved by the client setting RTSP Speed to 2 while the
-        server has this property disabled.
+          (corresponding to RTSP speed parameter). Disabling this property means
+          the timestamps will not be affected by the set delivery speed (RTSP speed).
+          
+          Example: A server wants to allow streaming a recorded video in double
+          speed but still have the timestamps correspond to the position in the
+          video. This is achieved by the client setting RTSP Speed to 2 while the
+          server has this property disabled.
   */
   @property void scaleRtptime(bool propval)
   {
@@ -266,7 +266,7 @@ class RTPBasePayload : gst.element.Element
   /**
       Get `sourceInfo` property.
       Returns: Enable writing the CSRC field in allocated RTP header based on RTP source
-      information found in the input buffer's #GstRTPSourceMeta.
+        information found in the input buffer's #GstRTPSourceMeta.
   */
   @property bool sourceInfo()
   {
@@ -277,7 +277,7 @@ class RTPBasePayload : gst.element.Element
       Set `sourceInfo` property.
       Params:
         propval = Enable writing the CSRC field in allocated RTP header based on RTP source
-        information found in the input buffer's #GstRTPSourceMeta.
+          information found in the input buffer's #GstRTPSourceMeta.
   */
   @property void sourceInfo(bool propval)
   {
@@ -299,21 +299,21 @@ class RTPBasePayload : gst.element.Element
   /**
       Get `stats` property.
       Returns: Various payloader statistics retrieved atomically (and are therefore
-      synchroized with each other), these can be used e.g. to generate an
-      RTP-Info header. This property return a GstStructure named
-      application/x-rtp-payload-stats containing the following fields relating to
-      the last processed buffer and current state of the stream being payloaded:
-      
-        $(LIST
-            * `clock-rate` :#G_TYPE_UINT, clock-rate of the stream
-            * `running-time` :#G_TYPE_UINT64, running time
-            * `seqnum` :#G_TYPE_UINT, sequence number, same as #GstRTPBasePayload:seqnum
-            * `timestamp` :#G_TYPE_UINT, RTP timestamp, same as #GstRTPBasePayload:timestamp
-            * `ssrc` :#G_TYPE_UINT, The SSRC in use
-            * `pt` :#G_TYPE_UINT, The Payload type in use, same as #GstRTPBasePayload:pt
-            * `seqnum-offset` :#G_TYPE_UINT, The current offset added to the seqnum
-            * `timestamp-offset` :#G_TYPE_UINT, The current offset added to the timestamp
-        )
+        synchroized with each other), these can be used e.g. to generate an
+        RTP-Info header. This property return a GstStructure named
+        application/x-rtp-payload-stats containing the following fields relating to
+        the last processed buffer and current state of the stream being payloaded:
+        
+          $(LIST
+              * `clock-rate` :#G_TYPE_UINT, clock-rate of the stream
+              * `running-time` :#G_TYPE_UINT64, running time
+              * `seqnum` :#G_TYPE_UINT, sequence number, same as #GstRTPBasePayload:seqnum
+              * `timestamp` :#G_TYPE_UINT, RTP timestamp, same as #GstRTPBasePayload:timestamp
+              * `ssrc` :#G_TYPE_UINT, The SSRC in use
+              * `pt` :#G_TYPE_UINT, The Payload type in use, same as #GstRTPBasePayload:pt
+              * `seqnum-offset` :#G_TYPE_UINT, The current offset added to the seqnum
+              * `timestamp-offset` :#G_TYPE_UINT, The current offset added to the timestamp
+          )
   */
   @property gst.structure.Structure stats()
   {
@@ -465,10 +465,10 @@ class RTPBasePayload : gst.element.Element
         s = a #GstStructure with the caps fields
       Returns: true if the caps could be set.
   */
-  bool setOutcapsStructure(gst.structure.Structure s = null)
+  bool setOutcapsStructure(gst.structure.Structure s)
   {
     bool _retval;
-    _retval = cast(bool)gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
+    _retval = cast(bool)gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, cast(GstStructure*)&s);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ class RTPBasePayload : gst.element.Element
       Connect to `AddExtension` signal.
   
       Add ext as an extension for writing part of an RTP header extension onto
-      outgoing RTP packets.
+        outgoing RTP packets.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -570,7 +570,7 @@ class RTPBasePayload : gst.element.Element
       Connect to `RequestExtension` signal.
   
       The returned ext must be configured with the correct ext_id and with the
-      necessary attributes as required by the extension implementation.
+        necessary attributes as required by the extension implementation.
   
       Params:
         callback = signal callback delegate or function to connect

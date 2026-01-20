@@ -9,7 +9,7 @@ import gid.gid;
 /** */
 class Diff
 {
-  GdaDiff cInstance;
+  GdaDiff _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class Diff
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.diff.Diff");
 
-    cInstance = *cast(GdaDiff*)ptr;
+    _cInstance = *cast(GdaDiff*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,7 +26,7 @@ class Diff
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /** */

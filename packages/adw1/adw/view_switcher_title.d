@@ -132,8 +132,8 @@ class ViewSwitcherTitle : gtk.widget.Widget
   /**
       Get `subtitle` property.
       Returns: The subtitle to display.
-      
-      The subtitle should give the user additional details.
+        
+        The subtitle should give the user additional details.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
@@ -146,8 +146,8 @@ class ViewSwitcherTitle : gtk.widget.Widget
       Set `subtitle` property.
       Params:
         propval = The subtitle to display.
-        
-        The subtitle should give the user additional details.
+          
+          The subtitle should give the user additional details.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
@@ -159,9 +159,9 @@ class ViewSwitcherTitle : gtk.widget.Widget
   /**
       Get `title` property.
       Returns: The title to display.
-      
-      The title typically identifies the current view or content item, and
-      generally does not use the application name.
+        
+        The title typically identifies the current view or content item, and
+        generally does not use the application name.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
@@ -174,9 +174,9 @@ class ViewSwitcherTitle : gtk.widget.Widget
       Set `title` property.
       Params:
         propval = The title to display.
-        
-        The title typically identifies the current view or content item, and
-        generally does not use the application name.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
@@ -188,9 +188,9 @@ class ViewSwitcherTitle : gtk.widget.Widget
   /**
       Get `titleVisible` property.
       Returns: Whether the title is currently visible.
-      
-      If the title is visible, it means the view switcher is hidden an it may be
-      wanted to show an alternative switcher, e.g. a `class@ViewSwitcherBar`.
+        
+        If the title is visible, it means the view switcher is hidden an it may be
+        wanted to show an alternative switcher, e.g. a `class@ViewSwitcherBar`.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
@@ -202,13 +202,13 @@ class ViewSwitcherTitle : gtk.widget.Widget
   /**
       Get `viewSwitcherEnabled` property.
       Returns: Whether the view switcher is enabled.
-      
-      If it is disabled, the title will be displayed instead. This allows to
-      programmatically hide the view switcher even if it fits in the available
-      space.
-      
-      This can be used e.g. to ensure the view switcher is hidden below a certain
-      window width, or any other constraint you find suitable.
+        
+        If it is disabled, the title will be displayed instead. This allows to
+        programmatically hide the view switcher even if it fits in the available
+        space.
+        
+        This can be used e.g. to ensure the view switcher is hidden below a certain
+        window width, or any other constraint you find suitable.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
@@ -221,13 +221,13 @@ class ViewSwitcherTitle : gtk.widget.Widget
       Set `viewSwitcherEnabled` property.
       Params:
         propval = Whether the view switcher is enabled.
-        
-        If it is disabled, the title will be displayed instead. This allows to
-        programmatically hide the view switcher even if it fits in the available
-        space.
-        
-        This can be used e.g. to ensure the view switcher is hidden below a certain
-        window width, or any other constraint you find suitable.
+          
+          If it is disabled, the title will be displayed instead. This allows to
+          programmatically hide the view switcher even if it fits in the available
+          space.
+          
+          This can be used e.g. to ensure the view switcher is hidden below a certain
+          window width, or any other constraint you find suitable.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */

@@ -160,7 +160,7 @@ interface FileChooser
   /**
       Get `createFolders` property.
       Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
-      will offer the user to create new folders.
+        will offer the user to create new folders.
   */
   @property bool createFolders();
 
@@ -168,15 +168,15 @@ interface FileChooser
       Set `createFolders` property.
       Params:
         propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
-        will offer the user to create new folders.
+          will offer the user to create new folders.
   */
   @property void createFolders(bool propval);
 
   /**
       Get `doOverwriteConfirmation` property.
       Returns: Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
-      will present an overwrite confirmation dialog if the user
-      selects a file name that already exists.
+        will present an overwrite confirmation dialog if the user
+        selects a file name that already exists.
   */
   @property bool doOverwriteConfirmation();
 
@@ -184,8 +184,8 @@ interface FileChooser
       Set `doOverwriteConfirmation` property.
       Params:
         propval = Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
-        will present an overwrite confirmation dialog if the user
-        selects a file name that already exists.
+          will present an overwrite confirmation dialog if the user
+          selects a file name that already exists.
   */
   @property void doOverwriteConfirmation(bool propval);
 
@@ -1027,63 +1027,63 @@ interface FileChooser
       Connect to `ConfirmOverwrite` signal.
   
       This signal gets emitted whenever it is appropriate to present a
-      confirmation dialog when the user has selected a file name that
-      already exists.  The signal only gets emitted when the file
-      chooser is in [gtk.types.FileChooserAction.Save] mode.
-      
-      Most applications just need to turn on the
-      #GtkFileChooser:do-overwrite-confirmation property (or call the
-      [gtk.file_chooser.FileChooser.setDoOverwriteConfirmation] function), and
-      they will automatically get a stock confirmation dialog.
-      Applications which need to customize this behavior should do
-      that, and also connect to the #GtkFileChooser::confirm-overwrite
-      signal.
-      
-      A signal handler for this signal must return a
-      #GtkFileChooserConfirmation value, which indicates the action to
-      take.  If the handler determines that the user wants to select a
-      different filename, it should return
-      [gtk.types.FileChooserConfirmation.SelectAgain].  If it determines
-      that the user is satisfied with his choice of file name, it
-      should return [gtk.types.FileChooserConfirmation.AcceptFilename].
-      On the other hand, if it determines that the stock confirmation
-      dialog should be used, it should return
-      [gtk.types.FileChooserConfirmation.Confirm]. The following example
-      illustrates this.
-      
-      ## Custom confirmation ## {#gtkfilechooser-confirmation}
-      
-      ```c
-      static GtkFileChooserConfirmation
-      confirm_overwrite_callback (GtkFileChooser *chooser, gpointer data)
-      {
-        char *uri;
-      
-        uri = gtk_file_chooser_get_uri (chooser);
-      
-        if (is_uri_read_only (uri))
-          {
-            if (user_wants_to_replace_read_only_file (uri))
-              return GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME;
-            else
-              return GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN;
-          } else
-            return GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM; // fall back to the default dialog
-      }
-      
-      ...
-      
-      chooser = gtk_file_chooser_dialog_new (...);
-      
-      gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
-      g_signal_connect (chooser, "confirm-overwrite",
-                        G_CALLBACK (confirm_overwrite_callback), NULL);
-      
-      if (gtk_dialog_run (chooser) == GTK_RESPONSE_ACCEPT)
-              save_to_file (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
-      
-      gtk_widget_destroy (chooser);
-      ```
+        confirmation dialog when the user has selected a file name that
+        already exists.  The signal only gets emitted when the file
+        chooser is in [gtk.types.FileChooserAction.Save] mode.
+        
+        Most applications just need to turn on the
+        #GtkFileChooser:do-overwrite-confirmation property (or call the
+        [gtk.file_chooser.FileChooser.setDoOverwriteConfirmation] function), and
+        they will automatically get a stock confirmation dialog.
+        Applications which need to customize this behavior should do
+        that, and also connect to the #GtkFileChooser::confirm-overwrite
+        signal.
+        
+        A signal handler for this signal must return a
+        #GtkFileChooserConfirmation value, which indicates the action to
+        take.  If the handler determines that the user wants to select a
+        different filename, it should return
+        [gtk.types.FileChooserConfirmation.SelectAgain].  If it determines
+        that the user is satisfied with his choice of file name, it
+        should return [gtk.types.FileChooserConfirmation.AcceptFilename].
+        On the other hand, if it determines that the stock confirmation
+        dialog should be used, it should return
+        [gtk.types.FileChooserConfirmation.Confirm]. The following example
+        illustrates this.
+        
+        ## Custom confirmation ## {#gtkfilechooser-confirmation}
+        
+        ```c
+        static GtkFileChooserConfirmation
+        confirm_overwrite_callback (GtkFileChooser *chooser, gpointer data)
+        {
+          char *uri;
+        
+          uri = gtk_file_chooser_get_uri (chooser);
+        
+          if (is_uri_read_only (uri))
+            {
+              if (user_wants_to_replace_read_only_file (uri))
+                return GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME;
+              else
+                return GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN;
+            } else
+              return GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM; // fall back to the default dialog
+        }
+        
+        ...
+        
+        chooser = gtk_file_chooser_dialog_new (...);
+        
+        gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
+        g_signal_connect (chooser, "confirm-overwrite",
+                          G_CALLBACK (confirm_overwrite_callback), NULL);
+        
+        if (gtk_dialog_run (chooser) == GTK_RESPONSE_ACCEPT)
+                save_to_file (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+        
+        gtk_widget_destroy (chooser);
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1093,7 +1093,7 @@ interface FileChooser
           `fileChooser` the instance the signal is connected to (optional)
   
           `Returns` a #GtkFileChooserConfirmation value that indicates which
-           action to take after emitting the signal.
+             action to take after emitting the signal.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1103,18 +1103,18 @@ interface FileChooser
       Connect to `CurrentFolderChanged` signal.
   
       This signal is emitted when the current folder in a #GtkFileChooser
-      changes.  This can happen due to the user performing some action that
-      changes folders, such as selecting a bookmark or visiting a folder on the
-      file list.  It can also happen as a result of calling a function to
-      explicitly change the current folder in a file chooser.
-      
-      Normally you do not need to connect to this signal, unless you need to keep
-      track of which folder a file chooser is showing.
-      
-      See also:  [gtk.file_chooser.FileChooser.setCurrentFolder],
-      [gtk.file_chooser.FileChooser.getCurrentFolder],
-      [gtk.file_chooser.FileChooser.setCurrentFolderUri],
-      [gtk.file_chooser.FileChooser.getCurrentFolderUri].
+        changes.  This can happen due to the user performing some action that
+        changes folders, such as selecting a bookmark or visiting a folder on the
+        file list.  It can also happen as a result of calling a function to
+        explicitly change the current folder in a file chooser.
+        
+        Normally you do not need to connect to this signal, unless you need to keep
+        track of which folder a file chooser is showing.
+        
+        See also:  [gtk.file_chooser.FileChooser.setCurrentFolder],
+        [gtk.file_chooser.FileChooser.getCurrentFolder],
+        [gtk.file_chooser.FileChooser.setCurrentFolderUri],
+        [gtk.file_chooser.FileChooser.getCurrentFolderUri].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1132,16 +1132,16 @@ interface FileChooser
       Connect to `FileActivated` signal.
   
       This signal is emitted when the user "activates" a file in the file
-      chooser.  This can happen by double-clicking on a file in the file list, or
-      by pressing `Enter`.
-      
-      Normally you do not need to connect to this signal.  It is used internally
-      by #GtkFileChooserDialog to know when to activate the default button in the
-      dialog.
-      
-      See also: [gtk.file_chooser.FileChooser.getFilename],
-      [gtk.file_chooser.FileChooser.getFilenames], [gtk.file_chooser.FileChooser.getUri],
-      [gtk.file_chooser.FileChooser.getUris].
+        chooser.  This can happen by double-clicking on a file in the file list, or
+        by pressing `Enter`.
+        
+        Normally you do not need to connect to this signal.  It is used internally
+        by #GtkFileChooserDialog to know when to activate the default button in the
+        dialog.
+        
+        See also: [gtk.file_chooser.FileChooser.getFilename],
+        [gtk.file_chooser.FileChooser.getFilenames], [gtk.file_chooser.FileChooser.getUri],
+        [gtk.file_chooser.FileChooser.getUris].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1159,19 +1159,19 @@ interface FileChooser
       Connect to `SelectionChanged` signal.
   
       This signal is emitted when there is a change in the set of selected files
-      in a #GtkFileChooser.  This can happen when the user modifies the selection
-      with the mouse or the keyboard, or when explicitly calling functions to
-      change the selection.
-      
-      Normally you do not need to connect to this signal, as it is easier to wait
-      for the file chooser to finish running, and then to get the list of
-      selected files using the functions mentioned below.
-      
-      See also: [gtk.file_chooser.FileChooser.selectFilename],
-      [gtk.file_chooser.FileChooser.unselectFilename], [gtk.file_chooser.FileChooser.getFilename],
-      [gtk.file_chooser.FileChooser.getFilenames], [gtk.file_chooser.FileChooser.selectUri],
-      [gtk.file_chooser.FileChooser.unselectUri], [gtk.file_chooser.FileChooser.getUri],
-      [gtk.file_chooser.FileChooser.getUris].
+        in a #GtkFileChooser.  This can happen when the user modifies the selection
+        with the mouse or the keyboard, or when explicitly calling functions to
+        change the selection.
+        
+        Normally you do not need to connect to this signal, as it is easier to wait
+        for the file chooser to finish running, and then to get the list of
+        selected files using the functions mentioned below.
+        
+        See also: [gtk.file_chooser.FileChooser.selectFilename],
+        [gtk.file_chooser.FileChooser.unselectFilename], [gtk.file_chooser.FileChooser.getFilename],
+        [gtk.file_chooser.FileChooser.getFilenames], [gtk.file_chooser.FileChooser.selectUri],
+        [gtk.file_chooser.FileChooser.unselectUri], [gtk.file_chooser.FileChooser.getUri],
+        [gtk.file_chooser.FileChooser.getUris].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1189,27 +1189,27 @@ interface FileChooser
       Connect to `UpdatePreview` signal.
   
       This signal is emitted when the preview in a file chooser should be
-      regenerated.  For example, this can happen when the currently selected file
-      changes.  You should use this signal if you want your file chooser to have
-      a preview widget.
-      
-      Once you have installed a preview widget with
-      [gtk.file_chooser.FileChooser.setPreviewWidget], you should update it when this
-      signal is emitted.  You can use the functions
-      [gtk.file_chooser.FileChooser.getPreviewFilename] or
-      [gtk.file_chooser.FileChooser.getPreviewUri] to get the name of the file to preview.
-      Your widget may not be able to preview all kinds of files; your callback
-      must call [gtk.file_chooser.FileChooser.setPreviewWidgetActive] to inform the file
-      chooser about whether the preview was generated successfully or not.
-      
-      Please see the example code in
-      [Using a Preview Widget][gtkfilechooser-preview].
-      
-      See also: [gtk.file_chooser.FileChooser.setPreviewWidget],
-      [gtk.file_chooser.FileChooser.setPreviewWidgetActive],
-      [gtk.file_chooser.FileChooser.setUsePreviewLabel],
-      [gtk.file_chooser.FileChooser.getPreviewFilename],
-      [gtk.file_chooser.FileChooser.getPreviewUri].
+        regenerated.  For example, this can happen when the currently selected file
+        changes.  You should use this signal if you want your file chooser to have
+        a preview widget.
+        
+        Once you have installed a preview widget with
+        [gtk.file_chooser.FileChooser.setPreviewWidget], you should update it when this
+        signal is emitted.  You can use the functions
+        [gtk.file_chooser.FileChooser.getPreviewFilename] or
+        [gtk.file_chooser.FileChooser.getPreviewUri] to get the name of the file to preview.
+        Your widget may not be able to preview all kinds of files; your callback
+        must call [gtk.file_chooser.FileChooser.setPreviewWidgetActive] to inform the file
+        chooser about whether the preview was generated successfully or not.
+        
+        Please see the example code in
+        [Using a Preview Widget][gtkfilechooser-preview].
+        
+        See also: [gtk.file_chooser.FileChooser.setPreviewWidget],
+        [gtk.file_chooser.FileChooser.setPreviewWidgetActive],
+        [gtk.file_chooser.FileChooser.setUsePreviewLabel],
+        [gtk.file_chooser.FileChooser.getPreviewFilename],
+        [gtk.file_chooser.FileChooser.getPreviewUri].
   
       Params:
         callback = signal callback delegate or function to connect

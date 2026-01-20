@@ -1,4 +1,4 @@
-/// Module for [TypeFind] class
+/// Module for [TypeFind] struct
 module gst.type_find;
 
 import gid.gid;
@@ -12,27 +12,30 @@ import gst.types;
     The following functions allow you to detect the media type of an unknown
     stream.
 */
-class TypeFind
+struct TypeFind
 {
-  GstTypeFind cInstance;
+  /**
+      Method to peek data.
+  */
+  extern(C) const(ubyte)* function(void* data, long offset, uint size) peekFunc;
+
+  /**
+      Method to suggest #GstCaps with a given probability.
+  */
+  extern(C) void function(void* data, uint probability, GstCaps* caps) suggestFunc;
+
+  /**
+      The data used by the caller of the typefinding function.
+  */
+  void* data;
+
+  /**
+      Returns the length of current data.
+  */
+  extern(C) ulong function(void* data) getLengthFunc;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.type_find.TypeFind");
-
-    cInstance = *cast(GstTypeFind*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  void*[4] GstReserved;
 
   /**
       Get the length of the data stream.
@@ -41,7 +44,7 @@ class TypeFind
   ulong getLength()
   {
     ulong _retval;
-    _retval = gst_type_find_get_length(cast(GstTypeFind*)this._cPtr);
+    _retval = gst_type_find_get_length(cast(GstTypeFind*)&this);
     return _retval;
   }
 
@@ -60,7 +63,7 @@ class TypeFind
   */
   const(ubyte)* peek(long offset, uint size)
   {
-    auto _retval = gst_type_find_peek(cast(GstTypeFind*)this._cPtr, offset, size);
+    auto _retval = gst_type_find_peek(cast(GstTypeFind*)&this, offset, size);
     return _retval;
   }
 
@@ -76,7 +79,7 @@ class TypeFind
   */
   void suggest(uint probability, gst.caps.Caps caps)
   {
-    gst_type_find_suggest(cast(GstTypeFind*)this._cPtr, probability, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    gst_type_find_suggest(cast(GstTypeFind*)&this, probability, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -93,7 +96,7 @@ class TypeFind
   void suggestEmptySimple(uint probability, string mediaType)
   {
     const(char)* _mediaType = mediaType.toCString(No.Alloc);
-    gst_type_find_suggest_empty_simple(cast(GstTypeFind*)this._cPtr, probability, _mediaType);
+    gst_type_find_suggest_empty_simple(cast(GstTypeFind*)&this, probability, _mediaType);
   }
 
   /**
@@ -118,10 +121,9 @@ class TypeFind
     {
       auto _dlg = cast(gst.types.TypeFindFunction*)userData;
 
-      (*_dlg)(find ? new gst.type_find.TypeFind(cast(void*)find, No.Take) : null);
+      (*_dlg)(*cast(gst.type_find.TypeFind*)find);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _extensions = extensions.toCString(No.Alloc);

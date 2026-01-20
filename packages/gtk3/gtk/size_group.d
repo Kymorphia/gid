@@ -109,14 +109,14 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Get `ignoreHidden` property.
       Returns: If true, unmapped widgets are ignored when determining
-      the size of the group.
+        the size of the group.
   
       Deprecated: Measuring the size of hidden widgets has not worked
-          reliably for a long time. In most cases, they will report a size
-          of 0 nowadays, and thus, their size will not affect the other
-          size group members. In effect, size groups will always operate
-          as if this property was true. Use a #GtkStack instead to hide
-          widgets while still having their size taken into account.
+            reliably for a long time. In most cases, they will report a size
+            of 0 nowadays, and thus, their size will not affect the other
+            size group members. In effect, size groups will always operate
+            as if this property was true. Use a #GtkStack instead to hide
+            widgets while still having their size taken into account.
   */
   @property bool ignoreHidden()
   {
@@ -127,14 +127,14 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Set `ignoreHidden` property.
       Params:
         propval = If true, unmapped widgets are ignored when determining
-        the size of the group.
+          the size of the group.
   
       Deprecated: Measuring the size of hidden widgets has not worked
-          reliably for a long time. In most cases, they will report a size
-          of 0 nowadays, and thus, their size will not affect the other
-          size group members. In effect, size groups will always operate
-          as if this property was true. Use a #GtkStack instead to hide
-          widgets while still having their size taken into account.
+            reliably for a long time. In most cases, they will report a size
+            of 0 nowadays, and thus, their size will not affect the other
+            size group members. In effect, size groups will always operate
+            as if this property was true. Use a #GtkStack instead to hide
+            widgets while still having their size taken into account.
   */
   @property void ignoreHidden(bool propval)
   {

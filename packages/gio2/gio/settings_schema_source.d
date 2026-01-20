@@ -24,7 +24,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -131,6 +131,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
       {
       }
     }
+
     nonRelocatable.length = _lennonRelocatable;
     foreach (i; 0 .. _lennonRelocatable)
       nonRelocatable[i] = _nonRelocatable[i].fromCString(Yes.Free);
@@ -142,6 +143,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
       {
       }
     }
+
     relocatable.length = _lenrelocatable;
     foreach (i; 0 .. _lenrelocatable)
       relocatable[i] = _relocatable[i].fromCString(Yes.Free);

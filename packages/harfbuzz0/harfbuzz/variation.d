@@ -1,4 +1,4 @@
-/// Module for [Variation] class
+/// Module for [Variation] struct
 module harfbuzz.variation;
 
 import gid.gid;
@@ -11,63 +11,15 @@ import harfbuzz.types;
     variation-axis tags are listed in
     [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
 */
-class Variation
+struct Variation
 {
-  hb_variation_t cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for harfbuzz.variation.Variation");
-
-    cInstance = *cast(hb_variation_t*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  /**
+      The #hb_tag_t tag of the variation-axis name
+  */
+  Tag tag;
 
   /**
-      Get `tag` field.
-      Returns: The #hb_tag_t tag of the variation-axis name
+      The value of the variation axis
   */
-  @property harfbuzz.types.Tag tag()
-  {
-    return (cast(hb_variation_t*)this._cPtr).tag;
-  }
-
-  /**
-      Set `tag` field.
-      Params:
-        propval = The #hb_tag_t tag of the variation-axis name
-  */
-  @property void tag(harfbuzz.types.Tag propval)
-  {
-    (cast(hb_variation_t*)this._cPtr).tag = propval;
-  }
-
-  /**
-      Get `value` field.
-      Returns: The value of the variation axis
-  */
-  @property float value()
-  {
-    return (cast(hb_variation_t*)this._cPtr).value;
-  }
-
-  /**
-      Set `value` field.
-      Params:
-        propval = The value of the variation axis
-  */
-  @property void value(float propval)
-  {
-    (cast(hb_variation_t*)this._cPtr).value = propval;
-  }
+  float value;
 }

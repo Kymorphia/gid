@@ -76,11 +76,10 @@ template TreeSortableT()
     {
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), *cast(gtk.tree_iter.TreeIter*)a, *cast(gtk.tree_iter.TreeIter*)b);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
-
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
     gtk_tree_sortable_set_default_sort_func(cast(GtkTreeSortable*)this._cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
@@ -123,11 +122,10 @@ template TreeSortableT()
     {
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), *cast(gtk.tree_iter.TreeIter*)a, *cast(gtk.tree_iter.TreeIter*)b);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
-
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
     gtk_tree_sortable_set_sort_func(cast(GtkTreeSortable*)this._cPtr, sortColumnId, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
@@ -145,8 +143,8 @@ template TreeSortableT()
       Connect to `SortColumnChanged` signal.
   
       The ::sort-column-changed signal is emitted when the sort column
-      or sort order of sortable is changed. The signal is emitted before
-      the contents of sortable are resorted.
+        or sort order of sortable is changed. The signal is emitted before
+        the contents of sortable are resorted.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -46,11 +46,11 @@ class SaveDelegate : gobject.object.ObjectWrap
   /**
       Get `icon` property.
       Returns: The "icon" property contains a #GIcon that describes the save
-      operation. Generally, this should be the symbolic icon of the
-      document class you are saving.
-      
-      Alternatively, you can use #PanelSaveDelegate:icon-name for a
-      named icon.
+        operation. Generally, this should be the symbolic icon of the
+        document class you are saving.
+        
+        Alternatively, you can use #PanelSaveDelegate:icon-name for a
+        named icon.
   */
   @property gio.icon.Icon icon()
   {
@@ -61,11 +61,11 @@ class SaveDelegate : gobject.object.ObjectWrap
       Set `icon` property.
       Params:
         propval = The "icon" property contains a #GIcon that describes the save
-        operation. Generally, this should be the symbolic icon of the
-        document class you are saving.
-        
-        Alternatively, you can use #PanelSaveDelegate:icon-name for a
-        named icon.
+          operation. Generally, this should be the symbolic icon of the
+          document class you are saving.
+          
+          Alternatively, you can use #PanelSaveDelegate:icon-name for a
+          named icon.
   */
   @property void icon(gio.icon.Icon propval)
   {
@@ -75,11 +75,11 @@ class SaveDelegate : gobject.object.ObjectWrap
   /**
       Get `iconName` property.
       Returns: The "icon-name" property contains the name of an icon to use when
-      showing information about the save operation in UI such as a save
-      dialog.
-      
-      You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
-      an icon name.
+        showing information about the save operation in UI such as a save
+        dialog.
+        
+        You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
+        an icon name.
   */
   @property string iconName()
   {
@@ -90,11 +90,11 @@ class SaveDelegate : gobject.object.ObjectWrap
       Set `iconName` property.
       Params:
         propval = The "icon-name" property contains the name of an icon to use when
-        showing information about the save operation in UI such as a save
-        dialog.
-        
-        You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
-        an icon name.
+          showing information about the save operation in UI such as a save
+          dialog.
+          
+          You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
+          an icon name.
   */
   @property void iconName(string propval)
   {
@@ -104,7 +104,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   /**
       Get `isDraft` property.
       Returns: The "is-draft" property indicates that the document represented by the
-      delegate is a draft and might be lost of not saved.
+        delegate is a draft and might be lost of not saved.
   */
   @property bool isDraft()
   {
@@ -115,7 +115,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Set `isDraft` property.
       Params:
         propval = The "is-draft" property indicates that the document represented by the
-        delegate is a draft and might be lost of not saved.
+          delegate is a draft and might be lost of not saved.
   */
   @property void isDraft(bool propval)
   {
@@ -125,7 +125,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   /**
       Get `progress` property.
       Returns: The "progress" property contains progress between 0.0 and 1.0 and
-      should be updated by the delegate implementation as saving progresses.
+        should be updated by the delegate implementation as saving progresses.
   */
   @property double progress()
   {
@@ -136,7 +136,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Set `progress` property.
       Params:
         propval = The "progress" property contains progress between 0.0 and 1.0 and
-        should be updated by the delegate implementation as saving progresses.
+          should be updated by the delegate implementation as saving progresses.
   */
   @property void progress(double propval)
   {
@@ -146,8 +146,8 @@ class SaveDelegate : gobject.object.ObjectWrap
   /**
       Get `subtitle` property.
       Returns: The "subtitle" property contains additional information that may
-      not make sense to put in the title. This might include the directory
-      that the file will be saved within.
+        not make sense to put in the title. This might include the directory
+        that the file will be saved within.
   */
   @property string subtitle()
   {
@@ -158,8 +158,8 @@ class SaveDelegate : gobject.object.ObjectWrap
       Set `subtitle` property.
       Params:
         propval = The "subtitle" property contains additional information that may
-        not make sense to put in the title. This might include the directory
-        that the file will be saved within.
+          not make sense to put in the title. This might include the directory
+          that the file will be saved within.
   */
   @property void subtitle(string propval)
   {
@@ -169,8 +169,8 @@ class SaveDelegate : gobject.object.ObjectWrap
   /**
       Get `title` property.
       Returns: The "title" property contains the title of the document being saved.
-      Generally, this should be the base name of the document such as
-      `file.txt`.
+        Generally, this should be the base name of the document such as
+        `file.txt`.
   */
   @property string title()
   {
@@ -181,8 +181,8 @@ class SaveDelegate : gobject.object.ObjectWrap
       Set `title` property.
       Params:
         propval = The "title" property contains the title of the document being saved.
-        Generally, this should be the base name of the document such as
-        `file.txt`.
+          Generally, this should be the base name of the document such as
+          `file.txt`.
   */
   @property void title(string propval)
   {
@@ -287,7 +287,6 @@ class SaveDelegate : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     panel_save_delegate_save_async(cast(PanelSaveDelegate*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -366,12 +365,12 @@ class SaveDelegate : gobject.object.ObjectWrap
       Connect to `Close` signal.
   
       This signal is emitted when the save delegate should close
-      the widget it is related to. This can happen after saving as
-      part of a close request and it is now save for the delegate to
-      close.
-      
-      Implementations are encouraged to connect to this signal (or
-      implement the virtual method) and call [panel.widget.Widget.forceClose].
+        the widget it is related to. This can happen after saving as
+        part of a close request and it is now save for the delegate to
+        close.
+        
+        Implementations are encouraged to connect to this signal (or
+        implement the virtual method) and call [panel.widget.Widget.forceClose].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -409,11 +408,11 @@ class SaveDelegate : gobject.object.ObjectWrap
       Connect to `Discard` signal.
   
       This signal is emitted when the user has requested that the
-      delegate discard the changes instead of saving them.
-      
-      Implementations are encouraged to connect to this signal (or
-      implement the virtual method) and revert the document to the
-      last saved state and/or close the document.
+        delegate discard the changes instead of saving them.
+        
+        Implementations are encouraged to connect to this signal (or
+        implement the virtual method) and revert the document to the
+        last saved state and/or close the document.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -451,12 +450,12 @@ class SaveDelegate : gobject.object.ObjectWrap
       Connect to `Save` signal.
   
       This signal can be used when subclassing #PanelSaveDelegate is not
-      possible or cumbersome. The default implementation of
-      #PanelSaveDelegateClass.save_async() will emit this signal to allow
-      the consumer to implement asynchronous save in a flexible manner.
-      
-      The caller is expected to complete task with a boolean when the
-      save operation has completed.
+        possible or cumbersome. The default implementation of
+        #PanelSaveDelegateClass.save_async() will emit this signal to allow
+        the consumer to implement asynchronous save in a flexible manner.
+        
+        The caller is expected to complete task with a boolean when the
+        save operation has completed.
   
       Params:
         callback = signal callback delegate or function to connect

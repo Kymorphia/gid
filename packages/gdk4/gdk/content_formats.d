@@ -55,7 +55,7 @@ class ContentFormats : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -100,6 +100,7 @@ class ContentFormats : gobject.boxed.Boxed
     foreach (s; mimeTypes)
       _tmpmimeTypes ~= s.toCString(No.Alloc);
     const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
+
     _cretval = gdk_content_formats_new(_mimeTypes, _nMimeTypes);
     this(_cretval, Yes.Take);
   }

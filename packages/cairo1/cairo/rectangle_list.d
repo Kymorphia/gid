@@ -3,7 +3,6 @@ module cairo.rectangle_list;
 
 import cairo.c.functions;
 import cairo.c.types;
-import cairo.rectangle;
 import cairo.types;
 import gid.gid;
 import gobject.boxed;
@@ -19,14 +18,12 @@ class RectangleList : gobject.boxed.Boxed
       Create a `rectangle_list.RectangleList` boxed type.
       Params:
         status = Error status of the rectangle list
-        rectangles = Array containing the rectangles
         numRectangles = Number of rectangles in this list
   */
-  this(cairo.types.Status status = cairo.types.Status.init, cairo.rectangle.Rectangle rectangles = cairo.rectangle.Rectangle.init, int numRectangles = int.init)
+  this(cairo.types.Status status = cairo.types.Status.init, int numRectangles = int.init)
   {
     super(gMalloc(cairo_rectangle_list_t.sizeof), Yes.Take);
     this.status = status;
-    this.rectangles = rectangles;
     this.numRectangles = numRectangles;
   }
 
@@ -39,7 +36,7 @@ class RectangleList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -84,20 +81,9 @@ class RectangleList : gobject.boxed.Boxed
       Get `rectangles` field.
       Returns: Array containing the rectangles
   */
-  @property cairo.rectangle.Rectangle rectangles()
+  @property cairo.types.Rectangle rectangles()
   {
-    return cToD!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
-  }
-
-  /**
-      Set `rectangles` field.
-      Params:
-        propval = Array containing the rectangles
-  */
-  @property void rectangles(cairo.rectangle.Rectangle propval)
-  {
-    cValueFree!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
-    dToC(propval, cast(void*)&(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
+    return cToD!(cairo.types.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
   }
 
   /**

@@ -14,7 +14,7 @@ import gid.gid;
 */
 class SqlRenderingContext
 {
-  GdaSqlRenderingContext cInstance;
+  GdaSqlRenderingContext _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class SqlRenderingContext
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_rendering_context.SqlRenderingContext");
 
-    cInstance = *cast(GdaSqlRenderingContext*)ptr;
+    _cInstance = *cast(GdaSqlRenderingContext*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class SqlRenderingContext
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

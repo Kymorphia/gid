@@ -7,13 +7,16 @@ import glib.date_time;
 import glib.error;
 import glib.string_;
 import glib.uri;
+import gobject.type_class;
 import soup.c.functions;
 import soup.c.types;
 import soup.cookie;
 import soup.message;
 import soup.message_headers;
 import soup.multipart;
+import soup.server_message;
 import soup.types;
+import soup.websocket_extension;
 
 
 /**
@@ -740,5 +743,172 @@ bool uriEqual(glib.uri.Uri uri1, glib.uri.Uri uri2)
 {
   bool _retval;
   _retval = cast(bool)soup_uri_equal(uri1 ? cast(GUri*)uri1._cPtr(No.Dup) : null, uri2 ? cast(GUri*)uri2._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Adds the necessary headers to msg to request a WebSocket
+    handshake including supported WebSocket extensions.
+    
+    The message body and non-WebSocket-related headers are
+    not modified.
+    
+    This is a low-level function; if you use
+    [soup.session.Session.websocketConnectAsync] to create a WebSocket connection, it
+    will call this for you.
+
+    Params:
+      msg = a #SoupMessage
+      origin = the "Origin" header to set
+      protocols = list of
+          protocols to offer
+      supportedExtensions = list
+          of supported extension types
+*/
+void websocketClientPrepareHandshake(soup.message.Message msg, string origin = null, string[] protocols = null, gobject.type_class.TypeClass[] supportedExtensions = null)
+{
+  const(char)* _origin = origin.toCString(No.Alloc);
+  char*[] _tmpprotocols;
+  foreach (s; protocols)
+    _tmpprotocols ~= s.toCString(No.Alloc);
+  _tmpprotocols ~= null;
+  char** _protocols = _tmpprotocols.ptr;
+
+  auto _supportedExtensions = gPtrArrayFromD!(gobject.type_class.TypeClass, false)(supportedExtensions);
+  scope(exit) containerFree!(GPtrArray*, gobject.type_class.TypeClass, GidOwnership.None)(_supportedExtensions);
+  soup_websocket_client_prepare_handshake(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _origin, _protocols, _supportedExtensions);
+}
+
+/**
+    Looks at the response status code and headers in msg and
+    determines if they contain a valid WebSocket handshake response
+    (given the handshake request in msg's request headers).
+    
+    If supported_extensions is non-null, extensions included in the
+    response "Sec-WebSocket-Extensions" are verified too. Accepted
+    extensions are returned in accepted_extensions parameter if non-null.
+    
+    This is a low-level function; if you use
+    [soup.session.Session.websocketConnectAsync] to create a WebSocket
+    connection, it will call this for you.
+
+    Params:
+      msg = #SoupMessage containing both client and server sides of a
+          WebSocket handshake
+      supportedExtensions = list
+          of supported extension types
+      acceptedExtensions = a
+          #GList of #SoupWebsocketExtension objects
+    Returns: true if msg contains a completed valid WebSocket
+        handshake, false and an error if not.
+    Throws: [ErrorWrap]
+*/
+bool websocketClientVerifyHandshake(soup.message.Message msg, gobject.type_class.TypeClass[] supportedExtensions, out soup.websocket_extension.WebsocketExtension[] acceptedExtensions)
+{
+  bool _retval;
+  auto _supportedExtensions = gPtrArrayFromD!(gobject.type_class.TypeClass, false)(supportedExtensions);
+  scope(exit) containerFree!(GPtrArray*, gobject.type_class.TypeClass, GidOwnership.None)(_supportedExtensions);
+  GList* _acceptedExtensions;
+  GError *_err;
+  _retval = cast(bool)soup_websocket_client_verify_handshake(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _supportedExtensions, &_acceptedExtensions, &_err);
+  if (_err)
+    throw new ErrorWrap(_err);
+  acceptedExtensions = gListToD!(soup.websocket_extension.WebsocketExtension, GidOwnership.Full)(_acceptedExtensions);
+  return _retval;
+}
+
+/**
+    Examines the method and request headers in msg and determines
+    whether msg contains a valid handshake request.
+    
+    If origin is non-null, then only requests containing a matching
+    "Origin" header will be accepted. If protocols is non-null, then
+    only requests containing a compatible "Sec-WebSocket-Protocols"
+    header will be accepted. If supported_extensions is non-null, then
+    only requests containing valid supported extensions in
+    "Sec-WebSocket-Extensions" header will be accepted.
+    
+    Normally `funcwebsocket_server_process_handshake`
+    will take care of this for you, and if you use
+    [soup.server.Server.addWebsocketHandler] to handle accepting WebSocket
+    connections, it will call that for you. However, this function may
+    be useful if you need to perform more complicated validation; eg,
+    accepting multiple different Origins, or handling different protocols
+    depending on the path.
+
+    Params:
+      msg = #SoupServerMessage containing the client side of a WebSocket handshake
+      origin = expected Origin header
+      protocols = allowed WebSocket
+          protocols.
+      supportedExtensions = list
+          of supported extension types
+    Returns: true if msg contained a valid WebSocket handshake,
+        false and an error if not.
+    Throws: [ErrorWrap]
+*/
+bool websocketServerCheckHandshake(soup.server_message.ServerMessage msg, string origin = null, string[] protocols = null, gobject.type_class.TypeClass[] supportedExtensions = null)
+{
+  bool _retval;
+  const(char)* _origin = origin.toCString(No.Alloc);
+  char*[] _tmpprotocols;
+  foreach (s; protocols)
+    _tmpprotocols ~= s.toCString(No.Alloc);
+  _tmpprotocols ~= null;
+  char** _protocols = _tmpprotocols.ptr;
+
+  auto _supportedExtensions = gPtrArrayFromD!(gobject.type_class.TypeClass, false)(supportedExtensions);
+  scope(exit) containerFree!(GPtrArray*, gobject.type_class.TypeClass, GidOwnership.None)(_supportedExtensions);
+  GError *_err;
+  _retval = cast(bool)soup_websocket_server_check_handshake(msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null, _origin, _protocols, _supportedExtensions, &_err);
+  if (_err)
+    throw new ErrorWrap(_err);
+  return _retval;
+}
+
+/**
+    Examines the method and request headers in msg and (assuming msg
+    contains a valid handshake request), fills in the handshake
+    response.
+    
+    If expected_origin is non-null, then only requests containing a matching
+    "Origin" header will be accepted. If protocols is non-null, then
+    only requests containing a compatible "Sec-WebSocket-Protocols"
+    header will be accepted. If supported_extensions is non-null, then
+    only requests containing valid supported extensions in
+    "Sec-WebSocket-Extensions" header will be accepted. The accepted extensions
+    will be returned in accepted_extensions parameter if non-null.
+    
+    This is a low-level function; if you use
+    [soup.server.Server.addWebsocketHandler] to handle accepting WebSocket
+    connections, it will call this for you.
+
+    Params:
+      msg = #SoupServerMessage containing the client side of a WebSocket handshake
+      expectedOrigin = expected Origin header
+      protocols = allowed WebSocket
+          protocols.
+      supportedExtensions = list
+          of supported extension types
+      acceptedExtensions = a
+          #GList of #SoupWebsocketExtension objects
+    Returns: true if msg contained a valid WebSocket handshake
+        request and was updated to contain a handshake response. false if not.
+*/
+bool websocketServerProcessHandshake(soup.server_message.ServerMessage msg, string expectedOrigin, string[] protocols, gobject.type_class.TypeClass[] supportedExtensions, out soup.websocket_extension.WebsocketExtension[] acceptedExtensions)
+{
+  bool _retval;
+  const(char)* _expectedOrigin = expectedOrigin.toCString(No.Alloc);
+  char*[] _tmpprotocols;
+  foreach (s; protocols)
+    _tmpprotocols ~= s.toCString(No.Alloc);
+  _tmpprotocols ~= null;
+  char** _protocols = _tmpprotocols.ptr;
+
+  auto _supportedExtensions = gPtrArrayFromD!(gobject.type_class.TypeClass, false)(supportedExtensions);
+  scope(exit) containerFree!(GPtrArray*, gobject.type_class.TypeClass, GidOwnership.None)(_supportedExtensions);
+  GList* _acceptedExtensions;
+  _retval = cast(bool)soup_websocket_server_process_handshake(msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null, _expectedOrigin, _protocols, _supportedExtensions, &_acceptedExtensions);
+  acceptedExtensions = gListToD!(soup.websocket_extension.WebsocketExtension, GidOwnership.Full)(_acceptedExtensions);
   return _retval;
 }

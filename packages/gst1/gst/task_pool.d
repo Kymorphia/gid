@@ -136,7 +136,6 @@ class TaskPool : gst.object.ObjectWrap
       (*_dlg)();
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GError *_err;
     auto _retval = gst_task_pool_push(cast(GstTaskPool*)this._cPtr, _funcCB, _func, &_err);

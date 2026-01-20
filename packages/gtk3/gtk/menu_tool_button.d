@@ -177,13 +177,13 @@ class MenuToolButton : gtk.tool_button.ToolButton
       Connect to `ShowMenu` signal.
   
       The ::show-menu signal is emitted before the menu is shown.
-      
-      It can be used to populate the menu on demand, using
-      [gtk.menu_tool_button.MenuToolButton.setMenu].
-      
-      Note that even if you populate the menu dynamically in this way,
-      you must set an empty menu on the #GtkMenuToolButton beforehand,
-      since the arrow is made insensitive if the menu is not set.
+        
+        It can be used to populate the menu on demand, using
+        [gtk.menu_tool_button.MenuToolButton.setMenu].
+        
+        Note that even if you populate the menu dynamically in this way,
+        you must set an empty menu on the #GtkMenuToolButton beforehand,
+        since the arrow is made insensitive if the menu is not set.
   
       Params:
         callback = signal callback delegate or function to connect

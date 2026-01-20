@@ -36,7 +36,7 @@ interface Retrievable
   /**
       Get `created` property.
       Returns: The date and time (in seconds since the UNIX epoch) that this
-      item was created.
+        item was created.
   */
   @property ulong created();
 
@@ -44,7 +44,7 @@ interface Retrievable
       Set `created` property.
       Params:
         propval = The date and time (in seconds since the UNIX epoch) that this
-        item was created.
+          item was created.
   */
   @property void created(ulong propval);
 
@@ -64,7 +64,7 @@ interface Retrievable
   /**
       Get `modified` property.
       Returns: The date and time (in seconds since the UNIX epoch) that this
-      item was last modified.
+        item was last modified.
   */
   @property ulong modified();
 
@@ -72,7 +72,7 @@ interface Retrievable
       Set `modified` property.
       Params:
         propval = The date and time (in seconds since the UNIX epoch) that this
-        item was last modified.
+          item was last modified.
   */
   @property void modified(ulong propval);
 

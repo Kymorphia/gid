@@ -15,7 +15,7 @@ import gobject.value;
 */
 class Parameter
 {
-  GParameter cInstance;
+  GParameter _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class Parameter
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.parameter.Parameter");
 
-    cInstance = *cast(GParameter*)ptr;
+    _cInstance = *cast(GParameter*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class Parameter
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

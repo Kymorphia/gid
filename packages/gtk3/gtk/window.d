@@ -131,14 +131,14 @@ class Window : gtk.bin.Bin
   /**
       Get `application` property.
       Returns: The #GtkApplication associated with the window.
-      
-      The application will be kept alive for at least as long as it
-      has any windows associated with it (see [gio.application.Application.hold]
-      for a way to keep it alive without windows).
-      
-      Normally, the connection between the application and the window
-      will remain until the window is destroyed, but you can explicitly
-      remove it by setting the :application property to null.
+        
+        The application will be kept alive for at least as long as it
+        has any windows associated with it (see [gio.application.Application.hold]
+        for a way to keep it alive without windows).
+        
+        Normally, the connection between the application and the window
+        will remain until the window is destroyed, but you can explicitly
+        remove it by setting the :application property to null.
   */
   @property gtk.application.Application application()
   {
@@ -149,14 +149,14 @@ class Window : gtk.bin.Bin
       Set `application` property.
       Params:
         propval = The #GtkApplication associated with the window.
-        
-        The application will be kept alive for at least as long as it
-        has any windows associated with it (see [gio.application.Application.hold]
-        for a way to keep it alive without windows).
-        
-        Normally, the connection between the application and the window
-        will remain until the window is destroyed, but you can explicitly
-        remove it by setting the :application property to null.
+          
+          The application will be kept alive for at least as long as it
+          has any windows associated with it (see [gio.application.Application.hold]
+          for a way to keep it alive without windows).
+          
+          Normally, the connection between the application and the window
+          will remain until the window is destroyed, but you can explicitly
+          remove it by setting the :application property to null.
   */
   @property void application(gtk.application.Application propval)
   {
@@ -166,12 +166,12 @@ class Window : gtk.bin.Bin
   /**
       Get `attachedTo` property.
       Returns: The widget to which this window is attached.
-      See [gtk.window.Window.setAttachedTo].
-      
-      Examples of places where specifying this relation is useful are
-      for instance a #GtkMenu created by a #GtkComboBox, a completion
-      popup window created by #GtkEntry or a typeahead search entry
-      created by #GtkTreeView.
+        See [gtk.window.Window.setAttachedTo].
+        
+        Examples of places where specifying this relation is useful are
+        for instance a #GtkMenu created by a #GtkComboBox, a completion
+        popup window created by #GtkEntry or a typeahead search entry
+        created by #GtkTreeView.
   */
   @property gtk.widget.Widget attachedTo()
   {
@@ -182,12 +182,12 @@ class Window : gtk.bin.Bin
       Set `attachedTo` property.
       Params:
         propval = The widget to which this window is attached.
-        See [gtk.window.Window.setAttachedTo].
-        
-        Examples of places where specifying this relation is useful are
-        for instance a #GtkMenu created by a #GtkComboBox, a completion
-        popup window created by #GtkEntry or a typeahead search entry
-        created by #GtkTreeView.
+          See [gtk.window.Window.setAttachedTo].
+          
+          Examples of places where specifying this relation is useful are
+          for instance a #GtkMenu created by a #GtkComboBox, a completion
+          popup window created by #GtkEntry or a typeahead search entry
+          created by #GtkTreeView.
   */
   @property void attachedTo(gtk.widget.Widget propval)
   {
@@ -290,9 +290,9 @@ class Window : gtk.bin.Bin
   /**
       Get `focusVisible` property.
       Returns: Whether 'focus rectangles' are currently visible in this window.
-      
-      This property is maintained by GTK+ based on user input
-      and should not be set by applications.
+        
+        This property is maintained by GTK+ based on user input
+        and should not be set by applications.
   */
   @property bool focusVisible()
   {
@@ -303,9 +303,9 @@ class Window : gtk.bin.Bin
       Set `focusVisible` property.
       Params:
         propval = Whether 'focus rectangles' are currently visible in this window.
-        
-        This property is maintained by GTK+ based on user input
-        and should not be set by applications.
+          
+          This property is maintained by GTK+ based on user input
+          and should not be set by applications.
   */
   @property void focusVisible(bool propval)
   {
@@ -315,7 +315,7 @@ class Window : gtk.bin.Bin
   /**
       Get `gravity` property.
       Returns: The window gravity of the window. See [gtk.window.Window.move] and #GdkGravity for
-      more details about window gravity.
+        more details about window gravity.
   */
   @property gdk.types.Gravity gravity()
   {
@@ -326,7 +326,7 @@ class Window : gtk.bin.Bin
       Set `gravity` property.
       Params:
         propval = The window gravity of the window. See [gtk.window.Window.move] and #GdkGravity for
-        more details about window gravity.
+          more details about window gravity.
   */
   @property void gravity(gdk.types.Gravity propval)
   {
@@ -336,11 +336,11 @@ class Window : gtk.bin.Bin
   /**
       Get `hasResizeGrip` property.
       Returns: Whether the window has a corner resize grip.
-      
-      Note that the resize grip is only shown if the window is
-      actually resizable and not maximized. Use
-      #GtkWindow:resize-grip-visible to find out if the resize
-      grip is currently shown.
+        
+        Note that the resize grip is only shown if the window is
+        actually resizable and not maximized. Use
+        #GtkWindow:resize-grip-visible to find out if the resize
+        grip is currently shown.
   
       Deprecated: Resize grips have been removed.
   */
@@ -353,11 +353,11 @@ class Window : gtk.bin.Bin
       Set `hasResizeGrip` property.
       Params:
         propval = Whether the window has a corner resize grip.
-        
-        Note that the resize grip is only shown if the window is
-        actually resizable and not maximized. Use
-        #GtkWindow:resize-grip-visible to find out if the resize
-        grip is currently shown.
+          
+          Note that the resize grip is only shown if the window is
+          actually resizable and not maximized. Use
+          #GtkWindow:resize-grip-visible to find out if the resize
+          grip is currently shown.
   
       Deprecated: Resize grips have been removed.
   */
@@ -400,7 +400,7 @@ class Window : gtk.bin.Bin
   /**
       Get `iconName` property.
       Returns: The :icon-name property specifies the name of the themed icon to
-      use as the window icon. See #GtkIconTheme for more details.
+        use as the window icon. See #GtkIconTheme for more details.
   */
   @property string iconName()
   {
@@ -411,7 +411,7 @@ class Window : gtk.bin.Bin
       Set `iconName` property.
       Params:
         propval = The :icon-name property specifies the name of the themed icon to
-        use as the window icon. See #GtkIconTheme for more details.
+          use as the window icon. See #GtkIconTheme for more details.
   */
   @property void iconName(string propval)
   {
@@ -421,9 +421,9 @@ class Window : gtk.bin.Bin
   /**
       Get `mnemonicsVisible` property.
       Returns: Whether mnemonics are currently visible in this window.
-      
-      This property is maintained by GTK+ based on user input,
-      and should not be set by applications.
+        
+        This property is maintained by GTK+ based on user input,
+        and should not be set by applications.
   */
   @property bool mnemonicsVisible()
   {
@@ -434,9 +434,9 @@ class Window : gtk.bin.Bin
       Set `mnemonicsVisible` property.
       Params:
         propval = Whether mnemonics are currently visible in this window.
-        
-        This property is maintained by GTK+ based on user input,
-        and should not be set by applications.
+          
+          This property is maintained by GTK+ based on user input,
+          and should not be set by applications.
   */
   @property void mnemonicsVisible(bool propval)
   {
@@ -530,8 +530,8 @@ class Window : gtk.bin.Bin
       Set `startupId` property.
       Params:
         propval = The :startup-id is a write-only property for setting window's
-        startup notification identifier. See [gtk.window.Window.setStartupId]
-        for more details.
+          startup notification identifier. See [gtk.window.Window.setStartupId]
+          for more details.
   */
   @property void startupId(string propval)
   {
@@ -553,7 +553,7 @@ class Window : gtk.bin.Bin
   /**
       Get `transientFor` property.
       Returns: The transient parent of the window. See [gtk.window.Window.setTransientFor] for
-      more details about transient windows.
+        more details about transient windows.
   */
   @property gtk.window.Window transientFor()
   {
@@ -564,7 +564,7 @@ class Window : gtk.bin.Bin
       Set `transientFor` property.
       Params:
         propval = The transient parent of the window. See [gtk.window.Window.setTransientFor] for
-        more details about transient windows.
+          more details about transient windows.
   */
   @property void transientFor(gtk.window.Window propval)
   {
@@ -1296,9 +1296,7 @@ class Window : gtk.bin.Bin
   bool getResizeGripArea(out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
-    GdkRectangle _rect;
-    _retval = cast(bool)gtk_window_get_resize_grip_area(cast(GtkWindow*)this._cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    _retval = cast(bool)gtk_window_get_resize_grip_area(cast(GtkWindow*)this._cPtr, cast(GdkRectangle*)&rect);
     return _retval;
   }
 
@@ -2770,9 +2768,9 @@ class Window : gtk.bin.Bin
       Connect to `ActivateDefault` signal.
   
       The ::activate-default signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user activates the default widget
-      of window.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user activates the default widget
+        of window.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2810,9 +2808,9 @@ class Window : gtk.bin.Bin
       Connect to `ActivateFocus` signal.
   
       The ::activate-focus signal is a
-      [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user activates the currently
-      focused widget of window.
+        [keybinding signal][GtkBindingSignal]
+        which gets emitted when the user activates the currently
+        focused widget of window.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2850,13 +2848,13 @@ class Window : gtk.bin.Bin
       Connect to `EnableDebugging` signal.
   
       The ::enable-debugging signal is a [keybinding signal][GtkBindingSignal]
-      which gets emitted when the user enables or disables interactive
-      debugging. When toggle is true, interactive debugging is toggled
-      on or off, when it is false, the debugger will be pointed at the
-      widget under the pointer.
-      
-      The default bindings for this signal are Ctrl-Shift-I
-      and Ctrl-Shift-D.
+        which gets emitted when the user enables or disables interactive
+        debugging. When toggle is true, interactive debugging is toggled
+        on or off, when it is false, the debugger will be pointed at the
+        widget under the pointer.
+        
+        The default bindings for this signal are Ctrl-Shift-I
+        and Ctrl-Shift-D.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2903,7 +2901,7 @@ class Window : gtk.bin.Bin
       Connect to `KeysChanged` signal.
   
       The ::keys-changed signal gets emitted when the set of accelerators
-      or mnemonics that are associated with window changes.
+        or mnemonics that are associated with window changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2941,7 +2939,7 @@ class Window : gtk.bin.Bin
       Connect to `SetFocus` signal.
   
       This signal is emitted whenever the currently focused widget in
-      this window changes.
+        this window changes.
   
       Params:
         callback = signal callback delegate or function to connect

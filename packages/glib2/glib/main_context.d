@@ -4,8 +4,6 @@ module glib.main_context;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;
-import glib.cond;
-import glib.mutex;
 import glib.source;
 import glib.types;
 import gobject.boxed;
@@ -26,7 +24,7 @@ class MainContext : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -240,13 +238,15 @@ class MainContext : gobject.boxed.Boxed
   {
     extern(C) gboolean _function_Callback(void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      gboolean _retval = (*_dlg)();
+      _dretval = (*_dlg)();
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _function_CB = function_ ? &_function_Callback : null;
-
     auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
     GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
     g_main_context_invoke_full(cast(GMainContext*)this._cPtr, priority, _function_CB, _function_, _function_DestroyCB);
@@ -427,28 +427,6 @@ class MainContext : gobject.boxed.Boxed
   void removePoll(glib.types.PollFD fd)
   {
     g_main_context_remove_poll(cast(GMainContext*)this._cPtr, &fd);
-  }
-
-  /**
-      Tries to become the owner of the specified context,
-      as with [glib.main_context.MainContext.acquire]. But if another thread
-      is the owner, atomically drop mutex and wait on cond until
-      that owner releases ownership or until cond is signaled, then
-      try again (once) to become the owner.
-  
-      Params:
-        cond = a condition variable
-        mutex = a mutex, currently held
-      Returns: true if the operation succeeded, and
-          this thread is now the owner of context.
-  
-      Deprecated: Use [glib.main_context.MainContext.isOwner] and separate locking instead.
-  */
-  bool wait(glib.cond.Cond cond, glib.mutex.Mutex mutex)
-  {
-    bool _retval;
-    _retval = cast(bool)g_main_context_wait(cast(GMainContext*)this._cPtr, cond ? cast(GCond*)cond._cPtr : null, mutex ? cast(GMutex*)mutex._cPtr : null);
-    return _retval;
   }
 
   /**

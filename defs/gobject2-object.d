@@ -53,7 +53,7 @@ string objectMixin()
 
 class ObjectWrap
 {
-  protected GObject* cInstancePtr; // Pointer to wrapped C GObject
+  protected GObject* _cInstancePtr; // Pointer to wrapped C GObject
   DClosure[ulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
@@ -83,10 +83,10 @@ class ObjectWrap
 
   ~this()
   { // D object is being garbage collected. Only happens when there is only the toggle reference on GObject and there are no more pointers to the D proxy object.
-    if (cInstancePtr) // Might be null if an exception occurred during construction
+    if (_cInstancePtr) // Might be null if an exception occurred during construction
     {
       debug objectDebugLog("dtor");
-      g_object_remove_toggle_ref(cInstancePtr, &_cObjToggleNotify, cast(void*)this); // Remove the toggle reference, which will likely lead to the destruction of the GObject
+      g_object_remove_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this); // Remove the toggle reference, which will likely lead to the destruction of the GObject
     }
   }
 
@@ -98,29 +98,29 @@ class ObjectWrap
    */
   final void _setGObject(void* cObj, Flag!"Take" take)
   {
-    assert(!cInstancePtr);
+    assert(!_cInstancePtr);
 
-    cInstancePtr = cast(GObject*)cObj;
+    _cInstancePtr = cast(GObject*)cObj;
 
     // Add a data pointer to the D object from the C GObject
-    g_object_set_qdata(cInstancePtr, gidObjectQuark, cast(void*)this);
+    g_object_set_qdata(_cInstancePtr, gidObjectQuark, cast(void*)this);
 
     // Add a toggle reference to bind the GObject to this proxy D Object to prevent the GObject from being destroyed, while also preventing ref loops.
-    g_object_add_toggle_ref(cInstancePtr, &_cObjToggleNotify, cast(void*)this);
+    g_object_add_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this);
 
     // Add D object as a root to garbage collector so that it doesn't get collected as long as the GObject has a strong reference on it (toggle ref + 1 or more other refs).
     // There will always be at least 2 references at this point, one from the caller and one for the toggle ref.
     ptrFreezeGC(cast(void*)this);
 
     // If object has a floating reference, remove it
-    if (g_object_is_floating(cInstancePtr))
+    if (g_object_is_floating(_cInstancePtr))
     {
-      g_object_ref_sink(cInstancePtr);
-      g_object_unref(cInstancePtr);
+      g_object_ref_sink(_cInstancePtr);
+      g_object_unref(_cInstancePtr);
     }
 
     if (take) // If taking ownership of the object, remove the extra reference. May trigger toggle notify if it is the last remaining ref
-      g_object_unref(cInstancePtr);
+      g_object_unref(_cInstancePtr);
 
     debug objectDebugLog("new");
   }
@@ -149,7 +149,7 @@ class ObjectWrap
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
-      g_object_ref(cInstancePtr);
+      g_object_ref(_cInstancePtr);
 
     debug
     {
@@ -157,7 +157,7 @@ class ObjectWrap
         objectDebugLog("_cPtr(Yes.Dup)");
     }
 
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -212,7 +212,7 @@ class ObjectWrap
    * Template to get the D object from a C GObject and cast it to the given D object type.
    * Params:
    *   T = The D object type
-   *   cInstance = The C GObject (can be null, in which case null is returned)
+   *   cptr = The C GObject (can be null, in which case null is returned)
    *   take = If Yes.Take then the D object will consume a GObject reference.
    * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
    */
@@ -317,8 +317,8 @@ class ObjectWrap
 
         auto thisTypeName = typeid(this).name;
         toHex(thisHexBuf, cast(ulong)cast(void*)this);
-        toHex(cPtrHexBuf, cast(ulong)cast(void*)cInstancePtr);
-        auto refCountBufLen = toDec(refCountBuf, cInstancePtr.refCount);
+        toHex(cPtrHexBuf, cast(ulong)cast(void*)_cInstancePtr);
+        auto refCountBufLen = toDec(refCountBuf, _cInstancePtr.refCount);
 
         fwrite(action.ptr, 1, action.length, stderr);
         fwrite(" ".ptr, 1, " ".length, stderr);
@@ -373,8 +373,8 @@ class ObjectWrap
   ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
   {
     auto gclosure = cast(GClosure*)(cast(Closure)closure)._cPtr;
-    auto retval = g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
-    g_object_watch_closure(cInstancePtr, gclosure); // Invalidate closure when object is finalized
+    auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
+    g_object_watch_closure(_cInstancePtr, gclosure); // Invalidate closure when object is finalized
 
     if (retval != 0)
       signalClosures[retval] = closure;
@@ -393,7 +393,7 @@ class ObjectWrap
     GValue value;
     initVal!T(&value);
     setVal(&value, val);
-    g_object_set_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_set_property(_cInstancePtr, toCString(propertyName, No.Alloc), &value);
     g_value_unset(&value);
   }
 
@@ -407,7 +407,7 @@ class ObjectWrap
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cast(GObject*)cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_get_property(cast(GObject*)_cInstancePtr, toCString(propertyName, No.Alloc), &value);
     T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;

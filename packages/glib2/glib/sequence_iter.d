@@ -13,7 +13,7 @@ import glib.types;
 */
 class SequenceIter
 {
-  GSequenceIter* cInstancePtr;
+  GSequenceIter* _cInstancePtr;
   bool owned;
 
   /** */
@@ -22,7 +22,7 @@ class SequenceIter
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.sequence_iter.SequenceIter");
 
-    cInstancePtr = cast(GSequenceIter*)ptr;
+    _cInstancePtr = cast(GSequenceIter*)ptr;
 
     owned = take;
   }
@@ -30,7 +30,7 @@ class SequenceIter
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

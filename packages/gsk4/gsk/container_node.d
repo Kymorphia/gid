@@ -42,6 +42,7 @@ class ContainerNode : gsk.render_node.RenderNode
     foreach (obj; children)
       _tmpchildren ~= obj ? cast(GskRenderNode*)obj._cPtr : null;
     GskRenderNode** _children = cast(GskRenderNode**)_tmpchildren.ptr;
+
     _cretval = gsk_container_node_new(_children, _nChildren);
     this(_cretval, Yes.Take);
   }

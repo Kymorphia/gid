@@ -225,13 +225,15 @@ class Registry : gst.object.ObjectWrap
   {
     extern(C) gboolean _filterCallback(GstPluginFeature* feature, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.PluginFeatureFilter*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
-
     GList* _cretval;
     auto _filter = filter ? cast(void*)&(filter) : null;
     _cretval = gst_registry_feature_filter(cast(GstRegistry*)this._cPtr, _filterCB, first, _filter);
@@ -400,13 +402,15 @@ class Registry : gst.object.ObjectWrap
   {
     extern(C) gboolean _filterCallback(GstPlugin* plugin, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.PluginFilter*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
-
     GList* _cretval;
     auto _filter = filter ? cast(void*)&(filter) : null;
     _cretval = gst_registry_plugin_filter(cast(GstRegistry*)this._cPtr, _filterCB, first, _filter);
@@ -460,7 +464,7 @@ class Registry : gst.object.ObjectWrap
       Connect to `FeatureAdded` signal.
   
       Signals that a feature has been added to the registry (possibly
-      replacing a previously-added one by the same name)
+        replacing a previously-added one by the same name)
   
       Params:
         callback = signal callback delegate or function to connect
@@ -505,7 +509,7 @@ class Registry : gst.object.ObjectWrap
       Connect to `PluginAdded` signal.
   
       Signals that a plugin has been added to the registry (possibly
-      replacing a previously-added one by the same name)
+        replacing a previously-added one by the same name)
   
       Params:
         callback = signal callback delegate or function to connect

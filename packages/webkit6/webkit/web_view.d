@@ -103,26 +103,6 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `cameraCaptureState` property.
       Returns: Capture state of the camera device. Whenever the user grants a media-request sent by the web
-      page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
-      true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
-      
-      The application can monitor this property and provide a visual indicator allowing to optionally
-      deactivate or mute the capture device by setting this property respectively to
-      [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
-      
-      If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-      can still re-request the permission to the user. Permission desision caching is left to the
-      application.
-  */
-  @property webkit.types.MediaCaptureState cameraCaptureState()
-  {
-    return getCameraCaptureState();
-  }
-
-  /**
-      Set `cameraCaptureState` property.
-      Params:
-        propval = Capture state of the camera device. Whenever the user grants a media-request sent by the web
         page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
         true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
         
@@ -134,6 +114,26 @@ class WebView : webkit.web_view_base.WebViewBase
         can still re-request the permission to the user. Permission desision caching is left to the
         application.
   */
+  @property webkit.types.MediaCaptureState cameraCaptureState()
+  {
+    return getCameraCaptureState();
+  }
+
+  /**
+      Set `cameraCaptureState` property.
+      Params:
+        propval = Capture state of the camera device. Whenever the user grants a media-request sent by the web
+          page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
+          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          
+          The application can monitor this property and provide a visual indicator allowing to optionally
+          deactivate or mute the capture device by setting this property respectively to
+          [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+          
+          If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+          can still re-request the permission to the user. Permission desision caching is left to the
+          application.
+  */
   @property void cameraCaptureState(webkit.types.MediaCaptureState propval)
   {
     return setCameraCaptureState(propval);
@@ -142,26 +142,6 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `displayCaptureState` property.
       Returns: Capture state of the display device. Whenever the user grants a media-request sent by the web
-      page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
-      property will be set to [webkit.types.MediaCaptureState.Active].
-      
-      The application can monitor this property and provide a visual indicator allowing to
-      optionally deactivate or mute the capture device by setting this property respectively to
-      [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
-      
-      If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-      can still re-request the permission to the user. Permission desision caching is left to the
-      application.
-  */
-  @property webkit.types.MediaCaptureState displayCaptureState()
-  {
-    return getDisplayCaptureState();
-  }
-
-  /**
-      Set `displayCaptureState` property.
-      Params:
-        propval = Capture state of the display device. Whenever the user grants a media-request sent by the web
         page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
         property will be set to [webkit.types.MediaCaptureState.Active].
         
@@ -173,6 +153,26 @@ class WebView : webkit.web_view_base.WebViewBase
         can still re-request the permission to the user. Permission desision caching is left to the
         application.
   */
+  @property webkit.types.MediaCaptureState displayCaptureState()
+  {
+    return getDisplayCaptureState();
+  }
+
+  /**
+      Set `displayCaptureState` property.
+      Params:
+        propval = Capture state of the display device. Whenever the user grants a media-request sent by the web
+          page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
+          property will be set to [webkit.types.MediaCaptureState.Active].
+          
+          The application can monitor this property and provide a visual indicator allowing to
+          optionally deactivate or mute the capture device by setting this property respectively to
+          [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+          
+          If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+          can still re-request the permission to the user. Permission desision caching is left to the
+          application.
+  */
   @property void displayCaptureState(webkit.types.MediaCaptureState propval)
   {
     return setDisplayCaptureState(propval);
@@ -181,7 +181,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `editable` property.
       Returns: Whether the pages loaded inside #WebKitWebView are editable. For more
-      information see [webkit.web_view.WebView.setEditable].
+        information see [webkit.web_view.WebView.setEditable].
   */
   @property bool editable()
   {
@@ -192,7 +192,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Set `editable` property.
       Params:
         propval = Whether the pages loaded inside #WebKitWebView are editable. For more
-        information see [webkit.web_view.WebView.setEditable].
+          information see [webkit.web_view.WebView.setEditable].
   */
   @property void editable(bool propval)
   {
@@ -202,12 +202,12 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `estimatedLoadProgress` property.
       Returns: An estimate of the percent completion for the current loading operation.
-      This value will range from 0.0 to 1.0 and, once a load completes,
-      will remain at 1.0 until a new load starts, at which point it
-      will be reset to 0.0.
-      The value is an estimate based on the total number of bytes expected
-      to be received for a document, including all its possible subresources
-      and child documents.
+        This value will range from 0.0 to 1.0 and, once a load completes,
+        will remain at 1.0 until a new load starts, at which point it
+        will be reset to 0.0.
+        The value is an estimate based on the total number of bytes expected
+        to be received for a document, including all its possible subresources
+        and child documents.
   */
   @property double estimatedLoadProgress()
   {
@@ -217,7 +217,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `favicon` property.
       Returns: The favicon currently associated to the #WebKitWebView.
-      See [webkit.web_view.WebView.getFavicon] for more details.
+        See [webkit.web_view.WebView.getFavicon] for more details.
   */
   @property gdk.texture.Texture favicon()
   {
@@ -227,7 +227,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `isMuted` property.
       Returns: Whether the #WebKitWebView audio is muted. When true, audio is silenced.
-      It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
+        It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
   */
   @property bool isMuted()
   {
@@ -238,7 +238,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Set `isMuted` property.
       Params:
         propval = Whether the #WebKitWebView audio is muted. When true, audio is silenced.
-        It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
+          It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
   */
   @property void isMuted(bool propval)
   {
@@ -257,26 +257,6 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `microphoneCaptureState` property.
       Returns: Capture state of the microphone device. Whenever the user grants a media-request sent by the web
-      page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
-      true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
-      
-      The application can monitor this property and provide a visual indicator allowing to
-      optionally deactivate or mute the capture device by setting this property respectively to
-      [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
-      
-      If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-      can still re-request the permission to the user. Permission desision caching is left to the
-      application.
-  */
-  @property webkit.types.MediaCaptureState microphoneCaptureState()
-  {
-    return getMicrophoneCaptureState();
-  }
-
-  /**
-      Set `microphoneCaptureState` property.
-      Params:
-        propval = Capture state of the microphone device. Whenever the user grants a media-request sent by the web
         page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
         true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
         
@@ -287,6 +267,26 @@ class WebView : webkit.web_view_base.WebViewBase
         If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
         can still re-request the permission to the user. Permission desision caching is left to the
         application.
+  */
+  @property webkit.types.MediaCaptureState microphoneCaptureState()
+  {
+    return getMicrophoneCaptureState();
+  }
+
+  /**
+      Set `microphoneCaptureState` property.
+      Params:
+        propval = Capture state of the microphone device. Whenever the user grants a media-request sent by the web
+          page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
+          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          
+          The application can monitor this property and provide a visual indicator allowing to
+          optionally deactivate or mute the capture device by setting this property respectively to
+          [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+          
+          If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+          can still re-request the permission to the user. Permission desision caching is left to the
+          application.
   */
   @property void microphoneCaptureState(webkit.types.MediaCaptureState propval)
   {
@@ -315,7 +315,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `title` property.
       Returns: The main frame document title of this #WebKitWebView. If
-      the title has not been received yet, it will be null.
+        the title has not been received yet, it will be null.
   */
   @property string title()
   {
@@ -325,7 +325,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `uri` property.
       Returns: The current active URI of the #WebKitWebView.
-      See [webkit.web_view.WebView.getUri] for more details.
+        See [webkit.web_view.WebView.getUri] for more details.
   */
   @property string uri()
   {
@@ -335,7 +335,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `zoomLevel` property.
       Returns: The zoom level of the #WebKitWebView content.
-      See [webkit.web_view.WebView.setZoomLevel] for more details.
+        See [webkit.web_view.WebView.setZoomLevel] for more details.
   */
   @property double zoomLevel()
   {
@@ -346,7 +346,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Set `zoomLevel` property.
       Params:
         propval = The zoom level of the #WebKitWebView content.
-        See [webkit.web_view.WebView.setZoomLevel] for more details.
+          See [webkit.web_view.WebView.setZoomLevel] for more details.
   */
   @property void zoomLevel(double propval)
   {
@@ -449,7 +449,6 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _body_ = body_.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
@@ -498,7 +497,6 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _command = command.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_can_execute_editing_command(cast(WebKitWebView*)this._cPtr, _command, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -650,7 +648,6 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _script = script.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
@@ -749,9 +746,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void getBackgroundColor(out gdk.rgba.RGBA rgba)
   {
-    GdkRGBA _rgba;
-    webkit_web_view_get_background_color(cast(WebKitWebView*)this._cPtr, &_rgba);
-    rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
+    webkit_web_view_get_background_color(cast(WebKitWebView*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
 
   /**
@@ -1039,7 +1034,6 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_get_snapshot(cast(WebKitWebView*)this._cPtr, region, options, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1512,7 +1506,6 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_save(cast(WebKitWebView*)this._cPtr, saveMode, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1564,7 +1557,6 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_save_to_file(cast(WebKitWebView*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, saveMode, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1610,7 +1602,6 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_send_message_to_page(cast(WebKitWebView*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1647,7 +1638,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setBackgroundColor(gdk.rgba.RGBA rgba)
   {
-    webkit_web_view_set_background_color(cast(WebKitWebView*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    webkit_web_view_set_background_color(cast(WebKitWebView*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
 
   /**
@@ -1693,6 +1684,7 @@ class WebView : webkit.web_view_base.WebViewBase
       _tmpallowlist ~= s.toCString(No.Alloc);
     _tmpallowlist ~= null;
     const(char*)* _allowlist = _tmpallowlist.ptr;
+
     webkit_web_view_set_cors_allowlist(cast(WebKitWebView*)this._cPtr, _allowlist);
   }
 
@@ -1861,17 +1853,17 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `Authenticate` signal.
   
       This signal is emitted when the user is challenged with HTTP
-      authentication. To let the  application access or supply
-      the credentials as well as to allow the client application
-      to either cancel the request or perform the authentication,
-      the signal will pass an instance of the
-      #WebKitAuthenticationRequest in the request argument.
-      To handle this signal asynchronously you should keep a ref
-      of the request and return true. To disable HTTP authentication
-      entirely, connect to this signal and simply return true.
-      
-      The default signal handler will run a default authentication
-      dialog asynchronously for the user to interact with.
+        authentication. To let the  application access or supply
+        the credentials as well as to allow the client application
+        to either cancel the request or perform the authentication,
+        the signal will pass an instance of the
+        #WebKitAuthenticationRequest in the request argument.
+        To handle this signal asynchronously you should keep a ref
+        of the request and return true. To disable HTTP authentication
+        entirely, connect to this signal and simply return true.
+        
+        The default signal handler will run a default authentication
+        dialog asynchronously for the user to interact with.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1883,7 +1875,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1919,10 +1911,10 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `Close` signal.
   
       Emitted when closing a #WebKitWebView is requested. This occurs when a
-      call is made from JavaScript's <function>window.close</function> function or
-      after trying to close the web_view with [webkit.web_view.WebView.tryClose].
-      It is the owner's responsibility to handle this signal to hide or
-      destroy the #WebKitWebView, if necessary.
+        call is made from JavaScript's <function>window.close</function> function or
+        after trying to close the web_view with [webkit.web_view.WebView.tryClose].
+        It is the owner's responsibility to handle this signal to hide or
+        destroy the #WebKitWebView, if necessary.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1960,38 +1952,38 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `ContextMenu` signal.
   
       Emitted when a context menu is about to be displayed to give the application
-      a chance to customize the proposed menu, prevent the menu from being displayed,
-      or build its own context menu.
-      <itemizedlist>
-      <listitem><para>
-       To customize the proposed menu you can use [webkitwebprocessextension.context_menu.ContextMenu.prepend],
-       [webkitwebprocessextension.context_menu.ContextMenu.append] or [webkitwebprocessextension.context_menu.ContextMenu.insert] to add new
-       #WebKitContextMenuItem<!-- -->s to context_menu, [webkitwebprocessextension.context_menu.ContextMenu.moveItem]
-       to reorder existing items, or [webkitwebprocessextension.context_menu.ContextMenu.remove] to remove an
-       existing item. The signal handler should return false, and the menu represented
-       by context_menu will be shown.
-      </para></listitem>
-      <listitem><para>
-       To prevent the menu from being displayed you can just connect to this signal
-       and return true so that the proposed menu will not be shown.
-      </para></listitem>
-      <listitem><para>
-       To build your own menu, you can remove all items from the proposed menu with
-       [webkitwebprocessextension.context_menu.ContextMenu.removeAll], add your own items and return false so
-       that the menu will be shown. You can also ignore the proposed #WebKitContextMenu,
-       build your own #GtkMenu and return true to prevent the proposed menu from being shown.
-      </para></listitem>
-      <listitem><para>
-       If you just want the default menu to be shown always, simply don't connect to this
-       signal because showing the proposed context menu is the default behaviour.
-      </para></listitem>
-      </itemizedlist>
-      
-      If the signal handler returns false the context menu represented by context_menu
-      will be shown, if it return true the context menu will not be shown.
-      
-      The proposed #WebKitContextMenu passed in context_menu argument is only valid
-      during the signal emission.
+        a chance to customize the proposed menu, prevent the menu from being displayed,
+        or build its own context menu.
+        <itemizedlist>
+        <listitem><para>
+         To customize the proposed menu you can use [webkitwebprocessextension.context_menu.ContextMenu.prepend],
+         [webkitwebprocessextension.context_menu.ContextMenu.append] or [webkitwebprocessextension.context_menu.ContextMenu.insert] to add new
+         #WebKitContextMenuItem<!-- -->s to context_menu, [webkitwebprocessextension.context_menu.ContextMenu.moveItem]
+         to reorder existing items, or [webkitwebprocessextension.context_menu.ContextMenu.remove] to remove an
+         existing item. The signal handler should return false, and the menu represented
+         by context_menu will be shown.
+        </para></listitem>
+        <listitem><para>
+         To prevent the menu from being displayed you can just connect to this signal
+         and return true so that the proposed menu will not be shown.
+        </para></listitem>
+        <listitem><para>
+         To build your own menu, you can remove all items from the proposed menu with
+         [webkitwebprocessextension.context_menu.ContextMenu.removeAll], add your own items and return false so
+         that the menu will be shown. You can also ignore the proposed #WebKitContextMenu,
+         build your own #GtkMenu and return true to prevent the proposed menu from being shown.
+        </para></listitem>
+        <listitem><para>
+         If you just want the default menu to be shown always, simply don't connect to this
+         signal because showing the proposed context menu is the default behaviour.
+        </para></listitem>
+        </itemizedlist>
+        
+        If the signal handler returns false the context menu represented by context_menu
+        will be shown, if it return true the context menu will not be shown.
+        
+        The proposed #WebKitContextMenu passed in context_menu argument is only valid
+        during the signal emission.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2005,7 +1997,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2046,7 +2038,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `ContextMenuDismissed` signal.
   
       Emitted after #WebKitWebView::context-menu signal, if the context menu is shown,
-      to notify that the context menu is dismissed.
+        to notify that the context menu is dismissed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2084,20 +2076,20 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `Create` signal.
   
       Emitted when the creation of a new #WebKitWebView is requested.
-      If this signal is handled the signal handler should return the
-      newly created #WebKitWebView.
-      
-      The #WebKitNavigationAction parameter contains information about the
-      navigation action that triggered this signal.
-      
-      The new #WebKitWebView must be related to web_view, see
-      #WebKitWebView:related-view for more details.
-      
-      The new #WebKitWebView should not be displayed to the user
-      until the #WebKitWebView::ready-to-show signal is emitted.
-      
-      For creating views as response to automation tools requests, see the
-      #WebKitAutomationSession::create-web-view signal.
+        If this signal is handled the signal handler should return the
+        newly created #WebKitWebView.
+        
+        The #WebKitNavigationAction parameter contains information about the
+        navigation action that triggered this signal.
+        
+        The new #WebKitWebView must be related to web_view, see
+        #WebKitWebView:related-view for more details.
+        
+        The new #WebKitWebView should not be displayed to the user
+        until the #WebKitWebView::ready-to-show signal is emitted.
+        
+        For creating views as response to automation tools requests, see the
+        #WebKitAutomationSession::create-web-view signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2109,7 +2101,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` a newly allocated #WebKitWebView widget
-             or null to propagate the event further.
+               or null to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2145,46 +2137,46 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `DecidePolicy` signal.
   
       This signal is emitted when WebKit is requesting the client to decide a policy
-      decision, such as whether to navigate to a page, open a new window or whether or
-      not to download a resource. The #WebKitNavigationPolicyDecision passed in the
-      decision argument is a generic type, but should be casted to a more
-      specific type when making the decision. For example:
-      
-      ```c
-      static gboolean
-      decide_policy_cb (WebKitWebView *web_view,
-                        WebKitPolicyDecision *decision,
-                        WebKitPolicyDecisionType type)
-      {
-          switch (type) {
-          case WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION: {
-              WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION (decision);
-              // Make a policy decision here
-              break;
-          }
-          case WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION: {
-              WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION (decision);
-              // Make a policy decision here
-              break;
-          }
-          case WEBKIT_POLICY_DECISION_TYPE_RESPONSE:
-              WebKitResponsePolicyDecision *response = WEBKIT_RESPONSE_POLICY_DECISION (decision);
-              // Make a policy decision here
-              break;
-          default:
-              // Making no decision results in webkit_policy_decision_use()
-              return FALSE;
-          }
-          return TRUE;
-      }
-      ```
-      
-      It is possible to make policy decision asynchronously, by simply calling [gobject.object.ObjectWrap.ref_]
-      on the decision argument and returning true to block the default signal handler.
-      If the last reference is removed on a #WebKitPolicyDecision and no decision has been
-      made explicitly, [webkit.policy_decision.PolicyDecision.use] will be the default policy decision. The
-      default signal handler will simply call [webkit.policy_decision.PolicyDecision.use]. Only the first
-      policy decision chosen for a given #WebKitPolicyDecision will have any affect.
+        decision, such as whether to navigate to a page, open a new window or whether or
+        not to download a resource. The #WebKitNavigationPolicyDecision passed in the
+        decision argument is a generic type, but should be casted to a more
+        specific type when making the decision. For example:
+        
+        ```c
+        static gboolean
+        decide_policy_cb (WebKitWebView *web_view,
+                          WebKitPolicyDecision *decision,
+                          WebKitPolicyDecisionType type)
+        {
+            switch (type) {
+            case WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION: {
+                WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION (decision);
+                // Make a policy decision here
+                break;
+            }
+            case WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION: {
+                WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION (decision);
+                // Make a policy decision here
+                break;
+            }
+            case WEBKIT_POLICY_DECISION_TYPE_RESPONSE:
+                WebKitResponsePolicyDecision *response = WEBKIT_RESPONSE_POLICY_DECISION (decision);
+                // Make a policy decision here
+                break;
+            default:
+                // Making no decision results in webkit_policy_decision_use()
+                return FALSE;
+            }
+            return TRUE;
+        }
+        ```
+        
+        It is possible to make policy decision asynchronously, by simply calling [gobject.object.ObjectWrap.ref_]
+        on the decision argument and returning true to block the default signal handler.
+        If the last reference is removed on a #WebKitPolicyDecision and no decision has been
+        made explicitly, [webkit.policy_decision.PolicyDecision.use] will be the default policy decision. The
+        default signal handler will simply call [webkit.policy_decision.PolicyDecision.use]. Only the first
+        policy decision chosen for a given #WebKitPolicyDecision will have any affect.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2198,7 +2190,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2239,13 +2231,13 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `EnterFullscreen` signal.
   
       Emitted when JavaScript code calls
-      <function>element.webkitRequestFullScreen</function>. If the
-      signal is not handled the #WebKitWebView will proceed to full screen
-      its top level window. This signal can be used by client code to
-      request permission to the user prior doing the full screen
-      transition and eventually prepare the top-level window
-      (e.g. hide some widgets that would otherwise be part of the
-      full screen window).
+        <function>element.webkitRequestFullScreen</function>. If the
+        signal is not handled the #WebKitWebView will proceed to full screen
+        its top level window. This signal can be used by client code to
+        request permission to the user prior doing the full screen
+        transition and eventually prepare the top-level window
+        (e.g. hide some widgets that would otherwise be part of the
+        full screen window).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2255,7 +2247,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to continue emission of the event.
+               false to continue emission of the event.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2286,8 +2278,8 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `InsecureContentDetected` signal.
   
       Prior to 2.46, this signal was emitted when insecure content was
-      loaded in a secure content. Since 2.46, this signal is generally
-      no longer emitted.
+        loaded in a secure content. Since 2.46, this signal is generally
+        no longer emitted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2332,9 +2324,9 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `LeaveFullscreen` signal.
   
       Emitted when the #WebKitWebView is about to restore its top level
-      window out of its full screen state. This signal can be used by
-      client code to restore widgets hidden during the
-      #WebKitWebView::enter-fullscreen stage for instance.
+        window out of its full screen state. This signal can be used by
+        client code to restore widgets hidden during the
+        #WebKitWebView::enter-fullscreen stage for instance.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2344,7 +2336,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to continue emission of the event.
+               false to continue emission of the event.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2375,49 +2367,49 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `LoadChanged` signal.
   
       Emitted when a load operation in web_view changes.
-      The signal is always emitted with [webkit.types.LoadEvent.Started] when a
-      new load request is made and [webkit.types.LoadEvent.Finished] when the load
-      finishes successfully or due to an error. When the ongoing load
-      operation fails #WebKitWebView::load-failed signal is emitted
-      before #WebKitWebView::load-changed is emitted with
-      [webkit.types.LoadEvent.Finished].
-      If a redirection is received from the server, this signal is emitted
-      with [webkit.types.LoadEvent.Redirected] after the initial emission with
-      [webkit.types.LoadEvent.Started] and before [webkit.types.LoadEvent.Committed].
-      When the page content starts arriving the signal is emitted with
-      [webkit.types.LoadEvent.Committed] event.
-      
-      You can handle this signal and use a switch to track any ongoing
-      load operation.
-      
-      ```c
-      static void web_view_load_changed (WebKitWebView  *web_view,
-                                         WebKitLoadEvent load_event,
-                                         gpointer        user_data)
-      {
-          switch (load_event) {
-          case WEBKIT_LOAD_STARTED:
-              // New load, we have now a provisional URI
-              provisional_uri = webkit_web_view_get_uri (web_view);
-              // Here we could start a spinner or update the
-              // location bar with the provisional URI
-              break;
-          case WEBKIT_LOAD_REDIRECTED:
-              redirected_uri = webkit_web_view_get_uri (web_view);
-              break;
-          case WEBKIT_LOAD_COMMITTED:
-              // The load is being performed. Current URI is
-              // the final one and it won't change unless a new
-              // load is requested or a navigation within the
-              // same page is performed
-              uri = webkit_web_view_get_uri (web_view);
-              break;
-          case WEBKIT_LOAD_FINISHED:
-              // Load finished, we can now stop the spinner
-              break;
-          }
-      }
-      ```
+        The signal is always emitted with [webkit.types.LoadEvent.Started] when a
+        new load request is made and [webkit.types.LoadEvent.Finished] when the load
+        finishes successfully or due to an error. When the ongoing load
+        operation fails #WebKitWebView::load-failed signal is emitted
+        before #WebKitWebView::load-changed is emitted with
+        [webkit.types.LoadEvent.Finished].
+        If a redirection is received from the server, this signal is emitted
+        with [webkit.types.LoadEvent.Redirected] after the initial emission with
+        [webkit.types.LoadEvent.Started] and before [webkit.types.LoadEvent.Committed].
+        When the page content starts arriving the signal is emitted with
+        [webkit.types.LoadEvent.Committed] event.
+        
+        You can handle this signal and use a switch to track any ongoing
+        load operation.
+        
+        ```c
+        static void web_view_load_changed (WebKitWebView  *web_view,
+                                           WebKitLoadEvent load_event,
+                                           gpointer        user_data)
+        {
+            switch (load_event) {
+            case WEBKIT_LOAD_STARTED:
+                // New load, we have now a provisional URI
+                provisional_uri = webkit_web_view_get_uri (web_view);
+                // Here we could start a spinner or update the
+                // location bar with the provisional URI
+                break;
+            case WEBKIT_LOAD_REDIRECTED:
+                redirected_uri = webkit_web_view_get_uri (web_view);
+                break;
+            case WEBKIT_LOAD_COMMITTED:
+                // The load is being performed. Current URI is
+                // the final one and it won't change unless a new
+                // load is requested or a navigation within the
+                // same page is performed
+                uri = webkit_web_view_get_uri (web_view);
+                break;
+            case WEBKIT_LOAD_FINISHED:
+                // Load finished, we can now stop the spinner
+                break;
+            }
+        }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2462,15 +2454,15 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `LoadFailed` signal.
   
       Emitted when an error occurs during a load operation.
-      If the error happened when starting to load data for a page
-      load_event will be [webkit.types.LoadEvent.Started]. If it happened while
-      loading a committed data source load_event will be [webkit.types.LoadEvent.Committed].
-      Since a load error causes the load operation to finish, the signal
-      WebKitWebView::load-changed will always be emitted with
-      [webkit.types.LoadEvent.Finished] event right after this one.
-      
-      By default, if the signal is not handled, a stock error page will be displayed.
-      You need to handle the signal if you want to provide your own error page.
+        If the error happened when starting to load data for a page
+        load_event will be [webkit.types.LoadEvent.Started]. If it happened while
+        loading a committed data source load_event will be [webkit.types.LoadEvent.Committed].
+        Since a load error causes the load operation to finish, the signal
+        WebKitWebView::load-changed will always be emitted with
+        [webkit.types.LoadEvent.Finished] event right after this one.
+        
+        By default, if the signal is not handled, a stock error page will be displayed.
+        You need to handle the signal if you want to provide your own error page.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2486,7 +2478,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2532,14 +2524,14 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `LoadFailedWithTlsErrors` signal.
   
       Emitted when a TLS error occurs during a load operation.
-      To allow an exception for this certificate
-      and the host of failing_uri use webkit_web_context_allow_tls_certificate_for_host().
-      
-      To handle this signal asynchronously you should call [gobject.object.ObjectWrap.ref_] on certificate
-      and return true.
-      
-      If false is returned, #WebKitWebView::load-failed will be emitted. The load
-      will finish regardless of the returned value.
+        To allow an exception for this certificate
+        and the host of failing_uri use webkit_web_context_allow_tls_certificate_for_host().
+        
+        To handle this signal asynchronously you should call [gobject.object.ObjectWrap.ref_] on certificate
+        and return true.
+        
+        If false is returned, #WebKitWebView::load-failed will be emitted. The load
+        will finish regardless of the returned value.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2555,7 +2547,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2601,13 +2593,13 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `MouseTargetChanged` signal.
   
       This signal is emitted when the mouse cursor moves over an
-      element such as a link, image or a media element. To determine
-      what type of element the mouse cursor is over, a Hit Test is performed
-      on the current mouse coordinates and the result is passed in the
-      hit_test_result argument. The modifiers argument is a bitmask of
-      #GdkModifierType flags indicating the state of modifier keys.
-      The signal is emitted again when the mouse is moved out of the
-      current element with a new hit_test_result.
+        element such as a link, image or a media element. To determine
+        what type of element the mouse cursor is over, a Hit Test is performed
+        on the current mouse coordinates and the result is passed in the
+        hit_test_result argument. The modifiers argument is a bitmask of
+        #GdkModifierType flags indicating the state of modifier keys.
+        The signal is emitted again when the mouse is moved out of the
+        current element with a new hit_test_result.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2659,51 +2651,51 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `PermissionRequest` signal.
   
       This signal is emitted when WebKit is requesting the client to
-      decide about a permission request, such as allowing the browser
-      to switch to fullscreen mode, sharing its location or similar
-      operations.
-      
-      A possible way to use this signal could be through a dialog
-      allowing the user decide what to do with the request:
-      
-      ```c
-      static gboolean permission_request_cb (WebKitWebView *web_view,
-                                             WebKitPermissionRequest *request,
-                                             GtkWindow *parent_window)
-      {
-          GtkWidget *dialog = gtk_message_dialog_new (parent_window,
-                                                      GTK_DIALOG_MODAL,
-                                                      GTK_MESSAGE_QUESTION,
-                                                      GTK_BUTTONS_YES_NO,
-                                                      "Allow Permission Request?");
-          gtk_widget_show (dialog);
-          gint result = gtk_dialog_run (GTK_DIALOG (dialog));
-      
-          switch (result) {
-          case GTK_RESPONSE_YES:
-              webkit_permission_request_allow (request);
-              break;
-          default:
-              webkit_permission_request_deny (request);
-              break;
-          }
-          gtk_widget_destroy (dialog);
-      
-          return TRUE;
-      }
-      ```
-      
-      It is possible to handle permission requests asynchronously, by
-      simply calling [gobject.object.ObjectWrap.ref_] on the request argument and
-      returning true to block the default signal handler.  If the
-      last reference is removed on a #WebKitPermissionRequest and the
-      request has not been handled, [webkit.permission_request.PermissionRequest.deny]
-      will be the default action.
-      
-      If the signal is not handled, the request will be completed automatically
-      by the specific #WebKitPermissionRequest that could allow or deny it. Check the
-      documentation of classes implementing #WebKitPermissionRequest interface to know
-      their default action.
+        decide about a permission request, such as allowing the browser
+        to switch to fullscreen mode, sharing its location or similar
+        operations.
+        
+        A possible way to use this signal could be through a dialog
+        allowing the user decide what to do with the request:
+        
+        ```c
+        static gboolean permission_request_cb (WebKitWebView *web_view,
+                                               WebKitPermissionRequest *request,
+                                               GtkWindow *parent_window)
+        {
+            GtkWidget *dialog = gtk_message_dialog_new (parent_window,
+                                                        GTK_DIALOG_MODAL,
+                                                        GTK_MESSAGE_QUESTION,
+                                                        GTK_BUTTONS_YES_NO,
+                                                        "Allow Permission Request?");
+            gtk_widget_show (dialog);
+            gint result = gtk_dialog_run (GTK_DIALOG (dialog));
+        
+            switch (result) {
+            case GTK_RESPONSE_YES:
+                webkit_permission_request_allow (request);
+                break;
+            default:
+                webkit_permission_request_deny (request);
+                break;
+            }
+            gtk_widget_destroy (dialog);
+        
+            return TRUE;
+        }
+        ```
+        
+        It is possible to handle permission requests asynchronously, by
+        simply calling [gobject.object.ObjectWrap.ref_] on the request argument and
+        returning true to block the default signal handler.  If the
+        last reference is removed on a #WebKitPermissionRequest and the
+        request has not been handled, [webkit.permission_request.PermissionRequest.deny]
+        will be the default action.
+        
+        If the signal is not handled, the request will be completed automatically
+        by the specific #WebKitPermissionRequest that could allow or deny it. Check the
+        documentation of classes implementing #WebKitPermissionRequest interface to know
+        their default action.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2715,7 +2707,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2751,14 +2743,14 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `Print` signal.
   
       Emitted when printing is requested on web_view, usually by a JavaScript call,
-      before the print dialog is shown. This signal can be used to set the initial
-      print settings and page setup of print_operation to be used as default values in
-      the print dialog. You can call [webkit.print_operation.PrintOperation.setPrintSettings] and
-      [webkit.print_operation.PrintOperation.setPageSetup] and then return false to propagate the
-      event so that the print dialog is shown.
-      
-      You can connect to this signal and return true to cancel the print operation
-      or implement your own print dialog.
+        before the print dialog is shown. This signal can be used to set the initial
+        print settings and page setup of print_operation to be used as default values in
+        the print dialog. You can call [webkit.print_operation.PrintOperation.setPrintSettings] and
+        [webkit.print_operation.PrintOperation.setPageSetup] and then return false to propagate the
+        event so that the print dialog is shown.
+        
+        You can connect to this signal and return true to cancel the print operation
+        or implement your own print dialog.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2770,7 +2762,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2806,12 +2798,12 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `QueryPermissionState` signal.
   
       This signal allows the User-Agent to respond to permission requests for powerful features, as
-      specified by the [Permissions W3C Specification](https://w3c.github.io/permissions/).
-      You can reply to the query using [webkit.permission_state_query.PermissionStateQuery.finish].
-      
-      You can handle the query asynchronously by calling [webkit.permission_state_query.PermissionStateQuery.ref_] on
-      query and returning true. If the last reference of query is removed and the query has not
-      been handled, the query result will be set to `WEBKIT_QUERY_PERMISSION_PROMPT`.
+        specified by the [Permissions W3C Specification](https://w3c.github.io/permissions/).
+        You can reply to the query using [webkit.permission_state_query.PermissionStateQuery.finish].
+        
+        You can handle the query asynchronously by calling [webkit.permission_state_query.PermissionStateQuery.ref_] on
+        query and returning true. If the last reference of query is removed and the query has not
+        been handled, the query result will be set to `WEBKIT_QUERY_PERMISSION_PROMPT`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2858,11 +2850,11 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `ReadyToShow` signal.
   
       Emitted after #WebKitWebView::create on the newly created #WebKitWebView
-      when it should be displayed to the user. When this signal is emitted
-      all the information about how the window should look, including
-      size, position, whether the location, status and scrollbars
-      should be displayed, is already set on the #WebKitWindowProperties
-      of web_view. See also [webkit.web_view.WebView.getWindowProperties].
+        when it should be displayed to the user. When this signal is emitted
+        all the information about how the window should look, including
+        size, position, whether the location, status and scrollbars
+        should be displayed, is already set on the #WebKitWindowProperties
+        of web_view. See also [webkit.web_view.WebView.getWindowProperties].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2900,9 +2892,9 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `ResourceLoadStarted` signal.
   
       Emitted when a new resource is going to be loaded. The request parameter
-      contains the #WebKitURIRequest that will be sent to the server.
-      You can monitor the load operation by connecting to the different signals
-      of resource.
+        contains the #WebKitURIRequest that will be sent to the server.
+        You can monitor the load operation by connecting to the different signals
+        of resource.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2954,12 +2946,12 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `RunAsModal` signal.
   
       Emitted after #WebKitWebView::ready-to-show on the newly
-      created #WebKitWebView when JavaScript code calls
-      <function>window.showModalDialog</function>. The purpose of
-      this signal is to allow the client application to prepare the
-      new view to behave as modal. Once the signal is emitted a new
-      main loop will be run to block user interaction in the parent
-      #WebKitWebView until the new dialog is closed.
+        created #WebKitWebView when JavaScript code calls
+        <function>window.showModalDialog</function>. The purpose of
+        this signal is to allow the client application to prepare the
+        new view to behave as modal. Once the signal is emitted a new
+        main loop will be run to block user interaction in the parent
+        #WebKitWebView until the new dialog is closed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2997,18 +2989,18 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `RunColorChooser` signal.
   
       This signal is emitted when the user interacts with a <input
-      type='color' /> HTML element, requesting from WebKit to show
-      a dialog to select a color. To let the application know the details of
-      the color chooser, as well as to allow the client application to either
-      cancel the request or perform an actual color selection, the signal will
-      pass an instance of the #WebKitColorChooserRequest in the request
-      argument.
-      
-      It is possible to handle this request asynchronously by increasing the
-      reference count of the request.
-      
-      The default signal handler will asynchronously run a regular
-      #GtkColorChooser for the user to interact with.
+        type='color' /> HTML element, requesting from WebKit to show
+        a dialog to select a color. To let the application know the details of
+        the color chooser, as well as to allow the client application to either
+        cancel the request or perform an actual color selection, the signal will
+        pass an instance of the #WebKitColorChooserRequest in the request
+        argument.
+        
+        It is possible to handle this request asynchronously by increasing the
+        reference count of the request.
+        
+        The default signal handler will asynchronously run a regular
+        #GtkColorChooser for the user to interact with.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3020,7 +3012,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -3056,16 +3048,16 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `RunFileChooser` signal.
   
       This signal is emitted when the user interacts with a <input
-      type='file' /> HTML element, requesting from WebKit to show
-      a dialog to select one or more files to be uploaded. To let the
-      application know the details of the file chooser, as well as to
-      allow the client application to either cancel the request or
-      perform an actual selection of files, the signal will pass an
-      instance of the #WebKitFileChooserRequest in the request
-      argument.
-      
-      The default signal handler will asynchronously run a regular
-      #GtkFileChooserDialog for the user to interact with.
+        type='file' /> HTML element, requesting from WebKit to show
+        a dialog to select one or more files to be uploaded. To let the
+        application know the details of the file chooser, as well as to
+        allow the client application to either cancel the request or
+        perform an actual selection of files, the signal will pass an
+        instance of the #WebKitFileChooserRequest in the request
+        argument.
+        
+        The default signal handler will asynchronously run a regular
+        #GtkFileChooserDialog for the user to interact with.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3077,7 +3069,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -3113,32 +3105,32 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `ScriptDialog` signal.
   
       Emitted when JavaScript code calls <function>window.alert</function>,
-      <function>window.confirm</function> or <function>window.prompt</function>,
-      or when <function>onbeforeunload</function> event is fired.
-      The dialog parameter should be used to build the dialog.
-      If the signal is not handled a different dialog will be built and shown depending
-      on the dialog type:
-      <itemizedlist>
-      <listitem><para>
-       [webkit.types.ScriptDialogType.Alert]: message dialog with a single Close button.
-      </para></listitem>
-      <listitem><para>
-       [webkit.types.ScriptDialogType.Confirm]: message dialog with OK and Cancel buttons.
-      </para></listitem>
-      <listitem><para>
-       [webkit.types.ScriptDialogType.Prompt]: message dialog with OK and Cancel buttons and
-       a text entry with the default text.
-      </para></listitem>
-      <listitem><para>
-       [webkit.types.ScriptDialogType.BeforeUnloadConfirm]: message dialog with Stay and Leave buttons.
-      </para></listitem>
-      </itemizedlist>
-      
-      It is possible to handle the script dialog request asynchronously, by simply
-      caling [webkit.script_dialog.ScriptDialog.ref_] on the dialog argument and calling
-      [webkit.script_dialog.ScriptDialog.close] when done.
-      If the last reference is removed on a #WebKitScriptDialog and the dialog has not been
-      closed, [webkit.script_dialog.ScriptDialog.close] will be called.
+        <function>window.confirm</function> or <function>window.prompt</function>,
+        or when <function>onbeforeunload</function> event is fired.
+        The dialog parameter should be used to build the dialog.
+        If the signal is not handled a different dialog will be built and shown depending
+        on the dialog type:
+        <itemizedlist>
+        <listitem><para>
+         [webkit.types.ScriptDialogType.Alert]: message dialog with a single Close button.
+        </para></listitem>
+        <listitem><para>
+         [webkit.types.ScriptDialogType.Confirm]: message dialog with OK and Cancel buttons.
+        </para></listitem>
+        <listitem><para>
+         [webkit.types.ScriptDialogType.Prompt]: message dialog with OK and Cancel buttons and
+         a text entry with the default text.
+        </para></listitem>
+        <listitem><para>
+         [webkit.types.ScriptDialogType.BeforeUnloadConfirm]: message dialog with Stay and Leave buttons.
+        </para></listitem>
+        </itemizedlist>
+        
+        It is possible to handle the script dialog request asynchronously, by simply
+        caling [webkit.script_dialog.ScriptDialog.ref_] on the dialog argument and calling
+        [webkit.script_dialog.ScriptDialog.close] when done.
+        If the last reference is removed on a #WebKitScriptDialog and the dialog has not been
+        closed, [webkit.script_dialog.ScriptDialog.close] will be called.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3150,7 +3142,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-             false to propagate the event further.
+               false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -3186,11 +3178,11 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `ShowNotification` signal.
   
       This signal is emitted when a notification should be presented to the
-      user. The notification is kept alive until either: 1) the web page cancels it
-      or 2) a navigation happens.
-      
-      The default handler will emit a notification using libnotify, if built with
-      support for it.
+        user. The notification is kept alive until either: 1) the web page cancels it
+        or 2) a navigation happens.
+        
+        The default handler will emit a notification using libnotify, if built with
+        support for it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3237,13 +3229,13 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `ShowOptionMenu` signal.
   
       This signal is emitted when a select element in web_view needs to display a
-      dropdown menu. This signal can be used to show a custom menu, using menu to get
-      the details of all items that should be displayed. The area of the element in the
-      #WebKitWebView is given as rectangle parameter, it can be used to position the
-      menu.
-      To handle this signal asynchronously you should keep a ref of the menu.
-      
-      The default signal handler will pop up a #GtkMenu.
+        dropdown menu. This signal can be used to show a custom menu, using menu to get
+        the details of all items that should be displayed. The area of the element in the
+        #WebKitWebView is given as rectangle parameter, it can be used to position the
+        menu.
+        To handle this signal asynchronously you should keep a ref of the menu.
+        
+        The default signal handler will pop up a #GtkMenu.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3257,7 +3249,7 @@ class WebView : webkit.web_view_base.WebViewBase
           `webView` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -3298,16 +3290,16 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `SubmitForm` signal.
   
       This signal is emitted when a form is about to be submitted. The request
-      argument passed contains information about the text fields of the form. This
-      is typically used to store login information that can be used later to
-      pre-fill the form.
-      The form will not be submitted until [webkit.form_submission_request.FormSubmissionRequest.submit] is called.
-      
-      It is possible to handle the form submission request asynchronously, by
-      simply calling [gobject.object.ObjectWrap.ref_] on the request argument and calling
-      [webkit.form_submission_request.FormSubmissionRequest.submit] when done to continue with the form submission.
-      If the last reference is removed on a #WebKitFormSubmissionRequest and the
-      form has not been submitted, [webkit.form_submission_request.FormSubmissionRequest.submit] will be called.
+        argument passed contains information about the text fields of the form. This
+        is typically used to store login information that can be used later to
+        pre-fill the form.
+        The form will not be submitted until [webkit.form_submission_request.FormSubmissionRequest.submit] is called.
+        
+        It is possible to handle the form submission request asynchronously, by
+        simply calling [gobject.object.ObjectWrap.ref_] on the request argument and calling
+        [webkit.form_submission_request.FormSubmissionRequest.submit] when done to continue with the form submission.
+        If the last reference is removed on a #WebKitFormSubmissionRequest and the
+        form has not been submitted, [webkit.form_submission_request.FormSubmissionRequest.submit] will be called.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3352,13 +3344,13 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `UserMessageReceived` signal.
   
       This signal is emitted when a #WebKitUserMessage is received from the
-      #WebKitWebPage corresponding to web_view. You can reply to the message
-      using [webkitwebprocessextension.user_message.UserMessage.sendReply].
-      
-      You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
-      message and returning true. If the last reference of message is removed
-      and the message has not been replied to, the operation in the #WebKitWebPage will
-      finish with error [webkit.types.UserMessageError.Message].
+        #WebKitWebPage corresponding to web_view. You can reply to the message
+        using [webkitwebprocessextension.user_message.UserMessage.sendReply].
+        
+        You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
+        message and returning true. If the last reference of message is removed
+        and the message has not been replied to, the operation in the #WebKitWebPage will
+        finish with error [webkit.types.UserMessageError.Message].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3405,7 +3397,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `WebProcessTerminated` signal.
   
       This signal is emitted when the web process terminates abnormally due
-      to reason.
+        to reason.
   
       Params:
         callback = signal callback delegate or function to connect

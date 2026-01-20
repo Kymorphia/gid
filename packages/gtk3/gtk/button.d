@@ -74,10 +74,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /**
       Get `alwaysShowImage` property.
       Returns: If true, the button will ignore the #GtkSettings:gtk-button-images
-      setting and always show the image, if available.
-      
-      Use this property if the button would be useless or hard to use
-      without the image.
+        setting and always show the image, if available.
+        
+        Use this property if the button would be useless or hard to use
+        without the image.
   */
   @property bool alwaysShowImage()
   {
@@ -88,10 +88,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Set `alwaysShowImage` property.
       Params:
         propval = If true, the button will ignore the #GtkSettings:gtk-button-images
-        setting and always show the image, if available.
-        
-        Use this property if the button would be useless or hard to use
-        without the image.
+          setting and always show the image, if available.
+          
+          Use this property if the button would be useless or hard to use
+          without the image.
   */
   @property void alwaysShowImage(bool propval)
   {
@@ -187,11 +187,11 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /**
       Get `xalign` property.
       Returns: If the child of the button is a #GtkMisc or #GtkAlignment, this property
-      can be used to control its horizontal alignment. 0.0 is left aligned,
-      1.0 is right aligned.
+        can be used to control its horizontal alignment. 0.0 is left aligned,
+        1.0 is right aligned.
   
       Deprecated: Access the child widget directly if you need to control
-      its alignment.
+        its alignment.
   */
   @property float xalign()
   {
@@ -202,11 +202,11 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Set `xalign` property.
       Params:
         propval = If the child of the button is a #GtkMisc or #GtkAlignment, this property
-        can be used to control its horizontal alignment. 0.0 is left aligned,
-        1.0 is right aligned.
+          can be used to control its horizontal alignment. 0.0 is left aligned,
+          1.0 is right aligned.
   
       Deprecated: Access the child widget directly if you need to control
-      its alignment.
+        its alignment.
   */
   @property void xalign(float propval)
   {
@@ -216,11 +216,11 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /**
       Get `yalign` property.
       Returns: If the child of the button is a #GtkMisc or #GtkAlignment, this property
-      can be used to control its vertical alignment. 0.0 is top aligned,
-      1.0 is bottom aligned.
+        can be used to control its vertical alignment. 0.0 is top aligned,
+        1.0 is bottom aligned.
   
       Deprecated: Access the child widget directly if you need to control
-      its alignment.
+        its alignment.
   */
   @property float yalign()
   {
@@ -231,11 +231,11 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Set `yalign` property.
       Params:
         propval = If the child of the button is a #GtkMisc or #GtkAlignment, this property
-        can be used to control its vertical alignment. 0.0 is top aligned,
-        1.0 is bottom aligned.
+          can be used to control its vertical alignment. 0.0 is top aligned,
+          1.0 is bottom aligned.
   
       Deprecated: Access the child widget directly if you need to control
-      its alignment.
+        its alignment.
   */
   @property void yalign(float propval)
   {
@@ -665,9 +665,9 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Connect to `Activate` signal.
   
       The ::activate signal on GtkButton is an action signal and
-      emitting it causes the button to animate press then release.
-      Applications should never connect to this signal, but use the
-      #GtkButton::clicked signal.
+        emitting it causes the button to animate press then release.
+        Applications should never connect to this signal, but use the
+        #GtkButton::clicked signal.
   
       Params:
         callback = signal callback delegate or function to connect

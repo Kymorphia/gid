@@ -12,7 +12,7 @@ import gst.types;
 */
 class FormatDefinition
 {
-  GstFormatDefinition cInstance;
+  GstFormatDefinition _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class FormatDefinition
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.format_definition.FormatDefinition");
 
-    cInstance = *cast(GstFormatDefinition*)ptr;
+    _cInstance = *cast(GstFormatDefinition*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class FormatDefinition
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

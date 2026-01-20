@@ -1,76 +1,23 @@
-/// Module for [Binary] class
+/// Module for [Binary] struct
 module gda.binary;
 
 import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
-import gobject.boxed;
 
 /** */
-class Binary : gobject.boxed.Boxed
+struct Binary
 {
+  /**
+      the actual data as an array
+  */
+  ubyte* data;
 
   /**
-      Create a `binary.Binary` boxed type.
-      Params:
-        binaryLength = length of @data
+      length of @data
   */
-  this(glong binaryLength = glong.init)
-  {
-    super(gMalloc(GdaBinary.sizeof), Yes.Take);
-    this.binaryLength = binaryLength;
-  }
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
-  {
-    return dup ? copy_ : cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType()
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gda_binary_get_type != &gidSymbolNotFound ? gda_binary_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType()
-  {
-    return _getGType();
-  }
-
-  /** Returns `this`, for use in `with` statements. */
-  override Binary self()
-  {
-    return this;
-  }
-
-  /**
-      Get `binaryLength` field.
-      Returns: length of @data
-  */
-  @property glong binaryLength()
-  {
-    return (cast(GdaBinary*)this._cPtr).binaryLength;
-  }
-
-  /**
-      Set `binaryLength` field.
-      Params:
-        propval = length of @data
-  */
-  @property void binaryLength(glong propval)
-  {
-    (cast(GdaBinary*)this._cPtr).binaryLength = propval;
-  }
+  glong binaryLength;
 
   /**
       Converts all the non printable characters of bin->data into the "\xyz" representation
@@ -92,7 +39,7 @@ class Binary : gobject.boxed.Boxed
   string toString_(uint maxlen)
   {
     char* _cretval;
-    _cretval = gda_binary_to_string(cast(const(GdaBinary)*)this._cPtr, maxlen);
+    _cretval = gda_binary_to_string(cast(const(GdaBinary)*)&this, maxlen);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

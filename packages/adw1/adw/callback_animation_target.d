@@ -56,7 +56,6 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
       (*_dlg)(value);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     AdwAnimationTarget* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;

@@ -24,7 +24,7 @@ class FileList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -66,6 +66,7 @@ class FileList : gobject.boxed.Boxed
     foreach (obj; files)
       _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
     GFile** _files = _tmpfiles.ptr;
+
     _cretval = gdk_file_list_new_from_array(_files, _nFiles);
     auto _retval = _cretval ? new gdk.file_list.FileList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

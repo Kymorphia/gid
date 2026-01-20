@@ -168,13 +168,15 @@ class Bus : gst.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstBus* bus, GstMessage* message, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.BusFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     uint _retval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -457,7 +459,6 @@ class Bus : gst.object.ObjectWrap
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gst_bus_set_sync_handler(cast(GstBus*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -529,8 +530,8 @@ class Bus : gst.object.ObjectWrap
       Connect to `Message` signal.
   
       A message has been posted on the bus. This signal is emitted from a
-      #GSource added to the mainloop. this signal will only be emitted when
-      there is a #GMainLoop running.
+        #GSource added to the mainloop. this signal will only be emitted when
+        there is a #GMainLoop running.
   
       Params:
         detail = Signal detail or null (default)
@@ -576,10 +577,10 @@ class Bus : gst.object.ObjectWrap
       Connect to `SyncMessage` signal.
   
       A message has been posted on the bus. This signal is emitted from the
-      thread that posted the message so one has to be careful with locking.
-      
-      This signal will not be emitted by default, you have to call
-      [gst.bus.Bus.enableSyncMessageEmission] before.
+        thread that posted the message so one has to be careful with locking.
+        
+        This signal will not be emitted by default, you have to call
+        [gst.bus.Bus.enableSyncMessageEmission] before.
   
       Params:
         detail = Signal detail or null (default)

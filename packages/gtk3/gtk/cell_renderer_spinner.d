@@ -63,10 +63,10 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
   /**
       Get `pulse` property.
       Returns: Pulse of the spinner. Increment this value to draw the next frame of the
-      spinner animation. Usually, you would update this value in a timeout.
-      
-      By default, the #GtkSpinner widget draws one full cycle of the animation,
-      consisting of 12 frames, in 750 milliseconds.
+        spinner animation. Usually, you would update this value in a timeout.
+        
+        By default, the #GtkSpinner widget draws one full cycle of the animation,
+        consisting of 12 frames, in 750 milliseconds.
   */
   @property uint pulse()
   {
@@ -77,10 +77,10 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
       Set `pulse` property.
       Params:
         propval = Pulse of the spinner. Increment this value to draw the next frame of the
-        spinner animation. Usually, you would update this value in a timeout.
-        
-        By default, the #GtkSpinner widget draws one full cycle of the animation,
-        consisting of 12 frames, in 750 milliseconds.
+          spinner animation. Usually, you would update this value in a timeout.
+          
+          By default, the #GtkSpinner widget draws one full cycle of the animation,
+          consisting of 12 frames, in 750 milliseconds.
   */
   @property void pulse(uint propval)
   {

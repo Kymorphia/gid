@@ -412,7 +412,6 @@ class Container : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
     gtk_container_forall(cast(GtkContainer*)this._cPtr, _callbackCB, _callback);
   }
@@ -442,7 +441,6 @@ class Container : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
     gtk_container_foreach(cast(GtkContainer*)this._cPtr, _callbackCB, _callback);
   }

@@ -129,7 +129,7 @@ class Popover : gtk.bin.Bin
   /**
       Get `modal` property.
       Returns: Sets whether the popover is modal (so other elements in the window do not
-      receive input while the popover is visible).
+        receive input while the popover is visible).
   */
   @property bool modal()
   {
@@ -140,7 +140,7 @@ class Popover : gtk.bin.Bin
       Set `modal` property.
       Params:
         propval = Sets whether the popover is modal (so other elements in the window do not
-        receive input while the popover is visible).
+          receive input while the popover is visible).
   */
   @property void modal(bool propval)
   {
@@ -209,8 +209,8 @@ class Popover : gtk.bin.Bin
       Returns: Whether show/hide transitions are enabled for this popover.
   
       Deprecated: You can show or hide the popover without transitions
-        using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
-        and [gtk.popover.Popover.popdown] will use transitions.
+          using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
+          and [gtk.popover.Popover.popdown] will use transitions.
   */
   @property bool transitionsEnabled()
   {
@@ -223,8 +223,8 @@ class Popover : gtk.bin.Bin
         propval = Whether show/hide transitions are enabled for this popover.
   
       Deprecated: You can show or hide the popover without transitions
-        using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
-        and [gtk.popover.Popover.popdown] will use transitions.
+          using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
+          and [gtk.popover.Popover.popdown] will use transitions.
   */
   @property void transitionsEnabled(bool propval)
   {
@@ -359,9 +359,7 @@ class Popover : gtk.bin.Bin
   bool getPointingTo(out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
-    GdkRectangle _rect;
-    _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, cast(GdkRectangle*)&rect);
     return _retval;
   }
 
@@ -477,7 +475,7 @@ class Popover : gtk.bin.Bin
   */
   void setPointingTo(gdk.rectangle.Rectangle rect)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, cast(const(GdkRectangle)*)&rect);
   }
 
   /**
@@ -532,7 +530,7 @@ class Popover : gtk.bin.Bin
       Connect to `Closed` signal.
   
       This signal is emitted when the popover is dismissed either through
-      API or user interaction.
+        API or user interaction.
   
       Params:
         callback = signal callback delegate or function to connect

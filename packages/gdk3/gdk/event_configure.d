@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventConfigure
 {
-  GdkEventConfigure cInstance;
+  GdkEventConfigure _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventConfigure
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_configure.EventConfigure");
 
-    cInstance = *cast(GdkEventConfigure*)ptr;
+    _cInstance = *cast(GdkEventConfigure*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventConfigure
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

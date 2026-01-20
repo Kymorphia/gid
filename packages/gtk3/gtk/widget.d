@@ -584,11 +584,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `focusOnClick` property.
       Returns: Whether the widget should grab focus when it is clicked with the mouse.
-      
-      This property is only relevant for widgets that can take focus.
-      
-      Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
-      GtkComboBox) implemented this property individually.
+        
+        This property is only relevant for widgets that can take focus.
+        
+        Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
+        GtkComboBox) implemented this property individually.
   */
   @property bool focusOnClick()
   {
@@ -599,11 +599,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `focusOnClick` property.
       Params:
         propval = Whether the widget should grab focus when it is clicked with the mouse.
-        
-        This property is only relevant for widgets that can take focus.
-        
-        Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
-        GtkComboBox) implemented this property individually.
+          
+          This property is only relevant for widgets that can take focus.
+          
+          Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
+          GtkComboBox) implemented this property individually.
   */
   @property void focusOnClick(bool propval)
   {
@@ -632,14 +632,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `hasTooltip` property.
       Returns: Enables or disables the emission of #GtkWidget::query-tooltip on @widget.
-      A value of true indicates that @widget can have a tooltip, in this case
-      the widget will be queried using #GtkWidget::query-tooltip to determine
-      whether it will provide a tooltip or not.
-      
-      Note that setting this property to true for the first time will change
-      the event masks of the GdkWindows of this widget to include leave-notify
-      and motion-notify events.  This cannot and will not be undone when the
-      property is set to false again.
+        A value of true indicates that @widget can have a tooltip, in this case
+        the widget will be queried using #GtkWidget::query-tooltip to determine
+        whether it will provide a tooltip or not.
+        
+        Note that setting this property to true for the first time will change
+        the event masks of the GdkWindows of this widget to include leave-notify
+        and motion-notify events.  This cannot and will not be undone when the
+        property is set to false again.
   */
   @property bool hasTooltip()
   {
@@ -650,14 +650,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `hasTooltip` property.
       Params:
         propval = Enables or disables the emission of #GtkWidget::query-tooltip on @widget.
-        A value of true indicates that @widget can have a tooltip, in this case
-        the widget will be queried using #GtkWidget::query-tooltip to determine
-        whether it will provide a tooltip or not.
-        
-        Note that setting this property to true for the first time will change
-        the event masks of the GdkWindows of this widget to include leave-notify
-        and motion-notify events.  This cannot and will not be undone when the
-        property is set to false again.
+          A value of true indicates that @widget can have a tooltip, in this case
+          the widget will be queried using #GtkWidget::query-tooltip to determine
+          whether it will provide a tooltip or not.
+          
+          Note that setting this property to true for the first time will change
+          the event masks of the GdkWindows of this widget to include leave-notify
+          and motion-notify events.  This cannot and will not be undone when the
+          property is set to false again.
   */
   @property void hasTooltip(bool propval)
   {
@@ -717,7 +717,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `margin` property.
       Returns: Sets all four sides' margin at once. If read, returns max
-      margin on any side.
+        margin on any side.
   */
   @property int margin()
   {
@@ -728,7 +728,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `margin` property.
       Params:
         propval = Sets all four sides' margin at once. If read, returns max
-        margin on any side.
+          margin on any side.
   */
   @property void margin(int propval)
   {
@@ -738,10 +738,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `marginBottom` property.
       Returns: Margin on bottom side of widget.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginBottom()
   {
@@ -752,10 +752,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `marginBottom` property.
       Params:
         propval = Margin on bottom side of widget.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginBottom(int propval)
   {
@@ -765,11 +765,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `marginEnd` property.
       Returns: Margin on end of widget, horizontally. This property supports
-      left-to-right and right-to-left text directions.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        left-to-right and right-to-left text directions.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginEnd()
   {
@@ -780,11 +780,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `marginEnd` property.
       Params:
         propval = Margin on end of widget, horizontally. This property supports
-        left-to-right and right-to-left text directions.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          left-to-right and right-to-left text directions.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginEnd(int propval)
   {
@@ -794,10 +794,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `marginLeft` property.
       Returns: Margin on left side of widget.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   
       Deprecated: Use #GtkWidget:margin-start instead.
   */
@@ -810,10 +810,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `marginLeft` property.
       Params:
         propval = Margin on left side of widget.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   
       Deprecated: Use #GtkWidget:margin-start instead.
   */
@@ -825,10 +825,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `marginRight` property.
       Returns: Margin on right side of widget.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   
       Deprecated: Use #GtkWidget:margin-end instead.
   */
@@ -841,10 +841,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `marginRight` property.
       Params:
         propval = Margin on right side of widget.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   
       Deprecated: Use #GtkWidget:margin-end instead.
   */
@@ -856,11 +856,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `marginStart` property.
       Returns: Margin on start of widget, horizontally. This property supports
-      left-to-right and right-to-left text directions.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        left-to-right and right-to-left text directions.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginStart()
   {
@@ -871,11 +871,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `marginStart` property.
       Params:
         propval = Margin on start of widget, horizontally. This property supports
-        left-to-right and right-to-left text directions.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          left-to-right and right-to-left text directions.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginStart(int propval)
   {
@@ -885,10 +885,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `marginTop` property.
       Returns: Margin on top side of widget.
-      
-      This property adds margin outside of the widget's normal size
-      request, the margin will be added in addition to the size from
-      [gtk.widget.Widget.setSizeRequest] for example.
+        
+        This property adds margin outside of the widget's normal size
+        request, the margin will be added in addition to the size from
+        [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property int marginTop()
   {
@@ -899,10 +899,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `marginTop` property.
       Params:
         propval = Margin on top side of widget.
-        
-        This property adds margin outside of the widget's normal size
-        request, the margin will be added in addition to the size from
-        [gtk.widget.Widget.setSizeRequest] for example.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
   */
   @property void marginTop(int propval)
   {
@@ -936,9 +936,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `opacity` property.
       Returns: The requested opacity of the widget. See [gtk.widget.Widget.setOpacity] for
-      more details about window opacity.
-      
-      Before 3.8 this was only available in GtkWindow
+        more details about window opacity.
+        
+        Before 3.8 this was only available in GtkWindow
   */
   @property double opacity()
   {
@@ -949,9 +949,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Set `opacity` property.
       Params:
         propval = The requested opacity of the widget. See [gtk.widget.Widget.setOpacity] for
-        more details about window opacity.
-        
-        Before 3.8 this was only available in GtkWindow
+          more details about window opacity.
+          
+          Before 3.8 this was only available in GtkWindow
   */
   @property void opacity(double propval)
   {
@@ -985,7 +985,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `scaleFactor` property.
       Returns: The scale factor of the widget. See [gtk.widget.Widget.getScaleFactor] for
-      more details about widget scaling.
+        more details about widget scaling.
   */
   @property int scaleFactor()
   {
@@ -1030,26 +1030,6 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `tooltipMarkup` property.
       Returns: Sets the text of tooltip to be the given string, which is marked up
-      with the [Pango text markup language][PangoMarkupFormat].
-      Also see [gtk.tooltip.Tooltip.setMarkup].
-      
-      This is a convenience property which will take care of getting the
-      tooltip shown if the given string is not null: #GtkWidget:has-tooltip
-      will automatically be set to true and there will be taken care of
-      #GtkWidget::query-tooltip in the default signal handler.
-      
-      Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
-      are set, the last one wins.
-  */
-  @property string tooltipMarkup()
-  {
-    return getTooltipMarkup();
-  }
-
-  /**
-      Set `tooltipMarkup` property.
-      Params:
-        propval = Sets the text of tooltip to be the given string, which is marked up
         with the [Pango text markup language][PangoMarkupFormat].
         Also see [gtk.tooltip.Tooltip.setMarkup].
         
@@ -1061,6 +1041,26 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
         are set, the last one wins.
   */
+  @property string tooltipMarkup()
+  {
+    return getTooltipMarkup();
+  }
+
+  /**
+      Set `tooltipMarkup` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string, which is marked up
+          with the [Pango text markup language][PangoMarkupFormat].
+          Also see [gtk.tooltip.Tooltip.setMarkup].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null: #GtkWidget:has-tooltip
+          will automatically be set to true and there will be taken care of
+          #GtkWidget::query-tooltip in the default signal handler.
+          
+          Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+          are set, the last one wins.
+  */
   @property void tooltipMarkup(string propval)
   {
     return setTooltipMarkup(propval);
@@ -1069,26 +1069,6 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Get `tooltipText` property.
       Returns: Sets the text of tooltip to be the given string.
-      
-      Also see [gtk.tooltip.Tooltip.setText].
-      
-      This is a convenience property which will take care of getting the
-      tooltip shown if the given string is not null: #GtkWidget:has-tooltip
-      will automatically be set to true and there will be taken care of
-      #GtkWidget::query-tooltip in the default signal handler.
-      
-      Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
-      are set, the last one wins.
-  */
-  @property string tooltipText()
-  {
-    return getTooltipText();
-  }
-
-  /**
-      Set `tooltipText` property.
-      Params:
-        propval = Sets the text of tooltip to be the given string.
         
         Also see [gtk.tooltip.Tooltip.setText].
         
@@ -1099,6 +1079,26 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         
         Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
         are set, the last one wins.
+  */
+  @property string tooltipText()
+  {
+    return getTooltipText();
+  }
+
+  /**
+      Set `tooltipText` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string.
+          
+          Also see [gtk.tooltip.Tooltip.setText].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null: #GtkWidget:has-tooltip
+          will automatically be set to true and there will be taken care of
+          #GtkWidget::query-tooltip in the default signal handler.
+          
+          Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
+          are set, the last one wins.
   */
   @property void tooltipText(string propval)
   {
@@ -1379,13 +1379,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     extern(C) gboolean _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     uint _retval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
@@ -1646,7 +1648,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.drag_context.DragContext dragBegin(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event = null)
   {
     GdkDragContext* _cretval;
-    _cretval = gtk_drag_begin(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr : null);
+    _cretval = gtk_drag_begin(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
@@ -1696,7 +1698,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.drag_context.DragContext dragBeginWithCoordinates(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event, int x, int y)
   {
     GdkDragContext* _cretval;
-    _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr : null, x, y);
+    _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, x, y);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
@@ -1865,6 +1867,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_drag_dest_set(cast(GtkWidget*)this._cPtr, flags, _targets, _nTargets, actions);
   }
 
@@ -2024,6 +2027,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_drag_source_set(cast(GtkWidget*)this._cPtr, startButtonMask, _targets, _nTargets, actions);
   }
 
@@ -2183,7 +2187,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool event(gdk.event.Event event)
   {
     bool _retval;
-    _retval = cast(bool)gtk_widget_event(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gtk_widget_event(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2270,6 +2274,26 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   }
 
   /**
+      Retrieves the widget’s allocated size.
+      
+      This function returns the last values passed to
+      [gtk.widget.Widget.sizeAllocateWithBaseline]. The value differs from
+      the size returned in [gtk.widget.Widget.getAllocation] in that functions
+      like [gtk.widget.Widget.setHalign] can adjust the allocation, but not
+      the value returned by this function.
+      
+      If a widget is not visible, its allocated size is 0.
+  
+      Params:
+        allocation = a pointer to a #GtkAllocation to copy to
+        baseline = a pointer to an integer to copy to
+  */
+  void getAllocatedSize(out gtk.types.Allocation allocation, out int baseline)
+  {
+    gtk_widget_get_allocated_size(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation, cast(int*)&baseline);
+  }
+
+  /**
       Returns the width that has currently been allocated to widget.
       This function is intended to be used when implementing handlers
       for the #GtkWidget::draw function.
@@ -2280,6 +2304,32 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     int _retval;
     _retval = gtk_widget_get_allocated_width(cast(GtkWidget*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Retrieves the widget’s allocation.
+      
+      Note, when implementing a #GtkContainer: a widget’s allocation will
+      be its “adjusted” allocation, that is, the widget’s parent
+      container typically calls [gtk.widget.Widget.sizeAllocate] with an
+      allocation, and that allocation is then adjusted (to handle margin
+      and alignment for example) before assignment to the widget.
+      [gtk.widget.Widget.getAllocation] returns the adjusted allocation that
+      was actually assigned to the widget. The adjusted allocation is
+      guaranteed to be completely contained within the
+      [gtk.widget.Widget.sizeAllocate] allocation, however. So a #GtkContainer
+      is guaranteed that its children stay inside the assigned bounds,
+      but not that they have exactly the bounds the container assigned.
+      There is no way to get the original allocation assigned by
+      [gtk.widget.Widget.sizeAllocate], since it isn’t stored; if a container
+      implementation needs that information it will have to track it itself.
+  
+      Params:
+        allocation = a pointer to a #GtkAllocation to copy to
+  */
+  void getAllocation(out gtk.types.Allocation allocation)
+  {
+    gtk_widget_get_allocation(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation);
   }
 
   /**
@@ -2370,9 +2420,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getChildRequisition(out gtk.requisition.Requisition requisition)
   {
-    GtkRequisition _requisition;
-    gtk_widget_get_child_requisition(cast(GtkWidget*)this._cPtr, &_requisition);
-    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
+    gtk_widget_get_child_requisition(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&requisition);
   }
 
   /**
@@ -2389,6 +2437,23 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     bool _retval;
     _retval = cast(bool)gtk_widget_get_child_visible(cast(GtkWidget*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Retrieves the widget’s clip area.
+      
+      The clip area is the area in which all of widget's drawing will
+      happen. Other toolkits call it the bounding box.
+      
+      Historically, in GTK+ the clip area has been equal to the allocation
+      retrieved via [gtk.widget.Widget.getAllocation].
+  
+      Params:
+        clip = a pointer to a #GtkAllocation to copy to
+  */
+  void getClip(out gtk.types.Allocation clip)
+  {
+    gtk_widget_get_clip(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&clip);
   }
 
   /**
@@ -3007,11 +3072,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getPreferredSize(out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize)
   {
-    GtkRequisition _minimumSize;
-    GtkRequisition _naturalSize;
-    gtk_widget_get_preferred_size(cast(GtkWidget*)this._cPtr, &_minimumSize, &_naturalSize);
-    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
-    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
+    gtk_widget_get_preferred_size(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&minimumSize, cast(GtkRequisition*)&naturalSize);
   }
 
   /**
@@ -3118,9 +3179,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getRequisition(out gtk.requisition.Requisition requisition)
   {
-    GtkRequisition _requisition;
-    gtk_widget_get_requisition(cast(GtkWidget*)this._cPtr, &_requisition);
-    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
+    gtk_widget_get_requisition(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&requisition);
   }
 
   /**
@@ -3766,9 +3825,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool intersect(gdk.rectangle.Rectangle area, out gdk.rectangle.Rectangle intersection)
   {
     bool _retval;
-    GdkRectangle _intersection;
-    _retval = cast(bool)gtk_widget_intersect(cast(GtkWidget*)this._cPtr, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null, &_intersection);
-    intersection = new gdk.rectangle.Rectangle(cast(void*)&_intersection, No.Take);
+    _retval = cast(bool)gtk_widget_intersect(cast(GtkWidget*)this._cPtr, cast(const(GdkRectangle)*)&area, cast(GdkRectangle*)&intersection);
     return _retval;
   }
 
@@ -3950,8 +4007,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -4031,9 +4088,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
   */
-  void modifyBase(gtk.types.StateType state, gdk.color.Color color = null)
+  void modifyBase(gtk.types.StateType state, gdk.color.Color color)
   {
-    gtk_widget_modify_base(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gtk_widget_modify_base(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -4060,9 +4117,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
   */
-  void modifyBg(gtk.types.StateType state, gdk.color.Color color = null)
+  void modifyBg(gtk.types.StateType state, gdk.color.Color color)
   {
-    gtk_widget_modify_bg(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gtk_widget_modify_bg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -4083,9 +4140,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideCursor] instead.
   */
-  void modifyCursor(gdk.color.Color primary = null, gdk.color.Color secondary = null)
+  void modifyCursor(gdk.color.Color primary, gdk.color.Color secondary)
   {
-    gtk_widget_modify_cursor(cast(GtkWidget*)this._cPtr, primary ? cast(const(GdkColor)*)primary._cPtr(No.Dup) : null, secondary ? cast(const(GdkColor)*)secondary._cPtr(No.Dup) : null);
+    gtk_widget_modify_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkColor)*)&primary, cast(const(GdkColor)*)&secondary);
   }
 
   /**
@@ -4102,9 +4159,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideColor] instead
   */
-  void modifyFg(gtk.types.StateType state, gdk.color.Color color = null)
+  void modifyFg(gtk.types.StateType state, gdk.color.Color color)
   {
-    gtk_widget_modify_fg(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gtk_widget_modify_fg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -4171,9 +4228,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideColor] instead
   */
-  void modifyText(gtk.types.StateType state, gdk.color.Color color = null)
+  void modifyText(gtk.types.StateType state, gdk.color.Color color)
   {
-    gtk_widget_modify_text(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gtk_widget_modify_text(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -4194,9 +4251,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           drawing of a widget through the #GtkWidget::draw signal, and use Cairo to
           draw a specific color, regardless of the CSS style.
   */
-  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
+  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color)
   {
-    gtk_widget_override_background_color(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
+    gtk_widget_override_background_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)&color);
   }
 
   /**
@@ -4233,9 +4290,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use a custom style provider and style classes instead
   */
-  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
+  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color)
   {
-    gtk_widget_override_color(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
+    gtk_widget_override_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)&color);
   }
 
   /**
@@ -4260,9 +4317,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           and secondary cursors you should use a custom CSS style, through an
           application-specific #GtkStyleProvider and a CSS style class.
   */
-  void overrideCursor(gdk.rgba.RGBA cursor = null, gdk.rgba.RGBA secondaryCursor = null)
+  void overrideCursor(gdk.rgba.RGBA cursor, gdk.rgba.RGBA secondaryCursor)
   {
-    gtk_widget_override_cursor(cast(GtkWidget*)this._cPtr, cursor ? cast(const(GdkRGBA)*)cursor._cPtr(No.Dup) : null, secondaryCursor ? cast(const(GdkRGBA)*)secondaryCursor._cPtr(No.Dup) : null);
+    gtk_widget_override_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkRGBA)*)&cursor, cast(const(GdkRGBA)*)&secondaryCursor);
   }
 
   /**
@@ -4301,10 +4358,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           you should use a custom CSS style, through an application-specific
           #GtkStyleProvider and a CSS style class.
   */
-  void overrideSymbolicColor(string name, gdk.rgba.RGBA color = null)
+  void overrideSymbolicColor(string name, gdk.rgba.RGBA color)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_override_symbolic_color(cast(GtkWidget*)this._cPtr, _name, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
+    gtk_widget_override_symbolic_color(cast(GtkWidget*)this._cPtr, _name, cast(const(GdkRGBA)*)&color);
   }
 
   /**
@@ -4685,7 +4742,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int sendExpose(gdk.event.Event event)
   {
     int _retval;
-    _retval = gtk_widget_send_expose(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = gtk_widget_send_expose(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -4722,7 +4779,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool sendFocusChange(gdk.event.Event event)
   {
     bool _retval;
-    _retval = cast(bool)gtk_widget_send_focus_change(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
+    _retval = cast(bool)gtk_widget_send_focus_change(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -4775,7 +4832,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setAllocation(gtk.types.Allocation allocation)
   {
-    gtk_widget_set_allocation(cast(GtkWidget*)this._cPtr, allocation ? cast(const(GtkAllocation)*)allocation._cPtr(No.Dup) : null);
+    gtk_widget_set_allocation(cast(GtkWidget*)this._cPtr, cast(const(GtkAllocation)*)&allocation);
   }
 
   /**
@@ -4869,7 +4926,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setClip(gtk.types.Allocation clip)
   {
-    gtk_widget_set_clip(cast(GtkWidget*)this._cPtr, clip ? cast(const(GtkAllocation)*)clip._cPtr(No.Dup) : null);
+    gtk_widget_set_clip(cast(GtkWidget*)this._cPtr, cast(const(GtkAllocation)*)&clip);
   }
 
   /**
@@ -5733,7 +5790,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void sizeAllocate(gtk.types.Allocation allocation)
   {
-    gtk_widget_size_allocate(cast(GtkWidget*)this._cPtr, allocation ? cast(GtkAllocation*)allocation._cPtr(No.Dup) : null);
+    gtk_widget_size_allocate(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation);
   }
 
   /**
@@ -5757,7 +5814,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void sizeAllocateWithBaseline(gtk.types.Allocation allocation, int baseline)
   {
-    gtk_widget_size_allocate_with_baseline(cast(GtkWidget*)this._cPtr, allocation ? cast(GtkAllocation*)allocation._cPtr(No.Dup) : null, baseline);
+    gtk_widget_size_allocate_with_baseline(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation, baseline);
   }
 
   /**
@@ -5781,9 +5838,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void sizeRequest(out gtk.requisition.Requisition requisition)
   {
-    GtkRequisition _requisition;
-    gtk_widget_size_request(cast(GtkWidget*)this._cPtr, &_requisition);
-    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
+    gtk_widget_size_request(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&requisition);
   }
 
   /**
@@ -5958,12 +6013,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ButtonPressEvent` signal.
   
       The ::button-press-event signal will be emitted when a button
-      (typically from a mouse) is pressed.
-      
-      To receive this signal, the #GdkWindow associated to the
-      widget needs to enable the #GDK_BUTTON_PRESS_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        (typically from a mouse) is pressed.
+        
+        To receive this signal, the #GdkWindow associated to the
+        widget needs to enable the #GDK_BUTTON_PRESS_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -5971,12 +6026,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget))
   
           `event` the #GdkEventButton which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -6012,12 +6067,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ButtonReleaseEvent` signal.
   
       The ::button-release-event signal will be emitted when a button
-      (typically from a mouse) is released.
-      
-      To receive this signal, the #GdkWindow associated to the
-      widget needs to enable the #GDK_BUTTON_RELEASE_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        (typically from a mouse) is released.
+        
+        To receive this signal, the #GdkWindow associated to the
+        widget needs to enable the #GDK_BUTTON_RELEASE_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6025,12 +6080,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget))
   
           `event` the #GdkEventButton which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -6066,10 +6121,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `CanActivateAccel` signal.
   
       Determines whether an accelerator that activates the signal
-      identified by signal_id can currently be activated.
-      This signal is present to allow applications and derived
-      widgets to override the default #GtkWidget handling
-      for determining whether an accelerator can be activated.
+        identified by signal_id can currently be activated.
+        This signal is present to allow applications and derived
+        widgets to override the default #GtkWidget handling
+        for determining whether an accelerator can be activated.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6116,8 +6171,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ChildNotify` signal.
   
       The ::child-notify signal is emitted for each
-      [child property][child-properties]  that has
-      changed on an object. The signal's detail holds the property name.
+        [child property][child-properties]  that has
+        changed on an object. The signal's detail holds the property name.
   
       Params:
         detail = Signal detail or null (default)
@@ -6163,8 +6218,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `CompositedChanged` signal.
   
       The ::composited-changed signal is emitted when the composited
-      status of widgets screen changes.
-      See [gdk.screen.Screen.isComposited].
+        status of widgets screen changes.
+        See [gdk.screen.Screen.isComposited].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6204,11 +6259,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ConfigureEvent` signal.
   
       The ::configure-event signal will be emitted when the size, position or
-      stacking of the widget's window has changed.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
-      automatically for all new windows.
+        stacking of the widget's window has changed.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+        automatically for all new windows.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6216,12 +6271,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_configure.EventConfigure event, gtk.widget.Widget widget))
   
           `event` the #GdkEventConfigure which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -6257,8 +6312,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DamageEvent` signal.
   
       Emitted when a redirected window belonging to widget gets drawn into.
-      The region/area members of the event shows what area of the redirected
-      drawable was drawn into.
+        The region/area members of the event shows what area of the redirected
+        drawable was drawn into.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6270,7 +6325,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -6306,10 +6361,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DeleteEvent` signal.
   
       The ::delete-event signal is emitted if a user requests that
-      a toplevel window is closed. The default handler for this signal
-      destroys the window. Connecting [gtk.widget.Widget.hideOnDelete] to
-      this signal will cause the window to be hidden instead, so that
-      it can later be shown again without reconstructing it.
+        a toplevel window is closed. The default handler for this signal
+        destroys the window. Connecting [gtk.widget.Widget.hideOnDelete] to
+        this signal will cause the window to be hidden instead, so that
+        it can later be shown again without reconstructing it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6321,7 +6376,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -6357,10 +6412,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Destroy` signal.
   
       Signals that all holders of a reference to the widget should release
-      the reference that they hold. May result in finalization of the widget
-      if all references are released.
-      
-      This signal is not suitable for saving widget state.
+        the reference that they hold. May result in finalization of the widget
+        if all references are released.
+        
+        This signal is not suitable for saving widget state.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6398,13 +6453,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DestroyEvent` signal.
   
       The ::destroy-event signal is emitted when a #GdkWindow is destroyed.
-      You rarely get this signal, because most widgets disconnect themselves
-      from their window before they destroy it, so no widget owns the
-      window at destroy time.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
-      automatically for all new windows.
+        You rarely get this signal, because most widgets disconnect themselves
+        from their window before they destroy it, so no widget owns the
+        window at destroy time.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+        automatically for all new windows.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6416,7 +6471,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -6452,7 +6507,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DirectionChanged` signal.
   
       The ::direction-changed signal is emitted when the text direction
-      of a widget changes.
+        of a widget changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6497,12 +6552,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragBegin` signal.
   
       The ::drag-begin signal is emitted on the drag source when a drag is
-      started. A typical reason to connect to this signal is to set up a
-      custom drag icon with e.g. [gtk.widget.Widget.dragSourceSetIconPixbuf].
-      
-      Note that some widgets set up a drag icon in the default handler of
-      this signal, so you may have to use g_signal_connect_after() to
-      override what the default handler did.
+        started. A typical reason to connect to this signal is to set up a
+        custom drag icon with e.g. [gtk.widget.Widget.dragSourceSetIconPixbuf].
+        
+        Note that some widgets set up a drag icon in the default handler of
+        this signal, so you may have to use g_signal_connect_after() to
+        override what the default handler did.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6547,9 +6602,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragDataDelete` signal.
   
       The ::drag-data-delete signal is emitted on the drag source when a drag
-      with the action [gdk.types.DragAction.Move] is successfully completed. The signal
-      handler is responsible for deleting the data that has been dropped. What
-      "delete" means depends on the context of the drag operation.
+        with the action [gdk.types.DragAction.Move] is successfully completed. The signal
+        handler is responsible for deleting the data that has been dropped. What
+        "delete" means depends on the context of the drag operation.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6594,10 +6649,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragDataGet` signal.
   
       The ::drag-data-get signal is emitted on the drag source when the drop
-      site requests the data which is dragged. It is the responsibility of
-      the signal handler to fill data with the data in the format which
-      is indicated by info. See [gtk.selection_data.SelectionData.set] and
-      [gtk.selection_data.SelectionData.setText].
+        site requests the data which is dragged. It is the responsibility of
+        the signal handler to fill data with the data in the format which
+        is indicated by info. See [gtk.selection_data.SelectionData.set] and
+        [gtk.selection_data.SelectionData.setText].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6609,7 +6664,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `data` the #GtkSelectionData to be filled with the dragged data (optional)
   
           `info` the info that has been registered with the target in the
-                 #GtkTargetList (optional)
+                   #GtkTargetList (optional)
   
           `time` the timestamp at which the data was requested (optional)
   
@@ -6664,65 +6719,65 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragDataReceived` signal.
   
       The ::drag-data-received signal is emitted on the drop site when the
-      dragged data has been received. If the data was received in order to
-      determine whether the drop will be accepted, the handler is expected
-      to call [gdk.global.dragStatus] and not finish the drag.
-      If the data was received in response to a #GtkWidget::drag-drop signal
-      (and this is the last target to be received), the handler for this
-      signal is expected to process the received data and then call
-      [gtk.global.dragFinish], setting the success parameter depending on
-      whether the data was processed successfully.
-      
-      Applications must create some means to determine why the signal was emitted
-      and therefore whether to call [gdk.global.dragStatus] or [gtk.global.dragFinish].
-      
-      The handler may inspect the selected action with
-      [gdk.drag_context.DragContext.getSelectedAction] before calling
-      [gtk.global.dragFinish], e.g. to implement [gdk.types.DragAction.Ask] as
-      shown in the following example:
-      ```c
-      void
-      drag_data_received (GtkWidget          *widget,
-                          GdkDragContext     *context,
-                          gint                x,
-                          gint                y,
-                          GtkSelectionData   *data,
-                          guint               info,
-                          guint               time)
-      {
-        if ((data->length >= 0) && (data->format == 8))
-          {
-            GdkDragAction action;
-      
-            // handle data here
-      
-            action = gdk_drag_context_get_selected_action (context);
-            if (action == GDK_ACTION_ASK)
-              {
-                GtkWidget *dialog;
-                gint response;
-      
-                dialog = gtk_message_dialog_new (NULL,
-                                                 GTK_DIALOG_MODAL |
-                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_INFO,
-                                                 GTK_BUTTONS_YES_NO,
-                                                 "Move the data ?\n");
-                response = gtk_dialog_run (GTK_DIALOG (dialog));
-                gtk_widget_destroy (dialog);
-      
-                if (response == GTK_RESPONSE_YES)
-                  action = GDK_ACTION_MOVE;
-                else
-                  action = GDK_ACTION_COPY;
-               }
-      
-            gtk_drag_finish (context, TRUE, action == GDK_ACTION_MOVE, time);
-          }
-        else
-          gtk_drag_finish (context, FALSE, FALSE, time);
-       }
-      ```
+        dragged data has been received. If the data was received in order to
+        determine whether the drop will be accepted, the handler is expected
+        to call [gdk.global.dragStatus] and not finish the drag.
+        If the data was received in response to a #GtkWidget::drag-drop signal
+        (and this is the last target to be received), the handler for this
+        signal is expected to process the received data and then call
+        [gtk.global.dragFinish], setting the success parameter depending on
+        whether the data was processed successfully.
+        
+        Applications must create some means to determine why the signal was emitted
+        and therefore whether to call [gdk.global.dragStatus] or [gtk.global.dragFinish].
+        
+        The handler may inspect the selected action with
+        [gdk.drag_context.DragContext.getSelectedAction] before calling
+        [gtk.global.dragFinish], e.g. to implement [gdk.types.DragAction.Ask] as
+        shown in the following example:
+        ```c
+        void
+        drag_data_received (GtkWidget          *widget,
+                            GdkDragContext     *context,
+                            gint                x,
+                            gint                y,
+                            GtkSelectionData   *data,
+                            guint               info,
+                            guint               time)
+        {
+          if ((data->length >= 0) && (data->format == 8))
+            {
+              GdkDragAction action;
+        
+              // handle data here
+        
+              action = gdk_drag_context_get_selected_action (context);
+              if (action == GDK_ACTION_ASK)
+                {
+                  GtkWidget *dialog;
+                  gint response;
+        
+                  dialog = gtk_message_dialog_new (NULL,
+                                                   GTK_DIALOG_MODAL |
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_INFO,
+                                                   GTK_BUTTONS_YES_NO,
+                                                   "Move the data ?\n");
+                  response = gtk_dialog_run (GTK_DIALOG (dialog));
+                  gtk_widget_destroy (dialog);
+        
+                  if (response == GTK_RESPONSE_YES)
+                    action = GDK_ACTION_MOVE;
+                  else
+                    action = GDK_ACTION_COPY;
+                 }
+        
+              gtk_drag_finish (context, TRUE, action == GDK_ACTION_MOVE, time);
+            }
+          else
+            gtk_drag_finish (context, FALSE, FALSE, time);
+         }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6738,7 +6793,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `data` the received data (optional)
   
           `info` the info that has been registered with the target in the
-                 #GtkTargetList (optional)
+                   #GtkTargetList (optional)
   
           `time` the timestamp at which the data was received (optional)
   
@@ -6803,15 +6858,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragDrop` signal.
   
       The ::drag-drop signal is emitted on the drop site when the user drops
-      the data onto the widget. The signal handler must determine whether
-      the cursor position is in a drop zone or not. If it is not in a drop
-      zone, it returns false and no further processing is necessary.
-      Otherwise, the handler returns true. In this case, the handler must
-      ensure that [gtk.global.dragFinish] is called to let the source know that
-      the drop is done. The call to [gtk.global.dragFinish] can be done either
-      directly or in a #GtkWidget::drag-data-received handler which gets
-      triggered by calling [gtk.widget.Widget.dragGetData] to receive the data for one
-      or more of the supported targets.
+        the data onto the widget. The signal handler must determine whether
+        the cursor position is in a drop zone or not. If it is not in a drop
+        zone, it returns false and no further processing is necessary.
+        Otherwise, the handler returns true. In this case, the handler must
+        ensure that [gtk.global.dragFinish] is called to let the source know that
+        the drop is done. The call to [gtk.global.dragFinish] can be done either
+        directly or in a #GtkWidget::drag-data-received handler which gets
+        triggered by calling [gtk.widget.Widget.dragGetData] to receive the data for one
+        or more of the supported targets.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6879,8 +6934,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragEnd` signal.
   
       The ::drag-end signal is emitted on the drag source when a drag is
-      finished.  A typical reason to connect to this signal is to undo
-      things done in #GtkWidget::drag-begin.
+        finished.  A typical reason to connect to this signal is to undo
+        things done in #GtkWidget::drag-begin.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6925,10 +6980,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragFailed` signal.
   
       The ::drag-failed signal is emitted on the drag source when a drag has
-      failed. The signal handler may hook custom code to handle a failed DnD
-      operation based on the type of error, it returns true is the failure has
-      been already handled (not showing the default "drag operation failed"
-      animation), otherwise it returns false.
+        failed. The signal handler may hook custom code to handle a failed DnD
+        operation based on the type of error, it returns true is the failure has
+        been already handled (not showing the default "drag operation failed"
+        animation), otherwise it returns false.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -6982,14 +7037,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragLeave` signal.
   
       The ::drag-leave signal is emitted on the drop site when the cursor
-      leaves the widget. A typical reason to connect to this signal is to
-      undo things done in #GtkWidget::drag-motion, e.g. undo highlighting
-      with [gtk.widget.Widget.dragUnhighlight].
-      
-      
-      Likewise, the #GtkWidget::drag-leave signal is also emitted before the
-      ::drag-drop signal, for instance to allow cleaning up of a preview item
-      created in the #GtkWidget::drag-motion signal handler.
+        leaves the widget. A typical reason to connect to this signal is to
+        undo things done in #GtkWidget::drag-motion, e.g. undo highlighting
+        with [gtk.widget.Widget.dragUnhighlight].
+        
+        
+        Likewise, the #GtkWidget::drag-leave signal is also emitted before the
+        ::drag-drop signal, for instance to allow cleaning up of a preview item
+        created in the #GtkWidget::drag-motion signal handler.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7041,91 +7096,91 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `DragMotion` signal.
   
       The ::drag-motion signal is emitted on the drop site when the user
-      moves the cursor over the widget during a drag. The signal handler
-      must determine whether the cursor position is in a drop zone or not.
-      If it is not in a drop zone, it returns false and no further processing
-      is necessary. Otherwise, the handler returns true. In this case, the
-      handler is responsible for providing the necessary information for
-      displaying feedback to the user, by calling [gdk.global.dragStatus].
-      
-      If the decision whether the drop will be accepted or rejected can't be
-      made based solely on the cursor position and the type of the data, the
-      handler may inspect the dragged data by calling [gtk.widget.Widget.dragGetData] and
-      defer the [gdk.global.dragStatus] call to the #GtkWidget::drag-data-received
-      handler. Note that you must pass #GTK_DEST_DEFAULT_DROP,
-      #GTK_DEST_DEFAULT_MOTION or #GTK_DEST_DEFAULT_ALL to [gtk.widget.Widget.dragDestSet]
-      when using the drag-motion signal that way.
-      
-      Also note that there is no drag-enter signal. The drag receiver has to
-      keep track of whether he has received any drag-motion signals since the
-      last #GtkWidget::drag-leave and if not, treat the drag-motion signal as
-      an "enter" signal. Upon an "enter", the handler will typically highlight
-      the drop site with [gtk.widget.Widget.dragHighlight].
-      ```c
-      static void
-      drag_motion (GtkWidget      *widget,
-                   GdkDragContext *context,
-                   gint            x,
-                   gint            y,
-                   guint           time)
-      {
-        GdkAtom target;
-      
-        PrivateData *private_data = GET_PRIVATE_DATA (widget);
-      
-        if (!private_data->drag_highlight)
-         {
-           private_data->drag_highlight = 1;
-           gtk_drag_highlight (widget);
-         }
-      
-        target = gtk_drag_dest_find_target (widget, context, NULL);
-        if (target == GDK_NONE)
-          gdk_drag_status (context, 0, time);
-        else
-         {
-           private_data->pending_status
-              = gdk_drag_context_get_suggested_action (context);
-           gtk_drag_get_data (widget, context, target, time);
-         }
-      
-        return TRUE;
-      }
-      
-      static void
-      drag_data_received (GtkWidget        *widget,
-                          GdkDragContext   *context,
-                          gint              x,
-                          gint              y,
-                          GtkSelectionData *selection_data,
-                          guint             info,
-                          guint             time)
-      {
-        PrivateData *private_data = GET_PRIVATE_DATA (widget);
-      
-        if (private_data->suggested_action)
-         {
-           private_data->suggested_action = 0;
-      
-           // We are getting this data due to a request in drag_motion,
-           // rather than due to a request in drag_drop, so we are just
-           // supposed to call gdk_drag_status(), not actually paste in
-           // the data.
-      
-           str = gtk_selection_data_get_text (selection_data);
-           if (!data_is_acceptable (str))
-             gdk_drag_status (context, 0, time);
-           else
-             gdk_drag_status (context,
-                              private_data->suggested_action,
-                              time);
-         }
-        else
-         {
-           // accept the drop
-         }
-      }
-      ```
+        moves the cursor over the widget during a drag. The signal handler
+        must determine whether the cursor position is in a drop zone or not.
+        If it is not in a drop zone, it returns false and no further processing
+        is necessary. Otherwise, the handler returns true. In this case, the
+        handler is responsible for providing the necessary information for
+        displaying feedback to the user, by calling [gdk.global.dragStatus].
+        
+        If the decision whether the drop will be accepted or rejected can't be
+        made based solely on the cursor position and the type of the data, the
+        handler may inspect the dragged data by calling [gtk.widget.Widget.dragGetData] and
+        defer the [gdk.global.dragStatus] call to the #GtkWidget::drag-data-received
+        handler. Note that you must pass #GTK_DEST_DEFAULT_DROP,
+        #GTK_DEST_DEFAULT_MOTION or #GTK_DEST_DEFAULT_ALL to [gtk.widget.Widget.dragDestSet]
+        when using the drag-motion signal that way.
+        
+        Also note that there is no drag-enter signal. The drag receiver has to
+        keep track of whether he has received any drag-motion signals since the
+        last #GtkWidget::drag-leave and if not, treat the drag-motion signal as
+        an "enter" signal. Upon an "enter", the handler will typically highlight
+        the drop site with [gtk.widget.Widget.dragHighlight].
+        ```c
+        static void
+        drag_motion (GtkWidget      *widget,
+                     GdkDragContext *context,
+                     gint            x,
+                     gint            y,
+                     guint           time)
+        {
+          GdkAtom target;
+        
+          PrivateData *private_data = GET_PRIVATE_DATA (widget);
+        
+          if (!private_data->drag_highlight)
+           {
+             private_data->drag_highlight = 1;
+             gtk_drag_highlight (widget);
+           }
+        
+          target = gtk_drag_dest_find_target (widget, context, NULL);
+          if (target == GDK_NONE)
+            gdk_drag_status (context, 0, time);
+          else
+           {
+             private_data->pending_status
+                = gdk_drag_context_get_suggested_action (context);
+             gtk_drag_get_data (widget, context, target, time);
+           }
+        
+          return TRUE;
+        }
+        
+        static void
+        drag_data_received (GtkWidget        *widget,
+                            GdkDragContext   *context,
+                            gint              x,
+                            gint              y,
+                            GtkSelectionData *selection_data,
+                            guint             info,
+                            guint             time)
+        {
+          PrivateData *private_data = GET_PRIVATE_DATA (widget);
+        
+          if (private_data->suggested_action)
+           {
+             private_data->suggested_action = 0;
+        
+             // We are getting this data due to a request in drag_motion,
+             // rather than due to a request in drag_drop, so we are just
+             // supposed to call gdk_drag_status(), not actually paste in
+             // the data.
+        
+             str = gtk_selection_data_get_text (selection_data);
+             if (!data_is_acceptable (str))
+               gdk_drag_status (context, 0, time);
+             else
+               gdk_drag_status (context,
+                                private_data->suggested_action,
+                                time);
+           }
+          else
+           {
+             // accept the drop
+           }
+        }
+        ```
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7193,22 +7248,22 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Draw` signal.
   
       This signal is emitted when a widget is supposed to render itself.
-      The widget's top left corner must be painted at the origin of
-      the passed in context and be sized to the values returned by
-      [gtk.widget.Widget.getAllocatedWidth] and
-      [gtk.widget.Widget.getAllocatedHeight].
-      
-      Signal handlers connected to this signal can modify the cairo
-      context passed as cr in any way they like and don't need to
-      restore it. The signal emission takes care of calling [cairo.context.Context.save]
-      before and [cairo.context.Context.restore] after invoking the handler.
-      
-      The signal handler will get a cr with a clip region already set to the
-      widget's dirty region, i.e. to the area that needs repainting.  Complicated
-      widgets that want to avoid redrawing themselves completely can get the full
-      extents of the clip region with [gdk.global.cairoGetClipRectangle], or they can
-      get a finer-grained representation of the dirty region with
-      [cairo.context.Context.copyClipRectangleList].
+        The widget's top left corner must be painted at the origin of
+        the passed in context and be sized to the values returned by
+        [gtk.widget.Widget.getAllocatedWidth] and
+        [gtk.widget.Widget.getAllocatedHeight].
+        
+        Signal handlers connected to this signal can modify the cairo
+        context passed as cr in any way they like and don't need to
+        restore it. The signal emission takes care of calling [cairo.context.Context.save]
+        before and [cairo.context.Context.restore] after invoking the handler.
+        
+        The signal handler will get a cr with a clip region already set to the
+        widget's dirty region, i.e. to the area that needs repainting.  Complicated
+        widgets that want to avoid redrawing themselves completely can get the full
+        extents of the clip region with [gdk.global.cairoGetClipRectangle], or they can
+        get a finer-grained representation of the dirty region with
+        [cairo.context.Context.copyClipRectangleList].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7220,7 +7275,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-          false to propagate the event further.
+            false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7256,12 +7311,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `EnterNotifyEvent` signal.
   
       The ::enter-notify-event will be emitted when the pointer enters
-      the widget's window.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_ENTER_NOTIFY_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        the widget's window.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_ENTER_NOTIFY_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7269,12 +7324,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget))
   
           `event` the #GdkEventCrossing which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7310,10 +7365,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Event` signal.
   
       The GTK+ main loop will emit three signals for each GDK event delivered
-      to a widget: one generic ::event signal, another, more specific,
-      signal that matches the type of event delivered (e.g.
-      #GtkWidget::key-press-event) and finally a generic
-      #GtkWidget::event-after signal.
+        to a widget: one generic ::event signal, another, more specific,
+        signal that matches the type of event delivered (e.g.
+        #GtkWidget::key-press-event) and finally a generic
+        #GtkWidget::event-after signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7325,10 +7380,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event
-          and to cancel the emission of the second specific ::event signal.
-            false to propagate the event further and to allow the emission of
-            the second signal. The ::event-after signal is emitted regardless of
-            the return value.
+            and to cancel the emission of the second specific ::event signal.
+              false to propagate the event further and to allow the emission of
+              the second signal. The ::event-after signal is emitted regardless of
+              the return value.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7364,8 +7419,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `EventAfter` signal.
   
       After the emission of the #GtkWidget::event signal and (optionally)
-      the second more specific signal, ::event-after will be emitted
-      regardless of the previous two signals handlers return values.
+        the second more specific signal, ::event-after will be emitted
+        regardless of the previous two signals handlers return values.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7456,10 +7511,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `FocusInEvent` signal.
   
       The ::focus-in-event signal will be emitted when the keyboard focus
-      enters the widget's window.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_FOCUS_CHANGE_MASK mask.
+        enters the widget's window.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_FOCUS_CHANGE_MASK mask.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7467,12 +7522,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget))
   
           `event` the #GdkEventFocus which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7508,10 +7563,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `FocusOutEvent` signal.
   
       The ::focus-out-event signal will be emitted when the keyboard focus
-      leaves the widget's window.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_FOCUS_CHANGE_MASK mask.
+        leaves the widget's window.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_FOCUS_CHANGE_MASK mask.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7519,12 +7574,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget))
   
           `event` the #GdkEventFocus which triggered this
-            signal. (optional)
+              signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7560,11 +7615,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `GrabBrokenEvent` signal.
   
       Emitted when a pointer or keyboard grab on a window belonging
-      to widget gets broken.
-      
-      On X11, this happens when the grab window becomes unviewable
-      (i.e. it or one of its ancestors is unmapped), or if the same
-      application grabs the pointer or keyboard again.
+        to widget gets broken.
+        
+        On X11, this happens when the grab window becomes unviewable
+        (i.e. it or one of its ancestors is unmapped), or if the same
+        application grabs the pointer or keyboard again.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7576,7 +7631,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for
-            the event. false to propagate the event further.
+              the event. false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7649,13 +7704,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `GrabNotify` signal.
   
       The ::grab-notify signal is emitted when a widget becomes
-      shadowed by a GTK+ grab (not a pointer or keyboard grab) on
-      another widget, or when it becomes unshadowed due to a grab
-      being removed.
-      
-      A widget is shadowed by a [gtk.widget.Widget.grabAdd] when the topmost
-      grab widget in the grab stack of its window group is not
-      its ancestor.
+        shadowed by a GTK+ grab (not a pointer or keyboard grab) on
+        another widget, or when it becomes unshadowed due to a grab
+        being removed.
+        
+        A widget is shadowed by a [gtk.widget.Widget.grabAdd] when the topmost
+        grab widget in the grab stack of its window group is not
+        its ancestor.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7663,7 +7718,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D void callback(bool wasGrabbed, gtk.widget.Widget widget))
   
           `wasGrabbed` false if the widget becomes shadowed, true
-                        if it becomes unshadowed (optional)
+                          if it becomes unshadowed (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7701,7 +7756,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Hide` signal.
   
       The ::hide signal is emitted when widget is hidden, for example with
-      [gtk.widget.Widget.hide].
+        [gtk.widget.Widget.hide].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7739,10 +7794,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `HierarchyChanged` signal.
   
       The ::hierarchy-changed signal is emitted when the
-      anchored state of a widget changes. A widget is
-      “anchored” when its toplevel
-      ancestor is a #GtkWindow. This signal is emitted when
-      a widget changes from un-anchored to anchored or vice-versa.
+        anchored state of a widget changes. A widget is
+        “anchored” when its toplevel
+        ancestor is a #GtkWindow. This signal is emitted when
+        a widget changes from un-anchored to anchored or vice-versa.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7750,7 +7805,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D void callback(gtk.widget.Widget previousToplevel, gtk.widget.Widget widget))
   
           `previousToplevel` the previous toplevel ancestor, or null
-            if the widget was previously unanchored (optional)
+              if the widget was previously unanchored (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7788,12 +7843,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `KeyPressEvent` signal.
   
       The ::key-press-event signal is emitted when a key is pressed. The signal
-      emission will reoccur at the key-repeat rate when the key is kept pressed.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_KEY_PRESS_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        emission will reoccur at the key-repeat rate when the key is kept pressed.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_KEY_PRESS_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7805,7 +7860,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7841,11 +7896,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `KeyReleaseEvent` signal.
   
       The ::key-release-event signal is emitted when a key is released.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_KEY_RELEASE_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_KEY_RELEASE_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7857,7 +7912,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7893,7 +7948,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `KeynavFailed` signal.
   
       Gets emitted if keyboard navigation fails.
-      See [gtk.widget.Widget.keynavFailed] for details.
+        See [gtk.widget.Widget.keynavFailed] for details.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7905,8 +7960,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true if stopping keyboard navigation is fine, false
-                   if the emitting widget should try to handle the keyboard
-                   navigation attempt in its parent container(s).
+                     if the emitting widget should try to handle the keyboard
+                     navigation attempt in its parent container(s).
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7942,12 +7997,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `LeaveNotifyEvent` signal.
   
       The ::leave-notify-event will be emitted when the pointer leaves
-      the widget's window.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_LEAVE_NOTIFY_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        the widget's window.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_LEAVE_NOTIFY_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -7955,12 +8010,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget))
   
           `event` the #GdkEventCrossing which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -7996,14 +8051,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Map` signal.
   
       The ::map signal is emitted when widget is going to be mapped, that is
-      when the widget is visible (which is controlled with
-      [gtk.widget.Widget.setVisible]) and all its parents up to the toplevel widget
-      are also visible. Once the map has occurred, #GtkWidget::map-event will
-      be emitted.
-      
-      The ::map signal can be used to determine whether a widget will be drawn,
-      for instance it can resume an animation that was stopped during the
-      emission of #GtkWidget::unmap.
+        when the widget is visible (which is controlled with
+        [gtk.widget.Widget.setVisible]) and all its parents up to the toplevel widget
+        are also visible. Once the map has occurred, #GtkWidget::map-event will
+        be emitted.
+        
+        The ::map signal can be used to determine whether a widget will be drawn,
+        for instance it can resume an animation that was stopped during the
+        emission of #GtkWidget::unmap.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8041,11 +8096,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `MapEvent` signal.
   
       The ::map-event signal will be emitted when the widget's window is
-      mapped. A window is mapped when it becomes visible on the screen.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
-      automatically for all new windows.
+        mapped. A window is mapped when it becomes visible on the screen.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+        automatically for all new windows.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8057,7 +8112,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8093,7 +8148,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `MnemonicActivate` signal.
   
       The default handler for this signal activates widget if group_cycling
-      is false, or just makes widget grab focus if group_cycling is true.
+        is false, or just makes widget grab focus if group_cycling is true.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8105,7 +8160,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-          false to propagate the event further.
+            false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8141,12 +8196,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `MotionNotifyEvent` signal.
   
       The ::motion-notify-event signal is emitted when the pointer moves
-      over the widget's #GdkWindow.
-      
-      To receive this signal, the #GdkWindow associated to the widget
-      needs to enable the #GDK_POINTER_MOTION_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        over the widget's #GdkWindow.
+        
+        To receive this signal, the #GdkWindow associated to the widget
+        needs to enable the #GDK_POINTER_MOTION_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8154,12 +8209,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_motion.EventMotion event, gtk.widget.Widget widget))
   
           `event` the #GdkEventMotion which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8239,7 +8294,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ParentSet` signal.
   
       The ::parent-set signal is emitted when a new parent
-      has been set on a widget.
+        has been set on a widget.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8247,7 +8302,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D void callback(gtk.widget.Widget oldParent, gtk.widget.Widget widget))
   
           `oldParent` the previous parent, or null if the widget
-            just got its initial parent. (optional)
+              just got its initial parent. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8285,12 +8340,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `PopupMenu` signal.
   
       This signal gets emitted whenever a widget should pop up a context
-      menu. This usually happens through the standard key binding mechanism;
-      by pressing a certain key while a widget is focused, the user can cause
-      the widget to pop up a menu.  For example, the #GtkEntry widget creates
-      a menu with clipboard commands. See the
-      [Popup Menu Migration Checklist][checklist-popup-menu]
-      for an example of how to use this signal.
+        menu. This usually happens through the standard key binding mechanism;
+        by pressing a certain key while a widget is focused, the user can cause
+        the widget to pop up a menu.  For example, the #GtkEntry widget creates
+        a menu with clipboard commands. See the
+        [Popup Menu Migration Checklist][checklist-popup-menu]
+        for an example of how to use this signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8330,10 +8385,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `PropertyNotifyEvent` signal.
   
       The ::property-notify-event signal will be emitted when a property on
-      the widget's window has been changed or deleted.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_PROPERTY_CHANGE_MASK mask.
+        the widget's window has been changed or deleted.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_PROPERTY_CHANGE_MASK mask.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8341,12 +8396,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_property.EventProperty event, gtk.widget.Widget widget))
   
           `event` the #GdkEventProperty which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8382,9 +8437,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ProximityInEvent` signal.
   
       To receive this signal the #GdkWindow associated to the widget needs
-      to enable the #GDK_PROXIMITY_IN_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        to enable the #GDK_PROXIMITY_IN_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8392,12 +8447,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget))
   
           `event` the #GdkEventProximity which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8433,9 +8488,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ProximityOutEvent` signal.
   
       To receive this signal the #GdkWindow associated to the widget needs
-      to enable the #GDK_PROXIMITY_OUT_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        to enable the #GDK_PROXIMITY_OUT_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8443,12 +8498,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget))
   
           `event` the #GdkEventProximity which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8484,17 +8539,17 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `QueryTooltip` signal.
   
       Emitted when #GtkWidget:has-tooltip is true and the hover timeout
-      has expired with the cursor hovering "above" widget; or emitted when widget got
-      focus in keyboard mode.
-      
-      Using the given coordinates, the signal handler should determine
-      whether a tooltip should be shown for widget. If this is the case
-      true should be returned, false otherwise.  Note that if
-      keyboard_mode is true, the values of `x` and `y` are undefined and
-      should not be used.
-      
-      The signal handler is free to manipulate tooltip with the therefore
-      destined function calls.
+        has expired with the cursor hovering "above" widget; or emitted when widget got
+        focus in keyboard mode.
+        
+        Using the given coordinates, the signal handler should determine
+        whether a tooltip should be shown for widget. If this is the case
+        true should be returned, false otherwise.  Note that if
+        keyboard_mode is true, the values of `x` and `y` are undefined and
+        should not be used.
+        
+        The signal handler is free to manipulate tooltip with the therefore
+        destined function calls.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8502,10 +8557,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget))
   
           `x` the x coordinate of the cursor position where the request has
-              been emitted, relative to widget's left side (optional)
+                been emitted, relative to widget's left side (optional)
   
           `y` the y coordinate of the cursor position where the request has
-              been emitted, relative to widget's top (optional)
+                been emitted, relative to widget's top (optional)
   
           `keyboardMode` true if the tooltip was triggered using the keyboard (optional)
   
@@ -8564,8 +8619,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Realize` signal.
   
       The ::realize signal is emitted when widget is associated with a
-      #GdkWindow, which means that [gtk.widget.Widget.realize] has been called or the
-      widget has been mapped (that is, it is going to be drawn).
+        #GdkWindow, which means that [gtk.widget.Widget.realize] has been called or the
+        widget has been mapped (that is, it is going to be drawn).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8603,7 +8658,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ScreenChanged` signal.
   
       The ::screen-changed signal gets emitted when the
-      screen of a widget has changed.
+        screen of a widget has changed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8611,7 +8666,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D void callback(gdk.screen.Screen previousScreen, gtk.widget.Widget widget))
   
           `previousScreen` the previous screen, or null if the
-            widget was not associated with a screen before (optional)
+              widget was not associated with a screen before (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8649,13 +8704,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `ScrollEvent` signal.
   
       The ::scroll-event signal is emitted when a button in the 4 to 7
-      range is pressed. Wheel mice are usually configured to generate
-      button press events for buttons 4 and 5 when the wheel is turned.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_SCROLL_MASK mask.
-      
-      This signal will be sent to the grab widget if there is one.
+        range is pressed. Wheel mice are usually configured to generate
+        button press events for buttons 4 and 5 when the wheel is turned.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_SCROLL_MASK mask.
+        
+        This signal will be sent to the grab widget if there is one.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8663,12 +8718,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_scroll.EventScroll event, gtk.widget.Widget widget))
   
           `event` the #GdkEventScroll which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8704,7 +8759,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `SelectionClearEvent` signal.
   
       The ::selection-clear-event signal will be emitted when the
-      the widget's window has lost ownership of a selection.
+        the widget's window has lost ownership of a selection.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8712,12 +8767,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget))
   
           `event` the #GdkEventSelection which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8908,8 +8963,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `SelectionRequestEvent` signal.
   
       The ::selection-request-event signal will be emitted when
-      another client requests ownership of the selection owned by
-      the widget's window.
+        another client requests ownership of the selection owned by
+        the widget's window.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -8917,12 +8972,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget))
   
           `event` the #GdkEventSelection which triggered
-            this signal. (optional)
+              this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -8958,7 +9013,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Show` signal.
   
       The ::show signal is emitted when widget is shown, for example with
-      [gtk.widget.Widget.show].
+        [gtk.widget.Widget.show].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9007,7 +9062,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-          false to propagate the event further.
+            false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -9050,7 +9105,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D void callback(gtk.types.Allocation allocation, gtk.widget.Widget widget))
   
           `allocation` the region which has been
-            allocated to the widget. (optional)
+              allocated to the widget. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9088,7 +9143,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `StateChanged` signal.
   
       The ::state-changed signal is emitted when the widget state changes.
-      See [gtk.widget.Widget.getState].
+        See [gtk.widget.Widget.getState].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9135,7 +9190,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `StateFlagsChanged` signal.
   
       The ::state-flags-changed signal is emitted when the widget state
-      changes, see [gtk.widget.Widget.getStateFlags].
+        changes, see [gtk.widget.Widget.getStateFlags].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9180,12 +9235,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `StyleSet` signal.
   
       The ::style-set signal is emitted when a new style has been set
-      on a widget. Note that style-modifying functions like
-      [gtk.widget.Widget.modifyBase] also cause this signal to be emitted.
-      
-      Note that this signal is emitted for changes to the deprecated
-      #GtkStyle. To track changes to the #GtkStyleContext associated
-      with a widget, use the #GtkWidget::style-updated signal.
+        on a widget. Note that style-modifying functions like
+        [gtk.widget.Widget.modifyBase] also cause this signal to be emitted.
+        
+        Note that this signal is emitted for changes to the deprecated
+        #GtkStyle. To track changes to the #GtkStyleContext associated
+        with a widget, use the #GtkWidget::style-updated signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9193,7 +9248,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D void callback(gtk.style.Style previousStyle, gtk.widget.Widget widget))
   
           `previousStyle` the previous style, or null if the widget
-            just got its initial style (optional)
+              just got its initial style (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9233,11 +9288,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `StyleUpdated` signal.
   
       The ::style-updated signal is a convenience signal that is emitted when the
-      #GtkStyleContext::changed signal is emitted on the widget's associated
-      #GtkStyleContext as returned by [gtk.widget.Widget.getStyleContext].
-      
-      Note that style-modifying functions like [gtk.widget.Widget.overrideColor] also
-      cause this signal to be emitted.
+        #GtkStyleContext::changed signal is emitted on the widget's associated
+        #GtkStyleContext as returned by [gtk.widget.Widget.getStyleContext].
+        
+        Note that style-modifying functions like [gtk.widget.Widget.overrideColor] also
+        cause this signal to be emitted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9321,11 +9376,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Unmap` signal.
   
       The ::unmap signal is emitted when widget is going to be unmapped, which
-      means that either it or any of its parents up to the toplevel widget have
-      been set as hidden.
-      
-      As ::unmap indicates that a widget will not be shown any longer, it can be
-      used to, for example, stop an animation on the widget.
+        means that either it or any of its parents up to the toplevel widget have
+        been set as hidden.
+        
+        As ::unmap indicates that a widget will not be shown any longer, it can be
+        used to, for example, stop an animation on the widget.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9363,11 +9418,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `UnmapEvent` signal.
   
       The ::unmap-event signal will be emitted when the widget's window is
-      unmapped. A window is unmapped when it becomes invisible on the screen.
-      
-      To receive this signal, the #GdkWindow associated to the widget needs
-      to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
-      automatically for all new windows.
+        unmapped. A window is unmapped when it becomes invisible on the screen.
+        
+        To receive this signal, the #GdkWindow associated to the widget needs
+        to enable the #GDK_STRUCTURE_MASK mask. GDK will enable this mask
+        automatically for all new windows.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9379,7 +9434,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -9415,9 +9470,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `Unrealize` signal.
   
       The ::unrealize signal is emitted when the #GdkWindow associated with
-      widget is destroyed, which means that [gtk.widget.Widget.unrealize] has been
-      called or the widget has been unmapped (that is, it is going to be
-      hidden).
+        widget is destroyed, which means that [gtk.widget.Widget.unrealize] has been
+        called or the widget has been unmapped (that is, it is going to be
+        hidden).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9455,10 +9510,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `VisibilityNotifyEvent` signal.
   
       The ::visibility-notify-event will be emitted when the widget's
-      window is obscured or unobscured.
-      
-      To receive this signal the #GdkWindow associated to the widget needs
-      to enable the #GDK_VISIBILITY_NOTIFY_MASK mask.
+        window is obscured or unobscured.
+        
+        To receive this signal the #GdkWindow associated to the widget needs
+        to enable the #GDK_VISIBILITY_NOTIFY_MASK mask.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9466,19 +9521,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_visibility.EventVisibility event, gtk.widget.Widget widget))
   
           `event` the #GdkEventVisibility which
-            triggered this signal. (optional)
+              triggered this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   
       Deprecated: Modern composited windowing systems with pervasive
-          transparency make it impossible to track the visibility of a window
-          reliably, so this signal can not be guaranteed to provide useful
-          information.
+            transparency make it impossible to track the visibility of a window
+            reliably, so this signal can not be guaranteed to provide useful
+            information.
   */
   ulong connectVisibilityNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
@@ -9512,11 +9567,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Connect to `WindowStateEvent` signal.
   
       The ::window-state-event will be emitted when the state of the
-      toplevel window associated to the widget changes.
-      
-      To receive this signal the #GdkWindow associated to the widget
-      needs to enable the #GDK_STRUCTURE_MASK mask. GDK will enable
-      this mask automatically for all new windows.
+        toplevel window associated to the widget changes.
+        
+        To receive this signal the #GdkWindow associated to the widget
+        needs to enable the #GDK_STRUCTURE_MASK mask. GDK will enable
+        this mask automatically for all new windows.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -9524,12 +9579,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           $(D bool callback(gdk.event_window_state.EventWindowState event, gtk.widget.Widget widget))
   
           `event` the #GdkEventWindowState which
-            triggered this signal. (optional)
+              triggered this signal. (optional)
   
           `widget` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the
-            event. false to propagate the event further.
+              event. false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

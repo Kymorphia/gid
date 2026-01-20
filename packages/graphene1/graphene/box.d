@@ -34,7 +34,7 @@ class Box : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -96,7 +96,7 @@ class Box : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
-    _retval = cast(bool)graphene_box_contains_point(cast(const(graphene_box_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
+    _retval = cast(bool)graphene_box_contains_point(cast(const(graphene_box_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Box : gobject.boxed.Boxed
   void expand(graphene.point3_d.Point3D point, out graphene.box.Box res)
   {
     graphene_box_t _res;
-    graphene_box_expand(cast(const(graphene_box_t)*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null, &_res);
+    graphene_box_expand(cast(const(graphene_box_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, &_res);
     res = new graphene.box.Box(cast(void*)&_res, No.Take);
   }
 
@@ -183,9 +183,7 @@ class Box : gobject.boxed.Boxed
   */
   void getCenter(out graphene.point3_d.Point3D center)
   {
-    graphene_point3d_t _center;
-    graphene_box_get_center(cast(const(graphene_box_t)*)this._cPtr, &_center);
-    center = new graphene.point3_d.Point3D(cast(void*)&_center, No.Take);
+    graphene_box_get_center(cast(const(graphene_box_t)*)this._cPtr, cast(graphene_point3d_t*)&center);
   }
 
   /**
@@ -219,9 +217,7 @@ class Box : gobject.boxed.Boxed
   */
   void getMax(out graphene.point3_d.Point3D max)
   {
-    graphene_point3d_t _max;
-    graphene_box_get_max(cast(const(graphene_box_t)*)this._cPtr, &_max);
-    max = new graphene.point3_d.Point3D(cast(void*)&_max, No.Take);
+    graphene_box_get_max(cast(const(graphene_box_t)*)this._cPtr, cast(graphene_point3d_t*)&max);
   }
 
   /**
@@ -233,9 +229,7 @@ class Box : gobject.boxed.Boxed
   */
   void getMin(out graphene.point3_d.Point3D min)
   {
-    graphene_point3d_t _min;
-    graphene_box_get_min(cast(const(graphene_box_t)*)this._cPtr, &_min);
-    min = new graphene.point3_d.Point3D(cast(void*)&_min, No.Take);
+    graphene_box_get_min(cast(const(graphene_box_t)*)this._cPtr, cast(graphene_point3d_t*)&min);
   }
 
   /**
@@ -288,10 +282,10 @@ class Box : gobject.boxed.Boxed
         max = the coordinates of the maximum vertex
       Returns: the initialized #graphene_box_t
   */
-  graphene.box.Box init_(graphene.point3_d.Point3D min = null, graphene.point3_d.Point3D max = null)
+  graphene.box.Box init_(graphene.point3_d.Point3D min, graphene.point3_d.Point3D max)
   {
     graphene_box_t* _cretval;
-    _cretval = graphene_box_init(cast(graphene_box_t*)this._cPtr, min ? cast(const(graphene_point3d_t)*)min._cPtr(No.Dup) : null, max ? cast(const(graphene_point3d_t)*)max._cPtr(No.Dup) : null);
+    _cretval = graphene_box_init(cast(graphene_box_t*)this._cPtr, cast(const(graphene_point3d_t)*)&min, cast(const(graphene_point3d_t)*)&max);
     auto _retval = _cretval ? new graphene.box.Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -330,10 +324,7 @@ class Box : gobject.boxed.Boxed
     if (points)
       _nPoints = cast(uint)points.length;
 
-    graphene_point3d_t[] _tmppoints;
-    foreach (obj; points)
-      _tmppoints ~= *cast(graphene_point3d_t*)obj._cPtr;
-    const(graphene_point3d_t)* _points = _tmppoints.ptr;
+    auto _points = cast(const(graphene_point3d_t)*)points.ptr;
     _cretval = graphene_box_init_from_points(cast(graphene_box_t*)this._cPtr, _nPoints, _points);
     auto _retval = _cretval ? new graphene.box.Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -378,6 +369,7 @@ class Box : gobject.boxed.Boxed
     foreach (obj; vectors)
       _tmpvectors ~= *cast(graphene_vec3_t*)obj._cPtr;
     const(graphene_vec3_t)* _vectors = _tmpvectors.ptr;
+
     _cretval = graphene_box_init_from_vectors(cast(graphene_box_t*)this._cPtr, _nVectors, _vectors);
     auto _retval = _cretval ? new graphene.box.Box(cast(void*)_cretval, No.Take) : null;
     return _retval;

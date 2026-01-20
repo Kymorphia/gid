@@ -26,7 +26,7 @@ class Language : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -281,8 +281,8 @@ class Language : gobject.boxed.Boxed
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new pango.language.Language[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = new pango.language.Language(cast(void*)_cretval[i], No.Take);

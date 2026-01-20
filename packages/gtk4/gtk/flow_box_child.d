@@ -155,14 +155,14 @@ class FlowBoxChild : gtk.widget.Widget
       Connect to `Activate` signal.
   
       Emitted when the user activates a child widget in a [gtk.flow_box.FlowBox].
-      
-      This can happen either by clicking or double-clicking,
-      or via a keybinding.
-      
-      This is a [keybinding signal](class.SignalAction.html),
-      but it can be used by applications for their own purposes.
-      
-      The default bindings are <kbd>Space</kbd> and <kbd>Enter</kbd>.
+        
+        This can happen either by clicking or double-clicking,
+        or via a keybinding.
+        
+        This is a [keybinding signal](class.SignalAction.html),
+        but it can be used by applications for their own purposes.
+        
+        The default bindings are <kbd>Space</kbd> and <kbd>Enter</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

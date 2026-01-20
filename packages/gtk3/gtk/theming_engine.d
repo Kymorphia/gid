@@ -79,9 +79,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getBackgroundColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_theming_engine_get_background_color(cast(GtkThemingEngine*)this._cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_theming_engine_get_background_color(cast(GtkThemingEngine*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -93,9 +91,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getBorder(gtk.types.StateFlags state, out gtk.border.Border border)
   {
-    GtkBorder _border;
-    gtk_theming_engine_get_border(cast(GtkThemingEngine*)this._cPtr, state, &_border);
-    border = new gtk.border.Border(cast(void*)&_border, No.Take);
+    gtk_theming_engine_get_border(cast(GtkThemingEngine*)this._cPtr, state, cast(GtkBorder*)&border);
   }
 
   /**
@@ -107,9 +103,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getBorderColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_theming_engine_get_border_color(cast(GtkThemingEngine*)this._cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_theming_engine_get_border_color(cast(GtkThemingEngine*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -121,9 +115,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
-    GdkRGBA _color;
-    gtk_theming_engine_get_color(cast(GtkThemingEngine*)this._cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    gtk_theming_engine_get_color(cast(GtkThemingEngine*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
 
   /**
@@ -182,9 +174,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getMargin(gtk.types.StateFlags state, out gtk.border.Border margin)
   {
-    GtkBorder _margin;
-    gtk_theming_engine_get_margin(cast(GtkThemingEngine*)this._cPtr, state, &_margin);
-    margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
+    gtk_theming_engine_get_margin(cast(GtkThemingEngine*)this._cPtr, state, cast(GtkBorder*)&margin);
   }
 
   /**
@@ -196,9 +186,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getPadding(gtk.types.StateFlags state, out gtk.border.Border padding)
   {
-    GtkBorder _padding;
-    gtk_theming_engine_get_padding(cast(GtkThemingEngine*)this._cPtr, state, &_padding);
-    padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
+    gtk_theming_engine_get_padding(cast(GtkThemingEngine*)this._cPtr, state, cast(GtkBorder*)&padding);
   }
 
   /**
@@ -320,9 +308,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
-    GdkRGBA _color;
-    _retval = cast(bool)gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)this._cPtr, _colorName, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    _retval = cast(bool)gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)this._cPtr, _colorName, cast(GdkRGBA*)&color);
     return _retval;
   }
 

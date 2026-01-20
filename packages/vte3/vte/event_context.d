@@ -11,7 +11,7 @@ import vte.types;
 */
 class EventContext
 {
-  VteEventContext* cInstancePtr;
+  VteEventContext* _cInstancePtr;
   bool owned;
 
   /** */
@@ -20,7 +20,7 @@ class EventContext
     if (!ptr)
       throw new GidConstructException("Null instance pointer for vte.event_context.EventContext");
 
-    cInstancePtr = cast(VteEventContext*)ptr;
+    _cInstancePtr = cast(VteEventContext*)ptr;
 
     owned = take;
   }
@@ -28,7 +28,7 @@ class EventContext
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /** */

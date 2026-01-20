@@ -9,7 +9,7 @@ import javascriptcore.types;
 /** */
 class ClassClass
 {
-  JSCClassClass cInstance;
+  JSCClassClass _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -17,7 +17,7 @@ class ClassClass
     if (!ptr)
       throw new GidConstructException("Null instance pointer for javascriptcore.class_class.ClassClass");
 
-    cInstance = *cast(JSCClassClass*)ptr;
+    _cInstance = *cast(JSCClassClass*)ptr;
 
     if (take)
       gFree(ptr);
@@ -26,6 +26,6 @@ class ClassClass
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

@@ -76,7 +76,7 @@ void cairoDrawFromGl(cairo.context.Context cr, gdk.surface.Surface surface, int 
 */
 void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
 {
-  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, rectangle ? cast(const(GdkRectangle)*)rectangle._cPtr(No.Dup) : null);
+  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&rectangle);
 }
 
 /**
@@ -136,7 +136,7 @@ void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixb
 */
 void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
 {
-  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&rgba);
 }
 
 /**
@@ -166,7 +166,6 @@ void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeTyp
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   const(char)* _mimeType = mimeType.toCString(No.Alloc);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   gdk_content_deserialize_async(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, _mimeType, type, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -222,7 +221,6 @@ void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeTyp
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-
   const(char)* _mimeType = mimeType.toCString(No.Alloc);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   gdk_content_serialize_async(stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _mimeType, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);

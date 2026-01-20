@@ -14,7 +14,7 @@ import gobject.value;
 */
 class MetaTableColumn
 {
-  GdaMetaTableColumn cInstance;
+  GdaMetaTableColumn _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class MetaTableColumn
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_table_column.MetaTableColumn");
 
-    cInstance = *cast(GdaMetaTableColumn*)ptr;
+    _cInstance = *cast(GdaMetaTableColumn*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class MetaTableColumn
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -167,7 +167,6 @@ class MetaTableColumn
       (*_dlg)(_attName, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gda_meta_table_column_foreach_attribute(cast(GdaMetaTableColumn*)this._cPtr, _funcCB, _func);
   }
@@ -215,7 +214,6 @@ class MetaTableColumn
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     const(char)* _attribute = attribute.toCString(No.Alloc);
     gda_meta_table_column_set_attribute(cast(GdaMetaTableColumn*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }

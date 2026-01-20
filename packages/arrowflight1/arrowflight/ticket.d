@@ -40,7 +40,7 @@ class Ticket : gobject.object.ObjectWrap
   /**
       Get `data` property.
       Returns: Opaque identifier or credential to use when requesting a data
-      stream with the DoGet RPC.
+        stream with the DoGet RPC.
   */
   @property glib.bytes.Bytes data()
   {
@@ -51,7 +51,7 @@ class Ticket : gobject.object.ObjectWrap
       Set `data` property.
       Params:
         propval = Opaque identifier or credential to use when requesting a data
-        stream with the DoGet RPC.
+          stream with the DoGet RPC.
   */
   @property void data(glib.bytes.Bytes propval)
   {

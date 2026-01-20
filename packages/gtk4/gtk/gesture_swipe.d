@@ -84,8 +84,8 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
       Connect to `Swipe` signal.
   
       Emitted when the recognized gesture is finished.
-      
-      Velocity and direction are a product of previously recorded events.
+        
+        Velocity and direction are a product of previously recorded events.
   
       Params:
         callback = signal callback delegate or function to connect

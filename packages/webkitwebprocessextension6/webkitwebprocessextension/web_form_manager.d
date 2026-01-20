@@ -90,14 +90,14 @@ class WebFormManager : gobject.object.ObjectWrap
       Connect to `FormControlsAssociated` signal.
   
       Emitted after form elements (or form associated elements) are associated to frame.
-      This is useful to implement form auto filling for web pages where form fields are added
-      dynamically. This signal might be emitted multiple times for the same frame.
-      
-      Note that this signal could be also emitted when form controls are moved between forms. In
-      that case, the elements array carries the list of those elements which have moved.
-      
-      Clients should take a reference to the members of the elements array if it is desired to
-      keep them alive after the signal handler returns.
+        This is useful to implement form auto filling for web pages where form fields are added
+        dynamically. This signal might be emitted multiple times for the same frame.
+        
+        Note that this signal could be also emitted when form controls are moved between forms. In
+        that case, the elements array carries the list of those elements which have moved.
+        
+        Clients should take a reference to the members of the elements array if it is desired to
+        keep them alive after the signal handler returns.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -107,7 +107,7 @@ class WebFormManager : gobject.object.ObjectWrap
           `frame` a #WebKitFrame (optional)
   
           `elements` a #GPtrArray of
-              #JSCValue with the list of forms in the page (optional)
+                #JSCValue with the list of forms in the page (optional)
   
           `webFormManager` the instance the signal is connected to (optional)
   
@@ -149,17 +149,17 @@ class WebFormManager : gobject.object.ObjectWrap
       Connect to `WillSendSubmitEvent` signal.
   
       This signal is emitted when the DOM submit event is about to be fired for form.
-      JavaScript code may rely on the submit event to detect that the user has clicked
-      on a submit button, and to possibly cancel the form submission before
-      #WebKitWebFormManager::will-submit-form signal is emitted.
-      However, beware that, for historical reasons, the submit event is not emitted at
-      all if the form submission is triggered by JavaScript. For these reasons,
-      this signal may not be used to reliably detect whether a form will be submitted.
-      Instead, use it to detect if a user has clicked on a form's submit button even if
-      JavaScript later cancels the form submission, or to read the values of the form's
-      fields even if JavaScript later clears certain fields before submitting. This may
-      be needed, for example, to implement a robust browser password manager, as some
-      misguided websites may use such techniques to attempt to thwart password managers.
+        JavaScript code may rely on the submit event to detect that the user has clicked
+        on a submit button, and to possibly cancel the form submission before
+        #WebKitWebFormManager::will-submit-form signal is emitted.
+        However, beware that, for historical reasons, the submit event is not emitted at
+        all if the form submission is triggered by JavaScript. For these reasons,
+        this signal may not be used to reliably detect whether a form will be submitted.
+        Instead, use it to detect if a user has clicked on a form's submit button even if
+        JavaScript later cancels the form submission, or to read the values of the form's
+        fields even if JavaScript later clears certain fields before submitting. This may
+        be needed, for example, to implement a robust browser password manager, as some
+        misguided websites may use such techniques to attempt to thwart password managers.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -171,7 +171,7 @@ class WebFormManager : gobject.object.ObjectWrap
           `sourceFrame` the #WebKitFrame containing the form to be submitted (optional)
   
           `targetFrame` the #WebKitFrame containing the form's target,
-              which may be the same as source_frame if no target was specified (optional)
+                which may be the same as source_frame if no target was specified (optional)
   
           `webFormManager` the instance the signal is connected to (optional)
   
@@ -219,10 +219,10 @@ class WebFormManager : gobject.object.ObjectWrap
       Connect to `WillSubmitForm` signal.
   
       This signal is emitted when form will imminently be submitted. It can no longer
-      be cancelled. This event always occurs immediately before a form is submitted to
-      its target, so use this event to reliably detect when a form is submitted. This
-      signal is emitted after #WebKitWebFormManager::will-send-submit-event if that
-      signal is emitted.
+        be cancelled. This event always occurs immediately before a form is submitted to
+        its target, so use this event to reliably detect when a form is submitted. This
+        signal is emitted after #WebKitWebFormManager::will-send-submit-event if that
+        signal is emitted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -234,7 +234,7 @@ class WebFormManager : gobject.object.ObjectWrap
           `sourceFrame` the #WebKitFrame containing the form to be submitted (optional)
   
           `targetFrame` the #WebKitFrame containing the form's target,
-              which may be the same as source_frame if no target was specified (optional)
+                which may be the same as source_frame if no target was specified (optional)
   
           `webFormManager` the instance the signal is connected to (optional)
   

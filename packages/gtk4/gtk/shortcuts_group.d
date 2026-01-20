@@ -68,8 +68,8 @@ class ShortcutsGroup : gtk.box.Box
       Set `accelSizeGroup` property.
       Params:
         propval = The size group for the accelerator portion of shortcuts in this group.
-        
-        This is used internally by GTK, and must not be modified by applications.
+          
+          This is used internally by GTK, and must not be modified by applications.
   */
   @property void accelSizeGroup(gtk.size_group.SizeGroup propval)
   {
@@ -79,8 +79,8 @@ class ShortcutsGroup : gtk.box.Box
   /**
       Get `height` property.
       Returns: A rough measure for the number of lines in this group.
-      
-      This is used internally by GTK, and is not useful for applications.
+        
+        This is used internally by GTK, and is not useful for applications.
   */
   @property uint height()
   {
@@ -110,8 +110,8 @@ class ShortcutsGroup : gtk.box.Box
       Set `titleSizeGroup` property.
       Params:
         propval = The size group for the textual portion of shortcuts in this group.
-        
-        This is used internally by GTK, and must not be modified by applications.
+          
+          This is used internally by GTK, and must not be modified by applications.
   */
   @property void titleSizeGroup(gtk.size_group.SizeGroup propval)
   {
@@ -121,11 +121,11 @@ class ShortcutsGroup : gtk.box.Box
   /**
       Get `view` property.
       Returns: An optional view that the shortcuts in this group are relevant for.
-      
-      The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
-      property does not match the view of this group.
-      
-      Set this to null to make the group always visible.
+        
+        The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
+        property does not match the view of this group.
+        
+        Set this to null to make the group always visible.
   */
   @property string view()
   {
@@ -136,11 +136,11 @@ class ShortcutsGroup : gtk.box.Box
       Set `view` property.
       Params:
         propval = An optional view that the shortcuts in this group are relevant for.
-        
-        The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
-        property does not match the view of this group.
-        
-        Set this to null to make the group always visible.
+          
+          The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
+          property does not match the view of this group.
+          
+          Set this to null to make the group always visible.
   */
   @property void view(string propval)
   {

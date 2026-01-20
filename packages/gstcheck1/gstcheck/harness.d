@@ -114,7 +114,7 @@ import gstcheck.types;
 */
 class Harness
 {
-  GstHarness cInstance;
+  GstHarness _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -122,7 +122,7 @@ class Harness
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstcheck.harness.Harness");
 
-    cInstance = *cast(GstHarness*)ptr;
+    _cInstance = *cast(GstHarness*)ptr;
 
     if (take)
       gFree(ptr);
@@ -131,7 +131,7 @@ class Harness
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -266,7 +266,6 @@ class Harness
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _elementName = elementName.toCString(No.Alloc);
     const(char)* _padName = padName.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -284,9 +283,9 @@ class Harness
         api = a metadata API
         params = API specific parameters
   */
-  void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
+  void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params)
   {
-    gst_harness_add_propose_allocation_meta(cast(GstHarness*)this._cPtr, api, params ? cast(const(GstStructure)*)params._cPtr(No.Dup) : null);
+    gst_harness_add_propose_allocation_meta(cast(GstHarness*)this._cPtr, api, cast(const(GstStructure)*)&params);
   }
 
   /**
@@ -564,10 +563,8 @@ class Harness
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_harness_get_allocator(cast(GstHarness*)this._cPtr, &_allocator, &_params);
+    gst_harness_get_allocator(cast(GstHarness*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, No.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /**
@@ -903,9 +900,9 @@ class Harness
         allocator = a #GstAllocator
         params = a #GstAllocationParams
   */
-  void setProposeAllocator(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
+  void setProposeAllocator(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params)
   {
-    gst_harness_set_propose_allocator(cast(GstHarness*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null, params ? cast(const(GstAllocationParams)*)params._cPtr(No.Dup) : null);
+    gst_harness_set_propose_allocator(cast(GstHarness*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null, cast(const(GstAllocationParams)*)&params);
   }
 
   /**

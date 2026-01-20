@@ -13,7 +13,7 @@ import gstbase.types;
 */
 class DataQueueItem
 {
-  GstDataQueueItem cInstance;
+  GstDataQueueItem _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class DataQueueItem
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstbase.data_queue_item.DataQueueItem");
 
-    cInstance = *cast(GstDataQueueItem*)ptr;
+    _cInstance = *cast(GstDataQueueItem*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class DataQueueItem
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -40,17 +40,6 @@ class DataQueueItem
   @property gst.mini_object.MiniObject object()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
-  }
-
-  /**
-      Set `object` field.
-      Params:
-        propval = the #GstMiniObject to queue.
-  */
-  @property void object(gst.mini_object.MiniObject propval)
-  {
-    cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
-    dToC(propval, cast(void*)&(cast(GstDataQueueItem*)this._cPtr).object);
   }
 
   /**
@@ -75,7 +64,7 @@ class DataQueueItem
   /**
       Get `duration` field.
       Returns: the duration in #GstClockTime of the miniobject. Can not be
-      `GST_CLOCK_TIME_NONE`.
+        `GST_CLOCK_TIME_NONE`.
   */
   @property ulong duration()
   {
@@ -86,7 +75,7 @@ class DataQueueItem
       Set `duration` field.
       Params:
         propval = the duration in #GstClockTime of the miniobject. Can not be
-        `GST_CLOCK_TIME_NONE`.
+          `GST_CLOCK_TIME_NONE`.
   */
   @property void duration(ulong propval)
   {
@@ -115,8 +104,8 @@ class DataQueueItem
   /**
       Get `destroy` field.
       Returns: The #GDestroyNotify function to use to free the #GstDataQueueItem.
-      This function should also drop the reference to @object the owner of the
-      #GstDataQueueItem is assumed to hold.
+        This function should also drop the reference to @object the owner of the
+        #GstDataQueueItem is assumed to hold.
   */
   @property GDestroyNotify destroy()
   {
@@ -127,8 +116,8 @@ class DataQueueItem
       Set `destroy` field.
       Params:
         propval = The #GDestroyNotify function to use to free the #GstDataQueueItem.
-        This function should also drop the reference to @object the owner of the
-        #GstDataQueueItem is assumed to hold.
+          This function should also drop the reference to @object the owner of the
+          #GstDataQueueItem is assumed to hold.
   */
 
   @property void destroy(GDestroyNotify propval)

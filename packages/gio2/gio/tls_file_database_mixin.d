@@ -20,9 +20,9 @@ template TlsFileDatabaseT()
   /**
       Get `anchors` property.
       Returns: The path to a file containing PEM encoded certificate authority
-      root anchors. The certificates in this file will be treated as
-      root authorities for the purpose of verifying other certificates
-      via the [gio.tls_database.TlsDatabase.verifyChain] operation.
+        root anchors. The certificates in this file will be treated as
+        root authorities for the purpose of verifying other certificates
+        via the [gio.tls_database.TlsDatabase.verifyChain] operation.
   */
   @property string anchors()
   {
@@ -33,9 +33,9 @@ template TlsFileDatabaseT()
       Set `anchors` property.
       Params:
         propval = The path to a file containing PEM encoded certificate authority
-        root anchors. The certificates in this file will be treated as
-        root authorities for the purpose of verifying other certificates
-        via the [gio.tls_database.TlsDatabase.verifyChain] operation.
+          root anchors. The certificates in this file will be treated as
+          root authorities for the purpose of verifying other certificates
+          via the [gio.tls_database.TlsDatabase.verifyChain] operation.
   */
   @property void anchors(string propval)
   {

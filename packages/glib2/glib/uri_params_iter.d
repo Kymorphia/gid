@@ -1,4 +1,4 @@
-/// Module for [UriParamsIter] class
+/// Module for [UriParamsIter] struct
 module glib.uri_params_iter;
 
 import gid.gid;
@@ -18,27 +18,19 @@ import glib.types;
     [glib.uri_params_iter.UriParamsIter.init_]. See the documentation for [glib.uri_params_iter.UriParamsIter.init_]
     for a usage example.
 */
-class UriParamsIter
+struct UriParamsIter
 {
-  GUriParamsIter cInstance;
+  /** */
+  int dummy0;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.uri_params_iter.UriParamsIter");
-
-    cInstance = *cast(GUriParamsIter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
+  void* dummy1;
 
   /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  void* dummy2;
+
+  /** */
+  ubyte[256] dummy3;
 
   /**
       Initializes an attribute/value pair iterator.
@@ -90,7 +82,7 @@ class UriParamsIter
   {
     const(char)* _params = params.toCString(No.Alloc);
     const(char)* _separators = separators.toCString(No.Alloc);
-    g_uri_params_iter_init(cast(GUriParamsIter*)this._cPtr, _params, length, _separators, flags);
+    g_uri_params_iter_init(cast(GUriParamsIter*)&this, _params, length, _separators, flags);
   }
 
   /**
@@ -119,7 +111,7 @@ class UriParamsIter
     char* _attribute;
     char* _value;
     GError *_err;
-    _retval = cast(bool)g_uri_params_iter_next(cast(GUriParamsIter*)this._cPtr, &_attribute, &_value, &_err);
+    _retval = cast(bool)g_uri_params_iter_next(cast(GUriParamsIter*)&this, &_attribute, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     attribute = _attribute.fromCString(Yes.Free);

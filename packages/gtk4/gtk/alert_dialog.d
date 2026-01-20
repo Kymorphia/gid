@@ -54,14 +54,14 @@ class AlertDialog : gobject.object.ObjectWrap
   /**
       Get `cancelButton` property.
       Returns: This property determines what happens when the Escape key is
-      pressed while the alert is shown.
-      
-      If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
-      then pressing Escape is treated as if that button was pressed. If it is -1
-      or not a valid index for the `buttons` array, then an error is returned.
-      
-      If `buttons` is `NULL`, then the automatically created 'Close' button
-      is treated as both cancel and default button, so 0 is returned.
+        pressed while the alert is shown.
+        
+        If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+        then pressing Escape is treated as if that button was pressed. If it is -1
+        or not a valid index for the `buttons` array, then an error is returned.
+        
+        If `buttons` is `NULL`, then the automatically created 'Close' button
+        is treated as both cancel and default button, so 0 is returned.
   */
   @property int cancelButton()
   {
@@ -72,14 +72,14 @@ class AlertDialog : gobject.object.ObjectWrap
       Set `cancelButton` property.
       Params:
         propval = This property determines what happens when the Escape key is
-        pressed while the alert is shown.
-        
-        If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
-        then pressing Escape is treated as if that button was pressed. If it is -1
-        or not a valid index for the `buttons` array, then an error is returned.
-        
-        If `buttons` is `NULL`, then the automatically created 'Close' button
-        is treated as both cancel and default button, so 0 is returned.
+          pressed while the alert is shown.
+          
+          If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+          then pressing Escape is treated as if that button was pressed. If it is -1
+          or not a valid index for the `buttons` array, then an error is returned.
+          
+          If `buttons` is `NULL`, then the automatically created 'Close' button
+          is treated as both cancel and default button, so 0 is returned.
   */
   @property void cancelButton(int propval)
   {
@@ -89,14 +89,14 @@ class AlertDialog : gobject.object.ObjectWrap
   /**
       Get `defaultButton` property.
       Returns: This property determines what happens when the Return key is
-      pressed while the alert is shown.
-      
-      If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
-      then pressing Return is treated as if that button was pressed. If it is -1
-      or not a valid index for the `buttons` array, then nothing happens.
-      
-      If `buttons` is `NULL`, then the automatically created 'Close' button
-      is treated as both cancel and default button, so 0 is returned.
+        pressed while the alert is shown.
+        
+        If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+        then pressing Return is treated as if that button was pressed. If it is -1
+        or not a valid index for the `buttons` array, then nothing happens.
+        
+        If `buttons` is `NULL`, then the automatically created 'Close' button
+        is treated as both cancel and default button, so 0 is returned.
   */
   @property int defaultButton()
   {
@@ -107,14 +107,14 @@ class AlertDialog : gobject.object.ObjectWrap
       Set `defaultButton` property.
       Params:
         propval = This property determines what happens when the Return key is
-        pressed while the alert is shown.
-        
-        If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
-        then pressing Return is treated as if that button was pressed. If it is -1
-        or not a valid index for the `buttons` array, then nothing happens.
-        
-        If `buttons` is `NULL`, then the automatically created 'Close' button
-        is treated as both cancel and default button, so 0 is returned.
+          pressed while the alert is shown.
+          
+          If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+          then pressing Return is treated as if that button was pressed. If it is -1
+          or not a valid index for the `buttons` array, then nothing happens.
+          
+          If `buttons` is `NULL`, then the automatically created 'Close' button
+          is treated as both cancel and default button, so 0 is returned.
   */
   @property void defaultButton(int propval)
   {
@@ -204,7 +204,6 @@ class AlertDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_alert_dialog_choose(cast(GtkAlertDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -243,8 +242,8 @@ class AlertDialog : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -323,6 +322,7 @@ class AlertDialog : gobject.object.ObjectWrap
       _tmplabels ~= s.toCString(No.Alloc);
     _tmplabels ~= null;
     const(char*)* _labels = _tmplabels.ptr;
+
     gtk_alert_dialog_set_buttons(cast(GtkAlertDialog*)this._cPtr, _labels);
   }
 

@@ -1,10 +1,9 @@
-/// Module for [Cond] class
+/// Module for [Cond] struct
 module glib.cond;
 
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;
-import glib.mutex;
 import glib.types;
 
 /**
@@ -74,27 +73,13 @@ import glib.types;
     
     A #GCond should only be accessed via the g_cond_ functions.
 */
-class Cond
+struct Cond
 {
-  GCond cInstance;
+  /** */
+  void* p;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.cond.Cond");
-
-    cInstance = *cast(GCond*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  uint[2] i;
 
   /**
       If threads are waiting for cond, all of them are unblocked.
@@ -104,7 +89,7 @@ class Cond
   */
   void broadcast()
   {
-    g_cond_broadcast(cast(GCond*)this._cPtr);
+    g_cond_broadcast(cast(GCond*)&this);
   }
 
   /**
@@ -118,7 +103,7 @@ class Cond
   */
   void clear()
   {
-    g_cond_clear(cast(GCond*)this._cPtr);
+    g_cond_clear(cast(GCond*)&this);
   }
 
   /**
@@ -136,7 +121,7 @@ class Cond
   */
   void init_()
   {
-    g_cond_init(cast(GCond*)this._cPtr);
+    g_cond_init(cast(GCond*)&this);
   }
 
   /**
@@ -147,92 +132,6 @@ class Cond
   */
   void signal()
   {
-    g_cond_signal(cast(GCond*)this._cPtr);
-  }
-
-  /**
-      Atomically releases mutex and waits until cond is signalled.
-      When this function returns, mutex is locked again and owned by the
-      calling thread.
-      
-      When using condition variables, it is possible that a spurious wakeup
-      may occur (ie: [glib.cond.Cond.wait] returns even though [glib.cond.Cond.signal] was
-      not called).  It's also possible that a stolen wakeup may occur.
-      This is when [glib.cond.Cond.signal] is called, but another thread acquires
-      mutex before this thread and modifies the state of the program in
-      such a way that when [glib.cond.Cond.wait] is able to return, the expected
-      condition is no longer met.
-      
-      For this reason, [glib.cond.Cond.wait] must always be used in a loop.  See
-      the documentation for #GCond for a complete example.
-  
-      Params:
-        mutex = a #GMutex that is currently locked
-  */
-  void wait(glib.mutex.Mutex mutex)
-  {
-    g_cond_wait(cast(GCond*)this._cPtr, mutex ? cast(GMutex*)mutex._cPtr : null);
-  }
-
-  /**
-      Waits until either cond is signalled or end_time has passed.
-      
-      As with [glib.cond.Cond.wait] it is possible that a spurious or stolen wakeup
-      could occur.  For that reason, waiting on a condition variable should
-      always be in a loop, based on an explicitly-checked predicate.
-      
-      true is returned if the condition variable was signalled (or in the
-      case of a spurious wakeup).  false is returned if end_time has
-      passed.
-      
-      The following code shows how to correctly perform a timed wait on a
-      condition variable (extending the example presented in the
-      documentation for #GCond):
-      
-      ```c
-      gpointer
-      pop_data_timed (void)
-      {
-        gint64 end_time;
-        gpointer data;
-      
-        g_mutex_lock (&data_mutex);
-      
-        end_time = g_get_monotonic_time () + 5 * G_TIME_SPAN_SECOND;
-        while (!current_data)
-          if (!g_cond_wait_until (&data_cond, &data_mutex, end_time))
-            {
-              // timeout has passed.
-              g_mutex_unlock (&data_mutex);
-              return NULL;
-            }
-      
-        // there is data for us
-        data = current_data;
-        current_data = NULL;
-      
-        g_mutex_unlock (&data_mutex);
-      
-        return data;
-      }
-      ```
-      
-      Notice that the end time is calculated once, before entering the
-      loop and reused.  This is the motivation behind the use of absolute
-      time on this API -- if a relative time of 5 seconds were passed
-      directly to the call and a spurious wakeup occurred, the program would
-      have to start over waiting again (which would lead to a total wait
-      time of more than 5 seconds).
-  
-      Params:
-        mutex = a #GMutex that is currently locked
-        endTime = the monotonic time to wait until
-      Returns: true on a signal, false on a timeout
-  */
-  bool waitUntil(glib.mutex.Mutex mutex, long endTime)
-  {
-    bool _retval;
-    _retval = cast(bool)g_cond_wait_until(cast(GCond*)this._cPtr, mutex ? cast(GMutex*)mutex._cPtr : null, endTime);
-    return _retval;
+    g_cond_signal(cast(GCond*)&this);
   }
 }

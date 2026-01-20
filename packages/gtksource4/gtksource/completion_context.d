@@ -122,9 +122,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   bool getIter(out gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)this._cPtr, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    _retval = cast(bool)gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)this._cPtr, cast(GtkTextIter*)&iter);
     return _retval;
   }
 
@@ -132,8 +130,8 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Connect to `Cancelled` signal.
   
       Emitted when the current population of proposals has been cancelled.
-      Providers adding proposals asynchronously should connect to this signal
-      to know when to cancel running proposal queries.
+        Providers adding proposals asynchronously should connect to this signal
+        to know when to cancel running proposal queries.
   
       Params:
         callback = signal callback delegate or function to connect

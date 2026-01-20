@@ -18,7 +18,7 @@ import gstaudio.types;
 */
 class AudioCdSrcTrack
 {
-  GstAudioCdSrcTrack cInstance;
+  GstAudioCdSrcTrack _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -26,7 +26,7 @@ class AudioCdSrcTrack
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_cd_src_track.AudioCdSrcTrack");
 
-    cInstance = *cast(GstAudioCdSrcTrack*)ptr;
+    _cInstance = *cast(GstAudioCdSrcTrack*)ptr;
 
     if (take)
       gFree(ptr);
@@ -35,7 +35,7 @@ class AudioCdSrcTrack
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

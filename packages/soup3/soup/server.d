@@ -137,40 +137,6 @@ class Server : gobject.object.ObjectWrap
   /**
       Get `serverHeader` property.
       Returns: Server header.
-      
-      If non-null, the value to use for the "Server" header on
-      `class@ServerMessage`s processed by this server.
-      
-      The Server header is the server equivalent of the
-      User-Agent header, and provides information about the
-      server and its components. It contains a list of one or
-      more product tokens, separated by whitespace, with the most
-      significant product token coming first. The tokens must be
-      brief, ASCII, and mostly alphanumeric (although "-", "_",
-      and "." are also allowed), and may optionally include a "/"
-      followed by a version string. You may also put comments,
-      enclosed in parentheses, between or after the tokens.
-      
-      Some HTTP server implementations intentionally do not use
-      version numbers in their Server header, so that
-      installations running older versions of the server don't
-      end up advertising their vulnerability to specific security
-      holes.
-      
-      As with `property@Session:user_agent`, if you set a
-      `property@Server:server-header` property that has trailing
-      whitespace, #SoupServer will append its own product token (eg,
-      `libsoup/2.3.2`) to the end of the header for you.
-  */
-  @property string serverHeader()
-  {
-    return gobject.object.ObjectWrap.getProperty!(string)("server-header");
-  }
-
-  /**
-      Set `serverHeader` property.
-      Params:
-        propval = Server header.
         
         If non-null, the value to use for the "Server" header on
         `class@ServerMessage`s processed by this server.
@@ -195,6 +161,40 @@ class Server : gobject.object.ObjectWrap
         `property@Server:server-header` property that has trailing
         whitespace, #SoupServer will append its own product token (eg,
         `libsoup/2.3.2`) to the end of the header for you.
+  */
+  @property string serverHeader()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("server-header");
+  }
+
+  /**
+      Set `serverHeader` property.
+      Params:
+        propval = Server header.
+          
+          If non-null, the value to use for the "Server" header on
+          `class@ServerMessage`s processed by this server.
+          
+          The Server header is the server equivalent of the
+          User-Agent header, and provides information about the
+          server and its components. It contains a list of one or
+          more product tokens, separated by whitespace, with the most
+          significant product token coming first. The tokens must be
+          brief, ASCII, and mostly alphanumeric (although "-", "_",
+          and "." are also allowed), and may optionally include a "/"
+          followed by a version string. You may also put comments,
+          enclosed in parentheses, between or after the tokens.
+          
+          Some HTTP server implementations intentionally do not use
+          version numbers in their Server header, so that
+          installations running older versions of the server don't
+          end up advertising their vulnerability to specific security
+          holes.
+          
+          As with `property@Session:user_agent`, if you set a
+          `property@Server:server-header` property that has trailing
+          whitespace, #SoupServer will append its own product token (eg,
+          `libsoup/2.3.2`) to the end of the header for you.
   */
   @property void serverHeader(string propval)
   {
@@ -223,10 +223,10 @@ class Server : gobject.object.ObjectWrap
   /**
       Get `tlsCertificate` property.
       Returns: A [gio.tls_certificate.TlsCertificate] that has a
-      `property@Gio.TlsCertificate:private-key` set.
-      
-      If this is set, then the server will be able to speak
-      https in addition to (or instead of) plain http.
+        `property@Gio.TlsCertificate:private-key` set.
+        
+        If this is set, then the server will be able to speak
+        https in addition to (or instead of) plain http.
   */
   @property gio.tls_certificate.TlsCertificate tlsCertificate()
   {
@@ -237,10 +237,10 @@ class Server : gobject.object.ObjectWrap
       Set `tlsCertificate` property.
       Params:
         propval = A [gio.tls_certificate.TlsCertificate] that has a
-        `property@Gio.TlsCertificate:private-key` set.
-        
-        If this is set, then the server will be able to speak
-        https in addition to (or instead of) plain http.
+          `property@Gio.TlsCertificate:private-key` set.
+          
+          If this is set, then the server will be able to speak
+          https in addition to (or instead of) plain http.
   */
   @property void tlsCertificate(gio.tls_certificate.TlsCertificate propval)
   {
@@ -250,7 +250,7 @@ class Server : gobject.object.ObjectWrap
   /**
       Get `tlsDatabase` property.
       Returns: A [gio.tls_database.TlsDatabase] to use for validating SSL/TLS client
-      certificates.
+        certificates.
   */
   @property gio.tls_database.TlsDatabase tlsDatabase()
   {
@@ -261,7 +261,7 @@ class Server : gobject.object.ObjectWrap
       Set `tlsDatabase` property.
       Params:
         propval = A [gio.tls_database.TlsDatabase] to use for validating SSL/TLS client
-        certificates.
+          certificates.
   */
   @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
   {
@@ -357,7 +357,6 @@ class Server : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _path = path.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
@@ -415,7 +414,6 @@ class Server : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _path = path.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
@@ -478,7 +476,6 @@ class Server : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, gobject.object.ObjectWrap._getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _path = path.toCString(No.Alloc);
     const(char)* _origin = origin.toCString(No.Alloc);
     char*[] _tmpprotocols;
@@ -836,16 +833,16 @@ class Server : gobject.object.ObjectWrap
       Connect to `RequestAborted` signal.
   
       Emitted when processing has failed for a message.
-      
-      This could mean either that it could not be read (if
-      `signalServer::request-read` has not been emitted for it yet), or that
-      the response could not be written back (if `signalServer::request-read`
-      has been emitted but `signalServer::request-finished` has not been).
-      
-      message is in an undefined state when this signal is
-      emitted; the signal exists primarily to allow the server to
-      free any state that it may have allocated in
-      `signalServer::request-started`.
+        
+        This could mean either that it could not be read (if
+        `signalServer::request-read` has not been emitted for it yet), or that
+        the response could not be written back (if `signalServer::request-read`
+        has been emitted but `signalServer::request-finished` has not been).
+        
+        message is in an undefined state when this signal is
+        emitted; the signal exists primarily to allow the server to
+        free any state that it may have allocated in
+        `signalServer::request-started`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -890,7 +887,7 @@ class Server : gobject.object.ObjectWrap
       Connect to `RequestFinished` signal.
   
       Emitted when the server has finished writing a response to
-      a request.
+        a request.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -935,13 +932,13 @@ class Server : gobject.object.ObjectWrap
       Connect to `RequestRead` signal.
   
       Emitted when the server has successfully read a request.
-      
-      message will have all of its request-side information
-      filled in, and if the message was authenticated, client
-      will have information about that. This signal is emitted
-      before any (non-early) handlers are called for the message,
-      and if it sets the message's #status_code, then normal
-      handler processing will be skipped.
+        
+        message will have all of its request-side information
+        filled in, and if the message was authenticated, client
+        will have information about that. This signal is emitted
+        before any (non-early) handlers are called for the message,
+        and if it sets the message's #status_code, then normal
+        handler processing will be skipped.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -986,17 +983,17 @@ class Server : gobject.object.ObjectWrap
       Connect to `RequestStarted` signal.
   
       Emitted when the server has started reading a new request.
-      
-      message will be completely blank; not even the
-      Request-Line will have been read yet. About the only thing
-      you can usefully do with it is connect to its signals.
-      
-      If the request is read successfully, this will eventually
-      be followed by a `signalServer::request_read signal`. If a
-      response is then sent, the request processing will end with
-      a `signalServer::request-finished` signal. If a network error
-      occurs, the processing will instead end with
-      `signalServer::request-aborted`.
+        
+        message will be completely blank; not even the
+        Request-Line will have been read yet. About the only thing
+        you can usefully do with it is connect to its signals.
+        
+        If the request is read successfully, this will eventually
+        be followed by a `signalServer::request_read signal`. If a
+        response is then sent, the request processing will end with
+        a `signalServer::request-finished` signal. If a network error
+        occurs, the processing will instead end with
+        `signalServer::request-aborted`.
   
       Params:
         callback = signal callback delegate or function to connect

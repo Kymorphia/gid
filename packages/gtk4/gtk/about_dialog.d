@@ -102,10 +102,10 @@ class AboutDialog : gtk.window.Window
   /**
       Get `comments` property.
       Returns: Comments about the program.
-      
-      This string is displayed in a label in the main dialog, thus it
-      should be a short explanation of the main purpose of the program,
-      not a detailed list of features.
+        
+        This string is displayed in a label in the main dialog, thus it
+        should be a short explanation of the main purpose of the program,
+        not a detailed list of features.
   */
   @property string comments()
   {
@@ -116,10 +116,10 @@ class AboutDialog : gtk.window.Window
       Set `comments` property.
       Params:
         propval = Comments about the program.
-        
-        This string is displayed in a label in the main dialog, thus it
-        should be a short explanation of the main purpose of the program,
-        not a detailed list of features.
+          
+          This string is displayed in a label in the main dialog, thus it
+          should be a short explanation of the main purpose of the program,
+          not a detailed list of features.
   */
   @property void comments(string propval)
   {
@@ -148,29 +148,6 @@ class AboutDialog : gtk.window.Window
   /**
       Get `license` property.
       Returns: The license of the program, as free-form text.
-      
-      This string is displayed in a text view in a secondary dialog, therefore
-      it is fine to use a long multi-paragraph text. Note that the text is only
-      wrapped in the text view if the "wrap-license" property is set to `TRUE`;
-      otherwise the text itself must contain the intended linebreaks.
-      
-      When setting this property to a non-`NULL` value, the
-      [gtk.about_dialog.AboutDialog.license] property is set to
-      [gtk.types.License.Custom] as a side effect.
-      
-      The text may contain links in this format `<http://www.some.place/>`
-      and email references in the form `<mail-to@some.body>`, and these will
-      be converted into clickable links.
-  */
-  @property string license()
-  {
-    return getLicense();
-  }
-
-  /**
-      Set `license` property.
-      Params:
-        propval = The license of the program, as free-form text.
         
         This string is displayed in a text view in a secondary dialog, therefore
         it is fine to use a long multi-paragraph text. Note that the text is only
@@ -185,6 +162,29 @@ class AboutDialog : gtk.window.Window
         and email references in the form `<mail-to@some.body>`, and these will
         be converted into clickable links.
   */
+  @property string license()
+  {
+    return getLicense();
+  }
+
+  /**
+      Set `license` property.
+      Params:
+        propval = The license of the program, as free-form text.
+          
+          This string is displayed in a text view in a secondary dialog, therefore
+          it is fine to use a long multi-paragraph text. Note that the text is only
+          wrapped in the text view if the "wrap-license" property is set to `TRUE`;
+          otherwise the text itself must contain the intended linebreaks.
+          
+          When setting this property to a non-`NULL` value, the
+          [gtk.about_dialog.AboutDialog.license] property is set to
+          [gtk.types.License.Custom] as a side effect.
+          
+          The text may contain links in this format `<http://www.some.place/>`
+          and email references in the form `<mail-to@some.body>`, and these will
+          be converted into clickable links.
+  */
   @property void license(string propval)
   {
     return setLicense(propval);
@@ -193,30 +193,6 @@ class AboutDialog : gtk.window.Window
   /**
       Get `licenseType` property.
       Returns: The license of the program.
-      
-      The [gtk.about_dialog.AboutDialog] will automatically fill out a standard disclaimer
-      and link the user to the appropriate online resource for the license
-      text.
-      
-      If [gtk.types.License.Unknown] is used, the link used will be the same
-      specified in the [gtk.about_dialog.AboutDialog.website] property.
-      
-      If [gtk.types.License.Custom] is used, the current contents of the
-      [gtk.about_dialog.AboutDialog.license] property are used.
-      
-      For any other [gtk.types.License] value, the contents of the
-      [gtk.about_dialog.AboutDialog.license] property are also set by this property as
-      a side effect.
-  */
-  @property gtk.types.License licenseType()
-  {
-    return getLicenseType();
-  }
-
-  /**
-      Set `licenseType` property.
-      Params:
-        propval = The license of the program.
         
         The [gtk.about_dialog.AboutDialog] will automatically fill out a standard disclaimer
         and link the user to the appropriate online resource for the license
@@ -232,6 +208,30 @@ class AboutDialog : gtk.window.Window
         [gtk.about_dialog.AboutDialog.license] property are also set by this property as
         a side effect.
   */
+  @property gtk.types.License licenseType()
+  {
+    return getLicenseType();
+  }
+
+  /**
+      Set `licenseType` property.
+      Params:
+        propval = The license of the program.
+          
+          The [gtk.about_dialog.AboutDialog] will automatically fill out a standard disclaimer
+          and link the user to the appropriate online resource for the license
+          text.
+          
+          If [gtk.types.License.Unknown] is used, the link used will be the same
+          specified in the [gtk.about_dialog.AboutDialog.website] property.
+          
+          If [gtk.types.License.Custom] is used, the current contents of the
+          [gtk.about_dialog.AboutDialog.license] property are used.
+          
+          For any other [gtk.types.License] value, the contents of the
+          [gtk.about_dialog.AboutDialog.license] property are also set by this property as
+          a side effect.
+  */
   @property void licenseType(gtk.types.License propval)
   {
     return setLicenseType(propval);
@@ -240,9 +240,9 @@ class AboutDialog : gtk.window.Window
   /**
       Get `logo` property.
       Returns: A logo for the about box.
-      
-      If it is `NULL`, the default window icon set with
-      [gtk.window.Window.setDefaultIconName] will be used.
+        
+        If it is `NULL`, the default window icon set with
+        [gtk.window.Window.setDefaultIconName] will be used.
   */
   @property gdk.paintable.Paintable logo()
   {
@@ -253,9 +253,9 @@ class AboutDialog : gtk.window.Window
       Set `logo` property.
       Params:
         propval = A logo for the about box.
-        
-        If it is `NULL`, the default window icon set with
-        [gtk.window.Window.setDefaultIconName] will be used.
+          
+          If it is `NULL`, the default window icon set with
+          [gtk.window.Window.setDefaultIconName] will be used.
   */
   @property void logo(gdk.paintable.Paintable propval)
   {
@@ -265,8 +265,8 @@ class AboutDialog : gtk.window.Window
   /**
       Get `logoIconName` property.
       Returns: A named icon to use as the logo for the about box.
-      
-      This property overrides the [gtk.about_dialog.AboutDialog.logo] property.
+        
+        This property overrides the [gtk.about_dialog.AboutDialog.logo] property.
   */
   @property string logoIconName()
   {
@@ -277,8 +277,8 @@ class AboutDialog : gtk.window.Window
       Set `logoIconName` property.
       Params:
         propval = A named icon to use as the logo for the about box.
-        
-        This property overrides the [gtk.about_dialog.AboutDialog.logo] property.
+          
+          This property overrides the [gtk.about_dialog.AboutDialog.logo] property.
   */
   @property void logoIconName(string propval)
   {
@@ -288,9 +288,9 @@ class AboutDialog : gtk.window.Window
   /**
       Get `programName` property.
       Returns: The name of the program.
-      
-      If this is not set, it defaults to the value returned by
-      `[glib.global.getApplicationName]`.
+        
+        If this is not set, it defaults to the value returned by
+        `[glib.global.getApplicationName]`.
   */
   @property string programName()
   {
@@ -301,9 +301,9 @@ class AboutDialog : gtk.window.Window
       Set `programName` property.
       Params:
         propval = The name of the program.
-        
-        If this is not set, it defaults to the value returned by
-        `[glib.global.getApplicationName]`.
+          
+          If this is not set, it defaults to the value returned by
+          `[glib.global.getApplicationName]`.
   */
   @property void programName(string propval)
   {
@@ -313,14 +313,14 @@ class AboutDialog : gtk.window.Window
   /**
       Get `systemInformation` property.
       Returns: Information about the system on which the program is running.
-      
-      This information is displayed in a separate page, therefore it is fine
-      to use a long multi-paragraph text. Note that the text should contain
-      the intended linebreaks.
-      
-      The text may contain links in this format `<http://www.some.place/>`
-      and email references in the form `<mail-to@some.body>`, and these will
-      be converted into clickable links.
+        
+        This information is displayed in a separate page, therefore it is fine
+        to use a long multi-paragraph text. Note that the text should contain
+        the intended linebreaks.
+        
+        The text may contain links in this format `<http://www.some.place/>`
+        and email references in the form `<mail-to@some.body>`, and these will
+        be converted into clickable links.
   */
   @property string systemInformation()
   {
@@ -331,14 +331,14 @@ class AboutDialog : gtk.window.Window
       Set `systemInformation` property.
       Params:
         propval = Information about the system on which the program is running.
-        
-        This information is displayed in a separate page, therefore it is fine
-        to use a long multi-paragraph text. Note that the text should contain
-        the intended linebreaks.
-        
-        The text may contain links in this format `<http://www.some.place/>`
-        and email references in the form `<mail-to@some.body>`, and these will
-        be converted into clickable links.
+          
+          This information is displayed in a separate page, therefore it is fine
+          to use a long multi-paragraph text. Note that the text should contain
+          the intended linebreaks.
+          
+          The text may contain links in this format `<http://www.some.place/>`
+          and email references in the form `<mail-to@some.body>`, and these will
+          be converted into clickable links.
   */
   @property void systemInformation(string propval)
   {
@@ -348,11 +348,11 @@ class AboutDialog : gtk.window.Window
   /**
       Get `translatorCredits` property.
       Returns: Credits to the translators.
-      
-      This string should be marked as translatable.
-      
-      The string may contain email addresses and URLs, which will be displayed
-      as links, see the introduction for more details.
+        
+        This string should be marked as translatable.
+        
+        The string may contain email addresses and URLs, which will be displayed
+        as links, see the introduction for more details.
   */
   @property string translatorCredits()
   {
@@ -363,11 +363,11 @@ class AboutDialog : gtk.window.Window
       Set `translatorCredits` property.
       Params:
         propval = Credits to the translators.
-        
-        This string should be marked as translatable.
-        
-        The string may contain email addresses and URLs, which will be displayed
-        as links, see the introduction for more details.
+          
+          This string should be marked as translatable.
+          
+          The string may contain email addresses and URLs, which will be displayed
+          as links, see the introduction for more details.
   */
   @property void translatorCredits(string propval)
   {
@@ -396,8 +396,8 @@ class AboutDialog : gtk.window.Window
   /**
       Get `website` property.
       Returns: The URL for the link to the website of the program.
-      
-      This should be a string starting with `http://` or `https://`.
+        
+        This should be a string starting with `http://` or `https://`.
   */
   @property string website()
   {
@@ -408,8 +408,8 @@ class AboutDialog : gtk.window.Window
       Set `website` property.
       Params:
         propval = The URL for the link to the website of the program.
-        
-        This should be a string starting with `http://` or `https://`.
+          
+          This should be a string starting with `http://` or `https://`.
   */
   @property void website(string propval)
   {
@@ -480,6 +480,7 @@ class AboutDialog : gtk.window.Window
       _tmppeople ~= s.toCString(No.Alloc);
     _tmppeople ~= null;
     const(char*)* _people = _tmppeople.ptr;
+
     gtk_about_dialog_add_credit_section(cast(GtkAboutDialog*)this._cPtr, _sectionName, _people);
   }
 
@@ -498,8 +499,8 @@ class AboutDialog : gtk.window.Window
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -522,8 +523,8 @@ class AboutDialog : gtk.window.Window
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -570,8 +571,8 @@ class AboutDialog : gtk.window.Window
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(No.Free);
@@ -730,6 +731,7 @@ class AboutDialog : gtk.window.Window
       _tmpartists ~= s.toCString(No.Alloc);
     _tmpartists ~= null;
     const(char*)* _artists = _tmpartists.ptr;
+
     gtk_about_dialog_set_artists(cast(GtkAboutDialog*)this._cPtr, _artists);
   }
 
@@ -747,6 +749,7 @@ class AboutDialog : gtk.window.Window
       _tmpauthors ~= s.toCString(No.Alloc);
     _tmpauthors ~= null;
     const(char*)* _authors = _tmpauthors.ptr;
+
     gtk_about_dialog_set_authors(cast(GtkAboutDialog*)this._cPtr, _authors);
   }
 
@@ -793,6 +796,7 @@ class AboutDialog : gtk.window.Window
       _tmpdocumenters ~= s.toCString(No.Alloc);
     _tmpdocumenters ~= null;
     const(char*)* _documenters = _tmpdocumenters.ptr;
+
     gtk_about_dialog_set_documenters(cast(GtkAboutDialog*)this._cPtr, _documenters);
   }
 
@@ -963,9 +967,9 @@ class AboutDialog : gtk.window.Window
       Connect to `ActivateLink` signal.
   
       Emitted every time a URL is activated.
-      
-      Applications may connect to it to override the default behaviour,
-      which is to call [gtk.file_launcher.FileLauncher.launch].
+        
+        Applications may connect to it to override the default behaviour,
+        which is to call [gtk.file_launcher.FileLauncher.launch].
   
       Params:
         callback = signal callback delegate or function to connect

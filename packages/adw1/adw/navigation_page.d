@@ -74,15 +74,15 @@ class NavigationPage : gtk.widget.Widget
   /**
       Get `canPop` property.
       Returns: Whether the page can be popped from navigation stack.
-      
-      Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
-      back button from `class@HeaderBar`.
-      
-      Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
-      action will still work.
-      
-      See `property@HeaderBar:show-back-button` for removing only the back
-      button, but not shortcuts.
+        
+        Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
+        back button from `class@HeaderBar`.
+        
+        Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
+        action will still work.
+        
+        See `property@HeaderBar:show-back-button` for removing only the back
+        button, but not shortcuts.
   */
   @property bool canPop()
   {
@@ -93,15 +93,15 @@ class NavigationPage : gtk.widget.Widget
       Set `canPop` property.
       Params:
         propval = Whether the page can be popped from navigation stack.
-        
-        Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
-        back button from `class@HeaderBar`.
-        
-        Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
-        action will still work.
-        
-        See `property@HeaderBar:show-back-button` for removing only the back
-        button, but not shortcuts.
+          
+          Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
+          back button from `class@HeaderBar`.
+          
+          Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
+          action will still work.
+          
+          See `property@HeaderBar:show-back-button` for removing only the back
+          button, but not shortcuts.
   */
   @property void canPop(bool propval)
   {
@@ -130,25 +130,6 @@ class NavigationPage : gtk.widget.Widget
   /**
       Get `tag` property.
       Returns: The page tag.
-      
-      The tag can be used to retrieve the page with
-      [adw.navigation_view.NavigationView.findPage], as well as with
-      [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
-      [adw.navigation_view.NavigationView.replaceWithTags].
-      
-      Tags must be unique within each `class@NavigationView`.
-      
-      The tag also must be set to use the `navigation.push` action.
-  */
-  @property string tag()
-  {
-    return getTag();
-  }
-
-  /**
-      Set `tag` property.
-      Params:
-        propval = The page tag.
         
         The tag can be used to retrieve the page with
         [adw.navigation_view.NavigationView.findPage], as well as with
@@ -159,6 +140,25 @@ class NavigationPage : gtk.widget.Widget
         
         The tag also must be set to use the `navigation.push` action.
   */
+  @property string tag()
+  {
+    return getTag();
+  }
+
+  /**
+      Set `tag` property.
+      Params:
+        propval = The page tag.
+          
+          The tag can be used to retrieve the page with
+          [adw.navigation_view.NavigationView.findPage], as well as with
+          [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
+          [adw.navigation_view.NavigationView.replaceWithTags].
+          
+          Tags must be unique within each `class@NavigationView`.
+          
+          The tag also must be set to use the `navigation.push` action.
+  */
   @property void tag(string propval)
   {
     return setTag(propval);
@@ -167,9 +167,9 @@ class NavigationPage : gtk.widget.Widget
   /**
       Get `title` property.
       Returns: The page title.
-      
-      It's displayed in `class@HeaderBar` instead of the window title, and used
-      as the tooltip on the next page's back button, as well as by screen reader.
+        
+        It's displayed in `class@HeaderBar` instead of the window title, and used
+        as the tooltip on the next page's back button, as well as by screen reader.
   */
   @property string title()
   {
@@ -180,9 +180,9 @@ class NavigationPage : gtk.widget.Widget
       Set `title` property.
       Params:
         propval = The page title.
-        
-        It's displayed in `class@HeaderBar` instead of the window title, and used
-        as the tooltip on the next page's back button, as well as by screen reader.
+          
+          It's displayed in `class@HeaderBar` instead of the window title, and used
+          as the tooltip on the next page's back button, as well as by screen reader.
   */
   @property void title(string propval)
   {
@@ -342,10 +342,10 @@ class NavigationPage : gtk.widget.Widget
       Connect to `Hidden` signal.
   
       Emitted when the navigation view transition has been completed and the page
-      is fully hidden.
-      
-      It will always be preceded by `signalNavigationPage::hiding` or
-      `signalNavigationPage::showing`.
+        is fully hidden.
+        
+        It will always be preceded by `signalNavigationPage::hiding` or
+        `signalNavigationPage::showing`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -383,10 +383,10 @@ class NavigationPage : gtk.widget.Widget
       Connect to `Hiding` signal.
   
       Emitted when the page starts hiding at the beginning of the navigation view
-      transition.
-      
-      It will always be followed by `signalNavigationPage::hidden` or
-      `signalNavigationPage::shown`.
+        transition.
+        
+        It will always be followed by `signalNavigationPage::hidden` or
+        `signalNavigationPage::shown`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -424,10 +424,10 @@ class NavigationPage : gtk.widget.Widget
       Connect to `Showing` signal.
   
       Emitted when the page shows at the beginning of the navigation view
-      transition.
-      
-      It will always be followed by `signalNavigationPage::shown` or
-      `signalNavigationPage::hidden`.
+        transition.
+        
+        It will always be followed by `signalNavigationPage::shown` or
+        `signalNavigationPage::hidden`.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -465,10 +465,10 @@ class NavigationPage : gtk.widget.Widget
       Connect to `Shown` signal.
   
       Emitted when the navigation view transition has been completed and the page
-      is fully shown.
-      
-      It will always be preceded by `signalNavigationPage::showing` or
-      `signalNavigationPage::hiding`.
+        is fully shown.
+        
+        It will always be preceded by `signalNavigationPage::showing` or
+        `signalNavigationPage::hiding`.
   
       Params:
         callback = signal callback delegate or function to connect

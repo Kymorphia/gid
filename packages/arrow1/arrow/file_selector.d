@@ -39,7 +39,7 @@ class FileSelector : gobject.object.ObjectWrap
   /**
       Get `allowNotFound` property.
       Returns: The behavior if `base_dir` isn't found in the file system.
-      If false, an error is returned.  If true, an empty selection is returned.
+        If false, an error is returned.  If true, an empty selection is returned.
   */
   @property bool allowNotFound()
   {
@@ -50,7 +50,7 @@ class FileSelector : gobject.object.ObjectWrap
       Set `allowNotFound` property.
       Params:
         propval = The behavior if `base_dir` isn't found in the file system.
-        If false, an error is returned.  If true, an empty selection is returned.
+          If false, an error is returned.  If true, an empty selection is returned.
   */
   @property void allowNotFound(bool propval)
   {
@@ -60,8 +60,8 @@ class FileSelector : gobject.object.ObjectWrap
   /**
       Get `baseDir` property.
       Returns: The directory in which to select files.
-      If the path exists but doesn't point to a directory, this should
-      be an error.
+        If the path exists but doesn't point to a directory, this should
+        be an error.
   */
   @property string baseDir()
   {
@@ -72,8 +72,8 @@ class FileSelector : gobject.object.ObjectWrap
       Set `baseDir` property.
       Params:
         propval = The directory in which to select files.
-        If the path exists but doesn't point to a directory, this should
-        be an error.
+          If the path exists but doesn't point to a directory, this should
+          be an error.
   */
   @property void baseDir(string propval)
   {

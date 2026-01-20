@@ -120,7 +120,6 @@ class Multipart : gmime.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)parent, No.Take), gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)part, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
     g_mime_multipart_foreach(cast(GMimeMultipart*)this._cPtr, _callbackCB, _callback);
   }

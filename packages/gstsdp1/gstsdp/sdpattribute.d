@@ -11,7 +11,7 @@ import gstsdp.types;
 */
 class SDPAttribute
 {
-  GstSDPAttribute cInstance;
+  GstSDPAttribute _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class SDPAttribute
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdpattribute.SDPAttribute");
 
-    cInstance = *cast(GstSDPAttribute*)ptr;
+    _cInstance = *cast(GstSDPAttribute*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class SDPAttribute
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

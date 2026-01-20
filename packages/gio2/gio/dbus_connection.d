@@ -112,7 +112,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   /**
       Get `capabilities` property.
       Returns: Flags from the #GDBusCapabilityFlags enumeration
-      representing connection features negotiated with the other peer.
+        representing connection features negotiated with the other peer.
   */
   @property gio.types.DBusCapabilityFlags capabilities()
   {
@@ -131,11 +131,11 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   /**
       Get `exitOnClose` property.
       Returns: A boolean specifying whether the process will be terminated (by
-      calling `raise(SIGTERM)`) if the connection is closed by the
-      remote peer.
-      
-      Note that #GDBusConnection objects returned by [gio.global.busGetFinish]
-      and [gio.global.busGetSync] will (usually) have this property set to true.
+        calling `raise(SIGTERM)`) if the connection is closed by the
+        remote peer.
+        
+        Note that #GDBusConnection objects returned by [gio.global.busGetFinish]
+        and [gio.global.busGetSync] will (usually) have this property set to true.
   */
   @property bool exitOnClose()
   {
@@ -146,11 +146,11 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Set `exitOnClose` property.
       Params:
         propval = A boolean specifying whether the process will be terminated (by
-        calling `raise(SIGTERM)`) if the connection is closed by the
-        remote peer.
-        
-        Note that #GDBusConnection objects returned by [gio.global.busGetFinish]
-        and [gio.global.busGetSync] will (usually) have this property set to true.
+          calling `raise(SIGTERM)`) if the connection is closed by the
+          remote peer.
+          
+          Note that #GDBusConnection objects returned by [gio.global.busGetFinish]
+          and [gio.global.busGetSync] will (usually) have this property set to true.
   */
   @property void exitOnClose(bool propval)
   {
@@ -160,7 +160,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   /**
       Get `uniqueName` property.
       Returns: The unique name as assigned by the message bus or null if the
-      connection is not open or not a message bus connection.
+        connection is not open or not a message bus connection.
   */
   @property string uniqueName()
   {
@@ -331,7 +331,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _guid = guid.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_new(stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, _guid, flags, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -378,7 +377,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _address = address.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_new_for_address(_address, flags, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -426,12 +424,11 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       auto _dlg = cast(gio.types.DBusMessageFilterFunction*)userData;
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(void*)message, Yes.Take), cast(bool)incoming);
-      GDBusMessage* _retval = cast(GDBusMessage*)_dretval._cPtr(Yes.Dup);
+      auto _retval = cast(GDBusMessage*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _filterFunctionCB = filterFunction ? &_filterFunctionCallback : null;
-
     uint _retval;
     auto _filterFunction = filterFunction ? freezeDelegate(cast(void*)&filterFunction) : null;
     GDestroyNotify _filterFunctionDestroyCB = filterFunction ? &thawDelegate : null;
@@ -514,7 +511,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
@@ -658,7 +654,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
@@ -786,7 +781,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_close(cast(GDBusConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -971,7 +965,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_flush(cast(GDBusConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1230,7 +1223,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)();
     }
     auto _userDataFreeFuncCB = userDataFreeFunc ? &_userDataFreeFuncCallback : null;
-
     uint _retval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     GError *_err;
@@ -1352,7 +1344,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_send_message_with_reply(cast(GDBusConnection*)this._cPtr, message ? cast(GDBusMessage*)message._cPtr(No.Dup) : null, flags, timeoutMsec, cast(uint*)&outSerial, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1542,7 +1533,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), _senderName, _objectPath, _interfaceName, _signalName, parameters ? new glib.variant.Variant(cast(void*)parameters, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     uint _retval;
     const(char)* _sender = sender.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
@@ -1655,23 +1645,23 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Connect to `Closed` signal.
   
       Emitted when the connection is closed.
-      
-      The cause of this event can be
-      
-      $(LIST
-        * If [gio.dbus_connection.DBusConnection.close] is called. In this case
-          remote_peer_vanished is set to false and error is null.
         
-        * If the remote peer closes the connection. In this case
-          remote_peer_vanished is set to true and error is set.
+        The cause of this event can be
         
-        * If the remote peer sends invalid or malformed data. In this
-          case remote_peer_vanished is set to false and error is set.
-      )
-        
-      Upon receiving this signal, you should give up your reference to
-      connection. You are guaranteed that this signal is emitted only
-      once.
+        $(LIST
+          * If [gio.dbus_connection.DBusConnection.close] is called. In this case
+            remote_peer_vanished is set to false and error is null.
+          
+          * If the remote peer closes the connection. In this case
+            remote_peer_vanished is set to true and error is set.
+          
+          * If the remote peer sends invalid or malformed data. In this
+            case remote_peer_vanished is set to false and error is set.
+        )
+          
+        Upon receiving this signal, you should give up your reference to
+        connection. You are guaranteed that this signal is emitted only
+        once.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1679,7 +1669,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
           $(D void callback(bool remotePeerVanished, glib.error.ErrorWrap error, gio.dbus_connection.DBusConnection dBusConnection))
   
           `remotePeerVanished` true if connection is closed because the
-              remote peer closed its end of the connection (optional)
+                remote peer closed its end of the connection (optional)
   
           `error` a #GError with more details about the event or null (optional)
   

@@ -48,6 +48,7 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
     foreach (s; paths)
       _tmppaths ~= s.toCString(No.Alloc);
     const(char*)* _paths = _tmppaths.ptr;
+
     _cretval = gaflight_path_descriptor_new(_paths, _nPaths);
     this(_cretval, Yes.Take);
   }
@@ -62,8 +63,8 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);

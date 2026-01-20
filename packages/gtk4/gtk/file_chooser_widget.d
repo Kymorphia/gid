@@ -111,13 +111,13 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `DesktopFolder` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser show the user's Desktop
-      folder in the file list.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>D</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser show the user's Desktop
+        folder in the file list.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>D</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -155,17 +155,17 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `DownFolder` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser go to a child of the
-      current folder in the file hierarchy. The subfolder that will
-      be used is displayed in the path bar widget of the file chooser.
-      For example, if the path bar is showing "/foo/bar/baz", with bar
-      currently displayed, then this will cause the file chooser to
-      switch to the "baz" subfolder.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>Down</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser go to a child of the
+        current folder in the file hierarchy. The subfolder that will
+        be used is displayed in the path bar widget of the file chooser.
+        For example, if the path bar is showing "/foo/bar/baz", with bar
+        currently displayed, then this will cause the file chooser to
+        switch to the "baz" subfolder.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>Down</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -203,13 +203,13 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `HomeFolder` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser show the user's home
-      folder in the file list.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>Home</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser show the user's home
+        folder in the file list.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>Home</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -247,18 +247,18 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `LocationPopup` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser show a "Location" prompt which
-      the user can use to manually type the name of the file he wishes to select.
-      
-      The default bindings for this signal are <kbd>Control</kbd>-<kbd>L</kbd>
-      with a path string of "" (the empty string). It is also bound to
-      <kbd>/</kbd> with a path string of "`/`" (a slash):  this lets you
-      type `/` and immediately type a path name. On Unix systems, this is
-      bound to <kbd>~</kbd> (tilde) with a path string of "~" itself for
-      access to home directories.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser show a "Location" prompt which
+        the user can use to manually type the name of the file he wishes to select.
+        
+        The default bindings for this signal are <kbd>Control</kbd>-<kbd>L</kbd>
+        with a path string of "" (the empty string). It is also bound to
+        <kbd>/</kbd> with a path string of "`/`" (a slash):  this lets you
+        type `/` and immediately type a path name. On Unix systems, this is
+        bound to <kbd>~</kbd> (tilde) with a path string of "~" itself for
+        access to home directories.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -303,13 +303,13 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `LocationPopupOnPaste` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser show a "Location" prompt
-      when the user pastes into a [gtk.file_chooser_widget.FileChooserWidget].
-      
-      The default binding for this signal is <kbd>Control</kbd>-<kbd>V</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser show a "Location" prompt
+        when the user pastes into a [gtk.file_chooser_widget.FileChooserWidget].
+        
+        The default binding for this signal is <kbd>Control</kbd>-<kbd>V</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -347,14 +347,14 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `LocationTogglePopup` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to toggle the visibility of a "Location" prompt
-      which the user can use to manually type the name of the file
-      he wishes to select.
-      
-      The default binding for this signal is <kbd>Control</kbd>-<kbd>L</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to toggle the visibility of a "Location" prompt
+        which the user can use to manually type the name of the file
+        he wishes to select.
+        
+        The default binding for this signal is <kbd>Control</kbd>-<kbd>L</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -392,12 +392,12 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `PlacesShortcut` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to move the focus to the places sidebar.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>P</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to move the focus to the places sidebar.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>P</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -435,19 +435,19 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `QuickBookmark` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser switch to the bookmark
-      specified in the bookmark_index parameter. For example, if
-      you have three bookmarks, you can pass 0, 1, 2 to this signal
-      to switch to each of them, respectively.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>1</kbd>,
-      <kbd>Alt</kbd>-<kbd>2</kbd>, etc. until <kbd>Alt</kbd>-<kbd>0</kbd>.
-      Note that in the default binding, that <kbd>Alt</kbd>-<kbd>1</kbd> is
-      actually defined to switch to the bookmark at index 0, and so on
-      successively.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser switch to the bookmark
+        specified in the bookmark_index parameter. For example, if
+        you have three bookmarks, you can pass 0, 1, 2 to this signal
+        to switch to each of them, respectively.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>1</kbd>,
+        <kbd>Alt</kbd>-<kbd>2</kbd>, etc. until <kbd>Alt</kbd>-<kbd>0</kbd>.
+        Note that in the default binding, that <kbd>Alt</kbd>-<kbd>1</kbd> is
+        actually defined to switch to the bookmark at index 0, and so on
+        successively.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -492,12 +492,12 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `RecentShortcut` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser show the Recent location.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>R</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser show the Recent location.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>R</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -535,12 +535,12 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `SearchShortcut` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser show the search entry.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>S</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser show the search entry.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>S</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -578,12 +578,12 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `ShowHidden` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser display hidden files.
-      
-      The default binding for this signal is <kbd>Control</kbd>-<kbd>H</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser display hidden files.
+        
+        The default binding for this signal is <kbd>Control</kbd>-<kbd>H</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -621,13 +621,13 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       Connect to `UpFolder` signal.
   
       Emitted when the user asks for it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      This is used to make the file chooser go to the parent
-      of the current folder in the file hierarchy.
-      
-      The default binding for this signal is <kbd>Alt</kbd>-<kbd>Up</kbd>.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        This is used to make the file chooser go to the parent
+        of the current folder in the file hierarchy.
+        
+        The default binding for this signal is <kbd>Alt</kbd>-<kbd>Up</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

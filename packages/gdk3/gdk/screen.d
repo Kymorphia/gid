@@ -294,9 +294,7 @@ class Screen : gobject.object.ObjectWrap
   */
   void getMonitorGeometry(int monitorNum, out gdk.rectangle.Rectangle dest)
   {
-    GdkRectangle _dest;
-    gdk_screen_get_monitor_geometry(cast(GdkScreen*)this._cPtr, monitorNum, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
+    gdk_screen_get_monitor_geometry(cast(GdkScreen*)this._cPtr, monitorNum, cast(GdkRectangle*)&dest);
   }
 
   /**
@@ -399,9 +397,7 @@ class Screen : gobject.object.ObjectWrap
   */
   void getMonitorWorkarea(int monitorNum, out gdk.rectangle.Rectangle dest)
   {
-    GdkRectangle _dest;
-    gdk_screen_get_monitor_workarea(cast(GdkScreen*)this._cPtr, monitorNum, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
+    gdk_screen_get_monitor_workarea(cast(GdkScreen*)this._cPtr, monitorNum, cast(GdkRectangle*)&dest);
   }
 
   /**
@@ -693,7 +689,7 @@ class Screen : gobject.object.ObjectWrap
       Connect to `CompositedChanged` signal.
   
       The ::composited-changed signal is emitted when the composited
-      status of the screen changes
+        status of the screen changes
   
       Params:
         callback = signal callback delegate or function to connect
@@ -731,10 +727,10 @@ class Screen : gobject.object.ObjectWrap
       Connect to `MonitorsChanged` signal.
   
       The ::monitors-changed signal is emitted when the number, size
-      or position of the monitors attached to the screen change.
-      
-      Only for X11 and OS X for now. A future implementation for Win32
-      may be a possibility.
+        or position of the monitors attached to the screen change.
+        
+        Only for X11 and OS X for now. A future implementation for Win32
+        may be a possibility.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -772,7 +768,7 @@ class Screen : gobject.object.ObjectWrap
       Connect to `SizeChanged` signal.
   
       The ::size-changed signal is emitted when the pixel width or
-      height of a screen changes.
+        height of a screen changes.
   
       Params:
         callback = signal callback delegate or function to connect

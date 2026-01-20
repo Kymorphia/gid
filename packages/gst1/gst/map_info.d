@@ -17,7 +17,7 @@ import gst.types;
 */
 class MapInfo
 {
-  GstMapInfo cInstance;
+  GstMapInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -25,7 +25,7 @@ class MapInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.map_info.MapInfo");
 
-    cInstance = *cast(GstMapInfo*)ptr;
+    _cInstance = *cast(GstMapInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -34,7 +34,7 @@ class MapInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

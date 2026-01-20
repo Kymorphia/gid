@@ -99,9 +99,9 @@ class AspectFrame : gtk.widget.Widget
   /**
       Get `ratio` property.
       Returns: The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
-      
-      This property is only used if
-      `property@Gtk.AspectFrame:obey-child` is set to false.
+        
+        This property is only used if
+        `property@Gtk.AspectFrame:obey-child` is set to false.
   */
   @property float ratio()
   {
@@ -112,9 +112,9 @@ class AspectFrame : gtk.widget.Widget
       Set `ratio` property.
       Params:
         propval = The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
-        
-        This property is only used if
-        `property@Gtk.AspectFrame:obey-child` is set to false.
+          
+          This property is only used if
+          `property@Gtk.AspectFrame:obey-child` is set to false.
   */
   @property void ratio(float propval)
   {

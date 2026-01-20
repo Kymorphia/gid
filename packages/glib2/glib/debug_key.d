@@ -12,7 +12,7 @@ import glib.types;
 */
 class DebugKey
 {
-  GDebugKey cInstance;
+  GDebugKey _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class DebugKey
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.debug_key.DebugKey");
 
-    cInstance = *cast(GDebugKey*)ptr;
+    _cInstance = *cast(GDebugKey*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class DebugKey
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

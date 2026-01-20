@@ -11,7 +11,7 @@ import harfbuzz.types;
 */
 class OtNameEntry
 {
-  hb_ot_name_entry_t cInstance;
+  hb_ot_name_entry_t _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class OtNameEntry
     if (!ptr)
       throw new GidConstructException("Null instance pointer for harfbuzz.ot_name_entry.OtNameEntry");
 
-    cInstance = *cast(hb_ot_name_entry_t*)ptr;
+    _cInstance = *cast(hb_ot_name_entry_t*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,7 +28,7 @@ class OtNameEntry
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -57,15 +57,5 @@ class OtNameEntry
   @property harfbuzz.types.Language language()
   {
     return (cast(hb_ot_name_entry_t*)this._cPtr).language;
-  }
-
-  /**
-      Set `language` field.
-      Params:
-        propval = language
-  */
-  @property void language(harfbuzz.types.Language propval)
-  {
-    (cast(hb_ot_name_entry_t*)this._cPtr).language = propval;
   }
 }

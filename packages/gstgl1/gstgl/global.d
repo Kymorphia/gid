@@ -44,7 +44,7 @@ gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMetaFull(gstgl.glcontext.GLContext c
 gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationParams(gst.structure.Structure config)
 {
   GstGLAllocationParams* _cretval;
-  _cretval = gst_buffer_pool_config_get_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
+  _cretval = gst_buffer_pool_config_get_gl_allocation_params(cast(GstStructure*)&config);
   auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -59,7 +59,7 @@ gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationPara
 uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
 {
   uint _retval;
-  _retval = gst_buffer_pool_config_get_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
+  _retval = gst_buffer_pool_config_get_gl_min_free_queue_size(cast(GstStructure*)&config);
   return _retval;
 }
 
@@ -72,7 +72,7 @@ uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
 */
 void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl.glallocation_params.GLAllocationParams params = null)
 {
-  gst_buffer_pool_config_set_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, params ? cast(const(GstGLAllocationParams)*)params._cPtr(No.Dup) : null);
+  gst_buffer_pool_config_set_gl_allocation_params(cast(GstStructure*)&config, params ? cast(const(GstGLAllocationParams)*)params._cPtr(No.Dup) : null);
 }
 
 /**
@@ -94,7 +94,7 @@ void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl
 */
 void bufferPoolConfigSetGlMinFreeQueueSize(gst.structure.Structure config, uint queueSize)
 {
-  gst_buffer_pool_config_set_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, queueSize);
+  gst_buffer_pool_config_set_gl_min_free_queue_size(cast(GstStructure*)&config, queueSize);
 }
 
 /** */
@@ -198,7 +198,7 @@ void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_met
 size_t glGetPlaneDataSize(gstvideo.video_info.VideoInfo info, gstvideo.video_alignment.VideoAlignment align_, uint plane)
 {
   size_t _retval;
-  _retval = gst_gl_get_plane_data_size(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, align_ ? cast(const(GstVideoAlignment)*)align_._cPtr : null, plane);
+  _retval = gst_gl_get_plane_data_size(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&align_, plane);
   return _retval;
 }
 
@@ -206,7 +206,7 @@ size_t glGetPlaneDataSize(gstvideo.video_info.VideoInfo info, gstvideo.video_ali
 size_t glGetPlaneStart(gstvideo.video_info.VideoInfo info, gstvideo.video_alignment.VideoAlignment valign, uint plane)
 {
   size_t _retval;
-  _retval = gst_gl_get_plane_start(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, valign ? cast(const(GstVideoAlignment)*)valign._cPtr : null, plane);
+  _retval = gst_gl_get_plane_start(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&valign, plane);
   return _retval;
 }
 

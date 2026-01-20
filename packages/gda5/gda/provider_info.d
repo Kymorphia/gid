@@ -12,7 +12,7 @@ import gid.gid;
 */
 class ProviderInfo
 {
-  GdaProviderInfo cInstance;
+  GdaProviderInfo _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class ProviderInfo
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.provider_info.ProviderInfo");
 
-    cInstance = *cast(GdaProviderInfo*)ptr;
+    _cInstance = *cast(GdaProviderInfo*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class ProviderInfo
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

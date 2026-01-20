@@ -14,7 +14,7 @@ import glib.types;
 */
 class AsyncQueue
 {
-  GAsyncQueue* cInstancePtr;
+  GAsyncQueue* _cInstancePtr;
   bool owned;
 
   /** */
@@ -23,7 +23,7 @@ class AsyncQueue
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.async_queue.AsyncQueue");
 
-    cInstancePtr = cast(GAsyncQueue*)ptr;
+    _cInstancePtr = cast(GAsyncQueue*)ptr;
 
     owned = take;
   }
@@ -31,13 +31,13 @@ class AsyncQueue
   ~this()
   {
     if (owned)
-      g_async_queue_unref(cInstancePtr);
+      g_async_queue_unref(_cInstancePtr);
   }
 
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -187,7 +187,6 @@ class AsyncQueue
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_async_queue_push_sorted(cast(GAsyncQueue*)this._cPtr, data, _funcCB, _func);
   }
@@ -223,7 +222,6 @@ class AsyncQueue
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_async_queue_push_sorted_unlocked(cast(GAsyncQueue*)this._cPtr, data, _funcCB, _func);
   }
@@ -322,7 +320,6 @@ class AsyncQueue
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_async_queue_sort(cast(GAsyncQueue*)this._cPtr, _funcCB, _func);
   }
@@ -351,7 +348,6 @@ class AsyncQueue
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_async_queue_sort_unlocked(cast(GAsyncQueue*)this._cPtr, _funcCB, _func);
   }
@@ -374,7 +370,7 @@ class AsyncQueue
   */
   void* timedPop(glib.time_val.TimeVal endTime)
   {
-    auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)this._cPtr, endTime ? cast(GTimeVal*)endTime._cPtr : null);
+    auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)this._cPtr, cast(GTimeVal*)&endTime);
     return _retval;
   }
 
@@ -398,7 +394,7 @@ class AsyncQueue
   */
   void* timedPopUnlocked(glib.time_val.TimeVal endTime)
   {
-    auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)this._cPtr, endTime ? cast(GTimeVal*)endTime._cPtr : null);
+    auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)this._cPtr, cast(GTimeVal*)&endTime);
     return _retval;
   }
 

@@ -62,10 +62,10 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `accumulativeMargin` property.
       Returns: Whether the margins accumulate or override each other.
-      
-      When set to true the margins of this tag are added to the margins
-      of any other non-accumulative margins present. When set to false
-      the margins override one another (the default).
+        
+        When set to true the margins of this tag are added to the margins
+        of any other non-accumulative margins present. When set to false
+        the margins override one another (the default).
   */
   @property bool accumulativeMargin()
   {
@@ -76,10 +76,10 @@ class TextTag : gobject.object.ObjectWrap
       Set `accumulativeMargin` property.
       Params:
         propval = Whether the margins accumulate or override each other.
-        
-        When set to true the margins of this tag are added to the margins
-        of any other non-accumulative margins present. When set to false
-        the margins override one another (the default).
+          
+          When set to true the margins of this tag are added to the margins
+          of any other non-accumulative margins present. When set to false
+          the margins override one another (the default).
   */
   @property void accumulativeMargin(bool propval)
   {
@@ -130,7 +130,7 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `backgroundFullHeight` property.
       Returns: Whether the background color fills the entire line height
-      or only the height of the tagged characters.
+        or only the height of the tagged characters.
   */
   @property bool backgroundFullHeight()
   {
@@ -141,7 +141,7 @@ class TextTag : gobject.object.ObjectWrap
       Set `backgroundFullHeight` property.
       Params:
         propval = Whether the background color fills the entire line height
-        or only the height of the tagged characters.
+          or only the height of the tagged characters.
   */
   @property void backgroundFullHeight(bool propval)
   {
@@ -244,9 +244,9 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `fallback` property.
       Returns: Whether font fallback is enabled.
-      
-      When set to true, other fonts will be substituted
-      where the current font is missing glyphs.
+        
+        When set to true, other fonts will be substituted
+        where the current font is missing glyphs.
   */
   @property bool fallback()
   {
@@ -257,9 +257,9 @@ class TextTag : gobject.object.ObjectWrap
       Set `fallback` property.
       Params:
         propval = Whether font fallback is enabled.
-        
-        When set to true, other fonts will be substituted
-        where the current font is missing glyphs.
+          
+          When set to true, other fonts will be substituted
+          where the current font is missing glyphs.
   */
   @property void fallback(bool propval)
   {
@@ -312,9 +312,9 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `font` property.
       Returns: Font description as string, e.g. \"Sans Italic 12\".
-      
-      Note that the initial value of this property depends on
-      the internals of [pango.font_description.FontDescription].
+        
+        Note that the initial value of this property depends on
+        the internals of [pango.font_description.FontDescription].
   */
   @property string font()
   {
@@ -325,9 +325,9 @@ class TextTag : gobject.object.ObjectWrap
       Set `font` property.
       Params:
         propval = Font description as string, e.g. \"Sans Italic 12\".
-        
-        Note that the initial value of this property depends on
-        the internals of [pango.font_description.FontDescription].
+          
+          Note that the initial value of this property depends on
+          the internals of [pango.font_description.FontDescription].
   */
   @property void font(string propval)
   {
@@ -428,10 +428,10 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `indent` property.
       Returns: Amount to indent the paragraph, in pixels.
-      
-      A negative value of indent will produce a hanging indentation.
-      That is, the first line will have the full width, and subsequent
-      lines will be indented by the absolute value of indent.
+        
+        A negative value of indent will produce a hanging indentation.
+        That is, the first line will have the full width, and subsequent
+        lines will be indented by the absolute value of indent.
   */
   @property int indent()
   {
@@ -442,10 +442,10 @@ class TextTag : gobject.object.ObjectWrap
       Set `indent` property.
       Params:
         propval = Amount to indent the paragraph, in pixels.
-        
-        A negative value of indent will produce a hanging indentation.
-        That is, the first line will have the full width, and subsequent
-        lines will be indented by the absolute value of indent.
+          
+          A negative value of indent will produce a hanging indentation.
+          That is, the first line will have the full width, and subsequent
+          lines will be indented by the absolute value of indent.
   */
   @property void indent(int propval)
   {
@@ -498,10 +498,10 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `invisible` property.
       Returns: Whether this text is hidden.
-      
-      Note that there may still be problems with the support for invisible
-      text, in particular when navigating programmatically inside a buffer
-      containing invisible segments.
+        
+        Note that there may still be problems with the support for invisible
+        text, in particular when navigating programmatically inside a buffer
+        containing invisible segments.
   */
   @property bool invisible()
   {
@@ -512,10 +512,10 @@ class TextTag : gobject.object.ObjectWrap
       Set `invisible` property.
       Params:
         propval = Whether this text is hidden.
-        
-        Note that there may still be problems with the support for invisible
-        text, in particular when navigating programmatically inside a buffer
-        containing invisible segments.
+          
+          Note that there may still be problems with the support for invisible
+          text, in particular when navigating programmatically inside a buffer
+          containing invisible segments.
   */
   @property void invisible(bool propval)
   {
@@ -568,12 +568,12 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `language` property.
       Returns: The language this text is in, as an ISO code.
-      
-      Pango can use this as a hint when rendering the text.
-      If not set, an appropriate default will be used.
-      
-      Note that the initial value of this property depends
-      on the current locale, see also `func@Gtk.get_default_language`.
+        
+        Pango can use this as a hint when rendering the text.
+        If not set, an appropriate default will be used.
+        
+        Note that the initial value of this property depends
+        on the current locale, see also `func@Gtk.get_default_language`.
   */
   @property string language()
   {
@@ -584,12 +584,12 @@ class TextTag : gobject.object.ObjectWrap
       Set `language` property.
       Params:
         propval = The language this text is in, as an ISO code.
-        
-        Pango can use this as a hint when rendering the text.
-        If not set, an appropriate default will be used.
-        
-        Note that the initial value of this property depends
-        on the current locale, see also `func@Gtk.get_default_language`.
+          
+          Pango can use this as a hint when rendering the text.
+          If not set, an appropriate default will be used.
+          
+          Note that the initial value of this property depends
+          on the current locale, see also `func@Gtk.get_default_language`.
   */
   @property void language(string propval)
   {
@@ -723,8 +723,8 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `overlineRgba` property.
       Returns: This property modifies the color of overlines.
-      
-      If not set, overlines will use the foreground color.
+        
+        If not set, overlines will use the foreground color.
   */
   @property gdk.rgba.RGBA overlineRgba()
   {
@@ -735,8 +735,8 @@ class TextTag : gobject.object.ObjectWrap
       Set `overlineRgba` property.
       Params:
         propval = This property modifies the color of overlines.
-        
-        If not set, overlines will use the foreground color.
+          
+          If not set, overlines will use the foreground color.
   */
   @property void overlineRgba(gdk.rgba.RGBA propval)
   {
@@ -935,8 +935,8 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `rise` property.
       Returns: Offset of text above the baseline, in Pango units.
-      
-      Negative values go below the baseline.
+        
+        Negative values go below the baseline.
   */
   @property int rise()
   {
@@ -947,8 +947,8 @@ class TextTag : gobject.object.ObjectWrap
       Set `rise` property.
       Params:
         propval = Offset of text above the baseline, in Pango units.
-        
-        Negative values go below the baseline.
+          
+          Negative values go below the baseline.
   */
   @property void rise(int propval)
   {
@@ -970,9 +970,9 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `scale` property.
       Returns: Font size as a scale factor relative to the default font size.
-      
-      This properly adapts to theme changes, etc. so is recommended.
-      Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
+        
+        This properly adapts to theme changes, etc. so is recommended.
+        Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
   */
   @property double scale()
   {
@@ -983,9 +983,9 @@ class TextTag : gobject.object.ObjectWrap
       Set `scale` property.
       Params:
         propval = Font size as a scale factor relative to the default font size.
-        
-        This properly adapts to theme changes, etc. so is recommended.
-        Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
+          
+          This properly adapts to theme changes, etc. so is recommended.
+          Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
   */
   @property void scale(double propval)
   {
@@ -1007,8 +1007,8 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `sentence` property.
       Returns: Whether this tag represents a single sentence.
-      
-      This affects cursor movement.
+        
+        This affects cursor movement.
   */
   @property bool sentence()
   {
@@ -1019,8 +1019,8 @@ class TextTag : gobject.object.ObjectWrap
       Set `sentence` property.
       Params:
         propval = Whether this tag represents a single sentence.
-        
-        This affects cursor movement.
+          
+          This affects cursor movement.
   */
   @property void sentence(bool propval)
   {
@@ -1173,8 +1173,8 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `strikethroughRgba` property.
       Returns: This property modifies the color of strikeouts.
-      
-      If not set, strikeouts will use the foreground color.
+        
+        If not set, strikeouts will use the foreground color.
   */
   @property gdk.rgba.RGBA strikethroughRgba()
   {
@@ -1185,8 +1185,8 @@ class TextTag : gobject.object.ObjectWrap
       Set `strikethroughRgba` property.
       Params:
         propval = This property modifies the color of strikeouts.
-        
-        If not set, strikeouts will use the foreground color.
+          
+          If not set, strikeouts will use the foreground color.
   */
   @property void strikethroughRgba(gdk.rgba.RGBA propval)
   {
@@ -1339,12 +1339,12 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `underlineRgba` property.
       Returns: This property modifies the color of underlines.
-      
-      If not set, underlines will use the foreground color.
-      
-      If [gtk.text_tag.TextTag.underline] is set to [pango.types.Underline.Error],
-      an alternate color may be applied instead of the foreground. Setting
-      this property will always override those defaults.
+        
+        If not set, underlines will use the foreground color.
+        
+        If [gtk.text_tag.TextTag.underline] is set to [pango.types.Underline.Error],
+        an alternate color may be applied instead of the foreground. Setting
+        this property will always override those defaults.
   */
   @property gdk.rgba.RGBA underlineRgba()
   {
@@ -1355,12 +1355,12 @@ class TextTag : gobject.object.ObjectWrap
       Set `underlineRgba` property.
       Params:
         propval = This property modifies the color of underlines.
-        
-        If not set, underlines will use the foreground color.
-        
-        If [gtk.text_tag.TextTag.underline] is set to [pango.types.Underline.Error],
-        an alternate color may be applied instead of the foreground. Setting
-        this property will always override those defaults.
+          
+          If not set, underlines will use the foreground color.
+          
+          If [gtk.text_tag.TextTag.underline] is set to [pango.types.Underline.Error],
+          an alternate color may be applied instead of the foreground. Setting
+          this property will always override those defaults.
   */
   @property void underlineRgba(gdk.rgba.RGBA propval)
   {
@@ -1463,8 +1463,8 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `word` property.
       Returns: Whether this tag represents a single word.
-      
-      This affects line breaks and cursor movement.
+        
+        This affects line breaks and cursor movement.
   */
   @property bool word()
   {
@@ -1475,8 +1475,8 @@ class TextTag : gobject.object.ObjectWrap
       Set `word` property.
       Params:
         propval = Whether this tag represents a single word.
-        
-        This affects line breaks and cursor movement.
+          
+          This affects line breaks and cursor movement.
   */
   @property void word(bool propval)
   {
@@ -1498,7 +1498,7 @@ class TextTag : gobject.object.ObjectWrap
   /**
       Get `wrapMode` property.
       Returns: Whether to wrap lines never, at word boundaries, or
-      at character boundaries.
+        at character boundaries.
   */
   @property gtk.types.WrapMode wrapMode()
   {
@@ -1509,7 +1509,7 @@ class TextTag : gobject.object.ObjectWrap
       Set `wrapMode` property.
       Params:
         propval = Whether to wrap lines never, at word boundaries, or
-        at character boundaries.
+          at character boundaries.
   */
   @property void wrapMode(gtk.types.WrapMode propval)
   {

@@ -87,7 +87,7 @@ template FileChooserT()
   /**
       Get `createFolders` property.
       Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
-      will offer the user to create new folders.
+        will offer the user to create new folders.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -100,7 +100,7 @@ template FileChooserT()
       Set `createFolders` property.
       Params:
         propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
-        will offer the user to create new folders.
+          will offer the user to create new folders.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -135,10 +135,10 @@ template FileChooserT()
   /**
       Get `filters` property.
       Returns: A [gio.list_model.ListModel] containing the filters that have been
-      added with [gtk.file_chooser.FileChooser.addFilter].
-      
-      The returned object should not be modified. It may
-      or may not be updated for later changes.
+        added with [gtk.file_chooser.FileChooser.addFilter].
+        
+        The returned object should not be modified. It may
+        or may not be updated for later changes.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -173,10 +173,10 @@ template FileChooserT()
   /**
       Get `shortcutFolders` property.
       Returns: A [gio.list_model.ListModel] containing the shortcut folders that have been
-      added with [gtk.file_chooser.FileChooser.addShortcutFolder].
-      
-      The returned object should not be modified. It may
-      or may not be updated for later changes.
+        added with [gtk.file_chooser.FileChooser.addShortcutFolder].
+        
+        The returned object should not be modified. It may
+        or may not be updated for later changes.
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -218,6 +218,7 @@ template FileChooserT()
       _tmpoptionLabels ~= s.toCString(No.Alloc);
     _tmpoptionLabels ~= null;
     const(char*)* _optionLabels = _tmpoptionLabels.ptr;
+
     gtk_file_chooser_add_choice(cast(GtkFileChooser*)this._cPtr, _id, _label, _options, _optionLabels);
   }
 

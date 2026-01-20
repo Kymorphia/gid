@@ -154,7 +154,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   /**
       Get `implicitTrailingNewline` property.
       Returns: Whether the buffer has an implicit trailing newline. See
-      [gtksource.buffer.Buffer.setImplicitTrailingNewline].
+        [gtksource.buffer.Buffer.setImplicitTrailingNewline].
   */
   @property bool implicitTrailingNewline()
   {
@@ -165,7 +165,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Set `implicitTrailingNewline` property.
       Params:
         propval = Whether the buffer has an implicit trailing newline. See
-        [gtksource.buffer.Buffer.setImplicitTrailingNewline].
+          [gtksource.buffer.Buffer.setImplicitTrailingNewline].
   */
   @property void implicitTrailingNewline(bool propval)
   {
@@ -187,10 +187,10 @@ class Buffer : gtk.text_buffer.TextBuffer
   /**
       Get `loading` property.
       Returns: The "loading" property denotes that a [gtksource.file_loader.FileLoader] is
-      currently loading the buffer.
-      
-      Applications may want to use this setting to avoid doing work
-      while the buffer is loading such as spellchecking.
+        currently loading the buffer.
+        
+        Applications may want to use this setting to avoid doing work
+        while the buffer is loading such as spellchecking.
   */
   @property bool loading()
   {
@@ -200,8 +200,8 @@ class Buffer : gtk.text_buffer.TextBuffer
   /**
       Get `styleScheme` property.
       Returns: Style scheme. It contains styles for syntax highlighting, optionally
-      foreground, background, cursor color, current line color, and matching
-      brackets style.
+        foreground, background, cursor color, current line color, and matching
+        brackets style.
   */
   @property gtksource.style_scheme.StyleScheme styleScheme()
   {
@@ -212,8 +212,8 @@ class Buffer : gtk.text_buffer.TextBuffer
       Set `styleScheme` property.
       Params:
         propval = Style scheme. It contains styles for syntax highlighting, optionally
-        foreground, background, cursor color, current line color, and matching
-        brackets style.
+          foreground, background, cursor color, current line color, and matching
+          brackets style.
   */
   @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
   {
@@ -265,11 +265,11 @@ class Buffer : gtk.text_buffer.TextBuffer
         category = category to search for, or null
       Returns: whether `iter` was moved.
   */
-  bool backwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null)
+  bool backwardIterToSourceMark(ref gtk.text_iter.TextIter iter, string category = null)
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
-    _retval = cast(bool)gtk_source_buffer_backward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
+    _retval = cast(bool)gtk_source_buffer_backward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, cast(GtkTextIter*)&iter, _category);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void changeCase(gtksource.types.ChangeCaseType caseType, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_buffer_change_case(cast(GtkSourceBuffer*)this._cPtr, caseType, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    gtk_source_buffer_change_case(cast(GtkSourceBuffer*)this._cPtr, caseType, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
   }
 
   /**
@@ -317,7 +317,7 @@ class Buffer : gtk.text_buffer.TextBuffer
     GtkSourceMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_buffer_create_source_mark(cast(GtkSourceBuffer*)this._cPtr, _name, _category, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
+    _cretval = gtk_source_buffer_create_source_mark(cast(GtkSourceBuffer*)this._cPtr, _name, _category, cast(const(GtkTextIter)*)&where);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
@@ -337,7 +337,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void ensureHighlight(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_buffer_ensure_highlight(cast(GtkSourceBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
+    gtk_source_buffer_ensure_highlight(cast(GtkSourceBuffer*)this._cPtr, cast(const(GtkTextIter)*)&start, cast(const(GtkTextIter)*)&end);
   }
 
   /**
@@ -352,11 +352,11 @@ class Buffer : gtk.text_buffer.TextBuffer
         category = category to search for, or null
       Returns: whether `iter` was moved.
   */
-  bool forwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null)
+  bool forwardIterToSourceMark(ref gtk.text_iter.TextIter iter, string category = null)
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
-    _retval = cast(bool)gtk_source_buffer_forward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
+    _retval = cast(bool)gtk_source_buffer_forward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, cast(GtkTextIter*)&iter, _category);
     return _retval;
   }
 
@@ -374,14 +374,14 @@ class Buffer : gtk.text_buffer.TextBuffer
   string[] getContextClassesAtIter(gtk.text_iter.TextIter iter)
   {
     char** _cretval;
-    _cretval = gtk_source_buffer_get_context_classes_at_iter(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    _cretval = gtk_source_buffer_get_context_classes_at_iter(cast(GtkSourceBuffer*)this._cPtr, cast(const(GtkTextIter)*)&iter);
     string[] _retval;
 
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -461,7 +461,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     GSList* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_buffer_get_source_marks_at_iter(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
+    _cretval = gtk_source_buffer_get_source_marks_at_iter(cast(GtkSourceBuffer*)this._cPtr, cast(GtkTextIter*)&iter, _category);
     auto _retval = gSListToD!(gtksource.mark.Mark, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -516,11 +516,11 @@ class Buffer : gtk.text_buffer.TextBuffer
         contextClass = the context class.
       Returns: whether we found a context class toggle before iter
   */
-  bool iterBackwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass)
+  bool iterBackwardToContextClassToggle(ref gtk.text_iter.TextIter iter, string contextClass)
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
-    _retval = cast(bool)gtk_source_buffer_iter_backward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _contextClass);
+    _retval = cast(bool)gtk_source_buffer_iter_backward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, cast(GtkTextIter*)&iter, _contextClass);
     return _retval;
   }
 
@@ -539,11 +539,11 @@ class Buffer : gtk.text_buffer.TextBuffer
         contextClass = the context class.
       Returns: whether we found a context class toggle after iter
   */
-  bool iterForwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass)
+  bool iterForwardToContextClassToggle(ref gtk.text_iter.TextIter iter, string contextClass)
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
-    _retval = cast(bool)gtk_source_buffer_iter_forward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _contextClass);
+    _retval = cast(bool)gtk_source_buffer_iter_forward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, cast(GtkTextIter*)&iter, _contextClass);
     return _retval;
   }
 
@@ -561,7 +561,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
-    _retval = cast(bool)gtk_source_buffer_iter_has_context_class(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, _contextClass);
+    _retval = cast(bool)gtk_source_buffer_iter_has_context_class(cast(GtkSourceBuffer*)this._cPtr, cast(const(GtkTextIter)*)&iter, _contextClass);
     return _retval;
   }
 
@@ -574,7 +574,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void joinLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_buffer_join_lines(cast(GtkSourceBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    gtk_source_buffer_join_lines(cast(GtkSourceBuffer*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
   }
 
   /**
@@ -590,7 +590,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   void removeSourceMarks(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, string category = null)
   {
     const(char)* _category = category.toCString(No.Alloc);
-    gtk_source_buffer_remove_source_marks(cast(GtkSourceBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, _category);
+    gtk_source_buffer_remove_source_marks(cast(GtkSourceBuffer*)this._cPtr, cast(const(GtkTextIter)*)&start, cast(const(GtkTextIter)*)&end, _category);
   }
 
   /**
@@ -704,20 +704,20 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void sortLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.SortFlags flags, int column)
   {
-    gtk_source_buffer_sort_lines(cast(GtkSourceBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, flags, column);
+    gtk_source_buffer_sort_lines(cast(GtkSourceBuffer*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end, flags, column);
   }
 
   /**
       Connect to `BracketMatched` signal.
   
       iter is set to a valid iterator pointing to the matching bracket
-      if state is [gtksource.types.BracketMatchType.Found]. Otherwise iter is
-      meaningless.
-      
-      The signal is emitted only when the state changes, typically when
-      the cursor moves.
-      
-      A use-case for this signal is to show messages in a [gtk.statusbar.Statusbar].
+        if state is [gtksource.types.BracketMatchType.Found]. Otherwise iter is
+        meaningless.
+        
+        The signal is emitted only when the state changes, typically when
+        the cursor moves.
+        
+        A use-case for this signal is to show messages in a [gtk.statusbar.Statusbar].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -806,8 +806,8 @@ class Buffer : gtk.text_buffer.TextBuffer
       Connect to `HighlightUpdated` signal.
   
       The ::highlight-updated signal is emitted when the syntax
-      highlighting and [context classes](./class.Buffer.html#context-classes) are updated in a
-      certain region of the buffer.
+        highlighting and [context classes](./class.Buffer.html#context-classes) are updated in a
+        certain region of the buffer.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -859,7 +859,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Connect to `SourceMarkUpdated` signal.
   
       The ::source-mark-updated signal is emitted each time
-      a mark is added to, moved or removed from the buffer.
+        a mark is added to, moved or removed from the buffer.
   
       Params:
         callback = signal callback delegate or function to connect

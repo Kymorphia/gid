@@ -54,7 +54,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
   /**
       Get `baseNameTemplate` property.
       Returns: Template string used to generate fragment base names. {i} will be
-      replaced by an auto incremented integer.
+        replaced by an auto incremented integer.
   */
   @property string baseNameTemplate()
   {
@@ -65,7 +65,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
       Set `baseNameTemplate` property.
       Params:
         propval = Template string used to generate fragment base names. {i} will be
-        replaced by an auto incremented integer.
+          replaced by an auto incremented integer.
   */
   @property void baseNameTemplate(string propval)
   {

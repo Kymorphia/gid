@@ -24,7 +24,7 @@ class AccessibleList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -64,6 +64,7 @@ class AccessibleList : gobject.boxed.Boxed
     foreach (obj; accessibles)
       _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
     GtkAccessible** _accessibles = _tmpaccessibles.ptr;
+
     _cretval = gtk_accessible_list_new_from_array(_accessibles, _nAccessibles);
     auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

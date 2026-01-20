@@ -215,12 +215,12 @@ class Seat : gobject.object.ObjectWrap
       Connect to `ToolAdded` signal.
   
       Emitted whenever a new tool is made known to the seat.
-      
-      The tool may later be assigned to a device (i.e. on
-      proximity with a tablet). The device will emit the
-      `signalGdk.Device::tool-changed` signal accordingly.
-      
-      A same tool may be used by several devices.
+        
+        The tool may later be assigned to a device (i.e. on
+        proximity with a tablet). The device will emit the
+        `signalGdk.Device::tool-changed` signal accordingly.
+        
+        A same tool may be used by several devices.
   
       Params:
         callback = signal callback delegate or function to connect

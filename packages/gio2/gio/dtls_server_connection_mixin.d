@@ -21,8 +21,8 @@ template DtlsServerConnectionT()
   /**
       Get `authenticationMode` property.
       Returns: The #GTlsAuthenticationMode for the server. This can be changed
-      before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
-      rehandshake with a different mode from the initial handshake.
+        before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
+        rehandshake with a different mode from the initial handshake.
   */
   @property gio.types.TlsAuthenticationMode authenticationMode()
   {
@@ -33,8 +33,8 @@ template DtlsServerConnectionT()
       Set `authenticationMode` property.
       Params:
         propval = The #GTlsAuthenticationMode for the server. This can be changed
-        before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
-        rehandshake with a different mode from the initial handshake.
+          before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
+          rehandshake with a different mode from the initial handshake.
   */
   @property void authenticationMode(gio.types.TlsAuthenticationMode propval)
   {

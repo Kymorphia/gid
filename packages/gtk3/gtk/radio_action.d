@@ -47,7 +47,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   /**
       Get `currentValue` property.
       Returns: The value property of the currently active member of the group to which
-      this action belongs.
+        this action belongs.
   */
   @property int currentValue()
   {
@@ -58,7 +58,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Set `currentValue` property.
       Params:
         propval = The value property of the currently active member of the group to which
-        this action belongs.
+          this action belongs.
   */
   @property void currentValue(int propval)
   {
@@ -78,10 +78,10 @@ class RadioAction : gtk.toggle_action.ToggleAction
   /**
       Get `value` property.
       Returns: The value is an arbitrary integer which can be used as a
-      convenient way to determine which action in the group is
-      currently active in an ::activate or ::changed signal handler.
-      See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
-      for convenient ways to get and set this property.
+        convenient way to determine which action in the group is
+        currently active in an ::activate or ::changed signal handler.
+        See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
+        for convenient ways to get and set this property.
   */
   @property int value()
   {
@@ -92,10 +92,10 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Set `value` property.
       Params:
         propval = The value is an arbitrary integer which can be used as a
-        convenient way to determine which action in the group is
-        currently active in an ::activate or ::changed signal handler.
-        See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
-        for convenient ways to get and set this property.
+          convenient way to determine which action in the group is
+          currently active in an ::activate or ::changed signal handler.
+          See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
+          for convenient ways to get and set this property.
   */
   @property void value(int propval)
   {
@@ -227,8 +227,8 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Connect to `Changed` signal.
   
       The ::changed signal is emitted on every member of a radio group when the
-      active member is changed. The signal gets emitted after the ::activate signals
-      for the previous and current active members.
+        active member is changed. The signal gets emitted after the ::activate signals
+        for the previous and current active members.
   
       Params:
         callback = signal callback delegate or function to connect

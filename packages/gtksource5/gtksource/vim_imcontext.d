@@ -150,11 +150,11 @@ class VimIMContext : gtk.imcontext.IMContext
       Connect to `Edit` signal.
   
       Requests the application open the file found at path.
-      
-      If path is null, then the current file should be reloaded from storage.
-      
-      This may be executed in relation to the user running the
-      `:edit` or `:e` commands.
+        
+        If path is null, then the current file should be reloaded from storage.
+        
+        This may be executed in relation to the user running the
+        `:edit` or `:e` commands.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -206,10 +206,10 @@ class VimIMContext : gtk.imcontext.IMContext
       Connect to `ExecuteCommand` signal.
   
       The signal is emitted when a command should be
-      executed. This might be something like `:wq` or `:e <path>`.
-      
-      If the application chooses to implement this, it should return
-      true from this signal to indicate the command has been handled.
+        executed. This might be something like `:wq` or `:e <path>`.
+        
+        If the application chooses to implement this, it should return
+        true from this signal to indicate the command has been handled.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -256,7 +256,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Connect to `FormatText` signal.
   
       Requests that the application format the text between
-      begin and end.
+        begin and end.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -308,9 +308,9 @@ class VimIMContext : gtk.imcontext.IMContext
       Connect to `Write` signal.
   
       Requests the application save the file.
-      
-      If a filename was provided, it will be available to the signal handler as path.
-      This may be executed in relation to the user running the `:write` or `:w` commands.
+        
+        If a filename was provided, it will be available to the signal handler as path.
+        This may be executed in relation to the user running the `:write` or `:w` commands.
   
       Params:
         callback = signal callback delegate or function to connect

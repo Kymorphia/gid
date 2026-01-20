@@ -118,14 +118,14 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `application` property.
       Returns: The [gtk.application.Application] associated with the window.
-      
-      The application will be kept alive for at least as long as it
-      has any windows associated with it (see [gio.application.Application.hold]
-      for a way to keep it alive without windows).
-      
-      Normally, the connection between the application and the window
-      will remain until the window is destroyed, but you can explicitly
-      remove it by setting the :application property to null.
+        
+        The application will be kept alive for at least as long as it
+        has any windows associated with it (see [gio.application.Application.hold]
+        for a way to keep it alive without windows).
+        
+        Normally, the connection between the application and the window
+        will remain until the window is destroyed, but you can explicitly
+        remove it by setting the :application property to null.
   */
   @property gtk.application.Application application()
   {
@@ -136,14 +136,14 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Set `application` property.
       Params:
         propval = The [gtk.application.Application] associated with the window.
-        
-        The application will be kept alive for at least as long as it
-        has any windows associated with it (see [gio.application.Application.hold]
-        for a way to keep it alive without windows).
-        
-        Normally, the connection between the application and the window
-        will remain until the window is destroyed, but you can explicitly
-        remove it by setting the :application property to null.
+          
+          The application will be kept alive for at least as long as it
+          has any windows associated with it (see [gio.application.Application.hold]
+          for a way to keep it alive without windows).
+          
+          Normally, the connection between the application and the window
+          will remain until the window is destroyed, but you can explicitly
+          remove it by setting the :application property to null.
   */
   @property void application(gtk.application.Application propval)
   {
@@ -305,9 +305,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `focusVisible` property.
       Returns: Whether 'focus rectangles' are currently visible in this window.
-      
-      This property is maintained by GTK based on user input
-      and should not be set by applications.
+        
+        This property is maintained by GTK based on user input
+        and should not be set by applications.
   */
   @property bool focusVisible()
   {
@@ -318,9 +318,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Set `focusVisible` property.
       Params:
         propval = Whether 'focus rectangles' are currently visible in this window.
-        
-        This property is maintained by GTK based on user input
-        and should not be set by applications.
+          
+          This property is maintained by GTK based on user input
+          and should not be set by applications.
   */
   @property void focusVisible(bool propval)
   {
@@ -349,12 +349,12 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `fullscreened` property.
       Returns: Whether the window is fullscreen.
-      
-      Setting this property is the equivalent of calling
-      [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen];
-      either operation is asynchronous, which means you will need to
-      connect to the ::notify signal in order to know whether the
-      operation was successful.
+        
+        Setting this property is the equivalent of calling
+        [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen];
+        either operation is asynchronous, which means you will need to
+        connect to the ::notify signal in order to know whether the
+        operation was successful.
   */
   @property bool fullscreened()
   {
@@ -365,12 +365,12 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Set `fullscreened` property.
       Params:
         propval = Whether the window is fullscreen.
-        
-        Setting this property is the equivalent of calling
-        [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen];
-        either operation is asynchronous, which means you will need to
-        connect to the ::notify signal in order to know whether the
-        operation was successful.
+          
+          Setting this property is the equivalent of calling
+          [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen];
+          either operation is asynchronous, which means you will need to
+          connect to the ::notify signal in order to know whether the
+          operation was successful.
   */
   @property void fullscreened(bool propval)
   {
@@ -380,7 +380,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `handleMenubarAccel` property.
       Returns: Whether the window frame should handle F10 for activating
-      menubars.
+        menubars.
   */
   @property bool handleMenubarAccel()
   {
@@ -391,7 +391,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Set `handleMenubarAccel` property.
       Params:
         propval = Whether the window frame should handle F10 for activating
-        menubars.
+          menubars.
   */
   @property void handleMenubarAccel(bool propval)
   {
@@ -420,8 +420,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `iconName` property.
       Returns: Specifies the name of the themed icon to use as the window icon.
-      
-      See [gtk.icon_theme.IconTheme] for more details.
+        
+        See [gtk.icon_theme.IconTheme] for more details.
   */
   @property string iconName()
   {
@@ -432,8 +432,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Set `iconName` property.
       Params:
         propval = Specifies the name of the themed icon to use as the window icon.
-        
-        See [gtk.icon_theme.IconTheme] for more details.
+          
+          See [gtk.icon_theme.IconTheme] for more details.
   */
   @property void iconName(string propval)
   {
@@ -443,12 +443,12 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `maximized` property.
       Returns: Whether the window is maximized.
-      
-      Setting this property is the equivalent of calling
-      [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize];
-      either operation is asynchronous, which means you will need to
-      connect to the ::notify signal in order to know whether the
-      operation was successful.
+        
+        Setting this property is the equivalent of calling
+        [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize];
+        either operation is asynchronous, which means you will need to
+        connect to the ::notify signal in order to know whether the
+        operation was successful.
   */
   @property bool maximized()
   {
@@ -459,12 +459,12 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Set `maximized` property.
       Params:
         propval = Whether the window is maximized.
-        
-        Setting this property is the equivalent of calling
-        [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize];
-        either operation is asynchronous, which means you will need to
-        connect to the ::notify signal in order to know whether the
-        operation was successful.
+          
+          Setting this property is the equivalent of calling
+          [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize];
+          either operation is asynchronous, which means you will need to
+          connect to the ::notify signal in order to know whether the
+          operation was successful.
   */
   @property void maximized(bool propval)
   {
@@ -474,9 +474,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `mnemonicsVisible` property.
       Returns: Whether mnemonics are currently visible in this window.
-      
-      This property is maintained by GTK based on user input,
-      and should not be set by applications.
+        
+        This property is maintained by GTK based on user input,
+        and should not be set by applications.
   */
   @property bool mnemonicsVisible()
   {
@@ -487,9 +487,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Set `mnemonicsVisible` property.
       Params:
         propval = Whether mnemonics are currently visible in this window.
-        
-        This property is maintained by GTK based on user input,
-        and should not be set by applications.
+          
+          This property is maintained by GTK based on user input,
+          and should not be set by applications.
   */
   @property void mnemonicsVisible(bool propval)
   {
@@ -547,8 +547,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Get `suspended` property.
       Returns: Whether the window is suspended.
-      
-      See [gtk.window.Window.isSuspended] for details about what suspended means.
+        
+        See [gtk.window.Window.isSuspended] for details about what suspended means.
   */
   @property bool suspended()
   {
@@ -1626,9 +1626,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Connect to `ActivateDefault` signal.
   
       Emitted when the user activates the default widget
-      of window.
-      
-      This is a [keybinding signal](class.SignalAction.html).
+        of window.
+        
+        This is a [keybinding signal](class.SignalAction.html).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1666,9 +1666,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Connect to `ActivateFocus` signal.
   
       Emitted when the user activates the currently focused
-      widget of window.
-      
-      This is a [keybinding signal](class.SignalAction.html).
+        widget of window.
+        
+        This is a [keybinding signal](class.SignalAction.html).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1745,15 +1745,15 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Connect to `EnableDebugging` signal.
   
       Emitted when the user enables or disables interactive debugging.
-      
-      When toggle is true, interactive debugging is toggled on or off,
-      when it is false, the debugger will be pointed at the widget
-      under the pointer.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default bindings for this signal are Ctrl-Shift-I
-      and Ctrl-Shift-D.
+        
+        When toggle is true, interactive debugging is toggled on or off,
+        when it is false, the debugger will be pointed at the widget
+        under the pointer.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are Ctrl-Shift-I
+        and Ctrl-Shift-D.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1800,7 +1800,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Connect to `KeysChanged` signal.
   
       emitted when the set of accelerators or mnemonics that
-      are associated with window changes.
+        are associated with window changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1813,7 +1813,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: Signal ID
   
       Deprecated: Use [gtk.shortcut.Shortcut] and [gtk.event_controller.EventController]
-      to implement keyboard shortcuts
+        to implement keyboard shortcuts
   */
   ulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T

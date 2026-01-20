@@ -135,9 +135,9 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Connect to `Activate` signal.
   
       Emitted to animate press then release.
-      
-      This is an action signal. Applications should never connect to this signal,
-      but use the `signalTabButton::clicked` signal.
+        
+        This is an action signal. Applications should never connect to this signal,
+        but use the `signalTabButton::clicked` signal.
   
       Params:
         callback = signal callback delegate or function to connect

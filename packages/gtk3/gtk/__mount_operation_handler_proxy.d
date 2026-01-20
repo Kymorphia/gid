@@ -11,7 +11,7 @@ import gtk.types;
 */
 class MountOperationHandlerProxy
 {
-  _GtkMountOperationHandlerProxy cInstance;
+  _GtkMountOperationHandlerProxy _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class MountOperationHandlerProxy
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.__mount_operation_handler_proxy.MountOperationHandlerProxy");
 
-    cInstance = *cast(_GtkMountOperationHandlerProxy*)ptr;
+    _cInstance = *cast(_GtkMountOperationHandlerProxy*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,6 +28,6 @@ class MountOperationHandlerProxy
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

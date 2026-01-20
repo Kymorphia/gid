@@ -16,8 +16,8 @@ template StyleSchemeChooserT()
   /**
       Get `styleScheme` property.
       Returns: The :style-scheme property contains the currently selected style
-      scheme. The property can be set to change
-      the current selection programmatically.
+        scheme. The property can be set to change
+        the current selection programmatically.
   */
   @property gtksource.style_scheme.StyleScheme styleScheme()
   {
@@ -28,8 +28,8 @@ template StyleSchemeChooserT()
       Set `styleScheme` property.
       Params:
         propval = The :style-scheme property contains the currently selected style
-        scheme. The property can be set to change
-        the current selection programmatically.
+          scheme. The property can be set to change
+          the current selection programmatically.
   */
   @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
   {

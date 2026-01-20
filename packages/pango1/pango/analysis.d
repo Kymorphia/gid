@@ -14,7 +14,7 @@ import pango.types;
 */
 class Analysis
 {
-  PangoAnalysis cInstance;
+  PangoAnalysis _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class Analysis
     if (!ptr)
       throw new GidConstructException("Null instance pointer for pango.analysis.Analysis");
 
-    cInstance = *cast(PangoAnalysis*)ptr;
+    _cInstance = *cast(PangoAnalysis*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,7 +31,7 @@ class Analysis
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

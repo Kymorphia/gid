@@ -21,7 +21,7 @@ import gid.gid;
 */
 class Attribute
 {
-  AtkAttribute cInstance;
+  AtkAttribute _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -29,7 +29,7 @@ class Attribute
     if (!ptr)
       throw new GidConstructException("Null instance pointer for atk.attribute.Attribute");
 
-    cInstance = *cast(AtkAttribute*)ptr;
+    _cInstance = *cast(AtkAttribute*)ptr;
 
     if (take)
       gFree(ptr);
@@ -38,7 +38,7 @@ class Attribute
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

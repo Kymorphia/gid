@@ -68,7 +68,7 @@ class ColorDialogButton : gtk.widget.Widget
   /**
       Get `dialog` property.
       Returns: The [gtk.color_dialog.ColorDialog] that contains parameters for
-      the color chooser dialog.
+        the color chooser dialog.
   */
   @property gtk.color_dialog.ColorDialog dialog()
   {
@@ -79,7 +79,7 @@ class ColorDialogButton : gtk.widget.Widget
       Set `dialog` property.
       Params:
         propval = The [gtk.color_dialog.ColorDialog] that contains parameters for
-        the color chooser dialog.
+          the color chooser dialog.
   */
   @property void dialog(gtk.color_dialog.ColorDialog propval)
   {
@@ -89,13 +89,13 @@ class ColorDialogButton : gtk.widget.Widget
   /**
       Get `rgba` property.
       Returns: The selected color.
-      
-      This property can be set to give the button its initial
-      color, and it will be updated to reflect the users choice
-      in the color chooser dialog.
-      
-      Listen to `notify::rgba` to get informed about changes
-      to the buttons color.
+        
+        This property can be set to give the button its initial
+        color, and it will be updated to reflect the users choice
+        in the color chooser dialog.
+        
+        Listen to `notify::rgba` to get informed about changes
+        to the buttons color.
   */
   @property gdk.rgba.RGBA rgba()
   {
@@ -106,13 +106,13 @@ class ColorDialogButton : gtk.widget.Widget
       Set `rgba` property.
       Params:
         propval = The selected color.
-        
-        This property can be set to give the button its initial
-        color, and it will be updated to reflect the users choice
-        in the color chooser dialog.
-        
-        Listen to `notify::rgba` to get informed about changes
-        to the buttons color.
+          
+          This property can be set to give the button its initial
+          color, and it will be updated to reflect the users choice
+          in the color chooser dialog.
+          
+          Listen to `notify::rgba` to get informed about changes
+          to the buttons color.
   */
   @property void rgba(gdk.rgba.RGBA propval)
   {
@@ -161,7 +161,9 @@ class ColorDialogButton : gtk.widget.Widget
   {
     const(GdkRGBA)* _cretval;
     _cretval = gtk_color_dialog_button_get_rgba(cast(GtkColorDialogButton*)this._cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
+    gdk.rgba.RGBA _retval;
+    if (_cretval)
+      _retval = *cast(gdk.rgba.RGBA*)_cretval;
     return _retval;
   }
 
@@ -186,16 +188,16 @@ class ColorDialogButton : gtk.widget.Widget
   */
   void setRgba(gdk.rgba.RGBA color)
   {
-    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)this._cPtr, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
+    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)this._cPtr, cast(const(GdkRGBA)*)&color);
   }
 
   /**
       Connect to `Activate` signal.
   
       Emitted when the color dialog button is activated.
-      
-      The `::activate` signal on [gtk.color_dialog_button.ColorDialogButton] is an action signal
-      and emitting it causes the button to pop up its dialog.
+        
+        The `::activate` signal on [gtk.color_dialog_button.ColorDialogButton] is an action signal
+        and emitting it causes the button to pop up its dialog.
   
       Params:
         callback = signal callback delegate or function to connect

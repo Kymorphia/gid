@@ -195,33 +195,6 @@ class SocketClient : gobject.object.ObjectWrap
   /**
       Get `tlsValidationFlags` property.
       Returns: The TLS validation flags used when creating TLS connections. The
-      default value is [gio.types.TlsCertificateFlags.ValidateAll].
-      
-      GLib guarantees that if certificate verification fails, at least one
-      flag will be set, but it does not guarantee that all possible flags
-      will be set. Accordingly, you may not safely decide to ignore any
-      particular type of error. For example, it would be incorrect to mask
-      [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
-      because this could potentially be the only error flag set even if
-      other problems exist with the certificate. Therefore, there is no
-      safe way to use this property. This is not a horrible problem,
-      though, because you should not be attempting to ignore validation
-      errors anyway. If you really must ignore TLS certificate errors,
-      connect to the #GSocketClient::event signal, wait for it to be
-      emitted with [gio.types.SocketClientEvent.TlsHandshaking], and use that to
-      connect to #GTlsConnection::accept-certificate.
-  
-      Deprecated: Do not attempt to ignore validation errors.
-  */
-  @property gio.types.TlsCertificateFlags tlsValidationFlags()
-  {
-    return getTlsValidationFlags();
-  }
-
-  /**
-      Set `tlsValidationFlags` property.
-      Params:
-        propval = The TLS validation flags used when creating TLS connections. The
         default value is [gio.types.TlsCertificateFlags.ValidateAll].
         
         GLib guarantees that if certificate verification fails, at least one
@@ -237,6 +210,33 @@ class SocketClient : gobject.object.ObjectWrap
         connect to the #GSocketClient::event signal, wait for it to be
         emitted with [gio.types.SocketClientEvent.TlsHandshaking], and use that to
         connect to #GTlsConnection::accept-certificate.
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  @property gio.types.TlsCertificateFlags tlsValidationFlags()
+  {
+    return getTlsValidationFlags();
+  }
+
+  /**
+      Set `tlsValidationFlags` property.
+      Params:
+        propval = The TLS validation flags used when creating TLS connections. The
+          default value is [gio.types.TlsCertificateFlags.ValidateAll].
+          
+          GLib guarantees that if certificate verification fails, at least one
+          flag will be set, but it does not guarantee that all possible flags
+          will be set. Accordingly, you may not safely decide to ignore any
+          particular type of error. For example, it would be incorrect to mask
+          [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+          because this could potentially be the only error flag set even if
+          other problems exist with the certificate. Therefore, there is no
+          safe way to use this property. This is not a horrible problem,
+          though, because you should not be attempting to ignore validation
+          errors anyway. If you really must ignore TLS certificate errors,
+          connect to the #GSocketClient::event signal, wait for it to be
+          emitted with [gio.types.SocketClientEvent.TlsHandshaking], and use that to
+          connect to #GTlsConnection::accept-certificate.
   
       Deprecated: Do not attempt to ignore validation errors.
   */
@@ -374,7 +374,6 @@ class SocketClient : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_client_connect_async(cast(GSocketClient*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -472,7 +471,6 @@ class SocketClient : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_client_connect_to_host_async(cast(GSocketClient*)this._cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -553,7 +551,6 @@ class SocketClient : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _domain = domain.toCString(No.Alloc);
     const(char)* _service = service.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -644,7 +641,6 @@ class SocketClient : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _uri = uri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_client_connect_to_uri_async(cast(GSocketClient*)this._cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -962,56 +958,56 @@ class SocketClient : gobject.object.ObjectWrap
       Connect to `Event` signal.
   
       Emitted when client's activity on connectable changes state.
-      Among other things, this can be used to provide progress
-      information about a network connection in the UI. The meanings of
-      the different event values are as follows:
-      
-      $(LIST
-        * [gio.types.SocketClientEvent.Resolving]: client is about to look up connectable
-          in DNS. connection will be null.
+        Among other things, this can be used to provide progress
+        information about a network connection in the UI. The meanings of
+        the different event values are as follows:
         
-        * [gio.types.SocketClientEvent.Resolved]:  client has successfully resolved
-          connectable in DNS. connection will be null.
+        $(LIST
+          * [gio.types.SocketClientEvent.Resolving]: client is about to look up connectable
+            in DNS. connection will be null.
+          
+          * [gio.types.SocketClientEvent.Resolved]:  client has successfully resolved
+            connectable in DNS. connection will be null.
+          
+          * [gio.types.SocketClientEvent.Connecting]: client is about to make a connection
+            to a remote host; either a proxy server or the destination server
+            itself. connection is the #GSocketConnection, which is not yet
+            connected.  Since GLib 2.40, you can access the remote
+            address via [gio.socket_connection.SocketConnection.getRemoteAddress].
+          
+          * [gio.types.SocketClientEvent.Connected]: client has successfully connected
+            to a remote host. connection is the connected #GSocketConnection.
+          
+          * [gio.types.SocketClientEvent.ProxyNegotiating]: client is about to negotiate
+            with a proxy to get it to connect to connectable. connection is
+            the #GSocketConnection to the proxy server.
+          
+          * [gio.types.SocketClientEvent.ProxyNegotiated]: client has negotiated a
+            connection to connectable through a proxy server. connection is
+            the stream returned from [gio.proxy.Proxy.connect], which may or may not
+            be a #GSocketConnection.
+          
+          * [gio.types.SocketClientEvent.TlsHandshaking]: client is about to begin a TLS
+            handshake. connection is a #GTlsClientConnection.
+          
+          * [gio.types.SocketClientEvent.TlsHandshaked]: client has successfully completed
+            the TLS handshake. connection is a #GTlsClientConnection.
+          
+          * [gio.types.SocketClientEvent.Complete]: client has either successfully connected
+            to connectable (in which case connection is the #GSocketConnection
+            that it will be returning to the caller) or has failed (in which
+            case connection is null and the client is about to return an error).
+        )
+          
+        Each event except [gio.types.SocketClientEvent.Complete] may be emitted
+        multiple times (or not at all) for a given connectable (in
+        particular, if client ends up attempting to connect to more than
+        one address). However, if client emits the #GSocketClient::event
+        signal at all for a given connectable, then it will always emit
+        it with [gio.types.SocketClientEvent.Complete] when it is done.
         
-        * [gio.types.SocketClientEvent.Connecting]: client is about to make a connection
-          to a remote host; either a proxy server or the destination server
-          itself. connection is the #GSocketConnection, which is not yet
-          connected.  Since GLib 2.40, you can access the remote
-          address via [gio.socket_connection.SocketConnection.getRemoteAddress].
-        
-        * [gio.types.SocketClientEvent.Connected]: client has successfully connected
-          to a remote host. connection is the connected #GSocketConnection.
-        
-        * [gio.types.SocketClientEvent.ProxyNegotiating]: client is about to negotiate
-          with a proxy to get it to connect to connectable. connection is
-          the #GSocketConnection to the proxy server.
-        
-        * [gio.types.SocketClientEvent.ProxyNegotiated]: client has negotiated a
-          connection to connectable through a proxy server. connection is
-          the stream returned from [gio.proxy.Proxy.connect], which may or may not
-          be a #GSocketConnection.
-        
-        * [gio.types.SocketClientEvent.TlsHandshaking]: client is about to begin a TLS
-          handshake. connection is a #GTlsClientConnection.
-        
-        * [gio.types.SocketClientEvent.TlsHandshaked]: client has successfully completed
-          the TLS handshake. connection is a #GTlsClientConnection.
-        
-        * [gio.types.SocketClientEvent.Complete]: client has either successfully connected
-          to connectable (in which case connection is the #GSocketConnection
-          that it will be returning to the caller) or has failed (in which
-          case connection is null and the client is about to return an error).
-      )
-        
-      Each event except [gio.types.SocketClientEvent.Complete] may be emitted
-      multiple times (or not at all) for a given connectable (in
-      particular, if client ends up attempting to connect to more than
-      one address). However, if client emits the #GSocketClient::event
-      signal at all for a given connectable, then it will always emit
-      it with [gio.types.SocketClientEvent.Complete] when it is done.
-      
-      Note that there may be additional #GSocketClientEvent values in
-      the future; unrecognized event values should be ignored.
+        Note that there may be additional #GSocketClientEvent values in
+        the future; unrecognized event values should be ignored.
   
       Params:
         callback = signal callback delegate or function to connect

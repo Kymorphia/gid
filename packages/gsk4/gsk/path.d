@@ -45,7 +45,7 @@ class Path : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -94,13 +94,15 @@ class Path : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gsk.types.PathForeachFunc*)userData;
 
-      gboolean _retval = (*_dlg)(op, pts ? new graphene.point.Point(cast(void*)pts, No.Take) : null, nPts, weight);
+      _dretval = (*_dlg)(op, *cast(graphene.point.Point*)pts, nPts, weight);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gsk_path_foreach(cast(GskPath*)this._cPtr, flags, _funcCB, _func);
@@ -177,7 +179,7 @@ class Path : gobject.boxed.Boxed
   bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule)
   {
     bool _retval;
-    _retval = cast(bool)gsk_path_in_fill(cast(GskPath*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null, fillRule);
+    _retval = cast(bool)gsk_path_in_fill(cast(GskPath*)this._cPtr, cast(const(graphene_point_t)*)&point, fillRule);
     return _retval;
   }
 

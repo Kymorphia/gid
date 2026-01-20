@@ -184,8 +184,8 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   /**
       Get `updatePolicy` property.
       Returns: The policy for updating the spin row.
-      
-      The options are always, or only when the value is invalid.
+        
+        The options are always, or only when the value is invalid.
   */
   @property gtk.types.SpinButtonUpdatePolicy updatePolicy()
   {
@@ -196,8 +196,8 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Set `updatePolicy` property.
       Params:
         propval = The policy for updating the spin row.
-        
-        The options are always, or only when the value is invalid.
+          
+          The options are always, or only when the value is invalid.
   */
   @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
   {
@@ -510,8 +510,8 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Connect to `Output` signal.
   
       Emitted to tweak the formatting of the value for display.
-      
-      See [gtk.spin_button.SpinButton.output].
+        
+        See [gtk.spin_button.SpinButton.output].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -551,8 +551,8 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Connect to `Wrapped` signal.
   
       Emitted right after the spinbutton wraps.
-      
-      See [gtk.spin_button.SpinButton.wrapped].
+        
+        See [gtk.spin_button.SpinButton.wrapped].
   
       Params:
         callback = signal callback delegate or function to connect

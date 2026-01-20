@@ -27,7 +27,7 @@ import gsk.types;
 */
 class RenderNode
 {
-  GskRenderNode* cInstancePtr;
+  GskRenderNode* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -35,15 +35,15 @@ class RenderNode
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gsk.render_node.RenderNode");
 
-    cInstancePtr = cast(GskRenderNode*)ptr;
+    _cInstancePtr = cast(GskRenderNode*)ptr;
 
     if (!take)
-      gsk_render_node_ref(cInstancePtr);
+      gsk_render_node_ref(_cInstancePtr);
   }
 
   ~this()
   {
-    gsk_render_node_unref(cInstancePtr);
+    gsk_render_node_unref(_cInstancePtr);
   }
 
 
@@ -51,9 +51,9 @@ class RenderNode
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
-      gsk_render_node_ref(cInstancePtr);
+      gsk_render_node_ref(_cInstancePtr);
 
-    return cInstancePtr;
+    return _cInstancePtr;
   }
 
   /**
@@ -72,10 +72,9 @@ class RenderNode
     {
       auto _dlg = cast(gsk.types.ParseErrorFunc*)userData;
 
-      (*_dlg)(*start, *end, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      (*_dlg)(*cast(gsk.types.ParseLocation*)start, *cast(gsk.types.ParseLocation*)end, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _errorFuncCB = errorFunc ? &_errorFuncCallback : null;
-
     GskRenderNode* _cretval;
     auto _errorFunc = errorFunc ? cast(void*)&(errorFunc) : null;
     _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, _errorFuncCB, _errorFunc);

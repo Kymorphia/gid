@@ -154,8 +154,8 @@ class Alignment : gtk.bin.Bin
   /**
       Get `xalign` property.
       Returns: Horizontal position of child in available space. A value of 0.0
-      will flush the child left (or right, in RTL locales); a value
-      of 1.0 will flush the child right (or left, in RTL locales).
+        will flush the child left (or right, in RTL locales); a value
+        of 1.0 will flush the child right (or left, in RTL locales).
   
       Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
   */
@@ -168,8 +168,8 @@ class Alignment : gtk.bin.Bin
       Set `xalign` property.
       Params:
         propval = Horizontal position of child in available space. A value of 0.0
-        will flush the child left (or right, in RTL locales); a value
-        of 1.0 will flush the child right (or left, in RTL locales).
+          will flush the child left (or right, in RTL locales); a value
+          of 1.0 will flush the child right (or left, in RTL locales).
   
       Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
   */
@@ -181,8 +181,8 @@ class Alignment : gtk.bin.Bin
   /**
       Get `xscale` property.
       Returns: If available horizontal space is bigger than needed, how much
-      of it to use for the child. A value of 0.0 means none; a value
-      of 1.0 means all.
+        of it to use for the child. A value of 0.0 means none; a value
+        of 1.0 means all.
   
       Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
   */
@@ -195,8 +195,8 @@ class Alignment : gtk.bin.Bin
       Set `xscale` property.
       Params:
         propval = If available horizontal space is bigger than needed, how much
-        of it to use for the child. A value of 0.0 means none; a value
-        of 1.0 means all.
+          of it to use for the child. A value of 0.0 means none; a value
+          of 1.0 means all.
   
       Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
   */
@@ -208,8 +208,8 @@ class Alignment : gtk.bin.Bin
   /**
       Get `yalign` property.
       Returns: Vertical position of child in available space. A value of 0.0
-      will flush the child to the top; a value of 1.0 will flush the
-      child to the bottom.
+        will flush the child to the top; a value of 1.0 will flush the
+        child to the bottom.
   
       Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
   */
@@ -222,8 +222,8 @@ class Alignment : gtk.bin.Bin
       Set `yalign` property.
       Params:
         propval = Vertical position of child in available space. A value of 0.0
-        will flush the child to the top; a value of 1.0 will flush the
-        child to the bottom.
+          will flush the child to the top; a value of 1.0 will flush the
+          child to the bottom.
   
       Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
   */
@@ -235,8 +235,8 @@ class Alignment : gtk.bin.Bin
   /**
       Get `yscale` property.
       Returns: If available vertical space is bigger than needed, how much
-      of it to use for the child. A value of 0.0 means none; a value
-      of 1.0 means all.
+        of it to use for the child. A value of 0.0 means none; a value
+        of 1.0 means all.
   
       Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
   */
@@ -249,8 +249,8 @@ class Alignment : gtk.bin.Bin
       Set `yscale` property.
       Params:
         propval = If available vertical space is bigger than needed, how much
-        of it to use for the child. A value of 0.0 means none; a value
-        of 1.0 means all.
+          of it to use for the child. A value of 0.0 means none; a value
+          of 1.0 means all.
   
       Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
   */

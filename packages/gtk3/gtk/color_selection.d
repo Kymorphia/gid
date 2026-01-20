@@ -153,8 +153,7 @@ class ColorSelection : gtk.box.Box
     GdkColor* _colors;
     _retval = cast(bool)gtk_color_selection_palette_from_string(_str, &_colors, &_nColors);
     colors.length = _nColors;
-    foreach (i; 0 .. _nColors)
-      colors[i] = new gdk.color.Color(cast(void*)&_colors[i], Yes.Take);
+    colors[0 .. $] = (cast(gdk.color.Color*)_colors)[0 .. _nColors];
     gFree(cast(void*)_colors);
     return _retval;
   }
@@ -173,10 +172,7 @@ class ColorSelection : gtk.box.Box
     if (colors)
       _nColors = cast(int)colors.length;
 
-    GdkColor[] _tmpcolors;
-    foreach (obj; colors)
-      _tmpcolors ~= *cast(GdkColor*)obj._cPtr;
-    const(GdkColor)* _colors = _tmpcolors.ptr;
+    auto _colors = cast(const(GdkColor)*)colors.ptr;
     _cretval = gtk_color_selection_palette_to_string(_colors, _nColors);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
@@ -203,9 +199,7 @@ class ColorSelection : gtk.box.Box
   */
   void getCurrentColor(out gdk.color.Color color)
   {
-    GdkColor _color;
-    gtk_color_selection_get_current_color(cast(GtkColorSelection*)this._cPtr, &_color);
-    color = new gdk.color.Color(cast(void*)&_color, No.Take);
+    gtk_color_selection_get_current_color(cast(GtkColorSelection*)this._cPtr, cast(GdkColor*)&color);
   }
 
   /**
@@ -216,9 +210,7 @@ class ColorSelection : gtk.box.Box
   */
   void getCurrentRgba(out gdk.rgba.RGBA rgba)
   {
-    GdkRGBA _rgba;
-    gtk_color_selection_get_current_rgba(cast(GtkColorSelection*)this._cPtr, &_rgba);
-    rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
+    gtk_color_selection_get_current_rgba(cast(GtkColorSelection*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
 
   /**
@@ -265,9 +257,7 @@ class ColorSelection : gtk.box.Box
   */
   void getPreviousColor(out gdk.color.Color color)
   {
-    GdkColor _color;
-    gtk_color_selection_get_previous_color(cast(GtkColorSelection*)this._cPtr, &_color);
-    color = new gdk.color.Color(cast(void*)&_color, No.Take);
+    gtk_color_selection_get_previous_color(cast(GtkColorSelection*)this._cPtr, cast(GdkColor*)&color);
   }
 
   /**
@@ -278,9 +268,7 @@ class ColorSelection : gtk.box.Box
   */
   void getPreviousRgba(out gdk.rgba.RGBA rgba)
   {
-    GdkRGBA _rgba;
-    gtk_color_selection_get_previous_rgba(cast(GtkColorSelection*)this._cPtr, &_rgba);
-    rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
+    gtk_color_selection_get_previous_rgba(cast(GtkColorSelection*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
 
   /**
@@ -322,7 +310,7 @@ class ColorSelection : gtk.box.Box
   */
   void setCurrentColor(gdk.color.Color color)
   {
-    gtk_color_selection_set_current_color(cast(GtkColorSelection*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gtk_color_selection_set_current_color(cast(GtkColorSelection*)this._cPtr, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -336,7 +324,7 @@ class ColorSelection : gtk.box.Box
   */
   void setCurrentRgba(gdk.rgba.RGBA rgba)
   {
-    gtk_color_selection_set_current_rgba(cast(GtkColorSelection*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    gtk_color_selection_set_current_rgba(cast(GtkColorSelection*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
 
   /**
@@ -390,7 +378,7 @@ class ColorSelection : gtk.box.Box
   */
   void setPreviousColor(gdk.color.Color color)
   {
-    gtk_color_selection_set_previous_color(cast(GtkColorSelection*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    gtk_color_selection_set_previous_color(cast(GtkColorSelection*)this._cPtr, cast(const(GdkColor)*)&color);
   }
 
   /**
@@ -406,14 +394,14 @@ class ColorSelection : gtk.box.Box
   */
   void setPreviousRgba(gdk.rgba.RGBA rgba)
   {
-    gtk_color_selection_set_previous_rgba(cast(GtkColorSelection*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    gtk_color_selection_set_previous_rgba(cast(GtkColorSelection*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
 
   /**
       Connect to `ColorChanged` signal.
   
       This signal is emitted when the color changes in the #GtkColorSelection
-      according to its update policy.
+        according to its update policy.
   
       Params:
         callback = signal callback delegate or function to connect

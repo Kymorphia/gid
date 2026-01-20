@@ -46,7 +46,7 @@ class EditorState : gobject.object.ObjectWrap
   /**
       Get `typingAttributes` property.
       Returns: Bitmask of #WebKitEditorTypingAttributes flags.
-      See [webkit.editor_state.EditorState.getTypingAttributes] for more information.
+        See [webkit.editor_state.EditorState.getTypingAttributes] for more information.
   */
   @property uint typingAttributes()
   {

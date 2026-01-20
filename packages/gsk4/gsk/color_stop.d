@@ -12,7 +12,7 @@ import gsk.types;
 */
 class ColorStop
 {
-  GskColorStop cInstance;
+  GskColorStop _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class ColorStop
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gsk.color_stop.ColorStop");
 
-    cInstance = *cast(GskColorStop*)ptr;
+    _cInstance = *cast(GskColorStop*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class ColorStop
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -58,5 +58,15 @@ class ColorStop
   @property gdk.rgba.RGBA color()
   {
     return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskColorStop*)this._cPtr).color);
+  }
+
+  /**
+      Set `color` field.
+      Params:
+        propval = the color at the given offset
+  */
+  @property void color(gdk.rgba.RGBA propval)
+  {
+    (cast(GskColorStop*)this._cPtr).color = cast(GdkRGBA)propval;
   }
 }

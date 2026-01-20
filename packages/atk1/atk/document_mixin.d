@@ -141,8 +141,8 @@ template DocumentT()
       Connect to `DocumentAttributeChanged` signal.
   
       The "document-attribute-changed" signal should be emitted when there is a
-      change to one of the document attributes returned by
-      atk_document_get_attributes.
+        change to one of the document attributes returned by
+        atk_document_get_attributes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -150,7 +150,7 @@ template DocumentT()
           $(D void callback(string arg1, string arg2, atk.document.Document document))
   
           `arg1` the name of the attribute being modified, or null if not
-                   available. (optional)
+                     available. (optional)
   
           `arg2` the attribute's new value, or null if not available. (optional)
   
@@ -195,14 +195,14 @@ template DocumentT()
       Connect to `LoadComplete` signal.
   
       The 'load-complete' signal is emitted when a pending load of
-      a static document has completed.  This signal is to be
-      expected by ATK clients if and when AtkDocument implementors
-      expose ATK_STATE_BUSY.  If the state of an AtkObject which
-      implements AtkDocument does not include ATK_STATE_BUSY, it
-      should be safe for clients to assume that the AtkDocument's
-      static contents are fully loaded into the container.
-      (Dynamic document contents should be exposed via other
-      signals.)
+        a static document has completed.  This signal is to be
+        expected by ATK clients if and when AtkDocument implementors
+        expose ATK_STATE_BUSY.  If the state of an AtkObject which
+        implements AtkDocument does not include ATK_STATE_BUSY, it
+        should be safe for clients to assume that the AtkDocument's
+        static contents are fully loaded into the container.
+        (Dynamic document contents should be exposed via other
+        signals.)
   
       Params:
         callback = signal callback delegate or function to connect
@@ -240,11 +240,11 @@ template DocumentT()
       Connect to `LoadStopped` signal.
   
       The 'load-stopped' signal is emitted when a pending load of
-      document contents is cancelled, paused, or otherwise
-      interrupted by the user or application logic.  It should not
-      however be emitted while waiting for a resource (for instance
-      while blocking on a file or network read) unless a
-      user-significant timeout has occurred.
+        document contents is cancelled, paused, or otherwise
+        interrupted by the user or application logic.  It should not
+        however be emitted while waiting for a resource (for instance
+        while blocking on a file or network read) unless a
+        user-significant timeout has occurred.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -282,8 +282,8 @@ template DocumentT()
       Connect to `PageChanged` signal.
   
       The 'page-changed' signal is emitted when the current page of
-      a document changes, e.g. pressing page up/down in a document
-      viewer.
+        a document changes, e.g. pressing page up/down in a document
+        viewer.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -291,7 +291,7 @@ template DocumentT()
           $(D void callback(int pageNumber, atk.document.Document document))
   
           `pageNumber` the new page number. If this value is unknown
-          or not applicable, -1 should be provided. (optional)
+            or not applicable, -1 should be provided. (optional)
   
           `document` the instance the signal is connected to (optional)
   
@@ -329,10 +329,10 @@ template DocumentT()
       Connect to `Reload` signal.
   
       The 'reload' signal is emitted when the contents of a
-      document is refreshed from its source.  Once 'reload' has
-      been emitted, a matching 'load-complete' or 'load-stopped'
-      signal should follow, which clients may await before
-      interrogating ATK for the latest document content.
+        document is refreshed from its source.  Once 'reload' has
+        been emitted, a matching 'load-complete' or 'load-stopped'
+        signal should follow, which clients may await before
+        interrogating ATK for the latest document content.
   
       Params:
         callback = signal callback delegate or function to connect

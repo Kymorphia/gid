@@ -69,6 +69,7 @@ class ControlBinding : gst.object.ObjectWrap
     foreach (obj; values)
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
+
     _retval = cast(bool)gst_control_binding_get_g_value_array(cast(GstControlBinding*)this._cPtr, timestamp, interval, _nValues, _values);
     return _retval;
   }

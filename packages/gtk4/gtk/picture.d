@@ -172,7 +172,7 @@ class Picture : gtk.widget.Widget
   /**
       Get `keepAspectRatio` property.
       Returns: Whether the GtkPicture will render its contents trying to preserve the aspect
-      ratio.
+        ratio.
   
       Deprecated: Use `property@Gtk.Picture:content-fit` instead.
   */
@@ -185,7 +185,7 @@ class Picture : gtk.widget.Widget
       Set `keepAspectRatio` property.
       Params:
         propval = Whether the GtkPicture will render its contents trying to preserve the aspect
-        ratio.
+          ratio.
   
       Deprecated: Use `property@Gtk.Picture:content-fit` instead.
   */

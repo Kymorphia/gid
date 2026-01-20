@@ -4,7 +4,6 @@ module gda.sql_select_target;
 import gda.c.functions;
 import gda.c.types;
 import gda.meta_db_object;
-import gda.sql_any_part;
 import gda.sql_expr;
 import gda.sql_statement;
 import gda.types;
@@ -19,7 +18,7 @@ import gobject.value;
 */
 class SqlSelectTarget
 {
-  GdaSqlSelectTarget cInstance;
+  GdaSqlSelectTarget _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -27,7 +26,7 @@ class SqlSelectTarget
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_select_target.SqlSelectTarget");
 
-    cInstance = *cast(GdaSqlSelectTarget*)ptr;
+    _cInstance = *cast(GdaSqlSelectTarget*)ptr;
 
     if (take)
       gFree(ptr);
@@ -36,16 +35,7 @@ class SqlSelectTarget
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
-  }
-
-  /**
-      Get `any` field.
-      Returns: inheritance structure
-  */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlSelectTarget*)this._cPtr).any, No.Take);
+    return cast(void*)&_cInstance;
   }
 
   /**

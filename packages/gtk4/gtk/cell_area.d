@@ -372,9 +372,9 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   /**
       Get `editWidget` property.
       Returns: The widget currently editing the edited cell
-      
-      This property is read-only and only changes as
-      a result of a call [gtk.cell_area.CellArea.activateCell].
+        
+        This property is read-only and only changes as
+        a result of a call [gtk.cell_area.CellArea.activateCell].
   */
   @property gtk.cell_editable.CellEditable editWidget()
   {
@@ -384,9 +384,9 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   /**
       Get `editedCell` property.
       Returns: The cell in the area that is currently edited
-      
-      This property is read-only and only changes as
-      a result of a call [gtk.cell_area.CellArea.activateCell].
+        
+        This property is read-only and only changes as
+        a result of a call [gtk.cell_area.CellArea.activateCell].
   */
   @property gtk.cell_renderer.CellRenderer editedCell()
   {
@@ -432,7 +432,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   bool activate(gtk.cell_area_context.CellAreaContext context, gtk.widget.Widget widget, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags, bool editOnly)
   {
     bool _retval;
-    _retval = cast(bool)gtk_cell_area_activate(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags, editOnly);
+    _retval = cast(bool)gtk_cell_area_activate(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, flags, editOnly);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   bool activateCell(gtk.widget.Widget widget, gtk.cell_renderer.CellRenderer renderer, gdk.event.Event event, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
     bool _retval;
-    _retval = cast(bool)gtk_cell_area_activate_cell(cast(GtkCellArea*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags);
+    _retval = cast(bool)gtk_cell_area_activate_cell(cast(GtkCellArea*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, flags);
     return _retval;
   }
 
@@ -499,7 +499,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   */
   void applyAttributes(gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded)
   {
-    gtk_cell_area_apply_attributes(cast(GtkCellArea*)this._cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, isExpander, isExpanded);
+    gtk_cell_area_apply_attributes(cast(GtkCellArea*)this._cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, cast(GtkTreeIter*)&iter, isExpander, isExpanded);
   }
 
   /**
@@ -633,7 +633,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   int event(gtk.cell_area_context.CellAreaContext context, gtk.widget.Widget widget, gdk.event.Event event, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
     int _retval;
-    _retval = gtk_cell_area_event(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags);
+    _retval = gtk_cell_area_event(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, flags);
     return _retval;
   }
 
@@ -667,13 +667,15 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     extern(C) gboolean _callbackCallback(GtkCellRenderer* renderer, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.CellCallback*)data;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
     gtk_cell_area_foreach(cast(GtkCellArea*)this._cPtr, _callbackCB, _callback);
   }
@@ -693,15 +695,17 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   {
     extern(C) gboolean _callbackCallback(GtkCellRenderer* renderer, const(GdkRectangle)* cellArea, const(GdkRectangle)* cellBackground, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.CellAllocCallback*)data;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take), cellArea ? new gdk.rectangle.Rectangle(cast(void*)cellArea, No.Take) : null, cellBackground ? new gdk.rectangle.Rectangle(cast(void*)cellBackground, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)renderer, No.Take), *cast(gdk.rectangle.Rectangle*)cellArea, *cast(gdk.rectangle.Rectangle*)cellBackground);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
-    gtk_cell_area_foreach_alloc(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea._cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_cell_area_foreach_alloc(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, cast(const(GdkRectangle)*)&backgroundArea, _callbackCB, _callback);
   }
 
   /**
@@ -718,9 +722,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   */
   void getCellAllocation(gtk.cell_area_context.CellAreaContext context, gtk.widget.Widget widget, gtk.cell_renderer.CellRenderer renderer, gdk.rectangle.Rectangle cellArea, out gdk.rectangle.Rectangle allocation)
   {
-    GdkRectangle _allocation;
-    gtk_cell_area_get_cell_allocation(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, &_allocation);
-    allocation = new gdk.rectangle.Rectangle(cast(void*)&_allocation, No.Take);
+    gtk_cell_area_get_cell_allocation(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, cast(GdkRectangle*)&allocation);
   }
 
   /**
@@ -741,10 +743,8 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   gtk.cell_renderer.CellRenderer getCellAtPosition(gtk.cell_area_context.CellAreaContext context, gtk.widget.Widget widget, gdk.rectangle.Rectangle cellArea, int x, int y, out gdk.rectangle.Rectangle allocArea)
   {
     GtkCellRenderer* _cretval;
-    GdkRectangle _allocArea;
-    _cretval = gtk_cell_area_get_cell_at_position(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, x, y, &_allocArea);
+    _cretval = gtk_cell_area_get_cell_at_position(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, x, y, cast(GdkRectangle*)&allocArea);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(GtkCellRenderer*)_cretval, No.Take);
-    allocArea = new gdk.rectangle.Rectangle(cast(void*)&_allocArea, No.Take);
     return _retval;
   }
 
@@ -978,9 +978,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   */
   void innerCellArea(gtk.widget.Widget widget, gdk.rectangle.Rectangle cellArea, out gdk.rectangle.Rectangle innerArea)
   {
-    GdkRectangle _innerArea;
-    gtk_cell_area_inner_cell_area(cast(GtkCellArea*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, &_innerArea);
-    innerArea = new gdk.rectangle.Rectangle(cast(void*)&_innerArea, No.Take);
+    gtk_cell_area_inner_cell_area(cast(GtkCellArea*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, cast(GdkRectangle*)&innerArea);
   }
 
   /**
@@ -1087,7 +1085,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   */
   void snapshot(gtk.cell_area_context.CellAreaContext context, gtk.widget.Widget widget, gtk.snapshot.Snapshot snapshot, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags, bool paintFocus)
   {
-    gtk_cell_area_snapshot(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, snapshot ? cast(GtkSnapshot*)snapshot._cPtr(No.Dup) : null, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea._cPtr(No.Dup) : null, flags, paintFocus);
+    gtk_cell_area_snapshot(cast(GtkCellArea*)this._cPtr, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, snapshot ? cast(GtkSnapshot*)snapshot._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags, paintFocus);
   }
 
   /**
@@ -1112,7 +1110,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
       Connect to `AddEditable` signal.
   
       Indicates that editing has started on renderer and that editable
-      should be added to the owning cell-layouting widget at cell_area.
+        should be added to the owning cell-layouting widget at cell_area.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1124,7 +1122,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
           `editable` the [gtk.cell_editable.CellEditable] widget to add (optional)
   
           `area` the [gtk.widget.Widget] relative [gtk.types.Rectangle] coordinates
-                      where editable should be added (optional)
+                        where editable should be added (optional)
   
           `path` the [gtk.tree_path.TreePath] string this edit was initiated for (optional)
   
@@ -1244,13 +1242,13 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
       Connect to `FocusChanged` signal.
   
       Indicates that focus changed on this area. This signal
-      is emitted either as a result of focus handling or event
-      handling.
-      
-      It's possible that the signal is emitted even if the
-      currently focused renderer did not change, this is
-      because focus may change to the same renderer in the
-      same cell area for a different row of data.
+        is emitted either as a result of focus handling or event
+        handling.
+        
+        It's possible that the signal is emitted even if the
+        currently focused renderer did not change, this is
+        because focus may change to the same renderer in the
+        same cell area for a different row of data.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1302,7 +1300,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
       Connect to `RemoveEditable` signal.
   
       Indicates that editing finished on renderer and that editable
-      should be removed from the owning cell-layouting widget.
+        should be removed from the owning cell-layouting widget.
   
       Params:
         callback = signal callback delegate or function to connect

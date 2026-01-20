@@ -12,7 +12,7 @@ import gstrtsp.types;
 */
 class RTSPTransport
 {
-  GstRTSPTransport cInstance;
+  GstRTSPTransport _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class RTSPTransport
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtsp.rtsptransport.RTSPTransport");
 
-    cInstance = *cast(GstRTSPTransport*)ptr;
+    _cInstance = *cast(GstRTSPTransport*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class RTSPTransport
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -211,7 +211,17 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange interleaved()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).interleaved, No.Take);
+    return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).interleaved);
+  }
+
+  /**
+      Set `interleaved` field.
+      Params:
+        propval = the interleave range
+  */
+  @property void interleaved(gstrtsp.rtsprange.RTSPRange propval)
+  {
+    (cast(GstRTSPTransport*)this._cPtr).interleaved = cast(GstRTSPRange)propval;
   }
 
   /**
@@ -239,29 +249,63 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange port()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).port, No.Take);
+    return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).port);
+  }
+
+  /**
+      Set `port` field.
+      Params:
+        propval = the port pair for multicast sessions
+  */
+  @property void port(gstrtsp.rtsprange.RTSPRange propval)
+  {
+    (cast(GstRTSPTransport*)this._cPtr).port = cast(GstRTSPRange)propval;
   }
 
   /**
       Get `clientPort` field.
       Returns: the client port pair for receiving data. For TCP
-        based transports, applications can use this field to store the
-        sender and receiver ports of the client.
+          based transports, applications can use this field to store the
+          sender and receiver ports of the client.
   */
   @property gstrtsp.rtsprange.RTSPRange clientPort()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).clientPort, No.Take);
+    return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).clientPort);
+  }
+
+  /**
+      Set `clientPort` field.
+      Params:
+        propval = the client port pair for receiving data. For TCP
+            based transports, applications can use this field to store the
+            sender and receiver ports of the client.
+  */
+  @property void clientPort(gstrtsp.rtsprange.RTSPRange propval)
+  {
+    (cast(GstRTSPTransport*)this._cPtr).clientPort = cast(GstRTSPRange)propval;
   }
 
   /**
       Get `serverPort` field.
       Returns: the server port pair for receiving data. For TCP
-        based transports, applications can use this field to store the
-        sender and receiver ports of the server.
+          based transports, applications can use this field to store the
+          sender and receiver ports of the server.
   */
   @property gstrtsp.rtsprange.RTSPRange serverPort()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).serverPort, No.Take);
+    return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).serverPort);
+  }
+
+  /**
+      Set `serverPort` field.
+      Params:
+        propval = the server port pair for receiving data. For TCP
+            based transports, applications can use this field to store the
+            sender and receiver ports of the server.
+  */
+  @property void serverPort(gstrtsp.rtsprange.RTSPRange propval)
+  {
+    (cast(GstRTSPTransport*)this._cPtr).serverPort = cast(GstRTSPRange)propval;
   }
 
   /**

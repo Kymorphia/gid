@@ -84,7 +84,7 @@ class Closure : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -109,7 +109,7 @@ class Closure : gobject.boxed.Boxed
   /**
       Get `inMarshal` field.
       Returns: Indicates whether the closure is currently being invoked with
-        [gobject.closure.Closure.invoke]
+          [gobject.closure.Closure.invoke]
   */
   @property uint inMarshal()
   {
@@ -120,7 +120,7 @@ class Closure : gobject.boxed.Boxed
       Set `inMarshal` field.
       Params:
         propval = Indicates whether the closure is currently being invoked with
-          [gobject.closure.Closure.invoke]
+            [gobject.closure.Closure.invoke]
   */
   @property void inMarshal(uint propval)
   {
@@ -130,7 +130,7 @@ class Closure : gobject.boxed.Boxed
   /**
       Get `isInvalid` field.
       Returns: Indicates whether the closure has been invalidated by
-        [gobject.closure.Closure.invalidate]
+          [gobject.closure.Closure.invalidate]
   */
   @property uint isInvalid()
   {
@@ -141,7 +141,7 @@ class Closure : gobject.boxed.Boxed
       Set `isInvalid` field.
       Params:
         propval = Indicates whether the closure has been invalidated by
-          [gobject.closure.Closure.invalidate]
+            [gobject.closure.Closure.invalidate]
   */
   @property void isInvalid(uint propval)
   {
@@ -276,6 +276,7 @@ class Closure : gobject.boxed.Boxed
     foreach (obj; paramValues)
       _tmpparamValues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _paramValues = _tmpparamValues.ptr;
+
     g_closure_invoke(cast(GClosure*)this._cPtr, &_returnValue, _nParamValues, _paramValues, invocationHint);
     returnValue = new gobject.value.Value(cast(void*)&_returnValue, No.Take);
   }

@@ -44,7 +44,7 @@ template DtlsConnectionT()
   /**
       Get `certificate` property.
       Returns: The connection's certificate; see
-      [gio.dtls_connection.DtlsConnection.setCertificate].
+        [gio.dtls_connection.DtlsConnection.setCertificate].
   */
   @property gio.tls_certificate.TlsCertificate certificate()
   {
@@ -55,7 +55,7 @@ template DtlsConnectionT()
       Set `certificate` property.
       Params:
         propval = The connection's certificate; see
-        [gio.dtls_connection.DtlsConnection.setCertificate].
+          [gio.dtls_connection.DtlsConnection.setCertificate].
   */
   @property void certificate(gio.tls_certificate.TlsCertificate propval)
   {
@@ -74,31 +74,6 @@ template DtlsConnectionT()
   /**
       Get `database` property.
       Returns: The certificate database to use when verifying this TLS connection.
-      If no certificate database is set, then the default database will be
-      used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
-      
-      When using a non-default database, #GDtlsConnection must fall back to using
-      the #GTlsDatabase to perform certificate verification using
-      [gio.tls_database.TlsDatabase.verifyChain], which means certificate verification will
-      not be able to make use of TLS session context. This may be less secure.
-      For example, if you create your own #GTlsDatabase that just wraps the
-      default #GTlsDatabase, you might expect that you have not changed anything,
-      but this is not true because you may have altered the behavior of
-      #GDtlsConnection by causing it to use [gio.tls_database.TlsDatabase.verifyChain]. See the
-      documentation of [gio.tls_database.TlsDatabase.verifyChain] for more details on specific
-      security checks that may not be performed. Accordingly, setting a
-      non-default database is discouraged except for specialty applications with
-      unusual security requirements.
-  */
-  @property gio.tls_database.TlsDatabase database()
-  {
-    return getDatabase();
-  }
-
-  /**
-      Set `database` property.
-      Params:
-        propval = The certificate database to use when verifying this TLS connection.
         If no certificate database is set, then the default database will be
         used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
         
@@ -115,6 +90,31 @@ template DtlsConnectionT()
         non-default database is discouraged except for specialty applications with
         unusual security requirements.
   */
+  @property gio.tls_database.TlsDatabase database()
+  {
+    return getDatabase();
+  }
+
+  /**
+      Set `database` property.
+      Params:
+        propval = The certificate database to use when verifying this TLS connection.
+          If no certificate database is set, then the default database will be
+          used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+          
+          When using a non-default database, #GDtlsConnection must fall back to using
+          the #GTlsDatabase to perform certificate verification using
+          [gio.tls_database.TlsDatabase.verifyChain], which means certificate verification will
+          not be able to make use of TLS session context. This may be less secure.
+          For example, if you create your own #GTlsDatabase that just wraps the
+          default #GTlsDatabase, you might expect that you have not changed anything,
+          but this is not true because you may have altered the behavior of
+          #GDtlsConnection by causing it to use [gio.tls_database.TlsDatabase.verifyChain]. See the
+          documentation of [gio.tls_database.TlsDatabase.verifyChain] for more details on specific
+          security checks that may not be performed. Accordingly, setting a
+          non-default database is discouraged except for specialty applications with
+          unusual security requirements.
+  */
   @property void database(gio.tls_database.TlsDatabase propval)
   {
     return setDatabase(propval);
@@ -123,8 +123,8 @@ template DtlsConnectionT()
   /**
       Get `interaction` property.
       Returns: A #GTlsInteraction object to be used when the connection or certificate
-      database need to interact with the user. This will be used to prompt the
-      user for passwords where necessary.
+        database need to interact with the user. This will be used to prompt the
+        user for passwords where necessary.
   */
   @property gio.tls_interaction.TlsInteraction interaction()
   {
@@ -135,8 +135,8 @@ template DtlsConnectionT()
       Set `interaction` property.
       Params:
         propval = A #GTlsInteraction object to be used when the connection or certificate
-        database need to interact with the user. This will be used to prompt the
-        user for passwords where necessary.
+          database need to interact with the user. This will be used to prompt the
+          user for passwords where necessary.
   */
   @property void interaction(gio.tls_interaction.TlsInteraction propval)
   {
@@ -146,7 +146,7 @@ template DtlsConnectionT()
   /**
       Get `negotiatedProtocol` property.
       Returns: The application-layer protocol negotiated during the TLS
-      handshake. See [gio.dtls_connection.DtlsConnection.getNegotiatedProtocol].
+        handshake. See [gio.dtls_connection.DtlsConnection.getNegotiatedProtocol].
   */
   @property string negotiatedProtocol()
   {
@@ -156,11 +156,11 @@ template DtlsConnectionT()
   /**
       Get `peerCertificate` property.
       Returns: The connection's peer's certificate, after the TLS handshake has
-      completed or failed. Note in particular that this is not yet set
-      during the emission of #GDtlsConnection::accept-certificate.
-      
-      (You can watch for a #GObject::notify signal on this property to
-      detect when a handshake has occurred.)
+        completed or failed. Note in particular that this is not yet set
+        during the emission of #GDtlsConnection::accept-certificate.
+        
+        (You can watch for a #GObject::notify signal on this property to
+        detect when a handshake has occurred.)
   */
   @property gio.tls_certificate.TlsCertificate peerCertificate()
   {
@@ -170,19 +170,19 @@ template DtlsConnectionT()
   /**
       Get `peerCertificateErrors` property.
       Returns: The errors noticed while verifying
-      #GDtlsConnection:peer-certificate. Normally this should be 0, but
-      it may not be if #GDtlsClientConnection:validation-flags is not
-      [gio.types.TlsCertificateFlags.ValidateAll], or if
-      #GDtlsConnection::accept-certificate overrode the default
-      behavior.
-      
-      GLib guarantees that if certificate verification fails, at least
-      one error will be set, but it does not guarantee that all possible
-      errors will be set. Accordingly, you may not safely decide to
-      ignore any particular type of error. For example, it would be
-      incorrect to mask [gio.types.TlsCertificateFlags.Expired] if you want to allow
-      expired certificates, because this could potentially be the only
-      error flag set even if other problems exist with the certificate.
+        #GDtlsConnection:peer-certificate. Normally this should be 0, but
+        it may not be if #GDtlsClientConnection:validation-flags is not
+        [gio.types.TlsCertificateFlags.ValidateAll], or if
+        #GDtlsConnection::accept-certificate overrode the default
+        behavior.
+        
+        GLib guarantees that if certificate verification fails, at least
+        one error will be set, but it does not guarantee that all possible
+        errors will be set. Accordingly, you may not safely decide to
+        ignore any particular type of error. For example, it would be
+        incorrect to mask [gio.types.TlsCertificateFlags.Expired] if you want to allow
+        expired certificates, because this could potentially be the only
+        error flag set even if other problems exist with the certificate.
   */
   @property gio.types.TlsCertificateFlags peerCertificateErrors()
   {
@@ -201,7 +201,7 @@ template DtlsConnectionT()
   /**
       Get `rehandshakeMode` property.
       Returns: The rehandshaking mode. See
-      [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
+        [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
   
       Deprecated: The rehandshake mode is ignored.
   */
@@ -214,7 +214,7 @@ template DtlsConnectionT()
       Set `rehandshakeMode` property.
       Params:
         propval = The rehandshaking mode. See
-        [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
+          [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
   
       Deprecated: The rehandshake mode is ignored.
   */
@@ -226,7 +226,7 @@ template DtlsConnectionT()
   /**
       Get `requireCloseNotify` property.
       Returns: Whether or not proper TLS close notification is required.
-      See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
+        See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
   */
   @property bool requireCloseNotify()
   {
@@ -237,7 +237,7 @@ template DtlsConnectionT()
       Set `requireCloseNotify` property.
       Params:
         propval = Whether or not proper TLS close notification is required.
-        See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
+          See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
   */
   @property void requireCloseNotify(bool propval)
   {
@@ -299,7 +299,6 @@ template DtlsConnectionT()
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dtls_connection_close_async(cast(GDtlsConnection*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -553,7 +552,6 @@ template DtlsConnectionT()
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dtls_connection_handshake_async(cast(GDtlsConnection*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -601,6 +599,7 @@ template DtlsConnectionT()
       _tmpprotocols ~= s.toCString(No.Alloc);
     _tmpprotocols ~= null;
     const(char*)* _protocols = _tmpprotocols.ptr;
+
     g_dtls_connection_set_advertised_protocols(cast(GDtlsConnection*)this._cPtr, _protocols);
   }
 
@@ -778,7 +777,6 @@ template DtlsConnectionT()
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dtls_connection_shutdown_async(cast(GDtlsConnection*)this._cPtr, shutdownRead, shutdownWrite, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -807,47 +805,47 @@ template DtlsConnectionT()
       Connect to `AcceptCertificate` signal.
   
       Emitted during the TLS handshake after the peer certificate has
-      been received. You can examine peer_cert's certification path by
-      calling [gio.tls_certificate.TlsCertificate.getIssuer] on it.
-      
-      For a client-side connection, peer_cert is the server's
-      certificate, and the signal will only be emitted if the
-      certificate was not acceptable according to conn's
-      #GDtlsClientConnection:validation_flags. If you would like the
-      certificate to be accepted despite errors, return true from the
-      signal handler. Otherwise, if no handler accepts the certificate,
-      the handshake will fail with [gio.types.TlsError.BadCertificate].
-      
-      GLib guarantees that if certificate verification fails, this signal
-      will be emitted with at least one error will be set in errors, but
-      it does not guarantee that all possible errors will be set.
-      Accordingly, you may not safely decide to ignore any particular
-      type of error. For example, it would be incorrect to ignore
-      [gio.types.TlsCertificateFlags.Expired] if you want to allow expired
-      certificates, because this could potentially be the only error flag
-      set even if other problems exist with the certificate.
-      
-      For a server-side connection, peer_cert is the certificate
-      presented by the client, if this was requested via the server's
-      #GDtlsServerConnection:authentication_mode. On the server side,
-      the signal is always emitted when the client presents a
-      certificate, and the certificate will only be accepted if a
-      handler returns true.
-      
-      Note that if this signal is emitted as part of asynchronous I/O
-      in the main thread, then you should not attempt to interact with
-      the user before returning from the signal handler. If you want to
-      let the user decide whether or not to accept the certificate, you
-      would have to return false from the signal handler on the first
-      attempt, and then after the connection attempt returns a
-      [gio.types.TlsError.BadCertificate], you can interact with the user, and
-      if the user decides to accept the certificate, remember that fact,
-      create a new connection, and return true from the signal handler
-      the next time.
-      
-      If you are doing I/O in another thread, you do not
-      need to worry about this, and can simply block in the signal
-      handler until the UI thread returns an answer.
+        been received. You can examine peer_cert's certification path by
+        calling [gio.tls_certificate.TlsCertificate.getIssuer] on it.
+        
+        For a client-side connection, peer_cert is the server's
+        certificate, and the signal will only be emitted if the
+        certificate was not acceptable according to conn's
+        #GDtlsClientConnection:validation_flags. If you would like the
+        certificate to be accepted despite errors, return true from the
+        signal handler. Otherwise, if no handler accepts the certificate,
+        the handshake will fail with [gio.types.TlsError.BadCertificate].
+        
+        GLib guarantees that if certificate verification fails, this signal
+        will be emitted with at least one error will be set in errors, but
+        it does not guarantee that all possible errors will be set.
+        Accordingly, you may not safely decide to ignore any particular
+        type of error. For example, it would be incorrect to ignore
+        [gio.types.TlsCertificateFlags.Expired] if you want to allow expired
+        certificates, because this could potentially be the only error flag
+        set even if other problems exist with the certificate.
+        
+        For a server-side connection, peer_cert is the certificate
+        presented by the client, if this was requested via the server's
+        #GDtlsServerConnection:authentication_mode. On the server side,
+        the signal is always emitted when the client presents a
+        certificate, and the certificate will only be accepted if a
+        handler returns true.
+        
+        Note that if this signal is emitted as part of asynchronous I/O
+        in the main thread, then you should not attempt to interact with
+        the user before returning from the signal handler. If you want to
+        let the user decide whether or not to accept the certificate, you
+        would have to return false from the signal handler on the first
+        attempt, and then after the connection attempt returns a
+        [gio.types.TlsError.BadCertificate], you can interact with the user, and
+        if the user decides to accept the certificate, remember that fact,
+        create a new connection, and return true from the signal handler
+        the next time.
+        
+        If you are doing I/O in another thread, you do not
+        need to worry about this, and can simply block in the signal
+        handler until the UI thread returns an answer.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -861,9 +859,9 @@ template DtlsConnectionT()
           `dtlsConnection` the instance the signal is connected to (optional)
   
           `Returns` true to accept peer_cert (which will also
-          immediately end the signal emission). false to allow the signal
-          emission to continue, which will cause the handshake to fail if
-          no one else overrides it.
+            immediately end the signal emission). false to allow the signal
+            emission to continue, which will cause the handshake to fail if
+            no one else overrides it.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

@@ -100,8 +100,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   /**
       Get `accelPath` property.
       Returns: Sets the accelerator path of the menu item, through which runtime
-      changes of the menu item's accelerator caused by the user can be
-      identified and saved to persistant storage.
+        changes of the menu item's accelerator caused by the user can be
+        identified and saved to persistant storage.
   */
   @property string accelPath()
   {
@@ -112,8 +112,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Set `accelPath` property.
       Params:
         propval = Sets the accelerator path of the menu item, through which runtime
-        changes of the menu item's accelerator caused by the user can be
-        identified and saved to persistant storage.
+          changes of the menu item's accelerator caused by the user can be
+          identified and saved to persistant storage.
   */
   @property void accelPath(string propval)
   {
@@ -142,7 +142,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   /**
       Get `rightJustified` property.
       Returns: Sets whether the menu item appears justified
-      at the right side of a menu bar.
+        at the right side of a menu bar.
   */
   @property bool rightJustified()
   {
@@ -153,7 +153,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Set `rightJustified` property.
       Params:
         propval = Sets whether the menu item appears justified
-        at the right side of a menu bar.
+          at the right side of a menu bar.
   */
   @property void rightJustified(bool propval)
   {
@@ -524,8 +524,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Connect to `ActivateItem` signal.
   
       Emitted when the item is activated, but also if the menu item has a
-      submenu. For normal applications, the relevant signal is
-      #GtkMenuItem::activate.
+        submenu. For normal applications, the relevant signal is
+        #GtkMenuItem::activate.
   
       Params:
         callback = signal callback delegate or function to connect

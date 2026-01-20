@@ -34,7 +34,7 @@ import gobject.types;
 */
 class WeakRef
 {
-  GWeakRef cInstance;
+  GWeakRef _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -42,7 +42,7 @@ class WeakRef
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.weak_ref.WeakRef");
 
-    cInstance = *cast(GWeakRef*)ptr;
+    _cInstance = *cast(GWeakRef*)ptr;
 
     if (take)
       gFree(ptr);
@@ -51,6 +51,6 @@ class WeakRef
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

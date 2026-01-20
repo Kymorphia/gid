@@ -117,15 +117,15 @@ class Filter : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Emitted whenever the filter changed.
-      
-      Users of the filter should then check items again via
-      [gtk.filter.Filter.match].
-      
-      [gtk.filter_list_model.FilterListModel] handles this signal automatically.
-      
-      Depending on the change parameter, not all items need
-      to be checked, but only some. Refer to the [gtk.types.FilterChange]
-      documentation for details.
+        
+        Users of the filter should then check items again via
+        [gtk.filter.Filter.match].
+        
+        [gtk.filter_list_model.FilterListModel] handles this signal automatically.
+        
+        Depending on the change parameter, not all items need
+        to be checked, but only some. Refer to the [gtk.types.FilterChange]
+        documentation for details.
   
       Params:
         callback = signal callback delegate or function to connect

@@ -244,6 +244,7 @@ void acceleratorParseWithKeycode(string accelerator, out uint acceleratorKey, ou
     {
     }
   }
+
   acceleratorCodes.length = _lenacceleratorCodes;
   acceleratorCodes[0 .. $] = (cast(uint*)_acceleratorCodes)[0 .. _lenacceleratorCodes];
   gFree(cast(void*)_acceleratorCodes);
@@ -697,7 +698,7 @@ void dragSetIconWidget(gdk.drag_context.DragContext context, gtk.widget.Widget w
 */
 void drawInsertionCursor(gtk.widget.Widget widget, cairo.context.Context cr, gdk.rectangle.Rectangle location, bool isPrimary, gtk.types.TextDirection direction, bool drawArrow)
 {
-  gtk_draw_insertion_cursor(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, location ? cast(const(GdkRectangle)*)location._cPtr(No.Dup) : null, isPrimary, direction, drawArrow);
+  gtk_draw_insertion_cursor(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&location, isPrimary, direction, drawArrow);
 }
 
 /**
@@ -765,7 +766,7 @@ gdk.event.Event getCurrentEvent()
 {
   GdkEvent* _cretval;
   _cretval = gtk_get_current_event();
-  auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new gdk.event.Event(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -859,7 +860,7 @@ pango.language.Language getDefaultLanguage()
 gtk.widget.Widget getEventWidget(gdk.event.Event event)
 {
   GtkWidget* _cretval;
-  _cretval = gtk_get_event_widget(event ? cast(GdkEvent*)event._cPtr : null);
+  _cretval = gtk_get_event_widget(event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
@@ -1066,7 +1067,7 @@ void main()
 */
 void mainDoEvent(gdk.event.Event event)
 {
-  gtk_main_do_event(event ? cast(GdkEvent*)event._cPtr : null);
+  gtk_main_do_event(event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
 }
 
 /**
@@ -1661,7 +1662,6 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
     (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
   }
   auto _doneCbCB = doneCb ? &_doneCbCallback : null;
-
   auto _doneCb = doneCb ? freezeDelegate(cast(void*)&doneCb) : null;
   gtk_print_run_page_setup_dialog_async(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null, _doneCbCB, _doneCb);
 }
@@ -1692,7 +1692,7 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
 */
 void propagateEvent(gtk.widget.Widget widget, gdk.event.Event event)
 {
-  gtk_propagate_event(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr : null);
+  gtk_propagate_event(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
 }
 
 /**
@@ -1772,8 +1772,8 @@ string[] rcGetDefaultFiles()
   if (_cretval)
   {
     uint _cretlength;
-    for (; _cretval[_cretlength] !is null; _cretlength++)
-      break;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(No.Free);
@@ -1950,9 +1950,7 @@ void rcParse(string filename)
 uint rcParseColor(glib.scanner.Scanner scanner, out gdk.color.Color color)
 {
   uint _retval;
-  GdkColor _color;
-  _retval = gtk_rc_parse_color(scanner ? cast(GScanner*)scanner._cPtr : null, &_color);
-  color = new gdk.color.Color(cast(void*)&_color, No.Take);
+  _retval = gtk_rc_parse_color(scanner ? cast(GScanner*)scanner._cPtr : null, cast(GdkColor*)&color);
   return _retval;
 }
 
@@ -1974,9 +1972,7 @@ uint rcParseColor(glib.scanner.Scanner scanner, out gdk.color.Color color)
 uint rcParseColorFull(glib.scanner.Scanner scanner, gtk.rc_style.RcStyle style, out gdk.color.Color color)
 {
   uint _retval;
-  GdkColor _color;
-  _retval = gtk_rc_parse_color_full(scanner ? cast(GScanner*)scanner._cPtr : null, style ? cast(GtkRcStyle*)style._cPtr(No.Dup) : null, &_color);
-  color = new gdk.color.Color(cast(void*)&_color, No.Take);
+  _retval = gtk_rc_parse_color_full(scanner ? cast(GScanner*)scanner._cPtr : null, style ? cast(GtkRcStyle*)style._cPtr(No.Dup) : null, cast(GdkColor*)&color);
   return _retval;
 }
 
@@ -2107,6 +2103,7 @@ void rcSetDefaultFiles(string[] filenames)
     _tmpfilenames ~= s.toCString(No.Alloc);
   _tmpfilenames ~= null;
   char** _filenames = _tmpfilenames.ptr;
+
   gtk_rc_set_default_files(_filenames);
 }
 
@@ -2184,9 +2181,7 @@ void renderBackground(gtk.style_context.StyleContext context, cairo.context.Cont
 */
 void renderBackgroundGetClip(gtk.style_context.StyleContext context, double x, double y, double width, double height, out gdk.rectangle.Rectangle outClip)
 {
-  GdkRectangle _outClip;
-  gtk_render_background_get_clip(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height, &_outClip);
-  outClip = new gdk.rectangle.Rectangle(cast(void*)&_outClip, No.Take);
+  gtk_render_background_get_clip(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height, cast(GdkRectangle*)&outClip);
 }
 
 /**
@@ -2555,6 +2550,7 @@ void selectionAddTargets(gtk.widget.Widget widget, gdk.atom.Atom selection, gtk.
   foreach (obj; targets)
     _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
   const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
   gtk_selection_add_targets(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, _targets, _ntargets);
 }
 
@@ -2801,12 +2797,11 @@ void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func)
     string _path = path.fromCString(No.Free);
 
     _dretval = (*_dlg)(_path);
-    char* _retval = _dretval.toCString(Yes.Alloc);
+    auto _retval = _dretval.toCString(Yes.Alloc);
 
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-
   const(char)* _domain = domain.toCString(No.Alloc);
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
@@ -2830,6 +2825,7 @@ void targetTableFree(gtk.target_entry.TargetEntry[] targets)
   foreach (obj; targets)
     _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
   GtkTargetEntry* _targets = _tmptargets.ptr;
+
   gtk_target_table_free(_targets, _nTargets);
 }
 

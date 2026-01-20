@@ -1,4 +1,4 @@
-/// Module for [PollFD] class
+/// Module for [PollFD] struct
 module gst.poll_fd;
 
 import gid.gid;
@@ -9,46 +9,15 @@ import gst.types;
 /**
     A file descriptor object.
 */
-class PollFD
+struct PollFD
 {
-  GstPollFD cInstance;
+  /**
+      a file descriptor
+  */
+  int fd;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.poll_fd.PollFD");
-
-    cInstance = *cast(GstPollFD*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
-
-  /**
-      Get `fd` field.
-      Returns: a file descriptor
-  */
-  @property int fd()
-  {
-    return (cast(GstPollFD*)this._cPtr).fd;
-  }
-
-  /**
-      Set `fd` field.
-      Params:
-        propval = a file descriptor
-  */
-  @property void fd(int propval)
-  {
-    (cast(GstPollFD*)this._cPtr).fd = propval;
-  }
+  int idx;
 
   /**
       Initializes fd. Alternatively you can initialize it with
@@ -56,6 +25,6 @@ class PollFD
   */
   void init_()
   {
-    gst_poll_fd_init(cast(GstPollFD*)this._cPtr);
+    gst_poll_fd_init(cast(GstPollFD*)&this);
   }
 }

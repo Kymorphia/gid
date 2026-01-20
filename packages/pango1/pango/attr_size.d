@@ -13,7 +13,7 @@ import pango.types;
 */
 class AttrSize
 {
-  PangoAttrSize cInstance;
+  PangoAttrSize _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class AttrSize
     if (!ptr)
       throw new GidConstructException("Null instance pointer for pango.attr_size.AttrSize");
 
-    cInstance = *cast(PangoAttrSize*)ptr;
+    _cInstance = *cast(PangoAttrSize*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class AttrSize
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -45,7 +45,7 @@ class AttrSize
   /**
       Get `size` field.
       Returns: size of font, in units of 1/`PANGO_SCALE` of a point (for
-        [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
+          [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
   @property int size()
   {
@@ -56,7 +56,7 @@ class AttrSize
       Set `size` field.
       Params:
         propval = size of font, in units of 1/`PANGO_SCALE` of a point (for
-          [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
+            [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
   @property void size(int propval)
   {
@@ -66,9 +66,9 @@ class AttrSize
   /**
       Get `absolute` field.
       Returns: whether the font size is in device units or points.
-        This field is only present for compatibility with Pango-1.8.0
-        ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
-        be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
+          This field is only present for compatibility with Pango-1.8.0
+          ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
+          be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
   */
   @property uint absolute()
   {
@@ -79,9 +79,9 @@ class AttrSize
       Set `absolute` field.
       Params:
         propval = whether the font size is in device units or points.
-          This field is only present for compatibility with Pango-1.8.0
-          ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
-          be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
+            This field is only present for compatibility with Pango-1.8.0
+            ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
+            be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
   */
   @property void absolute(uint propval)
   {

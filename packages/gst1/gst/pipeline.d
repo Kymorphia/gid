@@ -94,8 +94,8 @@ class Pipeline : gst.bin.Bin
   /**
       Get `autoFlushBus` property.
       Returns: Whether or not to automatically flush all messages on the
-      pipeline's bus when going from READY to NULL state. Please see
-      [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
+        pipeline's bus when going from READY to NULL state. Please see
+        [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
   */
   @property bool autoFlushBus()
   {
@@ -106,8 +106,8 @@ class Pipeline : gst.bin.Bin
       Set `autoFlushBus` property.
       Params:
         propval = Whether or not to automatically flush all messages on the
-        pipeline's bus when going from READY to NULL state. Please see
-        [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
+          pipeline's bus when going from READY to NULL state. Please see
+          [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
   */
   @property void autoFlushBus(bool propval)
   {
@@ -117,8 +117,8 @@ class Pipeline : gst.bin.Bin
   /**
       Get `delay` property.
       Returns: The expected delay needed for elements to spin up to the
-      PLAYING state expressed in nanoseconds.
-      see [gst.pipeline.Pipeline.setDelay] for more information on this option.
+        PLAYING state expressed in nanoseconds.
+        see [gst.pipeline.Pipeline.setDelay] for more information on this option.
   */
   @property ulong delay()
   {
@@ -129,8 +129,8 @@ class Pipeline : gst.bin.Bin
       Set `delay` property.
       Params:
         propval = The expected delay needed for elements to spin up to the
-        PLAYING state expressed in nanoseconds.
-        see [gst.pipeline.Pipeline.setDelay] for more information on this option.
+          PLAYING state expressed in nanoseconds.
+          see [gst.pipeline.Pipeline.setDelay] for more information on this option.
   */
   @property void delay(ulong propval)
   {

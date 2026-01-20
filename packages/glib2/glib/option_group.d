@@ -28,7 +28,7 @@ class OptionGroup : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -94,12 +94,11 @@ class OptionGroup : gobject.boxed.Boxed
       string _str = str.fromCString(No.Free);
 
       _dretval = (*_dlg)(_str);
-      const(char)* _retval = _dretval.toCString(No.Alloc);
+      auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     g_option_group_set_translate_func(cast(GOptionGroup*)this._cPtr, _funcCB, _func, _funcDestroyCB);

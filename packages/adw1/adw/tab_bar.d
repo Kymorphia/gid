@@ -73,11 +73,11 @@ class TabBar : gtk.widget.Widget
   /**
       Get `autohide` property.
       Returns: Whether the tabs automatically hide.
-      
-      If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
-      or 1 tab, no pinned tabs, and no tab is being transferred.
-      
-      See `property@TabBar:tabs-revealed`.
+        
+        If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+        or 1 tab, no pinned tabs, and no tab is being transferred.
+        
+        See `property@TabBar:tabs-revealed`.
   */
   @property bool autohide()
   {
@@ -88,11 +88,11 @@ class TabBar : gtk.widget.Widget
       Set `autohide` property.
       Params:
         propval = Whether the tabs automatically hide.
-        
-        If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
-        or 1 tab, no pinned tabs, and no tab is being transferred.
-        
-        See `property@TabBar:tabs-revealed`.
+          
+          If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+          or 1 tab, no pinned tabs, and no tab is being transferred.
+          
+          See `property@TabBar:tabs-revealed`.
   */
   @property void autohide(bool propval)
   {
@@ -121,9 +121,9 @@ class TabBar : gtk.widget.Widget
   /**
       Get `expandTabs` property.
       Returns: Whether tabs expand to full width.
-      
-      If set to `TRUE`, the tabs will always vary width filling the whole width
-      when possible, otherwise tabs will always have the minimum possible size.
+        
+        If set to `TRUE`, the tabs will always vary width filling the whole width
+        when possible, otherwise tabs will always have the minimum possible size.
   */
   @property bool expandTabs()
   {
@@ -134,9 +134,9 @@ class TabBar : gtk.widget.Widget
       Set `expandTabs` property.
       Params:
         propval = Whether tabs expand to full width.
-        
-        If set to `TRUE`, the tabs will always vary width filling the whole width
-        when possible, otherwise tabs will always have the minimum possible size.
+          
+          If set to `TRUE`, the tabs will always vary width filling the whole width
+          when possible, otherwise tabs will always have the minimum possible size.
   */
   @property void expandTabs(bool propval)
   {
@@ -146,11 +146,11 @@ class TabBar : gtk.widget.Widget
   /**
       Get `extraDragPreferredAction` property.
       Returns: The unique action on the `current-drop` of the
-      `signal@TabBar::extra-drag-drop`.
-      
-      This property should only be used during a `signal@TabBar::extra-drag-drop`
-      and is always a subset of what was originally passed to
-      [adw.tab_bar.TabBar.setupExtraDropTarget].
+        `signal@TabBar::extra-drag-drop`.
+        
+        This property should only be used during a `signal@TabBar::extra-drag-drop`
+        and is always a subset of what was originally passed to
+        [adw.tab_bar.TabBar.setupExtraDropTarget].
   */
   @property gdk.types.DragAction extraDragPreferredAction()
   {
@@ -160,8 +160,8 @@ class TabBar : gtk.widget.Widget
   /**
       Get `extraDragPreload` property.
       Returns: Whether the drop data should be preloaded on hover.
-      
-      See [gtk.drop_target.DropTarget.preload].
+        
+        See [gtk.drop_target.DropTarget.preload].
   */
   @property bool extraDragPreload()
   {
@@ -172,8 +172,8 @@ class TabBar : gtk.widget.Widget
       Set `extraDragPreload` property.
       Params:
         propval = Whether the drop data should be preloaded on hover.
-        
-        See [gtk.drop_target.DropTarget.preload].
+          
+          See [gtk.drop_target.DropTarget.preload].
   */
   @property void extraDragPreload(bool propval)
   {
@@ -183,9 +183,9 @@ class TabBar : gtk.widget.Widget
   /**
       Get `inverted` property.
       Returns: Whether tabs use inverted layout.
-      
-      If set to `TRUE`, non-pinned tabs will have the close button at the
-      beginning and the indicator at the end rather than the opposite.
+        
+        If set to `TRUE`, non-pinned tabs will have the close button at the
+        beginning and the indicator at the end rather than the opposite.
   */
   @property bool inverted()
   {
@@ -196,9 +196,9 @@ class TabBar : gtk.widget.Widget
       Set `inverted` property.
       Params:
         propval = Whether tabs use inverted layout.
-        
-        If set to `TRUE`, non-pinned tabs will have the close button at the
-        beginning and the indicator at the end rather than the opposite.
+          
+          If set to `TRUE`, non-pinned tabs will have the close button at the
+          beginning and the indicator at the end rather than the opposite.
   */
   @property void inverted(bool propval)
   {
@@ -208,8 +208,8 @@ class TabBar : gtk.widget.Widget
   /**
       Get `isOverflowing` property.
       Returns: Whether the tab bar is overflowing.
-      
-      If `TRUE`, all tabs cannot be displayed at once and require scrolling.
+        
+        If `TRUE`, all tabs cannot be displayed at once and require scrolling.
   */
   @property bool isOverflowing()
   {
@@ -238,8 +238,8 @@ class TabBar : gtk.widget.Widget
   /**
       Get `tabsRevealed` property.
       Returns: Whether the tabs are currently revealed.
-      
-      See `property@TabBar:autohide`.
+        
+        See `property@TabBar:autohide`.
   */
   @property bool tabsRevealed()
   {
@@ -515,11 +515,11 @@ class TabBar : gtk.widget.Widget
       Connect to `ExtraDragDrop` signal.
   
       This signal is emitted when content is dropped onto a tab.
-      
-      The content must be of one of the types set up via
-      [adw.tab_bar.TabBar.setupExtraDropTarget].
-      
-      See [gtk.drop_target.DropTarget.drop].
+        
+        The content must be of one of the types set up via
+        [adw.tab_bar.TabBar.setupExtraDropTarget].
+        
+        See [gtk.drop_target.DropTarget.drop].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -573,14 +573,14 @@ class TabBar : gtk.widget.Widget
       Connect to `ExtraDragValue` signal.
   
       This signal is emitted when the dropped content is preloaded.
-      
-      In order for data to be preloaded, `propertyTabBar:extra-drag-preload`
-      must be set to `TRUE`.
-      
-      The content must be of one of the types set up via
-      [adw.tab_bar.TabBar.setupExtraDropTarget].
-      
-      See [gtk.drop_target.DropTarget.value].
+        
+        In order for data to be preloaded, `propertyTabBar:extra-drag-preload`
+        must be set to `TRUE`.
+        
+        The content must be of one of the types set up via
+        [adw.tab_bar.TabBar.setupExtraDropTarget].
+        
+        See [gtk.drop_target.DropTarget.value].
   
       Params:
         callback = signal callback delegate or function to connect

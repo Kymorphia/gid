@@ -66,7 +66,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Returns: Selected link
   
       Deprecated: Please use ATK_STATE_FOCUSABLE for all links, and
-      ATK_STATE_FOCUSED for focused links.
+        ATK_STATE_FOCUSED for focused links.
   */
   @property bool selectedLink()
   {

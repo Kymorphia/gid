@@ -56,7 +56,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   /**
       Get `hasEntry` property.
       Returns: If true, the cell renderer will include an entry and allow to enter
-      values other than the ones in the popup list.
+        values other than the ones in the popup list.
   */
   @property bool hasEntry()
   {
@@ -67,7 +67,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Set `hasEntry` property.
       Params:
         propval = If true, the cell renderer will include an entry and allow to enter
-        values other than the ones in the popup list.
+          values other than the ones in the popup list.
   */
   @property void hasEntry(bool propval)
   {
@@ -77,7 +77,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   /**
       Get `model` property.
       Returns: Holds a tree model containing the possible values for the combo box.
-      Use the text_column property to specify the column holding the values.
+        Use the text_column property to specify the column holding the values.
   */
   @property gtk.tree_model.TreeModel model()
   {
@@ -88,7 +88,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Set `model` property.
       Params:
         propval = Holds a tree model containing the possible values for the combo box.
-        Use the text_column property to specify the column holding the values.
+          Use the text_column property to specify the column holding the values.
   */
   @property void model(gtk.tree_model.TreeModel propval)
   {
@@ -98,14 +98,14 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   /**
       Get `textColumn` property.
       Returns: Specifies the model column which holds the possible values for the
-      combo box.
-      
-      Note that this refers to the model specified in the model property,
-      not the model backing the tree view to which
-      this cell renderer is attached.
-      
-      #GtkCellRendererCombo automatically adds a text cell renderer for
-      this column to its combo box.
+        combo box.
+        
+        Note that this refers to the model specified in the model property,
+        not the model backing the tree view to which
+        this cell renderer is attached.
+        
+        #GtkCellRendererCombo automatically adds a text cell renderer for
+        this column to its combo box.
   */
   @property int textColumn()
   {
@@ -116,14 +116,14 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Set `textColumn` property.
       Params:
         propval = Specifies the model column which holds the possible values for the
-        combo box.
-        
-        Note that this refers to the model specified in the model property,
-        not the model backing the tree view to which
-        this cell renderer is attached.
-        
-        #GtkCellRendererCombo automatically adds a text cell renderer for
-        this column to its combo box.
+          combo box.
+          
+          Note that this refers to the model specified in the model property,
+          not the model backing the tree view to which
+          this cell renderer is attached.
+          
+          #GtkCellRendererCombo automatically adds a text cell renderer for
+          this column to its combo box.
   */
   @property void textColumn(int propval)
   {
@@ -151,16 +151,16 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Connect to `Changed` signal.
   
       This signal is emitted each time after the user selected an item in
-      the combo box, either by using the mouse or the arrow keys.  Contrary
-      to GtkComboBox, GtkCellRendererCombo::changed is not emitted for
-      changes made to a selected item in the entry.  The argument new_iter
-      corresponds to the newly selected item in the combo box and it is relative
-      to the GtkTreeModel set via the model property on GtkCellRendererCombo.
-      
-      Note that as soon as you change the model displayed in the tree view,
-      the tree view will immediately cease the editing operating.  This
-      means that you most probably want to refrain from changing the model
-      until the combo cell renderer emits the edited or editing_canceled signal.
+        the combo box, either by using the mouse or the arrow keys.  Contrary
+        to GtkComboBox, GtkCellRendererCombo::changed is not emitted for
+        changes made to a selected item in the entry.  The argument new_iter
+        corresponds to the newly selected item in the combo box and it is relative
+        to the GtkTreeModel set via the model property on GtkCellRendererCombo.
+        
+        Note that as soon as you change the model displayed in the tree view,
+        the tree view will immediately cease the editing operating.  This
+        means that you most probably want to refrain from changing the model
+        until the combo cell renderer emits the edited or editing_canceled signal.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -168,10 +168,10 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
           $(D void callback(string pathString, gtk.tree_iter.TreeIter newIter, gtk.cell_renderer_combo.CellRendererCombo cellRendererCombo))
   
           `pathString` a string of the path identifying the edited cell
-                        (relative to the tree view model) (optional)
+                          (relative to the tree view model) (optional)
   
           `newIter` the new iter selected in the combo box
-                     (relative to the combo box model) (optional)
+                       (relative to the combo box model) (optional)
   
           `cellRendererCombo` the instance the signal is connected to (optional)
   

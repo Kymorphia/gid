@@ -257,7 +257,7 @@ class Display : gobject.object.ObjectWrap
   {
     GdkEvent* _cretval;
     _cretval = gdk_display_get_event(cast(GdkDisplay*)this._cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -539,7 +539,7 @@ class Display : gobject.object.ObjectWrap
   {
     GdkEvent* _cretval;
     _cretval = gdk_display_peek_event(cast(GdkDisplay*)this._cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -579,7 +579,7 @@ class Display : gobject.object.ObjectWrap
   */
   void putEvent(gdk.event.Event event)
   {
-    gdk_display_put_event(cast(GdkDisplay*)this._cPtr, event ? cast(const(GdkEvent)*)event._cPtr : null);
+    gdk_display_put_event(cast(GdkDisplay*)this._cPtr, event ? cast(const(GdkEvent)*)event._cPtr(No.Dup) : null);
   }
 
   /**
@@ -768,7 +768,7 @@ class Display : gobject.object.ObjectWrap
       Connect to `Closed` signal.
   
       The ::closed signal is emitted when the connection to the windowing
-      system for display is closed.
+        system for display is closed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -813,7 +813,7 @@ class Display : gobject.object.ObjectWrap
       Connect to `MonitorAdded` signal.
   
       The ::monitor-added signal is emitted whenever a monitor is
-      added.
+        added.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -858,7 +858,7 @@ class Display : gobject.object.ObjectWrap
       Connect to `MonitorRemoved` signal.
   
       The ::monitor-removed signal is emitted whenever a monitor is
-      removed.
+        removed.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -903,7 +903,7 @@ class Display : gobject.object.ObjectWrap
       Connect to `Opened` signal.
   
       The ::opened signal is emitted when the connection to the windowing
-      system for display is opened.
+        system for display is opened.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -941,7 +941,7 @@ class Display : gobject.object.ObjectWrap
       Connect to `SeatAdded` signal.
   
       The ::seat-added signal is emitted whenever a new seat is made
-      known to the windowing system.
+        known to the windowing system.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -986,7 +986,7 @@ class Display : gobject.object.ObjectWrap
       Connect to `SeatRemoved` signal.
   
       The ::seat-removed signal is emitted whenever a seat is removed
-      by the windowing system.
+        by the windowing system.
   
       Params:
         callback = signal callback delegate or function to connect

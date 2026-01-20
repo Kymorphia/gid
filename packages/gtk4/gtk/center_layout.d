@@ -49,13 +49,13 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   /**
       Get `shrinkCenterLast` property.
       Returns: Whether to shrink the center widget after other children.
-      
-      By default, when there's no space to give all three children their
-      natural widths, the start and end widgets start shrinking and the
-      center child keeps natural width until they reach minimum width.
-      
-      If set to `FALSE`, start and end widgets keep natural width and the
-      center widget starts shrinking instead.
+        
+        By default, when there's no space to give all three children their
+        natural widths, the start and end widgets start shrinking and the
+        center child keeps natural width until they reach minimum width.
+        
+        If set to `FALSE`, start and end widgets keep natural width and the
+        center widget starts shrinking instead.
   */
   @property bool shrinkCenterLast()
   {
@@ -66,13 +66,13 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Set `shrinkCenterLast` property.
       Params:
         propval = Whether to shrink the center widget after other children.
-        
-        By default, when there's no space to give all three children their
-        natural widths, the start and end widgets start shrinking and the
-        center child keeps natural width until they reach minimum width.
-        
-        If set to `FALSE`, start and end widgets keep natural width and the
-        center widget starts shrinking instead.
+          
+          By default, when there's no space to give all three children their
+          natural widths, the start and end widgets start shrinking and the
+          center child keeps natural width until they reach minimum width.
+          
+          If set to `FALSE`, start and end widgets keep natural width and the
+          center widget starts shrinking instead.
   */
   @property void shrinkCenterLast(bool propval)
   {

@@ -187,10 +187,8 @@ class BaseTransform : gst.element.Element
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
     GstAllocator* _allocator;
-    GstAllocationParams _params;
-    gst_base_transform_get_allocator(cast(GstBaseTransform*)this._cPtr, &_allocator, &_params);
+    gst_base_transform_get_allocator(cast(GstBaseTransform*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /** */

@@ -498,13 +498,15 @@ class MetaStore : gobject.object.ObjectWrap
 
     extern(C) gboolean _funcCallback(const(char)* word)
     {
+      bool _dretval;
       string _word = word.fromCString(No.Free);
 
-      gboolean _retval = _static_func(_word);
+      _dretval = _static_func(_word);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     _static_func = func;
     gda_meta_store_set_reserved_keywords_func(cast(GdaMetaStore*)this._cPtr, _funcCB);
     _static_func = null;
@@ -557,7 +559,7 @@ class MetaStore : gobject.object.ObjectWrap
       Connect to `MetaReset` signal.
   
       This signal is emitted when the store's contents have been reset completely and when
-      no detailed changes are available
+        no detailed changes are available
   
       Params:
         callback = signal callback delegate or function to connect
@@ -595,8 +597,8 @@ class MetaStore : gobject.object.ObjectWrap
       Connect to `SuggestUpdate` signal.
   
       This signal is emitted when the contents of a table should be updated (data to update or insert only;
-      deleting data is done automatically). This signal is used for internal purposes by the #GdaConnection
-      object.
+        deleting data is done automatically). This signal is used for internal purposes by the #GdaConnection
+        object.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -608,7 +610,7 @@ class MetaStore : gobject.object.ObjectWrap
           `metaStore` the instance the signal is connected to (optional)
   
           `Returns` a new #GError error structure if there was an error when processing the
-          signal, or null if signal propagation should continue
+            signal, or null if signal propagation should continue
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

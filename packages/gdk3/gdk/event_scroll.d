@@ -20,7 +20,7 @@ import gid.gid;
 */
 class EventScroll
 {
-  GdkEventScroll cInstance;
+  GdkEventScroll _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -28,7 +28,7 @@ class EventScroll
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_scroll.EventScroll");
 
-    cInstance = *cast(GdkEventScroll*)ptr;
+    _cInstance = *cast(GdkEventScroll*)ptr;
 
     if (take)
       gFree(ptr);
@@ -37,7 +37,7 @@ class EventScroll
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -158,8 +158,8 @@ class EventScroll
   /**
       Get `state` field.
       Returns: a bit-mask representing the state of
-        the modifier keys (e.g. Control, Shift and Alt) and the pointer
-        buttons. See #GdkModifierType.
+          the modifier keys (e.g. Control, Shift and Alt) and the pointer
+          buttons. See #GdkModifierType.
   */
   @property gdk.types.ModifierType state()
   {
@@ -170,8 +170,8 @@ class EventScroll
       Set `state` field.
       Params:
         propval = a bit-mask representing the state of
-          the modifier keys (e.g. Control, Shift and Alt) and the pointer
-          buttons. See #GdkModifierType.
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
   */
   @property void state(gdk.types.ModifierType propval)
   {
@@ -181,8 +181,8 @@ class EventScroll
   /**
       Get `direction` field.
       Returns: the direction to scroll to (one of [gdk.types.ScrollDirection.Up],
-        [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
-        [gdk.types.ScrollDirection.Smooth]).
+          [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
+          [gdk.types.ScrollDirection.Smooth]).
   */
   @property gdk.types.ScrollDirection direction()
   {
@@ -193,8 +193,8 @@ class EventScroll
       Set `direction` field.
       Params:
         propval = the direction to scroll to (one of [gdk.types.ScrollDirection.Up],
-          [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
-          [gdk.types.ScrollDirection.Smooth]).
+            [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
+            [gdk.types.ScrollDirection.Smooth]).
   */
   @property void direction(gdk.types.ScrollDirection propval)
   {
@@ -204,7 +204,7 @@ class EventScroll
   /**
       Get `device` field.
       Returns: the master device that the event originated from. Use
-      [gdk.event.Event.getSourceDevice] to get the slave device.
+        [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property gdk.device.Device device()
   {
@@ -215,7 +215,7 @@ class EventScroll
       Set `device` field.
       Params:
         propval = the master device that the event originated from. Use
-        [gdk.event.Event.getSourceDevice] to get the slave device.
+          [gdk.event.Event.getSourceDevice] to get the slave device.
   */
   @property void device(gdk.device.Device propval)
   {
@@ -226,7 +226,7 @@ class EventScroll
   /**
       Get `xRoot` field.
       Returns: the x coordinate of the pointer relative to the root of the
-        screen.
+          screen.
   */
   @property double xRoot()
   {
@@ -237,7 +237,7 @@ class EventScroll
       Set `xRoot` field.
       Params:
         propval = the x coordinate of the pointer relative to the root of the
-          screen.
+            screen.
   */
   @property void xRoot(double propval)
   {
@@ -247,7 +247,7 @@ class EventScroll
   /**
       Get `yRoot` field.
       Returns: the y coordinate of the pointer relative to the root of the
-        screen.
+          screen.
   */
   @property double yRoot()
   {
@@ -258,7 +258,7 @@ class EventScroll
       Set `yRoot` field.
       Params:
         propval = the y coordinate of the pointer relative to the root of the
-          screen.
+            screen.
   */
   @property void yRoot(double propval)
   {

@@ -123,7 +123,7 @@ class ListBox : gtk.widget.Widget
   /**
       Get `activateOnSingleClick` property.
       Returns: Determines whether children can be activated with a single
-      click, or require a double-click.
+        click, or require a double-click.
   */
   @property bool activateOnSingleClick()
   {
@@ -134,7 +134,7 @@ class ListBox : gtk.widget.Widget
       Set `activateOnSingleClick` property.
       Params:
         propval = Determines whether children can be activated with a single
-        click, or require a double-click.
+          click, or require a double-click.
   */
   @property void activateOnSingleClick(bool propval)
   {
@@ -234,12 +234,11 @@ class ListBox : gtk.widget.Widget
       auto _dlg = cast(gtk.types.ListBoxCreateWidgetFunc*)userData;
 
       _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
-      GtkWidget* _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
+      auto _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _createWidgetFuncCB = createWidgetFunc ? &_createWidgetFuncCallback : null;
-
     auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
     GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
     gtk_list_box_bind_model(cast(GtkListBox*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
@@ -510,7 +509,6 @@ class ListBox : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gtk_list_box_selected_foreach(cast(GtkListBox*)this._cPtr, _funcCB, _func);
   }
@@ -569,13 +567,15 @@ class ListBox : gtk.widget.Widget
   {
     extern(C) gboolean _filterFuncCallback(GtkListBoxRow* row, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.ListBoxFilterFunc*)userData;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
-
     auto _filterFunc = filterFunc ? freezeDelegate(cast(void*)&filterFunc) : null;
     GDestroyNotify _filterFuncDestroyCB = filterFunc ? &thawDelegate : null;
     gtk_list_box_set_filter_func(cast(GtkListBox*)this._cPtr, _filterFuncCB, _filterFunc, _filterFuncDestroyCB);
@@ -620,7 +620,6 @@ class ListBox : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.Take));
     }
     auto _updateHeaderCB = updateHeader ? &_updateHeaderCallback : null;
-
     auto _updateHeader = updateHeader ? freezeDelegate(cast(void*)&updateHeader) : null;
     GDestroyNotify _updateHeaderDestroyCB = updateHeader ? &thawDelegate : null;
     gtk_list_box_set_header_func(cast(GtkListBox*)this._cPtr, _updateHeaderCB, _updateHeader, _updateHeaderDestroyCB);
@@ -688,7 +687,6 @@ class ListBox : gtk.widget.Widget
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
-
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
     gtk_list_box_set_sort_func(cast(GtkListBox*)this._cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
@@ -863,11 +861,11 @@ class ListBox : gtk.widget.Widget
       Connect to `RowSelected` signal.
   
       Emitted when a new row is selected, or (with a null row)
-      when the selection is cleared.
-      
-      When the box is using [gtk.types.SelectionMode.Multiple], this signal will not
-      give you the full picture of selection changes, and you should use
-      the `signalGtk.ListBox::selected-rows-changed` signal instead.
+        when the selection is cleared.
+        
+        When the box is using [gtk.types.SelectionMode.Multiple], this signal will not
+        give you the full picture of selection changes, and you should use
+        the `signalGtk.ListBox::selected-rows-changed` signal instead.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -912,11 +910,11 @@ class ListBox : gtk.widget.Widget
       Connect to `SelectAll` signal.
   
       Emitted to select all children of the box, if the selection
-      mode permits it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
+        mode permits it.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1028,12 +1026,12 @@ class ListBox : gtk.widget.Widget
       Connect to `UnselectAll` signal.
   
       Emitted to unselect all children of the box, if the selection
-      mode permits it.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is
-      <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
+        mode permits it.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is
+        <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

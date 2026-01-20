@@ -1,4 +1,4 @@
-/// Module for [RegionIter] class
+/// Module for [RegionIter] struct
 module gtksource.region_iter;
 
 import gid.gid;
@@ -11,27 +11,16 @@ import gtksource.types;
     #GtkSourceRegionIter is an opaque datatype; ignore all its fields.
     Initialize the iter with [gtksource.region.Region.getStartRegionIter].
 */
-class RegionIter
+struct RegionIter
 {
-  GtkSourceRegionIter cInstance;
+  /** */
+  void* dummy1;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtksource.region_iter.RegionIter");
-
-    cInstance = *cast(GtkSourceRegionIter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
+  uint dummy2;
 
   /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  void* dummy3;
 
   /**
       Gets the subregion at this iterator.
@@ -45,11 +34,7 @@ class RegionIter
   bool getSubregion(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
     bool _retval;
-    GtkTextIter _start;
-    GtkTextIter _end;
-    _retval = cast(bool)gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)this._cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    _retval = cast(bool)gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)&this, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
     return _retval;
   }
 
@@ -57,7 +42,7 @@ class RegionIter
   bool isEnd()
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_region_iter_is_end(cast(GtkSourceRegionIter*)this._cPtr);
+    _retval = cast(bool)gtk_source_region_iter_is_end(cast(GtkSourceRegionIter*)&this);
     return _retval;
   }
 
@@ -69,7 +54,7 @@ class RegionIter
   bool next()
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_region_iter_next(cast(GtkSourceRegionIter*)this._cPtr);
+    _retval = cast(bool)gtk_source_region_iter_next(cast(GtkSourceRegionIter*)&this);
     return _retval;
   }
 }

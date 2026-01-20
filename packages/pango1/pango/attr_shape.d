@@ -13,7 +13,7 @@ import pango.types;
 */
 class AttrShape
 {
-  PangoAttrShape cInstance;
+  PangoAttrShape _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class AttrShape
     if (!ptr)
       throw new GidConstructException("Null instance pointer for pango.attr_shape.AttrShape");
 
-    cInstance = *cast(PangoAttrShape*)ptr;
+    _cInstance = *cast(PangoAttrShape*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class AttrShape
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -58,7 +58,7 @@ class AttrShape
   */
   @property void inkRect(pango.types.Rectangle propval)
   {
-    (cast(PangoAttrShape*)this._cPtr).inkRect = propval;
+    (cast(PangoAttrShape*)this._cPtr).inkRect = cast(PangoRectangle)propval;
   }
 
   /**
@@ -77,7 +77,7 @@ class AttrShape
   */
   @property void logicalRect(pango.types.Rectangle propval)
   {
-    (cast(PangoAttrShape*)this._cPtr).logicalRect = propval;
+    (cast(PangoAttrShape*)this._cPtr).logicalRect = cast(PangoRectangle)propval;
   }
 
   /**

@@ -139,9 +139,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   bool getBackground(out gdk.rgba.RGBA background)
   {
     bool _retval;
-    GdkRGBA _background;
-    _retval = cast(bool)gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)this._cPtr, &_background);
-    background = new gdk.rgba.RGBA(cast(void*)&_background, No.Take);
+    _retval = cast(bool)gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)this._cPtr, cast(GdkRGBA*)&background);
     return _retval;
   }
 
@@ -251,7 +249,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   void setBackground(gdk.rgba.RGBA background)
   {
-    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)this._cPtr, background ? cast(const(GdkRGBA)*)background._cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)this._cPtr, cast(const(GdkRGBA)*)&background);
   }
 
   /**
@@ -292,7 +290,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Connect to `QueryTooltipMarkup` signal.
   
       The code should connect to this signal to provide a tooltip for given
-      mark. The tooltip can contain a markup.
+        mark. The tooltip can contain a markup.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -304,7 +302,7 @@ class MarkAttributes : gobject.object.ObjectWrap
           `markAttributes` the instance the signal is connected to (optional)
   
           `Returns` A tooltip. The string should be freed with
-          [glib.global.gfree] when done with it.
+            [glib.global.gfree] when done with it.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -340,7 +338,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Connect to `QueryTooltipText` signal.
   
       The code should connect to this signal to provide a tooltip for given
-      mark. The tooltip should be just a plain text.
+        mark. The tooltip should be just a plain text.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -352,7 +350,7 @@ class MarkAttributes : gobject.object.ObjectWrap
           `markAttributes` the instance the signal is connected to (optional)
   
           `Returns` A tooltip. The string should be freed with
-          [glib.global.gfree] when done with it.
+            [glib.global.gfree] when done with it.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

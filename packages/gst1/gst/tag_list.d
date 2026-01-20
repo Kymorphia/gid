@@ -30,7 +30,7 @@ class TagList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -59,6 +59,16 @@ class TagList : gobject.boxed.Boxed
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstTagList*)this._cPtr).miniObject);
+  }
+
+  /**
+      Set `miniObject` field.
+      Params:
+        propval = the parent type
+  */
+  @property void miniObject(gst.mini_object.MiniObject propval)
+  {
+    (cast(GstTagList*)this._cPtr).miniObject = cast(GstMiniObject)propval;
   }
 
   /**
@@ -143,7 +153,6 @@ class TagList : gobject.boxed.Boxed
       (*_dlg)(list ? new gst.tag_list.TagList(cast(void*)list, No.Take) : null, _tag);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gst_tag_list_foreach(cast(const(GstTagList)*)this._cPtr, _funcCB, _func);
   }
@@ -209,7 +218,7 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString(No.Alloc);
     GDate* _value;
     _retval = cast(bool)gst_tag_list_get_date(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
-    value = new glib.date.Date(cast(void*)_value, Yes.Take);
+    value = *cast(Date*)_value;
     return _retval;
   }
 
@@ -233,7 +242,7 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString(No.Alloc);
     GDate* _value;
     _retval = cast(bool)gst_tag_list_get_date_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
-    value = new glib.date.Date(cast(void*)_value, Yes.Take);
+    value = *cast(Date*)_value;
     return _retval;
   }
 

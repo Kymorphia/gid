@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventSetting
 {
-  GdkEventSetting cInstance;
+  GdkEventSetting _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventSetting
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_setting.EventSetting");
 
-    cInstance = *cast(GdkEventSetting*)ptr;
+    _cInstance = *cast(GdkEventSetting*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventSetting
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -93,7 +93,7 @@ class EventSetting
   /**
       Get `action` field.
       Returns: what happened to the setting ([gdk.types.SettingAction.New],
-        [gdk.types.SettingAction.Changed] or [gdk.types.SettingAction.Deleted]).
+          [gdk.types.SettingAction.Changed] or [gdk.types.SettingAction.Deleted]).
   */
   @property gdk.types.SettingAction action()
   {
@@ -104,7 +104,7 @@ class EventSetting
       Set `action` field.
       Params:
         propval = what happened to the setting ([gdk.types.SettingAction.New],
-          [gdk.types.SettingAction.Changed] or [gdk.types.SettingAction.Deleted]).
+            [gdk.types.SettingAction.Changed] or [gdk.types.SettingAction.Deleted]).
   */
   @property void action(gdk.types.SettingAction propval)
   {

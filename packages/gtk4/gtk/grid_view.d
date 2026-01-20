@@ -128,9 +128,9 @@ class GridView : gtk.list_base.ListBase
   /**
       Get `maxColumns` property.
       Returns: Maximum number of columns per row.
-      
-      If this number is smaller than `property@Gtk.GridView:min-columns`,
-      that value is used instead.
+        
+        If this number is smaller than `property@Gtk.GridView:min-columns`,
+        that value is used instead.
   */
   @property uint maxColumns()
   {
@@ -141,9 +141,9 @@ class GridView : gtk.list_base.ListBase
       Set `maxColumns` property.
       Params:
         propval = Maximum number of columns per row.
-        
-        If this number is smaller than `property@Gtk.GridView:min-columns`,
-        that value is used instead.
+          
+          If this number is smaller than `property@Gtk.GridView:min-columns`,
+          that value is used instead.
   */
   @property void maxColumns(uint propval)
   {
@@ -442,11 +442,11 @@ class GridView : gtk.list_base.ListBase
       Connect to `Activate` signal.
   
       Emitted when a cell has been activated by the user,
-      usually via activating the GtkGridView|list.activate-item action.
-      
-      This allows for a convenient way to handle activation in a gridview.
-      See [gtk.list_item.ListItem.activatable] for details on how to use
-      this signal.
+        usually via activating the GtkGridView|list.activate-item action.
+        
+        This allows for a convenient way to handle activation in a gridview.
+        See [gtk.list_item.ListItem.activatable] for details on how to use
+        this signal.
   
       Params:
         callback = signal callback delegate or function to connect

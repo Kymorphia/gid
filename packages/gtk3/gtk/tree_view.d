@@ -139,7 +139,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `activateOnSingleClick` property.
       Returns: The activate-on-single-click property specifies whether the "row-activated" signal
-      will be emitted after a single click.
+        will be emitted after a single click.
   */
   @property bool activateOnSingleClick()
   {
@@ -150,7 +150,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `activateOnSingleClick` property.
       Params:
         propval = The activate-on-single-click property specifies whether the "row-activated" signal
-        will be emitted after a single click.
+          will be emitted after a single click.
   */
   @property void activateOnSingleClick(bool propval)
   {
@@ -208,10 +208,10 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `fixedHeightMode` property.
       Returns: Setting the ::fixed-height-mode property to true speeds up
-      #GtkTreeView by assuming that all rows have the same height.
-      Only enable this option if all rows are the same height.
-      Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
-      information on this option.
+        #GtkTreeView by assuming that all rows have the same height.
+        Only enable this option if all rows are the same height.
+        Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
+        information on this option.
   */
   @property bool fixedHeightMode()
   {
@@ -222,10 +222,10 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `fixedHeightMode` property.
       Params:
         propval = Setting the ::fixed-height-mode property to true speeds up
-        #GtkTreeView by assuming that all rows have the same height.
-        Only enable this option if all rows are the same height.
-        Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
-        information on this option.
+          #GtkTreeView by assuming that all rows have the same height.
+          Only enable this option if all rows are the same height.
+          Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
+          information on this option.
   */
   @property void fixedHeightMode(bool propval)
   {
@@ -259,11 +259,11 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `hoverExpand` property.
       Returns: Enables or disables the hover expansion mode of @tree_view.
-      Hover expansion makes rows expand or collapse if the pointer moves
-      over them.
-      
-      This mode is primarily intended for treeviews in popups, e.g.
-      in #GtkComboBox or #GtkEntryCompletion.
+        Hover expansion makes rows expand or collapse if the pointer moves
+        over them.
+        
+        This mode is primarily intended for treeviews in popups, e.g.
+        in #GtkComboBox or #GtkEntryCompletion.
   */
   @property bool hoverExpand()
   {
@@ -274,11 +274,11 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `hoverExpand` property.
       Params:
         propval = Enables or disables the hover expansion mode of @tree_view.
-        Hover expansion makes rows expand or collapse if the pointer moves
-        over them.
-        
-        This mode is primarily intended for treeviews in popups, e.g.
-        in #GtkComboBox or #GtkEntryCompletion.
+          Hover expansion makes rows expand or collapse if the pointer moves
+          over them.
+          
+          This mode is primarily intended for treeviews in popups, e.g.
+          in #GtkComboBox or #GtkEntryCompletion.
   */
   @property void hoverExpand(bool propval)
   {
@@ -288,12 +288,12 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Get `hoverSelection` property.
       Returns: Enables or disables the hover selection mode of @tree_view.
-      Hover selection makes the selected row follow the pointer.
-      Currently, this works only for the selection modes
-      [gtk.types.SelectionMode.Single] and [gtk.types.SelectionMode.Browse].
-      
-      This mode is primarily intended for treeviews in popups, e.g.
-      in #GtkComboBox or #GtkEntryCompletion.
+        Hover selection makes the selected row follow the pointer.
+        Currently, this works only for the selection modes
+        [gtk.types.SelectionMode.Single] and [gtk.types.SelectionMode.Browse].
+        
+        This mode is primarily intended for treeviews in popups, e.g.
+        in #GtkComboBox or #GtkEntryCompletion.
   */
   @property bool hoverSelection()
   {
@@ -304,12 +304,12 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Set `hoverSelection` property.
       Params:
         propval = Enables or disables the hover selection mode of @tree_view.
-        Hover selection makes the selected row follow the pointer.
-        Currently, this works only for the selection modes
-        [gtk.types.SelectionMode.Single] and [gtk.types.SelectionMode.Browse].
-        
-        This mode is primarily intended for treeviews in popups, e.g.
-        in #GtkComboBox or #GtkEntryCompletion.
+          Hover selection makes the selected row follow the pointer.
+          Currently, this works only for the selection modes
+          [gtk.types.SelectionMode.Single] and [gtk.types.SelectionMode.Browse].
+          
+          This mode is primarily intended for treeviews in popups, e.g.
+          in #GtkComboBox or #GtkEntryCompletion.
   */
   @property void hoverSelection(bool propval)
   {
@@ -376,7 +376,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: Sets a hint to the theme to draw rows in alternating colors.
   
       Deprecated: The theme is responsible for drawing rows
-        using zebra striping
+          using zebra striping
   */
   @property bool rulesHint()
   {
@@ -389,7 +389,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         propval = Sets a hint to the theme to draw rows in alternating colors.
   
       Deprecated: The theme is responsible for drawing rows
-        using zebra striping
+          using zebra striping
   */
   @property void rulesHint(bool propval)
   {
@@ -646,6 +646,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_tree_view_enable_model_drag_dest(cast(GtkTreeView*)this._cPtr, _targets, _nTargets, actions);
   }
 
@@ -669,6 +670,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
     foreach (obj; targets)
       _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
+
     gtk_tree_view_enable_model_drag_source(cast(GtkTreeView*)this._cPtr, startButtonMask, _targets, _nTargets, actions);
   }
 
@@ -736,9 +738,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getBackgroundArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect)
   {
-    GdkRectangle _rect;
-    gtk_tree_view_get_background_area(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    gtk_tree_view_get_background_area(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, cast(GdkRectangle*)&rect);
   }
 
   /**
@@ -774,9 +774,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getCellArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect)
   {
-    GdkRectangle _rect;
-    gtk_tree_view_get_cell_area(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    gtk_tree_view_get_cell_area(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, cast(GdkRectangle*)&rect);
   }
 
   /**
@@ -1197,11 +1195,9 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
     bool _retval;
     GtkTreeModel* _model;
     GtkTreePath* _path;
-    GtkTreeIter _iter;
-    _retval = cast(bool)gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)this._cPtr, cast(int*)&x, cast(int*)&y, keyboardTip, &_model, &_path, &_iter);
+    _retval = cast(bool)gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)this._cPtr, cast(int*)&x, cast(int*)&y, keyboardTip, &_model, &_path, cast(GtkTreeIter*)&iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -1255,9 +1251,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
   {
-    GdkRectangle _visibleRect;
-    gtk_tree_view_get_visible_rect(cast(GtkTreeView*)this._cPtr, &_visibleRect);
-    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.Take);
+    gtk_tree_view_get_visible_rect(cast(GtkTreeView*)this._cPtr, cast(GdkRectangle*)&visibleRect);
   }
 
   /**
@@ -1299,10 +1293,9 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
     {
       auto _dlg = cast(gtk.types.TreeCellDataFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     int _retval;
     const(char)* _title = title.toCString(No.Alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1383,7 +1376,6 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gtk_tree_view_map_expanded_rows(cast(GtkTreeView*)this._cPtr, _funcCB, _func);
   }
@@ -1519,13 +1511,15 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     extern(C) gboolean _funcCallback(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewColumnDropFunc*)data;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)prevColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)nextColumn, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)prevColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)nextColumn, No.Take));
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_view_set_column_drag_function(cast(GtkTreeView*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -1600,7 +1594,6 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, children);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_view_set_destroy_count_func(cast(GtkTreeView*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -1815,13 +1808,15 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_view_set_row_separator_func(cast(GtkTreeView*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -1911,14 +1906,16 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     extern(C) gboolean _searchEqualFuncCallback(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData)
     {
+      bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewSearchEqualFunc*)searchData;
       string _key = key.fromCString(No.Free);
 
-      gboolean _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, *cast(gtk.tree_iter.TreeIter*)iter);
+      auto _retval = cast(gboolean)_dretval;
+
       return _retval;
     }
     auto _searchEqualFuncCB = searchEqualFunc ? &_searchEqualFuncCallback : null;
-
     auto _searchEqualFunc = searchEqualFunc ? freezeDelegate(cast(void*)&searchEqualFunc) : null;
     GDestroyNotify _searchEqualFuncDestroyCB = searchEqualFunc ? &thawDelegate : null;
     gtk_tree_view_set_search_equal_func(cast(GtkTreeView*)this._cPtr, _searchEqualFuncCB, _searchEqualFunc, _searchEqualFuncDestroyCB);
@@ -1940,7 +1937,6 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)searchDialog, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_view_set_search_position_func(cast(GtkTreeView*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -2192,14 +2188,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `MoveCursor` signal.
   
       The #GtkTreeView::move-cursor signal is a [keybinding
-      signal][GtkBindingSignal] which gets emitted when the user
-      presses one of the cursor keys.
-      
-      Applications should not connect to it, but may emit it with
-      [gobject.global.signalEmitByName] if they need to control the cursor
-      programmatically. In contrast to [gtk.tree_view.TreeView.setCursor] and
-      [gtk.tree_view.TreeView.setCursorOnCell] when moving horizontally
-      #GtkTreeView::move-cursor does not reset the current selection.
+        signal][GtkBindingSignal] which gets emitted when the user
+        presses one of the cursor keys.
+        
+        Applications should not connect to it, but may emit it with
+        [gobject.global.signalEmitByName] if they need to control the cursor
+        programmatically. In contrast to [gtk.tree_view.TreeView.setCursor] and
+        [gtk.tree_view.TreeView.setCursorOnCell] when moving horizontally
+        #GtkTreeView::move-cursor does not reset the current selection.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2207,15 +2203,15 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
           $(D bool callback(gtk.types.MovementStep step, int direction, gtk.tree_view.TreeView treeView))
   
           `step` the granularity of the move, as a
-          #GtkMovementStep. [gtk.types.MovementStep.LogicalPositions],
-          [gtk.types.MovementStep.VisualPositions], [gtk.types.MovementStep.DisplayLines],
-          [gtk.types.MovementStep.Pages] and [gtk.types.MovementStep.BufferEnds] are
-          supported. [gtk.types.MovementStep.LogicalPositions] and
-          [gtk.types.MovementStep.VisualPositions] are treated identically. (optional)
+            #GtkMovementStep. [gtk.types.MovementStep.LogicalPositions],
+            [gtk.types.MovementStep.VisualPositions], [gtk.types.MovementStep.DisplayLines],
+            [gtk.types.MovementStep.Pages] and [gtk.types.MovementStep.BufferEnds] are
+            supported. [gtk.types.MovementStep.LogicalPositions] and
+            [gtk.types.MovementStep.VisualPositions] are treated identically. (optional)
   
           `direction` the direction to move: +1 to move forwards;
-          -1 to move backwards. The resulting movement is
-          undefined for all other values. (optional)
+            -1 to move backwards. The resulting movement is
+            undefined for all other values. (optional)
   
           `treeView` the instance the signal is connected to (optional)
   
@@ -2260,16 +2256,16 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `RowActivated` signal.
   
       The "row-activated" signal is emitted when the method
-      [gtk.tree_view.TreeView.rowActivated] is called, when the user double
-      clicks a treeview row with the "activate-on-single-click"
-      property set to false, or when the user single clicks a row when
-      the "activate-on-single-click" property set to true. It is also
-      emitted when a non-editable row is selected and one of the keys:
-      Space, Shift+Space, Return or Enter is pressed.
-      
-      For selection handling refer to the
-      [tree widget conceptual overview](TreeWidget.html)
-      as well as #GtkTreeSelection.
+        [gtk.tree_view.TreeView.rowActivated] is called, when the user double
+        clicks a treeview row with the "activate-on-single-click"
+        property set to false, or when the user single clicks a row when
+        the "activate-on-single-click" property set to true. It is also
+        emitted when a non-editable row is selected and one of the keys:
+        Space, Shift+Space, Return or Enter is pressed.
+        
+        For selection handling refer to the
+        [tree widget conceptual overview](TreeWidget.html)
+        as well as #GtkTreeSelection.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2586,7 +2582,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `TestCollapseRow` signal.
   
       The given row is about to be collapsed (hide its children nodes). Use this
-      signal if you need to control the collapsibility of individual rows.
+        signal if you need to control the collapsibility of individual rows.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2640,7 +2636,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Connect to `TestExpandRow` signal.
   
       The given row is about to be expanded (show its children nodes). Use this
-      signal if you need to control the expandability of individual rows.
+        signal if you need to control the expandability of individual rows.
   
       Params:
         callback = signal callback delegate or function to connect

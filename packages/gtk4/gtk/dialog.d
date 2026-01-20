@@ -359,10 +359,10 @@ class Dialog : gtk.window.Window
       Connect to `Close` signal.
   
       Emitted when the user uses a keybinding to close the dialog.
-      
-      This is a [keybinding signal](class.SignalAction.html).
-      
-      The default binding for this signal is the Escape key.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is the Escape key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -402,11 +402,11 @@ class Dialog : gtk.window.Window
       Connect to `Response` signal.
   
       Emitted when an action widget is clicked.
-      
-      The signal is also emitted when the dialog receives a
-      delete event, and when [gtk.dialog.Dialog.response] is called.
-      On a delete event, the response ID is [gtk.types.ResponseType.DeleteEvent].
-      Otherwise, it depends on which action widget was clicked.
+        
+        The signal is also emitted when the dialog receives a
+        delete event, and when [gtk.dialog.Dialog.response] is called.
+        On a delete event, the response ID is [gtk.types.ResponseType.DeleteEvent].
+        Otherwise, it depends on which action widget was clicked.
   
       Params:
         callback = signal callback delegate or function to connect

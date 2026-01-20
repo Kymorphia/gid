@@ -1,4 +1,4 @@
-/// Module for [TypeClass] class
+/// Module for [TypeClass] struct
 module gobject.type_class;
 
 import gid.gid;
@@ -9,27 +9,10 @@ import gobject.types;
 /**
     An opaque structure used as the base of all classes.
 */
-class TypeClass
+struct TypeClass
 {
-  GTypeClass cInstance;
-
   /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.type_class.TypeClass");
-
-    cInstance = *cast(GTypeClass*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
+  GType gType;
 
   /**
       Registers a private structure for an instantiatable type.
@@ -103,13 +86,13 @@ class TypeClass
   */
   void addPrivate(size_t privateSize)
   {
-    g_type_class_add_private(cast(GTypeClass*)this._cPtr, privateSize);
+    g_type_class_add_private(cast(GTypeClass*)&this, privateSize);
   }
 
   /** */
   void* getPrivate(gobject.types.GType privateType)
   {
-    auto _retval = g_type_class_get_private(cast(GTypeClass*)this._cPtr, privateType);
+    auto _retval = g_type_class_get_private(cast(GTypeClass*)&this, privateType);
     return _retval;
   }
 
@@ -128,8 +111,10 @@ class TypeClass
   gobject.type_class.TypeClass peekParent()
   {
     GTypeClass* _cretval;
-    _cretval = g_type_class_peek_parent(cast(GTypeClass*)this._cPtr);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
+    _cretval = g_type_class_peek_parent(cast(GTypeClass*)&this);
+    gobject.type_class.TypeClass _retval;
+    if (_cretval)
+      _retval = *cast(gobject.type_class.TypeClass*)_cretval;
     return _retval;
   }
 
@@ -150,7 +135,9 @@ class TypeClass
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek(type);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
+    gobject.type_class.TypeClass _retval;
+    if (_cretval)
+      _retval = *cast(gobject.type_class.TypeClass*)_cretval;
     return _retval;
   }
 
@@ -168,7 +155,9 @@ class TypeClass
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek_static(type);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
+    gobject.type_class.TypeClass _retval;
+    if (_cretval)
+      _retval = *cast(gobject.type_class.TypeClass*)_cretval;
     return _retval;
   }
 
@@ -186,7 +175,9 @@ class TypeClass
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_ref(type);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
+    gobject.type_class.TypeClass _retval;
+    if (_cretval)
+      _retval = *cast(gobject.type_class.TypeClass*)_cretval;
     return _retval;
   }
 }

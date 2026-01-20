@@ -322,9 +322,9 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Connect to `AdoptWidget` signal.
   
       This signal is emitted when the frame should decide if it can adopt
-      a #PanelWidget dropped on the frame.
-      
-      If GDK_EVENT_STOP is returned, then the widget will not be adopted.
+        a #PanelWidget dropped on the frame.
+        
+        If GDK_EVENT_STOP is returned, then the widget will not be adopted.
   
       Params:
         callback = signal callback delegate or function to connect

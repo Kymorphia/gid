@@ -24,7 +24,7 @@ struct Gravity
   static pango.types.Gravity getForMatrix(pango.matrix.Matrix matrix)
   {
     PangoGravity _cretval;
-    _cretval = pango_gravity_get_for_matrix(matrix ? cast(const(PangoMatrix)*)matrix._cPtr(No.Dup) : null);
+    _cretval = pango_gravity_get_for_matrix(cast(const(PangoMatrix)*)&matrix);
     pango.types.Gravity _retval = cast(pango.types.Gravity)_cretval;
     return _retval;
   }

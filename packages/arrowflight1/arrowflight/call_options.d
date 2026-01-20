@@ -39,8 +39,8 @@ class CallOptions : gobject.object.ObjectWrap
   /**
       Get `timeout` property.
       Returns: An optional timeout for this call. Negative durations mean an
-      implementation-defined default behavior will be used
-      instead. This is the default value.
+        implementation-defined default behavior will be used
+        instead. This is the default value.
   */
   @property double timeout()
   {
@@ -51,8 +51,8 @@ class CallOptions : gobject.object.ObjectWrap
       Set `timeout` property.
       Params:
         propval = An optional timeout for this call. Negative durations mean an
-        implementation-defined default behavior will be used
-        instead. This is the default value.
+          implementation-defined default behavior will be used
+          instead. This is the default value.
   */
   @property void timeout(double propval)
   {
@@ -106,7 +106,6 @@ class CallOptions : gobject.object.ObjectWrap
       (*_dlg)(_name, _value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gaflight_call_options_foreach_header(cast(GAFlightCallOptions*)this._cPtr, _funcCB, _func);
   }

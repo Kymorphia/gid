@@ -149,7 +149,7 @@ class ModelButton : gtk.button.Button
   /**
       Get `active` property.
       Returns: The state of the button. This is reflecting the state of the associated
-      #GAction.
+        #GAction.
   */
   @property bool active()
   {
@@ -160,7 +160,7 @@ class ModelButton : gtk.button.Button
       Set `active` property.
       Params:
         propval = The state of the button. This is reflecting the state of the associated
-        #GAction.
+          #GAction.
   */
   @property void active(bool propval)
   {
@@ -170,7 +170,7 @@ class ModelButton : gtk.button.Button
   /**
       Get `centered` property.
       Returns: Whether to render the button contents centered instead of left-aligned.
-      This property should be set for title-like items.
+        This property should be set for title-like items.
   */
   @property bool centered()
   {
@@ -181,7 +181,7 @@ class ModelButton : gtk.button.Button
       Set `centered` property.
       Params:
         propval = Whether to render the button contents centered instead of left-aligned.
-        This property should be set for title-like items.
+          This property should be set for title-like items.
   */
   @property void centered(bool propval)
   {
@@ -191,7 +191,7 @@ class ModelButton : gtk.button.Button
   /**
       Get `icon` property.
       Returns: A #GIcon that will be used if iconic appearance for the button is
-      desired.
+        desired.
   */
   @property gio.icon.Icon icon()
   {
@@ -202,7 +202,7 @@ class ModelButton : gtk.button.Button
       Set `icon` property.
       Params:
         propval = A #GIcon that will be used if iconic appearance for the button is
-        desired.
+          desired.
   */
   @property void icon(gio.icon.Icon propval)
   {
@@ -212,8 +212,8 @@ class ModelButton : gtk.button.Button
   /**
       Get `iconic` property.
       Returns: If this property is set, the button will show an icon if one is set.
-      If no icon is set, the text will be used. This is typically used for
-      horizontal sections of linked buttons.
+        If no icon is set, the text will be used. This is typically used for
+        horizontal sections of linked buttons.
   */
   @property bool iconic()
   {
@@ -224,8 +224,8 @@ class ModelButton : gtk.button.Button
       Set `iconic` property.
       Params:
         propval = If this property is set, the button will show an icon if one is set.
-        If no icon is set, the text will be used. This is typically used for
-        horizontal sections of linked buttons.
+          If no icon is set, the text will be used. This is typically used for
+          horizontal sections of linked buttons.
   */
   @property void iconic(bool propval)
   {
@@ -235,8 +235,8 @@ class ModelButton : gtk.button.Button
   /**
       Get `inverted` property.
       Returns: Whether to show the submenu indicator at the opposite side than normal.
-      This property should be set for model buttons that 'go back' to a parent
-      menu.
+        This property should be set for model buttons that 'go back' to a parent
+        menu.
   */
   @property bool inverted()
   {
@@ -247,8 +247,8 @@ class ModelButton : gtk.button.Button
       Set `inverted` property.
       Params:
         propval = Whether to show the submenu indicator at the opposite side than normal.
-        This property should be set for model buttons that 'go back' to a parent
-        menu.
+          This property should be set for model buttons that 'go back' to a parent
+          menu.
   */
   @property void inverted(bool propval)
   {
@@ -258,7 +258,7 @@ class ModelButton : gtk.button.Button
   /**
       Get `menuName` property.
       Returns: The name of a submenu to open when the button is activated.
-      If this is set, the button should not have an action associated with it.
+        If this is set, the button should not have an action associated with it.
   */
   @property string menuName()
   {
@@ -269,7 +269,7 @@ class ModelButton : gtk.button.Button
       Set `menuName` property.
       Params:
         propval = The name of a submenu to open when the button is activated.
-        If this is set, the button should not have an action associated with it.
+          If this is set, the button should not have an action associated with it.
   */
   @property void menuName(string propval)
   {
@@ -279,8 +279,8 @@ class ModelButton : gtk.button.Button
   /**
       Get `role` property.
       Returns: Specifies whether the button is a plain, check or radio button.
-      When #GtkActionable:action-name is set, the role will be determined
-      from the action and does not have to be set explicitly.
+        When #GtkActionable:action-name is set, the role will be determined
+        from the action and does not have to be set explicitly.
   */
   @property gtk.types.ButtonRole role()
   {
@@ -291,8 +291,8 @@ class ModelButton : gtk.button.Button
       Set `role` property.
       Params:
         propval = Specifies whether the button is a plain, check or radio button.
-        When #GtkActionable:action-name is set, the role will be determined
-        from the action and does not have to be set explicitly.
+          When #GtkActionable:action-name is set, the role will be determined
+          from the action and does not have to be set explicitly.
   */
   @property void role(gtk.types.ButtonRole propval)
   {
@@ -321,8 +321,8 @@ class ModelButton : gtk.button.Button
   /**
       Get `useMarkup` property.
       Returns: If true, XML tags in the text of the button are interpreted as by
-      [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
-      text will be displayed verbatim.
+        [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
+        text will be displayed verbatim.
   */
   @property bool useMarkup()
   {
@@ -333,8 +333,8 @@ class ModelButton : gtk.button.Button
       Set `useMarkup` property.
       Params:
         propval = If true, XML tags in the text of the button are interpreted as by
-        [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
-        text will be displayed verbatim.
+          [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
+          text will be displayed verbatim.
   */
   @property void useMarkup(bool propval)
   {

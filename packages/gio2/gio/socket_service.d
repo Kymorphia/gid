@@ -156,12 +156,12 @@ class SocketService : gio.socket_listener.SocketListener
       Connect to `Incoming` signal.
   
       The ::incoming signal is emitted when a new incoming connection
-      to service needs to be handled. The handler must initiate the
-      handling of connection, but may not block; in essence,
-      asynchronous operations must be used.
-      
-      connection will be unreffed once the signal handler returns,
-      so you need to ref it yourself if you are planning to use it.
+        to service needs to be handled. The handler must initiate the
+        handling of connection, but may not block; in essence,
+        asynchronous operations must be used.
+        
+        connection will be unreffed once the signal handler returns,
+        so you need to ref it yourself if you are planning to use it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -171,7 +171,7 @@ class SocketService : gio.socket_listener.SocketListener
           `connection` a new #GSocketConnection object (optional)
   
           `sourceObject` the source_object passed to
-              [gio.socket_listener.SocketListener.addAddress] (optional)
+                [gio.socket_listener.SocketListener.addAddress] (optional)
   
           `socketService` the instance the signal is connected to (optional)
   

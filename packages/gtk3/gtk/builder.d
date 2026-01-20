@@ -228,9 +228,9 @@ class Builder : gobject.object.ObjectWrap
   /**
       Get `translationDomain` property.
       Returns: The translation domain used when translating property values that
-      have been marked as translatable in interface descriptions.
-      If the translation domain is null, #GtkBuilder uses gettext(),
-      otherwise [glib.global.dgettext].
+        have been marked as translatable in interface descriptions.
+        If the translation domain is null, #GtkBuilder uses gettext(),
+        otherwise [glib.global.dgettext].
   */
   @property string translationDomain()
   {
@@ -241,9 +241,9 @@ class Builder : gobject.object.ObjectWrap
       Set `translationDomain` property.
       Params:
         propval = The translation domain used when translating property values that
-        have been marked as translatable in interface descriptions.
-        If the translation domain is null, #GtkBuilder uses gettext(),
-        otherwise [glib.global.dgettext].
+          have been marked as translatable in interface descriptions.
+          If the translation domain is null, #GtkBuilder uses gettext(),
+          otherwise [glib.global.dgettext].
   */
   @property void translationDomain(string propval)
   {
@@ -587,7 +587,6 @@ class Builder : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(void*)builder, No.Take), gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), _signalName, _handlerName, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)connectObject, No.Take), flags);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     gtk_builder_connect_signals_full(cast(GtkBuilder*)this._cPtr, _funcCB, _func);
   }

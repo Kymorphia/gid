@@ -15,7 +15,7 @@ import gst.types;
 */
 class ProtectionMeta
 {
-  GstProtectionMeta cInstance;
+  GstProtectionMeta _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -23,7 +23,7 @@ class ProtectionMeta
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.protection_meta.ProtectionMeta");
 
-    cInstance = *cast(GstProtectionMeta*)ptr;
+    _cInstance = *cast(GstProtectionMeta*)ptr;
 
     if (take)
       gFree(ptr);
@@ -32,7 +32,7 @@ class ProtectionMeta
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -53,23 +53,14 @@ class ProtectionMeta
     return cToD!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)this._cPtr).info);
   }
 
-  /**
-      Set `info` field.
-      Params:
-        propval = the cryptographic information needed to decrypt the sample.
-  */
-  @property void info(gst.structure.Structure propval)
-  {
-    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)this._cPtr).info);
-    dToC(propval, cast(void*)&(cast(GstProtectionMeta*)this._cPtr).info);
-  }
-
   /** */
   static gst.meta_info.MetaInfo getInfo()
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_protection_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
+    gst.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gst.meta_info.MetaInfo*)_cretval;
     return _retval;
   }
 }

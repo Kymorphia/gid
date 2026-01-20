@@ -61,8 +61,8 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /**
       Get `allowNullStrings` property.
       Returns: Whether string / binary columns can have null values.
-      If true, then strings in "null_values" are considered null for string columns.
-      If false, then all strings are valid string values.
+        If true, then strings in "null_values" are considered null for string columns.
+        If false, then all strings are valid string values.
   */
   @property bool allowNullStrings()
   {
@@ -73,8 +73,8 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Set `allowNullStrings` property.
       Params:
         propval = Whether string / binary columns can have null values.
-        If true, then strings in "null_values" are considered null for string columns.
-        If false, then all strings are valid string values.
+          If true, then strings in "null_values" are considered null for string columns.
+          If false, then all strings are valid string values.
   */
   @property void allowNullStrings(bool propval)
   {
@@ -84,7 +84,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /**
       Get `blockSize` property.
       Returns: Block size we request from the IO layer; also determines the size
-      of chunks when #GArrowCSVReadOptions:use-threads is true.
+        of chunks when #GArrowCSVReadOptions:use-threads is true.
   */
   @property int blockSize()
   {
@@ -95,7 +95,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Set `blockSize` property.
       Params:
         propval = Block size we request from the IO layer; also determines the size
-        of chunks when #GArrowCSVReadOptions:use-threads is true.
+          of chunks when #GArrowCSVReadOptions:use-threads is true.
   */
   @property void blockSize(int propval)
   {
@@ -143,7 +143,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /**
       Get `escapeCharacter` property.
       Returns: Escaping character. This is used only when
-      #GArrowCSVReadOptions:is-escaped is true.
+        #GArrowCSVReadOptions:is-escaped is true.
   */
   @property char escapeCharacter()
   {
@@ -154,7 +154,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Set `escapeCharacter` property.
       Params:
         propval = Escaping character. This is used only when
-        #GArrowCSVReadOptions:is-escaped is true.
+          #GArrowCSVReadOptions:is-escaped is true.
   */
   @property void escapeCharacter(char propval)
   {
@@ -176,7 +176,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /**
       Get `ignoreEmptyLines` property.
       Returns: Whether empty lines are ignored. If false, an empty line
-      represents a simple empty value (assuming a one-column CSV file).
+        represents a simple empty value (assuming a one-column CSV file).
   */
   @property bool ignoreEmptyLines()
   {
@@ -187,7 +187,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Set `ignoreEmptyLines` property.
       Params:
         propval = Whether empty lines are ignored. If false, an empty line
-        represents a simple empty value (assuming a one-column CSV file).
+          represents a simple empty value (assuming a one-column CSV file).
   */
   @property void ignoreEmptyLines(bool propval)
   {
@@ -254,7 +254,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /**
       Get `nSkipRows` property.
       Returns: The number of header rows to skip (not including
-      the row of column names, if any)
+        the row of column names, if any)
   */
   @property uint nSkipRows()
   {
@@ -265,7 +265,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Set `nSkipRows` property.
       Params:
         propval = The number of header rows to skip (not including
-        the row of column names, if any)
+          the row of column names, if any)
   */
   @property void nSkipRows(uint propval)
   {
@@ -275,7 +275,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /**
       Get `quoteCharacter` property.
       Returns: Quoting character. This is used only when
-      #GArrowCSVReadOptions:is-quoted is true.
+        #GArrowCSVReadOptions:is-quoted is true.
   */
   @property char quoteCharacter()
   {
@@ -286,7 +286,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Set `quoteCharacter` property.
       Params:
         propval = Quoting character. This is used only when
-        #GArrowCSVReadOptions:is-quoted is true.
+          #GArrowCSVReadOptions:is-quoted is true.
   */
   @property void quoteCharacter(char propval)
   {
@@ -388,8 +388,8 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -417,8 +417,8 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -437,8 +437,8 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -466,8 +466,8 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] !is null; _cretlength++)
-        break;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString(Yes.Free);
@@ -487,6 +487,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
     foreach (s; columnNames)
       _tmpcolumnNames ~= s.toCString(No.Alloc);
     const(char*)* _columnNames = _tmpcolumnNames.ptr;
+
     garrow_csv_read_options_set_column_names(cast(GArrowCSVReadOptions*)this._cPtr, _columnNames, _nColumnNames);
   }
 
@@ -501,6 +502,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
     foreach (s; falseValues)
       _tmpfalseValues ~= s.toCString(No.Alloc);
     const(char*)* _falseValues = _tmpfalseValues.ptr;
+
     garrow_csv_read_options_set_false_values(cast(GArrowCSVReadOptions*)this._cPtr, _falseValues, _nFalseValues);
   }
 
@@ -515,6 +517,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
     foreach (s; nullValues)
       _tmpnullValues ~= s.toCString(No.Alloc);
     const(char*)* _nullValues = _tmpnullValues.ptr;
+
     garrow_csv_read_options_set_null_values(cast(GArrowCSVReadOptions*)this._cPtr, _nullValues, _nNullValues);
   }
 
@@ -537,6 +540,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
     foreach (s; trueValues)
       _tmptrueValues ~= s.toCString(No.Alloc);
     const(char*)* _trueValues = _tmptrueValues.ptr;
+
     garrow_csv_read_options_set_true_values(cast(GArrowCSVReadOptions*)this._cPtr, _trueValues, _nTrueValues);
   }
 }

@@ -16,7 +16,7 @@ import gid.gid;
 */
 class MetaTable
 {
-  GdaMetaTable cInstance;
+  GdaMetaTable _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -24,7 +24,7 @@ class MetaTable
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_table.MetaTable");
 
-    cInstance = *cast(GdaMetaTable*)ptr;
+    _cInstance = *cast(GdaMetaTable*)ptr;
 
     if (take)
       gFree(ptr);
@@ -33,7 +33,7 @@ class MetaTable
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

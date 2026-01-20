@@ -264,6 +264,7 @@ class IconTheme : gobject.object.ObjectWrap
       _tmpiconNames ~= s.toCString(No.Alloc);
     _tmpiconNames ~= null;
     const(char*)* _iconNames = _tmpiconNames.ptr;
+
     _cretval = gtk_icon_theme_choose_icon(cast(GtkIconTheme*)this._cPtr, _iconNames, size, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
@@ -298,6 +299,7 @@ class IconTheme : gobject.object.ObjectWrap
       _tmpiconNames ~= s.toCString(No.Alloc);
     _tmpiconNames ~= null;
     const(char*)* _iconNames = _tmpiconNames.ptr;
+
     _cretval = gtk_icon_theme_choose_icon_for_scale(cast(GtkIconTheme*)this._cPtr, _iconNames, size, scale, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
@@ -341,8 +343,8 @@ class IconTheme : gobject.object.ObjectWrap
     if (_cretval)
     {
       uint _cretlength;
-      for (; _cretval[_cretlength] != 0; _cretlength++)
-        break;
+      while (_cretval[_cretlength] != 0)
+        _cretlength++;
       _retval = cast(int[])_cretval[0 .. _cretlength].dup;
       gFree(cast(void*)_cretval);
     }
@@ -732,6 +734,7 @@ class IconTheme : gobject.object.ObjectWrap
     foreach (s; path)
       _tmppath ~= s.toCString(No.Alloc);
     const(char*)* _path = _tmppath.ptr;
+
     gtk_icon_theme_set_search_path(cast(GtkIconTheme*)this._cPtr, _path, _nElements);
   }
 
@@ -739,8 +742,8 @@ class IconTheme : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Emitted when the current icon theme is switched or GTK+ detects
-      that a change has occurred in the contents of the current
-      icon theme.
+        that a change has occurred in the contents of the current
+        icon theme.
   
       Params:
         callback = signal callback delegate or function to connect

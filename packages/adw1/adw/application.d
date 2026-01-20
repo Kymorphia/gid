@@ -77,9 +77,9 @@ class Application : gtk.application.Application
   /**
       Get `styleManager` property.
       Returns: The style manager for this application.
-      
-      This is a convenience property allowing to access [adw.style_manager.StyleManager] through
-      property bindings or expressions.
+        
+        This is a convenience property allowing to access [adw.style_manager.StyleManager] through
+        property bindings or expressions.
   */
   @property adw.style_manager.StyleManager styleManager()
   {

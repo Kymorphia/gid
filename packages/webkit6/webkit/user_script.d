@@ -22,7 +22,7 @@ class UserScript : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -78,6 +78,7 @@ class UserScript : gobject.boxed.Boxed
       _tmpblockList ~= s.toCString(No.Alloc);
     _tmpblockList ~= null;
     const(char*)* _blockList = _tmpblockList.ptr;
+
     _cretval = webkit_user_script_new(_source, injectedFrames, injectionTime, _allowList, _blockList);
     this(_cretval, Yes.Take);
   }
@@ -112,6 +113,7 @@ class UserScript : gobject.boxed.Boxed
       _tmpblockList ~= s.toCString(No.Alloc);
     _tmpblockList ~= null;
     const(char*)* _blockList = _tmpblockList.ptr;
+
     _cretval = webkit_user_script_new_for_world(_source, injectedFrames, injectionTime, _worldName, _allowList, _blockList);
     auto _retval = _cretval ? new webkit.user_script.UserScript(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

@@ -266,7 +266,7 @@ import std.variant : StdVariant = Variant;
 */
 class Variant
 {
-  GVariant* cInstancePtr;
+  GVariant* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -274,15 +274,15 @@ class Variant
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.variant.Variant");
 
-    cInstancePtr = cast(GVariant*)ptr;
+    _cInstancePtr = cast(GVariant*)ptr;
 
     if (!take)
-      g_variant_ref_sink(cInstancePtr);
+      g_variant_ref_sink(_cInstancePtr);
   }
 
   ~this()
   {
-    g_variant_unref(cInstancePtr);
+    g_variant_unref(_cInstancePtr);
   }
 
 
@@ -290,9 +290,9 @@ class Variant
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
-      g_variant_ref_sink(cInstancePtr);
+      g_variant_ref_sink(_cInstancePtr);
 
-    return cInstancePtr;
+    return _cInstancePtr;
   }
   /**
   * Template to create a new Variant from a single D value.
@@ -427,6 +427,7 @@ class Variant
     foreach (obj; children)
       _tmpchildren ~= obj ? cast(GVariant*)obj._cPtr : null;
     const(GVariant*)* _children = cast(const(GVariant*)*)_tmpchildren.ptr;
+
     _cretval = g_variant_new_array(childType ? cast(const(GVariantType)*)childType._cPtr(No.Dup) : null, _children, _nChildren);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -505,6 +506,7 @@ class Variant
     foreach (s; strv)
       _tmpstrv ~= s.toCString(No.Alloc);
     const(char*)* _strv = _tmpstrv.ptr;
+
     _cretval = g_variant_new_bytestring_array(_strv, _length);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -731,6 +733,7 @@ class Variant
     foreach (s; strv)
       _tmpstrv ~= s.toCString(No.Alloc);
     const(char*)* _strv = _tmpstrv.ptr;
+
     _cretval = g_variant_new_objv(_strv, _length);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -795,6 +798,7 @@ class Variant
     foreach (s; strv)
       _tmpstrv ~= s.toCString(No.Alloc);
     const(char*)* _strv = _tmpstrv.ptr;
+
     _cretval = g_variant_new_strv(_strv, _length);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -825,6 +829,7 @@ class Variant
     foreach (obj; children)
       _tmpchildren ~= obj ? cast(GVariant*)obj._cPtr : null;
     const(GVariant*)* _children = cast(const(GVariant*)*)_tmpchildren.ptr;
+
     _cretval = g_variant_new_tuple(_children, _nChildren);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;

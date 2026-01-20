@@ -35,7 +35,7 @@ class Value : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -106,7 +106,6 @@ class Value : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-
     SecretValue* _cretval;
     char* _secretData = secretData.toCString(No.Alloc);
     const(char)* _contentType = contentType.toCString(No.Alloc);

@@ -12,7 +12,7 @@ import vte.types;
 */
 class EventContext
 {
-  VteEventContext* cInstancePtr;
+  VteEventContext* _cInstancePtr;
   bool owned;
 
   /** */
@@ -21,7 +21,7 @@ class EventContext
     if (!ptr)
       throw new GidConstructException("Null instance pointer for vte.event_context.EventContext");
 
-    cInstancePtr = cast(VteEventContext*)ptr;
+    _cInstancePtr = cast(VteEventContext*)ptr;
 
     owned = take;
   }
@@ -29,7 +29,7 @@ class EventContext
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /** */
@@ -37,7 +37,7 @@ class EventContext
   {
     GdkEvent* _cretval;
     _cretval = vte_event_context_get_event(cast(const(VteEventContext)*)this._cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

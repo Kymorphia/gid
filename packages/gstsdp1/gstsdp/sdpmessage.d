@@ -50,7 +50,7 @@ class SDPMessage : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -282,6 +282,7 @@ class SDPMessage : gobject.boxed.Boxed
       _tmprepeat ~= s.toCString(No.Alloc);
     _tmprepeat ~= null;
     const(char*)* _repeat = _tmprepeat.ptr;
+
     _cretval = gst_sdp_message_add_time(cast(GstSDPMessage*)this._cPtr, _start, _stop, _repeat);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

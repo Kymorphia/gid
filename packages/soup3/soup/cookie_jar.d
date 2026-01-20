@@ -340,14 +340,14 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Connect to `Changed` signal.
   
       Emitted when jar changes.
-      
-      If a cookie has been added,
-      new_cookie will contain the newly-added cookie and
-      old_cookie will be null. If a cookie has been deleted,
-      old_cookie will contain the to-be-deleted cookie and
-      new_cookie will be null. If a cookie has been changed,
-      old_cookie will contain its old value, and new_cookie its
-      new value.
+        
+        If a cookie has been added,
+        new_cookie will contain the newly-added cookie and
+        old_cookie will be null. If a cookie has been deleted,
+        old_cookie will contain the to-be-deleted cookie and
+        new_cookie will be null. If a cookie has been changed,
+        old_cookie will contain its old value, and new_cookie its
+        new value.
   
       Params:
         callback = signal callback delegate or function to connect

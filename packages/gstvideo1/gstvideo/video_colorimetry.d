@@ -1,4 +1,4 @@
-/// Module for [VideoColorimetry] class
+/// Module for [VideoColorimetry] struct
 module gstvideo.video_colorimetry;
 
 import gid.gid;
@@ -9,107 +9,29 @@ import gstvideo.types;
 /**
     Structure describing the color info.
 */
-class VideoColorimetry
+struct VideoColorimetry
 {
-  GstVideoColorimetry cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_colorimetry.VideoColorimetry");
-
-    cInstance = *cast(GstVideoColorimetry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
-
   /**
-      Get `range` field.
-      Returns: the color range. This is the valid range for the samples.
+      the color range. This is the valid range for the samples.
               It is used to convert the samples to Y'PbPr values.
   */
-  @property gstvideo.types.VideoColorRange range()
-  {
-    return cast(gstvideo.types.VideoColorRange)(cast(GstVideoColorimetry*)this._cPtr).range;
-  }
+  VideoColorRange range;
 
   /**
-      Set `range` field.
-      Params:
-        propval = the color range. This is the valid range for the samples.
-                It is used to convert the samples to Y'PbPr values.
-  */
-  @property void range(gstvideo.types.VideoColorRange propval)
-  {
-    (cast(GstVideoColorimetry*)this._cPtr).range = cast(GstVideoColorRange)propval;
-  }
-
-  /**
-      Get `matrix` field.
-      Returns: the color matrix. Used to convert between Y'PbPr and
+      the color matrix. Used to convert between Y'PbPr and
                non-linear RGB (R'G'B')
   */
-  @property gstvideo.types.VideoColorMatrix matrix()
-  {
-    return cast(gstvideo.types.VideoColorMatrix)(cast(GstVideoColorimetry*)this._cPtr).matrix;
-  }
+  VideoColorMatrix matrix;
 
   /**
-      Set `matrix` field.
-      Params:
-        propval = the color matrix. Used to convert between Y'PbPr and
-                 non-linear RGB (R'G'B')
+      the transfer function. used to convert between R'G'B' and RGB
   */
-  @property void matrix(gstvideo.types.VideoColorMatrix propval)
-  {
-    (cast(GstVideoColorimetry*)this._cPtr).matrix = cast(GstVideoColorMatrix)propval;
-  }
+  VideoTransferFunction transfer;
 
   /**
-      Get `transfer` field.
-      Returns: the transfer function. used to convert between R'G'B' and RGB
+      color primaries. used to convert between R'G'B' and CIE XYZ
   */
-  @property gstvideo.types.VideoTransferFunction transfer()
-  {
-    return cast(gstvideo.types.VideoTransferFunction)(cast(GstVideoColorimetry*)this._cPtr).transfer;
-  }
-
-  /**
-      Set `transfer` field.
-      Params:
-        propval = the transfer function. used to convert between R'G'B' and RGB
-  */
-  @property void transfer(gstvideo.types.VideoTransferFunction propval)
-  {
-    (cast(GstVideoColorimetry*)this._cPtr).transfer = cast(GstVideoTransferFunction)propval;
-  }
-
-  /**
-      Get `primaries` field.
-      Returns: color primaries. used to convert between R'G'B' and CIE XYZ
-  */
-  @property gstvideo.types.VideoColorPrimaries primaries()
-  {
-    return cast(gstvideo.types.VideoColorPrimaries)(cast(GstVideoColorimetry*)this._cPtr).primaries;
-  }
-
-  /**
-      Set `primaries` field.
-      Params:
-        propval = color primaries. used to convert between R'G'B' and CIE XYZ
-  */
-  @property void primaries(gstvideo.types.VideoColorPrimaries propval)
-  {
-    (cast(GstVideoColorimetry*)this._cPtr).primaries = cast(GstVideoColorPrimaries)propval;
-  }
+  VideoColorPrimaries primaries;
 
   /**
       Parse the colorimetry string and update cinfo with the parsed
@@ -123,7 +45,7 @@ class VideoColorimetry
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
-    _retval = cast(bool)gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)this._cPtr, _color);
+    _retval = cast(bool)gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)&this, _color);
     return _retval;
   }
 
@@ -137,7 +59,7 @@ class VideoColorimetry
   bool isEqual(gstvideo.video_colorimetry.VideoColorimetry other)
   {
     bool _retval;
-    _retval = cast(bool)gst_video_colorimetry_is_equal(cast(const(GstVideoColorimetry)*)this._cPtr, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null);
+    _retval = cast(bool)gst_video_colorimetry_is_equal(cast(const(GstVideoColorimetry)*)&this, cast(const(GstVideoColorimetry)*)&other);
     return _retval;
   }
 
@@ -153,7 +75,7 @@ class VideoColorimetry
   bool isEquivalent(uint bitdepth, gstvideo.video_colorimetry.VideoColorimetry other, uint otherBitdepth)
   {
     bool _retval;
-    _retval = cast(bool)gst_video_colorimetry_is_equivalent(cast(const(GstVideoColorimetry)*)this._cPtr, bitdepth, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null, otherBitdepth);
+    _retval = cast(bool)gst_video_colorimetry_is_equivalent(cast(const(GstVideoColorimetry)*)&this, bitdepth, cast(const(GstVideoColorimetry)*)&other, otherBitdepth);
     return _retval;
   }
 
@@ -170,7 +92,7 @@ class VideoColorimetry
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
-    _retval = cast(bool)gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)this._cPtr, _color);
+    _retval = cast(bool)gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)&this, _color);
     return _retval;
   }
 
@@ -182,7 +104,7 @@ class VideoColorimetry
   string toString_()
   {
     char* _cretval;
-    _cretval = gst_video_colorimetry_to_string(cast(const(GstVideoColorimetry)*)this._cPtr);
+    _cretval = gst_video_colorimetry_to_string(cast(const(GstVideoColorimetry)*)&this);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

@@ -34,18 +34,18 @@ template DragSurfaceT()
       Connect to `ComputeSize` signal.
   
       Emitted when the size for the surface needs to be computed, when it is
-      present.
-      
-      This signal will normally be emitted during the native surface layout
-      cycle when the surface size needs to be recomputed.
-      
-      It is the responsibility of the drag surface user to handle this signal
-      and compute the desired size of the surface, storing the computed size
-      in the [gdk.drag_surface_size.DragSurfaceSize] object that is passed to the signal
-      handler, using [gdk.drag_surface_size.DragSurfaceSize.setSize].
-      
-      Failing to set a size so will result in an arbitrary size being used as
-      a result.
+        present.
+        
+        This signal will normally be emitted during the native surface layout
+        cycle when the surface size needs to be recomputed.
+        
+        It is the responsibility of the drag surface user to handle this signal
+        and compute the desired size of the surface, storing the computed size
+        in the [gdk.drag_surface_size.DragSurfaceSize] object that is passed to the signal
+        handler, using [gdk.drag_surface_size.DragSurfaceSize.setSize].
+        
+        Failing to set a size so will result in an arbitrary size being used as
+        a result.
   
       Params:
         callback = signal callback delegate or function to connect

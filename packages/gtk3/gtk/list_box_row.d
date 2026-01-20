@@ -48,7 +48,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   /**
       Get `activatable` property.
       Returns: The property determines whether the #GtkListBox::row-activated
-      signal will be emitted for this row.
+        signal will be emitted for this row.
   */
   @property bool activatable()
   {
@@ -59,7 +59,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Set `activatable` property.
       Params:
         propval = The property determines whether the #GtkListBox::row-activated
-        signal will be emitted for this row.
+          signal will be emitted for this row.
   */
   @property void activatable(bool propval)
   {
@@ -221,9 +221,9 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Connect to `Activate` signal.
   
       This is a keybinding signal, which will cause this row to be activated.
-      
-      If you want to be notified when the user activates a row (by key or not),
-      use the #GtkListBox::row-activated signal on the row’s parent #GtkListBox.
+        
+        If you want to be notified when the user activates a row (by key or not),
+        use the #GtkListBox::row-activated signal on the row’s parent #GtkListBox.
   
       Params:
         callback = signal callback delegate or function to connect

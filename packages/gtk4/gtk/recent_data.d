@@ -12,7 +12,7 @@ import gtk.types;
 */
 class RecentData
 {
-  GtkRecentData cInstance;
+  GtkRecentData _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class RecentData
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.recent_data.RecentData");
 
-    cInstance = *cast(GtkRecentData*)ptr;
+    _cInstance = *cast(GtkRecentData*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,13 +29,13 @@ class RecentData
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `displayName` field.
       Returns: a UTF-8 encoded string, containing the name of the recently
-        used resource to be displayed, or null;
+          used resource to be displayed, or null;
   */
   @property string displayName()
   {
@@ -46,7 +46,7 @@ class RecentData
       Set `displayName` field.
       Params:
         propval = a UTF-8 encoded string, containing the name of the recently
-          used resource to be displayed, or null;
+            used resource to be displayed, or null;
   */
   @property void displayName(string propval)
   {
@@ -57,7 +57,7 @@ class RecentData
   /**
       Get `description` field.
       Returns: a UTF-8 encoded string, containing a short description of
-        the resource, or null;
+          the resource, or null;
   */
   @property string description()
   {
@@ -68,7 +68,7 @@ class RecentData
       Set `description` field.
       Params:
         propval = a UTF-8 encoded string, containing a short description of
-          the resource, or null;
+            the resource, or null;
   */
   @property void description(string propval)
   {
@@ -99,7 +99,7 @@ class RecentData
   /**
       Get `appName` field.
       Returns: the name of the application that is registering this recently
-        used resource;
+          used resource;
   */
   @property string appName()
   {
@@ -110,7 +110,7 @@ class RecentData
       Set `appName` field.
       Params:
         propval = the name of the application that is registering this recently
-          used resource;
+            used resource;
   */
   @property void appName(string propval)
   {
@@ -121,9 +121,9 @@ class RecentData
   /**
       Get `appExec` field.
       Returns: command line used to launch this resource; may contain the
-        “\`f`” and “\`u`” escape characters which will be expanded
-        to the resource file path and URI respectively when the command line
-        is retrieved;
+          “\`f`” and “\`u`” escape characters which will be expanded
+          to the resource file path and URI respectively when the command line
+          is retrieved;
   */
   @property string appExec()
   {
@@ -134,9 +134,9 @@ class RecentData
       Set `appExec` field.
       Params:
         propval = command line used to launch this resource; may contain the
-          “\`f`” and “\`u`” escape characters which will be expanded
-          to the resource file path and URI respectively when the command line
-          is retrieved;
+            “\`f`” and “\`u`” escape characters which will be expanded
+            to the resource file path and URI respectively when the command line
+            is retrieved;
   */
   @property void appExec(string propval)
   {
@@ -147,7 +147,7 @@ class RecentData
   /**
       Get `isPrivate` field.
       Returns: whether this resource should be displayed only by the
-        applications that have registered it or not.
+          applications that have registered it or not.
   */
   @property bool isPrivate()
   {
@@ -158,7 +158,7 @@ class RecentData
       Set `isPrivate` field.
       Params:
         propval = whether this resource should be displayed only by the
-          applications that have registered it or not.
+            applications that have registered it or not.
   */
   @property void isPrivate(bool propval)
   {

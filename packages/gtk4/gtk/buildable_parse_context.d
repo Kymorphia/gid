@@ -11,7 +11,7 @@ import gtk.types;
 */
 class BuildableParseContext
 {
-  GtkBuildableParseContext* cInstancePtr;
+  GtkBuildableParseContext* _cInstancePtr;
   bool owned;
 
   /** */
@@ -20,7 +20,7 @@ class BuildableParseContext
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.buildable_parse_context.BuildableParseContext");
 
-    cInstancePtr = cast(GtkBuildableParseContext*)ptr;
+    _cInstancePtr = cast(GtkBuildableParseContext*)ptr;
 
     owned = take;
   }
@@ -28,7 +28,7 @@ class BuildableParseContext
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

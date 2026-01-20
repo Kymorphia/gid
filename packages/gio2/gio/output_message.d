@@ -18,7 +18,7 @@ import gio.types;
 */
 class OutputMessage
 {
-  GOutputMessage cInstance;
+  GOutputMessage _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -26,7 +26,7 @@ class OutputMessage
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.output_message.OutputMessage");
 
-    cInstance = *cast(GOutputMessage*)ptr;
+    _cInstance = *cast(GOutputMessage*)ptr;
 
     if (take)
       gFree(ptr);
@@ -35,7 +35,7 @@ class OutputMessage
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -68,16 +68,6 @@ class OutputMessage
   }
 
   /**
-      Set `vectors` field.
-      Params:
-        propval = pointer to an array of output vectors
-  */
-  @property void vectors(gio.types.OutputVector propval)
-  {
-    (cast(GOutputMessage*)this._cPtr).vectors = &propval;
-  }
-
-  /**
       Get `numVectors` field.
       Returns: the number of output vectors pointed to by @vectors.
   */
@@ -99,7 +89,7 @@ class OutputMessage
   /**
       Get `bytesSent` field.
       Returns: initialize to 0. Will be set to the number of bytes
-          that have been sent
+            that have been sent
   */
   @property uint bytesSent()
   {
@@ -110,7 +100,7 @@ class OutputMessage
       Set `bytesSent` field.
       Params:
         propval = initialize to 0. Will be set to the number of bytes
-            that have been sent
+              that have been sent
   */
   @property void bytesSent(uint propval)
   {

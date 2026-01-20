@@ -13,7 +13,7 @@ import gid.gid;
 */
 class EventProperty
 {
-  GdkEventProperty cInstance;
+  GdkEventProperty _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +21,7 @@ class EventProperty
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_property.EventProperty");
 
-    cInstance = *cast(GdkEventProperty*)ptr;
+    _cInstance = *cast(GdkEventProperty*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,7 +30,7 @@ class EventProperty
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -122,7 +122,7 @@ class EventProperty
   /**
       Get `state` field.
       Returns: whether the property was changed
-        ([gdk.types.PropertyState.NewValue]) or deleted ([gdk.types.PropertyState.Delete]).
+          ([gdk.types.PropertyState.NewValue]) or deleted ([gdk.types.PropertyState.Delete]).
   */
   @property gdk.types.PropertyState state()
   {
@@ -133,7 +133,7 @@ class EventProperty
       Set `state` field.
       Params:
         propval = whether the property was changed
-          ([gdk.types.PropertyState.NewValue]) or deleted ([gdk.types.PropertyState.Delete]).
+            ([gdk.types.PropertyState.NewValue]) or deleted ([gdk.types.PropertyState.Delete]).
   */
   @property void state(gdk.types.PropertyState propval)
   {

@@ -207,8 +207,8 @@ class MessageDialog : gtk.window.Window
   /**
       Get `bodyUseMarkup` property.
       Returns: Whether the body text includes Pango markup.
-      
-      See `func@Pango.parse_markup`.
+        
+        See `func@Pango.parse_markup`.
   */
   @property bool bodyUseMarkup()
   {
@@ -219,8 +219,8 @@ class MessageDialog : gtk.window.Window
       Set `bodyUseMarkup` property.
       Params:
         propval = Whether the body text includes Pango markup.
-        
-        See `func@Pango.parse_markup`.
+          
+          See `func@Pango.parse_markup`.
   */
   @property void bodyUseMarkup(bool propval)
   {
@@ -230,13 +230,13 @@ class MessageDialog : gtk.window.Window
   /**
       Get `closeResponse` property.
       Returns: The ID of the close response.
-      
-      It will be passed to `signal@MessageDialog::response` if the window is
-      closed by pressing <kbd>Escape</kbd> or with a system action.
-      
-      It doesn't have to correspond to any of the responses in the dialog.
-      
-      The default close response is `close`.
+        
+        It will be passed to `signal@MessageDialog::response` if the window is
+        closed by pressing <kbd>Escape</kbd> or with a system action.
+        
+        It doesn't have to correspond to any of the responses in the dialog.
+        
+        The default close response is `close`.
   */
   @property string closeResponse()
   {
@@ -247,13 +247,13 @@ class MessageDialog : gtk.window.Window
       Set `closeResponse` property.
       Params:
         propval = The ID of the close response.
-        
-        It will be passed to `signal@MessageDialog::response` if the window is
-        closed by pressing <kbd>Escape</kbd> or with a system action.
-        
-        It doesn't have to correspond to any of the responses in the dialog.
-        
-        The default close response is `close`.
+          
+          It will be passed to `signal@MessageDialog::response` if the window is
+          closed by pressing <kbd>Escape</kbd> or with a system action.
+          
+          It doesn't have to correspond to any of the responses in the dialog.
+          
+          The default close response is `close`.
   */
   @property void closeResponse(string propval)
   {
@@ -263,11 +263,11 @@ class MessageDialog : gtk.window.Window
   /**
       Get `defaultResponse` property.
       Returns: The response ID of the default response.
-      
-      If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
-      
-      If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-      will do nothing.
+        
+        If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+        
+        If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
+        will do nothing.
   */
   @property string defaultResponse()
   {
@@ -278,11 +278,11 @@ class MessageDialog : gtk.window.Window
       Set `defaultResponse` property.
       Params:
         propval = The response ID of the default response.
-        
-        If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
-        
-        If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-        will do nothing.
+          
+          If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+          
+          If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
+          will do nothing.
   */
   @property void defaultResponse(string propval)
   {
@@ -292,8 +292,8 @@ class MessageDialog : gtk.window.Window
   /**
       Get `extraChild` property.
       Returns: The child widget.
-      
-      Displayed below the heading and body.
+        
+        Displayed below the heading and body.
   */
   @property gtk.widget.Widget extraChild()
   {
@@ -304,8 +304,8 @@ class MessageDialog : gtk.window.Window
       Set `extraChild` property.
       Params:
         propval = The child widget.
-        
-        Displayed below the heading and body.
+          
+          Displayed below the heading and body.
   */
   @property void extraChild(gtk.widget.Widget propval)
   {
@@ -334,8 +334,8 @@ class MessageDialog : gtk.window.Window
   /**
       Get `headingUseMarkup` property.
       Returns: Whether the heading includes Pango markup.
-      
-      See `func@Pango.parse_markup`.
+        
+        See `func@Pango.parse_markup`.
   */
   @property bool headingUseMarkup()
   {
@@ -346,8 +346,8 @@ class MessageDialog : gtk.window.Window
       Set `headingUseMarkup` property.
       Params:
         propval = Whether the heading includes Pango markup.
-        
-        See `func@Pango.parse_markup`.
+          
+          See `func@Pango.parse_markup`.
   */
   @property void headingUseMarkup(bool propval)
   {
@@ -434,7 +434,6 @@ class MessageDialog : gtk.window.Window
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     adw_message_dialog_choose(cast(AdwMessageDialog*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -802,13 +801,13 @@ class MessageDialog : gtk.window.Window
       Connect to `Response` signal.
   
       This signal is emitted when the dialog is closed.
-      
-      response will be set to the response ID of the button that had been
-      activated.
-      
-      if the dialog was closed by pressing <kbd>Escape</kbd> or with a system
-      action, response will be set to the value of
-      `propertyMessageDialog:close-response`.
+        
+        response will be set to the response ID of the button that had been
+        activated.
+        
+        if the dialog was closed by pressing <kbd>Escape</kbd> or with a system
+        action, response will be set to the value of
+        `propertyMessageDialog:close-response`.
   
       Params:
         detail = Signal detail or null (default)

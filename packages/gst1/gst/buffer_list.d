@@ -30,7 +30,7 @@ class BufferList : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : cInstancePtr;
+    return dup ? copy_ : _cInstancePtr;
   }
 
   /** */
@@ -120,16 +120,17 @@ class BufferList : gobject.boxed.Boxed
   {
     extern(C) gboolean _funcCallback(GstBuffer** buffer, uint idx, void* userData)
     {
+      bool _dretval;
       auto _dlg = cast(gst.types.BufferListFunc*)userData;
       auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
 
-      gboolean _retval = (*_dlg)(_buffer, idx);
+      _dretval = (*_dlg)(_buffer, idx);
+      auto _retval = cast(gboolean)_dretval;
       *buffer = *cast(GstBuffer**)_buffer._cPtr;
 
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_buffer_list_foreach(cast(GstBufferList*)this._cPtr, _funcCB, _func);

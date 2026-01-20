@@ -77,12 +77,12 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   /**
       Get `locked` property.
       Returns: Whether the item is locked or not.
-      
-      An item may not be independently lockable separate from other items in
-      its collection.
-      
-      To lock or unlock a item use the [secret.service.Service.lock] or
-      [secret.service.Service.unlock] functions.
+        
+        An item may not be independently lockable separate from other items in
+        its collection.
+        
+        To lock or unlock a item use the [secret.service.Service.lock] or
+        [secret.service.Service.unlock] functions.
   */
   @property bool locked()
   {
@@ -122,7 +122,6 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     const(char)* _label = label.toCString(No.Alloc);
@@ -209,7 +208,6 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _items = gListFromD!(secret.item.Item)(items);
     scope(exit) containerFree!(GList*, secret.item.Item, GidOwnership.None)(_items);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -286,7 +284,6 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_item_delete(cast(SecretItem*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -491,7 +488,6 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_item_load_secret(cast(SecretItem*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -580,7 +576,6 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -654,7 +649,6 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _label = label.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_item_set_label(cast(SecretItem*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -724,7 +718,6 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_item_set_secret(cast(SecretItem*)this._cPtr, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

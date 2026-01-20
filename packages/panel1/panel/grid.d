@@ -93,7 +93,6 @@ class Grid : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     panel_grid_agree_to_close_async(cast(PanelGrid*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -124,7 +123,6 @@ class Grid : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? cast(void*)&(callback) : null;
     panel_grid_foreach_frame(cast(PanelGrid*)this._cPtr, _callbackCB, _callback);
   }
@@ -194,10 +192,10 @@ class Grid : gtk.widget.Widget
       Connect to `CreateFrame` signal.
   
       The "create-frame" signal is used to create a new frame within
-      the grid.
-      
-      Consumers of this signal are required to return an unrooted
-      #PanelFrame from this signal. The first signal handler wins.
+        the grid.
+        
+        Consumers of this signal are required to return an unrooted
+        #PanelFrame from this signal. The first signal handler wins.
   
       Params:
         callback = signal callback delegate or function to connect

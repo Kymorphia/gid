@@ -11,7 +11,7 @@ import gid.gid;
 */
 class SqlStatementUnknown
 {
-  GdaSqlStatementUnknown cInstance;
+  GdaSqlStatementUnknown _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -19,7 +19,7 @@ class SqlStatementUnknown
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_statement_unknown.SqlStatementUnknown");
 
-    cInstance = *cast(GdaSqlStatementUnknown*)ptr;
+    _cInstance = *cast(GdaSqlStatementUnknown*)ptr;
 
     if (take)
       gFree(ptr);
@@ -28,6 +28,6 @@ class SqlStatementUnknown
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 }

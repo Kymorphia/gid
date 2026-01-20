@@ -56,10 +56,10 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `allowFileAccessFromFileUrls` property.
       Returns: Whether file access is allowed from file URLs. By default, when
-      something is loaded in a #WebKitWebView using a file URI, cross
-      origin requests to other file resources are not allowed. This
-      setting allows you to change that behaviour, so that it would be
-      possible to do a XMLHttpRequest of a local file, for example.
+        something is loaded in a #WebKitWebView using a file URI, cross
+        origin requests to other file resources are not allowed. This
+        setting allows you to change that behaviour, so that it would be
+        possible to do a XMLHttpRequest of a local file, for example.
   */
   @property bool allowFileAccessFromFileUrls()
   {
@@ -70,10 +70,10 @@ class Settings : gobject.object.ObjectWrap
       Set `allowFileAccessFromFileUrls` property.
       Params:
         propval = Whether file access is allowed from file URLs. By default, when
-        something is loaded in a #WebKitWebView using a file URI, cross
-        origin requests to other file resources are not allowed. This
-        setting allows you to change that behaviour, so that it would be
-        possible to do a XMLHttpRequest of a local file, for example.
+          something is loaded in a #WebKitWebView using a file URI, cross
+          origin requests to other file resources are not allowed. This
+          setting allows you to change that behaviour, so that it would be
+          possible to do a XMLHttpRequest of a local file, for example.
   */
   @property void allowFileAccessFromFileUrls(bool propval)
   {
@@ -83,11 +83,11 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `allowModalDialogs` property.
       Returns: Determine whether it's allowed to create and run modal dialogs
-      from a #WebKitWebView through JavaScript with
-      <function>window.showModalDialog</function>. If it's set to
-      false, the associated #WebKitWebView won't be able to create
-      new modal dialogs, so not even the #WebKitWebView::create
-      signal will be emitted.
+        from a #WebKitWebView through JavaScript with
+        <function>window.showModalDialog</function>. If it's set to
+        false, the associated #WebKitWebView won't be able to create
+        new modal dialogs, so not even the #WebKitWebView::create
+        signal will be emitted.
   */
   @property bool allowModalDialogs()
   {
@@ -98,11 +98,11 @@ class Settings : gobject.object.ObjectWrap
       Set `allowModalDialogs` property.
       Params:
         propval = Determine whether it's allowed to create and run modal dialogs
-        from a #WebKitWebView through JavaScript with
-        <function>window.showModalDialog</function>. If it's set to
-        false, the associated #WebKitWebView won't be able to create
-        new modal dialogs, so not even the #WebKitWebView::create
-        signal will be emitted.
+          from a #WebKitWebView through JavaScript with
+          <function>window.showModalDialog</function>. If it's set to
+          false, the associated #WebKitWebView won't be able to create
+          new modal dialogs, so not even the #WebKitWebView::create
+          signal will be emitted.
   */
   @property void allowModalDialogs(bool propval)
   {
@@ -112,9 +112,9 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `allowTopNavigationToDataUrls` property.
       Returns: Whether or not the top frame is allowed to navigate to data URLs. It is disabled by default
-      due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
-      and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
-      embeds a WebView and you have control of the pages being show instead of a generic browser.
+        due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
+        and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
+        embeds a WebView and you have control of the pages being show instead of a generic browser.
   */
   @property bool allowTopNavigationToDataUrls()
   {
@@ -125,9 +125,9 @@ class Settings : gobject.object.ObjectWrap
       Set `allowTopNavigationToDataUrls` property.
       Params:
         propval = Whether or not the top frame is allowed to navigate to data URLs. It is disabled by default
-        due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
-        and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
-        embeds a WebView and you have control of the pages being show instead of a generic browser.
+          due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
+          and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
+          embeds a WebView and you have control of the pages being show instead of a generic browser.
   */
   @property void allowTopNavigationToDataUrls(bool propval)
   {
@@ -137,11 +137,11 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `allowUniversalAccessFromFileUrls` property.
       Returns: Whether or not JavaScript running in the context of a file scheme URL
-      should be allowed to access content from any origin.  By default, when
-      something is loaded in a #WebKitWebView using a file scheme URL,
-      access to the local file system and arbitrary local storage is not
-      allowed. This setting allows you to change that behaviour, so that
-      it would be possible to use local storage, for example.
+        should be allowed to access content from any origin.  By default, when
+        something is loaded in a #WebKitWebView using a file scheme URL,
+        access to the local file system and arbitrary local storage is not
+        allowed. This setting allows you to change that behaviour, so that
+        it would be possible to use local storage, for example.
   */
   @property bool allowUniversalAccessFromFileUrls()
   {
@@ -152,11 +152,11 @@ class Settings : gobject.object.ObjectWrap
       Set `allowUniversalAccessFromFileUrls` property.
       Params:
         propval = Whether or not JavaScript running in the context of a file scheme URL
-        should be allowed to access content from any origin.  By default, when
-        something is loaded in a #WebKitWebView using a file scheme URL,
-        access to the local file system and arbitrary local storage is not
-        allowed. This setting allows you to change that behaviour, so that
-        it would be possible to use local storage, for example.
+          should be allowed to access content from any origin.  By default, when
+          something is loaded in a #WebKitWebView using a file scheme URL,
+          access to the local file system and arbitrary local storage is not
+          allowed. This setting allows you to change that behaviour, so that
+          it would be possible to use local storage, for example.
   */
   @property void allowUniversalAccessFromFileUrls(bool propval)
   {
@@ -166,8 +166,8 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `autoLoadImages` property.
       Returns: Determines whether images should be automatically loaded or not.
-      On devices where network bandwidth is of concern, it might be
-      useful to turn this property off.
+        On devices where network bandwidth is of concern, it might be
+        useful to turn this property off.
   */
   @property bool autoLoadImages()
   {
@@ -178,8 +178,8 @@ class Settings : gobject.object.ObjectWrap
       Set `autoLoadImages` property.
       Params:
         propval = Determines whether images should be automatically loaded or not.
-        On devices where network bandwidth is of concern, it might be
-        useful to turn this property off.
+          On devices where network bandwidth is of concern, it might be
+          useful to turn this property off.
   */
   @property void autoLoadImages(bool propval)
   {
@@ -246,7 +246,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `defaultFontSize` property.
       Returns: The default font size in pixels to use for content displayed if
-      no font size is specified.
+        no font size is specified.
   */
   @property uint defaultFontSize()
   {
@@ -257,7 +257,7 @@ class Settings : gobject.object.ObjectWrap
       Set `defaultFontSize` property.
       Params:
         propval = The default font size in pixels to use for content displayed if
-        no font size is specified.
+          no font size is specified.
   */
   @property void defaultFontSize(uint propval)
   {
@@ -267,7 +267,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `defaultMonospaceFontSize` property.
       Returns: The default font size in pixels to use for content displayed in
-      monospace font if no font size is specified.
+        monospace font if no font size is specified.
   */
   @property uint defaultMonospaceFontSize()
   {
@@ -278,7 +278,7 @@ class Settings : gobject.object.ObjectWrap
       Set `defaultMonospaceFontSize` property.
       Params:
         propval = The default font size in pixels to use for content displayed in
-        monospace font if no font size is specified.
+          monospace font if no font size is specified.
   */
   @property void defaultMonospaceFontSize(uint propval)
   {
@@ -288,11 +288,11 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `disableWebSecurity` property.
       Returns: Enable or disable support for Web Security on pages.
-      
-      This setting disables the same-origin policy, allowing every website full control over
-      all other websites. This is for use in special environments where you wish to disable
-      all security and allow websites to hack each other. It is impossible to use this setting
-      securely.
+        
+        This setting disables the same-origin policy, allowing every website full control over
+        all other websites. This is for use in special environments where you wish to disable
+        all security and allow websites to hack each other. It is impossible to use this setting
+        securely.
   */
   @property bool disableWebSecurity()
   {
@@ -303,11 +303,11 @@ class Settings : gobject.object.ObjectWrap
       Set `disableWebSecurity` property.
       Params:
         propval = Enable or disable support for Web Security on pages.
-        
-        This setting disables the same-origin policy, allowing every website full control over
-        all other websites. This is for use in special environments where you wish to disable
-        all security and allow websites to hack each other. It is impossible to use this setting
-        securely.
+          
+          This setting disables the same-origin policy, allowing every website full control over
+          all other websites. This is for use in special environments where you wish to disable
+          all security and allow websites to hack each other. It is impossible to use this setting
+          securely.
   */
   @property void disableWebSecurity(bool propval)
   {
@@ -317,8 +317,8 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `drawCompositingIndicators` property.
       Returns: Whether to draw compositing borders and repaint counters on layers drawn
-      with accelerated compositing. This is useful for debugging issues related
-      to web content that is composited with the GPU.
+        with accelerated compositing. This is useful for debugging issues related
+        to web content that is composited with the GPU.
   */
   @property bool drawCompositingIndicators()
   {
@@ -329,8 +329,8 @@ class Settings : gobject.object.ObjectWrap
       Set `drawCompositingIndicators` property.
       Params:
         propval = Whether to draw compositing borders and repaint counters on layers drawn
-        with accelerated compositing. This is useful for debugging issues related
-        to web content that is composited with the GPU.
+          with accelerated compositing. This is useful for debugging issues related
+          to web content that is composited with the GPU.
   */
   @property void drawCompositingIndicators(bool propval)
   {
@@ -340,9 +340,9 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enable2dCanvasAcceleration` property.
       Returns: Enable or disable 2D canvas acceleration.
-      If this setting is enabled, the 2D canvas will be accelerated even if Skia CPU
-      is used for rendering. However, the canvas can be unaccelerated even when this setting
-      is enabled, for other reasons like its size or when willReadFrequently property is used.
+        If this setting is enabled, the 2D canvas will be accelerated even if Skia CPU
+        is used for rendering. However, the canvas can be unaccelerated even when this setting
+        is enabled, for other reasons like its size or when willReadFrequently property is used.
   */
   @property bool enable2dCanvasAcceleration()
   {
@@ -353,9 +353,9 @@ class Settings : gobject.object.ObjectWrap
       Set `enable2dCanvasAcceleration` property.
       Params:
         propval = Enable or disable 2D canvas acceleration.
-        If this setting is enabled, the 2D canvas will be accelerated even if Skia CPU
-        is used for rendering. However, the canvas can be unaccelerated even when this setting
-        is enabled, for other reasons like its size or when willReadFrequently property is used.
+          If this setting is enabled, the 2D canvas will be accelerated even if Skia CPU
+          is used for rendering. However, the canvas can be unaccelerated even when this setting
+          is enabled, for other reasons like its size or when willReadFrequently property is used.
   */
   @property void enable2dCanvasAcceleration(bool propval)
   {
@@ -422,7 +422,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableDnsPrefetching` property.
       Returns: Determines whether or not to prefetch domain names. DNS prefetching attempts
-      to resolve domain names before a user tries to follow a link.
+        to resolve domain names before a user tries to follow a link.
   */
   @property bool enableDnsPrefetching()
   {
@@ -433,7 +433,7 @@ class Settings : gobject.object.ObjectWrap
       Set `enableDnsPrefetching` property.
       Params:
         propval = Determines whether or not to prefetch domain names. DNS prefetching attempts
-        to resolve domain names before a user tries to follow a link.
+          to resolve domain names before a user tries to follow a link.
   */
   @property void enableDnsPrefetching(bool propval)
   {
@@ -443,11 +443,11 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableEncryptedMedia` property.
       Returns: Enable or disable support for Encrypted Media API on pages.
-      EncryptedMedia is an experimental JavaScript API for playing encrypted media in HTML.
-      This property will only work as intended if the EncryptedMedia feature is enabled at build time
-      with the ENABLE_ENCRYPTED_MEDIA flag.
-      
-      See https://www.w3.org/TR/encrypted-media/
+        EncryptedMedia is an experimental JavaScript API for playing encrypted media in HTML.
+        This property will only work as intended if the EncryptedMedia feature is enabled at build time
+        with the ENABLE_ENCRYPTED_MEDIA flag.
+        
+        See https://www.w3.org/TR/encrypted-media/
   */
   @property bool enableEncryptedMedia()
   {
@@ -458,11 +458,11 @@ class Settings : gobject.object.ObjectWrap
       Set `enableEncryptedMedia` property.
       Params:
         propval = Enable or disable support for Encrypted Media API on pages.
-        EncryptedMedia is an experimental JavaScript API for playing encrypted media in HTML.
-        This property will only work as intended if the EncryptedMedia feature is enabled at build time
-        with the ENABLE_ENCRYPTED_MEDIA flag.
-        
-        See https://www.w3.org/TR/encrypted-media/
+          EncryptedMedia is an experimental JavaScript API for playing encrypted media in HTML.
+          This property will only work as intended if the EncryptedMedia feature is enabled at build time
+          with the ENABLE_ENCRYPTED_MEDIA flag.
+          
+          See https://www.w3.org/TR/encrypted-media/
   */
   @property void enableEncryptedMedia(bool propval)
   {
@@ -472,9 +472,9 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableFullscreen` property.
       Returns: Whether to enable the Javascript Fullscreen API. The API
-      allows any HTML element to request fullscreen display. See also
-      the current draft of the spec:
-      http://www.w3.org/TR/fullscreen/
+        allows any HTML element to request fullscreen display. See also
+        the current draft of the spec:
+        http://www.w3.org/TR/fullscreen/
   */
   @property bool enableFullscreen()
   {
@@ -485,9 +485,9 @@ class Settings : gobject.object.ObjectWrap
       Set `enableFullscreen` property.
       Params:
         propval = Whether to enable the Javascript Fullscreen API. The API
-        allows any HTML element to request fullscreen display. See also
-        the current draft of the spec:
-        http://www.w3.org/TR/fullscreen/
+          allows any HTML element to request fullscreen display. See also
+          the current draft of the spec:
+          http://www.w3.org/TR/fullscreen/
   */
   @property void enableFullscreen(bool propval)
   {
@@ -516,10 +516,10 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableHtml5LocalStorage` property.
       Returns: Whether to enable HTML5 local storage support. Local storage provides
-      simple synchronous storage access.
-      
-      HTML5 local storage specification is available at
-      http://dev.w3.org/html5/webstorage/.
+        simple synchronous storage access.
+        
+        HTML5 local storage specification is available at
+        http://dev.w3.org/html5/webstorage/.
   */
   @property bool enableHtml5LocalStorage()
   {
@@ -530,10 +530,10 @@ class Settings : gobject.object.ObjectWrap
       Set `enableHtml5LocalStorage` property.
       Params:
         propval = Whether to enable HTML5 local storage support. Local storage provides
-        simple synchronous storage access.
-        
-        HTML5 local storage specification is available at
-        http://dev.w3.org/html5/webstorage/.
+          simple synchronous storage access.
+          
+          HTML5 local storage specification is available at
+          http://dev.w3.org/html5/webstorage/.
   */
   @property void enableHtml5LocalStorage(bool propval)
   {
@@ -543,9 +543,9 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableHyperlinkAuditing` property.
       Returns: Determines whether or not hyperlink auditing is enabled.
-      
-      The hyperlink auditing specification is available at
-      http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
+        
+        The hyperlink auditing specification is available at
+        http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
   */
   @property bool enableHyperlinkAuditing()
   {
@@ -556,9 +556,9 @@ class Settings : gobject.object.ObjectWrap
       Set `enableHyperlinkAuditing` property.
       Params:
         propval = Determines whether or not hyperlink auditing is enabled.
-        
-        The hyperlink auditing specification is available at
-        http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
+          
+          The hyperlink auditing specification is available at
+          http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
   */
   @property void enableHyperlinkAuditing(bool propval)
   {
@@ -587,8 +587,8 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableJavascriptMarkup` property.
       Returns: Determines whether or not JavaScript markup is allowed in document. When this setting is disabled,
-      all JavaScript-related elements and attributes are removed from the document during parsing. Note that
-      executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
+        all JavaScript-related elements and attributes are removed from the document during parsing. Note that
+        executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
   */
   @property bool enableJavascriptMarkup()
   {
@@ -599,8 +599,8 @@ class Settings : gobject.object.ObjectWrap
       Set `enableJavascriptMarkup` property.
       Params:
         propval = Determines whether or not JavaScript markup is allowed in document. When this setting is disabled,
-        all JavaScript-related elements and attributes are removed from the document during parsing. Note that
-        executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
+          all JavaScript-related elements and attributes are removed from the document during parsing. Note that
+          executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
   */
   @property void enableJavascriptMarkup(bool propval)
   {
@@ -610,8 +610,8 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableMedia` property.
       Returns: Enable or disable support for media playback on pages. This setting is enabled by
-      default. Disabling it means `<audio>`, `<track>` and `<video>` elements will have
-      playback support disabled.
+        default. Disabling it means `<audio>`, `<track>` and `<video>` elements will have
+        playback support disabled.
   */
   @property bool enableMedia()
   {
@@ -622,8 +622,8 @@ class Settings : gobject.object.ObjectWrap
       Set `enableMedia` property.
       Params:
         propval = Enable or disable support for media playback on pages. This setting is enabled by
-        default. Disabling it means `<audio>`, `<track>` and `<video>` elements will have
-        playback support disabled.
+          default. Disabling it means `<audio>`, `<track>` and `<video>` elements will have
+          playback support disabled.
   */
   @property void enableMedia(bool propval)
   {
@@ -633,13 +633,13 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableMediaCapabilities` property.
       Returns: Enable or disable support for MediaCapabilities on pages. This
-      specification intends to provide APIs to allow websites to make an optimal
-      decision when picking media content for the user. The APIs will expose
-      information about the decoding and encoding capabilities for a given format
-      but also output capabilities to find the best match based on the device’s
-      display.
-      
-      See also https://wicg.github.io/media-capabilities/
+        specification intends to provide APIs to allow websites to make an optimal
+        decision when picking media content for the user. The APIs will expose
+        information about the decoding and encoding capabilities for a given format
+        but also output capabilities to find the best match based on the device’s
+        display.
+        
+        See also https://wicg.github.io/media-capabilities/
   */
   @property bool enableMediaCapabilities()
   {
@@ -650,13 +650,13 @@ class Settings : gobject.object.ObjectWrap
       Set `enableMediaCapabilities` property.
       Params:
         propval = Enable or disable support for MediaCapabilities on pages. This
-        specification intends to provide APIs to allow websites to make an optimal
-        decision when picking media content for the user. The APIs will expose
-        information about the decoding and encoding capabilities for a given format
-        but also output capabilities to find the best match based on the device’s
-        display.
-        
-        See also https://wicg.github.io/media-capabilities/
+          specification intends to provide APIs to allow websites to make an optimal
+          decision when picking media content for the user. The APIs will expose
+          information about the decoding and encoding capabilities for a given format
+          but also output capabilities to find the best match based on the device’s
+          display.
+          
+          See also https://wicg.github.io/media-capabilities/
   */
   @property void enableMediaCapabilities(bool propval)
   {
@@ -666,10 +666,10 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableMediaStream` property.
       Returns: Enable or disable support for MediaStream on pages. MediaStream
-      is an experimental proposal for allowing web pages to access
-      audio and video devices for capture.
-      
-      See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
+        is an experimental proposal for allowing web pages to access
+        audio and video devices for capture.
+        
+        See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
   */
   @property bool enableMediaStream()
   {
@@ -680,10 +680,10 @@ class Settings : gobject.object.ObjectWrap
       Set `enableMediaStream` property.
       Params:
         propval = Enable or disable support for MediaStream on pages. MediaStream
-        is an experimental proposal for allowing web pages to access
-        audio and video devices for capture.
-        
-        See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
+          is an experimental proposal for allowing web pages to access
+          audio and video devices for capture.
+          
+          See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
   */
   @property void enableMediaStream(bool propval)
   {
@@ -693,10 +693,10 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableMediasource` property.
       Returns: Enable or disable support for MediaSource on pages. MediaSource
-      extends HTMLMediaElement to allow JavaScript to generate media
-      streams for playback.
-      
-      See also http://www.w3.org/TR/media-source/
+        extends HTMLMediaElement to allow JavaScript to generate media
+        streams for playback.
+        
+        See also http://www.w3.org/TR/media-source/
   */
   @property bool enableMediasource()
   {
@@ -707,10 +707,10 @@ class Settings : gobject.object.ObjectWrap
       Set `enableMediasource` property.
       Params:
         propval = Enable or disable support for MediaSource on pages. MediaSource
-        extends HTMLMediaElement to allow JavaScript to generate media
-        streams for playback.
-        
-        See also http://www.w3.org/TR/media-source/
+          extends HTMLMediaElement to allow JavaScript to generate media
+          streams for playback.
+          
+          See also http://www.w3.org/TR/media-source/
   */
   @property void enableMediasource(bool propval)
   {
@@ -720,8 +720,8 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableMockCaptureDevices` property.
       Returns: Enable or disable the Mock Capture Devices. Those are fake
-      Microphone and Camera devices to be used as MediaStream
-      sources.
+        Microphone and Camera devices to be used as MediaStream
+        sources.
   */
   @property bool enableMockCaptureDevices()
   {
@@ -732,8 +732,8 @@ class Settings : gobject.object.ObjectWrap
       Set `enableMockCaptureDevices` property.
       Params:
         propval = Enable or disable the Mock Capture Devices. Those are fake
-        Microphone and Camera devices to be used as MediaStream
-        sources.
+          Microphone and Camera devices to be used as MediaStream
+          sources.
   */
   @property void enableMockCaptureDevices(bool propval)
   {
@@ -762,14 +762,14 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enablePageCache` property.
       Returns: Enable or disable the page cache. Disabling the page cache is
-      generally only useful for special circumstances like low-memory
-      scenarios or special purpose applications like static HTML
-      viewers. This setting only controls the Page Cache, this cache
-      is different than the disk-based or memory-based traditional
-      resource caches, its point is to make going back and forth
-      between pages much faster. For details about the different types
-      of caches and their purposes see:
-      http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
+        generally only useful for special circumstances like low-memory
+        scenarios or special purpose applications like static HTML
+        viewers. This setting only controls the Page Cache, this cache
+        is different than the disk-based or memory-based traditional
+        resource caches, its point is to make going back and forth
+        between pages much faster. For details about the different types
+        of caches and their purposes see:
+        http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
   */
   @property bool enablePageCache()
   {
@@ -780,14 +780,14 @@ class Settings : gobject.object.ObjectWrap
       Set `enablePageCache` property.
       Params:
         propval = Enable or disable the page cache. Disabling the page cache is
-        generally only useful for special circumstances like low-memory
-        scenarios or special purpose applications like static HTML
-        viewers. This setting only controls the Page Cache, this cache
-        is different than the disk-based or memory-based traditional
-        resource caches, its point is to make going back and forth
-        between pages much faster. For details about the different types
-        of caches and their purposes see:
-        http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
+          generally only useful for special circumstances like low-memory
+          scenarios or special purpose applications like static HTML
+          viewers. This setting only controls the Page Cache, this cache
+          is different than the disk-based or memory-based traditional
+          resource caches, its point is to make going back and forth
+          between pages much faster. For details about the different types
+          of caches and their purposes see:
+          http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
   */
   @property void enablePageCache(bool propval)
   {
@@ -816,11 +816,11 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableSiteSpecificQuirks` property.
       Returns: Whether to turn on site-specific quirks. Turning this on will
-      tell WebKit to use some site-specific workarounds for
-      better web compatibility. For example, older versions of
-      MediaWiki will incorrectly send to WebKit a CSS file with KHTML
-      workarounds. By turning on site-specific quirks, WebKit will
-      special-case this and other cases to make some specific sites work.
+        tell WebKit to use some site-specific workarounds for
+        better web compatibility. For example, older versions of
+        MediaWiki will incorrectly send to WebKit a CSS file with KHTML
+        workarounds. By turning on site-specific quirks, WebKit will
+        special-case this and other cases to make some specific sites work.
   */
   @property bool enableSiteSpecificQuirks()
   {
@@ -831,11 +831,11 @@ class Settings : gobject.object.ObjectWrap
       Set `enableSiteSpecificQuirks` property.
       Params:
         propval = Whether to turn on site-specific quirks. Turning this on will
-        tell WebKit to use some site-specific workarounds for
-        better web compatibility. For example, older versions of
-        MediaWiki will incorrectly send to WebKit a CSS file with KHTML
-        workarounds. By turning on site-specific quirks, WebKit will
-        special-case this and other cases to make some specific sites work.
+          tell WebKit to use some site-specific workarounds for
+          better web compatibility. For example, older versions of
+          MediaWiki will incorrectly send to WebKit a CSS file with KHTML
+          workarounds. By turning on site-specific quirks, WebKit will
+          special-case this and other cases to make some specific sites work.
   */
   @property void enableSiteSpecificQuirks(bool propval)
   {
@@ -864,11 +864,11 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableSpatialNavigation` property.
       Returns: Whether to enable Spatial Navigation. This feature consists in the ability
-      to navigate between focusable elements in a Web page, such as hyperlinks
-      and form controls, by using Left, Right, Up and Down arrow keys.
-      For example, if an user presses the Right key, heuristics determine whether
-      there is an element they might be trying to reach towards the right, and if
-      there are multiple elements, which element they probably wants.
+        to navigate between focusable elements in a Web page, such as hyperlinks
+        and form controls, by using Left, Right, Up and Down arrow keys.
+        For example, if an user presses the Right key, heuristics determine whether
+        there is an element they might be trying to reach towards the right, and if
+        there are multiple elements, which element they probably wants.
   */
   @property bool enableSpatialNavigation()
   {
@@ -879,11 +879,11 @@ class Settings : gobject.object.ObjectWrap
       Set `enableSpatialNavigation` property.
       Params:
         propval = Whether to enable Spatial Navigation. This feature consists in the ability
-        to navigate between focusable elements in a Web page, such as hyperlinks
-        and form controls, by using Left, Right, Up and Down arrow keys.
-        For example, if an user presses the Right key, heuristics determine whether
-        there is an element they might be trying to reach towards the right, and if
-        there are multiple elements, which element they probably wants.
+          to navigate between focusable elements in a Web page, such as hyperlinks
+          and form controls, by using Left, Right, Up and Down arrow keys.
+          For example, if an user presses the Right key, heuristics determine whether
+          there is an element they might be trying to reach towards the right, and if
+          there are multiple elements, which element they probably wants.
   */
   @property void enableSpatialNavigation(bool propval)
   {
@@ -893,9 +893,9 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableTabsToLinks` property.
       Returns: Determines whether the tab key cycles through the elements on the page.
-      When this setting is enabled, users will be able to focus the next element
-      in the page by pressing the tab key. If the selected element is editable,
-      then pressing tab key will insert the tab character.
+        When this setting is enabled, users will be able to focus the next element
+        in the page by pressing the tab key. If the selected element is editable,
+        then pressing tab key will insert the tab character.
   */
   @property bool enableTabsToLinks()
   {
@@ -906,9 +906,9 @@ class Settings : gobject.object.ObjectWrap
       Set `enableTabsToLinks` property.
       Params:
         propval = Determines whether the tab key cycles through the elements on the page.
-        When this setting is enabled, users will be able to focus the next element
-        in the page by pressing the tab key. If the selected element is editable,
-        then pressing tab key will insert the tab character.
+          When this setting is enabled, users will be able to focus the next element
+          in the page by pressing the tab key. If the selected element is editable,
+          then pressing tab key will insert the tab character.
   */
   @property void enableTabsToLinks(bool propval)
   {
@@ -918,9 +918,9 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableWebaudio` property.
       Returns: Enable or disable support for WebAudio on pages. WebAudio is an
-      API for processing and synthesizing audio in web applications
-      
-      See also https://webaudio.github.io/web-audio-api
+        API for processing and synthesizing audio in web applications
+        
+        See also https://webaudio.github.io/web-audio-api
   */
   @property bool enableWebaudio()
   {
@@ -931,9 +931,9 @@ class Settings : gobject.object.ObjectWrap
       Set `enableWebaudio` property.
       Params:
         propval = Enable or disable support for WebAudio on pages. WebAudio is an
-        API for processing and synthesizing audio in web applications
-        
-        See also https://webaudio.github.io/web-audio-api
+          API for processing and synthesizing audio in web applications
+          
+          See also https://webaudio.github.io/web-audio-api
   */
   @property void enableWebaudio(bool propval)
   {
@@ -943,7 +943,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableWebgl` property.
       Returns: Enable or disable support for WebGL on pages. WebGL enables web
-      content to use an API based on OpenGL ES 2.0.
+        content to use an API based on OpenGL ES 2.0.
   */
   @property bool enableWebgl()
   {
@@ -954,7 +954,7 @@ class Settings : gobject.object.ObjectWrap
       Set `enableWebgl` property.
       Params:
         propval = Enable or disable support for WebGL on pages. WebGL enables web
-        content to use an API based on OpenGL ES 2.0.
+          content to use an API based on OpenGL ES 2.0.
   */
   @property void enableWebgl(bool propval)
   {
@@ -964,11 +964,11 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableWebrtc` property.
       Returns: Enable WebRTC support for loaded pages.
-      
-      Enabling this setting implies that `property@Settings:enable-media-stream`
-      will be enabled as well.
-      
-      See also https://www.w3.org/TR/webrtc/
+        
+        Enabling this setting implies that `property@Settings:enable-media-stream`
+        will be enabled as well.
+        
+        See also https://www.w3.org/TR/webrtc/
   */
   @property bool enableWebrtc()
   {
@@ -979,11 +979,11 @@ class Settings : gobject.object.ObjectWrap
       Set `enableWebrtc` property.
       Params:
         propval = Enable WebRTC support for loaded pages.
-        
-        Enabling this setting implies that `property@Settings:enable-media-stream`
-        will be enabled as well.
-        
-        See also https://www.w3.org/TR/webrtc/
+          
+          Enabling this setting implies that `property@Settings:enable-media-stream`
+          will be enabled as well.
+          
+          See also https://www.w3.org/TR/webrtc/
   */
   @property void enableWebrtc(bool propval)
   {
@@ -993,7 +993,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `enableWriteConsoleMessagesToStdout` property.
       Returns: Enable or disable writing console messages to stdout. These are messages
-      sent to the console with console.log and related methods.
+        sent to the console with console.log and related methods.
   */
   @property bool enableWriteConsoleMessagesToStdout()
   {
@@ -1004,7 +1004,7 @@ class Settings : gobject.object.ObjectWrap
       Set `enableWriteConsoleMessagesToStdout` property.
       Params:
         propval = Enable or disable writing console messages to stdout. These are messages
-        sent to the console with console.log and related methods.
+          sent to the console with console.log and related methods.
   */
   @property void enableWriteConsoleMessagesToStdout(bool propval)
   {
@@ -1033,12 +1033,12 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `hardwareAccelerationPolicy` property.
       Returns: The #WebKitHardwareAccelerationPolicy to decide how to enable and disable
-      hardware acceleration. Disabling hardware acceleration might
-      cause some websites to not render correctly or consume more CPU.
-      
-      Note that changing this setting might not be possible if hardware acceleration is not
-      supported by the hardware or the system. In that case, you can get the value to know the
-      actual policy being used, but changing the setting will not have any effect.
+        hardware acceleration. Disabling hardware acceleration might
+        cause some websites to not render correctly or consume more CPU.
+        
+        Note that changing this setting might not be possible if hardware acceleration is not
+        supported by the hardware or the system. In that case, you can get the value to know the
+        actual policy being used, but changing the setting will not have any effect.
   */
   @property webkit.types.HardwareAccelerationPolicy hardwareAccelerationPolicy()
   {
@@ -1049,12 +1049,12 @@ class Settings : gobject.object.ObjectWrap
       Set `hardwareAccelerationPolicy` property.
       Params:
         propval = The #WebKitHardwareAccelerationPolicy to decide how to enable and disable
-        hardware acceleration. Disabling hardware acceleration might
-        cause some websites to not render correctly or consume more CPU.
-        
-        Note that changing this setting might not be possible if hardware acceleration is not
-        supported by the hardware or the system. In that case, you can get the value to know the
-        actual policy being used, but changing the setting will not have any effect.
+          hardware acceleration. Disabling hardware acceleration might
+          cause some websites to not render correctly or consume more CPU.
+          
+          Note that changing this setting might not be possible if hardware acceleration is not
+          supported by the hardware or the system. In that case, you can get the value to know the
+          actual policy being used, but changing the setting will not have any effect.
   */
   @property void hardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy propval)
   {
@@ -1064,7 +1064,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `javascriptCanAccessClipboard` property.
       Returns: Whether JavaScript can access the clipboard. The default value is false. If
-      set to true, document.execCommand() allows cut, copy and paste commands.
+        set to true, document.execCommand() allows cut, copy and paste commands.
   */
   @property bool javascriptCanAccessClipboard()
   {
@@ -1075,7 +1075,7 @@ class Settings : gobject.object.ObjectWrap
       Set `javascriptCanAccessClipboard` property.
       Params:
         propval = Whether JavaScript can access the clipboard. The default value is false. If
-        set to true, document.execCommand() allows cut, copy and paste commands.
+          set to true, document.execCommand() allows cut, copy and paste commands.
   */
   @property void javascriptCanAccessClipboard(bool propval)
   {
@@ -1085,7 +1085,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `javascriptCanOpenWindowsAutomatically` property.
       Returns: Whether JavaScript can open popup windows automatically without user
-      intervention.
+        intervention.
   */
   @property bool javascriptCanOpenWindowsAutomatically()
   {
@@ -1096,7 +1096,7 @@ class Settings : gobject.object.ObjectWrap
       Set `javascriptCanOpenWindowsAutomatically` property.
       Params:
         propval = Whether JavaScript can open popup windows automatically without user
-        intervention.
+          intervention.
   */
   @property void javascriptCanOpenWindowsAutomatically(bool propval)
   {
@@ -1125,7 +1125,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `mediaContentTypesRequiringHardwareSupport` property.
       Returns: List of media content types requiring hardware support, split by semicolons (:).
-      For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
+        For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
   */
   @property string mediaContentTypesRequiringHardwareSupport()
   {
@@ -1136,7 +1136,7 @@ class Settings : gobject.object.ObjectWrap
       Set `mediaContentTypesRequiringHardwareSupport` property.
       Params:
         propval = List of media content types requiring hardware support, split by semicolons (:).
-        For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
+          For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
   */
   @property void mediaContentTypesRequiringHardwareSupport(string propval)
   {
@@ -1146,8 +1146,8 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `mediaPlaybackAllowsInline` property.
       Returns: Whether media playback is full-screen only or inline playback is allowed.
-      This is true by default, so media playback can be inline. Setting it to
-      false allows specifying that media playback should be always fullscreen.
+        This is true by default, so media playback can be inline. Setting it to
+        false allows specifying that media playback should be always fullscreen.
   */
   @property bool mediaPlaybackAllowsInline()
   {
@@ -1158,8 +1158,8 @@ class Settings : gobject.object.ObjectWrap
       Set `mediaPlaybackAllowsInline` property.
       Params:
         propval = Whether media playback is full-screen only or inline playback is allowed.
-        This is true by default, so media playback can be inline. Setting it to
-        false allows specifying that media playback should be always fullscreen.
+          This is true by default, so media playback can be inline. Setting it to
+          false allows specifying that media playback should be always fullscreen.
   */
   @property void mediaPlaybackAllowsInline(bool propval)
   {
@@ -1169,10 +1169,10 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `mediaPlaybackRequiresUserGesture` property.
       Returns: Whether a user gesture (such as clicking the play button)
-      would be required to start media playback or load media. This is off
-      by default, so media playback could start automatically.
-      Setting it on requires a gesture by the user to start playback, or to
-      load the media.
+        would be required to start media playback or load media. This is off
+        by default, so media playback could start automatically.
+        Setting it on requires a gesture by the user to start playback, or to
+        load the media.
   */
   @property bool mediaPlaybackRequiresUserGesture()
   {
@@ -1183,10 +1183,10 @@ class Settings : gobject.object.ObjectWrap
       Set `mediaPlaybackRequiresUserGesture` property.
       Params:
         propval = Whether a user gesture (such as clicking the play button)
-        would be required to start media playback or load media. This is off
-        by default, so media playback could start automatically.
-        Setting it on requires a gesture by the user to start playback, or to
-        load the media.
+          would be required to start media playback or load media. This is off
+          by default, so media playback could start automatically.
+          Setting it on requires a gesture by the user to start playback, or to
+          load the media.
   */
   @property void mediaPlaybackRequiresUserGesture(bool propval)
   {
@@ -1196,8 +1196,8 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `minimumFontSize` property.
       Returns: The minimum font size in pixels used to display text. This setting
-      controls the absolute smallest size. Values other than 0 can
-      potentially break page layouts.
+        controls the absolute smallest size. Values other than 0 can
+        potentially break page layouts.
   */
   @property uint minimumFontSize()
   {
@@ -1208,8 +1208,8 @@ class Settings : gobject.object.ObjectWrap
       Set `minimumFontSize` property.
       Params:
         propval = The minimum font size in pixels used to display text. This setting
-        controls the absolute smallest size. Values other than 0 can
-        potentially break page layouts.
+          controls the absolute smallest size. Values other than 0 can
+          potentially break page layouts.
   */
   @property void minimumFontSize(uint propval)
   {
@@ -1314,13 +1314,13 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `userAgent` property.
       Returns: The user-agent string used by WebKit. Unusual user-agent strings may cause web
-      content to render incorrectly or fail to run, as many web pages are written to
-      parse the user-agent strings of only the most popular browsers. Therefore, it's
-      typically better to not completely override the standard user-agent, but to use
-      [webkit.settings.Settings.setUserAgentWithApplicationDetails] instead.
-      
-      If this property is set to the empty string or null, it will revert to the standard
-      user-agent.
+        content to render incorrectly or fail to run, as many web pages are written to
+        parse the user-agent strings of only the most popular browsers. Therefore, it's
+        typically better to not completely override the standard user-agent, but to use
+        [webkit.settings.Settings.setUserAgentWithApplicationDetails] instead.
+        
+        If this property is set to the empty string or null, it will revert to the standard
+        user-agent.
   */
   @property string userAgent()
   {
@@ -1331,13 +1331,13 @@ class Settings : gobject.object.ObjectWrap
       Set `userAgent` property.
       Params:
         propval = The user-agent string used by WebKit. Unusual user-agent strings may cause web
-        content to render incorrectly or fail to run, as many web pages are written to
-        parse the user-agent strings of only the most popular browsers. Therefore, it's
-        typically better to not completely override the standard user-agent, but to use
-        [webkit.settings.Settings.setUserAgentWithApplicationDetails] instead.
-        
-        If this property is set to the empty string or null, it will revert to the standard
-        user-agent.
+          content to render incorrectly or fail to run, as many web pages are written to
+          parse the user-agent strings of only the most popular browsers. Therefore, it's
+          typically better to not completely override the standard user-agent, but to use
+          [webkit.settings.Settings.setUserAgentWithApplicationDetails] instead.
+          
+          If this property is set to the empty string or null, it will revert to the standard
+          user-agent.
   */
   @property void userAgent(string propval)
   {
@@ -1347,12 +1347,12 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `webrtcUdpPortsRange` property.
       Returns: Allow customization of the WebRTC UDP ports range.
-      
-      In some constrained environments where a firewall blocks UDP network traffic excepted on a
-      specific port range, this settings can be used to give hints to the WebRTC backend regarding
-      which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
-      default empty string value means the OS will use no hints from the WebRTC backend. Using 0
-      for one of the values is allowed and means the value is unspecified.
+        
+        In some constrained environments where a firewall blocks UDP network traffic excepted on a
+        specific port range, this settings can be used to give hints to the WebRTC backend regarding
+        which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
+        default empty string value means the OS will use no hints from the WebRTC backend. Using 0
+        for one of the values is allowed and means the value is unspecified.
   */
   @property string webrtcUdpPortsRange()
   {
@@ -1363,12 +1363,12 @@ class Settings : gobject.object.ObjectWrap
       Set `webrtcUdpPortsRange` property.
       Params:
         propval = Allow customization of the WebRTC UDP ports range.
-        
-        In some constrained environments where a firewall blocks UDP network traffic excepted on a
-        specific port range, this settings can be used to give hints to the WebRTC backend regarding
-        which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
-        default empty string value means the OS will use no hints from the WebRTC backend. Using 0
-        for one of the values is allowed and means the value is unspecified.
+          
+          In some constrained environments where a firewall blocks UDP network traffic excepted on a
+          specific port range, this settings can be used to give hints to the WebRTC backend regarding
+          which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
+          default empty string value means the OS will use no hints from the WebRTC backend. Using 0
+          for one of the values is allowed and means the value is unspecified.
   */
   @property void webrtcUdpPortsRange(string propval)
   {
@@ -1378,9 +1378,9 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `zoomTextOnly` property.
       Returns: Whether #WebKitWebView:zoom-level affects only the
-      text of the page or all the contents. Other contents containing text
-      like form controls will be also affected by zoom factor when
-      this property is enabled.
+        text of the page or all the contents. Other contents containing text
+        like form controls will be also affected by zoom factor when
+        this property is enabled.
   */
   @property bool zoomTextOnly()
   {
@@ -1391,9 +1391,9 @@ class Settings : gobject.object.ObjectWrap
       Set `zoomTextOnly` property.
       Params:
         propval = Whether #WebKitWebView:zoom-level affects only the
-        text of the page or all the contents. Other contents containing text
-        like form controls will be also affected by zoom factor when
-        this property is enabled.
+          text of the page or all the contents. Other contents containing text
+          like form controls will be also affected by zoom factor when
+          this property is enabled.
   */
   @property void zoomTextOnly(bool propval)
   {

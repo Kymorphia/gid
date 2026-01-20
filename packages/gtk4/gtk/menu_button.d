@@ -150,7 +150,7 @@ class MenuButton : gtk.widget.Widget
   /**
       Get `canShrink` property.
       Returns: Whether the size of the button can be made smaller than the natural
-      size of its contents.
+        size of its contents.
   */
   @property bool canShrink()
   {
@@ -161,7 +161,7 @@ class MenuButton : gtk.widget.Widget
       Set `canShrink` property.
       Params:
         propval = Whether the size of the button can be made smaller than the natural
-        size of its contents.
+          size of its contents.
   */
   @property void canShrink(bool propval)
   {
@@ -190,7 +190,7 @@ class MenuButton : gtk.widget.Widget
   /**
       Get `direction` property.
       Returns: The [gtk.types.ArrowType] representing the direction in which the
-      menu or popover will be popped out.
+        menu or popover will be popped out.
   */
   @property gtk.types.ArrowType direction()
   {
@@ -201,7 +201,7 @@ class MenuButton : gtk.widget.Widget
       Set `direction` property.
       Params:
         propval = The [gtk.types.ArrowType] representing the direction in which the
-        menu or popover will be popped out.
+          menu or popover will be popped out.
   */
   @property void direction(gtk.types.ArrowType propval)
   {
@@ -268,9 +268,9 @@ class MenuButton : gtk.widget.Widget
   /**
       Get `menuModel` property.
       Returns: The [gio.menu_model.MenuModel] from which the popup will be created.
-      
-      See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
-      with the [gtk.menu_button.MenuButton.popover] property.
+        
+        See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
+        with the [gtk.menu_button.MenuButton.popover] property.
   */
   @property gio.menu_model.MenuModel menuModel()
   {
@@ -281,9 +281,9 @@ class MenuButton : gtk.widget.Widget
       Set `menuModel` property.
       Params:
         propval = The [gio.menu_model.MenuModel] from which the popup will be created.
-        
-        See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
-        with the [gtk.menu_button.MenuButton.popover] property.
+          
+          See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
+          with the [gtk.menu_button.MenuButton.popover] property.
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
@@ -312,8 +312,8 @@ class MenuButton : gtk.widget.Widget
   /**
       Get `primary` property.
       Returns: Whether the menu button acts as a primary menu.
-      
-      Primary menus can be opened using the <kbd>F10</kbd> key
+        
+        Primary menus can be opened using the <kbd>F10</kbd> key
   */
   @property bool primary()
   {
@@ -324,8 +324,8 @@ class MenuButton : gtk.widget.Widget
       Set `primary` property.
       Params:
         propval = Whether the menu button acts as a primary menu.
-        
-        Primary menus can be opened using the <kbd>F10</kbd> key
+          
+          Primary menus can be opened using the <kbd>F10</kbd> key
   */
   @property void primary(bool propval)
   {
@@ -618,7 +618,6 @@ class MenuButton : gtk.widget.Widget
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_menu_button_set_create_popup_func(cast(GtkMenuButton*)this._cPtr, _funcCB, _func, _funcDestroyCB);
@@ -759,9 +758,9 @@ class MenuButton : gtk.widget.Widget
       Connect to `Activate` signal.
   
       Emitted to when the menu button is activated.
-      
-      The `::activate` signal on [gtk.menu_button.MenuButton] is an action signal and
-      emitting it causes the button to pop up its menu.
+        
+        The `::activate` signal on [gtk.menu_button.MenuButton] is an action signal and
+        emitting it causes the button to pop up its menu.
   
       Params:
         callback = signal callback delegate or function to connect

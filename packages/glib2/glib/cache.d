@@ -20,7 +20,7 @@ import glib.types;
 */
 class Cache
 {
-  GCache* cInstancePtr;
+  GCache* _cInstancePtr;
   bool owned;
 
   /** */
@@ -29,7 +29,7 @@ class Cache
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.cache.Cache");
 
-    cInstancePtr = cast(GCache*)ptr;
+    _cInstancePtr = cast(GCache*)ptr;
 
     owned = take;
   }
@@ -37,7 +37,7 @@ class Cache
   /** */
   void* _cPtr()
   {
-    return cast(void*)cInstancePtr;
+    return cast(void*)_cInstancePtr;
   }
 
   /**
@@ -97,7 +97,6 @@ class Cache
       (*_dlg)(key, value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_cache_key_foreach(cast(GCache*)this._cPtr, _funcCB, _func);
   }
@@ -135,7 +134,6 @@ class Cache
       (*_dlg)(key, value);
     }
     auto _funcCB = func ? &_funcCallback : null;
-
     auto _func = func ? cast(void*)&(func) : null;
     g_cache_value_foreach(cast(GCache*)this._cPtr, _funcCB, _func);
   }

@@ -49,8 +49,8 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   /**
       Get `byteOrder` property.
       Returns: The :byte-order property determines the byte ordering that
-      is used when reading multi-byte entities (such as integers)
-      from the stream.
+        is used when reading multi-byte entities (such as integers)
+        from the stream.
   */
   @property gio.types.DataStreamByteOrder byteOrder()
   {
@@ -61,8 +61,8 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Set `byteOrder` property.
       Params:
         propval = The :byte-order property determines the byte ordering that
-        is used when reading multi-byte entities (such as integers)
-        from the stream.
+          is used when reading multi-byte entities (such as integers)
+          from the stream.
   */
   @property void byteOrder(gio.types.DataStreamByteOrder propval)
   {
@@ -72,7 +72,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   /**
       Get `newlineType` property.
       Returns: The :newline-type property determines what is considered
-      as a line ending when reading complete lines from the stream.
+        as a line ending when reading complete lines from the stream.
   */
   @property gio.types.DataStreamNewlineType newlineType()
   {
@@ -83,7 +83,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Set `newlineType` property.
       Params:
         propval = The :newline-type property determines what is considered
-        as a line ending when reading complete lines from the stream.
+          as a line ending when reading complete lines from the stream.
   */
   @property void newlineType(gio.types.DataStreamNewlineType propval)
   {
@@ -244,7 +244,6 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_data_input_stream_read_line_async(cast(GDataInputStream*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -453,7 +452,6 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _stopChars = stopChars.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_data_input_stream_read_until_async(cast(GDataInputStream*)this._cPtr, _stopChars, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
@@ -558,7 +556,6 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     const(char)* _stopChars = stopChars.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_data_input_stream_read_upto_async(cast(GDataInputStream*)this._cPtr, _stopChars, stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);

@@ -3,7 +3,6 @@ module gda.sql_function;
 
 import gda.c.functions;
 import gda.c.types;
-import gda.sql_any_part;
 import gda.types;
 import gid.gid;
 import gobject.value;
@@ -13,7 +12,7 @@ import gobject.value;
 */
 class SqlFunction
 {
-  GdaSqlFunction cInstance;
+  GdaSqlFunction _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -21,7 +20,7 @@ class SqlFunction
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_function.SqlFunction");
 
-    cInstance = *cast(GdaSqlFunction*)ptr;
+    _cInstance = *cast(GdaSqlFunction*)ptr;
 
     if (take)
       gFree(ptr);
@@ -30,16 +29,7 @@ class SqlFunction
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
-  }
-
-  /**
-      Get `any` field.
-      Returns: inheritance structure
-  */
-  @property gda.sql_any_part.SqlAnyPart any()
-  {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlFunction*)this._cPtr).any, No.Take);
+    return cast(void*)&_cInstance;
   }
 
   /**

@@ -18,7 +18,7 @@ import gid.gid;
 */
 class MetaDbObject
 {
-  GdaMetaDbObject cInstance;
+  GdaMetaDbObject _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -26,7 +26,7 @@ class MetaDbObject
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_db_object.MetaDbObject");
 
-    cInstance = *cast(GdaMetaDbObject*)ptr;
+    _cInstance = *cast(GdaMetaDbObject*)ptr;
 
     if (take)
       gFree(ptr);
@@ -35,7 +35,7 @@ class MetaDbObject
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**

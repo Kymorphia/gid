@@ -104,10 +104,10 @@ class Allocator : gst.object.ObjectWrap
         params = optional parameters
       Returns: a new #GstMemory.
   */
-  gst.memory.Memory alloc(size_t size, gst.allocation_params.AllocationParams params = null)
+  gst.memory.Memory alloc(size_t size, gst.allocation_params.AllocationParams params)
   {
     GstMemory* _cretval;
-    _cretval = gst_allocator_alloc(cast(GstAllocator*)this._cPtr, size, params ? cast(GstAllocationParams*)params._cPtr(No.Dup) : null);
+    _cretval = gst_allocator_alloc(cast(GstAllocator*)this._cPtr, size, cast(GstAllocationParams*)&params);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -77,14 +77,14 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Get `defaultFilter` property.
       Returns: The default filter, that is, the filter that is initially
-      active in the file chooser dialog.
-      
-      If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
-      is used as the default filter. If that property contains no filter, the dialog will
-      be unfiltered.
-      
-      If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
-      of the list. If it is not, the dialog may choose to not make it available.
+        active in the file chooser dialog.
+        
+        If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+        is used as the default filter. If that property contains no filter, the dialog will
+        be unfiltered.
+        
+        If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
+        of the list. If it is not, the dialog may choose to not make it available.
   */
   @property gtk.file_filter.FileFilter defaultFilter()
   {
@@ -95,14 +95,14 @@ class FileDialog : gobject.object.ObjectWrap
       Set `defaultFilter` property.
       Params:
         propval = The default filter, that is, the filter that is initially
-        active in the file chooser dialog.
-        
-        If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
-        is used as the default filter. If that property contains no filter, the dialog will
-        be unfiltered.
-        
-        If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
-        of the list. If it is not, the dialog may choose to not make it available.
+          active in the file chooser dialog.
+          
+          If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+          is used as the default filter. If that property contains no filter, the dialog will
+          be unfiltered.
+          
+          If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
+          of the list. If it is not, the dialog may choose to not make it available.
   */
   @property void defaultFilter(gtk.file_filter.FileFilter propval)
   {
@@ -112,8 +112,8 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Get `filters` property.
       Returns: The list of filters.
-      
-      See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+        
+        See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
   */
   @property gio.list_model.ListModel filters()
   {
@@ -124,8 +124,8 @@ class FileDialog : gobject.object.ObjectWrap
       Set `filters` property.
       Params:
         propval = The list of filters.
-        
-        See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+          
+          See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
   */
   @property void filters(gio.list_model.ListModel propval)
   {
@@ -135,10 +135,10 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Get `initialFile` property.
       Returns: The initial file, that is, the file that is initially selected
-      in the file chooser dialog
-      
-      This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
-      `property@Gtk.FileDialog:initial-name`.
+        in the file chooser dialog
+        
+        This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
+        `property@Gtk.FileDialog:initial-name`.
   */
   @property gio.file.File initialFile()
   {
@@ -149,10 +149,10 @@ class FileDialog : gobject.object.ObjectWrap
       Set `initialFile` property.
       Params:
         propval = The initial file, that is, the file that is initially selected
-        in the file chooser dialog
-        
-        This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
-        `property@Gtk.FileDialog:initial-name`.
+          in the file chooser dialog
+          
+          This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
+          `property@Gtk.FileDialog:initial-name`.
   */
   @property void initialFile(gio.file.File propval)
   {
@@ -162,7 +162,7 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Get `initialFolder` property.
       Returns: The initial folder, that is, the directory that is initially
-      opened in the file chooser dialog
+        opened in the file chooser dialog
   */
   @property gio.file.File initialFolder()
   {
@@ -173,7 +173,7 @@ class FileDialog : gobject.object.ObjectWrap
       Set `initialFolder` property.
       Params:
         propval = The initial folder, that is, the directory that is initially
-        opened in the file chooser dialog
+          opened in the file chooser dialog
   */
   @property void initialFolder(gio.file.File propval)
   {
@@ -183,7 +183,7 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Get `initialName` property.
       Returns: The initial name, that is, the filename that is initially
-      selected in the file chooser dialog.
+        selected in the file chooser dialog.
   */
   @property string initialName()
   {
@@ -194,7 +194,7 @@ class FileDialog : gobject.object.ObjectWrap
       Set `initialName` property.
       Params:
         propval = The initial name, that is, the filename that is initially
-        selected in the file chooser dialog.
+          selected in the file chooser dialog.
   */
   @property void initialName(string propval)
   {
@@ -373,7 +373,6 @@ class FileDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_file_dialog_open(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -425,7 +424,6 @@ class FileDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_file_dialog_open_multiple(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -475,7 +473,6 @@ class FileDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_file_dialog_save(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -528,7 +525,6 @@ class FileDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_file_dialog_select_folder(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -580,7 +576,6 @@ class FileDialog : gobject.object.ObjectWrap
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gtk_file_dialog_select_multiple_folders(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

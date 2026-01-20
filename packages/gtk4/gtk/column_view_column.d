@@ -103,7 +103,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   /**
       Get `fixedWidth` property.
       Returns: If not -1, this is the width that the column is allocated,
-      regardless of the size of its content.
+        regardless of the size of its content.
   */
   @property int fixedWidth()
   {
@@ -114,7 +114,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Set `fixedWidth` property.
       Params:
         propval = If not -1, this is the width that the column is allocated,
-        regardless of the size of its content.
+          regardless of the size of its content.
   */
   @property void fixedWidth(int propval)
   {
@@ -143,12 +143,12 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   /**
       Get `id` property.
       Returns: An ID for the column.
-      
-      GTK is not currently using the ID for anything, but
-      it can be used by applications when saving column view
-      configurations.
-      
-      It is up to applications to ensure uniqueness of IDs.
+        
+        GTK is not currently using the ID for anything, but
+        it can be used by applications when saving column view
+        configurations.
+        
+        It is up to applications to ensure uniqueness of IDs.
   */
   @property string id()
   {
@@ -159,12 +159,12 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Set `id` property.
       Params:
         propval = An ID for the column.
-        
-        GTK is not currently using the ID for anything, but
-        it can be used by applications when saving column view
-        configurations.
-        
-        It is up to applications to ensure uniqueness of IDs.
+          
+          GTK is not currently using the ID for anything, but
+          it can be used by applications when saving column view
+          configurations.
+          
+          It is up to applications to ensure uniqueness of IDs.
   */
   @property void id(string propval)
   {

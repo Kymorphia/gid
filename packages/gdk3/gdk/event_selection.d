@@ -14,7 +14,7 @@ import gid.gid;
 */
 class EventSelection
 {
-  GdkEventSelection cInstance;
+  GdkEventSelection _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -22,7 +22,7 @@ class EventSelection
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_selection.EventSelection");
 
-    cInstance = *cast(GdkEventSelection*)ptr;
+    _cInstance = *cast(GdkEventSelection*)ptr;
 
     if (take)
       gFree(ptr);
@@ -31,13 +31,13 @@ class EventSelection
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.SelectionClear],
-        [gdk.types.EventType.SelectionNotify] or [gdk.types.EventType.SelectionRequest]).
+          [gdk.types.EventType.SelectionNotify] or [gdk.types.EventType.SelectionRequest]).
   */
   @property gdk.types.EventType type()
   {
@@ -48,7 +48,7 @@ class EventSelection
       Set `type` field.
       Params:
         propval = the type of the event ([gdk.types.EventType.SelectionClear],
-          [gdk.types.EventType.SelectionNotify] or [gdk.types.EventType.SelectionRequest]).
+            [gdk.types.EventType.SelectionNotify] or [gdk.types.EventType.SelectionRequest]).
   */
   @property void type(gdk.types.EventType propval)
   {

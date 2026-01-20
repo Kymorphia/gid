@@ -428,7 +428,6 @@ class Assistant : gtk.window.Window
       return _retval;
     }
     auto _pageFuncCB = pageFunc ? &_pageFuncCallback : null;
-
     auto _pageFunc = pageFunc ? freezeDelegate(cast(void*)&pageFunc) : null;
     GDestroyNotify _pageFuncDestroyCB = pageFunc ? &thawDelegate : null;
     gtk_assistant_set_forward_page_func(cast(GtkAssistant*)this._cPtr, _pageFuncCB, _pageFunc, _pageFuncDestroyCB);
@@ -507,16 +506,16 @@ class Assistant : gtk.window.Window
       Connect to `Apply` signal.
   
       Emitted when the apply button is clicked.
-      
-      The default behavior of the [gtk.assistant.Assistant] is to switch to the page
-      after the current page, unless the current page is the last one.
-      
-      A handler for the ::apply signal should carry out the actions for
-      which the wizard has collected data. If the action takes a long time
-      to complete, you might consider putting a page of type
-      [gtk.types.AssistantPageType.Progress] after the confirmation page and handle
-      this operation within the [gtk.assistant.Assistant.prepare] signal of
-      the progress page.
+        
+        The default behavior of the [gtk.assistant.Assistant] is to switch to the page
+        after the current page, unless the current page is the last one.
+        
+        A handler for the ::apply signal should carry out the actions for
+        which the wizard has collected data. If the action takes a long time
+        to complete, you might consider putting a page of type
+        [gtk.types.AssistantPageType.Progress] after the confirmation page and handle
+        this operation within the [gtk.assistant.Assistant.prepare] signal of
+        the progress page.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -595,8 +594,8 @@ class Assistant : gtk.window.Window
       Connect to `Close` signal.
   
       Emitted either when the close button of a summary page is clicked,
-      or when the apply button in the last page in the flow (of type
-      [gtk.types.AssistantPageType.Confirm]) is clicked.
+        or when the apply button in the last page in the flow (of type
+        [gtk.types.AssistantPageType.Confirm]) is clicked.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -675,10 +674,10 @@ class Assistant : gtk.window.Window
       Connect to `Prepare` signal.
   
       Emitted when a new page is set as the assistant's current page,
-      before making the new page visible.
-      
-      A handler for this signal can do any preparations which are
-      necessary before showing page.
+        before making the new page visible.
+        
+        A handler for this signal can do any preparations which are
+        necessary before showing page.
   
       Params:
         callback = signal callback delegate or function to connect

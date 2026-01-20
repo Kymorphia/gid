@@ -12,7 +12,7 @@ import gid.gid;
 */
 class EventWindowState
 {
-  GdkEventWindowState cInstance;
+  GdkEventWindowState _cInstance;
 
   /** */
   this(void* ptr, Flag!"Take" take)
@@ -20,7 +20,7 @@ class EventWindowState
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_window_state.EventWindowState");
 
-    cInstance = *cast(GdkEventWindowState*)ptr;
+    _cInstance = *cast(GdkEventWindowState*)ptr;
 
     if (take)
       gFree(ptr);
@@ -29,7 +29,7 @@ class EventWindowState
   /** */
   void* _cPtr()
   {
-    return cast(void*)&cInstance;
+    return cast(void*)&_cInstance;
   }
 
   /**
@@ -112,7 +112,7 @@ class EventWindowState
   /**
       Get `newWindowState` field.
       Returns: the new window state, a combination of
-        #GdkWindowState bits.
+          #GdkWindowState bits.
   */
   @property gdk.types.WindowState newWindowState()
   {
@@ -123,7 +123,7 @@ class EventWindowState
       Set `newWindowState` field.
       Params:
         propval = the new window state, a combination of
-          #GdkWindowState bits.
+            #GdkWindowState bits.
   */
   @property void newWindowState(gdk.types.WindowState propval)
   {

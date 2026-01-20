@@ -78,10 +78,10 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   /**
       Get `drawSensitive` property.
       Returns: Whether all cells should be draw as sensitive for this view regardless
-      of the actual cell properties (used to make menus with submenus appear
-      sensitive when the items in submenus might be insensitive).
-      
-      since 3.0
+        of the actual cell properties (used to make menus with submenus appear
+        sensitive when the items in submenus might be insensitive).
+        
+        since 3.0
   */
   @property bool drawSensitive()
   {
@@ -92,10 +92,10 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Set `drawSensitive` property.
       Params:
         propval = Whether all cells should be draw as sensitive for this view regardless
-        of the actual cell properties (used to make menus with submenus appear
-        sensitive when the items in submenus might be insensitive).
-        
-        since 3.0
+          of the actual cell properties (used to make menus with submenus appear
+          sensitive when the items in submenus might be insensitive).
+          
+          since 3.0
   */
   @property void drawSensitive(bool propval)
   {
@@ -105,11 +105,11 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   /**
       Get `fitModel` property.
       Returns: Whether the view should request enough space to always fit
-      the size of every row in the model (used by the combo box to
-      ensure the combo box size doesn't change when different items
-      are selected).
-      
-      since 3.0
+        the size of every row in the model (used by the combo box to
+        ensure the combo box size doesn't change when different items
+        are selected).
+        
+        since 3.0
   */
   @property bool fitModel()
   {
@@ -120,11 +120,11 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Set `fitModel` property.
       Params:
         propval = Whether the view should request enough space to always fit
-        the size of every row in the model (used by the combo box to
-        ensure the combo box size doesn't change when different items
-        are selected).
-        
-        since 3.0
+          the size of every row in the model (used by the combo box to
+          ensure the combo box size doesn't change when different items
+          are selected).
+          
+          since 3.0
   */
   @property void fitModel(bool propval)
   {
@@ -134,8 +134,8 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   /**
       Get `model` property.
       Returns: The model for cell view
-      
-      since 2.10
+        
+        since 2.10
   */
   @property gtk.tree_model.TreeModel model()
   {
@@ -146,8 +146,8 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Set `model` property.
       Params:
         propval = The model for cell view
-        
-        since 2.10
+          
+          since 2.10
   */
   @property void model(gtk.tree_model.TreeModel propval)
   {

@@ -212,7 +212,7 @@ void setVal(T)(GValue* gval, T v)
   else static if (is(T : Boxed))
   {
     g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
-    g_value_set_boxed(gval, v.cInstancePtr);
+    g_value_set_boxed(gval, v._cInstancePtr);
   }
   else static if (is(T : gobject.object.ObjectWrap))
     g_value_set_object(gval, v ? cast(GObject*)v._cPtr(No.Dup) : null);

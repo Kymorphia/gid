@@ -1,4 +1,4 @@
-/// Module for [Tuples] class
+/// Module for [Tuples] struct
 module glib.tuples;
 
 import gid.gid;
@@ -14,46 +14,12 @@ import glib.types;
 
     Deprecated: Rarely used API
 */
-class Tuples
+struct Tuples
 {
-  GTuples cInstance;
-
-  /** */
-  this(void* ptr, Flag!"Take" take)
-  {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.tuples.Tuples");
-
-    cInstance = *cast(GTuples*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr()
-  {
-    return cast(void*)&cInstance;
-  }
-
   /**
-      Get `len` field.
-      Returns: the number of records that matched.
+      the number of records that matched.
   */
-  @property uint len()
-  {
-    return (cast(GTuples*)this._cPtr).len;
-  }
-
-  /**
-      Set `len` field.
-      Params:
-        propval = the number of records that matched.
-  */
-  @property void len(uint propval)
-  {
-    (cast(GTuples*)this._cPtr).len = propval;
-  }
+  uint len;
 
   /**
       Frees the records which were returned by [glib.relation.Relation.select]. This
@@ -65,7 +31,7 @@ class Tuples
   */
   void destroy()
   {
-    g_tuples_destroy(cast(GTuples*)this._cPtr);
+    g_tuples_destroy(cast(GTuples*)&this);
   }
 
   /**
@@ -82,7 +48,7 @@ class Tuples
   */
   void* index(int index, int field)
   {
-    auto _retval = g_tuples_index(cast(GTuples*)this._cPtr, index, field);
+    auto _retval = g_tuples_index(cast(GTuples*)&this, index, field);
     return _retval;
   }
 }

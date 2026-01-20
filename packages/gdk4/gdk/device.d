@@ -51,8 +51,8 @@ class Device : gobject.object.ObjectWrap
   /**
       Get `capsLockState` property.
       Returns: Whether Caps Lock is on.
-      
-      This is only relevant for keyboard devices.
+        
+        This is only relevant for keyboard devices.
   */
   @property bool capsLockState()
   {
@@ -62,8 +62,8 @@ class Device : gobject.object.ObjectWrap
   /**
       Get `direction` property.
       Returns: The direction of the current layout.
-      
-      This is only relevant for keyboard devices.
+        
+        This is only relevant for keyboard devices.
   */
   @property pango.types.Direction direction()
   {
@@ -73,8 +73,8 @@ class Device : gobject.object.ObjectWrap
   /**
       Get `modifierState` property.
       Returns: The current modifier state of the device.
-      
-      This is only relevant for keyboard devices.
+        
+        This is only relevant for keyboard devices.
   */
   @property gdk.types.ModifierType modifierState()
   {
@@ -93,8 +93,8 @@ class Device : gobject.object.ObjectWrap
   /**
       Get `numLockState` property.
       Returns: Whether Num Lock is on.
-      
-      This is only relevant for keyboard devices.
+        
+        This is only relevant for keyboard devices.
   */
   @property bool numLockState()
   {
@@ -104,8 +104,8 @@ class Device : gobject.object.ObjectWrap
   /**
       Get `scrollLockState` property.
       Returns: Whether Scroll Lock is on.
-      
-      This is only relevant for keyboard devices.
+        
+        This is only relevant for keyboard devices.
   */
   @property bool scrollLockState()
   {
@@ -407,12 +407,12 @@ class Device : gobject.object.ObjectWrap
       Connect to `Changed` signal.
   
       Emitted either when the number of either axes or keys changes.
-      
-      On X11 this will normally happen when the physical device
-      routing events through the logical device changes (for
-      example, user switches from the USB mouse to a tablet); in
-      that case the logical device will change to reflect the axes
-      and keys on the new physical device.
+        
+        On X11 this will normally happen when the physical device
+        routing events through the logical device changes (for
+        example, user switches from the USB mouse to a tablet); in
+        that case the logical device will change to reflect the axes
+        and keys on the new physical device.
   
       Params:
         callback = signal callback delegate or function to connect
