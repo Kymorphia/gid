@@ -65,6 +65,7 @@
 //!reserved lazy
 //!reserved long
 //!reserved macro
+//!reserved main
 //!reserved mixin
 //!reserved module
 //!reserved new

@@ -248,7 +248,7 @@ class ObjectWrap
   * Template to get the D object from a C GObject and cast it to the given D object type.
   * Params:
   *   T = The D object type
-  *   _cInstance = The C GObject (can be null, in which case null is returned)
+  *   cptr = The C GObject (can be null, in which case null is returned)
   *   take = If Yes.Take then the D object will consume a GObject reference.
   * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
   */

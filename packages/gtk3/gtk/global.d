@@ -1014,10 +1014,10 @@ void keySnooperRemove(uint snooperHandlerId)
 /**
     Runs the main loop until [gtk.global.mainQuit] is called.
     
-    You can nest calls to [gtk.global.main]. In that case [gtk.global.mainQuit]
+    You can nest calls to [gtk.global.main_]. In that case [gtk.global.mainQuit]
     will make the innermost invocation of the main loop return.
 */
-void main()
+void main_()
 {
   gtk_main();
 }
@@ -2859,7 +2859,7 @@ gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList
 /**
     Create a simple window with window title window_title and
     text contents dialog_text.
-    The window will quit any running [gtk.global.main]-loop when destroyed, and it
+    The window will quit any running [gtk.global.main_]-loop when destroyed, and it
     will automatically be destroyed upon test function teardown.
 
     Params:
