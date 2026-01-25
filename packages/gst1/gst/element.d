@@ -1078,7 +1078,7 @@ class Element : gst.object.ObjectWrap
     char* _debug_ = debug_.toCString(Yes.Alloc);
     const(char)* _file = file.toCString(No.Alloc);
     const(char)* _function_ = function_.toCString(No.Alloc);
-    gst_element_message_full_with_details(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line, cast(GstStructure*)&structure);
+    gst_element_message_full_with_details(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
   }
 
   /**

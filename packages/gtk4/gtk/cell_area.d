@@ -499,7 +499,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   */
   void applyAttributes(gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded)
   {
-    gtk_cell_area_apply_attributes(cast(GtkCellArea*)this._cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, cast(GtkTreeIter*)&iter, isExpander, isExpanded);
+    gtk_cell_area_apply_attributes(cast(GtkCellArea*)this._cPtr, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, isExpander, isExpanded);
   }
 
   /**

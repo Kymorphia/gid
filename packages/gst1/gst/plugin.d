@@ -320,9 +320,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(GstStructure)* _cretval;
     _cretval = gst_plugin_get_cache_data(cast(GstPlugin*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -546,6 +544,6 @@ class Plugin : gst.object.ObjectWrap
   */
   void setCacheData(gst.structure.Structure cacheData)
   {
-    gst_plugin_set_cache_data(cast(GstPlugin*)this._cPtr, cast(GstStructure*)&cacheData);
+    gst_plugin_set_cache_data(cast(GstPlugin*)this._cPtr, cacheData ? cast(GstStructure*)cacheData._cPtr(Yes.Dup) : null);
   }
 }

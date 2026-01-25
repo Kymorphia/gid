@@ -550,6 +550,48 @@ gst.caps.Caps codecUtilsOpusCreateCapsFromHeader(gst.buffer.Buffer header, gst.b
 }
 
 /**
+    Parses Opus caps and fills the different fields with defaults if possible.
+
+    Params:
+      caps = the #GstCaps to parse the data from
+      rate = the sample rate
+      channels = the number of channels
+      channelMappingFamily = the channel mapping family
+      streamCount = the number of independent streams
+      coupledCount = the number of stereo streams
+      channelMapping = the mapping between the streams
+    Returns: true if parsing was successful, false otherwise.
+*/
+bool codecUtilsOpusParseCaps(gst.caps.Caps caps, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping)
+{
+  bool _retval;
+  _retval = cast(bool)gst_codec_utils_opus_parse_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(uint*)&rate, cast(ubyte*)&channels, cast(ubyte*)&channelMappingFamily, cast(ubyte*)&streamCount, cast(ubyte*)&coupledCount, channelMapping.ptr);
+  return _retval;
+}
+
+/**
+    Parses the OpusHead header.
+
+    Params:
+      header = the OpusHead #GstBuffer
+      rate = the sample rate
+      channels = the number of channels
+      channelMappingFamily = the channel mapping family
+      streamCount = the number of independent streams
+      coupledCount = the number of stereo streams
+      channelMapping = the mapping between the streams
+      preSkip = Pre-skip in 48kHz samples or 0
+      outputGain = Output gain or 0
+    Returns: true if parsing was successful, false otherwise.
+*/
+bool codecUtilsOpusParseHeader(gst.buffer.Buffer header, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping, out ushort preSkip, out short outputGain)
+{
+  bool _retval;
+  _retval = cast(bool)gst_codec_utils_opus_parse_header(header ? cast(GstBuffer*)header._cPtr(No.Dup) : null, cast(uint*)&rate, cast(ubyte*)&channels, cast(ubyte*)&channelMappingFamily, cast(ubyte*)&streamCount, cast(ubyte*)&coupledCount, channelMapping.ptr, cast(ushort*)&preSkip, cast(short*)&outputGain);
+  return _retval;
+}
+
+/**
     List all available #GstEncodingTarget for the specified category, or all categories
     if categoryname is null.
 

@@ -500,8 +500,6 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   
       Params:
         stopChars = characters to terminate the read
-        stopCharsLen = length of stop_chars. May be -1 if stop_chars is
-              nul-terminated
         length = a #gsize to get the length of the data read in
         cancellable = optional #GCancellable object, null to ignore
       Returns: a string with the data that was read
@@ -510,12 +508,16 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             return null on an error
       Throws: [ErrorWrap]
   */
-  string readUpto(string stopChars, ptrdiff_t stopCharsLen, out size_t length, gio.cancellable.Cancellable cancellable = null)
+  string readUpto(string stopChars, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
-    const(char)* _stopChars = stopChars.toCString(No.Alloc);
+    ptrdiff_t _stopCharsLen;
+    if (stopChars)
+      _stopCharsLen = cast(ptrdiff_t)stopChars.length;
+
+    auto _stopChars = cast(const(char)*)stopChars.ptr;
     GError *_err;
-    _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)this._cPtr, _stopChars, stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)this._cPtr, _stopChars, _stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
@@ -540,13 +542,11 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   
       Params:
         stopChars = characters to terminate the read
-        stopCharsLen = length of stop_chars. May be -1 if stop_chars is
-              nul-terminated
         ioPriority = the [I/O priority][io-priority] of the request
         cancellable = optional #GCancellable object, null to ignore
         callback = callback to call when the request is satisfied
   */
-  void readUptoAsync(string stopChars, ptrdiff_t stopCharsLen, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readUptoAsync(string stopChars, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
@@ -556,9 +556,13 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _stopChars = stopChars.toCString(No.Alloc);
+    ptrdiff_t _stopCharsLen;
+    if (stopChars)
+      _stopCharsLen = cast(ptrdiff_t)stopChars.length;
+
+    auto _stopChars = cast(const(char)*)stopChars.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_data_input_stream_read_upto_async(cast(GDataInputStream*)this._cPtr, _stopChars, stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_data_input_stream_read_upto_async(cast(GDataInputStream*)this._cPtr, _stopChars, _stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

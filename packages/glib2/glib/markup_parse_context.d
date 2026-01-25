@@ -161,16 +161,19 @@ class MarkupParseContext : gobject.boxed.Boxed
   
       Params:
         text = chunk of text to parse
-        textLen = length of text in bytes
       Returns: false if an error occurred, true on success
       Throws: [ErrorWrap]
   */
-  bool parse(string text, ptrdiff_t textLen)
+  bool parse(string text)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.Alloc);
+    ptrdiff_t _textLen;
+    if (text)
+      _textLen = cast(ptrdiff_t)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
     GError *_err;
-    _retval = cast(bool)g_markup_parse_context_parse(cast(GMarkupParseContext*)this._cPtr, _text, textLen, &_err);
+    _retval = cast(bool)g_markup_parse_context_parse(cast(GMarkupParseContext*)this._cPtr, _text, _textLen, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

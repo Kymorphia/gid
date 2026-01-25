@@ -20,13 +20,11 @@ class Blob : gobject.boxed.Boxed
   /**
       Create a `blob.Blob` boxed type.
       Params:
-        data = data buffer, as a #GdaBinary
         op = a pointer to a #GdaBlopOp, or null
   */
-  this(gda.binary.Binary data = gda.binary.Binary.init, gda.blob_op.BlobOp op = gda.blob_op.BlobOp.init)
+  this(gda.blob_op.BlobOp op = gda.blob_op.BlobOp.init)
   {
     super(gMalloc(GdaBlob.sizeof), Yes.Take);
-    this.data = data;
     this.op = op;
   }
 
@@ -68,16 +66,6 @@ class Blob : gobject.boxed.Boxed
   @property gda.binary.Binary data()
   {
     return cToD!(gda.binary.Binary)(cast(void*)&(cast(GdaBlob*)this._cPtr).data);
-  }
-
-  /**
-      Set `data` field.
-      Params:
-        propval = data buffer, as a #GdaBinary
-  */
-  @property void data(gda.binary.Binary propval)
-  {
-    (cast(GdaBlob*)this._cPtr).data = cast(GdaBinary)propval;
   }
 
   /**

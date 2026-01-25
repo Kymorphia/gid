@@ -432,14 +432,13 @@ class WebView : webkit.web_view_base.WebViewBase
   
       Params:
         body_ = the function body
-        length = length of body, or -1 if body is a nul-terminated string
         arguments = a #GVariant with format `a{sv}` storing the function arguments, or null
         worldName = the name of a #WebKitScriptWorld or null to use the default
         sourceUri = the source URI
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the script finished
   */
-  void callAsyncJavascriptFunction(string body_, ptrdiff_t length, glib.variant.Variant arguments = null, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void callAsyncJavascriptFunction(string body_, glib.variant.Variant arguments = null, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
@@ -449,11 +448,15 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _body_ = body_.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (body_)
+      _length = cast(ptrdiff_t)body_.length;
+
+    auto _body_ = cast(const(char)*)body_.ptr;
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_call_async_javascript_function(cast(WebKitWebView*)this._cPtr, _body_, length, arguments ? cast(GVariant*)arguments._cPtr(No.Dup) : null, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_call_async_javascript_function(cast(WebKitWebView*)this._cPtr, _body_, _length, arguments ? cast(GVariant*)arguments._cPtr(No.Dup) : null, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -632,13 +635,12 @@ class WebView : webkit.web_view_base.WebViewBase
   
       Params:
         script = the script to evaluate
-        length = length of script, or -1 if script is a nul-terminated string
         worldName = the name of a #WebKitScriptWorld or null to use the default
         sourceUri = the source URI
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the script finished
   */
-  void evaluateJavascript(string script, ptrdiff_t length, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void evaluateJavascript(string script, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
@@ -648,11 +650,15 @@ class WebView : webkit.web_view_base.WebViewBase
       (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _script = script.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (script)
+      _length = cast(ptrdiff_t)script.length;
+
+    auto _script = cast(const(char)*)script.ptr;
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_evaluate_javascript(cast(WebKitWebView*)this._cPtr, _script, length, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_evaluate_javascript(cast(WebKitWebView*)this._cPtr, _script, _length, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

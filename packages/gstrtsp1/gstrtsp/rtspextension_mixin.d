@@ -69,7 +69,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult parseSdp(gstsdp.sdpmessage.SDPMessage sdp, gst.structure.Structure s)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_parse_sdp(cast(GstRTSPExtension*)this._cPtr, sdp ? cast(GstSDPMessage*)sdp._cPtr(No.Dup) : null, cast(GstStructure*)&s);
+    _cretval = gst_rtsp_extension_parse_sdp(cast(GstRTSPExtension*)this._cPtr, sdp ? cast(GstSDPMessage*)sdp._cPtr(No.Dup) : null, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

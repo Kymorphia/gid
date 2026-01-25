@@ -159,16 +159,6 @@ class Buffer : gobject.boxed.Boxed
   }
 
   /**
-      Set `miniObject` field.
-      Params:
-        propval = the parent structure
-  */
-  @property void miniObject(gst.mini_object.MiniObject propval)
-  {
-    (cast(GstBuffer*)this._cPtr).miniObject = cast(GstMiniObject)propval;
-  }
-
-  /**
       Get `pool` field.
       Returns: pointer to the pool owner of the buffer
   */
@@ -475,7 +465,7 @@ class Buffer : gobject.boxed.Boxed
   gst.protection_meta.ProtectionMeta addProtectionMeta(gst.structure.Structure info)
   {
     GstProtectionMeta* _cretval;
-    _cretval = gst_buffer_add_protection_meta(cast(GstBuffer*)this._cPtr, cast(GstStructure*)&info);
+    _cretval = gst_buffer_add_protection_meta(cast(GstBuffer*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.protection_meta.ProtectionMeta(cast(GstProtectionMeta*)_cretval, No.Take) : null;
     return _retval;
   }

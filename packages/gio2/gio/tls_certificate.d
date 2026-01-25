@@ -199,16 +199,19 @@ class TlsCertificate : gobject.object.ObjectWrap
   
       Params:
         data = PEM-encoded certificate data
-        length = the length of data, or -1 if it's 0-terminated.
       Returns: the new certificate, or null if data is invalid
       Throws: [ErrorWrap]
   */
-  static gio.tls_certificate.TlsCertificate newFromPem(string data, ptrdiff_t length)
+  static gio.tls_certificate.TlsCertificate newFromPem(string data)
   {
     GTlsCertificate* _cretval;
-    const(char)* _data = data.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (data)
+      _length = cast(ptrdiff_t)data.length;
+
+    auto _data = cast(const(char)*)data.ptr;
     GError *_err;
-    _cretval = g_tls_certificate_new_from_pem(_data, length, &_err);
+    _cretval = g_tls_certificate_new_from_pem(_data, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);

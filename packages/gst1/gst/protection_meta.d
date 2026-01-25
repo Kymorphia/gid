@@ -53,6 +53,17 @@ class ProtectionMeta
     return cToD!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)this._cPtr).info);
   }
 
+  /**
+      Set `info` field.
+      Params:
+        propval = the cryptographic information needed to decrypt the sample.
+  */
+  @property void info(gst.structure.Structure propval)
+  {
+    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)this._cPtr).info);
+    dToC(propval, cast(void*)&(cast(GstProtectionMeta*)this._cPtr).info);
+  }
+
   /** */
   static gst.meta_info.MetaInfo getInfo()
   {

@@ -1,4 +1,4 @@
-/// Module for [VariantIter] struct
+/// Module for [VariantIter] class
 module glib.variant_iter;
 
 import gid.gid;
@@ -11,10 +11,32 @@ import glib.variant;
     #GVariantIter is an opaque data structure and can only be accessed
     using the following functions.
 */
-struct VariantIter
+class VariantIter
 {
+  GVariantIter _cInstance;
+
   /** */
-  size_t[16] x;
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for glib.variant_iter.VariantIter");
+
+    _cInstance = *cast(GVariantIter*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
+
+  ~this()
+  {
+    g_variant_iter_free(&_cInstance);
+  }
+
+  /** */
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
 
   /**
       Queries the number of child items in the container that we are
@@ -27,7 +49,7 @@ struct VariantIter
   size_t nChildren()
   {
     size_t _retval;
-    _retval = g_variant_iter_n_children(cast(GVariantIter*)&this);
+    _retval = g_variant_iter_n_children(cast(GVariantIter*)this._cPtr);
     return _retval;
   }
 
@@ -64,7 +86,7 @@ struct VariantIter
   glib.variant.Variant nextValue()
   {
     GVariant* _cretval;
-    _cretval = g_variant_iter_next_value(cast(GVariantIter*)&this);
+    _cretval = g_variant_iter_next_value(cast(GVariantIter*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }

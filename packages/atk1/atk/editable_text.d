@@ -64,12 +64,11 @@ interface EditableText
   
       Params:
         string_ = the text to insert
-        length = the length of text to insert, in bytes
         position = The caller initializes this to
           the position at which to insert the text. After the call it
           points at the position after the newly inserted text.
   */
-  void insertText(string string_, int length, ref int position);
+  void insertText(string string_, ref int position);
 
   /**
       Paste text from clipboard to specified position.

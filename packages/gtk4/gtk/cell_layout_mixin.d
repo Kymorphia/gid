@@ -263,7 +263,7 @@ template CellLayoutT()
     {
       auto _dlg = cast(gtk.types.CellLayoutDataFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_layout.CellLayout)(cast(void*)cellLayout, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_layout.CellLayout)(cast(void*)cellLayout, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;

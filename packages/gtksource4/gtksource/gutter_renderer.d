@@ -240,7 +240,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, cast(GtkTextIter*)&iter, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
 
   /**
@@ -257,7 +257,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void begin(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_gutter_renderer_begin(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
+    gtk_source_gutter_renderer_begin(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -285,7 +285,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void draw(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
   {
-    gtk_source_gutter_renderer_draw(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end, state);
+    gtk_source_gutter_renderer_draw(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
   }
 
   /**
@@ -411,7 +411,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, cast(GtkTextIter*)&iter, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void queryData(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
   {
-    gtk_source_gutter_renderer_query_data(cast(GtkSourceGutterRenderer*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end, state);
+    gtk_source_gutter_renderer_query_data(cast(GtkSourceGutterRenderer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
   }
 
   /**
@@ -448,7 +448,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryTooltip(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip)
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)this._cPtr, cast(GtkTextIter*)&iter, cast(GdkRectangle*)&area, x, y, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, x, y, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
     return _retval;
   }
 

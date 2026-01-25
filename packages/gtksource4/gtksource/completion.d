@@ -280,10 +280,10 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         so if you invoke [gtksource.completion.Completion.start] with this context
         you don't need to unref it.
   */
-  gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position)
+  gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position = null)
   {
     GtkSourceCompletionContext* _cretval;
-    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)this._cPtr, cast(GtkTextIter*)&position);
+    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)this._cPtr, position ? cast(GtkTextIter*)position._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.Take);
     return _retval;
   }

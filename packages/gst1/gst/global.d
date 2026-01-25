@@ -2307,9 +2307,7 @@ gst.structure.Structure valueGetStructure(gobject.value.Value value)
 {
   const(GstStructure)* _cretval;
   _cretval = gst_value_get_structure(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-  gst.structure.Structure _retval;
-  if (_cretval)
-    _retval = *cast(gst.structure.Structure*)_cretval;
+  auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -2586,7 +2584,7 @@ void valueSetIntRangeStep(gobject.value.Value value, int start, int end, int ste
 */
 void valueSetStructure(gobject.value.Value value, gst.structure.Structure structure)
 {
-  gst_value_set_structure(value ? cast(GValue*)value._cPtr(No.Dup) : null, cast(const(GstStructure)*)&structure);
+  gst_value_set_structure(value ? cast(GValue*)value._cPtr(No.Dup) : null, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null);
 }
 
 /**

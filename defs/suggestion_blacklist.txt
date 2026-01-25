@@ -1,0 +1,98 @@
+File: defs/adw1.d
+
+//!set class[Avatar].constructor[new].parameters.parameter[text].type '<array length="0" c:type="const char*"><type name="char" c:type="char"/></array>'
+
+File: defs/arrow1.d
+
+//!set class[StringArrayBuilder].method[append_string_len].parameters.parameter[value].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/atk1.d
+
+//!set record[ComponentIface].field[bounds_changed].callback[bounds_changed].parameters.parameter[bounds][direction] out
+//!set interface[Text].method[get_bounded_ranges].parameters.parameter[rect][direction] out
+//!set record[TextIface].field[get_bounded_ranges].callback[get_bounded_ranges].parameters.parameter[rect][direction] out
+//!set record[ObjectClass].field[active_descendant_changed].callback[active_descendant_changed].parameters.parameter[child][direction] out
+
+File: defs/gda5.d
+
+//!set callback[ThreadWrapperCallback].parameters.parameter[signame].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/glib2.d
+
+//!set function[error_domain_register].parameters.parameter[error_type_name].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set function[error_domain_register_static].parameters.parameter[error_type_name].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set function[ref_string_new_len].parameters.parameter[str].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_truncate_middle].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[BookmarkFile].method[set_app_info].parameters.parameter[exec].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[BookmarkFile].method[set_application_info].parameters.parameter[exec].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[Error].function[domain_register].parameters.parameter[error_type_name].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[Error].function[domain_register_static].parameters.parameter[error_type_name].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[IOFuncs].field[io_read].callback[io_read].parameters.parameter[buf].type '<array length="2" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set record[IOFuncs].field[io_write].callback[io_write].parameters.parameter[buf].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[MarkupParser].field[text].callback[text].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[MarkupParser].field[passthrough].callback[passthrough].parameters.parameter[passthrough_text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[String].constructor[new_len].parameters.parameter[init].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[String].method[append_len].parameters.parameter[val].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[String].method[insert_len].parameters.parameter[val].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[String].method[overwrite_len].parameters.parameter[val].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[String].method[prepend_len].parameters.parameter[val].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[StringChunk].method[insert_len].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/gst1.d
+
+//!set function[param_spec_fraction].parameters.parameter[blurb].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[Registry].method[check_feature_version].parameters.parameter[feature_name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/gstg11.d
+
+//!set class[GLShader].method[set_uniform_matrix_2fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_2x3fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_2x4fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_3fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_3x2fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_3x4fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_4fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_4x2fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[GLShader].method[set_uniform_matrix_4x3fv].parameters.parameter[name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/gtk3.d
+
+//!set record[EditableInterface].field[insert_text].callback[insert_text].parameters.parameter[new_text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[EditableInterface].field[do_insert_text].callback[do_insert_text].parameters.parameter[new_text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[EntryBufferClass].field[inserted_text].callback[inserted_text].parameters.parameter[chars].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[EntryBufferClass].field[insert_text].callback[insert_text].parameters.parameter[chars].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[IMContextClass].field[set_surrounding].callback[set_surrounding].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IconTheme].function[add_builtin_icon].parameters.parameter[icon_name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IconTheme].method[load_icon].parameters.parameter[icon_name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IconTheme].method[load_icon_for_scale].parameters.parameter[icon_name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IconTheme].method[load_surface].parameters.parameter[icon_name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IconTheme].method[lookup_icon].parameters.parameter[icon_name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IconTheme].method[lookup_icon_for_scale].parameters.parameter[icon_name].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[TextBufferClass].field[insert_text].callback[insert_text].parameters.parameter[new_text].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/gtk4.d
+
+//!set record[BuildableParser].field[text].callback[text].parameters.parameter[text].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[EditableInterface].field[insert_text].callback[insert_text].parameters.parameter[text].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[EditableInterface].field[do_insert_text].callback[do_insert_text].parameters.parameter[text].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[EntryBufferClass].field[inserted_text].callback[inserted_text].parameters.parameter[chars].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[EntryBufferClass].field[insert_text].callback[insert_text].parameters.parameter[chars].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[IMContextClass].field[set_surrounding].callback[set_surrounding].parameters.parameter[text].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[IMContextClass].field[set_surrounding_with_selection].callback[set_surrounding_with_selection].parameters.parameter[text].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[TextBufferClass].field[insert_text].callback[insert_text].parameters.parameter[new_text].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'
+
+File: defs/json1.d
+
+//!set function[construct_gobject].parameters.parameter[data].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/vte2.d
+
+//!set record[TerminalClass].field[commit].callback[commit].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/vte3.d
+
+//!set record[TerminalClass].field[commit].callback[commit].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+File: defs/webkit6.d
+
+//!set record[InputMethodContextClass].field[notify_surrounding].callback[notify_surrounding].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'

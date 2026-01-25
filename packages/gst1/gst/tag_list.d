@@ -62,16 +62,6 @@ class TagList : gobject.boxed.Boxed
   }
 
   /**
-      Set `miniObject` field.
-      Params:
-        propval = the parent type
-  */
-  @property void miniObject(gst.mini_object.MiniObject propval)
-  {
-    (cast(GstTagList*)this._cPtr).miniObject = cast(GstMiniObject)propval;
-  }
-
-  /**
       Creates a new empty GstTagList.
       
       Free-function: gst_tag_list_unref

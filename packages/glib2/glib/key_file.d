@@ -789,17 +789,20 @@ class KeyFile : gobject.boxed.Boxed
   
       Params:
         data = key file loaded in memory
-        length = the length of data in bytes (or (gsize)-1 if data is nul-terminated)
         flags = flags from #GKeyFileFlags
       Returns: true if a key file could be loaded, false otherwise
       Throws: [KeyFileException]
   */
-  bool loadFromData(string data, size_t length, glib.types.KeyFileFlags flags)
+  bool loadFromData(string data, glib.types.KeyFileFlags flags)
   {
     bool _retval;
-    const(char)* _data = data.toCString(No.Alloc);
+    size_t _length;
+    if (data)
+      _length = cast(size_t)data.length;
+
+    auto _data = cast(const(char)*)data.ptr;
     GError *_err;
-    _retval = cast(bool)g_key_file_load_from_data(cast(GKeyFile*)this._cPtr, _data, length, flags, &_err);
+    _retval = cast(bool)g_key_file_load_from_data(cast(GKeyFile*)this._cPtr, _data, _length, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
     return _retval;

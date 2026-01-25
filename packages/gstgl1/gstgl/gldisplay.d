@@ -221,7 +221,7 @@ class GLDisplay : gst.object.ObjectWrap
   gstgl.glcontext.GLContext getGlContextForThread(glib.thread.Thread thread)
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)this._cPtr, cast(GThread*)&thread);
+    _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)this._cPtr, thread ? cast(GThread*)thread._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }

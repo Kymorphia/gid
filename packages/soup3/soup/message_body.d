@@ -1,8 +1,9 @@
-/// Module for [MessageBody] struct
+/// Module for [MessageBody] class
 module soup.message_body;
 
 import gid.gid;
 import glib.bytes;
+import gobject.boxed;
 import soup.c.functions;
 import soup.c.types;
 import soup.types;
@@ -22,17 +23,72 @@ import soup.types;
     As an added bonus, when @data is filled in, it is always terminated
     with a `\0` byte (which is not reflected in @length).
 */
-struct MessageBody
+class MessageBody : gobject.boxed.Boxed
 {
-  /**
-      the data
-  */
-  const(ubyte)* data;
+
+  /** */
+  this(void* ptr, Flag!"Take" take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  /** */
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  {
+    return dup ? copy_ : _cInstancePtr;
+  }
+
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())soup_message_body_get_type != &gidSymbolNotFound ? soup_message_body_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MessageBody self()
+  {
+    return this;
+  }
 
   /**
-      length of @data
+      Get `length` field.
+      Returns: length of @data
   */
-  long length;
+  @property long length()
+  {
+    return (cast(SoupMessageBody*)this._cPtr).length;
+  }
+
+  /**
+      Set `length` field.
+      Params:
+        propval = length of @data
+  */
+  @property void length(long propval)
+  {
+    (cast(SoupMessageBody*)this._cPtr).length = propval;
+  }
+
+  /**
+      Creates a new #SoupMessageBody.
+      
+      `classMessage` uses this internally; you
+      will not normally need to call it yourself.
+      Returns: a new #SoupMessageBody.
+  */
+  this()
+  {
+    SoupMessageBody* _cretval;
+    _cretval = soup_message_body_new();
+    this(_cretval, Yes.Take);
+  }
 
   /**
       Appends the data from buffer to body.
@@ -42,7 +98,7 @@ struct MessageBody
   */
   void appendBytes(glib.bytes.Bytes buffer)
   {
-    soup_message_body_append_bytes(cast(SoupMessageBody*)&this, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null);
+    soup_message_body_append_bytes(cast(SoupMessageBody*)this._cPtr, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -52,7 +108,7 @@ struct MessageBody
   */
   void complete()
   {
-    soup_message_body_complete(cast(SoupMessageBody*)&this);
+    soup_message_body_complete(cast(SoupMessageBody*)this._cPtr);
   }
 
   /**
@@ -67,7 +123,7 @@ struct MessageBody
   glib.bytes.Bytes flatten()
   {
     GBytes* _cretval;
-    _cretval = soup_message_body_flatten(cast(SoupMessageBody*)&this);
+    _cretval = soup_message_body_flatten(cast(SoupMessageBody*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -81,7 +137,7 @@ struct MessageBody
   bool getAccumulate()
   {
     bool _retval;
-    _retval = cast(bool)soup_message_body_get_accumulate(cast(SoupMessageBody*)&this);
+    _retval = cast(bool)soup_message_body_get_accumulate(cast(SoupMessageBody*)this._cPtr);
     return _retval;
   }
 
@@ -110,7 +166,7 @@ struct MessageBody
   glib.bytes.Bytes getChunk(long offset)
   {
     GBytes* _cretval;
-    _cretval = soup_message_body_get_chunk(cast(SoupMessageBody*)&this, offset);
+    _cretval = soup_message_body_get_chunk(cast(SoupMessageBody*)this._cPtr, offset);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -131,7 +187,7 @@ struct MessageBody
   */
   void gotChunk(glib.bytes.Bytes chunk)
   {
-    soup_message_body_got_chunk(cast(SoupMessageBody*)&this, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
+    soup_message_body_got_chunk(cast(SoupMessageBody*)this._cPtr, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
   }
 
   /**
@@ -154,7 +210,7 @@ struct MessageBody
   */
   void setAccumulate(bool accumulate)
   {
-    soup_message_body_set_accumulate(cast(SoupMessageBody*)&this, accumulate);
+    soup_message_body_set_accumulate(cast(SoupMessageBody*)this._cPtr, accumulate);
   }
 
   /**
@@ -162,7 +218,7 @@ struct MessageBody
   */
   void truncate()
   {
-    soup_message_body_truncate(cast(SoupMessageBody*)&this);
+    soup_message_body_truncate(cast(SoupMessageBody*)this._cPtr);
   }
 
   /**
@@ -181,6 +237,6 @@ struct MessageBody
   */
   void wroteChunk(glib.bytes.Bytes chunk)
   {
-    soup_message_body_wrote_chunk(cast(SoupMessageBody*)&this, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
+    soup_message_body_wrote_chunk(cast(SoupMessageBody*)this._cPtr, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
   }
 }

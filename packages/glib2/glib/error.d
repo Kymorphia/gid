@@ -5,7 +5,6 @@ import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
-import gobject.boxed;
 
 
 import glib.types;

@@ -20,3 +20,7 @@
 
 //# Disable class APIs
 //!set class[GLFilter].function[add_rgba_pad_templates][ignore] 1
+
+//# caller-allocated-out-array (Caller allocated output array)
+//!set function[gl_swizzle_invert].parameters.parameter[inversion][caller-allocates] 1
+//!set function[gl_video_format_swizzle].parameters.parameter[swizzle][caller-allocates] 1

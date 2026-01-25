@@ -3288,6 +3288,7 @@ struct GstVideoAncillary
       The user data content of the Ancillary packet.
          Does not contain the ADF, DID, SDID nor CS.
   */
+  ubyte* data;
 
   /** */
   void*[4] GstReserved;

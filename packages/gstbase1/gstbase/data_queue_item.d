@@ -43,6 +43,17 @@ class DataQueueItem
   }
 
   /**
+      Set `object` field.
+      Params:
+        propval = the #GstMiniObject to queue.
+  */
+  @property void object(gst.mini_object.MiniObject propval)
+  {
+    cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
+    dToC(propval, cast(void*)&(cast(GstDataQueueItem*)this._cPtr).object);
+  }
+
+  /**
       Get `size` field.
       Returns: the size in bytes of the miniobject.
   */

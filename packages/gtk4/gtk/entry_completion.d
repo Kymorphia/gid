@@ -520,7 +520,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, *cast(gtk.tree_iter.TreeIter*)iter);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;

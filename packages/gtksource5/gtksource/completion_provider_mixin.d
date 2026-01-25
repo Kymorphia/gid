@@ -123,7 +123,7 @@ template CompletionProviderT()
   override bool isTrigger(gtk.text_iter.TextIter iter, dchar ch)
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_completion_provider_is_trigger(cast(GtkSourceCompletionProvider*)this._cPtr, cast(const(GtkTextIter)*)&iter, ch);
+    _retval = cast(bool)gtk_source_completion_provider_is_trigger(cast(GtkSourceCompletionProvider*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, ch);
     return _retval;
   }
 

@@ -9,6 +9,7 @@ import harfbuzz.blob;
 import harfbuzz.buffer;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
+import harfbuzz.color_line;
 import harfbuzz.draw_funcs;
 import harfbuzz.draw_state;
 import harfbuzz.face;
@@ -1342,12 +1343,12 @@ ubyte colorGetRed(harfbuzz.types.Color color)
       colorStops = Array of #hb_color_stop_t to populate
     Returns: the total number of color stops in color_line
 */
-uint colorLineGetColorStops(harfbuzz.types.ColorLine colorLine, uint start, ref harfbuzz.types.ColorStop[] colorStops)
+uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start, ref harfbuzz.types.ColorStop[] colorStops)
 {
   uint _retval;
   uint _count;
   _count = cast(uint)colorStops.length;
-  _retval = hb_color_line_get_color_stops(&colorLine, start, &_count, colorStops.ptr);
+  _retval = hb_color_line_get_color_stops(colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, start, &_count, colorStops.ptr);
   return _retval;
 }
 
@@ -1358,10 +1359,10 @@ uint colorLineGetColorStops(harfbuzz.types.ColorLine colorLine, uint start, ref 
       colorLine = a #hb_color_line_t object
     Returns: the extend mode of color_line
 */
-harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.types.ColorLine colorLine)
+harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.color_line.ColorLine colorLine)
 {
   hb_paint_extend_t _cretval;
-  _cretval = hb_color_line_get_extend(&colorLine);
+  _cretval = hb_color_line_get_extend(colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null);
   harfbuzz.types.PaintExtend _retval = cast(harfbuzz.types.PaintExtend)_cretval;
   return _retval;
 }
@@ -5910,7 +5911,7 @@ void paintFuncsSetLinearGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   {
     auto _dlg = cast(harfbuzz.types.PaintLinearGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, *cast(harfbuzz.types.ColorLine*)colorLine, x0, y0, x1, y1, x2, y2);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6078,7 +6079,7 @@ void paintFuncsSetRadialGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   {
     auto _dlg = cast(harfbuzz.types.PaintRadialGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, *cast(harfbuzz.types.ColorLine*)colorLine, x0, y0, r0, x1, y1, r1);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6099,7 +6100,7 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   {
     auto _dlg = cast(harfbuzz.types.PaintSweepGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, *cast(harfbuzz.types.ColorLine*)colorLine, x0, y0, startAngle, endAngle);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6139,9 +6140,9 @@ void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz
       x2 = X coordinate of the third point
       y2 = Y coordinate of the third point
 */
-void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2)
+void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2)
 {
-  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, &colorLine, x0, y0, x1, y1, x2, y2);
+  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, x1, y1, x2, y2);
 }
 
 /**
@@ -6255,9 +6256,9 @@ void paintPushTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
       y1 = Y coordinate of the second circle's center
       r1 = radius of the second circle
 */
-void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1)
+void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1)
 {
-  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, &colorLine, x0, y0, r0, x1, y1, r1);
+  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, r0, x1, y1, r1);
 }
 
 /**
@@ -6272,9 +6273,9 @@ void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData,
       startAngle = the start angle
       endAngle = the end angle
 */
-void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle)
+void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle)
 {
-  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, &colorLine, x0, y0, startAngle, endAngle);
+  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, startAngle, endAngle);
 }
 
 /**

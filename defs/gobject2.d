@@ -4,6 +4,8 @@
 //!info docs https://www.kymorphia.com/gid/gobject.html
 //!info capi https://docs.gtk.org/gobject/
 
+//!kind ClosureNotifyData StructAlias
+
 //# Merge GObject into GLib package to simplify interdependencies
 //!merge GLib 2.0
 

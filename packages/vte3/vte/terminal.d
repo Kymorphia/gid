@@ -2954,11 +2954,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string text, uint size, vte.terminal.Terminal terminal))
+          $(D void callback(char[] text, vte.terminal.Terminal terminal))
   
           `text` a string of text (optional)
-  
-          `size` the length of that string of text (optional)
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -2968,10 +2966,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   ulong connectCommit(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
-  && Parameters!T.length < 4)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == char[])))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -2979,17 +2976,18 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
+      auto size = getVal!(uint)(&_paramVals[2]);
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
-
-      static if (Parameters!T.length > 1)
-        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
-
-      static if (Parameters!T.length > 2)
-        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
-
+      {
+        auto _cArray = getVal!(char**)(&_paramVals[1]);
+        char[] _dArray;
+        _dArray = cast(char[])_cArray[0 .. size];
+        _paramTuple[0] = _dArray;
+      }
       _dClosure.cb(_paramTuple[]);
     }
 

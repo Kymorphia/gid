@@ -67,15 +67,13 @@ class Event : gobject.boxed.Boxed
   /**
       Create a `event.Event` boxed type.
       Params:
-        miniObject = the parent structure
         type = the #GstEventType of the event
         timestamp = the timestamp of the event
         seqnum = the sequence number of the event
   */
-  this(gst.mini_object.MiniObject miniObject = gst.mini_object.MiniObject.init, gst.types.EventType type = gst.types.EventType.init, ulong timestamp = ulong.init, uint seqnum = uint.init)
+  this(gst.types.EventType type = gst.types.EventType.init, ulong timestamp = ulong.init, uint seqnum = uint.init)
   {
     super(gMalloc(GstEvent.sizeof), Yes.Take);
-    this.miniObject = miniObject;
     this.type = type;
     this.timestamp = timestamp;
     this.seqnum = seqnum;
@@ -119,16 +117,6 @@ class Event : gobject.boxed.Boxed
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstEvent*)this._cPtr).miniObject);
-  }
-
-  /**
-      Set `miniObject` field.
-      Params:
-        propval = the parent structure
-  */
-  @property void miniObject(gst.mini_object.MiniObject propval)
-  {
-    (cast(GstEvent*)this._cPtr).miniObject = cast(GstMiniObject)propval;
   }
 
   /**
@@ -247,7 +235,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newCustom(gst.types.EventType type, gst.structure.Structure structure)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_custom(type, cast(GstStructure*)&structure);
+    _cretval = gst_event_new_custom(type, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -430,7 +418,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newNavigation(gst.structure.Structure structure)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_navigation(cast(GstStructure*)&structure);
+    _cretval = gst_event_new_navigation(structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -959,9 +947,7 @@ class Event : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_event_get_structure(cast(GstEvent*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1467,9 +1453,7 @@ class Event : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_event_writable_structure(cast(GstEvent*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

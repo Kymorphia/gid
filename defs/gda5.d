@@ -19,3 +19,5 @@
 //!set function[dsn_split].parameters.parameter[out_password][direction] out
 
 //!set class[ServerProvider].method[string_to_value].parameters.parameter[dbms_type][direction] out
+
+//!set record[Binary].field[data].array[][length] 1

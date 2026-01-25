@@ -116,7 +116,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   */
   void callFunction(gst.type_find.TypeFind find)
   {
-    gst_type_find_factory_call_function(cast(GstTypeFindFactory*)this._cPtr, cast(GstTypeFind*)&find);
+    gst_type_find_factory_call_function(cast(GstTypeFindFactory*)this._cPtr, find ? cast(GstTypeFind*)find._cPtr : null);
   }
 
   /**

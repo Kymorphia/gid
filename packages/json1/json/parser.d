@@ -191,16 +191,19 @@ class Parser : gobject.object.ObjectWrap
   
       Params:
         data = the buffer to parse
-        length = the length of the buffer, or -1 if it is `NUL` terminated
       Returns: `TRUE` if the buffer was succesfully parsed
       Throws: [ErrorWrap]
   */
-  bool loadFromData(string data, ptrdiff_t length)
+  bool loadFromData(string data)
   {
     bool _retval;
-    const(char)* _data = data.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (data)
+      _length = cast(ptrdiff_t)data.length;
+
+    auto _data = cast(const(char)*)data.ptr;
     GError *_err;
-    _retval = cast(bool)json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, length, &_err);
+    _retval = cast(bool)json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

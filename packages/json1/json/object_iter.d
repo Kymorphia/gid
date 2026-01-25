@@ -1,4 +1,4 @@
-/// Module for [ObjectIter] struct
+/// Module for [ObjectIter] class
 module json.object_iter;
 
 import gid.gid;
@@ -20,16 +20,27 @@ import json.types;
     All the fields in the [json.object_iter.ObjectIter] structure are private and should
     never be accessed directly.
 */
-struct ObjectIter
+class ObjectIter
 {
-  /** */
-  void*[6] privPointer;
+  JsonObjectIter _cInstance;
 
   /** */
-  int[2] privInt;
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for json.object_iter.ObjectIter");
+
+    _cInstance = *cast(JsonObjectIter*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
 
   /** */
-  gboolean[1] privBoolean;
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
 
   /**
       Initialises the iter and associate it with object.
@@ -56,7 +67,7 @@ struct ObjectIter
   */
   void init_(json.object.ObjectWrap object)
   {
-    json_object_iter_init(cast(JsonObjectIter*)&this, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
+    json_object_iter_init(cast(JsonObjectIter*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
 
   /**
@@ -81,7 +92,7 @@ struct ObjectIter
   */
   void initOrdered(json.object.ObjectWrap object)
   {
-    json_object_iter_init_ordered(cast(JsonObjectIter*)&this, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
+    json_object_iter_init_ordered(cast(JsonObjectIter*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
 
   /**
@@ -114,7 +125,7 @@ struct ObjectIter
     bool _retval;
     char* _memberName;
     JsonNode* _memberNode;
-    _retval = cast(bool)json_object_iter_next(cast(JsonObjectIter*)&this, &_memberName, &_memberNode);
+    _retval = cast(bool)json_object_iter_next(cast(JsonObjectIter*)this._cPtr, &_memberName, &_memberNode);
     memberName = _memberName.fromCString(No.Free);
     memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;
@@ -149,7 +160,7 @@ struct ObjectIter
     bool _retval;
     char* _memberName;
     JsonNode* _memberNode;
-    _retval = cast(bool)json_object_iter_next_ordered(cast(JsonObjectIter*)&this, &_memberName, &_memberNode);
+    _retval = cast(bool)json_object_iter_next_ordered(cast(JsonObjectIter*)this._cPtr, &_memberName, &_memberNode);
     memberName = _memberName.fromCString(No.Free);
     memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;

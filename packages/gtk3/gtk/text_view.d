@@ -551,7 +551,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
+    _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -572,7 +572,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
+    _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -612,7 +612,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
+    _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -633,7 +633,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter);
+    _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -720,7 +720,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getCursorLocations(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle strong, out gdk.rectangle.Rectangle weak)
   {
-    gtk_text_view_get_cursor_locations(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GdkRectangle*)&strong, cast(GdkRectangle*)&weak);
+    gtk_text_view_get_cursor_locations(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&strong, cast(GdkRectangle*)&weak);
   }
 
   /**
@@ -832,7 +832,9 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, x, y);
+    GtkTextIter _iter;
+    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, &_iter, x, y);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -861,7 +863,9 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, cast(int*)&trailing, x, y);
+    GtkTextIter _iter;
+    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, &_iter, cast(int*)&trailing, x, y);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -877,7 +881,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
   {
-    gtk_text_view_get_iter_location(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GdkRectangle*)&location);
+    gtk_text_view_get_iter_location(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&location);
   }
 
   /**
@@ -919,7 +923,9 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop)
   {
-    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&targetIter, y, cast(int*)&lineTop);
+    GtkTextIter _targetIter;
+    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, &_targetIter, y, cast(int*)&lineTop);
+    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.Take);
   }
 
   /**
@@ -934,7 +940,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
   {
-    gtk_text_view_get_line_yrange(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(int*)&y, cast(int*)&height);
+    gtk_text_view_get_line_yrange(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -1208,7 +1214,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, count);
+    _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, count);
     return _retval;
   }
 
@@ -1289,7 +1295,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, cast(GtkTextIter*)&iter, withinMargin, useAlign, xalign, yalign);
+    _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
     return _retval;
   }
 
@@ -1597,7 +1603,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, cast(const(GtkTextIter)*)&iter);
+    _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

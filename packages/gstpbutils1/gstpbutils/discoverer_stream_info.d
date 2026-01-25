@@ -84,9 +84,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   {
     const(GstStructure)* _cretval;
     _cretval = gst_discoverer_stream_info_get_misc(cast(GstDiscovererStreamInfo*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

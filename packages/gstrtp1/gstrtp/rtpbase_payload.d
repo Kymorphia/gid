@@ -465,10 +465,10 @@ class RTPBasePayload : gst.element.Element
         s = a #GstStructure with the caps fields
       Returns: true if the caps could be set.
   */
-  bool setOutcapsStructure(gst.structure.Structure s)
+  bool setOutcapsStructure(gst.structure.Structure s = null)
   {
     bool _retval;
-    _retval = cast(bool)gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, cast(GstStructure*)&s);
+    _retval = cast(bool)gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -106,15 +106,18 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   
       Params:
         data = CSS data to be parsed
-        length = the length of data in bytes, or -1 for NUL terminated strings
   
       Deprecated: Use [gtk.css_provider.CssProvider.loadFromString]
           or [gtk.css_provider.CssProvider.loadFromBytes] instead
   */
-  void loadFromData(string data, ptrdiff_t length)
+  void loadFromData(string data)
   {
-    const(char)* _data = data.toCString(No.Alloc);
-    gtk_css_provider_load_from_data(cast(GtkCssProvider*)this._cPtr, _data, length);
+    ptrdiff_t _length;
+    if (data)
+      _length = cast(ptrdiff_t)data.length;
+
+    auto _data = cast(const(char)*)data.ptr;
+    gtk_css_provider_load_from_data(cast(GtkCssProvider*)this._cPtr, _data, _length);
   }
 
   /**

@@ -762,7 +762,6 @@ class Uri : gobject.boxed.Boxed
       Params:
         params = a `%`-encoded string containing `attribute=value`
             parameters
-        length = the length of params, or `-1` if it is nul-terminated
         separators = the separator byte character set between parameters. (usually
             `&`, but sometimes `;` or both `&;`). Note that this function works on
             bytes not characters, so it can't be used to delimit UTF-8 strings for
@@ -773,13 +772,17 @@ class Uri : gobject.boxed.Boxed
             fully-decoded; or null on error.
       Throws: [UriException]
   */
-  static string[string] parseParams(string params, ptrdiff_t length, string separators, glib.types.UriParamsFlags flags)
+  static string[string] parseParams(string params, string separators, glib.types.UriParamsFlags flags)
   {
     GHashTable* _cretval;
-    const(char)* _params = params.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (params)
+      _length = cast(ptrdiff_t)params.length;
+
+    auto _params = cast(const(char)*)params.ptr;
     const(char)* _separators = separators.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_uri_parse_params(_params, length, _separators, flags, &_err);
+    _cretval = g_uri_parse_params(_params, _length, _separators, flags, &_err);
     if (_err)
       throw new UriException(_err);
     auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
@@ -1043,8 +1046,6 @@ class Uri : gobject.boxed.Boxed
   
       Params:
         escapedString = A URI-escaped string
-        length = the length (in bytes) of escaped_string to escape, or `-1` if it
-            is nul-terminated.
         illegalCharacters = a string of illegal characters
             not to be allowed, or null.
       Returns: an unescaped version of escaped_string
@@ -1052,13 +1053,17 @@ class Uri : gobject.boxed.Boxed
             code). The returned #GBytes should be unreffed when no longer needed.
       Throws: [UriException]
   */
-  static glib.bytes.Bytes unescapeBytes(string escapedString, ptrdiff_t length, string illegalCharacters = null)
+  static glib.bytes.Bytes unescapeBytes(string escapedString, string illegalCharacters = null)
   {
     GBytes* _cretval;
-    const(char)* _escapedString = escapedString.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (escapedString)
+      _length = cast(ptrdiff_t)escapedString.length;
+
+    auto _escapedString = cast(const(char)*)escapedString.ptr;
     const(char)* _illegalCharacters = illegalCharacters.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_uri_unescape_bytes(_escapedString, length, _illegalCharacters, &_err);
+    _cretval = g_uri_unescape_bytes(_escapedString, _length, _illegalCharacters, &_err);
     if (_err)
       throw new UriException(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;

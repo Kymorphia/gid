@@ -166,9 +166,7 @@ class ServerMessage : gobject.object.ObjectWrap
   {
     SoupMessageBody* _cretval;
     _cretval = soup_server_message_get_request_body(cast(SoupServerMessage*)this._cPtr);
-    soup.message_body.MessageBody _retval;
-    if (_cretval)
-      _retval = *cast(soup.message_body.MessageBody*)_cretval;
+    auto _retval = _cretval ? new soup.message_body.MessageBody(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -192,9 +190,7 @@ class ServerMessage : gobject.object.ObjectWrap
   {
     SoupMessageBody* _cretval;
     _cretval = soup_server_message_get_response_body(cast(SoupServerMessage*)this._cPtr);
-    soup.message_body.MessageBody _retval;
-    if (_cretval)
-      _retval = *cast(soup.message_body.MessageBody*)_cretval;
+    auto _retval = _cretval ? new soup.message_body.MessageBody(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

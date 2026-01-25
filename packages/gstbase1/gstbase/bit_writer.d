@@ -1,4 +1,4 @@
-/// Module for [BitWriter] struct
+/// Module for [BitWriter] class
 module gstbase.bit_writer;
 
 import gid.gid;
@@ -12,29 +12,46 @@ import gstbase.types;
     bits into a memory buffer. It provides functions for writing any
     number of bits into 8, 16, 32 and 64 bit variables.
 */
-struct BitWriter
+class BitWriter
 {
+  GstBitWriter _cInstance;
+
+  /** */
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for gstbase.bit_writer.BitWriter");
+
+    _cInstance = *cast(GstBitWriter*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
+
+  /** */
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
+
   /**
-      Allocated @data for bit writer to write
+      Get `bitSize` field.
+      Returns: Size of written @data in bits
   */
-  ubyte* data;
+  @property uint bitSize()
+  {
+    return (cast(GstBitWriter*)this._cPtr).bitSize;
+  }
 
   /**
-      Size of written @data in bits
+      Set `bitSize` field.
+      Params:
+        propval = Size of written @data in bits
   */
-  uint bitSize;
-
-  /** */
-  uint bitCapacity;
-
-  /** */
-  gboolean autoGrow;
-
-  /** */
-  gboolean owned;
-
-  /** */
-  void*[4] GstReserved;
+  @property void bitSize(uint propval)
+  {
+    (cast(GstBitWriter*)this._cPtr).bitSize = propval;
+  }
 
   /**
       Write trailing bit to align last byte of data. trailing_bit can
@@ -47,7 +64,7 @@ struct BitWriter
   bool alignBytes(ubyte trailingBit)
   {
     bool _retval;
-    _retval = cast(bool)gst_bit_writer_align_bytes(cast(GstBitWriter*)&this, trailingBit);
+    _retval = cast(bool)gst_bit_writer_align_bytes(cast(GstBitWriter*)this._cPtr, trailingBit);
     return _retval;
   }
 
@@ -62,7 +79,7 @@ struct BitWriter
   gst.buffer.Buffer freeAndGetBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_bit_writer_free_and_get_buffer(cast(GstBitWriter*)&this);
+    _cretval = gst_bit_writer_free_and_get_buffer(cast(GstBitWriter*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -71,7 +88,7 @@ struct BitWriter
   uint getRemaining()
   {
     uint _retval;
-    _retval = gst_bit_writer_get_remaining(cast(const(GstBitWriter)*)&this);
+    _retval = gst_bit_writer_get_remaining(cast(const(GstBitWriter)*)this._cPtr);
     return _retval;
   }
 
@@ -82,7 +99,7 @@ struct BitWriter
   uint getSize()
   {
     uint _retval;
-    _retval = gst_bit_writer_get_size(cast(const(GstBitWriter)*)&this);
+    _retval = gst_bit_writer_get_size(cast(const(GstBitWriter)*)this._cPtr);
     return _retval;
   }
 
@@ -97,7 +114,7 @@ struct BitWriter
   bool putBitsUint16(ushort value, uint nbits)
   {
     bool _retval;
-    _retval = cast(bool)gst_bit_writer_put_bits_uint16(cast(GstBitWriter*)&this, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint16(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -112,7 +129,7 @@ struct BitWriter
   bool putBitsUint32(uint value, uint nbits)
   {
     bool _retval;
-    _retval = cast(bool)gst_bit_writer_put_bits_uint32(cast(GstBitWriter*)&this, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint32(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -127,7 +144,7 @@ struct BitWriter
   bool putBitsUint64(ulong value, uint nbits)
   {
     bool _retval;
-    _retval = cast(bool)gst_bit_writer_put_bits_uint64(cast(GstBitWriter*)&this, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint64(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -142,7 +159,7 @@ struct BitWriter
   bool putBitsUint8(ubyte value, uint nbits)
   {
     bool _retval;
-    _retval = cast(bool)gst_bit_writer_put_bits_uint8(cast(GstBitWriter*)&this, value, nbits);
+    _retval = cast(bool)gst_bit_writer_put_bits_uint8(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -161,7 +178,7 @@ struct BitWriter
       _nbytes = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = cast(bool)gst_bit_writer_put_bytes(cast(GstBitWriter*)&this, _data, _nbytes);
+    _retval = cast(bool)gst_bit_writer_put_bytes(cast(GstBitWriter*)this._cPtr, _data, _nbytes);
     return _retval;
   }
 
@@ -170,7 +187,7 @@ struct BitWriter
   */
   void reset()
   {
-    gst_bit_writer_reset(cast(GstBitWriter*)&this);
+    gst_bit_writer_reset(cast(GstBitWriter*)this._cPtr);
   }
 
   /**
@@ -183,7 +200,7 @@ struct BitWriter
   gst.buffer.Buffer resetAndGetBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_bit_writer_reset_and_get_buffer(cast(GstBitWriter*)&this);
+    _cretval = gst_bit_writer_reset_and_get_buffer(cast(GstBitWriter*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -192,7 +209,7 @@ struct BitWriter
   bool setPos(uint pos)
   {
     bool _retval;
-    _retval = cast(bool)gst_bit_writer_set_pos(cast(GstBitWriter*)&this, pos);
+    _retval = cast(bool)gst_bit_writer_set_pos(cast(GstBitWriter*)this._cPtr, pos);
     return _retval;
   }
 }

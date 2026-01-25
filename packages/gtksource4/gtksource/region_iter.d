@@ -1,4 +1,4 @@
-/// Module for [RegionIter] struct
+/// Module for [RegionIter] class
 module gtksource.region_iter;
 
 import gid.gid;
@@ -11,16 +11,27 @@ import gtksource.types;
     #GtkSourceRegionIter is an opaque datatype; ignore all its fields.
     Initialize the iter with [gtksource.region.Region.getStartRegionIter].
 */
-struct RegionIter
+class RegionIter
 {
-  /** */
-  void* dummy1;
+  GtkSourceRegionIter _cInstance;
 
   /** */
-  uint dummy2;
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for gtksource.region_iter.RegionIter");
+
+    _cInstance = *cast(GtkSourceRegionIter*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
 
   /** */
-  void* dummy3;
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
 
   /**
       Gets the subregion at this iterator.
@@ -34,7 +45,11 @@ struct RegionIter
   bool getSubregion(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)&this, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
+    GtkTextIter _start;
+    GtkTextIter _end;
+    _retval = cast(bool)gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)this._cPtr, &_start, &_end);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
@@ -42,7 +57,7 @@ struct RegionIter
   bool isEnd()
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_region_iter_is_end(cast(GtkSourceRegionIter*)&this);
+    _retval = cast(bool)gtk_source_region_iter_is_end(cast(GtkSourceRegionIter*)this._cPtr);
     return _retval;
   }
 
@@ -54,7 +69,7 @@ struct RegionIter
   bool next()
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_region_iter_next(cast(GtkSourceRegionIter*)&this);
+    _retval = cast(bool)gtk_source_region_iter_next(cast(GtkSourceRegionIter*)this._cPtr);
     return _retval;
   }
 }

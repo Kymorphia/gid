@@ -1211,9 +1211,11 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     bool _retval;
     GtkTreeModel* _model;
     GtkTreePath* _path;
-    _retval = cast(bool)gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)this._cPtr, x, y, keyboardTip, &_model, &_path, cast(GtkTreeIter*)&iter);
+    GtkTreeIter _iter;
+    _retval = cast(bool)gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)this._cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -1301,7 +1303,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       auto _dlg = cast(gtk.types.TreeCellDataFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
     int _retval;
@@ -1838,7 +1840,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1920,7 +1922,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dlg = cast(gtk.types.TreeViewSearchEqualFunc*)searchData;
       string _key = key.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, *cast(gtk.tree_iter.TreeIter*)iter);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;

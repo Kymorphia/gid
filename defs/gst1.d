@@ -6,6 +6,8 @@
 
 //!subdtype Object ObjectWrap
 
+//!kind Structure Boxed
+
 //# These are all fundamental types with no obvious way to wrap them and minimal usage, ignore them
 //!set class[Bitmask][ignore] 1
 //!set class[DoubleRange][ignore] 1

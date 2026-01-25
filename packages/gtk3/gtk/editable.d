@@ -143,10 +143,9 @@ interface Editable
   
       Params:
         newText = the text to append
-        newTextLength = the length of the text in bytes, or -1
         position = location of the position text will be inserted at
   */
-  void insertText(string newText, int newTextLength, ref int position);
+  void insertText(string newText, ref int position);
 
   /**
       Pastes the content of the clipboard to the current position of the

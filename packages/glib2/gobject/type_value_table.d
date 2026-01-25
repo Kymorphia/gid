@@ -161,28 +161,6 @@ class TypeValueTable
   }
 
   /**
-      Get `collectValue` field.
-      Returns: Function to initialize a GValue from the values
-          collected from variadic arguments
-  */
-  @property GTypeValueCollectFunc collectValue()
-  {
-    return (cast(GTypeValueTable*)this._cPtr).collectValue;
-  }
-
-  /**
-      Set `collectValue` field.
-      Params:
-        propval = Function to initialize a GValue from the values
-            collected from variadic arguments
-  */
-
-  @property void collectValue(GTypeValueCollectFunc propval)
-  {
-    (cast(GTypeValueTable*)this._cPtr).collectValue = propval;
-  }
-
-  /**
       Get `lcopyFormat` field.
       Returns: Format description of the arguments to collect for @lcopy_value,
           analogous to @collect_format. Usually, @lcopy_format string consists
@@ -204,27 +182,5 @@ class TypeValueTable
   {
     cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
     dToC(propval, cast(void*)&(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
-  }
-
-  /**
-      Get `lcopyValue` field.
-      Returns: Function to store the contents of a value into the
-          locations collected from variadic arguments
-  */
-  @property GTypeValueLCopyFunc lcopyValue()
-  {
-    return (cast(GTypeValueTable*)this._cPtr).lcopyValue;
-  }
-
-  /**
-      Set `lcopyValue` field.
-      Params:
-        propval = Function to store the contents of a value into the
-            locations collected from variadic arguments
-  */
-
-  @property void lcopyValue(GTypeValueLCopyFunc propval)
-  {
-    (cast(GTypeValueTable*)this._cPtr).lcopyValue = propval;
   }
 }

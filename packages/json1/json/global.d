@@ -104,12 +104,12 @@ json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed
 
     Deprecated: Use `funcJson.gobject_from_data` instead
 */
-gobject.object.ObjectWrap constructGobject(gobject.types.GType gtype, string data, size_t length)
+gobject.object.ObjectWrap constructGobject(gobject.types.GType gtype, string data)
 {
   GObject* _cretval;
   const(char)* _data = data.toCString(No.Alloc);
   GError *_err;
-  _cretval = json_construct_gobject(gtype, _data, length, &_err);
+  _cretval = json_construct_gobject(gtype, _data, size_t.init, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
@@ -173,16 +173,19 @@ gobject.object.ObjectWrap gobjectDeserialize(gobject.types.GType gtype, json.nod
     Params:
       gtype = the type of the object to construct
       data = a JSON data stream
-      length = length of the data stream, or -1 if it is `NUL`-terminated
     Returns: a new object instance of the given type
     Throws: [ErrorWrap]
 */
-gobject.object.ObjectWrap gobjectFromData(gobject.types.GType gtype, string data, ptrdiff_t length)
+gobject.object.ObjectWrap gobjectFromData(gobject.types.GType gtype, string data)
 {
   GObject* _cretval;
-  const(char)* _data = data.toCString(No.Alloc);
+  ptrdiff_t _length;
+  if (data)
+    _length = cast(ptrdiff_t)data.length;
+
+  auto _data = cast(const(char)*)data.ptr;
   GError *_err;
-  _cretval = json_gobject_from_data(gtype, _data, length, &_err);
+  _cretval = json_gobject_from_data(gtype, _data, _length, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
@@ -287,18 +290,21 @@ glib.variant.Variant gvariantDeserialize(json.node.Node jsonNode, string signatu
 
     Params:
       json = A JSON data string
-      length = The length of json, or -1 if `NUL`-terminated
       signature = A valid [glib.variant.Variant] type string
     Returns: A newly created [glib.variant.Variant]D compliant
     Throws: [ErrorWrap]
 */
-glib.variant.Variant gvariantDeserializeData(string json, ptrdiff_t length, string signature = null)
+glib.variant.Variant gvariantDeserializeData(string json, string signature = null)
 {
   GVariant* _cretval;
-  const(char)* _json = json.toCString(No.Alloc);
+  ptrdiff_t _length;
+  if (json)
+    _length = cast(ptrdiff_t)json.length;
+
+  auto _json = cast(const(char)*)json.ptr;
   const(char)* _signature = signature.toCString(No.Alloc);
   GError *_err;
-  _cretval = json_gvariant_deserialize_data(_json, length, _signature, &_err);
+  _cretval = json_gvariant_deserialize_data(_json, _length, _signature, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;

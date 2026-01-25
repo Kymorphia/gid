@@ -4,6 +4,8 @@
 //!info docs https://www.kymorphia.com/gid-old/gtk.html
 //!info capi https://docs.gtk.org/gtk3/
 
+//!kind RequestedSize StructAlias
+
 //# Rename ToolShell.getOrientation since it conflicts with Orientable.getOrientation in ToolBar
 //!set interface[ToolShell].method[get_orientation][name] tool_shell_get_orientation
 
@@ -36,3 +38,27 @@
 
 //# Return callback array should be transfer-ownership full
 //!set callback[TextBufferSerializeFunc].return-value[][transfer-ownership] full
+
+//# string-length-param (Strings with array length parameters)
+//!set class[Builder].constructor[new_from_string].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[Builder].method[add_from_string].parameters.parameter[buffer].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[Builder].method[add_objects_from_string].parameters.parameter[buffer].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[Builder].method[extend_with_template].parameters.parameter[buffer].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[Clipboard].method[set_text].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set interface[Editable].method[insert_text].parameters.parameter[new_text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].constructor[new].parameters.parameter[initial_chars].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].method[emit_inserted_text].parameters.parameter[chars].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].method[insert_text].parameters.parameter[chars].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].method[set_text].parameters.parameter[chars].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].glib:signal[inserted-text].parameters.parameter[chars].type '<array length="2" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IMContext].method[set_surrounding].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[SelectionData].method[set_text].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_at_cursor].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_interactive].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_interactive_at_cursor].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_markup].parameters.parameter[markup].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[set_text].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].glib:signal[insert-text].parameters.parameter[text].type '<array length="2" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set class[UIManager].method[add_ui_from_string].parameters.parameter[buffer].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set interface[Editable].glib:signal[insert-text].parameters.parameter[new_text].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'

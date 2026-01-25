@@ -186,14 +186,17 @@ class InputMethodContext : gobject.object.ObjectWrap
   
       Params:
         text = text surrounding the insertion point
-        length = the length of text, or -1 if text is nul-terminated
         cursorIndex = the byte index of the insertion cursor within text.
         selectionIndex = the byte index of the selection cursor within text.
   */
-  void notifySurrounding(string text, int length, uint cursorIndex, uint selectionIndex)
+  void notifySurrounding(string text, uint cursorIndex, uint selectionIndex)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    webkit_input_method_context_notify_surrounding(cast(WebKitInputMethodContext*)this._cPtr, _text, length, cursorIndex, selectionIndex);
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    webkit_input_method_context_notify_surrounding(cast(WebKitInputMethodContext*)this._cPtr, _text, _length, cursorIndex, selectionIndex);
   }
 
   /**

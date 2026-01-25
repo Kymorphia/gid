@@ -560,15 +560,18 @@ string[string] headerParseSemiParamListStrict(string header)
     Params:
       str = the header string (including the Request-Line or Status-Line,
           but not the trailing blank line)
-      len = length of str
       dest = #SoupMessageHeaders to store the header values in
     Returns: success or failure
 */
-bool headersParse(string str, int len, soup.message_headers.MessageHeaders dest)
+bool headersParse(string str, soup.message_headers.MessageHeaders dest)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _retval = cast(bool)soup_headers_parse(_str, len, dest ? cast(SoupMessageHeaders*)dest._cPtr(No.Dup) : null);
+  int _len;
+  if (str)
+    _len = cast(int)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _retval = cast(bool)soup_headers_parse(_str, _len, dest ? cast(SoupMessageHeaders*)dest._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -580,7 +583,6 @@ bool headersParse(string str, int len, soup.message_headers.MessageHeaders dest)
 
     Params:
       str = the headers (up to, but not including, the trailing blank line)
-      len = length of str
       reqHeaders = #SoupMessageHeaders to store the header values in
       reqMethod = if non-null, will be filled in with the
           request method
@@ -591,13 +593,17 @@ bool headersParse(string str, int len, soup.message_headers.MessageHeaders dest)
     Returns: [soup.types.Status.Ok] if the headers could be parsed, or an
         HTTP error to be returned to the client if they could not be.
 */
-uint headersParseRequest(string str, int len, soup.message_headers.MessageHeaders reqHeaders, out string reqMethod, out string reqPath, out soup.types.HTTPVersion ver)
+uint headersParseRequest(string str, soup.message_headers.MessageHeaders reqHeaders, out string reqMethod, out string reqPath, out soup.types.HTTPVersion ver)
 {
   uint _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  int _len;
+  if (str)
+    _len = cast(int)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
   char* _reqMethod;
   char* _reqPath;
-  _retval = soup_headers_parse_request(_str, len, reqHeaders ? cast(SoupMessageHeaders*)reqHeaders._cPtr(No.Dup) : null, &_reqMethod, &_reqPath, &ver);
+  _retval = soup_headers_parse_request(_str, _len, reqHeaders ? cast(SoupMessageHeaders*)reqHeaders._cPtr(No.Dup) : null, &_reqMethod, &_reqPath, &ver);
   reqMethod = _reqMethod.fromCString(Yes.Free);
   reqPath = _reqPath.fromCString(Yes.Free);
   return _retval;
@@ -611,7 +617,6 @@ uint headersParseRequest(string str, int len, soup.message_headers.MessageHeader
 
     Params:
       str = the headers (up to, but not including, the trailing blank line)
-      len = length of str
       headers = #SoupMessageHeaders to store the header values in
       ver = if non-null, will be filled in with the HTTP
           version
@@ -621,12 +626,16 @@ uint headersParseRequest(string str, int len, soup.message_headers.MessageHeader
           the reason phrase
     Returns: success or failure.
 */
-bool headersParseResponse(string str, int len, soup.message_headers.MessageHeaders headers, out soup.types.HTTPVersion ver, out uint statusCode, out string reasonPhrase)
+bool headersParseResponse(string str, soup.message_headers.MessageHeaders headers, out soup.types.HTTPVersion ver, out uint statusCode, out string reasonPhrase)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  int _len;
+  if (str)
+    _len = cast(int)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
   char* _reasonPhrase;
-  _retval = cast(bool)soup_headers_parse_response(_str, len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
+  _retval = cast(bool)soup_headers_parse_response(_str, _len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
   reasonPhrase = _reasonPhrase.fromCString(Yes.Free);
   return _retval;
 }

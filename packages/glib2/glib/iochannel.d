@@ -671,17 +671,20 @@ class IOChannel : gobject.boxed.Boxed
   
       Params:
         buf = the buffer containing the data to write
-        count = the number of bytes to write
         bytesWritten = the number of bytes actually written
       Returns: `G_IO_ERROR_NONE` if the operation was successful.
   
       Deprecated: Use [glib.iochannel.IOChannel.writeChars] instead.
   */
-  glib.types.IOError write(string buf, size_t count, out size_t bytesWritten)
+  glib.types.IOError write(string buf, out size_t bytesWritten)
   {
     GIOError _cretval;
-    const(char)* _buf = buf.toCString(No.Alloc);
-    _cretval = g_io_channel_write(cast(GIOChannel*)this._cPtr, _buf, count, cast(size_t*)&bytesWritten);
+    size_t _count;
+    if (buf)
+      _count = cast(size_t)buf.length;
+
+    auto _buf = cast(const(char)*)buf.ptr;
+    _cretval = g_io_channel_write(cast(GIOChannel*)this._cPtr, _buf, _count, cast(size_t*)&bytesWritten);
     glib.types.IOError _retval = cast(glib.types.IOError)_cretval;
     return _retval;
   }

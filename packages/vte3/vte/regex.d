@@ -57,18 +57,20 @@ class Regex : gobject.boxed.Boxed
   
       Params:
         pattern = a regex pattern string
-        patternLength = the length of pattern in bytes, or -1 if the
-           string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
       Returns: a newly created #VteRegex, or null with error filled in
       Throws: [ErrorWrap]
   */
-  static vte.regex.Regex newForMatch(string pattern, ptrdiff_t patternLength, uint flags)
+  static vte.regex.Regex newForMatch(string pattern, uint flags)
   {
     VteRegex* _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    ptrdiff_t _patternLength;
+    if (pattern)
+      _patternLength = cast(ptrdiff_t)pattern.length;
+
+    auto _pattern = cast(const(char)*)pattern.ptr;
     GError *_err;
-    _cretval = vte_regex_new_for_match(_pattern, patternLength, flags, &_err);
+    _cretval = vte_regex_new_for_match(_pattern, _patternLength, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
@@ -92,20 +94,22 @@ class Regex : gobject.boxed.Boxed
   
       Params:
         pattern = a regex pattern string
-        patternLength = the length of pattern in bytes, or -1 if the
-           string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
         extraFlags = PCRE2 extra compile flags
         errorOffset = return location to store the error offset
       Returns: a newly created #VteRegex, or null
       Throws: [ErrorWrap]
   */
-  static vte.regex.Regex newForMatchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
+  static vte.regex.Regex newForMatchFull(string pattern, uint flags, uint extraFlags, out size_t errorOffset)
   {
     VteRegex* _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    ptrdiff_t _patternLength;
+    if (pattern)
+      _patternLength = cast(ptrdiff_t)pattern.length;
+
+    auto _pattern = cast(const(char)*)pattern.ptr;
     GError *_err;
-    _cretval = vte_regex_new_for_match_full(_pattern, patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
+    _cretval = vte_regex_new_for_match_full(_pattern, _patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
@@ -125,18 +129,20 @@ class Regex : gobject.boxed.Boxed
   
       Params:
         pattern = a regex pattern string
-        patternLength = the length of pattern in bytes, or -1 if the
-           string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
       Returns: a newly created #VteRegex, or null with error filled in
       Throws: [ErrorWrap]
   */
-  static vte.regex.Regex newForSearch(string pattern, ptrdiff_t patternLength, uint flags)
+  static vte.regex.Regex newForSearch(string pattern, uint flags)
   {
     VteRegex* _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    ptrdiff_t _patternLength;
+    if (pattern)
+      _patternLength = cast(ptrdiff_t)pattern.length;
+
+    auto _pattern = cast(const(char)*)pattern.ptr;
     GError *_err;
-    _cretval = vte_regex_new_for_search(_pattern, patternLength, flags, &_err);
+    _cretval = vte_regex_new_for_search(_pattern, _patternLength, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
@@ -159,20 +165,22 @@ class Regex : gobject.boxed.Boxed
   
       Params:
         pattern = a regex pattern string
-        patternLength = the length of pattern in bytes, or -1 if the
-           string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
         extraFlags = 
         errorOffset = return location to store the error offset
       Returns: a newly created #VteRegex, or null
       Throws: [ErrorWrap]
   */
-  static vte.regex.Regex newForSearchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
+  static vte.regex.Regex newForSearchFull(string pattern, uint flags, uint extraFlags, out size_t errorOffset)
   {
     VteRegex* _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    ptrdiff_t _patternLength;
+    if (pattern)
+      _patternLength = cast(ptrdiff_t)pattern.length;
+
+    auto _pattern = cast(const(char)*)pattern.ptr;
     GError *_err;
-    _cretval = vte_regex_new_for_search_full(_pattern, patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
+    _cretval = vte_regex_new_for_search_full(_pattern, _patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;

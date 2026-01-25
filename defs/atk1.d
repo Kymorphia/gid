@@ -34,3 +34,7 @@
 //!set record[TableIface].field[get_selected_rows].callback[get_selected_rows].parameters.parameter[selected][direction] out
 //!set record[TableIface].field[get_selected_rows].callback[get_selected_rows].parameters.parameter[selected][transfer-ownership] full
 //!set record[TableIface].field[get_selected_rows].callback[get_selected_rows].parameters.parameter[selected].type '<array length="-1" zero-terminated="0" c:type="int **"><type name="int" c:type="int"/></array>'
+
+//# string-length-param (Strings with array length parameters)
+//!set interface[EditableText].method[insert_text].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[EditableTextIface].field[insert_text].callback[insert_text].parameters.parameter[string].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'

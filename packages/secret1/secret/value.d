@@ -67,16 +67,19 @@ class Value : gobject.boxed.Boxed
   
       Params:
         secret = the secret data
-        length = the length of the data
         contentType = the content type of the data
       Returns: the new #SecretValue
   */
-  this(string secret, ptrdiff_t length, string contentType)
+  this(string secret, string contentType)
   {
     SecretValue* _cretval;
-    const(char)* _secret = secret.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (secret)
+      _length = cast(ptrdiff_t)secret.length;
+
+    auto _secret = cast(const(char)*)secret.ptr;
     const(char)* _contentType = contentType.toCString(No.Alloc);
-    _cretval = secret_value_new(_secret, length, _contentType);
+    _cretval = secret_value_new(_secret, _length, _contentType);
     this(_cretval, Yes.Take);
   }
 
@@ -91,12 +94,11 @@ class Value : gobject.boxed.Boxed
   
       Params:
         secretData = the secret data
-        length = the length of the data
         contentType = the content type of the data
         destroy = function to call to free the secret data
       Returns: the new #SecretValue
   */
-  static secret.value.Value newFull(string secretData, ptrdiff_t length, string contentType, glib.types.DestroyNotify destroy)
+  static secret.value.Value newFull(string secretData, string contentType, glib.types.DestroyNotify destroy)
   {
     extern(C) void _destroyCallback(void* data)
     {
@@ -107,9 +109,13 @@ class Value : gobject.boxed.Boxed
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     SecretValue* _cretval;
-    char* _secretData = secretData.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (secretData)
+      _length = cast(ptrdiff_t)secretData.length;
+
+    auto _secretData = cast(char*)secretData.ptr;
     const(char)* _contentType = contentType.toCString(No.Alloc);
-    _cretval = secret_value_new_full(_secretData, length, _contentType, _destroyCB);
+    _cretval = secret_value_new_full(_secretData, _length, _contentType, _destroyCB);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

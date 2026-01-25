@@ -74,3 +74,12 @@
 //!set function[ot_var_normalize_coords].parameters.parameter[design_coords].type '<array length="1" zero-terminated="0" c:type="const float *"><type name="float" c:type="float"/></array>'
 //!set function[font_get_var_coords_design].return-value.type '<array length="1" zero-terminated="0" c:type="const float *"><type name="float" c:type="float"/></array>'
 //!set function[font_get_var_coords_normalized].return-value.type '<array length="1" zero-terminated="0" c:type="const int *"><type name="int" c:type="int"/></array>'
+
+//# caller-allocated-out-array (Caller allocated output array)
+//!set function[buffer_serialize].parameters.parameter[buf][caller-allocates] 1
+//!set function[buffer_serialize_glyphs].parameters.parameter[buf][caller-allocates] 1
+//!set function[buffer_serialize_unicode].parameters.parameter[buf][caller-allocates] 1
+//!set function[feature_to_string].parameters.parameter[buf][caller-allocates] 1
+//!set function[font_get_glyph_name].parameters.parameter[name][caller-allocates] 1
+//!set function[font_glyph_to_string].parameters.parameter[s][caller-allocates] 1
+//!set function[ot_var_normalize_variations].parameters.parameter[coords][caller-allocates] 1

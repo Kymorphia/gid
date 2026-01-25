@@ -415,7 +415,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
 bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
   bool _retval;
-  _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(cast(GstStructure*)&config, cast(GstVideoAlignment*)&align_);
+  _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, cast(GstVideoAlignment*)&align_);
   return _retval;
 }
 
@@ -429,7 +429,7 @@ bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.
 */
 void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
-  gst_buffer_pool_config_set_video_alignment(cast(GstStructure*)&config, cast(const(GstVideoAlignment)*)&align_);
+  gst_buffer_pool_config_set_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&align_);
 }
 
 /**

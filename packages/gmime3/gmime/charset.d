@@ -40,16 +40,19 @@ struct Charset
       Params:
         charset = a charset
         text = utf-8 text to check
-        len = length of text
       Returns: true if it is safe to encode text into charset or false
         otherwise.
   */
-  bool canEncode(string charset, string text, size_t len)
+  bool canEncode(string charset, string text)
   {
     bool _retval;
     const(char)* _charset = charset.toCString(No.Alloc);
-    const(char)* _text = text.toCString(No.Alloc);
-    _retval = cast(bool)g_mime_charset_can_encode(cast(GMimeCharset*)&this, _charset, _text, len);
+    size_t _len;
+    if (text)
+      _len = cast(size_t)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    _retval = cast(bool)g_mime_charset_can_encode(cast(GMimeCharset*)&this, _charset, _text, _len);
     return _retval;
   }
 
@@ -69,12 +72,15 @@ struct Charset
   
       Params:
         inbuf = input text buffer (must be in UTF-8)
-        inlen = input buffer length
   */
-  void step(string inbuf, size_t inlen)
+  void step(string inbuf)
   {
-    const(char)* _inbuf = inbuf.toCString(No.Alloc);
-    g_mime_charset_step(cast(GMimeCharset*)&this, _inbuf, inlen);
+    size_t _inlen;
+    if (inbuf)
+      _inlen = cast(size_t)inbuf.length;
+
+    auto _inbuf = cast(const(char)*)inbuf.ptr;
+    g_mime_charset_step(cast(GMimeCharset*)&this, _inbuf, _inlen);
   }
 
   /**
@@ -82,15 +88,18 @@ struct Charset
   
       Params:
         inbuf = a UTF-8 text buffer
-        inlen = input buffer length
       Returns: the charset name best suited for the input text
         or null if it is ascii-safe.
   */
-  static string best(string inbuf, size_t inlen)
+  static string best(string inbuf)
   {
     const(char)* _cretval;
-    const(char)* _inbuf = inbuf.toCString(No.Alloc);
-    _cretval = g_mime_charset_best(_inbuf, inlen);
+    size_t _inlen;
+    if (inbuf)
+      _inlen = cast(size_t)inbuf.length;
+
+    auto _inbuf = cast(const(char)*)inbuf.ptr;
+    _cretval = g_mime_charset_best(_inbuf, _inlen);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

@@ -136,8 +136,10 @@ class TreeSelection : gobject.object.ObjectWrap
   {
     bool _retval;
     GtkTreeModel* _model;
-    _retval = cast(bool)gtk_tree_selection_get_selected(cast(GtkTreeSelection*)this._cPtr, &_model, cast(GtkTreeIter*)&iter);
+    GtkTreeIter _iter;
+    _retval = cast(bool)gtk_tree_selection_get_selected(cast(GtkTreeSelection*)this._cPtr, &_model, &_iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -194,7 +196,7 @@ class TreeSelection : gobject.object.ObjectWrap
   bool iterIsSelected(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)this._cPtr, cast(GtkTreeIter*)&iter);
+    _retval = cast(bool)gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -236,7 +238,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void selectIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)this._cPtr, cast(GtkTreeIter*)&iter);
+    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -283,7 +285,7 @@ class TreeSelection : gobject.object.ObjectWrap
     {
       auto _dlg = cast(gtk.types.TreeSelectionForeachFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, *cast(gtk.tree_iter.TreeIter*)iter);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -356,7 +358,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void unselectIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)this._cPtr, cast(GtkTreeIter*)&iter);
+    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
 
   /**

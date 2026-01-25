@@ -1,4 +1,4 @@
-/// Module for [MessageHeadersIter] struct
+/// Module for [MessageHeadersIter] class
 module soup.message_headers_iter;
 
 import gid.gid;
@@ -16,10 +16,27 @@ import soup.types;
     
     You may not modify the headers while iterating over them.
 */
-struct MessageHeadersIter
+class MessageHeadersIter
 {
+  SoupMessageHeadersIter _cInstance;
+
   /** */
-  void*[3] dummy;
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for soup.message_headers_iter.MessageHeadersIter");
+
+    _cInstance = *cast(SoupMessageHeadersIter*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
+
+  /** */
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
 
   /**
       Yields the next name/value pair in the `structMessageHeaders` being
@@ -42,7 +59,7 @@ struct MessageHeadersIter
     bool _retval;
     char* _name;
     char* _value;
-    _retval = cast(bool)soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)&this, &_name, &_value);
+    _retval = cast(bool)soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)this._cPtr, &_name, &_value);
     name = _name.fromCString(No.Free);
     value = _value.fromCString(No.Free);
     return _retval;
@@ -58,6 +75,8 @@ struct MessageHeadersIter
   */
   static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs)
   {
-    soup_message_headers_iter_init(cast(SoupMessageHeadersIter*)&iter, hdrs ? cast(SoupMessageHeaders*)hdrs._cPtr(No.Dup) : null);
+    SoupMessageHeadersIter _iter;
+    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs._cPtr(No.Dup) : null);
+    iter = new soup.message_headers_iter.MessageHeadersIter(cast(void*)&_iter, No.Take);
   }
 }

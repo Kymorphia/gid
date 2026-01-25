@@ -17,6 +17,7 @@ import gstgl.glcontext;
 import gstgl.gldisplay;
 import gstgl.glsync_meta;
 import gstgl.types;
+import gstvideo.types;
 import gstvideo.video_affine_transformation_meta;
 import gstvideo.video_alignment;
 import gstvideo.video_info;
@@ -44,7 +45,7 @@ gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMetaFull(gstgl.glcontext.GLContext c
 gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationParams(gst.structure.Structure config)
 {
   GstGLAllocationParams* _cretval;
-  _cretval = gst_buffer_pool_config_get_gl_allocation_params(cast(GstStructure*)&config);
+  _cretval = gst_buffer_pool_config_get_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -59,7 +60,7 @@ gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationPara
 uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
 {
   uint _retval;
-  _retval = gst_buffer_pool_config_get_gl_min_free_queue_size(cast(GstStructure*)&config);
+  _retval = gst_buffer_pool_config_get_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -72,7 +73,7 @@ uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
 */
 void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl.glallocation_params.GLAllocationParams params = null)
 {
-  gst_buffer_pool_config_set_gl_allocation_params(cast(GstStructure*)&config, params ? cast(const(GstGLAllocationParams)*)params._cPtr(No.Dup) : null);
+  gst_buffer_pool_config_set_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, params ? cast(const(GstGLAllocationParams)*)params._cPtr(No.Dup) : null);
 }
 
 /**
@@ -94,7 +95,7 @@ void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl
 */
 void bufferPoolConfigSetGlMinFreeQueueSize(gst.structure.Structure config, uint queueSize)
 {
-  gst_buffer_pool_config_set_gl_min_free_queue_size(cast(GstStructure*)&config, queueSize);
+  gst_buffer_pool_config_set_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, queueSize);
 }
 
 /** */
@@ -292,6 +293,26 @@ gobject.types.GType glStereoDownmixModeGetType()
   return _retval;
 }
 
+/**
+    Given swizzle, produce inversion such that:
+    
+    swizzle[inversion[i]] == identity[i] where:
+    $(LIST
+      * identity = {0, 1, 2,...}
+      * unset fields are marked by -1
+    )
+
+    Params:
+      swizzle = input swizzle
+      inversion = resulting inversion
+*/
+void glSwizzleInvert(int[] swizzle, ref int[] inversion)
+{
+  assert(!swizzle || swizzle.length == 4);
+  auto _swizzle = cast(int*)swizzle.ptr;
+  gst_gl_swizzle_invert(_swizzle, inversion.ptr);
+}
+
 /** */
 gobject.types.GType glSyncMetaApiGetType()
 {
@@ -346,6 +367,30 @@ gstgl.types.GLSLVersion glVersionToGlslVersion(gstgl.types.GLAPI glApi, int maj,
   GstGLSLVersion _cretval;
   _cretval = gst_gl_version_to_glsl_version(glApi, maj, min);
   gstgl.types.GLSLVersion _retval = cast(gstgl.types.GLSLVersion)_cretval;
+  return _retval;
+}
+
+/**
+    Calculates the swizzle indices for video_format and gl_format in order to
+    access a texture such that accessing a texel from a texture through the swizzle
+    index produces values in the order (R, G, B, A) or (Y, U, V, A).
+    
+    For multi-planer formats, the swizzle index uses the same component order (RGBA/YUVA)
+    and should be applied after combining multiple planes into a single rgba/yuva value.
+    e.g. sampling from a NV12 format would have Y from one texture and UV from
+    another texture into a (Y, U, V) value.  Add an Aplha component and then
+    perform swizzling.  Sampling from NV21 would produce (Y, V, U) which is then
+    swizzled to (Y, U, V).
+
+    Params:
+      videoFormat = the #GstVideoFormat in use
+      swizzle = the returned swizzle indices
+    Returns: whether valid swizzle indices could be found
+*/
+bool glVideoFormatSwizzle(gstvideo.types.VideoFormat videoFormat, ref int[] swizzle)
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_video_format_swizzle(videoFormat, swizzle.ptr);
   return _retval;
 }
 

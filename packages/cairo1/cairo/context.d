@@ -1886,17 +1886,20 @@ class Context : gobject.boxed.Boxed
   
       Params:
         utf8 = a string of text encoded in UTF-8
-        utf8Len = length of utf8 in bytes, or -1 if it is NUL-terminated
         glyphs = array of glyphs to show
         numGlyphs = number of glyphs to show
         clusters = array of cluster mapping information
         numClusters = number of clusters in the mapping
         clusterFlags = cluster mapping flags
   */
-  void showTextGlyphs(string utf8, int utf8Len, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags)
+  void showTextGlyphs(string utf8, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags)
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, utf8Len, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(const(cairo_text_cluster_t)*)&clusters, numClusters, clusterFlags);
+    int _utf8Len;
+    if (utf8)
+      _utf8Len = cast(int)utf8.length;
+
+    auto _utf8 = cast(const(char)*)utf8.ptr;
+    cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, _utf8Len, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(const(cairo_text_cluster_t)*)&clusters, numClusters, clusterFlags);
   }
 
   /**

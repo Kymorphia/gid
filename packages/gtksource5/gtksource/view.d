@@ -715,7 +715,7 @@ class View : gtk.text_view.TextView
   uint getVisualColumn(gtk.text_iter.TextIter iter)
   {
     uint _retval;
-    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, cast(const(GtkTextIter)*)&iter);
+    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -729,7 +729,7 @@ class View : gtk.text_view.TextView
   */
   void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
+    gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -743,9 +743,9 @@ class View : gtk.text_view.TextView
         snippet = a #GtkSourceSnippet
         location = a #GtkTextIter or null for the cursor position
   */
-  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location)
+  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location = null)
   {
-    gtk_source_view_push_snippet(cast(GtkSourceView*)this._cPtr, snippet ? cast(GtkSourceSnippet*)snippet._cPtr(No.Dup) : null, cast(GtkTextIter*)&location);
+    gtk_source_view_push_snippet(cast(GtkSourceView*)this._cPtr, snippet ? cast(GtkSourceSnippet*)snippet._cPtr(No.Dup) : null, location ? cast(GtkTextIter*)location._cPtr(No.Dup) : null);
   }
 
   /**
@@ -986,7 +986,7 @@ class View : gtk.text_view.TextView
   */
   void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, cast(GtkTextIter*)&start, cast(GtkTextIter*)&end);
+    gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**

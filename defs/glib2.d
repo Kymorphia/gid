@@ -5,6 +5,7 @@
 //!info capi https://docs.gtk.org/glib/
 
 //!kind OptionEntry StructAlias
+//!kind VariantIter Wrap
 
 //# Disable binding of container types
 //!set record[Array][ignore] 1
@@ -26,7 +27,6 @@
 //!set function[base64_encode_close][introspectable] 0
 //!set function[base64_encode_step][introspectable] 0
 //!set function[prefix_error_literal][introspectable] 0
-//!set function[strfreev][introspectable] 0
 //!set function[test_add_data_func_full][introspectable] 0
 //!set function[unichar_to_utf8][introspectable] 0
 //!set record[Variant].constructor[new_from_data][introspectable] 0
@@ -51,7 +51,7 @@
 //!set record[Dir][free-function] g_dir_close
 //!set record[Dir].method[close][ignore] 1
 
-//# Disable binding of unuseful API
+//# Disable binding of useless/problematic API
 //!set record[Completion][ignore] 1
 //!set union[Mutex][ignore] 1
 //!set record[RecMutex][ignore] 1
@@ -67,6 +67,11 @@
 //!set function[log_writer_journald][ignore] 1
 //!set function[log_writer_standard_streams][ignore] 1
 //!set function[log_writer_syslog][ignore] 1
+//!set function[strfreev][ignore] 0
+//!set function[strlcat][ignore] 1
+//!set function[strlcpy][ignore] 1
+//!set function[strrstr_len][ignore] 1
+//!set function[strstr_len][ignore] 1
 
 //# Disable Queue fields
 //!set record[Queue].field[head][ignore] 1
@@ -224,6 +229,44 @@
 //!set function[filename_to_utf8].parameters.parameter[opsysstring].type '<array length="1" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
 //!set function[locale_from_utf8].parameters.parameter[utf8string].type '<array length="1" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
 //!set function[locale_to_utf8].return-value.type '<array length="3" c:type="gchar*"><type name="char" c:type="char"/></array>'
+
+// Ignore string return values which are copies of the passed in buffer
+//!set function[ascii_dtostr].return-value[][ignore] 1
+//!set function[ascii_formatd].return-value[][ignore] 1
+
+// Buffer is a caller allocated out buffer
+//!set function[ascii_dtostr].parameters.parameter[buffer][direction] out
+//!set function[ascii_dtostr].parameters.parameter[buffer][caller-allocates] 1
+//!set function[ascii_formatd].parameters.parameter[buffer][direction] out
+//!set function[ascii_formatd].parameters.parameter[buffer][caller-allocates] 1
+
+//# string-length-param (Strings with array length parameters)
+//!set function[ascii_dtostr].parameters.parameter[buffer].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set function[ascii_formatd].parameters.parameter[buffer].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set function[ascii_strdown].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[ascii_strup].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[compute_checksum_for_string].parameters.parameter[str].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[compute_hmac_for_string].parameters.parameter[str].type '<array length="4" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[markup_escape_text].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_casefold].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_collate_key].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_collate_key_for_filename].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_get_char_validated].parameters.parameter[p].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_make_valid].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_normalize].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_strchr].parameters.parameter[p].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_strdown].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_strrchr].parameters.parameter[p].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_strreverse].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set function[utf8_strup].parameters.parameter[str].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[IOChannel].method[write].parameters.parameter[buf].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[KeyFile].method[load_from_data].parameters.parameter[data].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[MarkupParseContext].method[parse].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[PatternSpec].method[match].parameters.parameter[string].type '<array length="0" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[Scanner].method[input_text].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[Uri].function[parse_params].parameters.parameter[params].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[Uri].function[unescape_bytes].parameters.parameter[escaped_string].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[UriParamsIter].method[init].parameters.parameter[params].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 
 //# Set writable to false as it should be
 //!set record[Node].field[children][writable] 0

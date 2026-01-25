@@ -232,7 +232,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(const(GdkRectangle)*)&area, button, state, nPresses);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&area, button, state, nPresses);
   }
 
   /**
@@ -362,7 +362,7 @@ class GutterRenderer : gtk.widget.Widget
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area)
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(const(GdkRectangle)*)&area);
+    _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&area);
     return _retval;
   }
 

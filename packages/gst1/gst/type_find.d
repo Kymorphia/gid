@@ -1,4 +1,4 @@
-/// Module for [TypeFind] struct
+/// Module for [TypeFind] class
 module gst.type_find;
 
 import gid.gid;
@@ -12,30 +12,63 @@ import gst.types;
     The following functions allow you to detect the media type of an unknown
     stream.
 */
-struct TypeFind
+class TypeFind
 {
-  /**
-      Method to peek data.
-  */
-  extern(C) const(ubyte)* function(void* data, long offset, uint size) peekFunc;
-
-  /**
-      Method to suggest #GstCaps with a given probability.
-  */
-  extern(C) void function(void* data, uint probability, GstCaps* caps) suggestFunc;
-
-  /**
-      The data used by the caller of the typefinding function.
-  */
-  void* data;
-
-  /**
-      Returns the length of current data.
-  */
-  extern(C) ulong function(void* data) getLengthFunc;
+  GstTypeFind _cInstance;
 
   /** */
-  void*[4] GstReserved;
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for gst.type_find.TypeFind");
+
+    _cInstance = *cast(GstTypeFind*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
+
+  /** */
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
+
+  /** Function alias for field `peekFunc` */
+  alias PeekFuncFuncType = extern(C) const(ubyte)* function(void* data, long offset, uint size);
+
+  /**
+      Get `peekFunc` field.
+      Returns: Method to peek data.
+  */
+  @property PeekFuncFuncType peekFunc()
+  {
+    return (cast(GstTypeFind*)this._cPtr).peekFunc;
+  }
+
+  /** Function alias for field `suggestFunc` */
+  alias SuggestFuncFuncType = extern(C) void function(void* data, uint probability, GstCaps* caps);
+
+  /**
+      Get `suggestFunc` field.
+      Returns: Method to suggest #GstCaps with a given probability.
+  */
+  @property SuggestFuncFuncType suggestFunc()
+  {
+    return (cast(GstTypeFind*)this._cPtr).suggestFunc;
+  }
+
+  /** Function alias for field `getLengthFunc` */
+  alias GetLengthFuncFuncType = extern(C) ulong function(void* data);
+
+  /**
+      Get `getLengthFunc` field.
+      Returns: Returns the length of current data.
+  */
+  @property GetLengthFuncFuncType getLengthFunc()
+  {
+    return (cast(GstTypeFind*)this._cPtr).getLengthFunc;
+  }
 
   /**
       Get the length of the data stream.
@@ -44,7 +77,7 @@ struct TypeFind
   ulong getLength()
   {
     ulong _retval;
-    _retval = gst_type_find_get_length(cast(GstTypeFind*)&this);
+    _retval = gst_type_find_get_length(cast(GstTypeFind*)this._cPtr);
     return _retval;
   }
 
@@ -63,7 +96,7 @@ struct TypeFind
   */
   const(ubyte)* peek(long offset, uint size)
   {
-    auto _retval = gst_type_find_peek(cast(GstTypeFind*)&this, offset, size);
+    auto _retval = gst_type_find_peek(cast(GstTypeFind*)this._cPtr, offset, size);
     return _retval;
   }
 
@@ -79,7 +112,7 @@ struct TypeFind
   */
   void suggest(uint probability, gst.caps.Caps caps)
   {
-    gst_type_find_suggest(cast(GstTypeFind*)&this, probability, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    gst_type_find_suggest(cast(GstTypeFind*)this._cPtr, probability, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -96,7 +129,7 @@ struct TypeFind
   void suggestEmptySimple(uint probability, string mediaType)
   {
     const(char)* _mediaType = mediaType.toCString(No.Alloc);
-    gst_type_find_suggest_empty_simple(cast(GstTypeFind*)&this, probability, _mediaType);
+    gst_type_find_suggest_empty_simple(cast(GstTypeFind*)this._cPtr, probability, _mediaType);
   }
 
   /**
@@ -121,7 +154,7 @@ struct TypeFind
     {
       auto _dlg = cast(gst.types.TypeFindFunction*)userData;
 
-      (*_dlg)(*cast(gst.type_find.TypeFind*)find);
+      (*_dlg)(find ? new gst.type_find.TypeFind(cast(void*)find, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
     bool _retval;

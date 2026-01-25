@@ -1,4 +1,4 @@
-/// Module for [Once] struct
+/// Module for [Once] class
 module glib.once;
 
 import gid.gid;
@@ -11,18 +11,46 @@ import glib.types;
     one-time initialization function must have its own unique #GOnce
     struct.
 */
-struct Once
+class Once
 {
-  /**
-      the status of the #GOnce
-  */
-  OnceStatus status;
+  GOnce _cInstance;
+
+  /** */
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for glib.once.Once");
+
+    _cInstance = *cast(GOnce*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
+
+  /** */
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
 
   /**
-      the value returned by the call to the function, if @status
-               is `G_ONCE_STATUS_READY`
+      Get `status` field.
+      Returns: the status of the #GOnce
   */
-  void* retval;
+  @property glib.types.OnceStatus status()
+  {
+    return cast(glib.types.OnceStatus)(cast(GOnce*)this._cPtr).status;
+  }
+
+  /**
+      Set `status` field.
+      Params:
+        propval = the status of the #GOnce
+  */
+  @property void status(glib.types.OnceStatus propval)
+  {
+    (cast(GOnce*)this._cPtr).status = cast(GOnceStatus)propval;
+  }
 
   /**
       Function to be called when starting a critical initialization

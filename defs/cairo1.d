@@ -139,3 +139,8 @@
 //!set record[Surface].method[observer_print].parameters.parameter[write_func][closure] 1
 //!set record[Surface].method[set_mime_data].parameters.parameter[destroy][closure] 4
 //!set record[Surface].method[write_to_png_stream].parameters.parameter[write_func][closure] 1
+
+//# string-length-param (Strings with array length parameters)
+//!set callback[UserScaledFontTextToGlyphsFunc].parameters.parameter[utf8].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[Context].method[show_text_glyphs].parameters.parameter[utf8].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set record[ScaledFont].method[text_to_glyphs].parameters.parameter[utf8].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'

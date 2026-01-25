@@ -4,67 +4,64 @@
 [Summary]
 Package                    |       Structs        |        Funcs         |       Signals        |        Fields        |
                            |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |
-adw1                       |   74    0    0   100 |  980   22    0   100 |   46    0    1  97.9 |    0    0    0   100 |
-arrow1                     |  296    0    0   100 |  973   54    0   100 |    0    0    0   100 |    0    0    0   100 |
+adw1                       |   74    0    0   100 |  980    0    0   100 |   46    0    1  97.9 |    0    0    0   100 |
+arrow1                     |  296    0    0   100 |  973    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-atk1                       |   40    0    0   100 |  236   24    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   73    0    3  96.1 | 1233  371    8  99.4 |    0    0    0   100 |  130    0    8  94.2 |
-gmime3                     |   69    0    0   100 |  546   31   12  97.8 |    0    0    0   100 |   12    0    3  80.0 |
-gmodule2                   |    3    0    0   100 |    8    6    0   100 |    0    0    0   100 |    0    0    0   100 |
-gobject2                   |   55    0    0   100 |  266  150    2  99.3 |    3    0    0   100 |  136    0    4  97.1 |
-gda5                       |  112    0    3  97.4 |  664  173   23  96.7 |   53    0    1  98.1 |  170    0   53  76.2 |
-gdk3                       |   57    0    0   100 |  539   27    9  98.4 |   37    0    2  94.9 |  263    0    4  98.5 |
-gdk4                       |   63    0    0   100 |  483   18    5  99.0 |   35    0    0   100 |   13    0    1  92.9 |
-gdkpixbuf2                 |   12    0    0   100 |   97   11    1  99.0 |    4    0    0   100 |   21    0    2  91.3 |
-gio2                       |  178    0    0   100 | 1725  128   18  99.0 |   81    0    0   100 |   46    0   22  67.6 |
-graphene1                  |   21    0    0   100 |  367   26    0   100 |    0    0    0   100 |    9    0    0   100 |
-gsk4                       |   51    0    0   100 |  257   10   14  94.8 |    0    0    0   100 |   12    0    1  92.3 |
-gst1                       |   89    0    0   100 | 1396  158   23  98.4 |   23    0    0   100 |  128    0    5  96.2 |
+atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
+glib2                      |   76    0    0   100 | 1257    1    9  99.3 |    0    0    0   100 |  145    0   11  92.9 |
+gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   12    0    3  80.0 |
+gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
+gobject2                   |   55    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  134    0    6  95.7 |
+gda5                       |  112    0    3  97.4 |  664    0   23  96.7 |   53    0    1  98.1 |  170    0   53  76.2 |
+gdk3                       |   57    0    0   100 |  539    0    9  98.4 |   37    0    2  94.9 |  263    0    4  98.5 |
+gdk4                       |   63    0    0   100 |  483    0    5  99.0 |   35    0    0   100 |   13    0    1  92.9 |
+gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4    0    0   100 |   21    0    2  91.3 |
+gio2                       |  178    0    0   100 | 1727    0   17  99.0 |   81    0    0   100 |   46    0   22  67.6 |
+graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
+gsk4                       |   51    0    0   100 |  257    0   14  94.8 |    0    0    0   100 |   12    0    1  92.3 |
+gst1                       |   89    0    0   100 | 1396    0   23  98.4 |   23    0    0   100 |  128    0    5  96.2 |
 gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstapp1                    |    6    0    0   100 |   48    4    0   100 |   16    0    1  94.1 |    8    0    0   100 |
-gstaudio1                  |   33    0    0   100 |  212   31   10  95.5 |    0    0    0   100 |   54    0   11  83.1 |
-gstbase1                   |   23    0    0   100 |  305   66   10  96.8 |    2    2    0   100 |   28    0    3  90.3 |
-gstcheck1                  |    8    0    0   100 |  110   33    2  98.2 |    0    0    0   100 |    8    0    0   100 |
+gstapp1                    |    6    0    0   100 |   48    0    0   100 |   17    0    0   100 |    8    0    0   100 |
+gstaudio1                  |   33    0    0   100 |  212    0   10  95.5 |    0    0    0   100 |   54    0   11  83.1 |
+gstbase1                   |   23    0    0   100 |  305    0   10  96.8 |    2    0    0   100 |   28    0    3  90.3 |
+gstcheck1                  |    8    0    0   100 |  110    0    2  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   16    0    0   100 |    3    0    0   100 |    2    0    0   100 |
-gstgl1                     |   38    0    0   100 |  283   47   12  95.9 |    5    0    0   100 |   55    0    7  88.7 |
-gstglegl1                  |    7    0    0   100 |   14    6    6  70.0 |    0    0    0   100 |    0    0    0   100 |
+gstgl1                     |   38    0    0   100 |  285    0   10  96.6 |    5    0    0   100 |   55    0    7  88.7 |
+gstglegl1                  |    7    0    0   100 |   14    0    6  70.0 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstnet1                    |    9    0    0   100 |   24    3    0   100 |    0    0    0   100 |    6    0    0   100 |
-gstpbutils1                |   16    0    0   100 |  167    1    4  97.7 |    5    0    0   100 |    0    0    0   100 |
-gstrtp1                    |   11    0    0   100 |  196   27    2  99.0 |    6    0    0   100 |   16    0    4  80.0 |
-gstrtsp1                   |   15    0    0   100 |  138   18    2  98.6 |    1    0    0   100 |   50    0    1  98.0 |
-gstsdp1                    |   23    0    0   100 |  168    9    2  98.8 |    0    0    0   100 |   65    0   24  73.0 |
+gstnet1                    |    9    0    0   100 |   24    0    0   100 |    0    0    0   100 |    6    0    0   100 |
+gstpbutils1                |   16    0    0   100 |  169    0    2  98.8 |    5    0    0   100 |    0    0    0   100 |
+gstrtp1                    |   11    0    0   100 |  196    0    2  99.0 |    6    0    0   100 |   16    0    4  80.0 |
+gstrtsp1                   |   15    0    0   100 |  138    0    2  98.6 |    1    0    0   100 |   50    0    1  98.0 |
+gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   65    0   24  73.0 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   58    0    0   100 |  371  107    8  97.9 |    2    0    0   100 |  157    0   32  83.1 |
-gtk3                       |  345    0    0   100 | 3765  129   22  99.4 |  444    1    3  99.3 |  148    0   11  93.1 |
-gtk4                       |  320    0    0   100 | 3579   90   12  99.7 |  342    1    3  99.1 |   33    0    5  86.8 |
-gtksource4                 |   38    0    0   100 |  371   10    0   100 |   33    0    0   100 |    0    0    0   100 |
-gtksource5                 |   49    0    0   100 |  448    9    0   100 |   29    0    1  96.7 |    0    0    0   100 |
-harfbuzz0                  |   35    0    0   100 |  408   52   41  90.9 |    0    0    0   100 |   65    0   11  85.5 |
-javascriptcore6            |   10    0    0   100 |  104   13    9  92.0 |    1    0    0   100 |    5    0    1  83.3 |
-json1                      |   12    0    0   100 |  200    5    0   100 |    9    0    0   100 |    0    0    0   100 |
-panel1                     |   33    0    0   100 |  311    4    0   100 |   17    0    0   100 |    0    0    0   100 |
-pango1                     |   43    0    0   100 |  397   25   12  97.1 |    0    0    0   100 |   89    0    8  91.8 |
-pangocairo1                |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
+gstvideo1                  |   58    0    0   100 |  371    0    8  97.9 |    2    0    0   100 |  157    0   32  83.1 |
+gtk3                       |  345    0    0   100 | 3765    0   22  99.4 |  444    0    3  99.3 |  148    0   11  93.1 |
+gtk4                       |  320    0    0   100 | 3579    0   12  99.7 |  342    0    3  99.1 |   33    0    5  86.8 |
+gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
+gtksource5                 |   49    0    0   100 |  448    0    0   100 |   29    0    1  96.7 |    0    0    0   100 |
+harfbuzz0                  |   35    0    0   100 |  408    0   41  90.9 |    0    0    0   100 |   65    0   11  85.5 |
+javascriptcore6            |   10    0    0   100 |  104    0    9  92.0 |    1    0    0   100 |    5    0    1  83.3 |
+json1                      |   12    0    0   100 |  200    0    0   100 |    9    0    0   100 |    0    0    0   100 |
+panel1                     |   33    0    0   100 |  311    0    0   100 |   17    0    0   100 |    0    0    0   100 |
+pango1                     |   43    0    0   100 |  397    0   12  97.1 |    0    0    0   100 |   89    0    8  91.8 |
+pangocairo1                |    4    0    0   100 |   26    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-rsvg2                      |    7    0    0   100 |   46    1    0   100 |    0    0    0   100 |   12    0    0   100 |
-secret1                    |   11    0    0   100 |  133   64    8  94.3 |    0    0    0   100 |    4    0    1  80.0 |
-soup3                      |   38    0    0   100 |  372   19    3  99.2 |   42    0    0   100 |    3    0    1  75.0 |
-vte2                       |    7    0    0   100 |  169    4    4  97.7 |   35    0    0   100 |    0    0    0   100 |
-vte3                       |    7    0    0   100 |  159    4    0   100 |   28    0    0   100 |    0    0    0   100 |
-webkit6                    |   74    0    0   100 |  648   14    0   100 |   72    0    0   100 |    0    0    0   100 |
+rsvg2                      |    7    0    0   100 |   46    0    0   100 |    0    0    0   100 |   12    0    0   100 |
+secret1                    |   11    0    0   100 |  133    0    8  94.3 |    0    0    0   100 |    4    0    1  80.0 |
+soup3                      |   38    0    0   100 |  372    0    3  99.2 |   42    0    0   100 |    3    0    1  75.0 |
+vte2                       |    7    0    0   100 |  169    0    4  97.7 |   35    0    0   100 |    0    0    0   100 |
+vte3                       |    7    0    0   100 |  159    0    0   100 |   28    0    0   100 |    0    0    0   100 |
+webkit6                    |   74    0    0   100 |  648    0    0   100 |   72    0    0   100 |    0    0    0   100 |
 webkitwebprocessextension6 |   16    0    0   100 |   97    0    0   100 |   12    0    0   100 |    0    0    0   100 |
-cairo1                     |   21    0    0   100 |  328   54    2  99.4 |    0    0    0   100 |   37    0    0   100 |
+cairo1                     |   21    0    0   100 |  328    0    2  99.4 |    0    0    0   100 |   37    0    0   100 |
 freetype2                  |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gid                        |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 libxml2                    |   10    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 xlib2                      |   12    0    0   100 |    1    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
 [Unsupported Structs]
-glib.types.Hook
-glib.types.HookList
-glib.types.Node
 gda.types.Short
 gda.types.SqlAnyPart
 gda.types.UShort
@@ -85,18 +82,7 @@ glib.option_context.OptionContext.parseStrv
 glib.global.environSetenv
 glib.global.environUnsetenv
 glib.global.parseDebugString
-gmime.encoding.Encoding.base64DecodeStep
-gmime.encoding.Encoding.base64EncodeClose
-gmime.encoding.Encoding.base64EncodeStep
-gmime.encoding.Encoding.quotedDecodeStep
-gmime.encoding.Encoding.quotedEncodeClose
-gmime.encoding.Encoding.quotedEncodeStep
-gmime.encoding.Encoding.uudecodeStep
-gmime.encoding.Encoding.uuencodeClose
-gmime.encoding.Encoding.uuencodeStep
-gmime.global.ydecodeStep
-gmime.global.yencodeClose
-gmime.global.yencodeStep
+glib.global.strfreev
 gobject.object.ObjectWrap.newv
 gobject.type_class.TypeClass.adjustPrivateOffset
 gda.connection.Connection.asyncStatementExecute
@@ -146,15 +132,14 @@ gio.datagram_based.DatagramBased.receiveMessages
 gio.datagram_based.DatagramBased.sendMessages
 gio.desktop_app_info.DesktopAppInfo.search
 gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
-gio.dtls_connection.DtlsConnection.getChannelBindingData
 gio.initable.Initable.newv
 gio.memory_input_stream.MemoryInputStream.newFromData
 gio.memory_input_stream.MemoryInputStream.addData
+gio.settings_backend.SettingsBackend.flattenTree
 gio.simple_action_group.SimpleActionGroup.addEntries
 gio.socket.Socket.receiveMessages
 gio.socket.Socket.sendMessages
 gio.tls_client_connection.TlsClientConnection.getAcceptedCas
-gio.tls_connection.TlsConnection.getChannelBindingData
 gsk.conic_gradient_node.ConicGradientNode.new_
 gsk.conic_gradient_node.ConicGradientNode.getColorStops
 gsk.linear_gradient_node.LinearGradientNode.new_
@@ -224,8 +209,6 @@ gstgl.glshader.GLShader.setUniformMatrix3x4fv
 gstgl.glshader.GLShader.setUniformMatrix4fv
 gstgl.glshader.GLShader.setUniformMatrix4x2fv
 gstgl.glshader.GLShader.setUniformMatrix4x3fv
-gstgl.global.glSwizzleInvert
-gstgl.global.glVideoFormatSwizzle
 gstglegl.eglimage.EGLImage.newWrapped
 gstglegl.eglimage.EGLImage.exportDmabuf
 gstglegl.eglimage.EGLImage.fromDmabufDirect
@@ -234,8 +217,6 @@ gstglegl.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
 gstglegl.eglimage.EGLImage.fromTexture
 gstpbutils.global.codecUtilsOpusCreateCaps
 gstpbutils.global.codecUtilsOpusCreateHeader
-gstpbutils.global.codecUtilsOpusParseCaps
-gstpbutils.global.codecUtilsOpusParseHeader
 gstrtp.rtpbuffer.RTPBuffer.newTakeData
 gstrtp.global.bufferAddRtpSourceMeta
 gstrtsp.rtspmessage.RTSPMessage.takeBody
@@ -369,7 +350,6 @@ adw.spin_row.SpinRow.input
 gda.meta_store.MetaStore.metaChanged
 gdk.window.Window.fromEmbedder
 gdk.window.Window.toEmbedder
-gstapp.app_sink.AppSink.tryPullObject
 gtk.editable.Editable.insertText
 gtk.overlay.Overlay.getChildPosition
 gtk.spin_button.SpinButton.input
@@ -379,6 +359,9 @@ gtk.spin_button.SpinButton.input
 gtksource.view.View.pushSnippet
 
 [Unsupported Fields]
+glib.hook.Hook.data
+glib.hook.Hook.func
+glib.node.Node.data
 glib.once.Once.retval
 glib.types.OptionEntry.argData
 glib.scanner.Scanner.userData
@@ -393,7 +376,9 @@ gmime.types.StreamIOVector.data
 gobject.cclosure.CClosure.callback
 gobject.types.ClosureNotifyData.data
 gobject.signal_query.SignalQuery.paramTypes
-gobject.types.TypeCValue.vPointer
+gobject.type_cvalue.TypeCValue.vPointer
+gobject.type_value_table.TypeValueTable.collectValue
+gobject.type_value_table.TypeValueTable.lcopyValue
 gda.binary.Binary.data
 gda.diff.Diff.values
 gda.meta_context.MetaContext.columnNames
@@ -518,7 +503,7 @@ gstsdp.mikeypayload_key_data.MIKEYPayloadKeyData.kvData
 gstsdp.mikeypayload_pke.MIKEYPayloadPKE.data
 gstsdp.mikeypayload_rand.MIKEYPayloadRAND.rand
 gstsdp.mikeypayload_sp.MIKEYPayloadSP.params
-gstsdp.types.MIKEYPayloadSPParam.val
+gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam.val
 gstsdp.mikeypayload_t.MIKEYPayloadT.tsValue
 gstsdp.sdpmedia.SDPMedia.fmts
 gstsdp.sdpmedia.SDPMedia.connections
@@ -580,9 +565,9 @@ gtk.types.RequestedSize.data
 gtk.tree_iter.TreeIter.userData
 gtk.tree_iter.TreeIter.userData2
 gtk.tree_iter.TreeIter.userData3
-harfbuzz.types.ColorLine.data
-harfbuzz.types.ColorLine.getColorStopsUserData
-harfbuzz.types.ColorLine.getExtendUserData
+harfbuzz.color_line.ColorLine.data
+harfbuzz.color_line.ColorLine.getColorStopsUserData
+harfbuzz.color_line.ColorLine.getExtendUserData
 harfbuzz.types.VarInt.u16
 harfbuzz.types.VarInt.i16
 harfbuzz.types.VarInt.u8

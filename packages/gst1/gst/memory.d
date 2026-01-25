@@ -55,7 +55,6 @@ class Memory : gobject.boxed.Boxed
   /**
       Create a `memory.Memory` boxed type.
       Params:
-        miniObject = parent structure
         allocator = pointer to the #GstAllocator
         parent = parent memory block
         maxsize = the maximum size allocated
@@ -63,10 +62,9 @@ class Memory : gobject.boxed.Boxed
         offset = the offset where valid data starts
         size = the size of valid data
   */
-  this(gst.mini_object.MiniObject miniObject = gst.mini_object.MiniObject.init, gst.allocator.Allocator allocator = gst.allocator.Allocator.init, gst.memory.Memory parent = gst.memory.Memory.init, size_t maxsize = size_t.init, size_t align_ = size_t.init, size_t offset = size_t.init, size_t size = size_t.init)
+  this(gst.allocator.Allocator allocator = gst.allocator.Allocator.init, gst.memory.Memory parent = gst.memory.Memory.init, size_t maxsize = size_t.init, size_t align_ = size_t.init, size_t offset = size_t.init, size_t size = size_t.init)
   {
     super(gMalloc(GstMemory.sizeof), Yes.Take);
-    this.miniObject = miniObject;
     this.allocator = allocator;
     this.parent = parent;
     this.maxsize = maxsize;
@@ -113,16 +111,6 @@ class Memory : gobject.boxed.Boxed
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMemory*)this._cPtr).miniObject);
-  }
-
-  /**
-      Set `miniObject` field.
-      Params:
-        propval = parent structure
-  */
-  @property void miniObject(gst.mini_object.MiniObject propval)
-  {
-    (cast(GstMemory*)this._cPtr).miniObject = cast(GstMiniObject)propval;
   }
 
   /**

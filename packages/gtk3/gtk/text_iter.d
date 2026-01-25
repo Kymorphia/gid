@@ -1,8 +1,9 @@
-/// Module for [TextIter] struct
+/// Module for [TextIter] class
 module gtk.text_iter;
 
 import gdkpixbuf.pixbuf;
 import gid.gid;
+import gobject.boxed;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -20,49 +21,47 @@ import pango.language;
     which gives an overview of all the objects and data
     types related to the text widget and how they work together.
 */
-struct TextIter
+class TextIter : gobject.boxed.Boxed
 {
-  /** */
-  void* dummy1;
+
+  /**
+      Create a `text_iter.TextIter` boxed type.
+  */
+  this()
+  {
+    super(gMalloc(GtkTextIter.sizeof), Yes.Take);
+  }
 
   /** */
-  void* dummy2;
+  this(void* ptr, Flag!"Take" take)
+  {
+    super(cast(void*)ptr, take);
+  }
 
   /** */
-  int dummy3;
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  {
+    return dup ? copy_ : _cInstancePtr;
+  }
 
   /** */
-  int dummy4;
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_text_iter_get_type != &gidSymbolNotFound ? gtk_text_iter_get_type() : cast(GType)0;
+  }
 
   /** */
-  int dummy5;
+  override @property GType _gType()
+  {
+    return _getGType();
+  }
 
-  /** */
-  int dummy6;
-
-  /** */
-  int dummy7;
-
-  /** */
-  int dummy8;
-
-  /** */
-  void* dummy9;
-
-  /** */
-  void* dummy10;
-
-  /** */
-  int dummy11;
-
-  /** */
-  int dummy12;
-
-  /** */
-  int dummy13;
-
-  /** */
-  void* dummy14;
+  /** Returns `this`, for use in `with` statements. */
+  override TextIter self()
+  {
+    return this;
+  }
 
   /**
       Assigns the value of other to iter.  This function
@@ -75,7 +74,7 @@ struct TextIter
   */
   void assign(gtk.text_iter.TextIter other)
   {
-    gtk_text_iter_assign(cast(GtkTextIter*)&this, cast(const(GtkTextIter)*)&other);
+    gtk_text_iter_assign(cast(GtkTextIter*)this._cPtr, other ? cast(const(GtkTextIter)*)other._cPtr(No.Dup) : null);
   }
 
   /**
@@ -88,7 +87,7 @@ struct TextIter
   bool backwardChar()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_char(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_char(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -107,7 +106,7 @@ struct TextIter
   bool backwardChars(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_chars(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_chars(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -118,7 +117,7 @@ struct TextIter
   bool backwardCursorPosition()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_cursor_position(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_cursor_position(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +132,7 @@ struct TextIter
   bool backwardCursorPositions(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_cursor_positions(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_cursor_positions(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -145,7 +144,7 @@ struct TextIter
         limit = search limit, or null for none
       Returns: whether a match was found
   */
-  bool backwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit)
+  bool backwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit = null)
   {
     extern(C) gboolean _predCallback(dchar ch, void* userData)
     {
@@ -160,7 +159,7 @@ struct TextIter
     auto _predCB = pred ? &_predCallback : null;
     bool _retval;
     auto _pred = pred ? cast(void*)&(pred) : null;
-    _retval = cast(bool)gtk_text_iter_backward_find_char(cast(GtkTextIter*)&this, _predCB, _pred, cast(const(GtkTextIter)*)&limit);
+    _retval = cast(bool)gtk_text_iter_backward_find_char(cast(GtkTextIter*)this._cPtr, _predCB, _pred, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -177,7 +176,7 @@ struct TextIter
   bool backwardLine()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_line(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_line(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -197,7 +196,7 @@ struct TextIter
   bool backwardLines(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_lines(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_lines(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -215,11 +214,15 @@ struct TextIter
         limit = location of last possible match_start, or null for start of buffer
       Returns: whether a match was found
   */
-  bool backwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit)
+  bool backwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit = null)
   {
     bool _retval;
     const(char)* _str = str.toCString(No.Alloc);
-    _retval = cast(bool)gtk_text_iter_backward_search(cast(const(GtkTextIter)*)&this, _str, flags, cast(GtkTextIter*)&matchStart, cast(GtkTextIter*)&matchEnd, cast(const(GtkTextIter)*)&limit);
+    GtkTextIter _matchStart;
+    GtkTextIter _matchEnd;
+    _retval = cast(bool)gtk_text_iter_backward_search(cast(const(GtkTextIter)*)this._cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
@@ -234,7 +237,7 @@ struct TextIter
   bool backwardSentenceStart()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_sentence_start(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_sentence_start(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -250,7 +253,7 @@ struct TextIter
   bool backwardSentenceStarts(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_sentence_starts(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_sentence_starts(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -270,7 +273,7 @@ struct TextIter
   bool backwardToTagToggle(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_to_tag_toggle(cast(GtkTextIter*)&this, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_iter_backward_to_tag_toggle(cast(GtkTextIter*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -282,7 +285,7 @@ struct TextIter
   bool backwardVisibleCursorPosition()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_visible_cursor_position(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_visible_cursor_position(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -297,7 +300,7 @@ struct TextIter
   bool backwardVisibleCursorPositions(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_visible_cursor_positions(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_visible_cursor_positions(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -314,7 +317,7 @@ struct TextIter
   bool backwardVisibleLine()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_visible_line(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_visible_line(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -334,7 +337,7 @@ struct TextIter
   bool backwardVisibleLines(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_visible_lines(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_visible_lines(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -349,7 +352,7 @@ struct TextIter
   bool backwardVisibleWordStart()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_visible_word_start(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_visible_word_start(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -363,7 +366,7 @@ struct TextIter
   bool backwardVisibleWordStarts(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_visible_word_starts(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_visible_word_starts(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -378,7 +381,7 @@ struct TextIter
   bool backwardWordStart()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_word_start(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_backward_word_start(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -392,7 +395,7 @@ struct TextIter
   bool backwardWordStarts(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_backward_word_starts(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_backward_word_starts(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -416,7 +419,7 @@ struct TextIter
   bool beginsTag(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_begins_tag(cast(const(GtkTextIter)*)&this, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_iter_begins_tag(cast(const(GtkTextIter)*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -435,7 +438,7 @@ struct TextIter
   bool canInsert(bool defaultEditability)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_can_insert(cast(const(GtkTextIter)*)&this, defaultEditability);
+    _retval = cast(bool)gtk_text_iter_can_insert(cast(const(GtkTextIter)*)this._cPtr, defaultEditability);
     return _retval;
   }
 
@@ -452,7 +455,7 @@ struct TextIter
   int compare(gtk.text_iter.TextIter rhs)
   {
     int _retval;
-    _retval = gtk_text_iter_compare(cast(const(GtkTextIter)*)&this, cast(const(GtkTextIter)*)&rhs);
+    _retval = gtk_text_iter_compare(cast(const(GtkTextIter)*)this._cPtr, rhs ? cast(const(GtkTextIter)*)rhs._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -466,10 +469,8 @@ struct TextIter
   gtk.text_iter.TextIter copy()
   {
     GtkTextIter* _cretval;
-    _cretval = gtk_text_iter_copy(cast(const(GtkTextIter)*)&this);
-    gtk.text_iter.TextIter _retval;
-    if (_cretval)
-      _retval = *cast(gtk.text_iter.TextIter*)_cretval;
+    _cretval = gtk_text_iter_copy(cast(const(GtkTextIter)*)this._cPtr);
+    auto _retval = _cretval ? new gtk.text_iter.TextIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -494,7 +495,7 @@ struct TextIter
   bool editable(bool defaultSetting)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_editable(cast(const(GtkTextIter)*)&this, defaultSetting);
+    _retval = cast(bool)gtk_text_iter_editable(cast(const(GtkTextIter)*)this._cPtr, defaultSetting);
     return _retval;
   }
 
@@ -512,7 +513,7 @@ struct TextIter
   bool endsLine()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_ends_line(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_ends_line(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -526,7 +527,7 @@ struct TextIter
   bool endsSentence()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_ends_sentence(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_ends_sentence(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -547,7 +548,7 @@ struct TextIter
   bool endsTag(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_ends_tag(cast(const(GtkTextIter)*)&this, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_iter_ends_tag(cast(const(GtkTextIter)*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -561,7 +562,7 @@ struct TextIter
   bool endsWord()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_ends_word(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_ends_word(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -579,7 +580,7 @@ struct TextIter
   bool equal(gtk.text_iter.TextIter rhs)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_equal(cast(const(GtkTextIter)*)&this, cast(const(GtkTextIter)*)&rhs);
+    _retval = cast(bool)gtk_text_iter_equal(cast(const(GtkTextIter)*)this._cPtr, rhs ? cast(const(GtkTextIter)*)rhs._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -596,7 +597,7 @@ struct TextIter
   bool forwardChar()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_char(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_char(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -615,7 +616,7 @@ struct TextIter
   bool forwardChars(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_chars(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_chars(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -635,7 +636,7 @@ struct TextIter
   bool forwardCursorPosition()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_cursor_position(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_cursor_position(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -650,7 +651,7 @@ struct TextIter
   bool forwardCursorPositions(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_cursor_positions(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_cursor_positions(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -665,7 +666,7 @@ struct TextIter
         limit = search limit, or null for none
       Returns: whether a match was found
   */
-  bool forwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit)
+  bool forwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit = null)
   {
     extern(C) gboolean _predCallback(dchar ch, void* userData)
     {
@@ -680,7 +681,7 @@ struct TextIter
     auto _predCB = pred ? &_predCallback : null;
     bool _retval;
     auto _pred = pred ? cast(void*)&(pred) : null;
-    _retval = cast(bool)gtk_text_iter_forward_find_char(cast(GtkTextIter*)&this, _predCB, _pred, cast(const(GtkTextIter)*)&limit);
+    _retval = cast(bool)gtk_text_iter_forward_find_char(cast(GtkTextIter*)this._cPtr, _predCB, _pred, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -694,7 +695,7 @@ struct TextIter
   bool forwardLine()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_line(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_line(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -714,7 +715,7 @@ struct TextIter
   bool forwardLines(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_lines(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_lines(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -737,11 +738,15 @@ struct TextIter
         limit = location of last possible match_end, or null for the end of the buffer
       Returns: whether a match was found
   */
-  bool forwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit)
+  bool forwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit = null)
   {
     bool _retval;
     const(char)* _str = str.toCString(No.Alloc);
-    _retval = cast(bool)gtk_text_iter_forward_search(cast(const(GtkTextIter)*)&this, _str, flags, cast(GtkTextIter*)&matchStart, cast(GtkTextIter*)&matchEnd, cast(const(GtkTextIter)*)&limit);
+    GtkTextIter _matchStart;
+    GtkTextIter _matchEnd;
+    _retval = cast(bool)gtk_text_iter_forward_search(cast(const(GtkTextIter)*)this._cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
@@ -756,7 +761,7 @@ struct TextIter
   bool forwardSentenceEnd()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_sentence_end(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_sentence_end(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -772,7 +777,7 @@ struct TextIter
   bool forwardSentenceEnds(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_sentence_ends(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_sentence_ends(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -783,7 +788,7 @@ struct TextIter
   */
   void forwardToEnd()
   {
-    gtk_text_iter_forward_to_end(cast(GtkTextIter*)&this);
+    gtk_text_iter_forward_to_end(cast(GtkTextIter*)this._cPtr);
   }
 
   /**
@@ -800,7 +805,7 @@ struct TextIter
   bool forwardToLineEnd()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_to_line_end(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_to_line_end(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -820,7 +825,7 @@ struct TextIter
   bool forwardToTagToggle(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_to_tag_toggle(cast(GtkTextIter*)&this, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_iter_forward_to_tag_toggle(cast(GtkTextIter*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -832,7 +837,7 @@ struct TextIter
   bool forwardVisibleCursorPosition()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_visible_cursor_position(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_visible_cursor_position(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -847,7 +852,7 @@ struct TextIter
   bool forwardVisibleCursorPositions(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_visible_cursor_positions(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_visible_cursor_positions(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -861,7 +866,7 @@ struct TextIter
   bool forwardVisibleLine()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_visible_line(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_visible_line(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -881,7 +886,7 @@ struct TextIter
   bool forwardVisibleLines(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_visible_lines(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_visible_lines(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -896,7 +901,7 @@ struct TextIter
   bool forwardVisibleWordEnd()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_visible_word_end(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_visible_word_end(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -910,7 +915,7 @@ struct TextIter
   bool forwardVisibleWordEnds(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_visible_word_ends(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_visible_word_ends(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -925,7 +930,7 @@ struct TextIter
   bool forwardWordEnd()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_word_end(cast(GtkTextIter*)&this);
+    _retval = cast(bool)gtk_text_iter_forward_word_end(cast(GtkTextIter*)this._cPtr);
     return _retval;
   }
 
@@ -939,7 +944,7 @@ struct TextIter
   bool forwardWordEnds(int count)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_forward_word_ends(cast(GtkTextIter*)&this, count);
+    _retval = cast(bool)gtk_text_iter_forward_word_ends(cast(GtkTextIter*)this._cPtr, count);
     return _retval;
   }
 
@@ -961,7 +966,7 @@ struct TextIter
   {
     bool _retval;
     GtkTextAttributes _values;
-    _retval = cast(bool)gtk_text_iter_get_attributes(cast(const(GtkTextIter)*)&this, &_values);
+    _retval = cast(bool)gtk_text_iter_get_attributes(cast(const(GtkTextIter)*)this._cPtr, &_values);
     values = new gtk.text_attributes.TextAttributes(cast(void*)&_values, No.Take);
     return _retval;
   }
@@ -973,7 +978,7 @@ struct TextIter
   gtk.text_buffer.TextBuffer getBuffer()
   {
     GtkTextBuffer* _cretval;
-    _cretval = gtk_text_iter_get_buffer(cast(const(GtkTextIter)*)&this);
+    _cretval = gtk_text_iter_get_buffer(cast(const(GtkTextIter)*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
@@ -986,7 +991,7 @@ struct TextIter
   int getBytesInLine()
   {
     int _retval;
-    _retval = gtk_text_iter_get_bytes_in_line(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_bytes_in_line(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1003,7 +1008,7 @@ struct TextIter
   dchar getChar()
   {
     dchar _retval;
-    _retval = gtk_text_iter_get_char(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_char(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1015,7 +1020,7 @@ struct TextIter
   int getCharsInLine()
   {
     int _retval;
-    _retval = gtk_text_iter_get_chars_in_line(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_chars_in_line(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1028,7 +1033,7 @@ struct TextIter
   gtk.text_child_anchor.TextChildAnchor getChildAnchor()
   {
     GtkTextChildAnchor* _cretval;
-    _cretval = gtk_text_iter_get_child_anchor(cast(const(GtkTextIter)*)&this);
+    _cretval = gtk_text_iter_get_child_anchor(cast(const(GtkTextIter)*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
@@ -1043,7 +1048,7 @@ struct TextIter
   pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
-    _cretval = gtk_text_iter_get_language(cast(const(GtkTextIter)*)&this);
+    _cretval = gtk_text_iter_get_language(cast(const(GtkTextIter)*)this._cPtr);
     auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1057,7 +1062,7 @@ struct TextIter
   int getLine()
   {
     int _retval;
-    _retval = gtk_text_iter_get_line(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_line(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1072,7 +1077,7 @@ struct TextIter
   int getLineIndex()
   {
     int _retval;
-    _retval = gtk_text_iter_get_line_index(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_line_index(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1085,7 +1090,7 @@ struct TextIter
   int getLineOffset()
   {
     int _retval;
-    _retval = gtk_text_iter_get_line_offset(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_line_offset(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1100,7 +1105,7 @@ struct TextIter
   gtk.text_mark.TextMark[] getMarks()
   {
     GSList* _cretval;
-    _cretval = gtk_text_iter_get_marks(cast(const(GtkTextIter)*)&this);
+    _cretval = gtk_text_iter_get_marks(cast(const(GtkTextIter)*)this._cPtr);
     auto _retval = gSListToD!(gtk.text_mark.TextMark, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -1116,7 +1121,7 @@ struct TextIter
   int getOffset()
   {
     int _retval;
-    _retval = gtk_text_iter_get_offset(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_offset(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1129,7 +1134,7 @@ struct TextIter
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     GdkPixbuf* _cretval;
-    _cretval = gtk_text_iter_get_pixbuf(cast(const(GtkTextIter)*)&this);
+    _cretval = gtk_text_iter_get_pixbuf(cast(const(GtkTextIter)*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
@@ -1151,7 +1156,7 @@ struct TextIter
   string getSlice(gtk.text_iter.TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_slice(cast(const(GtkTextIter)*)&this, cast(const(GtkTextIter)*)&end);
+    _cretval = gtk_text_iter_get_slice(cast(const(GtkTextIter)*)this._cPtr, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1166,7 +1171,7 @@ struct TextIter
   gtk.text_tag.TextTag[] getTags()
   {
     GSList* _cretval;
-    _cretval = gtk_text_iter_get_tags(cast(const(GtkTextIter)*)&this);
+    _cretval = gtk_text_iter_get_tags(cast(const(GtkTextIter)*)this._cPtr);
     auto _retval = gSListToD!(gtk.text_tag.TextTag, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -1185,7 +1190,7 @@ struct TextIter
   string getText(gtk.text_iter.TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_text(cast(const(GtkTextIter)*)&this, cast(const(GtkTextIter)*)&end);
+    _cretval = gtk_text_iter_get_text(cast(const(GtkTextIter)*)this._cPtr, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1205,7 +1210,7 @@ struct TextIter
   gtk.text_tag.TextTag[] getToggledTags(bool toggledOn)
   {
     GSList* _cretval;
-    _cretval = gtk_text_iter_get_toggled_tags(cast(const(GtkTextIter)*)&this, toggledOn);
+    _cretval = gtk_text_iter_get_toggled_tags(cast(const(GtkTextIter)*)this._cPtr, toggledOn);
     auto _retval = gSListToD!(gtk.text_tag.TextTag, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -1220,7 +1225,7 @@ struct TextIter
   int getVisibleLineIndex()
   {
     int _retval;
-    _retval = gtk_text_iter_get_visible_line_index(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_visible_line_index(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1234,7 +1239,7 @@ struct TextIter
   int getVisibleLineOffset()
   {
     int _retval;
-    _retval = gtk_text_iter_get_visible_line_offset(cast(const(GtkTextIter)*)&this);
+    _retval = gtk_text_iter_get_visible_line_offset(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1250,7 +1255,7 @@ struct TextIter
   string getVisibleSlice(gtk.text_iter.TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_visible_slice(cast(const(GtkTextIter)*)&this, cast(const(GtkTextIter)*)&end);
+    _cretval = gtk_text_iter_get_visible_slice(cast(const(GtkTextIter)*)this._cPtr, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1268,7 +1273,7 @@ struct TextIter
   string getVisibleText(gtk.text_iter.TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_visible_text(cast(const(GtkTextIter)*)&this, cast(const(GtkTextIter)*)&end);
+    _cretval = gtk_text_iter_get_visible_text(cast(const(GtkTextIter)*)this._cPtr, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1284,7 +1289,7 @@ struct TextIter
   bool hasTag(gtk.text_tag.TextTag tag)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_has_tag(cast(const(GtkTextIter)*)&this, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_iter_has_tag(cast(const(GtkTextIter)*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1300,7 +1305,7 @@ struct TextIter
   bool inRange(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_in_range(cast(const(GtkTextIter)*)&this, cast(const(GtkTextIter)*)&start, cast(const(GtkTextIter)*)&end);
+    _retval = cast(bool)gtk_text_iter_in_range(cast(const(GtkTextIter)*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1315,7 +1320,7 @@ struct TextIter
   bool insideSentence()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_inside_sentence(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_inside_sentence(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1332,7 +1337,7 @@ struct TextIter
   bool insideWord()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_inside_word(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_inside_word(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1344,7 +1349,7 @@ struct TextIter
   bool isCursorPosition()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_is_cursor_position(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_is_cursor_position(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1358,7 +1363,7 @@ struct TextIter
   bool isEnd()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_is_end(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_is_end(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1370,7 +1375,7 @@ struct TextIter
   bool isStart()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_is_start(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_is_start(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1387,7 +1392,7 @@ struct TextIter
   */
   void order(gtk.text_iter.TextIter second)
   {
-    gtk_text_iter_order(cast(GtkTextIter*)&this, cast(GtkTextIter*)&second);
+    gtk_text_iter_order(cast(GtkTextIter*)this._cPtr, second ? cast(GtkTextIter*)second._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1400,7 +1405,7 @@ struct TextIter
   */
   void setLine(int lineNumber)
   {
-    gtk_text_iter_set_line(cast(GtkTextIter*)&this, lineNumber);
+    gtk_text_iter_set_line(cast(GtkTextIter*)this._cPtr, lineNumber);
   }
 
   /**
@@ -1414,7 +1419,7 @@ struct TextIter
   */
   void setLineIndex(int byteOnLine)
   {
-    gtk_text_iter_set_line_index(cast(GtkTextIter*)&this, byteOnLine);
+    gtk_text_iter_set_line_index(cast(GtkTextIter*)this._cPtr, byteOnLine);
   }
 
   /**
@@ -1430,7 +1435,7 @@ struct TextIter
   */
   void setLineOffset(int charOnLine)
   {
-    gtk_text_iter_set_line_offset(cast(GtkTextIter*)&this, charOnLine);
+    gtk_text_iter_set_line_offset(cast(GtkTextIter*)this._cPtr, charOnLine);
   }
 
   /**
@@ -1442,7 +1447,7 @@ struct TextIter
   */
   void setOffset(int charOffset)
   {
-    gtk_text_iter_set_offset(cast(GtkTextIter*)&this, charOffset);
+    gtk_text_iter_set_offset(cast(GtkTextIter*)this._cPtr, charOffset);
   }
 
   /**
@@ -1455,7 +1460,7 @@ struct TextIter
   */
   void setVisibleLineIndex(int byteOnLine)
   {
-    gtk_text_iter_set_visible_line_index(cast(GtkTextIter*)&this, byteOnLine);
+    gtk_text_iter_set_visible_line_index(cast(GtkTextIter*)this._cPtr, byteOnLine);
   }
 
   /**
@@ -1468,7 +1473,7 @@ struct TextIter
   */
   void setVisibleLineOffset(int charOnLine)
   {
-    gtk_text_iter_set_visible_line_offset(cast(GtkTextIter*)&this, charOnLine);
+    gtk_text_iter_set_visible_line_offset(cast(GtkTextIter*)this._cPtr, charOnLine);
   }
 
   /**
@@ -1482,7 +1487,7 @@ struct TextIter
   bool startsLine()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_starts_line(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_starts_line(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1496,7 +1501,7 @@ struct TextIter
   bool startsSentence()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_starts_sentence(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_starts_sentence(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1518,7 +1523,7 @@ struct TextIter
   bool startsTag(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_starts_tag(cast(const(GtkTextIter)*)&this, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_iter_starts_tag(cast(const(GtkTextIter)*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1532,7 +1537,7 @@ struct TextIter
   bool startsWord()
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_starts_word(cast(const(GtkTextIter)*)&this);
+    _retval = cast(bool)gtk_text_iter_starts_word(cast(const(GtkTextIter)*)this._cPtr);
     return _retval;
   }
 
@@ -1548,7 +1553,7 @@ struct TextIter
   bool togglesTag(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_iter_toggles_tag(cast(const(GtkTextIter)*)&this, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+    _retval = cast(bool)gtk_text_iter_toggles_tag(cast(const(GtkTextIter)*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 }

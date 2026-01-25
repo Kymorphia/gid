@@ -66,15 +66,18 @@ template EditableTextT()
   
       Params:
         string_ = the text to insert
-        length = the length of text to insert, in bytes
         position = The caller initializes this to
           the position at which to insert the text. After the call it
           points at the position after the newly inserted text.
   */
-  override void insertText(string string_, int length, ref int position)
+  override void insertText(string string_, ref int position)
   {
-    const(char)* _string_ = string_.toCString(No.Alloc);
-    atk_editable_text_insert_text(cast(AtkEditableText*)this._cPtr, _string_, length, cast(int*)&position);
+    int _length;
+    if (string_)
+      _length = cast(int)string_.length;
+
+    auto _string_ = cast(const(char)*)string_.ptr;
+    atk_editable_text_insert_text(cast(AtkEditableText*)this._cPtr, _string_, _length, cast(int*)&position);
   }
 
   /**

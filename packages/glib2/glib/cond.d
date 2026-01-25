@@ -1,4 +1,4 @@
-/// Module for [Cond] struct
+/// Module for [Cond] class
 module glib.cond;
 
 import gid.gid;
@@ -73,13 +73,27 @@ import glib.types;
     
     A #GCond should only be accessed via the g_cond_ functions.
 */
-struct Cond
+class Cond
 {
-  /** */
-  void* p;
+  GCond _cInstance;
 
   /** */
-  uint[2] i;
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for glib.cond.Cond");
+
+    _cInstance = *cast(GCond*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
+
+  /** */
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
 
   /**
       If threads are waiting for cond, all of them are unblocked.
@@ -89,7 +103,7 @@ struct Cond
   */
   void broadcast()
   {
-    g_cond_broadcast(cast(GCond*)&this);
+    g_cond_broadcast(cast(GCond*)this._cPtr);
   }
 
   /**
@@ -103,7 +117,7 @@ struct Cond
   */
   void clear()
   {
-    g_cond_clear(cast(GCond*)&this);
+    g_cond_clear(cast(GCond*)this._cPtr);
   }
 
   /**
@@ -121,7 +135,7 @@ struct Cond
   */
   void init_()
   {
-    g_cond_init(cast(GCond*)&this);
+    g_cond_init(cast(GCond*)this._cPtr);
   }
 
   /**
@@ -132,6 +146,6 @@ struct Cond
   */
   void signal()
   {
-    g_cond_signal(cast(GCond*)&this);
+    g_cond_signal(cast(GCond*)this._cPtr);
   }
 }

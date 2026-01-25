@@ -69,10 +69,10 @@ class AudioConverter : gobject.boxed.Boxed
         config = a #GstStructure with configuration options
       Returns: a #GstAudioConverter or null if conversion is not possible.
   */
-  this(gstaudio.types.AudioConverterFlags flags, gstaudio.audio_info.AudioInfo inInfo, gstaudio.audio_info.AudioInfo outInfo, gst.structure.Structure config)
+  this(gstaudio.types.AudioConverterFlags flags, gstaudio.audio_info.AudioInfo inInfo, gstaudio.audio_info.AudioInfo outInfo, gst.structure.Structure config = null)
   {
     GstAudioConverter* _cretval;
-    _cretval = gst_audio_converter_new(flags, inInfo ? cast(GstAudioInfo*)inInfo._cPtr(No.Dup) : null, outInfo ? cast(GstAudioInfo*)outInfo._cPtr(No.Dup) : null, cast(GstStructure*)&config);
+    _cretval = gst_audio_converter_new(flags, inInfo ? cast(GstAudioInfo*)inInfo._cPtr(No.Dup) : null, outInfo ? cast(GstAudioInfo*)outInfo._cPtr(No.Dup) : null, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -118,9 +118,7 @@ class AudioConverter : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_audio_converter_get_config(cast(GstAudioConverter*)this._cPtr, cast(int*)&inRate, cast(int*)&outRate);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -222,10 +220,10 @@ class AudioConverter : gobject.boxed.Boxed
         config = a #GstStructure or null
       Returns: true when the new parameters could be set
   */
-  bool updateConfig(int inRate, int outRate, gst.structure.Structure config)
+  bool updateConfig(int inRate, int outRate, gst.structure.Structure config = null)
   {
     bool _retval;
-    _retval = cast(bool)gst_audio_converter_update_config(cast(GstAudioConverter*)this._cPtr, inRate, outRate, cast(GstStructure*)&config);
+    _retval = cast(bool)gst_audio_converter_update_config(cast(GstAudioConverter*)this._cPtr, inRate, outRate, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
     return _retval;
   }
 }

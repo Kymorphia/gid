@@ -1,4 +1,4 @@
-/// Module for [UriParamsIter] struct
+/// Module for [UriParamsIter] class
 module glib.uri_params_iter;
 
 import gid.gid;
@@ -18,19 +18,27 @@ import glib.types;
     [glib.uri_params_iter.UriParamsIter.init_]. See the documentation for [glib.uri_params_iter.UriParamsIter.init_]
     for a usage example.
 */
-struct UriParamsIter
+class UriParamsIter
 {
-  /** */
-  int dummy0;
+  GUriParamsIter _cInstance;
 
   /** */
-  void* dummy1;
+  this(void* ptr, Flag!"Take" take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for glib.uri_params_iter.UriParamsIter");
+
+    _cInstance = *cast(GUriParamsIter*)ptr;
+
+    if (take)
+      gFree(ptr);
+  }
 
   /** */
-  void* dummy2;
-
-  /** */
-  ubyte[256] dummy3;
+  void* _cPtr()
+  {
+    return cast(void*)&_cInstance;
+  }
 
   /**
       Initializes an attribute/value pair iterator.
@@ -70,7 +78,6 @@ struct UriParamsIter
       Params:
         params = a `%`-encoded string containing `attribute=value`
             parameters
-        length = the length of params, or `-1` if it is nul-terminated
         separators = the separator byte character set between parameters. (usually
             `&`, but sometimes `;` or both `&;`). Note that this function works on
             bytes not characters, so it can't be used to delimit UTF-8 strings for
@@ -78,11 +85,15 @@ struct UriParamsIter
             no splitting will occur.
         flags = flags to modify the way the parameters are handled.
   */
-  void init_(string params, ptrdiff_t length, string separators, glib.types.UriParamsFlags flags)
+  void init_(string params, string separators, glib.types.UriParamsFlags flags)
   {
-    const(char)* _params = params.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (params)
+      _length = cast(ptrdiff_t)params.length;
+
+    auto _params = cast(const(char)*)params.ptr;
     const(char)* _separators = separators.toCString(No.Alloc);
-    g_uri_params_iter_init(cast(GUriParamsIter*)&this, _params, length, _separators, flags);
+    g_uri_params_iter_init(cast(GUriParamsIter*)this._cPtr, _params, _length, _separators, flags);
   }
 
   /**
@@ -111,7 +122,7 @@ struct UriParamsIter
     char* _attribute;
     char* _value;
     GError *_err;
-    _retval = cast(bool)g_uri_params_iter_next(cast(GUriParamsIter*)&this, &_attribute, &_value, &_err);
+    _retval = cast(bool)g_uri_params_iter_next(cast(GUriParamsIter*)this._cPtr, &_attribute, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     attribute = _attribute.fromCString(Yes.Free);

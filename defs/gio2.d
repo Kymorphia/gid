@@ -4,12 +4,13 @@
 //!info docs https://www.kymorphia.com/gid/gio.html
 //!info capi https://docs.gtk.org/gio/
 
+//!kind InputVector StructAlias
+//!kind OutputVector StructAlias
 
 //# Ignore APIs which aren't useful to D binding
 //!set record[IOExtension][ignore] 1
 //!set record[IOExtensionPoint][ignore] 1
 //!set class[IOModule][ignore] 1
-//!set class[SettingsBackend].function[flatten_tree][ignore] 1
 //!set class[SettingsBackend].method[changed_tree][ignore] 1
 //!set function[io_modules_load_all_in_directory][ignore] 1
 //!set function[io_modules_load_all_in_directory_with_scope][ignore] 1
@@ -51,6 +52,20 @@
 //# Set parameters to out
 //!set callback[DBusSubtreeDispatchFunc].parameters.parameter[out_user_data][direction] out
 //!set enumeration[DBusError].function[register_error_domain].parameters.parameter[quark_volatile][direction] out
+
+//# string-length-param (Strings with array length parameters)
+//!set class[DataInputStream].method[read_upto].parameters.parameter[stop_chars].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[DataInputStream].method[read_upto_async].parameters.parameter[stop_chars].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TlsCertificate].constructor[new_from_pem].parameters.parameter[data].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+//# string-array-null-term (Null terminated string arrays)
+//!set function[file_new_build_filenamev].parameters.parameter[args].array[][zero-terminated] 1
+//!set class[IOModule].function[query].return-value.array[][zero-terminated] 1
+//!set class[SettingsBackend].function[flatten_tree].parameters.parameter[keys].array[][zero-terminated] 1
+//!set class[SettingsBackend].function[flatten_tree].parameters.parameter[values].array[][zero-terminated] 1
+
+//!set interface[DtlsConnection].method[get_channel_binding_data].parameters.parameter[data][caller-allocates] 1
+//!set class[TlsConnection].method[get_channel_binding_data].parameters.parameter[data][caller-allocates] 1
 
 //!class ListModel
 

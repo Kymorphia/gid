@@ -63,10 +63,10 @@ class Sample : gobject.boxed.Boxed
       Returns: the new #GstSample. gst_sample_unref()
             after usage.
   */
-  this(gst.buffer.Buffer buffer, gst.caps.Caps caps, gst.segment.Segment segment, gst.structure.Structure info)
+  this(gst.buffer.Buffer buffer, gst.caps.Caps caps, gst.segment.Segment segment, gst.structure.Structure info = null)
   {
     GstSample* _cretval;
-    _cretval = gst_sample_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(const(GstSegment)*)&segment, cast(GstStructure*)&info);
+    _cretval = gst_sample_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(const(GstSegment)*)&segment, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -124,9 +124,7 @@ class Sample : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_sample_get_info(cast(GstSample*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -189,7 +187,7 @@ class Sample : gobject.boxed.Boxed
   bool setInfo(gst.structure.Structure info)
   {
     bool _retval;
-    _retval = cast(bool)gst_sample_set_info(cast(GstSample*)this._cPtr, cast(GstStructure*)&info);
+    _retval = cast(bool)gst_sample_set_info(cast(GstSample*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
     return _retval;
   }
 

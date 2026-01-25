@@ -931,9 +931,11 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     bool _retval;
     GtkTreeModel* _model;
     GtkTreePath* _path;
-    _retval = cast(bool)gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, cast(int*)&x, cast(int*)&y, keyboardTip, &_model, &_path, cast(GtkTreeIter*)&iter);
+    GtkTreeIter _iter;
+    _retval = cast(bool)gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, cast(int*)&x, cast(int*)&y, keyboardTip, &_model, &_path, &_iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 

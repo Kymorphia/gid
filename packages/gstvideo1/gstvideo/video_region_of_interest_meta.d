@@ -193,7 +193,7 @@ class VideoRegionOfInterestMeta
   */
   void addParam(gst.structure.Structure s)
   {
-    gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, cast(GstStructure*)&s);
+    gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -211,9 +211,7 @@ class VideoRegionOfInterestMeta
     GstStructure* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_video_region_of_interest_meta_get_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, _name);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

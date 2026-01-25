@@ -44,17 +44,7 @@ class ByteWriter
   */
   @property gstbase.byte_reader.ByteReader parent()
   {
-    return cToD!(gstbase.byte_reader.ByteReader)(cast(void*)&(cast(GstByteWriter*)this._cPtr).parent);
-  }
-
-  /**
-      Set `parent` field.
-      Params:
-        propval = #GstByteReader parent
-  */
-  @property void parent(gstbase.byte_reader.ByteReader propval)
-  {
-    (cast(GstByteWriter*)this._cPtr).parent = cast(GstByteReader)propval;
+    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent, No.Take);
   }
 
   /**

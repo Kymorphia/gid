@@ -117,7 +117,11 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)this._cPtr, cast(GtkTextIter*)&begin, cast(GtkTextIter*)&end);
+    GtkTextIter _begin;
+    GtkTextIter _end;
+    _retval = cast(bool)gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)this._cPtr, &_begin, &_end);
+    begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 

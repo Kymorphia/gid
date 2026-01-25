@@ -163,9 +163,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     GstStructure* _cretval;
     _cretval = gst_encoding_profile_get_element_properties(cast(GstEncodingProfile*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -333,7 +331,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setElementProperties(gst.structure.Structure elementProperties)
   {
-    gst_encoding_profile_set_element_properties(cast(GstEncodingProfile*)this._cPtr, cast(GstStructure*)&elementProperties);
+    gst_encoding_profile_set_element_properties(cast(GstEncodingProfile*)this._cPtr, elementProperties ? cast(GstStructure*)elementProperties._cPtr(Yes.Dup) : null);
   }
 
   /**

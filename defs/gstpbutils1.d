@@ -7,3 +7,7 @@
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
 //!set function[codec_utils_opus_create_caps][unsupported] 1
 //!set function[codec_utils_opus_create_header][unsupported] 1
+
+//# caller-allocated-out-array (Caller allocated output array)
+//!set function[codec_utils_opus_parse_caps].parameters.parameter[channel_mapping][caller-allocates] 1
+//!set function[codec_utils_opus_parse_header].parameters.parameter[channel_mapping][caller-allocates] 1

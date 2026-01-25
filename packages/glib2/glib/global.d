@@ -151,17 +151,13 @@ int asciiDigitValue(char c)
 
     Params:
       buffer = a buffer to place the resulting string in
-      bufLen = the length of the buffer
       d = the value to convert
-    Returns: the pointer to the buffer with the converted string
 */
-string asciiDtostr(string buffer, int bufLen, double d)
+void asciiDtostr(ref char[] buffer, double d)
 {
-  char* _cretval;
-  char* _buffer = buffer.toCString(No.Alloc);
-  _cretval = g_ascii_dtostr(_buffer, bufLen, d);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
-  return _retval;
+  int _bufLen;
+  _bufLen = cast(int)buffer.length;
+  g_ascii_dtostr(buffer.ptr, _bufLen, d);
 }
 
 /**
@@ -180,20 +176,16 @@ string asciiDtostr(string buffer, int bufLen, double d)
 
     Params:
       buffer = a buffer to place the resulting string in
-      bufLen = the length of the buffer
       format = the `printf()`-style format to use for the
           code to use for converting
       d = the value to convert
-    Returns: the pointer to the buffer with the converted string
 */
-string asciiFormatd(string buffer, int bufLen, string format, double d)
+void asciiFormatd(ref char[] buffer, string format, double d)
 {
-  char* _cretval;
-  char* _buffer = buffer.toCString(No.Alloc);
+  int _bufLen;
+  _bufLen = cast(int)buffer.length;
   const(char)* _format = format.toCString(No.Alloc);
-  _cretval = g_ascii_formatd(_buffer, bufLen, _format, d);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
-  return _retval;
+  g_ascii_formatd(buffer.ptr, _bufLen, _format, d);
 }
 
 /**
@@ -234,16 +226,19 @@ int asciiStrcasecmp(string s1, string s2)
 
     Params:
       str = a string
-      len = length of str in bytes, or `-1` if str is nul-terminated
     Returns: a newly-allocated string, with all the upper case characters in
         str converted to lower case. (Note that this is unlike the old
         `funcGLib.strdown`, which modified the string in place.)
 */
-string asciiStrdown(string str, ptrdiff_t len)
+string asciiStrdown(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_ascii_strdown(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_ascii_strdown(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -491,16 +486,19 @@ ulong asciiStrtoull(string nptr, out string endptr, uint base)
 
     Params:
       str = a string
-      len = length of str in bytes, or `-1` if str is nul-terminated
     Returns: a newly-allocated string, with all the lower case characters
         in str converted to upper case. (Note that this is unlike the old
         `funcGLib.strup`, which modified the string in place.)
 */
-string asciiStrup(string str, ptrdiff_t len)
+string asciiStrup(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_ascii_strup(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_ascii_strup(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -1941,16 +1939,19 @@ string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data
     Params:
       checksumType = a #GChecksumType
       str = the string to compute the checksum of
-      length = the length of the string, or -1 if the string is null-terminated.
     Returns: the checksum as a hexadecimal string,
         or null if [glib.checksum.Checksum.new_] fails for checksum_type. The returned string
         should be freed with [glib.global.gfree] when done using it.
 */
-string computeChecksumForString(glib.types.ChecksumType checksumType, string str, ptrdiff_t length)
+string computeChecksumForString(glib.types.ChecksumType checksumType, string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_compute_checksum_for_string(checksumType, _str, length);
+  ptrdiff_t _length;
+  if (str)
+    _length = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_compute_checksum_for_string(checksumType, _str, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -2018,12 +2019,11 @@ string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte
       digestType = a #GChecksumType to use for the HMAC
       key = the key to use in the HMAC
       str = the string to compute the HMAC for
-      length = the length of the string, or -1 if the string is nul-terminated
     Returns: the HMAC as a hexadecimal string.
           The returned string should be freed with [glib.global.gfree]
           when done using it.
 */
-string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, string str, ptrdiff_t length)
+string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, string str)
 {
   char* _cretval;
   size_t _keyLen;
@@ -2031,8 +2031,12 @@ string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, str
     _keyLen = cast(size_t)key.length;
 
   auto _key = cast(const(ubyte)*)key.ptr;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_compute_hmac_for_string(digestType, _key, _keyLen, _str, length);
+  ptrdiff_t _length;
+  if (str)
+    _length = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_compute_hmac_for_string(digestType, _key, _keyLen, _str, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -5272,14 +5276,17 @@ glib.types.Quark markupErrorQuark()
 
     Params:
       text = some valid UTF-8 text
-      length = length of text in bytes, or -1 if the text is nul-terminated
     Returns: a newly allocated string with the escaped text
 */
-string markupEscapeText(string text, ptrdiff_t length)
+string markupEscapeText(string text)
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
-  _cretval = g_markup_escape_text(_text, length);
+  ptrdiff_t _length;
+  if (text)
+    _length = cast(ptrdiff_t)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
+  _cretval = g_markup_escape_text(_text, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -8188,70 +8195,6 @@ string strjoinv(string separator, string[] strArray)
 }
 
 /**
-    Portability wrapper that calls `strlcat()` on systems which have it,
-    and emulates it otherwise. Appends nul-terminated src string to dest,
-    guaranteeing nul-termination for dest. The total size of dest won't
-    exceed dest_size.
-    
-    At most dest_size - 1 characters will be copied. Unlike `strncat()`,
-    dest_size is the full size of dest, not the space left over. This
-    function does not allocate memory. It always nul-terminates (unless
-    dest_size == 0 or there were no nul characters in the dest_size
-    characters of dest to start with).
-    
-    Caveat: this is supposedly a more secure alternative to `strcat()` or
-    `strncat()`, but for real security `funcGLib.strconcat` is harder to mess up.
-
-    Params:
-      dest = destination buffer, already containing one nul-terminated string
-      src = source buffer
-      destSize = length of dest buffer in bytes (not length of existing string
-          inside dest)
-    Returns: size of attempted result, which is `MIN (dest_size, strlen
-        (original dest)) + strlen (src)`, so if retval >= dest_size,
-        truncation occurred
-*/
-size_t strlcat(string dest, string src, size_t destSize)
-{
-  size_t _retval;
-  char* _dest = dest.toCString(No.Alloc);
-  const(char)* _src = src.toCString(No.Alloc);
-  _retval = g_strlcat(_dest, _src, destSize);
-  return _retval;
-}
-
-/**
-    Portability wrapper that calls `strlcpy()` on systems which have it,
-    and emulates `strlcpy()` otherwise. Copies src to dest; dest is
-    guaranteed to be nul-terminated; src must be nul-terminated;
-    dest_size is the buffer size, not the number of bytes to copy.
-    
-    At most dest_size - 1 characters will be copied. Always nul-terminates
-    (unless dest_size is 0). This function does not allocate memory. Unlike
-    `strncpy()`, this function doesn't pad dest (so it's often faster). It
-    returns the size of the attempted result, `strlen (src)`, so if
-    retval >= dest_size, truncation occurred.
-    
-    Caveat: `strlcpy()` is supposedly more secure than `strcpy()` or `strncpy()`,
-    but if you really want to avoid screwups, `funcGLib.strdup` is an even better
-    idea.
-
-    Params:
-      dest = destination buffer
-      src = source buffer
-      destSize = length of dest in bytes
-    Returns: length of src
-*/
-size_t strlcpy(string dest, string src, size_t destSize)
-{
-  size_t _retval;
-  char* _dest = dest.toCString(No.Alloc);
-  const(char)* _src = src.toCString(No.Alloc);
-  _retval = g_strlcpy(_dest, _src, destSize);
-  return _retval;
-}
-
-/**
     A case-insensitive string comparison, corresponding to the standard
     `strncasecmp()` function on platforms which support it. It is similar
     to `funcGLib.strcasecmp` except it only compares the first `n` characters of
@@ -8364,28 +8307,6 @@ string strrstr(string haystack, string needle)
   const(char)* _haystack = haystack.toCString(No.Alloc);
   const(char)* _needle = needle.toCString(No.Alloc);
   _cretval = g_strrstr(_haystack, _needle);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
-  return _retval;
-}
-
-/**
-    Searches the string haystack for the last occurrence
-    of the string needle, limiting the length of the search
-    to haystack_len.
-
-    Params:
-      haystack = a string to search in
-      haystackLen = the maximum length of haystack in bytes. A length of `-1`
-          can be used to mean "search the entire string", like `funcGLib.strrstr`
-      needle = the string to search for
-    Returns: a pointer to the found occurrence, or `NULL` if not found
-*/
-string strrstrLen(string haystack, ptrdiff_t haystackLen, string needle)
-{
-  char* _cretval;
-  const(char)* _haystack = haystack.toCString(No.Alloc);
-  const(char)* _needle = needle.toCString(No.Alloc);
-  _cretval = g_strrstr_len(_haystack, haystackLen, _needle);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -8505,31 +8426,6 @@ string[] strsplitSet(string string_, string delimiters, int maxTokens)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
     gFree(cast(void*)_cretval);
   }
-  return _retval;
-}
-
-/**
-    Searches the string haystack for the first occurrence
-    of the string needle, limiting the length of the search
-    to haystack_len or a nul terminator byte (whichever is reached first).
-    
-    A length of `-1` can be used to mean “search the entire string”, like
-    `strstr()`.
-
-    Params:
-      haystack = a string to search in
-      haystackLen = the maximum length of haystack in bytes, or `-1` to
-          search it entirely
-      needle = the string to search for
-    Returns: a pointer to the found occurrence, or `NULL` if not found
-*/
-string strstrLen(string haystack, ptrdiff_t haystackLen, string needle)
-{
-  char* _cretval;
-  const(char)* _haystack = haystack.toCString(No.Alloc);
-  const(char)* _needle = needle.toCString(No.Alloc);
-  _cretval = g_strstr_len(_haystack, haystackLen, _needle);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -10761,15 +10657,18 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
 
     Params:
       str = a UTF-8 encoded string
-      len = length of str, in bytes, or -1 if str is nul-terminated.
     Returns: a newly allocated string, that is a
         case independent form of str.
 */
-string utf8Casefold(string str, ptrdiff_t len)
+string utf8Casefold(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_casefold(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_casefold(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -10814,15 +10713,18 @@ int utf8Collate(string str1, string str2)
 
     Params:
       str = a UTF-8 encoded string.
-      len = length of str, in bytes, or -1 if str is nul-terminated.
     Returns: a newly allocated string. This string should
         be freed with [glib.global.gfree] when you are done with it.
 */
-string utf8CollateKey(string str, ptrdiff_t len)
+string utf8CollateKey(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_collate_key(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_collate_key(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -10842,15 +10744,18 @@ string utf8CollateKey(string str, ptrdiff_t len)
 
     Params:
       str = a UTF-8 encoded string.
-      len = length of str, in bytes, or -1 if str is nul-terminated.
     Returns: a newly allocated string. This string should
         be freed with [glib.global.gfree] when you are done with it.
 */
-string utf8CollateKeyForFilename(string str, ptrdiff_t len)
+string utf8CollateKeyForFilename(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_collate_key_for_filename(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_collate_key_for_filename(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -10940,18 +10845,21 @@ dchar utf8GetChar(string p)
 
     Params:
       p = a pointer to Unicode character encoded as UTF-8
-      maxLen = the maximum number of bytes to read, or -1 if `p` is nul-terminated
     Returns: the resulting character. If `p` points to a partial
           sequence at the end of a string that could begin a valid
           character (or if max_len is zero), returns (gunichar)-2;
           otherwise, if `p` does not point to a valid UTF-8 encoded
           Unicode character, returns (gunichar)-1.
 */
-dchar utf8GetCharValidated(string p, ptrdiff_t maxLen)
+dchar utf8GetCharValidated(string p)
 {
   dchar _retval;
-  const(char)* _p = p.toCString(No.Alloc);
-  _retval = g_utf8_get_char_validated(_p, maxLen);
+  ptrdiff_t _maxLen;
+  if (p)
+    _maxLen = cast(ptrdiff_t)p.length;
+
+  auto _p = cast(const(char)*)p.ptr;
+  _retval = g_utf8_get_char_validated(_p, _maxLen);
   return _retval;
 }
 
@@ -10968,15 +10876,17 @@ dchar utf8GetCharValidated(string p, ptrdiff_t maxLen)
 
     Params:
       str = string to coerce into UTF-8
-      len = the maximum length of str to use, in bytes. If len < 0,
-            then the string is nul-terminated.
     Returns: a valid UTF-8 string whose content resembles str
 */
-string utf8MakeValid(string str, ptrdiff_t len)
+string utf8MakeValid(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_make_valid(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_make_valid(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -11010,17 +10920,20 @@ string utf8MakeValid(string str, ptrdiff_t len)
 
     Params:
       str = a UTF-8 encoded string.
-      len = length of str, in bytes, or -1 if str is nul-terminated.
       mode = the type of normalization to perform.
     Returns: a newly allocated string, that
         is the normalized form of str, or null if str
         is not valid UTF-8.
 */
-string utf8Normalize(string str, ptrdiff_t len, glib.types.NormalizeMode mode)
+string utf8Normalize(string str, glib.types.NormalizeMode mode)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_normalize(_str, len, mode);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_normalize(_str, _len, mode);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -11103,17 +11016,20 @@ string utf8PrevChar(string p)
 
     Params:
       p = a nul-terminated UTF-8 encoded string
-      len = the maximum length of `p`
       c = a Unicode character
     Returns: null if the string does not contain the character,
           otherwise, a pointer to the start of the leftmost occurrence
           of the character in the string.
 */
-string utf8Strchr(string p, ptrdiff_t len, dchar c)
+string utf8Strchr(string p, dchar c)
 {
   char* _cretval;
-  const(char)* _p = p.toCString(No.Alloc);
-  _cretval = g_utf8_strchr(_p, len, c);
+  ptrdiff_t _len;
+  if (p)
+    _len = cast(ptrdiff_t)p.length;
+
+  auto _p = cast(const(char)*)p.ptr;
+  _cretval = g_utf8_strchr(_p, _len, c);
   string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
@@ -11126,15 +11042,18 @@ string utf8Strchr(string p, ptrdiff_t len, dchar c)
 
     Params:
       str = a UTF-8 encoded string
-      len = length of str, in bytes, or -1 if str is nul-terminated.
     Returns: a newly allocated string, with all characters
          converted to lowercase.
 */
-string utf8Strdown(string str, ptrdiff_t len)
+string utf8Strdown(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_strdown(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_strdown(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -11193,17 +11112,20 @@ string utf8Strncpy(string dest, string src, size_t n)
 
     Params:
       p = a nul-terminated UTF-8 encoded string
-      len = the maximum length of `p`
       c = a Unicode character
     Returns: null if the string does not contain the character,
           otherwise, a pointer to the start of the rightmost occurrence
           of the character in the string.
 */
-string utf8Strrchr(string p, ptrdiff_t len, dchar c)
+string utf8Strrchr(string p, dchar c)
 {
   char* _cretval;
-  const(char)* _p = p.toCString(No.Alloc);
-  _cretval = g_utf8_strrchr(_p, len, c);
+  ptrdiff_t _len;
+  if (p)
+    _len = cast(ptrdiff_t)p.length;
+
+  auto _p = cast(const(char)*)p.ptr;
+  _cretval = g_utf8_strrchr(_p, _len, c);
   string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
@@ -11225,15 +11147,17 @@ string utf8Strrchr(string p, ptrdiff_t len, dchar c)
 
     Params:
       str = a UTF-8 encoded string
-      len = the maximum length of str to use, in bytes. If len < 0,
-            then the string is nul-terminated.
     Returns: a newly-allocated string which is the reverse of str
 */
-string utf8Strreverse(string str, ptrdiff_t len)
+string utf8Strreverse(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_strreverse(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_strreverse(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -11247,15 +11171,18 @@ string utf8Strreverse(string str, ptrdiff_t len)
 
     Params:
       str = a UTF-8 encoded string
-      len = length of str, in bytes, or -1 if str is nul-terminated.
     Returns: a newly allocated string, with all characters
          converted to uppercase.
 */
-string utf8Strup(string str, ptrdiff_t len)
+string utf8Strup(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  _cretval = g_utf8_strup(_str, len);
+  ptrdiff_t _len;
+  if (str)
+    _len = cast(ptrdiff_t)str.length;
+
+  auto _str = cast(const(char)*)str.ptr;
+  _cretval = g_utf8_strup(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }

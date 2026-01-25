@@ -252,15 +252,18 @@ class SelectionData : gobject.boxed.Boxed
   
       Params:
         str = a UTF-8 string
-        len = the length of str, or -1 if str is nul-terminated.
       Returns: true if the selection was successfully set,
           otherwise false.
   */
-  bool setText(string str, int len)
+  bool setText(string str)
   {
     bool _retval;
-    const(char)* _str = str.toCString(No.Alloc);
-    _retval = cast(bool)gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, len);
+    int _len;
+    if (str)
+      _len = cast(int)str.length;
+
+    auto _str = cast(const(char)*)str.ptr;
+    _retval = cast(bool)gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, _len);
     return _retval;
   }
 

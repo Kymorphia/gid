@@ -102,14 +102,17 @@ class EntryBuffer : gobject.object.ObjectWrap
   
       Params:
         initialChars = initial buffer text
-        nInitialChars = number of characters in initial_chars, or -1
       Returns: A new [gtk.entry_buffer.EntryBuffer] object.
   */
-  this(string initialChars, int nInitialChars)
+  this(string initialChars = null)
   {
     GtkEntryBuffer* _cretval;
-    const(char)* _initialChars = initialChars.toCString(No.Alloc);
-    _cretval = gtk_entry_buffer_new(_initialChars, nInitialChars);
+    int _nInitialChars;
+    if (initialChars)
+      _nInitialChars = cast(int)initialChars.length;
+
+    auto _initialChars = cast(const(char)*)initialChars.ptr;
+    _cretval = gtk_entry_buffer_new(_initialChars, _nInitialChars);
     this(_cretval, Yes.Take);
   }
 
@@ -156,12 +159,15 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         position = position at which text was inserted
         chars = text that was inserted
-        nChars = number of characters inserted
   */
-  void emitInsertedText(uint position, string chars, uint nChars)
+  void emitInsertedText(uint position, string chars)
   {
-    const(char)* _chars = chars.toCString(No.Alloc);
-    gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, nChars);
+    uint _nChars;
+    if (chars)
+      _nChars = cast(uint)chars.length;
+
+    auto _chars = cast(const(char)*)chars.ptr;
+    gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, _nChars);
   }
 
   /**
@@ -231,14 +237,17 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         position = the position at which to insert text.
         chars = the text to insert into the buffer.
-        nChars = the length of the text in characters, or -1
       Returns: The number of characters actually inserted.
   */
-  uint insertText(uint position, string chars, int nChars)
+  uint insertText(uint position, string chars)
   {
     uint _retval;
-    const(char)* _chars = chars.toCString(No.Alloc);
-    _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, nChars);
+    int _nChars;
+    if (chars)
+      _nChars = cast(int)chars.length;
+
+    auto _chars = cast(const(char)*)chars.ptr;
+    _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, _nChars);
     return _retval;
   }
 
@@ -269,12 +278,15 @@ class EntryBuffer : gobject.object.ObjectWrap
   
       Params:
         chars = the new text
-        nChars = the number of characters in text, or -1
   */
-  void setText(string chars, int nChars)
+  void setText(string chars)
   {
-    const(char)* _chars = chars.toCString(No.Alloc);
-    gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)this._cPtr, _chars, nChars);
+    int _nChars;
+    if (chars)
+      _nChars = cast(int)chars.length;
+
+    auto _chars = cast(const(char)*)chars.ptr;
+    gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)this._cPtr, _chars, _nChars);
   }
 
   /**
@@ -339,13 +351,11 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, string chars, uint nChars, gtk.entry_buffer.EntryBuffer entryBuffer))
+          $(D void callback(uint position, char[] chars, gtk.entry_buffer.EntryBuffer entryBuffer))
   
           `position` the position the text was inserted at. (optional)
   
           `chars` The text that was inserted. (optional)
-  
-          `nChars` The number of characters that were inserted. (optional)
   
           `entryBuffer` the instance the signal is connected to (optional)
   
@@ -356,10 +366,9 @@ class EntryBuffer : gobject.object.ObjectWrap
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
-  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == uint)))
-  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.entry_buffer.EntryBuffer)))
-  && Parameters!T.length < 5)
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == char[])))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_buffer.EntryBuffer)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -371,17 +380,18 @@ class EntryBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
+      auto nChars = getVal!(uint)(&_paramVals[3]);
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
 
       static if (Parameters!T.length > 1)
-        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
-
-
-      static if (Parameters!T.length > 2)
-        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
-
-      static if (Parameters!T.length > 3)
-        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
-
+      {
+        auto _cArray = getVal!(char**)(&_paramVals[2]);
+        char[] _dArray;
+        _dArray = cast(char[])_cArray[0 .. nChars];
+        _paramTuple[1] = _dArray;
+      }
       _dClosure.cb(_paramTuple[]);
     }
 

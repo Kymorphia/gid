@@ -306,13 +306,16 @@ class IMContext : gobject.object.ObjectWrap
         text = text surrounding the insertion point, as UTF-8.
                  the preedit string should not be included within
                  text.
-        len = the length of text, or -1 if text is nul-terminated
         cursorIndex = the byte index of the insertion cursor within text.
   */
-  void setSurrounding(string text, int len, int cursorIndex)
+  void setSurrounding(string text, int cursorIndex)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_im_context_set_surrounding(cast(GtkIMContext*)this._cPtr, _text, len, cursorIndex);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_im_context_set_surrounding(cast(GtkIMContext*)this._cPtr, _text, _len, cursorIndex);
   }
 
   /**

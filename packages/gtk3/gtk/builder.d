@@ -323,14 +323,17 @@ class Builder : gobject.object.ObjectWrap
   
       Params:
         string_ = a user interface (XML) description
-        length = the length of string, or -1
       Returns: a #GtkBuilder containing the interface described by string
   */
-  static gtk.builder.Builder newFromString(string string_, ptrdiff_t length)
+  static gtk.builder.Builder newFromString(string string_)
   {
     GtkBuilder* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = gtk_builder_new_from_string(_string_, length);
+    ptrdiff_t _length;
+    if (string_)
+      _length = cast(ptrdiff_t)string_.length;
+
+    auto _string_ = cast(const(char)*)string_.ptr;
+    _cretval = gtk_builder_new_from_string(_string_, _length);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }
@@ -414,16 +417,19 @@ class Builder : gobject.object.ObjectWrap
   
       Params:
         buffer = the string to parse
-        length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: A positive value on success, 0 if an error occurred
       Throws: [ErrorWrap]
   */
-  uint addFromString(string buffer, size_t length)
+  uint addFromString(string buffer)
   {
     uint _retval;
-    const(char)* _buffer = buffer.toCString(No.Alloc);
+    size_t _length;
+    if (buffer)
+      _length = cast(size_t)buffer.length;
+
+    auto _buffer = cast(const(char)*)buffer.ptr;
     GError *_err;
-    _retval = gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, length, &_err);
+    _retval = gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -515,15 +521,18 @@ class Builder : gobject.object.ObjectWrap
   
       Params:
         buffer = the string to parse
-        length = the length of buffer (may be -1 if buffer is nul-terminated)
         objectIds = nul-terminated array of objects to build
       Returns: A positive value on success, 0 if an error occurred
       Throws: [ErrorWrap]
   */
-  uint addObjectsFromString(string buffer, size_t length, string[] objectIds)
+  uint addObjectsFromString(string buffer, string[] objectIds)
   {
     uint _retval;
-    const(char)* _buffer = buffer.toCString(No.Alloc);
+    size_t _length;
+    if (buffer)
+      _length = cast(size_t)buffer.length;
+
+    auto _buffer = cast(const(char)*)buffer.ptr;
     char*[] _tmpobjectIds;
     foreach (s; objectIds)
       _tmpobjectIds ~= s.toCString(No.Alloc);
@@ -531,7 +540,7 @@ class Builder : gobject.object.ObjectWrap
     char** _objectIds = _tmpobjectIds.ptr;
 
     GError *_err;
-    _retval = gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, length, _objectIds, &_err);
+    _retval = gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, _objectIds, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -616,16 +625,19 @@ class Builder : gobject.object.ObjectWrap
         widget = the widget that is being extended
         templateType = the type that the template is for
         buffer = the string to parse
-        length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: A positive value on success, 0 if an error occurred
       Throws: [ErrorWrap]
   */
-  uint extendWithTemplate(gtk.widget.Widget widget, gobject.types.GType templateType, string buffer, size_t length)
+  uint extendWithTemplate(gtk.widget.Widget widget, gobject.types.GType templateType, string buffer)
   {
     uint _retval;
-    const(char)* _buffer = buffer.toCString(No.Alloc);
+    size_t _length;
+    if (buffer)
+      _length = cast(size_t)buffer.length;
+
+    auto _buffer = cast(const(char)*)buffer.ptr;
     GError *_err;
-    _retval = gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, templateType, _buffer, length, &_err);
+    _retval = gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, templateType, _buffer, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

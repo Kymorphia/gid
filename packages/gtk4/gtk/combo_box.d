@@ -448,7 +448,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   bool getActiveIter(out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, cast(GtkTreeIter*)&iter);
+    GtkTreeIter _iter;
+    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, &_iter);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -651,9 +653,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setActiveIter(gtk.tree_iter.TreeIter iter)
+  void setActiveIter(gtk.tree_iter.TreeIter iter = null)
   {
-    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, cast(GtkTreeIter*)&iter);
+    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -779,7 +781,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), *cast(gtk.tree_iter.TreeIter*)iter);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;

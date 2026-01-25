@@ -405,18 +405,21 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Params:
         buffer = the string to parse
-        length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: The merge id for the merged UI. The merge id can be used
           to unmerge the UI with [gtk.uimanager.UIManager.removeUi]. If an error occurred,
           the return value is 0.
       Throws: [ErrorWrap]
   */
-  uint addUiFromString(string buffer, ptrdiff_t length)
+  uint addUiFromString(string buffer)
   {
     uint _retval;
-    const(char)* _buffer = buffer.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (buffer)
+      _length = cast(ptrdiff_t)buffer.length;
+
+    auto _buffer = cast(const(char)*)buffer.ptr;
     GError *_err;
-    _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)this._cPtr, _buffer, length, &_err);
+    _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)this._cPtr, _buffer, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -345,9 +345,9 @@ class Aggregator : gst.element.Element
         duration = The duration of the next output buffer
         info = a #GstStructure containing additional information
   */
-  void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info)
+  void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info = null)
   {
-    gst_aggregator_selected_samples(cast(GstAggregator*)this._cPtr, pts, dts, duration, cast(GstStructure*)&info);
+    gst_aggregator_selected_samples(cast(GstAggregator*)this._cPtr, pts, dts, duration, info ? cast(GstStructure*)info._cPtr(No.Dup) : null);
   }
 
   /**

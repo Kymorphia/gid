@@ -5,6 +5,7 @@ import gid.gid;
 import gobject.boxed;
 import gstsdp.c.functions;
 import gstsdp.c.types;
+import gstsdp.mikeypayload_spparam;
 import gstsdp.types;
 
 /**
@@ -334,13 +335,11 @@ class MIKEYPayload : gobject.boxed.Boxed
         idx = an index
       Returns: the #GstMIKEYPayloadSPParam at idx in payload
   */
-  gstsdp.types.MIKEYPayloadSPParam spGetParam(uint idx)
+  gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam spGetParam(uint idx)
   {
     const(GstMIKEYPayloadSPParam)* _cretval;
     _cretval = gst_mikey_payload_sp_get_param(cast(const(GstMIKEYPayload)*)this._cPtr, idx);
-    gstsdp.types.MIKEYPayloadSPParam _retval;
-    if (_cretval)
-      _retval = *cast(gstsdp.types.MIKEYPayloadSPParam*)_cretval;
+    auto _retval = _cretval ? new gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam(cast(GstMIKEYPayloadSPParam*)_cretval, No.Take) : null;
     return _retval;
   }
 

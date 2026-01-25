@@ -159,7 +159,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
 bool ptpInitFull(gst.structure.Structure config)
 {
   bool _retval;
-  _retval = cast(bool)gst_ptp_init_full(cast(const(GstStructure)*)&config);
+  _retval = cast(bool)gst_ptp_init_full(config ? cast(const(GstStructure)*)config._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -203,7 +203,7 @@ gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
     bool _dretval;
     auto _dlg = cast(gstnet.types.PtpStatisticsCallback*)userData;
 
-    _dretval = (*_dlg)(domain, *cast(gst.structure.Structure*)stats);
+    _dretval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.Take) : null);
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;

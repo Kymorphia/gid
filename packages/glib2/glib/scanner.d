@@ -370,12 +370,15 @@ class Scanner
   
       Params:
         text = the text buffer to scan
-        textLen = the length of the text buffer
   */
-  void inputText(string text, uint textLen)
+  void inputText(string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    g_scanner_input_text(cast(GScanner*)this._cPtr, _text, textLen);
+    uint _textLen;
+    if (text)
+      _textLen = cast(uint)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    g_scanner_input_text(cast(GScanner*)this._cPtr, _text, _textLen);
   }
 
   /**

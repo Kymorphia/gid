@@ -2818,7 +2818,7 @@ enum GTokenType
 
 /**
     Specifies which nodes are visited during several of the tree
-    functions, including [glib.types.Node.traverse] and [glib.types.Node.find].
+    functions, including [glib.node.Node.traverse] and [glib.node.Node.find].
 */
 enum GTraverseFlags : uint
 {
@@ -2859,7 +2859,7 @@ enum GTraverseFlags : uint
 
 /**
     Specifies the type of traversal performed by [glib.tree.Tree.traverse],
-    [glib.types.Node.traverse] and [glib.types.Node.find]. The different orders are
+    [glib.node.Node.traverse] and [glib.node.Node.find]. The different orders are
     illustrated here:
     $(LIST
       * In order: A, B, C, D, E, F, G, H, I

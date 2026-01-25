@@ -6,6 +6,7 @@ import harfbuzz.blob;
 import harfbuzz.buffer;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
+import harfbuzz.color_line;
 import harfbuzz.draw_funcs;
 import harfbuzz.draw_state;
 import harfbuzz.face;
@@ -150,9 +151,6 @@ alias UnicodeGeneralCategory = hb_unicode_general_category_t;
 alias AatLayoutFeatureSelectorInfo = hb_aat_layout_feature_selector_info_t;
 
 /** */
-alias ColorLine = hb_color_line_t;
-
-/** */
 alias ColorStop = hb_color_stop_t;
 
 /** */
@@ -218,7 +216,7 @@ alias BufferMessageFunc = harfbuzz.types.Bool delegate(harfbuzz.buffer.Buffer bu
       colorStops = Array of #hb_color_stop_t to populate
     Returns: the total number of color stops in color_line
 */
-alias ColorLineGetColorStopsFunc = uint delegate(harfbuzz.types.ColorLine colorLine, void* colorLineData, uint start, ref harfbuzz.types.ColorStop[] colorStops);
+alias ColorLineGetColorStopsFunc = uint delegate(harfbuzz.color_line.ColorLine colorLine, void* colorLineData, uint start, ref harfbuzz.types.ColorStop[] colorStops);
 
 /**
     A virtual method for the hb_color_line_t to fetches the extend mode.
@@ -228,7 +226,7 @@ alias ColorLineGetColorStopsFunc = uint delegate(harfbuzz.types.ColorLine colorL
       colorLineData = the data accompanying color_line
     Returns: the extend mode of color_line
 */
-alias ColorLineGetExtendFunc = harfbuzz.types.PaintExtend delegate(harfbuzz.types.ColorLine colorLine, void* colorLineData);
+alias ColorLineGetExtendFunc = harfbuzz.types.PaintExtend delegate(harfbuzz.color_line.ColorLine colorLine, void* colorLineData);
 
 /**
     A virtual method for destroy user-data callbacks.
@@ -603,7 +601,7 @@ alias PaintImageFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.PaintFu
       x2 = X coordinate of the third point
       y2 = Y coordinate of the third point
 */
-alias PaintLinearGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2);
+alias PaintLinearGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2);
 
 /**
     A virtual method for the #hb_paint_funcs_t to undo
@@ -742,7 +740,7 @@ alias PaintPushTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fun
       y1 = Y coordinate of the second circle's center
       r1 = radius of the second circle
 */
-alias PaintRadialGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1);
+alias PaintRadialGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1);
 
 /**
     A virtual method for the #hb_paint_funcs_t to paint a sweep
@@ -767,7 +765,7 @@ alias PaintRadialGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fu
       startAngle = the start angle, in radians
       endAngle = the end angle, in radians
 */
-alias PaintSweepGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle);
+alias PaintSweepGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle);
 
 /**
     Callback function for [harfbuzz.global.faceCreateForTables].

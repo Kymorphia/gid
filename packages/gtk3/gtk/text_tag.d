@@ -1146,7 +1146,7 @@ class TextTag : gobject.object.ObjectWrap
   bool event(gobject.object.ObjectWrap eventObject, gdk.event.Event event, gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_tag_event(cast(GtkTextTag*)this._cPtr, eventObject ? cast(GObject*)eventObject._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cast(const(GtkTextIter)*)&iter);
+    _retval = cast(bool)gtk_text_tag_event(cast(GtkTextTag*)this._cPtr, eventObject ? cast(GObject*)eventObject._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 

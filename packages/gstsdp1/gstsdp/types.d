@@ -58,9 +58,6 @@ alias MIKEYEncryptInfo = GstMIKEYEncryptInfo*;
 /** */
 alias MIKEYMapSRTP = GstMIKEYMapSRTP;
 
-/** */
-alias MIKEYPayloadSPParam = GstMIKEYPayloadSPParam;
-
 /**
     The supported MIKEY version 1.
 */

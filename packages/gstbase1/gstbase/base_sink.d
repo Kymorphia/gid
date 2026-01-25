@@ -418,7 +418,7 @@ class BaseSink : gst.element.Element
   gst.types.FlowReturn doPreroll(gst.mini_object.MiniObject obj)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)this._cPtr, cast(GstMiniObject*)&obj);
+    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)this._cPtr, obj ? cast(GstMiniObject*)obj._cPtr(No.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -543,9 +543,7 @@ class BaseSink : gst.element.Element
   {
     GstStructure* _cretval;
     _cretval = gst_base_sink_get_stats(cast(GstBaseSink*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

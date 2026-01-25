@@ -119,7 +119,9 @@ class GutterLines : gobject.object.ObjectWrap
   */
   void getIterAtLine(out gtk.text_iter.TextIter iter, uint line)
   {
-    gtk_source_gutter_lines_get_iter_at_line(cast(GtkSourceGutterLines*)this._cPtr, cast(GtkTextIter*)&iter, line);
+    GtkTextIter _iter;
+    gtk_source_gutter_lines_get_iter_at_line(cast(GtkSourceGutterLines*)this._cPtr, &_iter, line);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**

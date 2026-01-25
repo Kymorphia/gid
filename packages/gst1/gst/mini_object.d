@@ -1,8 +1,9 @@
-/// Module for [MiniObject] struct
+/// Module for [MiniObject] class
 module gst.mini_object;
 
 import gid.gid;
 import glib.types;
+import gobject.boxed;
 import gobject.types;
 import gst.c.functions;
 import gst.c.types;
@@ -36,48 +37,198 @@ import gst.types;
     A weak reference can be added and remove with [gst.mini_object.MiniObject.weakRef]
     and [gst.mini_object.MiniObject.weakUnref] respectively.
 */
-struct MiniObject
+class MiniObject : gobject.boxed.Boxed
 {
-  /**
-      the GType of the object
-  */
-  GType type;
 
   /**
-      atomic refcount
+      Create a `mini_object.MiniObject` boxed type.
+      Params:
+        type = the GType of the object
+        refcount = atomic refcount
+        lockstate = atomic state of the locks
+        flags = extra flags.
+        copy = a copy function
+        dispose = a dispose function
+        free = the free function
   */
-  int refcount;
-
-  /**
-      atomic state of the locks
-  */
-  int lockstate;
-
-  /**
-      extra flags.
-  */
-  uint flags;
-
-  /**
-      a copy function
-  */
-  GstMiniObjectCopyFunction copy;
-
-  /**
-      a dispose function
-  */
-  GstMiniObjectDisposeFunction dispose;
-
-  /**
-      the free function
-  */
-  GstMiniObjectFreeFunction free;
+  this(gobject.types.GType type = gobject.types.GType.init, int refcount = int.init, int lockstate = int.init, uint flags = uint.init, GstMiniObjectCopyFunction copy = GstMiniObjectCopyFunction.init, GstMiniObjectDisposeFunction dispose = GstMiniObjectDisposeFunction.init, GstMiniObjectFreeFunction free = GstMiniObjectFreeFunction.init)
+  {
+    super(gMalloc(GstMiniObject.sizeof), Yes.Take);
+    this.type = type;
+    this.refcount = refcount;
+    this.lockstate = lockstate;
+    this.flags = flags;
+    this.copy = copy;
+    this.dispose = dispose;
+    this.free = free;
+  }
 
   /** */
-  uint privUint;
+  this(void* ptr, Flag!"Take" take)
+  {
+    super(cast(void*)ptr, take);
+  }
 
   /** */
-  void* privPointer;
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  {
+    return dup ? copy_ : _cInstancePtr;
+  }
+
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_mini_object_get_type != &gidSymbolNotFound ? gst_mini_object_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MiniObject self()
+  {
+    return this;
+  }
+
+  /**
+      Get `type` field.
+      Returns: the GType of the object
+  */
+  @property gobject.types.GType type()
+  {
+    return (cast(GstMiniObject*)this._cPtr).type;
+  }
+
+  /**
+      Set `type` field.
+      Params:
+        propval = the GType of the object
+  */
+  @property void type(gobject.types.GType propval)
+  {
+    (cast(GstMiniObject*)this._cPtr).type = propval;
+  }
+
+  /**
+      Get `refcount` field.
+      Returns: atomic refcount
+  */
+  @property int refcount()
+  {
+    return (cast(GstMiniObject*)this._cPtr).refcount;
+  }
+
+  /**
+      Set `refcount` field.
+      Params:
+        propval = atomic refcount
+  */
+  @property void refcount(int propval)
+  {
+    (cast(GstMiniObject*)this._cPtr).refcount = propval;
+  }
+
+  /**
+      Get `lockstate` field.
+      Returns: atomic state of the locks
+  */
+  @property int lockstate()
+  {
+    return (cast(GstMiniObject*)this._cPtr).lockstate;
+  }
+
+  /**
+      Set `lockstate` field.
+      Params:
+        propval = atomic state of the locks
+  */
+  @property void lockstate(int propval)
+  {
+    (cast(GstMiniObject*)this._cPtr).lockstate = propval;
+  }
+
+  /**
+      Get `flags` field.
+      Returns: extra flags.
+  */
+  @property uint flags()
+  {
+    return (cast(GstMiniObject*)this._cPtr).flags;
+  }
+
+  /**
+      Set `flags` field.
+      Params:
+        propval = extra flags.
+  */
+  @property void flags(uint propval)
+  {
+    (cast(GstMiniObject*)this._cPtr).flags = propval;
+  }
+
+  /**
+      Get `copy` field.
+      Returns: a copy function
+  */
+  @property GstMiniObjectCopyFunction copy()
+  {
+    return (cast(GstMiniObject*)this._cPtr).copy;
+  }
+
+  /**
+      Set `copy` field.
+      Params:
+        propval = a copy function
+  */
+
+  @property void copy(GstMiniObjectCopyFunction propval)
+  {
+    (cast(GstMiniObject*)this._cPtr).copy = propval;
+  }
+
+  /**
+      Get `dispose` field.
+      Returns: a dispose function
+  */
+  @property GstMiniObjectDisposeFunction dispose()
+  {
+    return (cast(GstMiniObject*)this._cPtr).dispose;
+  }
+
+  /**
+      Set `dispose` field.
+      Params:
+        propval = a dispose function
+  */
+
+  @property void dispose(GstMiniObjectDisposeFunction propval)
+  {
+    (cast(GstMiniObject*)this._cPtr).dispose = propval;
+  }
+
+  /**
+      Get `free` field.
+      Returns: the free function
+  */
+  @property GstMiniObjectFreeFunction free()
+  {
+    return (cast(GstMiniObject*)this._cPtr).free;
+  }
+
+  /**
+      Set `free` field.
+      Params:
+        propval = the free function
+  */
+
+  @property void free(GstMiniObjectFreeFunction propval)
+  {
+    (cast(GstMiniObject*)this._cPtr).free = propval;
+  }
 
   /**
       This adds parent as a parent for object. Having one ore more parents affects the
@@ -94,7 +245,7 @@ struct MiniObject
   */
   void addParent(gst.mini_object.MiniObject parent)
   {
-    gst_mini_object_add_parent(cast(GstMiniObject*)&this, cast(GstMiniObject*)&parent);
+    gst_mini_object_add_parent(cast(GstMiniObject*)this._cPtr, parent ? cast(GstMiniObject*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -108,7 +259,7 @@ struct MiniObject
   */
   void* getQdata(glib.types.Quark quark)
   {
-    auto _retval = gst_mini_object_get_qdata(cast(GstMiniObject*)&this, quark);
+    auto _retval = gst_mini_object_get_qdata(cast(GstMiniObject*)this._cPtr, quark);
     return _retval;
   }
 
@@ -128,7 +279,7 @@ struct MiniObject
   bool isWritable()
   {
     bool _retval;
-    _retval = cast(bool)gst_mini_object_is_writable(cast(const(GstMiniObject)*)&this);
+    _retval = cast(bool)gst_mini_object_is_writable(cast(const(GstMiniObject)*)this._cPtr);
     return _retval;
   }
 
@@ -142,7 +293,7 @@ struct MiniObject
   bool lock(gst.types.LockFlags flags)
   {
     bool _retval;
-    _retval = cast(bool)gst_mini_object_lock(cast(GstMiniObject*)&this, flags);
+    _retval = cast(bool)gst_mini_object_lock(cast(GstMiniObject*)this._cPtr, flags);
     return _retval;
   }
 
@@ -155,7 +306,7 @@ struct MiniObject
   */
   void removeParent(gst.mini_object.MiniObject parent)
   {
-    gst_mini_object_remove_parent(cast(GstMiniObject*)&this, cast(GstMiniObject*)&parent);
+    gst_mini_object_remove_parent(cast(GstMiniObject*)this._cPtr, parent ? cast(GstMiniObject*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -188,7 +339,7 @@ struct MiniObject
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-    gst_mini_object_set_qdata(cast(GstMiniObject*)&this, quark, data, _destroyCB);
+    gst_mini_object_set_qdata(cast(GstMiniObject*)this._cPtr, quark, data, _destroyCB);
   }
 
   /**
@@ -203,7 +354,7 @@ struct MiniObject
   */
   void* stealQdata(glib.types.Quark quark)
   {
-    auto _retval = gst_mini_object_steal_qdata(cast(GstMiniObject*)&this, quark);
+    auto _retval = gst_mini_object_steal_qdata(cast(GstMiniObject*)this._cPtr, quark);
     return _retval;
   }
 
@@ -215,7 +366,7 @@ struct MiniObject
   */
   void unlock(gst.types.LockFlags flags)
   {
-    gst_mini_object_unlock(cast(GstMiniObject*)&this, flags);
+    gst_mini_object_unlock(cast(GstMiniObject*)this._cPtr, flags);
   }
 
   /**
@@ -231,12 +382,10 @@ struct MiniObject
         newdata = pointer to new mini-object
       Returns: true if newdata was different from olddata
   */
-  static bool replace(ref gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
+  static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null)
   {
     bool _retval;
-    GstMiniObject* _olddata;
-    _retval = cast(bool)gst_mini_object_replace(&_olddata, cast(GstMiniObject*)&newdata);
-    olddata = *cast(MiniObject*)_olddata;
+    _retval = cast(bool)gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -254,12 +403,10 @@ struct MiniObject
         newdata = pointer to new mini-object
       Returns: true if newdata was different from olddata
   */
-  static bool take(ref gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
+  static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
   {
     bool _retval;
-    GstMiniObject* _olddata;
-    _retval = cast(bool)gst_mini_object_take(&_olddata, cast(GstMiniObject*)&newdata);
-    olddata = *cast(MiniObject*)_olddata;
+    _retval = cast(bool)gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
     return _retval;
   }
 }

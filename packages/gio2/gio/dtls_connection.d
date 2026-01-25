@@ -277,6 +277,30 @@ interface DtlsConnection
   gio.tls_certificate.TlsCertificate getCertificate();
 
   /**
+      Query the TLS backend for TLS channel binding data of type for conn.
+      
+      This call retrieves TLS channel binding data as specified in RFC
+      [5056](https://tools.ietf.org/html/rfc5056), RFC
+      [5929](https://tools.ietf.org/html/rfc5929), and related RFCs.  The
+      binding data is returned in data.  The data is resized by the callee
+      using #GByteArray buffer management and will be freed when the data
+      is destroyed by [glib.byte_array.ByteArray.unref]. If data is null, it will only
+      check whether TLS backend is able to fetch the data (e.g. whether type
+      is supported by the TLS backend). It does not guarantee that the data
+      will be available though.  That could happen if TLS connection does not
+      support type or the binding data is not available yet due to additional
+      negotiation or input required.
+  
+      Params:
+        type = #GTlsChannelBindingType type of data to fetch
+        data = #GByteArray is
+                 filled with the binding data, or null
+      Returns: true on success, false otherwise
+      Throws: [ErrorWrap]
+  */
+  bool getChannelBindingData(gio.types.TlsChannelBindingType type, ref ubyte[] data);
+
+  /**
       Returns the name of the current DTLS ciphersuite, or null if the
       connection has not handshaked or has been closed. Beware that the TLS
       backend may use any of multiple different naming conventions, because

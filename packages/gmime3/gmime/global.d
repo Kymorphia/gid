@@ -471,3 +471,95 @@ string utilsUnstructuredHeaderFold(gmime.parser_options.ParserOptions options, g
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
+
+/**
+    Performs a 'decode step' on a chunk of yEncoded data of length
+    inlen pointed to by inbuf and writes to outbuf. Assumes the =ybegin
+    and =ypart lines have already been stripped off.
+    
+    To get the crc32 value of the part, use #GMIME_YENCODE_CRC_FINAL
+    (pcrc). If there are more parts, you should reuse crc without
+    re-initializing. Once all parts have been decoded, you may get the
+    combined crc32 value of all the parts using #GMIME_YENCODE_CRC_FINAL
+    (crc).
+
+    Params:
+      inbuf = input buffer
+      outbuf = output buffer
+      state = ydecode state
+      pcrc = part crc state
+      crc = crc state
+    Returns: the number of bytes decoded.
+*/
+size_t ydecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc)
+{
+  size_t _retval;
+  size_t _inlen;
+  if (inbuf)
+    _inlen = cast(size_t)inbuf.length;
+
+  auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+  _retval = g_mime_ydecode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&pcrc, cast(uint*)&crc);
+  return _retval;
+}
+
+/**
+    Call this function when finished encoding data with
+    [gmime.global.yencodeStep] to flush off the remaining state.
+    
+    #GMIME_YENCODE_CRC_FINAL (pcrc) will give you the crc32 of the
+    encoded "part". If there are more "parts" to encode, you should
+    re-use crc when encoding the next "parts" and then use
+    #GMIME_YENCODE_CRC_FINAL (crc) to get the combined crc32 value of
+    all the parts.
+
+    Params:
+      inbuf = input buffer
+      outbuf = output buffer
+      state = yencode state
+      pcrc = part crc state
+      crc = crc state
+    Returns: the number of bytes encoded.
+*/
+size_t yencodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc)
+{
+  size_t _retval;
+  size_t _inlen;
+  if (inbuf)
+    _inlen = cast(size_t)inbuf.length;
+
+  auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+  _retval = g_mime_yencode_close(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&pcrc, cast(uint*)&crc);
+  return _retval;
+}
+
+/**
+    Performs an yEncode 'encode step' on a chunk of raw data of length
+    inlen pointed to by inbuf and writes to outbuf.
+    
+    state should be initialized to #GMIME_YENCODE_STATE_INIT before
+    beginning making the first call to this function. Subsequent calls
+    should reuse state.
+    
+    Along the same lines, pcrc and crc should be initialized to
+    #GMIME_YENCODE_CRC_INIT before using.
+
+    Params:
+      inbuf = input buffer
+      outbuf = output buffer
+      state = yencode state
+      pcrc = part crc state
+      crc = crc state
+    Returns: the number of bytes encoded.
+*/
+size_t yencodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc)
+{
+  size_t _retval;
+  size_t _inlen;
+  if (inbuf)
+    _inlen = cast(size_t)inbuf.length;
+
+  auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+  _retval = g_mime_yencode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&pcrc, cast(uint*)&crc);
+  return _retval;
+}

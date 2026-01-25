@@ -5,6 +5,7 @@ import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gst.caps;
+import gst.mini_object;
 import gst.query;
 import gst.sample;
 import gst.types;
@@ -894,6 +895,73 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pull-sample", closure, after);
+  }
+
+  /**
+      Connect to `TryPullObject` signal.
+  
+      This function blocks until a sample or an event becomes available or the appsink
+        element is set to the READY/NULL state or the timeout expires.
+        
+        This function will only return samples when the appsink is in the PLAYING
+        state. All rendered samples and events will be put in a queue so that the application
+        can pull them at its own rate.
+        Events can be pulled when the appsink is in the READY, PAUSED or PLAYING state.
+        
+        Note that when the application does not pull samples fast enough, the
+        queued samples could consume a lot of memory, especially when dealing with
+        raw video frames. It's possible to control the behaviour of the queue with
+        the "drop" and "max-buffers" / "max-bytes" / "max-time" set of properties.
+        
+        This function will only pull serialized events, excluding
+        the EOS event for which this functions returns
+        null. Use [gstapp.app_sink.AppSink.isEos] to check for the EOS condition.
+        
+        This signal is a variant of #GstAppSink::try-pull-sample: that can be used
+        to handle incoming events as well as samples.
+        
+        Note that future releases may extend this API to return other object types
+        so make sure that your code is checking for the actual type it is handling.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D gst.mini_object.MiniObject callback(ulong timeout, gstapp.app_sink.AppSink appSink))
+  
+          `timeout` the maximum amount of time to wait for a sample (optional)
+  
+          `appSink` the instance the signal is connected to (optional)
+  
+          `Returns` a #GstSample or a #GstEvent or NULL when the appsink is stopped or EOS or the timeout expires.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectTryPullObject(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == gst.mini_object.MiniObject)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
+      setVal!(gst.mini_object.MiniObject)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("try-pull-object", closure, after);
   }
 
   /**

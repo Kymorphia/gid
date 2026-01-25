@@ -221,7 +221,7 @@ class Task : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), *cast(glib.thread.Thread*)thread);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _enterFuncCB = enterFunc ? &_enterFuncCallback : null;
     auto _enterFunc = enterFunc ? freezeDelegate(cast(void*)&enterFunc) : null;
@@ -243,7 +243,7 @@ class Task : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), *cast(glib.thread.Thread*)thread);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _leaveFuncCB = leaveFunc ? &_leaveFuncCallback : null;
     auto _leaveFunc = leaveFunc ? freezeDelegate(cast(void*)&leaveFunc) : null;

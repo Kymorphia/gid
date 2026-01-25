@@ -353,7 +353,7 @@ interface TreeModel
         parent = the #GtkTreeIter-struct, or null
       Returns: true, if iter has been set to the first child
   */
-  bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent);
+  bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null);
 
   /**
       Returns true if iter has children, false otherwise.
@@ -374,7 +374,7 @@ interface TreeModel
         iter = the #GtkTreeIter-struct, or null
       Returns: the number of children of iter
   */
-  int iterNChildren(gtk.tree_iter.TreeIter iter);
+  int iterNChildren(gtk.tree_iter.TreeIter iter = null);
 
   /**
       Sets iter to point to the node following it at the current level.

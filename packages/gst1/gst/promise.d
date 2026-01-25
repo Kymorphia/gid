@@ -107,16 +107,6 @@ class Promise : gobject.boxed.Boxed
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstPromise*)this._cPtr).parent);
   }
 
-  /**
-      Set `parent` field.
-      Params:
-        propval = parent #GstMiniObject
-  */
-  @property void parent(gst.mini_object.MiniObject propval)
-  {
-    (cast(GstPromise*)this._cPtr).parent = cast(GstMiniObject)propval;
-  }
-
   /** */
   this()
   {
@@ -170,9 +160,7 @@ class Promise : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_promise_get_reply(cast(GstPromise*)this._cPtr);
-    gst.structure.Structure _retval;
-    if (_cretval)
-      _retval = *cast(gst.structure.Structure*)_cretval;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -197,9 +185,9 @@ class Promise : gobject.boxed.Boxed
       Params:
         s = a #GstStructure with the the reply contents
   */
-  void reply(gst.structure.Structure s)
+  void reply(gst.structure.Structure s = null)
   {
-    gst_promise_reply(cast(GstPromise*)this._cPtr, cast(GstStructure*)&s);
+    gst_promise_reply(cast(GstPromise*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
   }
 
   /**

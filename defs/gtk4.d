@@ -4,6 +4,9 @@
 //!info docs https://www.kymorphia.com/gid/gtk.html
 //!info capi https://docs.gtk.org/gtk4/
 
+//!kind BitsetIter Boxed
+//!kind RequestedSize StructAlias
+
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
 //!set class[ListStore].method[reorder][unsupported] 1
 
@@ -37,6 +40,19 @@
 //!set interface[Editable].method[insert_text].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set class[IMContext].method[set_surrounding].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set class[IMContext].method[set_surrounding_with_selection].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+//# string-length-param (Strings with array length parameters)
+//!set class[Builder].method[add_from_string].parameters.parameter[buffer].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[Builder].method[add_objects_from_string].parameters.parameter[buffer].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[Builder].method[extend_with_template].parameters.parameter[buffer].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[CssProvider].method[load_from_data].parameters.parameter[data].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].constructor[new].parameters.parameter[initial_chars].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].method[emit_inserted_text].parameters.parameter[chars].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].method[insert_text].parameters.parameter[chars].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].method[set_text].parameters.parameter[chars].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+//!set class[EntryBuffer].glib:signal[inserted-text].parameters.parameter[chars].type '<array length="2" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].glib:signal[insert-text].parameters.parameter[text].type '<array length="2" c:type="gchar*"><type name="char" c:type="char"/></array>'
+//!set interface[Editable].glib:signal[insert-text].parameters.parameter[text].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
 
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][ignore] 1

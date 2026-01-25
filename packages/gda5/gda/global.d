@@ -833,9 +833,7 @@ gda.binary.Binary stringToBinary(string str = null)
   GdaBinary* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = gda_string_to_binary(_str);
-  gda.binary.Binary _retval;
-  if (_cretval)
-    _retval = *cast(gda.binary.Binary*)_cretval;
+  auto _retval = _cretval ? new gda.binary.Binary(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 

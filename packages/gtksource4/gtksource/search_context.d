@@ -147,8 +147,12 @@ class SearchContext : gobject.object.ObjectWrap
   bool backward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
+    GtkTextIter _matchStart;
+    GtkTextIter _matchEnd;
     gboolean _hasWrappedAround;
-    _retval = cast(bool)gtk_source_search_context_backward(cast(GtkSourceSearchContext*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GtkTextIter*)&matchStart, cast(GtkTextIter*)&matchEnd, &_hasWrappedAround);
+    _retval = cast(bool)gtk_source_search_context_backward(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, &_matchStart, &_matchEnd, &_hasWrappedAround);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     hasWrappedAround = cast(bool)_hasWrappedAround;
     return _retval;
   }
@@ -181,7 +185,7 @@ class SearchContext : gobject.object.ObjectWrap
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_search_context_backward_async(cast(GtkSourceSearchContext*)this._cPtr, cast(const(GtkTextIter)*)&iter, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_source_search_context_backward_async(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -203,11 +207,15 @@ class SearchContext : gobject.object.ObjectWrap
   bool backwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
+    GtkTextIter _matchStart;
+    GtkTextIter _matchEnd;
     gboolean _hasWrappedAround;
     GError *_err;
-    _retval = cast(bool)gtk_source_search_context_backward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(GtkTextIter*)&matchStart, cast(GtkTextIter*)&matchEnd, &_hasWrappedAround, &_err);
+    _retval = cast(bool)gtk_source_search_context_backward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_matchStart, &_matchEnd, &_hasWrappedAround, &_err);
     if (_err)
       throw new ErrorWrap(_err);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     hasWrappedAround = cast(bool)_hasWrappedAround;
     return _retval;
   }
@@ -235,8 +243,12 @@ class SearchContext : gobject.object.ObjectWrap
   bool forward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
+    GtkTextIter _matchStart;
+    GtkTextIter _matchEnd;
     gboolean _hasWrappedAround;
-    _retval = cast(bool)gtk_source_search_context_forward(cast(GtkSourceSearchContext*)this._cPtr, cast(const(GtkTextIter)*)&iter, cast(GtkTextIter*)&matchStart, cast(GtkTextIter*)&matchEnd, &_hasWrappedAround);
+    _retval = cast(bool)gtk_source_search_context_forward(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, &_matchStart, &_matchEnd, &_hasWrappedAround);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     hasWrappedAround = cast(bool)_hasWrappedAround;
     return _retval;
   }
@@ -269,7 +281,7 @@ class SearchContext : gobject.object.ObjectWrap
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_search_context_forward_async(cast(GtkSourceSearchContext*)this._cPtr, cast(const(GtkTextIter)*)&iter, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_source_search_context_forward_async(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -291,11 +303,15 @@ class SearchContext : gobject.object.ObjectWrap
   bool forwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
+    GtkTextIter _matchStart;
+    GtkTextIter _matchEnd;
     gboolean _hasWrappedAround;
     GError *_err;
-    _retval = cast(bool)gtk_source_search_context_forward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(GtkTextIter*)&matchStart, cast(GtkTextIter*)&matchEnd, &_hasWrappedAround, &_err);
+    _retval = cast(bool)gtk_source_search_context_forward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_matchStart, &_matchEnd, &_hasWrappedAround, &_err);
     if (_err)
       throw new ErrorWrap(_err);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     hasWrappedAround = cast(bool)_hasWrappedAround;
     return _retval;
   }
@@ -342,7 +358,7 @@ class SearchContext : gobject.object.ObjectWrap
   int getOccurrencePosition(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd)
   {
     int _retval;
-    _retval = gtk_source_search_context_get_occurrence_position(cast(GtkSourceSearchContext*)this._cPtr, cast(const(GtkTextIter)*)&matchStart, cast(const(GtkTextIter)*)&matchEnd);
+    _retval = gtk_source_search_context_get_occurrence_position(cast(GtkSourceSearchContext*)this._cPtr, matchStart ? cast(const(GtkTextIter)*)matchStart._cPtr(No.Dup) : null, matchEnd ? cast(const(GtkTextIter)*)matchEnd._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -399,16 +415,19 @@ class SearchContext : gobject.object.ObjectWrap
         matchStart = the start of the match to replace.
         matchEnd = the end of the match to replace.
         replace = the replacement text.
-        replaceLength = the length of replace in bytes, or -1.
       Returns: whether the match has been replaced.
       Throws: [ErrorWrap]
   */
-  bool replace(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd, string replace, int replaceLength)
+  bool replace(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd, string replace)
   {
     bool _retval;
-    const(char)* _replace = replace.toCString(No.Alloc);
+    int _replaceLength;
+    if (replace)
+      _replaceLength = cast(int)replace.length;
+
+    auto _replace = cast(const(char)*)replace.ptr;
     GError *_err;
-    _retval = cast(bool)gtk_source_search_context_replace(cast(GtkSourceSearchContext*)this._cPtr, cast(GtkTextIter*)&matchStart, cast(GtkTextIter*)&matchEnd, _replace, replaceLength, &_err);
+    _retval = cast(bool)gtk_source_search_context_replace(cast(GtkSourceSearchContext*)this._cPtr, matchStart ? cast(GtkTextIter*)matchStart._cPtr(No.Dup) : null, matchEnd ? cast(GtkTextIter*)matchEnd._cPtr(No.Dup) : null, _replace, _replaceLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -424,16 +443,19 @@ class SearchContext : gobject.object.ObjectWrap
   
       Params:
         replace = the replacement text.
-        replaceLength = the length of replace in bytes, or -1.
       Returns: the number of replaced matches.
       Throws: [ErrorWrap]
   */
-  uint replaceAll(string replace, int replaceLength)
+  uint replaceAll(string replace)
   {
     uint _retval;
-    const(char)* _replace = replace.toCString(No.Alloc);
+    int _replaceLength;
+    if (replace)
+      _replaceLength = cast(int)replace.length;
+
+    auto _replace = cast(const(char)*)replace.ptr;
     GError *_err;
-    _retval = gtk_source_search_context_replace_all(cast(GtkSourceSearchContext*)this._cPtr, _replace, replaceLength, &_err);
+    _retval = gtk_source_search_context_replace_all(cast(GtkSourceSearchContext*)this._cPtr, _replace, _replaceLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

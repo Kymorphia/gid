@@ -121,18 +121,20 @@ class PatternSpec : gobject.boxed.Boxed
       [glib.global.utf8Strreverse] function to reverse UTF-8 encoded strings.
   
       Params:
-        stringLength = the length of string (in bytes, i.e. strlen(),
-              not [glib.global.utf8Strlen])
         string_ = the UTF-8 encoded string to match
         stringReversed = the reverse of string or null
       Returns: true if string matches pspec
   */
-  bool match(size_t stringLength, string string_, string stringReversed = null)
+  bool match(string string_, string stringReversed = null)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    size_t _stringLength;
+    if (string_)
+      _stringLength = cast(size_t)string_.length;
+
+    auto _string_ = cast(const(char)*)string_.ptr;
     const(char)* _stringReversed = stringReversed.toCString(No.Alloc);
-    _retval = cast(bool)g_pattern_spec_match(cast(GPatternSpec*)this._cPtr, stringLength, _string_, _stringReversed);
+    _retval = cast(bool)g_pattern_spec_match(cast(GPatternSpec*)this._cPtr, _stringLength, _string_, _stringReversed);
     return _retval;
   }
 

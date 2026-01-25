@@ -621,16 +621,19 @@ class Builder : gobject.object.ObjectWrap
   
       Params:
         buffer = the string to parse
-        length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: true on success, false if an error occurred
       Throws: [ErrorWrap]
   */
-  bool addFromString(string buffer, ptrdiff_t length)
+  bool addFromString(string buffer)
   {
     bool _retval;
-    const(char)* _buffer = buffer.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (buffer)
+      _length = cast(ptrdiff_t)buffer.length;
+
+    auto _buffer = cast(const(char)*)buffer.ptr;
     GError *_err;
-    _retval = cast(bool)gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, length, &_err);
+    _retval = cast(bool)gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -722,15 +725,18 @@ class Builder : gobject.object.ObjectWrap
   
       Params:
         buffer = the string to parse
-        length = the length of buffer (may be -1 if buffer is nul-terminated)
         objectIds = nul-terminated array of objects to build
       Returns: true on success, false if an error occurred
       Throws: [ErrorWrap]
   */
-  bool addObjectsFromString(string buffer, ptrdiff_t length, string[] objectIds)
+  bool addObjectsFromString(string buffer, string[] objectIds)
   {
     bool _retval;
-    const(char)* _buffer = buffer.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (buffer)
+      _length = cast(ptrdiff_t)buffer.length;
+
+    auto _buffer = cast(const(char)*)buffer.ptr;
     const(char)*[] _tmpobjectIds;
     foreach (s; objectIds)
       _tmpobjectIds ~= s.toCString(No.Alloc);
@@ -738,7 +744,7 @@ class Builder : gobject.object.ObjectWrap
     const(char*)* _objectIds = _tmpobjectIds.ptr;
 
     GError *_err;
-    _retval = cast(bool)gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, length, _objectIds, &_err);
+    _retval = cast(bool)gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, _objectIds, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -802,16 +808,19 @@ class Builder : gobject.object.ObjectWrap
         object = the object that is being extended
         templateType = the type that the template is for
         buffer = the string to parse
-        length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: A positive value on success, 0 if an error occurred
       Throws: [ErrorWrap]
   */
-  bool extendWithTemplate(gobject.object.ObjectWrap object, gobject.types.GType templateType, string buffer, ptrdiff_t length)
+  bool extendWithTemplate(gobject.object.ObjectWrap object, gobject.types.GType templateType, string buffer)
   {
     bool _retval;
-    const(char)* _buffer = buffer.toCString(No.Alloc);
+    ptrdiff_t _length;
+    if (buffer)
+      _length = cast(ptrdiff_t)buffer.length;
+
+    auto _buffer = cast(const(char)*)buffer.ptr;
     GError *_err;
-    _retval = cast(bool)gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, templateType, _buffer, length, &_err);
+    _retval = cast(bool)gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, templateType, _buffer, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

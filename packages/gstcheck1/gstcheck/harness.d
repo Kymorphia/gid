@@ -283,9 +283,9 @@ class Harness
         api = a metadata API
         params = API specific parameters
   */
-  void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params)
+  void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
   {
-    gst_harness_add_propose_allocation_meta(cast(GstHarness*)this._cPtr, api, cast(const(GstStructure)*)&params);
+    gst_harness_add_propose_allocation_meta(cast(GstHarness*)this._cPtr, api, params ? cast(const(GstStructure)*)params._cPtr(No.Dup) : null);
   }
 
   /**

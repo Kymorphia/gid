@@ -433,13 +433,15 @@ class Clipboard : gobject.object.ObjectWrap
   
       Params:
         text = a UTF-8 string.
-        len = length of text, in bytes, or -1, in which case
-                      the length will be determined with strlen().
   */
-  void setText(string text, int len)
+  void setText(string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_clipboard_set_text(cast(GtkClipboard*)this._cPtr, _text, len);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_clipboard_set_text(cast(GtkClipboard*)this._cPtr, _text, _len);
   }
 
   /**
