@@ -12103,7 +12103,7 @@ struct GtkGestureRotateClass;
     is accessible through [gtk.gesture_single.GestureSingle.getCurrentSequence] while the
     gesture is being interacted with.
     
-    By default gestures react to both `GDK_BUTTON_PRIMARY` and touch
+    By default gestures react to both [gdk.types.BUTTON_PRIMARY] and touch
     events, [gtk.gesture_single.GestureSingle.setTouchOnly] can be used to change the
     touch behavior. Callers may also specify a different mouse button number
     to interact with through [gtk.gesture_single.GestureSingle.setButton], or react to any
@@ -13011,8 +13011,8 @@ struct GtkIconSource;
     
     $(LIST
       * Stock images usually are used in conjunction with
-        [Stock Items][gtkstock], such as `GTK_STOCK_OK` or
-        `GTK_STOCK_OPEN`. Named icons are easier to set up and therefore
+        [Stock Items][gtkstock], such as [gtk.types.STOCK_OK] or
+        [gtk.types.STOCK_OPEN]. Named icons are easier to set up and therefore
         are more useful for new icons that an application wants to
         add, such as application icons or window icons.
       
@@ -13032,7 +13032,7 @@ struct GtkIconSource;
     out that internally stock images are generally defined in
     terms of one or more named icons. (An example of the
     more than one case is icons that depend on writing direction;
-    `GTK_STOCK_GO_FORWARD` uses the two themed icons
+    [gtk.types.STOCK_GO_FORWARD] uses the two themed icons
     “gtk-stock-go-forward-ltr” and “gtk-stock-go-forward-rtl”.)
     
     In many cases, named themes are used indirectly, via #GtkImage
@@ -20116,18 +20116,18 @@ struct GtkStyleClass
     
     If you are developing a library with custom #GtkWidgets that
     render differently than standard components, you may need to add a
-    #GtkStyleProvider yourself with the `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK`
+    #GtkStyleProvider yourself with the [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK]
     priority, either a #GtkCssProvider or a custom object implementing the
     #GtkStyleProvider interface. This way themes may still attempt
     to style your UI elements in a different way if needed so.
     
     If you are using custom styling on an applications, you probably want then
     to make your style information prevail to the theme’s, so you must use
-    a #GtkStyleProvider with the `GTK_STYLE_PROVIDER_PRIORITY_APPLICATION`
+    a #GtkStyleProvider with the [gtk.types.STYLE_PROVIDER_PRIORITY_APPLICATION]
     priority, keep in mind that the user settings in
     `XDG_CONFIG_HOME/gtk-3.0/gtk.css` will
     still take precedence over your changes, as it uses the
-    `GTK_STYLE_PROVIDER_PRIORITY_USER` priority.
+    [gtk.types.STYLE_PROVIDER_PRIORITY_USER] priority.
 */
 struct GtkStyleContext
 {

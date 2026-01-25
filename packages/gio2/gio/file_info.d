@@ -125,11 +125,11 @@ class FileInfo : gobject.object.ObjectWrap
       #GDateTime.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_TIME_ACCESS`. If `G_FILE_ATTRIBUTE_TIME_ACCESS_USEC` is
+      [gio.types.FILE_ATTRIBUTE_TIME_ACCESS]. If [gio.types.FILE_ATTRIBUTE_TIME_ACCESS_USEC] is
       provided, the resulting #GDateTime will additionally have microsecond
       precision.
       
-      If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC` must
+      If nanosecond precision is needed, [gio.types.FILE_ATTRIBUTE_TIME_ACCESS_NSEC] must
       be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
       Returns: access time, or null if unknown
   */
@@ -407,7 +407,7 @@ class FileInfo : gobject.object.ObjectWrap
       Gets the file's content type.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE].
       Returns: a string containing the file's content type,
         or null if unknown.
   */
@@ -424,11 +424,11 @@ class FileInfo : gobject.object.ObjectWrap
       #GDateTime.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_TIME_CREATED`. If `G_FILE_ATTRIBUTE_TIME_CREATED_USEC` is
+      [gio.types.FILE_ATTRIBUTE_TIME_CREATED]. If [gio.types.FILE_ATTRIBUTE_TIME_CREATED_USEC] is
       provided, the resulting #GDateTime will additionally have microsecond
       precision.
       
-      If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_CREATED_NSEC` must
+      If nanosecond precision is needed, [gio.types.FILE_ATTRIBUTE_TIME_CREATED_NSEC] must
       be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
       Returns: creation time, or null if unknown
   */
@@ -442,8 +442,8 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Returns the #GDateTime representing the deletion date of the file, as
-      available in `G_FILE_ATTRIBUTE_TRASH_DELETION_DATE`. If the
-      `G_FILE_ATTRIBUTE_TRASH_DELETION_DATE` attribute is unset, null is returned.
+      available in [gio.types.FILE_ATTRIBUTE_TRASH_DELETION_DATE]. If the
+      [gio.types.FILE_ATTRIBUTE_TRASH_DELETION_DATE] attribute is unset, null is returned.
       Returns: a #GDateTime, or null.
   */
   glib.date_time.DateTime getDeletionDate()
@@ -458,7 +458,7 @@ class FileInfo : gobject.object.ObjectWrap
       Gets a display name for a file. This is guaranteed to always be set.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME].
       Returns: a string containing the display name.
   */
   string getDisplayName()
@@ -473,7 +473,7 @@ class FileInfo : gobject.object.ObjectWrap
       Gets the edit name for a file.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_EDIT_NAME].
       Returns: a string containing the edit name.
   */
   string getEditName()
@@ -486,10 +486,10 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Gets the [entity tag](iface.File.html#entity-tags) for a given
-      #GFileInfo. See `G_FILE_ATTRIBUTE_ETAG_VALUE`.
+      #GFileInfo. See [gio.types.FILE_ATTRIBUTE_ETAG_VALUE].
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_ETAG_VALUE`.
+      [gio.types.FILE_ATTRIBUTE_ETAG_VALUE].
       Returns: a string containing the value of the "etag:value" attribute.
   */
   string getEtag()
@@ -505,7 +505,7 @@ class FileInfo : gobject.object.ObjectWrap
       This is different from the file's content type, see [gio.file_info.FileInfo.getContentType].
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_TYPE`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_TYPE].
       Returns: a #GFileType for the given file.
   */
   gio.types.FileType getFileType()
@@ -520,7 +520,7 @@ class FileInfo : gobject.object.ObjectWrap
       Gets the icon for a file.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_ICON`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_ICON].
       Returns: #GIcon for the given info.
   */
   gio.icon.Icon getIcon()
@@ -535,7 +535,7 @@ class FileInfo : gobject.object.ObjectWrap
       Checks if a file is a backup file.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_IS_BACKUP].
       Returns: true if file is a backup file, false otherwise.
   */
   bool getIsBackup()
@@ -549,7 +549,7 @@ class FileInfo : gobject.object.ObjectWrap
       Checks if a file is hidden.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_IS_HIDDEN].
       Returns: true if the file is a hidden file, false otherwise.
   */
   bool getIsHidden()
@@ -563,7 +563,7 @@ class FileInfo : gobject.object.ObjectWrap
       Checks if a file is a symlink.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_IS_SYMLINK].
       Returns: true if the given info is a symlink.
   */
   bool getIsSymlink()
@@ -578,11 +578,11 @@ class FileInfo : gobject.object.ObjectWrap
       #GDateTime.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_TIME_MODIFIED`. If `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` is
+      [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED]. If [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED_USEC] is
       provided, the resulting #GDateTime will additionally have microsecond
       precision.
       
-      If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` must
+      If nanosecond precision is needed, [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED_NSEC] must
       be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
       Returns: modification time, or null if unknown
   */
@@ -599,7 +599,7 @@ class FileInfo : gobject.object.ObjectWrap
       in result.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_TIME_MODIFIED`. If `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` is
+      [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED]. If [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED_USEC] is
       provided it will be used too.
   
       Params:
@@ -617,7 +617,7 @@ class FileInfo : gobject.object.ObjectWrap
       Gets the name for a file. This is guaranteed to always be set.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_NAME`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_NAME].
       Returns: a string containing the file name.
   */
   string getName()
@@ -630,11 +630,11 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Gets the file's size (in bytes). The size is retrieved through the value of
-      the `G_FILE_ATTRIBUTE_STANDARD_SIZE` attribute and is converted
+      the [gio.types.FILE_ATTRIBUTE_STANDARD_SIZE] attribute and is converted
       from #guint64 to #goffset before returning the result.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_SIZE`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_SIZE].
       Returns: a #goffset containing the file's size (in bytes).
   */
   long getSize()
@@ -646,10 +646,10 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Gets the value of the sort_order attribute from the #GFileInfo.
-      See `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_SORT_ORDER].
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_SORT_ORDER].
       Returns: a #gint32 containing the value of the "standard::sort_order" attribute.
   */
   int getSortOrder()
@@ -663,7 +663,7 @@ class FileInfo : gobject.object.ObjectWrap
       Gets the symbolic icon for a file.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON].
       Returns: #GIcon for the given info.
   */
   gio.icon.Icon getSymbolicIcon()
@@ -678,7 +678,7 @@ class FileInfo : gobject.object.ObjectWrap
       Gets the symlink target for a given #GFileInfo.
       
       It is an error to call this if the #GFileInfo does not contain
-      `G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET].
       Returns: a string containing the symlink target.
   */
   string getSymlinkTarget()
@@ -765,11 +765,11 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the `G_FILE_ATTRIBUTE_TIME_ACCESS` and
-      `G_FILE_ATTRIBUTE_TIME_ACCESS_USEC` attributes in the file info to the
+      Sets the [gio.types.FILE_ATTRIBUTE_TIME_ACCESS] and
+      [gio.types.FILE_ATTRIBUTE_TIME_ACCESS_USEC] attributes in the file info to the
       given date/time value.
       
-      `G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC` will be cleared.
+      [gio.types.FILE_ATTRIBUTE_TIME_ACCESS_NSEC] will be cleared.
   
       Params:
         atime = a #GDateTime.
@@ -983,7 +983,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the content type attribute for a given #GFileInfo.
-      See `G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE].
   
       Params:
         contentType = a content type. See [GContentType][gio-GContentType]
@@ -995,11 +995,11 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the `G_FILE_ATTRIBUTE_TIME_CREATED` and
-      `G_FILE_ATTRIBUTE_TIME_CREATED_USEC` attributes in the file info to the
+      Sets the [gio.types.FILE_ATTRIBUTE_TIME_CREATED] and
+      [gio.types.FILE_ATTRIBUTE_TIME_CREATED_USEC] attributes in the file info to the
       given date/time value.
       
-      `G_FILE_ATTRIBUTE_TIME_CREATED_NSEC` will be cleared.
+      [gio.types.FILE_ATTRIBUTE_TIME_CREATED_NSEC] will be cleared.
   
       Params:
         creationTime = a #GDateTime.
@@ -1011,7 +1011,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the display name for the current #GFileInfo.
-      See `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME].
   
       Params:
         displayName = a string containing a display name.
@@ -1024,7 +1024,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the edit name for the current file.
-      See `G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_EDIT_NAME].
   
       Params:
         editName = a string containing an edit name.
@@ -1037,7 +1037,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the file type in a #GFileInfo to type.
-      See `G_FILE_ATTRIBUTE_STANDARD_TYPE`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_TYPE].
   
       Params:
         type = a #GFileType.
@@ -1049,7 +1049,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the icon for a given #GFileInfo.
-      See `G_FILE_ATTRIBUTE_STANDARD_ICON`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_ICON].
   
       Params:
         icon = a #GIcon.
@@ -1061,7 +1061,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the "is_hidden" attribute in a #GFileInfo according to is_hidden.
-      See `G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_IS_HIDDEN].
   
       Params:
         isHidden = a #gboolean.
@@ -1073,7 +1073,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the "is_symlink" attribute in a #GFileInfo according to is_symlink.
-      See `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_IS_SYMLINK].
   
       Params:
         isSymlink = a #gboolean.
@@ -1084,11 +1084,11 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the `G_FILE_ATTRIBUTE_TIME_MODIFIED` and
-      `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` attributes in the file info to the
+      Sets the [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED] and
+      [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED_USEC] attributes in the file info to the
       given date/time value.
       
-      `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` will be cleared.
+      [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED_NSEC] will be cleared.
   
       Params:
         mtime = a #GDateTime.
@@ -1099,11 +1099,11 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the `G_FILE_ATTRIBUTE_TIME_MODIFIED` and
-      `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` attributes in the file info to the
+      Sets the [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED] and
+      [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED_USEC] attributes in the file info to the
       given time value.
       
-      `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` will be cleared.
+      [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED_NSEC] will be cleared.
   
       Params:
         mtime = a #GTimeVal.
@@ -1118,7 +1118,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the name attribute for the current #GFileInfo.
-      See `G_FILE_ATTRIBUTE_STANDARD_NAME`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_NAME].
   
       Params:
         name = a string containing a name.
@@ -1130,7 +1130,7 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the `G_FILE_ATTRIBUTE_STANDARD_SIZE` attribute in the file info
+      Sets the [gio.types.FILE_ATTRIBUTE_STANDARD_SIZE] attribute in the file info
       to the given size.
   
       Params:
@@ -1143,7 +1143,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the sort order attribute in the file info structure. See
-      `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_SORT_ORDER].
   
       Params:
         sortOrder = a sort order integer.
@@ -1155,7 +1155,7 @@ class FileInfo : gobject.object.ObjectWrap
 
   /**
       Sets the symbolic icon for a given #GFileInfo.
-      See `G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON`.
+      See [gio.types.FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON].
   
       Params:
         icon = a #GIcon.
@@ -1166,7 +1166,7 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the `G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET` attribute in the file info
+      Sets the [gio.types.FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET] attribute in the file info
       to the given symlink target.
   
       Params:

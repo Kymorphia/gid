@@ -212,7 +212,7 @@ class Adapter : gobject.object.ObjectWrap
       The distance will be reset to 0 for all buffers with
       [gst.types.BufferFlags.Discont] on them, and then calculated for all other
       following buffers based on their size.
-      Returns: The offset. Can be `GST_BUFFER_OFFSET_NONE`.
+      Returns: The offset. Can be [gst.types.BUFFER_OFFSET_NONE].
   */
   ulong distanceFromDiscont()
   {

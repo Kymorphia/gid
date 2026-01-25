@@ -346,7 +346,7 @@ class Node : gobject.boxed.Boxed
   }
 
   /**
-      Returns the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] of the payload of the node.
+      Returns the `GType` of the payload of the node.
       
       For [json.types.NodeType.Null] nodes, the returned type is `G_TYPE_INVALID`.
       Returns: the type for the payload

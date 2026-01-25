@@ -70,14 +70,14 @@ import gobject.object;
     [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer],
     [gio.simple_async_result.SimpleAsyncResult.setOpResGboolean], and
     [gio.simple_async_result.SimpleAsyncResult.setOpResGssize]
-    are provided, setting the operation's result to a [xlib.types.void*], [glib.types.SOURCE_REMOVE], or
+    are provided, setting the operation's result to a [xlib.types.void*], `gboolean`, or
     `gssize`, respectively.
     
     Likewise, to get the result of an asynchronous function,
     [gio.simple_async_result.SimpleAsyncResult.getOpResGpointer],
     [gio.simple_async_result.SimpleAsyncResult.getOpResGboolean], and
     [gio.simple_async_result.SimpleAsyncResult.getOpResGssize] are
-    provided, getting the operation’s result as a [xlib.types.void*], [glib.types.SOURCE_REMOVE], and
+    provided, getting the operation’s result as a [xlib.types.void*], `gboolean`, and
     `gssize`, respectively.
     
     For the details of the requirements implementations must respect, see

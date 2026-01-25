@@ -7475,7 +7475,7 @@ struct GstReferenceTimestampMeta
   GstClockTime timestamp;
 
   /**
-      duration, or `GST_CLOCK_TIME_NONE`
+      duration, or [gst.types.CLOCK_TIME_NONE]
   */
   GstClockTime duration;
 }

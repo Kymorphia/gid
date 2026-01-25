@@ -51,12 +51,12 @@ public import gobject.object;
     different kinds of identifiers, such as Hal UDIs, filesystem labels,
     traditional Unix devices (e.g. `/dev/sda2`), UUIDs. GIO uses predefined
     strings as names for the different kinds of identifiers:
-    `G_VOLUME_IDENTIFIER_KIND_UUID`, `G_VOLUME_IDENTIFIER_KIND_LABEL`, etc.
+    [gio.types.VOLUME_IDENTIFIER_KIND_UUID], [gio.types.VOLUME_IDENTIFIER_KIND_LABEL], etc.
     Use [gio.volume.Volume.getIdentifier] to obtain an identifier for a volume.
     
-    Note that `G_VOLUME_IDENTIFIER_KIND_HAL_UDI` will only be available
+    Note that [gio.types.VOLUME_IDENTIFIER_KIND_HAL_UDI] will only be available
     when the GVFS hal volume monitor is in use. Other volume monitors
-    will generally be able to provide the `G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE`
+    will generally be able to provide the [gio.types.VOLUME_IDENTIFIER_KIND_UNIX_DEVICE]
     identifier, which can be used to obtain a hal device by means of
     `libhal_manager_find_device_string_match()`.
 */

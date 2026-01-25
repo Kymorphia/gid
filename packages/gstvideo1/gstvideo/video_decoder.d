@@ -265,7 +265,7 @@ class VideoDecoder : gst.element.Element
       Get `minForceKeyUnitInterval` property.
       Returns: Minimum interval between force-key-unit events sent upstream by the
         decoder. Setting this to 0 will cause every event to be handled, setting
-        this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
+        this to [gst.types.CLOCK_TIME_NONE] will cause every event to be ignored.
         
         See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
         force-key-unit events.
@@ -280,7 +280,7 @@ class VideoDecoder : gst.element.Element
       Params:
         propval = Minimum interval between force-key-unit events sent upstream by the
           decoder. Setting this to 0 will cause every event to be handled, setting
-          this to `GST_CLOCK_TIME_NONE` will cause every event to be ignored.
+          this to [gst.types.CLOCK_TIME_NONE] will cause every event to be ignored.
           
           See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
           force-key-unit events.

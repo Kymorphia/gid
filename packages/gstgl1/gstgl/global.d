@@ -146,7 +146,7 @@ void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldispl
     or is performed.
     
     This performs #GstContext queries (if necessary) for a winsys display
-    connection with `GST_GL_DISPLAY_CONTEXT_TYPE`, "gst.x11.display.handle", and
+    connection with [gstgl.types.GL_DISPLAY_CONTEXT_TYPE], "gst.x11.display.handle", and
     "GstWaylandDisplayHandleContextType" stopping after the first successful
     retrieval.
     

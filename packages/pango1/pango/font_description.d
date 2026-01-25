@@ -365,7 +365,7 @@ class FontDescription : gobject.boxed.Boxed
       which sets the font size in points.
   
       Params:
-        size = the new size, in Pango units. There are `PANGO_SCALE` Pango units
+        size = the new size, in Pango units. There are [pango.types.SCALE] Pango units
             in one device unit. For an output backend where a device unit is a pixel,
             a size value of 10 * PANGO_SCALE gives a 10 pixel font.
   */
@@ -436,7 +436,7 @@ class FontDescription : gobject.boxed.Boxed
       [pango.font_description.FontDescription.setAbsoluteSize].
   
       Params:
-        size = the size of the font in points, scaled by `PANGO_SCALE`.
+        size = the size of the font in points, scaled by [pango.types.SCALE].
             (That is, a size value of 10 * PANGO_SCALE is a 10 point font.
             The conversion factor between points and device units depends on
             system configuration and the output device. For screen display, a

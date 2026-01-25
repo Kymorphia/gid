@@ -769,7 +769,7 @@ class Element : gst.object.ObjectWrap
         pending = a pointer to #GstState to hold the pending
               state. Can be null.
         timeout = a #GstClockTime to specify the timeout for an async
-                    state change or `GST_CLOCK_TIME_NONE` for infinite timeout.
+                    state change or [gst.types.CLOCK_TIME_NONE] for infinite timeout.
       Returns: [gst.types.StateChangeReturn.Success] if the element has no more pending state
                  and the last state change succeeded, [gst.types.StateChangeReturn.Async] if the
                  element is still performing a state change or

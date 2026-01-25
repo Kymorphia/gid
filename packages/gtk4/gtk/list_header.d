@@ -116,7 +116,7 @@ class ListHeader : gobject.object.ObjectWrap
       Gets the end position in the model of the section that self is
       currently the header for.
       
-      If self is unbound, `GTK_INVALID_LIST_POSITION` is returned.
+      If self is unbound, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The end position of the section
   */
   uint getEnd()
@@ -159,7 +159,7 @@ class ListHeader : gobject.object.ObjectWrap
       Gets the start position in the model of the section that self is
       currently the header for.
       
-      If self is unbound, `GTK_INVALID_LIST_POSITION` is returned.
+      If self is unbound, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The start position of the section
   */
   uint getStart()

@@ -478,7 +478,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         reference = identifier for the timestamp reference.
         timestamp = timestamp
-        duration = duration, or `GST_CLOCK_TIME_NONE`
+        duration = duration, or [gst.types.CLOCK_TIME_NONE]
       Returns: The #GstReferenceTimestampMeta that was added to the buffer
   */
   gst.reference_timestamp_meta.ReferenceTimestampMeta addReferenceTimestampMeta(gst.caps.Caps reference, gst.types.ClockTime timestamp, gst.types.ClockTime duration)

@@ -83,8 +83,8 @@ class Cookie : gobject.boxed.Boxed
       -1 to not include the attribute (indicating that the cookie expires
       with the current session), 0 for an already-expired cookie, or a
       lifetime in seconds. You can use the constants
-      `SOUP_COOKIE_MAX_AGE_ONE_HOUR`, `SOUP_COOKIE_MAX_AGE_ONE_DAY`,
-      `SOUP_COOKIE_MAX_AGE_ONE_WEEK` and `SOUP_COOKIE_MAX_AGE_ONE_YEAR` (or
+      [soup.types.COOKIE_MAX_AGE_ONE_HOUR], [soup.types.COOKIE_MAX_AGE_ONE_DAY],
+      [soup.types.COOKIE_MAX_AGE_ONE_WEEK] and [soup.types.COOKIE_MAX_AGE_ONE_YEAR] (or
       multiples thereof) to calculate this value. (If you really care
       about setting the exact time that the cookie will expire, use
       [soup.cookie.Cookie.setExpires].)
@@ -318,9 +318,9 @@ class Cookie : gobject.boxed.Boxed
       
       If max_age is -1, the cookie is a session cookie, and will expire at the end
       of the client's session. Otherwise, it is the number of seconds until the
-      cookie expires. You can use the constants `SOUP_COOKIE_MAX_AGE_ONE_HOUR`,
-      `SOUP_COOKIE_MAX_AGE_ONE_DAY`, `SOUP_COOKIE_MAX_AGE_ONE_WEEK` and
-      `SOUP_COOKIE_MAX_AGE_ONE_YEAR` (or multiples thereof) to calculate this value.
+      cookie expires. You can use the constants [soup.types.COOKIE_MAX_AGE_ONE_HOUR],
+      [soup.types.COOKIE_MAX_AGE_ONE_DAY], [soup.types.COOKIE_MAX_AGE_ONE_WEEK] and
+      [soup.types.COOKIE_MAX_AGE_ONE_YEAR] (or multiples thereof) to calculate this value.
       (A value of 0 indicates that the cookie should be considered
       already-expired.)
       

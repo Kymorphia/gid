@@ -601,8 +601,8 @@ alias DBusSubtreeIntrospectFunc = gio.dbus_interface_info.DBusInterfaceInfo[] de
     Params:
       datagramBased = the #GDatagramBased
       condition = the current condition at the source fired
-    Returns: `G_SOURCE_REMOVE` if the source should be removed,
-        `G_SOURCE_CONTINUE` otherwise
+    Returns: [glib.types.SOURCE_REMOVE] if the source should be removed,
+        [glib.types.SOURCE_CONTINUE] otherwise
 */
 alias DatagramBasedSourceFunc = bool delegate(gio.datagram_based.DatagramBased datagramBased, glib.types.IOCondition condition);
 
@@ -1342,7 +1342,7 @@ enum FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL = "standard::is-virtual";
     A key in the "standard" namespace for checking if a file is
     volatile. This is meant for opaque, non-POSIX-like backends to
     indicate that the URI is not persistent. Applications should look
-    at `G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET` for the persistent URI.
+    at [gio.types.FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET] for the persistent URI.
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
 */
@@ -1355,7 +1355,7 @@ enum FILE_ATTRIBUTE_STANDARD_IS_VOLATILE = "standard::is-volatile";
     and can thus not be generally displayed as is. It is guaranteed to be set on
     every file.
     
-    Use `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME` if you need to display the
+    Use [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME] if you need to display the
     name in a user interface.
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
@@ -1470,7 +1470,7 @@ enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_XXLARGE = "thumbnail::failed-xxlarge";
     This attribute is true if the thumbnail is up-to-date with the file it represents,
     and false if the file has been modified since the thumbnail was generated.
     
-    If `G_FILE_ATTRIBUTE_THUMBNAILING_FAILED` is true and this attribute is false,
+    If [gio.types.FILE_ATTRIBUTE_THUMBNAILING_FAILED] is true and this attribute is false,
     it indicates that thumbnailing may be attempted again and may succeed.
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
@@ -1485,7 +1485,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID = "thumbnail::is-valid";
     it represents, and false if the file has been modified since the thumbnail
     was generated.
     
-    If `G_FILE_ATTRIBUTE_THUMBNAILING_FAILED_LARGE` is true and this attribute
+    If [gio.types.FILE_ATTRIBUTE_THUMBNAILING_FAILED_LARGE] is true and this attribute
     is false, it indicates that thumbnailing may be attempted again and may
     succeed.
     
@@ -1501,7 +1501,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_LARGE = "thumbnail::is-valid-large";
     it represents, and false if the file has been modified since the thumbnail
     was generated.
     
-    If `G_FILE_ATTRIBUTE_THUMBNAILING_FAILED_NORMAL` is true and this attribute
+    If [gio.types.FILE_ATTRIBUTE_THUMBNAILING_FAILED_NORMAL] is true and this attribute
     is false, it indicates that thumbnailing may be attempted again and may
     succeed.
     
@@ -1517,7 +1517,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_NORMAL = "thumbnail::is-valid-normal";
     it represents, and false if the file has been modified since the thumbnail
     was generated.
     
-    If `G_FILE_ATTRIBUTE_THUMBNAILING_FAILED_XLARGE` is true and this attribute
+    If [gio.types.FILE_ATTRIBUTE_THUMBNAILING_FAILED_XLARGE] is true and this attribute
     is false, it indicates that thumbnailing may be attempted again and may
     succeed.
     
@@ -1533,7 +1533,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_XLARGE = "thumbnail::is-valid-xlarge";
     it represents, and false if the file has been modified since the thumbnail
     was generated.
     
-    If `G_FILE_ATTRIBUTE_THUMBNAILING_FAILED_XXLARGE` is true and this attribute
+    If [gio.types.FILE_ATTRIBUTE_THUMBNAILING_FAILED_XXLARGE] is true and this attribute
     is false, it indicates that thumbnailing may be attempted again and may
     succeed.
     
@@ -1603,7 +1603,7 @@ enum FILE_ATTRIBUTE_TIME_ACCESS_NSEC = "time::access-nsec";
     A key in the "time" namespace for getting the microseconds of the time
     the file was last accessed.
     
-    This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_ACCESS`.
+    This should be used in conjunction with [gio.types.FILE_ATTRIBUTE_TIME_ACCESS].
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
 */
@@ -1633,7 +1633,7 @@ enum FILE_ATTRIBUTE_TIME_CHANGED_NSEC = "time::changed-nsec";
     A key in the "time" namespace for getting the microseconds of the time
     the file was last changed.
     
-    This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_CHANGED`.
+    This should be used in conjunction with [gio.types.FILE_ATTRIBUTE_TIME_CHANGED].
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
 */
@@ -1663,7 +1663,7 @@ enum FILE_ATTRIBUTE_TIME_CREATED_NSEC = "time::created-nsec";
     A key in the "time" namespace for getting the microseconds of the time
     the file was created.
     
-    This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_CREATED`.
+    This should be used in conjunction with [gio.types.FILE_ATTRIBUTE_TIME_CREATED].
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
 */
@@ -1691,7 +1691,7 @@ enum FILE_ATTRIBUTE_TIME_MODIFIED_NSEC = "time::modified-nsec";
     A key in the "time" namespace for getting the microseconds of the time
     the file was last modified.
     
-    This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_MODIFIED`.
+    This should be used in conjunction with [gio.types.FILE_ATTRIBUTE_TIME_MODIFIED].
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
 */

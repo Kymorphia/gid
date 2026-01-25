@@ -55,7 +55,7 @@ class Uri : gobject.boxed.Boxed
         scheme = The scheme for the new URI.
         userinfo = The user-info for the new URI.
         host = The host name for the new URI.
-        port = The port number for the new URI or `GST_URI_NO_PORT`.
+        port = The port number for the new URI or [gst.types.URI_NO_PORT].
         path = The path for the new URI with '/' separating path
                                elements.
         query = The query string for the new URI with '&' separating
@@ -229,9 +229,9 @@ class Uri : gobject.boxed.Boxed
   }
 
   /**
-      Get the port number from the URI or `GST_URI_NO_PORT` if it doesn't exist.
-      If uri is null then returns `GST_URI_NO_PORT`.
-      Returns: The port number from the #GstUri object or `GST_URI_NO_PORT`.
+      Get the port number from the URI or [gst.types.URI_NO_PORT] if it doesn't exist.
+      If uri is null then returns [gst.types.URI_NO_PORT].
+      Returns: The port number from the #GstUri object or [gst.types.URI_NO_PORT].
   */
   uint getPort()
   {
@@ -425,7 +425,7 @@ class Uri : gobject.boxed.Boxed
         scheme = The scheme for the new URI.
         userinfo = The user-info for the new URI.
         host = The host name for the new URI.
-        port = The port number for the new URI or `GST_URI_NO_PORT`.
+        port = The port number for the new URI or [gst.types.URI_NO_PORT].
         path = The path for the new URI with '/' separating path
                                elements.
         query = The query string for the new URI with '&' separating
@@ -561,7 +561,7 @@ class Uri : gobject.boxed.Boxed
       Set or unset the port number for the URI.
   
       Params:
-        port = The new port number to set or `GST_URI_NO_PORT` to unset.
+        port = The new port number to set or [gst.types.URI_NO_PORT] to unset.
       Returns: true if the port number was set/unset successfully.
   */
   bool setPort(uint port)

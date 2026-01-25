@@ -237,7 +237,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       can only be called once for a given filter model.
   
       Params:
-        types = The [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s of the columns.
+        types = The `GType`s of the columns.
         func = A [gtk.types.TreeModelFilterModifyFunc]
   */
   void setModifyFunc(gobject.types.GType[] types, gtk.types.TreeModelFilterModifyFunc func)

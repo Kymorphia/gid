@@ -336,7 +336,7 @@ class TlsDatabase : gobject.object.ObjectWrap
       certificate in the chain by its #GTlsCertificate:issuer property.
       
       purpose describes the purpose (or usage) for which the certificate
-      is being used. Typically purpose will be set to `G_TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER`
+      is being used. Typically purpose will be set to [gio.types.TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER]
       which means that the certificate is being used to authenticate a server
       (and we are acting as the client).
       

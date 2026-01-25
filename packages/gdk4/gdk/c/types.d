@@ -1013,7 +1013,7 @@ enum GdkMemoryFormat
     
     Note that GDK may add internal values to events which include values outside
     of this enumeration. Your code should preserve and ignore them.  You can use
-    [gdk.types.ModifierType.ModifierMask] to remove all private values.
+    [gdk.types.MODIFIER_MASK] to remove all private values.
 */
 enum GdkModifierType : uint
 {
@@ -1629,7 +1629,7 @@ struct GdkContentDeserializer;
     or application, like [gdk.drag.Drag], [gdk.drop.Drop],
     [gdk.clipboard.Clipboard] or [gdk.content_provider.ContentProvider].
     
-    GDK supports content in 2 forms: [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] and mime type.
+    GDK supports content in 2 forms: `GType` and mime type.
     Using `GTypes` is meant only for in-process content transfers. Mime types
     are meant to be used for data passing both in-process and out-of-process.
     The details of how data is passed is described in the documentation of

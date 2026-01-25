@@ -1289,7 +1289,7 @@ enum GtkBuilderError
 {
   /**
       A type-func attribute didn’t name
-       a function that returns a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT].
+       a function that returns a `GType`.
   */
   InvalidTypeFunction = 0,
 
@@ -6533,7 +6533,7 @@ struct GtkBuilderScopeInterface
   GTypeInterface gIface;
 
   /**
-      Try to lookup a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] via the its name. See
+      Try to lookup a `GType` via the its name. See
         [gtk.builder.Builder.getTypeFromName] for more details.
         The C implementation will use [gobject.global.typeFromName] and if that fails try to guess the
         correct function name for registering the type and then use dlsym() to load it.
@@ -6542,7 +6542,7 @@ struct GtkBuilderScopeInterface
   extern(C) GType function(GtkBuilderScope* self, GtkBuilder* builder, const(char)* typeName) getTypeFromName;
 
   /**
-      Try to lookup a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] via the given function name, specified
+      Try to lookup a `GType` via the given function name, specified
         explicitly in a GtkBuilder file, like via the "type-func" attribute in the `<object>` tag.
         This function is very rarely used.
         The C implementation will use dlsym() and call the resulting function as a `GTypeFunc`.
@@ -9251,7 +9251,7 @@ struct GtkDropDownClass
     
     The most basic way to use a [gtk.drop_target.DropTarget] to receive drops on a
     widget is to create it via [gtk.drop_target.DropTarget.new_], passing in the
-    [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] of the data you want to receive and connect to the
+    `GType` of the data you want to receive and connect to the
     [gtk.drop_target.DropTarget.drop] signal to receive the data:
     
     ```c
@@ -9309,7 +9309,7 @@ struct GtkDropDownClass
      )
        
     However, [gtk.drop_target.DropTarget] is ultimately modeled in a synchronous way
-    and only supports data transferred via [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]. If you want full control
+    and only supports data transferred via `GType`. If you want full control
     over an ongoing drop, the [gtk.drop_target_async.DropTargetAsync] object gives you
     this ability.
     
@@ -11572,7 +11572,7 @@ struct GtkGestureRotateClass;
     which is accessible through [gtk.gesture_single.GestureSingle.getCurrentSequence]
     while the gesture is being interacted with.
     
-    By default gestures react to both `GDK_BUTTON_PRIMARY` and touch events.
+    By default gestures react to both [gdk.types.BUTTON_PRIMARY] and touch events.
     [gtk.gesture_single.GestureSingle.setTouchOnly] can be used to change the
     touch behavior. Callers may also specify a different mouse button number
     to interact with through [gtk.gesture_single.GestureSingle.setButton], or react
@@ -12791,8 +12791,8 @@ struct GtkLayoutManagerClass
     Use [gtk.level_bar.LevelBar.setValue] to set the current value, and
     [gtk.level_bar.LevelBar.addOffsetValue] to set the value offsets at which
     the bar will be considered in a different state. GTK will add a few
-    offsets by default on the level bar: `GTK_LEVEL_BAR_OFFSET_LOW`,
-    `GTK_LEVEL_BAR_OFFSET_HIGH` and `GTK_LEVEL_BAR_OFFSET_FULL`, with
+    offsets by default on the level bar: [gtk.types.LEVEL_BAR_OFFSET_LOW],
+    [gtk.types.LEVEL_BAR_OFFSET_HIGH] and [gtk.types.LEVEL_BAR_OFFSET_FULL], with
     values 0.25, 0.75 and 1.0 respectively.
     
     Note that it is your responsibility to update preexisting offsets
@@ -13101,7 +13101,7 @@ struct GtkListItemFactoryClass;
     [drag](iface.TreeDragSource.html) and [drop](iface.TreeDragDest.html)
     interfaces.
     
-    The [gtk.list_store.ListStore] can accept most [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s as a column type, though
+    The [gtk.list_store.ListStore] can accept most `GType`s as a column type, though
     it can’t accept all custom types.  Internally, it will keep a copy of
     data passed in (such as a string or a boxed pointer).  Columns that
     accept [gobject.object.ObjectWrap]s are handled a little differently.  The
@@ -17154,18 +17154,18 @@ struct GtkStringSorterClass
     
     If you are developing a library with custom widgets that render differently
     than standard components, you may need to add a [gtk.style_provider.StyleProvider] yourself
-    with the `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK` priority, either a
+    with the [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] priority, either a
     [gtk.css_provider.CssProvider] or a custom object implementing the [gtk.style_provider.StyleProvider]
     interface. This way themes may still attempt to style your UI elements in
     a different way if needed so.
     
     If you are using custom styling on an applications, you probably want then
     to make your style information prevail to the theme’s, so you must use
-    a [gtk.style_provider.StyleProvider] with the `GTK_STYLE_PROVIDER_PRIORITY_APPLICATION`
+    a [gtk.style_provider.StyleProvider] with the [gtk.types.STYLE_PROVIDER_PRIORITY_APPLICATION]
     priority, keep in mind that the user settings in
     `XDG_CONFIG_HOME/gtk-4.0/gtk.css` will
     still take precedence over your changes, as it uses the
-    `GTK_STYLE_PROVIDER_PRIORITY_USER` priority.
+    [gtk.types.STYLE_PROVIDER_PRIORITY_USER] priority.
 
     Deprecated: The relevant API has been moved to [gtk.widget.Widget]
         where applicable; otherwise, there is no replacement for querying the

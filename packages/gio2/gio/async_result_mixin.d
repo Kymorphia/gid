@@ -93,7 +93,7 @@ public import gobject.object;
     operations are executed. They are not used to determine system-wide
     I/O scheduling. Priorities are integers, with lower numbers indicating
     higher priority. It is recommended to choose priorities between
-    `G_PRIORITY_LOW` and `G_PRIORITY_HIGH`, with `G_PRIORITY_DEFAULT`
+    [glib.types.PRIORITY_LOW] and [glib.types.PRIORITY_HIGH], with [glib.types.PRIORITY_DEFAULT]
     as a default.
 */
 template AsyncResultT()

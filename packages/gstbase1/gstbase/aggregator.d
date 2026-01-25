@@ -279,11 +279,11 @@ class Aggregator : gst.element.Element
 
   /**
       Retrieves the latency values reported by self in response to the latency
-      query, or `GST_CLOCK_TIME_NONE` if there is not live source connected and the element
+      query, or [gst.types.CLOCK_TIME_NONE] if there is not live source connected and the element
       will not wait for the clock.
       
       Typically only called by subclasses.
-      Returns: The latency or `GST_CLOCK_TIME_NONE` if the element does not sync
+      Returns: The latency or [gst.types.CLOCK_TIME_NONE] if the element does not sync
   */
   gst.types.ClockTime getLatency()
   {

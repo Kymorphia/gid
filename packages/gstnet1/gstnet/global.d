@@ -109,14 +109,14 @@ void ptpDeinit()
     slave-only mode for all domains on the given interfaces with the
     given clock_id.
     
-    If clock_id is `GST_PTP_CLOCK_ID_NONE`, a clock id is automatically
+    If clock_id is [gstnet.types.PTP_CLOCK_ID_NONE], a clock id is automatically
     generated from the MAC address of the first network interface.
     
     This function is automatically called by [gstnet.ptp_clock.PtpClock.new_] with default
     parameters if it wasn't called before.
 
     Params:
-      clockId = PTP clock id of this process' clock or `GST_PTP_CLOCK_ID_NONE`
+      clockId = PTP clock id of this process' clock or [gstnet.types.PTP_CLOCK_ID_NONE]
       interfaces = network interfaces to run the clock on
     Returns: true if the GStreamer PTP clock subsystem could be initialized.
 */
@@ -140,7 +140,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
     config is a #GstStructure with the following optional fields:
     $(LIST
       * #guint64 `clock-id`: The clock ID to use for the local clock. If the
-          clock-id is not provided or `GST_PTP_CLOCK_ID_NONE` is provided, a clock
+          clock-id is not provided or [gstnet.types.PTP_CLOCK_ID_NONE] is provided, a clock
           id is automatically generated from the MAC address of the first network
           interface.
       * #GStrv `interfaces`: The interface names to listen on for PTP packets. If

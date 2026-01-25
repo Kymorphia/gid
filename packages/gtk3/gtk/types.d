@@ -935,8 +935,8 @@ alias TextTagTableForeach = void delegate(gtk.text_tag.TextTag tag);
     Params:
       widget = the widget
       frameClock = the frame clock for the widget (same as calling [gtk.widget.Widget.getFrameClock])
-    Returns: `G_SOURCE_CONTINUE` if the tick callback should continue to be called,
-       `G_SOURCE_REMOVE` if the tick callback should be removed.
+    Returns: [glib.types.SOURCE_CONTINUE] if the tick callback should continue to be called,
+       [glib.types.SOURCE_REMOVE] if the tick callback should be removed.
 */
 alias TickCallback = bool delegate(gtk.widget.Widget widget, gdk.frame_clock.FrameClock frameClock);
 
@@ -1330,7 +1330,7 @@ enum PRINT_SETTINGS_WIN32_DRIVER_VERSION = "win32-driver-version";
     Use this priority for functionality related to size allocation.
     
     It is used internally by GTK+ to compute the sizes of widgets.
-    This priority is higher than `GDK_PRIORITY_REDRAW` to avoid
+    This priority is higher than [gdk.types.PRIORITY_REDRAW] to avoid
     resizing a widget which was just redrawn.
 */
 enum PRIORITY_RESIZE = 110;

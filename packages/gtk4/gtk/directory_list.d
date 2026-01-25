@@ -314,9 +314,9 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Setting the priority while self is loading will reprioritize the
       ongoing load as soon as possible.
       
-      The default IO priority is `G_PRIORITY_DEFAULT`, which is higher than
+      The default IO priority is [glib.types.PRIORITY_DEFAULT], which is higher than
       the GTK redraw priority. If you are loading a lot of directories in
-      parallel, lowering it to something like `G_PRIORITY_DEFAULT_IDLE`
+      parallel, lowering it to something like [glib.types.PRIORITY_DEFAULT_IDLE]
       may increase responsiveness.
   
       Params:

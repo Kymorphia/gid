@@ -117,10 +117,10 @@ class ContentProvider : gobject.object.ObjectWrap
   /**
       Gets the contents of provider stored in value.
       
-      The value will have been initialized to the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] the value should be
-      provided in. This given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] does not need to be listed in the formats
+      The value will have been initialized to the `GType` the value should be
+      provided in. This given `GType` does not need to be listed in the formats
       returned by [gdk.content_provider.ContentProvider.refFormats]. However, if the
-      given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is not supported, this operation can fail and
+      given `GType` is not supported, this operation can fail and
       [gio.types.IOErrorEnum.NotSupported] will be reported.
   
       Params:
@@ -179,7 +179,7 @@ class ContentProvider : gobject.object.ObjectWrap
       of the operation.
       
       The given mime type does not need to be listed in the formats returned by
-      [gdk.content_provider.ContentProvider.refFormats]. However, if the given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is
+      [gdk.content_provider.ContentProvider.refFormats]. However, if the given `GType` is
       not supported, [gio.types.IOErrorEnum.NotSupported] will be reported.
       
       The given stream will not be closed.

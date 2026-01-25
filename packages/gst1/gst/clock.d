@@ -287,7 +287,7 @@ class Clock : gst.object.ObjectWrap
       Registers a callback on the given #GstClockID id with the given
       function and user_data. When passing a #GstClockID with an invalid
       time to this function, the callback will be called immediately
-      with  a time set to `GST_CLOCK_TIME_NONE`. The callback will
+      with  a time set to [gst.types.CLOCK_TIME_NONE]. The callback will
       be called when the time of id has been reached.
       
       The callback func can be invoked from any thread, either provided by the
@@ -436,7 +436,7 @@ class Clock : gst.object.ObjectWrap
   /**
       Gets the current internal time of the given clock. The time is returned
       unadjusted for the offset and the rate.
-      Returns: the internal time of the clock. Or `GST_CLOCK_TIME_NONE` when
+      Returns: the internal time of the clock. Or [gst.types.CLOCK_TIME_NONE] when
         given invalid input.
   */
   gst.types.ClockTime getInternalTime()
@@ -476,7 +476,7 @@ class Clock : gst.object.ObjectWrap
       Gets the current time of the given clock. The time is always
       monotonically increasing and adjusted according to the current
       offset and rate.
-      Returns: the time of the clock. Or `GST_CLOCK_TIME_NONE` when
+      Returns: the time of the clock. Or [gst.types.CLOCK_TIME_NONE] when
         given invalid input.
   */
   gst.types.ClockTime getTime()
@@ -728,7 +728,7 @@ class Clock : gst.object.ObjectWrap
 
   /**
       Waits until clock is synced for reporting the current time. If timeout
-      is `GST_CLOCK_TIME_NONE` it will wait forever, otherwise it will time out
+      is [gst.types.CLOCK_TIME_NONE] it will wait forever, otherwise it will time out
       after timeout nanoseconds.
       
       For asynchronous waiting, the #GstClock::synced signal can be used.
@@ -737,7 +737,7 @@ class Clock : gst.object.ObjectWrap
       is not set on the clock, or if the clock is already synced.
   
       Params:
-        timeout = timeout for waiting or `GST_CLOCK_TIME_NONE`
+        timeout = timeout for waiting or [gst.types.CLOCK_TIME_NONE]
       Returns: true if waiting was successful, or false on timeout
   */
   bool waitForSync(gst.types.ClockTime timeout)

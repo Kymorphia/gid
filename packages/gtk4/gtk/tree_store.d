@@ -95,7 +95,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
       This constructor is meant for language bindings.
   
       Params:
-        types = an array of [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] types for the columns, from first to last
+        types = an array of `GType` types for the columns, from first to last
       Returns: a new [gtk.tree_store.TreeStore]
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
@@ -414,7 +414,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
       tree store.
   
       Params:
-        types = An array of [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] types, one for each column
+        types = An array of `GType` types, one for each column
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */

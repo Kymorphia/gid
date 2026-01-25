@@ -1730,7 +1730,7 @@ enum GdkModifierIntent
     
     Note that GDK may add internal values to events which include
     reserved values such as [gdk.types.ModifierType.ModifierReserved13Mask].  Your code
-    should preserve and ignore them.  You can use [gdk.types.ModifierType.ModifierMask] to
+    should preserve and ignore them.  You can use [gdk.types.MODIFIER_MASK] to
     remove all reserved values.
     
     Also note that the GDK X backend interprets button press events for button

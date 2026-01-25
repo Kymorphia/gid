@@ -92,14 +92,14 @@ class SearchEntry : gtk.entry.Entry
       function.
       
       If the key event is handled by the search entry and starts
-      or continues a search, `GDK_EVENT_STOP` will be returned.
+      or continues a search, [gdk.types.EVENT_STOP] will be returned.
       The caller should ensure that the entry is shown in this
       case, and not propagate the event further.
   
       Params:
         event = a key event
-      Returns: `GDK_EVENT_STOP` if the key press event resulted
-            in a search beginning or continuing, `GDK_EVENT_PROPAGATE`
+      Returns: [gdk.types.EVENT_STOP] if the key press event resulted
+            in a search beginning or continuing, [gdk.types.EVENT_PROPAGATE]
             otherwise.
   */
   bool handleEvent(gdk.event.Event event)

@@ -31,7 +31,7 @@ import gtk.types;
     [drag](iface.TreeDragSource.html) and [drop](iface.TreeDragDest.html)
     interfaces.
     
-    The [gtk.list_store.ListStore] can accept most [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s as a column type, though
+    The [gtk.list_store.ListStore] can accept most `GType`s as a column type, though
     it can’t accept all custom types.  Internally, it will keep a copy of
     data passed in (such as a string or a boxed pointer).  Columns that
     accept [gobject.object.ObjectWrap]s are handled a little differently.  The
@@ -207,7 +207,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
       This function is meant to be used by language bindings.
   
       Params:
-        types = an array of [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] types for the columns, from first to last
+        types = an array of `GType` types for the columns, from first to last
       Returns: a new [gtk.list_store.ListStore]
   
       Deprecated: Use [gio.list_store.ListStore] instead
@@ -442,7 +442,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
       a method on the [gtk.tree_model.TreeModel] interface is called.
   
       Params:
-        types = An array length n of [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s
+        types = An array length n of `GType`s
   
       Deprecated: Use list models
   */

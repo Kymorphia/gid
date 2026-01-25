@@ -908,7 +908,7 @@ class Builder : gobject.object.ObjectWrap
   
       Params:
         typeName = type name to lookup
-      Returns: the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] found for type_name or `G_TYPE_INVALID`
+      Returns: the `GType` found for type_name or `G_TYPE_INVALID`
           if no type was found
   */
   gobject.types.GType getTypeFromName(string typeName)
@@ -1000,7 +1000,7 @@ class Builder : gobject.object.ObjectWrap
       Demarshals a value from a string.
       
       Unlike [gtk.builder.Builder.valueFromString], this function
-      takes a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] instead of [gobject.param_spec.ParamSpec].
+      takes a `GType` instead of [gobject.param_spec.ParamSpec].
       
       Calls [gobject.value.Value.init_] on the value argument, so it
       need not be initialised beforehand.
@@ -1009,7 +1009,7 @@ class Builder : gobject.object.ObjectWrap
       assigned a [glib.error.ErrorWrap] from the `GTK_BUILDER_ERROR` domain.
   
       Params:
-        type = the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] of the value
+        type = the `GType` of the value
         string_ = the string representation of the value
         value = the [gobject.value.Value] to store the result in
       Returns: true on success

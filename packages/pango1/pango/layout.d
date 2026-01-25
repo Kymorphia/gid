@@ -601,7 +601,7 @@ class Layout : gobject.object.ObjectWrap
       units.
       
       [pango.layout.Layout.getSize] returns the width and height
-      scaled by `PANGO_SCALE`. This is simply a convenience function
+      scaled by [pango.types.SCALE]. This is simply a convenience function
       around [pango.layout.Layout.getPixelExtents].
   
       Params:
@@ -761,7 +761,7 @@ class Layout : gobject.object.ObjectWrap
         line = location to store resulting line index. (which will
             between 0 and pango_layout_get_line_count(layout) - 1)
         xPos = location to store resulting position within line
-            (`PANGO_SCALE` units per device unit)
+            ([pango.types.SCALE] units per device unit)
   */
   void indexToLineX(int index, bool trailing, out int line, out int xPos)
   {

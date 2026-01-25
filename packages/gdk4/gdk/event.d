@@ -264,7 +264,7 @@ class Event
       Returns the timestamp of event.
       
       Not all events have timestamps. In that case, this function
-      returns `GDK_CURRENT_TIME`.
+      returns [gdk.types.CURRENT_TIME].
       Returns: timestamp field from event
   */
   uint getTime()
@@ -281,7 +281,7 @@ class Event
       The right mouse button typically triggers context menus.
       
       This function should always be used instead of simply checking for
-      event->button == `GDK_BUTTON_SECONDARY`.
+      event->button == [gdk.types.BUTTON_SECONDARY].
       Returns: true if the event should trigger a context menu.
   */
   bool triggersContextMenu()

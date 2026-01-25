@@ -1232,8 +1232,8 @@ enum cairo_status_t
   DeviceFinished = 37,
 
   /**
-      `CAIRO_MIME_TYPE_JBIG2_GLOBAL_ID` has been used on at least one image
-        but no image provided `CAIRO_MIME_TYPE_JBIG2_GLOBAL` (Since 1.14)
+      [cairo.types.MIME_TYPE_JBIG2_GLOBAL_ID] has been used on at least one image
+        but no image provided [cairo.types.MIME_TYPE_JBIG2_GLOBAL] (Since 1.14)
   */
   Jbig2GlobalMissing = 38,
 

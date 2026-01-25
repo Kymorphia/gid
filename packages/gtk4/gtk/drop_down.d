@@ -262,7 +262,7 @@ class DropDown : gtk.widget.Widget
       Returns: The position of the selected item.
         
         If no item is selected, the property has the value
-        `GTK_INVALID_LIST_POSITION`.
+        [gtk.types.INVALID_LIST_POSITION].
   */
   @property uint selected()
   {
@@ -275,7 +275,7 @@ class DropDown : gtk.widget.Widget
         propval = The position of the selected item.
           
           If no item is selected, the property has the value
-          `GTK_INVALID_LIST_POSITION`.
+          [gtk.types.INVALID_LIST_POSITION].
   */
   @property void selected(uint propval)
   {
@@ -441,7 +441,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the position of the selected item.
-      Returns: the position of the selected item, or `GTK_INVALID_LIST_POSITION`
+      Returns: the position of the selected item, or [gtk.types.INVALID_LIST_POSITION]
           if not item is selected
   */
   uint getSelected()
@@ -562,7 +562,7 @@ class DropDown : gtk.widget.Widget
       Selects the item at the given position.
   
       Params:
-        position = the position of the item to select, or `GTK_INVALID_LIST_POSITION`
+        position = the position of the item to select, or [gtk.types.INVALID_LIST_POSITION]
   */
   void setSelected(uint position)
   {

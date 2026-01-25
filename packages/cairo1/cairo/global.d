@@ -1009,12 +1009,12 @@ void pdfGetVersions(out cairo.types.PdfVersion[] versions)
     that links to the location specified by link_attribs. Link
     attributes have the same keys and values as the [Link Tag][link],
     excluding the "rect" attribute. The item will be a child of the
-    item with id parent_id. Use `CAIRO_PDF_OUTLINE_ROOT` as the parent
+    item with id parent_id. Use [cairo.types.PDF_OUTLINE_ROOT] as the parent
     id of top level items.
 
     Params:
       surface = a PDF #cairo_surface_t
-      parentId = the id of the parent item or `CAIRO_PDF_OUTLINE_ROOT` if this is a top level item.
+      parentId = the id of the parent item or [cairo.types.PDF_OUTLINE_ROOT] if this is a top level item.
       utf8 = the name of the outline
       linkAttribs = the link attributes specifying where this outline links to
       flags = outline item flags
@@ -1919,20 +1919,20 @@ void svgGetVersions(out cairo.types.SvgVersion[] versions)
     The SVG surface backend recognizes the following MIME types for the
     data attached to a surface (see [cairo.surface.Surface.setMimeData]) when
     it is used as a source pattern for drawing on this surface:
-    `CAIRO_MIME_TYPE_JPEG`, `CAIRO_MIME_TYPE_PNG`,
-    `CAIRO_MIME_TYPE_URI`. If any of them is specified, the SVG backend
+    [cairo.types.MIME_TYPE_JPEG], [cairo.types.MIME_TYPE_PNG],
+    [cairo.types.MIME_TYPE_URI]. If any of them is specified, the SVG backend
     emits a href with the content of MIME data instead of a surface
     snapshot (PNG, Base64-encoded) in the corresponding image tag.
     
-    The unofficial MIME type `CAIRO_MIME_TYPE_URI` is examined
+    The unofficial MIME type [cairo.types.MIME_TYPE_URI] is examined
     first. If present, the URI is emitted as is: assuring the
     correctness of URI is left to the client code.
     
-    If `CAIRO_MIME_TYPE_URI` is not present, but `CAIRO_MIME_TYPE_JPEG`
-    or `CAIRO_MIME_TYPE_PNG` is specified, the corresponding data is
+    If [cairo.types.MIME_TYPE_URI] is not present, but [cairo.types.MIME_TYPE_JPEG]
+    or [cairo.types.MIME_TYPE_PNG] is specified, the corresponding data is
     Base64-encoded and emitted.
     
-    If `CAIRO_MIME_TYPE_UNIQUE_ID` is present, all surfaces with the same
+    If [cairo.types.MIME_TYPE_UNIQUE_ID] is present, all surfaces with the same
     unique identifier will only be embedded once.
 
     Params:

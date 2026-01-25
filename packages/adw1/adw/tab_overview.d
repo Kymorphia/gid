@@ -669,7 +669,7 @@ class TabOverview : gtk.widget.Widget
   
       Params:
         actions = the supported actions
-        types = all supported [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s that can be dropped
+        types = all supported `GType`s that can be dropped
   */
   void setupExtraDropTarget(gdk.types.DragAction actions, gobject.types.GType[] types = null)
   {

@@ -142,7 +142,7 @@ void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
 /**
     Read content from the given input stream and deserialize it, asynchronously.
     
-    The default I/O priority is `G_PRIORITY_DEFAULT` (i.e. 0), and lower numbers
+    The default I/O priority is [glib.types.PRIORITY_DEFAULT] (i.e. 0), and lower numbers
     indicate a higher priority.
     
     When the operation is finished, callback will be called. You must then
@@ -197,7 +197,7 @@ bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.v
 /**
     Serialize content and write it to the given output stream, asynchronously.
     
-    The default I/O priority is `G_PRIORITY_DEFAULT` (i.e. 0), and lower numbers
+    The default I/O priority is [glib.types.PRIORITY_DEFAULT] (i.e. 0), and lower numbers
     indicate a higher priority.
     
     When the operation is finished, callback will be called. You must then
@@ -338,7 +338,7 @@ string internMimeType(string string_)
 /**
     Obtains the upper- and lower-case versions of the keyval symbol.
     
-    Examples of keyvals are `GDK_KEY_a`, `GDK_KEY_Enter`, `GDK_KEY_F1`, etc.
+    Examples of keyvals are [gdk.types.KEY_a], `GDK_KEY_Enter`, [gdk.types.KEY_F1], etc.
 
     Params:
       symbol = a keyval
@@ -359,7 +359,7 @@ void keyvalConvertCase(uint symbol, out uint lower, out uint upper)
 
     Params:
       keyvalName = a key name
-    Returns: the corresponding key value, or `GDK_KEY_VoidSymbol`
+    Returns: the corresponding key value, or [gdk.types.KEY_VoidSymbol]
         if the key name is not a valid key
 */
 uint keyvalFromName(string keyvalName)
@@ -441,7 +441,7 @@ uint keyvalToLower(uint keyval)
     
     Note that the conversion does not take the current locale
     into consideration, which might be expected for particular
-    keyvals, such as `GDK_KEY_KP_Decimal`.
+    keyvals, such as [gdk.types.KEY_KP_Decimal].
 
     Params:
       keyval = a GDK key symbol

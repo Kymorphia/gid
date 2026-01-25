@@ -353,7 +353,7 @@ enum MINOR_VERSION = 4;
     
     If the compiler is configured to warn about the use of deprecated
     functions, then using functions that were deprecated in version
-    `SOUP_VERSION_MIN_REQUIRED` or earlier will cause warnings (but
+    [soup.types.VERSION_MIN_REQUIRED] or earlier will cause warnings (but
     using functions deprecated in later releases will not).
 */
 enum VERSION_MIN_REQUIRED = 2;

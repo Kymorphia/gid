@@ -3159,7 +3159,7 @@ int[] fontGetVarCoordsNormalized(harfbuzz.font.Font font)
 
     Params:
       font = a font.
-    Returns: Named-instance index or `HB_FONT_NO_VAR_NAMED_INSTANCE`.
+    Returns: Named-instance index or [harfbuzz.types.FONT_NO_VAR_NAMED_INSTANCE].
 */
 uint fontGetVarNamedInstance(harfbuzz.font.Font font)
 {

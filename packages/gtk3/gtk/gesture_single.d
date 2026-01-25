@@ -15,7 +15,7 @@ import gtk.types;
     is accessible through [gtk.gesture_single.GestureSingle.getCurrentSequence] while the
     gesture is being interacted with.
     
-    By default gestures react to both `GDK_BUTTON_PRIMARY` and touch
+    By default gestures react to both [gdk.types.BUTTON_PRIMARY] and touch
     events, [gtk.gesture_single.GestureSingle.setTouchOnly] can be used to change the
     touch behavior. Callers may also specify a different mouse button number
     to interact with through [gtk.gesture_single.GestureSingle.setButton], or react to any

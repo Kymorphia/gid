@@ -1919,8 +1919,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   
           `textView` the instance the signal is connected to (optional)
   
-          `Returns` `GDK_EVENT_STOP` to stop other handlers from being invoked for the
-              event. `GDK_EVENT_PROPAGATE` to propagate the event further.
+          `Returns` [gdk.types.EVENT_STOP] to stop other handlers from being invoked for the
+              event. [gdk.types.EVENT_PROPAGATE] to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

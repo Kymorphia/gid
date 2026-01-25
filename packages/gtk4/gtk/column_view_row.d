@@ -229,7 +229,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   /**
       Gets the position in the model that self currently displays.
       
-      If self is unbound, `GTK_INVALID_LIST_POSITION` is returned.
+      If self is unbound, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The position of this row
   */
   uint getPosition()

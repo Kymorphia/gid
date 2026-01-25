@@ -62,7 +62,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   /**
       Finds the position of a given enum value in self.
       
-      If the value is not found, `GTK_INVALID_LIST_POSITION` is returned.
+      If the value is not found, [gtk.types.INVALID_LIST_POSITION] is returned.
   
       Params:
         value = an enum value

@@ -61,18 +61,18 @@ import pango.font_description;
     
     If you are developing a library with custom #GtkWidgets that
     render differently than standard components, you may need to add a
-    #GtkStyleProvider yourself with the `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK`
+    #GtkStyleProvider yourself with the [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK]
     priority, either a #GtkCssProvider or a custom object implementing the
     #GtkStyleProvider interface. This way themes may still attempt
     to style your UI elements in a different way if needed so.
     
     If you are using custom styling on an applications, you probably want then
     to make your style information prevail to the theme’s, so you must use
-    a #GtkStyleProvider with the `GTK_STYLE_PROVIDER_PRIORITY_APPLICATION`
+    a #GtkStyleProvider with the [gtk.types.STYLE_PROVIDER_PRIORITY_APPLICATION]
     priority, keep in mind that the user settings in
     `XDG_CONFIG_HOME/gtk-3.0/gtk.css` will
     still take precedence over your changes, as it uses the
-    `GTK_STYLE_PROVIDER_PRIORITY_USER` priority.
+    [gtk.types.STYLE_PROVIDER_PRIORITY_USER] priority.
 */
 class StyleContext : gobject.object.ObjectWrap
 {
@@ -194,8 +194,8 @@ class StyleContext : gobject.object.ObjectWrap
         priority = the priority of the style provider. The lower
                      it is, the earlier it will be used in the style
                      construction. Typically this will be in the range
-                     between `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK` and
-                     `GTK_STYLE_PROVIDER_PRIORITY_USER`
+                     between [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] and
+                     [gtk.types.STYLE_PROVIDER_PRIORITY_USER]
   */
   static void addProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider, uint priority)
   {
@@ -273,8 +273,8 @@ class StyleContext : gobject.object.ObjectWrap
         priority = the priority of the style provider. The lower
                      it is, the earlier it will be used in the style
                      construction. Typically this will be in the range
-                     between `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK` and
-                     `GTK_STYLE_PROVIDER_PRIORITY_USER`
+                     between [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] and
+                     [gtk.types.STYLE_PROVIDER_PRIORITY_USER]
   */
   void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
   {

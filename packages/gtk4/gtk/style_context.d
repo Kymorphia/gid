@@ -37,18 +37,18 @@ import gtk.types;
     
     If you are developing a library with custom widgets that render differently
     than standard components, you may need to add a [gtk.style_provider.StyleProvider] yourself
-    with the `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK` priority, either a
+    with the [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] priority, either a
     [gtk.css_provider.CssProvider] or a custom object implementing the [gtk.style_provider.StyleProvider]
     interface. This way themes may still attempt to style your UI elements in
     a different way if needed so.
     
     If you are using custom styling on an applications, you probably want then
     to make your style information prevail to the theme’s, so you must use
-    a [gtk.style_provider.StyleProvider] with the `GTK_STYLE_PROVIDER_PRIORITY_APPLICATION`
+    a [gtk.style_provider.StyleProvider] with the [gtk.types.STYLE_PROVIDER_PRIORITY_APPLICATION]
     priority, keep in mind that the user settings in
     `XDG_CONFIG_HOME/gtk-4.0/gtk.css` will
     still take precedence over your changes, as it uses the
-    `GTK_STYLE_PROVIDER_PRIORITY_USER` priority.
+    [gtk.types.STYLE_PROVIDER_PRIORITY_USER] priority.
 
     Deprecated: The relevant API has been moved to [gtk.widget.Widget]
         where applicable; otherwise, there is no replacement for querying the
@@ -111,8 +111,8 @@ class StyleContext : gobject.object.ObjectWrap
         priority = the priority of the style provider. The lower
             it is, the earlier it will be used in the style construction.
             Typically this will be in the range between
-            `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK` and
-            `GTK_STYLE_PROVIDER_PRIORITY_USER`
+            [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] and
+            [gtk.types.STYLE_PROVIDER_PRIORITY_USER]
   */
   static void addProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider, uint priority)
   {
@@ -176,8 +176,8 @@ class StyleContext : gobject.object.ObjectWrap
         priority = the priority of the style provider. The lower
             it is, the earlier it will be used in the style construction.
             Typically this will be in the range between
-            `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK` and
-            `GTK_STYLE_PROVIDER_PRIORITY_USER`
+            [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] and
+            [gtk.types.STYLE_PROVIDER_PRIORITY_USER]
   
       Deprecated: Use style classes instead
   */

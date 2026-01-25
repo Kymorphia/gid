@@ -1659,7 +1659,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.dragSourceSet] is used.
       
       The event is used to retrieve the timestamp that will be used internally to
-      grab the pointer.  If event is null, then `GDK_CURRENT_TIME` will be used.
+      grab the pointer.  If event is null, then [gdk.types.CURRENT_TIME] will be used.
       However, you should try to pass a real event in all cases, since that can be
       used to get information about the drag.
       
@@ -4273,14 +4273,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       widget/container implementation through [gtk.style_context.StyleContext.addClass].
       
       This way, your widget library can install a #GtkCssProvider
-      with the `GTK_STYLE_PROVIDER_PRIORITY_FALLBACK` priority in order
+      with the [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] priority in order
       to provide a default styling for those widgets that need so, and
       this theming may fully overridden by the user’s theme.
       
       Note that for complex widgets this may bring in undesired
       results (such as uniform background color everywhere), in
       these cases it is better to fully style such widgets through a
-      #GtkCssProvider with the `GTK_STYLE_PROVIDER_PRIORITY_APPLICATION`
+      #GtkCssProvider with the [gtk.types.STYLE_PROVIDER_PRIORITY_APPLICATION]
       priority.
   
       Params:

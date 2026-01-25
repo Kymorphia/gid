@@ -572,7 +572,7 @@ class Harness
       typically with gst_harness_push or gst_harness_push_from_src.
       
       MT safe.
-      Returns: a #GstClockTime with the timestamp or `GST_CLOCK_TIME_NONE` if no
+      Returns: a #GstClockTime with the timestamp or [gst.types.CLOCK_TIME_NONE] if no
         #GstBuffer has been pushed on the #GstHarness srcpad
   */
   gst.types.ClockTime getLastPushedTimestamp()

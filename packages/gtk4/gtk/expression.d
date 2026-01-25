@@ -226,7 +226,7 @@ class Expression
       Evaluates the given expression and on success stores the result
       in value.
       
-      The [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] of `value` will be the type given by
+      The `GType` of `value` will be the type given by
       [gtk.expression.Expression.getValueType].
       
       It is possible that expressions cannot be evaluated - for example
@@ -247,7 +247,7 @@ class Expression
   }
 
   /**
-      Gets the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] that this expression evaluates to.
+      Gets the `GType` that this expression evaluates to.
       
       This type is constant and will not change over the lifetime
       of this expression.

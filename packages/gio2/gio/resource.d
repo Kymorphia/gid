@@ -148,7 +148,7 @@ import gobject.object;
     without recompiling, for debugging or quick hacking and testing purposes.
     Since GLib 2.50, it is possible to use the `G_RESOURCE_OVERLAYS` environment
     variable to selectively overlay resources with replacements from the
-    filesystem.  It is a `G_SEARCHPATH_SEPARATOR`-separated list of substitutions
+    filesystem.  It is a [glib.types.SEARCHPATH_SEPARATOR]-separated list of substitutions
     to perform during resource lookups. It is ignored when running in a setuid
     process.
     

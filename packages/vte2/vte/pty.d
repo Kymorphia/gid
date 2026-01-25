@@ -288,9 +288,9 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       assigned to the PTY. All open file descriptors apart from those mapped as above
       will be closed when execve() is called.
       
-      Beginning with 0.60, and on linux only, and unless `VTE_SPAWN_NO_SYSTEMD_SCOPE` is
+      Beginning with 0.60, and on linux only, and unless [vte.types.SPAWN_NO_SYSTEMD_SCOPE] is
       passed in spawn_flags, the newly created child process will be moved to its own
-      systemd user scope; and if `VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE` is passed, and creation
+      systemd user scope; and if [vte.types.SPAWN_REQUIRE_SYSTEMD_SCOPE] is passed, and creation
       of the systemd user scope fails, the whole spawn will fail.
       You can override the options used for the systemd user scope by
       providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit(5)

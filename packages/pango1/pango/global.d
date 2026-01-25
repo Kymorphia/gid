@@ -330,7 +330,7 @@ pango.attribute.Attribute attrLineHeightNew(double factor)
     [pango.layout_iter.LayoutIter.getLineExtents].
 
     Params:
-      height = the line height, in `PANGO_SCALE`-ths of a point
+      height = the line height, in [pango.types.SCALE]-ths of a point
     Returns: 
 */
 pango.attribute.Attribute attrLineHeightNewAbsolute(int height)
@@ -692,7 +692,7 @@ void defaultBreak(string text, pango.analysis.Analysis analysis, pango.types.Log
 /**
     Converts extents from Pango units to device units.
     
-    The conversion is done by dividing by the `PANGO_SCALE` factor and
+    The conversion is done by dividing by the [pango.types.SCALE] factor and
     performing rounding.
     
     The inclusive rectangle is converted by flooring the x/y coordinates
@@ -1344,11 +1344,11 @@ void shapeWithFlags(string itemText, string paragraphText, pango.analysis.Analys
 }
 
 /**
-    Splits a `G_SEARCHPATH_SEPARATOR`-separated list of files, stripping
+    Splits a [glib.types.SEARCHPATH_SEPARATOR]-separated list of files, stripping
     white space and substituting ~/ with $HOME/.
 
     Params:
-      str = a `G_SEARCHPATH_SEPARATOR` separated list of filenames
+      str = a [glib.types.SEARCHPATH_SEPARATOR] separated list of filenames
     Returns: a list of
         strings to be freed with [glib.global.strfreev]
 */
@@ -1448,7 +1448,7 @@ pango.types.Direction unicharDirection(dchar ch)
 /**
     Converts a floating-point number to Pango units.
     
-    The conversion is done by multiplying `d` by `PANGO_SCALE` and
+    The conversion is done by multiplying `d` by [pango.types.SCALE] and
     rounding the result to nearest integer.
 
     Params:
@@ -1465,7 +1465,7 @@ int unitsFromDouble(double d)
 /**
     Converts a number in Pango units to floating-point.
     
-    The conversion is done by dividing `i` by `PANGO_SCALE`.
+    The conversion is done by dividing `i` by [pango.types.SCALE].
 
     Params:
       i = value in Pango units
@@ -1497,8 +1497,8 @@ int version_()
     Checks that the Pango library in use is compatible with the
     given version.
     
-    Generally you would pass in the constants `PANGO_VERSION_MAJOR`,
-    `PANGO_VERSION_MINOR`, `PANGO_VERSION_MICRO` as the three arguments
+    Generally you would pass in the constants [pango.types.VERSION_MAJOR],
+    [pango.types.VERSION_MINOR], [pango.types.VERSION_MICRO] as the three arguments
     to this function; that produces a check that the library in use at
     run-time is compatible with the version of Pango the application or
     module was compiled against.
@@ -1532,7 +1532,7 @@ string versionCheck(int requiredMajor, int requiredMinor, int requiredMicro)
 /**
     Returns the version of Pango available at run-time.
     
-    This is similar to the macro `PANGO_VERSION_STRING` except that the
+    This is similar to the macro [pango.types.VERSION_STRING] except that the
     macro returns the version available at compile-time.
     Returns: A string containing the version of Pango library available
         at run time. The returned string is owned by Pango and should not

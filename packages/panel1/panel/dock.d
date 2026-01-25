@@ -461,8 +461,8 @@ class Dock : gtk.widget.Widget
   
           `dock` the instance the signal is connected to (optional)
   
-          `Returns` `GDK_EVENT_STOP` to prevent dropping, otherwise
-              `GDK_EVENT_PROPAGATE` to allow adopting the widget.
+          `Returns` [gdk.types.EVENT_STOP] to prevent dropping, otherwise
+              [gdk.types.EVENT_PROPAGATE] to allow adopting the widget.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

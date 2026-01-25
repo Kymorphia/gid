@@ -498,9 +498,9 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       [gio.types.ApplicationFlags.HandlesCommandLine] is unset.
       
       If #GApplication::handle-local-options needs to see the list of
-      filenames, then the use of `G_OPTION_REMAINING` is recommended.  If
-      arg_data is null then `G_OPTION_REMAINING` can be used as a key into
-      the options dictionary.  If you do use `G_OPTION_REMAINING` then you
+      filenames, then the use of [glib.types.OPTION_REMAINING] is recommended.  If
+      arg_data is null then [glib.types.OPTION_REMAINING] can be used as a key into
+      the options dictionary.  If you do use [glib.types.OPTION_REMAINING] then you
       need to handle these arguments for yourself because once they are
       consumed, they will no longer be visible to the default handling
       (which treats them as filenames to be opened).

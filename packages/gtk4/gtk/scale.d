@@ -340,7 +340,7 @@ class Scale : gtk.range.Range
       [pango.layout.Layout] representing the text in the scale.
       
       Remember when using the [pango.layout.Layout] function you need to
-      convert to and from pixels using `PANGO_PIXELS()` or `PANGO_SCALE`.
+      convert to and from pixels using `PANGO_PIXELS()` or [pango.types.SCALE].
       
       If the `propertyGtk.Scale:draw-value` property is false, the return
       values are undefined.

@@ -1462,7 +1462,7 @@ enum GFileQueryInfoFlags : uint
     Indicates the file's on-disk type.
     
     On Windows systems a file will never have [gio.types.FileType.SymbolicLink] type;
-    use #GFileInfo and `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK` to determine
+    use #GFileInfo and [gio.types.FILE_ATTRIBUTE_STANDARD_IS_SYMLINK] to determine
     whether a file is a symlink or not. This is due to the fact that NTFS does
     not have a single filesystem object type for symbolic links - it has
     files that symlink to files, and directories that symlink to directories.
@@ -1513,7 +1513,7 @@ enum GFileType
 /**
     Indicates a hint from the file system whether files should be
     previewed in a file manager. Returned as the value of the key
-    `G_FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW`.
+    [gio.types.FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW].
 */
 enum GFilesystemPreviewType
 {
@@ -2147,11 +2147,11 @@ enum GResolverNameLookupFlags : uint
     the variant tuples returned.
     
     [gio.types.ResolverRecordType.Srv] records are returned as variants with the signature
-    `(qqqs)`, containing a [glib.types.MAXUINT16] with the priority, a [glib.types.MAXUINT16] with the
-    weight, a [glib.types.MAXUINT16] with the port, and a string of the hostname.
+    `(qqqs)`, containing a [glib.types.ushort] with the priority, a [glib.types.ushort] with the
+    weight, a [glib.types.ushort] with the port, and a string of the hostname.
     
     [gio.types.ResolverRecordType.Mx] records are returned as variants with the signature
-    `(qs)`, representing a [glib.types.MAXUINT16] with the preference, and a string containing
+    `(qs)`, representing a [glib.types.ushort] with the preference, and a string containing
     the mail exchanger hostname.
     
     [gio.types.ResolverRecordType.Txt] records are returned as variants with the signature
@@ -4338,7 +4338,7 @@ struct GAsyncInitableIface
     operations are executed. They are not used to determine system-wide
     I/O scheduling. Priorities are integers, with lower numbers indicating
     higher priority. It is recommended to choose priorities between
-    `G_PRIORITY_LOW` and `G_PRIORITY_HIGH`, with `G_PRIORITY_DEFAULT`
+    [glib.types.PRIORITY_LOW] and [glib.types.PRIORITY_HIGH], with [glib.types.PRIORITY_DEFAULT]
     as a default.
 */
 struct GAsyncResult;
@@ -6493,7 +6493,7 @@ struct GEmblemedIconPrivate;
     have any particular charset encoding or even make any sense at all. If
     you want to use filenames in a user interface you should use the display
     name that you can get by requesting the
-    `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME` attribute with
+    [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME] attribute with
     [gio.file.File.queryInfo]. This is guaranteed to be in UTF-8 and can be
     used in a user interface. But always store the real basename or the [gio.file.File]
     to use to actually access the file, because there is no way to go from a
@@ -6505,7 +6505,7 @@ struct GEmblemedIconPrivate;
     file. Other possible causes for aliases are: case insensitive filesystems,
     short and long names on FAT/NTFS, or bind mounts in Linux. If you want to
     check if two [gio.file.File]s point to the same file you can query for the
-    `G_FILE_ATTRIBUTE_ID_FILE` attribute. Note that [gio.file.File] does some trivial
+    [gio.types.FILE_ATTRIBUTE_ID_FILE] attribute. Note that [gio.file.File] does some trivial
     canonicalization of pathnames passed in, so that trivial differences in
     the path string used at creation (duplicated slashes, slash at end of
     path, `.` or `..` path segments, etc) does not create different [gio.file.File]s.
@@ -8656,14 +8656,14 @@ struct GMenuLinkIterPrivate;
     attributes and links of an item, see
     [gio.menu_model.MenuModel.iterateItemAttributes] and
     [gio.menu_model.MenuModel.iterateItemLinks]. The ‘standard’ attributes and
-    link types have predefined names: `G_MENU_ATTRIBUTE_LABEL`,
-    `G_MENU_ATTRIBUTE_ACTION`, `G_MENU_ATTRIBUTE_TARGET`, `G_MENU_LINK_SECTION`
-    and `G_MENU_LINK_SUBMENU`.
+    link types have predefined names: [gio.types.MENU_ATTRIBUTE_LABEL],
+    [gio.types.MENU_ATTRIBUTE_ACTION], [gio.types.MENU_ATTRIBUTE_TARGET], [gio.types.MENU_LINK_SECTION]
+    and [gio.types.MENU_LINK_SUBMENU].
     
     Items in a [gio.menu_model.MenuModel] represent active controls if they refer to
     an action that can get activated when the user interacts with the
     menu item. The reference to the action is encoded by the string ID
-    in the `G_MENU_ATTRIBUTE_ACTION` attribute. An action ID uniquely
+    in the [gio.types.MENU_ATTRIBUTE_ACTION] attribute. An action ID uniquely
     identifies an action in an action group. Which action group(s) provide
     actions depends on the context in which the menu model is used.
     E.g. when the model is exported as the application menu of a
@@ -10078,7 +10078,7 @@ struct GResolverPrivate;
     without recompiling, for debugging or quick hacking and testing purposes.
     Since GLib 2.50, it is possible to use the `G_RESOURCE_OVERLAYS` environment
     variable to selectively overlay resources with replacements from the
-    filesystem.  It is a `G_SEARCHPATH_SEPARATOR`-separated list of substitutions
+    filesystem.  It is a [glib.types.SEARCHPATH_SEPARATOR]-separated list of substitutions
     to perform during resource lookups. It is ignored when running in a setuid
     process.
     
@@ -10467,7 +10467,7 @@ struct GSettings
     non-strictly-typed data that is stored in a hierarchy. To implement
     an alternative storage backend for [gio.settings.Settings], you need to
     implement the [gio.settings_backend.SettingsBackend] interface and then make it implement the
-    extension point `G_SETTINGS_BACKEND_EXTENSION_POINT_NAME`.
+    extension point [gio.types.SETTINGS_BACKEND_EXTENSION_POINT_NAME].
     
     The interface defines methods for reading and writing values, a
     method for determining if writing of certain values will fail
@@ -10784,14 +10784,14 @@ struct GSimpleActionGroupPrivate;
     [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer],
     [gio.simple_async_result.SimpleAsyncResult.setOpResGboolean], and
     [gio.simple_async_result.SimpleAsyncResult.setOpResGssize]
-    are provided, setting the operation's result to a [xlib.types.void*], [glib.types.SOURCE_REMOVE], or
+    are provided, setting the operation's result to a [xlib.types.void*], `gboolean`, or
     `gssize`, respectively.
     
     Likewise, to get the result of an asynchronous function,
     [gio.simple_async_result.SimpleAsyncResult.getOpResGpointer],
     [gio.simple_async_result.SimpleAsyncResult.getOpResGboolean], and
     [gio.simple_async_result.SimpleAsyncResult.getOpResGssize] are
-    provided, getting the operation’s result as a [xlib.types.void*], [glib.types.SOURCE_REMOVE], and
+    provided, getting the operation’s result as a [xlib.types.void*], `gboolean`, and
     `gssize`, respectively.
     
     For the details of the requirements implementations must respect, see
@@ -13338,12 +13338,12 @@ struct GVfsClass
     different kinds of identifiers, such as Hal UDIs, filesystem labels,
     traditional Unix devices (e.g. `/dev/sda2`), UUIDs. GIO uses predefined
     strings as names for the different kinds of identifiers:
-    `G_VOLUME_IDENTIFIER_KIND_UUID`, `G_VOLUME_IDENTIFIER_KIND_LABEL`, etc.
+    [gio.types.VOLUME_IDENTIFIER_KIND_UUID], [gio.types.VOLUME_IDENTIFIER_KIND_LABEL], etc.
     Use [gio.volume.Volume.getIdentifier] to obtain an identifier for a volume.
     
-    Note that `G_VOLUME_IDENTIFIER_KIND_HAL_UDI` will only be available
+    Note that [gio.types.VOLUME_IDENTIFIER_KIND_HAL_UDI] will only be available
     when the GVFS hal volume monitor is in use. Other volume monitors
-    will generally be able to provide the `G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE`
+    will generally be able to provide the [gio.types.VOLUME_IDENTIFIER_KIND_UNIX_DEVICE]
     identifier, which can be used to obtain a hal device by means of
     `libhal_manager_find_device_string_match()`.
 */

@@ -230,8 +230,8 @@ class FileSaver : gobject.object.ObjectWrap
       documentation to know how to use this function.
   
       Params:
-        ioPriority = the I/O priority of the request. E.g. `G_PRIORITY_LOW`,
-            `G_PRIORITY_DEFAULT` or `G_PRIORITY_HIGH`.
+        ioPriority = the I/O priority of the request. E.g. [glib.types.PRIORITY_LOW],
+            [glib.types.PRIORITY_DEFAULT] or [glib.types.PRIORITY_HIGH].
         cancellable = optional #GCancellable object, null to ignore.
         progressCallback = function to call back with
             progress information, or null if progress information is not needed.

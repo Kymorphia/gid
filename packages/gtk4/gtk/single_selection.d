@@ -211,7 +211,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   /**
       Gets the position of the selected item.
       
-      If no item is selected, `GTK_INVALID_LIST_POSITION` is returned.
+      If no item is selected, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The position of the selected item
   */
   uint getSelected()
@@ -283,14 +283,14 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Selects the item at the given position.
       
       If the list does not have an item at position or
-      `GTK_INVALID_LIST_POSITION` is given, the behavior depends on the
+      [gtk.types.INVALID_LIST_POSITION] is given, the behavior depends on the
       value of the [gtk.single_selection.SingleSelection.autoselect] property:
       If it is set, no change will occur and the old item will stay
       selected. If it is unset, the selection will be unset and no item
       will be selected.
   
       Params:
-        position = the item to select or `GTK_INVALID_LIST_POSITION`
+        position = the item to select or [gtk.types.INVALID_LIST_POSITION]
   */
   void setSelected(uint position)
   {

@@ -74,8 +74,8 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 
   /**
-      Gets the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to of the object to serialize.
-      Returns: the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] for the current operation
+      Gets the `GType` to of the object to serialize.
+      Returns: the `GType` for the current operation
   */
   gobject.types.GType getGtype()
   {

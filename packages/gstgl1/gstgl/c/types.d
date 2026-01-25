@@ -1171,9 +1171,9 @@ struct GstGLBufferAllocatorClass
     A #GstGLBufferPool is created with [gstgl.glbuffer_pool.GLBufferPool.new_]
     
     #GstGLBufferPool implements the VideoMeta buffer pool option
-    `GST_BUFFER_POOL_OPTION_VIDEO_META`, the VideoAligment buffer pool option
-    `GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT` as well as the OpenGL specific
-    `GST_BUFFER_POOL_OPTION_GL_SYNC_META` buffer pool option.
+    [gstvideo.types.BUFFER_POOL_OPTION_VIDEO_META], the VideoAligment buffer pool option
+    [gstvideo.types.BUFFER_POOL_OPTION_VIDEO_ALIGNMENT] as well as the OpenGL specific
+    [gstgl.types.BUFFER_POOL_OPTION_GL_SYNC_META] buffer pool option.
 */
 struct GstGLBufferPool
 {
@@ -1633,7 +1633,7 @@ struct GstGLFuncs;
     Data is uploaded or downloaded from the GPU as is necessary.
     
     The #GstCaps that is used for #GstGLMemory based buffers should contain
-    the `GST_CAPS_FEATURE_MEMORY_GL_MEMORY` as a #GstCapsFeatures and should
+    the [gstgl.types.CAPS_FEATURE_MEMORY_GL_MEMORY] as a #GstCapsFeatures and should
     contain a 'texture-target' field with one of the #GstGLTextureTarget values
     as a string, i.e. some combination of 'texture-target=(string){2D,
     rectangle, external-oes}'.

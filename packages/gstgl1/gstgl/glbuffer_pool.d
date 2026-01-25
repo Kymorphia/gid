@@ -15,9 +15,9 @@ import gstgl.types;
     A #GstGLBufferPool is created with [gstgl.glbuffer_pool.GLBufferPool.new_]
     
     #GstGLBufferPool implements the VideoMeta buffer pool option
-    `GST_BUFFER_POOL_OPTION_VIDEO_META`, the VideoAligment buffer pool option
-    `GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT` as well as the OpenGL specific
-    `GST_BUFFER_POOL_OPTION_GL_SYNC_META` buffer pool option.
+    [gstvideo.types.BUFFER_POOL_OPTION_VIDEO_META], the VideoAligment buffer pool option
+    [gstvideo.types.BUFFER_POOL_OPTION_VIDEO_ALIGNMENT] as well as the OpenGL specific
+    [gstgl.types.BUFFER_POOL_OPTION_GL_SYNC_META] buffer pool option.
 */
 class GLBufferPool : gst.buffer_pool.BufferPool
 {

@@ -1591,7 +1591,7 @@ long utilGreatestCommonDivisorInt64(long a, long b)
     This function is used to generate a new group-id for the
     stream-start event.
     
-    This function never returns `GST_GROUP_ID_INVALID` (which is 0)
+    This function never returns [gst.types.GROUP_ID_INVALID] (which is 0)
     Returns: A constantly incrementing unsigned integer, which might
       overflow back to 0 at some point.
 */
@@ -1636,7 +1636,7 @@ int utilSeqnumCompare(uint s1, uint s2)
     on a segment-done message to be the same as that of the last seek event, to
     indicate that event and the message correspond to the same segment.
     
-    This function never returns `GST_SEQNUM_INVALID` (which is 0).
+    This function never returns [gst.types.SEQNUM_INVALID] (which is 0).
     Returns: A constantly incrementing 32-bit unsigned integer, which might
       overflow at some point. Use [gst.global.utilSeqnumCompare] to make sure
       you handle wraparound correctly.

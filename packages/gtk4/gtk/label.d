@@ -948,8 +948,8 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       
       If the label has been set so that it has a mnemonic key this function
       returns the keyval used for the mnemonic accelerator. If there is no
-      mnemonic set up it returns `GDK_KEY_VoidSymbol`.
-      Returns: GDK keyval usable for accelerators, or `GDK_KEY_VoidSymbol`
+      mnemonic set up it returns [gdk.types.KEY_VoidSymbol].
+      Returns: GDK keyval usable for accelerators, or [gdk.types.KEY_VoidSymbol]
   */
   uint getMnemonicKeyval()
   {

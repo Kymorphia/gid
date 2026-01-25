@@ -69,7 +69,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       represented by this object must be enforced.
       
       max_age is used to set the "expires" attribute on the policy; pass
-      `SOUP_HSTS_POLICY_MAX_AGE_PAST` for an already-expired policy, or a
+      [soup.types.HSTS_POLICY_MAX_AGE_PAST] for an already-expired policy, or a
       lifetime in seconds.
       
       If include_subdomains is true, the strict transport security policy

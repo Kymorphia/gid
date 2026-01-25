@@ -32,8 +32,8 @@ import gtk.types;
     
     $(LIST
       * Stock images usually are used in conjunction with
-        [Stock Items][gtkstock], such as `GTK_STOCK_OK` or
-        `GTK_STOCK_OPEN`. Named icons are easier to set up and therefore
+        [Stock Items][gtkstock], such as [gtk.types.STOCK_OK] or
+        [gtk.types.STOCK_OPEN]. Named icons are easier to set up and therefore
         are more useful for new icons that an application wants to
         add, such as application icons or window icons.
       
@@ -53,7 +53,7 @@ import gtk.types;
     out that internally stock images are generally defined in
     terms of one or more named icons. (An example of the
     more than one case is icons that depend on writing direction;
-    `GTK_STOCK_GO_FORWARD` uses the two themed icons
+    [gtk.types.STOCK_GO_FORWARD] uses the two themed icons
     “gtk-stock-go-forward-ltr” and “gtk-stock-go-forward-rtl”.)
     
     In many cases, named themes are used indirectly, via #GtkImage

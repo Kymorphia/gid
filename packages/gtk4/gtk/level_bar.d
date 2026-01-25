@@ -30,8 +30,8 @@ import gtk.widget;
     Use [gtk.level_bar.LevelBar.setValue] to set the current value, and
     [gtk.level_bar.LevelBar.addOffsetValue] to set the value offsets at which
     the bar will be considered in a different state. GTK will add a few
-    offsets by default on the level bar: `GTK_LEVEL_BAR_OFFSET_LOW`,
-    `GTK_LEVEL_BAR_OFFSET_HIGH` and `GTK_LEVEL_BAR_OFFSET_FULL`, with
+    offsets by default on the level bar: [gtk.types.LEVEL_BAR_OFFSET_LOW],
+    [gtk.types.LEVEL_BAR_OFFSET_HIGH] and [gtk.types.LEVEL_BAR_OFFSET_FULL], with
     values 0.25, 0.75 and 1.0 respectively.
     
     Note that it is your responsibility to update preexisting offsets

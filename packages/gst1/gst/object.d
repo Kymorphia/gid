@@ -268,7 +268,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       should be up to control-rate nanoseconds.
       
       If the object is not under property control, this will return
-      `GST_CLOCK_TIME_NONE`. This allows the element to avoid the sub-dividing.
+      [gst.types.CLOCK_TIME_NONE]. This allows the element to avoid the sub-dividing.
       
       The control-rate is not expected to change if the element is in
       [gst.types.State.Paused] or [gst.types.State.Playing].
@@ -555,7 +555,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   /**
       Returns a suggestion for timestamps where buffers should be split
       to get best controller results.
-      Returns: Returns the suggested timestamp or `GST_CLOCK_TIME_NONE`
+      Returns: Returns the suggested timestamp or [gst.types.CLOCK_TIME_NONE]
         if no control-rate was set.
   */
   gst.types.ClockTime suggestNextSync()

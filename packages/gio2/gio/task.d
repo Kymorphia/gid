@@ -1173,7 +1173,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
 
   /**
       Sets task's priority. If you do not call this, it will default to
-      `G_PRIORITY_DEFAULT`.
+      [glib.types.PRIORITY_DEFAULT].
       
       This will affect the priority of #GSources created with
       [gio.task.Task.attachSource] and the scheduling of tasks run in threads,

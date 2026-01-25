@@ -272,8 +272,8 @@ class MenuItem : gobject.object.ObjectWrap
       Sets or unsets an attribute on menu_item.
       
       The attribute to set or unset is specified by attribute. This
-      can be one of the standard attribute names `G_MENU_ATTRIBUTE_LABEL`,
-      `G_MENU_ATTRIBUTE_ACTION`, `G_MENU_ATTRIBUTE_TARGET`, or a custom
+      can be one of the standard attribute names [gio.types.MENU_ATTRIBUTE_LABEL],
+      [gio.types.MENU_ATTRIBUTE_ACTION], [gio.types.MENU_ATTRIBUTE_TARGET], or a custom
       attribute name.
       Attribute names are restricted to lowercase characters, numbers
       and '-'. Furthermore, the names must begin with a lowercase character,
@@ -326,7 +326,7 @@ class MenuItem : gobject.object.ObjectWrap
       
       This call is the same as calling [gio.icon.Icon.serialize] and using the
       result as the value to [gio.menu_item.MenuItem.setAttributeValue] for
-      `G_MENU_ATTRIBUTE_ICON`.
+      [gio.types.MENU_ATTRIBUTE_ICON].
       
       This API is only intended for use with "noun" menu items; things like
       bookmarks or applications in an "Open With" menu.  Don't use it on
@@ -362,8 +362,8 @@ class MenuItem : gobject.object.ObjectWrap
       Creates a link from menu_item to model if non-null, or unsets it.
       
       Links are used to establish a relationship between a particular menu
-      item and another menu.  For example, `G_MENU_LINK_SUBMENU` is used to
-      associate a submenu with a particular menu item, and `G_MENU_LINK_SECTION`
+      item and another menu.  For example, [gio.types.MENU_LINK_SUBMENU] is used to
+      associate a submenu with a particular menu item, and [gio.types.MENU_LINK_SECTION]
       is used to create a section. Other types of link can be used, but there
       is no guarantee that clients will be able to make sense of them.
       Link types are restricted to lowercase characters, numbers

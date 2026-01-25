@@ -509,7 +509,7 @@ class Device : gobject.object.ObjectWrap
                    window and its descendants, and the cursor for window is used
                    elsewhere.
         time = the timestamp of the event which led to this pointer grab. This
-                  usually comes from the #GdkEvent struct, though `GDK_CURRENT_TIME`
+                  usually comes from the #GdkEvent struct, though [gdk.types.CURRENT_TIME]
                   can be used if the time isn’t known.
       Returns: [gdk.types.GrabStatus.Success] if the grab was successful.
   
@@ -589,7 +589,7 @@ class Device : gobject.object.ObjectWrap
       Release any grab on device.
   
       Params:
-        time = a timestap (e.g. `GDK_CURRENT_TIME`).
+        time = a timestap (e.g. [gdk.types.CURRENT_TIME]).
   
       Deprecated: Use [gdk.seat.Seat.ungrab] instead.
   */

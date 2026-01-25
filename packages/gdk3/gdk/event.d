@@ -806,7 +806,7 @@ class Event : gobject.boxed.Boxed
       also trigger a context menu if this modifier is pressed.
       
       This function should always be used instead of simply checking for
-      event->button == `GDK_BUTTON_SECONDARY`.
+      event->button == [gdk.types.BUTTON_SECONDARY].
       Returns: true if the event should trigger a context menu.
   */
   bool triggersContextMenu()

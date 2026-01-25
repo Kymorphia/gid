@@ -166,7 +166,7 @@ class Keymap : gobject.object.ObjectWrap
       with [glib.global.gfree].
   
       Params:
-        keyval = a keyval, such as `GDK_KEY_a`, `GDK_KEY_Up`, `GDK_KEY_Return`, etc.
+        keyval = a keyval, such as [gdk.types.KEY_a], [gdk.types.KEY_Up], [gdk.types.KEY_Return], etc.
         keys = return location
               for an array of #GdkKeymapKey
       Returns: true if keys were found and returned

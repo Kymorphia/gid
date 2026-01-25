@@ -18,7 +18,7 @@ import gobject.types;
     or application, like [gdk.drag.Drag], [gdk.drop.Drop],
     [gdk.clipboard.Clipboard] or [gdk.content_provider.ContentProvider].
     
-    GDK supports content in 2 forms: [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] and mime type.
+    GDK supports content in 2 forms: `GType` and mime type.
     Using `GTypes` is meant only for in-process content transfers. Mime types
     are meant to be used for data passing both in-process and out-of-process.
     The details of how data is passed is described in the documentation of
@@ -106,10 +106,10 @@ class ContentFormats : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new [gdk.content_formats.ContentFormats] for a given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT].
+      Creates a new [gdk.content_formats.ContentFormats] for a given `GType`.
   
       Params:
-        type = a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]
+        type = a `GType`
       Returns: a new [gdk.content_formats.ContentFormats]
   */
   static gdk.content_formats.ContentFormats newForGtype(gobject.types.GType type)
@@ -121,11 +121,11 @@ class ContentFormats : gobject.boxed.Boxed
   }
 
   /**
-      Checks if a given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is part of the given formats.
+      Checks if a given `GType` is part of the given formats.
   
       Params:
-        type = the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to search for
-      Returns: true if the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] was found
+        type = the `GType` to search for
+      Returns: true if the `GType` was found
   */
   bool containGtype(gobject.types.GType type)
   {
@@ -150,9 +150,9 @@ class ContentFormats : gobject.boxed.Boxed
   }
 
   /**
-      Gets the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s included in formats.
+      Gets the `GType`s included in formats.
       
-      Note that formats may not contain any [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s, in particular when
+      Note that formats may not contain any `GType`s, in particular when
       they are empty. In that case null will be returned.
       Returns: `G_TYPE_INVALID`-terminated array of types included in formats
   */
@@ -209,14 +209,14 @@ class ContentFormats : gobject.boxed.Boxed
   }
 
   /**
-      Finds the first [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] from first that is also contained
+      Finds the first `GType` from first that is also contained
       in second.
       
-      If no matching [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is found, `G_TYPE_INVALID` is returned.
+      If no matching `GType` is found, `G_TYPE_INVALID` is returned.
   
       Params:
         second = the [gdk.content_formats.ContentFormats] to intersect with
-      Returns: The first common [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] or `G_TYPE_INVALID` if none.
+      Returns: The first common `GType` or `G_TYPE_INVALID` if none.
   */
   gobject.types.GType matchGtype(gdk.content_formats.ContentFormats second)
   {

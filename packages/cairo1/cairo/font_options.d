@@ -263,7 +263,7 @@ class FontOptions : gobject.boxed.Boxed
   /**
       Sets the OpenType font color palette for the font options
       object. OpenType color fonts with a CPAL table may contain multiple
-      palettes. The default color palette index is `CAIRO_COLOR_PALETTE_DEFAULT`.
+      palettes. The default color palette index is [cairo.types.COLOR_PALETTE_DEFAULT].
       
       If palette_index is invalid, the default palette is used.
       

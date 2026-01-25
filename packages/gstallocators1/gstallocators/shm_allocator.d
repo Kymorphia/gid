@@ -64,7 +64,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
 
   /**
       Register a #GstShmAllocator using [gst.allocator.Allocator.register] with the name
-      `GST_ALLOCATOR_SHM`. This is no-op after the first call.
+      [gstallocators.types.ALLOCATOR_SHM]. This is no-op after the first call.
   */
   static void initOnce()
   {

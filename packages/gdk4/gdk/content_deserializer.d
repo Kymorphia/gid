@@ -73,8 +73,8 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   }
 
   /**
-      Gets the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to create an instance of.
-      Returns: the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] for the current operation
+      Gets the `GType` to create an instance of.
+      Returns: the `GType` for the current operation
   */
   gobject.types.GType getGtype()
   {

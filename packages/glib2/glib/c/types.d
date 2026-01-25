@@ -6,14 +6,14 @@ public import gid.basictypes;
 /**
     Integer representing a day of the month; between 1 and 31.
     
-    The `G_DATE_BAD_DAY` value represents an invalid day of the month.
+    The [glib.types.DATE_BAD_DAY] value represents an invalid day of the month.
 */
 alias GDateDay = ubyte;
 
 /**
     Integer type representing a year.
     
-    The `G_DATE_BAD_YEAR` value is the invalid value. The year
+    The [glib.types.DATE_BAD_YEAR] value is the invalid value. The year
     must be 1 or higher; negative ([BCE](https://en.wikipedia.org/wiki/Common_Era))
     years are not allowed.
     
@@ -818,7 +818,7 @@ enum GHookFlagMask : uint
 
   /**
       A mask covering all bits reserved for
-        hook flags; see `G_HOOK_FLAG_USER_SHIFT`
+        hook flags; see [glib.types.HOOK_FLAG_USER_SHIFT]
   */
   Mask = 15,
 }
@@ -5792,13 +5792,13 @@ struct GOptionEntry
           called to handle the extra argument. Otherwise, @arg_data is a
           pointer to a location to store the value, the required type of
           the location depends on the @arg type:
-           - `G_OPTION_ARG_NONE`: [glib.types.SOURCE_REMOVE]
-           - `G_OPTION_ARG_STRING`: [glib.types.LOG_DOMAIN]*
-           - `G_OPTION_ARG_INT`: [webkit.types.MINOR_VERSION]
-           - `G_OPTION_ARG_FILENAME`: [glib.types.LOG_DOMAIN]*
-           - `G_OPTION_ARG_STRING_ARRAY`: [glib.types.LOG_DOMAIN]**
-           - `G_OPTION_ARG_FILENAME_ARRAY`: [glib.types.LOG_DOMAIN]**
-           - `G_OPTION_ARG_DOUBLE`: [graphene.types.PI_2]
+           - `G_OPTION_ARG_NONE`: `gboolean`
+           - `G_OPTION_ARG_STRING`: `gchar`*
+           - `G_OPTION_ARG_INT`: `gint`
+           - `G_OPTION_ARG_FILENAME`: `gchar`*
+           - `G_OPTION_ARG_STRING_ARRAY`: `gchar`**
+           - `G_OPTION_ARG_FILENAME_ARRAY`: `gchar`**
+           - `G_OPTION_ARG_DOUBLE`: `gdouble`
           If @arg type is `G_OPTION_ARG_STRING` or `G_OPTION_ARG_FILENAME`,
           the location will contain a newly allocated string if the option
           was given. That string needs to be freed by the callee using [glib.global.gfree].
@@ -6340,14 +6340,14 @@ struct GScannerConfig
 
   /**
       specifies the characters which can start
-          identifiers (the default is `G_CSET_a_2_z`, "_", and `G_CSET_A_2_Z`).
+          identifiers (the default is [glib.types.CSET_a_2_z], "_", and [glib.types.CSET_A_2_Z]).
   */
   char* csetIdentifierFirst;
 
   /**
       specifies the characters which can be used
           in identifiers, after the first character (the default is
-          `G_CSET_a_2_z`, "_0123456789", `G_CSET_A_2_Z`, `G_CSET_LATINS`,
+          [glib.types.CSET_a_2_z], "_0123456789", [glib.types.CSET_A_2_Z], `G_CSET_LATINS`,
           `G_CSET_LATINC`).
   */
   char* csetIdentifierNth;
@@ -6633,8 +6633,8 @@ struct GSourceFuncs
           connected to a callback using [glib.source.Source.setCallback]. The @dispatch
           function should call the callback function with @user_data and whatever
           additional parameters are needed for this type of event source. The
-          return value of the @dispatch function should be `G_SOURCE_REMOVE` if the
-          source should be removed or `G_SOURCE_CONTINUE` to keep it.
+          return value of the @dispatch function should be [glib.types.SOURCE_REMOVE] if the
+          source should be removed or [glib.types.SOURCE_CONTINUE] to keep it.
   */
   extern(C) gboolean function(GSource* source, GSourceFunc callback, void* userData) dispatch;
 

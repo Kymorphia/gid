@@ -197,7 +197,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_COLLATE`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_COLLATE].
       Returns: whether to collate the printed pages
   */
   bool getCollate()
@@ -208,7 +208,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_DEFAULT_SOURCE`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_DEFAULT_SOURCE].
       Returns: the default source
   */
   string getDefaultSource()
@@ -220,7 +220,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_DITHER`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_DITHER].
       Returns: the dithering that is used
   */
   string getDither()
@@ -267,7 +267,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_DUPLEX`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_DUPLEX].
       Returns: whether to print the output in duplex.
   */
   gtk.types.PrintDuplex getDuplex()
@@ -279,7 +279,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_FINISHINGS`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_FINISHINGS].
       Returns: the finishings
   */
   string getFinishings()
@@ -340,7 +340,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_MEDIA_TYPE`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_MEDIA_TYPE].
       
       The set of media types is defined in PWG 5101.1-2002 PWG.
       Returns: the media type
@@ -354,7 +354,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_N_COPIES`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_N_COPIES].
       Returns: the number of copies to print
   */
   int getNCopies()
@@ -365,7 +365,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_NUMBER_UP`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_NUMBER_UP].
       Returns: the number of pages per sheet
   */
   int getNumberUp()
@@ -376,7 +376,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_NUMBER_UP_LAYOUT`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_NUMBER_UP_LAYOUT].
       Returns: layout of page in number-up mode
   */
   gtk.types.NumberUpLayout getNumberUpLayout()
@@ -388,7 +388,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Get the value of `GTK_PRINT_SETTINGS_ORIENTATION`,
+      Get the value of [gtk.types.PRINT_SETTINGS_ORIENTATION],
       converted to a #GtkPageOrientation.
       Returns: the orientation
   */
@@ -401,7 +401,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_OUTPUT_BIN`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_OUTPUT_BIN].
       Returns: the output bin
   */
   string getOutputBin()
@@ -413,7 +413,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_PAGE_RANGES`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_PAGE_RANGES].
       Returns: an array
             of #GtkPageRanges.  Use [glib.global.gfree] to free the array when
             it is no longer needed.
@@ -436,7 +436,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_PAGE_SET`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_PAGE_SET].
       Returns: the set of pages to print
   */
   gtk.types.PageSet getPageSet()
@@ -448,7 +448,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_PAPER_HEIGHT`,
+      Gets the value of [gtk.types.PRINT_SETTINGS_PAPER_HEIGHT],
       converted to unit.
   
       Params:
@@ -463,7 +463,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_PAPER_FORMAT`,
+      Gets the value of [gtk.types.PRINT_SETTINGS_PAPER_FORMAT],
       converted to a #GtkPaperSize.
       Returns: the paper size
   */
@@ -476,7 +476,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_PAPER_WIDTH`,
+      Gets the value of [gtk.types.PRINT_SETTINGS_PAPER_WIDTH],
       converted to unit.
   
       Params:
@@ -491,7 +491,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_PRINT_PAGES`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_PRINT_PAGES].
       Returns: which pages to print
   */
   gtk.types.PrintPages getPrintPages()
@@ -504,7 +504,7 @@ class PrintSettings : gobject.object.ObjectWrap
 
   /**
       Convenience function to obtain the value of
-      `GTK_PRINT_SETTINGS_PRINTER`.
+      [gtk.types.PRINT_SETTINGS_PRINTER].
       Returns: the printer name
   */
   string getPrinter()
@@ -516,7 +516,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_PRINTER_LPI`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_PRINTER_LPI].
       Returns: the resolution in lpi (lines per inch)
   */
   double getPrinterLpi()
@@ -527,7 +527,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_QUALITY`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_QUALITY].
       Returns: the print quality
   */
   gtk.types.PrintQuality getQuality()
@@ -539,7 +539,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_RESOLUTION`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_RESOLUTION].
       Returns: the resolution in dpi
   */
   int getResolution()
@@ -550,7 +550,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_RESOLUTION_X`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_RESOLUTION_X].
       Returns: the horizontal resolution in dpi
   */
   int getResolutionX()
@@ -561,7 +561,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_RESOLUTION_Y].
       Returns: the vertical resolution in dpi
   */
   int getResolutionY()
@@ -572,7 +572,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_REVERSE`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_REVERSE].
       Returns: whether to reverse the order of the printed pages
   */
   bool getReverse()
@@ -583,7 +583,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_SCALE`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_SCALE].
       Returns: the scale in percent
   */
   double getScale()
@@ -594,7 +594,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of `GTK_PRINT_SETTINGS_USE_COLOR`.
+      Gets the value of [gtk.types.PRINT_SETTINGS_USE_COLOR].
       Returns: whether to use color
   */
   bool getUseColor()
@@ -691,7 +691,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_COLLATE`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_COLLATE].
   
       Params:
         collate = whether to collate the output
@@ -702,7 +702,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_DEFAULT_SOURCE`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_DEFAULT_SOURCE].
   
       Params:
         defaultSource = the default source
@@ -714,7 +714,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_DITHER`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_DITHER].
   
       Params:
         dither = the dithering that is used
@@ -739,7 +739,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_DUPLEX`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_DUPLEX].
   
       Params:
         duplex = a #GtkPrintDuplex value
@@ -750,7 +750,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_FINISHINGS`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_FINISHINGS].
   
       Params:
         finishings = the finishings
@@ -789,7 +789,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_MEDIA_TYPE`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_MEDIA_TYPE].
       
       The set of media types is defined in PWG 5101.1-2002 PWG.
   
@@ -803,7 +803,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_N_COPIES`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_N_COPIES].
   
       Params:
         numCopies = the number of copies
@@ -814,7 +814,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_NUMBER_UP`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_NUMBER_UP].
   
       Params:
         numberUp = the number of pages per sheet
@@ -825,7 +825,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_NUMBER_UP_LAYOUT`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_NUMBER_UP_LAYOUT].
   
       Params:
         numberUpLayout = a #GtkNumberUpLayout value
@@ -836,7 +836,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_ORIENTATION`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_ORIENTATION].
   
       Params:
         orientation = a page orientation
@@ -847,7 +847,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_OUTPUT_BIN`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_OUTPUT_BIN].
   
       Params:
         outputBin = the output bin
@@ -859,7 +859,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_PAGE_RANGES`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_PAGE_RANGES].
   
       Params:
         pageRanges = an array of #GtkPageRanges
@@ -875,7 +875,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_PAGE_SET`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_PAGE_SET].
   
       Params:
         pageSet = a #GtkPageSet value
@@ -886,7 +886,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_PAPER_HEIGHT`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_PAPER_HEIGHT].
   
       Params:
         height = the paper height
@@ -898,9 +898,9 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_PAPER_FORMAT`,
-      `GTK_PRINT_SETTINGS_PAPER_WIDTH` and
-      `GTK_PRINT_SETTINGS_PAPER_HEIGHT`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_PAPER_FORMAT],
+      [gtk.types.PRINT_SETTINGS_PAPER_WIDTH] and
+      [gtk.types.PRINT_SETTINGS_PAPER_HEIGHT].
   
       Params:
         paperSize = a paper size
@@ -911,7 +911,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_PAPER_WIDTH`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_PAPER_WIDTH].
   
       Params:
         width = the paper width
@@ -923,7 +923,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_PRINT_PAGES`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_PRINT_PAGES].
   
       Params:
         pages = a #GtkPrintPages value
@@ -934,7 +934,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Convenience function to set `GTK_PRINT_SETTINGS_PRINTER`
+      Convenience function to set [gtk.types.PRINT_SETTINGS_PRINTER]
       to printer.
   
       Params:
@@ -947,7 +947,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_PRINTER_LPI`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_PRINTER_LPI].
   
       Params:
         lpi = the resolution in lpi (lines per inch)
@@ -958,7 +958,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_QUALITY`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_QUALITY].
   
       Params:
         quality = a #GtkPrintQuality value
@@ -969,9 +969,9 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the values of `GTK_PRINT_SETTINGS_RESOLUTION`,
-      `GTK_PRINT_SETTINGS_RESOLUTION_X` and
-      `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
+      Sets the values of [gtk.types.PRINT_SETTINGS_RESOLUTION],
+      [gtk.types.PRINT_SETTINGS_RESOLUTION_X] and
+      [gtk.types.PRINT_SETTINGS_RESOLUTION_Y].
   
       Params:
         resolution = the resolution in dpi
@@ -982,9 +982,9 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the values of `GTK_PRINT_SETTINGS_RESOLUTION`,
-      `GTK_PRINT_SETTINGS_RESOLUTION_X` and
-      `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
+      Sets the values of [gtk.types.PRINT_SETTINGS_RESOLUTION],
+      [gtk.types.PRINT_SETTINGS_RESOLUTION_X] and
+      [gtk.types.PRINT_SETTINGS_RESOLUTION_Y].
   
       Params:
         resolutionX = the horizontal resolution in dpi
@@ -996,7 +996,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_REVERSE`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_REVERSE].
   
       Params:
         reverse = whether to reverse the output
@@ -1007,7 +1007,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_SCALE`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_SCALE].
   
       Params:
         scale = the scale in percent
@@ -1018,7 +1018,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the value of `GTK_PRINT_SETTINGS_USE_COLOR`.
+      Sets the value of [gtk.types.PRINT_SETTINGS_USE_COLOR].
   
       Params:
         useColor = whether to use color

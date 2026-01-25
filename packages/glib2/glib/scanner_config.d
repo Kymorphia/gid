@@ -60,7 +60,7 @@ class ScannerConfig
   /**
       Get `csetIdentifierFirst` field.
       Returns: specifies the characters which can start
-            identifiers (the default is `G_CSET_a_2_z`, "_", and `G_CSET_A_2_Z`).
+            identifiers (the default is [glib.types.CSET_a_2_z], "_", and [glib.types.CSET_A_2_Z]).
   */
   @property string csetIdentifierFirst()
   {
@@ -71,7 +71,7 @@ class ScannerConfig
       Set `csetIdentifierFirst` field.
       Params:
         propval = specifies the characters which can start
-              identifiers (the default is `G_CSET_a_2_z`, "_", and `G_CSET_A_2_Z`).
+              identifiers (the default is [glib.types.CSET_a_2_z], "_", and [glib.types.CSET_A_2_Z]).
   */
   @property void csetIdentifierFirst(string propval)
   {
@@ -83,7 +83,7 @@ class ScannerConfig
       Get `csetIdentifierNth` field.
       Returns: specifies the characters which can be used
             in identifiers, after the first character (the default is
-            `G_CSET_a_2_z`, "_0123456789", `G_CSET_A_2_Z`, `G_CSET_LATINS`,
+            [glib.types.CSET_a_2_z], "_0123456789", [glib.types.CSET_A_2_Z], `G_CSET_LATINS`,
             `G_CSET_LATINC`).
   */
   @property string csetIdentifierNth()
@@ -96,7 +96,7 @@ class ScannerConfig
       Params:
         propval = specifies the characters which can be used
               in identifiers, after the first character (the default is
-              `G_CSET_a_2_z`, "_0123456789", `G_CSET_A_2_Z`, `G_CSET_LATINS`,
+              [glib.types.CSET_a_2_z], "_0123456789", [glib.types.CSET_A_2_Z], `G_CSET_LATINS`,
               `G_CSET_LATINC`).
   */
   @property void csetIdentifierNth(string propval)

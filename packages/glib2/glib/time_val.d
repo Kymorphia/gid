@@ -39,7 +39,7 @@ struct TimeVal
       Params:
         microseconds = number of microseconds to add to time
   
-      Deprecated: #GTimeVal is not year-2038-safe. Use [vte.types.TEST_FLAGS_NONE] for
+      Deprecated: #GTimeVal is not year-2038-safe. Use [gst.types.ulong] for
            representing microseconds since the epoch, or use #GDateTime.
   */
   void add(glong microseconds)

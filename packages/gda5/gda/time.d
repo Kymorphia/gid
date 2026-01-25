@@ -38,7 +38,7 @@ struct Time
 
   /**
       Changes time's timezone (for example to convert from GMT to another time zone).
-      If time's current timezone is unset (i.e. equal to `GDA_TIMEZONE_INVALID`), then this function simply sets
+      If time's current timezone is unset (i.e. equal to [gda.types.TIMEZONE_INVALID]), then this function simply sets
       time's timezone attribute; Otherwise, it adds or removes hours, minutes or seconds to reflect the time in the new timezone.
       
       Note: the resulting will always be a valid time.

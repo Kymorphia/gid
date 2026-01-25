@@ -560,7 +560,7 @@ class Display : gobject.object.ObjectWrap
       Release any pointer grab.
   
       Params:
-        time = a timestap (e.g. `GDK_CURRENT_TIME`).
+        time = a timestap (e.g. [gdk.types.CURRENT_TIME]).
   
       Deprecated: Use [gdk.device.Device.ungrab], together with [gdk.device.Device.grab]
                     instead.

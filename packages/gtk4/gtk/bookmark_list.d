@@ -201,7 +201,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   /**
       Sets the IO priority to use while loading files.
       
-      The default IO priority is `G_PRIORITY_DEFAULT`.
+      The default IO priority is [glib.types.PRIORITY_DEFAULT].
   
       Params:
         ioPriority = IO priority to use

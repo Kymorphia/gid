@@ -78,14 +78,14 @@ import gobject.object;
     attributes and links of an item, see
     [gio.menu_model.MenuModel.iterateItemAttributes] and
     [gio.menu_model.MenuModel.iterateItemLinks]. The ‘standard’ attributes and
-    link types have predefined names: `G_MENU_ATTRIBUTE_LABEL`,
-    `G_MENU_ATTRIBUTE_ACTION`, `G_MENU_ATTRIBUTE_TARGET`, `G_MENU_LINK_SECTION`
-    and `G_MENU_LINK_SUBMENU`.
+    link types have predefined names: [gio.types.MENU_ATTRIBUTE_LABEL],
+    [gio.types.MENU_ATTRIBUTE_ACTION], [gio.types.MENU_ATTRIBUTE_TARGET], [gio.types.MENU_LINK_SECTION]
+    and [gio.types.MENU_LINK_SUBMENU].
     
     Items in a [gio.menu_model.MenuModel] represent active controls if they refer to
     an action that can get activated when the user interacts with the
     menu item. The reference to the action is encoded by the string ID
-    in the `G_MENU_ATTRIBUTE_ACTION` attribute. An action ID uniquely
+    in the [gio.types.MENU_ATTRIBUTE_ACTION] attribute. An action ID uniquely
     identifies an action in an action group. Which action group(s) provide
     actions depends on the context in which the menu model is used.
     E.g. when the model is exported as the application menu of a

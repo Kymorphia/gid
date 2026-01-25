@@ -317,12 +317,12 @@ class Clipboard : gobject.object.ObjectWrap
       When the operation is finished callback will be called. You must then call
       [gdk.clipboard.Clipboard.readValueFinish] to get the resulting [gobject.value.Value].
       
-      For local clipboard contents that are available in the given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT],
+      For local clipboard contents that are available in the given `GType`,
       the value will be copied directly. Otherwise, GDK will try to use
       `funccontent_deserialize_async` to convert the clipboard's data.
   
       Params:
-        type = a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to read
+        type = a `GType` to read
         ioPriority = the I/O priority of the request
         cancellable = optional [gio.cancellable.Cancellable] object
         callback = callback to call when the request is satisfied

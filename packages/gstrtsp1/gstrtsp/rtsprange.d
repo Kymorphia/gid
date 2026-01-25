@@ -55,7 +55,7 @@ struct RTSPRange
       Retrieve the minimum and maximum values from range converted to
       #GstClockTime in min and max.
       
-      A value of `GST_CLOCK_TIME_NONE` will be used to signal #GST_RTSP_TIME_NOW
+      A value of [gst.types.CLOCK_TIME_NONE] will be used to signal #GST_RTSP_TIME_NOW
       and #GST_RTSP_TIME_END for min and max respectively.
       
       UTC times will be converted to nanoseconds since 1900.

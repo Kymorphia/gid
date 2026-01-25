@@ -914,7 +914,7 @@ class TabView : gtk.widget.Widget
         A typical reason to connect to this signal is to show a confirmation dialog
         for closing a tab.
         
-        The signal handler should return `GDK_EVENT_STOP` to stop propagation or
+        The signal handler should return [gdk.types.EVENT_STOP] to stop propagation or
         `GDK_EVENT_CONTINUE` to invoke the default handler.
   
       Params:

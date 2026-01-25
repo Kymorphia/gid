@@ -802,9 +802,9 @@ bool getCurrentEventState(out gdk.types.ModifierType state)
 
 /**
     If there is a current event and it has a timestamp,
-    return that timestamp, otherwise return `GDK_CURRENT_TIME`.
+    return that timestamp, otherwise return [gdk.types.CURRENT_TIME].
     Returns: the timestamp from the current event,
-          or `GDK_CURRENT_TIME`.
+          or [gdk.types.CURRENT_TIME].
 */
 uint getCurrentEventTime()
 {
@@ -2135,7 +2135,7 @@ void renderActivity(gtk.style_context.StyleContext context, cairo.context.Contex
     Params:
       context = a #GtkStyleContext
       cr = a #cairo_t
-      angle = arrow angle from 0 to 2 * `G_PI`, being 0 the arrow pointing to the north
+      angle = arrow angle from 0 to 2 * [glib.types.PI], being 0 the arrow pointing to the north
       x = X origin of the render area
       y = Y origin of the render area
       size = square side for render area
@@ -2692,7 +2692,7 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
       
     Ideally the timestamp is taken from the event triggering
     the [gtk.global.showUri] call. If timestamp is not known you can take
-    `GDK_CURRENT_TIME`.
+    [gdk.types.CURRENT_TIME].
     
     This is the recommended call to be used as it passes information
     necessary for sandbox helpers to parent their dialogs properly.

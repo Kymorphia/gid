@@ -944,7 +944,7 @@ struct GstBaseParsePrivate;
     
     When the element is set to PLAYING, #GstBaseSink will synchronise on the
     clock using the times returned from #GstBaseSinkClass::get_times. If this
-    function returns `GST_CLOCK_TIME_NONE` for the start time, no synchronisation
+    function returns [gst.types.CLOCK_TIME_NONE] for the start time, no synchronisation
     will be done. Synchronisation can be disabled entirely by setting the object
     #GstBaseSink:sync property to false.
     
@@ -2213,7 +2213,7 @@ struct GstDataQueueItem
 
   /**
       the duration in #GstClockTime of the miniobject. Can not be
-      `GST_CLOCK_TIME_NONE`.
+      [gst.types.CLOCK_TIME_NONE].
   */
   ulong duration;
 

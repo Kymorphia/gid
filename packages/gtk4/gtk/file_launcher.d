@@ -264,7 +264,7 @@ class FileLauncher : gobject.object.ObjectWrap
       If `FALSE`, the file might be opened with a default app or the previous choice.
   
       Params:
-        alwaysAsk = a [glib.types.SOURCE_REMOVE]
+        alwaysAsk = a `gboolean`
   */
   void setAlwaysAsk(bool alwaysAsk)
   {
@@ -286,7 +286,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Sets whether to make the file writable for the handler.
   
       Params:
-        writable = a [glib.types.SOURCE_REMOVE]
+        writable = a `gboolean`
   */
   void setWritable(bool writable)
   {

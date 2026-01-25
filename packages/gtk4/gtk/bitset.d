@@ -248,7 +248,7 @@ class Bitset : gobject.boxed.Boxed
       
       For example, if the set is empty, 0 is returned.
       
-      Note that this function returns a [vte.types.TEST_FLAGS_NONE], because when all
+      Note that this function returns a [gst.types.ulong], because when all
       values are set, the return value is `G_MAXUINT + 1`. Unless you
       are sure this cannot happen (it can't with [gio.list_model.ListModel]), be sure
       to use a 64bit type.
@@ -265,7 +265,7 @@ class Bitset : gobject.boxed.Boxed
       Gets the number of values that are part of the set from first to last
       (inclusive).
       
-      Note that this function returns a [vte.types.TEST_FLAGS_NONE], because when all values are
+      Note that this function returns a [gst.types.ulong], because when all values are
       set, the return value is `G_MAXUINT + 1`. Unless you are sure this cannot
       happen (it can't with [gio.list_model.ListModel]), be sure to use a 64bit type.
   

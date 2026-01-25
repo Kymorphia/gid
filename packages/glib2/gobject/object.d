@@ -80,8 +80,8 @@ string objectMixin()
     [Instantiatable classed types: Objects](concepts.html#instantiatable-classed-types-objects).
     
     Since GLib 2.72, all [gobject.object.ObjectWrap]s are guaranteed to be aligned to at least the
-    alignment of the largest basic GLib type (typically this is [vte.types.TEST_FLAGS_NONE] or
-    [graphene.types.PI_2]). If you need larger alignment for an element in a [gobject.object.ObjectWrap], you
+    alignment of the largest basic GLib type (typically this is [gst.types.ulong] or
+    `gdouble`). If you need larger alignment for an element in a [gobject.object.ObjectWrap], you
     should allocate it on the heap (aligned), or arrange for your [gobject.object.ObjectWrap] to be
     appropriately padded. This guarantee applies to the [gobject.object.ObjectWrap] (or derived)
     struct, the [gstpbutils.types.ObjectClass] (or derived) struct, and any private data allocated

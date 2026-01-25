@@ -22,8 +22,8 @@ template TreeSortableT()
   /**
       Fills in sort_column_id and order with the current sort column and the
       order. It returns true unless the sort_column_id is
-      `GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID` or
-      `GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID`.
+      [gtk.types.TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID] or
+      [gtk.types.TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID].
   
       Params:
         sortColumnId = The sort column id to be filled in
@@ -54,13 +54,13 @@ template TreeSortableT()
   /**
       Sets the default comparison function used when sorting to be sort_func.
       If the current sort column id of sortable is
-      `GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID`, then the model will sort using
+      [gtk.types.TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID], then the model will sort using
       this function.
       
       If sort_func is null, then there will be no default comparison function.
       This means that once the model  has been sorted, it can’t go back to the
       default state. In this case, when the current sort column id of sortable
-      is `GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID`, the model will be unsorted.
+      is [gtk.types.TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID], the model will be unsorted.
   
       Params:
         sortFunc = The comparison function
@@ -87,10 +87,10 @@ template TreeSortableT()
       a regular column id, or one of the following special values:
       
       $(LIST
-        * `GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID`: the default sort function
+        * [gtk.types.TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID]: the default sort function
           will be used, if it is set
         
-        * `GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID`: no sorting will occur
+        * [gtk.types.TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID]: no sorting will occur
       )
   
       Params:

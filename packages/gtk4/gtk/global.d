@@ -96,7 +96,7 @@ string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint accelera
     Converts an accelerator keyval and modifier mask into a string
     parseable by [gtk.global.acceleratorParse].
     
-    For example, if you pass in `GDK_KEY_q` and [gdk.types.ModifierType.ControlMask],
+    For example, if you pass in [gdk.types.KEY_q] and [gdk.types.ModifierType.ControlMask],
     this function returns `<Control>q`.
     
     If you need to display accelerators in the user interface,
@@ -229,9 +229,9 @@ bool acceleratorParseWithKeycode(string accelerator, gdk.display.Display display
     Determines whether a given keyval and modifier mask constitute
     a valid keyboard accelerator.
     
-    For example, the `GDK_KEY_a` keyval plus [gdk.types.ModifierType.ControlMask] mark is valid,
+    For example, the [gdk.types.KEY_a] keyval plus [gdk.types.ModifierType.ControlMask] mark is valid,
     and matches the “Ctrl+a” accelerator. But, you can't, for instance, use
-    the `GDK_KEY_Control_L` keyval as an accelerator.
+    the [gdk.types.KEY_Control_L] keyval as an accelerator.
 
     Params:
       keyval = a GDK keyval
@@ -249,8 +249,8 @@ bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
     Checks that the GTK library in use is compatible with the
     given version.
     
-    Generally you would pass in the constants `GTK_MAJOR_VERSION`,
-    `GTK_MINOR_VERSION`, `GTK_MICRO_VERSION` as the three arguments
+    Generally you would pass in the constants [gtk.types.MAJOR_VERSION],
+    [gtk.types.MINOR_VERSION], [gtk.types.MICRO_VERSION] as the three arguments
     to this function; that produces a check that the library in
     use is compatible with the version of GTK the application or
     module was compiled against.
@@ -481,7 +481,7 @@ gtk.types.TextDirection getLocaleDirection()
     For example, in GTK version 3.1.5 this is 3.
     
     This function is in the library, so it represents the GTK library
-    your code is running against. Contrast with the `GTK_MAJOR_VERSION`
+    your code is running against. Contrast with the [gtk.types.MAJOR_VERSION]
     macro, which represents the major version of the GTK headers you
     have included when compiling your code.
     Returns: the major version number of the GTK library
@@ -500,7 +500,7 @@ uint getMajorVersion()
     
     This function is in the library, so it represents the GTK library
     your code is are running against. Contrast with the
-    `GTK_MICRO_VERSION` macro, which represents the micro version of the
+    [gtk.types.MICRO_VERSION] macro, which represents the micro version of the
     GTK headers you have included when compiling your code.
     Returns: the micro version number of the GTK library
 */
@@ -518,7 +518,7 @@ uint getMicroVersion()
     
     This function is in the library, so it represents the GTK library
     your code is are running against. Contrast with the
-    `GTK_MINOR_VERSION` macro, which represents the minor version of the
+    [gtk.types.MINOR_VERSION] macro, which represents the minor version of the
     GTK headers you have included when compiling your code.
     Returns: the minor version number of the GTK library
 */
@@ -708,7 +708,7 @@ void renderActivity(gtk.style_context.StyleContext context, cairo.context.Contex
     Params:
       context = a [gtk.style_context.StyleContext]
       cr = a [cairo.context.Context]
-      angle = arrow angle from 0 to 2 * `G_PI`, being 0 the arrow pointing to the north
+      angle = arrow angle from 0 to 2 * [glib.types.PI], being 0 the arrow pointing to the north
       x = X origin of the render area
       y = Y origin of the render area
       size = square side for render area
@@ -956,7 +956,7 @@ void setDebugFlags(gtk.types.DebugFlags flags)
     Params:
       parent = parent window
       uri = the uri to show
-      timestamp = timestamp from the event that triggered this call, or `GDK_CURRENT_TIME`
+      timestamp = timestamp from the event that triggered this call, or [gdk.types.CURRENT_TIME]
 
     Deprecated: Use [gtk.file_launcher.FileLauncher.launch] or
         [gtk.uri_launcher.UriLauncher.launch] instead
@@ -980,7 +980,7 @@ void showUri(gtk.window.Window parent, string uri, uint timestamp)
     Params:
       parent = parent window
       uri = the uri to show
-      timestamp = timestamp from the event that triggered this call, or `GDK_CURRENT_TIME`
+      timestamp = timestamp from the event that triggered this call, or [gdk.types.CURRENT_TIME]
       cancellable = a [gio.cancellable.Cancellable] to cancel the launch
       callback = a callback to call when the action is complete
 

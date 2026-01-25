@@ -93,7 +93,7 @@ string getFeatures()
 
 /**
     Returns the major version of the VTE library at runtime.
-    Contrast this with `VTE_MAJOR_VERSION` which represents
+    Contrast this with [vte.types.MAJOR_VERSION] which represents
     the version of the VTE library that the code was compiled
     with.
     Returns: the major version
@@ -107,7 +107,7 @@ uint getMajorVersion()
 
 /**
     Returns the micro version of the VTE library at runtime.
-    Contrast this with `VTE_MICRO_VERSION` which represents
+    Contrast this with [vte.types.MICRO_VERSION] which represents
     the version of the VTE library that the code was compiled
     with.
     Returns: the micro version
@@ -121,7 +121,7 @@ uint getMicroVersion()
 
 /**
     Returns the minor version of the VTE library at runtime.
-    Contrast this with `VTE_MINOR_VERSION` which represents
+    Contrast this with [vte.types.MINOR_VERSION] which represents
     the version of the VTE library that the code was compiled
     with.
     Returns: the minor version

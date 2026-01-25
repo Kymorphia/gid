@@ -429,7 +429,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   /**
       Sets the minimum interval for requesting keyframes based on force-keyunit
       events. Setting this to 0 will allow to handle every event, setting this to
-      `GST_CLOCK_TIME_NONE` causes force-keyunit events to be ignored.
+      [gst.types.CLOCK_TIME_NONE] causes force-keyunit events to be ignored.
   
       Params:
         interval = minimum interval

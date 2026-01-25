@@ -464,7 +464,7 @@ class OutputStream : gobject.object.ObjectWrap
       
       Any outstanding I/O request with higher priority (lower numerical
       value) will be executed before an outstanding request with lower
-      priority. Default priority is `G_PRIORITY_DEFAULT`.
+      priority. Default priority is [glib.types.PRIORITY_DEFAULT].
       
       Note that no copy of buffer will be made, so it must stay valid
       until callback is called.
@@ -546,7 +546,7 @@ class OutputStream : gobject.object.ObjectWrap
       
       Any outstanding I/O request with higher priority (lower numerical
       value) will be executed before an outstanding request with lower
-      priority. Default priority is `G_PRIORITY_DEFAULT`.
+      priority. Default priority is [glib.types.PRIORITY_DEFAULT].
       
       The asynchronous methods have a default fallback that uses threads
       to implement asynchronicity, so they are optional for inheriting
@@ -794,7 +794,7 @@ class OutputStream : gobject.object.ObjectWrap
       
       Any outstanding I/O request with higher priority (lower numerical
       value) will be executed before an outstanding request with lower
-      priority. Default priority is `G_PRIORITY_DEFAULT`.
+      priority. Default priority is [glib.types.PRIORITY_DEFAULT].
       
       Note that no copy of vectors will be made, so it must stay valid
       until callback is called. The content of the individual elements
@@ -874,7 +874,7 @@ class OutputStream : gobject.object.ObjectWrap
       
       Any outstanding I/O request with higher priority (lower numerical
       value) will be executed before an outstanding request with lower
-      priority. Default priority is `G_PRIORITY_DEFAULT`.
+      priority. Default priority is [glib.types.PRIORITY_DEFAULT].
       
       The asynchronous methods have a default fallback that uses threads
       to implement asynchronicity, so they are optional for inheriting

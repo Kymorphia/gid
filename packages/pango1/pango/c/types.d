@@ -8,7 +8,7 @@ public import harfbuzz.c.types;
 public import cairo.c.types;
 
 /**
-    A [pango.types.GLYPH_UNKNOWN_FLAG] represents a single glyph in the output form of a string.
+    A `PangoGlyph` represents a single glyph in the output form of a string.
 */
 alias PangoGlyph = uint;
 
@@ -109,7 +109,7 @@ enum PangoAttrType
   Stretch = 6,
 
   /**
-      font size in points scaled by `PANGO_SCALE` ([pango.attr_int.AttrInt])
+      font size in points scaled by [pango.types.SCALE] ([pango.attr_int.AttrInt])
   */
   Size = 7,
 
@@ -174,7 +174,7 @@ enum PangoAttrType
   StrikethroughColor = 19,
 
   /**
-      font size in pixels scaled by `PANGO_SCALE` ([pango.attr_int.AttrInt])
+      font size in pixels scaled by [pango.types.SCALE] ([pango.attr_int.AttrInt])
   */
   AbsoluteSize = 20,
 
@@ -2052,7 +2052,7 @@ struct PangoAttrSize
   PangoAttribute attr;
 
   /**
-      size of font, in units of 1/`PANGO_SCALE` of a point (for
+      size of font, in units of 1/[pango.types.SCALE] of a point (for
         [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
   int size;

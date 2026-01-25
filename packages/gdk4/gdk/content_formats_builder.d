@@ -77,7 +77,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
       Appends type to builder if it has not already been added.
   
       Params:
-        type = a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]
+        type = a `GType`
   */
   void addGtype(gobject.types.GType type)
   {

@@ -139,7 +139,7 @@ int asciiDigitValue(char c)
 }
 
 /**
-    Converts a [graphene.types.PI_2] to a string, using the '.' as
+    Converts a `gdouble` to a string, using the '.' as
     decimal point.
     
     This function generates enough precision that converting
@@ -161,13 +161,13 @@ void asciiDtostr(ref char[] buffer, double d)
 }
 
 /**
-    Converts a [graphene.types.PI_2] to a string, using the '.' as
+    Converts a `gdouble` to a string, using the '.' as
     decimal point. To format the number you pass in
     a `printf()`-style format string. Allowed conversion
     specifiers are 'e', 'E', 'f', 'F', 'g' and 'G'.
     
     The format must just be a single format specifier
-    starting with `%`, expecting a [graphene.types.PI_2] argument.
+    starting with `%`, expecting a `gdouble` argument.
     
     The returned buffer is guaranteed to be nul-terminated.
     
@@ -402,7 +402,7 @@ double asciiStrtod(string nptr, out string endptr)
 }
 
 /**
-    Converts a string to a [gst.types.FORMAT_PERCENT_SCALE] value.
+    Converts a string to a [gst.types.long] value.
     
     This function behaves like the standard `strtoll()` function
     does in the C locale. It does this without actually
@@ -439,7 +439,7 @@ long asciiStrtoll(string nptr, out string endptr, uint base)
 }
 
 /**
-    Converts a string to a [vte.types.TEST_FLAGS_NONE] value.
+    Converts a string to a [gst.types.ulong] value.
     
     This function behaves like the standard `strtoull()` function
     does in the C locale. It does this without actually
@@ -447,7 +447,7 @@ long asciiStrtoll(string nptr, out string endptr, uint base)
     thread-safe.
     
     Note that input with a leading minus sign (`-`) is accepted, and will return
-    the negation of the parsed number, unless that would overflow a [vte.types.TEST_FLAGS_NONE].
+    the negation of the parsed number, unless that would overflow a [gst.types.ulong].
     Critically, this means you cannot assume that a short fixed length input will
     result in a low return value, as the input could have a leading `-`.
     
@@ -1642,8 +1642,8 @@ int chdir(string path)
     Checks that the GLib library in use is compatible with the
     given version.
     
-    Generally you would pass in the constants `GLIB_MAJOR_VERSION`,
-    `GLIB_MINOR_VERSION`, `GLIB_MICRO_VERSION` as the three arguments
+    Generally you would pass in the constants [glib.types.MAJOR_VERSION],
+    [glib.types.MINOR_VERSION], [glib.types.MICRO_VERSION] as the three arguments
     to this function; that produces a check that the library in use
     is compatible with the version of GLib the application or module
     was compiled against.
@@ -1700,7 +1700,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
 
     Params:
       priority = the priority of the idle source. Typically this will be in the
-          range between `G_PRIORITY_DEFAULT_IDLE` and `G_PRIORITY_HIGH_IDLE`.
+          range between [glib.types.PRIORITY_DEFAULT_IDLE] and [glib.types.PRIORITY_HIGH_IDLE].
       pid = process to watch. On POSIX the positive pid of a child process. On
         Windows a handle for a process (which doesn't have to be a child).
       function_ = function to call
@@ -4288,7 +4288,7 @@ string hostnameToUnicode(string hostname)
     Adds a function to be called whenever there are no higher priority
     events pending.
     
-    If the function returns `G_SOURCE_REMOVE` or false it is automatically
+    If the function returns [glib.types.SOURCE_REMOVE] or false it is automatically
     removed from the list of event sources and will not be called again.
     
     See [memory management of sources][mainloop-memory-management] for details
@@ -4302,7 +4302,7 @@ string hostnameToUnicode(string hostname)
 
     Params:
       priority = the priority of the idle source. Typically this will be in the
-          range between `G_PRIORITY_DEFAULT_IDLE` and `G_PRIORITY_HIGH_IDLE`.
+          range between [glib.types.PRIORITY_DEFAULT_IDLE] and [glib.types.PRIORITY_HIGH_IDLE].
       function_ = function to call
     Returns: the ID (greater than 0) of the event source.
 */
@@ -4346,8 +4346,8 @@ bool idleRemoveByData(void* data = null)
     The source will not initially be associated with any #GMainContext
     and must be added to one with [glib.source.Source.attach] before it will be
     executed. Note that the default priority for idle sources is
-    `G_PRIORITY_DEFAULT_IDLE`, as compared to other sources which
-    have a default priority of `G_PRIORITY_DEFAULT`.
+    [glib.types.PRIORITY_DEFAULT_IDLE], as compared to other sources which
+    have a default priority of [glib.types.PRIORITY_DEFAULT].
     Returns: the newly-created idle source
 */
 glib.source.Source idleSourceNew()
@@ -4891,7 +4891,7 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
     For more details on its usage and about the parameters, see `funcGLib.log_structured`.
 
     Params:
-      logDomain = log domain, usually `G_LOG_DOMAIN`
+      logDomain = log domain, usually [glib.types.LOG_DOMAIN]
       logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
            level
       fields = a dictionary ([glib.variant.Variant] of the type `G_VARIANT_TYPE_VARDICT`)
@@ -5348,7 +5348,7 @@ void memSetVtable(glib.types.MemVTable vtable)
     Returns: a pointer to the newly-allocated copy of the memory
 
     Deprecated: Use `funcGLib.memdup2` instead, as it accepts a gsize argument
-        for byte_size, avoiding the possibility of overflow in a [gobject.types.size_t] → [pango.types.ATTR_INDEX_TO_TEXT_END]
+        for byte_size, avoiding the possibility of overflow in a [gobject.types.size_t] → [gda.types.uint]
         conversion
 */
 void* memdup(const(void)* mem, uint byteSize)
@@ -5362,7 +5362,7 @@ void* memdup(const(void)* mem, uint byteSize)
     from mem. If mem is `NULL` it returns `NULL`.
     
     This replaces `funcGLib.memdup`, which was prone to integer overflows when
-    converting the argument from a [gobject.types.size_t] to a [pango.types.ATTR_INDEX_TO_TEXT_END].
+    converting the argument from a [gobject.types.size_t] to a [gda.types.uint].
 
     Params:
       mem = the memory to copy
@@ -8581,7 +8581,7 @@ uint strvLength(string[] strArray)
     required via the `-p` command-line option or [glib.global.testTrapSubprocess].
     
     No component of testpath may start with a dot (`.`) if the
-    `G_TEST_OPTION_ISOLATE_DIRS` option is being used; and it is recommended to
+    [glib.types.TEST_OPTION_ISOLATE_DIRS] option is being used; and it is recommended to
     do so even if it isn’t.
 
     Params:
@@ -9326,7 +9326,7 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
 
     Params:
       priority = the priority of the timeout source. Typically this will be in
-          the range between `G_PRIORITY_DEFAULT` and `G_PRIORITY_HIGH`.
+          the range between [glib.types.PRIORITY_DEFAULT] and [glib.types.PRIORITY_HIGH].
       interval = the time between calls to the function, in milliseconds
           (1/1000ths of a second)
       function_ = function to call
@@ -9355,7 +9355,7 @@ uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
 /**
     Sets a function to be called at regular intervals, with priority.
     
-    The function is called repeatedly until it returns `G_SOURCE_REMOVE`
+    The function is called repeatedly until it returns [glib.types.SOURCE_REMOVE]
     or false, at which point the timeout is automatically destroyed and
     the function will not be called again.
     
@@ -9395,7 +9395,7 @@ uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
 
     Params:
       priority = the priority of the timeout source. Typically this will be in
-          the range between `G_PRIORITY_DEFAULT` and `G_PRIORITY_HIGH`.
+          the range between [glib.types.PRIORITY_DEFAULT] and [glib.types.PRIORITY_HIGH].
       interval = the time between calls to the function, in seconds
       function_ = function to call
     Returns: the ID (greater than 0) of the event source.
@@ -9768,7 +9768,7 @@ int unicharDigitValue(dchar c)
     At any rate, Unicode does guarantee that a buffer of length
     18 is always enough for both compatibility and canonical
     decompositions, so that is the size recommended. This is provided
-    as `G_UNICHAR_MAX_DECOMPOSITION_LENGTH`.
+    as [glib.types.UNICHAR_MAX_DECOMPOSITION_LENGTH].
     
     See
     [UAX#15](http://unicode.org/reports/tr15/)
@@ -10427,7 +10427,7 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
 
     Params:
       priority = the priority of the signal source. Typically this will be in
-                   the range between `G_PRIORITY_DEFAULT` and `G_PRIORITY_HIGH`.
+                   the range between [glib.types.PRIORITY_DEFAULT] and [glib.types.PRIORITY_HIGH].
       signum = Signal number
       handler = Callback
     Returns: An ID (greater than 0) for the event source
@@ -10546,7 +10546,7 @@ void unsetenv(string variable)
     Pauses the current thread for the given number of microseconds.
     
     There are 1 million microseconds per second (represented by the
-    `G_USEC_PER_SEC` macro). [glib.global.usleep] may have limited precision,
+    [glib.types.USEC_PER_SEC] macro). [glib.global.usleep] may have limited precision,
     depending on hardware and operating system; don't rely on the exact
     length of the sleep.
 

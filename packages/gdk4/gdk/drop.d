@@ -244,11 +244,11 @@ class Drop : gobject.object.ObjectWrap
       [gobject.value.Value].
       
       For local drag-and-drop operations that are available in the given
-      [gobject.types.TYPE_FLAG_RESERVED_ID_BIT], the value will be copied directly. Otherwise, GDK will
+      `GType`, the value will be copied directly. Otherwise, GDK will
       try to use `funcGdk.content_deserialize_async` to convert the data.
   
       Params:
-        type = a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to read
+        type = a `GType` to read
         ioPriority = the I/O priority of the request.
         cancellable = optional [gio.cancellable.Cancellable] object, null to ignore.
         callback = callback to call when the request is satisfied

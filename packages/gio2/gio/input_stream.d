@@ -265,7 +265,7 @@ class InputStream : gobject.object.ObjectWrap
       
       Any outstanding I/O request with higher priority (lower numerical
       value) will be executed before an outstanding request with lower
-      priority. Default priority is `G_PRIORITY_DEFAULT`.
+      priority. Default priority is [glib.types.PRIORITY_DEFAULT].
   
       Params:
         buffer = a buffer to read data into (which should be at least count bytes long)
@@ -336,7 +336,7 @@ class InputStream : gobject.object.ObjectWrap
       
       Any outstanding i/o request with higher priority (lower numerical value) will
       be executed before an outstanding request with lower priority. Default
-      priority is `G_PRIORITY_DEFAULT`.
+      priority is [glib.types.PRIORITY_DEFAULT].
       
       The asynchronous methods have a default fallback that uses threads to implement
       asynchronicity, so they are optional for inheriting classes. However, if you
@@ -429,7 +429,7 @@ class InputStream : gobject.object.ObjectWrap
       
       Any outstanding I/O request with higher priority (lower numerical
       value) will be executed before an outstanding request with lower
-      priority. Default priority is `G_PRIORITY_DEFAULT`.
+      priority. Default priority is [glib.types.PRIORITY_DEFAULT].
   
       Params:
         count = the number of bytes that will be read from the stream
@@ -557,7 +557,7 @@ class InputStream : gobject.object.ObjectWrap
       
       Any outstanding i/o request with higher priority (lower numerical value)
       will be executed before an outstanding request with lower priority.
-      Default priority is `G_PRIORITY_DEFAULT`.
+      Default priority is [glib.types.PRIORITY_DEFAULT].
       
       The asynchronous methods have a default fallback that uses threads to
       implement asynchronicity, so they are optional for inheriting classes.

@@ -94,7 +94,7 @@ class Bus : gst.object.ObjectWrap
 
   /**
       Adds a bus signal watch to the default main context with the default priority
-      ( `G_PRIORITY_DEFAULT` ). It is also possible to use a non-default
+      ( [glib.types.PRIORITY_DEFAULT] ). It is also possible to use a non-default
       main context set up using [glib.main_context.MainContext.pushThreadDefault] (before
       one had to create a bus watch source and attach it to the desired main
       context 'manually').
@@ -113,7 +113,7 @@ class Bus : gst.object.ObjectWrap
 
   /**
       Adds a bus signal watch to the default main context with the given priority
-      (e.g. `G_PRIORITY_DEFAULT`). It is also possible to use a non-default main
+      (e.g. [glib.types.PRIORITY_DEFAULT]). It is also possible to use a non-default main
       context set up using [glib.main_context.MainContext.pushThreadDefault]
       (before one had to create a bus watch source and attach it to the desired
       main context 'manually').
@@ -138,7 +138,7 @@ class Bus : gst.object.ObjectWrap
 
   /**
       Adds a bus watch to the default main context with the given priority (e.g.
-      `G_PRIORITY_DEFAULT`). It is also possible to use a non-default  main
+      [glib.types.PRIORITY_DEFAULT]). It is also possible to use a non-default  main
       context set up using [glib.main_context.MainContext.pushThreadDefault] (before
       one had to create a bus watch source and attach it to the desired main
       context 'manually').
@@ -512,7 +512,7 @@ class Bus : gst.object.ObjectWrap
       matching message was posted on the bus.
   
       Params:
-        timeout = a timeout in nanoseconds, or `GST_CLOCK_TIME_NONE` to wait forever
+        timeout = a timeout in nanoseconds, or [gst.types.CLOCK_TIME_NONE] to wait forever
         types = message types to take into account, [gst.types.MessageType.Any] for any type
       Returns: a #GstMessage matching the
             filter in types, or null if no matching message was found on

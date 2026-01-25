@@ -341,7 +341,7 @@ class Event : gobject.boxed.Boxed
       by the rate_multiplier factor.
       
       The flags provided replace any flags in the existing segment, for the
-      flags within the `GST_SEGMENT_INSTANT_FLAGS` set. Other GstSegmentFlags
+      flags within the [gst.types.SEGMENT_INSTANT_FLAGS] set. Other GstSegmentFlags
       are ignored and not transferred in the event.
   
       Params:

@@ -145,7 +145,7 @@ class SearchBar : gtk.bin.Bin
       window which contains the search bar received a key event.
       
       If the key event is handled by the search bar, the bar will
-      be shown, the entry populated with the entered text and `GDK_EVENT_STOP`
+      be shown, the entry populated with the entered text and [gdk.types.EVENT_STOP]
       will be returned. The caller should ensure that events are
       not propagated further.
       
@@ -182,9 +182,9 @@ class SearchBar : gtk.bin.Bin
   
       Params:
         event = a #GdkEvent containing key press events
-      Returns: `GDK_EVENT_STOP` if the key press event resulted
+      Returns: [gdk.types.EVENT_STOP] if the key press event resulted
             in text being entered in the search entry (and revealing
-            the search bar if necessary), `GDK_EVENT_PROPAGATE` otherwise.
+            the search bar if necessary), [gdk.types.EVENT_PROPAGATE] otherwise.
   */
   bool handleEvent(gdk.event.Event event)
   {

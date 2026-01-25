@@ -910,7 +910,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       returned (with error set accordingly).
       
       Exporting menus with sections containing more than
-      `G_MENU_EXPORTER_MAX_SECTION_SIZE` items is not supported and results in
+      [gio.types.MENU_EXPORTER_MAX_SECTION_SIZE] items is not supported and results in
       undefined behavior.
       
       You can unexport the menu model using
@@ -1555,7 +1555,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       [gio.dbus_connection.DBusConnection.signalSubscribe] is called, in order to avoid memory
       leaks through callbacks queued on the #GMainContext after it’s stopped being
       iterated.
-      Alternatively, any idle source with a priority lower than `G_PRIORITY_DEFAULT`
+      Alternatively, any idle source with a priority lower than [glib.types.PRIORITY_DEFAULT]
       that was scheduled after unsubscription, also indicates that all resources
       of this subscription are released.
   

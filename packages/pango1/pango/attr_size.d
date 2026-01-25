@@ -44,7 +44,7 @@ class AttrSize
 
   /**
       Get `size` field.
-      Returns: size of font, in units of 1/`PANGO_SCALE` of a point (for
+      Returns: size of font, in units of 1/[pango.types.SCALE] of a point (for
           [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
   @property int size()
@@ -55,7 +55,7 @@ class AttrSize
   /**
       Set `size` field.
       Params:
-        propval = size of font, in units of 1/`PANGO_SCALE` of a point (for
+        propval = size of font, in units of 1/[pango.types.SCALE] of a point (for
             [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
   @property void size(int propval)
@@ -92,7 +92,7 @@ class AttrSize
       Create a new font-size attribute in fractional points.
   
       Params:
-        size = the font size, in `PANGO_SCALE`-ths of a point
+        size = the font size, in [pango.types.SCALE]-ths of a point
       Returns: the newly allocated
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]
@@ -109,7 +109,7 @@ class AttrSize
       Create a new font-size attribute in device units.
   
       Params:
-        size = the font size, in `PANGO_SCALE`-ths of a device unit
+        size = the font size, in [pango.types.SCALE]-ths of a device unit
       Returns: the newly allocated
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]

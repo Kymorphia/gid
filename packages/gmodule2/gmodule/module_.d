@@ -110,7 +110,7 @@ class Module
             prefix and suffix. This should be freed when no longer needed
   
       Deprecated: Use [gmodule.module_.Module.open] instead with module_name as the
-        basename of the file_name argument. See `G_MODULE_SUFFIX` for why.
+        basename of the file_name argument. See [glib.types.MODULE_SUFFIX] for why.
   */
   static string buildPath(string directory, string moduleName)
   {

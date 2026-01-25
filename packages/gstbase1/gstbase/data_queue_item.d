@@ -75,7 +75,7 @@ class DataQueueItem
   /**
       Get `duration` field.
       Returns: the duration in #GstClockTime of the miniobject. Can not be
-        `GST_CLOCK_TIME_NONE`.
+        [gst.types.CLOCK_TIME_NONE].
   */
   @property ulong duration()
   {
@@ -86,7 +86,7 @@ class DataQueueItem
       Set `duration` field.
       Params:
         propval = the duration in #GstClockTime of the miniobject. Can not be
-          `GST_CLOCK_TIME_NONE`.
+          [gst.types.CLOCK_TIME_NONE].
   */
   @property void duration(ulong propval)
   {

@@ -559,7 +559,7 @@ bool contentTypeIsUnknown(string type)
     This function is intended to be used when writing tests that depend on
     information stored in the MIME database, in order to control the data.
     
-    Typically, in case your tests use `G_TEST_OPTION_ISOLATE_DIRS`, but they
+    Typically, in case your tests use [glib.types.TEST_OPTION_ISOLATE_DIRS], but they
     depend on the system’s MIME database, you should call this function
     with dirs set to null before calling [glib.global.testInit], for instance:
     

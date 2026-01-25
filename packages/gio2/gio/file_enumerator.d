@@ -151,7 +151,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       directory of enumerator.  This function is primarily intended to be used
       inside loops with [gio.file_enumerator.FileEnumerator.nextFile].
       
-      To use this, `G_FILE_ATTRIBUTE_STANDARD_NAME` must have been listed in the
+      To use this, [gio.types.FILE_ATTRIBUTE_STANDARD_NAME] must have been listed in the
       attributes list used when creating the #GFileEnumerator.
       
       This is a convenience method that's equivalent to:
@@ -364,7 +364,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       
       Any outstanding I/O request with higher priority (lower numerical value) will
       be executed before an outstanding request with lower priority. Default
-      priority is `G_PRIORITY_DEFAULT`.
+      priority is [glib.types.PRIORITY_DEFAULT].
   
       Params:
         numFiles = the number of file info objects to request

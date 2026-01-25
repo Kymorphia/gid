@@ -850,8 +850,8 @@ alias SourceDummyMarshal = void delegate();
     When calling [glib.source.Source.setCallback], you may need to cast a function of a
     different type to this type. Use G_SOURCE_FUNC() to avoid warnings about
     incompatible function types.
-    Returns: false if the source should be removed. `G_SOURCE_CONTINUE` and
-      `G_SOURCE_REMOVE` are more memorable names for the return value.
+    Returns: false if the source should be removed. [glib.types.SOURCE_CONTINUE] and
+      [glib.types.SOURCE_REMOVE] are more memorable names for the return value.
 */
 alias SourceFunc = bool delegate();
 
@@ -1211,104 +1211,104 @@ enum IEEE754_FLOAT_BIAS = 127;
 enum KEY_FILE_DESKTOP_GROUP = "Desktop Entry";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a string list
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string list
     giving the available application actions.
 */
 enum KEY_FILE_DESKTOP_KEY_ACTIONS = "Actions";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a list
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a list
     of strings giving the categories in which the desktop entry
     should be shown in a menu.
 */
 enum KEY_FILE_DESKTOP_KEY_CATEGORIES = "Categories";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a localized
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a localized
     string giving the tooltip for the desktop entry.
 */
 enum KEY_FILE_DESKTOP_KEY_COMMENT = "Comment";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a boolean
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a boolean
     set to true if the application is D-Bus activatable.
 */
 enum KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE = "DBusActivatable";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a string
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
     giving the command line to execute. It is only valid for desktop
     entries with the `Application` type.
 */
 enum KEY_FILE_DESKTOP_KEY_EXEC = "Exec";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a localized
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a localized
     string giving the generic name of the desktop entry.
 */
 enum KEY_FILE_DESKTOP_KEY_GENERIC_NAME = "GenericName";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a boolean
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a boolean
     stating whether the desktop entry has been deleted by the user.
 */
 enum KEY_FILE_DESKTOP_KEY_HIDDEN = "Hidden";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a localized
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a localized
     string giving the name of the icon to be displayed for the desktop
     entry.
 */
 enum KEY_FILE_DESKTOP_KEY_ICON = "Icon";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a list
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a list
     of strings giving the MIME types supported by this desktop entry.
 */
 enum KEY_FILE_DESKTOP_KEY_MIME_TYPE = "MimeType";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a localized
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a localized
     string giving the specific name of the desktop entry.
 */
 enum KEY_FILE_DESKTOP_KEY_NAME = "Name";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a list of
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a list of
     strings identifying the environments that should not display the
     desktop entry.
 */
 enum KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN = "NotShowIn";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a boolean
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a boolean
     stating whether the desktop entry should be shown in menus.
 */
 enum KEY_FILE_DESKTOP_KEY_NO_DISPLAY = "NoDisplay";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a list of
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a list of
     strings identifying the environments that should display the
     desktop entry.
 */
 enum KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN = "OnlyShowIn";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a string
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
     containing the working directory to run the program in. It is only
     valid for desktop entries with the `Application` type.
 */
 enum KEY_FILE_DESKTOP_KEY_PATH = "Path";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a boolean
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a boolean
     stating whether the application supports the
     [Startup Notification Protocol Specification](http://www.freedesktop.org/Standards/startup-notification-spec).
 */
 enum KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY = "StartupNotify";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is string
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is string
     identifying the WM class or name hint of a window that the application
     will create, which can be used to emulate Startup Notification with
     older applications.
@@ -1316,7 +1316,7 @@ enum KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY = "StartupNotify";
 enum KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS = "StartupWMClass";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a boolean
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a boolean
     stating whether the program should be run in a terminal window.
     
     It is only valid for desktop entries with the `Application` type.
@@ -1324,7 +1324,7 @@ enum KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS = "StartupWMClass";
 enum KEY_FILE_DESKTOP_KEY_TERMINAL = "Terminal";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a string
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
     giving the file name of a binary on disk used to determine if the
     program is actually installed. It is only valid for desktop entries
     with the `Application` type.
@@ -1332,43 +1332,43 @@ enum KEY_FILE_DESKTOP_KEY_TERMINAL = "Terminal";
 enum KEY_FILE_DESKTOP_KEY_TRY_EXEC = "TryExec";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a string
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
     giving the type of the desktop entry.
     
-    Usually `G_KEY_FILE_DESKTOP_TYPE_APPLICATION`,
-    `G_KEY_FILE_DESKTOP_TYPE_LINK`, or
-    `G_KEY_FILE_DESKTOP_TYPE_DIRECTORY`.
+    Usually [glib.types.KEY_FILE_DESKTOP_TYPE_APPLICATION],
+    [glib.types.KEY_FILE_DESKTOP_TYPE_LINK], or
+    [glib.types.KEY_FILE_DESKTOP_TYPE_DIRECTORY].
 */
 enum KEY_FILE_DESKTOP_KEY_TYPE = "Type";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a string
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
     giving the URL to access. It is only valid for desktop entries
     with the `Link` type.
 */
 enum KEY_FILE_DESKTOP_KEY_URL = "URL";
 
 /**
-    A key under `G_KEY_FILE_DESKTOP_GROUP`, whose value is a string
+    A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
     giving the version of the Desktop Entry Specification used for
     the desktop entry file.
 */
 enum KEY_FILE_DESKTOP_KEY_VERSION = "Version";
 
 /**
-    The value of the `G_KEY_FILE_DESKTOP_KEY_TYPE`, key for desktop
+    The value of the [glib.types.KEY_FILE_DESKTOP_KEY_TYPE], key for desktop
     entries representing applications.
 */
 enum KEY_FILE_DESKTOP_TYPE_APPLICATION = "Application";
 
 /**
-    The value of the `G_KEY_FILE_DESKTOP_KEY_TYPE`, key for desktop
+    The value of the [glib.types.KEY_FILE_DESKTOP_KEY_TYPE], key for desktop
     entries representing directories.
 */
 enum KEY_FILE_DESKTOP_TYPE_DIRECTORY = "Directory";
 
 /**
-    The value of the `G_KEY_FILE_DESKTOP_KEY_TYPE`, key for desktop
+    The value of the [glib.types.KEY_FILE_DESKTOP_KEY_TYPE], key for desktop
     entries representing links to documents.
 */
 enum KEY_FILE_DESKTOP_TYPE_LINK = "Link";
@@ -1508,7 +1508,7 @@ enum MODULE_SUFFIX = "so";
     or `G_OPTION_ARG_FILENAME_ARRAY`.
     
     
-    Using `G_OPTION_REMAINING` instead of simply scanning `argv`
+    Using [glib.types.OPTION_REMAINING] instead of simply scanning `argv`
     for leftover arguments has the advantage that GOption takes care of
     necessary encoding conversions for strings or filenames.
 */
@@ -1565,8 +1565,8 @@ enum PRIORITY_HIGH = -100;
 /**
     Use this for high priority idle functions.
     
-    GTK uses `G_PRIORITY_HIGH_IDLE` + 10 for resizing operations,
-    and `G_PRIORITY_HIGH_IDLE` + 20 for redrawing operations. (This is
+    GTK uses [glib.types.PRIORITY_HIGH_IDLE] + 10 for resizing operations,
+    and [glib.types.PRIORITY_HIGH_IDLE] + 20 for redrawing operations. (This is
     done to ensure that any pending resizes are processed before any
     pending redraws, so that widgets are not redrawn twice unnecessarily.)
 */
@@ -1751,7 +1751,7 @@ enum VA_COPY_AS_ARRAY = 1;
     
     If the compiler is configured to warn about the use of deprecated
     functions, then using functions that were deprecated in version
-    `GLIB_VERSION_MIN_REQUIRED` or earlier will cause warnings (but
+    [glib.types.VERSION_MIN_REQUIRED] or earlier will cause warnings (but
     using functions deprecated in later releases will not).
 */
 enum VERSION_MIN_REQUIRED = 2;

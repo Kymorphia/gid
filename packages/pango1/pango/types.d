@@ -178,7 +178,7 @@ enum ATTR_INDEX_FROM_TEXT_BEGINNING = 0;
 enum ATTR_INDEX_TO_TEXT_END = 4294967295;
 
 /**
-    A [pango.types.GLYPH_UNKNOWN_FLAG] value that indicates a zero-width empty glpyh.
+    A `PangoGlyph` value that indicates a zero-width empty glpyh.
     
     This is useful for example in shaper modules, to use as the glyph for
     various zero-width Unicode characters (those passing `func@is_zero_width`).
@@ -186,18 +186,18 @@ enum ATTR_INDEX_TO_TEXT_END = 4294967295;
 enum GLYPH_EMPTY = 268435455;
 
 /**
-    A [pango.types.GLYPH_UNKNOWN_FLAG] value for invalid input.
+    A `PangoGlyph` value for invalid input.
     
     [pango.layout.Layout] produces one such glyph per invalid input UTF-8 byte and such
     a glyph is rendered as a crossed box.
     
-    Note that this value is defined such that it has the `PANGO_GLYPH_UNKNOWN_FLAG`
+    Note that this value is defined such that it has the [pango.types.GLYPH_UNKNOWN_FLAG]
     set.
 */
 enum GLYPH_INVALID_INPUT = 4294967295;
 
 /**
-    Flag used in [pango.types.GLYPH_UNKNOWN_FLAG] to turn a `gunichar` value of a valid Unicode
+    Flag used in `PangoGlyph` to turn a `gunichar` value of a valid Unicode
     character into an unknown-character glyph for that `gunichar`.
     
     Such unknown-character glyphs may be rendered as a 'hex box'.
@@ -208,7 +208,7 @@ enum GLYPH_UNKNOWN_FLAG = 268435456;
     The scale between dimensions used for Pango distances and device units.
     
     The definition of device units is dependent on the output device; it will
-    typically be pixels for a screen, and points for a printer. `PANGO_SCALE` is
+    typically be pixels for a screen, and points for a printer. [pango.types.SCALE] is
     currently 1024, but this may be changed in the future.
     
     When setting font sizes, device units are always considered to be

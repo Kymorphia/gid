@@ -220,7 +220,7 @@ class Pipeline : gst.bin.Bin
 
   /**
       Return the configured latency on pipeline.
-      Returns: pipeline configured latency, or `GST_CLOCK_TIME_NONE` if none has been configured
+      Returns: pipeline configured latency, or [gst.types.CLOCK_TIME_NONE] if none has been configured
         because pipeline did not reach the PLAYING state yet.
         
         MT safe.

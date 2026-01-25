@@ -284,7 +284,7 @@ class TestClock : gst.clock.Clock
       MT safe.
       Returns: a #GstClockTime set to the time of the next pending clock
         notification. If no clock notifications have been requested
-        `GST_CLOCK_TIME_NONE` will be returned.
+        [gst.types.CLOCK_TIME_NONE] will be returned.
   */
   gst.types.ClockTime getNextEntryTime()
   {

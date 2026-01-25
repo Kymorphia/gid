@@ -106,7 +106,7 @@ class ReferenceTimestampMeta
 
   /**
       Get `duration` field.
-      Returns: duration, or `GST_CLOCK_TIME_NONE`
+      Returns: duration, or [gst.types.CLOCK_TIME_NONE]
   */
   @property gst.types.ClockTime duration()
   {
@@ -116,7 +116,7 @@ class ReferenceTimestampMeta
   /**
       Set `duration` field.
       Params:
-        propval = duration, or `GST_CLOCK_TIME_NONE`
+        propval = duration, or [gst.types.CLOCK_TIME_NONE]
   */
   @property void duration(gst.types.ClockTime propval)
   {

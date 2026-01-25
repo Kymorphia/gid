@@ -286,7 +286,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   /**
       Gets the value of the NoDisplay key, which helps determine if the
       application info should be shown in menus. See
-      `G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY` and [gio.app_info.AppInfo.shouldShow].
+      [glib.types.KEY_FILE_DESKTOP_KEY_NO_DISPLAY] and [gio.app_info.AppInfo.shouldShow].
       Returns: The value of the NoDisplay key
   */
   bool getNodisplay()

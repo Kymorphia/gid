@@ -12,7 +12,7 @@ import gobject.object;
     non-strictly-typed data that is stored in a hierarchy. To implement
     an alternative storage backend for [gio.settings.Settings], you need to
     implement the [gio.settings_backend.SettingsBackend] interface and then make it implement the
-    extension point `G_SETTINGS_BACKEND_EXTENSION_POINT_NAME`.
+    extension point [gio.types.SETTINGS_BACKEND_EXTENSION_POINT_NAME].
     
     The interface defines methods for reading and writing values, a
     method for determining if writing of certain values will fail

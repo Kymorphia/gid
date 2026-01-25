@@ -162,7 +162,7 @@ struct PathBuf
       as many elements the path provides.
       
       On Windows, both forward slashes and backslashes are treated as
-      directory separators. On other platforms, `G_DIR_SEPARATOR_S` is the
+      directory separators. On other platforms, [glib.types.DIR_SEPARATOR_S] is the
       only directory separator.
       
       ```c

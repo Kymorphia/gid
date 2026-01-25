@@ -335,7 +335,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   
           `frame` the instance the signal is connected to (optional)
   
-          `Returns` `GDK_EVENT_STOP` or `GDK_EVENT_PROPAGATE`
+          `Returns` [gdk.types.EVENT_STOP] or [gdk.types.EVENT_PROPAGATE]
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

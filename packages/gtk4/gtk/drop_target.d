@@ -19,7 +19,7 @@ import gtk.types;
     
     The most basic way to use a [gtk.drop_target.DropTarget] to receive drops on a
     widget is to create it via [gtk.drop_target.DropTarget.new_], passing in the
-    [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] of the data you want to receive and connect to the
+    `GType` of the data you want to receive and connect to the
     [gtk.drop_target.DropTarget.drop] signal to receive the data:
     
     ```c
@@ -77,7 +77,7 @@ import gtk.types;
      )
        
     However, [gtk.drop_target.DropTarget] is ultimately modeled in a synchronous way
-    and only supports data transferred via [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]. If you want full control
+    and only supports data transferred via `GType`. If you want full control
     over an ongoing drop, the [gtk.drop_target_async.DropTargetAsync] object gives you
     this ability.
     
@@ -291,7 +291,7 @@ class DropTarget : gtk.event_controller.EventController
   }
 
   /**
-      Gets the list of supported [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s that can be dropped on the target.
+      Gets the list of supported `GType`s that can be dropped on the target.
       
       If no types have been set, `NULL` will be returned.
       Returns: the `G_TYPE_INVALID`-terminated array of types included in
@@ -361,10 +361,10 @@ class DropTarget : gtk.event_controller.EventController
   }
 
   /**
-      Sets the supported [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s for this drop target.
+      Sets the supported `GType`s for this drop target.
   
       Params:
-        types = all supported [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s
+        types = all supported `GType`s
             that can be dropped on the target
   */
   void setGtypes(gobject.types.GType[] types = null)

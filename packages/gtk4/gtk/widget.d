@@ -2567,7 +2567,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       bindings which cannot easily make use of the GObject structure offsets.
   
       Params:
-        widgetType = The [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to get a template child for
+        widgetType = The `GType` to get a template child for
         name = The “id” of the child defined in the template XML
       Returns: The object built in the template XML with
           the id name

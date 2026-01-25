@@ -68,7 +68,7 @@ import gobject.object;
     have any particular charset encoding or even make any sense at all. If
     you want to use filenames in a user interface you should use the display
     name that you can get by requesting the
-    `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME` attribute with
+    [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME] attribute with
     [gio.file.File.queryInfo]. This is guaranteed to be in UTF-8 and can be
     used in a user interface. But always store the real basename or the [gio.file.File]
     to use to actually access the file, because there is no way to go from a
@@ -80,7 +80,7 @@ import gobject.object;
     file. Other possible causes for aliases are: case insensitive filesystems,
     short and long names on FAT/NTFS, or bind mounts in Linux. If you want to
     check if two [gio.file.File]s point to the same file you can query for the
-    `G_FILE_ATTRIBUTE_ID_FILE` attribute. Note that [gio.file.File] does some trivial
+    [gio.types.FILE_ATTRIBUTE_ID_FILE] attribute. Note that [gio.file.File] does some trivial
     canonicalization of pathnames passed in, so that trivial differences in
     the path string used at creation (duplicated slashes, slash at end of
     path, `.` or `..` path segments, etc) does not create different [gio.file.File]s.
@@ -891,7 +891,7 @@ interface File
       "standard::*" means all attributes in the standard namespace.
       An example attribute query be "standard::*,owner::user".
       The standard attributes are available as defines, like
-      `G_FILE_ATTRIBUTE_STANDARD_NAME`. `G_FILE_ATTRIBUTE_STANDARD_NAME` should
+      [gio.types.FILE_ATTRIBUTE_STANDARD_NAME]. [gio.types.FILE_ATTRIBUTE_STANDARD_NAME] should
       always be specified if you plan to call [gio.file_enumerator.FileEnumerator.getChild] or
       [gio.file_enumerator.FileEnumerator.iterate] on the returned enumerator.
       
@@ -1028,7 +1028,7 @@ interface File
       The base name is a byte string (not UTF-8). It has no defined encoding
       or rules other than it may not contain zero bytes.  If you want to use
       filenames in a user interface you should use the display name that you
-      can get by requesting the `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME`
+      can get by requesting the [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME]
       attribute with [gio.file.File.queryInfo].
       
       This call does no blocking I/O.
@@ -1967,9 +1967,9 @@ interface File
       attributes, and a wildcard like "filesystem::*" means all attributes
       in the filesystem namespace. The standard namespace for filesystem
       attributes is "filesystem". Common attributes of interest are
-      `G_FILE_ATTRIBUTE_FILESYSTEM_SIZE` (the total size of the filesystem
-      in bytes), `G_FILE_ATTRIBUTE_FILESYSTEM_FREE` (number of bytes available),
-      and `G_FILE_ATTRIBUTE_FILESYSTEM_TYPE` (type of the filesystem).
+      [gio.types.FILE_ATTRIBUTE_FILESYSTEM_SIZE] (the total size of the filesystem
+      in bytes), [gio.types.FILE_ATTRIBUTE_FILESYSTEM_FREE] (number of bytes available),
+      and [gio.types.FILE_ATTRIBUTE_FILESYSTEM_TYPE] (type of the filesystem).
       
       If cancellable is not null, then the operation can be cancelled
       by triggering the cancellable object from another thread. If the
@@ -2040,7 +2040,7 @@ interface File
       "standard::*" means all attributes in the standard namespace.
       An example attribute query be "standard::*,owner::user".
       The standard attributes are available as defines, like
-      `G_FILE_ATTRIBUTE_STANDARD_NAME`.
+      [gio.types.FILE_ATTRIBUTE_STANDARD_NAME].
       
       If cancellable is not null, then the operation can be cancelled
       by triggering the cancellable object from another thread. If the
@@ -2670,7 +2670,7 @@ interface File
       for the target filesystem if possible and the file is renamed to this.
       
       If you want to implement a rename operation in the user interface the
-      edit name (`G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME`) should be used as the
+      edit name ([gio.types.FILE_ATTRIBUTE_STANDARD_EDIT_NAME]) should be used as the
       initial value in the rename widget, and then the result after editing
       should be passed to [gio.file.File.setDisplayName].
       

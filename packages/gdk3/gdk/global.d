@@ -705,7 +705,7 @@ bool getShowEvents()
           are reported with respect to window. Both key press and key
           release events are always reported, independant of the event mask
           set by the application.
-      time = a timestamp from a #GdkEvent, or `GDK_CURRENT_TIME` if no timestamp is
+      time = a timestamp from a #GdkEvent, or [gdk.types.CURRENT_TIME] if no timestamp is
           available.
     Returns: [gdk.types.GrabStatus.Success] if the grab was successful.
 
@@ -724,7 +724,7 @@ gdk.types.GrabStatus keyboardGrab(gdk.window.Window window, bool ownerEvents, ui
     application.
 
     Params:
-      time = a timestamp from a #GdkEvent, or `GDK_CURRENT_TIME` if no
+      time = a timestamp from a #GdkEvent, or [gdk.types.CURRENT_TIME] if no
                timestamp is available.
 
     Deprecated: Use [gdk.device.Device.ungrab], together with [gdk.device.Device.grab]
@@ -758,7 +758,7 @@ void keyvalConvertCase(uint symbol, out uint lower, out uint upper)
 
     Params:
       keyvalName = a key name
-    Returns: the corresponding key value, or `GDK_KEY_VoidSymbol`
+    Returns: the corresponding key value, or [gdk.types.KEY_VoidSymbol]
           if the key name is not a valid key
 */
 uint keyvalFromName(string keyvalName)
@@ -1166,7 +1166,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromWindow(gdk.window.Window window, int srcX, 
                  the normal cursors are used for window and its descendants, and the cursor
                  for window is used for all other windows.
       time = the timestamp of the event which led to this pointer grab. This usually
-                comes from a #GdkEventButton struct, though `GDK_CURRENT_TIME` can be used if
+                comes from a #GdkEventButton struct, though [gdk.types.CURRENT_TIME] can be used if
                 the time isn’t known.
     Returns: [gdk.types.GrabStatus.Success] if the grab was successful.
 
@@ -1202,7 +1202,7 @@ bool pointerIsGrabbed()
     application.
 
     Params:
-      time = a timestamp from a #GdkEvent, or `GDK_CURRENT_TIME` if no
+      time = a timestamp from a #GdkEvent, or [gdk.types.CURRENT_TIME] if no
          timestamp is available.
 
     Deprecated: Use [gdk.device.Device.ungrab], together with [gdk.device.Device.grab]

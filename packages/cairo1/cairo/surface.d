@@ -589,11 +589,11 @@ class Surface : gobject.boxed.Boxed
       surface.  This approach tends to be faster and requires less
       memory and disk space.
       
-      The recognized MIME types are the following: `CAIRO_MIME_TYPE_JPEG`,
-      `CAIRO_MIME_TYPE_PNG`, `CAIRO_MIME_TYPE_JP2`, `CAIRO_MIME_TYPE_URI`,
-      `CAIRO_MIME_TYPE_UNIQUE_ID`, `CAIRO_MIME_TYPE_JBIG2`,
-      `CAIRO_MIME_TYPE_JBIG2_GLOBAL`, `CAIRO_MIME_TYPE_JBIG2_GLOBAL_ID`,
-      `CAIRO_MIME_TYPE_CCITT_FAX`, `CAIRO_MIME_TYPE_CCITT_FAX_PARAMS`.
+      The recognized MIME types are the following: [cairo.types.MIME_TYPE_JPEG],
+      [cairo.types.MIME_TYPE_PNG], [cairo.types.MIME_TYPE_JP2], [cairo.types.MIME_TYPE_URI],
+      [cairo.types.MIME_TYPE_UNIQUE_ID], [cairo.types.MIME_TYPE_JBIG2],
+      [cairo.types.MIME_TYPE_JBIG2_GLOBAL], [cairo.types.MIME_TYPE_JBIG2_GLOBAL_ID],
+      [cairo.types.MIME_TYPE_CCITT_FAX], [cairo.types.MIME_TYPE_CCITT_FAX_PARAMS].
       
       See corresponding backend surface docs for details about which MIME
       types it can handle. Caution: the associated MIME data will be
