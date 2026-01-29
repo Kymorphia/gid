@@ -2,6 +2,7 @@
 
 import std.traits : isPointer;
 
+import gid.gid;
 import gobject.object;
 import gobject.types;
 
@@ -101,7 +102,7 @@ void initVal(T)(GValue* gval)
     g_value_init(gval, GTypeEnum.Variant);
   else static if (is(T : ParamSpec))
     g_value_init(gval, GTypeEnum.Param);
-  else static if (is(T : Boxed))
+  else static if (isBoxed!T)
   { // Cannot initialize a plain boxed type, it is done in setVal()
   }
   else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
@@ -153,10 +154,15 @@ T getVal(T)(const(GValue)* gval)
     auto v = g_value_get_param(gval);
     return v ? new T(v, No.Take) : null;
   }
-  else static if (is(T : Boxed))
+  else static if (is(T : Boxed)) // Boxed class types
   {
     auto v = g_value_get_boxed(gval);
     return v ? new T(v, No.Take) : null;
+  }
+  else static if (isBoxed!T) // Boxed struct types
+  {
+    auto v = g_value_get_boxed(gval);
+    return v ? *cast(T*)v : T.init;
   }
   else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
   {
@@ -213,6 +219,11 @@ void setVal(T)(GValue* gval, T v)
   {
     g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
     g_value_set_boxed(gval, v._cInstancePtr);
+  }
+  else static if (isBoxed!T)
+  {
+    g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
+    g_value_set_boxed(gval, cast(void*)&v);
   }
   else static if (is(T : gobject.object.ObjectWrap))
     g_value_set_object(gval, v ? cast(GObject*)v._cPtr(No.Dup) : null);

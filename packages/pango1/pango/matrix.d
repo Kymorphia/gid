@@ -49,6 +49,26 @@ struct Matrix
   */
   double y0;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_matrix_get_type != &gidSymbolNotFound ? pango_matrix_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       Changes the transformation represented by matrix to be the
       transformation given by first applying transformation

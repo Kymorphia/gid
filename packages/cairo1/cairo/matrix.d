@@ -47,6 +47,26 @@ struct Matrix
   */
   double y0;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())cairo_gobject_matrix_get_type != &gidSymbolNotFound ? cairo_gobject_matrix_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       Sets matrix to be the affine transformation given by
       xx, yx, xy, yy, x0, y0. The transformation is given

@@ -163,6 +163,26 @@ struct Segment
   /** */
   void*[4] GstReserved;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_segment_get_type != &gidSymbolNotFound ? gst_segment_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       Clip the given start and stop values to the segment boundaries given
       in segment. start and stop are compared and clipped to segment

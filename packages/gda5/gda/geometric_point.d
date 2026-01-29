@@ -16,6 +16,26 @@ struct GeometricPoint
   double y;
 
   /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gda_geometricpoint_get_type != &gidSymbolNotFound ? gda_geometricpoint_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
+  /** */
   static void* copy(void* boxed = null)
   {
     auto _retval = gda_geometricpoint_copy(boxed);

@@ -51,6 +51,26 @@ struct Timestamp
   */
   glong timezone;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gda_timestamp_get_type != &gidSymbolNotFound ? gda_timestamp_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       This function is similar to [gda.time.Time.changeTimezone] but operates on time stamps.
       

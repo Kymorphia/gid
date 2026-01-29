@@ -82,6 +82,26 @@ struct Date
   */
   uint year;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())g_date_get_type != &gidSymbolNotFound ? g_date_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
   Generates a printed representation of the date, in a
   [locale][setlocale]-specific way.

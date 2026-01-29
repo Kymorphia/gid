@@ -26,6 +26,26 @@ struct NetTimePacket
   */
   ClockTime remoteTime;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_net_time_packet_get_type != &gidSymbolNotFound ? gst_net_time_packet_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       Make a copy of packet.
       Returns: a copy of packet, free with [gstnet.net_time_packet.NetTimePacket.free].

@@ -30,6 +30,26 @@ struct Quaternion
   /** */
   float w;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())graphene_quaternion_get_type != &gidSymbolNotFound ? graphene_quaternion_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       Adds two #graphene_quaternion_t `a` and `b`.
   

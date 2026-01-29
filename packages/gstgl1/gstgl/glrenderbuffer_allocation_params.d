@@ -25,7 +25,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return dup ? copy_ : _cInstancePtr;
+    return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */

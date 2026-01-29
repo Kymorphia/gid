@@ -99,6 +99,26 @@ struct DsdInfo
   /** */
   void*[4] GstReserved;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_dsd_info_get_type != &gidSymbolNotFound ? gst_dsd_info_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       Copy a GstDsdInfo structure.
       Returns: a new #GstDsdInfo. free with gst_dsd_info_free.

@@ -13,7 +13,6 @@ import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
 import glib.c.functions;
 import glib.c.types;
-import gobject.boxed;
 import gobject.object;
 import gobject.c.functions;
 
@@ -834,12 +833,48 @@ void cValueFree(T)(void* data)
 {
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
     gobject.object.ObjectWrap._unref(data);
-  else static if (is(T : Boxed))
-    Boxed.boxedFree!T(data);
+  else static if (isBoxed!T)
+    boxedFree!T(data);
   else static if (__traits(compiles, T._unref(data))) // Reffed types
     T._unref(data);
   else static if (is(T : string) || isTypeSimple!T)
     gFree(data);
+}
+
+
+/**
+ * Check if a type is a boxed struct or class.
+ * Params:
+ *   T = The type to check
+ * Returns: true if T is a boxed type (just checks if it has a boxCopy member)
+ */
+bool isBoxed(T)()
+{
+  return hasMember!(T, "boxCopy");
+}
+
+/**
+  * Copy a C boxed value using g_boxed_copy.
+  * Params:
+  *   T = The D boxed type
+  *   cBoxed = The C boxed pointer
+  * Returns: A copy of the boxed type
+  */
+static void* boxedCopy(T)(void* cBoxed)
+{
+  return cBoxed ? g_boxed_copy(T._getGType, cBoxed) : null;
+}
+
+/**
+  * Free a C boxed value using g_boxed_free.
+  * Params:
+  *   T = The D boxed type
+  *   cBoxed = The C boxed pointer
+  */
+static void boxedFree(T)(void* cBoxed)
+{
+  if (cBoxed)
+    g_boxed_free(T._getGType, cBoxed);
 }
 
 /// Exception class used for ObjectWrap constructor errors

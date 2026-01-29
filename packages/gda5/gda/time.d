@@ -36,6 +36,26 @@ struct Time
   */
   glong timezone;
 
+  /** */
+  static GType _getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gda_time_get_type != &gidSymbolNotFound ? gda_time_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType()
+  {
+    return _getGType();
+  }
+
+  void* boxCopy()
+  {
+    import gobject.c.functions : g_boxed_copy;
+    return g_boxed_copy(_gType,
+        cast(void*)&this);
+  }
+
   /**
       Changes time's timezone (for example to convert from GMT to another time zone).
       If time's current timezone is unset (i.e. equal to [gda.types.TIMEZONE_INVALID]), then this function simply sets
