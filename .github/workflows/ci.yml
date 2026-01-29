@@ -18,8 +18,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          submodules: remote
+
+      - name: Update submodules
+        run: git submodule update --init --remote
 
       - name: Install dependencies
         run: |
