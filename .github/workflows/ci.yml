@@ -31,7 +31,10 @@ jobs:
           dub build --compiler=ldc2
           cp gidgen /usr/local/bin/
 
-      - name: Make bindings
+      - name: Gidgen version
+        run: gidgen --version
+
+      - name: Generate bindings
         run: gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
 
       - name: Make packages
