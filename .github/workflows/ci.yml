@@ -29,14 +29,14 @@ jobs:
         run: |
           dnf install -y gcc-gdc ldc dub glib2-devel make pkg-config
 
-      - name: Build gidgen
-        run: |
-          cd gidgen
-          dub build --compiler=ldc2
-          cp gidgen /usr/local/bin/
+      # - name: Build gidgen
+      #   run: |
+      #     cd gidgen
+      #     dub build --compiler=ldc2
+      #     cp gidgen /usr/local/bin/
 
-      - name: Gidgen version
-        run: gidgen --version
+      # - name: Gidgen version
+      #   run: gidgen --version
 
       - name: make clean
         run: make clean
