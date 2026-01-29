@@ -32,13 +32,13 @@ jobs:
           cp gidgen /usr/local/bin/
 
       - name: Gidgen version
-        run: gidgen --version
+        run: gidgen/gidgen --version
 
       - name: make clean
         run: make clean
 
       - name: Generate bindings
-        run: gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
+        run: gidgen/gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
 
       - name: Make packages
         run: dub build --parallel --compiler=ldc2 --debug debug
