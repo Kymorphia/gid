@@ -34,6 +34,9 @@ jobs:
       - name: Gidgen version
         run: gidgen --version
 
+      - name: make clean
+        run: make clean
+
       - name: Generate bindings
         run: gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
 
