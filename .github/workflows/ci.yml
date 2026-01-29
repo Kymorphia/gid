@@ -32,7 +32,7 @@ jobs:
           cp gidgen /usr/local/bin/
 
       - name: Make bindings
-        run: gidgen --compiler=ldc2 -- --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
+        run: gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
 
       - name: Make packages
         run: dub build --parallel --compiler=ldc2 --debug debug
