@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    container: fedora:latest
+
+    steps:
+      - name: Install Git
+        run: dnf install -y git
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update submodules
+        run: |
+          git config --global --add safe.directory /__w/gid/gid
+          git config --global url."https://github.com/".insteadOf "git@github.com:"
+          git submodule update --init --remote
+
+      - name: Install dependencies
+        run: |
+          dnf install -y gcc-gdc ldc dub glib2-devel make pkg-config
+
+      # - name: Build gidgen
+      #   run: |
+      #     cd gidgen
+      #     dub build --compiler=ldc2
+      #     cp gidgen /usr/local/bin/
+
+      # - name: Gidgen version
+      #   run: gidgen --version
+
+      - name: make clean
+        run: make clean
+
+      - name: Generate bindings
+        run: make binding
+
+      - name: Make packages
+        run: make packages
+
+      - name: Run gidgen tests
+        run: |
+          cd gidgen
+          make run-test
