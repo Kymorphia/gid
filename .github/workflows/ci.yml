@@ -20,7 +20,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Update submodules
-        run: git submodule update --init --remote
+        run: |
+          git config --global --add safe.directory /__w/gid/gid
+          git submodule update --init --remote
 
       - name: Install dependencies
         run: |
