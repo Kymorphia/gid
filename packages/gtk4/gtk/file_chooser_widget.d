@@ -285,7 +285,6 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -473,7 +472,6 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);

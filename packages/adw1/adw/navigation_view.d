@@ -666,6 +666,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(adw.navigation_page.NavigationPage)(_returnValue, _retval);
     }
 
@@ -708,7 +709,6 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);

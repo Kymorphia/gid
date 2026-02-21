@@ -2968,10 +2968,8 @@ class Window : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -2980,11 +2978,88 @@ class Window : gobject.object.ObjectWrap
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(cairo.surface.Surface)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-surface", closure, after);
+  }
+
+  /**
+      Connect to `FromEmbedder` signal.
+  
+      The ::from-embedder signal is emitted to translate coordinates
+        in the embedder of an offscreen window to the offscreen window.
+        
+        See also #GdkWindow::to-embedder.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(double embedderX, double embedderY, out double offscreenX, out double offscreenY, gdk.window.Window window))
+  
+          `embedderX` x coordinate in the embedder window (optional)
+  
+          `embedderY` y coordinate in the embedder window (optional)
+  
+          `offscreenX` return location for the x
+                coordinate in the offscreen window (optional)
+  
+          `offscreenY` return location for the y
+                coordinate in the offscreen window (optional)
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectFromEmbedder(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.out_ && is(Parameters!T[2] == double)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.out_ && is(Parameters!T[3] == double)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gdk.window.Window)))
+  && Parameters!T.length < 6)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 5, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      Parameters!T[2] offscreenX;
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = offscreenX;
+
+      Parameters!T[3] offscreenY;
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = offscreenY;
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+
+      static if (Parameters!T.length > 2)
+        *getVal!(Parameters!T[2]*)(&_paramVals[3]) = offscreenX;
+
+      static if (Parameters!T.length > 3)
+        *getVal!(Parameters!T[3]*)(&_paramVals[4]) = offscreenY;
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("from-embedder", closure, after);
   }
 
   /**
@@ -3038,18 +3113,14 @@ class Window : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
 
-
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
-
 
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
@@ -3100,10 +3171,8 @@ class Window : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -3112,10 +3181,87 @@ class Window : gobject.object.ObjectWrap
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(gdk.window.Window)(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pick-embedded-child", closure, after);
+  }
+
+  /**
+      Connect to `ToEmbedder` signal.
+  
+      The ::to-embedder signal is emitted to translate coordinates
+        in an offscreen window to its embedder.
+        
+        See also #GdkWindow::from-embedder.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(double offscreenX, double offscreenY, out double embedderX, out double embedderY, gdk.window.Window window))
+  
+          `offscreenX` x coordinate in the offscreen window (optional)
+  
+          `offscreenY` y coordinate in the offscreen window (optional)
+  
+          `embedderX` return location for the x
+                coordinate in the embedder window (optional)
+  
+          `embedderY` return location for the y
+                coordinate in the embedder window (optional)
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectToEmbedder(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.out_ && is(Parameters!T[2] == double)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.out_ && is(Parameters!T[3] == double)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gdk.window.Window)))
+  && Parameters!T.length < 6)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 5, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      Parameters!T[2] embedderX;
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = embedderX;
+
+      Parameters!T[3] embedderY;
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = embedderY;
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+
+      static if (Parameters!T.length > 2)
+        *getVal!(Parameters!T[2]*)(&_paramVals[3]) = embedderX;
+
+      static if (Parameters!T.length > 3)
+        *getVal!(Parameters!T[3]*)(&_paramVals[4]) = embedderY;
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("to-embedder", closure, after);
   }
 }

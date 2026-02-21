@@ -12,9 +12,11 @@ import gobject.type_instance;
 import gobject.types;
 
 
+import core.stdc.string : strlen;
 import std.traits : isPointer;
 
 import gid.gid;
+import glib.c.functions : g_strv_get_type;
 import gobject.object;
 import gobject.types;
 
@@ -987,6 +989,8 @@ void initVal(T)(GValue* gval)
     g_value_init(gval, GTypeEnum.Variant);
   else static if (is(T : ParamSpec))
     g_value_init(gval, GTypeEnum.Param);
+  else static if (is(T == string[]))
+    g_value_init(gval, g_strv_get_type());
   else static if (isBoxed!T)
   { // Cannot initialize a plain boxed type, it is done in setVal()
   }
@@ -1039,6 +1043,23 @@ T getVal(T)(const(GValue)* gval)
     auto v = g_value_get_param(gval);
     return v ? new T(v, No.Take) : null;
   }
+  else static if (is(T == string[]))
+  {
+    string[] sa;
+    char **strv = g_value_get_boxed(gval);
+
+    if (strv)
+    {
+      uint len;
+      for (len = 0; strv[len]; len++) {}
+
+      sa.length = len;
+      foreach (i; len)
+        sa[i] = strv[i].fromCString(No.Free);
+    }
+
+    return sa;
+  }
   else static if (is(T : Boxed)) // Boxed class types
   {
     auto v = g_value_get_boxed(gval);
@@ -1058,6 +1079,25 @@ T getVal(T)(const(GValue)* gval)
     return cast(T)g_value_get_pointer(gval);
   else
     assert(0, "Unsupported type " ~ T.stringof ~ " in Value.getVal");
+}
+
+/**
+* Get a string from a GValue with a length.
+* Params:
+*   gval = Value
+*   length = Length of string (-1 to use strlen)
+* Returns: The D string
+*/
+string getStringWithLength(const(GValue)* gval, int length)
+{
+  auto cstr = g_value_get_string(gval);
+  if (!cstr)
+    return null;
+
+  if (length == -1)
+    length = cast(int)strlen(cstr);
+
+  return cstr[0 .. length].dup;
 }
 
 /**
@@ -1100,6 +1140,14 @@ void setVal(T)(GValue* gval, T v)
     g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
   else static if (is(T : ParamSpec))
     g_value_set_param(gval, v ? cast(GParamSpec*)v._cPtr : null);
+  else static if (is(T == string[]))
+  {
+    auto strv = cast(char**)gMalloc((v.length + 1) * (char*).sizeof);
+    foreach(i; 0 .. v.length)
+    strv[i] = v[i].toCString(Yes.Alloc);
+
+    g_value_set_boxed(gval, strv);
+  }
   else static if (is(T : Boxed))
   {
     g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal

@@ -507,6 +507,65 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   }
 
   /**
+      Connect to `Input` signal.
+  
+      Emitted to convert the user's input into a double value.
+        
+        The signal handler is expected to use [gtk.editable.Editable.getText] to
+        retrieve the text of the spinbutton and set new_value to the new value.
+        
+        The default conversion uses `funcGLib.strtod`.
+        
+        See [gtk.spin_button.SpinButton.input].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D int callback(out double newValue, adw.spin_row.SpinRow spinRow))
+  
+          `newValue` return location for the new value (optional)
+  
+          `spinRow` the instance the signal is connected to (optional)
+  
+          `Returns` `TRUE` for a successful conversion, `FALSE` if the input was not
+              handled, and [gtk.types.INPUT_ERROR] if the conversion failed.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectInput(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == int)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.out_ && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.spin_row.SpinRow)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      Parameters!T[0] newValue;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = newValue;
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
+
+      setVal!(int)(_returnValue, _retval);
+
+      static if (Parameters!T.length > 0)
+        *getVal!(Parameters!T[0]*)(&_paramVals[1]) = newValue;
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("input", closure, after);
+  }
+
+  /**
       Connect to `Output` signal.
   
       Emitted to tweak the formatting of the value for display.
@@ -540,6 +599,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(bool)(_returnValue, _retval);
     }
 

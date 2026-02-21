@@ -489,34 +489,21 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
 
-
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
 
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-
-      static if (Parameters!T.length > 3)
-      {
-        auto _cArray = getVal!(char**)(&_paramVals[4]);
-        string[] _dArray;
-        uint _leninvalidatedProperties;
-        if (_cArray)
-          for (; _cArray[_leninvalidatedProperties] !is null; _leninvalidatedProperties++)
-          break;
-        foreach (i; 0 .. _leninvalidatedProperties)
-          _dArray ~= _cArray[i].fromCString(No.Free);
-        _paramTuple[3] = _dArray;
-      }
       _dClosure.cb(_paramTuple[]);
     }
 
@@ -573,22 +560,17 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
 
-
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
 
-
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
-
 
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[5]);

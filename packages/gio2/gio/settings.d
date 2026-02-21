@@ -1560,11 +1560,10 @@ class Settings : gobject.object.ObjectWrap
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
       auto nKeys = getVal!(int)(&_paramVals[2]);
+
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
-
 
       static if (Parameters!T.length > 0)
       {
@@ -1573,7 +1572,9 @@ class Settings : gobject.object.ObjectWrap
         _dArray = cast(glib.types.Quark[])_cArray[0 .. nKeys];
         _paramTuple[0] = _dArray;
       }
+
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(bool)(_returnValue, _retval);
     }
 
@@ -1620,7 +1621,6 @@ class Settings : gobject.object.ObjectWrap
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1684,7 +1684,6 @@ class Settings : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -1692,6 +1691,7 @@ class Settings : gobject.object.ObjectWrap
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(bool)(_returnValue, _retval);
     }
 
@@ -1735,7 +1735,6 @@ class Settings : gobject.object.ObjectWrap
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);

@@ -613,4 +613,33 @@ interface Editable
       Returns: Signal ID
   */
   ulong connectDeleteText(T)(T callback, Flag!"After" after = No.After);
+
+  /**
+      Connect to `InsertText` signal.
+  
+      Emitted when text is inserted into the widget by the user.
+        
+        The default handler for this signal will normally be responsible
+        for inserting the text, so by connecting to this signal and then
+        stopping the signal with [gobject.global.signalStopEmission], it is possible
+        to modify the inserted text, or prevent it from being inserted entirely.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string text, ref int position, gtk.editable.Editable editable))
+  
+          `text` the new text to insert (optional)
+  
+          `position` the position, in characters,
+                at which to insert the new text. this is an in-out
+                parameter.  After the signal emission is finished, it
+                should point after the newly inserted text. (optional)
+  
+          `editable` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectInsertText(T)(T callback, Flag!"After" after = No.After);
 }

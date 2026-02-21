@@ -2882,10 +2882,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -2931,7 +2929,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -2954,7 +2951,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(char[] text, vte.terminal.Terminal terminal))
+          $(D void callback(string text, vte.terminal.Terminal terminal))
   
           `text` a string of text (optional)
   
@@ -2966,7 +2963,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   ulong connectCommit(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == char[])))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
   {
@@ -2975,19 +2972,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
       auto size = getVal!(uint)(&_paramVals[2]);
+
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-
       static if (Parameters!T.length > 0)
-      {
-        auto _cArray = getVal!(char**)(&_paramVals[1]);
-        char[] _dArray;
-        _dArray = cast(char[])_cArray[0 .. size];
-        _paramTuple[0] = _dArray;
-      }
+        _paramTuple[0] = getStringWithLength(&_paramVals[1], size);
+
       _dClosure.cb(_paramTuple[]);
     }
 
@@ -3373,10 +3365,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -3611,10 +3601,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -3773,10 +3761,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -3905,7 +3891,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);

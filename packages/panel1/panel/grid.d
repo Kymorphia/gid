@@ -224,6 +224,7 @@ class Grid : gtk.widget.Widget
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(panel.frame.Frame)(_returnValue, _retval);
     }
 

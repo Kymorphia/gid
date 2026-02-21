@@ -1345,7 +1345,6 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -1353,6 +1352,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(int)(_returnValue, _retval);
     }
 
@@ -1434,7 +1434,6 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -1442,6 +1441,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(int)(_returnValue, _retval);
     }
 
@@ -1485,6 +1485,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(bool)(_returnValue, _retval);
     }
 
@@ -1525,7 +1526,6 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
       auto nFiles = getVal!(int)(&_paramVals[2]);
 
       static if (Parameters!T.length > 1)
@@ -1533,7 +1533,6 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
 
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
-
 
       static if (Parameters!T.length > 0)
       {
@@ -1543,6 +1542,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
           _dArray ~= gobject.object.ObjectWrap._getDObject!(gio.file.File)(_cArray[i], No.Take);
         _paramTuple[0] = _dArray;
       }
+
       _dClosure.cb(_paramTuple[]);
     }
 

@@ -325,10 +325,8 @@ class EntryBuffer : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -351,7 +349,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, char[] chars, gtk.entry_buffer.EntryBuffer entryBuffer))
+          $(D void callback(uint position, string chars, gtk.entry_buffer.EntryBuffer entryBuffer))
   
           `position` the position the text was inserted at. (optional)
   
@@ -366,7 +364,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == char[])))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_buffer.EntryBuffer)))
   && Parameters!T.length < 4)
   {
@@ -376,22 +374,16 @@ class EntryBuffer : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
       auto nChars = getVal!(uint)(&_paramVals[3]);
+
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-
       static if (Parameters!T.length > 1)
-      {
-        auto _cArray = getVal!(char**)(&_paramVals[2]);
-        char[] _dArray;
-        _dArray = cast(char[])_cArray[0 .. nChars];
-        _paramTuple[1] = _dArray;
-      }
+        _paramTuple[1] = getStringWithLength(&_paramVals[2], nChars);
+
       _dClosure.cb(_paramTuple[]);
     }
 

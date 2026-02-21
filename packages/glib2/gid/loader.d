@@ -182,7 +182,7 @@ else // Linux or OSX
   }
 }
 
-/// Return a giD unresolved lib/symbol report
+/// Return a giD unresolved lib/symbol report (might get called by multiple threads)
 string gidLoaderUnresolvedReport()
 {
   if (gidUnresolvedLibs.length == 0 && gidUnresolvedSymbols.length == 0)
@@ -194,11 +194,12 @@ string gidLoaderUnresolvedReport()
   import std.array : array;
   import std.string : join;
 
+  // dup to prevent multi-thread sort issues. gidUnresolvedLibs and gidUnresolvedSymbols should not change at this point.
   if (gidUnresolvedLibs.length > 0)
-    s ~= "Unresolved libraries: " ~ gidUnresolvedLibs.sort.array.join(", ") ~ "\n";
+    s ~= "Unresolved libraries: " ~ gidUnresolvedLibs.dup.sort.array.join(", ") ~ "\n";
 
   if (gidUnresolvedSymbols.length > 0)
-    s ~= "Unresolved symbols: " ~ gidUnresolvedSymbols.sort.array.join(", ") ~ "\n";
+    s ~= "Unresolved symbols: " ~ gidUnresolvedSymbols.dup.sort.array.join(", ") ~ "\n";
 
   return s;
 }

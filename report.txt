@@ -4,7 +4,7 @@
 [Summary]
 Package                    |       Structs        |        Funcs         |       Signals        |        Fields        |
                            |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |
-adw1                       |   74    0    0   100 |  980    0    0   100 |   46    0    1  97.9 |    0    0    0   100 |
+adw1                       |   74    0    0   100 |  980    0    0   100 |   47    0    0   100 |    0    0    0   100 |
 arrow1                     |  296    0    0   100 |  973    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -14,7 +14,7 @@ gmime3                     |   69    0    0   100 |  558    0    0   100 |    0 
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   55    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  134    0    6  95.7 |
 gda5                       |  112    0    3  97.4 |  664    0   23  96.7 |   53    0    1  98.1 |  170    0   53  76.2 |
-gdk3                       |   57    0    0   100 |  539    0    9  98.4 |   37    0    2  94.9 |  263    0    4  98.5 |
+gdk3                       |   57    0    0   100 |  539    0    9  98.4 |   39    0    0   100 |  263    0    4  98.5 |
 gdk4                       |   63    0    0   100 |  483    0    5  99.0 |   35    0    0   100 |   13    0    1  92.9 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4    0    0   100 |   21    0    2  91.3 |
 gio2                       |  178    0    0   100 | 1727    0   17  99.0 |   81    0    0   100 |   46    0   22  67.6 |
@@ -37,10 +37,10 @@ gstrtsp1                   |   15    0    0   100 |  138    0    2  98.6 |    1 
 gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   65    0   24  73.0 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   58    0    0   100 |  371    0    8  97.9 |    2    0    0   100 |  157    0   32  83.1 |
-gtk3                       |  345    0    0   100 | 3765    0   22  99.4 |  444    0    3  99.3 |  148    0   11  93.1 |
-gtk4                       |  320    0    0   100 | 3579    0   12  99.7 |  342    0    3  99.1 |   33    0    5  86.8 |
+gtk3                       |  345    0    0   100 | 3765    0   22  99.4 |  447    0    0   100 |  148    0   11  93.1 |
+gtk4                       |  320    0    0   100 | 3579    0   12  99.7 |  345    0    0   100 |   33    0    5  86.8 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
-gtksource5                 |   49    0    0   100 |  448    0    0   100 |   29    0    1  96.7 |    0    0    0   100 |
+gtksource5                 |   49    0    0   100 |  448    0    0   100 |   30    0    0   100 |    0    0    0   100 |
 harfbuzz0                  |   35    0    0   100 |  408    0   41  90.9 |    0    0    0   100 |   65    0   11  85.5 |
 javascriptcore6            |   10    0    0   100 |  104    0    9  92.0 |    1    0    0   100 |    5    0    1  83.3 |
 json1                      |   12    0    0   100 |  200    0    0   100 |    9    0    0   100 |    0    0    0   100 |
@@ -346,17 +346,7 @@ cairo.scaled_font.ScaledFont.textToGlyphs
 cairo.global.imageSurfaceCreateForData
 
 [Unsupported Signals]
-adw.spin_row.SpinRow.input
 gda.meta_store.MetaStore.metaChanged
-gdk.window.Window.fromEmbedder
-gdk.window.Window.toEmbedder
-gtk.editable.Editable.insertText
-gtk.overlay.Overlay.getChildPosition
-gtk.spin_button.SpinButton.input
-gtk.editable.Editable.insertText
-gtk.overlay.Overlay.getChildPosition
-gtk.spin_button.SpinButton.input
-gtksource.view.View.pushSnippet
 
 [Unsupported Fields]
 glib.hook.Hook.data

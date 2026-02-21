@@ -744,10 +744,8 @@ template EditableT()
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
@@ -760,5 +758,68 @@ template EditableT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("delete-text", closure, after);
+  }
+
+  /**
+      Connect to `InsertText` signal.
+  
+      Emitted when text is inserted into the widget by the user.
+        
+        The default handler for this signal will normally be responsible
+        for inserting the text, so by connecting to this signal and then
+        stopping the signal with [gobject.global.signalStopEmission], it is possible
+        to modify the inserted text, or prevent it from being inserted entirely.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string text, ref int position, gtk.editable.Editable editable))
+  
+          `text` the new text to insert (optional)
+  
+          `position` the position, in characters,
+                at which to insert the new text. this is an in-out
+                parameter.  After the signal emission is finished, it
+                should point after the newly inserted text. (optional)
+  
+          `editable` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectInsertText(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.ref_ && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.editable.Editable)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 4, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      auto length = getVal!(int)(&_paramVals[2]);
+
+      Parameters!T[1] position = *getVal!(Parameters!T[1]*)(&_paramVals[3]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = position;
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getStringWithLength(&_paramVals[1], length);
+
+      _dClosure.cb(_paramTuple[]);
+
+      static if (Parameters!T.length > 1)
+        *getVal!(Parameters!T[1]*)(&_paramVals[3]) = position;
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("insert-text", closure, after);
   }
 }

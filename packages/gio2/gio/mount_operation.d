@@ -565,18 +565,14 @@ class MountOperation : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
 
-
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
-
 
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
@@ -629,26 +625,15 @@ class MountOperation : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
 
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-
-      static if (Parameters!T.length > 1)
-      {
-        auto _cArray = getVal!(char**)(&_paramVals[2]);
-        string[] _dArray;
-        uint _lenchoices;
-        if (_cArray)
-          for (; _cArray[_lenchoices] !is null; _lenchoices++)
-          break;
-        foreach (i; 0 .. _lenchoices)
-          _dArray ~= _cArray[i].fromCString(No.Free);
-        _paramTuple[1] = _dArray;
-      }
       _dClosure.cb(_paramTuple[]);
     }
 
@@ -685,7 +670,6 @@ class MountOperation : gobject.object.ObjectWrap
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -748,29 +732,18 @@ class MountOperation : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
-
       static if (Parameters!T.length > 1)
         _paramTuple[1] = gArrayGToD!(glib.types.Pid, GidOwnership.None)(cast(GArray*)getVal!(void*)(&_paramVals[2]));
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-
-      static if (Parameters!T.length > 2)
-      {
-        auto _cArray = getVal!(char**)(&_paramVals[3]);
-        string[] _dArray;
-        uint _lenchoices;
-        if (_cArray)
-          for (; _cArray[_lenchoices] !is null; _lenchoices++)
-          break;
-        foreach (i; 0 .. _lenchoices)
-          _dArray ~= _cArray[i].fromCString(No.Free);
-        _paramTuple[2] = _dArray;
-      }
       _dClosure.cb(_paramTuple[]);
     }
 
@@ -832,14 +805,11 @@ class MountOperation : gobject.object.ObjectWrap
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
-
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
-
 
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);

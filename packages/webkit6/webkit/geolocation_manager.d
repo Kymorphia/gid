@@ -132,6 +132,7 @@ class GeolocationManager : gobject.object.ObjectWrap
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
       auto _retval = _dClosure.cb(_paramTuple[]);
+
       setVal!(bool)(_returnValue, _retval);
     }
 

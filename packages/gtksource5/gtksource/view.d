@@ -1019,7 +1019,6 @@ class View : gtk.text_view.TextView
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -1062,7 +1061,6 @@ class View : gtk.text_view.TextView
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1156,18 +1154,14 @@ class View : gtk.text_view.TextView
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
 
-
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
-
 
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
@@ -1215,7 +1209,6 @@ class View : gtk.text_view.TextView
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -1258,7 +1251,6 @@ class View : gtk.text_view.TextView
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
-
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1306,7 +1298,6 @@ class View : gtk.text_view.TextView
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
@@ -1318,6 +1309,64 @@ class View : gtk.text_view.TextView
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-words", closure, after);
+  }
+
+  /**
+      Connect to `PushSnippet` signal.
+  
+      The signal is emitted to insert a new snippet into the view.
+        
+        If another snippet was active, it will be paused until all focus positions of snippet have been exhausted.
+        
+        location will be updated to point at the end of the snippet.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.snippet.Snippet snippet, ref gtk.text_iter.TextIter location, gtksource.view.View view))
+  
+          `snippet` a #GtkSourceSnippet (optional)
+  
+          `location` a #GtkTextIter (optional)
+  
+          `view` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectPushSnippet(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.snippet.Snippet)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.ref_ && is(Parameters!T[1] == gtk.text_iter.TextIter)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.view.View)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      Parameters!T[1] location = *getVal!(Parameters!T[1]*)(&_paramVals[2]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = location;
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+
+      static if (Parameters!T.length > 1)
+        *getVal!(Parameters!T[1]*)(&_paramVals[2]) = location;
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("push-snippet", closure, after);
   }
 
   /**
@@ -1404,10 +1453,8 @@ class View : gtk.text_view.TextView
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
 
-
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
-
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
