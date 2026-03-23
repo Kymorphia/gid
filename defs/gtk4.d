@@ -115,3 +115,46 @@
     auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
     gtk_custom_sorter_set_sort_func(cast(GtkCustomSorter*)_cPtr, &_sortFuncCallback, _sortFunc, &thawDelegate);
   }
+
+//!class Widget
+//# Disable deprecated IconView margin property (which would conflict with our convenience property)
+//!set class[IconView].property[margin][ignore] 1
+
+//# Add margin convenience property to Widget
+  /**
+      Convenience property to set `marginStart`, `marginEnd`, `marginTop`, and `marginBottom`.
+      Params:
+        propval = Margin for all 4 sides of the widget.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property void margin(int propval)
+  {
+    setMarginStart(propval);
+    setMarginEnd(propval);
+    setMarginTop(propval);
+    setMarginBottom(propval);
+  }
+
+//# Add margin convenience property to WidgetGidBuilder
+//!class WidgetGidBuilder
+
+  /**
+      Convenience property to set `marginStart`, `marginEnd`, `marginTop`, and `marginBottom`.
+      Params:
+        propval = Margin for all 4 sides of the widget.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T margin(int propval)
+  {
+    setProperty("margin-start", propval);
+    setProperty("margin-end", propval);
+    setProperty("margin-top", propval);
+    return setProperty("margin-bottom", propval);
+  }
