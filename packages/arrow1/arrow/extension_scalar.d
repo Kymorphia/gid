@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class ExtensionScalar : arrow.scalar.Scalar
@@ -34,5 +35,27 @@ class ExtensionScalar : arrow.scalar.Scalar
   override ExtensionScalar self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.extension_scalar.ExtensionScalar]
+  Returns: New builder object
+  */
+  static ExtensionScalarGidBuilder builder()
+  {
+    return new ExtensionScalarGidBuilder;
+  }
+}
+
+class ExtensionScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.extension_scalar.ExtensionScalar]
+final class ExtensionScalarGidBuilder : ExtensionScalarGidBuilderImpl!ExtensionScalarGidBuilder
+{
+  ExtensionScalar build()
+  {
+    return new ExtensionScalar(cast(void*)createGObject(ExtensionScalar._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.cell_area_box;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -62,6 +63,15 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.cell_area_box.CellAreaBox]
+  Returns: New builder object
+  */
+  static CellAreaBoxGidBuilder builder()
+  {
+    return new CellAreaBoxGidBuilder;
+  }
+
+  /**
       Get `spacing` property.
       Returns: The amount of space to reserve between cells.
   */
@@ -77,7 +87,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   */
   @property void spacing(int propval)
   {
-    return setSpacing(propval);
+    setSpacing(propval);
   }
 
   mixin OrientableT!();
@@ -149,5 +159,31 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   void setSpacing(int spacing)
   {
     gtk_cell_area_box_set_spacing(cast(GtkCellAreaBox*)this._cPtr, spacing);
+  }
+}
+
+class CellAreaBoxGidBuilderImpl(T) : gtk.cell_area.CellAreaGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The amount of space to reserve between cells.
+      Returns: Builder instance for fluent chaining
+  */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_area_box.CellAreaBox]
+final class CellAreaBoxGidBuilder : CellAreaBoxGidBuilderImpl!CellAreaBoxGidBuilder
+{
+  CellAreaBox build()
+  {
+    return new CellAreaBox(cast(void*)createGObject(CellAreaBox._getGType), No.Take);
   }
 }

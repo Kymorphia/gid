@@ -6,6 +6,7 @@ import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class Ticket : gobject.object.ObjectWrap
   override Ticket self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.ticket.Ticket]
+  Returns: New builder object
+  */
+  static TicketGidBuilder builder()
+  {
+    return new TicketGidBuilder;
   }
 
   /**
@@ -72,5 +82,30 @@ class Ticket : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gaflight_ticket_equal(cast(GAFlightTicket*)this._cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class TicketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `data` property.
+      Params:
+        propval = Opaque identifier or credential to use when requesting a data
+          stream with the DoGet RPC.
+      Returns: Builder instance for fluent chaining
+  */
+  T data(glib.bytes.Bytes propval)
+  {
+    return setProperty("data", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.ticket.Ticket]
+final class TicketGidBuilder : TicketGidBuilderImpl!TicketGidBuilder
+{
+  Ticket build()
+  {
+    return new Ticket(cast(void*)createGObject(Ticket._getGType), Yes.Take);
   }
 }

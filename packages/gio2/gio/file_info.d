@@ -9,6 +9,7 @@ import gio.icon;
 import gio.types;
 import glib.date_time;
 import glib.time_val;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -75,6 +76,15 @@ class FileInfo : gobject.object.ObjectWrap
   override FileInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.file_info.FileInfo]
+  Returns: New builder object
+  */
+  static FileInfoGidBuilder builder()
+  {
+    return new FileInfoGidBuilder;
   }
 
   /**
@@ -1185,5 +1195,18 @@ class FileInfo : gobject.object.ObjectWrap
   void unsetAttributeMask()
   {
     g_file_info_unset_attribute_mask(cast(GFileInfo*)this._cPtr);
+  }
+}
+
+class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.file_info.FileInfo]
+final class FileInfoGidBuilder : FileInfoGidBuilderImpl!FileInfoGidBuilder
+{
+  FileInfo build()
+  {
+    return new FileInfo(cast(void*)createGObject(FileInfo._getGType), Yes.Take);
   }
 }

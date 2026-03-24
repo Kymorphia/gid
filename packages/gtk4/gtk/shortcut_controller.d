@@ -5,6 +5,7 @@ import gdk.types;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.buildable;
@@ -86,6 +87,15 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   }
 
   /**
+  Get builder for [gtk.shortcut_controller.ShortcutController]
+  Returns: New builder object
+  */
+  static ShortcutControllerGidBuilder builder()
+  {
+    return new ShortcutControllerGidBuilder;
+  }
+
+  /**
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
@@ -110,7 +120,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   @property void mnemonicModifiers(gdk.types.ModifierType propval)
   {
-    return setMnemonicsModifiers(propval);
+    setMnemonicsModifiers(propval);
   }
 
   /**
@@ -138,7 +148,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   @property void scope_(gtk.types.ShortcutScope propval)
   {
-    return setScope(propval);
+    setScope(propval);
   }
 
   mixin ListModelT!();
@@ -269,5 +279,54 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   void setScope(gtk.types.ShortcutScope scope_)
   {
     gtk_shortcut_controller_set_scope(cast(GtkShortcutController*)this._cPtr, scope_);
+  }
+}
+
+class ShortcutControllerGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `mnemonicModifiers` property.
+      Params:
+        propval = The modifiers that need to be pressed to allow mnemonics activation.
+      Returns: Builder instance for fluent chaining
+  */
+  T mnemonicModifiers(gdk.types.ModifierType propval)
+  {
+    return setProperty("mnemonic-modifiers", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = A list model to take shortcuts from.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `scope_` property.
+      Params:
+        propval = What scope the shortcuts will be handled in.
+      Returns: Builder instance for fluent chaining
+  */
+  T scope_(gtk.types.ShortcutScope propval)
+  {
+    return setProperty("scope", propval);
+  }
+}
+
+/// Fluent builder for [gtk.shortcut_controller.ShortcutController]
+final class ShortcutControllerGidBuilder : ShortcutControllerGidBuilderImpl!ShortcutControllerGidBuilder
+{
+  ShortcutController build()
+  {
+    return new ShortcutController(cast(void*)createGObject(ShortcutController._getGType), Yes.Take);
   }
 }

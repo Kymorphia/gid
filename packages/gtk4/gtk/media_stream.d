@@ -6,6 +6,7 @@ import gdk.paintable_mixin;
 import gdk.surface;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -59,6 +60,15 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 
   /**
+  Get builder for [gtk.media_stream.MediaStream]
+  Returns: New builder object
+  */
+  static MediaStreamGidBuilder builder()
+  {
+    return new MediaStreamGidBuilder;
+  }
+
+  /**
       Get `duration` property.
       Returns: The stream's duration in microseconds or 0 if unknown.
   */
@@ -83,7 +93,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   @property void loop(bool propval)
   {
-    return setLoop(propval);
+    setLoop(propval);
   }
 
   /**
@@ -102,7 +112,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   @property void muted(bool propval)
   {
-    return setMuted(propval);
+    setMuted(propval);
   }
 
   /**
@@ -121,7 +131,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   @property void playing(bool propval)
   {
-    return setPlaying(propval);
+    setPlaying(propval);
   }
 
   /**
@@ -167,7 +177,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   @property void volume(double propval)
   {
-    return setVolume(propval);
+    setVolume(propval);
   }
 
   mixin PaintableT!();
@@ -610,5 +620,64 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   void update(long timestamp)
   {
     gtk_media_stream_update(cast(GtkMediaStream*)this._cPtr, timestamp);
+  }
+}
+
+class MediaStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T
+{
+
+  mixin PaintableGidBuilderT!();
+
+  /**
+      Set `loop` property.
+      Params:
+        propval = Try to restart the media from the beginning once it ended.
+      Returns: Builder instance for fluent chaining
+  */
+  T loop(bool propval)
+  {
+    return setProperty("loop", propval);
+  }
+
+  /**
+      Set `muted` property.
+      Params:
+        propval = Whether the audio stream should be muted.
+      Returns: Builder instance for fluent chaining
+  */
+  T muted(bool propval)
+  {
+    return setProperty("muted", propval);
+  }
+
+  /**
+      Set `playing` property.
+      Params:
+        propval = Whether the stream is currently playing.
+      Returns: Builder instance for fluent chaining
+  */
+  T playing(bool propval)
+  {
+    return setProperty("playing", propval);
+  }
+
+  /**
+      Set `volume` property.
+      Params:
+        propval = Volume of the audio stream.
+      Returns: Builder instance for fluent chaining
+  */
+  T volume(double propval)
+  {
+    return setProperty("volume", propval);
+  }
+}
+
+/// Fluent builder for [gtk.media_stream.MediaStream]
+final class MediaStreamGidBuilder : MediaStreamGidBuilderImpl!MediaStreamGidBuilder
+{
+  MediaStream build()
+  {
+    return new MediaStream(cast(void*)createGObject(MediaStream._getGType), No.Take);
   }
 }

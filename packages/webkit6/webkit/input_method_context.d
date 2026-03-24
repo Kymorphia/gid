@@ -4,6 +4,7 @@ module webkit.input_method_context;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -51,6 +52,15 @@ class InputMethodContext : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.input_method_context.InputMethodContext]
+  Returns: New builder object
+  */
+  static InputMethodContextGidBuilder builder()
+  {
+    return new InputMethodContextGidBuilder;
+  }
+
+  /**
       Get `inputHints` property.
       Returns: The #WebKitInputHints of the input associated with this context.
   */
@@ -66,7 +76,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   @property void inputHints(webkit.types.InputHints propval)
   {
-    return setInputHints(propval);
+    setInputHints(propval);
   }
 
   /**
@@ -85,7 +95,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   @property void inputPurpose(webkit.types.InputPurpose propval)
   {
-    return setInputPurpose(propval);
+    setInputPurpose(propval);
   }
 
   /**
@@ -448,5 +458,40 @@ class InputMethodContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("preedit-started", closure, after);
+  }
+}
+
+class InputMethodContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = The #WebKitInputHints of the input associated with this context.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(webkit.types.InputHints propval)
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The #WebKitInputPurpose of the input associated with this context.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(webkit.types.InputPurpose propval)
+  {
+    return setProperty("input-purpose", propval);
+  }
+}
+
+/// Fluent builder for [webkit.input_method_context.InputMethodContext]
+final class InputMethodContextGidBuilder : InputMethodContextGidBuilderImpl!InputMethodContextGidBuilder
+{
+  InputMethodContext build()
+  {
+    return new InputMethodContext(cast(void*)createGObject(InputMethodContext._getGType), No.Take);
   }
 }

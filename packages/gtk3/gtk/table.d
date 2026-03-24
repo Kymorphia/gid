@@ -4,6 +4,7 @@ module gtk.table;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -67,6 +68,15 @@ class Table : gtk.container.Container
     return this;
   }
 
+  /**
+  Get builder for [gtk.table.Table]
+  Returns: New builder object
+  */
+  static TableGidBuilder builder()
+  {
+    return new TableGidBuilder;
+  }
+
   /** */
   @property uint columnSpacing()
   {
@@ -88,7 +98,7 @@ class Table : gtk.container.Container
   /** */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /** */
@@ -393,5 +403,49 @@ class Table : gtk.container.Container
   void setRowSpacings(uint spacing)
   {
     gtk_table_set_row_spacings(cast(GtkTable*)this._cPtr, spacing);
+  }
+}
+
+class TableGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+
+  /** */
+  T columnSpacing(uint propval)
+  {
+    return setProperty("column-spacing", propval);
+  }
+
+  /** */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /** */
+  T nColumns(uint propval)
+  {
+    return setProperty("n-columns", propval);
+  }
+
+  /** */
+  T nRows(uint propval)
+  {
+    return setProperty("n-rows", propval);
+  }
+
+  /** */
+  T rowSpacing(uint propval)
+  {
+    return setProperty("row-spacing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.table.Table]
+final class TableGidBuilder : TableGidBuilderImpl!TableGidBuilder
+{
+  Table build()
+  {
+    return new Table(cast(void*)createGObject(Table._getGType), No.Take);
   }
 }

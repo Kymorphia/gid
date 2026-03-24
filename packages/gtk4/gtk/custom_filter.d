@@ -2,6 +2,7 @@
 module gtk.custom_filter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -37,6 +38,15 @@ class CustomFilter : gtk.filter.Filter
   override CustomFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.custom_filter.CustomFilter]
+  Returns: New builder object
+  */
+  static CustomFilterGidBuilder builder()
+  {
+    return new CustomFilterGidBuilder;
   }
 
   /**
@@ -102,5 +112,18 @@ class CustomFilter : gtk.filter.Filter
     auto _matchFunc = matchFunc ? freezeDelegate(cast(void*)&matchFunc) : null;
     GDestroyNotify _matchFuncDestroyCB = matchFunc ? &thawDelegate : null;
     gtk_custom_filter_set_filter_func(cast(GtkCustomFilter*)this._cPtr, _matchFuncCB, _matchFunc, _matchFuncDestroyCB);
+  }
+}
+
+class CustomFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.custom_filter.CustomFilter]
+final class CustomFilterGidBuilder : CustomFilterGidBuilderImpl!CustomFilterGidBuilder
+{
+  CustomFilter build()
+  {
+    return new CustomFilter(cast(void*)createGObject(CustomFilter._getGType), Yes.Take);
   }
 }

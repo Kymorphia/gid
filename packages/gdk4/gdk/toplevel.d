@@ -13,6 +13,7 @@ import gdk.toplevel_size;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 
 /**
     A [gdk.toplevel.Toplevel] is a freestanding toplevel surface.
@@ -422,4 +423,75 @@ interface Toplevel
       Returns: Signal ID
   */
   ulong connectComputeSize(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface ToplevelGidBuilderImpl(T)
+{
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window manager should add decorations.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorated(bool propval);
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window manager should allow to close the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T deletable(bool propval);
+
+  /**
+      Set `fullscreenMode` property.
+      Params:
+        propval = The fullscreen mode of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T fullscreenMode(gdk.types.FullscreenMode propval);
+
+  /**
+      Set `iconList` property.
+      Params:
+        propval = A list of textures to use as icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconList(void* propval);
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the surface is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval);
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The startup ID of the surface.
+          
+          See [gdk.app_launch_context.AppLaunchContext] for more information about
+          startup feedback.
+      Returns: Builder instance for fluent chaining
+  */
+  T startupId(string propval);
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval);
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T transientFor(gdk.surface.Surface propval);
 }

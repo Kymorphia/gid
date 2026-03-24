@@ -11,6 +11,7 @@ import gio.types;
 import glib.error;
 import glib.uri;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import soup.auth_domain;
@@ -135,6 +136,25 @@ class Server : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [soup.server.Server]
+  Returns: New builder object
+  */
+  static ServerGidBuilder builder()
+  {
+    return new ServerGidBuilder;
+  }
+
+  /**
+      Get `rawPaths` property.
+      Returns: If true, percent-encoding in the Request-URI path will not be
+        automatically decoded.
+  */
+  @property bool rawPaths()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("raw-paths");
+  }
+
+  /**
       Get `serverHeader` property.
       Returns: Server header.
         
@@ -217,7 +237,7 @@ class Server : gobject.object.ObjectWrap
   */
   @property void tlsAuthMode(gio.types.TlsAuthenticationMode propval)
   {
-    return setTlsAuthMode(propval);
+    setTlsAuthMode(propval);
   }
 
   /**
@@ -244,7 +264,7 @@ class Server : gobject.object.ObjectWrap
   */
   @property void tlsCertificate(gio.tls_certificate.TlsCertificate propval)
   {
-    return setTlsCertificate(propval);
+    setTlsCertificate(propval);
   }
 
   /**
@@ -265,7 +285,7 @@ class Server : gobject.object.ObjectWrap
   */
   @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
   {
-    return setTlsDatabase(propval);
+    setTlsDatabase(propval);
   }
 
   /**
@@ -1028,5 +1048,103 @@ class Server : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-started", closure, after);
+  }
+}
+
+class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `rawPaths` property.
+      Params:
+        propval = If true, percent-encoding in the Request-URI path will not be
+          automatically decoded.
+      Returns: Builder instance for fluent chaining
+  */
+  T rawPaths(bool propval)
+  {
+    return setProperty("raw-paths", propval);
+  }
+
+  /**
+      Set `serverHeader` property.
+      Params:
+        propval = Server header.
+          
+          If non-null, the value to use for the "Server" header on
+          `class@ServerMessage`s processed by this server.
+          
+          The Server header is the server equivalent of the
+          User-Agent header, and provides information about the
+          server and its components. It contains a list of one or
+          more product tokens, separated by whitespace, with the most
+          significant product token coming first. The tokens must be
+          brief, ASCII, and mostly alphanumeric (although "-", "_",
+          and "." are also allowed), and may optionally include a "/"
+          followed by a version string. You may also put comments,
+          enclosed in parentheses, between or after the tokens.
+          
+          Some HTTP server implementations intentionally do not use
+          version numbers in their Server header, so that
+          installations running older versions of the server don't
+          end up advertising their vulnerability to specific security
+          holes.
+          
+          As with `property@Session:user_agent`, if you set a
+          `property@Server:server-header` property that has trailing
+          whitespace, #SoupServer will append its own product token (eg,
+          `libsoup/2.3.2`) to the end of the header for you.
+      Returns: Builder instance for fluent chaining
+  */
+  T serverHeader(string propval)
+  {
+    return setProperty("server-header", propval);
+  }
+
+  /**
+      Set `tlsAuthMode` property.
+      Params:
+        propval = A [gio.types.TlsAuthenticationMode] for SSL/TLS client authentication.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsAuthMode(gio.types.TlsAuthenticationMode propval)
+  {
+    return setProperty("tls-auth-mode", propval);
+  }
+
+  /**
+      Set `tlsCertificate` property.
+      Params:
+        propval = A [gio.tls_certificate.TlsCertificate] that has a
+          `property@Gio.TlsCertificate:private-key` set.
+          
+          If this is set, then the server will be able to speak
+          https in addition to (or instead of) plain http.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsCertificate(gio.tls_certificate.TlsCertificate propval)
+  {
+    return setProperty("tls-certificate", propval);
+  }
+
+  /**
+      Set `tlsDatabase` property.
+      Params:
+        propval = A [gio.tls_database.TlsDatabase] to use for validating SSL/TLS client
+          certificates.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsDatabase(gio.tls_database.TlsDatabase propval)
+  {
+    return setProperty("tls-database", propval);
+  }
+}
+
+/// Fluent builder for [soup.server.Server]
+final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
+{
+  Server build()
+  {
+    return new Server(cast(void*)createGObject(Server._getGType), Yes.Take);
   }
 }

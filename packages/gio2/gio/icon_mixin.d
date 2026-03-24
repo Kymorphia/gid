@@ -8,6 +8,7 @@ public import gio.c.types;
 public import gio.types;
 public import glib.error;
 public import glib.variant;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -118,4 +119,8 @@ template IconT()
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
+}
+
+template IconGidBuilderT()
+{
 }

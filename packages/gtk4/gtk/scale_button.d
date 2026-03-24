@@ -3,6 +3,7 @@ module gtk.scale_button;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -68,6 +69,15 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
+  Get builder for [gtk.scale_button.ScaleButton]
+  Returns: New builder object
+  */
+  static ScaleButtonGidBuilder builder()
+  {
+    return new ScaleButtonGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: If the scale button should be pressed in.
   */
@@ -92,7 +102,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void adjustment(gtk.adjustment.Adjustment propval)
   {
-    return setAdjustment(propval);
+    setAdjustment(propval);
   }
 
   /**
@@ -111,7 +121,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void hasFrame(bool propval)
   {
-    return setHasFrame(propval);
+    setHasFrame(propval);
   }
 
   /**
@@ -130,7 +140,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void value(double propval)
   {
-    return setValue(propval);
+    setValue(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -436,5 +446,54 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+}
+
+class ScaleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin AccessibleRangeGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] that is used as the model.
+      Returns: Builder instance for fluent chaining
+  */
+  T adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("adjustment", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = If the scale button has a frame.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval)
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scale.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(double propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [gtk.scale_button.ScaleButton]
+final class ScaleButtonGidBuilder : ScaleButtonGidBuilderImpl!ScaleButtonGidBuilder
+{
+  ScaleButton build()
+  {
+    return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), No.Take);
   }
 }

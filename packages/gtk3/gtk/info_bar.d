@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -118,6 +119,15 @@ class InfoBar : gtk.box.Box
   }
 
   /**
+  Get builder for [gtk.info_bar.InfoBar]
+  Returns: New builder object
+  */
+  static InfoBarGidBuilder builder()
+  {
+    return new InfoBarGidBuilder;
+  }
+
+  /**
       Get `messageType` property.
       Returns: The type of the message.
         
@@ -137,7 +147,7 @@ class InfoBar : gtk.box.Box
   */
   @property void messageType(gtk.types.MessageType propval)
   {
-    return setMessageType(propval);
+    setMessageType(propval);
   }
 
   /** */
@@ -149,7 +159,7 @@ class InfoBar : gtk.box.Box
   /** */
   @property void revealed(bool propval)
   {
-    return setRevealed(propval);
+    setRevealed(propval);
   }
 
   /**
@@ -168,7 +178,7 @@ class InfoBar : gtk.box.Box
   */
   @property void showCloseButton(bool propval)
   {
-    return setShowCloseButton(propval);
+    setShowCloseButton(propval);
   }
 
   /**
@@ -440,5 +450,49 @@ class InfoBar : gtk.box.Box
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
+  }
+}
+
+class InfoBarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /**
+      Set `messageType` property.
+      Params:
+        propval = The type of the message.
+          
+          The type may be used to determine the appearance of the info bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T messageType(gtk.types.MessageType propval)
+  {
+    return setProperty("message-type", propval);
+  }
+
+  /** */
+  T revealed(bool propval)
+  {
+    return setProperty("revealed", propval);
+  }
+
+  /**
+      Set `showCloseButton` property.
+      Params:
+        propval = Whether to include a standard close button.
+      Returns: Builder instance for fluent chaining
+  */
+  T showCloseButton(bool propval)
+  {
+    return setProperty("show-close-button", propval);
+  }
+}
+
+/// Fluent builder for [gtk.info_bar.InfoBar]
+final class InfoBarGidBuilder : InfoBarGidBuilderImpl!InfoBarGidBuilder
+{
+  InfoBar build()
+  {
+    return new InfoBar(cast(void*)createGObject(InfoBar._getGType), No.Take);
   }
 }

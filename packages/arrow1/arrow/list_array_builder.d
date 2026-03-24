@@ -8,6 +8,7 @@ import arrow.list_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   override ListArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.list_array_builder.ListArrayBuilder]
+  Returns: New builder object
+  */
+  static ListArrayBuilderGidBuilder builder()
+  {
+    return new ListArrayBuilderGidBuilder;
   }
 
   /** */
@@ -79,5 +89,18 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     _cretval = garrow_list_array_builder_get_value_builder(cast(GArrowListArrayBuilder*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class ListArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.list_array_builder.ListArrayBuilder]
+final class ListArrayBuilderGidBuilder : ListArrayBuilderGidBuilderImpl!ListArrayBuilderGidBuilder
+{
+  ListArrayBuilder build()
+  {
+    return new ListArrayBuilder(cast(void*)createGObject(ListArrayBuilder._getGType), Yes.Take);
   }
 }

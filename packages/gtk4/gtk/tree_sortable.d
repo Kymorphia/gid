@@ -4,6 +4,7 @@ module gtk.tree_sortable;
 public import gtk.tree_sortable_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -122,4 +123,8 @@ interface TreeSortable
       Returns: Signal ID
   */
   ulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface TreeSortableGidBuilderImpl(T)
+{
 }

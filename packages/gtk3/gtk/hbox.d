@@ -4,6 +4,7 @@ module gtk.hbox;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.box;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -62,6 +63,15 @@ class HBox : gtk.box.Box
   }
 
   /**
+  Get builder for [gtk.hbox.HBox]
+  Returns: New builder object
+  */
+  static HBoxGidBuilder builder()
+  {
+    return new HBoxGidBuilder;
+  }
+
+  /**
       Creates a new #GtkHBox.
   
       Params:
@@ -77,5 +87,19 @@ class HBox : gtk.box.Box
     GtkWidget* _cretval;
     _cretval = gtk_hbox_new(homogeneous, spacing);
     this(_cretval, No.Take);
+  }
+}
+
+class HBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.hbox.HBox]
+final class HBoxGidBuilder : HBoxGidBuilderImpl!HBoxGidBuilder
+{
+  HBox build()
+  {
+    return new HBox(cast(void*)createGObject(HBox._getGType), No.Take);
   }
 }

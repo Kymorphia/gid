@@ -3,6 +3,7 @@ module gtk.tool_shell;
 
 public import gtk.tool_shell_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -95,4 +96,8 @@ interface ToolShell
       [gtk.tool_item.ToolItem.rebuildMenu] instead.
   */
   void rebuildMenu();
+}
+
+interface ToolShellGidBuilderImpl(T)
+{
 }

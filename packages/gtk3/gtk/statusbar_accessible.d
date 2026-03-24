@@ -4,6 +4,7 @@ module gtk.statusbar_accessible;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -36,5 +37,28 @@ class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
   override StatusbarAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.statusbar_accessible.StatusbarAccessible]
+  Returns: New builder object
+  */
+  static StatusbarAccessibleGidBuilder builder()
+  {
+    return new StatusbarAccessibleGidBuilder;
+  }
+}
+
+class StatusbarAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.statusbar_accessible.StatusbarAccessible]
+final class StatusbarAccessibleGidBuilder : StatusbarAccessibleGidBuilderImpl!StatusbarAccessibleGidBuilder
+{
+  StatusbarAccessible build()
+  {
+    return new StatusbarAccessible(cast(void*)createGObject(StatusbarAccessible._getGType), No.Take);
   }
 }

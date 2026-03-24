@@ -8,6 +8,7 @@ import gmime.c.types;
 import gmime.internet_address_list;
 import gmime.internet_address_mailbox;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -39,6 +40,15 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
   override AutocryptHeaderList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.autocrypt_header_list.AutocryptHeaderList]
+  Returns: New builder object
+  */
+  static AutocryptHeaderListGidBuilder builder()
+  {
+    return new AutocryptHeaderListGidBuilder;
   }
 
   /**
@@ -127,5 +137,18 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
   void removeIncomplete()
   {
     g_mime_autocrypt_header_list_remove_incomplete(cast(GMimeAutocryptHeaderList*)this._cPtr);
+  }
+}
+
+class AutocryptHeaderListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.autocrypt_header_list.AutocryptHeaderList]
+final class AutocryptHeaderListGidBuilder : AutocryptHeaderListGidBuilderImpl!AutocryptHeaderListGidBuilder
+{
+  AutocryptHeaderList build()
+  {
+    return new AutocryptHeaderList(cast(void*)createGObject(AutocryptHeaderList._getGType), Yes.Take);
   }
 }

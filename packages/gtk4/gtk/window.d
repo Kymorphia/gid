@@ -6,6 +6,7 @@ import gdk.monitor;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -116,6 +117,15 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
+  Get builder for [gtk.window.Window]
+  Returns: New builder object
+  */
+  static WindowGidBuilder builder()
+  {
+    return new WindowGidBuilder;
+  }
+
+  /**
       Get `application` property.
       Returns: The [gtk.application.Application] associated with the window.
         
@@ -147,7 +157,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void application(gtk.application.Application propval)
   {
-    return setApplication(propval);
+    setApplication(propval);
   }
 
   /**
@@ -166,7 +176,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -185,7 +195,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void decorated(bool propval)
   {
-    return setDecorated(propval);
+    setDecorated(propval);
   }
 
   /**
@@ -223,7 +233,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void defaultWidget(gtk.widget.Widget propval)
   {
-    return setDefaultWidget(propval);
+    setDefaultWidget(propval);
   }
 
   /**
@@ -261,7 +271,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void deletable(bool propval)
   {
-    return setDeletable(propval);
+    setDeletable(propval);
   }
 
   /**
@@ -280,7 +290,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void destroyWithParent(bool propval)
   {
-    return setDestroyWithParent(propval);
+    setDestroyWithParent(propval);
   }
 
   /**
@@ -299,7 +309,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void display(gdk.display.Display propval)
   {
-    return setDisplay(propval);
+    setDisplay(propval);
   }
 
   /**
@@ -324,7 +334,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void focusVisible(bool propval)
   {
-    return setFocusVisible(propval);
+    setFocusVisible(propval);
   }
 
   /**
@@ -343,7 +353,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void focusWidget(gtk.widget.Widget propval)
   {
-    return setFocus(propval);
+    setFocus(propval);
   }
 
   /**
@@ -395,7 +405,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void handleMenubarAccel(bool propval)
   {
-    return setHandleMenubarAccel(propval);
+    setHandleMenubarAccel(propval);
   }
 
   /**
@@ -414,7 +424,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void hideOnClose(bool propval)
   {
-    return setHideOnClose(propval);
+    setHideOnClose(propval);
   }
 
   /**
@@ -437,7 +447,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -493,7 +503,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void mnemonicsVisible(bool propval)
   {
-    return setMnemonicsVisible(propval);
+    setMnemonicsVisible(propval);
   }
 
   /**
@@ -512,7 +522,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -531,7 +541,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void resizable(bool propval)
   {
-    return setResizable(propval);
+    setResizable(propval);
   }
 
   /**
@@ -541,7 +551,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void startupId(string propval)
   {
-    return setStartupId(propval);
+    setStartupId(propval);
   }
 
   /**
@@ -571,7 +581,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -590,7 +600,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void titlebar(gtk.widget.Widget propval)
   {
-    return setTitlebar(propval);
+    setTitlebar(propval);
   }
 
   /**
@@ -609,7 +619,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   @property void transientFor(gtk.window.Window propval)
   {
-    return setTransientFor(propval);
+    setTransientFor(propval);
   }
 
   mixin NativeT!();
@@ -1836,5 +1846,304 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("keys-changed", closure, after);
+  }
+}
+
+class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.NativeGidBuilderImpl!T, gtk.root.RootGidBuilderImpl!T, gtk.shortcut_manager.ShortcutManagerGidBuilderImpl!T
+{
+
+  mixin NativeGidBuilderT!();
+  mixin RootGidBuilderT!();
+  mixin ShortcutManagerGidBuilderT!();
+
+  /**
+      Set `application` property.
+      Params:
+        propval = The [gtk.application.Application] associated with the window.
+          
+          The application will be kept alive for at least as long as it
+          has any windows associated with it (see [gio.application.Application.hold]
+          for a way to keep it alive without windows).
+          
+          Normally, the connection between the application and the window
+          will remain until the window is destroyed, but you can explicitly
+          remove it by setting the :application property to null.
+      Returns: Builder instance for fluent chaining
+  */
+  T application(gtk.application.Application propval)
+  {
+    return setProperty("application", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window should have a frame (also known as *decorations*).
+      Returns: Builder instance for fluent chaining
+  */
+  T decorated(bool propval)
+  {
+    return setProperty("decorated", propval);
+  }
+
+  /**
+      Set `defaultHeight` property.
+      Params:
+        propval = The default height of the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultHeight(int propval)
+  {
+    return setProperty("default-height", propval);
+  }
+
+  /**
+      Set `defaultWidget` property.
+      Params:
+        propval = The default widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("default-widget", propval);
+  }
+
+  /**
+      Set `defaultWidth` property.
+      Params:
+        propval = The default width of the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultWidth(int propval)
+  {
+    return setProperty("default-width", propval);
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window frame should have a close button.
+      Returns: Builder instance for fluent chaining
+  */
+  T deletable(bool propval)
+  {
+    return setProperty("deletable", propval);
+  }
+
+  /**
+      Set `destroyWithParent` property.
+      Params:
+        propval = If this window should be destroyed when the parent is destroyed.
+      Returns: Builder instance for fluent chaining
+  */
+  T destroyWithParent(bool propval)
+  {
+    return setProperty("destroy-with-parent", propval);
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display that will display this window.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `focusVisible` property.
+      Params:
+        propval = Whether 'focus rectangles' are currently visible in this window.
+          
+          This property is maintained by GTK based on user input
+          and should not be set by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusVisible(bool propval)
+  {
+    return setProperty("focus-visible", propval);
+  }
+
+  /**
+      Set `focusWidget` property.
+      Params:
+        propval = The focus widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("focus-widget", propval);
+  }
+
+  /**
+      Set `fullscreened` property.
+      Params:
+        propval = Whether the window is fullscreen.
+          
+          Setting this property is the equivalent of calling
+          [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen];
+          either operation is asynchronous, which means you will need to
+          connect to the ::notify signal in order to know whether the
+          operation was successful.
+      Returns: Builder instance for fluent chaining
+  */
+  T fullscreened(bool propval)
+  {
+    return setProperty("fullscreened", propval);
+  }
+
+  /**
+      Set `handleMenubarAccel` property.
+      Params:
+        propval = Whether the window frame should handle F10 for activating
+          menubars.
+      Returns: Builder instance for fluent chaining
+  */
+  T handleMenubarAccel(bool propval)
+  {
+    return setProperty("handle-menubar-accel", propval);
+  }
+
+  /**
+      Set `hideOnClose` property.
+      Params:
+        propval = If this window should be hidden when the users clicks the close button.
+      Returns: Builder instance for fluent chaining
+  */
+  T hideOnClose(bool propval)
+  {
+    return setProperty("hide-on-close", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = Specifies the name of the themed icon to use as the window icon.
+          
+          See [gtk.icon_theme.IconTheme] for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `maximized` property.
+      Params:
+        propval = Whether the window is maximized.
+          
+          Setting this property is the equivalent of calling
+          [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize];
+          either operation is asynchronous, which means you will need to
+          connect to the ::notify signal in order to know whether the
+          operation was successful.
+      Returns: Builder instance for fluent chaining
+  */
+  T maximized(bool propval)
+  {
+    return setProperty("maximized", propval);
+  }
+
+  /**
+      Set `mnemonicsVisible` property.
+      Params:
+        propval = Whether mnemonics are currently visible in this window.
+          
+          This property is maintained by GTK based on user input,
+          and should not be set by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T mnemonicsVisible(bool propval)
+  {
+    return setProperty("mnemonics-visible", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = If true, the window is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `resizable` property.
+      Params:
+        propval = If true, users can resize the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T resizable(bool propval)
+  {
+    return setProperty("resizable", propval);
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = A write-only property for setting window's startup notification identifier.
+      Returns: Builder instance for fluent chaining
+  */
+  T startupId(string propval)
+  {
+    return setProperty("startup-id", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `titlebar` property.
+      Params:
+        propval = The titlebar widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T titlebar(gtk.widget.Widget propval)
+  {
+    return setProperty("titlebar", propval);
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T transientFor(gtk.window.Window propval)
+  {
+    return setProperty("transient-for", propval);
+  }
+}
+
+/// Fluent builder for [gtk.window.Window]
+final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
+{
+  Window build()
+  {
+    return new Window(cast(void*)createGObject(Window._getGType), No.Take);
   }
 }

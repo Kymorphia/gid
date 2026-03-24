@@ -6,6 +6,7 @@ import arrowdataset.c.types;
 import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
   }
 
   /**
+  Get builder for [arrowdataset.hive_partitioning_options.HivePartitioningOptions]
+  Returns: New builder object
+  */
+  static HivePartitioningOptionsGidBuilder builder()
+  {
+    return new HivePartitioningOptionsGidBuilder;
+  }
+
+  /**
       Get `nullFallback` property.
       Returns: The fallback string for null. This is used only by
         #GADatasetHivePartitioning.
@@ -64,5 +74,30 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
     GADatasetHivePartitioningOptions* _cretval;
     _cretval = gadataset_hive_partitioning_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class HivePartitioningOptionsGidBuilderImpl(T) : arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `nullFallback` property.
+      Params:
+        propval = The fallback string for null. This is used only by
+          #GADatasetHivePartitioning.
+      Returns: Builder instance for fluent chaining
+  */
+  T nullFallback(string propval)
+  {
+    return setProperty("null-fallback", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.hive_partitioning_options.HivePartitioningOptions]
+final class HivePartitioningOptionsGidBuilder : HivePartitioningOptionsGidBuilderImpl!HivePartitioningOptionsGidBuilder
+{
+  HivePartitioningOptions build()
+  {
+    return new HivePartitioningOptions(cast(void*)createGObject(HivePartitioningOptions._getGType), Yes.Take);
   }
 }

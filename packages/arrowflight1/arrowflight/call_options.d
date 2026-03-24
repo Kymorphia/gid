@@ -5,6 +5,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class CallOptions : gobject.object.ObjectWrap
   override CallOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.call_options.CallOptions]
+  Returns: New builder object
+  */
+  static CallOptionsGidBuilder builder()
+  {
+    return new CallOptionsGidBuilder;
   }
 
   /**
@@ -108,5 +118,31 @@ class CallOptions : gobject.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
     gaflight_call_options_foreach_header(cast(GAFlightCallOptions*)this._cPtr, _funcCB, _func);
+  }
+}
+
+class CallOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = An optional timeout for this call. Negative durations mean an
+          implementation-defined default behavior will be used
+          instead. This is the default value.
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(double propval)
+  {
+    return setProperty("timeout", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.call_options.CallOptions]
+final class CallOptionsGidBuilder : CallOptionsGidBuilderImpl!CallOptionsGidBuilder
+{
+  CallOptions build()
+  {
+    return new CallOptions(cast(void*)createGObject(CallOptions._getGType), Yes.Take);
   }
 }

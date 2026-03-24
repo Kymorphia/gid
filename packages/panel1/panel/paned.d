@@ -2,6 +2,7 @@
 module panel.paned;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -45,6 +46,15 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   override Paned self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.paned.Paned]
+  Returns: New builder object
+  */
+  static PanedGidBuilder builder()
+  {
+    return new PanedGidBuilder;
   }
 
   mixin OrientableT!();
@@ -141,5 +151,20 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   void remove(gtk.widget.Widget child)
   {
     panel_paned_remove(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class PanedGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+}
+
+/// Fluent builder for [panel.paned.Paned]
+final class PanedGidBuilder : PanedGidBuilderImpl!PanedGidBuilder
+{
+  Paned build()
+  {
+    return new Paned(cast(void*)createGObject(Paned._getGType), No.Take);
   }
 }

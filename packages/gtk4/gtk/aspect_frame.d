@@ -2,6 +2,7 @@
 module gtk.aspect_frame;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -59,6 +60,15 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.aspect_frame.AspectFrame]
+  Returns: New builder object
+  */
+  static AspectFrameGidBuilder builder()
+  {
+    return new AspectFrameGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -74,7 +84,7 @@ class AspectFrame : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -93,7 +103,7 @@ class AspectFrame : gtk.widget.Widget
   */
   @property void obeyChild(bool propval)
   {
-    return setObeyChild(propval);
+    setObeyChild(propval);
   }
 
   /**
@@ -118,7 +128,7 @@ class AspectFrame : gtk.widget.Widget
   */
   @property void ratio(float propval)
   {
-    return setRatio(propval);
+    setRatio(propval);
   }
 
   /**
@@ -137,7 +147,7 @@ class AspectFrame : gtk.widget.Widget
   */
   @property void xalign(float propval)
   {
-    return setXalign(propval);
+    setXalign(propval);
   }
 
   /**
@@ -156,7 +166,7 @@ class AspectFrame : gtk.widget.Widget
   */
   @property void yalign(float propval)
   {
-    return setYalign(propval);
+    setYalign(propval);
   }
 
   /**
@@ -296,5 +306,77 @@ class AspectFrame : gtk.widget.Widget
   void setYalign(float yalign)
   {
     gtk_aspect_frame_set_yalign(cast(GtkAspectFrame*)this._cPtr, yalign);
+  }
+}
+
+class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `obeyChild` property.
+      Params:
+        propval = Whether the [gtk.aspect_frame.AspectFrame] should use the aspect ratio of its child.
+      Returns: Builder instance for fluent chaining
+  */
+  T obeyChild(bool propval)
+  {
+    return setProperty("obey-child", propval);
+  }
+
+  /**
+      Set `ratio` property.
+      Params:
+        propval = The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
+          
+          This property is only used if
+          `property@Gtk.AspectFrame:obey-child` is set to false.
+      Returns: Builder instance for fluent chaining
+  */
+  T ratio(float propval)
+  {
+    return setProperty("ratio", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+}
+
+/// Fluent builder for [gtk.aspect_frame.AspectFrame]
+final class AspectFrameGidBuilder : AspectFrameGidBuilderImpl!AspectFrameGidBuilder
+{
+  AspectFrame build()
+  {
+    return new AspectFrame(cast(void*)createGObject(AspectFrame._getGType), No.Take);
   }
 }

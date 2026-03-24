@@ -2,6 +2,7 @@
 module gstaudio.audio_encoder;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
@@ -147,6 +148,15 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
     return this;
   }
 
+  /**
+  Get builder for [gstaudio.audio_encoder.AudioEncoder]
+  Returns: New builder object
+  */
+  static AudioEncoderGidBuilder builder()
+  {
+    return new AudioEncoderGidBuilder;
+  }
+
   /** */
   @property bool hardResync()
   {
@@ -156,7 +166,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   /** */
   @property void hardResync(bool propval)
   {
-    return setHardResync(propval);
+    setHardResync(propval);
   }
 
   /** */
@@ -174,7 +184,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   /** */
   @property void perfectTimestamp(bool propval)
   {
-    return setPerfectTimestamp(propval);
+    setPerfectTimestamp(propval);
   }
 
   /** */
@@ -611,5 +621,38 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   void setTolerance(gst.types.ClockTime tolerance)
   {
     gst_audio_encoder_set_tolerance(cast(GstAudioEncoder*)this._cPtr, tolerance);
+  }
+}
+
+class AudioEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.preset.PresetGidBuilderImpl!T
+{
+
+  mixin PresetGidBuilderT!();
+
+  /** */
+  T hardResync(bool propval)
+  {
+    return setProperty("hard-resync", propval);
+  }
+
+  /** */
+  T perfectTimestamp(bool propval)
+  {
+    return setProperty("perfect-timestamp", propval);
+  }
+
+  /** */
+  T tolerance(long propval)
+  {
+    return setProperty("tolerance", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_encoder.AudioEncoder]
+final class AudioEncoderGidBuilder : AudioEncoderGidBuilderImpl!AudioEncoderGidBuilder
+{
+  AudioEncoder build()
+  {
+    return new AudioEncoder(cast(void*)createGObject(AudioEncoder._getGType), No.Take);
   }
 }

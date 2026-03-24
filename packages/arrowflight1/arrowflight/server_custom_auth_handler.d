@@ -11,6 +11,7 @@ import arrowflight.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandler
@@ -39,6 +40,15 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
   override ServerCustomAuthHandler self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.server_custom_auth_handler.ServerCustomAuthHandler]
+  Returns: New builder object
+  */
+  static ServerCustomAuthHandlerGidBuilder builder()
+  {
+    return new ServerCustomAuthHandlerGidBuilder;
   }
 
   /**
@@ -79,5 +89,18 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class ServerCustomAuthHandlerGidBuilderImpl(T) : arrowflight.server_auth_handler.ServerAuthHandlerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.server_custom_auth_handler.ServerCustomAuthHandler]
+final class ServerCustomAuthHandlerGidBuilder : ServerCustomAuthHandlerGidBuilderImpl!ServerCustomAuthHandlerGidBuilder
+{
+  ServerCustomAuthHandler build()
+  {
+    return new ServerCustomAuthHandler(cast(void*)createGObject(ServerCustomAuthHandler._getGType), No.Take);
   }
 }

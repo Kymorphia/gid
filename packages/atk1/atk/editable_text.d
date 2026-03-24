@@ -6,6 +6,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     The ATK interface implemented by components containing user-editable text content.
@@ -85,4 +86,8 @@ interface EditableText
         string_ = string to set for text contents of text
   */
   void setTextContents(string string_);
+}
+
+interface EditableTextGidBuilderImpl(T)
+{
 }

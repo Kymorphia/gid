@@ -3,6 +3,7 @@ module gtk.cell_layout;
 
 public import gtk.cell_layout_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -227,4 +228,8 @@ interface CellLayout
         func = the #GtkCellLayoutDataFunc to use, or null
   */
   void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func = null);
+}
+
+interface CellLayoutGidBuilderImpl(T)
+{
 }

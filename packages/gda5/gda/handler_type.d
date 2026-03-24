@@ -7,6 +7,7 @@ import gda.data_handler;
 import gda.data_handler_mixin;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class HandlerType : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     return this;
   }
 
+  /**
+  Get builder for [gda.handler_type.HandlerType]
+  Returns: New builder object
+  */
+  static HandlerTypeGidBuilder builder()
+  {
+    return new HandlerTypeGidBuilder;
+  }
+
   mixin DataHandlerT!();
 
   /**
@@ -50,5 +60,20 @@ class HandlerType : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     _cretval = gda_handler_type_new();
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_handler.DataHandler)(cast(GdaDataHandler*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class HandlerTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
+{
+
+  mixin DataHandlerGidBuilderT!();
+}
+
+/// Fluent builder for [gda.handler_type.HandlerType]
+final class HandlerTypeGidBuilder : HandlerTypeGidBuilderImpl!HandlerTypeGidBuilder
+{
+  HandlerType build()
+  {
+    return new HandlerType(cast(void*)createGObject(HandlerType._getGType), No.Take);
   }
 }

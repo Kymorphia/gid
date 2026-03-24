@@ -7,6 +7,8 @@ import arrow.datum;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class ScalarDatum : arrow.datum.Datum
@@ -37,11 +39,45 @@ class ScalarDatum : arrow.datum.Datum
     return this;
   }
 
+  /**
+  Get builder for [arrow.scalar_datum.ScalarDatum]
+  Returns: New builder object
+  */
+  static ScalarDatumGidBuilder builder()
+  {
+    return new ScalarDatumGidBuilder;
+  }
+
+  /** */
+  @property arrow.scalar.Scalar value()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.scalar.Scalar)("value");
+  }
+
   /** */
   this(arrow.scalar.Scalar value)
   {
     GArrowScalarDatum* _cretval;
     _cretval = garrow_scalar_datum_new(value ? cast(GArrowScalar*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class ScalarDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
+{
+
+  /** */
+  T value(arrow.scalar.Scalar propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.scalar_datum.ScalarDatum]
+final class ScalarDatumGidBuilder : ScalarDatumGidBuilderImpl!ScalarDatumGidBuilder
+{
+  ScalarDatum build()
+  {
+    return new ScalarDatum(cast(void*)createGObject(ScalarDatum._getGType), Yes.Take);
   }
 }

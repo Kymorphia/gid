@@ -3,6 +3,7 @@ module gtk.sorter;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class Sorter : gobject.object.ObjectWrap
   override Sorter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.sorter.Sorter]
+  Returns: New builder object
+  */
+  static SorterGidBuilder builder()
+  {
+    return new SorterGidBuilder;
   }
 
   /**
@@ -178,5 +188,18 @@ class Sorter : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class SorterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.sorter.Sorter]
+final class SorterGidBuilder : SorterGidBuilderImpl!SorterGidBuilder
+{
+  Sorter build()
+  {
+    return new Sorter(cast(void*)createGObject(Sorter._getGType), No.Take);
   }
 }

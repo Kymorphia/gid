@@ -2,6 +2,7 @@
 module gtk.layout_manager;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -85,6 +86,15 @@ class LayoutManager : gobject.object.ObjectWrap
   override LayoutManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.layout_manager.LayoutManager]
+  Returns: New builder object
+  */
+  static LayoutManagerGidBuilder builder()
+  {
+    return new LayoutManagerGidBuilder;
   }
 
   /**
@@ -188,5 +198,18 @@ class LayoutManager : gobject.object.ObjectWrap
   void measure(gtk.widget.Widget widget, gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
     gtk_layout_manager_measure(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+  }
+}
+
+class LayoutManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.layout_manager.LayoutManager]
+final class LayoutManagerGidBuilder : LayoutManagerGidBuilderImpl!LayoutManagerGidBuilder
+{
+  LayoutManager build()
+  {
+    return new LayoutManager(cast(void*)createGObject(LayoutManager._getGType), No.Take);
   }
 }

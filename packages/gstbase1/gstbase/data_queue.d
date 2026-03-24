@@ -2,6 +2,7 @@
 module gstbase.data_queue;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstbase.c.functions;
 import gstbase.c.types;
@@ -40,6 +41,15 @@ class DataQueue : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gstbase.data_queue.DataQueue]
+  Returns: New builder object
+  */
+  static DataQueueGidBuilder builder()
+  {
+    return new DataQueueGidBuilder;
+  }
+
   /** */
   @property uint currentLevelBytes()
   {
@@ -56,5 +66,18 @@ class DataQueue : gobject.object.ObjectWrap
   @property uint currentLevelVisible()
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("current-level-visible");
+  }
+}
+
+class DataQueueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstbase.data_queue.DataQueue]
+final class DataQueueGidBuilder : DataQueueGidBuilderImpl!DataQueueGidBuilder
+{
+  DataQueue build()
+  {
+    return new DataQueue(cast(void*)createGObject(DataQueue._getGType), Yes.Take);
   }
 }

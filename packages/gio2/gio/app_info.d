@@ -12,6 +12,7 @@ import gio.file;
 import gio.icon;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -687,4 +688,8 @@ interface AppInfo
       Returns: true if the appinfo supports URIs.
   */
   bool supportsUris();
+}
+
+interface AppInfoGidBuilderImpl(T)
+{
 }

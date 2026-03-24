@@ -7,6 +7,7 @@ import adw.tab_view;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -77,6 +78,15 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+  Get builder for [adw.tab_button.TabButton]
+  Returns: New builder object
+  */
+  static TabButtonGidBuilder builder()
+  {
+    return new TabButtonGidBuilder;
+  }
+
+  /**
       Get `view` property.
       Returns: The view the tab button displays.
   */
@@ -92,7 +102,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void view(adw.tab_view.TabView propval)
   {
-    return setView(propval);
+    setView(propval);
   }
 
   mixin ActionableT!();
@@ -206,5 +216,31 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("clicked", closure, after);
+  }
+}
+
+class TabButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The view the tab button displays.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(adw.tab_view.TabView propval)
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [adw.tab_button.TabButton]
+final class TabButtonGidBuilder : TabButtonGidBuilderImpl!TabButtonGidBuilder
+{
+  TabButton build()
+  {
+    return new TabButton(cast(void*)createGObject(TabButton._getGType), No.Take);
   }
 }

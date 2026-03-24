@@ -7,6 +7,7 @@ import atk.c.types;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 
 /**
     The ATK interface which represents the toplevel
@@ -217,4 +218,8 @@ interface Document
       Returns: Signal ID
   */
   ulong connectReload(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface DocumentGidBuilderImpl(T)
+{
 }

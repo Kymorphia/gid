@@ -7,6 +7,7 @@ import arrow.month_day_nano;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.month_day_nano_interval_scalar.MonthDayNanoIntervalScalar]
+  Returns: New builder object
+  */
+  static MonthDayNanoIntervalScalarGidBuilder builder()
+  {
+    return new MonthDayNanoIntervalScalarGidBuilder;
+  }
+
   /** */
   this(arrow.month_day_nano.MonthDayNano value)
   {
@@ -53,5 +63,18 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
     _cretval = garrow_month_day_nano_interval_scalar_get_value(cast(GArrowMonthDayNanoIntervalScalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class MonthDayNanoIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_day_nano_interval_scalar.MonthDayNanoIntervalScalar]
+final class MonthDayNanoIntervalScalarGidBuilder : MonthDayNanoIntervalScalarGidBuilderImpl!MonthDayNanoIntervalScalarGidBuilder
+{
+  MonthDayNanoIntervalScalar build()
+  {
+    return new MonthDayNanoIntervalScalar(cast(void*)createGObject(MonthDayNanoIntervalScalar._getGType), Yes.Take);
   }
 }

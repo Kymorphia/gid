@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.certificate;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class CertificateList : gobject.object.ObjectWrap
   override CertificateList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.certificate_list.CertificateList]
+  Returns: New builder object
+  */
+  static CertificateListGidBuilder builder()
+  {
+    return new CertificateListGidBuilder;
   }
 
   /**
@@ -185,5 +195,18 @@ class CertificateList : gobject.object.ObjectWrap
   void setCertificate(int index, gmime.certificate.Certificate cert)
   {
     g_mime_certificate_list_set_certificate(cast(GMimeCertificateList*)this._cPtr, index, cert ? cast(GMimeCertificate*)cert._cPtr(No.Dup) : null);
+  }
+}
+
+class CertificateListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.certificate_list.CertificateList]
+final class CertificateListGidBuilder : CertificateListGidBuilderImpl!CertificateListGidBuilder
+{
+  CertificateList build()
+  {
+    return new CertificateList(cast(void*)createGObject(CertificateList._getGType), Yes.Take);
   }
 }

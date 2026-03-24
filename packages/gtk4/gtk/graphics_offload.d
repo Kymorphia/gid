@@ -2,6 +2,7 @@
 module gtk.graphics_offload;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -83,6 +84,15 @@ class GraphicsOffload : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.graphics_offload.GraphicsOffload]
+  Returns: New builder object
+  */
+  static GraphicsOffloadGidBuilder builder()
+  {
+    return new GraphicsOffloadGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -98,7 +108,7 @@ class GraphicsOffload : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -117,7 +127,7 @@ class GraphicsOffload : gtk.widget.Widget
   */
   @property void enabled(gtk.types.GraphicsOffloadEnabled propval)
   {
-    return setEnabled(propval);
+    setEnabled(propval);
   }
 
   /**
@@ -179,5 +189,41 @@ class GraphicsOffload : gtk.widget.Widget
   void setEnabled(gtk.types.GraphicsOffloadEnabled enabled)
   {
     gtk_graphics_offload_set_enabled(cast(GtkGraphicsOffload*)this._cPtr, enabled);
+  }
+}
+
+class GraphicsOffloadGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether graphics offload is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enabled(gtk.types.GraphicsOffloadEnabled propval)
+  {
+    return setProperty("enabled", propval);
+  }
+}
+
+/// Fluent builder for [gtk.graphics_offload.GraphicsOffload]
+final class GraphicsOffloadGidBuilder : GraphicsOffloadGidBuilderImpl!GraphicsOffloadGidBuilder
+{
+  GraphicsOffload build()
+  {
+    return new GraphicsOffload(cast(void*)createGObject(GraphicsOffload._getGType), Yes.Take);
   }
 }

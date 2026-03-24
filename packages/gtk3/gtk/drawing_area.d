@@ -4,6 +4,7 @@ module gtk.drawing_area;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -127,6 +128,15 @@ class DrawingArea : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.drawing_area.DrawingArea]
+  Returns: New builder object
+  */
+  static DrawingAreaGidBuilder builder()
+  {
+    return new DrawingAreaGidBuilder;
+  }
+
+  /**
       Creates a new drawing area.
       Returns: a new #GtkDrawingArea
   */
@@ -135,5 +145,19 @@ class DrawingArea : gtk.widget.Widget
     GtkWidget* _cretval;
     _cretval = gtk_drawing_area_new();
     this(_cretval, No.Take);
+  }
+}
+
+class DrawingAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.drawing_area.DrawingArea]
+final class DrawingAreaGidBuilder : DrawingAreaGidBuilderImpl!DrawingAreaGidBuilder
+{
+  DrawingArea build()
+  {
+    return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import gdk.rectangle;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -108,6 +109,15 @@ class Popover : gtk.bin.Bin
   }
 
   /**
+  Get builder for [gtk.popover.Popover]
+  Returns: New builder object
+  */
+  static PopoverGidBuilder builder()
+  {
+    return new PopoverGidBuilder;
+  }
+
+  /**
       Get `constrainTo` property.
       Returns: Sets a constraint for the popover position.
   */
@@ -123,7 +133,7 @@ class Popover : gtk.bin.Bin
   */
   @property void constrainTo(gtk.types.PopoverConstraint propval)
   {
-    return setConstrainTo(propval);
+    setConstrainTo(propval);
   }
 
   /**
@@ -144,7 +154,7 @@ class Popover : gtk.bin.Bin
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -163,7 +173,7 @@ class Popover : gtk.bin.Bin
   */
   @property void pointingTo(gdk.rectangle.Rectangle propval)
   {
-    return setPointingTo(propval);
+    setPointingTo(propval);
   }
 
   /**
@@ -182,7 +192,7 @@ class Popover : gtk.bin.Bin
   */
   @property void position(gtk.types.PositionType propval)
   {
-    return setPosition(propval);
+    setPosition(propval);
   }
 
   /**
@@ -201,7 +211,7 @@ class Popover : gtk.bin.Bin
   */
   @property void relativeTo(gtk.widget.Widget propval)
   {
-    return setRelativeTo(propval);
+    setRelativeTo(propval);
   }
 
   /**
@@ -228,7 +238,7 @@ class Popover : gtk.bin.Bin
   */
   @property void transitionsEnabled(bool propval)
   {
-    return setTransitionsEnabled(propval);
+    setTransitionsEnabled(propval);
   }
 
   /**
@@ -562,5 +572,90 @@ class Popover : gtk.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
+  }
+}
+
+class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /**
+      Set `constrainTo` property.
+      Params:
+        propval = Sets a constraint for the popover position.
+      Returns: Builder instance for fluent chaining
+  */
+  T constrainTo(gtk.types.PopoverConstraint propval)
+  {
+    return setProperty("constrain-to", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Sets whether the popover is modal (so other elements in the window do not
+          receive input while the popover is visible).
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `pointingTo` property.
+      Params:
+        propval = Marks a specific rectangle to be pointed.
+      Returns: Builder instance for fluent chaining
+  */
+  T pointingTo(gdk.rectangle.Rectangle propval)
+  {
+    return setProperty("pointing-to", propval);
+  }
+
+  /**
+      Set `position` property.
+      Params:
+        propval = Sets the preferred position of the popover.
+      Returns: Builder instance for fluent chaining
+  */
+  T position(gtk.types.PositionType propval)
+  {
+    return setProperty("position", propval);
+  }
+
+  /**
+      Set `relativeTo` property.
+      Params:
+        propval = Sets the attached widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T relativeTo(gtk.widget.Widget propval)
+  {
+    return setProperty("relative-to", propval);
+  }
+
+  /**
+      Set `transitionsEnabled` property.
+      Params:
+        propval = Whether show/hide transitions are enabled for this popover.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: You can show or hide the popover without transitions
+          using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
+          and [gtk.popover.Popover.popdown] will use transitions.
+  */
+  T transitionsEnabled(bool propval)
+  {
+    return setProperty("transitions-enabled", propval);
+  }
+}
+
+/// Fluent builder for [gtk.popover.Popover]
+final class PopoverGidBuilder : PopoverGidBuilderImpl!PopoverGidBuilder
+{
+  Popover build()
+  {
+    return new Popover(cast(void*)createGObject(Popover._getGType), No.Take);
   }
 }

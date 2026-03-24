@@ -2,6 +2,7 @@
 module gtksource.print_compositor;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.print_context;
 import gtk.types;
@@ -41,6 +42,15 @@ class PrintCompositor : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.print_compositor.PrintCompositor]
+  Returns: New builder object
+  */
+  static PrintCompositorGidBuilder builder()
+  {
+    return new PrintCompositorGidBuilder;
+  }
+
+  /**
       Get `bodyFontName` property.
       Returns: Name of the font used for the text body.
         
@@ -70,7 +80,16 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void bodyFontName(string propval)
   {
-    return setBodyFontName(propval);
+    setBodyFontName(propval);
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The GtkSourceBuffer object to print.
+  */
+  @property gtksource.buffer.Buffer buffer()
+  {
+    return getBuffer();
   }
 
   /**
@@ -105,7 +124,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void footerFontName(string propval)
   {
-    return setFooterFontName(propval);
+    setFooterFontName(propval);
   }
 
   /**
@@ -140,7 +159,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void headerFontName(string propval)
   {
-    return setHeaderFontName(propval);
+    setHeaderFontName(propval);
   }
 
   /**
@@ -165,7 +184,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void highlightSyntax(bool propval)
   {
-    return setHighlightSyntax(propval);
+    setHighlightSyntax(propval);
   }
 
   /**
@@ -200,7 +219,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void lineNumbersFontName(string propval)
   {
-    return setLineNumbersFontName(propval);
+    setLineNumbersFontName(propval);
   }
 
   /**
@@ -243,7 +262,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void printFooter(bool propval)
   {
-    return setPrintFooter(propval);
+    setPrintFooter(propval);
   }
 
   /**
@@ -276,7 +295,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void printHeader(bool propval)
   {
-    return setPrintHeader(propval);
+    setPrintHeader(propval);
   }
 
   /**
@@ -305,7 +324,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void printLineNumbers(uint propval)
   {
-    return setPrintLineNumbers(propval);
+    setPrintLineNumbers(propval);
   }
 
   /**
@@ -330,7 +349,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void tabWidth(uint propval)
   {
-    return setTabWidth(propval);
+    setTabWidth(propval);
   }
 
   /**
@@ -355,7 +374,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   @property void wrapMode(gtk.types.WrapMode propval)
   {
-    return setWrapMode(propval);
+    setWrapMode(propval);
   }
 
   /**
@@ -1019,5 +1038,198 @@ class PrintCompositor : gobject.object.ObjectWrap
   void setWrapMode(gtk.types.WrapMode wrapMode)
   {
     gtk_source_print_compositor_set_wrap_mode(cast(GtkSourcePrintCompositor*)this._cPtr, wrapMode);
+  }
+}
+
+class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `bodyFontName` property.
+      Params:
+        propval = Name of the font used for the text body.
+          
+          Accepted values are strings representing a font description Pango can understand.
+          (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+          for a description of the format of the string representation.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T bodyFontName(string propval)
+  {
+    return setProperty("body-font-name", propval);
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The GtkSourceBuffer object to print.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtksource.buffer.Buffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `footerFontName` property.
+      Params:
+        propval = Name of the font used to print page footer.
+          If this property is unspecified, the text body font is used.
+          
+          Accepted values are strings representing a font description Pango can understand.
+          (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+          for a description of the format of the string representation.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T footerFontName(string propval)
+  {
+    return setProperty("footer-font-name", propval);
+  }
+
+  /**
+      Set `headerFontName` property.
+      Params:
+        propval = Name of the font used to print page header.
+          If this property is unspecified, the text body font is used.
+          
+          Accepted values are strings representing a font description Pango can understand.
+          (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+          for a description of the format of the string representation.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T headerFontName(string propval)
+  {
+    return setProperty("header-font-name", propval);
+  }
+
+  /**
+      Set `highlightSyntax` property.
+      Params:
+        propval = Whether to print the document with highlighted syntax.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T highlightSyntax(bool propval)
+  {
+    return setProperty("highlight-syntax", propval);
+  }
+
+  /**
+      Set `lineNumbersFontName` property.
+      Params:
+        propval = Name of the font used to print line numbers on the left margin.
+          If this property is unspecified, the text body font is used.
+          
+          Accepted values are strings representing a font description Pango can understand.
+          (e.g. &quot;Monospace 10&quot;). See [pango.font_description.FontDescription.fromString]
+          for a description of the format of the string representation.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T lineNumbersFontName(string propval)
+  {
+    return setProperty("line-numbers-font-name", propval);
+  }
+
+  /**
+      Set `printFooter` property.
+      Params:
+        propval = Whether to print a footer in each page.
+          
+          Note that by default the footer format is unspecified, and if it is
+          unspecified the footer will not be printed, regardless of the value of
+          this property.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T printFooter(bool propval)
+  {
+    return setProperty("print-footer", propval);
+  }
+
+  /**
+      Set `printHeader` property.
+      Params:
+        propval = Whether to print a header in each page.
+          
+          Note that by default the header format is unspecified, and if it is
+          unspecified the header will not be printed, regardless of the value of
+          this property.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T printHeader(bool propval)
+  {
+    return setProperty("print-header", propval);
+  }
+
+  /**
+      Set `printLineNumbers` property.
+      Params:
+        propval = Interval of printed line numbers. If this property is set to 0 no
+          numbers will be printed.  If greater than 0, a number will be
+          printed every "print-line-numbers" lines (i.e. 1 will print all line numbers).
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T printLineNumbers(uint propval)
+  {
+    return setProperty("print-line-numbers", propval);
+  }
+
+  /**
+      Set `tabWidth` property.
+      Params:
+        propval = Width of a tab character expressed in spaces.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabWidth(uint propval)
+  {
+    return setProperty("tab-width", propval);
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Whether to wrap lines never, at word boundaries, or at character boundaries.
+          
+          The value of this property cannot be changed anymore after the first
+          call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapMode(gtk.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.print_compositor.PrintCompositor]
+final class PrintCompositorGidBuilder : PrintCompositorGidBuilderImpl!PrintCompositorGidBuilder
+{
+  PrintCompositor build()
+  {
+    return new PrintCompositor(cast(void*)createGObject(PrintCompositor._getGType), Yes.Take);
   }
 }

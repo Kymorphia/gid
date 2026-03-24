@@ -4,6 +4,7 @@ module gstgl.glcontext;
 import gid.gid;
 import glib.error;
 import glib.thread;
+import gobject.gid_builder;
 import gobject.object;
 import gst.object;
 import gst.structure;
@@ -62,6 +63,15 @@ class GLContext : gst.object.ObjectWrap
   override GLContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glcontext.GLContext]
+  Returns: New builder object
+  */
+  static GLContextGidBuilder builder()
+  {
+    return new GLContextGidBuilder;
   }
 
   /**
@@ -589,5 +599,18 @@ class GLContext : gst.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
     gst_gl_context_thread_add(cast(GstGLContext*)this._cPtr, _funcCB, _func);
+  }
+}
+
+class GLContextGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glcontext.GLContext]
+final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
+{
+  GLContext build()
+  {
+    return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);
   }
 }

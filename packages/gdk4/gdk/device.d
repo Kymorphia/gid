@@ -10,6 +10,7 @@ import gdk.surface;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import pango.types;
 
@@ -49,6 +50,15 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.device.Device]
+  Returns: New builder object
+  */
+  static DeviceGidBuilder builder()
+  {
+    return new DeviceGidBuilder;
+  }
+
+  /**
       Get `capsLockState` property.
       Returns: Whether Caps Lock is on.
         
@@ -68,6 +78,24 @@ class Device : gobject.object.ObjectWrap
   @property pango.types.Direction direction()
   {
     return getDirection();
+  }
+
+  /**
+      Get `display` property.
+      Returns: The [gdk.display.Display] the [gdk.device.Device] pertains to.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Get `hasCursor` property.
+      Returns: Whether the device is represented by a cursor on the screen.
+  */
+  @property bool hasCursor()
+  {
+    return getHasCursor();
   }
 
   /**
@@ -91,6 +119,15 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
+      Get `name` property.
+      Returns: The device name.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
       Get `numLockState` property.
       Returns: Whether Num Lock is on.
         
@@ -99,6 +136,29 @@ class Device : gobject.object.ObjectWrap
   @property bool numLockState()
   {
     return getNumLockState();
+  }
+
+  /**
+      Get `numTouches` property.
+      Returns: The maximal number of concurrent touches on a touch device.
+        
+        Will be 0 if the device is not a touch device or if the number
+        of touches is unknown.
+  */
+  @property uint numTouches()
+  {
+    return getNumTouches();
+  }
+
+  /**
+      Get `productId` property.
+      Returns: Product ID of this device.
+        
+        See [gdk.device.Device.getProductId].
+  */
+  @property string productId()
+  {
+    return getProductId();
   }
 
   /**
@@ -132,12 +192,32 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
+      Get `source` property.
+      Returns: Source type for the device.
+  */
+  @property gdk.types.InputSource source()
+  {
+    return getSource();
+  }
+
+  /**
       Get `tool` property.
       Returns: The [gdk.device_tool.DeviceTool] that is currently used with this device.
   */
   @property gdk.device_tool.DeviceTool tool()
   {
     return getDeviceTool();
+  }
+
+  /**
+      Get `vendorId` property.
+      Returns: Vendor ID of this device.
+        
+        See [gdk.device.Device.getVendorId].
+  */
+  @property string vendorId()
+  {
+    return getVendorId();
   }
 
   /**
@@ -487,5 +567,113 @@ class Device : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tool-changed", closure, after);
+  }
+}
+
+class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The [gdk.display.Display] the [gdk.device.Device] pertains to.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `hasCursor` property.
+      Params:
+        propval = Whether the device is represented by a cursor on the screen.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasCursor(bool propval)
+  {
+    return setProperty("has-cursor", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The device name.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `numTouches` property.
+      Params:
+        propval = The maximal number of concurrent touches on a touch device.
+          
+          Will be 0 if the device is not a touch device or if the number
+          of touches is unknown.
+      Returns: Builder instance for fluent chaining
+  */
+  T numTouches(uint propval)
+  {
+    return setProperty("num-touches", propval);
+  }
+
+  /**
+      Set `productId` property.
+      Params:
+        propval = Product ID of this device.
+          
+          See [gdk.device.Device.getProductId].
+      Returns: Builder instance for fluent chaining
+  */
+  T productId(string propval)
+  {
+    return setProperty("product-id", propval);
+  }
+
+  /**
+      Set `seat` property.
+      Params:
+        propval = [gdk.seat.Seat] of this device.
+      Returns: Builder instance for fluent chaining
+  */
+  T seat(gdk.seat.Seat propval)
+  {
+    return setProperty("seat", propval);
+  }
+
+  /**
+      Set `source` property.
+      Params:
+        propval = Source type for the device.
+      Returns: Builder instance for fluent chaining
+  */
+  T source(gdk.types.InputSource propval)
+  {
+    return setProperty("source", propval);
+  }
+
+  /**
+      Set `vendorId` property.
+      Params:
+        propval = Vendor ID of this device.
+          
+          See [gdk.device.Device.getVendorId].
+      Returns: Builder instance for fluent chaining
+  */
+  T vendorId(string propval)
+  {
+    return setProperty("vendor-id", propval);
+  }
+}
+
+/// Fluent builder for [gdk.device.Device]
+final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
+{
+  Device build()
+  {
+    return new Device(cast(void*)createGObject(Device._getGType), No.Take);
   }
 }

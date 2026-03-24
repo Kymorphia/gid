@@ -4,6 +4,7 @@ module gtk.notebook;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -142,6 +143,15 @@ class Notebook : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.notebook.Notebook]
+  Returns: New builder object
+  */
+  static NotebookGidBuilder builder()
+  {
+    return new NotebookGidBuilder;
+  }
+
+  /**
       Get `enablePopup` property.
       Returns: If true, pressing the right mouse button on the notebook shows a page switching menu.
   */
@@ -176,7 +186,7 @@ class Notebook : gtk.widget.Widget
   */
   @property void groupName(string propval)
   {
-    return setGroupName(propval);
+    setGroupName(propval);
   }
 
   /**
@@ -195,7 +205,7 @@ class Notebook : gtk.widget.Widget
   */
   @property void page(int propval)
   {
-    return setCurrentPage(propval);
+    setCurrentPage(propval);
   }
 
   /**
@@ -223,7 +233,7 @@ class Notebook : gtk.widget.Widget
   */
   @property void scrollable(bool propval)
   {
-    return setScrollable(propval);
+    setScrollable(propval);
   }
 
   /**
@@ -242,7 +252,7 @@ class Notebook : gtk.widget.Widget
   */
   @property void showBorder(bool propval)
   {
-    return setShowBorder(propval);
+    setShowBorder(propval);
   }
 
   /**
@@ -261,7 +271,7 @@ class Notebook : gtk.widget.Widget
   */
   @property void showTabs(bool propval)
   {
-    return setShowTabs(propval);
+    setShowTabs(propval);
   }
 
   /**
@@ -280,7 +290,7 @@ class Notebook : gtk.widget.Widget
   */
   @property void tabPos(gtk.types.PositionType propval)
   {
-    return setTabPos(propval);
+    setTabPos(propval);
   }
 
   /**
@@ -1478,5 +1488,96 @@ class Notebook : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("switch-page", closure, after);
+  }
+}
+
+class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enablePopup` property.
+      Params:
+        propval = If true, pressing the right mouse button on the notebook shows a page switching menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T enablePopup(bool propval)
+  {
+    return setProperty("enable-popup", propval);
+  }
+
+  /**
+      Set `groupName` property.
+      Params:
+        propval = Group name for tab drag and drop.
+      Returns: Builder instance for fluent chaining
+  */
+  T groupName(string propval)
+  {
+    return setProperty("group-name", propval);
+  }
+
+  /**
+      Set `page` property.
+      Params:
+        propval = The index of the current page.
+      Returns: Builder instance for fluent chaining
+  */
+  T page(int propval)
+  {
+    return setProperty("page", propval);
+  }
+
+  /**
+      Set `scrollable` property.
+      Params:
+        propval = If true, scroll arrows are added if there are too many pages to fit.
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollable(bool propval)
+  {
+    return setProperty("scrollable", propval);
+  }
+
+  /**
+      Set `showBorder` property.
+      Params:
+        propval = Whether the border should be shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T showBorder(bool propval)
+  {
+    return setProperty("show-border", propval);
+  }
+
+  /**
+      Set `showTabs` property.
+      Params:
+        propval = Whether tabs should be shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T showTabs(bool propval)
+  {
+    return setProperty("show-tabs", propval);
+  }
+
+  /**
+      Set `tabPos` property.
+      Params:
+        propval = Which side of the notebook holds the tabs.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabPos(gtk.types.PositionType propval)
+  {
+    return setProperty("tab-pos", propval);
+  }
+}
+
+/// Fluent builder for [gtk.notebook.Notebook]
+final class NotebookGidBuilder : NotebookGidBuilderImpl!NotebookGidBuilder
+{
+  Notebook build()
+  {
+    return new Notebook(cast(void*)createGObject(Notebook._getGType), No.Take);
   }
 }

@@ -9,6 +9,7 @@ import gio.c.types;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -103,4 +104,8 @@ interface ProxyResolver
       Throws: [ErrorWrap]
   */
   string[] lookupFinish(gio.async_result.AsyncResult result);
+}
+
+interface ProxyResolverGidBuilderImpl(T)
+{
 }

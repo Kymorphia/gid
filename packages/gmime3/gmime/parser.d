@@ -9,6 +9,7 @@ import gmime.object;
 import gmime.parser_options;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -40,6 +41,15 @@ class Parser : gobject.object.ObjectWrap
   override Parser self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.parser.Parser]
+  Returns: New builder object
+  */
+  static ParserGidBuilder builder()
+  {
+    return new ParserGidBuilder;
   }
 
   /**
@@ -288,5 +298,18 @@ class Parser : gobject.object.ObjectWrap
     long _retval;
     _retval = g_mime_parser_tell(cast(GMimeParser*)this._cPtr);
     return _retval;
+  }
+}
+
+class ParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.parser.Parser]
+final class ParserGidBuilder : ParserGidBuilderImpl!ParserGidBuilder
+{
+  Parser build()
+  {
+    return new Parser(cast(void*)createGObject(Parser._getGType), Yes.Take);
   }
 }

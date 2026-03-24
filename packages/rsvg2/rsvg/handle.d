@@ -8,6 +8,7 @@ import gio.cancellable;
 import gio.file;
 import gio.input_stream;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import rsvg.c.functions;
 import rsvg.c.types;
@@ -204,6 +205,15 @@ class Handle : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [rsvg.handle.Handle]
+  Returns: New builder object
+  */
+  static HandleGidBuilder builder()
+  {
+    return new HandleGidBuilder;
+  }
+
+  /**
       Get `baseUri` property.
       Returns: Base URI, to be used to resolve relative references for resources.  See the section
         "Security and locations of referenced files" for details.
@@ -221,7 +231,7 @@ class Handle : gobject.object.ObjectWrap
   */
   @property void baseUri(string propval)
   {
-    return setBaseUri(propval);
+    setBaseUri(propval);
   }
 
   /**
@@ -301,6 +311,15 @@ class Handle : gobject.object.ObjectWrap
   @property double ex()
   {
     return gobject.object.ObjectWrap.getProperty!(double)("ex");
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags from [rsvg.types.HandleFlags].
+  */
+  @property rsvg.types.HandleFlags flags()
+  {
+    return gobject.object.ObjectWrap.getProperty!(rsvg.types.HandleFlags)("flags");
   }
 
   /**
@@ -1446,5 +1465,63 @@ class Handle : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `baseUri` property.
+      Params:
+        propval = Base URI, to be used to resolve relative references for resources.  See the section
+          "Security and locations of referenced files" for details.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseUri(string propval)
+  {
+    return setProperty("base-uri", propval);
+  }
+
+  /**
+      Set `dpiX` property.
+      Params:
+        propval = Horizontal resolution in dots per inch.
+      Returns: Builder instance for fluent chaining
+  */
+  T dpiX(double propval)
+  {
+    return setProperty("dpi-x", propval);
+  }
+
+  /**
+      Set `dpiY` property.
+      Params:
+        propval = Horizontal resolution in dots per inch.
+      Returns: Builder instance for fluent chaining
+  */
+  T dpiY(double propval)
+  {
+    return setProperty("dpi-y", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags from [rsvg.types.HandleFlags].
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(rsvg.types.HandleFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+}
+
+/// Fluent builder for [rsvg.handle.Handle]
+final class HandleGidBuilder : HandleGidBuilderImpl!HandleGidBuilder
+{
+  Handle build()
+  {
+    return new Handle(cast(void*)createGObject(Handle._getGType), Yes.Take);
   }
 }

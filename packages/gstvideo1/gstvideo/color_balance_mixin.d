@@ -4,6 +4,7 @@ module gstvideo.color_balance_mixin;
 public import gstvideo.color_balance_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gstvideo.c.functions;
 public import gstvideo.c.types;
 public import gstvideo.color_balance_channel;
@@ -145,4 +146,8 @@ template ColorBalanceT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
   }
+}
+
+template ColorBalanceGidBuilderT()
+{
 }

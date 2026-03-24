@@ -8,6 +8,7 @@ import gio.socket_connection;
 import gio.socket_service;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -54,6 +55,24 @@ class ThreadedSocketService : gio.socket_service.SocketService
   override ThreadedSocketService self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.threaded_socket_service.ThreadedSocketService]
+  Returns: New builder object
+  */
+  static ThreadedSocketServiceGidBuilder builder()
+  {
+    return new ThreadedSocketServiceGidBuilder;
+  }
+
+  /**
+      Get `maxThreads` property.
+      Returns: The maximum number of threads handling clients for this service.
+  */
+  @property int maxThreads()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-threads");
   }
 
   /**
@@ -125,5 +144,29 @@ class ThreadedSocketService : gio.socket_service.SocketService
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("run", closure, after);
+  }
+}
+
+class ThreadedSocketServiceGidBuilderImpl(T) : gio.socket_service.SocketServiceGidBuilderImpl!T
+{
+
+  /**
+      Set `maxThreads` property.
+      Params:
+        propval = The maximum number of threads handling clients for this service.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxThreads(int propval)
+  {
+    return setProperty("max-threads", propval);
+  }
+}
+
+/// Fluent builder for [gio.threaded_socket_service.ThreadedSocketService]
+final class ThreadedSocketServiceGidBuilder : ThreadedSocketServiceGidBuilderImpl!ThreadedSocketServiceGidBuilder
+{
+  ThreadedSocketService build()
+  {
+    return new ThreadedSocketService(cast(void*)createGObject(ThreadedSocketService._getGType), Yes.Take);
   }
 }

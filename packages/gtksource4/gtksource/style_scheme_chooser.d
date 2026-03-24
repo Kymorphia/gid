@@ -3,6 +3,7 @@ module gtksource.style_scheme_chooser;
 
 public import gtksource.style_scheme_chooser_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -50,4 +51,18 @@ interface StyleSchemeChooser
         scheme = a #GtkSourceStyleScheme
   */
   void setStyleScheme(gtksource.style_scheme.StyleScheme scheme);
+}
+
+interface StyleSchemeChooserGidBuilderImpl(T)
+{
+
+  /**
+      Set `styleScheme` property.
+      Params:
+        propval = The :style-scheme property contains the currently selected style
+          scheme. The property can be set to change
+          the current selection programmatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T styleScheme(gtksource.style_scheme.StyleScheme propval);
 }

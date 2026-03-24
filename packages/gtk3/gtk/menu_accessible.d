@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.selection;
 import atk.selection_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.menu_shell_accessible;
@@ -38,5 +39,28 @@ class MenuAccessible : gtk.menu_shell_accessible.MenuShellAccessible
   override MenuAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.menu_accessible.MenuAccessible]
+  Returns: New builder object
+  */
+  static MenuAccessibleGidBuilder builder()
+  {
+    return new MenuAccessibleGidBuilder;
+  }
+}
+
+class MenuAccessibleGidBuilderImpl(T) : gtk.menu_shell_accessible.MenuShellAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.menu_accessible.MenuAccessible]
+final class MenuAccessibleGidBuilder : MenuAccessibleGidBuilderImpl!MenuAccessibleGidBuilder
+{
+  MenuAccessible build()
+  {
+    return new MenuAccessible(cast(void*)createGObject(MenuAccessible._getGType), No.Take);
   }
 }

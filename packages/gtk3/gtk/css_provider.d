@@ -5,6 +5,7 @@ import gid.gid;
 import gio.file;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -64,6 +65,15 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   override CssProvider self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.css_provider.CssProvider]
+  Returns: New builder object
+  */
+  static CssProviderGidBuilder builder()
+  {
+    return new CssProviderGidBuilder;
   }
 
   mixin StyleProviderT!();
@@ -278,5 +288,20 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("parsing-error", closure, after);
+  }
+}
+
+class CssProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.style_provider.StyleProviderGidBuilderImpl!T
+{
+
+  mixin StyleProviderGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.css_provider.CssProvider]
+final class CssProviderGidBuilder : CssProviderGidBuilderImpl!CssProviderGidBuilder
+{
+  CssProvider build()
+  {
+    return new CssProvider(cast(void*)createGObject(CssProvider._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.widget;
 import gtksource.c.functions;
@@ -43,6 +44,15 @@ class MarkAttributes : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.mark_attributes.MarkAttributes]
+  Returns: New builder object
+  */
+  static MarkAttributesGidBuilder builder()
+  {
+    return new MarkAttributesGidBuilder;
+  }
+
+  /**
       Get `background` property.
       Returns: A color used for background of a line.
   */
@@ -58,7 +68,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   @property void background(gdk.rgba.RGBA propval)
   {
-    return setBackground(propval);
+    setBackground(propval);
   }
 
   /**
@@ -77,7 +87,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   @property void gicon(gio.icon.Icon propval)
   {
-    return setGicon(propval);
+    setGicon(propval);
   }
 
   /**
@@ -96,7 +106,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -115,7 +125,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
   {
-    return setPixbuf(propval);
+    setPixbuf(propval);
   }
 
   /**
@@ -380,5 +390,62 @@ class MarkAttributes : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("query-tooltip-text", closure, after);
+  }
+}
+
+class MarkAttributesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `background` property.
+      Params:
+        propval = A color used for background of a line.
+      Returns: Builder instance for fluent chaining
+  */
+  T background(gdk.rgba.RGBA propval)
+  {
+    return setProperty("background", propval);
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = A #GIcon that may be a base of a rendered icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = An icon name that may be a base of a rendered icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `pixbuf` property.
+      Params:
+        propval = A #GdkPixbuf that may be a base of a rendered icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("pixbuf", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.mark_attributes.MarkAttributes]
+final class MarkAttributesGidBuilder : MarkAttributesGidBuilderImpl!MarkAttributesGidBuilder
+{
+  MarkAttributes build()
+  {
+    return new MarkAttributes(cast(void*)createGObject(MarkAttributes._getGType), Yes.Take);
   }
 }

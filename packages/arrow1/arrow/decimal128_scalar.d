@@ -8,6 +8,7 @@ import arrow.decimal128_data_type;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class Decimal128Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal128_scalar.Decimal128Scalar]
+  Returns: New builder object
+  */
+  static Decimal128ScalarGidBuilder builder()
+  {
+    return new Decimal128ScalarGidBuilder;
+  }
+
   /** */
   this(arrow.decimal128_data_type.Decimal128DataType dataType, arrow.decimal128.Decimal128 value)
   {
@@ -54,5 +64,29 @@ class Decimal128Scalar : arrow.scalar.Scalar
     _cretval = garrow_decimal128_scalar_get_value(cast(GArrowDecimal128Scalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal128.Decimal128)(cast(GArrowDecimal128*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class Decimal128ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scalar.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(arrow.decimal128.Decimal128 propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.decimal128_scalar.Decimal128Scalar]
+final class Decimal128ScalarGidBuilder : Decimal128ScalarGidBuilderImpl!Decimal128ScalarGidBuilder
+{
+  Decimal128Scalar build()
+  {
+    return new Decimal128Scalar(cast(void*)createGObject(Decimal128Scalar._getGType), Yes.Take);
   }
 }

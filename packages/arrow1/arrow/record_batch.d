@@ -16,6 +16,7 @@ import arrow.uint64_array;
 import arrow.write_options;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -45,6 +46,15 @@ class RecordBatch : gobject.object.ObjectWrap
   override RecordBatch self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.record_batch.RecordBatch]
+  Returns: New builder object
+  */
+  static RecordBatchGidBuilder builder()
+  {
+    return new RecordBatchGidBuilder;
   }
 
   /** */
@@ -233,5 +243,24 @@ class RecordBatch : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class RecordBatchGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T recordBatch(void* propval)
+  {
+    return setProperty("record-batch", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch.RecordBatch]
+final class RecordBatchGidBuilder : RecordBatchGidBuilderImpl!RecordBatchGidBuilder
+{
+  RecordBatch build()
+  {
+    return new RecordBatch(cast(void*)createGObject(RecordBatch._getGType), Yes.Take);
   }
 }

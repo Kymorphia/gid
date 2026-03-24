@@ -6,6 +6,7 @@ public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
+public import gobject.gid_builder;
 
 /**
     [gio.debug_controller.DebugController] is an interface to expose control of debugging features and
@@ -46,7 +47,7 @@ template DebugControllerT()
   */
   @property void debugEnabled(bool propval)
   {
-    return setDebugEnabled(propval);
+    setDebugEnabled(propval);
   }
 
   /**
@@ -69,5 +70,21 @@ template DebugControllerT()
   override void setDebugEnabled(bool debugEnabled)
   {
     g_debug_controller_set_debug_enabled(cast(GDebugController*)this._cPtr, debugEnabled);
+  }
+}
+
+template DebugControllerGidBuilderT()
+{
+
+  /**
+      Set `debugEnabled` property.
+      Params:
+        propval = true if debug output should be exposed (for example by forwarding it to
+          the journal), false otherwise.
+      Returns: Builder instance for fluent chaining
+  */
+  T debugEnabled(bool propval)
+  {
+    return setProperty("debug-enabled", propval);
   }
 }

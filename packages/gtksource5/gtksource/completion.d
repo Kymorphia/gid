@@ -3,6 +3,7 @@ module gtksource.completion;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_view;
 import gtksource.buffer;
@@ -73,6 +74,15 @@ class Completion : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.completion.Completion]
+  Returns: New builder object
+  */
+  static CompletionGidBuilder builder()
+  {
+    return new CompletionGidBuilder;
+  }
+
+  /**
       Get `buffer` property.
       Returns: The #GtkTextBuffer for the #GtkSourceCompletion:view.
         This is a convenience property for providers.
@@ -98,7 +108,7 @@ class Completion : gobject.object.ObjectWrap
   */
   @property void pageSize(uint propval)
   {
-    return setPageSize(propval);
+    setPageSize(propval);
   }
 
   /**
@@ -162,6 +172,16 @@ class Completion : gobject.object.ObjectWrap
   @property void showIcons(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-icons", propval);
+  }
+
+  /**
+      Get `view` property.
+      Returns: The "view" property is the #GtkTextView for which this #GtkSourceCompletion
+        is providing completion features.
+  */
+  @property gtksource.view.View view()
+  {
+    return getView();
   }
 
   /**
@@ -466,5 +486,77 @@ class Completion : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show", closure, after);
+  }
+}
+
+class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `pageSize` property.
+      Params:
+        propval = The number of rows to display to the user before scrolling.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageSize(uint propval)
+  {
+    return setProperty("page-size", propval);
+  }
+
+  /**
+      Set `rememberInfoVisibility` property.
+      Params:
+        propval = Determines whether the visibility of the info window should be saved when the
+          completion is hidden, and restored when the completion is shown again.
+      Returns: Builder instance for fluent chaining
+  */
+  T rememberInfoVisibility(bool propval)
+  {
+    return setProperty("remember-info-visibility", propval);
+  }
+
+  /**
+      Set `selectOnShow` property.
+      Params:
+        propval = Determines whether the first proposal should be selected when the completion
+          is first shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectOnShow(bool propval)
+  {
+    return setProperty("select-on-show", propval);
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = The "show-icons" property denotes if icons should be displayed within
+          the list of completions presented to the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T showIcons(bool propval)
+  {
+    return setProperty("show-icons", propval);
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The "view" property is the #GtkTextView for which this #GtkSourceCompletion
+          is providing completion features.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(gtksource.view.View propval)
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion.Completion]
+final class CompletionGidBuilder : CompletionGidBuilderImpl!CompletionGidBuilder
+{
+  Completion build()
+  {
+    return new Completion(cast(void*)createGObject(Completion._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -122,4 +123,8 @@ interface CompletionProposal
       Returns: Signal ID
   */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface CompletionProposalGidBuilderImpl(T)
+{
 }

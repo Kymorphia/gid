@@ -4,6 +4,7 @@ module gtk.root;
 public import gtk.root_iface_proxy;
 import gdk.display;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -67,4 +68,8 @@ interface Root
              to unset the focus widget
   */
   void setFocus(gtk.widget.Widget focus = null);
+}
+
+interface RootGidBuilderImpl(T)
+{
 }

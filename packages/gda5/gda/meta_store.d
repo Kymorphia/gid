@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -42,6 +43,21 @@ class MetaStore : gobject.object.ObjectWrap
   override MetaStore self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.meta_store.MetaStore]
+  Returns: New builder object
+  */
+  static MetaStoreGidBuilder builder()
+  {
+    return new MetaStoreGidBuilder;
+  }
+
+  /** */
+  @property gda.connection.Connection cnc()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("cnc");
   }
 
   /**
@@ -640,6 +656,43 @@ class MetaStore : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("suggest-update", closure, after);
+  }
+}
+
+class MetaStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T catalog(string propval)
+  {
+    return setProperty("catalog", propval);
+  }
+
+  /** */
+  T cnc(gda.connection.Connection propval)
+  {
+    return setProperty("cnc", propval);
+  }
+
+  /** */
+  T cncString(string propval)
+  {
+    return setProperty("cnc-string", propval);
+  }
+
+  /** */
+  T schema(string propval)
+  {
+    return setProperty("schema", propval);
+  }
+}
+
+/// Fluent builder for [gda.meta_store.MetaStore]
+final class MetaStoreGidBuilder : MetaStoreGidBuilderImpl!MetaStoreGidBuilder
+{
+  MetaStore build()
+  {
+    return new MetaStore(cast(void*)createGObject(MetaStore._getGType), Yes.Take);
   }
 }
 

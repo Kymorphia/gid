@@ -2,6 +2,7 @@
 module gstpbutils.audio_visualizer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.element;
 import gstpbutils.c.functions;
@@ -45,6 +46,15 @@ class AudioVisualizer : gst.element.Element
     return this;
   }
 
+  /**
+  Get builder for [gstpbutils.audio_visualizer.AudioVisualizer]
+  Returns: New builder object
+  */
+  static AudioVisualizerGidBuilder builder()
+  {
+    return new AudioVisualizerGidBuilder;
+  }
+
   /** */
   @property uint shadeAmount()
   {
@@ -67,5 +77,30 @@ class AudioVisualizer : gst.element.Element
   @property void shader(gstpbutils.types.AudioVisualizerShader propval)
   {
     gobject.object.ObjectWrap.setProperty!(gstpbutils.types.AudioVisualizerShader)("shader", propval);
+  }
+}
+
+class AudioVisualizerGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /** */
+  T shadeAmount(uint propval)
+  {
+    return setProperty("shade-amount", propval);
+  }
+
+  /** */
+  T shader(gstpbutils.types.AudioVisualizerShader propval)
+  {
+    return setProperty("shader", propval);
+  }
+}
+
+/// Fluent builder for [gstpbutils.audio_visualizer.AudioVisualizer]
+final class AudioVisualizerGidBuilder : AudioVisualizerGidBuilderImpl!AudioVisualizerGidBuilder
+{
+  AudioVisualizer build()
+  {
+    return new AudioVisualizer(cast(void*)createGObject(AudioVisualizer._getGType), No.Take);
   }
 }

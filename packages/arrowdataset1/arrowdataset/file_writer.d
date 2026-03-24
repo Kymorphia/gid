@@ -8,6 +8,7 @@ import arrowdataset.c.types;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class FileWriter : gobject.object.ObjectWrap
   override FileWriter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowdataset.file_writer.FileWriter]
+  Returns: New builder object
+  */
+  static FileWriterGidBuilder builder()
+  {
+    return new FileWriterGidBuilder;
   }
 
   /** */
@@ -70,5 +80,24 @@ class FileWriter : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class FileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T writer(void* propval)
+  {
+    return setProperty("writer", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.file_writer.FileWriter]
+final class FileWriterGidBuilder : FileWriterGidBuilderImpl!FileWriterGidBuilder
+{
+  FileWriter build()
+  {
+    return new FileWriter(cast(void*)createGObject(FileWriter._getGType), No.Take);
   }
 }

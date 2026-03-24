@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.value;
 import atk.value_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.range_accessible;
@@ -38,5 +39,28 @@ class ScaleAccessible : gtk.range_accessible.RangeAccessible
   override ScaleAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.scale_accessible.ScaleAccessible]
+  Returns: New builder object
+  */
+  static ScaleAccessibleGidBuilder builder()
+  {
+    return new ScaleAccessibleGidBuilder;
+  }
+}
+
+class ScaleAccessibleGidBuilderImpl(T) : gtk.range_accessible.RangeAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.scale_accessible.ScaleAccessible]
+final class ScaleAccessibleGidBuilder : ScaleAccessibleGidBuilderImpl!ScaleAccessibleGidBuilder
+{
+  ScaleAccessible build()
+  {
+    return new ScaleAccessible(cast(void*)createGObject(ScaleAccessible._getGType), No.Take);
   }
 }

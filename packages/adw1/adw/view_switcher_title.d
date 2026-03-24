@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import adw.view_stack;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -107,6 +108,15 @@ class ViewSwitcherTitle : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.view_switcher_title.ViewSwitcherTitle]
+  Returns: New builder object
+  */
+  static ViewSwitcherTitleGidBuilder builder()
+  {
+    return new ViewSwitcherTitleGidBuilder;
+  }
+
+  /**
       Get `stack` property.
       Returns: The stack the view switcher controls.
   
@@ -126,7 +136,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   @property void stack(adw.view_stack.ViewStack propval)
   {
-    return setStack(propval);
+    setStack(propval);
   }
 
   /**
@@ -153,7 +163,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   @property void subtitle(string propval)
   {
-    return setSubtitle(propval);
+    setSubtitle(propval);
   }
 
   /**
@@ -182,7 +192,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -233,7 +243,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   @property void viewSwitcherEnabled(bool propval)
   {
-    return setViewSwitcherEnabled(propval);
+    setViewSwitcherEnabled(propval);
   }
 
   /**
@@ -384,5 +394,83 @@ class ViewSwitcherTitle : gtk.widget.Widget
   void setViewSwitcherEnabled(bool enabled)
   {
     adw_view_switcher_title_set_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr, enabled);
+  }
+}
+
+class ViewSwitcherTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack the view switcher controls.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T stack(adw.view_stack.ViewStack propval)
+  {
+    return setProperty("stack", propval);
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle to display.
+          
+          The subtitle should give the user additional details.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T subtitle(string propval)
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to display.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `viewSwitcherEnabled` property.
+      Params:
+        propval = Whether the view switcher is enabled.
+          
+          If it is disabled, the title will be displayed instead. This allows to
+          programmatically hide the view switcher even if it fits in the available
+          space.
+          
+          This can be used e.g. to ensure the view switcher is hidden below a certain
+          window width, or any other constraint you find suitable.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T viewSwitcherEnabled(bool propval)
+  {
+    return setProperty("view-switcher-enabled", propval);
+  }
+}
+
+/// Fluent builder for [adw.view_switcher_title.ViewSwitcherTitle]
+final class ViewSwitcherTitleGidBuilder : ViewSwitcherTitleGidBuilderImpl!ViewSwitcherTitleGidBuilder
+{
+  ViewSwitcherTitle build()
+  {
+    return new ViewSwitcherTitle(cast(void*)createGObject(ViewSwitcherTitle._getGType), No.Take);
   }
 }

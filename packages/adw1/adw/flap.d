@@ -8,6 +8,7 @@ import adw.swipeable;
 import adw.swipeable_mixin;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -110,6 +111,15 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   }
 
   /**
+  Get builder for [adw.flap.Flap]
+  Returns: New builder object
+  */
+  static FlapGidBuilder builder()
+  {
+    return new FlapGidBuilder;
+  }
+
+  /**
       Get `content` property.
       Returns: The content widget.
         
@@ -133,7 +143,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void content(gtk.widget.Widget propval)
   {
-    return setContent(propval);
+    setContent(propval);
   }
 
   /**
@@ -160,7 +170,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void flap(gtk.widget.Widget propval)
   {
-    return setFlap(propval);
+    setFlap(propval);
   }
 
   /**
@@ -189,7 +199,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void flapPosition(gtk.types.PackType propval)
   {
-    return setFlapPosition(propval);
+    setFlapPosition(propval);
   }
 
   /**
@@ -212,7 +222,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void foldDuration(uint propval)
   {
-    return setFoldDuration(propval);
+    setFoldDuration(propval);
   }
 
   /**
@@ -235,7 +245,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void foldPolicy(adw.types.FlapFoldPolicy propval)
   {
-    return setFoldPolicy(propval);
+    setFoldPolicy(propval);
   }
 
   /**
@@ -272,7 +282,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
   {
-    return setFoldThresholdPolicy(propval);
+    setFoldThresholdPolicy(propval);
   }
 
   /**
@@ -316,7 +326,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void locked(bool propval)
   {
-    return setLocked(propval);
+    setLocked(propval);
   }
 
   /**
@@ -347,7 +357,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -370,7 +380,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void revealFlap(bool propval)
   {
-    return setRevealFlap(propval);
+    setRevealFlap(propval);
   }
 
   /**
@@ -405,7 +415,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void revealParams(adw.spring_params.SpringParams propval)
   {
-    return setRevealParams(propval);
+    setRevealParams(propval);
   }
 
   /**
@@ -451,7 +461,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void separator(gtk.widget.Widget propval)
   {
-    return setSeparator(propval);
+    setSeparator(propval);
   }
 
   /**
@@ -480,7 +490,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void swipeToClose(bool propval)
   {
-    return setSwipeToClose(propval);
+    setSwipeToClose(propval);
   }
 
   /**
@@ -509,7 +519,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void swipeToOpen(bool propval)
   {
-    return setSwipeToOpen(propval);
+    setSwipeToOpen(propval);
   }
 
   /**
@@ -542,7 +552,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   @property void transitionType(adw.types.FlapTransitionType propval)
   {
-    return setTransitionType(propval);
+    setTransitionType(propval);
   }
 
   mixin SwipeableT!();
@@ -1006,5 +1016,246 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   void setTransitionType(adw.types.FlapTransitionType transitionType)
   {
     adw_flap_set_transition_type(cast(AdwFlap*)this._cPtr, transitionType);
+  }
+}
+
+class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin SwipeableGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+          
+          It's always displayed when unfolded, and partially visible when folded.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T content(gtk.widget.Widget propval)
+  {
+    return setProperty("content", propval);
+  }
+
+  /**
+      Set `flap` property.
+      Params:
+        propval = The flap widget.
+          
+          It's only visible when `property@Flap:reveal-progress` is greater than 0.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T flap(gtk.widget.Widget propval)
+  {
+    return setProperty("flap", propval);
+  }
+
+  /**
+      Set `flapPosition` property.
+      Params:
+        propval = The flap position.
+          
+          If it's set to [gtk.types.PackType.Start], the flap is displayed before the content,
+          if [gtk.types.PackType.End], it's displayed after the content.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T flapPosition(gtk.types.PackType propval)
+  {
+    return setProperty("flap-position", propval);
+  }
+
+  /**
+      Set `foldDuration` property.
+      Params:
+        propval = The fold transition animation duration, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T foldDuration(uint propval)
+  {
+    return setProperty("fold-duration", propval);
+  }
+
+  /**
+      Set `foldPolicy` property.
+      Params:
+        propval = The fold policy for the flap.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T foldPolicy(adw.types.FlapFoldPolicy propval)
+  {
+    return setProperty("fold-policy", propval);
+  }
+
+  /**
+      Set `foldThresholdPolicy` property.
+      Params:
+        propval = Determines when the flap will fold.
+          
+          If set to [adw.types.FoldThresholdPolicy.Minimum], flap will only fold when
+          the children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+          it will fold as soon as children don't get their natural size.
+          
+          This can be useful if you have a long ellipsizing label and want to let it
+          ellipsize instead of immediately folding.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  {
+    return setProperty("fold-threshold-policy", propval);
+  }
+
+  /**
+      Set `locked` property.
+      Params:
+        propval = Whether the flap is locked.
+          
+          If `FALSE`, folding when the flap is revealed automatically closes it, and
+          unfolding it when the flap is not revealed opens it. If `TRUE`,
+          `property@Flap:reveal-flap` value never changes on its own.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T locked(bool propval)
+  {
+    return setProperty("locked", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the flap is modal.
+          
+          If `TRUE`, clicking the content widget while flap is revealed, as well as
+          pressing the <kbd>Esc</kbd> key, will close the flap. If `FALSE`, clicks
+          are passed through to the content widget.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `revealFlap` property.
+      Params:
+        propval = Whether the flap widget is revealed.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T revealFlap(bool propval)
+  {
+    return setProperty("reveal-flap", propval);
+  }
+
+  /**
+      Set `revealParams` property.
+      Params:
+        propval = The reveal animation spring parameters.
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T revealParams(adw.spring_params.SpringParams propval)
+  {
+    return setProperty("reveal-params", propval);
+  }
+
+  /**
+      Set `separator` property.
+      Params:
+        propval = The separator widget.
+          
+          It's displayed between content and flap when there's no shadow to display.
+          When exactly it's visible depends on the `property@Flap:transition-type`
+          value.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T separator(gtk.widget.Widget propval)
+  {
+    return setProperty("separator", propval);
+  }
+
+  /**
+      Set `swipeToClose` property.
+      Params:
+        propval = Whether the flap can be closed with a swipe gesture.
+          
+          The area that can be swiped depends on the `property@Flap:transition-type`
+          value.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T swipeToClose(bool propval)
+  {
+    return setProperty("swipe-to-close", propval);
+  }
+
+  /**
+      Set `swipeToOpen` property.
+      Params:
+        propval = Whether the flap can be opened with a swipe gesture.
+          
+          The area that can be swiped depends on the `property@Flap:transition-type`
+          value.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T swipeToOpen(bool propval)
+  {
+    return setProperty("swipe-to-open", propval);
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = the type of animation used for reveal and fold transitions.
+          
+          `property@Flap:flap` is transparent by default, which means the content
+          will be seen through it with [adw.types.FlapTransitionType.Over] transitions;
+          add the [`.background`](style-classes.html#background) style class to it if
+          this is unwanted.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T transitionType(adw.types.FlapTransitionType propval)
+  {
+    return setProperty("transition-type", propval);
+  }
+}
+
+/// Fluent builder for [adw.flap.Flap]
+final class FlapGidBuilder : FlapGidBuilderImpl!FlapGidBuilder
+{
+  Flap build()
+  {
+    return new Flap(cast(void*)createGObject(Flap._getGType), No.Take);
   }
 }

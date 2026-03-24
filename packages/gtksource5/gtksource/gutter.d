@@ -2,6 +2,7 @@
 module gtksource.gutter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -9,6 +10,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.types;
 import gtk.widget;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -63,6 +65,33 @@ class Gutter : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [gtksource.gutter.Gutter]
+  Returns: New builder object
+  */
+  static GutterGidBuilder builder()
+  {
+    return new GutterGidBuilder;
+  }
+
+  /**
+      Get `view` property.
+      Returns: The #GtkSourceView of the gutter.
+  */
+  @property gtksource.view.View view()
+  {
+    return getView();
+  }
+
+  /**
+      Get `windowType` property.
+      Returns: The text window type on which the window is placed.
+  */
+  @property gtk.types.TextWindowType windowType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.TextWindowType)("window-type");
+  }
+
   /** */
   gtksource.view.View getView()
   {
@@ -105,5 +134,41 @@ class Gutter : gtk.widget.Widget
   void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     gtk_source_gutter_reorder(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
+  }
+}
+
+class GutterGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The #GtkSourceView of the gutter.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(gtksource.view.View propval)
+  {
+    return setProperty("view", propval);
+  }
+
+  /**
+      Set `windowType` property.
+      Params:
+        propval = The text window type on which the window is placed.
+      Returns: Builder instance for fluent chaining
+  */
+  T windowType(gtk.types.TextWindowType propval)
+  {
+    return setProperty("window-type", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.gutter.Gutter]
+final class GutterGidBuilder : GutterGidBuilderImpl!GutterGidBuilder
+{
+  Gutter build()
+  {
+    return new Gutter(cast(void*)createGObject(Gutter._getGType), No.Take);
   }
 }

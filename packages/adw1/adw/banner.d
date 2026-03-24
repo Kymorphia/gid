@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -69,6 +70,15 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+  Get builder for [adw.banner.Banner]
+  Returns: New builder object
+  */
+  static BannerGidBuilder builder()
+  {
+    return new BannerGidBuilder;
+  }
+
+  /**
       Get `buttonLabel` property.
       Returns: The label to show on the button.
         
@@ -94,7 +104,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void buttonLabel(string propval)
   {
-    return setButtonLabel(propval);
+    setButtonLabel(propval);
   }
 
   /**
@@ -113,7 +123,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void revealed(bool propval)
   {
-    return setRevealed(propval);
+    setRevealed(propval);
   }
 
   /**
@@ -136,7 +146,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -159,7 +169,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void useMarkup(bool propval)
   {
-    return setUseMarkup(propval);
+    setUseMarkup(propval);
   }
 
   mixin ActionableT!();
@@ -317,5 +327,73 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("button-clicked", closure, after);
+  }
+}
+
+class BannerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `buttonLabel` property.
+      Params:
+        propval = The label to show on the button.
+          
+          If set to `""` or `NULL`, the button won't be shown.
+          
+          The button can be used with a [gio.action.Action], or with the
+          `signal@Banner::button-clicked` signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T buttonLabel(string propval)
+  {
+    return setProperty("button-label", propval);
+  }
+
+  /**
+      Set `revealed` property.
+      Params:
+        propval = Whether the banner is currently revealed.
+      Returns: Builder instance for fluent chaining
+  */
+  T revealed(bool propval)
+  {
+    return setProperty("revealed", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this banner.
+          
+          See also: `property@Banner:use-markup`.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether to use Pango markup for the banner title.
+          
+          See also `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+}
+
+/// Fluent builder for [adw.banner.Banner]
+final class BannerGidBuilder : BannerGidBuilderImpl!BannerGidBuilder
+{
+  Banner build()
+  {
+    return new Banner(cast(void*)createGObject(Banner._getGType), No.Take);
   }
 }

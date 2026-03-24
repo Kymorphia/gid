@@ -14,6 +14,7 @@ import gio.initable_mixin;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -156,6 +157,28 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
     return this;
   }
 
+  /**
+  Get builder for [gio.debug_controller_dbus.DebugControllerDBus]
+  Returns: New builder object
+  */
+  static DebugControllerDBusGidBuilder builder()
+  {
+    return new DebugControllerDBusGidBuilder;
+  }
+
+  /**
+      Get `connection` property.
+      Returns: The D-Bus connection to expose the debugging interface on.
+        
+        Typically this will be the same connection (to the system or session bus)
+        which the rest of the application or service’s D-Bus objects are registered
+        on.
+  */
+  @property gio.dbus_connection.DBusConnection connection()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.dbus_connection.DBusConnection)("connection");
+  }
+
   mixin DebugControllerT!();
   mixin InitableT!();
 
@@ -268,5 +291,36 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize", closure, after);
+  }
+}
+
+class DebugControllerDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.debug_controller.DebugControllerGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin DebugControllerGidBuilderT!();
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `connection` property.
+      Params:
+        propval = The D-Bus connection to expose the debugging interface on.
+          
+          Typically this will be the same connection (to the system or session bus)
+          which the rest of the application or service’s D-Bus objects are registered
+          on.
+      Returns: Builder instance for fluent chaining
+  */
+  T connection(gio.dbus_connection.DBusConnection propval)
+  {
+    return setProperty("connection", propval);
+  }
+}
+
+/// Fluent builder for [gio.debug_controller_dbus.DebugControllerDBus]
+final class DebugControllerDBusGidBuilder : DebugControllerDBusGidBuilderImpl!DebugControllerDBusGidBuilder
+{
+  DebugControllerDBus build()
+  {
+    return new DebugControllerDBus(cast(void*)createGObject(DebugControllerDBus._getGType), Yes.Take);
   }
 }

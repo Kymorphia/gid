@@ -4,6 +4,7 @@ module gtk.buildable;
 public import gtk.buildable_iface_proxy;
 import gid.gid;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import gtk.builder;
@@ -135,4 +136,8 @@ interface Buildable
         name = name to set
   */
   void setName(string name);
+}
+
+interface BuildableGidBuilderImpl(T)
+{
 }

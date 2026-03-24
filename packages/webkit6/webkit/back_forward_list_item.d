@@ -2,6 +2,7 @@
 module webkit.back_forward_list_item;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import webkit.c.functions;
 import webkit.c.types;
@@ -39,6 +40,15 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   override BackForwardListItem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.back_forward_list_item.BackForwardListItem]
+  Returns: New builder object
+  */
+  static BackForwardListItemGidBuilder builder()
+  {
+    return new BackForwardListItemGidBuilder;
   }
 
   /**
@@ -84,5 +94,18 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
     _cretval = webkit_back_forward_list_item_get_uri(cast(WebKitBackForwardListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class BackForwardListItemGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.back_forward_list_item.BackForwardListItem]
+final class BackForwardListItemGidBuilder : BackForwardListItemGidBuilderImpl!BackForwardListItemGidBuilder
+{
+  BackForwardListItem build()
+  {
+    return new BackForwardListItem(cast(void*)createGObject(BackForwardListItem._getGType), No.Take);
   }
 }

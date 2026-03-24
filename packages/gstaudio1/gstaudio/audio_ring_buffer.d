@@ -2,6 +2,7 @@
 module gstaudio.audio_ring_buffer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.caps;
 import gst.object;
@@ -47,6 +48,15 @@ class AudioRingBuffer : gst.object.ObjectWrap
   override AudioRingBuffer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstaudio.audio_ring_buffer.AudioRingBuffer]
+  Returns: New builder object
+  */
+  static AudioRingBufferGidBuilder builder()
+  {
+    return new AudioRingBufferGidBuilder;
   }
 
   /**
@@ -529,5 +539,18 @@ class AudioRingBuffer : gst.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gst_audio_ring_buffer_stop(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
+  }
+}
+
+class AudioRingBufferGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstaudio.audio_ring_buffer.AudioRingBuffer]
+final class AudioRingBufferGidBuilder : AudioRingBufferGidBuilderImpl!AudioRingBufferGidBuilder
+{
+  AudioRingBuffer build()
+  {
+    return new AudioRingBuffer(cast(void*)createGObject(AudioRingBuffer._getGType), No.Take);
   }
 }

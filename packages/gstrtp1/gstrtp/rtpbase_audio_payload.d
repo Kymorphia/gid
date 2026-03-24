@@ -2,6 +2,7 @@
 module gstrtp.rtpbase_audio_payload;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.types;
 import gstbase.adapter;
@@ -66,6 +67,15 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   override RTPBaseAudioPayload self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstrtp.rtpbase_audio_payload.RTPBaseAudioPayload]
+  Returns: New builder object
+  */
+  static RTPBaseAudioPayloadGidBuilder builder()
+  {
+    return new RTPBaseAudioPayloadGidBuilder;
   }
 
   /** */
@@ -188,5 +198,24 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   void setSamplebitsOptions(int sampleSize)
   {
     gst_rtp_base_audio_payload_set_samplebits_options(cast(GstRTPBaseAudioPayload*)this._cPtr, sampleSize);
+  }
+}
+
+class RTPBaseAudioPayloadGidBuilderImpl(T) : gstrtp.rtpbase_payload.RTPBasePayloadGidBuilderImpl!T
+{
+
+  /** */
+  T bufferList(bool propval)
+  {
+    return setProperty("buffer-list", propval);
+  }
+}
+
+/// Fluent builder for [gstrtp.rtpbase_audio_payload.RTPBaseAudioPayload]
+final class RTPBaseAudioPayloadGidBuilder : RTPBaseAudioPayloadGidBuilderImpl!RTPBaseAudioPayloadGidBuilder
+{
+  RTPBaseAudioPayload build()
+  {
+    return new RTPBaseAudioPayload(cast(void*)createGObject(RTPBaseAudioPayload._getGType), No.Take);
   }
 }

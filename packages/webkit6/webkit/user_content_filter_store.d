@@ -8,6 +8,7 @@ import gio.file;
 import gio.types;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -56,6 +57,25 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   override UserContentFilterStore self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.user_content_filter_store.UserContentFilterStore]
+  Returns: New builder object
+  */
+  static UserContentFilterStoreGidBuilder builder()
+  {
+    return new UserContentFilterStoreGidBuilder;
+  }
+
+  /**
+      Get `path` property.
+      Returns: The directory used for filter storage. This path is used as the base
+        directory where user content filters are stored on disk.
+  */
+  @property string path()
+  {
+    return getPath();
   }
 
   /**
@@ -340,5 +360,30 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class UserContentFilterStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `path` property.
+      Params:
+        propval = The directory used for filter storage. This path is used as the base
+          directory where user content filters are stored on disk.
+      Returns: Builder instance for fluent chaining
+  */
+  T path(string propval)
+  {
+    return setProperty("path", propval);
+  }
+}
+
+/// Fluent builder for [webkit.user_content_filter_store.UserContentFilterStore]
+final class UserContentFilterStoreGidBuilder : UserContentFilterStoreGidBuilderImpl!UserContentFilterStoreGidBuilder
+{
+  UserContentFilterStore build()
+  {
+    return new UserContentFilterStore(cast(void*)createGObject(UserContentFilterStore._getGType), Yes.Take);
   }
 }

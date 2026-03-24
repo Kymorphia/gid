@@ -8,6 +8,7 @@ public import gio.c.types;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 
 /**
     [gio.initable.Initable] is implemented by objects that can fail during
@@ -93,4 +94,8 @@ template InitableT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template InitableGidBuilderT()
+{
 }

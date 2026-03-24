@@ -4,6 +4,7 @@ module gtksource.indenter;
 public import gtksource.indenter_iface_proxy;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.text_iter;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -95,4 +96,8 @@ interface Indenter
           otherwise false and no indentation will be performed.
   */
   bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval);
+}
+
+interface IndenterGidBuilderImpl(T)
+{
 }

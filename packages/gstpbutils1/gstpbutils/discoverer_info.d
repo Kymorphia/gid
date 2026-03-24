@@ -3,6 +3,7 @@ module gstpbutils.discoverer_info;
 
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.structure;
@@ -47,6 +48,15 @@ class DiscovererInfo : gobject.object.ObjectWrap
   override DiscovererInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.discoverer_info.DiscovererInfo]
+  Returns: New builder object
+  */
+  static DiscovererInfoGidBuilder builder()
+  {
+    return new DiscovererInfoGidBuilder;
   }
 
   /**
@@ -278,5 +288,18 @@ class DiscovererInfo : gobject.object.ObjectWrap
     _cretval = gst_discoverer_info_to_variant(cast(GstDiscovererInfo*)this._cPtr, flags);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class DiscovererInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.discoverer_info.DiscovererInfo]
+final class DiscovererInfoGidBuilder : DiscovererInfoGidBuilderImpl!DiscovererInfoGidBuilder
+{
+  DiscovererInfo build()
+  {
+    return new DiscovererInfo(cast(void*)createGObject(DiscovererInfo._getGType), No.Take);
   }
 }

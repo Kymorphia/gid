@@ -6,6 +6,7 @@ import arrowdataset.c.types;
 import arrowdataset.file_format;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class IPCFileFormat : arrowdataset.file_format.FileFormat
@@ -36,11 +37,33 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.ipcfile_format.IPCFileFormat]
+  Returns: New builder object
+  */
+  static IPCFileFormatGidBuilder builder()
+  {
+    return new IPCFileFormatGidBuilder;
+  }
+
   /** */
   this()
   {
     GADatasetIPCFileFormat* _cretval;
     _cretval = gadataset_ipc_file_format_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class IPCFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.ipcfile_format.IPCFileFormat]
+final class IPCFileFormatGidBuilder : IPCFileFormatGidBuilderImpl!IPCFileFormatGidBuilder
+{
+  IPCFileFormat build()
+  {
+    return new IPCFileFormat(cast(void*)createGObject(IPCFileFormat._getGType), Yes.Take);
   }
 }

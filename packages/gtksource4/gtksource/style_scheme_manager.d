@@ -2,6 +2,7 @@
 module gtksource.style_scheme_manager;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -35,6 +36,15 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   override StyleSchemeManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.style_scheme_manager.StyleSchemeManager]
+  Returns: New builder object
+  */
+  static StyleSchemeManagerGidBuilder builder()
+  {
+    return new StyleSchemeManagerGidBuilder;
   }
 
   /**
@@ -184,5 +194,18 @@ class StyleSchemeManager : gobject.object.ObjectWrap
     char** _path = _tmppath.ptr;
 
     gtk_source_style_scheme_manager_set_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
+  }
+}
+
+class StyleSchemeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.style_scheme_manager.StyleSchemeManager]
+final class StyleSchemeManagerGidBuilder : StyleSchemeManagerGidBuilderImpl!StyleSchemeManagerGidBuilder
+{
+  StyleSchemeManager build()
+  {
+    return new StyleSchemeManager(cast(void*)createGObject(StyleSchemeManager._getGType), Yes.Take);
   }
 }

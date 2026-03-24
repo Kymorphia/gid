@@ -5,6 +5,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -36,6 +37,51 @@ class DeviceTool : gobject.object.ObjectWrap
   override DeviceTool self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.device_tool.DeviceTool]
+  Returns: New builder object
+  */
+  static DeviceToolGidBuilder builder()
+  {
+    return new DeviceToolGidBuilder;
+  }
+
+  /**
+      Get `axes` property.
+      Returns: The axes of the tool.
+  */
+  @property gdk.types.AxisFlags axes()
+  {
+    return getAxes();
+  }
+
+  /**
+      Get `hardwareId` property.
+      Returns: The hardware ID of the tool.
+  */
+  @property ulong hardwareId()
+  {
+    return getHardwareId();
+  }
+
+  /**
+      Get `serial` property.
+      Returns: The serial number of the tool.
+  */
+  @property ulong serial()
+  {
+    return getSerial();
+  }
+
+  /**
+      Get `toolType` property.
+      Returns: The type of the tool.
+  */
+  @property gdk.types.DeviceToolType toolType()
+  {
+    return getToolType();
   }
 
   /**
@@ -97,5 +143,62 @@ class DeviceTool : gobject.object.ObjectWrap
     _cretval = gdk_device_tool_get_tool_type(cast(GdkDeviceTool*)this._cPtr);
     gdk.types.DeviceToolType _retval = cast(gdk.types.DeviceToolType)_cretval;
     return _retval;
+  }
+}
+
+class DeviceToolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `axes` property.
+      Params:
+        propval = The axes of the tool.
+      Returns: Builder instance for fluent chaining
+  */
+  T axes(gdk.types.AxisFlags propval)
+  {
+    return setProperty("axes", propval);
+  }
+
+  /**
+      Set `hardwareId` property.
+      Params:
+        propval = The hardware ID of the tool.
+      Returns: Builder instance for fluent chaining
+  */
+  T hardwareId(ulong propval)
+  {
+    return setProperty("hardware-id", propval);
+  }
+
+  /**
+      Set `serial` property.
+      Params:
+        propval = The serial number of the tool.
+      Returns: Builder instance for fluent chaining
+  */
+  T serial(ulong propval)
+  {
+    return setProperty("serial", propval);
+  }
+
+  /**
+      Set `toolType` property.
+      Params:
+        propval = The type of the tool.
+      Returns: Builder instance for fluent chaining
+  */
+  T toolType(gdk.types.DeviceToolType propval)
+  {
+    return setProperty("tool-type", propval);
+  }
+}
+
+/// Fluent builder for [gdk.device_tool.DeviceTool]
+final class DeviceToolGidBuilder : DeviceToolGidBuilderImpl!DeviceToolGidBuilder
+{
+  DeviceTool build()
+  {
+    return new DeviceTool(cast(void*)createGObject(DeviceTool._getGType), No.Take);
   }
 }

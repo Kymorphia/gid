@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import adw.view_stack;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -107,6 +108,15 @@ class ViewSwitcherBar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.view_switcher_bar.ViewSwitcherBar]
+  Returns: New builder object
+  */
+  static ViewSwitcherBarGidBuilder builder()
+  {
+    return new ViewSwitcherBarGidBuilder;
+  }
+
+  /**
       Get `reveal` property.
       Returns: Whether the bar should be revealed or hidden.
   */
@@ -122,7 +132,7 @@ class ViewSwitcherBar : gtk.widget.Widget
   */
   @property void reveal(bool propval)
   {
-    return setReveal(propval);
+    setReveal(propval);
   }
 
   /**
@@ -141,7 +151,7 @@ class ViewSwitcherBar : gtk.widget.Widget
   */
   @property void stack(adw.view_stack.ViewStack propval)
   {
-    return setStack(propval);
+    setStack(propval);
   }
 
   /**
@@ -198,5 +208,41 @@ class ViewSwitcherBar : gtk.widget.Widget
   void setStack(adw.view_stack.ViewStack stack = null)
   {
     adw_view_switcher_bar_set_stack(cast(AdwViewSwitcherBar*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
+  }
+}
+
+class ViewSwitcherBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `reveal` property.
+      Params:
+        propval = Whether the bar should be revealed or hidden.
+      Returns: Builder instance for fluent chaining
+  */
+  T reveal(bool propval)
+  {
+    return setProperty("reveal", propval);
+  }
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack the view switcher controls.
+      Returns: Builder instance for fluent chaining
+  */
+  T stack(adw.view_stack.ViewStack propval)
+  {
+    return setProperty("stack", propval);
+  }
+}
+
+/// Fluent builder for [adw.view_switcher_bar.ViewSwitcherBar]
+final class ViewSwitcherBarGidBuilder : ViewSwitcherBarGidBuilderImpl!ViewSwitcherBarGidBuilder
+{
+  ViewSwitcherBar build()
+  {
+    return new ViewSwitcherBar(cast(void*)createGObject(ViewSwitcherBar._getGType), No.Take);
   }
 }

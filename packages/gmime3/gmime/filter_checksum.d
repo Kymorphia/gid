@@ -7,6 +7,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for calculating the checksum of a stream.
@@ -37,6 +38,15 @@ class FilterChecksum : gmime.filter.Filter
   override FilterChecksum self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.filter_checksum.FilterChecksum]
+  Returns: New builder object
+  */
+  static FilterChecksumGidBuilder builder()
+  {
+    return new FilterChecksumGidBuilder;
   }
 
   /**
@@ -82,5 +92,18 @@ class FilterChecksum : gmime.filter.Filter
     _cretval = g_mime_filter_checksum_get_string(cast(GMimeFilterChecksum*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class FilterChecksumGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_checksum.FilterChecksum]
+final class FilterChecksumGidBuilder : FilterChecksumGidBuilderImpl!FilterChecksumGidBuilder
+{
+  FilterChecksum build()
+  {
+    return new FilterChecksum(cast(void*)createGObject(FilterChecksum._getGType), Yes.Take);
   }
 }

@@ -8,6 +8,7 @@ import atk.component_mixin;
 import atk.object;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     Container for AtkPlug objects from other processes
@@ -65,6 +66,15 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
     return this;
   }
 
+  /**
+  Get builder for [atk.socket.Socket]
+  Returns: New builder object
+  */
+  static SocketGidBuilder builder()
+  {
+    return new SocketGidBuilder;
+  }
+
   mixin ComponentT!();
 
   /**
@@ -108,5 +118,20 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
     bool _retval;
     _retval = cast(bool)atk_socket_is_occupied(cast(AtkSocket*)this._cPtr);
     return _retval;
+  }
+}
+
+class SocketGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T
+{
+
+  mixin ComponentGidBuilderT!();
+}
+
+/// Fluent builder for [atk.socket.Socket]
+final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
+{
+  Socket build()
+  {
+    return new Socket(cast(void*)createGObject(Socket._getGType), Yes.Take);
   }
 }

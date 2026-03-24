@@ -3,6 +3,7 @@ module gtk.toplevel_accessible;
 
 import atk.object;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -37,6 +38,15 @@ class ToplevelAccessible : atk.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gtk.toplevel_accessible.ToplevelAccessible]
+  Returns: New builder object
+  */
+  static ToplevelAccessibleGidBuilder builder()
+  {
+    return new ToplevelAccessibleGidBuilder;
+  }
+
   /** */
   gtk.window.Window[] getChildren()
   {
@@ -44,5 +54,18 @@ class ToplevelAccessible : atk.object.ObjectWrap
     _cretval = gtk_toplevel_accessible_get_children(cast(GtkToplevelAccessible*)this._cPtr);
     auto _retval = gListToD!(gtk.window.Window, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class ToplevelAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.toplevel_accessible.ToplevelAccessible]
+final class ToplevelAccessibleGidBuilder : ToplevelAccessibleGidBuilderImpl!ToplevelAccessibleGidBuilder
+{
+  ToplevelAccessible build()
+  {
+    return new ToplevelAccessible(cast(void*)createGObject(ToplevelAccessible._getGType), No.Take);
   }
 }

@@ -11,6 +11,7 @@ import gio.menu;
 import gio.menu_model;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -115,6 +116,15 @@ class Application : gio.application.Application
   }
 
   /**
+  Get builder for [gtk.application.Application]
+  Returns: New builder object
+  */
+  static ApplicationGidBuilder builder()
+  {
+    return new ApplicationGidBuilder;
+  }
+
+  /**
       Get `activeWindow` property.
       Returns: The currently focused window of the application.
   */
@@ -139,7 +149,7 @@ class Application : gio.application.Application
   */
   @property void menubar(gio.menu_model.MenuModel propval)
   {
-    return setMenubar(propval);
+    setMenubar(propval);
   }
 
   /**
@@ -692,5 +702,44 @@ class Application : gio.application.Application
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-removed", closure, after);
+  }
+}
+
+class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
+{
+
+
+  /**
+      Set `menubar` property.
+      Params:
+        propval = The [gio.menu_model.MenuModel] to be used for the application's menu bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T menubar(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menubar", propval);
+  }
+
+  /**
+      Set `registerSession` property.
+      Params:
+        propval = Set this property to `TRUE` to register with the session manager.
+          
+          This will make GTK track the session state (such as the
+          `property@Gtk.Application:screensaver-active` property).
+      Returns: Builder instance for fluent chaining
+  */
+  T registerSession(bool propval)
+  {
+    return setProperty("register-session", propval);
+  }
+}
+
+/// Fluent builder for [gtk.application.Application]
+final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
+{
+  Application build()
+  {
+    return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }
 }

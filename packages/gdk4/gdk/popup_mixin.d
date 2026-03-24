@@ -8,6 +8,7 @@ public import gdk.popup_layout;
 public import gdk.surface;
 public import gdk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -21,6 +22,24 @@ public import gobject.object;
 */
 template PopupT()
 {
+
+  /**
+      Get `autohide` property.
+      Returns: Whether to hide on outside clicks.
+  */
+  @property bool autohide()
+  {
+    return getAutohide();
+  }
+
+  /**
+      Get `parent` property.
+      Returns: The parent surface.
+  */
+  @property gdk.surface.Surface parent()
+  {
+    return getParent();
+  }
 
   /**
       Returns whether this popup is set to hide on outside clicks.
@@ -125,5 +144,31 @@ template PopupT()
     bool _retval;
     _retval = cast(bool)gdk_popup_present(cast(GdkPopup*)this._cPtr, width, height, layout ? cast(GdkPopupLayout*)layout._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+template PopupGidBuilderT()
+{
+
+  /**
+      Set `autohide` property.
+      Params:
+        propval = Whether to hide on outside clicks.
+      Returns: Builder instance for fluent chaining
+  */
+  T autohide(bool propval)
+  {
+    return setProperty("autohide", propval);
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = The parent surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T parent(gdk.surface.Surface propval)
+  {
+    return setProperty("parent", propval);
   }
 }

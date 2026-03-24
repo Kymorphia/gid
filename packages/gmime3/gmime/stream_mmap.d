@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class StreamMmap : gmime.stream.Stream
   override StreamMmap self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.stream_mmap.StreamMmap]
+  Returns: New builder object
+  */
+  static StreamMmapGidBuilder builder()
+  {
+    return new StreamMmapGidBuilder;
   }
 
   /**
@@ -99,5 +109,18 @@ class StreamMmap : gmime.stream.Stream
   void setOwner(bool owner)
   {
     g_mime_stream_mmap_set_owner(cast(GMimeStreamMmap*)this._cPtr, owner);
+  }
+}
+
+class StreamMmapGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_mmap.StreamMmap]
+final class StreamMmapGidBuilder : StreamMmapGidBuilderImpl!StreamMmapGidBuilder
+{
+  StreamMmap build()
+  {
+    return new StreamMmap(cast(void*)createGObject(StreamMmap._getGType), Yes.Take);
   }
 }

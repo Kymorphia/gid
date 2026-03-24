@@ -8,6 +8,7 @@ import gio.socket_connectable;
 import gio.socket_connectable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -48,6 +49,42 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   override NetworkAddress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.network_address.NetworkAddress]
+  Returns: New builder object
+  */
+  static NetworkAddressGidBuilder builder()
+  {
+    return new NetworkAddressGidBuilder;
+  }
+
+  /**
+      Get `hostname` property.
+      Returns: Hostname to resolve.
+  */
+  @property string hostname()
+  {
+    return getHostname();
+  }
+
+  /**
+      Get `port` property.
+      Returns: Network port.
+  */
+  @property uint port()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("port");
+  }
+
+  /**
+      Get `scheme` property.
+      Returns: URI scheme.
+  */
+  @property string scheme()
+  {
+    return getScheme();
   }
 
   mixin SocketConnectableT!();
@@ -204,5 +241,53 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
     _cretval = g_network_address_get_scheme(cast(GNetworkAddress*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class NetworkAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.socket_connectable.SocketConnectableGidBuilderImpl!T
+{
+
+  mixin SocketConnectableGidBuilderT!();
+
+  /**
+      Set `hostname` property.
+      Params:
+        propval = Hostname to resolve.
+      Returns: Builder instance for fluent chaining
+  */
+  T hostname(string propval)
+  {
+    return setProperty("hostname", propval);
+  }
+
+  /**
+      Set `port` property.
+      Params:
+        propval = Network port.
+      Returns: Builder instance for fluent chaining
+  */
+  T port(uint propval)
+  {
+    return setProperty("port", propval);
+  }
+
+  /**
+      Set `scheme` property.
+      Params:
+        propval = URI scheme.
+      Returns: Builder instance for fluent chaining
+  */
+  T scheme(string propval)
+  {
+    return setProperty("scheme", propval);
+  }
+}
+
+/// Fluent builder for [gio.network_address.NetworkAddress]
+final class NetworkAddressGidBuilder : NetworkAddressGidBuilderImpl!NetworkAddressGidBuilder
+{
+  NetworkAddress build()
+  {
+    return new NetworkAddress(cast(void*)createGObject(NetworkAddress._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.certificate;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class Signature : gobject.object.ObjectWrap
   override Signature self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.signature.Signature]
+  Returns: New builder object
+  */
+  static SignatureGidBuilder builder()
+  {
+    return new SignatureGidBuilder;
   }
 
   /**
@@ -163,5 +173,18 @@ class Signature : gobject.object.ObjectWrap
   void setStatus(gmime.types.SignatureStatus status)
   {
     g_mime_signature_set_status(cast(GMimeSignature*)this._cPtr, status);
+  }
+}
+
+class SignatureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.signature.Signature]
+final class SignatureGidBuilder : SignatureGidBuilderImpl!SignatureGidBuilder
+{
+  Signature build()
+  {
+    return new Signature(cast(void*)createGObject(Signature._getGType), Yes.Take);
   }
 }

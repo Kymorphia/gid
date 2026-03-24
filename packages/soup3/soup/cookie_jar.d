@@ -4,6 +4,7 @@ module soup.cookie_jar;
 import gid.gid;
 import glib.uri;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -52,6 +53,15 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /**
+  Get builder for [soup.cookie_jar.CookieJar]
+  Returns: New builder object
+  */
+  static CookieJarGidBuilder builder()
+  {
+    return new CookieJarGidBuilder;
+  }
+
+  /**
       Get `acceptPolicy` property.
       Returns: The policy the jar should follow to accept or reject cookies.
   */
@@ -67,7 +77,16 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   @property void acceptPolicy(soup.types.CookieJarAcceptPolicy propval)
   {
-    return setAcceptPolicy(propval);
+    setAcceptPolicy(propval);
+  }
+
+  /**
+      Get `readOnly` property.
+      Returns: Whether or not the cookie jar is read-only.
+  */
+  @property bool readOnly()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("read-only");
   }
 
   mixin SessionFeatureT!();
@@ -391,5 +410,42 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class CookieJarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+
+  /**
+      Set `acceptPolicy` property.
+      Params:
+        propval = The policy the jar should follow to accept or reject cookies.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptPolicy(soup.types.CookieJarAcceptPolicy propval)
+  {
+    return setProperty("accept-policy", propval);
+  }
+
+  /**
+      Set `readOnly` property.
+      Params:
+        propval = Whether or not the cookie jar is read-only.
+      Returns: Builder instance for fluent chaining
+  */
+  T readOnly(bool propval)
+  {
+    return setProperty("read-only", propval);
+  }
+}
+
+/// Fluent builder for [soup.cookie_jar.CookieJar]
+final class CookieJarGidBuilder : CookieJarGidBuilderImpl!CookieJarGidBuilder
+{
+  CookieJar build()
+  {
+    return new CookieJar(cast(void*)createGObject(CookieJar._getGType), Yes.Take);
   }
 }

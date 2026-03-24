@@ -5,6 +5,7 @@ import gdk.rectangle;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -56,6 +57,15 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.color_chooser_request.ColorChooserRequest]
+  Returns: New builder object
+  */
+  static ColorChooserRequestGidBuilder builder()
+  {
+    return new ColorChooserRequestGidBuilder;
+  }
+
+  /**
       Get `rgba` property.
       Returns: The #GdkRGBA color of the request
   */
@@ -71,7 +81,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   */
   @property void rgba(gdk.rgba.RGBA propval)
   {
-    return setRgba(propval);
+    setRgba(propval);
   }
 
   /**
@@ -172,5 +182,29 @@ class ColorChooserRequest : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("finished", closure, after);
+  }
+}
+
+class ColorChooserRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The #GdkRGBA color of the request
+      Returns: Builder instance for fluent chaining
+  */
+  T rgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("rgba", propval);
+  }
+}
+
+/// Fluent builder for [webkit.color_chooser_request.ColorChooserRequest]
+final class ColorChooserRequestGidBuilder : ColorChooserRequestGidBuilderImpl!ColorChooserRequestGidBuilder
+{
+  ColorChooserRequest build()
+  {
+    return new ColorChooserRequest(cast(void*)createGObject(ColorChooserRequest._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module webkit.user_message;
 import gid.gid;
 import gio.unix_fdlist;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import webkit.c.functions;
@@ -46,6 +47,44 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   override UserMessage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.user_message.UserMessage]
+  Returns: New builder object
+  */
+  static UserMessageGidBuilder builder()
+  {
+    return new UserMessageGidBuilder;
+  }
+
+  /**
+      Get `fdList` property.
+      Returns: The UNIX file descriptors of the user message.
+  */
+  @property gio.unix_fdlist.UnixFDList fdList()
+  {
+    return getFdList();
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the user message.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Get `parameters` property.
+      Returns: The parameters of the user message as a #GVariant, or null
+        if the message doesn't include parameters. Note that only complete types are
+        allowed.
+  */
+  @property glib.variant.Variant parameters()
+  {
+    return getParameters();
   }
 
   /**
@@ -131,5 +170,53 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   void sendReply(webkit.user_message.UserMessage reply)
   {
     webkit_user_message_send_reply(cast(WebKitUserMessage*)this._cPtr, reply ? cast(WebKitUserMessage*)reply._cPtr(No.Dup) : null);
+  }
+}
+
+class UserMessageGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+
+  /**
+      Set `fdList` property.
+      Params:
+        propval = The UNIX file descriptors of the user message.
+      Returns: Builder instance for fluent chaining
+  */
+  T fdList(gio.unix_fdlist.UnixFDList propval)
+  {
+    return setProperty("fd-list", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the user message.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `parameters` property.
+      Params:
+        propval = The parameters of the user message as a #GVariant, or null
+          if the message doesn't include parameters. Note that only complete types are
+          allowed.
+      Returns: Builder instance for fluent chaining
+  */
+  T parameters(glib.variant.Variant propval)
+  {
+    return setProperty("parameters", propval);
+  }
+}
+
+/// Fluent builder for [webkit.user_message.UserMessage]
+final class UserMessageGidBuilder : UserMessageGidBuilderImpl!UserMessageGidBuilder
+{
+  UserMessage build()
+  {
+    return new UserMessage(cast(void*)createGObject(UserMessage._getGType), No.Take);
   }
 }

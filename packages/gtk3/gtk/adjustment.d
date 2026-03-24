@@ -3,6 +3,7 @@ module gtk.adjustment;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gtk.c.functions;
 import gtk.c.types;
@@ -46,6 +47,15 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
+  Get builder for [gtk.adjustment.Adjustment]
+  Returns: New builder object
+  */
+  static AdjustmentGidBuilder builder()
+  {
+    return new AdjustmentGidBuilder;
+  }
+
+  /**
       Get `lower` property.
       Returns: The minimum value of the adjustment.
   */
@@ -61,7 +71,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   @property void lower(double propval)
   {
-    return setLower(propval);
+    setLower(propval);
   }
 
   /**
@@ -80,7 +90,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   @property void pageIncrement(double propval)
   {
-    return setPageIncrement(propval);
+    setPageIncrement(propval);
   }
 
   /**
@@ -105,7 +115,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   @property void pageSize(double propval)
   {
-    return setPageSize(propval);
+    setPageSize(propval);
   }
 
   /**
@@ -124,7 +134,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   @property void stepIncrement(double propval)
   {
-    return setStepIncrement(propval);
+    setStepIncrement(propval);
   }
 
   /**
@@ -149,7 +159,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   @property void upper(double propval)
   {
-    return setUpper(propval);
+    setUpper(propval);
   }
 
   /**
@@ -168,7 +178,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   @property void value(double propval)
   {
-    return setValue(propval);
+    setValue(propval);
   }
 
   /**
@@ -508,5 +518,90 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+}
+
+class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+
+  /**
+      Set `lower` property.
+      Params:
+        propval = The minimum value of the adjustment.
+      Returns: Builder instance for fluent chaining
+  */
+  T lower(double propval)
+  {
+    return setProperty("lower", propval);
+  }
+
+  /**
+      Set `pageIncrement` property.
+      Params:
+        propval = The page increment of the adjustment.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageIncrement(double propval)
+  {
+    return setProperty("page-increment", propval);
+  }
+
+  /**
+      Set `pageSize` property.
+      Params:
+        propval = The page size of the adjustment.
+          Note that the page-size is irrelevant and should be set to zero
+          if the adjustment is used for a simple scalar value, e.g. in a
+          #GtkSpinButton.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageSize(double propval)
+  {
+    return setProperty("page-size", propval);
+  }
+
+  /**
+      Set `stepIncrement` property.
+      Params:
+        propval = The step increment of the adjustment.
+      Returns: Builder instance for fluent chaining
+  */
+  T stepIncrement(double propval)
+  {
+    return setProperty("step-increment", propval);
+  }
+
+  /**
+      Set `upper` property.
+      Params:
+        propval = The maximum value of the adjustment.
+          Note that values will be restricted by
+          `upper - page-size` if the page-size
+          property is nonzero.
+      Returns: Builder instance for fluent chaining
+  */
+  T upper(double propval)
+  {
+    return setProperty("upper", propval);
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the adjustment.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(double propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [gtk.adjustment.Adjustment]
+final class AdjustmentGidBuilder : AdjustmentGidBuilderImpl!AdjustmentGidBuilder
+{
+  Adjustment build()
+  {
+    return new Adjustment(cast(void*)createGObject(Adjustment._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import gda.types;
 import gid.gid;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -38,6 +39,15 @@ class Column : gobject.object.ObjectWrap
   override Column self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.column.Column]
+  Returns: New builder object
+  */
+  static ColumnGidBuilder builder()
+  {
+    return new ColumnGidBuilder;
   }
 
   /** */
@@ -385,5 +395,24 @@ class Column : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("name-changed", closure, after);
+  }
+}
+
+class ColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+}
+
+/// Fluent builder for [gda.column.Column]
+final class ColumnGidBuilder : ColumnGidBuilderImpl!ColumnGidBuilder
+{
+  Column build()
+  {
+    return new Column(cast(void*)createGObject(Column._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import atk.object;
 import atk.relation;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -48,6 +49,15 @@ class RelationSet : gobject.object.ObjectWrap
   override RelationSet self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.relation_set.RelationSet]
+  Returns: New builder object
+  */
+  static RelationSetGidBuilder builder()
+  {
+    return new RelationSetGidBuilder;
   }
 
   /**
@@ -179,5 +189,18 @@ class RelationSet : gobject.object.ObjectWrap
   void remove(atk.relation.Relation relation)
   {
     atk_relation_set_remove(cast(AtkRelationSet*)this._cPtr, relation ? cast(AtkRelation*)relation._cPtr(No.Dup) : null);
+  }
+}
+
+class RelationSetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.relation_set.RelationSet]
+final class RelationSetGidBuilder : RelationSetGidBuilderImpl!RelationSetGidBuilder
+{
+  RelationSet build()
+  {
+    return new RelationSet(cast(void*)createGObject(RelationSet._getGType), Yes.Take);
   }
 }

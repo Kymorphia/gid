@@ -4,6 +4,7 @@ module webkit.download;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -50,6 +51,15 @@ class Download : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.download.Download]
+  Returns: New builder object
+  */
+  static DownloadGidBuilder builder()
+  {
+    return new DownloadGidBuilder;
+  }
+
+  /**
       Get `allowOverwrite` property.
       Returns: Whether or not the download is allowed to overwrite an existing file on
         disk. If this property is false and the destination already exists,
@@ -69,7 +79,7 @@ class Download : gobject.object.ObjectWrap
   */
   @property void allowOverwrite(bool propval)
   {
-    return setAllowOverwrite(propval);
+    setAllowOverwrite(propval);
   }
 
   /**
@@ -506,5 +516,31 @@ class Download : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("received-data", closure, after);
+  }
+}
+
+class DownloadGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `allowOverwrite` property.
+      Params:
+        propval = Whether or not the download is allowed to overwrite an existing file on
+          disk. If this property is false and the destination already exists,
+          the download will fail.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowOverwrite(bool propval)
+  {
+    return setProperty("allow-overwrite", propval);
+  }
+}
+
+/// Fluent builder for [webkit.download.Download]
+final class DownloadGidBuilder : DownloadGidBuilderImpl!DownloadGidBuilder
+{
+  Download build()
+  {
+    return new Download(cast(void*)createGObject(Download._getGType), No.Take);
   }
 }

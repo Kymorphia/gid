@@ -4,6 +4,7 @@ module gtk.overlay;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -79,6 +80,15 @@ class Overlay : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.overlay.Overlay]
+  Returns: New builder object
+  */
+  static OverlayGidBuilder builder()
+  {
+    return new OverlayGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The main child widget.
   */
@@ -94,7 +104,7 @@ class Overlay : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -286,5 +296,30 @@ class Overlay : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("get-child-position", closure, after);
+  }
+}
+
+class OverlayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The main child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [gtk.overlay.Overlay]
+final class OverlayGidBuilder : OverlayGidBuilderImpl!OverlayGidBuilder
+{
+  Overlay build()
+  {
+    return new Overlay(cast(void*)createGObject(Overlay._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module soup.websocket_extension;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -40,6 +41,15 @@ class WebsocketExtension : gobject.object.ObjectWrap
   override WebsocketExtension self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.websocket_extension.WebsocketExtension]
+  Returns: New builder object
+  */
+  static WebsocketExtensionGidBuilder builder()
+  {
+    return new WebsocketExtensionGidBuilder;
   }
 
   /**
@@ -122,5 +132,18 @@ class WebsocketExtension : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class WebsocketExtensionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [soup.websocket_extension.WebsocketExtension]
+final class WebsocketExtensionGidBuilder : WebsocketExtensionGidBuilderImpl!WebsocketExtensionGidBuilder
+{
+  WebsocketExtension build()
+  {
+    return new WebsocketExtension(cast(void*)createGObject(WebsocketExtension._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import gio.action_group;
 import gio.action_group_mixin;
 import gio.action_map;
 import gio.action_map_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -59,6 +60,15 @@ class Workspace : adw.application_window.ApplicationWindow
   }
 
   /**
+  Get builder for [panel.workspace.Workspace]
+  Returns: New builder object
+  */
+  static WorkspaceGidBuilder builder()
+  {
+    return new WorkspaceGidBuilder;
+  }
+
+  /**
       Get `id` property.
       Returns: The "id" of the workspace.
         
@@ -80,7 +90,7 @@ class Workspace : adw.application_window.ApplicationWindow
   */
   @property void id(string propval)
   {
-    return setId(propval);
+    setId(propval);
   }
 
   /**
@@ -154,5 +164,33 @@ class Workspace : adw.application_window.ApplicationWindow
   {
     const(char)* _id = id.toCString(No.Alloc);
     panel_workspace_set_id(cast(PanelWorkspace*)this._cPtr, _id);
+  }
+}
+
+class WorkspaceGidBuilderImpl(T) : adw.application_window.ApplicationWindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The "id" of the workspace.
+          
+          This is generally used by applications to help destinguish between
+          types of workspaces, particularly when saving session state.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+}
+
+/// Fluent builder for [panel.workspace.Workspace]
+final class WorkspaceGidBuilder : WorkspaceGidBuilderImpl!WorkspaceGidBuilder
+{
+  Workspace build()
+  {
+    return new Workspace(cast(void*)createGObject(Workspace._getGType), No.Take);
   }
 }

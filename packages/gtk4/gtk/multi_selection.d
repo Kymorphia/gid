@@ -4,6 +4,7 @@ module gtk.multi_selection;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -47,6 +48,15 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
+  Get builder for [gtk.multi_selection.MultiSelection]
+  Returns: New builder object
+  */
+  static MultiSelectionGidBuilder builder()
+  {
+    return new MultiSelectionGidBuilder;
+  }
+
+  /**
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
@@ -71,7 +81,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -124,5 +134,33 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   void setModel(gio.list_model.ListModel model = null)
   {
     gtk_multi_selection_set_model(cast(GtkMultiSelection*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class MultiSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+  mixin SelectionModelGidBuilderT!();
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The list managed by this selection.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.multi_selection.MultiSelection]
+final class MultiSelectionGidBuilder : MultiSelectionGidBuilderImpl!MultiSelectionGidBuilder
+{
+  MultiSelection build()
+  {
+    return new MultiSelection(cast(void*)createGObject(MultiSelection._getGType), Yes.Take);
   }
 }

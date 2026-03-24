@@ -8,6 +8,7 @@ import gda.data_model_mixin;
 import gda.set;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import libxml2.types;
 
@@ -41,6 +42,52 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /**
+  Get builder for [gda.data_model_import.DataModelImport]
+  Returns: New builder object
+  */
+  static DataModelImportGidBuilder builder()
+  {
+    return new DataModelImportGidBuilder;
+  }
+
+  /**
+      Get `dataString` property.
+      Returns: Data to import, as a string.
+  */
+  @property string dataString()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("data-string");
+  }
+
+  /**
+      Get `filename` property.
+      Returns: Name of the file to import.
+  */
+  @property string filename()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("filename");
+  }
+
+  /**
+      Get `options` property.
+      Returns: Data model options.
+  */
+  @property gda.set.Set options()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.set.Set)("options");
+  }
+
+  /**
+      Get `randomAccess` property.
+      Returns: Defines if the data model will be accessed randomly or through a cursor. If set to false,
+        access will have to be done using a cursor.
+  */
+  @property bool randomAccess()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("random-access");
+  }
+
+  /**
       Get `strict` property.
       Returns: Defines the behaviour in case the imported data contains recoverable errors (usually too
         many or too few data per row). If set to true, an error will be reported and the import
@@ -61,6 +108,15 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   @property void strict(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strict", propval);
+  }
+
+  /**
+      Get `xmlNode` property.
+      Returns: Data to import, as a pointer to an XML node (a #xmlNodePtr).
+  */
+  @property void* xmlNode()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("xml-node");
   }
 
   mixin DataModelT!();
@@ -142,5 +198,89 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   void cleanErrors()
   {
     gda_data_model_import_clean_errors(cast(GdaDataModelImport*)this._cPtr);
+  }
+}
+
+class DataModelImportGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
+{
+
+  mixin DataModelGidBuilderT!();
+
+  /**
+      Set `dataString` property.
+      Params:
+        propval = Data to import, as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T dataString(string propval)
+  {
+    return setProperty("data-string", propval);
+  }
+
+  /**
+      Set `filename` property.
+      Params:
+        propval = Name of the file to import.
+      Returns: Builder instance for fluent chaining
+  */
+  T filename(string propval)
+  {
+    return setProperty("filename", propval);
+  }
+
+  /**
+      Set `options` property.
+      Params:
+        propval = Data model options.
+      Returns: Builder instance for fluent chaining
+  */
+  T options(gda.set.Set propval)
+  {
+    return setProperty("options", propval);
+  }
+
+  /**
+      Set `randomAccess` property.
+      Params:
+        propval = Defines if the data model will be accessed randomly or through a cursor. If set to false,
+          access will have to be done using a cursor.
+      Returns: Builder instance for fluent chaining
+  */
+  T randomAccess(bool propval)
+  {
+    return setProperty("random-access", propval);
+  }
+
+  /**
+      Set `strict` property.
+      Params:
+        propval = Defines the behaviour in case the imported data contains recoverable errors (usually too
+          many or too few data per row). If set to true, an error will be reported and the import
+          will stop, and if set to false, then the error will be reported but the import will not stop.
+      Returns: Builder instance for fluent chaining
+  */
+  T strict(bool propval)
+  {
+    return setProperty("strict", propval);
+  }
+
+  /**
+      Set `xmlNode` property.
+      Params:
+        propval = Data to import, as a pointer to an XML node (a #xmlNodePtr).
+      Returns: Builder instance for fluent chaining
+  */
+  T xmlNode(void* propval)
+  {
+    return setProperty("xml-node", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_model_import.DataModelImport]
+final class DataModelImportGidBuilder : DataModelImportGidBuilderImpl!DataModelImportGidBuilder
+{
+  DataModelImport build()
+  {
+    return new DataModelImport(cast(void*)createGObject(DataModelImport._getGType), No.Take);
   }
 }

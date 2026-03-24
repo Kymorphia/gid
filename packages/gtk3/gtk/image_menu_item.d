@@ -4,6 +4,7 @@ module gtk.image_menu_item;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accel_group;
 import gtk.actionable;
@@ -110,6 +111,15 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
+  Get builder for [gtk.image_menu_item.ImageMenuItem]
+  Returns: New builder object
+  */
+  static ImageMenuItemGidBuilder builder()
+  {
+    return new ImageMenuItemGidBuilder;
+  }
+
+  /**
       Set `accelGroup` property.
       Params:
         propval = The Accel Group to use for stock accelerator keys
@@ -118,7 +128,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   @property void accelGroup(gtk.accel_group.AccelGroup propval)
   {
-    return setAccelGroup(propval);
+    setAccelGroup(propval);
   }
 
   /**
@@ -149,7 +159,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   @property void alwaysShowImage(bool propval)
   {
-    return setAlwaysShowImage(propval);
+    setAlwaysShowImage(propval);
   }
 
   /**
@@ -174,7 +184,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   @property void image(gtk.widget.Widget propval)
   {
-    return setImage(propval);
+    setImage(propval);
   }
 
   /**
@@ -199,7 +209,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   @property void useStock(bool propval)
   {
-    return setUseStock(propval);
+    setUseStock(propval);
   }
 
   /**
@@ -375,5 +385,77 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   void setUseStock(bool useStock)
   {
     gtk_image_menu_item_set_use_stock(cast(GtkImageMenuItem*)this._cPtr, useStock);
+  }
+}
+
+class ImageMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
+{
+
+
+  /**
+      Set `accelGroup` property.
+      Params:
+        propval = The Accel Group to use for stock accelerator keys
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.addAccelerator] instead
+  */
+  T accelGroup(gtk.accel_group.AccelGroup propval)
+  {
+    return setProperty("accel-group", propval);
+  }
+
+  /**
+      Set `alwaysShowImage` property.
+      Params:
+        propval = If true, the menu item will always show the image, if available.
+          
+          Use this property only if the menuitem would be useless or hard to use
+          without the image.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use a #GtkMenuItem containing a #GtkBox with
+          a #GtkAccelLabel and a #GtkImage instead
+  */
+  T alwaysShowImage(bool propval)
+  {
+    return setProperty("always-show-image", propval);
+  }
+
+  /**
+      Set `image` property.
+      Params:
+        propval = Child widget to appear next to the menu text.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use a #GtkMenuItem containing a #GtkBox with
+          a #GtkAccelLabel and a #GtkImage instead
+  */
+  T image(gtk.widget.Widget propval)
+  {
+    return setProperty("image", propval);
+  }
+
+  /**
+      Set `useStock` property.
+      Params:
+        propval = If true, the label set in the menuitem is used as a
+          stock id to select the stock item for the item.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use a named icon from the #GtkIconTheme instead
+  */
+  T useStock(bool propval)
+  {
+    return setProperty("use-stock", propval);
+  }
+}
+
+/// Fluent builder for [gtk.image_menu_item.ImageMenuItem]
+final class ImageMenuItemGidBuilder : ImageMenuItemGidBuilderImpl!ImageMenuItemGidBuilder
+{
+  ImageMenuItem build()
+  {
+    return new ImageMenuItem(cast(void*)createGObject(ImageMenuItem._getGType), No.Take);
   }
 }

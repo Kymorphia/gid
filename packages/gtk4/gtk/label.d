@@ -4,6 +4,7 @@ module gtk.label;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -234,6 +235,15 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
+  Get builder for [gtk.label.Label]
+  Returns: New builder object
+  */
+  static LabelGidBuilder builder()
+  {
+    return new LabelGidBuilder;
+  }
+
+  /**
       Get `attributes` property.
       Returns: A list of style attributes to apply to the text of the label.
   */
@@ -249,7 +259,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
   }
 
   /**
@@ -286,7 +296,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
-    return setEllipsize(propval);
+    setEllipsize(propval);
   }
 
   /**
@@ -305,7 +315,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void extraMenu(gio.menu_model.MenuModel propval)
   {
-    return setExtraMenu(propval);
+    setExtraMenu(propval);
   }
 
   /**
@@ -330,7 +340,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void justify(gtk.types.Justification propval)
   {
-    return setJustify(propval);
+    setJustify(propval);
   }
 
   /**
@@ -371,7 +381,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -398,7 +408,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void lines(int propval)
   {
-    return setLines(propval);
+    setLines(propval);
   }
 
   /**
@@ -429,7 +439,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void maxWidthChars(int propval)
   {
-    return setMaxWidthChars(propval);
+    setMaxWidthChars(propval);
   }
 
   /**
@@ -457,7 +467,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void mnemonicWidget(gtk.widget.Widget propval)
   {
-    return setMnemonicWidget(propval);
+    setMnemonicWidget(propval);
   }
 
   /**
@@ -488,7 +498,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void naturalWrapMode(gtk.types.NaturalWrapMode propval)
   {
-    return setNaturalWrapMode(propval);
+    setNaturalWrapMode(propval);
   }
 
   /**
@@ -507,7 +517,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void selectable(bool propval)
   {
-    return setSelectable(propval);
+    setSelectable(propval);
   }
 
   /**
@@ -536,7 +546,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void singleLineMode(bool propval)
   {
-    return setSingleLineMode(propval);
+    setSingleLineMode(propval);
   }
 
   /**
@@ -555,7 +565,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void tabs(pango.tab_array.TabArray propval)
   {
-    return setTabs(propval);
+    setTabs(propval);
   }
 
   /**
@@ -578,7 +588,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void useMarkup(bool propval)
   {
-    return setUseMarkup(propval);
+    setUseMarkup(propval);
   }
 
   /**
@@ -599,7 +609,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -630,7 +640,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void widthChars(int propval)
   {
-    return setWidthChars(propval);
+    setWidthChars(propval);
   }
 
   /**
@@ -649,7 +659,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void wrap(bool propval)
   {
-    return setWrap(propval);
+    setWrap(propval);
   }
 
   /**
@@ -682,7 +692,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void wrapMode(pango.types.WrapMode propval)
   {
-    return setWrapMode(propval);
+    setWrapMode(propval);
   }
 
   /**
@@ -707,7 +717,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void xalign(float propval)
   {
-    return setXalign(propval);
+    setXalign(propval);
   }
 
   /**
@@ -732,7 +742,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void yalign(float propval)
   {
-    return setYalign(propval);
+    setYalign(propval);
   }
 
   mixin AccessibleTextT!();
@@ -1754,5 +1764,295 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-cursor", closure, after);
+  }
+}
+
+class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T
+{
+
+  mixin AccessibleTextGidBuilderT!();
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of style attributes to apply to the text of the label.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(pango.attr_list.AttrList propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string, if the label does
+          not have enough room to display the entire string.
+          
+          Note that setting this property to a value other than
+          [pango.types.EllipsizeMode.None] has the side-effect that the label requests
+          only enough space to display the ellipsis "...". In particular, this
+          means that ellipsizing labels do not work well in notebook tabs, unless
+          the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
+          Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
+          and [gtk.label.Label.setWidthChars].
+      Returns: Builder instance for fluent chaining
+  */
+  T ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setProperty("ellipsize", propval);
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to the context menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("extra-menu", propval);
+  }
+
+  /**
+      Set `justify` property.
+      Params:
+        propval = The alignment of the lines in the text of the label, relative to each other.
+          
+          This does *not* affect the alignment of the label within its allocation.
+          See [gtk.label.Label.xalign] for that.
+      Returns: Builder instance for fluent chaining
+  */
+  T justify(gtk.types.Justification propval)
+  {
+    return setProperty("justify", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The contents of the label.
+          
+          If the string contains Pango markup (see `func@Pango.parse_markup`),
+          you will have to set the `property@Gtk.Label:use-markup` property to
+          true in order for the label to display the markup attributes. See also
+          [gtk.label.Label.setMarkup] for a convenience function that sets both
+          this property and the `property@Gtk.Label:use-markup` property at the
+          same time.
+          
+          If the string contains underlines acting as mnemonics, you will have to
+          set the `property@Gtk.Label:use-underline` property to true in order
+          for the label to display them.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `lines` property.
+      Params:
+        propval = The number of lines to which an ellipsized, wrapping label
+          should be limited.
+          
+          This property has no effect if the label is not wrapping or ellipsized.
+          Set this property to -1 if you don't want to limit the number of lines.
+      Returns: Builder instance for fluent chaining
+  */
+  T lines(int propval)
+  {
+    return setProperty("lines", propval);
+  }
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the label, in characters.
+          
+          If this property is set to -1, the width will be calculated automatically.
+          
+          See the section on [text layout](class.Label.html#text-layout) for details of how
+          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          determine the width of ellipsized and wrapped labels.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxWidthChars(int propval)
+  {
+    return setProperty("max-width-chars", propval);
+  }
+
+  /**
+      Set `mnemonicWidget` property.
+      Params:
+        propval = The widget to be activated when the labels mnemonic key is pressed.
+      Returns: Builder instance for fluent chaining
+  */
+  T mnemonicWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("mnemonic-widget", propval);
+  }
+
+  /**
+      Set `naturalWrapMode` property.
+      Params:
+        propval = Select the line wrapping for the natural size request.
+          
+          This only affects the natural size requested. For the actual wrapping used,
+          see the [gtk.label.Label.wrap] property.
+          
+          The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
+          [gtk.label.Label.wrap] property.
+      Returns: Builder instance for fluent chaining
+  */
+  T naturalWrapMode(gtk.types.NaturalWrapMode propval)
+  {
+    return setProperty("natural-wrap-mode", propval);
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = Whether the label text can be selected with the mouse.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectable(bool propval)
+  {
+    return setProperty("selectable", propval);
+  }
+
+  /**
+      Set `singleLineMode` property.
+      Params:
+        propval = Whether the label is in single line mode.
+          
+          In single line mode, the height of the label does not depend on the
+          actual text, it is always set to ascent + descent of the font. This
+          can be an advantage in situations where resizing the label because
+          of text changes would be distracting, e.g. in a statusbar.
+      Returns: Builder instance for fluent chaining
+  */
+  T singleLineMode(bool propval)
+  {
+    return setProperty("single-line-mode", propval);
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = Custom tabs for this label.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabs(pango.tab_array.TabArray propval)
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = true if the text of the label includes Pango markup.
+          
+          See `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = true if the text of the label indicates a mnemonic with an _
+          before the mnemonic character.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = The desired width of the label, in characters.
+          
+          If this property is set to -1, the width will be calculated automatically.
+          
+          See the section on [text layout](class.Label.html#text-layout) for details of how
+          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          determine the width of ellipsized and wrapped labels.
+      Returns: Builder instance for fluent chaining
+  */
+  T widthChars(int propval)
+  {
+    return setProperty("width-chars", propval);
+  }
+
+  /**
+      Set `wrap` property.
+      Params:
+        propval = true if the label text will wrap if it gets too wide.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrap(bool propval)
+  {
+    return setProperty("wrap", propval);
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Controls how the line wrapping is done.
+          
+          This only affects the formatting if line wrapping is on (see the
+          [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
+          which means wrap on word boundaries.
+          
+          For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
+          property.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapMode(pango.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the label text inside its size allocation.
+          
+          Compare this to [gtk.widget.Widget.halign], which determines how the
+          labels size allocation is positioned in the space available for the label.
+      Returns: Builder instance for fluent chaining
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the label text inside its size allocation.
+          
+          Compare this to [gtk.widget.Widget.valign], which determines how the
+          labels size allocation is positioned in the space available for the label.
+      Returns: Builder instance for fluent chaining
+  */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+}
+
+/// Fluent builder for [gtk.label.Label]
+final class LabelGidBuilder : LabelGidBuilderImpl!LabelGidBuilder
+{
+  Label build()
+  {
+    return new Label(cast(void*)createGObject(Label._getGType), No.Take);
   }
 }

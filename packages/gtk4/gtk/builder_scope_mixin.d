@@ -3,6 +3,7 @@ module gtk.builder_scope_mixin;
 
 public import gtk.builder_scope_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -28,5 +29,9 @@ public import gtk.types;
     as that class implements support for automatic lookups from C symbols.
 */
 template BuilderScopeT()
+{
+}
+
+template BuilderScopeGidBuilderT()
 {
 }

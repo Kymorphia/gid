@@ -13,6 +13,7 @@ import gio.input_stream;
 import gio.types;
 import glib.error;
 import glib.time_val;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -56,6 +57,15 @@ class PixbufAnimation : gobject.object.ObjectWrap
   override PixbufAnimation self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdkpixbuf.pixbuf_animation.PixbufAnimation]
+  Returns: New builder object
+  */
+  static PixbufAnimationGidBuilder builder()
+  {
+    return new PixbufAnimationGidBuilder;
   }
 
   /**
@@ -295,5 +305,18 @@ class PixbufAnimation : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_animation_is_static_image(cast(GdkPixbufAnimation*)this._cPtr);
     return _retval;
+  }
+}
+
+class PixbufAnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdkpixbuf.pixbuf_animation.PixbufAnimation]
+final class PixbufAnimationGidBuilder : PixbufAnimationGidBuilderImpl!PixbufAnimationGidBuilder
+{
+  PixbufAnimation build()
+  {
+    return new PixbufAnimation(cast(void*)createGObject(PixbufAnimation._getGType), No.Take);
   }
 }

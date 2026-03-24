@@ -4,6 +4,7 @@ module gtk.constraint_layout;
 import gid.gid;
 import gio.list_model;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -210,6 +211,15 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   override ConstraintLayout self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.constraint_layout.ConstraintLayout]
+  Returns: New builder object
+  */
+  static ConstraintLayoutGidBuilder builder()
+  {
+    return new ConstraintLayoutGidBuilder;
   }
 
   mixin BuildableT!();
@@ -453,5 +463,20 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   void removeGuide(gtk.constraint_guide.ConstraintGuide guide)
   {
     gtk_constraint_layout_remove_guide(cast(GtkConstraintLayout*)this._cPtr, guide ? cast(GtkConstraintGuide*)guide._cPtr(No.Dup) : null);
+  }
+}
+
+class ConstraintLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.constraint_layout.ConstraintLayout]
+final class ConstraintLayoutGidBuilder : ConstraintLayoutGidBuilderImpl!ConstraintLayoutGidBuilder
+{
+  ConstraintLayout build()
+  {
+    return new ConstraintLayout(cast(void*)createGObject(ConstraintLayout._getGType), Yes.Take);
   }
 }

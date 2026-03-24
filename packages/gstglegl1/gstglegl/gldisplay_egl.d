@@ -2,6 +2,7 @@
 module gstglegl.gldisplay_egl;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstgl.gldisplay;
 import gstgl.types;
@@ -39,6 +40,15 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   override GLDisplayEGL self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstglegl.gldisplay_egl.GLDisplayEGL]
+  Returns: New builder object
+  */
+  static GLDisplayEGLGidBuilder builder()
+  {
+    return new GLDisplayEGLGidBuilder;
   }
 
   /**
@@ -106,5 +116,18 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     auto _retval = gst_gl_display_egl_get_from_native(type, display);
     return _retval;
+  }
+}
+
+class GLDisplayEGLGidBuilderImpl(T) : gstgl.gldisplay.GLDisplayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstglegl.gldisplay_egl.GLDisplayEGL]
+final class GLDisplayEGLGidBuilder : GLDisplayEGLGidBuilderImpl!GLDisplayEGLGidBuilder
+{
+  GLDisplayEGL build()
+  {
+    return new GLDisplayEGL(cast(void*)createGObject(GLDisplayEGL._getGType), Yes.Take);
   }
 }

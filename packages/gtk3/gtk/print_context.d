@@ -3,6 +3,7 @@ module gtk.print_context;
 
 import cairo.context;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -107,6 +108,15 @@ class PrintContext : gobject.object.ObjectWrap
   override PrintContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.print_context.PrintContext]
+  Returns: New builder object
+  */
+  static PrintContextGidBuilder builder()
+  {
+    return new PrintContextGidBuilder;
   }
 
   /**
@@ -253,5 +263,18 @@ class PrintContext : gobject.object.ObjectWrap
   void setCairoContext(cairo.context.Context cr, double dpiX, double dpiY)
   {
     gtk_print_context_set_cairo_context(cast(GtkPrintContext*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, dpiX, dpiY);
+  }
+}
+
+class PrintContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.print_context.PrintContext]
+final class PrintContextGidBuilder : PrintContextGidBuilderImpl!PrintContextGidBuilder
+{
+  PrintContext build()
+  {
+    return new PrintContext(cast(void*)createGObject(PrintContext._getGType), No.Take);
   }
 }

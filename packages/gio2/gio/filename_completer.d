@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -39,6 +40,15 @@ class FilenameCompleter : gobject.object.ObjectWrap
   override FilenameCompleter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.filename_completer.FilenameCompleter]
+  Returns: New builder object
+  */
+  static FilenameCompleterGidBuilder builder()
+  {
+    return new FilenameCompleterGidBuilder;
   }
 
   /**
@@ -145,5 +155,18 @@ class FilenameCompleter : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("got-completion-data", closure, after);
+  }
+}
+
+class FilenameCompleterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.filename_completer.FilenameCompleter]
+final class FilenameCompleterGidBuilder : FilenameCompleterGidBuilderImpl!FilenameCompleterGidBuilder
+{
+  FilenameCompleter build()
+  {
+    return new FilenameCompleter(cast(void*)createGObject(FilenameCompleter._getGType), Yes.Take);
   }
 }

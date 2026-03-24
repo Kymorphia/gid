@@ -4,6 +4,7 @@ module gtk.editable;
 public import gtk.editable_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 import gobject.value;
@@ -642,4 +643,58 @@ interface Editable
       Returns: Signal ID
   */
   ulong connectInsertText(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface EditableGidBuilderImpl(T)
+{
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the entry contents can be edited.
+      Returns: Builder instance for fluent chaining
+  */
+  T editable(bool propval);
+
+  /**
+      Set `enableUndo` property.
+      Params:
+        propval = If undo/redo should be enabled for the editable.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableUndo(bool propval);
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the entry, in characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxWidthChars(int propval);
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The contents of the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval);
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = Number of characters to leave space for in the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T widthChars(int propval);
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment, from 0 (left) to 1 (right).
+          
+          Reversed for RTL layouts.
+      Returns: Builder instance for fluent chaining
+  */
+  T xalign(float propval);
 }

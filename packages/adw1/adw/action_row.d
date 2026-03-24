@@ -7,6 +7,7 @@ import adw.preferences_row;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -88,6 +89,15 @@ class ActionRow : adw.preferences_row.PreferencesRow
   }
 
   /**
+  Get builder for [adw.action_row.ActionRow]
+  Returns: New builder object
+  */
+  static ActionRowGidBuilder builder()
+  {
+    return new ActionRowGidBuilder;
+  }
+
+  /**
       Get `activatableWidget` property.
       Returns: The widget to activate when the row is activated.
         
@@ -119,7 +129,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   @property void activatableWidget(gtk.widget.Widget propval)
   {
-    return setActivatableWidget(propval);
+    setActivatableWidget(propval);
   }
 
   /**
@@ -142,7 +152,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -167,7 +177,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   @property void subtitle(string propval)
   {
-    return setSubtitle(propval);
+    setSubtitle(propval);
   }
 
   /**
@@ -192,7 +202,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   @property void subtitleLines(int propval)
   {
-    return setSubtitleLines(propval);
+    setSubtitleLines(propval);
   }
 
   /**
@@ -215,7 +225,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   @property void subtitleSelectable(bool propval)
   {
-    return setSubtitleSelectable(propval);
+    setSubtitleSelectable(propval);
   }
 
   /**
@@ -238,7 +248,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   @property void titleLines(int propval)
   {
-    return setTitleLines(propval);
+    setTitleLines(propval);
   }
 
   /**
@@ -493,5 +503,105 @@ class ActionRow : adw.preferences_row.PreferencesRow
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activated", closure, after);
+  }
+}
+
+class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `activatableWidget` property.
+      Params:
+        propval = The widget to activate when the row is activated.
+          
+          The row can be activated either by clicking on it, calling
+          [adw.action_row.ActionRow.activate], or via mnemonics in the title.
+          See the `property@PreferencesRow:use-underline` property to enable
+          mnemonics.
+          
+          The target widget will be activated by emitting the
+          `signal@Gtk.Widget::mnemonic-activate` signal on it.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatableWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("activatable-widget", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this row.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle for this row.
+          
+          The subtitle is interpreted as Pango markup unless
+          `property@PreferencesRow:use-markup` is set to `FALSE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitle(string propval)
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `subtitleLines` property.
+      Params:
+        propval = The number of lines at the end of which the subtitle label will be
+          ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitleLines(int propval)
+  {
+    return setProperty("subtitle-lines", propval);
+  }
+
+  /**
+      Set `subtitleSelectable` property.
+      Params:
+        propval = Whether the user can copy the subtitle from the label.
+          
+          See also [gtk.label.Label.selectable].
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitleSelectable(bool propval)
+  {
+    return setProperty("subtitle-selectable", propval);
+  }
+
+  /**
+      Set `titleLines` property.
+      Params:
+        propval = The number of lines at the end of which the title label will be ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+      Returns: Builder instance for fluent chaining
+  */
+  T titleLines(int propval)
+  {
+    return setProperty("title-lines", propval);
+  }
+}
+
+/// Fluent builder for [adw.action_row.ActionRow]
+final class ActionRowGidBuilder : ActionRowGidBuilderImpl!ActionRowGidBuilder
+{
+  ActionRow build()
+  {
+    return new ActionRow(cast(void*)createGObject(ActionRow._getGType), No.Take);
   }
 }

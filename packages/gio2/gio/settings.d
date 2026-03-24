@@ -11,6 +11,7 @@ import gio.types;
 import glib.types;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -333,6 +334,24 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.settings.Settings]
+  Returns: New builder object
+  */
+  static SettingsGidBuilder builder()
+  {
+    return new SettingsGidBuilder;
+  }
+
+  /**
+      Get `backend` property.
+      Returns: The name of the context that the settings are stored in.
+  */
+  @property gio.settings_backend.SettingsBackend backend()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.settings_backend.SettingsBackend)("backend");
+  }
+
+  /**
       Get `delayApply` property.
       Returns: Whether the #GSettings object is in 'delay-apply' mode. See
         [gio.settings.Settings.delay] for details.
@@ -350,6 +369,60 @@ class Settings : gobject.object.ObjectWrap
   @property bool hasUnapplied()
   {
     return getHasUnapplied();
+  }
+
+  /**
+      Get `path` property.
+      Returns: The path within the backend where the settings are stored.
+  */
+  @property string path()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("path");
+  }
+
+  /**
+      Get `schema` property.
+      Returns: The name of the schema that describes the types of keys
+        for this #GSettings object.
+        
+        The type of this property is *not* #GSettingsSchema.
+        #GSettingsSchema has only existed since version 2.32 and
+        unfortunately this name was used in previous versions to refer to
+        the schema ID rather than the schema itself.  Take care to use the
+        'settings-schema' property if you wish to pass in a
+        #GSettingsSchema.
+  
+      Deprecated: Use the 'schema-id' property instead.  In a future
+        version, this property may instead refer to a #GSettingsSchema.
+  */
+  @property string schema()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("schema");
+  }
+
+  /**
+      Get `schemaId` property.
+      Returns: The name of the schema that describes the types of keys
+        for this #GSettings object.
+  */
+  @property string schemaId()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("schema-id");
+  }
+
+  /**
+      Get `settingsSchema` property.
+      Returns: The #GSettingsSchema describing the types of keys for this
+        #GSettings object.
+        
+        Ideally, this property would be called 'schema'.  #GSettingsSchema
+        has only existed since version 2.32, however, and before then the
+        'schema' property was used to refer to the ID of the schema rather
+        than the schema itself.  Take care.
+  */
+  @property gio.settings_schema.SettingsSchema settingsSchema()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.settings_schema.SettingsSchema)("settings-schema");
   }
 
   /**
@@ -1747,5 +1820,91 @@ class Settings : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("writable-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `backend` property.
+      Params:
+        propval = The name of the context that the settings are stored in.
+      Returns: Builder instance for fluent chaining
+  */
+  T backend(gio.settings_backend.SettingsBackend propval)
+  {
+    return setProperty("backend", propval);
+  }
+
+  /**
+      Set `path` property.
+      Params:
+        propval = The path within the backend where the settings are stored.
+      Returns: Builder instance for fluent chaining
+  */
+  T path(string propval)
+  {
+    return setProperty("path", propval);
+  }
+
+  /**
+      Set `schema` property.
+      Params:
+        propval = The name of the schema that describes the types of keys
+          for this #GSettings object.
+          
+          The type of this property is *not* #GSettingsSchema.
+          #GSettingsSchema has only existed since version 2.32 and
+          unfortunately this name was used in previous versions to refer to
+          the schema ID rather than the schema itself.  Take care to use the
+          'settings-schema' property if you wish to pass in a
+          #GSettingsSchema.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use the 'schema-id' property instead.  In a future
+        version, this property may instead refer to a #GSettingsSchema.
+  */
+  T schema(string propval)
+  {
+    return setProperty("schema", propval);
+  }
+
+  /**
+      Set `schemaId` property.
+      Params:
+        propval = The name of the schema that describes the types of keys
+          for this #GSettings object.
+      Returns: Builder instance for fluent chaining
+  */
+  T schemaId(string propval)
+  {
+    return setProperty("schema-id", propval);
+  }
+
+  /**
+      Set `settingsSchema` property.
+      Params:
+        propval = The #GSettingsSchema describing the types of keys for this
+          #GSettings object.
+          
+          Ideally, this property would be called 'schema'.  #GSettingsSchema
+          has only existed since version 2.32, however, and before then the
+          'schema' property was used to refer to the ID of the schema rather
+          than the schema itself.  Take care.
+      Returns: Builder instance for fluent chaining
+  */
+  T settingsSchema(gio.settings_schema.SettingsSchema propval)
+  {
+    return setProperty("settings-schema", propval);
+  }
+}
+
+/// Fluent builder for [gio.settings.Settings]
+final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
+{
+  Settings build()
+  {
+    return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);
   }
 }

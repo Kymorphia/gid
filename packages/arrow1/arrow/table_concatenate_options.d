@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
   override TableConcatenateOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.table_concatenate_options.TableConcatenateOptions]
+  Returns: New builder object
+  */
+  static TableConcatenateOptionsGidBuilder builder()
+  {
+    return new TableConcatenateOptionsGidBuilder;
   }
 
   /**
@@ -102,5 +112,51 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
     GArrowTableConcatenateOptions* _cretval;
     _cretval = garrow_table_concatenate_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class TableConcatenateOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `promoteNullability` property.
+      Params:
+        propval = If true, a #GArrowField of #GArrowNullDataType can be unified
+          with a #GArrowField of another type. The unified field will be of
+          the other type and become nullable. Nullability will be promoted
+          to the looser option (nullable if one is not nullable).
+      Returns: Builder instance for fluent chaining
+  */
+  T promoteNullability(bool propval)
+  {
+    return setProperty("promote-nullability", propval);
+  }
+
+  /**
+      Set `unifySchemas` property.
+      Params:
+        propval = If true, the schemas of the tables will be first unified with
+          fields of the same name being merged, according to
+          #GArrowTableConcatenateOptions:promote-nullability, then each
+          table will be promoted to the unified schema before being
+          concatenated.
+          
+          Otherwise, all tables should have the same schema. Each column in
+          the output table is the result of concatenating the corresponding
+          columns in all input tables.
+      Returns: Builder instance for fluent chaining
+  */
+  T unifySchemas(bool propval)
+  {
+    return setProperty("unify-schemas", propval);
+  }
+}
+
+/// Fluent builder for [arrow.table_concatenate_options.TableConcatenateOptions]
+final class TableConcatenateOptionsGidBuilder : TableConcatenateOptionsGidBuilderImpl!TableConcatenateOptionsGidBuilder
+{
+  TableConcatenateOptions build()
+  {
+    return new TableConcatenateOptions(cast(void*)createGObject(TableConcatenateOptions._getGType), Yes.Take);
   }
 }

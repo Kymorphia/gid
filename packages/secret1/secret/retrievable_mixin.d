@@ -7,6 +7,7 @@ public import gio.async_result;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 public import secret.c.functions;
 public import secret.c.types;
@@ -217,5 +218,44 @@ template RetrievableT()
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+template RetrievableGidBuilderT()
+{
+
+  /**
+      Set `created` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+          item was created.
+      Returns: Builder instance for fluent chaining
+  */
+  T created(ulong propval)
+  {
+    return setProperty("created", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The human readable label for the item.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `modified` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+          item was last modified.
+      Returns: Builder instance for fluent chaining
+  */
+  T modified(ulong propval)
+  {
+    return setProperty("modified", propval);
   }
 }

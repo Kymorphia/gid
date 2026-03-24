@@ -11,6 +11,7 @@ import gdk.visual;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -55,6 +56,15 @@ class Screen : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gdk.screen.Screen]
+  Returns: New builder object
+  */
+  static ScreenGidBuilder builder()
+  {
+    return new ScreenGidBuilder;
+  }
+
   /** */
   @property void* fontOptions()
   {
@@ -76,7 +86,7 @@ class Screen : gobject.object.ObjectWrap
   /** */
   @property void resolution(double propval)
   {
-    return setResolution(propval);
+    setResolution(propval);
   }
 
   /**
@@ -800,5 +810,30 @@ class Screen : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("size-changed", closure, after);
+  }
+}
+
+class ScreenGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T fontOptions(void* propval)
+  {
+    return setProperty("font-options", propval);
+  }
+
+  /** */
+  T resolution(double propval)
+  {
+    return setProperty("resolution", propval);
+  }
+}
+
+/// Fluent builder for [gdk.screen.Screen]
+final class ScreenGidBuilder : ScreenGidBuilderImpl!ScreenGidBuilder
+{
+  Screen build()
+  {
+    return new Screen(cast(void*)createGObject(Screen._getGType), No.Take);
   }
 }

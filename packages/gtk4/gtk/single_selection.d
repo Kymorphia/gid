@@ -4,6 +4,7 @@ module gtk.single_selection;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -52,6 +53,15 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 
   /**
+  Get builder for [gtk.single_selection.SingleSelection]
+  Returns: New builder object
+  */
+  static SingleSelectionGidBuilder builder()
+  {
+    return new SingleSelectionGidBuilder;
+  }
+
+  /**
       Get `autoselect` property.
       Returns: If the selection will always select an item.
   */
@@ -67,7 +77,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   @property void autoselect(bool propval)
   {
-    return setAutoselect(propval);
+    setAutoselect(propval);
   }
 
   /**
@@ -86,7 +96,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   @property void canUnselect(bool propval)
   {
-    return setCanUnselect(propval);
+    setCanUnselect(propval);
   }
 
   /**
@@ -114,7 +124,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -142,7 +152,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   @property void selected(uint propval)
   {
-    return setSelected(propval);
+    setSelected(propval);
   }
 
   /**
@@ -295,5 +305,66 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   void setSelected(uint position)
   {
     gtk_single_selection_set_selected(cast(GtkSingleSelection*)this._cPtr, position);
+  }
+}
+
+class SingleSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+  mixin SelectionModelGidBuilderT!();
+
+  /**
+      Set `autoselect` property.
+      Params:
+        propval = If the selection will always select an item.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoselect(bool propval)
+  {
+    return setProperty("autoselect", propval);
+  }
+
+  /**
+      Set `canUnselect` property.
+      Params:
+        propval = If unselecting the selected item is allowed.
+      Returns: Builder instance for fluent chaining
+  */
+  T canUnselect(bool propval)
+  {
+    return setProperty("can-unselect", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being managed.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `selected` property.
+      Params:
+        propval = Position of the selected item.
+      Returns: Builder instance for fluent chaining
+  */
+  T selected(uint propval)
+  {
+    return setProperty("selected", propval);
+  }
+}
+
+/// Fluent builder for [gtk.single_selection.SingleSelection]
+final class SingleSelectionGidBuilder : SingleSelectionGidBuilderImpl!SingleSelectionGidBuilder
+{
+  SingleSelection build()
+  {
+    return new SingleSelection(cast(void*)createGObject(SingleSelection._getGType), Yes.Take);
   }
 }

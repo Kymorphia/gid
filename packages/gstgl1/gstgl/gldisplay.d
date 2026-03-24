@@ -6,6 +6,7 @@ import glib.error;
 import glib.thread;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.object;
 import gstgl.c.functions;
@@ -64,6 +65,15 @@ class GLDisplay : gst.object.ObjectWrap
   override GLDisplay self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.gldisplay.GLDisplay]
+  Returns: New builder object
+  */
+  static GLDisplayGidBuilder builder()
+  {
+    return new GLDisplayGidBuilder;
   }
 
   /** */
@@ -337,5 +347,18 @@ class GLDisplay : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-context", closure, after);
+  }
+}
+
+class GLDisplayGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.gldisplay.GLDisplay]
+final class GLDisplayGidBuilder : GLDisplayGidBuilderImpl!GLDisplayGidBuilder
+{
+  GLDisplay build()
+  {
+    return new GLDisplay(cast(void*)createGObject(GLDisplay._getGType), Yes.Take);
   }
 }

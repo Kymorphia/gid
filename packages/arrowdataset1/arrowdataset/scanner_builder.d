@@ -10,6 +10,7 @@ import arrowdataset.scanner;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class ScannerBuilder : gobject.object.ObjectWrap
   override ScannerBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowdataset.scanner_builder.ScannerBuilder]
+  Returns: New builder object
+  */
+  static ScannerBuilderGidBuilder builder()
+  {
+    return new ScannerBuilderGidBuilder;
   }
 
   /** */
@@ -82,5 +92,24 @@ class ScannerBuilder : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ScannerBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T scannerBuilder(void* propval)
+  {
+    return setProperty("scanner-builder", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.scanner_builder.ScannerBuilder]
+final class ScannerBuilderGidBuilder : ScannerBuilderGidBuilderImpl!ScannerBuilderGidBuilder
+{
+  ScannerBuilder build()
+  {
+    return new ScannerBuilder(cast(void*)createGObject(ScannerBuilder._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 
@@ -39,6 +40,37 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   override PropertyAnimationTarget self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [adw.property_animation_target.PropertyAnimationTarget]
+  Returns: New builder object
+  */
+  static PropertyAnimationTargetGidBuilder builder()
+  {
+    return new PropertyAnimationTargetGidBuilder;
+  }
+
+  /**
+      Get `object` property.
+      Returns: The object whose property will be animated.
+        
+        The [adw.property_animation_target.PropertyAnimationTarget] instance does not hold a strong reference
+        on the object; make sure the object is kept alive throughout the target's
+        lifetime.
+  */
+  @property gobject.object.ObjectWrap object()
+  {
+    return getObject();
+  }
+
+  /**
+      Get `pspec` property.
+      Returns: The [gobject.param_spec.ParamSpec] of the property to be animated.
+  */
+  @property gobject.param_spec.ParamSpec pspec()
+  {
+    return getPspec();
   }
 
   /**
@@ -101,5 +133,44 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
     _cretval = adw_property_animation_target_get_pspec(cast(AdwPropertyAnimationTarget*)this._cPtr);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class PropertyAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationTargetGidBuilderImpl!T
+{
+
+  /**
+      Set `object` property.
+      Params:
+        propval = The object whose property will be animated.
+          
+          The [adw.property_animation_target.PropertyAnimationTarget] instance does not hold a strong reference
+          on the object; make sure the object is kept alive throughout the target's
+          lifetime.
+      Returns: Builder instance for fluent chaining
+  */
+  T object(gobject.object.ObjectWrap propval)
+  {
+    return setProperty("object", propval);
+  }
+
+  /**
+      Set `pspec` property.
+      Params:
+        propval = The [gobject.param_spec.ParamSpec] of the property to be animated.
+      Returns: Builder instance for fluent chaining
+  */
+  T pspec(gobject.param_spec.ParamSpec propval)
+  {
+    return setProperty("pspec", propval);
+  }
+}
+
+/// Fluent builder for [adw.property_animation_target.PropertyAnimationTarget]
+final class PropertyAnimationTargetGidBuilder : PropertyAnimationTargetGidBuilderImpl!PropertyAnimationTargetGidBuilder
+{
+  PropertyAnimationTarget build()
+  {
+    return new PropertyAnimationTarget(cast(void*)createGObject(PropertyAnimationTarget._getGType), Yes.Take);
   }
 }

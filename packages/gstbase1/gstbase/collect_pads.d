@@ -2,6 +2,7 @@
 module gstbase.collect_pads;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.event;
@@ -80,6 +81,15 @@ class CollectPads : gst.object.ObjectWrap
   override CollectPads self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstbase.collect_pads.CollectPads]
+  Returns: New builder object
+  */
+  static CollectPadsGidBuilder builder()
+  {
+    return new CollectPadsGidBuilder;
   }
 
   /**
@@ -566,5 +576,18 @@ class CollectPads : gst.object.ObjectWrap
     _cretval = gst_collect_pads_take_buffer(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, size);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class CollectPadsGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstbase.collect_pads.CollectPads]
+final class CollectPadsGidBuilder : CollectPadsGidBuilderImpl!CollectPadsGidBuilder
+{
+  CollectPads build()
+  {
+    return new CollectPads(cast(void*)createGObject(CollectPads._getGType), Yes.Take);
   }
 }

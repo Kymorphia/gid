@@ -9,6 +9,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import glib.source;
+import gobject.gid_builder;
 
 /**
     [gio.pollable_input_stream.PollableInputStream] is implemented by [gio.input_stream.InputStream]s that
@@ -106,4 +107,8 @@ interface PollableInputStream
       Throws: [ErrorWrap]
   */
   ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
+}
+
+interface PollableInputStreamGidBuilderImpl(T)
+{
 }

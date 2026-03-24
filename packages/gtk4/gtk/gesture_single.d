@@ -3,6 +3,7 @@ module gtk.gesture_single;
 
 import gdk.event_sequence;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture;
@@ -53,6 +54,15 @@ class GestureSingle : gtk.gesture.Gesture
   }
 
   /**
+  Get builder for [gtk.gesture_single.GestureSingle]
+  Returns: New builder object
+  */
+  static GestureSingleGidBuilder builder()
+  {
+    return new GestureSingleGidBuilder;
+  }
+
+  /**
       Get `button` property.
       Returns: Mouse button number to listen to, or 0 to listen for any button.
   */
@@ -68,7 +78,7 @@ class GestureSingle : gtk.gesture.Gesture
   */
   @property void button(uint propval)
   {
-    return setButton(propval);
+    setButton(propval);
   }
 
   /**
@@ -91,7 +101,7 @@ class GestureSingle : gtk.gesture.Gesture
   */
   @property void exclusive(bool propval)
   {
-    return setExclusive(propval);
+    setExclusive(propval);
   }
 
   /**
@@ -110,7 +120,7 @@ class GestureSingle : gtk.gesture.Gesture
   */
   @property void touchOnly(bool propval)
   {
-    return setTouchOnly(propval);
+    setTouchOnly(propval);
   }
 
   /**
@@ -220,5 +230,53 @@ class GestureSingle : gtk.gesture.Gesture
   void setTouchOnly(bool touchOnly)
   {
     gtk_gesture_single_set_touch_only(cast(GtkGestureSingle*)this._cPtr, touchOnly);
+  }
+}
+
+class GestureSingleGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
+{
+
+  /**
+      Set `button` property.
+      Params:
+        propval = Mouse button number to listen to, or 0 to listen for any button.
+      Returns: Builder instance for fluent chaining
+  */
+  T button(uint propval)
+  {
+    return setProperty("button", propval);
+  }
+
+  /**
+      Set `exclusive` property.
+      Params:
+        propval = Whether the gesture is exclusive.
+          
+          Exclusive gestures only listen to pointer and pointer emulated events.
+      Returns: Builder instance for fluent chaining
+  */
+  T exclusive(bool propval)
+  {
+    return setProperty("exclusive", propval);
+  }
+
+  /**
+      Set `touchOnly` property.
+      Params:
+        propval = Whether the gesture handles only touch events.
+      Returns: Builder instance for fluent chaining
+  */
+  T touchOnly(bool propval)
+  {
+    return setProperty("touch-only", propval);
+  }
+}
+
+/// Fluent builder for [gtk.gesture_single.GestureSingle]
+final class GestureSingleGidBuilder : GestureSingleGidBuilderImpl!GestureSingleGidBuilder
+{
+  GestureSingle build()
+  {
+    return new GestureSingle(cast(void*)createGObject(GestureSingle._getGType), No.Take);
   }
 }

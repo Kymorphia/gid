@@ -5,6 +5,7 @@ import gid.gid;
 import gio.icon;
 import gobject.closure;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accel_group;
 import gtk.action_group;
@@ -97,6 +98,15 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
+  Get builder for [gtk.action.Action]
+  Returns: New builder object
+  */
+  static ActionGidBuilder builder()
+  {
+    return new ActionGidBuilder;
+  }
+
+  /**
       Get `actionGroup` property.
       Returns: The GtkActionGroup this GtkAction is associated with, or NULL
         (for internal use).
@@ -153,7 +163,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void alwaysShowImage(bool propval)
   {
-    return setAlwaysShowImage(propval);
+    setAlwaysShowImage(propval);
   }
 
   /**
@@ -188,7 +198,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void gicon(gio.icon.Icon propval)
   {
-    return setGicon(propval);
+    setGicon(propval);
   }
 
   /**
@@ -250,7 +260,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -277,7 +287,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void isImportant(bool propval)
   {
-    return setIsImportant(propval);
+    setIsImportant(propval);
   }
 
   /**
@@ -310,7 +320,18 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: A unique name for the action.
+  
+      Deprecated: Use #GAction:name instead
+  */
+  @property string name()
+  {
+    return getName();
   }
 
   /**
@@ -335,7 +356,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void sensitive(bool propval)
   {
-    return setSensitive(propval);
+    setSensitive(propval);
   }
 
   /**
@@ -366,7 +387,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void shortLabel(string propval)
   {
-    return setShortLabel(propval);
+    setShortLabel(propval);
   }
 
   /**
@@ -397,7 +418,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void stockId(string propval)
   {
-    return setStockId(propval);
+    setStockId(propval);
   }
 
   /**
@@ -420,7 +441,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void tooltip(string propval)
   {
-    return setTooltip(propval);
+    setTooltip(propval);
   }
 
   /**
@@ -445,7 +466,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   /**
@@ -470,7 +491,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void visibleHorizontal(bool propval)
   {
-    return setVisibleHorizontal(propval);
+    setVisibleHorizontal(propval);
   }
 
   /**
@@ -522,7 +543,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void visibleVertical(bool propval)
   {
-    return setVisibleVertical(propval);
+    setVisibleVertical(propval);
   }
 
   mixin BuildableT!();
@@ -1231,5 +1252,270 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `actionGroup` property.
+      Params:
+        propval = The GtkActionGroup this GtkAction is associated with, or NULL
+          (for internal use).
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Lookup the #GAction using [gio.action_map.ActionMap.lookupAction]
+        instead
+  */
+  T actionGroup(gtk.action_group.ActionGroup propval)
+  {
+    return setProperty("action-group", propval);
+  }
+
+  /**
+      Set `alwaysShowImage` property.
+      Params:
+        propval = If true, the action's menu item proxies will ignore the #GtkSettings:gtk-menu-images
+          setting and always show their image, if available.
+          
+          Use this property if the menu item would be useless or hard to use
+          without their image.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T alwaysShowImage(bool propval)
+  {
+    return setProperty("always-show-image", propval);
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The #GIcon displayed in the #GtkAction.
+          
+          Note that the stock icon is preferred, if the #GtkAction:stock-id
+          property holds the id of an existing stock icon.
+          
+          This is an appearance property and thus only applies if
+          #GtkActivatable:use-action-appearance is true.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use the "icon" attribute on a #GMenuItem instead
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /**
+      Set `hideIfEmpty` property.
+      Params:
+        propval = When TRUE, empty menu proxies for this action are hidden.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T hideIfEmpty(bool propval)
+  {
+    return setProperty("hide-if-empty", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon from the icon theme.
+          
+          Note that the stock icon is preferred, if the #GtkAction:stock-id
+          property holds the id of an existing stock icon, and the #GIcon is
+          preferred if the #GtkAction:gicon property is set.
+          
+          This is an appearance property and thus only applies if
+          #GtkActivatable:use-action-appearance is true.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use the "icon" attribute on a #GMenuItem instead
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `isImportant` property.
+      Params:
+        propval = Whether the action is considered important. When TRUE, toolitem
+          proxies for this action show text in GTK_TOOLBAR_BOTH_HORIZ mode.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T isImportant(bool propval)
+  {
+    return setProperty("is-important", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The label used for menu items and buttons that activate
+          this action. If the label is null, GTK+ uses the stock
+          label specified via the stock-id property.
+          
+          This is an appearance property and thus only applies if
+          #GtkActivatable:use-action-appearance is true.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use the "label" attribute on #GMenuItem instead
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = A unique name for the action.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GAction:name instead
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `sensitive` property.
+      Params:
+        propval = Whether the action is enabled.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GAction:enabled and #GSimpleAction:enabled
+        instead
+  */
+  T sensitive(bool propval)
+  {
+    return setProperty("sensitive", propval);
+  }
+
+  /**
+      Set `shortLabel` property.
+      Params:
+        propval = A shorter label that may be used on toolbar buttons.
+          
+          This is an appearance property and thus only applies if
+          #GtkActivatable:use-action-appearance is true.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T shortLabel(string propval)
+  {
+    return setProperty("short-label", propval);
+  }
+
+  /**
+      Set `stockId` property.
+      Params:
+        propval = The stock icon displayed in widgets representing this action.
+          
+          This is an appearance property and thus only applies if
+          #GtkActivatable:use-action-appearance is true.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T stockId(string propval)
+  {
+    return setProperty("stock-id", propval);
+  }
+
+  /**
+      Set `tooltip` property.
+      Params:
+        propval = A tooltip for this action.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setTooltipText] instead
+  */
+  T tooltip(string propval)
+  {
+    return setProperty("tooltip", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether the action is visible.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+
+  /**
+      Set `visibleHorizontal` property.
+      Params:
+        propval = Whether the toolbar item is visible when the toolbar is in a horizontal orientation.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T visibleHorizontal(bool propval)
+  {
+    return setProperty("visible-horizontal", propval);
+  }
+
+  /**
+      Set `visibleOverflown` property.
+      Params:
+        propval = When true, toolitem proxies for this action are represented in the
+          toolbar overflow menu.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T visibleOverflown(bool propval)
+  {
+    return setProperty("visible-overflown", propval);
+  }
+
+  /**
+      Set `visibleVertical` property.
+      Params:
+        propval = Whether the toolbar item is visible when the toolbar is in a vertical orientation.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There is no corresponding replacement when using
+        #GAction
+  */
+  T visibleVertical(bool propval)
+  {
+    return setProperty("visible-vertical", propval);
+  }
+}
+
+/// Fluent builder for [gtk.action.Action]
+final class ActionGidBuilder : ActionGidBuilderImpl!ActionGidBuilder
+{
+  Action build()
+  {
+    return new Action(cast(void*)createGObject(Action._getGType), Yes.Take);
   }
 }

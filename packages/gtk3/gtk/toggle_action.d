@@ -3,6 +3,7 @@ module gtk.toggle_action;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.action;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -43,6 +44,15 @@ class ToggleAction : gtk.action.Action
   }
 
   /**
+  Get builder for [gtk.toggle_action.ToggleAction]
+  Returns: New builder object
+  */
+  static ToggleActionGidBuilder builder()
+  {
+    return new ToggleActionGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: Whether the toggle action should be active.
   */
@@ -58,7 +68,7 @@ class ToggleAction : gtk.action.Action
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -83,7 +93,7 @@ class ToggleAction : gtk.action.Action
   */
   @property void drawAsRadio(bool propval)
   {
-    return setDrawAsRadio(propval);
+    setDrawAsRadio(propval);
   }
 
   /**
@@ -200,5 +210,44 @@ class ToggleAction : gtk.action.Action
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+class ToggleActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T
+{
+
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the toggle action should be active.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `drawAsRadio` property.
+      Params:
+        propval = Whether the proxies for this action look like radio action proxies.
+          
+          This is an appearance property and thus only applies if
+          #GtkActivatable:use-action-appearance is true.
+      Returns: Builder instance for fluent chaining
+  */
+  T drawAsRadio(bool propval)
+  {
+    return setProperty("draw-as-radio", propval);
+  }
+}
+
+/// Fluent builder for [gtk.toggle_action.ToggleAction]
+final class ToggleActionGidBuilder : ToggleActionGidBuilderImpl!ToggleActionGidBuilder
+{
+  ToggleAction build()
+  {
+    return new ToggleAction(cast(void*)createGObject(ToggleAction._getGType), Yes.Take);
   }
 }

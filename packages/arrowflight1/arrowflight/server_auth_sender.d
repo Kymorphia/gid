@@ -7,6 +7,7 @@ import arrowflight.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class ServerAuthSender : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrowflight.server_auth_sender.ServerAuthSender]
+  Returns: New builder object
+  */
+  static ServerAuthSenderGidBuilder builder()
+  {
+    return new ServerAuthSenderGidBuilder;
+  }
+
+  /**
       Writes a message to the client.
   
       Params:
@@ -54,5 +64,24 @@ class ServerAuthSender : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ServerAuthSenderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T sender(void* propval)
+  {
+    return setProperty("sender", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.server_auth_sender.ServerAuthSender]
+final class ServerAuthSenderGidBuilder : ServerAuthSenderGidBuilderImpl!ServerAuthSenderGidBuilder
+{
+  ServerAuthSender build()
+  {
+    return new ServerAuthSender(cast(void*)createGObject(ServerAuthSender._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module webkit.geolocation_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -63,5 +64,29 @@ class GeolocationPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
     return this;
   }
 
+  /**
+  Get builder for [webkit.geolocation_permission_request.GeolocationPermissionRequest]
+  Returns: New builder object
+  */
+  static GeolocationPermissionRequestGidBuilder builder()
+  {
+    return new GeolocationPermissionRequestGidBuilder;
+  }
+
   mixin PermissionRequestT!();
+}
+
+class GeolocationPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.geolocation_permission_request.GeolocationPermissionRequest]
+final class GeolocationPermissionRequestGidBuilder : GeolocationPermissionRequestGidBuilderImpl!GeolocationPermissionRequestGidBuilder
+{
+  GeolocationPermissionRequest build()
+  {
+    return new GeolocationPermissionRequest(cast(void*)createGObject(GeolocationPermissionRequest._getGType), No.Take);
+  }
 }

@@ -2,6 +2,7 @@
 module gtk.activate_action;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,6 +41,15 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
+  Get builder for [gtk.activate_action.ActivateAction]
+  Returns: New builder object
+  */
+  static ActivateActionGidBuilder builder()
+  {
+    return new ActivateActionGidBuilder;
+  }
+
+  /**
       Gets the activate action.
       
       This is an action that calls [gtk.widget.Widget.activate]
@@ -52,5 +62,18 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
     _cretval = gtk_activate_action_get();
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.activate_action.ActivateAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class ActivateActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.activate_action.ActivateAction]
+final class ActivateActionGidBuilder : ActivateActionGidBuilderImpl!ActivateActionGidBuilder
+{
+  ActivateAction build()
+  {
+    return new ActivateAction(cast(void*)createGObject(ActivateAction._getGType), No.Take);
   }
 }

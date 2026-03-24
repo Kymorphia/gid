@@ -8,6 +8,7 @@ import adw.view_stack_page;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.selection_model;
 import gtk.selection_model_mixin;
@@ -46,6 +47,15 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
+  Get builder for [adw.view_stack_pages.ViewStackPages]
+  Returns: New builder object
+  */
+  static ViewStackPagesGidBuilder builder()
+  {
+    return new ViewStackPagesGidBuilder;
+  }
+
+  /**
       Get `selectedPage` property.
       Returns: The selected `class@ViewStackPage` within the `class@ViewStackPages`.
         
@@ -71,7 +81,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   @property void selectedPage(adw.view_stack_page.ViewStackPage propval)
   {
-    return setSelectedPage(propval);
+    setSelectedPage(propval);
   }
 
   mixin ListModelT!();
@@ -104,5 +114,37 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   void setSelectedPage(adw.view_stack_page.ViewStackPage page)
   {
     adw_view_stack_pages_set_selected_page(cast(AdwViewStackPages*)this._cPtr, page ? cast(AdwViewStackPage*)page._cPtr(No.Dup) : null);
+  }
+}
+
+class ViewStackPagesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SelectionModelGidBuilderT!();
+
+  /**
+      Set `selectedPage` property.
+      Params:
+        propval = The selected `class@ViewStackPage` within the `class@ViewStackPages`.
+          
+          This can be used to keep an up-to-date view of the `class@ViewStackPage` for
+          The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
+          
+          This can be used to keep an up-to-date view of the visible child.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectedPage(adw.view_stack_page.ViewStackPage propval)
+  {
+    return setProperty("selected-page", propval);
+  }
+}
+
+/// Fluent builder for [adw.view_stack_pages.ViewStackPages]
+final class ViewStackPagesGidBuilder : ViewStackPagesGidBuilderImpl!ViewStackPagesGidBuilder
+{
+  ViewStackPages build()
+  {
+    return new ViewStackPages(cast(void*)createGObject(ViewStackPages._getGType), No.Take);
   }
 }

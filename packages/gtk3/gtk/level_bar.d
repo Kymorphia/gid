@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -139,6 +140,15 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.level_bar.LevelBar]
+  Returns: New builder object
+  */
+  static LevelBarGidBuilder builder()
+  {
+    return new LevelBarGidBuilder;
+  }
+
+  /**
       Get `inverted` property.
       Returns: Level bars normally grow from top to bottom or left to right.
         Inverted level bars grow in the opposite direction.
@@ -156,7 +166,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void inverted(bool propval)
   {
-    return setInverted(propval);
+    setInverted(propval);
   }
 
   /**
@@ -177,7 +187,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void maxValue(double propval)
   {
-    return setMaxValue(propval);
+    setMaxValue(propval);
   }
 
   /**
@@ -198,7 +208,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void minValue(double propval)
   {
-    return setMinValue(propval);
+    setMinValue(propval);
   }
 
   /**
@@ -231,7 +241,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void mode(gtk.types.LevelBarMode propval)
   {
-    return setMode(propval);
+    setMode(propval);
   }
 
   /**
@@ -252,7 +262,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void value(double propval)
   {
-    return setValue(propval);
+    setValue(propval);
   }
 
   mixin OrientableT!();
@@ -500,5 +510,86 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("offset-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Level bars normally grow from top to bottom or left to right.
+          Inverted level bars grow in the opposite direction.
+      Returns: Builder instance for fluent chaining
+  */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /**
+      Set `maxValue` property.
+      Params:
+        propval = The #GtkLevelBar:max-value property determaxes the maximum value of
+          the interval that can be displayed by the bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxValue(double propval)
+  {
+    return setProperty("max-value", propval);
+  }
+
+  /**
+      Set `minValue` property.
+      Params:
+        propval = The #GtkLevelBar:min-value property determines the minimum value of
+          the interval that can be displayed by the bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T minValue(double propval)
+  {
+    return setProperty("min-value", propval);
+  }
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = The #GtkLevelBar:mode property determines the way #GtkLevelBar
+          interprets the value properties to draw the level fill area.
+          Specifically, when the value is #GTK_LEVEL_BAR_MODE_CONTINUOUS,
+          #GtkLevelBar will draw a single block representing the current value in
+          that area; when the value is #GTK_LEVEL_BAR_MODE_DISCRETE,
+          the widget will draw a succession of separate blocks filling the
+          draw area, with the number of blocks being equal to the units separating
+          the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
+      Returns: Builder instance for fluent chaining
+  */
+  T mode(gtk.types.LevelBarMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The #GtkLevelBar:value property determines the currently
+          filled value of the level bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(double propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [gtk.level_bar.LevelBar]
+final class LevelBarGidBuilder : LevelBarGidBuilderImpl!LevelBarGidBuilder
+{
+  LevelBar build()
+  {
+    return new LevelBar(cast(void*)createGObject(LevelBar._getGType), No.Take);
   }
 }

@@ -10,6 +10,7 @@ import gio.pollable_input_stream;
 import gio.pollable_input_stream_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -56,6 +57,24 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   override MultipartInputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.multipart_input_stream.MultipartInputStream]
+  Returns: New builder object
+  */
+  static MultipartInputStreamGidBuilder builder()
+  {
+    return new MultipartInputStreamGidBuilder;
+  }
+
+  /**
+      Get `message` property.
+      Returns: The `class@Message`.
+  */
+  @property soup.message.Message message()
+  {
+    return gobject.object.ObjectWrap.getProperty!(soup.message.Message)("message");
   }
 
   mixin PollableInputStreamT!();
@@ -175,5 +194,31 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class MultipartInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInputStreamGidBuilderImpl!T, gio.pollable_input_stream.PollableInputStreamGidBuilderImpl!T
+{
+
+  mixin PollableInputStreamGidBuilderT!();
+
+  /**
+      Set `message` property.
+      Params:
+        propval = The `class@Message`.
+      Returns: Builder instance for fluent chaining
+  */
+  T message(soup.message.Message propval)
+  {
+    return setProperty("message", propval);
+  }
+}
+
+/// Fluent builder for [soup.multipart_input_stream.MultipartInputStream]
+final class MultipartInputStreamGidBuilder : MultipartInputStreamGidBuilderImpl!MultipartInputStreamGidBuilder
+{
+  MultipartInputStream build()
+  {
+    return new MultipartInputStream(cast(void*)createGObject(MultipartInputStream._getGType), Yes.Take);
   }
 }

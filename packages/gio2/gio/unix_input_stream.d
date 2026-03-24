@@ -10,6 +10,7 @@ import gio.input_stream;
 import gio.pollable_input_stream;
 import gio.pollable_input_stream_mixin;
 import gio.types;
+import gobject.gid_builder;
 
 /**
     [gio.unix_input_stream.UnixInputStream] implements [gio.input_stream.InputStream] for reading from a UNIX
@@ -51,6 +52,15 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   }
 
   /**
+  Get builder for [gio.unix_input_stream.UnixInputStream]
+  Returns: New builder object
+  */
+  static UnixInputStreamGidBuilder builder()
+  {
+    return new UnixInputStreamGidBuilder;
+  }
+
+  /**
       Get `closeFd` property.
       Returns: Whether to close the file descriptor when the stream is closed.
   */
@@ -66,7 +76,16 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   */
   @property void closeFd(bool propval)
   {
-    return setCloseFd(propval);
+    setCloseFd(propval);
+  }
+
+  /**
+      Get `fd` property.
+      Returns: The file descriptor that the stream reads from.
+  */
+  @property int fd()
+  {
+    return getFd();
   }
 
   mixin FileDescriptorBasedT!();
@@ -123,5 +142,43 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   void setCloseFd(bool closeFd)
   {
     g_unix_input_stream_set_close_fd(cast(GUnixInputStream*)this._cPtr, closeFd);
+  }
+}
+
+class UnixInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T, gio.file_descriptor_based.FileDescriptorBasedGidBuilderImpl!T, gio.pollable_input_stream.PollableInputStreamGidBuilderImpl!T
+{
+
+  mixin FileDescriptorBasedGidBuilderT!();
+  mixin PollableInputStreamGidBuilderT!();
+
+  /**
+      Set `closeFd` property.
+      Params:
+        propval = Whether to close the file descriptor when the stream is closed.
+      Returns: Builder instance for fluent chaining
+  */
+  T closeFd(bool propval)
+  {
+    return setProperty("close-fd", propval);
+  }
+
+  /**
+      Set `fd` property.
+      Params:
+        propval = The file descriptor that the stream reads from.
+      Returns: Builder instance for fluent chaining
+  */
+  T fd(int propval)
+  {
+    return setProperty("fd", propval);
+  }
+}
+
+/// Fluent builder for [gio.unix_input_stream.UnixInputStream]
+final class UnixInputStreamGidBuilder : UnixInputStreamGidBuilderImpl!UnixInputStreamGidBuilder
+{
+  UnixInputStream build()
+  {
+    return new UnixInputStream(cast(void*)createGObject(UnixInputStream._getGType), Yes.Take);
   }
 }

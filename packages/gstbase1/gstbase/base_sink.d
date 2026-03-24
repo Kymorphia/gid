@@ -2,6 +2,7 @@
 module gstbase.base_sink;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.element;
 import gst.mini_object;
@@ -156,6 +157,15 @@ class BaseSink : gst.element.Element
   }
 
   /**
+  Get builder for [gstbase.base_sink.BaseSink]
+  Returns: New builder object
+  */
+  static BaseSinkGidBuilder builder()
+  {
+    return new BaseSinkGidBuilder;
+  }
+
+  /**
       Get `async` property.
       Returns: If set to true, the basesink will perform asynchronous state changes.
         When set to false, the sink will not signal the parent when it prerolls.
@@ -196,7 +206,7 @@ class BaseSink : gst.element.Element
   */
   @property void blocksize(uint propval)
   {
-    return setBlocksize(propval);
+    setBlocksize(propval);
   }
 
   /**
@@ -255,7 +265,7 @@ class BaseSink : gst.element.Element
   */
   @property void maxBitrate(ulong propval)
   {
-    return setMaxBitrate(propval);
+    setMaxBitrate(propval);
   }
 
   /** */
@@ -267,7 +277,7 @@ class BaseSink : gst.element.Element
   /** */
   @property void maxLateness(long propval)
   {
-    return setMaxLateness(propval);
+    setMaxLateness(propval);
   }
 
   /**
@@ -353,7 +363,7 @@ class BaseSink : gst.element.Element
   /** */
   @property void sync(bool propval)
   {
-    return setSync(propval);
+    setSync(propval);
   }
 
   /**
@@ -376,7 +386,7 @@ class BaseSink : gst.element.Element
   */
   @property void throttleTime(ulong propval)
   {
-    return setThrottleTime(propval);
+    setThrottleTime(propval);
   }
 
   /**
@@ -894,5 +904,140 @@ class BaseSink : gst.element.Element
     _cretval = gst_base_sink_wait_preroll(cast(GstBaseSink*)this._cPtr);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
+  }
+}
+
+class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `async` property.
+      Params:
+        propval = If set to true, the basesink will perform asynchronous state changes.
+          When set to false, the sink will not signal the parent when it prerolls.
+          Use this option when dealing with sparse streams or when synchronisation is
+          not required.
+      Returns: Builder instance for fluent chaining
+  */
+  T async(bool propval)
+  {
+    return setProperty("async", propval);
+  }
+
+  /**
+      Set `blocksize` property.
+      Params:
+        propval = The amount of bytes to pull when operating in pull mode.
+      Returns: Builder instance for fluent chaining
+  */
+  T blocksize(uint propval)
+  {
+    return setProperty("blocksize", propval);
+  }
+
+  /**
+      Set `enableLastSample` property.
+      Params:
+        propval = Enable the last-sample property. If false, basesink doesn't keep a
+          reference to the last buffer arrived and the last-sample property is always
+          set to null. This can be useful if you need buffers to be released as soon
+          as possible, eg. if you're using a buffer pool.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableLastSample(bool propval)
+  {
+    return setProperty("enable-last-sample", propval);
+  }
+
+  /**
+      Set `maxBitrate` property.
+      Params:
+        propval = Control the maximum amount of bits that will be rendered per second.
+          Setting this property to a value bigger than 0 will make the sink delay
+          rendering of the buffers when it would exceed to max-bitrate.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxBitrate(ulong propval)
+  {
+    return setProperty("max-bitrate", propval);
+  }
+
+  /** */
+  T maxLateness(long propval)
+  {
+    return setProperty("max-lateness", propval);
+  }
+
+  /**
+      Set `processingDeadline` property.
+      Params:
+        propval = Maximum amount of time (in nanoseconds) that the pipeline can take
+          for processing the buffer. This is added to the latency of live
+          pipelines.
+      Returns: Builder instance for fluent chaining
+  */
+  T processingDeadline(ulong propval)
+  {
+    return setProperty("processing-deadline", propval);
+  }
+
+  /** */
+  T qos(bool propval)
+  {
+    return setProperty("qos", propval);
+  }
+
+  /**
+      Set `renderDelay` property.
+      Params:
+        propval = The additional delay between synchronisation and actual rendering of the
+          media. This property will add additional latency to the device in order to
+          make other sinks compensate for the delay.
+      Returns: Builder instance for fluent chaining
+  */
+  T renderDelay(ulong propval)
+  {
+    return setProperty("render-delay", propval);
+  }
+
+  /** */
+  T sync(bool propval)
+  {
+    return setProperty("sync", propval);
+  }
+
+  /**
+      Set `throttleTime` property.
+      Params:
+        propval = The time to insert between buffers. This property can be used to control
+          the maximum amount of buffers per second to render. Setting this property
+          to a value bigger than 0 will make the sink create THROTTLE QoS events.
+      Returns: Builder instance for fluent chaining
+  */
+  T throttleTime(ulong propval)
+  {
+    return setProperty("throttle-time", propval);
+  }
+
+  /**
+      Set `tsOffset` property.
+      Params:
+        propval = Controls the final synchronisation, a negative value will render the buffer
+          earlier while a positive value delays playback. This property can be
+          used to fix synchronisation in bad files.
+      Returns: Builder instance for fluent chaining
+  */
+  T tsOffset(long propval)
+  {
+    return setProperty("ts-offset", propval);
+  }
+}
+
+/// Fluent builder for [gstbase.base_sink.BaseSink]
+final class BaseSinkGidBuilder : BaseSinkGidBuilderImpl!BaseSinkGidBuilder
+{
+  BaseSink build()
+  {
+    return new BaseSink(cast(void*)createGObject(BaseSink._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtksource.language_manager;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -46,6 +47,15 @@ class LanguageManager : gobject.object.ObjectWrap
   override LanguageManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.language_manager.LanguageManager]
+  Returns: New builder object
+  */
+  static LanguageManagerGidBuilder builder()
+  {
+    return new LanguageManagerGidBuilder;
   }
 
   /**
@@ -257,5 +267,18 @@ class LanguageManager : gobject.object.ObjectWrap
     const(char*)* _dirs = _tmpdirs.ptr;
 
     gtk_source_language_manager_set_search_path(cast(GtkSourceLanguageManager*)this._cPtr, _dirs);
+  }
+}
+
+class LanguageManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.language_manager.LanguageManager]
+final class LanguageManagerGidBuilder : LanguageManagerGidBuilderImpl!LanguageManagerGidBuilder
+{
+  LanguageManager build()
+  {
+    return new LanguageManager(cast(void*)createGObject(LanguageManager._getGType), Yes.Take);
   }
 }

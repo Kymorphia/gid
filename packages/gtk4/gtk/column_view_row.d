@@ -2,6 +2,7 @@
 module gtk.column_view_row;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -43,6 +44,15 @@ class ColumnViewRow : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.column_view_row.ColumnViewRow]
+  Returns: New builder object
+  */
+  static ColumnViewRowGidBuilder builder()
+  {
+    return new ColumnViewRowGidBuilder;
+  }
+
+  /**
       Get `accessibleDescription` property.
       Returns: The accessible description to set on the row.
   */
@@ -58,7 +68,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   @property void accessibleDescription(string propval)
   {
-    return setAccessibleDescription(propval);
+    setAccessibleDescription(propval);
   }
 
   /**
@@ -77,7 +87,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   @property void accessibleLabel(string propval)
   {
-    return setAccessibleLabel(propval);
+    setAccessibleLabel(propval);
   }
 
   /**
@@ -96,7 +106,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   @property void activatable(bool propval)
   {
-    return setActivatable(propval);
+    setActivatable(propval);
   }
 
   /**
@@ -115,7 +125,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   @property void focusable(bool propval)
   {
-    return setFocusable(propval);
+    setFocusable(propval);
   }
 
   /**
@@ -152,7 +162,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   @property void selectable(bool propval)
   {
-    return setSelectable(propval);
+    setSelectable(propval);
   }
 
   /**
@@ -349,5 +359,73 @@ class ColumnViewRow : gobject.object.ObjectWrap
   void setSelectable(bool selectable)
   {
     gtk_column_view_row_set_selectable(cast(GtkColumnViewRow*)this._cPtr, selectable);
+  }
+}
+
+class ColumnViewRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `accessibleDescription` property.
+      Params:
+        propval = The accessible description to set on the row.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessibleDescription(string propval)
+  {
+    return setProperty("accessible-description", propval);
+  }
+
+  /**
+      Set `accessibleLabel` property.
+      Params:
+        propval = The accessible label to set on the row.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessibleLabel(string propval)
+  {
+    return setProperty("accessible-label", propval);
+  }
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = If the row can be activated by the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatable(bool propval)
+  {
+    return setProperty("activatable", propval);
+  }
+
+  /**
+      Set `focusable` property.
+      Params:
+        propval = If the row can be focused with the keyboard.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusable(bool propval)
+  {
+    return setProperty("focusable", propval);
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = If the row can be selected by the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectable(bool propval)
+  {
+    return setProperty("selectable", propval);
+  }
+}
+
+/// Fluent builder for [gtk.column_view_row.ColumnViewRow]
+final class ColumnViewRowGidBuilder : ColumnViewRowGidBuilderImpl!ColumnViewRowGidBuilder
+{
+  ColumnViewRow build()
+  {
+    return new ColumnViewRow(cast(void*)createGObject(ColumnViewRow._getGType), No.Take);
   }
 }

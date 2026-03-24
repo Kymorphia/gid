@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.dbus_connection;
 import gio.menu_model;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,15 @@ class DBusMenuModel : gio.menu_model.MenuModel
   }
 
   /**
+  Get builder for [gio.dbus_menu_model.DBusMenuModel]
+  Returns: New builder object
+  */
+  static DBusMenuModelGidBuilder builder()
+  {
+    return new DBusMenuModelGidBuilder;
+  }
+
+  /**
       Obtains a #GDBusMenuModel for the menu model which is exported
       at the given bus_name and object_path.
       
@@ -68,5 +78,18 @@ class DBusMenuModel : gio.menu_model.MenuModel
     _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _busName, _objectPath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class DBusMenuModelGidBuilderImpl(T) : gio.menu_model.MenuModelGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.dbus_menu_model.DBusMenuModel]
+final class DBusMenuModelGidBuilder : DBusMenuModelGidBuilderImpl!DBusMenuModelGidBuilder
+{
+  DBusMenuModel build()
+  {
+    return new DBusMenuModel(cast(void*)createGObject(DBusMenuModel._getGType), No.Take);
   }
 }

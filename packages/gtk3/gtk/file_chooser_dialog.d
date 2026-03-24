@@ -4,6 +4,7 @@ module gtk.file_chooser_dialog;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -202,5 +203,29 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
     return this;
   }
 
+  /**
+  Get builder for [gtk.file_chooser_dialog.FileChooserDialog]
+  Returns: New builder object
+  */
+  static FileChooserDialogGidBuilder builder()
+  {
+    return new FileChooserDialogGidBuilder;
+  }
+
   mixin FileChooserT!();
+}
+
+class FileChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
+{
+
+  mixin FileChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.file_chooser_dialog.FileChooserDialog]
+final class FileChooserDialogGidBuilder : FileChooserDialogGidBuilderImpl!FileChooserDialogGidBuilder
+{
+  FileChooserDialog build()
+  {
+    return new FileChooserDialog(cast(void*)createGObject(FileChooserDialog._getGType), No.Take);
+  }
 }

@@ -14,6 +14,7 @@ import gmime.internet_address_list;
 import gmime.parser_options;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -46,6 +47,15 @@ class ObjectWrap : gobject.object.ObjectWrap
   override ObjectWrap self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.object.ObjectWrap]
+  Returns: New builder object
+  */
+  static ObjectWrapGidBuilder builder()
+  {
+    return new ObjectWrapGidBuilder;
   }
 
   /**
@@ -522,5 +532,18 @@ class ObjectWrap : gobject.object.ObjectWrap
     ptrdiff_t _retval;
     _retval = g_mime_object_write_to_stream(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.object.ObjectWrap]
+final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
+{
+  ObjectWrap build()
+  {
+    return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), Yes.Take);
   }
 }

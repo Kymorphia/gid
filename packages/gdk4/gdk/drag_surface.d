@@ -8,6 +8,7 @@ import gdk.drag_surface_size;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 
 /**
     A [gdk.drag_surface.DragSurface] is an interface for surfaces used during DND.
@@ -62,4 +63,8 @@ interface DragSurface
       Returns: Signal ID
   */
   ulong connectComputeSize(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface DragSurfaceGidBuilderImpl(T)
+{
 }

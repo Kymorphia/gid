@@ -8,6 +8,7 @@ import gio.tls_certificate;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -54,6 +55,15 @@ class WebResource : gobject.object.ObjectWrap
   override WebResource self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.web_resource.WebResource]
+  Returns: New builder object
+  */
+  static WebResourceGidBuilder builder()
+  {
+    return new WebResourceGidBuilder;
   }
 
   /**
@@ -368,5 +378,18 @@ class WebResource : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sent-request", closure, after);
+  }
+}
+
+class WebResourceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.web_resource.WebResource]
+final class WebResourceGidBuilder : WebResourceGidBuilderImpl!WebResourceGidBuilder
+{
+  WebResource build()
+  {
+    return new WebResource(cast(void*)createGObject(WebResource._getGType), No.Take);
   }
 }

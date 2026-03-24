@@ -15,6 +15,7 @@ import gio.mount_operation;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -314,4 +315,8 @@ interface Volume
       Returns: Signal ID
   */
   ulong connectRemoved(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface VolumeGidBuilderImpl(T)
+{
 }

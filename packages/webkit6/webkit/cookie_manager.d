@@ -7,6 +7,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import soup.cookie;
 import webkit.c.functions;
@@ -48,6 +49,15 @@ class CookieManager : gobject.object.ObjectWrap
   override CookieManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.cookie_manager.CookieManager]
+  Returns: New builder object
+  */
+  static CookieManagerGidBuilder builder()
+  {
+    return new CookieManagerGidBuilder;
   }
 
   /**
@@ -399,5 +409,18 @@ class CookieManager : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class CookieManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.cookie_manager.CookieManager]
+final class CookieManagerGidBuilder : CookieManagerGidBuilderImpl!CookieManagerGidBuilder
+{
+  CookieManager build()
+  {
+    return new CookieManager(cast(void*)createGObject(CookieManager._getGType), No.Take);
   }
 }

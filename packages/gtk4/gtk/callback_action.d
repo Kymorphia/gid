@@ -3,6 +3,7 @@ module gtk.callback_action;
 
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -42,6 +43,15 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
+  Get builder for [gtk.callback_action.CallbackAction]
+  Returns: New builder object
+  */
+  static CallbackActionGidBuilder builder()
+  {
+    return new CallbackActionGidBuilder;
+  }
+
+  /**
       Create a custom action that calls the given callback when
       activated.
   
@@ -67,5 +77,18 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     _cretval = gtk_callback_action_new(_callbackCB, _callback, _callbackDestroyCB);
     this(_cretval, Yes.Take);
+  }
+}
+
+class CallbackActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.callback_action.CallbackAction]
+final class CallbackActionGidBuilder : CallbackActionGidBuilderImpl!CallbackActionGidBuilder
+{
+  CallbackAction build()
+  {
+    return new CallbackAction(cast(void*)createGObject(CallbackAction._getGType), Yes.Take);
   }
 }

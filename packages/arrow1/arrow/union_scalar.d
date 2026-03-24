@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class UnionScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.union_scalar.UnionScalar]
+  Returns: New builder object
+  */
+  static UnionScalarGidBuilder builder()
+  {
+    return new UnionScalarGidBuilder;
+  }
+
   /** */
   byte getTypeCode()
   {
@@ -52,5 +62,29 @@ class UnionScalar : arrow.scalar.Scalar
     _cretval = garrow_union_scalar_get_value(cast(GArrowUnionScalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class UnionScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scalar.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(arrow.scalar.Scalar propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.union_scalar.UnionScalar]
+final class UnionScalarGidBuilder : UnionScalarGidBuilderImpl!UnionScalarGidBuilder
+{
+  UnionScalar build()
+  {
+    return new UnionScalar(cast(void*)createGObject(UnionScalar._getGType), No.Take);
   }
 }

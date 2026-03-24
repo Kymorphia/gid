@@ -5,6 +5,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gid.gid;
 import gio.file;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -43,6 +44,33 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   override IconPaintable self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.icon_paintable.IconPaintable]
+  Returns: New builder object
+  */
+  static IconPaintableGidBuilder builder()
+  {
+    return new IconPaintableGidBuilder;
+  }
+
+  /**
+      Get `file` property.
+      Returns: The file representing the icon, if any.
+  */
+  @property gio.file.File file()
+  {
+    return getFile();
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name that was chosen during lookup.
+  */
+  @property string iconName()
+  {
+    return getIconName();
   }
 
   mixin PaintableT!();
@@ -118,5 +146,43 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
     bool _retval;
     _retval = cast(bool)gtk_icon_paintable_is_symbolic(cast(GtkIconPaintable*)this._cPtr);
     return _retval;
+  }
+}
+
+class IconPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T, gtk.symbolic_paintable.SymbolicPaintableGidBuilderImpl!T
+{
+
+  mixin PaintableGidBuilderT!();
+  mixin SymbolicPaintableGidBuilderT!();
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file representing the icon, if any.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gio.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name that was chosen during lookup.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.icon_paintable.IconPaintable]
+final class IconPaintableGidBuilder : IconPaintableGidBuilderImpl!IconPaintableGidBuilder
+{
+  IconPaintable build()
+  {
+    return new IconPaintable(cast(void*)createGObject(IconPaintable._getGType), No.Take);
   }
 }

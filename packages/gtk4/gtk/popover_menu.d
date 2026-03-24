@@ -3,6 +3,7 @@ module gtk.popover_menu;
 
 import gid.gid;
 import gio.menu_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -167,6 +168,15 @@ class PopoverMenu : gtk.popover.Popover
   }
 
   /**
+  Get builder for [gtk.popover_menu.PopoverMenu]
+  Returns: New builder object
+  */
+  static PopoverMenuGidBuilder builder()
+  {
+    return new PopoverMenuGidBuilder;
+  }
+
+  /**
       Get `flags` property.
       Returns: The flags that @popover uses to create/display a menu from its model.
         
@@ -188,7 +198,7 @@ class PopoverMenu : gtk.popover.Popover
   */
   @property void flags(gtk.types.PopoverMenuFlags propval)
   {
-    return setFlags(propval);
+    setFlags(propval);
   }
 
   /**
@@ -207,7 +217,7 @@ class PopoverMenu : gtk.popover.Popover
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
-    return setMenuModel(propval);
+    setMenuModel(propval);
   }
 
   /**
@@ -363,5 +373,55 @@ class PopoverMenu : gtk.popover.Popover
   void setMenuModel(gio.menu_model.MenuModel model = null)
   {
     gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
+  }
+}
+
+class PopoverMenuGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
+{
+
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = The flags that @popover uses to create/display a menu from its model.
+          
+          If a model is set and the flags change, contents are rebuilt, so if setting
+          properties individually, set flags before model to avoid a redundant rebuild.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gtk.types.PopoverMenuFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The model from which the menu is made.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menu-model", propval);
+  }
+
+  /**
+      Set `visibleSubmenu` property.
+      Params:
+        propval = The name of the visible submenu.
+      Returns: Builder instance for fluent chaining
+  */
+  T visibleSubmenu(string propval)
+  {
+    return setProperty("visible-submenu", propval);
+  }
+}
+
+/// Fluent builder for [gtk.popover_menu.PopoverMenu]
+final class PopoverMenuGidBuilder : PopoverMenuGidBuilderImpl!PopoverMenuGidBuilder
+{
+  PopoverMenu build()
+  {
+    return new PopoverMenu(cast(void*)createGObject(PopoverMenu._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.editable;
 public import gtk.editable_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -274,4 +275,8 @@ interface Editable
       Returns: Signal ID
   */
   ulong connectInsertText(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface EditableGidBuilderImpl(T)
+{
 }

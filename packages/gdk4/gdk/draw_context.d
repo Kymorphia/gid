@@ -8,6 +8,7 @@ import gdk.display;
 import gdk.surface;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +48,33 @@ class DrawContext : gobject.object.ObjectWrap
   override DrawContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.draw_context.DrawContext]
+  Returns: New builder object
+  */
+  static DrawContextGidBuilder builder()
+  {
+    return new DrawContextGidBuilder;
+  }
+
+  /**
+      Get `display` property.
+      Returns: The [gdk.display.Display] used to create the [gdk.draw_context.DrawContext].
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Get `surface` property.
+      Returns: The [gdk.surface.Surface] the context is bound to.
+  */
+  @property gdk.surface.Surface surface()
+  {
+    return getSurface();
   }
 
   /**
@@ -155,5 +183,40 @@ class DrawContext : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gdk_draw_context_is_in_frame(cast(GdkDrawContext*)this._cPtr);
     return _retval;
+  }
+}
+
+class DrawContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The [gdk.display.Display] used to create the [gdk.draw_context.DrawContext].
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `surface` property.
+      Params:
+        propval = The [gdk.surface.Surface] the context is bound to.
+      Returns: Builder instance for fluent chaining
+  */
+  T surface(gdk.surface.Surface propval)
+  {
+    return setProperty("surface", propval);
+  }
+}
+
+/// Fluent builder for [gdk.draw_context.DrawContext]
+final class DrawContextGidBuilder : DrawContextGidBuilderImpl!DrawContextGidBuilder
+{
+  DrawContext build()
+  {
+    return new DrawContext(cast(void*)createGObject(DrawContext._getGType), No.Take);
   }
 }

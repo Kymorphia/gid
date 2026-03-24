@@ -8,6 +8,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class LargeBinaryArray : arrow.array.Array
   override LargeBinaryArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.large_binary_array.LargeBinaryArray]
+  Returns: New builder object
+  */
+  static LargeBinaryArrayGidBuilder builder()
+  {
+    return new LargeBinaryArrayGidBuilder;
   }
 
   /** */
@@ -81,5 +91,18 @@ class LargeBinaryArray : arrow.array.Array
     _cretval = garrow_large_binary_array_get_value(cast(GArrowLargeBinaryArray*)this._cPtr, i);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class LargeBinaryArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.large_binary_array.LargeBinaryArray]
+final class LargeBinaryArrayGidBuilder : LargeBinaryArrayGidBuilderImpl!LargeBinaryArrayGidBuilder
+{
+  LargeBinaryArray build()
+  {
+    return new LargeBinaryArray(cast(void*)createGObject(LargeBinaryArray._getGType), Yes.Take);
   }
 }

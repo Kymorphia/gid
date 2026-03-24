@@ -13,6 +13,7 @@ import gio.initable;
 import gio.initable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import secret.c.functions;
 import secret.c.types;
@@ -75,6 +76,25 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   }
 
   /**
+  Get builder for [secret.item.Item]
+  Returns: New builder object
+  */
+  static ItemGidBuilder builder()
+  {
+    return new ItemGidBuilder;
+  }
+
+  /**
+      Get `flags` property.
+      Returns: A set of flags describing which parts of the secret item have
+        been initialized.
+  */
+  @property secret.types.ItemFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
       Get `locked` property.
       Returns: Whether the item is locked or not.
         
@@ -87,6 +107,16 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   @property bool locked()
   {
     return getLocked();
+  }
+
+  /**
+      Get `service` property.
+      Returns: The `class@Service` object that this item is associated with and
+        uses to interact with the actual D-Bus Secret Service.
+  */
+  @property secret.service.Service service()
+  {
+    return getService();
   }
 
   mixin RetrievableT!();
@@ -763,5 +793,44 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ItemGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T, secret.retrievable.RetrievableGidBuilderImpl!T
+{
+
+  mixin RetrievableGidBuilderT!();
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = A set of flags describing which parts of the secret item have
+          been initialized.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(secret.types.ItemFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `service` property.
+      Params:
+        propval = The `class@Service` object that this item is associated with and
+          uses to interact with the actual D-Bus Secret Service.
+      Returns: Builder instance for fluent chaining
+  */
+  T service(secret.service.Service propval)
+  {
+    return setProperty("service", propval);
+  }
+}
+
+/// Fluent builder for [secret.item.Item]
+final class ItemGidBuilder : ItemGidBuilderImpl!ItemGidBuilder
+{
+  Item build()
+  {
+    return new Item(cast(void*)createGObject(Item._getGType), No.Take);
   }
 }

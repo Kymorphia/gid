@@ -4,6 +4,7 @@ module gtk.tool_item_group;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -54,6 +55,15 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
     return this;
   }
 
+  /**
+  Get builder for [gtk.tool_item_group.ToolItemGroup]
+  Returns: New builder object
+  */
+  static ToolItemGroupGidBuilder builder()
+  {
+    return new ToolItemGroupGidBuilder;
+  }
+
   /** */
   @property bool collapsed()
   {
@@ -63,7 +73,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   /** */
   @property void collapsed(bool propval)
   {
-    return setCollapsed(propval);
+    setCollapsed(propval);
   }
 
   /** */
@@ -75,7 +85,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   /** */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
-    return setEllipsize(propval);
+    setEllipsize(propval);
   }
 
   /** */
@@ -87,7 +97,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   /** */
   @property void headerRelief(gtk.types.ReliefStyle propval)
   {
-    return setHeaderRelief(propval);
+    setHeaderRelief(propval);
   }
 
   /** */
@@ -99,7 +109,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   /** */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /** */
@@ -111,7 +121,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   /** */
   @property void labelWidget(gtk.widget.Widget propval)
   {
-    return setLabelWidget(propval);
+    setLabelWidget(propval);
   }
 
   mixin ToolShellT!();
@@ -335,5 +345,50 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   void setLabelWidget(gtk.widget.Widget labelWidget)
   {
     gtk_tool_item_group_set_label_widget(cast(GtkToolItemGroup*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
+  }
+}
+
+class ToolItemGroupGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.tool_shell.ToolShellGidBuilderImpl!T
+{
+
+  mixin ToolShellGidBuilderT!();
+
+  /** */
+  T collapsed(bool propval)
+  {
+    return setProperty("collapsed", propval);
+  }
+
+  /** */
+  T ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setProperty("ellipsize", propval);
+  }
+
+  /** */
+  T headerRelief(gtk.types.ReliefStyle propval)
+  {
+    return setProperty("header-relief", propval);
+  }
+
+  /** */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /** */
+  T labelWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("label-widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tool_item_group.ToolItemGroup]
+final class ToolItemGroupGidBuilder : ToolItemGroupGidBuilderImpl!ToolItemGroupGidBuilder
+{
+  ToolItemGroup build()
+  {
+    return new ToolItemGroup(cast(void*)createGObject(ToolItemGroup._getGType), No.Take);
   }
 }

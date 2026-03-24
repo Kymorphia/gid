@@ -6,6 +6,7 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -72,4 +73,8 @@ interface PowerProfileMonitor
       Returns: Whether the system is in “Power Saver” mode.
   */
   bool getPowerSaverEnabled();
+}
+
+interface PowerProfileMonitorGidBuilderImpl(T)
+{
 }

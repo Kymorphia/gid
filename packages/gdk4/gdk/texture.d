@@ -15,6 +15,7 @@ import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -60,6 +61,33 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   override Texture self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.texture.Texture]
+  Returns: New builder object
+  */
+  static TextureGidBuilder builder()
+  {
+    return new TextureGidBuilder;
+  }
+
+  /**
+      Get `height` property.
+      Returns: The height of the texture, in pixels.
+  */
+  @property int height()
+  {
+    return getHeight();
+  }
+
+  /**
+      Get `width` property.
+      Returns: The width of the texture, in pixels.
+  */
+  @property int width()
+  {
+    return getWidth();
   }
 
   mixin PaintableT!();
@@ -324,5 +352,44 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     _cretval = gdk_texture_save_to_tiff_bytes(cast(GdkTexture*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class TextureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T, gio.loadable_icon.LoadableIconGidBuilderImpl!T
+{
+
+  mixin PaintableGidBuilderT!();
+  mixin IconGidBuilderT!();
+  mixin LoadableIconGidBuilderT!();
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The height of the texture, in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T height(int propval)
+  {
+    return setProperty("height", propval);
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The width of the texture, in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T width(int propval)
+  {
+    return setProperty("width", propval);
+  }
+}
+
+/// Fluent builder for [gdk.texture.Texture]
+final class TextureGidBuilder : TextureGidBuilderImpl!TextureGidBuilder
+{
+  Texture build()
+  {
+    return new Texture(cast(void*)createGObject(Texture._getGType), No.Take);
   }
 }

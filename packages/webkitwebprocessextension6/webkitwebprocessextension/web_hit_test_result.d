@@ -2,6 +2,7 @@
 module webkitwebprocessextension.web_hit_test_result;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.value;
 import webkitwebprocessextension.c.functions;
@@ -41,6 +42,15 @@ class WebHitTestResult : gobject.object.ObjectWrap
   override WebHitTestResult self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.web_hit_test_result.WebHitTestResult]
+  Returns: New builder object
+  */
+  static WebHitTestResultGidBuilder builder()
+  {
+    return new WebHitTestResultGidBuilder;
   }
 
   /**
@@ -213,5 +223,18 @@ class WebHitTestResult : gobject.object.ObjectWrap
     _cretval = webkit_web_hit_test_result_get_media_uri(cast(WebKitWebHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class WebHitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.web_hit_test_result.WebHitTestResult]
+final class WebHitTestResultGidBuilder : WebHitTestResultGidBuilderImpl!WebHitTestResultGidBuilder
+{
+  WebHitTestResult build()
+  {
+    return new WebHitTestResult(cast(void*)createGObject(WebHitTestResult._getGType), No.Take);
   }
 }

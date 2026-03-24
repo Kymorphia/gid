@@ -10,6 +10,7 @@ import gmime.decrypt_result;
 import gmime.object;
 import gmime.signature_list;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -41,6 +42,15 @@ class Part : gmime.object.ObjectWrap
   override Part self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.part.Part]
+  Returns: New builder object
+  */
+  static PartGidBuilder builder()
+  {
+    return new PartGidBuilder;
   }
 
   /**
@@ -402,5 +412,18 @@ class Part : gmime.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)g_mime_part_verify_content_md5(cast(GMimePart*)this._cPtr);
     return _retval;
+  }
+}
+
+class PartGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.part.Part]
+final class PartGidBuilder : PartGidBuilderImpl!PartGidBuilder
+{
+  Part build()
+  {
+    return new Part(cast(void*)createGObject(Part._getGType), Yes.Take);
   }
 }

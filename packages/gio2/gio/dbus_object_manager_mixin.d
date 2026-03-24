@@ -9,6 +9,7 @@ public import gio.dbus_interface;
 public import gio.dbus_object;
 public import gio.types;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -276,4 +277,8 @@ template DBusObjectManagerT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("object-removed", closure, after);
   }
+}
+
+template DBusObjectManagerGidBuilderT()
+{
 }

@@ -10,6 +10,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -40,6 +41,15 @@ class Function : gobject.object.ObjectWrap
   override Function self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.function_.Function]
+  Returns: New builder object
+  */
+  static FunctionGidBuilder builder()
+  {
+    return new FunctionGidBuilder;
   }
 
   /** */
@@ -125,5 +135,24 @@ class Function : gobject.object.ObjectWrap
     _cretval = garrow_function_to_string(cast(GArrowFunction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class FunctionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T function_(void* propval)
+  {
+    return setProperty("function", propval);
+  }
+}
+
+/// Fluent builder for [arrow.function_.Function]
+final class FunctionGidBuilder : FunctionGidBuilderImpl!FunctionGidBuilder
+{
+  Function build()
+  {
+    return new Function(cast(void*)createGObject(Function._getGType), No.Take);
   }
 }

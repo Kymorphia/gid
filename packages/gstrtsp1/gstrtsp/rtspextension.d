@@ -4,6 +4,7 @@ module gstrtsp.rtspextension;
 public import gstrtsp.rtspextension_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gst.caps;
 import gst.structure;
 import gstrtsp.c.functions;
@@ -79,4 +80,8 @@ interface RTSPExtension
       Returns: Signal ID
   */
   ulong connectSend(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface RTSPExtensionGidBuilderImpl(T)
+{
 }

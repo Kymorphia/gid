@@ -7,6 +7,7 @@ import gdk.c.types;
 import gdk.draw_context;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     [gdk.cairo_context.CairoContext] is an object representing the platform-specific
@@ -45,6 +46,15 @@ class CairoContext : gdk.draw_context.DrawContext
   }
 
   /**
+  Get builder for [gdk.cairo_context.CairoContext]
+  Returns: New builder object
+  */
+  static CairoContextGidBuilder builder()
+  {
+    return new CairoContextGidBuilder;
+  }
+
+  /**
       Retrieves a Cairo context to be used to draw on the [gdk.surface.Surface]
       of context.
       
@@ -62,5 +72,18 @@ class CairoContext : gdk.draw_context.DrawContext
     _cretval = gdk_cairo_context_cairo_create(cast(GdkCairoContext*)this._cPtr);
     auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class CairoContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.cairo_context.CairoContext]
+final class CairoContextGidBuilder : CairoContextGidBuilderImpl!CairoContextGidBuilder
+{
+  CairoContext build()
+  {
+    return new CairoContext(cast(void*)createGObject(CairoContext._getGType), No.Take);
   }
 }

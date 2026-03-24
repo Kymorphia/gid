@@ -3,6 +3,7 @@ module gtk.link_button;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -74,6 +75,15 @@ class LinkButton : gtk.button.Button
   }
 
   /**
+  Get builder for [gtk.link_button.LinkButton]
+  Returns: New builder object
+  */
+  static LinkButtonGidBuilder builder()
+  {
+    return new LinkButtonGidBuilder;
+  }
+
+  /**
       Get `uri` property.
       Returns: The URI bound to this button.
   */
@@ -89,7 +99,7 @@ class LinkButton : gtk.button.Button
   */
   @property void uri(string propval)
   {
-    return setUri(propval);
+    setUri(propval);
   }
 
   /**
@@ -112,7 +122,7 @@ class LinkButton : gtk.button.Button
   */
   @property void visited(bool propval)
   {
-    return setVisited(propval);
+    setVisited(propval);
   }
 
   /**
@@ -249,5 +259,43 @@ class LinkButton : gtk.button.Button
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-link", closure, after);
+  }
+}
+
+class LinkButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The URI bound to this button.
+      Returns: Builder instance for fluent chaining
+  */
+  T uri(string propval)
+  {
+    return setProperty("uri", propval);
+  }
+
+  /**
+      Set `visited` property.
+      Params:
+        propval = The 'visited' state of this button.
+          
+          A visited link is drawn in a different color.
+      Returns: Builder instance for fluent chaining
+  */
+  T visited(bool propval)
+  {
+    return setProperty("visited", propval);
+  }
+}
+
+/// Fluent builder for [gtk.link_button.LinkButton]
+final class LinkButtonGidBuilder : LinkButtonGidBuilderImpl!LinkButtonGidBuilder
+{
+  LinkButton build()
+  {
+    return new LinkButton(cast(void*)createGObject(LinkButton._getGType), No.Take);
   }
 }

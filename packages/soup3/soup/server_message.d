@@ -10,6 +10,7 @@ import gio.types;
 import glib.bytes;
 import glib.uri;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -57,6 +58,15 @@ class ServerMessage : gobject.object.ObjectWrap
   override ServerMessage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.server_message.ServerMessage]
+  Returns: New builder object
+  */
+  static ServerMessageGidBuilder builder()
+  {
+    return new ServerMessageGidBuilder;
   }
 
   /**
@@ -892,5 +902,18 @@ class ServerMessage : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("wrote-informational", closure, after);
+  }
+}
+
+class ServerMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [soup.server_message.ServerMessage]
+final class ServerMessageGidBuilder : ServerMessageGidBuilderImpl!ServerMessageGidBuilder
+{
+  ServerMessage build()
+  {
+    return new ServerMessage(cast(void*)createGObject(ServerMessage._getGType), No.Take);
   }
 }

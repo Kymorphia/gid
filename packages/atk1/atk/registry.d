@@ -6,6 +6,7 @@ import atk.c.types;
 import atk.object_factory;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -47,6 +48,15 @@ class Registry : gobject.object.ObjectWrap
   override Registry self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.registry.Registry]
+  Returns: New builder object
+  */
+  static RegistryGidBuilder builder()
+  {
+    return new RegistryGidBuilder;
   }
 
   /**
@@ -96,5 +106,18 @@ class Registry : gobject.object.ObjectWrap
   void setFactoryType(gobject.types.GType type, gobject.types.GType factoryType)
   {
     atk_registry_set_factory_type(cast(AtkRegistry*)this._cPtr, type, factoryType);
+  }
+}
+
+class RegistryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.registry.Registry]
+final class RegistryGidBuilder : RegistryGidBuilderImpl!RegistryGidBuilder
+{
+  Registry build()
+  {
+    return new Registry(cast(void*)createGObject(Registry._getGType), No.Take);
   }
 }

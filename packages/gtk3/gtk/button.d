@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -72,6 +73,15 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   }
 
   /**
+  Get builder for [gtk.button.Button]
+  Returns: New builder object
+  */
+  static ButtonGidBuilder builder()
+  {
+    return new ButtonGidBuilder;
+  }
+
+  /**
       Get `alwaysShowImage` property.
       Returns: If true, the button will ignore the #GtkSettings:gtk-button-images
         setting and always show the image, if available.
@@ -95,7 +105,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   @property void alwaysShowImage(bool propval)
   {
-    return setAlwaysShowImage(propval);
+    setAlwaysShowImage(propval);
   }
 
   /**
@@ -114,7 +124,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   @property void image(gtk.widget.Widget propval)
   {
-    return setImage(propval);
+    setImage(propval);
   }
 
   /**
@@ -133,7 +143,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   @property void imagePosition(gtk.types.PositionType propval)
   {
-    return setImagePosition(propval);
+    setImagePosition(propval);
   }
 
   /** */
@@ -145,7 +155,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /** */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /** */
@@ -157,7 +167,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /** */
   @property void relief(gtk.types.ReliefStyle propval)
   {
-    return setRelief(propval);
+    setRelief(propval);
   }
 
   /** */
@@ -169,7 +179,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /** */
   @property void useStock(bool propval)
   {
-    return setUseStock(propval);
+    setUseStock(propval);
   }
 
   /** */
@@ -181,7 +191,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /** */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -892,5 +902,114 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("released", closure, after);
+  }
+}
+
+class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+  mixin ActivatableGidBuilderT!();
+
+  /**
+      Set `alwaysShowImage` property.
+      Params:
+        propval = If true, the button will ignore the #GtkSettings:gtk-button-images
+          setting and always show the image, if available.
+          
+          Use this property if the button would be useless or hard to use
+          without the image.
+      Returns: Builder instance for fluent chaining
+  */
+  T alwaysShowImage(bool propval)
+  {
+    return setProperty("always-show-image", propval);
+  }
+
+  /**
+      Set `image` property.
+      Params:
+        propval = The child widget to appear next to the button text.
+      Returns: Builder instance for fluent chaining
+  */
+  T image(gtk.widget.Widget propval)
+  {
+    return setProperty("image", propval);
+  }
+
+  /**
+      Set `imagePosition` property.
+      Params:
+        propval = The position of the image relative to the text inside the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T imagePosition(gtk.types.PositionType propval)
+  {
+    return setProperty("image-position", propval);
+  }
+
+  /** */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /** */
+  T relief(gtk.types.ReliefStyle propval)
+  {
+    return setProperty("relief", propval);
+  }
+
+  /** */
+  T useStock(bool propval)
+  {
+    return setProperty("use-stock", propval);
+  }
+
+  /** */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = If the child of the button is a #GtkMisc or #GtkAlignment, this property
+          can be used to control its horizontal alignment. 0.0 is left aligned,
+          1.0 is right aligned.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Access the child widget directly if you need to control
+        its alignment.
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = If the child of the button is a #GtkMisc or #GtkAlignment, this property
+          can be used to control its vertical alignment. 0.0 is top aligned,
+          1.0 is bottom aligned.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Access the child widget directly if you need to control
+        its alignment.
+  */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+}
+
+/// Fluent builder for [gtk.button.Button]
+final class ButtonGidBuilder : ButtonGidBuilderImpl!ButtonGidBuilder
+{
+  Button build()
+  {
+    return new Button(cast(void*)createGObject(Button._getGType), No.Take);
   }
 }

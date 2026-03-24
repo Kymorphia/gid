@@ -4,6 +4,7 @@ module gtksource.undo_manager_mixin;
 public import gtksource.undo_manager_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gtksource.c.functions;
 public import gtksource.c.types;
 public import gtksource.types;
@@ -161,4 +162,8 @@ template UndoManagerT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("can-undo-changed", closure, after);
   }
+}
+
+template UndoManagerGidBuilderT()
+{
 }

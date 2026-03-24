@@ -2,6 +2,7 @@
 module gst.pipeline;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.bin;
 import gst.bus;
@@ -92,6 +93,15 @@ class Pipeline : gst.bin.Bin
   }
 
   /**
+  Get builder for [gst.pipeline.Pipeline]
+  Returns: New builder object
+  */
+  static PipelineGidBuilder builder()
+  {
+    return new PipelineGidBuilder;
+  }
+
+  /**
       Get `autoFlushBus` property.
       Returns: Whether or not to automatically flush all messages on the
         pipeline's bus when going from READY to NULL state. Please see
@@ -111,7 +121,7 @@ class Pipeline : gst.bin.Bin
   */
   @property void autoFlushBus(bool propval)
   {
-    return setAutoFlushBus(propval);
+    setAutoFlushBus(propval);
   }
 
   /**
@@ -363,5 +373,56 @@ class Pipeline : gst.bin.Bin
   void useClock(gst.clock.Clock clock = null)
   {
     gst_pipeline_use_clock(cast(GstPipeline*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
+  }
+}
+
+class PipelineGidBuilderImpl(T) : gst.bin.BinGidBuilderImpl!T
+{
+
+
+  /**
+      Set `autoFlushBus` property.
+      Params:
+        propval = Whether or not to automatically flush all messages on the
+          pipeline's bus when going from READY to NULL state. Please see
+          [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoFlushBus(bool propval)
+  {
+    return setProperty("auto-flush-bus", propval);
+  }
+
+  /**
+      Set `delay` property.
+      Params:
+        propval = The expected delay needed for elements to spin up to the
+          PLAYING state expressed in nanoseconds.
+          see [gst.pipeline.Pipeline.setDelay] for more information on this option.
+      Returns: Builder instance for fluent chaining
+  */
+  T delay(ulong propval)
+  {
+    return setProperty("delay", propval);
+  }
+
+  /**
+      Set `latency` property.
+      Params:
+        propval = Latency to configure on the pipeline. See [gst.pipeline.Pipeline.setLatency].
+      Returns: Builder instance for fluent chaining
+  */
+  T latency(ulong propval)
+  {
+    return setProperty("latency", propval);
+  }
+}
+
+/// Fluent builder for [gst.pipeline.Pipeline]
+final class PipelineGidBuilder : PipelineGidBuilderImpl!PipelineGidBuilder
+{
+  Pipeline build()
+  {
+    return new Pipeline(cast(void*)createGObject(Pipeline._getGType), No.Take);
   }
 }

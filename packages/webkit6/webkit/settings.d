@@ -4,6 +4,7 @@ module webkit.settings;
 import gid.gid;
 import glib.error;
 import glib.key_file;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -54,6 +55,15 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.settings.Settings]
+  Returns: New builder object
+  */
+  static SettingsGidBuilder builder()
+  {
+    return new SettingsGidBuilder;
+  }
+
+  /**
       Get `allowFileAccessFromFileUrls` property.
       Returns: Whether file access is allowed from file URLs. By default, when
         something is loaded in a #WebKitWebView using a file URI, cross
@@ -77,7 +87,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void allowFileAccessFromFileUrls(bool propval)
   {
-    return setAllowFileAccessFromFileUrls(propval);
+    setAllowFileAccessFromFileUrls(propval);
   }
 
   /**
@@ -106,7 +116,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void allowModalDialogs(bool propval)
   {
-    return setAllowModalDialogs(propval);
+    setAllowModalDialogs(propval);
   }
 
   /**
@@ -131,7 +141,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void allowTopNavigationToDataUrls(bool propval)
   {
-    return setAllowTopNavigationToDataUrls(propval);
+    setAllowTopNavigationToDataUrls(propval);
   }
 
   /**
@@ -160,7 +170,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void allowUniversalAccessFromFileUrls(bool propval)
   {
-    return setAllowUniversalAccessFromFileUrls(propval);
+    setAllowUniversalAccessFromFileUrls(propval);
   }
 
   /**
@@ -183,7 +193,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void autoLoadImages(bool propval)
   {
-    return setAutoLoadImages(propval);
+    setAutoLoadImages(propval);
   }
 
   /**
@@ -202,7 +212,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void cursiveFontFamily(string propval)
   {
-    return setCursiveFontFamily(propval);
+    setCursiveFontFamily(propval);
   }
 
   /**
@@ -221,7 +231,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void defaultCharset(string propval)
   {
-    return setDefaultCharset(propval);
+    setDefaultCharset(propval);
   }
 
   /**
@@ -240,7 +250,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void defaultFontFamily(string propval)
   {
-    return setDefaultFontFamily(propval);
+    setDefaultFontFamily(propval);
   }
 
   /**
@@ -261,7 +271,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void defaultFontSize(uint propval)
   {
-    return setDefaultFontSize(propval);
+    setDefaultFontSize(propval);
   }
 
   /**
@@ -282,7 +292,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void defaultMonospaceFontSize(uint propval)
   {
-    return setDefaultMonospaceFontSize(propval);
+    setDefaultMonospaceFontSize(propval);
   }
 
   /**
@@ -311,7 +321,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void disableWebSecurity(bool propval)
   {
-    return setDisableWebSecurity(propval);
+    setDisableWebSecurity(propval);
   }
 
   /**
@@ -334,7 +344,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void drawCompositingIndicators(bool propval)
   {
-    return setDrawCompositingIndicators(propval);
+    setDrawCompositingIndicators(propval);
   }
 
   /**
@@ -359,7 +369,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enable2dCanvasAcceleration(bool propval)
   {
-    return setEnable2dCanvasAcceleration(propval);
+    setEnable2dCanvasAcceleration(propval);
   }
 
   /**
@@ -378,7 +388,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableBackForwardNavigationGestures(bool propval)
   {
-    return setEnableBackForwardNavigationGestures(propval);
+    setEnableBackForwardNavigationGestures(propval);
   }
 
   /**
@@ -397,7 +407,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableCaretBrowsing(bool propval)
   {
-    return setEnableCaretBrowsing(propval);
+    setEnableCaretBrowsing(propval);
   }
 
   /**
@@ -416,7 +426,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableDeveloperExtras(bool propval)
   {
-    return setEnableDeveloperExtras(propval);
+    setEnableDeveloperExtras(propval);
   }
 
   /**
@@ -437,7 +447,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableDnsPrefetching(bool propval)
   {
-    return setEnableDnsPrefetching(propval);
+    setEnableDnsPrefetching(propval);
   }
 
   /**
@@ -466,7 +476,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableEncryptedMedia(bool propval)
   {
-    return setEnableEncryptedMedia(propval);
+    setEnableEncryptedMedia(propval);
   }
 
   /**
@@ -491,7 +501,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableFullscreen(bool propval)
   {
-    return setEnableFullscreen(propval);
+    setEnableFullscreen(propval);
   }
 
   /**
@@ -510,7 +520,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableHtml5Database(bool propval)
   {
-    return setEnableHtml5Database(propval);
+    setEnableHtml5Database(propval);
   }
 
   /**
@@ -537,7 +547,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableHtml5LocalStorage(bool propval)
   {
-    return setEnableHtml5LocalStorage(propval);
+    setEnableHtml5LocalStorage(propval);
   }
 
   /**
@@ -562,7 +572,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableHyperlinkAuditing(bool propval)
   {
-    return setEnableHyperlinkAuditing(propval);
+    setEnableHyperlinkAuditing(propval);
   }
 
   /**
@@ -581,7 +591,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableJavascript(bool propval)
   {
-    return setEnableJavascript(propval);
+    setEnableJavascript(propval);
   }
 
   /**
@@ -604,7 +614,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableJavascriptMarkup(bool propval)
   {
-    return setEnableJavascriptMarkup(propval);
+    setEnableJavascriptMarkup(propval);
   }
 
   /**
@@ -627,7 +637,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableMedia(bool propval)
   {
-    return setEnableMedia(propval);
+    setEnableMedia(propval);
   }
 
   /**
@@ -660,7 +670,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableMediaCapabilities(bool propval)
   {
-    return setEnableMediaCapabilities(propval);
+    setEnableMediaCapabilities(propval);
   }
 
   /**
@@ -687,7 +697,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableMediaStream(bool propval)
   {
-    return setEnableMediaStream(propval);
+    setEnableMediaStream(propval);
   }
 
   /**
@@ -714,7 +724,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableMediasource(bool propval)
   {
-    return setEnableMediasource(propval);
+    setEnableMediasource(propval);
   }
 
   /**
@@ -737,7 +747,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableMockCaptureDevices(bool propval)
   {
-    return setEnableMockCaptureDevices(propval);
+    setEnableMockCaptureDevices(propval);
   }
 
   /**
@@ -756,7 +766,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableOfflineWebApplicationCache(bool propval)
   {
-    return setEnableOfflineWebApplicationCache(propval);
+    setEnableOfflineWebApplicationCache(propval);
   }
 
   /**
@@ -791,7 +801,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enablePageCache(bool propval)
   {
-    return setEnablePageCache(propval);
+    setEnablePageCache(propval);
   }
 
   /**
@@ -810,7 +820,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableResizableTextAreas(bool propval)
   {
-    return setEnableResizableTextAreas(propval);
+    setEnableResizableTextAreas(propval);
   }
 
   /**
@@ -839,7 +849,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableSiteSpecificQuirks(bool propval)
   {
-    return setEnableSiteSpecificQuirks(propval);
+    setEnableSiteSpecificQuirks(propval);
   }
 
   /**
@@ -858,7 +868,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableSmoothScrolling(bool propval)
   {
-    return setEnableSmoothScrolling(propval);
+    setEnableSmoothScrolling(propval);
   }
 
   /**
@@ -887,7 +897,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableSpatialNavigation(bool propval)
   {
-    return setEnableSpatialNavigation(propval);
+    setEnableSpatialNavigation(propval);
   }
 
   /**
@@ -912,7 +922,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableTabsToLinks(bool propval)
   {
-    return setEnableTabsToLinks(propval);
+    setEnableTabsToLinks(propval);
   }
 
   /**
@@ -937,7 +947,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableWebaudio(bool propval)
   {
-    return setEnableWebaudio(propval);
+    setEnableWebaudio(propval);
   }
 
   /**
@@ -958,7 +968,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableWebgl(bool propval)
   {
-    return setEnableWebgl(propval);
+    setEnableWebgl(propval);
   }
 
   /**
@@ -987,7 +997,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableWebrtc(bool propval)
   {
-    return setEnableWebrtc(propval);
+    setEnableWebrtc(propval);
   }
 
   /**
@@ -1008,7 +1018,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void enableWriteConsoleMessagesToStdout(bool propval)
   {
-    return setEnableWriteConsoleMessagesToStdout(propval);
+    setEnableWriteConsoleMessagesToStdout(propval);
   }
 
   /**
@@ -1027,7 +1037,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void fantasyFontFamily(string propval)
   {
-    return setFantasyFontFamily(propval);
+    setFantasyFontFamily(propval);
   }
 
   /**
@@ -1058,7 +1068,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void hardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy propval)
   {
-    return setHardwareAccelerationPolicy(propval);
+    setHardwareAccelerationPolicy(propval);
   }
 
   /**
@@ -1079,7 +1089,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void javascriptCanAccessClipboard(bool propval)
   {
-    return setJavascriptCanAccessClipboard(propval);
+    setJavascriptCanAccessClipboard(propval);
   }
 
   /**
@@ -1100,7 +1110,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void javascriptCanOpenWindowsAutomatically(bool propval)
   {
-    return setJavascriptCanOpenWindowsAutomatically(propval);
+    setJavascriptCanOpenWindowsAutomatically(propval);
   }
 
   /**
@@ -1119,7 +1129,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void loadIconsIgnoringImageLoadSetting(bool propval)
   {
-    return setLoadIconsIgnoringImageLoadSetting(propval);
+    setLoadIconsIgnoringImageLoadSetting(propval);
   }
 
   /**
@@ -1140,7 +1150,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void mediaContentTypesRequiringHardwareSupport(string propval)
   {
-    return setMediaContentTypesRequiringHardwareSupport(propval);
+    setMediaContentTypesRequiringHardwareSupport(propval);
   }
 
   /**
@@ -1163,7 +1173,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void mediaPlaybackAllowsInline(bool propval)
   {
-    return setMediaPlaybackAllowsInline(propval);
+    setMediaPlaybackAllowsInline(propval);
   }
 
   /**
@@ -1190,7 +1200,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void mediaPlaybackRequiresUserGesture(bool propval)
   {
-    return setMediaPlaybackRequiresUserGesture(propval);
+    setMediaPlaybackRequiresUserGesture(propval);
   }
 
   /**
@@ -1213,7 +1223,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void minimumFontSize(uint propval)
   {
-    return setMinimumFontSize(propval);
+    setMinimumFontSize(propval);
   }
 
   /**
@@ -1232,7 +1242,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void monospaceFontFamily(string propval)
   {
-    return setMonospaceFontFamily(propval);
+    setMonospaceFontFamily(propval);
   }
 
   /**
@@ -1251,7 +1261,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void pictographFontFamily(string propval)
   {
-    return setPictographFontFamily(propval);
+    setPictographFontFamily(propval);
   }
 
   /**
@@ -1270,7 +1280,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void printBackgrounds(bool propval)
   {
-    return setPrintBackgrounds(propval);
+    setPrintBackgrounds(propval);
   }
 
   /**
@@ -1289,7 +1299,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void sansSerifFontFamily(string propval)
   {
-    return setSansSerifFontFamily(propval);
+    setSansSerifFontFamily(propval);
   }
 
   /**
@@ -1308,7 +1318,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void serifFontFamily(string propval)
   {
-    return setSerifFontFamily(propval);
+    setSerifFontFamily(propval);
   }
 
   /**
@@ -1341,7 +1351,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void userAgent(string propval)
   {
-    return setUserAgent(propval);
+    setUserAgent(propval);
   }
 
   /**
@@ -1372,7 +1382,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void webrtcUdpPortsRange(string propval)
   {
-    return setWebrtcUdpPortsRange(propval);
+    setWebrtcUdpPortsRange(propval);
   }
 
   /**
@@ -1397,7 +1407,7 @@ class Settings : gobject.object.ObjectWrap
   */
   @property void zoomTextOnly(bool propval)
   {
-    return setZoomTextOnly(propval);
+    setZoomTextOnly(propval);
   }
 
   /**
@@ -2863,5 +2873,777 @@ class Settings : gobject.object.ObjectWrap
   void setZoomTextOnly(bool zoomTextOnly)
   {
     webkit_settings_set_zoom_text_only(cast(WebKitSettings*)this._cPtr, zoomTextOnly);
+  }
+}
+
+class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `allowFileAccessFromFileUrls` property.
+      Params:
+        propval = Whether file access is allowed from file URLs. By default, when
+          something is loaded in a #WebKitWebView using a file URI, cross
+          origin requests to other file resources are not allowed. This
+          setting allows you to change that behaviour, so that it would be
+          possible to do a XMLHttpRequest of a local file, for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowFileAccessFromFileUrls(bool propval)
+  {
+    return setProperty("allow-file-access-from-file-urls", propval);
+  }
+
+  /**
+      Set `allowModalDialogs` property.
+      Params:
+        propval = Determine whether it's allowed to create and run modal dialogs
+          from a #WebKitWebView through JavaScript with
+          <function>window.showModalDialog</function>. If it's set to
+          false, the associated #WebKitWebView won't be able to create
+          new modal dialogs, so not even the #WebKitWebView::create
+          signal will be emitted.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowModalDialogs(bool propval)
+  {
+    return setProperty("allow-modal-dialogs", propval);
+  }
+
+  /**
+      Set `allowTopNavigationToDataUrls` property.
+      Params:
+        propval = Whether or not the top frame is allowed to navigate to data URLs. It is disabled by default
+          due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
+          and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
+          embeds a WebView and you have control of the pages being show instead of a generic browser.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowTopNavigationToDataUrls(bool propval)
+  {
+    return setProperty("allow-top-navigation-to-data-urls", propval);
+  }
+
+  /**
+      Set `allowUniversalAccessFromFileUrls` property.
+      Params:
+        propval = Whether or not JavaScript running in the context of a file scheme URL
+          should be allowed to access content from any origin.  By default, when
+          something is loaded in a #WebKitWebView using a file scheme URL,
+          access to the local file system and arbitrary local storage is not
+          allowed. This setting allows you to change that behaviour, so that
+          it would be possible to use local storage, for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowUniversalAccessFromFileUrls(bool propval)
+  {
+    return setProperty("allow-universal-access-from-file-urls", propval);
+  }
+
+  /**
+      Set `autoLoadImages` property.
+      Params:
+        propval = Determines whether images should be automatically loaded or not.
+          On devices where network bandwidth is of concern, it might be
+          useful to turn this property off.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoLoadImages(bool propval)
+  {
+    return setProperty("auto-load-images", propval);
+  }
+
+  /**
+      Set `cursiveFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a cursive font.
+      Returns: Builder instance for fluent chaining
+  */
+  T cursiveFontFamily(string propval)
+  {
+    return setProperty("cursive-font-family", propval);
+  }
+
+  /**
+      Set `defaultCharset` property.
+      Params:
+        propval = The default text charset used when interpreting content with an unspecified charset.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultCharset(string propval)
+  {
+    return setProperty("default-charset", propval);
+  }
+
+  /**
+      Set `defaultFontFamily` property.
+      Params:
+        propval = The font family to use as the default for content that does not specify a font.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultFontFamily(string propval)
+  {
+    return setProperty("default-font-family", propval);
+  }
+
+  /**
+      Set `defaultFontSize` property.
+      Params:
+        propval = The default font size in pixels to use for content displayed if
+          no font size is specified.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultFontSize(uint propval)
+  {
+    return setProperty("default-font-size", propval);
+  }
+
+  /**
+      Set `defaultMonospaceFontSize` property.
+      Params:
+        propval = The default font size in pixels to use for content displayed in
+          monospace font if no font size is specified.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultMonospaceFontSize(uint propval)
+  {
+    return setProperty("default-monospace-font-size", propval);
+  }
+
+  /**
+      Set `disableWebSecurity` property.
+      Params:
+        propval = Enable or disable support for Web Security on pages.
+          
+          This setting disables the same-origin policy, allowing every website full control over
+          all other websites. This is for use in special environments where you wish to disable
+          all security and allow websites to hack each other. It is impossible to use this setting
+          securely.
+      Returns: Builder instance for fluent chaining
+  */
+  T disableWebSecurity(bool propval)
+  {
+    return setProperty("disable-web-security", propval);
+  }
+
+  /**
+      Set `drawCompositingIndicators` property.
+      Params:
+        propval = Whether to draw compositing borders and repaint counters on layers drawn
+          with accelerated compositing. This is useful for debugging issues related
+          to web content that is composited with the GPU.
+      Returns: Builder instance for fluent chaining
+  */
+  T drawCompositingIndicators(bool propval)
+  {
+    return setProperty("draw-compositing-indicators", propval);
+  }
+
+  /**
+      Set `enable2dCanvasAcceleration` property.
+      Params:
+        propval = Enable or disable 2D canvas acceleration.
+          If this setting is enabled, the 2D canvas will be accelerated even if Skia CPU
+          is used for rendering. However, the canvas can be unaccelerated even when this setting
+          is enabled, for other reasons like its size or when willReadFrequently property is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T enable2dCanvasAcceleration(bool propval)
+  {
+    return setProperty("enable-2d-canvas-acceleration", propval);
+  }
+
+  /**
+      Set `enableBackForwardNavigationGestures` property.
+      Params:
+        propval = Enable or disable horizontal swipe gesture for back-forward navigation.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableBackForwardNavigationGestures(bool propval)
+  {
+    return setProperty("enable-back-forward-navigation-gestures", propval);
+  }
+
+  /**
+      Set `enableCaretBrowsing` property.
+      Params:
+        propval = Whether to enable accessibility enhanced keyboard navigation.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableCaretBrowsing(bool propval)
+  {
+    return setProperty("enable-caret-browsing", propval);
+  }
+
+  /**
+      Set `enableDeveloperExtras` property.
+      Params:
+        propval = Determines whether or not developer tools, such as the Web Inspector, are enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableDeveloperExtras(bool propval)
+  {
+    return setProperty("enable-developer-extras", propval);
+  }
+
+  /**
+      Set `enableDnsPrefetching` property.
+      Params:
+        propval = Determines whether or not to prefetch domain names. DNS prefetching attempts
+          to resolve domain names before a user tries to follow a link.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableDnsPrefetching(bool propval)
+  {
+    return setProperty("enable-dns-prefetching", propval);
+  }
+
+  /**
+      Set `enableEncryptedMedia` property.
+      Params:
+        propval = Enable or disable support for Encrypted Media API on pages.
+          EncryptedMedia is an experimental JavaScript API for playing encrypted media in HTML.
+          This property will only work as intended if the EncryptedMedia feature is enabled at build time
+          with the ENABLE_ENCRYPTED_MEDIA flag.
+          
+          See https://www.w3.org/TR/encrypted-media/
+      Returns: Builder instance for fluent chaining
+  */
+  T enableEncryptedMedia(bool propval)
+  {
+    return setProperty("enable-encrypted-media", propval);
+  }
+
+  /**
+      Set `enableFullscreen` property.
+      Params:
+        propval = Whether to enable the Javascript Fullscreen API. The API
+          allows any HTML element to request fullscreen display. See also
+          the current draft of the spec:
+          http://www.w3.org/TR/fullscreen/
+      Returns: Builder instance for fluent chaining
+  */
+  T enableFullscreen(bool propval)
+  {
+    return setProperty("enable-fullscreen", propval);
+  }
+
+  /**
+      Set `enableHtml5Database` property.
+      Params:
+        propval = Whether to enable HTML5 client-side SQL database support (IndexedDB).
+      Returns: Builder instance for fluent chaining
+  */
+  T enableHtml5Database(bool propval)
+  {
+    return setProperty("enable-html5-database", propval);
+  }
+
+  /**
+      Set `enableHtml5LocalStorage` property.
+      Params:
+        propval = Whether to enable HTML5 local storage support. Local storage provides
+          simple synchronous storage access.
+          
+          HTML5 local storage specification is available at
+          http://dev.w3.org/html5/webstorage/.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableHtml5LocalStorage(bool propval)
+  {
+    return setProperty("enable-html5-local-storage", propval);
+  }
+
+  /**
+      Set `enableHyperlinkAuditing` property.
+      Params:
+        propval = Determines whether or not hyperlink auditing is enabled.
+          
+          The hyperlink auditing specification is available at
+          http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableHyperlinkAuditing(bool propval)
+  {
+    return setProperty("enable-hyperlink-auditing", propval);
+  }
+
+  /**
+      Set `enableJavascript` property.
+      Params:
+        propval = Determines whether or not JavaScript executes within a page.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableJavascript(bool propval)
+  {
+    return setProperty("enable-javascript", propval);
+  }
+
+  /**
+      Set `enableJavascriptMarkup` property.
+      Params:
+        propval = Determines whether or not JavaScript markup is allowed in document. When this setting is disabled,
+          all JavaScript-related elements and attributes are removed from the document during parsing. Note that
+          executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableJavascriptMarkup(bool propval)
+  {
+    return setProperty("enable-javascript-markup", propval);
+  }
+
+  /**
+      Set `enableMedia` property.
+      Params:
+        propval = Enable or disable support for media playback on pages. This setting is enabled by
+          default. Disabling it means `<audio>`, `<track>` and `<video>` elements will have
+          playback support disabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableMedia(bool propval)
+  {
+    return setProperty("enable-media", propval);
+  }
+
+  /**
+      Set `enableMediaCapabilities` property.
+      Params:
+        propval = Enable or disable support for MediaCapabilities on pages. This
+          specification intends to provide APIs to allow websites to make an optimal
+          decision when picking media content for the user. The APIs will expose
+          information about the decoding and encoding capabilities for a given format
+          but also output capabilities to find the best match based on the device’s
+          display.
+          
+          See also https://wicg.github.io/media-capabilities/
+      Returns: Builder instance for fluent chaining
+  */
+  T enableMediaCapabilities(bool propval)
+  {
+    return setProperty("enable-media-capabilities", propval);
+  }
+
+  /**
+      Set `enableMediaStream` property.
+      Params:
+        propval = Enable or disable support for MediaStream on pages. MediaStream
+          is an experimental proposal for allowing web pages to access
+          audio and video devices for capture.
+          
+          See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
+      Returns: Builder instance for fluent chaining
+  */
+  T enableMediaStream(bool propval)
+  {
+    return setProperty("enable-media-stream", propval);
+  }
+
+  /**
+      Set `enableMediasource` property.
+      Params:
+        propval = Enable or disable support for MediaSource on pages. MediaSource
+          extends HTMLMediaElement to allow JavaScript to generate media
+          streams for playback.
+          
+          See also http://www.w3.org/TR/media-source/
+      Returns: Builder instance for fluent chaining
+  */
+  T enableMediasource(bool propval)
+  {
+    return setProperty("enable-mediasource", propval);
+  }
+
+  /**
+      Set `enableMockCaptureDevices` property.
+      Params:
+        propval = Enable or disable the Mock Capture Devices. Those are fake
+          Microphone and Camera devices to be used as MediaStream
+          sources.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableMockCaptureDevices(bool propval)
+  {
+    return setProperty("enable-mock-capture-devices", propval);
+  }
+
+  /**
+      Set `enableOfflineWebApplicationCache` property.
+      Params:
+        propval = Unsupported setting. This property does nothing.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableOfflineWebApplicationCache(bool propval)
+  {
+    return setProperty("enable-offline-web-application-cache", propval);
+  }
+
+  /**
+      Set `enablePageCache` property.
+      Params:
+        propval = Enable or disable the page cache. Disabling the page cache is
+          generally only useful for special circumstances like low-memory
+          scenarios or special purpose applications like static HTML
+          viewers. This setting only controls the Page Cache, this cache
+          is different than the disk-based or memory-based traditional
+          resource caches, its point is to make going back and forth
+          between pages much faster. For details about the different types
+          of caches and their purposes see:
+          http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
+      Returns: Builder instance for fluent chaining
+  */
+  T enablePageCache(bool propval)
+  {
+    return setProperty("enable-page-cache", propval);
+  }
+
+  /**
+      Set `enableResizableTextAreas` property.
+      Params:
+        propval = Determines whether or not text areas can be resized.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableResizableTextAreas(bool propval)
+  {
+    return setProperty("enable-resizable-text-areas", propval);
+  }
+
+  /**
+      Set `enableSiteSpecificQuirks` property.
+      Params:
+        propval = Whether to turn on site-specific quirks. Turning this on will
+          tell WebKit to use some site-specific workarounds for
+          better web compatibility. For example, older versions of
+          MediaWiki will incorrectly send to WebKit a CSS file with KHTML
+          workarounds. By turning on site-specific quirks, WebKit will
+          special-case this and other cases to make some specific sites work.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSiteSpecificQuirks(bool propval)
+  {
+    return setProperty("enable-site-specific-quirks", propval);
+  }
+
+  /**
+      Set `enableSmoothScrolling` property.
+      Params:
+        propval = Enable or disable smooth scrolling.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSmoothScrolling(bool propval)
+  {
+    return setProperty("enable-smooth-scrolling", propval);
+  }
+
+  /**
+      Set `enableSpatialNavigation` property.
+      Params:
+        propval = Whether to enable Spatial Navigation. This feature consists in the ability
+          to navigate between focusable elements in a Web page, such as hyperlinks
+          and form controls, by using Left, Right, Up and Down arrow keys.
+          For example, if an user presses the Right key, heuristics determine whether
+          there is an element they might be trying to reach towards the right, and if
+          there are multiple elements, which element they probably wants.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSpatialNavigation(bool propval)
+  {
+    return setProperty("enable-spatial-navigation", propval);
+  }
+
+  /**
+      Set `enableTabsToLinks` property.
+      Params:
+        propval = Determines whether the tab key cycles through the elements on the page.
+          When this setting is enabled, users will be able to focus the next element
+          in the page by pressing the tab key. If the selected element is editable,
+          then pressing tab key will insert the tab character.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableTabsToLinks(bool propval)
+  {
+    return setProperty("enable-tabs-to-links", propval);
+  }
+
+  /**
+      Set `enableWebaudio` property.
+      Params:
+        propval = Enable or disable support for WebAudio on pages. WebAudio is an
+          API for processing and synthesizing audio in web applications
+          
+          See also https://webaudio.github.io/web-audio-api
+      Returns: Builder instance for fluent chaining
+  */
+  T enableWebaudio(bool propval)
+  {
+    return setProperty("enable-webaudio", propval);
+  }
+
+  /**
+      Set `enableWebgl` property.
+      Params:
+        propval = Enable or disable support for WebGL on pages. WebGL enables web
+          content to use an API based on OpenGL ES 2.0.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableWebgl(bool propval)
+  {
+    return setProperty("enable-webgl", propval);
+  }
+
+  /**
+      Set `enableWebrtc` property.
+      Params:
+        propval = Enable WebRTC support for loaded pages.
+          
+          Enabling this setting implies that `property@Settings:enable-media-stream`
+          will be enabled as well.
+          
+          See also https://www.w3.org/TR/webrtc/
+      Returns: Builder instance for fluent chaining
+  */
+  T enableWebrtc(bool propval)
+  {
+    return setProperty("enable-webrtc", propval);
+  }
+
+  /**
+      Set `enableWriteConsoleMessagesToStdout` property.
+      Params:
+        propval = Enable or disable writing console messages to stdout. These are messages
+          sent to the console with console.log and related methods.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableWriteConsoleMessagesToStdout(bool propval)
+  {
+    return setProperty("enable-write-console-messages-to-stdout", propval);
+  }
+
+  /**
+      Set `fantasyFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a fantasy font.
+      Returns: Builder instance for fluent chaining
+  */
+  T fantasyFontFamily(string propval)
+  {
+    return setProperty("fantasy-font-family", propval);
+  }
+
+  /**
+      Set `hardwareAccelerationPolicy` property.
+      Params:
+        propval = The #WebKitHardwareAccelerationPolicy to decide how to enable and disable
+          hardware acceleration. Disabling hardware acceleration might
+          cause some websites to not render correctly or consume more CPU.
+          
+          Note that changing this setting might not be possible if hardware acceleration is not
+          supported by the hardware or the system. In that case, you can get the value to know the
+          actual policy being used, but changing the setting will not have any effect.
+      Returns: Builder instance for fluent chaining
+  */
+  T hardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy propval)
+  {
+    return setProperty("hardware-acceleration-policy", propval);
+  }
+
+  /**
+      Set `javascriptCanAccessClipboard` property.
+      Params:
+        propval = Whether JavaScript can access the clipboard. The default value is false. If
+          set to true, document.execCommand() allows cut, copy and paste commands.
+      Returns: Builder instance for fluent chaining
+  */
+  T javascriptCanAccessClipboard(bool propval)
+  {
+    return setProperty("javascript-can-access-clipboard", propval);
+  }
+
+  /**
+      Set `javascriptCanOpenWindowsAutomatically` property.
+      Params:
+        propval = Whether JavaScript can open popup windows automatically without user
+          intervention.
+      Returns: Builder instance for fluent chaining
+  */
+  T javascriptCanOpenWindowsAutomatically(bool propval)
+  {
+    return setProperty("javascript-can-open-windows-automatically", propval);
+  }
+
+  /**
+      Set `loadIconsIgnoringImageLoadSetting` property.
+      Params:
+        propval = Unsupported setting. This property does nothing.
+      Returns: Builder instance for fluent chaining
+  */
+  T loadIconsIgnoringImageLoadSetting(bool propval)
+  {
+    return setProperty("load-icons-ignoring-image-load-setting", propval);
+  }
+
+  /**
+      Set `mediaContentTypesRequiringHardwareSupport` property.
+      Params:
+        propval = List of media content types requiring hardware support, split by semicolons (:).
+          For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
+      Returns: Builder instance for fluent chaining
+  */
+  T mediaContentTypesRequiringHardwareSupport(string propval)
+  {
+    return setProperty("media-content-types-requiring-hardware-support", propval);
+  }
+
+  /**
+      Set `mediaPlaybackAllowsInline` property.
+      Params:
+        propval = Whether media playback is full-screen only or inline playback is allowed.
+          This is true by default, so media playback can be inline. Setting it to
+          false allows specifying that media playback should be always fullscreen.
+      Returns: Builder instance for fluent chaining
+  */
+  T mediaPlaybackAllowsInline(bool propval)
+  {
+    return setProperty("media-playback-allows-inline", propval);
+  }
+
+  /**
+      Set `mediaPlaybackRequiresUserGesture` property.
+      Params:
+        propval = Whether a user gesture (such as clicking the play button)
+          would be required to start media playback or load media. This is off
+          by default, so media playback could start automatically.
+          Setting it on requires a gesture by the user to start playback, or to
+          load the media.
+      Returns: Builder instance for fluent chaining
+  */
+  T mediaPlaybackRequiresUserGesture(bool propval)
+  {
+    return setProperty("media-playback-requires-user-gesture", propval);
+  }
+
+  /**
+      Set `minimumFontSize` property.
+      Params:
+        propval = The minimum font size in pixels used to display text. This setting
+          controls the absolute smallest size. Values other than 0 can
+          potentially break page layouts.
+      Returns: Builder instance for fluent chaining
+  */
+  T minimumFontSize(uint propval)
+  {
+    return setProperty("minimum-font-size", propval);
+  }
+
+  /**
+      Set `monospaceFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a monospace font.
+      Returns: Builder instance for fluent chaining
+  */
+  T monospaceFontFamily(string propval)
+  {
+    return setProperty("monospace-font-family", propval);
+  }
+
+  /**
+      Set `pictographFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a pictograph font.
+      Returns: Builder instance for fluent chaining
+  */
+  T pictographFontFamily(string propval)
+  {
+    return setProperty("pictograph-font-family", propval);
+  }
+
+  /**
+      Set `printBackgrounds` property.
+      Params:
+        propval = Whether background images should be drawn during printing.
+      Returns: Builder instance for fluent chaining
+  */
+  T printBackgrounds(bool propval)
+  {
+    return setProperty("print-backgrounds", propval);
+  }
+
+  /**
+      Set `sansSerifFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a sans-serif font.
+      Returns: Builder instance for fluent chaining
+  */
+  T sansSerifFontFamily(string propval)
+  {
+    return setProperty("sans-serif-font-family", propval);
+  }
+
+  /**
+      Set `serifFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a serif font.
+      Returns: Builder instance for fluent chaining
+  */
+  T serifFontFamily(string propval)
+  {
+    return setProperty("serif-font-family", propval);
+  }
+
+  /**
+      Set `userAgent` property.
+      Params:
+        propval = The user-agent string used by WebKit. Unusual user-agent strings may cause web
+          content to render incorrectly or fail to run, as many web pages are written to
+          parse the user-agent strings of only the most popular browsers. Therefore, it's
+          typically better to not completely override the standard user-agent, but to use
+          [webkit.settings.Settings.setUserAgentWithApplicationDetails] instead.
+          
+          If this property is set to the empty string or null, it will revert to the standard
+          user-agent.
+      Returns: Builder instance for fluent chaining
+  */
+  T userAgent(string propval)
+  {
+    return setProperty("user-agent", propval);
+  }
+
+  /**
+      Set `webrtcUdpPortsRange` property.
+      Params:
+        propval = Allow customization of the WebRTC UDP ports range.
+          
+          In some constrained environments where a firewall blocks UDP network traffic excepted on a
+          specific port range, this settings can be used to give hints to the WebRTC backend regarding
+          which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
+          default empty string value means the OS will use no hints from the WebRTC backend. Using 0
+          for one of the values is allowed and means the value is unspecified.
+      Returns: Builder instance for fluent chaining
+  */
+  T webrtcUdpPortsRange(string propval)
+  {
+    return setProperty("webrtc-udp-ports-range", propval);
+  }
+
+  /**
+      Set `zoomTextOnly` property.
+      Params:
+        propval = Whether #WebKitWebView:zoom-level affects only the
+          text of the page or all the contents. Other contents containing text
+          like form controls will be also affected by zoom factor when
+          this property is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T zoomTextOnly(bool propval)
+  {
+    return setProperty("zoom-text-only", propval);
+  }
+}
+
+/// Fluent builder for [webkit.settings.Settings]
+final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
+{
+  Settings build()
+  {
+    return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);
   }
 }

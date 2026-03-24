@@ -2,6 +2,7 @@
 module gtk.viewport;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -67,6 +68,15 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+  Get builder for [gtk.viewport.Viewport]
+  Returns: New builder object
+  */
+  static ViewportGidBuilder builder()
+  {
+    return new ViewportGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -82,7 +92,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -109,7 +119,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void scrollToFocus(bool propval)
   {
-    return setScrollToFocus(propval);
+    setScrollToFocus(propval);
   }
 
   mixin ScrollableT!();
@@ -193,5 +203,46 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   void setScrollToFocus(bool scrollToFocus)
   {
     gtk_viewport_set_scroll_to_focus(cast(GtkViewport*)this._cPtr, scrollToFocus);
+  }
+}
+
+class ViewportGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `scrollToFocus` property.
+      Params:
+        propval = Whether to scroll when the focus changes.
+          
+          Before 4.6.2, this property was mistakenly defaulting to FALSE, so if your
+          code needs to work with older versions, consider setting it explicitly to
+          TRUE.
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollToFocus(bool propval)
+  {
+    return setProperty("scroll-to-focus", propval);
+  }
+}
+
+/// Fluent builder for [gtk.viewport.Viewport]
+final class ViewportGidBuilder : ViewportGidBuilderImpl!ViewportGidBuilder
+{
+  Viewport build()
+  {
+    return new Viewport(cast(void*)createGObject(Viewport._getGType), No.Take);
   }
 }

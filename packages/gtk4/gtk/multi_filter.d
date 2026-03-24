@@ -4,6 +4,7 @@ module gtk.multi_filter;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.buildable;
@@ -42,6 +43,15 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   override MultiFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.multi_filter.MultiFilter]
+  Returns: New builder object
+  */
+  static MultiFilterGidBuilder builder()
+  {
+    return new MultiFilterGidBuilder;
   }
 
   /**
@@ -89,5 +99,21 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   void remove(uint position)
   {
     gtk_multi_filter_remove(cast(GtkMultiFilter*)this._cPtr, position);
+  }
+}
+
+class MultiFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.multi_filter.MultiFilter]
+final class MultiFilterGidBuilder : MultiFilterGidBuilderImpl!MultiFilterGidBuilder
+{
+  MultiFilter build()
+  {
+    return new MultiFilter(cast(void*)createGObject(MultiFilter._getGType), No.Take);
   }
 }

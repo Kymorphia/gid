@@ -6,6 +6,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     #GdkDevicePad is an interface implemented by devices of type
@@ -73,4 +74,8 @@ interface DevicePad
       Returns: The number of button/ring/strip groups in the pad.
   */
   int getNGroups();
+}
+
+interface DevicePadGidBuilderImpl(T)
+{
 }

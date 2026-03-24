@@ -8,6 +8,7 @@ import arrow.month_day_nano;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -36,6 +37,15 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   override MonthDayNanoIntervalArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.month_day_nano_interval_array_builder.MonthDayNanoIntervalArrayBuilder]
+  Returns: New builder object
+  */
+  static MonthDayNanoIntervalArrayBuilderGidBuilder builder()
+  {
+    return new MonthDayNanoIntervalArrayBuilderGidBuilder;
   }
 
   /** */
@@ -92,5 +102,18 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class MonthDayNanoIntervalArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_day_nano_interval_array_builder.MonthDayNanoIntervalArrayBuilder]
+final class MonthDayNanoIntervalArrayBuilderGidBuilder : MonthDayNanoIntervalArrayBuilderGidBuilderImpl!MonthDayNanoIntervalArrayBuilderGidBuilder
+{
+  MonthDayNanoIntervalArrayBuilder build()
+  {
+    return new MonthDayNanoIntervalArrayBuilder(cast(void*)createGObject(MonthDayNanoIntervalArrayBuilder._getGType), Yes.Take);
   }
 }

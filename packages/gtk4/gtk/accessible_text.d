@@ -3,6 +3,7 @@ module gtk.accessible_text;
 
 public import gtk.accessible_text_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -62,4 +63,8 @@ interface AccessibleText
       technologies.
   */
   void updateSelectionBound();
+}
+
+interface AccessibleTextGidBuilderImpl(T)
+{
 }

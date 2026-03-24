@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
@@ -36,11 +37,33 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.boolean_data_type.BooleanDataType]
+  Returns: New builder object
+  */
+  static BooleanDataTypeGidBuilder builder()
+  {
+    return new BooleanDataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowBooleanDataType* _cretval;
     _cretval = garrow_boolean_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class BooleanDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.boolean_data_type.BooleanDataType]
+final class BooleanDataTypeGidBuilder : BooleanDataTypeGidBuilderImpl!BooleanDataTypeGidBuilder
+{
+  BooleanDataType build()
+  {
+    return new BooleanDataType(cast(void*)createGObject(BooleanDataType._getGType), Yes.Take);
   }
 }

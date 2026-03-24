@@ -7,6 +7,7 @@ import gdk.color;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -60,6 +61,15 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
+  Get builder for [gtk.color_button.ColorButton]
+  Returns: New builder object
+  */
+  static ColorButtonGidBuilder builder()
+  {
+    return new ColorButtonGidBuilder;
+  }
+
+  /**
       Get `alpha` property.
       Returns: The selected opacity value (0 fully transparent, 65535 fully opaque).
   */
@@ -98,7 +108,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   @property void color(gdk.color.Color propval)
   {
-    return setColor(propval);
+    setColor(propval);
   }
 
   /**
@@ -165,7 +175,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -188,7 +198,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   @property void useAlpha(bool propval)
   {
-    return setUseAlpha(propval);
+    setUseAlpha(propval);
   }
 
   mixin ColorChooserT!();
@@ -385,5 +395,95 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-set", closure, after);
+  }
+}
+
+class ColorButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.color_chooser.ColorChooserGidBuilderImpl!T
+{
+
+  mixin ColorChooserGidBuilderT!();
+
+  /**
+      Set `alpha` property.
+      Params:
+        propval = The selected opacity value (0 fully transparent, 65535 fully opaque).
+      Returns: Builder instance for fluent chaining
+  */
+  T alpha(uint propval)
+  {
+    return setProperty("alpha", propval);
+  }
+
+  /**
+      Set `color` property.
+      Params:
+        propval = The selected color.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkColorButton:rgba instead.
+  */
+  T color(gdk.color.Color propval)
+  {
+    return setProperty("color", propval);
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The RGBA color.
+      Returns: Builder instance for fluent chaining
+  */
+  T rgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("rgba", propval);
+  }
+
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = Set this property to true to skip the palette
+          in the dialog and go directly to the color editor.
+          
+          This property should be used in cases where the palette
+          in the editor would be redundant, such as when the color
+          button is already part of a palette.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEditor(bool propval)
+  {
+    return setProperty("show-editor", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the color selection dialog
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = If this property is set to true, the color swatch on the button is
+          rendered against a checkerboard background to show its opacity and
+          the opacity slider is displayed in the color selection dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T useAlpha(bool propval)
+  {
+    return setProperty("use-alpha", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_button.ColorButton]
+final class ColorButtonGidBuilder : ColorButtonGidBuilderImpl!ColorButtonGidBuilder
+{
+  ColorButton build()
+  {
+    return new ColorButton(cast(void*)createGObject(ColorButton._getGType), No.Take);
   }
 }

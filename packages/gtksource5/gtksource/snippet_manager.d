@@ -3,6 +3,7 @@ module gtksource.snippet_manager;
 
 import gid.gid;
 import gio.list_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -47,6 +48,15 @@ class SnippetManager : gobject.object.ObjectWrap
   override SnippetManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.snippet_manager.SnippetManager]
+  Returns: New builder object
+  */
+  static SnippetManagerGidBuilder builder()
+  {
+    return new SnippetManagerGidBuilder;
   }
 
   /**
@@ -203,5 +213,18 @@ class SnippetManager : gobject.object.ObjectWrap
     const(char*)* _dirs = _tmpdirs.ptr;
 
     gtk_source_snippet_manager_set_search_path(cast(GtkSourceSnippetManager*)this._cPtr, _dirs);
+  }
+}
+
+class SnippetManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.snippet_manager.SnippetManager]
+final class SnippetManagerGidBuilder : SnippetManagerGidBuilderImpl!SnippetManagerGidBuilder
+{
+  SnippetManager build()
+  {
+    return new SnippetManager(cast(void*)createGObject(SnippetManager._getGType), No.Take);
   }
 }

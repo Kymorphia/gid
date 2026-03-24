@@ -2,6 +2,7 @@
 module webkit.clipboard_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -47,5 +48,29 @@ class ClipboardPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
     return this;
   }
 
+  /**
+  Get builder for [webkit.clipboard_permission_request.ClipboardPermissionRequest]
+  Returns: New builder object
+  */
+  static ClipboardPermissionRequestGidBuilder builder()
+  {
+    return new ClipboardPermissionRequestGidBuilder;
+  }
+
   mixin PermissionRequestT!();
+}
+
+class ClipboardPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.clipboard_permission_request.ClipboardPermissionRequest]
+final class ClipboardPermissionRequestGidBuilder : ClipboardPermissionRequestGidBuilderImpl!ClipboardPermissionRequestGidBuilder
+{
+  ClipboardPermissionRequest build()
+  {
+    return new ClipboardPermissionRequest(cast(void*)createGObject(ClipboardPermissionRequest._getGType), No.Take);
+  }
 }

@@ -5,6 +5,7 @@ import gid.gid;
 import glib.source;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -79,6 +80,15 @@ class Bus : gst.object.ObjectWrap
   override Bus self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.bus.Bus]
+  Returns: New builder object
+  */
+  static BusGidBuilder builder()
+  {
+    return new BusGidBuilder;
   }
 
   /**
@@ -618,5 +628,34 @@ class Bus : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sync-message"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class BusGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `enableAsync` property.
+      Params:
+        propval = Enables async message delivery support for bus watches,
+          [gst.bus.Bus.pop] and similar API. Without this only the
+          synchronous message handlers are called.
+          
+          This property is used to create the child element buses
+          in #GstBin.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableAsync(bool propval)
+  {
+    return setProperty("enable-async", propval);
+  }
+}
+
+/// Fluent builder for [gst.bus.Bus]
+final class BusGidBuilder : BusGidBuilderImpl!BusGidBuilder
+{
+  Bus build()
+  {
+    return new Bus(cast(void*)createGObject(Bus._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.event_controller_scroll;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.event_controller;
@@ -74,6 +75,15 @@ class EventControllerScroll : gtk.event_controller.EventController
   }
 
   /**
+  Get builder for [gtk.event_controller_scroll.EventControllerScroll]
+  Returns: New builder object
+  */
+  static EventControllerScrollGidBuilder builder()
+  {
+    return new EventControllerScrollGidBuilder;
+  }
+
+  /**
       Get `flags` property.
       Returns: The flags affecting event controller behavior
   */
@@ -89,7 +99,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   */
   @property void flags(gtk.types.EventControllerScrollFlags propval)
   {
-    return setFlags(propval);
+    setFlags(propval);
   }
 
   /**
@@ -307,5 +317,29 @@ class EventControllerScroll : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scroll-end", closure, after);
+  }
+}
+
+class EventControllerScrollGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = The flags affecting event controller behavior
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gtk.types.EventControllerScrollFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+}
+
+/// Fluent builder for [gtk.event_controller_scroll.EventControllerScroll]
+final class EventControllerScrollGidBuilder : EventControllerScrollGidBuilderImpl!EventControllerScrollGidBuilder
+{
+  EventControllerScroll build()
+  {
+    return new EventControllerScroll(cast(void*)createGObject(EventControllerScroll._getGType), Yes.Take);
   }
 }

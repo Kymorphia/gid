@@ -16,6 +16,7 @@ import arrowflight.ticket;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -45,6 +46,15 @@ class Client : gobject.object.ObjectWrap
   override Client self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.client.Client]
+  Returns: New builder object
+  */
+  static ClientGidBuilder builder()
+  {
+    return new ClientGidBuilder;
   }
 
   /** */
@@ -159,5 +169,24 @@ class Client : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrowflight.info.Info, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class ClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T client(void* propval)
+  {
+    return setProperty("client", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.client.Client]
+final class ClientGidBuilder : ClientGidBuilderImpl!ClientGidBuilder
+{
+  Client build()
+  {
+    return new Client(cast(void*)createGObject(Client._getGType), Yes.Take);
   }
 }

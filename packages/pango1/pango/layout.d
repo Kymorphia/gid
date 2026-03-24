@@ -4,6 +4,7 @@ module pango.layout;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import pango.attr_list;
 import pango.c.functions;
@@ -81,6 +82,15 @@ class Layout : gobject.object.ObjectWrap
   override Layout self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.layout.Layout]
+  Returns: New builder object
+  */
+  static LayoutGidBuilder builder()
+  {
+    return new LayoutGidBuilder;
   }
 
   /**
@@ -1337,5 +1347,18 @@ class Layout : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)pango_layout_xy_to_index(cast(PangoLayout*)this._cPtr, x, y, cast(int*)&index, cast(int*)&trailing);
     return _retval;
+  }
+}
+
+class LayoutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.layout.Layout]
+final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
+{
+  Layout build()
+  {
+    return new Layout(cast(void*)createGObject(Layout._getGType), Yes.Take);
   }
 }

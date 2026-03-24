@@ -9,6 +9,7 @@ import gio.socket_address;
 import gio.socket_connectable;
 import gio.socket_connectable_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,51 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   override InetSocketAddress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.inet_socket_address.InetSocketAddress]
+  Returns: New builder object
+  */
+  static InetSocketAddressGidBuilder builder()
+  {
+    return new InetSocketAddressGidBuilder;
+  }
+
+  /**
+      Get `address` property.
+      Returns: The address.
+  */
+  @property gio.inet_address.InetAddress address()
+  {
+    return getAddress();
+  }
+
+  /**
+      Get `flowinfo` property.
+      Returns: The `sin6_flowinfo` field, for IPv6 addresses.
+  */
+  @property uint flowinfo()
+  {
+    return getFlowinfo();
+  }
+
+  /**
+      Get `port` property.
+      Returns: The port.
+  */
+  @property uint port()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("port");
+  }
+
+  /**
+      Get `scopeId` property.
+      Returns: The `sin6_scope_id` field, for IPv6 addresses.
+  */
+  @property uint scopeId()
+  {
+    return getScopeId();
   }
 
   /**
@@ -128,5 +174,63 @@ class InetSocketAddress : gio.socket_address.SocketAddress
     uint _retval;
     _retval = g_inet_socket_address_get_scope_id(cast(GInetSocketAddress*)this._cPtr);
     return _retval;
+  }
+}
+
+class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBuilderImpl!T
+{
+
+
+  /**
+      Set `address` property.
+      Params:
+        propval = The address.
+      Returns: Builder instance for fluent chaining
+  */
+  T address(gio.inet_address.InetAddress propval)
+  {
+    return setProperty("address", propval);
+  }
+
+  /**
+      Set `flowinfo` property.
+      Params:
+        propval = The `sin6_flowinfo` field, for IPv6 addresses.
+      Returns: Builder instance for fluent chaining
+  */
+  T flowinfo(uint propval)
+  {
+    return setProperty("flowinfo", propval);
+  }
+
+  /**
+      Set `port` property.
+      Params:
+        propval = The port.
+      Returns: Builder instance for fluent chaining
+  */
+  T port(uint propval)
+  {
+    return setProperty("port", propval);
+  }
+
+  /**
+      Set `scopeId` property.
+      Params:
+        propval = The `sin6_scope_id` field, for IPv6 addresses.
+      Returns: Builder instance for fluent chaining
+  */
+  T scopeId(uint propval)
+  {
+    return setProperty("scope-id", propval);
+  }
+}
+
+/// Fluent builder for [gio.inet_socket_address.InetSocketAddress]
+final class InetSocketAddressGidBuilder : InetSocketAddressGidBuilderImpl!InetSocketAddressGidBuilder
+{
+  InetSocketAddress build()
+  {
+    return new InetSocketAddress(cast(void*)createGObject(InetSocketAddress._getGType), Yes.Take);
   }
 }

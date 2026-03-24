@@ -11,6 +11,7 @@ import arrow.seekable_input_stream;
 import arrow.types;
 import gid.gid;
 import gio.input_stream;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -42,6 +43,21 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
     return this;
   }
 
+  /**
+  Get builder for [arrow.gioinput_stream.GIOInputStream]
+  Returns: New builder object
+  */
+  static GIOInputStreamGidBuilder builder()
+  {
+    return new GIOInputStreamGidBuilder;
+  }
+
+  /** */
+  @property gio.input_stream.InputStream raw()
+  {
+    return getRaw();
+  }
+
   /** */
   this(gio.input_stream.InputStream gioInputStream)
   {
@@ -57,5 +73,25 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
     _cretval = garrow_gio_input_stream_get_raw(cast(GArrowGIOInputStream*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class GIOInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableInputStreamGidBuilderImpl!T
+{
+
+
+  /** */
+  T raw(gio.input_stream.InputStream propval)
+  {
+    return setProperty("raw", propval);
+  }
+}
+
+/// Fluent builder for [arrow.gioinput_stream.GIOInputStream]
+final class GIOInputStreamGidBuilder : GIOInputStreamGidBuilderImpl!GIOInputStreamGidBuilder
+{
+  GIOInputStream build()
+  {
+    return new GIOInputStream(cast(void*)createGObject(GIOInputStream._getGType), Yes.Take);
   }
 }

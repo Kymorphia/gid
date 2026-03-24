@@ -9,6 +9,7 @@ import gio.input_stream;
 import gio.types;
 import glib.variant;
 import glib.variant_dict;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -207,6 +208,15 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   override ApplicationCommandLine self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.application_command_line.ApplicationCommandLine]
+  Returns: New builder object
+  */
+  static ApplicationCommandLineGidBuilder builder()
+  {
+    return new ApplicationCommandLineGidBuilder;
   }
 
   /**
@@ -526,5 +536,52 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   void setExitStatus(int exitStatus)
   {
     g_application_command_line_set_exit_status(cast(GApplicationCommandLine*)this._cPtr, exitStatus);
+  }
+}
+
+class ApplicationCommandLineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `arguments` property.
+      Params:
+        propval = The commandline that caused this `signal@Gio.Application::command-line`
+          signal emission.
+      Returns: Builder instance for fluent chaining
+  */
+  T arguments(glib.variant.Variant propval)
+  {
+    return setProperty("arguments", propval);
+  }
+
+  /**
+      Set `options` property.
+      Params:
+        propval = The options sent along with the commandline.
+      Returns: Builder instance for fluent chaining
+  */
+  T options(glib.variant.Variant propval)
+  {
+    return setProperty("options", propval);
+  }
+
+  /**
+      Set `platformData` property.
+      Params:
+        propval = Platform-specific data for the commandline.
+      Returns: Builder instance for fluent chaining
+  */
+  T platformData(glib.variant.Variant propval)
+  {
+    return setProperty("platform-data", propval);
+  }
+}
+
+/// Fluent builder for [gio.application_command_line.ApplicationCommandLine]
+final class ApplicationCommandLineGidBuilder : ApplicationCommandLineGidBuilderImpl!ApplicationCommandLineGidBuilder
+{
+  ApplicationCommandLine build()
+  {
+    return new ApplicationCommandLine(cast(void*)createGObject(ApplicationCommandLine._getGType), No.Take);
   }
 }

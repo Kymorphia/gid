@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for yEncoding or yDecoding a stream.
@@ -36,6 +37,15 @@ class FilterYenc : gmime.filter.Filter
   override FilterYenc self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.filter_yenc.FilterYenc]
+  Returns: New builder object
+  */
+  static FilterYencGidBuilder builder()
+  {
+    return new FilterYencGidBuilder;
   }
 
   /**
@@ -94,5 +104,18 @@ class FilterYenc : gmime.filter.Filter
   void setState(int state)
   {
     g_mime_filter_yenc_set_state(cast(GMimeFilterYenc*)this._cPtr, state);
+  }
+}
+
+class FilterYencGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_yenc.FilterYenc]
+final class FilterYencGidBuilder : FilterYencGidBuilderImpl!FilterYencGidBuilder
+{
+  FilterYenc build()
+  {
+    return new FilterYenc(cast(void*)createGObject(FilterYenc._getGType), Yes.Take);
   }
 }

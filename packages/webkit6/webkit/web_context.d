@@ -4,11 +4,13 @@ module webkit.web_context;
 import gid.gid;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.automation_session;
 import webkit.c.functions;
 import webkit.c.types;
 import webkit.geolocation_manager;
+import webkit.memory_pressure_settings;
 import webkit.network_session;
 import webkit.security_manager;
 import webkit.security_origin;
@@ -69,6 +71,31 @@ class WebContext : gobject.object.ObjectWrap
   override WebContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.web_context.WebContext]
+  Returns: New builder object
+  */
+  static WebContextGidBuilder builder()
+  {
+    return new WebContextGidBuilder;
+  }
+
+  /**
+      Get `timeZoneOverride` property.
+      Returns: The timezone override for this web context. Setting this property provides a better
+        alternative to configure the timezone information for all webviews managed by the WebContext.
+        The other, less optimal, approach is to globally set the TZ environment variable in the
+        process before creating the context. However this approach might not be very convenient and
+        can have side-effects in your application.
+        
+        The expected values for this property are defined in the IANA timezone database. See this
+        wikipedia page for instance, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
+  */
+  @property string timeZoneOverride()
+  {
+    return getTimeZoneOverride();
   }
 
   /**
@@ -667,5 +694,47 @@ class WebContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("user-message-received", closure, after);
+  }
+}
+
+class WebContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `memoryPressureSettings` property.
+      Params:
+        propval = The #WebKitMemoryPressureSettings applied to the web processes created by this context.
+      Returns: Builder instance for fluent chaining
+  */
+  T memoryPressureSettings(webkit.memory_pressure_settings.MemoryPressureSettings propval)
+  {
+    return setProperty("memory-pressure-settings", propval);
+  }
+
+  /**
+      Set `timeZoneOverride` property.
+      Params:
+        propval = The timezone override for this web context. Setting this property provides a better
+          alternative to configure the timezone information for all webviews managed by the WebContext.
+          The other, less optimal, approach is to globally set the TZ environment variable in the
+          process before creating the context. However this approach might not be very convenient and
+          can have side-effects in your application.
+          
+          The expected values for this property are defined in the IANA timezone database. See this
+          wikipedia page for instance, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
+      Returns: Builder instance for fluent chaining
+  */
+  T timeZoneOverride(string propval)
+  {
+    return setProperty("time-zone-override", propval);
+  }
+}
+
+/// Fluent builder for [webkit.web_context.WebContext]
+final class WebContextGidBuilder : WebContextGidBuilderImpl!WebContextGidBuilder
+{
+  WebContext build()
+  {
+    return new WebContext(cast(void*)createGObject(WebContext._getGType), Yes.Take);
   }
 }

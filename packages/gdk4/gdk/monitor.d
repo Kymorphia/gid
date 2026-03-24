@@ -8,6 +8,7 @@ import gdk.rectangle;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -48,6 +49,15 @@ class MonitorWrap : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.monitor.MonitorWrap]
+  Returns: New builder object
+  */
+  static MonitorWrapGidBuilder builder()
+  {
+    return new MonitorWrapGidBuilder;
+  }
+
+  /**
       Get `connector` property.
       Returns: The connector name.
   */
@@ -63,6 +73,15 @@ class MonitorWrap : gobject.object.ObjectWrap
   @property string description()
   {
     return getDescription();
+  }
+
+  /**
+      Get `display` property.
+      Returns: The [gdk.display.Display] of the monitor.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   /**
@@ -379,5 +398,29 @@ class MonitorWrap : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("invalidate", closure, after);
+  }
+}
+
+class MonitorWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The [gdk.display.Display] of the monitor.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.monitor.MonitorWrap]
+final class MonitorWrapGidBuilder : MonitorWrapGidBuilderImpl!MonitorWrapGidBuilder
+{
+  MonitorWrap build()
+  {
+    return new MonitorWrap(cast(void*)createGObject(MonitorWrap._getGType), No.Take);
   }
 }

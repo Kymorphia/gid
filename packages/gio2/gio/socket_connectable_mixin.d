@@ -7,6 +7,7 @@ public import gio.c.functions;
 public import gio.c.types;
 public import gio.socket_address_enumerator;
 public import gio.types;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -118,4 +119,8 @@ template SocketConnectableT()
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
+}
+
+template SocketConnectableGidBuilderT()
+{
 }

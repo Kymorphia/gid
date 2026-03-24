@@ -3,6 +3,7 @@ module gtk.video;
 
 import gid.gid;
 import gio.file;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -61,6 +62,15 @@ class Video : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.video.Video]
+  Returns: New builder object
+  */
+  static VideoGidBuilder builder()
+  {
+    return new VideoGidBuilder;
+  }
+
+  /**
       Get `autoplay` property.
       Returns: If the video should automatically begin playing.
   */
@@ -76,7 +86,7 @@ class Video : gtk.widget.Widget
   */
   @property void autoplay(bool propval)
   {
-    return setAutoplay(propval);
+    setAutoplay(propval);
   }
 
   /**
@@ -95,7 +105,7 @@ class Video : gtk.widget.Widget
   */
   @property void file(gio.file.File propval)
   {
-    return setFile(propval);
+    setFile(propval);
   }
 
   /**
@@ -114,7 +124,7 @@ class Video : gtk.widget.Widget
   */
   @property void graphicsOffload(gtk.types.GraphicsOffloadEnabled propval)
   {
-    return setGraphicsOffload(propval);
+    setGraphicsOffload(propval);
   }
 
   /**
@@ -133,7 +143,7 @@ class Video : gtk.widget.Widget
   */
   @property void loop(bool propval)
   {
-    return setLoop(propval);
+    setLoop(propval);
   }
 
   /**
@@ -152,7 +162,7 @@ class Video : gtk.widget.Widget
   */
   @property void mediaStream(gtk.media_stream.MediaStream propval)
   {
-    return setMediaStream(propval);
+    setMediaStream(propval);
   }
 
   /**
@@ -386,5 +396,74 @@ class Video : gtk.widget.Widget
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_video_set_resource(cast(GtkVideo*)this._cPtr, _resourcePath);
+  }
+}
+
+class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `autoplay` property.
+      Params:
+        propval = If the video should automatically begin playing.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoplay(bool propval)
+  {
+    return setProperty("autoplay", propval);
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file played by this video if the video is playing a file.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gio.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `graphicsOffload` property.
+      Params:
+        propval = Whether to enable graphics offload.
+      Returns: Builder instance for fluent chaining
+  */
+  T graphicsOffload(gtk.types.GraphicsOffloadEnabled propval)
+  {
+    return setProperty("graphics-offload", propval);
+  }
+
+  /**
+      Set `loop` property.
+      Params:
+        propval = If new media files should be set to loop.
+      Returns: Builder instance for fluent chaining
+  */
+  T loop(bool propval)
+  {
+    return setProperty("loop", propval);
+  }
+
+  /**
+      Set `mediaStream` property.
+      Params:
+        propval = The media-stream played
+      Returns: Builder instance for fluent chaining
+  */
+  T mediaStream(gtk.media_stream.MediaStream propval)
+  {
+    return setProperty("media-stream", propval);
+  }
+}
+
+/// Fluent builder for [gtk.video.Video]
+final class VideoGidBuilder : VideoGidBuilderImpl!VideoGidBuilder
+{
+  Video build()
+  {
+    return new Video(cast(void*)createGObject(Video._getGType), No.Take);
   }
 }

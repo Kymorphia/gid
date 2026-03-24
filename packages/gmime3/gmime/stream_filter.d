@@ -7,6 +7,7 @@ import gmime.c.types;
 import gmime.filter;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A #GMimeStream which passes data through any #GMimeFilter objects.
@@ -37,6 +38,15 @@ class StreamFilter : gmime.stream.Stream
   override StreamFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.stream_filter.StreamFilter]
+  Returns: New builder object
+  */
+  static StreamFilterGidBuilder builder()
+  {
+    return new StreamFilterGidBuilder;
   }
 
   /**
@@ -105,5 +115,18 @@ class StreamFilter : gmime.stream.Stream
   void setOwner(bool owner)
   {
     g_mime_stream_filter_set_owner(cast(GMimeStreamFilter*)this._cPtr, owner);
+  }
+}
+
+class StreamFilterGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_filter.StreamFilter]
+final class StreamFilterGidBuilder : StreamFilterGidBuilderImpl!StreamFilterGidBuilder
+{
+  StreamFilter build()
+  {
+    return new StreamFilter(cast(void*)createGObject(StreamFilter._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.tree_list_row_sorter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -52,6 +53,15 @@ class TreeListRowSorter : gtk.sorter.Sorter
   }
 
   /**
+  Get builder for [gtk.tree_list_row_sorter.TreeListRowSorter]
+  Returns: New builder object
+  */
+  static TreeListRowSorterGidBuilder builder()
+  {
+    return new TreeListRowSorterGidBuilder;
+  }
+
+  /**
       Get `sorter` property.
       Returns: The underlying sorter
   */
@@ -67,7 +77,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
   */
   @property void sorter(gtk.sorter.Sorter propval)
   {
-    return setSorter(propval);
+    setSorter(propval);
   }
 
   /**
@@ -112,5 +122,29 @@ class TreeListRowSorter : gtk.sorter.Sorter
   void setSorter(gtk.sorter.Sorter sorter = null)
   {
     gtk_tree_list_row_sorter_set_sorter(cast(GtkTreeListRowSorter*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
+  }
+}
+
+class TreeListRowSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
+{
+
+  /**
+      Set `sorter` property.
+      Params:
+        propval = The underlying sorter
+      Returns: Builder instance for fluent chaining
+  */
+  T sorter(gtk.sorter.Sorter propval)
+  {
+    return setProperty("sorter", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_list_row_sorter.TreeListRowSorter]
+final class TreeListRowSorterGidBuilder : TreeListRowSorterGidBuilderImpl!TreeListRowSorterGidBuilder
+{
+  TreeListRowSorter build()
+  {
+    return new TreeListRowSorter(cast(void*)createGObject(TreeListRowSorter._getGType), Yes.Take);
   }
 }

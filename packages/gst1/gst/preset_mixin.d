@@ -3,6 +3,7 @@ module gst.preset_mixin;
 
 public import gst.preset_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gst.c.functions;
 public import gst.c.types;
 public import gst.types;
@@ -201,4 +202,8 @@ template PresetT()
     _retval = cast(bool)gst_preset_set_meta(cast(GstPreset*)this._cPtr, _name, _tag, _value);
     return _retval;
   }
+}
+
+template PresetGidBuilderT()
+{
 }

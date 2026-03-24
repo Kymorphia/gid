@@ -2,6 +2,7 @@
 module gstaudio.audio_filter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstaudio.c.functions;
 import gstaudio.c.types;
 import gstaudio.types;
@@ -48,5 +49,27 @@ class AudioFilter : gstbase.base_transform.BaseTransform
   override AudioFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstaudio.audio_filter.AudioFilter]
+  Returns: New builder object
+  */
+  static AudioFilterGidBuilder builder()
+  {
+    return new AudioFilterGidBuilder;
+  }
+}
+
+class AudioFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstaudio.audio_filter.AudioFilter]
+final class AudioFilterGidBuilder : AudioFilterGidBuilderImpl!AudioFilterGidBuilder
+{
+  AudioFilter build()
+  {
+    return new AudioFilter(cast(void*)createGObject(AudioFilter._getGType), No.Take);
   }
 }

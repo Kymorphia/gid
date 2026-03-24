@@ -9,6 +9,7 @@ import gmime.header;
 import gmime.parser_options;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -40,6 +41,15 @@ class HeaderList : gobject.object.ObjectWrap
   override HeaderList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.header_list.HeaderList]
+  Returns: New builder object
+  */
+  static HeaderListGidBuilder builder()
+  {
+    return new HeaderListGidBuilder;
   }
 
   /**
@@ -236,5 +246,18 @@ class HeaderList : gobject.object.ObjectWrap
     ptrdiff_t _retval;
     _retval = g_mime_header_list_write_to_stream(cast(GMimeHeaderList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class HeaderListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.header_list.HeaderList]
+final class HeaderListGidBuilder : HeaderListGidBuilderImpl!HeaderListGidBuilder
+{
+  HeaderList build()
+  {
+    return new HeaderList(cast(void*)createGObject(HeaderList._getGType), Yes.Take);
   }
 }

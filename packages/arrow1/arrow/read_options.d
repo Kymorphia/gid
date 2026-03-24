@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class ReadOptions : gobject.object.ObjectWrap
   override ReadOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.read_options.ReadOptions]
+  Returns: New builder object
+  */
+  static ReadOptionsGidBuilder builder()
+  {
+    return new ReadOptionsGidBuilder;
   }
 
   /**
@@ -107,5 +117,40 @@ class ReadOptions : gobject.object.ObjectWrap
 
     auto _fields = cast(int*)fields.ptr;
     garrow_read_options_set_included_fields(cast(GArrowReadOptions*)this._cPtr, _fields, _nFields);
+  }
+}
+
+class ReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `maxRecursionDepth` property.
+      Params:
+        propval = The maximum permitted schema nesting depth.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxRecursionDepth(int propval)
+  {
+    return setProperty("max-recursion-depth", propval);
+  }
+
+  /**
+      Set `useThreads` property.
+      Params:
+        propval = Whether to use the global CPU thread pool.
+      Returns: Builder instance for fluent chaining
+  */
+  T useThreads(bool propval)
+  {
+    return setProperty("use-threads", propval);
+  }
+}
+
+/// Fluent builder for [arrow.read_options.ReadOptions]
+final class ReadOptionsGidBuilder : ReadOptionsGidBuilderImpl!ReadOptionsGidBuilder
+{
+  ReadOptions build()
+  {
+    return new ReadOptions(cast(void*)createGObject(ReadOptions._getGType), Yes.Take);
   }
 }

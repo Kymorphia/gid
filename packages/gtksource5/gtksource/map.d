@@ -2,6 +2,7 @@
 module gtksource.map;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -72,6 +73,15 @@ class Map : gtksource.view.View
     return this;
   }
 
+  /**
+  Get builder for [gtksource.map.Map]
+  Returns: New builder object
+  */
+  static MapGidBuilder builder()
+  {
+    return new MapGidBuilder;
+  }
+
   /** */
   @property pango.font_description.FontDescription fontDesc()
   {
@@ -93,7 +103,7 @@ class Map : gtksource.view.View
   /** */
   @property void view(gtksource.view.View propval)
   {
-    return setView(propval);
+    setView(propval);
   }
 
   /**
@@ -128,5 +138,31 @@ class Map : gtksource.view.View
   void setView(gtksource.view.View view)
   {
     gtk_source_map_set_view(cast(GtkSourceMap*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null);
+  }
+}
+
+class MapGidBuilderImpl(T) : gtksource.view.ViewGidBuilderImpl!T
+{
+
+
+  /** */
+  T fontDesc(pango.font_description.FontDescription propval)
+  {
+    return setProperty("font-desc", propval);
+  }
+
+  /** */
+  T view(gtksource.view.View propval)
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.map.Map]
+final class MapGidBuilder : MapGidBuilderImpl!MapGidBuilder
+{
+  Map build()
+  {
+    return new Map(cast(void*)createGObject(Map._getGType), No.Take);
   }
 }

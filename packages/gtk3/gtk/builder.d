@@ -3,6 +3,7 @@ module gtk.builder;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 import gobject.types;
@@ -226,6 +227,15 @@ class Builder : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.builder.Builder]
+  Returns: New builder object
+  */
+  static BuilderGidBuilder builder()
+  {
+    return new BuilderGidBuilder;
+  }
+
+  /**
       Get `translationDomain` property.
       Returns: The translation domain used when translating property values that
         have been marked as translatable in interface descriptions.
@@ -247,7 +257,7 @@ class Builder : gobject.object.ObjectWrap
   */
   @property void translationDomain(string propval)
   {
-    return setTranslationDomain(propval);
+    setTranslationDomain(propval);
   }
 
   /**
@@ -815,5 +825,32 @@ class Builder : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
+  }
+}
+
+class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `translationDomain` property.
+      Params:
+        propval = The translation domain used when translating property values that
+          have been marked as translatable in interface descriptions.
+          If the translation domain is null, #GtkBuilder uses gettext(),
+          otherwise [glib.global.dgettext].
+      Returns: Builder instance for fluent chaining
+  */
+  T translationDomain(string propval)
+  {
+    return setProperty("translation-domain", propval);
+  }
+}
+
+/// Fluent builder for [gtk.builder.Builder]
+final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
+{
+  Builder build()
+  {
+    return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);
   }
 }

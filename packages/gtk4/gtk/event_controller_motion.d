@@ -3,6 +3,7 @@ module gtk.event_controller_motion;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.event_controller;
@@ -45,6 +46,15 @@ class EventControllerMotion : gtk.event_controller.EventController
   override EventControllerMotion self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.event_controller_motion.EventControllerMotion]
+  Returns: New builder object
+  */
+  static EventControllerMotionGidBuilder builder()
+  {
+    return new EventControllerMotionGidBuilder;
   }
 
   /**
@@ -213,5 +223,18 @@ class EventControllerMotion : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("motion", closure, after);
+  }
+}
+
+class EventControllerMotionGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.event_controller_motion.EventControllerMotion]
+final class EventControllerMotionGidBuilder : EventControllerMotionGidBuilderImpl!EventControllerMotionGidBuilder
+{
+  EventControllerMotion build()
+  {
+    return new EventControllerMotion(cast(void*)createGObject(EventControllerMotion._getGType), Yes.Take);
   }
 }

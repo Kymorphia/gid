@@ -9,6 +9,7 @@ import gio.iostream;
 import gio.tls_certificate;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -67,4 +68,18 @@ interface TlsServerConnection
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_server_connection.TlsServerConnection)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
+}
+
+interface TlsServerConnectionGidBuilderImpl(T)
+{
+
+  /**
+      Set `authenticationMode` property.
+      Params:
+        propval = The #GTlsAuthenticationMode for the server. This can be changed
+          before calling [gio.tls_connection.TlsConnection.handshake] if you want to
+          rehandshake with a different mode from the initial handshake.
+      Returns: Builder instance for fluent chaining
+  */
+  T authenticationMode(gio.types.TlsAuthenticationMode propval);
 }

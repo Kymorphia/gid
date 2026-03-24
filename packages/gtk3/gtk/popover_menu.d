@@ -4,6 +4,7 @@ module gtk.popover_menu;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -114,6 +115,15 @@ class PopoverMenu : gtk.popover.Popover
     return this;
   }
 
+  /**
+  Get builder for [gtk.popover_menu.PopoverMenu]
+  Returns: New builder object
+  */
+  static PopoverMenuGidBuilder builder()
+  {
+    return new PopoverMenuGidBuilder;
+  }
+
   /** */
   @property string visibleSubmenu()
   {
@@ -155,5 +165,25 @@ class PopoverMenu : gtk.popover.Popover
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_popover_menu_open_submenu(cast(GtkPopoverMenu*)this._cPtr, _name);
+  }
+}
+
+class PopoverMenuGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
+{
+
+
+  /** */
+  T visibleSubmenu(string propval)
+  {
+    return setProperty("visible-submenu", propval);
+  }
+}
+
+/// Fluent builder for [gtk.popover_menu.PopoverMenu]
+final class PopoverMenuGidBuilder : PopoverMenuGidBuilderImpl!PopoverMenuGidBuilder
+{
+  PopoverMenu build()
+  {
+    return new PopoverMenu(cast(void*)createGObject(PopoverMenu._getGType), No.Take);
   }
 }

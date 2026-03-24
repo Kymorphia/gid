@@ -9,6 +9,7 @@ public import gio.cancellable;
 public import gio.types;
 public import glib.error;
 public import glib.source;
+public import gobject.gid_builder;
 
 /**
     [gio.pollable_input_stream.PollableInputStream] is implemented by [gio.input_stream.InputStream]s that
@@ -125,4 +126,8 @@ template PollableInputStreamT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template PollableInputStreamGidBuilderT()
+{
 }

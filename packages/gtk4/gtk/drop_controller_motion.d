@@ -4,6 +4,7 @@ module gtk.drop_controller_motion;
 import gdk.drop;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -46,6 +47,15 @@ class DropControllerMotion : gtk.event_controller.EventController
   override DropControllerMotion self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.drop_controller_motion.DropControllerMotion]
+  Returns: New builder object
+  */
+  static DropControllerMotionGidBuilder builder()
+  {
+    return new DropControllerMotionGidBuilder;
   }
 
   /**
@@ -251,5 +261,18 @@ class DropControllerMotion : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("motion", closure, after);
+  }
+}
+
+class DropControllerMotionGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.drop_controller_motion.DropControllerMotion]
+final class DropControllerMotionGidBuilder : DropControllerMotionGidBuilderImpl!DropControllerMotionGidBuilder
+{
+  DropControllerMotion build()
+  {
+    return new DropControllerMotion(cast(void*)createGObject(DropControllerMotion._getGType), Yes.Take);
   }
 }

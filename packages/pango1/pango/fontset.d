@@ -2,6 +2,7 @@
 module pango.fontset;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -43,6 +44,15 @@ class Fontset : gobject.object.ObjectWrap
   override Fontset self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.fontset.Fontset]
+  Returns: New builder object
+  */
+  static FontsetGidBuilder builder()
+  {
+    return new FontsetGidBuilder;
   }
 
   /**
@@ -99,5 +109,18 @@ class Fontset : gobject.object.ObjectWrap
     if (_cretval)
       _retval = *cast(pango.font_metrics.FontMetrics*)_cretval;
     return _retval;
+  }
+}
+
+class FontsetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.fontset.Fontset]
+final class FontsetGidBuilder : FontsetGidBuilderImpl!FontsetGidBuilder
+{
+  Fontset build()
+  {
+    return new Fontset(cast(void*)createGObject(Fontset._getGType), No.Take);
   }
 }

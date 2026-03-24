@@ -3,6 +3,7 @@ module gtksource.snippet;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_buffer;
 import gtksource.c.functions;
@@ -53,6 +54,15 @@ class Snippet : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gtksource.snippet.Snippet]
+  Returns: New builder object
+  */
+  static SnippetGidBuilder builder()
+  {
+    return new SnippetGidBuilder;
+  }
+
   /** */
   @property gtk.text_buffer.TextBuffer buffer()
   {
@@ -68,7 +78,7 @@ class Snippet : gobject.object.ObjectWrap
   /** */
   @property void description(string propval)
   {
-    return setDescription(propval);
+    setDescription(propval);
   }
 
   /** */
@@ -86,7 +96,7 @@ class Snippet : gobject.object.ObjectWrap
   /** */
   @property void languageId(string propval)
   {
-    return setLanguageId(propval);
+    setLanguageId(propval);
   }
 
   /** */
@@ -98,7 +108,7 @@ class Snippet : gobject.object.ObjectWrap
   /** */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /** */
@@ -110,7 +120,7 @@ class Snippet : gobject.object.ObjectWrap
   /** */
   @property void trigger(string propval)
   {
-    return setTrigger(propval);
+    setTrigger(propval);
   }
 
   /**
@@ -332,5 +342,42 @@ class Snippet : gobject.object.ObjectWrap
   {
     const(char)* _trigger = trigger.toCString(No.Alloc);
     gtk_source_snippet_set_trigger(cast(GtkSourceSnippet*)this._cPtr, _trigger);
+  }
+}
+
+class SnippetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T description(string propval)
+  {
+    return setProperty("description", propval);
+  }
+
+  /** */
+  T languageId(string propval)
+  {
+    return setProperty("language-id", propval);
+  }
+
+  /** */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /** */
+  T trigger(string propval)
+  {
+    return setProperty("trigger", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.snippet.Snippet]
+final class SnippetGidBuilder : SnippetGidBuilderImpl!SnippetGidBuilder
+{
+  Snippet build()
+  {
+    return new Snippet(cast(void*)createGObject(Snippet._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.accessible;
 
 import atk.object;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -50,6 +51,15 @@ class Accessible : atk.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gtk.accessible.Accessible]
+  Returns: New builder object
+  */
+  static AccessibleGidBuilder builder()
+  {
+    return new AccessibleGidBuilder;
+  }
+
   /** */
   @property gtk.widget.Widget widget()
   {
@@ -59,7 +69,7 @@ class Accessible : atk.object.ObjectWrap
   /** */
   @property void widget(gtk.widget.Widget propval)
   {
-    return setWidget(propval);
+    setWidget(propval);
   }
 
   /**
@@ -102,5 +112,24 @@ class Accessible : atk.object.ObjectWrap
   void setWidget(gtk.widget.Widget widget = null)
   {
     gtk_accessible_set_widget(cast(GtkAccessible*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+}
+
+class AccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T widget(gtk.widget.Widget propval)
+  {
+    return setProperty("widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.accessible.Accessible]
+final class AccessibleGidBuilder : AccessibleGidBuilderImpl!AccessibleGidBuilder
+{
+  Accessible build()
+  {
+    return new Accessible(cast(void*)createGObject(Accessible._getGType), No.Take);
   }
 }

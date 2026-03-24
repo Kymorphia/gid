@@ -4,6 +4,7 @@ module gtk.password_entry;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -81,6 +82,15 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
+  Get builder for [gtk.password_entry.PasswordEntry]
+  Returns: New builder object
+  */
+  static PasswordEntryGidBuilder builder()
+  {
+    return new PasswordEntryGidBuilder;
+  }
+
+  /**
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
@@ -117,7 +127,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   @property void extraMenu(gio.menu_model.MenuModel propval)
   {
-    return setExtraMenu(propval);
+    setExtraMenu(propval);
   }
 
   /**
@@ -157,7 +167,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   @property void showPeekIcon(bool propval)
   {
-    return setShowPeekIcon(propval);
+    setShowPeekIcon(propval);
   }
 
   mixin EditableT!();
@@ -260,5 +270,66 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class PasswordEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
+{
+
+  mixin EditableGidBuilderT!();
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatesDefault(bool propval)
+  {
+    return setProperty("activates-default", propval);
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to
+          the context menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("extra-menu", propval);
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.password_entry.PasswordEntry]
+          when it is empty and unfocused.
+      Returns: Builder instance for fluent chaining
+  */
+  T placeholderText(string propval)
+  {
+    return setProperty("placeholder-text", propval);
+  }
+
+  /**
+      Set `showPeekIcon` property.
+      Params:
+        propval = Whether to show an icon for revealing the content.
+      Returns: Builder instance for fluent chaining
+  */
+  T showPeekIcon(bool propval)
+  {
+    return setProperty("show-peek-icon", propval);
+  }
+}
+
+/// Fluent builder for [gtk.password_entry.PasswordEntry]
+final class PasswordEntryGidBuilder : PasswordEntryGidBuilderImpl!PasswordEntryGidBuilder
+{
+  PasswordEntry build()
+  {
+    return new PasswordEntry(cast(void*)createGObject(PasswordEntry._getGType), No.Take);
   }
 }

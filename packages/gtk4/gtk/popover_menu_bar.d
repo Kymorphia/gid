@@ -3,6 +3,7 @@ module gtk.popover_menu_bar;
 
 import gid.gid;
 import gio.menu_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -75,6 +76,15 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.popover_menu_bar.PopoverMenuBar]
+  Returns: New builder object
+  */
+  static PopoverMenuBarGidBuilder builder()
+  {
+    return new PopoverMenuBarGidBuilder;
+  }
+
+  /**
       Get `menuModel` property.
       Returns: The [gio.menu_model.MenuModel] from which the menu bar is created.
         
@@ -94,7 +104,7 @@ class PopoverMenuBar : gtk.widget.Widget
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
-    return setMenuModel(propval);
+    setMenuModel(propval);
   }
 
   /**
@@ -168,5 +178,32 @@ class PopoverMenuBar : gtk.widget.Widget
   void setMenuModel(gio.menu_model.MenuModel model = null)
   {
     gtk_popover_menu_bar_set_menu_model(cast(GtkPopoverMenuBar*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
+  }
+}
+
+class PopoverMenuBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The [gio.menu_model.MenuModel] from which the menu bar is created.
+          
+          The model should only contain submenus as toplevel elements.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menu-model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.popover_menu_bar.PopoverMenuBar]
+final class PopoverMenuBarGidBuilder : PopoverMenuBarGidBuilderImpl!PopoverMenuBarGidBuilder
+{
+  PopoverMenuBar build()
+  {
+    return new PopoverMenuBar(cast(void*)createGObject(PopoverMenuBar._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module gst.preset;
 
 public import gst.preset_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.types;
@@ -156,4 +157,8 @@ interface Preset
       Returns: true for success, false if e.g. there is no preset with that name
   */
   bool setMeta(string name, string tag, string value = null);
+}
+
+interface PresetGidBuilderImpl(T)
+{
 }

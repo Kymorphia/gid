@@ -4,6 +4,7 @@ module gtk.color_dialog_button;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -66,6 +67,15 @@ class ColorDialogButton : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.color_dialog_button.ColorDialogButton]
+  Returns: New builder object
+  */
+  static ColorDialogButtonGidBuilder builder()
+  {
+    return new ColorDialogButtonGidBuilder;
+  }
+
+  /**
       Get `dialog` property.
       Returns: The [gtk.color_dialog.ColorDialog] that contains parameters for
         the color chooser dialog.
@@ -83,7 +93,7 @@ class ColorDialogButton : gtk.widget.Widget
   */
   @property void dialog(gtk.color_dialog.ColorDialog propval)
   {
-    return setDialog(propval);
+    setDialog(propval);
   }
 
   /**
@@ -116,7 +126,7 @@ class ColorDialogButton : gtk.widget.Widget
   */
   @property void rgba(gdk.rgba.RGBA propval)
   {
-    return setRgba(propval);
+    setRgba(propval);
   }
 
   /**
@@ -229,5 +239,49 @@ class ColorDialogButton : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class ColorDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `dialog` property.
+      Params:
+        propval = The [gtk.color_dialog.ColorDialog] that contains parameters for
+          the color chooser dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T dialog(gtk.color_dialog.ColorDialog propval)
+  {
+    return setProperty("dialog", propval);
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The selected color.
+          
+          This property can be set to give the button its initial
+          color, and it will be updated to reflect the users choice
+          in the color chooser dialog.
+          
+          Listen to `notify::rgba` to get informed about changes
+          to the buttons color.
+      Returns: Builder instance for fluent chaining
+  */
+  T rgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("rgba", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_dialog_button.ColorDialogButton]
+final class ColorDialogButtonGidBuilder : ColorDialogButtonGidBuilderImpl!ColorDialogButtonGidBuilder
+{
+  ColorDialogButton build()
+  {
+    return new ColorDialogButton(cast(void*)createGObject(ColorDialogButton._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module soup.auth;
 
 import gid.gid;
 import glib.uri;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import soup.c.functions;
@@ -46,6 +47,15 @@ class Auth : gobject.object.ObjectWrap
   override Auth self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.auth.Auth]
+  Returns: New builder object
+  */
+  static AuthGidBuilder builder()
+  {
+    return new AuthGidBuilder;
   }
 
   /**
@@ -326,5 +336,40 @@ class Auth : gobject.object.ObjectWrap
     const(char)* _authHeader = authHeader.toCString(No.Alloc);
     _retval = cast(bool)soup_auth_update(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _authHeader);
     return _retval;
+  }
+}
+
+class AuthGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `authority` property.
+      Params:
+        propval = The authority (host:port) being authenticated to.
+      Returns: Builder instance for fluent chaining
+  */
+  T authority(string propval)
+  {
+    return setProperty("authority", propval);
+  }
+
+  /**
+      Set `realm` property.
+      Params:
+        propval = The authentication realm.
+      Returns: Builder instance for fluent chaining
+  */
+  T realm(string propval)
+  {
+    return setProperty("realm", propval);
+  }
+}
+
+/// Fluent builder for [soup.auth.Auth]
+final class AuthGidBuilder : AuthGidBuilderImpl!AuthGidBuilder
+{
+  Auth build()
+  {
+    return new Auth(cast(void*)createGObject(Auth._getGType), Yes.Take);
   }
 }

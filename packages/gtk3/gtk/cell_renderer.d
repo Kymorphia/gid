@@ -8,6 +8,7 @@ import gdk.rectangle;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gtk.c.functions;
@@ -80,6 +81,15 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   override CellRenderer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer.CellRenderer]
+  Returns: New builder object
+  */
+  static CellRendererGidBuilder builder()
+  {
+    return new CellRendererGidBuilder;
   }
 
   /** */
@@ -205,7 +215,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   /** */
   @property void sensitive(bool propval)
   {
-    return setSensitive(propval);
+    setSensitive(propval);
   }
 
   /** */
@@ -217,7 +227,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   /** */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   /** */
@@ -750,5 +760,120 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("editing-started", closure, after);
+  }
+}
+
+class CellRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+
+  /** */
+  T cellBackground(string propval)
+  {
+    return setProperty("cell-background", propval);
+  }
+
+  /**
+      Set `cellBackgroundGdk` property.
+      Params:
+        propval = Cell background as a #GdkColor
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkCellRenderer:cell-background-rgba instead.
+  */
+  T cellBackgroundGdk(gdk.color.Color propval)
+  {
+    return setProperty("cell-background-gdk", propval);
+  }
+
+  /**
+      Set `cellBackgroundRgba` property.
+      Params:
+        propval = Cell background as a #GdkRGBA
+      Returns: Builder instance for fluent chaining
+  */
+  T cellBackgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("cell-background-rgba", propval);
+  }
+
+  /** */
+  T cellBackgroundSet(bool propval)
+  {
+    return setProperty("cell-background-set", propval);
+  }
+
+  /** */
+  T height(int propval)
+  {
+    return setProperty("height", propval);
+  }
+
+  /** */
+  T isExpanded(bool propval)
+  {
+    return setProperty("is-expanded", propval);
+  }
+
+  /** */
+  T isExpander(bool propval)
+  {
+    return setProperty("is-expander", propval);
+  }
+
+  /** */
+  T mode(gtk.types.CellRendererMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+
+  /** */
+  T sensitive(bool propval)
+  {
+    return setProperty("sensitive", propval);
+  }
+
+  /** */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+
+  /** */
+  T width(int propval)
+  {
+    return setProperty("width", propval);
+  }
+
+  /** */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /** */
+  T xpad(uint propval)
+  {
+    return setProperty("xpad", propval);
+  }
+
+  /** */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+
+  /** */
+  T ypad(uint propval)
+  {
+    return setProperty("ypad", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer.CellRenderer]
+final class CellRendererGidBuilder : CellRendererGidBuilderImpl!CellRendererGidBuilder
+{
+  CellRenderer build()
+  {
+    return new CellRenderer(cast(void*)createGObject(CellRenderer._getGType), No.Take);
   }
 }

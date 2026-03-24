@@ -3,6 +3,7 @@ module gtk.shortcut_manager_mixin;
 
 public import gtk.shortcut_manager_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -22,5 +23,9 @@ public import gtk.types;
     [gtk.types.ShortcutScope.Managed].
 */
 template ShortcutManagerT()
+{
+}
+
+template ShortcutManagerGidBuilderT()
 {
 }

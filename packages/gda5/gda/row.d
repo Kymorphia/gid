@@ -6,6 +6,7 @@ import gda.c.types;
 import gda.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -36,6 +37,15 @@ class Row : gobject.object.ObjectWrap
   override Row self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.row.Row]
+  Returns: New builder object
+  */
+  static RowGidBuilder builder()
+  {
+    return new RowGidBuilder;
   }
 
   /** */
@@ -143,5 +153,24 @@ class Row : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class RowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T nbValues(int propval)
+  {
+    return setProperty("nb-values", propval);
+  }
+}
+
+/// Fluent builder for [gda.row.Row]
+final class RowGidBuilder : RowGidBuilderImpl!RowGidBuilder
+{
+  Row build()
+  {
+    return new Row(cast(void*)createGObject(Row._getGType), Yes.Take);
   }
 }

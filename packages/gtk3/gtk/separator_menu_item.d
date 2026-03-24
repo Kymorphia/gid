@@ -4,6 +4,7 @@ module gtk.separator_menu_item;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.actionable;
 import gtk.actionable_mixin;
 import gtk.activatable;
@@ -53,6 +54,15 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
+  Get builder for [gtk.separator_menu_item.SeparatorMenuItem]
+  Returns: New builder object
+  */
+  static SeparatorMenuItemGidBuilder builder()
+  {
+    return new SeparatorMenuItemGidBuilder;
+  }
+
+  /**
       Creates a new #GtkSeparatorMenuItem.
       Returns: a new #GtkSeparatorMenuItem.
   */
@@ -61,5 +71,19 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     _cretval = gtk_separator_menu_item_new();
     this(_cretval, No.Take);
+  }
+}
+
+class SeparatorMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.separator_menu_item.SeparatorMenuItem]
+final class SeparatorMenuItemGidBuilder : SeparatorMenuItemGidBuilderImpl!SeparatorMenuItemGidBuilder
+{
+  SeparatorMenuItem build()
+  {
+    return new SeparatorMenuItem(cast(void*)createGObject(SeparatorMenuItem._getGType), No.Take);
   }
 }

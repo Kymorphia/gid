@@ -8,6 +8,7 @@ import adw.c.types;
 import adw.spring_params;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.widget;
 
 /**
@@ -72,6 +73,15 @@ class SpringAnimation : adw.animation.Animation
   }
 
   /**
+  Get builder for [adw.spring_animation.SpringAnimation]
+  Returns: New builder object
+  */
+  static SpringAnimationGidBuilder builder()
+  {
+    return new SpringAnimationGidBuilder;
+  }
+
+  /**
       Get `clamp` property.
       Returns: Whether the animation should be clamped.
         
@@ -99,7 +109,7 @@ class SpringAnimation : adw.animation.Animation
   */
   @property void clamp(bool propval)
   {
-    return setClamp(propval);
+    setClamp(propval);
   }
 
   /**
@@ -140,7 +150,7 @@ class SpringAnimation : adw.animation.Animation
   */
   @property void epsilon(double propval)
   {
-    return setEpsilon(propval);
+    setEpsilon(propval);
   }
 
   /**
@@ -174,7 +184,7 @@ class SpringAnimation : adw.animation.Animation
   */
   @property void initialVelocity(double propval)
   {
-    return setInitialVelocity(propval);
+    setInitialVelocity(propval);
   }
 
   /**
@@ -193,7 +203,7 @@ class SpringAnimation : adw.animation.Animation
   */
   @property void springParams(adw.spring_params.SpringParams propval)
   {
-    return setSpringParams(propval);
+    setSpringParams(propval);
   }
 
   /**
@@ -218,7 +228,7 @@ class SpringAnimation : adw.animation.Animation
   */
   @property void valueFrom(double propval)
   {
-    return setValueFrom(propval);
+    setValueFrom(propval);
   }
 
   /**
@@ -243,7 +253,7 @@ class SpringAnimation : adw.animation.Animation
   */
   @property void valueTo(double propval)
   {
-    return setValueTo(propval);
+    setValueTo(propval);
   }
 
   /**
@@ -494,5 +504,109 @@ class SpringAnimation : adw.animation.Animation
   void setValueTo(double value)
   {
     adw_spring_animation_set_value_to(cast(AdwSpringAnimation*)this._cPtr, value);
+  }
+}
+
+class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
+{
+
+  /**
+      Set `clamp` property.
+      Params:
+        propval = Whether the animation should be clamped.
+          
+          If set to `TRUE`, the animation will abruptly end as soon as it reaches the
+          final value, preventing overshooting.
+          
+          It won't prevent overshooting `property@SpringAnimation:value-from` if a
+          relative negative `property@SpringAnimation:initial-velocity` is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T clamp(bool propval)
+  {
+    return setProperty("clamp", propval);
+  }
+
+  /**
+      Set `epsilon` property.
+      Params:
+        propval = Precision of the spring.
+          
+          The level of precision used to determine when the animation has come to a
+          rest, that is, when the amplitude of the oscillations becomes smaller than
+          this value.
+          
+          If the epsilon value is too small, the animation will take a long time to
+          stop after the animated value has stopped visibly changing.
+          
+          If the epsilon value is too large, the animation will end prematurely.
+          
+          The default value is 0.001.
+      Returns: Builder instance for fluent chaining
+  */
+  T epsilon(double propval)
+  {
+    return setProperty("epsilon", propval);
+  }
+
+  /**
+      Set `initialVelocity` property.
+      Params:
+        propval = The initial velocity to start the animation with.
+          
+          Initial velocity affects only the animation curve, but not its duration.
+      Returns: Builder instance for fluent chaining
+  */
+  T initialVelocity(double propval)
+  {
+    return setProperty("initial-velocity", propval);
+  }
+
+  /**
+      Set `springParams` property.
+      Params:
+        propval = Physical parameters describing the spring.
+      Returns: Builder instance for fluent chaining
+  */
+  T springParams(adw.spring_params.SpringParams propval)
+  {
+    return setProperty("spring-params", propval);
+  }
+
+  /**
+      Set `valueFrom` property.
+      Params:
+        propval = The value to animate from.
+          
+          The animation will start at this value and end at
+          `property@SpringAnimation:value-to`.
+      Returns: Builder instance for fluent chaining
+  */
+  T valueFrom(double propval)
+  {
+    return setProperty("value-from", propval);
+  }
+
+  /**
+      Set `valueTo` property.
+      Params:
+        propval = The value to animate to.
+          
+          The animation will start at `property@SpringAnimation:value-from` and end
+          at this value.
+      Returns: Builder instance for fluent chaining
+  */
+  T valueTo(double propval)
+  {
+    return setProperty("value-to", propval);
+  }
+}
+
+/// Fluent builder for [adw.spring_animation.SpringAnimation]
+final class SpringAnimationGidBuilder : SpringAnimationGidBuilderImpl!SpringAnimationGidBuilder
+{
+  SpringAnimation build()
+  {
+    return new SpringAnimation(cast(void*)createGObject(SpringAnimation._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.font_chooser_mixin;
 public import gtk.font_chooser_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -47,7 +48,7 @@ template FontChooserT()
   */
   @property void font(string propval)
   {
-    return setFont(propval);
+    setFont(propval);
   }
 
   /**
@@ -70,7 +71,7 @@ template FontChooserT()
   */
   @property void fontDesc(pango.font_description.FontDescription propval)
   {
-    return setFontDesc(propval);
+    setFontDesc(propval);
   }
 
   /**
@@ -107,7 +108,7 @@ template FontChooserT()
   */
   @property void language(string propval)
   {
-    return setLanguage(propval);
+    setLanguage(propval);
   }
 
   /**
@@ -130,7 +131,7 @@ template FontChooserT()
   */
   @property void level(gtk.types.FontChooserLevel propval)
   {
-    return setLevel(propval);
+    setLevel(propval);
   }
 
   /**
@@ -153,7 +154,7 @@ template FontChooserT()
   */
   @property void previewText(string propval)
   {
-    return setPreviewText(propval);
+    setPreviewText(propval);
   }
 
   /**
@@ -176,7 +177,7 @@ template FontChooserT()
   */
   @property void showPreviewEntry(bool propval)
   {
-    return setShowPreviewEntry(propval);
+    setShowPreviewEntry(propval);
   }
 
   /**
@@ -579,5 +580,87 @@ template FontChooserT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("font-activated", closure, after);
+  }
+}
+
+template FontChooserGidBuilderT()
+{
+
+  /**
+      Set `font` property.
+      Params:
+        propval = The font description as a string, e.g. "Sans Italic 12".
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T font(string propval)
+  {
+    return setProperty("font", propval);
+  }
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = The font description as a [pango.font_description.FontDescription].
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T fontDesc(pango.font_description.FontDescription propval)
+  {
+    return setProperty("font-desc", propval);
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language for which the font features were selected.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T language(string propval)
+  {
+    return setProperty("language", propval);
+  }
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of granularity to offer for selecting fonts.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T level(gtk.types.FontChooserLevel propval)
+  {
+    return setProperty("level", propval);
+  }
+
+  /**
+      Set `previewText` property.
+      Params:
+        propval = The string with which to preview the font.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T previewText(string propval)
+  {
+    return setProperty("preview-text", propval);
+  }
+
+  /**
+      Set `showPreviewEntry` property.
+      Params:
+        propval = Whether to show an entry to change the preview text.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T showPreviewEntry(bool propval)
+  {
+    return setProperty("show-preview-entry", propval);
   }
 }

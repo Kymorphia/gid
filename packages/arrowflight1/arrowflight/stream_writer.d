@@ -7,6 +7,7 @@ import arrowflight.record_batch_writer;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
@@ -37,6 +38,15 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     return this;
   }
 
+  /**
+  Get builder for [arrowflight.stream_writer.StreamWriter]
+  Returns: New builder object
+  */
+  static StreamWriterGidBuilder builder()
+  {
+    return new StreamWriterGidBuilder;
+  }
+
   /** */
   bool doneWriting()
   {
@@ -46,5 +56,18 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class StreamWriterGidBuilderImpl(T) : arrowflight.record_batch_writer.RecordBatchWriterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.stream_writer.StreamWriter]
+final class StreamWriterGidBuilder : StreamWriterGidBuilderImpl!StreamWriterGidBuilder
+{
+  StreamWriter build()
+  {
+    return new StreamWriter(cast(void*)createGObject(StreamWriter._getGType), No.Take);
   }
 }

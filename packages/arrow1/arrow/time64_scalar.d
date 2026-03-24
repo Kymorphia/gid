@@ -7,6 +7,7 @@ import arrow.scalar;
 import arrow.time64_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class Time64Scalar : arrow.scalar.Scalar
@@ -37,6 +38,15 @@ class Time64Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.time64_scalar.Time64Scalar]
+  Returns: New builder object
+  */
+  static Time64ScalarGidBuilder builder()
+  {
+    return new Time64ScalarGidBuilder;
+  }
+
   /** */
   this(arrow.time64_data_type.Time64DataType dataType, long value)
   {
@@ -51,5 +61,18 @@ class Time64Scalar : arrow.scalar.Scalar
     long _retval;
     _retval = garrow_time64_scalar_get_value(cast(GArrowTime64Scalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class Time64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.time64_scalar.Time64Scalar]
+final class Time64ScalarGidBuilder : Time64ScalarGidBuilderImpl!Time64ScalarGidBuilder
+{
+  Time64Scalar build()
+  {
+    return new Time64Scalar(cast(void*)createGObject(Time64Scalar._getGType), Yes.Take);
   }
 }

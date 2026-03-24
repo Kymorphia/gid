@@ -2,6 +2,7 @@
 module gstpbutils.discoverer_subtitle_info;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
 import gstpbutils.discoverer_stream_info;
@@ -39,6 +40,15 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
     return this;
   }
 
+  /**
+  Get builder for [gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo]
+  Returns: New builder object
+  */
+  static DiscovererSubtitleInfoGidBuilder builder()
+  {
+    return new DiscovererSubtitleInfoGidBuilder;
+  }
+
   /** */
   string getLanguage()
   {
@@ -46,5 +56,18 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
     _cretval = gst_discoverer_subtitle_info_get_language(cast(const(GstDiscovererSubtitleInfo)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class DiscovererSubtitleInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo]
+final class DiscovererSubtitleInfoGidBuilder : DiscovererSubtitleInfoGidBuilderImpl!DiscovererSubtitleInfoGidBuilder
+{
+  DiscovererSubtitleInfo build()
+  {
+    return new DiscovererSubtitleInfo(cast(void*)createGObject(DiscovererSubtitleInfo._getGType), No.Take);
   }
 }

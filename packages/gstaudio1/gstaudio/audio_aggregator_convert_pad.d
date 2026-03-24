@@ -2,6 +2,7 @@
 module gstaudio.audio_aggregator_convert_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.structure;
 import gstaudio.audio_aggregator_pad;
@@ -42,6 +43,15 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
     return this;
   }
 
+  /**
+  Get builder for [gstaudio.audio_aggregator_convert_pad.AudioAggregatorConvertPad]
+  Returns: New builder object
+  */
+  static AudioAggregatorConvertPadGidBuilder builder()
+  {
+    return new AudioAggregatorConvertPadGidBuilder;
+  }
+
   /** */
   @property gst.structure.Structure converterConfig()
   {
@@ -52,5 +62,24 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
   @property void converterConfig(gst.structure.Structure propval)
   {
     gobject.object.ObjectWrap.setProperty!(gst.structure.Structure)("converter-config", propval);
+  }
+}
+
+class AudioAggregatorConvertPadGidBuilderImpl(T) : gstaudio.audio_aggregator_pad.AudioAggregatorPadGidBuilderImpl!T
+{
+
+  /** */
+  T converterConfig(gst.structure.Structure propval)
+  {
+    return setProperty("converter-config", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_aggregator_convert_pad.AudioAggregatorConvertPad]
+final class AudioAggregatorConvertPadGidBuilder : AudioAggregatorConvertPadGidBuilderImpl!AudioAggregatorConvertPadGidBuilder
+{
+  AudioAggregatorConvertPad build()
+  {
+    return new AudioAggregatorConvertPad(cast(void*)createGObject(AudioAggregatorConvertPad._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.tree_model_sort;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -141,6 +142,21 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   override TreeModelSort self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.tree_model_sort.TreeModelSort]
+  Returns: New builder object
+  */
+  static TreeModelSortGidBuilder builder()
+  {
+    return new TreeModelSortGidBuilder;
+  }
+
+  /** */
+  @property gtk.tree_model.TreeModel model()
+  {
+    return getModel();
   }
 
   mixin TreeDragSourceT!();
@@ -284,5 +300,28 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   void resetDefaultSortFunc()
   {
     gtk_tree_model_sort_reset_default_sort_func(cast(GtkTreeModelSort*)this._cPtr);
+  }
+}
+
+class TreeModelSortGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.tree_drag_source.TreeDragSourceGidBuilderImpl!T, gtk.tree_model.TreeModelGidBuilderImpl!T, gtk.tree_sortable.TreeSortableGidBuilderImpl!T
+{
+
+  mixin TreeDragSourceGidBuilderT!();
+  mixin TreeModelGidBuilderT!();
+  mixin TreeSortableGidBuilderT!();
+
+  /** */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_model_sort.TreeModelSort]
+final class TreeModelSortGidBuilder : TreeModelSortGidBuilderImpl!TreeModelSortGidBuilder
+{
+  TreeModelSort build()
+  {
+    return new TreeModelSort(cast(void*)createGObject(TreeModelSort._getGType), No.Take);
   }
 }

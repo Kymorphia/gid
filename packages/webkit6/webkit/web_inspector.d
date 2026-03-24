@@ -3,6 +3,7 @@ module webkit.web_inspector;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -60,6 +61,15 @@ class WebInspector : gobject.object.ObjectWrap
   override WebInspector self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.web_inspector.WebInspector]
+  Returns: New builder object
+  */
+  static WebInspectorGidBuilder builder()
+  {
+    return new WebInspectorGidBuilder;
   }
 
   /**
@@ -435,5 +445,18 @@ class WebInspector : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("open-window", closure, after);
+  }
+}
+
+class WebInspectorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.web_inspector.WebInspector]
+final class WebInspectorGidBuilder : WebInspectorGidBuilderImpl!WebInspectorGidBuilder
+{
+  WebInspector build()
+  {
+    return new WebInspector(cast(void*)createGObject(WebInspector._getGType), No.Take);
   }
 }

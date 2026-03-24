@@ -5,6 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -40,6 +41,15 @@ class StateSet : gobject.object.ObjectWrap
   override StateSet self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.state_set.StateSet]
+  Returns: New builder object
+  */
+  static StateSetGidBuilder builder()
+  {
+    return new StateSetGidBuilder;
   }
 
   /**
@@ -215,5 +225,18 @@ class StateSet : gobject.object.ObjectWrap
     _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)this._cPtr, compareSet ? cast(AtkStateSet*)compareSet._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class StateSetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.state_set.StateSet]
+final class StateSetGidBuilder : StateSetGidBuilderImpl!StateSetGidBuilder
+{
+  StateSet build()
+  {
+    return new StateSet(cast(void*)createGObject(StateSet._getGType), Yes.Take);
   }
 }

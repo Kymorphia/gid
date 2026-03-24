@@ -5,6 +5,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,5 +35,33 @@ class DataStream : gobject.object.ObjectWrap
   override DataStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.data_stream.DataStream]
+  Returns: New builder object
+  */
+  static DataStreamGidBuilder builder()
+  {
+    return new DataStreamGidBuilder;
+  }
+}
+
+class DataStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T stream(void* propval)
+  {
+    return setProperty("stream", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.data_stream.DataStream]
+final class DataStreamGidBuilder : DataStreamGidBuilderImpl!DataStreamGidBuilder
+{
+  DataStream build()
+  {
+    return new DataStream(cast(void*)createGObject(DataStream._getGType), No.Take);
   }
 }

@@ -9,6 +9,7 @@ import gmime.format_options;
 import gmime.param;
 import gmime.parser_options;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -40,6 +41,15 @@ class ParamList : gobject.object.ObjectWrap
   override ParamList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.param_list.ParamList]
+  Returns: New builder object
+  */
+  static ParamListGidBuilder builder()
+  {
+    return new ParamListGidBuilder;
   }
 
   /**
@@ -176,5 +186,18 @@ class ParamList : gobject.object.ObjectWrap
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
     g_mime_param_list_set_parameter(cast(GMimeParamList*)this._cPtr, _name, _value);
+  }
+}
+
+class ParamListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.param_list.ParamList]
+final class ParamListGidBuilder : ParamListGidBuilderImpl!ParamListGidBuilder
+{
+  ParamList build()
+  {
+    return new ParamList(cast(void*)createGObject(ParamList._getGType), Yes.Take);
   }
 }

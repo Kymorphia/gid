@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -129,6 +130,15 @@ class RadioButton : gtk.check_button.CheckButton
   override RadioButton self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.radio_button.RadioButton]
+  Returns: New builder object
+  */
+  static RadioButtonGidBuilder builder()
+  {
+    return new RadioButtonGidBuilder;
   }
 
   /**
@@ -359,5 +369,30 @@ class RadioButton : gtk.check_button.CheckButton
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("group-changed", closure, after);
+  }
+}
+
+class RadioButtonGidBuilderImpl(T) : gtk.check_button.CheckButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `group` property.
+      Params:
+        propval = Sets a new group for a radio button.
+      Returns: Builder instance for fluent chaining
+  */
+  T group(gtk.radio_button.RadioButton propval)
+  {
+    return setProperty("group", propval);
+  }
+}
+
+/// Fluent builder for [gtk.radio_button.RadioButton]
+final class RadioButtonGidBuilder : RadioButtonGidBuilderImpl!RadioButtonGidBuilder
+{
+  RadioButton build()
+  {
+    return new RadioButton(cast(void*)createGObject(RadioButton._getGType), No.Take);
   }
 }

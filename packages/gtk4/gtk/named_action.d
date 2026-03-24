@@ -2,6 +2,7 @@
 module gtk.named_action;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_action;
@@ -39,6 +40,24 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
+  Get builder for [gtk.named_action.NamedAction]
+  Returns: New builder object
+  */
+  static NamedActionGidBuilder builder()
+  {
+    return new NamedActionGidBuilder;
+  }
+
+  /**
+      Get `actionName` property.
+      Returns: The name of the action to activate.
+  */
+  @property string actionName()
+  {
+    return getActionName();
+  }
+
+  /**
       Creates an action that when activated, activates
       the named action on the widget.
       
@@ -69,5 +88,29 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
     _cretval = gtk_named_action_get_action_name(cast(GtkNamedAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class NamedActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
+{
+
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the action to activate.
+      Returns: Builder instance for fluent chaining
+  */
+  T actionName(string propval)
+  {
+    return setProperty("action-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.named_action.NamedAction]
+final class NamedActionGidBuilder : NamedActionGidBuilderImpl!NamedActionGidBuilder
+{
+  NamedAction build()
+  {
+    return new NamedAction(cast(void*)createGObject(NamedAction._getGType), Yes.Take);
   }
 }

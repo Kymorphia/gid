@@ -3,6 +3,7 @@ module gstgl.glshader;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gst.object;
 import gstgl.c.functions;
@@ -38,6 +39,15 @@ class GLShader : gst.object.ObjectWrap
   override GLShader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glshader.GLShader]
+  Returns: New builder object
+  */
+  static GLShaderGidBuilder builder()
+  {
+    return new GLShaderGidBuilder;
   }
 
   /** */
@@ -564,5 +574,18 @@ class GLShader : gst.object.ObjectWrap
   void use()
   {
     gst_gl_shader_use(cast(GstGLShader*)this._cPtr);
+  }
+}
+
+class GLShaderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glshader.GLShader]
+final class GLShaderGidBuilder : GLShaderGidBuilderImpl!GLShaderGidBuilder
+{
+  GLShader build()
+  {
+    return new GLShader(cast(void*)createGObject(GLShader._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.file_chooser_widget;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -56,6 +57,15 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
   override FileChooserWidget self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.file_chooser_widget.FileChooserWidget]
+  Returns: New builder object
+  */
+  static FileChooserWidgetGidBuilder builder()
+  {
+    return new FileChooserWidgetGidBuilder;
   }
 
   /** */
@@ -657,5 +667,26 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("up-folder", closure, after);
+  }
+}
+
+class FileChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
+{
+
+  mixin FileChooserGidBuilderT!();
+
+  /** */
+  T searchMode(bool propval)
+  {
+    return setProperty("search-mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.file_chooser_widget.FileChooserWidget]
+final class FileChooserWidgetGidBuilder : FileChooserWidgetGidBuilderImpl!FileChooserWidgetGidBuilder
+{
+  FileChooserWidget build()
+  {
+    return new FileChooserWidget(cast(void*)createGObject(FileChooserWidget._getGType), No.Take);
   }
 }

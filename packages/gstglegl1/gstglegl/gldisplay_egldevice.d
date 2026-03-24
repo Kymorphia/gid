@@ -2,6 +2,7 @@
 module gstglegl.gldisplay_egldevice;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstgl.gldisplay;
 import gstglegl.c.functions;
@@ -41,6 +42,15 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
   }
 
   /**
+  Get builder for [gstglegl.gldisplay_egldevice.GLDisplayEGLDevice]
+  Returns: New builder object
+  */
+  static GLDisplayEGLDeviceGidBuilder builder()
+  {
+    return new GLDisplayEGLDeviceGidBuilder;
+  }
+
+  /**
       Create a new #GstGLDisplayEGLDevice with an EGLDevice supported device
   
       Params:
@@ -68,5 +78,18 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
     _cretval = gst_gl_display_egl_device_new_with_egl_device(device);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstglegl.gldisplay_egldevice.GLDisplayEGLDevice)(cast(GstGLDisplayEGLDevice*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class GLDisplayEGLDeviceGidBuilderImpl(T) : gstgl.gldisplay.GLDisplayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstglegl.gldisplay_egldevice.GLDisplayEGLDevice]
+final class GLDisplayEGLDeviceGidBuilder : GLDisplayEGLDeviceGidBuilderImpl!GLDisplayEGLDeviceGidBuilder
+{
+  GLDisplayEGLDevice build()
+  {
+    return new GLDisplayEGLDevice(cast(void*)createGObject(GLDisplayEGLDevice._getGType), Yes.Take);
   }
 }

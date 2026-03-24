@@ -4,6 +4,7 @@ module gtk.font_chooser;
 public import gtk.font_chooser_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -420,4 +421,68 @@ interface FontChooser
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
   ulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface FontChooserGidBuilderImpl(T)
+{
+
+  /**
+      Set `font` property.
+      Params:
+        propval = The font description as a string, e.g. "Sans Italic 12".
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T font(string propval);
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = The font description as a [pango.font_description.FontDescription].
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T fontDesc(pango.font_description.FontDescription propval);
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language for which the font features were selected.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T language(string propval);
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of granularity to offer for selecting fonts.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T level(gtk.types.FontChooserLevel propval);
+
+  /**
+      Set `previewText` property.
+      Params:
+        propval = The string with which to preview the font.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T previewText(string propval);
+
+  /**
+      Set `showPreviewEntry` property.
+      Params:
+        propval = Whether to show an entry to change the preview text.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
+  */
+  T showPreviewEntry(bool propval);
 }

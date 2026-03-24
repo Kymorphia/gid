@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.input_stream;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,24 @@ class FilterInputStream : gio.input_stream.InputStream
   }
 
   /**
+  Get builder for [gio.filter_input_stream.FilterInputStream]
+  Returns: New builder object
+  */
+  static FilterInputStreamGidBuilder builder()
+  {
+    return new FilterInputStreamGidBuilder;
+  }
+
+  /**
+      Get `baseStream` property.
+      Returns: The underlying base stream on which the I/O ops will be done.
+  */
+  @property gio.input_stream.InputStream baseStream()
+  {
+    return getBaseStream();
+  }
+
+  /**
       Get `closeBaseStream` property.
       Returns: Whether the base stream should be closed when the filter stream is closed.
   */
@@ -58,7 +77,7 @@ class FilterInputStream : gio.input_stream.InputStream
   */
   @property void closeBaseStream(bool propval)
   {
-    return setCloseBaseStream(propval);
+    setCloseBaseStream(propval);
   }
 
   /**
@@ -94,5 +113,40 @@ class FilterInputStream : gio.input_stream.InputStream
   void setCloseBaseStream(bool closeBase)
   {
     g_filter_input_stream_set_close_base_stream(cast(GFilterInputStream*)this._cPtr, closeBase);
+  }
+}
+
+class FilterInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T
+{
+
+  /**
+      Set `baseStream` property.
+      Params:
+        propval = The underlying base stream on which the I/O ops will be done.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseStream(gio.input_stream.InputStream propval)
+  {
+    return setProperty("base-stream", propval);
+  }
+
+  /**
+      Set `closeBaseStream` property.
+      Params:
+        propval = Whether the base stream should be closed when the filter stream is closed.
+      Returns: Builder instance for fluent chaining
+  */
+  T closeBaseStream(bool propval)
+  {
+    return setProperty("close-base-stream", propval);
+  }
+}
+
+/// Fluent builder for [gio.filter_input_stream.FilterInputStream]
+final class FilterInputStreamGidBuilder : FilterInputStreamGidBuilderImpl!FilterInputStreamGidBuilder
+{
+  FilterInputStream build()
+  {
+    return new FilterInputStream(cast(void*)createGObject(FilterInputStream._getGType), No.Take);
   }
 }

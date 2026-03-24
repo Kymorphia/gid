@@ -2,6 +2,7 @@
 module gstaudio.audio_decoder;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
@@ -143,6 +144,15 @@ class AudioDecoder : gst.element.Element
   }
 
   /**
+  Get builder for [gstaudio.audio_decoder.AudioDecoder]
+  Returns: New builder object
+  */
+  static AudioDecoderGidBuilder builder()
+  {
+    return new AudioDecoderGidBuilder;
+  }
+
+  /**
       Get `maxErrors` property.
       Returns: Maximum number of tolerated consecutive decode errors. See
         [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
@@ -160,7 +170,7 @@ class AudioDecoder : gst.element.Element
   */
   @property void maxErrors(int propval)
   {
-    return setMaxErrors(propval);
+    setMaxErrors(propval);
   }
 
   /** */
@@ -184,7 +194,7 @@ class AudioDecoder : gst.element.Element
   /** */
   @property void plc(bool propval)
   {
-    return setPlc(propval);
+    setPlc(propval);
   }
 
   /** */
@@ -652,5 +662,48 @@ class AudioDecoder : gst.element.Element
   void setUseDefaultPadAcceptcaps(bool use)
   {
     gst_audio_decoder_set_use_default_pad_acceptcaps(cast(GstAudioDecoder*)this._cPtr, use);
+  }
+}
+
+class AudioDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `maxErrors` property.
+      Params:
+        propval = Maximum number of tolerated consecutive decode errors. See
+          [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxErrors(int propval)
+  {
+    return setProperty("max-errors", propval);
+  }
+
+  /** */
+  T minLatency(long propval)
+  {
+    return setProperty("min-latency", propval);
+  }
+
+  /** */
+  T plc(bool propval)
+  {
+    return setProperty("plc", propval);
+  }
+
+  /** */
+  T tolerance(long propval)
+  {
+    return setProperty("tolerance", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_decoder.AudioDecoder]
+final class AudioDecoderGidBuilder : AudioDecoderGidBuilderImpl!AudioDecoderGidBuilder
+{
+  AudioDecoder build()
+  {
+    return new AudioDecoder(cast(void*)createGObject(AudioDecoder._getGType), No.Take);
   }
 }

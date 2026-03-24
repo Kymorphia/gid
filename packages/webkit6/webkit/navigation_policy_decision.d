@@ -2,6 +2,7 @@
 module webkit.navigation_policy_decision;
 
 import gid.gid;
+import gobject.gid_builder;
 import webkit.c.functions;
 import webkit.c.types;
 import webkit.navigation_action;
@@ -44,6 +45,15 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
   }
 
   /**
+  Get builder for [webkit.navigation_policy_decision.NavigationPolicyDecision]
+  Returns: New builder object
+  */
+  static NavigationPolicyDecisionGidBuilder builder()
+  {
+    return new NavigationPolicyDecisionGidBuilder;
+  }
+
+  /**
       Get `navigationAction` property.
       Returns: The #WebKitNavigationAction that triggered this policy decision.
   */
@@ -62,5 +72,18 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
     _cretval = webkit_navigation_policy_decision_get_navigation_action(cast(WebKitNavigationPolicyDecision*)this._cPtr);
     auto _retval = _cretval ? new webkit.navigation_action.NavigationAction(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class NavigationPolicyDecisionGidBuilderImpl(T) : webkit.policy_decision.PolicyDecisionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.navigation_policy_decision.NavigationPolicyDecision]
+final class NavigationPolicyDecisionGidBuilder : NavigationPolicyDecisionGidBuilderImpl!NavigationPolicyDecisionGidBuilder
+{
+  NavigationPolicyDecision build()
+  {
+    return new NavigationPolicyDecision(cast(void*)createGObject(NavigationPolicyDecision._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -69,6 +70,15 @@ class HandleBox : gtk.bin.Bin
     return this;
   }
 
+  /**
+  Get builder for [gtk.handle_box.HandleBox]
+  Returns: New builder object
+  */
+  static HandleBoxGidBuilder builder()
+  {
+    return new HandleBoxGidBuilder;
+  }
+
   /** */
   @property bool childDetached()
   {
@@ -84,7 +94,7 @@ class HandleBox : gtk.bin.Bin
   /** */
   @property void handlePosition(gtk.types.PositionType propval)
   {
-    return setHandlePosition(propval);
+    setHandlePosition(propval);
   }
 
   /** */
@@ -96,7 +106,7 @@ class HandleBox : gtk.bin.Bin
   /** */
   @property void shadowType(gtk.types.ShadowType propval)
   {
-    return setShadowType(propval);
+    setShadowType(propval);
   }
 
   /** */
@@ -108,7 +118,7 @@ class HandleBox : gtk.bin.Bin
   /** */
   @property void snapEdge(gtk.types.PositionType propval)
   {
-    return setSnapEdge(propval);
+    setSnapEdge(propval);
   }
 
   /** */
@@ -344,5 +354,43 @@ class HandleBox : gtk.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("child-detached", closure, after);
+  }
+}
+
+class HandleBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /** */
+  T handlePosition(gtk.types.PositionType propval)
+  {
+    return setProperty("handle-position", propval);
+  }
+
+  /** */
+  T shadowType(gtk.types.ShadowType propval)
+  {
+    return setProperty("shadow-type", propval);
+  }
+
+  /** */
+  T snapEdge(gtk.types.PositionType propval)
+  {
+    return setProperty("snap-edge", propval);
+  }
+
+  /** */
+  T snapEdgeSet(bool propval)
+  {
+    return setProperty("snap-edge-set", propval);
+  }
+}
+
+/// Fluent builder for [gtk.handle_box.HandleBox]
+final class HandleBoxGidBuilder : HandleBoxGidBuilderImpl!HandleBoxGidBuilder
+{
+  HandleBox build()
+  {
+    return new HandleBox(cast(void*)createGObject(HandleBox._getGType), No.Take);
   }
 }

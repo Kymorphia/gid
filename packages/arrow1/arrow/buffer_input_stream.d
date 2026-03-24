@@ -11,6 +11,7 @@ import arrow.readable_mixin;
 import arrow.seekable_input_stream;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -42,6 +43,21 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     return this;
   }
 
+  /**
+  Get builder for [arrow.buffer_input_stream.BufferInputStream]
+  Returns: New builder object
+  */
+  static BufferInputStreamGidBuilder builder()
+  {
+    return new BufferInputStreamGidBuilder;
+  }
+
+  /** */
+  @property arrow.buffer.Buffer buffer()
+  {
+    return getBuffer();
+  }
+
   /** */
   this(arrow.buffer.Buffer buffer)
   {
@@ -57,5 +73,25 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     _cretval = garrow_buffer_input_stream_get_buffer(cast(GArrowBufferInputStream*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class BufferInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableInputStreamGidBuilderImpl!T
+{
+
+
+  /** */
+  T buffer(arrow.buffer.Buffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+}
+
+/// Fluent builder for [arrow.buffer_input_stream.BufferInputStream]
+final class BufferInputStreamGidBuilder : BufferInputStreamGidBuilderImpl!BufferInputStreamGidBuilder
+{
+  BufferInputStream build()
+  {
+    return new BufferInputStream(cast(void*)createGObject(BufferInputStream._getGType), Yes.Take);
   }
 }

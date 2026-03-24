@@ -7,6 +7,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -52,6 +53,15 @@ class Grid : gtk.widget.Widget
   override Grid self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.grid.Grid]
+  Returns: New builder object
+  */
+  static GridGidBuilder builder()
+  {
+    return new GridGidBuilder;
   }
 
   /**
@@ -230,5 +240,19 @@ class Grid : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-frame", closure, after);
+  }
+}
+
+class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [panel.grid.Grid]
+final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
+{
+  Grid build()
+  {
+    return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);
   }
 }

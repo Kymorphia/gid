@@ -3,6 +3,7 @@ module gtk.cell_renderer_combo;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -51,6 +52,15 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   override CellRendererCombo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer_combo.CellRendererCombo]
+  Returns: New builder object
+  */
+  static CellRendererComboGidBuilder builder()
+  {
+    return new CellRendererComboGidBuilder;
   }
 
   /**
@@ -206,5 +216,61 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class CellRendererComboGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTextGidBuilderImpl!T
+{
+
+  /**
+      Set `hasEntry` property.
+      Params:
+        propval = If true, the cell renderer will include an entry and allow to enter
+          values other than the ones in the popup list.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasEntry(bool propval)
+  {
+    return setProperty("has-entry", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Holds a tree model containing the possible values for the combo box.
+          Use the text_column property to specify the column holding the values.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = Specifies the model column which holds the possible values for the
+          combo box.
+          
+          Note that this refers to the model specified in the model property,
+          not the model backing the tree view to which
+          this cell renderer is attached.
+          
+          #GtkCellRendererCombo automatically adds a text cell renderer for
+          this column to its combo box.
+      Returns: Builder instance for fluent chaining
+  */
+  T textColumn(int propval)
+  {
+    return setProperty("text-column", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_combo.CellRendererCombo]
+final class CellRendererComboGidBuilder : CellRendererComboGidBuilderImpl!CellRendererComboGidBuilder
+{
+  CellRendererCombo build()
+  {
+    return new CellRendererCombo(cast(void*)createGObject(CellRendererCombo._getGType), No.Take);
   }
 }

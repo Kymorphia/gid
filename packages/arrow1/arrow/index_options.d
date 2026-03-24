@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class IndexOptions : arrow.function_options.FunctionOptions
   }
 
   /**
+  Get builder for [arrow.index_options.IndexOptions]
+  Returns: New builder object
+  */
+  static IndexOptionsGidBuilder builder()
+  {
+    return new IndexOptionsGidBuilder;
+  }
+
+  /**
       Get `value` property.
       Returns: The value to be compared.
   */
@@ -63,5 +73,29 @@ class IndexOptions : arrow.function_options.FunctionOptions
     GArrowIndexOptions* _cretval;
     _cretval = garrow_index_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class IndexOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value to be compared.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(arrow.scalar.Scalar propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.index_options.IndexOptions]
+final class IndexOptionsGidBuilder : IndexOptionsGidBuilderImpl!IndexOptionsGidBuilder
+{
+  IndexOptions build()
+  {
+    return new IndexOptions(cast(void*)createGObject(IndexOptions._getGType), Yes.Take);
   }
 }

@@ -8,6 +8,7 @@ import atk.object;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -489,4 +490,8 @@ interface Table
       Returns: Signal ID
   */
   ulong connectRowReordered(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface TableGidBuilderImpl(T)
+{
 }

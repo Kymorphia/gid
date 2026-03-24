@@ -3,6 +3,7 @@ module gst.task_pool;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.object;
@@ -40,6 +41,15 @@ class TaskPool : gst.object.ObjectWrap
   override TaskPool self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.task_pool.TaskPool]
+  Returns: New builder object
+  */
+  static TaskPoolGidBuilder builder()
+  {
+    return new TaskPoolGidBuilder;
   }
 
   /**
@@ -142,5 +152,18 @@ class TaskPool : gst.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class TaskPoolGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.task_pool.TaskPool]
+final class TaskPoolGidBuilder : TaskPoolGidBuilderImpl!TaskPoolGidBuilder
+{
+  TaskPool build()
+  {
+    return new TaskPool(cast(void*)createGObject(TaskPool._getGType), Yes.Take);
   }
 }

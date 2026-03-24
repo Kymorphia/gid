@@ -8,6 +8,7 @@ import gdk.types;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class DragContext : gobject.object.ObjectWrap
   override DragContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.drag_context.DragContext]
+  Returns: New builder object
+  */
+  static DragContextGidBuilder builder()
+  {
+    return new DragContextGidBuilder;
   }
 
   /**
@@ -381,5 +391,18 @@ class DragContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drop-performed", closure, after);
+  }
+}
+
+class DragContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.drag_context.DragContext]
+final class DragContextGidBuilder : DragContextGidBuilderImpl!DragContextGidBuilder
+{
+  DragContext build()
+  {
+    return new DragContext(cast(void*)createGObject(DragContext._getGType), No.Take);
   }
 }

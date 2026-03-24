@@ -7,6 +7,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class ColorDialog : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.color_dialog.ColorDialog]
+  Returns: New builder object
+  */
+  static ColorDialogGidBuilder builder()
+  {
+    return new ColorDialogGidBuilder;
+  }
+
+  /**
       Get `modal` property.
       Returns: Whether the color chooser dialog is modal.
   */
@@ -71,7 +81,7 @@ class ColorDialog : gobject.object.ObjectWrap
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -92,7 +102,7 @@ class ColorDialog : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -117,7 +127,7 @@ class ColorDialog : gobject.object.ObjectWrap
   */
   @property void withAlpha(bool propval)
   {
-    return setWithAlpha(propval);
+    setWithAlpha(propval);
   }
 
   /**
@@ -254,5 +264,55 @@ class ColorDialog : gobject.object.ObjectWrap
   void setWithAlpha(bool withAlpha)
   {
     gtk_color_dialog_set_with_alpha(cast(GtkColorDialog*)this._cPtr, withAlpha);
+  }
+}
+
+class ColorDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the color chooser dialog is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the color chooser
+          dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `withAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+          
+          When with-alpha is false, the color that is selected
+          will be forced to have alpha == 1.
+      Returns: Builder instance for fluent chaining
+  */
+  T withAlpha(bool propval)
+  {
+    return setProperty("with-alpha", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_dialog.ColorDialog]
+final class ColorDialogGidBuilder : ColorDialogGidBuilderImpl!ColorDialogGidBuilder
+{
+  ColorDialog build()
+  {
+    return new ColorDialog(cast(void*)createGObject(ColorDialog._getGType), Yes.Take);
   }
 }

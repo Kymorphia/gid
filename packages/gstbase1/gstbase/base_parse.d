@@ -2,6 +2,7 @@
 module gstbase.base_parse;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.element;
 import gst.tag_list;
@@ -184,6 +185,15 @@ class BaseParse : gst.element.Element
   override BaseParse self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstbase.base_parse.BaseParse]
+  Returns: New builder object
+  */
+  static BaseParseGidBuilder builder()
+  {
+    return new BaseParseGidBuilder;
   }
 
   /**
@@ -498,5 +508,34 @@ class BaseParse : gst.element.Element
   void setTsAtOffset(size_t offset)
   {
     gst_base_parse_set_ts_at_offset(cast(GstBaseParse*)this._cPtr, offset);
+  }
+}
+
+class BaseParseGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `disablePassthrough` property.
+      Params:
+        propval = If set to true, baseparse will unconditionally force parsing of the
+          incoming data. This can be required in the rare cases where the incoming
+          side-data (caps, pts, dts, ...) is not trusted by the user and wants to
+          force validation and parsing of the incoming data.
+          If set to false, decision of whether to parse the data or not is up to
+          the implementation (standard behaviour).
+      Returns: Builder instance for fluent chaining
+  */
+  T disablePassthrough(bool propval)
+  {
+    return setProperty("disable-passthrough", propval);
+  }
+}
+
+/// Fluent builder for [gstbase.base_parse.BaseParse]
+final class BaseParseGidBuilder : BaseParseGidBuilderImpl!BaseParseGidBuilder
+{
+  BaseParse build()
+  {
+    return new BaseParse(cast(void*)createGObject(BaseParse._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtksource.style_scheme_chooser_widget;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -42,6 +43,15 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
     return this;
   }
 
+  /**
+  Get builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
+  Returns: New builder object
+  */
+  static StyleSchemeChooserWidgetGidBuilder builder()
+  {
+    return new StyleSchemeChooserWidgetGidBuilder;
+  }
+
   mixin StyleSchemeChooserT!();
 
   /**
@@ -53,5 +63,20 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
     GtkWidget* _cretval;
     _cretval = gtk_source_style_scheme_chooser_widget_new();
     this(_cretval, No.Take);
+  }
+}
+
+class StyleSchemeChooserWidgetGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtksource.style_scheme_chooser.StyleSchemeChooserGidBuilderImpl!T
+{
+
+  mixin StyleSchemeChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
+final class StyleSchemeChooserWidgetGidBuilder : StyleSchemeChooserWidgetGidBuilderImpl!StyleSchemeChooserWidgetGidBuilder
+{
+  StyleSchemeChooserWidget build()
+  {
+    return new StyleSchemeChooserWidget(cast(void*)createGObject(StyleSchemeChooserWidget._getGType), No.Take);
   }
 }

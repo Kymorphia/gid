@@ -10,6 +10,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -38,6 +39,15 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   override BinaryDictionaryArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.binary_dictionary_array_builder.BinaryDictionaryArrayBuilder]
+  Returns: New builder object
+  */
+  static BinaryDictionaryArrayBuilderGidBuilder builder()
+  {
+    return new BinaryDictionaryArrayBuilderGidBuilder;
   }
 
   /** */
@@ -158,5 +168,18 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   void resetFull()
   {
     garrow_binary_dictionary_array_builder_reset_full(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr);
+  }
+}
+
+class BinaryDictionaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.binary_dictionary_array_builder.BinaryDictionaryArrayBuilder]
+final class BinaryDictionaryArrayBuilderGidBuilder : BinaryDictionaryArrayBuilderGidBuilderImpl!BinaryDictionaryArrayBuilderGidBuilder
+{
+  BinaryDictionaryArrayBuilder build()
+  {
+    return new BinaryDictionaryArrayBuilder(cast(void*)createGObject(BinaryDictionaryArrayBuilder._getGType), Yes.Take);
   }
 }

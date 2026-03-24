@@ -3,6 +3,7 @@ module gstrtp.rtpbase_depayload;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
@@ -75,6 +76,15 @@ class RTPBaseDepayload : gst.element.Element
   override RTPBaseDepayload self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstrtp.rtpbase_depayload.RTPBaseDepayload]
+  Returns: New builder object
+  */
+  static RTPBaseDepayloadGidBuilder builder()
+  {
+    return new RTPBaseDepayloadGidBuilder;
   }
 
   /**
@@ -447,5 +457,57 @@ class RTPBaseDepayload : gst.element.Element
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-extension", closure, after);
+  }
+}
+
+class RTPBaseDepayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `autoHeaderExtension` property.
+      Params:
+        propval = If enabled, the depayloader will automatically try to enable all the
+          RTP header extensions provided in the sink caps, saving the application
+          the need to handle these extensions manually using the
+          GstRTPBaseDepayload::request-extension: signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoHeaderExtension(bool propval)
+  {
+    return setProperty("auto-header-extension", propval);
+  }
+
+  /**
+      Set `maxReorder` property.
+      Params:
+        propval = Max seqnum reorder before the sender is assumed to have restarted.
+          
+          When max-reorder is set to 0 all reordered/duplicate packets are
+          considered coming from a restarted sender.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxReorder(int propval)
+  {
+    return setProperty("max-reorder", propval);
+  }
+
+  /**
+      Set `sourceInfo` property.
+      Params:
+        propval = Add RTP source information found in RTP header as meta to output buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T sourceInfo(bool propval)
+  {
+    return setProperty("source-info", propval);
+  }
+}
+
+/// Fluent builder for [gstrtp.rtpbase_depayload.RTPBaseDepayload]
+final class RTPBaseDepayloadGidBuilder : RTPBaseDepayloadGidBuilderImpl!RTPBaseDepayloadGidBuilder
+{
+  RTPBaseDepayload build()
+  {
+    return new RTPBaseDepayload(cast(void*)createGObject(RTPBaseDepayload._getGType), No.Take);
   }
 }

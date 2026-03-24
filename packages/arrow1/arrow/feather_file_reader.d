@@ -8,6 +8,7 @@ import arrow.table;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class FeatherFileReader : gobject.object.ObjectWrap
   override FeatherFileReader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.feather_file_reader.FeatherFileReader]
+  Returns: New builder object
+  */
+  static FeatherFileReaderGidBuilder builder()
+  {
+    return new FeatherFileReaderGidBuilder;
   }
 
   /** */
@@ -106,5 +116,24 @@ class FeatherFileReader : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class FeatherFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T featherReader(void* propval)
+  {
+    return setProperty("feather-reader", propval);
+  }
+}
+
+/// Fluent builder for [arrow.feather_file_reader.FeatherFileReader]
+final class FeatherFileReaderGidBuilder : FeatherFileReaderGidBuilderImpl!FeatherFileReaderGidBuilder
+{
+  FeatherFileReader build()
+  {
+    return new FeatherFileReader(cast(void*)createGObject(FeatherFileReader._getGType), Yes.Take);
   }
 }

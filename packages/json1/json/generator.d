@@ -6,6 +6,7 @@ import gio.cancellable;
 import gio.output_stream;
 import glib.error;
 import glib.string_;
+import gobject.gid_builder;
 import gobject.object;
 import json.c.functions;
 import json.c.types;
@@ -46,6 +47,15 @@ class Generator : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [json.generator.Generator]
+  Returns: New builder object
+  */
+  static GeneratorGidBuilder builder()
+  {
+    return new GeneratorGidBuilder;
+  }
+
+  /**
       Get `indent` property.
       Returns: Number of spaces to be used to indent when pretty printing.
   */
@@ -61,7 +71,7 @@ class Generator : gobject.object.ObjectWrap
   */
   @property void indent(uint propval)
   {
-    return setIndent(propval);
+    setIndent(propval);
   }
 
   /**
@@ -107,7 +117,7 @@ class Generator : gobject.object.ObjectWrap
   */
   @property void pretty(bool propval)
   {
-    return setPretty(propval);
+    setPretty(propval);
   }
 
   /**
@@ -128,7 +138,7 @@ class Generator : gobject.object.ObjectWrap
   */
   @property void root(json.node.Node propval)
   {
-    return setRoot(propval);
+    setRoot(propval);
   }
 
   /**
@@ -318,5 +328,67 @@ class Generator : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class GeneratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Number of spaces to be used to indent when pretty printing.
+      Returns: Builder instance for fluent chaining
+  */
+  T indent(uint propval)
+  {
+    return setProperty("indent", propval);
+  }
+
+  /**
+      Set `indentChar` property.
+      Params:
+        propval = The character that should be used when indenting in pretty print.
+      Returns: Builder instance for fluent chaining
+  */
+  T indentChar(uint propval)
+  {
+    return setProperty("indent-char", propval);
+  }
+
+  /**
+      Set `pretty` property.
+      Params:
+        propval = Whether the output should be "pretty-printed", with indentation and
+          newlines.
+          
+          The indentation level can be controlled by using the
+          [json.generator.Generator.indent] property.
+      Returns: Builder instance for fluent chaining
+  */
+  T pretty(bool propval)
+  {
+    return setProperty("pretty", propval);
+  }
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root node to be used when constructing a JSON data
+          stream.
+      Returns: Builder instance for fluent chaining
+  */
+  T root(json.node.Node propval)
+  {
+    return setProperty("root", propval);
+  }
+}
+
+/// Fluent builder for [json.generator.Generator]
+final class GeneratorGidBuilder : GeneratorGidBuilderImpl!GeneratorGidBuilder
+{
+  Generator build()
+  {
+    return new Generator(cast(void*)createGObject(Generator._getGType), Yes.Take);
   }
 }

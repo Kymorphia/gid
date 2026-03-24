@@ -6,6 +6,7 @@ import gdk.content_provider;
 import gdk.paintable;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class TextBuffer : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.text_buffer.TextBuffer]
+  Returns: New builder object
+  */
+  static TextBufferGidBuilder builder()
+  {
+    return new TextBufferGidBuilder;
+  }
+
+  /**
       Get `canRedo` property.
       Returns: Denotes that the buffer can reapply the last undone action.
   */
@@ -101,7 +111,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   @property void enableUndo(bool propval)
   {
-    return setEnableUndo(propval);
+    setEnableUndo(propval);
   }
 
   /**
@@ -111,6 +121,15 @@ class TextBuffer : gobject.object.ObjectWrap
   @property bool hasSelection()
   {
     return getHasSelection();
+  }
+
+  /**
+      Get `tagTable` property.
+      Returns: The GtkTextTagTable for the buffer.
+  */
+  @property gtk.text_tag_table.TextTagTable tagTable()
+  {
+    return getTagTable();
   }
 
   /**
@@ -2151,5 +2170,54 @@ class TextBuffer : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("undo", closure, after);
+  }
+}
+
+class TextBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `enableUndo` property.
+      Params:
+        propval = Denotes if support for undoing and redoing changes to the buffer is allowed.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableUndo(bool propval)
+  {
+    return setProperty("enable-undo", propval);
+  }
+
+  /**
+      Set `tagTable` property.
+      Params:
+        propval = The GtkTextTagTable for the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T tagTable(gtk.text_tag_table.TextTagTable propval)
+  {
+    return setProperty("tag-table", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The text content of the buffer.
+          
+          Without child widgets and images,
+          see [gtk.text_buffer.TextBuffer.getText] for more information.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [gtk.text_buffer.TextBuffer]
+final class TextBufferGidBuilder : TextBufferGidBuilderImpl!TextBufferGidBuilder
+{
+  TextBuffer build()
+  {
+    return new TextBuffer(cast(void*)createGObject(TextBuffer._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gst.device_monitor;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.bus;
 import gst.c.functions;
@@ -100,6 +101,15 @@ class DeviceMonitor : gst.object.ObjectWrap
   override DeviceMonitor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.device_monitor.DeviceMonitor]
+  Returns: New builder object
+  */
+  static DeviceMonitorGidBuilder builder()
+  {
+    return new DeviceMonitorGidBuilder;
   }
 
   /** */
@@ -263,5 +273,24 @@ class DeviceMonitor : gst.object.ObjectWrap
   void stop()
   {
     gst_device_monitor_stop(cast(GstDeviceMonitor*)this._cPtr);
+  }
+}
+
+class DeviceMonitorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T showAll(bool propval)
+  {
+    return setProperty("show-all", propval);
+  }
+}
+
+/// Fluent builder for [gst.device_monitor.DeviceMonitor]
+final class DeviceMonitorGidBuilder : DeviceMonitorGidBuilderImpl!DeviceMonitorGidBuilder
+{
+  DeviceMonitor build()
+  {
+    return new DeviceMonitor(cast(void*)createGObject(DeviceMonitor._getGType), Yes.Take);
   }
 }

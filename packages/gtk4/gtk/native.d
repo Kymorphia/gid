@@ -4,6 +4,7 @@ module gtk.native;
 public import gtk.native_iface_proxy;
 import gdk.surface;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gsk.renderer;
 import gtk.c.functions;
@@ -89,4 +90,8 @@ interface Native
       This should only be used by subclasses.
   */
   void unrealize();
+}
+
+interface NativeGidBuilderImpl(T)
+{
 }

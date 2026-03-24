@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -71,6 +72,28 @@ class Assistant : gtk.window.Window
   override Assistant self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.assistant.Assistant]
+  Returns: New builder object
+  */
+  static AssistantGidBuilder builder()
+  {
+    return new AssistantGidBuilder;
+  }
+
+  /**
+      Get `useHeaderBar` property.
+      Returns: true if the assistant uses a #GtkHeaderBar for action buttons
+        instead of the action-area.
+        
+        For technical reasons, this property is declared as an integer
+        property, but you should only set it to true or false.
+  */
+  @property int useHeaderBar()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("use-header-bar");
   }
 
   /**
@@ -701,5 +724,34 @@ class Assistant : gtk.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prepare", closure, after);
+  }
+}
+
+class AssistantGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `useHeaderBar` property.
+      Params:
+        propval = true if the assistant uses a #GtkHeaderBar for action buttons
+          instead of the action-area.
+          
+          For technical reasons, this property is declared as an integer
+          property, but you should only set it to true or false.
+      Returns: Builder instance for fluent chaining
+  */
+  T useHeaderBar(int propval)
+  {
+    return setProperty("use-header-bar", propval);
+  }
+}
+
+/// Fluent builder for [gtk.assistant.Assistant]
+final class AssistantGidBuilder : AssistantGidBuilderImpl!AssistantGidBuilder
+{
+  Assistant build()
+  {
+    return new Assistant(cast(void*)createGObject(Assistant._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.timestamp_parser;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
@@ -36,6 +37,15 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
     return this;
   }
 
+  /**
+  Get builder for [arrow.strptime_timestamp_parser.StrptimeTimestampParser]
+  Returns: New builder object
+  */
+  static StrptimeTimestampParserGidBuilder builder()
+  {
+    return new StrptimeTimestampParserGidBuilder;
+  }
+
   /** */
   this(string format)
   {
@@ -52,5 +62,18 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
     _cretval = garrow_strptime_timestamp_parser_get_format(cast(GArrowStrptimeTimestampParser*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class StrptimeTimestampParserGidBuilderImpl(T) : arrow.timestamp_parser.TimestampParserGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.strptime_timestamp_parser.StrptimeTimestampParser]
+final class StrptimeTimestampParserGidBuilder : StrptimeTimestampParserGidBuilderImpl!StrptimeTimestampParserGidBuilder
+{
+  StrptimeTimestampParser build()
+  {
+    return new StrptimeTimestampParser(cast(void*)createGObject(StrptimeTimestampParser._getGType), Yes.Take);
   }
 }

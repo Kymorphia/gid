@@ -2,6 +2,7 @@
 module gtk.text_mark;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -69,6 +70,37 @@ class TextMark : gobject.object.ObjectWrap
   override TextMark self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.text_mark.TextMark]
+  Returns: New builder object
+  */
+  static TextMarkGidBuilder builder()
+  {
+    return new TextMarkGidBuilder;
+  }
+
+  /**
+      Get `leftGravity` property.
+      Returns: Whether the mark has left gravity.
+        
+        When text is inserted at the mark’s current location, if the mark
+        has left gravity it will be moved to the left of the newly-inserted
+        text, otherwise to the right.
+  */
+  @property bool leftGravity()
+  {
+    return getLeftGravity();
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the mark or null if the mark is anonymous.
+  */
+  @property string name()
+  {
+    return getName();
   }
 
   /**
@@ -167,5 +199,44 @@ class TextMark : gobject.object.ObjectWrap
   void setVisible(bool setting)
   {
     gtk_text_mark_set_visible(cast(GtkTextMark*)this._cPtr, setting);
+  }
+}
+
+class TextMarkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `leftGravity` property.
+      Params:
+        propval = Whether the mark has left gravity.
+          
+          When text is inserted at the mark’s current location, if the mark
+          has left gravity it will be moved to the left of the newly-inserted
+          text, otherwise to the right.
+      Returns: Builder instance for fluent chaining
+  */
+  T leftGravity(bool propval)
+  {
+    return setProperty("left-gravity", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the mark or null if the mark is anonymous.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.text_mark.TextMark]
+final class TextMarkGidBuilder : TextMarkGidBuilderImpl!TextMarkGidBuilder
+{
+  TextMark build()
+  {
+    return new TextMark(cast(void*)createGObject(TextMark._getGType), Yes.Take);
   }
 }

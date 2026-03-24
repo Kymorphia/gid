@@ -4,6 +4,7 @@ module gtk.recent_chooser_menu;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.activatable;
 import gtk.activatable_mixin;
@@ -66,6 +67,15 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   }
 
   /**
+  Get builder for [gtk.recent_chooser_menu.RecentChooserMenu]
+  Returns: New builder object
+  */
+  static RecentChooserMenuGidBuilder builder()
+  {
+    return new RecentChooserMenuGidBuilder;
+  }
+
+  /**
       Get `showNumbers` property.
       Returns: Whether the first ten items in the menu should be prepended by
         a number acting as a unique mnemonic.
@@ -83,7 +93,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   */
   @property void showNumbers(bool propval)
   {
-    return setShowNumbers(propval);
+    setShowNumbers(propval);
   }
 
   mixin ActivatableT!();
@@ -155,5 +165,33 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   void setShowNumbers(bool showNumbers)
   {
     gtk_recent_chooser_menu_set_show_numbers(cast(GtkRecentChooserMenu*)this._cPtr, showNumbers);
+  }
+}
+
+class RecentChooserMenuGidBuilderImpl(T) : gtk.menu.MenuGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
+{
+
+  mixin ActivatableGidBuilderT!();
+  mixin RecentChooserGidBuilderT!();
+
+  /**
+      Set `showNumbers` property.
+      Params:
+        propval = Whether the first ten items in the menu should be prepended by
+          a number acting as a unique mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T showNumbers(bool propval)
+  {
+    return setProperty("show-numbers", propval);
+  }
+}
+
+/// Fluent builder for [gtk.recent_chooser_menu.RecentChooserMenu]
+final class RecentChooserMenuGidBuilder : RecentChooserMenuGidBuilderImpl!RecentChooserMenuGidBuilder
+{
+  RecentChooserMenu build()
+  {
+    return new RecentChooserMenu(cast(void*)createGObject(RecentChooserMenu._getGType), No.Take);
   }
 }

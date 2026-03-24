@@ -9,6 +9,7 @@ public import gio.types;
 public import glib.variant;
 public import glib.variant_type;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 
 /**
     [gio.action_group.ActionGroup] represents a group of actions.
@@ -607,4 +608,8 @@ template ActionGroupT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("action-state-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
+}
+
+template ActionGroupGidBuilderT()
+{
 }

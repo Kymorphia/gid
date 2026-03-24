@@ -2,6 +2,7 @@
 module gtk.mnemonic_action;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,6 +41,15 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
+  Get builder for [gtk.mnemonic_action.MnemonicAction]
+  Returns: New builder object
+  */
+  static MnemonicActionGidBuilder builder()
+  {
+    return new MnemonicActionGidBuilder;
+  }
+
+  /**
       Gets the mnemonic action.
       
       This is an action that calls [gtk.widget.Widget.mnemonicActivate]
@@ -52,5 +62,18 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
     _cretval = gtk_mnemonic_action_get();
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.mnemonic_action.MnemonicAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class MnemonicActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.mnemonic_action.MnemonicAction]
+final class MnemonicActionGidBuilder : MnemonicActionGidBuilderImpl!MnemonicActionGidBuilder
+{
+  MnemonicAction build()
+  {
+    return new MnemonicAction(cast(void*)createGObject(MnemonicAction._getGType), No.Take);
   }
 }

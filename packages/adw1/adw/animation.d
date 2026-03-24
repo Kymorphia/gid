@@ -7,6 +7,7 @@ import adw.c.types;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.widget;
 
@@ -86,6 +87,15 @@ class Animation : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [adw.animation.Animation]
+  Returns: New builder object
+  */
+  static AnimationGidBuilder builder()
+  {
+    return new AnimationGidBuilder;
+  }
+
+  /**
       Get `followEnableAnimationsSetting` property.
       Returns: Whether to skip the animation when animations are globally disabled.
         
@@ -117,7 +127,7 @@ class Animation : gobject.object.ObjectWrap
   */
   @property void followEnableAnimationsSetting(bool propval)
   {
-    return setFollowEnableAnimationsSetting(propval);
+    setFollowEnableAnimationsSetting(propval);
   }
 
   /**
@@ -148,7 +158,7 @@ class Animation : gobject.object.ObjectWrap
   */
   @property void target(adw.animation_target.AnimationTarget propval)
   {
-    return setTarget(propval);
+    setTarget(propval);
   }
 
   /**
@@ -158,6 +168,22 @@ class Animation : gobject.object.ObjectWrap
   @property double value()
   {
     return getValue();
+  }
+
+  /**
+      Get `widget` property.
+      Returns: The animation widget.
+        
+        It provides the frame clock for the animation. It's not strictly necessary
+        for this widget to be same as the one being animated.
+        
+        The widget must be mapped in order for the animation to work. If it's not
+        mapped, or if it gets unmapped during an ongoing animation, the animation
+        will be automatically skipped.
+  */
+  @property gtk.widget.Widget widget()
+  {
+    return getWidget();
   }
 
   /**
@@ -365,5 +391,66 @@ class Animation : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("done", closure, after);
+  }
+}
+
+class AnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `followEnableAnimationsSetting` property.
+      Params:
+        propval = Whether to skip the animation when animations are globally disabled.
+          
+          The default behavior is to skip the animation. Set to `FALSE` to disable
+          this behavior.
+          
+          This can be useful for cases where animation is essential, like spinners,
+          or in demo applications. Most other animations should keep it enabled.
+          
+          See `property@Gtk.Settings:gtk-enable-animations`.
+      Returns: Builder instance for fluent chaining
+  */
+  T followEnableAnimationsSetting(bool propval)
+  {
+    return setProperty("follow-enable-animations-setting", propval);
+  }
+
+  /**
+      Set `target` property.
+      Params:
+        propval = The target to animate.
+      Returns: Builder instance for fluent chaining
+  */
+  T target(adw.animation_target.AnimationTarget propval)
+  {
+    return setProperty("target", propval);
+  }
+
+  /**
+      Set `widget` property.
+      Params:
+        propval = The animation widget.
+          
+          It provides the frame clock for the animation. It's not strictly necessary
+          for this widget to be same as the one being animated.
+          
+          The widget must be mapped in order for the animation to work. If it's not
+          mapped, or if it gets unmapped during an ongoing animation, the animation
+          will be automatically skipped.
+      Returns: Builder instance for fluent chaining
+  */
+  T widget(gtk.widget.Widget propval)
+  {
+    return setProperty("widget", propval);
+  }
+}
+
+/// Fluent builder for [adw.animation.Animation]
+final class AnimationGidBuilder : AnimationGidBuilderImpl!AnimationGidBuilder
+{
+  Animation build()
+  {
+    return new Animation(cast(void*)createGObject(Animation._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.socket_address_enumerator;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -107,4 +108,8 @@ interface SocketConnectable
       Returns: the formatted string
   */
   string toString_();
+}
+
+interface SocketConnectableGidBuilderImpl(T)
+{
 }

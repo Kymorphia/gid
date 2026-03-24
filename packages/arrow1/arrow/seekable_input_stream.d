@@ -13,6 +13,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -42,6 +43,15 @@ class SeekableInputStream : arrow.input_stream.InputStream
   override SeekableInputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.seekable_input_stream.SeekableInputStream]
+  Returns: New builder object
+  */
+  static SeekableInputStreamGidBuilder builder()
+  {
+    return new SeekableInputStreamGidBuilder;
   }
 
   /** */
@@ -97,5 +107,19 @@ class SeekableInputStream : arrow.input_stream.InputStream
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class SeekableInputStreamGidBuilderImpl(T) : arrow.input_stream.InputStreamGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [arrow.seekable_input_stream.SeekableInputStream]
+final class SeekableInputStreamGidBuilder : SeekableInputStreamGidBuilderImpl!SeekableInputStreamGidBuilder
+{
+  SeekableInputStream build()
+  {
+    return new SeekableInputStream(cast(void*)createGObject(SeekableInputStream._getGType), No.Take);
   }
 }

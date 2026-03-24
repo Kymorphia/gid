@@ -6,6 +6,7 @@ import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_animation_iter;
 import gdkpixbuf.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
@@ -34,5 +35,27 @@ class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
   override PixbufSimpleAnimIter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdkpixbuf.pixbuf_simple_anim_iter.PixbufSimpleAnimIter]
+  Returns: New builder object
+  */
+  static PixbufSimpleAnimIterGidBuilder builder()
+  {
+    return new PixbufSimpleAnimIterGidBuilder;
+  }
+}
+
+class PixbufSimpleAnimIterGidBuilderImpl(T) : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdkpixbuf.pixbuf_simple_anim_iter.PixbufSimpleAnimIter]
+final class PixbufSimpleAnimIterGidBuilder : PixbufSimpleAnimIterGidBuilderImpl!PixbufSimpleAnimIterGidBuilder
+{
+  PixbufSimpleAnimIter build()
+  {
+    return new PixbufSimpleAnimIter(cast(void*)createGObject(PixbufSimpleAnimIter._getGType), No.Take);
   }
 }

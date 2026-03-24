@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.integer_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class UInt16DataType : arrow.integer_data_type.IntegerDataType
@@ -36,11 +37,33 @@ class UInt16DataType : arrow.integer_data_type.IntegerDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.uint16_data_type.UInt16DataType]
+  Returns: New builder object
+  */
+  static UInt16DataTypeGidBuilder builder()
+  {
+    return new UInt16DataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowUInt16DataType* _cretval;
     _cretval = garrow_uint16_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class UInt16DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint16_data_type.UInt16DataType]
+final class UInt16DataTypeGidBuilder : UInt16DataTypeGidBuilderImpl!UInt16DataTypeGidBuilder
+{
+  UInt16DataType build()
+  {
+    return new UInt16DataType(cast(void*)createGObject(UInt16DataType._getGType), Yes.Take);
   }
 }

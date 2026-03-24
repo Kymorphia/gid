@@ -2,6 +2,7 @@
 module gst.buffer_pool;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.allocation_params;
 import gst.allocator;
 import gst.buffer;
@@ -74,6 +75,15 @@ class BufferPool : gst.object.ObjectWrap
   override BufferPool self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.buffer_pool.BufferPool]
+  Returns: New builder object
+  */
+  static BufferPoolGidBuilder builder()
+  {
+    return new BufferPoolGidBuilder;
   }
 
   /**
@@ -419,5 +429,18 @@ class BufferPool : gst.object.ObjectWrap
   void setFlushing(bool flushing)
   {
     gst_buffer_pool_set_flushing(cast(GstBufferPool*)this._cPtr, flushing);
+  }
+}
+
+class BufferPoolGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.buffer_pool.BufferPool]
+final class BufferPoolGidBuilder : BufferPoolGidBuilderImpl!BufferPoolGidBuilder
+{
+  BufferPool build()
+  {
+    return new BufferPool(cast(void*)createGObject(BufferPool._getGType), Yes.Take);
   }
 }

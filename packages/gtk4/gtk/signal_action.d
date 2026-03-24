@@ -2,6 +2,7 @@
 module gtk.signal_action;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_action;
@@ -42,6 +43,24 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
+  Get builder for [gtk.signal_action.SignalAction]
+  Returns: New builder object
+  */
+  static SignalActionGidBuilder builder()
+  {
+    return new SignalActionGidBuilder;
+  }
+
+  /**
+      Get `signalName` property.
+      Returns: The name of the signal to emit.
+  */
+  @property string signalName()
+  {
+    return getSignalName();
+  }
+
+  /**
       Creates an action that when activated, emits the given action signal
       on the provided widget.
       
@@ -69,5 +88,29 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
     _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class SignalActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
+{
+
+  /**
+      Set `signalName` property.
+      Params:
+        propval = The name of the signal to emit.
+      Returns: Builder instance for fluent chaining
+  */
+  T signalName(string propval)
+  {
+    return setProperty("signal-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.signal_action.SignalAction]
+final class SignalActionGidBuilder : SignalActionGidBuilderImpl!SignalActionGidBuilder
+{
+  SignalAction build()
+  {
+    return new SignalAction(cast(void*)createGObject(SignalAction._getGType), Yes.Take);
   }
 }

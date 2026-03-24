@@ -4,6 +4,7 @@ module gtksource.indenter_mixin;
 public import gtksource.indenter_iface_proxy;
 public import gdk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.text_iter;
 public import gtksource.c.functions;
 public import gtksource.c.types;
@@ -96,4 +97,8 @@ template IndenterT()
     _retval = cast(bool)gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null, location ? cast(const(GtkTextIter)*)location._cPtr(No.Dup) : null, state, keyval);
     return _retval;
   }
+}
+
+template IndenterGidBuilderT()
+{
 }

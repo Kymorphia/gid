@@ -2,6 +2,7 @@
 module panel.frame_tab_bar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -48,6 +49,15 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 
   /**
+  Get builder for [panel.frame_tab_bar.FrameTabBar]
+  Returns: New builder object
+  */
+  static FrameTabBarGidBuilder builder()
+  {
+    return new FrameTabBarGidBuilder;
+  }
+
+  /**
       Get `autohide` property.
       Returns: Whether the tabs automatically hide.
   */
@@ -63,7 +73,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   @property void autohide(bool propval)
   {
-    return setAutohide(propval);
+    setAutohide(propval);
   }
 
   /**
@@ -82,7 +92,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   @property void expandTabs(bool propval)
   {
-    return setExpandTabs(propval);
+    setExpandTabs(propval);
   }
 
   /**
@@ -101,7 +111,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   @property void inverted(bool propval)
   {
-    return setInverted(propval);
+    setInverted(propval);
   }
 
   mixin FrameHeaderT!();
@@ -181,5 +191,53 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   void setInverted(bool inverted)
   {
     panel_frame_tab_bar_set_inverted(cast(PanelFrameTabBar*)this._cPtr, inverted);
+  }
+}
+
+class FrameTabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.frame_header.FrameHeaderGidBuilderImpl!T
+{
+
+  mixin FrameHeaderGidBuilderT!();
+
+  /**
+      Set `autohide` property.
+      Params:
+        propval = Whether the tabs automatically hide.
+      Returns: Builder instance for fluent chaining
+  */
+  T autohide(bool propval)
+  {
+    return setProperty("autohide", propval);
+  }
+
+  /**
+      Set `expandTabs` property.
+      Params:
+        propval = Whether tabs expand to full width.
+      Returns: Builder instance for fluent chaining
+  */
+  T expandTabs(bool propval)
+  {
+    return setProperty("expand-tabs", propval);
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether tabs use inverted layout.
+      Returns: Builder instance for fluent chaining
+  */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+}
+
+/// Fluent builder for [panel.frame_tab_bar.FrameTabBar]
+final class FrameTabBarGidBuilder : FrameTabBarGidBuilderImpl!FrameTabBarGidBuilder
+{
+  FrameTabBar build()
+  {
+    return new FrameTabBar(cast(void*)createGObject(FrameTabBar._getGType), No.Take);
   }
 }

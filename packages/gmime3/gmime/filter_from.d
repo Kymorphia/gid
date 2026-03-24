@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for armoring or escaping lines beginning with "From ".
@@ -39,6 +40,15 @@ class FilterFrom : gmime.filter.Filter
   }
 
   /**
+  Get builder for [gmime.filter_from.FilterFrom]
+  Returns: New builder object
+  */
+  static FilterFromGidBuilder builder()
+  {
+    return new FilterFromGidBuilder;
+  }
+
+  /**
       Creates a new GMimeFilterFrom filter. If mode is
       #GMIME_FILTER_FROM_MODE_ARMOR, the from-filter will encode from
       lines using the quoted-printable encoding resulting in "=46rom ".
@@ -59,5 +69,18 @@ class FilterFrom : gmime.filter.Filter
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_from_new(mode);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FilterFromGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_from.FilterFrom]
+final class FilterFromGidBuilder : FilterFromGidBuilderImpl!FilterFromGidBuilder
+{
+  FilterFrom build()
+  {
+    return new FilterFrom(cast(void*)createGObject(FilterFrom._getGType), Yes.Take);
   }
 }

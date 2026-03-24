@@ -8,6 +8,7 @@ public import atk.object;
 public import atk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -327,4 +328,8 @@ template ComponentT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("bounds-changed", closure, after);
   }
+}
+
+template ComponentGidBuilderT()
+{
 }

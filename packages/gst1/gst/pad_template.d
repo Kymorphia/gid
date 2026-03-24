@@ -3,6 +3,7 @@ module gst.pad_template;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.c.functions;
@@ -101,6 +102,60 @@ class PadTemplate : gst.object.ObjectWrap
   override PadTemplate self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.pad_template.PadTemplate]
+  Returns: New builder object
+  */
+  static PadTemplateGidBuilder builder()
+  {
+    return new PadTemplateGidBuilder;
+  }
+
+  /**
+      Get `caps` property.
+      Returns: The capabilities of the pad described by the pad template.
+  */
+  @property gst.caps.Caps caps()
+  {
+    return getCaps();
+  }
+
+  /**
+      Get `direction` property.
+      Returns: The direction of the pad described by the pad template.
+  */
+  @property gst.types.PadDirection direction()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.PadDirection)("direction");
+  }
+
+  /**
+      Get `gtype` property.
+      Returns: The type of the pad described by the pad template.
+  */
+  @property gobject.types.GType gtype()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("gtype");
+  }
+
+  /**
+      Get `nameTemplate` property.
+      Returns: The name template of the pad template.
+  */
+  @property string nameTemplate()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("name-template");
+  }
+
+  /**
+      Get `presence` property.
+      Returns: When the pad described by the pad template will become available.
+  */
+  @property gst.types.PadPresence presence()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.PadPresence)("presence");
   }
 
   /**
@@ -251,5 +306,73 @@ class PadTemplate : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pad-created", closure, after);
+  }
+}
+
+class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `caps` property.
+      Params:
+        propval = The capabilities of the pad described by the pad template.
+      Returns: Builder instance for fluent chaining
+  */
+  T caps(gst.caps.Caps propval)
+  {
+    return setProperty("caps", propval);
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The direction of the pad described by the pad template.
+      Returns: Builder instance for fluent chaining
+  */
+  T direction(gst.types.PadDirection propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `gtype` property.
+      Params:
+        propval = The type of the pad described by the pad template.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtype(gobject.types.GType propval)
+  {
+    return setProperty("gtype", propval);
+  }
+
+  /**
+      Set `nameTemplate` property.
+      Params:
+        propval = The name template of the pad template.
+      Returns: Builder instance for fluent chaining
+  */
+  T nameTemplate(string propval)
+  {
+    return setProperty("name-template", propval);
+  }
+
+  /**
+      Set `presence` property.
+      Params:
+        propval = When the pad described by the pad template will become available.
+      Returns: Builder instance for fluent chaining
+  */
+  T presence(gst.types.PadPresence propval)
+  {
+    return setProperty("presence", propval);
+  }
+}
+
+/// Fluent builder for [gst.pad_template.PadTemplate]
+final class PadTemplateGidBuilder : PadTemplateGidBuilderImpl!PadTemplateGidBuilder
+{
+  PadTemplate build()
+  {
+    return new PadTemplate(cast(void*)createGObject(PadTemplate._getGType), No.Take);
   }
 }

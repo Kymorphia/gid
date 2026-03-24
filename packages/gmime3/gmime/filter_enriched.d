@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for converting text/enriched or text/richtext textual
@@ -40,6 +41,15 @@ class FilterEnriched : gmime.filter.Filter
   }
 
   /**
+  Get builder for [gmime.filter_enriched.FilterEnriched]
+  Returns: New builder object
+  */
+  static FilterEnrichedGidBuilder builder()
+  {
+    return new FilterEnrichedGidBuilder;
+  }
+
+  /**
       Creates a new GMimeFilterEnriched object.
   
       Params:
@@ -51,5 +61,18 @@ class FilterEnriched : gmime.filter.Filter
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_enriched_new(flags);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FilterEnrichedGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_enriched.FilterEnriched]
+final class FilterEnrichedGidBuilder : FilterEnrichedGidBuilderImpl!FilterEnrichedGidBuilder
+{
+  FilterEnriched build()
+  {
+    return new FilterEnriched(cast(void*)createGObject(FilterEnriched._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class Date32Scalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class Date32Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.date32_scalar.Date32Scalar]
+  Returns: New builder object
+  */
+  static Date32ScalarGidBuilder builder()
+  {
+    return new Date32ScalarGidBuilder;
+  }
+
   /** */
   this(int value)
   {
@@ -50,5 +60,18 @@ class Date32Scalar : arrow.scalar.Scalar
     int _retval;
     _retval = garrow_date32_scalar_get_value(cast(GArrowDate32Scalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class Date32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.date32_scalar.Date32Scalar]
+final class Date32ScalarGidBuilder : Date32ScalarGidBuilderImpl!Date32ScalarGidBuilder
+{
+  Date32Scalar build()
+  {
+    return new Date32Scalar(cast(void*)createGObject(Date32Scalar._getGType), Yes.Take);
   }
 }

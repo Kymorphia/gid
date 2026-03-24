@@ -8,6 +8,7 @@ import gda.statement;
 import gda.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,21 @@ class RepetitiveStatement : gobject.object.ObjectWrap
   override RepetitiveStatement self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.repetitive_statement.RepetitiveStatement]
+  Returns: New builder object
+  */
+  static RepetitiveStatementGidBuilder builder()
+  {
+    return new RepetitiveStatementGidBuilder;
+  }
+
+  /** */
+  @property gda.statement.Statement statement()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("statement");
   }
 
   /**
@@ -104,5 +120,24 @@ class RepetitiveStatement : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class RepetitiveStatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T statement(gda.statement.Statement propval)
+  {
+    return setProperty("statement", propval);
+  }
+}
+
+/// Fluent builder for [gda.repetitive_statement.RepetitiveStatement]
+final class RepetitiveStatementGidBuilder : RepetitiveStatementGidBuilderImpl!RepetitiveStatementGidBuilder
+{
+  RepetitiveStatement build()
+  {
+    return new RepetitiveStatement(cast(void*)createGObject(RepetitiveStatement._getGType), Yes.Take);
   }
 }

@@ -10,6 +10,7 @@ import gio.dbus_object;
 import gio.dbus_object_mixin;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -45,6 +46,15 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   override DBusObjectSkeleton self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.dbus_object_skeleton.DBusObjectSkeleton]
+  Returns: New builder object
+  */
+  static DBusObjectSkeletonGidBuilder builder()
+  {
+    return new DBusObjectSkeletonGidBuilder;
   }
 
   /**
@@ -205,5 +215,31 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize-method", closure, after);
+  }
+}
+
+class DBusObjectSkeletonGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.dbus_object.DBusObjectGidBuilderImpl!T
+{
+
+  mixin DBusObjectGidBuilderT!();
+
+  /**
+      Set `gObjectPath` property.
+      Params:
+        propval = The object path where the object is exported.
+      Returns: Builder instance for fluent chaining
+  */
+  T gObjectPath(string propval)
+  {
+    return setProperty("g-object-path", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_object_skeleton.DBusObjectSkeleton]
+final class DBusObjectSkeletonGidBuilder : DBusObjectSkeletonGidBuilderImpl!DBusObjectSkeletonGidBuilder
+{
+  DBusObjectSkeleton build()
+  {
+    return new DBusObjectSkeleton(cast(void*)createGObject(DBusObjectSkeleton._getGType), Yes.Take);
   }
 }

@@ -9,6 +9,7 @@ import gio.file;
 import gio.types;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -42,6 +43,15 @@ class AppLaunchContext : gobject.object.ObjectWrap
   override AppLaunchContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.app_launch_context.AppLaunchContext]
+  Returns: New builder object
+  */
+  static AppLaunchContextGidBuilder builder()
+  {
+    return new AppLaunchContextGidBuilder;
   }
 
   /**
@@ -355,5 +365,18 @@ class AppLaunchContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("launched", closure, after);
+  }
+}
+
+class AppLaunchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.app_launch_context.AppLaunchContext]
+final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunchContextGidBuilder
+{
+  AppLaunchContext build()
+  {
+    return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.lock_button;
 
 import gid.gid;
 import gio.permission;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -87,6 +88,15 @@ class LockButton : gtk.button.Button
   }
 
   /**
+  Get builder for [gtk.lock_button.LockButton]
+  Returns: New builder object
+  */
+  static LockButtonGidBuilder builder()
+  {
+    return new LockButtonGidBuilder;
+  }
+
+  /**
       Get `permission` property.
       Returns: The `GPermission object controlling this button.
   
@@ -106,7 +116,7 @@ class LockButton : gtk.button.Button
   */
   @property void permission(gio.permission.Permission propval)
   {
-    return setPermission(propval);
+    setPermission(propval);
   }
 
   /**
@@ -265,5 +275,97 @@ class LockButton : gtk.button.Button
   void setPermission(gio.permission.Permission permission = null)
   {
     gtk_lock_button_set_permission(cast(GtkLockButton*)this._cPtr, permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
+  }
+}
+
+class LockButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `permission` property.
+      Params:
+        propval = The `GPermission object controlling this button.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  T permission(gio.permission.Permission propval)
+  {
+    return setProperty("permission", propval);
+  }
+
+  /**
+      Set `textLock` property.
+      Params:
+        propval = The text to display when prompting the user to lock.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  T textLock(string propval)
+  {
+    return setProperty("text-lock", propval);
+  }
+
+  /**
+      Set `textUnlock` property.
+      Params:
+        propval = The text to display when prompting the user to unlock.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  T textUnlock(string propval)
+  {
+    return setProperty("text-unlock", propval);
+  }
+
+  /**
+      Set `tooltipLock` property.
+      Params:
+        propval = The tooltip to display when prompting the user to lock.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  T tooltipLock(string propval)
+  {
+    return setProperty("tooltip-lock", propval);
+  }
+
+  /**
+      Set `tooltipNotAuthorized` property.
+      Params:
+        propval = The tooltip to display when the user cannot obtain authorization.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  T tooltipNotAuthorized(string propval)
+  {
+    return setProperty("tooltip-not-authorized", propval);
+  }
+
+  /**
+      Set `tooltipUnlock` property.
+      Params:
+        propval = The tooltip to display when prompting the user to unlock.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  T tooltipUnlock(string propval)
+  {
+    return setProperty("tooltip-unlock", propval);
+  }
+}
+
+/// Fluent builder for [gtk.lock_button.LockButton]
+final class LockButtonGidBuilder : LockButtonGidBuilderImpl!LockButtonGidBuilder
+{
+  LockButton build()
+  {
+    return new LockButton(cast(void*)createGObject(LockButton._getGType), No.Take);
   }
 }

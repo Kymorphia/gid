@@ -7,6 +7,7 @@ public import gio.action;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -72,4 +73,8 @@ template ActionMapT()
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_map_remove_action(cast(GActionMap*)this._cPtr, _actionName);
   }
+}
+
+template ActionMapGidBuilderT()
+{
 }

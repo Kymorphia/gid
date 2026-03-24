@@ -6,6 +6,7 @@ import gdk.event;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -58,6 +59,15 @@ class TextTag : gobject.object.ObjectWrap
   override TextTag self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.text_tag.TextTag]
+  Returns: New builder object
+  */
+  static TextTagGidBuilder builder()
+  {
+    return new TextTagGidBuilder;
   }
 
   /**
@@ -577,6 +587,12 @@ class TextTag : gobject.object.ObjectWrap
   @property void letterSpacingSet(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("letter-spacing-set", propval);
+  }
+
+  /** */
+  @property string name()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /**
@@ -1240,5 +1256,583 @@ class TextTag : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
+  }
+}
+
+class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `accumulativeMargin` property.
+      Params:
+        propval = Whether the margins accumulate or override each other.
+          
+          When set to true the margins of this tag are added to the margins
+          of any other non-accumulative margins present. When set to false
+          the margins override one another (the default).
+      Returns: Builder instance for fluent chaining
+  */
+  T accumulativeMargin(bool propval)
+  {
+    return setProperty("accumulative-margin", propval);
+  }
+
+  /** */
+  T background(string propval)
+  {
+    return setProperty("background", propval);
+  }
+
+  /** */
+  T backgroundFullHeight(bool propval)
+  {
+    return setProperty("background-full-height", propval);
+  }
+
+  /** */
+  T backgroundFullHeightSet(bool propval)
+  {
+    return setProperty("background-full-height-set", propval);
+  }
+
+  /**
+      Set `backgroundGdk` property.
+      Params:
+        propval = Background color as a #GdkColor.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkTextTag:background-rgba instead.
+  */
+  T backgroundGdk(gdk.color.Color propval)
+  {
+    return setProperty("background-gdk", propval);
+  }
+
+  /**
+      Set `backgroundRgba` property.
+      Params:
+        propval = Background color as a #GdkRGBA.
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("background-rgba", propval);
+  }
+
+  /** */
+  T backgroundSet(bool propval)
+  {
+    return setProperty("background-set", propval);
+  }
+
+  /** */
+  T direction(gtk.types.TextDirection propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /** */
+  T editable(bool propval)
+  {
+    return setProperty("editable", propval);
+  }
+
+  /** */
+  T editableSet(bool propval)
+  {
+    return setProperty("editable-set", propval);
+  }
+
+  /**
+      Set `fallback` property.
+      Params:
+        propval = Whether font fallback is enabled.
+          
+          When set to true, other fonts will be substituted
+          where the current font is missing glyphs.
+      Returns: Builder instance for fluent chaining
+  */
+  T fallback(bool propval)
+  {
+    return setProperty("fallback", propval);
+  }
+
+  /** */
+  T fallbackSet(bool propval)
+  {
+    return setProperty("fallback-set", propval);
+  }
+
+  /** */
+  T family(string propval)
+  {
+    return setProperty("family", propval);
+  }
+
+  /** */
+  T familySet(bool propval)
+  {
+    return setProperty("family-set", propval);
+  }
+
+  /**
+      Set `font` property.
+      Params:
+        propval = Font description as string, e.g. \"Sans Italic 12\".
+          
+          Note that the initial value of this property depends on
+          the internals of #PangoFontDescription.
+      Returns: Builder instance for fluent chaining
+  */
+  T font(string propval)
+  {
+    return setProperty("font", propval);
+  }
+
+  /** */
+  T fontDesc(pango.font_description.FontDescription propval)
+  {
+    return setProperty("font-desc", propval);
+  }
+
+  /**
+      Set `fontFeatures` property.
+      Params:
+        propval = OpenType font features, as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontFeatures(string propval)
+  {
+    return setProperty("font-features", propval);
+  }
+
+  /** */
+  T fontFeaturesSet(bool propval)
+  {
+    return setProperty("font-features-set", propval);
+  }
+
+  /** */
+  T foreground(string propval)
+  {
+    return setProperty("foreground", propval);
+  }
+
+  /**
+      Set `foregroundGdk` property.
+      Params:
+        propval = Foreground color as a #GdkColor.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkTextTag:foreground-rgba instead.
+  */
+  T foregroundGdk(gdk.color.Color propval)
+  {
+    return setProperty("foreground-gdk", propval);
+  }
+
+  /**
+      Set `foregroundRgba` property.
+      Params:
+        propval = Foreground color as a #GdkRGBA.
+      Returns: Builder instance for fluent chaining
+  */
+  T foregroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("foreground-rgba", propval);
+  }
+
+  /** */
+  T foregroundSet(bool propval)
+  {
+    return setProperty("foreground-set", propval);
+  }
+
+  /** */
+  T indent(int propval)
+  {
+    return setProperty("indent", propval);
+  }
+
+  /** */
+  T indentSet(bool propval)
+  {
+    return setProperty("indent-set", propval);
+  }
+
+  /**
+      Set `invisible` property.
+      Params:
+        propval = Whether this text is hidden.
+          
+          Note that there may still be problems with the support for invisible
+          text, in particular when navigating programmatically inside a buffer
+          containing invisible segments.
+      Returns: Builder instance for fluent chaining
+  */
+  T invisible(bool propval)
+  {
+    return setProperty("invisible", propval);
+  }
+
+  /** */
+  T invisibleSet(bool propval)
+  {
+    return setProperty("invisible-set", propval);
+  }
+
+  /** */
+  T justification(gtk.types.Justification propval)
+  {
+    return setProperty("justification", propval);
+  }
+
+  /** */
+  T justificationSet(bool propval)
+  {
+    return setProperty("justification-set", propval);
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language this text is in, as an ISO code. Pango can use this as a
+          hint when rendering the text. If not set, an appropriate default will be
+          used.
+          
+          Note that the initial value of this property depends on the current
+          locale, see also [gtk.global.getDefaultLanguage].
+      Returns: Builder instance for fluent chaining
+  */
+  T language(string propval)
+  {
+    return setProperty("language", propval);
+  }
+
+  /** */
+  T languageSet(bool propval)
+  {
+    return setProperty("language-set", propval);
+  }
+
+  /** */
+  T leftMargin(int propval)
+  {
+    return setProperty("left-margin", propval);
+  }
+
+  /** */
+  T leftMarginSet(bool propval)
+  {
+    return setProperty("left-margin-set", propval);
+  }
+
+  /**
+      Set `letterSpacing` property.
+      Params:
+        propval = Extra spacing between graphemes, in Pango units.
+      Returns: Builder instance for fluent chaining
+  */
+  T letterSpacing(int propval)
+  {
+    return setProperty("letter-spacing", propval);
+  }
+
+  /** */
+  T letterSpacingSet(bool propval)
+  {
+    return setProperty("letter-spacing-set", propval);
+  }
+
+  /** */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `paragraphBackground` property.
+      Params:
+        propval = The paragraph background color as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T paragraphBackground(string propval)
+  {
+    return setProperty("paragraph-background", propval);
+  }
+
+  /**
+      Set `paragraphBackgroundGdk` property.
+      Params:
+        propval = The paragraph background color as a #GdkColor.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkTextTag:paragraph-background-rgba instead.
+  */
+  T paragraphBackgroundGdk(gdk.color.Color propval)
+  {
+    return setProperty("paragraph-background-gdk", propval);
+  }
+
+  /**
+      Set `paragraphBackgroundRgba` property.
+      Params:
+        propval = The paragraph background color as a #GdkRGBA.
+      Returns: Builder instance for fluent chaining
+  */
+  T paragraphBackgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("paragraph-background-rgba", propval);
+  }
+
+  /** */
+  T paragraphBackgroundSet(bool propval)
+  {
+    return setProperty("paragraph-background-set", propval);
+  }
+
+  /** */
+  T pixelsAboveLines(int propval)
+  {
+    return setProperty("pixels-above-lines", propval);
+  }
+
+  /** */
+  T pixelsAboveLinesSet(bool propval)
+  {
+    return setProperty("pixels-above-lines-set", propval);
+  }
+
+  /** */
+  T pixelsBelowLines(int propval)
+  {
+    return setProperty("pixels-below-lines", propval);
+  }
+
+  /** */
+  T pixelsBelowLinesSet(bool propval)
+  {
+    return setProperty("pixels-below-lines-set", propval);
+  }
+
+  /** */
+  T pixelsInsideWrap(int propval)
+  {
+    return setProperty("pixels-inside-wrap", propval);
+  }
+
+  /** */
+  T pixelsInsideWrapSet(bool propval)
+  {
+    return setProperty("pixels-inside-wrap-set", propval);
+  }
+
+  /** */
+  T rightMargin(int propval)
+  {
+    return setProperty("right-margin", propval);
+  }
+
+  /** */
+  T rightMarginSet(bool propval)
+  {
+    return setProperty("right-margin-set", propval);
+  }
+
+  /** */
+  T rise(int propval)
+  {
+    return setProperty("rise", propval);
+  }
+
+  /** */
+  T riseSet(bool propval)
+  {
+    return setProperty("rise-set", propval);
+  }
+
+  /** */
+  T scale(double propval)
+  {
+    return setProperty("scale", propval);
+  }
+
+  /** */
+  T scaleSet(bool propval)
+  {
+    return setProperty("scale-set", propval);
+  }
+
+  /** */
+  T size(int propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /** */
+  T sizePoints(double propval)
+  {
+    return setProperty("size-points", propval);
+  }
+
+  /** */
+  T sizeSet(bool propval)
+  {
+    return setProperty("size-set", propval);
+  }
+
+  /** */
+  T stretch(pango.types.Stretch propval)
+  {
+    return setProperty("stretch", propval);
+  }
+
+  /** */
+  T stretchSet(bool propval)
+  {
+    return setProperty("stretch-set", propval);
+  }
+
+  /** */
+  T strikethrough(bool propval)
+  {
+    return setProperty("strikethrough", propval);
+  }
+
+  /**
+      Set `strikethroughRgba` property.
+      Params:
+        propval = This property modifies the color of strikeouts. If not set, strikeouts
+          will use the forground color.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethroughRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("strikethrough-rgba", propval);
+  }
+
+  /**
+      Set `strikethroughRgbaSet` property.
+      Params:
+        propval = If the #GtkTextTag:strikethrough-rgba property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethroughRgbaSet(bool propval)
+  {
+    return setProperty("strikethrough-rgba-set", propval);
+  }
+
+  /** */
+  T strikethroughSet(bool propval)
+  {
+    return setProperty("strikethrough-set", propval);
+  }
+
+  /** */
+  T style(pango.types.Style propval)
+  {
+    return setProperty("style", propval);
+  }
+
+  /** */
+  T styleSet(bool propval)
+  {
+    return setProperty("style-set", propval);
+  }
+
+  /** */
+  T tabs(pango.tab_array.TabArray propval)
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /** */
+  T tabsSet(bool propval)
+  {
+    return setProperty("tabs-set", propval);
+  }
+
+  /** */
+  T underline(pango.types.Underline propval)
+  {
+    return setProperty("underline", propval);
+  }
+
+  /**
+      Set `underlineRgba` property.
+      Params:
+        propval = This property modifies the color of underlines. If not set, underlines
+          will use the forground color.
+          
+          If #GtkTextTag:underline is set to [pango.types.Underline.Error], an alternate
+          color may be applied instead of the foreground. Setting this property
+          will always override those defaults.
+      Returns: Builder instance for fluent chaining
+  */
+  T underlineRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("underline-rgba", propval);
+  }
+
+  /**
+      Set `underlineRgbaSet` property.
+      Params:
+        propval = If the #GtkTextTag:underline-rgba property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T underlineRgbaSet(bool propval)
+  {
+    return setProperty("underline-rgba-set", propval);
+  }
+
+  /** */
+  T underlineSet(bool propval)
+  {
+    return setProperty("underline-set", propval);
+  }
+
+  /** */
+  T variant(pango.types.Variant propval)
+  {
+    return setProperty("variant", propval);
+  }
+
+  /** */
+  T variantSet(bool propval)
+  {
+    return setProperty("variant-set", propval);
+  }
+
+  /** */
+  T weight(int propval)
+  {
+    return setProperty("weight", propval);
+  }
+
+  /** */
+  T weightSet(bool propval)
+  {
+    return setProperty("weight-set", propval);
+  }
+
+  /** */
+  T wrapMode(gtk.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+
+  /** */
+  T wrapModeSet(bool propval)
+  {
+    return setProperty("wrap-mode-set", propval);
+  }
+}
+
+/// Fluent builder for [gtk.text_tag.TextTag]
+final class TextTagGidBuilder : TextTagGidBuilderImpl!TextTagGidBuilder
+{
+  TextTag build()
+  {
+    return new TextTag(cast(void*)createGObject(TextTag._getGType), Yes.Take);
   }
 }

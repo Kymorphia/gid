@@ -6,6 +6,7 @@ import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class Location : gobject.object.ObjectWrap
   override Location self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.location.Location]
+  Returns: New builder object
+  */
+  static LocationGidBuilder builder()
+  {
+    return new LocationGidBuilder;
   }
 
   /** */
@@ -73,5 +83,18 @@ class Location : gobject.object.ObjectWrap
     _cretval = gaflight_location_to_string(cast(GAFlightLocation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class LocationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.location.Location]
+final class LocationGidBuilder : LocationGidBuilderImpl!LocationGidBuilder
+{
+  Location build()
+  {
+    return new Location(cast(void*)createGObject(Location._getGType), Yes.Take);
   }
 }

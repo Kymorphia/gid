@@ -3,6 +3,7 @@ module soup.hstsenforcer;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -61,6 +62,15 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   override HSTSEnforcer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.hstsenforcer.HSTSEnforcer]
+  Returns: New builder object
+  */
+  static HSTSEnforcerGidBuilder builder()
+  {
+    return new HSTSEnforcerGidBuilder;
   }
 
   mixin SessionFeatureT!();
@@ -232,5 +242,20 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class HSTSEnforcerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+}
+
+/// Fluent builder for [soup.hstsenforcer.HSTSEnforcer]
+final class HSTSEnforcerGidBuilder : HSTSEnforcerGidBuilderImpl!HSTSEnforcerGidBuilder
+{
+  HSTSEnforcer build()
+  {
+    return new HSTSEnforcer(cast(void*)createGObject(HSTSEnforcer._getGType), Yes.Take);
   }
 }

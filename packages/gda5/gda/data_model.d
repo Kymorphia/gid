@@ -13,6 +13,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -637,6 +638,10 @@ interface DataModel
       Returns: Signal ID
   */
   ulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface DataModelGidBuilderImpl(T)
+{
 }
 
 class DataModelException : ErrorWrap

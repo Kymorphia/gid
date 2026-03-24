@@ -4,6 +4,7 @@ module gtk.widget_accessible;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.c.functions;
 import gtk.c.types;
@@ -38,5 +39,29 @@ class WidgetAccessible : gtk.accessible.Accessible, atk.component.Component
     return this;
   }
 
+  /**
+  Get builder for [gtk.widget_accessible.WidgetAccessible]
+  Returns: New builder object
+  */
+  static WidgetAccessibleGidBuilder builder()
+  {
+    return new WidgetAccessibleGidBuilder;
+  }
+
   mixin ComponentT!();
+}
+
+class WidgetAccessibleGidBuilderImpl(T) : gtk.accessible.AccessibleGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T
+{
+
+  mixin ComponentGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.widget_accessible.WidgetAccessible]
+final class WidgetAccessibleGidBuilder : WidgetAccessibleGidBuilderImpl!WidgetAccessibleGidBuilder
+{
+  WidgetAccessible build()
+  {
+    return new WidgetAccessible(cast(void*)createGObject(WidgetAccessible._getGType), No.Take);
+  }
 }

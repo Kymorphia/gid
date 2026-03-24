@@ -2,6 +2,7 @@
 module gtk.box_layout;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -55,6 +56,15 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.box_layout.BoxLayout]
+  Returns: New builder object
+  */
+  static BoxLayoutGidBuilder builder()
+  {
+    return new BoxLayoutGidBuilder;
+  }
+
+  /**
       Get `baselineChild` property.
       Returns: The child that determines the baseline of the box
         in vertical layout.
@@ -80,7 +90,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   @property void baselineChild(int propval)
   {
-    return setBaselineChild(propval);
+    setBaselineChild(propval);
   }
 
   /**
@@ -107,7 +117,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   @property void baselinePosition(gtk.types.BaselinePosition propval)
   {
-    return setBaselinePosition(propval);
+    setBaselinePosition(propval);
   }
 
   /**
@@ -128,7 +138,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /**
@@ -262,5 +272,74 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   void setSpacing(uint spacing)
   {
     gtk_box_layout_set_spacing(cast(GtkBoxLayout*)this._cPtr, spacing);
+  }
+}
+
+class BoxLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `baselineChild` property.
+      Params:
+        propval = The child that determines the baseline of the box
+          in vertical layout.
+          
+          If the child does baseline positioning, then its baseline
+          is lined up with the baseline of the box. If it doesn't, then
+          the bottom edge of the child is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T baselineChild(int propval)
+  {
+    return setProperty("baseline-child", propval);
+  }
+
+  /**
+      Set `baselinePosition` property.
+      Params:
+        propval = The position of the allocated baseline within the extra space
+          allocated to each child.
+          
+          This property is only relevant for horizontal layouts containing
+          at least one child with a baseline alignment.
+      Returns: Builder instance for fluent chaining
+  */
+  T baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setProperty("baseline-position", propval);
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Whether the box layout should distribute the available space
+          equally among the children.
+      Returns: Builder instance for fluent chaining
+  */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The space to put between the children.
+      Returns: Builder instance for fluent chaining
+  */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.box_layout.BoxLayout]
+final class BoxLayoutGidBuilder : BoxLayoutGidBuilderImpl!BoxLayoutGidBuilder
+{
+  BoxLayout build()
+  {
+    return new BoxLayout(cast(void*)createGObject(BoxLayout._getGType), Yes.Take);
   }
 }

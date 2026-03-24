@@ -7,6 +7,7 @@ public import atk.c.types;
 public import atk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 
 /**
     The ATK interface which represents the toplevel
@@ -362,4 +363,8 @@ template DocumentT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("reload", closure, after);
   }
+}
+
+template DocumentGidBuilderT()
+{
 }

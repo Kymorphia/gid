@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.event;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -67,6 +68,15 @@ class SearchBar : gtk.bin.Bin
     return this;
   }
 
+  /**
+  Get builder for [gtk.search_bar.SearchBar]
+  Returns: New builder object
+  */
+  static SearchBarGidBuilder builder()
+  {
+    return new SearchBarGidBuilder;
+  }
+
   /** */
   @property bool searchModeEnabled()
   {
@@ -88,7 +98,7 @@ class SearchBar : gtk.bin.Bin
   /** */
   @property void showCloseButton(bool propval)
   {
-    return setShowCloseButton(propval);
+    setShowCloseButton(propval);
   }
 
   /**
@@ -216,5 +226,31 @@ class SearchBar : gtk.bin.Bin
   void setShowCloseButton(bool visible)
   {
     gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)this._cPtr, visible);
+  }
+}
+
+class SearchBarGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /** */
+  T searchModeEnabled(bool propval)
+  {
+    return setProperty("search-mode-enabled", propval);
+  }
+
+  /** */
+  T showCloseButton(bool propval)
+  {
+    return setProperty("show-close-button", propval);
+  }
+}
+
+/// Fluent builder for [gtk.search_bar.SearchBar]
+final class SearchBarGidBuilder : SearchBarGidBuilderImpl!SearchBarGidBuilder
+{
+  SearchBar build()
+  {
+    return new SearchBar(cast(void*)createGObject(SearchBar._getGType), No.Take);
   }
 }

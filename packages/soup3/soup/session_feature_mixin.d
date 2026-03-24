@@ -3,6 +3,7 @@ module soup.session_feature_mixin;
 
 public import soup.session_feature_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import soup.c.functions;
 public import soup.c.types;
 public import soup.types;
@@ -19,5 +20,9 @@ public import soup.types;
     See [soup.session.Session.addFeature], etc, to add a feature to a session.
 */
 template SessionFeatureT()
+{
+}
+
+template SessionFeatureGidBuilderT()
 {
 }

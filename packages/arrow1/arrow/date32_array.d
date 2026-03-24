@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.numeric_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class Date32Array : arrow.numeric_array.NumericArray
@@ -35,6 +36,15 @@ class Date32Array : arrow.numeric_array.NumericArray
   override Date32Array self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.date32_array.Date32Array]
+  Returns: New builder object
+  */
+  static Date32ArrayGidBuilder builder()
+  {
+    return new Date32ArrayGidBuilder;
   }
 
   /** */
@@ -66,5 +76,18 @@ class Date32Array : arrow.numeric_array.NumericArray
       _retval = cast(int[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
+  }
+}
+
+class Date32ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.date32_array.Date32Array]
+final class Date32ArrayGidBuilder : Date32ArrayGidBuilderImpl!Date32ArrayGidBuilder
+{
+  Date32Array build()
+  {
+    return new Date32Array(cast(void*)createGObject(Date32Array._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.window_controls;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -94,6 +95,15 @@ class WindowControls : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.window_controls.WindowControls]
+  Returns: New builder object
+  */
+  static WindowControlsGidBuilder builder()
+  {
+    return new WindowControlsGidBuilder;
+  }
+
+  /**
       Get `decorationLayout` property.
       Returns: The decoration layout for window buttons.
         
@@ -115,7 +125,7 @@ class WindowControls : gtk.widget.Widget
   */
   @property void decorationLayout(string propval)
   {
-    return setDecorationLayout(propval);
+    setDecorationLayout(propval);
   }
 
   /**
@@ -147,7 +157,7 @@ class WindowControls : gtk.widget.Widget
   */
   @property void side(gtk.types.PackType propval)
   {
-    return setSide(propval);
+    setSide(propval);
   }
 
   /**
@@ -236,5 +246,46 @@ class WindowControls : gtk.widget.Widget
   void setSide(gtk.types.PackType side)
   {
     gtk_window_controls_set_side(cast(GtkWindowControls*)this._cPtr, side);
+  }
+}
+
+class WindowControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for window buttons.
+          
+          If this property is not set, the
+          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorationLayout(string propval)
+  {
+    return setProperty("decoration-layout", propval);
+  }
+
+  /**
+      Set `side` property.
+      Params:
+        propval = Whether the widget shows start or end side of the decoration layout.
+          
+          See `property@Gtk.WindowControls:decoration_layout`.
+      Returns: Builder instance for fluent chaining
+  */
+  T side(gtk.types.PackType propval)
+  {
+    return setProperty("side", propval);
+  }
+}
+
+/// Fluent builder for [gtk.window_controls.WindowControls]
+final class WindowControlsGidBuilder : WindowControlsGidBuilderImpl!WindowControlsGidBuilder
+{
+  WindowControls build()
+  {
+    return new WindowControls(cast(void*)createGObject(WindowControls._getGType), No.Take);
   }
 }

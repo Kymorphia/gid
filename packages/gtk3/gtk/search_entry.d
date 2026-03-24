@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -69,6 +70,15 @@ class SearchEntry : gtk.entry.Entry
   override SearchEntry self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.search_entry.SearchEntry]
+  Returns: New builder object
+  */
+  static SearchEntryGidBuilder builder()
+  {
+    return new SearchEntryGidBuilder;
   }
 
   /**
@@ -276,5 +286,19 @@ class SearchEntry : gtk.entry.Entry
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stop-search", closure, after);
+  }
+}
+
+class SearchEntryGidBuilderImpl(T) : gtk.entry.EntryGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.search_entry.SearchEntry]
+final class SearchEntryGidBuilder : SearchEntryGidBuilderImpl!SearchEntryGidBuilder
+{
+  SearchEntry build()
+  {
+    return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), No.Take);
   }
 }

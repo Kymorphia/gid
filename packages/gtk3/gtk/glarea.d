@@ -7,6 +7,7 @@ import gdk.glcontext;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -145,6 +146,15 @@ class GLArea : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.glarea.GLArea]
+  Returns: New builder object
+  */
+  static GLAreaGidBuilder builder()
+  {
+    return new GLAreaGidBuilder;
+  }
+
+  /**
       Get `autoRender` property.
       Returns: If set to true the #GtkGLArea::render signal will be emitted every time
         the widget draws. This is the default and is useful if drawing the widget
@@ -176,7 +186,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void autoRender(bool propval)
   {
-    return setAutoRender(propval);
+    setAutoRender(propval);
   }
 
   /**
@@ -218,7 +228,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void hasAlpha(bool propval)
   {
-    return setHasAlpha(propval);
+    setHasAlpha(propval);
   }
 
   /**
@@ -239,7 +249,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void hasDepthBuffer(bool propval)
   {
-    return setHasDepthBuffer(propval);
+    setHasDepthBuffer(propval);
   }
 
   /**
@@ -260,7 +270,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void hasStencilBuffer(bool propval)
   {
-    return setHasStencilBuffer(propval);
+    setHasStencilBuffer(propval);
   }
 
   /**
@@ -285,7 +295,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void useEs(bool propval)
   {
-    return setUseEs(propval);
+    setUseEs(propval);
   }
 
   /**
@@ -691,5 +701,92 @@ class GLArea : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resize", closure, after);
+  }
+}
+
+class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `autoRender` property.
+      Params:
+        propval = If set to true the #GtkGLArea::render signal will be emitted every time
+          the widget draws. This is the default and is useful if drawing the widget
+          is faster.
+          
+          If set to false the data from previous rendering is kept around and will
+          be used for drawing the widget the next time, unless the window is resized.
+          In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+          This mode is useful when the scene changes seldomly, but takes a long time
+          to redraw.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoRender(bool propval)
+  {
+    return setProperty("auto-render", propval);
+  }
+
+  /**
+      Set `hasAlpha` property.
+      Params:
+        propval = If set to true the buffer allocated by the widget will have an alpha channel
+          component, and when rendering to the window the result will be composited over
+          whatever is below the widget.
+          
+          If set to false there will be no alpha channel, and the buffer will fully
+          replace anything below the widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasAlpha(bool propval)
+  {
+    return setProperty("has-alpha", propval);
+  }
+
+  /**
+      Set `hasDepthBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a depth buffer for the
+          target framebuffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasDepthBuffer(bool propval)
+  {
+    return setProperty("has-depth-buffer", propval);
+  }
+
+  /**
+      Set `hasStencilBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a stencil buffer for the
+          target framebuffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasStencilBuffer(bool propval)
+  {
+    return setProperty("has-stencil-buffer", propval);
+  }
+
+  /**
+      Set `useEs` property.
+      Params:
+        propval = If set to true the widget will try to create a #GdkGLContext using
+          OpenGL ES instead of OpenGL.
+          
+          See also: [gdk.glcontext.GLContext.setUseEs]
+      Returns: Builder instance for fluent chaining
+  */
+  T useEs(bool propval)
+  {
+    return setProperty("use-es", propval);
+  }
+}
+
+/// Fluent builder for [gtk.glarea.GLArea]
+final class GLAreaGidBuilder : GLAreaGidBuilderImpl!GLAreaGidBuilder
+{
+  GLArea build()
+  {
+    return new GLArea(cast(void*)createGObject(GLArea._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import gdk.paintable;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -63,6 +64,15 @@ class StatusPage : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.status_page.StatusPage]
+  Returns: New builder object
+  */
+  static StatusPageGidBuilder builder()
+  {
+    return new StatusPageGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -78,7 +88,7 @@ class StatusPage : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -97,7 +107,7 @@ class StatusPage : gtk.widget.Widget
   */
   @property void description(string propval)
   {
-    return setDescription(propval);
+    setDescription(propval);
   }
 
   /**
@@ -120,7 +130,7 @@ class StatusPage : gtk.widget.Widget
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -143,7 +153,7 @@ class StatusPage : gtk.widget.Widget
   */
   @property void paintable(gdk.paintable.Paintable propval)
   {
-    return setPaintable(propval);
+    setPaintable(propval);
   }
 
   /**
@@ -166,7 +176,7 @@ class StatusPage : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -304,5 +314,80 @@ class StatusPage : gtk.widget.Widget
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_status_page_set_title(cast(AdwStatusPage*)this._cPtr, _title);
+  }
+}
+
+class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `description` property.
+      Params:
+        propval = The description markup to be displayed below the title.
+      Returns: Builder instance for fluent chaining
+  */
+  T description(string propval)
+  {
+    return setProperty("description", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon to be used.
+          
+          Changing this will set `property@StatusPage:paintable` to `NULL`.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `paintable` property.
+      Params:
+        propval = The paintable to be used.
+          
+          Changing this will set `property@StatusPage:icon-name` to `NULL`.
+      Returns: Builder instance for fluent chaining
+  */
+  T paintable(gdk.paintable.Paintable propval)
+  {
+    return setProperty("paintable", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to be displayed below the icon.
+          
+          It is not parsed as Pango markup.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [adw.status_page.StatusPage]
+final class StatusPageGidBuilder : StatusPageGidBuilderImpl!StatusPageGidBuilder
+{
+  StatusPage build()
+  {
+    return new StatusPage(cast(void*)createGObject(StatusPage._getGType), No.Take);
   }
 }

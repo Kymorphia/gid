@@ -4,6 +4,7 @@ module gtk.flow_box_child_accessible;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -36,5 +37,28 @@ class FlowBoxChildAccessible : gtk.container_accessible.ContainerAccessible
   override FlowBoxChildAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.flow_box_child_accessible.FlowBoxChildAccessible]
+  Returns: New builder object
+  */
+  static FlowBoxChildAccessibleGidBuilder builder()
+  {
+    return new FlowBoxChildAccessibleGidBuilder;
+  }
+}
+
+class FlowBoxChildAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.flow_box_child_accessible.FlowBoxChildAccessible]
+final class FlowBoxChildAccessibleGidBuilder : FlowBoxChildAccessibleGidBuilderImpl!FlowBoxChildAccessibleGidBuilder
+{
+  FlowBoxChildAccessible build()
+  {
+    return new FlowBoxChildAccessible(cast(void*)createGObject(FlowBoxChildAccessible._getGType), No.Take);
   }
 }

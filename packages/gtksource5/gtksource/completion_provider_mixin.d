@@ -9,6 +9,7 @@ public import gio.cancellable;
 public import gio.list_model;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.text_iter;
 public import gtksource.c.functions;
@@ -232,4 +233,8 @@ template CompletionProviderT()
   {
     gtk_source_completion_provider_refilter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
+}
+
+template CompletionProviderGidBuilderT()
+{
 }

@@ -5,6 +5,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class ServerCallContext : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrowflight.server_call_context.ServerCallContext]
+  Returns: New builder object
+  */
+  static ServerCallContextGidBuilder builder()
+  {
+    return new ServerCallContextGidBuilder;
+  }
+
+  /**
       Iterates over all incoming headers.
   
       Params:
@@ -55,5 +65,24 @@ class ServerCallContext : gobject.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
     gaflight_server_call_context_foreach_incoming_header(cast(GAFlightServerCallContext*)this._cPtr, _funcCB, _func);
+  }
+}
+
+class ServerCallContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T callContext(void* propval)
+  {
+    return setProperty("call-context", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.server_call_context.ServerCallContext]
+final class ServerCallContextGidBuilder : ServerCallContextGidBuilderImpl!ServerCallContextGidBuilder
+{
+  ServerCallContext build()
+  {
+    return new ServerCallContext(cast(void*)createGObject(ServerCallContext._getGType), No.Take);
   }
 }

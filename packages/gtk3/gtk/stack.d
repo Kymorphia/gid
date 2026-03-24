@@ -4,6 +4,7 @@ module gtk.stack;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -60,6 +61,15 @@ class Stack : gtk.container.Container
   }
 
   /**
+  Get builder for [gtk.stack.Stack]
+  Returns: New builder object
+  */
+  static StackGidBuilder builder()
+  {
+    return new StackGidBuilder;
+  }
+
+  /**
       Get `hhomogeneous` property.
       Returns: true if the stack allocates the same width for all children.
   */
@@ -75,7 +85,7 @@ class Stack : gtk.container.Container
   */
   @property void hhomogeneous(bool propval)
   {
-    return setHhomogeneous(propval);
+    setHhomogeneous(propval);
   }
 
   /** */
@@ -87,7 +97,7 @@ class Stack : gtk.container.Container
   /** */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /** */
@@ -99,7 +109,7 @@ class Stack : gtk.container.Container
   /** */
   @property void interpolateSize(bool propval)
   {
-    return setInterpolateSize(propval);
+    setInterpolateSize(propval);
   }
 
   /** */
@@ -111,7 +121,7 @@ class Stack : gtk.container.Container
   /** */
   @property void transitionDuration(uint propval)
   {
-    return setTransitionDuration(propval);
+    setTransitionDuration(propval);
   }
 
   /** */
@@ -129,7 +139,7 @@ class Stack : gtk.container.Container
   /** */
   @property void transitionType(gtk.types.StackTransitionType propval)
   {
-    return setTransitionType(propval);
+    setTransitionType(propval);
   }
 
   /**
@@ -148,7 +158,7 @@ class Stack : gtk.container.Container
   */
   @property void vhomogeneous(bool propval)
   {
-    return setVhomogeneous(propval);
+    setVhomogeneous(propval);
   }
 
   /** */
@@ -160,7 +170,7 @@ class Stack : gtk.container.Container
   /** */
   @property void visibleChild(gtk.widget.Widget propval)
   {
-    return setVisibleChild(propval);
+    setVisibleChild(propval);
   }
 
   /** */
@@ -172,7 +182,7 @@ class Stack : gtk.container.Container
   /** */
   @property void visibleChildName(string propval)
   {
-    return setVisibleChildName(propval);
+    setVisibleChildName(propval);
   }
 
   /**
@@ -493,5 +503,77 @@ class Stack : gtk.container.Container
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_stack_set_visible_child_name(cast(GtkStack*)this._cPtr, _name);
+  }
+}
+
+class StackGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same width for all children.
+      Returns: Builder instance for fluent chaining
+  */
+  T hhomogeneous(bool propval)
+  {
+    return setProperty("hhomogeneous", propval);
+  }
+
+  /** */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /** */
+  T interpolateSize(bool propval)
+  {
+    return setProperty("interpolate-size", propval);
+  }
+
+  /** */
+  T transitionDuration(uint propval)
+  {
+    return setProperty("transition-duration", propval);
+  }
+
+  /** */
+  T transitionType(gtk.types.StackTransitionType propval)
+  {
+    return setProperty("transition-type", propval);
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same height for all children.
+      Returns: Builder instance for fluent chaining
+  */
+  T vhomogeneous(bool propval)
+  {
+    return setProperty("vhomogeneous", propval);
+  }
+
+  /** */
+  T visibleChild(gtk.widget.Widget propval)
+  {
+    return setProperty("visible-child", propval);
+  }
+
+  /** */
+  T visibleChildName(string propval)
+  {
+    return setProperty("visible-child-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.stack.Stack]
+final class StackGidBuilder : StackGidBuilderImpl!StackGidBuilder
+{
+  Stack build()
+  {
+    return new Stack(cast(void*)createGObject(Stack._getGType), No.Take);
   }
 }

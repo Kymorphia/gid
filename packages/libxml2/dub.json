@@ -1,7 +1,7 @@
 {
   "name": "libxml2",
   "description": "D binding for the libxml2 library - ",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://github.com/GNOME/libxml2",

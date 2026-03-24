@@ -2,6 +2,7 @@
 module webkit.notification_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -47,5 +48,29 @@ class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permissi
     return this;
   }
 
+  /**
+  Get builder for [webkit.notification_permission_request.NotificationPermissionRequest]
+  Returns: New builder object
+  */
+  static NotificationPermissionRequestGidBuilder builder()
+  {
+    return new NotificationPermissionRequestGidBuilder;
+  }
+
   mixin PermissionRequestT!();
+}
+
+class NotificationPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.notification_permission_request.NotificationPermissionRequest]
+final class NotificationPermissionRequestGidBuilder : NotificationPermissionRequestGidBuilderImpl!NotificationPermissionRequestGidBuilder
+{
+  NotificationPermissionRequest build()
+  {
+    return new NotificationPermissionRequest(cast(void*)createGObject(NotificationPermissionRequest._getGType), No.Take);
+  }
 }

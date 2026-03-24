@@ -7,6 +7,7 @@ import arrow.expression;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class FieldExpression : arrow.expression.Expression
@@ -37,6 +38,15 @@ class FieldExpression : arrow.expression.Expression
     return this;
   }
 
+  /**
+  Get builder for [arrow.field_expression.FieldExpression]
+  Returns: New builder object
+  */
+  static FieldExpressionGidBuilder builder()
+  {
+    return new FieldExpressionGidBuilder;
+  }
+
   /** */
   this(string reference)
   {
@@ -47,5 +57,18 @@ class FieldExpression : arrow.expression.Expression
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FieldExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.field_expression.FieldExpression]
+final class FieldExpressionGidBuilder : FieldExpressionGidBuilderImpl!FieldExpressionGidBuilder
+{
+  FieldExpression build()
+  {
+    return new FieldExpression(cast(void*)createGObject(FieldExpression._getGType), Yes.Take);
   }
 }

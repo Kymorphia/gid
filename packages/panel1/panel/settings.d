@@ -8,6 +8,7 @@ import gio.types;
 import glib.variant;
 import glib.variant_type;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import panel.c.functions;
@@ -41,6 +42,56 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   override Settings self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.settings.Settings]
+  Returns: New builder object
+  */
+  static SettingsGidBuilder builder()
+  {
+    return new SettingsGidBuilder;
+  }
+
+  /**
+      Get `identifier` property.
+      Returns: The "identifier" property is used to make unique paths.
+        
+        This might be a unique "project-id" for example, in an IDE.
+  */
+  @property string identifier()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("identifier");
+  }
+
+  /** */
+  @property string path()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("path");
+  }
+
+  /** */
+  @property string pathPrefix()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("path-prefix");
+  }
+
+  /** */
+  @property string pathSuffix()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("path-suffix");
+  }
+
+  /** */
+  @property string schemaId()
+  {
+    return getSchemaId();
+  }
+
+  /** */
+  @property string schemaIdPrefix()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("schema-id-prefix");
   }
 
   mixin ActionGroupT!();
@@ -325,5 +376,63 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+
+  /**
+      Set `identifier` property.
+      Params:
+        propval = The "identifier" property is used to make unique paths.
+          
+          This might be a unique "project-id" for example, in an IDE.
+      Returns: Builder instance for fluent chaining
+  */
+  T identifier(string propval)
+  {
+    return setProperty("identifier", propval);
+  }
+
+  /** */
+  T path(string propval)
+  {
+    return setProperty("path", propval);
+  }
+
+  /** */
+  T pathPrefix(string propval)
+  {
+    return setProperty("path-prefix", propval);
+  }
+
+  /** */
+  T pathSuffix(string propval)
+  {
+    return setProperty("path-suffix", propval);
+  }
+
+  /** */
+  T schemaId(string propval)
+  {
+    return setProperty("schema-id", propval);
+  }
+
+  /** */
+  T schemaIdPrefix(string propval)
+  {
+    return setProperty("schema-id-prefix", propval);
+  }
+}
+
+/// Fluent builder for [panel.settings.Settings]
+final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
+{
+  Settings build()
+  {
+    return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);
   }
 }

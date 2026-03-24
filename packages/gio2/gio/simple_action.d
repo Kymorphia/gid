@@ -10,6 +10,7 @@ import gio.types;
 import glib.variant;
 import glib.variant_type;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -46,6 +47,15 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   }
 
   /**
+  Get builder for [gio.simple_action.SimpleAction]
+  Returns: New builder object
+  */
+  static SimpleActionGidBuilder builder()
+  {
+    return new SimpleActionGidBuilder;
+  }
+
+  /**
       Get `enabled` property.
       Returns: If @action is currently enabled.
         
@@ -67,7 +77,27 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   */
   @property void enabled(bool propval)
   {
-    return setEnabled(propval);
+    setEnabled(propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the action. This is mostly meaningful for identifying
+        the action once it has been added to a #GSimpleActionGroup.
+  */
+  @property string name()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("name");
+  }
+
+  /**
+      Get `parameterType` property.
+      Returns: The type of the parameter that must be given when activating the
+        action.
+  */
+  @property glib.variant_type.VariantType parameterType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("parameter-type");
   }
 
   /**
@@ -86,7 +116,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   */
   @property void state(glib.variant.Variant propval)
   {
-    return setState(propval);
+    setState(propval);
   }
 
   /**
@@ -325,5 +355,69 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("change-state", closure, after);
+  }
+}
+
+class SimpleActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action.ActionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = If @action is currently enabled.
+          
+          If the action is disabled then calls to [gio.action.Action.activate] and
+          [gio.action.Action.changeState] have no effect.
+      Returns: Builder instance for fluent chaining
+  */
+  T enabled(bool propval)
+  {
+    return setProperty("enabled", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the action. This is mostly meaningful for identifying
+          the action once it has been added to a #GSimpleActionGroup.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `parameterType` property.
+      Params:
+        propval = The type of the parameter that must be given when activating the
+          action.
+      Returns: Builder instance for fluent chaining
+  */
+  T parameterType(glib.variant_type.VariantType propval)
+  {
+    return setProperty("parameter-type", propval);
+  }
+
+  /**
+      Set `state` property.
+      Params:
+        propval = The state of the action, or null if the action is stateless.
+      Returns: Builder instance for fluent chaining
+  */
+  T state(glib.variant.Variant propval)
+  {
+    return setProperty("state", propval);
+  }
+}
+
+/// Fluent builder for [gio.simple_action.SimpleAction]
+final class SimpleActionGidBuilder : SimpleActionGidBuilderImpl!SimpleActionGidBuilder
+{
+  SimpleAction build()
+  {
+    return new SimpleAction(cast(void*)createGObject(SimpleAction._getGType), Yes.Take);
   }
 }

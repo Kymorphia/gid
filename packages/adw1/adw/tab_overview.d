@@ -10,6 +10,7 @@ import gdk.types;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -108,6 +109,15 @@ class TabOverview : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.tab_overview.TabOverview]
+  Returns: New builder object
+  */
+  static TabOverviewGidBuilder builder()
+  {
+    return new TabOverviewGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -123,7 +133,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -146,7 +156,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void enableNewTab(bool propval)
   {
-    return setEnableNewTab(propval);
+    setEnableNewTab(propval);
   }
 
   /**
@@ -183,7 +193,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void enableSearch(bool propval)
   {
-    return setEnableSearch(propval);
+    setEnableSearch(propval);
   }
 
   /**
@@ -220,7 +230,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void extraDragPreload(bool propval)
   {
-    return setExtraDragPreload(propval);
+    setExtraDragPreload(propval);
   }
 
   /**
@@ -245,7 +255,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void inverted(bool propval)
   {
-    return setInverted(propval);
+    setInverted(propval);
   }
 
   /**
@@ -264,7 +274,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void open(bool propval)
   {
-    return setOpen(propval);
+    setOpen(propval);
   }
 
   /**
@@ -298,7 +308,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void secondaryMenu(gio.menu_model.MenuModel propval)
   {
-    return setSecondaryMenu(propval);
+    setSecondaryMenu(propval);
   }
 
   /**
@@ -321,7 +331,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void showEndTitleButtons(bool propval)
   {
-    return setShowEndTitleButtons(propval);
+    setShowEndTitleButtons(propval);
   }
 
   /**
@@ -344,7 +354,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void showStartTitleButtons(bool propval)
   {
-    return setShowStartTitleButtons(propval);
+    setShowStartTitleButtons(propval);
   }
 
   /**
@@ -367,7 +377,7 @@ class TabOverview : gtk.widget.Widget
   */
   @property void view(adw.tab_view.TabView propval)
   {
-    return setView(propval);
+    setView(propval);
   }
 
   /**
@@ -842,5 +852,153 @@ class TabOverview : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("extra-drag-value", closure, after);
+  }
+}
+
+class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `enableNewTab` property.
+      Params:
+        propval = Whether to enable new tab button.
+          
+          Connect to the `signal@TabOverview::create-tab` signal to use it.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableNewTab(bool propval)
+  {
+    return setProperty("enable-new-tab", propval);
+  }
+
+  /**
+      Set `enableSearch` property.
+      Params:
+        propval = Whether to enable search in tabs.
+          
+          Search matches tab titles and tooltips, as well as keywords, set via
+          `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
+          web browser.
+          
+          During search, tab reordering and drag-n-drop are disabled.
+          
+          Use `property@TabOverview:search-active` to check out if search is
+          currently active.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSearch(bool propval)
+  {
+    return setProperty("enable-search", propval);
+  }
+
+  /**
+      Set `extraDragPreload` property.
+      Params:
+        propval = Whether the drop data should be preloaded on hover.
+          
+          See [gtk.drop_target.DropTarget.preload].
+      Returns: Builder instance for fluent chaining
+  */
+  T extraDragPreload(bool propval)
+  {
+    return setProperty("extra-drag-preload", propval);
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether thumbnails use inverted layout.
+          
+          If set to `TRUE`, thumbnails will have the close or unpin buttons at the
+          beginning and the indicator at the end rather than the other way around.
+      Returns: Builder instance for fluent chaining
+  */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /**
+      Set `open` property.
+      Params:
+        propval = Whether the overview is open.
+      Returns: Builder instance for fluent chaining
+  */
+  T open(bool propval)
+  {
+    return setProperty("open", propval);
+  }
+
+  /**
+      Set `secondaryMenu` property.
+      Params:
+        propval = The secondary menu model.
+          
+          Use it to add extra actions, e.g. to open a new window or undo closed tab.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryMenu(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("secondary-menu", propval);
+  }
+
+  /**
+      Set `showEndTitleButtons` property.
+      Params:
+        propval = Whether to show end title buttons in the overview's header bar.
+          
+          See `property@HeaderBar:show-start-title-buttons` for the other side.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEndTitleButtons(bool propval)
+  {
+    return setProperty("show-end-title-buttons", propval);
+  }
+
+  /**
+      Set `showStartTitleButtons` property.
+      Params:
+        propval = Whether to show start title buttons in the overview's header bar.
+          
+          See `property@HeaderBar:show-end-title-buttons` for the other side.
+      Returns: Builder instance for fluent chaining
+  */
+  T showStartTitleButtons(bool propval)
+  {
+    return setProperty("show-start-title-buttons", propval);
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The tab view the overview controls.
+          
+          The view must be inside the tab overview, see `property@TabOverview:child`.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(adw.tab_view.TabView propval)
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [adw.tab_overview.TabOverview]
+final class TabOverviewGidBuilder : TabOverviewGidBuilderImpl!TabOverviewGidBuilder
+{
+  TabOverview build()
+  {
+    return new TabOverview(cast(void*)createGObject(TabOverview._getGType), No.Take);
   }
 }

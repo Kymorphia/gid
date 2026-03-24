@@ -11,6 +11,7 @@ import gio.seekable;
 import gio.seekable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 
 /**
     Data output stream implements [gio.output_stream.OutputStream] and includes functions
@@ -45,6 +46,15 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
+  Get builder for [gio.data_output_stream.DataOutputStream]
+  Returns: New builder object
+  */
+  static DataOutputStreamGidBuilder builder()
+  {
+    return new DataOutputStreamGidBuilder;
+  }
+
+  /**
       Get `byteOrder` property.
       Returns: Determines the byte ordering that is used when writing
         multi-byte entities (such as integers) to the stream.
@@ -62,7 +72,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   */
   @property void byteOrder(gio.types.DataStreamByteOrder propval)
   {
-    return setByteOrder(propval);
+    setByteOrder(propval);
   }
 
   mixin SeekableT!();
@@ -255,5 +265,32 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   void setByteOrder(gio.types.DataStreamByteOrder order)
   {
     g_data_output_stream_set_byte_order(cast(GDataOutputStream*)this._cPtr, order);
+  }
+}
+
+class DataOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOutputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
+{
+
+  mixin SeekableGidBuilderT!();
+
+  /**
+      Set `byteOrder` property.
+      Params:
+        propval = Determines the byte ordering that is used when writing
+          multi-byte entities (such as integers) to the stream.
+      Returns: Builder instance for fluent chaining
+  */
+  T byteOrder(gio.types.DataStreamByteOrder propval)
+  {
+    return setProperty("byte-order", propval);
+  }
+}
+
+/// Fluent builder for [gio.data_output_stream.DataOutputStream]
+final class DataOutputStreamGidBuilder : DataOutputStreamGidBuilderImpl!DataOutputStreamGidBuilder
+{
+  DataOutputStream build()
+  {
+    return new DataOutputStream(cast(void*)createGObject(DataOutputStream._getGType), Yes.Take);
   }
 }

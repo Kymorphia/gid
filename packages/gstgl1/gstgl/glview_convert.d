@@ -2,6 +2,7 @@
 module gstgl.glview_convert;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.caps;
@@ -42,6 +43,15 @@ class GLViewConvert : gst.object.ObjectWrap
   override GLViewConvert self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glview_convert.GLViewConvert]
+  Returns: New builder object
+  */
+  static GLViewConvertGidBuilder builder()
+  {
+    return new GLViewConvertGidBuilder;
   }
 
   /** */
@@ -228,5 +238,48 @@ class GLViewConvert : gst.object.ObjectWrap
     _cretval = gst_gl_view_convert_transform_caps(cast(GstGLViewConvert*)this._cPtr, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class GLViewConvertGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T downmixMode(gstgl.types.GLStereoDownmix propval)
+  {
+    return setProperty("downmix-mode", propval);
+  }
+
+  /** */
+  T inputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  {
+    return setProperty("input-flags-override", propval);
+  }
+
+  /** */
+  T inputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  {
+    return setProperty("input-mode-override", propval);
+  }
+
+  /** */
+  T outputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  {
+    return setProperty("output-flags-override", propval);
+  }
+
+  /** */
+  T outputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  {
+    return setProperty("output-mode-override", propval);
+  }
+}
+
+/// Fluent builder for [gstgl.glview_convert.GLViewConvert]
+final class GLViewConvertGidBuilder : GLViewConvertGidBuilderImpl!GLViewConvertGidBuilder
+{
+  GLViewConvert build()
+  {
+    return new GLViewConvert(cast(void*)createGObject(GLViewConvert._getGType), Yes.Take);
   }
 }

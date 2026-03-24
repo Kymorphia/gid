@@ -1,7 +1,7 @@
 {
   "name": "gda5",
   "description": "D binding for the Gda5 library - GNU Data Access database library",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/libgda",

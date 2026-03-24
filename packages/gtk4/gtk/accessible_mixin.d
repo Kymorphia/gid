@@ -3,6 +3,7 @@ module gtk.accessible_mixin;
 
 public import gtk.accessible_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.value;
 public import gtk.atcontext;
@@ -348,5 +349,22 @@ template AccessibleT()
     const(GValue)* _values = _tmpvalues.ptr;
 
     gtk_accessible_update_state_value(cast(GtkAccessible*)this._cPtr, _nStates, _states, _values);
+  }
+}
+
+template AccessibleGidBuilderT()
+{
+
+  /**
+      Set `accessibleRole` property.
+      Params:
+        propval = The accessible role of the given [gtk.accessible.Accessible] implementation.
+          
+          The accessible role cannot be changed once set.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessibleRole(gtk.types.AccessibleRole propval)
+  {
+    return setProperty("accessible-role", propval);
   }
 }

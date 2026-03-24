@@ -3,6 +3,7 @@ module gst.plugin;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -57,6 +58,15 @@ class Plugin : gst.object.ObjectWrap
   override Plugin self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.plugin.Plugin]
+  Returns: New builder object
+  */
+  static PluginGidBuilder builder()
+  {
+    return new PluginGidBuilder;
   }
 
   /**
@@ -545,5 +555,18 @@ class Plugin : gst.object.ObjectWrap
   void setCacheData(gst.structure.Structure cacheData)
   {
     gst_plugin_set_cache_data(cast(GstPlugin*)this._cPtr, cacheData ? cast(GstStructure*)cacheData._cPtr(Yes.Dup) : null);
+  }
+}
+
+class PluginGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.plugin.Plugin]
+final class PluginGidBuilder : PluginGidBuilderImpl!PluginGidBuilder
+{
+  Plugin build()
+  {
+    return new Plugin(cast(void*)createGObject(Plugin._getGType), No.Take);
   }
 }

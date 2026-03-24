@@ -6,6 +6,7 @@ import arrowflight.c.types;
 import arrowflight.descriptor;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class PathDescriptor : arrowflight.descriptor.Descriptor
@@ -34,6 +35,15 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
   override PathDescriptor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.path_descriptor.PathDescriptor]
+  Returns: New builder object
+  */
+  static PathDescriptorGidBuilder builder()
+  {
+    return new PathDescriptorGidBuilder;
   }
 
   /** */
@@ -71,5 +81,18 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
       gFree(cast(void*)_cretval);
     }
     return _retval;
+  }
+}
+
+class PathDescriptorGidBuilderImpl(T) : arrowflight.descriptor.DescriptorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.path_descriptor.PathDescriptor]
+final class PathDescriptorGidBuilder : PathDescriptorGidBuilderImpl!PathDescriptorGidBuilder
+{
+  PathDescriptor build()
+  {
+    return new PathDescriptor(cast(void*)createGObject(PathDescriptor._getGType), Yes.Take);
   }
 }

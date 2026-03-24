@@ -2,6 +2,7 @@
 module gtk.string_filter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -52,6 +53,15 @@ class StringFilter : gtk.filter.Filter
   }
 
   /**
+  Get builder for [gtk.string_filter.StringFilter]
+  Returns: New builder object
+  */
+  static StringFilterGidBuilder builder()
+  {
+    return new StringFilterGidBuilder;
+  }
+
+  /**
       Get `expression` property.
       Returns: The expression to evaluate on item to get a string to compare with.
   */
@@ -67,7 +77,7 @@ class StringFilter : gtk.filter.Filter
   */
   @property void expression(gtk.expression.Expression propval)
   {
-    return setExpression(propval);
+    setExpression(propval);
   }
 
   /**
@@ -86,7 +96,7 @@ class StringFilter : gtk.filter.Filter
   */
   @property void ignoreCase(bool propval)
   {
-    return setIgnoreCase(propval);
+    setIgnoreCase(propval);
   }
 
   /**
@@ -105,7 +115,7 @@ class StringFilter : gtk.filter.Filter
   */
   @property void matchMode(gtk.types.StringFilterMatchMode propval)
   {
-    return setMatchMode(propval);
+    setMatchMode(propval);
   }
 
   /**
@@ -124,7 +134,7 @@ class StringFilter : gtk.filter.Filter
   */
   @property void search(string propval)
   {
-    return setSearch(propval);
+    setSearch(propval);
   }
 
   /**
@@ -239,5 +249,62 @@ class StringFilter : gtk.filter.Filter
   {
     const(char)* _search = search.toCString(No.Alloc);
     gtk_string_filter_set_search(cast(GtkStringFilter*)this._cPtr, _search);
+  }
+}
+
+class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
+{
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on item to get a string to compare with.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(gtk.expression.Expression propval)
+  {
+    return setProperty("expression", propval);
+  }
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = If matching is case sensitive.
+      Returns: Builder instance for fluent chaining
+  */
+  T ignoreCase(bool propval)
+  {
+    return setProperty("ignore-case", propval);
+  }
+
+  /**
+      Set `matchMode` property.
+      Params:
+        propval = If exact matches are necessary or if substrings are allowed.
+      Returns: Builder instance for fluent chaining
+  */
+  T matchMode(gtk.types.StringFilterMatchMode propval)
+  {
+    return setProperty("match-mode", propval);
+  }
+
+  /**
+      Set `search` property.
+      Params:
+        propval = The search term.
+      Returns: Builder instance for fluent chaining
+  */
+  T search(string propval)
+  {
+    return setProperty("search", propval);
+  }
+}
+
+/// Fluent builder for [gtk.string_filter.StringFilter]
+final class StringFilterGidBuilder : StringFilterGidBuilderImpl!StringFilterGidBuilder
+{
+  StringFilter build()
+  {
+    return new StringFilter(cast(void*)createGObject(StringFilter._getGType), Yes.Take);
   }
 }

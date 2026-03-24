@@ -8,6 +8,7 @@ import arrow.numeric_array;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class UInt32Array : arrow.numeric_array.NumericArray
@@ -36,6 +37,15 @@ class UInt32Array : arrow.numeric_array.NumericArray
   override UInt32Array self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.uint32_array.UInt32Array]
+  Returns: New builder object
+  */
+  static UInt32ArrayGidBuilder builder()
+  {
+    return new UInt32ArrayGidBuilder;
   }
 
   /** */
@@ -78,5 +88,18 @@ class UInt32Array : arrow.numeric_array.NumericArray
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class UInt32ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint32_array.UInt32Array]
+final class UInt32ArrayGidBuilder : UInt32ArrayGidBuilderImpl!UInt32ArrayGidBuilder
+{
+  UInt32Array build()
+  {
+    return new UInt32Array(cast(void*)createGObject(UInt32Array._getGType), Yes.Take);
   }
 }

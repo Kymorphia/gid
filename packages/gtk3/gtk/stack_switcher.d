@@ -4,6 +4,7 @@ module gtk.stack_switcher;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -68,6 +69,15 @@ class StackSwitcher : gtk.box.Box
   }
 
   /**
+  Get builder for [gtk.stack_switcher.StackSwitcher]
+  Returns: New builder object
+  */
+  static StackSwitcherGidBuilder builder()
+  {
+    return new StackSwitcherGidBuilder;
+  }
+
+  /**
       Get `iconSize` property.
       Returns: Use the "icon-size" property to change the size of the image displayed
         when a #GtkStackSwitcher is displaying icons.
@@ -97,7 +107,7 @@ class StackSwitcher : gtk.box.Box
   /** */
   @property void stack(gtk.stack.Stack propval)
   {
-    return setStack(propval);
+    setStack(propval);
   }
 
   /**
@@ -134,5 +144,37 @@ class StackSwitcher : gtk.box.Box
   void setStack(gtk.stack.Stack stack = null)
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
+  }
+}
+
+class StackSwitcherGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = Use the "icon-size" property to change the size of the image displayed
+          when a #GtkStackSwitcher is displaying icons.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSize(int propval)
+  {
+    return setProperty("icon-size", propval);
+  }
+
+  /** */
+  T stack(gtk.stack.Stack propval)
+  {
+    return setProperty("stack", propval);
+  }
+}
+
+/// Fluent builder for [gtk.stack_switcher.StackSwitcher]
+final class StackSwitcherGidBuilder : StackSwitcherGidBuilderImpl!StackSwitcherGidBuilder
+{
+  StackSwitcher build()
+  {
+    return new StackSwitcher(cast(void*)createGObject(StackSwitcher._getGType), No.Take);
   }
 }

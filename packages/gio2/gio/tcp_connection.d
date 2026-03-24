@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.socket_connection;
 import gio.types;
+import gobject.gid_builder;
 
 /**
     This is the subclass of [gio.socket_connection.SocketConnection] that is created
@@ -40,6 +41,15 @@ class TcpConnection : gio.socket_connection.SocketConnection
   }
 
   /**
+  Get builder for [gio.tcp_connection.TcpConnection]
+  Returns: New builder object
+  */
+  static TcpConnectionGidBuilder builder()
+  {
+    return new TcpConnectionGidBuilder;
+  }
+
+  /**
       Get `gracefulDisconnect` property.
       Returns: Whether [gio.iostream.IOStream.close] does a graceful disconnect.
   */
@@ -55,7 +65,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
   */
   @property void gracefulDisconnect(bool propval)
   {
-    return setGracefulDisconnect(propval);
+    setGracefulDisconnect(propval);
   }
 
   /**
@@ -87,5 +97,29 @@ class TcpConnection : gio.socket_connection.SocketConnection
   void setGracefulDisconnect(bool gracefulDisconnect)
   {
     g_tcp_connection_set_graceful_disconnect(cast(GTcpConnection*)this._cPtr, gracefulDisconnect);
+  }
+}
+
+class TcpConnectionGidBuilderImpl(T) : gio.socket_connection.SocketConnectionGidBuilderImpl!T
+{
+
+  /**
+      Set `gracefulDisconnect` property.
+      Params:
+        propval = Whether [gio.iostream.IOStream.close] does a graceful disconnect.
+      Returns: Builder instance for fluent chaining
+  */
+  T gracefulDisconnect(bool propval)
+  {
+    return setProperty("graceful-disconnect", propval);
+  }
+}
+
+/// Fluent builder for [gio.tcp_connection.TcpConnection]
+final class TcpConnectionGidBuilder : TcpConnectionGidBuilderImpl!TcpConnectionGidBuilder
+{
+  TcpConnection build()
+  {
+    return new TcpConnection(cast(void*)createGObject(TcpConnection._getGType), No.Take);
   }
 }

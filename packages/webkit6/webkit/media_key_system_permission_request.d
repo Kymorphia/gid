@@ -2,6 +2,7 @@
 module webkit.media_key_system_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -50,5 +51,29 @@ class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permis
     return this;
   }
 
+  /**
+  Get builder for [webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest]
+  Returns: New builder object
+  */
+  static MediaKeySystemPermissionRequestGidBuilder builder()
+  {
+    return new MediaKeySystemPermissionRequestGidBuilder;
+  }
+
   mixin PermissionRequestT!();
+}
+
+class MediaKeySystemPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest]
+final class MediaKeySystemPermissionRequestGidBuilder : MediaKeySystemPermissionRequestGidBuilderImpl!MediaKeySystemPermissionRequestGidBuilder
+{
+  MediaKeySystemPermissionRequest build()
+  {
+    return new MediaKeySystemPermissionRequest(cast(void*)createGObject(MediaKeySystemPermissionRequest._getGType), No.Take);
+  }
 }

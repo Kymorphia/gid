@@ -6,6 +6,7 @@ import gdk.rectangle;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -93,6 +94,15 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
+  Get builder for [gtk.text_view.TextView]
+  Returns: New builder object
+  */
+  static TextViewGidBuilder builder()
+  {
+    return new TextViewGidBuilder;
+  }
+
+  /**
       Get `acceptsTab` property.
       Returns: Whether Tab will result in a tab character being entered.
   */
@@ -108,7 +118,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void acceptsTab(bool propval)
   {
-    return setAcceptsTab(propval);
+    setAcceptsTab(propval);
   }
 
   /**
@@ -139,7 +149,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void bottomMargin(int propval)
   {
-    return setBottomMargin(propval);
+    setBottomMargin(propval);
   }
 
   /**
@@ -158,7 +168,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void buffer(gtk.text_buffer.TextBuffer propval)
   {
-    return setBuffer(propval);
+    setBuffer(propval);
   }
 
   /**
@@ -177,7 +187,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void cursorVisible(bool propval)
   {
-    return setCursorVisible(propval);
+    setCursorVisible(propval);
   }
 
   /** */
@@ -189,7 +199,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /** */
   @property void editable(bool propval)
   {
-    return setEditable(propval);
+    setEditable(propval);
   }
 
   /**
@@ -208,7 +218,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void extraMenu(gio.menu_model.MenuModel propval)
   {
-    return setExtraMenu(propval);
+    setExtraMenu(propval);
   }
 
   /**
@@ -264,7 +274,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void indent(int propval)
   {
-    return setIndent(propval);
+    setIndent(propval);
   }
 
   /**
@@ -285,7 +295,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
-    return setInputHints(propval);
+    setInputHints(propval);
   }
 
   /**
@@ -310,7 +320,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
-    return setInputPurpose(propval);
+    setInputPurpose(propval);
   }
 
   /** */
@@ -322,7 +332,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /** */
   @property void justification(gtk.types.Justification propval)
   {
-    return setJustification(propval);
+    setJustification(propval);
   }
 
   /**
@@ -353,7 +363,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void leftMargin(int propval)
   {
-    return setLeftMargin(propval);
+    setLeftMargin(propval);
   }
 
   /**
@@ -378,7 +388,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void monospace(bool propval)
   {
-    return setMonospace(propval);
+    setMonospace(propval);
   }
 
   /**
@@ -397,7 +407,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void overwrite(bool propval)
   {
-    return setOverwrite(propval);
+    setOverwrite(propval);
   }
 
   /** */
@@ -409,7 +419,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /** */
   @property void pixelsAboveLines(int propval)
   {
-    return setPixelsAboveLines(propval);
+    setPixelsAboveLines(propval);
   }
 
   /** */
@@ -421,7 +431,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /** */
   @property void pixelsBelowLines(int propval)
   {
-    return setPixelsBelowLines(propval);
+    setPixelsBelowLines(propval);
   }
 
   /** */
@@ -433,7 +443,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /** */
   @property void pixelsInsideWrap(int propval)
   {
-    return setPixelsInsideWrap(propval);
+    setPixelsInsideWrap(propval);
   }
 
   /**
@@ -464,7 +474,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void rightMargin(int propval)
   {
-    return setRightMargin(propval);
+    setRightMargin(propval);
   }
 
   /** */
@@ -476,7 +486,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /** */
   @property void tabs(pango.tab_array.TabArray propval)
   {
-    return setTabs(propval);
+    setTabs(propval);
   }
 
   /**
@@ -507,7 +517,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   @property void topMargin(int propval)
   {
-    return setTopMargin(propval);
+    setTopMargin(propval);
   }
 
   /** */
@@ -519,7 +529,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /** */
   @property void wrapMode(gtk.types.WrapMode propval)
   {
-    return setWrapMode(propval);
+    setWrapMode(propval);
   }
 
   mixin AccessibleTextT!();
@@ -2458,5 +2468,257 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-overwrite", closure, after);
+  }
+}
+
+class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin AccessibleTextGidBuilderT!();
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `acceptsTab` property.
+      Params:
+        propval = Whether Tab will result in a tab character being entered.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptsTab(bool propval)
+  {
+    return setProperty("accepts-tab", propval);
+  }
+
+  /**
+      Set `bottomMargin` property.
+      Params:
+        propval = The bottom margin for text in the text view.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+      Returns: Builder instance for fluent chaining
+  */
+  T bottomMargin(int propval)
+  {
+    return setProperty("bottom-margin", propval);
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The buffer which is displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtk.text_buffer.TextBuffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `cursorVisible` property.
+      Params:
+        propval = If the insertion cursor is shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T cursorVisible(bool propval)
+  {
+    return setProperty("cursor-visible", propval);
+  }
+
+  /** */
+  T editable(bool propval)
+  {
+    return setProperty("editable", propval);
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to the context menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("extra-menu", propval);
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this text_view.
+          
+          See [gtk.immulticontext.IMMulticontext].
+          
+          Setting this to a non-null value overrides the system-wide IM module
+          setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+      Returns: Builder instance for fluent chaining
+  */
+  T imModule(string propval)
+  {
+    return setProperty("im-module", propval);
+  }
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Amount to indent the paragraph, in pixels.
+          
+          A negative value of indent will produce a hanging indentation.
+          That is, the first line will have the full width, and subsequent
+          lines will be indented by the absolute value of indent.
+      Returns: Builder instance for fluent chaining
+  */
+  T indent(int propval)
+  {
+    return setProperty("indent", propval);
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints (beyond `property@Gtk.TextView:input-purpose`)
+          that allow input methods to fine-tune their behaviour.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(gtk.types.InputHints propval)
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setProperty("input-purpose", propval);
+  }
+
+  /** */
+  T justification(gtk.types.Justification propval)
+  {
+    return setProperty("justification", propval);
+  }
+
+  /**
+      Set `leftMargin` property.
+      Params:
+        propval = The default left margin for text in the text view.
+          
+          Tags in the buffer may override the default.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+      Returns: Builder instance for fluent chaining
+  */
+  T leftMargin(int propval)
+  {
+    return setProperty("left-margin", propval);
+  }
+
+  /**
+      Set `monospace` property.
+      Params:
+        propval = Whether text should be displayed in a monospace font.
+          
+          If true, set the .monospace style class on the
+          text view to indicate that a monospace font is desired.
+      Returns: Builder instance for fluent chaining
+  */
+  T monospace(bool propval)
+  {
+    return setProperty("monospace", propval);
+  }
+
+  /**
+      Set `overwrite` property.
+      Params:
+        propval = Whether entered text overwrites existing contents.
+      Returns: Builder instance for fluent chaining
+  */
+  T overwrite(bool propval)
+  {
+    return setProperty("overwrite", propval);
+  }
+
+  /** */
+  T pixelsAboveLines(int propval)
+  {
+    return setProperty("pixels-above-lines", propval);
+  }
+
+  /** */
+  T pixelsBelowLines(int propval)
+  {
+    return setProperty("pixels-below-lines", propval);
+  }
+
+  /** */
+  T pixelsInsideWrap(int propval)
+  {
+    return setProperty("pixels-inside-wrap", propval);
+  }
+
+  /**
+      Set `rightMargin` property.
+      Params:
+        propval = The default right margin for text in the text view.
+          
+          Tags in the buffer may override the default.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+      Returns: Builder instance for fluent chaining
+  */
+  T rightMargin(int propval)
+  {
+    return setProperty("right-margin", propval);
+  }
+
+  /** */
+  T tabs(pango.tab_array.TabArray propval)
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /**
+      Set `topMargin` property.
+      Params:
+        propval = The top margin for text in the text view.
+          
+          Note that this property is confusingly named. In CSS terms,
+          the value set here is padding, and it is applied in addition
+          to the padding from the theme.
+          
+          Don't confuse this property with `property@Gtk.Widget:margin-top`.
+      Returns: Builder instance for fluent chaining
+  */
+  T topMargin(int propval)
+  {
+    return setProperty("top-margin", propval);
+  }
+
+  /** */
+  T wrapMode(gtk.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.text_view.TextView]
+final class TextViewGidBuilder : TextViewGidBuilderImpl!TextViewGidBuilder
+{
+  TextView build()
+  {
+    return new TextView(cast(void*)createGObject(TextView._getGType), No.Take);
   }
 }

@@ -20,6 +20,7 @@ public import gio.mount_operation;
 public import gio.types;
 public import glib.bytes;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -3891,4 +3892,8 @@ template FileT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template FileGidBuilderT()
+{
 }

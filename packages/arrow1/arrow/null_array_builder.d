@@ -6,6 +6,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class NullArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -36,11 +37,33 @@ class NullArrayBuilder : arrow.array_builder.ArrayBuilder
     return this;
   }
 
+  /**
+  Get builder for [arrow.null_array_builder.NullArrayBuilder]
+  Returns: New builder object
+  */
+  static NullArrayBuilderGidBuilder builder()
+  {
+    return new NullArrayBuilderGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowNullArrayBuilder* _cretval;
     _cretval = garrow_null_array_builder_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class NullArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.null_array_builder.NullArrayBuilder]
+final class NullArrayBuilderGidBuilder : NullArrayBuilderGidBuilderImpl!NullArrayBuilderGidBuilder
+{
+  NullArrayBuilder build()
+  {
+    return new NullArrayBuilder(cast(void*)createGObject(NullArrayBuilder._getGType), Yes.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.button_box;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -42,6 +43,15 @@ class ButtonBox : gtk.box.Box
   override ButtonBox self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.button_box.ButtonBox]
+  Returns: New builder object
+  */
+  static ButtonBoxGidBuilder builder()
+  {
+    return new ButtonBoxGidBuilder;
   }
 
   /** */
@@ -156,5 +166,25 @@ class ButtonBox : gtk.box.Box
   void setLayout(gtk.types.ButtonBoxStyle layoutStyle)
   {
     gtk_button_box_set_layout(cast(GtkButtonBox*)this._cPtr, layoutStyle);
+  }
+}
+
+class ButtonBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /** */
+  T layoutStyle(gtk.types.ButtonBoxStyle propval)
+  {
+    return setProperty("layout-style", propval);
+  }
+}
+
+/// Fluent builder for [gtk.button_box.ButtonBox]
+final class ButtonBoxGidBuilder : ButtonBoxGidBuilderImpl!ButtonBoxGidBuilder
+{
+  ButtonBox build()
+  {
+    return new ButtonBox(cast(void*)createGObject(ButtonBox._getGType), No.Take);
   }
 }

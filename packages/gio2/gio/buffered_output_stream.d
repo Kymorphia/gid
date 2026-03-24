@@ -9,6 +9,7 @@ import gio.output_stream;
 import gio.seekable;
 import gio.seekable_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -55,6 +56,15 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   }
 
   /**
+  Get builder for [gio.buffered_output_stream.BufferedOutputStream]
+  Returns: New builder object
+  */
+  static BufferedOutputStreamGidBuilder builder()
+  {
+    return new BufferedOutputStreamGidBuilder;
+  }
+
+  /**
       Get `autoGrow` property.
       Returns: Whether the buffer should automatically grow.
   */
@@ -70,7 +80,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   */
   @property void autoGrow(bool propval)
   {
-    return setAutoGrow(propval);
+    setAutoGrow(propval);
   }
 
   /**
@@ -170,5 +180,42 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   void setBufferSize(size_t size)
   {
     g_buffered_output_stream_set_buffer_size(cast(GBufferedOutputStream*)this._cPtr, size);
+  }
+}
+
+class BufferedOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOutputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
+{
+
+  mixin SeekableGidBuilderT!();
+
+  /**
+      Set `autoGrow` property.
+      Params:
+        propval = Whether the buffer should automatically grow.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoGrow(bool propval)
+  {
+    return setProperty("auto-grow", propval);
+  }
+
+  /**
+      Set `bufferSize` property.
+      Params:
+        propval = The size of the backend buffer, in bytes.
+      Returns: Builder instance for fluent chaining
+  */
+  T bufferSize(uint propval)
+  {
+    return setProperty("buffer-size", propval);
+  }
+}
+
+/// Fluent builder for [gio.buffered_output_stream.BufferedOutputStream]
+final class BufferedOutputStreamGidBuilder : BufferedOutputStreamGidBuilderImpl!BufferedOutputStreamGidBuilder
+{
+  BufferedOutputStream build()
+  {
+    return new BufferedOutputStream(cast(void*)createGObject(BufferedOutputStream._getGType), Yes.Take);
   }
 }

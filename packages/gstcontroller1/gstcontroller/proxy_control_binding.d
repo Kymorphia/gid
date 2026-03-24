@@ -2,6 +2,7 @@
 module gstcontroller.proxy_control_binding;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.control_binding;
 import gst.object;
 import gstcontroller.c.functions;
@@ -40,6 +41,15 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
   }
 
   /**
+  Get builder for [gstcontroller.proxy_control_binding.ProxyControlBinding]
+  Returns: New builder object
+  */
+  static ProxyControlBindingGidBuilder builder()
+  {
+    return new ProxyControlBindingGidBuilder;
+  }
+
+  /**
       #GstProxyControlBinding forwards all access to data or `sync_values()`
       requests from property_name on object to the control binding at
       ref_property_name on ref_object.
@@ -60,5 +70,18 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
     const(char)* _refPropertyName = refPropertyName.toCString(No.Alloc);
     _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, refObject ? cast(GstObject*)refObject._cPtr(No.Dup) : null, _refPropertyName);
     this(_cretval, No.Take);
+  }
+}
+
+class ProxyControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstcontroller.proxy_control_binding.ProxyControlBinding]
+final class ProxyControlBindingGidBuilder : ProxyControlBindingGidBuilderImpl!ProxyControlBindingGidBuilder
+{
+  ProxyControlBinding build()
+  {
+    return new ProxyControlBinding(cast(void*)createGObject(ProxyControlBinding._getGType), No.Take);
   }
 }

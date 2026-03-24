@@ -2,6 +2,7 @@
 module gtk.list_item;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -54,6 +55,15 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.list_item.ListItem]
+  Returns: New builder object
+  */
+  static ListItemGidBuilder builder()
+  {
+    return new ListItemGidBuilder;
+  }
+
+  /**
       Get `accessibleDescription` property.
       Returns: The accessible description to set on the list item.
   */
@@ -69,7 +79,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   @property void accessibleDescription(string propval)
   {
-    return setAccessibleDescription(propval);
+    setAccessibleDescription(propval);
   }
 
   /**
@@ -88,7 +98,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   @property void accessibleLabel(string propval)
   {
-    return setAccessibleLabel(propval);
+    setAccessibleLabel(propval);
   }
 
   /**
@@ -107,7 +117,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   @property void activatable(bool propval)
   {
-    return setActivatable(propval);
+    setActivatable(propval);
   }
 
   /**
@@ -126,7 +136,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -145,7 +155,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   @property void focusable(bool propval)
   {
-    return setFocusable(propval);
+    setFocusable(propval);
   }
 
   /**
@@ -182,7 +192,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   @property void selectable(bool propval)
   {
-    return setSelectable(propval);
+    setSelectable(propval);
   }
 
   /**
@@ -409,5 +419,84 @@ class ListItem : gobject.object.ObjectWrap
   void setSelectable(bool selectable)
   {
     gtk_list_item_set_selectable(cast(GtkListItem*)this._cPtr, selectable);
+  }
+}
+
+class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `accessibleDescription` property.
+      Params:
+        propval = The accessible description to set on the list item.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessibleDescription(string propval)
+  {
+    return setProperty("accessible-description", propval);
+  }
+
+  /**
+      Set `accessibleLabel` property.
+      Params:
+        propval = The accessible label to set on the list item.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessibleLabel(string propval)
+  {
+    return setProperty("accessible-label", propval);
+  }
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = If the item can be activated by the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatable(bool propval)
+  {
+    return setProperty("activatable", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = Widget used for display.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `focusable` property.
+      Params:
+        propval = If the item can be focused with the keyboard.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusable(bool propval)
+  {
+    return setProperty("focusable", propval);
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = If the item can be selected by the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectable(bool propval)
+  {
+    return setProperty("selectable", propval);
+  }
+}
+
+/// Fluent builder for [gtk.list_item.ListItem]
+final class ListItemGidBuilder : ListItemGidBuilderImpl!ListItemGidBuilder
+{
+  ListItem build()
+  {
+    return new ListItem(cast(void*)createGObject(ListItem._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstgl.glfilter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gstgl.c.functions;
@@ -41,6 +42,15 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   override GLFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glfilter.GLFilter]
+  Returns: New builder object
+  */
+  static GLFilterGidBuilder builder()
+  {
+    return new GLFilterGidBuilder;
   }
 
   /**
@@ -110,5 +120,18 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   void renderToTargetWithShader(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.glshader.GLShader shader)
   {
     gst_gl_filter_render_to_target_with_shader(cast(GstGLFilter*)this._cPtr, input ? cast(GstGLMemory*)input._cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output._cPtr(No.Dup) : null, shader ? cast(GstGLShader*)shader._cPtr(No.Dup) : null);
+  }
+}
+
+class GLFilterGidBuilderImpl(T) : gstgl.glbase_filter.GLBaseFilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glfilter.GLFilter]
+final class GLFilterGidBuilder : GLFilterGidBuilderImpl!GLFilterGidBuilder
+{
+  GLFilter build()
+  {
+    return new GLFilter(cast(void*)createGObject(GLFilter._getGType), No.Take);
   }
 }

@@ -13,6 +13,7 @@ import gio.types;
 import glib.error;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,15 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   override DBusInterfaceSkeleton self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]
+  Returns: New builder object
+  */
+  static DBusInterfaceSkeletonGidBuilder builder()
+  {
+    return new DBusInterfaceSkeletonGidBuilder;
   }
 
   /**
@@ -332,5 +342,31 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("g-authorize-method", closure, after);
+  }
+}
+
+class DBusInterfaceSkeletonGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.dbus_interface.DBusInterfaceGidBuilderImpl!T
+{
+
+  mixin DBusInterfaceGidBuilderT!();
+
+  /**
+      Set `gFlags` property.
+      Params:
+        propval = Flags from the #GDBusInterfaceSkeletonFlags enumeration.
+      Returns: Builder instance for fluent chaining
+  */
+  T gFlags(gio.types.DBusInterfaceSkeletonFlags propval)
+  {
+    return setProperty("g-flags", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]
+final class DBusInterfaceSkeletonGidBuilder : DBusInterfaceSkeletonGidBuilderImpl!DBusInterfaceSkeletonGidBuilder
+{
+  DBusInterfaceSkeleton build()
+  {
+    return new DBusInterfaceSkeleton(cast(void*)createGObject(DBusInterfaceSkeleton._getGType), No.Take);
   }
 }

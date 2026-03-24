@@ -4,6 +4,7 @@ module gdk.device;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.cursor;
+import gdk.device_manager;
 import gdk.device_tool;
 import gdk.display;
 import gdk.screen;
@@ -12,6 +13,7 @@ import gdk.types;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -51,6 +53,15 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.device.Device]
+  Returns: New builder object
+  */
+  static DeviceGidBuilder builder()
+  {
+    return new DeviceGidBuilder;
+  }
+
+  /**
       Get `associatedDevice` property.
       Returns: Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
         always come in keyboard/pointer pairs. Other device types will have a null associated device.
@@ -69,6 +80,34 @@ class Device : gobject.object.ObjectWrap
     return getAxes();
   }
 
+  /**
+      Get `deviceManager` property.
+      Returns: The #GdkDeviceManager the #GdkDevice pertains to.
+  */
+  @property gdk.device_manager.DeviceManager deviceManager()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.device_manager.DeviceManager)("device-manager");
+  }
+
+  /**
+      Get `display` property.
+      Returns: The #GdkDisplay the #GdkDevice pertains to.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Get `hasCursor` property.
+      Returns: Whether the device is represented by a cursor on the screen. Devices of type
+        [gdk.types.DeviceType.Master] will have true here.
+  */
+  @property bool hasCursor()
+  {
+    return getHasCursor();
+  }
+
   /** */
   @property gdk.types.InputMode inputMode()
   {
@@ -82,12 +121,50 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
+      Get `inputSource` property.
+      Returns: Source type for the device.
+  */
+  @property gdk.types.InputSource inputSource()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.InputSource)("input-source");
+  }
+
+  /**
       Get `nAxes` property.
       Returns: Number of axes in the device.
   */
   @property uint nAxes()
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-axes");
+  }
+
+  /**
+      Get `name` property.
+      Returns: The device name.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Get `numTouches` property.
+      Returns: The maximal number of concurrent touches on a touch device.
+        Will be 0 if the device is not a touch device or if the number
+        of touches is unknown.
+  */
+  @property uint numTouches()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("num-touches");
+  }
+
+  /**
+      Get `productId` property.
+      Returns: Product ID of this device, see [gdk.device.Device.getProductId].
+  */
+  @property string productId()
+  {
+    return getProductId();
   }
 
   /**
@@ -113,6 +190,24 @@ class Device : gobject.object.ObjectWrap
   @property gdk.device_tool.DeviceTool tool()
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.device_tool.DeviceTool)("tool");
+  }
+
+  /**
+      Get `type` property.
+      Returns: Device role in the device manager.
+  */
+  @property gdk.types.DeviceType type()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.types.DeviceType)("type");
+  }
+
+  /**
+      Get `vendorId` property.
+      Returns: Vendor ID of this device, see [gdk.device.Device.getVendorId].
+  */
+  @property string vendorId()
+  {
+    return getVendorId();
   }
 
   /**
@@ -706,5 +801,137 @@ class Device : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tool-changed", closure, after);
+  }
+}
+
+class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `deviceManager` property.
+      Params:
+        propval = The #GdkDeviceManager the #GdkDevice pertains to.
+      Returns: Builder instance for fluent chaining
+  */
+  T deviceManager(gdk.device_manager.DeviceManager propval)
+  {
+    return setProperty("device-manager", propval);
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The #GdkDisplay the #GdkDevice pertains to.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `hasCursor` property.
+      Params:
+        propval = Whether the device is represented by a cursor on the screen. Devices of type
+          [gdk.types.DeviceType.Master] will have true here.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasCursor(bool propval)
+  {
+    return setProperty("has-cursor", propval);
+  }
+
+  /** */
+  T inputMode(gdk.types.InputMode propval)
+  {
+    return setProperty("input-mode", propval);
+  }
+
+  /**
+      Set `inputSource` property.
+      Params:
+        propval = Source type for the device.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputSource(gdk.types.InputSource propval)
+  {
+    return setProperty("input-source", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The device name.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `numTouches` property.
+      Params:
+        propval = The maximal number of concurrent touches on a touch device.
+          Will be 0 if the device is not a touch device or if the number
+          of touches is unknown.
+      Returns: Builder instance for fluent chaining
+  */
+  T numTouches(uint propval)
+  {
+    return setProperty("num-touches", propval);
+  }
+
+  /**
+      Set `productId` property.
+      Params:
+        propval = Product ID of this device, see [gdk.device.Device.getProductId].
+      Returns: Builder instance for fluent chaining
+  */
+  T productId(string propval)
+  {
+    return setProperty("product-id", propval);
+  }
+
+  /**
+      Set `seat` property.
+      Params:
+        propval = #GdkSeat of this device.
+      Returns: Builder instance for fluent chaining
+  */
+  T seat(gdk.seat.Seat propval)
+  {
+    return setProperty("seat", propval);
+  }
+
+  /**
+      Set `type` property.
+      Params:
+        propval = Device role in the device manager.
+      Returns: Builder instance for fluent chaining
+  */
+  T type(gdk.types.DeviceType propval)
+  {
+    return setProperty("type", propval);
+  }
+
+  /**
+      Set `vendorId` property.
+      Params:
+        propval = Vendor ID of this device, see [gdk.device.Device.getVendorId].
+      Returns: Builder instance for fluent chaining
+  */
+  T vendorId(string propval)
+  {
+    return setProperty("vendor-id", propval);
+  }
+}
+
+/// Fluent builder for [gdk.device.Device]
+final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
+{
+  Device build()
+  {
+    return new Device(cast(void*)createGObject(Device._getGType), No.Take);
   }
 }

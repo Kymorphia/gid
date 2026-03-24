@@ -7,6 +7,7 @@ import glib.bytes;
 import glib.error;
 import glib.uri;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -65,6 +66,45 @@ class WebsocketConnection : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [soup.websocket_connection.WebsocketConnection]
+  Returns: New builder object
+  */
+  static WebsocketConnectionGidBuilder builder()
+  {
+    return new WebsocketConnectionGidBuilder;
+  }
+
+  /**
+      Get `connectionType` property.
+      Returns: The type of connection (client/server).
+  */
+  @property soup.types.WebsocketConnectionType connectionType()
+  {
+    return getConnectionType();
+  }
+
+  /**
+      Get `extensions` property.
+      Returns: List of `class@WebsocketExtension` objects that are active in the connection.
+  */
+  @property void* extensions()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("extensions");
+  }
+
+  /**
+      Get `ioStream` property.
+      Returns: The underlying IO stream the WebSocket is communicating
+        over.
+        
+        The input and output streams must be pollable streams.
+  */
+  @property gio.iostream.IOStream ioStream()
+  {
+    return getIoStream();
+  }
+
+  /**
       Get `keepaliveInterval` property.
       Returns: Interval in seconds on when to send a ping message which will
         serve as a keepalive message.
@@ -86,7 +126,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   @property void keepaliveInterval(uint propval)
   {
-    return setKeepaliveInterval(propval);
+    setKeepaliveInterval(propval);
   }
 
   /**
@@ -109,7 +149,26 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   @property void maxIncomingPayloadSize(ulong propval)
   {
-    return setMaxIncomingPayloadSize(propval);
+    setMaxIncomingPayloadSize(propval);
+  }
+
+  /**
+      Get `origin` property.
+      Returns: The client's Origin.
+  */
+  @property string origin()
+  {
+    return getOrigin();
+  }
+
+  /**
+      Get `protocol` property.
+      Returns: The chosen protocol, or null if a protocol was not agreed
+        upon.
+  */
+  @property string protocol()
+  {
+    return getProtocol();
   }
 
   /**
@@ -119,6 +178,18 @@ class WebsocketConnection : gobject.object.ObjectWrap
   @property soup.types.WebsocketState state()
   {
     return getState();
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The URI of the WebSocket.
+        
+        For servers this represents the address of the WebSocket,
+        and for clients it is the address connected to.
+  */
+  @property glib.uri.Uri uri()
+  {
+    return getUri();
   }
 
   /**
@@ -591,5 +662,118 @@ class WebsocketConnection : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pong", closure, after);
+  }
+}
+
+class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `connectionType` property.
+      Params:
+        propval = The type of connection (client/server).
+      Returns: Builder instance for fluent chaining
+  */
+  T connectionType(soup.types.WebsocketConnectionType propval)
+  {
+    return setProperty("connection-type", propval);
+  }
+
+  /**
+      Set `extensions` property.
+      Params:
+        propval = List of `class@WebsocketExtension` objects that are active in the connection.
+      Returns: Builder instance for fluent chaining
+  */
+  T extensions(void* propval)
+  {
+    return setProperty("extensions", propval);
+  }
+
+  /**
+      Set `ioStream` property.
+      Params:
+        propval = The underlying IO stream the WebSocket is communicating
+          over.
+          
+          The input and output streams must be pollable streams.
+      Returns: Builder instance for fluent chaining
+  */
+  T ioStream(gio.iostream.IOStream propval)
+  {
+    return setProperty("io-stream", propval);
+  }
+
+  /**
+      Set `keepaliveInterval` property.
+      Params:
+        propval = Interval in seconds on when to send a ping message which will
+          serve as a keepalive message.
+          
+          If set to 0 the keepalive message is disabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T keepaliveInterval(uint propval)
+  {
+    return setProperty("keepalive-interval", propval);
+  }
+
+  /**
+      Set `maxIncomingPayloadSize` property.
+      Params:
+        propval = The maximum payload size for incoming packets.
+          
+          The protocol expects or 0 to not limit it.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxIncomingPayloadSize(ulong propval)
+  {
+    return setProperty("max-incoming-payload-size", propval);
+  }
+
+  /**
+      Set `origin` property.
+      Params:
+        propval = The client's Origin.
+      Returns: Builder instance for fluent chaining
+  */
+  T origin(string propval)
+  {
+    return setProperty("origin", propval);
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = The chosen protocol, or null if a protocol was not agreed
+          upon.
+      Returns: Builder instance for fluent chaining
+  */
+  T protocol(string propval)
+  {
+    return setProperty("protocol", propval);
+  }
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The URI of the WebSocket.
+          
+          For servers this represents the address of the WebSocket,
+          and for clients it is the address connected to.
+      Returns: Builder instance for fluent chaining
+  */
+  T uri(glib.uri.Uri propval)
+  {
+    return setProperty("uri", propval);
+  }
+}
+
+/// Fluent builder for [soup.websocket_connection.WebsocketConnection]
+final class WebsocketConnectionGidBuilder : WebsocketConnectionGidBuilderImpl!WebsocketConnectionGidBuilder
+{
+  WebsocketConnection build()
+  {
+    return new WebsocketConnection(cast(void*)createGObject(WebsocketConnection._getGType), Yes.Take);
   }
 }

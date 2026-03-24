@@ -4,6 +4,7 @@ module javascriptcore.value;
 import gid.gid;
 import glib.bytes;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.c.functions;
 import javascriptcore.c.types;
@@ -41,6 +42,24 @@ class Value : gobject.object.ObjectWrap
   override Value self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [javascriptcore.value.Value]
+  Returns: New builder object
+  */
+  static ValueGidBuilder builder()
+  {
+    return new ValueGidBuilder;
+  }
+
+  /**
+      Get `context` property.
+      Returns: The #JSCContext in which the value was created.
+  */
+  @property javascriptcore.context.Context context()
+  {
+    return getContext();
   }
 
   /**
@@ -890,5 +909,29 @@ class Value : gobject.object.ObjectWrap
     _cretval = jsc_value_typed_array_get_type(cast(JSCValue*)this._cPtr);
     javascriptcore.types.TypedArrayType _retval = cast(javascriptcore.types.TypedArrayType)_cretval;
     return _retval;
+  }
+}
+
+class ValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `context` property.
+      Params:
+        propval = The #JSCContext in which the value was created.
+      Returns: Builder instance for fluent chaining
+  */
+  T context(javascriptcore.context.Context propval)
+  {
+    return setProperty("context", propval);
+  }
+}
+
+/// Fluent builder for [javascriptcore.value.Value]
+final class ValueGidBuilder : ValueGidBuilderImpl!ValueGidBuilder
+{
+  Value build()
+  {
+    return new Value(cast(void*)createGObject(Value._getGType), No.Take);
   }
 }

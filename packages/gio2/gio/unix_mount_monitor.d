@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   override UnixMountMonitor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.unix_mount_monitor.UnixMountMonitor]
+  Returns: New builder object
+  */
+  static UnixMountMonitorGidBuilder builder()
+  {
+    return new UnixMountMonitorGidBuilder;
   }
 
   /**
@@ -167,5 +177,18 @@ class UnixMountMonitor : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mounts-changed", closure, after);
+  }
+}
+
+class UnixMountMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.unix_mount_monitor.UnixMountMonitor]
+final class UnixMountMonitorGidBuilder : UnixMountMonitorGidBuilderImpl!UnixMountMonitorGidBuilder
+{
+  UnixMountMonitor build()
+  {
+    return new UnixMountMonitor(cast(void*)createGObject(UnixMountMonitor._getGType), Yes.Take);
   }
 }

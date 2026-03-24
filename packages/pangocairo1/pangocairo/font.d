@@ -4,6 +4,7 @@ module pangocairo.font;
 public import pangocairo.font_iface_proxy;
 import cairo.scaled_font;
 import gid.gid;
+import gobject.gid_builder;
 import pangocairo.c.functions;
 import pangocairo.c.types;
 import pangocairo.types;
@@ -33,4 +34,8 @@ interface Font
           used by font
   */
   cairo.scaled_font.ScaledFont getScaledFont();
+}
+
+interface FontGidBuilderImpl(T)
+{
 }

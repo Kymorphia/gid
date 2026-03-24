@@ -7,6 +7,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.variant;
+import gobject.gid_builder;
 
 /**
     The [gio.remote_action_group.RemoteActionGroup] interface is implemented by [gio.action_group.ActionGroup]
@@ -76,4 +77,8 @@ interface RemoteActionGroup
         platformData = the platform data to send
   */
   void changeActionStateFull(string actionName, glib.variant.Variant value, glib.variant.Variant platformData);
+}
+
+interface RemoteActionGroupGidBuilderImpl(T)
+{
 }

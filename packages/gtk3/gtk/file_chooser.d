@@ -6,6 +6,7 @@ import gid.gid;
 import gio.file;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -1222,4 +1223,54 @@ interface FileChooser
       Returns: Signal ID
   */
   ulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface FileChooserGidBuilderImpl(T)
+{
+
+  /** */
+  T action(gtk.types.FileChooserAction propval);
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+          will offer the user to create new folders.
+      Returns: Builder instance for fluent chaining
+  */
+  T createFolders(bool propval);
+
+  /**
+      Set `doOverwriteConfirmation` property.
+      Params:
+        propval = Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
+          will present an overwrite confirmation dialog if the user
+          selects a file name that already exists.
+      Returns: Builder instance for fluent chaining
+  */
+  T doOverwriteConfirmation(bool propval);
+
+  /** */
+  T extraWidget(gtk.widget.Widget propval);
+
+  /** */
+  T filter(gtk.file_filter.FileFilter propval);
+
+  /** */
+  T localOnly(bool propval);
+
+  /** */
+  T previewWidget(gtk.widget.Widget propval);
+
+  /** */
+  T previewWidgetActive(bool propval);
+
+  /** */
+  T selectMultiple(bool propval);
+
+  /** */
+  T showHidden(bool propval);
+
+  /** */
+  T usePreviewLabel(bool propval);
 }

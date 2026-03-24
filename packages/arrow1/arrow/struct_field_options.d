@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     return this;
   }
 
+  /**
+  Get builder for [arrow.struct_field_options.StructFieldOptions]
+  Returns: New builder object
+  */
+  static StructFieldOptionsGidBuilder builder()
+  {
+    return new StructFieldOptionsGidBuilder;
+  }
+
   /** */
   @property string fieldRef()
   {
@@ -60,5 +70,18 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     garrow_struct_field_options_set_field_ref(cast(GArrowStructFieldOptions*)this._cPtr, _fieldRef, &_err);
     if (_err)
       throw new ErrorWrap(_err);
+  }
+}
+
+class StructFieldOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.struct_field_options.StructFieldOptions]
+final class StructFieldOptionsGidBuilder : StructFieldOptionsGidBuilderImpl!StructFieldOptionsGidBuilder
+{
+  StructFieldOptions build()
+  {
+    return new StructFieldOptions(cast(void*)createGObject(StructFieldOptions._getGType), Yes.Take);
   }
 }

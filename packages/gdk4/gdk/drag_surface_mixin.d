@@ -8,6 +8,7 @@ public import gdk.drag_surface_size;
 public import gdk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 
 /**
     A [gdk.drag_surface.DragSurface] is an interface for surfaces used during DND.
@@ -84,4 +85,8 @@ template DragSurfaceT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("compute-size", closure, after);
   }
+}
+
+template DragSurfaceGidBuilderT()
+{
 }

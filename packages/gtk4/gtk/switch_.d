@@ -3,6 +3,7 @@ module gtk.switch_;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -80,6 +81,15 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+  Get builder for [gtk.switch_.Switch]
+  Returns: New builder object
+  */
+  static SwitchGidBuilder builder()
+  {
+    return new SwitchGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: Whether the [gtk.switch_.Switch] widget is in its on or off state.
   */
@@ -95,7 +105,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -118,7 +128,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void state(bool propval)
   {
-    return setState(propval);
+    setState(propval);
   }
 
   mixin ActionableT!();
@@ -281,5 +291,44 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("state-set", closure, after);
+  }
+}
+
+class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the [gtk.switch_.Switch] widget is in its on or off state.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `state` property.
+      Params:
+        propval = The backend state that is controlled by the switch.
+          
+          See `signal@Gtk.Switch::state-set` for details.
+      Returns: Builder instance for fluent chaining
+  */
+  T state(bool propval)
+  {
+    return setProperty("state", propval);
+  }
+}
+
+/// Fluent builder for [gtk.switch_.Switch]
+final class SwitchGidBuilder : SwitchGidBuilderImpl!SwitchGidBuilder
+{
+  Switch build()
+  {
+    return new Switch(cast(void*)createGObject(Switch._getGType), No.Take);
   }
 }

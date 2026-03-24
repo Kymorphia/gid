@@ -7,6 +7,7 @@ public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 
 /**
     [gio.converter.Converter] is an interface for streaming conversions.
@@ -149,4 +150,8 @@ template ConverterT()
   {
     g_converter_reset(cast(GConverter*)this._cPtr);
   }
+}
+
+template ConverterGidBuilderT()
+{
 }

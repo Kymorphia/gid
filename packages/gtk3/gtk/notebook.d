@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -125,6 +126,15 @@ class Notebook : gtk.container.Container
     return this;
   }
 
+  /**
+  Get builder for [gtk.notebook.Notebook]
+  Returns: New builder object
+  */
+  static NotebookGidBuilder builder()
+  {
+    return new NotebookGidBuilder;
+  }
+
   /** */
   @property bool enablePopup()
   {
@@ -153,7 +163,7 @@ class Notebook : gtk.container.Container
   */
   @property void groupName(string propval)
   {
-    return setGroupName(propval);
+    setGroupName(propval);
   }
 
   /** */
@@ -177,7 +187,7 @@ class Notebook : gtk.container.Container
   /** */
   @property void scrollable(bool propval)
   {
-    return setScrollable(propval);
+    setScrollable(propval);
   }
 
   /** */
@@ -189,7 +199,7 @@ class Notebook : gtk.container.Container
   /** */
   @property void showBorder(bool propval)
   {
-    return setShowBorder(propval);
+    setShowBorder(propval);
   }
 
   /** */
@@ -201,7 +211,7 @@ class Notebook : gtk.container.Container
   /** */
   @property void showTabs(bool propval)
   {
-    return setShowTabs(propval);
+    setShowTabs(propval);
   }
 
   /** */
@@ -213,7 +223,7 @@ class Notebook : gtk.container.Container
   /** */
   @property void tabPos(gtk.types.PositionType propval)
   {
-    return setTabPos(propval);
+    setTabPos(propval);
   }
 
   /**
@@ -1413,5 +1423,66 @@ class Notebook : gtk.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("switch-page", closure, after);
+  }
+}
+
+class NotebookGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+
+  /** */
+  T enablePopup(bool propval)
+  {
+    return setProperty("enable-popup", propval);
+  }
+
+  /**
+      Set `groupName` property.
+      Params:
+        propval = Group name for tab drag and drop.
+      Returns: Builder instance for fluent chaining
+  */
+  T groupName(string propval)
+  {
+    return setProperty("group-name", propval);
+  }
+
+  /** */
+  T page(int propval)
+  {
+    return setProperty("page", propval);
+  }
+
+  /** */
+  T scrollable(bool propval)
+  {
+    return setProperty("scrollable", propval);
+  }
+
+  /** */
+  T showBorder(bool propval)
+  {
+    return setProperty("show-border", propval);
+  }
+
+  /** */
+  T showTabs(bool propval)
+  {
+    return setProperty("show-tabs", propval);
+  }
+
+  /** */
+  T tabPos(gtk.types.PositionType propval)
+  {
+    return setProperty("tab-pos", propval);
+  }
+}
+
+/// Fluent builder for [gtk.notebook.Notebook]
+final class NotebookGidBuilder : NotebookGidBuilderImpl!NotebookGidBuilder
+{
+  Notebook build()
+  {
+    return new Notebook(cast(void*)createGObject(Notebook._getGType), No.Take);
   }
 }

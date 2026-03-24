@@ -2,6 +2,7 @@
 module gtk.notebook_page;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,6 +41,24 @@ class NotebookPage : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.notebook_page.NotebookPage]
+  Returns: New builder object
+  */
+  static NotebookPageGidBuilder builder()
+  {
+    return new NotebookPageGidBuilder;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child for this page.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
       Get `detachable` property.
       Returns: Whether the tab is detachable.
   */
@@ -56,6 +75,15 @@ class NotebookPage : gobject.object.ObjectWrap
   @property void detachable(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("detachable", propval);
+  }
+
+  /**
+      Get `menu` property.
+      Returns: The label widget displayed in the child's menu entry.
+  */
+  @property gtk.widget.Widget menu()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("menu");
   }
 
   /**
@@ -113,6 +141,15 @@ class NotebookPage : gobject.object.ObjectWrap
   @property void reorderable(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("reorderable", propval);
+  }
+
+  /**
+      Get `tab` property.
+      Returns: The tab widget for this page.
+  */
+  @property gtk.widget.Widget tab()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("tab");
   }
 
   /**
@@ -182,5 +219,128 @@ class NotebookPage : gobject.object.ObjectWrap
     _cretval = gtk_notebook_page_get_child(cast(GtkNotebookPage*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child for this page.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `detachable` property.
+      Params:
+        propval = Whether the tab is detachable.
+      Returns: Builder instance for fluent chaining
+  */
+  T detachable(bool propval)
+  {
+    return setProperty("detachable", propval);
+  }
+
+  /**
+      Set `menu` property.
+      Params:
+        propval = The label widget displayed in the child's menu entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T menu(gtk.widget.Widget propval)
+  {
+    return setProperty("menu", propval);
+  }
+
+  /**
+      Set `menuLabel` property.
+      Params:
+        propval = The text of the menu widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuLabel(string propval)
+  {
+    return setProperty("menu-label", propval);
+  }
+
+  /**
+      Set `position` property.
+      Params:
+        propval = The index of the child in the parent.
+      Returns: Builder instance for fluent chaining
+  */
+  T position(int propval)
+  {
+    return setProperty("position", propval);
+  }
+
+  /**
+      Set `reorderable` property.
+      Params:
+        propval = Whether the tab is reorderable by user action.
+      Returns: Builder instance for fluent chaining
+  */
+  T reorderable(bool propval)
+  {
+    return setProperty("reorderable", propval);
+  }
+
+  /**
+      Set `tab` property.
+      Params:
+        propval = The tab widget for this page.
+      Returns: Builder instance for fluent chaining
+  */
+  T tab(gtk.widget.Widget propval)
+  {
+    return setProperty("tab", propval);
+  }
+
+  /**
+      Set `tabExpand` property.
+      Params:
+        propval = Whether to expand the child's tab.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabExpand(bool propval)
+  {
+    return setProperty("tab-expand", propval);
+  }
+
+  /**
+      Set `tabFill` property.
+      Params:
+        propval = Whether the child's tab should fill the allocated area.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabFill(bool propval)
+  {
+    return setProperty("tab-fill", propval);
+  }
+
+  /**
+      Set `tabLabel` property.
+      Params:
+        propval = The text of the tab widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabLabel(string propval)
+  {
+    return setProperty("tab-label", propval);
+  }
+}
+
+/// Fluent builder for [gtk.notebook_page.NotebookPage]
+final class NotebookPageGidBuilder : NotebookPageGidBuilderImpl!NotebookPageGidBuilder
+{
+  NotebookPage build()
+  {
+    return new NotebookPage(cast(void*)createGObject(NotebookPage._getGType), No.Take);
   }
 }

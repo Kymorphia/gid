@@ -7,12 +7,14 @@ public import gio.async_result;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
+public import gio.datagram_based;
 public import gio.tls_certificate;
 public import gio.tls_database;
 public import gio.tls_interaction;
 public import gio.types;
 public import glib.error;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -42,6 +44,16 @@ template DtlsConnectionT()
 {
 
   /**
+      Get `baseSocket` property.
+      Returns: The #GDatagramBased that the connection wraps. Note that this may be any
+        implementation of #GDatagramBased, not just a #GSocket.
+  */
+  @property gio.datagram_based.DatagramBased baseSocket()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.datagram_based.DatagramBased)("base-socket");
+  }
+
+  /**
       Get `certificate` property.
       Returns: The connection's certificate; see
         [gio.dtls_connection.DtlsConnection.setCertificate].
@@ -59,7 +71,7 @@ template DtlsConnectionT()
   */
   @property void certificate(gio.tls_certificate.TlsCertificate propval)
   {
-    return setCertificate(propval);
+    setCertificate(propval);
   }
 
   /**
@@ -117,7 +129,7 @@ template DtlsConnectionT()
   */
   @property void database(gio.tls_database.TlsDatabase propval)
   {
-    return setDatabase(propval);
+    setDatabase(propval);
   }
 
   /**
@@ -140,7 +152,7 @@ template DtlsConnectionT()
   */
   @property void interaction(gio.tls_interaction.TlsInteraction propval)
   {
-    return setInteraction(propval);
+    setInteraction(propval);
   }
 
   /**
@@ -220,7 +232,7 @@ template DtlsConnectionT()
   */
   @property void rehandshakeMode(gio.types.TlsRehandshakeMode propval)
   {
-    return setRehandshakeMode(propval);
+    setRehandshakeMode(propval);
   }
 
   /**
@@ -241,7 +253,7 @@ template DtlsConnectionT()
   */
   @property void requireCloseNotify(bool propval)
   {
-    return setRequireCloseNotify(propval);
+    setRequireCloseNotify(propval);
   }
 
   /**
@@ -930,5 +942,98 @@ template DtlsConnectionT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accept-certificate", closure, after);
+  }
+}
+
+template DtlsConnectionGidBuilderT()
+{
+
+  /**
+      Set `baseSocket` property.
+      Params:
+        propval = The #GDatagramBased that the connection wraps. Note that this may be any
+          implementation of #GDatagramBased, not just a #GSocket.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseSocket(gio.datagram_based.DatagramBased propval)
+  {
+    return setProperty("base-socket", propval);
+  }
+
+  /**
+      Set `certificate` property.
+      Params:
+        propval = The connection's certificate; see
+          [gio.dtls_connection.DtlsConnection.setCertificate].
+      Returns: Builder instance for fluent chaining
+  */
+  T certificate(gio.tls_certificate.TlsCertificate propval)
+  {
+    return setProperty("certificate", propval);
+  }
+
+  /**
+      Set `database` property.
+      Params:
+        propval = The certificate database to use when verifying this TLS connection.
+          If no certificate database is set, then the default database will be
+          used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+          
+          When using a non-default database, #GDtlsConnection must fall back to using
+          the #GTlsDatabase to perform certificate verification using
+          [gio.tls_database.TlsDatabase.verifyChain], which means certificate verification will
+          not be able to make use of TLS session context. This may be less secure.
+          For example, if you create your own #GTlsDatabase that just wraps the
+          default #GTlsDatabase, you might expect that you have not changed anything,
+          but this is not true because you may have altered the behavior of
+          #GDtlsConnection by causing it to use [gio.tls_database.TlsDatabase.verifyChain]. See the
+          documentation of [gio.tls_database.TlsDatabase.verifyChain] for more details on specific
+          security checks that may not be performed. Accordingly, setting a
+          non-default database is discouraged except for specialty applications with
+          unusual security requirements.
+      Returns: Builder instance for fluent chaining
+  */
+  T database(gio.tls_database.TlsDatabase propval)
+  {
+    return setProperty("database", propval);
+  }
+
+  /**
+      Set `interaction` property.
+      Params:
+        propval = A #GTlsInteraction object to be used when the connection or certificate
+          database need to interact with the user. This will be used to prompt the
+          user for passwords where necessary.
+      Returns: Builder instance for fluent chaining
+  */
+  T interaction(gio.tls_interaction.TlsInteraction propval)
+  {
+    return setProperty("interaction", propval);
+  }
+
+  /**
+      Set `rehandshakeMode` property.
+      Params:
+        propval = The rehandshaking mode. See
+          [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: The rehandshake mode is ignored.
+  */
+  T rehandshakeMode(gio.types.TlsRehandshakeMode propval)
+  {
+    return setProperty("rehandshake-mode", propval);
+  }
+
+  /**
+      Set `requireCloseNotify` property.
+      Params:
+        propval = Whether or not proper TLS close notification is required.
+          See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
+      Returns: Builder instance for fluent chaining
+  */
+  T requireCloseNotify(bool propval)
+  {
+    return setProperty("require-close-notify", propval);
   }
 }

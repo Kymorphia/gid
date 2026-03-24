@@ -4,6 +4,7 @@ module gtk.box;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -92,6 +93,15 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
     return this;
   }
 
+  /**
+  Get builder for [gtk.box.Box]
+  Returns: New builder object
+  */
+  static BoxGidBuilder builder()
+  {
+    return new BoxGidBuilder;
+  }
+
   /** */
   @property gtk.types.BaselinePosition baselinePosition()
   {
@@ -101,7 +111,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   /** */
   @property void baselinePosition(gtk.types.BaselinePosition propval)
   {
-    return setBaselinePosition(propval);
+    setBaselinePosition(propval);
   }
 
   /** */
@@ -113,7 +123,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   /** */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /** */
@@ -125,7 +135,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   /** */
   @property void spacing(int propval)
   {
-    return setSpacing(propval);
+    setSpacing(propval);
   }
 
   mixin OrientableT!();
@@ -359,5 +369,38 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   void setSpacing(int spacing)
   {
     gtk_box_set_spacing(cast(GtkBox*)this._cPtr, spacing);
+  }
+}
+
+class BoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setProperty("baseline-position", propval);
+  }
+
+  /** */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /** */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.box.Box]
+final class BoxGidBuilder : BoxGidBuilderImpl!BoxGidBuilder
+{
+  Box build()
+  {
+    return new Box(cast(void*)createGObject(Box._getGType), No.Take);
   }
 }

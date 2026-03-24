@@ -3,6 +3,7 @@ module gst.registry;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.c.functions;
@@ -102,6 +103,15 @@ class Registry : gst.object.ObjectWrap
   override Registry self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.registry.Registry]
+  Returns: New builder object
+  */
+  static RegistryGidBuilder builder()
+  {
+    return new RegistryGidBuilder;
   }
 
   /**
@@ -546,5 +556,18 @@ class Registry : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("plugin-added", closure, after);
+  }
+}
+
+class RegistryGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.registry.Registry]
+final class RegistryGidBuilder : RegistryGidBuilderImpl!RegistryGidBuilder
+{
+  Registry build()
+  {
+    return new Registry(cast(void*)createGObject(Registry._getGType), No.Take);
   }
 }

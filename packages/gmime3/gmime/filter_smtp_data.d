@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter to byte-stuff SMTP DATA.
@@ -39,6 +40,15 @@ class FilterSmtpData : gmime.filter.Filter
   }
 
   /**
+  Get builder for [gmime.filter_smtp_data.FilterSmtpData]
+  Returns: New builder object
+  */
+  static FilterSmtpDataGidBuilder builder()
+  {
+    return new FilterSmtpDataGidBuilder;
+  }
+
+  /**
       Creates a new #GMimeFilterSmtpData filter.
       Returns: a new #GMimeFilterSmtpData filter.
   */
@@ -47,5 +57,18 @@ class FilterSmtpData : gmime.filter.Filter
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_smtp_data_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class FilterSmtpDataGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_smtp_data.FilterSmtpData]
+final class FilterSmtpDataGidBuilder : FilterSmtpDataGidBuilderImpl!FilterSmtpDataGidBuilder
+{
+  FilterSmtpData build()
+  {
+    return new FilterSmtpData(cast(void*)createGObject(FilterSmtpData._getGType), Yes.Take);
   }
 }

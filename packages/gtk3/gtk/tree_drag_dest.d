@@ -3,6 +3,7 @@ module gtk.tree_drag_dest;
 
 public import gtk.tree_drag_dest_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.selection_data;
@@ -48,4 +49,8 @@ interface TreeDragDest
       Returns: true if a drop is possible before dest_path
   */
   bool rowDropPossible(gtk.tree_path.TreePath destPath, gtk.selection_data.SelectionData selectionData);
+}
+
+interface TreeDragDestGidBuilderImpl(T)
+{
 }

@@ -4,6 +4,7 @@ module gtk.grid;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -61,6 +62,15 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
     return this;
   }
 
+  /**
+  Get builder for [gtk.grid.Grid]
+  Returns: New builder object
+  */
+  static GridGidBuilder builder()
+  {
+    return new GridGidBuilder;
+  }
+
   /** */
   @property int baselineRow()
   {
@@ -70,7 +80,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   /** */
   @property void baselineRow(int propval)
   {
-    return setBaselineRow(propval);
+    setBaselineRow(propval);
   }
 
   /** */
@@ -82,7 +92,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   /** */
   @property void columnHomogeneous(bool propval)
   {
-    return setColumnHomogeneous(propval);
+    setColumnHomogeneous(propval);
   }
 
   /** */
@@ -106,7 +116,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   /** */
   @property void rowHomogeneous(bool propval)
   {
-    return setRowHomogeneous(propval);
+    setRowHomogeneous(propval);
   }
 
   /** */
@@ -415,5 +425,50 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   void setRowSpacing(uint spacing)
   {
     gtk_grid_set_row_spacing(cast(GtkGrid*)this._cPtr, spacing);
+  }
+}
+
+class GridGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T baselineRow(int propval)
+  {
+    return setProperty("baseline-row", propval);
+  }
+
+  /** */
+  T columnHomogeneous(bool propval)
+  {
+    return setProperty("column-homogeneous", propval);
+  }
+
+  /** */
+  T columnSpacing(int propval)
+  {
+    return setProperty("column-spacing", propval);
+  }
+
+  /** */
+  T rowHomogeneous(bool propval)
+  {
+    return setProperty("row-homogeneous", propval);
+  }
+
+  /** */
+  T rowSpacing(int propval)
+  {
+    return setProperty("row-spacing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.grid.Grid]
+final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
+{
+  Grid build()
+  {
+    return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);
   }
 }

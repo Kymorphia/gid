@@ -3,6 +3,7 @@ module gst.toc_setter;
 
 public import gst.toc_setter_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.toc;
@@ -56,4 +57,8 @@ interface TocSetter
         toc = a #GstToc to set.
   */
   void setToc(gst.toc.Toc toc = null);
+}
+
+interface TocSetterGidBuilderImpl(T)
+{
 }

@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.struct_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class MapScalar : arrow.base_list_scalar.BaseListScalar
@@ -37,11 +38,33 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.map_scalar.MapScalar]
+  Returns: New builder object
+  */
+  static MapScalarGidBuilder builder()
+  {
+    return new MapScalarGidBuilder;
+  }
+
   /** */
   this(arrow.struct_array.StructArray value)
   {
     GArrowMapScalar* _cretval;
     _cretval = garrow_map_scalar_new(value ? cast(GArrowStructArray*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class MapScalarGidBuilderImpl(T) : arrow.base_list_scalar.BaseListScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.map_scalar.MapScalar]
+final class MapScalarGidBuilder : MapScalarGidBuilderImpl!MapScalarGidBuilder
+{
+  MapScalar build()
+  {
+    return new MapScalar(cast(void*)createGObject(MapScalar._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.bus;
@@ -102,6 +103,15 @@ class Element : gst.object.ObjectWrap
   override Element self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.element.Element]
+  Returns: New builder object
+  */
+  static ElementGidBuilder builder()
+  {
+    return new ElementGidBuilder;
   }
 
   /**
@@ -1714,5 +1724,18 @@ class Element : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pad-removed", closure, after);
+  }
+}
+
+class ElementGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.element.Element]
+final class ElementGidBuilder : ElementGidBuilderImpl!ElementGidBuilder
+{
+  Element build()
+  {
+    return new Element(cast(void*)createGObject(Element._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.tree_selection;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -66,6 +67,15 @@ class TreeSelection : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.tree_selection.TreeSelection]
+  Returns: New builder object
+  */
+  static TreeSelectionGidBuilder builder()
+  {
+    return new TreeSelectionGidBuilder;
+  }
+
+  /**
       Get `mode` property.
       Returns: Selection mode.
         See [gtk.tree_selection.TreeSelection.setMode] for more information on this property.
@@ -83,7 +93,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   @property void mode(gtk.types.SelectionMode propval)
   {
-    return setMode(propval);
+    setMode(propval);
   }
 
   /**
@@ -396,5 +406,30 @@ class TreeSelection : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class TreeSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = Selection mode.
+          See [gtk.tree_selection.TreeSelection.setMode] for more information on this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T mode(gtk.types.SelectionMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_selection.TreeSelection]
+final class TreeSelectionGidBuilder : TreeSelectionGidBuilderImpl!TreeSelectionGidBuilder
+{
+  TreeSelection build()
+  {
+    return new TreeSelection(cast(void*)createGObject(TreeSelection._getGType), No.Take);
   }
 }

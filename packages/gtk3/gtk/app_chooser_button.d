@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.icon;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.app_chooser;
 import gtk.app_chooser_mixin;
@@ -73,6 +74,15 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   }
 
   /**
+  Get builder for [gtk.app_chooser_button.AppChooserButton]
+  Returns: New builder object
+  */
+  static AppChooserButtonGidBuilder builder()
+  {
+    return new AppChooserButtonGidBuilder;
+  }
+
+  /**
       Get `heading` property.
       Returns: The text to show at the top of the dialog that can be
         opened from the button. The string may contain Pango markup.
@@ -90,7 +100,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   */
   @property void heading(string propval)
   {
-    return setHeading(propval);
+    setHeading(propval);
   }
 
   /**
@@ -113,7 +123,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   */
   @property void showDefaultItem(bool propval)
   {
-    return setShowDefaultItem(propval);
+    setShowDefaultItem(propval);
   }
 
   /**
@@ -136,7 +146,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   */
   @property void showDialogItem(bool propval)
   {
-    return setShowDialogItem(propval);
+    setShowDialogItem(propval);
   }
 
   mixin AppChooserT!();
@@ -320,5 +330,58 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("custom-item-activated"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class AppChooserButtonGidBuilderImpl(T) : gtk.combo_box.ComboBoxGidBuilderImpl!T, gtk.app_chooser.AppChooserGidBuilderImpl!T
+{
+
+  mixin AppChooserGidBuilderT!();
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The text to show at the top of the dialog that can be
+          opened from the button. The string may contain Pango markup.
+      Returns: Builder instance for fluent chaining
+  */
+  T heading(string propval)
+  {
+    return setProperty("heading", propval);
+  }
+
+  /**
+      Set `showDefaultItem` property.
+      Params:
+        propval = The #GtkAppChooserButton:show-default-item property determines
+          whether the dropdown menu should show the default application
+          on top for the provided content type.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDefaultItem(bool propval)
+  {
+    return setProperty("show-default-item", propval);
+  }
+
+  /**
+      Set `showDialogItem` property.
+      Params:
+        propval = The #GtkAppChooserButton:show-dialog-item property determines
+          whether the dropdown menu should show an item that triggers
+          a #GtkAppChooserDialog when clicked.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDialogItem(bool propval)
+  {
+    return setProperty("show-dialog-item", propval);
+  }
+}
+
+/// Fluent builder for [gtk.app_chooser_button.AppChooserButton]
+final class AppChooserButtonGidBuilder : AppChooserButtonGidBuilderImpl!AppChooserButtonGidBuilder
+{
+  AppChooserButton build()
+  {
+    return new AppChooserButton(cast(void*)createGObject(AppChooserButton._getGType), No.Take);
   }
 }

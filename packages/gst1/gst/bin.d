@@ -3,6 +3,7 @@ module gst.bin;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.c.functions;
@@ -152,6 +153,15 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   override Bin self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.bin.Bin]
+  Returns: New builder object
+  */
+  static BinGidBuilder builder()
+  {
+    return new BinGidBuilder;
   }
 
   /**
@@ -741,5 +751,50 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("element-removed", closure, after);
+  }
+}
+
+class BinGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.child_proxy.ChildProxyGidBuilderImpl!T
+{
+
+  mixin ChildProxyGidBuilderT!();
+
+  /**
+      Set `asyncHandling` property.
+      Params:
+        propval = If set to true, the bin will handle asynchronous state changes.
+          This should be used only if the bin subclass is modifying the state
+          of its children on its own.
+      Returns: Builder instance for fluent chaining
+  */
+  T asyncHandling(bool propval)
+  {
+    return setProperty("async-handling", propval);
+  }
+
+  /**
+      Set `messageForward` property.
+      Params:
+        propval = Forward all children messages, even those that would normally be filtered by
+          the bin. This can be interesting when one wants to be notified of the EOS
+          state of individual elements, for example.
+          
+          The messages are converted to an ELEMENT message with the bin as the
+          source. The structure of the message is named `GstBinForwarded` and contains
+          a field named `message` that contains the original forwarded #GstMessage.
+      Returns: Builder instance for fluent chaining
+  */
+  T messageForward(bool propval)
+  {
+    return setProperty("message-forward", propval);
+  }
+}
+
+/// Fluent builder for [gst.bin.Bin]
+final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
+{
+  Bin build()
+  {
+    return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);
   }
 }

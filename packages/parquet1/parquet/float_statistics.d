@@ -2,6 +2,7 @@
 module parquet.float_statistics;
 
 import gid.gid;
+import gobject.gid_builder;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
@@ -36,6 +37,15 @@ class FloatStatistics : parquet.statistics.Statistics
     return this;
   }
 
+  /**
+  Get builder for [parquet.float_statistics.FloatStatistics]
+  Returns: New builder object
+  */
+  static FloatStatisticsGidBuilder builder()
+  {
+    return new FloatStatisticsGidBuilder;
+  }
+
   /** */
   float getMax()
   {
@@ -50,5 +60,18 @@ class FloatStatistics : parquet.statistics.Statistics
     float _retval;
     _retval = gparquet_float_statistics_get_min(cast(GParquetFloatStatistics*)this._cPtr);
     return _retval;
+  }
+}
+
+class FloatStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.float_statistics.FloatStatistics]
+final class FloatStatisticsGidBuilder : FloatStatisticsGidBuilderImpl!FloatStatisticsGidBuilder
+{
+  FloatStatistics build()
+  {
+    return new FloatStatistics(cast(void*)createGObject(FloatStatistics._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ public import gtk.color_chooser_iface_proxy;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -148,4 +149,32 @@ interface ColorChooser
       Returns: Signal ID
   */
   ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface ColorChooserGidBuilderImpl(T)
+{
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The ::rgba property contains the currently selected color,
+          as a #GdkRGBA struct. The property can be set to change
+          the current selection programmatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T rgba(gdk.rgba.RGBA propval);
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = When ::use-alpha is true, colors may have alpha (translucency)
+          information. When it is false, the #GdkRGBA struct obtained
+          via the #GtkColorChooser:rgba property will be forced to have
+          alpha == 1.
+          
+          Implementations are expected to show alpha by rendering the color
+          over a non-uniform background (like a checkerboard pattern).
+      Returns: Builder instance for fluent chaining
+  */
+  T useAlpha(bool propval);
 }

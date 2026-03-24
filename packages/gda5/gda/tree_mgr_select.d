@@ -9,6 +9,8 @@ import gda.statement;
 import gda.tree_manager;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class TreeMgrSelect : gda.tree_manager.TreeManager
@@ -40,6 +42,33 @@ class TreeMgrSelect : gda.tree_manager.TreeManager
   }
 
   /**
+  Get builder for [gda.tree_mgr_select.TreeMgrSelect]
+  Returns: New builder object
+  */
+  static TreeMgrSelectGidBuilder builder()
+  {
+    return new TreeMgrSelectGidBuilder;
+  }
+
+  /** */
+  @property gda.connection.Connection connection()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("connection");
+  }
+
+  /** */
+  @property gda.set.Set params()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.set.Set)("params");
+  }
+
+  /** */
+  @property gda.statement.Statement statement()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("statement");
+  }
+
+  /**
       Creates a new #GdaTreeMgrSelect object which will add one tree node for each row in
       the #GdaDataModel resulting from the execution of stmt.
   
@@ -54,5 +83,36 @@ class TreeMgrSelect : gda.tree_manager.TreeManager
     GdaTreeManager* _cretval;
     _cretval = gda_tree_mgr_select_new(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class TreeMgrSelectGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImpl!T
+{
+
+  /** */
+  T connection(gda.connection.Connection propval)
+  {
+    return setProperty("connection", propval);
+  }
+
+  /** */
+  T params(gda.set.Set propval)
+  {
+    return setProperty("params", propval);
+  }
+
+  /** */
+  T statement(gda.statement.Statement propval)
+  {
+    return setProperty("statement", propval);
+  }
+}
+
+/// Fluent builder for [gda.tree_mgr_select.TreeMgrSelect]
+final class TreeMgrSelectGidBuilder : TreeMgrSelectGidBuilderImpl!TreeMgrSelectGidBuilder
+{
+  TreeMgrSelect build()
+  {
+    return new TreeMgrSelect(cast(void*)createGObject(TreeMgrSelect._getGType), Yes.Take);
   }
 }

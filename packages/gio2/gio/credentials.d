@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -71,6 +72,15 @@ class Credentials : gobject.object.ObjectWrap
   override Credentials self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.credentials.Credentials]
+  Returns: New builder object
+  */
+  static CredentialsGidBuilder builder()
+  {
+    return new CredentialsGidBuilder;
   }
 
   /**
@@ -200,5 +210,18 @@ class Credentials : gobject.object.ObjectWrap
     _cretval = g_credentials_to_string(cast(GCredentials*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class CredentialsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.credentials.Credentials]
+final class CredentialsGidBuilder : CredentialsGidBuilderImpl!CredentialsGidBuilder
+{
+  Credentials build()
+  {
+    return new Credentials(cast(void*)createGObject(Credentials._getGType), Yes.Take);
   }
 }

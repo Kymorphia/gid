@@ -10,6 +10,7 @@ import gmime.object;
 import gmime.part;
 import gmime.signature_list;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -41,6 +42,15 @@ class ApplicationPkcs7Mime : gmime.part.Part
   override ApplicationPkcs7Mime self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.application_pkcs7_mime.ApplicationPkcs7Mime]
+  Returns: New builder object
+  */
+  static ApplicationPkcs7MimeGidBuilder builder()
+  {
+    return new ApplicationPkcs7MimeGidBuilder;
   }
 
   /**
@@ -177,5 +187,18 @@ class ApplicationPkcs7Mime : gmime.part.Part
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
     entity = new gmime.object.ObjectWrap(cast(void*)_entity, Yes.Take);
     return _retval;
+  }
+}
+
+class ApplicationPkcs7MimeGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.application_pkcs7_mime.ApplicationPkcs7Mime]
+final class ApplicationPkcs7MimeGidBuilder : ApplicationPkcs7MimeGidBuilderImpl!ApplicationPkcs7MimeGidBuilder
+{
+  ApplicationPkcs7Mime build()
+  {
+    return new ApplicationPkcs7Mime(cast(void*)createGObject(ApplicationPkcs7Mime._getGType), Yes.Take);
   }
 }

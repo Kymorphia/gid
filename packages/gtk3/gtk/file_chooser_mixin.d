@@ -6,6 +6,7 @@ public import gid.gid;
 public import gio.file;
 public import glib.error;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -153,7 +154,7 @@ template FileChooserT()
   /** */
   @property void action(gtk.types.FileChooserAction propval)
   {
-    return setAction(propval);
+    setAction(propval);
   }
 
   /**
@@ -174,7 +175,7 @@ template FileChooserT()
   */
   @property void createFolders(bool propval)
   {
-    return setCreateFolders(propval);
+    setCreateFolders(propval);
   }
 
   /**
@@ -197,7 +198,7 @@ template FileChooserT()
   */
   @property void doOverwriteConfirmation(bool propval)
   {
-    return setDoOverwriteConfirmation(propval);
+    setDoOverwriteConfirmation(propval);
   }
 
   /** */
@@ -209,7 +210,7 @@ template FileChooserT()
   /** */
   @property void extraWidget(gtk.widget.Widget propval)
   {
-    return setExtraWidget(propval);
+    setExtraWidget(propval);
   }
 
   /** */
@@ -221,7 +222,7 @@ template FileChooserT()
   /** */
   @property void filter(gtk.file_filter.FileFilter propval)
   {
-    return setFilter(propval);
+    setFilter(propval);
   }
 
   /** */
@@ -233,7 +234,7 @@ template FileChooserT()
   /** */
   @property void localOnly(bool propval)
   {
-    return setLocalOnly(propval);
+    setLocalOnly(propval);
   }
 
   /** */
@@ -245,7 +246,7 @@ template FileChooserT()
   /** */
   @property void previewWidget(gtk.widget.Widget propval)
   {
-    return setPreviewWidget(propval);
+    setPreviewWidget(propval);
   }
 
   /** */
@@ -257,7 +258,7 @@ template FileChooserT()
   /** */
   @property void previewWidgetActive(bool propval)
   {
-    return setPreviewWidgetActive(propval);
+    setPreviewWidgetActive(propval);
   }
 
   /** */
@@ -269,7 +270,7 @@ template FileChooserT()
   /** */
   @property void selectMultiple(bool propval)
   {
-    return setSelectMultiple(propval);
+    setSelectMultiple(propval);
   }
 
   /** */
@@ -281,7 +282,7 @@ template FileChooserT()
   /** */
   @property void showHidden(bool propval)
   {
-    return setShowHidden(propval);
+    setShowHidden(propval);
   }
 
   /** */
@@ -293,7 +294,7 @@ template FileChooserT()
   /** */
   @property void usePreviewLabel(bool propval)
   {
-    return setUsePreviewLabel(propval);
+    setUsePreviewLabel(propval);
   }
 
   /**
@@ -1726,5 +1727,88 @@ template FileChooserT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update-preview", closure, after);
+  }
+}
+
+template FileChooserGidBuilderT()
+{
+
+  /** */
+  T action(gtk.types.FileChooserAction propval)
+  {
+    return setProperty("action", propval);
+  }
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+          will offer the user to create new folders.
+      Returns: Builder instance for fluent chaining
+  */
+  T createFolders(bool propval)
+  {
+    return setProperty("create-folders", propval);
+  }
+
+  /**
+      Set `doOverwriteConfirmation` property.
+      Params:
+        propval = Whether a file chooser in [gtk.types.FileChooserAction.Save] mode
+          will present an overwrite confirmation dialog if the user
+          selects a file name that already exists.
+      Returns: Builder instance for fluent chaining
+  */
+  T doOverwriteConfirmation(bool propval)
+  {
+    return setProperty("do-overwrite-confirmation", propval);
+  }
+
+  /** */
+  T extraWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("extra-widget", propval);
+  }
+
+  /** */
+  T filter(gtk.file_filter.FileFilter propval)
+  {
+    return setProperty("filter", propval);
+  }
+
+  /** */
+  T localOnly(bool propval)
+  {
+    return setProperty("local-only", propval);
+  }
+
+  /** */
+  T previewWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("preview-widget", propval);
+  }
+
+  /** */
+  T previewWidgetActive(bool propval)
+  {
+    return setProperty("preview-widget-active", propval);
+  }
+
+  /** */
+  T selectMultiple(bool propval)
+  {
+    return setProperty("select-multiple", propval);
+  }
+
+  /** */
+  T showHidden(bool propval)
+  {
+    return setProperty("show-hidden", propval);
+  }
+
+  /** */
+  T usePreviewLabel(bool propval)
+  {
+    return setProperty("use-preview-label", propval);
   }
 }

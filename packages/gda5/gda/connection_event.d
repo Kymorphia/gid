@@ -5,6 +5,7 @@ import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class ConnectionEvent : gobject.object.ObjectWrap
   override ConnectionEvent self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.connection_event.ConnectionEvent]
+  Returns: New builder object
+  */
+  static ConnectionEventGidBuilder builder()
+  {
+    return new ConnectionEventGidBuilder;
   }
 
   /** */
@@ -194,5 +204,24 @@ class ConnectionEvent : gobject.object.ObjectWrap
   {
     const(char)* _sqlstate = sqlstate.toCString(No.Alloc);
     gda_connection_event_set_sqlstate(cast(GdaConnectionEvent*)this._cPtr, _sqlstate);
+  }
+}
+
+class ConnectionEventGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T type(int propval)
+  {
+    return setProperty("type", propval);
+  }
+}
+
+/// Fluent builder for [gda.connection_event.ConnectionEvent]
+final class ConnectionEventGidBuilder : ConnectionEventGidBuilderImpl!ConnectionEventGidBuilder
+{
+  ConnectionEvent build()
+  {
+    return new ConnectionEvent(cast(void*)createGObject(ConnectionEvent._getGType), No.Take);
   }
 }

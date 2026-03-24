@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.list_model;
 import gio.list_model_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -43,6 +44,25 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   override ListStore self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.list_store.ListStore]
+  Returns: New builder object
+  */
+  static ListStoreGidBuilder builder()
+  {
+    return new ListStoreGidBuilder;
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items contained in this list store. Items must be
+        subclasses of #GObject.
+  */
+  @property gobject.types.GType itemType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
 
   /**
@@ -265,5 +285,32 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
     void** _additions = cast(void**)_tmpadditions.ptr;
 
     g_list_store_splice(cast(GListStore*)this._cPtr, position, nRemovals, _additions, _nAdditions);
+  }
+}
+
+class ListStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `itemType` property.
+      Params:
+        propval = The type of items contained in this list store. Items must be
+          subclasses of #GObject.
+      Returns: Builder instance for fluent chaining
+  */
+  T itemType(gobject.types.GType propval)
+  {
+    return setProperty("item-type", propval);
+  }
+}
+
+/// Fluent builder for [gio.list_store.ListStore]
+final class ListStoreGidBuilder : ListStoreGidBuilderImpl!ListStoreGidBuilder
+{
+  ListStore build()
+  {
+    return new ListStore(cast(void*)createGObject(ListStore._getGType), Yes.Take);
   }
 }

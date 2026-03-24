@@ -6,6 +6,7 @@ import gdk.types;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -155,6 +156,15 @@ class GLArea : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.glarea.GLArea]
+  Returns: New builder object
+  */
+  static GLAreaGidBuilder builder()
+  {
+    return new GLAreaGidBuilder;
+  }
+
+  /**
       Get `allowedApis` property.
       Returns: The allowed APIs.
   */
@@ -170,7 +180,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void allowedApis(gdk.types.GLAPI propval)
   {
-    return setAllowedApis(propval);
+    setAllowedApis(propval);
   }
 
   /**
@@ -216,7 +226,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void autoRender(bool propval)
   {
-    return setAutoRender(propval);
+    setAutoRender(propval);
   }
 
   /**
@@ -258,7 +268,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void hasDepthBuffer(bool propval)
   {
-    return setHasDepthBuffer(propval);
+    setHasDepthBuffer(propval);
   }
 
   /**
@@ -279,7 +289,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void hasStencilBuffer(bool propval)
   {
-    return setHasStencilBuffer(propval);
+    setHasStencilBuffer(propval);
   }
 
   /**
@@ -304,7 +314,7 @@ class GLArea : gtk.widget.Widget
   */
   @property void useEs(bool propval)
   {
-    return setUseEs(propval);
+    setUseEs(propval);
   }
 
   /**
@@ -747,5 +757,92 @@ class GLArea : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resize", closure, after);
+  }
+}
+
+class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `allowedApis` property.
+      Params:
+        propval = The allowed APIs.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowedApis(gdk.types.GLAPI propval)
+  {
+    return setProperty("allowed-apis", propval);
+  }
+
+  /**
+      Set `autoRender` property.
+      Params:
+        propval = If set to true the ::render signal will be emitted every time
+          the widget draws.
+          
+          This is the default and is useful if drawing the widget is faster.
+          
+          If set to false the data from previous rendering is kept around and will
+          be used for drawing the widget the next time, unless the window is resized.
+          In order to force a rendering [gtk.glarea.GLArea.queueRender] must be called.
+          This mode is useful when the scene changes seldom, but takes a long time
+          to redraw.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoRender(bool propval)
+  {
+    return setProperty("auto-render", propval);
+  }
+
+  /**
+      Set `hasDepthBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a depth buffer for the
+          target framebuffer.
+          
+          Setting this property will enable GL's depth testing as a side effect. If
+          you don't need depth testing, you should call `glDisable(GL_DEPTH_TEST)`
+          in your `GtkGLArea::render` handler.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasDepthBuffer(bool propval)
+  {
+    return setProperty("has-depth-buffer", propval);
+  }
+
+  /**
+      Set `hasStencilBuffer` property.
+      Params:
+        propval = If set to true the widget will allocate and enable a stencil buffer for the
+          target framebuffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasStencilBuffer(bool propval)
+  {
+    return setProperty("has-stencil-buffer", propval);
+  }
+
+  /**
+      Set `useEs` property.
+      Params:
+        propval = If set to true the widget will try to create a [gdk.glcontext.GLContext] using
+          OpenGL ES instead of OpenGL.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use `property@Gtk.GLArea:allowed-apis`
+  */
+  T useEs(bool propval)
+  {
+    return setProperty("use-es", propval);
+  }
+}
+
+/// Fluent builder for [gtk.glarea.GLArea]
+final class GLAreaGidBuilder : GLAreaGidBuilderImpl!GLAreaGidBuilder
+{
+  GLArea build()
+  {
+    return new GLArea(cast(void*)createGObject(GLArea._getGType), No.Take);
   }
 }

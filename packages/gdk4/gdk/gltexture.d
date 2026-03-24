@@ -14,6 +14,7 @@ import gio.icon_mixin;
 import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 import glib.types;
+import gobject.gid_builder;
 
 /**
     A GdkTexture representing a GL texture object.
@@ -44,6 +45,15 @@ class GLTexture : gdk.texture.Texture
   override GLTexture self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.gltexture.GLTexture]
+  Returns: New builder object
+  */
+  static GLTextureGidBuilder builder()
+  {
+    return new GLTextureGidBuilder;
   }
 
   /**
@@ -92,5 +102,19 @@ class GLTexture : gdk.texture.Texture
   void release()
   {
     gdk_gl_texture_release(cast(GdkGLTexture*)this._cPtr);
+  }
+}
+
+class GLTextureGidBuilderImpl(T) : gdk.texture.TextureGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gdk.gltexture.GLTexture]
+final class GLTextureGidBuilder : GLTextureGidBuilderImpl!GLTextureGidBuilder
+{
+  GLTexture build()
+  {
+    return new GLTexture(cast(void*)createGObject(GLTexture._getGType), Yes.Take);
   }
 }

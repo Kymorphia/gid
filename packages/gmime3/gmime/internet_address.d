@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.format_options;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class InternetAddress : gobject.object.ObjectWrap
   override InternetAddress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.internet_address.InternetAddress]
+  Returns: New builder object
+  */
+  static InternetAddressGidBuilder builder()
+  {
+    return new InternetAddressGidBuilder;
   }
 
   /**
@@ -108,5 +118,18 @@ class InternetAddress : gobject.object.ObjectWrap
     _cretval = internet_address_to_string(cast(GMimeInternetAddress*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, encode);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class InternetAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.internet_address.InternetAddress]
+final class InternetAddressGidBuilder : InternetAddressGidBuilderImpl!InternetAddressGidBuilder
+{
+  InternetAddress build()
+  {
+    return new InternetAddress(cast(void*)createGObject(InternetAddress._getGType), No.Take);
   }
 }

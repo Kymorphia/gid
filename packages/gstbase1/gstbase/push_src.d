@@ -2,6 +2,7 @@
 module gstbase.push_src;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstbase.base_src;
 import gstbase.c.functions;
 import gstbase.c.types;
@@ -54,5 +55,27 @@ class PushSrc : gstbase.base_src.BaseSrc
   override PushSrc self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstbase.push_src.PushSrc]
+  Returns: New builder object
+  */
+  static PushSrcGidBuilder builder()
+  {
+    return new PushSrcGidBuilder;
+  }
+}
+
+class PushSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstbase.push_src.PushSrc]
+final class PushSrcGidBuilder : PushSrcGidBuilderImpl!PushSrcGidBuilder
+{
+  PushSrc build()
+  {
+    return new PushSrc(cast(void*)createGObject(PushSrc._getGType), No.Take);
   }
 }

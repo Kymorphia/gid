@@ -8,6 +8,7 @@ import arrow.numeric_array;
 import arrow.timestamp_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class TimestampArray : arrow.numeric_array.NumericArray
@@ -36,6 +37,15 @@ class TimestampArray : arrow.numeric_array.NumericArray
   override TimestampArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.timestamp_array.TimestampArray]
+  Returns: New builder object
+  */
+  static TimestampArrayGidBuilder builder()
+  {
+    return new TimestampArrayGidBuilder;
   }
 
   /** */
@@ -67,5 +77,18 @@ class TimestampArray : arrow.numeric_array.NumericArray
       _retval = cast(long[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
+  }
+}
+
+class TimestampArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.timestamp_array.TimestampArray]
+final class TimestampArrayGidBuilder : TimestampArrayGidBuilderImpl!TimestampArrayGidBuilder
+{
+  TimestampArray build()
+  {
+    return new TimestampArray(cast(void*)createGObject(TimestampArray._getGType), Yes.Take);
   }
 }

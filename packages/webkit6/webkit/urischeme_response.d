@@ -3,6 +3,7 @@ module webkit.urischeme_response;
 
 import gid.gid;
 import gio.input_stream;
+import gobject.gid_builder;
 import gobject.object;
 import soup.message_headers;
 import webkit.c.functions;
@@ -49,6 +50,15 @@ class URISchemeResponse : gobject.object.ObjectWrap
   override URISchemeResponse self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.urischeme_response.URISchemeResponse]
+  Returns: New builder object
+  */
+  static URISchemeResponseGidBuilder builder()
+  {
+    return new URISchemeResponseGidBuilder;
   }
 
   /**
@@ -105,5 +115,40 @@ class URISchemeResponse : gobject.object.ObjectWrap
   {
     const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
     webkit_uri_scheme_response_set_status(cast(WebKitURISchemeResponse*)this._cPtr, statusCode, _reasonPhrase);
+  }
+}
+
+class URISchemeResponseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `stream` property.
+      Params:
+        propval = The input stream to read from.
+      Returns: Builder instance for fluent chaining
+  */
+  T stream(gio.input_stream.InputStream propval)
+  {
+    return setProperty("stream", propval);
+  }
+
+  /**
+      Set `streamLength` property.
+      Params:
+        propval = The input stream length in bytes, `-1` for unknown length.
+      Returns: Builder instance for fluent chaining
+  */
+  T streamLength(long propval)
+  {
+    return setProperty("stream-length", propval);
+  }
+}
+
+/// Fluent builder for [webkit.urischeme_response.URISchemeResponse]
+final class URISchemeResponseGidBuilder : URISchemeResponseGidBuilderImpl!URISchemeResponseGidBuilder
+{
+  URISchemeResponse build()
+  {
+    return new URISchemeResponse(cast(void*)createGObject(URISchemeResponse._getGType), Yes.Take);
   }
 }

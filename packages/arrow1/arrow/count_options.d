@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class CountOptions : arrow.function_options.FunctionOptions
     return this;
   }
 
+  /**
+  Get builder for [arrow.count_options.CountOptions]
+  Returns: New builder object
+  */
+  static CountOptionsGidBuilder builder()
+  {
+    return new CountOptionsGidBuilder;
+  }
+
   /** */
   @property arrow.types.CountMode mode()
   {
@@ -55,5 +65,24 @@ class CountOptions : arrow.function_options.FunctionOptions
     GArrowCountOptions* _cretval;
     _cretval = garrow_count_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class CountOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /** */
+  T mode(arrow.types.CountMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+}
+
+/// Fluent builder for [arrow.count_options.CountOptions]
+final class CountOptionsGidBuilder : CountOptionsGidBuilderImpl!CountOptionsGidBuilder
+{
+  CountOptions build()
+  {
+    return new CountOptions(cast(void*)createGObject(CountOptions._getGType), Yes.Take);
   }
 }

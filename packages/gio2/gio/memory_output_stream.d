@@ -11,6 +11,7 @@ import gio.seekable;
 import gio.seekable_mixin;
 import gio.types;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -49,12 +50,39 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   }
 
   /**
+  Get builder for [gio.memory_output_stream.MemoryOutputStream]
+  Returns: New builder object
+  */
+  static MemoryOutputStreamGidBuilder builder()
+  {
+    return new MemoryOutputStreamGidBuilder;
+  }
+
+  /**
+      Get `data` property.
+      Returns: Pointer to buffer where data will be written.
+  */
+  @property void* data()
+  {
+    return getData();
+  }
+
+  /**
       Get `dataSize` property.
       Returns: Size of data written to the buffer.
   */
   @property gulong dataSize()
   {
     return gobject.object.ObjectWrap.getProperty!(gulong)("data-size");
+  }
+
+  /**
+      Get `size` property.
+      Returns: Current size of the data buffer.
+  */
+  @property gulong size()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gulong)("size");
   }
 
   mixin PollableOutputStreamT!();
@@ -155,5 +183,43 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   {
     auto _retval = g_memory_output_stream_steal_data(cast(GMemoryOutputStream*)this._cPtr);
     return _retval;
+  }
+}
+
+class MemoryOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBuilderImpl!T, gio.pollable_output_stream.PollableOutputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
+{
+
+  mixin PollableOutputStreamGidBuilderT!();
+  mixin SeekableGidBuilderT!();
+
+  /**
+      Set `data` property.
+      Params:
+        propval = Pointer to buffer where data will be written.
+      Returns: Builder instance for fluent chaining
+  */
+  T data(void* propval)
+  {
+    return setProperty("data", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = Current size of the data buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(gulong propval)
+  {
+    return setProperty("size", propval);
+  }
+}
+
+/// Fluent builder for [gio.memory_output_stream.MemoryOutputStream]
+final class MemoryOutputStreamGidBuilder : MemoryOutputStreamGidBuilderImpl!MemoryOutputStreamGidBuilder
+{
+  MemoryOutputStream build()
+  {
+    return new MemoryOutputStream(cast(void*)createGObject(MemoryOutputStream._getGType), Yes.Take);
   }
 }

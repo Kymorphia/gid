@@ -6,6 +6,7 @@ import gdk.c.types;
 import gdk.texture;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -70,6 +71,64 @@ class Cursor : gobject.object.ObjectWrap
   override Cursor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.cursor.Cursor]
+  Returns: New builder object
+  */
+  static CursorGidBuilder builder()
+  {
+    return new CursorGidBuilder;
+  }
+
+  /**
+      Get `fallback` property.
+      Returns: Cursor to fall back to if this cursor cannot be displayed.
+  */
+  @property gdk.cursor.Cursor fallback()
+  {
+    return getFallback();
+  }
+
+  /**
+      Get `hotspotX` property.
+      Returns: X position of the cursor hotspot in the cursor image.
+  */
+  @property int hotspotX()
+  {
+    return getHotspotX();
+  }
+
+  /**
+      Get `hotspotY` property.
+      Returns: Y position of the cursor hotspot in the cursor image.
+  */
+  @property int hotspotY()
+  {
+    return getHotspotY();
+  }
+
+  /**
+      Get `name` property.
+      Returns: Name of this this cursor.
+        
+        The name will be null if the cursor was created from a texture.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Get `texture` property.
+      Returns: The texture displayed by this cursor.
+        
+        The texture will be null if the cursor was created from a name.
+  */
+  @property gdk.texture.Texture texture()
+  {
+    return getTexture();
   }
 
   /**
@@ -207,5 +266,77 @@ class Cursor : gobject.object.ObjectWrap
     _cretval = gdk_cursor_get_texture(cast(GdkCursor*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `fallback` property.
+      Params:
+        propval = Cursor to fall back to if this cursor cannot be displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T fallback(gdk.cursor.Cursor propval)
+  {
+    return setProperty("fallback", propval);
+  }
+
+  /**
+      Set `hotspotX` property.
+      Params:
+        propval = X position of the cursor hotspot in the cursor image.
+      Returns: Builder instance for fluent chaining
+  */
+  T hotspotX(int propval)
+  {
+    return setProperty("hotspot-x", propval);
+  }
+
+  /**
+      Set `hotspotY` property.
+      Params:
+        propval = Y position of the cursor hotspot in the cursor image.
+      Returns: Builder instance for fluent chaining
+  */
+  T hotspotY(int propval)
+  {
+    return setProperty("hotspot-y", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = Name of this this cursor.
+          
+          The name will be null if the cursor was created from a texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `texture` property.
+      Params:
+        propval = The texture displayed by this cursor.
+          
+          The texture will be null if the cursor was created from a name.
+      Returns: Builder instance for fluent chaining
+  */
+  T texture(gdk.texture.Texture propval)
+  {
+    return setProperty("texture", propval);
+  }
+}
+
+/// Fluent builder for [gdk.cursor.Cursor]
+final class CursorGidBuilder : CursorGidBuilderImpl!CursorGidBuilder
+{
+  Cursor build()
+  {
+    return new Cursor(cast(void*)createGObject(Cursor._getGType), No.Take);
   }
 }

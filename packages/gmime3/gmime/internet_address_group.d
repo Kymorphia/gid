@@ -7,6 +7,7 @@ import gmime.c.types;
 import gmime.internet_address;
 import gmime.internet_address_list;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
   override InternetAddressGroup self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.internet_address_group.InternetAddressGroup]
+  Returns: New builder object
+  */
+  static InternetAddressGroupGidBuilder builder()
+  {
+    return new InternetAddressGroupGidBuilder;
   }
 
   /**
@@ -95,5 +105,18 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
   void setMembers(gmime.internet_address_list.InternetAddressList members)
   {
     internet_address_group_set_members(cast(GMimeInternetAddressGroup*)this._cPtr, members ? cast(GMimeInternetAddressList*)members._cPtr(No.Dup) : null);
+  }
+}
+
+class InternetAddressGroupGidBuilderImpl(T) : gmime.internet_address.InternetAddressGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.internet_address_group.InternetAddressGroup]
+final class InternetAddressGroupGidBuilder : InternetAddressGroupGidBuilderImpl!InternetAddressGroupGidBuilder
+{
+  InternetAddressGroup build()
+  {
+    return new InternetAddressGroup(cast(void*)createGObject(InternetAddressGroup._getGType), Yes.Take);
   }
 }

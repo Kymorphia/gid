@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class EqualOptions : gobject.object.ObjectWrap
   override EqualOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.equal_options.EqualOptions]
+  Returns: New builder object
+  */
+  static EqualOptionsGidBuilder builder()
+  {
+    return new EqualOptionsGidBuilder;
   }
 
   /**
@@ -109,5 +119,52 @@ class EqualOptions : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)garrow_equal_options_is_approx(cast(GArrowEqualOptions*)this._cPtr);
     return _retval;
+  }
+}
+
+class EqualOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `absoluteTolerance` property.
+      Params:
+        propval = The absolute tolerance for approximate comparison of
+          floating-point values.
+      Returns: Builder instance for fluent chaining
+  */
+  T absoluteTolerance(double propval)
+  {
+    return setProperty("absolute-tolerance", propval);
+  }
+
+  /**
+      Set `approx` property.
+      Params:
+        propval = Whether or not approximate comparison is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T approx(bool propval)
+  {
+    return setProperty("approx", propval);
+  }
+
+  /**
+      Set `nansEqual` property.
+      Params:
+        propval = Whether or not NaNs are considered equal.
+      Returns: Builder instance for fluent chaining
+  */
+  T nansEqual(bool propval)
+  {
+    return setProperty("nans-equal", propval);
+  }
+}
+
+/// Fluent builder for [arrow.equal_options.EqualOptions]
+final class EqualOptionsGidBuilder : EqualOptionsGidBuilderImpl!EqualOptionsGidBuilder
+{
+  EqualOptions build()
+  {
+    return new EqualOptions(cast(void*)createGObject(EqualOptions._getGType), Yes.Take);
   }
 }

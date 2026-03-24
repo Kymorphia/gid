@@ -12,6 +12,7 @@ import gdk.types;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,24 @@ class Seat : gobject.object.ObjectWrap
   override Seat self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.seat.Seat]
+  Returns: New builder object
+  */
+  static SeatGidBuilder builder()
+  {
+    return new SeatGidBuilder;
+  }
+
+  /**
+      Get `display` property.
+      Returns: #GdkDisplay of this seat.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   /**
@@ -362,5 +381,29 @@ class Seat : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tool-removed", closure, after);
+  }
+}
+
+class SeatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = #GdkDisplay of this seat.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.seat.Seat]
+final class SeatGidBuilder : SeatGidBuilderImpl!SeatGidBuilder
+{
+  Seat build()
+  {
+    return new Seat(cast(void*)createGObject(Seat._getGType), No.Take);
   }
 }

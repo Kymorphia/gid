@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.preferences_group;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -62,6 +63,15 @@ class PreferencesPage : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.preferences_page.PreferencesPage]
+  Returns: New builder object
+  */
+  static PreferencesPageGidBuilder builder()
+  {
+    return new PreferencesPageGidBuilder;
+  }
+
+  /**
       Get `description` property.
       Returns: The description to be displayed at the top of the page.
   */
@@ -77,7 +87,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   @property void description(string propval)
   {
-    return setDescription(propval);
+    setDescription(propval);
   }
 
   /**
@@ -96,7 +106,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -115,7 +125,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   override @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /**
@@ -134,7 +144,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -153,7 +163,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -315,5 +325,74 @@ class PreferencesPage : gtk.widget.Widget
   void setUseUnderline(bool useUnderline)
   {
     adw_preferences_page_set_use_underline(cast(AdwPreferencesPage*)this._cPtr, useUnderline);
+  }
+}
+
+class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `description` property.
+      Params:
+        propval = The description to be displayed at the top of the page.
+      Returns: Builder instance for fluent chaining
+  */
+  T description(string propval)
+  {
+    return setProperty("description", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this page.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of this page.
+      Returns: Builder instance for fluent chaining
+  */
+  override T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this page.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an embedded underline in the title indicates a mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [adw.preferences_page.PreferencesPage]
+final class PreferencesPageGidBuilder : PreferencesPageGidBuilderImpl!PreferencesPageGidBuilder
+{
+  PreferencesPage build()
+  {
+    return new PreferencesPage(cast(void*)createGObject(PreferencesPage._getGType), No.Take);
   }
 }

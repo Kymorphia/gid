@@ -2,6 +2,7 @@
 module javascriptcore.virtual_machine;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.c.functions;
 import javascriptcore.c.types;
@@ -44,6 +45,15 @@ class VirtualMachine : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [javascriptcore.virtual_machine.VirtualMachine]
+  Returns: New builder object
+  */
+  static VirtualMachineGidBuilder builder()
+  {
+    return new VirtualMachineGidBuilder;
+  }
+
+  /**
       Create a new #JSCVirtualMachine.
       Returns: the newly created #JSCVirtualMachine.
   */
@@ -52,5 +62,18 @@ class VirtualMachine : gobject.object.ObjectWrap
     JSCVirtualMachine* _cretval;
     _cretval = jsc_virtual_machine_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class VirtualMachineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [javascriptcore.virtual_machine.VirtualMachine]
+final class VirtualMachineGidBuilder : VirtualMachineGidBuilderImpl!VirtualMachineGidBuilder
+{
+  VirtualMachine build()
+  {
+    return new VirtualMachine(cast(void*)createGObject(VirtualMachine._getGType), Yes.Take);
   }
 }

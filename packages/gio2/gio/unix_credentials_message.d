@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.credentials;
 import gio.socket_control_message;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -59,6 +60,24 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /**
+  Get builder for [gio.unix_credentials_message.UnixCredentialsMessage]
+  Returns: New builder object
+  */
+  static UnixCredentialsMessageGidBuilder builder()
+  {
+    return new UnixCredentialsMessageGidBuilder;
+  }
+
+  /**
+      Get `credentials` property.
+      Returns: The credentials stored in the message.
+  */
+  @property gio.credentials.Credentials credentials()
+  {
+    return getCredentials();
+  }
+
+  /**
       Creates a new #GUnixCredentialsMessage with credentials matching the current processes.
       Returns: a new #GUnixCredentialsMessage
   */
@@ -105,5 +124,29 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
     _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class UnixCredentialsMessageGidBuilderImpl(T) : gio.socket_control_message.SocketControlMessageGidBuilderImpl!T
+{
+
+  /**
+      Set `credentials` property.
+      Params:
+        propval = The credentials stored in the message.
+      Returns: Builder instance for fluent chaining
+  */
+  T credentials(gio.credentials.Credentials propval)
+  {
+    return setProperty("credentials", propval);
+  }
+}
+
+/// Fluent builder for [gio.unix_credentials_message.UnixCredentialsMessage]
+final class UnixCredentialsMessageGidBuilder : UnixCredentialsMessageGidBuilderImpl!UnixCredentialsMessageGidBuilder
+{
+  UnixCredentialsMessage build()
+  {
+    return new UnixCredentialsMessage(cast(void*)createGObject(UnixCredentialsMessage._getGType), Yes.Take);
   }
 }

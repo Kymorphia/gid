@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class VarianceOptions : arrow.function_options.FunctionOptions
   override VarianceOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.variance_options.VarianceOptions]
+  Returns: New builder object
+  */
+  static VarianceOptionsGidBuilder builder()
+  {
+    return new VarianceOptionsGidBuilder;
   }
 
   /**
@@ -100,5 +110,51 @@ class VarianceOptions : arrow.function_options.FunctionOptions
     GArrowVarianceOptions* _cretval;
     _cretval = garrow_variance_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class VarianceOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `ddof` property.
+      Params:
+        propval = The Delta Degrees of Freedom (ddof) to be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T ddof(int propval)
+  {
+    return setProperty("ddof", propval);
+  }
+
+  /**
+      Set `minCount` property.
+      Params:
+        propval = If less than this many non-null values are observed, emit null.
+      Returns: Builder instance for fluent chaining
+  */
+  T minCount(uint propval)
+  {
+    return setProperty("min-count", propval);
+  }
+
+  /**
+      Set `skipNulls` property.
+      Params:
+        propval = Whether NULLs are skipped or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T skipNulls(bool propval)
+  {
+    return setProperty("skip-nulls", propval);
+  }
+}
+
+/// Fluent builder for [arrow.variance_options.VarianceOptions]
+final class VarianceOptionsGidBuilder : VarianceOptionsGidBuilderImpl!VarianceOptionsGidBuilder
+{
+  VarianceOptions build()
+  {
+    return new VarianceOptions(cast(void*)createGObject(VarianceOptions._getGType), Yes.Take);
   }
 }

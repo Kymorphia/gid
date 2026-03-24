@@ -5,6 +5,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,5 +35,33 @@ class ServerAuthHandler : gobject.object.ObjectWrap
   override ServerAuthHandler self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.server_auth_handler.ServerAuthHandler]
+  Returns: New builder object
+  */
+  static ServerAuthHandlerGidBuilder builder()
+  {
+    return new ServerAuthHandlerGidBuilder;
+  }
+}
+
+class ServerAuthHandlerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T handler(void* propval)
+  {
+    return setProperty("handler", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.server_auth_handler.ServerAuthHandler]
+final class ServerAuthHandlerGidBuilder : ServerAuthHandlerGidBuilderImpl!ServerAuthHandlerGidBuilder
+{
+  ServerAuthHandler build()
+  {
+    return new ServerAuthHandler(cast(void*)createGObject(ServerAuthHandler._getGType), No.Take);
   }
 }

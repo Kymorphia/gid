@@ -2,6 +2,7 @@
 module gstgl.glupload;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.buffer;
 import gst.caps;
 import gst.object;
@@ -43,6 +44,15 @@ class GLUpload : gst.object.ObjectWrap
   override GLUpload self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glupload.GLUpload]
+  Returns: New builder object
+  */
+  static GLUploadGidBuilder builder()
+  {
+    return new GLUploadGidBuilder;
   }
 
   /** */
@@ -148,5 +158,18 @@ class GLUpload : gst.object.ObjectWrap
     _cretval = gst_gl_upload_transform_caps(cast(GstGLUpload*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class GLUploadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glupload.GLUpload]
+final class GLUploadGidBuilder : GLUploadGidBuilderImpl!GLUploadGidBuilder
+{
+  GLUpload build()
+  {
+    return new GLUpload(cast(void*)createGObject(GLUpload._getGType), Yes.Take);
   }
 }

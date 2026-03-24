@@ -4,6 +4,7 @@ module gstcontroller.timed_value_control_source;
 import gid.gid;
 import glib.sequence_iter;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gst.control_source;
 import gst.types;
 import gstcontroller.c.functions;
@@ -45,6 +46,15 @@ class TimedValueControlSource : gst.control_source.ControlSource
   override TimedValueControlSource self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstcontroller.timed_value_control_source.TimedValueControlSource]
+  Returns: New builder object
+  */
+  static TimedValueControlSourceGidBuilder builder()
+  {
+    return new TimedValueControlSourceGidBuilder;
   }
 
   /**
@@ -273,5 +283,18 @@ class TimedValueControlSource : gst.control_source.ControlSource
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-removed", closure, after);
+  }
+}
+
+class TimedValueControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstcontroller.timed_value_control_source.TimedValueControlSource]
+final class TimedValueControlSourceGidBuilder : TimedValueControlSourceGidBuilderImpl!TimedValueControlSourceGidBuilder
+{
+  TimedValueControlSource build()
+  {
+    return new TimedValueControlSource(cast(void*)createGObject(TimedValueControlSource._getGType), No.Take);
   }
 }

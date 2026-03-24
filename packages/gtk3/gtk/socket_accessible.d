@@ -4,6 +4,7 @@ module gtk.socket_accessible;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -38,10 +39,33 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
     return this;
   }
 
+  /**
+  Get builder for [gtk.socket_accessible.SocketAccessible]
+  Returns: New builder object
+  */
+  static SocketAccessibleGidBuilder builder()
+  {
+    return new SocketAccessibleGidBuilder;
+  }
+
   /** */
   void embed(string path)
   {
     char* _path = path.toCString(No.Alloc);
     gtk_socket_accessible_embed(cast(GtkSocketAccessible*)this._cPtr, _path);
+  }
+}
+
+class SocketAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.socket_accessible.SocketAccessible]
+final class SocketAccessibleGidBuilder : SocketAccessibleGidBuilderImpl!SocketAccessibleGidBuilder
+{
+  SocketAccessible build()
+  {
+    return new SocketAccessible(cast(void*)createGObject(SocketAccessible._getGType), No.Take);
   }
 }

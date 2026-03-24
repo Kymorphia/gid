@@ -2,6 +2,7 @@
 module gstgl.glbase_src;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstbase.push_src;
 import gstgl.c.functions;
@@ -42,6 +43,15 @@ class GLBaseSrc : gstbase.push_src.PushSrc
     return this;
   }
 
+  /**
+  Get builder for [gstgl.glbase_src.GLBaseSrc]
+  Returns: New builder object
+  */
+  static GLBaseSrcGidBuilder builder()
+  {
+    return new GLBaseSrcGidBuilder;
+  }
+
   /** */
   @property long timestampOffset()
   {
@@ -52,5 +62,24 @@ class GLBaseSrc : gstbase.push_src.PushSrc
   @property void timestampOffset(long propval)
   {
     gobject.object.ObjectWrap.setProperty!(long)("timestamp-offset", propval);
+  }
+}
+
+class GLBaseSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T
+{
+
+  /** */
+  T timestampOffset(long propval)
+  {
+    return setProperty("timestamp-offset", propval);
+  }
+}
+
+/// Fluent builder for [gstgl.glbase_src.GLBaseSrc]
+final class GLBaseSrcGidBuilder : GLBaseSrcGidBuilderImpl!GLBaseSrcGidBuilder
+{
+  GLBaseSrc build()
+  {
+    return new GLBaseSrc(cast(void*)createGObject(GLBaseSrc._getGType), No.Take);
   }
 }

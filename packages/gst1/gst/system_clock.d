@@ -2,6 +2,7 @@
 module gst.system_clock;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -45,6 +46,15 @@ class SystemClock : gst.clock.Clock
   override SystemClock self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.system_clock.SystemClock]
+  Returns: New builder object
+  */
+  static SystemClockGidBuilder builder()
+  {
+    return new SystemClockGidBuilder;
   }
 
   /** */
@@ -91,5 +101,24 @@ class SystemClock : gst.clock.Clock
   static void setDefault(gst.clock.Clock newClock = null)
   {
     gst_system_clock_set_default(newClock ? cast(GstClock*)newClock._cPtr(No.Dup) : null);
+  }
+}
+
+class SystemClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
+{
+
+  /** */
+  T clockType(gst.types.ClockType propval)
+  {
+    return setProperty("clock-type", propval);
+  }
+}
+
+/// Fluent builder for [gst.system_clock.SystemClock]
+final class SystemClockGidBuilder : SystemClockGidBuilderImpl!SystemClockGidBuilder
+{
+  SystemClock build()
+  {
+    return new SystemClock(cast(void*)createGObject(SystemClock._getGType), No.Take);
   }
 }

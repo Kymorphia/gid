@@ -7,6 +7,7 @@ import arrow.extension_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   override ExtensionDataTypeRegistry self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
+  Returns: New builder object
+  */
+  static ExtensionDataTypeRegistryGidBuilder builder()
+  {
+    return new ExtensionDataTypeRegistryGidBuilder;
   }
 
   /** */
@@ -93,5 +103,24 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ExtensionDataTypeRegistryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T registry(void* propval)
+  {
+    return setProperty("registry", propval);
+  }
+}
+
+/// Fluent builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
+final class ExtensionDataTypeRegistryGidBuilder : ExtensionDataTypeRegistryGidBuilderImpl!ExtensionDataTypeRegistryGidBuilder
+{
+  ExtensionDataTypeRegistry build()
+  {
+    return new ExtensionDataTypeRegistry(cast(void*)createGObject(ExtensionDataTypeRegistry._getGType), No.Take);
   }
 }

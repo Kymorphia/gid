@@ -17,6 +17,7 @@ import gio.output_stream;
 import gio.types;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -182,6 +183,103 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   override Pixbuf self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdkpixbuf.pixbuf.Pixbuf]
+  Returns: New builder object
+  */
+  static PixbufGidBuilder builder()
+  {
+    return new PixbufGidBuilder;
+  }
+
+  /**
+      Get `bitsPerSample` property.
+      Returns: The number of bits per sample.
+        
+        Currently only 8 bit per sample are supported.
+  */
+  @property int bitsPerSample()
+  {
+    return getBitsPerSample();
+  }
+
+  /**
+      Get `colorspace` property.
+      Returns: The color space of the pixbuf.
+        
+        Currently, only [gdkpixbuf.types.Colorspace.Rgb] is supported.
+  */
+  @property gdkpixbuf.types.Colorspace colorspace()
+  {
+    return getColorspace();
+  }
+
+  /**
+      Get `hasAlpha` property.
+      Returns: Whether the pixbuf has an alpha channel.
+  */
+  @property bool hasAlpha()
+  {
+    return getHasAlpha();
+  }
+
+  /**
+      Get `height` property.
+      Returns: The number of rows of the pixbuf.
+  */
+  @property int height()
+  {
+    return getHeight();
+  }
+
+  /**
+      Get `nChannels` property.
+      Returns: The number of samples per pixel.
+        
+        Currently, only 3 or 4 samples per pixel are supported.
+  */
+  @property int nChannels()
+  {
+    return getNChannels();
+  }
+
+  /** */
+  @property glib.bytes.Bytes pixelBytes()
+  {
+    return gobject.object.ObjectWrap.getProperty!(glib.bytes.Bytes)("pixel-bytes");
+  }
+
+  /**
+      Get `pixels` property.
+      Returns: A pointer to the pixel data of the pixbuf.
+  */
+  @property void* pixels()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("pixels");
+  }
+
+  /**
+      Get `rowstride` property.
+      Returns: The number of bytes between the start of a row and
+        the start of the next row.
+        
+        This number must (obviously) be at least as large as the
+        width of the pixbuf.
+  */
+  @property int rowstride()
+  {
+    return getRowstride();
+  }
+
+  /**
+      Get `width` property.
+      Returns: The number of columns of the pixbuf.
+  */
+  @property int width()
+  {
+    return getWidth();
   }
 
   mixin IconT!();
@@ -1641,5 +1739,125 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     const(char)* _value = value.toCString(No.Alloc);
     _retval = cast(bool)gdk_pixbuf_set_option(cast(GdkPixbuf*)this._cPtr, _key, _value);
     return _retval;
+  }
+}
+
+class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T, gio.loadable_icon.LoadableIconGidBuilderImpl!T
+{
+
+  mixin IconGidBuilderT!();
+  mixin LoadableIconGidBuilderT!();
+
+  /**
+      Set `bitsPerSample` property.
+      Params:
+        propval = The number of bits per sample.
+          
+          Currently only 8 bit per sample are supported.
+      Returns: Builder instance for fluent chaining
+  */
+  T bitsPerSample(int propval)
+  {
+    return setProperty("bits-per-sample", propval);
+  }
+
+  /**
+      Set `colorspace` property.
+      Params:
+        propval = The color space of the pixbuf.
+          
+          Currently, only [gdkpixbuf.types.Colorspace.Rgb] is supported.
+      Returns: Builder instance for fluent chaining
+  */
+  T colorspace(gdkpixbuf.types.Colorspace propval)
+  {
+    return setProperty("colorspace", propval);
+  }
+
+  /**
+      Set `hasAlpha` property.
+      Params:
+        propval = Whether the pixbuf has an alpha channel.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasAlpha(bool propval)
+  {
+    return setProperty("has-alpha", propval);
+  }
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The number of rows of the pixbuf.
+      Returns: Builder instance for fluent chaining
+  */
+  T height(int propval)
+  {
+    return setProperty("height", propval);
+  }
+
+  /**
+      Set `nChannels` property.
+      Params:
+        propval = The number of samples per pixel.
+          
+          Currently, only 3 or 4 samples per pixel are supported.
+      Returns: Builder instance for fluent chaining
+  */
+  T nChannels(int propval)
+  {
+    return setProperty("n-channels", propval);
+  }
+
+  /** */
+  T pixelBytes(glib.bytes.Bytes propval)
+  {
+    return setProperty("pixel-bytes", propval);
+  }
+
+  /**
+      Set `pixels` property.
+      Params:
+        propval = A pointer to the pixel data of the pixbuf.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixels(void* propval)
+  {
+    return setProperty("pixels", propval);
+  }
+
+  /**
+      Set `rowstride` property.
+      Params:
+        propval = The number of bytes between the start of a row and
+          the start of the next row.
+          
+          This number must (obviously) be at least as large as the
+          width of the pixbuf.
+      Returns: Builder instance for fluent chaining
+  */
+  T rowstride(int propval)
+  {
+    return setProperty("rowstride", propval);
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The number of columns of the pixbuf.
+      Returns: Builder instance for fluent chaining
+  */
+  T width(int propval)
+  {
+    return setProperty("width", propval);
+  }
+}
+
+/// Fluent builder for [gdkpixbuf.pixbuf.Pixbuf]
+final class PixbufGidBuilder : PixbufGidBuilderImpl!PixbufGidBuilder
+{
+  Pixbuf build()
+  {
+    return new Pixbuf(cast(void*)createGObject(Pixbuf._getGType), Yes.Take);
   }
 }

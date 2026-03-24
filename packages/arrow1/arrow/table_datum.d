@@ -7,6 +7,8 @@ import arrow.datum;
 import arrow.table;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class TableDatum : arrow.datum.Datum
@@ -37,11 +39,45 @@ class TableDatum : arrow.datum.Datum
     return this;
   }
 
+  /**
+  Get builder for [arrow.table_datum.TableDatum]
+  Returns: New builder object
+  */
+  static TableDatumGidBuilder builder()
+  {
+    return new TableDatumGidBuilder;
+  }
+
+  /** */
+  @property arrow.table.Table value()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.table.Table)("value");
+  }
+
   /** */
   this(arrow.table.Table value)
   {
     GArrowTableDatum* _cretval;
     _cretval = garrow_table_datum_new(value ? cast(GArrowTable*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class TableDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
+{
+
+  /** */
+  T value(arrow.table.Table propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.table_datum.TableDatum]
+final class TableDatumGidBuilder : TableDatumGidBuilderImpl!TableDatumGidBuilder
+{
+  TableDatum build()
+  {
+    return new TableDatum(cast(void*)createGObject(TableDatum._getGType), Yes.Take);
   }
 }

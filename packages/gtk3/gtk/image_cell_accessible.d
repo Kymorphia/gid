@@ -10,6 +10,7 @@ import atk.image_mixin;
 import atk.table_cell;
 import atk.table_cell_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.renderer_cell_accessible;
@@ -44,5 +45,29 @@ class ImageCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible,
     return this;
   }
 
+  /**
+  Get builder for [gtk.image_cell_accessible.ImageCellAccessible]
+  Returns: New builder object
+  */
+  static ImageCellAccessibleGidBuilder builder()
+  {
+    return new ImageCellAccessibleGidBuilder;
+  }
+
   mixin ImageT!();
+}
+
+class ImageCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.RendererCellAccessibleGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
+{
+
+  mixin ImageGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.image_cell_accessible.ImageCellAccessible]
+final class ImageCellAccessibleGidBuilder : ImageCellAccessibleGidBuilderImpl!ImageCellAccessibleGidBuilder
+{
+  ImageCellAccessible build()
+  {
+    return new ImageCellAccessible(cast(void*)createGObject(ImageCellAccessible._getGType), No.Take);
+  }
 }

@@ -2,6 +2,7 @@
 module gstcontroller.direct_control_binding;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.control_binding;
 import gst.control_source;
@@ -44,6 +45,21 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   override DirectControlBinding self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstcontroller.direct_control_binding.DirectControlBinding]
+  Returns: New builder object
+  */
+  static DirectControlBindingGidBuilder builder()
+  {
+    return new DirectControlBindingGidBuilder;
+  }
+
+  /** */
+  @property bool absolute()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("absolute");
   }
 
   /** */
@@ -95,5 +111,30 @@ class DirectControlBinding : gst.control_binding.ControlBinding
     _cretval = gst_direct_control_binding_new_absolute(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class DirectControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGidBuilderImpl!T
+{
+
+  /** */
+  T absolute(bool propval)
+  {
+    return setProperty("absolute", propval);
+  }
+
+  /** */
+  T controlSource(gst.control_source.ControlSource propval)
+  {
+    return setProperty("control-source", propval);
+  }
+}
+
+/// Fluent builder for [gstcontroller.direct_control_binding.DirectControlBinding]
+final class DirectControlBindingGidBuilder : DirectControlBindingGidBuilderImpl!DirectControlBindingGidBuilder
+{
+  DirectControlBinding build()
+  {
+    return new DirectControlBinding(cast(void*)createGObject(DirectControlBinding._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.file_system;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class S3FileSystem : arrow.file_system.FileSystem
@@ -34,5 +35,27 @@ class S3FileSystem : arrow.file_system.FileSystem
   override S3FileSystem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.s3_file_system.S3FileSystem]
+  Returns: New builder object
+  */
+  static S3FileSystemGidBuilder builder()
+  {
+    return new S3FileSystemGidBuilder;
+  }
+}
+
+class S3FileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.s3_file_system.S3FileSystem]
+final class S3FileSystemGidBuilder : S3FileSystemGidBuilderImpl!S3FileSystemGidBuilder
+{
+  S3FileSystem build()
+  {
+    return new S3FileSystem(cast(void*)createGObject(S3FileSystem._getGType), No.Take);
   }
 }

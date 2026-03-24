@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -65,6 +66,15 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     return this;
   }
 
+  /**
+  Get builder for [gtk.check_menu_item.CheckMenuItem]
+  Returns: New builder object
+  */
+  static CheckMenuItemGidBuilder builder()
+  {
+    return new CheckMenuItemGidBuilder;
+  }
+
   /** */
   @property bool active()
   {
@@ -74,7 +84,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   /** */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /** */
@@ -86,7 +96,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   /** */
   @property void drawAsRadio(bool propval)
   {
-    return setDrawAsRadio(propval);
+    setDrawAsRadio(propval);
   }
 
   /** */
@@ -98,7 +108,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   /** */
   @property void inconsistent(bool propval)
   {
-    return setInconsistent(propval);
+    setInconsistent(propval);
   }
 
   /**
@@ -267,5 +277,37 @@ class CheckMenuItem : gtk.menu_item.MenuItem
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+class CheckMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
+{
+
+
+  /** */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /** */
+  T drawAsRadio(bool propval)
+  {
+    return setProperty("draw-as-radio", propval);
+  }
+
+  /** */
+  T inconsistent(bool propval)
+  {
+    return setProperty("inconsistent", propval);
+  }
+}
+
+/// Fluent builder for [gtk.check_menu_item.CheckMenuItem]
+final class CheckMenuItemGidBuilder : CheckMenuItemGidBuilderImpl!CheckMenuItemGidBuilder
+{
+  CheckMenuItem build()
+  {
+    return new CheckMenuItem(cast(void*)createGObject(CheckMenuItem._getGType), No.Take);
   }
 }

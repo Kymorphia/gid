@@ -3,6 +3,7 @@ module gstvideo.video_orientation_mixin;
 
 public import gstvideo.video_orientation_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gst.tag_list;
 public import gstvideo.c.functions;
 public import gstvideo.c.types;
@@ -131,4 +132,8 @@ template VideoOrientationT()
     _retval = cast(bool)gst_video_orientation_set_vflip(cast(GstVideoOrientation*)this._cPtr, flip);
     return _retval;
   }
+}
+
+template VideoOrientationGidBuilderT()
+{
 }

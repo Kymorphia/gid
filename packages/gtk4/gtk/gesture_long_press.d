@@ -3,6 +3,7 @@ module gtk.gesture_long_press;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture_single;
@@ -54,6 +55,15 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
+  Get builder for [gtk.gesture_long_press.GestureLongPress]
+  Returns: New builder object
+  */
+  static GestureLongPressGidBuilder builder()
+  {
+    return new GestureLongPressGidBuilder;
+  }
+
+  /**
       Get `delayFactor` property.
       Returns: Factor by which to modify the default timeout.
   */
@@ -69,7 +79,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   */
   @property void delayFactor(double propval)
   {
-    return setDelayFactor(propval);
+    setDelayFactor(propval);
   }
 
   /**
@@ -194,5 +204,29 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pressed", closure, after);
+  }
+}
+
+class GestureLongPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+
+  /**
+      Set `delayFactor` property.
+      Params:
+        propval = Factor by which to modify the default timeout.
+      Returns: Builder instance for fluent chaining
+  */
+  T delayFactor(double propval)
+  {
+    return setProperty("delay-factor", propval);
+  }
+}
+
+/// Fluent builder for [gtk.gesture_long_press.GestureLongPress]
+final class GestureLongPressGidBuilder : GestureLongPressGidBuilderImpl!GestureLongPressGidBuilder
+{
+  GestureLongPress build()
+  {
+    return new GestureLongPress(cast(void*)createGObject(GestureLongPress._getGType), Yes.Take);
   }
 }

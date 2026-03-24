@@ -9,6 +9,7 @@ import gdk.texture;
 import gdk.types;
 import gid.gid;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -53,6 +54,15 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.gltexture_builder.GLTextureBuilder]
+  Returns: New builder object
+  */
+  static GLTextureBuilderGidBuilder builder()
+  {
+    return new GLTextureBuilderGidBuilder;
+  }
+
+  /**
       Get `context` property.
       Returns: The context owning the texture.
   */
@@ -68,7 +78,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void context(gdk.glcontext.GLContext propval)
   {
-    return setContext(propval);
+    setContext(propval);
   }
 
   /**
@@ -87,7 +97,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void format(gdk.types.MemoryFormat propval)
   {
-    return setFormat(propval);
+    setFormat(propval);
   }
 
   /**
@@ -106,7 +116,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void hasMipmap(bool propval)
   {
-    return setHasMipmap(propval);
+    setHasMipmap(propval);
   }
 
   /**
@@ -125,7 +135,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void height(int propval)
   {
-    return setHeight(propval);
+    setHeight(propval);
   }
 
   /**
@@ -144,7 +154,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void id(uint propval)
   {
-    return setId(propval);
+    setId(propval);
   }
 
   /**
@@ -167,7 +177,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void sync(void* propval)
   {
-    return setSync(propval);
+    setSync(propval);
   }
 
   /**
@@ -186,7 +196,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void updateRegion(cairo.region.Region propval)
   {
-    return setUpdateRegion(propval);
+    setUpdateRegion(propval);
   }
 
   /**
@@ -205,7 +215,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void updateTexture(gdk.texture.Texture propval)
   {
-    return setUpdateTexture(propval);
+    setUpdateTexture(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   @property void width(int propval)
   {
-    return setWidth(propval);
+    setWidth(propval);
   }
 
   /**
@@ -526,5 +536,119 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   void setWidth(int width)
   {
     gdk_gl_texture_builder_set_width(cast(GdkGLTextureBuilder*)this._cPtr, width);
+  }
+}
+
+class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `context` property.
+      Params:
+        propval = The context owning the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T context(gdk.glcontext.GLContext propval)
+  {
+    return setProperty("context", propval);
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format when downloading the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(gdk.types.MemoryFormat propval)
+  {
+    return setProperty("format", propval);
+  }
+
+  /**
+      Set `hasMipmap` property.
+      Params:
+        propval = If the texture has a mipmap.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasMipmap(bool propval)
+  {
+    return setProperty("has-mipmap", propval);
+  }
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The height of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T height(int propval)
+  {
+    return setProperty("height", propval);
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The texture ID to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(uint propval)
+  {
+    return setProperty("id", propval);
+  }
+
+  /**
+      Set `sync` property.
+      Params:
+        propval = An optional `GLSync` object.
+          
+          If this is set, GTK will wait on it before using the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T sync(void* propval)
+  {
+    return setProperty("sync", propval);
+  }
+
+  /**
+      Set `updateRegion` property.
+      Params:
+        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+      Returns: Builder instance for fluent chaining
+  */
+  T updateRegion(cairo.region.Region propval)
+  {
+    return setProperty("update-region", propval);
+  }
+
+  /**
+      Set `updateTexture` property.
+      Params:
+        propval = The texture `property@Gdk.GLTextureBuilder:update-region` is an update for.
+      Returns: Builder instance for fluent chaining
+  */
+  T updateTexture(gdk.texture.Texture propval)
+  {
+    return setProperty("update-texture", propval);
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The width of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T width(int propval)
+  {
+    return setProperty("width", propval);
+  }
+}
+
+/// Fluent builder for [gdk.gltexture_builder.GLTextureBuilder]
+final class GLTextureBuilderGidBuilder : GLTextureBuilderGidBuilderImpl!GLTextureBuilderGidBuilder
+{
+  GLTextureBuilder build()
+  {
+    return new GLTextureBuilder(cast(void*)createGObject(GLTextureBuilder._getGType), Yes.Take);
   }
 }

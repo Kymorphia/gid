@@ -2,6 +2,7 @@
 module gstgl.glframebuffer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.object;
 import gstgl.c.functions;
@@ -48,6 +49,15 @@ class GLFramebuffer : gst.object.ObjectWrap
   override GLFramebuffer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glframebuffer.GLFramebuffer]
+  Returns: New builder object
+  */
+  static GLFramebufferGidBuilder builder()
+  {
+    return new GLFramebufferGidBuilder;
   }
 
   /**
@@ -128,5 +138,18 @@ class GLFramebuffer : gst.object.ObjectWrap
     uint _retval;
     _retval = gst_gl_framebuffer_get_id(cast(GstGLFramebuffer*)this._cPtr);
     return _retval;
+  }
+}
+
+class GLFramebufferGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glframebuffer.GLFramebuffer]
+final class GLFramebufferGidBuilder : GLFramebufferGidBuilderImpl!GLFramebufferGidBuilder
+{
+  GLFramebuffer build()
+  {
+    return new GLFramebuffer(cast(void*)createGObject(GLFramebuffer._getGType), Yes.Take);
   }
 }

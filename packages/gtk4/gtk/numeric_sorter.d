@@ -2,6 +2,7 @@
 module gtk.numeric_sorter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -43,6 +44,15 @@ class NumericSorter : gtk.sorter.Sorter
   }
 
   /**
+  Get builder for [gtk.numeric_sorter.NumericSorter]
+  Returns: New builder object
+  */
+  static NumericSorterGidBuilder builder()
+  {
+    return new NumericSorterGidBuilder;
+  }
+
+  /**
       Get `expression` property.
       Returns: The expression to evaluate on items to get a number to compare with.
   */
@@ -58,7 +68,7 @@ class NumericSorter : gtk.sorter.Sorter
   */
   @property void expression(gtk.expression.Expression propval)
   {
-    return setExpression(propval);
+    setExpression(propval);
   }
 
   /**
@@ -77,7 +87,7 @@ class NumericSorter : gtk.sorter.Sorter
   */
   @property void sortOrder(gtk.types.SortType propval)
   {
-    return setSortOrder(propval);
+    setSortOrder(propval);
   }
 
   /**
@@ -147,5 +157,40 @@ class NumericSorter : gtk.sorter.Sorter
   void setSortOrder(gtk.types.SortType sortOrder)
   {
     gtk_numeric_sorter_set_sort_order(cast(GtkNumericSorter*)this._cPtr, sortOrder);
+  }
+}
+
+class NumericSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
+{
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on items to get a number to compare with.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(gtk.expression.Expression propval)
+  {
+    return setProperty("expression", propval);
+  }
+
+  /**
+      Set `sortOrder` property.
+      Params:
+        propval = Whether the sorter will sort smaller numbers first.
+      Returns: Builder instance for fluent chaining
+  */
+  T sortOrder(gtk.types.SortType propval)
+  {
+    return setProperty("sort-order", propval);
+  }
+}
+
+/// Fluent builder for [gtk.numeric_sorter.NumericSorter]
+final class NumericSorterGidBuilder : NumericSorterGidBuilderImpl!NumericSorterGidBuilder
+{
+  NumericSorter build()
+  {
+    return new NumericSorter(cast(void*)createGObject(NumericSorter._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.accessible_range;
 
 public import gtk.accessible_range_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -43,4 +44,8 @@ interface AccessibleRange
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_range_get_type != &gidSymbolNotFound ? gtk_accessible_range_get_type() : cast(GType)0;
   }
+}
+
+interface AccessibleRangeGidBuilderImpl(T)
+{
 }

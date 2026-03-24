@@ -10,6 +10,7 @@ import atk.streamable_content_mixin;
 import atk.text;
 import atk.text_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -44,7 +45,33 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
     return this;
   }
 
+  /**
+  Get builder for [gtk.text_view_accessible.TextViewAccessible]
+  Returns: New builder object
+  */
+  static TextViewAccessibleGidBuilder builder()
+  {
+    return new TextViewAccessibleGidBuilder;
+  }
+
   mixin EditableTextT!();
   mixin StreamableContentT!();
   mixin TextT!();
+}
+
+class TextViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.editable_text.EditableTextGidBuilderImpl!T, atk.streamable_content.StreamableContentGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T
+{
+
+  mixin EditableTextGidBuilderT!();
+  mixin StreamableContentGidBuilderT!();
+  mixin TextGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.text_view_accessible.TextViewAccessible]
+final class TextViewAccessibleGidBuilder : TextViewAccessibleGidBuilderImpl!TextViewAccessibleGidBuilder
+{
+  TextViewAccessible build()
+  {
+    return new TextViewAccessible(cast(void*)createGObject(TextViewAccessible._getGType), No.Take);
+  }
 }

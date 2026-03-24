@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class DataWrapper : gobject.object.ObjectWrap
   override DataWrapper self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.data_wrapper.DataWrapper]
+  Returns: New builder object
+  */
+  static DataWrapperGidBuilder builder()
+  {
+    return new DataWrapperGidBuilder;
   }
 
   /**
@@ -131,5 +141,18 @@ class DataWrapper : gobject.object.ObjectWrap
     ptrdiff_t _retval;
     _retval = g_mime_data_wrapper_write_to_stream(cast(GMimeDataWrapper*)this._cPtr, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class DataWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.data_wrapper.DataWrapper]
+final class DataWrapperGidBuilder : DataWrapperGidBuilderImpl!DataWrapperGidBuilder
+{
+  DataWrapper build()
+  {
+    return new DataWrapper(cast(void*)createGObject(DataWrapper._getGType), Yes.Take);
   }
 }

@@ -11,6 +11,7 @@ import gio.iostream;
 import gio.proxy_address;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -98,4 +99,8 @@ interface Proxy
       Returns: true if hostname resolution is supported.
   */
   bool supportsHostname();
+}
+
+interface ProxyGidBuilderImpl(T)
+{
 }

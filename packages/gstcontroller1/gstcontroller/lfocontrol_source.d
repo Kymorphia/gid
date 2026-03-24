@@ -2,6 +2,7 @@
 module gstcontroller.lfocontrol_source;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.control_source;
 import gstcontroller.c.functions;
@@ -44,6 +45,15 @@ class LFOControlSource : gst.control_source.ControlSource
   override LFOControlSource self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstcontroller.lfocontrol_source.LFOControlSource]
+  Returns: New builder object
+  */
+  static LFOControlSourceGidBuilder builder()
+  {
+    return new LFOControlSourceGidBuilder;
   }
 
   /**
@@ -162,5 +172,79 @@ class LFOControlSource : gst.control_source.ControlSource
     GstControlSource* _cretval;
     _cretval = gst_lfo_control_source_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBuilderImpl!T
+{
+
+  /**
+      Set `amplitude` property.
+      Params:
+        propval = Specifies the amplitude for the waveform of this #GstLFOControlSource.
+      Returns: Builder instance for fluent chaining
+  */
+  T amplitude(double propval)
+  {
+    return setProperty("amplitude", propval);
+  }
+
+  /**
+      Set `frequency` property.
+      Params:
+        propval = Specifies the frequency that should be used for the waveform
+          of this #GstLFOControlSource. It should be large enough
+          so that the period is longer than one nanosecond.
+      Returns: Builder instance for fluent chaining
+  */
+  T frequency(double propval)
+  {
+    return setProperty("frequency", propval);
+  }
+
+  /**
+      Set `offset` property.
+      Params:
+        propval = Specifies the value offset for the waveform of this #GstLFOControlSource.
+      Returns: Builder instance for fluent chaining
+  */
+  T offset(double propval)
+  {
+    return setProperty("offset", propval);
+  }
+
+  /**
+      Set `timeshift` property.
+      Params:
+        propval = Specifies the timeshift to the right that should be used for the waveform
+          of this #GstLFOControlSource in nanoseconds.
+          
+          To get a n nanosecond shift to the left use
+          "(GST_SECOND / frequency) - n".
+      Returns: Builder instance for fluent chaining
+  */
+  T timeshift(ulong propval)
+  {
+    return setProperty("timeshift", propval);
+  }
+
+  /**
+      Set `waveform` property.
+      Params:
+        propval = Specifies the waveform that should be used for this #GstLFOControlSource.
+      Returns: Builder instance for fluent chaining
+  */
+  T waveform(gstcontroller.types.LFOWaveform propval)
+  {
+    return setProperty("waveform", propval);
+  }
+}
+
+/// Fluent builder for [gstcontroller.lfocontrol_source.LFOControlSource]
+final class LFOControlSourceGidBuilder : LFOControlSourceGidBuilderImpl!LFOControlSourceGidBuilder
+{
+  LFOControlSource build()
+  {
+    return new LFOControlSource(cast(void*)createGObject(LFOControlSource._getGType), Yes.Take);
   }
 }

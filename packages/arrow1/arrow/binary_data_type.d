@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class BinaryDataType : arrow.data_type.DataType
@@ -36,11 +37,33 @@ class BinaryDataType : arrow.data_type.DataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.binary_data_type.BinaryDataType]
+  Returns: New builder object
+  */
+  static BinaryDataTypeGidBuilder builder()
+  {
+    return new BinaryDataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowBinaryDataType* _cretval;
     _cretval = garrow_binary_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class BinaryDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.binary_data_type.BinaryDataType]
+final class BinaryDataTypeGidBuilder : BinaryDataTypeGidBuilderImpl!BinaryDataTypeGidBuilder
+{
+  BinaryDataType build()
+  {
+    return new BinaryDataType(cast(void*)createGObject(BinaryDataType._getGType), Yes.Take);
   }
 }

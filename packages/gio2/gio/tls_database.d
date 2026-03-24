@@ -11,6 +11,7 @@ import gio.tls_certificate;
 import gio.tls_interaction;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -50,6 +51,15 @@ class TlsDatabase : gobject.object.ObjectWrap
   override TlsDatabase self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.tls_database.TlsDatabase]
+  Returns: New builder object
+  */
+  static TlsDatabaseGidBuilder builder()
+  {
+    return new TlsDatabaseGidBuilder;
   }
 
   /**
@@ -470,5 +480,18 @@ class TlsDatabase : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
+  }
+}
+
+class TlsDatabaseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.tls_database.TlsDatabase]
+final class TlsDatabaseGidBuilder : TlsDatabaseGidBuilderImpl!TlsDatabaseGidBuilder
+{
+  TlsDatabase build()
+  {
+    return new TlsDatabase(cast(void*)createGObject(TlsDatabase._getGType), No.Take);
   }
 }

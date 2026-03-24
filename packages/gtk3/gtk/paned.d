@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -112,6 +113,15 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.paned.Paned]
+  Returns: New builder object
+  */
+  static PanedGidBuilder builder()
+  {
+    return new PanedGidBuilder;
+  }
+
+  /**
       Get `maxPosition` property.
       Returns: The largest possible value for the position property.
         This property is derived from the size and shrinkability
@@ -142,7 +152,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   /** */
   @property void position(int propval)
   {
-    return setPosition(propval);
+    setPosition(propval);
   }
 
   /** */
@@ -177,7 +187,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void wideHandle(bool propval)
   {
-    return setWideHandle(propval);
+    setWideHandle(propval);
   }
 
   mixin OrientableT!();
@@ -616,5 +626,45 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-handle-focus", closure, after);
+  }
+}
+
+class PanedGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T position(int propval)
+  {
+    return setProperty("position", propval);
+  }
+
+  /** */
+  T positionSet(bool propval)
+  {
+    return setProperty("position-set", propval);
+  }
+
+  /**
+      Set `wideHandle` property.
+      Params:
+        propval = Setting this property to true indicates that the paned needs
+          to provide stronger visual separation (e.g. because it separates
+          between two notebooks, whose tab rows would otherwise merge visually).
+      Returns: Builder instance for fluent chaining
+  */
+  T wideHandle(bool propval)
+  {
+    return setProperty("wide-handle", propval);
+  }
+}
+
+/// Fluent builder for [gtk.paned.Paned]
+final class PanedGidBuilder : PanedGidBuilderImpl!PanedGidBuilder
+{
+  Paned build()
+  {
+    return new Paned(cast(void*)createGObject(Paned._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -129,6 +130,15 @@ class Image : gtk.misc.Misc
   override Image self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.image.Image]
+  Returns: New builder object
+  */
+  static ImageGidBuilder builder()
+  {
+    return new ImageGidBuilder;
   }
 
   /** */
@@ -255,7 +265,7 @@ class Image : gtk.misc.Misc
   */
   @property void pixelSize(int propval)
   {
-    return setPixelSize(propval);
+    setPixelSize(propval);
   }
 
   /**
@@ -831,5 +841,124 @@ class Image : gtk.misc.Misc
   void setPixelSize(int pixelSize)
   {
     gtk_image_set_pixel_size(cast(GtkImage*)this._cPtr, pixelSize);
+  }
+}
+
+class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
+{
+
+
+  /** */
+  T file(string propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The GIcon displayed in the GtkImage. For themed icons,
+          If the icon theme is changed, the image will be updated
+          automatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon in the icon theme. If the icon theme is
+          changed, the image will be updated automatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /** */
+  T iconSet(gtk.icon_set.IconSet propval)
+  {
+    return setProperty("icon-set", propval);
+  }
+
+  /** */
+  T iconSize(int propval)
+  {
+    return setProperty("icon-size", propval);
+  }
+
+  /** */
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("pixbuf", propval);
+  }
+
+  /** */
+  T pixbufAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation propval)
+  {
+    return setProperty("pixbuf-animation", propval);
+  }
+
+  /**
+      Set `pixelSize` property.
+      Params:
+        propval = The "pixel-size" property can be used to specify a fixed size
+          overriding the #GtkImage:icon-size property for images of type
+          [gtk.types.ImageType.IconName].
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelSize(int propval)
+  {
+    return setProperty("pixel-size", propval);
+  }
+
+  /**
+      Set `resource` property.
+      Params:
+        propval = A path to a resource file to display.
+      Returns: Builder instance for fluent chaining
+  */
+  T resource(string propval)
+  {
+    return setProperty("resource", propval);
+  }
+
+  /** */
+  T stock(string propval)
+  {
+    return setProperty("stock", propval);
+  }
+
+  /** */
+  T surface(cairo.surface.Surface propval)
+  {
+    return setProperty("surface", propval);
+  }
+
+  /**
+      Set `useFallback` property.
+      Params:
+        propval = Whether the icon displayed in the GtkImage will use
+          standard icon names fallback. The value of this property
+          is only relevant for images of type [gtk.types.ImageType.IconName]
+          and [gtk.types.ImageType.Gicon].
+      Returns: Builder instance for fluent chaining
+  */
+  T useFallback(bool propval)
+  {
+    return setProperty("use-fallback", propval);
+  }
+}
+
+/// Fluent builder for [gtk.image.Image]
+final class ImageGidBuilder : ImageGidBuilderImpl!ImageGidBuilder
+{
+  Image build()
+  {
+    return new Image(cast(void*)createGObject(Image._getGType), No.Take);
   }
 }

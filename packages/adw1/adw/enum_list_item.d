@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -36,6 +37,15 @@ class EnumListItem : gobject.object.ObjectWrap
   override EnumListItem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [adw.enum_list_item.EnumListItem]
+  Returns: New builder object
+  */
+  static EnumListItemGidBuilder builder()
+  {
+    return new EnumListItemGidBuilder;
   }
 
   /**
@@ -98,5 +108,18 @@ class EnumListItem : gobject.object.ObjectWrap
     int _retval;
     _retval = adw_enum_list_item_get_value(cast(AdwEnumListItem*)this._cPtr);
     return _retval;
+  }
+}
+
+class EnumListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [adw.enum_list_item.EnumListItem]
+final class EnumListItemGidBuilder : EnumListItemGidBuilderImpl!EnumListItemGidBuilder
+{
+  EnumListItem build()
+  {
+    return new EnumListItem(cast(void*)createGObject(EnumListItem._getGType), No.Take);
   }
 }

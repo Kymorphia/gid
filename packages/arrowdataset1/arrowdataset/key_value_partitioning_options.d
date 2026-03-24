@@ -5,6 +5,7 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions]
+  Returns: New builder object
+  */
+  static KeyValuePartitioningOptionsGidBuilder builder()
+  {
+    return new KeyValuePartitioningOptionsGidBuilder;
+  }
+
+  /**
       Get `segmentEncoding` property.
       Returns: After splitting a path into components, decode the path
         components before parsing according to this scheme.
@@ -63,5 +73,30 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
     GADatasetKeyValuePartitioningOptions* _cretval;
     _cretval = gadataset_key_value_partitioning_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class KeyValuePartitioningOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `segmentEncoding` property.
+      Params:
+        propval = After splitting a path into components, decode the path
+          components before parsing according to this scheme.
+      Returns: Builder instance for fluent chaining
+  */
+  T segmentEncoding(arrowdataset.types.SegmentEncoding propval)
+  {
+    return setProperty("segment-encoding", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions]
+final class KeyValuePartitioningOptionsGidBuilder : KeyValuePartitioningOptionsGidBuilderImpl!KeyValuePartitioningOptionsGidBuilder
+{
+  KeyValuePartitioningOptions build()
+  {
+    return new KeyValuePartitioningOptions(cast(void*)createGObject(KeyValuePartitioningOptions._getGType), Yes.Take);
   }
 }

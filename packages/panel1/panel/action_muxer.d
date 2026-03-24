@@ -4,6 +4,7 @@ module panel.action_muxer;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -36,6 +37,15 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   override ActionMuxer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.action_muxer.ActionMuxer]
+  Returns: New builder object
+  */
+  static ActionMuxerGidBuilder builder()
+  {
+    return new ActionMuxerGidBuilder;
   }
 
   mixin ActionGroupT!();
@@ -108,5 +118,20 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   void removeAll()
   {
     panel_action_muxer_remove_all(cast(PanelActionMuxer*)this._cPtr);
+  }
+}
+
+class ActionMuxerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+}
+
+/// Fluent builder for [panel.action_muxer.ActionMuxer]
+final class ActionMuxerGidBuilder : ActionMuxerGidBuilderImpl!ActionMuxerGidBuilder
+{
+  ActionMuxer build()
+  {
+    return new ActionMuxer(cast(void*)createGObject(ActionMuxer._getGType), Yes.Take);
   }
 }

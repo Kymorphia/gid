@@ -3,6 +3,7 @@ module soup.content_sniffer;
 
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -49,6 +50,15 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
     return this;
   }
 
+  /**
+  Get builder for [soup.content_sniffer.ContentSniffer]
+  Returns: New builder object
+  */
+  static ContentSnifferGidBuilder builder()
+  {
+    return new ContentSnifferGidBuilder;
+  }
+
   mixin SessionFeatureT!();
 
   /**
@@ -84,5 +94,20 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
+  }
+}
+
+class ContentSnifferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+}
+
+/// Fluent builder for [soup.content_sniffer.ContentSniffer]
+final class ContentSnifferGidBuilder : ContentSnifferGidBuilderImpl!ContentSnifferGidBuilder
+{
+  ContentSniffer build()
+  {
+    return new ContentSniffer(cast(void*)createGObject(ContentSniffer._getGType), Yes.Take);
   }
 }

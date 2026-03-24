@@ -3,6 +3,7 @@ module json.serializable;
 
 public import json.serializable_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.param_spec;
 import gobject.value;
 import json.c.functions;
@@ -165,4 +166,8 @@ interface Serializable
         value = the property value to set
   */
   void setProperty(gobject.param_spec.ParamSpec pspec, gobject.value.Value value);
+}
+
+interface SerializableGidBuilderImpl(T)
+{
 }

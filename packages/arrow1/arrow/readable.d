@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -27,4 +28,8 @@ interface Readable
 
   /** */
   glib.bytes.Bytes readBytes(long nBytes);
+}
+
+interface ReadableGidBuilderImpl(T)
+{
 }

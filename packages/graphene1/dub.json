@@ -1,7 +1,7 @@
 {
   "name": "graphene1",
   "description": "D binding for the Graphene library - library providing efficient types for 2D and 3D math",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://ebassi.github.io/graphene/",

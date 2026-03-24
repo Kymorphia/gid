@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.floating_point_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class FloatDataType : arrow.floating_point_data_type.FloatingPointDataType
@@ -36,11 +37,33 @@ class FloatDataType : arrow.floating_point_data_type.FloatingPointDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.float_data_type.FloatDataType]
+  Returns: New builder object
+  */
+  static FloatDataTypeGidBuilder builder()
+  {
+    return new FloatDataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowFloatDataType* _cretval;
     _cretval = garrow_float_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class FloatDataTypeGidBuilderImpl(T) : arrow.floating_point_data_type.FloatingPointDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.float_data_type.FloatDataType]
+final class FloatDataTypeGidBuilder : FloatDataTypeGidBuilderImpl!FloatDataTypeGidBuilder
+{
+  FloatDataType build()
+  {
+    return new FloatDataType(cast(void*)createGObject(FloatDataType._getGType), Yes.Take);
   }
 }

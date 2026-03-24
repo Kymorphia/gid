@@ -7,6 +7,7 @@ import arrow.fixed_size_binary_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType
@@ -37,6 +38,15 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal_data_type.DecimalDataType]
+  Returns: New builder object
+  */
+  static DecimalDataTypeGidBuilder builder()
+  {
+    return new DecimalDataTypeGidBuilder;
+  }
+
   /** */
   this(int precision, int scale)
   {
@@ -62,5 +72,18 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     int _retval;
     _retval = garrow_decimal_data_type_get_scale(cast(GArrowDecimalDataType*)this._cPtr);
     return _retval;
+  }
+}
+
+class DecimalDataTypeGidBuilderImpl(T) : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal_data_type.DecimalDataType]
+final class DecimalDataTypeGidBuilder : DecimalDataTypeGidBuilderImpl!DecimalDataTypeGidBuilder
+{
+  DecimalDataType build()
+  {
+    return new DecimalDataType(cast(void*)createGObject(DecimalDataType._getGType), Yes.Take);
   }
 }

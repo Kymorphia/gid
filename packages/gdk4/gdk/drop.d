@@ -15,6 +15,7 @@ import gio.cancellable;
 import gio.input_stream;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -64,12 +65,66 @@ class Drop : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.drop.Drop]
+  Returns: New builder object
+  */
+  static DropGidBuilder builder()
+  {
+    return new DropGidBuilder;
+  }
+
+  /**
+      Get `actions` property.
+      Returns: The possible actions for this drop
+  */
+  @property gdk.types.DragAction actions()
+  {
+    return getActions();
+  }
+
+  /**
+      Get `device` property.
+      Returns: The [gdk.device.Device] performing the drop
+  */
+  @property gdk.device.Device device()
+  {
+    return getDevice();
+  }
+
+  /**
       Get `display` property.
       Returns: The [gdk.display.Display] that the drop belongs to.
   */
   @property gdk.display.Display display()
   {
     return getDisplay();
+  }
+
+  /**
+      Get `drag` property.
+      Returns: The [gdk.drag.Drag] that initiated this drop
+  */
+  @property gdk.drag.Drag drag()
+  {
+    return getDrag();
+  }
+
+  /**
+      Get `formats` property.
+      Returns: The possible formats that the drop can provide its data in.
+  */
+  @property gdk.content_formats.ContentFormats formats()
+  {
+    return getFormats();
+  }
+
+  /**
+      Get `surface` property.
+      Returns: The [gdk.surface.Surface] the drop happens on
+  */
+  @property gdk.surface.Surface surface()
+  {
+    return getSurface();
   }
 
   /**
@@ -312,5 +367,73 @@ class Drop : gobject.object.ObjectWrap
   void status(gdk.types.DragAction actions, gdk.types.DragAction preferred)
   {
     gdk_drop_status(cast(GdkDrop*)this._cPtr, actions, preferred);
+  }
+}
+
+class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The possible actions for this drop
+      Returns: Builder instance for fluent chaining
+  */
+  T actions(gdk.types.DragAction propval)
+  {
+    return setProperty("actions", propval);
+  }
+
+  /**
+      Set `device` property.
+      Params:
+        propval = The [gdk.device.Device] performing the drop
+      Returns: Builder instance for fluent chaining
+  */
+  T device(gdk.device.Device propval)
+  {
+    return setProperty("device", propval);
+  }
+
+  /**
+      Set `drag` property.
+      Params:
+        propval = The [gdk.drag.Drag] that initiated this drop
+      Returns: Builder instance for fluent chaining
+  */
+  T drag(gdk.drag.Drag propval)
+  {
+    return setProperty("drag", propval);
+  }
+
+  /**
+      Set `formats` property.
+      Params:
+        propval = The possible formats that the drop can provide its data in.
+      Returns: Builder instance for fluent chaining
+  */
+  T formats(gdk.content_formats.ContentFormats propval)
+  {
+    return setProperty("formats", propval);
+  }
+
+  /**
+      Set `surface` property.
+      Params:
+        propval = The [gdk.surface.Surface] the drop happens on
+      Returns: Builder instance for fluent chaining
+  */
+  T surface(gdk.surface.Surface propval)
+  {
+    return setProperty("surface", propval);
+  }
+}
+
+/// Fluent builder for [gdk.drop.Drop]
+final class DropGidBuilder : DropGidBuilderImpl!DropGidBuilder
+{
+  Drop build()
+  {
+    return new Drop(cast(void*)createGObject(Drop._getGType), No.Take);
   }
 }

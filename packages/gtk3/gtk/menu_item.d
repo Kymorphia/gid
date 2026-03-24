@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -98,6 +99,15 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
+  Get builder for [gtk.menu_item.MenuItem]
+  Returns: New builder object
+  */
+  static MenuItemGidBuilder builder()
+  {
+    return new MenuItemGidBuilder;
+  }
+
+  /**
       Get `accelPath` property.
       Returns: Sets the accelerator path of the menu item, through which runtime
         changes of the menu item's accelerator caused by the user can be
@@ -117,7 +127,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   @property void accelPath(string propval)
   {
-    return setAccelPath(propval);
+    setAccelPath(propval);
   }
 
   /**
@@ -136,7 +146,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -157,7 +167,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   @property void rightJustified(bool propval)
   {
-    return setRightJustified(propval);
+    setRightJustified(propval);
   }
 
   /**
@@ -176,7 +186,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   @property void submenu(gtk.menu.Menu propval)
   {
-    return setSubmenu(propval);
+    setSubmenu(propval);
   }
 
   /**
@@ -195,7 +205,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -717,5 +727,79 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-size-request", closure, after);
+  }
+}
+
+class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+  mixin ActivatableGidBuilderT!();
+
+  /**
+      Set `accelPath` property.
+      Params:
+        propval = Sets the accelerator path of the menu item, through which runtime
+          changes of the menu item's accelerator caused by the user can be
+          identified and saved to persistant storage.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelPath(string propval)
+  {
+    return setProperty("accel-path", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The text for the child label.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `rightJustified` property.
+      Params:
+        propval = Sets whether the menu item appears justified
+          at the right side of a menu bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T rightJustified(bool propval)
+  {
+    return setProperty("right-justified", propval);
+  }
+
+  /**
+      Set `submenu` property.
+      Params:
+        propval = The submenu attached to the menu item, or null if it has none.
+      Returns: Builder instance for fluent chaining
+  */
+  T submenu(gtk.menu.Menu propval)
+  {
+    return setProperty("submenu", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = true if underlines in the text indicate mnemonics.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gtk.menu_item.MenuItem]
+final class MenuItemGidBuilder : MenuItemGidBuilderImpl!MenuItemGidBuilder
+{
+  MenuItem build()
+  {
+    return new MenuItem(cast(void*)createGObject(MenuItem._getGType), No.Take);
   }
 }

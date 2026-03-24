@@ -2,6 +2,7 @@
 module webkit.uriresponse;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.message_headers;
 import webkit.c.functions;
@@ -41,6 +42,15 @@ class URIResponse : gobject.object.ObjectWrap
   override URIResponse self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.uriresponse.URIResponse]
+  Returns: New builder object
+  */
+  static URIResponseGidBuilder builder()
+  {
+    return new URIResponseGidBuilder;
   }
 
   /**
@@ -178,5 +188,18 @@ class URIResponse : gobject.object.ObjectWrap
     _cretval = webkit_uri_response_get_uri(cast(WebKitURIResponse*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class URIResponseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.uriresponse.URIResponse]
+final class URIResponseGidBuilder : URIResponseGidBuilderImpl!URIResponseGidBuilder
+{
+  URIResponse build()
+  {
+    return new URIResponse(cast(void*)createGObject(URIResponse._getGType), No.Take);
   }
 }

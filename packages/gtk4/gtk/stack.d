@@ -2,6 +2,7 @@
 module gtk.stack;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -94,6 +95,15 @@ class Stack : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.stack.Stack]
+  Returns: New builder object
+  */
+  static StackGidBuilder builder()
+  {
+    return new StackGidBuilder;
+  }
+
+  /**
       Get `hhomogeneous` property.
       Returns: true if the stack allocates the same width for all children.
   */
@@ -109,7 +119,7 @@ class Stack : gtk.widget.Widget
   */
   @property void hhomogeneous(bool propval)
   {
-    return setHhomogeneous(propval);
+    setHhomogeneous(propval);
   }
 
   /**
@@ -128,7 +138,7 @@ class Stack : gtk.widget.Widget
   */
   @property void interpolateSize(bool propval)
   {
-    return setInterpolateSize(propval);
+    setInterpolateSize(propval);
   }
 
   /**
@@ -156,7 +166,7 @@ class Stack : gtk.widget.Widget
   */
   @property void transitionDuration(uint propval)
   {
-    return setTransitionDuration(propval);
+    setTransitionDuration(propval);
   }
 
   /**
@@ -184,7 +194,7 @@ class Stack : gtk.widget.Widget
   */
   @property void transitionType(gtk.types.StackTransitionType propval)
   {
-    return setTransitionType(propval);
+    setTransitionType(propval);
   }
 
   /**
@@ -203,7 +213,7 @@ class Stack : gtk.widget.Widget
   */
   @property void vhomogeneous(bool propval)
   {
-    return setVhomogeneous(propval);
+    setVhomogeneous(propval);
   }
 
   /**
@@ -222,7 +232,7 @@ class Stack : gtk.widget.Widget
   */
   @property void visibleChild(gtk.widget.Widget propval)
   {
-    return setVisibleChild(propval);
+    setVisibleChild(propval);
   }
 
   /**
@@ -241,7 +251,7 @@ class Stack : gtk.widget.Widget
   */
   @property void visibleChildName(string propval)
   {
-    return setVisibleChildName(propval);
+    setVisibleChildName(propval);
   }
 
   /**
@@ -604,5 +614,96 @@ class Stack : gtk.widget.Widget
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_stack_set_visible_child_name(cast(GtkStack*)this._cPtr, _name);
+  }
+}
+
+class StackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same width for all children.
+      Returns: Builder instance for fluent chaining
+  */
+  T hhomogeneous(bool propval)
+  {
+    return setProperty("hhomogeneous", propval);
+  }
+
+  /**
+      Set `interpolateSize` property.
+      Params:
+        propval = Whether or not the size should smoothly change during the transition.
+      Returns: Builder instance for fluent chaining
+  */
+  T interpolateSize(bool propval)
+  {
+    return setProperty("interpolate-size", propval);
+  }
+
+  /**
+      Set `transitionDuration` property.
+      Params:
+        propval = The animation duration, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  */
+  T transitionDuration(uint propval)
+  {
+    return setProperty("transition-duration", propval);
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = The type of animation used to transition.
+      Returns: Builder instance for fluent chaining
+  */
+  T transitionType(gtk.types.StackTransitionType propval)
+  {
+    return setProperty("transition-type", propval);
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same height for all children.
+      Returns: Builder instance for fluent chaining
+  */
+  T vhomogeneous(bool propval)
+  {
+    return setProperty("vhomogeneous", propval);
+  }
+
+  /**
+      Set `visibleChild` property.
+      Params:
+        propval = The widget currently visible in the stack.
+      Returns: Builder instance for fluent chaining
+  */
+  T visibleChild(gtk.widget.Widget propval)
+  {
+    return setProperty("visible-child", propval);
+  }
+
+  /**
+      Set `visibleChildName` property.
+      Params:
+        propval = The name of the widget currently visible in the stack.
+      Returns: Builder instance for fluent chaining
+  */
+  T visibleChildName(string propval)
+  {
+    return setProperty("visible-child-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.stack.Stack]
+final class StackGidBuilder : StackGidBuilderImpl!StackGidBuilder
+{
+  Stack build()
+  {
+    return new Stack(cast(void*)createGObject(Stack._getGType), No.Take);
   }
 }

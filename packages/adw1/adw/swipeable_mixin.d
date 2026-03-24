@@ -7,6 +7,7 @@ public import adw.c.types;
 public import adw.types;
 public import gdk.rectangle;
 public import gid.gid;
+public import gobject.gid_builder;
 
 /**
     An interface for swipeable widgets.
@@ -95,4 +96,8 @@ template SwipeableT()
   {
     adw_swipeable_get_swipe_area(cast(AdwSwipeable*)this._cPtr, navigationDirection, isDrag, cast(GdkRectangle*)&rect);
   }
+}
+
+template SwipeableGidBuilderT()
+{
 }

@@ -7,6 +7,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -66,4 +67,19 @@ interface TlsFileDatabase
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
+}
+
+interface TlsFileDatabaseGidBuilderImpl(T)
+{
+
+  /**
+      Set `anchors` property.
+      Params:
+        propval = The path to a file containing PEM encoded certificate authority
+          root anchors. The certificates in this file will be treated as
+          root authorities for the purpose of verifying other certificates
+          via the [gio.tls_database.TlsDatabase.verifyChain] operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T anchors(string propval);
 }

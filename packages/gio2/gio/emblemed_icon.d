@@ -8,6 +8,7 @@ import gio.emblem;
 import gio.icon;
 import gio.icon_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,24 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   override EmblemedIcon self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.emblemed_icon.EmblemedIcon]
+  Returns: New builder object
+  */
+  static EmblemedIconGidBuilder builder()
+  {
+    return new EmblemedIconGidBuilder;
+  }
+
+  /**
+      Get `gicon` property.
+      Returns: The [gio.icon.Icon] to attach emblems to.
+  */
+  @property gio.icon.Icon gicon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("gicon");
   }
 
   mixin IconT!();
@@ -105,5 +124,31 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
     _cretval = g_emblemed_icon_get_icon(cast(GEmblemedIcon*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class EmblemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T
+{
+
+  mixin IconGidBuilderT!();
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The [gio.icon.Icon] to attach emblems to.
+      Returns: Builder instance for fluent chaining
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+}
+
+/// Fluent builder for [gio.emblemed_icon.EmblemedIcon]
+final class EmblemedIconGidBuilder : EmblemedIconGidBuilderImpl!EmblemedIconGidBuilder
+{
+  EmblemedIcon build()
+  {
+    return new EmblemedIcon(cast(void*)createGObject(EmblemedIcon._getGType), Yes.Take);
   }
 }

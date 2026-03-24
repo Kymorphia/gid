@@ -4,6 +4,7 @@ module gtk.list_box;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -102,6 +103,15 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.list_box.ListBox]
+  Returns: New builder object
+  */
+  static ListBoxGidBuilder builder()
+  {
+    return new ListBoxGidBuilder;
+  }
+
+  /**
       Get `acceptUnpairedRelease` property.
       Returns: Whether to accept unpaired release events.
   */
@@ -138,7 +148,7 @@ class ListBox : gtk.widget.Widget
   */
   @property void activateOnSingleClick(bool propval)
   {
-    return setActivateOnSingleClick(propval);
+    setActivateOnSingleClick(propval);
   }
 
   /**
@@ -157,7 +167,7 @@ class ListBox : gtk.widget.Widget
   */
   @property void selectionMode(gtk.types.SelectionMode propval)
   {
-    return setSelectionMode(propval);
+    setSelectionMode(propval);
   }
 
   /**
@@ -176,7 +186,7 @@ class ListBox : gtk.widget.Widget
   */
   @property void showSeparators(bool propval)
   {
-    return setShowSeparators(propval);
+    setShowSeparators(propval);
   }
 
   /**
@@ -1057,5 +1067,64 @@ class ListBox : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+}
+
+class ListBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `acceptUnpairedRelease` property.
+      Params:
+        propval = Whether to accept unpaired release events.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptUnpairedRelease(bool propval)
+  {
+    return setProperty("accept-unpaired-release", propval);
+  }
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = Determines whether children can be activated with a single
+          click, or require a double-click.
+      Returns: Builder instance for fluent chaining
+  */
+  T activateOnSingleClick(bool propval)
+  {
+    return setProperty("activate-on-single-click", propval);
+  }
+
+  /**
+      Set `selectionMode` property.
+      Params:
+        propval = The selection mode used by the list box.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectionMode(gtk.types.SelectionMode propval)
+  {
+    return setProperty("selection-mode", propval);
+  }
+
+  /**
+      Set `showSeparators` property.
+      Params:
+        propval = Whether to show separators between rows.
+      Returns: Builder instance for fluent chaining
+  */
+  T showSeparators(bool propval)
+  {
+    return setProperty("show-separators", propval);
+  }
+}
+
+/// Fluent builder for [gtk.list_box.ListBox]
+final class ListBoxGidBuilder : ListBoxGidBuilderImpl!ListBoxGidBuilder
+{
+  ListBox build()
+  {
+    return new ListBox(cast(void*)createGObject(ListBox._getGType), No.Take);
   }
 }

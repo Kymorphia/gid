@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.menu_item;
 import gio.menu_model;
 import gio.types;
+import gobject.gid_builder;
 
 /**
     [gio.menu.Menu] is a simple implementation of [gio.menu_model.MenuModel].
@@ -44,6 +45,15 @@ class Menu : gio.menu_model.MenuModel
   override Menu self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.menu.Menu]
+  Returns: New builder object
+  */
+  static MenuGidBuilder builder()
+  {
+    return new MenuGidBuilder;
   }
 
   /**
@@ -295,5 +305,18 @@ class Menu : gio.menu_model.MenuModel
   void removeAll()
   {
     g_menu_remove_all(cast(GMenu*)this._cPtr);
+  }
+}
+
+class MenuGidBuilderImpl(T) : gio.menu_model.MenuModelGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.menu.Menu]
+final class MenuGidBuilder : MenuGidBuilderImpl!MenuGidBuilder
+{
+  Menu build()
+  {
+    return new Menu(cast(void*)createGObject(Menu._getGType), Yes.Take);
   }
 }

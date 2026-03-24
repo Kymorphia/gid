@@ -8,6 +8,7 @@ import atk.object;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -127,4 +128,8 @@ interface Selection
       Returns: Signal ID
   */
   ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface SelectionGidBuilderImpl(T)
+{
 }

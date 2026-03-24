@@ -6,6 +6,7 @@ import atk.c.types;
 import atk.object;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value_array;
 
@@ -44,6 +45,15 @@ class Relation : gobject.object.ObjectWrap
   override Relation self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.relation.Relation]
+  Returns: New builder object
+  */
+  static RelationGidBuilder builder()
+  {
+    return new RelationGidBuilder;
   }
 
   /** */
@@ -145,5 +155,30 @@ class Relation : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)atk_relation_remove_target(cast(AtkRelation*)this._cPtr, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class RelationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T relationType(atk.types.RelationType propval)
+  {
+    return setProperty("relation-type", propval);
+  }
+
+  /** */
+  T target(gobject.value_array.ValueArray propval)
+  {
+    return setProperty("target", propval);
+  }
+}
+
+/// Fluent builder for [atk.relation.Relation]
+final class RelationGidBuilder : RelationGidBuilderImpl!RelationGidBuilder
+{
+  Relation build()
+  {
+    return new Relation(cast(void*)createGObject(Relation._getGType), Yes.Take);
   }
 }

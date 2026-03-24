@@ -3,6 +3,7 @@ module gtk.expander;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -138,6 +139,15 @@ class Expander : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.expander.Expander]
+  Returns: New builder object
+  */
+  static ExpanderGidBuilder builder()
+  {
+    return new ExpanderGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -153,7 +163,7 @@ class Expander : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -172,7 +182,7 @@ class Expander : gtk.widget.Widget
   */
   @property void expanded(bool propval)
   {
-    return setExpanded(propval);
+    setExpanded(propval);
   }
 
   /**
@@ -191,7 +201,7 @@ class Expander : gtk.widget.Widget
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -210,7 +220,7 @@ class Expander : gtk.widget.Widget
   */
   @property void labelWidget(gtk.widget.Widget propval)
   {
-    return setLabelWidget(propval);
+    setLabelWidget(propval);
   }
 
   /**
@@ -231,7 +241,7 @@ class Expander : gtk.widget.Widget
   */
   @property void resizeToplevel(bool propval)
   {
-    return setResizeToplevel(propval);
+    setResizeToplevel(propval);
   }
 
   /**
@@ -250,7 +260,7 @@ class Expander : gtk.widget.Widget
   */
   @property void useMarkup(bool propval)
   {
-    return setUseMarkup(propval);
+    setUseMarkup(propval);
   }
 
   /**
@@ -269,7 +279,7 @@ class Expander : gtk.widget.Widget
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -524,5 +534,97 @@ class Expander : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = Whether the expander has been opened to reveal the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T expanded(bool propval)
+  {
+    return setProperty("expanded", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The text of the expanders label.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `labelWidget` property.
+      Params:
+        propval = A widget to display instead of the usual expander label.
+      Returns: Builder instance for fluent chaining
+  */
+  T labelWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("label-widget", propval);
+  }
+
+  /**
+      Set `resizeToplevel` property.
+      Params:
+        propval = When this property is true, the expander will resize the toplevel
+          widget containing the expander upon expanding and collapsing.
+      Returns: Builder instance for fluent chaining
+  */
+  T resizeToplevel(bool propval)
+  {
+    return setProperty("resize-toplevel", propval);
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether the text in the label is Pango markup.
+      Returns: Builder instance for fluent chaining
+  */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an underline in the text indicates a mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gtk.expander.Expander]
+final class ExpanderGidBuilder : ExpanderGidBuilderImpl!ExpanderGidBuilder
+{
+  Expander build()
+  {
+    return new Expander(cast(void*)createGObject(Expander._getGType), No.Take);
   }
 }

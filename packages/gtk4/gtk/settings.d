@@ -3,6 +3,7 @@ module gtk.settings;
 
 import gdk.display;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -66,6 +67,15 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   override Settings self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.settings.Settings]
+  Returns: New builder object
+  */
+  static SettingsGidBuilder builder()
+  {
+    return new SettingsGidBuilder;
   }
 
   /**
@@ -1426,5 +1436,752 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_settings_reset_property(cast(GtkSettings*)this._cPtr, _name);
+  }
+}
+
+class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.style_provider.StyleProviderGidBuilderImpl!T
+{
+
+  mixin StyleProviderGidBuilderT!();
+
+  /**
+      Set `gtkAlternativeButtonOrder` property.
+      Params:
+        propval = Whether buttons in dialogs should use the alternative button order.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkAlternativeButtonOrder(bool propval)
+  {
+    return setProperty("gtk-alternative-button-order", propval);
+  }
+
+  /**
+      Set `gtkAlternativeSortArrows` property.
+      Params:
+        propval = Controls the direction of the sort indicators in sorted list and tree
+          views.
+          
+          By default an arrow pointing down means the column is sorted
+          in ascending order. When set to true, this order will be inverted.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkAlternativeSortArrows(bool propval)
+  {
+    return setProperty("gtk-alternative-sort-arrows", propval);
+  }
+
+  /**
+      Set `gtkApplicationPreferDarkTheme` property.
+      Params:
+        propval = Whether the application prefers to use a dark theme.
+          
+          If a GTK theme includes a dark variant, it will be used
+          instead of the configured theme.
+          
+          Some applications benefit from minimizing the amount of light
+          pollution that interferes with the content. Good candidates for
+          dark themes are photo and video editors that make the actual
+          content get all the attention and minimize the distraction of
+          the chrome.
+          
+          Dark themes should not be used for documents, where large spaces
+          are white/light and the dark chrome creates too much contrast
+          (web browser, text editor...).
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkApplicationPreferDarkTheme(bool propval)
+  {
+    return setProperty("gtk-application-prefer-dark-theme", propval);
+  }
+
+  /**
+      Set `gtkCursorAspectRatio` property.
+      Params:
+        propval = The aspect ratio of the text caret.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkCursorAspectRatio(double propval)
+  {
+    return setProperty("gtk-cursor-aspect-ratio", propval);
+  }
+
+  /**
+      Set `gtkCursorBlink` property.
+      Params:
+        propval = Whether the cursor should blink.
+          
+          Also see the `property@Gtk.Settings:gtk-cursor-blink-timeout` setting,
+          which allows more flexible control over cursor blinking.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkCursorBlink(bool propval)
+  {
+    return setProperty("gtk-cursor-blink", propval);
+  }
+
+  /**
+      Set `gtkCursorBlinkTime` property.
+      Params:
+        propval = Length of the cursor blink cycle, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkCursorBlinkTime(int propval)
+  {
+    return setProperty("gtk-cursor-blink-time", propval);
+  }
+
+  /**
+      Set `gtkCursorBlinkTimeout` property.
+      Params:
+        propval = Time after which the cursor stops blinking, in seconds.
+          
+          The timer is reset after each user interaction.
+          
+          Setting this to zero has the same effect as setting
+          `property@Gtk.Settings:gtk-cursor-blink` to false.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkCursorBlinkTimeout(int propval)
+  {
+    return setProperty("gtk-cursor-blink-timeout", propval);
+  }
+
+  /**
+      Set `gtkCursorThemeName` property.
+      Params:
+        propval = Name of the cursor theme to use.
+          
+          Use null to use the default theme.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkCursorThemeName(string propval)
+  {
+    return setProperty("gtk-cursor-theme-name", propval);
+  }
+
+  /**
+      Set `gtkCursorThemeSize` property.
+      Params:
+        propval = The size to use for cursors.
+          
+          0 means to use the default size.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkCursorThemeSize(int propval)
+  {
+    return setProperty("gtk-cursor-theme-size", propval);
+  }
+
+  /**
+      Set `gtkDecorationLayout` property.
+      Params:
+        propval = Determines which buttons should be put in the
+          titlebar of client-side decorated windows, and whether they
+          should be placed on the left or right.
+          
+          The format of the string is button names, separated by commas.
+          A colon separates the buttons that should appear on the left
+          from those on the right. Recognized button names are minimize,
+          maximize, close, icon (the window icon) and menu (a menu button
+          for the fallback app menu).
+          
+          For example, "menu:minimize,maximize,close" specifies a menu
+          on the left, and minimize, maximize and close buttons on the right.
+          
+          Note that buttons will only be shown when they are meaningful.
+          E.g. a menu button only appears when the desktop shell does not
+          show the app menu, and a close button only appears on a window
+          that can be closed.
+          
+          Also note that the setting can be overridden with the
+          `property@Gtk.HeaderBar:decoration-layout` property.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkDecorationLayout(string propval)
+  {
+    return setProperty("gtk-decoration-layout", propval);
+  }
+
+  /**
+      Set `gtkDialogsUseHeader` property.
+      Params:
+        propval = Whether builtin GTK dialogs such as the file chooser, the
+          color chooser or the font chooser will use a header bar at
+          the top to show action widgets, or an action area at the bottom.
+          
+          This setting does not affect custom dialogs using [gtk.dialog.Dialog]
+          directly, or message dialogs.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkDialogsUseHeader(bool propval)
+  {
+    return setProperty("gtk-dialogs-use-header", propval);
+  }
+
+  /**
+      Set `gtkDndDragThreshold` property.
+      Params:
+        propval = The number of pixels the cursor can move before dragging.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkDndDragThreshold(int propval)
+  {
+    return setProperty("gtk-dnd-drag-threshold", propval);
+  }
+
+  /**
+      Set `gtkDoubleClickDistance` property.
+      Params:
+        propval = The maximum distance allowed between two clicks for them to be considered
+          a double click, in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkDoubleClickDistance(int propval)
+  {
+    return setProperty("gtk-double-click-distance", propval);
+  }
+
+  /**
+      Set `gtkDoubleClickTime` property.
+      Params:
+        propval = The maximum time to allow between two clicks for them to be considered
+          a double click, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkDoubleClickTime(int propval)
+  {
+    return setProperty("gtk-double-click-time", propval);
+  }
+
+  /**
+      Set `gtkEnableAccels` property.
+      Params:
+        propval = Whether menu items should have visible accelerators which can be
+          activated.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkEnableAccels(bool propval)
+  {
+    return setProperty("gtk-enable-accels", propval);
+  }
+
+  /**
+      Set `gtkEnableAnimations` property.
+      Params:
+        propval = Whether to enable toolkit-wide animations.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkEnableAnimations(bool propval)
+  {
+    return setProperty("gtk-enable-animations", propval);
+  }
+
+  /**
+      Set `gtkEnableEventSounds` property.
+      Params:
+        propval = Whether to play any event sounds at all.
+          
+          See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+          for more information on event sounds and sound themes.
+          
+          GTK itself does not support event sounds, you have to use a loadable
+          module like the one that comes with libcanberra.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkEnableEventSounds(bool propval)
+  {
+    return setProperty("gtk-enable-event-sounds", propval);
+  }
+
+  /**
+      Set `gtkEnableInputFeedbackSounds` property.
+      Params:
+        propval = Whether to play event sounds as feedback to user input.
+          
+          See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+          for more information on event sounds and sound themes.
+          
+          GTK itself does not support event sounds, you have to use a loadable
+          module like the one that comes with libcanberra.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkEnableInputFeedbackSounds(bool propval)
+  {
+    return setProperty("gtk-enable-input-feedback-sounds", propval);
+  }
+
+  /**
+      Set `gtkEnablePrimaryPaste` property.
+      Params:
+        propval = Whether a middle click on a mouse should paste the
+          'PRIMARY' clipboard content at the cursor location.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkEnablePrimaryPaste(bool propval)
+  {
+    return setProperty("gtk-enable-primary-paste", propval);
+  }
+
+  /**
+      Set `gtkEntryPasswordHintTimeout` property.
+      Params:
+        propval = How long to show the last input character in hidden
+          entries.
+          
+          This value is in milliseconds. 0 disables showing the
+          last char. 600 is a good value for enabling it.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkEntryPasswordHintTimeout(uint propval)
+  {
+    return setProperty("gtk-entry-password-hint-timeout", propval);
+  }
+
+  /**
+      Set `gtkEntrySelectOnFocus` property.
+      Params:
+        propval = Whether to select the contents of an entry when it is focused.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkEntrySelectOnFocus(bool propval)
+  {
+    return setProperty("gtk-entry-select-on-focus", propval);
+  }
+
+  /**
+      Set `gtkErrorBell` property.
+      Params:
+        propval = When true, keyboard navigation and other input-related errors
+          will cause a beep.
+          
+          Since the error bell is implemented using [gdk.surface.Surface.beep], the
+          windowing system may offer ways to configure the error bell in many
+          ways, such as flashing the window or similar visual effects.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkErrorBell(bool propval)
+  {
+    return setProperty("gtk-error-bell", propval);
+  }
+
+  /**
+      Set `gtkFontName` property.
+      Params:
+        propval = The default font to use.
+          
+          GTK uses the family name and size from this string.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkFontName(string propval)
+  {
+    return setProperty("gtk-font-name", propval);
+  }
+
+  /**
+      Set `gtkFontconfigTimestamp` property.
+      Params:
+        propval = Timestamp of the current fontconfig configuration.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkFontconfigTimestamp(uint propval)
+  {
+    return setProperty("gtk-fontconfig-timestamp", propval);
+  }
+
+  /**
+      Set `gtkHintFontMetrics` property.
+      Params:
+        propval = Whether hinting should be applied to font metrics.
+          
+          Note that this also turns off subpixel positioning of glyphs,
+          since it conflicts with metrics hinting.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkHintFontMetrics(bool propval)
+  {
+    return setProperty("gtk-hint-font-metrics", propval);
+  }
+
+  /**
+      Set `gtkIconThemeName` property.
+      Params:
+        propval = Name of the icon theme to use.
+          
+          See [gtk.icon_theme.IconTheme] for details about how
+          GTK handles icon themes.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkIconThemeName(string propval)
+  {
+    return setProperty("gtk-icon-theme-name", propval);
+  }
+
+  /**
+      Set `gtkImModule` property.
+      Params:
+        propval = Which IM (input method) module should be used by default.
+          
+          This is the input method that will be used if the user has not
+          explicitly chosen another input method from the IM context menu.
+          This also can be a colon-separated list of input methods, which GTK
+          will try in turn until it finds one available on the system.
+          
+          See [gtk.imcontext.IMContext].
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkImModule(string propval)
+  {
+    return setProperty("gtk-im-module", propval);
+  }
+
+  /**
+      Set `gtkKeynavUseCaret` property.
+      Params:
+        propval = Whether GTK should make sure that text can be navigated with
+          a caret, even if it is not editable.
+          
+          This is useful when using a screen reader.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkKeynavUseCaret(bool propval)
+  {
+    return setProperty("gtk-keynav-use-caret", propval);
+  }
+
+  /**
+      Set `gtkLabelSelectOnFocus` property.
+      Params:
+        propval = Whether to select the contents of a selectable
+          label when it is focused.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkLabelSelectOnFocus(bool propval)
+  {
+    return setProperty("gtk-label-select-on-focus", propval);
+  }
+
+  /**
+      Set `gtkLongPressTime` property.
+      Params:
+        propval = The time for a button or touch press to be considered a “long press”.
+          
+          See [gtk.gesture_long_press.GestureLongPress].
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkLongPressTime(uint propval)
+  {
+    return setProperty("gtk-long-press-time", propval);
+  }
+
+  /**
+      Set `gtkOverlayScrolling` property.
+      Params:
+        propval = Whether scrolled windows may use overlaid scrolling indicators.
+          
+          If this is set to false, scrolled windows will have permanent
+          scrollbars.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkOverlayScrolling(bool propval)
+  {
+    return setProperty("gtk-overlay-scrolling", propval);
+  }
+
+  /**
+      Set `gtkPrimaryButtonWarpsSlider` property.
+      Params:
+        propval = If the value of this setting is true, clicking the primary button in a
+          [gtk.range.Range] trough will move the slider, and hence set the range’s value, to
+          the point that you clicked.
+          
+          If it is false, a primary click will cause the slider/value to move
+          by the range’s page-size towards the point clicked.
+          
+          Whichever action you choose for the primary button, the other action will
+          be available by holding Shift and primary-clicking, or clicking the middle
+          mouse button.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkPrimaryButtonWarpsSlider(bool propval)
+  {
+    return setProperty("gtk-primary-button-warps-slider", propval);
+  }
+
+  /**
+      Set `gtkPrintBackends` property.
+      Params:
+        propval = A comma-separated list of print backends to use in the print
+          dialog.
+          
+          Available print backends depend on the GTK installation,
+          and may include "file", "cups", "lpr" or "papi".
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkPrintBackends(string propval)
+  {
+    return setProperty("gtk-print-backends", propval);
+  }
+
+  /**
+      Set `gtkPrintPreviewCommand` property.
+      Params:
+        propval = A command to run for displaying the print preview.
+          
+          The command should contain a ``f`` placeholder, which will get
+          replaced by the path to the pdf file. The command may also
+          contain a ``s`` placeholder, which will get replaced by the
+          path to a file containing the print settings in the format
+          produced by [gtk.print_settings.PrintSettings.toFile].
+          
+          The preview application is responsible for removing the pdf
+          file and the print settings file when it is done.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkPrintPreviewCommand(string propval)
+  {
+    return setProperty("gtk-print-preview-command", propval);
+  }
+
+  /**
+      Set `gtkRecentFilesEnabled` property.
+      Params:
+        propval = Whether GTK should keep track of items inside the recently used
+          resources list.
+          
+          If set to false, the list will always be empty.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkRecentFilesEnabled(bool propval)
+  {
+    return setProperty("gtk-recent-files-enabled", propval);
+  }
+
+  /**
+      Set `gtkRecentFilesMaxAge` property.
+      Params:
+        propval = The maximum age, in days, of the items inside the recently used
+          resources list.
+          
+          Items older than this setting will be excised from the list.
+          If set to 0, the list will always be empty; if set to -1, no
+          item will be removed.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkRecentFilesMaxAge(int propval)
+  {
+    return setProperty("gtk-recent-files-max-age", propval);
+  }
+
+  /**
+      Set `gtkShellShowsAppMenu` property.
+      Params:
+        propval = Set to true if the desktop environment is displaying
+          the app menu, false if the app should display it itself.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkShellShowsAppMenu(bool propval)
+  {
+    return setProperty("gtk-shell-shows-app-menu", propval);
+  }
+
+  /**
+      Set `gtkShellShowsDesktop` property.
+      Params:
+        propval = Set to true if the desktop environment is displaying
+          the desktop folder, false if not.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkShellShowsDesktop(bool propval)
+  {
+    return setProperty("gtk-shell-shows-desktop", propval);
+  }
+
+  /**
+      Set `gtkShellShowsMenubar` property.
+      Params:
+        propval = Set to true if the desktop environment is displaying
+          the menubar, false if the app should display it itself.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkShellShowsMenubar(bool propval)
+  {
+    return setProperty("gtk-shell-shows-menubar", propval);
+  }
+
+  /**
+      Set `gtkShowStatusShapes` property.
+      Params:
+        propval = When true, widgets like switches include shapes to indicate their on/off state.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkShowStatusShapes(bool propval)
+  {
+    return setProperty("gtk-show-status-shapes", propval);
+  }
+
+  /**
+      Set `gtkSoundThemeName` property.
+      Params:
+        propval = The XDG sound theme to use for event sounds.
+          
+          See the [Sound Theme Specifications](http://www.freedesktop.org/wiki/Specifications/sound-theme-spec)
+          for more information on event sounds and sound themes.
+          
+          GTK itself does not support event sounds, you have to use
+          a loadable module like the one that comes with libcanberra.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkSoundThemeName(string propval)
+  {
+    return setProperty("gtk-sound-theme-name", propval);
+  }
+
+  /**
+      Set `gtkSplitCursor` property.
+      Params:
+        propval = Whether two cursors should be displayed for mixed left-to-right and
+          right-to-left text.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkSplitCursor(bool propval)
+  {
+    return setProperty("gtk-split-cursor", propval);
+  }
+
+  /**
+      Set `gtkThemeName` property.
+      Params:
+        propval = Name of the theme to load.
+          
+          See [gtk.css_provider.CssProvider] for details about how
+          GTK finds the CSS stylesheet for a theme.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkThemeName(string propval)
+  {
+    return setProperty("gtk-theme-name", propval);
+  }
+
+  /**
+      Set `gtkTitlebarDoubleClick` property.
+      Params:
+        propval = Determines the action to take when a double-click
+          occurs on the titlebar of client-side decorated windows.
+          
+          Recognized actions are minimize, toggle-maximize, menu, lower
+          or none.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkTitlebarDoubleClick(string propval)
+  {
+    return setProperty("gtk-titlebar-double-click", propval);
+  }
+
+  /**
+      Set `gtkTitlebarMiddleClick` property.
+      Params:
+        propval = Determines the action to take when a middle-click
+          occurs on the titlebar of client-side decorated windows.
+          
+          Recognized actions are minimize, toggle-maximize, menu, lower
+          or none.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkTitlebarMiddleClick(string propval)
+  {
+    return setProperty("gtk-titlebar-middle-click", propval);
+  }
+
+  /**
+      Set `gtkTitlebarRightClick` property.
+      Params:
+        propval = Determines the action to take when a right-click
+          occurs on the titlebar of client-side decorated windows.
+          
+          Recognized actions are minimize, toggle-maximize, menu, lower
+          or none.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkTitlebarRightClick(string propval)
+  {
+    return setProperty("gtk-titlebar-right-click", propval);
+  }
+
+  /**
+      Set `gtkXftAntialias` property.
+      Params:
+        propval = Whether to antialias fonts.
+          
+          The values are 0 for no, 1 for yes, or -1 for the system default.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkXftAntialias(int propval)
+  {
+    return setProperty("gtk-xft-antialias", propval);
+  }
+
+  /**
+      Set `gtkXftDpi` property.
+      Params:
+        propval = The font resolution, in 1024 * dots/inch.
+          
+          -1 to use the default value.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkXftDpi(int propval)
+  {
+    return setProperty("gtk-xft-dpi", propval);
+  }
+
+  /**
+      Set `gtkXftHinting` property.
+      Params:
+        propval = Whether to enable font hinting.
+          
+          The values are 0 for no, 1 for yes, or -1 for the system default.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkXftHinting(int propval)
+  {
+    return setProperty("gtk-xft-hinting", propval);
+  }
+
+  /**
+      Set `gtkXftHintstyle` property.
+      Params:
+        propval = What degree of font hinting to use.
+          
+          The possible vaues are hintnone, hintslight,
+          hintmedium, hintfull.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkXftHintstyle(string propval)
+  {
+    return setProperty("gtk-xft-hintstyle", propval);
+  }
+
+  /**
+      Set `gtkXftRgba` property.
+      Params:
+        propval = The type of subpixel antialiasing to use.
+          
+          The possible values are none, rgb, bgr, vrgb, vbgr.
+          
+          Note that GSK does not support subpixel antialiasing, and this
+          setting has no effect on font rendering in GTK.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkXftRgba(string propval)
+  {
+    return setProperty("gtk-xft-rgba", propval);
+  }
+}
+
+/// Fluent builder for [gtk.settings.Settings]
+final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
+{
+  Settings build()
+  {
+    return new Settings(cast(void*)createGObject(Settings._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.tree_drag_dest_mixin;
 
 public import gtk.tree_drag_dest_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.selection_data;
@@ -51,4 +52,8 @@ template TreeDragDestT()
     _retval = cast(bool)gtk_tree_drag_dest_row_drop_possible(cast(GtkTreeDragDest*)this._cPtr, destPath ? cast(GtkTreePath*)destPath._cPtr(No.Dup) : null, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null);
     return _retval;
   }
+}
+
+template TreeDragDestGidBuilderT()
+{
 }

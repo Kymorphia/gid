@@ -4,6 +4,7 @@ module gtk.header_bar;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -58,6 +59,15 @@ class HeaderBar : gtk.container.Container
     return this;
   }
 
+  /**
+  Get builder for [gtk.header_bar.HeaderBar]
+  Returns: New builder object
+  */
+  static HeaderBarGidBuilder builder()
+  {
+    return new HeaderBarGidBuilder;
+  }
+
   /** */
   @property gtk.widget.Widget customTitle()
   {
@@ -67,7 +77,7 @@ class HeaderBar : gtk.container.Container
   /** */
   @property void customTitle(gtk.widget.Widget propval)
   {
-    return setCustomTitle(propval);
+    setCustomTitle(propval);
   }
 
   /**
@@ -96,7 +106,7 @@ class HeaderBar : gtk.container.Container
   */
   @property void decorationLayout(string propval)
   {
-    return setDecorationLayout(propval);
+    setDecorationLayout(propval);
   }
 
   /**
@@ -136,7 +146,7 @@ class HeaderBar : gtk.container.Container
   */
   @property void hasSubtitle(bool propval)
   {
-    return setHasSubtitle(propval);
+    setHasSubtitle(propval);
   }
 
   /**
@@ -165,7 +175,7 @@ class HeaderBar : gtk.container.Container
   */
   @property void showCloseButton(bool propval)
   {
-    return setShowCloseButton(propval);
+    setShowCloseButton(propval);
   }
 
   /** */
@@ -189,7 +199,7 @@ class HeaderBar : gtk.container.Container
   /** */
   @property void subtitle(string propval)
   {
-    return setSubtitle(propval);
+    setSubtitle(propval);
   }
 
   /** */
@@ -201,7 +211,7 @@ class HeaderBar : gtk.container.Container
   /** */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -421,5 +431,98 @@ class HeaderBar : gtk.container.Container
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_header_bar_set_title(cast(GtkHeaderBar*)this._cPtr, _title);
+  }
+}
+
+class HeaderBarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+
+  /** */
+  T customTitle(gtk.widget.Widget propval)
+  {
+    return setProperty("custom-title", propval);
+  }
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for buttons. If this property is
+          not set, the #GtkSettings:gtk-decoration-layout setting
+          is used.
+          
+          See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
+          about the format of this string.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorationLayout(string propval)
+  {
+    return setProperty("decoration-layout", propval);
+  }
+
+  /**
+      Set `decorationLayoutSet` property.
+      Params:
+        propval = Set to true if #GtkHeaderBar:decoration-layout is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorationLayoutSet(bool propval)
+  {
+    return setProperty("decoration-layout-set", propval);
+  }
+
+  /**
+      Set `hasSubtitle` property.
+      Params:
+        propval = If true, reserve space for a subtitle, even if none
+          is currently set.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasSubtitle(bool propval)
+  {
+    return setProperty("has-subtitle", propval);
+  }
+
+  /**
+      Set `showCloseButton` property.
+      Params:
+        propval = Whether to show window decorations.
+          
+          Which buttons are actually shown and where is determined
+          by the #GtkHeaderBar:decoration-layout property, and by
+          the state of the window (e.g. a close button will not be
+          shown if the window can't be closed).
+      Returns: Builder instance for fluent chaining
+  */
+  T showCloseButton(bool propval)
+  {
+    return setProperty("show-close-button", propval);
+  }
+
+  /** */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+
+  /** */
+  T subtitle(string propval)
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /** */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtk.header_bar.HeaderBar]
+final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
+{
+  HeaderBar build()
+  {
+    return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import atk.range;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.value;
 
 /**
@@ -310,4 +311,8 @@ interface Value
       Returns: Signal ID
   */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface ValueGidBuilderImpl(T)
+{
 }

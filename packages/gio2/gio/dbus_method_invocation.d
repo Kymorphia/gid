@@ -13,6 +13,7 @@ import gio.unix_fdlist;
 import glib.error;
 import glib.types;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -51,6 +52,15 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   override DBusMethodInvocation self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.dbus_method_invocation.DBusMethodInvocation]
+  Returns: New builder object
+  */
+  static DBusMethodInvocationGidBuilder builder()
+  {
+    return new DBusMethodInvocationGidBuilder;
   }
 
   /**
@@ -299,5 +309,18 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   void returnValueWithUnixFdList(glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
   {
     g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)this._cPtr, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
+  }
+}
+
+class DBusMethodInvocationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.dbus_method_invocation.DBusMethodInvocation]
+final class DBusMethodInvocationGidBuilder : DBusMethodInvocationGidBuilderImpl!DBusMethodInvocationGidBuilder
+{
+  DBusMethodInvocation build()
+  {
+    return new DBusMethodInvocation(cast(void*)createGObject(DBusMethodInvocation._getGType), No.Take);
   }
 }

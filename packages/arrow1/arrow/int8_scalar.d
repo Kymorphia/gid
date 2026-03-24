@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class Int8Scalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class Int8Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.int8_scalar.Int8Scalar]
+  Returns: New builder object
+  */
+  static Int8ScalarGidBuilder builder()
+  {
+    return new Int8ScalarGidBuilder;
+  }
+
   /** */
   this(byte value)
   {
@@ -50,5 +60,18 @@ class Int8Scalar : arrow.scalar.Scalar
     byte _retval;
     _retval = garrow_int8_scalar_get_value(cast(GArrowInt8Scalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class Int8ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.int8_scalar.Int8Scalar]
+final class Int8ScalarGidBuilder : Int8ScalarGidBuilderImpl!Int8ScalarGidBuilder
+{
+  Int8Scalar build()
+  {
+    return new Int8Scalar(cast(void*)createGObject(Int8Scalar._getGType), Yes.Take);
   }
 }

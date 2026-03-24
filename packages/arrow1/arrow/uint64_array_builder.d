@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class UInt64ArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -35,6 +36,15 @@ class UInt64ArrayBuilder : arrow.array_builder.ArrayBuilder
   override UInt64ArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.uint64_array_builder.UInt64ArrayBuilder]
+  Returns: New builder object
+  */
+  static UInt64ArrayBuilderGidBuilder builder()
+  {
+    return new UInt64ArrayBuilderGidBuilder;
   }
 
   /** */
@@ -98,5 +108,18 @@ class UInt64ArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class UInt64ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint64_array_builder.UInt64ArrayBuilder]
+final class UInt64ArrayBuilderGidBuilder : UInt64ArrayBuilderGidBuilderImpl!UInt64ArrayBuilderGidBuilder
+{
+  UInt64ArrayBuilder build()
+  {
+    return new UInt64ArrayBuilder(cast(void*)createGObject(UInt64ArrayBuilder._getGType), Yes.Take);
   }
 }

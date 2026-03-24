@@ -10,6 +10,7 @@ import gmime.multipart;
 import gmime.object;
 import gmime.signature_list;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -41,6 +42,15 @@ class MultipartSigned : gmime.multipart.Multipart
   override MultipartSigned self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.multipart_signed.MultipartSigned]
+  Returns: New builder object
+  */
+  static MultipartSignedGidBuilder builder()
+  {
+    return new MultipartSignedGidBuilder;
   }
 
   /**
@@ -101,5 +111,18 @@ class MultipartSigned : gmime.multipart.Multipart
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class MultipartSignedGidBuilderImpl(T) : gmime.multipart.MultipartGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.multipart_signed.MultipartSigned]
+final class MultipartSignedGidBuilder : MultipartSignedGidBuilderImpl!MultipartSignedGidBuilder
+{
+  MultipartSigned build()
+  {
+    return new MultipartSigned(cast(void*)createGObject(MultipartSigned._getGType), Yes.Take);
   }
 }

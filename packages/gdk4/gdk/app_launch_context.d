@@ -8,6 +8,7 @@ import gdk.types;
 import gid.gid;
 import gio.app_launch_context;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -57,6 +58,24 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   override AppLaunchContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.app_launch_context.AppLaunchContext]
+  Returns: New builder object
+  */
+  static AppLaunchContextGidBuilder builder()
+  {
+    return new AppLaunchContextGidBuilder;
+  }
+
+  /**
+      Get `display` property.
+      Returns: The display that the [gdk.app_launch_context.AppLaunchContext] is on.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   alias getDisplay = gio.app_launch_context.AppLaunchContext.getDisplay;
@@ -150,5 +169,29 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   void setTimestamp(uint timestamp)
   {
     gdk_app_launch_context_set_timestamp(cast(GdkAppLaunchContext*)this._cPtr, timestamp);
+  }
+}
+
+class AppLaunchContextGidBuilderImpl(T) : gio.app_launch_context.AppLaunchContextGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display that the [gdk.app_launch_context.AppLaunchContext] is on.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.app_launch_context.AppLaunchContext]
+final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunchContextGidBuilder
+{
+  AppLaunchContext build()
+  {
+    return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 interface Writable
@@ -28,4 +29,8 @@ interface Writable
 
   /** */
   bool write(ubyte[] data);
+}
+
+interface WritableGidBuilderImpl(T)
+{
 }

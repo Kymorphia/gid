@@ -2,6 +2,7 @@
 module panel.toggle_button;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -56,6 +57,24 @@ class ToggleButton : gtk.widget.Widget
   }
 
   /**
+  Get builder for [panel.toggle_button.ToggleButton]
+  Returns: New builder object
+  */
+  static ToggleButtonGidBuilder builder()
+  {
+    return new ToggleButtonGidBuilder;
+  }
+
+  /**
+      Get `area` property.
+      Returns: The area this button will reveal.
+  */
+  @property panel.types.Area area()
+  {
+    return gobject.object.ObjectWrap.getProperty!(panel.types.Area)("area");
+  }
+
+  /**
       Get `dock` property.
       Returns: The associated [panel.dock.Dock]
   */
@@ -88,5 +107,41 @@ class ToggleButton : gtk.widget.Widget
     GtkWidget* _cretval;
     _cretval = panel_toggle_button_new(dock ? cast(PanelDock*)dock._cPtr(No.Dup) : null, area);
     this(_cretval, No.Take);
+  }
+}
+
+class ToggleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `area` property.
+      Params:
+        propval = The area this button will reveal.
+      Returns: Builder instance for fluent chaining
+  */
+  T area(panel.types.Area propval)
+  {
+    return setProperty("area", propval);
+  }
+
+  /**
+      Set `dock` property.
+      Params:
+        propval = The associated [panel.dock.Dock]
+      Returns: Builder instance for fluent chaining
+  */
+  T dock(panel.dock.Dock propval)
+  {
+    return setProperty("dock", propval);
+  }
+}
+
+/// Fluent builder for [panel.toggle_button.ToggleButton]
+final class ToggleButtonGidBuilder : ToggleButtonGidBuilderImpl!ToggleButtonGidBuilder
+{
+  ToggleButton build()
+  {
+    return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), No.Take);
   }
 }

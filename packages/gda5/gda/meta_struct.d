@@ -9,6 +9,7 @@ import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -39,6 +40,27 @@ class MetaStruct : gobject.object.ObjectWrap
   override MetaStruct self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.meta_struct.MetaStruct]
+  Returns: New builder object
+  */
+  static MetaStructGidBuilder builder()
+  {
+    return new MetaStructGidBuilder;
+  }
+
+  /** */
+  @property uint features()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("features");
+  }
+
+  /** */
+  @property gda.meta_store.MetaStore metaStore()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.meta_store.MetaStore)("meta-store");
   }
 
   /**
@@ -269,6 +291,31 @@ class MetaStruct : gobject.object.ObjectWrap
     if (_err)
       throw new MetaStructException(_err);
     return _retval;
+  }
+}
+
+class MetaStructGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T features(uint propval)
+  {
+    return setProperty("features", propval);
+  }
+
+  /** */
+  T metaStore(gda.meta_store.MetaStore propval)
+  {
+    return setProperty("meta-store", propval);
+  }
+}
+
+/// Fluent builder for [gda.meta_struct.MetaStruct]
+final class MetaStructGidBuilder : MetaStructGidBuilderImpl!MetaStructGidBuilder
+{
+  MetaStruct build()
+  {
+    return new MetaStruct(cast(void*)createGObject(MetaStruct._getGType), Yes.Take);
   }
 }
 

@@ -7,6 +7,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class StringArray : arrow.binary_array.BinaryArray
@@ -37,6 +38,15 @@ class StringArray : arrow.binary_array.BinaryArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.string_array.StringArray]
+  Returns: New builder object
+  */
+  static StringArrayGidBuilder builder()
+  {
+    return new StringArrayGidBuilder;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
@@ -52,5 +62,18 @@ class StringArray : arrow.binary_array.BinaryArray
     _cretval = garrow_string_array_get_string(cast(GArrowStringArray*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class StringArrayGidBuilderImpl(T) : arrow.binary_array.BinaryArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.string_array.StringArray]
+final class StringArrayGidBuilder : StringArrayGidBuilderImpl!StringArrayGidBuilder
+{
+  StringArray build()
+  {
+    return new StringArray(cast(void*)createGObject(StringArray._getGType), Yes.Take);
   }
 }

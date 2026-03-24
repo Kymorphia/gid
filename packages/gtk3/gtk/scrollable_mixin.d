@@ -3,6 +3,7 @@ module gtk.scrollable_mixin;
 
 public import gtk.scrollable_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.adjustment;
 public import gtk.border;
@@ -62,7 +63,7 @@ template ScrollableT()
   */
   @property void hadjustment(gtk.adjustment.Adjustment propval)
   {
-    return setHadjustment(propval);
+    setHadjustment(propval);
   }
 
   /**
@@ -83,7 +84,7 @@ template ScrollableT()
   */
   @property void hscrollPolicy(gtk.types.ScrollablePolicy propval)
   {
-    return setHscrollPolicy(propval);
+    setHscrollPolicy(propval);
   }
 
   /**
@@ -104,7 +105,7 @@ template ScrollableT()
   */
   @property void vadjustment(gtk.adjustment.Adjustment propval)
   {
-    return setVadjustment(propval);
+    setVadjustment(propval);
   }
 
   /**
@@ -125,7 +126,7 @@ template ScrollableT()
   */
   @property void vscrollPolicy(gtk.types.ScrollablePolicy propval)
   {
-    return setVscrollPolicy(propval);
+    setVscrollPolicy(propval);
   }
 
   /**
@@ -240,5 +241,57 @@ template ScrollableT()
   override void setVscrollPolicy(gtk.types.ScrollablePolicy policy)
   {
     gtk_scrollable_set_vscroll_policy(cast(GtkScrollable*)this._cPtr, policy);
+  }
+}
+
+template ScrollableGidBuilderT()
+{
+
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = Horizontal #GtkAdjustment of the scrollable widget. This adjustment is
+          shared between the scrollable widget and its parent.
+      Returns: Builder instance for fluent chaining
+  */
+  T hadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("hadjustment", propval);
+  }
+
+  /**
+      Set `hscrollPolicy` property.
+      Params:
+        propval = Determines whether horizontal scrolling should start once the scrollable
+          widget is allocated less than its minimum width or less than its natural width.
+      Returns: Builder instance for fluent chaining
+  */
+  T hscrollPolicy(gtk.types.ScrollablePolicy propval)
+  {
+    return setProperty("hscroll-policy", propval);
+  }
+
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = Verical #GtkAdjustment of the scrollable widget. This adjustment is shared
+          between the scrollable widget and its parent.
+      Returns: Builder instance for fluent chaining
+  */
+  T vadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("vadjustment", propval);
+  }
+
+  /**
+      Set `vscrollPolicy` property.
+      Params:
+        propval = Determines whether vertical scrolling should start once the scrollable
+          widget is allocated less than its minimum height or less than its natural height.
+      Returns: Builder instance for fluent chaining
+  */
+  T vscrollPolicy(gtk.types.ScrollablePolicy propval)
+  {
+    return setProperty("vscroll-policy", propval);
   }
 }

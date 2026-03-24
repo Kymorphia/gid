@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class FileInfo : gobject.object.ObjectWrap
   override FileInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.file_info.FileInfo]
+  Returns: New builder object
+  */
+  static FileInfoGidBuilder builder()
+  {
+    return new FileInfoGidBuilder;
   }
 
   /**
@@ -180,5 +190,63 @@ class FileInfo : gobject.object.ObjectWrap
     _cretval = garrow_file_info_to_string(cast(GArrowFileInfo*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `mtime` property.
+      Params:
+        propval = The time of last modification, if available.
+      Returns: Builder instance for fluent chaining
+  */
+  T mtime(long propval)
+  {
+    return setProperty("mtime", propval);
+  }
+
+  /**
+      Set `path` property.
+      Params:
+        propval = The full file path in the file system.
+      Returns: Builder instance for fluent chaining
+  */
+  T path(string propval)
+  {
+    return setProperty("path", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = The size in bytes, if available
+          Only regular files are guaranteed to have a size.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(long propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /**
+      Set `type` property.
+      Params:
+        propval = The type of the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T type(arrow.types.FileType propval)
+  {
+    return setProperty("type", propval);
+  }
+}
+
+/// Fluent builder for [arrow.file_info.FileInfo]
+final class FileInfoGidBuilder : FileInfoGidBuilderImpl!FileInfoGidBuilder
+{
+  FileInfo build()
+  {
+    return new FileInfo(cast(void*)createGObject(FileInfo._getGType), Yes.Take);
   }
 }

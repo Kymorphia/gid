@@ -3,6 +3,7 @@ module gtk.scrolled_window;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -115,6 +116,15 @@ class ScrolledWindow : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.scrolled_window.ScrolledWindow]
+  Returns: New builder object
+  */
+  static ScrolledWindowGidBuilder builder()
+  {
+    return new ScrolledWindowGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
         
@@ -138,7 +148,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /** */
@@ -150,7 +160,7 @@ class ScrolledWindow : gtk.widget.Widget
   /** */
   @property void hadjustment(gtk.adjustment.Adjustment propval)
   {
-    return setHadjustment(propval);
+    setHadjustment(propval);
   }
 
   /**
@@ -169,7 +179,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void hasFrame(bool propval)
   {
-    return setHasFrame(propval);
+    setHasFrame(propval);
   }
 
   /**
@@ -217,7 +227,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void kineticScrolling(bool propval)
   {
-    return setKineticScrolling(propval);
+    setKineticScrolling(propval);
   }
 
   /**
@@ -236,7 +246,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void maxContentHeight(int propval)
   {
-    return setMaxContentHeight(propval);
+    setMaxContentHeight(propval);
   }
 
   /**
@@ -255,7 +265,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void maxContentWidth(int propval)
   {
-    return setMaxContentWidth(propval);
+    setMaxContentWidth(propval);
   }
 
   /**
@@ -274,7 +284,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void minContentHeight(int propval)
   {
-    return setMinContentHeight(propval);
+    setMinContentHeight(propval);
   }
 
   /**
@@ -293,7 +303,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void minContentWidth(int propval)
   {
-    return setMinContentWidth(propval);
+    setMinContentWidth(propval);
   }
 
   /**
@@ -326,7 +336,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void overlayScrolling(bool propval)
   {
-    return setOverlayScrolling(propval);
+    setOverlayScrolling(propval);
   }
 
   /**
@@ -353,7 +363,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void propagateNaturalHeight(bool propval)
   {
-    return setPropagateNaturalHeight(propval);
+    setPropagateNaturalHeight(propval);
   }
 
   /**
@@ -380,7 +390,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void propagateNaturalWidth(bool propval)
   {
-    return setPropagateNaturalWidth(propval);
+    setPropagateNaturalWidth(propval);
   }
 
   /** */
@@ -392,7 +402,7 @@ class ScrolledWindow : gtk.widget.Widget
   /** */
   @property void vadjustment(gtk.adjustment.Adjustment propval)
   {
-    return setVadjustment(propval);
+    setVadjustment(propval);
   }
 
   /**
@@ -436,7 +446,7 @@ class ScrolledWindow : gtk.widget.Widget
   */
   @property void windowPlacement(gtk.types.CornerType propval)
   {
-    return setPlacement(propval);
+    setPlacement(propval);
   }
 
   /**
@@ -1074,5 +1084,201 @@ class ScrolledWindow : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scroll-child", closure, after);
+  }
+}
+
+class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+          
+          When setting this property, if the child widget does not implement
+          [gtk.scrollable.Scrollable], the scrolled window will add the child to
+          a [gtk.viewport.Viewport] and then set the viewport as the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /** */
+  T hadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("hadjustment", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether to draw a frame around the contents.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval)
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `hscrollbarPolicy` property.
+      Params:
+        propval = When the horizontal scrollbar is displayed.
+          
+          Use [gtk.scrolled_window.ScrolledWindow.setPolicy] to set
+          this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T hscrollbarPolicy(gtk.types.PolicyType propval)
+  {
+    return setProperty("hscrollbar-policy", propval);
+  }
+
+  /**
+      Set `kineticScrolling` property.
+      Params:
+        propval = Whether kinetic scrolling is enabled or not.
+          
+          Kinetic scrolling only applies to devices with source [gdk.types.InputSource.Touchscreen].
+      Returns: Builder instance for fluent chaining
+  */
+  T kineticScrolling(bool propval)
+  {
+    return setProperty("kinetic-scrolling", propval);
+  }
+
+  /**
+      Set `maxContentHeight` property.
+      Params:
+        propval = The maximum content height of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxContentHeight(int propval)
+  {
+    return setProperty("max-content-height", propval);
+  }
+
+  /**
+      Set `maxContentWidth` property.
+      Params:
+        propval = The maximum content width of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxContentWidth(int propval)
+  {
+    return setProperty("max-content-width", propval);
+  }
+
+  /**
+      Set `minContentHeight` property.
+      Params:
+        propval = The minimum content height of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T minContentHeight(int propval)
+  {
+    return setProperty("min-content-height", propval);
+  }
+
+  /**
+      Set `minContentWidth` property.
+      Params:
+        propval = The minimum content width of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T minContentWidth(int propval)
+  {
+    return setProperty("min-content-width", propval);
+  }
+
+  /**
+      Set `overlayScrolling` property.
+      Params:
+        propval = Whether overlay scrolling is enabled or not.
+          
+          If it is, the scrollbars are only added as traditional widgets
+          when a mouse is present. Otherwise, they are overlaid on top of
+          the content, as narrow indicators.
+          
+          Note that overlay scrolling can also be globally disabled, with
+          the `property@Gtk.Settings:gtk-overlay-scrolling` setting.
+      Returns: Builder instance for fluent chaining
+  */
+  T overlayScrolling(bool propval)
+  {
+    return setProperty("overlay-scrolling", propval);
+  }
+
+  /**
+      Set `propagateNaturalHeight` property.
+      Params:
+        propval = Whether the natural height of the child should be calculated and propagated
+          through the scrolled window’s requested natural height.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagateNaturalHeight(bool propval)
+  {
+    return setProperty("propagate-natural-height", propval);
+  }
+
+  /**
+      Set `propagateNaturalWidth` property.
+      Params:
+        propval = Whether the natural width of the child should be calculated and propagated
+          through the scrolled window’s requested natural width.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagateNaturalWidth(bool propval)
+  {
+    return setProperty("propagate-natural-width", propval);
+  }
+
+  /** */
+  T vadjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("vadjustment", propval);
+  }
+
+  /**
+      Set `vscrollbarPolicy` property.
+      Params:
+        propval = When the vertical scrollbar is displayed.
+          
+          Use [gtk.scrolled_window.ScrolledWindow.setPolicy] to set
+          this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T vscrollbarPolicy(gtk.types.PolicyType propval)
+  {
+    return setProperty("vscrollbar-policy", propval);
+  }
+
+  /**
+      Set `windowPlacement` property.
+      Params:
+        propval = Where the contents are located with respect to the scrollbars.
+      Returns: Builder instance for fluent chaining
+  */
+  T windowPlacement(gtk.types.CornerType propval)
+  {
+    return setProperty("window-placement", propval);
+  }
+}
+
+/// Fluent builder for [gtk.scrolled_window.ScrolledWindow]
+final class ScrolledWindowGidBuilder : ScrolledWindowGidBuilderImpl!ScrolledWindowGidBuilder
+{
+  ScrolledWindow build()
+  {
+    return new ScrolledWindow(cast(void*)createGObject(ScrolledWindow._getGType), No.Take);
   }
 }

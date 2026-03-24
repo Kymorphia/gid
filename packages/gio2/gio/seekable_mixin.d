@@ -9,6 +9,7 @@ public import gio.cancellable;
 public import gio.types;
 public import glib.error;
 public import glib.types;
+public import gobject.gid_builder;
 
 /**
     [gio.seekable.Seekable] is implemented by streams (implementations of
@@ -127,4 +128,8 @@ template SeekableT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template SeekableGidBuilderT()
+{
 }

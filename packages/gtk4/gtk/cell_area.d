@@ -5,6 +5,7 @@ import gdk.event;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gobject.value;
@@ -370,6 +371,15 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   }
 
   /**
+  Get builder for [gtk.cell_area.CellArea]
+  Returns: New builder object
+  */
+  static CellAreaGidBuilder builder()
+  {
+    return new CellAreaGidBuilder;
+  }
+
+  /**
       Get `editWidget` property.
       Returns: The widget currently editing the edited cell
         
@@ -409,7 +419,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   */
   @property void focusCell(gtk.cell_renderer.CellRenderer propval)
   {
-    return setFocusCell(propval);
+    setFocusCell(propval);
   }
 
   mixin BuildableT!();
@@ -1334,5 +1344,32 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("remove-editable", closure, after);
+  }
+}
+
+class CellAreaGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+  mixin CellLayoutGidBuilderT!();
+
+  /**
+      Set `focusCell` property.
+      Params:
+        propval = The cell in the area that currently has focus
+      Returns: Builder instance for fluent chaining
+  */
+  T focusCell(gtk.cell_renderer.CellRenderer propval)
+  {
+    return setProperty("focus-cell", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_area.CellArea]
+final class CellAreaGidBuilder : CellAreaGidBuilderImpl!CellAreaGidBuilder
+{
+  CellArea build()
+  {
+    return new CellArea(cast(void*)createGObject(CellArea._getGType), No.Take);
   }
 }

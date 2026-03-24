@@ -3,6 +3,7 @@ module gtk.text_tag;
 
 import gdk.rgba;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -57,6 +58,15 @@ class TextTag : gobject.object.ObjectWrap
   override TextTag self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.text_tag.TextTag]
+  Returns: New builder object
+  */
+  static TextTagGidBuilder builder()
+  {
+    return new TextTagGidBuilder;
   }
 
   /**
@@ -699,6 +709,17 @@ class TextTag : gobject.object.ObjectWrap
   @property void lineHeightSet(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("line-height-set", propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name used to refer to the tag.
+        
+        null for anonymous tags.
+  */
+  @property string name()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /**
@@ -1591,5 +1612,854 @@ class TextTag : gobject.object.ObjectWrap
   void setPriority(int priority)
   {
     gtk_text_tag_set_priority(cast(GtkTextTag*)this._cPtr, priority);
+  }
+}
+
+class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `accumulativeMargin` property.
+      Params:
+        propval = Whether the margins accumulate or override each other.
+          
+          When set to true the margins of this tag are added to the margins
+          of any other non-accumulative margins present. When set to false
+          the margins override one another (the default).
+      Returns: Builder instance for fluent chaining
+  */
+  T accumulativeMargin(bool propval)
+  {
+    return setProperty("accumulative-margin", propval);
+  }
+
+  /**
+      Set `allowBreaks` property.
+      Params:
+        propval = Whether breaks are allowed.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowBreaks(bool propval)
+  {
+    return setProperty("allow-breaks", propval);
+  }
+
+  /** */
+  T allowBreaksSet(bool propval)
+  {
+    return setProperty("allow-breaks-set", propval);
+  }
+
+  /**
+      Set `background` property.
+      Params:
+        propval = Background color as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T background(string propval)
+  {
+    return setProperty("background", propval);
+  }
+
+  /**
+      Set `backgroundFullHeight` property.
+      Params:
+        propval = Whether the background color fills the entire line height
+          or only the height of the tagged characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundFullHeight(bool propval)
+  {
+    return setProperty("background-full-height", propval);
+  }
+
+  /** */
+  T backgroundFullHeightSet(bool propval)
+  {
+    return setProperty("background-full-height-set", propval);
+  }
+
+  /**
+      Set `backgroundRgba` property.
+      Params:
+        propval = Background color as a [gdk.rgba.RGBA].
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("background-rgba", propval);
+  }
+
+  /** */
+  T backgroundSet(bool propval)
+  {
+    return setProperty("background-set", propval);
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = Text direction, e.g. right-to-left or left-to-right.
+      Returns: Builder instance for fluent chaining
+  */
+  T direction(gtk.types.TextDirection propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the text can be modified by the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T editable(bool propval)
+  {
+    return setProperty("editable", propval);
+  }
+
+  /** */
+  T editableSet(bool propval)
+  {
+    return setProperty("editable-set", propval);
+  }
+
+  /**
+      Set `fallback` property.
+      Params:
+        propval = Whether font fallback is enabled.
+          
+          When set to true, other fonts will be substituted
+          where the current font is missing glyphs.
+      Returns: Builder instance for fluent chaining
+  */
+  T fallback(bool propval)
+  {
+    return setProperty("fallback", propval);
+  }
+
+  /** */
+  T fallbackSet(bool propval)
+  {
+    return setProperty("fallback-set", propval);
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = Name of the font family, e.g. Sans, Helvetica, Times, Monospace.
+      Returns: Builder instance for fluent chaining
+  */
+  T family(string propval)
+  {
+    return setProperty("family", propval);
+  }
+
+  /** */
+  T familySet(bool propval)
+  {
+    return setProperty("family-set", propval);
+  }
+
+  /**
+      Set `font` property.
+      Params:
+        propval = Font description as string, e.g. \"Sans Italic 12\".
+          
+          Note that the initial value of this property depends on
+          the internals of [pango.font_description.FontDescription].
+      Returns: Builder instance for fluent chaining
+  */
+  T font(string propval)
+  {
+    return setProperty("font", propval);
+  }
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = Font description as a [pango.font_description.FontDescription].
+      Returns: Builder instance for fluent chaining
+  */
+  T fontDesc(pango.font_description.FontDescription propval)
+  {
+    return setProperty("font-desc", propval);
+  }
+
+  /**
+      Set `fontFeatures` property.
+      Params:
+        propval = OpenType font features, as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontFeatures(string propval)
+  {
+    return setProperty("font-features", propval);
+  }
+
+  /** */
+  T fontFeaturesSet(bool propval)
+  {
+    return setProperty("font-features-set", propval);
+  }
+
+  /**
+      Set `foreground` property.
+      Params:
+        propval = Foreground color as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T foreground(string propval)
+  {
+    return setProperty("foreground", propval);
+  }
+
+  /**
+      Set `foregroundRgba` property.
+      Params:
+        propval = Foreground color as a [gdk.rgba.RGBA].
+      Returns: Builder instance for fluent chaining
+  */
+  T foregroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("foreground-rgba", propval);
+  }
+
+  /** */
+  T foregroundSet(bool propval)
+  {
+    return setProperty("foreground-set", propval);
+  }
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Amount to indent the paragraph, in pixels.
+          
+          A negative value of indent will produce a hanging indentation.
+          That is, the first line will have the full width, and subsequent
+          lines will be indented by the absolute value of indent.
+      Returns: Builder instance for fluent chaining
+  */
+  T indent(int propval)
+  {
+    return setProperty("indent", propval);
+  }
+
+  /** */
+  T indentSet(bool propval)
+  {
+    return setProperty("indent-set", propval);
+  }
+
+  /**
+      Set `insertHyphens` property.
+      Params:
+        propval = Whether to insert hyphens at breaks.
+      Returns: Builder instance for fluent chaining
+  */
+  T insertHyphens(bool propval)
+  {
+    return setProperty("insert-hyphens", propval);
+  }
+
+  /** */
+  T insertHyphensSet(bool propval)
+  {
+    return setProperty("insert-hyphens-set", propval);
+  }
+
+  /**
+      Set `invisible` property.
+      Params:
+        propval = Whether this text is hidden.
+          
+          Note that there may still be problems with the support for invisible
+          text, in particular when navigating programmatically inside a buffer
+          containing invisible segments.
+      Returns: Builder instance for fluent chaining
+  */
+  T invisible(bool propval)
+  {
+    return setProperty("invisible", propval);
+  }
+
+  /** */
+  T invisibleSet(bool propval)
+  {
+    return setProperty("invisible-set", propval);
+  }
+
+  /**
+      Set `justification` property.
+      Params:
+        propval = Left, right, or center justification.
+      Returns: Builder instance for fluent chaining
+  */
+  T justification(gtk.types.Justification propval)
+  {
+    return setProperty("justification", propval);
+  }
+
+  /** */
+  T justificationSet(bool propval)
+  {
+    return setProperty("justification-set", propval);
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language this text is in, as an ISO code.
+          
+          Pango can use this as a hint when rendering the text.
+          If not set, an appropriate default will be used.
+          
+          Note that the initial value of this property depends
+          on the current locale, see also `func@Gtk.get_default_language`.
+      Returns: Builder instance for fluent chaining
+  */
+  T language(string propval)
+  {
+    return setProperty("language", propval);
+  }
+
+  /** */
+  T languageSet(bool propval)
+  {
+    return setProperty("language-set", propval);
+  }
+
+  /**
+      Set `leftMargin` property.
+      Params:
+        propval = Width of the left margin in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T leftMargin(int propval)
+  {
+    return setProperty("left-margin", propval);
+  }
+
+  /** */
+  T leftMarginSet(bool propval)
+  {
+    return setProperty("left-margin-set", propval);
+  }
+
+  /**
+      Set `letterSpacing` property.
+      Params:
+        propval = Extra spacing between graphemes, in Pango units.
+      Returns: Builder instance for fluent chaining
+  */
+  T letterSpacing(int propval)
+  {
+    return setProperty("letter-spacing", propval);
+  }
+
+  /** */
+  T letterSpacingSet(bool propval)
+  {
+    return setProperty("letter-spacing-set", propval);
+  }
+
+  /**
+      Set `lineHeight` property.
+      Params:
+        propval = Factor to scale line height by.
+      Returns: Builder instance for fluent chaining
+  */
+  T lineHeight(float propval)
+  {
+    return setProperty("line-height", propval);
+  }
+
+  /** */
+  T lineHeightSet(bool propval)
+  {
+    return setProperty("line-height-set", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name used to refer to the tag.
+          
+          null for anonymous tags.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `overline` property.
+      Params:
+        propval = Style of overline for this text.
+      Returns: Builder instance for fluent chaining
+  */
+  T overline(pango.types.Overline propval)
+  {
+    return setProperty("overline", propval);
+  }
+
+  /**
+      Set `overlineRgba` property.
+      Params:
+        propval = This property modifies the color of overlines.
+          
+          If not set, overlines will use the foreground color.
+      Returns: Builder instance for fluent chaining
+  */
+  T overlineRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("overline-rgba", propval);
+  }
+
+  /** */
+  T overlineRgbaSet(bool propval)
+  {
+    return setProperty("overline-rgba-set", propval);
+  }
+
+  /** */
+  T overlineSet(bool propval)
+  {
+    return setProperty("overline-set", propval);
+  }
+
+  /**
+      Set `paragraphBackground` property.
+      Params:
+        propval = The paragraph background color as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T paragraphBackground(string propval)
+  {
+    return setProperty("paragraph-background", propval);
+  }
+
+  /**
+      Set `paragraphBackgroundRgba` property.
+      Params:
+        propval = The paragraph background color as a [gdk.rgba.RGBA].
+      Returns: Builder instance for fluent chaining
+  */
+  T paragraphBackgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("paragraph-background-rgba", propval);
+  }
+
+  /** */
+  T paragraphBackgroundSet(bool propval)
+  {
+    return setProperty("paragraph-background-set", propval);
+  }
+
+  /**
+      Set `pixelsAboveLines` property.
+      Params:
+        propval = Pixels of blank space above paragraphs.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsAboveLines(int propval)
+  {
+    return setProperty("pixels-above-lines", propval);
+  }
+
+  /** */
+  T pixelsAboveLinesSet(bool propval)
+  {
+    return setProperty("pixels-above-lines-set", propval);
+  }
+
+  /**
+      Set `pixelsBelowLines` property.
+      Params:
+        propval = Pixels of blank space below paragraphs.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsBelowLines(int propval)
+  {
+    return setProperty("pixels-below-lines", propval);
+  }
+
+  /** */
+  T pixelsBelowLinesSet(bool propval)
+  {
+    return setProperty("pixels-below-lines-set", propval);
+  }
+
+  /**
+      Set `pixelsInsideWrap` property.
+      Params:
+        propval = Pixels of blank space between wrapped lines in a paragraph.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsInsideWrap(int propval)
+  {
+    return setProperty("pixels-inside-wrap", propval);
+  }
+
+  /** */
+  T pixelsInsideWrapSet(bool propval)
+  {
+    return setProperty("pixels-inside-wrap-set", propval);
+  }
+
+  /**
+      Set `rightMargin` property.
+      Params:
+        propval = Width of the right margin, in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T rightMargin(int propval)
+  {
+    return setProperty("right-margin", propval);
+  }
+
+  /** */
+  T rightMarginSet(bool propval)
+  {
+    return setProperty("right-margin-set", propval);
+  }
+
+  /**
+      Set `rise` property.
+      Params:
+        propval = Offset of text above the baseline, in Pango units.
+          
+          Negative values go below the baseline.
+      Returns: Builder instance for fluent chaining
+  */
+  T rise(int propval)
+  {
+    return setProperty("rise", propval);
+  }
+
+  /** */
+  T riseSet(bool propval)
+  {
+    return setProperty("rise-set", propval);
+  }
+
+  /**
+      Set `scale` property.
+      Params:
+        propval = Font size as a scale factor relative to the default font size.
+          
+          This properly adapts to theme changes, etc. so is recommended.
+          Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T scale(double propval)
+  {
+    return setProperty("scale", propval);
+  }
+
+  /** */
+  T scaleSet(bool propval)
+  {
+    return setProperty("scale-set", propval);
+  }
+
+  /**
+      Set `sentence` property.
+      Params:
+        propval = Whether this tag represents a single sentence.
+          
+          This affects cursor movement.
+      Returns: Builder instance for fluent chaining
+  */
+  T sentence(bool propval)
+  {
+    return setProperty("sentence", propval);
+  }
+
+  /** */
+  T sentenceSet(bool propval)
+  {
+    return setProperty("sentence-set", propval);
+  }
+
+  /**
+      Set `showSpaces` property.
+      Params:
+        propval = How to render invisible characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T showSpaces(pango.types.ShowFlags propval)
+  {
+    return setProperty("show-spaces", propval);
+  }
+
+  /** */
+  T showSpacesSet(bool propval)
+  {
+    return setProperty("show-spaces-set", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = Font size in Pango units.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(int propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /**
+      Set `sizePoints` property.
+      Params:
+        propval = Font size in points.
+      Returns: Builder instance for fluent chaining
+  */
+  T sizePoints(double propval)
+  {
+    return setProperty("size-points", propval);
+  }
+
+  /** */
+  T sizeSet(bool propval)
+  {
+    return setProperty("size-set", propval);
+  }
+
+  /**
+      Set `stretch` property.
+      Params:
+        propval = Font stretch as a [pango.types.Stretch], e.g. [pango.types.Stretch.Condensed].
+      Returns: Builder instance for fluent chaining
+  */
+  T stretch(pango.types.Stretch propval)
+  {
+    return setProperty("stretch", propval);
+  }
+
+  /** */
+  T stretchSet(bool propval)
+  {
+    return setProperty("stretch-set", propval);
+  }
+
+  /**
+      Set `strikethrough` property.
+      Params:
+        propval = Whether to strike through the text.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethrough(bool propval)
+  {
+    return setProperty("strikethrough", propval);
+  }
+
+  /**
+      Set `strikethroughRgba` property.
+      Params:
+        propval = This property modifies the color of strikeouts.
+          
+          If not set, strikeouts will use the foreground color.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethroughRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("strikethrough-rgba", propval);
+  }
+
+  /**
+      Set `strikethroughRgbaSet` property.
+      Params:
+        propval = If the `strikethrough-rgba` property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethroughRgbaSet(bool propval)
+  {
+    return setProperty("strikethrough-rgba-set", propval);
+  }
+
+  /** */
+  T strikethroughSet(bool propval)
+  {
+    return setProperty("strikethrough-set", propval);
+  }
+
+  /**
+      Set `style` property.
+      Params:
+        propval = Font style as a [pango.types.Style], e.g. [pango.types.Style.Italic].
+      Returns: Builder instance for fluent chaining
+  */
+  T style(pango.types.Style propval)
+  {
+    return setProperty("style", propval);
+  }
+
+  /** */
+  T styleSet(bool propval)
+  {
+    return setProperty("style-set", propval);
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = Custom tabs for this text.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabs(pango.tab_array.TabArray propval)
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /** */
+  T tabsSet(bool propval)
+  {
+    return setProperty("tabs-set", propval);
+  }
+
+  /**
+      Set `textTransform` property.
+      Params:
+        propval = How to transform the text for display.
+      Returns: Builder instance for fluent chaining
+  */
+  T textTransform(pango.types.TextTransform propval)
+  {
+    return setProperty("text-transform", propval);
+  }
+
+  /** */
+  T textTransformSet(bool propval)
+  {
+    return setProperty("text-transform-set", propval);
+  }
+
+  /**
+      Set `underline` property.
+      Params:
+        propval = Style of underline for this text.
+      Returns: Builder instance for fluent chaining
+  */
+  T underline(pango.types.Underline propval)
+  {
+    return setProperty("underline", propval);
+  }
+
+  /**
+      Set `underlineRgba` property.
+      Params:
+        propval = This property modifies the color of underlines.
+          
+          If not set, underlines will use the foreground color.
+          
+          If [gtk.text_tag.TextTag.underline] is set to [pango.types.Underline.Error],
+          an alternate color may be applied instead of the foreground. Setting
+          this property will always override those defaults.
+      Returns: Builder instance for fluent chaining
+  */
+  T underlineRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("underline-rgba", propval);
+  }
+
+  /**
+      Set `underlineRgbaSet` property.
+      Params:
+        propval = If the `underline-rgba` property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T underlineRgbaSet(bool propval)
+  {
+    return setProperty("underline-rgba-set", propval);
+  }
+
+  /** */
+  T underlineSet(bool propval)
+  {
+    return setProperty("underline-set", propval);
+  }
+
+  /**
+      Set `variant` property.
+      Params:
+        propval = Font variant as a [pango.types.Variant], e.g. [pango.types.Variant.SmallCaps].
+      Returns: Builder instance for fluent chaining
+  */
+  T variant(pango.types.Variant propval)
+  {
+    return setProperty("variant", propval);
+  }
+
+  /** */
+  T variantSet(bool propval)
+  {
+    return setProperty("variant-set", propval);
+  }
+
+  /**
+      Set `weight` property.
+      Params:
+        propval = Font weight as an integer.
+      Returns: Builder instance for fluent chaining
+  */
+  T weight(int propval)
+  {
+    return setProperty("weight", propval);
+  }
+
+  /** */
+  T weightSet(bool propval)
+  {
+    return setProperty("weight-set", propval);
+  }
+
+  /**
+      Set `word` property.
+      Params:
+        propval = Whether this tag represents a single word.
+          
+          This affects line breaks and cursor movement.
+      Returns: Builder instance for fluent chaining
+  */
+  T word(bool propval)
+  {
+    return setProperty("word", propval);
+  }
+
+  /** */
+  T wordSet(bool propval)
+  {
+    return setProperty("word-set", propval);
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Whether to wrap lines never, at word boundaries, or
+          at character boundaries.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapMode(gtk.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+
+  /** */
+  T wrapModeSet(bool propval)
+  {
+    return setProperty("wrap-mode-set", propval);
+  }
+}
+
+/// Fluent builder for [gtk.text_tag.TextTag]
+final class TextTagGidBuilder : TextTagGidBuilderImpl!TextTagGidBuilder
+{
+  TextTag build()
+  {
+    return new TextTag(cast(void*)createGObject(TextTag._getGType), Yes.Take);
   }
 }

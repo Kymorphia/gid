@@ -7,6 +7,7 @@ import arrowflight.descriptor;
 import arrowflight.record_batch_reader;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
     return this;
   }
 
+  /**
+  Get builder for [arrowflight.message_reader.MessageReader]
+  Returns: New builder object
+  */
+  static MessageReaderGidBuilder builder()
+  {
+    return new MessageReaderGidBuilder;
+  }
+
   /** */
   arrowflight.descriptor.Descriptor getDescriptor()
   {
@@ -45,5 +55,18 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
     _cretval = gaflight_message_reader_get_descriptor(cast(GAFlightMessageReader*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class MessageReaderGidBuilderImpl(T) : arrowflight.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.message_reader.MessageReader]
+final class MessageReaderGidBuilder : MessageReaderGidBuilderImpl!MessageReaderGidBuilder
+{
+  MessageReader build()
+  {
+    return new MessageReader(cast(void*)createGObject(MessageReader._getGType), No.Take);
   }
 }

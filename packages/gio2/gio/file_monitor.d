@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.file;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -53,6 +54,15 @@ class FileMonitor : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.file_monitor.FileMonitor]
+  Returns: New builder object
+  */
+  static FileMonitorGidBuilder builder()
+  {
+    return new FileMonitorGidBuilder;
+  }
+
+  /**
       Get `cancelled` property.
       Returns: Whether the monitor has been cancelled.
   */
@@ -77,7 +87,7 @@ class FileMonitor : gobject.object.ObjectWrap
   */
   @property void rateLimit(int propval)
   {
-    return setRateLimit(propval);
+    setRateLimit(propval);
   }
 
   /**
@@ -214,5 +224,29 @@ class FileMonitor : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class FileMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `rateLimit` property.
+      Params:
+        propval = The limit of the monitor to watch for changes, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  */
+  T rateLimit(int propval)
+  {
+    return setProperty("rate-limit", propval);
+  }
+}
+
+/// Fluent builder for [gio.file_monitor.FileMonitor]
+final class FileMonitorGidBuilder : FileMonitorGidBuilderImpl!FileMonitorGidBuilder
+{
+  FileMonitor build()
+  {
+    return new FileMonitor(cast(void*)createGObject(FileMonitor._getGType), No.Take);
   }
 }

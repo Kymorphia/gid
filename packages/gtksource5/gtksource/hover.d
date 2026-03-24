@@ -2,6 +2,7 @@
 module gtksource.hover;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -52,6 +53,15 @@ class Hover : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.hover.Hover]
+  Returns: New builder object
+  */
+  static HoverGidBuilder builder()
+  {
+    return new HoverGidBuilder;
+  }
+
+  /**
       Get `hoverDelay` property.
       Returns: Contains the number of milliseconds to delay before showing the hover assistant.
   */
@@ -80,5 +90,29 @@ class Hover : gobject.object.ObjectWrap
   void removeProvider(gtksource.hover_provider.HoverProvider provider)
   {
     gtk_source_hover_remove_provider(cast(GtkSourceHover*)this._cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
+  }
+}
+
+class HoverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `hoverDelay` property.
+      Params:
+        propval = Contains the number of milliseconds to delay before showing the hover assistant.
+      Returns: Builder instance for fluent chaining
+  */
+  T hoverDelay(uint propval)
+  {
+    return setProperty("hover-delay", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.hover.Hover]
+final class HoverGidBuilder : HoverGidBuilderImpl!HoverGidBuilder
+{
+  Hover build()
+  {
+    return new Hover(cast(void*)createGObject(Hover._getGType), No.Take);
   }
 }

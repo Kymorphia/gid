@@ -2,6 +2,7 @@
 module webkit.security_manager;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -42,6 +43,15 @@ class SecurityManager : gobject.object.ObjectWrap
   override SecurityManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.security_manager.SecurityManager]
+  Returns: New builder object
+  */
+  static SecurityManagerGidBuilder builder()
+  {
+    return new SecurityManagerGidBuilder;
   }
 
   /**
@@ -235,5 +245,18 @@ class SecurityManager : gobject.object.ObjectWrap
     const(char)* _scheme = scheme.toCString(No.Alloc);
     _retval = cast(bool)webkit_security_manager_uri_scheme_is_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
+  }
+}
+
+class SecurityManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.security_manager.SecurityManager]
+final class SecurityManagerGidBuilder : SecurityManagerGidBuilderImpl!SecurityManagerGidBuilder
+{
+  SecurityManager build()
+  {
+    return new SecurityManager(cast(void*)createGObject(SecurityManager._getGType), No.Take);
   }
 }

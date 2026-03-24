@@ -7,6 +7,7 @@ import gio.cancellable;
 import gio.file;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.buffer;
 import gtksource.c.functions;
@@ -54,6 +55,25 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.file_saver.FileSaver]
+  Returns: New builder object
+  */
+  static FileSaverGidBuilder builder()
+  {
+    return new FileSaverGidBuilder;
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The #GtkSourceBuffer to save. The #GtkSourceFileSaver object has a
+        weak reference to the buffer.
+  */
+  @property gtksource.buffer.Buffer buffer()
+  {
+    return getBuffer();
+  }
+
+  /**
       Get `compressionType` property.
       Returns: The compression type.
   */
@@ -69,7 +89,7 @@ class FileSaver : gobject.object.ObjectWrap
   */
   @property void compressionType(gtksource.types.CompressionType propval)
   {
-    return setCompressionType(propval);
+    setCompressionType(propval);
   }
 
   /**
@@ -88,7 +108,17 @@ class FileSaver : gobject.object.ObjectWrap
   */
   @property void encoding(gtksource.encoding.Encoding propval)
   {
-    return setEncoding(propval);
+    setEncoding(propval);
+  }
+
+  /**
+      Get `file` property.
+      Returns: The #GtkSourceFile. The #GtkSourceFileSaver object has a weak
+        reference to the file.
+  */
+  @property gtksource.file.File file()
+  {
+    return getFile();
   }
 
   /**
@@ -107,7 +137,17 @@ class FileSaver : gobject.object.ObjectWrap
   */
   @property void flags(gtksource.types.FileSaverFlags propval)
   {
-    return setFlags(propval);
+    setFlags(propval);
+  }
+
+  /**
+      Get `location` property.
+      Returns: The #GFile where to save the buffer. By default the location is taken
+        from the #GtkSourceFile at construction time.
+  */
+  @property gio.file.File location()
+  {
+    return getLocation();
   }
 
   /**
@@ -126,7 +166,7 @@ class FileSaver : gobject.object.ObjectWrap
   */
   @property void newlineType(gtksource.types.NewlineType propval)
   {
-    return setNewlineType(propval);
+    setNewlineType(propval);
   }
 
   /**
@@ -338,5 +378,98 @@ class FileSaver : gobject.object.ObjectWrap
   void setNewlineType(gtksource.types.NewlineType newlineType)
   {
     gtk_source_file_saver_set_newline_type(cast(GtkSourceFileSaver*)this._cPtr, newlineType);
+  }
+}
+
+class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The #GtkSourceBuffer to save. The #GtkSourceFileSaver object has a
+          weak reference to the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtksource.buffer.Buffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `compressionType` property.
+      Params:
+        propval = The compression type.
+      Returns: Builder instance for fluent chaining
+  */
+  T compressionType(gtksource.types.CompressionType propval)
+  {
+    return setProperty("compression-type", propval);
+  }
+
+  /**
+      Set `encoding` property.
+      Params:
+        propval = The file's encoding.
+      Returns: Builder instance for fluent chaining
+  */
+  T encoding(gtksource.encoding.Encoding propval)
+  {
+    return setProperty("encoding", propval);
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The #GtkSourceFile. The #GtkSourceFileSaver object has a weak
+          reference to the file.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gtksource.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = File saving flags.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gtksource.types.FileSaverFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `location` property.
+      Params:
+        propval = The #GFile where to save the buffer. By default the location is taken
+          from the #GtkSourceFile at construction time.
+      Returns: Builder instance for fluent chaining
+  */
+  T location(gio.file.File propval)
+  {
+    return setProperty("location", propval);
+  }
+
+  /**
+      Set `newlineType` property.
+      Params:
+        propval = The newline type.
+      Returns: Builder instance for fluent chaining
+  */
+  T newlineType(gtksource.types.NewlineType propval)
+  {
+    return setProperty("newline-type", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.file_saver.FileSaver]
+final class FileSaverGidBuilder : FileSaverGidBuilderImpl!FileSaverGidBuilder
+{
+  FileSaver build()
+  {
+    return new FileSaver(cast(void*)createGObject(FileSaver._getGType), Yes.Take);
   }
 }

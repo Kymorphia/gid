@@ -15,6 +15,7 @@ public import gio.mount_operation;
 public import gio.types;
 public import glib.error;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -494,4 +495,8 @@ template VolumeT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("removed", closure, after);
   }
+}
+
+template VolumeGidBuilderT()
+{
 }

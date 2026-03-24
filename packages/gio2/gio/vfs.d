@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.file;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class Vfs : gobject.object.ObjectWrap
   override Vfs self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.vfs.Vfs]
+  Returns: New builder object
+  */
+  static VfsGidBuilder builder()
+  {
+    return new VfsGidBuilder;
   }
 
   /**
@@ -237,5 +247,18 @@ class Vfs : gobject.object.ObjectWrap
     const(char)* _scheme = scheme.toCString(No.Alloc);
     _retval = cast(bool)g_vfs_unregister_uri_scheme(cast(GVfs*)this._cPtr, _scheme);
     return _retval;
+  }
+}
+
+class VfsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.vfs.Vfs]
+final class VfsGidBuilder : VfsGidBuilderImpl!VfsGidBuilder
+{
+  Vfs build()
+  {
+    return new Vfs(cast(void*)createGObject(Vfs._getGType), No.Take);
   }
 }

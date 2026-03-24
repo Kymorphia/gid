@@ -4,6 +4,7 @@ module gtk.gesture_click;
 import gdk.event_sequence;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture_single;
@@ -44,6 +45,15 @@ class GestureClick : gtk.gesture_single.GestureSingle
   override GestureClick self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.gesture_click.GestureClick]
+  Returns: New builder object
+  */
+  static GestureClickGidBuilder builder()
+  {
+    return new GestureClickGidBuilder;
   }
 
   /**
@@ -274,5 +284,18 @@ class GestureClick : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unpaired-release", closure, after);
+  }
+}
+
+class GestureClickGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.gesture_click.GestureClick]
+final class GestureClickGidBuilder : GestureClickGidBuilderImpl!GestureClickGidBuilder
+{
+  GestureClick build()
+  {
+    return new GestureClick(cast(void*)createGObject(GestureClick._getGType), Yes.Take);
   }
 }

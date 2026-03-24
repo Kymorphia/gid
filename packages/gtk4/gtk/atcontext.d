@@ -4,6 +4,7 @@ module gtk.atcontext;
 import gdk.display;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.c.functions;
@@ -44,6 +45,24 @@ class ATContext : gobject.object.ObjectWrap
   override ATContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.atcontext.ATContext]
+  Returns: New builder object
+  */
+  static ATContextGidBuilder builder()
+  {
+    return new ATContextGidBuilder;
+  }
+
+  /**
+      Get `accessible` property.
+      Returns: The [gtk.accessible.Accessible] that created the [gtk.atcontext.ATContext] instance.
+  */
+  @property gtk.accessible.Accessible accessible()
+  {
+    return getAccessible();
   }
 
   /**
@@ -171,5 +190,54 @@ class ATContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("state-change", closure, after);
+  }
+}
+
+class ATContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `accessible` property.
+      Params:
+        propval = The [gtk.accessible.Accessible] that created the [gtk.atcontext.ATContext] instance.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessible(gtk.accessible.Accessible propval)
+  {
+    return setProperty("accessible", propval);
+  }
+
+  /**
+      Set `accessibleRole` property.
+      Params:
+        propval = The accessible role used by the AT context.
+          
+          Depending on the given role, different states and properties can be
+          set or retrieved.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessibleRole(gtk.types.AccessibleRole propval)
+  {
+    return setProperty("accessible-role", propval);
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The [gdk.display.Display] for the [gtk.atcontext.ATContext].
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gtk.atcontext.ATContext]
+final class ATContextGidBuilder : ATContextGidBuilderImpl!ATContextGidBuilder
+{
+  ATContext build()
+  {
+    return new ATContext(cast(void*)createGObject(ATContext._getGType), No.Take);
   }
 }

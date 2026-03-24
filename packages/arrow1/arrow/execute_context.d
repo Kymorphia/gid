@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,11 +37,33 @@ class ExecuteContext : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrow.execute_context.ExecuteContext]
+  Returns: New builder object
+  */
+  static ExecuteContextGidBuilder builder()
+  {
+    return new ExecuteContextGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowExecuteContext* _cretval;
     _cretval = garrow_execute_context_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class ExecuteContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.execute_context.ExecuteContext]
+final class ExecuteContextGidBuilder : ExecuteContextGidBuilderImpl!ExecuteContextGidBuilder
+{
+  ExecuteContext build()
+  {
+    return new ExecuteContext(cast(void*)createGObject(ExecuteContext._getGType), Yes.Take);
   }
 }

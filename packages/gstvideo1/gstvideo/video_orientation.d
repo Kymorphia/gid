@@ -3,6 +3,7 @@ module gstvideo.video_orientation;
 
 public import gstvideo.video_orientation_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gst.tag_list;
 import gstvideo.c.functions;
 import gstvideo.c.types;
@@ -109,4 +110,8 @@ interface VideoOrientation
       Returns: true in case the element supports flipping
   */
   bool setVflip(bool flip);
+}
+
+interface VideoOrientationGidBuilderImpl(T)
+{
 }

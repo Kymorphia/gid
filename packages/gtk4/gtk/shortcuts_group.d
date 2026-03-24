@@ -2,6 +2,7 @@
 module gtk.shortcuts_group;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -62,6 +63,15 @@ class ShortcutsGroup : gtk.box.Box
   override ShortcutsGroup self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.shortcuts_group.ShortcutsGroup]
+  Returns: New builder object
+  */
+  static ShortcutsGroupGidBuilder builder()
+  {
+    return new ShortcutsGroupGidBuilder;
   }
 
   /**
@@ -160,5 +170,72 @@ class ShortcutsGroup : gtk.box.Box
   void addShortcut(gtk.shortcuts_shortcut.ShortcutsShortcut shortcut)
   {
     gtk_shortcuts_group_add_shortcut(cast(GtkShortcutsGroup*)this._cPtr, shortcut ? cast(GtkShortcutsShortcut*)shortcut._cPtr(No.Dup) : null);
+  }
+}
+
+class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /**
+      Set `accelSizeGroup` property.
+      Params:
+        propval = The size group for the accelerator portion of shortcuts in this group.
+          
+          This is used internally by GTK, and must not be modified by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelSizeGroup(gtk.size_group.SizeGroup propval)
+  {
+    return setProperty("accel-size-group", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this group of shortcuts.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `titleSizeGroup` property.
+      Params:
+        propval = The size group for the textual portion of shortcuts in this group.
+          
+          This is used internally by GTK, and must not be modified by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T titleSizeGroup(gtk.size_group.SizeGroup propval)
+  {
+    return setProperty("title-size-group", propval);
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = An optional view that the shortcuts in this group are relevant for.
+          
+          The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
+          property does not match the view of this group.
+          
+          Set this to null to make the group always visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(string propval)
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [gtk.shortcuts_group.ShortcutsGroup]
+final class ShortcutsGroupGidBuilder : ShortcutsGroupGidBuilderImpl!ShortcutsGroupGidBuilder
+{
+  ShortcutsGroup build()
+  {
+    return new ShortcutsGroup(cast(void*)createGObject(ShortcutsGroup._getGType), No.Take);
   }
 }

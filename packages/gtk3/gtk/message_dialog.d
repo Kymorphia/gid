@@ -4,6 +4,7 @@ module gtk.message_dialog;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -96,6 +97,15 @@ class MessageDialog : gtk.dialog.Dialog
   }
 
   /**
+  Get builder for [gtk.message_dialog.MessageDialog]
+  Returns: New builder object
+  */
+  static MessageDialogGidBuilder builder()
+  {
+    return new MessageDialogGidBuilder;
+  }
+
+  /**
       Get `image` property.
       Returns: The image for this dialog.
   
@@ -115,7 +125,7 @@ class MessageDialog : gtk.dialog.Dialog
   */
   @property void image(gtk.widget.Widget propval)
   {
-    return setImage(propval);
+    setImage(propval);
   }
 
   /**
@@ -285,5 +295,96 @@ class MessageDialog : gtk.dialog.Dialog
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_message_dialog_set_markup(cast(GtkMessageDialog*)this._cPtr, _str);
+  }
+}
+
+class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
+{
+
+
+  /** */
+  T buttons(gtk.types.ButtonsType propval)
+  {
+    return setProperty("buttons", propval);
+  }
+
+  /**
+      Set `image` property.
+      Params:
+        propval = The image for this dialog.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkDialog to create dialogs with images
+  */
+  T image(gtk.widget.Widget propval)
+  {
+    return setProperty("image", propval);
+  }
+
+  /**
+      Set `messageType` property.
+      Params:
+        propval = The type of the message.
+      Returns: Builder instance for fluent chaining
+  */
+  T messageType(gtk.types.MessageType propval)
+  {
+    return setProperty("message-type", propval);
+  }
+
+  /**
+      Set `secondaryText` property.
+      Params:
+        propval = The secondary text of the message dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryText(string propval)
+  {
+    return setProperty("secondary-text", propval);
+  }
+
+  /**
+      Set `secondaryUseMarkup` property.
+      Params:
+        propval = true if the secondary text of the dialog includes Pango markup.
+          See [pango.global.parseMarkup].
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryUseMarkup(bool propval)
+  {
+    return setProperty("secondary-use-markup", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The primary text of the message dialog. If the dialog has
+          a secondary text, this will appear as the title.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = true if the primary text of the dialog includes Pango markup.
+          See [pango.global.parseMarkup].
+      Returns: Builder instance for fluent chaining
+  */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+}
+
+/// Fluent builder for [gtk.message_dialog.MessageDialog]
+final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogGidBuilder
+{
+  MessageDialog build()
+  {
+    return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), No.Take);
   }
 }

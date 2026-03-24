@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.field;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class StructDataType : arrow.data_type.DataType
   override StructDataType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.struct_data_type.StructDataType]
+  Returns: New builder object
+  */
+  static StructDataTypeGidBuilder builder()
+  {
+    return new StructDataTypeGidBuilder;
   }
 
   /** */
@@ -91,5 +101,18 @@ class StructDataType : arrow.data_type.DataType
     int _retval;
     _retval = garrow_struct_data_type_get_n_fields(cast(GArrowStructDataType*)this._cPtr);
     return _retval;
+  }
+}
+
+class StructDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.struct_data_type.StructDataType]
+final class StructDataTypeGidBuilder : StructDataTypeGidBuilderImpl!StructDataTypeGidBuilder
+{
+  StructDataType build()
+  {
+    return new StructDataType(cast(void*)createGObject(StructDataType._getGType), Yes.Take);
   }
 }

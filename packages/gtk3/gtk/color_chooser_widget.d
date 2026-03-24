@@ -4,6 +4,7 @@ module gtk.color_chooser_widget;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -67,6 +68,15 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
   }
 
   /**
+  Get builder for [gtk.color_chooser_widget.ColorChooserWidget]
+  Returns: New builder object
+  */
+  static ColorChooserWidgetGidBuilder builder()
+  {
+    return new ColorChooserWidgetGidBuilder;
+  }
+
+  /**
       Get `showEditor` property.
       Returns: The ::show-editor property is true when the color chooser
         is showing the single-color editor. It can be set to switch
@@ -100,5 +110,33 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
     GtkWidget* _cretval;
     _cretval = gtk_color_chooser_widget_new();
     this(_cretval, No.Take);
+  }
+}
+
+class ColorChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.color_chooser.ColorChooserGidBuilderImpl!T
+{
+
+  mixin ColorChooserGidBuilderT!();
+
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = The ::show-editor property is true when the color chooser
+          is showing the single-color editor. It can be set to switch
+          the color chooser into single-color editing mode.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEditor(bool propval)
+  {
+    return setProperty("show-editor", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_chooser_widget.ColorChooserWidget]
+final class ColorChooserWidgetGidBuilder : ColorChooserWidgetGidBuilderImpl!ColorChooserWidgetGidBuilder
+{
+  ColorChooserWidget build()
+  {
+    return new ColorChooserWidget(cast(void*)createGObject(ColorChooserWidget._getGType), No.Take);
   }
 }

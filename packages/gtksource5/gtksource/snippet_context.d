@@ -3,6 +3,7 @@ module gtksource.snippet_context;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -45,6 +46,15 @@ class SnippetContext : gobject.object.ObjectWrap
   override SnippetContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.snippet_context.SnippetContext]
+  Returns: New builder object
+  */
+  static SnippetContextGidBuilder builder()
+  {
+    return new SnippetContextGidBuilder;
   }
 
   /**
@@ -188,5 +198,18 @@ class SnippetContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class SnippetContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.snippet_context.SnippetContext]
+final class SnippetContextGidBuilder : SnippetContextGidBuilderImpl!SnippetContextGidBuilder
+{
+  SnippetContext build()
+  {
+    return new SnippetContext(cast(void*)createGObject(SnippetContext._getGType), Yes.Take);
   }
 }

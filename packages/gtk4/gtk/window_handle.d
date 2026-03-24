@@ -2,6 +2,7 @@
 module gtk.window_handle;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -59,6 +60,15 @@ class WindowHandle : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.window_handle.WindowHandle]
+  Returns: New builder object
+  */
+  static WindowHandleGidBuilder builder()
+  {
+    return new WindowHandleGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -74,7 +84,7 @@ class WindowHandle : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -109,5 +119,30 @@ class WindowHandle : gtk.widget.Widget
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_window_handle_set_child(cast(GtkWindowHandle*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class WindowHandleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [gtk.window_handle.WindowHandle]
+final class WindowHandleGidBuilder : WindowHandleGidBuilderImpl!WindowHandleGidBuilder
+{
+  WindowHandle build()
+  {
+    return new WindowHandle(cast(void*)createGObject(WindowHandle._getGType), No.Take);
   }
 }

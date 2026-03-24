@@ -4,6 +4,7 @@ module gtk.editable_mixin;
 public import gtk.editable_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -402,4 +403,8 @@ template EditableT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-text", closure, after);
   }
+}
+
+template EditableGidBuilderT()
+{
 }

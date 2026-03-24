@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.resolver;
 import gio.types;
+import gobject.gid_builder;
 
 /**
     #GThreadedResolver is an implementation of #GResolver which calls the libc
@@ -37,5 +38,27 @@ class ThreadedResolver : gio.resolver.Resolver
   override ThreadedResolver self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.threaded_resolver.ThreadedResolver]
+  Returns: New builder object
+  */
+  static ThreadedResolverGidBuilder builder()
+  {
+    return new ThreadedResolverGidBuilder;
+  }
+}
+
+class ThreadedResolverGidBuilderImpl(T) : gio.resolver.ResolverGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.threaded_resolver.ThreadedResolver]
+final class ThreadedResolverGidBuilder : ThreadedResolverGidBuilderImpl!ThreadedResolverGidBuilder
+{
+  ThreadedResolver build()
+  {
+    return new ThreadedResolver(cast(void*)createGObject(ThreadedResolver._getGType), No.Take);
   }
 }

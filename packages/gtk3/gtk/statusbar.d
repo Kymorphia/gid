@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -77,6 +78,15 @@ class Statusbar : gtk.box.Box
   override Statusbar self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.statusbar.Statusbar]
+  Returns: New builder object
+  */
+  static StatusbarGidBuilder builder()
+  {
+    return new StatusbarGidBuilder;
   }
 
   /**
@@ -277,5 +287,19 @@ class Statusbar : gtk.box.Box
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("text-pushed", closure, after);
+  }
+}
+
+class StatusbarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.statusbar.Statusbar]
+final class StatusbarGidBuilder : StatusbarGidBuilderImpl!StatusbarGidBuilder
+{
+  Statusbar build()
+  {
+    return new Statusbar(cast(void*)createGObject(Statusbar._getGType), No.Take);
   }
 }

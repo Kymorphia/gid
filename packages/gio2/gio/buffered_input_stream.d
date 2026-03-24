@@ -12,6 +12,7 @@ import gio.seekable;
 import gio.seekable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -55,6 +56,15 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   override BufferedInputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.buffered_input_stream.BufferedInputStream]
+  Returns: New builder object
+  */
+  static BufferedInputStreamGidBuilder builder()
+  {
+    return new BufferedInputStreamGidBuilder;
   }
 
   /**
@@ -304,5 +314,31 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   void setBufferSize(size_t size)
   {
     g_buffered_input_stream_set_buffer_size(cast(GBufferedInputStream*)this._cPtr, size);
+  }
+}
+
+class BufferedInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
+{
+
+  mixin SeekableGidBuilderT!();
+
+  /**
+      Set `bufferSize` property.
+      Params:
+        propval = The size of the backend buffer, in bytes.
+      Returns: Builder instance for fluent chaining
+  */
+  T bufferSize(uint propval)
+  {
+    return setProperty("buffer-size", propval);
+  }
+}
+
+/// Fluent builder for [gio.buffered_input_stream.BufferedInputStream]
+final class BufferedInputStreamGidBuilder : BufferedInputStreamGidBuilderImpl!BufferedInputStreamGidBuilder
+{
+  BufferedInputStream build()
+  {
+    return new BufferedInputStream(cast(void*)createGObject(BufferedInputStream._getGType), Yes.Take);
   }
 }

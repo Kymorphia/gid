@@ -9,6 +9,7 @@ import gio.cancellable;
 import gio.types;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -52,6 +53,15 @@ class InputStream : gobject.object.ObjectWrap
   override InputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.input_stream.InputStream]
+  Returns: New builder object
+  */
+  static InputStreamGidBuilder builder()
+  {
+    return new InputStreamGidBuilder;
   }
 
   /**
@@ -600,5 +610,18 @@ class InputStream : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class InputStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.input_stream.InputStream]
+final class InputStreamGidBuilder : InputStreamGidBuilderImpl!InputStreamGidBuilder
+{
+  InputStream build()
+  {
+    return new InputStream(cast(void*)createGObject(InputStream._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.list_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class MapDataType : arrow.list_data_type.ListDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.map_data_type.MapDataType]
+  Returns: New builder object
+  */
+  static MapDataTypeGidBuilder builder()
+  {
+    return new MapDataTypeGidBuilder;
+  }
+
   /** */
   this(arrow.data_type.DataType keyType, arrow.data_type.DataType itemType)
   {
@@ -62,5 +72,18 @@ class MapDataType : arrow.list_data_type.ListDataType
     _cretval = garrow_map_data_type_get_key_type(cast(GArrowMapDataType*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class MapDataTypeGidBuilderImpl(T) : arrow.list_data_type.ListDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.map_data_type.MapDataType]
+final class MapDataTypeGidBuilder : MapDataTypeGidBuilderImpl!MapDataTypeGidBuilder
+{
+  MapDataType build()
+  {
+    return new MapDataType(cast(void*)createGObject(MapDataType._getGType), Yes.Take);
   }
 }

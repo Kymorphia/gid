@@ -1,7 +1,7 @@
 {
   "name": "gdk4",
   "description": "D binding for the Gdk4 library - Graphics Drawing Toolkit part of Gtk4",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gtk.org",

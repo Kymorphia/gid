@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.value;
 import atk.value_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -40,5 +41,29 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
     return this;
   }
 
+  /**
+  Get builder for [gtk.paned_accessible.PanedAccessible]
+  Returns: New builder object
+  */
+  static PanedAccessibleGidBuilder builder()
+  {
+    return new PanedAccessibleGidBuilder;
+  }
+
   mixin ValueT!();
+}
+
+class PanedAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
+{
+
+  mixin ValueGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.paned_accessible.PanedAccessible]
+final class PanedAccessibleGidBuilder : PanedAccessibleGidBuilderImpl!PanedAccessibleGidBuilder
+{
+  PanedAccessible build()
+  {
+    return new PanedAccessible(cast(void*)createGObject(PanedAccessible._getGType), No.Take);
+  }
 }

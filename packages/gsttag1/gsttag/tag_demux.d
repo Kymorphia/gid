@@ -2,6 +2,7 @@
 module gsttag.tag_demux;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.element;
 import gsttag.c.functions;
 import gsttag.c.types;
@@ -68,5 +69,27 @@ class TagDemux : gst.element.Element
   override TagDemux self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gsttag.tag_demux.TagDemux]
+  Returns: New builder object
+  */
+  static TagDemuxGidBuilder builder()
+  {
+    return new TagDemuxGidBuilder;
+  }
+}
+
+class TagDemuxGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gsttag.tag_demux.TagDemux]
+final class TagDemuxGidBuilder : TagDemuxGidBuilderImpl!TagDemuxGidBuilder
+{
+  TagDemux build()
+  {
+    return new TagDemux(cast(void*)createGObject(TagDemux._getGType), No.Take);
   }
 }

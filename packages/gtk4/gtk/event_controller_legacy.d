@@ -4,6 +4,7 @@ module gtk.event_controller_legacy;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.event_controller;
@@ -42,6 +43,15 @@ class EventControllerLegacy : gtk.event_controller.EventController
   override EventControllerLegacy self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.event_controller_legacy.EventControllerLegacy]
+  Returns: New builder object
+  */
+  static EventControllerLegacyGidBuilder builder()
+  {
+    return new EventControllerLegacyGidBuilder;
   }
 
   /**
@@ -100,5 +110,18 @@ class EventControllerLegacy : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
+  }
+}
+
+class EventControllerLegacyGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.event_controller_legacy.EventControllerLegacy]
+final class EventControllerLegacyGidBuilder : EventControllerLegacyGidBuilderImpl!EventControllerLegacyGidBuilder
+{
+  EventControllerLegacy build()
+  {
+    return new EventControllerLegacy(cast(void*)createGObject(EventControllerLegacy._getGType), Yes.Take);
   }
 }

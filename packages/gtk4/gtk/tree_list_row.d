@@ -3,6 +3,7 @@ module gtk.tree_list_row;
 
 import gid.gid;
 import gio.list_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -50,6 +51,15 @@ class TreeListRow : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.tree_list_row.TreeListRow]
+  Returns: New builder object
+  */
+  static TreeListRowGidBuilder builder()
+  {
+    return new TreeListRowGidBuilder;
+  }
+
+  /**
       Get `children` property.
       Returns: The model holding the row's children.
   */
@@ -92,7 +102,7 @@ class TreeListRow : gobject.object.ObjectWrap
   */
   @property void expanded(bool propval)
   {
-    return setExpanded(propval);
+    setExpanded(propval);
   }
 
   /**
@@ -247,5 +257,29 @@ class TreeListRow : gobject.object.ObjectWrap
   void setExpanded(bool expanded)
   {
     gtk_tree_list_row_set_expanded(cast(GtkTreeListRow*)this._cPtr, expanded);
+  }
+}
+
+class TreeListRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = If this row is currently expanded.
+      Returns: Builder instance for fluent chaining
+  */
+  T expanded(bool propval)
+  {
+    return setProperty("expanded", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_list_row.TreeListRow]
+final class TreeListRowGidBuilder : TreeListRowGidBuilderImpl!TreeListRowGidBuilder
+{
+  TreeListRow build()
+  {
+    return new TreeListRow(cast(void*)createGObject(TreeListRow._getGType), No.Take);
   }
 }

@@ -9,6 +9,7 @@ public import gio.c.types;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -143,4 +144,8 @@ template ProxyResolverT()
     }
     return _retval;
   }
+}
+
+template ProxyResolverGidBuilderT()
+{
 }

@@ -5,6 +5,7 @@ import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_iter;
 import gtksource.buffer;
@@ -63,6 +64,15 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
+  Get builder for [gtksource.completion_context.CompletionContext]
+  Returns: New builder object
+  */
+  static CompletionContextGidBuilder builder()
+  {
+    return new CompletionContextGidBuilder;
+  }
+
+  /**
       Get `busy` property.
       Returns: The "busy" property is true while the completion context is
         populating completion proposals.
@@ -70,6 +80,15 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   @property bool busy()
   {
     return getBusy();
+  }
+
+  /**
+      Get `completion` property.
+      Returns: The "completion" is the #GtkSourceCompletion that was used to create the context.
+  */
+  @property gtksource.completion.Completion completion()
+  {
+    return getCompletion();
   }
 
   /**
@@ -312,5 +331,31 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("provider-model-changed", closure, after);
+  }
+}
+
+class CompletionContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `completion` property.
+      Params:
+        propval = The "completion" is the #GtkSourceCompletion that was used to create the context.
+      Returns: Builder instance for fluent chaining
+  */
+  T completion(gtksource.completion.Completion propval)
+  {
+    return setProperty("completion", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion_context.CompletionContext]
+final class CompletionContextGidBuilder : CompletionContextGidBuilderImpl!CompletionContextGidBuilder
+{
+  CompletionContext build()
+  {
+    return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), No.Take);
   }
 }

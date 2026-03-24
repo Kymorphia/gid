@@ -6,6 +6,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 
 /**
     The ATK Interface implemented by components
@@ -104,4 +105,8 @@ template ImageT()
     _retval = cast(bool)atk_image_set_image_description(cast(AtkImage*)this._cPtr, _description);
     return _retval;
   }
+}
+
+template ImageGidBuilderT()
+{
 }

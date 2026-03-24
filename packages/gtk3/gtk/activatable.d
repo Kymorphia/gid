@@ -3,6 +3,7 @@ module gtk.activatable;
 
 public import gtk.activatable_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.action;
 import gtk.c.functions;
@@ -378,4 +379,37 @@ interface Activatable
         action = the related #GtkAction or null
   */
   void syncActionProperties(gtk.action.Action action = null);
+}
+
+interface ActivatableGidBuilderImpl(T)
+{
+
+  /**
+      Set `relatedAction` property.
+      Params:
+        propval = The action that this activatable will activate and receive
+          updates from for various states and possibly appearance.
+          
+          > #GtkActivatable implementors need to handle the this property and
+          > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
+      Returns: Builder instance for fluent chaining
+  */
+  T relatedAction(gtk.action.Action propval);
+
+  /**
+      Set `useActionAppearance` property.
+      Params:
+        propval = Whether this activatable should reset its layout
+          and appearance when setting the related action or when
+          the action changes appearance.
+          
+          See the #GtkAction documentation directly to find which properties
+          should be ignored by the #GtkActivatable when this property is false.
+          
+          > #GtkActivatable implementors need to handle this property
+          > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
+          > widget when it changes.
+      Returns: Builder instance for fluent chaining
+  */
+  T useActionAppearance(bool propval);
 }

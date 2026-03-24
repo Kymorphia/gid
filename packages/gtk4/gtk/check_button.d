@@ -3,6 +3,7 @@ module gtk.check_button;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -105,6 +106,15 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+  Get builder for [gtk.check_button.CheckButton]
+  Returns: New builder object
+  */
+  static CheckButtonGidBuilder builder()
+  {
+    return new CheckButtonGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: If the check button is active.
         
@@ -126,7 +136,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -145,7 +155,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -155,7 +165,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void group(gtk.check_button.CheckButton propval)
   {
-    return setGroup(propval);
+    setGroup(propval);
   }
 
   /**
@@ -180,7 +190,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void inconsistent(bool propval)
   {
-    return setInconsistent(propval);
+    setInconsistent(propval);
   }
 
   /**
@@ -199,7 +209,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -220,7 +230,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -511,5 +521,93 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `active` property.
+      Params:
+        propval = If the check button is active.
+          
+          Setting `active` to true will add the `:checked:` state to both
+          the check button and the indicator CSS node.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = The check button whose group this widget belongs to.
+      Returns: Builder instance for fluent chaining
+  */
+  T group(gtk.check_button.CheckButton propval)
+  {
+    return setProperty("group", propval);
+  }
+
+  /**
+      Set `inconsistent` property.
+      Params:
+        propval = If the check button is in an “in between” state.
+          
+          The inconsistent state only affects visual appearance,
+          not the semantics of the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T inconsistent(bool propval)
+  {
+    return setProperty("inconsistent", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Text of the label inside the check button, if it contains a label widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set, an underline in the text indicates that the following
+          character is to be used as mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gtk.check_button.CheckButton]
+final class CheckButtonGidBuilder : CheckButtonGidBuilderImpl!CheckButtonGidBuilder
+{
+  CheckButton build()
+  {
+    return new CheckButton(cast(void*)createGObject(CheckButton._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gst.allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.c.functions;
@@ -49,6 +50,15 @@ class Allocator : gst.object.ObjectWrap
   override Allocator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.allocator.Allocator]
+  Returns: New builder object
+  */
+  static AllocatorGidBuilder builder()
+  {
+    return new AllocatorGidBuilder;
   }
 
   /**
@@ -118,5 +128,18 @@ class Allocator : gst.object.ObjectWrap
   void setDefault()
   {
     gst_allocator_set_default(cast(GstAllocator*)this._cPtr);
+  }
+}
+
+class AllocatorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.allocator.Allocator]
+final class AllocatorGidBuilder : AllocatorGidBuilderImpl!AllocatorGidBuilder
+{
+  Allocator build()
+  {
+    return new Allocator(cast(void*)createGObject(Allocator._getGType), No.Take);
   }
 }

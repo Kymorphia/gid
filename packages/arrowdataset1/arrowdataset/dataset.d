@@ -9,6 +9,7 @@ import arrowdataset.scanner_builder;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class Dataset : gobject.object.ObjectWrap
   override Dataset self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowdataset.dataset.Dataset]
+  Returns: New builder object
+  */
+  static DatasetGidBuilder builder()
+  {
+    return new DatasetGidBuilder;
   }
 
   /** */
@@ -83,5 +93,24 @@ class Dataset : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class DatasetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T dataset(void* propval)
+  {
+    return setProperty("dataset", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.dataset.Dataset]
+final class DatasetGidBuilder : DatasetGidBuilderImpl!DatasetGidBuilder
+{
+  Dataset build()
+  {
+    return new Dataset(cast(void*)createGObject(Dataset._getGType), No.Take);
   }
 }

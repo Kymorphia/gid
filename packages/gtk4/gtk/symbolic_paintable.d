@@ -5,6 +5,7 @@ public import gtk.symbolic_paintable_iface_proxy;
 import gdk.rgba;
 import gdk.snapshot;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -46,4 +47,8 @@ interface SymbolicPaintable
         colors = a pointer to an array of colors
   */
   void snapshotSymbolic(gdk.snapshot.Snapshot snapshot, double width, double height, gdk.rgba.RGBA[] colors);
+}
+
+interface SymbolicPaintableGidBuilderImpl(T)
+{
 }

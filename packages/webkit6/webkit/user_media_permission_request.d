@@ -2,6 +2,7 @@
 module webkit.user_media_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -48,6 +49,15 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
   }
 
   /**
+  Get builder for [webkit.user_media_permission_request.UserMediaPermissionRequest]
+  Returns: New builder object
+  */
+  static UserMediaPermissionRequestGidBuilder builder()
+  {
+    return new UserMediaPermissionRequestGidBuilder;
+  }
+
+  /**
       Get `isForAudioDevice` property.
       Returns: Whether the media device to which the permission was requested has a microphone or not.
   */
@@ -66,4 +76,19 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
   }
 
   mixin PermissionRequestT!();
+}
+
+class UserMediaPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.user_media_permission_request.UserMediaPermissionRequest]
+final class UserMediaPermissionRequestGidBuilder : UserMediaPermissionRequestGidBuilderImpl!UserMediaPermissionRequestGidBuilder
+{
+  UserMediaPermissionRequest build()
+  {
+    return new UserMediaPermissionRequest(cast(void*)createGObject(UserMediaPermissionRequest._getGType), No.Take);
+  }
 }

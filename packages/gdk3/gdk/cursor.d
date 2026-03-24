@@ -8,6 +8,7 @@ import gdk.display;
 import gdk.types;
 import gdkpixbuf.pixbuf;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -39,6 +40,27 @@ class Cursor : gobject.object.ObjectWrap
   override Cursor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.cursor.Cursor]
+  Returns: New builder object
+  */
+  static CursorGidBuilder builder()
+  {
+    return new CursorGidBuilder;
+  }
+
+  /** */
+  @property gdk.types.CursorType cursorType()
+  {
+    return getCursorType();
+  }
+
+  /** */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   /**
@@ -262,5 +284,30 @@ class Cursor : gobject.object.ObjectWrap
     _cretval = gdk_cursor_get_surface(cast(GdkCursor*)this._cPtr, cast(double*)&xHot, cast(double*)&yHot);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T cursorType(gdk.types.CursorType propval)
+  {
+    return setProperty("cursor-type", propval);
+  }
+
+  /** */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.cursor.Cursor]
+final class CursorGidBuilder : CursorGidBuilderImpl!CursorGidBuilder
+{
+  Cursor build()
+  {
+    return new Cursor(cast(void*)createGObject(Cursor._getGType), Yes.Take);
   }
 }

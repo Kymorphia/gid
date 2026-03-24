@@ -2,6 +2,7 @@
 module gtk.imcontext_simple;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.imcontext;
@@ -76,6 +77,15 @@ class IMContextSimple : gtk.imcontext.IMContext
   }
 
   /**
+  Get builder for [gtk.imcontext_simple.IMContextSimple]
+  Returns: New builder object
+  */
+  static IMContextSimpleGidBuilder builder()
+  {
+    return new IMContextSimpleGidBuilder;
+  }
+
+  /**
       Creates a new [gtk.imcontext_simple.IMContextSimple].
       Returns: a new [gtk.imcontext_simple.IMContextSimple]
   */
@@ -96,5 +106,18 @@ class IMContextSimple : gtk.imcontext.IMContext
   {
     const(char)* _composeFile = composeFile.toCString(No.Alloc);
     gtk_im_context_simple_add_compose_file(cast(GtkIMContextSimple*)this._cPtr, _composeFile);
+  }
+}
+
+class IMContextSimpleGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.imcontext_simple.IMContextSimple]
+final class IMContextSimpleGidBuilder : IMContextSimpleGidBuilderImpl!IMContextSimpleGidBuilder
+{
+  IMContextSimple build()
+  {
+    return new IMContextSimple(cast(void*)createGObject(IMContextSimple._getGType), Yes.Take);
   }
 }

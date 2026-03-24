@@ -8,6 +8,7 @@ import arrow.decimal256_data_type;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class Decimal256Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal256_scalar.Decimal256Scalar]
+  Returns: New builder object
+  */
+  static Decimal256ScalarGidBuilder builder()
+  {
+    return new Decimal256ScalarGidBuilder;
+  }
+
   /** */
   this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value)
   {
@@ -54,5 +64,29 @@ class Decimal256Scalar : arrow.scalar.Scalar
     _cretval = garrow_decimal256_scalar_get_value(cast(GArrowDecimal256Scalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class Decimal256ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scalar.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(arrow.decimal256.Decimal256 propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.decimal256_scalar.Decimal256Scalar]
+final class Decimal256ScalarGidBuilder : Decimal256ScalarGidBuilderImpl!Decimal256ScalarGidBuilder
+{
+  Decimal256Scalar build()
+  {
+    return new Decimal256Scalar(cast(void*)createGObject(Decimal256Scalar._getGType), Yes.Take);
   }
 }

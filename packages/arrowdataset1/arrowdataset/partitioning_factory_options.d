@@ -6,6 +6,7 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class PartitioningFactoryOptions : gobject.object.ObjectWrap
   override PartitioningFactoryOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowdataset.partitioning_factory_options.PartitioningFactoryOptions]
+  Returns: New builder object
+  */
+  static PartitioningFactoryOptionsGidBuilder builder()
+  {
+    return new PartitioningFactoryOptionsGidBuilder;
   }
 
   /**
@@ -114,5 +124,58 @@ class PartitioningFactoryOptions : gobject.object.ObjectWrap
     GADatasetPartitioningFactoryOptions* _cretval;
     _cretval = gadataset_partitioning_factory_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class PartitioningFactoryOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `inferDictionary` property.
+      Params:
+        propval = When inferring a schema for partition fields, yield dictionary
+          encoded types instead of plain. This can be more efficient when
+          materializing virtual columns, and Expressions parsed by the
+          finished Partitioning will include dictionaries of all unique
+          inspected values for each field.
+      Returns: Builder instance for fluent chaining
+  */
+  T inferDictionary(bool propval)
+  {
+    return setProperty("infer-dictionary", propval);
+  }
+
+  /**
+      Set `schema` property.
+      Params:
+        propval = Optionally, an expected schema can be provided, in which case
+          inference will only check discovered fields against the schema
+          and update internal state (such as dictionaries).
+      Returns: Builder instance for fluent chaining
+  */
+  T schema(arrow.schema.Schema propval)
+  {
+    return setProperty("schema", propval);
+  }
+
+  /**
+      Set `segmentEncoding` property.
+      Params:
+        propval = After splitting a path into components, decode the path
+          components before parsing according to this scheme.
+      Returns: Builder instance for fluent chaining
+  */
+  T segmentEncoding(arrowdataset.types.SegmentEncoding propval)
+  {
+    return setProperty("segment-encoding", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.partitioning_factory_options.PartitioningFactoryOptions]
+final class PartitioningFactoryOptionsGidBuilder : PartitioningFactoryOptionsGidBuilderImpl!PartitioningFactoryOptionsGidBuilder
+{
+  PartitioningFactoryOptions build()
+  {
+    return new PartitioningFactoryOptions(cast(void*)createGObject(PartitioningFactoryOptions._getGType), Yes.Take);
   }
 }

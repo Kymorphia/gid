@@ -2,6 +2,7 @@
 module gsk.vulkan_renderer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -40,11 +41,33 @@ class VulkanRenderer : gsk.renderer.Renderer
     return this;
   }
 
+  /**
+  Get builder for [gsk.vulkan_renderer.VulkanRenderer]
+  Returns: New builder object
+  */
+  static VulkanRendererGidBuilder builder()
+  {
+    return new VulkanRendererGidBuilder;
+  }
+
   /** */
   this()
   {
     GskRenderer* _cretval;
     _cretval = gsk_vulkan_renderer_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class VulkanRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gsk.vulkan_renderer.VulkanRenderer]
+final class VulkanRendererGidBuilder : VulkanRendererGidBuilderImpl!VulkanRendererGidBuilder
+{
+  VulkanRenderer build()
+  {
+    return new VulkanRenderer(cast(void*)createGObject(VulkanRenderer._getGType), Yes.Take);
   }
 }

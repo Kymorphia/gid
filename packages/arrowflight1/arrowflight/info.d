@@ -10,6 +10,7 @@ import arrowflight.endpoint;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class Info : gobject.object.ObjectWrap
   override Info self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.info.Info]
+  Returns: New builder object
+  */
+  static InfoGidBuilder builder()
+  {
+    return new InfoGidBuilder;
   }
 
   /** */
@@ -106,5 +116,24 @@ class Info : gobject.object.ObjectWrap
     long _retval;
     _retval = gaflight_info_get_total_records(cast(GAFlightInfo*)this._cPtr);
     return _retval;
+  }
+}
+
+class InfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T info(void* propval)
+  {
+    return setProperty("info", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.info.Info]
+final class InfoGidBuilder : InfoGidBuilderImpl!InfoGidBuilder
+{
+  Info build()
+  {
+    return new Info(cast(void*)createGObject(Info._getGType), Yes.Take);
   }
 }

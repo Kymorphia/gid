@@ -8,6 +8,7 @@ import arrow.numeric_array;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class DoubleArray : arrow.numeric_array.NumericArray
@@ -36,6 +37,15 @@ class DoubleArray : arrow.numeric_array.NumericArray
   override DoubleArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.double_array.DoubleArray]
+  Returns: New builder object
+  */
+  static DoubleArrayGidBuilder builder()
+  {
+    return new DoubleArrayGidBuilder;
   }
 
   /** */
@@ -78,5 +88,18 @@ class DoubleArray : arrow.numeric_array.NumericArray
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class DoubleArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.double_array.DoubleArray]
+final class DoubleArrayGidBuilder : DoubleArrayGidBuilderImpl!DoubleArrayGidBuilder
+{
+  DoubleArray build()
+  {
+    return new DoubleArray(cast(void*)createGObject(DoubleArray._getGType), Yes.Take);
   }
 }

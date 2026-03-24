@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.field;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class UnionDataType : arrow.data_type.DataType
   override UnionDataType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.union_data_type.UnionDataType]
+  Returns: New builder object
+  */
+  static UnionDataTypeGidBuilder builder()
+  {
+    return new UnionDataTypeGidBuilder;
   }
 
   /** */
@@ -78,5 +88,18 @@ class UnionDataType : arrow.data_type.DataType
       gFree(cast(void*)_cretval);
     }
     return _retval;
+  }
+}
+
+class UnionDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.union_data_type.UnionDataType]
+final class UnionDataTypeGidBuilder : UnionDataTypeGidBuilderImpl!UnionDataTypeGidBuilder
+{
+  UnionDataType build()
+  {
+    return new UnionDataType(cast(void*)createGObject(UnionDataType._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gst.proxy_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
@@ -39,6 +40,15 @@ class ProxyPad : gst.pad.Pad
   override ProxyPad self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.proxy_pad.ProxyPad]
+  Returns: New builder object
+  */
+  static ProxyPadGidBuilder builder()
+  {
+    return new ProxyPadGidBuilder;
   }
 
   /**
@@ -130,5 +140,18 @@ class ProxyPad : gst.pad.Pad
     _cretval = gst_proxy_pad_get_internal(cast(GstProxyPad*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.proxy_pad.ProxyPad)(cast(GstProxyPad*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ProxyPadGidBuilderImpl(T) : gst.pad.PadGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.proxy_pad.ProxyPad]
+final class ProxyPadGidBuilder : ProxyPadGidBuilderImpl!ProxyPadGidBuilder
+{
+  ProxyPad build()
+  {
+    return new ProxyPad(cast(void*)createGObject(ProxyPad._getGType), No.Take);
   }
 }

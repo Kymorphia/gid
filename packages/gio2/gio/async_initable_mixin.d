@@ -9,6 +9,7 @@ public import gio.c.types;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.parameter;
 public import gobject.types;
@@ -217,4 +218,8 @@ template AsyncInitableT()
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
+}
+
+template AsyncInitableGidBuilderT()
+{
 }

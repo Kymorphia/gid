@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -73,6 +74,15 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /**
+  Get builder for [gtk.toolbar.Toolbar]
+  Returns: New builder object
+  */
+  static ToolbarGidBuilder builder()
+  {
+    return new ToolbarGidBuilder;
+  }
+
+  /**
       Get `iconSize` property.
       Returns: The size of the icons in a toolbar is normally determined by
         the toolbar-icon-size setting. When this property is set, it
@@ -100,7 +110,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   @property void iconSize(gtk.types.IconSize propval)
   {
-    return setIconSize(propval);
+    setIconSize(propval);
   }
 
   /**
@@ -131,7 +141,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   /** */
   @property void showArrow(bool propval)
   {
-    return setShowArrow(propval);
+    setShowArrow(propval);
   }
 
   /** */
@@ -571,5 +581,61 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("style-changed", closure, after);
+  }
+}
+
+class ToolbarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, gtk.tool_shell.ToolShellGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+  mixin ToolShellGidBuilderT!();
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = The size of the icons in a toolbar is normally determined by
+          the toolbar-icon-size setting. When this property is set, it
+          overrides the setting.
+          
+          This should only be used for special-purpose toolbars, normal
+          application toolbars should respect the user preferences for the
+          size of icons.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSize(gtk.types.IconSize propval)
+  {
+    return setProperty("icon-size", propval);
+  }
+
+  /**
+      Set `iconSizeSet` property.
+      Params:
+        propval = Is true if the icon-size property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSizeSet(bool propval)
+  {
+    return setProperty("icon-size-set", propval);
+  }
+
+  /** */
+  T showArrow(bool propval)
+  {
+    return setProperty("show-arrow", propval);
+  }
+
+  /** */
+  T toolbarStyle(gtk.types.ToolbarStyle propval)
+  {
+    return setProperty("toolbar-style", propval);
+  }
+}
+
+/// Fluent builder for [gtk.toolbar.Toolbar]
+final class ToolbarGidBuilder : ToolbarGidBuilderImpl!ToolbarGidBuilder
+{
+  Toolbar build()
+  {
+    return new Toolbar(cast(void*)createGObject(Toolbar._getGType), No.Take);
   }
 }

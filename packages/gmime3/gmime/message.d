@@ -11,6 +11,7 @@ import gmime.c.types;
 import gmime.internet_address_list;
 import gmime.object;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -42,6 +43,15 @@ class Message : gmime.object.ObjectWrap
   override Message self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.message.Message]
+  Returns: New builder object
+  */
+  static MessageGidBuilder builder()
+  {
+    return new MessageGidBuilder;
   }
 
   /**
@@ -490,5 +500,18 @@ class Message : gmime.object.ObjectWrap
     const(char)* _subject = subject.toCString(No.Alloc);
     const(char)* _charset = charset.toCString(No.Alloc);
     g_mime_message_set_subject(cast(GMimeMessage*)this._cPtr, _subject, _charset);
+  }
+}
+
+class MessageGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.message.Message]
+final class MessageGidBuilder : MessageGidBuilderImpl!MessageGidBuilder
+{
+  Message build()
+  {
+    return new Message(cast(void*)createGObject(Message._getGType), Yes.Take);
   }
 }

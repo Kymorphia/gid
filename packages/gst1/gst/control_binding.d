@@ -2,6 +2,8 @@
 module gst.control_binding;
 
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 import gobject.value;
 import gst.c.functions;
 import gst.c.types;
@@ -40,6 +42,27 @@ class ControlBinding : gst.object.ObjectWrap
   override ControlBinding self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.control_binding.ControlBinding]
+  Returns: New builder object
+  */
+  static ControlBindingGidBuilder builder()
+  {
+    return new ControlBindingGidBuilder;
+  }
+
+  /** */
+  override @property string name()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("name");
+  }
+
+  /** */
+  @property gst.object.ObjectWrap object()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.object.ObjectWrap)("object");
   }
 
   alias getGValueArray = gst.object.ObjectWrap.getGValueArray;
@@ -137,5 +160,30 @@ class ControlBinding : gst.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gst_control_binding_sync_values(cast(GstControlBinding*)this._cPtr, object ? cast(GstObject*)object._cPtr(No.Dup) : null, timestamp, lastSync);
     return _retval;
+  }
+}
+
+class ControlBindingGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  override T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /** */
+  T object(gst.object.ObjectWrap propval)
+  {
+    return setProperty("object", propval);
+  }
+}
+
+/// Fluent builder for [gst.control_binding.ControlBinding]
+final class ControlBindingGidBuilder : ControlBindingGidBuilderImpl!ControlBindingGidBuilder
+{
+  ControlBinding build()
+  {
+    return new ControlBinding(cast(void*)createGObject(ControlBinding._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.window;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.bin;
@@ -65,6 +66,15 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
     return this;
   }
 
+  /**
+  Get builder for [gtk.viewport.Viewport]
+  Returns: New builder object
+  */
+  static ViewportGidBuilder builder()
+  {
+    return new ViewportGidBuilder;
+  }
+
   /** */
   @property gtk.types.ShadowType shadowType()
   {
@@ -74,7 +84,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   /** */
   @property void shadowType(gtk.types.ShadowType propval)
   {
-    return setShadowType(propval);
+    setShadowType(propval);
   }
 
   mixin ScrollableT!();
@@ -195,5 +205,26 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_viewport_set_vadjustment(cast(GtkViewport*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+  }
+}
+
+class ViewportGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin ScrollableGidBuilderT!();
+
+  /** */
+  T shadowType(gtk.types.ShadowType propval)
+  {
+    return setProperty("shadow-type", propval);
+  }
+}
+
+/// Fluent builder for [gtk.viewport.Viewport]
+final class ViewportGidBuilder : ViewportGidBuilderImpl!ViewportGidBuilder
+{
+  Viewport build()
+  {
+    return new Viewport(cast(void*)createGObject(Viewport._getGType), No.Take);
   }
 }

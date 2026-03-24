@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.value;
 import atk.value_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -40,5 +41,29 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
     return this;
   }
 
+  /**
+  Get builder for [gtk.level_bar_accessible.LevelBarAccessible]
+  Returns: New builder object
+  */
+  static LevelBarAccessibleGidBuilder builder()
+  {
+    return new LevelBarAccessibleGidBuilder;
+  }
+
   mixin ValueT!();
+}
+
+class LevelBarAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
+{
+
+  mixin ValueGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.level_bar_accessible.LevelBarAccessible]
+final class LevelBarAccessibleGidBuilder : LevelBarAccessibleGidBuilderImpl!LevelBarAccessibleGidBuilder
+{
+  LevelBarAccessible build()
+  {
+    return new LevelBarAccessible(cast(void*)createGObject(LevelBarAccessible._getGType), No.Take);
+  }
 }

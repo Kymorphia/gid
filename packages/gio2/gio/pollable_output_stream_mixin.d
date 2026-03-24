@@ -9,6 +9,7 @@ public import gio.cancellable;
 public import gio.types;
 public import glib.error;
 public import glib.source;
+public import gobject.gid_builder;
 
 /**
     [gio.pollable_output_stream.PollableOutputStream] is implemented by [gio.output_stream.OutputStream]s that
@@ -180,4 +181,8 @@ template PollableOutputStreamT()
     gio.types.PollableReturn _retval = cast(gio.types.PollableReturn)_cretval;
     return _retval;
   }
+}
+
+template PollableOutputStreamGidBuilderT()
+{
 }

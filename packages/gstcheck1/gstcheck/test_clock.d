@@ -2,6 +2,7 @@
 module gstcheck.test_clock;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.clock;
 import gst.types;
@@ -183,6 +184,15 @@ class TestClock : gst.clock.Clock
     return this;
   }
 
+  /**
+  Get builder for [gstcheck.test_clock.TestClock]
+  Returns: New builder object
+  */
+  static TestClockGidBuilder builder()
+  {
+    return new TestClockGidBuilder;
+  }
+
   /** */
   @property gst.types.ClockType clockType()
   {
@@ -193,6 +203,19 @@ class TestClock : gst.clock.Clock
   @property void clockType(gst.types.ClockType propval)
   {
     gobject.object.ObjectWrap.setProperty!(gst.types.ClockType)("clock-type", propval);
+  }
+
+  /**
+      Get `startTime` property.
+      Returns: When a #GstTestClock is constructed it will have a certain start time set.
+        If the clock was created using [gstcheck.test_clock.TestClock.newWithStartTime] then
+        this property contains the value of the @start_time argument. If
+        [gstcheck.test_clock.TestClock.new_] was called the clock started at time zero, and thus
+        this property contains the value 0.
+  */
+  @property ulong startTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("start-time");
   }
 
   /**
@@ -480,5 +503,39 @@ class TestClock : gst.clock.Clock
   void waitForPendingIdCount(uint count)
   {
     gst_test_clock_wait_for_pending_id_count(cast(GstTestClock*)this._cPtr, count);
+  }
+}
+
+class TestClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
+{
+
+  /** */
+  T clockType(gst.types.ClockType propval)
+  {
+    return setProperty("clock-type", propval);
+  }
+
+  /**
+      Set `startTime` property.
+      Params:
+        propval = When a #GstTestClock is constructed it will have a certain start time set.
+          If the clock was created using [gstcheck.test_clock.TestClock.newWithStartTime] then
+          this property contains the value of the @start_time argument. If
+          [gstcheck.test_clock.TestClock.new_] was called the clock started at time zero, and thus
+          this property contains the value 0.
+      Returns: Builder instance for fluent chaining
+  */
+  T startTime(ulong propval)
+  {
+    return setProperty("start-time", propval);
+  }
+}
+
+/// Fluent builder for [gstcheck.test_clock.TestClock]
+final class TestClockGidBuilder : TestClockGidBuilderImpl!TestClockGidBuilder
+{
+  TestClock build()
+  {
+    return new TestClock(cast(void*)createGObject(TestClock._getGType), Yes.Take);
   }
 }

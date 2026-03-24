@@ -10,6 +10,7 @@ import gdk.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -104,6 +105,15 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
+  Returns: New builder object
+  */
+  static DmabufTextureBuilderGidBuilder builder()
+  {
+    return new DmabufTextureBuilderGidBuilder;
+  }
+
+  /**
       Get `display` property.
       Returns: The display that this texture will be used on.
   */
@@ -119,7 +129,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void display(gdk.display.Display propval)
   {
-    return setDisplay(propval);
+    setDisplay(propval);
   }
 
   /**
@@ -138,7 +148,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void fourcc(uint propval)
   {
-    return setFourcc(propval);
+    setFourcc(propval);
   }
 
   /**
@@ -157,7 +167,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void height(uint propval)
   {
-    return setHeight(propval);
+    setHeight(propval);
   }
 
   /**
@@ -176,7 +186,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void modifier(ulong propval)
   {
-    return setModifier(propval);
+    setModifier(propval);
   }
 
   /**
@@ -201,7 +211,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void nPlanes(uint propval)
   {
-    return setNPlanes(propval);
+    setNPlanes(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void premultiplied(bool propval)
   {
-    return setPremultiplied(propval);
+    setPremultiplied(propval);
   }
 
   /**
@@ -243,7 +253,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void updateRegion(cairo.region.Region propval)
   {
-    return setUpdateRegion(propval);
+    setUpdateRegion(propval);
   }
 
   /**
@@ -262,7 +272,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void updateTexture(gdk.texture.Texture propval)
   {
-    return setUpdateTexture(propval);
+    setUpdateTexture(propval);
   }
 
   /**
@@ -281,7 +291,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   @property void width(uint propval)
   {
-    return setWidth(propval);
+    setWidth(propval);
   }
 
   /**
@@ -654,5 +664,122 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   void setWidth(uint width)
   {
     gdk_dmabuf_texture_builder_set_width(cast(GdkDmabufTextureBuilder*)this._cPtr, width);
+  }
+}
+
+class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display that this texture will be used on.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `fourcc` property.
+      Params:
+        propval = The format of the texture, as a fourcc value.
+      Returns: Builder instance for fluent chaining
+  */
+  T fourcc(uint propval)
+  {
+    return setProperty("fourcc", propval);
+  }
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The height of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T height(uint propval)
+  {
+    return setProperty("height", propval);
+  }
+
+  /**
+      Set `modifier` property.
+      Params:
+        propval = The modifier.
+      Returns: Builder instance for fluent chaining
+  */
+  T modifier(ulong propval)
+  {
+    return setProperty("modifier", propval);
+  }
+
+  /**
+      Set `nPlanes` property.
+      Params:
+        propval = The number of planes of the texture.
+          
+          Note that you can set properties for other planes,
+          but they will be ignored when constructing the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T nPlanes(uint propval)
+  {
+    return setProperty("n-planes", propval);
+  }
+
+  /**
+      Set `premultiplied` property.
+      Params:
+        propval = Whether the alpha channel is premultiplied into the others.
+          
+          Only relevant if the format has alpha.
+      Returns: Builder instance for fluent chaining
+  */
+  T premultiplied(bool propval)
+  {
+    return setProperty("premultiplied", propval);
+  }
+
+  /**
+      Set `updateRegion` property.
+      Params:
+        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+      Returns: Builder instance for fluent chaining
+  */
+  T updateRegion(cairo.region.Region propval)
+  {
+    return setProperty("update-region", propval);
+  }
+
+  /**
+      Set `updateTexture` property.
+      Params:
+        propval = The texture `property@Gdk.DmabufTextureBuilder:update-region` is an update for.
+      Returns: Builder instance for fluent chaining
+  */
+  T updateTexture(gdk.texture.Texture propval)
+  {
+    return setProperty("update-texture", propval);
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The width of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T width(uint propval)
+  {
+    return setProperty("width", propval);
+  }
+}
+
+/// Fluent builder for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
+final class DmabufTextureBuilderGidBuilder : DmabufTextureBuilderGidBuilderImpl!DmabufTextureBuilderGidBuilder
+{
+  DmabufTextureBuilder build()
+  {
+    return new DmabufTextureBuilder(cast(void*)createGObject(DmabufTextureBuilder._getGType), Yes.Take);
   }
 }

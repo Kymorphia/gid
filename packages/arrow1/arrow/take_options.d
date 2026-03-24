@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class TakeOptions : arrow.function_options.FunctionOptions
@@ -36,11 +37,33 @@ class TakeOptions : arrow.function_options.FunctionOptions
     return this;
   }
 
+  /**
+  Get builder for [arrow.take_options.TakeOptions]
+  Returns: New builder object
+  */
+  static TakeOptionsGidBuilder builder()
+  {
+    return new TakeOptionsGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowTakeOptions* _cretval;
     _cretval = garrow_take_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class TakeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.take_options.TakeOptions]
+final class TakeOptionsGidBuilder : TakeOptionsGidBuilderImpl!TakeOptionsGidBuilder
+{
+  TakeOptions build()
+  {
+    return new TakeOptions(cast(void*)createGObject(TakeOptions._getGType), Yes.Take);
   }
 }

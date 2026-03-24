@@ -3,6 +3,7 @@ module gtk.event_controller_focus;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.event_controller;
@@ -45,6 +46,15 @@ class EventControllerFocus : gtk.event_controller.EventController
   override EventControllerFocus self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.event_controller_focus.EventControllerFocus]
+  Returns: New builder object
+  */
+  static EventControllerFocusGidBuilder builder()
+  {
+    return new EventControllerFocusGidBuilder;
   }
 
   /**
@@ -169,5 +179,18 @@ class EventControllerFocus : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("leave", closure, after);
+  }
+}
+
+class EventControllerFocusGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.event_controller_focus.EventControllerFocus]
+final class EventControllerFocusGidBuilder : EventControllerFocusGidBuilderImpl!EventControllerFocusGidBuilder
+{
+  EventControllerFocus build()
+  {
+    return new EventControllerFocus(cast(void*)createGObject(EventControllerFocus._getGType), Yes.Take);
   }
 }

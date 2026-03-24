@@ -2,6 +2,7 @@
 module gtk.center_layout;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -47,6 +48,15 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
+  Get builder for [gtk.center_layout.CenterLayout]
+  Returns: New builder object
+  */
+  static CenterLayoutGidBuilder builder()
+  {
+    return new CenterLayoutGidBuilder;
+  }
+
+  /**
       Get `shrinkCenterLast` property.
       Returns: Whether to shrink the center widget after other children.
         
@@ -76,7 +86,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   */
   @property void shrinkCenterLast(bool propval)
   {
-    return setShrinkCenterLast(propval);
+    setShrinkCenterLast(propval);
   }
 
   /**
@@ -238,5 +248,36 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   void setStartWidget(gtk.widget.Widget widget = null)
   {
     gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+}
+
+class CenterLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
+{
+
+  /**
+      Set `shrinkCenterLast` property.
+      Params:
+        propval = Whether to shrink the center widget after other children.
+          
+          By default, when there's no space to give all three children their
+          natural widths, the start and end widgets start shrinking and the
+          center child keeps natural width until they reach minimum width.
+          
+          If set to `FALSE`, start and end widgets keep natural width and the
+          center widget starts shrinking instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T shrinkCenterLast(bool propval)
+  {
+    return setProperty("shrink-center-last", propval);
+  }
+}
+
+/// Fluent builder for [gtk.center_layout.CenterLayout]
+final class CenterLayoutGidBuilder : CenterLayoutGidBuilderImpl!CenterLayoutGidBuilder
+{
+  CenterLayout build()
+  {
+    return new CenterLayout(cast(void*)createGObject(CenterLayout._getGType), Yes.Take);
   }
 }

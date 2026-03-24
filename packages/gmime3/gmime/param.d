@@ -5,6 +5,7 @@ import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -36,6 +37,15 @@ class Param : gobject.object.ObjectWrap
   override Param self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.param.Param]
+  Returns: New builder object
+  */
+  static ParamGidBuilder builder()
+  {
+    return new ParamGidBuilder;
   }
 
   /**
@@ -143,5 +153,18 @@ class Param : gobject.object.ObjectWrap
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_mime_param_set_value(cast(GMimeParam*)this._cPtr, _value);
+  }
+}
+
+class ParamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.param.Param]
+final class ParamGidBuilder : ParamGidBuilderImpl!ParamGidBuilder
+{
+  Param build()
+  {
+    return new Param(cast(void*)createGObject(Param._getGType), No.Take);
   }
 }

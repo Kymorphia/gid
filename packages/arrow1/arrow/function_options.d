@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class FunctionOptions : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrow.function_options.FunctionOptions]
+  Returns: New builder object
+  */
+  static FunctionOptionsGidBuilder builder()
+  {
+    return new FunctionOptionsGidBuilder;
+  }
+
   /** */
   bool equal(arrow.function_options.FunctionOptions otherOptions = null)
   {
@@ -51,5 +61,18 @@ class FunctionOptions : gobject.object.ObjectWrap
     _cretval = garrow_function_options_to_string(cast(GArrowFunctionOptions*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class FunctionOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.function_options.FunctionOptions]
+final class FunctionOptionsGidBuilder : FunctionOptionsGidBuilderImpl!FunctionOptionsGidBuilder
+{
+  FunctionOptions build()
+  {
+    return new FunctionOptions(cast(void*)createGObject(FunctionOptions._getGType), No.Take);
   }
 }

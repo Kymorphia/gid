@@ -8,6 +8,7 @@ import gio.types;
 import gio.unix_fdlist;
 import glib.error;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -40,6 +41,15 @@ class DBusMessage : gobject.object.ObjectWrap
   override DBusMessage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.dbus_message.DBusMessage]
+  Returns: New builder object
+  */
+  static DBusMessageGidBuilder builder()
+  {
+    return new DBusMessageGidBuilder;
   }
 
   /** */
@@ -787,5 +797,18 @@ class DBusMessage : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class DBusMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.dbus_message.DBusMessage]
+final class DBusMessageGidBuilder : DBusMessageGidBuilderImpl!DBusMessageGidBuilder
+{
+  DBusMessage build()
+  {
+    return new DBusMessage(cast(void*)createGObject(DBusMessage._getGType), Yes.Take);
   }
 }

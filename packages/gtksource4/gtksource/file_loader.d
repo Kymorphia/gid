@@ -8,6 +8,7 @@ import gio.file;
 import gio.input_stream;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.buffer;
 import gtksource.c.functions;
@@ -43,6 +44,56 @@ class FileLoader : gobject.object.ObjectWrap
   override FileLoader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.file_loader.FileLoader]
+  Returns: New builder object
+  */
+  static FileLoaderGidBuilder builder()
+  {
+    return new FileLoaderGidBuilder;
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The #GtkSourceBuffer to load the contents into. The
+        #GtkSourceFileLoader object has a weak reference to the buffer.
+  */
+  @property gtksource.buffer.Buffer buffer()
+  {
+    return getBuffer();
+  }
+
+  /**
+      Get `file` property.
+      Returns: The #GtkSourceFile. The #GtkSourceFileLoader object has a weak
+        reference to the file.
+  */
+  @property gtksource.file.File file()
+  {
+    return getFile();
+  }
+
+  /**
+      Get `inputStream` property.
+      Returns: The #GInputStream to load. Useful for reading stdin. If this property
+        is set, the #GtkSourceFileLoader:location property is ignored.
+  */
+  @property gio.input_stream.InputStream inputStream()
+  {
+    return getInputStream();
+  }
+
+  /**
+      Get `location` property.
+      Returns: The #GFile to load. If the #GtkSourceFileLoader:input-stream is
+        null, by default the location is taken from the #GtkSourceFile at
+        construction time.
+  */
+  @property gio.file.File location()
+  {
+    return getLocation();
   }
 
   /**
@@ -225,5 +276,67 @@ class FileLoader : gobject.object.ObjectWrap
     auto _candidateEncodings = gSListFromD!(gtksource.encoding.Encoding)(candidateEncodings);
     scope(exit) containerFree!(GSList*, gtksource.encoding.Encoding, GidOwnership.None)(_candidateEncodings);
     gtk_source_file_loader_set_candidate_encodings(cast(GtkSourceFileLoader*)this._cPtr, _candidateEncodings);
+  }
+}
+
+class FileLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The #GtkSourceBuffer to load the contents into. The
+          #GtkSourceFileLoader object has a weak reference to the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtksource.buffer.Buffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The #GtkSourceFile. The #GtkSourceFileLoader object has a weak
+          reference to the file.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gtksource.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `inputStream` property.
+      Params:
+        propval = The #GInputStream to load. Useful for reading stdin. If this property
+          is set, the #GtkSourceFileLoader:location property is ignored.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputStream(gio.input_stream.InputStream propval)
+  {
+    return setProperty("input-stream", propval);
+  }
+
+  /**
+      Set `location` property.
+      Params:
+        propval = The #GFile to load. If the #GtkSourceFileLoader:input-stream is
+          null, by default the location is taken from the #GtkSourceFile at
+          construction time.
+      Returns: Builder instance for fluent chaining
+  */
+  T location(gio.file.File propval)
+  {
+    return setProperty("location", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.file_loader.FileLoader]
+final class FileLoaderGidBuilder : FileLoaderGidBuilderImpl!FileLoaderGidBuilder
+{
+  FileLoader build()
+  {
+    return new FileLoader(cast(void*)createGObject(FileLoader._getGType), Yes.Take);
   }
 }

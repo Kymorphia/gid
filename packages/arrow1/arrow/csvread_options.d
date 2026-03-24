@@ -8,6 +8,7 @@ import arrow.schema;
 import arrow.timestamp_parser;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class CSVReadOptions : gobject.object.ObjectWrap
   override CSVReadOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.csvread_options.CSVReadOptions]
+  Returns: New builder object
+  */
+  static CSVReadOptionsGidBuilder builder()
+  {
+    return new CSVReadOptionsGidBuilder;
   }
 
   /**
@@ -542,5 +552,174 @@ class CSVReadOptions : gobject.object.ObjectWrap
     const(char*)* _trueValues = _tmptrueValues.ptr;
 
     garrow_csv_read_options_set_true_values(cast(GArrowCSVReadOptions*)this._cPtr, _trueValues, _nTrueValues);
+  }
+}
+
+class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `allowNewlinesInValues` property.
+      Params:
+        propval = Whether values are allowed to contain CR (0x0d) and LF (0x0a) characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowNewlinesInValues(bool propval)
+  {
+    return setProperty("allow-newlines-in-values", propval);
+  }
+
+  /**
+      Set `allowNullStrings` property.
+      Params:
+        propval = Whether string / binary columns can have null values.
+          If true, then strings in "null_values" are considered null for string columns.
+          If false, then all strings are valid string values.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowNullStrings(bool propval)
+  {
+    return setProperty("allow-null-strings", propval);
+  }
+
+  /**
+      Set `blockSize` property.
+      Params:
+        propval = Block size we request from the IO layer; also determines the size
+          of chunks when #GArrowCSVReadOptions:use-threads is true.
+      Returns: Builder instance for fluent chaining
+  */
+  T blockSize(int propval)
+  {
+    return setProperty("block-size", propval);
+  }
+
+  /**
+      Set `checkUtf8` property.
+      Params:
+        propval = Whether to check UTF8 validity of string columns.
+      Returns: Builder instance for fluent chaining
+  */
+  T checkUtf8(bool propval)
+  {
+    return setProperty("check-utf8", propval);
+  }
+
+  /**
+      Set `delimiter` property.
+      Params:
+        propval = Field delimiter character.
+      Returns: Builder instance for fluent chaining
+  */
+  T delimiter(char propval)
+  {
+    return setProperty("delimiter", propval);
+  }
+
+  /**
+      Set `escapeCharacter` property.
+      Params:
+        propval = Escaping character. This is used only when
+          #GArrowCSVReadOptions:is-escaped is true.
+      Returns: Builder instance for fluent chaining
+  */
+  T escapeCharacter(char propval)
+  {
+    return setProperty("escape-character", propval);
+  }
+
+  /** */
+  T generateColumnNames(bool propval)
+  {
+    return setProperty("generate-column-names", propval);
+  }
+
+  /**
+      Set `ignoreEmptyLines` property.
+      Params:
+        propval = Whether empty lines are ignored. If false, an empty line
+          represents a simple empty value (assuming a one-column CSV file).
+      Returns: Builder instance for fluent chaining
+  */
+  T ignoreEmptyLines(bool propval)
+  {
+    return setProperty("ignore-empty-lines", propval);
+  }
+
+  /**
+      Set `isDoubleQuoted` property.
+      Params:
+        propval = Whether a quote inside a value is double quoted.
+      Returns: Builder instance for fluent chaining
+  */
+  T isDoubleQuoted(bool propval)
+  {
+    return setProperty("is-double-quoted", propval);
+  }
+
+  /**
+      Set `isEscaped` property.
+      Params:
+        propval = Whether escaping is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T isEscaped(bool propval)
+  {
+    return setProperty("is-escaped", propval);
+  }
+
+  /**
+      Set `isQuoted` property.
+      Params:
+        propval = Whether quoting is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T isQuoted(bool propval)
+  {
+    return setProperty("is-quoted", propval);
+  }
+
+  /**
+      Set `nSkipRows` property.
+      Params:
+        propval = The number of header rows to skip (not including
+          the row of column names, if any)
+      Returns: Builder instance for fluent chaining
+  */
+  T nSkipRows(uint propval)
+  {
+    return setProperty("n-skip-rows", propval);
+  }
+
+  /**
+      Set `quoteCharacter` property.
+      Params:
+        propval = Quoting character. This is used only when
+          #GArrowCSVReadOptions:is-quoted is true.
+      Returns: Builder instance for fluent chaining
+  */
+  T quoteCharacter(char propval)
+  {
+    return setProperty("quote-character", propval);
+  }
+
+  /**
+      Set `useThreads` property.
+      Params:
+        propval = Whether to use the global CPU thread pool.
+      Returns: Builder instance for fluent chaining
+  */
+  T useThreads(bool propval)
+  {
+    return setProperty("use-threads", propval);
+  }
+}
+
+/// Fluent builder for [arrow.csvread_options.CSVReadOptions]
+final class CSVReadOptionsGidBuilder : CSVReadOptionsGidBuilderImpl!CSVReadOptionsGidBuilder
+{
+  CSVReadOptions build()
+  {
+    return new CSVReadOptions(cast(void*)createGObject(CSVReadOptions._getGType), Yes.Take);
   }
 }

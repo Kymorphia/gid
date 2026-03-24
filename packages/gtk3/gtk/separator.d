@@ -4,6 +4,7 @@ module gtk.separator;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -52,6 +53,15 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
     return this;
   }
 
+  /**
+  Get builder for [gtk.separator.Separator]
+  Returns: New builder object
+  */
+  static SeparatorGidBuilder builder()
+  {
+    return new SeparatorGidBuilder;
+  }
+
   mixin OrientableT!();
 
   /**
@@ -66,5 +76,20 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
     GtkWidget* _cretval;
     _cretval = gtk_separator_new(orientation);
     this(_cretval, No.Take);
+  }
+}
+
+class SeparatorGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.separator.Separator]
+final class SeparatorGidBuilder : SeparatorGidBuilderImpl!SeparatorGidBuilder
+{
+  Separator build()
+  {
+    return new Separator(cast(void*)createGObject(Separator._getGType), No.Take);
   }
 }

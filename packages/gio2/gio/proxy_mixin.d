@@ -11,6 +11,7 @@ public import gio.iostream;
 public import gio.proxy_address;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -109,4 +110,8 @@ template ProxyT()
     _retval = cast(bool)g_proxy_supports_hostname(cast(GProxy*)this._cPtr);
     return _retval;
   }
+}
+
+template ProxyGidBuilderT()
+{
 }

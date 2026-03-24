@@ -6,6 +6,7 @@ import gio.action_group;
 import gio.icon;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -52,6 +53,15 @@ class Widget : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [panel.widget.Widget]
+  Returns: New builder object
+  */
+  static WidgetGidBuilder builder()
+  {
+    return new WidgetGidBuilder;
+  }
+
   /** */
   @property bool busy()
   {
@@ -67,7 +77,7 @@ class Widget : gtk.widget.Widget
   /** */
   @property void canMaximize(bool propval)
   {
-    return setCanMaximize(propval);
+    setCanMaximize(propval);
   }
 
   /**
@@ -86,7 +96,7 @@ class Widget : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -105,7 +115,7 @@ class Widget : gtk.widget.Widget
   */
   @property void icon(gio.icon.Icon propval)
   {
-    return setIcon(propval);
+    setIcon(propval);
   }
 
   /**
@@ -124,7 +134,7 @@ class Widget : gtk.widget.Widget
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /** */
@@ -136,7 +146,7 @@ class Widget : gtk.widget.Widget
   /** */
   @property void id(string propval)
   {
-    return setId(propval);
+    setId(propval);
   }
 
   /** */
@@ -148,7 +158,7 @@ class Widget : gtk.widget.Widget
   /** */
   @property void kind(string propval)
   {
-    return setKind(propval);
+    setKind(propval);
   }
 
   /**
@@ -169,7 +179,7 @@ class Widget : gtk.widget.Widget
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
-    return setMenuModel(propval);
+    setMenuModel(propval);
   }
 
   /** */
@@ -181,7 +191,7 @@ class Widget : gtk.widget.Widget
   /** */
   @property void modified(bool propval)
   {
-    return setModified(propval);
+    setModified(propval);
   }
 
   /** */
@@ -193,7 +203,7 @@ class Widget : gtk.widget.Widget
   /** */
   @property void needsAttention(bool propval)
   {
-    return setNeedsAttention(propval);
+    setNeedsAttention(propval);
   }
 
   /** */
@@ -205,7 +215,7 @@ class Widget : gtk.widget.Widget
   /** */
   @property void reorderable(bool propval)
   {
-    return setReorderable(propval);
+    setReorderable(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class Widget : gtk.widget.Widget
   */
   @property void saveDelegate(panel.save_delegate.SaveDelegate propval)
   {
-    return setSaveDelegate(propval);
+    setSaveDelegate(propval);
   }
 
   /**
@@ -243,7 +253,7 @@ class Widget : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -262,7 +272,7 @@ class Widget : gtk.widget.Widget
   */
   @property void tooltip(string propval)
   {
-    return setTooltip(propval);
+    setTooltip(propval);
   }
 
   /**
@@ -748,5 +758,133 @@ class Widget : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("presented", closure, after);
+  }
+}
+
+class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /** */
+  T canMaximize(bool propval)
+  {
+    return setProperty("can-maximize", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child inside this widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The icon for this widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T icon(gio.icon.Icon propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /** */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+
+  /** */
+  T kind(string propval)
+  {
+    return setProperty("kind", propval);
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = A menu model to display additional options for the page to the user via
+          menus.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menu-model", propval);
+  }
+
+  /** */
+  T modified(bool propval)
+  {
+    return setProperty("modified", propval);
+  }
+
+  /** */
+  T needsAttention(bool propval)
+  {
+    return setProperty("needs-attention", propval);
+  }
+
+  /** */
+  T reorderable(bool propval)
+  {
+    return setProperty("reorderable", propval);
+  }
+
+  /**
+      Set `saveDelegate` property.
+      Params:
+        propval = The save delegate attached to this widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T saveDelegate(panel.save_delegate.SaveDelegate propval)
+  {
+    return setProperty("save-delegate", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `tooltip` property.
+      Params:
+        propval = The tooltip to display in tabs for the widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T tooltip(string propval)
+  {
+    return setProperty("tooltip", propval);
+  }
+}
+
+/// Fluent builder for [panel.widget.Widget]
+final class WidgetGidBuilder : WidgetGidBuilderImpl!WidgetGidBuilder
+{
+  Widget build()
+  {
+    return new Widget(cast(void*)createGObject(Widget._getGType), No.Take);
   }
 }

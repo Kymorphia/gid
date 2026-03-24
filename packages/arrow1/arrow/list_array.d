@@ -8,6 +8,7 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,21 @@ class ListArray : arrow.array.Array
   override ListArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.list_array.ListArray]
+  Returns: New builder object
+  */
+  static ListArrayGidBuilder builder()
+  {
+    return new ListArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.array.Array rawValues()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("raw-values");
   }
 
   /** */
@@ -105,5 +121,24 @@ class ListArray : arrow.array.Array
     _cretval = garrow_list_array_get_values(cast(GArrowListArray*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ListArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+
+  /** */
+  T rawValues(arrow.array.Array propval)
+  {
+    return setProperty("raw-values", propval);
+  }
+}
+
+/// Fluent builder for [arrow.list_array.ListArray]
+final class ListArrayGidBuilder : ListArrayGidBuilderImpl!ListArrayGidBuilder
+{
+  ListArray build()
+  {
+    return new ListArray(cast(void*)createGObject(ListArray._getGType), Yes.Take);
   }
 }

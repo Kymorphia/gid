@@ -7,6 +7,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class StreamFs : gmime.stream.Stream
   override StreamFs self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.stream_fs.StreamFs]
+  Returns: New builder object
+  */
+  static StreamFsGidBuilder builder()
+  {
+    return new StreamFsGidBuilder;
   }
 
   /**
@@ -119,5 +129,18 @@ class StreamFs : gmime.stream.Stream
   void setOwner(bool owner)
   {
     g_mime_stream_fs_set_owner(cast(GMimeStreamFs*)this._cPtr, owner);
+  }
+}
+
+class StreamFsGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_fs.StreamFs]
+final class StreamFsGidBuilder : StreamFsGidBuilderImpl!StreamFsGidBuilder
+{
+  StreamFs build()
+  {
+    return new StreamFs(cast(void*)createGObject(StreamFs._getGType), Yes.Take);
   }
 }

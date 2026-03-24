@@ -2,6 +2,7 @@
 module webkit.response_policy_decision;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -45,6 +46,15 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   override ResponsePolicyDecision self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.response_policy_decision.ResponsePolicyDecision]
+  Returns: New builder object
+  */
+  static ResponsePolicyDecisionGidBuilder builder()
+  {
+    return new ResponsePolicyDecisionGidBuilder;
   }
 
   /**
@@ -120,5 +130,18 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
     bool _retval;
     _retval = cast(bool)webkit_response_policy_decision_is_mime_type_supported(cast(WebKitResponsePolicyDecision*)this._cPtr);
     return _retval;
+  }
+}
+
+class ResponsePolicyDecisionGidBuilderImpl(T) : webkit.policy_decision.PolicyDecisionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.response_policy_decision.ResponsePolicyDecision]
+final class ResponsePolicyDecisionGidBuilder : ResponsePolicyDecisionGidBuilderImpl!ResponsePolicyDecisionGidBuilder
+{
+  ResponsePolicyDecision build()
+  {
+    return new ResponsePolicyDecision(cast(void*)createGObject(ResponsePolicyDecision._getGType), No.Take);
   }
 }

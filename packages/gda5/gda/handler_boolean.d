@@ -7,6 +7,7 @@ import gda.data_handler;
 import gda.data_handler_mixin;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class HandlerBoolean : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     return this;
   }
 
+  /**
+  Get builder for [gda.handler_boolean.HandlerBoolean]
+  Returns: New builder object
+  */
+  static HandlerBooleanGidBuilder builder()
+  {
+    return new HandlerBooleanGidBuilder;
+  }
+
   mixin DataHandlerT!();
 
   /**
@@ -50,5 +60,20 @@ class HandlerBoolean : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     _cretval = gda_handler_boolean_new();
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_handler.DataHandler)(cast(GdaDataHandler*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class HandlerBooleanGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
+{
+
+  mixin DataHandlerGidBuilderT!();
+}
+
+/// Fluent builder for [gda.handler_boolean.HandlerBoolean]
+final class HandlerBooleanGidBuilder : HandlerBooleanGidBuilderImpl!HandlerBooleanGidBuilder
+{
+  HandlerBoolean build()
+  {
+    return new HandlerBoolean(cast(void*)createGObject(HandlerBoolean._getGType), No.Take);
   }
 }

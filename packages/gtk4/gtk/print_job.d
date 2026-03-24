@@ -5,6 +5,7 @@ import cairo.surface;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -54,6 +55,51 @@ class PrintJob : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.print_job.PrintJob]
+  Returns: New builder object
+  */
+  static PrintJobGidBuilder builder()
+  {
+    return new PrintJobGidBuilder;
+  }
+
+  /**
+      Get `pageSetup` property.
+      Returns: Page setup.
+  */
+  @property gtk.page_setup.PageSetup pageSetup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.page_setup.PageSetup)("page-setup");
+  }
+
+  /**
+      Get `printer` property.
+      Returns: The printer to send the job to.
+  */
+  @property gtk.printer.Printer printer()
+  {
+    return getPrinter();
+  }
+
+  /**
+      Get `settings` property.
+      Returns: Printer settings.
+  */
+  @property gtk.print_settings.PrintSettings settings()
+  {
+    return getSettings();
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the print job.
+  */
+  @property string title()
+  {
+    return getTitle();
+  }
+
+  /**
       Get `trackPrintStatus` property.
       Returns: true if the print job will continue to emit status-changed
         signals after the print data has been setn to the printer.
@@ -71,7 +117,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   @property void trackPrintStatus(bool propval)
   {
-    return setTrackPrintStatus(propval);
+    setTrackPrintStatus(propval);
   }
 
   /**
@@ -523,5 +569,74 @@ class PrintJob : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("status-changed", closure, after);
+  }
+}
+
+class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `pageSetup` property.
+      Params:
+        propval = Page setup.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setProperty("page-setup", propval);
+  }
+
+  /**
+      Set `printer` property.
+      Params:
+        propval = The printer to send the job to.
+      Returns: Builder instance for fluent chaining
+  */
+  T printer(gtk.printer.Printer propval)
+  {
+    return setProperty("printer", propval);
+  }
+
+  /**
+      Set `settings` property.
+      Params:
+        propval = Printer settings.
+      Returns: Builder instance for fluent chaining
+  */
+  T settings(gtk.print_settings.PrintSettings propval)
+  {
+    return setProperty("settings", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the print job.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `trackPrintStatus` property.
+      Params:
+        propval = true if the print job will continue to emit status-changed
+          signals after the print data has been setn to the printer.
+      Returns: Builder instance for fluent chaining
+  */
+  T trackPrintStatus(bool propval)
+  {
+    return setProperty("track-print-status", propval);
+  }
+}
+
+/// Fluent builder for [gtk.print_job.PrintJob]
+final class PrintJobGidBuilder : PrintJobGidBuilderImpl!PrintJobGidBuilder
+{
+  PrintJob build()
+  {
+    return new PrintJob(cast(void*)createGObject(PrintJob._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import gdk.rectangle;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -151,6 +152,15 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+  Get builder for [gtk.tree_view.TreeView]
+  Returns: New builder object
+  */
+  static TreeViewGidBuilder builder()
+  {
+    return new TreeViewGidBuilder;
+  }
+
+  /**
       Get `activateOnSingleClick` property.
       Returns: The activate-on-single-click property specifies whether the "row-activated" signal
         will be emitted after a single click.
@@ -168,7 +178,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void activateOnSingleClick(bool propval)
   {
-    return setActivateOnSingleClick(propval);
+    setActivateOnSingleClick(propval);
   }
 
   /** */
@@ -192,7 +202,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void enableSearch(bool propval)
   {
-    return setEnableSearch(propval);
+    setEnableSearch(propval);
   }
 
   /** */
@@ -204,7 +214,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void enableTreeLines(bool propval)
   {
-    return setEnableTreeLines(propval);
+    setEnableTreeLines(propval);
   }
 
   /** */
@@ -216,7 +226,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void expanderColumn(gtk.tree_view_column.TreeViewColumn propval)
   {
-    return setExpanderColumn(propval);
+    setExpanderColumn(propval);
   }
 
   /**
@@ -243,7 +253,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void fixedHeightMode(bool propval)
   {
-    return setFixedHeightMode(propval);
+    setFixedHeightMode(propval);
   }
 
   /** */
@@ -255,7 +265,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void headersClickable(bool propval)
   {
-    return setHeadersClickable(propval);
+    setHeadersClickable(propval);
   }
 
   /** */
@@ -267,7 +277,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void headersVisible(bool propval)
   {
-    return setHeadersVisible(propval);
+    setHeadersVisible(propval);
   }
 
   /**
@@ -296,7 +306,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void hoverExpand(bool propval)
   {
-    return setHoverExpand(propval);
+    setHoverExpand(propval);
   }
 
   /**
@@ -327,7 +337,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void hoverSelection(bool propval)
   {
-    return setHoverSelection(propval);
+    setHoverSelection(propval);
   }
 
   /**
@@ -346,7 +356,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void levelIndentation(int propval)
   {
-    return setLevelIndentation(propval);
+    setLevelIndentation(propval);
   }
 
   /** */
@@ -358,7 +368,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void model(gtk.tree_model.TreeModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /** */
@@ -370,7 +380,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void reorderable(bool propval)
   {
-    return setReorderable(propval);
+    setReorderable(propval);
   }
 
   /** */
@@ -382,7 +392,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void rubberBanding(bool propval)
   {
-    return setRubberBanding(propval);
+    setRubberBanding(propval);
   }
 
   /** */
@@ -394,7 +404,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void searchColumn(int propval)
   {
-    return setSearchColumn(propval);
+    setSearchColumn(propval);
   }
 
   /**
@@ -413,7 +423,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void showExpanders(bool propval)
   {
-    return setShowExpanders(propval);
+    setShowExpanders(propval);
   }
 
   /** */
@@ -425,7 +435,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void tooltipColumn(int propval)
   {
-    return setTooltipColumn(propval);
+    setTooltipColumn(propval);
   }
 
   mixin ScrollableT!();
@@ -2760,5 +2770,168 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+}
+
+class TreeViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = The activate-on-single-click property specifies whether the "row-activated" signal
+          will be emitted after a single click.
+      Returns: Builder instance for fluent chaining
+  */
+  T activateOnSingleClick(bool propval)
+  {
+    return setProperty("activate-on-single-click", propval);
+  }
+
+  /** */
+  T enableGridLines(gtk.types.TreeViewGridLines propval)
+  {
+    return setProperty("enable-grid-lines", propval);
+  }
+
+  /** */
+  T enableSearch(bool propval)
+  {
+    return setProperty("enable-search", propval);
+  }
+
+  /** */
+  T enableTreeLines(bool propval)
+  {
+    return setProperty("enable-tree-lines", propval);
+  }
+
+  /** */
+  T expanderColumn(gtk.tree_view_column.TreeViewColumn propval)
+  {
+    return setProperty("expander-column", propval);
+  }
+
+  /**
+      Set `fixedHeightMode` property.
+      Params:
+        propval = Setting the ::fixed-height-mode property to true speeds up
+          [gtk.tree_view.TreeView] by assuming that all rows have the same height.
+          Only enable this option if all rows are the same height.
+          Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
+          information on this option.
+      Returns: Builder instance for fluent chaining
+  */
+  T fixedHeightMode(bool propval)
+  {
+    return setProperty("fixed-height-mode", propval);
+  }
+
+  /** */
+  T headersClickable(bool propval)
+  {
+    return setProperty("headers-clickable", propval);
+  }
+
+  /** */
+  T headersVisible(bool propval)
+  {
+    return setProperty("headers-visible", propval);
+  }
+
+  /**
+      Set `hoverExpand` property.
+      Params:
+        propval = Enables or disables the hover expansion mode of @tree_view.
+          Hover expansion makes rows expand or collapse if the pointer moves
+          over them.
+          
+          This mode is primarily intended for treeviews in popups, e.g.
+          in [gtk.combo_box.ComboBox] or [gtk.entry_completion.EntryCompletion].
+      Returns: Builder instance for fluent chaining
+  */
+  T hoverExpand(bool propval)
+  {
+    return setProperty("hover-expand", propval);
+  }
+
+  /**
+      Set `hoverSelection` property.
+      Params:
+        propval = Enables or disables the hover selection mode of @tree_view.
+          Hover selection makes the selected row follow the pointer.
+          Currently, this works only for the selection modes
+          [gtk.types.SelectionMode.Single] and [gtk.types.SelectionMode.Browse].
+          
+          This mode is primarily intended for treeviews in popups, e.g.
+          in [gtk.combo_box.ComboBox] or [gtk.entry_completion.EntryCompletion].
+      Returns: Builder instance for fluent chaining
+  */
+  T hoverSelection(bool propval)
+  {
+    return setProperty("hover-selection", propval);
+  }
+
+  /**
+      Set `levelIndentation` property.
+      Params:
+        propval = Extra indentation for each level.
+      Returns: Builder instance for fluent chaining
+  */
+  T levelIndentation(int propval)
+  {
+    return setProperty("level-indentation", propval);
+  }
+
+  /** */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /** */
+  T reorderable(bool propval)
+  {
+    return setProperty("reorderable", propval);
+  }
+
+  /** */
+  T rubberBanding(bool propval)
+  {
+    return setProperty("rubber-banding", propval);
+  }
+
+  /** */
+  T searchColumn(int propval)
+  {
+    return setProperty("search-column", propval);
+  }
+
+  /**
+      Set `showExpanders` property.
+      Params:
+        propval = true if the view has expanders.
+      Returns: Builder instance for fluent chaining
+  */
+  T showExpanders(bool propval)
+  {
+    return setProperty("show-expanders", propval);
+  }
+
+  /** */
+  T tooltipColumn(int propval)
+  {
+    return setProperty("tooltip-column", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_view.TreeView]
+final class TreeViewGidBuilder : TreeViewGidBuilderImpl!TreeViewGidBuilder
+{
+  TreeView build()
+  {
+    return new TreeView(cast(void*)createGObject(TreeView._getGType), No.Take);
   }
 }

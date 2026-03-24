@@ -2,6 +2,7 @@
 module gst.plugin_feature;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -38,6 +39,15 @@ class PluginFeature : gst.object.ObjectWrap
   override PluginFeature self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.plugin_feature.PluginFeature]
+  Returns: New builder object
+  */
+  static PluginFeatureGidBuilder builder()
+  {
+    return new PluginFeatureGidBuilder;
   }
 
   /**
@@ -189,5 +199,18 @@ class PluginFeature : gst.object.ObjectWrap
   void setRank(uint rank)
   {
     gst_plugin_feature_set_rank(cast(GstPluginFeature*)this._cPtr, rank);
+  }
+}
+
+class PluginFeatureGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.plugin_feature.PluginFeature]
+final class PluginFeatureGidBuilder : PluginFeatureGidBuilderImpl!PluginFeatureGidBuilder
+{
+  PluginFeature build()
+  {
+    return new PluginFeature(cast(void*)createGObject(PluginFeature._getGType), No.Take);
   }
 }

@@ -3,11 +3,13 @@ module gtksource.completion_context;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gtk.text_iter;
 import gtksource.c.functions;
 import gtksource.c.types;
+import gtksource.completion;
 import gtksource.completion_proposal;
 import gtksource.completion_provider;
 import gtksource.types;
@@ -42,6 +44,15 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
+  Get builder for [gtksource.completion_context.CompletionContext]
+  Returns: New builder object
+  */
+  static CompletionContextGidBuilder builder()
+  {
+    return new CompletionContextGidBuilder;
+  }
+
+  /**
       Get `activation` property.
       Returns: The completion activation
   */
@@ -58,6 +69,15 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   @property void activation(gtksource.types.CompletionActivation propval)
   {
     gobject.object.ObjectWrap.setProperty!(gtksource.types.CompletionActivation)("activation", propval);
+  }
+
+  /**
+      Get `completion` property.
+      Returns: The #GtkSourceCompletion associated with the context.
+  */
+  @property gtksource.completion.Completion completion()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtksource.completion.Completion)("completion");
   }
 
   /**
@@ -165,5 +185,51 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancelled", closure, after);
+  }
+}
+
+class CompletionContextGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+
+  /**
+      Set `activation` property.
+      Params:
+        propval = The completion activation
+      Returns: Builder instance for fluent chaining
+  */
+  T activation(gtksource.types.CompletionActivation propval)
+  {
+    return setProperty("activation", propval);
+  }
+
+  /**
+      Set `completion` property.
+      Params:
+        propval = The #GtkSourceCompletion associated with the context.
+      Returns: Builder instance for fluent chaining
+  */
+  T completion(gtksource.completion.Completion propval)
+  {
+    return setProperty("completion", propval);
+  }
+
+  /**
+      Set `iter` property.
+      Params:
+        propval = The #GtkTextIter at which the completion is invoked.
+      Returns: Builder instance for fluent chaining
+  */
+  T iter(gtk.text_iter.TextIter propval)
+  {
+    return setProperty("iter", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion_context.CompletionContext]
+final class CompletionContextGidBuilder : CompletionContextGidBuilderImpl!CompletionContextGidBuilder
+{
+  CompletionContext build()
+  {
+    return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), No.Take);
   }
 }

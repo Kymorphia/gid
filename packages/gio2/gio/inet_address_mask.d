@@ -9,6 +9,7 @@ import gio.initable;
 import gio.initable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,15 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   override InetAddressMask self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.inet_address_mask.InetAddressMask]
+  Returns: New builder object
+  */
+  static InetAddressMaskGidBuilder builder()
+  {
+    return new InetAddressMaskGidBuilder;
   }
 
   /**
@@ -212,5 +222,42 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
     _cretval = g_inet_address_mask_to_string(cast(GInetAddressMask*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class InetAddressMaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `address` property.
+      Params:
+        propval = The base address.
+      Returns: Builder instance for fluent chaining
+  */
+  T address(gio.inet_address.InetAddress propval)
+  {
+    return setProperty("address", propval);
+  }
+
+  /**
+      Set `length` property.
+      Params:
+        propval = The prefix length, in bytes.
+      Returns: Builder instance for fluent chaining
+  */
+  T length(uint propval)
+  {
+    return setProperty("length", propval);
+  }
+}
+
+/// Fluent builder for [gio.inet_address_mask.InetAddressMask]
+final class InetAddressMaskGidBuilder : InetAddressMaskGidBuilderImpl!InetAddressMaskGidBuilder
+{
+  InetAddressMask build()
+  {
+    return new InetAddressMask(cast(void*)createGObject(InetAddressMask._getGType), Yes.Take);
   }
 }

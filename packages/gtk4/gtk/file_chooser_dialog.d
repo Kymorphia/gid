@@ -2,6 +2,7 @@
 module gtk.file_chooser_dialog;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -229,5 +230,29 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
     return this;
   }
 
+  /**
+  Get builder for [gtk.file_chooser_dialog.FileChooserDialog]
+  Returns: New builder object
+  */
+  static FileChooserDialogGidBuilder builder()
+  {
+    return new FileChooserDialogGidBuilder;
+  }
+
   mixin FileChooserT!();
+}
+
+class FileChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
+{
+
+  mixin FileChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.file_chooser_dialog.FileChooserDialog]
+final class FileChooserDialogGidBuilder : FileChooserDialogGidBuilderImpl!FileChooserDialogGidBuilder
+{
+  FileChooserDialog build()
+  {
+    return new FileChooserDialog(cast(void*)createGObject(FileChooserDialog._getGType), No.Take);
+  }
 }

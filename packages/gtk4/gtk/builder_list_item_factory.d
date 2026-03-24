@@ -3,6 +3,7 @@ module gtk.builder_list_item_factory;
 
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.builder_scope;
 import gtk.c.functions;
@@ -61,6 +62,42 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   override BuilderListItemFactory self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.builder_list_item_factory.BuilderListItemFactory]
+  Returns: New builder object
+  */
+  static BuilderListItemFactoryGidBuilder builder()
+  {
+    return new BuilderListItemFactoryGidBuilder;
+  }
+
+  /**
+      Get `bytes` property.
+      Returns: [glib.bytes.Bytes] containing the UI definition.
+  */
+  @property glib.bytes.Bytes bytes()
+  {
+    return getBytes();
+  }
+
+  /**
+      Get `resource` property.
+      Returns: Path of the resource containing the UI definition.
+  */
+  @property string resource()
+  {
+    return getResource();
+  }
+
+  /**
+      Get `scope_` property.
+      Returns: [gtk.builder_scope.BuilderScope] to use when instantiating listitems
+  */
+  @property gtk.builder_scope.BuilderScope scope_()
+  {
+    return getScope();
   }
 
   /**
@@ -133,5 +170,51 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
     _cretval = gtk_builder_list_item_factory_get_scope(cast(GtkBuilderListItemFactory*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class BuilderListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFactoryGidBuilderImpl!T
+{
+
+  /**
+      Set `bytes` property.
+      Params:
+        propval = [glib.bytes.Bytes] containing the UI definition.
+      Returns: Builder instance for fluent chaining
+  */
+  T bytes(glib.bytes.Bytes propval)
+  {
+    return setProperty("bytes", propval);
+  }
+
+  /**
+      Set `resource` property.
+      Params:
+        propval = Path of the resource containing the UI definition.
+      Returns: Builder instance for fluent chaining
+  */
+  T resource(string propval)
+  {
+    return setProperty("resource", propval);
+  }
+
+  /**
+      Set `scope_` property.
+      Params:
+        propval = [gtk.builder_scope.BuilderScope] to use when instantiating listitems
+      Returns: Builder instance for fluent chaining
+  */
+  T scope_(gtk.builder_scope.BuilderScope propval)
+  {
+    return setProperty("scope", propval);
+  }
+}
+
+/// Fluent builder for [gtk.builder_list_item_factory.BuilderListItemFactory]
+final class BuilderListItemFactoryGidBuilder : BuilderListItemFactoryGidBuilderImpl!BuilderListItemFactoryGidBuilder
+{
+  BuilderListItemFactory build()
+  {
+    return new BuilderListItemFactory(cast(void*)createGObject(BuilderListItemFactory._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import arrowdataset.c.types;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class Scanner : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.scanner.Scanner]
+  Returns: New builder object
+  */
+  static ScannerGidBuilder builder()
+  {
+    return new ScannerGidBuilder;
+  }
+
   /** */
   arrow.record_batch_reader.RecordBatchReader toRecordBatchReader()
   {
@@ -61,5 +71,24 @@ class Scanner : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ScannerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T scanner(void* propval)
+  {
+    return setProperty("scanner", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.scanner.Scanner]
+final class ScannerGidBuilder : ScannerGidBuilderImpl!ScannerGidBuilder
+{
+  Scanner build()
+  {
+    return new Scanner(cast(void*)createGObject(Scanner._getGType), No.Take);
   }
 }

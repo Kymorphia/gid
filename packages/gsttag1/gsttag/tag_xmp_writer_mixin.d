@@ -3,6 +3,7 @@ module gsttag.tag_xmp_writer_mixin;
 
 public import gsttag.tag_xmp_writer_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gst.buffer;
 public import gst.tag_list;
 public import gsttag.c.functions;
@@ -86,4 +87,8 @@ template TagXmpWriterT()
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
+}
+
+template TagXmpWriterGidBuilderT()
+{
 }

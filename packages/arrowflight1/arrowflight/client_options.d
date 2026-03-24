@@ -5,6 +5,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class ClientOptions : gobject.object.ObjectWrap
   override ClientOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.client_options.ClientOptions]
+  Returns: New builder object
+  */
+  static ClientOptionsGidBuilder builder()
+  {
+    return new ClientOptionsGidBuilder;
   }
 
   /**
@@ -168,5 +178,90 @@ class ClientOptions : gobject.object.ObjectWrap
     GAFlightClientOptions* _cretval;
     _cretval = gaflight_client_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `certificateChain` property.
+      Params:
+        propval = The client certificate to use if using Mutual TLS.
+      Returns: Builder instance for fluent chaining
+  */
+  T certificateChain(string propval)
+  {
+    return setProperty("certificate-chain", propval);
+  }
+
+  /**
+      Set `disableServerVerification` property.
+      Params:
+        propval = Whether use TLS without validating the server certificate. Use
+          with caution.
+      Returns: Builder instance for fluent chaining
+  */
+  T disableServerVerification(bool propval)
+  {
+    return setProperty("disable-server-verification", propval);
+  }
+
+  /**
+      Set `overrideHostName` property.
+      Params:
+        propval = Override the host name checked by TLS. Use with caution.
+      Returns: Builder instance for fluent chaining
+  */
+  T overrideHostName(string propval)
+  {
+    return setProperty("override-host-name", propval);
+  }
+
+  /**
+      Set `privateKey` property.
+      Params:
+        propval = The private key associated with the client certificate for Mutual
+          TLS.
+      Returns: Builder instance for fluent chaining
+  */
+  T privateKey(string propval)
+  {
+    return setProperty("private-key", propval);
+  }
+
+  /**
+      Set `tlsRootCertificates` property.
+      Params:
+        propval = Root certificates to use for validating server certificates.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsRootCertificates(string propval)
+  {
+    return setProperty("tls-root-certificates", propval);
+  }
+
+  /**
+      Set `writeSizeLimitBytes` property.
+      Params:
+        propval = A soft limit on the number of bytes to write in a single batch
+          when sending Arrow data to a server.
+          
+          Used to help limit server memory consumption. Only enabled if
+          positive. When enabled, @GARROW_ERROR_IO may be yielded.
+      Returns: Builder instance for fluent chaining
+  */
+  T writeSizeLimitBytes(long propval)
+  {
+    return setProperty("write-size-limit-bytes", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.client_options.ClientOptions]
+final class ClientOptionsGidBuilder : ClientOptionsGidBuilderImpl!ClientOptionsGidBuilder
+{
+  ClientOptions build()
+  {
+    return new ClientOptions(cast(void*)createGObject(ClientOptions._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import gdk.paintable;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.file;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -94,6 +95,15 @@ class Picture : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.picture.Picture]
+  Returns: New builder object
+  */
+  static PictureGidBuilder builder()
+  {
+    return new PictureGidBuilder;
+  }
+
+  /**
       Get `alternativeText` property.
       Returns: The alternative textual description for the picture.
   */
@@ -109,7 +119,7 @@ class Picture : gtk.widget.Widget
   */
   @property void alternativeText(string propval)
   {
-    return setAlternativeText(propval);
+    setAlternativeText(propval);
   }
 
   /**
@@ -128,7 +138,7 @@ class Picture : gtk.widget.Widget
   */
   @property void canShrink(bool propval)
   {
-    return setCanShrink(propval);
+    setCanShrink(propval);
   }
 
   /**
@@ -147,7 +157,7 @@ class Picture : gtk.widget.Widget
   */
   @property void contentFit(gtk.types.ContentFit propval)
   {
-    return setContentFit(propval);
+    setContentFit(propval);
   }
 
   /**
@@ -166,7 +176,7 @@ class Picture : gtk.widget.Widget
   */
   @property void file(gio.file.File propval)
   {
-    return setFile(propval);
+    setFile(propval);
   }
 
   /**
@@ -191,7 +201,7 @@ class Picture : gtk.widget.Widget
   */
   @property void keepAspectRatio(bool propval)
   {
-    return setKeepAspectRatio(propval);
+    setKeepAspectRatio(propval);
   }
 
   /**
@@ -210,7 +220,7 @@ class Picture : gtk.widget.Widget
   */
   @property void paintable(gdk.paintable.Paintable propval)
   {
-    return setPaintable(propval);
+    setPaintable(propval);
   }
 
   /**
@@ -552,5 +562,88 @@ class Picture : gtk.widget.Widget
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_picture_set_resource(cast(GtkPicture*)this._cPtr, _resourcePath);
+  }
+}
+
+class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `alternativeText` property.
+      Params:
+        propval = The alternative textual description for the picture.
+      Returns: Builder instance for fluent chaining
+  */
+  T alternativeText(string propval)
+  {
+    return setProperty("alternative-text", propval);
+  }
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = If the [gtk.picture.Picture] can be made smaller than the natural size of its contents.
+      Returns: Builder instance for fluent chaining
+  */
+  T canShrink(bool propval)
+  {
+    return setProperty("can-shrink", propval);
+  }
+
+  /**
+      Set `contentFit` property.
+      Params:
+        propval = How the content should be resized to fit inside the [gtk.picture.Picture].
+      Returns: Builder instance for fluent chaining
+  */
+  T contentFit(gtk.types.ContentFit propval)
+  {
+    return setProperty("content-fit", propval);
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The [gio.file.File] that is displayed or null if none.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gio.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `keepAspectRatio` property.
+      Params:
+        propval = Whether the GtkPicture will render its contents trying to preserve the aspect
+          ratio.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use `property@Gtk.Picture:content-fit` instead.
+  */
+  T keepAspectRatio(bool propval)
+  {
+    return setProperty("keep-aspect-ratio", propval);
+  }
+
+  /**
+      Set `paintable` property.
+      Params:
+        propval = The [gdk.paintable.Paintable] to be displayed by this [gtk.picture.Picture].
+      Returns: Builder instance for fluent chaining
+  */
+  T paintable(gdk.paintable.Paintable propval)
+  {
+    return setProperty("paintable", propval);
+  }
+}
+
+/// Fluent builder for [gtk.picture.Picture]
+final class PictureGidBuilder : PictureGidBuilderImpl!PictureGidBuilder
+{
+  Picture build()
+  {
+    return new Picture(cast(void*)createGObject(Picture._getGType), No.Take);
   }
 }

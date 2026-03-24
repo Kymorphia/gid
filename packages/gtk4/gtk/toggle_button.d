@@ -3,6 +3,7 @@ module gtk.toggle_button;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -123,6 +124,15 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
+  Get builder for [gtk.toggle_button.ToggleButton]
+  Returns: New builder object
+  */
+  static ToggleButtonGidBuilder builder()
+  {
+    return new ToggleButtonGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: If the toggle button should be pressed in.
   */
@@ -138,7 +148,7 @@ class ToggleButton : gtk.button.Button
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -148,7 +158,7 @@ class ToggleButton : gtk.button.Button
   */
   @property void group(gtk.toggle_button.ToggleButton propval)
   {
-    return setGroup(propval);
+    setGroup(propval);
   }
 
   /**
@@ -298,5 +308,41 @@ class ToggleButton : gtk.button.Button
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+class ToggleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `active` property.
+      Params:
+        propval = If the toggle button should be pressed in.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = The toggle button whose group this widget belongs to.
+      Returns: Builder instance for fluent chaining
+  */
+  T group(gtk.toggle_button.ToggleButton propval)
+  {
+    return setProperty("group", propval);
+  }
+}
+
+/// Fluent builder for [gtk.toggle_button.ToggleButton]
+final class ToggleButtonGidBuilder : ToggleButtonGidBuilderImpl!ToggleButtonGidBuilder
+{
+  ToggleButton build()
+  {
+    return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), No.Take);
   }
 }

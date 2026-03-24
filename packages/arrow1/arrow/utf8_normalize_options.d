@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
   }
 
   /**
+  Get builder for [arrow.utf8_normalize_options.UTF8NormalizeOptions]
+  Returns: New builder object
+  */
+  static UTF8NormalizeOptionsGidBuilder builder()
+  {
+    return new UTF8NormalizeOptionsGidBuilder;
+  }
+
+  /**
       Get `form` property.
       Returns: The Unicode normalization form to apply.
   */
@@ -62,5 +72,29 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
     GArrowUTF8NormalizeOptions* _cretval;
     _cretval = garrow_utf8_normalize_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class UTF8NormalizeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `form` property.
+      Params:
+        propval = The Unicode normalization form to apply.
+      Returns: Builder instance for fluent chaining
+  */
+  T form(arrow.types.UTF8NormalizeForm propval)
+  {
+    return setProperty("form", propval);
+  }
+}
+
+/// Fluent builder for [arrow.utf8_normalize_options.UTF8NormalizeOptions]
+final class UTF8NormalizeOptionsGidBuilder : UTF8NormalizeOptionsGidBuilderImpl!UTF8NormalizeOptionsGidBuilder
+{
+  UTF8NormalizeOptions build()
+  {
+    return new UTF8NormalizeOptions(cast(void*)createGObject(UTF8NormalizeOptions._getGType), Yes.Take);
   }
 }

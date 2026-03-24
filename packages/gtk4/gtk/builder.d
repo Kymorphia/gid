@@ -4,6 +4,7 @@ module gtk.builder;
 import gid.gid;
 import glib.error;
 import gobject.closure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 import gobject.types;
@@ -387,6 +388,15 @@ class Builder : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.builder.Builder]
+  Returns: New builder object
+  */
+  static BuilderGidBuilder builder()
+  {
+    return new BuilderGidBuilder;
+  }
+
+  /**
       Get `currentObject` property.
       Returns: The object the builder is evaluating for.
   */
@@ -402,7 +412,7 @@ class Builder : gobject.object.ObjectWrap
   */
   @property void currentObject(gobject.object.ObjectWrap propval)
   {
-    return setCurrentObject(propval);
+    setCurrentObject(propval);
   }
 
   /**
@@ -421,7 +431,7 @@ class Builder : gobject.object.ObjectWrap
   */
   @property void scope_(gtk.builder_scope.BuilderScope propval)
   {
-    return setScope(propval);
+    setScope(propval);
   }
 
   /**
@@ -448,7 +458,7 @@ class Builder : gobject.object.ObjectWrap
   */
   @property void translationDomain(string propval)
   {
-    return setTranslationDomain(propval);
+    setTranslationDomain(propval);
   }
 
   /**
@@ -1026,5 +1036,55 @@ class Builder : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
+  }
+}
+
+class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `currentObject` property.
+      Params:
+        propval = The object the builder is evaluating for.
+      Returns: Builder instance for fluent chaining
+  */
+  T currentObject(gobject.object.ObjectWrap propval)
+  {
+    return setProperty("current-object", propval);
+  }
+
+  /**
+      Set `scope_` property.
+      Params:
+        propval = The scope the builder is operating in
+      Returns: Builder instance for fluent chaining
+  */
+  T scope_(gtk.builder_scope.BuilderScope propval)
+  {
+    return setProperty("scope", propval);
+  }
+
+  /**
+      Set `translationDomain` property.
+      Params:
+        propval = The translation domain used when translating property values that
+          have been marked as translatable.
+          
+          If the translation domain is null, [gtk.builder.Builder] uses gettext(),
+          otherwise [glib.global.dgettext].
+      Returns: Builder instance for fluent chaining
+  */
+  T translationDomain(string propval)
+  {
+    return setProperty("translation-domain", propval);
+  }
+}
+
+/// Fluent builder for [gtk.builder.Builder]
+final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
+{
+  Builder build()
+  {
+    return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);
   }
 }

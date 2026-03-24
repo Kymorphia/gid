@@ -4,6 +4,7 @@ module gtksource.completion_info;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.text_iter;
@@ -42,6 +43,15 @@ class CompletionInfo : gtk.window.Window
     return this;
   }
 
+  /**
+  Get builder for [gtksource.completion_info.CompletionInfo]
+  Returns: New builder object
+  */
+  static CompletionInfoGidBuilder builder()
+  {
+    return new CompletionInfoGidBuilder;
+  }
+
   /** */
   this()
   {
@@ -63,5 +73,19 @@ class CompletionInfo : gtk.window.Window
   void moveToIter(gtk.text_view.TextView view, gtk.text_iter.TextIter iter = null)
   {
     gtk_source_completion_info_move_to_iter(cast(GtkSourceCompletionInfo*)this._cPtr, view ? cast(GtkTextView*)view._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+  }
+}
+
+class CompletionInfoGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtksource.completion_info.CompletionInfo]
+final class CompletionInfoGidBuilder : CompletionInfoGidBuilderImpl!CompletionInfoGidBuilder
+{
+  CompletionInfo build()
+  {
+    return new CompletionInfo(cast(void*)createGObject(CompletionInfo._getGType), No.Take);
   }
 }

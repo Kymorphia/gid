@@ -4,6 +4,7 @@ module gtk.vbox;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.box;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -69,6 +70,15 @@ class VBox : gtk.box.Box
   }
 
   /**
+  Get builder for [gtk.vbox.VBox]
+  Returns: New builder object
+  */
+  static VBoxGidBuilder builder()
+  {
+    return new VBoxGidBuilder;
+  }
+
+  /**
       Creates a new #GtkVBox.
   
       Params:
@@ -84,5 +94,19 @@ class VBox : gtk.box.Box
     GtkWidget* _cretval;
     _cretval = gtk_vbox_new(homogeneous, spacing);
     this(_cretval, No.Take);
+  }
+}
+
+class VBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.vbox.VBox]
+final class VBoxGidBuilder : VBoxGidBuilderImpl!VBoxGidBuilder
+{
+  VBox build()
+  {
+    return new VBox(cast(void*)createGObject(VBox._getGType), No.Take);
   }
 }

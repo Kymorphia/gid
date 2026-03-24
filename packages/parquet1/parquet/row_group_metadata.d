@@ -3,10 +3,12 @@ module parquet.row_group_metadata;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.column_chunk_metadata;
+import parquet.file_metadata;
 import parquet.types;
 
 /** */
@@ -36,6 +38,15 @@ class RowGroupMetadata : gobject.object.ObjectWrap
   override RowGroupMetadata self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [parquet.row_group_metadata.RowGroupMetadata]
+  Returns: New builder object
+  */
+  static RowGroupMetadataGidBuilder builder()
+  {
+    return new RowGroupMetadataGidBuilder;
   }
 
   /** */
@@ -104,5 +115,30 @@ class RowGroupMetadata : gobject.object.ObjectWrap
     long _retval;
     _retval = gparquet_row_group_metadata_get_total_size(cast(GParquetRowGroupMetadata*)this._cPtr);
     return _retval;
+  }
+}
+
+class RowGroupMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T metadata(void* propval)
+  {
+    return setProperty("metadata", propval);
+  }
+
+  /** */
+  T owner(parquet.file_metadata.FileMetadata propval)
+  {
+    return setProperty("owner", propval);
+  }
+}
+
+/// Fluent builder for [parquet.row_group_metadata.RowGroupMetadata]
+final class RowGroupMetadataGidBuilder : RowGroupMetadataGidBuilderImpl!RowGroupMetadataGidBuilder
+{
+  RowGroupMetadata build()
+  {
+    return new RowGroupMetadata(cast(void*)createGObject(RowGroupMetadata._getGType), No.Take);
   }
 }

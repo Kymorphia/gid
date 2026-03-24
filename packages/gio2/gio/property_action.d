@@ -9,6 +9,7 @@ import gio.c.types;
 import gio.types;
 import glib.variant;
 import glib.variant_type;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -94,6 +95,15 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   }
 
   /**
+  Get builder for [gio.property_action.PropertyAction]
+  Returns: New builder object
+  */
+  static PropertyActionGidBuilder builder()
+  {
+    return new PropertyActionGidBuilder;
+  }
+
+  /**
       Get `enabled` property.
       Returns: If @action is currently enabled.
         
@@ -103,6 +113,26 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   @property bool enabled()
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("enabled");
+  }
+
+  /**
+      Get `invertBoolean` property.
+      Returns: If true, the state of the action will be the negation of the
+        property value, provided the property is boolean.
+  */
+  @property bool invertBoolean()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("invert-boolean");
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the action.  This is mostly meaningful for identifying
+        the action once it has been added to a #GActionMap.
+  */
+  @property string name()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /**
@@ -160,5 +190,71 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     _cretval = g_property_action_new(_name, object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
     this(_cretval, Yes.Take);
+  }
+}
+
+class PropertyActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action.ActionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+
+  /**
+      Set `invertBoolean` property.
+      Params:
+        propval = If true, the state of the action will be the negation of the
+          property value, provided the property is boolean.
+      Returns: Builder instance for fluent chaining
+  */
+  T invertBoolean(bool propval)
+  {
+    return setProperty("invert-boolean", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the action.  This is mostly meaningful for identifying
+          the action once it has been added to a #GActionMap.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `object` property.
+      Params:
+        propval = The object to wrap a property on.
+          
+          The object must be a non-null #GObject with properties.
+      Returns: Builder instance for fluent chaining
+  */
+  T object(gobject.object.ObjectWrap propval)
+  {
+    return setProperty("object", propval);
+  }
+
+  /**
+      Set `propertyName` property.
+      Params:
+        propval = The name of the property to wrap on the object.
+          
+          The property must exist on the passed-in object and it must be
+          readable and writable (and not construct-only).
+      Returns: Builder instance for fluent chaining
+  */
+  T propertyName(string propval)
+  {
+    return setProperty("property-name", propval);
+  }
+}
+
+/// Fluent builder for [gio.property_action.PropertyAction]
+final class PropertyActionGidBuilder : PropertyActionGidBuilderImpl!PropertyActionGidBuilder
+{
+  PropertyAction build()
+  {
+    return new PropertyAction(cast(void*)createGObject(PropertyAction._getGType), Yes.Take);
   }
 }

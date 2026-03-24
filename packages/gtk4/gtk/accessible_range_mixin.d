@@ -3,6 +3,7 @@ module gtk.accessible_range_mixin;
 
 public import gtk.accessible_range_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -35,5 +36,9 @@ public import gtk.types;
     )
 */
 template AccessibleRangeT()
+{
+}
+
+template AccessibleRangeGidBuilderT()
 {
 }

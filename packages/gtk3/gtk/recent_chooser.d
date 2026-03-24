@@ -5,11 +5,13 @@ public import gtk.recent_chooser_iface_proxy;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.recent_filter;
 import gtk.recent_info;
+import gtk.recent_manager;
 import gtk.types;
 
 /**
@@ -456,4 +458,91 @@ interface RecentChooser
       Returns: Signal ID
   */
   ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface RecentChooserGidBuilderImpl(T)
+{
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The #GtkRecentFilter object to be used when displaying
+          the recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T filter(gtk.recent_filter.RecentFilter propval);
+
+  /**
+      Set `limit` property.
+      Params:
+        propval = The maximum number of recently used resources to be displayed,
+          or -1 to display all items.
+      Returns: Builder instance for fluent chaining
+  */
+  T limit(int propval);
+
+  /**
+      Set `localOnly` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display only local (file:)
+          resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T localOnly(bool propval);
+
+  /**
+      Set `recentManager` property.
+      Params:
+        propval = The #GtkRecentManager instance used by the #GtkRecentChooser to
+          display the list of recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T recentManager(gtk.recent_manager.RecentManager propval);
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Allow the user to select multiple resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectMultiple(bool propval);
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display an icon near the item.
+      Returns: Builder instance for fluent chaining
+  */
+  T showIcons(bool propval);
+
+  /**
+      Set `showNotFound` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display the recently used resources
+          even if not present anymore. Setting this to false will perform a
+          potentially expensive check on every local resource (every remote
+          resource will always be displayed).
+      Returns: Builder instance for fluent chaining
+  */
+  T showNotFound(bool propval);
+
+  /** */
+  T showPrivate(bool propval);
+
+  /**
+      Set `showTips` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display a tooltip containing the
+          full path of the recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T showTips(bool propval);
+
+  /**
+      Set `sortType` property.
+      Params:
+        propval = Sorting order to be used when displaying the recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T sortType(gtk.types.RecentSortType propval);
 }

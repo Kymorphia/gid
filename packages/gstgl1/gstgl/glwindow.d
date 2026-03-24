@@ -3,6 +3,7 @@ module gstgl.glwindow;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.object;
 import gstgl.c.functions;
@@ -41,6 +42,15 @@ class GLWindow : gst.object.ObjectWrap
   override GLWindow self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glwindow.GLWindow]
+  Returns: New builder object
+  */
+  static GLWindowGidBuilder builder()
+  {
+    return new GLWindowGidBuilder;
   }
 
   /** */
@@ -555,5 +565,18 @@ class GLWindow : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-handle-changed", closure, after);
+  }
+}
+
+class GLWindowGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glwindow.GLWindow]
+final class GLWindowGidBuilder : GLWindowGidBuilderImpl!GLWindowGidBuilder
+{
+  GLWindow build()
+  {
+    return new GLWindow(cast(void*)createGObject(GLWindow._getGType), Yes.Take);
   }
 }

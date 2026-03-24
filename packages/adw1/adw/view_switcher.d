@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import adw.view_stack;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -116,6 +117,15 @@ class ViewSwitcher : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.view_switcher.ViewSwitcher]
+  Returns: New builder object
+  */
+  static ViewSwitcherGidBuilder builder()
+  {
+    return new ViewSwitcherGidBuilder;
+  }
+
+  /**
       Get `policy` property.
       Returns: The policy to determine which mode to use.
   */
@@ -131,7 +141,7 @@ class ViewSwitcher : gtk.widget.Widget
   */
   @property void policy(adw.types.ViewSwitcherPolicy propval)
   {
-    return setPolicy(propval);
+    setPolicy(propval);
   }
 
   /**
@@ -150,7 +160,7 @@ class ViewSwitcher : gtk.widget.Widget
   */
   @property void stack(adw.view_stack.ViewStack propval)
   {
-    return setStack(propval);
+    setStack(propval);
   }
 
   /**
@@ -208,5 +218,41 @@ class ViewSwitcher : gtk.widget.Widget
   void setStack(adw.view_stack.ViewStack stack = null)
   {
     adw_view_switcher_set_stack(cast(AdwViewSwitcher*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
+  }
+}
+
+class ViewSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `policy` property.
+      Params:
+        propval = The policy to determine which mode to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T policy(adw.types.ViewSwitcherPolicy propval)
+  {
+    return setProperty("policy", propval);
+  }
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack the view switcher controls.
+      Returns: Builder instance for fluent chaining
+  */
+  T stack(adw.view_stack.ViewStack propval)
+  {
+    return setProperty("stack", propval);
+  }
+}
+
+/// Fluent builder for [adw.view_switcher.ViewSwitcher]
+final class ViewSwitcherGidBuilder : ViewSwitcherGidBuilderImpl!ViewSwitcherGidBuilder
+{
+  ViewSwitcher build()
+  {
+    return new ViewSwitcher(cast(void*)createGObject(ViewSwitcher._getGType), No.Take);
   }
 }

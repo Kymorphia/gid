@@ -7,6 +7,7 @@ import adw.swipeable;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.orientable;
 import gtk.orientable_mixin;
@@ -53,6 +54,15 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [adw.swipe_tracker.SwipeTracker]
+  Returns: New builder object
+  */
+  static SwipeTrackerGidBuilder builder()
+  {
+    return new SwipeTrackerGidBuilder;
+  }
+
+  /**
       Get `allowLongSwipes` property.
       Returns: Whether to allow swiping for more than one snap point at a time.
         
@@ -74,7 +84,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   @property void allowLongSwipes(bool propval)
   {
-    return setAllowLongSwipes(propval);
+    setAllowLongSwipes(propval);
   }
 
   /**
@@ -93,7 +103,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   @property void allowMouseDrag(bool propval)
   {
-    return setAllowMouseDrag(propval);
+    setAllowMouseDrag(propval);
   }
 
   /**
@@ -116,7 +126,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   @property void allowWindowHandle(bool propval)
   {
-    return setAllowWindowHandle(propval);
+    setAllowWindowHandle(propval);
   }
 
   /**
@@ -141,7 +151,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   @property void enabled(bool propval)
   {
-    return setEnabled(propval);
+    setEnabled(propval);
   }
 
   /**
@@ -160,7 +170,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   @property void lowerOvershoot(bool propval)
   {
-    return setLowerOvershoot(propval);
+    setLowerOvershoot(propval);
   }
 
   /**
@@ -185,7 +195,16 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   @property void reversed(bool propval)
   {
-    return setReversed(propval);
+    setReversed(propval);
+  }
+
+  /**
+      Get `swipeable` property.
+      Returns: The widget the swipe tracker is attached to.
+  */
+  @property adw.swipeable.Swipeable swipeable()
+  {
+    return getSwipeable();
   }
 
   /**
@@ -204,7 +223,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   @property void upperOvershoot(bool propval)
   {
-    return setUpperOvershoot(propval);
+    setUpperOvershoot(propval);
   }
 
   mixin OrientableT!();
@@ -593,5 +612,119 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update-swipe", closure, after);
+  }
+}
+
+class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one snap point at a time.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent snap
+          points.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowLongSwipes(bool propval)
+  {
+    return setProperty("allow-long-swipes", propval);
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Whether to allow dragging with mouse pointer.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowMouseDrag(bool propval)
+  {
+    return setProperty("allow-mouse-drag", propval);
+  }
+
+  /**
+      Set `allowWindowHandle` property.
+      Params:
+        propval = Whether to allow touchscreen swiping from [gtk.window_handle.WindowHandle].
+          
+          This will make dragging the window impossible.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowWindowHandle(bool propval)
+  {
+    return setProperty("allow-window-handle", propval);
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether the swipe tracker is enabled.
+          
+          When it's not enabled, no events will be processed. Usually widgets will
+          want to expose this via a property.
+      Returns: Builder instance for fluent chaining
+  */
+  T enabled(bool propval)
+  {
+    return setProperty("enabled", propval);
+  }
+
+  /**
+      Set `lowerOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the first available snap point.
+      Returns: Builder instance for fluent chaining
+  */
+  T lowerOvershoot(bool propval)
+  {
+    return setProperty("lower-overshoot", propval);
+  }
+
+  /**
+      Set `reversed` property.
+      Params:
+        propval = Whether to reverse the swipe direction.
+          
+          If the swipe tracker is horizontal, it can be used for supporting RTL text
+          direction.
+      Returns: Builder instance for fluent chaining
+  */
+  T reversed(bool propval)
+  {
+    return setProperty("reversed", propval);
+  }
+
+  /**
+      Set `swipeable` property.
+      Params:
+        propval = The widget the swipe tracker is attached to.
+      Returns: Builder instance for fluent chaining
+  */
+  T swipeable(adw.swipeable.Swipeable propval)
+  {
+    return setProperty("swipeable", propval);
+  }
+
+  /**
+      Set `upperOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the last available snap point.
+      Returns: Builder instance for fluent chaining
+  */
+  T upperOvershoot(bool propval)
+  {
+    return setProperty("upper-overshoot", propval);
+  }
+}
+
+/// Fluent builder for [adw.swipe_tracker.SwipeTracker]
+final class SwipeTrackerGidBuilder : SwipeTrackerGidBuilderImpl!SwipeTrackerGidBuilder
+{
+  SwipeTracker build()
+  {
+    return new SwipeTracker(cast(void*)createGObject(SwipeTracker._getGType), Yes.Take);
   }
 }

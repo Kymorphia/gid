@@ -6,6 +6,7 @@ import arrowdataset.c.types;
 import arrowdataset.file_format;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class ParquetFileFormat : arrowdataset.file_format.FileFormat
@@ -36,11 +37,33 @@ class ParquetFileFormat : arrowdataset.file_format.FileFormat
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.parquet_file_format.ParquetFileFormat]
+  Returns: New builder object
+  */
+  static ParquetFileFormatGidBuilder builder()
+  {
+    return new ParquetFileFormatGidBuilder;
+  }
+
   /** */
   this()
   {
     GADatasetParquetFileFormat* _cretval;
     _cretval = gadataset_parquet_file_format_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class ParquetFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.parquet_file_format.ParquetFileFormat]
+final class ParquetFileFormatGidBuilder : ParquetFileFormatGidBuilderImpl!ParquetFileFormatGidBuilder
+{
+  ParquetFileFormat build()
+  {
+    return new ParquetFileFormat(cast(void*)createGObject(ParquetFileFormat._getGType), Yes.Take);
   }
 }

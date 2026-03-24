@@ -9,6 +9,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -186,6 +187,15 @@ class MessageDialog : gtk.window.Window
   }
 
   /**
+  Get builder for [adw.message_dialog.MessageDialog]
+  Returns: New builder object
+  */
+  static MessageDialogGidBuilder builder()
+  {
+    return new MessageDialogGidBuilder;
+  }
+
+  /**
       Get `body_` property.
       Returns: The body text of the dialog.
   */
@@ -201,7 +211,7 @@ class MessageDialog : gtk.window.Window
   */
   @property void body_(string propval)
   {
-    return setBody(propval);
+    setBody(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class MessageDialog : gtk.window.Window
   */
   @property void bodyUseMarkup(bool propval)
   {
-    return setBodyUseMarkup(propval);
+    setBodyUseMarkup(propval);
   }
 
   /**
@@ -257,7 +267,7 @@ class MessageDialog : gtk.window.Window
   */
   @property void closeResponse(string propval)
   {
-    return setCloseResponse(propval);
+    setCloseResponse(propval);
   }
 
   /**
@@ -286,7 +296,7 @@ class MessageDialog : gtk.window.Window
   */
   @property void defaultResponse(string propval)
   {
-    return setDefaultResponse(propval);
+    setDefaultResponse(propval);
   }
 
   /**
@@ -309,7 +319,7 @@ class MessageDialog : gtk.window.Window
   */
   @property void extraChild(gtk.widget.Widget propval)
   {
-    return setExtraChild(propval);
+    setExtraChild(propval);
   }
 
   /**
@@ -328,7 +338,7 @@ class MessageDialog : gtk.window.Window
   */
   @property void heading(string propval)
   {
-    return setHeading(propval);
+    setHeading(propval);
   }
 
   /**
@@ -351,7 +361,7 @@ class MessageDialog : gtk.window.Window
   */
   @property void headingUseMarkup(bool propval)
   {
-    return setHeadingUseMarkup(propval);
+    setHeadingUseMarkup(propval);
   }
 
   /**
@@ -846,5 +856,114 @@ class MessageDialog : gtk.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `body_` property.
+      Params:
+        propval = The body text of the dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T body_(string propval)
+  {
+    return setProperty("body", propval);
+  }
+
+  /**
+      Set `bodyUseMarkup` property.
+      Params:
+        propval = Whether the body text includes Pango markup.
+          
+          See `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  */
+  T bodyUseMarkup(bool propval)
+  {
+    return setProperty("body-use-markup", propval);
+  }
+
+  /**
+      Set `closeResponse` property.
+      Params:
+        propval = The ID of the close response.
+          
+          It will be passed to `signal@MessageDialog::response` if the window is
+          closed by pressing <kbd>Escape</kbd> or with a system action.
+          
+          It doesn't have to correspond to any of the responses in the dialog.
+          
+          The default close response is `close`.
+      Returns: Builder instance for fluent chaining
+  */
+  T closeResponse(string propval)
+  {
+    return setProperty("close-response", propval);
+  }
+
+  /**
+      Set `defaultResponse` property.
+      Params:
+        propval = The response ID of the default response.
+          
+          If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+          
+          If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
+          will do nothing.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultResponse(string propval)
+  {
+    return setProperty("default-response", propval);
+  }
+
+  /**
+      Set `extraChild` property.
+      Params:
+        propval = The child widget.
+          
+          Displayed below the heading and body.
+      Returns: Builder instance for fluent chaining
+  */
+  T extraChild(gtk.widget.Widget propval)
+  {
+    return setProperty("extra-child", propval);
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The heading of the dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T heading(string propval)
+  {
+    return setProperty("heading", propval);
+  }
+
+  /**
+      Set `headingUseMarkup` property.
+      Params:
+        propval = Whether the heading includes Pango markup.
+          
+          See `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  */
+  T headingUseMarkup(bool propval)
+  {
+    return setProperty("heading-use-markup", propval);
+  }
+}
+
+/// Fluent builder for [adw.message_dialog.MessageDialog]
+final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogGidBuilder
+{
+  MessageDialog build()
+  {
+    return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), No.Take);
   }
 }

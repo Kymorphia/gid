@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.interval_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
@@ -36,11 +37,33 @@ class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.month_day_nano_interval_data_type.MonthDayNanoIntervalDataType]
+  Returns: New builder object
+  */
+  static MonthDayNanoIntervalDataTypeGidBuilder builder()
+  {
+    return new MonthDayNanoIntervalDataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowMonthDayNanoIntervalDataType* _cretval;
     _cretval = garrow_month_day_nano_interval_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class MonthDayNanoIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.IntervalDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_day_nano_interval_data_type.MonthDayNanoIntervalDataType]
+final class MonthDayNanoIntervalDataTypeGidBuilder : MonthDayNanoIntervalDataTypeGidBuilderImpl!MonthDayNanoIntervalDataTypeGidBuilder
+{
+  MonthDayNanoIntervalDataType build()
+  {
+    return new MonthDayNanoIntervalDataType(cast(void*)createGObject(MonthDayNanoIntervalDataType._getGType), Yes.Take);
   }
 }

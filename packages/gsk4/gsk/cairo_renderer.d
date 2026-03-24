@@ -2,6 +2,7 @@
 module gsk.cairo_renderer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -42,6 +43,15 @@ class CairoRenderer : gsk.renderer.Renderer
   }
 
   /**
+  Get builder for [gsk.cairo_renderer.CairoRenderer]
+  Returns: New builder object
+  */
+  static CairoRendererGidBuilder builder()
+  {
+    return new CairoRendererGidBuilder;
+  }
+
+  /**
       Creates a new Cairo renderer.
       
       The Cairo renderer is the fallback renderer drawing in ways similar
@@ -57,5 +67,18 @@ class CairoRenderer : gsk.renderer.Renderer
     GskRenderer* _cretval;
     _cretval = gsk_cairo_renderer_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class CairoRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gsk.cairo_renderer.CairoRenderer]
+final class CairoRendererGidBuilder : CairoRendererGidBuilderImpl!CairoRendererGidBuilder
+{
+  CairoRenderer build()
+  {
+    return new CairoRenderer(cast(void*)createGObject(CairoRenderer._getGType), Yes.Take);
   }
 }

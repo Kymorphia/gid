@@ -2,6 +2,7 @@
 module gtk.frame;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -91,6 +92,15 @@ class Frame : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.frame.Frame]
+  Returns: New builder object
+  */
+  static FrameGidBuilder builder()
+  {
+    return new FrameGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -106,7 +116,7 @@ class Frame : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -125,7 +135,7 @@ class Frame : gtk.widget.Widget
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -144,7 +154,7 @@ class Frame : gtk.widget.Widget
   */
   @property void labelWidget(gtk.widget.Widget propval)
   {
-    return setLabelWidget(propval);
+    setLabelWidget(propval);
   }
 
   /**
@@ -163,7 +173,7 @@ class Frame : gtk.widget.Widget
   */
   @property void labelXalign(float propval)
   {
-    return setLabelAlign(propval);
+    setLabelAlign(propval);
   }
 
   /**
@@ -286,5 +296,63 @@ class Frame : gtk.widget.Widget
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
     gtk_frame_set_label_widget(cast(GtkFrame*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
+  }
+}
+
+class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Text of the frame's label.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `labelWidget` property.
+      Params:
+        propval = Widget to display in place of the usual frame label.
+      Returns: Builder instance for fluent chaining
+  */
+  T labelWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("label-widget", propval);
+  }
+
+  /**
+      Set `labelXalign` property.
+      Params:
+        propval = The horizontal alignment of the label.
+      Returns: Builder instance for fluent chaining
+  */
+  T labelXalign(float propval)
+  {
+    return setProperty("label-xalign", propval);
+  }
+}
+
+/// Fluent builder for [gtk.frame.Frame]
+final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
+{
+  Frame build()
+  {
+    return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }
 }

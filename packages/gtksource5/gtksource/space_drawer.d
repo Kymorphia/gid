@@ -5,6 +5,7 @@ import gid.gid;
 import gio.settings;
 import gio.types;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -88,6 +89,15 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.space_drawer.SpaceDrawer]
+  Returns: New builder object
+  */
+  static SpaceDrawerGidBuilder builder()
+  {
+    return new SpaceDrawerGidBuilder;
+  }
+
+  /**
       Get `enableMatrix` property.
       Returns: Whether the `property@SpaceDrawer:matrix` property is enabled.
   */
@@ -103,7 +113,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   */
   @property void enableMatrix(bool propval)
   {
-    return setEnableMatrix(propval);
+    setEnableMatrix(propval);
   }
 
   /**
@@ -146,7 +156,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   */
   @property void matrix(glib.variant.Variant propval)
   {
-    return setMatrix(propval);
+    setMatrix(propval);
   }
 
   /**
@@ -273,5 +283,52 @@ class SpaceDrawer : gobject.object.ObjectWrap
   void setTypesForLocations(gtksource.types.SpaceLocationFlags locations, gtksource.types.SpaceTypeFlags types)
   {
     gtk_source_space_drawer_set_types_for_locations(cast(GtkSourceSpaceDrawer*)this._cPtr, locations, types);
+  }
+}
+
+class SpaceDrawerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `enableMatrix` property.
+      Params:
+        propval = Whether the `property@SpaceDrawer:matrix` property is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableMatrix(bool propval)
+  {
+    return setProperty("enable-matrix", propval);
+  }
+
+  /**
+      Set `matrix` property.
+      Params:
+        propval = The property is a [glib.variant.Variant] property to specify where and
+          what kind of white spaces to draw.
+          
+          The [glib.variant.Variant] is of type `"au"`, an array of unsigned integers. Each
+          integer is a combination of `flags@SpaceTypeFlags`. There is one
+          integer for each `flags@SpaceLocationFlags`, in the same order as
+          they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
+          [gtksource.types.SpaceLocationFlags.All] are not taken into account).
+          
+          If the array is shorter than the number of locations, then the value
+          for the missing locations will be [gtksource.types.SpaceTypeFlags.None].
+          
+          By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.4
+      Returns: Builder instance for fluent chaining
+  */
+  T matrix(glib.variant.Variant propval)
+  {
+    return setProperty("matrix", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.space_drawer.SpaceDrawer]
+final class SpaceDrawerGidBuilder : SpaceDrawerGidBuilderImpl!SpaceDrawerGidBuilder
+{
+  SpaceDrawer build()
+  {
+    return new SpaceDrawer(cast(void*)createGObject(SpaceDrawer._getGType), Yes.Take);
   }
 }

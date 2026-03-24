@@ -3,6 +3,7 @@ module panel.position;
 
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -41,6 +42,15 @@ class Position : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [panel.position.Position]
+  Returns: New builder object
+  */
+  static PositionGidBuilder builder()
+  {
+    return new PositionGidBuilder;
+  }
+
+  /**
       Get `area` property.
       Returns: The area.
   */
@@ -56,7 +66,7 @@ class Position : gobject.object.ObjectWrap
   */
   @property void area(panel.types.Area propval)
   {
-    return setArea(propval);
+    setArea(propval);
   }
 
   /**
@@ -75,7 +85,7 @@ class Position : gobject.object.ObjectWrap
   */
   @property void areaSet(bool propval)
   {
-    return setAreaSet(propval);
+    setAreaSet(propval);
   }
 
   /**
@@ -94,7 +104,7 @@ class Position : gobject.object.ObjectWrap
   */
   @property void column(uint propval)
   {
-    return setColumn(propval);
+    setColumn(propval);
   }
 
   /**
@@ -113,7 +123,7 @@ class Position : gobject.object.ObjectWrap
   */
   @property void columnSet(bool propval)
   {
-    return setColumnSet(propval);
+    setColumnSet(propval);
   }
 
   /** */
@@ -125,7 +135,7 @@ class Position : gobject.object.ObjectWrap
   /** */
   @property void depth(uint propval)
   {
-    return setDepth(propval);
+    setDepth(propval);
   }
 
   /** */
@@ -137,7 +147,7 @@ class Position : gobject.object.ObjectWrap
   /** */
   @property void depthSet(bool propval)
   {
-    return setDepthSet(propval);
+    setDepthSet(propval);
   }
 
   /** */
@@ -149,7 +159,7 @@ class Position : gobject.object.ObjectWrap
   /** */
   @property void row(uint propval)
   {
-    return setRow(propval);
+    setRow(propval);
   }
 
   /** */
@@ -161,7 +171,7 @@ class Position : gobject.object.ObjectWrap
   /** */
   @property void rowSet(bool propval)
   {
-    return setRowSet(propval);
+    setRowSet(propval);
   }
 
   /**
@@ -356,5 +366,86 @@ class Position : gobject.object.ObjectWrap
     _cretval = panel_position_to_variant(cast(PanelPosition*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class PositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `area` property.
+      Params:
+        propval = The area.
+      Returns: Builder instance for fluent chaining
+  */
+  T area(panel.types.Area propval)
+  {
+    return setProperty("area", propval);
+  }
+
+  /**
+      Set `areaSet` property.
+      Params:
+        propval = The area is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T areaSet(bool propval)
+  {
+    return setProperty("area-set", propval);
+  }
+
+  /**
+      Set `column` property.
+      Params:
+        propval = The column in the position.
+      Returns: Builder instance for fluent chaining
+  */
+  T column(uint propval)
+  {
+    return setProperty("column", propval);
+  }
+
+  /**
+      Set `columnSet` property.
+      Params:
+        propval = The column is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T columnSet(bool propval)
+  {
+    return setProperty("column-set", propval);
+  }
+
+  /** */
+  T depth(uint propval)
+  {
+    return setProperty("depth", propval);
+  }
+
+  /** */
+  T depthSet(bool propval)
+  {
+    return setProperty("depth-set", propval);
+  }
+
+  /** */
+  T row(uint propval)
+  {
+    return setProperty("row", propval);
+  }
+
+  /** */
+  T rowSet(bool propval)
+  {
+    return setProperty("row-set", propval);
+  }
+}
+
+/// Fluent builder for [panel.position.Position]
+final class PositionGidBuilder : PositionGidBuilderImpl!PositionGidBuilder
+{
+  Position build()
+  {
+    return new Position(cast(void*)createGObject(Position._getGType), Yes.Take);
   }
 }

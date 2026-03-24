@@ -2,6 +2,7 @@
 module gtksource.tag;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_tag;
 import gtksource.c.functions;
@@ -35,6 +36,15 @@ class Tag : gtk.text_tag.TextTag
   override Tag self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.tag.Tag]
+  Returns: New builder object
+  */
+  static TagGidBuilder builder()
+  {
+    return new TagGidBuilder;
   }
 
   /**
@@ -104,5 +114,46 @@ class Tag : gtk.text_tag.TextTag
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_source_tag_new(_name);
     this(_cretval, Yes.Take);
+  }
+}
+
+class TagGidBuilderImpl(T) : gtk.text_tag.TextTagGidBuilderImpl!T
+{
+
+  /**
+      Set `drawSpaces` property.
+      Params:
+        propval = Whether to draw white spaces. This property takes precedence over the value
+          defined by the GtkSourceSpaceDrawer's #GtkSourceSpaceDrawer:matrix property
+          (only where the tag is applied).
+          
+          Setting this property also changes #GtkSourceTag:draw-spaces-set to
+          true.
+      Returns: Builder instance for fluent chaining
+  */
+  T drawSpaces(bool propval)
+  {
+    return setProperty("draw-spaces", propval);
+  }
+
+  /**
+      Set `drawSpacesSet` property.
+      Params:
+        propval = Whether the #GtkSourceTag:draw-spaces property is set and must be
+          taken into account.
+      Returns: Builder instance for fluent chaining
+  */
+  T drawSpacesSet(bool propval)
+  {
+    return setProperty("draw-spaces-set", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.tag.Tag]
+final class TagGidBuilder : TagGidBuilderImpl!TagGidBuilder
+{
+  Tag build()
+  {
+    return new Tag(cast(void*)createGObject(Tag._getGType), Yes.Take);
   }
 }

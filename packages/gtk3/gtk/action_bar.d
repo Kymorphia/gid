@@ -4,6 +4,7 @@ module gtk.action_bar;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -53,6 +54,15 @@ class ActionBar : gtk.bin.Bin
   override ActionBar self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.action_bar.ActionBar]
+  Returns: New builder object
+  */
+  static ActionBarGidBuilder builder()
+  {
+    return new ActionBarGidBuilder;
   }
 
   /**
@@ -111,5 +121,19 @@ class ActionBar : gtk.bin.Bin
   void setCenterWidget(gtk.widget.Widget centerWidget = null)
   {
     gtk_action_bar_set_center_widget(cast(GtkActionBar*)this._cPtr, centerWidget ? cast(GtkWidget*)centerWidget._cPtr(No.Dup) : null);
+  }
+}
+
+class ActionBarGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.action_bar.ActionBar]
+final class ActionBarGidBuilder : ActionBarGidBuilderImpl!ActionBarGidBuilder
+{
+  ActionBar build()
+  {
+    return new ActionBar(cast(void*)createGObject(ActionBar._getGType), No.Take);
   }
 }

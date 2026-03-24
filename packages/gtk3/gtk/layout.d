@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.window;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -57,6 +58,15 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   override Layout self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.layout.Layout]
+  Returns: New builder object
+  */
+  static LayoutGidBuilder builder()
+  {
+    return new LayoutGidBuilder;
   }
 
   /** */
@@ -235,5 +245,32 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_layout_set_vadjustment(cast(GtkLayout*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+  }
+}
+
+class LayoutGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin ScrollableGidBuilderT!();
+
+  /** */
+  T height(uint propval)
+  {
+    return setProperty("height", propval);
+  }
+
+  /** */
+  T width(uint propval)
+  {
+    return setProperty("width", propval);
+  }
+}
+
+/// Fluent builder for [gtk.layout.Layout]
+final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
+{
+  Layout build()
+  {
+    return new Layout(cast(void*)createGObject(Layout._getGType), No.Take);
   }
 }

@@ -11,6 +11,7 @@ import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,15 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   override SqlParser self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.sql_parser.SqlParser]
+  Returns: New builder object
+  */
+  static SqlParserGidBuilder builder()
+  {
+    return new SqlParserGidBuilder;
   }
 
   /** */
@@ -196,6 +206,33 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   void setSyntaxError()
   {
     gda_sql_parser_set_syntax_error(cast(GdaSqlParser*)this._cPtr);
+  }
+}
+
+class SqlParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.lockable.LockableGidBuilderImpl!T
+{
+
+  mixin LockableGidBuilderT!();
+
+  /** */
+  T mode(int propval)
+  {
+    return setProperty("mode", propval);
+  }
+
+  /** */
+  T tokenizerFlavour(int propval)
+  {
+    return setProperty("tokenizer-flavour", propval);
+  }
+}
+
+/// Fluent builder for [gda.sql_parser.SqlParser]
+final class SqlParserGidBuilder : SqlParserGidBuilderImpl!SqlParserGidBuilder
+{
+  SqlParser build()
+  {
+    return new SqlParser(cast(void*)createGObject(SqlParser._getGType), Yes.Take);
   }
 }
 

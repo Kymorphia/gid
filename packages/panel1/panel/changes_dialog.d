@@ -7,6 +7,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -50,6 +51,15 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   }
 
   /**
+  Get builder for [panel.changes_dialog.ChangesDialog]
+  Returns: New builder object
+  */
+  static ChangesDialogGidBuilder builder()
+  {
+    return new ChangesDialogGidBuilder;
+  }
+
+  /**
       Get `closeAfterSave` property.
       Returns: This property requests that the widget close after saving.
   */
@@ -65,7 +75,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   */
   @property void closeAfterSave(bool propval)
   {
-    return setCloseAfterSave(propval);
+    setCloseAfterSave(propval);
   }
 
   /**
@@ -123,5 +133,30 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   void setCloseAfterSave(bool closeAfterSave)
   {
     panel_changes_dialog_set_close_after_save(cast(PanelChangesDialog*)this._cPtr, closeAfterSave);
+  }
+}
+
+class ChangesDialogGidBuilderImpl(T) : adw.alert_dialog.AlertDialogGidBuilderImpl!T
+{
+
+
+  /**
+      Set `closeAfterSave` property.
+      Params:
+        propval = This property requests that the widget close after saving.
+      Returns: Builder instance for fluent chaining
+  */
+  T closeAfterSave(bool propval)
+  {
+    return setProperty("close-after-save", propval);
+  }
+}
+
+/// Fluent builder for [panel.changes_dialog.ChangesDialog]
+final class ChangesDialogGidBuilder : ChangesDialogGidBuilderImpl!ChangesDialogGidBuilder
+{
+  ChangesDialog build()
+  {
+    return new ChangesDialog(cast(void*)createGObject(ChangesDialog._getGType), No.Take);
   }
 }

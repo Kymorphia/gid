@@ -8,6 +8,7 @@ import gio.converter;
 import gio.converter_mixin;
 import gio.file_info;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,15 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /**
+  Get builder for [gio.zlib_decompressor.ZlibDecompressor]
+  Returns: New builder object
+  */
+  static ZlibDecompressorGidBuilder builder()
+  {
+    return new ZlibDecompressorGidBuilder;
+  }
+
+  /**
       Get `fileInfo` property.
       Returns: A #GFileInfo containing the information found in the GZIP header
         of the data stream processed, or null if the header was not yet
@@ -52,6 +62,15 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   @property gio.file_info.FileInfo fileInfo()
   {
     return getFileInfo();
+  }
+
+  /**
+      Get `format` property.
+      Returns: The format of the compressed data.
+  */
+  @property gio.types.ZlibCompressorFormat format()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.types.ZlibCompressorFormat)("format");
   }
 
   mixin ConverterT!();
@@ -84,5 +103,31 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
     _cretval = g_zlib_decompressor_get_file_info(cast(GZlibDecompressor*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class ZlibDecompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.converter.ConverterGidBuilderImpl!T
+{
+
+  mixin ConverterGidBuilderT!();
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format of the compressed data.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(gio.types.ZlibCompressorFormat propval)
+  {
+    return setProperty("format", propval);
+  }
+}
+
+/// Fluent builder for [gio.zlib_decompressor.ZlibDecompressor]
+final class ZlibDecompressorGidBuilder : ZlibDecompressorGidBuilderImpl!ZlibDecompressorGidBuilder
+{
+  ZlibDecompressor build()
+  {
+    return new ZlibDecompressor(cast(void*)createGObject(ZlibDecompressor._getGType), Yes.Take);
   }
 }

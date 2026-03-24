@@ -3,6 +3,7 @@ module gtk.action_group;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accel_group;
 import gtk.action;
@@ -94,6 +95,15 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
+  Get builder for [gtk.action_group.ActionGroup]
+  Returns: New builder object
+  */
+  static ActionGroupGidBuilder builder()
+  {
+    return new ActionGroupGidBuilder;
+  }
+
+  /**
       Get `accelGroup` property.
       Returns: The accelerator group the actions of this group should use.
   */
@@ -109,7 +119,16 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void accelGroup(gtk.accel_group.AccelGroup propval)
   {
-    return setAccelGroup(propval);
+    setAccelGroup(propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: A name for the action.
+  */
+  @property string name()
+  {
+    return getName();
   }
 
   /**
@@ -128,7 +147,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void sensitive(bool propval)
   {
-    return setSensitive(propval);
+    setSensitive(propval);
   }
 
   /**
@@ -147,7 +166,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   mixin BuildableT!();
@@ -600,5 +619,64 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pre-activate", closure, after);
+  }
+}
+
+class ActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `accelGroup` property.
+      Params:
+        propval = The accelerator group the actions of this group should use.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelGroup(gtk.accel_group.AccelGroup propval)
+  {
+    return setProperty("accel-group", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = A name for the action.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `sensitive` property.
+      Params:
+        propval = Whether the action group is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T sensitive(bool propval)
+  {
+    return setProperty("sensitive", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether the action group is visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+}
+
+/// Fluent builder for [gtk.action_group.ActionGroup]
+final class ActionGroupGidBuilder : ActionGroupGidBuilderImpl!ActionGroupGidBuilder
+{
+  ActionGroup build()
+  {
+    return new ActionGroup(cast(void*)createGObject(ActionGroup._getGType), Yes.Take);
   }
 }

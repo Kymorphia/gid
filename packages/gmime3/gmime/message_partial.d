@@ -7,6 +7,7 @@ import gmime.c.types;
 import gmime.message;
 import gmime.part;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class MessagePartial : gmime.part.Part
   override MessagePartial self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.message_partial.MessagePartial]
+  Returns: New builder object
+  */
+  static MessagePartialGidBuilder builder()
+  {
+    return new MessagePartialGidBuilder;
   }
 
   /**
@@ -117,5 +127,18 @@ class MessagePartial : gmime.part.Part
     int _retval;
     _retval = g_mime_message_partial_get_total(cast(GMimeMessagePartial*)this._cPtr);
     return _retval;
+  }
+}
+
+class MessagePartialGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.message_partial.MessagePartial]
+final class MessagePartialGidBuilder : MessagePartialGidBuilderImpl!MessagePartialGidBuilder
+{
+  MessagePartial build()
+  {
+    return new MessagePartial(cast(void*)createGObject(MessagePartial._getGType), Yes.Take);
   }
 }

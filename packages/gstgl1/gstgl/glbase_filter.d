@@ -2,6 +2,7 @@
 module gstgl.glbase_filter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstbase.base_transform;
 import gstgl.c.functions;
@@ -43,6 +44,15 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
     return this;
   }
 
+  /**
+  Get builder for [gstgl.glbase_filter.GLBaseFilter]
+  Returns: New builder object
+  */
+  static GLBaseFilterGidBuilder builder()
+  {
+    return new GLBaseFilterGidBuilder;
+  }
+
   /** */
   @property gstgl.glcontext.GLContext context()
   {
@@ -64,5 +74,18 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
     _cretval = gst_gl_base_filter_get_gl_context(cast(GstGLBaseFilter*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class GLBaseFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glbase_filter.GLBaseFilter]
+final class GLBaseFilterGidBuilder : GLBaseFilterGidBuilderImpl!GLBaseFilterGidBuilder
+{
+  GLBaseFilter build()
+  {
+    return new GLBaseFilter(cast(void*)createGObject(GLBaseFilter._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.permission;
 import gio.types;
+import gobject.gid_builder;
 
 /**
     [gio.simple_permission.SimplePermission] is a trivial implementation of [gio.permission.Permission]
@@ -44,6 +45,15 @@ class SimplePermission : gio.permission.Permission
   }
 
   /**
+  Get builder for [gio.simple_permission.SimplePermission]
+  Returns: New builder object
+  */
+  static SimplePermissionGidBuilder builder()
+  {
+    return new SimplePermissionGidBuilder;
+  }
+
+  /**
       Creates a new #GPermission instance that represents an action that is
       either always or never allowed.
   
@@ -56,5 +66,18 @@ class SimplePermission : gio.permission.Permission
     GPermission* _cretval;
     _cretval = g_simple_permission_new(allowed);
     this(_cretval, Yes.Take);
+  }
+}
+
+class SimplePermissionGidBuilderImpl(T) : gio.permission.PermissionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.simple_permission.SimplePermission]
+final class SimplePermissionGidBuilder : SimplePermissionGidBuilderImpl!SimplePermissionGidBuilder
+{
+  SimplePermission build()
+  {
+    return new SimplePermission(cast(void*)createGObject(SimplePermission._getGType), Yes.Take);
   }
 }

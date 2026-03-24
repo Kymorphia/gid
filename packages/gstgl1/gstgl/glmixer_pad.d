@@ -2,6 +2,7 @@
 module gstgl.glmixer_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstgl.c.functions;
 import gstgl.c.types;
 import gstgl.glbase_mixer_pad;
@@ -34,5 +35,27 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
   override GLMixerPad self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glmixer_pad.GLMixerPad]
+  Returns: New builder object
+  */
+  static GLMixerPadGidBuilder builder()
+  {
+    return new GLMixerPadGidBuilder;
+  }
+}
+
+class GLMixerPadGidBuilderImpl(T) : gstgl.glbase_mixer_pad.GLBaseMixerPadGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glmixer_pad.GLMixerPad]
+final class GLMixerPadGidBuilder : GLMixerPadGidBuilderImpl!GLMixerPadGidBuilder
+{
+  GLMixerPad build()
+  {
+    return new GLMixerPad(cast(void*)createGObject(GLMixerPad._getGType), No.Take);
   }
 }

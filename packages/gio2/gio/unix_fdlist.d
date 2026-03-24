@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -50,6 +51,15 @@ class UnixFDList : gobject.object.ObjectWrap
   override UnixFDList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.unix_fdlist.UnixFDList]
+  Returns: New builder object
+  */
+  static UnixFDListGidBuilder builder()
+  {
+    return new UnixFDListGidBuilder;
   }
 
   /**
@@ -227,5 +237,18 @@ class UnixFDList : gobject.object.ObjectWrap
       gFree(cast(void*)_cretval);
     }
     return _retval;
+  }
+}
+
+class UnixFDListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.unix_fdlist.UnixFDList]
+final class UnixFDListGidBuilder : UnixFDListGidBuilderImpl!UnixFDListGidBuilder
+{
+  UnixFDList build()
+  {
+    return new UnixFDList(cast(void*)createGObject(UnixFDList._getGType), Yes.Take);
   }
 }

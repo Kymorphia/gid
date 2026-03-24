@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -144,6 +145,15 @@ class ModelButton : gtk.button.Button
   override ModelButton self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.model_button.ModelButton]
+  Returns: New builder object
+  */
+  static ModelButtonGidBuilder builder()
+  {
+    return new ModelButtonGidBuilder;
   }
 
   /**
@@ -350,5 +360,130 @@ class ModelButton : gtk.button.Button
     GtkWidget* _cretval;
     _cretval = gtk_model_button_new();
     this(_cretval, No.Take);
+  }
+}
+
+class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The state of the button. This is reflecting the state of the associated
+          #GAction.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `centered` property.
+      Params:
+        propval = Whether to render the button contents centered instead of left-aligned.
+          This property should be set for title-like items.
+      Returns: Builder instance for fluent chaining
+  */
+  T centered(bool propval)
+  {
+    return setProperty("centered", propval);
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = A #GIcon that will be used if iconic appearance for the button is
+          desired.
+      Returns: Builder instance for fluent chaining
+  */
+  T icon(gio.icon.Icon propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `iconic` property.
+      Params:
+        propval = If this property is set, the button will show an icon if one is set.
+          If no icon is set, the text will be used. This is typically used for
+          horizontal sections of linked buttons.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconic(bool propval)
+  {
+    return setProperty("iconic", propval);
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether to show the submenu indicator at the opposite side than normal.
+          This property should be set for model buttons that 'go back' to a parent
+          menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /**
+      Set `menuName` property.
+      Params:
+        propval = The name of a submenu to open when the button is activated.
+          If this is set, the button should not have an action associated with it.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuName(string propval)
+  {
+    return setProperty("menu-name", propval);
+  }
+
+  /**
+      Set `role` property.
+      Params:
+        propval = Specifies whether the button is a plain, check or radio button.
+          When #GtkActionable:action-name is set, the role will be determined
+          from the action and does not have to be set explicitly.
+      Returns: Builder instance for fluent chaining
+  */
+  T role(gtk.types.ButtonRole propval)
+  {
+    return setProperty("role", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The label for the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = If true, XML tags in the text of the button are interpreted as by
+          [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
+          text will be displayed verbatim.
+      Returns: Builder instance for fluent chaining
+  */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+}
+
+/// Fluent builder for [gtk.model_button.ModelButton]
+final class ModelButtonGidBuilder : ModelButtonGidBuilderImpl!ModelButtonGidBuilder
+{
+  ModelButton build()
+  {
+    return new ModelButton(cast(void*)createGObject(ModelButton._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module panel.frame_header;
 
 public import panel.frame_header_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.widget;
 import panel.c.functions;
@@ -87,4 +88,16 @@ interface FrameHeader
         frame = a #PanelFrame or null
   */
   void setFrame(panel.frame.Frame frame = null);
+}
+
+interface FrameHeaderGidBuilderImpl(T)
+{
+
+  /**
+      Set `frame` property.
+      Params:
+        propval = The frame the header is attached to, or null.
+      Returns: Builder instance for fluent chaining
+  */
+  T frame(panel.frame.Frame propval);
 }

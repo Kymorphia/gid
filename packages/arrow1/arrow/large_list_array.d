@@ -8,6 +8,7 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,21 @@ class LargeListArray : arrow.array.Array
   override LargeListArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.large_list_array.LargeListArray]
+  Returns: New builder object
+  */
+  static LargeListArrayGidBuilder builder()
+  {
+    return new LargeListArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.array.Array rawValues()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("raw-values");
   }
 
   /** */
@@ -105,5 +121,24 @@ class LargeListArray : arrow.array.Array
     _cretval = garrow_large_list_array_get_values(cast(GArrowLargeListArray*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class LargeListArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+
+  /** */
+  T rawValues(arrow.array.Array propval)
+  {
+    return setProperty("raw-values", propval);
+  }
+}
+
+/// Fluent builder for [arrow.large_list_array.LargeListArray]
+final class LargeListArrayGidBuilder : LargeListArrayGidBuilderImpl!LargeListArrayGidBuilder
+{
+  LargeListArray build()
+  {
+    return new LargeListArray(cast(void*)createGObject(LargeListArray._getGType), Yes.Take);
   }
 }

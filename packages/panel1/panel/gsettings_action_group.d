@@ -5,6 +5,7 @@ import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.settings;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -39,6 +40,21 @@ class GSettingsActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionG
     return this;
   }
 
+  /**
+  Get builder for [panel.gsettings_action_group.GSettingsActionGroup]
+  Returns: New builder object
+  */
+  static GSettingsActionGroupGidBuilder builder()
+  {
+    return new GSettingsActionGroupGidBuilder;
+  }
+
+  /** */
+  @property gio.settings.Settings settings()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.settings.Settings)("settings");
+  }
+
   mixin ActionGroupT!();
 
   /**
@@ -54,5 +70,26 @@ class GSettingsActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionG
     _cretval = panel_gsettings_action_group_new(settings ? cast(GSettings*)settings._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class GSettingsActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+
+  /** */
+  T settings(gio.settings.Settings propval)
+  {
+    return setProperty("settings", propval);
+  }
+}
+
+/// Fluent builder for [panel.gsettings_action_group.GSettingsActionGroup]
+final class GSettingsActionGroupGidBuilder : GSettingsActionGroupGidBuilderImpl!GSettingsActionGroupGidBuilder
+{
+  GSettingsActionGroup build()
+  {
+    return new GSettingsActionGroup(cast(void*)createGObject(GSettingsActionGroup._getGType), No.Take);
   }
 }

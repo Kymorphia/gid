@@ -2,6 +2,7 @@
 module gtk.media_controls;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -51,6 +52,15 @@ class MediaControls : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.media_controls.MediaControls]
+  Returns: New builder object
+  */
+  static MediaControlsGidBuilder builder()
+  {
+    return new MediaControlsGidBuilder;
+  }
+
+  /**
       Get `mediaStream` property.
       Returns: The media-stream managed by this object or null if none.
   */
@@ -66,7 +76,7 @@ class MediaControls : gtk.widget.Widget
   */
   @property void mediaStream(gtk.media_stream.MediaStream propval)
   {
-    return setMediaStream(propval);
+    setMediaStream(propval);
   }
 
   /**
@@ -104,5 +114,30 @@ class MediaControls : gtk.widget.Widget
   void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {
     gtk_media_controls_set_media_stream(cast(GtkMediaControls*)this._cPtr, stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
+  }
+}
+
+class MediaControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `mediaStream` property.
+      Params:
+        propval = The media-stream managed by this object or null if none.
+      Returns: Builder instance for fluent chaining
+  */
+  T mediaStream(gtk.media_stream.MediaStream propval)
+  {
+    return setProperty("media-stream", propval);
+  }
+}
+
+/// Fluent builder for [gtk.media_controls.MediaControls]
+final class MediaControlsGidBuilder : MediaControlsGidBuilderImpl!MediaControlsGidBuilder
+{
+  MediaControls build()
+  {
+    return new MediaControls(cast(void*)createGObject(MediaControls._getGType), No.Take);
   }
 }

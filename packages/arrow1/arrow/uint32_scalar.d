@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class UInt32Scalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class UInt32Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.uint32_scalar.UInt32Scalar]
+  Returns: New builder object
+  */
+  static UInt32ScalarGidBuilder builder()
+  {
+    return new UInt32ScalarGidBuilder;
+  }
+
   /** */
   this(uint value)
   {
@@ -50,5 +60,18 @@ class UInt32Scalar : arrow.scalar.Scalar
     uint _retval;
     _retval = garrow_uint32_scalar_get_value(cast(GArrowUInt32Scalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class UInt32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint32_scalar.UInt32Scalar]
+final class UInt32ScalarGidBuilder : UInt32ScalarGidBuilderImpl!UInt32ScalarGidBuilder
+{
+  UInt32Scalar build()
+  {
+    return new UInt32Scalar(cast(void*)createGObject(UInt32Scalar._getGType), Yes.Take);
   }
 }

@@ -8,6 +8,7 @@ import arrow.execute_node_options;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
@@ -38,6 +39,15 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return this;
   }
 
+  /**
+  Get builder for [arrow.aggregate_node_options.AggregateNodeOptions]
+  Returns: New builder object
+  */
+  static AggregateNodeOptionsGidBuilder builder()
+  {
+    return new AggregateNodeOptionsGidBuilder;
+  }
+
   /** */
   this(arrow.aggregation.Aggregation[] aggregations, string[] keys = null)
   {
@@ -58,5 +68,18 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class AggregateNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.aggregate_node_options.AggregateNodeOptions]
+final class AggregateNodeOptionsGidBuilder : AggregateNodeOptionsGidBuilderImpl!AggregateNodeOptionsGidBuilder
+{
+  AggregateNodeOptions build()
+  {
+    return new AggregateNodeOptions(cast(void*)createGObject(AggregateNodeOptions._getGType), Yes.Take);
   }
 }

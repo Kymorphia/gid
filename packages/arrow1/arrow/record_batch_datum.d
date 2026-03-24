@@ -7,6 +7,8 @@ import arrow.datum;
 import arrow.record_batch;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class RecordBatchDatum : arrow.datum.Datum
@@ -37,11 +39,45 @@ class RecordBatchDatum : arrow.datum.Datum
     return this;
   }
 
+  /**
+  Get builder for [arrow.record_batch_datum.RecordBatchDatum]
+  Returns: New builder object
+  */
+  static RecordBatchDatumGidBuilder builder()
+  {
+    return new RecordBatchDatumGidBuilder;
+  }
+
+  /** */
+  @property arrow.record_batch.RecordBatch value()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.record_batch.RecordBatch)("value");
+  }
+
   /** */
   this(arrow.record_batch.RecordBatch value)
   {
     GArrowRecordBatchDatum* _cretval;
     _cretval = garrow_record_batch_datum_new(value ? cast(GArrowRecordBatch*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class RecordBatchDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
+{
+
+  /** */
+  T value(arrow.record_batch.RecordBatch propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch_datum.RecordBatchDatum]
+final class RecordBatchDatumGidBuilder : RecordBatchDatumGidBuilderImpl!RecordBatchDatumGidBuilder
+{
+  RecordBatchDatum build()
+  {
+    return new RecordBatchDatum(cast(void*)createGObject(RecordBatchDatum._getGType), Yes.Take);
   }
 }

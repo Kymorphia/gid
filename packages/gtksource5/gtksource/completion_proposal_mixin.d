@@ -3,6 +3,7 @@ module gtksource.completion_proposal_mixin;
 
 public import gtksource.completion_proposal_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtksource.c.functions;
 public import gtksource.c.types;
 public import gtksource.types;
@@ -35,4 +36,8 @@ template CompletionProposalT()
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
+}
+
+template CompletionProposalGidBuilderT()
+{
 }

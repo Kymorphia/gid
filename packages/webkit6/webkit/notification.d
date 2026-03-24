@@ -3,6 +3,7 @@ module webkit.notification;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -37,6 +38,15 @@ class Notification : gobject.object.ObjectWrap
   override Notification self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.notification.Notification]
+  Returns: New builder object
+  */
+  static NotificationGidBuilder builder()
+  {
+    return new NotificationGidBuilder;
   }
 
   /**
@@ -216,5 +226,18 @@ class Notification : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
+  }
+}
+
+class NotificationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.notification.Notification]
+final class NotificationGidBuilder : NotificationGidBuilderImpl!NotificationGidBuilder
+{
+  Notification build()
+  {
+    return new Notification(cast(void*)createGObject(Notification._getGType), No.Take);
   }
 }

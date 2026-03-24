@@ -5,6 +5,7 @@ import gdk.texture;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   override CellRendererPixbuf self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
+  Returns: New builder object
+  */
+  static CellRendererPixbufGidBuilder builder()
+  {
+    return new CellRendererPixbufGidBuilder;
   }
 
   /**
@@ -178,5 +188,78 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_pixbuf_new();
     this(_cretval, No.Take);
+  }
+}
+
+class CellRendererPixbufGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
+{
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The GIcon representing the icon to display.
+          If the icon theme is changed, the image will be updated
+          automatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the themed icon to display.
+          This property only has an effect if not overridden by the "pixbuf" property.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = The [gtk.types.IconSize] value that specifies the size of the rendered icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSize(gtk.types.IconSize propval)
+  {
+    return setProperty("icon-size", propval);
+  }
+
+  /** */
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("pixbuf", propval);
+  }
+
+  /** */
+  T pixbufExpanderClosed(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("pixbuf-expander-closed", propval);
+  }
+
+  /** */
+  T pixbufExpanderOpen(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("pixbuf-expander-open", propval);
+  }
+
+  /** */
+  T texture(gdk.texture.Texture propval)
+  {
+    return setProperty("texture", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
+final class CellRendererPixbufGidBuilder : CellRendererPixbufGidBuilderImpl!CellRendererPixbufGidBuilder
+{
+  CellRendererPixbuf build()
+  {
+    return new CellRendererPixbuf(cast(void*)createGObject(CellRendererPixbuf._getGType), No.Take);
   }
 }

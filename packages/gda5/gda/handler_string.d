@@ -9,6 +9,7 @@ import gda.data_handler_mixin;
 import gda.server_provider;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,15 @@ class HandlerString : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     return this;
   }
 
+  /**
+  Get builder for [gda.handler_string.HandlerString]
+  Returns: New builder object
+  */
+  static HandlerStringGidBuilder builder()
+  {
+    return new HandlerStringGidBuilder;
+  }
+
   mixin DataHandlerT!();
 
   /**
@@ -69,5 +79,20 @@ class HandlerString : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     _cretval = gda_handler_string_new_with_provider(prov ? cast(GdaServerProvider*)prov._cPtr(No.Dup) : null, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_handler.DataHandler)(cast(GdaDataHandler*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class HandlerStringGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
+{
+
+  mixin DataHandlerGidBuilderT!();
+}
+
+/// Fluent builder for [gda.handler_string.HandlerString]
+final class HandlerStringGidBuilder : HandlerStringGidBuilderImpl!HandlerStringGidBuilder
+{
+  HandlerString build()
+  {
+    return new HandlerString(cast(void*)createGObject(HandlerString._getGType), No.Take);
   }
 }

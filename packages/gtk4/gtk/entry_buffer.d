@@ -3,6 +3,7 @@ module gtk.entry_buffer;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -49,6 +50,15 @@ class EntryBuffer : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.entry_buffer.EntryBuffer]
+  Returns: New builder object
+  */
+  static EntryBufferGidBuilder builder()
+  {
+    return new EntryBufferGidBuilder;
+  }
+
+  /**
       Get `length` property.
       Returns: The length (in characters) of the text in buffer.
   */
@@ -73,7 +83,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   */
   @property void maxLength(int propval)
   {
-    return setMaxLength(propval);
+    setMaxLength(propval);
   }
 
   /**
@@ -389,5 +399,40 @@ class EntryBuffer : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("inserted-text", closure, after);
+  }
+}
+
+class EntryBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = The maximum length (in characters) of the text in the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxLength(int propval)
+  {
+    return setProperty("max-length", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The contents of the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [gtk.entry_buffer.EntryBuffer]
+final class EntryBufferGidBuilder : EntryBufferGidBuilderImpl!EntryBufferGidBuilder
+{
+  EntryBuffer build()
+  {
+    return new EntryBuffer(cast(void*)createGObject(EntryBuffer._getGType), Yes.Take);
   }
 }

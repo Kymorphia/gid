@@ -6,6 +6,7 @@ import gio.action_group;
 import gio.action_group_mixin;
 import gio.action_map;
 import gio.action_map_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -129,6 +130,15 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   }
 
   /**
+  Get builder for [gtk.application_window.ApplicationWindow]
+  Returns: New builder object
+  */
+  static ApplicationWindowGidBuilder builder()
+  {
+    return new ApplicationWindowGidBuilder;
+  }
+
+  /**
       Get `showMenubar` property.
       Returns: If this property is true, the window will display a menubar
         unless it is shown by the desktop shell.
@@ -156,7 +166,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   */
   @property void showMenubar(bool propval)
   {
-    return setShowMenubar(propval);
+    setShowMenubar(propval);
   }
 
   mixin ActionGroupT!();
@@ -244,5 +254,38 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   void setShowMenubar(bool showMenubar)
   {
     gtk_application_window_set_show_menubar(cast(GtkApplicationWindow*)this._cPtr, showMenubar);
+  }
+}
+
+class ApplicationWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.action_map.ActionMapGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+  mixin ActionMapGidBuilderT!();
+
+  /**
+      Set `showMenubar` property.
+      Params:
+        propval = If this property is true, the window will display a menubar
+          unless it is shown by the desktop shell.
+          
+          See [gtk.application.Application.setMenubar].
+          
+          If false, the window will not display a menubar, regardless
+          of whether the desktop shell is showing it or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T showMenubar(bool propval)
+  {
+    return setProperty("show-menubar", propval);
+  }
+}
+
+/// Fluent builder for [gtk.application_window.ApplicationWindow]
+final class ApplicationWindowGidBuilder : ApplicationWindowGidBuilderImpl!ApplicationWindowGidBuilder
+{
+  ApplicationWindow build()
+  {
+    return new ApplicationWindow(cast(void*)createGObject(ApplicationWindow._getGType), No.Take);
   }
 }

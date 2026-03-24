@@ -4,6 +4,7 @@ module gtk.flatten_list_model;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -47,6 +48,15 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   }
 
   /**
+  Get builder for [gtk.flatten_list_model.FlattenListModel]
+  Returns: New builder object
+  */
+  static FlattenListModelGidBuilder builder()
+  {
+    return new FlattenListModelGidBuilder;
+  }
+
+  /**
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
@@ -71,7 +81,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -136,5 +146,32 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   void setModel(gio.list_model.ListModel model = null)
   {
     gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class FlattenListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being flattened.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.flatten_list_model.FlattenListModel]
+final class FlattenListModelGidBuilder : FlattenListModelGidBuilderImpl!FlattenListModelGidBuilder
+{
+  FlattenListModel build()
+  {
+    return new FlattenListModel(cast(void*)createGObject(FlattenListModel._getGType), Yes.Take);
   }
 }

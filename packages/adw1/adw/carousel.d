@@ -9,6 +9,7 @@ import adw.swipeable_mixin;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -67,6 +68,15 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   }
 
   /**
+  Get builder for [adw.carousel.Carousel]
+  Returns: New builder object
+  */
+  static CarouselGidBuilder builder()
+  {
+    return new CarouselGidBuilder;
+  }
+
+  /**
       Get `allowLongSwipes` property.
       Returns: Whether to allow swiping for more than one page at a time.
         
@@ -86,7 +96,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   @property void allowLongSwipes(bool propval)
   {
-    return setAllowLongSwipes(propval);
+    setAllowLongSwipes(propval);
   }
 
   /**
@@ -109,7 +119,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   @property void allowMouseDrag(bool propval)
   {
-    return setAllowMouseDrag(propval);
+    setAllowMouseDrag(propval);
   }
 
   /**
@@ -132,7 +142,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   @property void allowScrollWheel(bool propval)
   {
-    return setAllowScrollWheel(propval);
+    setAllowScrollWheel(propval);
   }
 
   /**
@@ -157,7 +167,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   @property void interactive(bool propval)
   {
-    return setInteractive(propval);
+    setInteractive(propval);
   }
 
   /**
@@ -200,7 +210,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   @property void revealDuration(uint propval)
   {
-    return setRevealDuration(propval);
+    setRevealDuration(propval);
   }
 
   /**
@@ -231,7 +241,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   @property void scrollParams(adw.spring_params.SpringParams propval)
   {
-    return setScrollParams(propval);
+    setScrollParams(propval);
   }
 
   /**
@@ -250,7 +260,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   @property void spacing(uint propval)
   {
-    return setSpacing(propval);
+    setSpacing(propval);
   }
 
   mixin SwipeableT!();
@@ -603,5 +613,115 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("page-changed", closure, after);
+  }
+}
+
+class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin SwipeableGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one page at a time.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent pages.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowLongSwipes(bool propval)
+  {
+    return setProperty("allow-long-swipes", propval);
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Sets whether the [adw.carousel.Carousel] can be dragged with mouse pointer.
+          
+          If the value is `FALSE`, dragging is only available on touch.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowMouseDrag(bool propval)
+  {
+    return setProperty("allow-mouse-drag", propval);
+  }
+
+  /**
+      Set `allowScrollWheel` property.
+      Params:
+        propval = Whether the widget will respond to scroll wheel events.
+          
+          If the value is `FALSE`, wheel events will be ignored.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowScrollWheel(bool propval)
+  {
+    return setProperty("allow-scroll-wheel", propval);
+  }
+
+  /**
+      Set `interactive` property.
+      Params:
+        propval = Whether the carousel can be navigated.
+          
+          This can be used to temporarily disable the carousel to only allow
+          navigating it in a certain state.
+      Returns: Builder instance for fluent chaining
+  */
+  T interactive(bool propval)
+  {
+    return setProperty("interactive", propval);
+  }
+
+  /**
+      Set `revealDuration` property.
+      Params:
+        propval = Page reveal duration, in milliseconds.
+          
+          Reveal duration is used when animating adding or removing pages.
+      Returns: Builder instance for fluent chaining
+  */
+  T revealDuration(uint propval)
+  {
+    return setProperty("reveal-duration", propval);
+  }
+
+  /**
+      Set `scrollParams` property.
+      Params:
+        propval = Scroll animation spring parameters.
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollParams(adw.spring_params.SpringParams propval)
+  {
+    return setProperty("scroll-params", propval);
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = Spacing between pages in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T spacing(uint propval)
+  {
+    return setProperty("spacing", propval);
+  }
+}
+
+/// Fluent builder for [adw.carousel.Carousel]
+final class CarouselGidBuilder : CarouselGidBuilderImpl!CarouselGidBuilder
+{
+  Carousel build()
+  {
+    return new Carousel(cast(void*)createGObject(Carousel._getGType), No.Take);
   }
 }

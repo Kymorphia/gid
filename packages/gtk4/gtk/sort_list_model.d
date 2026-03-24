@@ -4,6 +4,7 @@ module gtk.sort_list_model;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -70,6 +71,15 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   }
 
   /**
+  Get builder for [gtk.sort_list_model.SortListModel]
+  Returns: New builder object
+  */
+  static SortListModelGidBuilder builder()
+  {
+    return new SortListModelGidBuilder;
+  }
+
+  /**
       Get `incremental` property.
       Returns: If the model should sort items incrementally.
   */
@@ -85,7 +95,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   */
   @property void incremental(bool propval)
   {
-    return setIncremental(propval);
+    setIncremental(propval);
   }
 
   /**
@@ -113,7 +123,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -150,7 +160,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   */
   @property void sectionSorter(gtk.sorter.Sorter propval)
   {
-    return setSectionSorter(propval);
+    setSectionSorter(propval);
   }
 
   /**
@@ -169,7 +179,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   */
   @property void sorter(gtk.sorter.Sorter propval)
   {
-    return setSorter(propval);
+    setSorter(propval);
   }
 
   mixin ListModelT!();
@@ -326,5 +336,65 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   void setSorter(gtk.sorter.Sorter sorter = null)
   {
     gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
+  }
+}
+
+class SortListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+
+  /**
+      Set `incremental` property.
+      Params:
+        propval = If the model should sort items incrementally.
+      Returns: Builder instance for fluent chaining
+  */
+  T incremental(bool propval)
+  {
+    return setProperty("incremental", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being sorted.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `sectionSorter` property.
+      Params:
+        propval = The section sorter for this model, if one is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T sectionSorter(gtk.sorter.Sorter propval)
+  {
+    return setProperty("section-sorter", propval);
+  }
+
+  /**
+      Set `sorter` property.
+      Params:
+        propval = The sorter for this model.
+      Returns: Builder instance for fluent chaining
+  */
+  T sorter(gtk.sorter.Sorter propval)
+  {
+    return setProperty("sorter", propval);
+  }
+}
+
+/// Fluent builder for [gtk.sort_list_model.SortListModel]
+final class SortListModelGidBuilder : SortListModelGidBuilderImpl!SortListModelGidBuilder
+{
+  SortListModel build()
+  {
+    return new SortListModel(cast(void*)createGObject(SortListModel._getGType), Yes.Take);
   }
 }

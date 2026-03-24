@@ -3,6 +3,7 @@ module gtk.shortcuts_section;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -68,6 +69,15 @@ class ShortcutsSection : gtk.box.Box
   override ShortcutsSection self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.shortcuts_section.ShortcutsSection]
+  Returns: New builder object
+  */
+  static ShortcutsSectionGidBuilder builder()
+  {
+    return new ShortcutsSectionGidBuilder;
   }
 
   /**
@@ -243,5 +253,81 @@ class ShortcutsSection : gtk.box.Box
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("change-current-page", closure, after);
+  }
+}
+
+class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /**
+      Set `maxHeight` property.
+      Params:
+        propval = The maximum number of lines to allow per column.
+          
+          This property can be used to influence how the groups in this
+          section are distributed across pages and columns. The default
+          value of 15 should work in most cases.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxHeight(uint propval)
+  {
+    return setProperty("max-height", propval);
+  }
+
+  /**
+      Set `sectionName` property.
+      Params:
+        propval = A unique name to identify this section among the sections
+          added to the [gtk.shortcuts_window.ShortcutsWindow].
+          
+          Setting the `property@Gtk.ShortcutsWindow:section-name` property
+          to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
+      Returns: Builder instance for fluent chaining
+  */
+  T sectionName(string propval)
+  {
+    return setProperty("section-name", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The string to show in the section selector of the [gtk.shortcuts_window.ShortcutsWindow]
+          for this section.
+          
+          If there is only one section, you don't need to set a title,
+          since the section selector will not be shown in this case.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `viewName` property.
+      Params:
+        propval = A view name to filter the groups in this section by.
+          
+          See [gtk.shortcuts_group.ShortcutsGroup.view].
+          
+          Applications are expected to use the
+          `property@Gtk.ShortcutsWindow:view-name` property
+          for this purpose.
+      Returns: Builder instance for fluent chaining
+  */
+  T viewName(string propval)
+  {
+    return setProperty("view-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.shortcuts_section.ShortcutsSection]
+final class ShortcutsSectionGidBuilder : ShortcutsSectionGidBuilderImpl!ShortcutsSectionGidBuilder
+{
+  ShortcutsSection build()
+  {
+    return new ShortcutsSection(cast(void*)createGObject(ShortcutsSection._getGType), No.Take);
   }
 }

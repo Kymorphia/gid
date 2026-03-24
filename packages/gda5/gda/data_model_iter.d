@@ -11,6 +11,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -41,6 +42,15 @@ class DataModelIter : gda.set.Set
   override DataModelIter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.data_model_iter.DataModelIter]
+  Returns: New builder object
+  */
+  static DataModelIterGidBuilder builder()
+  {
+    return new DataModelIterGidBuilder;
   }
 
   /** */
@@ -384,6 +394,43 @@ class DataModelIter : gda.set.Set
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-changed", closure, after);
+  }
+}
+
+class DataModelIterGidBuilderImpl(T) : gda.set.SetGidBuilderImpl!T
+{
+
+  /** */
+  T currentRow(int propval)
+  {
+    return setProperty("current-row", propval);
+  }
+
+  /** */
+  T dataModel(gda.data_model.DataModel propval)
+  {
+    return setProperty("data-model", propval);
+  }
+
+  /** */
+  T forcedModel(gda.data_model.DataModel propval)
+  {
+    return setProperty("forced-model", propval);
+  }
+
+  /** */
+  T updateModel(bool propval)
+  {
+    return setProperty("update-model", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_model_iter.DataModelIter]
+final class DataModelIterGidBuilder : DataModelIterGidBuilderImpl!DataModelIterGidBuilder
+{
+  DataModelIter build()
+  {
+    return new DataModelIter(cast(void*)createGObject(DataModelIter._getGType), No.Take);
   }
 }
 

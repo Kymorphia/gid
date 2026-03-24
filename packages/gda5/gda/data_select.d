@@ -7,11 +7,13 @@ import gda.connection;
 import gda.data_model;
 import gda.data_model_mixin;
 import gda.pstmt;
+import gda.set;
 import gda.statement;
 import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -43,6 +45,15 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
     return this;
   }
 
+  /**
+  Get builder for [gda.data_select.DataSelect]
+  Returns: New builder object
+  */
+  static DataSelectGidBuilder builder()
+  {
+    return new DataSelectGidBuilder;
+  }
+
   /** */
   @property bool autoReset()
   {
@@ -56,6 +67,12 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /** */
+  @property gda.connection.Connection connection()
+  {
+    return getConnection();
+  }
+
+  /** */
   @property gda.statement.Statement deleteStmt()
   {
     return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("delete-stmt");
@@ -65,6 +82,12 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   @property void deleteStmt(gda.statement.Statement propval)
   {
     gobject.object.ObjectWrap.setProperty!(gda.statement.Statement)("delete-stmt", propval);
+  }
+
+  /** */
+  @property gda.set.Set execParams()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.set.Set)("exec-params");
   }
 
   /**
@@ -96,6 +119,12 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   @property void insertStmt(gda.statement.Statement propval)
   {
     gobject.object.ObjectWrap.setProperty!(gda.statement.Statement)("insert-stmt", propval);
+  }
+
+  /** */
+  @property uint modelUsage()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("model-usage");
   }
 
   /** */
@@ -396,6 +425,86 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
     if (_err)
       throw new DataSelectException(_err);
     return _retval;
+  }
+}
+
+class DataSelectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
+{
+
+  mixin DataModelGidBuilderT!();
+
+  /** */
+  T autoReset(bool propval)
+  {
+    return setProperty("auto-reset", propval);
+  }
+
+  /** */
+  T connection(gda.connection.Connection propval)
+  {
+    return setProperty("connection", propval);
+  }
+
+  /** */
+  T deleteStmt(gda.statement.Statement propval)
+  {
+    return setProperty("delete-stmt", propval);
+  }
+
+  /** */
+  T execParams(gda.set.Set propval)
+  {
+    return setProperty("exec-params", propval);
+  }
+
+  /**
+      Set `executionDelay` property.
+      Params:
+        propval = This property stores the execution delay which has been necessary to obtain the data
+      Returns: Builder instance for fluent chaining
+  */
+  T executionDelay(double propval)
+  {
+    return setProperty("execution-delay", propval);
+  }
+
+  /** */
+  T insertStmt(gda.statement.Statement propval)
+  {
+    return setProperty("insert-stmt", propval);
+  }
+
+  /** */
+  T modelUsage(uint propval)
+  {
+    return setProperty("model-usage", propval);
+  }
+
+  /** */
+  T preparedStmt(gda.pstmt.PStmt propval)
+  {
+    return setProperty("prepared-stmt", propval);
+  }
+
+  /** */
+  T storeAllRows(bool propval)
+  {
+    return setProperty("store-all-rows", propval);
+  }
+
+  /** */
+  T updateStmt(gda.statement.Statement propval)
+  {
+    return setProperty("update-stmt", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_select.DataSelect]
+final class DataSelectGidBuilder : DataSelectGidBuilderImpl!DataSelectGidBuilder
+{
+  DataSelect build()
+  {
+    return new DataSelect(cast(void*)createGObject(DataSelect._getGType), No.Take);
   }
 }
 

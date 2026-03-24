@@ -2,6 +2,7 @@
 module gstvideo.video_aggregator_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gstbase.aggregator_pad;
@@ -37,6 +38,15 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   override VideoAggregatorPad self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstvideo.video_aggregator_pad.VideoAggregatorPad]
+  Returns: New builder object
+  */
+  static VideoAggregatorPadGidBuilder builder()
+  {
+    return new VideoAggregatorPadGidBuilder;
   }
 
   /** */
@@ -137,5 +147,36 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   void setNeedsAlpha(bool needsAlpha)
   {
     gst_video_aggregator_pad_set_needs_alpha(cast(GstVideoAggregatorPad*)this._cPtr, needsAlpha);
+  }
+}
+
+class VideoAggregatorPadGidBuilderImpl(T) : gstbase.aggregator_pad.AggregatorPadGidBuilderImpl!T
+{
+
+  /** */
+  T maxLastBufferRepeat(ulong propval)
+  {
+    return setProperty("max-last-buffer-repeat", propval);
+  }
+
+  /** */
+  T repeatAfterEos(bool propval)
+  {
+    return setProperty("repeat-after-eos", propval);
+  }
+
+  /** */
+  T zorder(uint propval)
+  {
+    return setProperty("zorder", propval);
+  }
+}
+
+/// Fluent builder for [gstvideo.video_aggregator_pad.VideoAggregatorPad]
+final class VideoAggregatorPadGidBuilder : VideoAggregatorPadGidBuilderImpl!VideoAggregatorPadGidBuilder
+{
+  VideoAggregatorPad build()
+  {
+    return new VideoAggregatorPad(cast(void*)createGObject(VideoAggregatorPad._getGType), No.Take);
   }
 }

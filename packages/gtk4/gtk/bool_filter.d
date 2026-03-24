@@ -2,6 +2,7 @@
 module gtk.bool_filter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -41,6 +42,15 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /**
+  Get builder for [gtk.bool_filter.BoolFilter]
+  Returns: New builder object
+  */
+  static BoolFilterGidBuilder builder()
+  {
+    return new BoolFilterGidBuilder;
+  }
+
+  /**
       Get `expression` property.
       Returns: The boolean expression to evaluate on item.
   */
@@ -56,7 +66,7 @@ class BoolFilter : gtk.filter.Filter
   */
   @property void expression(gtk.expression.Expression propval)
   {
-    return setExpression(propval);
+    setExpression(propval);
   }
 
   /**
@@ -75,7 +85,7 @@ class BoolFilter : gtk.filter.Filter
   */
   @property void invert(bool propval)
   {
-    return setInvert(propval);
+    setInvert(propval);
   }
 
   /**
@@ -139,5 +149,40 @@ class BoolFilter : gtk.filter.Filter
   void setInvert(bool invert)
   {
     gtk_bool_filter_set_invert(cast(GtkBoolFilter*)this._cPtr, invert);
+  }
+}
+
+class BoolFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
+{
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The boolean expression to evaluate on item.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(gtk.expression.Expression propval)
+  {
+    return setProperty("expression", propval);
+  }
+
+  /**
+      Set `invert` property.
+      Params:
+        propval = If the expression result should be inverted.
+      Returns: Builder instance for fluent chaining
+  */
+  T invert(bool propval)
+  {
+    return setProperty("invert", propval);
+  }
+}
+
+/// Fluent builder for [gtk.bool_filter.BoolFilter]
+final class BoolFilterGidBuilder : BoolFilterGidBuilderImpl!BoolFilterGidBuilder
+{
+  BoolFilter build()
+  {
+    return new BoolFilter(cast(void*)createGObject(BoolFilter._getGType), Yes.Take);
   }
 }

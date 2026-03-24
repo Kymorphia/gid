@@ -8,6 +8,7 @@ import arrow.record_batch_reader;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
@@ -38,6 +39,15 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
     return this;
   }
 
+  /**
+  Get builder for [arrow.record_batch_stream_reader.RecordBatchStreamReader]
+  Returns: New builder object
+  */
+  static RecordBatchStreamReaderGidBuilder builder()
+  {
+    return new RecordBatchStreamReaderGidBuilder;
+  }
+
   /** */
   this(arrow.input_stream.InputStream stream)
   {
@@ -47,5 +57,18 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class RecordBatchStreamReaderGidBuilderImpl(T) : arrow.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.record_batch_stream_reader.RecordBatchStreamReader]
+final class RecordBatchStreamReaderGidBuilder : RecordBatchStreamReaderGidBuilderImpl!RecordBatchStreamReaderGidBuilder
+{
+  RecordBatchStreamReader build()
+  {
+    return new RecordBatchStreamReader(cast(void*)createGObject(RecordBatchStreamReader._getGType), Yes.Take);
   }
 }

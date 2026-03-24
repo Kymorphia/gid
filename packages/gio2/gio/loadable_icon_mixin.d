@@ -10,6 +10,7 @@ public import gio.cancellable;
 public import gio.input_stream;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -92,4 +93,8 @@ template LoadableIconT()
     type = _type.fromCString(Yes.Free);
     return _retval;
   }
+}
+
+template LoadableIconGidBuilderT()
+{
 }

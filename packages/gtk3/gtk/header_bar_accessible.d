@@ -4,6 +4,7 @@ module gtk.header_bar_accessible;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -36,5 +37,28 @@ class HeaderBarAccessible : gtk.container_accessible.ContainerAccessible
   override HeaderBarAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.header_bar_accessible.HeaderBarAccessible]
+  Returns: New builder object
+  */
+  static HeaderBarAccessibleGidBuilder builder()
+  {
+    return new HeaderBarAccessibleGidBuilder;
+  }
+}
+
+class HeaderBarAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.header_bar_accessible.HeaderBarAccessible]
+final class HeaderBarAccessibleGidBuilder : HeaderBarAccessibleGidBuilderImpl!HeaderBarAccessibleGidBuilder
+{
+  HeaderBarAccessible build()
+  {
+    return new HeaderBarAccessible(cast(void*)createGObject(HeaderBarAccessible._getGType), No.Take);
   }
 }

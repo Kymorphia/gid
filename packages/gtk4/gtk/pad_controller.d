@@ -4,6 +4,7 @@ module gtk.pad_controller;
 import gdk.device;
 import gid.gid;
 import gio.action_group;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -88,6 +89,27 @@ class PadController : gtk.event_controller.EventController
   }
 
   /**
+  Get builder for [gtk.pad_controller.PadController]
+  Returns: New builder object
+  */
+  static PadControllerGidBuilder builder()
+  {
+    return new PadControllerGidBuilder;
+  }
+
+  /** */
+  @property gio.action_group.ActionGroup actionGroup()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.action_group.ActionGroup)("action-group");
+  }
+
+  /** */
+  @property gdk.device.Device pad()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.device.Device)("pad");
+  }
+
+  /**
       Creates a new [gtk.pad_controller.PadController] that will associate events from pad to
       actions.
       
@@ -139,5 +161,30 @@ class PadController : gtk.event_controller.EventController
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_pad_controller_set_action(cast(GtkPadController*)this._cPtr, type, index, mode, _label, _actionName);
+  }
+}
+
+class PadControllerGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+
+  /** */
+  T actionGroup(gio.action_group.ActionGroup propval)
+  {
+    return setProperty("action-group", propval);
+  }
+
+  /** */
+  T pad(gdk.device.Device propval)
+  {
+    return setProperty("pad", propval);
+  }
+}
+
+/// Fluent builder for [gtk.pad_controller.PadController]
+final class PadControllerGidBuilder : PadControllerGidBuilderImpl!PadControllerGidBuilder
+{
+  PadController build()
+  {
+    return new PadController(cast(void*)createGObject(PadController._getGType), Yes.Take);
   }
 }

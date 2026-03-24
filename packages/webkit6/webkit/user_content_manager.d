@@ -3,6 +3,7 @@ module webkit.user_content_manager;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.value;
 import webkit.c.functions;
@@ -54,6 +55,15 @@ class UserContentManager : gobject.object.ObjectWrap
   override UserContentManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.user_content_manager.UserContentManager]
+  Returns: New builder object
+  */
+  static UserContentManagerGidBuilder builder()
+  {
+    return new UserContentManagerGidBuilder;
   }
 
   /**
@@ -397,5 +407,18 @@ class UserContentManager : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("script-message-with-reply-received"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class UserContentManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.user_content_manager.UserContentManager]
+final class UserContentManagerGidBuilder : UserContentManagerGidBuilderImpl!UserContentManagerGidBuilder
+{
+  UserContentManager build()
+  {
+    return new UserContentManager(cast(void*)createGObject(UserContentManager._getGType), Yes.Take);
   }
 }

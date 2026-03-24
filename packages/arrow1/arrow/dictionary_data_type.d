@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   override DictionaryDataType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.dictionary_data_type.DictionaryDataType]
+  Returns: New builder object
+  */
+  static DictionaryDataTypeGidBuilder builder()
+  {
+    return new DictionaryDataTypeGidBuilder;
   }
 
   /** */
@@ -70,5 +80,18 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     bool _retval;
     _retval = cast(bool)garrow_dictionary_data_type_is_ordered(cast(GArrowDictionaryDataType*)this._cPtr);
     return _retval;
+  }
+}
+
+class DictionaryDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.dictionary_data_type.DictionaryDataType]
+final class DictionaryDataTypeGidBuilder : DictionaryDataTypeGidBuilderImpl!DictionaryDataTypeGidBuilder
+{
+  DictionaryDataType build()
+  {
+    return new DictionaryDataType(cast(void*)createGObject(DictionaryDataType._getGType), Yes.Take);
   }
 }

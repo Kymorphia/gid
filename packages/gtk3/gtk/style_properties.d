@@ -2,6 +2,7 @@
 module gtk.style_properties;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import gtk.c.functions;
@@ -55,6 +56,15 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   override StyleProperties self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.style_properties.StyleProperties]
+  Returns: New builder object
+  */
+  static StylePropertiesGidBuilder builder()
+  {
+    return new StylePropertiesGidBuilder;
   }
 
   mixin StyleProviderT!();
@@ -189,5 +199,20 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   {
     const(char)* _property = property.toCString(No.Alloc);
     gtk_style_properties_unset_property(cast(GtkStyleProperties*)this._cPtr, _property, state);
+  }
+}
+
+class StylePropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.style_provider.StyleProviderGidBuilderImpl!T
+{
+
+  mixin StyleProviderGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.style_properties.StyleProperties]
+final class StylePropertiesGidBuilder : StylePropertiesGidBuilderImpl!StylePropertiesGidBuilder
+{
+  StyleProperties build()
+  {
+    return new StyleProperties(cast(void*)createGObject(StyleProperties._getGType), Yes.Take);
   }
 }

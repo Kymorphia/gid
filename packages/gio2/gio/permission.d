@@ -8,6 +8,7 @@ import gio.c.types;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -53,6 +54,15 @@ class Permission : gobject.object.ObjectWrap
   override Permission self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.permission.Permission]
+  Returns: New builder object
+  */
+  static PermissionGidBuilder builder()
+  {
+    return new PermissionGidBuilder;
   }
 
   /**
@@ -295,5 +305,18 @@ class Permission : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class PermissionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.permission.Permission]
+final class PermissionGidBuilder : PermissionGidBuilderImpl!PermissionGidBuilder
+{
+  Permission build()
+  {
+    return new Permission(cast(void*)createGObject(Permission._getGType), No.Take);
   }
 }

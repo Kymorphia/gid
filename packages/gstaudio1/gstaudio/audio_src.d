@@ -2,6 +2,7 @@
 module gstaudio.audio_src;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstaudio.audio_base_src;
 import gstaudio.c.functions;
 import gstaudio.c.types;
@@ -51,5 +52,27 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
   override AudioSrc self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstaudio.audio_src.AudioSrc]
+  Returns: New builder object
+  */
+  static AudioSrcGidBuilder builder()
+  {
+    return new AudioSrcGidBuilder;
+  }
+}
+
+class AudioSrcGidBuilderImpl(T) : gstaudio.audio_base_src.AudioBaseSrcGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstaudio.audio_src.AudioSrc]
+final class AudioSrcGidBuilder : AudioSrcGidBuilderImpl!AudioSrcGidBuilder
+{
+  AudioSrc build()
+  {
+    return new AudioSrc(cast(void*)createGObject(AudioSrc._getGType), No.Take);
   }
 }

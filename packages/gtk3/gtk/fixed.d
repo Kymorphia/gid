@@ -4,6 +4,7 @@ module gtk.fixed;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -85,6 +86,15 @@ class Fixed : gtk.container.Container
   }
 
   /**
+  Get builder for [gtk.fixed.Fixed]
+  Returns: New builder object
+  */
+  static FixedGidBuilder builder()
+  {
+    return new FixedGidBuilder;
+  }
+
+  /**
       Creates a new #GtkFixed.
       Returns: a new #GtkFixed.
   */
@@ -119,5 +129,19 @@ class Fixed : gtk.container.Container
   void put(gtk.widget.Widget widget, int x, int y)
   {
     gtk_fixed_put(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, x, y);
+  }
+}
+
+class FixedGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.fixed.Fixed]
+final class FixedGidBuilder : FixedGidBuilderImpl!FixedGidBuilder
+{
+  Fixed build()
+  {
+    return new Fixed(cast(void*)createGObject(Fixed._getGType), No.Take);
   }
 }

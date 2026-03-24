@@ -10,6 +10,7 @@ import gio.input_stream;
 import gio.output_stream;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -88,6 +89,15 @@ class IOStream : gobject.object.ObjectWrap
   override IOStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.iostream.IOStream]
+  Returns: New builder object
+  */
+  static IOStreamGidBuilder builder()
+  {
+    return new IOStreamGidBuilder;
   }
 
   /**
@@ -339,5 +349,18 @@ class IOStream : gobject.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_io_stream_splice_async(cast(GIOStream*)this._cPtr, stream2 ? cast(GIOStream*)stream2._cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+}
+
+class IOStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.iostream.IOStream]
+final class IOStreamGidBuilder : IOStreamGidBuilderImpl!IOStreamGidBuilder
+{
+  IOStream build()
+  {
+    return new IOStream(cast(void*)createGObject(IOStream._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtksource.style_scheme_chooser_mixin;
 
 public import gtksource.style_scheme_chooser_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtksource.c.functions;
 public import gtksource.c.types;
@@ -33,7 +34,7 @@ template StyleSchemeChooserT()
   */
   @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
   {
-    return setStyleScheme(propval);
+    setStyleScheme(propval);
   }
 
   /**
@@ -57,5 +58,22 @@ template StyleSchemeChooserT()
   override void setStyleScheme(gtksource.style_scheme.StyleScheme scheme)
   {
     gtk_source_style_scheme_chooser_set_style_scheme(cast(GtkSourceStyleSchemeChooser*)this._cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme._cPtr(No.Dup) : null);
+  }
+}
+
+template StyleSchemeChooserGidBuilderT()
+{
+
+  /**
+      Set `styleScheme` property.
+      Params:
+        propval = The :style-scheme property contains the currently selected style
+          scheme. The property can be set to change
+          the current selection programmatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T styleScheme(gtksource.style_scheme.StyleScheme propval)
+  {
+    return setProperty("style-scheme", propval);
   }
 }

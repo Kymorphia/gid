@@ -7,6 +7,7 @@ import arrow.mutable_buffer;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
@@ -35,6 +36,15 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
   override ResizableBuffer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.resizable_buffer.ResizableBuffer]
+  Returns: New builder object
+  */
+  static ResizableBufferGidBuilder builder()
+  {
+    return new ResizableBufferGidBuilder;
   }
 
   /** */
@@ -68,5 +78,18 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ResizableBufferGidBuilderImpl(T) : arrow.mutable_buffer.MutableBufferGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.resizable_buffer.ResizableBuffer]
+final class ResizableBufferGidBuilder : ResizableBufferGidBuilderImpl!ResizableBufferGidBuilder
+{
+  ResizableBuffer build()
+  {
+    return new ResizableBuffer(cast(void*)createGObject(ResizableBuffer._getGType), Yes.Take);
   }
 }

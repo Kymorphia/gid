@@ -7,6 +7,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class StreamGIO : gmime.stream.Stream
   override StreamGIO self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.stream_gio.StreamGIO]
+  Returns: New builder object
+  */
+  static StreamGIOGidBuilder builder()
+  {
+    return new StreamGIOGidBuilder;
   }
 
   /**
@@ -97,5 +107,18 @@ class StreamGIO : gmime.stream.Stream
   void setOwner(bool owner)
   {
     g_mime_stream_gio_set_owner(cast(GMimeStreamGIO*)this._cPtr, owner);
+  }
+}
+
+class StreamGIOGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_gio.StreamGIO]
+final class StreamGIOGidBuilder : StreamGIOGidBuilderImpl!StreamGIOGidBuilder
+{
+  StreamGIO build()
+  {
+    return new StreamGIO(cast(void*)createGObject(StreamGIO._getGType), Yes.Take);
   }
 }

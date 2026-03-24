@@ -13,6 +13,7 @@ import gio.types;
 import gio.volume;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -387,4 +388,8 @@ interface Drive
       Returns: Signal ID
   */
   ulong connectStopButton(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface DriveGidBuilderImpl(T)
+{
 }

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class FixedWidthDataType : arrow.data_type.DataType
@@ -36,11 +37,33 @@ class FixedWidthDataType : arrow.data_type.DataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.fixed_width_data_type.FixedWidthDataType]
+  Returns: New builder object
+  */
+  static FixedWidthDataTypeGidBuilder builder()
+  {
+    return new FixedWidthDataTypeGidBuilder;
+  }
+
   /** */
   int getBitWidth()
   {
     int _retval;
     _retval = garrow_fixed_width_data_type_get_bit_width(cast(GArrowFixedWidthDataType*)this._cPtr);
     return _retval;
+  }
+}
+
+class FixedWidthDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.fixed_width_data_type.FixedWidthDataType]
+final class FixedWidthDataTypeGidBuilder : FixedWidthDataTypeGidBuilderImpl!FixedWidthDataTypeGidBuilder
+{
+  FixedWidthDataType build()
+  {
+    return new FixedWidthDataType(cast(void*)createGObject(FixedWidthDataType._getGType), No.Take);
   }
 }

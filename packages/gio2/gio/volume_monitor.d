@@ -9,6 +9,7 @@ import gio.mount;
 import gio.types;
 import gio.volume;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -50,6 +51,15 @@ class VolumeMonitor : gobject.object.ObjectWrap
   override VolumeMonitor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.volume_monitor.VolumeMonitor]
+  Returns: New builder object
+  */
+  static VolumeMonitorGidBuilder builder()
+  {
+    return new VolumeMonitorGidBuilder;
   }
 
   /**
@@ -710,5 +720,18 @@ class VolumeMonitor : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("volume-removed", closure, after);
+  }
+}
+
+class VolumeMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.volume_monitor.VolumeMonitor]
+final class VolumeMonitorGidBuilder : VolumeMonitorGidBuilderImpl!VolumeMonitorGidBuilder
+{
+  VolumeMonitor build()
+  {
+    return new VolumeMonitor(cast(void*)createGObject(VolumeMonitor._getGType), No.Take);
   }
 }

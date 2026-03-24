@@ -4,6 +4,7 @@ module webkitwebprocessextension.context_menu_item;
 import gid.gid;
 import gio.action;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import webkitwebprocessextension.c.functions;
@@ -46,6 +47,15 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   override ContextMenuItem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.context_menu_item.ContextMenuItem]
+  Returns: New builder object
+  */
+  static ContextMenuItemGidBuilder builder()
+  {
+    return new ContextMenuItemGidBuilder;
   }
 
   /**
@@ -208,5 +218,18 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   void setSubmenu(webkitwebprocessextension.context_menu.ContextMenu submenu = null)
   {
     webkit_context_menu_item_set_submenu(cast(WebKitContextMenuItem*)this._cPtr, submenu ? cast(WebKitContextMenu*)submenu._cPtr(No.Dup) : null);
+  }
+}
+
+class ContextMenuItemGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.context_menu_item.ContextMenuItem]
+final class ContextMenuItemGidBuilder : ContextMenuItemGidBuilderImpl!ContextMenuItemGidBuilder
+{
+  ContextMenuItem build()
+  {
+    return new ContextMenuItem(cast(void*)createGObject(ContextMenuItem._getGType), No.Take);
   }
 }

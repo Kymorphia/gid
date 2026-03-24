@@ -10,6 +10,7 @@ import gmime.decrypt_result;
 import gmime.multipart;
 import gmime.object;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -41,6 +42,15 @@ class MultipartEncrypted : gmime.multipart.Multipart
   override MultipartEncrypted self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.multipart_encrypted.MultipartEncrypted]
+  Returns: New builder object
+  */
+  static MultipartEncryptedGidBuilder builder()
+  {
+    return new MultipartEncryptedGidBuilder;
   }
 
   /**
@@ -120,5 +130,18 @@ class MultipartEncrypted : gmime.multipart.Multipart
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(GMimeObject*)_cretval, Yes.Take);
     result = new gmime.decrypt_result.DecryptResult(cast(void*)_result, Yes.Take);
     return _retval;
+  }
+}
+
+class MultipartEncryptedGidBuilderImpl(T) : gmime.multipart.MultipartGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.multipart_encrypted.MultipartEncrypted]
+final class MultipartEncryptedGidBuilder : MultipartEncryptedGidBuilderImpl!MultipartEncryptedGidBuilder
+{
+  MultipartEncrypted build()
+  {
+    return new MultipartEncrypted(cast(void*)createGObject(MultipartEncrypted._getGType), Yes.Take);
   }
 }

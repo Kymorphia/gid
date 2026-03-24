@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class DataType : gobject.object.ObjectWrap
   override DataType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.data_type.DataType]
+  Returns: New builder object
+  */
+  static DataTypeGidBuilder builder()
+  {
+    return new DataTypeGidBuilder;
   }
 
   /** */
@@ -92,5 +102,24 @@ class DataType : gobject.object.ObjectWrap
     _cretval = garrow_data_type_to_string(cast(GArrowDataType*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class DataTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T dataType(void* propval)
+  {
+    return setProperty("data-type", propval);
+  }
+}
+
+/// Fluent builder for [arrow.data_type.DataType]
+final class DataTypeGidBuilder : DataTypeGidBuilderImpl!DataTypeGidBuilder
+{
+  DataType build()
+  {
+    return new DataType(cast(void*)createGObject(DataType._getGType), No.Take);
   }
 }

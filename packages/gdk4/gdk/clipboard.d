@@ -15,6 +15,7 @@ import gio.input_stream;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -67,6 +68,15 @@ class Clipboard : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.clipboard.Clipboard]
+  Returns: New builder object
+  */
+  static ClipboardGidBuilder builder()
+  {
+    return new ClipboardGidBuilder;
+  }
+
+  /**
       Get `content` property.
       Returns: The [gdk.content_provider.ContentProvider] or null if the clipboard is empty or contents are
         provided otherwise.
@@ -74,6 +84,15 @@ class Clipboard : gobject.object.ObjectWrap
   @property gdk.content_provider.ContentProvider content()
   {
     return getContent();
+  }
+
+  /**
+      Get `display` property.
+      Returns: The [gdk.display.Display] that the clipboard belongs to.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   /**
@@ -489,5 +508,29 @@ class Clipboard : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class ClipboardGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The [gdk.display.Display] that the clipboard belongs to.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.clipboard.Clipboard]
+final class ClipboardGidBuilder : ClipboardGidBuilderImpl!ClipboardGidBuilder
+{
+  Clipboard build()
+  {
+    return new Clipboard(cast(void*)createGObject(Clipboard._getGType), No.Take);
   }
 }

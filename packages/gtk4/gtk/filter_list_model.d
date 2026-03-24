@@ -4,6 +4,7 @@ module gtk.filter_list_model;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -55,6 +56,15 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 
   /**
+  Get builder for [gtk.filter_list_model.FilterListModel]
+  Returns: New builder object
+  */
+  static FilterListModelGidBuilder builder()
+  {
+    return new FilterListModelGidBuilder;
+  }
+
+  /**
       Get `filter` property.
       Returns: The filter for this model.
   */
@@ -70,7 +80,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   @property void filter(gtk.filter.Filter propval)
   {
-    return setFilter(propval);
+    setFilter(propval);
   }
 
   /**
@@ -89,7 +99,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   @property void incremental(bool propval)
   {
-    return setIncremental(propval);
+    setIncremental(propval);
   }
 
   /**
@@ -117,7 +127,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -271,5 +281,54 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   void setModel(gio.list_model.ListModel model = null)
   {
     gtk_filter_list_model_set_model(cast(GtkFilterListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class FilterListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The filter for this model.
+      Returns: Builder instance for fluent chaining
+  */
+  T filter(gtk.filter.Filter propval)
+  {
+    return setProperty("filter", propval);
+  }
+
+  /**
+      Set `incremental` property.
+      Params:
+        propval = If the model should filter items incrementally.
+      Returns: Builder instance for fluent chaining
+  */
+  T incremental(bool propval)
+  {
+    return setProperty("incremental", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being filtered.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.filter_list_model.FilterListModel]
+final class FilterListModelGidBuilder : FilterListModelGidBuilderImpl!FilterListModelGidBuilder
+{
+  FilterListModel build()
+  {
+    return new FilterListModel(cast(void*)createGObject(FilterListModel._getGType), Yes.Take);
   }
 }

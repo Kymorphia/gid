@@ -6,6 +6,7 @@ import atk.c.types;
 import atk.object;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -48,6 +49,15 @@ class ObjectFactory : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [atk.object_factory.ObjectFactory]
+  Returns: New builder object
+  */
+  static ObjectFactoryGidBuilder builder()
+  {
+    return new ObjectFactoryGidBuilder;
+  }
+
+  /**
       Provides an #AtkObject that implements an accessibility interface
       on behalf of obj
   
@@ -86,5 +96,18 @@ class ObjectFactory : gobject.object.ObjectWrap
   void invalidate()
   {
     atk_object_factory_invalidate(cast(AtkObjectFactory*)this._cPtr);
+  }
+}
+
+class ObjectFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.object_factory.ObjectFactory]
+final class ObjectFactoryGidBuilder : ObjectFactoryGidBuilderImpl!ObjectFactoryGidBuilder
+{
+  ObjectFactory build()
+  {
+    return new ObjectFactory(cast(void*)createGObject(ObjectFactory._getGType), No.Take);
   }
 }

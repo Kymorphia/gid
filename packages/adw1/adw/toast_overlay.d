@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.toast;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -85,6 +86,15 @@ class ToastOverlay : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.toast_overlay.ToastOverlay]
+  Returns: New builder object
+  */
+  static ToastOverlayGidBuilder builder()
+  {
+    return new ToastOverlayGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -100,7 +110,7 @@ class ToastOverlay : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -155,5 +165,30 @@ class ToastOverlay : gtk.widget.Widget
   void setChild(gtk.widget.Widget child = null)
   {
     adw_toast_overlay_set_child(cast(AdwToastOverlay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class ToastOverlayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [adw.toast_overlay.ToastOverlay]
+final class ToastOverlayGidBuilder : ToastOverlayGidBuilderImpl!ToastOverlayGidBuilder
+{
+  ToastOverlay build()
+  {
+    return new ToastOverlay(cast(void*)createGObject(ToastOverlay._getGType), No.Take);
   }
 }

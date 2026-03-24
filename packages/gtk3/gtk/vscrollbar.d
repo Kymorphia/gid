@@ -4,6 +4,7 @@ module gtk.vscrollbar;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.adjustment;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -53,6 +54,15 @@ class VScrollbar : gtk.scrollbar.Scrollbar
   }
 
   /**
+  Get builder for [gtk.vscrollbar.VScrollbar]
+  Returns: New builder object
+  */
+  static VScrollbarGidBuilder builder()
+  {
+    return new VScrollbarGidBuilder;
+  }
+
+  /**
       Creates a new vertical scrollbar.
   
       Params:
@@ -66,5 +76,19 @@ class VScrollbar : gtk.scrollbar.Scrollbar
     GtkWidget* _cretval;
     _cretval = gtk_vscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
+  }
+}
+
+class VScrollbarGidBuilderImpl(T) : gtk.scrollbar.ScrollbarGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.vscrollbar.VScrollbar]
+final class VScrollbarGidBuilder : VScrollbarGidBuilderImpl!VScrollbarGidBuilder
+{
+  VScrollbar build()
+  {
+    return new VScrollbar(cast(void*)createGObject(VScrollbar._getGType), No.Take);
   }
 }

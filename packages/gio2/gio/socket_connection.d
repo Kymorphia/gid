@@ -11,6 +11,7 @@ import gio.socket;
 import gio.socket_address;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -58,6 +59,24 @@ class SocketConnection : gio.iostream.IOStream
   override SocketConnection self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.socket_connection.SocketConnection]
+  Returns: New builder object
+  */
+  static SocketConnectionGidBuilder builder()
+  {
+    return new SocketConnectionGidBuilder;
+  }
+
+  /**
+      Get `socket` property.
+      Returns: The underlying [gio.socket.Socket].
+  */
+  @property gio.socket.Socket socket()
+  {
+    return getSocket();
   }
 
   /**
@@ -229,5 +248,29 @@ class SocketConnection : gio.iostream.IOStream
     bool _retval;
     _retval = cast(bool)g_socket_connection_is_connected(cast(GSocketConnection*)this._cPtr);
     return _retval;
+  }
+}
+
+class SocketConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
+{
+
+  /**
+      Set `socket` property.
+      Params:
+        propval = The underlying [gio.socket.Socket].
+      Returns: Builder instance for fluent chaining
+  */
+  T socket(gio.socket.Socket propval)
+  {
+    return setProperty("socket", propval);
+  }
+}
+
+/// Fluent builder for [gio.socket_connection.SocketConnection]
+final class SocketConnectionGidBuilder : SocketConnectionGidBuilderImpl!SocketConnectionGidBuilder
+{
+  SocketConnection build()
+  {
+    return new SocketConnection(cast(void*)createGObject(SocketConnection._getGType), No.Take);
   }
 }

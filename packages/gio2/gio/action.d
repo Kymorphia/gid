@@ -9,6 +9,7 @@ import gio.types;
 import glib.error;
 import glib.variant;
 import glib.variant_type;
+import gobject.gid_builder;
 
 /**
     [gio.action.Action] represents a single named action.
@@ -301,4 +302,8 @@ interface Action
       Returns: the state type, if the action is stateful
   */
   glib.variant_type.VariantType getStateType();
+}
+
+interface ActionGidBuilderImpl(T)
+{
 }

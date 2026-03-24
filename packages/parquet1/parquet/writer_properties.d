@@ -3,6 +3,7 @@ module parquet.writer_properties;
 
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
@@ -35,6 +36,15 @@ class WriterProperties : gobject.object.ObjectWrap
   override WriterProperties self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [parquet.writer_properties.WriterProperties]
+  Returns: New builder object
+  */
+  static WriterPropertiesGidBuilder builder()
+  {
+    return new WriterPropertiesGidBuilder;
   }
 
   /** */
@@ -139,5 +149,18 @@ class WriterProperties : gobject.object.ObjectWrap
   void setMaxRowGroupLength(long length)
   {
     gparquet_writer_properties_set_max_row_group_length(cast(GParquetWriterProperties*)this._cPtr, length);
+  }
+}
+
+class WriterPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.writer_properties.WriterProperties]
+final class WriterPropertiesGidBuilder : WriterPropertiesGidBuilderImpl!WriterPropertiesGidBuilder
+{
+  WriterProperties build()
+  {
+    return new WriterProperties(cast(void*)createGObject(WriterProperties._getGType), Yes.Take);
   }
 }

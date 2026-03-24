@@ -7,6 +7,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.widget;
 
 /**
@@ -56,6 +57,15 @@ class TimedAnimation : adw.animation.Animation
   }
 
   /**
+  Get builder for [adw.timed_animation.TimedAnimation]
+  Returns: New builder object
+  */
+  static TimedAnimationGidBuilder builder()
+  {
+    return new TimedAnimationGidBuilder;
+  }
+
+  /**
       Get `alternate` property.
       Returns: Whether the animation changes direction on every iteration.
   */
@@ -71,7 +81,7 @@ class TimedAnimation : adw.animation.Animation
   */
   @property void alternate(bool propval)
   {
-    return setAlternate(propval);
+    setAlternate(propval);
   }
 
   /**
@@ -100,7 +110,7 @@ class TimedAnimation : adw.animation.Animation
   */
   @property void duration(uint propval)
   {
-    return setDuration(propval);
+    setDuration(propval);
   }
 
   /**
@@ -127,7 +137,7 @@ class TimedAnimation : adw.animation.Animation
   */
   @property void easing(adw.types.Easing propval)
   {
-    return setEasing(propval);
+    setEasing(propval);
   }
 
   /**
@@ -150,7 +160,7 @@ class TimedAnimation : adw.animation.Animation
   */
   @property void repeatCount(uint propval)
   {
-    return setRepeatCount(propval);
+    setRepeatCount(propval);
   }
 
   /**
@@ -169,7 +179,7 @@ class TimedAnimation : adw.animation.Animation
   */
   @property void reverse(bool propval)
   {
-    return setReverse(propval);
+    setReverse(propval);
   }
 
   /**
@@ -200,7 +210,7 @@ class TimedAnimation : adw.animation.Animation
   */
   @property void valueFrom(double propval)
   {
-    return setValueFrom(propval);
+    setValueFrom(propval);
   }
 
   /**
@@ -231,7 +241,7 @@ class TimedAnimation : adw.animation.Animation
   */
   @property void valueTo(double propval)
   {
-    return setValueTo(propval);
+    setValueTo(propval);
   }
 
   /**
@@ -424,5 +434,118 @@ class TimedAnimation : adw.animation.Animation
   void setValueTo(double value)
   {
     adw_timed_animation_set_value_to(cast(AdwTimedAnimation*)this._cPtr, value);
+  }
+}
+
+class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
+{
+
+  /**
+      Set `alternate` property.
+      Params:
+        propval = Whether the animation changes direction on every iteration.
+      Returns: Builder instance for fluent chaining
+  */
+  T alternate(bool propval)
+  {
+    return setProperty("alternate", propval);
+  }
+
+  /**
+      Set `duration` property.
+      Params:
+        propval = Duration of the animation, in milliseconds.
+          
+          Describes how much time the animation will take.
+          
+          If the animation repeats more than once, describes the duration of one
+          iteration.
+      Returns: Builder instance for fluent chaining
+  */
+  T duration(uint propval)
+  {
+    return setProperty("duration", propval);
+  }
+
+  /**
+      Set `easing` property.
+      Params:
+        propval = Easing function used in the animation.
+          
+          Describes the curve the value is interpolated on.
+          
+          See `enum@Easing` for the description of specific easing functions.
+      Returns: Builder instance for fluent chaining
+  */
+  T easing(adw.types.Easing propval)
+  {
+    return setProperty("easing", propval);
+  }
+
+  /**
+      Set `repeatCount` property.
+      Params:
+        propval = Number of times the animation will play.
+          
+          If set to 0, the animation will repeat endlessly.
+      Returns: Builder instance for fluent chaining
+  */
+  T repeatCount(uint propval)
+  {
+    return setProperty("repeat-count", propval);
+  }
+
+  /**
+      Set `reverse` property.
+      Params:
+        propval = Whether the animation plays backwards.
+      Returns: Builder instance for fluent chaining
+  */
+  T reverse(bool propval)
+  {
+    return setProperty("reverse", propval);
+  }
+
+  /**
+      Set `valueFrom` property.
+      Params:
+        propval = The value to animate from.
+          
+          The animation will start at this value and end at
+          `property@TimedAnimation:value-to`.
+          
+          If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
+          this value instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T valueFrom(double propval)
+  {
+    return setProperty("value-from", propval);
+  }
+
+  /**
+      Set `valueTo` property.
+      Params:
+        propval = The value to animate to.
+          
+          The animation will start at `property@TimedAnimation:value-from` and end at
+          this value.
+          
+          If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
+          at this value instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T valueTo(double propval)
+  {
+    return setProperty("value-to", propval);
+  }
+}
+
+/// Fluent builder for [adw.timed_animation.TimedAnimation]
+final class TimedAnimationGidBuilder : TimedAnimationGidBuilderImpl!TimedAnimationGidBuilder
+{
+  TimedAnimation build()
+  {
+    return new TimedAnimation(cast(void*)createGObject(TimedAnimation._getGType), No.Take);
   }
 }

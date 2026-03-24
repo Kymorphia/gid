@@ -8,6 +8,7 @@ public import atk.range;
 public import atk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.value;
 
 /**
@@ -381,4 +382,8 @@ template ValueT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
   }
+}
+
+template ValueGidBuilderT()
+{
 }

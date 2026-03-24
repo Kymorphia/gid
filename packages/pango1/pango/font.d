@@ -4,6 +4,7 @@ module pango.font;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import harfbuzz.feature;
 import pango.c.functions;
@@ -47,6 +48,15 @@ class Font : gobject.object.ObjectWrap
   override Font self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.font.Font]
+  Returns: New builder object
+  */
+  static FontGidBuilder builder()
+  {
+    return new FontGidBuilder;
   }
 
   /**
@@ -287,5 +297,18 @@ class Font : gobject.object.ObjectWrap
     _cretval = pango_font_serialize(cast(PangoFont*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class FontGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.font.Font]
+final class FontGidBuilder : FontGidBuilderImpl!FontGidBuilder
+{
+  Font build()
+  {
+    return new Font(cast(void*)createGObject(Font._getGType), No.Take);
   }
 }

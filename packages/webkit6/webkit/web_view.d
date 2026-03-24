@@ -15,6 +15,7 @@ import glib.bytes;
 import glib.error;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -101,6 +102,27 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
+  Get builder for [webkit.web_view.WebView]
+  Returns: New builder object
+  */
+  static WebViewGidBuilder builder()
+  {
+    return new WebViewGidBuilder;
+  }
+
+  /**
+      Get `automationPresentationType` property.
+      Returns: The #WebKitAutomationBrowsingContextPresentation of #WebKitWebView. This should only be used when
+        creating a new #WebKitWebView as a response to #WebKitAutomationSession::create-web-view
+        signal request. If the new WebView was added to a new tab of current browsing context window
+        [webkit.types.AutomationBrowsingContextPresentation.Tab] should be used.
+  */
+  @property webkit.types.AutomationBrowsingContextPresentation automationPresentationType()
+  {
+    return getAutomationPresentationType();
+  }
+
+  /**
       Get `cameraCaptureState` property.
       Returns: Capture state of the camera device. Whenever the user grants a media-request sent by the web
         page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
@@ -136,7 +158,25 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   @property void cameraCaptureState(webkit.types.MediaCaptureState propval)
   {
-    return setCameraCaptureState(propval);
+    setCameraCaptureState(propval);
+  }
+
+  /**
+      Get `defaultContentSecurityPolicy` property.
+      Returns: The default Content-Security-Policy used by the webview as if it were set
+        by an HTTP header.
+        
+        This applies to all content loaded including through navigation or via the various
+        webkit_web_view_load_\* APIs. However do note that many WebKit APIs bypass
+        Content-Security-Policy in general such as #WebKitUserContentManager and
+        webkit_web_view_run_javascript().
+        
+        Policies are additive so if a website sets its own policy it still applies
+        on top of the policy set here.
+  */
+  @property string defaultContentSecurityPolicy()
+  {
+    return getDefaultContentSecurityPolicy();
   }
 
   /**
@@ -175,7 +215,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   @property void displayCaptureState(webkit.types.MediaCaptureState propval)
   {
-    return setDisplayCaptureState(propval);
+    setDisplayCaptureState(propval);
   }
 
   /**
@@ -196,7 +236,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   @property void editable(bool propval)
   {
-    return setEditable(propval);
+    setEditable(propval);
   }
 
   /**
@@ -242,7 +282,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   @property void isMuted(bool propval)
   {
-    return setIsMuted(propval);
+    setIsMuted(propval);
   }
 
   /**
@@ -290,7 +330,16 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   @property void microphoneCaptureState(webkit.types.MediaCaptureState propval)
   {
-    return setMicrophoneCaptureState(propval);
+    setMicrophoneCaptureState(propval);
+  }
+
+  /**
+      Get `networkSession` property.
+      Returns: The #WebKitNetworkSession of the view
+  */
+  @property webkit.network_session.NetworkSession networkSession()
+  {
+    return getNetworkSession();
   }
 
   /**
@@ -309,7 +358,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   @property void settings(webkit.settings.Settings propval)
   {
-    return setSettings(propval);
+    setSettings(propval);
   }
 
   /**
@@ -333,6 +382,48 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
+      Get `userContentManager` property.
+      Returns: The #WebKitUserContentManager of the view.
+  */
+  @property webkit.user_content_manager.UserContentManager userContentManager()
+  {
+    return getUserContentManager();
+  }
+
+  /**
+      Get `webContext` property.
+      Returns: The #WebKitWebContext of the view.
+  */
+  @property webkit.web_context.WebContext webContext()
+  {
+    return gobject.object.ObjectWrap.getProperty!(webkit.web_context.WebContext)("web-context");
+  }
+
+  /**
+      Get `webExtensionMode` property.
+      Returns: This configures @web_view to treat the content as a WebExtension.
+        
+        Note that this refers to the web standard [WebExtensions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
+        and not WebKitWebExtensions.
+        
+        In practice this limits the Content-Security-Policies that are allowed to be set. Some details can be found in
+        [Chrome's documentation](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/#content-security-policy).
+  */
+  @property webkit.types.WebExtensionMode webExtensionMode()
+  {
+    return getWebExtensionMode();
+  }
+
+  /**
+      Get `websitePolicies` property.
+      Returns: The #WebKitWebsitePolicies for the view.
+  */
+  @property webkit.website_policies.WebsitePolicies websitePolicies()
+  {
+    return getWebsitePolicies();
+  }
+
+  /**
       Get `zoomLevel` property.
       Returns: The zoom level of the #WebKitWebView content.
         See [webkit.web_view.WebView.setZoomLevel] for more details.
@@ -350,7 +441,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   @property void zoomLevel(double propval)
   {
-    return setZoomLevel(propval);
+    setZoomLevel(propval);
   }
 
   /**
@@ -3429,5 +3520,237 @@ class WebView : webkit.web_view_base.WebViewBase
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("web-process-terminated", closure, after);
+  }
+}
+
+class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!T
+{
+
+
+  /**
+      Set `automationPresentationType` property.
+      Params:
+        propval = The #WebKitAutomationBrowsingContextPresentation of #WebKitWebView. This should only be used when
+          creating a new #WebKitWebView as a response to #WebKitAutomationSession::create-web-view
+          signal request. If the new WebView was added to a new tab of current browsing context window
+          [webkit.types.AutomationBrowsingContextPresentation.Tab] should be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T automationPresentationType(webkit.types.AutomationBrowsingContextPresentation propval)
+  {
+    return setProperty("automation-presentation-type", propval);
+  }
+
+  /**
+      Set `cameraCaptureState` property.
+      Params:
+        propval = Capture state of the camera device. Whenever the user grants a media-request sent by the web
+          page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
+          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          
+          The application can monitor this property and provide a visual indicator allowing to optionally
+          deactivate or mute the capture device by setting this property respectively to
+          [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+          
+          If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+          can still re-request the permission to the user. Permission desision caching is left to the
+          application.
+      Returns: Builder instance for fluent chaining
+  */
+  T cameraCaptureState(webkit.types.MediaCaptureState propval)
+  {
+    return setProperty("camera-capture-state", propval);
+  }
+
+  /**
+      Set `defaultContentSecurityPolicy` property.
+      Params:
+        propval = The default Content-Security-Policy used by the webview as if it were set
+          by an HTTP header.
+          
+          This applies to all content loaded including through navigation or via the various
+          webkit_web_view_load_\* APIs. However do note that many WebKit APIs bypass
+          Content-Security-Policy in general such as #WebKitUserContentManager and
+          webkit_web_view_run_javascript().
+          
+          Policies are additive so if a website sets its own policy it still applies
+          on top of the policy set here.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultContentSecurityPolicy(string propval)
+  {
+    return setProperty("default-content-security-policy", propval);
+  }
+
+  /**
+      Set `displayCaptureState` property.
+      Params:
+        propval = Capture state of the display device. Whenever the user grants a media-request sent by the web
+          page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
+          property will be set to [webkit.types.MediaCaptureState.Active].
+          
+          The application can monitor this property and provide a visual indicator allowing to
+          optionally deactivate or mute the capture device by setting this property respectively to
+          [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+          
+          If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+          can still re-request the permission to the user. Permission desision caching is left to the
+          application.
+      Returns: Builder instance for fluent chaining
+  */
+  T displayCaptureState(webkit.types.MediaCaptureState propval)
+  {
+    return setProperty("display-capture-state", propval);
+  }
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the pages loaded inside #WebKitWebView are editable. For more
+          information see [webkit.web_view.WebView.setEditable].
+      Returns: Builder instance for fluent chaining
+  */
+  T editable(bool propval)
+  {
+    return setProperty("editable", propval);
+  }
+
+  /**
+      Set `isMuted` property.
+      Params:
+        propval = Whether the #WebKitWebView audio is muted. When true, audio is silenced.
+          It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
+      Returns: Builder instance for fluent chaining
+  */
+  T isMuted(bool propval)
+  {
+    return setProperty("is-muted", propval);
+  }
+
+  /**
+      Set `microphoneCaptureState` property.
+      Params:
+        propval = Capture state of the microphone device. Whenever the user grants a media-request sent by the web
+          page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
+          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          
+          The application can monitor this property and provide a visual indicator allowing to
+          optionally deactivate or mute the capture device by setting this property respectively to
+          [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
+          
+          If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
+          can still re-request the permission to the user. Permission desision caching is left to the
+          application.
+      Returns: Builder instance for fluent chaining
+  */
+  T microphoneCaptureState(webkit.types.MediaCaptureState propval)
+  {
+    return setProperty("microphone-capture-state", propval);
+  }
+
+  /**
+      Set `networkSession` property.
+      Params:
+        propval = The #WebKitNetworkSession of the view
+      Returns: Builder instance for fluent chaining
+  */
+  T networkSession(webkit.network_session.NetworkSession propval)
+  {
+    return setProperty("network-session", propval);
+  }
+
+  /**
+      Set `relatedView` property.
+      Params:
+        propval = The related #WebKitWebView used when creating the view to share the
+          same web process and network session. This property is not readable
+          because the related web view is only valid during the object construction.
+      Returns: Builder instance for fluent chaining
+  */
+  T relatedView(webkit.web_view.WebView propval)
+  {
+    return setProperty("related-view", propval);
+  }
+
+  /**
+      Set `settings` property.
+      Params:
+        propval = The #WebKitSettings of the view.
+      Returns: Builder instance for fluent chaining
+  */
+  T settings(webkit.settings.Settings propval)
+  {
+    return setProperty("settings", propval);
+  }
+
+  /**
+      Set `userContentManager` property.
+      Params:
+        propval = The #WebKitUserContentManager of the view.
+      Returns: Builder instance for fluent chaining
+  */
+  T userContentManager(webkit.user_content_manager.UserContentManager propval)
+  {
+    return setProperty("user-content-manager", propval);
+  }
+
+  /**
+      Set `webContext` property.
+      Params:
+        propval = The #WebKitWebContext of the view.
+      Returns: Builder instance for fluent chaining
+  */
+  T webContext(webkit.web_context.WebContext propval)
+  {
+    return setProperty("web-context", propval);
+  }
+
+  /**
+      Set `webExtensionMode` property.
+      Params:
+        propval = This configures @web_view to treat the content as a WebExtension.
+          
+          Note that this refers to the web standard [WebExtensions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
+          and not WebKitWebExtensions.
+          
+          In practice this limits the Content-Security-Policies that are allowed to be set. Some details can be found in
+          [Chrome's documentation](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/#content-security-policy).
+      Returns: Builder instance for fluent chaining
+  */
+  T webExtensionMode(webkit.types.WebExtensionMode propval)
+  {
+    return setProperty("web-extension-mode", propval);
+  }
+
+  /**
+      Set `websitePolicies` property.
+      Params:
+        propval = The #WebKitWebsitePolicies for the view.
+      Returns: Builder instance for fluent chaining
+  */
+  T websitePolicies(webkit.website_policies.WebsitePolicies propval)
+  {
+    return setProperty("website-policies", propval);
+  }
+
+  /**
+      Set `zoomLevel` property.
+      Params:
+        propval = The zoom level of the #WebKitWebView content.
+          See [webkit.web_view.WebView.setZoomLevel] for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T zoomLevel(double propval)
+  {
+    return setProperty("zoom-level", propval);
+  }
+}
+
+/// Fluent builder for [webkit.web_view.WebView]
+final class WebViewGidBuilder : WebViewGidBuilderImpl!WebViewGidBuilder
+{
+  WebView build()
+  {
+    return new WebView(cast(void*)createGObject(WebView._getGType), No.Take);
   }
 }

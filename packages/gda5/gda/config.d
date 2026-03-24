@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -41,6 +42,15 @@ class Config : gobject.object.ObjectWrap
   override Config self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.config.Config]
+  Returns: New builder object
+  */
+  static ConfigGidBuilder builder()
+  {
+    return new ConfigGidBuilder;
   }
 
   /**
@@ -485,6 +495,41 @@ class Config : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("dsn-to-be-removed", closure, after);
+  }
+}
+
+class ConfigGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `systemFilename` property.
+      Params:
+        propval = File to use for system-wide DSN list. When changed, the whole list of DSN will be reloaded.
+      Returns: Builder instance for fluent chaining
+  */
+  T systemFilename(string propval)
+  {
+    return setProperty("system-filename", propval);
+  }
+
+  /**
+      Set `userFilename` property.
+      Params:
+        propval = File to use for per-user DSN list. When changed, the whole list of DSN will be reloaded.
+      Returns: Builder instance for fluent chaining
+  */
+  T userFilename(string propval)
+  {
+    return setProperty("user-filename", propval);
+  }
+}
+
+/// Fluent builder for [gda.config.Config]
+final class ConfigGidBuilder : ConfigGidBuilderImpl!ConfigGidBuilder
+{
+  Config build()
+  {
+    return new Config(cast(void*)createGObject(Config._getGType), No.Take);
   }
 }
 

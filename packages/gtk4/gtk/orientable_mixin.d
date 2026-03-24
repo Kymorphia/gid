@@ -3,6 +3,7 @@ module gtk.orientable_mixin;
 
 public import gtk.orientable_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -39,7 +40,7 @@ template OrientableT()
   */
   @property void orientation(gtk.types.Orientation propval)
   {
-    return setOrientation(propval);
+    setOrientation(propval);
   }
 
   /**
@@ -63,5 +64,20 @@ template OrientableT()
   override void setOrientation(gtk.types.Orientation orientation)
   {
     gtk_orientable_set_orientation(cast(GtkOrientable*)this._cPtr, orientation);
+  }
+}
+
+template OrientableGidBuilderT()
+{
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The orientation of the orientable.
+      Returns: Builder instance for fluent chaining
+  */
+  T orientation(gtk.types.Orientation propval)
+  {
+    return setProperty("orientation", propval);
   }
 }

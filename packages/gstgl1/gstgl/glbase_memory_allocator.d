@@ -2,6 +2,7 @@
 module gstgl.glbase_memory_allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.allocator;
 import gstgl.c.functions;
 import gstgl.c.types;
@@ -36,5 +37,27 @@ class GLBaseMemoryAllocator : gst.allocator.Allocator
   override GLBaseMemoryAllocator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glbase_memory_allocator.GLBaseMemoryAllocator]
+  Returns: New builder object
+  */
+  static GLBaseMemoryAllocatorGidBuilder builder()
+  {
+    return new GLBaseMemoryAllocatorGidBuilder;
+  }
+}
+
+class GLBaseMemoryAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glbase_memory_allocator.GLBaseMemoryAllocator]
+final class GLBaseMemoryAllocatorGidBuilder : GLBaseMemoryAllocatorGidBuilderImpl!GLBaseMemoryAllocatorGidBuilder
+{
+  GLBaseMemoryAllocator build()
+  {
+    return new GLBaseMemoryAllocator(cast(void*)createGObject(GLBaseMemoryAllocator._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.color_selection_dialog;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -40,6 +41,15 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   override ColorSelectionDialog self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.color_selection_dialog.ColorSelectionDialog]
+  Returns: New builder object
+  */
+  static ColorSelectionDialogGidBuilder builder()
+  {
+    return new ColorSelectionDialogGidBuilder;
   }
 
   /** */
@@ -91,5 +101,19 @@ class ColorSelectionDialog : gtk.dialog.Dialog
     _cretval = gtk_color_selection_dialog_get_color_selection(cast(GtkColorSelectionDialog*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class ColorSelectionDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.color_selection_dialog.ColorSelectionDialog]
+final class ColorSelectionDialogGidBuilder : ColorSelectionDialogGidBuilderImpl!ColorSelectionDialogGidBuilder
+{
+  ColorSelectionDialog build()
+  {
+    return new ColorSelectionDialog(cast(void*)createGObject(ColorSelectionDialog._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,21 @@ class Tensor : gobject.object.ObjectWrap
   override Tensor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.tensor.Tensor]
+  Returns: New builder object
+  */
+  static TensorGidBuilder builder()
+  {
+    return new TensorGidBuilder;
+  }
+
+  /** */
+  @property arrow.buffer.Buffer buffer()
+  {
+    return getBuffer();
   }
 
   /** */
@@ -187,5 +203,30 @@ class Tensor : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)garrow_tensor_is_row_major(cast(GArrowTensor*)this._cPtr);
     return _retval;
+  }
+}
+
+class TensorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T buffer(arrow.buffer.Buffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /** */
+  T tensor(void* propval)
+  {
+    return setProperty("tensor", propval);
+  }
+}
+
+/// Fluent builder for [arrow.tensor.Tensor]
+final class TensorGidBuilder : TensorGidBuilderImpl!TensorGidBuilder
+{
+  Tensor build()
+  {
+    return new Tensor(cast(void*)createGObject(Tensor._getGType), Yes.Take);
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "gtk3",
   "description": "D binding for the Gtk3 library - Gtk3 graphics toolkit library",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gtk.org",

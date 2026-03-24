@@ -12,6 +12,7 @@ import gio.seekable;
 import gio.seekable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -56,6 +57,15 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
   override FileOutputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.file_output_stream.FileOutputStream]
+  Returns: New builder object
+  */
+  static FileOutputStreamGidBuilder builder()
+  {
+    return new FileOutputStreamGidBuilder;
   }
 
   mixin SeekableT!();
@@ -159,5 +169,20 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class FileOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
+{
+
+  mixin SeekableGidBuilderT!();
+}
+
+/// Fluent builder for [gio.file_output_stream.FileOutputStream]
+final class FileOutputStreamGidBuilder : FileOutputStreamGidBuilderImpl!FileOutputStreamGidBuilder
+{
+  FileOutputStream build()
+  {
+    return new FileOutputStream(cast(void*)createGObject(FileOutputStream._getGType), No.Take);
   }
 }

@@ -12,6 +12,7 @@ import gio.seekable;
 import gio.seekable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +48,15 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   }
 
   /**
+  Get builder for [gio.data_input_stream.DataInputStream]
+  Returns: New builder object
+  */
+  static DataInputStreamGidBuilder builder()
+  {
+    return new DataInputStreamGidBuilder;
+  }
+
+  /**
       Get `byteOrder` property.
       Returns: The :byte-order property determines the byte ordering that
         is used when reading multi-byte entities (such as integers)
@@ -66,7 +76,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   */
   @property void byteOrder(gio.types.DataStreamByteOrder propval)
   {
-    return setByteOrder(propval);
+    setByteOrder(propval);
   }
 
   /**
@@ -87,7 +97,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   */
   @property void newlineType(gio.types.DataStreamNewlineType propval)
   {
-    return setNewlineType(propval);
+    setNewlineType(propval);
   }
 
   /**
@@ -620,5 +630,44 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   void setNewlineType(gio.types.DataStreamNewlineType type)
   {
     g_data_input_stream_set_newline_type(cast(GDataInputStream*)this._cPtr, type);
+  }
+}
+
+class DataInputStreamGidBuilderImpl(T) : gio.buffered_input_stream.BufferedInputStreamGidBuilderImpl!T
+{
+
+
+  /**
+      Set `byteOrder` property.
+      Params:
+        propval = The :byte-order property determines the byte ordering that
+          is used when reading multi-byte entities (such as integers)
+          from the stream.
+      Returns: Builder instance for fluent chaining
+  */
+  T byteOrder(gio.types.DataStreamByteOrder propval)
+  {
+    return setProperty("byte-order", propval);
+  }
+
+  /**
+      Set `newlineType` property.
+      Params:
+        propval = The :newline-type property determines what is considered
+          as a line ending when reading complete lines from the stream.
+      Returns: Builder instance for fluent chaining
+  */
+  T newlineType(gio.types.DataStreamNewlineType propval)
+  {
+    return setProperty("newline-type", propval);
+  }
+}
+
+/// Fluent builder for [gio.data_input_stream.DataInputStream]
+final class DataInputStreamGidBuilder : DataInputStreamGidBuilderImpl!DataInputStreamGidBuilder
+{
+  DataInputStream build()
+  {
+    return new DataInputStream(cast(void*)createGObject(DataInputStream._getGType), Yes.Take);
   }
 }

@@ -9,6 +9,7 @@ import gio.menu_model;
 import gio.types;
 import glib.variant;
 import glib.variant_type;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -41,6 +42,15 @@ class MenuItem : gobject.object.ObjectWrap
   override MenuItem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.menu_item.MenuItem]
+  Returns: New builder object
+  */
+  static MenuItemGidBuilder builder()
+  {
+    return new MenuItemGidBuilder;
   }
 
   /**
@@ -412,5 +422,18 @@ class MenuItem : gobject.object.ObjectWrap
   void setSubmenu(gio.menu_model.MenuModel submenu = null)
   {
     g_menu_item_set_submenu(cast(GMenuItem*)this._cPtr, submenu ? cast(GMenuModel*)submenu._cPtr(No.Dup) : null);
+  }
+}
+
+class MenuItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.menu_item.MenuItem]
+final class MenuItemGidBuilder : MenuItemGidBuilderImpl!MenuItemGidBuilder
+{
+  MenuItem build()
+  {
+    return new MenuItem(cast(void*)createGObject(MenuItem._getGType), Yes.Take);
   }
 }

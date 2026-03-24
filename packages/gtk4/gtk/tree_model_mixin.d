@@ -4,6 +4,7 @@ module gtk.tree_model_mixin;
 public import gtk.tree_model_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.types;
 public import gobject.value;
@@ -895,4 +896,8 @@ template TreeModelT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-inserted", closure, after);
   }
+}
+
+template TreeModelGidBuilderT()
+{
 }

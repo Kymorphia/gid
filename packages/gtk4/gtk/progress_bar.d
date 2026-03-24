@@ -2,6 +2,7 @@
 module gtk.progress_bar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_range;
@@ -95,6 +96,15 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
+  Get builder for [gtk.progress_bar.ProgressBar]
+  Returns: New builder object
+  */
+  static ProgressBarGidBuilder builder()
+  {
+    return new ProgressBarGidBuilder;
+  }
+
+  /**
       Get `ellipsize` property.
       Returns: The preferred place to ellipsize the string.
         
@@ -126,7 +136,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
-    return setEllipsize(propval);
+    setEllipsize(propval);
   }
 
   /**
@@ -145,7 +155,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void fraction(double propval)
   {
-    return setFraction(propval);
+    setFraction(propval);
   }
 
   /**
@@ -164,7 +174,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void inverted(bool propval)
   {
-    return setInverted(propval);
+    setInverted(propval);
   }
 
   /**
@@ -183,7 +193,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void pulseStep(double propval)
   {
-    return setPulseStep(propval);
+    setPulseStep(propval);
   }
 
   /**
@@ -220,7 +230,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void showText(bool propval)
   {
-    return setShowText(propval);
+    setShowText(propval);
   }
 
   /**
@@ -239,7 +249,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   @property void text(string propval)
   {
-    return setText(propval);
+    setText(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -442,5 +452,104 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_progress_bar_set_text(cast(GtkProgressBar*)this._cPtr, _text);
+  }
+}
+
+class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin AccessibleRangeGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string.
+          
+          The text will be ellipsized if the progress bar does not have enough room
+          to display the entire string, specified as a [pango.types.EllipsizeMode].
+          
+          Note that setting this property to a value other than
+          [pango.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+          only enough space to display the ellipsis ("..."). Another means to set a
+          progress bar's width is [gtk.widget.Widget.setSizeRequest].
+      Returns: Builder instance for fluent chaining
+  */
+  T ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setProperty("ellipsize", propval);
+  }
+
+  /**
+      Set `fraction` property.
+      Params:
+        propval = The fraction of total work that has been completed.
+      Returns: Builder instance for fluent chaining
+  */
+  T fraction(double propval)
+  {
+    return setProperty("fraction", propval);
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Invert the direction in which the progress bar grows.
+      Returns: Builder instance for fluent chaining
+  */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /**
+      Set `pulseStep` property.
+      Params:
+        propval = The fraction of total progress to move the bounding block when pulsed.
+      Returns: Builder instance for fluent chaining
+  */
+  T pulseStep(double propval)
+  {
+    return setProperty("pulse-step", propval);
+  }
+
+  /**
+      Set `showText` property.
+      Params:
+        propval = Sets whether the progress bar will show a text in addition
+          to the bar itself.
+          
+          The shown text is either the value of the [gtk.progress_bar.ProgressBar.text]
+          property or, if that is null, the [gtk.progress_bar.ProgressBar.fraction]
+          value, as a percentage.
+          
+          To make a progress bar that is styled and sized suitably for showing text
+          (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+          to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
+      Returns: Builder instance for fluent chaining
+  */
+  T showText(bool propval)
+  {
+    return setProperty("show-text", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = Text to be displayed in the progress bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [gtk.progress_bar.ProgressBar]
+final class ProgressBarGidBuilder : ProgressBarGidBuilderImpl!ProgressBarGidBuilder
+{
+  ProgressBar build()
+  {
+    return new ProgressBar(cast(void*)createGObject(ProgressBar._getGType), No.Take);
   }
 }

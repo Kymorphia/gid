@@ -7,6 +7,7 @@ import adw.types;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -41,6 +42,24 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   override EnumListModel self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [adw.enum_list_model.EnumListModel]
+  Returns: New builder object
+  */
+  static EnumListModelGidBuilder builder()
+  {
+    return new EnumListModelGidBuilder;
+  }
+
+  /**
+      Get `enumType` property.
+      Returns: The type of the enum represented by the model.
+  */
+  @property gobject.types.GType enumType()
+  {
+    return getEnumType();
   }
 
   mixin ListModelT!();
@@ -84,5 +103,31 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
     gobject.types.GType _retval;
     _retval = adw_enum_list_model_get_enum_type(cast(AdwEnumListModel*)this._cPtr);
     return _retval;
+  }
+}
+
+class EnumListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `enumType` property.
+      Params:
+        propval = The type of the enum represented by the model.
+      Returns: Builder instance for fluent chaining
+  */
+  T enumType(gobject.types.GType propval)
+  {
+    return setProperty("enum-type", propval);
+  }
+}
+
+/// Fluent builder for [adw.enum_list_model.EnumListModel]
+final class EnumListModelGidBuilder : EnumListModelGidBuilderImpl!EnumListModelGidBuilder
+{
+  EnumListModel build()
+  {
+    return new EnumListModel(cast(void*)createGObject(EnumListModel._getGType), Yes.Take);
   }
 }

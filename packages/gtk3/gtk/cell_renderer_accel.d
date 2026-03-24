@@ -4,6 +4,7 @@ module gtk.cell_renderer_accel;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -43,6 +44,15 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   override CellRendererAccel self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer_accel.CellRendererAccel]
+  Returns: New builder object
+  */
+  static CellRendererAccelGidBuilder builder()
+  {
+    return new CellRendererAccelGidBuilder;
   }
 
   /**
@@ -252,5 +262,71 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accel-edited", closure, after);
+  }
+}
+
+class CellRendererAccelGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTextGidBuilderImpl!T
+{
+
+  /**
+      Set `accelKey` property.
+      Params:
+        propval = The keyval of the accelerator.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelKey(uint propval)
+  {
+    return setProperty("accel-key", propval);
+  }
+
+  /**
+      Set `accelMode` property.
+      Params:
+        propval = Determines if the edited accelerators are GTK+ accelerators. If
+          they are, consumed modifiers are suppressed, only accelerators
+          accepted by GTK+ are allowed, and the accelerators are rendered
+          in the same way as they are in menus.
+          
+          If the mode is set to [gtk.types.CellRendererAccelMode.ModifierTap]
+          then bare modifiers can be set as accelerators by tapping (ie:
+          pressing and immediately releasing) them.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelMode(gtk.types.CellRendererAccelMode propval)
+  {
+    return setProperty("accel-mode", propval);
+  }
+
+  /**
+      Set `accelMods` property.
+      Params:
+        propval = The modifier mask of the accelerator.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelMods(gdk.types.ModifierType propval)
+  {
+    return setProperty("accel-mods", propval);
+  }
+
+  /**
+      Set `keycode` property.
+      Params:
+        propval = The hardware keycode of the accelerator. Note that the hardware keycode is
+          only relevant if the key does not have a keyval. Normally, the keyboard
+          configuration should assign keyvals to all keys.
+      Returns: Builder instance for fluent chaining
+  */
+  T keycode(uint propval)
+  {
+    return setProperty("keycode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_accel.CellRendererAccel]
+final class CellRendererAccelGidBuilder : CellRendererAccelGidBuilderImpl!CellRendererAccelGidBuilder
+{
+  CellRendererAccel build()
+  {
+    return new CellRendererAccel(cast(void*)createGObject(CellRendererAccel._getGType), No.Take);
   }
 }

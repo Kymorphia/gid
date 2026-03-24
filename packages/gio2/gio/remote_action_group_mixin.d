@@ -7,6 +7,7 @@ public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
 public import glib.variant;
+public import gobject.gid_builder;
 
 /**
     The [gio.remote_action_group.RemoteActionGroup] interface is implemented by [gio.action_group.ActionGroup]
@@ -77,4 +78,8 @@ template RemoteActionGroupT()
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)this._cPtr, _actionName, value ? cast(GVariant*)value._cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData._cPtr(No.Dup) : null);
   }
+}
+
+template RemoteActionGroupGidBuilderT()
+{
 }

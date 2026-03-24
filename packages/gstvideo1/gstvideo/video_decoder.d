@@ -2,6 +2,7 @@
 module gstvideo.video_decoder;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
@@ -176,6 +177,15 @@ class VideoDecoder : gst.element.Element
   }
 
   /**
+  Get builder for [gstvideo.video_decoder.VideoDecoder]
+  Returns: New builder object
+  */
+  static VideoDecoderGidBuilder builder()
+  {
+    return new VideoDecoderGidBuilder;
+  }
+
+  /**
       Get `automaticRequestSyncPointFlags` property.
       Returns: GstVideoDecoderRequestSyncPointFlags to use for the automatically
         requested sync points if `automatic-request-sync-points` is enabled.
@@ -258,7 +268,7 @@ class VideoDecoder : gst.element.Element
   */
   @property void maxErrors(int propval)
   {
-    return setMaxErrors(propval);
+    setMaxErrors(propval);
   }
 
   /**
@@ -987,5 +997,97 @@ class VideoDecoder : gst.element.Element
   void setUseDefaultPadAcceptcaps(bool use)
   {
     gst_video_decoder_set_use_default_pad_acceptcaps(cast(GstVideoDecoder*)this._cPtr, use);
+  }
+}
+
+class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `automaticRequestSyncPointFlags` property.
+      Params:
+        propval = GstVideoDecoderRequestSyncPointFlags to use for the automatically
+          requested sync points if `automatic-request-sync-points` is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T automaticRequestSyncPointFlags(gstvideo.types.VideoDecoderRequestSyncPointFlags propval)
+  {
+    return setProperty("automatic-request-sync-point-flags", propval);
+  }
+
+  /**
+      Set `automaticRequestSyncPoints` property.
+      Params:
+        propval = If set to true the decoder will automatically request sync points when
+          it seems like a good idea, e.g. if the first frames are not key frames or
+          if packet loss was reported by upstream.
+      Returns: Builder instance for fluent chaining
+  */
+  T automaticRequestSyncPoints(bool propval)
+  {
+    return setProperty("automatic-request-sync-points", propval);
+  }
+
+  /**
+      Set `discardCorruptedFrames` property.
+      Params:
+        propval = If set to true the decoder will discard frames that are marked as
+          corrupted instead of outputting them.
+      Returns: Builder instance for fluent chaining
+  */
+  T discardCorruptedFrames(bool propval)
+  {
+    return setProperty("discard-corrupted-frames", propval);
+  }
+
+  /**
+      Set `maxErrors` property.
+      Params:
+        propval = Maximum number of tolerated consecutive decode errors. See
+          [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxErrors(int propval)
+  {
+    return setProperty("max-errors", propval);
+  }
+
+  /**
+      Set `minForceKeyUnitInterval` property.
+      Params:
+        propval = Minimum interval between force-key-unit events sent upstream by the
+          decoder. Setting this to 0 will cause every event to be handled, setting
+          this to [gst.types.CLOCK_TIME_NONE] will cause every event to be ignored.
+          
+          See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
+          force-key-unit events.
+      Returns: Builder instance for fluent chaining
+  */
+  T minForceKeyUnitInterval(ulong propval)
+  {
+    return setProperty("min-force-key-unit-interval", propval);
+  }
+
+  /**
+      Set `qos` property.
+      Params:
+        propval = If set to true the decoder will handle QoS events received
+          from downstream elements.
+          This includes dropping output frames which are detected as late
+          using the metrics reported by those events.
+      Returns: Builder instance for fluent chaining
+  */
+  T qos(bool propval)
+  {
+    return setProperty("qos", propval);
+  }
+}
+
+/// Fluent builder for [gstvideo.video_decoder.VideoDecoder]
+final class VideoDecoderGidBuilder : VideoDecoderGidBuilderImpl!VideoDecoderGidBuilder
+{
+  VideoDecoder build()
+  {
+    return new VideoDecoder(cast(void*)createGObject(VideoDecoder._getGType), No.Take);
   }
 }

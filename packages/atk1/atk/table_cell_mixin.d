@@ -7,6 +7,7 @@ public import atk.c.types;
 public import atk.object;
 public import atk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -118,4 +119,8 @@ template TableCellT()
     auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
+}
+
+template TableCellGidBuilderT()
+{
 }

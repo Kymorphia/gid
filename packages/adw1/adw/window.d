@@ -8,6 +8,7 @@ import adw.dialog;
 import adw.types;
 import gid.gid;
 import gio.list_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -129,6 +130,15 @@ class Window : gtk.window.Window
   }
 
   /**
+  Get builder for [adw.window.Window]
+  Returns: New builder object
+  */
+  static WindowGidBuilder builder()
+  {
+    return new WindowGidBuilder;
+  }
+
+  /**
       Get `content` property.
       Returns: The content widget.
         
@@ -148,7 +158,7 @@ class Window : gtk.window.Window
   */
   @property void content(gtk.widget.Widget propval)
   {
-    return setContent(propval);
+    setContent(propval);
   }
 
   /**
@@ -263,5 +273,32 @@ class Window : gtk.window.Window
   void setContent(gtk.widget.Widget content = null)
   {
     adw_window_set_content(cast(AdwWindow*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
+  }
+}
+
+class WindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+          
+          This property should always be used instead of [gtk.window.Window.child].
+      Returns: Builder instance for fluent chaining
+  */
+  T content(gtk.widget.Widget propval)
+  {
+    return setProperty("content", propval);
+  }
+}
+
+/// Fluent builder for [adw.window.Window]
+final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
+{
+  Window build()
+  {
+    return new Window(cast(void*)createGObject(Window._getGType), No.Take);
   }
 }

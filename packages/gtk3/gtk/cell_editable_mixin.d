@@ -5,6 +5,7 @@ public import gtk.cell_editable_iface_proxy;
 public import gdk.event;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -167,5 +168,20 @@ template CellEditableT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("remove-widget", closure, after);
+  }
+}
+
+template CellEditableGidBuilderT()
+{
+
+  /**
+      Set `editingCanceled` property.
+      Params:
+        propval = Indicates whether editing on the cell has been canceled.
+      Returns: Builder instance for fluent chaining
+  */
+  T editingCanceled(bool propval)
+  {
+    return setProperty("editing-canceled", propval);
   }
 }

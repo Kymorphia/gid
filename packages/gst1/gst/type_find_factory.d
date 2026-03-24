@@ -2,6 +2,7 @@
 module gst.type_find_factory;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.caps;
@@ -89,6 +90,15 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   }
 
   /**
+  Get builder for [gst.type_find_factory.TypeFindFactory]
+  Returns: New builder object
+  */
+  static TypeFindFactoryGidBuilder builder()
+  {
+    return new TypeFindFactoryGidBuilder;
+  }
+
+  /**
       Gets the list of all registered typefind factories. You must free the
       list using [gst.plugin_feature.PluginFeature.listFree].
       
@@ -167,5 +177,18 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
     bool _retval;
     _retval = cast(bool)gst_type_find_factory_has_function(cast(GstTypeFindFactory*)this._cPtr);
     return _retval;
+  }
+}
+
+class TypeFindFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.type_find_factory.TypeFindFactory]
+final class TypeFindFactoryGidBuilder : TypeFindFactoryGidBuilderImpl!TypeFindFactoryGidBuilder
+{
+  TypeFindFactory build()
+  {
+    return new TypeFindFactory(cast(void*)createGObject(TypeFindFactory._getGType), No.Take);
   }
 }

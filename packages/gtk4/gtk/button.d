@@ -3,6 +3,7 @@ module gtk.button;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -78,6 +79,15 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+  Get builder for [gtk.button.Button]
+  Returns: New builder object
+  */
+  static ButtonGidBuilder builder()
+  {
+    return new ButtonGidBuilder;
+  }
+
+  /**
       Get `canShrink` property.
       Returns: Whether the size of the button can be made smaller than the natural
         size of its contents.
@@ -105,7 +115,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void canShrink(bool propval)
   {
-    return setCanShrink(propval);
+    setCanShrink(propval);
   }
 
   /**
@@ -124,7 +134,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -143,7 +153,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void hasFrame(bool propval)
   {
-    return setHasFrame(propval);
+    setHasFrame(propval);
   }
 
   /**
@@ -162,7 +172,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -181,7 +191,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -202,7 +212,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -528,5 +538,93 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("clicked", closure, after);
+  }
+}
+
+class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = Whether the size of the button can be made smaller than the natural
+          size of its contents.
+          
+          For text buttons, setting this property will allow ellipsizing the label.
+          
+          If the contents of a button are an icon or a custom widget, setting this
+          property has no effect.
+      Returns: Builder instance for fluent chaining
+  */
+  T canShrink(bool propval)
+  {
+    return setProperty("can-shrink", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether the button has a frame.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval)
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon used to automatically populate the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Text of the label inside the button, if the button contains a label widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set, an underline in the text indicates that the following character is
+          to be used as mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gtk.button.Button]
+final class ButtonGidBuilder : ButtonGidBuilderImpl!ButtonGidBuilder
+{
+  Button build()
+  {
+    return new Button(cast(void*)createGObject(Button._getGType), No.Take);
   }
 }

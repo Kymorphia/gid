@@ -3,6 +3,7 @@ module gtk.accessible;
 
 public import gtk.accessible_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import gtk.atcontext;
@@ -243,4 +244,18 @@ interface Accessible
         values = an array of `GValues`, one for each state
   */
   void updateState(gtk.types.AccessibleState[] states, gobject.value.Value[] values);
+}
+
+interface AccessibleGidBuilderImpl(T)
+{
+
+  /**
+      Set `accessibleRole` property.
+      Params:
+        propval = The accessible role of the given [gtk.accessible.Accessible] implementation.
+          
+          The accessible role cannot be changed once set.
+      Returns: Builder instance for fluent chaining
+  */
+  T accessibleRole(gtk.types.AccessibleRole propval);
 }

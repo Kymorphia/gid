@@ -7,6 +7,7 @@ import adw.c.types;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import gtk.buildable;
@@ -89,6 +90,15 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
+  Get builder for [adw.breakpoint.Breakpoint]
+  Returns: New builder object
+  */
+  static BreakpointGidBuilder builder()
+  {
+    return new BreakpointGidBuilder;
+  }
+
+  /**
       Get `condition` property.
       Returns: The breakpoint's condition.
   */
@@ -104,7 +114,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void condition(adw.breakpoint_condition.BreakpointCondition propval)
   {
-    return setCondition(propval);
+    setCondition(propval);
   }
 
   mixin BuildableT!();
@@ -315,5 +325,31 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unapply", closure, after);
+  }
+}
+
+class BreakpointGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `condition` property.
+      Params:
+        propval = The breakpoint's condition.
+      Returns: Builder instance for fluent chaining
+  */
+  T condition(adw.breakpoint_condition.BreakpointCondition propval)
+  {
+    return setProperty("condition", propval);
+  }
+}
+
+/// Fluent builder for [adw.breakpoint.Breakpoint]
+final class BreakpointGidBuilder : BreakpointGidBuilderImpl!BreakpointGidBuilder
+{
+  Breakpoint build()
+  {
+    return new Breakpoint(cast(void*)createGObject(Breakpoint._getGType), Yes.Take);
   }
 }

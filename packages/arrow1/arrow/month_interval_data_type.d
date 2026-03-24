@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.interval_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
@@ -36,11 +37,33 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.month_interval_data_type.MonthIntervalDataType]
+  Returns: New builder object
+  */
+  static MonthIntervalDataTypeGidBuilder builder()
+  {
+    return new MonthIntervalDataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowMonthIntervalDataType* _cretval;
     _cretval = garrow_month_interval_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class MonthIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.IntervalDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_interval_data_type.MonthIntervalDataType]
+final class MonthIntervalDataTypeGidBuilder : MonthIntervalDataTypeGidBuilderImpl!MonthIntervalDataTypeGidBuilder
+{
+  MonthIntervalDataType build()
+  {
+    return new MonthIntervalDataType(cast(void*)createGObject(MonthIntervalDataType._getGType), Yes.Take);
   }
 }

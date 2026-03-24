@@ -9,6 +9,7 @@ import gdk.types;
 import gid.gid;
 import gio.app_launch_context;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -59,6 +60,21 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   override AppLaunchContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.app_launch_context.AppLaunchContext]
+  Returns: New builder object
+  */
+  static AppLaunchContextGidBuilder builder()
+  {
+    return new AppLaunchContextGidBuilder;
+  }
+
+  /** */
+  @property gdk.display.Display display()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.display.Display)("display");
   }
 
   /**
@@ -176,5 +192,24 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   void setTimestamp(uint timestamp)
   {
     gdk_app_launch_context_set_timestamp(cast(GdkAppLaunchContext*)this._cPtr, timestamp);
+  }
+}
+
+class AppLaunchContextGidBuilderImpl(T) : gio.app_launch_context.AppLaunchContextGidBuilderImpl!T
+{
+
+  /** */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.app_launch_context.AppLaunchContext]
+final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunchContextGidBuilder
+{
+  AppLaunchContext build()
+  {
+    return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), Yes.Take);
   }
 }

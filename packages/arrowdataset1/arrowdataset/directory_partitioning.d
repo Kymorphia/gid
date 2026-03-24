@@ -10,6 +10,7 @@ import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartitioning
@@ -40,6 +41,15 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.directory_partitioning.DirectoryPartitioning]
+  Returns: New builder object
+  */
+  static DirectoryPartitioningGidBuilder builder()
+  {
+    return new DirectoryPartitioningGidBuilder;
+  }
+
   /** */
   this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries = null, arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions options = null)
   {
@@ -51,5 +61,18 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class DirectoryPartitioningGidBuilderImpl(T) : arrowdataset.key_value_partitioning.KeyValuePartitioningGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.directory_partitioning.DirectoryPartitioning]
+final class DirectoryPartitioningGidBuilder : DirectoryPartitioningGidBuilderImpl!DirectoryPartitioningGidBuilder
+{
+  DirectoryPartitioning build()
+  {
+    return new DirectoryPartitioning(cast(void*)createGObject(DirectoryPartitioning._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.record_batch;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class RecordBatchIterator : gobject.object.ObjectWrap
   override RecordBatchIterator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.record_batch_iterator.RecordBatchIterator]
+  Returns: New builder object
+  */
+  static RecordBatchIteratorGidBuilder builder()
+  {
+    return new RecordBatchIteratorGidBuilder;
   }
 
   /** */
@@ -78,5 +88,24 @@ class RecordBatchIterator : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.record_batch.RecordBatch, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class RecordBatchIteratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T iterator(void* propval)
+  {
+    return setProperty("iterator", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch_iterator.RecordBatchIterator]
+final class RecordBatchIteratorGidBuilder : RecordBatchIteratorGidBuilderImpl!RecordBatchIteratorGidBuilder
+{
+  RecordBatchIterator build()
+  {
+    return new RecordBatchIterator(cast(void*)createGObject(RecordBatchIterator._getGType), Yes.Take);
   }
 }

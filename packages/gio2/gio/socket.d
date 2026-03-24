@@ -18,6 +18,7 @@ import gio.types;
 import glib.bytes;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -121,6 +122,15 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   }
 
   /**
+  Get builder for [gio.socket.Socket]
+  Returns: New builder object
+  */
+  static SocketGidBuilder builder()
+  {
+    return new SocketGidBuilder;
+  }
+
+  /**
       Get `blocking` property.
       Returns: Whether I/O on this socket is blocking.
   */
@@ -136,7 +146,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void blocking(bool propval)
   {
-    return setBlocking(propval);
+    setBlocking(propval);
   }
 
   /**
@@ -155,7 +165,25 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void broadcast(bool propval)
   {
-    return setBroadcast(propval);
+    setBroadcast(propval);
+  }
+
+  /**
+      Get `family` property.
+      Returns: The socket’s address family.
+  */
+  @property gio.types.SocketFamily family()
+  {
+    return getFamily();
+  }
+
+  /**
+      Get `fd` property.
+      Returns: The socket’s file descriptor.
+  */
+  @property int fd()
+  {
+    return getFd();
   }
 
   /**
@@ -174,7 +202,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void keepalive(bool propval)
   {
-    return setKeepalive(propval);
+    setKeepalive(propval);
   }
 
   /**
@@ -193,7 +221,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void listenBacklog(int propval)
   {
-    return setListenBacklog(propval);
+    setListenBacklog(propval);
   }
 
   /**
@@ -221,7 +249,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void multicastLoopback(bool propval)
   {
-    return setMulticastLoopback(propval);
+    setMulticastLoopback(propval);
   }
 
   /**
@@ -240,7 +268,16 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void multicastTtl(uint propval)
   {
-    return setMulticastTtl(propval);
+    setMulticastTtl(propval);
+  }
+
+  /**
+      Get `protocol` property.
+      Returns: The ID of the protocol to use, or `-1` for unknown.
+  */
+  @property gio.types.SocketProtocol protocol()
+  {
+    return getProtocol();
   }
 
   /**
@@ -268,7 +305,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void timeout(uint propval)
   {
-    return setTimeout(propval);
+    setTimeout(propval);
   }
 
   /**
@@ -287,7 +324,16 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   */
   @property void ttl(uint propval)
   {
-    return setTtl(propval);
+    setTtl(propval);
+  }
+
+  /**
+      Get `type` property.
+      Returns: The socket’s type.
+  */
+  @property gio.types.SocketType type()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.types.SocketType)("type");
   }
 
   mixin DatagramBasedT!();
@@ -1806,5 +1852,153 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     bool _retval;
     _retval = cast(bool)g_socket_speaks_ipv4(cast(GSocket*)this._cPtr);
     return _retval;
+  }
+}
+
+class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.datagram_based.DatagramBasedGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin DatagramBasedGidBuilderT!();
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `blocking` property.
+      Params:
+        propval = Whether I/O on this socket is blocking.
+      Returns: Builder instance for fluent chaining
+  */
+  T blocking(bool propval)
+  {
+    return setProperty("blocking", propval);
+  }
+
+  /**
+      Set `broadcast` property.
+      Params:
+        propval = Whether the socket should allow sending to broadcast addresses.
+      Returns: Builder instance for fluent chaining
+  */
+  T broadcast(bool propval)
+  {
+    return setProperty("broadcast", propval);
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = The socket’s address family.
+      Returns: Builder instance for fluent chaining
+  */
+  T family(gio.types.SocketFamily propval)
+  {
+    return setProperty("family", propval);
+  }
+
+  /**
+      Set `fd` property.
+      Params:
+        propval = The socket’s file descriptor.
+      Returns: Builder instance for fluent chaining
+  */
+  T fd(int propval)
+  {
+    return setProperty("fd", propval);
+  }
+
+  /**
+      Set `keepalive` property.
+      Params:
+        propval = Whether to keep the connection alive by sending periodic pings.
+      Returns: Builder instance for fluent chaining
+  */
+  T keepalive(bool propval)
+  {
+    return setProperty("keepalive", propval);
+  }
+
+  /**
+      Set `listenBacklog` property.
+      Params:
+        propval = The number of outstanding connections in the listen queue.
+      Returns: Builder instance for fluent chaining
+  */
+  T listenBacklog(int propval)
+  {
+    return setProperty("listen-backlog", propval);
+  }
+
+  /**
+      Set `multicastLoopback` property.
+      Params:
+        propval = Whether outgoing multicast packets loop back to the local host.
+      Returns: Builder instance for fluent chaining
+  */
+  T multicastLoopback(bool propval)
+  {
+    return setProperty("multicast-loopback", propval);
+  }
+
+  /**
+      Set `multicastTtl` property.
+      Params:
+        propval = Time-to-live out outgoing multicast packets
+      Returns: Builder instance for fluent chaining
+  */
+  T multicastTtl(uint propval)
+  {
+    return setProperty("multicast-ttl", propval);
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = The ID of the protocol to use, or `-1` for unknown.
+      Returns: Builder instance for fluent chaining
+  */
+  T protocol(gio.types.SocketProtocol propval)
+  {
+    return setProperty("protocol", propval);
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The timeout in seconds on socket I/O
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(uint propval)
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /**
+      Set `ttl` property.
+      Params:
+        propval = Time-to-live for outgoing unicast packets
+      Returns: Builder instance for fluent chaining
+  */
+  T ttl(uint propval)
+  {
+    return setProperty("ttl", propval);
+  }
+
+  /**
+      Set `type` property.
+      Params:
+        propval = The socket’s type.
+      Returns: Builder instance for fluent chaining
+  */
+  T type(gio.types.SocketType propval)
+  {
+    return setProperty("type", propval);
+  }
+}
+
+/// Fluent builder for [gio.socket.Socket]
+final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
+{
+  Socket build()
+  {
+    return new Socket(cast(void*)createGObject(Socket._getGType), Yes.Take);
   }
 }

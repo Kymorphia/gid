@@ -3,6 +3,7 @@ module gstbase.adapter;
 
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
@@ -138,6 +139,15 @@ class Adapter : gobject.object.ObjectWrap
   override Adapter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstbase.adapter.Adapter]
+  Returns: New builder object
+  */
+  static AdapterGidBuilder builder()
+  {
+    return new AdapterGidBuilder;
   }
 
   /**
@@ -685,5 +695,18 @@ class Adapter : gobject.object.ObjectWrap
   void unmap()
   {
     gst_adapter_unmap(cast(GstAdapter*)this._cPtr);
+  }
+}
+
+class AdapterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstbase.adapter.Adapter]
+final class AdapterGidBuilder : AdapterGidBuilderImpl!AdapterGidBuilder
+{
+  Adapter build()
+  {
+    return new Adapter(cast(void*)createGObject(Adapter._getGType), Yes.Take);
   }
 }

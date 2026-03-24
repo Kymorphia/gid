@@ -4,6 +4,7 @@ module panel.session_item;
 import gid.gid;
 import glib.variant;
 import glib.variant_type;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -39,6 +40,15 @@ class SessionItem : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [panel.session_item.SessionItem]
+  Returns: New builder object
+  */
+  static SessionItemGidBuilder builder()
+  {
+    return new SessionItemGidBuilder;
+  }
+
   /** */
   @property string id()
   {
@@ -48,7 +58,7 @@ class SessionItem : gobject.object.ObjectWrap
   /** */
   @property void id(string propval)
   {
-    return setId(propval);
+    setId(propval);
   }
 
   /** */
@@ -60,7 +70,7 @@ class SessionItem : gobject.object.ObjectWrap
   /** */
   @property void moduleName(string propval)
   {
-    return setModuleName(propval);
+    setModuleName(propval);
   }
 
   /** */
@@ -72,7 +82,7 @@ class SessionItem : gobject.object.ObjectWrap
   /** */
   @property void position(panel.position.Position propval)
   {
-    return setPosition(propval);
+    setPosition(propval);
   }
 
   /** */
@@ -84,7 +94,7 @@ class SessionItem : gobject.object.ObjectWrap
   /** */
   @property void typeHint(string propval)
   {
-    return setTypeHint(propval);
+    setTypeHint(propval);
   }
 
   /** */
@@ -96,7 +106,7 @@ class SessionItem : gobject.object.ObjectWrap
   /** */
   @property void workspace(string propval)
   {
-    return setWorkspace(propval);
+    setWorkspace(propval);
   }
 
   /** */
@@ -310,5 +320,48 @@ class SessionItem : gobject.object.ObjectWrap
   {
     const(char)* _workspace = workspace.toCString(No.Alloc);
     panel_session_item_set_workspace(cast(PanelSessionItem*)this._cPtr, _workspace);
+  }
+}
+
+class SessionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+
+  /** */
+  T moduleName(string propval)
+  {
+    return setProperty("module-name", propval);
+  }
+
+  /** */
+  T position(panel.position.Position propval)
+  {
+    return setProperty("position", propval);
+  }
+
+  /** */
+  T typeHint(string propval)
+  {
+    return setProperty("type-hint", propval);
+  }
+
+  /** */
+  T workspace(string propval)
+  {
+    return setProperty("workspace", propval);
+  }
+}
+
+/// Fluent builder for [panel.session_item.SessionItem]
+final class SessionItemGidBuilder : SessionItemGidBuilderImpl!SessionItemGidBuilder
+{
+  SessionItem build()
+  {
+    return new SessionItem(cast(void*)createGObject(SessionItem._getGType), Yes.Take);
   }
 }

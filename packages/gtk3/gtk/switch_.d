@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.actionable;
 import gtk.actionable_mixin;
 import gtk.activatable;
@@ -63,6 +64,15 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   }
 
   /**
+  Get builder for [gtk.switch_.Switch]
+  Returns: New builder object
+  */
+  static SwitchGidBuilder builder()
+  {
+    return new SwitchGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: Whether the #GtkSwitch widget is in its on or off state.
   */
@@ -78,7 +88,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -99,7 +109,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   */
   @property void state(bool propval)
   {
-    return setState(propval);
+    setState(propval);
   }
 
   mixin ActionableT!();
@@ -266,5 +276,44 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("state-set", closure, after);
+  }
+}
+
+class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+  mixin ActivatableGidBuilderT!();
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the #GtkSwitch widget is in its on or off state.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `state` property.
+      Params:
+        propval = The backend state that is controlled by the switch.
+          See #GtkSwitch::state-set for details.
+      Returns: Builder instance for fluent chaining
+  */
+  T state(bool propval)
+  {
+    return setProperty("state", propval);
+  }
+}
+
+/// Fluent builder for [gtk.switch_.Switch]
+final class SwitchGidBuilder : SwitchGidBuilderImpl!SwitchGidBuilder
+{
+  Switch build()
+  {
+    return new Switch(cast(void*)createGObject(Switch._getGType), No.Take);
   }
 }

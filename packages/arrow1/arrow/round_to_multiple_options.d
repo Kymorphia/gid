@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
   override RoundToMultipleOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.round_to_multiple_options.RoundToMultipleOptions]
+  Returns: New builder object
+  */
+  static RoundToMultipleOptionsGidBuilder builder()
+  {
+    return new RoundToMultipleOptionsGidBuilder;
   }
 
   /**
@@ -92,5 +102,45 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
     GArrowRoundToMultipleOptions* _cretval;
     _cretval = garrow_round_to_multiple_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class RoundToMultipleOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = The rounding and tie-breaking mode.
+      Returns: Builder instance for fluent chaining
+  */
+  T mode(arrow.types.RoundMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+
+  /**
+      Set `multiple` property.
+      Params:
+        propval = The rounding scale (multiple to round to).
+          
+          Should be a scalar of a type compatible with the argument to be rounded.
+          For example, rounding a decimal value means a decimal multiple is
+          required. Rounding a floating point or integer value means a floating
+          point scalar is required.
+      Returns: Builder instance for fluent chaining
+  */
+  T multiple(arrow.scalar.Scalar propval)
+  {
+    return setProperty("multiple", propval);
+  }
+}
+
+/// Fluent builder for [arrow.round_to_multiple_options.RoundToMultipleOptions]
+final class RoundToMultipleOptionsGidBuilder : RoundToMultipleOptionsGidBuilderImpl!RoundToMultipleOptionsGidBuilder
+{
+  RoundToMultipleOptions build()
+  {
+    return new RoundToMultipleOptions(cast(void*)createGObject(RoundToMultipleOptions._getGType), Yes.Take);
   }
 }

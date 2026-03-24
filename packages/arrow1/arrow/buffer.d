@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,21 @@ class Buffer : gobject.object.ObjectWrap
   override Buffer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.buffer.Buffer]
+  Returns: New builder object
+  */
+  static BufferGidBuilder builder()
+  {
+    return new BufferGidBuilder;
+  }
+
+  /** */
+  @property arrow.buffer.Buffer parent()
+  {
+    return getParent();
   }
 
   /** */
@@ -148,5 +164,36 @@ class Buffer : gobject.object.ObjectWrap
     _cretval = garrow_buffer_slice(cast(GArrowBuffer*)this._cPtr, offset, size);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class BufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T buffer(void* propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /** */
+  T data(glib.bytes.Bytes propval)
+  {
+    return setProperty("data", propval);
+  }
+
+  /** */
+  T parent(arrow.buffer.Buffer propval)
+  {
+    return setProperty("parent", propval);
+  }
+}
+
+/// Fluent builder for [arrow.buffer.Buffer]
+final class BufferGidBuilder : BufferGidBuilderImpl!BufferGidBuilder
+{
+  Buffer build()
+  {
+    return new Buffer(cast(void*)createGObject(Buffer._getGType), Yes.Take);
   }
 }

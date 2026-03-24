@@ -11,6 +11,7 @@ import gio.types;
 import glib.error;
 import glib.main_context;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -568,6 +569,15 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   override Task self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.task.Task]
+  Returns: New builder object
+  */
+  static TaskGidBuilder builder()
+  {
+    return new TaskGidBuilder;
   }
 
   /**
@@ -1286,5 +1296,20 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     }
     auto _taskDataDestroyCB = taskDataDestroy ? &_taskDataDestroyCallback : null;
     g_task_set_task_data(cast(GTask*)this._cPtr, taskData, _taskDataDestroyCB);
+  }
+}
+
+class TaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_result.AsyncResultGidBuilderImpl!T
+{
+
+  mixin AsyncResultGidBuilderT!();
+}
+
+/// Fluent builder for [gio.task.Task]
+final class TaskGidBuilder : TaskGidBuilderImpl!TaskGidBuilder
+{
+  Task build()
+  {
+    return new Task(cast(void*)createGObject(Task._getGType), Yes.Take);
   }
 }

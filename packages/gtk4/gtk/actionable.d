@@ -4,6 +4,7 @@ module gtk.actionable;
 public import gtk.actionable_iface_proxy;
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -113,4 +114,14 @@ interface Actionable
         detailedActionName = the detailed action name
   */
   void setDetailedActionName(string detailedActionName);
+}
+
+interface ActionableGidBuilderImpl(T)
+{
+
+  /** */
+  T actionName(string propval);
+
+  /** */
+  T actionTarget(glib.variant.Variant propval);
 }

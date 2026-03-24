@@ -2,6 +2,7 @@
 module gtk.page_setup_unix_dialog;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -67,6 +68,15 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 
   /**
+  Get builder for [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
+  Returns: New builder object
+  */
+  static PageSetupUnixDialogGidBuilder builder()
+  {
+    return new PageSetupUnixDialogGidBuilder;
+  }
+
+  /**
       Creates a new page setup dialog.
   
       Params:
@@ -128,5 +138,19 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
   {
     gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
+  }
+}
+
+class PageSetupUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
+final class PageSetupUnixDialogGidBuilder : PageSetupUnixDialogGidBuilderImpl!PageSetupUnixDialogGidBuilder
+{
+  PageSetupUnixDialog build()
+  {
+    return new PageSetupUnixDialog(cast(void*)createGObject(PageSetupUnixDialog._getGType), No.Take);
   }
 }

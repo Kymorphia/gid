@@ -10,6 +10,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
@@ -38,6 +39,15 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   override Decimal256ArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.decimal256_array_builder.Decimal256ArrayBuilder]
+  Returns: New builder object
+  */
+  static Decimal256ArrayBuilderGidBuilder builder()
+  {
+    return new Decimal256ArrayBuilderGidBuilder;
   }
 
   /** */
@@ -98,5 +108,18 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class Decimal256ArrayBuilderGidBuilderImpl(T) : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal256_array_builder.Decimal256ArrayBuilder]
+final class Decimal256ArrayBuilderGidBuilder : Decimal256ArrayBuilderGidBuilderImpl!Decimal256ArrayBuilderGidBuilder
+{
+  Decimal256ArrayBuilder build()
+  {
+    return new Decimal256ArrayBuilder(cast(void*)createGObject(Decimal256ArrayBuilder._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtksource.search_settings;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -37,6 +38,15 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.search_settings.SearchSettings]
+  Returns: New builder object
+  */
+  static SearchSettingsGidBuilder builder()
+  {
+    return new SearchSettingsGidBuilder;
+  }
+
+  /**
       Get `atWordBoundaries` property.
       Returns: If true, a search match must start and end a word. The match can
         span multiple words.
@@ -54,7 +64,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   @property void atWordBoundaries(bool propval)
   {
-    return setAtWordBoundaries(propval);
+    setAtWordBoundaries(propval);
   }
 
   /**
@@ -73,7 +83,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   @property void caseSensitive(bool propval)
   {
-    return setCaseSensitive(propval);
+    setCaseSensitive(propval);
   }
 
   /**
@@ -94,7 +104,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   @property void regexEnabled(bool propval)
   {
-    return setRegexEnabled(propval);
+    setRegexEnabled(propval);
   }
 
   /**
@@ -117,7 +127,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   @property void searchText(string propval)
   {
-    return setSearchText(propval);
+    setSearchText(propval);
   }
 
   /**
@@ -140,7 +150,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   @property void wrapAround(bool propval)
   {
-    return setWrapAround(propval);
+    setWrapAround(propval);
   }
 
   /**
@@ -272,5 +282,79 @@ class SearchSettings : gobject.object.ObjectWrap
   void setWrapAround(bool wrapAround)
   {
     gtk_source_search_settings_set_wrap_around(cast(GtkSourceSearchSettings*)this._cPtr, wrapAround);
+  }
+}
+
+class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `atWordBoundaries` property.
+      Params:
+        propval = If true, a search match must start and end a word. The match can
+          span multiple words.
+      Returns: Builder instance for fluent chaining
+  */
+  T atWordBoundaries(bool propval)
+  {
+    return setProperty("at-word-boundaries", propval);
+  }
+
+  /**
+      Set `caseSensitive` property.
+      Params:
+        propval = Whether the search is case sensitive.
+      Returns: Builder instance for fluent chaining
+  */
+  T caseSensitive(bool propval)
+  {
+    return setProperty("case-sensitive", propval);
+  }
+
+  /**
+      Set `regexEnabled` property.
+      Params:
+        propval = Search by regular expressions with
+          #GtkSourceSearchSettings:search-text as the pattern.
+      Returns: Builder instance for fluent chaining
+  */
+  T regexEnabled(bool propval)
+  {
+    return setProperty("regex-enabled", propval);
+  }
+
+  /**
+      Set `searchText` property.
+      Params:
+        propval = A search string, or null if the search is disabled. If the regular
+          expression search is enabled, #GtkSourceSearchSettings:search-text is
+          the pattern.
+      Returns: Builder instance for fluent chaining
+  */
+  T searchText(string propval)
+  {
+    return setProperty("search-text", propval);
+  }
+
+  /**
+      Set `wrapAround` property.
+      Params:
+        propval = For a forward search, continue at the beginning of the buffer if no
+          search occurrence is found. For a backward search, continue at the
+          end of the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapAround(bool propval)
+  {
+    return setProperty("wrap-around", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.search_settings.SearchSettings]
+final class SearchSettingsGidBuilder : SearchSettingsGidBuilderImpl!SearchSettingsGidBuilder
+{
+  SearchSettings build()
+  {
+    return new SearchSettings(cast(void*)createGObject(SearchSettings._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module json.serializable_mixin;
 
 public import json.serializable_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.param_spec;
 public import gobject.value;
 public import json.c.functions;
@@ -216,4 +217,8 @@ template SerializableT()
   {
     json_serializable_set_property(cast(JsonSerializable*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
+}
+
+template SerializableGidBuilderT()
+{
 }

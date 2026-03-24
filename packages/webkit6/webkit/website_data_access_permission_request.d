@@ -2,6 +2,7 @@
 module webkit.website_data_access_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -46,6 +47,15 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
     return this;
   }
 
+  /**
+  Get builder for [webkit.website_data_access_permission_request.WebsiteDataAccessPermissionRequest]
+  Returns: New builder object
+  */
+  static WebsiteDataAccessPermissionRequestGidBuilder builder()
+  {
+    return new WebsiteDataAccessPermissionRequestGidBuilder;
+  }
+
   mixin PermissionRequestT!();
 
   /**
@@ -70,5 +80,20 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
     _cretval = webkit_website_data_access_permission_request_get_requesting_domain(cast(WebKitWebsiteDataAccessPermissionRequest*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class WebsiteDataAccessPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.website_data_access_permission_request.WebsiteDataAccessPermissionRequest]
+final class WebsiteDataAccessPermissionRequestGidBuilder : WebsiteDataAccessPermissionRequestGidBuilderImpl!WebsiteDataAccessPermissionRequestGidBuilder
+{
+  WebsiteDataAccessPermissionRequest build()
+  {
+    return new WebsiteDataAccessPermissionRequest(cast(void*)createGObject(WebsiteDataAccessPermissionRequest._getGType), No.Take);
   }
 }

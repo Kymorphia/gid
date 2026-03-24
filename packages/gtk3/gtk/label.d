@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -226,6 +227,15 @@ class Label : gtk.misc.Misc
   }
 
   /**
+  Get builder for [gtk.label.Label]
+  Returns: New builder object
+  */
+  static LabelGidBuilder builder()
+  {
+    return new LabelGidBuilder;
+  }
+
+  /**
       Get `angle` property.
       Returns: The angle that the baseline of the label makes with the horizontal,
         in degrees, measured counterclockwise. An angle of 90 reads from
@@ -247,7 +257,7 @@ class Label : gtk.misc.Misc
   */
   @property void angle(double propval)
   {
-    return setAngle(propval);
+    setAngle(propval);
   }
 
   /** */
@@ -259,7 +269,7 @@ class Label : gtk.misc.Misc
   /** */
   @property void attributes(pango.attr_list.AttrList propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
   }
 
   /** */
@@ -304,7 +314,7 @@ class Label : gtk.misc.Misc
   */
   @property void ellipsize(pango.types.EllipsizeMode propval)
   {
-    return setEllipsize(propval);
+    setEllipsize(propval);
   }
 
   /** */
@@ -316,7 +326,7 @@ class Label : gtk.misc.Misc
   /** */
   @property void justify(gtk.types.Justification propval)
   {
-    return setJustify(propval);
+    setJustify(propval);
   }
 
   /**
@@ -355,7 +365,7 @@ class Label : gtk.misc.Misc
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -380,7 +390,7 @@ class Label : gtk.misc.Misc
   */
   @property void lines(int propval)
   {
-    return setLines(propval);
+    setLines(propval);
   }
 
   /**
@@ -409,7 +419,7 @@ class Label : gtk.misc.Misc
   */
   @property void maxWidthChars(int propval)
   {
-    return setMaxWidthChars(propval);
+    setMaxWidthChars(propval);
   }
 
   /** */
@@ -427,13 +437,13 @@ class Label : gtk.misc.Misc
   /** */
   @property void mnemonicWidget(gtk.widget.Widget propval)
   {
-    return setMnemonicWidget(propval);
+    setMnemonicWidget(propval);
   }
 
   /** */
   @property void pattern(string propval)
   {
-    return setPattern(propval);
+    setPattern(propval);
   }
 
   /** */
@@ -445,7 +455,7 @@ class Label : gtk.misc.Misc
   /** */
   @property void selectable(bool propval)
   {
-    return setSelectable(propval);
+    setSelectable(propval);
   }
 
   /** */
@@ -478,7 +488,7 @@ class Label : gtk.misc.Misc
   */
   @property void singleLineMode(bool propval)
   {
-    return setSingleLineMode(propval);
+    setSingleLineMode(propval);
   }
 
   /**
@@ -501,7 +511,7 @@ class Label : gtk.misc.Misc
   */
   @property void trackVisitedLinks(bool propval)
   {
-    return setTrackVisitedLinks(propval);
+    setTrackVisitedLinks(propval);
   }
 
   /** */
@@ -513,7 +523,7 @@ class Label : gtk.misc.Misc
   /** */
   @property void useMarkup(bool propval)
   {
-    return setUseMarkup(propval);
+    setUseMarkup(propval);
   }
 
   /** */
@@ -525,7 +535,7 @@ class Label : gtk.misc.Misc
   /** */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -554,7 +564,7 @@ class Label : gtk.misc.Misc
   */
   @property void widthChars(int propval)
   {
-    return setWidthChars(propval);
+    setWidthChars(propval);
   }
 
   /** */
@@ -614,7 +624,7 @@ class Label : gtk.misc.Misc
   */
   override @property void xalign(float propval)
   {
-    return setXalign(propval);
+    setXalign(propval);
   }
 
   /**
@@ -639,7 +649,7 @@ class Label : gtk.misc.Misc
   */
   override @property void yalign(float propval)
   {
-    return setYalign(propval);
+    setYalign(propval);
   }
 
   /**
@@ -1639,5 +1649,238 @@ class Label : gtk.misc.Misc
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("populate-popup", closure, after);
+  }
+}
+
+class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
+{
+
+
+  /**
+      Set `angle` property.
+      Params:
+        propval = The angle that the baseline of the label makes with the horizontal,
+          in degrees, measured counterclockwise. An angle of 90 reads from
+          from bottom to top, an angle of 270, from top to bottom. Ignored
+          if the label is selectable.
+      Returns: Builder instance for fluent chaining
+  */
+  T angle(double propval)
+  {
+    return setProperty("angle", propval);
+  }
+
+  /** */
+  T attributes(pango.attr_list.AttrList propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string, if the label does
+          not have enough room to display the entire string, specified as a
+          #PangoEllipsizeMode.
+          
+          Note that setting this property to a value other than
+          [pango.types.EllipsizeMode.None] has the side-effect that the label requests
+          only enough space to display the ellipsis "...". In particular, this
+          means that ellipsizing labels do not work well in notebook tabs, unless
+          the #GtkNotebook tab-expand child property is set to true. Other ways
+          to set a label's width are [gtk.widget.Widget.setSizeRequest] and
+          [gtk.label.Label.setWidthChars].
+      Returns: Builder instance for fluent chaining
+  */
+  T ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setProperty("ellipsize", propval);
+  }
+
+  /** */
+  T justify(gtk.types.Justification propval)
+  {
+    return setProperty("justify", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The contents of the label.
+          
+          If the string contains [Pango XML markup][PangoMarkupFormat], you will
+          have to set the #GtkLabel:use-markup property to true in order for the
+          label to display the markup attributes. See also [gtk.label.Label.setMarkup]
+          for a convenience function that sets both this property and the
+          #GtkLabel:use-markup property at the same time.
+          
+          If the string contains underlines acting as mnemonics, you will have to
+          set the #GtkLabel:use-underline property to true in order for the label
+          to display them.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `lines` property.
+      Params:
+        propval = The number of lines to which an ellipsized, wrapping label
+          should be limited. This property has no effect if the
+          label is not wrapping or ellipsized. Set this property to
+          -1 if you don't want to limit the number of lines.
+      Returns: Builder instance for fluent chaining
+  */
+  T lines(int propval)
+  {
+    return setProperty("lines", propval);
+  }
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the label, in characters. If this property
+          is set to -1, the width will be calculated automatically.
+          
+          See the section on [text layout][label-text-layout]
+          for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+          determine the width of ellipsized and wrapped labels.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxWidthChars(int propval)
+  {
+    return setProperty("max-width-chars", propval);
+  }
+
+  /** */
+  T mnemonicWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("mnemonic-widget", propval);
+  }
+
+  /** */
+  T pattern(string propval)
+  {
+    return setProperty("pattern", propval);
+  }
+
+  /** */
+  T selectable(bool propval)
+  {
+    return setProperty("selectable", propval);
+  }
+
+  /**
+      Set `singleLineMode` property.
+      Params:
+        propval = Whether the label is in single line mode. In single line mode,
+          the height of the label does not depend on the actual text, it
+          is always set to ascent + descent of the font. This can be an
+          advantage in situations where resizing the label because of text
+          changes would be distracting, e.g. in a statusbar.
+      Returns: Builder instance for fluent chaining
+  */
+  T singleLineMode(bool propval)
+  {
+    return setProperty("single-line-mode", propval);
+  }
+
+  /**
+      Set `trackVisitedLinks` property.
+      Params:
+        propval = Set this property to true to make the label track which links
+          have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
+          when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
+      Returns: Builder instance for fluent chaining
+  */
+  T trackVisitedLinks(bool propval)
+  {
+    return setProperty("track-visited-links", propval);
+  }
+
+  /** */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+
+  /** */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = The desired width of the label, in characters. If this property is set to
+          -1, the width will be calculated automatically.
+          
+          See the section on [text layout][label-text-layout]
+          for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
+          determine the width of ellipsized and wrapped labels.
+      Returns: Builder instance for fluent chaining
+  */
+  T widthChars(int propval)
+  {
+    return setProperty("width-chars", propval);
+  }
+
+  /** */
+  T wrap(bool propval)
+  {
+    return setProperty("wrap", propval);
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = If line wrapping is on (see the #GtkLabel:wrap property) this controls
+          how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
+          means wrap on word boundaries.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapMode(pango.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The xalign property determines the horizontal aligment of the label text
+          inside the labels size allocation. Compare this to #GtkWidget:halign,
+          which determines how the labels size allocation is positioned in the
+          space available for the label.
+      Returns: Builder instance for fluent chaining
+  */
+  override T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The yalign property determines the vertical aligment of the label text
+          inside the labels size allocation. Compare this to #GtkWidget:valign,
+          which determines how the labels size allocation is positioned in the
+          space available for the label.
+      Returns: Builder instance for fluent chaining
+  */
+  override T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+}
+
+/// Fluent builder for [gtk.label.Label]
+final class LabelGidBuilder : LabelGidBuilderImpl!LabelGidBuilder
+{
+  Label build()
+  {
+    return new Label(cast(void*)createGObject(Label._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.stack_switcher;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -81,6 +82,15 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.stack_switcher.StackSwitcher]
+  Returns: New builder object
+  */
+  static StackSwitcherGidBuilder builder()
+  {
+    return new StackSwitcherGidBuilder;
+  }
+
+  /**
       Get `stack` property.
       Returns: The stack.
   */
@@ -96,7 +106,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void stack(gtk.stack.Stack propval)
   {
-    return setStack(propval);
+    setStack(propval);
   }
 
   mixin OrientableT!();
@@ -133,5 +143,31 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   void setStack(gtk.stack.Stack stack = null)
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
+  }
+}
+
+class StackSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack.
+      Returns: Builder instance for fluent chaining
+  */
+  T stack(gtk.stack.Stack propval)
+  {
+    return setProperty("stack", propval);
+  }
+}
+
+/// Fluent builder for [gtk.stack_switcher.StackSwitcher]
+final class StackSwitcherGidBuilder : StackSwitcherGidBuilderImpl!StackSwitcherGidBuilder
+{
+  StackSwitcher build()
+  {
+    return new StackSwitcher(cast(void*)createGObject(StackSwitcher._getGType), No.Take);
   }
 }

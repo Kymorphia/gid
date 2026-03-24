@@ -8,6 +8,7 @@ import arrow.month_day_nano;
 import arrow.primitive_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.month_day_nano_interval_array.MonthDayNanoIntervalArray]
+  Returns: New builder object
+  */
+  static MonthDayNanoIntervalArrayGidBuilder builder()
+  {
+    return new MonthDayNanoIntervalArrayGidBuilder;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
@@ -63,5 +73,18 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
     _cretval = garrow_month_day_nano_interval_array_get_values(cast(GArrowMonthDayNanoIntervalArray*)this._cPtr);
     auto _retval = gListToD!(arrow.month_day_nano.MonthDayNano, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class MonthDayNanoIntervalArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_day_nano_interval_array.MonthDayNanoIntervalArray]
+final class MonthDayNanoIntervalArrayGidBuilder : MonthDayNanoIntervalArrayGidBuilderImpl!MonthDayNanoIntervalArrayGidBuilder
+{
+  MonthDayNanoIntervalArray build()
+  {
+    return new MonthDayNanoIntervalArray(cast(void*)createGObject(MonthDayNanoIntervalArray._getGType), Yes.Take);
   }
 }

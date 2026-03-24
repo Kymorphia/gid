@@ -10,6 +10,7 @@ import gio.icon_mixin;
 import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -46,6 +47,24 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
     return this;
   }
 
+  /**
+  Get builder for [gio.file_icon.FileIcon]
+  Returns: New builder object
+  */
+  static FileIconGidBuilder builder()
+  {
+    return new FileIconGidBuilder;
+  }
+
+  /**
+      Get `file` property.
+      Returns: The file containing the icon.
+  */
+  @property gio.file.File file()
+  {
+    return getFile();
+  }
+
   mixin IconT!();
   mixin LoadableIconT!();
 
@@ -74,5 +93,32 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
     _cretval = g_file_icon_get_file(cast(GFileIcon*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class FileIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T, gio.loadable_icon.LoadableIconGidBuilderImpl!T
+{
+
+  mixin IconGidBuilderT!();
+  mixin LoadableIconGidBuilderT!();
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file containing the icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gio.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+}
+
+/// Fluent builder for [gio.file_icon.FileIcon]
+final class FileIconGidBuilder : FileIconGidBuilderImpl!FileIconGidBuilder
+{
+  FileIcon build()
+  {
+    return new FileIcon(cast(void*)createGObject(FileIcon._getGType), Yes.Take);
   }
 }

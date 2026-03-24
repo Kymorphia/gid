@@ -2,6 +2,7 @@
 module gtk.custom_sorter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.sorter;
@@ -37,6 +38,15 @@ class CustomSorter : gtk.sorter.Sorter
   override CustomSorter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.custom_sorter.CustomSorter]
+  Returns: New builder object
+  */
+  static CustomSorterGidBuilder builder()
+  {
+    return new CustomSorterGidBuilder;
   }
   import gobject.object;
 
@@ -95,5 +105,19 @@ class CustomSorter : gtk.sorter.Sorter
 
     auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
     gtk_custom_sorter_set_sort_func(cast(GtkCustomSorter*)_cPtr, &_sortFuncCallback, _sortFunc, &thawDelegate);
+  }
+
+}
+
+class CustomSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.custom_sorter.CustomSorter]
+final class CustomSorterGidBuilder : CustomSorterGidBuilderImpl!CustomSorterGidBuilder
+{
+  CustomSorter build()
+  {
+    return new CustomSorter(cast(void*)createGObject(CustomSorter._getGType), Yes.Take);
   }
 }

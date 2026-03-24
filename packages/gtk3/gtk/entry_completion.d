@@ -3,6 +3,7 @@ module gtk.entry_completion;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -87,6 +88,28 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   }
 
   /**
+  Get builder for [gtk.entry_completion.EntryCompletion]
+  Returns: New builder object
+  */
+  static EntryCompletionGidBuilder builder()
+  {
+    return new EntryCompletionGidBuilder;
+  }
+
+  /**
+      Get `cellArea` property.
+      Returns: The #GtkCellArea used to layout cell renderers in the treeview column.
+        
+        If no area is specified when creating the entry completion with
+        [gtk.entry_completion.EntryCompletion.newWithArea] a horizontally oriented
+        #GtkCellAreaBox will be used.
+  */
+  @property gtk.cell_area.CellArea cellArea()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
+  }
+
+  /**
       Get `inlineCompletion` property.
       Returns: Determines whether the common prefix of the possible completions
         should be inserted automatically in the entry. Note that this
@@ -108,7 +131,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   @property void inlineCompletion(bool propval)
   {
-    return setInlineCompletion(propval);
+    setInlineCompletion(propval);
   }
 
   /**
@@ -129,7 +152,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   @property void inlineSelection(bool propval)
   {
-    return setInlineSelection(propval);
+    setInlineSelection(propval);
   }
 
   /** */
@@ -141,7 +164,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /** */
   @property void minimumKeyLength(int propval)
   {
-    return setMinimumKeyLength(propval);
+    setMinimumKeyLength(propval);
   }
 
   /** */
@@ -153,7 +176,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   /** */
   @property void model(gtk.tree_model.TreeModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -174,7 +197,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   @property void popupCompletion(bool propval)
   {
-    return setPopupCompletion(propval);
+    setPopupCompletion(propval);
   }
 
   /**
@@ -195,7 +218,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   @property void popupSetWidth(bool propval)
   {
-    return setPopupSetWidth(propval);
+    setPopupSetWidth(propval);
   }
 
   /**
@@ -220,7 +243,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   @property void popupSingleMatch(bool propval)
   {
-    return setPopupSingleMatch(propval);
+    setPopupSingleMatch(propval);
   }
 
   /**
@@ -241,7 +264,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   @property void textColumn(int propval)
   {
-    return setTextColumn(propval);
+    setTextColumn(propval);
   }
 
   mixin BuildableT!();
@@ -864,5 +887,124 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("no-matches", closure, after);
+  }
+}
+
+class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+  mixin CellLayoutGidBuilderT!();
+
+  /**
+      Set `cellArea` property.
+      Params:
+        propval = The #GtkCellArea used to layout cell renderers in the treeview column.
+          
+          If no area is specified when creating the entry completion with
+          [gtk.entry_completion.EntryCompletion.newWithArea] a horizontally oriented
+          #GtkCellAreaBox will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T cellArea(gtk.cell_area.CellArea propval)
+  {
+    return setProperty("cell-area", propval);
+  }
+
+  /**
+      Set `inlineCompletion` property.
+      Params:
+        propval = Determines whether the common prefix of the possible completions
+          should be inserted automatically in the entry. Note that this
+          requires text-column to be set, even if you are using a custom
+          match function.
+      Returns: Builder instance for fluent chaining
+  */
+  T inlineCompletion(bool propval)
+  {
+    return setProperty("inline-completion", propval);
+  }
+
+  /**
+      Set `inlineSelection` property.
+      Params:
+        propval = Determines whether the possible completions on the popup
+          will appear in the entry as you navigate through them.
+      Returns: Builder instance for fluent chaining
+  */
+  T inlineSelection(bool propval)
+  {
+    return setProperty("inline-selection", propval);
+  }
+
+  /** */
+  T minimumKeyLength(int propval)
+  {
+    return setProperty("minimum-key-length", propval);
+  }
+
+  /** */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `popupCompletion` property.
+      Params:
+        propval = Determines whether the possible completions should be
+          shown in a popup window.
+      Returns: Builder instance for fluent chaining
+  */
+  T popupCompletion(bool propval)
+  {
+    return setProperty("popup-completion", propval);
+  }
+
+  /**
+      Set `popupSetWidth` property.
+      Params:
+        propval = Determines whether the completions popup window will be
+          resized to the width of the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T popupSetWidth(bool propval)
+  {
+    return setProperty("popup-set-width", propval);
+  }
+
+  /**
+      Set `popupSingleMatch` property.
+      Params:
+        propval = Determines whether the completions popup window will shown
+          for a single possible completion. You probably want to set
+          this to false if you are using
+          [inline completion][GtkEntryCompletion--inline-completion].
+      Returns: Builder instance for fluent chaining
+  */
+  T popupSingleMatch(bool propval)
+  {
+    return setProperty("popup-single-match", propval);
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = The column of the model containing the strings.
+          Note that the strings must be UTF-8.
+      Returns: Builder instance for fluent chaining
+  */
+  T textColumn(int propval)
+  {
+    return setProperty("text-column", propval);
+  }
+}
+
+/// Fluent builder for [gtk.entry_completion.EntryCompletion]
+final class EntryCompletionGidBuilder : EntryCompletionGidBuilderImpl!EntryCompletionGidBuilder
+{
+  EntryCompletion build()
+  {
+    return new EntryCompletion(cast(void*)createGObject(EntryCompletion._getGType), Yes.Take);
   }
 }

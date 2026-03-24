@@ -3,6 +3,7 @@ module gtksource.vim_imcontext;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.imcontext;
 import gtk.text_iter;
 import gtksource.c.functions;
@@ -86,6 +87,15 @@ class VimIMContext : gtk.imcontext.IMContext
   override VimIMContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.vim_imcontext.VimIMContext]
+  Returns: New builder object
+  */
+  static VimIMContextGidBuilder builder()
+  {
+    return new VimIMContextGidBuilder;
   }
 
   /** */
@@ -350,5 +360,18 @@ class VimIMContext : gtk.imcontext.IMContext
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("write", closure, after);
+  }
+}
+
+class VimIMContextGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.vim_imcontext.VimIMContext]
+final class VimIMContextGidBuilder : VimIMContextGidBuilderImpl!VimIMContextGidBuilder
+{
+  VimIMContext build()
+  {
+    return new VimIMContext(cast(void*)createGObject(VimIMContext._getGType), Yes.Take);
   }
 }

@@ -10,6 +10,7 @@ public import gio.types;
 public import glib.error;
 public import glib.source;
 public import glib.types;
+public import gobject.gid_builder;
 
 /**
     Interface for socket-like objects with datagram semantics.
@@ -169,4 +170,8 @@ template DatagramBasedT()
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
+}
+
+template DatagramBasedGidBuilderT()
+{
 }

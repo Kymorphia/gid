@@ -2,6 +2,7 @@
 module parquet.boolean_statistics;
 
 import gid.gid;
+import gobject.gid_builder;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
@@ -36,6 +37,15 @@ class BooleanStatistics : parquet.statistics.Statistics
     return this;
   }
 
+  /**
+  Get builder for [parquet.boolean_statistics.BooleanStatistics]
+  Returns: New builder object
+  */
+  static BooleanStatisticsGidBuilder builder()
+  {
+    return new BooleanStatisticsGidBuilder;
+  }
+
   /** */
   bool getMax()
   {
@@ -50,5 +60,18 @@ class BooleanStatistics : parquet.statistics.Statistics
     bool _retval;
     _retval = cast(bool)gparquet_boolean_statistics_get_min(cast(GParquetBooleanStatistics*)this._cPtr);
     return _retval;
+  }
+}
+
+class BooleanStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.boolean_statistics.BooleanStatistics]
+final class BooleanStatisticsGidBuilder : BooleanStatisticsGidBuilderImpl!BooleanStatisticsGidBuilder
+{
+  BooleanStatistics build()
+  {
+    return new BooleanStatistics(cast(void*)createGObject(BooleanStatistics._getGType), No.Take);
   }
 }

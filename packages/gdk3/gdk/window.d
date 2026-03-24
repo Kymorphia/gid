@@ -26,6 +26,7 @@ import gdkpixbuf.pixbuf;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -58,6 +59,15 @@ class Window : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.window.Window]
+  Returns: New builder object
+  */
+  static WindowGidBuilder builder()
+  {
+    return new WindowGidBuilder;
+  }
+
+  /**
       Get `cursor` property.
       Returns: The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
         [gdk.window.Window.getCursor] for details.
@@ -75,7 +85,7 @@ class Window : gobject.object.ObjectWrap
   */
   @property void cursor(gdk.cursor.Cursor propval)
   {
-    return setCursor(propval);
+    setCursor(propval);
   }
 
   /**
@@ -3263,5 +3273,30 @@ class Window : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("to-embedder", closure, after);
+  }
+}
+
+class WindowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `cursor` property.
+      Params:
+        propval = The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
+          [gdk.window.Window.getCursor] for details.
+      Returns: Builder instance for fluent chaining
+  */
+  T cursor(gdk.cursor.Cursor propval)
+  {
+    return setProperty("cursor", propval);
+  }
+}
+
+/// Fluent builder for [gdk.window.Window]
+final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
+{
+  Window build()
+  {
+    return new Window(cast(void*)createGObject(Window._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.scrollbar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -90,6 +91,15 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.scrollbar.Scrollbar]
+  Returns: New builder object
+  */
+  static ScrollbarGidBuilder builder()
+  {
+    return new ScrollbarGidBuilder;
+  }
+
+  /**
       Get `adjustment` property.
       Returns: The [gtk.adjustment.Adjustment] controlled by this scrollbar.
   */
@@ -105,7 +115,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void adjustment(gtk.adjustment.Adjustment propval)
   {
-    return setAdjustment(propval);
+    setAdjustment(propval);
   }
 
   mixin OrientableT!();
@@ -147,5 +157,31 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+  }
+}
+
+class ScrollbarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] controlled by this scrollbar.
+      Returns: Builder instance for fluent chaining
+  */
+  T adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("adjustment", propval);
+  }
+}
+
+/// Fluent builder for [gtk.scrollbar.Scrollbar]
+final class ScrollbarGidBuilder : ScrollbarGidBuilderImpl!ScrollbarGidBuilder
+{
+  Scrollbar build()
+  {
+    return new Scrollbar(cast(void*)createGObject(Scrollbar._getGType), No.Take);
   }
 }

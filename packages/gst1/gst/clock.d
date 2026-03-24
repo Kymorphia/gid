@@ -3,6 +3,7 @@ module gst.clock;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -109,6 +110,15 @@ class Clock : gst.object.ObjectWrap
   override Clock self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.clock.Clock]
+  Returns: New builder object
+  */
+  static ClockGidBuilder builder()
+  {
+    return new ClockGidBuilder;
   }
 
   /** */
@@ -793,5 +803,36 @@ class Clock : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("synced", closure, after);
+  }
+}
+
+class ClockGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T timeout(ulong propval)
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /** */
+  T windowSize(int propval)
+  {
+    return setProperty("window-size", propval);
+  }
+
+  /** */
+  T windowThreshold(int propval)
+  {
+    return setProperty("window-threshold", propval);
+  }
+}
+
+/// Fluent builder for [gst.clock.Clock]
+final class ClockGidBuilder : ClockGidBuilderImpl!ClockGidBuilder
+{
+  Clock build()
+  {
+    return new Clock(cast(void*)createGObject(Clock._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import arrowdataset.finish_options;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class DatasetFactory : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.dataset_factory.DatasetFactory]
+  Returns: New builder object
+  */
+  static DatasetFactoryGidBuilder builder()
+  {
+    return new DatasetFactoryGidBuilder;
+  }
+
   /** */
   arrowdataset.dataset.Dataset finish(arrowdataset.finish_options.FinishOptions options = null)
   {
@@ -49,5 +59,24 @@ class DatasetFactory : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.dataset.Dataset)(cast(GADatasetDataset*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class DatasetFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T datasetFactory(void* propval)
+  {
+    return setProperty("dataset-factory", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.dataset_factory.DatasetFactory]
+final class DatasetFactoryGidBuilder : DatasetFactoryGidBuilderImpl!DatasetFactoryGidBuilder
+{
+  DatasetFactory build()
+  {
+    return new DatasetFactory(cast(void*)createGObject(DatasetFactory._getGType), No.Take);
   }
 }

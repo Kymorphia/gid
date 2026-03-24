@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Field : gobject.object.ObjectWrap
   override Field self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.field.Field]
+  Returns: New builder object
+  */
+  static FieldGidBuilder builder()
+  {
+    return new FieldGidBuilder;
   }
 
   /** */
@@ -177,5 +187,30 @@ class Field : gobject.object.ObjectWrap
     _cretval = garrow_field_with_metadata(cast(GArrowField*)this._cPtr, _metadata);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class FieldGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T dataType(arrow.data_type.DataType propval)
+  {
+    return setProperty("data-type", propval);
+  }
+
+  /** */
+  T field(void* propval)
+  {
+    return setProperty("field", propval);
+  }
+}
+
+/// Fluent builder for [arrow.field.Field]
+final class FieldGidBuilder : FieldGidBuilderImpl!FieldGidBuilder
+{
+  Field build()
+  {
+    return new Field(cast(void*)createGObject(Field._getGType), Yes.Take);
   }
 }

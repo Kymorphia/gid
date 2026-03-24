@@ -4,6 +4,7 @@ module gstpbutils.discoverer;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.element;
 import gst.types;
@@ -56,6 +57,15 @@ class Discoverer : gobject.object.ObjectWrap
   override Discoverer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.discoverer.Discoverer]
+  Returns: New builder object
+  */
+  static DiscovererGidBuilder builder()
+  {
+    return new DiscovererGidBuilder;
   }
 
   /**
@@ -410,5 +420,39 @@ class Discoverer : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("starting", closure, after);
+  }
+}
+
+class DiscovererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The duration (in nanoseconds) after which the discovery of an individual
+          URI will timeout.
+          
+          If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
+          set on the result flags.
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(ulong propval)
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /** */
+  T useCache(bool propval)
+  {
+    return setProperty("use-cache", propval);
+  }
+}
+
+/// Fluent builder for [gstpbutils.discoverer.Discoverer]
+final class DiscovererGidBuilder : DiscovererGidBuilderImpl!DiscovererGidBuilder
+{
+  Discoverer build()
+  {
+    return new Discoverer(cast(void*)createGObject(Discoverer._getGType), Yes.Take);
   }
 }

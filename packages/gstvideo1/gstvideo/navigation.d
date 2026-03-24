@@ -3,6 +3,7 @@ module gstvideo.navigation;
 
 public import gstvideo.navigation_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gst.event;
 import gst.message;
 import gst.object;
@@ -815,4 +816,8 @@ interface Navigation
         deltaY = The delta_y coordinate of the mouse event.
   */
   void sendMouseScrollEvent(double x, double y, double deltaX, double deltaY);
+}
+
+interface NavigationGidBuilderImpl(T)
+{
 }

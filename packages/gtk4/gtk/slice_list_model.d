@@ -4,6 +4,7 @@ module gtk.slice_list_model;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -50,6 +51,15 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
+  Get builder for [gtk.slice_list_model.SliceListModel]
+  Returns: New builder object
+  */
+  static SliceListModelGidBuilder builder()
+  {
+    return new SliceListModelGidBuilder;
+  }
+
+  /**
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
@@ -74,7 +84,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -102,7 +112,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   @property void offset(uint propval)
   {
-    return setOffset(propval);
+    setOffset(propval);
   }
 
   /**
@@ -121,7 +131,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   @property void size(uint propval)
   {
-    return setSize(propval);
+    setSize(propval);
   }
 
   mixin ListModelT!();
@@ -220,5 +230,54 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   void setSize(uint size)
   {
     gtk_slice_list_model_set_size(cast(GtkSliceListModel*)this._cPtr, size);
+  }
+}
+
+class SliceListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Child model to take slice from.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `offset` property.
+      Params:
+        propval = Offset of slice.
+      Returns: Builder instance for fluent chaining
+  */
+  T offset(uint propval)
+  {
+    return setProperty("offset", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = Maximum size of slice.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(uint propval)
+  {
+    return setProperty("size", propval);
+  }
+}
+
+/// Fluent builder for [gtk.slice_list_model.SliceListModel]
+final class SliceListModelGidBuilder : SliceListModelGidBuilderImpl!SliceListModelGidBuilder
+{
+  SliceListModel build()
+  {
+    return new SliceListModel(cast(void*)createGObject(SliceListModel._getGType), Yes.Take);
   }
 }

@@ -9,6 +9,7 @@ import gda.row;
 import gda.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
   override DataModelArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.data_model_array.DataModelArray]
+  Returns: New builder object
+  */
+  static DataModelArrayGidBuilder builder()
+  {
+    return new DataModelArrayGidBuilder;
   }
 
   /** */
@@ -121,5 +131,32 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
   void setNColumns(int cols)
   {
     gda_data_model_array_set_n_columns(cast(GdaDataModelArray*)this._cPtr, cols);
+  }
+}
+
+class DataModelArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
+{
+
+  mixin DataModelGidBuilderT!();
+
+  /** */
+  T nColumns(uint propval)
+  {
+    return setProperty("n-columns", propval);
+  }
+
+  /** */
+  T readOnly(bool propval)
+  {
+    return setProperty("read-only", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_model_array.DataModelArray]
+final class DataModelArrayGidBuilder : DataModelArrayGidBuilderImpl!DataModelArrayGidBuilder
+{
+  DataModelArray build()
+  {
+    return new DataModelArray(cast(void*)createGObject(DataModelArray._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import gid.gid;
 import gio.emblemed_icon;
 import gio.icon;
 import gio.icon_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -52,6 +53,15 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
     return this;
   }
 
+  /**
+  Get builder for [gtk.numerable_icon.NumerableIcon]
+  Returns: New builder object
+  */
+  static NumerableIconGidBuilder builder()
+  {
+    return new NumerableIconGidBuilder;
+  }
+
   /** */
   @property gio.icon.Icon backgroundIcon()
   {
@@ -73,7 +83,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   /** */
   @property void backgroundIconName(string propval)
   {
-    return setBackgroundIconName(propval);
+    setBackgroundIconName(propval);
   }
 
   /** */
@@ -85,7 +95,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   /** */
   @property void count(int propval)
   {
-    return setCount(propval);
+    setCount(propval);
   }
 
   /** */
@@ -97,7 +107,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   /** */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /** */
@@ -109,7 +119,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   /** */
   @property void styleContext(gtk.style_context.StyleContext propval)
   {
-    return setStyleContext(propval);
+    setStyleContext(propval);
   }
 
   /**
@@ -300,5 +310,49 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   void setStyleContext(gtk.style_context.StyleContext style)
   {
     gtk_numerable_icon_set_style_context(cast(GtkNumerableIcon*)this._cPtr, style ? cast(GtkStyleContext*)style._cPtr(No.Dup) : null);
+  }
+}
+
+class NumerableIconGidBuilderImpl(T) : gio.emblemed_icon.EmblemedIconGidBuilderImpl!T
+{
+
+
+  /** */
+  T backgroundIcon(gio.icon.Icon propval)
+  {
+    return setProperty("background-icon", propval);
+  }
+
+  /** */
+  T backgroundIconName(string propval)
+  {
+    return setProperty("background-icon-name", propval);
+  }
+
+  /** */
+  T count(int propval)
+  {
+    return setProperty("count", propval);
+  }
+
+  /** */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /** */
+  T styleContext(gtk.style_context.StyleContext propval)
+  {
+    return setProperty("style-context", propval);
+  }
+}
+
+/// Fluent builder for [gtk.numerable_icon.NumerableIcon]
+final class NumerableIconGidBuilder : NumerableIconGidBuilderImpl!NumerableIconGidBuilder
+{
+  NumerableIcon build()
+  {
+    return new NumerableIcon(cast(void*)createGObject(NumerableIcon._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import gdk.paintable;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -51,6 +52,15 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     return this;
   }
 
+  /**
+  Get builder for [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf]
+  Returns: New builder object
+  */
+  static GutterRendererPixbufGidBuilder builder()
+  {
+    return new GutterRendererPixbufGidBuilder;
+  }
+
   /** */
   @property gio.icon.Icon gicon()
   {
@@ -60,7 +70,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   /** */
   @property void gicon(gio.icon.Icon propval)
   {
-    return setGicon(propval);
+    setGicon(propval);
   }
 
   /** */
@@ -72,7 +82,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   /** */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /** */
@@ -84,7 +94,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   /** */
   @property void paintable(gdk.paintable.Paintable propval)
   {
-    return setPaintable(propval);
+    setPaintable(propval);
   }
 
   /** */
@@ -96,7 +106,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   /** */
   @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
   {
-    return setPixbuf(propval);
+    setPixbuf(propval);
   }
 
   /**
@@ -192,5 +202,43 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_pixbuf(cast(GtkSourceGutterRendererPixbuf*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
+  }
+}
+
+class GutterRendererPixbufGidBuilderImpl(T) : gtksource.gutter_renderer.GutterRendererGidBuilderImpl!T
+{
+
+
+  /** */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /** */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /** */
+  T paintable(gdk.paintable.Paintable propval)
+  {
+    return setProperty("paintable", propval);
+  }
+
+  /** */
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("pixbuf", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf]
+final class GutterRendererPixbufGidBuilder : GutterRendererPixbufGidBuilderImpl!GutterRendererPixbufGidBuilder
+{
+  GutterRendererPixbuf build()
+  {
+    return new GutterRendererPixbuf(cast(void*)createGObject(GutterRendererPixbuf._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.overlay_layout_child;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_child;
@@ -39,6 +40,15 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
+  Get builder for [gtk.overlay_layout_child.OverlayLayoutChild]
+  Returns: New builder object
+  */
+  static OverlayLayoutChildGidBuilder builder()
+  {
+    return new OverlayLayoutChildGidBuilder;
+  }
+
+  /**
       Get `clipOverlay` property.
       Returns: Whether the child should be clipped to fit the parent's size.
   */
@@ -54,7 +64,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   */
   @property void clipOverlay(bool propval)
   {
-    return setClipOverlay(propval);
+    setClipOverlay(propval);
   }
 
   /**
@@ -75,7 +85,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   */
   @property void measure(bool propval)
   {
-    return setMeasure(propval);
+    setMeasure(propval);
   }
 
   /**
@@ -120,5 +130,41 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   void setMeasure(bool measure)
   {
     gtk_overlay_layout_child_set_measure(cast(GtkOverlayLayoutChild*)this._cPtr, measure);
+  }
+}
+
+class OverlayLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderImpl!T
+{
+
+  /**
+      Set `clipOverlay` property.
+      Params:
+        propval = Whether the child should be clipped to fit the parent's size.
+      Returns: Builder instance for fluent chaining
+  */
+  T clipOverlay(bool propval)
+  {
+    return setProperty("clip-overlay", propval);
+  }
+
+  /**
+      Set `measure` property.
+      Params:
+        propval = Whether the child size should contribute to the [gtk.overlay_layout.OverlayLayout]'s
+          measurement.
+      Returns: Builder instance for fluent chaining
+  */
+  T measure(bool propval)
+  {
+    return setProperty("measure", propval);
+  }
+}
+
+/// Fluent builder for [gtk.overlay_layout_child.OverlayLayoutChild]
+final class OverlayLayoutChildGidBuilder : OverlayLayoutChildGidBuilderImpl!OverlayLayoutChildGidBuilder
+{
+  OverlayLayoutChild build()
+  {
+    return new OverlayLayoutChild(cast(void*)createGObject(OverlayLayoutChild._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.container_accessible;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -36,5 +37,28 @@ class ContainerAccessible : gtk.widget_accessible.WidgetAccessible
   override ContainerAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.container_accessible.ContainerAccessible]
+  Returns: New builder object
+  */
+  static ContainerAccessibleGidBuilder builder()
+  {
+    return new ContainerAccessibleGidBuilder;
+  }
+}
+
+class ContainerAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.container_accessible.ContainerAccessible]
+final class ContainerAccessibleGidBuilder : ContainerAccessibleGidBuilderImpl!ContainerAccessibleGidBuilder
+{
+  ContainerAccessible build()
+  {
+    return new ContainerAccessible(cast(void*)createGObject(ContainerAccessible._getGType), No.Take);
   }
 }

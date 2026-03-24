@@ -7,6 +7,7 @@ import gmime.c.types;
 import gmime.message;
 import gmime.object;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class MessagePart : gmime.object.ObjectWrap
   override MessagePart self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.message_part.MessagePart]
+  Returns: New builder object
+  */
+  static MessagePartGidBuilder builder()
+  {
+    return new MessagePartGidBuilder;
   }
 
   /**
@@ -97,5 +107,18 @@ class MessagePart : gmime.object.ObjectWrap
   void setMessage(gmime.message.Message message)
   {
     g_mime_message_part_set_message(cast(GMimeMessagePart*)this._cPtr, message ? cast(GMimeMessage*)message._cPtr(No.Dup) : null);
+  }
+}
+
+class MessagePartGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.message_part.MessagePart]
+final class MessagePartGidBuilder : MessagePartGidBuilderImpl!MessagePartGidBuilder
+{
+  MessagePart build()
+  {
+    return new MessagePart(cast(void*)createGObject(MessagePart._getGType), Yes.Take);
   }
 }

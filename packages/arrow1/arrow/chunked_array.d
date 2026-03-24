@@ -12,6 +12,7 @@ import arrow.types;
 import arrow.uint64_array;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -41,6 +42,15 @@ class ChunkedArray : gobject.object.ObjectWrap
   override ChunkedArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.chunked_array.ChunkedArray]
+  Returns: New builder object
+  */
+  static ChunkedArrayGidBuilder builder()
+  {
+    return new ChunkedArrayGidBuilder;
   }
 
   /** */
@@ -235,5 +245,30 @@ class ChunkedArray : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class ChunkedArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T chunkedArray(void* propval)
+  {
+    return setProperty("chunked-array", propval);
+  }
+
+  /** */
+  T dataType(arrow.data_type.DataType propval)
+  {
+    return setProperty("data-type", propval);
+  }
+}
+
+/// Fluent builder for [arrow.chunked_array.ChunkedArray]
+final class ChunkedArrayGidBuilder : ChunkedArrayGidBuilderImpl!ChunkedArrayGidBuilder
+{
+  ChunkedArray build()
+  {
+    return new ChunkedArray(cast(void*)createGObject(ChunkedArray._getGType), Yes.Take);
   }
 }

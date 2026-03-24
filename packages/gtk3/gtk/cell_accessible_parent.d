@@ -7,6 +7,7 @@ import atk.relation_set;
 import atk.types;
 import gdk.rectangle;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_accessible;
@@ -58,4 +59,8 @@ interface CellAccessibleParent
 
   /** */
   void updateRelationset(gtk.cell_accessible.CellAccessible cell, atk.relation_set.RelationSet relationset);
+}
+
+interface CellAccessibleParentGidBuilderImpl(T)
+{
 }

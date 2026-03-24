@@ -14,6 +14,7 @@ import arrow.source_node_options;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -43,6 +44,15 @@ class ExecutePlan : gobject.object.ObjectWrap
   override ExecutePlan self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.execute_plan.ExecutePlan]
+  Returns: New builder object
+  */
+  static ExecutePlanGidBuilder builder()
+  {
+    return new ExecutePlanGidBuilder;
   }
 
   /** */
@@ -252,5 +262,24 @@ class ExecutePlan : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ExecutePlanGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T plan(void* propval)
+  {
+    return setProperty("plan", propval);
+  }
+}
+
+/// Fluent builder for [arrow.execute_plan.ExecutePlan]
+final class ExecutePlanGidBuilder : ExecutePlanGidBuilderImpl!ExecutePlanGidBuilder
+{
+  ExecutePlan build()
+  {
+    return new ExecutePlan(cast(void*)createGObject(ExecutePlan._getGType), Yes.Take);
   }
 }

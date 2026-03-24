@@ -9,6 +9,7 @@ import gdk.surface;
 import gdk.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -91,6 +92,15 @@ class GLContext : gdk.draw_context.DrawContext
   }
 
   /**
+  Get builder for [gdk.glcontext.GLContext]
+  Returns: New builder object
+  */
+  static GLContextGidBuilder builder()
+  {
+    return new GLContextGidBuilder;
+  }
+
+  /**
       Get `allowedApis` property.
       Returns: The allowed APIs.
   */
@@ -106,7 +116,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   @property void allowedApis(gdk.types.GLAPI propval)
   {
-    return setAllowedApis(propval);
+    setAllowedApis(propval);
   }
 
   /**
@@ -116,6 +126,21 @@ class GLContext : gdk.draw_context.DrawContext
   @property gdk.types.GLAPI api()
   {
     return getApi();
+  }
+
+  /**
+      Get `sharedContext` property.
+      Returns: Always null
+        
+        As many contexts can share data now and no single shared context exists
+        anymore, this function has been deprecated and now always returns null.
+  
+      Deprecated: Use [gdk.glcontext.GLContext.isShared] to check if contexts
+          can be shared.
+  */
+  @property gdk.glcontext.GLContext sharedContext()
+  {
+    return getSharedContext();
   }
 
   /**
@@ -450,5 +475,46 @@ class GLContext : gdk.draw_context.DrawContext
   void setUseEs(int useEs)
   {
     gdk_gl_context_set_use_es(cast(GdkGLContext*)this._cPtr, useEs);
+  }
+}
+
+class GLContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T
+{
+
+  /**
+      Set `allowedApis` property.
+      Params:
+        propval = The allowed APIs.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowedApis(gdk.types.GLAPI propval)
+  {
+    return setProperty("allowed-apis", propval);
+  }
+
+  /**
+      Set `sharedContext` property.
+      Params:
+        propval = Always null
+          
+          As many contexts can share data now and no single shared context exists
+          anymore, this function has been deprecated and now always returns null.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gdk.glcontext.GLContext.isShared] to check if contexts
+          can be shared.
+  */
+  T sharedContext(gdk.glcontext.GLContext propval)
+  {
+    return setProperty("shared-context", propval);
+  }
+}
+
+/// Fluent builder for [gdk.glcontext.GLContext]
+final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
+{
+  GLContext build()
+  {
+    return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -38,6 +39,15 @@ class TreeManager : gobject.object.ObjectWrap
   override TreeManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.tree_manager.TreeManager]
+  Returns: New builder object
+  */
+  static TreeManagerGidBuilder builder()
+  {
+    return new TreeManagerGidBuilder;
   }
 
   /**
@@ -162,6 +172,47 @@ class TreeManager : gobject.object.ObjectWrap
     _cretval = gda_tree_manager_get_managers(cast(GdaTreeManager*)this._cPtr);
     auto _retval = gSListToD!(gda.tree_manager.TreeManager, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
+  }
+}
+
+class TreeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `func` property.
+      Params:
+        propval = This property specifies the function which needs to be called when the list of #GdaTreeNode nodes
+          managed has to be updated
+      Returns: Builder instance for fluent chaining
+  */
+  T func(void* propval)
+  {
+    return setProperty("func", propval);
+  }
+
+  /**
+      Set `recursive` property.
+      Params:
+        propval = This property specifies if, when initially creating nodes or updating the list of nodes,
+          the tree manager shoud also request that each node it has created or updated also
+          initially create or update their children.
+          
+          This property can typically set to FALSE if the process of creating children nodes is lenghty
+          and needs to be postponed while an event occurs.
+      Returns: Builder instance for fluent chaining
+  */
+  T recursive(bool propval)
+  {
+    return setProperty("recursive", propval);
+  }
+}
+
+/// Fluent builder for [gda.tree_manager.TreeManager]
+final class TreeManagerGidBuilder : TreeManagerGidBuilderImpl!TreeManagerGidBuilder
+{
+  TreeManager build()
+  {
+    return new TreeManager(cast(void*)createGObject(TreeManager._getGType), No.Take);
   }
 }
 

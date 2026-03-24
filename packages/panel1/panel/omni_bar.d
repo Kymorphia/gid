@@ -3,6 +3,7 @@ module panel.omni_bar;
 
 import gid.gid;
 import gio.menu_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -57,6 +58,15 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   override OmniBar self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.omni_bar.OmniBar]
+  Returns: New builder object
+  */
+  static OmniBarGidBuilder builder()
+  {
+    return new OmniBarGidBuilder;
   }
 
   /**
@@ -132,7 +142,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void popover(gtk.popover.Popover propval)
   {
-    return setPopover(propval);
+    setPopover(propval);
   }
 
   /**
@@ -151,7 +161,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void progress(double propval)
   {
-    return setProgress(propval);
+    setProgress(propval);
   }
 
   mixin ActionableT!();
@@ -266,5 +276,75 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   void stopPulsing()
   {
     panel_omni_bar_stop_pulsing(cast(PanelOmniBar*)this._cPtr);
+  }
+}
+
+class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `actionTooltip` property.
+      Params:
+        propval = The tooltip for the action.
+      Returns: Builder instance for fluent chaining
+  */
+  T actionTooltip(string propval)
+  {
+    return setProperty("action-tooltip", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The menu model of the omni bar menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menu-model", propval);
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The popover to show.
+      Returns: Builder instance for fluent chaining
+  */
+  T popover(gtk.popover.Popover propval)
+  {
+    return setProperty("popover", propval);
+  }
+
+  /**
+      Set `progress` property.
+      Params:
+        propval = The current progress value.
+      Returns: Builder instance for fluent chaining
+  */
+  T progress(double propval)
+  {
+    return setProperty("progress", propval);
+  }
+}
+
+/// Fluent builder for [panel.omni_bar.OmniBar]
+final class OmniBarGidBuilder : OmniBarGidBuilderImpl!OmniBarGidBuilder
+{
+  OmniBar build()
+  {
+    return new OmniBar(cast(void*)createGObject(OmniBar._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import atk.component_mixin;
 import atk.table_cell;
 import atk.table_cell_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_accessible;
@@ -42,6 +43,15 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
     return this;
   }
 
+  /**
+  Get builder for [gtk.container_cell_accessible.ContainerCellAccessible]
+  Returns: New builder object
+  */
+  static ContainerCellAccessibleGidBuilder builder()
+  {
+    return new ContainerCellAccessibleGidBuilder;
+  }
+
   /** */
   this()
   {
@@ -72,5 +82,19 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   void removeChild(gtk.cell_accessible.CellAccessible child)
   {
     gtk_container_cell_accessible_remove_child(cast(GtkContainerCellAccessible*)this._cPtr, child ? cast(GtkCellAccessible*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class ContainerCellAccessibleGidBuilderImpl(T) : gtk.cell_accessible.CellAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.container_cell_accessible.ContainerCellAccessible]
+final class ContainerCellAccessibleGidBuilder : ContainerCellAccessibleGidBuilderImpl!ContainerCellAccessibleGidBuilder
+{
+  ContainerCellAccessible build()
+  {
+    return new ContainerCellAccessible(cast(void*)createGObject(ContainerCellAccessible._getGType), Yes.Take);
   }
 }

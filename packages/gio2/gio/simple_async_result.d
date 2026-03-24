@@ -9,6 +9,7 @@ import gio.c.types;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -205,6 +206,15 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   override SimpleAsyncResult self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.simple_async_result.SimpleAsyncResult]
+  Returns: New builder object
+  */
+  static SimpleAsyncResultGidBuilder builder()
+  {
+    return new SimpleAsyncResultGidBuilder;
   }
 
   mixin AsyncResultT!();
@@ -463,5 +473,20 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   void setOpResGssize(ptrdiff_t opRes)
   {
     g_simple_async_result_set_op_res_gssize(cast(GSimpleAsyncResult*)this._cPtr, opRes);
+  }
+}
+
+class SimpleAsyncResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_result.AsyncResultGidBuilderImpl!T
+{
+
+  mixin AsyncResultGidBuilderT!();
+}
+
+/// Fluent builder for [gio.simple_async_result.SimpleAsyncResult]
+final class SimpleAsyncResultGidBuilder : SimpleAsyncResultGidBuilderImpl!SimpleAsyncResultGidBuilder
+{
+  SimpleAsyncResult build()
+  {
+    return new SimpleAsyncResult(cast(void*)createGObject(SimpleAsyncResult._getGType), Yes.Take);
   }
 }

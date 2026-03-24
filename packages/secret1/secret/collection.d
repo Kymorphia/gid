@@ -13,6 +13,7 @@ import gio.initable;
 import gio.initable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import secret.c.functions;
 import secret.c.types;
@@ -64,6 +65,15 @@ class Collection : gio.dbus_proxy.DBusProxy
   }
 
   /**
+  Get builder for [secret.collection.Collection]
+  Returns: New builder object
+  */
+  static CollectionGidBuilder builder()
+  {
+    return new CollectionGidBuilder;
+  }
+
+  /**
       Get `created` property.
       Returns: The date and time (in seconds since the UNIX epoch) that this
         collection was created.
@@ -82,6 +92,16 @@ class Collection : gio.dbus_proxy.DBusProxy
   @property void created(ulong propval)
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("created", propval);
+  }
+
+  /**
+      Get `flags` property.
+      Returns: A set of flags describing which parts of the secret collection have
+        been initialized.
+  */
+  @property secret.types.CollectionFlags flags()
+  {
+    return getFlags();
   }
 
   /**
@@ -142,6 +162,16 @@ class Collection : gio.dbus_proxy.DBusProxy
   @property void modified(ulong propval)
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("modified", propval);
+  }
+
+  /**
+      Get `service` property.
+      Returns: The `class@Service` object that this collection is associated with and
+        uses to interact with the actual D-Bus Secret Service.
+  */
+  @property secret.service.Service service()
+  {
+    return getService();
   }
 
   /**
@@ -735,5 +765,82 @@ class Collection : gio.dbus_proxy.DBusProxy
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
+{
+
+
+  /**
+      Set `created` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+          collection was created.
+      Returns: Builder instance for fluent chaining
+  */
+  T created(ulong propval)
+  {
+    return setProperty("created", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = A set of flags describing which parts of the secret collection have
+          been initialized.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(secret.types.CollectionFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The human readable label for the collection.
+          
+          Setting this property will result in the label of the collection being
+          set asynchronously. To properly track the changing of the label use the
+          [secret.collection.Collection.setLabel] function.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `modified` property.
+      Params:
+        propval = The date and time (in seconds since the UNIX epoch) that this
+          collection was last modified.
+      Returns: Builder instance for fluent chaining
+  */
+  T modified(ulong propval)
+  {
+    return setProperty("modified", propval);
+  }
+
+  /**
+      Set `service` property.
+      Params:
+        propval = The `class@Service` object that this collection is associated with and
+          uses to interact with the actual D-Bus Secret Service.
+      Returns: Builder instance for fluent chaining
+  */
+  T service(secret.service.Service propval)
+  {
+    return setProperty("service", propval);
+  }
+}
+
+/// Fluent builder for [secret.collection.Collection]
+final class CollectionGidBuilder : CollectionGidBuilderImpl!CollectionGidBuilder
+{
+  Collection build()
+  {
+    return new Collection(cast(void*)createGObject(Collection._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtksource.completion;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -44,6 +45,15 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   override Completion self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.completion.Completion]
+  Returns: New builder object
+  */
+  static CompletionGidBuilder builder()
+  {
+    return new CompletionGidBuilder;
   }
 
   /**
@@ -228,6 +238,15 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   @property void showIcons(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-icons", propval);
+  }
+
+  /**
+      Get `view` property.
+      Returns: The #GtkSourceView bound to the completion object.
+  */
+  @property gtksource.view.View view()
+  {
+    return getView();
   }
 
   mixin BuildableT!();
@@ -684,5 +703,135 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show", closure, after);
+  }
+}
+
+class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `accelerators` property.
+      Params:
+        propval = Number of keyboard accelerators to show for the first proposals. For
+          example, to activate the first proposal, the user can press
+          <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelerators(uint propval)
+  {
+    return setProperty("accelerators", propval);
+  }
+
+  /**
+      Set `autoCompleteDelay` property.
+      Params:
+        propval = Determines the popup delay (in milliseconds) at which the completion
+          will be shown for interactive completion.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoCompleteDelay(uint propval)
+  {
+    return setProperty("auto-complete-delay", propval);
+  }
+
+  /**
+      Set `proposalPageSize` property.
+      Params:
+        propval = The scroll page size of the proposals in the completion window. In
+          other words, when <keycap>PageDown</keycap> or
+          <keycap>PageUp</keycap> is pressed, the selected
+          proposal becomes the one which is located one page size backward or
+          forward.
+          
+          See also the #GtkSourceCompletion::move-cursor signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T proposalPageSize(uint propval)
+  {
+    return setProperty("proposal-page-size", propval);
+  }
+
+  /**
+      Set `providerPageSize` property.
+      Params:
+        propval = The scroll page size of the provider pages in the completion window.
+          
+          See the #GtkSourceCompletion::move-page signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T providerPageSize(uint propval)
+  {
+    return setProperty("provider-page-size", propval);
+  }
+
+  /**
+      Set `rememberInfoVisibility` property.
+      Params:
+        propval = Determines whether the visibility of the info window should be
+          saved when the completion is hidden, and restored when the completion
+          is shown again.
+      Returns: Builder instance for fluent chaining
+  */
+  T rememberInfoVisibility(bool propval)
+  {
+    return setProperty("remember-info-visibility", propval);
+  }
+
+  /**
+      Set `selectOnShow` property.
+      Params:
+        propval = Determines whether the first proposal should be selected when the
+          completion is first shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectOnShow(bool propval)
+  {
+    return setProperty("select-on-show", propval);
+  }
+
+  /**
+      Set `showHeaders` property.
+      Params:
+        propval = Determines whether provider headers should be shown in the proposal
+          list. It can be useful to disable when there is only one provider.
+      Returns: Builder instance for fluent chaining
+  */
+  T showHeaders(bool propval)
+  {
+    return setProperty("show-headers", propval);
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = Determines whether provider and proposal icons should be shown in
+          the completion popup.
+      Returns: Builder instance for fluent chaining
+  */
+  T showIcons(bool propval)
+  {
+    return setProperty("show-icons", propval);
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The #GtkSourceView bound to the completion object.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(gtksource.view.View propval)
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion.Completion]
+final class CompletionGidBuilder : CompletionGidBuilderImpl!CompletionGidBuilder
+{
+  Completion build()
+  {
+    return new Completion(cast(void*)createGObject(Completion._getGType), No.Take);
   }
 }

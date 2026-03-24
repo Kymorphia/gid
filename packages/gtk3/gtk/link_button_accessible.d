@@ -10,6 +10,7 @@ import atk.hyperlink_impl_mixin;
 import atk.image;
 import atk.image_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.button_accessible;
 import gtk.c.functions;
 import gtk.c.types;
@@ -44,5 +45,29 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
     return this;
   }
 
+  /**
+  Get builder for [gtk.link_button_accessible.LinkButtonAccessible]
+  Returns: New builder object
+  */
+  static LinkButtonAccessibleGidBuilder builder()
+  {
+    return new LinkButtonAccessibleGidBuilder;
+  }
+
   mixin HyperlinkImplT!();
+}
+
+class LinkButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccessibleGidBuilderImpl!T, atk.hyperlink_impl.HyperlinkImplGidBuilderImpl!T
+{
+
+  mixin HyperlinkImplGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.link_button_accessible.LinkButtonAccessible]
+final class LinkButtonAccessibleGidBuilder : LinkButtonAccessibleGidBuilderImpl!LinkButtonAccessibleGidBuilder
+{
+  LinkButtonAccessible build()
+  {
+    return new LinkButtonAccessible(cast(void*)createGObject(LinkButtonAccessible._getGType), No.Take);
+  }
 }

@@ -5,6 +5,7 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -117,6 +118,24 @@ class TestDBus : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.test_dbus.TestDBus]
+  Returns: New builder object
+  */
+  static TestDBusGidBuilder builder()
+  {
+    return new TestDBusGidBuilder;
+  }
+
+  /**
+      Get `flags` property.
+      Returns: #GTestDBusFlags specifying the behaviour of the D-Bus session.
+  */
+  @property gio.types.TestDBusFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
       Create a new #GTestDBus object.
   
       Params:
@@ -220,5 +239,29 @@ class TestDBus : gobject.object.ObjectWrap
   void up()
   {
     g_test_dbus_up(cast(GTestDBus*)this._cPtr);
+  }
+}
+
+class TestDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = #GTestDBusFlags specifying the behaviour of the D-Bus session.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.TestDBusFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+}
+
+/// Fluent builder for [gio.test_dbus.TestDBus]
+final class TestDBusGidBuilder : TestDBusGidBuilderImpl!TestDBusGidBuilder
+{
+  TestDBus build()
+  {
+    return new TestDBus(cast(void*)createGObject(TestDBus._getGType), Yes.Take);
   }
 }

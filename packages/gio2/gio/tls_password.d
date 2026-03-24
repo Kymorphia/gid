@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -41,6 +42,15 @@ class TlsPassword : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.tls_password.TlsPassword]
+  Returns: New builder object
+  */
+  static TlsPasswordGidBuilder builder()
+  {
+    return new TlsPasswordGidBuilder;
+  }
+
+  /**
       Get `description` property.
       Returns: Description of what the password is for.
   */
@@ -56,7 +66,7 @@ class TlsPassword : gobject.object.ObjectWrap
   */
   @property void description(string propval)
   {
-    return setDescription(propval);
+    setDescription(propval);
   }
 
   /**
@@ -75,7 +85,7 @@ class TlsPassword : gobject.object.ObjectWrap
   */
   @property void flags(gio.types.TlsPasswordFlags propval)
   {
-    return setFlags(propval);
+    setFlags(propval);
   }
 
   /**
@@ -94,7 +104,7 @@ class TlsPassword : gobject.object.ObjectWrap
   */
   @property void warning(string propval)
   {
-    return setWarning(propval);
+    setWarning(propval);
   }
 
   /**
@@ -263,5 +273,51 @@ class TlsPassword : gobject.object.ObjectWrap
   {
     const(char)* _warning = warning.toCString(No.Alloc);
     g_tls_password_set_warning(cast(GTlsPassword*)this._cPtr, _warning);
+  }
+}
+
+class TlsPasswordGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `description` property.
+      Params:
+        propval = Description of what the password is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T description(string propval)
+  {
+    return setProperty("description", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags about the password.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.TlsPasswordFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `warning` property.
+      Params:
+        propval = Warning about the password.
+      Returns: Builder instance for fluent chaining
+  */
+  T warning(string propval)
+  {
+    return setProperty("warning", propval);
+  }
+}
+
+/// Fluent builder for [gio.tls_password.TlsPassword]
+final class TlsPasswordGidBuilder : TlsPasswordGidBuilderImpl!TlsPasswordGidBuilder
+{
+  TlsPassword build()
+  {
+    return new TlsPassword(cast(void*)createGObject(TlsPassword._getGType), Yes.Take);
   }
 }

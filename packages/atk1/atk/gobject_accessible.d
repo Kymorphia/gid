@@ -6,6 +6,7 @@ import atk.c.types;
 import atk.object;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -45,6 +46,15 @@ class GObjectAccessible : atk.object.ObjectWrap
   }
 
   /**
+  Get builder for [atk.gobject_accessible.GObjectAccessible]
+  Returns: New builder object
+  */
+  static GObjectAccessibleGidBuilder builder()
+  {
+    return new GObjectAccessibleGidBuilder;
+  }
+
+  /**
       Gets the accessible object for the specified obj.
   
       Params:
@@ -71,5 +81,18 @@ class GObjectAccessible : atk.object.ObjectWrap
     _cretval = atk_gobject_accessible_get_object(cast(AtkGObjectAccessible*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class GObjectAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.gobject_accessible.GObjectAccessible]
+final class GObjectAccessibleGidBuilder : GObjectAccessibleGidBuilderImpl!GObjectAccessibleGidBuilder
+{
+  GObjectAccessible build()
+  {
+    return new GObjectAccessible(cast(void*)createGObject(GObjectAccessible._getGType), No.Take);
   }
 }

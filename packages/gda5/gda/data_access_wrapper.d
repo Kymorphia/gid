@@ -7,6 +7,7 @@ import gda.data_model;
 import gda.data_model_mixin;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,21 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
   override DataAccessWrapper self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.data_access_wrapper.DataAccessWrapper]
+  Returns: New builder object
+  */
+  static DataAccessWrapperGidBuilder builder()
+  {
+    return new DataAccessWrapperGidBuilder;
+  }
+
+  /** */
+  @property gda.data_model.DataModel model()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("model");
   }
 
   mixin DataModelT!();
@@ -89,5 +105,26 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
     auto _mapping = cast(const(int)*)mapping.ptr;
     _retval = cast(bool)gda_data_access_wrapper_set_mapping(cast(GdaDataAccessWrapper*)this._cPtr, _mapping, _mappingSize);
     return _retval;
+  }
+}
+
+class DataAccessWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
+{
+
+  mixin DataModelGidBuilderT!();
+
+  /** */
+  T model(gda.data_model.DataModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_access_wrapper.DataAccessWrapper]
+final class DataAccessWrapperGidBuilder : DataAccessWrapperGidBuilderImpl!DataAccessWrapperGidBuilder
+{
+  DataAccessWrapper build()
+  {
+    return new DataAccessWrapper(cast(void*)createGObject(DataAccessWrapper._getGType), No.Take);
   }
 }

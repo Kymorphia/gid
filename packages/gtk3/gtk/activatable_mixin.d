@@ -3,6 +3,7 @@ module gtk.activatable_mixin;
 
 public import gtk.activatable_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.action;
 public import gtk.c.functions;
@@ -272,7 +273,7 @@ template ActivatableT()
   */
   @property void relatedAction(gtk.action.Action propval)
   {
-    return setRelatedAction(propval);
+    setRelatedAction(propval);
   }
 
   /**
@@ -309,7 +310,7 @@ template ActivatableT()
   */
   @property void useActionAppearance(bool propval)
   {
-    return setUseActionAppearance(propval);
+    setUseActionAppearance(propval);
   }
 
   /**
@@ -405,5 +406,44 @@ template ActivatableT()
   override void syncActionProperties(gtk.action.Action action = null)
   {
     gtk_activatable_sync_action_properties(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
+  }
+}
+
+template ActivatableGidBuilderT()
+{
+
+  /**
+      Set `relatedAction` property.
+      Params:
+        propval = The action that this activatable will activate and receive
+          updates from for various states and possibly appearance.
+          
+          > #GtkActivatable implementors need to handle the this property and
+          > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
+      Returns: Builder instance for fluent chaining
+  */
+  T relatedAction(gtk.action.Action propval)
+  {
+    return setProperty("related-action", propval);
+  }
+
+  /**
+      Set `useActionAppearance` property.
+      Params:
+        propval = Whether this activatable should reset its layout
+          and appearance when setting the related action or when
+          the action changes appearance.
+          
+          See the #GtkAction documentation directly to find which properties
+          should be ignored by the #GtkActivatable when this property is false.
+          
+          > #GtkActivatable implementors need to handle this property
+          > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
+          > widget when it changes.
+      Returns: Builder instance for fluent chaining
+  */
+  T useActionAppearance(bool propval)
+  {
+    return setProperty("use-action-appearance", propval);
   }
 }

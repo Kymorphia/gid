@@ -2,6 +2,7 @@
 module gtk.column_view_sorter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -69,6 +70,15 @@ class ColumnViewSorter : gtk.sorter.Sorter
   override ColumnViewSorter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.column_view_sorter.ColumnViewSorter]
+  Returns: New builder object
+  */
+  static ColumnViewSorterGidBuilder builder()
+  {
+    return new ColumnViewSorterGidBuilder;
   }
 
   /**
@@ -166,5 +176,18 @@ class ColumnViewSorter : gtk.sorter.Sorter
     _cretval = gtk_column_view_sorter_get_primary_sort_order(cast(GtkColumnViewSorter*)this._cPtr);
     gtk.types.SortType _retval = cast(gtk.types.SortType)_cretval;
     return _retval;
+  }
+}
+
+class ColumnViewSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.column_view_sorter.ColumnViewSorter]
+final class ColumnViewSorterGidBuilder : ColumnViewSorterGidBuilderImpl!ColumnViewSorterGidBuilder
+{
+  ColumnViewSorter build()
+  {
+    return new ColumnViewSorter(cast(void*)createGObject(ColumnViewSorter._getGType), No.Take);
   }
 }

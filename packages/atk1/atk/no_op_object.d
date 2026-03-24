@@ -30,6 +30,7 @@ import atk.value_mixin;
 import atk.window;
 import atk.window_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -68,6 +69,15 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
     return this;
   }
 
+  /**
+  Get builder for [atk.no_op_object.NoOpObject]
+  Returns: New builder object
+  */
+  static NoOpObjectGidBuilder builder()
+  {
+    return new NoOpObjectGidBuilder;
+  }
+
   mixin ActionT!();
   mixin ComponentT!();
   mixin DocumentT!();
@@ -97,5 +107,31 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
     AtkObject* _cretval;
     _cretval = atk_no_op_object_new(obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class NoOpObjectGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T, atk.document.DocumentGidBuilderImpl!T, atk.editable_text.EditableTextGidBuilderImpl!T, atk.hypertext.HypertextGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T, atk.table.TableGidBuilderImpl!T, atk.table_cell.TableCellGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T, atk.window.WindowGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+  mixin ComponentGidBuilderT!();
+  mixin DocumentGidBuilderT!();
+  mixin EditableTextGidBuilderT!();
+  mixin HypertextGidBuilderT!();
+  mixin ImageGidBuilderT!();
+  mixin SelectionGidBuilderT!();
+  mixin TableGidBuilderT!();
+  mixin TableCellGidBuilderT!();
+  mixin TextGidBuilderT!();
+  mixin ValueGidBuilderT!();
+  mixin WindowGidBuilderT!();
+}
+
+/// Fluent builder for [atk.no_op_object.NoOpObject]
+final class NoOpObjectGidBuilder : NoOpObjectGidBuilderImpl!NoOpObjectGidBuilder
+{
+  NoOpObject build()
+  {
+    return new NoOpObject(cast(void*)createGObject(NoOpObject._getGType), Yes.Take);
   }
 }

@@ -8,6 +8,7 @@ import arrow.time64_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -36,6 +37,15 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
   override Time64ArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.time64_array_builder.Time64ArrayBuilder]
+  Returns: New builder object
+  */
+  static Time64ArrayBuilderGidBuilder builder()
+  {
+    return new Time64ArrayBuilderGidBuilder;
   }
 
   /** */
@@ -100,5 +110,18 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class Time64ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.time64_array_builder.Time64ArrayBuilder]
+final class Time64ArrayBuilderGidBuilder : Time64ArrayBuilderGidBuilderImpl!Time64ArrayBuilderGidBuilder
+{
+  Time64ArrayBuilder build()
+  {
+    return new Time64ArrayBuilder(cast(void*)createGObject(Time64ArrayBuilder._getGType), Yes.Take);
   }
 }

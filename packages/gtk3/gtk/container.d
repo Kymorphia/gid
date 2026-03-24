@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import cairo.context;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 import gobject.types;
@@ -250,6 +251,15 @@ class Container : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [gtk.container.Container]
+  Returns: New builder object
+  */
+  static ContainerGidBuilder builder()
+  {
+    return new ContainerGidBuilder;
+  }
+
   /** */
   @property uint borderWidth()
   {
@@ -259,7 +269,7 @@ class Container : gtk.widget.Widget
   /** */
   @property void borderWidth(uint propval)
   {
-    return setBorderWidth(propval);
+    setBorderWidth(propval);
   }
 
   /** */
@@ -277,7 +287,7 @@ class Container : gtk.widget.Widget
   /** */
   @property void resizeMode(gtk.types.ResizeMode propval)
   {
-    return setResizeMode(propval);
+    setResizeMode(propval);
   }
 
   /**
@@ -939,5 +949,37 @@ class Container : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("set-focus-child", closure, after);
+  }
+}
+
+class ContainerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /** */
+  T borderWidth(uint propval)
+  {
+    return setProperty("border-width", propval);
+  }
+
+  /** */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /** */
+  T resizeMode(gtk.types.ResizeMode propval)
+  {
+    return setProperty("resize-mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.container.Container]
+final class ContainerGidBuilder : ContainerGidBuilderImpl!ContainerGidBuilder
+{
+  Container build()
+  {
+    return new Container(cast(void*)createGObject(Container._getGType), No.Take);
   }
 }

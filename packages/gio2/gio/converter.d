@@ -7,6 +7,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 
 /**
     [gio.converter.Converter] is an interface for streaming conversions.
@@ -134,4 +135,8 @@ interface Converter
       state that would produce output then that output is lost.
   */
   void reset();
+}
+
+interface ConverterGidBuilderImpl(T)
+{
 }

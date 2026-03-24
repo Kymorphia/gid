@@ -4,6 +4,7 @@ module gtk.stack_sidebar;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -59,6 +60,15 @@ class StackSidebar : gtk.bin.Bin
     return this;
   }
 
+  /**
+  Get builder for [gtk.stack_sidebar.StackSidebar]
+  Returns: New builder object
+  */
+  static StackSidebarGidBuilder builder()
+  {
+    return new StackSidebarGidBuilder;
+  }
+
   /** */
   @property gtk.stack.Stack stack()
   {
@@ -68,7 +78,7 @@ class StackSidebar : gtk.bin.Bin
   /** */
   @property void stack(gtk.stack.Stack propval)
   {
-    return setStack(propval);
+    setStack(propval);
   }
 
   /**
@@ -108,5 +118,25 @@ class StackSidebar : gtk.bin.Bin
   void setStack(gtk.stack.Stack stack)
   {
     gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
+  }
+}
+
+class StackSidebarGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /** */
+  T stack(gtk.stack.Stack propval)
+  {
+    return setProperty("stack", propval);
+  }
+}
+
+/// Fluent builder for [gtk.stack_sidebar.StackSidebar]
+final class StackSidebarGidBuilder : StackSidebarGidBuilderImpl!StackSidebarGidBuilder
+{
+  StackSidebar build()
+  {
+    return new StackSidebar(cast(void*)createGObject(StackSidebar._getGType), No.Take);
   }
 }

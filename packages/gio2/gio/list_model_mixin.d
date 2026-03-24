@@ -7,6 +7,7 @@ public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.types;
 
@@ -253,4 +254,8 @@ template ListModelT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("items-changed", closure, after);
   }
+}
+
+template ListModelGidBuilderT()
+{
 }

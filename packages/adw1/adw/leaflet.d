@@ -9,6 +9,7 @@ import adw.swipeable;
 import adw.swipeable_mixin;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -85,6 +86,15 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   }
 
   /**
+  Get builder for [adw.leaflet.Leaflet]
+  Returns: New builder object
+  */
+  static LeafletGidBuilder builder()
+  {
+    return new LeafletGidBuilder;
+  }
+
+  /**
       Get `canNavigateBack` property.
       Returns: Whether gestures and shortcuts for navigating backward are enabled.
         
@@ -140,7 +150,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void canNavigateBack(bool propval)
   {
-    return setCanNavigateBack(propval);
+    setCanNavigateBack(propval);
   }
 
   /**
@@ -199,7 +209,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void canNavigateForward(bool propval)
   {
-    return setCanNavigateForward(propval);
+    setCanNavigateForward(propval);
   }
 
   /**
@@ -222,7 +232,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void canUnfold(bool propval)
   {
-    return setCanUnfold(propval);
+    setCanUnfold(propval);
   }
 
   /**
@@ -257,7 +267,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void childTransitionParams(adw.spring_params.SpringParams propval)
   {
-    return setChildTransitionParams(propval);
+    setChildTransitionParams(propval);
   }
 
   /**
@@ -305,7 +315,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
   {
-    return setFoldThresholdPolicy(propval);
+    setFoldThresholdPolicy(propval);
   }
 
   /**
@@ -349,7 +359,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /**
@@ -372,7 +382,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void modeTransitionDuration(uint propval)
   {
-    return setModeTransitionDuration(propval);
+    setModeTransitionDuration(propval);
   }
 
   /**
@@ -418,7 +428,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void transitionType(adw.types.LeafletTransitionType propval)
   {
-    return setTransitionType(propval);
+    setTransitionType(propval);
   }
 
   /**
@@ -451,7 +461,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void visibleChild(gtk.widget.Widget propval)
   {
-    return setVisibleChild(propval);
+    setVisibleChild(propval);
   }
 
   /**
@@ -478,7 +488,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   @property void visibleChildName(string propval)
   {
-    return setVisibleChildName(propval);
+    setVisibleChildName(propval);
   }
 
   mixin SwipeableT!();
@@ -1040,5 +1050,214 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_leaflet_set_visible_child_name(cast(AdwLeaflet*)this._cPtr, _name);
+  }
+}
+
+class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin SwipeableGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `canNavigateBack` property.
+      Params:
+        propval = Whether gestures and shortcuts for navigating backward are enabled.
+          
+          The supported gestures are:
+          
+          $(LIST
+            * One-finger swipe on touchscreens
+            * Horizontal scrolling on touchpads (usually two-finger swipe)
+            * Back/forward mouse buttons
+          )
+            
+          The keyboard back/forward keys are also supported, as well as the
+          <kbd>Alt</kbd>+<kbd>←</kbd> shortcut for horizontal orientation, or
+          <kbd>Alt</kbd>+<kbd>↑</kbd> for vertical orientation.
+          
+          If the orientation is horizontal, for right-to-left locales, gestures and
+          shortcuts are reversed.
+          
+          Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+          can be navigated to.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T canNavigateBack(bool propval)
+  {
+    return setProperty("can-navigate-back", propval);
+  }
+
+  /**
+      Set `canNavigateForward` property.
+      Params:
+        propval = Whether gestures and shortcuts for navigating forward are enabled.
+          
+          The supported gestures are:
+          
+          $(LIST
+            * One-finger swipe on touchscreens
+            * Horizontal scrolling on touchpads (usually two-finger swipe)
+            * Back/forward mouse buttons
+          )
+            
+          The keyboard back/forward keys are also supported, as well as the
+          <kbd>Alt</kbd>+<kbd>→</kbd> shortcut for horizontal orientation, or
+          <kbd>Alt</kbd>+<kbd>↓</kbd> for vertical orientation.
+          
+          If the orientation is horizontal, for right-to-left locales, gestures and
+          shortcuts are reversed.
+          
+          Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+          can be navigated to.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T canNavigateForward(bool propval)
+  {
+    return setProperty("can-navigate-forward", propval);
+  }
+
+  /**
+      Set `canUnfold` property.
+      Params:
+        propval = Whether or not the leaflet can unfold.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T canUnfold(bool propval)
+  {
+    return setProperty("can-unfold", propval);
+  }
+
+  /**
+      Set `childTransitionParams` property.
+      Params:
+        propval = The child transition spring parameters.
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T childTransitionParams(adw.spring_params.SpringParams propval)
+  {
+    return setProperty("child-transition-params", propval);
+  }
+
+  /**
+      Set `foldThresholdPolicy` property.
+      Params:
+        propval = Determines when the leaflet will fold.
+          
+          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only fold when the
+          children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural], it
+          will fold as soon as children don't get their natural size.
+          
+          This can be useful if you have a long ellipsizing label and want to let it
+          ellipsize instead of immediately folding.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  {
+    return setProperty("fold-threshold-policy", propval);
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Whether the leaflet allocates the same size for all children when folded.
+          
+          If set to `FALSE`, different children can have different size along the
+          opposite orientation.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /**
+      Set `modeTransitionDuration` property.
+      Params:
+        propval = The mode transition animation duration, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T modeTransitionDuration(uint propval)
+  {
+    return setProperty("mode-transition-duration", propval);
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = The type of animation used for transitions between modes and children.
+          
+          The transition type can be changed without problems at runtime, so it is
+          possible to change the animation based on the mode or child that is about
+          to become current.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T transitionType(adw.types.LeafletTransitionType propval)
+  {
+    return setProperty("transition-type", propval);
+  }
+
+  /**
+      Set `visibleChild` property.
+      Params:
+        propval = The widget currently visible when the leaflet is folded.
+          
+          The transition is determined by `property@Leaflet:transition-type` and
+          `property@Leaflet:child-transition-params`. The transition can be cancelled
+          by the user, in which case visible child will change back to the previously
+          visible child.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T visibleChild(gtk.widget.Widget propval)
+  {
+    return setProperty("visible-child", propval);
+  }
+
+  /**
+      Set `visibleChildName` property.
+      Params:
+        propval = The name of the widget currently visible when the leaflet is folded.
+          
+          See `property@Leaflet:visible-child`.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T visibleChildName(string propval)
+  {
+    return setProperty("visible-child-name", propval);
+  }
+}
+
+/// Fluent builder for [adw.leaflet.Leaflet]
+final class LeafletGidBuilder : LeafletGidBuilderImpl!LeafletGidBuilder
+{
+  Leaflet build()
+  {
+    return new Leaflet(cast(void*)createGObject(Leaflet._getGType), No.Take);
   }
 }

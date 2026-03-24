@@ -2,6 +2,7 @@
 module webkit.file_chooser_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.file_filter;
 import webkit.c.functions;
@@ -54,6 +55,15 @@ class FileChooserRequest : gobject.object.ObjectWrap
   override FileChooserRequest self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.file_chooser_request.FileChooserRequest]
+  Returns: New builder object
+  */
+  static FileChooserRequestGidBuilder builder()
+  {
+    return new FileChooserRequestGidBuilder;
   }
 
   /**
@@ -217,5 +227,18 @@ class FileChooserRequest : gobject.object.ObjectWrap
     const(char*)* _files = _tmpfiles.ptr;
 
     webkit_file_chooser_request_select_files(cast(WebKitFileChooserRequest*)this._cPtr, _files);
+  }
+}
+
+class FileChooserRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.file_chooser_request.FileChooserRequest]
+final class FileChooserRequestGidBuilder : FileChooserRequestGidBuilderImpl!FileChooserRequestGidBuilder
+{
+  FileChooserRequest build()
+  {
+    return new FileChooserRequest(cast(void*)createGObject(FileChooserRequest._getGType), No.Take);
   }
 }

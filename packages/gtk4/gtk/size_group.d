@@ -2,6 +2,7 @@
 module gtk.size_group;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -105,6 +106,15 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
+  Get builder for [gtk.size_group.SizeGroup]
+  Returns: New builder object
+  */
+  static SizeGroupGidBuilder builder()
+  {
+    return new SizeGroupGidBuilder;
+  }
+
+  /**
       Get `mode` property.
       Returns: The direction in which the size group affects requested sizes.
   */
@@ -120,7 +130,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void mode(gtk.types.SizeGroupMode propval)
   {
-    return setMode(propval);
+    setMode(propval);
   }
 
   mixin BuildableT!();
@@ -211,5 +221,31 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   void setMode(gtk.types.SizeGroupMode mode)
   {
     gtk_size_group_set_mode(cast(GtkSizeGroup*)this._cPtr, mode);
+  }
+}
+
+class SizeGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `mode` property.
+      Params:
+        propval = The direction in which the size group affects requested sizes.
+      Returns: Builder instance for fluent chaining
+  */
+  T mode(gtk.types.SizeGroupMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.size_group.SizeGroup]
+final class SizeGroupGidBuilder : SizeGroupGidBuilderImpl!SizeGroupGidBuilder
+{
+  SizeGroup build()
+  {
+    return new SizeGroup(cast(void*)createGObject(SizeGroup._getGType), Yes.Take);
   }
 }

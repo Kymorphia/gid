@@ -2,6 +2,7 @@
 module gtk.cell_renderer_progress;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -42,6 +43,15 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   override CellRendererProgress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer_progress.CellRendererProgress]
+  Returns: New builder object
+  */
+  static CellRendererProgressGidBuilder builder()
+  {
+    return new CellRendererProgressGidBuilder;
   }
 
   /** */
@@ -196,5 +206,98 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_progress_new();
     this(_cretval, No.Take);
+  }
+}
+
+class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /**
+      Set `pulse` property.
+      Params:
+        propval = Setting this to a non-negative value causes the cell renderer to
+          enter "activity mode", where a block bounces back and forth to
+          indicate that some progress is made, without specifying exactly how
+          much.
+          
+          Each increment of the property causes the block to move by a little
+          bit.
+          
+          To indicate that the activity has not started yet, set the property
+          to zero. To indicate completion, set the property to `G_MAXINT`.
+      Returns: Builder instance for fluent chaining
+  */
+  T pulse(int propval)
+  {
+    return setProperty("pulse", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The "text" property determines the label which will be drawn
+          over the progress bar. Setting this property to null causes the default
+          label to be displayed. Setting this property to an empty string causes
+          no label to be displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+
+  /**
+      Set `textXalign` property.
+      Params:
+        propval = The "text-xalign" property controls the horizontal alignment of the
+          text in the progress bar.  Valid values range from 0 (left) to 1
+          (right).  Reserved for RTL layouts.
+      Returns: Builder instance for fluent chaining
+  */
+  T textXalign(float propval)
+  {
+    return setProperty("text-xalign", propval);
+  }
+
+  /**
+      Set `textYalign` property.
+      Params:
+        propval = The "text-yalign" property controls the vertical alignment of the
+          text in the progress bar.  Valid values range from 0 (top) to 1
+          (bottom).
+      Returns: Builder instance for fluent chaining
+  */
+  T textYalign(float propval)
+  {
+    return setProperty("text-yalign", propval);
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The "value" property determines the percentage to which the
+          progress bar will be "filled in".
+      Returns: Builder instance for fluent chaining
+  */
+  T value(int propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_progress.CellRendererProgress]
+final class CellRendererProgressGidBuilder : CellRendererProgressGidBuilderImpl!CellRendererProgressGidBuilder
+{
+  CellRendererProgress build()
+  {
+    return new CellRendererProgress(cast(void*)createGObject(CellRendererProgress._getGType), No.Take);
   }
 }

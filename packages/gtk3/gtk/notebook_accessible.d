@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.selection;
 import atk.selection_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -40,5 +41,29 @@ class NotebookAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return this;
   }
 
+  /**
+  Get builder for [gtk.notebook_accessible.NotebookAccessible]
+  Returns: New builder object
+  */
+  static NotebookAccessibleGidBuilder builder()
+  {
+    return new NotebookAccessibleGidBuilder;
+  }
+
   mixin SelectionT!();
+}
+
+class NotebookAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
+{
+
+  mixin SelectionGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.notebook_accessible.NotebookAccessible]
+final class NotebookAccessibleGidBuilder : NotebookAccessibleGidBuilderImpl!NotebookAccessibleGidBuilder
+{
+  NotebookAccessible build()
+  {
+    return new NotebookAccessible(cast(void*)createGObject(NotebookAccessible._getGType), No.Take);
+  }
 }

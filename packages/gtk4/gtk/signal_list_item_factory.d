@@ -3,6 +3,7 @@ module gtk.signal_list_item_factory;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -77,6 +78,15 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   override SignalListItemFactory self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.signal_list_item_factory.SignalListItemFactory]
+  Returns: New builder object
+  */
+  static SignalListItemFactoryGidBuilder builder()
+  {
+    return new SignalListItemFactoryGidBuilder;
   }
 
   /**
@@ -286,5 +296,18 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unbind", closure, after);
+  }
+}
+
+class SignalListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFactoryGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.signal_list_item_factory.SignalListItemFactory]
+final class SignalListItemFactoryGidBuilder : SignalListItemFactoryGidBuilderImpl!SignalListItemFactoryGidBuilder
+{
+  SignalListItemFactory build()
+  {
+    return new SignalListItemFactory(cast(void*)createGObject(SignalListItemFactory._getGType), Yes.Take);
   }
 }

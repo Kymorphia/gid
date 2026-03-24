@@ -8,6 +8,7 @@ import arrow.decimal32_data_type;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class Decimal32Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal32_scalar.Decimal32Scalar]
+  Returns: New builder object
+  */
+  static Decimal32ScalarGidBuilder builder()
+  {
+    return new Decimal32ScalarGidBuilder;
+  }
+
   /** */
   this(arrow.decimal32_data_type.Decimal32DataType dataType, arrow.decimal32.Decimal32 value)
   {
@@ -54,5 +64,29 @@ class Decimal32Scalar : arrow.scalar.Scalar
     _cretval = garrow_decimal32_scalar_get_value(cast(GArrowDecimal32Scalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class Decimal32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scalar.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(arrow.decimal32.Decimal32 propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.decimal32_scalar.Decimal32Scalar]
+final class Decimal32ScalarGidBuilder : Decimal32ScalarGidBuilderImpl!Decimal32ScalarGidBuilder
+{
+  Decimal32Scalar build()
+  {
+    return new Decimal32Scalar(cast(void*)createGObject(Decimal32Scalar._getGType), Yes.Take);
   }
 }

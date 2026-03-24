@@ -4,6 +4,7 @@ module gtk.tree_sortable_mixin;
 public import gtk.tree_sortable_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -177,4 +178,8 @@ template TreeSortableT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sort-column-changed", closure, after);
   }
+}
+
+template TreeSortableGidBuilderT()
+{
 }

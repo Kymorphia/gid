@@ -19,6 +19,7 @@ import arrow.types;
 import arrow.uint64_array;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -48,6 +49,15 @@ class Table : gobject.object.ObjectWrap
   override Table self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.table.Table]
+  Returns: New builder object
+  */
+  static TableGidBuilder builder()
+  {
+    return new TableGidBuilder;
   }
 
   /** */
@@ -323,5 +333,24 @@ class Table : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class TableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T table(void* propval)
+  {
+    return setProperty("table", propval);
+  }
+}
+
+/// Fluent builder for [arrow.table.Table]
+final class TableGidBuilder : TableGidBuilderImpl!TableGidBuilder
+{
+  Table build()
+  {
+    return new Table(cast(void*)createGObject(Table._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for converting text/plain into text/html.
@@ -39,6 +40,15 @@ class FilterHTML : gmime.filter.Filter
   }
 
   /**
+  Get builder for [gmime.filter_html.FilterHTML]
+  Returns: New builder object
+  */
+  static FilterHTMLGidBuilder builder()
+  {
+    return new FilterHTMLGidBuilder;
+  }
+
+  /**
       Creates a new GMimeFilterHTML filter which can be used to convert a
       plain UTF-8 text stream into an html stream.
   
@@ -52,5 +62,18 @@ class FilterHTML : gmime.filter.Filter
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_html_new(flags, colour);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FilterHTMLGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_html.FilterHTML]
+final class FilterHTMLGidBuilder : FilterHTMLGidBuilderImpl!FilterHTMLGidBuilder
+{
+  FilterHTML build()
+  {
+    return new FilterHTML(cast(void*)createGObject(FilterHTML._getGType), Yes.Take);
   }
 }

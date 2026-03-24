@@ -3,6 +3,7 @@ module gtk.tree_drag_dest;
 
 public import gtk.tree_drag_dest_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.value;
 import gtk.c.functions;
 import gtk.c.types;
@@ -57,4 +58,8 @@ interface TreeDragDest
       Deprecated: Use list models instead
   */
   bool rowDropPossible(gtk.tree_path.TreePath destPath, gobject.value.Value value);
+}
+
+interface TreeDragDestGidBuilderImpl(T)
+{
 }

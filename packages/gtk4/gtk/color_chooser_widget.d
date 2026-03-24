@@ -2,6 +2,7 @@
 module gtk.color_chooser_widget;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -73,6 +74,15 @@ class ColorChooserWidget : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
+  Get builder for [gtk.color_chooser_widget.ColorChooserWidget]
+  Returns: New builder object
+  */
+  static ColorChooserWidgetGidBuilder builder()
+  {
+    return new ColorChooserWidgetGidBuilder;
+  }
+
+  /**
       Get `showEditor` property.
       Returns: true when the color chooser is showing the single-color editor.
         
@@ -106,5 +116,33 @@ class ColorChooserWidget : gtk.widget.Widget, gtk.color_chooser.ColorChooser
     GtkWidget* _cretval;
     _cretval = gtk_color_chooser_widget_new();
     this(_cretval, No.Take);
+  }
+}
+
+class ColorChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.color_chooser.ColorChooserGidBuilderImpl!T
+{
+
+  mixin ColorChooserGidBuilderT!();
+
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = true when the color chooser is showing the single-color editor.
+          
+          It can be set to switch the color chooser into single-color editing mode.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEditor(bool propval)
+  {
+    return setProperty("show-editor", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_chooser_widget.ColorChooserWidget]
+final class ColorChooserWidgetGidBuilder : ColorChooserWidgetGidBuilderImpl!ColorChooserWidgetGidBuilder
+{
+  ColorChooserWidget build()
+  {
+    return new ColorChooserWidget(cast(void*)createGObject(ColorChooserWidget._getGType), No.Take);
   }
 }

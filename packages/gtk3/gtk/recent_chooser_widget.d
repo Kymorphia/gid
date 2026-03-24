@@ -4,6 +4,7 @@ module gtk.recent_chooser_widget;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -56,6 +57,15 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
     return this;
   }
 
+  /**
+  Get builder for [gtk.recent_chooser_widget.RecentChooserWidget]
+  Returns: New builder object
+  */
+  static RecentChooserWidgetGidBuilder builder()
+  {
+    return new RecentChooserWidgetGidBuilder;
+  }
+
   mixin RecentChooserT!();
 
   /**
@@ -86,5 +96,20 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
     _cretval = gtk_recent_chooser_widget_new_for_manager(manager ? cast(GtkRecentManager*)manager._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.recent_chooser_widget.RecentChooserWidget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class RecentChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
+{
+
+  mixin RecentChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.recent_chooser_widget.RecentChooserWidget]
+final class RecentChooserWidgetGidBuilder : RecentChooserWidgetGidBuilderImpl!RecentChooserWidgetGidBuilder
+{
+  RecentChooserWidget build()
+  {
+    return new RecentChooserWidget(cast(void*)createGObject(RecentChooserWidget._getGType), No.Take);
   }
 }

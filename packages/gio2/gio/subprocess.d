@@ -13,6 +13,7 @@ import gio.output_stream;
 import gio.types;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -100,6 +101,15 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   override Subprocess self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.subprocess.Subprocess]
+  Returns: New builder object
+  */
+  static SubprocessGidBuilder builder()
+  {
+    return new SubprocessGidBuilder;
   }
 
   mixin InitableT!();
@@ -651,5 +661,31 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class SubprocessGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Subprocess flags.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.SubprocessFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+}
+
+/// Fluent builder for [gio.subprocess.Subprocess]
+final class SubprocessGidBuilder : SubprocessGidBuilderImpl!SubprocessGidBuilder
+{
+  Subprocess build()
+  {
+    return new Subprocess(cast(void*)createGObject(Subprocess._getGType), Yes.Take);
   }
 }

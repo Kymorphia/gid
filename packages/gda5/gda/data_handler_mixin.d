@@ -6,6 +6,7 @@ public import gda.c.functions;
 public import gda.c.types;
 public import gda.types;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.types;
 public import gobject.value;
@@ -145,4 +146,8 @@ template DataHandlerT()
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
+}
+
+template DataHandlerGidBuilderT()
+{
 }

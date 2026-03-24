@@ -9,6 +9,7 @@ import arrow.data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class StructArray : arrow.array.Array
   override StructArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.struct_array.StructArray]
+  Returns: New builder object
+  */
+  static StructArrayGidBuilder builder()
+  {
+    return new StructArrayGidBuilder;
   }
 
   /** */
@@ -78,5 +88,18 @@ class StructArray : arrow.array.Array
     _cretval = garrow_struct_array_get_fields(cast(GArrowStructArray*)this._cPtr);
     auto _retval = gListToD!(arrow.array.Array, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class StructArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.struct_array.StructArray]
+final class StructArrayGidBuilder : StructArrayGidBuilderImpl!StructArrayGidBuilder
+{
+  StructArray build()
+  {
+    return new StructArray(cast(void*)createGObject(StructArray._getGType), Yes.Take);
   }
 }

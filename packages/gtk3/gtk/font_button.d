@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -57,6 +58,15 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   }
 
   /**
+  Get builder for [gtk.font_button.FontButton]
+  Returns: New builder object
+  */
+  static FontButtonGidBuilder builder()
+  {
+    return new FontButtonGidBuilder;
+  }
+
+  /**
       Get `fontName` property.
       Returns: The name of the currently selected font.
   
@@ -99,7 +109,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   */
   @property void showSize(bool propval)
   {
-    return setShowSize(propval);
+    setShowSize(propval);
   }
 
   /**
@@ -122,7 +132,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   */
   @property void showStyle(bool propval)
   {
-    return setShowStyle(propval);
+    setShowStyle(propval);
   }
 
   /**
@@ -141,7 +151,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -162,7 +172,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   */
   @property void useFont(bool propval)
   {
-    return setUseFont(propval);
+    setUseFont(propval);
   }
 
   /**
@@ -183,7 +193,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   */
   @property void useSize(bool propval)
   {
-    return setUseSize(propval);
+    setUseSize(propval);
   }
 
   mixin FontChooserT!();
@@ -404,5 +414,94 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("font-set", closure, after);
+  }
+}
+
+class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_chooser.FontChooserGidBuilderImpl!T
+{
+
+  mixin FontChooserGidBuilderT!();
+
+  /**
+      Set `fontName` property.
+      Params:
+        propval = The name of the currently selected font.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use the #GtkFontChooser::font property instead
+  */
+  T fontName(string propval)
+  {
+    return setProperty("font-name", propval);
+  }
+
+  /**
+      Set `showSize` property.
+      Params:
+        propval = If this property is set to true, the selected font size will be shown
+          in the label. For a more WYSIWYG way to show the selected size, see the
+          ::use-size property.
+      Returns: Builder instance for fluent chaining
+  */
+  T showSize(bool propval)
+  {
+    return setProperty("show-size", propval);
+  }
+
+  /**
+      Set `showStyle` property.
+      Params:
+        propval = If this property is set to true, the name of the selected font style
+          will be shown in the label. For a more WYSIWYG way to show the selected
+          style, see the ::use-font property.
+      Returns: Builder instance for fluent chaining
+  */
+  T showStyle(bool propval)
+  {
+    return setProperty("show-style", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the font chooser dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useFont` property.
+      Params:
+        propval = If this property is set to true, the label will be drawn
+          in the selected font.
+      Returns: Builder instance for fluent chaining
+  */
+  T useFont(bool propval)
+  {
+    return setProperty("use-font", propval);
+  }
+
+  /**
+      Set `useSize` property.
+      Params:
+        propval = If this property is set to true, the label will be drawn
+          with the selected font size.
+      Returns: Builder instance for fluent chaining
+  */
+  T useSize(bool propval)
+  {
+    return setProperty("use-size", propval);
+  }
+}
+
+/// Fluent builder for [gtk.font_button.FontButton]
+final class FontButtonGidBuilder : FontButtonGidBuilderImpl!FontButtonGidBuilder
+{
+  FontButton build()
+  {
+    return new FontButton(cast(void*)createGObject(FontButton._getGType), No.Take);
   }
 }

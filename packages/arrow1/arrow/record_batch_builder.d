@@ -9,6 +9,7 @@ import arrow.schema;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   override RecordBatchBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.record_batch_builder.RecordBatchBuilder]
+  Returns: New builder object
+  */
+  static RecordBatchBuilderGidBuilder builder()
+  {
+    return new RecordBatchBuilderGidBuilder;
   }
 
   /** */
@@ -118,5 +128,24 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   void setInitialCapacity(long capacity)
   {
     garrow_record_batch_builder_set_initial_capacity(cast(GArrowRecordBatchBuilder*)this._cPtr, capacity);
+  }
+}
+
+class RecordBatchBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T recordBatchBuilder(void* propval)
+  {
+    return setProperty("record-batch-builder", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch_builder.RecordBatchBuilder]
+final class RecordBatchBuilderGidBuilder : RecordBatchBuilderGidBuilderImpl!RecordBatchBuilderGidBuilder
+{
+  RecordBatchBuilder build()
+  {
+    return new RecordBatchBuilder(cast(void*)createGObject(RecordBatchBuilder._getGType), Yes.Take);
   }
 }

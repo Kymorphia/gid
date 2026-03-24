@@ -10,6 +10,7 @@ import atk.image_mixin;
 import atk.value;
 import atk.value_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.button_accessible;
 import gtk.c.functions;
 import gtk.c.types;
@@ -44,5 +45,29 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
     return this;
   }
 
+  /**
+  Get builder for [gtk.scale_button_accessible.ScaleButtonAccessible]
+  Returns: New builder object
+  */
+  static ScaleButtonAccessibleGidBuilder builder()
+  {
+    return new ScaleButtonAccessibleGidBuilder;
+  }
+
   mixin ValueT!();
+}
+
+class ScaleButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
+{
+
+  mixin ValueGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.scale_button_accessible.ScaleButtonAccessible]
+final class ScaleButtonAccessibleGidBuilder : ScaleButtonAccessibleGidBuilderImpl!ScaleButtonAccessibleGidBuilder
+{
+  ScaleButtonAccessible build()
+  {
+    return new ScaleButtonAccessible(cast(void*)createGObject(ScaleButtonAccessible._getGType), No.Take);
+  }
 }

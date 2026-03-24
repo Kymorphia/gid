@@ -10,6 +10,7 @@ import gio.input_stream;
 import gio.pollable_input_stream;
 import gio.pollable_input_stream_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +48,24 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     return this;
   }
 
+  /**
+  Get builder for [gio.converter_input_stream.ConverterInputStream]
+  Returns: New builder object
+  */
+  static ConverterInputStreamGidBuilder builder()
+  {
+    return new ConverterInputStreamGidBuilder;
+  }
+
+  /**
+      Get `converter` property.
+      Returns: The converter object.
+  */
+  @property gio.converter.Converter converter()
+  {
+    return getConverter();
+  }
+
   mixin PollableInputStreamT!();
 
   /**
@@ -74,5 +93,31 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     _cretval = g_converter_input_stream_get_converter(cast(GConverterInputStream*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class ConverterInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInputStreamGidBuilderImpl!T, gio.pollable_input_stream.PollableInputStreamGidBuilderImpl!T
+{
+
+  mixin PollableInputStreamGidBuilderT!();
+
+  /**
+      Set `converter` property.
+      Params:
+        propval = The converter object.
+      Returns: Builder instance for fluent chaining
+  */
+  T converter(gio.converter.Converter propval)
+  {
+    return setProperty("converter", propval);
+  }
+}
+
+/// Fluent builder for [gio.converter_input_stream.ConverterInputStream]
+final class ConverterInputStreamGidBuilder : ConverterInputStreamGidBuilderImpl!ConverterInputStreamGidBuilder
+{
+  ConverterInputStream build()
+  {
+    return new ConverterInputStream(cast(void*)createGObject(ConverterInputStream._getGType), Yes.Take);
   }
 }

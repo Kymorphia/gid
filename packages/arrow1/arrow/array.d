@@ -20,6 +20,7 @@ import arrow.types;
 import arrow.uint64_array;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -49,6 +50,45 @@ class Array : gobject.object.ObjectWrap
   override Array self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.array.Array]
+  Returns: New builder object
+  */
+  static ArrayGidBuilder builder()
+  {
+    return new ArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.buffer.Buffer buffer1()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.buffer.Buffer)("buffer1");
+  }
+
+  /** */
+  @property arrow.buffer.Buffer buffer2()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.buffer.Buffer)("buffer2");
+  }
+
+  /** */
+  @property arrow.buffer.Buffer nullBitmap()
+  {
+    return getNullBitmap();
+  }
+
+  /** */
+  @property arrow.array.Array parent()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("parent");
+  }
+
+  /** */
+  @property arrow.data_type.DataType valueDataType()
+  {
+    return getValueDataType();
   }
 
   /** */
@@ -382,5 +422,54 @@ class Array : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T array(void* propval)
+  {
+    return setProperty("array", propval);
+  }
+
+  /** */
+  T buffer1(arrow.buffer.Buffer propval)
+  {
+    return setProperty("buffer1", propval);
+  }
+
+  /** */
+  T buffer2(arrow.buffer.Buffer propval)
+  {
+    return setProperty("buffer2", propval);
+  }
+
+  /** */
+  T nullBitmap(arrow.buffer.Buffer propval)
+  {
+    return setProperty("null-bitmap", propval);
+  }
+
+  /** */
+  T parent(arrow.array.Array propval)
+  {
+    return setProperty("parent", propval);
+  }
+
+  /** */
+  T valueDataType(arrow.data_type.DataType propval)
+  {
+    return setProperty("value-data-type", propval);
+  }
+}
+
+/// Fluent builder for [arrow.array.Array]
+final class ArrayGidBuilder : ArrayGidBuilderImpl!ArrayGidBuilder
+{
+  Array build()
+  {
+    return new Array(cast(void*)createGObject(Array._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstvideo.video_buffer_pool;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.buffer_pool;
 import gstvideo.c.functions;
 import gstvideo.c.types;
@@ -37,6 +38,15 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
   }
 
   /**
+  Get builder for [gstvideo.video_buffer_pool.VideoBufferPool]
+  Returns: New builder object
+  */
+  static VideoBufferPoolGidBuilder builder()
+  {
+    return new VideoBufferPoolGidBuilder;
+  }
+
+  /**
       Create a new bufferpool that can allocate video frames. This bufferpool
       supports all the video bufferpool options.
       Returns: a new #GstBufferPool to allocate video frames
@@ -46,5 +56,18 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
     GstBufferPool* _cretval;
     _cretval = gst_video_buffer_pool_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class VideoBufferPoolGidBuilderImpl(T) : gst.buffer_pool.BufferPoolGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstvideo.video_buffer_pool.VideoBufferPool]
+final class VideoBufferPoolGidBuilder : VideoBufferPoolGidBuilderImpl!VideoBufferPoolGidBuilder
+{
+  VideoBufferPool build()
+  {
+    return new VideoBufferPool(cast(void*)createGObject(VideoBufferPool._getGType), Yes.Take);
   }
 }

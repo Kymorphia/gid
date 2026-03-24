@@ -2,6 +2,7 @@
 module gstaudio.audio_clock;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.clock;
 import gst.system_clock;
@@ -42,6 +43,15 @@ class AudioClock : gst.system_clock.SystemClock
   override AudioClock self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstaudio.audio_clock.AudioClock]
+  Returns: New builder object
+  */
+  static AudioClockGidBuilder builder()
+  {
+    return new AudioClockGidBuilder;
   }
 
   /**
@@ -126,5 +136,18 @@ class AudioClock : gst.system_clock.SystemClock
   void reset(gst.types.ClockTime time)
   {
     gst_audio_clock_reset(cast(GstAudioClock*)this._cPtr, time);
+  }
+}
+
+class AudioClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstaudio.audio_clock.AudioClock]
+final class AudioClockGidBuilder : AudioClockGidBuilderImpl!AudioClockGidBuilder
+{
+  AudioClock build()
+  {
+    return new AudioClock(cast(void*)createGObject(AudioClock._getGType), Yes.Take);
   }
 }

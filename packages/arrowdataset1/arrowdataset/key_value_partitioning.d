@@ -6,6 +6,7 @@ import arrowdataset.c.types;
 import arrowdataset.partitioning;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
@@ -34,5 +35,27 @@ class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
   override KeyValuePartitioning self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowdataset.key_value_partitioning.KeyValuePartitioning]
+  Returns: New builder object
+  */
+  static KeyValuePartitioningGidBuilder builder()
+  {
+    return new KeyValuePartitioningGidBuilder;
+  }
+}
+
+class KeyValuePartitioningGidBuilderImpl(T) : arrowdataset.partitioning.PartitioningGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.key_value_partitioning.KeyValuePartitioning]
+final class KeyValuePartitioningGidBuilder : KeyValuePartitioningGidBuilderImpl!KeyValuePartitioningGidBuilder
+{
+  KeyValuePartitioning build()
+  {
+    return new KeyValuePartitioning(cast(void*)createGObject(KeyValuePartitioning._getGType), No.Take);
   }
 }

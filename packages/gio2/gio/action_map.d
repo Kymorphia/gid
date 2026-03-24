@@ -7,6 +7,7 @@ import gio.action;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -65,4 +66,8 @@ interface ActionMap
         actionName = the name of the action
   */
   void removeAction(string actionName);
+}
+
+interface ActionMapGidBuilderImpl(T)
+{
 }

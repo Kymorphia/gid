@@ -4,6 +4,7 @@ module webkit.option_menu;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -43,6 +44,15 @@ class OptionMenu : gobject.object.ObjectWrap
   override OptionMenu self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.option_menu.OptionMenu]
+  Returns: New builder object
+  */
+  static OptionMenuGidBuilder builder()
+  {
+    return new OptionMenuGidBuilder;
   }
 
   /**
@@ -168,5 +178,18 @@ class OptionMenu : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("close", closure, after);
+  }
+}
+
+class OptionMenuGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.option_menu.OptionMenu]
+final class OptionMenuGidBuilder : OptionMenuGidBuilderImpl!OptionMenuGidBuilder
+{
+  OptionMenu build()
+  {
+    return new OptionMenu(cast(void*)createGObject(OptionMenu._getGType), No.Take);
   }
 }

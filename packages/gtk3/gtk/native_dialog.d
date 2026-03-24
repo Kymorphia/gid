@@ -3,6 +3,7 @@ module gtk.native_dialog;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -55,6 +56,15 @@ class NativeDialog : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.native_dialog.NativeDialog]
+  Returns: New builder object
+  */
+  static NativeDialogGidBuilder builder()
+  {
+    return new NativeDialogGidBuilder;
+  }
+
+  /**
       Get `modal` property.
       Returns: Whether the window should be modal with respect to its transient parent.
   */
@@ -70,7 +80,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -89,7 +99,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -108,7 +118,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   @property void transientFor(gtk.window.Window propval)
   {
-    return setTransientFor(propval);
+    setTransientFor(propval);
   }
 
   /**
@@ -351,5 +361,62 @@ class NativeDialog : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
+  }
+}
+
+class NativeDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the window should be modal with respect to its transient parent.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the dialog window
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the dialog, or null for none.
+      Returns: Builder instance for fluent chaining
+  */
+  T transientFor(gtk.window.Window propval)
+  {
+    return setProperty("transient-for", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether the window is currenlty visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+}
+
+/// Fluent builder for [gtk.native_dialog.NativeDialog]
+final class NativeDialogGidBuilder : NativeDialogGidBuilderImpl!NativeDialogGidBuilder
+{
+  NativeDialog build()
+  {
+    return new NativeDialog(cast(void*)createGObject(NativeDialog._getGType), No.Take);
   }
 }

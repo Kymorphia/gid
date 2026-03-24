@@ -7,6 +7,7 @@ import arrow.scalar;
 import arrow.struct_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class StructScalar : arrow.scalar.Scalar
@@ -37,6 +38,15 @@ class StructScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.struct_scalar.StructScalar]
+  Returns: New builder object
+  */
+  static StructScalarGidBuilder builder()
+  {
+    return new StructScalarGidBuilder;
+  }
+
   /** */
   this(arrow.struct_data_type.StructDataType dataType, arrow.scalar.Scalar[] value)
   {
@@ -54,5 +64,18 @@ class StructScalar : arrow.scalar.Scalar
     _cretval = garrow_struct_scalar_get_value(cast(GArrowStructScalar*)this._cPtr);
     auto _retval = gListToD!(arrow.scalar.Scalar, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class StructScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.struct_scalar.StructScalar]
+final class StructScalarGidBuilder : StructScalarGidBuilderImpl!StructScalarGidBuilder
+{
+  StructScalar build()
+  {
+    return new StructScalar(cast(void*)createGObject(StructScalar._getGType), Yes.Take);
   }
 }

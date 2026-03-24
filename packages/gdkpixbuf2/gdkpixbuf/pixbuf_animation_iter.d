@@ -7,6 +7,7 @@ import gdkpixbuf.pixbuf;
 import gdkpixbuf.types;
 import gid.gid;
 import glib.time_val;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -39,6 +40,15 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   override PixbufAnimationIter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter]
+  Returns: New builder object
+  */
+  static PixbufAnimationIterGidBuilder builder()
+  {
+    return new PixbufAnimationIterGidBuilder;
   }
 
   /**
@@ -134,5 +144,18 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_animation_iter_on_currently_loading_frame(cast(GdkPixbufAnimationIter*)this._cPtr);
     return _retval;
+  }
+}
+
+class PixbufAnimationIterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter]
+final class PixbufAnimationIterGidBuilder : PixbufAnimationIterGidBuilderImpl!PixbufAnimationIterGidBuilder
+{
+  PixbufAnimationIter build()
+  {
+    return new PixbufAnimationIter(cast(void*)createGObject(PixbufAnimationIter._getGType), No.Take);
   }
 }

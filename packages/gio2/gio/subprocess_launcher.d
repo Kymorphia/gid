@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.subprocess;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -45,6 +46,15 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   override SubprocessLauncher self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.subprocess_launcher.SubprocessLauncher]
+  Returns: New builder object
+  */
+  static SubprocessLauncherGidBuilder builder()
+  {
+    return new SubprocessLauncherGidBuilder;
   }
 
   /**
@@ -409,5 +419,29 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   {
     const(char)* _variable = variable.toCString(No.Alloc);
     g_subprocess_launcher_unsetenv(cast(GSubprocessLauncher*)this._cPtr, _variable);
+  }
+}
+
+class SubprocessLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = [gio.types.SubprocessFlags] for launched processes.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.SubprocessFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+}
+
+/// Fluent builder for [gio.subprocess_launcher.SubprocessLauncher]
+final class SubprocessLauncherGidBuilder : SubprocessLauncherGidBuilderImpl!SubprocessLauncherGidBuilder
+{
+  SubprocessLauncher build()
+  {
+    return new SubprocessLauncher(cast(void*)createGObject(SubprocessLauncher._getGType), Yes.Take);
   }
 }

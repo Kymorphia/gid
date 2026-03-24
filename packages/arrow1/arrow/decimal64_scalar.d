@@ -8,6 +8,7 @@ import arrow.decimal64_data_type;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class Decimal64Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal64_scalar.Decimal64Scalar]
+  Returns: New builder object
+  */
+  static Decimal64ScalarGidBuilder builder()
+  {
+    return new Decimal64ScalarGidBuilder;
+  }
+
   /** */
   this(arrow.decimal64_data_type.Decimal64DataType dataType, arrow.decimal64.Decimal64 value)
   {
@@ -54,5 +64,29 @@ class Decimal64Scalar : arrow.scalar.Scalar
     _cretval = garrow_decimal64_scalar_get_value(cast(GArrowDecimal64Scalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class Decimal64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scalar.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(arrow.decimal64.Decimal64 propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.decimal64_scalar.Decimal64Scalar]
+final class Decimal64ScalarGidBuilder : Decimal64ScalarGidBuilderImpl!Decimal64ScalarGidBuilder
+{
+  Decimal64Scalar build()
+  {
+    return new Decimal64Scalar(cast(void*)createGObject(Decimal64Scalar._getGType), Yes.Take);
   }
 }

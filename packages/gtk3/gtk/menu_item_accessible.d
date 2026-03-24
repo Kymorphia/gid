@@ -9,6 +9,7 @@ import atk.object;
 import atk.selection;
 import atk.selection_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -43,9 +44,34 @@ class MenuItemAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return this;
   }
 
+  /**
+  Get builder for [gtk.menu_item_accessible.MenuItemAccessible]
+  Returns: New builder object
+  */
+  static MenuItemAccessibleGidBuilder builder()
+  {
+    return new MenuItemAccessibleGidBuilder;
+  }
+
   mixin ActionT!();
   mixin SelectionT!();
   alias getDescription = atk.object.ObjectWrap.getDescription;
   alias getName = atk.object.ObjectWrap.getName;
   alias setDescription = atk.object.ObjectWrap.setDescription;
+}
+
+class MenuItemAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+  mixin SelectionGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.menu_item_accessible.MenuItemAccessible]
+final class MenuItemAccessibleGidBuilder : MenuItemAccessibleGidBuilderImpl!MenuItemAccessibleGidBuilder
+{
+  MenuItemAccessible build()
+  {
+    return new MenuItemAccessible(cast(void*)createGObject(MenuItemAccessible._getGType), No.Take);
+  }
 }

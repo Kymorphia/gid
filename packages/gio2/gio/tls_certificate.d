@@ -10,6 +10,7 @@ import gio.types;
 import glib.bytes;
 import glib.date_time;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -48,6 +49,50 @@ class TlsCertificate : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.tls_certificate.TlsCertificate]
+  Returns: New builder object
+  */
+  static TlsCertificateGidBuilder builder()
+  {
+    return new TlsCertificateGidBuilder;
+  }
+
+  /**
+      Get `certificatePem` property.
+      Returns: The PEM (ASCII) encoded representation of the certificate.
+        This property and the #GTlsCertificate:certificate
+        property represent the same data, just in different forms.
+  */
+  @property string certificatePem()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("certificate-pem");
+  }
+
+  /**
+      Get `issuer` property.
+      Returns: A #GTlsCertificate representing the entity that issued this
+        certificate. If null, this means that the certificate is either
+        self-signed, or else the certificate of the issuer is not
+        available.
+        
+        Beware the issuer certificate may not be the same as the
+        certificate that would actually be used to construct a valid
+        certification path during certificate verification.
+        [RFC 4158](https://datatracker.ietf.org/doc/html/rfc4158) explains
+        why an issuer certificate cannot be naively assumed to be part of the
+        the certification path (though GLib's TLS backends may not follow the
+        path building strategies outlined in this RFC). Due to the complexity
+        of certification path building, GLib does not provide any way to know
+        which certification path will actually be used. Accordingly, this
+        property cannot be used to make security-related decisions. Only
+        GLib itself should make security decisions about TLS certificates.
+  */
+  @property gio.tls_certificate.TlsCertificate issuer()
+  {
+    return getIssuer();
+  }
+
+  /**
       Get `issuerName` property.
       Returns: The issuer from the certificate,
         null if unavailable.
@@ -75,6 +120,55 @@ class TlsCertificate : gobject.object.ObjectWrap
   @property glib.date_time.DateTime notValidBefore()
   {
     return getNotValidBefore();
+  }
+
+  /**
+      Get `pkcs11Uri` property.
+      Returns: A URI referencing the [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html)
+        objects containing an X.509 certificate and optionally a private key.
+        
+        If null, the certificate is either not backed by PKCS \#11 or the
+        #GTlsBackend does not support PKCS \#11.
+  */
+  @property string pkcs11Uri()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("pkcs11-uri");
+  }
+
+  /**
+      Get `privateKeyPem` property.
+      Returns: The PEM (ASCII) encoded representation of the certificate's
+        private key in either [PKCS \#1 format](https://datatracker.ietf.org/doc/html/rfc8017)
+        ("`BEGIN RSA PRIVATE KEY`") or unencrypted
+        [PKCS \#8 format](https://datatracker.ietf.org/doc/html/rfc5208)
+        ("`BEGIN PRIVATE KEY`"). PKCS \#8 format is supported since 2.32;
+        earlier releases only support PKCS \#1. You can use the `openssl rsa`
+        tool to convert PKCS \#8 keys to PKCS \#1.
+        
+        This property (or the #GTlsCertificate:private-key property)
+        can be set when constructing a key (for example, from a file).
+        Since GLib 2.70, it is now also readable; however, be aware that if
+        the private key is backed by a PKCS \#11 URI - for example, if it
+        is stored on a smartcard - then this property will be null. If so,
+        the private key must be referenced via its PKCS \#11 URI,
+        #GTlsCertificate:private-key-pkcs11-uri. You must check both
+        properties to see if the certificate really has a private key.
+        When this property is read, the output format will be unencrypted
+        PKCS \#8.
+  */
+  @property string privateKeyPem()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("private-key-pem");
+  }
+
+  /**
+      Get `privateKeyPkcs11Uri` property.
+      Returns: A URI referencing a [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html)
+        object containing a private key.
+  */
+  @property string privateKeyPkcs11Uri()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("private-key-pkcs11-uri");
   }
 
   /**
@@ -483,5 +577,123 @@ class TlsCertificate : gobject.object.ObjectWrap
     _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa._cPtr(No.Dup) : null);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
+  }
+}
+
+class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `certificatePem` property.
+      Params:
+        propval = The PEM (ASCII) encoded representation of the certificate.
+          This property and the #GTlsCertificate:certificate
+          property represent the same data, just in different forms.
+      Returns: Builder instance for fluent chaining
+  */
+  T certificatePem(string propval)
+  {
+    return setProperty("certificate-pem", propval);
+  }
+
+  /**
+      Set `issuer` property.
+      Params:
+        propval = A #GTlsCertificate representing the entity that issued this
+          certificate. If null, this means that the certificate is either
+          self-signed, or else the certificate of the issuer is not
+          available.
+          
+          Beware the issuer certificate may not be the same as the
+          certificate that would actually be used to construct a valid
+          certification path during certificate verification.
+          [RFC 4158](https://datatracker.ietf.org/doc/html/rfc4158) explains
+          why an issuer certificate cannot be naively assumed to be part of the
+          the certification path (though GLib's TLS backends may not follow the
+          path building strategies outlined in this RFC). Due to the complexity
+          of certification path building, GLib does not provide any way to know
+          which certification path will actually be used. Accordingly, this
+          property cannot be used to make security-related decisions. Only
+          GLib itself should make security decisions about TLS certificates.
+      Returns: Builder instance for fluent chaining
+  */
+  T issuer(gio.tls_certificate.TlsCertificate propval)
+  {
+    return setProperty("issuer", propval);
+  }
+
+  /**
+      Set `password` property.
+      Params:
+        propval = An optional password used when constructed with GTlsCertificate:pkcs12-data.
+      Returns: Builder instance for fluent chaining
+  */
+  T password(string propval)
+  {
+    return setProperty("password", propval);
+  }
+
+  /**
+      Set `pkcs11Uri` property.
+      Params:
+        propval = A URI referencing the [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html)
+          objects containing an X.509 certificate and optionally a private key.
+          
+          If null, the certificate is either not backed by PKCS \#11 or the
+          #GTlsBackend does not support PKCS \#11.
+      Returns: Builder instance for fluent chaining
+  */
+  T pkcs11Uri(string propval)
+  {
+    return setProperty("pkcs11-uri", propval);
+  }
+
+  /**
+      Set `privateKeyPem` property.
+      Params:
+        propval = The PEM (ASCII) encoded representation of the certificate's
+          private key in either [PKCS \#1 format](https://datatracker.ietf.org/doc/html/rfc8017)
+          ("`BEGIN RSA PRIVATE KEY`") or unencrypted
+          [PKCS \#8 format](https://datatracker.ietf.org/doc/html/rfc5208)
+          ("`BEGIN PRIVATE KEY`"). PKCS \#8 format is supported since 2.32;
+          earlier releases only support PKCS \#1. You can use the `openssl rsa`
+          tool to convert PKCS \#8 keys to PKCS \#1.
+          
+          This property (or the #GTlsCertificate:private-key property)
+          can be set when constructing a key (for example, from a file).
+          Since GLib 2.70, it is now also readable; however, be aware that if
+          the private key is backed by a PKCS \#11 URI - for example, if it
+          is stored on a smartcard - then this property will be null. If so,
+          the private key must be referenced via its PKCS \#11 URI,
+          #GTlsCertificate:private-key-pkcs11-uri. You must check both
+          properties to see if the certificate really has a private key.
+          When this property is read, the output format will be unencrypted
+          PKCS \#8.
+      Returns: Builder instance for fluent chaining
+  */
+  T privateKeyPem(string propval)
+  {
+    return setProperty("private-key-pem", propval);
+  }
+
+  /**
+      Set `privateKeyPkcs11Uri` property.
+      Params:
+        propval = A URI referencing a [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html)
+          object containing a private key.
+      Returns: Builder instance for fluent chaining
+  */
+  T privateKeyPkcs11Uri(string propval)
+  {
+    return setProperty("private-key-pkcs11-uri", propval);
+  }
+}
+
+/// Fluent builder for [gio.tls_certificate.TlsCertificate]
+final class TlsCertificateGidBuilder : TlsCertificateGidBuilderImpl!TlsCertificateGidBuilder
+{
+  TlsCertificate build()
+  {
+    return new TlsCertificate(cast(void*)createGObject(TlsCertificate._getGType), No.Take);
   }
 }

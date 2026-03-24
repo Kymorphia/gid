@@ -12,6 +12,7 @@ import atk.text_mixin;
 import atk.value;
 import atk.value_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.entry_accessible;
@@ -46,5 +47,29 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
     return this;
   }
 
+  /**
+  Get builder for [gtk.spin_button_accessible.SpinButtonAccessible]
+  Returns: New builder object
+  */
+  static SpinButtonAccessibleGidBuilder builder()
+  {
+    return new SpinButtonAccessibleGidBuilder;
+  }
+
   mixin ValueT!();
+}
+
+class SpinButtonAccessibleGidBuilderImpl(T) : gtk.entry_accessible.EntryAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
+{
+
+  mixin ValueGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.spin_button_accessible.SpinButtonAccessible]
+final class SpinButtonAccessibleGidBuilder : SpinButtonAccessibleGidBuilderImpl!SpinButtonAccessibleGidBuilder
+{
+  SpinButtonAccessible build()
+  {
+    return new SpinButtonAccessible(cast(void*)createGObject(SpinButtonAccessible._getGType), No.Take);
+  }
 }

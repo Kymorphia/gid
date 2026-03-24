@@ -4,6 +4,7 @@ module gsk.glshader;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import graphene.vec2;
 import graphene.vec3;
@@ -154,6 +155,33 @@ class GLShader : gobject.object.ObjectWrap
   override GLShader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gsk.glshader.GLShader]
+  Returns: New builder object
+  */
+  static GLShaderGidBuilder builder()
+  {
+    return new GLShaderGidBuilder;
+  }
+
+  /**
+      Get `resource` property.
+      Returns: Resource containing the source code for the shader.
+        
+        If the shader source is not coming from a resource, this
+        will be null.
+  */
+  @property string resource()
+  {
+    return getResource();
+  }
+
+  /** */
+  @property glib.bytes.Bytes source()
+  {
+    return getSource();
   }
 
   /**
@@ -450,5 +478,38 @@ class GLShader : gobject.object.ObjectWrap
     _cretval = gsk_gl_shader_get_uniform_type(cast(GskGLShader*)this._cPtr, idx);
     gsk.types.GLUniformType _retval = cast(gsk.types.GLUniformType)_cretval;
     return _retval;
+  }
+}
+
+class GLShaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `resource` property.
+      Params:
+        propval = Resource containing the source code for the shader.
+          
+          If the shader source is not coming from a resource, this
+          will be null.
+      Returns: Builder instance for fluent chaining
+  */
+  T resource(string propval)
+  {
+    return setProperty("resource", propval);
+  }
+
+  /** */
+  T source(glib.bytes.Bytes propval)
+  {
+    return setProperty("source", propval);
+  }
+}
+
+/// Fluent builder for [gsk.glshader.GLShader]
+final class GLShaderGidBuilder : GLShaderGidBuilderImpl!GLShaderGidBuilder
+{
+  GLShader build()
+  {
+    return new GLShader(cast(void*)createGObject(GLShader._getGType), No.Take);
   }
 }

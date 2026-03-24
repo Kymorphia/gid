@@ -12,6 +12,7 @@ import gio.types;
 import glib.error;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -64,6 +65,15 @@ class Resolver : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.resolver.Resolver]
+  Returns: New builder object
+  */
+  static ResolverGidBuilder builder()
+  {
+    return new ResolverGidBuilder;
+  }
+
+  /**
       Get `timeout` property.
       Returns: The timeout applied to all resolver lookups, in milliseconds.
         
@@ -97,7 +107,7 @@ class Resolver : gobject.object.ObjectWrap
   */
   @property void timeout(uint propval)
   {
-    return setTimeout(propval);
+    setTimeout(propval);
   }
 
   /**
@@ -639,5 +649,38 @@ class Resolver : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("reload", closure, after);
+  }
+}
+
+class ResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The timeout applied to all resolver lookups, in milliseconds.
+          
+          This may be changed through the lifetime of the #GResolver. The new value
+          will apply to any lookups started after the change, but not to any
+          already-ongoing lookups.
+          
+          If this is `0`, no timeout is applied to lookups.
+          
+          No timeout was applied to lookups before this property was added in
+          GLib 2.78.
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(uint propval)
+  {
+    return setProperty("timeout", propval);
+  }
+}
+
+/// Fluent builder for [gio.resolver.Resolver]
+final class ResolverGidBuilder : ResolverGidBuilderImpl!ResolverGidBuilder
+{
+  Resolver build()
+  {
+    return new Resolver(cast(void*)createGObject(Resolver._getGType), No.Take);
   }
 }

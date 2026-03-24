@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -57,6 +58,15 @@ class Bin : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.bin.Bin]
+  Returns: New builder object
+  */
+  static BinGidBuilder builder()
+  {
+    return new BinGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget of the [adw.bin.Bin].
   */
@@ -72,7 +82,7 @@ class Bin : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -107,5 +117,30 @@ class Bin : gtk.widget.Widget
   void setChild(gtk.widget.Widget child = null)
   {
     adw_bin_set_child(cast(AdwBin*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class BinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget of the [adw.bin.Bin].
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [adw.bin.Bin]
+final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
+{
+  Bin build()
+  {
+    return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);
   }
 }

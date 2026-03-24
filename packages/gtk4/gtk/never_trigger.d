@@ -2,6 +2,7 @@
 module gtk.never_trigger;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,6 +41,15 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
+  Get builder for [gtk.never_trigger.NeverTrigger]
+  Returns: New builder object
+  */
+  static NeverTriggerGidBuilder builder()
+  {
+    return new NeverTriggerGidBuilder;
+  }
+
+  /**
       Gets the never trigger.
       
       This is a singleton for a trigger that never triggers.
@@ -53,5 +63,18 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
     _cretval = gtk_never_trigger_get();
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.never_trigger.NeverTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class NeverTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.never_trigger.NeverTrigger]
+final class NeverTriggerGidBuilder : NeverTriggerGidBuilderImpl!NeverTriggerGidBuilder
+{
+  NeverTrigger build()
+  {
+    return new NeverTrigger(cast(void*)createGObject(NeverTrigger._getGType), No.Take);
   }
 }

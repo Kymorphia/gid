@@ -11,6 +11,7 @@ import arrow.seekable_input_stream;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,15 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
   override FileInputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.file_input_stream.FileInputStream]
+  Returns: New builder object
+  */
+  static FileInputStreamGidBuilder builder()
+  {
+    return new FileInputStreamGidBuilder;
   }
 
   /** */
@@ -72,5 +82,19 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     int _retval;
     _retval = garrow_file_input_stream_get_file_descriptor(cast(GArrowFileInputStream*)this._cPtr);
     return _retval;
+  }
+}
+
+class FileInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableInputStreamGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [arrow.file_input_stream.FileInputStream]
+final class FileInputStreamGidBuilder : FileInputStreamGidBuilderImpl!FileInputStreamGidBuilder
+{
+  FileInputStream build()
+  {
+    return new FileInputStream(cast(void*)createGObject(FileInputStream._getGType), Yes.Take);
   }
 }

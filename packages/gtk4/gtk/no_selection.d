@@ -4,6 +4,7 @@ module gtk.no_selection;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -52,6 +53,15 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   }
 
   /**
+  Get builder for [gtk.no_selection.NoSelection]
+  Returns: New builder object
+  */
+  static NoSelectionGidBuilder builder()
+  {
+    return new NoSelectionGidBuilder;
+  }
+
+  /**
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
@@ -76,7 +86,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -129,5 +139,33 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   void setModel(gio.list_model.ListModel model = null)
   {
     gtk_no_selection_set_model(cast(GtkNoSelection*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class NoSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+  mixin SelectionModelGidBuilderT!();
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being managed.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.no_selection.NoSelection]
+final class NoSelectionGidBuilder : NoSelectionGidBuilderImpl!NoSelectionGidBuilder
+{
+  NoSelection build()
+  {
+    return new NoSelection(cast(void*)createGObject(NoSelection._getGType), Yes.Take);
   }
 }

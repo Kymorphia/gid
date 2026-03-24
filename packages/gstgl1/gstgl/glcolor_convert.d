@@ -2,6 +2,7 @@
 module gstgl.glcolor_convert;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.buffer;
 import gst.caps;
 import gst.object;
@@ -49,6 +50,15 @@ class GLColorConvert : gst.object.ObjectWrap
   override GLColorConvert self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glcolor_convert.GLColorConvert]
+  Returns: New builder object
+  */
+  static GLColorConvertGidBuilder builder()
+  {
+    return new GLColorConvertGidBuilder;
   }
 
   /** */
@@ -169,5 +179,18 @@ class GLColorConvert : gst.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gst_gl_color_convert_set_caps(cast(GstGLColorConvert*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class GLColorConvertGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glcolor_convert.GLColorConvert]
+final class GLColorConvertGidBuilder : GLColorConvertGidBuilderImpl!GLColorConvertGidBuilder
+{
+  GLColorConvert build()
+  {
+    return new GLColorConvert(cast(void*)createGObject(GLColorConvert._getGType), Yes.Take);
   }
 }

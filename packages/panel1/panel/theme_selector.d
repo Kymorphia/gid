@@ -2,6 +2,7 @@
 module panel.theme_selector;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -54,6 +55,15 @@ class ThemeSelector : gtk.widget.Widget
   }
 
   /**
+  Get builder for [panel.theme_selector.ThemeSelector]
+  Returns: New builder object
+  */
+  static ThemeSelectorGidBuilder builder()
+  {
+    return new ThemeSelectorGidBuilder;
+  }
+
+  /**
       Get `actionName` property.
       Returns: The name of the action activated on activation.
   */
@@ -69,7 +79,7 @@ class ThemeSelector : gtk.widget.Widget
   */
   @property void actionName(string propval)
   {
-    return setActionName(propval);
+    setActionName(propval);
   }
 
   /**
@@ -105,5 +115,30 @@ class ThemeSelector : gtk.widget.Widget
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     panel_theme_selector_set_action_name(cast(PanelThemeSelector*)this._cPtr, _actionName);
+  }
+}
+
+class ThemeSelectorGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the action activated on activation.
+      Returns: Builder instance for fluent chaining
+  */
+  T actionName(string propval)
+  {
+    return setProperty("action-name", propval);
+  }
+}
+
+/// Fluent builder for [panel.theme_selector.ThemeSelector]
+final class ThemeSelectorGidBuilder : ThemeSelectorGidBuilderImpl!ThemeSelectorGidBuilder
+{
+  ThemeSelector build()
+  {
+    return new ThemeSelector(cast(void*)createGObject(ThemeSelector._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.activatable;
 import gtk.activatable_mixin;
@@ -58,6 +59,15 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     return this;
   }
 
+  /**
+  Get builder for [gtk.tool_item.ToolItem]
+  Returns: New builder object
+  */
+  static ToolItemGidBuilder builder()
+  {
+    return new ToolItemGidBuilder;
+  }
+
   /** */
   @property bool isImportant()
   {
@@ -67,7 +77,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   /** */
   @property void isImportant(bool propval)
   {
-    return setIsImportant(propval);
+    setIsImportant(propval);
   }
 
   /** */
@@ -79,7 +89,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   /** */
   @property void visibleHorizontal(bool propval)
   {
-    return setVisibleHorizontal(propval);
+    setVisibleHorizontal(propval);
   }
 
   /** */
@@ -91,7 +101,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   /** */
   @property void visibleVertical(bool propval)
   {
-    return setVisibleVertical(propval);
+    setVisibleVertical(propval);
   }
 
   mixin ActivatableT!();
@@ -604,5 +614,38 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toolbar-reconfigured", closure, after);
+  }
+}
+
+class ToolItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
+{
+
+  mixin ActivatableGidBuilderT!();
+
+  /** */
+  T isImportant(bool propval)
+  {
+    return setProperty("is-important", propval);
+  }
+
+  /** */
+  T visibleHorizontal(bool propval)
+  {
+    return setProperty("visible-horizontal", propval);
+  }
+
+  /** */
+  T visibleVertical(bool propval)
+  {
+    return setProperty("visible-vertical", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tool_item.ToolItem]
+final class ToolItemGidBuilder : ToolItemGidBuilderImpl!ToolItemGidBuilder
+{
+  ToolItem build()
+  {
+    return new ToolItem(cast(void*)createGObject(ToolItem._getGType), No.Take);
   }
 }

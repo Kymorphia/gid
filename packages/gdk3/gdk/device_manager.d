@@ -8,6 +8,7 @@ import gdk.display;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -152,6 +153,21 @@ class DeviceManager : gobject.object.ObjectWrap
   override DeviceManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.device_manager.DeviceManager]
+  Returns: New builder object
+  */
+  static DeviceManagerGidBuilder builder()
+  {
+    return new DeviceManagerGidBuilder;
+  }
+
+  /** */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   /**
@@ -350,5 +366,24 @@ class DeviceManager : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("device-removed", closure, after);
+  }
+}
+
+class DeviceManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.device_manager.DeviceManager]
+final class DeviceManagerGidBuilder : DeviceManagerGidBuilderImpl!DeviceManagerGidBuilder
+{
+  DeviceManager build()
+  {
+    return new DeviceManager(cast(void*)createGObject(DeviceManager._getGType), No.Take);
   }
 }

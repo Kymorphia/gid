@@ -2,6 +2,7 @@
 module gstvideo.video_aggregator_parallel_convert_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstvideo.c.functions;
 import gstvideo.c.types;
 import gstvideo.types;
@@ -38,5 +39,27 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
   override VideoAggregatorParallelConvertPad self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstvideo.video_aggregator_parallel_convert_pad.VideoAggregatorParallelConvertPad]
+  Returns: New builder object
+  */
+  static VideoAggregatorParallelConvertPadGidBuilder builder()
+  {
+    return new VideoAggregatorParallelConvertPadGidBuilder;
+  }
+}
+
+class VideoAggregatorParallelConvertPadGidBuilderImpl(T) : gstvideo.video_aggregator_convert_pad.VideoAggregatorConvertPadGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstvideo.video_aggregator_parallel_convert_pad.VideoAggregatorParallelConvertPad]
+final class VideoAggregatorParallelConvertPadGidBuilder : VideoAggregatorParallelConvertPadGidBuilderImpl!VideoAggregatorParallelConvertPadGidBuilder
+{
+  VideoAggregatorParallelConvertPad build()
+  {
+    return new VideoAggregatorParallelConvertPad(cast(void*)createGObject(VideoAggregatorParallelConvertPad._getGType), No.Take);
   }
 }

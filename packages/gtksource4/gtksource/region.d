@@ -2,6 +2,7 @@
 module gtksource.region;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_buffer;
 import gtk.text_iter;
@@ -37,6 +38,25 @@ class Region : gobject.object.ObjectWrap
   override Region self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.region.Region]
+  Returns: New builder object
+  */
+  static RegionGidBuilder builder()
+  {
+    return new RegionGidBuilder;
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The #GtkTextBuffer. The #GtkSourceRegion has a weak reference to the
+        buffer.
+  */
+  @property gtk.text_buffer.TextBuffer buffer()
+  {
+    return getBuffer();
   }
 
   /** */
@@ -200,5 +220,30 @@ class Region : gobject.object.ObjectWrap
     _cretval = gtk_source_region_to_string(cast(GtkSourceRegion*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class RegionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The #GtkTextBuffer. The #GtkSourceRegion has a weak reference to the
+          buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtk.text_buffer.TextBuffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.region.Region]
+final class RegionGidBuilder : RegionGidBuilderImpl!RegionGidBuilder
+{
+  Region build()
+  {
+    return new Region(cast(void*)createGObject(Region._getGType), Yes.Take);
   }
 }

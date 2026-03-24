@@ -2,6 +2,7 @@
 module pango.context;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -51,6 +52,15 @@ class Context : gobject.object.ObjectWrap
   override Context self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.context.Context]
+  Returns: New builder object
+  */
+  static ContextGidBuilder builder()
+  {
+    return new ContextGidBuilder;
   }
 
   /**
@@ -453,5 +463,18 @@ class Context : gobject.object.ObjectWrap
   void setRoundGlyphPositions(bool roundPositions)
   {
     pango_context_set_round_glyph_positions(cast(PangoContext*)this._cPtr, roundPositions);
+  }
+}
+
+class ContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.context.Context]
+final class ContextGidBuilder : ContextGidBuilderImpl!ContextGidBuilder
+{
+  Context build()
+  {
+    return new Context(cast(void*)createGObject(Context._getGType), Yes.Take);
   }
 }

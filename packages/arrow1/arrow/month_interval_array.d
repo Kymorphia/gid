@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.numeric_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class MonthIntervalArray : arrow.numeric_array.NumericArray
@@ -35,6 +36,15 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
   override MonthIntervalArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.month_interval_array.MonthIntervalArray]
+  Returns: New builder object
+  */
+  static MonthIntervalArrayGidBuilder builder()
+  {
+    return new MonthIntervalArrayGidBuilder;
   }
 
   /** */
@@ -66,5 +76,18 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
       _retval = cast(int[])_cretval[0 .. _cretlength].dup;
     }
     return _retval;
+  }
+}
+
+class MonthIntervalArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_interval_array.MonthIntervalArray]
+final class MonthIntervalArrayGidBuilder : MonthIntervalArrayGidBuilderImpl!MonthIntervalArrayGidBuilder
+{
+  MonthIntervalArray build()
+  {
+    return new MonthIntervalArray(cast(void*)createGObject(MonthIntervalArray._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.integer_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class UInt8DataType : arrow.integer_data_type.IntegerDataType
@@ -36,11 +37,33 @@ class UInt8DataType : arrow.integer_data_type.IntegerDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.uint8_data_type.UInt8DataType]
+  Returns: New builder object
+  */
+  static UInt8DataTypeGidBuilder builder()
+  {
+    return new UInt8DataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowUInt8DataType* _cretval;
     _cretval = garrow_uint8_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class UInt8DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint8_data_type.UInt8DataType]
+final class UInt8DataTypeGidBuilder : UInt8DataTypeGidBuilderImpl!UInt8DataTypeGidBuilder
+{
+  UInt8DataType build()
+  {
+    return new UInt8DataType(cast(void*)createGObject(UInt8DataType._getGType), Yes.Take);
   }
 }

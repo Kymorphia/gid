@@ -8,6 +8,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -52,6 +53,15 @@ class FaviconDatabase : gobject.object.ObjectWrap
   override FaviconDatabase self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.favicon_database.FaviconDatabase]
+  Returns: New builder object
+  */
+  static FaviconDatabaseGidBuilder builder()
+  {
+    return new FaviconDatabaseGidBuilder;
   }
 
   /**
@@ -182,5 +192,18 @@ class FaviconDatabase : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("favicon-changed", closure, after);
+  }
+}
+
+class FaviconDatabaseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.favicon_database.FaviconDatabase]
+final class FaviconDatabaseGidBuilder : FaviconDatabaseGidBuilderImpl!FaviconDatabaseGidBuilder
+{
+  FaviconDatabase build()
+  {
+    return new FaviconDatabase(cast(void*)createGObject(FaviconDatabase._getGType), No.Take);
   }
 }

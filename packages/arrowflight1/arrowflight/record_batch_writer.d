@@ -11,6 +11,7 @@ import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
@@ -39,6 +40,15 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   override RecordBatchWriter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.record_batch_writer.RecordBatchWriter]
+  Returns: New builder object
+  */
+  static RecordBatchWriterGidBuilder builder()
+  {
+    return new RecordBatchWriterGidBuilder;
   }
 
   /**
@@ -98,5 +108,18 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class RecordBatchWriterGidBuilderImpl(T) : arrow.record_batch_writer.RecordBatchWriterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.record_batch_writer.RecordBatchWriter]
+final class RecordBatchWriterGidBuilder : RecordBatchWriterGidBuilderImpl!RecordBatchWriterGidBuilder
+{
+  RecordBatchWriter build()
+  {
+    return new RecordBatchWriter(cast(void*)createGObject(RecordBatchWriter._getGType), No.Take);
   }
 }

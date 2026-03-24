@@ -4,6 +4,7 @@ module gtk.spinner;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -53,6 +54,15 @@ class Spinner : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [gtk.spinner.Spinner]
+  Returns: New builder object
+  */
+  static SpinnerGidBuilder builder()
+  {
+    return new SpinnerGidBuilder;
+  }
+
   /** */
   @property bool active()
   {
@@ -90,5 +100,25 @@ class Spinner : gtk.widget.Widget
   void stop()
   {
     gtk_spinner_stop(cast(GtkSpinner*)this._cPtr);
+  }
+}
+
+class SpinnerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /** */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+}
+
+/// Fluent builder for [gtk.spinner.Spinner]
+final class SpinnerGidBuilder : SpinnerGidBuilderImpl!SpinnerGidBuilder
+{
+  Spinner build()
+  {
+    return new Spinner(cast(void*)createGObject(Spinner._getGType), No.Take);
   }
 }

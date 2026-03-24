@@ -9,6 +9,7 @@ import arrow.string_array;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -37,6 +38,15 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   override StringDictionaryArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.string_dictionary_array_builder.StringDictionaryArrayBuilder]
+  Returns: New builder object
+  */
+  static StringDictionaryArrayBuilderGidBuilder builder()
+  {
+    return new StringDictionaryArrayBuilderGidBuilder;
   }
 
   /** */
@@ -142,5 +152,18 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   void resetFull()
   {
     garrow_string_dictionary_array_builder_reset_full(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr);
+  }
+}
+
+class StringDictionaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.string_dictionary_array_builder.StringDictionaryArrayBuilder]
+final class StringDictionaryArrayBuilderGidBuilder : StringDictionaryArrayBuilderGidBuilderImpl!StringDictionaryArrayBuilderGidBuilder
+{
+  StringDictionaryArrayBuilder build()
+  {
+    return new StringDictionaryArrayBuilder(cast(void*)createGObject(StringDictionaryArrayBuilder._getGType), Yes.Take);
   }
 }

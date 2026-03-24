@@ -6,6 +6,7 @@ public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
+public import gobject.gid_builder;
 
 /**
     [gio.file_descriptor_based.FileDescriptorBased] is an interface for file descriptor based IO.
@@ -30,4 +31,8 @@ template FileDescriptorBasedT()
     _retval = g_file_descriptor_based_get_fd(cast(GFileDescriptorBased*)this._cPtr);
     return _retval;
   }
+}
+
+template FileDescriptorBasedGidBuilderT()
+{
 }

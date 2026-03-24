@@ -3,6 +3,7 @@ module gtk.event_controller;
 
 import gdk.event;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -43,6 +44,15 @@ class EventController : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.event_controller.EventController]
+  Returns: New builder object
+  */
+  static EventControllerGidBuilder builder()
+  {
+    return new EventControllerGidBuilder;
+  }
+
+  /**
       Get `propagationPhase` property.
       Returns: The propagation phase at which this controller will handle events.
   */
@@ -58,7 +68,16 @@ class EventController : gobject.object.ObjectWrap
   */
   @property void propagationPhase(gtk.types.PropagationPhase propval)
   {
-    return setPropagationPhase(propval);
+    setPropagationPhase(propval);
+  }
+
+  /**
+      Get `widget` property.
+      Returns: The widget receiving the #GdkEvents that the controller will handle.
+  */
+  @property gtk.widget.Widget widget()
+  {
+    return getWidget();
   }
 
   /**
@@ -124,5 +143,40 @@ class EventController : gobject.object.ObjectWrap
   void setPropagationPhase(gtk.types.PropagationPhase phase)
   {
     gtk_event_controller_set_propagation_phase(cast(GtkEventController*)this._cPtr, phase);
+  }
+}
+
+class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `propagationPhase` property.
+      Params:
+        propval = The propagation phase at which this controller will handle events.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagationPhase(gtk.types.PropagationPhase propval)
+  {
+    return setProperty("propagation-phase", propval);
+  }
+
+  /**
+      Set `widget` property.
+      Params:
+        propval = The widget receiving the #GdkEvents that the controller will handle.
+      Returns: Builder instance for fluent chaining
+  */
+  T widget(gtk.widget.Widget propval)
+  {
+    return setProperty("widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.event_controller.EventController]
+final class EventControllerGidBuilder : EventControllerGidBuilderImpl!EventControllerGidBuilder
+{
+  EventController build()
+  {
+    return new EventController(cast(void*)createGObject(EventController._getGType), No.Take);
   }
 }

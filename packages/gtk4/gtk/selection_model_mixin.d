@@ -4,6 +4,7 @@ module gtk.selection_model_mixin;
 public import gtk.selection_model_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gtk.bitset;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -312,4 +313,8 @@ template SelectionModelT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-changed", closure, after);
   }
+}
+
+template SelectionModelGidBuilderT()
+{
 }

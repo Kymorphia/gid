@@ -9,6 +9,7 @@ public import arrow.types;
 public import gid.gid;
 public import glib.bytes;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /** */
@@ -38,4 +39,8 @@ template ReadableT()
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
+}
+
+template ReadableGidBuilderT()
+{
 }

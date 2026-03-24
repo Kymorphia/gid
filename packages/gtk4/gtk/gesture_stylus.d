@@ -5,6 +5,7 @@ import gdk.device_tool;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -46,6 +47,15 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
+  Get builder for [gtk.gesture_stylus.GestureStylus]
+  Returns: New builder object
+  */
+  static GestureStylusGidBuilder builder()
+  {
+    return new GestureStylusGidBuilder;
+  }
+
+  /**
       Get `stylusOnly` property.
       Returns: If this gesture should exclusively react to stylus input devices.
   */
@@ -61,7 +71,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   */
   @property void stylusOnly(bool propval)
   {
-    return setStylusOnly(propval);
+    setStylusOnly(propval);
   }
 
   /**
@@ -390,5 +400,29 @@ class GestureStylus : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("up", closure, after);
+  }
+}
+
+class GestureStylusGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+
+  /**
+      Set `stylusOnly` property.
+      Params:
+        propval = If this gesture should exclusively react to stylus input devices.
+      Returns: Builder instance for fluent chaining
+  */
+  T stylusOnly(bool propval)
+  {
+    return setProperty("stylus-only", propval);
+  }
+}
+
+/// Fluent builder for [gtk.gesture_stylus.GestureStylus]
+final class GestureStylusGidBuilder : GestureStylusGidBuilderImpl!GestureStylusGidBuilder
+{
+  GestureStylus build()
+  {
+    return new GestureStylus(cast(void*)createGObject(GestureStylus._getGType), Yes.Take);
   }
 }

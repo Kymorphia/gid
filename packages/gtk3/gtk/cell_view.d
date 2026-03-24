@@ -7,6 +7,7 @@ import gdk.color;
 import gdk.rgba;
 import gdkpixbuf.pixbuf;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -71,6 +72,15 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
     return this;
   }
 
+  /**
+  Get builder for [gtk.cell_view.CellView]
+  Returns: New builder object
+  */
+  static CellViewGidBuilder builder()
+  {
+    return new CellViewGidBuilder;
+  }
+
   /** */
   @property void background(string propval)
   {
@@ -116,7 +126,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   @property void backgroundRgba(gdk.rgba.RGBA propval)
   {
-    return setBackgroundRgba(propval);
+    setBackgroundRgba(propval);
   }
 
   /** */
@@ -129,6 +139,40 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   @property void backgroundSet(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-set", propval);
+  }
+
+  /**
+      Get `cellArea` property.
+      Returns: The #GtkCellArea rendering cells
+        
+        If no area is specified when creating the cell view with [gtk.cell_view.CellView.newWithContext]
+        a horizontally oriented #GtkCellAreaBox will be used.
+        
+        since 3.0
+  */
+  @property gtk.cell_area.CellArea cellArea()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
+  }
+
+  /**
+      Get `cellAreaContext` property.
+      Returns: The #GtkCellAreaContext used to compute the geometry of the cell view.
+        
+        A group of cell views can be assigned the same context in order to
+        ensure the sizes and cell alignments match across all the views with
+        the same context.
+        
+        #GtkComboBox menus uses this to assign the same context to all cell views
+        in the menu items for a single menu (each submenu creates its own
+        context since the size of each submenu does not depend on parent
+        or sibling menus).
+        
+        since 3.0
+  */
+  @property gtk.cell_area_context.CellAreaContext cellAreaContext()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area_context.CellAreaContext)("cell-area-context");
   }
 
   /**
@@ -155,7 +199,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   @property void drawSensitive(bool propval)
   {
-    return setDrawSensitive(propval);
+    setDrawSensitive(propval);
   }
 
   /**
@@ -184,7 +228,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   @property void fitModel(bool propval)
   {
-    return setFitModel(propval);
+    setFitModel(propval);
   }
 
   /**
@@ -207,7 +251,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   @property void model(gtk.tree_model.TreeModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   mixin CellLayoutT!();
@@ -451,5 +495,139 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_cell_view_set_model(cast(GtkCellView*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin CellLayoutGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T background(string propval)
+  {
+    return setProperty("background", propval);
+  }
+
+  /**
+      Set `backgroundGdk` property.
+      Params:
+        propval = The background color as a #GdkColor
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkCellView:background-rgba instead.
+  */
+  T backgroundGdk(gdk.color.Color propval)
+  {
+    return setProperty("background-gdk", propval);
+  }
+
+  /**
+      Set `backgroundRgba` property.
+      Params:
+        propval = The background color as a #GdkRGBA
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("background-rgba", propval);
+  }
+
+  /** */
+  T backgroundSet(bool propval)
+  {
+    return setProperty("background-set", propval);
+  }
+
+  /**
+      Set `cellArea` property.
+      Params:
+        propval = The #GtkCellArea rendering cells
+          
+          If no area is specified when creating the cell view with [gtk.cell_view.CellView.newWithContext]
+          a horizontally oriented #GtkCellAreaBox will be used.
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T cellArea(gtk.cell_area.CellArea propval)
+  {
+    return setProperty("cell-area", propval);
+  }
+
+  /**
+      Set `cellAreaContext` property.
+      Params:
+        propval = The #GtkCellAreaContext used to compute the geometry of the cell view.
+          
+          A group of cell views can be assigned the same context in order to
+          ensure the sizes and cell alignments match across all the views with
+          the same context.
+          
+          #GtkComboBox menus uses this to assign the same context to all cell views
+          in the menu items for a single menu (each submenu creates its own
+          context since the size of each submenu does not depend on parent
+          or sibling menus).
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T cellAreaContext(gtk.cell_area_context.CellAreaContext propval)
+  {
+    return setProperty("cell-area-context", propval);
+  }
+
+  /**
+      Set `drawSensitive` property.
+      Params:
+        propval = Whether all cells should be draw as sensitive for this view regardless
+          of the actual cell properties (used to make menus with submenus appear
+          sensitive when the items in submenus might be insensitive).
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T drawSensitive(bool propval)
+  {
+    return setProperty("draw-sensitive", propval);
+  }
+
+  /**
+      Set `fitModel` property.
+      Params:
+        propval = Whether the view should request enough space to always fit
+          the size of every row in the model (used by the combo box to
+          ensure the combo box size doesnt change when different items
+          are selected).
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T fitModel(bool propval)
+  {
+    return setProperty("fit-model", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model for cell view
+          
+          since 2.10
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_view.CellView]
+final class CellViewGidBuilder : CellViewGidBuilderImpl!CellViewGidBuilder
+{
+  CellView build()
+  {
+    return new CellView(cast(void*)createGObject(CellView._getGType), No.Take);
   }
 }

@@ -9,6 +9,7 @@ import adw.preferences_page;
 import adw.toast;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -63,6 +64,15 @@ class PreferencesDialog : adw.dialog.Dialog
   }
 
   /**
+  Get builder for [adw.preferences_dialog.PreferencesDialog]
+  Returns: New builder object
+  */
+  static PreferencesDialogGidBuilder builder()
+  {
+    return new PreferencesDialogGidBuilder;
+  }
+
+  /**
       Get `searchEnabled` property.
       Returns: Whether search is enabled.
   */
@@ -78,7 +88,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   @property void searchEnabled(bool propval)
   {
-    return setSearchEnabled(propval);
+    setSearchEnabled(propval);
   }
 
   /**
@@ -120,7 +130,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   @property void visiblePageName(string propval)
   {
-    return setVisiblePageName(propval);
+    setVisiblePageName(propval);
   }
 
   /**
@@ -262,5 +272,54 @@ class PreferencesDialog : adw.dialog.Dialog
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_preferences_dialog_set_visible_page_name(cast(AdwPreferencesDialog*)this._cPtr, _name);
+  }
+}
+
+class PreferencesDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
+{
+
+
+  /**
+      Set `searchEnabled` property.
+      Params:
+        propval = Whether search is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T searchEnabled(bool propval)
+  {
+    return setProperty("search-enabled", propval);
+  }
+
+  /**
+      Set `visiblePage` property.
+      Params:
+        propval = The currently visible page.
+      Returns: Builder instance for fluent chaining
+  */
+  T visiblePage(gtk.widget.Widget propval)
+  {
+    return setProperty("visible-page", propval);
+  }
+
+  /**
+      Set `visiblePageName` property.
+      Params:
+        propval = The name of the currently visible page.
+          
+          See `property@AdwPreferencesDialog:visible-page`.
+      Returns: Builder instance for fluent chaining
+  */
+  T visiblePageName(string propval)
+  {
+    return setProperty("visible-page-name", propval);
+  }
+}
+
+/// Fluent builder for [adw.preferences_dialog.PreferencesDialog]
+final class PreferencesDialogGidBuilder : PreferencesDialogGidBuilderImpl!PreferencesDialogGidBuilder
+{
+  PreferencesDialog build()
+  {
+    return new PreferencesDialog(cast(void*)createGObject(PreferencesDialog._getGType), No.Take);
   }
 }

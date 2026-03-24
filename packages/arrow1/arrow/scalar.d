@@ -9,6 +9,7 @@ import arrow.equal_options;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class Scalar : gobject.object.ObjectWrap
   override Scalar self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.scalar.Scalar]
+  Returns: New builder object
+  */
+  static ScalarGidBuilder builder()
+  {
+    return new ScalarGidBuilder;
   }
 
   /** */
@@ -109,5 +119,35 @@ class Scalar : gobject.object.ObjectWrap
     _cretval = garrow_scalar_to_string(cast(GArrowScalar*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class ScalarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `dataType` property.
+      Params:
+        propval = The data type of the scalar.
+      Returns: Builder instance for fluent chaining
+  */
+  T dataType(arrow.data_type.DataType propval)
+  {
+    return setProperty("data-type", propval);
+  }
+
+  /** */
+  T scalar(void* propval)
+  {
+    return setProperty("scalar", propval);
+  }
+}
+
+/// Fluent builder for [arrow.scalar.Scalar]
+final class ScalarGidBuilder : ScalarGidBuilderImpl!ScalarGidBuilder
+{
+  Scalar build()
+  {
+    return new Scalar(cast(void*)createGObject(Scalar._getGType), No.Take);
   }
 }

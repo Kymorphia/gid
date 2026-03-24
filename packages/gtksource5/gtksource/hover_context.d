@@ -2,6 +2,7 @@
 module gtksource.hover_context;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_iter;
 import gtksource.buffer;
@@ -49,6 +50,15 @@ class HoverContext : gobject.object.ObjectWrap
   override HoverContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.hover_context.HoverContext]
+  Returns: New builder object
+  */
+  static HoverContextGidBuilder builder()
+  {
+    return new HoverContextGidBuilder;
   }
 
   /**
@@ -103,5 +113,18 @@ class HoverContext : gobject.object.ObjectWrap
     _cretval = gtk_source_hover_context_get_view(cast(GtkSourceHoverContext*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class HoverContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.hover_context.HoverContext]
+final class HoverContextGidBuilder : HoverContextGidBuilderImpl!HoverContextGidBuilder
+{
+  HoverContext build()
+  {
+    return new HoverContext(cast(void*)createGObject(HoverContext._getGType), No.Take);
   }
 }

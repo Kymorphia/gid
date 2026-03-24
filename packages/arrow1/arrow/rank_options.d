@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.sort_key;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class RankOptions : arrow.function_options.FunctionOptions
   override RankOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.rank_options.RankOptions]
+  Returns: New builder object
+  */
+  static RankOptionsGidBuilder builder()
+  {
+    return new RankOptionsGidBuilder;
   }
 
   /**
@@ -125,5 +135,40 @@ class RankOptions : arrow.function_options.FunctionOptions
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);
     scope(exit) containerFree!(GList*, arrow.sort_key.SortKey, GidOwnership.None)(_sortKeys);
     garrow_rank_options_set_sort_keys(cast(GArrowRankOptions*)this._cPtr, _sortKeys);
+  }
+}
+
+class RankOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `nullPlacement` property.
+      Params:
+        propval = Whether nulls and NaNs are placed at the start or at the end.
+      Returns: Builder instance for fluent chaining
+  */
+  T nullPlacement(arrow.types.NullPlacement propval)
+  {
+    return setProperty("null-placement", propval);
+  }
+
+  /**
+      Set `tiebreaker` property.
+      Params:
+        propval = Tiebreaker for dealing with equal values in ranks.
+      Returns: Builder instance for fluent chaining
+  */
+  T tiebreaker(arrow.types.RankTiebreaker propval)
+  {
+    return setProperty("tiebreaker", propval);
+  }
+}
+
+/// Fluent builder for [arrow.rank_options.RankOptions]
+final class RankOptionsGidBuilder : RankOptionsGidBuilderImpl!RankOptionsGidBuilder
+{
+  RankOptions build()
+  {
+    return new RankOptions(cast(void*)createGObject(RankOptions._getGType), Yes.Take);
   }
 }

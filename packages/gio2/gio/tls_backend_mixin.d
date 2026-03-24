@@ -7,6 +7,7 @@ public import gio.c.functions;
 public import gio.c.types;
 public import gio.tls_database;
 public import gio.types;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.types;
 
@@ -144,4 +145,8 @@ template TlsBackendT()
     _retval = cast(bool)g_tls_backend_supports_tls(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
+}
+
+template TlsBackendGidBuilderT()
+{
 }

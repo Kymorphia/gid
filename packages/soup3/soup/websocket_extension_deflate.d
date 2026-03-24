@@ -2,6 +2,7 @@
 module soup.websocket_extension_deflate;
 
 import gid.gid;
+import gobject.gid_builder;
 import soup.c.functions;
 import soup.c.types;
 import soup.types;
@@ -40,5 +41,27 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
   override WebsocketExtensionDeflate self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.websocket_extension_deflate.WebsocketExtensionDeflate]
+  Returns: New builder object
+  */
+  static WebsocketExtensionDeflateGidBuilder builder()
+  {
+    return new WebsocketExtensionDeflateGidBuilder;
+  }
+}
+
+class WebsocketExtensionDeflateGidBuilderImpl(T) : soup.websocket_extension.WebsocketExtensionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [soup.websocket_extension_deflate.WebsocketExtensionDeflate]
+final class WebsocketExtensionDeflateGidBuilder : WebsocketExtensionDeflateGidBuilderImpl!WebsocketExtensionDeflateGidBuilder
+{
+  WebsocketExtensionDeflate build()
+  {
+    return new WebsocketExtensionDeflate(cast(void*)createGObject(WebsocketExtensionDeflate._getGType), No.Take);
   }
 }

@@ -9,6 +9,7 @@ import arrow.data_type;
 import arrow.extension_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,21 @@ class ExtensionDataType : arrow.data_type.DataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.extension_data_type.ExtensionDataType]
+  Returns: New builder object
+  */
+  static ExtensionDataTypeGidBuilder builder()
+  {
+    return new ExtensionDataTypeGidBuilder;
+  }
+
+  /** */
+  @property arrow.data_type.DataType storageDataType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.data_type.DataType)("storage-data-type");
+  }
+
   /** */
   string getExtensionName()
   {
@@ -65,5 +81,24 @@ class ExtensionDataType : arrow.data_type.DataType
     _cretval = garrow_extension_data_type_wrap_chunked_array(cast(GArrowExtensionDataType*)this._cPtr, storage ? cast(GArrowChunkedArray*)storage._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ExtensionDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
+{
+
+  /** */
+  T storageDataType(arrow.data_type.DataType propval)
+  {
+    return setProperty("storage-data-type", propval);
+  }
+}
+
+/// Fluent builder for [arrow.extension_data_type.ExtensionDataType]
+final class ExtensionDataTypeGidBuilder : ExtensionDataTypeGidBuilderImpl!ExtensionDataTypeGidBuilder
+{
+  ExtensionDataType build()
+  {
+    return new ExtensionDataType(cast(void*)createGObject(ExtensionDataType._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import gmime.c.types;
 import gmime.format_options;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class Header : gobject.object.ObjectWrap
   override Header self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.header.Header]
+  Returns: New builder object
+  */
+  static HeaderGidBuilder builder()
+  {
+    return new HeaderGidBuilder;
   }
 
   /**
@@ -303,5 +313,18 @@ class Header : gobject.object.ObjectWrap
     ptrdiff_t _retval;
     _retval = g_mime_header_write_to_stream(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class HeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.header.Header]
+final class HeaderGidBuilder : HeaderGidBuilderImpl!HeaderGidBuilder
+{
+  Header build()
+  {
+    return new Header(cast(void*)createGObject(Header._getGType), No.Take);
   }
 }

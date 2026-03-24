@@ -2,6 +2,7 @@
 module gstgl.gloverlay_compositor;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.caps;
@@ -40,6 +41,15 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   override GLOverlayCompositor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.gloverlay_compositor.GLOverlayCompositor]
+  Returns: New builder object
+  */
+  static GLOverlayCompositorGidBuilder builder()
+  {
+    return new GLOverlayCompositorGidBuilder;
   }
 
   /** */
@@ -87,5 +97,24 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   void uploadOverlays(gst.buffer.Buffer buf)
   {
     gst_gl_overlay_compositor_upload_overlays(cast(GstGLOverlayCompositor*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null);
+  }
+}
+
+class GLOverlayCompositorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T yinvert(bool propval)
+  {
+    return setProperty("yinvert", propval);
+  }
+}
+
+/// Fluent builder for [gstgl.gloverlay_compositor.GLOverlayCompositor]
+final class GLOverlayCompositorGidBuilder : GLOverlayCompositorGidBuilderImpl!GLOverlayCompositorGidBuilder
+{
+  GLOverlayCompositor build()
+  {
+    return new GLOverlayCompositor(cast(void*)createGObject(GLOverlayCompositor._getGType), No.Take);
   }
 }

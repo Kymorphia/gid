@@ -4,6 +4,7 @@ module gtk.tearoff_menu_item;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.actionable;
 import gtk.actionable_mixin;
 import gtk.activatable;
@@ -61,6 +62,15 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
+  Get builder for [gtk.tearoff_menu_item.TearoffMenuItem]
+  Returns: New builder object
+  */
+  static TearoffMenuItemGidBuilder builder()
+  {
+    return new TearoffMenuItemGidBuilder;
+  }
+
+  /**
       Creates a new #GtkTearoffMenuItem.
       Returns: a new #GtkTearoffMenuItem.
   
@@ -72,5 +82,19 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     _cretval = gtk_tearoff_menu_item_new();
     this(_cretval, No.Take);
+  }
+}
+
+class TearoffMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.tearoff_menu_item.TearoffMenuItem]
+final class TearoffMenuItemGidBuilder : TearoffMenuItemGidBuilderImpl!TearoffMenuItemGidBuilder
+{
+  TearoffMenuItem build()
+  {
+    return new TearoffMenuItem(cast(void*)createGObject(TearoffMenuItem._getGType), No.Take);
   }
 }

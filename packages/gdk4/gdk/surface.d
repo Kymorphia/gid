@@ -19,6 +19,7 @@ import gdk.vulkan_context;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -61,6 +62,15 @@ class Surface : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.surface.Surface]
+  Returns: New builder object
+  */
+  static SurfaceGidBuilder builder()
+  {
+    return new SurfaceGidBuilder;
+  }
+
+  /**
       Get `cursor` property.
       Returns: The mouse pointer for the [gdk.surface.Surface].
   */
@@ -76,7 +86,25 @@ class Surface : gobject.object.ObjectWrap
   */
   @property void cursor(gdk.cursor.Cursor propval)
   {
-    return setCursor(propval);
+    setCursor(propval);
+  }
+
+  /**
+      Get `display` property.
+      Returns: The [gdk.display.Display] connection of the surface.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Get `frameClock` property.
+      Returns: The [gdk.frame_clock.FrameClock] of the surface.
+  */
+  @property gdk.frame_clock.FrameClock frameClock()
+  {
+    return getFrameClock();
   }
 
   /**
@@ -825,5 +853,51 @@ class Surface : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("render", closure, after);
+  }
+}
+
+class SurfaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `cursor` property.
+      Params:
+        propval = The mouse pointer for the [gdk.surface.Surface].
+      Returns: Builder instance for fluent chaining
+  */
+  T cursor(gdk.cursor.Cursor propval)
+  {
+    return setProperty("cursor", propval);
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The [gdk.display.Display] connection of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `frameClock` property.
+      Params:
+        propval = The [gdk.frame_clock.FrameClock] of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T frameClock(gdk.frame_clock.FrameClock propval)
+  {
+    return setProperty("frame-clock", propval);
+  }
+}
+
+/// Fluent builder for [gdk.surface.Surface]
+final class SurfaceGidBuilder : SurfaceGidBuilderImpl!SurfaceGidBuilder
+{
+  Surface build()
+  {
+    return new Surface(cast(void*)createGObject(Surface._getGType), No.Take);
   }
 }

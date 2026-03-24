@@ -4,6 +4,7 @@ module gtk.style_context;
 import gdk.display;
 import gdk.rgba;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.border;
 import gtk.c.functions;
@@ -82,6 +83,15 @@ class StyleContext : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gtk.style_context.StyleContext]
+  Returns: New builder object
+  */
+  static StyleContextGidBuilder builder()
+  {
+    return new StyleContextGidBuilder;
+  }
+
   /** */
   @property gdk.display.Display display()
   {
@@ -91,7 +101,7 @@ class StyleContext : gobject.object.ObjectWrap
   /** */
   @property void display(gdk.display.Display propval)
   {
-    return setDisplay(propval);
+    setDisplay(propval);
   }
 
   /**
@@ -447,5 +457,24 @@ class StyleContext : gobject.object.ObjectWrap
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)this._cPtr, flags);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gtk.style_context.StyleContext]
+final class StyleContextGidBuilder : StyleContextGidBuilderImpl!StyleContextGidBuilder
+{
+  StyleContext build()
+  {
+    return new StyleContext(cast(void*)createGObject(StyleContext._getGType), No.Take);
   }
 }

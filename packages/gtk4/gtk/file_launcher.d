@@ -7,6 +7,7 @@ import gio.cancellable;
 import gio.file;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.file_launcher.FileLauncher]
+  Returns: New builder object
+  */
+  static FileLauncherGidBuilder builder()
+  {
+    return new FileLauncherGidBuilder;
+  }
+
+  /**
       Get `alwaysAsk` property.
       Returns: Whether to ask the user to choose an app for opening the file. If `FALSE`,
         the file might be opened with a default app or the previous choice.
@@ -73,7 +83,7 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   @property void alwaysAsk(bool propval)
   {
-    return setAlwaysAsk(propval);
+    setAlwaysAsk(propval);
   }
 
   /**
@@ -92,7 +102,7 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   @property void file(gio.file.File propval)
   {
-    return setFile(propval);
+    setFile(propval);
   }
 
   /**
@@ -111,7 +121,7 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   @property void writable(bool propval)
   {
-    return setWritable(propval);
+    setWritable(propval);
   }
 
   /**
@@ -291,5 +301,52 @@ class FileLauncher : gobject.object.ObjectWrap
   void setWritable(bool writable)
   {
     gtk_file_launcher_set_writable(cast(GtkFileLauncher*)this._cPtr, writable);
+  }
+}
+
+class FileLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `alwaysAsk` property.
+      Params:
+        propval = Whether to ask the user to choose an app for opening the file. If `FALSE`,
+          the file might be opened with a default app or the previous choice.
+      Returns: Builder instance for fluent chaining
+  */
+  T alwaysAsk(bool propval)
+  {
+    return setProperty("always-ask", propval);
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file to launch.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gio.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `writable` property.
+      Params:
+        propval = Whether to make the file writable for the handler.
+      Returns: Builder instance for fluent chaining
+  */
+  T writable(bool propval)
+  {
+    return setProperty("writable", propval);
+  }
+}
+
+/// Fluent builder for [gtk.file_launcher.FileLauncher]
+final class FileLauncherGidBuilder : FileLauncherGidBuilderImpl!FileLauncherGidBuilder
+{
+  FileLauncher build()
+  {
+    return new FileLauncher(cast(void*)createGObject(FileLauncher._getGType), Yes.Take);
   }
 }

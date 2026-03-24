@@ -7,6 +7,7 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -41,8 +42,32 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return this;
   }
 
+  /**
+  Get builder for [gtk.expander_accessible.ExpanderAccessible]
+  Returns: New builder object
+  */
+  static ExpanderAccessibleGidBuilder builder()
+  {
+    return new ExpanderAccessibleGidBuilder;
+  }
+
   mixin ActionT!();
   alias getDescription = atk.object.ObjectWrap.getDescription;
   alias getName = atk.object.ObjectWrap.getName;
   alias setDescription = atk.object.ObjectWrap.setDescription;
+}
+
+class ExpanderAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.expander_accessible.ExpanderAccessible]
+final class ExpanderAccessibleGidBuilder : ExpanderAccessibleGidBuilderImpl!ExpanderAccessibleGidBuilder
+{
+  ExpanderAccessible build()
+  {
+    return new ExpanderAccessible(cast(void*)createGObject(ExpanderAccessible._getGType), No.Take);
+  }
 }

@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -54,6 +55,15 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
     return this;
   }
 
+  /**
+  Get builder for [gtk.range.Range]
+  Returns: New builder object
+  */
+  static RangeGidBuilder builder()
+  {
+    return new RangeGidBuilder;
+  }
+
   /** */
   @property gtk.adjustment.Adjustment adjustment()
   {
@@ -63,7 +73,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /** */
   @property void adjustment(gtk.adjustment.Adjustment propval)
   {
-    return setAdjustment(propval);
+    setAdjustment(propval);
   }
 
   /**
@@ -84,7 +94,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void fillLevel(double propval)
   {
-    return setFillLevel(propval);
+    setFillLevel(propval);
   }
 
   /** */
@@ -96,7 +106,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /** */
   @property void inverted(bool propval)
   {
-    return setInverted(propval);
+    setInverted(propval);
   }
 
   /** */
@@ -108,7 +118,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /** */
   @property void lowerStepperSensitivity(gtk.types.SensitivityType propval)
   {
-    return setLowerStepperSensitivity(propval);
+    setLowerStepperSensitivity(propval);
   }
 
   /**
@@ -131,7 +141,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void restrictToFillLevel(bool propval)
   {
-    return setRestrictToFillLevel(propval);
+    setRestrictToFillLevel(propval);
   }
 
   /**
@@ -152,7 +162,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void roundDigits(int propval)
   {
-    return setRoundDigits(propval);
+    setRoundDigits(propval);
   }
 
   /**
@@ -175,7 +185,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void showFillLevel(bool propval)
   {
-    return setShowFillLevel(propval);
+    setShowFillLevel(propval);
   }
 
   /** */
@@ -187,7 +197,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   /** */
   @property void upperStepperSensitivity(gtk.types.SensitivityType propval)
   {
-    return setUpperStepperSensitivity(propval);
+    setUpperStepperSensitivity(propval);
   }
 
   mixin OrientableT!();
@@ -764,5 +774,94 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+}
+
+class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("adjustment", propval);
+  }
+
+  /**
+      Set `fillLevel` property.
+      Params:
+        propval = The fill level (e.g. prebuffering of a network stream).
+          See [gtk.range.Range.setFillLevel].
+      Returns: Builder instance for fluent chaining
+  */
+  T fillLevel(double propval)
+  {
+    return setProperty("fill-level", propval);
+  }
+
+  /** */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /** */
+  T lowerStepperSensitivity(gtk.types.SensitivityType propval)
+  {
+    return setProperty("lower-stepper-sensitivity", propval);
+  }
+
+  /**
+      Set `restrictToFillLevel` property.
+      Params:
+        propval = The restrict-to-fill-level property controls whether slider
+          movement is restricted to an upper boundary set by the
+          fill level. See [gtk.range.Range.setRestrictToFillLevel].
+      Returns: Builder instance for fluent chaining
+  */
+  T restrictToFillLevel(bool propval)
+  {
+    return setProperty("restrict-to-fill-level", propval);
+  }
+
+  /**
+      Set `roundDigits` property.
+      Params:
+        propval = The number of digits to round the value to when
+          it changes, or -1. See #GtkRange::change-value.
+      Returns: Builder instance for fluent chaining
+  */
+  T roundDigits(int propval)
+  {
+    return setProperty("round-digits", propval);
+  }
+
+  /**
+      Set `showFillLevel` property.
+      Params:
+        propval = The show-fill-level property controls whether fill level indicator
+          graphics are displayed on the trough. See
+          [gtk.range.Range.setShowFillLevel].
+      Returns: Builder instance for fluent chaining
+  */
+  T showFillLevel(bool propval)
+  {
+    return setProperty("show-fill-level", propval);
+  }
+
+  /** */
+  T upperStepperSensitivity(gtk.types.SensitivityType propval)
+  {
+    return setProperty("upper-stepper-sensitivity", propval);
+  }
+}
+
+/// Fluent builder for [gtk.range.Range]
+final class RangeGidBuilder : RangeGidBuilderImpl!RangeGidBuilder
+{
+  Range build()
+  {
+    return new Range(cast(void*)createGObject(Range._getGType), No.Take);
   }
 }

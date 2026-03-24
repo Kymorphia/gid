@@ -9,6 +9,7 @@ import gid.gid;
 import gio.icon;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -147,6 +148,15 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   }
 
   /**
+  Get builder for [gtk.entry.Entry]
+  Returns: New builder object
+  */
+  static EntryGidBuilder builder()
+  {
+    return new EntryGidBuilder;
+  }
+
+  /**
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
@@ -162,7 +172,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void activatesDefault(bool propval)
   {
-    return setActivatesDefault(propval);
+    setActivatesDefault(propval);
   }
 
   /**
@@ -191,7 +201,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
   }
 
   /**
@@ -210,7 +220,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void buffer(gtk.entry_buffer.EntryBuffer propval)
   {
-    return setBuffer(propval);
+    setBuffer(propval);
   }
 
   /**
@@ -233,7 +243,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void completion(gtk.entry_completion.EntryCompletion propval)
   {
-    return setCompletion(propval);
+    setCompletion(propval);
   }
 
   /**
@@ -273,7 +283,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void extraMenu(gio.menu_model.MenuModel propval)
   {
-    return setExtraMenu(propval);
+    setExtraMenu(propval);
   }
 
   /**
@@ -292,7 +302,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void hasFrame(bool propval)
   {
-    return setHasFrame(propval);
+    setHasFrame(propval);
   }
 
   /**
@@ -346,7 +356,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
-    return setInputHints(propval);
+    setInputHints(propval);
   }
 
   /**
@@ -379,7 +389,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
-    return setInputPurpose(propval);
+    setInputPurpose(propval);
   }
 
   /**
@@ -436,7 +446,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void maxLength(int propval)
   {
-    return setMaxLength(propval);
+    setMaxLength(propval);
   }
 
   /**
@@ -455,7 +465,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void overwriteMode(bool propval)
   {
-    return setOverwriteMode(propval);
+    setOverwriteMode(propval);
   }
 
   /**
@@ -476,7 +486,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void placeholderText(string propval)
   {
-    return setPlaceholderText(propval);
+    setPlaceholderText(propval);
   }
 
   /**
@@ -673,7 +683,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void progressFraction(double propval)
   {
-    return setProgressFraction(propval);
+    setProgressFraction(propval);
   }
 
   /**
@@ -698,7 +708,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void progressPulseStep(double propval)
   {
-    return setProgressPulseStep(propval);
+    setProgressPulseStep(propval);
   }
 
   /**
@@ -909,7 +919,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   /** */
   @property void tabs(pango.tab_array.TabArray propval)
   {
-    return setTabs(propval);
+    setTabs(propval);
   }
 
   /**
@@ -958,7 +968,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void visibility(bool propval)
   {
-    return setVisibility(propval);
+    setVisibility(propval);
   }
 
   mixin CellEditableT!();
@@ -1989,5 +1999,460 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("icon-release", closure, after);
+  }
+}
+
+class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_editable.CellEditableGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
+{
+
+  mixin CellEditableGidBuilderT!();
+  mixin EditableGidBuilderT!();
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatesDefault(bool propval)
+  {
+    return setProperty("activates-default", propval);
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the entry.
+          
+          This is mainly useful to change the size or weight of the text.
+          
+          The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+          [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(pango.attr_list.AttrList propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The buffer object which actually stores the text.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtk.entry_buffer.EntryBuffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `completion` property.
+      Params:
+        propval = The auxiliary completion object to use with the entry.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  T completion(gtk.entry_completion.EntryCompletion propval)
+  {
+    return setProperty("completion", propval);
+  }
+
+  /**
+      Set `enableEmojiCompletion` property.
+      Params:
+        propval = Whether to suggest Emoji replacements for :-delimited names
+          like `:heart:`.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableEmojiCompletion(bool propval)
+  {
+    return setProperty("enable-emoji-completion", propval);
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to the context menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("extra-menu", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether the entry should draw a frame.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval)
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this entry.
+          
+          See [gtk.imcontext.IMContext].
+          
+          Setting this to a non-null value overrides the system-wide IM
+          module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
+          property.
+      Returns: Builder instance for fluent chaining
+  */
+  T imModule(string propval)
+  {
+    return setProperty("im-module", propval);
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints that allow input methods to fine-tune their behavior.
+          
+          Also see `property@Gtk.Entry:input-purpose`
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(gtk.types.InputHints propval)
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+          
+          Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+          [gtk.types.InputPurpose.Pin] is independent from setting
+          [gtk.entry.Entry.visibility].
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setProperty("input-purpose", propval);
+  }
+
+  /**
+      Set `invisibleChar` property.
+      Params:
+        propval = The character to use when masking entry contents (“password mode”).
+      Returns: Builder instance for fluent chaining
+  */
+  T invisibleChar(uint propval)
+  {
+    return setProperty("invisible-char", propval);
+  }
+
+  /**
+      Set `invisibleCharSet` property.
+      Params:
+        propval = Whether the invisible char has been set for the [gtk.entry.Entry].
+      Returns: Builder instance for fluent chaining
+  */
+  T invisibleCharSet(bool propval)
+  {
+    return setProperty("invisible-char-set", propval);
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = Maximum number of characters for this entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxLength(int propval)
+  {
+    return setProperty("max-length", propval);
+  }
+
+  /**
+      Set `overwriteMode` property.
+      Params:
+        propval = If text is overwritten when typing in the [gtk.entry.Entry].
+      Returns: Builder instance for fluent chaining
+  */
+  T overwriteMode(bool propval)
+  {
+    return setProperty("overwrite-mode", propval);
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.entry.Entry] when it is empty
+          and unfocused.
+      Returns: Builder instance for fluent chaining
+  */
+  T placeholderText(string propval)
+  {
+    return setProperty("placeholder-text", propval);
+  }
+
+  /**
+      Set `primaryIconActivatable` property.
+      Params:
+        propval = Whether the primary icon is activatable.
+          
+          GTK emits the `signal@Gtk.Entry::icon-press` and
+          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconActivatable(bool propval)
+  {
+    return setProperty("primary-icon-activatable", propval);
+  }
+
+  /**
+      Set `primaryIconGicon` property.
+      Params:
+        propval = The [gio.icon.Icon] to use for the primary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconGicon(gio.icon.Icon propval)
+  {
+    return setProperty("primary-icon-gicon", propval);
+  }
+
+  /**
+      Set `primaryIconName` property.
+      Params:
+        propval = The icon name to use for the primary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconName(string propval)
+  {
+    return setProperty("primary-icon-name", propval);
+  }
+
+  /**
+      Set `primaryIconPaintable` property.
+      Params:
+        propval = A [gdk.paintable.Paintable] to use as the primary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconPaintable(gdk.paintable.Paintable propval)
+  {
+    return setProperty("primary-icon-paintable", propval);
+  }
+
+  /**
+      Set `primaryIconSensitive` property.
+      Params:
+        propval = Whether the primary icon is sensitive.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconSensitive(bool propval)
+  {
+    return setProperty("primary-icon-sensitive", propval);
+  }
+
+  /**
+      Set `primaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon, with markup.
+          
+          Also see [gtk.entry.Entry.setIconTooltipMarkup].
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconTooltipMarkup(string propval)
+  {
+    return setProperty("primary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Set `primaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon.
+          
+          Also see [gtk.entry.Entry.setIconTooltipText].
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconTooltipText(string propval)
+  {
+    return setProperty("primary-icon-tooltip-text", propval);
+  }
+
+  /**
+      Set `progressFraction` property.
+      Params:
+        propval = The current fraction of the task that's been completed.
+      Returns: Builder instance for fluent chaining
+  */
+  T progressFraction(double propval)
+  {
+    return setProperty("progress-fraction", propval);
+  }
+
+  /**
+      Set `progressPulseStep` property.
+      Params:
+        propval = The fraction of total entry width to move the progress
+          bouncing block for each pulse.
+          
+          See [gtk.entry.Entry.progressPulse].
+      Returns: Builder instance for fluent chaining
+  */
+  T progressPulseStep(double propval)
+  {
+    return setProperty("progress-pulse-step", propval);
+  }
+
+  /**
+      Set `secondaryIconActivatable` property.
+      Params:
+        propval = Whether the secondary icon is activatable.
+          
+          GTK emits the `signal@Gtk.Entry::icon-press` and
+          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconActivatable(bool propval)
+  {
+    return setProperty("secondary-icon-activatable", propval);
+  }
+
+  /**
+      Set `secondaryIconGicon` property.
+      Params:
+        propval = The [gio.icon.Icon] to use for the secondary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconGicon(gio.icon.Icon propval)
+  {
+    return setProperty("secondary-icon-gicon", propval);
+  }
+
+  /**
+      Set `secondaryIconName` property.
+      Params:
+        propval = The icon name to use for the secondary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconName(string propval)
+  {
+    return setProperty("secondary-icon-name", propval);
+  }
+
+  /**
+      Set `secondaryIconPaintable` property.
+      Params:
+        propval = A [gdk.paintable.Paintable] to use as the secondary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconPaintable(gdk.paintable.Paintable propval)
+  {
+    return setProperty("secondary-icon-paintable", propval);
+  }
+
+  /**
+      Set `secondaryIconSensitive` property.
+      Params:
+        propval = Whether the secondary icon is sensitive.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconSensitive(bool propval)
+  {
+    return setProperty("secondary-icon-sensitive", propval);
+  }
+
+  /**
+      Set `secondaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon, with markup.
+          
+          Also see [gtk.entry.Entry.setIconTooltipMarkup].
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconTooltipMarkup(string propval)
+  {
+    return setProperty("secondary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Set `secondaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon.
+          
+          Also see [gtk.entry.Entry.setIconTooltipText].
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconTooltipText(string propval)
+  {
+    return setProperty("secondary-icon-tooltip-text", propval);
+  }
+
+  /** */
+  T showEmojiIcon(bool propval)
+  {
+    return setProperty("show-emoji-icon", propval);
+  }
+
+  /** */
+  T tabs(pango.tab_array.TabArray propval)
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /**
+      Set `truncateMultiline` property.
+      Params:
+        propval = When true, pasted multi-line text is truncated to the first line.
+      Returns: Builder instance for fluent chaining
+  */
+  T truncateMultiline(bool propval)
+  {
+    return setProperty("truncate-multiline", propval);
+  }
+
+  /**
+      Set `visibility` property.
+      Params:
+        propval = Whether the entry should show the “invisible char” instead of the
+          actual text (“password mode”).
+      Returns: Builder instance for fluent chaining
+  */
+  T visibility(bool propval)
+  {
+    return setProperty("visibility", propval);
+  }
+}
+
+/// Fluent builder for [gtk.entry.Entry]
+final class EntryGidBuilder : EntryGidBuilderImpl!EntryGidBuilder
+{
+  Entry build()
+  {
+    return new Entry(cast(void*)createGObject(Entry._getGType), No.Take);
   }
 }

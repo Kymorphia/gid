@@ -4,6 +4,7 @@ module gtk.drop_down;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -105,6 +106,15 @@ class DropDown : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.drop_down.DropDown]
+  Returns: New builder object
+  */
+  static DropDownGidBuilder builder()
+  {
+    return new DropDownGidBuilder;
+  }
+
+  /**
       Get `enableSearch` property.
       Returns: Whether to show a search entry in the popup.
         
@@ -126,7 +136,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void enableSearch(bool propval)
   {
-    return setEnableSearch(propval);
+    setEnableSearch(propval);
   }
 
   /**
@@ -155,7 +165,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void expression(gtk.expression.Expression propval)
   {
-    return setExpression(propval);
+    setExpression(propval);
   }
 
   /**
@@ -174,7 +184,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setFactory(propval);
+    setFactory(propval);
   }
 
   /**
@@ -193,7 +203,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void headerFactory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setHeaderFactory(propval);
+    setHeaderFactory(propval);
   }
 
   /**
@@ -216,7 +226,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void listFactory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setListFactory(propval);
+    setListFactory(propval);
   }
 
   /**
@@ -235,7 +245,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -254,7 +264,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void searchMatchMode(gtk.types.StringFilterMatchMode propval)
   {
-    return setSearchMatchMode(propval);
+    setSearchMatchMode(propval);
   }
 
   /**
@@ -279,7 +289,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void selected(uint propval)
   {
-    return setSelected(propval);
+    setSelected(propval);
   }
 
   /**
@@ -307,7 +317,7 @@ class DropDown : gtk.widget.Widget
   */
   @property void showArrow(bool propval)
   {
-    return setShowArrow(propval);
+    setShowArrow(propval);
   }
 
   /**
@@ -618,5 +628,131 @@ class DropDown : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enableSearch` property.
+      Params:
+        propval = Whether to show a search entry in the popup.
+          
+          Note that search requires [gtk.drop_down.DropDown.expression]
+          to be set.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSearch(bool propval)
+  {
+    return setProperty("enable-search", propval);
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = An expression to evaluate to obtain strings to match against the search
+          term.
+          
+          See `property@Gtk.DropDown:enable-search` for how to enable search.
+          If [gtk.drop_down.DropDown.factory] is not set, the expression is also
+          used to bind strings to labels produced by a default factory.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(gtk.expression.Expression propval)
+  {
+    return setProperty("expression", propval);
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+      Returns: Builder instance for fluent chaining
+  */
+  T factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("factory", propval);
+  }
+
+  /**
+      Set `headerFactory` property.
+      Params:
+        propval = The factory for creating header widgets for the popup.
+      Returns: Builder instance for fluent chaining
+  */
+  T headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("header-factory", propval);
+  }
+
+  /**
+      Set `listFactory` property.
+      Params:
+        propval = The factory for populating list items in the popup.
+          
+          If this is not set, [gtk.drop_down.DropDown.factory] is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T listFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("list-factory", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the displayed items.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `searchMatchMode` property.
+      Params:
+        propval = The match mode for the search filter.
+      Returns: Builder instance for fluent chaining
+  */
+  T searchMatchMode(gtk.types.StringFilterMatchMode propval)
+  {
+    return setProperty("search-match-mode", propval);
+  }
+
+  /**
+      Set `selected` property.
+      Params:
+        propval = The position of the selected item.
+          
+          If no item is selected, the property has the value
+          [gtk.types.INVALID_LIST_POSITION].
+      Returns: Builder instance for fluent chaining
+  */
+  T selected(uint propval)
+  {
+    return setProperty("selected", propval);
+  }
+
+  /**
+      Set `showArrow` property.
+      Params:
+        propval = Whether to show an arrow within the GtkDropDown widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T showArrow(bool propval)
+  {
+    return setProperty("show-arrow", propval);
+  }
+}
+
+/// Fluent builder for [gtk.drop_down.DropDown]
+final class DropDownGidBuilder : DropDownGidBuilderImpl!DropDownGidBuilder
+{
+  DropDown build()
+  {
+    return new DropDown(cast(void*)createGObject(DropDown._getGType), No.Take);
   }
 }

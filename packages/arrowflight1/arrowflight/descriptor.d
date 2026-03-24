@@ -5,6 +5,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Descriptor : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrowflight.descriptor.Descriptor]
+  Returns: New builder object
+  */
+  static DescriptorGidBuilder builder()
+  {
+    return new DescriptorGidBuilder;
+  }
+
   /** */
   bool equal(arrowflight.descriptor.Descriptor otherDescriptor)
   {
@@ -51,5 +61,24 @@ class Descriptor : gobject.object.ObjectWrap
     _cretval = gaflight_descriptor_to_string(cast(GAFlightDescriptor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class DescriptorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T descriptor(void* propval)
+  {
+    return setProperty("descriptor", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.descriptor.Descriptor]
+final class DescriptorGidBuilder : DescriptorGidBuilderImpl!DescriptorGidBuilder
+{
+  Descriptor build()
+  {
+    return new Descriptor(cast(void*)createGObject(Descriptor._getGType), No.Take);
   }
 }

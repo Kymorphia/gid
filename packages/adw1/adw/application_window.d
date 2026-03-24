@@ -12,6 +12,7 @@ import gio.action_group_mixin;
 import gio.action_map;
 import gio.action_map_mixin;
 import gio.list_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -91,6 +92,15 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   }
 
   /**
+  Get builder for [adw.application_window.ApplicationWindow]
+  Returns: New builder object
+  */
+  static ApplicationWindowGidBuilder builder()
+  {
+    return new ApplicationWindowGidBuilder;
+  }
+
+  /**
       Get `content` property.
       Returns: The content widget.
         
@@ -110,7 +120,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   */
   @property void content(gtk.widget.Widget propval)
   {
-    return setContent(propval);
+    setContent(propval);
   }
 
   /**
@@ -228,5 +238,32 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   void setContent(gtk.widget.Widget content = null)
   {
     adw_application_window_set_content(cast(AdwApplicationWindow*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
+  }
+}
+
+class ApplicationWindowGidBuilderImpl(T) : gtk.application_window.ApplicationWindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+          
+          This property should always be used instead of [gtk.window.Window.child].
+      Returns: Builder instance for fluent chaining
+  */
+  T content(gtk.widget.Widget propval)
+  {
+    return setProperty("content", propval);
+  }
+}
+
+/// Fluent builder for [adw.application_window.ApplicationWindow]
+final class ApplicationWindowGidBuilder : ApplicationWindowGidBuilderImpl!ApplicationWindowGidBuilder
+{
+  ApplicationWindow build()
+  {
+    return new ApplicationWindow(cast(void*)createGObject(ApplicationWindow._getGType), No.Take);
   }
 }

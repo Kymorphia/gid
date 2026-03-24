@@ -5,6 +5,7 @@ import gdk.types;
 import gid.gid;
 import glib.scanner;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -93,6 +94,15 @@ class AccelMap : gobject.object.ObjectWrap
   override AccelMap self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.accel_map.AccelMap]
+  Returns: New builder object
+  */
+  static AccelMapGidBuilder builder()
+  {
+    return new AccelMapGidBuilder;
   }
 
   /**
@@ -412,5 +422,18 @@ class AccelMap : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class AccelMapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.accel_map.AccelMap]
+final class AccelMapGidBuilder : AccelMapGidBuilderImpl!AccelMapGidBuilder
+{
+  AccelMap build()
+  {
+    return new AccelMap(cast(void*)createGObject(AccelMap._getGType), No.Take);
   }
 }

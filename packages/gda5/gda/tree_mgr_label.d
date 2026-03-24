@@ -6,6 +6,7 @@ import gda.c.types;
 import gda.tree_manager;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class TreeMgrLabel : gda.tree_manager.TreeManager
@@ -37,6 +38,15 @@ class TreeMgrLabel : gda.tree_manager.TreeManager
   }
 
   /**
+  Get builder for [gda.tree_mgr_label.TreeMgrLabel]
+  Returns: New builder object
+  */
+  static TreeMgrLabelGidBuilder builder()
+  {
+    return new TreeMgrLabelGidBuilder;
+  }
+
+  /**
       Creates a new #GdaTreeManager object which will add one tree node labelled label
   
       Params:
@@ -49,5 +59,24 @@ class TreeMgrLabel : gda.tree_manager.TreeManager
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gda_tree_mgr_label_new(_label);
     this(_cretval, Yes.Take);
+  }
+}
+
+class TreeMgrLabelGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImpl!T
+{
+
+  /** */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+}
+
+/// Fluent builder for [gda.tree_mgr_label.TreeMgrLabel]
+final class TreeMgrLabelGidBuilder : TreeMgrLabelGidBuilderImpl!TreeMgrLabelGidBuilder
+{
+  TreeMgrLabel build()
+  {
+    return new TreeMgrLabel(cast(void*)createGObject(TreeMgrLabel._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import gio.file;
 import gio.list_model;
 import gio.list_model_mixin;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -65,6 +66,15 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
+  Get builder for [gtk.directory_list.DirectoryList]
+  Returns: New builder object
+  */
+  static DirectoryListGidBuilder builder()
+  {
+    return new DirectoryListGidBuilder;
+  }
+
+  /**
       Get `attributes` property.
       Returns: The attributes to query.
   */
@@ -80,7 +90,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void attributes(string propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
   }
 
   /**
@@ -108,7 +118,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void file(gio.file.File propval)
   {
-    return setFile(propval);
+    setFile(propval);
   }
 
   /**
@@ -127,7 +137,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void ioPriority(int propval)
   {
-    return setIoPriority(propval);
+    setIoPriority(propval);
   }
 
   /**
@@ -164,7 +174,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void monitored(bool propval)
   {
-    return setMonitored(propval);
+    setMonitored(propval);
   }
 
   /**
@@ -346,5 +356,64 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   void setMonitored(bool monitored)
   {
     gtk_directory_list_set_monitored(cast(GtkDirectoryList*)this._cPtr, monitored);
+  }
+}
+
+class DirectoryListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = The attributes to query.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(string propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = File to query.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gio.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `ioPriority` property.
+      Params:
+        propval = Priority used when loading.
+      Returns: Builder instance for fluent chaining
+  */
+  T ioPriority(int propval)
+  {
+    return setProperty("io-priority", propval);
+  }
+
+  /**
+      Set `monitored` property.
+      Params:
+        propval = true if the directory is monitored for changed.
+      Returns: Builder instance for fluent chaining
+  */
+  T monitored(bool propval)
+  {
+    return setProperty("monitored", propval);
+  }
+}
+
+/// Fluent builder for [gtk.directory_list.DirectoryList]
+final class DirectoryListGidBuilder : DirectoryListGidBuilderImpl!DirectoryListGidBuilder
+{
+  DirectoryList build()
+  {
+    return new DirectoryList(cast(void*)createGObject(DirectoryList._getGType), Yes.Take);
   }
 }

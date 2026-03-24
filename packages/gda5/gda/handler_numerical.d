@@ -7,6 +7,7 @@ import gda.data_handler;
 import gda.data_handler_mixin;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class HandlerNumerical : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     return this;
   }
 
+  /**
+  Get builder for [gda.handler_numerical.HandlerNumerical]
+  Returns: New builder object
+  */
+  static HandlerNumericalGidBuilder builder()
+  {
+    return new HandlerNumericalGidBuilder;
+  }
+
   mixin DataHandlerT!();
 
   /**
@@ -50,5 +60,20 @@ class HandlerNumerical : gobject.object.ObjectWrap, gda.data_handler.DataHandler
     _cretval = gda_handler_numerical_new();
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_handler.DataHandler)(cast(GdaDataHandler*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class HandlerNumericalGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
+{
+
+  mixin DataHandlerGidBuilderT!();
+}
+
+/// Fluent builder for [gda.handler_numerical.HandlerNumerical]
+final class HandlerNumericalGidBuilder : HandlerNumericalGidBuilderImpl!HandlerNumericalGidBuilder
+{
+  HandlerNumerical build()
+  {
+    return new HandlerNumerical(cast(void*)createGObject(HandlerNumerical._getGType), No.Take);
   }
 }

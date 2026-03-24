@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -35,6 +36,15 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
   override HalfFloatArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.half_float_array_builder.HalfFloatArrayBuilder]
+  Returns: New builder object
+  */
+  static HalfFloatArrayBuilderGidBuilder builder()
+  {
+    return new HalfFloatArrayBuilderGidBuilder;
   }
 
   /** */
@@ -87,5 +97,18 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class HalfFloatArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.half_float_array_builder.HalfFloatArrayBuilder]
+final class HalfFloatArrayBuilderGidBuilder : HalfFloatArrayBuilderGidBuilderImpl!HalfFloatArrayBuilderGidBuilder
+{
+  HalfFloatArrayBuilder build()
+  {
+    return new HalfFloatArrayBuilder(cast(void*)createGObject(HalfFloatArrayBuilder._getGType), Yes.Take);
   }
 }

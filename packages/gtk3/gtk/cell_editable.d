@@ -5,6 +5,7 @@ public import gtk.cell_editable_iface_proxy;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -119,4 +120,16 @@ interface CellEditable
       Returns: Signal ID
   */
   ulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface CellEditableGidBuilderImpl(T)
+{
+
+  /**
+      Set `editingCanceled` property.
+      Params:
+        propval = Indicates whether editing on the cell has been canceled.
+      Returns: Builder instance for fluent chaining
+  */
+  T editingCanceled(bool propval);
 }

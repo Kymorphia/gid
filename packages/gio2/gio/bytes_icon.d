@@ -10,6 +10,7 @@ import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 import gio.types;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,24 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
     return this;
   }
 
+  /**
+  Get builder for [gio.bytes_icon.BytesIcon]
+  Returns: New builder object
+  */
+  static BytesIconGidBuilder builder()
+  {
+    return new BytesIconGidBuilder;
+  }
+
+  /**
+      Get `bytes` property.
+      Returns: The bytes containing the icon.
+  */
+  @property glib.bytes.Bytes bytes()
+  {
+    return getBytes();
+  }
+
   mixin IconT!();
   mixin LoadableIconT!();
 
@@ -75,5 +94,32 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
     _cretval = g_bytes_icon_get_bytes(cast(GBytesIcon*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class BytesIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T, gio.loadable_icon.LoadableIconGidBuilderImpl!T
+{
+
+  mixin IconGidBuilderT!();
+  mixin LoadableIconGidBuilderT!();
+
+  /**
+      Set `bytes` property.
+      Params:
+        propval = The bytes containing the icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T bytes(glib.bytes.Bytes propval)
+  {
+    return setProperty("bytes", propval);
+  }
+}
+
+/// Fluent builder for [gio.bytes_icon.BytesIcon]
+final class BytesIconGidBuilder : BytesIconGidBuilderImpl!BytesIconGidBuilder
+{
+  BytesIcon build()
+  {
+    return new BytesIcon(cast(void*)createGObject(BytesIcon._getGType), Yes.Take);
   }
 }

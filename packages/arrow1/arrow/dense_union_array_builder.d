@@ -8,6 +8,7 @@ import arrow.types;
 import arrow.union_array_builder;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
@@ -38,6 +39,15 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return this;
   }
 
+  /**
+  Get builder for [arrow.dense_union_array_builder.DenseUnionArrayBuilder]
+  Returns: New builder object
+  */
+  static DenseUnionArrayBuilderGidBuilder builder()
+  {
+    return new DenseUnionArrayBuilderGidBuilder;
+  }
+
   /** */
   this(arrow.dense_union_data_type.DenseUnionDataType dataType = null)
   {
@@ -47,5 +57,18 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class DenseUnionArrayBuilderGidBuilderImpl(T) : arrow.union_array_builder.UnionArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.dense_union_array_builder.DenseUnionArrayBuilder]
+final class DenseUnionArrayBuilderGidBuilder : DenseUnionArrayBuilderGidBuilderImpl!DenseUnionArrayBuilderGidBuilder
+{
+  DenseUnionArrayBuilder build()
+  {
+    return new DenseUnionArrayBuilder(cast(void*)createGObject(DenseUnionArrayBuilder._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
@@ -36,6 +37,15 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType]
+  Returns: New builder object
+  */
+  static FixedSizeBinaryDataTypeGidBuilder builder()
+  {
+    return new FixedSizeBinaryDataTypeGidBuilder;
+  }
+
   /** */
   this(int byteWidth)
   {
@@ -50,5 +60,18 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     int _retval;
     _retval = garrow_fixed_size_binary_data_type_get_byte_width(cast(GArrowFixedSizeBinaryDataType*)this._cPtr);
     return _retval;
+  }
+}
+
+class FixedSizeBinaryDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType]
+final class FixedSizeBinaryDataTypeGidBuilder : FixedSizeBinaryDataTypeGidBuilderImpl!FixedSizeBinaryDataTypeGidBuilder
+{
+  FixedSizeBinaryDataType build()
+  {
+    return new FixedSizeBinaryDataType(cast(void*)createGObject(FixedSizeBinaryDataType._getGType), Yes.Take);
   }
 }

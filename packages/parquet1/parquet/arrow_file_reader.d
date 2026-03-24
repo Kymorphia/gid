@@ -7,6 +7,7 @@ import arrow.seekable_input_stream;
 import arrow.table;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
@@ -40,6 +41,15 @@ class ArrowFileReader : gobject.object.ObjectWrap
   override ArrowFileReader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [parquet.arrow_file_reader.ArrowFileReader]
+  Returns: New builder object
+  */
+  static ArrowFileReaderGidBuilder builder()
+  {
+    return new ArrowFileReaderGidBuilder;
   }
 
   /** */
@@ -149,5 +159,24 @@ class ArrowFileReader : gobject.object.ObjectWrap
   void setUseThreads(bool useThreads)
   {
     gparquet_arrow_file_reader_set_use_threads(cast(GParquetArrowFileReader*)this._cPtr, useThreads);
+  }
+}
+
+class ArrowFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T arrowFileReader(void* propval)
+  {
+    return setProperty("arrow-file-reader", propval);
+  }
+}
+
+/// Fluent builder for [parquet.arrow_file_reader.ArrowFileReader]
+final class ArrowFileReaderGidBuilder : ArrowFileReaderGidBuilderImpl!ArrowFileReaderGidBuilder
+{
+  ArrowFileReader build()
+  {
+    return new ArrowFileReader(cast(void*)createGObject(ArrowFileReader._getGType), No.Take);
   }
 }

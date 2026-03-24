@@ -3,6 +3,7 @@ module gst.pad;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
@@ -109,10 +110,25 @@ class Pad : gst.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gst.pad.Pad]
+  Returns: New builder object
+  */
+  static PadGidBuilder builder()
+  {
+    return new PadGidBuilder;
+  }
+
   /** */
   @property gst.caps.Caps caps()
   {
     return gobject.object.ObjectWrap.getProperty!(gst.caps.Caps)("caps");
+  }
+
+  /** */
+  @property gst.types.PadDirection direction()
+  {
+    return getDirection();
   }
 
   /**
@@ -131,7 +147,7 @@ class Pad : gst.object.ObjectWrap
   */
   @property void offset(long propval)
   {
-    return setOffset(propval);
+    setOffset(propval);
   }
 
   /** */
@@ -1664,5 +1680,41 @@ class Pad : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unlinked", closure, after);
+  }
+}
+
+class PadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T direction(gst.types.PadDirection propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `offset` property.
+      Params:
+        propval = The offset that will be applied to the running time of the pad.
+      Returns: Builder instance for fluent chaining
+  */
+  T offset(long propval)
+  {
+    return setProperty("offset", propval);
+  }
+
+  /** */
+  T template_(gst.pad_template.PadTemplate propval)
+  {
+    return setProperty("template", propval);
+  }
+}
+
+/// Fluent builder for [gst.pad.Pad]
+final class PadGidBuilder : PadGidBuilderImpl!PadGidBuilder
+{
+  Pad build()
+  {
+    return new Pad(cast(void*)createGObject(Pad._getGType), No.Take);
   }
 }

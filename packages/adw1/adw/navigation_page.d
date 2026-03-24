@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -72,6 +73,15 @@ class NavigationPage : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.navigation_page.NavigationPage]
+  Returns: New builder object
+  */
+  static NavigationPageGidBuilder builder()
+  {
+    return new NavigationPageGidBuilder;
+  }
+
+  /**
       Get `canPop` property.
       Returns: Whether the page can be popped from navigation stack.
         
@@ -105,7 +115,7 @@ class NavigationPage : gtk.widget.Widget
   */
   @property void canPop(bool propval)
   {
-    return setCanPop(propval);
+    setCanPop(propval);
   }
 
   /**
@@ -124,7 +134,7 @@ class NavigationPage : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -161,7 +171,7 @@ class NavigationPage : gtk.widget.Widget
   */
   @property void tag(string propval)
   {
-    return setTag(propval);
+    setTag(propval);
   }
 
   /**
@@ -186,7 +196,7 @@ class NavigationPage : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -500,5 +510,84 @@ class NavigationPage : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("shown", closure, after);
+  }
+}
+
+class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `canPop` property.
+      Params:
+        propval = Whether the page can be popped from navigation stack.
+          
+          Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
+          back button from `class@HeaderBar`.
+          
+          Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
+          action will still work.
+          
+          See `property@HeaderBar:show-back-button` for removing only the back
+          button, but not shortcuts.
+      Returns: Builder instance for fluent chaining
+  */
+  T canPop(bool propval)
+  {
+    return setProperty("can-pop", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `tag` property.
+      Params:
+        propval = The page tag.
+          
+          The tag can be used to retrieve the page with
+          [adw.navigation_view.NavigationView.findPage], as well as with
+          [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
+          [adw.navigation_view.NavigationView.replaceWithTags].
+          
+          Tags must be unique within each `class@NavigationView`.
+          
+          The tag also must be set to use the `navigation.push` action.
+      Returns: Builder instance for fluent chaining
+  */
+  T tag(string propval)
+  {
+    return setProperty("tag", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The page title.
+          
+          It's displayed in `class@HeaderBar` instead of the window title, and used
+          as the tooltip on the next page's back button, as well as by screen reader.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [adw.navigation_page.NavigationPage]
+final class NavigationPageGidBuilder : NavigationPageGidBuilderImpl!NavigationPageGidBuilder
+{
+  NavigationPage build()
+  {
+    return new NavigationPage(cast(void*)createGObject(NavigationPage._getGType), No.Take);
   }
 }

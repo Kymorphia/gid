@@ -6,6 +6,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     The AtkImplementor interface is implemented by objects for which
@@ -21,4 +22,8 @@ interface ImplementorIface
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_implementor_get_type != &gidSymbolNotFound ? atk_implementor_get_type() : cast(GType)0;
   }
+}
+
+interface ImplementorIfaceGidBuilderImpl(T)
+{
 }

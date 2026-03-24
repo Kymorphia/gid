@@ -2,6 +2,7 @@
 module gtksource.gutter_renderer_text;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -35,6 +36,15 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   override GutterRendererText self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.gutter_renderer_text.GutterRendererText]
+  Returns: New builder object
+  */
+  static GutterRendererTextGidBuilder builder()
+  {
+    return new GutterRendererTextGidBuilder;
   }
 
   /** */
@@ -126,5 +136,30 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 
     auto _text = cast(const(char)*)text.ptr;
     gtk_source_gutter_renderer_text_set_text(cast(GtkSourceGutterRendererText*)this._cPtr, _text, _length);
+  }
+}
+
+class GutterRendererTextGidBuilderImpl(T) : gtksource.gutter_renderer.GutterRendererGidBuilderImpl!T
+{
+
+  /** */
+  T markup(string propval)
+  {
+    return setProperty("markup", propval);
+  }
+
+  /** */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.gutter_renderer_text.GutterRendererText]
+final class GutterRendererTextGidBuilder : GutterRendererTextGidBuilderImpl!GutterRendererTextGidBuilder
+{
+  GutterRendererText build()
+  {
+    return new GutterRendererText(cast(void*)createGObject(GutterRendererText._getGType), Yes.Take);
   }
 }

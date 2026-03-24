@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.squeezer_page;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -73,6 +74,15 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [adw.squeezer.Squeezer]
+  Returns: New builder object
+  */
+  static SqueezerGidBuilder builder()
+  {
+    return new SqueezerGidBuilder;
+  }
+
+  /**
       Get `allowNone` property.
       Returns: Whether to allow squeezing beyond the last child's minimum size.
         
@@ -100,7 +110,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void allowNone(bool propval)
   {
-    return setAllowNone(propval);
+    setAllowNone(propval);
   }
 
   /**
@@ -131,7 +141,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /**
@@ -164,7 +174,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void interpolateSize(bool propval)
   {
-    return setInterpolateSize(propval);
+    setInterpolateSize(propval);
   }
 
   /**
@@ -219,7 +229,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void switchThresholdPolicy(adw.types.FoldThresholdPolicy propval)
   {
-    return setSwitchThresholdPolicy(propval);
+    setSwitchThresholdPolicy(propval);
   }
 
   /**
@@ -242,7 +252,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void transitionDuration(uint propval)
   {
-    return setTransitionDuration(propval);
+    setTransitionDuration(propval);
   }
 
   /**
@@ -280,7 +290,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void transitionType(adw.types.SqueezerTransitionType propval)
   {
-    return setTransitionType(propval);
+    setTransitionType(propval);
   }
 
   /**
@@ -326,7 +336,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void xalign(float propval)
   {
-    return setXalign(propval);
+    setXalign(propval);
   }
 
   /**
@@ -361,7 +371,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void yalign(float propval)
   {
-    return setYalign(propval);
+    setYalign(propval);
   }
 
   mixin OrientableT!();
@@ -716,5 +726,158 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   void setYalign(float yalign)
   {
     adw_squeezer_set_yalign(cast(AdwSqueezer*)this._cPtr, yalign);
+  }
+}
+
+class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `allowNone` property.
+      Params:
+        propval = Whether to allow squeezing beyond the last child's minimum size.
+          
+          If set to `TRUE`, the squeezer can shrink to the point where no child can
+          be shown. This is functionally equivalent to appending a widget with 0×0
+          minimum size.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T allowNone(bool propval)
+  {
+    return setProperty("allow-none", propval);
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Whether all children have the same size for the opposite orientation.
+          
+          For example, if a squeezer is horizontal and is homogeneous, it will
+          request the same height for all its children. If it isn't, the squeezer may
+          change size when a different child becomes visible.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /**
+      Set `interpolateSize` property.
+      Params:
+        propval = Whether the squeezer interpolates its size when changing the visible child.
+          
+          If `TRUE`, the squeezer will interpolate its size between the one of the
+          previous visible child and the one of the new visible child, according to
+          the set transition duration and the orientation, e.g. if the squeezer is
+          horizontal, it will interpolate the its height.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T interpolateSize(bool propval)
+  {
+    return setProperty("interpolate-size", propval);
+  }
+
+  /**
+      Set `switchThresholdPolicy` property.
+      Params:
+        propval = The switch threshold policy.
+          
+          Determines when the squeezer will switch children.
+          
+          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when the
+          visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+          it will switch as soon as the visible child doesn't get their natural size.
+          
+          This can be useful if you have a long ellipsizing label and want to let it
+          ellipsize instead of immediately switching.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T switchThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  {
+    return setProperty("switch-threshold-policy", propval);
+  }
+
+  /**
+      Set `transitionDuration` property.
+      Params:
+        propval = The transition animation duration, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T transitionDuration(uint propval)
+  {
+    return setProperty("transition-duration", propval);
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = The type of animation used for transitions between children.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T transitionType(adw.types.SqueezerTransitionType propval)
+  {
+    return setProperty("transition-type", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment, from 0 (start) to 1 (end).
+          
+          This affects the children allocation during transitions, when they exceed
+          the size of the squeezer.
+          
+          For example, 0.5 means the child will be centered, 0 means it will keep the
+          start side aligned and overflow the end side, and 1 means the opposite.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment, from 0 (top) to 1 (bottom).
+          
+          This affects the children allocation during transitions, when they exceed
+          the size of the squeezer.
+          
+          For example, 0.5 means the child will be centered, 0 means it will keep the
+          top side aligned and overflow the bottom side, and 1 means the opposite.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+}
+
+/// Fluent builder for [adw.squeezer.Squeezer]
+final class SqueezerGidBuilder : SqueezerGidBuilderImpl!SqueezerGidBuilder
+{
+  Squeezer build()
+  {
+    return new Squeezer(cast(void*)createGObject(Squeezer._getGType), No.Take);
   }
 }

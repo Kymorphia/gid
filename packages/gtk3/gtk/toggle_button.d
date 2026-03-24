@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -107,6 +108,15 @@ class ToggleButton : gtk.button.Button
     return this;
   }
 
+  /**
+  Get builder for [gtk.toggle_button.ToggleButton]
+  Returns: New builder object
+  */
+  static ToggleButtonGidBuilder builder()
+  {
+    return new ToggleButtonGidBuilder;
+  }
+
   /** */
   @property bool active()
   {
@@ -116,7 +126,7 @@ class ToggleButton : gtk.button.Button
   /** */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /** */
@@ -140,7 +150,7 @@ class ToggleButton : gtk.button.Button
   /** */
   @property void inconsistent(bool propval)
   {
-    return setInconsistent(propval);
+    setInconsistent(propval);
   }
 
   /**
@@ -324,5 +334,37 @@ class ToggleButton : gtk.button.Button
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+class ToggleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
+{
+
+
+  /** */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /** */
+  T drawIndicator(bool propval)
+  {
+    return setProperty("draw-indicator", propval);
+  }
+
+  /** */
+  T inconsistent(bool propval)
+  {
+    return setProperty("inconsistent", propval);
+  }
+}
+
+/// Fluent builder for [gtk.toggle_button.ToggleButton]
+final class ToggleButtonGidBuilder : ToggleButtonGidBuilderImpl!ToggleButtonGidBuilder
+{
+  ToggleButton build()
+  {
+    return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), No.Take);
   }
 }

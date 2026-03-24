@@ -3,6 +3,7 @@ module gtksource.buffer;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_buffer;
 import gtk.text_iter;
@@ -114,6 +115,15 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
+  Get builder for [gtksource.buffer.Buffer]
+  Returns: New builder object
+  */
+  static BufferGidBuilder builder()
+  {
+    return new BufferGidBuilder;
+  }
+
+  /**
       Get `highlightMatchingBrackets` property.
       Returns: Whether to highlight matching brackets in the buffer.
   */
@@ -129,7 +139,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   @property void highlightMatchingBrackets(bool propval)
   {
-    return setHighlightMatchingBrackets(propval);
+    setHighlightMatchingBrackets(propval);
   }
 
   /**
@@ -148,7 +158,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   @property void highlightSyntax(bool propval)
   {
-    return setHighlightSyntax(propval);
+    setHighlightSyntax(propval);
   }
 
   /**
@@ -169,7 +179,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   @property void implicitTrailingNewline(bool propval)
   {
-    return setImplicitTrailingNewline(propval);
+    setImplicitTrailingNewline(propval);
   }
 
   /** */
@@ -181,7 +191,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   /** */
   @property void language(gtksource.language.Language propval)
   {
-    return setLanguage(propval);
+    setLanguage(propval);
   }
 
   /**
@@ -217,7 +227,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
   {
-    return setStyleScheme(propval);
+    setStyleScheme(propval);
   }
 
   /**
@@ -893,5 +903,71 @@ class Buffer : gtk.text_buffer.TextBuffer
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("source-mark-updated", closure, after);
+  }
+}
+
+class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
+{
+
+  /**
+      Set `highlightMatchingBrackets` property.
+      Params:
+        propval = Whether to highlight matching brackets in the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T highlightMatchingBrackets(bool propval)
+  {
+    return setProperty("highlight-matching-brackets", propval);
+  }
+
+  /**
+      Set `highlightSyntax` property.
+      Params:
+        propval = Whether to highlight syntax in the buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T highlightSyntax(bool propval)
+  {
+    return setProperty("highlight-syntax", propval);
+  }
+
+  /**
+      Set `implicitTrailingNewline` property.
+      Params:
+        propval = Whether the buffer has an implicit trailing newline. See
+          [gtksource.buffer.Buffer.setImplicitTrailingNewline].
+      Returns: Builder instance for fluent chaining
+  */
+  T implicitTrailingNewline(bool propval)
+  {
+    return setProperty("implicit-trailing-newline", propval);
+  }
+
+  /** */
+  T language(gtksource.language.Language propval)
+  {
+    return setProperty("language", propval);
+  }
+
+  /**
+      Set `styleScheme` property.
+      Params:
+        propval = Style scheme. It contains styles for syntax highlighting, optionally
+          foreground, background, cursor color, current line color, and matching
+          brackets style.
+      Returns: Builder instance for fluent chaining
+  */
+  T styleScheme(gtksource.style_scheme.StyleScheme propval)
+  {
+    return setProperty("style-scheme", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.buffer.Buffer]
+final class BufferGidBuilder : BufferGidBuilderImpl!BufferGidBuilder
+{
+  Buffer build()
+  {
+    return new Buffer(cast(void*)createGObject(Buffer._getGType), Yes.Take);
   }
 }

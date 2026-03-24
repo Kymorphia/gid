@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.file_system;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class AzureFileSystem : arrow.file_system.FileSystem
@@ -34,5 +35,27 @@ class AzureFileSystem : arrow.file_system.FileSystem
   override AzureFileSystem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.azure_file_system.AzureFileSystem]
+  Returns: New builder object
+  */
+  static AzureFileSystemGidBuilder builder()
+  {
+    return new AzureFileSystemGidBuilder;
+  }
+}
+
+class AzureFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.azure_file_system.AzureFileSystem]
+final class AzureFileSystemGidBuilder : AzureFileSystemGidBuilderImpl!AzureFileSystemGidBuilder
+{
+  AzureFileSystem build()
+  {
+    return new AzureFileSystem(cast(void*)createGObject(AzureFileSystem._getGType), No.Take);
   }
 }

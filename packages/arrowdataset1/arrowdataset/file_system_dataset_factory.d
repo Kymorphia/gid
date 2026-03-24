@@ -12,6 +12,7 @@ import arrowdataset.partitioning;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -44,12 +45,30 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   }
 
   /**
+  Get builder for [arrowdataset.file_system_dataset_factory.FileSystemDatasetFactory]
+  Returns: New builder object
+  */
+  static FileSystemDatasetFactoryGidBuilder builder()
+  {
+    return new FileSystemDatasetFactoryGidBuilder;
+  }
+
+  /**
       Get `fileSystem` property.
       Returns: File system passed to #GADatasetFileSystemDataset.
   */
   @property arrow.file_system.FileSystem fileSystem()
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.file_system.FileSystem)("file-system");
+  }
+
+  /**
+      Get `format` property.
+      Returns: Format passed to #GADatasetFileSystemDataset.
+  */
+  @property arrowdataset.file_format.FileFormat format()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowdataset.file_format.FileFormat)("format");
   }
 
   /**
@@ -143,5 +162,51 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class FileSystemDatasetFactoryGidBuilderImpl(T) : arrowdataset.dataset_factory.DatasetFactoryGidBuilderImpl!T
+{
+
+  /**
+      Set `format` property.
+      Params:
+        propval = Format passed to #GADatasetFileSystemDataset.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(arrowdataset.file_format.FileFormat propval)
+  {
+    return setProperty("format", propval);
+  }
+
+  /**
+      Set `partitionBaseDir` property.
+      Params:
+        propval = Partition base directory used by #GADatasetFileSystemDataset.
+      Returns: Builder instance for fluent chaining
+  */
+  T partitionBaseDir(string propval)
+  {
+    return setProperty("partition-base-dir", propval);
+  }
+
+  /**
+      Set `partitioning` property.
+      Params:
+        propval = Partitioning used by #GADatasetFileSystemDataset.
+      Returns: Builder instance for fluent chaining
+  */
+  T partitioning(arrowdataset.partitioning.Partitioning propval)
+  {
+    return setProperty("partitioning", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.file_system_dataset_factory.FileSystemDatasetFactory]
+final class FileSystemDatasetFactoryGidBuilder : FileSystemDatasetFactoryGidBuilderImpl!FileSystemDatasetFactoryGidBuilder
+{
+  FileSystemDatasetFactory build()
+  {
+    return new FileSystemDatasetFactory(cast(void*)createGObject(FileSystemDatasetFactory._getGType), Yes.Take);
   }
 }

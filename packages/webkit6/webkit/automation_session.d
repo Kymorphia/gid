@@ -3,6 +3,7 @@ module webkit.automation_session;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.application_info;
 import webkit.c.functions;
@@ -46,6 +47,24 @@ class AutomationSession : gobject.object.ObjectWrap
   override AutomationSession self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.automation_session.AutomationSession]
+  Returns: New builder object
+  */
+  static AutomationSessionGidBuilder builder()
+  {
+    return new AutomationSessionGidBuilder;
+  }
+
+  /**
+      Get `id` property.
+      Returns: The session unique identifier.
+  */
+  @property string id()
+  {
+    return getId();
   }
 
   /**
@@ -180,5 +199,29 @@ class AutomationSession : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("will-close", closure, after);
+  }
+}
+
+class AutomationSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The session unique identifier.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+}
+
+/// Fluent builder for [webkit.automation_session.AutomationSession]
+final class AutomationSessionGidBuilder : AutomationSessionGidBuilderImpl!AutomationSessionGidBuilder
+{
+  AutomationSession build()
+  {
+    return new AutomationSession(cast(void*)createGObject(AutomationSession._getGType), No.Take);
   }
 }

@@ -9,6 +9,7 @@ import arrow.seekable_input_stream;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   override RecordBatchFileReader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.record_batch_file_reader.RecordBatchFileReader]
+  Returns: New builder object
+  */
+  static RecordBatchFileReaderGidBuilder builder()
+  {
+    return new RecordBatchFileReaderGidBuilder;
   }
 
   /** */
@@ -99,5 +109,24 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class RecordBatchFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T recordBatchFileReader(void* propval)
+  {
+    return setProperty("record-batch-file-reader", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch_file_reader.RecordBatchFileReader]
+final class RecordBatchFileReaderGidBuilder : RecordBatchFileReaderGidBuilderImpl!RecordBatchFileReaderGidBuilder
+{
+  RecordBatchFileReader build()
+  {
+    return new RecordBatchFileReader(cast(void*)createGObject(RecordBatchFileReader._getGType), Yes.Take);
   }
 }

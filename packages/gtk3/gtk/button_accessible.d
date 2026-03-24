@@ -9,6 +9,7 @@ import atk.image;
 import atk.image_mixin;
 import atk.object;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -43,9 +44,34 @@ class ButtonAccessible : gtk.container_accessible.ContainerAccessible, atk.actio
     return this;
   }
 
+  /**
+  Get builder for [gtk.button_accessible.ButtonAccessible]
+  Returns: New builder object
+  */
+  static ButtonAccessibleGidBuilder builder()
+  {
+    return new ButtonAccessibleGidBuilder;
+  }
+
   mixin ActionT!();
   mixin ImageT!();
   alias getDescription = atk.object.ObjectWrap.getDescription;
   alias getName = atk.object.ObjectWrap.getName;
   alias setDescription = atk.object.ObjectWrap.setDescription;
+}
+
+class ButtonAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+  mixin ImageGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.button_accessible.ButtonAccessible]
+final class ButtonAccessibleGidBuilder : ButtonAccessibleGidBuilderImpl!ButtonAccessibleGidBuilder
+{
+  ButtonAccessible build()
+  {
+    return new ButtonAccessible(cast(void*)createGObject(ButtonAccessible._getGType), No.Take);
+  }
 }

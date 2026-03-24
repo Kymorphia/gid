@@ -7,6 +7,7 @@ import gda.data_model;
 import gda.data_model_mixin;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,21 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
     return this;
   }
 
+  /**
+  Get builder for [gda.data_model_dir.DataModelDir]
+  Returns: New builder object
+  */
+  static DataModelDirGidBuilder builder()
+  {
+    return new DataModelDirGidBuilder;
+  }
+
+  /** */
+  @property string basedir()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("basedir");
+  }
+
   mixin DataModelT!();
 
   /**
@@ -62,5 +78,26 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
   void cleanErrors()
   {
     gda_data_model_dir_clean_errors(cast(GdaDataModelDir*)this._cPtr);
+  }
+}
+
+class DataModelDirGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
+{
+
+  mixin DataModelGidBuilderT!();
+
+  /** */
+  T basedir(string propval)
+  {
+    return setProperty("basedir", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_model_dir.DataModelDir]
+final class DataModelDirGidBuilder : DataModelDirGidBuilderImpl!DataModelDirGidBuilder
+{
+  DataModelDir build()
+  {
+    return new DataModelDir(cast(void*)createGObject(DataModelDir._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import gio.input_stream;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import json.array;
 import json.c.functions;
@@ -80,6 +81,28 @@ class Parser : gobject.object.ObjectWrap
   override Parser self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [json.parser.Parser]
+  Returns: New builder object
+  */
+  static ParserGidBuilder builder()
+  {
+    return new ParserGidBuilder;
+  }
+
+  /**
+      Get `immutable_` property.
+      Returns: Whether the tree built by the parser should be immutable
+        when created.
+        
+        Making the output immutable on creation avoids the expense
+        of traversing it to make it immutable later.
+  */
+  @property bool immutable_()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("immutable");
   }
 
   /**
@@ -728,5 +751,33 @@ class Parser : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("parse-start", closure, after);
+  }
+}
+
+class ParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `immutable_` property.
+      Params:
+        propval = Whether the tree built by the parser should be immutable
+          when created.
+          
+          Making the output immutable on creation avoids the expense
+          of traversing it to make it immutable later.
+      Returns: Builder instance for fluent chaining
+  */
+  T immutable_(bool propval)
+  {
+    return setProperty("immutable", propval);
+  }
+}
+
+/// Fluent builder for [json.parser.Parser]
+final class ParserGidBuilder : ParserGidBuilderImpl!ParserGidBuilder
+{
+  Parser build()
+  {
+    return new Parser(cast(void*)createGObject(Parser._getGType), Yes.Take);
   }
 }

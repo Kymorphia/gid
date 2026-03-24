@@ -8,6 +8,7 @@ import arrow.large_list_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
     return this;
   }
 
+  /**
+  Get builder for [arrow.large_list_array_builder.LargeListArrayBuilder]
+  Returns: New builder object
+  */
+  static LargeListArrayBuilderGidBuilder builder()
+  {
+    return new LargeListArrayBuilderGidBuilder;
+  }
+
   /** */
   this(arrow.large_list_data_type.LargeListDataType dataType)
   {
@@ -68,5 +78,18 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
     _cretval = garrow_large_list_array_builder_get_value_builder(cast(GArrowLargeListArrayBuilder*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class LargeListArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.large_list_array_builder.LargeListArrayBuilder]
+final class LargeListArrayBuilderGidBuilder : LargeListArrayBuilderGidBuilderImpl!LargeListArrayBuilderGidBuilder
+{
+  LargeListArrayBuilder build()
+  {
+    return new LargeListArrayBuilder(cast(void*)createGObject(LargeListArrayBuilder._getGType), Yes.Take);
   }
 }

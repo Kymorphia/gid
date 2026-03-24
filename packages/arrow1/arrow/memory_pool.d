@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class MemoryPool : gobject.object.ObjectWrap
   override MemoryPool self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.memory_pool.MemoryPool]
+  Returns: New builder object
+  */
+  static MemoryPoolGidBuilder builder()
+  {
+    return new MemoryPoolGidBuilder;
   }
 
   /** */
@@ -72,5 +82,24 @@ class MemoryPool : gobject.object.ObjectWrap
     long _retval;
     _retval = garrow_memory_pool_get_max_memory(cast(GArrowMemoryPool*)this._cPtr);
     return _retval;
+  }
+}
+
+class MemoryPoolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T memoryPool(void* propval)
+  {
+    return setProperty("memory-pool", propval);
+  }
+}
+
+/// Fluent builder for [arrow.memory_pool.MemoryPool]
+final class MemoryPoolGidBuilder : MemoryPoolGidBuilderImpl!MemoryPoolGidBuilder
+{
+  MemoryPool build()
+  {
+    return new MemoryPool(cast(void*)createGObject(MemoryPool._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import adw.c.types;
 import adw.types;
 import gid.gid;
 import gio.list_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -97,6 +98,15 @@ class ComboRow : adw.action_row.ActionRow
   }
 
   /**
+  Get builder for [adw.combo_row.ComboRow]
+  Returns: New builder object
+  */
+  static ComboRowGidBuilder builder()
+  {
+    return new ComboRowGidBuilder;
+  }
+
+  /**
       Get `enableSearch` property.
       Returns: Whether to show a search entry in the popup.
         
@@ -122,7 +132,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   @property void enableSearch(bool propval)
   {
-    return setEnableSearch(propval);
+    setEnableSearch(propval);
   }
 
   /**
@@ -153,7 +163,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   @property void expression(gtk.expression.Expression propval)
   {
-    return setExpression(propval);
+    setExpression(propval);
   }
 
   /**
@@ -178,7 +188,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setFactory(propval);
+    setFactory(propval);
   }
 
   /**
@@ -201,7 +211,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   @property void listFactory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setListFactory(propval);
+    setListFactory(propval);
   }
 
   /**
@@ -220,7 +230,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   @property void model(gio.list_model.ListModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -245,7 +255,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   @property void selected(uint propval)
   {
-    return setSelected(propval);
+    setSelected(propval);
   }
 
   /**
@@ -289,7 +299,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   @property void useSubtitle(bool propval)
   {
-    return setUseSubtitle(propval);
+    setUseSubtitle(propval);
   }
 
   /**
@@ -502,5 +512,123 @@ class ComboRow : adw.action_row.ActionRow
   void setUseSubtitle(bool useSubtitle)
   {
     adw_combo_row_set_use_subtitle(cast(AdwComboRow*)this._cPtr, useSubtitle);
+  }
+}
+
+class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enableSearch` property.
+      Params:
+        propval = Whether to show a search entry in the popup.
+          
+          If set to `TRUE`, a search entry will be shown in the popup that
+          allows to search for items in the list.
+          
+          Search requires `property@ComboRow:expression` to be set.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSearch(bool propval)
+  {
+    return setProperty("enable-search", propval);
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = An expression used to obtain strings from items.
+          
+          The expression must have a value type of `G_TYPE_STRING`.
+          
+          It's used to bind strings to labels produced by the default factory if
+          `property@ComboRow:factory` is not set, or when
+          `property@ComboRow:use-subtitle` is set to `TRUE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(gtk.expression.Expression propval)
+  {
+    return setProperty("expression", propval);
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+          
+          This factory is always used for the item in the row. It is also used for
+          items in the popup unless `property@ComboRow:list-factory` is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("factory", propval);
+  }
+
+  /**
+      Set `listFactory` property.
+      Params:
+        propval = The factory for populating list items in the popup.
+          
+          If this is not set, `property@ComboRow:factory` is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T listFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("list-factory", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model that provides the displayed items.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `selected` property.
+      Params:
+        propval = The position of the selected item.
+          
+          If no item is selected, the property has the value
+          [gtk.types.INVALID_LIST_POSITION]
+      Returns: Builder instance for fluent chaining
+  */
+  T selected(uint propval)
+  {
+    return setProperty("selected", propval);
+  }
+
+  /**
+      Set `useSubtitle` property.
+      Params:
+        propval = Whether to use the current value as the subtitle.
+          
+          If you use a custom list item factory, you will need to give the row a
+          name conversion expression with `property@ComboRow:expression`.
+          
+          If set to `TRUE`, you should not access `property@ActionRow:subtitle`.
+          
+          The subtitle is interpreted as Pango markup if
+          `property@PreferencesRow:use-markup` is set to `TRUE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T useSubtitle(bool propval)
+  {
+    return setProperty("use-subtitle", propval);
+  }
+}
+
+/// Fluent builder for [adw.combo_row.ComboRow]
+final class ComboRowGidBuilder : ComboRowGidBuilderImpl!ComboRowGidBuilder
+{
+  ComboRow build()
+  {
+    return new ComboRow(cast(void*)createGObject(ComboRow._getGType), No.Take);
   }
 }

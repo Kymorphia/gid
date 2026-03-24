@@ -9,6 +9,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 
 /**
     [gio.seekable.Seekable] is implemented by streams (implementations of
@@ -103,4 +104,8 @@ interface Seekable
       Throws: [ErrorWrap]
   */
   bool truncate(long offset, gio.cancellable.Cancellable cancellable = null);
+}
+
+interface SeekableGidBuilderImpl(T)
+{
 }

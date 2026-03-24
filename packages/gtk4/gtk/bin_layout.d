@@ -2,6 +2,7 @@
 module gtk.bin_layout;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -45,6 +46,15 @@ class BinLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
+  Get builder for [gtk.bin_layout.BinLayout]
+  Returns: New builder object
+  */
+  static BinLayoutGidBuilder builder()
+  {
+    return new BinLayoutGidBuilder;
+  }
+
+  /**
       Creates a new [gtk.bin_layout.BinLayout] instance.
       Returns: the newly created [gtk.bin_layout.BinLayout]
   */
@@ -53,5 +63,18 @@ class BinLayout : gtk.layout_manager.LayoutManager
     GtkLayoutManager* _cretval;
     _cretval = gtk_bin_layout_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class BinLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.bin_layout.BinLayout]
+final class BinLayoutGidBuilder : BinLayoutGidBuilderImpl!BinLayoutGidBuilder
+{
+  BinLayout build()
+  {
+    return new BinLayout(cast(void*)createGObject(BinLayout._getGType), Yes.Take);
   }
 }

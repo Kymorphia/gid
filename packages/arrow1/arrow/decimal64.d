@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Decimal64 : gobject.object.ObjectWrap
   override Decimal64 self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.decimal64.Decimal64]
+  Returns: New builder object
+  */
+  static Decimal64GidBuilder builder()
+  {
+    return new Decimal64GidBuilder;
   }
 
   /** */
@@ -219,5 +229,24 @@ class Decimal64 : gobject.object.ObjectWrap
     _cretval = garrow_decimal64_to_string_scale(cast(GArrowDecimal64*)this._cPtr, scale);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class Decimal64GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T decimal64(void* propval)
+  {
+    return setProperty("decimal64", propval);
+  }
+}
+
+/// Fluent builder for [arrow.decimal64.Decimal64]
+final class Decimal64GidBuilder : Decimal64GidBuilderImpl!Decimal64GidBuilder
+{
+  Decimal64 build()
+  {
+    return new Decimal64(cast(void*)createGObject(Decimal64._getGType), No.Take);
   }
 }

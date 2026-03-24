@@ -7,6 +7,7 @@ import atk.c.types;
 import atk.object;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -87,4 +88,8 @@ interface TableCell
       Returns: the atk object for the containing table.
   */
   atk.object.ObjectWrap getTable();
+}
+
+interface TableCellGidBuilderImpl(T)
+{
 }

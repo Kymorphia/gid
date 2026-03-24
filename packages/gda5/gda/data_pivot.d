@@ -9,6 +9,7 @@ import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
   override DataPivot self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.data_pivot.DataPivot]
+  Returns: New builder object
+  */
+  static DataPivotGidBuilder builder()
+  {
+    return new DataPivotGidBuilder;
   }
 
   /** */
@@ -160,6 +170,27 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
     if (_err)
       throw new DataPivotException(_err);
     return _retval;
+  }
+}
+
+class DataPivotGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
+{
+
+  mixin DataModelGidBuilderT!();
+
+  /** */
+  T model(gda.data_model.DataModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_pivot.DataPivot]
+final class DataPivotGidBuilder : DataPivotGidBuilderImpl!DataPivotGidBuilder
+{
+  DataPivot build()
+  {
+    return new DataPivot(cast(void*)createGObject(DataPivot._getGType), No.Take);
   }
 }
 

@@ -4,6 +4,7 @@ module gtk.print_operation;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -109,6 +110,15 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   }
 
   /**
+  Get builder for [gtk.print_operation.PrintOperation]
+  Returns: New builder object
+  */
+  static PrintOperationGidBuilder builder()
+  {
+    return new PrintOperationGidBuilder;
+  }
+
+  /**
       Get `allowAsync` property.
       Returns: Determines whether the print operation may run asynchronously or not.
         
@@ -142,7 +152,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void allowAsync(bool propval)
   {
-    return setAllowAsync(propval);
+    setAllowAsync(propval);
   }
 
   /**
@@ -171,7 +181,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void currentPage(int propval)
   {
-    return setCurrentPage(propval);
+    setCurrentPage(propval);
   }
 
   /**
@@ -198,7 +208,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void customTabLabel(string propval)
   {
-    return setCustomTabLabel(propval);
+    setCustomTabLabel(propval);
   }
 
   /**
@@ -225,7 +235,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void defaultPageSetup(gtk.page_setup.PageSetup propval)
   {
-    return setDefaultPageSetup(propval);
+    setDefaultPageSetup(propval);
   }
 
   /**
@@ -246,7 +256,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void embedPageSetup(bool propval)
   {
-    return setEmbedPageSetup(propval);
+    setEmbedPageSetup(propval);
   }
 
   /**
@@ -283,7 +293,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void exportFilename(string propval)
   {
-    return setExportFilename(propval);
+    setExportFilename(propval);
   }
 
   /**
@@ -308,7 +318,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void hasSelection(bool propval)
   {
-    return setHasSelection(propval);
+    setHasSelection(propval);
   }
 
   /**
@@ -335,7 +345,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void jobName(string propval)
   {
-    return setJobName(propval);
+    setJobName(propval);
   }
 
   /**
@@ -374,7 +384,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void nPages(int propval)
   {
-    return setNPages(propval);
+    setNPages(propval);
   }
 
   /**
@@ -419,7 +429,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void printSettings(gtk.print_settings.PrintSettings propval)
   {
-    return setPrintSettings(propval);
+    setPrintSettings(propval);
   }
 
   /**
@@ -440,7 +450,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void showProgress(bool propval)
   {
-    return setShowProgress(propval);
+    setShowProgress(propval);
   }
 
   /**
@@ -487,7 +497,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void supportSelection(bool propval)
   {
-    return setSupportSelection(propval);
+    setSupportSelection(propval);
   }
 
   /**
@@ -518,7 +528,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void trackPrintStatus(bool propval)
   {
-    return setTrackPrintStatus(propval);
+    setTrackPrintStatus(propval);
   }
 
   /**
@@ -541,7 +551,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void unit(gtk.types.Unit propval)
   {
-    return setUnit(propval);
+    setUnit(propval);
   }
 
   /**
@@ -574,7 +584,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   @property void useFullPage(bool propval)
   {
-    return setUseFullPage(propval);
+    setUseFullPage(propval);
   }
 
   mixin PrintOperationPreviewT!();
@@ -1729,5 +1739,256 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update-custom-widget", closure, after);
+  }
+}
+
+class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.print_operation_preview.PrintOperationPreviewGidBuilderImpl!T
+{
+
+  mixin PrintOperationPreviewGidBuilderT!();
+
+  /**
+      Set `allowAsync` property.
+      Params:
+        propval = Determines whether the print operation may run asynchronously or not.
+          
+          Some systems don't support asynchronous printing, but those that do
+          will return [gtk.types.PrintOperationResult.InProgress] as the status, and
+          emit the [gtk.print_operation.PrintOperation.done] signal when the operation
+          is actually done.
+          
+          The Windows port does not support asynchronous operation at all (this
+          is unlikely to change). On other platforms, all actions except for
+          [gtk.types.PrintOperationAction.Export] support asynchronous operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowAsync(bool propval)
+  {
+    return setProperty("allow-async", propval);
+  }
+
+  /**
+      Set `currentPage` property.
+      Params:
+        propval = The current page in the document.
+          
+          If this is set before [gtk.print_operation.PrintOperation.run],
+          the user will be able to select to print only the current page.
+          
+          Note that this only makes sense for pre-paginated documents.
+      Returns: Builder instance for fluent chaining
+  */
+  T currentPage(int propval)
+  {
+    return setProperty("current-page", propval);
+  }
+
+  /**
+      Set `customTabLabel` property.
+      Params:
+        propval = Used as the label of the tab containing custom widgets.
+          
+          Note that this property may be ignored on some platforms.
+          
+          If this is null, GTK uses a default label.
+      Returns: Builder instance for fluent chaining
+  */
+  T customTabLabel(string propval)
+  {
+    return setProperty("custom-tab-label", propval);
+  }
+
+  /**
+      Set `defaultPageSetup` property.
+      Params:
+        propval = The [gtk.page_setup.PageSetup] used by default.
+          
+          This page setup will be used by [gtk.print_operation.PrintOperation.run],
+          but it can be overridden on a per-page basis by connecting
+          to the `signal@Gtk.PrintOperation::request-page-setup` signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultPageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setProperty("default-page-setup", propval);
+  }
+
+  /**
+      Set `embedPageSetup` property.
+      Params:
+        propval = If true, page size combo box and orientation combo box
+          are embedded into page setup page.
+      Returns: Builder instance for fluent chaining
+  */
+  T embedPageSetup(bool propval)
+  {
+    return setProperty("embed-page-setup", propval);
+  }
+
+  /**
+      Set `exportFilename` property.
+      Params:
+        propval = The name of a file to generate instead of showing the print dialog.
+          
+          Currently, PDF is the only supported format.
+          
+          The intended use of this property is for implementing
+          “Export to PDF” actions.
+          
+          “Print to PDF” support is independent of this and is done
+          by letting the user pick the “Print to PDF” item from the
+          list of printers in the print dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T exportFilename(string propval)
+  {
+    return setProperty("export-filename", propval);
+  }
+
+  /**
+      Set `hasSelection` property.
+      Params:
+        propval = Determines whether there is a selection in your application.
+          
+          This can allow your application to print the selection.
+          This is typically used to make a "Selection" button sensitive.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasSelection(bool propval)
+  {
+    return setProperty("has-selection", propval);
+  }
+
+  /**
+      Set `jobName` property.
+      Params:
+        propval = A string used to identify the job (e.g. in monitoring
+          applications like eggcups).
+          
+          If you don't set a job name, GTK picks a default one
+          by numbering successive print jobs.
+      Returns: Builder instance for fluent chaining
+  */
+  T jobName(string propval)
+  {
+    return setProperty("job-name", propval);
+  }
+
+  /**
+      Set `nPages` property.
+      Params:
+        propval = The number of pages in the document.
+          
+          This must be set to a positive number before the rendering
+          starts. It may be set in a `signal@Gtk.PrintOperation::begin-print`
+          signal handler.
+          
+          Note that the page numbers passed to the
+          `signal@Gtk.PrintOperation::request-page-setup` and
+          `signal@Gtk.PrintOperation::draw-page` signals are 0-based, i.e.
+          if the user chooses to print all pages, the last ::draw-page signal
+          will be for page @n_pages - 1.
+      Returns: Builder instance for fluent chaining
+  */
+  T nPages(int propval)
+  {
+    return setProperty("n-pages", propval);
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The [gtk.print_settings.PrintSettings] used for initializing the dialog.
+          
+          Setting this property is typically used to re-establish
+          print settings from a previous print operation, see
+          [gtk.print_operation.PrintOperation.run].
+      Returns: Builder instance for fluent chaining
+  */
+  T printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setProperty("print-settings", propval);
+  }
+
+  /**
+      Set `showProgress` property.
+      Params:
+        propval = Determines whether to show a progress dialog during the
+          print operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T showProgress(bool propval)
+  {
+    return setProperty("show-progress", propval);
+  }
+
+  /**
+      Set `supportSelection` property.
+      Params:
+        propval = If true, the print operation will support print of selection.
+          
+          This allows the print dialog to show a "Selection" button.
+      Returns: Builder instance for fluent chaining
+  */
+  T supportSelection(bool propval)
+  {
+    return setProperty("support-selection", propval);
+  }
+
+  /**
+      Set `trackPrintStatus` property.
+      Params:
+        propval = If true, the print operation will try to continue report on
+          the status of the print job in the printer queues and printer.
+          
+          This can allow your application to show things like “out of paper”
+          issues, and when the print job actually reaches the printer.
+          However, this is often implemented using polling, and should
+          not be enabled unless needed.
+      Returns: Builder instance for fluent chaining
+  */
+  T trackPrintStatus(bool propval)
+  {
+    return setProperty("track-print-status", propval);
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The transformation for the cairo context obtained from
+          [gtk.print_context.PrintContext] is set up in such a way that distances
+          are measured in units of @unit.
+      Returns: Builder instance for fluent chaining
+  */
+  T unit(gtk.types.Unit propval)
+  {
+    return setProperty("unit", propval);
+  }
+
+  /**
+      Set `useFullPage` property.
+      Params:
+        propval = If true, the transformation for the cairo context obtained
+          from [gtk.print_context.PrintContext] puts the origin at the top left corner
+          of the page.
+          
+          This may not be the top left corner of the sheet, depending on
+          page orientation and the number of pages per sheet. Otherwise,
+          the origin is at the top left corner of the imageable area (i.e.
+          inside the margins).
+      Returns: Builder instance for fluent chaining
+  */
+  T useFullPage(bool propval)
+  {
+    return setProperty("use-full-page", propval);
+  }
+}
+
+/// Fluent builder for [gtk.print_operation.PrintOperation]
+final class PrintOperationGidBuilder : PrintOperationGidBuilderImpl!PrintOperationGidBuilder
+{
+  PrintOperation build()
+  {
+    return new PrintOperation(cast(void*)createGObject(PrintOperation._getGType), Yes.Take);
   }
 }

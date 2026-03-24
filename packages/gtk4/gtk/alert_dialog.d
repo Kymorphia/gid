@@ -6,6 +6,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -52,6 +53,15 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.alert_dialog.AlertDialog]
+  Returns: New builder object
+  */
+  static AlertDialogGidBuilder builder()
+  {
+    return new AlertDialogGidBuilder;
+  }
+
+  /**
       Get `cancelButton` property.
       Returns: This property determines what happens when the Escape key is
         pressed while the alert is shown.
@@ -83,7 +93,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   @property void cancelButton(int propval)
   {
-    return setCancelButton(propval);
+    setCancelButton(propval);
   }
 
   /**
@@ -118,7 +128,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   @property void defaultButton(int propval)
   {
-    return setDefaultButton(propval);
+    setDefaultButton(propval);
   }
 
   /**
@@ -137,7 +147,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   @property void detail(string propval)
   {
-    return setDetail(propval);
+    setDetail(propval);
   }
 
   /**
@@ -156,7 +166,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   @property void message(string propval)
   {
-    return setMessage(propval);
+    setMessage(propval);
   }
 
   /**
@@ -175,7 +185,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -405,5 +415,89 @@ class AlertDialog : gobject.object.ObjectWrap
   void show(gtk.window.Window parent = null)
   {
     gtk_alert_dialog_show(cast(GtkAlertDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
+  }
+}
+
+class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `cancelButton` property.
+      Params:
+        propval = This property determines what happens when the Escape key is
+          pressed while the alert is shown.
+          
+          If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+          then pressing Escape is treated as if that button was pressed. If it is -1
+          or not a valid index for the `buttons` array, then an error is returned.
+          
+          If `buttons` is `NULL`, then the automatically created 'Close' button
+          is treated as both cancel and default button, so 0 is returned.
+      Returns: Builder instance for fluent chaining
+  */
+  T cancelButton(int propval)
+  {
+    return setProperty("cancel-button", propval);
+  }
+
+  /**
+      Set `defaultButton` property.
+      Params:
+        propval = This property determines what happens when the Return key is
+          pressed while the alert is shown.
+          
+          If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
+          then pressing Return is treated as if that button was pressed. If it is -1
+          or not a valid index for the `buttons` array, then nothing happens.
+          
+          If `buttons` is `NULL`, then the automatically created 'Close' button
+          is treated as both cancel and default button, so 0 is returned.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultButton(int propval)
+  {
+    return setProperty("default-button", propval);
+  }
+
+  /**
+      Set `detail` property.
+      Params:
+        propval = The detail text for the alert.
+      Returns: Builder instance for fluent chaining
+  */
+  T detail(string propval)
+  {
+    return setProperty("detail", propval);
+  }
+
+  /**
+      Set `message` property.
+      Params:
+        propval = The message for the alert.
+      Returns: Builder instance for fluent chaining
+  */
+  T message(string propval)
+  {
+    return setProperty("message", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the alert is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+}
+
+/// Fluent builder for [gtk.alert_dialog.AlertDialog]
+final class AlertDialogGidBuilder : AlertDialogGidBuilderImpl!AlertDialogGidBuilder
+{
+  AlertDialog build()
+  {
+    return new AlertDialog(cast(void*)createGObject(AlertDialog._getGType), Yes.Take);
   }
 }

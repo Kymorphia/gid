@@ -2,6 +2,7 @@
 module gtk.editable_label;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -75,6 +76,15 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
+  Get builder for [gtk.editable_label.EditableLabel]
+  Returns: New builder object
+  */
+  static EditableLabelGidBuilder builder()
+  {
+    return new EditableLabelGidBuilder;
+  }
+
+  /**
       Get `editing` property.
       Returns: This property is true while the widget is in edit mode.
   */
@@ -143,5 +153,31 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   void stopEditing(bool commit)
   {
     gtk_editable_label_stop_editing(cast(GtkEditableLabel*)this._cPtr, commit);
+  }
+}
+
+class EditableLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
+{
+
+  mixin EditableGidBuilderT!();
+
+  /**
+      Set `editing` property.
+      Params:
+        propval = This property is true while the widget is in edit mode.
+      Returns: Builder instance for fluent chaining
+  */
+  T editing(bool propval)
+  {
+    return setProperty("editing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.editable_label.EditableLabel]
+final class EditableLabelGidBuilder : EditableLabelGidBuilderImpl!EditableLabelGidBuilder
+{
+  EditableLabel build()
+  {
+    return new EditableLabel(cast(void*)createGObject(EditableLabel._getGType), No.Take);
   }
 }

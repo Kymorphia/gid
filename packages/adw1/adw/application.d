@@ -11,6 +11,7 @@ import gio.action_group_mixin;
 import gio.action_map;
 import gio.action_map_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.application;
 
@@ -75,6 +76,15 @@ class Application : gtk.application.Application
   }
 
   /**
+  Get builder for [adw.application.Application]
+  Returns: New builder object
+  */
+  static ApplicationGidBuilder builder()
+  {
+    return new ApplicationGidBuilder;
+  }
+
+  /**
       Get `styleManager` property.
       Returns: The style manager for this application.
         
@@ -121,5 +131,19 @@ class Application : gtk.application.Application
     _cretval = adw_application_get_style_manager(cast(AdwApplication*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class ApplicationGidBuilderImpl(T) : gtk.application.ApplicationGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [adw.application.Application]
+final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
+{
+  Application build()
+  {
+    return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }
 }

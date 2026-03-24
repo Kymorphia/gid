@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -82,6 +83,15 @@ class AboutDialog : gtk.dialog.Dialog
   }
 
   /**
+  Get builder for [gtk.about_dialog.AboutDialog]
+  Returns: New builder object
+  */
+  static AboutDialogGidBuilder builder()
+  {
+    return new AboutDialogGidBuilder;
+  }
+
+  /**
       Get `comments` property.
       Returns: Comments about the program. This string is displayed in a label
         in the main dialog, thus it should be a short explanation of
@@ -101,7 +111,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void comments(string propval)
   {
-    return setComments(propval);
+    setComments(propval);
   }
 
   /**
@@ -120,7 +130,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void copyright(string propval)
   {
-    return setCopyright(propval);
+    setCopyright(propval);
   }
 
   /**
@@ -153,7 +163,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void license(string propval)
   {
-    return setLicense(propval);
+    setLicense(propval);
   }
 
   /**
@@ -200,7 +210,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void licenseType(gtk.types.License propval)
   {
-    return setLicenseType(propval);
+    setLicenseType(propval);
   }
 
   /**
@@ -221,7 +231,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void logo(gdkpixbuf.pixbuf.Pixbuf propval)
   {
-    return setLogo(propval);
+    setLogo(propval);
   }
 
   /**
@@ -242,7 +252,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void logoIconName(string propval)
   {
-    return setLogoIconName(propval);
+    setLogoIconName(propval);
   }
 
   /**
@@ -263,7 +273,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void programName(string propval)
   {
-    return setProgramName(propval);
+    setProgramName(propval);
   }
 
   /**
@@ -286,7 +296,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void translatorCredits(string propval)
   {
-    return setTranslatorCredits(propval);
+    setTranslatorCredits(propval);
   }
 
   /**
@@ -305,7 +315,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void version_(string propval)
   {
-    return setVersion(propval);
+    setVersion(propval);
   }
 
   /**
@@ -326,7 +336,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void website(string propval)
   {
-    return setWebsite(propval);
+    setWebsite(propval);
   }
 
   /**
@@ -345,7 +355,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void websiteLabel(string propval)
   {
-    return setWebsiteLabel(propval);
+    setWebsiteLabel(propval);
   }
 
   /**
@@ -364,7 +374,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   @property void wrapLicense(bool propval)
   {
-    return setWrapLicense(propval);
+    setWrapLicense(propval);
   }
 
   /**
@@ -899,5 +909,180 @@ class AboutDialog : gtk.dialog.Dialog
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-link", closure, after);
+  }
+}
+
+class AboutDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
+{
+
+
+  /**
+      Set `comments` property.
+      Params:
+        propval = Comments about the program. This string is displayed in a label
+          in the main dialog, thus it should be a short explanation of
+          the main purpose of the program, not a detailed list of features.
+      Returns: Builder instance for fluent chaining
+  */
+  T comments(string propval)
+  {
+    return setProperty("comments", propval);
+  }
+
+  /**
+      Set `copyright` property.
+      Params:
+        propval = Copyright information for the program.
+      Returns: Builder instance for fluent chaining
+  */
+  T copyright(string propval)
+  {
+    return setProperty("copyright", propval);
+  }
+
+  /**
+      Set `license` property.
+      Params:
+        propval = The license of the program. This string is displayed in a
+          text view in a secondary dialog, therefore it is fine to use
+          a long multi-paragraph text. Note that the text is only wrapped
+          in the text view if the "wrap-license" property is set to true;
+          otherwise the text itself must contain the intended linebreaks.
+          When setting this property to a non-null value, the
+          #GtkAboutDialog:license-type property is set to [gtk.types.License.Custom]
+          as a side effect.
+      Returns: Builder instance for fluent chaining
+  */
+  T license(string propval)
+  {
+    return setProperty("license", propval);
+  }
+
+  /**
+      Set `licenseType` property.
+      Params:
+        propval = The license of the program, as a value of the [gtk.types.License] enumeration.
+          
+          The #GtkAboutDialog will automatically fill out a standard disclaimer
+          and link the user to the appropriate online resource for the license
+          text.
+          
+          If [gtk.types.License.Unknown] is used, the link used will be the same
+          specified in the #GtkAboutDialog:website property.
+          
+          If [gtk.types.License.Custom] is used, the current contents of the
+          #GtkAboutDialog:license property are used.
+          
+          For any other #GtkLicense value, the contents of the
+          #GtkAboutDialog:license property are also set by this property as
+          a side effect.
+      Returns: Builder instance for fluent chaining
+  */
+  T licenseType(gtk.types.License propval)
+  {
+    return setProperty("license-type", propval);
+  }
+
+  /**
+      Set `logo` property.
+      Params:
+        propval = A logo for the about box. If it is null, the default window icon
+          set with [gtk.window.Window.setDefaultIcon] will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T logo(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("logo", propval);
+  }
+
+  /**
+      Set `logoIconName` property.
+      Params:
+        propval = A named icon to use as the logo for the about box. This property
+          overrides the #GtkAboutDialog:logo property.
+      Returns: Builder instance for fluent chaining
+  */
+  T logoIconName(string propval)
+  {
+    return setProperty("logo-icon-name", propval);
+  }
+
+  /**
+      Set `programName` property.
+      Params:
+        propval = The name of the program.
+          If this is not set, it defaults to [glib.global.getApplicationName].
+      Returns: Builder instance for fluent chaining
+  */
+  T programName(string propval)
+  {
+    return setProperty("program-name", propval);
+  }
+
+  /**
+      Set `translatorCredits` property.
+      Params:
+        propval = Credits to the translators. This string should be marked as translatable.
+          The string may contain email addresses and URLs, which will be displayed
+          as links, see the introduction for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T translatorCredits(string propval)
+  {
+    return setProperty("translator-credits", propval);
+  }
+
+  /**
+      Set `version_` property.
+      Params:
+        propval = The version of the program.
+      Returns: Builder instance for fluent chaining
+  */
+  T version_(string propval)
+  {
+    return setProperty("version", propval);
+  }
+
+  /**
+      Set `website` property.
+      Params:
+        propval = The URL for the link to the website of the program.
+          This should be a string starting with "http://.
+      Returns: Builder instance for fluent chaining
+  */
+  T website(string propval)
+  {
+    return setProperty("website", propval);
+  }
+
+  /**
+      Set `websiteLabel` property.
+      Params:
+        propval = The label for the link to the website of the program.
+      Returns: Builder instance for fluent chaining
+  */
+  T websiteLabel(string propval)
+  {
+    return setProperty("website-label", propval);
+  }
+
+  /**
+      Set `wrapLicense` property.
+      Params:
+        propval = Whether to wrap the text in the license dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapLicense(bool propval)
+  {
+    return setProperty("wrap-license", propval);
+  }
+}
+
+/// Fluent builder for [gtk.about_dialog.AboutDialog]
+final class AboutDialogGidBuilder : AboutDialogGidBuilderImpl!AboutDialogGidBuilder
+{
+  AboutDialog build()
+  {
+    return new AboutDialog(cast(void*)createGObject(AboutDialog._getGType), No.Take);
   }
 }

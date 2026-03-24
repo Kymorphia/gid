@@ -11,6 +11,7 @@ import gio.cancellable;
 import gio.input_stream;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -54,6 +55,15 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   override ContentDeserializer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.content_deserializer.ContentDeserializer]
+  Returns: New builder object
+  */
+  static ContentDeserializerGidBuilder builder()
+  {
+    return new ContentDeserializerGidBuilder;
   }
 
   mixin AsyncResultT!();
@@ -195,5 +205,20 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
     gdk_content_deserializer_set_task_data(cast(GdkContentDeserializer*)this._cPtr, data, _notifyCB);
+  }
+}
+
+class ContentDeserializerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_result.AsyncResultGidBuilderImpl!T
+{
+
+  mixin AsyncResultGidBuilderT!();
+}
+
+/// Fluent builder for [gdk.content_deserializer.ContentDeserializer]
+final class ContentDeserializerGidBuilder : ContentDeserializerGidBuilderImpl!ContentDeserializerGidBuilder
+{
+  ContentDeserializer build()
+  {
+    return new ContentDeserializer(cast(void*)createGObject(ContentDeserializer._getGType), No.Take);
   }
 }

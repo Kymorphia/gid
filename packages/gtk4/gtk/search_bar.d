@@ -2,6 +2,7 @@
 module gtk.search_bar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -90,6 +91,15 @@ class SearchBar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.search_bar.SearchBar]
+  Returns: New builder object
+  */
+  static SearchBarGidBuilder builder()
+  {
+    return new SearchBarGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -105,7 +115,7 @@ class SearchBar : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -124,7 +134,7 @@ class SearchBar : gtk.widget.Widget
   */
   @property void keyCaptureWidget(gtk.widget.Widget propval)
   {
-    return setKeyCaptureWidget(propval);
+    setKeyCaptureWidget(propval);
   }
 
   /**
@@ -143,7 +153,7 @@ class SearchBar : gtk.widget.Widget
   */
   @property void searchModeEnabled(bool propval)
   {
-    return setSearchMode(propval);
+    setSearchMode(propval);
   }
 
   /**
@@ -162,7 +172,7 @@ class SearchBar : gtk.widget.Widget
   */
   @property void showCloseButton(bool propval)
   {
-    return setShowCloseButton(propval);
+    setShowCloseButton(propval);
   }
 
   /**
@@ -298,5 +308,63 @@ class SearchBar : gtk.widget.Widget
   void setShowCloseButton(bool visible)
   {
     gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)this._cPtr, visible);
+  }
+}
+
+class SearchBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `keyCaptureWidget` property.
+      Params:
+        propval = The key capture widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T keyCaptureWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("key-capture-widget", propval);
+  }
+
+  /**
+      Set `searchModeEnabled` property.
+      Params:
+        propval = Whether the search mode is on and the search bar shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T searchModeEnabled(bool propval)
+  {
+    return setProperty("search-mode-enabled", propval);
+  }
+
+  /**
+      Set `showCloseButton` property.
+      Params:
+        propval = Whether to show the close button in the search bar.
+      Returns: Builder instance for fluent chaining
+  */
+  T showCloseButton(bool propval)
+  {
+    return setProperty("show-close-button", propval);
+  }
+}
+
+/// Fluent builder for [gtk.search_bar.SearchBar]
+final class SearchBarGidBuilder : SearchBarGidBuilderImpl!SearchBarGidBuilder
+{
+  SearchBar build()
+  {
+    return new SearchBar(cast(void*)createGObject(SearchBar._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.action;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -65,6 +66,15 @@ class FontChooserWidget : gtk.box.Box, gtk.font_chooser.FontChooser
   }
 
   /**
+  Get builder for [gtk.font_chooser_widget.FontChooserWidget]
+  Returns: New builder object
+  */
+  static FontChooserWidgetGidBuilder builder()
+  {
+    return new FontChooserWidgetGidBuilder;
+  }
+
+  /**
       Get `tweakAction` property.
       Returns: A toggle action that can be used to switch to the tweak page
         of the font chooser widget, which lets the user tweak the
@@ -89,5 +99,20 @@ class FontChooserWidget : gtk.box.Box, gtk.font_chooser.FontChooser
     GtkWidget* _cretval;
     _cretval = gtk_font_chooser_widget_new();
     this(_cretval, No.Take);
+  }
+}
+
+class FontChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.font_chooser.FontChooserGidBuilderImpl!T
+{
+
+  mixin FontChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.font_chooser_widget.FontChooserWidget]
+final class FontChooserWidgetGidBuilder : FontChooserWidgetGidBuilderImpl!FontChooserWidgetGidBuilder
+{
+  FontChooserWidget build()
+  {
+    return new FontChooserWidget(cast(void*)createGObject(FontChooserWidget._getGType), No.Take);
   }
 }

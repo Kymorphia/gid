@@ -7,6 +7,7 @@ public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -162,4 +163,8 @@ template AsyncResultT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template AsyncResultGidBuilderT()
+{
 }

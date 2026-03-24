@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -42,6 +43,15 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
+  Get builder for [adw.view_stack_page.ViewStackPage]
+  Returns: New builder object
+  */
+  static ViewStackPageGidBuilder builder()
+  {
+    return new ViewStackPageGidBuilder;
+  }
+
+  /**
       Get `badgeNumber` property.
       Returns: The badge number for this page.
         
@@ -67,7 +77,16 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void badgeNumber(uint propval)
   {
-    return setBadgeNumber(propval);
+    setBadgeNumber(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The stack child to which the page belongs.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
   }
 
   /**
@@ -86,7 +105,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -105,7 +124,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /**
@@ -128,7 +147,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void needsAttention(bool propval)
   {
-    return setNeedsAttention(propval);
+    setNeedsAttention(propval);
   }
 
   /**
@@ -147,7 +166,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -166,7 +185,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -191,7 +210,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   mixin AccessibleT!();
@@ -379,5 +398,118 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setVisible(bool visible)
   {
     adw_view_stack_page_set_visible(cast(AdwViewStackPage*)this._cPtr, visible);
+  }
+}
+
+class ViewStackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.accessible.AccessibleGidBuilderImpl!T
+{
+
+  mixin AccessibleGidBuilderT!();
+
+  /**
+      Set `badgeNumber` property.
+      Params:
+        propval = The badge number for this page.
+          
+          `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+          commonly used to display a number of unread items within the page.
+          
+          It can be used together with `property@ViewStack{age}:needs-attention`.
+      Returns: Builder instance for fluent chaining
+  */
+  T badgeNumber(uint propval)
+  {
+    return setProperty("badge-number", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The stack child to which the page belongs.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name of the child page.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the child page.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `needsAttention` property.
+      Params:
+        propval = Whether the page requires the user attention.
+          
+          `class@ViewSwitcher` will display it as a dot next to the page icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T needsAttention(bool propval)
+  {
+    return setProperty("needs-attention", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the child page.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an embedded underline in the title indicates a mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether this page is visible.
+          
+          This is independent from the [gtk.widget.Widget.visible] property of
+          `property@ViewStackPage:child`.
+      Returns: Builder instance for fluent chaining
+  */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+}
+
+/// Fluent builder for [adw.view_stack_page.ViewStackPage]
+final class ViewStackPageGidBuilder : ViewStackPageGidBuilderImpl!ViewStackPageGidBuilder
+{
+  ViewStackPage build()
+  {
+    return new ViewStackPage(cast(void*)createGObject(ViewStackPage._getGType), No.Take);
   }
 }

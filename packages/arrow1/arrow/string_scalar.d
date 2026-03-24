@@ -7,6 +7,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class StringScalar : arrow.base_binary_scalar.BaseBinaryScalar
@@ -37,11 +38,33 @@ class StringScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.string_scalar.StringScalar]
+  Returns: New builder object
+  */
+  static StringScalarGidBuilder builder()
+  {
+    return new StringScalarGidBuilder;
+  }
+
   /** */
   this(arrow.buffer.Buffer value)
   {
     GArrowStringScalar* _cretval;
     _cretval = garrow_string_scalar_new(value ? cast(GArrowBuffer*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class StringScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.string_scalar.StringScalar]
+final class StringScalarGidBuilder : StringScalarGidBuilderImpl!StringScalarGidBuilder
+{
+  StringScalar build()
+  {
+    return new StringScalar(cast(void*)createGObject(StringScalar._getGType), Yes.Take);
   }
 }

@@ -10,6 +10,7 @@ import arrowdataset.key_value_partitioning;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitioning
@@ -40,6 +41,15 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.hive_partitioning.HivePartitioning]
+  Returns: New builder object
+  */
+  static HivePartitioningGidBuilder builder()
+  {
+    return new HivePartitioningGidBuilder;
+  }
+
   /** */
   this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries = null, arrowdataset.hive_partitioning_options.HivePartitioningOptions options = null)
   {
@@ -60,5 +70,18 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     _cretval = gadataset_hive_partitioning_get_null_fallback(cast(GADatasetHivePartitioning*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class HivePartitioningGidBuilderImpl(T) : arrowdataset.key_value_partitioning.KeyValuePartitioningGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.hive_partitioning.HivePartitioning]
+final class HivePartitioningGidBuilder : HivePartitioningGidBuilderImpl!HivePartitioningGidBuilder
+{
+  HivePartitioning build()
+  {
+    return new HivePartitioning(cast(void*)createGObject(HivePartitioning._getGType), Yes.Take);
   }
 }

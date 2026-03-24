@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class ScalarAggregateOptions : arrow.function_options.FunctionOptions
   override ScalarAggregateOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.scalar_aggregate_options.ScalarAggregateOptions]
+  Returns: New builder object
+  */
+  static ScalarAggregateOptionsGidBuilder builder()
+  {
+    return new ScalarAggregateOptionsGidBuilder;
   }
 
   /**
@@ -81,5 +91,40 @@ class ScalarAggregateOptions : arrow.function_options.FunctionOptions
     GArrowScalarAggregateOptions* _cretval;
     _cretval = garrow_scalar_aggregate_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class ScalarAggregateOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `minCount` property.
+      Params:
+        propval = The minimum required number of values.
+      Returns: Builder instance for fluent chaining
+  */
+  T minCount(uint propval)
+  {
+    return setProperty("min-count", propval);
+  }
+
+  /**
+      Set `skipNulls` property.
+      Params:
+        propval = Whether NULLs are skipped or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T skipNulls(bool propval)
+  {
+    return setProperty("skip-nulls", propval);
+  }
+}
+
+/// Fluent builder for [arrow.scalar_aggregate_options.ScalarAggregateOptions]
+final class ScalarAggregateOptionsGidBuilder : ScalarAggregateOptionsGidBuilderImpl!ScalarAggregateOptionsGidBuilder
+{
+  ScalarAggregateOptions build()
+  {
+    return new ScalarAggregateOptions(cast(void*)createGObject(ScalarAggregateOptions._getGType), Yes.Take);
   }
 }

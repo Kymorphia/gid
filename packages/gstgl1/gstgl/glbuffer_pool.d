@@ -2,6 +2,7 @@
 module gstgl.glbuffer_pool;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.buffer_pool;
 import gstgl.c.functions;
 import gstgl.c.types;
@@ -47,6 +48,15 @@ class GLBufferPool : gst.buffer_pool.BufferPool
     return this;
   }
 
+  /**
+  Get builder for [gstgl.glbuffer_pool.GLBufferPool]
+  Returns: New builder object
+  */
+  static GLBufferPoolGidBuilder builder()
+  {
+    return new GLBufferPoolGidBuilder;
+  }
+
   /** */
   this(gstgl.glcontext.GLContext context)
   {
@@ -68,5 +78,18 @@ class GLBufferPool : gst.buffer_pool.BufferPool
     _cretval = gst_gl_buffer_pool_get_gl_allocation_params(cast(GstGLBufferPool*)this._cPtr);
     auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class GLBufferPoolGidBuilderImpl(T) : gst.buffer_pool.BufferPoolGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glbuffer_pool.GLBufferPool]
+final class GLBufferPoolGidBuilder : GLBufferPoolGidBuilderImpl!GLBufferPoolGidBuilder
+{
+  GLBufferPool build()
+  {
+    return new GLBufferPool(cast(void*)createGObject(GLBufferPool._getGType), No.Take);
   }
 }

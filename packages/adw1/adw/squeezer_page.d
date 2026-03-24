@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.widget;
 
@@ -39,6 +40,26 @@ class SqueezerPage : gobject.object.ObjectWrap
   override SqueezerPage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [adw.squeezer_page.SqueezerPage]
+  Returns: New builder object
+  */
+  static SqueezerPageGidBuilder builder()
+  {
+    return new SqueezerPageGidBuilder;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The the squeezer child to which the page belongs.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
   }
 
   /**
@@ -79,7 +100,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   */
   @property void enabled(bool propval)
   {
-    return setEnabled(propval);
+    setEnabled(propval);
   }
 
   /**
@@ -129,5 +150,53 @@ class SqueezerPage : gobject.object.ObjectWrap
   void setEnabled(bool enabled)
   {
     adw_squeezer_page_set_enabled(cast(AdwSqueezerPage*)this._cPtr, enabled);
+  }
+}
+
+class SqueezerPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The the squeezer child to which the page belongs.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether the child is enabled.
+          
+          If a child is disabled, it will be ignored when looking for the child
+          fitting the available size best.
+          
+          This allows to programmatically and prematurely hide a child even if it
+          fits in the available space.
+          
+          This can be used e.g. to ensure a certain child is hidden below a certain
+          window width, or any other constraint you find suitable.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
+  */
+  T enabled(bool propval)
+  {
+    return setProperty("enabled", propval);
+  }
+}
+
+/// Fluent builder for [adw.squeezer_page.SqueezerPage]
+final class SqueezerPageGidBuilder : SqueezerPageGidBuilderImpl!SqueezerPageGidBuilder
+{
+  SqueezerPage build()
+  {
+    return new SqueezerPage(cast(void*)createGObject(SqueezerPage._getGType), No.Take);
   }
 }

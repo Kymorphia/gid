@@ -7,6 +7,7 @@ import arrow.time_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Time64DataType : arrow.time_data_type.TimeDataType
@@ -37,6 +38,15 @@ class Time64DataType : arrow.time_data_type.TimeDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.time64_data_type.Time64DataType]
+  Returns: New builder object
+  */
+  static Time64DataTypeGidBuilder builder()
+  {
+    return new Time64DataTypeGidBuilder;
+  }
+
   /** */
   this(arrow.types.TimeUnit unit)
   {
@@ -46,5 +56,18 @@ class Time64DataType : arrow.time_data_type.TimeDataType
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class Time64DataTypeGidBuilderImpl(T) : arrow.time_data_type.TimeDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.time64_data_type.Time64DataType]
+final class Time64DataTypeGidBuilder : Time64DataTypeGidBuilderImpl!Time64DataTypeGidBuilder
+{
+  Time64DataType build()
+  {
+    return new Time64DataType(cast(void*)createGObject(Time64DataType._getGType), Yes.Take);
   }
 }

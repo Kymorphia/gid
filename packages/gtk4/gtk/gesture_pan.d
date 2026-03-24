@@ -3,6 +3,7 @@ module gtk.gesture_pan;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture_drag;
@@ -53,6 +54,15 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   }
 
   /**
+  Get builder for [gtk.gesture_pan.GesturePan]
+  Returns: New builder object
+  */
+  static GesturePanGidBuilder builder()
+  {
+    return new GesturePanGidBuilder;
+  }
+
+  /**
       Get `orientation` property.
       Returns: The expected orientation of pan gestures.
   */
@@ -68,7 +78,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   */
   @property void orientation(gtk.types.Orientation propval)
   {
-    return setOrientation(propval);
+    setOrientation(propval);
   }
 
   /**
@@ -155,5 +165,29 @@ class GesturePan : gtk.gesture_drag.GestureDrag
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pan", closure, after);
+  }
+}
+
+class GesturePanGidBuilderImpl(T) : gtk.gesture_drag.GestureDragGidBuilderImpl!T
+{
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The expected orientation of pan gestures.
+      Returns: Builder instance for fluent chaining
+  */
+  T orientation(gtk.types.Orientation propval)
+  {
+    return setProperty("orientation", propval);
+  }
+}
+
+/// Fluent builder for [gtk.gesture_pan.GesturePan]
+final class GesturePanGidBuilder : GesturePanGidBuilderImpl!GesturePanGidBuilder
+{
+  GesturePan build()
+  {
+    return new GesturePan(cast(void*)createGObject(GesturePan._getGType), Yes.Take);
   }
 }

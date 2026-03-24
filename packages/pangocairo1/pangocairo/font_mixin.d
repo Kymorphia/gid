@@ -4,6 +4,7 @@ module pangocairo.font_mixin;
 public import pangocairo.font_iface_proxy;
 public import cairo.scaled_font;
 public import gid.gid;
+public import gobject.gid_builder;
 public import pangocairo.c.functions;
 public import pangocairo.c.types;
 public import pangocairo.types;
@@ -32,4 +33,8 @@ template FontT()
     auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
+}
+
+template FontGidBuilderT()
+{
 }

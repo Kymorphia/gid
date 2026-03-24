@@ -2,6 +2,7 @@
 module gtk.list_header;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -45,6 +46,15 @@ class ListHeader : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.list_header.ListHeader]
+  Returns: New builder object
+  */
+  static ListHeaderGidBuilder builder()
+  {
+    return new ListHeaderGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: Widget used for display.
   */
@@ -60,7 +70,7 @@ class ListHeader : gobject.object.ObjectWrap
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -182,5 +192,29 @@ class ListHeader : gobject.object.ObjectWrap
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_list_header_set_child(cast(GtkListHeader*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class ListHeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `child` property.
+      Params:
+        propval = Widget used for display.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [gtk.list_header.ListHeader]
+final class ListHeaderGidBuilder : ListHeaderGidBuilderImpl!ListHeaderGidBuilder
+{
+  ListHeader build()
+  {
+    return new ListHeader(cast(void*)createGObject(ListHeader._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import gdk.color;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -46,6 +47,15 @@ class ColorSelection : gtk.box.Box
     return this;
   }
 
+  /**
+  Get builder for [gtk.color_selection.ColorSelection]
+  Returns: New builder object
+  */
+  static ColorSelectionGidBuilder builder()
+  {
+    return new ColorSelectionGidBuilder;
+  }
+
   /** */
   @property uint currentAlpha()
   {
@@ -78,7 +88,7 @@ class ColorSelection : gtk.box.Box
   */
   @property void currentColor(gdk.color.Color propval)
   {
-    return setCurrentColor(propval);
+    setCurrentColor(propval);
   }
 
   /**
@@ -97,7 +107,7 @@ class ColorSelection : gtk.box.Box
   */
   @property void currentRgba(gdk.rgba.RGBA propval)
   {
-    return setCurrentRgba(propval);
+    setCurrentRgba(propval);
   }
 
   /** */
@@ -109,7 +119,7 @@ class ColorSelection : gtk.box.Box
   /** */
   @property void hasOpacityControl(bool propval)
   {
-    return setHasOpacityControl(propval);
+    setHasOpacityControl(propval);
   }
 
   /** */
@@ -121,7 +131,7 @@ class ColorSelection : gtk.box.Box
   /** */
   @property void hasPalette(bool propval)
   {
-    return setHasPalette(propval);
+    setHasPalette(propval);
   }
 
   /**
@@ -433,5 +443,61 @@ class ColorSelection : gtk.box.Box
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-changed", closure, after);
+  }
+}
+
+class ColorSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /** */
+  T currentAlpha(uint propval)
+  {
+    return setProperty("current-alpha", propval);
+  }
+
+  /**
+      Set `currentColor` property.
+      Params:
+        propval = The current GdkColor color.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GtkColorSelection:current-rgba instead.
+  */
+  T currentColor(gdk.color.Color propval)
+  {
+    return setProperty("current-color", propval);
+  }
+
+  /**
+      Set `currentRgba` property.
+      Params:
+        propval = The current RGBA color.
+      Returns: Builder instance for fluent chaining
+  */
+  T currentRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("current-rgba", propval);
+  }
+
+  /** */
+  T hasOpacityControl(bool propval)
+  {
+    return setProperty("has-opacity-control", propval);
+  }
+
+  /** */
+  T hasPalette(bool propval)
+  {
+    return setProperty("has-palette", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_selection.ColorSelection]
+final class ColorSelectionGidBuilder : ColorSelectionGidBuilderImpl!ColorSelectionGidBuilder
+{
+  ColorSelection build()
+  {
+    return new ColorSelection(cast(void*)createGObject(ColorSelection._getGType), No.Take);
   }
 }

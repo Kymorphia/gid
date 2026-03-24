@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
   override StrptimeOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.strptime_options.StrptimeOptions]
+  Returns: New builder object
+  */
+  static StrptimeOptionsGidBuilder builder()
+  {
+    return new StrptimeOptionsGidBuilder;
   }
 
   /**
@@ -100,5 +110,51 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
     GArrowStrptimeOptions* _cretval;
     _cretval = garrow_strptime_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class StrptimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `errorIsNull` property.
+      Params:
+        propval = Return null on parsing errors if true or raise if false.
+      Returns: Builder instance for fluent chaining
+  */
+  T errorIsNull(bool propval)
+  {
+    return setProperty("error-is-null", propval);
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The desired format string.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(string propval)
+  {
+    return setProperty("format", propval);
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The desired time resolution.
+      Returns: Builder instance for fluent chaining
+  */
+  T unit(arrow.types.TimeUnit propval)
+  {
+    return setProperty("unit", propval);
+  }
+}
+
+/// Fluent builder for [arrow.strptime_options.StrptimeOptions]
+final class StrptimeOptionsGidBuilder : StrptimeOptionsGidBuilderImpl!StrptimeOptionsGidBuilder
+{
+  StrptimeOptions build()
+  {
+    return new StrptimeOptions(cast(void*)createGObject(StrptimeOptions._getGType), Yes.Take);
   }
 }

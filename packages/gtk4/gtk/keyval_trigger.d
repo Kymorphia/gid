@@ -3,6 +3,7 @@ module gtk.keyval_trigger;
 
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_trigger;
@@ -37,6 +38,33 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   override KeyvalTrigger self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.keyval_trigger.KeyvalTrigger]
+  Returns: New builder object
+  */
+  static KeyvalTriggerGidBuilder builder()
+  {
+    return new KeyvalTriggerGidBuilder;
+  }
+
+  /**
+      Get `keyval` property.
+      Returns: The key value for the trigger.
+  */
+  @property uint keyval()
+  {
+    return getKeyval();
+  }
+
+  /**
+      Get `modifiers` property.
+      Returns: The key modifiers for the trigger.
+  */
+  @property gdk.types.ModifierType modifiers()
+  {
+    return getModifiers();
   }
 
   /**
@@ -78,5 +106,40 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
     _cretval = gtk_keyval_trigger_get_modifiers(cast(GtkKeyvalTrigger*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
+  }
+}
+
+class KeyvalTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
+{
+
+  /**
+      Set `keyval` property.
+      Params:
+        propval = The key value for the trigger.
+      Returns: Builder instance for fluent chaining
+  */
+  T keyval(uint propval)
+  {
+    return setProperty("keyval", propval);
+  }
+
+  /**
+      Set `modifiers` property.
+      Params:
+        propval = The key modifiers for the trigger.
+      Returns: Builder instance for fluent chaining
+  */
+  T modifiers(gdk.types.ModifierType propval)
+  {
+    return setProperty("modifiers", propval);
+  }
+}
+
+/// Fluent builder for [gtk.keyval_trigger.KeyvalTrigger]
+final class KeyvalTriggerGidBuilder : KeyvalTriggerGidBuilderImpl!KeyvalTriggerGidBuilder
+{
+  KeyvalTrigger build()
+  {
+    return new KeyvalTrigger(cast(void*)createGObject(KeyvalTrigger._getGType), Yes.Take);
   }
 }

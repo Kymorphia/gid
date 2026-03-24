@@ -8,6 +8,7 @@ import atk.component_mixin;
 import atk.object;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     Toplevel for embedding into other processes
@@ -40,6 +41,15 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   override Plug self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.plug.Plug]
+  Returns: New builder object
+  */
+  static PlugGidBuilder builder()
+  {
+    return new PlugGidBuilder;
   }
 
   mixin ComponentT!();
@@ -91,5 +101,20 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   void setChild(atk.object.ObjectWrap child)
   {
     atk_plug_set_child(cast(AtkPlug*)this._cPtr, child ? cast(AtkObject*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class PlugGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T
+{
+
+  mixin ComponentGidBuilderT!();
+}
+
+/// Fluent builder for [atk.plug.Plug]
+final class PlugGidBuilder : PlugGidBuilderImpl!PlugGidBuilder
+{
+  Plug build()
+  {
+    return new Plug(cast(void*)createGObject(Plug._getGType), Yes.Take);
   }
 }

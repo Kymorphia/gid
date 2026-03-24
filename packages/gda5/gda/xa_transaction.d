@@ -8,6 +8,7 @@ import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,27 @@ class XaTransaction : gobject.object.ObjectWrap
   override XaTransaction self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.xa_transaction.XaTransaction]
+  Returns: New builder object
+  */
+  static XaTransactionGidBuilder builder()
+  {
+    return new XaTransactionGidBuilder;
+  }
+
+  /** */
+  @property uint formatId()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("format-id");
+  }
+
+  /** */
+  @property string transactionId()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("transaction-id");
   }
 
   /**
@@ -182,6 +204,31 @@ class XaTransaction : gobject.object.ObjectWrap
   void unregisterConnection(gda.connection.Connection cnc)
   {
     gda_xa_transaction_unregister_connection(cast(GdaXaTransaction*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
+  }
+}
+
+class XaTransactionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T formatId(uint propval)
+  {
+    return setProperty("format-id", propval);
+  }
+
+  /** */
+  T transactionId(string propval)
+  {
+    return setProperty("transaction-id", propval);
+  }
+}
+
+/// Fluent builder for [gda.xa_transaction.XaTransaction]
+final class XaTransactionGidBuilder : XaTransactionGidBuilderImpl!XaTransactionGidBuilder
+{
+  XaTransaction build()
+  {
+    return new XaTransaction(cast(void*)createGObject(XaTransaction._getGType), Yes.Take);
   }
 }
 

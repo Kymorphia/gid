@@ -2,6 +2,7 @@
 module gtk.alternative_trigger;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -41,6 +42,33 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   override AlternativeTrigger self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.alternative_trigger.AlternativeTrigger]
+  Returns: New builder object
+  */
+  static AlternativeTriggerGidBuilder builder()
+  {
+    return new AlternativeTriggerGidBuilder;
+  }
+
+  /**
+      Get `first` property.
+      Returns: The first [gtk.shortcut_trigger.ShortcutTrigger] to check.
+  */
+  @property gtk.shortcut_trigger.ShortcutTrigger first()
+  {
+    return getFirst();
+  }
+
+  /**
+      Get `second` property.
+      Returns: The second [gtk.shortcut_trigger.ShortcutTrigger] to check.
+  */
+  @property gtk.shortcut_trigger.ShortcutTrigger second()
+  {
+    return getSecond();
   }
 
   /**
@@ -92,5 +120,40 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
     _cretval = gtk_alternative_trigger_get_second(cast(GtkAlternativeTrigger*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class AlternativeTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
+{
+
+  /**
+      Set `first` property.
+      Params:
+        propval = The first [gtk.shortcut_trigger.ShortcutTrigger] to check.
+      Returns: Builder instance for fluent chaining
+  */
+  T first(gtk.shortcut_trigger.ShortcutTrigger propval)
+  {
+    return setProperty("first", propval);
+  }
+
+  /**
+      Set `second` property.
+      Params:
+        propval = The second [gtk.shortcut_trigger.ShortcutTrigger] to check.
+      Returns: Builder instance for fluent chaining
+  */
+  T second(gtk.shortcut_trigger.ShortcutTrigger propval)
+  {
+    return setProperty("second", propval);
+  }
+}
+
+/// Fluent builder for [gtk.alternative_trigger.AlternativeTrigger]
+final class AlternativeTriggerGidBuilder : AlternativeTriggerGidBuilderImpl!AlternativeTriggerGidBuilder
+{
+  AlternativeTrigger build()
+  {
+    return new AlternativeTrigger(cast(void*)createGObject(AlternativeTrigger._getGType), Yes.Take);
   }
 }

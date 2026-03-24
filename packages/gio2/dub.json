@@ -1,7 +1,7 @@
 {
   "name": "gio2",
   "description": "D binding for the Gio library - General purpose I/O library which is part of glib",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gtk.org",

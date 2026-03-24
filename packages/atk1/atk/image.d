@@ -6,6 +6,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     The ATK Interface implemented by components
@@ -87,4 +88,8 @@ interface Image
         not be completed.
   */
   bool setImageDescription(string description);
+}
+
+interface ImageGidBuilderImpl(T)
+{
 }

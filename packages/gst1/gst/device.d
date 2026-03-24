@@ -3,6 +3,7 @@ module gst.device;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -46,6 +47,39 @@ class Device : gst.object.ObjectWrap
   override Device self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.device.Device]
+  Returns: New builder object
+  */
+  static DeviceGidBuilder builder()
+  {
+    return new DeviceGidBuilder;
+  }
+
+  /** */
+  @property gst.caps.Caps caps()
+  {
+    return getCaps();
+  }
+
+  /** */
+  @property string deviceClass()
+  {
+    return getDeviceClass();
+  }
+
+  /** */
+  @property string displayName()
+  {
+    return getDisplayName();
+  }
+
+  /** */
+  @property gst.structure.Structure properties()
+  {
+    return getProperties();
   }
 
   /**
@@ -211,5 +245,42 @@ class Device : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("removed", closure, after);
+  }
+}
+
+class DeviceGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T caps(gst.caps.Caps propval)
+  {
+    return setProperty("caps", propval);
+  }
+
+  /** */
+  T deviceClass(string propval)
+  {
+    return setProperty("device-class", propval);
+  }
+
+  /** */
+  T displayName(string propval)
+  {
+    return setProperty("display-name", propval);
+  }
+
+  /** */
+  T properties(gst.structure.Structure propval)
+  {
+    return setProperty("properties", propval);
+  }
+}
+
+/// Fluent builder for [gst.device.Device]
+final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
+{
+  Device build()
+  {
+    return new Device(cast(void*)createGObject(Device._getGType), No.Take);
   }
 }

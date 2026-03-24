@@ -12,6 +12,7 @@ import gio.socket_connection;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -57,6 +58,15 @@ class SocketListener : gobject.object.ObjectWrap
   override SocketListener self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.socket_listener.SocketListener]
+  Returns: New builder object
+  */
+  static SocketListenerGidBuilder builder()
+  {
+    return new SocketListenerGidBuilder;
   }
 
   /**
@@ -459,5 +469,29 @@ class SocketListener : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
+  }
+}
+
+class SocketListenerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `listenBacklog` property.
+      Params:
+        propval = The number of outstanding connections in the listen queue.
+      Returns: Builder instance for fluent chaining
+  */
+  T listenBacklog(int propval)
+  {
+    return setProperty("listen-backlog", propval);
+  }
+}
+
+/// Fluent builder for [gio.socket_listener.SocketListener]
+final class SocketListenerGidBuilder : SocketListenerGidBuilderImpl!SocketListenerGidBuilder
+{
+  SocketListener build()
+  {
+    return new SocketListener(cast(void*)createGObject(SocketListener._getGType), Yes.Take);
   }
 }

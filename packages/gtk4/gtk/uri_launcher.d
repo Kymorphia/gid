@@ -6,6 +6,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -55,6 +56,15 @@ class UriLauncher : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.uri_launcher.UriLauncher]
+  Returns: New builder object
+  */
+  static UriLauncherGidBuilder builder()
+  {
+    return new UriLauncherGidBuilder;
+  }
+
+  /**
       Get `uri` property.
       Returns: The uri to launch.
   */
@@ -70,7 +80,7 @@ class UriLauncher : gobject.object.ObjectWrap
   */
   @property void uri(string propval)
   {
-    return setUri(propval);
+    setUri(propval);
   }
 
   /**
@@ -158,5 +168,29 @@ class UriLauncher : gobject.object.ObjectWrap
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     gtk_uri_launcher_set_uri(cast(GtkUriLauncher*)this._cPtr, _uri);
+  }
+}
+
+class UriLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The uri to launch.
+      Returns: Builder instance for fluent chaining
+  */
+  T uri(string propval)
+  {
+    return setProperty("uri", propval);
+  }
+}
+
+/// Fluent builder for [gtk.uri_launcher.UriLauncher]
+final class UriLauncherGidBuilder : UriLauncherGidBuilderImpl!UriLauncherGidBuilder
+{
+  UriLauncher build()
+  {
+    return new UriLauncher(cast(void*)createGObject(UriLauncher._getGType), Yes.Take);
   }
 }

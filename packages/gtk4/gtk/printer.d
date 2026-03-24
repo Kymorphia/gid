@@ -3,6 +3,7 @@ module gtk.printer;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -50,6 +51,15 @@ class Printer : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.printer.Printer]
+  Returns: New builder object
+  */
+  static PrinterGidBuilder builder()
+  {
+    return new PrinterGidBuilder;
+  }
+
+  /**
       Get `acceptingJobs` property.
       Returns: true if the printer is accepting jobs.
   */
@@ -83,6 +93,15 @@ class Printer : gobject.object.ObjectWrap
   @property string location()
   {
     return getLocation();
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the printer.
+  */
+  @property string name()
+  {
+    return getName();
   }
 
   /**
@@ -472,5 +491,29 @@ class Printer : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("details-acquired", closure, after);
+  }
+}
+
+class PrinterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the printer.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.printer.Printer]
+final class PrinterGidBuilder : PrinterGidBuilderImpl!PrinterGidBuilder
+{
+  Printer build()
+  {
+    return new Printer(cast(void*)createGObject(Printer._getGType), Yes.Take);
   }
 }

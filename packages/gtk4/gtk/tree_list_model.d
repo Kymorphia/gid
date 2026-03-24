@@ -4,6 +4,7 @@ module gtk.tree_list_model;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -43,6 +44,15 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
+  Get builder for [gtk.tree_list_model.TreeListModel]
+  Returns: New builder object
+  */
+  static TreeListModelGidBuilder builder()
+  {
+    return new TreeListModelGidBuilder;
+  }
+
+  /**
       Get `autoexpand` property.
       Returns: If all rows should be expanded by default.
   */
@@ -58,7 +68,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void autoexpand(bool propval)
   {
-    return setAutoexpand(propval);
+    setAutoexpand(propval);
   }
 
   /**
@@ -86,6 +96,19 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   @property uint nItems()
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
+      Get `passthrough` property.
+      Returns: Gets whether the model is in passthrough mode.
+        
+        If false, the [gio.list_model.ListModel] functions for this object return custom
+        [gtk.tree_list_row.TreeListRow] objects. If true, the values of the child
+        models are pass through unmodified.
+  */
+  @property bool passthrough()
+  {
+    return getPassthrough();
   }
 
   mixin ListModelT!();
@@ -234,5 +257,46 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   void setAutoexpand(bool autoexpand)
   {
     gtk_tree_list_model_set_autoexpand(cast(GtkTreeListModel*)this._cPtr, autoexpand);
+  }
+}
+
+class TreeListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `autoexpand` property.
+      Params:
+        propval = If all rows should be expanded by default.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoexpand(bool propval)
+  {
+    return setProperty("autoexpand", propval);
+  }
+
+  /**
+      Set `passthrough` property.
+      Params:
+        propval = Gets whether the model is in passthrough mode.
+          
+          If false, the [gio.list_model.ListModel] functions for this object return custom
+          [gtk.tree_list_row.TreeListRow] objects. If true, the values of the child
+          models are pass through unmodified.
+      Returns: Builder instance for fluent chaining
+  */
+  T passthrough(bool propval)
+  {
+    return setProperty("passthrough", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_list_model.TreeListModel]
+final class TreeListModelGidBuilder : TreeListModelGidBuilderImpl!TreeListModelGidBuilder
+{
+  TreeListModel build()
+  {
+    return new TreeListModel(cast(void*)createGObject(TreeListModel._getGType), Yes.Take);
   }
 }

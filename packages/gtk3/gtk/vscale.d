@@ -4,6 +4,7 @@ module gtk.vscale;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -53,6 +54,15 @@ class VScale : gtk.scale.Scale
   }
 
   /**
+  Get builder for [gtk.vscale.VScale]
+  Returns: New builder object
+  */
+  static VScaleGidBuilder builder()
+  {
+    return new VScaleGidBuilder;
+  }
+
+  /**
       Creates a new #GtkVScale.
   
       Params:
@@ -92,5 +102,19 @@ class VScale : gtk.scale.Scale
     _cretval = gtk_vscale_new_with_range(min, max, step);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.vscale.VScale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class VScaleGidBuilderImpl(T) : gtk.scale.ScaleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.vscale.VScale]
+final class VScaleGidBuilder : VScaleGidBuilderImpl!VScaleGidBuilder
+{
+  VScale build()
+  {
+    return new VScale(cast(void*)createGObject(VScale._getGType), No.Take);
   }
 }

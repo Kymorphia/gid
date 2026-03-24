@@ -3,6 +3,7 @@ module gtk.gesture_long_press;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -45,6 +46,15 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   override GestureLongPress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.gesture_long_press.GestureLongPress]
+  Returns: New builder object
+  */
+  static GestureLongPressGidBuilder builder()
+  {
+    return new GestureLongPressGidBuilder;
   }
 
   /** */
@@ -159,5 +169,24 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pressed", closure, after);
+  }
+}
+
+class GestureLongPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+
+  /** */
+  T delayFactor(double propval)
+  {
+    return setProperty("delay-factor", propval);
+  }
+}
+
+/// Fluent builder for [gtk.gesture_long_press.GestureLongPress]
+final class GestureLongPressGidBuilder : GestureLongPressGidBuilderImpl!GestureLongPressGidBuilder
+{
+  GestureLongPress build()
+  {
+    return new GestureLongPress(cast(void*)createGObject(GestureLongPress._getGType), Yes.Take);
   }
 }

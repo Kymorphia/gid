@@ -8,6 +8,7 @@ import gio.dbus_connection;
 import gio.dbus_object;
 import gio.dbus_object_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,33 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
     return this;
   }
 
+  /**
+  Get builder for [gio.dbus_object_proxy.DBusObjectProxy]
+  Returns: New builder object
+  */
+  static DBusObjectProxyGidBuilder builder()
+  {
+    return new DBusObjectProxyGidBuilder;
+  }
+
+  /**
+      Get `gConnection` property.
+      Returns: The connection of the proxy.
+  */
+  @property gio.dbus_connection.DBusConnection gConnection()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.dbus_connection.DBusConnection)("g-connection");
+  }
+
+  /**
+      Get `gObjectPath` property.
+      Returns: The object path of the proxy.
+  */
+  @property string gObjectPath()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("g-object-path");
+  }
+
   mixin DBusObjectT!();
 
   /**
@@ -74,5 +102,42 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
     _cretval = g_dbus_object_proxy_get_connection(cast(GDBusObjectProxy*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class DBusObjectProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.dbus_object.DBusObjectGidBuilderImpl!T
+{
+
+  mixin DBusObjectGidBuilderT!();
+
+  /**
+      Set `gConnection` property.
+      Params:
+        propval = The connection of the proxy.
+      Returns: Builder instance for fluent chaining
+  */
+  T gConnection(gio.dbus_connection.DBusConnection propval)
+  {
+    return setProperty("g-connection", propval);
+  }
+
+  /**
+      Set `gObjectPath` property.
+      Params:
+        propval = The object path of the proxy.
+      Returns: Builder instance for fluent chaining
+  */
+  T gObjectPath(string propval)
+  {
+    return setProperty("g-object-path", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_object_proxy.DBusObjectProxy]
+final class DBusObjectProxyGidBuilder : DBusObjectProxyGidBuilderImpl!DBusObjectProxyGidBuilder
+{
+  DBusObjectProxy build()
+  {
+    return new DBusObjectProxy(cast(void*)createGObject(DBusObjectProxy._getGType), Yes.Take);
   }
 }

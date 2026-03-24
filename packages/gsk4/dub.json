@@ -1,7 +1,7 @@
 {
   "name": "gsk4",
   "description": "D binding for the Gsk4 library - GTK rendering abstraction library",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gtk.org",

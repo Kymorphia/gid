@@ -4,6 +4,7 @@ module gtk.font_selection_dialog;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -40,6 +41,15 @@ class FontSelectionDialog : gtk.dialog.Dialog
   override FontSelectionDialog self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.font_selection_dialog.FontSelectionDialog]
+  Returns: New builder object
+  */
+  static FontSelectionDialogGidBuilder builder()
+  {
+    return new FontSelectionDialogGidBuilder;
   }
 
   /**
@@ -171,5 +181,19 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_font_selection_dialog_set_preview_text(cast(GtkFontSelectionDialog*)this._cPtr, _text);
+  }
+}
+
+class FontSelectionDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.font_selection_dialog.FontSelectionDialog]
+final class FontSelectionDialogGidBuilder : FontSelectionDialogGidBuilderImpl!FontSelectionDialogGidBuilder
+{
+  FontSelectionDialog build()
+  {
+    return new FontSelectionDialog(cast(void*)createGObject(FontSelectionDialog._getGType), No.Take);
   }
 }

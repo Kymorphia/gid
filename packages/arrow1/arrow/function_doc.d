@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class FunctionDoc : gobject.object.ObjectWrap
   override FunctionDoc self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.function_doc.FunctionDoc]
+  Returns: New builder object
+  */
+  static FunctionDocGidBuilder builder()
+  {
+    return new FunctionDocGidBuilder;
   }
 
   /** */
@@ -81,5 +91,24 @@ class FunctionDoc : gobject.object.ObjectWrap
     _cretval = garrow_function_doc_get_summary(cast(GArrowFunctionDoc*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class FunctionDocGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T doc(void* propval)
+  {
+    return setProperty("doc", propval);
+  }
+}
+
+/// Fluent builder for [arrow.function_doc.FunctionDoc]
+final class FunctionDocGidBuilder : FunctionDocGidBuilderImpl!FunctionDocGidBuilder
+{
+  FunctionDoc build()
+  {
+    return new FunctionDoc(cast(void*)createGObject(FunctionDoc._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.stack_page;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -42,6 +43,24 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
+  Get builder for [gtk.stack_page.StackPage]
+  Returns: New builder object
+  */
+  static StackPageGidBuilder builder()
+  {
+    return new StackPageGidBuilder;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child that this page is for.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
       Get `iconName` property.
       Returns: The icon name of the child page.
   */
@@ -57,7 +76,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -76,7 +95,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /**
@@ -103,7 +122,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void needsAttention(bool propval)
   {
-    return setNeedsAttention(propval);
+    setNeedsAttention(propval);
   }
 
   /**
@@ -122,7 +141,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -141,7 +160,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -160,7 +179,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   mixin AccessibleT!();
@@ -317,5 +336,101 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setVisible(bool visible)
   {
     gtk_stack_page_set_visible(cast(GtkStackPage*)this._cPtr, visible);
+  }
+}
+
+class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.accessible.AccessibleGidBuilderImpl!T
+{
+
+  mixin AccessibleGidBuilderT!();
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child that this page is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name of the child page.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the child page.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `needsAttention` property.
+      Params:
+        propval = Whether the page requires the user attention.
+          
+          This is used by the [gtk.stack_switcher.StackSwitcher] to change the
+          appearance of the corresponding button when a page needs
+          attention and it is not the current one.
+      Returns: Builder instance for fluent chaining
+  */
+  T needsAttention(bool propval)
+  {
+    return setProperty("needs-attention", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the child page.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set, an underline in the title indicates a mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether this page is visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+}
+
+/// Fluent builder for [gtk.stack_page.StackPage]
+final class StackPageGidBuilder : StackPageGidBuilderImpl!StackPageGidBuilder
+{
+  StackPage build()
+  {
+    return new StackPage(cast(void*)createGObject(StackPage._getGType), No.Take);
   }
 }

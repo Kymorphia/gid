@@ -2,6 +2,7 @@
 module soup.auth_ntlm;
 
 import gid.gid;
+import gobject.gid_builder;
 import soup.auth;
 import soup.c.functions;
 import soup.c.types;
@@ -40,5 +41,27 @@ class AuthNTLM : soup.auth.Auth
   override AuthNTLM self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.auth_ntlm.AuthNTLM]
+  Returns: New builder object
+  */
+  static AuthNTLMGidBuilder builder()
+  {
+    return new AuthNTLMGidBuilder;
+  }
+}
+
+class AuthNTLMGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [soup.auth_ntlm.AuthNTLM]
+final class AuthNTLMGidBuilder : AuthNTLMGidBuilderImpl!AuthNTLMGidBuilder
+{
+  AuthNTLM build()
+  {
+    return new AuthNTLM(cast(void*)createGObject(AuthNTLM._getGType), No.Take);
   }
 }

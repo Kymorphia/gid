@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A buffered stream wrapper around any #GMimeStream object.
@@ -39,6 +40,15 @@ class StreamBuffer : gmime.stream.Stream
   }
 
   /**
+  Get builder for [gmime.stream_buffer.StreamBuffer]
+  Returns: New builder object
+  */
+  static StreamBufferGidBuilder builder()
+  {
+    return new StreamBufferGidBuilder;
+  }
+
+  /**
       Creates a new GMimeStreamBuffer object.
   
       Params:
@@ -51,5 +61,18 @@ class StreamBuffer : gmime.stream.Stream
     GMimeStream* _cretval;
     _cretval = g_mime_stream_buffer_new(source ? cast(GMimeStream*)source._cPtr(No.Dup) : null, mode);
     this(_cretval, Yes.Take);
+  }
+}
+
+class StreamBufferGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_buffer.StreamBuffer]
+final class StreamBufferGidBuilder : StreamBufferGidBuilderImpl!StreamBufferGidBuilder
+{
+  StreamBuffer build()
+  {
+    return new StreamBuffer(cast(void*)createGObject(StreamBuffer._getGType), Yes.Take);
   }
 }

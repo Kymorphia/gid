@@ -4,6 +4,7 @@ module gtk.volume_button;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -52,6 +53,15 @@ class VolumeButton : gtk.scale_button.ScaleButton
   }
 
   /**
+  Get builder for [gtk.volume_button.VolumeButton]
+  Returns: New builder object
+  */
+  static VolumeButtonGidBuilder builder()
+  {
+    return new VolumeButtonGidBuilder;
+  }
+
+  /**
       Get `useSymbolic` property.
       Returns: Whether to use symbolic icons as the icons. Note that
         if the symbolic icons are not available in your installed
@@ -87,5 +97,33 @@ class VolumeButton : gtk.scale_button.ScaleButton
     GtkWidget* _cretval;
     _cretval = gtk_volume_button_new();
     this(_cretval, No.Take);
+  }
+}
+
+class VolumeButtonGidBuilderImpl(T) : gtk.scale_button.ScaleButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `useSymbolic` property.
+      Params:
+        propval = Whether to use symbolic icons as the icons. Note that
+          if the symbolic icons are not available in your installed
+          theme, then the normal (potentially colorful) icons will
+          be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T useSymbolic(bool propval)
+  {
+    return setProperty("use-symbolic", propval);
+  }
+}
+
+/// Fluent builder for [gtk.volume_button.VolumeButton]
+final class VolumeButtonGidBuilder : VolumeButtonGidBuilderImpl!VolumeButtonGidBuilder
+{
+  VolumeButton build()
+  {
+    return new VolumeButton(cast(void*)createGObject(VolumeButton._getGType), No.Take);
   }
 }

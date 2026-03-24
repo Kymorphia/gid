@@ -4,6 +4,7 @@ module gtk.cell_renderer_text;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -52,6 +53,15 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   override CellRendererText self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer_text.CellRendererText]
+  Returns: New builder object
+  */
+  static CellRendererTextGidBuilder builder()
+  {
+    return new CellRendererTextGidBuilder;
   }
 
   /** */
@@ -777,5 +787,360 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("edited", closure, after);
+  }
+}
+
+class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
+{
+
+  /** */
+  T alignSet(bool propval)
+  {
+    return setProperty("align-set", propval);
+  }
+
+  /**
+      Set `alignment` property.
+      Params:
+        propval = Specifies how to align the lines of text with respect to each other.
+          
+          Note that this property describes how to align the lines of text in
+          case there are several of them. The "xalign" property of [gtk.cell_renderer.CellRenderer],
+          on the other hand, sets the horizontal alignment of the whole text.
+      Returns: Builder instance for fluent chaining
+  */
+  T alignment(pango.types.Alignment propval)
+  {
+    return setProperty("alignment", propval);
+  }
+
+  /** */
+  T attributes(pango.attr_list.AttrList propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /** */
+  T background(string propval)
+  {
+    return setProperty("background", propval);
+  }
+
+  /**
+      Set `backgroundRgba` property.
+      Params:
+        propval = Background color as a [gdk.rgba.RGBA]
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("background-rgba", propval);
+  }
+
+  /** */
+  T backgroundSet(bool propval)
+  {
+    return setProperty("background-set", propval);
+  }
+
+  /** */
+  T editable(bool propval)
+  {
+    return setProperty("editable", propval);
+  }
+
+  /** */
+  T editableSet(bool propval)
+  {
+    return setProperty("editable-set", propval);
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = Specifies the preferred place to ellipsize the string, if the cell renderer
+          does not have enough room to display the entire string. Setting it to
+          [pango.types.EllipsizeMode.None] turns off ellipsizing. See the wrap-width property
+          for another way of making the text fit into a given width.
+      Returns: Builder instance for fluent chaining
+  */
+  T ellipsize(pango.types.EllipsizeMode propval)
+  {
+    return setProperty("ellipsize", propval);
+  }
+
+  /** */
+  T ellipsizeSet(bool propval)
+  {
+    return setProperty("ellipsize-set", propval);
+  }
+
+  /** */
+  T family(string propval)
+  {
+    return setProperty("family", propval);
+  }
+
+  /** */
+  T familySet(bool propval)
+  {
+    return setProperty("family-set", propval);
+  }
+
+  /** */
+  T font(string propval)
+  {
+    return setProperty("font", propval);
+  }
+
+  /** */
+  T fontDesc(pango.font_description.FontDescription propval)
+  {
+    return setProperty("font-desc", propval);
+  }
+
+  /** */
+  T foreground(string propval)
+  {
+    return setProperty("foreground", propval);
+  }
+
+  /**
+      Set `foregroundRgba` property.
+      Params:
+        propval = Foreground color as a [gdk.rgba.RGBA]
+      Returns: Builder instance for fluent chaining
+  */
+  T foregroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("foreground-rgba", propval);
+  }
+
+  /** */
+  T foregroundSet(bool propval)
+  {
+    return setProperty("foreground-set", propval);
+  }
+
+  /** */
+  T language(string propval)
+  {
+    return setProperty("language", propval);
+  }
+
+  /** */
+  T languageSet(bool propval)
+  {
+    return setProperty("language-set", propval);
+  }
+
+  /** */
+  T markup(string propval)
+  {
+    return setProperty("markup", propval);
+  }
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the cell, in characters. If this property
+          is set to -1, the width will be calculated automatically.
+          
+          For cell renderers that ellipsize or wrap text; this property
+          controls the maximum reported width of the cell. The
+          cell should not receive any greater allocation unless it is
+          set to expand in its [gtk.cell_layout.CellLayout] and all of the cell's siblings
+          have received their natural width.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxWidthChars(int propval)
+  {
+    return setProperty("max-width-chars", propval);
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.cell_renderer.CellRenderer] if
+          `GtkCellRendererText:editable` is true and the cell is empty.
+      Returns: Builder instance for fluent chaining
+  */
+  T placeholderText(string propval)
+  {
+    return setProperty("placeholder-text", propval);
+  }
+
+  /** */
+  T rise(int propval)
+  {
+    return setProperty("rise", propval);
+  }
+
+  /** */
+  T riseSet(bool propval)
+  {
+    return setProperty("rise-set", propval);
+  }
+
+  /** */
+  T scale(double propval)
+  {
+    return setProperty("scale", propval);
+  }
+
+  /** */
+  T scaleSet(bool propval)
+  {
+    return setProperty("scale-set", propval);
+  }
+
+  /** */
+  T singleParagraphMode(bool propval)
+  {
+    return setProperty("single-paragraph-mode", propval);
+  }
+
+  /** */
+  T size(int propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /** */
+  T sizePoints(double propval)
+  {
+    return setProperty("size-points", propval);
+  }
+
+  /** */
+  T sizeSet(bool propval)
+  {
+    return setProperty("size-set", propval);
+  }
+
+  /** */
+  T stretch(pango.types.Stretch propval)
+  {
+    return setProperty("stretch", propval);
+  }
+
+  /** */
+  T stretchSet(bool propval)
+  {
+    return setProperty("stretch-set", propval);
+  }
+
+  /** */
+  T strikethrough(bool propval)
+  {
+    return setProperty("strikethrough", propval);
+  }
+
+  /** */
+  T strikethroughSet(bool propval)
+  {
+    return setProperty("strikethrough-set", propval);
+  }
+
+  /** */
+  T style(pango.types.Style propval)
+  {
+    return setProperty("style", propval);
+  }
+
+  /** */
+  T styleSet(bool propval)
+  {
+    return setProperty("style-set", propval);
+  }
+
+  /** */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+
+  /** */
+  T underline(pango.types.Underline propval)
+  {
+    return setProperty("underline", propval);
+  }
+
+  /** */
+  T underlineSet(bool propval)
+  {
+    return setProperty("underline-set", propval);
+  }
+
+  /** */
+  T variant(pango.types.Variant propval)
+  {
+    return setProperty("variant", propval);
+  }
+
+  /** */
+  T variantSet(bool propval)
+  {
+    return setProperty("variant-set", propval);
+  }
+
+  /** */
+  T weight(int propval)
+  {
+    return setProperty("weight", propval);
+  }
+
+  /** */
+  T weightSet(bool propval)
+  {
+    return setProperty("weight-set", propval);
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = The desired width of the cell, in characters. If this property is set to
+          -1, the width will be calculated automatically, otherwise the cell will
+          request either 3 characters or the property value, whichever is greater.
+      Returns: Builder instance for fluent chaining
+  */
+  T widthChars(int propval)
+  {
+    return setProperty("width-chars", propval);
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Specifies how to break the string into multiple lines, if the cell
+          renderer does not have enough room to display the entire string.
+          This property has no effect unless the wrap-width property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapMode(pango.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+
+  /**
+      Set `wrapWidth` property.
+      Params:
+        propval = Specifies the minimum width at which the text is wrapped. The wrap-mode property can
+          be used to influence at what character positions the line breaks can be placed.
+          Setting wrap-width to -1 turns wrapping off.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapWidth(int propval)
+  {
+    return setProperty("wrap-width", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_text.CellRendererText]
+final class CellRendererTextGidBuilder : CellRendererTextGidBuilderImpl!CellRendererTextGidBuilder
+{
+  CellRendererText build()
+  {
+    return new CellRendererText(cast(void*)createGObject(CellRendererText._getGType), No.Take);
   }
 }

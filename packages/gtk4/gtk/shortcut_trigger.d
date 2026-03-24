@@ -6,6 +6,7 @@ import gdk.event;
 import gdk.types;
 import gid.gid;
 import glib.string_;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -50,6 +51,15 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   override ShortcutTrigger self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.shortcut_trigger.ShortcutTrigger]
+  Returns: New builder object
+  */
+  static ShortcutTriggerGidBuilder builder()
+  {
+    return new ShortcutTriggerGidBuilder;
   }
 
   /**
@@ -239,5 +249,18 @@ class ShortcutTrigger : gobject.object.ObjectWrap
     _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, enableMnemonics);
     gdk.types.KeyMatch _retval = cast(gdk.types.KeyMatch)_cretval;
     return _retval;
+  }
+}
+
+class ShortcutTriggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.shortcut_trigger.ShortcutTrigger]
+final class ShortcutTriggerGidBuilder : ShortcutTriggerGidBuilderImpl!ShortcutTriggerGidBuilder
+{
+  ShortcutTrigger build()
+  {
+    return new ShortcutTrigger(cast(void*)createGObject(ShortcutTrigger._getGType), No.Take);
   }
 }

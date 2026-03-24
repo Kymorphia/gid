@@ -4,6 +4,7 @@ module gtk.aspect_frame;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -51,6 +52,15 @@ class AspectFrame : gtk.frame.Frame
   override AspectFrame self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.aspect_frame.AspectFrame]
+  Returns: New builder object
+  */
+  static AspectFrameGidBuilder builder()
+  {
+    return new AspectFrameGidBuilder;
   }
 
   /** */
@@ -142,5 +152,43 @@ class AspectFrame : gtk.frame.Frame
   void set(float xalign, float yalign, float ratio, bool obeyChild)
   {
     gtk_aspect_frame_set(cast(GtkAspectFrame*)this._cPtr, xalign, yalign, ratio, obeyChild);
+  }
+}
+
+class AspectFrameGidBuilderImpl(T) : gtk.frame.FrameGidBuilderImpl!T
+{
+
+
+  /** */
+  T obeyChild(bool propval)
+  {
+    return setProperty("obey-child", propval);
+  }
+
+  /** */
+  T ratio(float propval)
+  {
+    return setProperty("ratio", propval);
+  }
+
+  /** */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /** */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+}
+
+/// Fluent builder for [gtk.aspect_frame.AspectFrame]
+final class AspectFrameGidBuilder : AspectFrameGidBuilderImpl!AspectFrameGidBuilder
+{
+  AspectFrame build()
+  {
+    return new AspectFrame(cast(void*)createGObject(AspectFrame._getGType), No.Take);
   }
 }

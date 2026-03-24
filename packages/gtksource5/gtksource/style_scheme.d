@@ -2,6 +2,7 @@
 module gtksource.style_scheme;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -52,6 +53,15 @@ class StyleScheme : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.style_scheme.StyleScheme]
+  Returns: New builder object
+  */
+  static StyleSchemeGidBuilder builder()
+  {
+    return new StyleSchemeGidBuilder;
+  }
+
+  /**
       Get `description` property.
       Returns: Style scheme description, a translatable string to present to the user.
   */
@@ -67,6 +77,16 @@ class StyleScheme : gobject.object.ObjectWrap
   @property string filename()
   {
     return getFilename();
+  }
+
+  /**
+      Get `id` property.
+      Returns: Style scheme id, a unique string used to identify the style scheme
+        in `class@StyleSchemeManager`.
+  */
+  @property string id()
+  {
+    return getId();
   }
 
   /**
@@ -159,5 +179,30 @@ class StyleScheme : gobject.object.ObjectWrap
     _cretval = gtk_source_style_scheme_get_style(cast(GtkSourceStyleScheme*)this._cPtr, _styleId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class StyleSchemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `id` property.
+      Params:
+        propval = Style scheme id, a unique string used to identify the style scheme
+          in `class@StyleSchemeManager`.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.style_scheme.StyleScheme]
+final class StyleSchemeGidBuilder : StyleSchemeGidBuilderImpl!StyleSchemeGidBuilder
+{
+  StyleScheme build()
+  {
+    return new StyleScheme(cast(void*)createGObject(StyleScheme._getGType), No.Take);
   }
 }

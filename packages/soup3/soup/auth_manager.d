@@ -3,6 +3,7 @@ module soup.auth_manager;
 
 import gid.gid;
 import glib.uri;
+import gobject.gid_builder;
 import gobject.object;
 import soup.auth;
 import soup.c.functions;
@@ -58,6 +59,15 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
     return this;
   }
 
+  /**
+  Get builder for [soup.auth_manager.AuthManager]
+  Returns: New builder object
+  */
+  static AuthManagerGidBuilder builder()
+  {
+    return new AuthManagerGidBuilder;
+  }
+
   mixin SessionFeatureT!();
 
   /**
@@ -87,5 +97,20 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   void useAuth(glib.uri.Uri uri, soup.auth.Auth auth)
   {
     soup_auth_manager_use_auth(cast(SoupAuthManager*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, auth ? cast(SoupAuth*)auth._cPtr(No.Dup) : null);
+  }
+}
+
+class AuthManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+}
+
+/// Fluent builder for [soup.auth_manager.AuthManager]
+final class AuthManagerGidBuilder : AuthManagerGidBuilderImpl!AuthManagerGidBuilder
+{
+  AuthManager build()
+  {
+    return new AuthManager(cast(void*)createGObject(AuthManager._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.font_selection;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -46,6 +47,15 @@ class FontSelection : gtk.box.Box
     return this;
   }
 
+  /**
+  Get builder for [gtk.font_selection.FontSelection]
+  Returns: New builder object
+  */
+  static FontSelectionGidBuilder builder()
+  {
+    return new FontSelectionGidBuilder;
+  }
+
   /** */
   @property string fontName()
   {
@@ -67,7 +77,7 @@ class FontSelection : gtk.box.Box
   /** */
   @property void previewText(string propval)
   {
-    return setPreviewText(propval);
+    setPreviewText(propval);
   }
 
   /**
@@ -278,5 +288,31 @@ class FontSelection : gtk.box.Box
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_font_selection_set_preview_text(cast(GtkFontSelection*)this._cPtr, _text);
+  }
+}
+
+class FontSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /** */
+  T fontName(string propval)
+  {
+    return setProperty("font-name", propval);
+  }
+
+  /** */
+  T previewText(string propval)
+  {
+    return setProperty("preview-text", propval);
+  }
+}
+
+/// Fluent builder for [gtk.font_selection.FontSelection]
+final class FontSelectionGidBuilder : FontSelectionGidBuilderImpl!FontSelectionGidBuilder
+{
+  FontSelection build()
+  {
+    return new FontSelection(cast(void*)createGObject(FontSelection._getGType), No.Take);
   }
 }

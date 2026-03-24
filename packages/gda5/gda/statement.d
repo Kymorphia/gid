@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -41,6 +42,15 @@ class Statement : gobject.object.ObjectWrap
   override Statement self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.statement.Statement]
+  Returns: New builder object
+  */
+  static StatementGidBuilder builder()
+  {
+    return new StatementGidBuilder;
   }
 
   /** */
@@ -338,6 +348,25 @@ class Statement : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("reset", closure, after);
+  }
+}
+
+class StatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T structure(void* propval)
+  {
+    return setProperty("structure", propval);
+  }
+}
+
+/// Fluent builder for [gda.statement.Statement]
+final class StatementGidBuilder : StatementGidBuilderImpl!StatementGidBuilder
+{
+  Statement build()
+  {
+    return new Statement(cast(void*)createGObject(Statement._getGType), Yes.Take);
   }
 }
 

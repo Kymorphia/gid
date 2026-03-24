@@ -8,6 +8,7 @@ import gdk.snapshot;
 import gdk.texture;
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 import graphene.matrix;
 import graphene.point3_d;
@@ -70,6 +71,15 @@ class Snapshot : gdk.snapshot.Snapshot
   override Snapshot self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.snapshot.Snapshot]
+  Returns: New builder object
+  */
+  static SnapshotGidBuilder builder()
+  {
+    return new SnapshotGidBuilder;
   }
 
   /**
@@ -781,5 +791,18 @@ class Snapshot : gdk.snapshot.Snapshot
   void translate3d(graphene.point3_d.Point3D point)
   {
     gtk_snapshot_translate_3d(cast(GtkSnapshot*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
+  }
+}
+
+class SnapshotGidBuilderImpl(T) : gdk.snapshot.SnapshotGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.snapshot.Snapshot]
+final class SnapshotGidBuilder : SnapshotGidBuilderImpl!SnapshotGidBuilder
+{
+  Snapshot build()
+  {
+    return new Snapshot(cast(void*)createGObject(Snapshot._getGType), Yes.Take);
   }
 }

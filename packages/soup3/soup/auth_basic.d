@@ -2,6 +2,7 @@
 module soup.auth_basic;
 
 import gid.gid;
+import gobject.gid_builder;
 import soup.auth;
 import soup.c.functions;
 import soup.c.types;
@@ -40,5 +41,27 @@ class AuthBasic : soup.auth.Auth
   override AuthBasic self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.auth_basic.AuthBasic]
+  Returns: New builder object
+  */
+  static AuthBasicGidBuilder builder()
+  {
+    return new AuthBasicGidBuilder;
+  }
+}
+
+class AuthBasicGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [soup.auth_basic.AuthBasic]
+final class AuthBasicGidBuilder : AuthBasicGidBuilderImpl!AuthBasicGidBuilder
+{
+  AuthBasic build()
+  {
+    return new AuthBasic(cast(void*)createGObject(AuthBasic._getGType), No.Take);
   }
 }

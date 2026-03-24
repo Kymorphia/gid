@@ -6,6 +6,7 @@ import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class Criteria : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrowflight.criteria.Criteria]
+  Returns: New builder object
+  */
+  static CriteriaGidBuilder builder()
+  {
+    return new CriteriaGidBuilder;
+  }
+
+  /**
       Get `expression` property.
       Returns: Opaque criteria expression, dependent on server implementation.
   */
@@ -62,5 +72,29 @@ class Criteria : gobject.object.ObjectWrap
     GAFlightCriteria* _cretval;
     _cretval = gaflight_criteria_new(expression ? cast(GBytes*)expression._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class CriteriaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = Opaque criteria expression, dependent on server implementation.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(glib.bytes.Bytes propval)
+  {
+    return setProperty("expression", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.criteria.Criteria]
+final class CriteriaGidBuilder : CriteriaGidBuilderImpl!CriteriaGidBuilder
+{
+  Criteria build()
+  {
+    return new Criteria(cast(void*)createGObject(Criteria._getGType), Yes.Take);
   }
 }

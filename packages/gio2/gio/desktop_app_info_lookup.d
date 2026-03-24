@@ -7,6 +7,7 @@ import gio.app_info;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -45,4 +46,8 @@ interface DesktopAppInfoLookup
            unused by GIO.
   */
   gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme);
+}
+
+interface DesktopAppInfoLookupGidBuilderImpl(T)
+{
 }

@@ -2,6 +2,7 @@
 module gtksource.hover_display;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -51,6 +52,15 @@ class HoverDisplay : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [gtksource.hover_display.HoverDisplay]
+  Returns: New builder object
+  */
+  static HoverDisplayGidBuilder builder()
+  {
+    return new HoverDisplayGidBuilder;
+  }
+
   /** */
   void append(gtk.widget.Widget child)
   {
@@ -73,5 +83,19 @@ class HoverDisplay : gtk.widget.Widget
   void remove(gtk.widget.Widget child)
   {
     gtk_source_hover_display_remove(cast(GtkSourceHoverDisplay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class HoverDisplayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtksource.hover_display.HoverDisplay]
+final class HoverDisplayGidBuilder : HoverDisplayGidBuilderImpl!HoverDisplayGidBuilder
+{
+  HoverDisplay build()
+  {
+    return new HoverDisplay(cast(void*)createGObject(HoverDisplay._getGType), No.Take);
   }
 }

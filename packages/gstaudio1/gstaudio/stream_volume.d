@@ -3,6 +3,7 @@ module gstaudio.stream_volume;
 
 public import gstaudio.stream_volume_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gstaudio.c.functions;
 import gstaudio.c.types;
 import gstaudio.types;
@@ -66,4 +67,14 @@ interface StreamVolume
 
   /** */
   void setVolume(gstaudio.types.StreamVolumeFormat format, double val);
+}
+
+interface StreamVolumeGidBuilderImpl(T)
+{
+
+  /** */
+  T mute(bool propval);
+
+  /** */
+  T volume(double propval);
 }

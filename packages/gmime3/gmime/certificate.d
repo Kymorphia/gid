@@ -5,6 +5,7 @@ import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -36,6 +37,15 @@ class Certificate : gobject.object.ObjectWrap
   override Certificate self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.certificate.Certificate]
+  Returns: New builder object
+  */
+  static CertificateGidBuilder builder()
+  {
+    return new CertificateGidBuilder;
   }
 
   /**
@@ -400,5 +410,18 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _userId = userId.toCString(No.Alloc);
     g_mime_certificate_set_user_id(cast(GMimeCertificate*)this._cPtr, _userId);
+  }
+}
+
+class CertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.certificate.Certificate]
+final class CertificateGidBuilder : CertificateGidBuilderImpl!CertificateGidBuilder
+{
+  Certificate build()
+  {
+    return new Certificate(cast(void*)createGObject(Certificate._getGType), Yes.Take);
   }
 }

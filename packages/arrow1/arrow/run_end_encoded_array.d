@@ -8,6 +8,7 @@ import arrow.data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,27 @@ class RunEndEncodedArray : arrow.array.Array
   override RunEndEncodedArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.run_end_encoded_array.RunEndEncodedArray]
+  Returns: New builder object
+  */
+  static RunEndEncodedArrayGidBuilder builder()
+  {
+    return new RunEndEncodedArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.array.Array runEnds()
+  {
+    return getRunEnds();
+  }
+
+  /** */
+  @property arrow.array.Array values()
+  {
+    return getValues();
   }
 
   /** */
@@ -115,5 +137,30 @@ class RunEndEncodedArray : arrow.array.Array
     _cretval = garrow_run_end_encoded_array_get_values(cast(GArrowRunEndEncodedArray*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class RunEndEncodedArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+
+  /** */
+  T runEnds(arrow.array.Array propval)
+  {
+    return setProperty("run-ends", propval);
+  }
+
+  /** */
+  T values(arrow.array.Array propval)
+  {
+    return setProperty("values", propval);
+  }
+}
+
+/// Fluent builder for [arrow.run_end_encoded_array.RunEndEncodedArray]
+final class RunEndEncodedArrayGidBuilder : RunEndEncodedArrayGidBuilderImpl!RunEndEncodedArrayGidBuilder
+{
+  RunEndEncodedArray build()
+  {
+    return new RunEndEncodedArray(cast(void*)createGObject(RunEndEncodedArray._getGType), Yes.Take);
   }
 }

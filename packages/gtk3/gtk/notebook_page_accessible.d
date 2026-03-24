@@ -5,6 +5,7 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.notebook_accessible;
@@ -40,6 +41,15 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
     return this;
   }
 
+  /**
+  Get builder for [gtk.notebook_page_accessible.NotebookPageAccessible]
+  Returns: New builder object
+  */
+  static NotebookPageAccessibleGidBuilder builder()
+  {
+    return new NotebookPageAccessibleGidBuilder;
+  }
+
   mixin ComponentT!();
 
   /** */
@@ -54,5 +64,20 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
   void invalidate()
   {
     gtk_notebook_page_accessible_invalidate(cast(GtkNotebookPageAccessible*)this._cPtr);
+  }
+}
+
+class NotebookPageAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T
+{
+
+  mixin ComponentGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.notebook_page_accessible.NotebookPageAccessible]
+final class NotebookPageAccessibleGidBuilder : NotebookPageAccessibleGidBuilderImpl!NotebookPageAccessibleGidBuilder
+{
+  NotebookPageAccessible build()
+  {
+    return new NotebookPageAccessible(cast(void*)createGObject(NotebookPageAccessible._getGType), Yes.Take);
   }
 }

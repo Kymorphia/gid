@@ -5,6 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -41,5 +42,27 @@ class Util : gobject.object.ObjectWrap
   override Util self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.util.Util]
+  Returns: New builder object
+  */
+  static UtilGidBuilder builder()
+  {
+    return new UtilGidBuilder;
+  }
+}
+
+class UtilGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.util.Util]
+final class UtilGidBuilder : UtilGidBuilderImpl!UtilGidBuilder
+{
+  Util build()
+  {
+    return new Util(cast(void*)createGObject(Util._getGType), No.Take);
   }
 }

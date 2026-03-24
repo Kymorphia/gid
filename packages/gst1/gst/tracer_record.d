@@ -2,6 +2,7 @@
 module gst.tracer_record;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.object;
@@ -37,5 +38,27 @@ class TracerRecord : gst.object.ObjectWrap
   override TracerRecord self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.tracer_record.TracerRecord]
+  Returns: New builder object
+  */
+  static TracerRecordGidBuilder builder()
+  {
+    return new TracerRecordGidBuilder;
+  }
+}
+
+class TracerRecordGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.tracer_record.TracerRecord]
+final class TracerRecordGidBuilder : TracerRecordGidBuilderImpl!TracerRecordGidBuilder
+{
+  TracerRecord build()
+  {
+    return new TracerRecord(cast(void*)createGObject(TracerRecord._getGType), Yes.Take);
   }
 }

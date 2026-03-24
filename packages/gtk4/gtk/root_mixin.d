@@ -4,6 +4,7 @@ module gtk.root_mixin;
 public import gtk.root_iface_proxy;
 public import gdk.display;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -75,4 +76,8 @@ template RootT()
   {
     gtk_root_set_focus(cast(GtkRoot*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
+}
+
+template RootGidBuilderT()
+{
 }

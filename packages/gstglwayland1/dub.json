@@ -1,7 +1,7 @@
 {
   "name": "gstglwayland1",
   "description": "D binding for the GstGLWayland library - Wayland OpenGL library for the GStreamer multimedia framework",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gstreamer.freedesktop.org",

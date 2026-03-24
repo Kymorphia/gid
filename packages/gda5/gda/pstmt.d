@@ -6,6 +6,7 @@ import gda.c.types;
 import gda.statement;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class PStmt : gobject.object.ObjectWrap
   override PStmt self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.pstmt.PStmt]
+  Returns: New builder object
+  */
+  static PStmtGidBuilder builder()
+  {
+    return new PStmtGidBuilder;
   }
 
   /**
@@ -72,5 +82,18 @@ class PStmt : gobject.object.ObjectWrap
   void setGdaStatement(gda.statement.Statement stmt = null)
   {
     gda_pstmt_set_gda_statement(cast(GdaPStmt*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null);
+  }
+}
+
+class PStmtGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.pstmt.PStmt]
+final class PStmtGidBuilder : PStmtGidBuilderImpl!PStmtGidBuilder
+{
+  PStmt build()
+  {
+    return new PStmt(cast(void*)createGObject(PStmt._getGType), No.Take);
   }
 }

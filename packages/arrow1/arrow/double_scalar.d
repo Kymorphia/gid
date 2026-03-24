@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class DoubleScalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class DoubleScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.double_scalar.DoubleScalar]
+  Returns: New builder object
+  */
+  static DoubleScalarGidBuilder builder()
+  {
+    return new DoubleScalarGidBuilder;
+  }
+
   /** */
   this(double value)
   {
@@ -50,5 +60,18 @@ class DoubleScalar : arrow.scalar.Scalar
     double _retval;
     _retval = garrow_double_scalar_get_value(cast(GArrowDoubleScalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class DoubleScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.double_scalar.DoubleScalar]
+final class DoubleScalarGidBuilder : DoubleScalarGidBuilderImpl!DoubleScalarGidBuilder
+{
+  DoubleScalar build()
+  {
+    return new DoubleScalar(cast(void*)createGObject(DoubleScalar._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gst.ghost_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -52,6 +53,15 @@ class GhostPad : gst.proxy_pad.ProxyPad
   override GhostPad self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.ghost_pad.GhostPad]
+  Returns: New builder object
+  */
+  static GhostPadGidBuilder builder()
+  {
+    return new GhostPadGidBuilder;
   }
 
   /**
@@ -220,5 +230,18 @@ class GhostPad : gst.proxy_pad.ProxyPad
     bool _retval;
     _retval = cast(bool)gst_ghost_pad_set_target(cast(GstGhostPad*)this._cPtr, newtarget ? cast(GstPad*)newtarget._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class GhostPadGidBuilderImpl(T) : gst.proxy_pad.ProxyPadGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.ghost_pad.GhostPad]
+final class GhostPadGidBuilder : GhostPadGidBuilderImpl!GhostPadGidBuilder
+{
+  GhostPad build()
+  {
+    return new GhostPad(cast(void*)createGObject(GhostPad._getGType), No.Take);
   }
 }

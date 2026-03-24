@@ -7,6 +7,7 @@ import adw.types;
 import gdk.paintable;
 import gdk.texture;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -70,6 +71,15 @@ class Avatar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.avatar.Avatar]
+  Returns: New builder object
+  */
+  static AvatarGidBuilder builder()
+  {
+    return new AvatarGidBuilder;
+  }
+
+  /**
       Get `customImage` property.
       Returns: A custom image paintable.
         
@@ -89,7 +99,7 @@ class Avatar : gtk.widget.Widget
   */
   @property void customImage(gdk.paintable.Paintable propval)
   {
-    return setCustomImage(propval);
+    setCustomImage(propval);
   }
 
   /**
@@ -112,7 +122,7 @@ class Avatar : gtk.widget.Widget
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -135,7 +145,7 @@ class Avatar : gtk.widget.Widget
   */
   @property void showInitials(bool propval)
   {
-    return setShowInitials(propval);
+    setShowInitials(propval);
   }
 
   /**
@@ -154,7 +164,7 @@ class Avatar : gtk.widget.Widget
   */
   @property void size(int propval)
   {
-    return setSize(propval);
+    setSize(propval);
   }
 
   /**
@@ -179,7 +189,7 @@ class Avatar : gtk.widget.Widget
   */
   @property void text(string propval)
   {
-    return setText(propval);
+    setText(propval);
   }
 
   /**
@@ -341,5 +351,83 @@ class Avatar : gtk.widget.Widget
   {
     const(char)* _text = text.toCString(No.Alloc);
     adw_avatar_set_text(cast(AdwAvatar*)this._cPtr, _text);
+  }
+}
+
+class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `customImage` property.
+      Params:
+        propval = A custom image paintable.
+          
+          Custom image is displayed instead of initials or icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T customImage(gdk.paintable.Paintable propval)
+  {
+    return setProperty("custom-image", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of an icon to use as a fallback.
+          
+          If no name is set, `avatar-default-symbolic` will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `showInitials` property.
+      Params:
+        propval = Whether initials are used instead of an icon on the fallback avatar.
+          
+          See `property@Avatar:icon-name` for how to change the fallback icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T showInitials(bool propval)
+  {
+    return setProperty("show-initials", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = The size of the avatar.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(int propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = Sets the text used to generate the fallback initials and color.
+          
+          It's only used to generate the color if `property@Avatar:show-initials` is
+          `FALSE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [adw.avatar.Avatar]
+final class AvatarGidBuilder : AvatarGidBuilderImpl!AvatarGidBuilder
+{
+  Avatar build()
+  {
+    return new Avatar(cast(void*)createGObject(Avatar._getGType), No.Take);
   }
 }

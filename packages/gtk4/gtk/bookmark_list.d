@@ -4,6 +4,7 @@ module gtk.bookmark_list;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -49,6 +50,15 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
+  Get builder for [gtk.bookmark_list.BookmarkList]
+  Returns: New builder object
+  */
+  static BookmarkListGidBuilder builder()
+  {
+    return new BookmarkListGidBuilder;
+  }
+
+  /**
       Get `attributes` property.
       Returns: The attributes to query.
   */
@@ -64,7 +74,16 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void attributes(string propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
+  }
+
+  /**
+      Get `filename` property.
+      Returns: The bookmark file to load.
+  */
+  @property string filename()
+  {
+    return getFilename();
   }
 
   /**
@@ -83,7 +102,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void ioPriority(int propval)
   {
-    return setIoPriority(propval);
+    setIoPriority(propval);
   }
 
   /**
@@ -209,5 +228,53 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   void setIoPriority(int ioPriority)
   {
     gtk_bookmark_list_set_io_priority(cast(GtkBookmarkList*)this._cPtr, ioPriority);
+  }
+}
+
+class BookmarkListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = The attributes to query.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(string propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `filename` property.
+      Params:
+        propval = The bookmark file to load.
+      Returns: Builder instance for fluent chaining
+  */
+  T filename(string propval)
+  {
+    return setProperty("filename", propval);
+  }
+
+  /**
+      Set `ioPriority` property.
+      Params:
+        propval = Priority used when loading.
+      Returns: Builder instance for fluent chaining
+  */
+  T ioPriority(int propval)
+  {
+    return setProperty("io-priority", propval);
+  }
+}
+
+/// Fluent builder for [gtk.bookmark_list.BookmarkList]
+final class BookmarkListGidBuilder : BookmarkListGidBuilderImpl!BookmarkListGidBuilder
+{
+  BookmarkList build()
+  {
+    return new BookmarkList(cast(void*)createGObject(BookmarkList._getGType), Yes.Take);
   }
 }

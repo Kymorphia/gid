@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.icon;
 import gio.icon_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -46,6 +47,38 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   override ThemedIcon self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.themed_icon.ThemedIcon]
+  Returns: New builder object
+  */
+  static ThemedIconGidBuilder builder()
+  {
+    return new ThemedIconGidBuilder;
+  }
+
+  /**
+      Get `useDefaultFallbacks` property.
+      Returns: Whether to use the default fallbacks found by shortening the icon name
+        at '-' characters. If the "names" array has more than one element,
+        ignores any past the first.
+        
+        For example, if the icon name was "gnome-dev-cdrom-audio", the array
+        would become
+        ```c
+        {
+          "gnome-dev-cdrom-audio",
+          "gnome-dev-cdrom",
+          "gnome-dev",
+          "gnome",
+          NULL
+        };
+        ```
+  */
+  @property bool useDefaultFallbacks()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("use-default-fallbacks");
   }
 
   mixin IconT!();
@@ -169,5 +202,56 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   {
     const(char)* _iconname = iconname.toCString(No.Alloc);
     g_themed_icon_prepend_name(cast(GThemedIcon*)this._cPtr, _iconname);
+  }
+}
+
+class ThemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T
+{
+
+  mixin IconGidBuilderT!();
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The icon name.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `useDefaultFallbacks` property.
+      Params:
+        propval = Whether to use the default fallbacks found by shortening the icon name
+          at '-' characters. If the "names" array has more than one element,
+          ignores any past the first.
+          
+          For example, if the icon name was "gnome-dev-cdrom-audio", the array
+          would become
+          ```c
+          {
+            "gnome-dev-cdrom-audio",
+            "gnome-dev-cdrom",
+            "gnome-dev",
+            "gnome",
+            NULL
+          };
+          ```
+      Returns: Builder instance for fluent chaining
+  */
+  T useDefaultFallbacks(bool propval)
+  {
+    return setProperty("use-default-fallbacks", propval);
+  }
+}
+
+/// Fluent builder for [gio.themed_icon.ThemedIcon]
+final class ThemedIconGidBuilder : ThemedIconGidBuilderImpl!ThemedIconGidBuilder
+{
+  ThemedIcon build()
+  {
+    return new ThemedIcon(cast(void*)createGObject(ThemedIcon._getGType), Yes.Take);
   }
 }

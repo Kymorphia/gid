@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.numeric_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
@@ -34,5 +35,27 @@ class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
   override FloatingPointDataType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.floating_point_data_type.FloatingPointDataType]
+  Returns: New builder object
+  */
+  static FloatingPointDataTypeGidBuilder builder()
+  {
+    return new FloatingPointDataTypeGidBuilder;
+  }
+}
+
+class FloatingPointDataTypeGidBuilderImpl(T) : arrow.numeric_data_type.NumericDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.floating_point_data_type.FloatingPointDataType]
+final class FloatingPointDataTypeGidBuilder : FloatingPointDataTypeGidBuilderImpl!FloatingPointDataTypeGidBuilder
+{
+  FloatingPointDataType build()
+  {
+    return new FloatingPointDataType(cast(void*)createGObject(FloatingPointDataType._getGType), No.Take);
   }
 }

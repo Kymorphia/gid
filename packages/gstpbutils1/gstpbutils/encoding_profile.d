@@ -2,6 +2,7 @@
 module gstpbutils.encoding_profile;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.caps;
 import gst.structure;
@@ -43,6 +44,15 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gstpbutils.encoding_profile.EncodingProfile]
+  Returns: New builder object
+  */
+  static EncodingProfileGidBuilder builder()
+  {
+    return new EncodingProfileGidBuilder;
+  }
+
+  /**
       Get `elementProperties` property.
       Returns: A #GstStructure defining the properties to be set to the element
         the profile represents.
@@ -72,7 +82,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   @property void elementProperties(gst.structure.Structure propval)
   {
-    return setElementProperties(propval);
+    setElementProperties(propval);
   }
 
   /** */
@@ -434,5 +444,42 @@ class EncodingProfile : gobject.object.ObjectWrap
   void setSingleSegment(bool singleSegment)
   {
     gst_encoding_profile_set_single_segment(cast(GstEncodingProfile*)this._cPtr, singleSegment);
+  }
+}
+
+class EncodingProfileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `elementProperties` property.
+      Params:
+        propval = A #GstStructure defining the properties to be set to the element
+          the profile represents.
+          
+          For example for `av1enc`:
+          
+          ```
+          element-properties,row-mt=true, end-usage=vbr
+          ```
+      Returns: Builder instance for fluent chaining
+  */
+  T elementProperties(gst.structure.Structure propval)
+  {
+    return setProperty("element-properties", propval);
+  }
+
+  /** */
+  T restrictionCaps(gst.caps.Caps propval)
+  {
+    return setProperty("restriction-caps", propval);
+  }
+}
+
+/// Fluent builder for [gstpbutils.encoding_profile.EncodingProfile]
+final class EncodingProfileGidBuilder : EncodingProfileGidBuilderImpl!EncodingProfileGidBuilder
+{
+  EncodingProfile build()
+  {
+    return new EncodingProfile(cast(void*)createGObject(EncodingProfile._getGType), No.Take);
   }
 }

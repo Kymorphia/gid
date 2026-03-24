@@ -7,6 +7,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.tls_database;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -114,4 +115,8 @@ interface TlsBackend
       Returns: whether or not TLS is supported
   */
   bool supportsTls();
+}
+
+interface TlsBackendGidBuilderImpl(T)
+{
 }

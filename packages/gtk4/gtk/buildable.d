@@ -3,6 +3,7 @@ module gtk.buildable;
 
 public import gtk.buildable_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -40,4 +41,8 @@ interface Buildable
       Returns: the ID of the buildable object
   */
   string getBuildableId();
+}
+
+interface BuildableGidBuilderImpl(T)
+{
 }

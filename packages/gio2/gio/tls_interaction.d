@@ -10,6 +10,7 @@ import gio.tls_connection;
 import gio.tls_password;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -60,6 +61,15 @@ class TlsInteraction : gobject.object.ObjectWrap
   override TlsInteraction self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.tls_interaction.TlsInteraction]
+  Returns: New builder object
+  */
+  static TlsInteractionGidBuilder builder()
+  {
+    return new TlsInteractionGidBuilder;
   }
 
   /**
@@ -327,5 +337,18 @@ class TlsInteraction : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
+  }
+}
+
+class TlsInteractionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.tls_interaction.TlsInteraction]
+final class TlsInteractionGidBuilder : TlsInteractionGidBuilderImpl!TlsInteractionGidBuilder
+{
+  TlsInteraction build()
+  {
+    return new TlsInteraction(cast(void*)createGObject(TlsInteraction._getGType), No.Take);
   }
 }

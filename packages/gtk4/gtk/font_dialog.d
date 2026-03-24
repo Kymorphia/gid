@@ -6,6 +6,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -61,6 +62,15 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.font_dialog.FontDialog]
+  Returns: New builder object
+  */
+  static FontDialogGidBuilder builder()
+  {
+    return new FontDialogGidBuilder;
+  }
+
+  /**
       Get `filter` property.
       Returns: Sets a filter to restrict what fonts are shown
         in the font chooser dialog.
@@ -78,7 +88,7 @@ class FontDialog : gobject.object.ObjectWrap
   */
   @property void filter(gtk.filter.Filter propval)
   {
-    return setFilter(propval);
+    setFilter(propval);
   }
 
   /**
@@ -103,7 +113,7 @@ class FontDialog : gobject.object.ObjectWrap
   */
   @property void fontMap(pango.font_map.FontMap propval)
   {
-    return setFontMap(propval);
+    setFontMap(propval);
   }
 
   /**
@@ -122,7 +132,7 @@ class FontDialog : gobject.object.ObjectWrap
   */
   @property void language(pango.language.Language propval)
   {
-    return setLanguage(propval);
+    setLanguage(propval);
   }
 
   /**
@@ -141,7 +151,7 @@ class FontDialog : gobject.object.ObjectWrap
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -162,7 +172,7 @@ class FontDialog : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -516,5 +526,78 @@ class FontDialog : gobject.object.ObjectWrap
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_font_dialog_set_title(cast(GtkFontDialog*)this._cPtr, _title);
+  }
+}
+
+class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = Sets a filter to restrict what fonts are shown
+          in the font chooser dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T filter(gtk.filter.Filter propval)
+  {
+    return setProperty("filter", propval);
+  }
+
+  /**
+      Set `fontMap` property.
+      Params:
+        propval = Sets a custom font map to select fonts from.
+          
+          A custom font map can be used to present application-specific
+          fonts instead of or in addition to the normal system fonts.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontMap(pango.font_map.FontMap propval)
+  {
+    return setProperty("font-map", propval);
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language for which the font features are selected.
+      Returns: Builder instance for fluent chaining
+  */
+  T language(pango.language.Language propval)
+  {
+    return setProperty("language", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the font chooser dialog is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the font chooser
+          dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtk.font_dialog.FontDialog]
+final class FontDialogGidBuilder : FontDialogGidBuilderImpl!FontDialogGidBuilder
+{
+  FontDialog build()
+  {
+    return new FontDialog(cast(void*)createGObject(FontDialog._getGType), Yes.Take);
   }
 }

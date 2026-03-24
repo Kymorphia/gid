@@ -2,6 +2,7 @@
 module gtk.fixed_layout_child;
 
 import gid.gid;
+import gobject.gid_builder;
 import gsk.transform;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,6 +41,15 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
+  Get builder for [gtk.fixed_layout_child.FixedLayoutChild]
+  Returns: New builder object
+  */
+  static FixedLayoutChildGidBuilder builder()
+  {
+    return new FixedLayoutChildGidBuilder;
+  }
+
+  /**
       Get `transform` property.
       Returns: The transform of the child.
   */
@@ -55,7 +65,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   */
   @property void transform(gsk.transform.Transform propval)
   {
-    return setTransform(propval);
+    setTransform(propval);
   }
 
   /**
@@ -79,5 +89,29 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   void setTransform(gsk.transform.Transform transform)
   {
     gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)this._cPtr, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
+  }
+}
+
+class FixedLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderImpl!T
+{
+
+  /**
+      Set `transform` property.
+      Params:
+        propval = The transform of the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T transform(gsk.transform.Transform propval)
+  {
+    return setProperty("transform", propval);
+  }
+}
+
+/// Fluent builder for [gtk.fixed_layout_child.FixedLayoutChild]
+final class FixedLayoutChildGidBuilder : FixedLayoutChildGidBuilderImpl!FixedLayoutChildGidBuilder
+{
+  FixedLayoutChild build()
+  {
+    return new FixedLayoutChild(cast(void*)createGObject(FixedLayoutChild._getGType), No.Take);
   }
 }

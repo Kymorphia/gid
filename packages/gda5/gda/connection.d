@@ -23,6 +23,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -53,6 +54,15 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   override Connection self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.connection.Connection]
+  Returns: New builder object
+  */
+  static ConnectionGidBuilder builder()
+  {
+    return new ConnectionGidBuilder;
   }
 
   /** */
@@ -1711,6 +1721,123 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("transaction-status-changed", closure, after);
+  }
+}
+
+class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.lockable.LockableGidBuilderImpl!T
+{
+
+  mixin LockableGidBuilderT!();
+
+  /** */
+  T authString(string propval)
+  {
+    return setProperty("auth-string", propval);
+  }
+
+  /** */
+  T cncString(string propval)
+  {
+    return setProperty("cnc-string", propval);
+  }
+
+  /** */
+  T dsn(string propval)
+  {
+    return setProperty("dsn", propval);
+  }
+
+  /**
+      Set `eventsHistorySize` property.
+      Params:
+        propval = Defines the number of #GdaConnectionEvent objects kept in memory which can
+          be fetched using [gda.connection.Connection.getEvents].
+      Returns: Builder instance for fluent chaining
+  */
+  T eventsHistorySize(int propval)
+  {
+    return setProperty("events-history-size", propval);
+  }
+
+  /**
+      Set `executionSlowdown` property.
+      Params:
+        propval = Artificially slows down the execution of queries. This property can be used to
+          debug some problems. If non zero, this value is the number of microseconds waited before actually
+          executing each query.
+      Returns: Builder instance for fluent chaining
+  */
+  T executionSlowdown(uint propval)
+  {
+    return setProperty("execution-slowdown", propval);
+  }
+
+  /**
+      Set `executionTimer` property.
+      Params:
+        propval = Computes execution times for each statement executed.
+      Returns: Builder instance for fluent chaining
+  */
+  T executionTimer(bool propval)
+  {
+    return setProperty("execution-timer", propval);
+  }
+
+  /**
+      Set `isWrapper` property.
+      Params:
+        propval = This property, if set to true, specifies that the connection is not a real connection, but rather
+          a #GdaConnection object which "proxies" all the calls to another connection which executes in a sub
+          thread.
+          
+          Note: this property is used internally by Libgda and should not be directly used by any programs. Setting
+          this property has no effect, reading it is supported, though.
+      Returns: Builder instance for fluent chaining
+  */
+  T isWrapper(bool propval)
+  {
+    return setProperty("is-wrapper", propval);
+  }
+
+  /** */
+  T metaStore(gda.meta_store.MetaStore propval)
+  {
+    return setProperty("meta-store", propval);
+  }
+
+  /**
+      Set `monitorWrappedInMainloop` property.
+      Params:
+        propval = Useful only when there is a mainloop and when the connection acts as a thread wrapper around another connection,
+          it sets up a timeout to handle signals coming from the wrapped connection.
+          
+          If the connection is not a thread wrapper, then this property has no effect.
+      Returns: Builder instance for fluent chaining
+  */
+  T monitorWrappedInMainloop(bool propval)
+  {
+    return setProperty("monitor-wrapped-in-mainloop", propval);
+  }
+
+  /** */
+  T provider(gda.server_provider.ServerProvider propval)
+  {
+    return setProperty("provider", propval);
+  }
+
+  /** */
+  T threadOwner(void* propval)
+  {
+    return setProperty("thread-owner", propval);
+  }
+}
+
+/// Fluent builder for [gda.connection.Connection]
+final class ConnectionGidBuilder : ConnectionGidBuilderImpl!ConnectionGidBuilder
+{
+  Connection build()
+  {
+    return new Connection(cast(void*)createGObject(Connection._getGType), No.Take);
   }
 }
 

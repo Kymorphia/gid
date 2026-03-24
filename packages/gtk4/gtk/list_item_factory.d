@@ -2,6 +2,7 @@
 module gtk.list_item_factory;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -83,5 +84,27 @@ class ListItemFactory : gobject.object.ObjectWrap
   override ListItemFactory self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.list_item_factory.ListItemFactory]
+  Returns: New builder object
+  */
+  static ListItemFactoryGidBuilder builder()
+  {
+    return new ListItemFactoryGidBuilder;
+  }
+}
+
+class ListItemFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.list_item_factory.ListItemFactory]
+final class ListItemFactoryGidBuilder : ListItemFactoryGidBuilderImpl!ListItemFactoryGidBuilder
+{
+  ListItemFactory build()
+  {
+    return new ListItemFactory(cast(void*)createGObject(ListItemFactory._getGType), No.Take);
   }
 }

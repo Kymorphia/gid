@@ -6,6 +6,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     An `class@AnimationTarget` that calls a given callback during the
@@ -40,6 +41,15 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
   }
 
   /**
+  Get builder for [adw.callback_animation_target.CallbackAnimationTarget]
+  Returns: New builder object
+  */
+  static CallbackAnimationTargetGidBuilder builder()
+  {
+    return new CallbackAnimationTargetGidBuilder;
+  }
+
+  /**
       Creates a new [adw.animation_target.AnimationTarget] that calls the given callback during
       the animation.
   
@@ -61,5 +71,18 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     _cretval = adw_callback_animation_target_new(_callbackCB, _callback, _callbackDestroyCB);
     this(_cretval, Yes.Take);
+  }
+}
+
+class CallbackAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationTargetGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [adw.callback_animation_target.CallbackAnimationTarget]
+final class CallbackAnimationTargetGidBuilder : CallbackAnimationTargetGidBuilderImpl!CallbackAnimationTargetGidBuilder
+{
+  CallbackAnimationTarget build()
+  {
+    return new CallbackAnimationTarget(cast(void*)createGObject(CallbackAnimationTarget._getGType), Yes.Take);
   }
 }

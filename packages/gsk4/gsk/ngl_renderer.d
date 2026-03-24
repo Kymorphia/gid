@@ -2,6 +2,7 @@
 module gsk.ngl_renderer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -36,11 +37,33 @@ class NglRenderer : gsk.renderer.Renderer
     return this;
   }
 
+  /**
+  Get builder for [gsk.ngl_renderer.NglRenderer]
+  Returns: New builder object
+  */
+  static NglRendererGidBuilder builder()
+  {
+    return new NglRendererGidBuilder;
+  }
+
   /** */
   this()
   {
     GskRenderer* _cretval;
     _cretval = gsk_ngl_renderer_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class NglRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gsk.ngl_renderer.NglRenderer]
+final class NglRendererGidBuilder : NglRendererGidBuilderImpl!NglRendererGidBuilder
+{
+  NglRenderer build()
+  {
+    return new NglRenderer(cast(void*)createGObject(NglRenderer._getGType), Yes.Take);
   }
 }

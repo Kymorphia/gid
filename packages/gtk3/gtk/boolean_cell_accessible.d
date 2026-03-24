@@ -8,6 +8,7 @@ import atk.component_mixin;
 import atk.table_cell;
 import atk.table_cell_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.renderer_cell_accessible;
@@ -40,5 +41,28 @@ class BooleanCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessibl
   override BooleanCellAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.boolean_cell_accessible.BooleanCellAccessible]
+  Returns: New builder object
+  */
+  static BooleanCellAccessibleGidBuilder builder()
+  {
+    return new BooleanCellAccessibleGidBuilder;
+  }
+}
+
+class BooleanCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.RendererCellAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.boolean_cell_accessible.BooleanCellAccessible]
+final class BooleanCellAccessibleGidBuilder : BooleanCellAccessibleGidBuilderImpl!BooleanCellAccessibleGidBuilder
+{
+  BooleanCellAccessible build()
+  {
+    return new BooleanCellAccessible(cast(void*)createGObject(BooleanCellAccessible._getGType), No.Take);
   }
 }

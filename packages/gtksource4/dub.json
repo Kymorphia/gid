@@ -1,7 +1,7 @@
 {
   "name": "gtksource4",
   "description": "D binding for the GtkSource4 library - Sourcecode viewer widget for Gtk3",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/gtksourceview",

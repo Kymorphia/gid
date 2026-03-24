@@ -9,6 +9,7 @@ import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -77,6 +78,15 @@ class StatusIcon : gobject.object.ObjectWrap
   override StatusIcon self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.status_icon.StatusIcon]
+  Returns: New builder object
+  */
+  static StatusIconGidBuilder builder()
+  {
+    return new StatusIconGidBuilder;
   }
 
   /**
@@ -155,7 +165,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   @property void hasTooltip(bool propval)
   {
-    return setHasTooltip(propval);
+    setHasTooltip(propval);
   }
 
   /** */
@@ -201,7 +211,7 @@ class StatusIcon : gobject.object.ObjectWrap
   /** */
   @property void screen(gdk.screen.Screen propval)
   {
-    return setScreen(propval);
+    setScreen(propval);
   }
 
   /** */
@@ -248,7 +258,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -287,7 +297,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   @property void tooltipMarkup(string propval)
   {
-    return setTooltipMarkup(propval);
+    setTooltipMarkup(propval);
   }
 
   /**
@@ -330,7 +340,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   @property void tooltipText(string propval)
   {
-    return setTooltipText(propval);
+    setTooltipText(propval);
   }
 
   /** */
@@ -342,7 +352,7 @@ class StatusIcon : gobject.object.ObjectWrap
   /** */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   /**
@@ -1394,5 +1404,146 @@ class StatusIcon : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("size-changed", closure, after);
+  }
+}
+
+class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T file(string propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The #GIcon displayed in the #GtkStatusIcon. For themed icons,
+          the image will be updated automatically if the theme changes.
+      Returns: Builder instance for fluent chaining
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /**
+      Set `hasTooltip` property.
+      Params:
+        propval = Enables or disables the emission of #GtkStatusIcon::query-tooltip on
+          @status_icon.  A value of true indicates that @status_icon can have a
+          tooltip, in this case the status icon will be queried using
+          #GtkStatusIcon::query-tooltip to determine whether it will provide a
+          tooltip or not.
+          
+          Note that setting this property to true for the first time will change
+          the event masks of the windows of this status icon to include leave-notify
+          and motion-notify events. This will not be undone when the property is set
+          to false again.
+          
+          Whether this property is respected is platform dependent.
+          For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasTooltip(bool propval)
+  {
+    return setProperty("has-tooltip", propval);
+  }
+
+  /** */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /** */
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("pixbuf", propval);
+  }
+
+  /** */
+  T screen(gdk.screen.Screen propval)
+  {
+    return setProperty("screen", propval);
+  }
+
+  /** */
+  T stock(string propval)
+  {
+    return setProperty("stock", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of this tray icon. This should be a short, human-readable,
+          localized string describing the tray icon. It may be used by tools
+          like screen readers to render the tray icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `tooltipMarkup` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string, which is marked up
+          with the [Pango text markup language][PangoMarkupFormat].
+          Also see [gtk.tooltip.Tooltip.setMarkup].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null.
+          #GtkStatusIcon:has-tooltip will automatically be set to true and
+          the default handler for the #GtkStatusIcon::query-tooltip signal
+          will take care of displaying the tooltip.
+          
+          On some platforms, embedded markup will be ignored.
+      Returns: Builder instance for fluent chaining
+  */
+  T tooltipMarkup(string propval)
+  {
+    return setProperty("tooltip-markup", propval);
+  }
+
+  /**
+      Set `tooltipText` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string.
+          
+          Also see [gtk.tooltip.Tooltip.setText].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null.
+          #GtkStatusIcon:has-tooltip will automatically be set to true and
+          the default handler for the #GtkStatusIcon::query-tooltip signal
+          will take care of displaying the tooltip.
+          
+          Note that some platforms have limitations on the length of tooltips
+          that they allow on status icons, e.g. Windows only shows the first
+          64 characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T tooltipText(string propval)
+  {
+    return setProperty("tooltip-text", propval);
+  }
+
+  /** */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+}
+
+/// Fluent builder for [gtk.status_icon.StatusIcon]
+final class StatusIconGidBuilder : StatusIconGidBuilderImpl!StatusIconGidBuilder
+{
+  StatusIcon build()
+  {
+    return new StatusIcon(cast(void*)createGObject(StatusIcon._getGType), Yes.Take);
   }
 }

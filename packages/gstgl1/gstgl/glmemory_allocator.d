@@ -2,6 +2,7 @@
 module gstgl.glmemory_allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstgl.c.functions;
 import gstgl.c.types;
@@ -40,6 +41,15 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
     return this;
   }
 
+  /**
+  Get builder for [gstgl.glmemory_allocator.GLMemoryAllocator]
+  Returns: New builder object
+  */
+  static GLMemoryAllocatorGidBuilder builder()
+  {
+    return new GLMemoryAllocatorGidBuilder;
+  }
+
   /** */
   static gstgl.glmemory_allocator.GLMemoryAllocator getDefault(gstgl.glcontext.GLContext context)
   {
@@ -47,5 +57,18 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
     _cretval = gst_gl_memory_allocator_get_default(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glmemory_allocator.GLMemoryAllocator)(cast(GstGLMemoryAllocator*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class GLMemoryAllocatorGidBuilderImpl(T) : gstgl.glbase_memory_allocator.GLBaseMemoryAllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glmemory_allocator.GLMemoryAllocator]
+final class GLMemoryAllocatorGidBuilder : GLMemoryAllocatorGidBuilderImpl!GLMemoryAllocatorGidBuilder
+{
+  GLMemoryAllocator build()
+  {
+    return new GLMemoryAllocator(cast(void*)createGObject(GLMemoryAllocator._getGType), No.Take);
   }
 }

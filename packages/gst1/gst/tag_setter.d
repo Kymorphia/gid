@@ -3,6 +3,7 @@ module gst.tag_setter;
 
 public import gst.tag_setter_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.value;
 import gst.c.functions;
 import gst.c.types;
@@ -112,4 +113,8 @@ interface TagSetter
         mode = The mode with which tags are added
   */
   void setTagMergeMode(gst.types.TagMergeMode mode);
+}
+
+interface TagSetterGidBuilderImpl(T)
+{
 }

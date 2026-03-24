@@ -4,6 +4,7 @@ module gtk.combo_box_text;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -97,6 +98,15 @@ class ComboBoxText : gtk.combo_box.ComboBox
   override ComboBoxText self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.combo_box_text.ComboBoxText]
+  Returns: New builder object
+  */
+  static ComboBoxTextGidBuilder builder()
+  {
+    return new ComboBoxTextGidBuilder;
   }
 
   /**
@@ -262,5 +272,19 @@ class ComboBoxText : gtk.combo_box.ComboBox
   void removeAll()
   {
     gtk_combo_box_text_remove_all(cast(GtkComboBoxText*)this._cPtr);
+  }
+}
+
+class ComboBoxTextGidBuilderImpl(T) : gtk.combo_box.ComboBoxGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.combo_box_text.ComboBoxText]
+final class ComboBoxTextGidBuilder : ComboBoxTextGidBuilderImpl!ComboBoxTextGidBuilder
+{
+  ComboBoxText build()
+  {
+    return new ComboBoxText(cast(void*)createGObject(ComboBoxText._getGType), No.Take);
   }
 }

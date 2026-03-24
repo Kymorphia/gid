@@ -3,6 +3,7 @@ module gstbase.aggregator;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
@@ -111,6 +112,15 @@ class Aggregator : gst.element.Element
   override Aggregator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstbase.aggregator.Aggregator]
+  Returns: New builder object
+  */
+  static AggregatorGidBuilder builder()
+  {
+    return new AggregatorGidBuilder;
   }
 
   /**
@@ -502,5 +512,62 @@ class Aggregator : gst.element.Element
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("samples-selected", closure, after);
+  }
+}
+
+class AggregatorGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `emitSignals` property.
+      Params:
+        propval = Enables the emission of signals such as #GstAggregator::samples-selected
+      Returns: Builder instance for fluent chaining
+  */
+  T emitSignals(bool propval)
+  {
+    return setProperty("emit-signals", propval);
+  }
+
+  /** */
+  T latency(ulong propval)
+  {
+    return setProperty("latency", propval);
+  }
+
+  /**
+      Set `minUpstreamLatency` property.
+      Params:
+        propval = Force minimum upstream latency (in nanoseconds). When sources with a
+          higher latency are expected to be plugged in dynamically after the
+          aggregator has started playing, this allows overriding the minimum
+          latency reported by the initial source(s). This is only taken into
+          account when larger than the actually reported minimum latency.
+      Returns: Builder instance for fluent chaining
+  */
+  T minUpstreamLatency(ulong propval)
+  {
+    return setProperty("min-upstream-latency", propval);
+  }
+
+  /** */
+  T startTime(ulong propval)
+  {
+    return setProperty("start-time", propval);
+  }
+
+  /** */
+  T startTimeSelection(gstbase.types.AggregatorStartTimeSelection propval)
+  {
+    return setProperty("start-time-selection", propval);
+  }
+}
+
+/// Fluent builder for [gstbase.aggregator.Aggregator]
+final class AggregatorGidBuilder : AggregatorGidBuilderImpl!AggregatorGidBuilder
+{
+  Aggregator build()
+  {
+    return new Aggregator(cast(void*)createGObject(Aggregator._getGType), No.Take);
   }
 }

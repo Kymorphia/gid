@@ -3,6 +3,7 @@ module gtk.dialog;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -175,6 +176,43 @@ class Dialog : gtk.window.Window
   override Dialog self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.dialog.Dialog]
+  Returns: New builder object
+  */
+  static DialogGidBuilder builder()
+  {
+    return new DialogGidBuilder;
+  }
+
+  /**
+      Get `useHeaderBar` property.
+      Returns: true if the dialog uses a headerbar for action buttons
+        instead of the action-area.
+        
+        For technical reasons, this property is declared as an integer
+        property, but you should only set it to true or false.
+        
+        ## Creating a dialog with headerbar
+        
+        Builtin [gtk.dialog.Dialog] subclasses such as [gtk.color_chooser_dialog.ColorChooserDialog]
+        set this property according to platform conventions (using the
+        `property@Gtk.Settings:gtk-dialogs-use-header` setting).
+        
+        Here is how you can achieve the same:
+        
+        ```c
+        g_object_get (settings, "gtk-dialogs-use-header", &header, NULL);
+        dialog = g_object_new (GTK_TYPE_DIALOG, header, TRUE, NULL);
+        ```
+  
+      Deprecated: Use [gtk.window.Window] instead
+  */
+  @property int useHeaderBar()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("use-header-bar");
   }
 
   /**
@@ -446,5 +484,49 @@ class Dialog : gtk.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
+  }
+}
+
+class DialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `useHeaderBar` property.
+      Params:
+        propval = true if the dialog uses a headerbar for action buttons
+          instead of the action-area.
+          
+          For technical reasons, this property is declared as an integer
+          property, but you should only set it to true or false.
+          
+          ## Creating a dialog with headerbar
+          
+          Builtin [gtk.dialog.Dialog] subclasses such as [gtk.color_chooser_dialog.ColorChooserDialog]
+          set this property according to platform conventions (using the
+          `property@Gtk.Settings:gtk-dialogs-use-header` setting).
+          
+          Here is how you can achieve the same:
+          
+          ```c
+          g_object_get (settings, "gtk-dialogs-use-header", &header, NULL);
+          dialog = g_object_new (GTK_TYPE_DIALOG, header, TRUE, NULL);
+          ```
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.window.Window] instead
+  */
+  T useHeaderBar(int propval)
+  {
+    return setProperty("use-header-bar", propval);
+  }
+}
+
+/// Fluent builder for [gtk.dialog.Dialog]
+final class DialogGidBuilder : DialogGidBuilderImpl!DialogGidBuilder
+{
+  Dialog build()
+  {
+    return new Dialog(cast(void*)createGObject(Dialog._getGType), No.Take);
   }
 }

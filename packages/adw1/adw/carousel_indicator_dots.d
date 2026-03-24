@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.carousel;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -66,6 +67,15 @@ class CarouselIndicatorDots : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [adw.carousel_indicator_dots.CarouselIndicatorDots]
+  Returns: New builder object
+  */
+  static CarouselIndicatorDotsGidBuilder builder()
+  {
+    return new CarouselIndicatorDotsGidBuilder;
+  }
+
+  /**
       Get `carousel` property.
       Returns: The displayed carousel.
   */
@@ -81,7 +91,7 @@ class CarouselIndicatorDots : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void carousel(adw.carousel.Carousel propval)
   {
-    return setCarousel(propval);
+    setCarousel(propval);
   }
 
   mixin OrientableT!();
@@ -118,5 +128,31 @@ class CarouselIndicatorDots : gtk.widget.Widget, gtk.orientable.Orientable
   void setCarousel(adw.carousel.Carousel carousel = null)
   {
     adw_carousel_indicator_dots_set_carousel(cast(AdwCarouselIndicatorDots*)this._cPtr, carousel ? cast(AdwCarousel*)carousel._cPtr(No.Dup) : null);
+  }
+}
+
+class CarouselIndicatorDotsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `carousel` property.
+      Params:
+        propval = The displayed carousel.
+      Returns: Builder instance for fluent chaining
+  */
+  T carousel(adw.carousel.Carousel propval)
+  {
+    return setProperty("carousel", propval);
+  }
+}
+
+/// Fluent builder for [adw.carousel_indicator_dots.CarouselIndicatorDots]
+final class CarouselIndicatorDotsGidBuilder : CarouselIndicatorDotsGidBuilderImpl!CarouselIndicatorDotsGidBuilder
+{
+  CarouselIndicatorDots build()
+  {
+    return new CarouselIndicatorDots(cast(void*)createGObject(CarouselIndicatorDots._getGType), No.Take);
   }
 }

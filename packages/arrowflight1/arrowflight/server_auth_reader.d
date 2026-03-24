@@ -7,6 +7,7 @@ import arrowflight.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class ServerAuthReader : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrowflight.server_auth_reader.ServerAuthReader]
+  Returns: New builder object
+  */
+  static ServerAuthReaderGidBuilder builder()
+  {
+    return new ServerAuthReaderGidBuilder;
+  }
+
+  /**
       Reads a message from the client.
       Returns: Read data as #GBytes on
           success, null on error.
@@ -53,5 +63,24 @@ class ServerAuthReader : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class ServerAuthReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T reader(void* propval)
+  {
+    return setProperty("reader", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.server_auth_reader.ServerAuthReader]
+final class ServerAuthReaderGidBuilder : ServerAuthReaderGidBuilderImpl!ServerAuthReaderGidBuilder
+{
+  ServerAuthReader build()
+  {
+    return new ServerAuthReader(cast(void*)createGObject(ServerAuthReader._getGType), No.Take);
   }
 }

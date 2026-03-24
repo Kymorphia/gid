@@ -2,11 +2,13 @@
 module gtksource.style;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_tag;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
+import pango.types;
 
 /**
     Represents a style.
@@ -43,6 +45,135 @@ class Style : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.style.Style]
+  Returns: New builder object
+  */
+  static StyleGidBuilder builder()
+  {
+    return new StyleGidBuilder;
+  }
+
+  /** */
+  @property string background()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("background");
+  }
+
+  /** */
+  @property bool backgroundSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
+  }
+
+  /** */
+  @property bool bold()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("bold");
+  }
+
+  /** */
+  @property bool boldSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("bold-set");
+  }
+
+  /** */
+  @property string foreground()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("foreground");
+  }
+
+  /** */
+  @property bool foregroundSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("foreground-set");
+  }
+
+  /** */
+  @property bool italic()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("italic");
+  }
+
+  /** */
+  @property bool italicSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("italic-set");
+  }
+
+  /** */
+  @property string lineBackground()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("line-background");
+  }
+
+  /** */
+  @property bool lineBackgroundSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("line-background-set");
+  }
+
+  /** */
+  @property pango.types.Underline pangoUnderline()
+  {
+    return gobject.object.ObjectWrap.getProperty!(pango.types.Underline)("pango-underline");
+  }
+
+  /** */
+  @property string scale()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("scale");
+  }
+
+  /** */
+  @property bool scaleSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("scale-set");
+  }
+
+  /** */
+  @property bool strikethrough()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough");
+  }
+
+  /** */
+  @property bool strikethroughSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough-set");
+  }
+
+  /** */
+  @property string underlineColor()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("underline-color");
+  }
+
+  /** */
+  @property bool underlineColorSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("underline-color-set");
+  }
+
+  /** */
+  @property bool underlineSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("underline-set");
+  }
+
+  /** */
+  @property pango.types.Weight weight()
+  {
+    return gobject.object.ObjectWrap.getProperty!(pango.types.Weight)("weight");
+  }
+
+  /** */
+  @property bool weightSet()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("weight-set");
+  }
+
+  /**
       This function modifies the [gtk.text_tag.TextTag] properties that are related to the
       #GtkSourceStyle properties. Other [gtk.text_tag.TextTag] properties are left untouched.
       
@@ -71,5 +202,138 @@ class Style : gobject.object.ObjectWrap
     _cretval = gtk_source_style_copy(cast(const(GtkSourceStyle)*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class StyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T background(string propval)
+  {
+    return setProperty("background", propval);
+  }
+
+  /** */
+  T backgroundSet(bool propval)
+  {
+    return setProperty("background-set", propval);
+  }
+
+  /** */
+  T bold(bool propval)
+  {
+    return setProperty("bold", propval);
+  }
+
+  /** */
+  T boldSet(bool propval)
+  {
+    return setProperty("bold-set", propval);
+  }
+
+  /** */
+  T foreground(string propval)
+  {
+    return setProperty("foreground", propval);
+  }
+
+  /** */
+  T foregroundSet(bool propval)
+  {
+    return setProperty("foreground-set", propval);
+  }
+
+  /** */
+  T italic(bool propval)
+  {
+    return setProperty("italic", propval);
+  }
+
+  /** */
+  T italicSet(bool propval)
+  {
+    return setProperty("italic-set", propval);
+  }
+
+  /** */
+  T lineBackground(string propval)
+  {
+    return setProperty("line-background", propval);
+  }
+
+  /** */
+  T lineBackgroundSet(bool propval)
+  {
+    return setProperty("line-background-set", propval);
+  }
+
+  /** */
+  T pangoUnderline(pango.types.Underline propval)
+  {
+    return setProperty("pango-underline", propval);
+  }
+
+  /** */
+  T scale(string propval)
+  {
+    return setProperty("scale", propval);
+  }
+
+  /** */
+  T scaleSet(bool propval)
+  {
+    return setProperty("scale-set", propval);
+  }
+
+  /** */
+  T strikethrough(bool propval)
+  {
+    return setProperty("strikethrough", propval);
+  }
+
+  /** */
+  T strikethroughSet(bool propval)
+  {
+    return setProperty("strikethrough-set", propval);
+  }
+
+  /** */
+  T underlineColor(string propval)
+  {
+    return setProperty("underline-color", propval);
+  }
+
+  /** */
+  T underlineColorSet(bool propval)
+  {
+    return setProperty("underline-color-set", propval);
+  }
+
+  /** */
+  T underlineSet(bool propval)
+  {
+    return setProperty("underline-set", propval);
+  }
+
+  /** */
+  T weight(pango.types.Weight propval)
+  {
+    return setProperty("weight", propval);
+  }
+
+  /** */
+  T weightSet(bool propval)
+  {
+    return setProperty("weight-set", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.style.Style]
+final class StyleGidBuilder : StyleGidBuilderImpl!StyleGidBuilder
+{
+  Style build()
+  {
+    return new Style(cast(void*)createGObject(Style._getGType), No.Take);
   }
 }

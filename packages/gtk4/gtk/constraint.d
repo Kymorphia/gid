@@ -2,6 +2,7 @@
 module gtk.constraint;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -51,6 +52,101 @@ class Constraint : gobject.object.ObjectWrap
   override Constraint self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.constraint.Constraint]
+  Returns: New builder object
+  */
+  static ConstraintGidBuilder builder()
+  {
+    return new ConstraintGidBuilder;
+  }
+
+  /**
+      Get `constant` property.
+      Returns: The constant value to be added to the [gtk.constraint.Constraint.source].
+  */
+  @property double constant()
+  {
+    return getConstant();
+  }
+
+  /**
+      Get `multiplier` property.
+      Returns: The multiplication factor to be applied to
+        the [gtk.constraint.Constraint.source].
+  */
+  @property double multiplier()
+  {
+    return getMultiplier();
+  }
+
+  /**
+      Get `relation` property.
+      Returns: The order relation between the terms of the constraint.
+  */
+  @property gtk.types.ConstraintRelation relation()
+  {
+    return getRelation();
+  }
+
+  /**
+      Get `source` property.
+      Returns: The source of the constraint.
+        
+        The constraint will set the [gtk.constraint.Constraint.target]
+        property of the target using the [gtk.constraint.Constraint.source]
+        property of the source.
+  */
+  @property gtk.constraint_target.ConstraintTarget source()
+  {
+    return getSource();
+  }
+
+  /**
+      Get `sourceAttribute` property.
+      Returns: The attribute of the [gtk.constraint.Constraint.source] read by the
+        constraint.
+  */
+  @property gtk.types.ConstraintAttribute sourceAttribute()
+  {
+    return getSourceAttribute();
+  }
+
+  /**
+      Get `strength` property.
+      Returns: The strength of the constraint.
+        
+        The strength can be expressed either using one of the symbolic values
+        of the [gtk.types.ConstraintStrength] enumeration, or any positive integer
+        value.
+  */
+  @property int strength()
+  {
+    return getStrength();
+  }
+
+  /**
+      Get `target` property.
+      Returns: The target of the constraint.
+        
+        The constraint will set the [gtk.constraint.Constraint.target]
+        property of the target using the [gtk.constraint.Constraint.source]
+        property of the source widget.
+  */
+  @property gtk.constraint_target.ConstraintTarget target()
+  {
+    return getTarget();
+  }
+
+  /**
+      Get `targetAttribute` property.
+      Returns: The attribute of the [gtk.constraint.Constraint.target] set by the constraint.
+  */
+  @property gtk.types.ConstraintAttribute targetAttribute()
+  {
+    return getTargetAttribute();
   }
 
   /**
@@ -231,5 +327,120 @@ class Constraint : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gtk_constraint_is_required(cast(GtkConstraint*)this._cPtr);
     return _retval;
+  }
+}
+
+class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `constant` property.
+      Params:
+        propval = The constant value to be added to the [gtk.constraint.Constraint.source].
+      Returns: Builder instance for fluent chaining
+  */
+  T constant(double propval)
+  {
+    return setProperty("constant", propval);
+  }
+
+  /**
+      Set `multiplier` property.
+      Params:
+        propval = The multiplication factor to be applied to
+          the [gtk.constraint.Constraint.source].
+      Returns: Builder instance for fluent chaining
+  */
+  T multiplier(double propval)
+  {
+    return setProperty("multiplier", propval);
+  }
+
+  /**
+      Set `relation` property.
+      Params:
+        propval = The order relation between the terms of the constraint.
+      Returns: Builder instance for fluent chaining
+  */
+  T relation(gtk.types.ConstraintRelation propval)
+  {
+    return setProperty("relation", propval);
+  }
+
+  /**
+      Set `source` property.
+      Params:
+        propval = The source of the constraint.
+          
+          The constraint will set the [gtk.constraint.Constraint.target]
+          property of the target using the [gtk.constraint.Constraint.source]
+          property of the source.
+      Returns: Builder instance for fluent chaining
+  */
+  T source(gtk.constraint_target.ConstraintTarget propval)
+  {
+    return setProperty("source", propval);
+  }
+
+  /**
+      Set `sourceAttribute` property.
+      Params:
+        propval = The attribute of the [gtk.constraint.Constraint.source] read by the
+          constraint.
+      Returns: Builder instance for fluent chaining
+  */
+  T sourceAttribute(gtk.types.ConstraintAttribute propval)
+  {
+    return setProperty("source-attribute", propval);
+  }
+
+  /**
+      Set `strength` property.
+      Params:
+        propval = The strength of the constraint.
+          
+          The strength can be expressed either using one of the symbolic values
+          of the [gtk.types.ConstraintStrength] enumeration, or any positive integer
+          value.
+      Returns: Builder instance for fluent chaining
+  */
+  T strength(int propval)
+  {
+    return setProperty("strength", propval);
+  }
+
+  /**
+      Set `target` property.
+      Params:
+        propval = The target of the constraint.
+          
+          The constraint will set the [gtk.constraint.Constraint.target]
+          property of the target using the [gtk.constraint.Constraint.source]
+          property of the source widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T target(gtk.constraint_target.ConstraintTarget propval)
+  {
+    return setProperty("target", propval);
+  }
+
+  /**
+      Set `targetAttribute` property.
+      Params:
+        propval = The attribute of the [gtk.constraint.Constraint.target] set by the constraint.
+      Returns: Builder instance for fluent chaining
+  */
+  T targetAttribute(gtk.types.ConstraintAttribute propval)
+  {
+    return setProperty("target-attribute", propval);
+  }
+}
+
+/// Fluent builder for [gtk.constraint.Constraint]
+final class ConstraintGidBuilder : ConstraintGidBuilderImpl!ConstraintGidBuilder
+{
+  Constraint build()
+  {
+    return new Constraint(cast(void*)createGObject(Constraint._getGType), Yes.Take);
   }
 }

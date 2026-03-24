@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -132,6 +133,15 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.header_bar.HeaderBar]
+  Returns: New builder object
+  */
+  static HeaderBarGidBuilder builder()
+  {
+    return new HeaderBarGidBuilder;
+  }
+
+  /**
       Get `centeringPolicy` property.
       Returns: The policy for aligning the center widget.
   */
@@ -147,7 +157,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void centeringPolicy(adw.types.CenteringPolicy propval)
   {
-    return setCenteringPolicy(propval);
+    setCenteringPolicy(propval);
   }
 
   /**
@@ -188,7 +198,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void decorationLayout(string propval)
   {
-    return setDecorationLayout(propval);
+    setDecorationLayout(propval);
   }
 
   /**
@@ -213,7 +223,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void showBackButton(bool propval)
   {
-    return setShowBackButton(propval);
+    setShowBackButton(propval);
   }
 
   /**
@@ -246,7 +256,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void showEndTitleButtons(bool propval)
   {
-    return setShowEndTitleButtons(propval);
+    setShowEndTitleButtons(propval);
   }
 
   /**
@@ -279,7 +289,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void showStartTitleButtons(bool propval)
   {
-    return setShowStartTitleButtons(propval);
+    setShowStartTitleButtons(propval);
   }
 
   /**
@@ -298,7 +308,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void showTitle(bool propval)
   {
-    return setShowTitle(propval);
+    setShowTitle(propval);
   }
 
   /**
@@ -347,7 +357,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void titleWidget(gtk.widget.Widget propval)
   {
-    return setTitleWidget(propval);
+    setTitleWidget(propval);
   }
 
   /**
@@ -594,5 +604,139 @@ class HeaderBar : gtk.widget.Widget
   void setTitleWidget(gtk.widget.Widget titleWidget = null)
   {
     adw_header_bar_set_title_widget(cast(AdwHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
+  }
+}
+
+class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `centeringPolicy` property.
+      Params:
+        propval = The policy for aligning the center widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T centeringPolicy(adw.types.CenteringPolicy propval)
+  {
+    return setProperty("centering-policy", propval);
+  }
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for buttons.
+          
+          If this property is not set, the
+          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          
+          The format of the string is button names, separated by commas. A colon
+          separates the buttons that should appear at the start from those at the
+          end. Recognized button names are minimize, maximize, close and icon (the
+          window icon).
+          
+          For example, “icon:minimize,maximize,close” specifies an icon at the start,
+          and minimize, maximize and close buttons at the end.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorationLayout(string propval)
+  {
+    return setProperty("decoration-layout", propval);
+  }
+
+  /**
+      Set `showBackButton` property.
+      Params:
+        propval = Whether the header bar can show the back button.
+          
+          The back button will never be shown unless the header bar is placed inside an
+          `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T showBackButton(bool propval)
+  {
+    return setProperty("show-back-button", propval);
+  }
+
+  /**
+      Set `showEndTitleButtons` property.
+      Params:
+        propval = Whether to show title buttons at the end of the header bar.
+          
+          See `property@HeaderBar:show-start-title-buttons` for the other side.
+          
+          Which buttons are actually shown and where is determined by the
+          `property@HeaderBar:decoration-layout` property, and by the state of the
+          window (e.g. a close button will not be shown if the window can't be
+          closed).
+      Returns: Builder instance for fluent chaining
+  */
+  T showEndTitleButtons(bool propval)
+  {
+    return setProperty("show-end-title-buttons", propval);
+  }
+
+  /**
+      Set `showStartTitleButtons` property.
+      Params:
+        propval = Whether to show title buttons at the start of the header bar.
+          
+          See `property@HeaderBar:show-end-title-buttons` for the other side.
+          
+          Which buttons are actually shown and where is determined by the
+          `property@HeaderBar:decoration-layout` property, and by the state of the
+          window (e.g. a close button will not be shown if the window can't be
+          closed).
+      Returns: Builder instance for fluent chaining
+  */
+  T showStartTitleButtons(bool propval)
+  {
+    return setProperty("show-start-title-buttons", propval);
+  }
+
+  /**
+      Set `showTitle` property.
+      Params:
+        propval = Whether the title widget should be shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T showTitle(bool propval)
+  {
+    return setProperty("show-title", propval);
+  }
+
+  /**
+      Set `titleWidget` property.
+      Params:
+        propval = The title widget to display.
+          
+          When set to `NULL`, the header bar will display the title of the window it
+          is contained in.
+          
+          To use a different title, use `class@WindowTitle`:
+          
+          ```xml
+          <object class="AdwHeaderBar">
+            <property name="title-widget">
+              <object class="AdwWindowTitle">
+                <property name="title" translatable="yes">Title</property>
+              </object>
+            </property>
+          </object>
+          ```
+      Returns: Builder instance for fluent chaining
+  */
+  T titleWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("title-widget", propval);
+  }
+}
+
+/// Fluent builder for [adw.header_bar.HeaderBar]
+final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
+{
+  HeaderBar build()
+  {
+    return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);
   }
 }

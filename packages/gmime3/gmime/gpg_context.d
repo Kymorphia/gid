@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.crypto_context;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A GnuPG crypto context.
@@ -39,6 +40,15 @@ class GpgContext : gmime.crypto_context.CryptoContext
   }
 
   /**
+  Get builder for [gmime.gpg_context.GpgContext]
+  Returns: New builder object
+  */
+  static GpgContextGidBuilder builder()
+  {
+    return new GpgContextGidBuilder;
+  }
+
+  /**
       Creates a new gpg crypto context object.
       Returns: a new gpg crypto context object.
   */
@@ -47,5 +57,18 @@ class GpgContext : gmime.crypto_context.CryptoContext
     GMimeCryptoContext* _cretval;
     _cretval = g_mime_gpg_context_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class GpgContextGidBuilderImpl(T) : gmime.crypto_context.CryptoContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.gpg_context.GpgContext]
+final class GpgContextGidBuilder : GpgContextGidBuilderImpl!GpgContextGidBuilder
+{
+  GpgContext build()
+  {
+    return new GpgContext(cast(void*)createGObject(GpgContext._getGType), Yes.Take);
   }
 }

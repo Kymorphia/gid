@@ -6,6 +6,7 @@ import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 interface Lockable
@@ -48,4 +49,8 @@ interface Lockable
       This function can be used even if [glib.thread.Thread.init_] has not yet been called, and, in that case, will do nothing.
   */
   void unlock();
+}
+
+interface LockableGidBuilderImpl(T)
+{
 }

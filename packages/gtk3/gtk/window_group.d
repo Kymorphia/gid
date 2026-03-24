@@ -3,6 +3,7 @@ module gtk.window_group;
 
 import gdk.device;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -53,6 +54,15 @@ class WindowGroup : gobject.object.ObjectWrap
   override WindowGroup self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.window_group.WindowGroup]
+  Returns: New builder object
+  */
+  static WindowGroupGidBuilder builder()
+  {
+    return new WindowGroupGidBuilder;
   }
 
   /**
@@ -128,5 +138,18 @@ class WindowGroup : gobject.object.ObjectWrap
   void removeWindow(gtk.window.Window window)
   {
     gtk_window_group_remove_window(cast(GtkWindowGroup*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
+  }
+}
+
+class WindowGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.window_group.WindowGroup]
+final class WindowGroupGidBuilder : WindowGroupGidBuilderImpl!WindowGroupGidBuilder
+{
+  WindowGroup build()
+  {
+    return new WindowGroup(cast(void*)createGObject(WindowGroup._getGType), Yes.Take);
   }
 }

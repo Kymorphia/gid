@@ -2,6 +2,7 @@
 module gtk.nothing_action;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,6 +41,15 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
+  Get builder for [gtk.nothing_action.NothingAction]
+  Returns: New builder object
+  */
+  static NothingActionGidBuilder builder()
+  {
+    return new NothingActionGidBuilder;
+  }
+
+  /**
       Gets the nothing action.
       
       This is an action that does nothing and where
@@ -52,5 +62,18 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
     _cretval = gtk_nothing_action_get();
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.nothing_action.NothingAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class NothingActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.nothing_action.NothingAction]
+final class NothingActionGidBuilder : NothingActionGidBuilderImpl!NothingActionGidBuilder
+{
+  NothingAction build()
+  {
+    return new NothingAction(cast(void*)createGObject(NothingAction._getGType), No.Take);
   }
 }

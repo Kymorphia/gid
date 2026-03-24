@@ -2,6 +2,7 @@
 module panel.inhibitor;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -36,9 +37,31 @@ class Inhibitor : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [panel.inhibitor.Inhibitor]
+  Returns: New builder object
+  */
+  static InhibitorGidBuilder builder()
+  {
+    return new InhibitorGidBuilder;
+  }
+
   /** */
   void uninhibit()
   {
     panel_inhibitor_uninhibit(cast(PanelInhibitor*)this._cPtr);
+  }
+}
+
+class InhibitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [panel.inhibitor.Inhibitor]
+final class InhibitorGidBuilder : InhibitorGidBuilderImpl!InhibitorGidBuilder
+{
+  Inhibitor build()
+  {
+    return new Inhibitor(cast(void*)createGObject(Inhibitor._getGType), No.Take);
   }
 }

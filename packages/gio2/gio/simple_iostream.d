@@ -8,6 +8,8 @@ import gio.input_stream;
 import gio.iostream;
 import gio.output_stream;
 import gio.types;
+import gobject.gid_builder;
+import gobject.object;
 
 /**
     [gio.simple_iostream.SimpleIOStream] creates a [gio.iostream.IOStream] from an arbitrary
@@ -50,6 +52,33 @@ class SimpleIOStream : gio.iostream.IOStream
   }
 
   /**
+  Get builder for [gio.simple_iostream.SimpleIOStream]
+  Returns: New builder object
+  */
+  static SimpleIOStreamGidBuilder builder()
+  {
+    return new SimpleIOStreamGidBuilder;
+  }
+
+  /**
+      Get `inputStream` property.
+      Returns: The [gio.input_stream.InputStream] to read from.
+  */
+  override @property gio.input_stream.InputStream inputStream()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.input_stream.InputStream)("input-stream");
+  }
+
+  /**
+      Get `outputStream` property.
+      Returns: The [gio.output_stream.OutputStream] to write to.
+  */
+  override @property gio.output_stream.OutputStream outputStream()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.output_stream.OutputStream)("output-stream");
+  }
+
+  /**
       Creates a new #GSimpleIOStream wrapping input_stream and output_stream.
       See also #GIOStream.
   
@@ -63,5 +92,40 @@ class SimpleIOStream : gio.iostream.IOStream
     GIOStream* _cretval;
     _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream._cPtr(No.Dup) : null, outputStream ? cast(GOutputStream*)outputStream._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class SimpleIOStreamGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
+{
+
+  /**
+      Set `inputStream` property.
+      Params:
+        propval = The [gio.input_stream.InputStream] to read from.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputStream(gio.input_stream.InputStream propval)
+  {
+    return setProperty("input-stream", propval);
+  }
+
+  /**
+      Set `outputStream` property.
+      Params:
+        propval = The [gio.output_stream.OutputStream] to write to.
+      Returns: Builder instance for fluent chaining
+  */
+  T outputStream(gio.output_stream.OutputStream propval)
+  {
+    return setProperty("output-stream", propval);
+  }
+}
+
+/// Fluent builder for [gio.simple_iostream.SimpleIOStream]
+final class SimpleIOStreamGidBuilder : SimpleIOStreamGidBuilderImpl!SimpleIOStreamGidBuilder
+{
+  SimpleIOStream build()
+  {
+    return new SimpleIOStream(cast(void*)createGObject(SimpleIOStream._getGType), Yes.Take);
   }
 }

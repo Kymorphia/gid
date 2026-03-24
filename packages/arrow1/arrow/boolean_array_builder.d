@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -35,6 +36,15 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
   override BooleanArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.boolean_array_builder.BooleanArrayBuilder]
+  Returns: New builder object
+  */
+  static BooleanArrayBuilderGidBuilder builder()
+  {
+    return new BooleanArrayBuilderGidBuilder;
   }
 
   /** */
@@ -98,5 +108,18 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class BooleanArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.boolean_array_builder.BooleanArrayBuilder]
+final class BooleanArrayBuilderGidBuilder : BooleanArrayBuilderGidBuilderImpl!BooleanArrayBuilderGidBuilder
+{
+  BooleanArrayBuilder build()
+  {
+    return new BooleanArrayBuilder(cast(void*)createGObject(BooleanArrayBuilder._getGType), Yes.Take);
   }
 }

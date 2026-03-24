@@ -9,6 +9,7 @@ import adw.toast;
 import adw.types;
 import adw.window;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -69,6 +70,15 @@ class PreferencesWindow : adw.window.Window
   }
 
   /**
+  Get builder for [adw.preferences_window.PreferencesWindow]
+  Returns: New builder object
+  */
+  static PreferencesWindowGidBuilder builder()
+  {
+    return new PreferencesWindowGidBuilder;
+  }
+
+  /**
       Get `canNavigateBack` property.
       Returns: Whether gestures and shortcuts for closing subpages are enabled.
         
@@ -120,7 +130,7 @@ class PreferencesWindow : adw.window.Window
   */
   @property void canNavigateBack(bool propval)
   {
-    return setCanNavigateBack(propval);
+    setCanNavigateBack(propval);
   }
 
   /**
@@ -139,7 +149,7 @@ class PreferencesWindow : adw.window.Window
   */
   @property void searchEnabled(bool propval)
   {
-    return setSearchEnabled(propval);
+    setSearchEnabled(propval);
   }
 
   /**
@@ -181,7 +191,7 @@ class PreferencesWindow : adw.window.Window
   */
   @property void visiblePageName(string propval)
   {
-    return setVisiblePageName(propval);
+    setVisiblePageName(propval);
   }
 
   /**
@@ -392,5 +402,83 @@ class PreferencesWindow : adw.window.Window
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_preferences_window_set_visible_page_name(cast(AdwPreferencesWindow*)this._cPtr, _name);
+  }
+}
+
+class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `canNavigateBack` property.
+      Params:
+        propval = Whether gestures and shortcuts for closing subpages are enabled.
+          
+          The supported gestures are:
+          
+          $(LIST
+            * One-finger swipe on touchscreens
+            * Horizontal scrolling on touchpads (usually two-finger swipe)
+            * Back mouse button
+          )
+            
+          The keyboard back key is also supported, as well as the
+          <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
+          
+          For right-to-left locales, gestures and shortcuts are reversed.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use `property@NavigationPage:can-pop` instead.
+        
+        Has no effect for subpages added with
+        [adw.preferences_window.PreferencesWindow.pushSubpage].
+  */
+  T canNavigateBack(bool propval)
+  {
+    return setProperty("can-navigate-back", propval);
+  }
+
+  /**
+      Set `searchEnabled` property.
+      Params:
+        propval = Whether search is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T searchEnabled(bool propval)
+  {
+    return setProperty("search-enabled", propval);
+  }
+
+  /**
+      Set `visiblePage` property.
+      Params:
+        propval = The currently visible page.
+      Returns: Builder instance for fluent chaining
+  */
+  T visiblePage(gtk.widget.Widget propval)
+  {
+    return setProperty("visible-page", propval);
+  }
+
+  /**
+      Set `visiblePageName` property.
+      Params:
+        propval = The name of the currently visible page.
+          
+          See `property@PreferencesWindow:visible-page`.
+      Returns: Builder instance for fluent chaining
+  */
+  T visiblePageName(string propval)
+  {
+    return setProperty("visible-page-name", propval);
+  }
+}
+
+/// Fluent builder for [adw.preferences_window.PreferencesWindow]
+final class PreferencesWindowGidBuilder : PreferencesWindowGidBuilderImpl!PreferencesWindowGidBuilder
+{
+  PreferencesWindow build()
+  {
+    return new PreferencesWindow(cast(void*)createGObject(PreferencesWindow._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import arrowflight.stream_chunk;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class RecordBatchReader : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrowflight.record_batch_reader.RecordBatchReader]
+  Returns: New builder object
+  */
+  static RecordBatchReaderGidBuilder builder()
+  {
+    return new RecordBatchReaderGidBuilder;
+  }
+
   /** */
   arrow.table.Table readAll()
   {
@@ -61,5 +71,30 @@ class RecordBatchReader : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.stream_chunk.StreamChunk)(cast(GAFlightStreamChunk*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class RecordBatchReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T isOwner(bool propval)
+  {
+    return setProperty("is-owner", propval);
+  }
+
+  /** */
+  T reader(void* propval)
+  {
+    return setProperty("reader", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.record_batch_reader.RecordBatchReader]
+final class RecordBatchReaderGidBuilder : RecordBatchReaderGidBuilderImpl!RecordBatchReaderGidBuilder
+{
+  RecordBatchReader build()
+  {
+    return new RecordBatchReader(cast(void*)createGObject(RecordBatchReader._getGType), No.Take);
   }
 }

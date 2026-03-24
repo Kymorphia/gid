@@ -2,6 +2,7 @@
 module gtk.cell_renderer_spinner;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -46,6 +47,15 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
   override CellRendererSpinner self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer_spinner.CellRendererSpinner]
+  Returns: New builder object
+  */
+  static CellRendererSpinnerGidBuilder builder()
+  {
+    return new CellRendererSpinnerGidBuilder;
   }
 
   /** */
@@ -116,5 +126,50 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_spinner_new();
     this(_cretval, No.Take);
+  }
+}
+
+class CellRendererSpinnerGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
+{
+
+  /** */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `pulse` property.
+      Params:
+        propval = Pulse of the spinner. Increment this value to draw the next frame of the
+          spinner animation. Usually, you would update this value in a timeout.
+          
+          By default, the #GtkSpinner widget draws one full cycle of the animation,
+          consisting of 12 frames, in 750 milliseconds.
+      Returns: Builder instance for fluent chaining
+  */
+  T pulse(uint propval)
+  {
+    return setProperty("pulse", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = The #GtkIconSize value that specifies the size of the rendered spinner.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(gtk.types.IconSize propval)
+  {
+    return setProperty("size", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_spinner.CellRendererSpinner]
+final class CellRendererSpinnerGidBuilder : CellRendererSpinnerGidBuilderImpl!CellRendererSpinnerGidBuilder
+{
+  CellRendererSpinner build()
+  {
+    return new CellRendererSpinner(cast(void*)createGObject(CellRendererSpinner._getGType), No.Take);
   }
 }

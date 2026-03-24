@@ -7,12 +7,14 @@ import gio.async_result;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
+import gio.datagram_based;
 import gio.tls_certificate;
 import gio.tls_database;
 import gio.tls_interaction;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +49,13 @@ interface DtlsConnection
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dtls_connection_get_type != &gidSymbolNotFound ? g_dtls_connection_get_type() : cast(GType)0;
   }
+
+  /**
+      Get `baseSocket` property.
+      Returns: The #GDatagramBased that the connection wraps. Note that this may be any
+        implementation of #GDatagramBased, not just a #GSocket.
+  */
+  @property gio.datagram_based.DatagramBased baseSocket();
 
   /**
       Get `certificate` property.
@@ -680,4 +689,79 @@ interface DtlsConnection
       Returns: Signal ID
   */
   ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface DtlsConnectionGidBuilderImpl(T)
+{
+
+  /**
+      Set `baseSocket` property.
+      Params:
+        propval = The #GDatagramBased that the connection wraps. Note that this may be any
+          implementation of #GDatagramBased, not just a #GSocket.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseSocket(gio.datagram_based.DatagramBased propval);
+
+  /**
+      Set `certificate` property.
+      Params:
+        propval = The connection's certificate; see
+          [gio.dtls_connection.DtlsConnection.setCertificate].
+      Returns: Builder instance for fluent chaining
+  */
+  T certificate(gio.tls_certificate.TlsCertificate propval);
+
+  /**
+      Set `database` property.
+      Params:
+        propval = The certificate database to use when verifying this TLS connection.
+          If no certificate database is set, then the default database will be
+          used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+          
+          When using a non-default database, #GDtlsConnection must fall back to using
+          the #GTlsDatabase to perform certificate verification using
+          [gio.tls_database.TlsDatabase.verifyChain], which means certificate verification will
+          not be able to make use of TLS session context. This may be less secure.
+          For example, if you create your own #GTlsDatabase that just wraps the
+          default #GTlsDatabase, you might expect that you have not changed anything,
+          but this is not true because you may have altered the behavior of
+          #GDtlsConnection by causing it to use [gio.tls_database.TlsDatabase.verifyChain]. See the
+          documentation of [gio.tls_database.TlsDatabase.verifyChain] for more details on specific
+          security checks that may not be performed. Accordingly, setting a
+          non-default database is discouraged except for specialty applications with
+          unusual security requirements.
+      Returns: Builder instance for fluent chaining
+  */
+  T database(gio.tls_database.TlsDatabase propval);
+
+  /**
+      Set `interaction` property.
+      Params:
+        propval = A #GTlsInteraction object to be used when the connection or certificate
+          database need to interact with the user. This will be used to prompt the
+          user for passwords where necessary.
+      Returns: Builder instance for fluent chaining
+  */
+  T interaction(gio.tls_interaction.TlsInteraction propval);
+
+  /**
+      Set `rehandshakeMode` property.
+      Params:
+        propval = The rehandshaking mode. See
+          [gio.dtls_connection.DtlsConnection.setRehandshakeMode].
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: The rehandshake mode is ignored.
+  */
+  T rehandshakeMode(gio.types.TlsRehandshakeMode propval);
+
+  /**
+      Set `requireCloseNotify` property.
+      Params:
+        propval = Whether or not proper TLS close notification is required.
+          See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
+      Returns: Builder instance for fluent chaining
+  */
+  T requireCloseNotify(bool propval);
 }

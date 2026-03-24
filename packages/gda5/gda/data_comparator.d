@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class DataComparator : gobject.object.ObjectWrap
   override DataComparator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.data_comparator.DataComparator]
+  Returns: New builder object
+  */
+  static DataComparatorGidBuilder builder()
+  {
+    return new DataComparatorGidBuilder;
   }
 
   /** */
@@ -196,6 +206,31 @@ class DataComparator : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("diff-computed", closure, after);
+  }
+}
+
+class DataComparatorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T newModel(gda.data_model.DataModel propval)
+  {
+    return setProperty("new-model", propval);
+  }
+
+  /** */
+  T oldModel(gda.data_model.DataModel propval)
+  {
+    return setProperty("old-model", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_comparator.DataComparator]
+final class DataComparatorGidBuilder : DataComparatorGidBuilderImpl!DataComparatorGidBuilder
+{
+  DataComparator build()
+  {
+    return new DataComparator(cast(void*)createGObject(DataComparator._getGType), Yes.Take);
   }
 }
 

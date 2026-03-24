@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for compresing or decompressing a gzip stream.
@@ -36,6 +37,15 @@ class FilterGZip : gmime.filter.Filter
   override FilterGZip self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.filter_gzip.FilterGZip]
+  Returns: New builder object
+  */
+  static FilterGZipGidBuilder builder()
+  {
+    return new FilterGZipGidBuilder;
   }
 
   /**
@@ -99,5 +109,18 @@ class FilterGZip : gmime.filter.Filter
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     g_mime_filter_gzip_set_filename(cast(GMimeFilterGZip*)this._cPtr, _filename);
+  }
+}
+
+class FilterGZipGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_gzip.FilterGZip]
+final class FilterGZipGidBuilder : FilterGZipGidBuilderImpl!FilterGZipGidBuilder
+{
+  FilterGZip build()
+  {
+    return new FilterGZip(cast(void*)createGObject(FilterGZip._getGType), Yes.Take);
   }
 }

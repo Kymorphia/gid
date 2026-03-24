@@ -2,6 +2,7 @@
 module parquet.double_statistics;
 
 import gid.gid;
+import gobject.gid_builder;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
@@ -36,6 +37,15 @@ class DoubleStatistics : parquet.statistics.Statistics
     return this;
   }
 
+  /**
+  Get builder for [parquet.double_statistics.DoubleStatistics]
+  Returns: New builder object
+  */
+  static DoubleStatisticsGidBuilder builder()
+  {
+    return new DoubleStatisticsGidBuilder;
+  }
+
   /** */
   double getMax()
   {
@@ -50,5 +60,18 @@ class DoubleStatistics : parquet.statistics.Statistics
     double _retval;
     _retval = gparquet_double_statistics_get_min(cast(GParquetDoubleStatistics*)this._cPtr);
     return _retval;
+  }
+}
+
+class DoubleStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.double_statistics.DoubleStatistics]
+final class DoubleStatisticsGidBuilder : DoubleStatisticsGidBuilderImpl!DoubleStatisticsGidBuilder
+{
+  DoubleStatistics build()
+  {
+    return new DoubleStatistics(cast(void*)createGObject(DoubleStatistics._getGType), No.Take);
   }
 }

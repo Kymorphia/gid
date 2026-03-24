@@ -9,6 +9,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import glib.source;
+import gobject.gid_builder;
 
 /**
     [gio.pollable_output_stream.PollableOutputStream] is implemented by [gio.output_stream.OutputStream]s that
@@ -144,4 +145,8 @@ interface PollableOutputStream
       Throws: [ErrorWrap]
   */
   gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null);
+}
+
+interface PollableOutputStreamGidBuilderImpl(T)
+{
 }

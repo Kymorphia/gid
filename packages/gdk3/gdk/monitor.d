@@ -8,6 +8,7 @@ import gdk.rectangle;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -46,6 +47,21 @@ class MonitorWrap : gobject.object.ObjectWrap
   override MonitorWrap self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.monitor.MonitorWrap]
+  Returns: New builder object
+  */
+  static MonitorWrapGidBuilder builder()
+  {
+    return new MonitorWrapGidBuilder;
+  }
+
+  /** */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   /** */
@@ -292,5 +308,24 @@ class MonitorWrap : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("invalidate", closure, after);
+  }
+}
+
+class MonitorWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.monitor.MonitorWrap]
+final class MonitorWrapGidBuilder : MonitorWrapGidBuilderImpl!MonitorWrapGidBuilder
+{
+  MonitorWrap build()
+  {
+    return new MonitorWrap(cast(void*)createGObject(MonitorWrap._getGType), No.Take);
   }
 }

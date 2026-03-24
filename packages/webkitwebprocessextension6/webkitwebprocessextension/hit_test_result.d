@@ -2,6 +2,7 @@
 module webkitwebprocessextension.hit_test_result;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkitwebprocessextension.c.functions;
 import webkitwebprocessextension.c.types;
@@ -55,6 +56,75 @@ class HitTestResult : gobject.object.ObjectWrap
   override HitTestResult self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.hit_test_result.HitTestResult]
+  Returns: New builder object
+  */
+  static HitTestResultGidBuilder builder()
+  {
+    return new HitTestResultGidBuilder;
+  }
+
+  /**
+      Get `context` property.
+      Returns: Bitmask of #WebKitHitTestResultContext flags representing
+        the context of the #WebKitHitTestResult.
+  */
+  @property uint context()
+  {
+    return getContext();
+  }
+
+  /**
+      Get `imageUri` property.
+      Returns: The URI of the image if flag [webkit.types.HitTestResultContext.Image]
+        is present in #WebKitHitTestResult:context
+  */
+  @property string imageUri()
+  {
+    return getImageUri();
+  }
+
+  /**
+      Get `linkLabel` property.
+      Returns: The label of the link if flag [webkit.types.HitTestResultContext.Link]
+        is present in #WebKitHitTestResult:context
+  */
+  @property string linkLabel()
+  {
+    return getLinkLabel();
+  }
+
+  /**
+      Get `linkTitle` property.
+      Returns: The title of the link if flag [webkit.types.HitTestResultContext.Link]
+        is present in #WebKitHitTestResult:context
+  */
+  @property string linkTitle()
+  {
+    return getLinkTitle();
+  }
+
+  /**
+      Get `linkUri` property.
+      Returns: The URI of the link if flag [webkit.types.HitTestResultContext.Link]
+        is present in #WebKitHitTestResult:context
+  */
+  @property string linkUri()
+  {
+    return getLinkUri();
+  }
+
+  /**
+      Get `mediaUri` property.
+      Returns: The URI of the media if flag [webkit.types.HitTestResultContext.Media]
+        is present in #WebKitHitTestResult:context
+  */
+  @property string mediaUri()
+  {
+    return getMediaUri();
   }
 
   /**
@@ -211,5 +281,90 @@ class HitTestResult : gobject.object.ObjectWrap
     _cretval = webkit_hit_test_result_get_media_uri(cast(WebKitHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `context` property.
+      Params:
+        propval = Bitmask of #WebKitHitTestResultContext flags representing
+          the context of the #WebKitHitTestResult.
+      Returns: Builder instance for fluent chaining
+  */
+  T context(uint propval)
+  {
+    return setProperty("context", propval);
+  }
+
+  /**
+      Set `imageUri` property.
+      Params:
+        propval = The URI of the image if flag [webkit.types.HitTestResultContext.Image]
+          is present in #WebKitHitTestResult:context
+      Returns: Builder instance for fluent chaining
+  */
+  T imageUri(string propval)
+  {
+    return setProperty("image-uri", propval);
+  }
+
+  /**
+      Set `linkLabel` property.
+      Params:
+        propval = The label of the link if flag [webkit.types.HitTestResultContext.Link]
+          is present in #WebKitHitTestResult:context
+      Returns: Builder instance for fluent chaining
+  */
+  T linkLabel(string propval)
+  {
+    return setProperty("link-label", propval);
+  }
+
+  /**
+      Set `linkTitle` property.
+      Params:
+        propval = The title of the link if flag [webkit.types.HitTestResultContext.Link]
+          is present in #WebKitHitTestResult:context
+      Returns: Builder instance for fluent chaining
+  */
+  T linkTitle(string propval)
+  {
+    return setProperty("link-title", propval);
+  }
+
+  /**
+      Set `linkUri` property.
+      Params:
+        propval = The URI of the link if flag [webkit.types.HitTestResultContext.Link]
+          is present in #WebKitHitTestResult:context
+      Returns: Builder instance for fluent chaining
+  */
+  T linkUri(string propval)
+  {
+    return setProperty("link-uri", propval);
+  }
+
+  /**
+      Set `mediaUri` property.
+      Params:
+        propval = The URI of the media if flag [webkit.types.HitTestResultContext.Media]
+          is present in #WebKitHitTestResult:context
+      Returns: Builder instance for fluent chaining
+  */
+  T mediaUri(string propval)
+  {
+    return setProperty("media-uri", propval);
+  }
+}
+
+/// Fluent builder for [webkitwebprocessextension.hit_test_result.HitTestResult]
+final class HitTestResultGidBuilder : HitTestResultGidBuilderImpl!HitTestResultGidBuilder
+{
+  HitTestResult build()
+  {
+    return new HitTestResult(cast(void*)createGObject(HitTestResult._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import arrow.schema;
 import arrow.table;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
@@ -41,6 +42,15 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   override ArrowFileWriter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [parquet.arrow_file_writer.ArrowFileWriter]
+  Returns: New builder object
+  */
+  static ArrowFileWriterGidBuilder builder()
+  {
+    return new ArrowFileWriterGidBuilder;
   }
 
   /** */
@@ -177,5 +187,24 @@ class ArrowFileWriter : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ArrowFileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T arrowFileWriter(void* propval)
+  {
+    return setProperty("arrow-file-writer", propval);
+  }
+}
+
+/// Fluent builder for [parquet.arrow_file_writer.ArrowFileWriter]
+final class ArrowFileWriterGidBuilder : ArrowFileWriterGidBuilderImpl!ArrowFileWriterGidBuilder
+{
+  ArrowFileWriter build()
+  {
+    return new ArrowFileWriter(cast(void*)createGObject(ArrowFileWriter._getGType), No.Take);
   }
 }

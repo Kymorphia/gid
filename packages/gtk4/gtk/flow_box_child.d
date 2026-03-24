@@ -3,6 +3,7 @@ module gtk.flow_box_child;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -47,6 +48,15 @@ class FlowBoxChild : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.flow_box_child.FlowBoxChild]
+  Returns: New builder object
+  */
+  static FlowBoxChildGidBuilder builder()
+  {
+    return new FlowBoxChildGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -62,7 +72,7 @@ class FlowBoxChild : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -194,5 +204,30 @@ class FlowBoxChild : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class FlowBoxChildGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [gtk.flow_box_child.FlowBoxChild]
+final class FlowBoxChildGidBuilder : FlowBoxChildGidBuilderImpl!FlowBoxChildGidBuilder
+{
+  FlowBoxChild build()
+  {
+    return new FlowBoxChild(cast(void*)createGObject(FlowBoxChild._getGType), No.Take);
   }
 }

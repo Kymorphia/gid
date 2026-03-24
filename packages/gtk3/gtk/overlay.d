@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -69,6 +70,15 @@ class Overlay : gtk.bin.Bin
   override Overlay self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.overlay.Overlay]
+  Returns: New builder object
+  */
+  static OverlayGidBuilder builder()
+  {
+    return new OverlayGidBuilder;
   }
 
   /**
@@ -215,5 +225,19 @@ class Overlay : gtk.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("get-child-position", closure, after);
+  }
+}
+
+class OverlayGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.overlay.Overlay]
+final class OverlayGidBuilder : OverlayGidBuilderImpl!OverlayGidBuilder
+{
+  Overlay build()
+  {
+    return new Overlay(cast(void*)createGObject(Overlay._getGType), No.Take);
   }
 }

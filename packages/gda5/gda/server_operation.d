@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import libxml2.types;
@@ -41,6 +42,33 @@ class ServerOperation : gobject.object.ObjectWrap
   override ServerOperation self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.server_operation.ServerOperation]
+  Returns: New builder object
+  */
+  static ServerOperationGidBuilder builder()
+  {
+    return new ServerOperationGidBuilder;
+  }
+
+  /** */
+  @property gda.connection.Connection connection()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("connection");
+  }
+
+  /** */
+  @property int opType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("op-type");
+  }
+
+  /** */
+  @property gda.server_provider.ServerProvider provider()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gda.server_provider.ServerProvider)("provider");
   }
 
   /**
@@ -631,6 +659,43 @@ class ServerOperation : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sequence-item-remove", closure, after);
+  }
+}
+
+class ServerOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T connection(gda.connection.Connection propval)
+  {
+    return setProperty("connection", propval);
+  }
+
+  /** */
+  T opType(int propval)
+  {
+    return setProperty("op-type", propval);
+  }
+
+  /** */
+  T provider(gda.server_provider.ServerProvider propval)
+  {
+    return setProperty("provider", propval);
+  }
+
+  /** */
+  T specFilename(string propval)
+  {
+    return setProperty("spec-filename", propval);
+  }
+}
+
+/// Fluent builder for [gda.server_operation.ServerOperation]
+final class ServerOperationGidBuilder : ServerOperationGidBuilderImpl!ServerOperationGidBuilder
+{
+  ServerOperation build()
+  {
+    return new ServerOperation(cast(void*)createGObject(ServerOperation._getGType), Yes.Take);
   }
 }
 

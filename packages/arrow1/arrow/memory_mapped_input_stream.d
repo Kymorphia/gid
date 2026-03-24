@@ -11,6 +11,7 @@ import arrow.seekable_input_stream;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
@@ -41,6 +42,15 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
     return this;
   }
 
+  /**
+  Get builder for [arrow.memory_mapped_input_stream.MemoryMappedInputStream]
+  Returns: New builder object
+  */
+  static MemoryMappedInputStreamGidBuilder builder()
+  {
+    return new MemoryMappedInputStreamGidBuilder;
+  }
+
   /** */
   this(string path)
   {
@@ -51,5 +61,19 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class MemoryMappedInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableInputStreamGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [arrow.memory_mapped_input_stream.MemoryMappedInputStream]
+final class MemoryMappedInputStreamGidBuilder : MemoryMappedInputStreamGidBuilderImpl!MemoryMappedInputStreamGidBuilder
+{
+  MemoryMappedInputStream build()
+  {
+    return new MemoryMappedInputStream(cast(void*)createGObject(MemoryMappedInputStream._getGType), Yes.Take);
   }
 }

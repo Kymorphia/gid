@@ -8,6 +8,7 @@ import gio.c.types;
 import gio.dbus_interface_info;
 import gio.dbus_object;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -50,4 +51,8 @@ interface DBusInterface
         object = A #GDBusObject or null.
   */
   void setObject(gio.dbus_object.DBusObject object = null);
+}
+
+interface DBusInterfaceGidBuilderImpl(T)
+{
 }

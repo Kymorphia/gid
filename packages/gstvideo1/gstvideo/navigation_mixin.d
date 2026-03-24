@@ -3,6 +3,7 @@ module gstvideo.navigation_mixin;
 
 public import gstvideo.navigation_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gst.event;
 public import gst.message;
 public import gst.object;
@@ -153,4 +154,8 @@ template NavigationT()
   {
     gst_navigation_send_mouse_scroll_event(cast(GstNavigation*)this._cPtr, x, y, deltaX, deltaY);
   }
+}
+
+template NavigationGidBuilderT()
+{
 }

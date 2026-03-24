@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -71,6 +72,15 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
+  Get builder for [gtk.tool_button.ToolButton]
+  Returns: New builder object
+  */
+  static ToolButtonGidBuilder builder()
+  {
+    return new ToolButtonGidBuilder;
+  }
+
+  /**
       Get `iconName` property.
       Returns: The name of the themed icon displayed on the item.
         This property only has an effect if not overridden by
@@ -92,7 +102,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /** */
@@ -104,7 +114,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   /** */
   @property void iconWidget(gtk.widget.Widget propval)
   {
-    return setIconWidget(propval);
+    setIconWidget(propval);
   }
 
   /** */
@@ -116,7 +126,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   /** */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /** */
@@ -128,7 +138,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   /** */
   @property void labelWidget(gtk.widget.Widget propval)
   {
-    return setLabelWidget(propval);
+    setLabelWidget(propval);
   }
 
   /** */
@@ -140,7 +150,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   /** */
   @property void stockId(string propval)
   {
-    return setStockId(propval);
+    setStockId(propval);
   }
 
   /** */
@@ -152,7 +162,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   /** */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   mixin ActionableT!();
@@ -412,5 +422,64 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("clicked", closure, after);
+  }
+}
+
+class ToolButtonGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the themed icon displayed on the item.
+          This property only has an effect if not overridden by
+          #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
+          #GtkToolButton:stock-id properties.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /** */
+  T iconWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("icon-widget", propval);
+  }
+
+  /** */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /** */
+  T labelWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("label-widget", propval);
+  }
+
+  /** */
+  T stockId(string propval)
+  {
+    return setProperty("stock-id", propval);
+  }
+
+  /** */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tool_button.ToolButton]
+final class ToolButtonGidBuilder : ToolButtonGidBuilderImpl!ToolButtonGidBuilder
+{
+  ToolButton build()
+  {
+    return new ToolButton(cast(void*)createGObject(ToolButton._getGType), No.Take);
   }
 }

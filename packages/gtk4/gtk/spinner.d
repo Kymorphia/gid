@@ -2,6 +2,7 @@
 module gtk.spinner;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -59,6 +60,15 @@ class Spinner : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.spinner.Spinner]
+  Returns: New builder object
+  */
+  static SpinnerGidBuilder builder()
+  {
+    return new SpinnerGidBuilder;
+  }
+
+  /**
       Get `spinning` property.
       Returns: Whether the spinner is spinning
   */
@@ -74,7 +84,7 @@ class Spinner : gtk.widget.Widget
   */
   @property void spinning(bool propval)
   {
-    return setSpinning(propval);
+    setSpinning(propval);
   }
 
   /**
@@ -124,5 +134,30 @@ class Spinner : gtk.widget.Widget
   void stop()
   {
     gtk_spinner_stop(cast(GtkSpinner*)this._cPtr);
+  }
+}
+
+class SpinnerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `spinning` property.
+      Params:
+        propval = Whether the spinner is spinning
+      Returns: Builder instance for fluent chaining
+  */
+  T spinning(bool propval)
+  {
+    return setProperty("spinning", propval);
+  }
+}
+
+/// Fluent builder for [gtk.spinner.Spinner]
+final class SpinnerGidBuilder : SpinnerGidBuilderImpl!SpinnerGidBuilder
+{
+  Spinner build()
+  {
+    return new Spinner(cast(void*)createGObject(Spinner._getGType), No.Take);
   }
 }

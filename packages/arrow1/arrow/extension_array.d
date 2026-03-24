@@ -6,6 +6,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,21 @@ class ExtensionArray : arrow.array.Array
     return this;
   }
 
+  /**
+  Get builder for [arrow.extension_array.ExtensionArray]
+  Returns: New builder object
+  */
+  static ExtensionArrayGidBuilder builder()
+  {
+    return new ExtensionArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.array.Array storage()
+  {
+    return getStorage();
+  }
+
   /** */
   arrow.array.Array getStorage()
   {
@@ -44,5 +60,24 @@ class ExtensionArray : arrow.array.Array
     _cretval = garrow_extension_array_get_storage(cast(GArrowExtensionArray*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ExtensionArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+
+  /** */
+  T storage(arrow.array.Array propval)
+  {
+    return setProperty("storage", propval);
+  }
+}
+
+/// Fluent builder for [arrow.extension_array.ExtensionArray]
+final class ExtensionArrayGidBuilder : ExtensionArrayGidBuilderImpl!ExtensionArrayGidBuilder
+{
+  ExtensionArray build()
+  {
+    return new ExtensionArray(cast(void*)createGObject(ExtensionArray._getGType), No.Take);
   }
 }

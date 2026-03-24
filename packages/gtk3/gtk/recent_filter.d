@@ -2,6 +2,7 @@
 module gtk.recent_filter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -86,6 +87,15 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   override RecentFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.recent_filter.RecentFilter]
+  Returns: New builder object
+  */
+  static RecentFilterGidBuilder builder()
+  {
+    return new RecentFilterGidBuilder;
   }
 
   mixin BuildableT!();
@@ -280,5 +290,20 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_recent_filter_set_name(cast(GtkRecentFilter*)this._cPtr, _name);
+  }
+}
+
+class RecentFilterGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.recent_filter.RecentFilter]
+final class RecentFilterGidBuilder : RecentFilterGidBuilderImpl!RecentFilterGidBuilder
+{
+  RecentFilter build()
+  {
+    return new RecentFilter(cast(void*)createGObject(RecentFilter._getGType), No.Take);
   }
 }

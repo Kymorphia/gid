@@ -4,6 +4,7 @@ module gtk.mount_operation;
 import gdk.screen;
 import gid.gid;
 import gio.mount_operation;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -41,6 +42,15 @@ class MountOperation : gio.mount_operation.MountOperation
     return this;
   }
 
+  /**
+  Get builder for [gtk.mount_operation.MountOperation]
+  Returns: New builder object
+  */
+  static MountOperationGidBuilder builder()
+  {
+    return new MountOperationGidBuilder;
+  }
+
   /** */
   @property gtk.window.Window parent()
   {
@@ -50,7 +60,7 @@ class MountOperation : gio.mount_operation.MountOperation
   /** */
   @property void parent(gtk.window.Window propval)
   {
-    return setParent(propval);
+    setParent(propval);
   }
 
   /** */
@@ -62,7 +72,7 @@ class MountOperation : gio.mount_operation.MountOperation
   /** */
   @property void screen(gdk.screen.Screen propval)
   {
-    return setScreen(propval);
+    setScreen(propval);
   }
 
   /**
@@ -137,5 +147,30 @@ class MountOperation : gio.mount_operation.MountOperation
   void setScreen(gdk.screen.Screen screen)
   {
     gtk_mount_operation_set_screen(cast(GtkMountOperation*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
+  }
+}
+
+class MountOperationGidBuilderImpl(T) : gio.mount_operation.MountOperationGidBuilderImpl!T
+{
+
+  /** */
+  T parent(gtk.window.Window propval)
+  {
+    return setProperty("parent", propval);
+  }
+
+  /** */
+  T screen(gdk.screen.Screen propval)
+  {
+    return setProperty("screen", propval);
+  }
+}
+
+/// Fluent builder for [gtk.mount_operation.MountOperation]
+final class MountOperationGidBuilder : MountOperationGidBuilderImpl!MountOperationGidBuilder
+{
+  MountOperation build()
+  {
+    return new MountOperation(cast(void*)createGObject(MountOperation._getGType), Yes.Take);
   }
 }

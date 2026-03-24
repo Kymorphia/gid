@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.value;
 import atk.value_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -40,5 +41,29 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
     return this;
   }
 
+  /**
+  Get builder for [gtk.range_accessible.RangeAccessible]
+  Returns: New builder object
+  */
+  static RangeAccessibleGidBuilder builder()
+  {
+    return new RangeAccessibleGidBuilder;
+  }
+
   mixin ValueT!();
+}
+
+class RangeAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
+{
+
+  mixin ValueGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.range_accessible.RangeAccessible]
+final class RangeAccessibleGidBuilder : RangeAccessibleGidBuilderImpl!RangeAccessibleGidBuilder
+{
+  RangeAccessible build()
+  {
+    return new RangeAccessible(cast(void*)createGObject(RangeAccessible._getGType), No.Take);
+  }
 }

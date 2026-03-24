@@ -5,6 +5,7 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -58,6 +59,15 @@ class SettingsBackend : gobject.object.ObjectWrap
   override SettingsBackend self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.settings_backend.SettingsBackend]
+  Returns: New builder object
+  */
+  static SettingsBackendGidBuilder builder()
+  {
+    return new SettingsBackendGidBuilder;
   }
 
   /**
@@ -214,5 +224,18 @@ class SettingsBackend : gobject.object.ObjectWrap
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_writable_changed(cast(GSettingsBackend*)this._cPtr, _key);
+  }
+}
+
+class SettingsBackendGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.settings_backend.SettingsBackend]
+final class SettingsBackendGidBuilder : SettingsBackendGidBuilderImpl!SettingsBackendGidBuilder
+{
+  SettingsBackend build()
+  {
+    return new SettingsBackend(cast(void*)createGObject(SettingsBackend._getGType), No.Take);
   }
 }

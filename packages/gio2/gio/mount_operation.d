@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.types;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -62,6 +63,15 @@ class MountOperation : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.mount_operation.MountOperation]
+  Returns: New builder object
+  */
+  static MountOperationGidBuilder builder()
+  {
+    return new MountOperationGidBuilder;
+  }
+
+  /**
       Get `anonymous` property.
       Returns: Whether to use an anonymous user when authenticating.
   */
@@ -77,7 +87,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void anonymous(bool propval)
   {
-    return setAnonymous(propval);
+    setAnonymous(propval);
   }
 
   /**
@@ -98,7 +108,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void choice(int propval)
   {
-    return setChoice(propval);
+    setChoice(propval);
   }
 
   /**
@@ -117,7 +127,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void domain(string propval)
   {
-    return setDomain(propval);
+    setDomain(propval);
   }
 
   /**
@@ -138,7 +148,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void isTcryptHiddenVolume(bool propval)
   {
-    return setIsTcryptHiddenVolume(propval);
+    setIsTcryptHiddenVolume(propval);
   }
 
   /**
@@ -165,7 +175,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void isTcryptSystemVolume(bool propval)
   {
-    return setIsTcryptSystemVolume(propval);
+    setIsTcryptSystemVolume(propval);
   }
 
   /**
@@ -186,7 +196,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void password(string propval)
   {
-    return setPassword(propval);
+    setPassword(propval);
   }
 
   /**
@@ -205,7 +215,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void passwordSave(gio.types.PasswordSave propval)
   {
-    return setPasswordSave(propval);
+    setPasswordSave(propval);
   }
 
   /**
@@ -226,7 +236,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void pim(uint propval)
   {
-    return setPim(propval);
+    setPim(propval);
   }
 
   /**
@@ -247,7 +257,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   @property void username(string propval)
   {
-    return setUsername(propval);
+    setUsername(propval);
   }
 
   /**
@@ -822,5 +832,126 @@ class MountOperation : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show-unmount-progress", closure, after);
+  }
+}
+
+class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `anonymous` property.
+      Params:
+        propval = Whether to use an anonymous user when authenticating.
+      Returns: Builder instance for fluent chaining
+  */
+  T anonymous(bool propval)
+  {
+    return setProperty("anonymous", propval);
+  }
+
+  /**
+      Set `choice` property.
+      Params:
+        propval = The index of the user's choice when a question is asked during the
+          mount operation. See the #GMountOperation::ask-question signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T choice(int propval)
+  {
+    return setProperty("choice", propval);
+  }
+
+  /**
+      Set `domain` property.
+      Params:
+        propval = The domain to use for the mount operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T domain(string propval)
+  {
+    return setProperty("domain", propval);
+  }
+
+  /**
+      Set `isTcryptHiddenVolume` property.
+      Params:
+        propval = Whether the device to be unlocked is a TCRYPT hidden volume.
+          See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
+      Returns: Builder instance for fluent chaining
+  */
+  T isTcryptHiddenVolume(bool propval)
+  {
+    return setProperty("is-tcrypt-hidden-volume", propval);
+  }
+
+  /**
+      Set `isTcryptSystemVolume` property.
+      Params:
+        propval = Whether the device to be unlocked is a TCRYPT system volume.
+          In this context, a system volume is a volume with a bootloader
+          and operating system installed. This is only supported for Windows
+          operating systems. For further documentation, see
+          [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
+      Returns: Builder instance for fluent chaining
+  */
+  T isTcryptSystemVolume(bool propval)
+  {
+    return setProperty("is-tcrypt-system-volume", propval);
+  }
+
+  /**
+      Set `password` property.
+      Params:
+        propval = The password that is used for authentication when carrying out
+          the mount operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T password(string propval)
+  {
+    return setProperty("password", propval);
+  }
+
+  /**
+      Set `passwordSave` property.
+      Params:
+        propval = Determines if and how the password information should be saved.
+      Returns: Builder instance for fluent chaining
+  */
+  T passwordSave(gio.types.PasswordSave propval)
+  {
+    return setProperty("password-save", propval);
+  }
+
+  /**
+      Set `pim` property.
+      Params:
+        propval = The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
+          [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
+      Returns: Builder instance for fluent chaining
+  */
+  T pim(uint propval)
+  {
+    return setProperty("pim", propval);
+  }
+
+  /**
+      Set `username` property.
+      Params:
+        propval = The user name that is used for authentication when carrying out
+          the mount operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T username(string propval)
+  {
+    return setProperty("username", propval);
+  }
+}
+
+/// Fluent builder for [gio.mount_operation.MountOperation]
+final class MountOperationGidBuilder : MountOperationGidBuilderImpl!MountOperationGidBuilder
+{
+  MountOperation build()
+  {
+    return new MountOperation(cast(void*)createGObject(MountOperation._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -39,6 +40,15 @@ class Misc : gobject.object.ObjectWrap
   override Misc self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.misc.Misc]
+  Returns: New builder object
+  */
+  static MiscGidBuilder builder()
+  {
+    return new MiscGidBuilder;
   }
 
   /**
@@ -84,5 +94,18 @@ class Misc : gobject.object.ObjectWrap
   void threadsLeave()
   {
     atk_misc_threads_leave(cast(AtkMisc*)this._cPtr);
+  }
+}
+
+class MiscGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.misc.Misc]
+final class MiscGidBuilder : MiscGidBuilderImpl!MiscGidBuilder
+{
+  Misc build()
+  {
+    return new Misc(cast(void*)createGObject(Misc._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.layout_child;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -49,6 +50,33 @@ class LayoutChild : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.layout_child.LayoutChild]
+  Returns: New builder object
+  */
+  static LayoutChildGidBuilder builder()
+  {
+    return new LayoutChildGidBuilder;
+  }
+
+  /**
+      Get `childWidget` property.
+      Returns: The widget that is associated to the [gtk.layout_child.LayoutChild] instance.
+  */
+  @property gtk.widget.Widget childWidget()
+  {
+    return getChildWidget();
+  }
+
+  /**
+      Get `layoutManager` property.
+      Returns: The layout manager that created the [gtk.layout_child.LayoutChild] instance.
+  */
+  @property gtk.layout_manager.LayoutManager layoutManager()
+  {
+    return getLayoutManager();
+  }
+
+  /**
       Retrieves the [gtk.widget.Widget] associated to the given layout_child.
       Returns: a [gtk.widget.Widget]
   */
@@ -71,5 +99,40 @@ class LayoutChild : gobject.object.ObjectWrap
     _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class LayoutChildGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `childWidget` property.
+      Params:
+        propval = The widget that is associated to the [gtk.layout_child.LayoutChild] instance.
+      Returns: Builder instance for fluent chaining
+  */
+  T childWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("child-widget", propval);
+  }
+
+  /**
+      Set `layoutManager` property.
+      Params:
+        propval = The layout manager that created the [gtk.layout_child.LayoutChild] instance.
+      Returns: Builder instance for fluent chaining
+  */
+  T layoutManager(gtk.layout_manager.LayoutManager propval)
+  {
+    return setProperty("layout-manager", propval);
+  }
+}
+
+/// Fluent builder for [gtk.layout_child.LayoutChild]
+final class LayoutChildGidBuilder : LayoutChildGidBuilderImpl!LayoutChildGidBuilder
+{
+  LayoutChild build()
+  {
+    return new LayoutChild(cast(void*)createGObject(LayoutChild._getGType), No.Take);
   }
 }

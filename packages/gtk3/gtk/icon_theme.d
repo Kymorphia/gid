@@ -9,6 +9,7 @@ import gid.gid;
 import gio.icon;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -113,6 +114,15 @@ class IconTheme : gobject.object.ObjectWrap
   override IconTheme self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.icon_theme.IconTheme]
+  Returns: New builder object
+  */
+  static IconThemeGidBuilder builder()
+  {
+    return new IconThemeGidBuilder;
   }
 
   /**
@@ -775,5 +785,18 @@ class IconTheme : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class IconThemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.icon_theme.IconTheme]
+final class IconThemeGidBuilder : IconThemeGidBuilderImpl!IconThemeGidBuilder
+{
+  IconTheme build()
+  {
+    return new IconTheme(cast(void*)createGObject(IconTheme._getGType), Yes.Take);
   }
 }

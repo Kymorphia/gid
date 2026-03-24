@@ -2,6 +2,7 @@
 module webkit.device_info_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -47,5 +48,29 @@ class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission
     return this;
   }
 
+  /**
+  Get builder for [webkit.device_info_permission_request.DeviceInfoPermissionRequest]
+  Returns: New builder object
+  */
+  static DeviceInfoPermissionRequestGidBuilder builder()
+  {
+    return new DeviceInfoPermissionRequestGidBuilder;
+  }
+
   mixin PermissionRequestT!();
+}
+
+class DeviceInfoPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.device_info_permission_request.DeviceInfoPermissionRequest]
+final class DeviceInfoPermissionRequestGidBuilder : DeviceInfoPermissionRequestGidBuilderImpl!DeviceInfoPermissionRequestGidBuilder
+{
+  DeviceInfoPermissionRequest build()
+  {
+    return new DeviceInfoPermissionRequest(cast(void*)createGObject(DeviceInfoPermissionRequest._getGType), No.Take);
+  }
 }

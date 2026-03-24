@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
   override StrftimeOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.strftime_options.StrftimeOptions]
+  Returns: New builder object
+  */
+  static StrftimeOptionsGidBuilder builder()
+  {
+    return new StrftimeOptionsGidBuilder;
   }
 
   /**
@@ -81,5 +91,40 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
     GArrowStrftimeOptions* _cretval;
     _cretval = garrow_strftime_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class StrftimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The desired format string.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(string propval)
+  {
+    return setProperty("format", propval);
+  }
+
+  /**
+      Set `locale` property.
+      Params:
+        propval = The desired output locale string.
+      Returns: Builder instance for fluent chaining
+  */
+  T locale(string propval)
+  {
+    return setProperty("locale", propval);
+  }
+}
+
+/// Fluent builder for [arrow.strftime_options.StrftimeOptions]
+final class StrftimeOptionsGidBuilder : StrftimeOptionsGidBuilderImpl!StrftimeOptionsGidBuilder
+{
+  StrftimeOptions build()
+  {
+    return new StrftimeOptions(cast(void*)createGObject(StrftimeOptions._getGType), Yes.Take);
   }
 }

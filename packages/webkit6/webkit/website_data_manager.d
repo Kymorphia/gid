@@ -7,6 +7,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -57,6 +58,33 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   override WebsiteDataManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.website_data_manager.WebsiteDataManager]
+  Returns: New builder object
+  */
+  static WebsiteDataManagerGidBuilder builder()
+  {
+    return new WebsiteDataManagerGidBuilder;
+  }
+
+  /**
+      Get `baseCacheDirectory` property.
+      Returns: The base directory for caches. If null, a default location will be used.
+  */
+  @property string baseCacheDirectory()
+  {
+    return getBaseCacheDirectory();
+  }
+
+  /**
+      Get `baseDataDirectory` property.
+      Returns: The base directory for website data. If null, a default location will be used.
+  */
+  @property string baseDataDirectory()
+  {
+    return getBaseDataDirectory();
   }
 
   /**
@@ -326,5 +354,68 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   void setFaviconsEnabled(bool enabled)
   {
     webkit_website_data_manager_set_favicons_enabled(cast(WebKitWebsiteDataManager*)this._cPtr, enabled);
+  }
+}
+
+class WebsiteDataManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `baseCacheDirectory` property.
+      Params:
+        propval = The base directory for caches. If null, a default location will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseCacheDirectory(string propval)
+  {
+    return setProperty("base-cache-directory", propval);
+  }
+
+  /**
+      Set `baseDataDirectory` property.
+      Params:
+        propval = The base directory for website data. If null, a default location will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseDataDirectory(string propval)
+  {
+    return setProperty("base-data-directory", propval);
+  }
+
+  /**
+      Set `originStorageRatio` property.
+      Params:
+        propval = The percentage of volume space that can be used for data storage for every domain.
+          If the maximum storage is reached the storage request will fail with a QuotaExceededError exception.
+          A value of 0.0 means that data storage is not allowed. A value of -1.0, which is the default,
+          means WebKit will use the default quota (1 GiB).
+      Returns: Builder instance for fluent chaining
+  */
+  T originStorageRatio(double propval)
+  {
+    return setProperty("origin-storage-ratio", propval);
+  }
+
+  /**
+      Set `totalStorageRatio` property.
+      Params:
+        propval = The percentage of volume space that can be used for data storage for all domains.
+          If the maximum storage is reached the eviction will happen.
+          A value of 0.0 means that data storage is not allowed. A value of -1.0, which is the default,
+          means there's no limit for the total storage.
+      Returns: Builder instance for fluent chaining
+  */
+  T totalStorageRatio(double propval)
+  {
+    return setProperty("total-storage-ratio", propval);
+  }
+}
+
+/// Fluent builder for [webkit.website_data_manager.WebsiteDataManager]
+final class WebsiteDataManagerGidBuilder : WebsiteDataManagerGidBuilderImpl!WebsiteDataManagerGidBuilder
+{
+  WebsiteDataManager build()
+  {
+    return new WebsiteDataManager(cast(void*)createGObject(WebsiteDataManager._getGType), No.Take);
   }
 }

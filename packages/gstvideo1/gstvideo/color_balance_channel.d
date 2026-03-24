@@ -3,6 +3,7 @@ module gstvideo.color_balance_channel;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gstvideo.c.functions;
 import gstvideo.c.types;
@@ -39,6 +40,15 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
   override ColorBalanceChannel self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstvideo.color_balance_channel.ColorBalanceChannel]
+  Returns: New builder object
+  */
+  static ColorBalanceChannelGidBuilder builder()
+  {
+    return new ColorBalanceChannelGidBuilder;
   }
 
   /**
@@ -82,5 +92,18 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+}
+
+class ColorBalanceChannelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstvideo.color_balance_channel.ColorBalanceChannel]
+final class ColorBalanceChannelGidBuilder : ColorBalanceChannelGidBuilderImpl!ColorBalanceChannelGidBuilder
+{
+  ColorBalanceChannel build()
+  {
+    return new ColorBalanceChannel(cast(void*)createGObject(ColorBalanceChannel._getGType), No.Take);
   }
 }

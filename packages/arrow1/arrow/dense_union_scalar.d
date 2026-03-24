@@ -8,6 +8,7 @@ import arrow.scalar;
 import arrow.types;
 import arrow.union_scalar;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class DenseUnionScalar : arrow.union_scalar.UnionScalar
@@ -38,11 +39,33 @@ class DenseUnionScalar : arrow.union_scalar.UnionScalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.dense_union_scalar.DenseUnionScalar]
+  Returns: New builder object
+  */
+  static DenseUnionScalarGidBuilder builder()
+  {
+    return new DenseUnionScalarGidBuilder;
+  }
+
   /** */
   this(arrow.dense_union_data_type.DenseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {
     GArrowDenseUnionScalar* _cretval;
     _cretval = garrow_dense_union_scalar_new(dataType ? cast(GArrowDenseUnionDataType*)dataType._cPtr(No.Dup) : null, typeCode, value ? cast(GArrowScalar*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class DenseUnionScalarGidBuilderImpl(T) : arrow.union_scalar.UnionScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.dense_union_scalar.DenseUnionScalar]
+final class DenseUnionScalarGidBuilder : DenseUnionScalarGidBuilderImpl!DenseUnionScalarGidBuilder
+{
+  DenseUnionScalar build()
+  {
+    return new DenseUnionScalar(cast(void*)createGObject(DenseUnionScalar._getGType), Yes.Take);
   }
 }

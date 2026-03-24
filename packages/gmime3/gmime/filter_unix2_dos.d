@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter to convert a stream from Windows/DOS line endings to Unix line endings.
@@ -39,6 +40,15 @@ class FilterUnix2Dos : gmime.filter.Filter
   }
 
   /**
+  Get builder for [gmime.filter_unix2_dos.FilterUnix2Dos]
+  Returns: New builder object
+  */
+  static FilterUnix2DosGidBuilder builder()
+  {
+    return new FilterUnix2DosGidBuilder;
+  }
+
+  /**
       Creates a new #GMimeFilterUnix2Dos filter.
   
       Params:
@@ -50,5 +60,18 @@ class FilterUnix2Dos : gmime.filter.Filter
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_unix2dos_new(ensureNewline);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FilterUnix2DosGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_unix2_dos.FilterUnix2Dos]
+final class FilterUnix2DosGidBuilder : FilterUnix2DosGidBuilderImpl!FilterUnix2DosGidBuilder
+{
+  FilterUnix2Dos build()
+  {
+    return new FilterUnix2Dos(cast(void*)createGObject(FilterUnix2Dos._getGType), Yes.Take);
   }
 }

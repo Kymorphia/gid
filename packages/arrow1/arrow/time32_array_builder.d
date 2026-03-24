@@ -8,6 +8,7 @@ import arrow.time32_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -36,6 +37,15 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
   override Time32ArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.time32_array_builder.Time32ArrayBuilder]
+  Returns: New builder object
+  */
+  static Time32ArrayBuilderGidBuilder builder()
+  {
+    return new Time32ArrayBuilderGidBuilder;
   }
 
   /** */
@@ -100,5 +110,18 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class Time32ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.time32_array_builder.Time32ArrayBuilder]
+final class Time32ArrayBuilderGidBuilder : Time32ArrayBuilderGidBuilderImpl!Time32ArrayBuilderGidBuilder
+{
+  Time32ArrayBuilder build()
+  {
+    return new Time32ArrayBuilder(cast(void*)createGObject(Time32ArrayBuilder._getGType), Yes.Take);
   }
 }

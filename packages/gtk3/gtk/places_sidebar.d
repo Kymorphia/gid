@@ -9,6 +9,7 @@ import gio.file;
 import gio.mount_operation;
 import gio.volume;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -83,6 +84,15 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     return this;
   }
 
+  /**
+  Get builder for [gtk.places_sidebar.PlacesSidebar]
+  Returns: New builder object
+  */
+  static PlacesSidebarGidBuilder builder()
+  {
+    return new PlacesSidebarGidBuilder;
+  }
+
   /** */
   @property bool localOnly()
   {
@@ -92,7 +102,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void localOnly(bool propval)
   {
-    return setLocalOnly(propval);
+    setLocalOnly(propval);
   }
 
   /** */
@@ -104,7 +114,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void location(gio.file.File propval)
   {
-    return setLocation(propval);
+    setLocation(propval);
   }
 
   /** */
@@ -116,7 +126,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void openFlags(gtk.types.PlacesOpenFlags propval)
   {
-    return setOpenFlags(propval);
+    setOpenFlags(propval);
   }
 
   /**
@@ -149,7 +159,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void showConnectToServer(bool propval)
   {
-    return setShowConnectToServer(propval);
+    setShowConnectToServer(propval);
   }
 
   /** */
@@ -161,7 +171,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void showDesktop(bool propval)
   {
-    return setShowDesktop(propval);
+    setShowDesktop(propval);
   }
 
   /** */
@@ -173,7 +183,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void showEnterLocation(bool propval)
   {
-    return setShowEnterLocation(propval);
+    setShowEnterLocation(propval);
   }
 
   /** */
@@ -185,7 +195,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void showOtherLocations(bool propval)
   {
-    return setShowOtherLocations(propval);
+    setShowOtherLocations(propval);
   }
 
   /** */
@@ -197,7 +207,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void showRecent(bool propval)
   {
-    return setShowRecent(propval);
+    setShowRecent(propval);
   }
 
   /** */
@@ -209,7 +219,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void showStarredLocation(bool propval)
   {
-    return setShowStarredLocation(propval);
+    setShowStarredLocation(propval);
   }
 
   /** */
@@ -221,7 +231,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   /** */
   @property void showTrash(bool propval)
   {
-    return setShowTrash(propval);
+    setShowTrash(propval);
   }
 
   /**
@@ -1281,5 +1291,91 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unmount", closure, after);
+  }
+}
+
+class PlacesSidebarGidBuilderImpl(T) : gtk.scrolled_window.ScrolledWindowGidBuilderImpl!T
+{
+
+
+  /** */
+  T localOnly(bool propval)
+  {
+    return setProperty("local-only", propval);
+  }
+
+  /** */
+  T location(gio.file.File propval)
+  {
+    return setProperty("location", propval);
+  }
+
+  /** */
+  T openFlags(gtk.types.PlacesOpenFlags propval)
+  {
+    return setProperty("open-flags", propval);
+  }
+
+  /**
+      Set `populateAll` property.
+      Params:
+        propval = If :populate-all is true, the #GtkPlacesSidebar::populate-popup signal
+          is also emitted for popovers.
+      Returns: Builder instance for fluent chaining
+  */
+  T populateAll(bool propval)
+  {
+    return setProperty("populate-all", propval);
+  }
+
+  /** */
+  T showConnectToServer(bool propval)
+  {
+    return setProperty("show-connect-to-server", propval);
+  }
+
+  /** */
+  T showDesktop(bool propval)
+  {
+    return setProperty("show-desktop", propval);
+  }
+
+  /** */
+  T showEnterLocation(bool propval)
+  {
+    return setProperty("show-enter-location", propval);
+  }
+
+  /** */
+  T showOtherLocations(bool propval)
+  {
+    return setProperty("show-other-locations", propval);
+  }
+
+  /** */
+  T showRecent(bool propval)
+  {
+    return setProperty("show-recent", propval);
+  }
+
+  /** */
+  T showStarredLocation(bool propval)
+  {
+    return setProperty("show-starred-location", propval);
+  }
+
+  /** */
+  T showTrash(bool propval)
+  {
+    return setProperty("show-trash", propval);
+  }
+}
+
+/// Fluent builder for [gtk.places_sidebar.PlacesSidebar]
+final class PlacesSidebarGidBuilder : PlacesSidebarGidBuilderImpl!PlacesSidebarGidBuilder
+{
+  PlacesSidebar build()
+  {
+    return new PlacesSidebar(cast(void*)createGObject(PlacesSidebar._getGType), No.Take);
   }
 }

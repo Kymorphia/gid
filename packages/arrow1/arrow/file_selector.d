@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class FileSelector : gobject.object.ObjectWrap
   override FileSelector self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.file_selector.FileSelector]
+  Returns: New builder object
+  */
+  static FileSelectorGidBuilder builder()
+  {
+    return new FileSelectorGidBuilder;
   }
 
   /**
@@ -116,5 +126,65 @@ class FileSelector : gobject.object.ObjectWrap
   @property void recursive(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("recursive", propval);
+  }
+}
+
+class FileSelectorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `allowNotFound` property.
+      Params:
+        propval = The behavior if `base_dir` isn't found in the file system.
+          If false, an error is returned.  If true, an empty selection is returned.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowNotFound(bool propval)
+  {
+    return setProperty("allow-not-found", propval);
+  }
+
+  /**
+      Set `baseDir` property.
+      Params:
+        propval = The directory in which to select files.
+          If the path exists but doesn't point to a directory, this should
+          be an error.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseDir(string propval)
+  {
+    return setProperty("base-dir", propval);
+  }
+
+  /**
+      Set `maxRecursion` property.
+      Params:
+        propval = The maximum number of subdirectories to recurse into.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxRecursion(int propval)
+  {
+    return setProperty("max-recursion", propval);
+  }
+
+  /**
+      Set `recursive` property.
+      Params:
+        propval = Whether to recurse into subdirectories.
+      Returns: Builder instance for fluent chaining
+  */
+  T recursive(bool propval)
+  {
+    return setProperty("recursive", propval);
+  }
+}
+
+/// Fluent builder for [arrow.file_selector.FileSelector]
+final class FileSelectorGidBuilder : FileSelectorGidBuilderImpl!FileSelectorGidBuilder
+{
+  FileSelector build()
+  {
+    return new FileSelector(cast(void*)createGObject(FileSelector._getGType), No.Take);
   }
 }

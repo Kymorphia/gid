@@ -7,6 +7,7 @@ public import atk.c.types;
 public import atk.types;
 public import gid.gid;
 public import glib.iochannel;
+public import gobject.gid_builder;
 
 /**
     The ATK interface which provides access to streamable content.
@@ -100,4 +101,8 @@ template StreamableContentT()
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
+}
+
+template StreamableContentGidBuilderT()
+{
 }

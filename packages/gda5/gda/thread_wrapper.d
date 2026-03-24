@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import glib.iochannel;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -38,6 +39,15 @@ class ThreadWrapper : gobject.object.ObjectWrap
   override ThreadWrapper self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.thread_wrapper.ThreadWrapper]
+  Returns: New builder object
+  */
+  static ThreadWrapperGidBuilder builder()
+  {
+    return new ThreadWrapperGidBuilder;
   }
 
   /**
@@ -245,6 +255,19 @@ class ThreadWrapper : gobject.object.ObjectWrap
   void unsetIoChannel()
   {
     gda_thread_wrapper_unset_io_channel(cast(GdaThreadWrapper*)this._cPtr);
+  }
+}
+
+class ThreadWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.thread_wrapper.ThreadWrapper]
+final class ThreadWrapperGidBuilder : ThreadWrapperGidBuilderImpl!ThreadWrapperGidBuilder
+{
+  ThreadWrapper build()
+  {
+    return new ThreadWrapper(cast(void*)createGObject(ThreadWrapper._getGType), Yes.Take);
   }
 }
 

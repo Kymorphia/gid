@@ -4,6 +4,7 @@ module gtk.widget_paintable;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -61,6 +62,15 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 
   /**
+  Get builder for [gtk.widget_paintable.WidgetPaintable]
+  Returns: New builder object
+  */
+  static WidgetPaintableGidBuilder builder()
+  {
+    return new WidgetPaintableGidBuilder;
+  }
+
+  /**
       Get `widget` property.
       Returns: The observed widget or null if none.
   */
@@ -76,7 +86,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   @property void widget(gtk.widget.Widget propval)
   {
-    return setWidget(propval);
+    setWidget(propval);
   }
 
   mixin PaintableT!();
@@ -116,5 +126,31 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   void setWidget(gtk.widget.Widget widget = null)
   {
     gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+}
+
+class WidgetPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T
+{
+
+  mixin PaintableGidBuilderT!();
+
+  /**
+      Set `widget` property.
+      Params:
+        propval = The observed widget or null if none.
+      Returns: Builder instance for fluent chaining
+  */
+  T widget(gtk.widget.Widget propval)
+  {
+    return setProperty("widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.widget_paintable.WidgetPaintable]
+final class WidgetPaintableGidBuilder : WidgetPaintableGidBuilderImpl!WidgetPaintableGidBuilder
+{
+  WidgetPaintable build()
+  {
+    return new WidgetPaintable(cast(void*)createGObject(WidgetPaintable._getGType), Yes.Take);
   }
 }

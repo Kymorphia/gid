@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.file_system;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,21 @@ class SlowFileSystem : arrow.file_system.FileSystem
   override SlowFileSystem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.slow_file_system.SlowFileSystem]
+  Returns: New builder object
+  */
+  static SlowFileSystemGidBuilder builder()
+  {
+    return new SlowFileSystemGidBuilder;
+  }
+
+  /** */
+  @property arrow.file_system.FileSystem baseFileSystem()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.file_system.FileSystem)("base-file-system");
   }
 
   /**
@@ -72,5 +88,24 @@ class SlowFileSystem : arrow.file_system.FileSystem
     _cretval = garrow_slow_file_system_new_average_latency_and_seed(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem._cPtr(No.Dup) : null, averageLatency, seed);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class SlowFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
+{
+
+  /** */
+  T baseFileSystem(arrow.file_system.FileSystem propval)
+  {
+    return setProperty("base-file-system", propval);
+  }
+}
+
+/// Fluent builder for [arrow.slow_file_system.SlowFileSystem]
+final class SlowFileSystemGidBuilder : SlowFileSystemGidBuilderImpl!SlowFileSystemGidBuilder
+{
+  SlowFileSystem build()
+  {
+    return new SlowFileSystem(cast(void*)createGObject(SlowFileSystem._getGType), No.Take);
   }
 }

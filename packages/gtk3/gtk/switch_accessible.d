@@ -7,6 +7,7 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -41,8 +42,32 @@ class SwitchAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Acti
     return this;
   }
 
+  /**
+  Get builder for [gtk.switch_accessible.SwitchAccessible]
+  Returns: New builder object
+  */
+  static SwitchAccessibleGidBuilder builder()
+  {
+    return new SwitchAccessibleGidBuilder;
+  }
+
   mixin ActionT!();
   alias getDescription = atk.object.ObjectWrap.getDescription;
   alias getName = atk.object.ObjectWrap.getName;
   alias setDescription = atk.object.ObjectWrap.setDescription;
+}
+
+class SwitchAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.switch_accessible.SwitchAccessible]
+final class SwitchAccessibleGidBuilder : SwitchAccessibleGidBuilderImpl!SwitchAccessibleGidBuilder
+{
+  SwitchAccessible build()
+  {
+    return new SwitchAccessible(cast(void*)createGObject(SwitchAccessible._getGType), No.Take);
+  }
 }

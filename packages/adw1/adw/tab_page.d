@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -43,6 +44,24 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
+  Get builder for [adw.tab_page.TabPage]
+  Returns: New builder object
+  */
+  static TabPageGidBuilder builder()
+  {
+    return new TabPageGidBuilder;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child of the page.
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
       Get `icon` property.
       Returns: The icon of the page.
         
@@ -70,7 +89,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void icon(gio.icon.Icon propval)
   {
-    return setIcon(propval);
+    setIcon(propval);
   }
 
   /**
@@ -99,7 +118,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void indicatorActivatable(bool propval)
   {
-    return setIndicatorActivatable(propval);
+    setIndicatorActivatable(propval);
   }
 
   /**
@@ -150,7 +169,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void indicatorIcon(gio.icon.Icon propval)
   {
-    return setIndicatorIcon(propval);
+    setIndicatorIcon(propval);
   }
 
   /**
@@ -177,7 +196,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void indicatorTooltip(string propval)
   {
-    return setIndicatorTooltip(propval);
+    setIndicatorTooltip(propval);
   }
 
   /**
@@ -206,7 +225,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void keyword(string propval)
   {
-    return setKeyword(propval);
+    setKeyword(propval);
   }
 
   /**
@@ -241,7 +260,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void liveThumbnail(bool propval)
   {
-    return setLiveThumbnail(propval);
+    setLiveThumbnail(propval);
   }
 
   /**
@@ -272,7 +291,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void loading(bool propval)
   {
-    return setLoading(propval);
+    setLoading(propval);
   }
 
   /**
@@ -311,7 +330,18 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void needsAttention(bool propval)
   {
-    return setNeedsAttention(propval);
+    setNeedsAttention(propval);
+  }
+
+  /**
+      Get `parent` property.
+      Returns: The parent page of the page.
+        
+        See [adw.tab_view.TabView.addPage] and [adw.tab_view.TabView.closePage].
+  */
+  @property adw.tab_page.TabPage parent()
+  {
+    return getParent();
   }
 
   /**
@@ -368,7 +398,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void thumbnailXalign(float propval)
   {
-    return setThumbnailXalign(propval);
+    setThumbnailXalign(propval);
   }
 
   /**
@@ -405,7 +435,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void thumbnailYalign(float propval)
   {
-    return setThumbnailYalign(propval);
+    setThumbnailYalign(propval);
   }
 
   /**
@@ -438,7 +468,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -467,7 +497,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   @property void tooltip(string propval)
   {
-    return setTooltip(propval);
+    setTooltip(propval);
   }
 
   mixin AccessibleT!();
@@ -899,5 +929,266 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     adw_tab_page_set_tooltip(cast(AdwTabPage*)this._cPtr, _tooltip);
+  }
+}
+
+class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.accessible.AccessibleGidBuilderImpl!T
+{
+
+  mixin AccessibleGidBuilderT!();
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child of the page.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The icon of the page.
+          
+          `class@TabBar` and `class@TabOverview` display the icon next to the title,
+          unless `property@TabPage:loading` is set to `TRUE`.
+          
+          [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
+          [propertyTabPage:indicator-icon] is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T icon(gio.icon.Icon propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `indicatorActivatable` property.
+      Params:
+        propval = Whether the indicator icon is activatable.
+          
+          If set to `TRUE`, `signal@TabView::indicator-activated` will be emitted
+          when the indicator icon is clicked.
+          
+          If `property@TabPage:indicator-icon` is not set, does nothing.
+      Returns: Builder instance for fluent chaining
+  */
+  T indicatorActivatable(bool propval)
+  {
+    return setProperty("indicator-activatable", propval);
+  }
+
+  /**
+      Set `indicatorIcon` property.
+      Params:
+        propval = An indicator icon for the page.
+          
+          A common use case is an audio or camera indicator in a web browser.
+          
+          `class@TabBar` will show it at the beginning of the tab, alongside icon
+          representing `property@TabPage:icon` or loading spinner.
+          
+          If the page is pinned, the indicator will be shown instead of icon or
+          spinner.
+          
+          `class@TabOverview` will show it at the at the top part of the thumbnail.
+          
+          `property@TabPage:indicator-tooltip` can be used to set the tooltip on the
+          indicator icon.
+          
+          If `property@TabPage:indicator-activatable` is set to `TRUE`, the
+          indicator icon can act as a button.
+      Returns: Builder instance for fluent chaining
+  */
+  T indicatorIcon(gio.icon.Icon propval)
+  {
+    return setProperty("indicator-icon", propval);
+  }
+
+  /**
+      Set `indicatorTooltip` property.
+      Params:
+        propval = The tooltip of the indicator icon.
+          
+          The tooltip can be marked up with the Pango text markup language.
+          
+          See `property@TabPage:indicator-icon`.
+      Returns: Builder instance for fluent chaining
+  */
+  T indicatorTooltip(string propval)
+  {
+    return setProperty("indicator-tooltip", propval);
+  }
+
+  /**
+      Set `keyword` property.
+      Params:
+        propval = The search keyboard of the page.
+          
+          `class@TabOverview` can search pages by their keywords in addition to their
+          titles and tooltips.
+          
+          Keywords allow to include e.g. page URLs into tab search in a web browser.
+      Returns: Builder instance for fluent chaining
+  */
+  T keyword(string propval)
+  {
+    return setProperty("keyword", propval);
+  }
+
+  /**
+      Set `liveThumbnail` property.
+      Params:
+        propval = Whether to enable live thumbnail for this page.
+          
+          When set to `TRUE`, the page's thumbnail in `class@TabOverview` will update
+          immediately when the page is redrawn or resized.
+          
+          If it's set to `FALSE`, the thumbnail will only be live when the page is
+          selected, and otherwise it will be static and will only update when
+          [adw.tab_page.TabPage.invalidateThumbnail] or
+          [adw.tab_view.TabView.invalidateThumbnails] is called.
+      Returns: Builder instance for fluent chaining
+  */
+  T liveThumbnail(bool propval)
+  {
+    return setProperty("live-thumbnail", propval);
+  }
+
+  /**
+      Set `loading` property.
+      Params:
+        propval = Whether the page is loading.
+          
+          If set to `TRUE`, `class@TabBar` and `class@TabOverview` will display a
+          spinner in place of icon.
+          
+          If the page is pinned and `property@TabPage:indicator-icon` is set,
+          loading status will not be visible with [adw.tab_bar.TabBar].
+      Returns: Builder instance for fluent chaining
+  */
+  T loading(bool propval)
+  {
+    return setProperty("loading", propval);
+  }
+
+  /**
+      Set `needsAttention` property.
+      Params:
+        propval = Whether the page needs attention.
+          
+          `class@TabBar` will display a line under the tab representing the page if
+          set to `TRUE`. If the tab is not visible, the corresponding edge of the tab
+          bar will be highlighted.
+          
+          `class@TabOverview` will display a dot in the corner of the thumbnail if set
+          to `TRUE`.
+          
+          `class@TabButton` will display a dot if any of the pages that aren't
+          selected have this property set to `TRUE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T needsAttention(bool propval)
+  {
+    return setProperty("needs-attention", propval);
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = The parent page of the page.
+          
+          See [adw.tab_view.TabView.addPage] and [adw.tab_view.TabView.closePage].
+      Returns: Builder instance for fluent chaining
+  */
+  T parent(adw.tab_page.TabPage propval)
+  {
+    return setProperty("parent", propval);
+  }
+
+  /**
+      Set `thumbnailXalign` property.
+      Params:
+        propval = The horizontal alignment of the page thumbnail.
+          
+          If the page is so wide that `class@TabOverview` can't display it completely
+          and has to crop it, horizontal alignment will determine which part of the
+          page will be visible.
+          
+          For example, 0.5 means the center of the page will be visible, 0 means the
+          start edge will be visible and 1 means the end edge will be visible.
+          
+          The default horizontal alignment is 0.
+      Returns: Builder instance for fluent chaining
+  */
+  T thumbnailXalign(float propval)
+  {
+    return setProperty("thumbnail-xalign", propval);
+  }
+
+  /**
+      Set `thumbnailYalign` property.
+      Params:
+        propval = The vertical alignment of the page thumbnail.
+          
+          If the page is so tall that `class@TabOverview` can't display it completely
+          and has to crop it, vertical alignment will determine which part of the
+          page will be visible.
+          
+          For example, 0.5 means the center of the page will be visible, 0 means the
+          top edge will be visible and 1 means the bottom edge will be visible.
+          
+          The default vertical alignment is 0.
+      Returns: Builder instance for fluent chaining
+  */
+  T thumbnailYalign(float propval)
+  {
+    return setProperty("thumbnail-yalign", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the page.
+          
+          `class@TabBar` will display it in the center of the tab unless it's pinned,
+          and will use it as a tooltip unless `property@TabPage:tooltip` is set.
+          
+          `class@TabOverview` will display it below the thumbnail unless it's pinned,
+          or inside the card otherwise, and will use it as a tooltip unless
+          `property@TabPage:tooltip` is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `tooltip` property.
+      Params:
+        propval = The tooltip of the page.
+          
+          The tooltip can be marked up with the Pango text markup language.
+          
+          If not set, `class@TabBar` and `class@TabOverview` will use
+          `property@TabPage:title` as a tooltip instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T tooltip(string propval)
+  {
+    return setProperty("tooltip", propval);
+  }
+}
+
+/// Fluent builder for [adw.tab_page.TabPage]
+final class TabPageGidBuilder : TabPageGidBuilderImpl!TabPageGidBuilder
+{
+  TabPage build()
+  {
+    return new TabPage(cast(void*)createGObject(TabPage._getGType), No.Take);
   }
 }

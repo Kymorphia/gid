@@ -8,6 +8,7 @@ import arrow.sparse_union_data_type;
 import arrow.types;
 import arrow.union_scalar;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class SparseUnionScalar : arrow.union_scalar.UnionScalar
@@ -38,11 +39,33 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.sparse_union_scalar.SparseUnionScalar]
+  Returns: New builder object
+  */
+  static SparseUnionScalarGidBuilder builder()
+  {
+    return new SparseUnionScalarGidBuilder;
+  }
+
   /** */
   this(arrow.sparse_union_data_type.SparseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {
     GArrowSparseUnionScalar* _cretval;
     _cretval = garrow_sparse_union_scalar_new(dataType ? cast(GArrowSparseUnionDataType*)dataType._cPtr(No.Dup) : null, typeCode, value ? cast(GArrowScalar*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class SparseUnionScalarGidBuilderImpl(T) : arrow.union_scalar.UnionScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.sparse_union_scalar.SparseUnionScalar]
+final class SparseUnionScalarGidBuilder : SparseUnionScalarGidBuilderImpl!SparseUnionScalarGidBuilder
+{
+  SparseUnionScalar build()
+  {
+    return new SparseUnionScalar(cast(void*)createGObject(SparseUnionScalar._getGType), Yes.Take);
   }
 }

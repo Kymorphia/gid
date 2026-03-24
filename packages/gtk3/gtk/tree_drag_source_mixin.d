@@ -3,6 +3,7 @@ module gtk.tree_drag_source_mixin;
 
 public import gtk.tree_drag_source_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.selection_data;
@@ -65,4 +66,8 @@ template TreeDragSourceT()
     _retval = cast(bool)gtk_tree_drag_source_row_draggable(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
+}
+
+template TreeDragSourceGidBuilderT()
+{
 }

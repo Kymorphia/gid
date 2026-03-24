@@ -2,9 +2,11 @@
 module javascriptcore.class_;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.c.functions;
 import javascriptcore.c.types;
+import javascriptcore.context;
 import javascriptcore.types;
 
 /**
@@ -43,6 +45,33 @@ class Class : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [javascriptcore.class_.Class]
+  Returns: New builder object
+  */
+  static ClassGidBuilder builder()
+  {
+    return new ClassGidBuilder;
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name of the class.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
+      Get `parent` property.
+      Returns: The parent class or null in case of final classes.
+  */
+  @property javascriptcore.class_.Class parent()
+  {
+    return getParent();
+  }
+
+  /**
       Get the class name of jsc_class
       Returns: the name of jsc_class
   */
@@ -64,5 +93,51 @@ class Class : gobject.object.ObjectWrap
     _cretval = jsc_class_get_parent(cast(JSCClass*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class ClassGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `context` property.
+      Params:
+        propval = The #JSCContext in which the class was registered.
+      Returns: Builder instance for fluent chaining
+  */
+  T context(javascriptcore.context.Context propval)
+  {
+    return setProperty("context", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the class.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = The parent class or null in case of final classes.
+      Returns: Builder instance for fluent chaining
+  */
+  T parent(javascriptcore.class_.Class propval)
+  {
+    return setProperty("parent", propval);
+  }
+}
+
+/// Fluent builder for [javascriptcore.class_.Class]
+final class ClassGidBuilder : ClassGidBuilderImpl!ClassGidBuilder
+{
+  Class build()
+  {
+    return new Class(cast(void*)createGObject(Class._getGType), No.Take);
   }
 }

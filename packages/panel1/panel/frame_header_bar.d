@@ -2,6 +2,7 @@
 module panel.frame_header_bar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -53,6 +54,15 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 
   /**
+  Get builder for [panel.frame_header_bar.FrameHeaderBar]
+  Returns: New builder object
+  */
+  static FrameHeaderBarGidBuilder builder()
+  {
+    return new FrameHeaderBarGidBuilder;
+  }
+
+  /**
       Get `showIcon` property.
       Returns: Whether to show the icon or not.
   */
@@ -68,7 +78,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   @property void showIcon(bool propval)
   {
-    return setShowIcon(propval);
+    setShowIcon(propval);
   }
 
   mixin FrameHeaderT!();
@@ -116,5 +126,31 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   void setShowIcon(bool showIcon)
   {
     panel_frame_header_bar_set_show_icon(cast(PanelFrameHeaderBar*)this._cPtr, showIcon);
+  }
+}
+
+class FrameHeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.frame_header.FrameHeaderGidBuilderImpl!T
+{
+
+  mixin FrameHeaderGidBuilderT!();
+
+  /**
+      Set `showIcon` property.
+      Params:
+        propval = Whether to show the icon or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T showIcon(bool propval)
+  {
+    return setProperty("show-icon", propval);
+  }
+}
+
+/// Fluent builder for [panel.frame_header_bar.FrameHeaderBar]
+final class FrameHeaderBarGidBuilder : FrameHeaderBarGidBuilderImpl!FrameHeaderBarGidBuilder
+{
+  FrameHeaderBar build()
+  {
+    return new FrameHeaderBar(cast(void*)createGObject(FrameHeaderBar._getGType), No.Take);
   }
 }

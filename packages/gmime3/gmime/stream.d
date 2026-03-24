@@ -5,6 +5,7 @@ import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -36,6 +37,15 @@ class Stream : gobject.object.ObjectWrap
   override Stream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.stream.Stream]
+  Returns: New builder object
+  */
+  static StreamGidBuilder builder()
+  {
+    return new StreamGidBuilder;
   }
 
   /**
@@ -292,5 +302,18 @@ class Stream : gobject.object.ObjectWrap
     auto _vector = cast(GMimeStreamIOVector*)vector.ptr;
     _retval = g_mime_stream_writev(cast(GMimeStream*)this._cPtr, _vector, _count);
     return _retval;
+  }
+}
+
+class StreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream.Stream]
+final class StreamGidBuilder : StreamGidBuilderImpl!StreamGidBuilder
+{
+  Stream build()
+  {
+    return new Stream(cast(void*)createGObject(Stream._getGType), No.Take);
   }
 }

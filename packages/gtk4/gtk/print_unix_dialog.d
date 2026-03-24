@@ -2,6 +2,7 @@
 module gtk.print_unix_dialog;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -114,6 +115,15 @@ class PrintUnixDialog : gtk.dialog.Dialog
   }
 
   /**
+  Get builder for [gtk.print_unix_dialog.PrintUnixDialog]
+  Returns: New builder object
+  */
+  static PrintUnixDialogGidBuilder builder()
+  {
+    return new PrintUnixDialogGidBuilder;
+  }
+
+  /**
       Get `currentPage` property.
       Returns: The current page in the document.
   */
@@ -129,7 +139,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   @property void currentPage(int propval)
   {
-    return setCurrentPage(propval);
+    setCurrentPage(propval);
   }
 
   /**
@@ -148,7 +158,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   @property void embedPageSetup(bool propval)
   {
-    return setEmbedPageSetup(propval);
+    setEmbedPageSetup(propval);
   }
 
   /**
@@ -167,7 +177,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   @property void hasSelection(bool propval)
   {
-    return setHasSelection(propval);
+    setHasSelection(propval);
   }
 
   /**
@@ -186,7 +196,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   @property void manualCapabilities(gtk.types.PrintCapabilities propval)
   {
-    return setManualCapabilities(propval);
+    setManualCapabilities(propval);
   }
 
   /**
@@ -205,7 +215,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   @property void pageSetup(gtk.page_setup.PageSetup propval)
   {
-    return setPageSetup(propval);
+    setPageSetup(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   @property void printSettings(gtk.print_settings.PrintSettings propval)
   {
-    return setSettings(propval);
+    setSettings(propval);
   }
 
   /**
@@ -252,7 +262,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   @property void supportSelection(bool propval)
   {
-    return setSupportSelection(propval);
+    setSupportSelection(propval);
   }
 
   /**
@@ -480,5 +490,96 @@ class PrintUnixDialog : gtk.dialog.Dialog
   void setSupportSelection(bool supportSelection)
   {
     gtk_print_unix_dialog_set_support_selection(cast(GtkPrintUnixDialog*)this._cPtr, supportSelection);
+  }
+}
+
+class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
+{
+
+
+  /**
+      Set `currentPage` property.
+      Params:
+        propval = The current page in the document.
+      Returns: Builder instance for fluent chaining
+  */
+  T currentPage(int propval)
+  {
+    return setProperty("current-page", propval);
+  }
+
+  /**
+      Set `embedPageSetup` property.
+      Params:
+        propval = true if the page setup controls are embedded.
+      Returns: Builder instance for fluent chaining
+  */
+  T embedPageSetup(bool propval)
+  {
+    return setProperty("embed-page-setup", propval);
+  }
+
+  /**
+      Set `hasSelection` property.
+      Params:
+        propval = Whether the application has a selection.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasSelection(bool propval)
+  {
+    return setProperty("has-selection", propval);
+  }
+
+  /**
+      Set `manualCapabilities` property.
+      Params:
+        propval = Capabilities the application can handle.
+      Returns: Builder instance for fluent chaining
+  */
+  T manualCapabilities(gtk.types.PrintCapabilities propval)
+  {
+    return setProperty("manual-capabilities", propval);
+  }
+
+  /**
+      Set `pageSetup` property.
+      Params:
+        propval = The [gtk.page_setup.PageSetup] object to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setProperty("page-setup", propval);
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The [gtk.print_settings.PrintSettings] object used for this dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setProperty("print-settings", propval);
+  }
+
+  /**
+      Set `supportSelection` property.
+      Params:
+        propval = Whether the dialog supports selection.
+      Returns: Builder instance for fluent chaining
+  */
+  T supportSelection(bool propval)
+  {
+    return setProperty("support-selection", propval);
+  }
+}
+
+/// Fluent builder for [gtk.print_unix_dialog.PrintUnixDialog]
+final class PrintUnixDialogGidBuilder : PrintUnixDialogGidBuilderImpl!PrintUnixDialogGidBuilder
+{
+  PrintUnixDialog build()
+  {
+    return new PrintUnixDialog(cast(void*)createGObject(PrintUnixDialog._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.hseparator;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -54,6 +55,15 @@ class HSeparator : gtk.separator.Separator
   }
 
   /**
+  Get builder for [gtk.hseparator.HSeparator]
+  Returns: New builder object
+  */
+  static HSeparatorGidBuilder builder()
+  {
+    return new HSeparatorGidBuilder;
+  }
+
+  /**
       Creates a new #GtkHSeparator.
       Returns: a new #GtkHSeparator.
   
@@ -64,5 +74,19 @@ class HSeparator : gtk.separator.Separator
     GtkWidget* _cretval;
     _cretval = gtk_hseparator_new();
     this(_cretval, No.Take);
+  }
+}
+
+class HSeparatorGidBuilderImpl(T) : gtk.separator.SeparatorGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.hseparator.HSeparator]
+final class HSeparatorGidBuilder : HSeparatorGidBuilderImpl!HSeparatorGidBuilder
+{
+  HSeparator build()
+  {
+    return new HSeparator(cast(void*)createGObject(HSeparator._getGType), No.Take);
   }
 }

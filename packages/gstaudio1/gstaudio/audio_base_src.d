@@ -2,6 +2,7 @@
 module gstaudio.audio_base_src;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.element;
 import gstaudio.audio_ring_buffer;
@@ -41,6 +42,15 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   override AudioBaseSrc self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstaudio.audio_base_src.AudioBaseSrc]
+  Returns: New builder object
+  */
+  static AudioBaseSrcGidBuilder builder()
+  {
+    return new AudioBaseSrcGidBuilder;
   }
 
   /**
@@ -98,7 +108,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   /** */
   @property void provideClock(bool propval)
   {
-    return setProvideClock(propval);
+    setProvideClock(propval);
   }
 
   /** */
@@ -110,7 +120,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   /** */
   @property void slaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod propval)
   {
-    return setSlaveMethod(propval);
+    setSlaveMethod(propval);
   }
 
   /**
@@ -173,5 +183,42 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   void setSlaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod method)
   {
     gst_audio_base_src_set_slave_method(cast(GstAudioBaseSrc*)this._cPtr, method);
+  }
+}
+
+class AudioBaseSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T
+{
+
+  /** */
+  T bufferTime(long propval)
+  {
+    return setProperty("buffer-time", propval);
+  }
+
+  /** */
+  T latencyTime(long propval)
+  {
+    return setProperty("latency-time", propval);
+  }
+
+  /** */
+  T provideClock(bool propval)
+  {
+    return setProperty("provide-clock", propval);
+  }
+
+  /** */
+  T slaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod propval)
+  {
+    return setProperty("slave-method", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_base_src.AudioBaseSrc]
+final class AudioBaseSrcGidBuilder : AudioBaseSrcGidBuilderImpl!AudioBaseSrcGidBuilder
+{
+  AudioBaseSrc build()
+  {
+    return new AudioBaseSrc(cast(void*)createGObject(AudioBaseSrc._getGType), No.Take);
   }
 }

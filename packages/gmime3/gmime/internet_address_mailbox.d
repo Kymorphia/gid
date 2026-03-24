@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.internet_address;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     An RFC 2822 Mailbox address.
@@ -36,6 +37,15 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   override InternetAddressMailbox self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.internet_address_mailbox.InternetAddressMailbox]
+  Returns: New builder object
+  */
+  static InternetAddressMailboxGidBuilder builder()
+  {
+    return new InternetAddressMailboxGidBuilder;
   }
 
   /**
@@ -92,5 +102,18 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   {
     const(char)* _addr = addr.toCString(No.Alloc);
     internet_address_mailbox_set_addr(cast(GMimeInternetAddressMailbox*)this._cPtr, _addr);
+  }
+}
+
+class InternetAddressMailboxGidBuilderImpl(T) : gmime.internet_address.InternetAddressGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.internet_address_mailbox.InternetAddressMailbox]
+final class InternetAddressMailboxGidBuilder : InternetAddressMailboxGidBuilderImpl!InternetAddressMailboxGidBuilder
+{
+  InternetAddressMailbox build()
+  {
+    return new InternetAddressMailbox(cast(void*)createGObject(InternetAddressMailbox._getGType), Yes.Take);
   }
 }

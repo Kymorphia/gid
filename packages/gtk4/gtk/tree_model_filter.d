@@ -2,6 +2,7 @@
 module gtk.tree_model_filter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -114,6 +115,27 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
   override TreeModelFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.tree_model_filter.TreeModelFilter]
+  Returns: New builder object
+  */
+  static TreeModelFilterGidBuilder builder()
+  {
+    return new TreeModelFilterGidBuilder;
+  }
+
+  /** */
+  @property gtk.tree_model.TreeModel childModel()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.tree_model.TreeModel)("child-model");
+  }
+
+  /** */
+  @property gtk.tree_path.TreePath virtualRoot()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.tree_path.TreePath)("virtual-root");
   }
 
   mixin TreeDragSourceT!();
@@ -336,5 +358,33 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_model_filter_set_visible_func(cast(GtkTreeModelFilter*)this._cPtr, _funcCB, _func, _funcDestroyCB);
+  }
+}
+
+class TreeModelFilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.tree_drag_source.TreeDragSourceGidBuilderImpl!T, gtk.tree_model.TreeModelGidBuilderImpl!T
+{
+
+  mixin TreeDragSourceGidBuilderT!();
+  mixin TreeModelGidBuilderT!();
+
+  /** */
+  T childModel(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("child-model", propval);
+  }
+
+  /** */
+  T virtualRoot(gtk.tree_path.TreePath propval)
+  {
+    return setProperty("virtual-root", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_model_filter.TreeModelFilter]
+final class TreeModelFilterGidBuilder : TreeModelFilterGidBuilderImpl!TreeModelFilterGidBuilder
+{
+  TreeModelFilter build()
+  {
+    return new TreeModelFilter(cast(void*)createGObject(TreeModelFilter._getGType), No.Take);
   }
 }

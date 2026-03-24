@@ -17,6 +17,7 @@ import arrowflight.ticket;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -46,6 +47,15 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   override Server self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.server.Server]
+  Returns: New builder object
+  */
+  static ServerGidBuilder builder()
+  {
+    return new ServerGidBuilder;
   }
 
   mixin ServableT!();
@@ -150,5 +160,20 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, arrowflight.servable.ServableGidBuilderImpl!T
+{
+
+  mixin ServableGidBuilderT!();
+}
+
+/// Fluent builder for [arrowflight.server.Server]
+final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
+{
+  Server build()
+  {
+    return new Server(cast(void*)createGObject(Server._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.navigation_page;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -184,6 +185,15 @@ class NavigationSplitView : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.navigation_split_view.NavigationSplitView]
+  Returns: New builder object
+  */
+  static NavigationSplitViewGidBuilder builder()
+  {
+    return new NavigationSplitViewGidBuilder;
+  }
+
+  /**
       Get `collapsed` property.
       Returns: Whether the split view is collapsed.
         
@@ -211,7 +221,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void collapsed(bool propval)
   {
-    return setCollapsed(propval);
+    setCollapsed(propval);
   }
 
   /**
@@ -230,7 +240,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void content(adw.navigation_page.NavigationPage propval)
   {
-    return setContent(propval);
+    setContent(propval);
   }
 
   /**
@@ -261,7 +271,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void maxSidebarWidth(double propval)
   {
-    return setMaxSidebarWidth(propval);
+    setMaxSidebarWidth(propval);
   }
 
   /**
@@ -292,7 +302,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void minSidebarWidth(double propval)
   {
-    return setMinSidebarWidth(propval);
+    setMinSidebarWidth(propval);
   }
 
   /**
@@ -325,7 +335,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void showContent(bool propval)
   {
-    return setShowContent(propval);
+    setShowContent(propval);
   }
 
   /**
@@ -344,7 +354,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void sidebar(adw.navigation_page.NavigationPage propval)
   {
-    return setSidebar(propval);
+    setSidebar(propval);
   }
 
   /**
@@ -377,7 +387,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void sidebarWidthFraction(double propval)
   {
-    return setSidebarWidthFraction(propval);
+    setSidebarWidthFraction(propval);
   }
 
   /**
@@ -402,7 +412,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   @property void sidebarWidthUnit(adw.types.LengthUnit propval)
   {
-    return setSidebarWidthUnit(propval);
+    setSidebarWidthUnit(propval);
   }
 
   /**
@@ -627,5 +637,142 @@ class NavigationSplitView : gtk.widget.Widget
   void setSidebarWidthUnit(adw.types.LengthUnit unit)
   {
     adw_navigation_split_view_set_sidebar_width_unit(cast(AdwNavigationSplitView*)this._cPtr, unit);
+  }
+}
+
+class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `collapsed` property.
+      Params:
+        propval = Whether the split view is collapsed.
+          
+          When collapsed, the children are put inside an `class@NavigationView`,
+          otherwise they are displayed side by side.
+          
+          The `property@NavigationSplitView:show-content` controls which child is
+          visible while collapsed.
+      Returns: Builder instance for fluent chaining
+  */
+  T collapsed(bool propval)
+  {
+    return setProperty("collapsed", propval);
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T content(adw.navigation_page.NavigationPage propval)
+  {
+    return setProperty("content", propval);
+  }
+
+  /**
+      Set `maxSidebarWidth` property.
+      Params:
+        propval = The maximum sidebar width.
+          
+          Maximum width is affected by
+          `property@NavigationSplitView:sidebar-width-unit`.
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxSidebarWidth(double propval)
+  {
+    return setProperty("max-sidebar-width", propval);
+  }
+
+  /**
+      Set `minSidebarWidth` property.
+      Params:
+        propval = The minimum sidebar width.
+          
+          Minimum width is affected by
+          `property@NavigationSplitView:sidebar-width-unit`.
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+      Returns: Builder instance for fluent chaining
+  */
+  T minSidebarWidth(double propval)
+  {
+    return setProperty("min-sidebar-width", propval);
+  }
+
+  /**
+      Set `showContent` property.
+      Params:
+        propval = Determines the visible page when collapsed.
+          
+          If set to `TRUE`, the content widget will be the visible page when
+          `property@NavigationSplitView:collapsed` is `TRUE`; otherwise the sidebar
+          widget will be visible.
+          
+          If the split view is already collapsed, the visible page changes
+          immediately.
+      Returns: Builder instance for fluent chaining
+  */
+  T showContent(bool propval)
+  {
+    return setProperty("show-content", propval);
+  }
+
+  /**
+      Set `sidebar` property.
+      Params:
+        propval = The sidebar widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebar(adw.navigation_page.NavigationPage propval)
+  {
+    return setProperty("sidebar", propval);
+  }
+
+  /**
+      Set `sidebarWidthFraction` property.
+      Params:
+        propval = The preferred sidebar width as a fraction of the total width.
+          
+          The preferred width is additionally limited by
+          `property@NavigationSplitView:min-sidebar-width` and
+          `property@NavigationSplitView:max-sidebar-width`.
+          
+          The sidebar widget can be allocated with larger width if its own minimum
+          width exceeds the preferred width.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarWidthFraction(double propval)
+  {
+    return setProperty("sidebar-width-fraction", propval);
+  }
+
+  /**
+      Set `sidebarWidthUnit` property.
+      Params:
+        propval = The length unit for minimum and maximum sidebar widths.
+          
+          See `property@NavigationSplitView:min-sidebar-width` and
+          `property@NavigationSplitView:max-sidebar-width`.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarWidthUnit(adw.types.LengthUnit propval)
+  {
+    return setProperty("sidebar-width-unit", propval);
+  }
+}
+
+/// Fluent builder for [adw.navigation_split_view.NavigationSplitView]
+final class NavigationSplitViewGidBuilder : NavigationSplitViewGidBuilderImpl!NavigationSplitViewGidBuilder
+{
+  NavigationSplitView build()
+  {
+    return new NavigationSplitView(cast(void*)createGObject(NavigationSplitView._getGType), No.Take);
   }
 }

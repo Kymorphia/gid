@@ -7,6 +7,7 @@ import gdk.rectangle;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gtk.text_iter;
@@ -47,6 +48,15 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
+  Get builder for [gtksource.gutter_renderer.GutterRenderer]
+  Returns: New builder object
+  */
+  static GutterRendererGidBuilder builder()
+  {
+    return new GutterRendererGidBuilder;
+  }
+
+  /**
       Get `alignmentMode` property.
       Returns: The alignment mode of the renderer. This can be used to indicate
         that in the case a cell spans multiple lines (due to text wrapping)
@@ -68,7 +78,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
   {
-    return setAlignmentMode(propval);
+    setAlignmentMode(propval);
   }
 
   /** */
@@ -104,7 +114,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   /** */
   @property void size(int propval)
   {
-    return setSize(propval);
+    setSize(propval);
   }
 
   /**
@@ -132,7 +142,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   /**
@@ -825,5 +835,109 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("queue-draw", closure, after);
+  }
+}
+
+class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+
+  /**
+      Set `alignmentMode` property.
+      Params:
+        propval = The alignment mode of the renderer. This can be used to indicate
+          that in the case a cell spans multiple lines (due to text wrapping)
+          the alignment should work on either the full cell, the first line
+          or the last line.
+      Returns: Builder instance for fluent chaining
+  */
+  T alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
+  {
+    return setProperty("alignment-mode", propval);
+  }
+
+  /** */
+  T backgroundRgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("background-rgba", propval);
+  }
+
+  /** */
+  T backgroundSet(bool propval)
+  {
+    return setProperty("background-set", propval);
+  }
+
+  /** */
+  T size(int propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = The visibility of the renderer.
+      Returns: Builder instance for fluent chaining
+  */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the renderer. Set to 0 for a left
+          alignment. 1 for a right alignment. And 0.5 for centering the cells.
+          A value lower than 0 doesn't modify the alignment.
+      Returns: Builder instance for fluent chaining
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `xpad` property.
+      Params:
+        propval = The left and right padding of the renderer.
+      Returns: Builder instance for fluent chaining
+  */
+  T xpad(int propval)
+  {
+    return setProperty("xpad", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the renderer. Set to 0 for a top
+          alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+          A value lower than 0 doesn't modify the alignment.
+      Returns: Builder instance for fluent chaining
+  */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+
+  /**
+      Set `ypad` property.
+      Params:
+        propval = The top and bottom padding of the renderer.
+      Returns: Builder instance for fluent chaining
+  */
+  T ypad(int propval)
+  {
+    return setProperty("ypad", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.gutter_renderer.GutterRenderer]
+final class GutterRendererGidBuilder : GutterRendererGidBuilderImpl!GutterRendererGidBuilder
+{
+  GutterRenderer build()
+  {
+    return new GutterRenderer(cast(void*)createGObject(GutterRenderer._getGType), No.Take);
   }
 }

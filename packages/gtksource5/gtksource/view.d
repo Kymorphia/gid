@@ -4,6 +4,7 @@ module gtksource.view;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -120,6 +121,15 @@ class View : gtk.text_view.TextView
     return this;
   }
 
+  /**
+  Get builder for [gtksource.view.View]
+  Returns: New builder object
+  */
+  static ViewGidBuilder builder()
+  {
+    return new ViewGidBuilder;
+  }
+
   /** */
   @property bool autoIndent()
   {
@@ -129,7 +139,7 @@ class View : gtk.text_view.TextView
   /** */
   @property void autoIndent(bool propval)
   {
-    return setAutoIndent(propval);
+    setAutoIndent(propval);
   }
 
   /**
@@ -148,7 +158,7 @@ class View : gtk.text_view.TextView
   */
   @property void backgroundPattern(gtksource.types.BackgroundPatternType propval)
   {
-    return setBackgroundPattern(propval);
+    setBackgroundPattern(propval);
   }
 
   /**
@@ -188,7 +198,7 @@ class View : gtk.text_view.TextView
   */
   @property void enableSnippets(bool propval)
   {
-    return setEnableSnippets(propval);
+    setEnableSnippets(propval);
   }
 
   /** */
@@ -200,7 +210,7 @@ class View : gtk.text_view.TextView
   /** */
   @property void highlightCurrentLine(bool propval)
   {
-    return setHighlightCurrentLine(propval);
+    setHighlightCurrentLine(propval);
   }
 
   /** */
@@ -212,7 +222,7 @@ class View : gtk.text_view.TextView
   /** */
   @property void indentOnTab(bool propval)
   {
-    return setIndentOnTab(propval);
+    setIndentOnTab(propval);
   }
 
   /**
@@ -231,7 +241,7 @@ class View : gtk.text_view.TextView
   */
   @property void indentWidth(int propval)
   {
-    return setIndentWidth(propval);
+    setIndentWidth(propval);
   }
 
   /**
@@ -252,7 +262,7 @@ class View : gtk.text_view.TextView
   */
   @property void indenter(gtksource.indenter.Indenter propval)
   {
-    return setIndenter(propval);
+    setIndenter(propval);
   }
 
   /** */
@@ -264,7 +274,7 @@ class View : gtk.text_view.TextView
   /** */
   @property void insertSpacesInsteadOfTabs(bool propval)
   {
-    return setInsertSpacesInsteadOfTabs(propval);
+    setInsertSpacesInsteadOfTabs(propval);
   }
 
   /**
@@ -283,7 +293,7 @@ class View : gtk.text_view.TextView
   */
   @property void rightMarginPosition(uint propval)
   {
-    return setRightMarginPosition(propval);
+    setRightMarginPosition(propval);
   }
 
   /**
@@ -302,7 +312,7 @@ class View : gtk.text_view.TextView
   */
   @property void showLineMarks(bool propval)
   {
-    return setShowLineMarks(propval);
+    setShowLineMarks(propval);
   }
 
   /**
@@ -321,7 +331,7 @@ class View : gtk.text_view.TextView
   */
   @property void showLineNumbers(bool propval)
   {
-    return setShowLineNumbers(propval);
+    setShowLineNumbers(propval);
   }
 
   /**
@@ -340,7 +350,7 @@ class View : gtk.text_view.TextView
   */
   @property void showRightMargin(bool propval)
   {
-    return setShowRightMargin(propval);
+    setShowRightMargin(propval);
   }
 
   /**
@@ -359,7 +369,7 @@ class View : gtk.text_view.TextView
   */
   @property void smartBackspace(bool propval)
   {
-    return setSmartBackspace(propval);
+    setSmartBackspace(propval);
   }
 
   /**
@@ -378,7 +388,7 @@ class View : gtk.text_view.TextView
   */
   @property void smartHomeEnd(gtksource.types.SmartHomeEndType propval)
   {
-    return setSmartHomeEnd(propval);
+    setSmartHomeEnd(propval);
   }
 
   /**
@@ -406,7 +416,7 @@ class View : gtk.text_view.TextView
   */
   @property void tabWidth(uint propval)
   {
-    return setTabWidth(propval);
+    setTabWidth(propval);
   }
 
   /**
@@ -1467,5 +1477,171 @@ class View : gtk.text_view.TextView
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("smart-home-end", closure, after);
+  }
+}
+
+class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
+{
+
+
+  /** */
+  T autoIndent(bool propval)
+  {
+    return setProperty("auto-indent", propval);
+  }
+
+  /**
+      Set `backgroundPattern` property.
+      Params:
+        propval = Draw a specific background pattern on the view.
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundPattern(gtksource.types.BackgroundPatternType propval)
+  {
+    return setProperty("background-pattern", propval);
+  }
+
+  /**
+      Set `enableSnippets` property.
+      Params:
+        propval = The property denotes if snippets should be
+          expanded when the user presses Tab after having typed a word
+          matching the snippets found in `class@SnippetManager`.
+          
+          The user may tab through focus-positions of the snippet if any
+          are available by pressing Tab repeatedly until the desired focus
+          position is selected.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSnippets(bool propval)
+  {
+    return setProperty("enable-snippets", propval);
+  }
+
+  /** */
+  T highlightCurrentLine(bool propval)
+  {
+    return setProperty("highlight-current-line", propval);
+  }
+
+  /** */
+  T indentOnTab(bool propval)
+  {
+    return setProperty("indent-on-tab", propval);
+  }
+
+  /**
+      Set `indentWidth` property.
+      Params:
+        propval = Width of an indentation step expressed in number of spaces.
+      Returns: Builder instance for fluent chaining
+  */
+  T indentWidth(int propval)
+  {
+    return setProperty("indent-width", propval);
+  }
+
+  /**
+      Set `indenter` property.
+      Params:
+        propval = The property is a `iface@Indenter` to use to indent
+          as the user types into the `class@View`.
+      Returns: Builder instance for fluent chaining
+  */
+  T indenter(gtksource.indenter.Indenter propval)
+  {
+    return setProperty("indenter", propval);
+  }
+
+  /** */
+  T insertSpacesInsteadOfTabs(bool propval)
+  {
+    return setProperty("insert-spaces-instead-of-tabs", propval);
+  }
+
+  /**
+      Set `rightMarginPosition` property.
+      Params:
+        propval = Position of the right margin.
+      Returns: Builder instance for fluent chaining
+  */
+  T rightMarginPosition(uint propval)
+  {
+    return setProperty("right-margin-position", propval);
+  }
+
+  /**
+      Set `showLineMarks` property.
+      Params:
+        propval = Whether to display line mark pixbufs
+      Returns: Builder instance for fluent chaining
+  */
+  T showLineMarks(bool propval)
+  {
+    return setProperty("show-line-marks", propval);
+  }
+
+  /**
+      Set `showLineNumbers` property.
+      Params:
+        propval = Whether to display line numbers
+      Returns: Builder instance for fluent chaining
+  */
+  T showLineNumbers(bool propval)
+  {
+    return setProperty("show-line-numbers", propval);
+  }
+
+  /**
+      Set `showRightMargin` property.
+      Params:
+        propval = Whether to display the right margin.
+      Returns: Builder instance for fluent chaining
+  */
+  T showRightMargin(bool propval)
+  {
+    return setProperty("show-right-margin", propval);
+  }
+
+  /**
+      Set `smartBackspace` property.
+      Params:
+        propval = Whether smart Backspace should be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T smartBackspace(bool propval)
+  {
+    return setProperty("smart-backspace", propval);
+  }
+
+  /**
+      Set `smartHomeEnd` property.
+      Params:
+        propval = Set the behavior of the HOME and END keys.
+      Returns: Builder instance for fluent chaining
+  */
+  T smartHomeEnd(gtksource.types.SmartHomeEndType propval)
+  {
+    return setProperty("smart-home-end", propval);
+  }
+
+  /**
+      Set `tabWidth` property.
+      Params:
+        propval = Width of a tab character expressed in number of spaces.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabWidth(uint propval)
+  {
+    return setProperty("tab-width", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.view.View]
+final class ViewGidBuilder : ViewGidBuilderImpl!ViewGidBuilder
+{
+  View build()
+  {
+    return new View(cast(void*)createGObject(View._getGType), No.Take);
   }
 }

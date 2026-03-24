@@ -4,6 +4,7 @@ module gtk.tree_model;
 public import gtk.tree_model_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -632,4 +633,8 @@ interface TreeModel
       Returns: Signal ID
   */
   ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface TreeModelGidBuilderImpl(T)
+{
 }

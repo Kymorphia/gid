@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.crypto_context;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A PKCS7 crypto context.
@@ -39,6 +40,15 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
   }
 
   /**
+  Get builder for [gmime.pkcs7_context.Pkcs7Context]
+  Returns: New builder object
+  */
+  static Pkcs7ContextGidBuilder builder()
+  {
+    return new Pkcs7ContextGidBuilder;
+  }
+
+  /**
       Creates a new pkcs7 crypto context object.
       Returns: a new pkcs7 crypto context object.
   */
@@ -47,5 +57,18 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
     GMimeCryptoContext* _cretval;
     _cretval = g_mime_pkcs7_context_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class Pkcs7ContextGidBuilderImpl(T) : gmime.crypto_context.CryptoContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.pkcs7_context.Pkcs7Context]
+final class Pkcs7ContextGidBuilder : Pkcs7ContextGidBuilderImpl!Pkcs7ContextGidBuilder
+{
+  Pkcs7Context build()
+  {
+    return new Pkcs7Context(cast(void*)createGObject(Pkcs7Context._getGType), Yes.Take);
   }
 }

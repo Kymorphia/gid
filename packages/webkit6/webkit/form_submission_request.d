@@ -2,6 +2,7 @@
 module webkit.form_submission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -46,6 +47,15 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.form_submission_request.FormSubmissionRequest]
+  Returns: New builder object
+  */
+  static FormSubmissionRequestGidBuilder builder()
+  {
+    return new FormSubmissionRequestGidBuilder;
+  }
+
+  /**
       Get lists of the text fields contained in the form associated to request.
       
       Get lists with the names and values of the text fields contained in
@@ -77,5 +87,18 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   void submit()
   {
     webkit_form_submission_request_submit(cast(WebKitFormSubmissionRequest*)this._cPtr);
+  }
+}
+
+class FormSubmissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.form_submission_request.FormSubmissionRequest]
+final class FormSubmissionRequestGidBuilder : FormSubmissionRequestGidBuilderImpl!FormSubmissionRequestGidBuilder
+{
+  FormSubmissionRequest build()
+  {
+    return new FormSubmissionRequest(cast(void*)createGObject(FormSubmissionRequest._getGType), No.Take);
   }
 }

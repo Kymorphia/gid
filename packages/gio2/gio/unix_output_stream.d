@@ -10,6 +10,7 @@ import gio.output_stream;
 import gio.pollable_output_stream;
 import gio.pollable_output_stream_mixin;
 import gio.types;
+import gobject.gid_builder;
 
 /**
     [gio.unix_output_stream.UnixOutputStream] implements [gio.output_stream.OutputStream] for writing to a UNIX
@@ -51,6 +52,15 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   }
 
   /**
+  Get builder for [gio.unix_output_stream.UnixOutputStream]
+  Returns: New builder object
+  */
+  static UnixOutputStreamGidBuilder builder()
+  {
+    return new UnixOutputStreamGidBuilder;
+  }
+
+  /**
       Get `closeFd` property.
       Returns: Whether to close the file descriptor when the stream is closed.
   */
@@ -66,7 +76,16 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   */
   @property void closeFd(bool propval)
   {
-    return setCloseFd(propval);
+    setCloseFd(propval);
+  }
+
+  /**
+      Get `fd` property.
+      Returns: The file descriptor that the stream writes to.
+  */
+  @property int fd()
+  {
+    return getFd();
   }
 
   mixin FileDescriptorBasedT!();
@@ -123,5 +142,43 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   void setCloseFd(bool closeFd)
   {
     g_unix_output_stream_set_close_fd(cast(GUnixOutputStream*)this._cPtr, closeFd);
+  }
+}
+
+class UnixOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBuilderImpl!T, gio.file_descriptor_based.FileDescriptorBasedGidBuilderImpl!T, gio.pollable_output_stream.PollableOutputStreamGidBuilderImpl!T
+{
+
+  mixin FileDescriptorBasedGidBuilderT!();
+  mixin PollableOutputStreamGidBuilderT!();
+
+  /**
+      Set `closeFd` property.
+      Params:
+        propval = Whether to close the file descriptor when the stream is closed.
+      Returns: Builder instance for fluent chaining
+  */
+  T closeFd(bool propval)
+  {
+    return setProperty("close-fd", propval);
+  }
+
+  /**
+      Set `fd` property.
+      Params:
+        propval = The file descriptor that the stream writes to.
+      Returns: Builder instance for fluent chaining
+  */
+  T fd(int propval)
+  {
+    return setProperty("fd", propval);
+  }
+}
+
+/// Fluent builder for [gio.unix_output_stream.UnixOutputStream]
+final class UnixOutputStreamGidBuilder : UnixOutputStreamGidBuilderImpl!UnixOutputStreamGidBuilder
+{
+  UnixOutputStream build()
+  {
+    return new UnixOutputStream(cast(void*)createGObject(UnixOutputStream._getGType), Yes.Take);
   }
 }

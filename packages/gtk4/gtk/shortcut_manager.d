@@ -3,6 +3,7 @@ module gtk.shortcut_manager;
 
 public import gtk.shortcut_manager_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -30,4 +31,8 @@ interface ShortcutManager
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_manager_get_type != &gidSymbolNotFound ? gtk_shortcut_manager_get_type() : cast(GType)0;
   }
+}
+
+interface ShortcutManagerGidBuilderImpl(T)
+{
 }

@@ -7,6 +7,7 @@ import gdk.event_owner_change;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -100,6 +101,15 @@ class Clipboard : gobject.object.ObjectWrap
   override Clipboard self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.clipboard.Clipboard]
+  Returns: New builder object
+  */
+  static ClipboardGidBuilder builder()
+  {
+    return new ClipboardGidBuilder;
   }
 
   /**
@@ -717,5 +727,18 @@ class Clipboard : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("owner-change", closure, after);
+  }
+}
+
+class ClipboardGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.clipboard.Clipboard]
+final class ClipboardGidBuilder : ClipboardGidBuilderImpl!ClipboardGidBuilder
+{
+  Clipboard build()
+  {
+    return new Clipboard(cast(void*)createGObject(Clipboard._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import gdk.paintable_mixin;
 import gid.gid;
 import gio.file;
 import gio.input_stream;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -51,6 +52,15 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
+  Get builder for [gtk.media_file.MediaFile]
+  Returns: New builder object
+  */
+  static MediaFileGidBuilder builder()
+  {
+    return new MediaFileGidBuilder;
+  }
+
+  /**
       Get `file` property.
       Returns: The file being played back or null if not playing a file.
   */
@@ -66,7 +76,7 @@ class MediaFile : gtk.media_stream.MediaStream
   */
   @property void file(gio.file.File propval)
   {
-    return setFile(propval);
+    setFile(propval);
   }
 
   /**
@@ -89,7 +99,7 @@ class MediaFile : gtk.media_stream.MediaStream
   */
   @property void inputStream(gio.input_stream.InputStream propval)
   {
-    return setInputStream(propval);
+    setInputStream(propval);
   }
 
   /**
@@ -269,5 +279,43 @@ class MediaFile : gtk.media_stream.MediaStream
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_media_file_set_resource(cast(GtkMediaFile*)this._cPtr, _resourcePath);
+  }
+}
+
+class MediaFileGidBuilderImpl(T) : gtk.media_stream.MediaStreamGidBuilderImpl!T
+{
+
+
+  /**
+      Set `file` property.
+      Params:
+        propval = The file being played back or null if not playing a file.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gio.file.File propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `inputStream` property.
+      Params:
+        propval = The stream being played back or null if not playing a stream.
+          
+          This is null when playing a file.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputStream(gio.input_stream.InputStream propval)
+  {
+    return setProperty("input-stream", propval);
+  }
+}
+
+/// Fluent builder for [gtk.media_file.MediaFile]
+final class MediaFileGidBuilder : MediaFileGidBuilderImpl!MediaFileGidBuilder
+{
+  MediaFile build()
+  {
+    return new MediaFile(cast(void*)createGObject(MediaFile._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.string_object;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -43,6 +44,15 @@ class StringObject : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.string_object.StringObject]
+  Returns: New builder object
+  */
+  static StringObjectGidBuilder builder()
+  {
+    return new StringObjectGidBuilder;
+  }
+
+  /**
       Get `string_` property.
       Returns: The string.
   */
@@ -76,5 +86,18 @@ class StringObject : gobject.object.ObjectWrap
     _cretval = gtk_string_object_get_string(cast(GtkStringObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class StringObjectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.string_object.StringObject]
+final class StringObjectGidBuilder : StringObjectGidBuilderImpl!StringObjectGidBuilder
+{
+  StringObject build()
+  {
+    return new StringObject(cast(void*)createGObject(StringObject._getGType), Yes.Take);
   }
 }

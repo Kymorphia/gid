@@ -6,6 +6,7 @@ public import gda.c.functions;
 public import gda.c.types;
 public import gda.types;
 public import gid.gid;
+public import gobject.gid_builder;
 
 /** */
 template LockableT()
@@ -52,4 +53,8 @@ template LockableT()
   {
     gda_lockable_unlock(cast(GdaLockable*)this._cPtr);
   }
+}
+
+template LockableGidBuilderT()
+{
 }

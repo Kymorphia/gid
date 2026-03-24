@@ -2,6 +2,8 @@
 module soup.cookie_jar_db;
 
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 import soup.c.functions;
 import soup.c.types;
 import soup.cookie_jar;
@@ -48,6 +50,24 @@ class CookieJarDB : soup.cookie_jar.CookieJar
   }
 
   /**
+  Get builder for [soup.cookie_jar_db.CookieJarDB]
+  Returns: New builder object
+  */
+  static CookieJarDBGidBuilder builder()
+  {
+    return new CookieJarDBGidBuilder;
+  }
+
+  /**
+      Get `filename` property.
+      Returns: Cookie-storage filename.
+  */
+  @property string filename()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("filename");
+  }
+
+  /**
       Creates a #SoupCookieJarDB.
       
       filename will be read in at startup to create an initial set of cookies. If
@@ -67,5 +87,30 @@ class CookieJarDB : soup.cookie_jar.CookieJar
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = soup_cookie_jar_db_new(_filename, readOnly);
     this(_cretval, Yes.Take);
+  }
+}
+
+class CookieJarDBGidBuilderImpl(T) : soup.cookie_jar.CookieJarGidBuilderImpl!T
+{
+
+
+  /**
+      Set `filename` property.
+      Params:
+        propval = Cookie-storage filename.
+      Returns: Builder instance for fluent chaining
+  */
+  T filename(string propval)
+  {
+    return setProperty("filename", propval);
+  }
+}
+
+/// Fluent builder for [soup.cookie_jar_db.CookieJarDB]
+final class CookieJarDBGidBuilder : CookieJarDBGidBuilderImpl!CookieJarDBGidBuilder
+{
+  CookieJarDB build()
+  {
+    return new CookieJarDB(cast(void*)createGObject(CookieJarDB._getGType), Yes.Take);
   }
 }

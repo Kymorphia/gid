@@ -4,6 +4,7 @@ module gtk.scrollbar;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.adjustment;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -84,6 +85,15 @@ class Scrollbar : gtk.range.Range
   }
 
   /**
+  Get builder for [gtk.scrollbar.Scrollbar]
+  Returns: New builder object
+  */
+  static ScrollbarGidBuilder builder()
+  {
+    return new ScrollbarGidBuilder;
+  }
+
+  /**
       Creates a new scrollbar with the given orientation.
   
       Params:
@@ -96,5 +106,19 @@ class Scrollbar : gtk.range.Range
     GtkWidget* _cretval;
     _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
+  }
+}
+
+class ScrollbarGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.scrollbar.Scrollbar]
+final class ScrollbarGidBuilder : ScrollbarGidBuilderImpl!ScrollbarGidBuilder
+{
+  Scrollbar build()
+  {
+    return new Scrollbar(cast(void*)createGObject(Scrollbar._getGType), No.Take);
   }
 }

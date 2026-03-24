@@ -15,6 +15,7 @@ import gio.types;
 import glib.bytes;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import soup.c.functions;
@@ -89,6 +90,15 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [soup.session.Session]
+  Returns: New builder object
+  */
+  static SessionGidBuilder builder()
+  {
+    return new SessionGidBuilder;
+  }
+
+  /**
       Get `acceptLanguage` property.
       Returns: If non-null, the value to use for the "Accept-Language" header
         on `class@Message`s sent from this session.
@@ -110,7 +120,7 @@ class Session : gobject.object.ObjectWrap
   */
   @property void acceptLanguage(string propval)
   {
-    return setAcceptLanguage(propval);
+    setAcceptLanguage(propval);
   }
 
   /**
@@ -139,7 +149,7 @@ class Session : gobject.object.ObjectWrap
   */
   @property void acceptLanguageAuto(bool propval)
   {
-    return setAcceptLanguageAuto(propval);
+    setAcceptLanguageAuto(propval);
   }
 
   /**
@@ -172,7 +182,39 @@ class Session : gobject.object.ObjectWrap
   */
   @property void idleTimeout(uint propval)
   {
-    return setIdleTimeout(propval);
+    setIdleTimeout(propval);
+  }
+
+  /**
+      Get `localAddress` property.
+      Returns: Sets the [gio.inet_socket_address.InetSocketAddress] to use for the client side of
+        the connection.
+        
+        Use this property if you want for instance to bind the
+        local socket to a specific IP address.
+  */
+  @property gio.inet_socket_address.InetSocketAddress localAddress()
+  {
+    return getLocalAddress();
+  }
+
+  /**
+      Get `maxConns` property.
+      Returns: The maximum number of connections that the session can open at once.
+  */
+  @property int maxConns()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-conns");
+  }
+
+  /**
+      Get `maxConnsPerHost` property.
+      Returns: The maximum number of connections that the session can open at once
+        to a given host.
+  */
+  @property int maxConnsPerHost()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("max-conns-per-host");
   }
 
   /**
@@ -203,7 +245,22 @@ class Session : gobject.object.ObjectWrap
   */
   @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
   {
-    return setProxyResolver(propval);
+    setProxyResolver(propval);
+  }
+
+  /**
+      Get `remoteConnectable` property.
+      Returns: Sets a socket to make outgoing connections on. This will override the default
+        behaviour of opening TCP/IP sockets to the hosts specified in the URIs.
+        
+        This function is not required for common HTTP usage, but only when connecting
+        to a HTTP service that is not using standard TCP/IP sockets. An example of
+        this is a local service that uses HTTP over UNIX-domain sockets, in that case
+        a [gio.unix_socket_address.UnixSocketAddress] can be passed to this function.
+  */
+  @property gio.socket_connectable.SocketConnectable remoteConnectable()
+  {
+    return getRemoteConnectable();
   }
 
   /**
@@ -246,7 +303,7 @@ class Session : gobject.object.ObjectWrap
   */
   @property void timeout(uint propval)
   {
-    return setTimeout(propval);
+    setTimeout(propval);
   }
 
   /**
@@ -273,7 +330,7 @@ class Session : gobject.object.ObjectWrap
   */
   @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
   {
-    return setTlsDatabase(propval);
+    setTlsDatabase(propval);
   }
 
   /**
@@ -298,7 +355,7 @@ class Session : gobject.object.ObjectWrap
   */
   @property void tlsInteraction(gio.tls_interaction.TlsInteraction propval)
   {
-    return setTlsInteraction(propval);
+    setTlsInteraction(propval);
   }
 
   /**
@@ -365,7 +422,7 @@ class Session : gobject.object.ObjectWrap
   */
   @property void userAgent(string propval)
   {
-    return setUserAgent(propval);
+    setUserAgent(propval);
   }
 
   /**
@@ -1262,5 +1319,225 @@ class Session : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-unqueued", closure, after);
+  }
+}
+
+class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `acceptLanguage` property.
+      Params:
+        propval = If non-null, the value to use for the "Accept-Language" header
+          on `class@Message`s sent from this session.
+          
+          Setting this will disable `property@Session:accept-language-auto`.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptLanguage(string propval)
+  {
+    return setProperty("accept-language", propval);
+  }
+
+  /**
+      Set `acceptLanguageAuto` property.
+      Params:
+        propval = If true, #SoupSession will automatically set the string
+          for the "Accept-Language" header on every `class@Message`
+          sent, based on the return value of `func@GLib.get_language_names`.
+          
+          Setting this will override any previous value of
+          `property@Session:accept-language`.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptLanguageAuto(bool propval)
+  {
+    return setProperty("accept-language-auto", propval);
+  }
+
+  /**
+      Set `idleTimeout` property.
+      Params:
+        propval = Connection lifetime (in seconds) when idle. Any connection
+          left idle longer than this will be closed.
+          
+          Although you can change this property at any time, it will
+          only affect newly-created connections, not currently-open
+          ones. You can call [soup.session.Session.abort] after setting this
+          if you want to ensure that all future connections will have
+          this timeout value.
+      Returns: Builder instance for fluent chaining
+  */
+  T idleTimeout(uint propval)
+  {
+    return setProperty("idle-timeout", propval);
+  }
+
+  /**
+      Set `localAddress` property.
+      Params:
+        propval = Sets the [gio.inet_socket_address.InetSocketAddress] to use for the client side of
+          the connection.
+          
+          Use this property if you want for instance to bind the
+          local socket to a specific IP address.
+      Returns: Builder instance for fluent chaining
+  */
+  T localAddress(gio.inet_socket_address.InetSocketAddress propval)
+  {
+    return setProperty("local-address", propval);
+  }
+
+  /**
+      Set `maxConns` property.
+      Params:
+        propval = The maximum number of connections that the session can open at once.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxConns(int propval)
+  {
+    return setProperty("max-conns", propval);
+  }
+
+  /**
+      Set `maxConnsPerHost` property.
+      Params:
+        propval = The maximum number of connections that the session can open at once
+          to a given host.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxConnsPerHost(int propval)
+  {
+    return setProperty("max-conns-per-host", propval);
+  }
+
+  /**
+      Set `proxyResolver` property.
+      Params:
+        propval = A [gio.proxy_resolver.ProxyResolver] to use with this session.
+          
+          If no proxy resolver is set, then the default proxy resolver
+          will be used. See [gio.proxy_resolver.ProxyResolver.getDefault].
+          You can set it to null if you don't want to use proxies, or
+          set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
+          what proxies get used.
+      Returns: Builder instance for fluent chaining
+  */
+  T proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  {
+    return setProperty("proxy-resolver", propval);
+  }
+
+  /**
+      Set `remoteConnectable` property.
+      Params:
+        propval = Sets a socket to make outgoing connections on. This will override the default
+          behaviour of opening TCP/IP sockets to the hosts specified in the URIs.
+          
+          This function is not required for common HTTP usage, but only when connecting
+          to a HTTP service that is not using standard TCP/IP sockets. An example of
+          this is a local service that uses HTTP over UNIX-domain sockets, in that case
+          a [gio.unix_socket_address.UnixSocketAddress] can be passed to this function.
+      Returns: Builder instance for fluent chaining
+  */
+  T remoteConnectable(gio.socket_connectable.SocketConnectable propval)
+  {
+    return setProperty("remote-connectable", propval);
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The timeout (in seconds) for socket I/O operations
+          (including connecting to a server, and waiting for a reply
+          to an HTTP request).
+          
+          Although you can change this property at any time, it will
+          only affect newly-created connections, not currently-open
+          ones. You can call [soup.session.Session.abort] after setting this
+          if you want to ensure that all future connections will have
+          this timeout value.
+          
+          Not to be confused with `property@Session:idle-timeout` (which is
+          the length of time that idle persistent connections will be
+          kept open).
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(uint propval)
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /**
+      Set `tlsDatabase` property.
+      Params:
+        propval = Sets the [gio.tls_database.TlsDatabase] to use for validating SSL/TLS
+          certificates.
+          
+          If no certificate database is set, then the default database will be
+          used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsDatabase(gio.tls_database.TlsDatabase propval)
+  {
+    return setProperty("tls-database", propval);
+  }
+
+  /**
+      Set `tlsInteraction` property.
+      Params:
+        propval = A [gio.tls_interaction.TlsInteraction] object that will be passed on to any
+          [gio.tls_connection.TlsConnection]s created by the session.
+          
+          This can be used to provide client-side certificates, for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsInteraction(gio.tls_interaction.TlsInteraction propval)
+  {
+    return setProperty("tls-interaction", propval);
+  }
+
+  /**
+      Set `userAgent` property.
+      Params:
+        propval = User-Agent string.
+          
+          If non-null, the value to use for the "User-Agent" header
+          on `class@Message`s sent from this session.
+          
+          RFC 2616 says: "The User-Agent request-header field
+          contains information about the user agent originating the
+          request. This is for statistical purposes, the tracing of
+          protocol violations, and automated recognition of user
+          agents for the sake of tailoring responses to avoid
+          particular user agent limitations. User agents SHOULD
+          include this field with requests."
+          
+          The User-Agent header contains a list of one or more
+          product tokens, separated by whitespace, with the most
+          significant product token coming first. The tokens must be
+          brief, ASCII, and mostly alphanumeric (although "-", "_",
+          and "." are also allowed), and may optionally include a "/"
+          followed by a version string. You may also put comments,
+          enclosed in parentheses, between or after the tokens.
+          
+          If you set a `property@Session:user-agent` property that has trailing
+          whitespace, #SoupSession will append its own product token
+          (eg, `libsoup/2.3.2`) to the end of the
+          header for you.
+      Returns: Builder instance for fluent chaining
+  */
+  T userAgent(string propval)
+  {
+    return setProperty("user-agent", propval);
+  }
+}
+
+/// Fluent builder for [soup.session.Session]
+final class SessionGidBuilder : SessionGidBuilderImpl!SessionGidBuilder
+{
+  Session build()
+  {
+    return new Session(cast(void*)createGObject(Session._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.preferences_row;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -75,6 +76,15 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   }
 
   /**
+  Get builder for [adw.expander_row.ExpanderRow]
+  Returns: New builder object
+  */
+  static ExpanderRowGidBuilder builder()
+  {
+    return new ExpanderRowGidBuilder;
+  }
+
+  /**
       Get `enableExpansion` property.
       Returns: Whether expansion is enabled.
   */
@@ -90,7 +100,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   @property void enableExpansion(bool propval)
   {
-    return setEnableExpansion(propval);
+    setEnableExpansion(propval);
   }
 
   /**
@@ -109,7 +119,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   @property void expanded(bool propval)
   {
-    return setExpanded(propval);
+    setExpanded(propval);
   }
 
   /**
@@ -132,7 +142,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -151,7 +161,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   @property void showEnableSwitch(bool propval)
   {
-    return setShowEnableSwitch(propval);
+    setShowEnableSwitch(propval);
   }
 
   /**
@@ -176,7 +186,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   @property void subtitle(string propval)
   {
-    return setSubtitle(propval);
+    setSubtitle(propval);
   }
 
   /**
@@ -201,7 +211,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   @property void subtitleLines(int propval)
   {
-    return setSubtitleLines(propval);
+    setSubtitleLines(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   @property void titleLines(int propval)
   {
-    return setTitleLines(propval);
+    setTitleLines(propval);
   }
 
   /**
@@ -470,5 +480,106 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   void setTitleLines(int titleLines)
   {
     adw_expander_row_set_title_lines(cast(AdwExpanderRow*)this._cPtr, titleLines);
+  }
+}
+
+class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enableExpansion` property.
+      Params:
+        propval = Whether expansion is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableExpansion(bool propval)
+  {
+    return setProperty("enable-expansion", propval);
+  }
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = Whether the row is expanded.
+      Returns: Builder instance for fluent chaining
+  */
+  T expanded(bool propval)
+  {
+    return setProperty("expanded", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this row.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `showEnableSwitch` property.
+      Params:
+        propval = Whether the switch enabling the expansion is visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEnableSwitch(bool propval)
+  {
+    return setProperty("show-enable-switch", propval);
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle for this row.
+          
+          The subtitle is interpreted as Pango markup unless
+          `property@PreferencesRow:use-markup` is set to `FALSE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitle(string propval)
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `subtitleLines` property.
+      Params:
+        propval = The number of lines at the end of which the subtitle label will be
+          ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitleLines(int propval)
+  {
+    return setProperty("subtitle-lines", propval);
+  }
+
+  /**
+      Set `titleLines` property.
+      Params:
+        propval = The number of lines at the end of which the title label will be ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+      Returns: Builder instance for fluent chaining
+  */
+  T titleLines(int propval)
+  {
+    return setProperty("title-lines", propval);
+  }
+}
+
+/// Fluent builder for [adw.expander_row.ExpanderRow]
+final class ExpanderRowGidBuilder : ExpanderRowGidBuilderImpl!ExpanderRowGidBuilder
+{
+  ExpanderRow build()
+  {
+    return new ExpanderRow(cast(void*)createGObject(ExpanderRow._getGType), No.Take);
   }
 }

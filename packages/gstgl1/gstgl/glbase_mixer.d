@@ -2,6 +2,7 @@
 module gstgl.glbase_mixer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstgl.c.functions;
 import gstgl.c.types;
@@ -43,6 +44,15 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
   }
 
   /**
+  Get builder for [gstgl.glbase_mixer.GLBaseMixer]
+  Returns: New builder object
+  */
+  static GLBaseMixerGidBuilder builder()
+  {
+    return new GLBaseMixerGidBuilder;
+  }
+
+  /**
       Get `context` property.
       Returns: The #GstGLContext in use by this #GstGLBaseMixer
   */
@@ -58,5 +68,18 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
     _cretval = gst_gl_base_mixer_get_gl_context(cast(GstGLBaseMixer*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class GLBaseMixerGidBuilderImpl(T) : gstvideo.video_aggregator.VideoAggregatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glbase_mixer.GLBaseMixer]
+final class GLBaseMixerGidBuilder : GLBaseMixerGidBuilderImpl!GLBaseMixerGidBuilder
+{
+  GLBaseMixer build()
+  {
+    return new GLBaseMixer(cast(void*)createGObject(GLBaseMixer._getGType), No.Take);
   }
 }

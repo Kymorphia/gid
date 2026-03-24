@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A #GMimeStream which has no backing store.
@@ -36,6 +37,15 @@ class StreamNull : gmime.stream.Stream
   override StreamNull self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.stream_null.StreamNull]
+  Returns: New builder object
+  */
+  static StreamNullGidBuilder builder()
+  {
+    return new StreamNullGidBuilder;
   }
 
   /**
@@ -71,5 +81,18 @@ class StreamNull : gmime.stream.Stream
   void setCountNewlines(bool count)
   {
     g_mime_stream_null_set_count_newlines(cast(GMimeStreamNull*)this._cPtr, count);
+  }
+}
+
+class StreamNullGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_null.StreamNull]
+final class StreamNullGidBuilder : StreamNullGidBuilderImpl!StreamNullGidBuilder
+{
+  StreamNull build()
+  {
+    return new StreamNull(cast(void*)createGObject(StreamNull._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import gid.gid;
 import glib.error;
 import glib.key_file;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -82,6 +83,15 @@ class PageSetup : gobject.object.ObjectWrap
   override PageSetup self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.page_setup.PageSetup]
+  Returns: New builder object
+  */
+  static PageSetupGidBuilder builder()
+  {
+    return new PageSetupGidBuilder;
   }
 
   /**
@@ -490,5 +500,18 @@ class PageSetup : gobject.object.ObjectWrap
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_page_setup_to_key_file(cast(GtkPageSetup*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
+  }
+}
+
+class PageSetupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.page_setup.PageSetup]
+final class PageSetupGidBuilder : PageSetupGidBuilderImpl!PageSetupGidBuilder
+{
+  PageSetup build()
+  {
+    return new PageSetup(cast(void*)createGObject(PageSetup._getGType), Yes.Take);
   }
 }

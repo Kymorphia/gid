@@ -7,6 +7,7 @@ import atk.c.types;
 import atk.types;
 import gid.gid;
 import glib.iochannel;
+import gobject.gid_builder;
 
 /**
     The ATK interface which provides access to streamable content.
@@ -82,4 +83,8 @@ interface StreamableContent
         if no corresponding URI can be constructed.
   */
   string getUri(string mimeType);
+}
+
+interface StreamableContentGidBuilderImpl(T)
+{
 }

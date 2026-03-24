@@ -11,6 +11,7 @@ import gdk.surface;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -54,6 +55,15 @@ class Drag : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.drag.Drag]
+  Returns: New builder object
+  */
+  static DragGidBuilder builder()
+  {
+    return new DragGidBuilder;
+  }
+
+  /**
       Get `actions` property.
       Returns: The possible actions of this drag.
   */
@@ -73,12 +83,39 @@ class Drag : gobject.object.ObjectWrap
   }
 
   /**
+      Get `content` property.
+      Returns: The [gdk.content_provider.ContentProvider].
+  */
+  @property gdk.content_provider.ContentProvider content()
+  {
+    return getContent();
+  }
+
+  /**
+      Get `device` property.
+      Returns: The [gdk.device.Device] that is performing the drag.
+  */
+  @property gdk.device.Device device()
+  {
+    return getDevice();
+  }
+
+  /**
       Get `display` property.
       Returns: The [gdk.display.Display] that the drag belongs to.
   */
   @property gdk.display.Display display()
   {
     return getDisplay();
+  }
+
+  /**
+      Get `formats` property.
+      Returns: The possible formats that the drag can provide its data in.
+  */
+  @property gdk.content_formats.ContentFormats formats()
+  {
+    return getFormats();
   }
 
   /**
@@ -98,6 +135,15 @@ class Drag : gobject.object.ObjectWrap
   @property void selectedAction(gdk.types.DragAction propval)
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.DragAction)("selected-action", propval);
+  }
+
+  /**
+      Get `surface` property.
+      Returns: The surface where the drag originates.
+  */
+  @property gdk.surface.Surface surface()
+  {
+    return getSurface();
   }
 
   /**
@@ -388,5 +434,84 @@ class Drag : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drop-performed", closure, after);
+  }
+}
+
+class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The possible actions of this drag.
+      Returns: Builder instance for fluent chaining
+  */
+  T actions(gdk.types.DragAction propval)
+  {
+    return setProperty("actions", propval);
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The [gdk.content_provider.ContentProvider].
+      Returns: Builder instance for fluent chaining
+  */
+  T content(gdk.content_provider.ContentProvider propval)
+  {
+    return setProperty("content", propval);
+  }
+
+  /**
+      Set `device` property.
+      Params:
+        propval = The [gdk.device.Device] that is performing the drag.
+      Returns: Builder instance for fluent chaining
+  */
+  T device(gdk.device.Device propval)
+  {
+    return setProperty("device", propval);
+  }
+
+  /**
+      Set `formats` property.
+      Params:
+        propval = The possible formats that the drag can provide its data in.
+      Returns: Builder instance for fluent chaining
+  */
+  T formats(gdk.content_formats.ContentFormats propval)
+  {
+    return setProperty("formats", propval);
+  }
+
+  /**
+      Set `selectedAction` property.
+      Params:
+        propval = The currently selected action of the drag.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectedAction(gdk.types.DragAction propval)
+  {
+    return setProperty("selected-action", propval);
+  }
+
+  /**
+      Set `surface` property.
+      Params:
+        propval = The surface where the drag originates.
+      Returns: Builder instance for fluent chaining
+  */
+  T surface(gdk.surface.Surface propval)
+  {
+    return setProperty("surface", propval);
+  }
+}
+
+/// Fluent builder for [gdk.drag.Drag]
+final class DragGidBuilder : DragGidBuilderImpl!DragGidBuilder
+{
+  Drag build()
+  {
+    return new Drag(cast(void*)createGObject(Drag._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module javascriptcore.weak_value;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.c.functions;
 import javascriptcore.c.types;
@@ -40,6 +41,15 @@ class WeakValue : gobject.object.ObjectWrap
   override WeakValue self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [javascriptcore.weak_value.WeakValue]
+  Returns: New builder object
+  */
+  static WeakValueGidBuilder builder()
+  {
+    return new WeakValueGidBuilder;
   }
 
   /**
@@ -103,5 +113,29 @@ class WeakValue : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cleared", closure, after);
+  }
+}
+
+class WeakValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The #JSCValue referencing the JavaScript value.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(javascriptcore.value.Value propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [javascriptcore.weak_value.WeakValue]
+final class WeakValueGidBuilder : WeakValueGidBuilderImpl!WeakValueGidBuilder
+{
+  WeakValue build()
+  {
+    return new WeakValue(cast(void*)createGObject(WeakValue._getGType), Yes.Take);
   }
 }

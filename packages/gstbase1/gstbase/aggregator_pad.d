@@ -3,6 +3,7 @@ module gstbase.aggregator_pad;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.pad;
@@ -41,6 +42,15 @@ class AggregatorPad : gst.pad.Pad
   override AggregatorPad self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstbase.aggregator_pad.AggregatorPad]
+  Returns: New builder object
+  */
+  static AggregatorPadGidBuilder builder()
+  {
+    return new AggregatorPadGidBuilder;
   }
 
   /**
@@ -169,5 +179,29 @@ class AggregatorPad : gst.pad.Pad
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("buffer-consumed", closure, after);
+  }
+}
+
+class AggregatorPadGidBuilderImpl(T) : gst.pad.PadGidBuilderImpl!T
+{
+
+  /**
+      Set `emitSignals` property.
+      Params:
+        propval = Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
+      Returns: Builder instance for fluent chaining
+  */
+  T emitSignals(bool propval)
+  {
+    return setProperty("emit-signals", propval);
+  }
+}
+
+/// Fluent builder for [gstbase.aggregator_pad.AggregatorPad]
+final class AggregatorPadGidBuilder : AggregatorPadGidBuilderImpl!AggregatorPadGidBuilder
+{
+  AggregatorPad build()
+  {
+    return new AggregatorPad(cast(void*)createGObject(AggregatorPad._getGType), No.Take);
   }
 }

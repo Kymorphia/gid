@@ -7,6 +7,7 @@ import arrow.decimal_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
@@ -37,6 +38,15 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal32_data_type.Decimal32DataType]
+  Returns: New builder object
+  */
+  static Decimal32DataTypeGidBuilder builder()
+  {
+    return new Decimal32DataTypeGidBuilder;
+  }
+
   /** */
   this(int precision, int scale)
   {
@@ -54,5 +64,18 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
     int _retval;
     _retval = garrow_decimal32_data_type_max_precision();
     return _retval;
+  }
+}
+
+class Decimal32DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal32_data_type.Decimal32DataType]
+final class Decimal32DataTypeGidBuilder : Decimal32DataTypeGidBuilderImpl!Decimal32DataTypeGidBuilder
+{
+  Decimal32DataType build()
+  {
+    return new Decimal32DataType(cast(void*)createGObject(Decimal32DataType._getGType), Yes.Take);
   }
 }

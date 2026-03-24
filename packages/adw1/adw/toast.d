@@ -7,6 +7,7 @@ import adw.types;
 import gid.gid;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.widget;
 
@@ -162,6 +163,15 @@ class Toast : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [adw.toast.Toast]
+  Returns: New builder object
+  */
+  static ToastGidBuilder builder()
+  {
+    return new ToastGidBuilder;
+  }
+
+  /**
       Get `actionName` property.
       Returns: The name of the associated action.
         
@@ -185,7 +195,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void actionName(string propval)
   {
-    return setActionName(propval);
+    setActionName(propval);
   }
 
   /**
@@ -204,7 +214,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void actionTarget(glib.variant.Variant propval)
   {
-    return setActionTargetValue(propval);
+    setActionTargetValue(propval);
   }
 
   /**
@@ -235,7 +245,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void buttonLabel(string propval)
   {
-    return setButtonLabel(propval);
+    setButtonLabel(propval);
   }
 
   /**
@@ -264,7 +274,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void customTitle(gtk.widget.Widget propval)
   {
-    return setCustomTitle(propval);
+    setCustomTitle(propval);
   }
 
   /**
@@ -299,7 +309,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void priority(adw.types.ToastPriority propval)
   {
-    return setPriority(propval);
+    setPriority(propval);
   }
 
   /**
@@ -330,7 +340,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void timeout(uint propval)
   {
-    return setTimeout(propval);
+    setTimeout(propval);
   }
 
   /**
@@ -361,7 +371,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -384,7 +394,7 @@ class Toast : gobject.object.ObjectWrap
   */
   @property void useMarkup(bool propval)
   {
-    return setUseMarkup(propval);
+    setUseMarkup(propval);
   }
 
   /**
@@ -734,5 +744,143 @@ class Toast : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("dismissed", closure, after);
+  }
+}
+
+class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the associated action.
+          
+          It will be activated when clicking the button.
+          
+          See `property@Toast:action-target`.
+      Returns: Builder instance for fluent chaining
+  */
+  T actionName(string propval)
+  {
+    return setProperty("action-name", propval);
+  }
+
+  /**
+      Set `actionTarget` property.
+      Params:
+        propval = The parameter for action invocations.
+      Returns: Builder instance for fluent chaining
+  */
+  T actionTarget(glib.variant.Variant propval)
+  {
+    return setProperty("action-target", propval);
+  }
+
+  /**
+      Set `buttonLabel` property.
+      Params:
+        propval = The label to show on the button.
+          
+          Underlines in the button text can be used to indicate a mnemonic.
+          
+          If set to `NULL`, the button won't be shown.
+          
+          See `property@Toast:action-name`.
+      Returns: Builder instance for fluent chaining
+  */
+  T buttonLabel(string propval)
+  {
+    return setProperty("button-label", propval);
+  }
+
+  /**
+      Set `customTitle` property.
+      Params:
+        propval = The custom title widget.
+          
+          It will be displayed instead of the title if set. In this case,
+          `property@Toast:title` is ignored.
+          
+          Setting a custom title will unset `property@Toast:title`.
+      Returns: Builder instance for fluent chaining
+  */
+  T customTitle(gtk.widget.Widget propval)
+  {
+    return setProperty("custom-title", propval);
+  }
+
+  /**
+      Set `priority` property.
+      Params:
+        propval = The priority of the toast.
+          
+          Priority controls how the toast behaves when another toast is already
+          being displayed.
+          
+          If the priority is [adw.types.ToastPriority.Normal], the toast will be queued.
+          
+          If the priority is [adw.types.ToastPriority.High], the toast will be displayed
+          immediately, pushing the previous toast into the queue instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T priority(adw.types.ToastPriority propval)
+  {
+    return setProperty("priority", propval);
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The timeout of the toast, in seconds.
+          
+          If timeout is 0, the toast is displayed indefinitely until manually
+          dismissed.
+          
+          Toasts cannot disappear while being hovered, pressed (on touchscreen), or
+          have keyboard focus inside them.
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(uint propval)
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the toast.
+          
+          The title can be marked up with the Pango text markup language.
+          
+          Setting a title will unset `property@Toast:custom-title`.
+          
+          If `property@Toast:custom-title` is set, it will be used instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether to use Pango markup for the toast title.
+          
+          See also `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+}
+
+/// Fluent builder for [adw.toast.Toast]
+final class ToastGidBuilder : ToastGidBuilderImpl!ToastGidBuilder
+{
+  Toast build()
+  {
+    return new Toast(cast(void*)createGObject(Toast._getGType), Yes.Take);
   }
 }

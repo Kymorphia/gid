@@ -2,6 +2,7 @@
 module panel.statusbar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -43,6 +44,15 @@ class Statusbar : gtk.widget.Widget
   override Statusbar self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.statusbar.Statusbar]
+  Returns: New builder object
+  */
+  static StatusbarGidBuilder builder()
+  {
+    return new StatusbarGidBuilder;
   }
 
   /**
@@ -91,5 +101,19 @@ class Statusbar : gtk.widget.Widget
   void remove(gtk.widget.Widget widget)
   {
     panel_statusbar_remove(cast(PanelStatusbar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+}
+
+class StatusbarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [panel.statusbar.Statusbar]
+final class StatusbarGidBuilder : StatusbarGidBuilderImpl!StatusbarGidBuilder
+{
+  Statusbar build()
+  {
+    return new Statusbar(cast(void*)createGObject(Statusbar._getGType), No.Take);
   }
 }

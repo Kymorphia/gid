@@ -3,6 +3,7 @@ module gstapp.app_src;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
@@ -112,6 +113,15 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   }
 
   /**
+  Get builder for [gstapp.app_src.AppSrc]
+  Returns: New builder object
+  */
+  static AppSrcGidBuilder builder()
+  {
+    return new AppSrcGidBuilder;
+  }
+
+  /**
       Get `block` property.
       Returns: When max-bytes are queued and after the enough-data signal has been emitted,
         block any further push-buffer calls until the amount of queued bytes drops
@@ -152,7 +162,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   @property void caps(gst.caps.Caps propval)
   {
-    return setCaps(propval);
+    setCaps(propval);
   }
 
   /**
@@ -223,7 +233,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   @property void emitSignals(bool propval)
   {
-    return setEmitSignals(propval);
+    setEmitSignals(propval);
   }
 
   /**
@@ -325,7 +335,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   @property void leakyType(gstapp.types.AppLeakyType propval)
   {
-    return setLeakyType(propval);
+    setLeakyType(propval);
   }
 
   /**
@@ -348,7 +358,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   @property void maxBuffers(ulong propval)
   {
-    return setMaxBuffers(propval);
+    setMaxBuffers(propval);
   }
 
   /**
@@ -371,7 +381,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   @property void maxBytes(ulong propval)
   {
-    return setMaxBytes(propval);
+    setMaxBytes(propval);
   }
 
   /** */
@@ -469,7 +479,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   @property void size(long propval)
   {
-    return setSize(propval);
+    setSize(propval);
   }
 
   /**
@@ -490,7 +500,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   @property void streamType(gstapp.types.AppStreamType propval)
   {
-    return setStreamType(propval);
+    setStreamType(propval);
   }
 
   mixin URIHandlerT!();
@@ -1205,5 +1215,219 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("seek-data", closure, after);
+  }
+}
+
+class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.urihandler.URIHandlerGidBuilderImpl!T
+{
+
+  mixin URIHandlerGidBuilderT!();
+
+  /**
+      Set `block` property.
+      Params:
+        propval = When max-bytes are queued and after the enough-data signal has been emitted,
+          block any further push-buffer calls until the amount of queued bytes drops
+          below the max-bytes limit.
+      Returns: Builder instance for fluent chaining
+  */
+  T block(bool propval)
+  {
+    return setProperty("block", propval);
+  }
+
+  /**
+      Set `caps` property.
+      Params:
+        propval = The GstCaps that will negotiated downstream and will be put
+          on outgoing buffers.
+      Returns: Builder instance for fluent chaining
+  */
+  T caps(gst.caps.Caps propval)
+  {
+    return setProperty("caps", propval);
+  }
+
+  /**
+      Set `duration` property.
+      Params:
+        propval = The total duration in nanoseconds of the data stream. If the total duration is known, it
+          is recommended to configure it with this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T duration(ulong propval)
+  {
+    return setProperty("duration", propval);
+  }
+
+  /**
+      Set `emitSignals` property.
+      Params:
+        propval = Make appsrc emit the "need-data", "enough-data" and "seek-data" signals.
+          This option is by default enabled for backwards compatibility reasons but
+          can disabled when needed because signal emission is expensive.
+      Returns: Builder instance for fluent chaining
+  */
+  T emitSignals(bool propval)
+  {
+    return setProperty("emit-signals", propval);
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format to use for segment events. When the source is producing
+          timestamped buffers this property should be set to GST_FORMAT_TIME.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(gst.types.Format propval)
+  {
+    return setProperty("format", propval);
+  }
+
+  /**
+      Set `handleSegmentChange` property.
+      Params:
+        propval = When enabled, appsrc will check GstSegment in GstSample which was
+          pushed via [gstapp.app_src.AppSrc.pushSample] or "push-sample" signal action.
+          If a GstSegment is changed, corresponding segment event will be followed
+          by next data flow.
+          
+          FIXME: currently only GST_FORMAT_TIME format is supported and therefore
+          GstAppSrc::format should be time. However, possibly #GstAppSrc can support
+          other formats.
+      Returns: Builder instance for fluent chaining
+  */
+  T handleSegmentChange(bool propval)
+  {
+    return setProperty("handle-segment-change", propval);
+  }
+
+  /**
+      Set `isLive` property.
+      Params:
+        propval = Instruct the source to behave like a live source. This includes that it
+          will only push out buffers in the PLAYING state.
+      Returns: Builder instance for fluent chaining
+  */
+  T isLive(bool propval)
+  {
+    return setProperty("is-live", propval);
+  }
+
+  /**
+      Set `leakyType` property.
+      Params:
+        propval = When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsrc
+          will drop any buffers that are pushed into it once its internal queue is
+          full. The selected type defines whether to drop the oldest or new
+          buffers.
+      Returns: Builder instance for fluent chaining
+  */
+  T leakyType(gstapp.types.AppLeakyType propval)
+  {
+    return setProperty("leaky-type", propval);
+  }
+
+  /**
+      Set `maxBuffers` property.
+      Params:
+        propval = The maximum amount of buffers that can be queued internally.
+          After the maximum amount of buffers are queued, appsrc will emit the
+          "enough-data" signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxBuffers(ulong propval)
+  {
+    return setProperty("max-buffers", propval);
+  }
+
+  /**
+      Set `maxBytes` property.
+      Params:
+        propval = The maximum amount of bytes that can be queued internally.
+          After the maximum amount of bytes are queued, appsrc will emit the
+          "enough-data" signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxBytes(ulong propval)
+  {
+    return setProperty("max-bytes", propval);
+  }
+
+  /** */
+  T maxLatency(long propval)
+  {
+    return setProperty("max-latency", propval);
+  }
+
+  /**
+      Set `maxTime` property.
+      Params:
+        propval = The maximum amount of time that can be queued internally.
+          After the maximum amount of time are queued, appsrc will emit the
+          "enough-data" signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxTime(ulong propval)
+  {
+    return setProperty("max-time", propval);
+  }
+
+  /**
+      Set `minLatency` property.
+      Params:
+        propval = The minimum latency of the source. A value of -1 will use the default
+          latency calculations of #GstBaseSrc.
+      Returns: Builder instance for fluent chaining
+  */
+  T minLatency(long propval)
+  {
+    return setProperty("min-latency", propval);
+  }
+
+  /**
+      Set `minPercent` property.
+      Params:
+        propval = Make appsrc emit the "need-data" signal when the amount of bytes in the
+          queue drops below this percentage of max-bytes.
+      Returns: Builder instance for fluent chaining
+  */
+  T minPercent(uint propval)
+  {
+    return setProperty("min-percent", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = The total size in bytes of the data stream. If the total size is known, it
+          is recommended to configure it with this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(long propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /**
+      Set `streamType` property.
+      Params:
+        propval = The type of stream that this source is producing.  For seekable streams the
+          application should connect to the seek-data signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T streamType(gstapp.types.AppStreamType propval)
+  {
+    return setProperty("stream-type", propval);
+  }
+}
+
+/// Fluent builder for [gstapp.app_src.AppSrc]
+final class AppSrcGidBuilder : AppSrcGidBuilderImpl!AppSrcGidBuilder
+{
+  AppSrc build()
+  {
+    return new AppSrc(cast(void*)createGObject(AppSrc._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import arrowdataset.c.types;
 import arrowdataset.fragment;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class InMemoryFragment : arrowdataset.fragment.Fragment
@@ -38,6 +39,15 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.in_memory_fragment.InMemoryFragment]
+  Returns: New builder object
+  */
+  static InMemoryFragmentGidBuilder builder()
+  {
+    return new InMemoryFragmentGidBuilder;
+  }
+
   /** */
   this(arrow.schema.Schema schema, arrow.record_batch.RecordBatch[] recordBatches)
   {
@@ -53,5 +63,18 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
 
     _cretval = gadataset_in_memory_fragment_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _recordBatches, _nRecordBatches);
     this(_cretval, Yes.Take);
+  }
+}
+
+class InMemoryFragmentGidBuilderImpl(T) : arrowdataset.fragment.FragmentGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.in_memory_fragment.InMemoryFragment]
+final class InMemoryFragmentGidBuilder : InMemoryFragmentGidBuilderImpl!InMemoryFragmentGidBuilder
+{
+  InMemoryFragment build()
+  {
+    return new InMemoryFragment(cast(void*)createGObject(InMemoryFragment._getGType), Yes.Take);
   }
 }

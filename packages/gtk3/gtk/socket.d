@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -94,6 +95,15 @@ class Socket : gtk.container.Container
   override Socket self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.socket.Socket]
+  Returns: New builder object
+  */
+  static SocketGidBuilder builder()
+  {
+    return new SocketGidBuilder;
   }
 
   /**
@@ -237,5 +247,19 @@ class Socket : gtk.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("plug-removed", closure, after);
+  }
+}
+
+class SocketGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.socket.Socket]
+final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
+{
+  Socket build()
+  {
+    return new Socket(cast(void*)createGObject(Socket._getGType), No.Take);
   }
 }

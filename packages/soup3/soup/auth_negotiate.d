@@ -2,6 +2,7 @@
 module soup.auth_negotiate;
 
 import gid.gid;
+import gobject.gid_builder;
 import soup.auth;
 import soup.c.functions;
 import soup.c.types;
@@ -48,6 +49,15 @@ class AuthNegotiate : soup.auth.Auth
   }
 
   /**
+  Get builder for [soup.auth_negotiate.AuthNegotiate]
+  Returns: New builder object
+  */
+  static AuthNegotiateGidBuilder builder()
+  {
+    return new AuthNegotiateGidBuilder;
+  }
+
+  /**
       Indicates whether libsoup was built with GSSAPI support.
       
       If this is false, `SOUP_TYPE_AUTH_NEGOTIATE` will still be defined and can
@@ -60,5 +70,18 @@ class AuthNegotiate : soup.auth.Auth
     bool _retval;
     _retval = cast(bool)soup_auth_negotiate_supported();
     return _retval;
+  }
+}
+
+class AuthNegotiateGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [soup.auth_negotiate.AuthNegotiate]
+final class AuthNegotiateGidBuilder : AuthNegotiateGidBuilderImpl!AuthNegotiateGidBuilder
+{
+  AuthNegotiate build()
+  {
+    return new AuthNegotiate(cast(void*)createGObject(AuthNegotiate._getGType), No.Take);
   }
 }

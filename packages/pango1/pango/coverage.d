@@ -2,6 +2,7 @@
 module pango.coverage;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -43,6 +44,15 @@ class Coverage : gobject.object.ObjectWrap
   override Coverage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.coverage.Coverage]
+  Returns: New builder object
+  */
+  static CoverageGidBuilder builder()
+  {
+    return new CoverageGidBuilder;
   }
 
   /**
@@ -154,5 +164,18 @@ class Coverage : gobject.object.ObjectWrap
     bytes.length = _nBytes;
     bytes[0 .. $] = (cast(ubyte*)_bytes)[0 .. _nBytes];
     gFree(cast(void*)_bytes);
+  }
+}
+
+class CoverageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.coverage.Coverage]
+final class CoverageGidBuilder : CoverageGidBuilderImpl!CoverageGidBuilder
+{
+  Coverage build()
+  {
+    return new Coverage(cast(void*)createGObject(Coverage._getGType), Yes.Take);
   }
 }

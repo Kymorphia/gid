@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.icon;
 import gio.icon_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,33 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   override Emblem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.emblem.Emblem]
+  Returns: New builder object
+  */
+  static EmblemGidBuilder builder()
+  {
+    return new EmblemGidBuilder;
+  }
+
+  /**
+      Get `icon` property.
+      Returns: The actual icon of the emblem.
+  */
+  @property gobject.object.ObjectWrap icon()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.object.ObjectWrap)("icon");
+  }
+
+  /**
+      Get `origin` property.
+      Returns: The origin the emblem is derived from.
+  */
+  @property gio.types.EmblemOrigin origin()
+  {
+    return getOrigin();
   }
 
   mixin IconT!();
@@ -100,5 +128,42 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
     _cretval = g_emblem_get_origin(cast(GEmblem*)this._cPtr);
     gio.types.EmblemOrigin _retval = cast(gio.types.EmblemOrigin)_cretval;
     return _retval;
+  }
+}
+
+class EmblemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T
+{
+
+  mixin IconGidBuilderT!();
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The actual icon of the emblem.
+      Returns: Builder instance for fluent chaining
+  */
+  T icon(gobject.object.ObjectWrap propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `origin` property.
+      Params:
+        propval = The origin the emblem is derived from.
+      Returns: Builder instance for fluent chaining
+  */
+  T origin(gio.types.EmblemOrigin propval)
+  {
+    return setProperty("origin", propval);
+  }
+}
+
+/// Fluent builder for [gio.emblem.Emblem]
+final class EmblemGidBuilder : EmblemGidBuilderImpl!EmblemGidBuilder
+{
+  Emblem build()
+  {
+    return new Emblem(cast(void*)createGObject(Emblem._getGType), Yes.Take);
   }
 }

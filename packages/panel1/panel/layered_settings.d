@@ -8,6 +8,7 @@ import gio.types;
 import glib.variant;
 import glib.variant_type;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import panel.c.functions;
@@ -41,6 +42,27 @@ class LayeredSettings : gobject.object.ObjectWrap
   override LayeredSettings self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.layered_settings.LayeredSettings]
+  Returns: New builder object
+  */
+  static LayeredSettingsGidBuilder builder()
+  {
+    return new LayeredSettingsGidBuilder;
+  }
+
+  /** */
+  @property string path()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("path");
+  }
+
+  /** */
+  @property string schemaId()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("schema-id");
   }
 
   /** */
@@ -326,5 +348,30 @@ class LayeredSettings : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class LayeredSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T path(string propval)
+  {
+    return setProperty("path", propval);
+  }
+
+  /** */
+  T schemaId(string propval)
+  {
+    return setProperty("schema-id", propval);
+  }
+}
+
+/// Fluent builder for [panel.layered_settings.LayeredSettings]
+final class LayeredSettingsGidBuilder : LayeredSettingsGidBuilderImpl!LayeredSettingsGidBuilder
+{
+  LayeredSettings build()
+  {
+    return new LayeredSettings(cast(void*)createGObject(LayeredSettings._getGType), Yes.Take);
   }
 }

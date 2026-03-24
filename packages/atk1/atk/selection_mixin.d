@@ -8,6 +8,7 @@ public import atk.object;
 public import atk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -176,4 +177,8 @@ template SelectionT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-changed", closure, after);
   }
+}
+
+template SelectionGidBuilderT()
+{
 }

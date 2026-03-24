@@ -8,6 +8,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.internet_address_mailbox;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -42,6 +43,15 @@ class AutocryptHeader : gobject.object.ObjectWrap
   override AutocryptHeader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.autocrypt_header.AutocryptHeader]
+  Returns: New builder object
+  */
+  static AutocryptHeaderGidBuilder builder()
+  {
+    return new AutocryptHeaderGidBuilder;
   }
 
   /**
@@ -264,5 +274,18 @@ class AutocryptHeader : gobject.object.ObjectWrap
     _cretval = g_mime_autocrypt_header_to_string(cast(GMimeAutocryptHeader*)this._cPtr, gossip);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class AutocryptHeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.autocrypt_header.AutocryptHeader]
+final class AutocryptHeaderGidBuilder : AutocryptHeaderGidBuilderImpl!AutocryptHeaderGidBuilder
+{
+  AutocryptHeader build()
+  {
+    return new AutocryptHeader(cast(void*)createGObject(AutocryptHeader._getGType), Yes.Take);
   }
 }

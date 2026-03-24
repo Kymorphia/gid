@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -126,6 +127,15 @@ class Expander : gtk.bin.Bin
     return this;
   }
 
+  /**
+  Get builder for [gtk.expander.Expander]
+  Returns: New builder object
+  */
+  static ExpanderGidBuilder builder()
+  {
+    return new ExpanderGidBuilder;
+  }
+
   /** */
   @property bool expanded()
   {
@@ -135,7 +145,7 @@ class Expander : gtk.bin.Bin
   /** */
   @property void expanded(bool propval)
   {
-    return setExpanded(propval);
+    setExpanded(propval);
   }
 
   /** */
@@ -147,7 +157,7 @@ class Expander : gtk.bin.Bin
   /** */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -170,7 +180,7 @@ class Expander : gtk.bin.Bin
   */
   @property void labelFill(bool propval)
   {
-    return setLabelFill(propval);
+    setLabelFill(propval);
   }
 
   /** */
@@ -182,7 +192,7 @@ class Expander : gtk.bin.Bin
   /** */
   @property void labelWidget(gtk.widget.Widget propval)
   {
-    return setLabelWidget(propval);
+    setLabelWidget(propval);
   }
 
   /**
@@ -203,7 +213,7 @@ class Expander : gtk.bin.Bin
   */
   @property void resizeToplevel(bool propval)
   {
-    return setResizeToplevel(propval);
+    setResizeToplevel(propval);
   }
 
   /**
@@ -230,7 +240,7 @@ class Expander : gtk.bin.Bin
   */
   @property void spacing(int propval)
   {
-    return setSpacing(propval);
+    setSpacing(propval);
   }
 
   /** */
@@ -242,7 +252,7 @@ class Expander : gtk.bin.Bin
   /** */
   @property void useMarkup(bool propval)
   {
-    return setUseMarkup(propval);
+    setUseMarkup(propval);
   }
 
   /** */
@@ -254,7 +264,7 @@ class Expander : gtk.bin.Bin
   /** */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -549,5 +559,89 @@ class Expander : gtk.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class ExpanderGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /** */
+  T expanded(bool propval)
+  {
+    return setProperty("expanded", propval);
+  }
+
+  /** */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `labelFill` property.
+      Params:
+        propval = Whether the label widget should fill all available horizontal space.
+          
+          Note that this property is ignored since 3.20.
+      Returns: Builder instance for fluent chaining
+  */
+  T labelFill(bool propval)
+  {
+    return setProperty("label-fill", propval);
+  }
+
+  /** */
+  T labelWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("label-widget", propval);
+  }
+
+  /**
+      Set `resizeToplevel` property.
+      Params:
+        propval = When this property is true, the expander will resize the toplevel
+          widget containing the expander upon expanding and collapsing.
+      Returns: Builder instance for fluent chaining
+  */
+  T resizeToplevel(bool propval)
+  {
+    return setProperty("resize-toplevel", propval);
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = Space to put between the label and the child when the
+          expander is expanded.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property is deprecated and ignored.
+            Use margins on the child instead.
+  */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+
+  /** */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+
+  /** */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gtk.expander.Expander]
+final class ExpanderGidBuilder : ExpanderGidBuilderImpl!ExpanderGidBuilder
+{
+  Expander build()
+  {
+    return new Expander(cast(void*)createGObject(Expander._getGType), No.Take);
   }
 }

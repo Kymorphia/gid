@@ -9,6 +9,7 @@ import arrow.table;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class RecordBatchReader : gobject.object.ObjectWrap
   override RecordBatchReader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.record_batch_reader.RecordBatchReader]
+  Returns: New builder object
+  */
+  static RecordBatchReaderGidBuilder builder()
+  {
+    return new RecordBatchReaderGidBuilder;
   }
 
   /** */
@@ -139,5 +149,30 @@ class RecordBatchReader : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class RecordBatchReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T recordBatchReader(void* propval)
+  {
+    return setProperty("record-batch-reader", propval);
+  }
+
+  /** */
+  T sources(void* propval)
+  {
+    return setProperty("sources", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch_reader.RecordBatchReader]
+final class RecordBatchReaderGidBuilder : RecordBatchReaderGidBuilderImpl!RecordBatchReaderGidBuilder
+{
+  RecordBatchReader build()
+  {
+    return new RecordBatchReader(cast(void*)createGObject(RecordBatchReader._getGType), Yes.Take);
   }
 }

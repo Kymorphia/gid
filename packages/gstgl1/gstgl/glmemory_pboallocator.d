@@ -2,6 +2,7 @@
 module gstgl.glmemory_pboallocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstgl.c.functions;
 import gstgl.c.types;
 import gstgl.glmemory_allocator;
@@ -36,5 +37,27 @@ class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
   override GLMemoryPBOAllocator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glmemory_pboallocator.GLMemoryPBOAllocator]
+  Returns: New builder object
+  */
+  static GLMemoryPBOAllocatorGidBuilder builder()
+  {
+    return new GLMemoryPBOAllocatorGidBuilder;
+  }
+}
+
+class GLMemoryPBOAllocatorGidBuilderImpl(T) : gstgl.glmemory_allocator.GLMemoryAllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glmemory_pboallocator.GLMemoryPBOAllocator]
+final class GLMemoryPBOAllocatorGidBuilder : GLMemoryPBOAllocatorGidBuilderImpl!GLMemoryPBOAllocatorGidBuilder
+{
+  GLMemoryPBOAllocator build()
+  {
+    return new GLMemoryPBOAllocator(cast(void*)createGObject(GLMemoryPBOAllocator._getGType), No.Take);
   }
 }

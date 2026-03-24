@@ -2,6 +2,7 @@
 module soup.websocket_extension_manager;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -47,5 +48,29 @@ class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_featur
     return this;
   }
 
+  /**
+  Get builder for [soup.websocket_extension_manager.WebsocketExtensionManager]
+  Returns: New builder object
+  */
+  static WebsocketExtensionManagerGidBuilder builder()
+  {
+    return new WebsocketExtensionManagerGidBuilder;
+  }
+
   mixin SessionFeatureT!();
+}
+
+class WebsocketExtensionManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+}
+
+/// Fluent builder for [soup.websocket_extension_manager.WebsocketExtensionManager]
+final class WebsocketExtensionManagerGidBuilder : WebsocketExtensionManagerGidBuilderImpl!WebsocketExtensionManagerGidBuilder
+{
+  WebsocketExtensionManager build()
+  {
+    return new WebsocketExtensionManager(cast(void*)createGObject(WebsocketExtensionManager._getGType), No.Take);
+  }
 }

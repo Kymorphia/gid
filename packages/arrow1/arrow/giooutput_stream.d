@@ -11,6 +11,7 @@ import arrow.writable;
 import arrow.writable_mixin;
 import gid.gid;
 import gio.output_stream;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -42,6 +43,21 @@ class GIOOutputStream : arrow.output_stream.OutputStream
     return this;
   }
 
+  /**
+  Get builder for [arrow.giooutput_stream.GIOOutputStream]
+  Returns: New builder object
+  */
+  static GIOOutputStreamGidBuilder builder()
+  {
+    return new GIOOutputStreamGidBuilder;
+  }
+
+  /** */
+  @property gio.output_stream.OutputStream raw()
+  {
+    return getRaw();
+  }
+
   /** */
   this(gio.output_stream.OutputStream gioOutputStream)
   {
@@ -57,5 +73,25 @@ class GIOOutputStream : arrow.output_stream.OutputStream
     _cretval = garrow_gio_output_stream_get_raw(cast(GArrowGIOOutputStream*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class GIOOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuilderImpl!T
+{
+
+
+  /** */
+  T raw(gio.output_stream.OutputStream propval)
+  {
+    return setProperty("raw", propval);
+  }
+}
+
+/// Fluent builder for [arrow.giooutput_stream.GIOOutputStream]
+final class GIOOutputStreamGidBuilder : GIOOutputStreamGidBuilderImpl!GIOOutputStreamGidBuilder
+{
+  GIOOutputStream build()
+  {
+    return new GIOOutputStream(cast(void*)createGObject(GIOOutputStream._getGType), Yes.Take);
   }
 }

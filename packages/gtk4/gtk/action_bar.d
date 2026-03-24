@@ -2,6 +2,7 @@
 module gtk.action_bar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -83,6 +84,15 @@ class ActionBar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.action_bar.ActionBar]
+  Returns: New builder object
+  */
+  static ActionBarGidBuilder builder()
+  {
+    return new ActionBarGidBuilder;
+  }
+
+  /**
       Get `revealed` property.
       Returns: Controls whether the action bar shows its contents.
   */
@@ -98,7 +108,7 @@ class ActionBar : gtk.widget.Widget
   */
   @property void revealed(bool propval)
   {
-    return setRevealed(propval);
+    setRevealed(propval);
   }
 
   /**
@@ -195,5 +205,30 @@ class ActionBar : gtk.widget.Widget
   void setRevealed(bool revealed)
   {
     gtk_action_bar_set_revealed(cast(GtkActionBar*)this._cPtr, revealed);
+  }
+}
+
+class ActionBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `revealed` property.
+      Params:
+        propval = Controls whether the action bar shows its contents.
+      Returns: Builder instance for fluent chaining
+  */
+  T revealed(bool propval)
+  {
+    return setProperty("revealed", propval);
+  }
+}
+
+/// Fluent builder for [gtk.action_bar.ActionBar]
+final class ActionBarGidBuilder : ActionBarGidBuilderImpl!ActionBarGidBuilder
+{
+  ActionBar build()
+  {
+    return new ActionBar(cast(void*)createGObject(ActionBar._getGType), No.Take);
   }
 }

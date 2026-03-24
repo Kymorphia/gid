@@ -3,6 +3,7 @@ module gtk.style_provider_mixin;
 
 public import gtk.style_provider_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.param_spec;
 public import gobject.value;
@@ -77,4 +78,8 @@ template StyleProviderT()
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
+}
+
+template StyleProviderGidBuilderT()
+{
 }

@@ -6,8 +6,13 @@ public import arrowflight.c.functions;
 public import arrowflight.c.types;
 public import arrowflight.types;
 public import gid.gid;
+public import gobject.gid_builder;
 
 /** */
 template ServableT()
+{
+}
+
+template ServableGidBuilderT()
 {
 }

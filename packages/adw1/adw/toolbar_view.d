@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -145,6 +146,15 @@ class ToolbarView : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.toolbar_view.ToolbarView]
+  Returns: New builder object
+  */
+  static ToolbarViewGidBuilder builder()
+  {
+    return new ToolbarViewGidBuilder;
+  }
+
+  /**
       Get `bottomBarHeight` property.
       Returns: The current bottom bar height.
         
@@ -220,7 +230,7 @@ class ToolbarView : gtk.widget.Widget
   */
   @property void bottomBarStyle(adw.types.ToolbarStyle propval)
   {
-    return setBottomBarStyle(propval);
+    setBottomBarStyle(propval);
   }
 
   /**
@@ -239,7 +249,7 @@ class ToolbarView : gtk.widget.Widget
   */
   @property void content(gtk.widget.Widget propval)
   {
-    return setContent(propval);
+    setContent(propval);
   }
 
   /**
@@ -270,7 +280,7 @@ class ToolbarView : gtk.widget.Widget
   */
   @property void extendContentToBottomEdge(bool propval)
   {
-    return setExtendContentToBottomEdge(propval);
+    setExtendContentToBottomEdge(propval);
   }
 
   /**
@@ -299,7 +309,7 @@ class ToolbarView : gtk.widget.Widget
   */
   @property void extendContentToTopEdge(bool propval)
   {
-    return setExtendContentToTopEdge(propval);
+    setExtendContentToTopEdge(propval);
   }
 
   /**
@@ -334,7 +344,7 @@ class ToolbarView : gtk.widget.Widget
   */
   @property void revealBottomBars(bool propval)
   {
-    return setRevealBottomBars(propval);
+    setRevealBottomBars(propval);
   }
 
   /**
@@ -369,7 +379,7 @@ class ToolbarView : gtk.widget.Widget
   */
   @property void revealTopBars(bool propval)
   {
-    return setRevealTopBars(propval);
+    setRevealTopBars(propval);
   }
 
   /**
@@ -448,7 +458,7 @@ class ToolbarView : gtk.widget.Widget
   */
   @property void topBarStyle(adw.types.ToolbarStyle propval)
   {
-    return setTopBarStyle(propval);
+    setTopBarStyle(propval);
   }
 
   /**
@@ -754,5 +764,169 @@ class ToolbarView : gtk.widget.Widget
   void setTopBarStyle(adw.types.ToolbarStyle style)
   {
     adw_toolbar_view_set_top_bar_style(cast(AdwToolbarView*)this._cPtr, style);
+  }
+}
+
+class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `bottomBarStyle` property.
+      Params:
+        propval = Appearance of the bottom bars.
+          
+          If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling content
+          has a subtle undershoot shadow when touching them, same as the
+          [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
+          style class. This works well for simple content, e.g. `class@StatusPage` or
+          `class@PreferencesPage`, where the background at the bottom of the page is
+          uniform. Additionally, windows with sidebars should always use this style.
+          
+          Undershoot shadow is only present if a bottom bar is actually present and
+          visible. It is also never present if
+          `property@ToolbarView:extend-content-to-bottom-edge` is set to `TRUE`.
+          
+          If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque background and a
+          persistent shadow, this is suitable for content such as
+          [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+          where some elements are directly adjacent to the bottom bars, or
+          `class@TabView`, where each page can have a different background.
+          
+          [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
+          shadow is replaced with a more subtle border. This can be useful for
+          applications like image viewers.
+          
+          See also `property@ToolbarView:top-bar-style`.
+      Returns: Builder instance for fluent chaining
+  */
+  T bottomBarStyle(adw.types.ToolbarStyle propval)
+  {
+    return setProperty("bottom-bar-style", propval);
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T content(gtk.widget.Widget propval)
+  {
+    return setProperty("content", propval);
+  }
+
+  /**
+      Set `extendContentToBottomEdge` property.
+      Params:
+        propval = Whether the content widget can extend behind bottom bars.
+          
+          This can be used in combination with
+          `property@ToolbarView:reveal-bottom-bars` to show and hide toolbars in
+          fullscreen.
+          
+          See `property@ToolbarView:extend-content-to-top-edge`.
+      Returns: Builder instance for fluent chaining
+  */
+  T extendContentToBottomEdge(bool propval)
+  {
+    return setProperty("extend-content-to-bottom-edge", propval);
+  }
+
+  /**
+      Set `extendContentToTopEdge` property.
+      Params:
+        propval = Whether the content widget can extend behind top bars.
+          
+          This can be used in combination with `property@ToolbarView:reveal-top-bars`
+          to show and hide toolbars in fullscreen.
+          
+          See `property@ToolbarView:extend-content-to-bottom-edge`.
+      Returns: Builder instance for fluent chaining
+  */
+  T extendContentToTopEdge(bool propval)
+  {
+    return setProperty("extend-content-to-top-edge", propval);
+  }
+
+  /**
+      Set `revealBottomBars` property.
+      Params:
+        propval = Whether bottom bars are visible.
+          
+          The transition will be animated.
+          
+          This can be used in combination with
+          `property@ToolbarView:extend-content-to-bottom-edge` to show and hide
+          toolbars in fullscreen.
+          
+          See `property@ToolbarView:reveal-top-bars`.
+      Returns: Builder instance for fluent chaining
+  */
+  T revealBottomBars(bool propval)
+  {
+    return setProperty("reveal-bottom-bars", propval);
+  }
+
+  /**
+      Set `revealTopBars` property.
+      Params:
+        propval = Whether top bars are revealed.
+          
+          The transition will be animated.
+          
+          This can be used in combination with
+          `property@ToolbarView:extend-content-to-top-edge` to show and hide toolbars
+          in fullscreen.
+          
+          See `property@ToolbarView:reveal-bottom-bars`.
+      Returns: Builder instance for fluent chaining
+  */
+  T revealTopBars(bool propval)
+  {
+    return setProperty("reveal-top-bars", propval);
+  }
+
+  /**
+      Set `topBarStyle` property.
+      Params:
+        propval = Appearance of the top bars.
+          
+          If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling content has a
+          subtle undershoot shadow when touching them, same as the
+          [`.undershoot-top`](style-classes.html#undershoot-indicators)
+          style class. This works well for simple content, e.g. `class@StatusPage` or
+          `class@PreferencesPage`, where the background at the top of the page is
+          uniform. Additionally, windows with sidebars should always use this style.
+          
+          Undershoot shadow is only present if a top bar is actually present and
+          visible. It is also never present if
+          `property@ToolbarView:extend-content-to-top-edge` is set to `TRUE`.
+          
+          If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background and a
+          persistent shadow, this is suitable for content such as
+          [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+          where some elements are directly adjacent to the top bars, or
+          `class@TabView`, where each page can have a different background.
+          
+          [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
+          shadow is replaced with a more subtle border. This can be useful for
+          applications like image viewers.
+          
+          See also `property@ToolbarView:bottom-bar-style`.
+      Returns: Builder instance for fluent chaining
+  */
+  T topBarStyle(adw.types.ToolbarStyle propval)
+  {
+    return setProperty("top-bar-style", propval);
+  }
+}
+
+/// Fluent builder for [adw.toolbar_view.ToolbarView]
+final class ToolbarViewGidBuilder : ToolbarViewGidBuilderImpl!ToolbarViewGidBuilder
+{
+  ToolbarView build()
+  {
+    return new ToolbarView(cast(void*)createGObject(ToolbarView._getGType), No.Take);
   }
 }

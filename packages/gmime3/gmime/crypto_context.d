@@ -9,6 +9,7 @@ import gmime.decrypt_result;
 import gmime.signature_list;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -40,6 +41,15 @@ class CryptoContext : gobject.object.ObjectWrap
   override CryptoContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.crypto_context.CryptoContext]
+  Returns: New builder object
+  */
+  static CryptoContextGidBuilder builder()
+  {
+    return new CryptoContextGidBuilder;
   }
 
   /**
@@ -288,5 +298,18 @@ class CryptoContext : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class CryptoContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.crypto_context.CryptoContext]
+final class CryptoContextGidBuilder : CryptoContextGidBuilderImpl!CryptoContextGidBuilder
+{
+  CryptoContext build()
+  {
+    return new CryptoContext(cast(void*)createGObject(CryptoContext._getGType), Yes.Take);
   }
 }

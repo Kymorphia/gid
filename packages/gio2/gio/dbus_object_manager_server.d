@@ -9,6 +9,7 @@ import gio.dbus_object_manager;
 import gio.dbus_object_manager_mixin;
 import gio.dbus_object_skeleton;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -63,6 +64,15 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   }
 
   /**
+  Get builder for [gio.dbus_object_manager_server.DBusObjectManagerServer]
+  Returns: New builder object
+  */
+  static DBusObjectManagerServerGidBuilder builder()
+  {
+    return new DBusObjectManagerServerGidBuilder;
+  }
+
+  /**
       Get `connection` property.
       Returns: The #GDBusConnection to export objects on.
   */
@@ -78,7 +88,16 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   */
   @property void connection(gio.dbus_connection.DBusConnection propval)
   {
-    return setConnection(propval);
+    setConnection(propval);
+  }
+
+  /**
+      Get `objectPath` property.
+      Returns: The object path to register the manager object at.
+  */
+  @property string objectPath()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("object-path");
   }
 
   mixin DBusObjectManagerT!();
@@ -195,5 +214,42 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _retval = cast(bool)g_dbus_object_manager_server_unexport(cast(GDBusObjectManagerServer*)this._cPtr, _objectPath);
     return _retval;
+  }
+}
+
+class DBusObjectManagerServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.dbus_object_manager.DBusObjectManagerGidBuilderImpl!T
+{
+
+  mixin DBusObjectManagerGidBuilderT!();
+
+  /**
+      Set `connection` property.
+      Params:
+        propval = The #GDBusConnection to export objects on.
+      Returns: Builder instance for fluent chaining
+  */
+  T connection(gio.dbus_connection.DBusConnection propval)
+  {
+    return setProperty("connection", propval);
+  }
+
+  /**
+      Set `objectPath` property.
+      Params:
+        propval = The object path to register the manager object at.
+      Returns: Builder instance for fluent chaining
+  */
+  T objectPath(string propval)
+  {
+    return setProperty("object-path", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_object_manager_server.DBusObjectManagerServer]
+final class DBusObjectManagerServerGidBuilder : DBusObjectManagerServerGidBuilderImpl!DBusObjectManagerServerGidBuilder
+{
+  DBusObjectManagerServer build()
+  {
+    return new DBusObjectManagerServer(cast(void*)createGObject(DBusObjectManagerServer._getGType), Yes.Take);
   }
 }

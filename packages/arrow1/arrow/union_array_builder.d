@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -35,6 +36,15 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   override UnionArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.union_array_builder.UnionArrayBuilder]
+  Returns: New builder object
+  */
+  static UnionArrayBuilderGidBuilder builder()
+  {
+    return new UnionArrayBuilderGidBuilder;
   }
 
   /** */
@@ -71,5 +81,18 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class UnionArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.union_array_builder.UnionArrayBuilder]
+final class UnionArrayBuilderGidBuilder : UnionArrayBuilderGidBuilderImpl!UnionArrayBuilderGidBuilder
+{
+  UnionArrayBuilder build()
+  {
+    return new UnionArrayBuilder(cast(void*)createGObject(UnionArrayBuilder._getGType), No.Take);
   }
 }

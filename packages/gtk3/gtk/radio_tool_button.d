@@ -4,6 +4,7 @@ module gtk.radio_tool_button;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -56,6 +57,15 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   override RadioToolButton self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.radio_tool_button.RadioToolButton]
+  Returns: New builder object
+  */
+  static RadioToolButtonGidBuilder builder()
+  {
+    return new RadioToolButtonGidBuilder;
   }
 
   /**
@@ -168,5 +178,30 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
     gtk_radio_tool_button_set_group(cast(GtkRadioToolButton*)this._cPtr, _group);
+  }
+}
+
+class RadioToolButtonGidBuilderImpl(T) : gtk.toggle_tool_button.ToggleToolButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `group` property.
+      Params:
+        propval = Sets a new group for a radio tool button.
+      Returns: Builder instance for fluent chaining
+  */
+  T group(gtk.radio_tool_button.RadioToolButton propval)
+  {
+    return setProperty("group", propval);
+  }
+}
+
+/// Fluent builder for [gtk.radio_tool_button.RadioToolButton]
+final class RadioToolButtonGidBuilder : RadioToolButtonGidBuilderImpl!RadioToolButtonGidBuilder
+{
+  RadioToolButton build()
+  {
+    return new RadioToolButton(cast(void*)createGObject(RadioToolButton._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
   override FeatherWriteProperties self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.feather_write_properties.FeatherWriteProperties]
+  Returns: New builder object
+  */
+  static FeatherWritePropertiesGidBuilder builder()
+  {
+    return new FeatherWritePropertiesGidBuilder;
   }
 
   /**
@@ -75,5 +85,36 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
     GArrowFeatherWriteProperties* _cretval;
     _cretval = garrow_feather_write_properties_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class FeatherWritePropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `compression` property.
+      Params:
+        propval = Compression type to use. Only
+          [arrow.types.CompressionType.Uncompressed],
+          [arrow.types.CompressionType.Lz4] and [arrow.types.CompressionType.Zstd]
+          are supported. The default compression is
+          [arrow.types.CompressionType.Lz4] if Apache Arrow C++ is built with
+          support for it, otherwise [arrow.types.CompressionType.Uncompressed].
+          [arrow.types.CompressionType.Uncompressed] is set as the object
+          default here.
+      Returns: Builder instance for fluent chaining
+  */
+  T compression(arrow.types.CompressionType propval)
+  {
+    return setProperty("compression", propval);
+  }
+}
+
+/// Fluent builder for [arrow.feather_write_properties.FeatherWriteProperties]
+final class FeatherWritePropertiesGidBuilder : FeatherWritePropertiesGidBuilderImpl!FeatherWritePropertiesGidBuilder
+{
+  FeatherWriteProperties build()
+  {
+    return new FeatherWriteProperties(cast(void*)createGObject(FeatherWriteProperties._getGType), Yes.Take);
   }
 }

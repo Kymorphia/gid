@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.output_stream;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,30 @@ class FilterOutputStream : gio.output_stream.OutputStream
   }
 
   /**
+  Get builder for [gio.filter_output_stream.FilterOutputStream]
+  Returns: New builder object
+  */
+  static FilterOutputStreamGidBuilder builder()
+  {
+    return new FilterOutputStreamGidBuilder;
+  }
+
+  /** */
+  @property gio.output_stream.OutputStream baseStream()
+  {
+    return getBaseStream();
+  }
+
+  /**
+      Get `closeBaseStream` property.
+      Returns: Whether the base stream should be closed when the filter stream is closed.
+  */
+  @property bool closeBaseStream()
+  {
+    return getCloseBaseStream();
+  }
+
+  /**
       Gets the base stream for the filter stream.
       Returns: a #GOutputStream.
   */
@@ -75,5 +100,35 @@ class FilterOutputStream : gio.output_stream.OutputStream
   void setCloseBaseStream(bool closeBase)
   {
     g_filter_output_stream_set_close_base_stream(cast(GFilterOutputStream*)this._cPtr, closeBase);
+  }
+}
+
+class FilterOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBuilderImpl!T
+{
+
+  /** */
+  T baseStream(gio.output_stream.OutputStream propval)
+  {
+    return setProperty("base-stream", propval);
+  }
+
+  /**
+      Set `closeBaseStream` property.
+      Params:
+        propval = Whether the base stream should be closed when the filter stream is closed.
+      Returns: Builder instance for fluent chaining
+  */
+  T closeBaseStream(bool propval)
+  {
+    return setProperty("close-base-stream", propval);
+  }
+}
+
+/// Fluent builder for [gio.filter_output_stream.FilterOutputStream]
+final class FilterOutputStreamGidBuilder : FilterOutputStreamGidBuilderImpl!FilterOutputStreamGidBuilder
+{
+  FilterOutputStream build()
+  {
+    return new FilterOutputStream(cast(void*)createGObject(FilterOutputStream._getGType), No.Take);
   }
 }

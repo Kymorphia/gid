@@ -3,6 +3,7 @@ module gtk.gesture_rotate;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture;
@@ -40,6 +41,15 @@ class GestureRotate : gtk.gesture.Gesture
   override GestureRotate self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.gesture_rotate.GestureRotate]
+  Returns: New builder object
+  */
+  static GestureRotateGidBuilder builder()
+  {
+    return new GestureRotateGidBuilder;
   }
 
   /**
@@ -116,5 +126,18 @@ class GestureRotate : gtk.gesture.Gesture
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("angle-changed", closure, after);
+  }
+}
+
+class GestureRotateGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.gesture_rotate.GestureRotate]
+final class GestureRotateGidBuilder : GestureRotateGidBuilderImpl!GestureRotateGidBuilder
+{
+  GestureRotate build()
+  {
+    return new GestureRotate(cast(void*)createGObject(GestureRotate._getGType), Yes.Take);
   }
 }

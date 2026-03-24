@@ -8,6 +8,7 @@ import arrow.schema;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class StreamListener : gobject.object.ObjectWrap
   override StreamListener self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.stream_listener.StreamListener]
+  Returns: New builder object
+  */
+  static StreamListenerGidBuilder builder()
+  {
+    return new StreamListenerGidBuilder;
   }
 
   /**
@@ -92,5 +102,18 @@ class StreamListener : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class StreamListenerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.stream_listener.StreamListener]
+final class StreamListenerGidBuilder : StreamListenerGidBuilderImpl!StreamListenerGidBuilder
+{
+  StreamListener build()
+  {
+    return new StreamListener(cast(void*)createGObject(StreamListener._getGType), No.Take);
   }
 }

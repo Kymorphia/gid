@@ -13,6 +13,7 @@ public import gid.gid;
 public import glib.error;
 public import glib.types;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.types;
 public import gobject.value;
@@ -1004,4 +1005,8 @@ template DataModelT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-updated", closure, after);
   }
+}
+
+template DataModelGidBuilderT()
+{
 }

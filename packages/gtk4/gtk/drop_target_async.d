@@ -6,6 +6,7 @@ import gdk.drop;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.event_controller;
@@ -76,6 +77,15 @@ class DropTargetAsync : gtk.event_controller.EventController
   }
 
   /**
+  Get builder for [gtk.drop_target_async.DropTargetAsync]
+  Returns: New builder object
+  */
+  static DropTargetAsyncGidBuilder builder()
+  {
+    return new DropTargetAsyncGidBuilder;
+  }
+
+  /**
       Get `actions` property.
       Returns: The `GdkDragActions` that this drop target supports.
   */
@@ -91,7 +101,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   */
   @property void actions(gdk.types.DragAction propval)
   {
-    return setActions(propval);
+    setActions(propval);
   }
 
   /**
@@ -110,7 +120,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   */
   @property void formats(gdk.content_formats.ContentFormats propval)
   {
-    return setFormats(propval);
+    setFormats(propval);
   }
 
   /**
@@ -484,5 +494,40 @@ class DropTargetAsync : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drop", closure, after);
+  }
+}
+
+class DropTargetAsyncGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The `GdkDragActions` that this drop target supports.
+      Returns: Builder instance for fluent chaining
+  */
+  T actions(gdk.types.DragAction propval)
+  {
+    return setProperty("actions", propval);
+  }
+
+  /**
+      Set `formats` property.
+      Params:
+        propval = The [gdk.content_formats.ContentFormats] that determines the supported data formats.
+      Returns: Builder instance for fluent chaining
+  */
+  T formats(gdk.content_formats.ContentFormats propval)
+  {
+    return setProperty("formats", propval);
+  }
+}
+
+/// Fluent builder for [gtk.drop_target_async.DropTargetAsync]
+final class DropTargetAsyncGidBuilder : DropTargetAsyncGidBuilderImpl!DropTargetAsyncGidBuilder
+{
+  DropTargetAsync build()
+  {
+    return new DropTargetAsync(cast(void*)createGObject(DropTargetAsync._getGType), Yes.Take);
   }
 }

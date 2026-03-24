@@ -7,6 +7,7 @@ import gdk.display;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -82,6 +83,15 @@ class DisplayManager : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gdk.display_manager.DisplayManager]
+  Returns: New builder object
+  */
+  static DisplayManagerGidBuilder builder()
+  {
+    return new DisplayManagerGidBuilder;
+  }
+
+  /**
       Get `defaultDisplay` property.
       Returns: The default display.
   */
@@ -97,7 +107,7 @@ class DisplayManager : gobject.object.ObjectWrap
   */
   @property void defaultDisplay(gdk.display.Display propval)
   {
-    return setDefaultDisplay(propval);
+    setDefaultDisplay(propval);
   }
 
   /**
@@ -214,5 +224,29 @@ class DisplayManager : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("display-opened", closure, after);
+  }
+}
+
+class DisplayManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `defaultDisplay` property.
+      Params:
+        propval = The default display.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultDisplay(gdk.display.Display propval)
+  {
+    return setProperty("default-display", propval);
+  }
+}
+
+/// Fluent builder for [gdk.display_manager.DisplayManager]
+final class DisplayManagerGidBuilder : DisplayManagerGidBuilderImpl!DisplayManagerGidBuilder
+{
+  DisplayManager build()
+  {
+    return new DisplayManager(cast(void*)createGObject(DisplayManager._getGType), No.Take);
   }
 }

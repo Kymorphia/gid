@@ -4,6 +4,7 @@ module webkit.authentication_request;
 import gid.gid;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -53,6 +54,15 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   override AuthenticationRequest self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.authentication_request.AuthenticationRequest]
+  Returns: New builder object
+  */
+  static AuthenticationRequestGidBuilder builder()
+  {
+    return new AuthenticationRequestGidBuilder;
   }
 
   /**
@@ -330,5 +340,18 @@ class AuthenticationRequest : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancelled", closure, after);
+  }
+}
+
+class AuthenticationRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.authentication_request.AuthenticationRequest]
+final class AuthenticationRequestGidBuilder : AuthenticationRequestGidBuilderImpl!AuthenticationRequestGidBuilder
+{
+  AuthenticationRequest build()
+  {
+    return new AuthenticationRequest(cast(void*)createGObject(AuthenticationRequest._getGType), No.Take);
   }
 }

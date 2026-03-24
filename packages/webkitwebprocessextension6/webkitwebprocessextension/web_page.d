@@ -7,6 +7,7 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkitwebprocessextension.c.functions;
 import webkitwebprocessextension.c.types;
@@ -51,6 +52,15 @@ class WebPage : gobject.object.ObjectWrap
   override WebPage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.web_page.WebPage]
+  Returns: New builder object
+  */
+  static WebPageGidBuilder builder()
+  {
+    return new WebPageGidBuilder;
   }
 
   /**
@@ -435,5 +445,18 @@ class WebPage : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("user-message-received", closure, after);
+  }
+}
+
+class WebPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.web_page.WebPage]
+final class WebPageGidBuilder : WebPageGidBuilderImpl!WebPageGidBuilder
+{
+  WebPage build()
+  {
+    return new WebPage(cast(void*)createGObject(WebPage._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module webkitwebprocessextension.context_menu;
 import gdk.event;
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import webkitwebprocessextension.c.functions;
 import webkitwebprocessextension.c.types;
@@ -51,6 +52,15 @@ class ContextMenu : gobject.object.ObjectWrap
   override ContextMenu self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.context_menu.ContextMenu]
+  Returns: New builder object
+  */
+  static ContextMenuGidBuilder builder()
+  {
+    return new ContextMenuGidBuilder;
   }
 
   /**
@@ -290,5 +300,18 @@ class ContextMenu : gobject.object.ObjectWrap
   void setUserData(glib.variant.Variant userData)
   {
     webkit_context_menu_set_user_data(cast(WebKitContextMenu*)this._cPtr, userData ? cast(GVariant*)userData._cPtr(No.Dup) : null);
+  }
+}
+
+class ContextMenuGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.context_menu.ContextMenu]
+final class ContextMenuGidBuilder : ContextMenuGidBuilderImpl!ContextMenuGidBuilder
+{
+  ContextMenu build()
+  {
+    return new ContextMenu(cast(void*)createGObject(ContextMenu._getGType), Yes.Take);
   }
 }

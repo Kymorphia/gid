@@ -2,6 +2,7 @@
 module gtk.column_view_cell;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -55,6 +56,15 @@ class ColumnViewCell : gtk.list_item.ListItem
   }
 
   /**
+  Get builder for [gtk.column_view_cell.ColumnViewCell]
+  Returns: New builder object
+  */
+  static ColumnViewCellGidBuilder builder()
+  {
+    return new ColumnViewCellGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: Widget used for display.
   */
@@ -70,7 +80,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   */
   override @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -89,7 +99,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   */
   override @property void focusable(bool propval)
   {
-    return setFocusable(propval);
+    setFocusable(propval);
   }
 
   /**
@@ -217,5 +227,40 @@ class ColumnViewCell : gtk.list_item.ListItem
   override void setFocusable(bool focusable)
   {
     gtk_column_view_cell_set_focusable(cast(GtkColumnViewCell*)this._cPtr, focusable);
+  }
+}
+
+class ColumnViewCellGidBuilderImpl(T) : gtk.list_item.ListItemGidBuilderImpl!T
+{
+
+  /**
+      Set `child` property.
+      Params:
+        propval = Widget used for display.
+      Returns: Builder instance for fluent chaining
+  */
+  override T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `focusable` property.
+      Params:
+        propval = If the item can be focused with the keyboard.
+      Returns: Builder instance for fluent chaining
+  */
+  override T focusable(bool propval)
+  {
+    return setProperty("focusable", propval);
+  }
+}
+
+/// Fluent builder for [gtk.column_view_cell.ColumnViewCell]
+final class ColumnViewCellGidBuilder : ColumnViewCellGidBuilderImpl!ColumnViewCellGidBuilder
+{
+  ColumnViewCell build()
+  {
+    return new ColumnViewCell(cast(void*)createGObject(ColumnViewCell._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 
 /**
     The AtkImplementor interface is implemented by objects for which
@@ -13,5 +14,9 @@ public import gid.gid;
     iface->(ref_accessible)(implementor);
 */
 template ImplementorIfaceT()
+{
+}
+
+template ImplementorIfaceGidBuilderT()
 {
 }

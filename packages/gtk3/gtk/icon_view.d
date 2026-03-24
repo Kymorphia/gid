@@ -8,6 +8,7 @@ import gdk.rectangle;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -79,6 +80,15 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   }
 
   /**
+  Get builder for [gtk.icon_view.IconView]
+  Returns: New builder object
+  */
+  static IconViewGidBuilder builder()
+  {
+    return new IconViewGidBuilder;
+  }
+
+  /**
       Get `activateOnSingleClick` property.
       Returns: The activate-on-single-click property specifies whether the "item-activated" signal
         will be emitted after a single click.
@@ -96,7 +106,19 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void activateOnSingleClick(bool propval)
   {
-    return setActivateOnSingleClick(propval);
+    setActivateOnSingleClick(propval);
+  }
+
+  /**
+      Get `cellArea` property.
+      Returns: The #GtkCellArea used to layout cell renderers for this view.
+        
+        If no area is specified when creating the icon view with [gtk.icon_view.IconView.newWithArea]
+        a #GtkCellAreaBox will be used.
+  */
+  @property gtk.cell_area.CellArea cellArea()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
   }
 
   /**
@@ -117,7 +139,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void columnSpacing(int propval)
   {
-    return setColumnSpacing(propval);
+    setColumnSpacing(propval);
   }
 
   /**
@@ -140,7 +162,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void columns(int propval)
   {
-    return setColumns(propval);
+    setColumns(propval);
   }
 
   /**
@@ -161,7 +183,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void itemOrientation(gtk.types.Orientation propval)
   {
-    return setItemOrientation(propval);
+    setItemOrientation(propval);
   }
 
   /**
@@ -182,7 +204,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void itemPadding(int propval)
   {
-    return setItemPadding(propval);
+    setItemPadding(propval);
   }
 
   /**
@@ -205,7 +227,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void itemWidth(int propval)
   {
-    return setItemWidth(propval);
+    setItemWidth(propval);
   }
 
   /**
@@ -226,7 +248,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   override @property void margin(int propval)
   {
-    return setMargin(propval);
+    setMargin(propval);
   }
 
   /**
@@ -253,7 +275,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void markupColumn(int propval)
   {
-    return setMarkupColumn(propval);
+    setMarkupColumn(propval);
   }
 
   /** */
@@ -265,7 +287,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /** */
   @property void model(gtk.tree_model.TreeModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -290,7 +312,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void pixbufColumn(int propval)
   {
-    return setPixbufColumn(propval);
+    setPixbufColumn(propval);
   }
 
   /**
@@ -311,7 +333,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void reorderable(bool propval)
   {
-    return setReorderable(propval);
+    setReorderable(propval);
   }
 
   /**
@@ -332,7 +354,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void rowSpacing(int propval)
   {
-    return setRowSpacing(propval);
+    setRowSpacing(propval);
   }
 
   /**
@@ -355,7 +377,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void selectionMode(gtk.types.SelectionMode propval)
   {
-    return setSelectionMode(propval);
+    setSelectionMode(propval);
   }
 
   /**
@@ -376,7 +398,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void spacing(int propval)
   {
-    return setSpacing(propval);
+    setSpacing(propval);
   }
 
   /**
@@ -401,7 +423,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   */
   @property void textColumn(int propval)
   {
-    return setTextColumn(propval);
+    setTextColumn(propval);
   }
 
   /** */
@@ -413,7 +435,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /** */
   @property void tooltipColumn(int propval)
   {
-    return setTooltipColumn(propval);
+    setTooltipColumn(propval);
   }
 
   mixin CellLayoutT!();
@@ -1752,5 +1774,225 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+}
+
+class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin CellLayoutGidBuilderT!();
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = The activate-on-single-click property specifies whether the "item-activated" signal
+          will be emitted after a single click.
+      Returns: Builder instance for fluent chaining
+  */
+  T activateOnSingleClick(bool propval)
+  {
+    return setProperty("activate-on-single-click", propval);
+  }
+
+  /**
+      Set `cellArea` property.
+      Params:
+        propval = The #GtkCellArea used to layout cell renderers for this view.
+          
+          If no area is specified when creating the icon view with [gtk.icon_view.IconView.newWithArea]
+          a #GtkCellAreaBox will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T cellArea(gtk.cell_area.CellArea propval)
+  {
+    return setProperty("cell-area", propval);
+  }
+
+  /**
+      Set `columnSpacing` property.
+      Params:
+        propval = The column-spacing property specifies the space which is inserted between
+          the columns of the icon view.
+      Returns: Builder instance for fluent chaining
+  */
+  T columnSpacing(int propval)
+  {
+    return setProperty("column-spacing", propval);
+  }
+
+  /**
+      Set `columns` property.
+      Params:
+        propval = The columns property contains the number of the columns in which the
+          items should be displayed. If it is -1, the number of columns will
+          be chosen automatically to fill the available area.
+      Returns: Builder instance for fluent chaining
+  */
+  T columns(int propval)
+  {
+    return setProperty("columns", propval);
+  }
+
+  /**
+      Set `itemOrientation` property.
+      Params:
+        propval = The item-orientation property specifies how the cells (i.e. the icon and
+          the text) of the item are positioned relative to each other.
+      Returns: Builder instance for fluent chaining
+  */
+  T itemOrientation(gtk.types.Orientation propval)
+  {
+    return setProperty("item-orientation", propval);
+  }
+
+  /**
+      Set `itemPadding` property.
+      Params:
+        propval = The item-padding property specifies the padding around each
+          of the icon view's item.
+      Returns: Builder instance for fluent chaining
+  */
+  T itemPadding(int propval)
+  {
+    return setProperty("item-padding", propval);
+  }
+
+  /**
+      Set `itemWidth` property.
+      Params:
+        propval = The item-width property specifies the width to use for each item.
+          If it is set to -1, the icon view will automatically determine a
+          suitable item size.
+      Returns: Builder instance for fluent chaining
+  */
+  T itemWidth(int propval)
+  {
+    return setProperty("item-width", propval);
+  }
+
+  /**
+      Set `margin` property.
+      Params:
+        propval = The margin property specifies the space which is inserted
+          at the edges of the icon view.
+      Returns: Builder instance for fluent chaining
+  */
+  override T margin(int propval)
+  {
+    return setProperty("margin", propval);
+  }
+
+  /**
+      Set `markupColumn` property.
+      Params:
+        propval = The ::markup-column property contains the number of the model column
+          containing markup information to be displayed. The markup column must be
+          of type #G_TYPE_STRING. If this property and the :text-column property
+          are both set to column numbers, it overrides the text column.
+          If both are set to -1, no texts are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T markupColumn(int propval)
+  {
+    return setProperty("markup-column", propval);
+  }
+
+  /** */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `pixbufColumn` property.
+      Params:
+        propval = The ::pixbuf-column property contains the number of the model column
+          containing the pixbufs which are displayed. The pixbuf column must be
+          of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
+          display of pixbufs.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixbufColumn(int propval)
+  {
+    return setProperty("pixbuf-column", propval);
+  }
+
+  /**
+      Set `reorderable` property.
+      Params:
+        propval = The reorderable property specifies if the items can be reordered
+          by DND.
+      Returns: Builder instance for fluent chaining
+  */
+  T reorderable(bool propval)
+  {
+    return setProperty("reorderable", propval);
+  }
+
+  /**
+      Set `rowSpacing` property.
+      Params:
+        propval = The row-spacing property specifies the space which is inserted between
+          the rows of the icon view.
+      Returns: Builder instance for fluent chaining
+  */
+  T rowSpacing(int propval)
+  {
+    return setProperty("row-spacing", propval);
+  }
+
+  /**
+      Set `selectionMode` property.
+      Params:
+        propval = The ::selection-mode property specifies the selection mode of
+          icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
+          is enabled, for the other modes, only keyboard selection is possible.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectionMode(gtk.types.SelectionMode propval)
+  {
+    return setProperty("selection-mode", propval);
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The spacing property specifies the space which is inserted between
+          the cells (i.e. the icon and the text) of an item.
+      Returns: Builder instance for fluent chaining
+  */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = The ::text-column property contains the number of the model column
+          containing the texts which are displayed. The text column must be
+          of type #G_TYPE_STRING. If this property and the :markup-column
+          property are both set to -1, no texts are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T textColumn(int propval)
+  {
+    return setProperty("text-column", propval);
+  }
+
+  /** */
+  T tooltipColumn(int propval)
+  {
+    return setProperty("tooltip-column", propval);
+  }
+}
+
+/// Fluent builder for [gtk.icon_view.IconView]
+final class IconViewGidBuilder : IconViewGidBuilderImpl!IconViewGidBuilder
+{
+  IconView build()
+  {
+    return new IconView(cast(void*)createGObject(IconView._getGType), No.Take);
   }
 }

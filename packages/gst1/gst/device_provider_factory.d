@@ -2,6 +2,7 @@
 module gst.device_provider_factory;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.c.functions;
@@ -46,6 +47,15 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   override DeviceProviderFactory self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.device_provider_factory.DeviceProviderFactory]
+  Returns: New builder object
+  */
+  static DeviceProviderFactoryGidBuilder builder()
+  {
+    return new DeviceProviderFactoryGidBuilder;
   }
 
   /**
@@ -204,5 +214,18 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
     _retval = cast(bool)gst_device_provider_factory_has_classesv(cast(GstDeviceProviderFactory*)this._cPtr, _classes);
     return _retval;
+  }
+}
+
+class DeviceProviderFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.device_provider_factory.DeviceProviderFactory]
+final class DeviceProviderFactoryGidBuilder : DeviceProviderFactoryGidBuilderImpl!DeviceProviderFactoryGidBuilder
+{
+  DeviceProviderFactory build()
+  {
+    return new DeviceProviderFactory(cast(void*)createGObject(DeviceProviderFactory._getGType), No.Take);
   }
 }

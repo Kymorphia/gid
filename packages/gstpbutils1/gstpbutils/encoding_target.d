@@ -3,6 +3,7 @@ module gstpbutils.encoding_target;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
@@ -41,6 +42,15 @@ class EncodingTarget : gobject.object.ObjectWrap
   override EncodingTarget self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.encoding_target.EncodingTarget]
+  Returns: New builder object
+  */
+  static EncodingTargetGidBuilder builder()
+  {
+    return new EncodingTargetGidBuilder;
   }
 
   /**
@@ -234,5 +244,18 @@ class EncodingTarget : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class EncodingTargetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.encoding_target.EncodingTarget]
+final class EncodingTargetGidBuilder : EncodingTargetGidBuilderImpl!EncodingTargetGidBuilder
+{
+  EncodingTarget build()
+  {
+    return new EncodingTarget(cast(void*)createGObject(EncodingTarget._getGType), Yes.Take);
   }
 }

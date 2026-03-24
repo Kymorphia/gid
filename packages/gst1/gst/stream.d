@@ -2,6 +2,7 @@
 module gst.stream;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.caps;
@@ -52,6 +53,15 @@ class Stream : gst.object.ObjectWrap
   }
 
   /**
+  Get builder for [gst.stream.Stream]
+  Returns: New builder object
+  */
+  static StreamGidBuilder builder()
+  {
+    return new StreamGidBuilder;
+  }
+
+  /**
       Get `caps` property.
       Returns: The #GstCaps of the #GstStream.
   */
@@ -67,7 +77,7 @@ class Stream : gst.object.ObjectWrap
   */
   @property void caps(gst.caps.Caps propval)
   {
-    return setCaps(propval);
+    setCaps(propval);
   }
 
   /** */
@@ -79,7 +89,17 @@ class Stream : gst.object.ObjectWrap
   /** */
   @property void streamFlags(gst.types.StreamFlags propval)
   {
-    return setStreamFlags(propval);
+    setStreamFlags(propval);
+  }
+
+  /**
+      Get `streamId` property.
+      Returns: The unique identifier of the #GstStream. Can only be set at construction
+        time.
+  */
+  @property string streamId()
+  {
+    return getStreamId();
   }
 
   /**
@@ -98,7 +118,7 @@ class Stream : gst.object.ObjectWrap
   */
   @property void streamType(gst.types.StreamType propval)
   {
-    return setStreamType(propval);
+    setStreamType(propval);
   }
 
   /**
@@ -117,7 +137,7 @@ class Stream : gst.object.ObjectWrap
   */
   @property void tags(gst.tag_list.TagList propval)
   {
-    return setTags(propval);
+    setTags(propval);
   }
 
   /**
@@ -243,5 +263,69 @@ class Stream : gst.object.ObjectWrap
   void setTags(gst.tag_list.TagList tags = null)
   {
     gst_stream_set_tags(cast(GstStream*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null);
+  }
+}
+
+class StreamGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `caps` property.
+      Params:
+        propval = The #GstCaps of the #GstStream.
+      Returns: Builder instance for fluent chaining
+  */
+  T caps(gst.caps.Caps propval)
+  {
+    return setProperty("caps", propval);
+  }
+
+  /** */
+  T streamFlags(gst.types.StreamFlags propval)
+  {
+    return setProperty("stream-flags", propval);
+  }
+
+  /**
+      Set `streamId` property.
+      Params:
+        propval = The unique identifier of the #GstStream. Can only be set at construction
+          time.
+      Returns: Builder instance for fluent chaining
+  */
+  T streamId(string propval)
+  {
+    return setProperty("stream-id", propval);
+  }
+
+  /**
+      Set `streamType` property.
+      Params:
+        propval = The #GstStreamType of the #GstStream. Can only be set at construction time.
+      Returns: Builder instance for fluent chaining
+  */
+  T streamType(gst.types.StreamType propval)
+  {
+    return setProperty("stream-type", propval);
+  }
+
+  /**
+      Set `tags` property.
+      Params:
+        propval = The #GstTagList of the #GstStream.
+      Returns: Builder instance for fluent chaining
+  */
+  T tags(gst.tag_list.TagList propval)
+  {
+    return setProperty("tags", propval);
+  }
+}
+
+/// Fluent builder for [gst.stream.Stream]
+final class StreamGidBuilder : StreamGidBuilderImpl!StreamGidBuilder
+{
+  Stream build()
+  {
+    return new Stream(cast(void*)createGObject(Stream._getGType), Yes.Take);
   }
 }

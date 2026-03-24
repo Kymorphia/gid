@@ -3,6 +3,7 @@ module gtk.file_filter;
 
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gtk.buildable;
@@ -79,6 +80,15 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   override FileFilter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.file_filter.FileFilter]
+  Returns: New builder object
+  */
+  static FileFilterGidBuilder builder()
+  {
+    return new FileFilterGidBuilder;
   }
 
   mixin BuildableT!();
@@ -261,5 +271,20 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class FileFilterGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.file_filter.FileFilter]
+final class FileFilterGidBuilder : FileFilterGidBuilderImpl!FileFilterGidBuilder
+{
+  FileFilter build()
+  {
+    return new FileFilter(cast(void*)createGObject(FileFilter._getGType), No.Take);
   }
 }

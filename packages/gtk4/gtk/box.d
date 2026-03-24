@@ -2,6 +2,7 @@
 module gtk.box;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -80,6 +81,15 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.box.Box]
+  Returns: New builder object
+  */
+  static BoxGidBuilder builder()
+  {
+    return new BoxGidBuilder;
+  }
+
+  /**
       Get `baselineChild` property.
       Returns: The child that determines the baseline, in vertical orientation.
   */
@@ -95,7 +105,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void baselineChild(int propval)
   {
-    return setBaselineChild(propval);
+    setBaselineChild(propval);
   }
 
   /**
@@ -114,7 +124,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void baselinePosition(gtk.types.BaselinePosition propval)
   {
-    return setBaselinePosition(propval);
+    setBaselinePosition(propval);
   }
 
   /**
@@ -133,7 +143,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /**
@@ -152,7 +162,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void spacing(int propval)
   {
-    return setSpacing(propval);
+    setSpacing(propval);
   }
 
   mixin OrientableT!();
@@ -337,5 +347,64 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   void setSpacing(int spacing)
   {
     gtk_box_set_spacing(cast(GtkBox*)this._cPtr, spacing);
+  }
+}
+
+class BoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `baselineChild` property.
+      Params:
+        propval = The child that determines the baseline, in vertical orientation.
+      Returns: Builder instance for fluent chaining
+  */
+  T baselineChild(int propval)
+  {
+    return setProperty("baseline-child", propval);
+  }
+
+  /**
+      Set `baselinePosition` property.
+      Params:
+        propval = The position of the baseline aligned widgets if extra space is available.
+      Returns: Builder instance for fluent chaining
+  */
+  T baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setProperty("baseline-position", propval);
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Whether the children should all be the same size.
+      Returns: Builder instance for fluent chaining
+  */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = The amount of space between children.
+      Returns: Builder instance for fluent chaining
+  */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.box.Box]
+final class BoxGidBuilder : BoxGidBuilderImpl!BoxGidBuilder
+{
+  Box build()
+  {
+    return new Box(cast(void*)createGObject(Box._getGType), No.Take);
   }
 }

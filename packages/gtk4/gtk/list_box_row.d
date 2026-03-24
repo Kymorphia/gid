@@ -3,6 +3,7 @@ module gtk.list_box_row;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -49,6 +50,15 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+  Get builder for [gtk.list_box_row.ListBoxRow]
+  Returns: New builder object
+  */
+  static ListBoxRowGidBuilder builder()
+  {
+    return new ListBoxRowGidBuilder;
+  }
+
+  /**
       Get `activatable` property.
       Returns: Determines whether the ::row-activated
         signal will be emitted for this row.
@@ -66,7 +76,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void activatable(bool propval)
   {
-    return setActivatable(propval);
+    setActivatable(propval);
   }
 
   /**
@@ -85,7 +95,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -104,7 +114,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   */
   @property void selectable(bool propval)
   {
-    return setSelectable(propval);
+    setSelectable(propval);
   }
 
   mixin ActionableT!();
@@ -307,5 +317,54 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class ListBoxRowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = Determines whether the ::row-activated
+          signal will be emitted for this row.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatable(bool propval)
+  {
+    return setProperty("activatable", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = Determines whether this row can be selected.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectable(bool propval)
+  {
+    return setProperty("selectable", propval);
+  }
+}
+
+/// Fluent builder for [gtk.list_box_row.ListBoxRow]
+final class ListBoxRowGidBuilder : ListBoxRowGidBuilderImpl!ListBoxRowGidBuilder
+{
+  ListBoxRow build()
+  {
+    return new ListBoxRow(cast(void*)createGObject(ListBoxRow._getGType), No.Take);
   }
 }

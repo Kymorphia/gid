@@ -5,6 +5,7 @@ import gdk.device;
 import gdk.event;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -54,6 +55,15 @@ class EventController : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.event_controller.EventController]
+  Returns: New builder object
+  */
+  static EventControllerGidBuilder builder()
+  {
+    return new EventControllerGidBuilder;
+  }
+
+  /**
       Get `name` property.
       Returns: The name for this controller, typically used for debugging purposes.
   */
@@ -69,7 +79,7 @@ class EventController : gobject.object.ObjectWrap
   */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /**
@@ -88,7 +98,7 @@ class EventController : gobject.object.ObjectWrap
   */
   @property void propagationLimit(gtk.types.PropagationLimit propval)
   {
-    return setPropagationLimit(propval);
+    setPropagationLimit(propval);
   }
 
   /**
@@ -107,7 +117,7 @@ class EventController : gobject.object.ObjectWrap
   */
   @property void propagationPhase(gtk.types.PropagationPhase propval)
   {
-    return setPropagationPhase(propval);
+    setPropagationPhase(propval);
   }
 
   /**
@@ -286,5 +296,51 @@ class EventController : gobject.object.ObjectWrap
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_event_controller_set_static_name(cast(GtkEventController*)this._cPtr, _name);
+  }
+}
+
+class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name for this controller, typically used for debugging purposes.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `propagationLimit` property.
+      Params:
+        propval = The limit for which events this controller will handle.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagationLimit(gtk.types.PropagationLimit propval)
+  {
+    return setProperty("propagation-limit", propval);
+  }
+
+  /**
+      Set `propagationPhase` property.
+      Params:
+        propval = The propagation phase at which this controller will handle events.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagationPhase(gtk.types.PropagationPhase propval)
+  {
+    return setProperty("propagation-phase", propval);
+  }
+}
+
+/// Fluent builder for [gtk.event_controller.EventController]
+final class EventControllerGidBuilder : EventControllerGidBuilderImpl!EventControllerGidBuilder
+{
+  EventController build()
+  {
+    return new EventController(cast(void*)createGObject(EventController._getGType), No.Take);
   }
 }

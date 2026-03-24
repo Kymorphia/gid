@@ -9,6 +9,7 @@ import arrow.table;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,21 @@ class CSVReader : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrow.csvreader.CSVReader]
+  Returns: New builder object
+  */
+  static CSVReaderGidBuilder builder()
+  {
+    return new CSVReaderGidBuilder;
+  }
+
+  /** */
+  @property arrow.input_stream.InputStream input()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.input_stream.InputStream)("input");
+  }
+
   /** */
   this(arrow.input_stream.InputStream input, arrow.csvread_options.CSVReadOptions options = null)
   {
@@ -61,5 +77,30 @@ class CSVReader : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class CSVReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T csvTableReader(void* propval)
+  {
+    return setProperty("csv-table-reader", propval);
+  }
+
+  /** */
+  T input(arrow.input_stream.InputStream propval)
+  {
+    return setProperty("input", propval);
+  }
+}
+
+/// Fluent builder for [arrow.csvreader.CSVReader]
+final class CSVReaderGidBuilder : CSVReaderGidBuilderImpl!CSVReaderGidBuilder
+{
+  CSVReader build()
+  {
+    return new CSVReader(cast(void*)createGObject(CSVReader._getGType), Yes.Take);
   }
 }

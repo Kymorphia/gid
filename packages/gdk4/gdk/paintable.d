@@ -8,6 +8,7 @@ import gdk.snapshot;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -276,4 +277,8 @@ interface Paintable
       Returns: Signal ID
   */
   ulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface PaintableGidBuilderImpl(T)
+{
 }

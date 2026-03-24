@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter to detect OpenPGP markers.
@@ -36,6 +37,15 @@ class FilterOpenPGP : gmime.filter.Filter
   override FilterOpenPGP self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.filter_open_pgp.FilterOpenPGP]
+  Returns: New builder object
+  */
+  static FilterOpenPGPGidBuilder builder()
+  {
+    return new FilterOpenPGPGidBuilder;
   }
 
   /**
@@ -81,5 +91,18 @@ class FilterOpenPGP : gmime.filter.Filter
     long _retval;
     _retval = g_mime_filter_openpgp_get_end_offset(cast(GMimeFilterOpenPGP*)this._cPtr);
     return _retval;
+  }
+}
+
+class FilterOpenPGPGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_open_pgp.FilterOpenPGP]
+final class FilterOpenPGPGidBuilder : FilterOpenPGPGidBuilderImpl!FilterOpenPGPGidBuilder
+{
+  FilterOpenPGP build()
+  {
+    return new FilterOpenPGP(cast(void*)createGObject(FilterOpenPGP._getGType), Yes.Take);
   }
 }

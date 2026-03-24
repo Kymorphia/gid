@@ -2,6 +2,7 @@
 module gsttag.tag_mux;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.element;
 import gst.tag_setter;
 import gst.tag_setter_mixin;
@@ -55,5 +56,29 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
     return this;
   }
 
+  /**
+  Get builder for [gsttag.tag_mux.TagMux]
+  Returns: New builder object
+  */
+  static TagMuxGidBuilder builder()
+  {
+    return new TagMuxGidBuilder;
+  }
+
   mixin TagSetterT!();
+}
+
+class TagMuxGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.tag_setter.TagSetterGidBuilderImpl!T
+{
+
+  mixin TagSetterGidBuilderT!();
+}
+
+/// Fluent builder for [gsttag.tag_mux.TagMux]
+final class TagMuxGidBuilder : TagMuxGidBuilderImpl!TagMuxGidBuilder
+{
+  TagMux build()
+  {
+    return new TagMux(cast(void*)createGObject(TagMux._getGType), No.Take);
+  }
 }

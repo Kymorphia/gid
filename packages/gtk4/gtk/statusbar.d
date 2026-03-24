@@ -3,6 +3,7 @@ module gtk.statusbar;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -80,6 +81,15 @@ class Statusbar : gtk.widget.Widget
   override Statusbar self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.statusbar.Statusbar]
+  Returns: New builder object
+  */
+  static StatusbarGidBuilder builder()
+  {
+    return new StatusbarGidBuilder;
   }
 
   /**
@@ -283,5 +293,19 @@ class Statusbar : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("text-pushed", closure, after);
+  }
+}
+
+class StatusbarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.statusbar.Statusbar]
+final class StatusbarGidBuilder : StatusbarGidBuilderImpl!StatusbarGidBuilder
+{
+  Statusbar build()
+  {
+    return new Statusbar(cast(void*)createGObject(Statusbar._getGType), No.Take);
   }
 }

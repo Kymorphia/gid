@@ -2,6 +2,7 @@
 module gtksource.mark;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_mark;
 import gtksource.c.functions;
@@ -49,6 +50,25 @@ class Mark : gtk.text_mark.TextMark
   override Mark self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.mark.Mark]
+  Returns: New builder object
+  */
+  static MarkGidBuilder builder()
+  {
+    return new MarkGidBuilder;
+  }
+
+  /**
+      Get `category` property.
+      Returns: The category of the [gtksource.mark.Mark], classifies the mark and controls
+        which pixbuf is used and with which priority it is drawn.
+  */
+  @property string category()
+  {
+    return getCategory();
   }
 
   /**
@@ -129,5 +149,30 @@ class Mark : gtk.text_mark.TextMark
     _cretval = gtk_source_mark_prev(cast(GtkSourceMark*)this._cPtr, _category);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class MarkGidBuilderImpl(T) : gtk.text_mark.TextMarkGidBuilderImpl!T
+{
+
+  /**
+      Set `category` property.
+      Params:
+        propval = The category of the [gtksource.mark.Mark], classifies the mark and controls
+          which pixbuf is used and with which priority it is drawn.
+      Returns: Builder instance for fluent chaining
+  */
+  T category(string propval)
+  {
+    return setProperty("category", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.mark.Mark]
+final class MarkGidBuilder : MarkGidBuilderImpl!MarkGidBuilder
+{
+  Mark build()
+  {
+    return new Mark(cast(void*)createGObject(Mark._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -48,6 +49,15 @@ class HSV : gtk.widget.Widget
   override HSV self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.hsv.HSV]
+  Returns: New builder object
+  */
+  static HSVGidBuilder builder()
+  {
+    return new HSVGidBuilder;
   }
 
   /**
@@ -226,5 +236,19 @@ class HSV : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move", closure, after);
+  }
+}
+
+class HSVGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.hsv.HSV]
+final class HSVGidBuilder : HSVGidBuilderImpl!HSVGidBuilder
+{
+  HSV build()
+  {
+    return new HSV(cast(void*)createGObject(HSV._getGType), No.Take);
   }
 }

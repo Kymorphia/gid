@@ -4,6 +4,7 @@ module gtk.app_chooser_widget;
 import gid.gid;
 import gio.app_info;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.app_chooser;
@@ -75,6 +76,15 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   }
 
   /**
+  Get builder for [gtk.app_chooser_widget.AppChooserWidget]
+  Returns: New builder object
+  */
+  static AppChooserWidgetGidBuilder builder()
+  {
+    return new AppChooserWidgetGidBuilder;
+  }
+
+  /**
       Get `defaultText` property.
       Returns: The text that appears in the widget when there are no applications
         for the given content type.
@@ -92,7 +102,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   @property void defaultText(string propval)
   {
-    return setDefaultText(propval);
+    setDefaultText(propval);
   }
 
   /**
@@ -115,7 +125,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   @property void showAll(bool propval)
   {
-    return setShowAll(propval);
+    setShowAll(propval);
   }
 
   /**
@@ -142,7 +152,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   @property void showDefault(bool propval)
   {
-    return setShowDefault(propval);
+    setShowDefault(propval);
   }
 
   /**
@@ -169,7 +179,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   @property void showFallback(bool propval)
   {
-    return setShowFallback(propval);
+    setShowFallback(propval);
   }
 
   /**
@@ -190,7 +200,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   @property void showOther(bool propval)
   {
-    return setShowOther(propval);
+    setShowOther(propval);
   }
 
   /**
@@ -217,7 +227,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   @property void showRecommended(bool propval)
   {
-    return setShowRecommended(propval);
+    setShowRecommended(propval);
   }
 
   mixin AppChooserT!();
@@ -498,5 +508,102 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("application-selected", closure, after);
+  }
+}
+
+class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.app_chooser.AppChooserGidBuilderImpl!T
+{
+
+  mixin AppChooserGidBuilderT!();
+
+  /**
+      Set `defaultText` property.
+      Params:
+        propval = The text that appears in the widget when there are no applications
+          for the given content type.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultText(string propval)
+  {
+    return setProperty("default-text", propval);
+  }
+
+  /**
+      Set `showAll` property.
+      Params:
+        propval = If true, the app chooser presents all applications
+          in a single list, without subsections for default,
+          recommended or related applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showAll(bool propval)
+  {
+    return setProperty("show-all", propval);
+  }
+
+  /**
+      Set `showDefault` property.
+      Params:
+        propval = Determines whether the app chooser should show the default
+          handler for the content type in a separate section.
+          
+          If false, the default handler is listed among the recommended
+          applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDefault(bool propval)
+  {
+    return setProperty("show-default", propval);
+  }
+
+  /**
+      Set `showFallback` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for fallback applications.
+          
+          If false, the fallback applications are listed among the
+          other applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showFallback(bool propval)
+  {
+    return setProperty("show-fallback", propval);
+  }
+
+  /**
+      Set `showOther` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for other applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showOther(bool propval)
+  {
+    return setProperty("show-other", propval);
+  }
+
+  /**
+      Set `showRecommended` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for recommended applications.
+          
+          If false, the recommended applications are listed
+          among the other applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showRecommended(bool propval)
+  {
+    return setProperty("show-recommended", propval);
+  }
+}
+
+/// Fluent builder for [gtk.app_chooser_widget.AppChooserWidget]
+final class AppChooserWidgetGidBuilder : AppChooserWidgetGidBuilderImpl!AppChooserWidgetGidBuilder
+{
+  AppChooserWidget build()
+  {
+    return new AppChooserWidget(cast(void*)createGObject(AppChooserWidget._getGType), No.Take);
   }
 }

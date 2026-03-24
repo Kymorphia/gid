@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
   override SplitPatternOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.split_pattern_options.SplitPatternOptions]
+  Returns: New builder object
+  */
+  static SplitPatternOptionsGidBuilder builder()
+  {
+    return new SplitPatternOptionsGidBuilder;
   }
 
   /** */
@@ -95,5 +105,47 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
     GArrowSplitPatternOptions* _cretval;
     _cretval = garrow_split_pattern_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class SplitPatternOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /** */
+  T maxSplits(long propval)
+  {
+    return setProperty("max-splits", propval);
+  }
+
+  /**
+      Set `pattern` property.
+      Params:
+        propval = The exact substring to split on.
+      Returns: Builder instance for fluent chaining
+  */
+  T pattern(string propval)
+  {
+    return setProperty("pattern", propval);
+  }
+
+  /**
+      Set `reverse` property.
+      Params:
+        propval = Start splitting from the end of the string (only relevant when
+          max_splits != -1)
+      Returns: Builder instance for fluent chaining
+  */
+  T reverse(bool propval)
+  {
+    return setProperty("reverse", propval);
+  }
+}
+
+/// Fluent builder for [arrow.split_pattern_options.SplitPatternOptions]
+final class SplitPatternOptionsGidBuilder : SplitPatternOptionsGidBuilderImpl!SplitPatternOptionsGidBuilder
+{
+  SplitPatternOptions build()
+  {
+    return new SplitPatternOptions(cast(void*)createGObject(SplitPatternOptions._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import atk.object;
 import gdk.device;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -107,6 +108,15 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
+  Get builder for [gtk.combo_box.ComboBox]
+  Returns: New builder object
+  */
+  static ComboBoxGidBuilder builder()
+  {
+    return new ComboBoxGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: The item which is currently active. If the model is a non-flat treemodel,
         and the active item is not an immediate child of the root of the tree,
@@ -130,7 +140,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void active(int propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -174,7 +184,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void addTearoffs(bool propval)
   {
-    return setAddTearoffs(propval);
+    setAddTearoffs(propval);
   }
 
   /**
@@ -195,7 +205,19 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void buttonSensitivity(gtk.types.SensitivityType propval)
   {
-    return setButtonSensitivity(propval);
+    setButtonSensitivity(propval);
+  }
+
+  /**
+      Get `cellArea` property.
+      Returns: The #GtkCellArea used to layout cell renderers for this combo box.
+        
+        If no area is specified when creating the combo box with [gtk.combo_box.ComboBox.newWithArea]
+        a horizontally oriented #GtkCellAreaBox will be used.
+  */
+  @property gtk.cell_area.CellArea cellArea()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
   }
 
   /**
@@ -222,7 +244,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void columnSpanColumn(int propval)
   {
-    return setColumnSpanColumn(propval);
+    setColumnSpanColumn(propval);
   }
 
   /**
@@ -243,7 +265,16 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void entryTextColumn(int propval)
   {
-    return setEntryTextColumn(propval);
+    setEntryTextColumn(propval);
+  }
+
+  /**
+      Get `hasEntry` property.
+      Returns: Whether the combo box has an entry.
+  */
+  @property bool hasEntry()
+  {
+    return getHasEntry();
   }
 
   /**
@@ -285,7 +316,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void idColumn(int propval)
   {
-    return setIdColumn(propval);
+    setIdColumn(propval);
   }
 
   /**
@@ -306,7 +337,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void model(gtk.tree_model.TreeModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -327,7 +358,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void popupFixedWidth(bool propval)
   {
-    return setPopupFixedWidth(propval);
+    setPopupFixedWidth(propval);
   }
 
   /**
@@ -363,7 +394,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void rowSpanColumn(int propval)
   {
-    return setRowSpanColumn(propval);
+    setRowSpanColumn(propval);
   }
 
   /**
@@ -405,7 +436,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   @property void wrapWidth(int propval)
   {
-    return setWrapWidth(propval);
+    setWrapWidth(propval);
   }
 
   mixin CellEditableT!();
@@ -1228,5 +1259,211 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("popup", closure, after);
+  }
+}
+
+class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable.CellEditableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
+{
+
+  mixin CellEditableGidBuilderT!();
+  mixin CellLayoutGidBuilderT!();
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The item which is currently active. If the model is a non-flat treemodel,
+          and the active item is not an immediate child of the root of the tree,
+          this property has the value
+          `gtk_tree_path_get_indices (path)[0]`,
+          where `path` is the #GtkTreePath of the active item.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(int propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `activeId` property.
+      Params:
+        propval = The value of the ID column of the active row.
+      Returns: Builder instance for fluent chaining
+  */
+  T activeId(string propval)
+  {
+    return setProperty("active-id", propval);
+  }
+
+  /**
+      Set `addTearoffs` property.
+      Params:
+        propval = The add-tearoffs property controls whether generated menus
+          have tearoff menu items.
+          
+          Note that this only affects menu style combo boxes.
+      Returns: Builder instance for fluent chaining
+  */
+  T addTearoffs(bool propval)
+  {
+    return setProperty("add-tearoffs", propval);
+  }
+
+  /**
+      Set `buttonSensitivity` property.
+      Params:
+        propval = Whether the dropdown button is sensitive when
+          the model is empty.
+      Returns: Builder instance for fluent chaining
+  */
+  T buttonSensitivity(gtk.types.SensitivityType propval)
+  {
+    return setProperty("button-sensitivity", propval);
+  }
+
+  /**
+      Set `cellArea` property.
+      Params:
+        propval = The #GtkCellArea used to layout cell renderers for this combo box.
+          
+          If no area is specified when creating the combo box with [gtk.combo_box.ComboBox.newWithArea]
+          a horizontally oriented #GtkCellAreaBox will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T cellArea(gtk.cell_area.CellArea propval)
+  {
+    return setProperty("cell-area", propval);
+  }
+
+  /**
+      Set `columnSpanColumn` property.
+      Params:
+        propval = If this is set to a non-negative value, it must be the index of a column
+          of type `G_TYPE_INT` in the model. The value in that column for each item
+          will determine how many columns that item will span in the popup.
+          Therefore, values in this column must be greater than zero, and the sum of
+          an item’s column position + span should not exceed #GtkComboBox:wrap-width.
+      Returns: Builder instance for fluent chaining
+  */
+  T columnSpanColumn(int propval)
+  {
+    return setProperty("column-span-column", propval);
+  }
+
+  /**
+      Set `entryTextColumn` property.
+      Params:
+        propval = The column in the combo box's model to associate with strings from the entry
+          if the combo was created with #GtkComboBox:has-entry = true.
+      Returns: Builder instance for fluent chaining
+  */
+  T entryTextColumn(int propval)
+  {
+    return setProperty("entry-text-column", propval);
+  }
+
+  /**
+      Set `hasEntry` property.
+      Params:
+        propval = Whether the combo box has an entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasEntry(bool propval)
+  {
+    return setProperty("has-entry", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = The has-frame property controls whether a frame
+          is drawn around the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval)
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `idColumn` property.
+      Params:
+        propval = The column in the combo box's model that provides string
+          IDs for the values in the model, if != -1.
+      Returns: Builder instance for fluent chaining
+  */
+  T idColumn(int propval)
+  {
+    return setProperty("id-column", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model from which the combo box takes the values shown
+          in the list.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `popupFixedWidth` property.
+      Params:
+        propval = Whether the popup's width should be a fixed width matching the
+          allocated width of the combo box.
+      Returns: Builder instance for fluent chaining
+  */
+  T popupFixedWidth(bool propval)
+  {
+    return setProperty("popup-fixed-width", propval);
+  }
+
+  /**
+      Set `rowSpanColumn` property.
+      Params:
+        propval = If this is set to a non-negative value, it must be the index of a column
+          of type `G_TYPE_INT` in the model. The value in that column for each item
+          will determine how many rows that item will span in the popup. Therefore,
+          values in this column must be greater than zero.
+      Returns: Builder instance for fluent chaining
+  */
+  T rowSpanColumn(int propval)
+  {
+    return setProperty("row-span-column", propval);
+  }
+
+  /**
+      Set `tearoffTitle` property.
+      Params:
+        propval = A title that may be displayed by the window manager
+          when the popup is torn-off.
+      Returns: Builder instance for fluent chaining
+  */
+  T tearoffTitle(string propval)
+  {
+    return setProperty("tearoff-title", propval);
+  }
+
+  /**
+      Set `wrapWidth` property.
+      Params:
+        propval = If wrap-width is set to a positive value, items in the popup will be laid
+          out along multiple columns, starting a new row on reaching the wrap width.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapWidth(int propval)
+  {
+    return setProperty("wrap-width", propval);
+  }
+}
+
+/// Fluent builder for [gtk.combo_box.ComboBox]
+final class ComboBoxGidBuilder : ComboBoxGidBuilderImpl!ComboBoxGidBuilder
+{
+  ComboBox build()
+  {
+    return new ComboBox(cast(void*)createGObject(ComboBox._getGType), No.Take);
   }
 }

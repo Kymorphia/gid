@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.menu_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -51,6 +52,15 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /**
+  Get builder for [gtk.menu_bar.MenuBar]
+  Returns: New builder object
+  */
+  static MenuBarGidBuilder builder()
+  {
+    return new MenuBarGidBuilder;
+  }
+
+  /**
       Get `childPackDirection` property.
       Returns: The child pack direction of the menubar. It determines how
         the widgets contained in child menuitems are arranged.
@@ -68,7 +78,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   */
   @property void childPackDirection(gtk.types.PackDirection propval)
   {
-    return setChildPackDirection(propval);
+    setChildPackDirection(propval);
   }
 
   /**
@@ -89,7 +99,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   */
   @property void packDirection(gtk.types.PackDirection propval)
   {
-    return setPackDirection(propval);
+    setPackDirection(propval);
   }
 
   /**
@@ -170,5 +180,43 @@ class MenuBar : gtk.menu_shell.MenuShell
   void setPackDirection(gtk.types.PackDirection packDir)
   {
     gtk_menu_bar_set_pack_direction(cast(GtkMenuBar*)this._cPtr, packDir);
+  }
+}
+
+class MenuBarGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
+{
+
+
+  /**
+      Set `childPackDirection` property.
+      Params:
+        propval = The child pack direction of the menubar. It determines how
+          the widgets contained in child menuitems are arranged.
+      Returns: Builder instance for fluent chaining
+  */
+  T childPackDirection(gtk.types.PackDirection propval)
+  {
+    return setProperty("child-pack-direction", propval);
+  }
+
+  /**
+      Set `packDirection` property.
+      Params:
+        propval = The pack direction of the menubar. It determines how
+          menuitems are arranged in the menubar.
+      Returns: Builder instance for fluent chaining
+  */
+  T packDirection(gtk.types.PackDirection propval)
+  {
+    return setProperty("pack-direction", propval);
+  }
+}
+
+/// Fluent builder for [gtk.menu_bar.MenuBar]
+final class MenuBarGidBuilder : MenuBarGidBuilderImpl!MenuBarGidBuilder
+{
+  MenuBar build()
+  {
+    return new MenuBar(cast(void*)createGObject(MenuBar._getGType), No.Take);
   }
 }

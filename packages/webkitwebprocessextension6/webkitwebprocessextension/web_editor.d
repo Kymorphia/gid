@@ -3,6 +3,7 @@ module webkitwebprocessextension.web_editor;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkitwebprocessextension.c.functions;
 import webkitwebprocessextension.c.types;
@@ -42,6 +43,15 @@ class WebEditor : gobject.object.ObjectWrap
   override WebEditor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.web_editor.WebEditor]
+  Returns: New builder object
+  */
+  static WebEditorGidBuilder builder()
+  {
+    return new WebEditorGidBuilder;
   }
 
   /**
@@ -93,5 +103,18 @@ class WebEditor : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-changed", closure, after);
+  }
+}
+
+class WebEditorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.web_editor.WebEditor]
+final class WebEditorGidBuilder : WebEditorGidBuilderImpl!WebEditorGidBuilder
+{
+  WebEditor build()
+  {
+    return new WebEditor(cast(void*)createGObject(WebEditor._getGType), No.Take);
   }
 }

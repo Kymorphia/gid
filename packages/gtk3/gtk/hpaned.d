@@ -4,6 +4,7 @@ module gtk.hpaned;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -50,6 +51,15 @@ class HPaned : gtk.paned.Paned
   }
 
   /**
+  Get builder for [gtk.hpaned.HPaned]
+  Returns: New builder object
+  */
+  static HPanedGidBuilder builder()
+  {
+    return new HPanedGidBuilder;
+  }
+
+  /**
       Create a new #GtkHPaned
       Returns: the new #GtkHPaned
   
@@ -60,5 +70,19 @@ class HPaned : gtk.paned.Paned
     GtkWidget* _cretval;
     _cretval = gtk_hpaned_new();
     this(_cretval, No.Take);
+  }
+}
+
+class HPanedGidBuilderImpl(T) : gtk.paned.PanedGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.hpaned.HPaned]
+final class HPanedGidBuilder : HPanedGidBuilderImpl!HPanedGidBuilder
+{
+  HPaned build()
+  {
+    return new HPaned(cast(void*)createGObject(HPaned._getGType), No.Take);
   }
 }

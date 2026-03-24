@@ -7,6 +7,7 @@ import gdk.screen;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import gtk.border;
@@ -102,6 +103,15 @@ class StyleContext : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gtk.style_context.StyleContext]
+  Returns: New builder object
+  */
+  static StyleContextGidBuilder builder()
+  {
+    return new StyleContextGidBuilder;
+  }
+
   /** */
   @property gtk.types.TextDirection direction()
   {
@@ -111,7 +121,7 @@ class StyleContext : gobject.object.ObjectWrap
   /** */
   @property void direction(gtk.types.TextDirection propval)
   {
-    return setDirection(propval);
+    setDirection(propval);
   }
 
   /** */
@@ -144,7 +154,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   @property void parent(gtk.style_context.StyleContext propval)
   {
-    return setParent(propval);
+    setParent(propval);
   }
 
   /** */
@@ -156,7 +166,7 @@ class StyleContext : gobject.object.ObjectWrap
   /** */
   @property void screen(gdk.screen.Screen propval)
   {
-    return setScreen(propval);
+    setScreen(propval);
   }
 
   /**
@@ -1147,5 +1157,48 @@ class StyleContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T direction(gtk.types.TextDirection propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /** */
+  T paintClock(gdk.frame_clock.FrameClock propval)
+  {
+    return setProperty("paint-clock", propval);
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = Sets or gets the style context’s parent. See [gtk.style_context.StyleContext.setParent]
+          for details.
+      Returns: Builder instance for fluent chaining
+  */
+  T parent(gtk.style_context.StyleContext propval)
+  {
+    return setProperty("parent", propval);
+  }
+
+  /** */
+  T screen(gdk.screen.Screen propval)
+  {
+    return setProperty("screen", propval);
+  }
+}
+
+/// Fluent builder for [gtk.style_context.StyleContext]
+final class StyleContextGidBuilder : StyleContextGidBuilderImpl!StyleContextGidBuilder
+{
+  StyleContext build()
+  {
+    return new StyleContext(cast(void*)createGObject(StyleContext._getGType), Yes.Take);
   }
 }

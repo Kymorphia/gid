@@ -2,6 +2,7 @@
 module gstallocators.dma_buf_allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.allocator;
 import gst.memory;
 import gstallocators.c.functions;
@@ -38,6 +39,15 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
   override DmaBufAllocator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstallocators.dma_buf_allocator.DmaBufAllocator]
+  Returns: New builder object
+  */
+  static DmaBufAllocatorGidBuilder builder()
+  {
+    return new DmaBufAllocatorGidBuilder;
   }
 
   /**
@@ -91,5 +101,18 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
     _cretval = gst_dmabuf_allocator_alloc_with_flags(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class DmaBufAllocatorGidBuilderImpl(T) : gstallocators.fd_allocator.FdAllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstallocators.dma_buf_allocator.DmaBufAllocator]
+final class DmaBufAllocatorGidBuilder : DmaBufAllocatorGidBuilderImpl!DmaBufAllocatorGidBuilder
+{
+  DmaBufAllocator build()
+  {
+    return new DmaBufAllocator(cast(void*)createGObject(DmaBufAllocator._getGType), Yes.Take);
   }
 }

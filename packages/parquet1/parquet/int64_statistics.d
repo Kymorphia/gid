@@ -2,6 +2,7 @@
 module parquet.int64_statistics;
 
 import gid.gid;
+import gobject.gid_builder;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
@@ -36,6 +37,15 @@ class Int64Statistics : parquet.statistics.Statistics
     return this;
   }
 
+  /**
+  Get builder for [parquet.int64_statistics.Int64Statistics]
+  Returns: New builder object
+  */
+  static Int64StatisticsGidBuilder builder()
+  {
+    return new Int64StatisticsGidBuilder;
+  }
+
   /** */
   long getMax()
   {
@@ -50,5 +60,18 @@ class Int64Statistics : parquet.statistics.Statistics
     long _retval;
     _retval = gparquet_int64_statistics_get_min(cast(GParquetInt64Statistics*)this._cPtr);
     return _retval;
+  }
+}
+
+class Int64StatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.int64_statistics.Int64Statistics]
+final class Int64StatisticsGidBuilder : Int64StatisticsGidBuilderImpl!Int64StatisticsGidBuilder
+{
+  Int64Statistics build()
+  {
+    return new Int64Statistics(cast(void*)createGObject(Int64Statistics._getGType), No.Take);
   }
 }

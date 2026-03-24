@@ -7,6 +7,7 @@ import arrow.expression;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class CallExpression : arrow.expression.Expression
@@ -37,6 +38,15 @@ class CallExpression : arrow.expression.Expression
     return this;
   }
 
+  /**
+  Get builder for [arrow.call_expression.CallExpression]
+  Returns: New builder object
+  */
+  static CallExpressionGidBuilder builder()
+  {
+    return new CallExpressionGidBuilder;
+  }
+
   /** */
   this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options = null)
   {
@@ -46,5 +56,18 @@ class CallExpression : arrow.expression.Expression
     scope(exit) containerFree!(GList*, arrow.expression.Expression, GidOwnership.None)(_arguments);
     _cretval = garrow_call_expression_new(_function_, _arguments, options ? cast(GArrowFunctionOptions*)options._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class CallExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.call_expression.CallExpression]
+final class CallExpressionGidBuilder : CallExpressionGidBuilderImpl!CallExpressionGidBuilder
+{
+  CallExpression build()
+  {
+    return new CallExpression(cast(void*)createGObject(CallExpression._getGType), Yes.Take);
   }
 }

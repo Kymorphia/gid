@@ -20,6 +20,7 @@ import gio.mount_operation;
 import gio.types;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -2921,4 +2922,8 @@ interface File
       Throws: [ErrorWrap]
   */
   bool unmountMountableWithOperationFinish(gio.async_result.AsyncResult result);
+}
+
+interface FileGidBuilderImpl(T)
+{
 }

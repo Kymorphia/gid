@@ -10,6 +10,7 @@ import gio.credentials;
 import gio.socket_connection;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -52,6 +53,15 @@ class UnixConnection : gio.socket_connection.SocketConnection
   override UnixConnection self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.unix_connection.UnixConnection]
+  Returns: New builder object
+  */
+  static UnixConnectionGidBuilder builder()
+  {
+    return new UnixConnectionGidBuilder;
   }
 
   /**
@@ -274,5 +284,18 @@ class UnixConnection : gio.socket_connection.SocketConnection
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class UnixConnectionGidBuilderImpl(T) : gio.socket_connection.SocketConnectionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.unix_connection.UnixConnection]
+final class UnixConnectionGidBuilder : UnixConnectionGidBuilderImpl!UnixConnectionGidBuilder
+{
+  UnixConnection build()
+  {
+    return new UnixConnection(cast(void*)createGObject(UnixConnection._getGType), No.Take);
   }
 }

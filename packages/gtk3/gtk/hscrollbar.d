@@ -4,6 +4,7 @@ module gtk.hscrollbar;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.adjustment;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -53,6 +54,15 @@ class HScrollbar : gtk.scrollbar.Scrollbar
   }
 
   /**
+  Get builder for [gtk.hscrollbar.HScrollbar]
+  Returns: New builder object
+  */
+  static HScrollbarGidBuilder builder()
+  {
+    return new HScrollbarGidBuilder;
+  }
+
+  /**
       Creates a new horizontal scrollbar.
   
       Params:
@@ -66,5 +76,19 @@ class HScrollbar : gtk.scrollbar.Scrollbar
     GtkWidget* _cretval;
     _cretval = gtk_hscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
+  }
+}
+
+class HScrollbarGidBuilderImpl(T) : gtk.scrollbar.ScrollbarGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.hscrollbar.HScrollbar]
+final class HScrollbarGidBuilder : HScrollbarGidBuilderImpl!HScrollbarGidBuilder
+{
+  HScrollbar build()
+  {
+    return new HScrollbar(cast(void*)createGObject(HScrollbar._getGType), No.Take);
   }
 }

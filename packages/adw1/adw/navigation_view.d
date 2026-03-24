@@ -10,6 +10,7 @@ import adw.types;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -217,6 +218,15 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
+  Get builder for [adw.navigation_view.NavigationView]
+  Returns: New builder object
+  */
+  static NavigationViewGidBuilder builder()
+  {
+    return new NavigationViewGidBuilder;
+  }
+
+  /**
       Get `animateTransitions` property.
       Returns: Whether to animate page transitions.
         
@@ -236,7 +246,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void animateTransitions(bool propval)
   {
-    return setAnimateTransitions(propval);
+    setAnimateTransitions(propval);
   }
 
   /**
@@ -274,7 +284,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void popOnEscape(bool propval)
   {
-    return setPopOnEscape(propval);
+    setPopOnEscape(propval);
   }
 
   /**
@@ -799,5 +809,47 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("replaced", closure, after);
+  }
+}
+
+class NavigationViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T
+{
+
+  mixin SwipeableGidBuilderT!();
+
+  /**
+      Set `animateTransitions` property.
+      Params:
+        propval = Whether to animate page transitions.
+          
+          Gesture-based transitions are always animated.
+      Returns: Builder instance for fluent chaining
+  */
+  T animateTransitions(bool propval)
+  {
+    return setProperty("animate-transitions", propval);
+  }
+
+  /**
+      Set `popOnEscape` property.
+      Params:
+        propval = Whether pressing Escape pops the current page.
+          
+          Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
+          disable it.
+      Returns: Builder instance for fluent chaining
+  */
+  T popOnEscape(bool propval)
+  {
+    return setProperty("pop-on-escape", propval);
+  }
+}
+
+/// Fluent builder for [adw.navigation_view.NavigationView]
+final class NavigationViewGidBuilder : NavigationViewGidBuilderImpl!NavigationViewGidBuilder
+{
+  NavigationView build()
+  {
+    return new NavigationView(cast(void*)createGObject(NavigationView._getGType), No.Take);
   }
 }

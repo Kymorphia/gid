@@ -5,6 +5,7 @@ import gid.gid;
 import glib.error;
 import glib.key_file;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -51,6 +52,15 @@ class PrintSettings : gobject.object.ObjectWrap
   override PrintSettings self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.print_settings.PrintSettings]
+  Returns: New builder object
+  */
+  static PrintSettingsGidBuilder builder()
+  {
+    return new PrintSettingsGidBuilder;
   }
 
   /**
@@ -1086,5 +1096,18 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_unset(cast(GtkPrintSettings*)this._cPtr, _key);
+  }
+}
+
+class PrintSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.print_settings.PrintSettings]
+final class PrintSettingsGidBuilder : PrintSettingsGidBuilderImpl!PrintSettingsGidBuilder
+{
+  PrintSettings build()
+  {
+    return new PrintSettings(cast(void*)createGObject(PrintSettings._getGType), Yes.Take);
   }
 }

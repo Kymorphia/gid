@@ -3,6 +3,7 @@ module gtk.grid_view;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -88,6 +89,15 @@ class GridView : gtk.list_base.ListBase
   }
 
   /**
+  Get builder for [gtk.grid_view.GridView]
+  Returns: New builder object
+  */
+  static GridViewGidBuilder builder()
+  {
+    return new GridViewGidBuilder;
+  }
+
+  /**
       Get `enableRubberband` property.
       Returns: Allow rubberband selection.
   */
@@ -103,7 +113,7 @@ class GridView : gtk.list_base.ListBase
   */
   @property void enableRubberband(bool propval)
   {
-    return setEnableRubberband(propval);
+    setEnableRubberband(propval);
   }
 
   /**
@@ -122,7 +132,7 @@ class GridView : gtk.list_base.ListBase
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setFactory(propval);
+    setFactory(propval);
   }
 
   /**
@@ -147,7 +157,7 @@ class GridView : gtk.list_base.ListBase
   */
   @property void maxColumns(uint propval)
   {
-    return setMaxColumns(propval);
+    setMaxColumns(propval);
   }
 
   /**
@@ -166,7 +176,7 @@ class GridView : gtk.list_base.ListBase
   */
   @property void minColumns(uint propval)
   {
-    return setMinColumns(propval);
+    setMinColumns(propval);
   }
 
   /**
@@ -185,7 +195,7 @@ class GridView : gtk.list_base.ListBase
   */
   @property void model(gtk.selection_model.SelectionModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -204,7 +214,7 @@ class GridView : gtk.list_base.ListBase
   */
   @property void singleClickActivate(bool propval)
   {
-    return setSingleClickActivate(propval);
+    setSingleClickActivate(propval);
   }
 
   /**
@@ -223,7 +233,7 @@ class GridView : gtk.list_base.ListBase
   */
   @property void tabBehavior(gtk.types.ListTabBehavior propval)
   {
-    return setTabBehavior(propval);
+    setTabBehavior(propval);
   }
 
   /**
@@ -484,5 +494,99 @@ class GridView : gtk.list_base.ListBase
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class GridViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableRubberband(bool propval)
+  {
+    return setProperty("enable-rubberband", propval);
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+      Returns: Builder instance for fluent chaining
+  */
+  T factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("factory", propval);
+  }
+
+  /**
+      Set `maxColumns` property.
+      Params:
+        propval = Maximum number of columns per row.
+          
+          If this number is smaller than `property@Gtk.GridView:min-columns`,
+          that value is used instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxColumns(uint propval)
+  {
+    return setProperty("max-columns", propval);
+  }
+
+  /**
+      Set `minColumns` property.
+      Params:
+        propval = Minimum number of columns per row.
+      Returns: Builder instance for fluent chaining
+  */
+  T minColumns(uint propval)
+  {
+    return setProperty("min-columns", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.selection_model.SelectionModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+      Returns: Builder instance for fluent chaining
+  */
+  T singleClickActivate(bool propval)
+  {
+    return setProperty("single-click-activate", propval);
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+      Returns: Builder instance for fluent chaining
+  */
+  T tabBehavior(gtk.types.ListTabBehavior propval)
+  {
+    return setProperty("tab-behavior", propval);
+  }
+}
+
+/// Fluent builder for [gtk.grid_view.GridView]
+final class GridViewGidBuilder : GridViewGidBuilderImpl!GridViewGidBuilder
+{
+  GridView build()
+  {
+    return new GridView(cast(void*)createGObject(GridView._getGType), No.Take);
   }
 }

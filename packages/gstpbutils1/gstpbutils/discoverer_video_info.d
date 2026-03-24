@@ -2,6 +2,7 @@
 module gstpbutils.discoverer_video_info;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
 import gstpbutils.discoverer_stream_info;
@@ -36,6 +37,15 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   override DiscovererVideoInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.discoverer_video_info.DiscovererVideoInfo]
+  Returns: New builder object
+  */
+  static DiscovererVideoInfoGidBuilder builder()
+  {
+    return new DiscovererVideoInfoGidBuilder;
   }
 
   /** */
@@ -124,5 +134,18 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
     bool _retval;
     _retval = cast(bool)gst_discoverer_video_info_is_interlaced(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
     return _retval;
+  }
+}
+
+class DiscovererVideoInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.discoverer_video_info.DiscovererVideoInfo]
+final class DiscovererVideoInfoGidBuilder : DiscovererVideoInfoGidBuilderImpl!DiscovererVideoInfoGidBuilder
+{
+  DiscovererVideoInfo build()
+  {
+    return new DiscovererVideoInfo(cast(void*)createGObject(DiscovererVideoInfo._getGType), No.Take);
   }
 }

@@ -5,11 +5,13 @@ public import gtk.recent_chooser_iface_proxy;
 public import gid.gid;
 public import glib.error;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.recent_filter;
 public import gtk.recent_info;
+public import gtk.recent_manager;
 public import gtk.types;
 
 /**
@@ -41,7 +43,7 @@ template RecentChooserT()
   */
   @property void filter(gtk.recent_filter.RecentFilter propval)
   {
-    return setFilter(propval);
+    setFilter(propval);
   }
 
   /**
@@ -62,7 +64,7 @@ template RecentChooserT()
   */
   @property void limit(int propval)
   {
-    return setLimit(propval);
+    setLimit(propval);
   }
 
   /**
@@ -83,7 +85,7 @@ template RecentChooserT()
   */
   @property void localOnly(bool propval)
   {
-    return setLocalOnly(propval);
+    setLocalOnly(propval);
   }
 
   /**
@@ -102,7 +104,7 @@ template RecentChooserT()
   */
   @property void selectMultiple(bool propval)
   {
-    return setSelectMultiple(propval);
+    setSelectMultiple(propval);
   }
 
   /**
@@ -121,7 +123,7 @@ template RecentChooserT()
   */
   @property void showIcons(bool propval)
   {
-    return setShowIcons(propval);
+    setShowIcons(propval);
   }
 
   /**
@@ -146,7 +148,7 @@ template RecentChooserT()
   */
   @property void showNotFound(bool propval)
   {
-    return setShowNotFound(propval);
+    setShowNotFound(propval);
   }
 
   /** */
@@ -158,7 +160,7 @@ template RecentChooserT()
   /** */
   @property void showPrivate(bool propval)
   {
-    return setShowPrivate(propval);
+    setShowPrivate(propval);
   }
 
   /**
@@ -179,7 +181,7 @@ template RecentChooserT()
   */
   @property void showTips(bool propval)
   {
-    return setShowTips(propval);
+    setShowTips(propval);
   }
 
   /**
@@ -198,7 +200,7 @@ template RecentChooserT()
   */
   @property void sortType(gtk.types.RecentSortType propval)
   {
-    return setSortType(propval);
+    setSortType(propval);
   }
 
   /**
@@ -702,5 +704,122 @@ template RecentChooserT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-changed", closure, after);
+  }
+}
+
+template RecentChooserGidBuilderT()
+{
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The #GtkRecentFilter object to be used when displaying
+          the recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T filter(gtk.recent_filter.RecentFilter propval)
+  {
+    return setProperty("filter", propval);
+  }
+
+  /**
+      Set `limit` property.
+      Params:
+        propval = The maximum number of recently used resources to be displayed,
+          or -1 to display all items.
+      Returns: Builder instance for fluent chaining
+  */
+  T limit(int propval)
+  {
+    return setProperty("limit", propval);
+  }
+
+  /**
+      Set `localOnly` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display only local (file:)
+          resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T localOnly(bool propval)
+  {
+    return setProperty("local-only", propval);
+  }
+
+  /**
+      Set `recentManager` property.
+      Params:
+        propval = The #GtkRecentManager instance used by the #GtkRecentChooser to
+          display the list of recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T recentManager(gtk.recent_manager.RecentManager propval)
+  {
+    return setProperty("recent-manager", propval);
+  }
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Allow the user to select multiple resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectMultiple(bool propval)
+  {
+    return setProperty("select-multiple", propval);
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display an icon near the item.
+      Returns: Builder instance for fluent chaining
+  */
+  T showIcons(bool propval)
+  {
+    return setProperty("show-icons", propval);
+  }
+
+  /**
+      Set `showNotFound` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display the recently used resources
+          even if not present anymore. Setting this to false will perform a
+          potentially expensive check on every local resource (every remote
+          resource will always be displayed).
+      Returns: Builder instance for fluent chaining
+  */
+  T showNotFound(bool propval)
+  {
+    return setProperty("show-not-found", propval);
+  }
+
+  /** */
+  T showPrivate(bool propval)
+  {
+    return setProperty("show-private", propval);
+  }
+
+  /**
+      Set `showTips` property.
+      Params:
+        propval = Whether this #GtkRecentChooser should display a tooltip containing the
+          full path of the recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T showTips(bool propval)
+  {
+    return setProperty("show-tips", propval);
+  }
+
+  /**
+      Set `sortType` property.
+      Params:
+        propval = Sorting order to be used when displaying the recently used resources.
+      Returns: Builder instance for fluent chaining
+  */
+  T sortType(gtk.types.RecentSortType propval)
+  {
+    return setProperty("sort-type", propval);
   }
 }

@@ -3,6 +3,7 @@ module webkit.permission_request_mixin;
 
 public import webkit.permission_request_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import webkit.c.functions;
 public import webkit.c.types;
 public import webkit.types;
@@ -35,4 +36,8 @@ template PermissionRequestT()
   {
     webkit_permission_request_deny(cast(WebKitPermissionRequest*)this._cPtr);
   }
+}
+
+template PermissionRequestGidBuilderT()
+{
 }

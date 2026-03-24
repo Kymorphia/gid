@@ -7,6 +7,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import secret.c.functions;
 import secret.c.types;
@@ -25,6 +26,13 @@ interface Backend
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_backend_get_type != &gidSymbolNotFound ? secret_backend_get_type() : cast(GType)0;
   }
+
+  /**
+      Get `flags` property.
+      Returns: A set of flags describing which parts of the secret backend have
+        been initialized.
+  */
+  @property secret.types.ServiceFlags flags();
 
   /**
       Get a #SecretBackend instance.
@@ -74,4 +82,17 @@ interface Backend
     auto _retval = gobject.object.ObjectWrap._getDObject!(secret.backend.Backend)(cast(SecretBackend*)_cretval, Yes.Take);
     return _retval;
   }
+}
+
+interface BackendGidBuilderImpl(T)
+{
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = A set of flags describing which parts of the secret backend have
+          been initialized.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(secret.types.ServiceFlags propval);
 }

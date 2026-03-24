@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.large_binary_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
@@ -37,6 +38,15 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.large_string_array.LargeStringArray]
+  Returns: New builder object
+  */
+  static LargeStringArrayGidBuilder builder()
+  {
+    return new LargeStringArrayGidBuilder;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
@@ -52,5 +62,18 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
     _cretval = garrow_large_string_array_get_string(cast(GArrowLargeStringArray*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class LargeStringArrayGidBuilderImpl(T) : arrow.large_binary_array.LargeBinaryArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.large_string_array.LargeStringArray]
+final class LargeStringArrayGidBuilder : LargeStringArrayGidBuilderImpl!LargeStringArrayGidBuilder
+{
+  LargeStringArray build()
+  {
+    return new LargeStringArray(cast(void*)createGObject(LargeStringArray._getGType), Yes.Take);
   }
 }

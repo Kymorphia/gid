@@ -4,6 +4,7 @@ module pangocairo.font_map;
 public import pangocairo.font_map_iface_proxy;
 import cairo.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import pango.font_map;
 import pangocairo.c.functions;
@@ -153,4 +154,8 @@ interface FontMap
             involved; the terminology is conventional.)
   */
   void setResolution(double dpi);
+}
+
+interface FontMapGidBuilderImpl(T)
+{
 }

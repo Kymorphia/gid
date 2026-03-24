@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -157,6 +158,15 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
     return this;
   }
 
+  /**
+  Get builder for [gtk.spin_button.SpinButton]
+  Returns: New builder object
+  */
+  static SpinButtonGidBuilder builder()
+  {
+    return new SpinButtonGidBuilder;
+  }
+
   /** */
   @property gtk.adjustment.Adjustment adjustment()
   {
@@ -166,7 +176,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   /** */
   @property void adjustment(gtk.adjustment.Adjustment propval)
   {
-    return setAdjustment(propval);
+    setAdjustment(propval);
   }
 
   /** */
@@ -190,7 +200,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   /** */
   @property void digits(uint propval)
   {
-    return setDigits(propval);
+    setDigits(propval);
   }
 
   /** */
@@ -202,7 +212,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   /** */
   @property void numeric(bool propval)
   {
-    return setNumeric(propval);
+    setNumeric(propval);
   }
 
   /** */
@@ -214,7 +224,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   /** */
   @property void snapToTicks(bool propval)
   {
-    return setSnapToTicks(propval);
+    setSnapToTicks(propval);
   }
 
   /** */
@@ -226,7 +236,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   /** */
   @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
   {
-    return setUpdatePolicy(propval);
+    setUpdatePolicy(propval);
   }
 
   /** */
@@ -238,7 +248,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   /** */
   @property void value(double propval)
   {
-    return setValue(propval);
+    setValue(propval);
   }
 
   /** */
@@ -250,7 +260,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
   /** */
   @property void wrap(bool propval)
   {
-    return setWrap(propval);
+    setWrap(propval);
   }
 
   mixin OrientableT!();
@@ -809,5 +819,68 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("wrapped", closure, after);
+  }
+}
+
+class SpinButtonGidBuilderImpl(T) : gtk.entry.EntryGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("adjustment", propval);
+  }
+
+  /** */
+  T climbRate(double propval)
+  {
+    return setProperty("climb-rate", propval);
+  }
+
+  /** */
+  T digits(uint propval)
+  {
+    return setProperty("digits", propval);
+  }
+
+  /** */
+  T numeric(bool propval)
+  {
+    return setProperty("numeric", propval);
+  }
+
+  /** */
+  T snapToTicks(bool propval)
+  {
+    return setProperty("snap-to-ticks", propval);
+  }
+
+  /** */
+  T updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  {
+    return setProperty("update-policy", propval);
+  }
+
+  /** */
+  T value(double propval)
+  {
+    return setProperty("value", propval);
+  }
+
+  /** */
+  T wrap(bool propval)
+  {
+    return setProperty("wrap", propval);
+  }
+}
+
+/// Fluent builder for [gtk.spin_button.SpinButton]
+final class SpinButtonGidBuilder : SpinButtonGidBuilderImpl!SpinButtonGidBuilder
+{
+  SpinButton build()
+  {
+    return new SpinButton(cast(void*)createGObject(SpinButton._getGType), No.Take);
   }
 }

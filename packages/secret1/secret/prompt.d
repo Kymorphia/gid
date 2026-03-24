@@ -15,6 +15,7 @@ import gio.types;
 import glib.error;
 import glib.variant;
 import glib.variant_type;
+import gobject.gid_builder;
 import gobject.object;
 import secret.c.functions;
 import secret.c.types;
@@ -62,6 +63,15 @@ class Prompt : gio.dbus_proxy.DBusProxy
   override Prompt self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [secret.prompt.Prompt]
+  Returns: New builder object
+  */
+  static PromptGidBuilder builder()
+  {
+    return new PromptGidBuilder;
   }
 
   /**
@@ -192,5 +202,19 @@ class Prompt : gio.dbus_proxy.DBusProxy
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class PromptGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [secret.prompt.Prompt]
+final class PromptGidBuilder : PromptGidBuilderImpl!PromptGidBuilder
+{
+  Prompt build()
+  {
+    return new Prompt(cast(void*)createGObject(Prompt._getGType), No.Take);
   }
 }

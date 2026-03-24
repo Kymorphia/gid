@@ -10,6 +10,7 @@ import gio.action_map_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,15 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   override SimpleActionGroup self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.simple_action_group.SimpleActionGroup]
+  Returns: New builder object
+  */
+  static SimpleActionGroupGidBuilder builder()
+  {
+    return new SimpleActionGroupGidBuilder;
   }
 
   mixin ActionGroupT!();
@@ -111,5 +121,21 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_simple_action_group_remove(cast(GSimpleActionGroup*)this._cPtr, _actionName);
+  }
+}
+
+class SimpleActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.action_map.ActionMapGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+  mixin ActionMapGidBuilderT!();
+}
+
+/// Fluent builder for [gio.simple_action_group.SimpleActionGroup]
+final class SimpleActionGroupGidBuilder : SimpleActionGroupGidBuilderImpl!SimpleActionGroupGidBuilder
+{
+  SimpleActionGroup build()
+  {
+    return new SimpleActionGroup(cast(void*)createGObject(SimpleActionGroup._getGType), Yes.Take);
   }
 }

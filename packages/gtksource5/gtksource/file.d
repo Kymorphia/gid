@@ -3,6 +3,7 @@ module gtksource.file;
 
 import gid.gid;
 import gio.file;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -49,6 +50,15 @@ class File : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.file.File]
+  Returns: New builder object
+  */
+  static FileGidBuilder builder()
+  {
+    return new FileGidBuilder;
+  }
+
+  /**
       Get `compressionType` property.
       Returns: The compression type.
   */
@@ -83,7 +93,7 @@ class File : gobject.object.ObjectWrap
   */
   @property void location(gio.file.File propval)
   {
-    return setLocation(propval);
+    setLocation(propval);
   }
 
   /**
@@ -235,5 +245,29 @@ class File : gobject.object.ObjectWrap
   void setLocation(gio.file.File location = null)
   {
     gtk_source_file_set_location(cast(GtkSourceFile*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
+  }
+}
+
+class FileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `location` property.
+      Params:
+        propval = The location.
+      Returns: Builder instance for fluent chaining
+  */
+  T location(gio.file.File propval)
+  {
+    return setProperty("location", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.file.File]
+final class FileGidBuilder : FileGidBuilderImpl!FileGidBuilder
+{
+  File build()
+  {
+    return new File(cast(void*)createGObject(File._getGType), Yes.Take);
   }
 }

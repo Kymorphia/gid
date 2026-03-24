@@ -7,6 +7,7 @@ import adw.c.types;
 import adw.types;
 import gdk.rectangle;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     An interface for swipeable widgets.
@@ -71,4 +72,8 @@ interface Swipeable
         rect = a pointer to a rectangle to store the swipe area
   */
   void getSwipeArea(adw.types.NavigationDirection navigationDirection, bool isDrag, out gdk.rectangle.Rectangle rect);
+}
+
+interface SwipeableGidBuilderImpl(T)
+{
 }

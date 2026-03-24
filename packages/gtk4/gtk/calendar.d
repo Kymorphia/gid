@@ -4,6 +4,7 @@ module gtk.calendar;
 import gid.gid;
 import glib.date_time;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -95,6 +96,15 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.calendar.Calendar]
+  Returns: New builder object
+  */
+  static CalendarGidBuilder builder()
+  {
+    return new CalendarGidBuilder;
+  }
+
+  /**
       Get `day` property.
       Returns: The selected day (as a number between 1 and 31).
   */
@@ -110,7 +120,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void day(int propval)
   {
-    return setDay(propval);
+    setDay(propval);
   }
 
   /**
@@ -133,7 +143,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void month(int propval)
   {
-    return setMonth(propval);
+    setMonth(propval);
   }
 
   /**
@@ -152,7 +162,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void showDayNames(bool propval)
   {
-    return setShowDayNames(propval);
+    setShowDayNames(propval);
   }
 
   /**
@@ -171,7 +181,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void showHeading(bool propval)
   {
-    return setShowHeading(propval);
+    setShowHeading(propval);
   }
 
   /**
@@ -190,7 +200,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void showWeekNumbers(bool propval)
   {
-    return setShowWeekNumbers(propval);
+    setShowWeekNumbers(propval);
   }
 
   /**
@@ -213,7 +223,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void year(int propval)
   {
-    return setYear(propval);
+    setYear(propval);
   }
 
   /**
@@ -636,5 +646,89 @@ class Calendar : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prev-year", closure, after);
+  }
+}
+
+class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31).
+      Returns: Builder instance for fluent chaining
+  */
+  T day(int propval)
+  {
+    return setProperty("day", propval);
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+          
+          This property gets initially set to the current month.
+      Returns: Builder instance for fluent chaining
+  */
+  T month(int propval)
+  {
+    return setProperty("month", propval);
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDayNames(bool propval)
+  {
+    return setProperty("show-day-names", propval);
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showHeading(bool propval)
+  {
+    return setProperty("show-heading", propval);
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showWeekNumbers(bool propval)
+  {
+    return setProperty("show-week-numbers", propval);
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+          
+          This property gets initially set to the current year.
+      Returns: Builder instance for fluent chaining
+  */
+  T year(int propval)
+  {
+    return setProperty("year", propval);
+  }
+}
+
+/// Fluent builder for [gtk.calendar.Calendar]
+final class CalendarGidBuilder : CalendarGidBuilderImpl!CalendarGidBuilder
+{
+  Calendar build()
+  {
+    return new Calendar(cast(void*)createGObject(Calendar._getGType), No.Take);
   }
 }

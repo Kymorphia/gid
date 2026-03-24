@@ -9,6 +9,7 @@ import adw.types;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -71,6 +72,15 @@ class TabBar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.tab_bar.TabBar]
+  Returns: New builder object
+  */
+  static TabBarGidBuilder builder()
+  {
+    return new TabBarGidBuilder;
+  }
+
+  /**
       Get `autohide` property.
       Returns: Whether the tabs automatically hide.
         
@@ -96,7 +106,7 @@ class TabBar : gtk.widget.Widget
   */
   @property void autohide(bool propval)
   {
-    return setAutohide(propval);
+    setAutohide(propval);
   }
 
   /**
@@ -115,7 +125,7 @@ class TabBar : gtk.widget.Widget
   */
   @property void endActionWidget(gtk.widget.Widget propval)
   {
-    return setEndActionWidget(propval);
+    setEndActionWidget(propval);
   }
 
   /**
@@ -140,7 +150,7 @@ class TabBar : gtk.widget.Widget
   */
   @property void expandTabs(bool propval)
   {
-    return setExpandTabs(propval);
+    setExpandTabs(propval);
   }
 
   /**
@@ -177,7 +187,7 @@ class TabBar : gtk.widget.Widget
   */
   @property void extraDragPreload(bool propval)
   {
-    return setExtraDragPreload(propval);
+    setExtraDragPreload(propval);
   }
 
   /**
@@ -202,7 +212,7 @@ class TabBar : gtk.widget.Widget
   */
   @property void inverted(bool propval)
   {
-    return setInverted(propval);
+    setInverted(propval);
   }
 
   /**
@@ -232,7 +242,7 @@ class TabBar : gtk.widget.Widget
   */
   @property void startActionWidget(gtk.widget.Widget propval)
   {
-    return setStartActionWidget(propval);
+    setStartActionWidget(propval);
   }
 
   /**
@@ -262,7 +272,7 @@ class TabBar : gtk.widget.Widget
   */
   @property void view(adw.tab_view.TabView propval)
   {
-    return setView(propval);
+    setView(propval);
   }
 
   /**
@@ -626,5 +636,109 @@ class TabBar : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("extra-drag-value", closure, after);
+  }
+}
+
+class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `autohide` property.
+      Params:
+        propval = Whether the tabs automatically hide.
+          
+          If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+          or 1 tab, no pinned tabs, and no tab is being transferred.
+          
+          See `property@TabBar:tabs-revealed`.
+      Returns: Builder instance for fluent chaining
+  */
+  T autohide(bool propval)
+  {
+    return setProperty("autohide", propval);
+  }
+
+  /**
+      Set `endActionWidget` property.
+      Params:
+        propval = The widget shown after the tabs.
+      Returns: Builder instance for fluent chaining
+  */
+  T endActionWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("end-action-widget", propval);
+  }
+
+  /**
+      Set `expandTabs` property.
+      Params:
+        propval = Whether tabs expand to full width.
+          
+          If set to `TRUE`, the tabs will always vary width filling the whole width
+          when possible, otherwise tabs will always have the minimum possible size.
+      Returns: Builder instance for fluent chaining
+  */
+  T expandTabs(bool propval)
+  {
+    return setProperty("expand-tabs", propval);
+  }
+
+  /**
+      Set `extraDragPreload` property.
+      Params:
+        propval = Whether the drop data should be preloaded on hover.
+          
+          See [gtk.drop_target.DropTarget.preload].
+      Returns: Builder instance for fluent chaining
+  */
+  T extraDragPreload(bool propval)
+  {
+    return setProperty("extra-drag-preload", propval);
+  }
+
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether tabs use inverted layout.
+          
+          If set to `TRUE`, non-pinned tabs will have the close button at the
+          beginning and the indicator at the end rather than the opposite.
+      Returns: Builder instance for fluent chaining
+  */
+  T inverted(bool propval)
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /**
+      Set `startActionWidget` property.
+      Params:
+        propval = The widget shown before the tabs.
+      Returns: Builder instance for fluent chaining
+  */
+  T startActionWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("start-action-widget", propval);
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The tab view the tab bar controls.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(adw.tab_view.TabView propval)
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [adw.tab_bar.TabBar]
+final class TabBarGidBuilder : TabBarGidBuilderImpl!TabBarGidBuilder
+{
+  TabBar build()
+  {
+    return new TabBar(cast(void*)createGObject(TabBar._getGType), No.Take);
   }
 }

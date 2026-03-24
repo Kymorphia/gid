@@ -4,6 +4,7 @@ module gtk.editable_mixin;
 public import gtk.editable_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.param_spec;
 public import gobject.value;
@@ -169,7 +170,7 @@ template EditableT()
   */
   @property void editable(bool propval)
   {
-    return setEditable(propval);
+    setEditable(propval);
   }
 
   /**
@@ -188,7 +189,7 @@ template EditableT()
   */
   @property void enableUndo(bool propval)
   {
-    return setEnableUndo(propval);
+    setEnableUndo(propval);
   }
 
   /**
@@ -207,7 +208,7 @@ template EditableT()
   */
   @property void maxWidthChars(int propval)
   {
-    return setMaxWidthChars(propval);
+    setMaxWidthChars(propval);
   }
 
   /**
@@ -235,7 +236,7 @@ template EditableT()
   */
   @property void text(string propval)
   {
-    return setText(propval);
+    setText(propval);
   }
 
   /**
@@ -254,7 +255,7 @@ template EditableT()
   */
   @property void widthChars(int propval)
   {
-    return setWidthChars(propval);
+    setWidthChars(propval);
   }
 
   /**
@@ -277,7 +278,7 @@ template EditableT()
   */
   @property void xalign(float propval)
   {
-    return setAlignment(propval);
+    setAlignment(propval);
   }
 
 
@@ -821,5 +822,77 @@ template EditableT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-text", closure, after);
+  }
+}
+
+template EditableGidBuilderT()
+{
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the entry contents can be edited.
+      Returns: Builder instance for fluent chaining
+  */
+  T editable(bool propval)
+  {
+    return setProperty("editable", propval);
+  }
+
+  /**
+      Set `enableUndo` property.
+      Params:
+        propval = If undo/redo should be enabled for the editable.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableUndo(bool propval)
+  {
+    return setProperty("enable-undo", propval);
+  }
+
+  /**
+      Set `maxWidthChars` property.
+      Params:
+        propval = The desired maximum width of the entry, in characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxWidthChars(int propval)
+  {
+    return setProperty("max-width-chars", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The contents of the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = Number of characters to leave space for in the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T widthChars(int propval)
+  {
+    return setProperty("width-chars", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment, from 0 (left) to 1 (right).
+          
+          Reversed for RTL layouts.
+      Returns: Builder instance for fluent chaining
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
   }
 }

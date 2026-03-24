@@ -3,6 +3,7 @@ module gstvideo.video_direction;
 
 public import gstvideo.video_direction_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gstvideo.c.functions;
 import gstvideo.c.types;
 import gstvideo.types;
@@ -26,4 +27,11 @@ interface VideoDirection
 
   /** */
   @property void videoDirection(gstvideo.types.VideoOrientationMethod propval);
+}
+
+interface VideoDirectionGidBuilderImpl(T)
+{
+
+  /** */
+  T videoDirection(gstvideo.types.VideoOrientationMethod propval);
 }

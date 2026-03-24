@@ -8,6 +8,7 @@ import gio.file;
 import gio.output_stream;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class PrintDialog : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.print_dialog.PrintDialog]
+  Returns: New builder object
+  */
+  static PrintDialogGidBuilder builder()
+  {
+    return new PrintDialogGidBuilder;
+  }
+
+  /**
       Get `acceptLabel` property.
       Returns: A label that may be shown on the accept button of a print dialog
         that is presented by [gtk.print_dialog.PrintDialog.setup].
@@ -73,7 +83,7 @@ class PrintDialog : gobject.object.ObjectWrap
   */
   @property void acceptLabel(string propval)
   {
-    return setAcceptLabel(propval);
+    setAcceptLabel(propval);
   }
 
   /**
@@ -92,7 +102,7 @@ class PrintDialog : gobject.object.ObjectWrap
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -111,7 +121,7 @@ class PrintDialog : gobject.object.ObjectWrap
   */
   @property void pageSetup(gtk.page_setup.PageSetup propval)
   {
-    return setPageSetup(propval);
+    setPageSetup(propval);
   }
 
   /**
@@ -130,7 +140,7 @@ class PrintDialog : gobject.object.ObjectWrap
   */
   @property void printSettings(gtk.print_settings.PrintSettings propval)
   {
-    return setPrintSettings(propval);
+    setPrintSettings(propval);
   }
 
   /**
@@ -151,7 +161,7 @@ class PrintDialog : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -453,5 +463,75 @@ class PrintDialog : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gtk.print_setup.PrintSetup(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = A label that may be shown on the accept button of a print dialog
+          that is presented by [gtk.print_dialog.PrintDialog.setup].
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptLabel(string propval)
+  {
+    return setProperty("accept-label", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the print dialog is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `pageSetup` property.
+      Params:
+        propval = The page setup to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setProperty("page-setup", propval);
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The print settings to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setProperty("print-settings", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the print dialog that is
+          presented by [gtk.print_dialog.PrintDialog.setup].
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtk.print_dialog.PrintDialog]
+final class PrintDialogGidBuilder : PrintDialogGidBuilderImpl!PrintDialogGidBuilder
+{
+  PrintDialog build()
+  {
+    return new PrintDialog(cast(void*)createGObject(PrintDialog._getGType), Yes.Take);
   }
 }

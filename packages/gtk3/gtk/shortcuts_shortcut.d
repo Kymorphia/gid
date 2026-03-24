@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -46,6 +47,15 @@ class ShortcutsShortcut : gtk.box.Box
   override ShortcutsShortcut self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.shortcuts_shortcut.ShortcutsShortcut]
+  Returns: New builder object
+  */
+  static ShortcutsShortcutGidBuilder builder()
+  {
+    return new ShortcutsShortcutGidBuilder;
   }
 
   /**
@@ -313,5 +323,180 @@ class ShortcutsShortcut : gtk.box.Box
   @property void titleSizeGroup(gtk.size_group.SizeGroup propval)
   {
     gobject.object.ObjectWrap.setProperty!(gtk.size_group.SizeGroup)("title-size-group", propval);
+  }
+}
+
+class ShortcutsShortcutGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
+{
+
+
+  /**
+      Set `accelSizeGroup` property.
+      Params:
+        propval = The size group for the accelerator portion of this shortcut.
+          
+          This is used internally by GTK+, and must not be modified by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelSizeGroup(gtk.size_group.SizeGroup propval)
+  {
+    return setProperty("accel-size-group", propval);
+  }
+
+  /**
+      Set `accelerator` property.
+      Params:
+        propval = The accelerator(s) represented by this object. This property is used
+          if #GtkShortcutsShortcut:shortcut-type is set to #GTK_SHORTCUT_ACCELERATOR.
+          
+          The syntax of this property is (an extension of) the syntax understood by
+          [gtk.global.acceleratorParse]. Multiple accelerators can be specified by separating
+          them with a space, but keep in mind that the available width is limited.
+          It is also possible to specify ranges of shortcuts, using `...` between the keys.
+          Sequences of keys can be specified using a `+` or `&` between the keys.
+          
+          Examples:
+          
+          $(LIST
+            * A single shortcut: `<ctl><alt>delete`
+            * Two alternative shortcuts: `<shift>a Home`
+            * A range of shortcuts: `<alt>1...<alt>9`
+            * Several keys pressed together: `Control_L&Control_R`
+            * A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
+          )
+            
+          Use + instead of & when the keys may (or have to be) pressed sequentially (e.g
+          use t+t for 'press the t key twice').
+          
+          Note that `<`, `>` and `&` need to be escaped as &lt;, &gt; and &amp; when used
+          in .ui files.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelerator(string propval)
+  {
+    return setProperty("accelerator", propval);
+  }
+
+  /**
+      Set `actionName` property.
+      Params:
+        propval = A detailed action name. If this is set for a shortcut
+          of type [gtk.types.ShortcutType.Accelerator], then GTK+ will use
+          the accelerators that are associated with the action
+          via [gtk.application.Application.setAccelsForAction], and setting
+          #GtkShortcutsShortcut::accelerator is not necessary.
+      Returns: Builder instance for fluent chaining
+  */
+  T actionName(string propval)
+  {
+    return setProperty("action-name", propval);
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The text direction for which this shortcut is active. If the shortcut
+          is used regardless of the text direction, set this property to
+          #GTK_TEXT_DIR_NONE.
+      Returns: Builder instance for fluent chaining
+  */
+  T direction(gtk.types.TextDirection propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = An icon to represent the shortcut or gesture. This property is used if
+          #GtkShortcutsShortcut:shortcut-type is set to #GTK_SHORTCUT_GESTURE.
+          For the other predefined gesture types, GTK+ provides an icon on its own.
+      Returns: Builder instance for fluent chaining
+  */
+  T icon(gio.icon.Icon propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `iconSet` property.
+      Params:
+        propval = true if an icon has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSet(bool propval)
+  {
+    return setProperty("icon-set", propval);
+  }
+
+  /**
+      Set `shortcutType` property.
+      Params:
+        propval = The type of shortcut that is represented.
+      Returns: Builder instance for fluent chaining
+  */
+  T shortcutType(gtk.types.ShortcutType propval)
+  {
+    return setProperty("shortcut-type", propval);
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle for the shortcut or gesture.
+          
+          This is typically used for gestures and should be a short, one-line
+          text that describes the gesture itself. For the predefined gesture
+          types, GTK+ provides a subtitle on its own.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitle(string propval)
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `subtitleSet` property.
+      Params:
+        propval = true if a subtitle has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitleSet(bool propval)
+  {
+    return setProperty("subtitle-set", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The textual description for the shortcut or gesture represented by
+          this object. This should be a short string that can fit in a single line.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `titleSizeGroup` property.
+      Params:
+        propval = The size group for the textual portion of this shortcut.
+          
+          This is used internally by GTK+, and must not be modified by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T titleSizeGroup(gtk.size_group.SizeGroup propval)
+  {
+    return setProperty("title-size-group", propval);
+  }
+}
+
+/// Fluent builder for [gtk.shortcuts_shortcut.ShortcutsShortcut]
+final class ShortcutsShortcutGidBuilder : ShortcutsShortcutGidBuilderImpl!ShortcutsShortcutGidBuilder
+{
+  ShortcutsShortcut build()
+  {
+    return new ShortcutsShortcut(cast(void*)createGObject(ShortcutsShortcut._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import atk.selection_mixin;
 import atk.table;
 import atk.table_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_accessible_parent;
@@ -44,7 +45,33 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return this;
   }
 
+  /**
+  Get builder for [gtk.tree_view_accessible.TreeViewAccessible]
+  Returns: New builder object
+  */
+  static TreeViewAccessibleGidBuilder builder()
+  {
+    return new TreeViewAccessibleGidBuilder;
+  }
+
   mixin SelectionT!();
   mixin TableT!();
   mixin CellAccessibleParentT!();
+}
+
+class TreeViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T, atk.table.TableGidBuilderImpl!T, gtk.cell_accessible_parent.CellAccessibleParentGidBuilderImpl!T
+{
+
+  mixin SelectionGidBuilderT!();
+  mixin TableGidBuilderT!();
+  mixin CellAccessibleParentGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.tree_view_accessible.TreeViewAccessible]
+final class TreeViewAccessibleGidBuilder : TreeViewAccessibleGidBuilderImpl!TreeViewAccessibleGidBuilder
+{
+  TreeViewAccessible build()
+  {
+    return new TreeViewAccessible(cast(void*)createGObject(TreeViewAccessible._getGType), No.Take);
+  }
 }

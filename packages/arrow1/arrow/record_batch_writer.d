@@ -8,6 +8,7 @@ import arrow.table;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class RecordBatchWriter : gobject.object.ObjectWrap
   override RecordBatchWriter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.record_batch_writer.RecordBatchWriter]
+  Returns: New builder object
+  */
+  static RecordBatchWriterGidBuilder builder()
+  {
+    return new RecordBatchWriterGidBuilder;
   }
 
   /** */
@@ -78,5 +88,24 @@ class RecordBatchWriter : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class RecordBatchWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T recordBatchWriter(void* propval)
+  {
+    return setProperty("record-batch-writer", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch_writer.RecordBatchWriter]
+final class RecordBatchWriterGidBuilder : RecordBatchWriterGidBuilderImpl!RecordBatchWriterGidBuilder
+{
+  RecordBatchWriter build()
+  {
+    return new RecordBatchWriter(cast(void*)createGObject(RecordBatchWriter._getGType), No.Take);
   }
 }

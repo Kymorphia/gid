@@ -3,6 +3,7 @@ module webkit.editor_state;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -41,6 +42,15 @@ class EditorState : gobject.object.ObjectWrap
   override EditorState self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.editor_state.EditorState]
+  Returns: New builder object
+  */
+  static EditorStateGidBuilder builder()
+  {
+    return new EditorStateGidBuilder;
   }
 
   /**
@@ -159,5 +169,18 @@ class EditorState : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class EditorStateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.editor_state.EditorState]
+final class EditorStateGidBuilder : EditorStateGidBuilderImpl!EditorStateGidBuilder
+{
+  EditorState build()
+  {
+    return new EditorState(cast(void*)createGObject(EditorState._getGType), No.Take);
   }
 }

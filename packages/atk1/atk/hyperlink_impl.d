@@ -7,6 +7,7 @@ import atk.c.types;
 import atk.hyperlink;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -32,4 +33,8 @@ interface HyperlinkImpl
         implementing AtkObject.
   */
   atk.hyperlink.Hyperlink getHyperlink();
+}
+
+interface HyperlinkImplGidBuilderImpl(T)
+{
 }

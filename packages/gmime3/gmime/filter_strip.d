@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for stripping whitespace from the end of lines.
@@ -39,6 +40,15 @@ class FilterStrip : gmime.filter.Filter
   }
 
   /**
+  Get builder for [gmime.filter_strip.FilterStrip]
+  Returns: New builder object
+  */
+  static FilterStripGidBuilder builder()
+  {
+    return new FilterStripGidBuilder;
+  }
+
+  /**
       Creates a new #GMimeFilterStrip filter which will strip trailing
       whitespace from every line of input passed through the filter.
       Returns: a new strip filter.
@@ -48,5 +58,18 @@ class FilterStrip : gmime.filter.Filter
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_strip_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class FilterStripGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_strip.FilterStrip]
+final class FilterStripGidBuilder : FilterStripGidBuilderImpl!FilterStripGidBuilder
+{
+  FilterStrip build()
+  {
+    return new FilterStrip(cast(void*)createGObject(FilterStrip._getGType), Yes.Take);
   }
 }

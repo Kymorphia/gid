@@ -4,6 +4,7 @@ module gtk.tree_drag_source;
 public import gtk.tree_drag_source_iface_proxy;
 import gdk.content_provider;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -67,4 +68,8 @@ interface TreeDragSource
       Deprecated: Use list models instead
   */
   bool rowDraggable(gtk.tree_path.TreePath path);
+}
+
+interface TreeDragSourceGidBuilderImpl(T)
+{
 }

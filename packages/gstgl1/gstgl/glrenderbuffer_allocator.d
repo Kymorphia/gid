@@ -2,6 +2,7 @@
 module gstgl.glrenderbuffer_allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstgl.c.functions;
 import gstgl.c.types;
 import gstgl.glbase_memory_allocator;
@@ -36,5 +37,27 @@ class GLRenderbufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAlloca
   override GLRenderbufferAllocator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glrenderbuffer_allocator.GLRenderbufferAllocator]
+  Returns: New builder object
+  */
+  static GLRenderbufferAllocatorGidBuilder builder()
+  {
+    return new GLRenderbufferAllocatorGidBuilder;
+  }
+}
+
+class GLRenderbufferAllocatorGidBuilderImpl(T) : gstgl.glbase_memory_allocator.GLBaseMemoryAllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glrenderbuffer_allocator.GLRenderbufferAllocator]
+final class GLRenderbufferAllocatorGidBuilder : GLRenderbufferAllocatorGidBuilderImpl!GLRenderbufferAllocatorGidBuilder
+{
+  GLRenderbufferAllocator build()
+  {
+    return new GLRenderbufferAllocator(cast(void*)createGObject(GLRenderbufferAllocator._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ public import gtk.color_chooser_iface_proxy;
 public import gdk.rgba;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -54,7 +55,7 @@ template ColorChooserT()
   */
   @property void rgba(gdk.rgba.RGBA propval)
   {
-    return setRgba(propval);
+    setRgba(propval);
   }
 
   /**
@@ -93,7 +94,7 @@ template ColorChooserT()
   */
   @property void useAlpha(bool propval)
   {
-    return setUseAlpha(propval);
+    setUseAlpha(propval);
   }
 
   /**
@@ -234,5 +235,47 @@ template ColorChooserT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-activated", closure, after);
+  }
+}
+
+template ColorChooserGidBuilderT()
+{
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The currently selected color, as a [gdk.rgba.RGBA] struct.
+          
+          The property can be set to change the current selection
+          programmatically.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+          instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  T rgba(gdk.rgba.RGBA propval)
+  {
+    return setProperty("rgba", propval);
+  }
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+          
+          When ::use-alpha is false, the [gdk.rgba.RGBA] struct obtained
+          via the [gtk.color_chooser.ColorChooser.rgba] property will be
+          forced to have alpha == 1.
+          
+          Implementations are expected to show alpha by rendering the color
+          over a non-uniform background (like a checkerboard pattern).
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
+          instead of widgets implementing [gtk.color_chooser.ColorChooser]
+  */
+  T useAlpha(bool propval)
+  {
+    return setProperty("use-alpha", propval);
   }
 }

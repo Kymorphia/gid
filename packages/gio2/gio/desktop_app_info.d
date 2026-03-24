@@ -11,6 +11,7 @@ import gio.types;
 import glib.error;
 import glib.key_file;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +48,24 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   override DesktopAppInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.desktop_app_info.DesktopAppInfo]
+  Returns: New builder object
+  */
+  static DesktopAppInfoGidBuilder builder()
+  {
+    return new DesktopAppInfoGidBuilder;
+  }
+
+  /**
+      Get `filename` property.
+      Returns: The origin filename of this #GDesktopAppInfo
+  */
+  @property string filename()
+  {
+    return getFilename();
   }
 
   mixin AppInfoT!();
@@ -559,5 +578,31 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
         _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
+  }
+}
+
+class DesktopAppInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.app_info.AppInfoGidBuilderImpl!T
+{
+
+  mixin AppInfoGidBuilderT!();
+
+  /**
+      Set `filename` property.
+      Params:
+        propval = The origin filename of this #GDesktopAppInfo
+      Returns: Builder instance for fluent chaining
+  */
+  T filename(string propval)
+  {
+    return setProperty("filename", propval);
+  }
+}
+
+/// Fluent builder for [gio.desktop_app_info.DesktopAppInfo]
+final class DesktopAppInfoGidBuilder : DesktopAppInfoGidBuilderImpl!DesktopAppInfoGidBuilder
+{
+  DesktopAppInfo build()
+  {
+    return new DesktopAppInfo(cast(void*)createGObject(DesktopAppInfo._getGType), Yes.Take);
   }
 }

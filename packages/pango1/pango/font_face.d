@@ -2,6 +2,7 @@
 module pango.font_face;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -39,6 +40,15 @@ class FontFace : gobject.object.ObjectWrap
   override FontFace self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.font_face.FontFace]
+  Returns: New builder object
+  */
+  static FontFaceGidBuilder builder()
+  {
+    return new FontFaceGidBuilder;
   }
 
   /**
@@ -123,5 +133,18 @@ class FontFace : gobject.object.ObjectWrap
     sizes.length = _nSizes;
     sizes[0 .. $] = (cast(int*)_sizes)[0 .. _nSizes];
     gFree(cast(void*)_sizes);
+  }
+}
+
+class FontFaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.font_face.FontFace]
+final class FontFaceGidBuilder : FontFaceGidBuilderImpl!FontFaceGidBuilder
+{
+  FontFace build()
+  {
+    return new FontFace(cast(void*)createGObject(FontFace._getGType), No.Take);
   }
 }

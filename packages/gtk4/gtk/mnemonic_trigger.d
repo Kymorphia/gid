@@ -2,6 +2,7 @@
 module gtk.mnemonic_trigger;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_trigger;
@@ -42,6 +43,24 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
+  Get builder for [gtk.mnemonic_trigger.MnemonicTrigger]
+  Returns: New builder object
+  */
+  static MnemonicTriggerGidBuilder builder()
+  {
+    return new MnemonicTriggerGidBuilder;
+  }
+
+  /**
+      Get `keyval` property.
+      Returns: The key value for the trigger.
+  */
+  @property uint keyval()
+  {
+    return getKeyval();
+  }
+
+  /**
       Creates a [gtk.shortcut_trigger.ShortcutTrigger] that will trigger whenever the key with
       the given keyval is pressed and mnemonics have been activated.
       
@@ -68,5 +87,29 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
     uint _retval;
     _retval = gtk_mnemonic_trigger_get_keyval(cast(GtkMnemonicTrigger*)this._cPtr);
     return _retval;
+  }
+}
+
+class MnemonicTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
+{
+
+  /**
+      Set `keyval` property.
+      Params:
+        propval = The key value for the trigger.
+      Returns: Builder instance for fluent chaining
+  */
+  T keyval(uint propval)
+  {
+    return setProperty("keyval", propval);
+  }
+}
+
+/// Fluent builder for [gtk.mnemonic_trigger.MnemonicTrigger]
+final class MnemonicTriggerGidBuilder : MnemonicTriggerGidBuilderImpl!MnemonicTriggerGidBuilder
+{
+  MnemonicTrigger build()
+  {
+    return new MnemonicTrigger(cast(void*)createGObject(MnemonicTrigger._getGType), Yes.Take);
   }
 }

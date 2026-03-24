@@ -12,6 +12,7 @@ import gio.menu_model;
 import gio.types;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -124,6 +125,15 @@ class Application : gio.application.Application
     return this;
   }
 
+  /**
+  Get builder for [gtk.application.Application]
+  Returns: New builder object
+  */
+  static ApplicationGidBuilder builder()
+  {
+    return new ApplicationGidBuilder;
+  }
+
   /** */
   @property gtk.window.Window activeWindow()
   {
@@ -139,7 +149,7 @@ class Application : gio.application.Application
   /** */
   @property void appMenu(gio.menu_model.MenuModel propval)
   {
-    return setAppMenu(propval);
+    setAppMenu(propval);
   }
 
   /** */
@@ -151,7 +161,7 @@ class Application : gio.application.Application
   /** */
   @property void menubar(gio.menu_model.MenuModel propval)
   {
-    return setMenubar(propval);
+    setMenubar(propval);
   }
 
   /**
@@ -844,5 +854,42 @@ class Application : gio.application.Application
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-removed", closure, after);
+  }
+}
+
+class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
+{
+
+
+  /** */
+  T appMenu(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("app-menu", propval);
+  }
+
+  /** */
+  T menubar(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menubar", propval);
+  }
+
+  /**
+      Set `registerSession` property.
+      Params:
+        propval = Set this property to true to register with the session manager.
+      Returns: Builder instance for fluent chaining
+  */
+  T registerSession(bool propval)
+  {
+    return setProperty("register-session", propval);
+  }
+}
+
+/// Fluent builder for [gtk.application.Application]
+final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
+{
+  Application build()
+  {
+    return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }
 }

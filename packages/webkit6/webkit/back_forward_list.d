@@ -3,6 +3,7 @@ module webkit.back_forward_list;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.back_forward_list_item;
 import webkit.c.functions;
@@ -52,6 +53,15 @@ class BackForwardList : gobject.object.ObjectWrap
   override BackForwardList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.back_forward_list.BackForwardList]
+  Returns: New builder object
+  */
+  static BackForwardListGidBuilder builder()
+  {
+    return new BackForwardListGidBuilder;
   }
 
   /**
@@ -229,5 +239,18 @@ class BackForwardList : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class BackForwardListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.back_forward_list.BackForwardList]
+final class BackForwardListGidBuilder : BackForwardListGidBuilderImpl!BackForwardListGidBuilder
+{
+  BackForwardList build()
+  {
+    return new BackForwardList(cast(void*)createGObject(BackForwardList._getGType), No.Take);
   }
 }

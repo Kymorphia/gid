@@ -2,6 +2,7 @@
 module gstaudio.audio_aggregator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.caps;
 import gstaudio.audio_aggregator_pad;
@@ -88,6 +89,15 @@ class AudioAggregator : gstbase.aggregator.Aggregator
     return this;
   }
 
+  /**
+  Get builder for [gstaudio.audio_aggregator.AudioAggregator]
+  Returns: New builder object
+  */
+  static AudioAggregatorGidBuilder builder()
+  {
+    return new AudioAggregatorGidBuilder;
+  }
+
   /** */
   @property ulong alignmentThreshold()
   {
@@ -110,6 +120,18 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   @property void discontWait(ulong propval)
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("discont-wait", propval);
+  }
+
+  /**
+      Get `forceLive` property.
+      Returns: Causes the element to aggregate on a timeout even when no live source is
+        connected to its sinks. See #GstAggregator:min-upstream-latency for a
+        companion property: in the vast majority of cases where you plan to plug in
+        live sources with a non-zero latency, you should set it to a non-zero value.
+  */
+  @property bool forceLive()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("force-live");
   }
 
   /**
@@ -161,5 +183,68 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   void setSinkCaps(gstaudio.audio_aggregator_pad.AudioAggregatorPad pad, gst.caps.Caps caps)
   {
     gst_audio_aggregator_set_sink_caps(cast(GstAudioAggregator*)this._cPtr, pad ? cast(GstAudioAggregatorPad*)pad._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+  }
+}
+
+class AudioAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilderImpl!T
+{
+
+  /** */
+  T alignmentThreshold(ulong propval)
+  {
+    return setProperty("alignment-threshold", propval);
+  }
+
+  /** */
+  T discontWait(ulong propval)
+  {
+    return setProperty("discont-wait", propval);
+  }
+
+  /**
+      Set `forceLive` property.
+      Params:
+        propval = Causes the element to aggregate on a timeout even when no live source is
+          connected to its sinks. See #GstAggregator:min-upstream-latency for a
+          companion property: in the vast majority of cases where you plan to plug in
+          live sources with a non-zero latency, you should set it to a non-zero value.
+      Returns: Builder instance for fluent chaining
+  */
+  T forceLive(bool propval)
+  {
+    return setProperty("force-live", propval);
+  }
+
+  /**
+      Set `ignoreInactivePads` property.
+      Params:
+        propval = Don't wait for inactive pads when live. An inactive pad
+          is a pad that hasn't yet received a buffer, but that has
+          been waited on at least once.
+          
+          The purpose of this property is to avoid aggregating on
+          timeout when new pads are requested in advance of receiving
+          data flow, for example the user may decide to connect it later,
+          but wants to configure it already.
+      Returns: Builder instance for fluent chaining
+  */
+  T ignoreInactivePads(bool propval)
+  {
+    return setProperty("ignore-inactive-pads", propval);
+  }
+
+  /** */
+  T outputBufferDuration(ulong propval)
+  {
+    return setProperty("output-buffer-duration", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_aggregator.AudioAggregator]
+final class AudioAggregatorGidBuilder : AudioAggregatorGidBuilderImpl!AudioAggregatorGidBuilder
+{
+  AudioAggregator build()
+  {
+    return new AudioAggregator(cast(void*)createGObject(AudioAggregator._getGType), No.Take);
   }
 }

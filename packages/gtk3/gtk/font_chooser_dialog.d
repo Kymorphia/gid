@@ -4,6 +4,7 @@ module gtk.font_chooser_dialog;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -52,6 +53,15 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
     return this;
   }
 
+  /**
+  Get builder for [gtk.font_chooser_dialog.FontChooserDialog]
+  Returns: New builder object
+  */
+  static FontChooserDialogGidBuilder builder()
+  {
+    return new FontChooserDialogGidBuilder;
+  }
+
   mixin FontChooserT!();
 
   /**
@@ -68,5 +78,20 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
     const(char)* _title = title.toCString(No.Alloc);
     _cretval = gtk_font_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
+  }
+}
+
+class FontChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.font_chooser.FontChooserGidBuilderImpl!T
+{
+
+  mixin FontChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.font_chooser_dialog.FontChooserDialog]
+final class FontChooserDialogGidBuilder : FontChooserDialogGidBuilderImpl!FontChooserDialogGidBuilder
+{
+  FontChooserDialog build()
+  {
+    return new FontChooserDialog(cast(void*)createGObject(FontChooserDialog._getGType), No.Take);
   }
 }

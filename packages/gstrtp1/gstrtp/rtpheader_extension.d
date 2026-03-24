@@ -2,6 +2,7 @@
 module gstrtp.rtpheader_extension;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.caps;
@@ -39,6 +40,15 @@ class RTPHeaderExtension : gst.element.Element
   override RTPHeaderExtension self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstrtp.rtpheader_extension.RTPHeaderExtension]
+  Returns: New builder object
+  */
+  static RTPHeaderExtensionGidBuilder builder()
+  {
+    return new RTPHeaderExtensionGidBuilder;
   }
 
   /** */
@@ -304,5 +314,18 @@ class RTPHeaderExtension : gst.element.Element
     auto _data = cast(ubyte*)data.ptr;
     _retval = gst_rtp_header_extension_write(cast(GstRTPHeaderExtension*)this._cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta._cPtr(No.Dup) : null, writeFlags, output ? cast(GstBuffer*)output._cPtr(No.Dup) : null, _data, _size);
     return _retval;
+  }
+}
+
+class RTPHeaderExtensionGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstrtp.rtpheader_extension.RTPHeaderExtension]
+final class RTPHeaderExtensionGidBuilder : RTPHeaderExtensionGidBuilderImpl!RTPHeaderExtensionGidBuilder
+{
+  RTPHeaderExtension build()
+  {
+    return new RTPHeaderExtension(cast(void*)createGObject(RTPHeaderExtension._getGType), No.Take);
   }
 }

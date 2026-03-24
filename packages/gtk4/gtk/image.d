@@ -5,6 +5,7 @@ import gdk.paintable;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -87,6 +88,15 @@ class Image : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.image.Image]
+  Returns: New builder object
+  */
+  static ImageGidBuilder builder()
+  {
+    return new ImageGidBuilder;
+  }
+
+  /**
       Get `file` property.
       Returns: A path to the file to display.
   */
@@ -102,7 +112,7 @@ class Image : gtk.widget.Widget
   */
   @property void file(string propval)
   {
-    return setFromFile(propval);
+    setFromFile(propval);
   }
 
   /**
@@ -127,7 +137,7 @@ class Image : gtk.widget.Widget
   */
   @property void gicon(gio.icon.Icon propval)
   {
-    return setFromGicon(propval);
+    setFromGicon(propval);
   }
 
   /**
@@ -150,7 +160,7 @@ class Image : gtk.widget.Widget
   */
   @property void iconName(string propval)
   {
-    return setFromIconName(propval);
+    setFromIconName(propval);
   }
 
   /**
@@ -169,7 +179,7 @@ class Image : gtk.widget.Widget
   */
   @property void iconSize(gtk.types.IconSize propval)
   {
-    return setIconSize(propval);
+    setIconSize(propval);
   }
 
   /**
@@ -188,7 +198,7 @@ class Image : gtk.widget.Widget
   */
   @property void paintable(gdk.paintable.Paintable propval)
   {
-    return setFromPaintable(propval);
+    setFromPaintable(propval);
   }
 
   /**
@@ -215,7 +225,7 @@ class Image : gtk.widget.Widget
   */
   @property void pixelSize(int propval)
   {
-    return setPixelSize(propval);
+    setPixelSize(propval);
   }
 
   /**
@@ -234,7 +244,7 @@ class Image : gtk.widget.Widget
   */
   @property void resource(string propval)
   {
-    return setFromResource(propval);
+    setFromResource(propval);
   }
 
   /**
@@ -638,5 +648,120 @@ class Image : gtk.widget.Widget
   void setPixelSize(int pixelSize)
   {
     gtk_image_set_pixel_size(cast(GtkImage*)this._cPtr, pixelSize);
+  }
+}
+
+class ImageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `file` property.
+      Params:
+        propval = A path to the file to display.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(string propval)
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The [gio.icon.Icon] displayed in the GtkImage.
+          
+          For themed icons, If the icon theme is changed, the image will be updated
+          automatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon in the icon theme.
+          
+          If the icon theme is changed, the image will be updated automatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = The symbolic size to display icons at.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSize(gtk.types.IconSize propval)
+  {
+    return setProperty("icon-size", propval);
+  }
+
+  /**
+      Set `paintable` property.
+      Params:
+        propval = The [gdk.paintable.Paintable] to display.
+      Returns: Builder instance for fluent chaining
+  */
+  T paintable(gdk.paintable.Paintable propval)
+  {
+    return setProperty("paintable", propval);
+  }
+
+  /**
+      Set `pixelSize` property.
+      Params:
+        propval = The size in pixels to display icons at.
+          
+          If set to a value != -1, this property overrides the
+          `property@Gtk.Image:icon-size` property for images of type
+          [gtk.types.ImageType.IconName].
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelSize(int propval)
+  {
+    return setProperty("pixel-size", propval);
+  }
+
+  /**
+      Set `resource` property.
+      Params:
+        propval = A path to a resource file to display.
+      Returns: Builder instance for fluent chaining
+  */
+  T resource(string propval)
+  {
+    return setProperty("resource", propval);
+  }
+
+  /**
+      Set `useFallback` property.
+      Params:
+        propval = Whether the icon displayed in the [gtk.image.Image] will use
+          standard icon names fallback.
+          
+          The value of this property is only relevant for images of type
+          [gtk.types.ImageType.IconName] and [gtk.types.ImageType.Gicon].
+      Returns: Builder instance for fluent chaining
+  */
+  T useFallback(bool propval)
+  {
+    return setProperty("use-fallback", propval);
+  }
+}
+
+/// Fluent builder for [gtk.image.Image]
+final class ImageGidBuilder : ImageGidBuilderImpl!ImageGidBuilder
+{
+  Image build()
+  {
+    return new Image(cast(void*)createGObject(Image._getGType), No.Take);
   }
 }

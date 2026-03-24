@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.run_end_encoded_data_type.RunEndEncodedDataType]
+  Returns: New builder object
+  */
+  static RunEndEncodedDataTypeGidBuilder builder()
+  {
+    return new RunEndEncodedDataTypeGidBuilder;
+  }
+
   /** */
   this(arrow.data_type.DataType runEndDataType, arrow.data_type.DataType valueDataType)
   {
@@ -62,5 +72,18 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     _cretval = garrow_run_end_encoded_data_type_get_value_data_type(cast(GArrowRunEndEncodedDataType*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class RunEndEncodedDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.run_end_encoded_data_type.RunEndEncodedDataType]
+final class RunEndEncodedDataTypeGidBuilder : RunEndEncodedDataTypeGidBuilderImpl!RunEndEncodedDataTypeGidBuilder
+{
+  RunEndEncodedDataType build()
+  {
+    return new RunEndEncodedDataType(cast(void*)createGObject(RunEndEncodedDataType._getGType), Yes.Take);
   }
 }

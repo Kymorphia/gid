@@ -4,6 +4,7 @@ module gtk.gesture_multi_press;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture_single;
@@ -48,6 +49,15 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   override GestureMultiPress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.gesture_multi_press.GestureMultiPress]
+  Returns: New builder object
+  */
+  static GestureMultiPressGidBuilder builder()
+  {
+    return new GestureMultiPressGidBuilder;
   }
 
   /**
@@ -250,5 +260,18 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stopped", closure, after);
+  }
+}
+
+class GestureMultiPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.gesture_multi_press.GestureMultiPress]
+final class GestureMultiPressGidBuilder : GestureMultiPressGidBuilderImpl!GestureMultiPressGidBuilder
+{
+  GestureMultiPress build()
+  {
+    return new GestureMultiPress(cast(void*)createGObject(GestureMultiPress._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -119,6 +120,15 @@ class Scale : gtk.range.Range
     return this;
   }
 
+  /**
+  Get builder for [gtk.scale.Scale]
+  Returns: New builder object
+  */
+  static ScaleGidBuilder builder()
+  {
+    return new ScaleGidBuilder;
+  }
+
   /** */
   @property int digits()
   {
@@ -128,7 +138,7 @@ class Scale : gtk.range.Range
   /** */
   @property void digits(int propval)
   {
-    return setDigits(propval);
+    setDigits(propval);
   }
 
   /** */
@@ -140,7 +150,7 @@ class Scale : gtk.range.Range
   /** */
   @property void drawValue(bool propval)
   {
-    return setDrawValue(propval);
+    setDrawValue(propval);
   }
 
   /** */
@@ -152,7 +162,7 @@ class Scale : gtk.range.Range
   /** */
   @property void hasOrigin(bool propval)
   {
-    return setHasOrigin(propval);
+    setHasOrigin(propval);
   }
 
   /** */
@@ -164,7 +174,7 @@ class Scale : gtk.range.Range
   /** */
   @property void valuePos(gtk.types.PositionType propval)
   {
-    return setValuePos(propval);
+    setValuePos(propval);
   }
 
   /**
@@ -440,5 +450,43 @@ class Scale : gtk.range.Range
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("format-value", closure, after);
+  }
+}
+
+class ScaleGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
+{
+
+
+  /** */
+  T digits(int propval)
+  {
+    return setProperty("digits", propval);
+  }
+
+  /** */
+  T drawValue(bool propval)
+  {
+    return setProperty("draw-value", propval);
+  }
+
+  /** */
+  T hasOrigin(bool propval)
+  {
+    return setProperty("has-origin", propval);
+  }
+
+  /** */
+  T valuePos(gtk.types.PositionType propval)
+  {
+    return setProperty("value-pos", propval);
+  }
+}
+
+/// Fluent builder for [gtk.scale.Scale]
+final class ScaleGidBuilder : ScaleGidBuilderImpl!ScaleGidBuilder
+{
+  Scale build()
+  {
+    return new Scale(cast(void*)createGObject(Scale._getGType), No.Take);
   }
 }

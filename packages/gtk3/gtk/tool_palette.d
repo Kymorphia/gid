@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -123,6 +124,15 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   }
 
   /**
+  Get builder for [gtk.tool_palette.ToolPalette]
+  Returns: New builder object
+  */
+  static ToolPaletteGidBuilder builder()
+  {
+    return new ToolPaletteGidBuilder;
+  }
+
+  /**
       Get `iconSize` property.
       Returns: The size of the icons in a tool palette. When this property is set,
         it overrides the default setting.
@@ -148,7 +158,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   @property void iconSize(gtk.types.IconSize propval)
   {
-    return setIconSize(propval);
+    setIconSize(propval);
   }
 
   /**
@@ -490,5 +500,59 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   void unsetStyle()
   {
     gtk_tool_palette_unset_style(cast(GtkToolPalette*)this._cPtr);
+  }
+}
+
+class ToolPaletteGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `iconSize` property.
+      Params:
+        propval = The size of the icons in a tool palette. When this property is set,
+          it overrides the default setting.
+          
+          This should only be used for special-purpose tool palettes, normal
+          application tool palettes should respect the user preferences for the
+          size of icons.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSize(gtk.types.IconSize propval)
+  {
+    return setProperty("icon-size", propval);
+  }
+
+  /**
+      Set `iconSizeSet` property.
+      Params:
+        propval = Is true if the #GtkToolPalette:icon-size property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconSizeSet(bool propval)
+  {
+    return setProperty("icon-size-set", propval);
+  }
+
+  /**
+      Set `toolbarStyle` property.
+      Params:
+        propval = The style of items in the tool palette.
+      Returns: Builder instance for fluent chaining
+  */
+  T toolbarStyle(gtk.types.ToolbarStyle propval)
+  {
+    return setProperty("toolbar-style", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tool_palette.ToolPalette]
+final class ToolPaletteGidBuilder : ToolPaletteGidBuilderImpl!ToolPaletteGidBuilder
+{
+  ToolPalette build()
+  {
+    return new ToolPalette(cast(void*)createGObject(ToolPalette._getGType), No.Take);
   }
 }

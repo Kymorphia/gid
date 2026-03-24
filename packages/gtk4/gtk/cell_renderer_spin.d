@@ -2,6 +2,7 @@
 module gtk.cell_renderer_spin;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.c.functions;
@@ -53,6 +54,15 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
   override CellRendererSpin self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_renderer_spin.CellRendererSpin]
+  Returns: New builder object
+  */
+  static CellRendererSpinGidBuilder builder()
+  {
+    return new CellRendererSpinGidBuilder;
   }
 
   /**
@@ -123,5 +133,52 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_spin_new();
     this(_cretval, No.Take);
+  }
+}
+
+class CellRendererSpinGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTextGidBuilderImpl!T
+{
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The adjustment that holds the value of the spinbutton.
+          This must be non-null for the cell renderer to be editable.
+      Returns: Builder instance for fluent chaining
+  */
+  T adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("adjustment", propval);
+  }
+
+  /**
+      Set `climbRate` property.
+      Params:
+        propval = The acceleration rate when you hold down a button.
+      Returns: Builder instance for fluent chaining
+  */
+  T climbRate(double propval)
+  {
+    return setProperty("climb-rate", propval);
+  }
+
+  /**
+      Set `digits` property.
+      Params:
+        propval = The number of decimal places to display.
+      Returns: Builder instance for fluent chaining
+  */
+  T digits(uint propval)
+  {
+    return setProperty("digits", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_spin.CellRendererSpin]
+final class CellRendererSpinGidBuilder : CellRendererSpinGidBuilderImpl!CellRendererSpinGidBuilder
+{
+  CellRendererSpin build()
+  {
+    return new CellRendererSpin(cast(void*)createGObject(CellRendererSpin._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstglwayland.gldisplay_wayland;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstgl.gldisplay;
 import gstglwayland.c.functions;
@@ -41,6 +42,15 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   }
 
   /**
+  Get builder for [gstglwayland.gldisplay_wayland.GLDisplayWayland]
+  Returns: New builder object
+  */
+  static GLDisplayWaylandGidBuilder builder()
+  {
+    return new GLDisplayWaylandGidBuilder;
+  }
+
+  /**
       Create a new #GstGLDisplayWayland from the wayland display name.  See `wl_display_connect`()
       for details on what is a valid name.
   
@@ -69,5 +79,18 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
     _cretval = gst_gl_display_wayland_new_with_display(display);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstglwayland.gldisplay_wayland.GLDisplayWayland)(cast(GstGLDisplayWayland*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class GLDisplayWaylandGidBuilderImpl(T) : gstgl.gldisplay.GLDisplayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstglwayland.gldisplay_wayland.GLDisplayWayland]
+final class GLDisplayWaylandGidBuilder : GLDisplayWaylandGidBuilderImpl!GLDisplayWaylandGidBuilder
+{
+  GLDisplayWayland build()
+  {
+    return new GLDisplayWayland(cast(void*)createGObject(GLDisplayWayland._getGType), Yes.Take);
   }
 }

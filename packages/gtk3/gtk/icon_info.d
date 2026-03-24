@@ -12,6 +12,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -50,6 +51,15 @@ class IconInfo : gobject.object.ObjectWrap
   override IconInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.icon_info.IconInfo]
+  Returns: New builder object
+  */
+  static IconInfoGidBuilder builder()
+  {
+    return new IconInfoGidBuilder;
   }
 
   /**
@@ -572,5 +582,18 @@ class IconInfo : gobject.object.ObjectWrap
   void setRawCoordinates(bool rawCoordinates)
   {
     gtk_icon_info_set_raw_coordinates(cast(GtkIconInfo*)this._cPtr, rawCoordinates);
+  }
+}
+
+class IconInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.icon_info.IconInfo]
+final class IconInfoGidBuilder : IconInfoGidBuilderImpl!IconInfoGidBuilder
+{
+  IconInfo build()
+  {
+    return new IconInfo(cast(void*)createGObject(IconInfo._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.builder_scope;
 
 public import gtk.builder_scope_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -36,4 +37,8 @@ interface BuilderScope
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_scope_get_type != &gidSymbolNotFound ? gtk_builder_scope_get_type() : cast(GType)0;
   }
+}
+
+interface BuilderScopeGidBuilderImpl(T)
+{
 }

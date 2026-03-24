@@ -8,6 +8,7 @@ import arrow.day_millisecond;
 import arrow.primitive_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.day_time_interval_array.DayTimeIntervalArray]
+  Returns: New builder object
+  */
+  static DayTimeIntervalArrayGidBuilder builder()
+  {
+    return new DayTimeIntervalArrayGidBuilder;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
@@ -63,5 +73,18 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
     _cretval = garrow_day_time_interval_array_get_values(cast(GArrowDayTimeIntervalArray*)this._cPtr);
     auto _retval = gListToD!(arrow.day_millisecond.DayMillisecond, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class DayTimeIntervalArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.day_time_interval_array.DayTimeIntervalArray]
+final class DayTimeIntervalArrayGidBuilder : DayTimeIntervalArrayGidBuilderImpl!DayTimeIntervalArrayGidBuilder
+{
+  DayTimeIntervalArray build()
+  {
+    return new DayTimeIntervalArray(cast(void*)createGObject(DayTimeIntervalArray._getGType), Yes.Take);
   }
 }

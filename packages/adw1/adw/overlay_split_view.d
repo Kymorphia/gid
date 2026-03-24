@@ -7,6 +7,7 @@ import adw.swipeable;
 import adw.swipeable_mixin;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -181,6 +182,15 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
+  Get builder for [adw.overlay_split_view.OverlaySplitView]
+  Returns: New builder object
+  */
+  static OverlaySplitViewGidBuilder builder()
+  {
+    return new OverlaySplitViewGidBuilder;
+  }
+
+  /**
       Get `collapsed` property.
       Returns: Whether the split view is collapsed.
         
@@ -202,7 +212,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void collapsed(bool propval)
   {
-    return setCollapsed(propval);
+    setCollapsed(propval);
   }
 
   /**
@@ -221,7 +231,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void content(gtk.widget.Widget propval)
   {
-    return setContent(propval);
+    setContent(propval);
   }
 
   /**
@@ -244,7 +254,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void enableHideGesture(bool propval)
   {
-    return setEnableHideGesture(propval);
+    setEnableHideGesture(propval);
   }
 
   /**
@@ -267,7 +277,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void enableShowGesture(bool propval)
   {
-    return setEnableShowGesture(propval);
+    setEnableShowGesture(propval);
   }
 
   /**
@@ -298,7 +308,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void maxSidebarWidth(double propval)
   {
-    return setMaxSidebarWidth(propval);
+    setMaxSidebarWidth(propval);
   }
 
   /**
@@ -329,7 +339,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void minSidebarWidth(double propval)
   {
-    return setMinSidebarWidth(propval);
+    setMinSidebarWidth(propval);
   }
 
   /**
@@ -356,7 +366,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void pinSidebar(bool propval)
   {
-    return setPinSidebar(propval);
+    setPinSidebar(propval);
   }
 
   /**
@@ -375,7 +385,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void showSidebar(bool propval)
   {
-    return setShowSidebar(propval);
+    setShowSidebar(propval);
   }
 
   /**
@@ -394,7 +404,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void sidebar(gtk.widget.Widget propval)
   {
-    return setSidebar(propval);
+    setSidebar(propval);
   }
 
   /**
@@ -419,7 +429,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void sidebarPosition(gtk.types.PackType propval)
   {
-    return setSidebarPosition(propval);
+    setSidebarPosition(propval);
   }
 
   /**
@@ -452,7 +462,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void sidebarWidthFraction(double propval)
   {
-    return setSidebarWidthFraction(propval);
+    setSidebarWidthFraction(propval);
   }
 
   /**
@@ -477,7 +487,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   @property void sidebarWidthUnit(adw.types.LengthUnit propval)
   {
-    return setSidebarWidthUnit(propval);
+    setSidebarWidthUnit(propval);
   }
 
   mixin SwipeableT!();
@@ -793,5 +803,188 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   void setSidebarWidthUnit(adw.types.LengthUnit unit)
   {
     adw_overlay_split_view_set_sidebar_width_unit(cast(AdwOverlaySplitView*)this._cPtr, unit);
+  }
+}
+
+class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T
+{
+
+  mixin SwipeableGidBuilderT!();
+
+  /**
+      Set `collapsed` property.
+      Params:
+        propval = Whether the split view is collapsed.
+          
+          When collapsed, the sidebar widget is presented as an overlay above the
+          content widget, otherwise they are displayed side by side.
+      Returns: Builder instance for fluent chaining
+  */
+  T collapsed(bool propval)
+  {
+    return setProperty("collapsed", propval);
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T content(gtk.widget.Widget propval)
+  {
+    return setProperty("content", propval);
+  }
+
+  /**
+      Set `enableHideGesture` property.
+      Params:
+        propval = Whether the sidebar can be closed with a swipe gesture.
+          
+          Only touchscreen swipes are supported.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableHideGesture(bool propval)
+  {
+    return setProperty("enable-hide-gesture", propval);
+  }
+
+  /**
+      Set `enableShowGesture` property.
+      Params:
+        propval = Whether the sidebar can be opened with an edge swipe gesture.
+          
+          Only touchscreen swipes are supported.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableShowGesture(bool propval)
+  {
+    return setProperty("enable-show-gesture", propval);
+  }
+
+  /**
+      Set `maxSidebarWidth` property.
+      Params:
+        propval = The maximum sidebar width.
+          
+          Maximum width is affected by
+          `property@OverlaySplitView:sidebar-width-unit`.
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxSidebarWidth(double propval)
+  {
+    return setProperty("max-sidebar-width", propval);
+  }
+
+  /**
+      Set `minSidebarWidth` property.
+      Params:
+        propval = The minimum sidebar width.
+          
+          Minimum width is affected by
+          `property@OverlaySplitView:sidebar-width-unit`.
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+      Returns: Builder instance for fluent chaining
+  */
+  T minSidebarWidth(double propval)
+  {
+    return setProperty("min-sidebar-width", propval);
+  }
+
+  /**
+      Set `pinSidebar` property.
+      Params:
+        propval = Whether the sidebar widget is pinned.
+          
+          By default, collapsing @self automatically hides the sidebar widget, and
+          uncollapsing it shows the sidebar. If set to `TRUE`, sidebar visibility
+          never changes on its own.
+      Returns: Builder instance for fluent chaining
+  */
+  T pinSidebar(bool propval)
+  {
+    return setProperty("pin-sidebar", propval);
+  }
+
+  /**
+      Set `showSidebar` property.
+      Params:
+        propval = Whether the sidebar widget is shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T showSidebar(bool propval)
+  {
+    return setProperty("show-sidebar", propval);
+  }
+
+  /**
+      Set `sidebar` property.
+      Params:
+        propval = The sidebar widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebar(gtk.widget.Widget propval)
+  {
+    return setProperty("sidebar", propval);
+  }
+
+  /**
+      Set `sidebarPosition` property.
+      Params:
+        propval = The sidebar position.
+          
+          If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
+          if [gtk.types.PackType.End], it's displayed after the content.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarPosition(gtk.types.PackType propval)
+  {
+    return setProperty("sidebar-position", propval);
+  }
+
+  /**
+      Set `sidebarWidthFraction` property.
+      Params:
+        propval = The preferred sidebar width as a fraction of the total width.
+          
+          The preferred width is additionally limited by
+          `property@OverlaySplitView:min-sidebar-width` and
+          `property@OverlaySplitView:max-sidebar-width`.
+          
+          The sidebar widget can be allocated with larger width if its own minimum
+          width exceeds the preferred width.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarWidthFraction(double propval)
+  {
+    return setProperty("sidebar-width-fraction", propval);
+  }
+
+  /**
+      Set `sidebarWidthUnit` property.
+      Params:
+        propval = The length unit for minimum and maximum sidebar widths.
+          
+          See `property@OverlaySplitView:min-sidebar-width` and
+          `property@OverlaySplitView:max-sidebar-width`.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarWidthUnit(adw.types.LengthUnit propval)
+  {
+    return setProperty("sidebar-width-unit", propval);
+  }
+}
+
+/// Fluent builder for [adw.overlay_split_view.OverlaySplitView]
+final class OverlaySplitViewGidBuilder : OverlaySplitViewGidBuilderImpl!OverlaySplitViewGidBuilder
+{
+  OverlaySplitView build()
+  {
+    return new OverlaySplitView(cast(void*)createGObject(OverlaySplitView._getGType), No.Take);
   }
 }

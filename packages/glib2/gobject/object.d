@@ -8,6 +8,7 @@ import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.param_spec;
 import gobject.types;
 import gobject.value;
@@ -970,6 +971,19 @@ class ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("notify"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class ObjectWrapGidBuilderImpl(T) : gobject.gid_builder.GidBuilder!T
+{
+}
+
+/// Fluent builder for [gobject.object.ObjectWrap]
+final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
+{
+  ObjectWrap build()
+  {
+    return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), Yes.Take);
   }
 }
 

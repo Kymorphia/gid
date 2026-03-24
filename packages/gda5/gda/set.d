@@ -13,6 +13,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import libxml2.types;
@@ -44,6 +45,15 @@ class Set : gobject.object.ObjectWrap
   override Set self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.set.Set]
+  Returns: New builder object
+  */
+  static SetGidBuilder builder()
+  {
+    return new SetGidBuilder;
   }
 
   /** */
@@ -707,6 +717,56 @@ class Set : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("validate-set", closure, after);
+  }
+}
+
+class SetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T description(string propval)
+  {
+    return setProperty("description", propval);
+  }
+
+  /** */
+  T holders(void* propval)
+  {
+    return setProperty("holders", propval);
+  }
+
+  /** */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+
+  /** */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `validateChanges` property.
+      Params:
+        propval = Defines if the "validate-set" signal gets emitted when
+          any holder in the data set changes. This property also affects the
+          GdaHolder:validate-changes property.
+      Returns: Builder instance for fluent chaining
+  */
+  T validateChanges(bool propval)
+  {
+    return setProperty("validate-changes", propval);
+  }
+}
+
+/// Fluent builder for [gda.set.Set]
+final class SetGidBuilder : SetGidBuilderImpl!SetGidBuilder
+{
+  Set build()
+  {
+    return new Set(cast(void*)createGObject(Set._getGType), Yes.Take);
   }
 }
 

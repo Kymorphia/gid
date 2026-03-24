@@ -4,6 +4,7 @@ module gtk.event_box;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -44,6 +45,15 @@ class EventBox : gtk.bin.Bin
     return this;
   }
 
+  /**
+  Get builder for [gtk.event_box.EventBox]
+  Returns: New builder object
+  */
+  static EventBoxGidBuilder builder()
+  {
+    return new EventBoxGidBuilder;
+  }
+
   /** */
   @property bool aboveChild()
   {
@@ -53,7 +63,7 @@ class EventBox : gtk.bin.Bin
   /** */
   @property void aboveChild(bool propval)
   {
-    return setAboveChild(propval);
+    setAboveChild(propval);
   }
 
   /** */
@@ -65,7 +75,7 @@ class EventBox : gtk.bin.Bin
   /** */
   @property void visibleWindow(bool propval)
   {
-    return setVisibleWindow(propval);
+    setVisibleWindow(propval);
   }
 
   /**
@@ -163,5 +173,31 @@ class EventBox : gtk.bin.Bin
   void setVisibleWindow(bool visibleWindow)
   {
     gtk_event_box_set_visible_window(cast(GtkEventBox*)this._cPtr, visibleWindow);
+  }
+}
+
+class EventBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /** */
+  T aboveChild(bool propval)
+  {
+    return setProperty("above-child", propval);
+  }
+
+  /** */
+  T visibleWindow(bool propval)
+  {
+    return setProperty("visible-window", propval);
+  }
+}
+
+/// Fluent builder for [gtk.event_box.EventBox]
+final class EventBoxGidBuilder : EventBoxGidBuilderImpl!EventBoxGidBuilder
+{
+  EventBox build()
+  {
+    return new EventBox(cast(void*)createGObject(EventBox._getGType), No.Take);
   }
 }

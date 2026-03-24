@@ -4,6 +4,7 @@ module gtk.style_provider_mixin;
 public import gtk.style_provider_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -58,4 +59,8 @@ template StyleProviderT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("gtk-private-changed", closure, after);
   }
+}
+
+template StyleProviderGidBuilderT()
+{
 }

@@ -3,6 +3,7 @@ module gst.toc_setter_mixin;
 
 public import gst.toc_setter_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gst.c.functions;
 public import gst.c.types;
 public import gst.toc;
@@ -61,4 +62,8 @@ template TocSetterT()
   {
     gst_toc_setter_set_toc(cast(GstTocSetter*)this._cPtr, toc ? cast(GstToc*)toc._cPtr(No.Dup) : null);
   }
+}
+
+template TocSetterGidBuilderT()
+{
 }

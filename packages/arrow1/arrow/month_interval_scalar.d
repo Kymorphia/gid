@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class MonthIntervalScalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class MonthIntervalScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.month_interval_scalar.MonthIntervalScalar]
+  Returns: New builder object
+  */
+  static MonthIntervalScalarGidBuilder builder()
+  {
+    return new MonthIntervalScalarGidBuilder;
+  }
+
   /** */
   this(int value)
   {
@@ -50,5 +60,18 @@ class MonthIntervalScalar : arrow.scalar.Scalar
     int _retval;
     _retval = garrow_month_interval_scalar_get_value(cast(GArrowMonthIntervalScalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class MonthIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_interval_scalar.MonthIntervalScalar]
+final class MonthIntervalScalarGidBuilder : MonthIntervalScalarGidBuilderImpl!MonthIntervalScalarGidBuilder
+{
+  MonthIntervalScalar build()
+  {
+    return new MonthIntervalScalar(cast(void*)createGObject(MonthIntervalScalar._getGType), Yes.Take);
   }
 }

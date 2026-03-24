@@ -8,6 +8,7 @@ import arrow.map_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   override MapArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.map_array_builder.MapArrayBuilder]
+  Returns: New builder object
+  */
+  static MapArrayBuilderGidBuilder builder()
+  {
+    return new MapArrayBuilderGidBuilder;
   }
 
   /** */
@@ -119,5 +129,18 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     _cretval = garrow_map_array_builder_get_value_builder(cast(GArrowMapArrayBuilder*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class MapArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.map_array_builder.MapArrayBuilder]
+final class MapArrayBuilderGidBuilder : MapArrayBuilderGidBuilderImpl!MapArrayBuilderGidBuilder
+{
+  MapArrayBuilder build()
+  {
+    return new MapArrayBuilder(cast(void*)createGObject(MapArrayBuilder._getGType), Yes.Take);
   }
 }

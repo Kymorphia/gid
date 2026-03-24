@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.entry_row;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -67,6 +68,15 @@ class PasswordEntryRow : adw.entry_row.EntryRow
   }
 
   /**
+  Get builder for [adw.password_entry_row.PasswordEntryRow]
+  Returns: New builder object
+  */
+  static PasswordEntryRowGidBuilder builder()
+  {
+    return new PasswordEntryRowGidBuilder;
+  }
+
+  /**
       Creates a new [adw.password_entry_row.PasswordEntryRow].
       Returns: the newly created [adw.password_entry_row.PasswordEntryRow]
   */
@@ -75,5 +85,19 @@ class PasswordEntryRow : adw.entry_row.EntryRow
     GtkWidget* _cretval;
     _cretval = adw_password_entry_row_new();
     this(_cretval, No.Take);
+  }
+}
+
+class PasswordEntryRowGidBuilderImpl(T) : adw.entry_row.EntryRowGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [adw.password_entry_row.PasswordEntryRow]
+final class PasswordEntryRowGidBuilder : PasswordEntryRowGidBuilderImpl!PasswordEntryRowGidBuilder
+{
+  PasswordEntryRow build()
+  {
+    return new PasswordEntryRow(cast(void*)createGObject(PasswordEntryRow._getGType), No.Take);
   }
 }

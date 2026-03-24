@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.selection;
 import atk.selection_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -40,5 +41,29 @@ class FlowBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
     return this;
   }
 
+  /**
+  Get builder for [gtk.flow_box_accessible.FlowBoxAccessible]
+  Returns: New builder object
+  */
+  static FlowBoxAccessibleGidBuilder builder()
+  {
+    return new FlowBoxAccessibleGidBuilder;
+  }
+
   mixin SelectionT!();
+}
+
+class FlowBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
+{
+
+  mixin SelectionGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.flow_box_accessible.FlowBoxAccessible]
+final class FlowBoxAccessibleGidBuilder : FlowBoxAccessibleGidBuilderImpl!FlowBoxAccessibleGidBuilder
+{
+  FlowBoxAccessible build()
+  {
+    return new FlowBoxAccessible(cast(void*)createGObject(FlowBoxAccessible._getGType), No.Take);
+  }
 }

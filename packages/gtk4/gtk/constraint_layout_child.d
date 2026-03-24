@@ -2,6 +2,7 @@
 module gtk.constraint_layout_child;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_child;
@@ -36,5 +37,27 @@ class ConstraintLayoutChild : gtk.layout_child.LayoutChild
   override ConstraintLayoutChild self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.constraint_layout_child.ConstraintLayoutChild]
+  Returns: New builder object
+  */
+  static ConstraintLayoutChildGidBuilder builder()
+  {
+    return new ConstraintLayoutChildGidBuilder;
+  }
+}
+
+class ConstraintLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.constraint_layout_child.ConstraintLayoutChild]
+final class ConstraintLayoutChildGidBuilder : ConstraintLayoutChildGidBuilderImpl!ConstraintLayoutChildGidBuilder
+{
+  ConstraintLayoutChild build()
+  {
+    return new ConstraintLayoutChild(cast(void*)createGObject(ConstraintLayoutChild._getGType), No.Take);
   }
 }

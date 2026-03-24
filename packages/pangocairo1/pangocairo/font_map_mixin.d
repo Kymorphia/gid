@@ -4,6 +4,7 @@ module pangocairo.font_map_mixin;
 public import pangocairo.font_map_iface_proxy;
 public import cairo.types;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import pango.font_map;
 public import pangocairo.c.functions;
@@ -86,4 +87,8 @@ template FontMapT()
   {
     pango_cairo_font_map_set_resolution(cast(PangoCairoFontMap*)this._cPtr, dpi);
   }
+}
+
+template FontMapGidBuilderT()
+{
 }

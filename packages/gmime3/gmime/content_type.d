@@ -8,6 +8,7 @@ import gmime.format_options;
 import gmime.param_list;
 import gmime.parser_options;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -39,6 +40,15 @@ class ContentType : gobject.object.ObjectWrap
   override ContentType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.content_type.ContentType]
+  Returns: New builder object
+  */
+  static ContentTypeGidBuilder builder()
+  {
+    return new ContentTypeGidBuilder;
   }
 
   /**
@@ -216,5 +226,18 @@ class ContentType : gobject.object.ObjectWrap
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
     g_mime_content_type_set_parameter(cast(GMimeContentType*)this._cPtr, _name, _value);
+  }
+}
+
+class ContentTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.content_type.ContentType]
+final class ContentTypeGidBuilder : ContentTypeGidBuilderImpl!ContentTypeGidBuilder
+{
+  ContentType build()
+  {
+    return new ContentType(cast(void*)createGObject(ContentType._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.font_button;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -67,6 +68,15 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   }
 
   /**
+  Get builder for [gtk.font_button.FontButton]
+  Returns: New builder object
+  */
+  static FontButtonGidBuilder builder()
+  {
+    return new FontButtonGidBuilder;
+  }
+
+  /**
       Get `modal` property.
       Returns: Whether the font chooser dialog should be modal.
   */
@@ -82,7 +92,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -101,7 +111,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -120,7 +130,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   @property void useFont(bool propval)
   {
-    return setUseFont(propval);
+    setUseFont(propval);
   }
 
   /**
@@ -139,7 +149,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   @property void useSize(bool propval)
   {
-    return setUseSize(propval);
+    setUseSize(propval);
   }
 
   mixin FontChooserT!();
@@ -367,5 +377,64 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("font-set", closure, after);
+  }
+}
+
+class FontButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.font_chooser.FontChooserGidBuilderImpl!T
+{
+
+  mixin FontChooserGidBuilderT!();
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the font chooser dialog should be modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the font chooser dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `useFont` property.
+      Params:
+        propval = Whether the buttons label will be drawn in the selected font.
+      Returns: Builder instance for fluent chaining
+  */
+  T useFont(bool propval)
+  {
+    return setProperty("use-font", propval);
+  }
+
+  /**
+      Set `useSize` property.
+      Params:
+        propval = Whether the buttons label will use the selected font size.
+      Returns: Builder instance for fluent chaining
+  */
+  T useSize(bool propval)
+  {
+    return setProperty("use-size", propval);
+  }
+}
+
+/// Fluent builder for [gtk.font_button.FontButton]
+final class FontButtonGidBuilder : FontButtonGidBuilderImpl!FontButtonGidBuilder
+{
+  FontButton build()
+  {
+    return new FontButton(cast(void*)createGObject(FontButton._getGType), No.Take);
   }
 }

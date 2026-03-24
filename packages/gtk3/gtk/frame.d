@@ -4,6 +4,7 @@ module gtk.frame;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -85,6 +86,15 @@ class Frame : gtk.bin.Bin
     return this;
   }
 
+  /**
+  Get builder for [gtk.frame.Frame]
+  Returns: New builder object
+  */
+  static FrameGidBuilder builder()
+  {
+    return new FrameGidBuilder;
+  }
+
   /** */
   @property string label()
   {
@@ -94,7 +104,7 @@ class Frame : gtk.bin.Bin
   /** */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /** */
@@ -106,7 +116,7 @@ class Frame : gtk.bin.Bin
   /** */
   @property void labelWidget(gtk.widget.Widget propval)
   {
-    return setLabelWidget(propval);
+    setLabelWidget(propval);
   }
 
   /** */
@@ -142,7 +152,7 @@ class Frame : gtk.bin.Bin
   /** */
   @property void shadowType(gtk.types.ShadowType propval)
   {
-    return setShadowType(propval);
+    setShadowType(propval);
   }
 
   /**
@@ -276,5 +286,49 @@ class Frame : gtk.bin.Bin
   void setShadowType(gtk.types.ShadowType type)
   {
     gtk_frame_set_shadow_type(cast(GtkFrame*)this._cPtr, type);
+  }
+}
+
+class FrameGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /** */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /** */
+  T labelWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("label-widget", propval);
+  }
+
+  /** */
+  T labelXalign(float propval)
+  {
+    return setProperty("label-xalign", propval);
+  }
+
+  /** */
+  T labelYalign(float propval)
+  {
+    return setProperty("label-yalign", propval);
+  }
+
+  /** */
+  T shadowType(gtk.types.ShadowType propval)
+  {
+    return setProperty("shadow-type", propval);
+  }
+}
+
+/// Fluent builder for [gtk.frame.Frame]
+final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
+{
+  Frame build()
+  {
+    return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }
 }

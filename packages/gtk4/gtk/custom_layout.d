@@ -2,6 +2,7 @@
 module gtk.custom_layout;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -43,6 +44,15 @@ class CustomLayout : gtk.layout_manager.LayoutManager
   override CustomLayout self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.custom_layout.CustomLayout]
+  Returns: New builder object
+  */
+  static CustomLayoutGidBuilder builder()
+  {
+    return new CustomLayoutGidBuilder;
   }
 
   /**
@@ -98,5 +108,18 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     _static_measure = null;
     _static_allocate = null;
     this(_cretval, Yes.Take);
+  }
+}
+
+class CustomLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.custom_layout.CustomLayout]
+final class CustomLayoutGidBuilder : CustomLayoutGidBuilderImpl!CustomLayoutGidBuilder
+{
+  CustomLayout build()
+  {
+    return new CustomLayout(cast(void*)createGObject(CustomLayout._getGType), Yes.Take);
   }
 }

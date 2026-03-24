@@ -3,6 +3,7 @@ module gtk.text_tag_table;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -59,6 +60,15 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   override TextTagTable self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.text_tag_table.TextTagTable]
+  Returns: New builder object
+  */
+  static TextTagTableGidBuilder builder()
+  {
+    return new TextTagTableGidBuilder;
   }
 
   mixin BuildableT!();
@@ -289,5 +299,20 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tag-removed", closure, after);
+  }
+}
+
+class TextTagTableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.text_tag_table.TextTagTable]
+final class TextTagTableGidBuilder : TextTagTableGidBuilderImpl!TextTagTableGidBuilder
+{
+  TextTagTable build()
+  {
+    return new TextTagTable(cast(void*)createGObject(TextTagTable._getGType), Yes.Take);
   }
 }

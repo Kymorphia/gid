@@ -8,6 +8,7 @@ public import gio.c.types;
 public import gio.dbus_interface_info;
 public import gio.dbus_object;
 public import gio.types;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -58,4 +59,8 @@ template DBusInterfaceT()
   {
     g_dbus_interface_set_object(cast(GDBusInterface*)this._cPtr, object ? cast(GDBusObject*)(cast(gobject.object.ObjectWrap)object)._cPtr(No.Dup) : null);
   }
+}
+
+template DBusInterfaceGidBuilderT()
+{
 }

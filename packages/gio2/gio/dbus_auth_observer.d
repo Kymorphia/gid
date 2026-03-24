@@ -8,6 +8,7 @@ import gio.credentials;
 import gio.iostream;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -101,6 +102,15 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   override DBusAuthObserver self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.dbus_auth_observer.DBusAuthObserver]
+  Returns: New builder object
+  */
+  static DBusAuthObserverGidBuilder builder()
+  {
+    return new DBusAuthObserverGidBuilder;
   }
 
   /**
@@ -241,5 +251,18 @@ class DBusAuthObserver : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize-authenticated-peer", closure, after);
+  }
+}
+
+class DBusAuthObserverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.dbus_auth_observer.DBusAuthObserver]
+final class DBusAuthObserverGidBuilder : DBusAuthObserverGidBuilderImpl!DBusAuthObserverGidBuilder
+{
+  DBusAuthObserver build()
+  {
+    return new DBusAuthObserver(cast(void*)createGObject(DBusAuthObserver._getGType), Yes.Take);
   }
 }

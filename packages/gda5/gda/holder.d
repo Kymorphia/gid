@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -43,6 +44,15 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   override Holder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.holder.Holder]
+  Returns: New builder object
+  */
+  static HolderGidBuilder builder()
+  {
+    return new HolderGidBuilder;
   }
 
   /** */
@@ -114,7 +124,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   /** */
   @property void notNull(bool propval)
   {
-    return setNotNull(propval);
+    setNotNull(propval);
   }
 
   /** */
@@ -782,6 +792,87 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("validate-change", closure, after);
+  }
+}
+
+class HolderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.lockable.LockableGidBuilderImpl!T
+{
+
+  mixin LockableGidBuilderT!();
+
+  /** */
+  T description(string propval)
+  {
+    return setProperty("description", propval);
+  }
+
+  /** */
+  T fullBind(gda.holder.Holder propval)
+  {
+    return setProperty("full-bind", propval);
+  }
+
+  /** */
+  T gType(gobject.types.GType propval)
+  {
+    return setProperty("g-type", propval);
+  }
+
+  /** */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+
+  /** */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /** */
+  T notNull(bool propval)
+  {
+    return setProperty("not-null", propval);
+  }
+
+  /** */
+  T simpleBind(gda.holder.Holder propval)
+  {
+    return setProperty("simple-bind", propval);
+  }
+
+  /** */
+  T sourceColumn(int propval)
+  {
+    return setProperty("source-column", propval);
+  }
+
+  /** */
+  T sourceModel(gda.data_model.DataModel propval)
+  {
+    return setProperty("source-model", propval);
+  }
+
+  /**
+      Set `validateChanges` property.
+      Params:
+        propval = Defines if the "validate-change" signal gets emitted when
+          the holder's value changes.
+      Returns: Builder instance for fluent chaining
+  */
+  T validateChanges(bool propval)
+  {
+    return setProperty("validate-changes", propval);
+  }
+}
+
+/// Fluent builder for [gda.holder.Holder]
+final class HolderGidBuilder : HolderGidBuilderImpl!HolderGidBuilder
+{
+  Holder build()
+  {
+    return new Holder(cast(void*)createGObject(Holder._getGType), Yes.Take);
   }
 }
 

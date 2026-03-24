@@ -6,6 +6,7 @@ import gdk.rectangle;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -78,6 +79,15 @@ class Tooltip : gobject.object.ObjectWrap
   override Tooltip self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.tooltip.Tooltip]
+  Returns: New builder object
+  */
+  static TooltipGidBuilder builder()
+  {
+    return new TooltipGidBuilder;
   }
 
   /**
@@ -211,5 +221,18 @@ class Tooltip : gobject.object.ObjectWrap
   void setTipArea(gdk.rectangle.Rectangle rect)
   {
     gtk_tooltip_set_tip_area(cast(GtkTooltip*)this._cPtr, cast(const(GdkRectangle)*)&rect);
+  }
+}
+
+class TooltipGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.tooltip.Tooltip]
+final class TooltipGidBuilder : TooltipGidBuilderImpl!TooltipGidBuilder
+{
+  Tooltip build()
+  {
+    return new Tooltip(cast(void*)createGObject(Tooltip._getGType), No.Take);
   }
 }

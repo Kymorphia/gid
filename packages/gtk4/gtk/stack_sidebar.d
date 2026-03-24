@@ -2,6 +2,7 @@
 module gtk.stack_sidebar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -61,6 +62,15 @@ class StackSidebar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.stack_sidebar.StackSidebar]
+  Returns: New builder object
+  */
+  static StackSidebarGidBuilder builder()
+  {
+    return new StackSidebarGidBuilder;
+  }
+
+  /**
       Get `stack` property.
       Returns: The stack.
   */
@@ -76,7 +86,7 @@ class StackSidebar : gtk.widget.Widget
   */
   @property void stack(gtk.stack.Stack propval)
   {
-    return setStack(propval);
+    setStack(propval);
   }
 
   /**
@@ -115,5 +125,30 @@ class StackSidebar : gtk.widget.Widget
   void setStack(gtk.stack.Stack stack)
   {
     gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
+  }
+}
+
+class StackSidebarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack.
+      Returns: Builder instance for fluent chaining
+  */
+  T stack(gtk.stack.Stack propval)
+  {
+    return setProperty("stack", propval);
+  }
+}
+
+/// Fluent builder for [gtk.stack_sidebar.StackSidebar]
+final class StackSidebarGidBuilder : StackSidebarGidBuilderImpl!StackSidebarGidBuilder
+{
+  StackSidebar build()
+  {
+    return new StackSidebar(cast(void*)createGObject(StackSidebar._getGType), No.Take);
   }
 }

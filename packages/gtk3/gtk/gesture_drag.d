@@ -3,6 +3,7 @@ module gtk.gesture_drag;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture_single;
@@ -43,6 +44,15 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   override GestureDrag self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.gesture_drag.GestureDrag]
+  Returns: New builder object
+  */
+  static GestureDragGidBuilder builder()
+  {
+    return new GestureDragGidBuilder;
   }
 
   /**
@@ -238,5 +248,18 @@ class GestureDrag : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drag-update", closure, after);
+  }
+}
+
+class GestureDragGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.gesture_drag.GestureDrag]
+final class GestureDragGidBuilder : GestureDragGidBuilderImpl!GestureDragGidBuilder
+{
+  GestureDrag build()
+  {
+    return new GestureDrag(cast(void*)createGObject(GestureDrag._getGType), Yes.Take);
   }
 }

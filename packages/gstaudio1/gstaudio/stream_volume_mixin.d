@@ -3,6 +3,7 @@ module gstaudio.stream_volume_mixin;
 
 public import gstaudio.stream_volume_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gstaudio.c.functions;
 public import gstaudio.c.types;
@@ -38,7 +39,7 @@ template StreamVolumeT()
   /** */
   @property void mute(bool propval)
   {
-    return setMute(propval);
+    setMute(propval);
   }
 
   /** */
@@ -80,5 +81,21 @@ template StreamVolumeT()
   override void setVolume(gstaudio.types.StreamVolumeFormat format, double val)
   {
     gst_stream_volume_set_volume(cast(GstStreamVolume*)this._cPtr, format, val);
+  }
+}
+
+template StreamVolumeGidBuilderT()
+{
+
+  /** */
+  T mute(bool propval)
+  {
+    return setProperty("mute", propval);
+  }
+
+  /** */
+  T volume(double propval)
+  {
+    return setProperty("volume", propval);
   }
 }

@@ -7,6 +7,7 @@ import adw.preferences_row;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -86,6 +87,15 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   }
 
   /**
+  Get builder for [adw.entry_row.EntryRow]
+  Returns: New builder object
+  */
+  static EntryRowGidBuilder builder()
+  {
+    return new EntryRowGidBuilder;
+  }
+
+  /**
       Get `activatesDefault` property.
       Returns: Whether activating the embedded entry can activate the default widget.
   */
@@ -101,7 +111,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   @property void activatesDefault(bool propval)
   {
-    return setActivatesDefault(propval);
+    setActivatesDefault(propval);
   }
 
   /**
@@ -126,7 +136,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
   }
 
   /**
@@ -149,7 +159,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   @property void enableEmojiCompletion(bool propval)
   {
-    return setEnableEmojiCompletion(propval);
+    setEnableEmojiCompletion(propval);
   }
 
   /**
@@ -176,7 +186,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
-    return setInputHints(propval);
+    setInputHints(propval);
   }
 
   /**
@@ -199,7 +209,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
-    return setInputPurpose(propval);
+    setInputPurpose(propval);
   }
 
   /**
@@ -234,7 +244,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   @property void showApplyButton(bool propval)
   {
-    return setShowApplyButton(propval);
+    setShowApplyButton(propval);
   }
 
   /**
@@ -544,5 +554,105 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("entry-activated", closure, after);
+  }
+}
+
+class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
+{
+
+  mixin EditableGidBuilderT!();
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether activating the embedded entry can activate the default widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatesDefault(bool propval)
+  {
+    return setProperty("activates-default", propval);
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the embedded entry.
+          
+          The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
+          the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(pango.attr_list.AttrList propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `enableEmojiCompletion` property.
+      Params:
+        propval = Whether to suggest emoji replacements on the entry row.
+          
+          Emoji replacement is done with :-delimited names, like `:heart:`.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableEmojiCompletion(bool propval)
+  {
+    return setProperty("enable-emoji-completion", propval);
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional input hints for the entry row.
+          
+          Input hints allow input methods to fine-tune their behavior.
+          
+          See also: `property@Adw.EntryRow:input-purpose`
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(gtk.types.InputHints propval)
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The input purpose of the entry row.
+          
+          The input purpose can be used by input methods to adjust their behavior.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setProperty("input-purpose", propval);
+  }
+
+  /**
+      Set `showApplyButton` property.
+      Params:
+        propval = Whether to show the apply button.
+          
+          When set to `TRUE`, typing text in the entry will reveal an apply button.
+          Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
+          emit the `signal@EntryRow::apply` signal.
+          
+          This is useful if changing the entry contents can trigger an expensive
+          operation, e.g. network activity, to avoid triggering it after typing every
+          character.
+      Returns: Builder instance for fluent chaining
+  */
+  T showApplyButton(bool propval)
+  {
+    return setProperty("show-apply-button", propval);
+  }
+}
+
+/// Fluent builder for [adw.entry_row.EntryRow]
+final class EntryRowGidBuilder : EntryRowGidBuilderImpl!EntryRowGidBuilder
+{
+  EntryRow build()
+  {
+    return new EntryRow(cast(void*)createGObject(EntryRow._getGType), No.Take);
   }
 }

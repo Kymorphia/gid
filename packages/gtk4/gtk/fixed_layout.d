@@ -2,6 +2,7 @@
 module gtk.fixed_layout;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -71,6 +72,15 @@ class FixedLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
+  Get builder for [gtk.fixed_layout.FixedLayout]
+  Returns: New builder object
+  */
+  static FixedLayoutGidBuilder builder()
+  {
+    return new FixedLayoutGidBuilder;
+  }
+
+  /**
       Creates a new [gtk.fixed_layout.FixedLayout].
       Returns: the newly created [gtk.fixed_layout.FixedLayout]
   */
@@ -79,5 +89,18 @@ class FixedLayout : gtk.layout_manager.LayoutManager
     GtkLayoutManager* _cretval;
     _cretval = gtk_fixed_layout_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class FixedLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.fixed_layout.FixedLayout]
+final class FixedLayoutGidBuilder : FixedLayoutGidBuilderImpl!FixedLayoutGidBuilder
+{
+  FixedLayout build()
+  {
+    return new FixedLayout(cast(void*)createGObject(FixedLayout._getGType), Yes.Take);
   }
 }

@@ -13,6 +13,7 @@ public import gio.types;
 public import gio.volume;
 public import glib.error;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -670,4 +671,8 @@ template DriveT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stop-button", closure, after);
   }
+}
+
+template DriveGidBuilderT()
+{
 }

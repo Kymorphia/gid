@@ -2,6 +2,7 @@
 module gtk.tree_store;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -74,6 +75,15 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   override TreeStore self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.tree_store.TreeStore]
+  Returns: New builder object
+  */
+  static TreeStoreGidBuilder builder()
+  {
+    return new TreeStoreGidBuilder;
   }
 
   mixin BuildableT!();
@@ -413,5 +423,24 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   void swap(gtk.tree_iter.TreeIter a, gtk.tree_iter.TreeIter b)
   {
     gtk_tree_store_swap(cast(GtkTreeStore*)this._cPtr, a ? cast(GtkTreeIter*)a._cPtr(No.Dup) : null, b ? cast(GtkTreeIter*)b._cPtr(No.Dup) : null);
+  }
+}
+
+class TreeStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.tree_drag_dest.TreeDragDestGidBuilderImpl!T, gtk.tree_drag_source.TreeDragSourceGidBuilderImpl!T, gtk.tree_model.TreeModelGidBuilderImpl!T, gtk.tree_sortable.TreeSortableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+  mixin TreeDragDestGidBuilderT!();
+  mixin TreeDragSourceGidBuilderT!();
+  mixin TreeModelGidBuilderT!();
+  mixin TreeSortableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.tree_store.TreeStore]
+final class TreeStoreGidBuilder : TreeStoreGidBuilderImpl!TreeStoreGidBuilder
+{
+  TreeStore build()
+  {
+    return new TreeStore(cast(void*)createGObject(TreeStore._getGType), Yes.Take);
   }
 }

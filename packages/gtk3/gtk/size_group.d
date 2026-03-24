@@ -2,6 +2,7 @@
 module gtk.size_group;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -107,6 +108,15 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
+  Get builder for [gtk.size_group.SizeGroup]
+  Returns: New builder object
+  */
+  static SizeGroupGidBuilder builder()
+  {
+    return new SizeGroupGidBuilder;
+  }
+
+  /**
       Get `ignoreHidden` property.
       Returns: If true, unmapped widgets are ignored when determining
         the size of the group.
@@ -138,7 +148,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void ignoreHidden(bool propval)
   {
-    return setIgnoreHidden(propval);
+    setIgnoreHidden(propval);
   }
 
   /** */
@@ -150,7 +160,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /** */
   @property void mode(gtk.types.SizeGroupMode propval)
   {
-    return setMode(propval);
+    setMode(propval);
   }
 
   mixin BuildableT!();
@@ -275,5 +285,45 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   void setMode(gtk.types.SizeGroupMode mode)
   {
     gtk_size_group_set_mode(cast(GtkSizeGroup*)this._cPtr, mode);
+  }
+}
+
+class SizeGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `ignoreHidden` property.
+      Params:
+        propval = If true, unmapped widgets are ignored when determining
+          the size of the group.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Measuring the size of hidden widgets has not worked
+            reliably for a long time. In most cases, they will report a size
+            of 0 nowadays, and thus, their size will not affect the other
+            size group members. In effect, size groups will always operate
+            as if this property was true. Use a #GtkStack instead to hide
+            widgets while still having their size taken into account.
+  */
+  T ignoreHidden(bool propval)
+  {
+    return setProperty("ignore-hidden", propval);
+  }
+
+  /** */
+  T mode(gtk.types.SizeGroupMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.size_group.SizeGroup]
+final class SizeGroupGidBuilder : SizeGroupGidBuilderImpl!SizeGroupGidBuilder
+{
+  SizeGroup build()
+  {
+    return new SizeGroup(cast(void*)createGObject(SizeGroup._getGType), Yes.Take);
   }
 }

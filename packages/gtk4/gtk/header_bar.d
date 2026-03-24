@@ -2,6 +2,7 @@
 module gtk.header_bar;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -116,6 +117,15 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.header_bar.HeaderBar]
+  Returns: New builder object
+  */
+  static HeaderBarGidBuilder builder()
+  {
+    return new HeaderBarGidBuilder;
+  }
+
+  /**
       Get `decorationLayout` property.
       Returns: The decoration layout for buttons.
         
@@ -137,7 +147,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void decorationLayout(string propval)
   {
-    return setDecorationLayout(propval);
+    setDecorationLayout(propval);
   }
 
   /**
@@ -166,7 +176,7 @@ class HeaderBar : gtk.widget.Widget
   */
   @property void showTitleButtons(bool propval)
   {
-    return setShowTitleButtons(propval);
+    setShowTitleButtons(propval);
   }
 
   /** */
@@ -178,7 +188,7 @@ class HeaderBar : gtk.widget.Widget
   /** */
   @property void titleWidget(gtk.widget.Widget propval)
   {
-    return setTitleWidget(propval);
+    setTitleWidget(propval);
   }
 
   /**
@@ -329,5 +339,55 @@ class HeaderBar : gtk.widget.Widget
   void setTitleWidget(gtk.widget.Widget titleWidget = null)
   {
     gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
+  }
+}
+
+class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `decorationLayout` property.
+      Params:
+        propval = The decoration layout for buttons.
+          
+          If this property is not set, the
+          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorationLayout(string propval)
+  {
+    return setProperty("decoration-layout", propval);
+  }
+
+  /**
+      Set `showTitleButtons` property.
+      Params:
+        propval = Whether to show title buttons like close, minimize, maximize.
+          
+          Which buttons are actually shown and where is determined
+          by the `property@Gtk.HeaderBar:decoration-layout` property,
+          and by the state of the window (e.g. a close button will not
+          be shown if the window can't be closed).
+      Returns: Builder instance for fluent chaining
+  */
+  T showTitleButtons(bool propval)
+  {
+    return setProperty("show-title-buttons", propval);
+  }
+
+  /** */
+  T titleWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("title-widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.header_bar.HeaderBar]
+final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
+{
+  HeaderBar build()
+  {
+    return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);
   }
 }

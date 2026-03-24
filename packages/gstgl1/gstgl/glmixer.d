@@ -2,6 +2,7 @@
 module gstgl.glmixer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gstgl.c.functions;
@@ -41,6 +42,15 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
     return this;
   }
 
+  /**
+  Get builder for [gstgl.glmixer.GLMixer]
+  Returns: New builder object
+  */
+  static GLMixerGidBuilder builder()
+  {
+    return new GLMixerGidBuilder;
+  }
+
   /** */
   gstgl.glframebuffer.GLFramebuffer getFramebuffer()
   {
@@ -64,5 +74,18 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
     bool _retval;
     _retval = cast(bool)gst_gl_mixer_process_textures(cast(GstGLMixer*)this._cPtr, outbuf ? cast(GstBuffer*)outbuf._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class GLMixerGidBuilderImpl(T) : gstgl.glbase_mixer.GLBaseMixerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glmixer.GLMixer]
+final class GLMixerGidBuilder : GLMixerGidBuilderImpl!GLMixerGidBuilder
+{
+  GLMixer build()
+  {
+    return new GLMixer(cast(void*)createGObject(GLMixer._getGType), No.Take);
   }
 }

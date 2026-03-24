@@ -10,6 +10,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
@@ -38,6 +39,15 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
   override Decimal32ArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.decimal32_array_builder.Decimal32ArrayBuilder]
+  Returns: New builder object
+  */
+  static Decimal32ArrayBuilderGidBuilder builder()
+  {
+    return new Decimal32ArrayBuilderGidBuilder;
   }
 
   /** */
@@ -98,5 +108,18 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class Decimal32ArrayBuilderGidBuilderImpl(T) : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal32_array_builder.Decimal32ArrayBuilder]
+final class Decimal32ArrayBuilderGidBuilder : Decimal32ArrayBuilderGidBuilderImpl!Decimal32ArrayBuilderGidBuilder
+{
+  Decimal32ArrayBuilder build()
+  {
+    return new Decimal32ArrayBuilder(cast(void*)createGObject(Decimal32ArrayBuilder._getGType), Yes.Take);
   }
 }

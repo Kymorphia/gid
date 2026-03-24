@@ -8,6 +8,7 @@ import gio.socket_connectable;
 import gio.socket_connectable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -42,6 +43,15 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   override SocketAddress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.socket_address.SocketAddress]
+  Returns: New builder object
+  */
+  static SocketAddressGidBuilder builder()
+  {
+    return new SocketAddressGidBuilder;
   }
 
   /**
@@ -123,5 +133,20 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class SocketAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.socket_connectable.SocketConnectableGidBuilderImpl!T
+{
+
+  mixin SocketConnectableGidBuilderT!();
+}
+
+/// Fluent builder for [gio.socket_address.SocketAddress]
+final class SocketAddressGidBuilder : SocketAddressGidBuilderImpl!SocketAddressGidBuilder
+{
+  SocketAddress build()
+  {
+    return new SocketAddress(cast(void*)createGObject(SocketAddress._getGType), No.Take);
   }
 }

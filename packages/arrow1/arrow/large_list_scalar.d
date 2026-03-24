@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.large_list_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class LargeListScalar : arrow.base_list_scalar.BaseListScalar
@@ -37,11 +38,33 @@ class LargeListScalar : arrow.base_list_scalar.BaseListScalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.large_list_scalar.LargeListScalar]
+  Returns: New builder object
+  */
+  static LargeListScalarGidBuilder builder()
+  {
+    return new LargeListScalarGidBuilder;
+  }
+
   /** */
   this(arrow.large_list_array.LargeListArray value)
   {
     GArrowLargeListScalar* _cretval;
     _cretval = garrow_large_list_scalar_new(value ? cast(GArrowLargeListArray*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class LargeListScalarGidBuilderImpl(T) : arrow.base_list_scalar.BaseListScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.large_list_scalar.LargeListScalar]
+final class LargeListScalarGidBuilder : LargeListScalarGidBuilderImpl!LargeListScalarGidBuilder
+{
+  LargeListScalar build()
+  {
+    return new LargeListScalar(cast(void*)createGObject(LargeListScalar._getGType), Yes.Take);
   }
 }

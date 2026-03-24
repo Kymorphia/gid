@@ -6,6 +6,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_iter;
 import gtksource.buffer;
@@ -45,6 +46,24 @@ class SearchContext : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtksource.search_context.SearchContext]
+  Returns: New builder object
+  */
+  static SearchContextGidBuilder builder()
+  {
+    return new SearchContextGidBuilder;
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The #GtkSourceBuffer associated to the search context.
+  */
+  @property gtksource.buffer.Buffer buffer()
+  {
+    return getBuffer();
+  }
+
+  /**
       Get `highlight` property.
       Returns: Highlight the search occurrences.
   */
@@ -60,7 +79,7 @@ class SearchContext : gobject.object.ObjectWrap
   */
   @property void highlight(bool propval)
   {
-    return setHighlight(propval);
+    setHighlight(propval);
   }
 
   /**
@@ -79,7 +98,7 @@ class SearchContext : gobject.object.ObjectWrap
   */
   @property void matchStyle(gtksource.style.Style propval)
   {
-    return setMatchStyle(propval);
+    setMatchStyle(propval);
   }
 
   /**
@@ -104,6 +123,17 @@ class SearchContext : gobject.object.ObjectWrap
   @property void* regexError()
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("regex-error");
+  }
+
+  /**
+      Get `settings` property.
+      Returns: The #GtkSourceSearchSettings associated to the search context.
+        
+        This property is construct-only since version 4.0.
+  */
+  @property gtksource.search_settings.SearchSettings settings()
+  {
+    return getSettings();
   }
 
   /**
@@ -484,5 +514,64 @@ class SearchContext : gobject.object.ObjectWrap
   void setMatchStyle(gtksource.style.Style matchStyle = null)
   {
     gtk_source_search_context_set_match_style(cast(GtkSourceSearchContext*)this._cPtr, matchStyle ? cast(GtkSourceStyle*)matchStyle._cPtr(No.Dup) : null);
+  }
+}
+
+class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The #GtkSourceBuffer associated to the search context.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtksource.buffer.Buffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `highlight` property.
+      Params:
+        propval = Highlight the search occurrences.
+      Returns: Builder instance for fluent chaining
+  */
+  T highlight(bool propval)
+  {
+    return setProperty("highlight", propval);
+  }
+
+  /**
+      Set `matchStyle` property.
+      Params:
+        propval = A #GtkSourceStyle, or null for theme's scheme default style.
+      Returns: Builder instance for fluent chaining
+  */
+  T matchStyle(gtksource.style.Style propval)
+  {
+    return setProperty("match-style", propval);
+  }
+
+  /**
+      Set `settings` property.
+      Params:
+        propval = The #GtkSourceSearchSettings associated to the search context.
+          
+          This property is construct-only since version 4.0.
+      Returns: Builder instance for fluent chaining
+  */
+  T settings(gtksource.search_settings.SearchSettings propval)
+  {
+    return setProperty("settings", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.search_context.SearchContext]
+final class SearchContextGidBuilder : SearchContextGidBuilderImpl!SearchContextGidBuilder
+{
+  SearchContext build()
+  {
+    return new SearchContext(cast(void*)createGObject(SearchContext._getGType), Yes.Take);
   }
 }

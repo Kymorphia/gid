@@ -2,6 +2,7 @@
 module gstaudio.audio_base_sink;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.element;
 import gst.types;
@@ -42,6 +43,15 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   override AudioBaseSink self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstaudio.audio_base_sink.AudioBaseSink]
+  Returns: New builder object
+  */
+  static AudioBaseSinkGidBuilder builder()
+  {
+    return new AudioBaseSinkGidBuilder;
   }
 
   /** */
@@ -119,7 +129,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   */
   @property void driftTolerance(long propval)
   {
-    return setDriftTolerance(propval);
+    setDriftTolerance(propval);
   }
 
   /** */
@@ -147,7 +157,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   /** */
   @property void provideClock(bool propval)
   {
-    return setProvideClock(propval);
+    setProvideClock(propval);
   }
 
   /** */
@@ -159,7 +169,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   /** */
   @property void slaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod propval)
   {
-    return setSlaveMethod(propval);
+    setSlaveMethod(propval);
   }
 
   /**
@@ -328,5 +338,78 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   void setSlaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod method)
   {
     gst_audio_base_sink_set_slave_method(cast(GstAudioBaseSink*)this._cPtr, method);
+  }
+}
+
+class AudioBaseSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T
+{
+
+  /** */
+  T alignmentThreshold(ulong propval)
+  {
+    return setProperty("alignment-threshold", propval);
+  }
+
+  /** */
+  T bufferTime(long propval)
+  {
+    return setProperty("buffer-time", propval);
+  }
+
+  /** */
+  T canActivatePull(bool propval)
+  {
+    return setProperty("can-activate-pull", propval);
+  }
+
+  /**
+      Set `discontWait` property.
+      Params:
+        propval = A window of time in nanoseconds to wait before creating a discontinuity as
+          a result of breaching the drift-tolerance.
+      Returns: Builder instance for fluent chaining
+  */
+  T discontWait(ulong propval)
+  {
+    return setProperty("discont-wait", propval);
+  }
+
+  /**
+      Set `driftTolerance` property.
+      Params:
+        propval = Controls the amount of time in microseconds that clocks are allowed
+          to drift before resynchronisation happens.
+      Returns: Builder instance for fluent chaining
+  */
+  T driftTolerance(long propval)
+  {
+    return setProperty("drift-tolerance", propval);
+  }
+
+  /** */
+  T latencyTime(long propval)
+  {
+    return setProperty("latency-time", propval);
+  }
+
+  /** */
+  T provideClock(bool propval)
+  {
+    return setProperty("provide-clock", propval);
+  }
+
+  /** */
+  T slaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod propval)
+  {
+    return setProperty("slave-method", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_base_sink.AudioBaseSink]
+final class AudioBaseSinkGidBuilder : AudioBaseSinkGidBuilderImpl!AudioBaseSinkGidBuilder
+{
+  AudioBaseSink build()
+  {
+    return new AudioBaseSink(cast(void*)createGObject(AudioBaseSink._getGType), No.Take);
   }
 }

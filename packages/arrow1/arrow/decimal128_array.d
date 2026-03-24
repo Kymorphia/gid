@@ -7,6 +7,7 @@ import arrow.decimal128;
 import arrow.fixed_size_binary_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal128_array.Decimal128Array]
+  Returns: New builder object
+  */
+  static Decimal128ArrayGidBuilder builder()
+  {
+    return new Decimal128ArrayGidBuilder;
+  }
+
   /** */
   string formatValue(long i)
   {
@@ -56,5 +66,18 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     _cretval = garrow_decimal128_array_get_value(cast(GArrowDecimal128Array*)this._cPtr, i);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal128.Decimal128)(cast(GArrowDecimal128*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class Decimal128ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSizeBinaryArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal128_array.Decimal128Array]
+final class Decimal128ArrayGidBuilder : Decimal128ArrayGidBuilderImpl!Decimal128ArrayGidBuilder
+{
+  Decimal128Array build()
+  {
+    return new Decimal128Array(cast(void*)createGObject(Decimal128Array._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstpbutils.discoverer_stream_info;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.caps;
 import gst.structure;
@@ -54,6 +55,15 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   override DiscovererStreamInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.discoverer_stream_info.DiscovererStreamInfo]
+  Returns: New builder object
+  */
+  static DiscovererStreamInfoGidBuilder builder()
+  {
+    return new DiscovererStreamInfoGidBuilder;
   }
 
   /**
@@ -148,5 +158,18 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
     _cretval = gst_discoverer_stream_info_get_toc(cast(GstDiscovererStreamInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class DiscovererStreamInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.discoverer_stream_info.DiscovererStreamInfo]
+final class DiscovererStreamInfoGidBuilder : DiscovererStreamInfoGidBuilderImpl!DiscovererStreamInfoGidBuilder
+{
+  DiscovererStreamInfo build()
+  {
+    return new DiscovererStreamInfo(cast(void*)createGObject(DiscovererStreamInfo._getGType), No.Take);
   }
 }

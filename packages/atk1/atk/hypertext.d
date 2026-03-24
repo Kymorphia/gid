@@ -8,6 +8,7 @@ import atk.hyperlink;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -80,4 +81,8 @@ interface Hypertext
       Returns: Signal ID
   */
   ulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface HypertextGidBuilderImpl(T)
+{
 }

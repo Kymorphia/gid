@@ -1,7 +1,7 @@
 {
   "name": "rsvg2",
   "description": "D binding for the librsvg library - Scalable Vector Graphics (SVG) rendering",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/librsvg",

@@ -7,6 +7,7 @@ import gmime.c.types;
 import gmime.certificate_list;
 import gmime.signature_list;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class DecryptResult : gobject.object.ObjectWrap
   override DecryptResult self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.decrypt_result.DecryptResult]
+  Returns: New builder object
+  */
+  static DecryptResultGidBuilder builder()
+  {
+    return new DecryptResultGidBuilder;
   }
 
   /**
@@ -167,5 +177,18 @@ class DecryptResult : gobject.object.ObjectWrap
   void setSignatures(gmime.signature_list.SignatureList signatures)
   {
     g_mime_decrypt_result_set_signatures(cast(GMimeDecryptResult*)this._cPtr, signatures ? cast(GMimeSignatureList*)signatures._cPtr(No.Dup) : null);
+  }
+}
+
+class DecryptResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.decrypt_result.DecryptResult]
+final class DecryptResultGidBuilder : DecryptResultGidBuilderImpl!DecryptResultGidBuilder
+{
+  DecryptResult build()
+  {
+    return new DecryptResult(cast(void*)createGObject(DecryptResult._getGType), Yes.Take);
   }
 }

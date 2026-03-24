@@ -3,6 +3,7 @@ module gtk.tree_drag_source;
 
 public import gtk.tree_drag_source_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.selection_data;
@@ -57,4 +58,8 @@ interface TreeDragSource
       Returns: true if the row can be dragged
   */
   bool rowDraggable(gtk.tree_path.TreePath path);
+}
+
+interface TreeDragSourceGidBuilderImpl(T)
+{
 }

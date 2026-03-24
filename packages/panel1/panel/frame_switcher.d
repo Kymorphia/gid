@@ -2,6 +2,7 @@
 module panel.frame_switcher;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -50,6 +51,15 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
     return this;
   }
 
+  /**
+  Get builder for [panel.frame_switcher.FrameSwitcher]
+  Returns: New builder object
+  */
+  static FrameSwitcherGidBuilder builder()
+  {
+    return new FrameSwitcherGidBuilder;
+  }
+
   mixin OrientableT!();
   mixin FrameHeaderT!();
 
@@ -62,5 +72,21 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
     GtkWidget* _cretval;
     _cretval = panel_frame_switcher_new();
     this(_cretval, No.Take);
+  }
+}
+
+class FrameSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, panel.frame_header.FrameHeaderGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+  mixin FrameHeaderGidBuilderT!();
+}
+
+/// Fluent builder for [panel.frame_switcher.FrameSwitcher]
+final class FrameSwitcherGidBuilder : FrameSwitcherGidBuilderImpl!FrameSwitcherGidBuilder
+{
+  FrameSwitcher build()
+  {
+    return new FrameSwitcher(cast(void*)createGObject(FrameSwitcher._getGType), No.Take);
   }
 }

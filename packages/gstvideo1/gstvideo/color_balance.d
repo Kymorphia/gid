@@ -4,6 +4,7 @@ module gstvideo.color_balance;
 public import gstvideo.color_balance_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gstvideo.c.functions;
 import gstvideo.c.types;
 import gstvideo.color_balance_channel;
@@ -101,4 +102,8 @@ interface ColorBalance
       Returns: Signal ID
   */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface ColorBalanceGidBuilderImpl(T)
+{
 }

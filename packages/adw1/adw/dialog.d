@@ -7,6 +7,7 @@ import adw.c.types;
 import adw.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -100,6 +101,15 @@ class Dialog : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.dialog.Dialog]
+  Returns: New builder object
+  */
+  static DialogGidBuilder builder()
+  {
+    return new DialogGidBuilder;
+  }
+
+  /**
       Get `canClose` property.
       Returns: Whether the dialog can be closed.
         
@@ -125,7 +135,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void canClose(bool propval)
   {
-    return setCanClose(propval);
+    setCanClose(propval);
   }
 
   /**
@@ -144,7 +154,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -171,7 +181,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void contentHeight(int propval)
   {
-    return setContentHeight(propval);
+    setContentHeight(propval);
   }
 
   /**
@@ -198,7 +208,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void contentWidth(int propval)
   {
-    return setContentWidth(propval);
+    setContentWidth(propval);
   }
 
   /**
@@ -230,7 +240,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void defaultWidget(gtk.widget.Widget propval)
   {
-    return setDefaultWidget(propval);
+    setDefaultWidget(propval);
   }
 
   /**
@@ -249,7 +259,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void focusWidget(gtk.widget.Widget propval)
   {
-    return setFocus(propval);
+    setFocus(propval);
   }
 
   /**
@@ -280,7 +290,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void followsContentSize(bool propval)
   {
-    return setFollowsContentSize(propval);
+    setFollowsContentSize(propval);
   }
 
   /**
@@ -319,7 +329,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void presentationMode(adw.types.DialogPresentationMode propval)
   {
-    return setPresentationMode(propval);
+    setPresentationMode(propval);
   }
 
   /**
@@ -338,7 +348,7 @@ class Dialog : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -734,5 +744,149 @@ class Dialog : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
+  }
+}
+
+class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `canClose` property.
+      Params:
+        propval = Whether the dialog can be closed.
+          
+          If set to `FALSE`, the close button, shortcuts and
+          [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+          emitted instead, and bottom sheet close swipe will be disabled.
+          [adw.dialog.Dialog.forceClose] still works.
+      Returns: Builder instance for fluent chaining
+  */
+  T canClose(bool propval)
+  {
+    return setProperty("can-close", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget of the [adw.dialog.Dialog].
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `contentHeight` property.
+      Params:
+        propval = The height of the dialog's contents.
+          
+          Set it to -1 to reset it to the content's natural height.
+          
+          See also: `property@Gtk.Window:default-height`
+      Returns: Builder instance for fluent chaining
+  */
+  T contentHeight(int propval)
+  {
+    return setProperty("content-height", propval);
+  }
+
+  /**
+      Set `contentWidth` property.
+      Params:
+        propval = The width of the dialog's contents.
+          
+          Set it to -1 to reset it to the content's natural width.
+          
+          See also: `property@Gtk.Window:default-width`
+      Returns: Builder instance for fluent chaining
+  */
+  T contentWidth(int propval)
+  {
+    return setProperty("content-width", propval);
+  }
+
+  /**
+      Set `defaultWidget` property.
+      Params:
+        propval = The default widget.
+          
+          It's activated when the user presses Enter.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("default-widget", propval);
+  }
+
+  /**
+      Set `focusWidget` property.
+      Params:
+        propval = The focus widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("focus-widget", propval);
+  }
+
+  /**
+      Set `followsContentSize` property.
+      Params:
+        propval = Whether to size content automatically.
+          
+          If set to `TRUE`, always use the content's natural size instead of
+          `property@Dialog:content-width` and `property@Dialog:content-height`. If
+          the content resizes, the dialog will immediately resize as well.
+          
+          See also: [gtk.window.Window.resizable]
+      Returns: Builder instance for fluent chaining
+  */
+  T followsContentSize(bool propval)
+  {
+    return setProperty("follows-content-size", propval);
+  }
+
+  /**
+      Set `presentationMode` property.
+      Params:
+        propval = The dialog's presentation mode.
+          
+          When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
+          the following condition is met: `max-width: 450px or max-height: 360px`,
+          and as a floating window otherwise.
+          
+          Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
+          present it a floating window or a bottom sheet respectively, regardless of
+          available size.
+          
+          Presentation mode does nothing for dialogs presented as a window.
+      Returns: Builder instance for fluent chaining
+  */
+  T presentationMode(adw.types.DialogPresentationMode propval)
+  {
+    return setProperty("presentation-mode", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [adw.dialog.Dialog]
+final class DialogGidBuilder : DialogGidBuilderImpl!DialogGidBuilder
+{
+  Dialog build()
+  {
+    return new Dialog(cast(void*)createGObject(Dialog._getGType), No.Take);
   }
 }

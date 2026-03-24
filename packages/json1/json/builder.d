@@ -2,6 +2,7 @@
 module json.builder;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import json.c.functions;
 import json.c.types;
@@ -72,6 +73,27 @@ class Builder : gobject.object.ObjectWrap
   override Builder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [json.builder.Builder]
+  Returns: New builder object
+  */
+  static BuilderGidBuilder builder()
+  {
+    return new BuilderGidBuilder;
+  }
+
+  /**
+      Get `immutable_` property.
+      Returns: Whether the tree should be immutable when created.
+        
+        Making the output immutable on creation avoids the expense
+        of traversing it to make it immutable later.
+  */
+  @property bool immutable_()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("immutable");
   }
 
   /**
@@ -341,5 +363,32 @@ class Builder : gobject.object.ObjectWrap
     _cretval = json_builder_set_member_name(cast(JsonBuilder*)this._cPtr, _memberName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `immutable_` property.
+      Params:
+        propval = Whether the tree should be immutable when created.
+          
+          Making the output immutable on creation avoids the expense
+          of traversing it to make it immutable later.
+      Returns: Builder instance for fluent chaining
+  */
+  T immutable_(bool propval)
+  {
+    return setProperty("immutable", propval);
+  }
+}
+
+/// Fluent builder for [json.builder.Builder]
+final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
+{
+  Builder build()
+  {
+    return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);
   }
 }

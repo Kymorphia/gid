@@ -9,6 +9,7 @@ import gio.types;
 import glib.variant;
 import glib.variant_type;
 import gobject.dclosure;
+import gobject.gid_builder;
 
 /**
     [gio.action_group.ActionGroup] represents a group of actions.
@@ -413,4 +414,8 @@ interface ActionGroup
       Returns: Signal ID
   */
   ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
+}
+
+interface ActionGroupGidBuilderImpl(T)
+{
 }

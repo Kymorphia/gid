@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.screen;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -48,6 +49,15 @@ class Invisible : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [gtk.invisible.Invisible]
+  Returns: New builder object
+  */
+  static InvisibleGidBuilder builder()
+  {
+    return new InvisibleGidBuilder;
+  }
+
   /** */
   @property gdk.screen.Screen screen()
   {
@@ -57,7 +67,7 @@ class Invisible : gtk.widget.Widget
   /** */
   @property void screen(gdk.screen.Screen propval)
   {
-    return setScreen(propval);
+    setScreen(propval);
   }
 
   /**
@@ -108,5 +118,25 @@ class Invisible : gtk.widget.Widget
   void setScreen(gdk.screen.Screen screen)
   {
     gtk_invisible_set_screen(cast(GtkInvisible*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
+  }
+}
+
+class InvisibleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /** */
+  T screen(gdk.screen.Screen propval)
+  {
+    return setProperty("screen", propval);
+  }
+}
+
+/// Fluent builder for [gtk.invisible.Invisible]
+final class InvisibleGidBuilder : InvisibleGidBuilderImpl!InvisibleGidBuilder
+{
+  Invisible build()
+  {
+    return new Invisible(cast(void*)createGObject(Invisible._getGType), No.Take);
   }
 }

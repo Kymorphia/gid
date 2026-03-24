@@ -6,6 +6,7 @@ public import gid.gid;
 public import gio.file;
 public import gio.list_model;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -81,7 +82,7 @@ template FileChooserT()
   */
   @property void action(gtk.types.FileChooserAction propval)
   {
-    return setAction(propval);
+    setAction(propval);
   }
 
   /**
@@ -106,7 +107,7 @@ template FileChooserT()
   */
   @property void createFolders(bool propval)
   {
-    return setCreateFolders(propval);
+    setCreateFolders(propval);
   }
 
   /**
@@ -129,7 +130,7 @@ template FileChooserT()
   */
   @property void filter(gtk.file_filter.FileFilter propval)
   {
-    return setFilter(propval);
+    setFilter(propval);
   }
 
   /**
@@ -167,7 +168,7 @@ template FileChooserT()
   */
   @property void selectMultiple(bool propval)
   {
-    return setSelectMultiple(propval);
+    setSelectMultiple(propval);
   }
 
   /**
@@ -694,5 +695,62 @@ template FileChooserT()
   override void setSelectMultiple(bool selectMultiple)
   {
     gtk_file_chooser_set_select_multiple(cast(GtkFileChooser*)this._cPtr, selectMultiple);
+  }
+}
+
+template FileChooserGidBuilderT()
+{
+
+  /**
+      Set `action` property.
+      Params:
+        propval = The type of operation that the file chooser is performing.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T action(gtk.types.FileChooserAction propval)
+  {
+    return setProperty("action", propval);
+  }
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+          will offer the user to create new folders.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T createFolders(bool propval)
+  {
+    return setProperty("create-folders", propval);
+  }
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The current filter for selecting files that are displayed.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T filter(gtk.file_filter.FileFilter propval)
+  {
+    return setProperty("filter", propval);
+  }
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Whether to allow multiple files to be selected.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T selectMultiple(bool propval)
+  {
+    return setProperty("select-multiple", propval);
   }
 }

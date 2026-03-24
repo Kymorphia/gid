@@ -3,6 +3,7 @@ module gtk.cell_renderer_toggle;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -43,6 +44,15 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
     return this;
   }
 
+  /**
+  Get builder for [gtk.cell_renderer_toggle.CellRendererToggle]
+  Returns: New builder object
+  */
+  static CellRendererToggleGidBuilder builder()
+  {
+    return new CellRendererToggleGidBuilder;
+  }
+
   /** */
   @property bool activatable()
   {
@@ -52,7 +62,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   /** */
   @property void activatable(bool propval)
   {
-    return setActivatable(propval);
+    setActivatable(propval);
   }
 
   /** */
@@ -64,7 +74,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   /** */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /** */
@@ -100,7 +110,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   /** */
   @property void radio(bool propval)
   {
-    return setRadio(propval);
+    setRadio(propval);
   }
 
   /**
@@ -240,5 +250,48 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+class CellRendererToggleGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
+{
+
+  /** */
+  T activatable(bool propval)
+  {
+    return setProperty("activatable", propval);
+  }
+
+  /** */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /** */
+  T inconsistent(bool propval)
+  {
+    return setProperty("inconsistent", propval);
+  }
+
+  /** */
+  T indicatorSize(int propval)
+  {
+    return setProperty("indicator-size", propval);
+  }
+
+  /** */
+  T radio(bool propval)
+  {
+    return setProperty("radio", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_renderer_toggle.CellRendererToggle]
+final class CellRendererToggleGidBuilder : CellRendererToggleGidBuilderImpl!CellRendererToggleGidBuilder
+{
+  CellRendererToggle build()
+  {
+    return new CellRendererToggle(cast(void*)createGObject(CellRendererToggle._getGType), No.Take);
   }
 }

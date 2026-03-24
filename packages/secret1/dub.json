@@ -1,7 +1,7 @@
 {
   "name": "secret1",
   "description": "D binding for the libsecret library - GObject-based library for storing and receiving secrets",
-  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/libsecret",

@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -36,5 +37,27 @@ class AnimationTarget : gobject.object.ObjectWrap
   override AnimationTarget self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [adw.animation_target.AnimationTarget]
+  Returns: New builder object
+  */
+  static AnimationTargetGidBuilder builder()
+  {
+    return new AnimationTargetGidBuilder;
+  }
+}
+
+class AnimationTargetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [adw.animation_target.AnimationTarget]
+final class AnimationTargetGidBuilder : AnimationTargetGidBuilderImpl!AnimationTargetGidBuilder
+{
+  AnimationTarget build()
+  {
+    return new AnimationTarget(cast(void*)createGObject(AnimationTarget._getGType), No.Take);
   }
 }

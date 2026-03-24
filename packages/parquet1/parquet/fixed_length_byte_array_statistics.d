@@ -3,6 +3,7 @@ module parquet.fixed_length_byte_array_statistics;
 
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
@@ -37,6 +38,15 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
     return this;
   }
 
+  /**
+  Get builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
+  Returns: New builder object
+  */
+  static FixedLengthByteArrayStatisticsGidBuilder builder()
+  {
+    return new FixedLengthByteArrayStatisticsGidBuilder;
+  }
+
   /** */
   glib.bytes.Bytes getMax()
   {
@@ -53,5 +63,18 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
     _cretval = gparquet_fixed_length_byte_array_statistics_get_min(cast(GParquetFixedLengthByteArrayStatistics*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class FixedLengthByteArrayStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
+final class FixedLengthByteArrayStatisticsGidBuilder : FixedLengthByteArrayStatisticsGidBuilderImpl!FixedLengthByteArrayStatisticsGidBuilder
+{
+  FixedLengthByteArrayStatistics build()
+  {
+    return new FixedLengthByteArrayStatistics(cast(void*)createGObject(FixedLengthByteArrayStatistics._getGType), No.Take);
   }
 }

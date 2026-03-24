@@ -2,6 +2,7 @@
 module gtksource.language;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -42,6 +43,15 @@ class Language : gobject.object.ObjectWrap
   override Language self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.language.Language]
+  Returns: New builder object
+  */
+  static LanguageGidBuilder builder()
+  {
+    return new LanguageGidBuilder;
   }
 
   /** */
@@ -255,5 +265,18 @@ class Language : gobject.object.ObjectWrap
     _cretval = gtk_source_language_get_style_name(cast(GtkSourceLanguage*)this._cPtr, _styleId);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class LanguageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.language.Language]
+final class LanguageGidBuilder : LanguageGidBuilderImpl!LanguageGidBuilder
+{
+  Language build()
+  {
+    return new Language(cast(void*)createGObject(Language._getGType), No.Take);
   }
 }

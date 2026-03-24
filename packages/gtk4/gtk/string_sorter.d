@@ -2,6 +2,7 @@
 module gtk.string_sorter;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -47,6 +48,15 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /**
+  Get builder for [gtk.string_sorter.StringSorter]
+  Returns: New builder object
+  */
+  static StringSorterGidBuilder builder()
+  {
+    return new StringSorterGidBuilder;
+  }
+
+  /**
       Get `collation` property.
       Returns: The collation method to use for sorting.
         
@@ -74,7 +84,7 @@ class StringSorter : gtk.sorter.Sorter
   */
   @property void collation(gtk.types.Collation propval)
   {
-    return setCollation(propval);
+    setCollation(propval);
   }
 
   /**
@@ -93,7 +103,7 @@ class StringSorter : gtk.sorter.Sorter
   */
   @property void expression(gtk.expression.Expression propval)
   {
-    return setExpression(propval);
+    setExpression(propval);
   }
 
   /**
@@ -112,7 +122,7 @@ class StringSorter : gtk.sorter.Sorter
   */
   @property void ignoreCase(bool propval)
   {
-    return setIgnoreCase(propval);
+    setIgnoreCase(propval);
   }
 
   /**
@@ -201,5 +211,57 @@ class StringSorter : gtk.sorter.Sorter
   void setIgnoreCase(bool ignoreCase)
   {
     gtk_string_sorter_set_ignore_case(cast(GtkStringSorter*)this._cPtr, ignoreCase);
+  }
+}
+
+class StringSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
+{
+
+  /**
+      Set `collation` property.
+      Params:
+        propval = The collation method to use for sorting.
+          
+          The [gtk.types.Collation.None] value is useful when the expression already
+          returns collation keys, or strings that need to be compared byte-by-byte.
+          
+          The default value, [gtk.types.Collation.Unicode], compares strings according
+          to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
+      Returns: Builder instance for fluent chaining
+  */
+  T collation(gtk.types.Collation propval)
+  {
+    return setProperty("collation", propval);
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on item to get a string to compare with.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(gtk.expression.Expression propval)
+  {
+    return setProperty("expression", propval);
+  }
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = If sorting is case sensitive.
+      Returns: Builder instance for fluent chaining
+  */
+  T ignoreCase(bool propval)
+  {
+    return setProperty("ignore-case", propval);
+  }
+}
+
+/// Fluent builder for [gtk.string_sorter.StringSorter]
+final class StringSorterGidBuilder : StringSorterGidBuilderImpl!StringSorterGidBuilder
+{
+  StringSorter build()
+  {
+    return new StringSorter(cast(void*)createGObject(StringSorter._getGType), Yes.Take);
   }
 }

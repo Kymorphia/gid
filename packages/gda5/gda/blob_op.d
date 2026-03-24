@@ -6,6 +6,7 @@ import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class BlobOp : gobject.object.ObjectWrap
   override BlobOp self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.blob_op.BlobOp]
+  Returns: New builder object
+  */
+  static BlobOpGidBuilder builder()
+  {
+    return new BlobOpGidBuilder;
   }
 
   /** */
@@ -109,5 +119,18 @@ class BlobOp : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gda_blob_op_write_all(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class BlobOpGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.blob_op.BlobOp]
+final class BlobOpGidBuilder : BlobOpGidBuilderImpl!BlobOpGidBuilder
+{
+  BlobOp build()
+  {
+    return new BlobOp(cast(void*)createGObject(BlobOp._getGType), No.Take);
   }
 }

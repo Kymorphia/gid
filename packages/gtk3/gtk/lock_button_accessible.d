@@ -8,6 +8,7 @@ import atk.component_mixin;
 import atk.image;
 import atk.image_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.button_accessible;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,5 +41,28 @@ class LockButtonAccessible : gtk.button_accessible.ButtonAccessible
   override LockButtonAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.lock_button_accessible.LockButtonAccessible]
+  Returns: New builder object
+  */
+  static LockButtonAccessibleGidBuilder builder()
+  {
+    return new LockButtonAccessibleGidBuilder;
+  }
+}
+
+class LockButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.lock_button_accessible.LockButtonAccessible]
+final class LockButtonAccessibleGidBuilder : LockButtonAccessibleGidBuilderImpl!LockButtonAccessibleGidBuilder
+{
+  LockButtonAccessible build()
+  {
+    return new LockButtonAccessible(cast(void*)createGObject(LockButtonAccessible._getGType), No.Take);
   }
 }

@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class Batch : gobject.object.ObjectWrap
   override Batch self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.batch.Batch]
+  Returns: New builder object
+  */
+  static BatchGidBuilder builder()
+  {
+    return new BatchGidBuilder;
   }
 
   /**
@@ -185,6 +195,19 @@ class Batch : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class BatchGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.batch.Batch]
+final class BatchGidBuilder : BatchGidBuilderImpl!BatchGidBuilder
+{
+  Batch build()
+  {
+    return new Batch(cast(void*)createGObject(Batch._getGType), Yes.Take);
   }
 }
 

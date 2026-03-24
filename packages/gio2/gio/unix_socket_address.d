@@ -8,6 +8,7 @@ import gio.socket_address;
 import gio.socket_connectable;
 import gio.socket_connectable_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -57,6 +58,46 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   override UnixSocketAddress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.unix_socket_address.UnixSocketAddress]
+  Returns: New builder object
+  */
+  static UnixSocketAddressGidBuilder builder()
+  {
+    return new UnixSocketAddressGidBuilder;
+  }
+
+  /**
+      Get `abstract_` property.
+      Returns: Whether or not this is an abstract address
+  
+      Deprecated: Use #GUnixSocketAddress:address-type, which
+        distinguishes between zero-padded and non-zero-padded
+        abstract addresses.
+  */
+  @property bool abstract_()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("abstract");
+  }
+
+  /**
+      Get `addressType` property.
+      Returns: The type of Unix socket address.
+  */
+  @property gio.types.UnixSocketAddressType addressType()
+  {
+    return getAddressType();
+  }
+
+  /**
+      Get `path` property.
+      Returns: Unix socket path.
+  */
+  @property string path()
+  {
+    return getPath();
   }
 
   /**
@@ -215,5 +256,56 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     size_t _retval;
     _retval = g_unix_socket_address_get_path_len(cast(GUnixSocketAddress*)this._cPtr);
     return _retval;
+  }
+}
+
+class UnixSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBuilderImpl!T
+{
+
+
+  /**
+      Set `abstract_` property.
+      Params:
+        propval = Whether or not this is an abstract address
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use #GUnixSocketAddress:address-type, which
+        distinguishes between zero-padded and non-zero-padded
+        abstract addresses.
+  */
+  T abstract_(bool propval)
+  {
+    return setProperty("abstract", propval);
+  }
+
+  /**
+      Set `addressType` property.
+      Params:
+        propval = The type of Unix socket address.
+      Returns: Builder instance for fluent chaining
+  */
+  T addressType(gio.types.UnixSocketAddressType propval)
+  {
+    return setProperty("address-type", propval);
+  }
+
+  /**
+      Set `path` property.
+      Params:
+        propval = Unix socket path.
+      Returns: Builder instance for fluent chaining
+  */
+  T path(string propval)
+  {
+    return setProperty("path", propval);
+  }
+}
+
+/// Fluent builder for [gio.unix_socket_address.UnixSocketAddress]
+final class UnixSocketAddressGidBuilder : UnixSocketAddressGidBuilderImpl!UnixSocketAddressGidBuilder
+{
+  UnixSocketAddress build()
+  {
+    return new UnixSocketAddress(cast(void*)createGObject(UnixSocketAddress._getGType), Yes.Take);
   }
 }

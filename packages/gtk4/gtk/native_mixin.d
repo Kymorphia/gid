@@ -4,6 +4,7 @@ module gtk.native_mixin;
 public import gtk.native_iface_proxy;
 public import gdk.surface;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gsk.renderer;
 public import gtk.c.functions;
@@ -89,4 +90,8 @@ template NativeT()
   {
     gtk_native_unrealize(cast(GtkNative*)this._cPtr);
   }
+}
+
+template NativeGidBuilderT()
+{
 }

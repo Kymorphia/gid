@@ -9,6 +9,7 @@ import arrow.record_batch_reader;
 import arrow.table;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,27 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return this;
   }
 
+  /**
+  Get builder for [arrow.source_node_options.SourceNodeOptions]
+  Returns: New builder object
+  */
+  static SourceNodeOptionsGidBuilder builder()
+  {
+    return new SourceNodeOptionsGidBuilder;
+  }
+
+  /** */
+  @property arrow.record_batch_reader.RecordBatchReader reader()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.record_batch_reader.RecordBatchReader)("reader");
+  }
+
+  /** */
+  @property arrow.record_batch.RecordBatch recordBatch()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.record_batch.RecordBatch)("record-batch");
+  }
+
   /** */
   static arrow.source_node_options.SourceNodeOptions newRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
@@ -65,5 +87,30 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     _cretval = garrow_source_node_options_new_table(table ? cast(GArrowTable*)table._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class SourceNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
+{
+
+  /** */
+  T reader(arrow.record_batch_reader.RecordBatchReader propval)
+  {
+    return setProperty("reader", propval);
+  }
+
+  /** */
+  T recordBatch(arrow.record_batch.RecordBatch propval)
+  {
+    return setProperty("record-batch", propval);
+  }
+}
+
+/// Fluent builder for [arrow.source_node_options.SourceNodeOptions]
+final class SourceNodeOptionsGidBuilder : SourceNodeOptionsGidBuilderImpl!SourceNodeOptionsGidBuilder
+{
+  SourceNodeOptions build()
+  {
+    return new SourceNodeOptions(cast(void*)createGObject(SourceNodeOptions._getGType), No.Take);
   }
 }

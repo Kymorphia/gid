@@ -7,6 +7,7 @@ import arrow.datum;
 import arrow.expression;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class LiteralExpression : arrow.expression.Expression
@@ -37,11 +38,33 @@ class LiteralExpression : arrow.expression.Expression
     return this;
   }
 
+  /**
+  Get builder for [arrow.literal_expression.LiteralExpression]
+  Returns: New builder object
+  */
+  static LiteralExpressionGidBuilder builder()
+  {
+    return new LiteralExpressionGidBuilder;
+  }
+
   /** */
   this(arrow.datum.Datum datum)
   {
     GArrowLiteralExpression* _cretval;
     _cretval = garrow_literal_expression_new(datum ? cast(GArrowDatum*)datum._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class LiteralExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.literal_expression.LiteralExpression]
+final class LiteralExpressionGidBuilder : LiteralExpressionGidBuilderImpl!LiteralExpressionGidBuilder
+{
+  LiteralExpression build()
+  {
+    return new LiteralExpression(cast(void*)createGObject(LiteralExpression._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module panel.workbench;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.widget;
@@ -42,6 +43,15 @@ class Workbench : gtk.window_group.WindowGroup
   }
 
   /**
+  Get builder for [panel.workbench.Workbench]
+  Returns: New builder object
+  */
+  static WorkbenchGidBuilder builder()
+  {
+    return new WorkbenchGidBuilder;
+  }
+
+  /**
       Get `id` property.
       Returns: The "id" of the workbench.
         
@@ -63,7 +73,7 @@ class Workbench : gtk.window_group.WindowGroup
   */
   @property void id(string propval)
   {
-    return setId(propval);
+    setId(propval);
   }
 
   /** */
@@ -205,5 +215,32 @@ class Workbench : gtk.window_group.WindowGroup
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class WorkbenchGidBuilderImpl(T) : gtk.window_group.WindowGroupGidBuilderImpl!T
+{
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The "id" of the workbench.
+          
+          This is generally used by applications to help destinguish between
+          projects, so that the project-id matches the workbench-id.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(string propval)
+  {
+    return setProperty("id", propval);
+  }
+}
+
+/// Fluent builder for [panel.workbench.Workbench]
+final class WorkbenchGidBuilder : WorkbenchGidBuilderImpl!WorkbenchGidBuilder
+{
+  Workbench build()
+  {
+    return new Workbench(cast(void*)createGObject(Workbench._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.record_batch_reader;
 import arrow.table;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
@@ -37,6 +38,15 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
     return this;
   }
 
+  /**
+  Get builder for [arrow.table_batch_reader.TableBatchReader]
+  Returns: New builder object
+  */
+  static TableBatchReaderGidBuilder builder()
+  {
+    return new TableBatchReaderGidBuilder;
+  }
+
   /** */
   this(arrow.table.Table table)
   {
@@ -57,5 +67,18 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   void setMaxChunkSize(long maxChunkSize)
   {
     garrow_table_batch_reader_set_max_chunk_size(cast(GArrowTableBatchReader*)this._cPtr, maxChunkSize);
+  }
+}
+
+class TableBatchReaderGidBuilderImpl(T) : arrow.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.table_batch_reader.TableBatchReader]
+final class TableBatchReaderGidBuilder : TableBatchReaderGidBuilderImpl!TableBatchReaderGidBuilder
+{
+  TableBatchReader build()
+  {
+    return new TableBatchReader(cast(void*)createGObject(TableBatchReader._getGType), Yes.Take);
   }
 }

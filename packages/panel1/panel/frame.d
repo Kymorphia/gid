@@ -3,6 +3,7 @@ module panel.frame;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -57,6 +58,15 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
     return this;
   }
 
+  /**
+  Get builder for [panel.frame.Frame]
+  Returns: New builder object
+  */
+  static FrameGidBuilder builder()
+  {
+    return new FrameGidBuilder;
+  }
+
   /** */
   @property bool closeable()
   {
@@ -78,7 +88,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   /** */
   @property void placeholder(gtk.widget.Widget propval)
   {
-    return setPlaceholder(propval);
+    setPlaceholder(propval);
   }
 
   /** */
@@ -90,7 +100,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   /** */
   @property void visibleChild(panel.widget.Widget propval)
   {
-    return setVisibleChild(propval);
+    setVisibleChild(propval);
   }
 
   mixin OrientableT!();
@@ -408,5 +418,32 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("page-closed", closure, after);
+  }
+}
+
+class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T placeholder(gtk.widget.Widget propval)
+  {
+    return setProperty("placeholder", propval);
+  }
+
+  /** */
+  T visibleChild(panel.widget.Widget propval)
+  {
+    return setProperty("visible-child", propval);
+  }
+}
+
+/// Fluent builder for [panel.frame.Frame]
+final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
+{
+  Frame build()
+  {
+    return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }
 }

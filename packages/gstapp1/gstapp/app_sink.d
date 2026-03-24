@@ -3,6 +3,7 @@ module gstapp.app_sink;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.caps;
 import gst.mini_object;
@@ -82,6 +83,15 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     return this;
   }
 
+  /**
+  Get builder for [gstapp.app_sink.AppSink]
+  Returns: New builder object
+  */
+  static AppSinkGidBuilder builder()
+  {
+    return new AppSinkGidBuilder;
+  }
+
   /** */
   @property bool bufferList()
   {
@@ -103,7 +113,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   /** */
   @property void caps(gst.caps.Caps propval)
   {
-    return setCaps(propval);
+    setCaps(propval);
   }
 
   /** */
@@ -115,7 +125,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   /** */
   @property void drop(bool propval)
   {
-    return setDrop(propval);
+    setDrop(propval);
   }
 
   /** */
@@ -127,7 +137,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   /** */
   @property void emitSignals(bool propval)
   {
-    return setEmitSignals(propval);
+    setEmitSignals(propval);
   }
 
   /** */
@@ -152,7 +162,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   @property void maxBuffers(uint propval)
   {
-    return setMaxBuffers(propval);
+    setMaxBuffers(propval);
   }
 
   /**
@@ -171,7 +181,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   @property void maxBytes(ulong propval)
   {
-    return setMaxBytes(propval);
+    setMaxBytes(propval);
   }
 
   /**
@@ -215,7 +225,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   @property void waitOnEos(bool propval)
   {
-    return setWaitOnEos(propval);
+    setWaitOnEos(propval);
   }
 
   mixin URIHandlerT!();
@@ -1092,5 +1102,91 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("try-pull-sample", closure, after);
+  }
+}
+
+class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst.urihandler.URIHandlerGidBuilderImpl!T
+{
+
+  mixin URIHandlerGidBuilderT!();
+
+  /** */
+  T bufferList(bool propval)
+  {
+    return setProperty("buffer-list", propval);
+  }
+
+  /** */
+  T caps(gst.caps.Caps propval)
+  {
+    return setProperty("caps", propval);
+  }
+
+  /** */
+  T drop(bool propval)
+  {
+    return setProperty("drop", propval);
+  }
+
+  /** */
+  T emitSignals(bool propval)
+  {
+    return setProperty("emit-signals", propval);
+  }
+
+  /**
+      Set `maxBuffers` property.
+      Params:
+        propval = Maximum amount of buffers in the queue (0 = unlimited).
+      Returns: Builder instance for fluent chaining
+  */
+  T maxBuffers(uint propval)
+  {
+    return setProperty("max-buffers", propval);
+  }
+
+  /**
+      Set `maxBytes` property.
+      Params:
+        propval = Maximum amount of bytes in the queue (0 = unlimited)
+      Returns: Builder instance for fluent chaining
+  */
+  T maxBytes(ulong propval)
+  {
+    return setProperty("max-bytes", propval);
+  }
+
+  /**
+      Set `maxTime` property.
+      Params:
+        propval = Maximum total duration of data in the queue (0 = unlimited)
+      Returns: Builder instance for fluent chaining
+  */
+  T maxTime(ulong propval)
+  {
+    return setProperty("max-time", propval);
+  }
+
+  /**
+      Set `waitOnEos` property.
+      Params:
+        propval = Wait for all buffers to be processed after receiving an EOS.
+          
+          In cases where it is uncertain if an @appsink will have a consumer for its buffers
+          when it receives an EOS, set to false to ensure that the @appsink will not hang.
+      Returns: Builder instance for fluent chaining
+  */
+  T waitOnEos(bool propval)
+  {
+    return setProperty("wait-on-eos", propval);
+  }
+}
+
+/// Fluent builder for [gstapp.app_sink.AppSink]
+final class AppSinkGidBuilder : AppSinkGidBuilderImpl!AppSinkGidBuilder
+{
+  AppSink build()
+  {
+    return new AppSink(cast(void*)createGObject(AppSink._getGType), No.Take);
   }
 }

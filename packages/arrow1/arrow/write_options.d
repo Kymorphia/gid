@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.codec;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class WriteOptions : gobject.object.ObjectWrap
   override WriteOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.write_options.WriteOptions]
+  Returns: New builder object
+  */
+  static WriteOptionsGidBuilder builder()
+  {
+    return new WriteOptionsGidBuilder;
   }
 
   /**
@@ -171,5 +181,91 @@ class WriteOptions : gobject.object.ObjectWrap
     GArrowWriteOptions* _cretval;
     _cretval = garrow_write_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `alignment` property.
+      Params:
+        propval = Write padding after memory buffers to this multiple of
+          bytes. Generally 8 or 64.
+      Returns: Builder instance for fluent chaining
+  */
+  T alignment(int propval)
+  {
+    return setProperty("alignment", propval);
+  }
+
+  /**
+      Set `allow64bit` property.
+      Params:
+        propval = Whether to allow field lengths that don't fit in a signed 32-bit
+          int. Some implementations may not be able to parse such streams.
+      Returns: Builder instance for fluent chaining
+  */
+  T allow64bit(bool propval)
+  {
+    return setProperty("allow-64bit", propval);
+  }
+
+  /**
+      Set `codec` property.
+      Params:
+        propval = Codec to use for compressing and decompressing record batch body
+          buffers. This is not part of the Arrow IPC protocol and only for
+          internal use (e.g. Feather files).
+          
+          May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
+      Returns: Builder instance for fluent chaining
+  */
+  T codec(arrow.codec.Codec propval)
+  {
+    return setProperty("codec", propval);
+  }
+
+  /**
+      Set `maxRecursionDepth` property.
+      Params:
+        propval = The maximum permitted schema nesting depth.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxRecursionDepth(int propval)
+  {
+    return setProperty("max-recursion-depth", propval);
+  }
+
+  /**
+      Set `useThreads` property.
+      Params:
+        propval = Whether to use the global CPU thread pool.
+      Returns: Builder instance for fluent chaining
+  */
+  T useThreads(bool propval)
+  {
+    return setProperty("use-threads", propval);
+  }
+
+  /**
+      Set `writeLegacyIpcFormat` property.
+      Params:
+        propval = Whether to write the pre-0.15.0 encapsulated IPC message format
+          consisting of a 4-byte prefix instead of 8 byte.
+      Returns: Builder instance for fluent chaining
+  */
+  T writeLegacyIpcFormat(bool propval)
+  {
+    return setProperty("write-legacy-ipc-format", propval);
+  }
+}
+
+/// Fluent builder for [arrow.write_options.WriteOptions]
+final class WriteOptionsGidBuilder : WriteOptionsGidBuilderImpl!WriteOptionsGidBuilder
+{
+  WriteOptions build()
+  {
+    return new WriteOptions(cast(void*)createGObject(WriteOptions._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Decimal128 : gobject.object.ObjectWrap
   override Decimal128 self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.decimal128.Decimal128]
+  Returns: New builder object
+  */
+  static Decimal128GidBuilder builder()
+  {
+    return new Decimal128GidBuilder;
   }
 
   /** */
@@ -219,5 +229,24 @@ class Decimal128 : gobject.object.ObjectWrap
     _cretval = garrow_decimal128_to_string_scale(cast(GArrowDecimal128*)this._cPtr, scale);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class Decimal128GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T decimal128(void* propval)
+  {
+    return setProperty("decimal128", propval);
+  }
+}
+
+/// Fluent builder for [arrow.decimal128.Decimal128]
+final class Decimal128GidBuilder : Decimal128GidBuilderImpl!Decimal128GidBuilder
+{
+  Decimal128 build()
+  {
+    return new Decimal128(cast(void*)createGObject(Decimal128._getGType), No.Take);
   }
 }

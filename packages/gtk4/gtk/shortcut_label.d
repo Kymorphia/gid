@@ -2,6 +2,7 @@
 module gtk.shortcut_label;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -47,6 +48,15 @@ class ShortcutLabel : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.shortcut_label.ShortcutLabel]
+  Returns: New builder object
+  */
+  static ShortcutLabelGidBuilder builder()
+  {
+    return new ShortcutLabelGidBuilder;
+  }
+
+  /**
       Get `accelerator` property.
       Returns: The accelerator that @self displays.
         
@@ -68,7 +78,7 @@ class ShortcutLabel : gtk.widget.Widget
   */
   @property void accelerator(string propval)
   {
-    return setAccelerator(propval);
+    setAccelerator(propval);
   }
 
   /**
@@ -87,7 +97,7 @@ class ShortcutLabel : gtk.widget.Widget
   */
   @property void disabledText(string propval)
   {
-    return setDisabledText(propval);
+    setDisabledText(propval);
   }
 
   /**
@@ -152,5 +162,44 @@ class ShortcutLabel : gtk.widget.Widget
   {
     const(char)* _disabledText = disabledText.toCString(No.Alloc);
     gtk_shortcut_label_set_disabled_text(cast(GtkShortcutLabel*)this._cPtr, _disabledText);
+  }
+}
+
+class ShortcutLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `accelerator` property.
+      Params:
+        propval = The accelerator that @self displays.
+          
+          See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
+          for the accepted syntax.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelerator(string propval)
+  {
+    return setProperty("accelerator", propval);
+  }
+
+  /**
+      Set `disabledText` property.
+      Params:
+        propval = The text that is displayed when no accelerator is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T disabledText(string propval)
+  {
+    return setProperty("disabled-text", propval);
+  }
+}
+
+/// Fluent builder for [gtk.shortcut_label.ShortcutLabel]
+final class ShortcutLabelGidBuilder : ShortcutLabelGidBuilderImpl!ShortcutLabelGidBuilder
+{
+  ShortcutLabel build()
+  {
+    return new ShortcutLabel(cast(void*)createGObject(ShortcutLabel._getGType), No.Take);
   }
 }

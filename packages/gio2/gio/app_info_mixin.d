@@ -12,6 +12,7 @@ public import gio.file;
 public import gio.icon;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -542,4 +543,8 @@ template AppInfoT()
     _retval = cast(bool)g_app_info_supports_uris(cast(GAppInfo*)this._cPtr);
     return _retval;
   }
+}
+
+template AppInfoGidBuilderT()
+{
 }

@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -76,6 +77,15 @@ class PreferencesGroup : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.preferences_group.PreferencesGroup]
+  Returns: New builder object
+  */
+  static PreferencesGroupGidBuilder builder()
+  {
+    return new PreferencesGroupGidBuilder;
+  }
+
+  /**
       Get `description` property.
       Returns: The description for this group of preferences.
   */
@@ -91,7 +101,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   @property void description(string propval)
   {
-    return setDescription(propval);
+    setDescription(propval);
   }
 
   /**
@@ -120,7 +130,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   @property void headerSuffix(gtk.widget.Widget propval)
   {
-    return setHeaderSuffix(propval);
+    setHeaderSuffix(propval);
   }
 
   /**
@@ -139,7 +149,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -248,5 +258,57 @@ class PreferencesGroup : gtk.widget.Widget
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_preferences_group_set_title(cast(AdwPreferencesGroup*)this._cPtr, _title);
+  }
+}
+
+class PreferencesGroupGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `description` property.
+      Params:
+        propval = The description for this group of preferences.
+      Returns: Builder instance for fluent chaining
+  */
+  T description(string propval)
+  {
+    return setProperty("description", propval);
+  }
+
+  /**
+      Set `headerSuffix` property.
+      Params:
+        propval = The header suffix widget.
+          
+          Displayed above the list, next to the title and description.
+          
+          Suffixes are commonly used to show a button or a spinner for the whole
+          group.
+      Returns: Builder instance for fluent chaining
+  */
+  T headerSuffix(gtk.widget.Widget propval)
+  {
+    return setProperty("header-suffix", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title for this group of preferences.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [adw.preferences_group.PreferencesGroup]
+final class PreferencesGroupGidBuilder : PreferencesGroupGidBuilderImpl!PreferencesGroupGidBuilder
+{
+  PreferencesGroup build()
+  {
+    return new PreferencesGroup(cast(void*)createGObject(PreferencesGroup._getGType), No.Take);
   }
 }

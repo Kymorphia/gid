@@ -3,6 +3,7 @@ module gstgl.glslstage;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gst.object;
 import gstgl.c.functions;
@@ -39,6 +40,15 @@ class GLSLStage : gst.object.ObjectWrap
   override GLSLStage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstgl.glslstage.GLSLStage]
+  Returns: New builder object
+  */
+  static GLSLStageGidBuilder builder()
+  {
+    return new GLSLStageGidBuilder;
   }
 
   /** */
@@ -163,5 +173,18 @@ class GLSLStage : gst.object.ObjectWrap
 
     _retval = cast(bool)gst_glsl_stage_set_strings(cast(GstGLSLStage*)this._cPtr, version_, profile, _nStrings, _str);
     return _retval;
+  }
+}
+
+class GLSLStageGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstgl.glslstage.GLSLStage]
+final class GLSLStageGidBuilder : GLSLStageGidBuilderImpl!GLSLStageGidBuilder
+{
+  GLSLStage build()
+  {
+    return new GLSLStage(cast(void*)createGObject(GLSLStage._getGType), No.Take);
   }
 }

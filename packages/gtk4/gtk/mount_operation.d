@@ -4,6 +4,7 @@ module gtk.mount_operation;
 import gdk.display;
 import gid.gid;
 import gio.mount_operation;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -54,6 +55,15 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
+  Get builder for [gtk.mount_operation.MountOperation]
+  Returns: New builder object
+  */
+  static MountOperationGidBuilder builder()
+  {
+    return new MountOperationGidBuilder;
+  }
+
+  /**
       Get `display` property.
       Returns: The display where dialogs will be shown.
   */
@@ -69,7 +79,7 @@ class MountOperation : gio.mount_operation.MountOperation
   */
   @property void display(gdk.display.Display propval)
   {
-    return setDisplay(propval);
+    setDisplay(propval);
   }
 
   /**
@@ -88,7 +98,7 @@ class MountOperation : gio.mount_operation.MountOperation
   */
   @property void parent(gtk.window.Window propval)
   {
-    return setParent(propval);
+    setParent(propval);
   }
 
   /**
@@ -163,5 +173,40 @@ class MountOperation : gio.mount_operation.MountOperation
   void setParent(gtk.window.Window parent = null)
   {
     gtk_mount_operation_set_parent(cast(GtkMountOperation*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
+  }
+}
+
+class MountOperationGidBuilderImpl(T) : gio.mount_operation.MountOperationGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display where dialogs will be shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = The parent window.
+      Returns: Builder instance for fluent chaining
+  */
+  T parent(gtk.window.Window propval)
+  {
+    return setProperty("parent", propval);
+  }
+}
+
+/// Fluent builder for [gtk.mount_operation.MountOperation]
+final class MountOperationGidBuilder : MountOperationGidBuilderImpl!MountOperationGidBuilder
+{
+  MountOperation build()
+  {
+    return new MountOperation(cast(void*)createGObject(MountOperation._getGType), Yes.Take);
   }
 }

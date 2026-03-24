@@ -2,6 +2,7 @@
 module gstvideo.video_encoder;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
@@ -112,6 +113,15 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   override VideoEncoder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstvideo.video_encoder.VideoEncoder]
+  Returns: New builder object
+  */
+  static VideoEncoderGidBuilder builder()
+  {
+    return new VideoEncoderGidBuilder;
   }
 
   /**
@@ -495,5 +505,38 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   void setQosEnabled(bool enabled)
   {
     gst_video_encoder_set_qos_enabled(cast(GstVideoEncoder*)this._cPtr, enabled);
+  }
+}
+
+class VideoEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.preset.PresetGidBuilderImpl!T
+{
+
+  mixin PresetGidBuilderT!();
+
+  /**
+      Set `minForceKeyUnitInterval` property.
+      Params:
+        propval = Minimum interval between force-keyunit requests in nanoseconds. See
+          [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T minForceKeyUnitInterval(ulong propval)
+  {
+    return setProperty("min-force-key-unit-interval", propval);
+  }
+
+  /** */
+  T qos(bool propval)
+  {
+    return setProperty("qos", propval);
+  }
+}
+
+/// Fluent builder for [gstvideo.video_encoder.VideoEncoder]
+final class VideoEncoderGidBuilder : VideoEncoderGidBuilderImpl!VideoEncoderGidBuilder
+{
+  VideoEncoder build()
+  {
+    return new VideoEncoder(cast(void*)createGObject(VideoEncoder._getGType), No.Take);
   }
 }

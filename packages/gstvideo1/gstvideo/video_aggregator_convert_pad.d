@@ -2,6 +2,7 @@
 module gstvideo.video_aggregator_convert_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.structure;
 import gstvideo.c.functions;
@@ -42,6 +43,15 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
     return this;
   }
 
+  /**
+  Get builder for [gstvideo.video_aggregator_convert_pad.VideoAggregatorConvertPad]
+  Returns: New builder object
+  */
+  static VideoAggregatorConvertPadGidBuilder builder()
+  {
+    return new VideoAggregatorConvertPadGidBuilder;
+  }
+
   /** */
   @property gst.structure.Structure converterConfig()
   {
@@ -61,5 +71,24 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
   void updateConversionInfo()
   {
     gst_video_aggregator_convert_pad_update_conversion_info(cast(GstVideoAggregatorConvertPad*)this._cPtr);
+  }
+}
+
+class VideoAggregatorConvertPadGidBuilderImpl(T) : gstvideo.video_aggregator_pad.VideoAggregatorPadGidBuilderImpl!T
+{
+
+  /** */
+  T converterConfig(gst.structure.Structure propval)
+  {
+    return setProperty("converter-config", propval);
+  }
+}
+
+/// Fluent builder for [gstvideo.video_aggregator_convert_pad.VideoAggregatorConvertPad]
+final class VideoAggregatorConvertPadGidBuilder : VideoAggregatorConvertPadGidBuilderImpl!VideoAggregatorConvertPadGidBuilder
+{
+  VideoAggregatorConvertPad build()
+  {
+    return new VideoAggregatorConvertPad(cast(void*)createGObject(VideoAggregatorConvertPad._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module webkit.urirequest;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.message_headers;
 import webkit.c.functions;
@@ -44,6 +45,15 @@ class URIRequest : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.urirequest.URIRequest]
+  Returns: New builder object
+  */
+  static URIRequestGidBuilder builder()
+  {
+    return new URIRequestGidBuilder;
+  }
+
+  /**
       Get `uri` property.
       Returns: The URI to which the request will be made.
   */
@@ -59,7 +69,7 @@ class URIRequest : gobject.object.ObjectWrap
   */
   @property void uri(string propval)
   {
-    return setUri(propval);
+    setUri(propval);
   }
 
   /**
@@ -125,5 +135,29 @@ class URIRequest : gobject.object.ObjectWrap
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     webkit_uri_request_set_uri(cast(WebKitURIRequest*)this._cPtr, _uri);
+  }
+}
+
+class URIRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The URI to which the request will be made.
+      Returns: Builder instance for fluent chaining
+  */
+  T uri(string propval)
+  {
+    return setProperty("uri", propval);
+  }
+}
+
+/// Fluent builder for [webkit.urirequest.URIRequest]
+final class URIRequestGidBuilder : URIRequestGidBuilderImpl!URIRequestGidBuilder
+{
+  URIRequest build()
+  {
+    return new URIRequest(cast(void*)createGObject(URIRequest._getGType), Yes.Take);
   }
 }

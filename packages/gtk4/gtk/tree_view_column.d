@@ -3,6 +3,7 @@ module gtk.tree_view_column;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gtk.buildable;
@@ -61,6 +62,15 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
     return this;
   }
 
+  /**
+  Get builder for [gtk.tree_view_column.TreeViewColumn]
+  Returns: New builder object
+  */
+  static TreeViewColumnGidBuilder builder()
+  {
+    return new TreeViewColumnGidBuilder;
+  }
+
   /** */
   @property float alignment()
   {
@@ -70,7 +80,19 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void alignment(float propval)
   {
-    return setAlignment(propval);
+    setAlignment(propval);
+  }
+
+  /**
+      Get `cellArea` property.
+      Returns: The [gtk.cell_area.CellArea] used to layout cell renderers for this column.
+        
+        If no area is specified when creating the tree view column with [gtk.tree_view_column.TreeViewColumn.newWithArea]
+        a horizontally oriented [gtk.cell_area_box.CellAreaBox] will be used.
+  */
+  @property gtk.cell_area.CellArea cellArea()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
   }
 
   /** */
@@ -82,7 +104,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void clickable(bool propval)
   {
-    return setClickable(propval);
+    setClickable(propval);
   }
 
   /** */
@@ -94,7 +116,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void expand(bool propval)
   {
-    return setExpand(propval);
+    setExpand(propval);
   }
 
   /** */
@@ -106,7 +128,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void fixedWidth(int propval)
   {
-    return setFixedWidth(propval);
+    setFixedWidth(propval);
   }
 
   /** */
@@ -118,7 +140,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void maxWidth(int propval)
   {
-    return setMaxWidth(propval);
+    setMaxWidth(propval);
   }
 
   /** */
@@ -130,7 +152,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void minWidth(int propval)
   {
-    return setMinWidth(propval);
+    setMinWidth(propval);
   }
 
   /** */
@@ -142,7 +164,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void reorderable(bool propval)
   {
-    return setReorderable(propval);
+    setReorderable(propval);
   }
 
   /** */
@@ -154,7 +176,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void resizable(bool propval)
   {
-    return setResizable(propval);
+    setResizable(propval);
   }
 
   /** */
@@ -166,7 +188,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void sizing(gtk.types.TreeViewColumnSizing propval)
   {
-    return setSizing(propval);
+    setSizing(propval);
   }
 
   /**
@@ -187,7 +209,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   */
   @property void sortColumnId(int propval)
   {
-    return setSortColumnId(propval);
+    setSortColumnId(propval);
   }
 
   /** */
@@ -199,7 +221,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void sortIndicator(bool propval)
   {
-    return setSortIndicator(propval);
+    setSortIndicator(propval);
   }
 
   /** */
@@ -211,7 +233,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void sortOrder(gtk.types.SortType propval)
   {
-    return setSortOrder(propval);
+    setSortOrder(propval);
   }
 
   /** */
@@ -223,7 +245,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void spacing(int propval)
   {
-    return setSpacing(propval);
+    setSpacing(propval);
   }
 
   /** */
@@ -235,7 +257,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /** */
@@ -247,7 +269,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   /** */
@@ -259,7 +281,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /** */
   @property void widget(gtk.widget.Widget propval)
   {
-    return setWidget(propval);
+    setWidget(propval);
   }
 
   /** */
@@ -1095,5 +1117,137 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("clicked", closure, after);
+  }
+}
+
+class TreeViewColumnGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+  mixin CellLayoutGidBuilderT!();
+
+  /** */
+  T alignment(float propval)
+  {
+    return setProperty("alignment", propval);
+  }
+
+  /**
+      Set `cellArea` property.
+      Params:
+        propval = The [gtk.cell_area.CellArea] used to layout cell renderers for this column.
+          
+          If no area is specified when creating the tree view column with [gtk.tree_view_column.TreeViewColumn.newWithArea]
+          a horizontally oriented [gtk.cell_area_box.CellAreaBox] will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T cellArea(gtk.cell_area.CellArea propval)
+  {
+    return setProperty("cell-area", propval);
+  }
+
+  /** */
+  T clickable(bool propval)
+  {
+    return setProperty("clickable", propval);
+  }
+
+  /** */
+  T expand(bool propval)
+  {
+    return setProperty("expand", propval);
+  }
+
+  /** */
+  T fixedWidth(int propval)
+  {
+    return setProperty("fixed-width", propval);
+  }
+
+  /** */
+  T maxWidth(int propval)
+  {
+    return setProperty("max-width", propval);
+  }
+
+  /** */
+  T minWidth(int propval)
+  {
+    return setProperty("min-width", propval);
+  }
+
+  /** */
+  T reorderable(bool propval)
+  {
+    return setProperty("reorderable", propval);
+  }
+
+  /** */
+  T resizable(bool propval)
+  {
+    return setProperty("resizable", propval);
+  }
+
+  /** */
+  T sizing(gtk.types.TreeViewColumnSizing propval)
+  {
+    return setProperty("sizing", propval);
+  }
+
+  /**
+      Set `sortColumnId` property.
+      Params:
+        propval = Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
+          clickable. Set to -1 to make the column unsortable.
+      Returns: Builder instance for fluent chaining
+  */
+  T sortColumnId(int propval)
+  {
+    return setProperty("sort-column-id", propval);
+  }
+
+  /** */
+  T sortIndicator(bool propval)
+  {
+    return setProperty("sort-indicator", propval);
+  }
+
+  /** */
+  T sortOrder(gtk.types.SortType propval)
+  {
+    return setProperty("sort-order", propval);
+  }
+
+  /** */
+  T spacing(int propval)
+  {
+    return setProperty("spacing", propval);
+  }
+
+  /** */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /** */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+
+  /** */
+  T widget(gtk.widget.Widget propval)
+  {
+    return setProperty("widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.tree_view_column.TreeViewColumn]
+final class TreeViewColumnGidBuilder : TreeViewColumnGidBuilderImpl!TreeViewColumnGidBuilder
+{
+  TreeViewColumn build()
+  {
+    return new TreeViewColumn(cast(void*)createGObject(TreeViewColumn._getGType), No.Take);
   }
 }

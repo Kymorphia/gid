@@ -2,6 +2,7 @@
 module gtksource.completion_words;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_buffer;
 import gtksource.c.functions;
@@ -43,6 +44,15 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   override CompletionWords self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.completion_words.CompletionWords]
+  Returns: New builder object
+  */
+  static CompletionWordsGidBuilder builder()
+  {
+    return new CompletionWordsGidBuilder;
   }
 
   /** */
@@ -136,5 +146,50 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   void unregister(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
+  }
+}
+
+class CompletionWordsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtksource.completion_provider.CompletionProviderGidBuilderImpl!T
+{
+
+  mixin CompletionProviderGidBuilderT!();
+
+  /** */
+  T minimumWordSize(uint propval)
+  {
+    return setProperty("minimum-word-size", propval);
+  }
+
+  /** */
+  T priority(int propval)
+  {
+    return setProperty("priority", propval);
+  }
+
+  /** */
+  T proposalsBatchSize(uint propval)
+  {
+    return setProperty("proposals-batch-size", propval);
+  }
+
+  /** */
+  T scanBatchSize(uint propval)
+  {
+    return setProperty("scan-batch-size", propval);
+  }
+
+  /** */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion_words.CompletionWords]
+final class CompletionWordsGidBuilder : CompletionWordsGidBuilderImpl!CompletionWordsGidBuilder
+{
+  CompletionWords build()
+  {
+    return new CompletionWords(cast(void*)createGObject(CompletionWords._getGType), Yes.Take);
   }
 }

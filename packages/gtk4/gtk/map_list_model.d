@@ -4,6 +4,7 @@ module gtk.map_list_model;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -72,12 +73,30 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
   }
 
   /**
+  Get builder for [gtk.map_list_model.MapListModel]
+  Returns: New builder object
+  */
+  static MapListModelGidBuilder builder()
+  {
+    return new MapListModelGidBuilder;
+  }
+
+  /**
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
   @property gobject.types.GType itemType()
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model being mapped.
+  */
+  @property gio.list_model.ListModel model()
+  {
+    return getModel();
   }
 
   /**
@@ -190,5 +209,32 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
   void setModel(gio.list_model.ListModel model = null)
   {
     gtk_map_list_model_set_model(cast(GtkMapListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class MapListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being mapped.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gio.list_model.ListModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.map_list_model.MapListModel]
+final class MapListModelGidBuilder : MapListModelGidBuilderImpl!MapListModelGidBuilder
+{
+  MapListModel build()
+  {
+    return new MapListModel(cast(void*)createGObject(MapListModel._getGType), Yes.Take);
   }
 }

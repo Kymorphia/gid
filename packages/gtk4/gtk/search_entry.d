@@ -3,6 +3,7 @@ module gtk.search_entry;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -92,6 +93,15 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
+  Get builder for [gtk.search_entry.SearchEntry]
+  Returns: New builder object
+  */
+  static SearchEntryGidBuilder builder()
+  {
+    return new SearchEntryGidBuilder;
+  }
+
+  /**
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
@@ -128,7 +138,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
-    return setInputHints(propval);
+    setInputHints(propval);
   }
 
   /**
@@ -149,7 +159,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
-    return setInputPurpose(propval);
+    setInputPurpose(propval);
   }
 
   /**
@@ -170,7 +180,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   @property void placeholderText(string propval)
   {
-    return setPlaceholderText(propval);
+    setPlaceholderText(propval);
   }
 
   /**
@@ -191,7 +201,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   @property void searchDelay(uint propval)
   {
-    return setSearchDelay(propval);
+    setSearchDelay(propval);
   }
 
   mixin EditableT!();
@@ -587,5 +597,79 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stop-search", closure, after);
+  }
+}
+
+class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
+{
+
+  mixin EditableGidBuilderT!();
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatesDefault(bool propval)
+  {
+    return setProperty("activates-default", propval);
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = The hints about input for the [gtk.search_entry.SearchEntry] used to alter the
+          behaviour of input methods.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(gtk.types.InputHints propval)
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose for the [gtk.search_entry.SearchEntry] input used to alter the
+          behaviour of input methods.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setProperty("input-purpose", propval);
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.search_entry.SearchEntry]
+          when it is empty and unfocused.
+      Returns: Builder instance for fluent chaining
+  */
+  T placeholderText(string propval)
+  {
+    return setProperty("placeholder-text", propval);
+  }
+
+  /**
+      Set `searchDelay` property.
+      Params:
+        propval = The delay in milliseconds from last keypress to the search
+          changed signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T searchDelay(uint propval)
+  {
+    return setProperty("search-delay", propval);
+  }
+}
+
+/// Fluent builder for [gtk.search_entry.SearchEntry]
+final class SearchEntryGidBuilder : SearchEntryGidBuilderImpl!SearchEntryGidBuilder
+{
+  SearchEntry build()
+  {
+    return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), No.Take);
   }
 }

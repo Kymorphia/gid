@@ -6,6 +6,7 @@ import gda.c.types;
 import gda.transaction_status_event;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class TransactionStatus : gobject.object.ObjectWrap
   override TransactionStatus self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.transaction_status.TransactionStatus]
+  Returns: New builder object
+  */
+  static TransactionStatusGidBuilder builder()
+  {
+    return new TransactionStatusGidBuilder;
   }
 
   /**
@@ -84,5 +94,18 @@ class TransactionStatus : gobject.object.ObjectWrap
   void freeEvents(gda.transaction_status_event.TransactionStatusEvent event, bool freeAfter)
   {
     gda_transaction_status_free_events(cast(GdaTransactionStatus*)this._cPtr, event ? cast(GdaTransactionStatusEvent*)event._cPtr : null, freeAfter);
+  }
+}
+
+class TransactionStatusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.transaction_status.TransactionStatus]
+final class TransactionStatusGidBuilder : TransactionStatusGidBuilderImpl!TransactionStatusGidBuilder
+{
+  TransactionStatus build()
+  {
+    return new TransactionStatus(cast(void*)createGObject(TransactionStatus._getGType), Yes.Take);
   }
 }

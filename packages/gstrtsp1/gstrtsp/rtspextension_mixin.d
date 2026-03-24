@@ -4,6 +4,7 @@ module gstrtsp.rtspextension_mixin;
 public import gstrtsp.rtspextension_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gst.caps;
 public import gst.structure;
 public import gstrtsp.c.functions;
@@ -161,4 +162,8 @@ template RTSPExtensionT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("send", closure, after);
   }
+}
+
+template RTSPExtensionGidBuilderT()
+{
 }

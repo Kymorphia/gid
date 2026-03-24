@@ -9,6 +9,7 @@ import gio.c.types;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.parameter;
 import gobject.types;
@@ -228,4 +229,8 @@ interface AsyncInitable
       Throws: [ErrorWrap]
   */
   gobject.object.ObjectWrap newFinish(gio.async_result.AsyncResult res);
+}
+
+interface AsyncInitableGidBuilderImpl(T)
+{
 }

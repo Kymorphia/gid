@@ -3,6 +3,7 @@ module gtk.file_filter;
 
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -88,6 +89,15 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   }
 
   /**
+  Get builder for [gtk.file_filter.FileFilter]
+  Returns: New builder object
+  */
+  static FileFilterGidBuilder builder()
+  {
+    return new FileFilterGidBuilder;
+  }
+
+  /**
       Get `name` property.
       Returns: The human-readable name of the filter.
         
@@ -109,7 +119,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   mixin BuildableT!();
@@ -281,5 +291,34 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class FileFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The human-readable name of the filter.
+          
+          This is the string that will be displayed in the file chooser
+          user interface if there is a selectable list of filters.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.file_filter.FileFilter]
+final class FileFilterGidBuilder : FileFilterGidBuilderImpl!FileFilterGidBuilder
+{
+  FileFilter build()
+  {
+    return new FileFilter(cast(void*)createGObject(FileFilter._getGType), Yes.Take);
   }
 }

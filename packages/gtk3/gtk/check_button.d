@@ -4,6 +4,7 @@ module gtk.check_button;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -74,6 +75,15 @@ class CheckButton : gtk.toggle_button.ToggleButton
   }
 
   /**
+  Get builder for [gtk.check_button.CheckButton]
+  Returns: New builder object
+  */
+  static CheckButtonGidBuilder builder()
+  {
+    return new CheckButtonGidBuilder;
+  }
+
+  /**
       Creates a new #GtkCheckButton.
       Returns: a #GtkWidget.
   */
@@ -117,5 +127,19 @@ class CheckButton : gtk.toggle_button.ToggleButton
     _cretval = gtk_check_button_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class CheckButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.check_button.CheckButton]
+final class CheckButtonGidBuilder : CheckButtonGidBuilderImpl!CheckButtonGidBuilder
+{
+  CheckButton build()
+  {
+    return new CheckButton(cast(void*)createGObject(CheckButton._getGType), No.Take);
   }
 }

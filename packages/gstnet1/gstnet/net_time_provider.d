@@ -4,6 +4,7 @@ module gstnet.net_time_provider;
 import gid.gid;
 import gio.initable;
 import gio.initable_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gst.clock;
 import gst.object;
@@ -50,6 +51,15 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
     return this;
   }
 
+  /**
+  Get builder for [gstnet.net_time_provider.NetTimeProvider]
+  Returns: New builder object
+  */
+  static NetTimeProviderGidBuilder builder()
+  {
+    return new NetTimeProviderGidBuilder;
+  }
+
   /** */
   @property bool active()
   {
@@ -60,6 +70,24 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
   @property void active(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
+  }
+
+  /** */
+  @property string address()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("address");
+  }
+
+  /** */
+  @property gst.clock.Clock clock()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.clock.Clock)("clock");
+  }
+
+  /** */
+  @property int port()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("port");
   }
 
   /** */
@@ -92,5 +120,50 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
     const(char)* _address = address.toCString(No.Alloc);
     _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock._cPtr(No.Dup) : null, _address, port);
     this(_cretval, Yes.Take);
+  }
+}
+
+class NetTimeProviderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin InitableGidBuilderT!();
+
+  /** */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /** */
+  T address(string propval)
+  {
+    return setProperty("address", propval);
+  }
+
+  /** */
+  T clock(gst.clock.Clock propval)
+  {
+    return setProperty("clock", propval);
+  }
+
+  /** */
+  T port(int propval)
+  {
+    return setProperty("port", propval);
+  }
+
+  /** */
+  T qosDscp(int propval)
+  {
+    return setProperty("qos-dscp", propval);
+  }
+}
+
+/// Fluent builder for [gstnet.net_time_provider.NetTimeProvider]
+final class NetTimeProviderGidBuilder : NetTimeProviderGidBuilderImpl!NetTimeProviderGidBuilder
+{
+  NetTimeProvider build()
+  {
+    return new NetTimeProvider(cast(void*)createGObject(NetTimeProvider._getGType), Yes.Take);
   }
 }

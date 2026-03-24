@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class Date64Scalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class Date64Scalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.date64_scalar.Date64Scalar]
+  Returns: New builder object
+  */
+  static Date64ScalarGidBuilder builder()
+  {
+    return new Date64ScalarGidBuilder;
+  }
+
   /** */
   this(long value)
   {
@@ -50,5 +60,18 @@ class Date64Scalar : arrow.scalar.Scalar
     long _retval;
     _retval = garrow_date64_scalar_get_value(cast(GArrowDate64Scalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class Date64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.date64_scalar.Date64Scalar]
+final class Date64ScalarGidBuilder : Date64ScalarGidBuilderImpl!Date64ScalarGidBuilder
+{
+  Date64Scalar build()
+  {
+    return new Date64Scalar(cast(void*)createGObject(Date64Scalar._getGType), Yes.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.alignment;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.bin;
 import gtk.buildable;
@@ -57,6 +58,15 @@ class Alignment : gtk.bin.Bin
   override Alignment self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.alignment.Alignment]
+  Returns: New builder object
+  */
+  static AlignmentGidBuilder builder()
+  {
+    return new AlignmentGidBuilder;
   }
 
   /**
@@ -346,5 +356,131 @@ class Alignment : gtk.bin.Bin
   void setPadding(uint paddingTop, uint paddingBottom, uint paddingLeft, uint paddingRight)
   {
     gtk_alignment_set_padding(cast(GtkAlignment*)this._cPtr, paddingTop, paddingBottom, paddingLeft, paddingRight);
+  }
+}
+
+class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /**
+      Set `bottomPadding` property.
+      Params:
+        propval = The padding to insert at the bottom of the widget.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginBottom] instead
+  */
+  T bottomPadding(uint propval)
+  {
+    return setProperty("bottom-padding", propval);
+  }
+
+  /**
+      Set `leftPadding` property.
+      Params:
+        propval = The padding to insert at the left of the widget.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginStart] instead
+  */
+  T leftPadding(uint propval)
+  {
+    return setProperty("left-padding", propval);
+  }
+
+  /**
+      Set `rightPadding` property.
+      Params:
+        propval = The padding to insert at the right of the widget.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginEnd] instead
+  */
+  T rightPadding(uint propval)
+  {
+    return setProperty("right-padding", propval);
+  }
+
+  /**
+      Set `topPadding` property.
+      Params:
+        propval = The padding to insert at the top of the widget.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setMarginTop] instead
+  */
+  T topPadding(uint propval)
+  {
+    return setProperty("top-padding", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = Horizontal position of child in available space. A value of 0.0
+          will flush the child left (or right, in RTL locales); a value
+          of 1.0 will flush the child right (or left, in RTL locales).
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `xscale` property.
+      Params:
+        propval = If available horizontal space is bigger than needed, how much
+          of it to use for the child. A value of 0.0 means none; a value
+          of 1.0 means all.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
+  */
+  T xscale(float propval)
+  {
+    return setProperty("xscale", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = Vertical position of child in available space. A value of 0.0
+          will flush the child to the top; a value of 1.0 will flush the
+          child to the bottom.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
+  */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+
+  /**
+      Set `yscale` property.
+      Params:
+        propval = If available vertical space is bigger than needed, how much
+          of it to use for the child. A value of 0.0 means none; a value
+          of 1.0 means all.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
+  */
+  T yscale(float propval)
+  {
+    return setProperty("yscale", propval);
+  }
+}
+
+/// Fluent builder for [gtk.alignment.Alignment]
+final class AlignmentGidBuilder : AlignmentGidBuilderImpl!AlignmentGidBuilder
+{
+  Alignment build()
+  {
+    return new Alignment(cast(void*)createGObject(Alignment._getGType), No.Take);
   }
 }

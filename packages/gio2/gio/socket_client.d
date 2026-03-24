@@ -14,6 +14,7 @@ import gio.socket_connection;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -60,6 +61,15 @@ class SocketClient : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.socket_client.SocketClient]
+  Returns: New builder object
+  */
+  static SocketClientGidBuilder builder()
+  {
+    return new SocketClientGidBuilder;
+  }
+
+  /**
       Get `enableProxy` property.
       Returns: Enable proxy support.
   */
@@ -75,7 +85,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void enableProxy(bool propval)
   {
-    return setEnableProxy(propval);
+    setEnableProxy(propval);
   }
 
   /**
@@ -94,7 +104,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void family(gio.types.SocketFamily propval)
   {
-    return setFamily(propval);
+    setFamily(propval);
   }
 
   /**
@@ -113,7 +123,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void localAddress(gio.socket_address.SocketAddress propval)
   {
-    return setLocalAddress(propval);
+    setLocalAddress(propval);
   }
 
   /**
@@ -132,7 +142,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void protocol(gio.types.SocketProtocol propval)
   {
-    return setProtocol(propval);
+    setProtocol(propval);
   }
 
   /**
@@ -151,7 +161,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
   {
-    return setProxyResolver(propval);
+    setProxyResolver(propval);
   }
 
   /**
@@ -170,7 +180,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void timeout(uint propval)
   {
-    return setTimeout(propval);
+    setTimeout(propval);
   }
 
   /**
@@ -189,7 +199,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void tls(bool propval)
   {
-    return setTls(propval);
+    setTls(propval);
   }
 
   /**
@@ -242,7 +252,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   @property void tlsValidationFlags(gio.types.TlsCertificateFlags propval)
   {
-    return setTlsValidationFlags(propval);
+    setTlsValidationFlags(propval);
   }
 
   /**
@@ -1057,5 +1067,134 @@ class SocketClient : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
+  }
+}
+
+class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `enableProxy` property.
+      Params:
+        propval = Enable proxy support.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableProxy(bool propval)
+  {
+    return setProperty("enable-proxy", propval);
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = The address family to use for socket construction.
+      Returns: Builder instance for fluent chaining
+  */
+  T family(gio.types.SocketFamily propval)
+  {
+    return setProperty("family", propval);
+  }
+
+  /**
+      Set `localAddress` property.
+      Params:
+        propval = The local address constructed sockets will be bound to.
+      Returns: Builder instance for fluent chaining
+  */
+  T localAddress(gio.socket_address.SocketAddress propval)
+  {
+    return setProperty("local-address", propval);
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = The protocol to use for socket construction, or `0` for default.
+      Returns: Builder instance for fluent chaining
+  */
+  T protocol(gio.types.SocketProtocol propval)
+  {
+    return setProperty("protocol", propval);
+  }
+
+  /**
+      Set `proxyResolver` property.
+      Params:
+        propval = The proxy resolver to use
+      Returns: Builder instance for fluent chaining
+  */
+  T proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  {
+    return setProperty("proxy-resolver", propval);
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The I/O timeout for sockets, in seconds, or `0` for none.
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(uint propval)
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /**
+      Set `tls` property.
+      Params:
+        propval = Whether to create TLS connections.
+      Returns: Builder instance for fluent chaining
+  */
+  T tls(bool propval)
+  {
+    return setProperty("tls", propval);
+  }
+
+  /**
+      Set `tlsValidationFlags` property.
+      Params:
+        propval = The TLS validation flags used when creating TLS connections. The
+          default value is [gio.types.TlsCertificateFlags.ValidateAll].
+          
+          GLib guarantees that if certificate verification fails, at least one
+          flag will be set, but it does not guarantee that all possible flags
+          will be set. Accordingly, you may not safely decide to ignore any
+          particular type of error. For example, it would be incorrect to mask
+          [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+          because this could potentially be the only error flag set even if
+          other problems exist with the certificate. Therefore, there is no
+          safe way to use this property. This is not a horrible problem,
+          though, because you should not be attempting to ignore validation
+          errors anyway. If you really must ignore TLS certificate errors,
+          connect to the #GSocketClient::event signal, wait for it to be
+          emitted with [gio.types.SocketClientEvent.TlsHandshaking], and use that to
+          connect to #GTlsConnection::accept-certificate.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  T tlsValidationFlags(gio.types.TlsCertificateFlags propval)
+  {
+    return setProperty("tls-validation-flags", propval);
+  }
+
+  /**
+      Set `type` property.
+      Params:
+        propval = The type to use for socket construction.
+      Returns: Builder instance for fluent chaining
+  */
+  T type(gio.types.SocketType propval)
+  {
+    return setProperty("type", propval);
+  }
+}
+
+/// Fluent builder for [gio.socket_client.SocketClient]
+final class SocketClientGidBuilder : SocketClientGidBuilderImpl!SocketClientGidBuilder
+{
+  SocketClient build()
+  {
+    return new SocketClient(cast(void*)createGObject(SocketClient._getGType), Yes.Take);
   }
 }

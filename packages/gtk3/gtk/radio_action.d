@@ -3,6 +3,7 @@ module gtk.radio_action;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -45,6 +46,15 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /**
+  Get builder for [gtk.radio_action.RadioAction]
+  Returns: New builder object
+  */
+  static RadioActionGidBuilder builder()
+  {
+    return new RadioActionGidBuilder;
+  }
+
+  /**
       Get `currentValue` property.
       Returns: The value property of the currently active member of the group to which
         this action belongs.
@@ -62,7 +72,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   */
   @property void currentValue(int propval)
   {
-    return setCurrentValue(propval);
+    setCurrentValue(propval);
   }
 
   /**
@@ -266,5 +276,57 @@ class RadioAction : gtk.toggle_action.ToggleAction
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class RadioActionGidBuilderImpl(T) : gtk.toggle_action.ToggleActionGidBuilderImpl!T
+{
+
+
+  /**
+      Set `currentValue` property.
+      Params:
+        propval = The value property of the currently active member of the group to which
+          this action belongs.
+      Returns: Builder instance for fluent chaining
+  */
+  T currentValue(int propval)
+  {
+    return setProperty("current-value", propval);
+  }
+
+  /**
+      Set `group` property.
+      Params:
+        propval = Sets a new group for a radio action.
+      Returns: Builder instance for fluent chaining
+  */
+  T group(gtk.radio_action.RadioAction propval)
+  {
+    return setProperty("group", propval);
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value is an arbitrary integer which can be used as a
+          convenient way to determine which action in the group is
+          currently active in an ::activate or ::changed signal handler.
+          See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
+          for convenient ways to get and set this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(int propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [gtk.radio_action.RadioAction]
+final class RadioActionGidBuilder : RadioActionGidBuilderImpl!RadioActionGidBuilder
+{
+  RadioAction build()
+  {
+    return new RadioAction(cast(void*)createGObject(RadioAction._getGType), Yes.Take);
   }
 }

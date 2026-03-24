@@ -2,6 +2,7 @@
 module soup.auth_domain_basic;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.auth_domain;
 import soup.c.functions;
@@ -41,6 +42,15 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   override AuthDomainBasic self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.auth_domain_basic.AuthDomainBasic]
+  Returns: New builder object
+  */
+  static AuthDomainBasicGidBuilder builder()
+  {
+    return new AuthDomainBasicGidBuilder;
   }
 
   /**
@@ -115,5 +125,40 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_auth_domain_basic_set_auth_callback(cast(SoupAuthDomain*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
+  }
+}
+
+class AuthDomainBasicGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderImpl!T
+{
+
+  /**
+      Set `authCallback` property.
+      Params:
+        propval = The `callback@AuthDomainBasicAuthCallback`.
+      Returns: Builder instance for fluent chaining
+  */
+  T authCallback(soup.types.AuthDomainBasicAuthCallback propval)
+  {
+    return setProperty("auth-callback", propval);
+  }
+
+  /**
+      Set `authData` property.
+      Params:
+        propval = The data to pass to the `callback@AuthDomainBasicAuthCallback`.
+      Returns: Builder instance for fluent chaining
+  */
+  T authData(void* propval)
+  {
+    return setProperty("auth-data", propval);
+  }
+}
+
+/// Fluent builder for [soup.auth_domain_basic.AuthDomainBasic]
+final class AuthDomainBasicGidBuilder : AuthDomainBasicGidBuilderImpl!AuthDomainBasicGidBuilder
+{
+  AuthDomainBasic build()
+  {
+    return new AuthDomainBasic(cast(void*)createGObject(AuthDomainBasic._getGType), Yes.Take);
   }
 }

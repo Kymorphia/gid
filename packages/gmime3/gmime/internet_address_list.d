@@ -9,6 +9,7 @@ import gmime.format_options;
 import gmime.internet_address;
 import gmime.parser_options;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -40,6 +41,15 @@ class InternetAddressList : gobject.object.ObjectWrap
   override InternetAddressList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.internet_address_list.InternetAddressList]
+  Returns: New builder object
+  */
+  static InternetAddressListGidBuilder builder()
+  {
+    return new InternetAddressListGidBuilder;
   }
 
   /**
@@ -273,5 +283,18 @@ class InternetAddressList : gobject.object.ObjectWrap
     _cretval = internet_address_list_to_string(cast(GMimeInternetAddressList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, encode);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class InternetAddressListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.internet_address_list.InternetAddressList]
+final class InternetAddressListGidBuilder : InternetAddressListGidBuilderImpl!InternetAddressListGidBuilder
+{
+  InternetAddressList build()
+  {
+    return new InternetAddressList(cast(void*)createGObject(InternetAddressList._getGType), Yes.Take);
   }
 }

@@ -12,6 +12,7 @@ import gio.action_group;
 import gio.list_model;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gobject.types;
@@ -467,6 +468,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
+  Get builder for [gtk.widget.Widget]
+  Returns: New builder object
+  */
+  static WidgetGidBuilder builder()
+  {
+    return new WidgetGidBuilder;
+  }
+
+  /**
       Get `canFocus` property.
       Returns: Whether the widget or any of its descendents can accept
         the input focus.
@@ -490,7 +500,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void canFocus(bool propval)
   {
-    return setCanFocus(propval);
+    setCanFocus(propval);
   }
 
   /**
@@ -509,7 +519,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void canTarget(bool propval)
   {
-    return setCanTarget(propval);
+    setCanTarget(propval);
+  }
+
+  /**
+      Get `cssName` property.
+      Returns: The name of this widget in the CSS tree.
+        
+        This property is meant to be set by widget implementations,
+        typically in their instance init function.
+  */
+  @property string cssName()
+  {
+    return getCssName();
   }
 
   /**
@@ -528,7 +550,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void cursor(gdk.cursor.Cursor propval)
   {
-    return setCursor(propval);
+    setCursor(propval);
   }
 
   /**
@@ -551,7 +573,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void focusOnClick(bool propval)
   {
-    return setFocusOnClick(propval);
+    setFocusOnClick(propval);
   }
 
   /**
@@ -570,7 +592,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void focusable(bool propval)
   {
-    return setFocusable(propval);
+    setFocusable(propval);
   }
 
   /**
@@ -589,7 +611,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void halign(gtk.types.Align propval)
   {
-    return setHalign(propval);
+    setHalign(propval);
   }
 
   /**
@@ -616,7 +638,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void hasTooltip(bool propval)
   {
-    return setHasTooltip(propval);
+    setHasTooltip(propval);
   }
 
   /**
@@ -658,7 +680,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void hexpand(bool propval)
   {
-    return setHexpand(propval);
+    setHexpand(propval);
   }
 
   /**
@@ -677,7 +699,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void hexpandSet(bool propval)
   {
-    return setHexpandSet(propval);
+    setHexpandSet(propval);
   }
 
   /**
@@ -704,7 +726,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void layoutManager(gtk.layout_manager.LayoutManager propval)
   {
-    return setLayoutManager(propval);
+    setLayoutManager(propval);
   }
 
   /**
@@ -731,7 +753,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void marginBottom(int propval)
   {
-    return setMarginBottom(propval);
+    setMarginBottom(propval);
   }
 
   /**
@@ -764,7 +786,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void marginEnd(int propval)
   {
-    return setMarginEnd(propval);
+    setMarginEnd(propval);
   }
 
   /**
@@ -797,7 +819,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void marginStart(int propval)
   {
-    return setMarginStart(propval);
+    setMarginStart(propval);
   }
 
   /**
@@ -824,7 +846,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void marginTop(int propval)
   {
-    return setMarginTop(propval);
+    setMarginTop(propval);
   }
 
   /**
@@ -843,7 +865,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /**
@@ -862,7 +884,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void opacity(double propval)
   {
-    return setOpacity(propval);
+    setOpacity(propval);
   }
 
   /**
@@ -887,7 +909,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void overflow(gtk.types.Overflow propval)
   {
-    return setOverflow(propval);
+    setOverflow(propval);
   }
 
   /**
@@ -915,7 +937,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void receivesDefault(bool propval)
   {
-    return setReceivesDefault(propval);
+    setReceivesDefault(propval);
   }
 
   /**
@@ -954,7 +976,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void sensitive(bool propval)
   {
-    return setSensitive(propval);
+    setSensitive(propval);
   }
 
   /**
@@ -997,7 +1019,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void tooltipMarkup(string propval)
   {
-    return setTooltipMarkup(propval);
+    setTooltipMarkup(propval);
   }
 
   /**
@@ -1038,7 +1060,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void tooltipText(string propval)
   {
-    return setTooltipText(propval);
+    setTooltipText(propval);
   }
 
   /**
@@ -1057,7 +1079,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void valign(gtk.types.Align propval)
   {
-    return setValign(propval);
+    setValign(propval);
   }
 
   /**
@@ -1076,7 +1098,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void vexpand(bool propval)
   {
-    return setVexpand(propval);
+    setVexpand(propval);
   }
 
   /**
@@ -1095,7 +1117,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void vexpandSet(bool propval)
   {
-    return setVexpandSet(propval);
+    setVexpandSet(propval);
   }
 
   /**
@@ -1114,7 +1136,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   @property void visible(bool propval)
   {
-    return setVisible(propval);
+    setVisible(propval);
   }
 
   /**
@@ -1143,6 +1165,24 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   mixin AccessibleT!();
   mixin BuildableT!();
   mixin ConstraintTargetT!();
+
+  /**
+  Convenience property to set `marginStart`, `marginEnd`, `marginTop`, and `marginBottom`.
+  Params:
+  propval = Margin for all 4 sides of the widget.
+  
+  This property adds margin outside of the widget's normal size
+  request, the margin will be added in addition to the size from
+  [gtk.widget.Widget.setSizeRequest] for example.
+  */
+  @property void margin(int propval)
+  {
+    setMarginStart(propval);
+    setMarginEnd(propval);
+    setMarginTop(propval);
+    setMarginBottom(propval);
+  }
+
 
   /**
       Obtains the current default reading direction.
@@ -4712,5 +4752,417 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unrealize", closure, after);
+  }
+}
+
+class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.accessible.AccessibleGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.constraint_target.ConstraintTargetGidBuilderImpl!T
+{
+
+  mixin AccessibleGidBuilderT!();
+  mixin BuildableGidBuilderT!();
+  mixin ConstraintTargetGidBuilderT!();
+
+  /**
+  Convenience property to set `marginStart`, `marginEnd`, `marginTop`, and `marginBottom`.
+  Params:
+  propval = Margin for all 4 sides of the widget.
+  
+  This property adds margin outside of the widget's normal size
+  request, the margin will be added in addition to the size from
+  [gtk.widget.Widget.setSizeRequest] for example.
+  Returns: Builder instance for fluent chaining
+  */
+  T margin(int propval)
+  {
+    setProperty("margin-start", propval);
+    setProperty("margin-end", propval);
+    setProperty("margin-top", propval);
+    return setProperty("margin-bottom", propval);
+  }
+
+  /**
+      Set `canFocus` property.
+      Params:
+        propval = Whether the widget or any of its descendents can accept
+          the input focus.
+          
+          This property is meant to be set by widget implementations,
+          typically in their instance init function.
+      Returns: Builder instance for fluent chaining
+  */
+  T canFocus(bool propval)
+  {
+    return setProperty("can-focus", propval);
+  }
+
+  /**
+      Set `canTarget` property.
+      Params:
+        propval = Whether the widget can receive pointer events.
+      Returns: Builder instance for fluent chaining
+  */
+  T canTarget(bool propval)
+  {
+    return setProperty("can-target", propval);
+  }
+
+  /**
+      Set `cssName` property.
+      Params:
+        propval = The name of this widget in the CSS tree.
+          
+          This property is meant to be set by widget implementations,
+          typically in their instance init function.
+      Returns: Builder instance for fluent chaining
+  */
+  T cssName(string propval)
+  {
+    return setProperty("css-name", propval);
+  }
+
+  /**
+      Set `cursor` property.
+      Params:
+        propval = The cursor used by @widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T cursor(gdk.cursor.Cursor propval)
+  {
+    return setProperty("cursor", propval);
+  }
+
+  /**
+      Set `focusOnClick` property.
+      Params:
+        propval = Whether the widget should grab focus when it is clicked with the mouse.
+          
+          This property is only relevant for widgets that can take focus.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusOnClick(bool propval)
+  {
+    return setProperty("focus-on-click", propval);
+  }
+
+  /**
+      Set `focusable` property.
+      Params:
+        propval = Whether this widget itself will accept the input focus.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusable(bool propval)
+  {
+    return setProperty("focusable", propval);
+  }
+
+  /**
+      Set `halign` property.
+      Params:
+        propval = How to distribute horizontal space if widget gets extra space.
+      Returns: Builder instance for fluent chaining
+  */
+  T halign(gtk.types.Align propval)
+  {
+    return setProperty("halign", propval);
+  }
+
+  /**
+      Set `hasTooltip` property.
+      Params:
+        propval = Enables or disables the emission of the ::query-tooltip signal on @widget.
+          
+          A value of true indicates that @widget can have a tooltip, in this case
+          the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
+          determine whether it will provide a tooltip or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasTooltip(bool propval)
+  {
+    return setProperty("has-tooltip", propval);
+  }
+
+  /**
+      Set `heightRequest` property.
+      Params:
+        propval = Override for height request of the widget.
+          
+          If this is -1, the natural request will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T heightRequest(int propval)
+  {
+    return setProperty("height-request", propval);
+  }
+
+  /**
+      Set `hexpand` property.
+      Params:
+        propval = Whether to expand horizontally.
+      Returns: Builder instance for fluent chaining
+  */
+  T hexpand(bool propval)
+  {
+    return setProperty("hexpand", propval);
+  }
+
+  /**
+      Set `hexpandSet` property.
+      Params:
+        propval = Whether to use the `hexpand` property.
+      Returns: Builder instance for fluent chaining
+  */
+  T hexpandSet(bool propval)
+  {
+    return setProperty("hexpand-set", propval);
+  }
+
+  /**
+      Set `layoutManager` property.
+      Params:
+        propval = The [gtk.layout_manager.LayoutManager] instance to use to compute the preferred size
+          of the widget, and allocate its children.
+          
+          This property is meant to be set by widget implementations,
+          typically in their instance init function.
+      Returns: Builder instance for fluent chaining
+  */
+  T layoutManager(gtk.layout_manager.LayoutManager propval)
+  {
+    return setProperty("layout-manager", propval);
+  }
+
+  /**
+      Set `marginBottom` property.
+      Params:
+        propval = Margin on bottom side of widget.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T marginBottom(int propval)
+  {
+    return setProperty("margin-bottom", propval);
+  }
+
+  /**
+      Set `marginEnd` property.
+      Params:
+        propval = Margin on end of widget, horizontally.
+          
+          This property supports left-to-right and right-to-left text
+          directions.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T marginEnd(int propval)
+  {
+    return setProperty("margin-end", propval);
+  }
+
+  /**
+      Set `marginStart` property.
+      Params:
+        propval = Margin on start of widget, horizontally.
+          
+          This property supports left-to-right and right-to-left text
+          directions.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T marginStart(int propval)
+  {
+    return setProperty("margin-start", propval);
+  }
+
+  /**
+      Set `marginTop` property.
+      Params:
+        propval = Margin on top side of widget.
+          
+          This property adds margin outside of the widget's normal size
+          request, the margin will be added in addition to the size from
+          [gtk.widget.Widget.setSizeRequest] for example.
+      Returns: Builder instance for fluent chaining
+  */
+  T marginTop(int propval)
+  {
+    return setProperty("margin-top", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `opacity` property.
+      Params:
+        propval = The requested opacity of the widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T opacity(double propval)
+  {
+    return setProperty("opacity", propval);
+  }
+
+  /**
+      Set `overflow` property.
+      Params:
+        propval = How content outside the widget's content area is treated.
+          
+          This property is meant to be set by widget implementations,
+          typically in their instance init function.
+      Returns: Builder instance for fluent chaining
+  */
+  T overflow(gtk.types.Overflow propval)
+  {
+    return setProperty("overflow", propval);
+  }
+
+  /**
+      Set `receivesDefault` property.
+      Params:
+        propval = Whether the widget will receive the default action when it is focused.
+      Returns: Builder instance for fluent chaining
+  */
+  T receivesDefault(bool propval)
+  {
+    return setProperty("receives-default", propval);
+  }
+
+  /**
+      Set `sensitive` property.
+      Params:
+        propval = Whether the widget responds to input.
+      Returns: Builder instance for fluent chaining
+  */
+  T sensitive(bool propval)
+  {
+    return setProperty("sensitive", propval);
+  }
+
+  /**
+      Set `tooltipMarkup` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string, which is marked up
+          with Pango markup.
+          
+          Also see [gtk.tooltip.Tooltip.setMarkup].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null:
+          `property@Gtk.Widget:has-tooltip` will automatically be set to true
+          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          the default signal handler.
+          
+          Note that if both `property@Gtk.Widget:tooltip-text` and
+          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+      Returns: Builder instance for fluent chaining
+  */
+  T tooltipMarkup(string propval)
+  {
+    return setProperty("tooltip-markup", propval);
+  }
+
+  /**
+      Set `tooltipText` property.
+      Params:
+        propval = Sets the text of tooltip to be the given string.
+          
+          Also see [gtk.tooltip.Tooltip.setText].
+          
+          This is a convenience property which will take care of getting the
+          tooltip shown if the given string is not null:
+          `property@Gtk.Widget:has-tooltip` will automatically be set to true
+          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          the default signal handler.
+          
+          Note that if both `property@Gtk.Widget:tooltip-text` and
+          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+      Returns: Builder instance for fluent chaining
+  */
+  T tooltipText(string propval)
+  {
+    return setProperty("tooltip-text", propval);
+  }
+
+  /**
+      Set `valign` property.
+      Params:
+        propval = How to distribute vertical space if widget gets extra space.
+      Returns: Builder instance for fluent chaining
+  */
+  T valign(gtk.types.Align propval)
+  {
+    return setProperty("valign", propval);
+  }
+
+  /**
+      Set `vexpand` property.
+      Params:
+        propval = Whether to expand vertically.
+      Returns: Builder instance for fluent chaining
+  */
+  T vexpand(bool propval)
+  {
+    return setProperty("vexpand", propval);
+  }
+
+  /**
+      Set `vexpandSet` property.
+      Params:
+        propval = Whether to use the `vexpand` property.
+      Returns: Builder instance for fluent chaining
+  */
+  T vexpandSet(bool propval)
+  {
+    return setProperty("vexpand-set", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether the widget is visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T visible(bool propval)
+  {
+    return setProperty("visible", propval);
+  }
+
+  /**
+      Set `widthRequest` property.
+      Params:
+        propval = Override for width request of the widget.
+          
+          If this is -1, the natural request will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T widthRequest(int propval)
+  {
+    return setProperty("width-request", propval);
+  }
+}
+
+/// Fluent builder for [gtk.widget.Widget]
+final class WidgetGidBuilder : WidgetGidBuilderImpl!WidgetGidBuilder
+{
+  Widget build()
+  {
+    return new Widget(cast(void*)createGObject(Widget._getGType), No.Take);
   }
 }

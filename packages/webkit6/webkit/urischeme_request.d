@@ -4,6 +4,7 @@ module webkit.urischeme_request;
 import gid.gid;
 import gio.input_stream;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import soup.message_headers;
 import webkit.c.functions;
@@ -50,6 +51,15 @@ class URISchemeRequest : gobject.object.ObjectWrap
   override URISchemeRequest self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.urischeme_request.URISchemeRequest]
+  Returns: New builder object
+  */
+  static URISchemeRequestGidBuilder builder()
+  {
+    return new URISchemeRequestGidBuilder;
   }
 
   /**
@@ -170,5 +180,18 @@ class URISchemeRequest : gobject.object.ObjectWrap
     _cretval = webkit_uri_scheme_request_get_web_view(cast(WebKitURISchemeRequest*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class URISchemeRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.urischeme_request.URISchemeRequest]
+final class URISchemeRequestGidBuilder : URISchemeRequestGidBuilderImpl!URISchemeRequestGidBuilder
+{
+  URISchemeRequest build()
+  {
+    return new URISchemeRequest(cast(void*)createGObject(URISchemeRequest._getGType), No.Take);
   }
 }

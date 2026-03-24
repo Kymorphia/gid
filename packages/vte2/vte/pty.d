@@ -9,6 +9,7 @@ import gio.initable_mixin;
 import gio.types;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import vte.c.functions;
 import vte.c.types;
@@ -41,6 +42,33 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   override Pty self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [vte.pty.Pty]
+  Returns: New builder object
+  */
+  static PtyGidBuilder builder()
+  {
+    return new PtyGidBuilder;
+  }
+
+  /**
+      Get `fd` property.
+      Returns: The file descriptor of the PTY master.
+  */
+  @property int fd()
+  {
+    return getFd();
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags.
+  */
+  @property vte.types.PtyFlags flags()
+  {
+    return gobject.object.ObjectWrap.getProperty!(vte.types.PtyFlags)("flags");
   }
 
   mixin InitableT!();
@@ -356,5 +384,42 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     vte_pty_spawn_with_fds_async(cast(VtePty*)this._cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+}
+
+class PtyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `fd` property.
+      Params:
+        propval = The file descriptor of the PTY master.
+      Returns: Builder instance for fluent chaining
+  */
+  T fd(int propval)
+  {
+    return setProperty("fd", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(vte.types.PtyFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+}
+
+/// Fluent builder for [vte.pty.Pty]
+final class PtyGidBuilder : PtyGidBuilderImpl!PtyGidBuilder
+{
+  Pty build()
+  {
+    return new Pty(cast(void*)createGObject(Pty._getGType), No.Take);
   }
 }

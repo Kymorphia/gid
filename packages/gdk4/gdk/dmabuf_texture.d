@@ -12,6 +12,7 @@ import gio.icon;
 import gio.icon_mixin;
 import gio.loadable_icon;
 import gio.loadable_icon_mixin;
+import gobject.gid_builder;
 
 /**
     A [gdk.texture.Texture] representing a DMA buffer.
@@ -47,5 +48,28 @@ class DmabufTexture : gdk.texture.Texture
   override DmabufTexture self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.dmabuf_texture.DmabufTexture]
+  Returns: New builder object
+  */
+  static DmabufTextureGidBuilder builder()
+  {
+    return new DmabufTextureGidBuilder;
+  }
+}
+
+class DmabufTextureGidBuilderImpl(T) : gdk.texture.TextureGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gdk.dmabuf_texture.DmabufTexture]
+final class DmabufTextureGidBuilder : DmabufTextureGidBuilderImpl!DmabufTextureGidBuilder
+{
+  DmabufTexture build()
+  {
+    return new DmabufTexture(cast(void*)createGObject(DmabufTexture._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstnet.ntp_clock;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.types;
 import gstnet.c.functions;
 import gstnet.c.types;
@@ -38,6 +39,15 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
   }
 
   /**
+  Get builder for [gstnet.ntp_clock.NtpClock]
+  Returns: New builder object
+  */
+  static NtpClockGidBuilder builder()
+  {
+    return new NtpClockGidBuilder;
+  }
+
+  /**
       Create a new #GstNtpClock that will report the time provided by
       the NTPv4 server on remote_address and remote_port.
   
@@ -56,5 +66,18 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
     const(char)* _remoteAddress = remoteAddress.toCString(No.Alloc);
     _cretval = gst_ntp_clock_new(_name, _remoteAddress, remotePort, baseTime);
     this(_cretval, Yes.Take);
+  }
+}
+
+class NtpClockGidBuilderImpl(T) : gstnet.net_client_clock.NetClientClockGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstnet.ntp_clock.NtpClock]
+final class NtpClockGidBuilder : NtpClockGidBuilderImpl!NtpClockGidBuilder
+{
+  NtpClock build()
+  {
+    return new NtpClock(cast(void*)createGObject(NtpClock._getGType), Yes.Take);
   }
 }

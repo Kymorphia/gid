@@ -2,6 +2,7 @@
 module panel.grid_column;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -42,6 +43,15 @@ class GridColumn : gtk.widget.Widget
   override GridColumn self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.grid_column.GridColumn]
+  Returns: New builder object
+  */
+  static GridColumnGidBuilder builder()
+  {
+    return new GridColumnGidBuilder;
   }
 
   /** */
@@ -112,5 +122,19 @@ class GridColumn : gtk.widget.Widget
     _cretval = panel_grid_column_get_row(cast(PanelGridColumn*)this._cPtr, row);
     auto _retval = gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class GridColumnGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [panel.grid_column.GridColumn]
+final class GridColumnGidBuilder : GridColumnGidBuilderImpl!GridColumnGidBuilder
+{
+  GridColumn build()
+  {
+    return new GridColumn(cast(void*)createGObject(GridColumn._getGType), No.Take);
   }
 }

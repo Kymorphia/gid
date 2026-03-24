@@ -2,9 +2,11 @@
 module parquet.column_chunk_metadata;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
+import parquet.row_group_metadata;
 import parquet.statistics;
 import parquet.types;
 
@@ -35,6 +37,15 @@ class ColumnChunkMetadata : gobject.object.ObjectWrap
   override ColumnChunkMetadata self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [parquet.column_chunk_metadata.ColumnChunkMetadata]
+  Returns: New builder object
+  */
+  static ColumnChunkMetadataGidBuilder builder()
+  {
+    return new ColumnChunkMetadataGidBuilder;
   }
 
   /** */
@@ -84,5 +95,30 @@ class ColumnChunkMetadata : gobject.object.ObjectWrap
     long _retval;
     _retval = gparquet_column_chunk_metadata_get_total_size(cast(GParquetColumnChunkMetadata*)this._cPtr);
     return _retval;
+  }
+}
+
+class ColumnChunkMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T metadata(void* propval)
+  {
+    return setProperty("metadata", propval);
+  }
+
+  /** */
+  T owner(parquet.row_group_metadata.RowGroupMetadata propval)
+  {
+    return setProperty("owner", propval);
+  }
+}
+
+/// Fluent builder for [parquet.column_chunk_metadata.ColumnChunkMetadata]
+final class ColumnChunkMetadataGidBuilder : ColumnChunkMetadataGidBuilderImpl!ColumnChunkMetadataGidBuilder
+{
+  ColumnChunkMetadata build()
+  {
+    return new ColumnChunkMetadata(cast(void*)createGObject(ColumnChunkMetadata._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -55,6 +56,15 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   }
 
   /**
+  Get builder for [adw.preferences_row.PreferencesRow]
+  Returns: New builder object
+  */
+  static PreferencesRowGidBuilder builder()
+  {
+    return new PreferencesRowGidBuilder;
+  }
+
+  /**
       Get `title` property.
       Returns: The title of the preference represented by this row.
         
@@ -76,7 +86,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -99,7 +109,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   @property void titleSelectable(bool propval)
   {
-    return setTitleSelectable(propval);
+    setTitleSelectable(propval);
   }
 
   /**
@@ -126,7 +136,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   @property void useMarkup(bool propval)
   {
-    return setUseMarkup(propval);
+    setUseMarkup(propval);
   }
 
   /**
@@ -145,7 +155,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -256,5 +266,72 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   void setUseUnderline(bool useUnderline)
   {
     adw_preferences_row_set_use_underline(cast(AdwPreferencesRow*)this._cPtr, useUnderline);
+  }
+}
+
+class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the preference represented by this row.
+          
+          The title is interpreted as Pango markup unless
+          `property@PreferencesRow:use-markup` is set to `FALSE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `titleSelectable` property.
+      Params:
+        propval = Whether the user can copy the title from the label.
+          
+          See also [gtk.label.Label.selectable].
+      Returns: Builder instance for fluent chaining
+  */
+  T titleSelectable(bool propval)
+  {
+    return setProperty("title-selectable", propval);
+  }
+
+  /**
+      Set `useMarkup` property.
+      Params:
+        propval = Whether to use Pango markup for the title label.
+          
+          Subclasses may also use it for other labels, such as subtitle.
+          
+          See also `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  */
+  T useMarkup(bool propval)
+  {
+    return setProperty("use-markup", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an embedded underline in the title indicates a mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [adw.preferences_row.PreferencesRow]
+final class PreferencesRowGidBuilder : PreferencesRowGidBuilderImpl!PreferencesRowGidBuilder
+{
+  PreferencesRow build()
+  {
+    return new PreferencesRow(cast(void*)createGObject(PreferencesRow._getGType), No.Take);
   }
 }

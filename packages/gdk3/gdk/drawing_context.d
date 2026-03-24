@@ -8,6 +8,7 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -48,6 +49,33 @@ class DrawingContext : gobject.object.ObjectWrap
   override DrawingContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.drawing_context.DrawingContext]
+  Returns: New builder object
+  */
+  static DrawingContextGidBuilder builder()
+  {
+    return new DrawingContextGidBuilder;
+  }
+
+  /**
+      Get `clip` property.
+      Returns: The clip region applied to the drawing context.
+  */
+  @property cairo.region.Region clip()
+  {
+    return getClip();
+  }
+
+  /**
+      Get `window` property.
+      Returns: The #GdkWindow that created the drawing context.
+  */
+  @property gdk.window.Window window()
+  {
+    return getWindow();
   }
 
   /**
@@ -102,5 +130,40 @@ class DrawingContext : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gdk_drawing_context_is_valid(cast(GdkDrawingContext*)this._cPtr);
     return _retval;
+  }
+}
+
+class DrawingContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `clip` property.
+      Params:
+        propval = The clip region applied to the drawing context.
+      Returns: Builder instance for fluent chaining
+  */
+  T clip(cairo.region.Region propval)
+  {
+    return setProperty("clip", propval);
+  }
+
+  /**
+      Set `window` property.
+      Params:
+        propval = The #GdkWindow that created the drawing context.
+      Returns: Builder instance for fluent chaining
+  */
+  T window(gdk.window.Window propval)
+  {
+    return setProperty("window", propval);
+  }
+}
+
+/// Fluent builder for [gdk.drawing_context.DrawingContext]
+final class DrawingContextGidBuilder : DrawingContextGidBuilderImpl!DrawingContextGidBuilder
+{
+  DrawingContext build()
+  {
+    return new DrawingContext(cast(void*)createGObject(DrawingContext._getGType), No.Take);
   }
 }

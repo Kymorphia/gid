@@ -7,6 +7,7 @@ import gio.action_group_mixin;
 import gio.action_map;
 import gio.action_map_mixin;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -59,6 +60,15 @@ class DocumentWorkspace : panel.workspace.Workspace
   override DocumentWorkspace self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.document_workspace.DocumentWorkspace]
+  Returns: New builder object
+  */
+  static DocumentWorkspaceGidBuilder builder()
+  {
+    return new DocumentWorkspaceGidBuilder;
   }
 
   /** */
@@ -259,5 +269,19 @@ class DocumentWorkspace : panel.workspace.Workspace
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-frame", closure, after);
+  }
+}
+
+class DocumentWorkspaceGidBuilderImpl(T) : panel.workspace.WorkspaceGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [panel.document_workspace.DocumentWorkspace]
+final class DocumentWorkspaceGidBuilder : DocumentWorkspaceGidBuilderImpl!DocumentWorkspaceGidBuilder
+{
+  DocumentWorkspace build()
+  {
+    return new DocumentWorkspace(cast(void*)createGObject(DocumentWorkspace._getGType), Yes.Take);
   }
 }

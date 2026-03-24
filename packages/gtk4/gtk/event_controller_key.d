@@ -4,6 +4,7 @@ module gtk.event_controller_key;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -42,6 +43,15 @@ class EventControllerKey : gtk.event_controller.EventController
   override EventControllerKey self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.event_controller_key.EventControllerKey]
+  Returns: New builder object
+  */
+  static EventControllerKeyGidBuilder builder()
+  {
+    return new EventControllerKeyGidBuilder;
   }
 
   /**
@@ -309,5 +319,18 @@ class EventControllerKey : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("modifiers", closure, after);
+  }
+}
+
+class EventControllerKeyGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.event_controller_key.EventControllerKey]
+final class EventControllerKeyGidBuilder : EventControllerKeyGidBuilderImpl!EventControllerKeyGidBuilder
+{
+  EventControllerKey build()
+  {
+    return new EventControllerKey(cast(void*)createGObject(EventControllerKey._getGType), Yes.Take);
   }
 }

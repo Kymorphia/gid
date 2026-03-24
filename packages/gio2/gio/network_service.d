@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.socket_connectable;
 import gio.socket_connectable_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -49,6 +50,33 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   }
 
   /**
+  Get builder for [gio.network_service.NetworkService]
+  Returns: New builder object
+  */
+  static NetworkServiceGidBuilder builder()
+  {
+    return new NetworkServiceGidBuilder;
+  }
+
+  /**
+      Get `domain` property.
+      Returns: Network domain, for example `example.com`.
+  */
+  @property string domain()
+  {
+    return getDomain();
+  }
+
+  /**
+      Get `protocol` property.
+      Returns: Network protocol, for example `tcp`.
+  */
+  @property string protocol()
+  {
+    return getProtocol();
+  }
+
+  /**
       Get `scheme` property.
       Returns: Network scheme (default is to use service).
   */
@@ -64,7 +92,16 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   */
   @property void scheme(string propval)
   {
-    return setScheme(propval);
+    setScheme(propval);
+  }
+
+  /**
+      Get `service` property.
+      Returns: Service name, for example `ldap`.
+  */
+  @property string service()
+  {
+    return getService();
   }
 
   mixin SocketConnectableT!();
@@ -151,5 +188,64 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     g_network_service_set_scheme(cast(GNetworkService*)this._cPtr, _scheme);
+  }
+}
+
+class NetworkServiceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.socket_connectable.SocketConnectableGidBuilderImpl!T
+{
+
+  mixin SocketConnectableGidBuilderT!();
+
+  /**
+      Set `domain` property.
+      Params:
+        propval = Network domain, for example `example.com`.
+      Returns: Builder instance for fluent chaining
+  */
+  T domain(string propval)
+  {
+    return setProperty("domain", propval);
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = Network protocol, for example `tcp`.
+      Returns: Builder instance for fluent chaining
+  */
+  T protocol(string propval)
+  {
+    return setProperty("protocol", propval);
+  }
+
+  /**
+      Set `scheme` property.
+      Params:
+        propval = Network scheme (default is to use service).
+      Returns: Builder instance for fluent chaining
+  */
+  T scheme(string propval)
+  {
+    return setProperty("scheme", propval);
+  }
+
+  /**
+      Set `service` property.
+      Params:
+        propval = Service name, for example `ldap`.
+      Returns: Builder instance for fluent chaining
+  */
+  T service(string propval)
+  {
+    return setProperty("service", propval);
+  }
+}
+
+/// Fluent builder for [gio.network_service.NetworkService]
+final class NetworkServiceGidBuilder : NetworkServiceGidBuilderImpl!NetworkServiceGidBuilder
+{
+  NetworkService build()
+  {
+    return new NetworkService(cast(void*)createGObject(NetworkService._getGType), Yes.Take);
   }
 }

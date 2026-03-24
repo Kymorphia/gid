@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -74,6 +75,15 @@ class MenuShell : gtk.container.Container
   }
 
   /**
+  Get builder for [gtk.menu_shell.MenuShell]
+  Returns: New builder object
+  */
+  static MenuShellGidBuilder builder()
+  {
+    return new MenuShellGidBuilder;
+  }
+
+  /**
       Get `takeFocus` property.
       Returns: A boolean that determines whether the menu and its submenus grab the
         keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
@@ -93,7 +103,7 @@ class MenuShell : gtk.container.Container
   */
   @property void takeFocus(bool propval)
   {
-    return setTakeFocus(propval);
+    setTakeFocus(propval);
   }
 
   /**
@@ -670,5 +680,32 @@ class MenuShell : gtk.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-done", closure, after);
+  }
+}
+
+class MenuShellGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+
+  /**
+      Set `takeFocus` property.
+      Params:
+        propval = A boolean that determines whether the menu and its submenus grab the
+          keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
+          [gtk.menu_shell.MenuShell.getTakeFocus].
+      Returns: Builder instance for fluent chaining
+  */
+  T takeFocus(bool propval)
+  {
+    return setProperty("take-focus", propval);
+  }
+}
+
+/// Fluent builder for [gtk.menu_shell.MenuShell]
+final class MenuShellGidBuilder : MenuShellGidBuilderImpl!MenuShellGidBuilder
+{
+  MenuShell build()
+  {
+    return new MenuShell(cast(void*)createGObject(MenuShell._getGType), No.Take);
   }
 }

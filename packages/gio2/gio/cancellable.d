@@ -9,6 +9,7 @@ import glib.error;
 import glib.source;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,15 @@ class Cancellable : gobject.object.ObjectWrap
   override Cancellable self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.cancellable.Cancellable]
+  Returns: New builder object
+  */
+  static CancellableGidBuilder builder()
+  {
+    return new CancellableGidBuilder;
   }
 
   /**
@@ -371,5 +381,18 @@ class Cancellable : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancelled", closure, after);
+  }
+}
+
+class CancellableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.cancellable.Cancellable]
+final class CancellableGidBuilder : CancellableGidBuilderImpl!CancellableGidBuilder
+{
+  Cancellable build()
+  {
+    return new Cancellable(cast(void*)createGObject(Cancellable._getGType), Yes.Take);
   }
 }

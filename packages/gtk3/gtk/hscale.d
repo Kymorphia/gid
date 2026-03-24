@@ -4,6 +4,7 @@ module gtk.hscale;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -53,6 +54,15 @@ class HScale : gtk.scale.Scale
   }
 
   /**
+  Get builder for [gtk.hscale.HScale]
+  Returns: New builder object
+  */
+  static HScaleGidBuilder builder()
+  {
+    return new HScaleGidBuilder;
+  }
+
+  /**
       Creates a new #GtkHScale.
   
       Params:
@@ -93,5 +103,19 @@ class HScale : gtk.scale.Scale
     _cretval = gtk_hscale_new_with_range(min, max, step);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.hscale.HScale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class HScaleGidBuilderImpl(T) : gtk.scale.ScaleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.hscale.HScale]
+final class HScaleGidBuilder : HScaleGidBuilderImpl!HScaleGidBuilder
+{
+  HScale build()
+  {
+    return new HScale(cast(void*)createGObject(HScale._getGType), No.Take);
   }
 }

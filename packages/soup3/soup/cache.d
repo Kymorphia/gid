@@ -2,6 +2,7 @@
 module soup.cache;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -38,6 +39,33 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   override Cache self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.cache.Cache]
+  Returns: New builder object
+  */
+  static CacheGidBuilder builder()
+  {
+    return new CacheGidBuilder;
+  }
+
+  /**
+      Get `cacheDir` property.
+      Returns: The directory to store the cache files.
+  */
+  @property string cacheDir()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("cache-dir");
+  }
+
+  /**
+      Get `cacheType` property.
+      Returns: Whether the cache is private or shared.
+  */
+  @property soup.types.CacheType cacheType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(soup.types.CacheType)("cache-type");
   }
 
   mixin SessionFeatureT!();
@@ -131,5 +159,42 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   void setMaxSize(uint maxSize)
   {
     soup_cache_set_max_size(cast(SoupCache*)this._cPtr, maxSize);
+  }
+}
+
+class CacheGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+
+  /**
+      Set `cacheDir` property.
+      Params:
+        propval = The directory to store the cache files.
+      Returns: Builder instance for fluent chaining
+  */
+  T cacheDir(string propval)
+  {
+    return setProperty("cache-dir", propval);
+  }
+
+  /**
+      Set `cacheType` property.
+      Params:
+        propval = Whether the cache is private or shared.
+      Returns: Builder instance for fluent chaining
+  */
+  T cacheType(soup.types.CacheType propval)
+  {
+    return setProperty("cache-type", propval);
+  }
+}
+
+/// Fluent builder for [soup.cache.Cache]
+final class CacheGidBuilder : CacheGidBuilderImpl!CacheGidBuilder
+{
+  Cache build()
+  {
+    return new Cache(cast(void*)createGObject(Cache._getGType), Yes.Take);
   }
 }

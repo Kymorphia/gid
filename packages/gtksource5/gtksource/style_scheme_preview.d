@@ -3,6 +3,7 @@ module gtksource.style_scheme_preview;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -54,6 +55,21 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     return this;
   }
 
+  /**
+  Get builder for [gtksource.style_scheme_preview.StyleSchemePreview]
+  Returns: New builder object
+  */
+  static StyleSchemePreviewGidBuilder builder()
+  {
+    return new StyleSchemePreviewGidBuilder;
+  }
+
+  /** */
+  @property gtksource.style_scheme.StyleScheme scheme()
+  {
+    return getScheme();
+  }
+
   /** */
   @property bool selected()
   {
@@ -63,7 +79,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   /** */
   @property void selected(bool propval)
   {
-    return setSelected(propval);
+    setSelected(propval);
   }
 
   mixin ActionableT!();
@@ -144,5 +160,32 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class StyleSchemePreviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /** */
+  T scheme(gtksource.style_scheme.StyleScheme propval)
+  {
+    return setProperty("scheme", propval);
+  }
+
+  /** */
+  T selected(bool propval)
+  {
+    return setProperty("selected", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.style_scheme_preview.StyleSchemePreview]
+final class StyleSchemePreviewGidBuilder : StyleSchemePreviewGidBuilderImpl!StyleSchemePreviewGidBuilder
+{
+  StyleSchemePreview build()
+  {
+    return new StyleSchemePreview(cast(void*)createGObject(StyleSchemePreview._getGType), No.Take);
   }
 }

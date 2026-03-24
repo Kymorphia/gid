@@ -4,6 +4,7 @@ module gtk.app_chooser_mixin;
 public import gtk.app_chooser_iface_proxy;
 public import gid.gid;
 public import gio.app_info;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -36,6 +37,17 @@ public import gtk.types;
 */
 template AppChooserT()
 {
+
+  /**
+      Get `contentType` property.
+      Returns: The content type of the [gtk.app_chooser.AppChooser] object.
+        
+        See `GContentType` for more information about content types.
+  */
+  @property string contentType()
+  {
+    return getContentType();
+  }
 
   /**
       Returns the currently selected application.
@@ -75,5 +87,22 @@ template AppChooserT()
   override void refresh()
   {
     gtk_app_chooser_refresh(cast(GtkAppChooser*)this._cPtr);
+  }
+}
+
+template AppChooserGidBuilderT()
+{
+
+  /**
+      Set `contentType` property.
+      Params:
+        propval = The content type of the [gtk.app_chooser.AppChooser] object.
+          
+          See `GContentType` for more information about content types.
+      Returns: Builder instance for fluent chaining
+  */
+  T contentType(string propval)
+  {
+    return setProperty("content-type", propval);
   }
 }

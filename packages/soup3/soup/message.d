@@ -12,6 +12,7 @@ import gio.types;
 import glib.bytes;
 import glib.uri;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import soup.auth;
@@ -75,6 +76,15 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [soup.message.Message]
+  Returns: New builder object
+  */
+  static MessageGidBuilder builder()
+  {
+    return new MessageGidBuilder;
+  }
+
+  /**
       Get `firstParty` property.
       Returns: The [glib.uri.Uri] loaded in the application when the message was
         queued.
@@ -92,7 +102,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void firstParty(glib.uri.Uri propval)
   {
-    return setFirstParty(propval);
+    setFirstParty(propval);
   }
 
   /**
@@ -111,7 +121,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void flags(soup.types.MessageFlags propval)
   {
-    return setFlags(propval);
+    setFlags(propval);
   }
 
   /**
@@ -149,7 +159,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void isOptionsPing(bool propval)
   {
-    return setIsOptionsPing(propval);
+    setIsOptionsPing(propval);
   }
 
   /**
@@ -168,7 +178,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void isTopLevelNavigation(bool propval)
   {
-    return setIsTopLevelNavigation(propval);
+    setIsTopLevelNavigation(propval);
   }
 
   /**
@@ -187,7 +197,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void method(string propval)
   {
-    return setMethod(propval);
+    setMethod(propval);
   }
 
   /**
@@ -208,7 +218,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void priority(soup.types.MessagePriority propval)
   {
-    return setPriority(propval);
+    setPriority(propval);
   }
 
   /**
@@ -264,7 +274,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void siteForCookies(glib.uri.Uri propval)
   {
-    return setSiteForCookies(propval);
+    setSiteForCookies(propval);
   }
 
   /**
@@ -328,7 +338,7 @@ class Message : gobject.object.ObjectWrap
   */
   @property void uri(glib.uri.Uri propval)
   {
-    return setUri(propval);
+    setUri(propval);
   }
 
   /**
@@ -1802,5 +1812,113 @@ class Message : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("wrote-headers", closure, after);
+  }
+}
+
+class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `firstParty` property.
+      Params:
+        propval = The [glib.uri.Uri] loaded in the application when the message was
+          queued.
+      Returns: Builder instance for fluent chaining
+  */
+  T firstParty(glib.uri.Uri propval)
+  {
+    return setProperty("first-party", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Various message options.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(soup.types.MessageFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `isOptionsPing` property.
+      Params:
+        propval = Whether the message is an OPTIONS ping.
+          
+          The #SoupMessage is intended to be used to send
+          `OPTIONS *` to a server. When set to true, the
+          path of `property@Message:uri` will be ignored and
+          `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+      Returns: Builder instance for fluent chaining
+  */
+  T isOptionsPing(bool propval)
+  {
+    return setProperty("is-options-ping", propval);
+  }
+
+  /**
+      Set `isTopLevelNavigation` property.
+      Params:
+        propval = Set when the message is navigating between top level domains.
+      Returns: Builder instance for fluent chaining
+  */
+  T isTopLevelNavigation(bool propval)
+  {
+    return setProperty("is-top-level-navigation", propval);
+  }
+
+  /**
+      Set `method` property.
+      Params:
+        propval = The message's HTTP method.
+      Returns: Builder instance for fluent chaining
+  */
+  T method(string propval)
+  {
+    return setProperty("method", propval);
+  }
+
+  /**
+      Set `priority` property.
+      Params:
+        propval = Sets the priority of the #SoupMessage. See
+          [soup.message.Message.setPriority] for further details.
+      Returns: Builder instance for fluent chaining
+  */
+  T priority(soup.types.MessagePriority propval)
+  {
+    return setProperty("priority", propval);
+  }
+
+  /**
+      Set `siteForCookies` property.
+      Params:
+        propval = Site used to compare cookies against. Used for SameSite cookie support.
+      Returns: Builder instance for fluent chaining
+  */
+  T siteForCookies(glib.uri.Uri propval)
+  {
+    return setProperty("site-for-cookies", propval);
+  }
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The message's Request-URI.
+      Returns: Builder instance for fluent chaining
+  */
+  T uri(glib.uri.Uri propval)
+  {
+    return setProperty("uri", propval);
+  }
+}
+
+/// Fluent builder for [soup.message.Message]
+final class MessageGidBuilder : MessageGidBuilderImpl!MessageGidBuilder
+{
+  Message build()
+  {
+    return new Message(cast(void*)createGObject(Message._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class S3GlobalOptions : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrow.s3_global_options.S3GlobalOptions]
+  Returns: New builder object
+  */
+  static S3GlobalOptionsGidBuilder builder()
+  {
+    return new S3GlobalOptionsGidBuilder;
+  }
+
+  /**
       Get `logLevel` property.
       Returns: The log level of S3 APIs.
   */
@@ -61,5 +71,29 @@ class S3GlobalOptions : gobject.object.ObjectWrap
     GArrowS3GlobalOptions* _cretval;
     _cretval = garrow_s3_global_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class S3GlobalOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `logLevel` property.
+      Params:
+        propval = The log level of S3 APIs.
+      Returns: Builder instance for fluent chaining
+  */
+  T logLevel(arrow.types.S3LogLevel propval)
+  {
+    return setProperty("log-level", propval);
+  }
+}
+
+/// Fluent builder for [arrow.s3_global_options.S3GlobalOptions]
+final class S3GlobalOptionsGidBuilder : S3GlobalOptionsGidBuilderImpl!S3GlobalOptionsGidBuilder
+{
+  S3GlobalOptions build()
+  {
+    return new S3GlobalOptions(cast(void*)createGObject(S3GlobalOptions._getGType), Yes.Take);
   }
 }

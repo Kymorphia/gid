@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   override MenuAttributeIter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.menu_attribute_iter.MenuAttributeIter]
+  Returns: New builder object
+  */
+  static MenuAttributeIterGidBuilder builder()
+  {
+    return new MenuAttributeIterGidBuilder;
   }
 
   /**
@@ -120,5 +130,18 @@ class MenuAttributeIter : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)g_menu_attribute_iter_next(cast(GMenuAttributeIter*)this._cPtr);
     return _retval;
+  }
+}
+
+class MenuAttributeIterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.menu_attribute_iter.MenuAttributeIter]
+final class MenuAttributeIterGidBuilder : MenuAttributeIterGidBuilderImpl!MenuAttributeIterGidBuilder
+{
+  MenuAttributeIter build()
+  {
+    return new MenuAttributeIter(cast(void*)createGObject(MenuAttributeIter._getGType), No.Take);
   }
 }

@@ -7,6 +7,8 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class ArrayDatum : arrow.datum.Datum
@@ -37,11 +39,45 @@ class ArrayDatum : arrow.datum.Datum
     return this;
   }
 
+  /**
+  Get builder for [arrow.array_datum.ArrayDatum]
+  Returns: New builder object
+  */
+  static ArrayDatumGidBuilder builder()
+  {
+    return new ArrayDatumGidBuilder;
+  }
+
+  /** */
+  @property arrow.array.Array value()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("value");
+  }
+
   /** */
   this(arrow.array.Array value)
   {
     GArrowArrayDatum* _cretval;
     _cretval = garrow_array_datum_new(value ? cast(GArrowArray*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class ArrayDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
+{
+
+  /** */
+  T value(arrow.array.Array propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.array_datum.ArrayDatum]
+final class ArrayDatumGidBuilder : ArrayDatumGidBuilderImpl!ArrayDatumGidBuilder
+{
+  ArrayDatum build()
+  {
+    return new ArrayDatum(cast(void*)createGObject(ArrayDatum._getGType), Yes.Take);
   }
 }

@@ -8,6 +8,7 @@ import atk.text_range;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 
 /**
     The ATK interface implemented by components with text content.
@@ -512,4 +513,8 @@ interface Text
       Returns: Signal ID
   */
   ulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface TextGidBuilderImpl(T)
+{
 }

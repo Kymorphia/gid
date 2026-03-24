@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.proxy_resolver;
 import gio.proxy_resolver_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -48,6 +49,15 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   }
 
   /**
+  Get builder for [gio.simple_proxy_resolver.SimpleProxyResolver]
+  Returns: New builder object
+  */
+  static SimpleProxyResolverGidBuilder builder()
+  {
+    return new SimpleProxyResolverGidBuilder;
+  }
+
+  /**
       Get `defaultProxy` property.
       Returns: The default proxy URI that will be used for any URI that doesn't
         match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
@@ -75,7 +85,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   */
   @property void defaultProxy(string propval)
   {
-    return setDefaultProxy(propval);
+    setDefaultProxy(propval);
   }
 
   mixin ProxyResolverT!();
@@ -166,5 +176,37 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     const(char)* _proxy = proxy.toCString(No.Alloc);
     g_simple_proxy_resolver_set_uri_proxy(cast(GSimpleProxyResolver*)this._cPtr, _uriScheme, _proxy);
+  }
+}
+
+class SimpleProxyResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.proxy_resolver.ProxyResolverGidBuilderImpl!T
+{
+
+  mixin ProxyResolverGidBuilderT!();
+
+  /**
+      Set `defaultProxy` property.
+      Params:
+        propval = The default proxy URI that will be used for any URI that doesn't
+          match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
+          of the schemes set with [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
+          
+          Note that as a special case, if this URI starts with
+          "socks://", #GSimpleProxyResolver will treat it as referring
+          to all three of the socks5, socks4a, and socks4 proxy types.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultProxy(string propval)
+  {
+    return setProperty("default-proxy", propval);
+  }
+}
+
+/// Fluent builder for [gio.simple_proxy_resolver.SimpleProxyResolver]
+final class SimpleProxyResolverGidBuilder : SimpleProxyResolverGidBuilderImpl!SimpleProxyResolverGidBuilder
+{
+  SimpleProxyResolver build()
+  {
+    return new SimpleProxyResolver(cast(void*)createGObject(SimpleProxyResolver._getGType), No.Take);
   }
 }

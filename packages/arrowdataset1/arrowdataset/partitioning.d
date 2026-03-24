@@ -5,6 +5,7 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Partitioning : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.partitioning.Partitioning]
+  Returns: New builder object
+  */
+  static PartitioningGidBuilder builder()
+  {
+    return new PartitioningGidBuilder;
+  }
+
   /** */
   static arrowdataset.partitioning.Partitioning createDefault()
   {
@@ -52,5 +62,24 @@ class Partitioning : gobject.object.ObjectWrap
     _cretval = gadataset_partitioning_get_type_name(cast(GADatasetPartitioning*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class PartitioningGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T partitioning(void* propval)
+  {
+    return setProperty("partitioning", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.partitioning.Partitioning]
+final class PartitioningGidBuilder : PartitioningGidBuilderImpl!PartitioningGidBuilder
+{
+  Partitioning build()
+  {
+    return new Partitioning(cast(void*)createGObject(Partitioning._getGType), No.Take);
   }
 }

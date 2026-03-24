@@ -3,6 +3,7 @@ module soup.session_feature;
 
 public import soup.session_feature_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import soup.c.functions;
 import soup.c.types;
 import soup.types;
@@ -27,4 +28,8 @@ interface SessionFeature
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_session_feature_get_type != &gidSymbolNotFound ? soup_session_feature_get_type() : cast(GType)0;
   }
+}
+
+interface SessionFeatureGidBuilderImpl(T)
+{
 }

@@ -11,6 +11,7 @@ import gio.socket_connectable;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -215,4 +216,8 @@ interface NetworkMonitor
       Returns: Signal ID
   */
   ulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface NetworkMonitorGidBuilderImpl(T)
+{
 }

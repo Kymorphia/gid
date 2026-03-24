@@ -8,6 +8,7 @@ import arrow.primitive_array;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
   override BooleanArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.boolean_array.BooleanArray]
+  Returns: New builder object
+  */
+  static BooleanArrayGidBuilder builder()
+  {
+    return new BooleanArrayGidBuilder;
   }
 
   /** */
@@ -119,5 +129,18 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class BooleanArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.boolean_array.BooleanArray]
+final class BooleanArrayGidBuilder : BooleanArrayGidBuilderImpl!BooleanArrayGidBuilder
+{
+  BooleanArray build()
+  {
+    return new BooleanArray(cast(void*)createGObject(BooleanArray._getGType), Yes.Take);
   }
 }

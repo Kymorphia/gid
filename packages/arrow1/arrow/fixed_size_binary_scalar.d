@@ -8,6 +8,7 @@ import arrow.c.types;
 import arrow.fixed_size_binary_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
@@ -38,11 +39,33 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.fixed_size_binary_scalar.FixedSizeBinaryScalar]
+  Returns: New builder object
+  */
+  static FixedSizeBinaryScalarGidBuilder builder()
+  {
+    return new FixedSizeBinaryScalarGidBuilder;
+  }
+
   /** */
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, arrow.buffer.Buffer value)
   {
     GArrowFixedSizeBinaryScalar* _cretval;
     _cretval = garrow_fixed_size_binary_scalar_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType._cPtr(No.Dup) : null, value ? cast(GArrowBuffer*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FixedSizeBinaryScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.fixed_size_binary_scalar.FixedSizeBinaryScalar]
+final class FixedSizeBinaryScalarGidBuilder : FixedSizeBinaryScalarGidBuilderImpl!FixedSizeBinaryScalarGidBuilder
+{
+  FixedSizeBinaryScalar build()
+  {
+    return new FixedSizeBinaryScalar(cast(void*)createGObject(FixedSizeBinaryScalar._getGType), Yes.Take);
   }
 }

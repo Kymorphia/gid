@@ -6,6 +6,7 @@ import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -127,4 +128,8 @@ interface DataHandler
       Returns: the new #GValue or null on error
   */
   gobject.value.Value getValueFromStr(string str, gobject.types.GType type);
+}
+
+interface DataHandlerGidBuilderImpl(T)
+{
 }

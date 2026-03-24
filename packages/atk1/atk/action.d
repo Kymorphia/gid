@@ -6,6 +6,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     The ATK interface provided by UI components
@@ -142,4 +143,8 @@ interface Action
       Returns: a gboolean representing if the description was successfully set;
   */
   bool setDescription(int i, string desc);
+}
+
+interface ActionGidBuilderImpl(T)
+{
 }

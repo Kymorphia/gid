@@ -19,6 +19,7 @@ import gio.types;
 import glib.error;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -131,6 +132,70 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   }
 
   /**
+  Get builder for [gio.dbus_object_manager_client.DBusObjectManagerClient]
+  Returns: New builder object
+  */
+  static DBusObjectManagerClientGidBuilder builder()
+  {
+    return new DBusObjectManagerClientGidBuilder;
+  }
+
+  /**
+      Get `connection` property.
+      Returns: The #GDBusConnection to use.
+  */
+  @property gio.dbus_connection.DBusConnection connection()
+  {
+    return getConnection();
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags from the #GDBusObjectManagerClientFlags enumeration.
+  */
+  @property gio.types.DBusObjectManagerClientFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Get `getProxyTypeDestroyNotify` property.
+      Returns: A #GDestroyNotify for the #gpointer user_data in #GDBusObjectManagerClient:get-proxy-type-user-data.
+  */
+  @property void* getProxyTypeDestroyNotify()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("get-proxy-type-destroy-notify");
+  }
+
+  /**
+      Get `getProxyTypeFunc` property.
+      Returns: The #GDBusProxyTypeFunc to use when determining what #GType to
+        use for interface proxies or null.
+  */
+  @property void* getProxyTypeFunc()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("get-proxy-type-func");
+  }
+
+  /**
+      Get `getProxyTypeUserData` property.
+      Returns: The #gpointer user_data to pass to #GDBusObjectManagerClient:get-proxy-type-func.
+  */
+  @property void* getProxyTypeUserData()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("get-proxy-type-user-data");
+  }
+
+  /**
+      Get `name` property.
+      Returns: The well-known name or unique name that the manager is for.
+  */
+  @property string name()
+  {
+    return getName();
+  }
+
+  /**
       Get `nameOwner` property.
       Returns: The unique name that owns #GDBusObjectManagerClient:name or null if
         no-one is currently owning the name. Connect to the
@@ -139,6 +204,15 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   @property string nameOwner()
   {
     return getNameOwner();
+  }
+
+  /**
+      Get `objectPath` property.
+      Returns: The object path the manager is for.
+  */
+  @property string objectPath()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("object-path");
   }
 
   mixin AsyncInitableT!();
@@ -583,5 +657,114 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("interface-proxy-signal", closure, after);
+  }
+}
+
+class DBusObjectManagerClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_initable.AsyncInitableGidBuilderImpl!T, gio.dbus_object_manager.DBusObjectManagerGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin AsyncInitableGidBuilderT!();
+  mixin DBusObjectManagerGidBuilderT!();
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `busType` property.
+      Params:
+        propval = If this property is not [gio.types.BusType.None], then
+          #GDBusObjectManagerClient:connection must be null and will be set to the
+          #GDBusConnection obtained by calling [gio.global.busGet] with the value
+          of this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T busType(gio.types.BusType propval)
+  {
+    return setProperty("bus-type", propval);
+  }
+
+  /**
+      Set `connection` property.
+      Params:
+        propval = The #GDBusConnection to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T connection(gio.dbus_connection.DBusConnection propval)
+  {
+    return setProperty("connection", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags from the #GDBusObjectManagerClientFlags enumeration.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.DBusObjectManagerClientFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `getProxyTypeDestroyNotify` property.
+      Params:
+        propval = A #GDestroyNotify for the #gpointer user_data in #GDBusObjectManagerClient:get-proxy-type-user-data.
+      Returns: Builder instance for fluent chaining
+  */
+  T getProxyTypeDestroyNotify(void* propval)
+  {
+    return setProperty("get-proxy-type-destroy-notify", propval);
+  }
+
+  /**
+      Set `getProxyTypeFunc` property.
+      Params:
+        propval = The #GDBusProxyTypeFunc to use when determining what #GType to
+          use for interface proxies or null.
+      Returns: Builder instance for fluent chaining
+  */
+  T getProxyTypeFunc(void* propval)
+  {
+    return setProperty("get-proxy-type-func", propval);
+  }
+
+  /**
+      Set `getProxyTypeUserData` property.
+      Params:
+        propval = The #gpointer user_data to pass to #GDBusObjectManagerClient:get-proxy-type-func.
+      Returns: Builder instance for fluent chaining
+  */
+  T getProxyTypeUserData(void* propval)
+  {
+    return setProperty("get-proxy-type-user-data", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The well-known name or unique name that the manager is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `objectPath` property.
+      Params:
+        propval = The object path the manager is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T objectPath(string propval)
+  {
+    return setProperty("object-path", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_object_manager_client.DBusObjectManagerClient]
+final class DBusObjectManagerClientGidBuilder : DBusObjectManagerClientGidBuilderImpl!DBusObjectManagerClientGidBuilder
+{
+  DBusObjectManagerClient build()
+  {
+    return new DBusObjectManagerClient(cast(void*)createGObject(DBusObjectManagerClient._getGType), No.Take);
   }
 }

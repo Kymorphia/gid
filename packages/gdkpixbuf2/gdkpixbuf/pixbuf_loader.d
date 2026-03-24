@@ -11,6 +11,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -88,6 +89,15 @@ class PixbufLoader : gobject.object.ObjectWrap
   override PixbufLoader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdkpixbuf.pixbuf_loader.PixbufLoader]
+  Returns: New builder object
+  */
+  static PixbufLoaderGidBuilder builder()
+  {
+    return new PixbufLoaderGidBuilder;
   }
 
   /**
@@ -524,5 +534,18 @@ class PixbufLoader : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("size-prepared", closure, after);
+  }
+}
+
+class PixbufLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdkpixbuf.pixbuf_loader.PixbufLoader]
+final class PixbufLoaderGidBuilder : PixbufLoaderGidBuilderImpl!PixbufLoaderGidBuilder
+{
+  PixbufLoader build()
+  {
+    return new PixbufLoader(cast(void*)createGObject(PixbufLoader._getGType), Yes.Take);
   }
 }

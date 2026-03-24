@@ -3,6 +3,7 @@ module gtk.tool_shell_mixin;
 
 public import gtk.tool_shell_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -138,4 +139,8 @@ template ToolShellT()
   {
     gtk_tool_shell_rebuild_menu(cast(GtkToolShell*)this._cPtr);
   }
+}
+
+template ToolShellGidBuilderT()
+{
 }

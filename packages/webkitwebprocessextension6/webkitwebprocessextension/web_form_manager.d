@@ -3,6 +3,7 @@ module webkitwebprocessextension.web_form_manager;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.value;
 import webkitwebprocessextension.c.functions;
@@ -39,6 +40,15 @@ class WebFormManager : gobject.object.ObjectWrap
   override WebFormManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.web_form_manager.WebFormManager]
+  Returns: New builder object
+  */
+  static WebFormManagerGidBuilder builder()
+  {
+    return new WebFormManagerGidBuilder;
   }
 
   /**
@@ -269,5 +279,18 @@ class WebFormManager : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("will-submit-form", closure, after);
+  }
+}
+
+class WebFormManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.web_form_manager.WebFormManager]
+final class WebFormManagerGidBuilder : WebFormManagerGidBuilderImpl!WebFormManagerGidBuilder
+{
+  WebFormManager build()
+  {
+    return new WebFormManager(cast(void*)createGObject(WebFormManager._getGType), No.Take);
   }
 }

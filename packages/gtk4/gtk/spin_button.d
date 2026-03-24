@@ -3,6 +3,7 @@ module gtk.spin_button;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -167,6 +168,15 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   }
 
   /**
+  Get builder for [gtk.spin_button.SpinButton]
+  Returns: New builder object
+  */
+  static SpinButtonGidBuilder builder()
+  {
+    return new SpinButtonGidBuilder;
+  }
+
+  /**
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when the spin button is activated.
         
@@ -186,7 +196,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void activatesDefault(bool propval)
   {
-    return setActivatesDefault(propval);
+    setActivatesDefault(propval);
   }
 
   /**
@@ -205,7 +215,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void adjustment(gtk.adjustment.Adjustment propval)
   {
-    return setAdjustment(propval);
+    setAdjustment(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void climbRate(double propval)
   {
-    return setClimbRate(propval);
+    setClimbRate(propval);
   }
 
   /**
@@ -243,7 +253,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void digits(uint propval)
   {
-    return setDigits(propval);
+    setDigits(propval);
   }
 
   /**
@@ -262,7 +272,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void numeric(bool propval)
   {
-    return setNumeric(propval);
+    setNumeric(propval);
   }
 
   /**
@@ -283,7 +293,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void snapToTicks(bool propval)
   {
-    return setSnapToTicks(propval);
+    setSnapToTicks(propval);
   }
 
   /**
@@ -304,7 +314,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
   {
-    return setUpdatePolicy(propval);
+    setUpdatePolicy(propval);
   }
 
   /**
@@ -323,7 +333,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void value(double propval)
   {
-    return setValue(propval);
+    setValue(propval);
   }
 
   /**
@@ -342,7 +352,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   @property void wrap(bool propval)
   {
-    return setWrap(propval);
+    setWrap(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -1008,5 +1018,126 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("wrapped", closure, after);
+  }
+}
+
+class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.cell_editable.CellEditableGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin AccessibleRangeGidBuilderT!();
+  mixin CellEditableGidBuilderT!();
+  mixin EditableGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when the spin button is activated.
+          
+          See [gtk.spin_button.SpinButton.activate] for what counts as activation.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatesDefault(bool propval)
+  {
+    return setProperty("activates-default", propval);
+  }
+
+  /**
+      Set `adjustment` property.
+      Params:
+        propval = The adjustment that holds the value of the spin button.
+      Returns: Builder instance for fluent chaining
+  */
+  T adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("adjustment", propval);
+  }
+
+  /**
+      Set `climbRate` property.
+      Params:
+        propval = The acceleration rate when you hold down a button or key.
+      Returns: Builder instance for fluent chaining
+  */
+  T climbRate(double propval)
+  {
+    return setProperty("climb-rate", propval);
+  }
+
+  /**
+      Set `digits` property.
+      Params:
+        propval = The number of decimal places to display.
+      Returns: Builder instance for fluent chaining
+  */
+  T digits(uint propval)
+  {
+    return setProperty("digits", propval);
+  }
+
+  /**
+      Set `numeric` property.
+      Params:
+        propval = Whether non-numeric characters should be ignored.
+      Returns: Builder instance for fluent chaining
+  */
+  T numeric(bool propval)
+  {
+    return setProperty("numeric", propval);
+  }
+
+  /**
+      Set `snapToTicks` property.
+      Params:
+        propval = Whether erroneous values are automatically changed to the spin buttons
+          nearest step increment.
+      Returns: Builder instance for fluent chaining
+  */
+  T snapToTicks(bool propval)
+  {
+    return setProperty("snap-to-ticks", propval);
+  }
+
+  /**
+      Set `updatePolicy` property.
+      Params:
+        propval = Whether the spin button should update always, or only when the value
+          is acceptable.
+      Returns: Builder instance for fluent chaining
+  */
+  T updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  {
+    return setProperty("update-policy", propval);
+  }
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The current value.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(double propval)
+  {
+    return setProperty("value", propval);
+  }
+
+  /**
+      Set `wrap` property.
+      Params:
+        propval = Whether a spin button should wrap upon reaching its limits.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrap(bool propval)
+  {
+    return setProperty("wrap", propval);
+  }
+}
+
+/// Fluent builder for [gtk.spin_button.SpinButton]
+final class SpinButtonGidBuilder : SpinButtonGidBuilderImpl!SpinButtonGidBuilder
+{
+  SpinButton build()
+  {
+    return new SpinButton(cast(void*)createGObject(SpinButton._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.print_operation_preview;
 public import gtk.print_operation_preview_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.page_setup;
@@ -101,4 +102,8 @@ interface PrintOperationPreview
       Returns: Signal ID
   */
   ulong connectReady(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface PrintOperationPreviewGidBuilderImpl(T)
+{
 }

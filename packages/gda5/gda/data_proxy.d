@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -40,6 +41,15 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   override DataProxy self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.data_proxy.DataProxy]
+  Returns: New builder object
+  */
+  static DataProxyGidBuilder builder()
+  {
+    return new DataProxyGidBuilder;
   }
 
   /**
@@ -124,7 +134,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   /** */
   @property void sampleSize(int propval)
   {
-    return setSampleSize(propval);
+    setSampleSize(propval);
   }
 
   mixin DataModelT!();
@@ -858,6 +868,65 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("validate-row-changes", closure, after);
+  }
+}
+
+class DataProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
+{
+
+  mixin DataModelGidBuilderT!();
+
+  /**
+      Set `cacheChanges` property.
+      Params:
+        propval = Defines how changes kept in the data proxy are handled when the proxied data model
+          is changed (using the "model" property). The default is to silently discard all the
+          changes, but if this property is set to true, then the changes are cached.
+          
+          If set to true, each cached change will be re-applied to a newly set proxied data model if
+          the change's number of columns match the proxied data model's number of columns and based on:
+          <itemizedlist>
+            <listitem><para>the contents of the proxied data model's modified row for updates and deletes</para></listitem>
+            <listitem><para>the inserts are always kept</para></listitem>
+          </itemizedlist>
+      Returns: Builder instance for fluent chaining
+  */
+  T cacheChanges(bool propval)
+  {
+    return setProperty("cache-changes", propval);
+  }
+
+  /** */
+  T deferSync(bool propval)
+  {
+    return setProperty("defer-sync", propval);
+  }
+
+  /** */
+  T model(gda.data_model.DataModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /** */
+  T prependNullEntry(bool propval)
+  {
+    return setProperty("prepend-null-entry", propval);
+  }
+
+  /** */
+  T sampleSize(int propval)
+  {
+    return setProperty("sample-size", propval);
+  }
+}
+
+/// Fluent builder for [gda.data_proxy.DataProxy]
+final class DataProxyGidBuilder : DataProxyGidBuilderImpl!DataProxyGidBuilder
+{
+  DataProxy build()
+  {
+    return new DataProxy(cast(void*)createGObject(DataProxy._getGType), Yes.Take);
   }
 }
 

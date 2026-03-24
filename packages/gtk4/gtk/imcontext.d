@@ -8,6 +8,7 @@ import gdk.surface;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -72,6 +73,15 @@ class IMContext : gobject.object.ObjectWrap
   override IMContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.imcontext.IMContext]
+  Returns: New builder object
+  */
+  static IMContextGidBuilder builder()
+  {
+    return new IMContextGidBuilder;
   }
 
   /**
@@ -702,5 +712,44 @@ class IMContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("retrieve-surrounding", closure, after);
+  }
+}
+
+class IMContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints that allow input methods to fine-tune
+          their behaviour.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(gtk.types.InputHints propval)
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of the text field that the `GtkIMContext is connected to.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setProperty("input-purpose", propval);
+  }
+}
+
+/// Fluent builder for [gtk.imcontext.IMContext]
+final class IMContextGidBuilder : IMContextGidBuilderImpl!IMContextGidBuilder
+{
+  IMContext build()
+  {
+    return new IMContext(cast(void*)createGObject(IMContext._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtksource.completion_item;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -41,6 +42,15 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   }
 
   /**
+  Get builder for [gtksource.completion_item.CompletionItem]
+  Returns: New builder object
+  */
+  static CompletionItemGidBuilder builder()
+  {
+    return new CompletionItemGidBuilder;
+  }
+
+  /**
       Get `gicon` property.
       Returns: The #GIcon for the icon to be shown for this proposal.
   */
@@ -56,7 +66,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   */
   @property void gicon(gio.icon.Icon propval)
   {
-    return setGicon(propval);
+    setGicon(propval);
   }
 
   /**
@@ -75,7 +85,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   */
   @property void icon(gdkpixbuf.pixbuf.Pixbuf propval)
   {
-    return setIcon(propval);
+    setIcon(propval);
   }
 
   /**
@@ -94,7 +104,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -113,7 +123,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   */
   @property void info(string propval)
   {
-    return setInfo(propval);
+    setInfo(propval);
   }
 
   /**
@@ -132,7 +142,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -151,7 +161,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   */
   @property void markup(string propval)
   {
-    return setMarkup(propval);
+    setMarkup(propval);
   }
 
   /**
@@ -170,7 +180,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   */
   @property void text(string propval)
   {
-    return setText(propval);
+    setText(propval);
   }
 
   mixin CompletionProposalT!();
@@ -232,5 +242,97 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_source_completion_item_set_text(cast(GtkSourceCompletionItem*)this._cPtr, _text);
+  }
+}
+
+class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtksource.completion_proposal.CompletionProposalGidBuilderImpl!T
+{
+
+  mixin CompletionProposalGidBuilderT!();
+
+  /**
+      Set `gicon` property.
+      Params:
+        propval = The #GIcon for the icon to be shown for this proposal.
+      Returns: Builder instance for fluent chaining
+  */
+  T gicon(gio.icon.Icon propval)
+  {
+    return setProperty("gicon", propval);
+  }
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The #GdkPixbuf for the icon to be shown for this proposal.
+      Returns: Builder instance for fluent chaining
+  */
+  T icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for the icon to be shown for this proposal.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `info` property.
+      Params:
+        propval = Optional extra information to be shown for this proposal.
+      Returns: Builder instance for fluent chaining
+  */
+  T info(string propval)
+  {
+    return setProperty("info", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = Label to be shown for this proposal.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `markup` property.
+      Params:
+        propval = Label with markup to be shown for this proposal.
+      Returns: Builder instance for fluent chaining
+  */
+  T markup(string propval)
+  {
+    return setProperty("markup", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = Proposal text.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion_item.CompletionItem]
+final class CompletionItemGidBuilder : CompletionItemGidBuilderImpl!CompletionItemGidBuilder
+{
+  CompletionItem build()
+  {
+    return new CompletionItem(cast(void*)createGObject(CompletionItem._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Expression : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrow.expression.Expression]
+  Returns: New builder object
+  */
+  static ExpressionGidBuilder builder()
+  {
+    return new ExpressionGidBuilder;
+  }
+
   /** */
   bool equal(arrow.expression.Expression otherExpression)
   {
@@ -51,5 +61,18 @@ class Expression : gobject.object.ObjectWrap
     _cretval = garrow_expression_to_string(cast(GArrowExpression*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class ExpressionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.expression.Expression]
+final class ExpressionGidBuilder : ExpressionGidBuilderImpl!ExpressionGidBuilder
+{
+  Expression build()
+  {
+    return new Expression(cast(void*)createGObject(Expression._getGType), No.Take);
   }
 }

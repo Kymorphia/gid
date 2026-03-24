@@ -3,6 +3,7 @@ module webkit.find_controller;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -51,6 +52,15 @@ class FindController : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.find_controller.FindController]
+  Returns: New builder object
+  */
+  static FindControllerGidBuilder builder()
+  {
+    return new FindControllerGidBuilder;
+  }
+
+  /**
       Get `maxMatchCount` property.
       Returns: The maximum number of matches to report for a given search.
   */
@@ -75,6 +85,15 @@ class FindController : gobject.object.ObjectWrap
   @property string text()
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
+  }
+
+  /**
+      Get `webView` property.
+      Returns: The #WebKitWebView this controller is associated to.
+  */
+  @property webkit.web_view.WebView webView()
+  {
+    return getWebView();
   }
 
   /**
@@ -362,5 +381,29 @@ class FindController : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("found-text", closure, after);
+  }
+}
+
+class FindControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `webView` property.
+      Params:
+        propval = The #WebKitWebView this controller is associated to.
+      Returns: Builder instance for fluent chaining
+  */
+  T webView(webkit.web_view.WebView propval)
+  {
+    return setProperty("web-view", propval);
+  }
+}
+
+/// Fluent builder for [webkit.find_controller.FindController]
+final class FindControllerGidBuilder : FindControllerGidBuilderImpl!FindControllerGidBuilder
+{
+  FindController build()
+  {
+    return new FindController(cast(void*)createGObject(FindController._getGType), No.Take);
   }
 }

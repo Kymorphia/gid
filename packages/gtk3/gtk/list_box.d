@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -85,6 +86,15 @@ class ListBox : gtk.container.Container
     return this;
   }
 
+  /**
+  Get builder for [gtk.list_box.ListBox]
+  Returns: New builder object
+  */
+  static ListBoxGidBuilder builder()
+  {
+    return new ListBoxGidBuilder;
+  }
+
   /** */
   @property bool activateOnSingleClick()
   {
@@ -94,7 +104,7 @@ class ListBox : gtk.container.Container
   /** */
   @property void activateOnSingleClick(bool propval)
   {
-    return setActivateOnSingleClick(propval);
+    setActivateOnSingleClick(propval);
   }
 
   /** */
@@ -106,7 +116,7 @@ class ListBox : gtk.container.Container
   /** */
   @property void selectionMode(gtk.types.SelectionMode propval)
   {
-    return setSelectionMode(propval);
+    setSelectionMode(propval);
   }
 
   /**
@@ -890,5 +900,31 @@ class ListBox : gtk.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+}
+
+class ListBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
+{
+
+
+  /** */
+  T activateOnSingleClick(bool propval)
+  {
+    return setProperty("activate-on-single-click", propval);
+  }
+
+  /** */
+  T selectionMode(gtk.types.SelectionMode propval)
+  {
+    return setProperty("selection-mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.list_box.ListBox]
+final class ListBoxGidBuilder : ListBoxGidBuilderImpl!ListBoxGidBuilder
+{
+  ListBox build()
+  {
+    return new ListBox(cast(void*)createGObject(ListBox._getGType), No.Take);
   }
 }

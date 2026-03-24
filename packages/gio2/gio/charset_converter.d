@@ -10,6 +10,7 @@ import gio.initable;
 import gio.initable_mixin;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -45,6 +46,33 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   }
 
   /**
+  Get builder for [gio.charset_converter.CharsetConverter]
+  Returns: New builder object
+  */
+  static CharsetConverterGidBuilder builder()
+  {
+    return new CharsetConverterGidBuilder;
+  }
+
+  /**
+      Get `fromCharset` property.
+      Returns: The character encoding to convert from.
+  */
+  @property string fromCharset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("from-charset");
+  }
+
+  /**
+      Get `toCharset` property.
+      Returns: The character encoding to convert to.
+  */
+  @property string toCharset()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("to-charset");
+  }
+
+  /**
       Get `useFallback` property.
       Returns: Use fallback (of form `\<hexval>`) for invalid bytes.
   */
@@ -60,7 +88,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   */
   @property void useFallback(bool propval)
   {
-    return setUseFallback(propval);
+    setUseFallback(propval);
   }
 
   mixin ConverterT!();
@@ -118,5 +146,54 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   void setUseFallback(bool useFallback)
   {
     g_charset_converter_set_use_fallback(cast(GCharsetConverter*)this._cPtr, useFallback);
+  }
+}
+
+class CharsetConverterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.converter.ConverterGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin ConverterGidBuilderT!();
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `fromCharset` property.
+      Params:
+        propval = The character encoding to convert from.
+      Returns: Builder instance for fluent chaining
+  */
+  T fromCharset(string propval)
+  {
+    return setProperty("from-charset", propval);
+  }
+
+  /**
+      Set `toCharset` property.
+      Params:
+        propval = The character encoding to convert to.
+      Returns: Builder instance for fluent chaining
+  */
+  T toCharset(string propval)
+  {
+    return setProperty("to-charset", propval);
+  }
+
+  /**
+      Set `useFallback` property.
+      Params:
+        propval = Use fallback (of form `\<hexval>`) for invalid bytes.
+      Returns: Builder instance for fluent chaining
+  */
+  T useFallback(bool propval)
+  {
+    return setProperty("use-fallback", propval);
+  }
+}
+
+/// Fluent builder for [gio.charset_converter.CharsetConverter]
+final class CharsetConverterGidBuilder : CharsetConverterGidBuilderImpl!CharsetConverterGidBuilder
+{
+  CharsetConverter build()
+  {
+    return new CharsetConverter(cast(void*)createGObject(CharsetConverter._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtksource.style_scheme_chooser_widget;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -55,6 +56,15 @@ class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_choos
     return this;
   }
 
+  /**
+  Get builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
+  Returns: New builder object
+  */
+  static StyleSchemeChooserWidgetGidBuilder builder()
+  {
+    return new StyleSchemeChooserWidgetGidBuilder;
+  }
+
   mixin StyleSchemeChooserT!();
 
   /**
@@ -66,5 +76,20 @@ class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_choos
     GtkWidget* _cretval;
     _cretval = gtk_source_style_scheme_chooser_widget_new();
     this(_cretval, No.Take);
+  }
+}
+
+class StyleSchemeChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtksource.style_scheme_chooser.StyleSchemeChooserGidBuilderImpl!T
+{
+
+  mixin StyleSchemeChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
+final class StyleSchemeChooserWidgetGidBuilder : StyleSchemeChooserWidgetGidBuilderImpl!StyleSchemeChooserWidgetGidBuilder
+{
+  StyleSchemeChooserWidget build()
+  {
+    return new StyleSchemeChooserWidget(cast(void*)createGObject(StyleSchemeChooserWidget._getGType), No.Take);
   }
 }

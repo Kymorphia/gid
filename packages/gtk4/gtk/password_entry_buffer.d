@@ -2,6 +2,7 @@
 module gtk.password_entry_buffer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.entry_buffer;
@@ -42,6 +43,15 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
   }
 
   /**
+  Get builder for [gtk.password_entry_buffer.PasswordEntryBuffer]
+  Returns: New builder object
+  */
+  static PasswordEntryBufferGidBuilder builder()
+  {
+    return new PasswordEntryBufferGidBuilder;
+  }
+
+  /**
       Creates a new [gtk.entry_buffer.EntryBuffer] using secure memory allocations.
       Returns: the newly created instance
   */
@@ -50,5 +60,18 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
     GtkEntryBuffer* _cretval;
     _cretval = gtk_password_entry_buffer_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class PasswordEntryBufferGidBuilderImpl(T) : gtk.entry_buffer.EntryBufferGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.password_entry_buffer.PasswordEntryBuffer]
+final class PasswordEntryBufferGidBuilder : PasswordEntryBufferGidBuilderImpl!PasswordEntryBufferGidBuilder
+{
+  PasswordEntryBuffer build()
+  {
+    return new PasswordEntryBuffer(cast(void*)createGObject(PasswordEntryBuffer._getGType), Yes.Take);
   }
 }

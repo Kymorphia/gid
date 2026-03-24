@@ -2,6 +2,7 @@
 module gstallocators.drmdumb_allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocator;
 import gst.memory;
@@ -38,6 +39,27 @@ class DRMDumbAllocator : gst.allocator.Allocator
   override DRMDumbAllocator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstallocators.drmdumb_allocator.DRMDumbAllocator]
+  Returns: New builder object
+  */
+  static DRMDumbAllocatorGidBuilder builder()
+  {
+    return new DRMDumbAllocatorGidBuilder;
+  }
+
+  /** */
+  @property string drmDevicePath()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("drm-device-path");
+  }
+
+  /** */
+  @property int drmFd()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("drm-fd");
   }
 
   /**
@@ -110,5 +132,30 @@ class DRMDumbAllocator : gst.allocator.Allocator
     bool _retval;
     _retval = cast(bool)gst_drm_dumb_allocator_has_prime_export(cast(GstAllocator*)this._cPtr);
     return _retval;
+  }
+}
+
+class DRMDumbAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!T
+{
+
+  /** */
+  T drmDevicePath(string propval)
+  {
+    return setProperty("drm-device-path", propval);
+  }
+
+  /** */
+  T drmFd(int propval)
+  {
+    return setProperty("drm-fd", propval);
+  }
+}
+
+/// Fluent builder for [gstallocators.drmdumb_allocator.DRMDumbAllocator]
+final class DRMDumbAllocatorGidBuilder : DRMDumbAllocatorGidBuilderImpl!DRMDumbAllocatorGidBuilder
+{
+  DRMDumbAllocator build()
+  {
+    return new DRMDumbAllocator(cast(void*)createGObject(DRMDumbAllocator._getGType), No.Take);
   }
 }

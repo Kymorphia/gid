@@ -6,6 +6,7 @@ import gdkpixbuf.pixbuf;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -53,6 +54,15 @@ class TextBuffer : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.text_buffer.TextBuffer]
+  Returns: New builder object
+  */
+  static TextBufferGidBuilder builder()
+  {
+    return new TextBufferGidBuilder;
+  }
+
+  /**
       Get `copyTargetList` property.
       Returns: The list of targets this buffer supports for clipboard copying
         and as DND source.
@@ -90,6 +100,12 @@ class TextBuffer : gobject.object.ObjectWrap
   @property gtk.target_list.TargetList pasteTargetList()
   {
     return getPasteTargetList();
+  }
+
+  /** */
+  @property gtk.text_tag_table.TextTagTable tagTable()
+  {
+    return getTagTable();
   }
 
   /**
@@ -2091,5 +2107,36 @@ class TextBuffer : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("remove-tag", closure, after);
+  }
+}
+
+class TextBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T tagTable(gtk.text_tag_table.TextTagTable propval)
+  {
+    return setProperty("tag-table", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The text content of the buffer. Without child widgets and images,
+          see [gtk.text_buffer.TextBuffer.getText] for more information.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [gtk.text_buffer.TextBuffer]
+final class TextBufferGidBuilder : TextBufferGidBuilderImpl!TextBufferGidBuilder
+{
+  TextBuffer build()
+  {
+    return new TextBuffer(cast(void*)createGObject(TextBuffer._getGType), Yes.Take);
   }
 }

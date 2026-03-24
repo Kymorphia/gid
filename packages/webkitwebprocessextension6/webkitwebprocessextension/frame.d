@@ -2,6 +2,7 @@
 module webkitwebprocessextension.frame;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.context;
 import webkitwebprocessextension.c.functions;
@@ -41,6 +42,15 @@ class Frame : gobject.object.ObjectWrap
   override Frame self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.frame.Frame]
+  Returns: New builder object
+  */
+  static FrameGidBuilder builder()
+  {
+    return new FrameGidBuilder;
   }
 
   /**
@@ -106,5 +116,18 @@ class Frame : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)webkit_frame_is_main_frame(cast(WebKitFrame*)this._cPtr);
     return _retval;
+  }
+}
+
+class FrameGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.frame.Frame]
+final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
+{
+  Frame build()
+  {
+    return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }
 }

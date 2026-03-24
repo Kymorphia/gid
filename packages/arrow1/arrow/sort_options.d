@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.sort_key;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class SortOptions : arrow.function_options.FunctionOptions
@@ -35,6 +36,15 @@ class SortOptions : arrow.function_options.FunctionOptions
   override SortOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.sort_options.SortOptions]
+  Returns: New builder object
+  */
+  static SortOptionsGidBuilder builder()
+  {
+    return new SortOptionsGidBuilder;
   }
 
   /** */
@@ -88,5 +98,18 @@ class SortOptions : arrow.function_options.FunctionOptions
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);
     scope(exit) containerFree!(GList*, arrow.sort_key.SortKey, GidOwnership.None)(_sortKeys);
     garrow_sort_options_set_sort_keys(cast(GArrowSortOptions*)this._cPtr, _sortKeys);
+  }
+}
+
+class SortOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.sort_options.SortOptions]
+final class SortOptionsGidBuilder : SortOptionsGidBuilderImpl!SortOptionsGidBuilder
+{
+  SortOptions build()
+  {
+    return new SortOptions(cast(void*)createGObject(SortOptions._getGType), Yes.Take);
   }
 }

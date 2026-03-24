@@ -2,6 +2,7 @@
 module gstaudio.audio_sink;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstaudio.audio_base_sink;
 import gstaudio.c.functions;
 import gstaudio.c.types;
@@ -60,5 +61,27 @@ class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
   override AudioSink self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstaudio.audio_sink.AudioSink]
+  Returns: New builder object
+  */
+  static AudioSinkGidBuilder builder()
+  {
+    return new AudioSinkGidBuilder;
+  }
+}
+
+class AudioSinkGidBuilderImpl(T) : gstaudio.audio_base_sink.AudioBaseSinkGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstaudio.audio_sink.AudioSink]
+final class AudioSinkGidBuilder : AudioSinkGidBuilderImpl!AudioSinkGidBuilder
+{
+  AudioSink build()
+  {
+    return new AudioSink(cast(void*)createGObject(AudioSink._getGType), No.Take);
   }
 }

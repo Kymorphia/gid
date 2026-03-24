@@ -7,6 +7,7 @@ import arrow.field;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Schema : gobject.object.ObjectWrap
   override Schema self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.schema.Schema]
+  Returns: New builder object
+  */
+  static SchemaGidBuilder builder()
+  {
+    return new SchemaGidBuilder;
   }
 
   /** */
@@ -203,5 +213,24 @@ class Schema : gobject.object.ObjectWrap
     _cretval = garrow_schema_with_metadata(cast(GArrowSchema*)this._cPtr, _metadata);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class SchemaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T schema(void* propval)
+  {
+    return setProperty("schema", propval);
+  }
+}
+
+/// Fluent builder for [arrow.schema.Schema]
+final class SchemaGidBuilder : SchemaGidBuilderImpl!SchemaGidBuilder
+{
+  Schema build()
+  {
+    return new Schema(cast(void*)createGObject(Schema._getGType), Yes.Take);
   }
 }

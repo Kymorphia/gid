@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -62,6 +63,15 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
     return this;
   }
 
+  /**
+  Get builder for [gtk.scale_button.ScaleButton]
+  Returns: New builder object
+  */
+  static ScaleButtonGidBuilder builder()
+  {
+    return new ScaleButtonGidBuilder;
+  }
+
   /** */
   @property gtk.adjustment.Adjustment adjustment()
   {
@@ -71,7 +81,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   /** */
   @property void adjustment(gtk.adjustment.Adjustment propval)
   {
-    return setAdjustment(propval);
+    setAdjustment(propval);
   }
 
   /** */
@@ -95,7 +105,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   /** */
   @property void value(double propval)
   {
-    return setValue(propval);
+    setValue(propval);
   }
 
   mixin OrientableT!();
@@ -357,5 +367,38 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+}
+
+class ScaleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /** */
+  T adjustment(gtk.adjustment.Adjustment propval)
+  {
+    return setProperty("adjustment", propval);
+  }
+
+  /** */
+  T size(gtk.types.IconSize propval)
+  {
+    return setProperty("size", propval);
+  }
+
+  /** */
+  T value(double propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [gtk.scale_button.ScaleButton]
+final class ScaleButtonGidBuilder : ScaleButtonGidBuilderImpl!ScaleButtonGidBuilder
+{
+  ScaleButton build()
+  {
+    return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), No.Take);
   }
 }

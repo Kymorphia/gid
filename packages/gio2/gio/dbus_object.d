@@ -8,6 +8,7 @@ import gio.c.types;
 import gio.dbus_interface;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -88,4 +89,8 @@ interface DBusObject
       Returns: Signal ID
   */
   ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface DBusObjectGidBuilderImpl(T)
+{
 }

@@ -2,6 +2,7 @@
 module gst.dynamic_type_factory;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.types;
 import gst.c.functions;
 import gst.c.types;
@@ -57,6 +58,15 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
     return this;
   }
 
+  /**
+  Get builder for [gst.dynamic_type_factory.DynamicTypeFactory]
+  Returns: New builder object
+  */
+  static DynamicTypeFactoryGidBuilder builder()
+  {
+    return new DynamicTypeFactoryGidBuilder;
+  }
+
   /** */
   static gobject.types.GType load(string factoryname)
   {
@@ -64,5 +74,18 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
     _retval = gst_dynamic_type_factory_load(_factoryname);
     return _retval;
+  }
+}
+
+class DynamicTypeFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.dynamic_type_factory.DynamicTypeFactory]
+final class DynamicTypeFactoryGidBuilder : DynamicTypeFactoryGidBuilderImpl!DynamicTypeFactoryGidBuilder
+{
+  DynamicTypeFactory build()
+  {
+    return new DynamicTypeFactory(cast(void*)createGObject(DynamicTypeFactory._getGType), No.Take);
   }
 }

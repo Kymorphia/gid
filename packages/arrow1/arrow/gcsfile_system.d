@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.file_system;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class GCSFileSystem : arrow.file_system.FileSystem
@@ -34,5 +35,27 @@ class GCSFileSystem : arrow.file_system.FileSystem
   override GCSFileSystem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.gcsfile_system.GCSFileSystem]
+  Returns: New builder object
+  */
+  static GCSFileSystemGidBuilder builder()
+  {
+    return new GCSFileSystemGidBuilder;
+  }
+}
+
+class GCSFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.gcsfile_system.GCSFileSystem]
+final class GCSFileSystemGidBuilder : GCSFileSystemGidBuilderImpl!GCSFileSystemGidBuilder
+{
+  GCSFileSystem build()
+  {
+    return new GCSFileSystem(cast(void*)createGObject(GCSFileSystem._getGType), No.Take);
   }
 }

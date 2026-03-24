@@ -13,6 +13,7 @@ import gio.tls_interaction;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -53,6 +54,28 @@ class TlsConnection : gio.iostream.IOStream
   }
 
   /**
+  Get builder for [gio.tls_connection.TlsConnection]
+  Returns: New builder object
+  */
+  static TlsConnectionGidBuilder builder()
+  {
+    return new TlsConnectionGidBuilder;
+  }
+
+  /**
+      Get `baseIoStream` property.
+      Returns: The #GIOStream that the connection wraps. The connection holds a reference
+        to this stream, and may run operations on the stream from other threads
+        throughout its lifetime. Consequently, after the #GIOStream has been
+        constructed, application code may only run its own operations on this
+        stream when no #GIOStream operations are running.
+  */
+  @property gio.iostream.IOStream baseIoStream()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.iostream.IOStream)("base-io-stream");
+  }
+
+  /**
       Get `certificate` property.
       Returns: The connection's certificate; see
         [gio.tls_connection.TlsConnection.setCertificate].
@@ -70,7 +93,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   @property void certificate(gio.tls_certificate.TlsCertificate propval)
   {
-    return setCertificate(propval);
+    setCertificate(propval);
   }
 
   /**
@@ -128,7 +151,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   @property void database(gio.tls_database.TlsDatabase propval)
   {
-    return setDatabase(propval);
+    setDatabase(propval);
   }
 
   /**
@@ -151,7 +174,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   @property void interaction(gio.tls_interaction.TlsInteraction propval)
   {
-    return setInteraction(propval);
+    setInteraction(propval);
   }
 
   /**
@@ -231,7 +254,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   @property void rehandshakeMode(gio.types.TlsRehandshakeMode propval)
   {
-    return setRehandshakeMode(propval);
+    setRehandshakeMode(propval);
   }
 
   /**
@@ -252,7 +275,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   @property void requireCloseNotify(bool propval)
   {
-    return setRequireCloseNotify(propval);
+    setRequireCloseNotify(propval);
   }
 
   /**
@@ -279,7 +302,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   @property void useSystemCertdb(bool propval)
   {
-    return setUseSystemCertdb(propval);
+    setUseSystemCertdb(propval);
   }
 
   /**
@@ -852,5 +875,125 @@ class TlsConnection : gio.iostream.IOStream
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accept-certificate", closure, after);
+  }
+}
+
+class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
+{
+
+  /**
+      Set `baseIoStream` property.
+      Params:
+        propval = The #GIOStream that the connection wraps. The connection holds a reference
+          to this stream, and may run operations on the stream from other threads
+          throughout its lifetime. Consequently, after the #GIOStream has been
+          constructed, application code may only run its own operations on this
+          stream when no #GIOStream operations are running.
+      Returns: Builder instance for fluent chaining
+  */
+  T baseIoStream(gio.iostream.IOStream propval)
+  {
+    return setProperty("base-io-stream", propval);
+  }
+
+  /**
+      Set `certificate` property.
+      Params:
+        propval = The connection's certificate; see
+          [gio.tls_connection.TlsConnection.setCertificate].
+      Returns: Builder instance for fluent chaining
+  */
+  T certificate(gio.tls_certificate.TlsCertificate propval)
+  {
+    return setProperty("certificate", propval);
+  }
+
+  /**
+      Set `database` property.
+      Params:
+        propval = The certificate database to use when verifying this TLS connection.
+          If no certificate database is set, then the default database will be
+          used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
+          
+          When using a non-default database, #GTlsConnection must fall back to using
+          the #GTlsDatabase to perform certificate verification using
+          [gio.tls_database.TlsDatabase.verifyChain], which means certificate verification will
+          not be able to make use of TLS session context. This may be less secure.
+          For example, if you create your own #GTlsDatabase that just wraps the
+          default #GTlsDatabase, you might expect that you have not changed anything,
+          but this is not true because you may have altered the behavior of
+          #GTlsConnection by causing it to use [gio.tls_database.TlsDatabase.verifyChain]. See the
+          documentation of [gio.tls_database.TlsDatabase.verifyChain] for more details on specific
+          security checks that may not be performed. Accordingly, setting a
+          non-default database is discouraged except for specialty applications with
+          unusual security requirements.
+      Returns: Builder instance for fluent chaining
+  */
+  T database(gio.tls_database.TlsDatabase propval)
+  {
+    return setProperty("database", propval);
+  }
+
+  /**
+      Set `interaction` property.
+      Params:
+        propval = A #GTlsInteraction object to be used when the connection or certificate
+          database need to interact with the user. This will be used to prompt the
+          user for passwords where necessary.
+      Returns: Builder instance for fluent chaining
+  */
+  T interaction(gio.tls_interaction.TlsInteraction propval)
+  {
+    return setProperty("interaction", propval);
+  }
+
+  /**
+      Set `rehandshakeMode` property.
+      Params:
+        propval = The rehandshaking mode. See
+          [gio.tls_connection.TlsConnection.setRehandshakeMode].
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: The rehandshake mode is ignored.
+  */
+  T rehandshakeMode(gio.types.TlsRehandshakeMode propval)
+  {
+    return setProperty("rehandshake-mode", propval);
+  }
+
+  /**
+      Set `requireCloseNotify` property.
+      Params:
+        propval = Whether or not proper TLS close notification is required.
+          See [gio.tls_connection.TlsConnection.setRequireCloseNotify].
+      Returns: Builder instance for fluent chaining
+  */
+  T requireCloseNotify(bool propval)
+  {
+    return setProperty("require-close-notify", propval);
+  }
+
+  /**
+      Set `useSystemCertdb` property.
+      Params:
+        propval = Whether or not the system certificate database will be used to
+          verify peer certificates. See
+          [gio.tls_connection.TlsConnection.setUseSystemCertdb].
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use GTlsConnection:database instead
+  */
+  T useSystemCertdb(bool propval)
+  {
+    return setProperty("use-system-certdb", propval);
+  }
+}
+
+/// Fluent builder for [gio.tls_connection.TlsConnection]
+final class TlsConnectionGidBuilder : TlsConnectionGidBuilderImpl!TlsConnectionGidBuilder
+{
+  TlsConnection build()
+  {
+    return new TlsConnection(cast(void*)createGObject(TlsConnection._getGType), No.Take);
   }
 }

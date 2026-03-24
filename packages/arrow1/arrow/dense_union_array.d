@@ -11,6 +11,7 @@ import arrow.types;
 import arrow.union_array;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,21 @@ class DenseUnionArray : arrow.union_array.UnionArray
   override DenseUnionArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.dense_union_array.DenseUnionArray]
+  Returns: New builder object
+  */
+  static DenseUnionArrayGidBuilder builder()
+  {
+    return new DenseUnionArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.int32_array.Int32Array valueOffsets()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.int32_array.Int32Array)("value-offsets");
   }
 
   /** */
@@ -75,5 +91,24 @@ class DenseUnionArray : arrow.union_array.UnionArray
     int _retval;
     _retval = garrow_dense_union_array_get_value_offset(cast(GArrowDenseUnionArray*)this._cPtr, i);
     return _retval;
+  }
+}
+
+class DenseUnionArrayGidBuilderImpl(T) : arrow.union_array.UnionArrayGidBuilderImpl!T
+{
+
+  /** */
+  T valueOffsets(arrow.int32_array.Int32Array propval)
+  {
+    return setProperty("value-offsets", propval);
+  }
+}
+
+/// Fluent builder for [arrow.dense_union_array.DenseUnionArray]
+final class DenseUnionArrayGidBuilder : DenseUnionArrayGidBuilderImpl!DenseUnionArrayGidBuilder
+{
+  DenseUnionArray build()
+  {
+    return new DenseUnionArray(cast(void*)createGObject(DenseUnionArray._getGType), Yes.Take);
   }
 }

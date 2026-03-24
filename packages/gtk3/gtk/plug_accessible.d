@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.window;
 import atk.window_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -40,6 +41,15 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
     return this;
   }
 
+  /**
+  Get builder for [gtk.plug_accessible.PlugAccessible]
+  Returns: New builder object
+  */
+  static PlugAccessibleGidBuilder builder()
+  {
+    return new PlugAccessibleGidBuilder;
+  }
+
   /** */
   string getId()
   {
@@ -47,5 +57,19 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
     _cretval = gtk_plug_accessible_get_id(cast(GtkPlugAccessible*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class PlugAccessibleGidBuilderImpl(T) : gtk.window_accessible.WindowAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.plug_accessible.PlugAccessible]
+final class PlugAccessibleGidBuilder : PlugAccessibleGidBuilderImpl!PlugAccessibleGidBuilder
+{
+  PlugAccessible build()
+  {
+    return new PlugAccessible(cast(void*)createGObject(PlugAccessible._getGType), No.Take);
   }
 }

@@ -13,6 +13,7 @@ import arrow.writable_mixin;
 import arrow.write_options;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -42,6 +43,15 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
   override OutputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.output_stream.OutputStream]
+  Returns: New builder object
+  */
+  static OutputStreamGidBuilder builder()
+  {
+    return new OutputStreamGidBuilder;
   }
 
   mixin FileT!();
@@ -78,5 +88,27 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class OutputStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, arrow.file.FileGidBuilderImpl!T, arrow.writable.WritableGidBuilderImpl!T
+{
+
+  mixin FileGidBuilderT!();
+  mixin WritableGidBuilderT!();
+
+  /** */
+  T outputStream(void* propval)
+  {
+    return setProperty("output-stream", propval);
+  }
+}
+
+/// Fluent builder for [arrow.output_stream.OutputStream]
+final class OutputStreamGidBuilder : OutputStreamGidBuilderImpl!OutputStreamGidBuilder
+{
+  OutputStream build()
+  {
+    return new OutputStream(cast(void*)createGObject(OutputStream._getGType), No.Take);
   }
 }

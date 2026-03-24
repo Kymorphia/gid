@@ -13,6 +13,7 @@ public import gdk.toplevel_size;
 public import gdk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -41,7 +42,7 @@ template ToplevelT()
   */
   @property void decorated(bool propval)
   {
-    return setDecorated(propval);
+    setDecorated(propval);
   }
 
   /**
@@ -60,7 +61,7 @@ template ToplevelT()
   */
   @property void deletable(bool propval)
   {
-    return setDeletable(propval);
+    setDeletable(propval);
   }
 
   /**
@@ -117,7 +118,7 @@ template ToplevelT()
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -151,7 +152,7 @@ template ToplevelT()
   */
   @property void startupId(string propval)
   {
-    return setStartupId(propval);
+    setStartupId(propval);
   }
 
   /**
@@ -179,7 +180,7 @@ template ToplevelT()
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -198,7 +199,7 @@ template ToplevelT()
   */
   @property void transientFor(gdk.surface.Surface propval)
   {
-    return setTransientFor(propval);
+    setTransientFor(propval);
   }
 
   /**
@@ -567,5 +568,100 @@ template ToplevelT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("compute-size", closure, after);
+  }
+}
+
+template ToplevelGidBuilderT()
+{
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window manager should add decorations.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorated(bool propval)
+  {
+    return setProperty("decorated", propval);
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window manager should allow to close the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T deletable(bool propval)
+  {
+    return setProperty("deletable", propval);
+  }
+
+  /**
+      Set `fullscreenMode` property.
+      Params:
+        propval = The fullscreen mode of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T fullscreenMode(gdk.types.FullscreenMode propval)
+  {
+    return setProperty("fullscreen-mode", propval);
+  }
+
+  /**
+      Set `iconList` property.
+      Params:
+        propval = A list of textures to use as icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconList(void* propval)
+  {
+    return setProperty("icon-list", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the surface is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The startup ID of the surface.
+          
+          See [gdk.app_launch_context.AppLaunchContext] for more information about
+          startup feedback.
+      Returns: Builder instance for fluent chaining
+  */
+  T startupId(string propval)
+  {
+    return setProperty("startup-id", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T transientFor(gdk.surface.Surface propval)
+  {
+    return setProperty("transient-for", propval);
   }
 }

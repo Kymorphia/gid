@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for calculating the best encoding and/or charset to encode
@@ -37,6 +38,15 @@ class FilterBest : gmime.filter.Filter
   override FilterBest self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.filter_best.FilterBest]
+  Returns: New builder object
+  */
+  static FilterBestGidBuilder builder()
+  {
+    return new FilterBestGidBuilder;
   }
 
   /**
@@ -92,5 +102,18 @@ class FilterBest : gmime.filter.Filter
     _cretval = g_mime_filter_best_encoding(cast(GMimeFilterBest*)this._cPtr, constraint);
     gmime.types.ContentEncoding _retval = cast(gmime.types.ContentEncoding)_cretval;
     return _retval;
+  }
+}
+
+class FilterBestGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_best.FilterBest]
+final class FilterBestGidBuilder : FilterBestGidBuilderImpl!FilterBestGidBuilder
+{
+  FilterBest build()
+  {
+    return new FilterBest(cast(void*)createGObject(FilterBest._getGType), Yes.Take);
   }
 }

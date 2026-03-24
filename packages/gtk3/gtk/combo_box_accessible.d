@@ -9,6 +9,7 @@ import atk.object;
 import atk.selection;
 import atk.selection_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -43,9 +44,34 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return this;
   }
 
+  /**
+  Get builder for [gtk.combo_box_accessible.ComboBoxAccessible]
+  Returns: New builder object
+  */
+  static ComboBoxAccessibleGidBuilder builder()
+  {
+    return new ComboBoxAccessibleGidBuilder;
+  }
+
   mixin ActionT!();
   mixin SelectionT!();
   alias getDescription = atk.object.ObjectWrap.getDescription;
   alias getName = atk.object.ObjectWrap.getName;
   alias setDescription = atk.object.ObjectWrap.setDescription;
+}
+
+class ComboBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+  mixin SelectionGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.combo_box_accessible.ComboBoxAccessible]
+final class ComboBoxAccessibleGidBuilder : ComboBoxAccessibleGidBuilderImpl!ComboBoxAccessibleGidBuilder
+{
+  ComboBoxAccessible build()
+  {
+    return new ComboBoxAccessible(cast(void*)createGObject(ComboBoxAccessible._getGType), No.Take);
+  }
 }

@@ -9,6 +9,7 @@ import arrow.table;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,21 @@ class JSONReader : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrow.jsonreader.JSONReader]
+  Returns: New builder object
+  */
+  static JSONReaderGidBuilder builder()
+  {
+    return new JSONReaderGidBuilder;
+  }
+
+  /** */
+  @property arrow.input_stream.InputStream input()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.input_stream.InputStream)("input");
+  }
+
   /** */
   this(arrow.input_stream.InputStream input, arrow.jsonread_options.JSONReadOptions options = null)
   {
@@ -61,5 +77,30 @@ class JSONReader : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class JSONReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T input(arrow.input_stream.InputStream propval)
+  {
+    return setProperty("input", propval);
+  }
+
+  /** */
+  T jsonTableReader(void* propval)
+  {
+    return setProperty("json-table-reader", propval);
+  }
+}
+
+/// Fluent builder for [arrow.jsonreader.JSONReader]
+final class JSONReaderGidBuilder : JSONReaderGidBuilderImpl!JSONReaderGidBuilder
+{
+  JSONReader build()
+  {
+    return new JSONReader(cast(void*)createGObject(JSONReader._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gst.tag_setter_mixin;
 
 public import gst.tag_setter_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.value;
 public import gst.c.functions;
 public import gst.c.types;
@@ -130,4 +131,8 @@ template TagSetterT()
   {
     gst_tag_setter_set_tag_merge_mode(cast(GstTagSetter*)this._cPtr, mode);
   }
+}
+
+template TagSetterGidBuilderT()
+{
 }

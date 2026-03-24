@@ -7,6 +7,7 @@ import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     An opaque struct representing a simple animation.
@@ -40,6 +41,15 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   }
 
   /**
+  Get builder for [gdkpixbuf.pixbuf_simple_anim.PixbufSimpleAnim]
+  Returns: New builder object
+  */
+  static PixbufSimpleAnimGidBuilder builder()
+  {
+    return new PixbufSimpleAnimGidBuilder;
+  }
+
+  /**
       Get `loop` property.
       Returns: Whether the animation should loop when it reaches the end.
   */
@@ -55,7 +65,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   */
   @property void loop(bool propval)
   {
-    return setLoop(propval);
+    setLoop(propval);
   }
 
   /**
@@ -107,5 +117,29 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   void setLoop(bool loop)
   {
     gdk_pixbuf_simple_anim_set_loop(cast(GdkPixbufSimpleAnim*)this._cPtr, loop);
+  }
+}
+
+class PixbufSimpleAnimGidBuilderImpl(T) : gdkpixbuf.pixbuf_animation.PixbufAnimationGidBuilderImpl!T
+{
+
+  /**
+      Set `loop` property.
+      Params:
+        propval = Whether the animation should loop when it reaches the end.
+      Returns: Builder instance for fluent chaining
+  */
+  T loop(bool propval)
+  {
+    return setProperty("loop", propval);
+  }
+}
+
+/// Fluent builder for [gdkpixbuf.pixbuf_simple_anim.PixbufSimpleAnim]
+final class PixbufSimpleAnimGidBuilder : PixbufSimpleAnimGidBuilderImpl!PixbufSimpleAnimGidBuilder
+{
+  PixbufSimpleAnim build()
+  {
+    return new PixbufSimpleAnim(cast(void*)createGObject(PixbufSimpleAnim._getGType), Yes.Take);
   }
 }

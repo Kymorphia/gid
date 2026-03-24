@@ -5,6 +5,7 @@ public import gtksource.completion_provider_iface_proxy;
 public import gdkpixbuf.pixbuf;
 public import gid.gid;
 public import gio.icon;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.text_iter;
 public import gtk.widget;
@@ -240,4 +241,8 @@ template CompletionProviderT()
   {
     gtk_source_completion_provider_update_info(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, info ? cast(GtkSourceCompletionInfo*)info._cPtr(No.Dup) : null);
   }
+}
+
+template CompletionProviderGidBuilderT()
+{
 }

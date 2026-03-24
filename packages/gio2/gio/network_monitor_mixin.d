@@ -11,6 +11,7 @@ public import gio.socket_connectable;
 public import gio.types;
 public import glib.error;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -273,4 +274,8 @@ template NetworkMonitorT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("network-changed", closure, after);
   }
+}
+
+template NetworkMonitorGidBuilderT()
+{
 }

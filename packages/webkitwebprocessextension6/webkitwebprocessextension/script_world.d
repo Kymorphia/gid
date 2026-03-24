@@ -3,6 +3,7 @@ module webkitwebprocessextension.script_world;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkitwebprocessextension.c.functions;
 import webkitwebprocessextension.c.types;
@@ -37,6 +38,15 @@ class ScriptWorld : gobject.object.ObjectWrap
   override ScriptWorld self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkitwebprocessextension.script_world.ScriptWorld]
+  Returns: New builder object
+  */
+  static ScriptWorldGidBuilder builder()
+  {
+    return new ScriptWorldGidBuilder;
   }
 
   /**
@@ -155,5 +165,18 @@ class ScriptWorld : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-object-cleared", closure, after);
+  }
+}
+
+class ScriptWorldGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkitwebprocessextension.script_world.ScriptWorld]
+final class ScriptWorldGidBuilder : ScriptWorldGidBuilderImpl!ScriptWorldGidBuilder
+{
+  ScriptWorld build()
+  {
+    return new ScriptWorld(cast(void*)createGObject(ScriptWorld._getGType), Yes.Take);
   }
 }

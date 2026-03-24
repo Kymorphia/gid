@@ -5,6 +5,7 @@ import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -36,6 +37,15 @@ class Filter : gobject.object.ObjectWrap
   override Filter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.filter.Filter]
+  Returns: New builder object
+  */
+  static FilterGidBuilder builder()
+  {
+    return new FilterGidBuilder;
   }
 
   /**
@@ -131,5 +141,18 @@ class Filter : gobject.object.ObjectWrap
   void setSize(size_t size, bool keep)
   {
     g_mime_filter_set_size(cast(GMimeFilter*)this._cPtr, size, keep);
+  }
+}
+
+class FilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter.Filter]
+final class FilterGidBuilder : FilterGidBuilderImpl!FilterGidBuilder
+{
+  Filter build()
+  {
+    return new Filter(cast(void*)createGObject(Filter._getGType), No.Take);
   }
 }

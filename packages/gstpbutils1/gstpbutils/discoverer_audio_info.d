@@ -2,6 +2,7 @@
 module gstpbutils.discoverer_audio_info;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
 import gstpbutils.discoverer_stream_info;
@@ -36,6 +37,15 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   override DiscovererAudioInfo self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.discoverer_audio_info.DiscovererAudioInfo]
+  Returns: New builder object
+  */
+  static DiscovererAudioInfoGidBuilder builder()
+  {
+    return new DiscovererAudioInfoGidBuilder;
   }
 
   /** */
@@ -93,5 +103,18 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
     uint _retval;
     _retval = gst_discoverer_audio_info_get_sample_rate(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     return _retval;
+  }
+}
+
+class DiscovererAudioInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.discoverer_audio_info.DiscovererAudioInfo]
+final class DiscovererAudioInfoGidBuilder : DiscovererAudioInfoGidBuilderImpl!DiscovererAudioInfoGidBuilder
+{
+  DiscovererAudioInfo build()
+  {
+    return new DiscovererAudioInfo(cast(void*)createGObject(DiscovererAudioInfo._getGType), No.Take);
   }
 }

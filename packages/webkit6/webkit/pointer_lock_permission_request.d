@@ -2,6 +2,7 @@
 module webkit.pointer_lock_permission_request;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -47,5 +48,29 @@ class PointerLockPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
     return this;
   }
 
+  /**
+  Get builder for [webkit.pointer_lock_permission_request.PointerLockPermissionRequest]
+  Returns: New builder object
+  */
+  static PointerLockPermissionRequestGidBuilder builder()
+  {
+    return new PointerLockPermissionRequestGidBuilder;
+  }
+
   mixin PermissionRequestT!();
+}
+
+class PointerLockPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
+{
+
+  mixin PermissionRequestGidBuilderT!();
+}
+
+/// Fluent builder for [webkit.pointer_lock_permission_request.PointerLockPermissionRequest]
+final class PointerLockPermissionRequestGidBuilder : PointerLockPermissionRequestGidBuilderImpl!PointerLockPermissionRequestGidBuilder
+{
+  PointerLockPermissionRequest build()
+  {
+    return new PointerLockPermissionRequest(cast(void*)createGObject(PointerLockPermissionRequest._getGType), No.Take);
+  }
 }

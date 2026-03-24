@@ -7,6 +7,7 @@ import arrowflight.metadata_reader;
 import arrowflight.stream_writer;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class DoPutResult : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrowflight.do_put_result.DoPutResult]
+  Returns: New builder object
+  */
+  static DoPutResultGidBuilder builder()
+  {
+    return new DoPutResultGidBuilder;
+  }
+
+  /**
       Get `reader` property.
       Returns: A reader for application metadata from the server.
   */
@@ -54,5 +64,24 @@ class DoPutResult : gobject.object.ObjectWrap
   @property arrowflight.stream_writer.StreamWriter writer()
   {
     return gobject.object.ObjectWrap.getProperty!(arrowflight.stream_writer.StreamWriter)("writer");
+  }
+}
+
+class DoPutResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T result(void* propval)
+  {
+    return setProperty("result", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.do_put_result.DoPutResult]
+final class DoPutResultGidBuilder : DoPutResultGidBuilderImpl!DoPutResultGidBuilder
+{
+  DoPutResult build()
+  {
+    return new DoPutResult(cast(void*)createGObject(DoPutResult._getGType), No.Take);
   }
 }

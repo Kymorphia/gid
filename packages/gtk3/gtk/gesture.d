@@ -8,6 +8,7 @@ import gdk.rectangle;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -140,6 +141,24 @@ class Gesture : gtk.event_controller.EventController
   }
 
   /**
+  Get builder for [gtk.gesture.Gesture]
+  Returns: New builder object
+  */
+  static GestureGidBuilder builder()
+  {
+    return new GestureGidBuilder;
+  }
+
+  /**
+      Get `nPoints` property.
+      Returns: The number of touch points that trigger recognition on this gesture,
+  */
+  @property uint nPoints()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-points");
+  }
+
+  /**
       Get `window` property.
       Returns: If non-null, the gesture will only listen for events that happen on
         this #GdkWindow, or a child of it.
@@ -157,7 +176,7 @@ class Gesture : gtk.event_controller.EventController
   */
   @property void window(gdk.window.Window propval)
   {
-    return setWindow(propval);
+    setWindow(propval);
   }
 
   /**
@@ -737,5 +756,41 @@ class Gesture : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update", closure, after);
+  }
+}
+
+class GestureGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+
+  /**
+      Set `nPoints` property.
+      Params:
+        propval = The number of touch points that trigger recognition on this gesture,
+      Returns: Builder instance for fluent chaining
+  */
+  T nPoints(uint propval)
+  {
+    return setProperty("n-points", propval);
+  }
+
+  /**
+      Set `window` property.
+      Params:
+        propval = If non-null, the gesture will only listen for events that happen on
+          this #GdkWindow, or a child of it.
+      Returns: Builder instance for fluent chaining
+  */
+  T window(gdk.window.Window propval)
+  {
+    return setProperty("window", propval);
+  }
+}
+
+/// Fluent builder for [gtk.gesture.Gesture]
+final class GestureGidBuilder : GestureGidBuilderImpl!GestureGidBuilder
+{
+  Gesture build()
+  {
+    return new Gesture(cast(void*)createGObject(Gesture._getGType), No.Take);
   }
 }

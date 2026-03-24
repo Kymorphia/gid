@@ -7,6 +7,7 @@ public import gio.async_result;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtksource.c.functions;
 public import gtksource.c.types;
@@ -54,4 +55,8 @@ template HoverProviderT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template HoverProviderGidBuilderT()
+{
 }

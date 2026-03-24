@@ -4,6 +4,7 @@ module gtksource.undo_manager;
 public import gtksource.undo_manager_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
@@ -100,4 +101,8 @@ interface UndoManager
       Returns: Signal ID
   */
   ulong connectCanUndoChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface UndoManagerGidBuilderImpl(T)
+{
 }

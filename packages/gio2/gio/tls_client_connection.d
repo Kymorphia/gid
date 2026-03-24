@@ -9,6 +9,7 @@ import gio.iostream;
 import gio.socket_connectable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -266,4 +267,65 @@ interface TlsClientConnection
       Deprecated: Do not attempt to ignore validation errors.
   */
   void setValidationFlags(gio.types.TlsCertificateFlags flags);
+}
+
+interface TlsClientConnectionGidBuilderImpl(T)
+{
+
+  /**
+      Set `serverIdentity` property.
+      Params:
+        propval = A #GSocketConnectable describing the identity of the server that
+          is expected on the other end of the connection.
+          
+          If the [gio.types.TlsCertificateFlags.BadIdentity] flag is set in
+          #GTlsClientConnection:validation-flags, this object will be used
+          to determine the expected identify of the remote end of the
+          connection; if #GTlsClientConnection:server-identity is not set,
+          or does not match the identity presented by the server, then the
+          [gio.types.TlsCertificateFlags.BadIdentity] validation will fail.
+          
+          In addition to its use in verifying the server certificate,
+          this is also used to give a hint to the server about what
+          certificate we expect, which is useful for servers that serve
+          virtual hosts.
+      Returns: Builder instance for fluent chaining
+  */
+  T serverIdentity(gio.socket_connectable.SocketConnectable propval);
+
+  /**
+      Set `useSsl3` property.
+      Params:
+        propval = SSL 3.0 is no longer supported. See
+          [gio.tls_client_connection.TlsClientConnection.setUseSsl3] for details.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: SSL 3.0 is insecure.
+  */
+  T useSsl3(bool propval);
+
+  /**
+      Set `validationFlags` property.
+      Params:
+        propval = What steps to perform when validating a certificate received from
+          a server. Server certificates that fail to validate in any of the
+          ways indicated here will be rejected unless the application
+          overrides the default via #GTlsConnection::accept-certificate.
+          
+          GLib guarantees that if certificate verification fails, at least one
+          flag will be set, but it does not guarantee that all possible flags
+          will be set. Accordingly, you may not safely decide to ignore any
+          particular type of error. For example, it would be incorrect to mask
+          [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+          because this could potentially be the only error flag set even if
+          other problems exist with the certificate. Therefore, there is no
+          safe way to use this property. This is not a horrible problem,
+          though, because you should not be attempting to ignore validation
+          errors anyway. If you really must ignore TLS certificate errors,
+          connect to #GTlsConnection::accept-certificate.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  T validationFlags(gio.types.TlsCertificateFlags propval);
 }

@@ -7,6 +7,7 @@ import atk.c.types;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 
 /**
     The ATK Interface provided by UI components that represent a top-level window.
@@ -188,4 +189,8 @@ interface Window
       Returns: Signal ID
   */
   ulong connectRestore(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface WindowGidBuilderImpl(T)
+{
 }

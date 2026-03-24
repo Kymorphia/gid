@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
@@ -34,5 +35,27 @@ class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
   override NumericDataType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.numeric_data_type.NumericDataType]
+  Returns: New builder object
+  */
+  static NumericDataTypeGidBuilder builder()
+  {
+    return new NumericDataTypeGidBuilder;
+  }
+}
+
+class NumericDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.numeric_data_type.NumericDataType]
+final class NumericDataTypeGidBuilder : NumericDataTypeGidBuilderImpl!NumericDataTypeGidBuilder
+{
+  NumericDataType build()
+  {
+    return new NumericDataType(cast(void*)createGObject(NumericDataType._getGType), No.Take);
   }
 }

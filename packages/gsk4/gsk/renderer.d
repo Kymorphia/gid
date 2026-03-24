@@ -7,6 +7,7 @@ import gdk.surface;
 import gdk.texture;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import graphene.rect;
 import gsk.c.functions;
@@ -53,6 +54,15 @@ class Renderer : gobject.object.ObjectWrap
   override Renderer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gsk.renderer.Renderer]
+  Returns: New builder object
+  */
+  static RendererGidBuilder builder()
+  {
+    return new RendererGidBuilder;
   }
 
   /**
@@ -221,5 +231,18 @@ class Renderer : gobject.object.ObjectWrap
   void unrealize()
   {
     gsk_renderer_unrealize(cast(GskRenderer*)this._cPtr);
+  }
+}
+
+class RendererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gsk.renderer.Renderer]
+final class RendererGidBuilder : RendererGidBuilderImpl!RendererGidBuilder
+{
+  Renderer build()
+  {
+    return new Renderer(cast(void*)createGObject(Renderer._getGType), No.Take);
   }
 }

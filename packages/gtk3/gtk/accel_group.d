@@ -6,6 +6,7 @@ import gid.gid;
 import glib.types;
 import gobject.closure;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -54,6 +55,15 @@ class AccelGroup : gobject.object.ObjectWrap
   override AccelGroup self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.accel_group.AccelGroup]
+  Returns: New builder object
+  */
+  static AccelGroupGidBuilder builder()
+  {
+    return new AccelGroupGidBuilder;
   }
 
   /** */
@@ -398,5 +408,18 @@ class AccelGroup : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accel-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class AccelGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.accel_group.AccelGroup]
+final class AccelGroupGidBuilder : AccelGroupGidBuilderImpl!AccelGroupGidBuilder
+{
+  AccelGroup build()
+  {
+    return new AccelGroup(cast(void*)createGObject(AccelGroup._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.paned;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -117,6 +118,15 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
+  Get builder for [gtk.paned.Paned]
+  Returns: New builder object
+  */
+  static PanedGidBuilder builder()
+  {
+    return new PanedGidBuilder;
+  }
+
+  /**
       Get `endChild` property.
       Returns: The second child.
   */
@@ -132,7 +142,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void endChild(gtk.widget.Widget propval)
   {
-    return setEndChild(propval);
+    setEndChild(propval);
   }
 
   /**
@@ -177,7 +187,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void position(int propval)
   {
-    return setPosition(propval);
+    setPosition(propval);
   }
 
   /**
@@ -217,7 +227,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void resizeEndChild(bool propval)
   {
-    return setResizeEndChild(propval);
+    setResizeEndChild(propval);
   }
 
   /**
@@ -238,7 +248,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void resizeStartChild(bool propval)
   {
-    return setResizeStartChild(propval);
+    setResizeStartChild(propval);
   }
 
   /**
@@ -259,7 +269,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void shrinkEndChild(bool propval)
   {
-    return setShrinkEndChild(propval);
+    setShrinkEndChild(propval);
   }
 
   /**
@@ -280,7 +290,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void shrinkStartChild(bool propval)
   {
-    return setShrinkStartChild(propval);
+    setShrinkStartChild(propval);
   }
 
   /**
@@ -299,7 +309,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void startChild(gtk.widget.Widget propval)
   {
-    return setStartChild(propval);
+    setStartChild(propval);
   }
 
   /**
@@ -324,7 +334,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   @property void wideHandle(bool propval)
   {
-    return setWideHandle(propval);
+    setWideHandle(propval);
   }
 
   mixin AccessibleRangeT!();
@@ -813,5 +823,127 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-handle-focus", closure, after);
+  }
+}
+
+class PanedGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin AccessibleRangeGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `endChild` property.
+      Params:
+        propval = The second child.
+      Returns: Builder instance for fluent chaining
+  */
+  T endChild(gtk.widget.Widget propval)
+  {
+    return setProperty("end-child", propval);
+  }
+
+  /**
+      Set `position` property.
+      Params:
+        propval = Position of the separator in pixels, from the left/top.
+      Returns: Builder instance for fluent chaining
+  */
+  T position(int propval)
+  {
+    return setProperty("position", propval);
+  }
+
+  /**
+      Set `positionSet` property.
+      Params:
+        propval = Whether the [gtk.paned.Paned.position] property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T positionSet(bool propval)
+  {
+    return setProperty("position-set", propval);
+  }
+
+  /**
+      Set `resizeEndChild` property.
+      Params:
+        propval = Determines whether the second child expands and shrinks
+          along with the paned widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T resizeEndChild(bool propval)
+  {
+    return setProperty("resize-end-child", propval);
+  }
+
+  /**
+      Set `resizeStartChild` property.
+      Params:
+        propval = Determines whether the first child expands and shrinks
+          along with the paned widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T resizeStartChild(bool propval)
+  {
+    return setProperty("resize-start-child", propval);
+  }
+
+  /**
+      Set `shrinkEndChild` property.
+      Params:
+        propval = Determines whether the second child can be made smaller
+          than its requisition.
+      Returns: Builder instance for fluent chaining
+  */
+  T shrinkEndChild(bool propval)
+  {
+    return setProperty("shrink-end-child", propval);
+  }
+
+  /**
+      Set `shrinkStartChild` property.
+      Params:
+        propval = Determines whether the first child can be made smaller
+          than its requisition.
+      Returns: Builder instance for fluent chaining
+  */
+  T shrinkStartChild(bool propval)
+  {
+    return setProperty("shrink-start-child", propval);
+  }
+
+  /**
+      Set `startChild` property.
+      Params:
+        propval = The first child.
+      Returns: Builder instance for fluent chaining
+  */
+  T startChild(gtk.widget.Widget propval)
+  {
+    return setProperty("start-child", propval);
+  }
+
+  /**
+      Set `wideHandle` property.
+      Params:
+        propval = Whether the [gtk.paned.Paned] should provide a stronger visual separation.
+          
+          For example, this could be set when a paned contains two
+          [gtk.notebook.Notebook]s, whose tab rows would otherwise merge visually.
+      Returns: Builder instance for fluent chaining
+  */
+  T wideHandle(bool propval)
+  {
+    return setProperty("wide-handle", propval);
+  }
+}
+
+/// Fluent builder for [gtk.paned.Paned]
+final class PanedGidBuilder : PanedGidBuilderImpl!PanedGidBuilder
+{
+  Paned build()
+  {
+    return new Paned(cast(void*)createGObject(Paned._getGType), No.Take);
   }
 }

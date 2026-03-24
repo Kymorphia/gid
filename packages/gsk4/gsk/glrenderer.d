@@ -2,6 +2,7 @@
 module gsk.glrenderer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -37,6 +38,15 @@ class GLRenderer : gsk.renderer.Renderer
   }
 
   /**
+  Get builder for [gsk.glrenderer.GLRenderer]
+  Returns: New builder object
+  */
+  static GLRendererGidBuilder builder()
+  {
+    return new GLRendererGidBuilder;
+  }
+
+  /**
       Creates a new [gsk.renderer.Renderer] using the new OpenGL renderer.
       Returns: a new GL renderer
   */
@@ -45,5 +55,18 @@ class GLRenderer : gsk.renderer.Renderer
     GskRenderer* _cretval;
     _cretval = gsk_gl_renderer_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class GLRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gsk.glrenderer.GLRenderer]
+final class GLRendererGidBuilder : GLRendererGidBuilderImpl!GLRendererGidBuilder
+{
+  GLRenderer build()
+  {
+    return new GLRenderer(cast(void*)createGObject(GLRenderer._getGType), Yes.Take);
   }
 }

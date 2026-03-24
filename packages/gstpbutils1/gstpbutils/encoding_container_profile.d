@@ -2,6 +2,7 @@
 module gstpbutils.encoding_container_profile;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.caps;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
@@ -37,6 +38,15 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   override EncodingContainerProfile self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.encoding_container_profile.EncodingContainerProfile]
+  Returns: New builder object
+  */
+  static EncodingContainerProfileGidBuilder builder()
+  {
+    return new EncodingContainerProfileGidBuilder;
   }
 
   /**
@@ -100,5 +110,18 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
     _cretval = gst_encoding_container_profile_get_profiles(cast(GstEncodingContainerProfile*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.encoding_profile.EncodingProfile, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class EncodingContainerProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.EncodingProfileGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.encoding_container_profile.EncodingContainerProfile]
+final class EncodingContainerProfileGidBuilder : EncodingContainerProfileGidBuilderImpl!EncodingContainerProfileGidBuilder
+{
+  EncodingContainerProfile build()
+  {
+    return new EncodingContainerProfile(cast(void*)createGObject(EncodingContainerProfile._getGType), Yes.Take);
   }
 }

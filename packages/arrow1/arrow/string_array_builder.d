@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
@@ -35,6 +36,15 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   override StringArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.string_array_builder.StringArrayBuilder]
+  Returns: New builder object
+  */
+  static StringArrayBuilderGidBuilder builder()
+  {
+    return new StringArrayBuilderGidBuilder;
   }
 
   /** */
@@ -118,5 +128,18 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class StringArrayBuilderGidBuilderImpl(T) : arrow.binary_array_builder.BinaryArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.string_array_builder.StringArrayBuilder]
+final class StringArrayBuilderGidBuilder : StringArrayBuilderGidBuilderImpl!StringArrayBuilderGidBuilder
+{
+  StringArrayBuilder build()
+  {
+    return new StringArrayBuilder(cast(void*)createGObject(StringArrayBuilder._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module panel.frame_header_mixin;
 
 public import panel.frame_header_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.widget;
 public import panel.c.functions;
@@ -33,7 +34,7 @@ template FrameHeaderT()
   */
   @property void frame(panel.frame.Frame propval)
   {
-    return setFrame(propval);
+    setFrame(propval);
   }
 
   /**
@@ -108,5 +109,20 @@ template FrameHeaderT()
   override void setFrame(panel.frame.Frame frame = null)
   {
     panel_frame_header_set_frame(cast(PanelFrameHeader*)this._cPtr, frame ? cast(PanelFrame*)frame._cPtr(No.Dup) : null);
+  }
+}
+
+template FrameHeaderGidBuilderT()
+{
+
+  /**
+      Set `frame` property.
+      Params:
+        propval = The frame the header is attached to, or null.
+      Returns: Builder instance for fluent chaining
+  */
+  T frame(panel.frame.Frame propval)
+  {
+    return setProperty("frame", propval);
   }
 }

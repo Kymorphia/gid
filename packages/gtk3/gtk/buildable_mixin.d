@@ -4,6 +4,7 @@ module gtk.buildable_mixin;
 public import gtk.buildable_iface_proxy;
 public import gid.gid;
 public import glib.types;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.value;
 public import gtk.builder;
@@ -173,4 +174,8 @@ template BuildableT()
     const(char)* _name = name.toCString(No.Alloc);
     gtk_buildable_set_name(cast(GtkBuildable*)this._cPtr, _name);
   }
+}
+
+template BuildableGidBuilderT()
+{
 }

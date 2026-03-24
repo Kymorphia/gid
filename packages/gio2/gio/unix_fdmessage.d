@@ -8,6 +8,7 @@ import gio.socket_control_message;
 import gio.types;
 import gio.unix_fdlist;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -51,6 +52,24 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   override UnixFDMessage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.unix_fdmessage.UnixFDMessage]
+  Returns: New builder object
+  */
+  static UnixFDMessageGidBuilder builder()
+  {
+    return new UnixFDMessageGidBuilder;
+  }
+
+  /**
+      Get `fdList` property.
+      Returns: The [gio.unix_fdlist.UnixFDList] object to send with the message.
+  */
+  @property gio.unix_fdlist.UnixFDList fdList()
+  {
+    return getFdList();
   }
 
   /**
@@ -153,5 +172,29 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       gFree(cast(void*)_cretval);
     }
     return _retval;
+  }
+}
+
+class UnixFDMessageGidBuilderImpl(T) : gio.socket_control_message.SocketControlMessageGidBuilderImpl!T
+{
+
+  /**
+      Set `fdList` property.
+      Params:
+        propval = The [gio.unix_fdlist.UnixFDList] object to send with the message.
+      Returns: Builder instance for fluent chaining
+  */
+  T fdList(gio.unix_fdlist.UnixFDList propval)
+  {
+    return setProperty("fd-list", propval);
+  }
+}
+
+/// Fluent builder for [gio.unix_fdmessage.UnixFDMessage]
+final class UnixFDMessageGidBuilder : UnixFDMessageGidBuilderImpl!UnixFDMessageGidBuilder
+{
+  UnixFDMessage build()
+  {
+    return new UnixFDMessage(cast(void*)createGObject(UnixFDMessage._getGType), Yes.Take);
   }
 }

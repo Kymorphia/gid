@@ -13,6 +13,7 @@ import gdk.window;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accel_group;
 import gtk.buildable;
@@ -124,6 +125,15 @@ class Menu : gtk.menu_shell.MenuShell
   }
 
   /**
+  Get builder for [gtk.menu.Menu]
+  Returns: New builder object
+  */
+  static MenuGidBuilder builder()
+  {
+    return new MenuGidBuilder;
+  }
+
+  /**
       Get `accelGroup` property.
       Returns: The accel group holding accelerators for the menu.
   */
@@ -139,7 +149,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   @property void accelGroup(gtk.accel_group.AccelGroup propval)
   {
-    return setAccelGroup(propval);
+    setAccelGroup(propval);
   }
 
   /**
@@ -158,7 +168,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   @property void accelPath(string propval)
   {
-    return setAccelPath(propval);
+    setAccelPath(propval);
   }
 
   /**
@@ -293,7 +303,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   @property void monitor(int propval)
   {
-    return setMonitor(propval);
+    setMonitor(propval);
   }
 
   /**
@@ -380,7 +390,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   @property void reserveToggleSize(bool propval)
   {
-    return setReserveToggleSize(propval);
+    setReserveToggleSize(propval);
   }
 
   /**
@@ -399,7 +409,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   @property void tearoffState(bool propval)
   {
-    return setTearoffState(propval);
+    setTearoffState(propval);
   }
 
   /**
@@ -1116,5 +1126,187 @@ class Menu : gtk.menu_shell.MenuShell
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("popped-up", closure, after);
+  }
+}
+
+class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
+{
+
+
+  /**
+      Set `accelGroup` property.
+      Params:
+        propval = The accel group holding accelerators for the menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelGroup(gtk.accel_group.AccelGroup propval)
+  {
+    return setProperty("accel-group", propval);
+  }
+
+  /**
+      Set `accelPath` property.
+      Params:
+        propval = An accel path used to conveniently construct accel paths of child items.
+      Returns: Builder instance for fluent chaining
+  */
+  T accelPath(string propval)
+  {
+    return setProperty("accel-path", propval);
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The index of the currently selected menu item, or -1 if no
+          menu item is selected.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(int propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `anchorHints` property.
+      Params:
+        propval = Positioning hints for aligning the menu relative to a rectangle.
+          
+          These hints determine how the menu should be positioned in the case that
+          the menu would fall off-screen if placed in its ideal position.
+          
+          ![](popup-flip.png)
+          
+          For example, [gdk.types.AnchorHints.FlipY] will replace [gdk.types.Gravity.NorthWest] with
+          [gdk.types.Gravity.SouthWest] and vice versa if the menu extends beyond the
+          bottom edge of the monitor.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
+          #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+      Returns: Builder instance for fluent chaining
+  */
+  T anchorHints(gdk.types.AnchorHints propval)
+  {
+    return setProperty("anchor-hints", propval);
+  }
+
+  /**
+      Set `attachWidget` property.
+      Params:
+        propval = The widget the menu is attached to. Setting this property attaches
+          the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
+          use [gtk.menu.Menu.attachToWidget] directly.
+      Returns: Builder instance for fluent chaining
+  */
+  T attachWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("attach-widget", propval);
+  }
+
+  /**
+      Set `menuTypeHint` property.
+      Params:
+        propval = The #GdkWindowTypeHint to use for the menu's #GdkWindow.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+          #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuTypeHint(gdk.types.WindowTypeHint propval)
+  {
+    return setProperty("menu-type-hint", propval);
+  }
+
+  /**
+      Set `monitor` property.
+      Params:
+        propval = The monitor the menu will be popped up on.
+      Returns: Builder instance for fluent chaining
+  */
+  T monitor(int propval)
+  {
+    return setProperty("monitor", propval);
+  }
+
+  /**
+      Set `rectAnchorDx` property.
+      Params:
+        propval = Horizontal offset to apply to the menu, i.e. the rectangle or widget
+          anchor.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+          #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+      Returns: Builder instance for fluent chaining
+  */
+  T rectAnchorDx(int propval)
+  {
+    return setProperty("rect-anchor-dx", propval);
+  }
+
+  /**
+      Set `rectAnchorDy` property.
+      Params:
+        propval = Vertical offset to apply to the menu, i.e. the rectangle or widget anchor.
+          
+          See gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (),
+          gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
+          #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
+      Returns: Builder instance for fluent chaining
+  */
+  T rectAnchorDy(int propval)
+  {
+    return setProperty("rect-anchor-dy", propval);
+  }
+
+  /**
+      Set `reserveToggleSize` property.
+      Params:
+        propval = A boolean that indicates whether the menu reserves space for
+          toggles and icons, regardless of their actual presence.
+          
+          This property should only be changed from its default value
+          for special-purposes such as tabular menus. Regular menus that
+          are connected to a menu bar or context menus should reserve
+          toggle space for consistency.
+      Returns: Builder instance for fluent chaining
+  */
+  T reserveToggleSize(bool propval)
+  {
+    return setProperty("reserve-toggle-size", propval);
+  }
+
+  /**
+      Set `tearoffState` property.
+      Params:
+        propval = A boolean that indicates whether the menu is torn-off.
+      Returns: Builder instance for fluent chaining
+  */
+  T tearoffState(bool propval)
+  {
+    return setProperty("tearoff-state", propval);
+  }
+
+  /**
+      Set `tearoffTitle` property.
+      Params:
+        propval = A title that may be displayed by the window manager when this
+          menu is torn-off.
+      Returns: Builder instance for fluent chaining
+  */
+  T tearoffTitle(string propval)
+  {
+    return setProperty("tearoff-title", propval);
+  }
+}
+
+/// Fluent builder for [gtk.menu.Menu]
+final class MenuGidBuilder : MenuGidBuilderImpl!MenuGidBuilder
+{
+  Menu build()
+  {
+    return new Menu(cast(void*)createGObject(Menu._getGType), No.Take);
   }
 }

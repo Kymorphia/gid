@@ -4,6 +4,7 @@ module gtksource.completion_cell;
 import gdk.paintable;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -62,6 +63,21 @@ class CompletionCell : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [gtksource.completion_cell.CompletionCell]
+  Returns: New builder object
+  */
+  static CompletionCellGidBuilder builder()
+  {
+    return new CompletionCellGidBuilder;
+  }
+
+  /** */
+  @property gtksource.types.CompletionColumn column()
+  {
+    return getColumn();
+  }
+
   /** */
   @property string markup()
   {
@@ -71,7 +87,7 @@ class CompletionCell : gtk.widget.Widget
   /** */
   @property void markup(string propval)
   {
-    return setMarkup(propval);
+    setMarkup(propval);
   }
 
   /** */
@@ -83,7 +99,7 @@ class CompletionCell : gtk.widget.Widget
   /** */
   @property void paintable(gdk.paintable.Paintable propval)
   {
-    return setPaintable(propval);
+    setPaintable(propval);
   }
 
   /** */
@@ -95,7 +111,7 @@ class CompletionCell : gtk.widget.Widget
   /** */
   @property void text(string propval)
   {
-    return setText(propval);
+    setText(propval);
   }
 
   /** */
@@ -107,7 +123,7 @@ class CompletionCell : gtk.widget.Widget
   /** */
   @property void widget(gtk.widget.Widget propval)
   {
-    return setWidget(propval);
+    setWidget(propval);
   }
 
   /** */
@@ -180,5 +196,49 @@ class CompletionCell : gtk.widget.Widget
   void setWidget(gtk.widget.Widget child)
   {
     gtk_source_completion_cell_set_widget(cast(GtkSourceCompletionCell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class CompletionCellGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /** */
+  T column(gtksource.types.CompletionColumn propval)
+  {
+    return setProperty("column", propval);
+  }
+
+  /** */
+  T markup(string propval)
+  {
+    return setProperty("markup", propval);
+  }
+
+  /** */
+  T paintable(gdk.paintable.Paintable propval)
+  {
+    return setProperty("paintable", propval);
+  }
+
+  /** */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+
+  /** */
+  T widget(gtk.widget.Widget propval)
+  {
+    return setProperty("widget", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion_cell.CompletionCell]
+final class CompletionCellGidBuilder : CompletionCellGidBuilderImpl!CompletionCellGidBuilder
+{
+  CompletionCell build()
+  {
+    return new CompletionCell(cast(void*)createGObject(CompletionCell._getGType), No.Take);
   }
 }

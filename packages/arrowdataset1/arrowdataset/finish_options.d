@@ -6,6 +6,7 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class FinishOptions : gobject.object.ObjectWrap
   override FinishOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowdataset.finish_options.FinishOptions]
+  Returns: New builder object
+  */
+  static FinishOptionsGidBuilder builder()
+  {
+    return new FinishOptionsGidBuilder;
   }
 
   /**
@@ -100,5 +110,57 @@ class FinishOptions : gobject.object.ObjectWrap
     GADatasetFinishOptions* _cretval;
     _cretval = gadataset_finish_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class FinishOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T finishOptions(void* propval)
+  {
+    return setProperty("finish-options", propval);
+  }
+
+  /**
+      Set `inspectNFragments` property.
+      Params:
+        propval = The number of fragments to be used to inspect schema.
+      Returns: Builder instance for fluent chaining
+  */
+  T inspectNFragments(int propval)
+  {
+    return setProperty("inspect-n-fragments", propval);
+  }
+
+  /**
+      Set `schema` property.
+      Params:
+        propval = The schema to finalize the dataset's schema.
+      Returns: Builder instance for fluent chaining
+  */
+  T schema(arrow.schema.Schema propval)
+  {
+    return setProperty("schema", propval);
+  }
+
+  /**
+      Set `validateFragments` property.
+      Params:
+        propval = Whether validate fragments against the given schema or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T validateFragments(bool propval)
+  {
+    return setProperty("validate-fragments", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.finish_options.FinishOptions]
+final class FinishOptionsGidBuilder : FinishOptionsGidBuilderImpl!FinishOptionsGidBuilder
+{
+  FinishOptions build()
+  {
+    return new FinishOptions(cast(void*)createGObject(FinishOptions._getGType), Yes.Take);
   }
 }

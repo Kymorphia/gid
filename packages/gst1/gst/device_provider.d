@@ -3,6 +3,7 @@ module gst.device_provider;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.bus;
@@ -51,6 +52,15 @@ class DeviceProvider : gst.object.ObjectWrap
   override DeviceProvider self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.device_provider.DeviceProvider]
+  Returns: New builder object
+  */
+  static DeviceProviderGidBuilder builder()
+  {
+    return new DeviceProviderGidBuilder;
   }
 
   /**
@@ -371,5 +381,18 @@ class DeviceProvider : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("provider-unhidden", closure, after);
+  }
+}
+
+class DeviceProviderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.device_provider.DeviceProvider]
+final class DeviceProviderGidBuilder : DeviceProviderGidBuilderImpl!DeviceProviderGidBuilder
+{
+  DeviceProvider build()
+  {
+    return new DeviceProvider(cast(void*)createGObject(DeviceProvider._getGType), No.Take);
   }
 }

@@ -11,6 +11,7 @@ import arrowdataset.file_writer;
 import arrowdataset.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,15 @@ class FileFormat : gobject.object.ObjectWrap
   override FileFormat self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowdataset.file_format.FileFormat]
+  Returns: New builder object
+  */
+  static FileFormatGidBuilder builder()
+  {
+    return new FileFormatGidBuilder;
   }
 
   /** */
@@ -79,5 +89,24 @@ class FileFormat : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class FileFormatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T format(void* propval)
+  {
+    return setProperty("format", propval);
+  }
+}
+
+/// Fluent builder for [arrowdataset.file_format.FileFormat]
+final class FileFormatGidBuilder : FileFormatGidBuilderImpl!FileFormatGidBuilder
+{
+  FileFormat build()
+  {
+    return new FileFormat(cast(void*)createGObject(FileFormat._getGType), No.Take);
   }
 }

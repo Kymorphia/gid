@@ -6,6 +6,7 @@ import gdk.drop;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -118,6 +119,15 @@ class DropTarget : gtk.event_controller.EventController
   }
 
   /**
+  Get builder for [gtk.drop_target.DropTarget]
+  Returns: New builder object
+  */
+  static DropTargetGidBuilder builder()
+  {
+    return new DropTargetGidBuilder;
+  }
+
+  /**
       Get `actions` property.
       Returns: The `GdkDragActions` that this drop target supports.
   */
@@ -133,7 +143,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   @property void actions(gdk.types.DragAction propval)
   {
-    return setActions(propval);
+    setActions(propval);
   }
 
   /**
@@ -143,6 +153,15 @@ class DropTarget : gtk.event_controller.EventController
   @property gdk.drop.Drop currentDrop()
   {
     return getCurrentDrop();
+  }
+
+  /**
+      Get `formats` property.
+      Returns: The [gdk.content_formats.ContentFormats] that determine the supported data formats.
+  */
+  @property gdk.content_formats.ContentFormats formats()
+  {
+    return getFormats();
   }
 
   /**
@@ -195,7 +214,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   @property void preload(bool propval)
   {
-    return setPreload(propval);
+    setPreload(propval);
   }
 
   /**
@@ -661,5 +680,68 @@ class DropTarget : gtk.event_controller.EventController
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("motion", closure, after);
+  }
+}
+
+class DropTargetGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
+{
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The `GdkDragActions` that this drop target supports.
+      Returns: Builder instance for fluent chaining
+  */
+  T actions(gdk.types.DragAction propval)
+  {
+    return setProperty("actions", propval);
+  }
+
+  /**
+      Set `formats` property.
+      Params:
+        propval = The [gdk.content_formats.ContentFormats] that determine the supported data formats.
+      Returns: Builder instance for fluent chaining
+  */
+  T formats(gdk.content_formats.ContentFormats propval)
+  {
+    return setProperty("formats", propval);
+  }
+
+  /**
+      Set `preload` property.
+      Params:
+        propval = Whether the drop data should be preloaded when the pointer is only
+          hovering over the widget but has not been released.
+          
+          Setting this property allows finer grained reaction to an ongoing
+          drop at the cost of loading more data.
+          
+          The default value for this property is false to avoid downloading
+          huge amounts of data by accident.
+          
+          For example, if somebody drags a full document of gigabytes of text
+          from a text editor across a widget with a preloading drop target,
+          this data will be downloaded, even if the data is ultimately dropped
+          elsewhere.
+          
+          For a lot of data formats, the amount of data is very small (like
+          `GDK_TYPE_RGBA`), so enabling this property does not hurt at all.
+          And for local-only Drag-and-Drop operations, no data transfer is done,
+          so enabling it there is free.
+      Returns: Builder instance for fluent chaining
+  */
+  T preload(bool propval)
+  {
+    return setProperty("preload", propval);
+  }
+}
+
+/// Fluent builder for [gtk.drop_target.DropTarget]
+final class DropTargetGidBuilder : DropTargetGidBuilderImpl!DropTargetGidBuilder
+{
+  DropTarget build()
+  {
+    return new DropTarget(cast(void*)createGObject(DropTarget._getGType), Yes.Take);
   }
 }

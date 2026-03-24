@@ -8,6 +8,7 @@ import gda.data_handler_mixin;
 import gda.types;
 import gid.gid;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -39,6 +40,15 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   override HandlerTime self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.handler_time.HandlerTime]
+  Returns: New builder object
+  */
+  static HandlerTimeGidBuilder builder()
+  {
+    return new HandlerTimeGidBuilder;
   }
 
   mixin DataHandlerT!();
@@ -132,5 +142,20 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   void setStrSpec(glib.types.DateDMY first, glib.types.DateDMY sec, glib.types.DateDMY third, char separator, bool twodigitsYears)
   {
     gda_handler_time_set_str_spec(cast(GdaHandlerTime*)this._cPtr, first, sec, third, separator, twodigitsYears);
+  }
+}
+
+class HandlerTimeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
+{
+
+  mixin DataHandlerGidBuilderT!();
+}
+
+/// Fluent builder for [gda.handler_time.HandlerTime]
+final class HandlerTimeGidBuilder : HandlerTimeGidBuilderImpl!HandlerTimeGidBuilder
+{
+  HandlerTime build()
+  {
+    return new HandlerTime(cast(void*)createGObject(HandlerTime._getGType), No.Take);
   }
 }

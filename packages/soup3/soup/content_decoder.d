@@ -2,6 +2,7 @@
 module soup.content_decoder;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -63,5 +64,29 @@ class ContentDecoder : gobject.object.ObjectWrap, soup.session_feature.SessionFe
     return this;
   }
 
+  /**
+  Get builder for [soup.content_decoder.ContentDecoder]
+  Returns: New builder object
+  */
+  static ContentDecoderGidBuilder builder()
+  {
+    return new ContentDecoderGidBuilder;
+  }
+
   mixin SessionFeatureT!();
+}
+
+class ContentDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+}
+
+/// Fluent builder for [soup.content_decoder.ContentDecoder]
+final class ContentDecoderGidBuilder : ContentDecoderGidBuilderImpl!ContentDecoderGidBuilder
+{
+  ContentDecoder build()
+  {
+    return new ContentDecoder(cast(void*)createGObject(ContentDecoder._getGType), No.Take);
+  }
 }

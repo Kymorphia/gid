@@ -2,6 +2,7 @@
 module gstpbutils.encoding_audio_profile;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.caps;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
@@ -40,6 +41,15 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /**
+  Get builder for [gstpbutils.encoding_audio_profile.EncodingAudioProfile]
+  Returns: New builder object
+  */
+  static EncodingAudioProfileGidBuilder builder()
+  {
+    return new EncodingAudioProfileGidBuilder;
+  }
+
+  /**
       Creates a new #GstEncodingAudioProfile
       
       All provided allocatable arguments will be internally copied, so can be
@@ -60,5 +70,18 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
     const(char)* _preset = preset.toCString(No.Alloc);
     _cretval = gst_encoding_audio_profile_new(format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction._cPtr(No.Dup) : null, presence);
     this(_cretval, Yes.Take);
+  }
+}
+
+class EncodingAudioProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.EncodingProfileGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.encoding_audio_profile.EncodingAudioProfile]
+final class EncodingAudioProfileGidBuilder : EncodingAudioProfileGidBuilderImpl!EncodingAudioProfileGidBuilder
+{
+  EncodingAudioProfile build()
+  {
+    return new EncodingAudioProfile(cast(void*)createGObject(EncodingAudioProfile._getGType), Yes.Take);
   }
 }

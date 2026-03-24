@@ -2,6 +2,7 @@
 module gtk.center_box;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -81,6 +82,15 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.center_box.CenterBox]
+  Returns: New builder object
+  */
+  static CenterBoxGidBuilder builder()
+  {
+    return new CenterBoxGidBuilder;
+  }
+
+  /**
       Get `baselinePosition` property.
       Returns: The position of the baseline aligned widget if extra space is available.
   */
@@ -96,7 +106,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void baselinePosition(gtk.types.BaselinePosition propval)
   {
-    return setBaselinePosition(propval);
+    setBaselinePosition(propval);
   }
 
   /**
@@ -115,7 +125,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void centerWidget(gtk.widget.Widget propval)
   {
-    return setCenterWidget(propval);
+    setCenterWidget(propval);
   }
 
   /**
@@ -142,7 +152,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void endWidget(gtk.widget.Widget propval)
   {
-    return setEndWidget(propval);
+    setEndWidget(propval);
   }
 
   /**
@@ -175,7 +185,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void shrinkCenterLast(bool propval)
   {
-    return setShrinkCenterLast(propval);
+    setShrinkCenterLast(propval);
   }
 
   /**
@@ -202,7 +212,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void startWidget(gtk.widget.Widget propval)
   {
-    return setStartWidget(propval);
+    setStartWidget(propval);
   }
 
   mixin OrientableT!();
@@ -349,5 +359,90 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   void setStartWidget(gtk.widget.Widget child = null)
   {
     gtk_center_box_set_start_widget(cast(GtkCenterBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `baselinePosition` property.
+      Params:
+        propval = The position of the baseline aligned widget if extra space is available.
+      Returns: Builder instance for fluent chaining
+  */
+  T baselinePosition(gtk.types.BaselinePosition propval)
+  {
+    return setProperty("baseline-position", propval);
+  }
+
+  /**
+      Set `centerWidget` property.
+      Params:
+        propval = The widget that is placed at the center position.
+      Returns: Builder instance for fluent chaining
+  */
+  T centerWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("center-widget", propval);
+  }
+
+  /**
+      Set `endWidget` property.
+      Params:
+        propval = The widget that is placed at the end position.
+          
+          In vertical orientation, the end position is at the bottom.
+          In horizontal orientation, the end position is at the trailing
+          edge wrt. to the text direction.
+      Returns: Builder instance for fluent chaining
+  */
+  T endWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("end-widget", propval);
+  }
+
+  /**
+      Set `shrinkCenterLast` property.
+      Params:
+        propval = Whether to shrink the center widget after other children.
+          
+          By default, when there's no space to give all three children their
+          natural widths, the start and end widgets start shrinking and the
+          center child keeps natural width until they reach minimum width.
+          
+          If set to `FALSE`, start and end widgets keep natural width and the
+          center widget starts shrinking instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T shrinkCenterLast(bool propval)
+  {
+    return setProperty("shrink-center-last", propval);
+  }
+
+  /**
+      Set `startWidget` property.
+      Params:
+        propval = The widget that is placed at the start position.
+          
+          In vertical orientation, the start position is at the top.
+          In horizontal orientation, the start position is at the leading
+          edge wrt. to the text direction.
+      Returns: Builder instance for fluent chaining
+  */
+  T startWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("start-widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.center_box.CenterBox]
+final class CenterBoxGidBuilder : CenterBoxGidBuilderImpl!CenterBoxGidBuilder
+{
+  CenterBox build()
+  {
+    return new CenterBox(cast(void*)createGObject(CenterBox._getGType), No.Take);
   }
 }

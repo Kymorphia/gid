@@ -2,6 +2,7 @@
 module gtk.grid;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -131,6 +132,15 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.grid.Grid]
+  Returns: New builder object
+  */
+  static GridGidBuilder builder()
+  {
+    return new GridGidBuilder;
+  }
+
+  /**
       Get `baselineRow` property.
       Returns: The row to align to the baseline when valign is using baseline alignment.
   */
@@ -146,7 +156,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void baselineRow(int propval)
   {
-    return setBaselineRow(propval);
+    setBaselineRow(propval);
   }
 
   /**
@@ -165,7 +175,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void columnHomogeneous(bool propval)
   {
-    return setColumnHomogeneous(propval);
+    setColumnHomogeneous(propval);
   }
 
   /**
@@ -203,7 +213,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   */
   @property void rowHomogeneous(bool propval)
   {
-    return setRowHomogeneous(propval);
+    setRowHomogeneous(propval);
   }
 
   /**
@@ -551,5 +561,75 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
   void setRowSpacing(uint spacing)
   {
     gtk_grid_set_row_spacing(cast(GtkGrid*)this._cPtr, spacing);
+  }
+}
+
+class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `baselineRow` property.
+      Params:
+        propval = The row to align to the baseline when valign is using baseline alignment.
+      Returns: Builder instance for fluent chaining
+  */
+  T baselineRow(int propval)
+  {
+    return setProperty("baseline-row", propval);
+  }
+
+  /**
+      Set `columnHomogeneous` property.
+      Params:
+        propval = If true, the columns are all the same width.
+      Returns: Builder instance for fluent chaining
+  */
+  T columnHomogeneous(bool propval)
+  {
+    return setProperty("column-homogeneous", propval);
+  }
+
+  /**
+      Set `columnSpacing` property.
+      Params:
+        propval = The amount of space between two consecutive columns.
+      Returns: Builder instance for fluent chaining
+  */
+  T columnSpacing(int propval)
+  {
+    return setProperty("column-spacing", propval);
+  }
+
+  /**
+      Set `rowHomogeneous` property.
+      Params:
+        propval = If true, the rows are all the same height.
+      Returns: Builder instance for fluent chaining
+  */
+  T rowHomogeneous(bool propval)
+  {
+    return setProperty("row-homogeneous", propval);
+  }
+
+  /**
+      Set `rowSpacing` property.
+      Params:
+        propval = The amount of space between two consecutive rows.
+      Returns: Builder instance for fluent chaining
+  */
+  T rowSpacing(int propval)
+  {
+    return setProperty("row-spacing", propval);
+  }
+}
+
+/// Fluent builder for [gtk.grid.Grid]
+final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
+{
+  Grid build()
+  {
+    return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);
   }
 }

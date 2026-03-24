@@ -2,6 +2,7 @@
 module gstnet.ptp_clock;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.clock;
 import gst.system_clock;
@@ -60,6 +61,21 @@ class PtpClock : gst.system_clock.SystemClock
     return this;
   }
 
+  /**
+  Get builder for [gstnet.ptp_clock.PtpClock]
+  Returns: New builder object
+  */
+  static PtpClockGidBuilder builder()
+  {
+    return new PtpClockGidBuilder;
+  }
+
+  /** */
+  @property uint domain()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("domain");
+  }
+
   /** */
   @property ulong grandmasterClockId()
   {
@@ -102,5 +118,24 @@ class PtpClock : gst.system_clock.SystemClock
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_ptp_clock_new(_name, domain);
     this(_cretval, Yes.Take);
+  }
+}
+
+class PtpClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
+{
+
+  /** */
+  T domain(uint propval)
+  {
+    return setProperty("domain", propval);
+  }
+}
+
+/// Fluent builder for [gstnet.ptp_clock.PtpClock]
+final class PtpClockGidBuilder : PtpClockGidBuilderImpl!PtpClockGidBuilder
+{
+  PtpClock build()
+  {
+    return new PtpClock(cast(void*)createGObject(PtpClock._getGType), Yes.Take);
   }
 }

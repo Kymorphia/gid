@@ -7,6 +7,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class PrimitiveArray : arrow.array.Array
     return this;
   }
 
+  /**
+  Get builder for [arrow.primitive_array.PrimitiveArray]
+  Returns: New builder object
+  */
+  static PrimitiveArrayGidBuilder builder()
+  {
+    return new PrimitiveArrayGidBuilder;
+  }
+
   /** */
   arrow.buffer.Buffer getBuffer()
   {
@@ -54,5 +64,18 @@ class PrimitiveArray : arrow.array.Array
     _cretval = garrow_primitive_array_get_data_buffer(cast(GArrowPrimitiveArray*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class PrimitiveArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.primitive_array.PrimitiveArray]
+final class PrimitiveArrayGidBuilder : PrimitiveArrayGidBuilderImpl!PrimitiveArrayGidBuilder
+{
+  PrimitiveArray build()
+  {
+    return new PrimitiveArray(cast(void*)createGObject(PrimitiveArray._getGType), No.Take);
   }
 }

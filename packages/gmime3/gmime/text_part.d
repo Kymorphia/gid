@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.part;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class TextPart : gmime.part.Part
   override TextPart self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.text_part.TextPart]
+  Returns: New builder object
+  */
+  static TextPartGidBuilder builder()
+  {
+    return new TextPartGidBuilder;
   }
 
   /**
@@ -114,5 +124,18 @@ class TextPart : gmime.part.Part
   {
     const(char)* _text = text.toCString(No.Alloc);
     g_mime_text_part_set_text(cast(GMimeTextPart*)this._cPtr, _text);
+  }
+}
+
+class TextPartGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.text_part.TextPart]
+final class TextPartGidBuilder : TextPartGidBuilderImpl!TextPartGidBuilder
+{
+  TextPart build()
+  {
+    return new TextPart(cast(void*)createGObject(TextPart._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -209,4 +210,8 @@ interface ListModel
       Returns: Signal ID
   */
   ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface ListModelGidBuilderImpl(T)
+{
 }

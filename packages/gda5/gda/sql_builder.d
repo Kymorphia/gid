@@ -9,6 +9,7 @@ import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -40,6 +41,15 @@ class SqlBuilder : gobject.object.ObjectWrap
   override SqlBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.sql_builder.SqlBuilder]
+  Returns: New builder object
+  */
+  static SqlBuilderGidBuilder builder()
+  {
+    return new SqlBuilderGidBuilder;
   }
 
   /**
@@ -532,6 +542,19 @@ class SqlBuilder : gobject.object.ObjectWrap
   void setWhere(gda.types.SqlBuilderId condId)
   {
     gda_sql_builder_set_where(cast(GdaSqlBuilder*)this._cPtr, condId);
+  }
+}
+
+class SqlBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.sql_builder.SqlBuilder]
+final class SqlBuilderGidBuilder : SqlBuilderGidBuilderImpl!SqlBuilderGidBuilder
+{
+  SqlBuilder build()
+  {
+    return new SqlBuilder(cast(void*)createGObject(SqlBuilder._getGType), Yes.Take);
   }
 }
 

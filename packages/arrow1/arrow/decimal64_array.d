@@ -7,6 +7,7 @@ import arrow.decimal64;
 import arrow.fixed_size_binary_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal64_array.Decimal64Array]
+  Returns: New builder object
+  */
+  static Decimal64ArrayGidBuilder builder()
+  {
+    return new Decimal64ArrayGidBuilder;
+  }
+
   /** */
   string formatValue(long i)
   {
@@ -56,5 +66,18 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     _cretval = garrow_decimal64_array_get_value(cast(GArrowDecimal64Array*)this._cPtr, i);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class Decimal64ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSizeBinaryArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal64_array.Decimal64Array]
+final class Decimal64ArrayGidBuilder : Decimal64ArrayGidBuilderImpl!Decimal64ArrayGidBuilder
+{
+  Decimal64Array build()
+  {
+    return new Decimal64Array(cast(void*)createGObject(Decimal64Array._getGType), No.Take);
   }
 }

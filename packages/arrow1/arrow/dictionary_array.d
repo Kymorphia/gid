@@ -9,6 +9,7 @@ import arrow.dictionary_data_type;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,27 @@ class DictionaryArray : arrow.array.Array
   override DictionaryArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.dictionary_array.DictionaryArray]
+  Returns: New builder object
+  */
+  static DictionaryArrayGidBuilder builder()
+  {
+    return new DictionaryArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.array.Array dictionary()
+  {
+    return getDictionary();
+  }
+
+  /** */
+  @property arrow.array.Array indices()
+  {
+    return getIndices();
   }
 
   /** */
@@ -76,5 +98,30 @@ class DictionaryArray : arrow.array.Array
     _cretval = garrow_dictionary_array_get_indices(cast(GArrowDictionaryArray*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class DictionaryArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+
+  /** */
+  T dictionary(arrow.array.Array propval)
+  {
+    return setProperty("dictionary", propval);
+  }
+
+  /** */
+  T indices(arrow.array.Array propval)
+  {
+    return setProperty("indices", propval);
+  }
+}
+
+/// Fluent builder for [arrow.dictionary_array.DictionaryArray]
+final class DictionaryArrayGidBuilder : DictionaryArrayGidBuilderImpl!DictionaryArrayGidBuilder
+{
+  DictionaryArray build()
+  {
+    return new DictionaryArray(cast(void*)createGObject(DictionaryArray._getGType), Yes.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.list_view;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -150,6 +151,15 @@ class ListView : gtk.list_base.ListBase
   }
 
   /**
+  Get builder for [gtk.list_view.ListView]
+  Returns: New builder object
+  */
+  static ListViewGidBuilder builder()
+  {
+    return new ListViewGidBuilder;
+  }
+
+  /**
       Get `enableRubberband` property.
       Returns: Allow rubberband selection.
   */
@@ -165,7 +175,7 @@ class ListView : gtk.list_base.ListBase
   */
   @property void enableRubberband(bool propval)
   {
-    return setEnableRubberband(propval);
+    setEnableRubberband(propval);
   }
 
   /**
@@ -184,7 +194,7 @@ class ListView : gtk.list_base.ListBase
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setFactory(propval);
+    setFactory(propval);
   }
 
   /**
@@ -203,7 +213,7 @@ class ListView : gtk.list_base.ListBase
   */
   @property void headerFactory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setHeaderFactory(propval);
+    setHeaderFactory(propval);
   }
 
   /**
@@ -222,7 +232,7 @@ class ListView : gtk.list_base.ListBase
   */
   @property void model(gtk.selection_model.SelectionModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -241,7 +251,7 @@ class ListView : gtk.list_base.ListBase
   */
   @property void showSeparators(bool propval)
   {
-    return setShowSeparators(propval);
+    setShowSeparators(propval);
   }
 
   /**
@@ -260,7 +270,7 @@ class ListView : gtk.list_base.ListBase
   */
   @property void singleClickActivate(bool propval)
   {
-    return setSingleClickActivate(propval);
+    setSingleClickActivate(propval);
   }
 
   /**
@@ -279,7 +289,7 @@ class ListView : gtk.list_base.ListBase
   */
   @property void tabBehavior(gtk.types.ListTabBehavior propval)
   {
-    return setTabBehavior(propval);
+    setTabBehavior(propval);
   }
 
   /**
@@ -536,5 +546,96 @@ class ListView : gtk.list_base.ListBase
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class ListViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableRubberband(bool propval)
+  {
+    return setProperty("enable-rubberband", propval);
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+      Returns: Builder instance for fluent chaining
+  */
+  T factory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("factory", propval);
+  }
+
+  /**
+      Set `headerFactory` property.
+      Params:
+        propval = Factory for creating header widgets.
+      Returns: Builder instance for fluent chaining
+  */
+  T headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("header-factory", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.selection_model.SelectionModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `showSeparators` property.
+      Params:
+        propval = Show separators between rows.
+      Returns: Builder instance for fluent chaining
+  */
+  T showSeparators(bool propval)
+  {
+    return setProperty("show-separators", propval);
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+      Returns: Builder instance for fluent chaining
+  */
+  T singleClickActivate(bool propval)
+  {
+    return setProperty("single-click-activate", propval);
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+      Returns: Builder instance for fluent chaining
+  */
+  T tabBehavior(gtk.types.ListTabBehavior propval)
+  {
+    return setProperty("tab-behavior", propval);
+  }
+}
+
+/// Fluent builder for [gtk.list_view.ListView]
+final class ListViewGidBuilder : ListViewGidBuilderImpl!ListViewGidBuilder
+{
+  ListView build()
+  {
+    return new ListView(cast(void*)createGObject(ListView._getGType), No.Take);
   }
 }

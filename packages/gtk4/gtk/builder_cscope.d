@@ -2,6 +2,7 @@
 module gtk.builder_cscope;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.builder_scope;
 import gtk.builder_scope_mixin;
@@ -55,6 +56,15 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
     return this;
   }
 
+  /**
+  Get builder for [gtk.builder_cscope.BuilderCScope]
+  Returns: New builder object
+  */
+  static BuilderCScopeGidBuilder builder()
+  {
+    return new BuilderCScopeGidBuilder;
+  }
+
   mixin BuilderScopeT!();
 
   /**
@@ -70,5 +80,20 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_cscope_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class BuilderCScopeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.builder_scope.BuilderScopeGidBuilderImpl!T
+{
+
+  mixin BuilderScopeGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.builder_cscope.BuilderCScope]
+final class BuilderCScopeGidBuilder : BuilderCScopeGidBuilderImpl!BuilderCScopeGidBuilder
+{
+  BuilderCScope build()
+  {
+    return new BuilderCScope(cast(void*)createGObject(BuilderCScope._getGType), Yes.Take);
   }
 }

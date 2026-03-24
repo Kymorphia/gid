@@ -10,6 +10,7 @@ import gio.cancellable;
 import gio.input_stream;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -65,4 +66,8 @@ interface LoadableIcon
       Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream loadFinish(gio.async_result.AsyncResult res, out string type);
+}
+
+interface LoadableIconGidBuilderImpl(T)
+{
 }

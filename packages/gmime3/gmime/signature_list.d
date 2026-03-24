@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.signature;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class SignatureList : gobject.object.ObjectWrap
   override SignatureList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.signature_list.SignatureList]
+  Returns: New builder object
+  */
+  static SignatureListGidBuilder builder()
+  {
+    return new SignatureListGidBuilder;
   }
 
   /**
@@ -185,5 +195,18 @@ class SignatureList : gobject.object.ObjectWrap
   void setSignature(int index, gmime.signature.Signature sig)
   {
     g_mime_signature_list_set_signature(cast(GMimeSignatureList*)this._cPtr, index, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
+  }
+}
+
+class SignatureListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.signature_list.SignatureList]
+final class SignatureListGidBuilder : SignatureListGidBuilderImpl!SignatureListGidBuilder
+{
+  SignatureList build()
+  {
+    return new SignatureList(cast(void*)createGObject(SignatureList._getGType), Yes.Take);
   }
 }

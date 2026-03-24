@@ -4,6 +4,7 @@ module gtk.combo_box;
 import gdk.device;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -115,6 +116,15 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   }
 
   /**
+  Get builder for [gtk.combo_box.ComboBox]
+  Returns: New builder object
+  */
+  static ComboBoxGidBuilder builder()
+  {
+    return new ComboBoxGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: The item which is currently active.
         
@@ -140,7 +150,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   @property void active(int propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -180,7 +190,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   @property void buttonSensitivity(gtk.types.SensitivityType propval)
   {
-    return setButtonSensitivity(propval);
+    setButtonSensitivity(propval);
   }
 
   /**
@@ -199,7 +209,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -224,7 +234,16 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   @property void entryTextColumn(int propval)
   {
-    return setEntryTextColumn(propval);
+    setEntryTextColumn(propval);
+  }
+
+  /**
+      Get `hasEntry` property.
+      Returns: Whether the combo box has an entry.
+  */
+  @property bool hasEntry()
+  {
+    return getHasEntry();
   }
 
   /**
@@ -264,7 +283,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   @property void idColumn(int propval)
   {
-    return setIdColumn(propval);
+    setIdColumn(propval);
   }
 
   /**
@@ -283,7 +302,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   @property void model(gtk.tree_model.TreeModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -304,7 +323,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   */
   @property void popupFixedWidth(bool propval)
   {
-    return setPopupFixedWidth(propval);
+    setPopupFixedWidth(propval);
   }
 
   /**
@@ -1079,5 +1098,142 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("popup", closure, after);
+  }
+}
+
+class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_editable.CellEditableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
+{
+
+  mixin CellEditableGidBuilderT!();
+  mixin CellLayoutGidBuilderT!();
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The item which is currently active.
+          
+          If the model is a non-flat treemodel, and the active item is not an
+          immediate child of the root of the tree, this property has the value
+          `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+          [gtk.tree_path.TreePath] of the active item.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(int propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `activeId` property.
+      Params:
+        propval = The value of the ID column of the active row.
+      Returns: Builder instance for fluent chaining
+  */
+  T activeId(string propval)
+  {
+    return setProperty("active-id", propval);
+  }
+
+  /**
+      Set `buttonSensitivity` property.
+      Params:
+        propval = Whether the dropdown button is sensitive when
+          the model is empty.
+      Returns: Builder instance for fluent chaining
+  */
+  T buttonSensitivity(gtk.types.SensitivityType propval)
+  {
+    return setProperty("button-sensitivity", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `entryTextColumn` property.
+      Params:
+        propval = The model column to associate with strings from the entry.
+          
+          This is property only relevant if the combo was created with
+          `property@Gtk.ComboBox:has-entry` is true.
+      Returns: Builder instance for fluent chaining
+  */
+  T entryTextColumn(int propval)
+  {
+    return setProperty("entry-text-column", propval);
+  }
+
+  /**
+      Set `hasEntry` property.
+      Params:
+        propval = Whether the combo box has an entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasEntry(bool propval)
+  {
+    return setProperty("has-entry", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = The `has-frame` property controls whether a frame is drawn around the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval)
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `idColumn` property.
+      Params:
+        propval = The model column that provides string IDs for the values
+          in the model, if != -1.
+      Returns: Builder instance for fluent chaining
+  */
+  T idColumn(int propval)
+  {
+    return setProperty("id-column", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model from which the combo box takes its values.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `popupFixedWidth` property.
+      Params:
+        propval = Whether the popup's width should be a fixed width matching the
+          allocated width of the combo box.
+      Returns: Builder instance for fluent chaining
+  */
+  T popupFixedWidth(bool propval)
+  {
+    return setProperty("popup-fixed-width", propval);
+  }
+}
+
+/// Fluent builder for [gtk.combo_box.ComboBox]
+final class ComboBoxGidBuilder : ComboBoxGidBuilderImpl!ComboBoxGidBuilder
+{
+  ComboBox build()
+  {
+    return new ComboBox(cast(void*)createGObject(ComboBox._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import cairo.surface;
 import gdkpixbuf.pixbuf;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -62,6 +63,15 @@ class OffscreenWindow : gtk.window.Window
   }
 
   /**
+  Get builder for [gtk.offscreen_window.OffscreenWindow]
+  Returns: New builder object
+  */
+  static OffscreenWindowGidBuilder builder()
+  {
+    return new OffscreenWindowGidBuilder;
+  }
+
+  /**
       Creates a toplevel container widget that is used to retrieve
       snapshots of widgets without showing them on the screen.
       Returns: A pointer to a #GtkWidget
@@ -101,5 +111,19 @@ class OffscreenWindow : gtk.window.Window
     _cretval = gtk_offscreen_window_get_surface(cast(GtkOffscreenWindow*)this._cPtr);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class OffscreenWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.offscreen_window.OffscreenWindow]
+final class OffscreenWindowGidBuilder : OffscreenWindowGidBuilderImpl!OffscreenWindowGidBuilder
+{
+  OffscreenWindow build()
+  {
+    return new OffscreenWindow(cast(void*)createGObject(OffscreenWindow._getGType), No.Take);
   }
 }

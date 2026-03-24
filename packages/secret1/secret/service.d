@@ -15,6 +15,7 @@ import gio.types;
 import glib.error;
 import glib.variant;
 import glib.variant_type;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import secret.backend;
@@ -92,6 +93,15 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   override Service self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [secret.service.Service]
+  Returns: New builder object
+  */
+  static ServiceGidBuilder builder()
+  {
+    return new ServiceGidBuilder;
   }
 
   mixin BackendT!();
@@ -1310,5 +1320,20 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       throw new ErrorWrap(_err);
     unlocked = gListToD!(gio.dbus_proxy.DBusProxy, GidOwnership.Full)(_unlocked);
     return _retval;
+  }
+}
+
+class ServiceGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T, secret.backend.BackendGidBuilderImpl!T
+{
+
+  mixin BackendGidBuilderT!();
+}
+
+/// Fluent builder for [secret.service.Service]
+final class ServiceGidBuilder : ServiceGidBuilderImpl!ServiceGidBuilder
+{
+  Service build()
+  {
+    return new Service(cast(void*)createGObject(Service._getGType), No.Take);
   }
 }

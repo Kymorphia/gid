@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -56,6 +57,15 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 
   /**
+  Get builder for [gtk.toggle_tool_button.ToggleToolButton]
+  Returns: New builder object
+  */
+  static ToggleToolButtonGidBuilder builder()
+  {
+    return new ToggleToolButtonGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: If the toggle tool button should be pressed in.
   */
@@ -71,7 +81,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -167,5 +177,30 @@ class ToggleToolButton : gtk.tool_button.ToolButton
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+class ToggleToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `active` property.
+      Params:
+        propval = If the toggle tool button should be pressed in.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+}
+
+/// Fluent builder for [gtk.toggle_tool_button.ToggleToolButton]
+final class ToggleToolButtonGidBuilder : ToggleToolButtonGidBuilderImpl!ToggleToolButtonGidBuilder
+{
+  ToggleToolButton build()
+  {
+    return new ToggleToolButton(cast(void*)createGObject(ToggleToolButton._getGType), No.Take);
   }
 }

@@ -5,6 +5,7 @@ public import gtk.symbolic_paintable_iface_proxy;
 public import gdk.rgba;
 public import gdk.snapshot;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -47,4 +48,8 @@ template SymbolicPaintableT()
     auto _colors = cast(const(GdkRGBA)*)colors.ptr;
     gtk_symbolic_paintable_snapshot_symbolic(cast(GtkSymbolicPaintable*)this._cPtr, snapshot ? cast(GdkSnapshot*)snapshot._cPtr(No.Dup) : null, width, height, _colors, _nColors);
   }
+}
+
+template SymbolicPaintableGidBuilderT()
+{
 }

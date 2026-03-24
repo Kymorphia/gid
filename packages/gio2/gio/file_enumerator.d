@@ -10,6 +10,7 @@ import gio.file;
 import gio.file_info;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -66,6 +67,15 @@ class FileEnumerator : gobject.object.ObjectWrap
   override FileEnumerator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.file_enumerator.FileEnumerator]
+  Returns: New builder object
+  */
+  static FileEnumeratorGidBuilder builder()
+  {
+    return new FileEnumeratorGidBuilder;
   }
 
   /**
@@ -417,5 +427,29 @@ class FileEnumerator : gobject.object.ObjectWrap
   void setPending(bool pending)
   {
     g_file_enumerator_set_pending(cast(GFileEnumerator*)this._cPtr, pending);
+  }
+}
+
+class FileEnumeratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `container` property.
+      Params:
+        propval = The container that is being enumerated.
+      Returns: Builder instance for fluent chaining
+  */
+  T container(gio.file.File propval)
+  {
+    return setProperty("container", propval);
+  }
+}
+
+/// Fluent builder for [gio.file_enumerator.FileEnumerator]
+final class FileEnumeratorGidBuilder : FileEnumeratorGidBuilderImpl!FileEnumeratorGidBuilder
+{
+  FileEnumerator build()
+  {
+    return new FileEnumerator(cast(void*)createGObject(FileEnumerator._getGType), No.Take);
   }
 }

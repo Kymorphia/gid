@@ -3,6 +3,7 @@ module parquet.file_metadata;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
@@ -36,6 +37,15 @@ class FileMetadata : gobject.object.ObjectWrap
   override FileMetadata self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [parquet.file_metadata.FileMetadata]
+  Returns: New builder object
+  */
+  static FileMetadataGidBuilder builder()
+  {
+    return new FileMetadataGidBuilder;
   }
 
   /** */
@@ -113,5 +123,24 @@ class FileMetadata : gobject.object.ObjectWrap
     uint _retval;
     _retval = gparquet_file_metadata_get_size(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
+  }
+}
+
+class FileMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T metadata(void* propval)
+  {
+    return setProperty("metadata", propval);
+  }
+}
+
+/// Fluent builder for [parquet.file_metadata.FileMetadata]
+final class FileMetadataGidBuilder : FileMetadataGidBuilderImpl!FileMetadataGidBuilder
+{
+  FileMetadata build()
+  {
+    return new FileMetadata(cast(void*)createGObject(FileMetadata._getGType), No.Take);
   }
 }

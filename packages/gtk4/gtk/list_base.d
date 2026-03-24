@@ -2,6 +2,7 @@
 module gtk.list_base;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -50,6 +51,15 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
   }
 
   /**
+  Get builder for [gtk.list_base.ListBase]
+  Returns: New builder object
+  */
+  static ListBaseGidBuilder builder()
+  {
+    return new ListBaseGidBuilder;
+  }
+
+  /**
       Get `orientation` property.
       Returns: The orientation of the list. See GtkOrientable:orientation
         for details.
@@ -72,4 +82,32 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
 
   mixin OrientableT!();
   mixin ScrollableT!();
+}
+
+class ListBaseGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The orientation of the list. See GtkOrientable:orientation
+          for details.
+      Returns: Builder instance for fluent chaining
+  */
+  T orientation(gtk.types.Orientation propval)
+  {
+    return setProperty("orientation", propval);
+  }
+}
+
+/// Fluent builder for [gtk.list_base.ListBase]
+final class ListBaseGidBuilder : ListBaseGidBuilderImpl!ListBaseGidBuilder
+{
+  ListBase build()
+  {
+    return new ListBase(cast(void*)createGObject(ListBase._getGType), No.Take);
+  }
 }

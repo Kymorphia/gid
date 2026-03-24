@@ -3,6 +3,7 @@ module gtk.scrollable;
 
 public import gtk.scrollable_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.border;
@@ -187,4 +188,44 @@ interface Scrollable
         policy = the vertical [gtk.types.ScrollablePolicy]
   */
   void setVscrollPolicy(gtk.types.ScrollablePolicy policy);
+}
+
+interface ScrollableGidBuilderImpl(T)
+{
+
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = Horizontal [gtk.adjustment.Adjustment] of the scrollable widget.
+          
+          This adjustment is shared between the scrollable widget and its parent.
+      Returns: Builder instance for fluent chaining
+  */
+  T hadjustment(gtk.adjustment.Adjustment propval);
+
+  /**
+      Set `hscrollPolicy` property.
+      Params:
+        propval = Determines when horizontal scrolling should start.
+      Returns: Builder instance for fluent chaining
+  */
+  T hscrollPolicy(gtk.types.ScrollablePolicy propval);
+
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = Vertical [gtk.adjustment.Adjustment] of the scrollable widget.
+          
+          This adjustment is shared between the scrollable widget and its parent.
+      Returns: Builder instance for fluent chaining
+  */
+  T vadjustment(gtk.adjustment.Adjustment propval);
+
+  /**
+      Set `vscrollPolicy` property.
+      Params:
+        propval = Determines when vertical scrolling should start.
+      Returns: Builder instance for fluent chaining
+  */
+  T vscrollPolicy(gtk.types.ScrollablePolicy propval);
 }

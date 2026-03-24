@@ -8,6 +8,7 @@ import gio.action_group_mixin;
 import gio.action_map;
 import gio.action_map_mixin;
 import gio.types;
+import gobject.gid_builder;
 import panel.c.functions;
 import panel.c.types;
 import panel.types;
@@ -41,6 +42,15 @@ class Application : adw.application.Application
     return this;
   }
 
+  /**
+  Get builder for [panel.application.Application]
+  Returns: New builder object
+  */
+  static ApplicationGidBuilder builder()
+  {
+    return new ApplicationGidBuilder;
+  }
+
   /** */
   this(string applicationId, gio.types.ApplicationFlags flags)
   {
@@ -48,5 +58,19 @@ class Application : adw.application.Application
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
     _cretval = panel_application_new(_applicationId, flags);
     this(_cretval, Yes.Take);
+  }
+}
+
+class ApplicationGidBuilderImpl(T) : adw.application.ApplicationGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [panel.application.Application]
+final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
+{
+  Application build()
+  {
+    return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }
 }

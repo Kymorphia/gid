@@ -4,6 +4,7 @@ module gtk.color_button;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -69,6 +70,15 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
+  Get builder for [gtk.color_button.ColorButton]
+  Returns: New builder object
+  */
+  static ColorButtonGidBuilder builder()
+  {
+    return new ColorButtonGidBuilder;
+  }
+
+  /**
       Get `modal` property.
       Returns: Whether the color chooser dialog should be modal.
   */
@@ -84,7 +94,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -130,7 +140,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   mixin ColorChooserT!();
@@ -305,5 +315,57 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-set", closure, after);
+  }
+}
+
+class ColorButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.color_chooser.ColorChooserGidBuilderImpl!T
+{
+
+  mixin ColorChooserGidBuilderT!();
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the color chooser dialog should be modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = Whether the color chooser should open in editor mode.
+          
+          This property should be used in cases where the palette
+          in the editor would be redundant, such as when the color
+          button is already part of a palette.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEditor(bool propval)
+  {
+    return setProperty("show-editor", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the color chooser dialog
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_button.ColorButton]
+final class ColorButtonGidBuilder : ColorButtonGidBuilderImpl!ColorButtonGidBuilder
+{
+  ColorButton build()
+  {
+    return new ColorButton(cast(void*)createGObject(ColorButton._getGType), No.Take);
   }
 }

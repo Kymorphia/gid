@@ -15,6 +15,7 @@ import arrow.types;
 import gid.gid;
 import gio.input_stream;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -44,6 +45,15 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   override InputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.input_stream.InputStream]
+  Returns: New builder object
+  */
+  static InputStreamGidBuilder builder()
+  {
+    return new InputStreamGidBuilder;
   }
 
   mixin FileT!();
@@ -96,5 +106,27 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class InputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T, arrow.file.FileGidBuilderImpl!T, arrow.readable.ReadableGidBuilderImpl!T
+{
+
+  mixin FileGidBuilderT!();
+  mixin ReadableGidBuilderT!();
+
+  /** */
+  T inputStream(void* propval)
+  {
+    return setProperty("input-stream", propval);
+  }
+}
+
+/// Fluent builder for [arrow.input_stream.InputStream]
+final class InputStreamGidBuilder : InputStreamGidBuilderImpl!InputStreamGidBuilder
+{
+  InputStream build()
+  {
+    return new InputStream(cast(void*)createGObject(InputStream._getGType), No.Take);
   }
 }

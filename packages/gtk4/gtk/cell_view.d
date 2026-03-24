@@ -3,6 +3,7 @@ module gtk.cell_view;
 
 import gdk.texture;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -76,6 +77,49 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   }
 
   /**
+  Get builder for [gtk.cell_view.CellView]
+  Returns: New builder object
+  */
+  static CellViewGidBuilder builder()
+  {
+    return new CellViewGidBuilder;
+  }
+
+  /**
+      Get `cellArea` property.
+      Returns: The [gtk.cell_area.CellArea] rendering cells
+        
+        If no area is specified when creating the cell view with [gtk.cell_view.CellView.newWithContext]
+        a horizontally oriented [gtk.cell_area.CellArea]Box will be used.
+        
+        since 3.0
+  */
+  @property gtk.cell_area.CellArea cellArea()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
+  }
+
+  /**
+      Get `cellAreaContext` property.
+      Returns: The [gtk.cell_area_context.CellAreaContext] used to compute the geometry of the cell view.
+        
+        A group of cell views can be assigned the same context in order to
+        ensure the sizes and cell alignments match across all the views with
+        the same context.
+        
+        [gtk.combo_box.ComboBox] menus uses this to assign the same context to all cell views
+        in the menu items for a single menu (each submenu creates its own
+        context since the size of each submenu does not depend on parent
+        or sibling menus).
+        
+        since 3.0
+  */
+  @property gtk.cell_area_context.CellAreaContext cellAreaContext()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.cell_area_context.CellAreaContext)("cell-area-context");
+  }
+
+  /**
       Get `drawSensitive` property.
       Returns: Whether all cells should be draw as sensitive for this view regardless
         of the actual cell properties (used to make menus with submenus appear
@@ -99,7 +143,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   @property void drawSensitive(bool propval)
   {
-    return setDrawSensitive(propval);
+    setDrawSensitive(propval);
   }
 
   /**
@@ -128,7 +172,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   @property void fitModel(bool propval)
   {
-    return setFitModel(propval);
+    setFitModel(propval);
   }
 
   /**
@@ -151,7 +195,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   */
   @property void model(gtk.tree_model.TreeModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   mixin CellLayoutT!();
@@ -350,5 +394,103 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_cell_view_set_model(cast(GtkCellView*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin CellLayoutGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `cellArea` property.
+      Params:
+        propval = The [gtk.cell_area.CellArea] rendering cells
+          
+          If no area is specified when creating the cell view with [gtk.cell_view.CellView.newWithContext]
+          a horizontally oriented [gtk.cell_area.CellArea]Box will be used.
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T cellArea(gtk.cell_area.CellArea propval)
+  {
+    return setProperty("cell-area", propval);
+  }
+
+  /**
+      Set `cellAreaContext` property.
+      Params:
+        propval = The [gtk.cell_area_context.CellAreaContext] used to compute the geometry of the cell view.
+          
+          A group of cell views can be assigned the same context in order to
+          ensure the sizes and cell alignments match across all the views with
+          the same context.
+          
+          [gtk.combo_box.ComboBox] menus uses this to assign the same context to all cell views
+          in the menu items for a single menu (each submenu creates its own
+          context since the size of each submenu does not depend on parent
+          or sibling menus).
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T cellAreaContext(gtk.cell_area_context.CellAreaContext propval)
+  {
+    return setProperty("cell-area-context", propval);
+  }
+
+  /**
+      Set `drawSensitive` property.
+      Params:
+        propval = Whether all cells should be draw as sensitive for this view regardless
+          of the actual cell properties (used to make menus with submenus appear
+          sensitive when the items in submenus might be insensitive).
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T drawSensitive(bool propval)
+  {
+    return setProperty("draw-sensitive", propval);
+  }
+
+  /**
+      Set `fitModel` property.
+      Params:
+        propval = Whether the view should request enough space to always fit
+          the size of every row in the model (used by the combo box to
+          ensure the combo box size doesn't change when different items
+          are selected).
+          
+          since 3.0
+      Returns: Builder instance for fluent chaining
+  */
+  T fitModel(bool propval)
+  {
+    return setProperty("fit-model", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model for cell view
+          
+          since 2.10
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.tree_model.TreeModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_view.CellView]
+final class CellViewGidBuilder : CellViewGidBuilderImpl!CellViewGidBuilder
+{
+  CellView build()
+  {
+    return new CellView(cast(void*)createGObject(CellView._getGType), No.Take);
   }
 }

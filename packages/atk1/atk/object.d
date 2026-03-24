@@ -9,6 +9,7 @@ import atk.state_set;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -63,6 +64,15 @@ class ObjectWrap : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [atk.object.ObjectWrap]
+  Returns: New builder object
+  */
+  static ObjectWrapGidBuilder builder()
+  {
+    return new ObjectWrapGidBuilder;
+  }
+
   /** */
   @property int accessibleComponentLayer()
   {
@@ -114,7 +124,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   /** */
   @property void accessibleId(string propval)
   {
-    return setAccessibleId(propval);
+    setAccessibleId(propval);
   }
 
   /** */
@@ -1140,5 +1150,150 @@ class ObjectWrap : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("visible-data-changed", closure, after);
+  }
+}
+
+class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T accessibleDescription(string propval)
+  {
+    return setProperty("accessible-description", propval);
+  }
+
+  /** */
+  T accessibleHelpText(string propval)
+  {
+    return setProperty("accessible-help-text", propval);
+  }
+
+  /** */
+  T accessibleId(string propval)
+  {
+    return setProperty("accessible-id", propval);
+  }
+
+  /** */
+  T accessibleName(string propval)
+  {
+    return setProperty("accessible-name", propval);
+  }
+
+  /** */
+  T accessibleParent(atk.object.ObjectWrap propval)
+  {
+    return setProperty("accessible-parent", propval);
+  }
+
+  /** */
+  T accessibleRole(atk.types.Role propval)
+  {
+    return setProperty("accessible-role", propval);
+  }
+
+  /**
+      Set `accessibleTableCaption` property.
+      Params:
+        propval = Table caption.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Since 1.3. Use table-caption-object instead.
+  */
+  T accessibleTableCaption(string propval)
+  {
+    return setProperty("accessible-table-caption", propval);
+  }
+
+  /** */
+  T accessibleTableCaptionObject(atk.object.ObjectWrap propval)
+  {
+    return setProperty("accessible-table-caption-object", propval);
+  }
+
+  /**
+      Set `accessibleTableColumnDescription` property.
+      Params:
+        propval = Accessible table column description.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
+        and [atk.table.Table.setColumnDescription] instead.
+  */
+  T accessibleTableColumnDescription(string propval)
+  {
+    return setProperty("accessible-table-column-description", propval);
+  }
+
+  /**
+      Set `accessibleTableColumnHeader` property.
+      Params:
+        propval = Accessible table column header.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
+        [atk.table.Table.setColumnHeader] instead.
+  */
+  T accessibleTableColumnHeader(atk.object.ObjectWrap propval)
+  {
+    return setProperty("accessible-table-column-header", propval);
+  }
+
+  /**
+      Set `accessibleTableRowDescription` property.
+      Params:
+        propval = Accessible table row description.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
+        [atk.table.Table.setRowDescription] instead.
+  */
+  T accessibleTableRowDescription(string propval)
+  {
+    return setProperty("accessible-table-row-description", propval);
+  }
+
+  /**
+      Set `accessibleTableRowHeader` property.
+      Params:
+        propval = Accessible table row header.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
+        [atk.table.Table.setRowHeader] instead.
+  */
+  T accessibleTableRowHeader(atk.object.ObjectWrap propval)
+  {
+    return setProperty("accessible-table-row-header", propval);
+  }
+
+  /** */
+  T accessibleTableSummary(atk.object.ObjectWrap propval)
+  {
+    return setProperty("accessible-table-summary", propval);
+  }
+
+  /**
+      Set `accessibleValue` property.
+      Params:
+        propval = Numeric value of this object, in case being and AtkValue.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText] to get
+        the value, and value-changed signal to be notified on their value
+        changes.
+  */
+  T accessibleValue(double propval)
+  {
+    return setProperty("accessible-value", propval);
+  }
+}
+
+/// Fluent builder for [atk.object.ObjectWrap]
+final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
+{
+  ObjectWrap build()
+  {
+    return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), No.Take);
   }
 }

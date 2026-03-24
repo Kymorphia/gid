@@ -6,6 +6,7 @@ import gid.gid;
 import gio.file;
 import gio.list_model;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -527,4 +528,49 @@ interface FileChooser
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
   void setSelectMultiple(bool selectMultiple);
+}
+
+interface FileChooserGidBuilderImpl(T)
+{
+
+  /**
+      Set `action` property.
+      Params:
+        propval = The type of operation that the file chooser is performing.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T action(gtk.types.FileChooserAction propval);
+
+  /**
+      Set `createFolders` property.
+      Params:
+        propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
+          will offer the user to create new folders.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T createFolders(bool propval);
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The current filter for selecting files that are displayed.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T filter(gtk.file_filter.FileFilter propval);
+
+  /**
+      Set `selectMultiple` property.
+      Params:
+        propval = Whether to allow multiple files to be selected.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.file_dialog.FileDialog] instead
+  */
+  T selectMultiple(bool propval);
 }

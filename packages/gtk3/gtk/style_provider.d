@@ -3,6 +3,7 @@ module gtk.style_provider;
 
 public import gtk.style_provider_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 import gobject.value;
@@ -65,4 +66,8 @@ interface StyleProvider
       Returns: true if the property was found and has a value, false otherwise
   */
   bool getStyleProperty(gtk.widget_path.WidgetPath path, gtk.types.StateFlags state, gobject.param_spec.ParamSpec pspec, out gobject.value.Value value);
+}
+
+interface StyleProviderGidBuilderImpl(T)
+{
 }

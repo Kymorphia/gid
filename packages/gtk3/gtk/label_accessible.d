@@ -8,6 +8,7 @@ import atk.hypertext_mixin;
 import atk.text;
 import atk.text_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -42,6 +43,31 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
     return this;
   }
 
+  /**
+  Get builder for [gtk.label_accessible.LabelAccessible]
+  Returns: New builder object
+  */
+  static LabelAccessibleGidBuilder builder()
+  {
+    return new LabelAccessibleGidBuilder;
+  }
+
   mixin HypertextT!();
   mixin TextT!();
+}
+
+class LabelAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.hypertext.HypertextGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T
+{
+
+  mixin HypertextGidBuilderT!();
+  mixin TextGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.label_accessible.LabelAccessible]
+final class LabelAccessibleGidBuilder : LabelAccessibleGidBuilderImpl!LabelAccessibleGidBuilder
+{
+  LabelAccessible build()
+  {
+    return new LabelAccessible(cast(void*)createGObject(LabelAccessible._getGType), No.Take);
+  }
 }

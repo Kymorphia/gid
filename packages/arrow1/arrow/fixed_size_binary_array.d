@@ -9,6 +9,7 @@ import arrow.primitive_array;
 import arrow.types;
 import gid.gid;
 import glib.bytes;
+import gobject.gid_builder;
 
 /** */
 class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
@@ -37,6 +38,15 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
   override FixedSizeBinaryArray self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.fixed_size_binary_array.FixedSizeBinaryArray]
+  Returns: New builder object
+  */
+  static FixedSizeBinaryArrayGidBuilder builder()
+  {
+    return new FixedSizeBinaryArrayGidBuilder;
   }
 
   /** */
@@ -71,5 +81,18 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     _cretval = garrow_fixed_size_binary_array_get_values_bytes(cast(GArrowFixedSizeBinaryArray*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class FixedSizeBinaryArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.fixed_size_binary_array.FixedSizeBinaryArray]
+final class FixedSizeBinaryArrayGidBuilder : FixedSizeBinaryArrayGidBuilderImpl!FixedSizeBinaryArrayGidBuilder
+{
+  FixedSizeBinaryArray build()
+  {
+    return new FixedSizeBinaryArray(cast(void*)createGObject(FixedSizeBinaryArray._getGType), Yes.Take);
   }
 }

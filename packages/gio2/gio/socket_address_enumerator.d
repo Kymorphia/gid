@@ -9,6 +9,7 @@ import gio.cancellable;
 import gio.socket_address;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -54,6 +55,15 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
   override SocketAddressEnumerator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.socket_address_enumerator.SocketAddressEnumerator]
+  Returns: New builder object
+  */
+  static SocketAddressEnumeratorGidBuilder builder()
+  {
+    return new SocketAddressEnumeratorGidBuilder;
   }
 
   /**
@@ -137,5 +147,18 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class SocketAddressEnumeratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.socket_address_enumerator.SocketAddressEnumerator]
+final class SocketAddressEnumeratorGidBuilder : SocketAddressEnumeratorGidBuilderImpl!SocketAddressEnumeratorGidBuilder
+{
+  SocketAddressEnumerator build()
+  {
+    return new SocketAddressEnumerator(cast(void*)createGObject(SocketAddressEnumerator._getGType), No.Take);
   }
 }

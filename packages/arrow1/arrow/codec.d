@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class Codec : gobject.object.ObjectWrap
   override Codec self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.codec.Codec]
+  Returns: New builder object
+  */
+  static CodecGidBuilder builder()
+  {
+    return new CodecGidBuilder;
   }
 
   /** */
@@ -72,5 +82,24 @@ class Codec : gobject.object.ObjectWrap
     _cretval = garrow_codec_get_name(cast(GArrowCodec*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class CodecGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T codec(void* propval)
+  {
+    return setProperty("codec", propval);
+  }
+}
+
+/// Fluent builder for [arrow.codec.Codec]
+final class CodecGidBuilder : CodecGidBuilderImpl!CodecGidBuilder
+{
+  Codec build()
+  {
+    return new Codec(cast(void*)createGObject(Codec._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstbase.base_src;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
@@ -164,6 +165,15 @@ class BaseSrc : gst.element.Element
   }
 
   /**
+  Get builder for [gstbase.base_src.BaseSrc]
+  Returns: New builder object
+  */
+  static BaseSrcGidBuilder builder()
+  {
+    return new BaseSrcGidBuilder;
+  }
+
+  /**
       Get `automaticEos` property.
       Returns: See [gstbase.base_src.BaseSrc.setAutomaticEos]
   */
@@ -179,7 +189,7 @@ class BaseSrc : gst.element.Element
   */
   @property void automaticEos(bool propval)
   {
-    return setAutomaticEos(propval);
+    setAutomaticEos(propval);
   }
 
   /** */
@@ -191,7 +201,7 @@ class BaseSrc : gst.element.Element
   /** */
   @property void blocksize(uint propval)
   {
-    return setBlocksize(propval);
+    setBlocksize(propval);
   }
 
   /** */
@@ -203,7 +213,7 @@ class BaseSrc : gst.element.Element
   /** */
   @property void doTimestamp(bool propval)
   {
-    return setDoTimestamp(propval);
+    setDoTimestamp(propval);
   }
 
   /** */
@@ -604,5 +614,53 @@ class BaseSrc : gst.element.Element
     _cretval = gst_base_src_wait_playing(cast(GstBaseSrc*)this._cPtr);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
+  }
+}
+
+class BaseSrcGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `automaticEos` property.
+      Params:
+        propval = See [gstbase.base_src.BaseSrc.setAutomaticEos]
+      Returns: Builder instance for fluent chaining
+  */
+  T automaticEos(bool propval)
+  {
+    return setProperty("automatic-eos", propval);
+  }
+
+  /** */
+  T blocksize(uint propval)
+  {
+    return setProperty("blocksize", propval);
+  }
+
+  /** */
+  T doTimestamp(bool propval)
+  {
+    return setProperty("do-timestamp", propval);
+  }
+
+  /** */
+  T numBuffers(int propval)
+  {
+    return setProperty("num-buffers", propval);
+  }
+
+  /** */
+  T typefind(bool propval)
+  {
+    return setProperty("typefind", propval);
+  }
+}
+
+/// Fluent builder for [gstbase.base_src.BaseSrc]
+final class BaseSrcGidBuilder : BaseSrcGidBuilderImpl!BaseSrcGidBuilder
+{
+  BaseSrc build()
+  {
+    return new BaseSrc(cast(void*)createGObject(BaseSrc._getGType), No.Take);
   }
 }

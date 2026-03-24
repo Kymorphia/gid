@@ -2,6 +2,7 @@
 module gst.tracer_factory;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.types;
 import gst.c.functions;
 import gst.c.types;
@@ -41,6 +42,15 @@ class TracerFactory : gst.plugin_feature.PluginFeature
   }
 
   /**
+  Get builder for [gst.tracer_factory.TracerFactory]
+  Returns: New builder object
+  */
+  static TracerFactoryGidBuilder builder()
+  {
+    return new TracerFactoryGidBuilder;
+  }
+
+  /**
       Gets the list of all registered tracer factories. You must free the
       list using [gst.plugin_feature.PluginFeature.listFree].
       
@@ -70,5 +80,18 @@ class TracerFactory : gst.plugin_feature.PluginFeature
     gobject.types.GType _retval;
     _retval = gst_tracer_factory_get_tracer_type(cast(GstTracerFactory*)this._cPtr);
     return _retval;
+  }
+}
+
+class TracerFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.tracer_factory.TracerFactory]
+final class TracerFactoryGidBuilder : TracerFactoryGidBuilderImpl!TracerFactoryGidBuilder
+{
+  TracerFactory build()
+  {
+    return new TracerFactory(cast(void*)createGObject(TracerFactory._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module gtk.gesture_zoom;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture;
@@ -41,6 +42,15 @@ class GestureZoom : gtk.gesture.Gesture
   override GestureZoom self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.gesture_zoom.GestureZoom]
+  Returns: New builder object
+  */
+  static GestureZoomGidBuilder builder()
+  {
+    return new GestureZoomGidBuilder;
   }
 
   /**
@@ -112,5 +122,18 @@ class GestureZoom : gtk.gesture.Gesture
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scale-changed", closure, after);
+  }
+}
+
+class GestureZoomGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.gesture_zoom.GestureZoom]
+final class GestureZoomGidBuilder : GestureZoomGidBuilderImpl!GestureZoomGidBuilder
+{
+  GestureZoom build()
+  {
+    return new GestureZoom(cast(void*)createGObject(GestureZoom._getGType), Yes.Take);
   }
 }

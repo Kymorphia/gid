@@ -8,6 +8,7 @@ import arrow.types;
 import arrow.union_array_builder;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
@@ -38,6 +39,15 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return this;
   }
 
+  /**
+  Get builder for [arrow.sparse_union_array_builder.SparseUnionArrayBuilder]
+  Returns: New builder object
+  */
+  static SparseUnionArrayBuilderGidBuilder builder()
+  {
+    return new SparseUnionArrayBuilderGidBuilder;
+  }
+
   /** */
   this(arrow.sparse_union_data_type.SparseUnionDataType dataType = null)
   {
@@ -47,5 +57,18 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class SparseUnionArrayBuilderGidBuilderImpl(T) : arrow.union_array_builder.UnionArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.sparse_union_array_builder.SparseUnionArrayBuilder]
+final class SparseUnionArrayBuilderGidBuilder : SparseUnionArrayBuilderGidBuilderImpl!SparseUnionArrayBuilderGidBuilder
+{
+  SparseUnionArrayBuilder build()
+  {
+    return new SparseUnionArrayBuilder(cast(void*)createGObject(SparseUnionArrayBuilder._getGType), Yes.Take);
   }
 }

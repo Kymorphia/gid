@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.field;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class ListDataType : arrow.data_type.DataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.list_data_type.ListDataType]
+  Returns: New builder object
+  */
+  static ListDataTypeGidBuilder builder()
+  {
+    return new ListDataTypeGidBuilder;
+  }
+
   /** */
   this(arrow.field.Field field)
   {
@@ -62,5 +72,18 @@ class ListDataType : arrow.data_type.DataType
     _cretval = garrow_list_data_type_get_value_field(cast(GArrowListDataType*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ListDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.list_data_type.ListDataType]
+final class ListDataTypeGidBuilder : ListDataTypeGidBuilderImpl!ListDataTypeGidBuilder
+{
+  ListDataType build()
+  {
+    return new ListDataType(cast(void*)createGObject(ListDataType._getGType), Yes.Take);
   }
 }

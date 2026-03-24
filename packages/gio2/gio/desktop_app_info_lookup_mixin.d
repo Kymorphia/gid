@@ -7,6 +7,7 @@ public import gio.app_info;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -45,4 +46,8 @@ template DesktopAppInfoLookupT()
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
+}
+
+template DesktopAppInfoLookupGidBuilderT()
+{
 }

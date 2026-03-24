@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -162,6 +163,28 @@ class Dialog : gtk.window.Window
   override Dialog self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.dialog.Dialog]
+  Returns: New builder object
+  */
+  static DialogGidBuilder builder()
+  {
+    return new DialogGidBuilder;
+  }
+
+  /**
+      Get `useHeaderBar` property.
+      Returns: true if the dialog uses a #GtkHeaderBar for action buttons
+        instead of the action-area.
+        
+        For technical reasons, this property is declared as an integer
+        property, but you should only set it to true or false.
+  */
+  @property int useHeaderBar()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("use-header-bar");
   }
 
   /**
@@ -498,5 +521,34 @@ class Dialog : gtk.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
+  }
+}
+
+class DialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `useHeaderBar` property.
+      Params:
+        propval = true if the dialog uses a #GtkHeaderBar for action buttons
+          instead of the action-area.
+          
+          For technical reasons, this property is declared as an integer
+          property, but you should only set it to true or false.
+      Returns: Builder instance for fluent chaining
+  */
+  T useHeaderBar(int propval)
+  {
+    return setProperty("use-header-bar", propval);
+  }
+}
+
+/// Fluent builder for [gtk.dialog.Dialog]
+final class DialogGidBuilder : DialogGidBuilderImpl!DialogGidBuilder
+{
+  Dialog build()
+  {
+    return new Dialog(cast(void*)createGObject(Dialog._getGType), No.Take);
   }
 }

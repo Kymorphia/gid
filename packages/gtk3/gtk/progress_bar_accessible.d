@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.value;
 import atk.value_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -40,5 +41,29 @@ class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.
     return this;
   }
 
+  /**
+  Get builder for [gtk.progress_bar_accessible.ProgressBarAccessible]
+  Returns: New builder object
+  */
+  static ProgressBarAccessibleGidBuilder builder()
+  {
+    return new ProgressBarAccessibleGidBuilder;
+  }
+
   mixin ValueT!();
+}
+
+class ProgressBarAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
+{
+
+  mixin ValueGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.progress_bar_accessible.ProgressBarAccessible]
+final class ProgressBarAccessibleGidBuilder : ProgressBarAccessibleGidBuilderImpl!ProgressBarAccessibleGidBuilder
+{
+  ProgressBarAccessible build()
+  {
+    return new ProgressBarAccessible(cast(void*)createGObject(ProgressBarAccessible._getGType), No.Take);
+  }
 }

@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   override QuantileOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.quantile_options.QuantileOptions]
+  Returns: New builder object
+  */
+  static QuantileOptionsGidBuilder builder()
+  {
+    return new QuantileOptionsGidBuilder;
   }
 
   /**
@@ -136,5 +146,53 @@ class QuantileOptions : arrow.function_options.FunctionOptions
 
     auto _qs = cast(const(double)*)qs.ptr;
     garrow_quantile_options_set_qs(cast(GArrowQuantileOptions*)this._cPtr, _qs, _n);
+  }
+}
+
+class QuantileOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `interpolation` property.
+      Params:
+        propval = Interpolation method to use when quantile lies between two data
+          points.
+      Returns: Builder instance for fluent chaining
+  */
+  T interpolation(arrow.types.QuantileInterpolation propval)
+  {
+    return setProperty("interpolation", propval);
+  }
+
+  /**
+      Set `minCount` property.
+      Params:
+        propval = If less than this many non-null values are observed, emit null.
+      Returns: Builder instance for fluent chaining
+  */
+  T minCount(uint propval)
+  {
+    return setProperty("min-count", propval);
+  }
+
+  /**
+      Set `skipNulls` property.
+      Params:
+        propval = If true (the default), null values are ignored. Otherwise, if any
+          value is null, emit null.
+      Returns: Builder instance for fluent chaining
+  */
+  T skipNulls(bool propval)
+  {
+    return setProperty("skip-nulls", propval);
+  }
+}
+
+/// Fluent builder for [arrow.quantile_options.QuantileOptions]
+final class QuantileOptionsGidBuilder : QuantileOptionsGidBuilderImpl!QuantileOptionsGidBuilder
+{
+  QuantileOptions build()
+  {
+    return new QuantileOptions(cast(void*)createGObject(QuantileOptions._getGType), Yes.Take);
   }
 }

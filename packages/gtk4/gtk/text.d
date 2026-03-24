@@ -4,6 +4,7 @@ module gtk.text;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import graphene.rect;
 import gtk.accessible;
@@ -117,6 +118,15 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
+  Get builder for [gtk.text.Text]
+  Returns: New builder object
+  */
+  static TextGidBuilder builder()
+  {
+    return new TextGidBuilder;
+  }
+
+  /**
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
@@ -132,7 +142,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void activatesDefault(bool propval)
   {
-    return setActivatesDefault(propval);
+    setActivatesDefault(propval);
   }
 
   /**
@@ -161,7 +171,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
   }
 
   /**
@@ -180,7 +190,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void buffer(gtk.entry_buffer.EntryBuffer propval)
   {
-    return setBuffer(propval);
+    setBuffer(propval);
   }
 
   /**
@@ -199,7 +209,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void enableEmojiCompletion(bool propval)
   {
-    return setEnableEmojiCompletion(propval);
+    setEnableEmojiCompletion(propval);
   }
 
   /**
@@ -220,7 +230,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void extraMenu(gio.menu_model.MenuModel propval)
   {
-    return setExtraMenu(propval);
+    setExtraMenu(propval);
   }
 
   /**
@@ -272,7 +282,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
-    return setInputHints(propval);
+    setInputHints(propval);
   }
 
   /**
@@ -305,7 +315,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void inputPurpose(gtk.types.InputPurpose propval)
   {
-    return setInputPurpose(propval);
+    setInputPurpose(propval);
   }
 
   /**
@@ -366,7 +376,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void maxLength(int propval)
   {
-    return setMaxLength(propval);
+    setMaxLength(propval);
   }
 
   /**
@@ -385,7 +395,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void overwriteMode(bool propval)
   {
-    return setOverwriteMode(propval);
+    setOverwriteMode(propval);
   }
 
   /**
@@ -406,7 +416,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void placeholderText(string propval)
   {
-    return setPlaceholderText(propval);
+    setPlaceholderText(propval);
   }
 
   /**
@@ -425,7 +435,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void propagateTextWidth(bool propval)
   {
-    return setPropagateTextWidth(propval);
+    setPropagateTextWidth(propval);
   }
 
   /**
@@ -453,7 +463,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void tabs(pango.tab_array.TabArray propval)
   {
-    return setTabs(propval);
+    setTabs(propval);
   }
 
   /**
@@ -472,7 +482,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void truncateMultiline(bool propval)
   {
-    return setTruncateMultiline(propval);
+    setTruncateMultiline(propval);
   }
 
   /**
@@ -491,7 +501,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   @property void visibility(bool propval)
   {
-    return setVisibility(propval);
+    setVisibility(propval);
   }
 
   mixin AccessibleTextT!();
@@ -1529,5 +1539,231 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-overwrite", closure, after);
+  }
+}
+
+class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
+{
+
+  mixin AccessibleTextGidBuilderT!();
+  mixin EditableGidBuilderT!();
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatesDefault(bool propval)
+  {
+    return setProperty("activates-default", propval);
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the [gtk.text.Text].
+          
+          This is mainly useful to change the size or weight of the text.
+          
+          The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
+          [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(pango.attr_list.AttrList propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The [gtk.entry_buffer.EntryBuffer] object which stores the text.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gtk.entry_buffer.EntryBuffer propval)
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `enableEmojiCompletion` property.
+      Params:
+        propval = Whether to suggest Emoji replacements.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableEmojiCompletion(bool propval)
+  {
+    return setProperty("enable-emoji-completion", propval);
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to
+          the context menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T extraMenu(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("extra-menu", propval);
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this self.
+          
+          See [gtk.immulticontext.IMMulticontext].
+          
+          Setting this to a non-null value overrides the system-wide
+          IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+          property.
+      Returns: Builder instance for fluent chaining
+  */
+  T imModule(string propval)
+  {
+    return setProperty("im-module", propval);
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints that allow input methods to fine-tune
+          their behaviour.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(gtk.types.InputHints propval)
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+          
+          Note that setting the purpose to [gtk.types.InputPurpose.Password] or
+          [gtk.types.InputPurpose.Pin] is independent from setting
+          [gtk.text.Text.visibility].
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(gtk.types.InputPurpose propval)
+  {
+    return setProperty("input-purpose", propval);
+  }
+
+  /**
+      Set `invisibleChar` property.
+      Params:
+        propval = The character to used when masking contents (in “password mode”).
+      Returns: Builder instance for fluent chaining
+  */
+  T invisibleChar(uint propval)
+  {
+    return setProperty("invisible-char", propval);
+  }
+
+  /**
+      Set `invisibleCharSet` property.
+      Params:
+        propval = Whether the invisible char has been set for the [gtk.text.Text].
+      Returns: Builder instance for fluent chaining
+  */
+  T invisibleCharSet(bool propval)
+  {
+    return setProperty("invisible-char-set", propval);
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = Maximum number of characters that are allowed.
+          
+          Zero indicates no limit.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxLength(int propval)
+  {
+    return setProperty("max-length", propval);
+  }
+
+  /**
+      Set `overwriteMode` property.
+      Params:
+        propval = If text is overwritten when typing in the [gtk.text.Text].
+      Returns: Builder instance for fluent chaining
+  */
+  T overwriteMode(bool propval)
+  {
+    return setProperty("overwrite-mode", propval);
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gtk.text.Text] when it is empty
+          and unfocused.
+      Returns: Builder instance for fluent chaining
+  */
+  T placeholderText(string propval)
+  {
+    return setProperty("placeholder-text", propval);
+  }
+
+  /**
+      Set `propagateTextWidth` property.
+      Params:
+        propval = Whether the widget should grow and shrink with the content.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagateTextWidth(bool propval)
+  {
+    return setProperty("propagate-text-width", propval);
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = A list of tabstops to apply to the text of the [gtk.text.Text].
+      Returns: Builder instance for fluent chaining
+  */
+  T tabs(pango.tab_array.TabArray propval)
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /**
+      Set `truncateMultiline` property.
+      Params:
+        propval = When true, pasted multi-line text is truncated to the first line.
+      Returns: Builder instance for fluent chaining
+  */
+  T truncateMultiline(bool propval)
+  {
+    return setProperty("truncate-multiline", propval);
+  }
+
+  /**
+      Set `visibility` property.
+      Params:
+        propval = If false, the text is masked with the “invisible char”.
+      Returns: Builder instance for fluent chaining
+  */
+  T visibility(bool propval)
+  {
+    return setProperty("visibility", propval);
+  }
+}
+
+/// Fluent builder for [gtk.text.Text]
+final class TextGidBuilder : TextGidBuilderImpl!TextGidBuilder
+{
+  Text build()
+  {
+    return new Text(cast(void*)createGObject(Text._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.popover_accessible;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -36,5 +37,28 @@ class PopoverAccessible : gtk.container_accessible.ContainerAccessible
   override PopoverAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.popover_accessible.PopoverAccessible]
+  Returns: New builder object
+  */
+  static PopoverAccessibleGidBuilder builder()
+  {
+    return new PopoverAccessibleGidBuilder;
+  }
+}
+
+class PopoverAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.popover_accessible.PopoverAccessible]
+final class PopoverAccessibleGidBuilder : PopoverAccessibleGidBuilderImpl!PopoverAccessibleGidBuilder
+{
+  PopoverAccessible build()
+  {
+    return new PopoverAccessible(cast(void*)createGObject(PopoverAccessible._getGType), No.Take);
   }
 }

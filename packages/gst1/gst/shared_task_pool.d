@@ -2,6 +2,7 @@
 module gst.shared_task_pool;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.task_pool;
@@ -36,6 +37,15 @@ class SharedTaskPool : gst.task_pool.TaskPool
   override SharedTaskPool self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.shared_task_pool.SharedTaskPool]
+  Returns: New builder object
+  */
+  static SharedTaskPoolGidBuilder builder()
+  {
+    return new SharedTaskPoolGidBuilder;
   }
 
   /**
@@ -75,5 +85,18 @@ class SharedTaskPool : gst.task_pool.TaskPool
   void setMaxThreads(uint maxThreads)
   {
     gst_shared_task_pool_set_max_threads(cast(GstSharedTaskPool*)this._cPtr, maxThreads);
+  }
+}
+
+class SharedTaskPoolGidBuilderImpl(T) : gst.task_pool.TaskPoolGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.shared_task_pool.SharedTaskPool]
+final class SharedTaskPoolGidBuilder : SharedTaskPoolGidBuilderImpl!SharedTaskPoolGidBuilder
+{
+  SharedTaskPool build()
+  {
+    return new SharedTaskPool(cast(void*)createGObject(SharedTaskPool._getGType), Yes.Take);
   }
 }

@@ -10,6 +10,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
@@ -38,6 +39,15 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   override Decimal128ArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.decimal128_array_builder.Decimal128ArrayBuilder]
+  Returns: New builder object
+  */
+  static Decimal128ArrayBuilderGidBuilder builder()
+  {
+    return new Decimal128ArrayBuilderGidBuilder;
   }
 
   /** */
@@ -109,5 +119,18 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class Decimal128ArrayBuilderGidBuilderImpl(T) : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal128_array_builder.Decimal128ArrayBuilder]
+final class Decimal128ArrayBuilderGidBuilder : Decimal128ArrayBuilderGidBuilderImpl!Decimal128ArrayBuilderGidBuilder
+{
+  Decimal128ArrayBuilder build()
+  {
+    return new Decimal128ArrayBuilder(cast(void*)createGObject(Decimal128ArrayBuilder._getGType), Yes.Take);
   }
 }

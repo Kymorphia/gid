@@ -7,6 +7,7 @@ import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class MetadataWriter : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [arrowflight.metadata_writer.MetadataWriter]
+  Returns: New builder object
+  */
+  static MetadataWriterGidBuilder builder()
+  {
+    return new MetadataWriterGidBuilder;
+  }
+
+  /**
       Writes metadata to the client.
   
       Params:
@@ -54,5 +64,24 @@ class MetadataWriter : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class MetadataWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T writer(void* propval)
+  {
+    return setProperty("writer", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.metadata_writer.MetadataWriter]
+final class MetadataWriterGidBuilder : MetadataWriterGidBuilderImpl!MetadataWriterGidBuilder
+{
+  MetadataWriter build()
+  {
+    return new MetadataWriter(cast(void*)createGObject(MetadataWriter._getGType), No.Take);
   }
 }

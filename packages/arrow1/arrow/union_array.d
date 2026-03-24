@@ -4,8 +4,10 @@ module arrow.union_array;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;
+import arrow.int8_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +39,21 @@ class UnionArray : arrow.array.Array
     return this;
   }
 
+  /**
+  Get builder for [arrow.union_array.UnionArray]
+  Returns: New builder object
+  */
+  static UnionArrayGidBuilder builder()
+  {
+    return new UnionArrayGidBuilder;
+  }
+
+  /** */
+  @property arrow.int8_array.Int8Array typeIds()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.int8_array.Int8Array)("type-ids");
+  }
+
   /** */
   int getChildId(long i)
   {
@@ -60,5 +77,24 @@ class UnionArray : arrow.array.Array
     byte _retval;
     _retval = garrow_union_array_get_type_code(cast(GArrowUnionArray*)this._cPtr, i);
     return _retval;
+  }
+}
+
+class UnionArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
+{
+
+  /** */
+  T typeIds(arrow.int8_array.Int8Array propval)
+  {
+    return setProperty("type-ids", propval);
+  }
+}
+
+/// Fluent builder for [arrow.union_array.UnionArray]
+final class UnionArrayGidBuilder : UnionArrayGidBuilderImpl!UnionArrayGidBuilder
+{
+  UnionArray build()
+  {
+    return new UnionArray(cast(void*)createGObject(UnionArray._getGType), No.Take);
   }
 }

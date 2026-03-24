@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A concatenation of other #GMimeStream objects.
@@ -39,6 +40,15 @@ class StreamCat : gmime.stream.Stream
   }
 
   /**
+  Get builder for [gmime.stream_cat.StreamCat]
+  Returns: New builder object
+  */
+  static StreamCatGidBuilder builder()
+  {
+    return new StreamCatGidBuilder;
+  }
+
+  /**
       Creates a new #GMimeStreamCat object.
       Returns: a new #GMimeStreamCat stream.
   */
@@ -61,5 +71,18 @@ class StreamCat : gmime.stream.Stream
     int _retval;
     _retval = g_mime_stream_cat_add_source(cast(GMimeStreamCat*)this._cPtr, source ? cast(GMimeStream*)source._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class StreamCatGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_cat.StreamCat]
+final class StreamCatGidBuilder : StreamCatGidBuilderImpl!StreamCatGidBuilder
+{
+  StreamCat build()
+  {
+    return new StreamCat(cast(void*)createGObject(StreamCat._getGType), Yes.Take);
   }
 }

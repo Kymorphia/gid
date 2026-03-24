@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +38,15 @@ class MutableBuffer : arrow.buffer.Buffer
   override MutableBuffer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.mutable_buffer.MutableBuffer]
+  Returns: New builder object
+  */
+  static MutableBufferGidBuilder builder()
+  {
+    return new MutableBufferGidBuilder;
   }
 
   /** */
@@ -86,5 +96,18 @@ class MutableBuffer : arrow.buffer.Buffer
     _cretval = garrow_mutable_buffer_slice(cast(GArrowMutableBuffer*)this._cPtr, offset, size);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.mutable_buffer.MutableBuffer)(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class MutableBufferGidBuilderImpl(T) : arrow.buffer.BufferGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.mutable_buffer.MutableBuffer]
+final class MutableBufferGidBuilder : MutableBufferGidBuilderImpl!MutableBufferGidBuilder
+{
+  MutableBuffer build()
+  {
+    return new MutableBuffer(cast(void*)createGObject(MutableBuffer._getGType), Yes.Take);
   }
 }

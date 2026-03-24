@@ -7,6 +7,7 @@ public import atk.c.types;
 public import atk.hyperlink;
 public import atk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -31,4 +32,8 @@ template HyperlinkImplT()
     auto _retval = gobject.object.ObjectWrap._getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, Yes.Take);
     return _retval;
   }
+}
+
+template HyperlinkImplGidBuilderT()
+{
 }

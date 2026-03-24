@@ -4,6 +4,7 @@ module gtk.revealer;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -55,6 +56,15 @@ class Revealer : gtk.bin.Bin
     return this;
   }
 
+  /**
+  Get builder for [gtk.revealer.Revealer]
+  Returns: New builder object
+  */
+  static RevealerGidBuilder builder()
+  {
+    return new RevealerGidBuilder;
+  }
+
   /** */
   @property bool childRevealed()
   {
@@ -70,7 +80,7 @@ class Revealer : gtk.bin.Bin
   /** */
   @property void revealChild(bool propval)
   {
-    return setRevealChild(propval);
+    setRevealChild(propval);
   }
 
   /** */
@@ -82,7 +92,7 @@ class Revealer : gtk.bin.Bin
   /** */
   @property void transitionDuration(uint propval)
   {
-    return setTransitionDuration(propval);
+    setTransitionDuration(propval);
   }
 
   /** */
@@ -94,7 +104,7 @@ class Revealer : gtk.bin.Bin
   /** */
   @property void transitionType(gtk.types.RevealerTransitionType propval)
   {
-    return setTransitionType(propval);
+    setTransitionType(propval);
   }
 
   /**
@@ -198,5 +208,37 @@ class Revealer : gtk.bin.Bin
   void setTransitionType(gtk.types.RevealerTransitionType transition)
   {
     gtk_revealer_set_transition_type(cast(GtkRevealer*)this._cPtr, transition);
+  }
+}
+
+class RevealerGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /** */
+  T revealChild(bool propval)
+  {
+    return setProperty("reveal-child", propval);
+  }
+
+  /** */
+  T transitionDuration(uint propval)
+  {
+    return setProperty("transition-duration", propval);
+  }
+
+  /** */
+  T transitionType(gtk.types.RevealerTransitionType propval)
+  {
+    return setProperty("transition-type", propval);
+  }
+}
+
+/// Fluent builder for [gtk.revealer.Revealer]
+final class RevealerGidBuilder : RevealerGidBuilderImpl!RevealerGidBuilder
+{
+  Revealer build()
+  {
+    return new Revealer(cast(void*)createGObject(Revealer._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import gdk.display;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import pango.types;
 
@@ -44,6 +45,15 @@ class Keymap : gobject.object.ObjectWrap
   override Keymap self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.keymap.Keymap]
+  Returns: New builder object
+  */
+  static KeymapGidBuilder builder()
+  {
+    return new KeymapGidBuilder;
   }
 
   /**
@@ -472,5 +482,18 @@ class Keymap : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("state-changed", closure, after);
+  }
+}
+
+class KeymapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.keymap.Keymap]
+final class KeymapGidBuilder : KeymapGidBuilderImpl!KeymapGidBuilder
+{
+  Keymap build()
+  {
+    return new Keymap(cast(void*)createGObject(Keymap._getGType), No.Take);
   }
 }

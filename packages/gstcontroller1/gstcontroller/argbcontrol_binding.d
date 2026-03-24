@@ -2,6 +2,7 @@
 module gstcontroller.argbcontrol_binding;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.control_binding;
 import gst.control_source;
@@ -41,6 +42,15 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   override ARGBControlBinding self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstcontroller.argbcontrol_binding.ARGBControlBinding]
+  Returns: New builder object
+  */
+  static ARGBControlBindingGidBuilder builder()
+  {
+    return new ARGBControlBindingGidBuilder;
   }
 
   /** */
@@ -110,5 +120,42 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, csA ? cast(GstControlSource*)csA._cPtr(No.Dup) : null, csR ? cast(GstControlSource*)csR._cPtr(No.Dup) : null, csG ? cast(GstControlSource*)csG._cPtr(No.Dup) : null, csB ? cast(GstControlSource*)csB._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
+  }
+}
+
+class ARGBControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGidBuilderImpl!T
+{
+
+  /** */
+  T controlSourceA(gst.control_source.ControlSource propval)
+  {
+    return setProperty("control-source-a", propval);
+  }
+
+  /** */
+  T controlSourceB(gst.control_source.ControlSource propval)
+  {
+    return setProperty("control-source-b", propval);
+  }
+
+  /** */
+  T controlSourceG(gst.control_source.ControlSource propval)
+  {
+    return setProperty("control-source-g", propval);
+  }
+
+  /** */
+  T controlSourceR(gst.control_source.ControlSource propval)
+  {
+    return setProperty("control-source-r", propval);
+  }
+}
+
+/// Fluent builder for [gstcontroller.argbcontrol_binding.ARGBControlBinding]
+final class ARGBControlBindingGidBuilder : ARGBControlBindingGidBuilderImpl!ARGBControlBindingGidBuilder
+{
+  ARGBControlBinding build()
+  {
+    return new ARGBControlBinding(cast(void*)createGObject(ARGBControlBinding._getGType), No.Take);
   }
 }

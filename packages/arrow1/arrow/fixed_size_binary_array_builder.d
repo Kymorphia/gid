@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -37,6 +38,15 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   override FixedSizeBinaryArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder]
+  Returns: New builder object
+  */
+  static FixedSizeBinaryArrayBuilderGidBuilder builder()
+  {
+    return new FixedSizeBinaryArrayBuilderGidBuilder;
   }
 
   /** */
@@ -140,5 +150,18 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class FixedSizeBinaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder]
+final class FixedSizeBinaryArrayBuilderGidBuilder : FixedSizeBinaryArrayBuilderGidBuilderImpl!FixedSizeBinaryArrayBuilderGidBuilder
+{
+  FixedSizeBinaryArrayBuilder build()
+  {
+    return new FixedSizeBinaryArrayBuilder(cast(void*)createGObject(FixedSizeBinaryArrayBuilder._getGType), Yes.Take);
   }
 }

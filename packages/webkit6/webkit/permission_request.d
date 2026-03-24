@@ -3,6 +3,7 @@ module webkit.permission_request;
 
 public import webkit.permission_request_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import webkit.c.functions;
 import webkit.c.types;
 import webkit.types;
@@ -36,4 +37,8 @@ interface PermissionRequest
       Deny the action which triggered this request.
   */
   void deny();
+}
+
+interface PermissionRequestGidBuilderImpl(T)
+{
 }

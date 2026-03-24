@@ -7,6 +7,7 @@ import arrow.large_binary_array_builder;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArrayBuilder
@@ -35,6 +36,15 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
   override LargeStringArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.large_string_array_builder.LargeStringArrayBuilder]
+  Returns: New builder object
+  */
+  static LargeStringArrayBuilderGidBuilder builder()
+  {
+    return new LargeStringArrayBuilderGidBuilder;
   }
 
   /** */
@@ -104,5 +114,18 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class LargeStringArrayBuilderGidBuilderImpl(T) : arrow.large_binary_array_builder.LargeBinaryArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.large_string_array_builder.LargeStringArrayBuilder]
+final class LargeStringArrayBuilderGidBuilder : LargeStringArrayBuilderGidBuilderImpl!LargeStringArrayBuilderGidBuilder
+{
+  LargeStringArrayBuilder build()
+  {
+    return new LargeStringArrayBuilder(cast(void*)createGObject(LargeStringArrayBuilder._getGType), Yes.Take);
   }
 }

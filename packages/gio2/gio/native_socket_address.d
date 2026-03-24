@@ -8,6 +8,7 @@ import gio.socket_address;
 import gio.socket_connectable;
 import gio.socket_connectable_mixin;
 import gio.types;
+import gobject.gid_builder;
 
 /**
     A socket address of some unknown native type.
@@ -44,6 +45,15 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
+  Get builder for [gio.native_socket_address.NativeSocketAddress]
+  Returns: New builder object
+  */
+  static NativeSocketAddressGidBuilder builder()
+  {
+    return new NativeSocketAddressGidBuilder;
+  }
+
+  /**
       Creates a new #GNativeSocketAddress for native and len.
   
       Params:
@@ -56,5 +66,19 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
     GSocketAddress* _cretval;
     _cretval = g_native_socket_address_new(native, len);
     this(_cretval, Yes.Take);
+  }
+}
+
+class NativeSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gio.native_socket_address.NativeSocketAddress]
+final class NativeSocketAddressGidBuilder : NativeSocketAddressGidBuilderImpl!NativeSocketAddressGidBuilder
+{
+  NativeSocketAddress build()
+  {
+    return new NativeSocketAddress(cast(void*)createGObject(NativeSocketAddress._getGType), Yes.Take);
   }
 }

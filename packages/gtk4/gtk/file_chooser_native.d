@@ -2,6 +2,7 @@
 module gtk.file_chooser_native;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.file_chooser;
@@ -193,6 +194,15 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   }
 
   /**
+  Get builder for [gtk.file_chooser_native.FileChooserNative]
+  Returns: New builder object
+  */
+  static FileChooserNativeGidBuilder builder()
+  {
+    return new FileChooserNativeGidBuilder;
+  }
+
+  /**
       Get `acceptLabel` property.
       Returns: The text used for the label on the accept button in the dialog, or
         null to use the default text.
@@ -210,7 +220,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   */
   @property void acceptLabel(string propval)
   {
-    return setAcceptLabel(propval);
+    setAcceptLabel(propval);
   }
 
   /**
@@ -231,7 +241,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   */
   @property void cancelLabel(string propval)
   {
-    return setCancelLabel(propval);
+    setCancelLabel(propval);
   }
 
   mixin FileChooserT!();
@@ -327,5 +337,44 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   {
     const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
     gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)this._cPtr, _cancelLabel);
+  }
+}
+
+class FileChooserNativeGidBuilderImpl(T) : gtk.native_dialog.NativeDialogGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
+{
+
+  mixin FileChooserGidBuilderT!();
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = The text used for the label on the accept button in the dialog, or
+          null to use the default text.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptLabel(string propval)
+  {
+    return setProperty("accept-label", propval);
+  }
+
+  /**
+      Set `cancelLabel` property.
+      Params:
+        propval = The text used for the label on the cancel button in the dialog, or
+          null to use the default text.
+      Returns: Builder instance for fluent chaining
+  */
+  T cancelLabel(string propval)
+  {
+    return setProperty("cancel-label", propval);
+  }
+}
+
+/// Fluent builder for [gtk.file_chooser_native.FileChooserNative]
+final class FileChooserNativeGidBuilder : FileChooserNativeGidBuilderImpl!FileChooserNativeGidBuilder
+{
+  FileChooserNative build()
+  {
+    return new FileChooserNative(cast(void*)createGObject(FileChooserNative._getGType), Yes.Take);
   }
 }

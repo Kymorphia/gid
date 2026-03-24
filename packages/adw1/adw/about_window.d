@@ -7,6 +7,7 @@ import adw.types;
 import adw.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -224,6 +225,15 @@ class AboutWindow : adw.window.Window
   }
 
   /**
+  Get builder for [adw.about_window.AboutWindow]
+  Returns: New builder object
+  */
+  static AboutWindowGidBuilder builder()
+  {
+    return new AboutWindowGidBuilder;
+  }
+
+  /**
       Get `applicationIcon` property.
       Returns: The name of the application icon.
         
@@ -243,7 +253,7 @@ class AboutWindow : adw.window.Window
   */
   @property void applicationIcon(string propval)
   {
-    return setApplicationIcon(propval);
+    setApplicationIcon(propval);
   }
 
   /**
@@ -266,7 +276,7 @@ class AboutWindow : adw.window.Window
   */
   @property void applicationName(string propval)
   {
-    return setApplicationName(propval);
+    setApplicationName(propval);
   }
 
   /**
@@ -295,7 +305,7 @@ class AboutWindow : adw.window.Window
   */
   @property void comments(string propval)
   {
-    return setComments(propval);
+    setComments(propval);
   }
 
   /**
@@ -332,7 +342,7 @@ class AboutWindow : adw.window.Window
   */
   @property void copyright(string propval)
   {
-    return setCopyright(propval);
+    setCopyright(propval);
   }
 
   /**
@@ -371,7 +381,7 @@ class AboutWindow : adw.window.Window
   */
   @property void debugInfo(string propval)
   {
-    return setDebugInfo(propval);
+    setDebugInfo(propval);
   }
 
   /**
@@ -400,7 +410,7 @@ class AboutWindow : adw.window.Window
   */
   @property void debugInfoFilename(string propval)
   {
-    return setDebugInfoFilename(propval);
+    setDebugInfoFilename(propval);
   }
 
   /**
@@ -437,7 +447,7 @@ class AboutWindow : adw.window.Window
   */
   @property void developerName(string propval)
   {
-    return setDeveloperName(propval);
+    setDeveloperName(propval);
   }
 
   /**
@@ -460,7 +470,7 @@ class AboutWindow : adw.window.Window
   */
   @property void issueUrl(string propval)
   {
-    return setIssueUrl(propval);
+    setIssueUrl(propval);
   }
 
   /**
@@ -507,7 +517,7 @@ class AboutWindow : adw.window.Window
   */
   @property void license(string propval)
   {
-    return setLicense(propval);
+    setLicense(propval);
   }
 
   /**
@@ -560,7 +570,7 @@ class AboutWindow : adw.window.Window
   */
   @property void licenseType(gtk.types.License propval)
   {
-    return setLicenseType(propval);
+    setLicenseType(propval);
   }
 
   /**
@@ -629,7 +639,7 @@ class AboutWindow : adw.window.Window
   */
   @property void releaseNotes(string propval)
   {
-    return setReleaseNotes(propval);
+    setReleaseNotes(propval);
   }
 
   /**
@@ -670,7 +680,7 @@ class AboutWindow : adw.window.Window
   */
   @property void releaseNotesVersion(string propval)
   {
-    return setReleaseNotesVersion(propval);
+    setReleaseNotesVersion(propval);
   }
 
   /**
@@ -693,7 +703,7 @@ class AboutWindow : adw.window.Window
   */
   @property void supportUrl(string propval)
   {
-    return setSupportUrl(propval);
+    setSupportUrl(propval);
   }
 
   /**
@@ -750,7 +760,7 @@ class AboutWindow : adw.window.Window
   */
   @property void translatorCredits(string propval)
   {
-    return setTranslatorCredits(propval);
+    setTranslatorCredits(propval);
   }
 
   /**
@@ -779,7 +789,7 @@ class AboutWindow : adw.window.Window
   */
   @property void version_(string propval)
   {
-    return setVersion(propval);
+    setVersion(propval);
   }
 
   /**
@@ -808,7 +818,7 @@ class AboutWindow : adw.window.Window
   */
   @property void website(string propval)
   {
-    return setWebsite(propval);
+    setWebsite(propval);
   }
 
   /**
@@ -1798,5 +1808,337 @@ class AboutWindow : adw.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-link", closure, after);
+  }
+}
+
+class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `applicationIcon` property.
+      Params:
+        propval = The name of the application icon.
+          
+          The icon is displayed at the top of the main page.
+      Returns: Builder instance for fluent chaining
+  */
+  T applicationIcon(string propval)
+  {
+    return setProperty("application-icon", propval);
+  }
+
+  /**
+      Set `applicationName` property.
+      Params:
+        propval = The name of the application.
+          
+          The name is displayed at the top of the main page.
+      Returns: Builder instance for fluent chaining
+  */
+  T applicationName(string propval)
+  {
+    return setProperty("application-name", propval);
+  }
+
+  /**
+      Set `comments` property.
+      Params:
+        propval = The comments about the application.
+          
+          Comments will be shown on the Details page, above links.
+          
+          Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
+          detailed. It can also contain links and Pango markup.
+      Returns: Builder instance for fluent chaining
+  */
+  T comments(string propval)
+  {
+    return setProperty("comments", propval);
+  }
+
+  /**
+      Set `copyright` property.
+      Params:
+        propval = The copyright information.
+          
+          This should be a short string of one or two lines, for example:
+          `© 2022 Example`.
+          
+          The copyright information will be displayed on the Legal page, above the
+          application license.
+          
+          [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
+          information for the application dependencies or other components.
+      Returns: Builder instance for fluent chaining
+  */
+  T copyright(string propval)
+  {
+    return setProperty("copyright", propval);
+  }
+
+  /**
+      Set `debugInfo` property.
+      Params:
+        propval = The debug information.
+          
+          Debug information will be shown on the Troubleshooting page. It's intended
+          to be attached to issue reports when reporting issues against the
+          application.
+          
+          [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
+          When saving, `property@AboutWindow:debug-info-filename` would be used as
+          the suggested filename.
+          
+          Debug information cannot contain markup or links.
+      Returns: Builder instance for fluent chaining
+  */
+  T debugInfo(string propval)
+  {
+    return setProperty("debug-info", propval);
+  }
+
+  /**
+      Set `debugInfoFilename` property.
+      Params:
+        propval = The debug information filename.
+          
+          It will be used as the suggested filename when saving debug information to
+          a file.
+          
+          See `property@AboutWindow:debug-info`.
+      Returns: Builder instance for fluent chaining
+  */
+  T debugInfoFilename(string propval)
+  {
+    return setProperty("debug-info-filename", propval);
+  }
+
+  /**
+      Set `developerName` property.
+      Params:
+        propval = The developer name.
+          
+          The developer name is displayed on the main page, under the application
+          name.
+          
+          If the application is developed by multiple people, the developer name can
+          be set to values like "AppName team", "AppName developers" or
+          "The AppName project", and the individual contributors can be listed on the
+          Credits page, with `property@AboutWindow:developers` and related
+          properties.
+      Returns: Builder instance for fluent chaining
+  */
+  T developerName(string propval)
+  {
+    return setProperty("developer-name", propval);
+  }
+
+  /**
+      Set `issueUrl` property.
+      Params:
+        propval = The URL for the application's issue tracker.
+          
+          The issue tracker link is displayed on the main page.
+      Returns: Builder instance for fluent chaining
+  */
+  T issueUrl(string propval)
+  {
+    return setProperty("issue-url", propval);
+  }
+
+  /**
+      Set `license` property.
+      Params:
+        propval = The license text.
+          
+          This can be used to set a custom text for the license if it can't be set
+          via `property@AboutWindow:license-type`.
+          
+          When set, `property@AboutWindow:license-type` will be set to
+          [gtk.types.License.Custom].
+          
+          The license text will be displayed on the Legal page, below the copyright
+          information.
+          
+          License text can contain Pango markup and links.
+          
+          [adw.about_window.AboutWindow.addLegalSection] can be used to add license
+          information for the application dependencies or other components.
+      Returns: Builder instance for fluent chaining
+  */
+  T license(string propval)
+  {
+    return setProperty("license", propval);
+  }
+
+  /**
+      Set `licenseType` property.
+      Params:
+        propval = The license type.
+          
+          Allows to set the application's license froma list of known licenses.
+          
+          If the application's license is not in the list,
+          `property@AboutWindow:license` can be used instead. The license type will
+          be automatically set to [gtk.types.License.Custom] in that case.
+          
+          If set to [gtk.types.License.Unknown], no information will be displayed.
+          
+          If the license type is different from [gtk.types.License.Custom].
+          `property@AboutWindow:license` will be cleared out.
+          
+          The license description will be displayed on the Legal page, below the
+          copyright information.
+          
+          [adw.about_window.AboutWindow.addLegalSection] can be used to add license
+          information for the application dependencies or other components.
+      Returns: Builder instance for fluent chaining
+  */
+  T licenseType(gtk.types.License propval)
+  {
+    return setProperty("license-type", propval);
+  }
+
+  /**
+      Set `releaseNotes` property.
+      Params:
+        propval = The release notes of the application.
+          
+          Release notes are displayed on the the What's New page.
+          
+          Release notes are formatted the same way as
+          [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
+          
+          The supported formatting options are:
+          
+          $(LIST
+            * Paragraph (`<p>`)
+            * Ordered list (`<ol>`), with list items (`<li>`)
+            * Unordered list (`<ul>`), with list items (`<li>`)
+          )
+            
+          Within paragraphs and list items, emphasis (`<em>`) and inline code
+          (`<code>`) text styles are supported. The emphasis is rendered in italic,
+          while inline code is shown in a monospaced font.
+          
+          Any text outside paragraphs or list items is ignored.
+          
+          Nested lists are not supported.
+          
+          [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
+          `property@AboutWindow:release-notes-version` of the property will be used
+          as the version; otherwise, `property@AboutWindow:version` is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T releaseNotes(string propval)
+  {
+    return setProperty("release-notes", propval);
+  }
+
+  /**
+      Set `releaseNotesVersion` property.
+      Params:
+        propval = The version described by the application's release notes.
+          
+          The release notes version is displayed on the What's New page, above the
+          release notes.
+          
+          If not set, `property@AboutWindow:version` will be used instead.
+          
+          For example, an application with the current version 2.0.2 might want to
+          keep the release notes from 2.0.0, and set the release notes version
+          accordingly.
+          
+          See `property@AboutWindow:release-notes`.
+      Returns: Builder instance for fluent chaining
+  */
+  T releaseNotesVersion(string propval)
+  {
+    return setProperty("release-notes-version", propval);
+  }
+
+  /**
+      Set `supportUrl` property.
+      Params:
+        propval = The URL of the application's support page.
+          
+          The support page link is displayed on the main page.
+      Returns: Builder instance for fluent chaining
+  */
+  T supportUrl(string propval)
+  {
+    return setProperty("support-url", propval);
+  }
+
+  /**
+      Set `translatorCredits` property.
+      Params:
+        propval = The translator credits string.
+          
+          It will be displayed on the Credits page.
+          
+          This string should be `"translator-credits"` or `"translator_credits"` and
+          should be marked as translatable.
+          
+          The string may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          $(LIST
+            * `property@AboutWindow:developers`
+            * `property@AboutWindow:designers`
+            * `property@AboutWindow:artists`
+            * `property@AboutWindow:documenters`
+            * [adw.about_window.AboutWindow.addCreditSection]
+            * [adw.about_window.AboutWindow.addAcknowledgementSection]
+          )
+      Returns: Builder instance for fluent chaining
+  */
+  T translatorCredits(string propval)
+  {
+    return setProperty("translator-credits", propval);
+  }
+
+  /**
+      Set `version_` property.
+      Params:
+        propval = The version of the application.
+          
+          The version is displayed on the main page.
+          
+          If `property@AboutWindow:release-notes-version` is not set, the version
+          will also be displayed above the release notes on the What's New page.
+      Returns: Builder instance for fluent chaining
+  */
+  T version_(string propval)
+  {
+    return setProperty("version", propval);
+  }
+
+  /**
+      Set `website` property.
+      Params:
+        propval = The URL of the application's website.
+          
+          Website is displayed on the Details page, below comments, or on the main
+          page if the Details page doesn't have any other content.
+          
+          Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
+      Returns: Builder instance for fluent chaining
+  */
+  T website(string propval)
+  {
+    return setProperty("website", propval);
+  }
+}
+
+/// Fluent builder for [adw.about_window.AboutWindow]
+final class AboutWindowGidBuilder : AboutWindowGidBuilderImpl!AboutWindowGidBuilder
+{
+  AboutWindow build()
+  {
+    return new AboutWindow(cast(void*)createGObject(AboutWindow._getGType), No.Take);
   }
 }

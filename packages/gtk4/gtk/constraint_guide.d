@@ -2,6 +2,7 @@
 module gtk.constraint_guide;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -49,6 +50,15 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   override ConstraintGuide self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.constraint_guide.ConstraintGuide]
+  Returns: New builder object
+  */
+  static ConstraintGuideGidBuilder builder()
+  {
+    return new ConstraintGuideGidBuilder;
   }
 
   /**
@@ -143,7 +153,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /**
@@ -202,7 +212,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   @property void strength(gtk.types.ConstraintStrength propval)
   {
-    return setStrength(propval);
+    setStrength(propval);
   }
 
   mixin ConstraintTargetT!();
@@ -347,5 +357,109 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   void setStrength(gtk.types.ConstraintStrength strength)
   {
     gtk_constraint_guide_set_strength(cast(GtkConstraintGuide*)this._cPtr, strength);
+  }
+}
+
+class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.constraint_target.ConstraintTargetGidBuilderImpl!T
+{
+
+  mixin ConstraintTargetGidBuilderT!();
+
+  /**
+      Set `maxHeight` property.
+      Params:
+        propval = The maximum height of the guide.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxHeight(int propval)
+  {
+    return setProperty("max-height", propval);
+  }
+
+  /**
+      Set `maxWidth` property.
+      Params:
+        propval = The maximum width of the guide.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxWidth(int propval)
+  {
+    return setProperty("max-width", propval);
+  }
+
+  /**
+      Set `minHeight` property.
+      Params:
+        propval = The minimum height of the guide.
+      Returns: Builder instance for fluent chaining
+  */
+  T minHeight(int propval)
+  {
+    return setProperty("min-height", propval);
+  }
+
+  /**
+      Set `minWidth` property.
+      Params:
+        propval = The minimum width of the guide.
+      Returns: Builder instance for fluent chaining
+  */
+  T minWidth(int propval)
+  {
+    return setProperty("min-width", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = A name that identifies the [gtk.constraint_guide.ConstraintGuide], for debugging.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `natHeight` property.
+      Params:
+        propval = The preferred, or natural, height of the guide.
+      Returns: Builder instance for fluent chaining
+  */
+  T natHeight(int propval)
+  {
+    return setProperty("nat-height", propval);
+  }
+
+  /**
+      Set `natWidth` property.
+      Params:
+        propval = The preferred, or natural, width of the guide.
+      Returns: Builder instance for fluent chaining
+  */
+  T natWidth(int propval)
+  {
+    return setProperty("nat-width", propval);
+  }
+
+  /**
+      Set `strength` property.
+      Params:
+        propval = The [gtk.types.ConstraintStrength] to be used for the constraint on
+          the natural size of the guide.
+      Returns: Builder instance for fluent chaining
+  */
+  T strength(gtk.types.ConstraintStrength propval)
+  {
+    return setProperty("strength", propval);
+  }
+}
+
+/// Fluent builder for [gtk.constraint_guide.ConstraintGuide]
+final class ConstraintGuideGidBuilder : ConstraintGuideGidBuilderImpl!ConstraintGuideGidBuilder
+{
+  ConstraintGuide build()
+  {
+    return new ConstraintGuide(cast(void*)createGObject(ConstraintGuide._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.day_millisecond;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.day_time_interval_scalar.DayTimeIntervalScalar]
+  Returns: New builder object
+  */
+  static DayTimeIntervalScalarGidBuilder builder()
+  {
+    return new DayTimeIntervalScalarGidBuilder;
+  }
+
   /** */
   this(arrow.day_millisecond.DayMillisecond value)
   {
@@ -53,5 +63,18 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
     _cretval = garrow_day_time_interval_scalar_get_value(cast(GArrowDayTimeIntervalScalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class DayTimeIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.day_time_interval_scalar.DayTimeIntervalScalar]
+final class DayTimeIntervalScalarGidBuilder : DayTimeIntervalScalarGidBuilderImpl!DayTimeIntervalScalarGidBuilder
+{
+  DayTimeIntervalScalar build()
+  {
+    return new DayTimeIntervalScalar(cast(void*)createGObject(DayTimeIntervalScalar._getGType), Yes.Take);
   }
 }

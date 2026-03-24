@@ -6,6 +6,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 
 /**
     The ATK interface provided by UI components
@@ -175,4 +176,8 @@ template ActionT()
     _retval = cast(bool)atk_action_set_description(cast(AtkAction*)this._cPtr, i, _desc);
     return _retval;
   }
+}
+
+template ActionGidBuilderT()
+{
 }

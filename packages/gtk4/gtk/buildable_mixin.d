@@ -3,6 +3,7 @@ module gtk.buildable_mixin;
 
 public import gtk.buildable_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -39,4 +40,8 @@ template BuildableT()
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
+}
+
+template BuildableGidBuilderT()
+{
 }

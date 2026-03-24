@@ -10,6 +10,7 @@ import gio.types;
 import glib.variant;
 import glib.variant_type;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -158,6 +159,15 @@ class MenuModel : gobject.object.ObjectWrap
   override MenuModel self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.menu_model.MenuModel]
+  Returns: New builder object
+  */
+  static MenuModelGidBuilder builder()
+  {
+    return new MenuModelGidBuilder;
   }
 
   /**
@@ -371,5 +381,18 @@ class MenuModel : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("items-changed", closure, after);
+  }
+}
+
+class MenuModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.menu_model.MenuModel]
+final class MenuModelGidBuilder : MenuModelGidBuilderImpl!MenuModelGidBuilder
+{
+  MenuModel build()
+  {
+    return new MenuModel(cast(void*)createGObject(MenuModel._getGType), No.Take);
   }
 }

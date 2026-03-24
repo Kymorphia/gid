@@ -4,6 +4,7 @@ module gtk.actionable_mixin;
 public import gtk.actionable_iface_proxy;
 public import gid.gid;
 public import glib.variant;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -35,7 +36,7 @@ template ActionableT()
   /** */
   @property void actionName(string propval)
   {
-    return setActionName(propval);
+    setActionName(propval);
   }
 
   /** */
@@ -149,5 +150,21 @@ template ActionableT()
   {
     const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     gtk_actionable_set_detailed_action_name(cast(GtkActionable*)this._cPtr, _detailedActionName);
+  }
+}
+
+template ActionableGidBuilderT()
+{
+
+  /** */
+  T actionName(string propval)
+  {
+    return setProperty("action-name", propval);
+  }
+
+  /** */
+  T actionTarget(glib.variant.Variant propval)
+  {
+    return setProperty("action-target", propval);
   }
 }

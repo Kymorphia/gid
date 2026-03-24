@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.temporal_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class Date32DataType : arrow.temporal_data_type.TemporalDataType
@@ -36,11 +37,33 @@ class Date32DataType : arrow.temporal_data_type.TemporalDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.date32_data_type.Date32DataType]
+  Returns: New builder object
+  */
+  static Date32DataTypeGidBuilder builder()
+  {
+    return new Date32DataTypeGidBuilder;
+  }
+
   /** */
   this()
   {
     GArrowDate32DataType* _cretval;
     _cretval = garrow_date32_data_type_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class Date32DataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.date32_data_type.Date32DataType]
+final class Date32DataTypeGidBuilder : Date32DataTypeGidBuilderImpl!Date32DataTypeGidBuilder
+{
+  Date32DataType build()
+  {
+    return new Date32DataType(cast(void*)createGObject(Date32DataType._getGType), Yes.Take);
   }
 }

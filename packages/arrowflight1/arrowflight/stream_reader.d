@@ -6,6 +6,7 @@ import arrowflight.c.types;
 import arrowflight.record_batch_reader;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
@@ -34,5 +35,27 @@ class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
   override StreamReader self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.stream_reader.StreamReader]
+  Returns: New builder object
+  */
+  static StreamReaderGidBuilder builder()
+  {
+    return new StreamReaderGidBuilder;
+  }
+}
+
+class StreamReaderGidBuilderImpl(T) : arrowflight.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.stream_reader.StreamReader]
+final class StreamReaderGidBuilder : StreamReaderGidBuilderImpl!StreamReaderGidBuilder
+{
+  StreamReader build()
+  {
+    return new StreamReader(cast(void*)createGObject(StreamReader._getGType), No.Take);
   }
 }

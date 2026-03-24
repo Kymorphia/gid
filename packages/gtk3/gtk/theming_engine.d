@@ -4,6 +4,7 @@ module gtk.theming_engine;
 import gdk.rgba;
 import gdk.screen;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import gtk.border;
@@ -50,6 +51,30 @@ class ThemingEngine : gobject.object.ObjectWrap
   override ThemingEngine self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.theming_engine.ThemingEngine]
+  Returns: New builder object
+  */
+  static ThemingEngineGidBuilder builder()
+  {
+    return new ThemingEngineGidBuilder;
+  }
+
+  /**
+      Get `name` property.
+      Returns: The theming engine name, this name will be used when registering
+        custom properties, for a theming engine named "Clearlooks" registering
+        a "glossy" custom property, it could be referenced in the CSS file as
+        
+        ```
+        -Clearlooks-glossy: true;
+        ```
+  */
+  @property string name()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /**
@@ -334,5 +359,35 @@ class ThemingEngine : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gtk_theming_engine_state_is_running(cast(GtkThemingEngine*)this._cPtr, state, cast(double*)&progress);
     return _retval;
+  }
+}
+
+class ThemingEngineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The theming engine name, this name will be used when registering
+          custom properties, for a theming engine named "Clearlooks" registering
+          a "glossy" custom property, it could be referenced in the CSS file as
+          
+          ```
+          -Clearlooks-glossy: true;
+          ```
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.theming_engine.ThemingEngine]
+final class ThemingEngineGidBuilder : ThemingEngineGidBuilderImpl!ThemingEngineGidBuilder
+{
+  ThemingEngine build()
+  {
+    return new ThemingEngine(cast(void*)createGObject(ThemingEngine._getGType), No.Take);
   }
 }

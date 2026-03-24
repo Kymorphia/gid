@@ -7,6 +7,7 @@ public import atk.c.types;
 public import atk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 
 /**
     The ATK Interface provided by UI components that represent a top-level window.
@@ -361,4 +362,8 @@ template WindowT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("restore", closure, after);
   }
+}
+
+template WindowGidBuilderT()
+{
 }

@@ -2,6 +2,7 @@
 module soup.logger;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -99,6 +100,15 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /**
+  Get builder for [soup.logger.Logger]
+  Returns: New builder object
+  */
+  static LoggerGidBuilder builder()
+  {
+    return new LoggerGidBuilder;
+  }
+
+  /**
       Get `level` property.
       Returns: The level of logging output.
   */
@@ -137,7 +147,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   @property void maxBodySize(int propval)
   {
-    return setMaxBodySize(propval);
+    setMaxBodySize(propval);
   }
 
   mixin SessionFeatureT!();
@@ -260,5 +270,44 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
     auto _responseFilter = responseFilter ? freezeDelegate(cast(void*)&responseFilter) : null;
     GDestroyNotify _responseFilterDestroyCB = responseFilter ? &thawDelegate : null;
     soup_logger_set_response_filter(cast(SoupLogger*)this._cPtr, _responseFilterCB, _responseFilter, _responseFilterDestroyCB);
+  }
+}
+
+class LoggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
+{
+
+  mixin SessionFeatureGidBuilderT!();
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of logging output.
+      Returns: Builder instance for fluent chaining
+  */
+  T level(soup.types.LoggerLogLevel propval)
+  {
+    return setProperty("level", propval);
+  }
+
+  /**
+      Set `maxBodySize` property.
+      Params:
+        propval = If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
+          the maximum number of bytes of the body that will be logged.
+          (-1 means "no limit".)
+      Returns: Builder instance for fluent chaining
+  */
+  T maxBodySize(int propval)
+  {
+    return setProperty("max-body-size", propval);
+  }
+}
+
+/// Fluent builder for [soup.logger.Logger]
+final class LoggerGidBuilder : LoggerGidBuilderImpl!LoggerGidBuilder
+{
+  Logger build()
+  {
+    return new Logger(cast(void*)createGObject(Logger._getGType), Yes.Take);
   }
 }

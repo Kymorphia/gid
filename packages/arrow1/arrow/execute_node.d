@@ -3,9 +3,11 @@ module arrow.execute_node;
 
 import arrow.c.functions;
 import arrow.c.types;
+import arrow.execute_node_options;
 import arrow.schema;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -37,6 +39,21 @@ class ExecuteNode : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrow.execute_node.ExecuteNode]
+  Returns: New builder object
+  */
+  static ExecuteNodeGidBuilder builder()
+  {
+    return new ExecuteNodeGidBuilder;
+  }
+
+  /** */
+  @property arrow.execute_node_options.ExecuteNodeOptions options()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.execute_node_options.ExecuteNodeOptions)("options");
+  }
+
   /** */
   string getKindName()
   {
@@ -53,5 +70,30 @@ class ExecuteNode : gobject.object.ObjectWrap
     _cretval = garrow_execute_node_get_output_schema(cast(GArrowExecuteNode*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class ExecuteNodeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T node(void* propval)
+  {
+    return setProperty("node", propval);
+  }
+
+  /** */
+  T options(arrow.execute_node_options.ExecuteNodeOptions propval)
+  {
+    return setProperty("options", propval);
+  }
+}
+
+/// Fluent builder for [arrow.execute_node.ExecuteNode]
+final class ExecuteNodeGidBuilder : ExecuteNodeGidBuilderImpl!ExecuteNodeGidBuilder
+{
+  ExecuteNode build()
+  {
+    return new ExecuteNode(cast(void*)createGObject(ExecuteNode._getGType), No.Take);
   }
 }

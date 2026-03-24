@@ -2,6 +2,8 @@
 module soup.hstsenforcer_db;
 
 import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
 import soup.c.functions;
 import soup.c.types;
 import soup.hstsenforcer;
@@ -44,6 +46,24 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
   }
 
   /**
+  Get builder for [soup.hstsenforcer_db.HSTSEnforcerDB]
+  Returns: New builder object
+  */
+  static HSTSEnforcerDBGidBuilder builder()
+  {
+    return new HSTSEnforcerDBGidBuilder;
+  }
+
+  /**
+      Get `filename` property.
+      Returns: The filename of the SQLite database where HSTS policies are stored.
+  */
+  @property string filename()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("filename");
+  }
+
+  /**
       Creates a #SoupHSTSEnforcerDB.
       
       filename will be read in during the initialization of a
@@ -63,5 +83,30 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = soup_hsts_enforcer_db_new(_filename);
     this(_cretval, Yes.Take);
+  }
+}
+
+class HSTSEnforcerDBGidBuilderImpl(T) : soup.hstsenforcer.HSTSEnforcerGidBuilderImpl!T
+{
+
+
+  /**
+      Set `filename` property.
+      Params:
+        propval = The filename of the SQLite database where HSTS policies are stored.
+      Returns: Builder instance for fluent chaining
+  */
+  T filename(string propval)
+  {
+    return setProperty("filename", propval);
+  }
+}
+
+/// Fluent builder for [soup.hstsenforcer_db.HSTSEnforcerDB]
+final class HSTSEnforcerDBGidBuilder : HSTSEnforcerDBGidBuilderImpl!HSTSEnforcerDBGidBuilder
+{
+  HSTSEnforcerDB build()
+  {
+    return new HSTSEnforcerDB(cast(void*)createGObject(HSTSEnforcerDB._getGType), Yes.Take);
   }
 }

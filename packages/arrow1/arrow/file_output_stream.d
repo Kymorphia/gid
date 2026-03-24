@@ -11,6 +11,7 @@ import arrow.writable;
 import arrow.writable_mixin;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class FileOutputStream : arrow.output_stream.OutputStream
@@ -41,6 +42,15 @@ class FileOutputStream : arrow.output_stream.OutputStream
     return this;
   }
 
+  /**
+  Get builder for [arrow.file_output_stream.FileOutputStream]
+  Returns: New builder object
+  */
+  static FileOutputStreamGidBuilder builder()
+  {
+    return new FileOutputStreamGidBuilder;
+  }
+
   /** */
   this(string path, bool append)
   {
@@ -51,5 +61,19 @@ class FileOutputStream : arrow.output_stream.OutputStream
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FileOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [arrow.file_output_stream.FileOutputStream]
+final class FileOutputStreamGidBuilder : FileOutputStreamGidBuilderImpl!FileOutputStreamGidBuilder
+{
+  FileOutputStream build()
+  {
+    return new FileOutputStream(cast(void*)createGObject(FileOutputStream._getGType), Yes.Take);
   }
 }

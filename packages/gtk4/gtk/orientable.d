@@ -3,6 +3,7 @@ module gtk.orientable;
 
 public import gtk.orientable_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -56,4 +57,16 @@ interface Orientable
         orientation = the orientable’s new orientation
   */
   void setOrientation(gtk.types.Orientation orientation);
+}
+
+interface OrientableGidBuilderImpl(T)
+{
+
+  /**
+      Set `orientation` property.
+      Params:
+        propval = The orientation of the orientable.
+      Returns: Builder instance for fluent chaining
+  */
+  T orientation(gtk.types.Orientation propval);
 }

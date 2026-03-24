@@ -4,6 +4,7 @@ module gtk.color_chooser_dialog;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -47,6 +48,15 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
     return this;
   }
 
+  /**
+  Get builder for [gtk.color_chooser_dialog.ColorChooserDialog]
+  Returns: New builder object
+  */
+  static ColorChooserDialogGidBuilder builder()
+  {
+    return new ColorChooserDialogGidBuilder;
+  }
+
   /** */
   @property bool showEditor()
   {
@@ -75,5 +85,26 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
     const(char)* _title = title.toCString(No.Alloc);
     _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
+  }
+}
+
+class ColorChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.color_chooser.ColorChooserGidBuilderImpl!T
+{
+
+  mixin ColorChooserGidBuilderT!();
+
+  /** */
+  T showEditor(bool propval)
+  {
+    return setProperty("show-editor", propval);
+  }
+}
+
+/// Fluent builder for [gtk.color_chooser_dialog.ColorChooserDialog]
+final class ColorChooserDialogGidBuilder : ColorChooserDialogGidBuilderImpl!ColorChooserDialogGidBuilder
+{
+  ColorChooserDialog build()
+  {
+    return new ColorChooserDialog(cast(void*)createGObject(ColorChooserDialog._getGType), No.Take);
   }
 }

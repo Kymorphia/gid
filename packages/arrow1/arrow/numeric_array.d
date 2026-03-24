@@ -7,6 +7,7 @@ import arrow.primitive_array;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class NumericArray : arrow.primitive_array.PrimitiveArray
@@ -37,6 +38,15 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.numeric_array.NumericArray]
+  Returns: New builder object
+  */
+  static NumericArrayGidBuilder builder()
+  {
+    return new NumericArrayGidBuilder;
+  }
+
   /** */
   double mean()
   {
@@ -46,5 +56,18 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class NumericArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.numeric_array.NumericArray]
+final class NumericArrayGidBuilder : NumericArrayGidBuilderImpl!NumericArrayGidBuilder
+{
+  NumericArray build()
+  {
+    return new NumericArray(cast(void*)createGObject(NumericArray._getGType), No.Take);
   }
 }

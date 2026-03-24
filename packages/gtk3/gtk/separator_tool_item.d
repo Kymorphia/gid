@@ -4,6 +4,7 @@ module gtk.separator_tool_item;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.activatable;
 import gtk.activatable_mixin;
 import gtk.buildable;
@@ -57,6 +58,15 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
     return this;
   }
 
+  /**
+  Get builder for [gtk.separator_tool_item.SeparatorToolItem]
+  Returns: New builder object
+  */
+  static SeparatorToolItemGidBuilder builder()
+  {
+    return new SeparatorToolItemGidBuilder;
+  }
+
   alias draw = gtk.widget.Widget.draw;
 
   /** */
@@ -70,7 +80,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   /** */
   @property void draw(bool propval)
   {
-    return setDraw(propval);
+    setDraw(propval);
   }
 
   /**
@@ -107,5 +117,25 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   void setDraw(bool draw)
   {
     gtk_separator_tool_item_set_draw(cast(GtkSeparatorToolItem*)this._cPtr, draw);
+  }
+}
+
+class SeparatorToolItemGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!T
+{
+
+
+  /** */
+  T draw(bool propval)
+  {
+    return setProperty("draw", propval);
+  }
+}
+
+/// Fluent builder for [gtk.separator_tool_item.SeparatorToolItem]
+final class SeparatorToolItemGidBuilder : SeparatorToolItemGidBuilderImpl!SeparatorToolItemGidBuilder
+{
+  SeparatorToolItem build()
+  {
+    return new SeparatorToolItem(cast(void*)createGObject(SeparatorToolItem._getGType), No.Take);
   }
 }

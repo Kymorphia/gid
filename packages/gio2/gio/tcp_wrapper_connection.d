@@ -8,6 +8,7 @@ import gio.iostream;
 import gio.socket;
 import gio.tcp_connection;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +48,24 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   }
 
   /**
+  Get builder for [gio.tcp_wrapper_connection.TcpWrapperConnection]
+  Returns: New builder object
+  */
+  static TcpWrapperConnectionGidBuilder builder()
+  {
+    return new TcpWrapperConnectionGidBuilder;
+  }
+
+  /**
+      Get `baseIoStream` property.
+      Returns: The wrapped [gio.iostream.IOStream].
+  */
+  @property gio.iostream.IOStream baseIoStream()
+  {
+    return getBaseIoStream();
+  }
+
+  /**
       Wraps base_io_stream and socket together as a #GSocketConnection.
   
       Params:
@@ -71,5 +90,29 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
     _cretval = g_tcp_wrapper_connection_get_base_io_stream(cast(GTcpWrapperConnection*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class TcpWrapperConnectionGidBuilderImpl(T) : gio.tcp_connection.TcpConnectionGidBuilderImpl!T
+{
+
+  /**
+      Set `baseIoStream` property.
+      Params:
+        propval = The wrapped [gio.iostream.IOStream].
+      Returns: Builder instance for fluent chaining
+  */
+  T baseIoStream(gio.iostream.IOStream propval)
+  {
+    return setProperty("base-io-stream", propval);
+  }
+}
+
+/// Fluent builder for [gio.tcp_wrapper_connection.TcpWrapperConnection]
+final class TcpWrapperConnectionGidBuilder : TcpWrapperConnectionGidBuilderImpl!TcpWrapperConnectionGidBuilder
+{
+  TcpWrapperConnection build()
+  {
+    return new TcpWrapperConnection(cast(void*)createGObject(TcpWrapperConnection._getGType), Yes.Take);
   }
 }

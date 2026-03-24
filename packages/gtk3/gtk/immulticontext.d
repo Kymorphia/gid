@@ -2,6 +2,7 @@
 module gtk.immulticontext;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.imcontext;
@@ -35,6 +36,15 @@ class IMMulticontext : gtk.imcontext.IMContext
   override IMMulticontext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.immulticontext.IMMulticontext]
+  Returns: New builder object
+  */
+  static IMMulticontextGidBuilder builder()
+  {
+    return new IMMulticontextGidBuilder;
   }
 
   /**
@@ -91,5 +101,18 @@ class IMMulticontext : gtk.imcontext.IMContext
   {
     const(char)* _contextId = contextId.toCString(No.Alloc);
     gtk_im_multicontext_set_context_id(cast(GtkIMMulticontext*)this._cPtr, _contextId);
+  }
+}
+
+class IMMulticontextGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.immulticontext.IMMulticontext]
+final class IMMulticontextGidBuilder : IMMulticontextGidBuilderImpl!IMMulticontextGidBuilder
+{
+  IMMulticontext build()
+  {
+    return new IMMulticontext(cast(void*)createGObject(IMMulticontext._getGType), Yes.Take);
   }
 }

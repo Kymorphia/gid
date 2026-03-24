@@ -11,6 +11,7 @@ import atk.object;
 import atk.text;
 import atk.text_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -45,10 +46,36 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
     return this;
   }
 
+  /**
+  Get builder for [gtk.entry_accessible.EntryAccessible]
+  Returns: New builder object
+  */
+  static EntryAccessibleGidBuilder builder()
+  {
+    return new EntryAccessibleGidBuilder;
+  }
+
   mixin ActionT!();
   mixin EditableTextT!();
   mixin TextT!();
   alias getDescription = atk.object.ObjectWrap.getDescription;
   alias getName = atk.object.ObjectWrap.getName;
   alias setDescription = atk.object.ObjectWrap.setDescription;
+}
+
+class EntryAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.editable_text.EditableTextGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+  mixin EditableTextGidBuilderT!();
+  mixin TextGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.entry_accessible.EntryAccessible]
+final class EntryAccessibleGidBuilder : EntryAccessibleGidBuilderImpl!EntryAccessibleGidBuilder
+{
+  EntryAccessible build()
+  {
+    return new EntryAccessible(cast(void*)createGObject(EntryAccessible._getGType), No.Take);
+  }
 }

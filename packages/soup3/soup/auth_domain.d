@@ -2,6 +2,7 @@
 module soup.auth_domain;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -53,6 +54,15 @@ class AuthDomain : gobject.object.ObjectWrap
   override AuthDomain self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.auth_domain.AuthDomain]
+  Returns: New builder object
+  */
+  static AuthDomainGidBuilder builder()
+  {
+    return new AuthDomainGidBuilder;
   }
 
   /**
@@ -129,6 +139,24 @@ class AuthDomain : gobject.object.ObjectWrap
   @property void genericAuthData(void* propval)
   {
     gobject.object.ObjectWrap.setProperty!(void*)("generic-auth-data", propval);
+  }
+
+  /**
+      Get `proxy` property.
+      Returns: Whether or not this is a proxy auth domain.
+  */
+  @property bool proxy()
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("proxy");
+  }
+
+  /**
+      Get `realm` property.
+      Returns: The realm of this auth domain.
+  */
+  @property string realm()
+  {
+    return getRealm();
   }
 
   /**
@@ -341,5 +369,84 @@ class AuthDomain : gobject.object.ObjectWrap
     auto _authCallback = authCallback ? freezeDelegate(cast(void*)&authCallback) : null;
     GDestroyNotify _authCallbackDestroyCB = authCallback ? &thawDelegate : null;
     soup_auth_domain_set_generic_auth_callback(cast(SoupAuthDomain*)this._cPtr, _authCallbackCB, _authCallback, _authCallbackDestroyCB);
+  }
+}
+
+class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `filter` property.
+      Params:
+        propval = The `callback@AuthDomainFilter` for the domain.
+      Returns: Builder instance for fluent chaining
+  */
+  T filter(soup.types.AuthDomainFilter propval)
+  {
+    return setProperty("filter", propval);
+  }
+
+  /**
+      Set `filterData` property.
+      Params:
+        propval = Data to pass to the `callback@AuthDomainFilter`.
+      Returns: Builder instance for fluent chaining
+  */
+  T filterData(void* propval)
+  {
+    return setProperty("filter-data", propval);
+  }
+
+  /**
+      Set `genericAuthCallback` property.
+      Params:
+        propval = The `callback@AuthDomainGenericAuthCallback`.
+      Returns: Builder instance for fluent chaining
+  */
+  T genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval)
+  {
+    return setProperty("generic-auth-callback", propval);
+  }
+
+  /**
+      Set `genericAuthData` property.
+      Params:
+        propval = The data to pass to the `callback@AuthDomainGenericAuthCallback`.
+      Returns: Builder instance for fluent chaining
+  */
+  T genericAuthData(void* propval)
+  {
+    return setProperty("generic-auth-data", propval);
+  }
+
+  /**
+      Set `proxy` property.
+      Params:
+        propval = Whether or not this is a proxy auth domain.
+      Returns: Builder instance for fluent chaining
+  */
+  T proxy(bool propval)
+  {
+    return setProperty("proxy", propval);
+  }
+
+  /**
+      Set `realm` property.
+      Params:
+        propval = The realm of this auth domain.
+      Returns: Builder instance for fluent chaining
+  */
+  T realm(string propval)
+  {
+    return setProperty("realm", propval);
+  }
+}
+
+/// Fluent builder for [soup.auth_domain.AuthDomain]
+final class AuthDomainGidBuilder : AuthDomainGidBuilderImpl!AuthDomainGidBuilder
+{
+  AuthDomain build()
+  {
+    return new AuthDomain(cast(void*)createGObject(AuthDomain._getGType), No.Take);
   }
 }

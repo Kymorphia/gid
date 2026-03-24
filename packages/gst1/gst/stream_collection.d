@@ -3,6 +3,7 @@ module gst.stream_collection;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 import gst.c.functions;
@@ -55,6 +56,15 @@ class StreamCollection : gst.object.ObjectWrap
   override StreamCollection self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.stream_collection.StreamCollection]
+  Returns: New builder object
+  */
+  static StreamCollectionGidBuilder builder()
+  {
+    return new StreamCollectionGidBuilder;
   }
 
   /**
@@ -194,5 +204,29 @@ class StreamCollection : gst.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stream-notify"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class StreamCollectionGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `upstreamId` property.
+      Params:
+        propval = stream-id
+      Returns: Builder instance for fluent chaining
+  */
+  T upstreamId(string propval)
+  {
+    return setProperty("upstream-id", propval);
+  }
+}
+
+/// Fluent builder for [gst.stream_collection.StreamCollection]
+final class StreamCollectionGidBuilder : StreamCollectionGidBuilderImpl!StreamCollectionGidBuilder
+{
+  StreamCollection build()
+  {
+    return new StreamCollection(cast(void*)createGObject(StreamCollection._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A basic encoder/decoder filter for the MIME encodings.
@@ -39,6 +40,15 @@ class FilterBasic : gmime.filter.Filter
   }
 
   /**
+  Get builder for [gmime.filter_basic.FilterBasic]
+  Returns: New builder object
+  */
+  static FilterBasicGidBuilder builder()
+  {
+    return new FilterBasicGidBuilder;
+  }
+
+  /**
       Creates a new basic filter for encoding.
   
       Params:
@@ -51,5 +61,18 @@ class FilterBasic : gmime.filter.Filter
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_basic_new(encoding, encode);
     this(_cretval, Yes.Take);
+  }
+}
+
+class FilterBasicGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_basic.FilterBasic]
+final class FilterBasicGidBuilder : FilterBasicGidBuilderImpl!FilterBasicGidBuilder
+{
+  FilterBasic build()
+  {
+    return new FilterBasic(cast(void*)createGObject(FilterBasic._getGType), Yes.Take);
   }
 }

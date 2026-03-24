@@ -8,6 +8,7 @@ import atk.component_mixin;
 import atk.image;
 import atk.image_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.toggle_button_accessible;
@@ -40,5 +41,28 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
   override RadioButtonAccessible self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.radio_button_accessible.RadioButtonAccessible]
+  Returns: New builder object
+  */
+  static RadioButtonAccessibleGidBuilder builder()
+  {
+    return new RadioButtonAccessibleGidBuilder;
+  }
+}
+
+class RadioButtonAccessibleGidBuilderImpl(T) : gtk.toggle_button_accessible.ToggleButtonAccessibleGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.radio_button_accessible.RadioButtonAccessible]
+final class RadioButtonAccessibleGidBuilder : RadioButtonAccessibleGidBuilderImpl!RadioButtonAccessibleGidBuilder
+{
+  RadioButtonAccessible build()
+  {
+    return new RadioButtonAccessible(cast(void*)createGObject(RadioButtonAccessible._getGType), No.Take);
   }
 }

@@ -3,6 +3,7 @@ module gsttag.tag_xmp_writer;
 
 public import gsttag.tag_xmp_writer_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gst.buffer;
 import gst.tag_list;
 import gsttag.c.functions;
@@ -67,4 +68,8 @@ interface TagXmpWriter
 
   /** */
   gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList taglist, bool readOnly);
+}
+
+interface TagXmpWriterGidBuilderImpl(T)
+{
 }

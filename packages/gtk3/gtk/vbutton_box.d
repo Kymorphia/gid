@@ -4,6 +4,7 @@ module gtk.vbutton_box;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.button_box;
@@ -43,6 +44,15 @@ class VButtonBox : gtk.button_box.ButtonBox
   }
 
   /**
+  Get builder for [gtk.vbutton_box.VButtonBox]
+  Returns: New builder object
+  */
+  static VButtonBoxGidBuilder builder()
+  {
+    return new VButtonBoxGidBuilder;
+  }
+
+  /**
       Creates a new vertical button box.
       Returns: a new button box #GtkWidget.
   
@@ -53,5 +63,19 @@ class VButtonBox : gtk.button_box.ButtonBox
     GtkWidget* _cretval;
     _cretval = gtk_vbutton_box_new();
     this(_cretval, No.Take);
+  }
+}
+
+class VButtonBoxGidBuilderImpl(T) : gtk.button_box.ButtonBoxGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.vbutton_box.VButtonBox]
+final class VButtonBoxGidBuilder : VButtonBoxGidBuilderImpl!VButtonBoxGidBuilder
+{
+  VButtonBox build()
+  {
+    return new VButtonBox(cast(void*)createGObject(VButtonBox._getGType), No.Take);
   }
 }

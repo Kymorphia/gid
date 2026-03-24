@@ -2,6 +2,7 @@
 module gstpbutils.discoverer_container_info;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.tag_list;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
@@ -39,6 +40,15 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
     return this;
   }
 
+  /**
+  Get builder for [gstpbutils.discoverer_container_info.DiscovererContainerInfo]
+  Returns: New builder object
+  */
+  static DiscovererContainerInfoGidBuilder builder()
+  {
+    return new DiscovererContainerInfoGidBuilder;
+  }
+
   /** */
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams()
   {
@@ -55,5 +65,18 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
     _cretval = gst_discoverer_container_info_get_tags(cast(const(GstDiscovererContainerInfo)*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+}
+
+class DiscovererContainerInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.discoverer_container_info.DiscovererContainerInfo]
+final class DiscovererContainerInfoGidBuilder : DiscovererContainerInfoGidBuilderImpl!DiscovererContainerInfoGidBuilder
+{
+  DiscovererContainerInfo build()
+  {
+    return new DiscovererContainerInfo(cast(void*)createGObject(DiscovererContainerInfo._getGType), No.Take);
   }
 }

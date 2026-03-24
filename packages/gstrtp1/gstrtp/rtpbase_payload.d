@@ -3,6 +3,7 @@ module gstrtp.rtpbase_payload;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gst.buffer;
 import gst.buffer_list;
@@ -43,6 +44,15 @@ class RTPBasePayload : gst.element.Element
   override RTPBasePayload self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstrtp.rtpbase_payload.RTPBasePayload]
+  Returns: New builder object
+  */
+  static RTPBasePayloadGidBuilder builder()
+  {
+    return new RTPBasePayloadGidBuilder;
   }
 
   /**
@@ -616,5 +626,157 @@ class RTPBasePayload : gst.element.Element
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-extension", closure, after);
+  }
+}
+
+class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /**
+      Set `autoHeaderExtension` property.
+      Params:
+        propval = If enabled, the payloader will automatically try to enable all the
+          RTP header extensions provided in the src caps, saving the application
+          the need to handle these extensions manually using the
+          GstRTPBasePayload::request-extension: signal.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoHeaderExtension(bool propval)
+  {
+    return setProperty("auto-header-extension", propval);
+  }
+
+  /** */
+  T maxPtime(long propval)
+  {
+    return setProperty("max-ptime", propval);
+  }
+
+  /**
+      Set `minPtime` property.
+      Params:
+        propval = Minimum duration of the packet data in ns (can't go above MTU)
+      Returns: Builder instance for fluent chaining
+  */
+  T minPtime(long propval)
+  {
+    return setProperty("min-ptime", propval);
+  }
+
+  /** */
+  T mtu(uint propval)
+  {
+    return setProperty("mtu", propval);
+  }
+
+  /**
+      Set `onvifNoRateControl` property.
+      Params:
+        propval = Make the payloader timestamp packets according to the Rate-Control=no
+          behaviour specified in the ONVIF replay spec.
+      Returns: Builder instance for fluent chaining
+  */
+  T onvifNoRateControl(bool propval)
+  {
+    return setProperty("onvif-no-rate-control", propval);
+  }
+
+  /**
+      Set `perfectRtptime` property.
+      Params:
+        propval = Try to use the offset fields to generate perfect RTP timestamps. When this
+          option is disabled, RTP timestamps are generated from GST_BUFFER_PTS of
+          each payloaded buffer. The PTSes of buffers may not necessarily increment
+          with the amount of data in each input buffer, consider e.g. the case where
+          the buffer arrives from a network which means that the PTS is unrelated to
+          the amount of data. Because the RTP timestamps are generated from
+          GST_BUFFER_PTS this can result in RTP timestamps that also don't increment
+          with the amount of data in the payloaded packet. To circumvent this it is
+          possible to set the perfect rtptime option enabled. When this option is
+          enabled the payloader will increment the RTP timestamps based on
+          GST_BUFFER_OFFSET which relates to the amount of data in each packet
+          rather than the GST_BUFFER_PTS of each buffer and therefore the RTP
+          timestamps will more closely correlate with the amount of data in each
+          buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
+          timestamps for audio streams.
+      Returns: Builder instance for fluent chaining
+  */
+  T perfectRtptime(bool propval)
+  {
+    return setProperty("perfect-rtptime", propval);
+  }
+
+  /** */
+  T pt(uint propval)
+  {
+    return setProperty("pt", propval);
+  }
+
+  /**
+      Set `ptimeMultiple` property.
+      Params:
+        propval = Force buffers to be multiples of this duration in ns (0 disables)
+      Returns: Builder instance for fluent chaining
+  */
+  T ptimeMultiple(long propval)
+  {
+    return setProperty("ptime-multiple", propval);
+  }
+
+  /**
+      Set `scaleRtptime` property.
+      Params:
+        propval = Make the RTP packets' timestamps be scaled with the segment's rate
+          (corresponding to RTSP speed parameter). Disabling this property means
+          the timestamps will not be affected by the set delivery speed (RTSP speed).
+          
+          Example: A server wants to allow streaming a recorded video in double
+          speed but still have the timestamps correspond to the position in the
+          video. This is achieved by the client setting RTSP Speed to 2 while the
+          server has this property disabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T scaleRtptime(bool propval)
+  {
+    return setProperty("scale-rtptime", propval);
+  }
+
+  /** */
+  T seqnumOffset(int propval)
+  {
+    return setProperty("seqnum-offset", propval);
+  }
+
+  /**
+      Set `sourceInfo` property.
+      Params:
+        propval = Enable writing the CSRC field in allocated RTP header based on RTP source
+          information found in the input buffer's #GstRTPSourceMeta.
+      Returns: Builder instance for fluent chaining
+  */
+  T sourceInfo(bool propval)
+  {
+    return setProperty("source-info", propval);
+  }
+
+  /** */
+  T ssrc(uint propval)
+  {
+    return setProperty("ssrc", propval);
+  }
+
+  /** */
+  T timestampOffset(uint propval)
+  {
+    return setProperty("timestamp-offset", propval);
+  }
+}
+
+/// Fluent builder for [gstrtp.rtpbase_payload.RTPBasePayload]
+final class RTPBasePayloadGidBuilder : RTPBasePayloadGidBuilderImpl!RTPBasePayloadGidBuilder
+{
+  RTPBasePayload build()
+  {
+    return new RTPBasePayload(cast(void*)createGObject(RTPBasePayload._getGType), No.Take);
   }
 }

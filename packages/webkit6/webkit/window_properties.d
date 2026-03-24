@@ -3,6 +3,7 @@ module webkit.window_properties;
 
 import gdk.rectangle;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -93,6 +94,87 @@ class WindowProperties : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.window_properties.WindowProperties]
+  Returns: New builder object
+  */
+  static WindowPropertiesGidBuilder builder()
+  {
+    return new WindowPropertiesGidBuilder;
+  }
+
+  /**
+      Get `fullscreen` property.
+      Returns: Whether window will be displayed fullscreen.
+  */
+  @property bool fullscreen()
+  {
+    return getFullscreen();
+  }
+
+  /**
+      Get `geometry` property.
+      Returns: The size and position of the window on the screen.
+  */
+  @property gdk.rectangle.Rectangle geometry()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("geometry");
+  }
+
+  /**
+      Get `locationbarVisible` property.
+      Returns: Whether the locationbar should be visible for the window.
+  */
+  @property bool locationbarVisible()
+  {
+    return getLocationbarVisible();
+  }
+
+  /**
+      Get `menubarVisible` property.
+      Returns: Whether the menubar should be visible for the window.
+  */
+  @property bool menubarVisible()
+  {
+    return getMenubarVisible();
+  }
+
+  /**
+      Get `resizable` property.
+      Returns: Whether the window can be resized.
+  */
+  @property bool resizable()
+  {
+    return getResizable();
+  }
+
+  /**
+      Get `scrollbarsVisible` property.
+      Returns: Whether the scrollbars should be visible for the window.
+  */
+  @property bool scrollbarsVisible()
+  {
+    return getScrollbarsVisible();
+  }
+
+  /**
+      Get `statusbarVisible` property.
+      Returns: Whether the statusbar should be visible for the window.
+  */
+  @property bool statusbarVisible()
+  {
+    return getStatusbarVisible();
+  }
+
+  /**
+      Get `toolbarVisible` property.
+      Returns: Whether the toolbar should be visible for the window.
+  */
+  @property bool toolbarVisible()
+  {
+    return getToolbarVisible();
+  }
+
+  /**
       Get whether the window should be shown in fullscreen state or not.
       Returns: true if the window should be fullscreen or false otherwise.
   */
@@ -178,5 +260,106 @@ class WindowProperties : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_toolbar_visible(cast(WebKitWindowProperties*)this._cPtr);
     return _retval;
+  }
+}
+
+class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `fullscreen` property.
+      Params:
+        propval = Whether window will be displayed fullscreen.
+      Returns: Builder instance for fluent chaining
+  */
+  T fullscreen(bool propval)
+  {
+    return setProperty("fullscreen", propval);
+  }
+
+  /**
+      Set `geometry` property.
+      Params:
+        propval = The size and position of the window on the screen.
+      Returns: Builder instance for fluent chaining
+  */
+  T geometry(gdk.rectangle.Rectangle propval)
+  {
+    return setProperty("geometry", propval);
+  }
+
+  /**
+      Set `locationbarVisible` property.
+      Params:
+        propval = Whether the locationbar should be visible for the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T locationbarVisible(bool propval)
+  {
+    return setProperty("locationbar-visible", propval);
+  }
+
+  /**
+      Set `menubarVisible` property.
+      Params:
+        propval = Whether the menubar should be visible for the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T menubarVisible(bool propval)
+  {
+    return setProperty("menubar-visible", propval);
+  }
+
+  /**
+      Set `resizable` property.
+      Params:
+        propval = Whether the window can be resized.
+      Returns: Builder instance for fluent chaining
+  */
+  T resizable(bool propval)
+  {
+    return setProperty("resizable", propval);
+  }
+
+  /**
+      Set `scrollbarsVisible` property.
+      Params:
+        propval = Whether the scrollbars should be visible for the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollbarsVisible(bool propval)
+  {
+    return setProperty("scrollbars-visible", propval);
+  }
+
+  /**
+      Set `statusbarVisible` property.
+      Params:
+        propval = Whether the statusbar should be visible for the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T statusbarVisible(bool propval)
+  {
+    return setProperty("statusbar-visible", propval);
+  }
+
+  /**
+      Set `toolbarVisible` property.
+      Params:
+        propval = Whether the toolbar should be visible for the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T toolbarVisible(bool propval)
+  {
+    return setProperty("toolbar-visible", propval);
+  }
+}
+
+/// Fluent builder for [webkit.window_properties.WindowProperties]
+final class WindowPropertiesGidBuilder : WindowPropertiesGidBuilderImpl!WindowPropertiesGidBuilder
+{
+  WindowProperties build()
+  {
+    return new WindowProperties(cast(void*)createGObject(WindowProperties._getGType), No.Take);
   }
 }

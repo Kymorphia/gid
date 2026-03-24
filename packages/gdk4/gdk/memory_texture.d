@@ -13,6 +13,7 @@ import gio.icon_mixin;
 import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 import glib.bytes;
+import gobject.gid_builder;
 
 /**
     A [gdk.texture.Texture] representing image data in memory.
@@ -46,6 +47,15 @@ class MemoryTexture : gdk.texture.Texture
   }
 
   /**
+  Get builder for [gdk.memory_texture.MemoryTexture]
+  Returns: New builder object
+  */
+  static MemoryTextureGidBuilder builder()
+  {
+    return new MemoryTextureGidBuilder;
+  }
+
+  /**
       Creates a new texture for a blob of image data.
       
       The [glib.bytes.Bytes] must contain stride × height pixels
@@ -64,5 +74,19 @@ class MemoryTexture : gdk.texture.Texture
     GdkTexture* _cretval;
     _cretval = gdk_memory_texture_new(width, height, format, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, stride);
     this(_cretval, Yes.Take);
+  }
+}
+
+class MemoryTextureGidBuilderImpl(T) : gdk.texture.TextureGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gdk.memory_texture.MemoryTexture]
+final class MemoryTextureGidBuilder : MemoryTextureGidBuilderImpl!MemoryTextureGidBuilder
+{
+  MemoryTexture build()
+  {
+    return new MemoryTexture(cast(void*)createGObject(MemoryTexture._getGType), Yes.Take);
   }
 }

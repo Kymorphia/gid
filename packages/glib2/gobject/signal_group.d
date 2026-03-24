@@ -6,6 +6,7 @@ import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -61,6 +62,15 @@ class SignalGroup : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gobject.signal_group.SignalGroup]
+  Returns: New builder object
+  */
+  static SignalGroupGidBuilder builder()
+  {
+    return new SignalGroupGidBuilder;
+  }
+
+  /**
       Get `target` property.
       Returns: The target instance used when connecting signals.
   */
@@ -76,7 +86,16 @@ class SignalGroup : gobject.object.ObjectWrap
   */
   @property void target(gobject.object.ObjectWrap propval)
   {
-    return setTarget(propval);
+    setTarget(propval);
+  }
+
+  /**
+      Get `targetType` property.
+      Returns: The #GType of the target property.
+  */
+  @property gobject.types.GType targetType()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("target-type");
   }
 
   /**
@@ -247,5 +266,40 @@ class SignalGroup : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unbind", closure, after);
+  }
+}
+
+class SignalGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `target` property.
+      Params:
+        propval = The target instance used when connecting signals.
+      Returns: Builder instance for fluent chaining
+  */
+  T target(gobject.object.ObjectWrap propval)
+  {
+    return setProperty("target", propval);
+  }
+
+  /**
+      Set `targetType` property.
+      Params:
+        propval = The #GType of the target property.
+      Returns: Builder instance for fluent chaining
+  */
+  T targetType(gobject.types.GType propval)
+  {
+    return setProperty("target-type", propval);
+  }
+}
+
+/// Fluent builder for [gobject.signal_group.SignalGroup]
+final class SignalGroupGidBuilder : SignalGroupGidBuilderImpl!SignalGroupGidBuilder
+{
+  SignalGroup build()
+  {
+    return new SignalGroup(cast(void*)createGObject(SignalGroup._getGType), Yes.Take);
   }
 }

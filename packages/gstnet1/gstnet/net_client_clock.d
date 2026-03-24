@@ -2,6 +2,7 @@
 module gstnet.net_client_clock;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.bus;
 import gst.clock;
@@ -63,6 +64,15 @@ class NetClientClock : gst.system_clock.SystemClock
     return this;
   }
 
+  /**
+  Get builder for [gstnet.net_client_clock.NetClientClock]
+  Returns: New builder object
+  */
+  static NetClientClockGidBuilder builder()
+  {
+    return new NetClientClockGidBuilder;
+  }
+
   /** */
   @property string address()
   {
@@ -73,6 +83,12 @@ class NetClientClock : gst.system_clock.SystemClock
   @property void address(string propval)
   {
     gobject.object.ObjectWrap.setProperty!(string)("address", propval);
+  }
+
+  /** */
+  @property ulong baseTime()
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("base-time");
   }
 
   /** */
@@ -161,5 +177,60 @@ class NetClientClock : gst.system_clock.SystemClock
     const(char)* _remoteAddress = remoteAddress.toCString(No.Alloc);
     _cretval = gst_net_client_clock_new(_name, _remoteAddress, remotePort, baseTime);
     this(_cretval, Yes.Take);
+  }
+}
+
+class NetClientClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
+{
+
+  /** */
+  T address(string propval)
+  {
+    return setProperty("address", propval);
+  }
+
+  /** */
+  T baseTime(ulong propval)
+  {
+    return setProperty("base-time", propval);
+  }
+
+  /** */
+  T bus(gst.bus.Bus propval)
+  {
+    return setProperty("bus", propval);
+  }
+
+  /** */
+  T minimumUpdateInterval(ulong propval)
+  {
+    return setProperty("minimum-update-interval", propval);
+  }
+
+  /** */
+  T port(int propval)
+  {
+    return setProperty("port", propval);
+  }
+
+  /** */
+  T qosDscp(int propval)
+  {
+    return setProperty("qos-dscp", propval);
+  }
+
+  /** */
+  T roundTripLimit(ulong propval)
+  {
+    return setProperty("round-trip-limit", propval);
+  }
+}
+
+/// Fluent builder for [gstnet.net_client_clock.NetClientClock]
+final class NetClientClockGidBuilder : NetClientClockGidBuilderImpl!NetClientClockGidBuilder
+{
+  NetClientClock build()
+  {
+    return new NetClientClock(cast(void*)createGObject(NetClientClock._getGType), Yes.Take);
   }
 }

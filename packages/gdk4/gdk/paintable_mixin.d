@@ -8,6 +8,7 @@ public import gdk.snapshot;
 public import gdk.types;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -327,4 +328,8 @@ template PaintableT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("invalidate-size", closure, after);
   }
+}
+
+template PaintableGidBuilderT()
+{
 }

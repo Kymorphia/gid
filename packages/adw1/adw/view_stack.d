@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import adw.view_stack_page;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -101,6 +102,15 @@ class ViewStack : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.view_stack.ViewStack]
+  Returns: New builder object
+  */
+  static ViewStackGidBuilder builder()
+  {
+    return new ViewStackGidBuilder;
+  }
+
+  /**
       Get `hhomogeneous` property.
       Returns: Whether the stack is horizontally homogeneous.
         
@@ -128,7 +138,7 @@ class ViewStack : gtk.widget.Widget
   */
   @property void hhomogeneous(bool propval)
   {
-    return setHhomogeneous(propval);
+    setHhomogeneous(propval);
   }
 
   /**
@@ -172,7 +182,7 @@ class ViewStack : gtk.widget.Widget
   */
   @property void vhomogeneous(bool propval)
   {
-    return setVhomogeneous(propval);
+    setVhomogeneous(propval);
   }
 
   /**
@@ -191,7 +201,7 @@ class ViewStack : gtk.widget.Widget
   */
   @property void visibleChild(gtk.widget.Widget propval)
   {
-    return setVisibleChild(propval);
+    setVisibleChild(propval);
   }
 
   /**
@@ -214,7 +224,7 @@ class ViewStack : gtk.widget.Widget
   */
   @property void visibleChildName(string propval)
   {
-    return setVisibleChildName(propval);
+    setVisibleChildName(propval);
   }
 
   /**
@@ -469,5 +479,77 @@ class ViewStack : gtk.widget.Widget
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_view_stack_set_visible_child_name(cast(AdwViewStack*)this._cPtr, _name);
+  }
+}
+
+class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = Whether the stack is horizontally homogeneous.
+          
+          If the stack is horizontally homogeneous, it allocates the same width for
+          all children.
+          
+          If it's `FALSE`, the stack may change width when a different child becomes
+          visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T hhomogeneous(bool propval)
+  {
+    return setProperty("hhomogeneous", propval);
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = Whether the stack is vertically homogeneous.
+          
+          If the stack is vertically homogeneous, it allocates the same height for
+          all children.
+          
+          If it's `FALSE`, the stack may change height when a different child becomes
+          visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T vhomogeneous(bool propval)
+  {
+    return setProperty("vhomogeneous", propval);
+  }
+
+  /**
+      Set `visibleChild` property.
+      Params:
+        propval = The widget currently visible in the stack.
+      Returns: Builder instance for fluent chaining
+  */
+  T visibleChild(gtk.widget.Widget propval)
+  {
+    return setProperty("visible-child", propval);
+  }
+
+  /**
+      Set `visibleChildName` property.
+      Params:
+        propval = The name of the widget currently visible in the stack.
+          
+          See `property@ViewStack:visible-child`.
+      Returns: Builder instance for fluent chaining
+  */
+  T visibleChildName(string propval)
+  {
+    return setProperty("visible-child-name", propval);
+  }
+}
+
+/// Fluent builder for [adw.view_stack.ViewStack]
+final class ViewStackGidBuilder : ViewStackGidBuilderImpl!ViewStackGidBuilder
+{
+  ViewStack build()
+  {
+    return new ViewStack(cast(void*)createGObject(ViewStack._getGType), No.Take);
   }
 }

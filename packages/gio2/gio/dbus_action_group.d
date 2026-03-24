@@ -10,6 +10,7 @@ import gio.dbus_connection;
 import gio.remote_action_group;
 import gio.remote_action_group_mixin;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +48,15 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
     return this;
   }
 
+  /**
+  Get builder for [gio.dbus_action_group.DBusActionGroup]
+  Returns: New builder object
+  */
+  static DBusActionGroupGidBuilder builder()
+  {
+    return new DBusActionGroupGidBuilder;
+  }
+
   mixin ActionGroupT!();
   mixin RemoteActionGroupT!();
 
@@ -80,5 +90,21 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
     _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _busName, _objectPath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class DBusActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.remote_action_group.RemoteActionGroupGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+  mixin RemoteActionGroupGidBuilderT!();
+}
+
+/// Fluent builder for [gio.dbus_action_group.DBusActionGroup]
+final class DBusActionGroupGidBuilder : DBusActionGroupGidBuilderImpl!DBusActionGroupGidBuilder
+{
+  DBusActionGroup build()
+  {
+    return new DBusActionGroup(cast(void*)createGObject(DBusActionGroup._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module panel.session;
 import gid.gid;
 import glib.error;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -37,6 +38,15 @@ class Session : gobject.object.ObjectWrap
   override Session self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.session.Session]
+  Returns: New builder object
+  */
+  static SessionGidBuilder builder()
+  {
+    return new SessionGidBuilder;
   }
 
   /** */
@@ -154,5 +164,18 @@ class Session : gobject.object.ObjectWrap
     _cretval = panel_session_to_variant(cast(PanelSession*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [panel.session.Session]
+final class SessionGidBuilder : SessionGidBuilderImpl!SessionGidBuilder
+{
+  Session build()
+  {
+    return new Session(cast(void*)createGObject(Session._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.revealer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -66,6 +67,15 @@ class Revealer : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.revealer.Revealer]
+  Returns: New builder object
+  */
+  static RevealerGidBuilder builder()
+  {
+    return new RevealerGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -81,7 +91,7 @@ class Revealer : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -109,7 +119,7 @@ class Revealer : gtk.widget.Widget
   */
   @property void revealChild(bool propval)
   {
-    return setRevealChild(propval);
+    setRevealChild(propval);
   }
 
   /**
@@ -128,7 +138,7 @@ class Revealer : gtk.widget.Widget
   */
   @property void transitionDuration(uint propval)
   {
-    return setTransitionDuration(propval);
+    setTransitionDuration(propval);
   }
 
   /**
@@ -147,7 +157,7 @@ class Revealer : gtk.widget.Widget
   */
   @property void transitionType(gtk.types.RevealerTransitionType propval)
   {
-    return setTransitionType(propval);
+    setTransitionType(propval);
   }
 
   /**
@@ -276,5 +286,63 @@ class Revealer : gtk.widget.Widget
   void setTransitionType(gtk.types.RevealerTransitionType transition)
   {
     gtk_revealer_set_transition_type(cast(GtkRevealer*)this._cPtr, transition);
+  }
+}
+
+class RevealerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `revealChild` property.
+      Params:
+        propval = Whether the revealer should reveal the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T revealChild(bool propval)
+  {
+    return setProperty("reveal-child", propval);
+  }
+
+  /**
+      Set `transitionDuration` property.
+      Params:
+        propval = The animation duration, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  */
+  T transitionDuration(uint propval)
+  {
+    return setProperty("transition-duration", propval);
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = The type of animation used to transition.
+      Returns: Builder instance for fluent chaining
+  */
+  T transitionType(gtk.types.RevealerTransitionType propval)
+  {
+    return setProperty("transition-type", propval);
+  }
+}
+
+/// Fluent builder for [gtk.revealer.Revealer]
+final class RevealerGidBuilder : RevealerGidBuilderImpl!RevealerGidBuilder
+{
+  Revealer build()
+  {
+    return new Revealer(cast(void*)createGObject(Revealer._getGType), No.Take);
   }
 }

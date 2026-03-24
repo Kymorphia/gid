@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 interface File
@@ -30,4 +31,8 @@ interface File
 
   /** */
   long tell();
+}
+
+interface FileGidBuilderImpl(T)
+{
 }

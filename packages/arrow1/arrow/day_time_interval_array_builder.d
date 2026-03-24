@@ -8,6 +8,7 @@ import arrow.day_millisecond;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -36,6 +37,15 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   override DayTimeIntervalArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.day_time_interval_array_builder.DayTimeIntervalArrayBuilder]
+  Returns: New builder object
+  */
+  static DayTimeIntervalArrayBuilderGidBuilder builder()
+  {
+    return new DayTimeIntervalArrayBuilderGidBuilder;
   }
 
   /** */
@@ -92,5 +102,18 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class DayTimeIntervalArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.day_time_interval_array_builder.DayTimeIntervalArrayBuilder]
+final class DayTimeIntervalArrayBuilderGidBuilder : DayTimeIntervalArrayBuilderGidBuilderImpl!DayTimeIntervalArrayBuilderGidBuilder
+{
+  DayTimeIntervalArrayBuilder build()
+  {
+    return new DayTimeIntervalArrayBuilder(cast(void*)createGObject(DayTimeIntervalArrayBuilder._getGType), Yes.Take);
   }
 }

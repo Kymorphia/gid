@@ -2,6 +2,7 @@
 module gtk.scale;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -131,6 +132,15 @@ class Scale : gtk.range.Range
   }
 
   /**
+  Get builder for [gtk.scale.Scale]
+  Returns: New builder object
+  */
+  static ScaleGidBuilder builder()
+  {
+    return new ScaleGidBuilder;
+  }
+
+  /**
       Get `digits` property.
       Returns: The number of decimal places that are displayed in the value.
   */
@@ -146,7 +156,7 @@ class Scale : gtk.range.Range
   */
   @property void digits(int propval)
   {
-    return setDigits(propval);
+    setDigits(propval);
   }
 
   /**
@@ -165,7 +175,7 @@ class Scale : gtk.range.Range
   */
   @property void drawValue(bool propval)
   {
-    return setDrawValue(propval);
+    setDrawValue(propval);
   }
 
   /**
@@ -184,7 +194,7 @@ class Scale : gtk.range.Range
   */
   @property void hasOrigin(bool propval)
   {
-    return setHasOrigin(propval);
+    setHasOrigin(propval);
   }
 
   /**
@@ -203,7 +213,7 @@ class Scale : gtk.range.Range
   */
   @property void valuePos(gtk.types.PositionType propval)
   {
-    return setValuePos(propval);
+    setValuePos(propval);
   }
 
   /**
@@ -456,5 +466,63 @@ class Scale : gtk.range.Range
   void setValuePos(gtk.types.PositionType pos)
   {
     gtk_scale_set_value_pos(cast(GtkScale*)this._cPtr, pos);
+  }
+}
+
+class ScaleGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
+{
+
+
+  /**
+      Set `digits` property.
+      Params:
+        propval = The number of decimal places that are displayed in the value.
+      Returns: Builder instance for fluent chaining
+  */
+  T digits(int propval)
+  {
+    return setProperty("digits", propval);
+  }
+
+  /**
+      Set `drawValue` property.
+      Params:
+        propval = Whether the current value is displayed as a string next to the slider.
+      Returns: Builder instance for fluent chaining
+  */
+  T drawValue(bool propval)
+  {
+    return setProperty("draw-value", propval);
+  }
+
+  /**
+      Set `hasOrigin` property.
+      Params:
+        propval = Whether the scale has an origin.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasOrigin(bool propval)
+  {
+    return setProperty("has-origin", propval);
+  }
+
+  /**
+      Set `valuePos` property.
+      Params:
+        propval = The position in which the current value is displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T valuePos(gtk.types.PositionType propval)
+  {
+    return setProperty("value-pos", propval);
+  }
+}
+
+/// Fluent builder for [gtk.scale.Scale]
+final class ScaleGidBuilder : ScaleGidBuilderImpl!ScaleGidBuilder
+{
+  Scale build()
+  {
+    return new Scale(cast(void*)createGObject(Scale._getGType), No.Take);
   }
 }

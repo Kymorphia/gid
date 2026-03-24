@@ -3,6 +3,7 @@ module gtk.app_chooser_dialog;
 
 import gid.gid;
 import gio.file;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -77,6 +78,27 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   }
 
   /**
+  Get builder for [gtk.app_chooser_dialog.AppChooserDialog]
+  Returns: New builder object
+  */
+  static AppChooserDialogGidBuilder builder()
+  {
+    return new AppChooserDialogGidBuilder;
+  }
+
+  /**
+      Get `gfile` property.
+      Returns: The GFile used by the [gtk.app_chooser_dialog.AppChooserDialog].
+        
+        The dialog's [gtk.app_chooser_widget.AppChooserWidget] content type will
+        be guessed from the file, if present.
+  */
+  @property gio.file.File gfile()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.file.File)("gfile");
+  }
+
+  /**
       Get `heading` property.
       Returns: The text to show at the top of the dialog.
         
@@ -96,7 +118,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   */
   @property void heading(string propval)
   {
-    return setHeading(propval);
+    setHeading(propval);
   }
 
   mixin AppChooserT!();
@@ -186,5 +208,47 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   {
     const(char)* _heading = heading.toCString(No.Alloc);
     gtk_app_chooser_dialog_set_heading(cast(GtkAppChooserDialog*)this._cPtr, _heading);
+  }
+}
+
+class AppChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.app_chooser.AppChooserGidBuilderImpl!T
+{
+
+  mixin AppChooserGidBuilderT!();
+
+  /**
+      Set `gfile` property.
+      Params:
+        propval = The GFile used by the [gtk.app_chooser_dialog.AppChooserDialog].
+          
+          The dialog's [gtk.app_chooser_widget.AppChooserWidget] content type will
+          be guessed from the file, if present.
+      Returns: Builder instance for fluent chaining
+  */
+  T gfile(gio.file.File propval)
+  {
+    return setProperty("gfile", propval);
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The text to show at the top of the dialog.
+          
+          The string may contain Pango markup.
+      Returns: Builder instance for fluent chaining
+  */
+  T heading(string propval)
+  {
+    return setProperty("heading", propval);
+  }
+}
+
+/// Fluent builder for [gtk.app_chooser_dialog.AppChooserDialog]
+final class AppChooserDialogGidBuilder : AppChooserDialogGidBuilderImpl!AppChooserDialogGidBuilder
+{
+  AppChooserDialog build()
+  {
+    return new AppChooserDialog(cast(void*)createGObject(AppChooserDialog._getGType), No.Take);
   }
 }

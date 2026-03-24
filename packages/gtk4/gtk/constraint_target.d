@@ -3,6 +3,7 @@ module gtk.constraint_target;
 
 public import gtk.constraint_target_iface_proxy;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -22,4 +23,8 @@ interface ConstraintTarget
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_target_get_type != &gidSymbolNotFound ? gtk_constraint_target_get_type() : cast(GType)0;
   }
+}
+
+interface ConstraintTargetGidBuilderImpl(T)
+{
 }

@@ -2,6 +2,7 @@
 module gstallocators.fd_allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.allocator;
 import gst.memory;
 import gstallocators.c.functions;
@@ -40,6 +41,15 @@ class FdAllocator : gst.allocator.Allocator
   }
 
   /**
+  Get builder for [gstallocators.fd_allocator.FdAllocator]
+  Returns: New builder object
+  */
+  static FdAllocatorGidBuilder builder()
+  {
+    return new FdAllocatorGidBuilder;
+  }
+
+  /**
       Return a new fd allocator.
       Returns: a new fd allocator. Use [gst.object.ObjectWrap.unref] to
         release the allocator after usage
@@ -70,5 +80,18 @@ class FdAllocator : gst.allocator.Allocator
     _cretval = gst_fd_allocator_alloc(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class FdAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstallocators.fd_allocator.FdAllocator]
+final class FdAllocatorGidBuilder : FdAllocatorGidBuilderImpl!FdAllocatorGidBuilder
+{
+  FdAllocator build()
+  {
+    return new FdAllocator(cast(void*)createGObject(FdAllocator._getGType), Yes.Take);
   }
 }

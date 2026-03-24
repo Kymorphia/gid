@@ -2,6 +2,7 @@
 module gtk.rc_style;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -42,6 +43,15 @@ class RcStyle : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.rc_style.RcStyle]
+  Returns: New builder object
+  */
+  static RcStyleGidBuilder builder()
+  {
+    return new RcStyleGidBuilder;
+  }
+
+  /**
       Creates a new #GtkRcStyle with no fields set and
       a reference count of 1.
       Returns: the newly-created #GtkRcStyle
@@ -69,5 +79,18 @@ class RcStyle : gobject.object.ObjectWrap
     _cretval = gtk_rc_style_copy(cast(GtkRcStyle*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class RcStyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.rc_style.RcStyle]
+final class RcStyleGidBuilder : RcStyleGidBuilderImpl!RcStyleGidBuilder
+{
+  RcStyle build()
+  {
+    return new RcStyle(cast(void*)createGObject(RcStyle._getGType), Yes.Take);
   }
 }

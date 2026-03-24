@@ -3,6 +3,7 @@ module webkit.geolocation_manager;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -45,6 +46,15 @@ class GeolocationManager : gobject.object.ObjectWrap
   override GeolocationManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.geolocation_manager.GeolocationManager]
+  Returns: New builder object
+  */
+  static GeolocationManagerGidBuilder builder()
+  {
+    return new GeolocationManagerGidBuilder;
   }
 
   /**
@@ -176,5 +186,18 @@ class GeolocationManager : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stop", closure, after);
+  }
+}
+
+class GeolocationManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.geolocation_manager.GeolocationManager]
+final class GeolocationManagerGidBuilder : GeolocationManagerGidBuilderImpl!GeolocationManagerGidBuilder
+{
+  GeolocationManager build()
+  {
+    return new GeolocationManager(cast(void*)createGObject(GeolocationManager._getGType), No.Take);
   }
 }

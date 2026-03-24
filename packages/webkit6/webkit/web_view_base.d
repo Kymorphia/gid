@@ -2,6 +2,7 @@
 module webkit.web_view_base;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -40,5 +41,28 @@ class WebViewBase : gtk.widget.Widget
   override WebViewBase self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.web_view_base.WebViewBase]
+  Returns: New builder object
+  */
+  static WebViewBaseGidBuilder builder()
+  {
+    return new WebViewBaseGidBuilder;
+  }
+}
+
+class WebViewBaseGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [webkit.web_view_base.WebViewBase]
+final class WebViewBaseGidBuilder : WebViewBaseGidBuilderImpl!WebViewBaseGidBuilder
+{
+  WebViewBase build()
+  {
+    return new WebViewBase(cast(void*)createGObject(WebViewBase._getGType), No.Take);
   }
 }

@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.object;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class Multipart : gmime.object.ObjectWrap
   override Multipart self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.multipart.Multipart]
+  Returns: New builder object
+  */
+  static MultipartGidBuilder builder()
+  {
+    return new MultipartGidBuilder;
   }
 
   /**
@@ -315,5 +325,18 @@ class Multipart : gmime.object.ObjectWrap
   {
     const(char)* _prologue = prologue.toCString(No.Alloc);
     g_mime_multipart_set_prologue(cast(GMimeMultipart*)this._cPtr, _prologue);
+  }
+}
+
+class MultipartGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.multipart.Multipart]
+final class MultipartGidBuilder : MultipartGidBuilderImpl!MultipartGidBuilder
+{
+  Multipart build()
+  {
+    return new Multipart(cast(void*)createGObject(Multipart._getGType), Yes.Take);
   }
 }

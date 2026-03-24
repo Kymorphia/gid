@@ -12,6 +12,7 @@ import gda.types;
 import gid.gid;
 import glib.error;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -43,6 +44,15 @@ class ServerProvider : gobject.object.ObjectWrap
   override ServerProvider self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.server_provider.ServerProvider]
+  Returns: New builder object
+  */
+  static ServerProviderGidBuilder builder()
+  {
+    return new ServerProviderGidBuilder;
   }
 
   /** */
@@ -473,6 +483,19 @@ class ServerProvider : gobject.object.ObjectWrap
     _cretval = gda_server_provider_value_to_sql_string(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, from ? cast(GValue*)from._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class ServerProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.server_provider.ServerProvider]
+final class ServerProviderGidBuilder : ServerProviderGidBuilderImpl!ServerProviderGidBuilder
+{
+  ServerProvider build()
+  {
+    return new ServerProvider(cast(void*)createGObject(ServerProvider._getGType), No.Take);
   }
 }
 

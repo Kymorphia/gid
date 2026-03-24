@@ -2,6 +2,7 @@
 module gstpbutils.encoding_video_profile;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.caps;
 import gstpbutils.c.functions;
 import gstpbutils.c.types;
@@ -37,6 +38,15 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   override EncodingVideoProfile self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstpbutils.encoding_video_profile.EncodingVideoProfile]
+  Returns: New builder object
+  */
+  static EncodingVideoProfileGidBuilder builder()
+  {
+    return new EncodingVideoProfileGidBuilder;
   }
 
   /**
@@ -117,5 +127,18 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   void setVariableframerate(bool variableframerate)
   {
     gst_encoding_video_profile_set_variableframerate(cast(GstEncodingVideoProfile*)this._cPtr, variableframerate);
+  }
+}
+
+class EncodingVideoProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.EncodingProfileGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstpbutils.encoding_video_profile.EncodingVideoProfile]
+final class EncodingVideoProfileGidBuilder : EncodingVideoProfileGidBuilderImpl!EncodingVideoProfileGidBuilder
+{
+  EncodingVideoProfile build()
+  {
+    return new EncodingVideoProfile(cast(void*)createGObject(EncodingVideoProfile._getGType), Yes.Take);
   }
 }

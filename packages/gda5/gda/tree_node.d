@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -38,6 +39,15 @@ class TreeNode : gobject.object.ObjectWrap
   override TreeNode self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.tree_node.TreeNode]
+  Returns: New builder object
+  */
+  static TreeNodeGidBuilder builder()
+  {
+    return new TreeNodeGidBuilder;
   }
 
   /** */
@@ -382,6 +392,25 @@ class TreeNode : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("node-inserted", closure, after);
+  }
+}
+
+class TreeNodeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+}
+
+/// Fluent builder for [gda.tree_node.TreeNode]
+final class TreeNodeGidBuilder : TreeNodeGidBuilderImpl!TreeNodeGidBuilder
+{
+  TreeNode build()
+  {
+    return new TreeNode(cast(void*)createGObject(TreeNode._getGType), Yes.Take);
   }
 }
 

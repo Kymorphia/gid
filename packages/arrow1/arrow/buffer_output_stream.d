@@ -11,6 +11,7 @@ import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class BufferOutputStream : arrow.output_stream.OutputStream
@@ -41,11 +42,34 @@ class BufferOutputStream : arrow.output_stream.OutputStream
     return this;
   }
 
+  /**
+  Get builder for [arrow.buffer_output_stream.BufferOutputStream]
+  Returns: New builder object
+  */
+  static BufferOutputStreamGidBuilder builder()
+  {
+    return new BufferOutputStreamGidBuilder;
+  }
+
   /** */
   this(arrow.resizable_buffer.ResizableBuffer buffer)
   {
     GArrowBufferOutputStream* _cretval;
     _cretval = garrow_buffer_output_stream_new(buffer ? cast(GArrowResizableBuffer*)buffer._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class BufferOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [arrow.buffer_output_stream.BufferOutputStream]
+final class BufferOutputStreamGidBuilder : BufferOutputStreamGidBuilderImpl!BufferOutputStreamGidBuilder
+{
+  BufferOutputStream build()
+  {
+    return new BufferOutputStream(cast(void*)createGObject(BufferOutputStream._getGType), Yes.Take);
   }
 }

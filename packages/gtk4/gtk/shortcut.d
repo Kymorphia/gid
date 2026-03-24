@@ -3,6 +3,7 @@ module gtk.shortcut;
 
 import gid.gid;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class Shortcut : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.shortcut.Shortcut]
+  Returns: New builder object
+  */
+  static ShortcutGidBuilder builder()
+  {
+    return new ShortcutGidBuilder;
+  }
+
+  /**
       Get `action` property.
       Returns: The action that gets activated by this shortcut.
   */
@@ -71,7 +81,7 @@ class Shortcut : gobject.object.ObjectWrap
   */
   @property void action(gtk.shortcut_action.ShortcutAction propval)
   {
-    return setAction(propval);
+    setAction(propval);
   }
 
   /**
@@ -90,7 +100,7 @@ class Shortcut : gobject.object.ObjectWrap
   */
   @property void arguments(glib.variant.Variant propval)
   {
-    return setArguments(propval);
+    setArguments(propval);
   }
 
   /**
@@ -109,7 +119,7 @@ class Shortcut : gobject.object.ObjectWrap
   */
   @property void trigger(gtk.shortcut_trigger.ShortcutTrigger propval)
   {
-    return setTrigger(propval);
+    setTrigger(propval);
   }
 
   /**
@@ -198,5 +208,51 @@ class Shortcut : gobject.object.ObjectWrap
   void setTrigger(gtk.shortcut_trigger.ShortcutTrigger trigger = null)
   {
     gtk_shortcut_set_trigger(cast(GtkShortcut*)this._cPtr, trigger ? cast(GtkShortcutTrigger*)trigger._cPtr(Yes.Dup) : null);
+  }
+}
+
+class ShortcutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `action` property.
+      Params:
+        propval = The action that gets activated by this shortcut.
+      Returns: Builder instance for fluent chaining
+  */
+  T action(gtk.shortcut_action.ShortcutAction propval)
+  {
+    return setProperty("action", propval);
+  }
+
+  /**
+      Set `arguments` property.
+      Params:
+        propval = Arguments passed to activation.
+      Returns: Builder instance for fluent chaining
+  */
+  T arguments(glib.variant.Variant propval)
+  {
+    return setProperty("arguments", propval);
+  }
+
+  /**
+      Set `trigger` property.
+      Params:
+        propval = The trigger that triggers this shortcut.
+      Returns: Builder instance for fluent chaining
+  */
+  T trigger(gtk.shortcut_trigger.ShortcutTrigger propval)
+  {
+    return setProperty("trigger", propval);
+  }
+}
+
+/// Fluent builder for [gtk.shortcut.Shortcut]
+final class ShortcutGidBuilder : ShortcutGidBuilderImpl!ShortcutGidBuilder
+{
+  Shortcut build()
+  {
+    return new Shortcut(cast(void*)createGObject(Shortcut._getGType), Yes.Take);
   }
 }

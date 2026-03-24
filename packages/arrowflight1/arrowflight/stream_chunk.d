@@ -7,6 +7,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class StreamChunk : gobject.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [arrowflight.stream_chunk.StreamChunk]
+  Returns: New builder object
+  */
+  static StreamChunkGidBuilder builder()
+  {
+    return new StreamChunkGidBuilder;
+  }
+
   alias getData = gobject.object.ObjectWrap.getData;
 
   /** */
@@ -56,5 +66,24 @@ class StreamChunk : gobject.object.ObjectWrap
     _cretval = gaflight_stream_chunk_get_metadata(cast(GAFlightStreamChunk*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class StreamChunkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T chunk(void* propval)
+  {
+    return setProperty("chunk", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.stream_chunk.StreamChunk]
+final class StreamChunkGidBuilder : StreamChunkGidBuilderImpl!StreamChunkGidBuilder
+{
+  StreamChunk build()
+  {
+    return new StreamChunk(cast(void*)createGObject(StreamChunk._getGType), No.Take);
   }
 }

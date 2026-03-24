@@ -3,6 +3,7 @@ module gtk.cell_layout_mixin;
 
 public import gtk.cell_layout_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -270,4 +271,8 @@ template CellLayoutT()
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_cell_layout_set_cell_data_func(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
   }
+}
+
+template CellLayoutGidBuilderT()
+{
 }

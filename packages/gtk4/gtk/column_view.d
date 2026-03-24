@@ -4,6 +4,7 @@ module gtk.column_view;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -119,6 +120,15 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+  Get builder for [gtk.column_view.ColumnView]
+  Returns: New builder object
+  */
+  static ColumnViewGidBuilder builder()
+  {
+    return new ColumnViewGidBuilder;
+  }
+
+  /**
       Get `columns` property.
       Returns: The list of columns.
   */
@@ -143,7 +153,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void enableRubberband(bool propval)
   {
-    return setEnableRubberband(propval);
+    setEnableRubberband(propval);
   }
 
   /**
@@ -162,7 +172,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void headerFactory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setHeaderFactory(propval);
+    setHeaderFactory(propval);
   }
 
   /**
@@ -181,7 +191,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void model(gtk.selection_model.SelectionModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -200,7 +210,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void reorderable(bool propval)
   {
-    return setReorderable(propval);
+    setReorderable(propval);
   }
 
   /**
@@ -219,7 +229,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void rowFactory(gtk.list_item_factory.ListItemFactory propval)
   {
-    return setRowFactory(propval);
+    setRowFactory(propval);
   }
 
   /**
@@ -238,7 +248,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void showColumnSeparators(bool propval)
   {
-    return setShowColumnSeparators(propval);
+    setShowColumnSeparators(propval);
   }
 
   /**
@@ -257,7 +267,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void showRowSeparators(bool propval)
   {
-    return setShowRowSeparators(propval);
+    setShowRowSeparators(propval);
   }
 
   /**
@@ -276,7 +286,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void singleClickActivate(bool propval)
   {
-    return setSingleClickActivate(propval);
+    setSingleClickActivate(propval);
   }
 
   /**
@@ -304,7 +314,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void tabBehavior(gtk.types.ListTabBehavior propval)
   {
-    return setTabBehavior(propval);
+    setTabBehavior(propval);
   }
 
   mixin ScrollableT!();
@@ -718,5 +728,119 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableRubberband(bool propval)
+  {
+    return setProperty("enable-rubberband", propval);
+  }
+
+  /**
+      Set `headerFactory` property.
+      Params:
+        propval = Factory for creating header widgets.
+      Returns: Builder instance for fluent chaining
+  */
+  T headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("header-factory", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.selection_model.SelectionModel propval)
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `reorderable` property.
+      Params:
+        propval = Whether columns are reorderable.
+      Returns: Builder instance for fluent chaining
+  */
+  T reorderable(bool propval)
+  {
+    return setProperty("reorderable", propval);
+  }
+
+  /**
+      Set `rowFactory` property.
+      Params:
+        propval = The factory used for configuring rows.
+      Returns: Builder instance for fluent chaining
+  */
+  T rowFactory(gtk.list_item_factory.ListItemFactory propval)
+  {
+    return setProperty("row-factory", propval);
+  }
+
+  /**
+      Set `showColumnSeparators` property.
+      Params:
+        propval = Show separators between columns.
+      Returns: Builder instance for fluent chaining
+  */
+  T showColumnSeparators(bool propval)
+  {
+    return setProperty("show-column-separators", propval);
+  }
+
+  /**
+      Set `showRowSeparators` property.
+      Params:
+        propval = Show separators between rows.
+      Returns: Builder instance for fluent chaining
+  */
+  T showRowSeparators(bool propval)
+  {
+    return setProperty("show-row-separators", propval);
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+      Returns: Builder instance for fluent chaining
+  */
+  T singleClickActivate(bool propval)
+  {
+    return setProperty("single-click-activate", propval);
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+      Returns: Builder instance for fluent chaining
+  */
+  T tabBehavior(gtk.types.ListTabBehavior propval)
+  {
+    return setProperty("tab-behavior", propval);
+  }
+}
+
+/// Fluent builder for [gtk.column_view.ColumnView]
+final class ColumnViewGidBuilder : ColumnViewGidBuilderImpl!ColumnViewGidBuilder
+{
+  ColumnView build()
+  {
+    return new ColumnView(cast(void*)createGObject(ColumnView._getGType), No.Take);
   }
 }

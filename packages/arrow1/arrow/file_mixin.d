@@ -7,6 +7,7 @@ public import arrow.c.types;
 public import arrow.types;
 public import gid.gid;
 public import glib.error;
+public import gobject.gid_builder;
 
 /** */
 template FileT()
@@ -50,4 +51,8 @@ template FileT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template FileGidBuilderT()
+{
 }

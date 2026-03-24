@@ -11,6 +11,7 @@ import arrow.seekable_input_stream;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,15 @@ class FileSystem : gobject.object.ObjectWrap
   override FileSystem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.file_system.FileSystem]
+  Returns: New builder object
+  */
+  static FileSystemGidBuilder builder()
+  {
+    return new FileSystemGidBuilder;
   }
 
   /**
@@ -394,5 +404,24 @@ class FileSystem : gobject.object.ObjectWrap
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class FileSystemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T fileSystem(void* propval)
+  {
+    return setProperty("file-system", propval);
+  }
+}
+
+/// Fluent builder for [arrow.file_system.FileSystem]
+final class FileSystemGidBuilder : FileSystemGidBuilderImpl!FileSystemGidBuilder
+{
+  FileSystem build()
+  {
+    return new FileSystem(cast(void*)createGObject(FileSystem._getGType), No.Take);
   }
 }

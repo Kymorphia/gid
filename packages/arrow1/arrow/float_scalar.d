@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class FloatScalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class FloatScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.float_scalar.FloatScalar]
+  Returns: New builder object
+  */
+  static FloatScalarGidBuilder builder()
+  {
+    return new FloatScalarGidBuilder;
+  }
+
   /** */
   this(float value)
   {
@@ -50,5 +60,18 @@ class FloatScalar : arrow.scalar.Scalar
     float _retval;
     _retval = garrow_float_scalar_get_value(cast(GArrowFloatScalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class FloatScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.float_scalar.FloatScalar]
+final class FloatScalarGidBuilder : FloatScalarGidBuilderImpl!FloatScalarGidBuilder
+{
+  FloatScalar build()
+  {
+    return new FloatScalar(cast(void*)createGObject(FloatScalar._getGType), Yes.Take);
   }
 }

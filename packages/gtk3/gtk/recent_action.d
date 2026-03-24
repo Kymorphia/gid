@@ -2,6 +2,7 @@
 module gtk.recent_action;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.action;
 import gtk.buildable;
@@ -52,6 +53,15 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   }
 
   /**
+  Get builder for [gtk.recent_action.RecentAction]
+  Returns: New builder object
+  */
+  static RecentActionGidBuilder builder()
+  {
+    return new RecentActionGidBuilder;
+  }
+
+  /**
       Get `showNumbers` property.
       Returns: Whether the items should be displayed with a number.
   */
@@ -67,7 +77,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   */
   @property void showNumbers(bool propval)
   {
-    return setShowNumbers(propval);
+    setShowNumbers(propval);
   }
 
   mixin RecentChooserT!();
@@ -148,5 +158,31 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   void setShowNumbers(bool showNumbers)
   {
     gtk_recent_action_set_show_numbers(cast(GtkRecentAction*)this._cPtr, showNumbers);
+  }
+}
+
+class RecentActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
+{
+
+  mixin RecentChooserGidBuilderT!();
+
+  /**
+      Set `showNumbers` property.
+      Params:
+        propval = Whether the items should be displayed with a number.
+      Returns: Builder instance for fluent chaining
+  */
+  T showNumbers(bool propval)
+  {
+    return setProperty("show-numbers", propval);
+  }
+}
+
+/// Fluent builder for [gtk.recent_action.RecentAction]
+final class RecentActionGidBuilder : RecentActionGidBuilderImpl!RecentActionGidBuilder
+{
+  RecentAction build()
+  {
+    return new RecentAction(cast(void*)createGObject(RecentAction._getGType), Yes.Take);
   }
 }

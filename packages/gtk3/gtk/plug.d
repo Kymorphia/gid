@@ -7,6 +7,7 @@ import gdk.display;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -62,6 +63,15 @@ class Plug : gtk.window.Window
   override Plug self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.plug.Plug]
+  Returns: New builder object
+  */
+  static PlugGidBuilder builder()
+  {
+    return new PlugGidBuilder;
   }
 
   /**
@@ -212,5 +222,19 @@ class Plug : gtk.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("embedded", closure, after);
+  }
+}
+
+class PlugGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.plug.Plug]
+final class PlugGidBuilder : PlugGidBuilderImpl!PlugGidBuilder
+{
+  Plug build()
+  {
+    return new Plug(cast(void*)createGObject(Plug._getGType), No.Take);
   }
 }

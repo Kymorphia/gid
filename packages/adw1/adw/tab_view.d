@@ -9,6 +9,7 @@ import gid.gid;
 import gio.icon;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -91,6 +92,15 @@ class TabView : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.tab_view.TabView]
+  Returns: New builder object
+  */
+  static TabViewGidBuilder builder()
+  {
+    return new TabViewGidBuilder;
+  }
+
+  /**
       Get `defaultIcon` property.
       Returns: Default page icon.
         
@@ -132,7 +142,7 @@ class TabView : gtk.widget.Widget
   */
   @property void defaultIcon(gio.icon.Icon propval)
   {
-    return setDefaultIcon(propval);
+    setDefaultIcon(propval);
   }
 
   /**
@@ -174,7 +184,7 @@ class TabView : gtk.widget.Widget
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
-    return setMenuModel(propval);
+    setMenuModel(propval);
   }
 
   /**
@@ -226,7 +236,7 @@ class TabView : gtk.widget.Widget
   */
   @property void selectedPage(adw.tab_page.TabPage propval)
   {
-    return setSelectedPage(propval);
+    setSelectedPage(propval);
   }
 
   /**
@@ -257,7 +267,7 @@ class TabView : gtk.widget.Widget
   */
   @property void shortcuts(adw.types.TabViewShortcuts propval)
   {
-    return setShortcuts(propval);
+    setShortcuts(propval);
   }
 
   /**
@@ -1253,5 +1263,86 @@ class TabView : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("setup-menu", closure, after);
+  }
+}
+
+class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `defaultIcon` property.
+      Params:
+        propval = Default page icon.
+          
+          If a page doesn't provide its own icon via `property@TabPage:icon`, a
+          default icon may be used instead for contexts where having an icon is
+          necessary.
+          
+          `class@TabBar` will use default icon for pinned tabs in case the page is
+          not loading, doesn't have an icon and an indicator. Default icon is never
+          used for tabs that aren't pinned.
+          
+          `class@TabOverview` will use default icon for pages with missing
+          thumbnails.
+          
+          By default, the `adw-tab-icon-missing-symbolic` icon is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultIcon(gio.icon.Icon propval)
+  {
+    return setProperty("default-icon", propval);
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = Tab context menu model.
+          
+          When a context menu is shown for a tab, it will be constructed from the
+          provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+          the menu actions for the particular tab.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menu-model", propval);
+  }
+
+  /**
+      Set `selectedPage` property.
+      Params:
+        propval = The currently selected page.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectedPage(adw.tab_page.TabPage propval)
+  {
+    return setProperty("selected-page", propval);
+  }
+
+  /**
+      Set `shortcuts` property.
+      Params:
+        propval = The enabled shortcuts.
+          
+          See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+          of the shortcuts are enabled by default.
+          
+          [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
+          provide a convenient way to manage individual shortcuts.
+      Returns: Builder instance for fluent chaining
+  */
+  T shortcuts(adw.types.TabViewShortcuts propval)
+  {
+    return setProperty("shortcuts", propval);
+  }
+}
+
+/// Fluent builder for [adw.tab_view.TabView]
+final class TabViewGidBuilder : TabViewGidBuilderImpl!TabViewGidBuilder
+{
+  TabView build()
+  {
+    return new TabView(cast(void*)createGObject(TabView._getGType), No.Take);
   }
 }

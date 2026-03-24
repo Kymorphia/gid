@@ -4,6 +4,7 @@ module gtk.drawing_area;
 import cairo.context;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -127,6 +128,15 @@ class DrawingArea : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.drawing_area.DrawingArea]
+  Returns: New builder object
+  */
+  static DrawingAreaGidBuilder builder()
+  {
+    return new DrawingAreaGidBuilder;
+  }
+
+  /**
       Get `contentHeight` property.
       Returns: The content height.
   */
@@ -142,7 +152,7 @@ class DrawingArea : gtk.widget.Widget
   */
   @property void contentHeight(int propval)
   {
-    return setContentHeight(propval);
+    setContentHeight(propval);
   }
 
   /**
@@ -161,7 +171,7 @@ class DrawingArea : gtk.widget.Widget
   */
   @property void contentWidth(int propval)
   {
-    return setContentWidth(propval);
+    setContentWidth(propval);
   }
 
   /**
@@ -318,5 +328,41 @@ class DrawingArea : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resize", closure, after);
+  }
+}
+
+class DrawingAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `contentHeight` property.
+      Params:
+        propval = The content height.
+      Returns: Builder instance for fluent chaining
+  */
+  T contentHeight(int propval)
+  {
+    return setProperty("content-height", propval);
+  }
+
+  /**
+      Set `contentWidth` property.
+      Params:
+        propval = The content width.
+      Returns: Builder instance for fluent chaining
+  */
+  T contentWidth(int propval)
+  {
+    return setProperty("content-width", propval);
+  }
+}
+
+/// Fluent builder for [gtk.drawing_area.DrawingArea]
+final class DrawingAreaGidBuilder : DrawingAreaGidBuilderImpl!DrawingAreaGidBuilder
+{
+  DrawingArea build()
+  {
+    return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), No.Take);
   }
 }

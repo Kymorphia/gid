@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,24 @@ class SortKey : gobject.object.ObjectWrap
   override SortKey self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.sort_key.SortKey]
+  Returns: New builder object
+  */
+  static SortKeyGidBuilder builder()
+  {
+    return new SortKeyGidBuilder;
+  }
+
+  /**
+      Get `order` property.
+      Returns: How to order values.
+  */
+  @property arrow.types.SortOrder order()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.types.SortOrder)("order");
   }
 
   /**
@@ -68,5 +87,29 @@ class SortKey : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)garrow_sort_key_equal(cast(GArrowSortKey*)this._cPtr, otherSortKey ? cast(GArrowSortKey*)otherSortKey._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class SortKeyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `order` property.
+      Params:
+        propval = How to order values.
+      Returns: Builder instance for fluent chaining
+  */
+  T order(arrow.types.SortOrder propval)
+  {
+    return setProperty("order", propval);
+  }
+}
+
+/// Fluent builder for [arrow.sort_key.SortKey]
+final class SortKeyGidBuilder : SortKeyGidBuilderImpl!SortKeyGidBuilder
+{
+  SortKey build()
+  {
+    return new SortKey(cast(void*)createGObject(SortKey._getGType), Yes.Take);
   }
 }

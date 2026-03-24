@@ -2,6 +2,7 @@
 module gst.control_source;
 
 import gid.gid;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.object;
@@ -51,6 +52,15 @@ class ControlSource : gst.object.ObjectWrap
   }
 
   /**
+  Get builder for [gst.control_source.ControlSource]
+  Returns: New builder object
+  */
+  static ControlSourceGidBuilder builder()
+  {
+    return new ControlSourceGidBuilder;
+  }
+
+  /**
       Gets the value for this #GstControlSource at a given timestamp.
   
       Params:
@@ -85,5 +95,18 @@ class ControlSource : gst.object.ObjectWrap
     auto _values = cast(double*)values.ptr;
     _retval = cast(bool)gst_control_source_get_value_array(cast(GstControlSource*)this._cPtr, timestamp, interval, _nValues, _values);
     return _retval;
+  }
+}
+
+class ControlSourceGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.control_source.ControlSource]
+final class ControlSourceGidBuilder : ControlSourceGidBuilderImpl!ControlSourceGidBuilder
+{
+  ControlSource build()
+  {
+    return new ControlSource(cast(void*)createGObject(ControlSource._getGType), No.Take);
   }
 }

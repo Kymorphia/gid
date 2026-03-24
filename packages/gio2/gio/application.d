@@ -19,6 +19,7 @@ import glib.option_group;
 import glib.types;
 import glib.variant_dict;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -177,13 +178,22 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   }
 
   /**
+  Get builder for [gio.application.Application]
+  Returns: New builder object
+  */
+  static ApplicationGidBuilder builder()
+  {
+    return new ApplicationGidBuilder;
+  }
+
+  /**
       Set `actionGroup` property.
       Params:
         propval = The group of actions that the application exports.
   */
   @property void actionGroup(gio.action_group.ActionGroup propval)
   {
-    return setActionGroup(propval);
+    setActionGroup(propval);
   }
 
   /**
@@ -202,7 +212,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   @property void applicationId(string propval)
   {
-    return setApplicationId(propval);
+    setApplicationId(propval);
   }
 
   /**
@@ -221,7 +231,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   @property void flags(gio.types.ApplicationFlags propval)
   {
-    return setFlags(propval);
+    setFlags(propval);
   }
 
   /**
@@ -240,7 +250,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   @property void inactivityTimeout(uint propval)
   {
-    return setInactivityTimeout(propval);
+    setInactivityTimeout(propval);
   }
 
   /**
@@ -287,7 +297,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   @property void resourceBasePath(string propval)
   {
-    return setResourceBasePath(propval);
+    setResourceBasePath(propval);
   }
 
   /**
@@ -306,7 +316,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   @property void version_(string propval)
   {
-    return setVersion(propval);
+    setVersion(propval);
   }
 
   mixin ActionGroupT!();
@@ -1624,5 +1634,87 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("startup", closure, after);
+  }
+}
+
+class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.action_map.ActionMapGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+  mixin ActionMapGidBuilderT!();
+
+  /**
+      Set `actionGroup` property.
+      Params:
+        propval = The group of actions that the application exports.
+      Returns: Builder instance for fluent chaining
+  */
+  T actionGroup(gio.action_group.ActionGroup propval)
+  {
+    return setProperty("action-group", propval);
+  }
+
+  /**
+      Set `applicationId` property.
+      Params:
+        propval = The unique identifier for the application.
+      Returns: Builder instance for fluent chaining
+  */
+  T applicationId(string propval)
+  {
+    return setProperty("application-id", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags specifying the behaviour of the application.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.ApplicationFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `inactivityTimeout` property.
+      Params:
+        propval = Time (in milliseconds) to stay alive after becoming idle.
+      Returns: Builder instance for fluent chaining
+  */
+  T inactivityTimeout(uint propval)
+  {
+    return setProperty("inactivity-timeout", propval);
+  }
+
+  /**
+      Set `resourceBasePath` property.
+      Params:
+        propval = The base resource path for the application.
+      Returns: Builder instance for fluent chaining
+  */
+  T resourceBasePath(string propval)
+  {
+    return setProperty("resource-base-path", propval);
+  }
+
+  /**
+      Set `version_` property.
+      Params:
+        propval = The human-readable version number of the application.
+      Returns: Builder instance for fluent chaining
+  */
+  T version_(string propval)
+  {
+    return setProperty("version", propval);
+  }
+}
+
+/// Fluent builder for [gio.application.Application]
+final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
+{
+  Application build()
+  {
+    return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }
 }

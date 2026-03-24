@@ -4,6 +4,7 @@ module gtk.every_filter;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -45,6 +46,15 @@ class EveryFilter : gtk.multi_filter.MultiFilter
   }
 
   /**
+  Get builder for [gtk.every_filter.EveryFilter]
+  Returns: New builder object
+  */
+  static EveryFilterGidBuilder builder()
+  {
+    return new EveryFilterGidBuilder;
+  }
+
+  /**
       Creates a new empty "every" filter.
       
       Use [gtk.multi_filter.MultiFilter.append] to add filters to it.
@@ -59,5 +69,19 @@ class EveryFilter : gtk.multi_filter.MultiFilter
     GtkEveryFilter* _cretval;
     _cretval = gtk_every_filter_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class EveryFilterGidBuilderImpl(T) : gtk.multi_filter.MultiFilterGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.every_filter.EveryFilter]
+final class EveryFilterGidBuilder : EveryFilterGidBuilderImpl!EveryFilterGidBuilder
+{
+  EveryFilter build()
+  {
+    return new EveryFilter(cast(void*)createGObject(EveryFilter._getGType), Yes.Take);
   }
 }

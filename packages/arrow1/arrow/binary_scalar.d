@@ -7,6 +7,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class BinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
@@ -37,11 +38,33 @@ class BinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.binary_scalar.BinaryScalar]
+  Returns: New builder object
+  */
+  static BinaryScalarGidBuilder builder()
+  {
+    return new BinaryScalarGidBuilder;
+  }
+
   /** */
   this(arrow.buffer.Buffer value)
   {
     GArrowBinaryScalar* _cretval;
     _cretval = garrow_binary_scalar_new(value ? cast(GArrowBuffer*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class BinaryScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.binary_scalar.BinaryScalar]
+final class BinaryScalarGidBuilder : BinaryScalarGidBuilderImpl!BinaryScalarGidBuilder
+{
+  BinaryScalar build()
+  {
+    return new BinaryScalar(cast(void*)createGObject(BinaryScalar._getGType), Yes.Take);
   }
 }

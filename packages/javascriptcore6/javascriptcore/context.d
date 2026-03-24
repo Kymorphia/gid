@@ -3,6 +3,7 @@ module javascriptcore.context;
 
 import gid.gid;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.c.functions;
 import javascriptcore.c.types;
@@ -47,6 +48,24 @@ class Context : gobject.object.ObjectWrap
   override Context self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [javascriptcore.context.Context]
+  Returns: New builder object
+  */
+  static ContextGidBuilder builder()
+  {
+    return new ContextGidBuilder;
+  }
+
+  /**
+      Get `virtualMachine` property.
+      Returns: The #JSCVirtualMachine in which the context was created.
+  */
+  @property javascriptcore.virtual_machine.VirtualMachine virtualMachine()
+  {
+    return getVirtualMachine();
   }
 
   /**
@@ -376,5 +395,29 @@ class Context : gobject.object.ObjectWrap
     const(char)* _errorName = errorName.toCString(No.Alloc);
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
     jsc_context_throw_with_name(cast(JSCContext*)this._cPtr, _errorName, _errorMessage);
+  }
+}
+
+class ContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `virtualMachine` property.
+      Params:
+        propval = The #JSCVirtualMachine in which the context was created.
+      Returns: Builder instance for fluent chaining
+  */
+  T virtualMachine(javascriptcore.virtual_machine.VirtualMachine propval)
+  {
+    return setProperty("virtual-machine", propval);
+  }
+}
+
+/// Fluent builder for [javascriptcore.context.Context]
+final class ContextGidBuilder : ContextGidBuilderImpl!ContextGidBuilder
+{
+  Context build()
+  {
+    return new Context(cast(void*)createGObject(Context._getGType), Yes.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.hbutton_box;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.button_box;
@@ -43,6 +44,15 @@ class HButtonBox : gtk.button_box.ButtonBox
   }
 
   /**
+  Get builder for [gtk.hbutton_box.HButtonBox]
+  Returns: New builder object
+  */
+  static HButtonBoxGidBuilder builder()
+  {
+    return new HButtonBoxGidBuilder;
+  }
+
+  /**
       Creates a new horizontal button box.
       Returns: a new button box #GtkWidget.
   
@@ -53,5 +63,19 @@ class HButtonBox : gtk.button_box.ButtonBox
     GtkWidget* _cretval;
     _cretval = gtk_hbutton_box_new();
     this(_cretval, No.Take);
+  }
+}
+
+class HButtonBoxGidBuilderImpl(T) : gtk.button_box.ButtonBoxGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.hbutton_box.HButtonBox]
+final class HButtonBoxGidBuilder : HButtonBoxGidBuilderImpl!HButtonBoxGidBuilder
+{
+  HButtonBox build()
+  {
+    return new HButtonBox(cast(void*)createGObject(HButtonBox._getGType), No.Take);
   }
 }

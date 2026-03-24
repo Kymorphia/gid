@@ -4,6 +4,7 @@ module gst.urihandler;
 public import gst.urihandler_iface_proxy;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gst.c.functions;
 import gst.c.types;
 import gst.types;
@@ -63,4 +64,8 @@ interface URIHandler
       Throws: [ErrorWrap]
   */
   bool setUri(string uri);
+}
+
+interface URIHandlerGidBuilderImpl(T)
+{
 }

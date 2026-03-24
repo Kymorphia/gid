@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class BaseBinaryScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.base_binary_scalar.BaseBinaryScalar]
+  Returns: New builder object
+  */
+  static BaseBinaryScalarGidBuilder builder()
+  {
+    return new BaseBinaryScalarGidBuilder;
+  }
+
   /** */
   arrow.buffer.Buffer getValue()
   {
@@ -45,5 +55,29 @@ class BaseBinaryScalar : arrow.scalar.Scalar
     _cretval = garrow_base_binary_scalar_get_value(cast(GArrowBaseBinaryScalar*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class BaseBinaryScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+
+  /**
+      Set `value` property.
+      Params:
+        propval = The value of the scalar.
+      Returns: Builder instance for fluent chaining
+  */
+  T value(arrow.buffer.Buffer propval)
+  {
+    return setProperty("value", propval);
+  }
+}
+
+/// Fluent builder for [arrow.base_binary_scalar.BaseBinaryScalar]
+final class BaseBinaryScalarGidBuilder : BaseBinaryScalarGidBuilderImpl!BaseBinaryScalarGidBuilder
+{
+  BaseBinaryScalar build()
+  {
+    return new BaseBinaryScalar(cast(void*)createGObject(BaseBinaryScalar._getGType), No.Take);
   }
 }

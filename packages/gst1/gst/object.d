@@ -4,6 +4,7 @@ module gst.object;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.initially_unowned;
 import gobject.object;
 import gobject.param_spec;
@@ -94,6 +95,15 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   override ObjectWrap self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.object.ObjectWrap]
+  Returns: New builder object
+  */
+  static ObjectWrapGidBuilder builder()
+  {
+    return new ObjectWrapGidBuilder;
   }
 
   /** */
@@ -645,5 +655,39 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("deep-notify"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class ObjectWrapGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+
+  /** */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `parent` property.
+      Params:
+        propval = The parent of the object. Please note, that when changing the 'parent'
+          property, we don't emit #GObject::notify and #GstObject::deep-notify
+          signals due to locking issues. In some cases one can use
+          #GstBin::element-added or #GstBin::element-removed signals on the parent to
+          achieve a similar effect.
+      Returns: Builder instance for fluent chaining
+  */
+  T parent(gst.object.ObjectWrap propval)
+  {
+    return setProperty("parent", propval);
+  }
+}
+
+/// Fluent builder for [gst.object.ObjectWrap]
+final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
+{
+  ObjectWrap build()
+  {
+    return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), No.Take);
   }
 }

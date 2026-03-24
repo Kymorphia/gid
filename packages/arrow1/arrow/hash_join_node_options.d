@@ -7,6 +7,7 @@ import arrow.execute_node_options;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
@@ -35,6 +36,15 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   override HashJoinNodeOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.hash_join_node_options.HashJoinNodeOptions]
+  Returns: New builder object
+  */
+  static HashJoinNodeOptionsGidBuilder builder()
+  {
+    return new HashJoinNodeOptionsGidBuilder;
   }
 
   /** */
@@ -104,5 +114,18 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class HashJoinNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.hash_join_node_options.HashJoinNodeOptions]
+final class HashJoinNodeOptionsGidBuilder : HashJoinNodeOptionsGidBuilderImpl!HashJoinNodeOptionsGidBuilder
+{
+  HashJoinNodeOptions build()
+  {
+    return new HashJoinNodeOptions(cast(void*)createGObject(HashJoinNodeOptions._getGType), Yes.Take);
   }
 }

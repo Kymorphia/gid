@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.menu_model;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -143,6 +144,15 @@ class MenuButton : gtk.toggle_button.ToggleButton
   }
 
   /**
+  Get builder for [gtk.menu_button.MenuButton]
+  Returns: New builder object
+  */
+  static MenuButtonGidBuilder builder()
+  {
+    return new MenuButtonGidBuilder;
+  }
+
+  /**
       Get `alignWidget` property.
       Returns: The #GtkWidget to use to align the menu with.
   */
@@ -179,7 +189,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   */
   @property void direction(gtk.types.ArrowType propval)
   {
-    return setDirection(propval);
+    setDirection(propval);
   }
 
   /**
@@ -208,7 +218,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
-    return setMenuModel(propval);
+    setMenuModel(propval);
   }
 
   /**
@@ -267,7 +277,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   */
   @property void usePopover(bool propval)
   {
-    return setUsePopover(propval);
+    setUsePopover(propval);
   }
 
   /**
@@ -463,5 +473,92 @@ class MenuButton : gtk.toggle_button.ToggleButton
   void setUsePopover(bool usePopover)
   {
     gtk_menu_button_set_use_popover(cast(GtkMenuButton*)this._cPtr, usePopover);
+  }
+}
+
+class MenuButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl!T
+{
+
+
+  /**
+      Set `alignWidget` property.
+      Params:
+        propval = The #GtkWidget to use to align the menu with.
+      Returns: Builder instance for fluent chaining
+  */
+  T alignWidget(gtk.container.Container propval)
+  {
+    return setProperty("align-widget", propval);
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The #GtkArrowType representing the direction in which the
+          menu or popover will be popped out.
+      Returns: Builder instance for fluent chaining
+  */
+  T direction(gtk.types.ArrowType propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The #GMenuModel from which the popup will be created.
+          Depending on the #GtkMenuButton:use-popover property, that may
+          be a menu or a popover.
+          
+          See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
+          #GtkMenuButton:popup property.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menu-model", propval);
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The #GtkPopover that will be popped up when the button is clicked.
+      Returns: Builder instance for fluent chaining
+  */
+  T popover(gtk.popover.Popover propval)
+  {
+    return setProperty("popover", propval);
+  }
+
+  /**
+      Set `popup` property.
+      Params:
+        propval = The #GtkMenu that will be popped up when the button is clicked.
+      Returns: Builder instance for fluent chaining
+  */
+  T popup(gtk.menu.Menu propval)
+  {
+    return setProperty("popup", propval);
+  }
+
+  /**
+      Set `usePopover` property.
+      Params:
+        propval = Whether to construct a #GtkPopover from the menu model,
+          or a #GtkMenu.
+      Returns: Builder instance for fluent chaining
+  */
+  T usePopover(bool propval)
+  {
+    return setProperty("use-popover", propval);
+  }
+}
+
+/// Fluent builder for [gtk.menu_button.MenuButton]
+final class MenuButtonGidBuilder : MenuButtonGidBuilderImpl!MenuButtonGidBuilder
+{
+  MenuButton build()
+  {
+    return new MenuButton(cast(void*)createGObject(MenuButton._getGType), No.Take);
   }
 }

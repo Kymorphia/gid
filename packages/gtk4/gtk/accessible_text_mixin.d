@@ -3,6 +3,7 @@ module gtk.accessible_text_mixin;
 
 public import gtk.accessible_text_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -64,4 +65,8 @@ template AccessibleTextT()
   {
     gtk_accessible_text_update_selection_bound(cast(GtkAccessibleText*)this._cPtr);
   }
+}
+
+template AccessibleTextGidBuilderT()
+{
 }

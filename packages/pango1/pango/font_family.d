@@ -4,6 +4,7 @@ module pango.font_family;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import pango.c.functions;
@@ -44,6 +45,15 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   override FontFamily self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.font_family.FontFamily]
+  Returns: New builder object
+  */
+  static FontFamilyGidBuilder builder()
+  {
+    return new FontFamilyGidBuilder;
   }
 
   /**
@@ -176,5 +186,20 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
     foreach (i; 0 .. _nFaces)
       faces[i] = gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
     gFree(cast(void*)_faces);
+  }
+}
+
+class FontFamilyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+}
+
+/// Fluent builder for [pango.font_family.FontFamily]
+final class FontFamilyGidBuilder : FontFamilyGidBuilderImpl!FontFamilyGidBuilder
+{
+  FontFamily build()
+  {
+    return new FontFamily(cast(void*)createGObject(FontFamily._getGType), No.Take);
   }
 }

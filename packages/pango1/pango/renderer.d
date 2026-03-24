@@ -2,6 +2,7 @@
 module pango.renderer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -48,6 +49,15 @@ class Renderer : gobject.object.ObjectWrap
   override Renderer self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [pango.renderer.Renderer]
+  Returns: New builder object
+  */
+  static RendererGidBuilder builder()
+  {
+    return new RendererGidBuilder;
   }
 
   /**
@@ -394,5 +404,18 @@ class Renderer : gobject.object.ObjectWrap
   void setMatrix(pango.matrix.Matrix matrix)
   {
     pango_renderer_set_matrix(cast(PangoRenderer*)this._cPtr, cast(const(PangoMatrix)*)&matrix);
+  }
+}
+
+class RendererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.renderer.Renderer]
+final class RendererGidBuilder : RendererGidBuilderImpl!RendererGidBuilder
+{
+  Renderer build()
+  {
+    return new Renderer(cast(void*)createGObject(Renderer._getGType), No.Take);
   }
 }

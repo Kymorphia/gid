@@ -5,6 +5,7 @@ import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -46,6 +47,15 @@ class BindingGroup : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gobject.binding_group.BindingGroup]
+  Returns: New builder object
+  */
+  static BindingGroupGidBuilder builder()
+  {
+    return new BindingGroupGidBuilder;
+  }
+
+  /**
       Get `source` property.
       Returns: The source object used for binding properties.
   */
@@ -61,7 +71,7 @@ class BindingGroup : gobject.object.ObjectWrap
   */
   @property void source(gobject.object.ObjectWrap propval)
   {
-    return setSource(propval);
+    setSource(propval);
   }
 
   /**
@@ -153,5 +163,29 @@ class BindingGroup : gobject.object.ObjectWrap
   void setSource(gobject.object.ObjectWrap source = null)
   {
     g_binding_group_set_source(cast(GBindingGroup*)this._cPtr, source ? cast(GObject*)source._cPtr(No.Dup) : null);
+  }
+}
+
+class BindingGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `source` property.
+      Params:
+        propval = The source object used for binding properties.
+      Returns: Builder instance for fluent chaining
+  */
+  T source(gobject.object.ObjectWrap propval)
+  {
+    return setProperty("source", propval);
+  }
+}
+
+/// Fluent builder for [gobject.binding_group.BindingGroup]
+final class BindingGroupGidBuilder : BindingGroupGidBuilderImpl!BindingGroupGidBuilder
+{
+  BindingGroup build()
+  {
+    return new BindingGroup(cast(void*)createGObject(BindingGroup._getGType), Yes.Take);
   }
 }

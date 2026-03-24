@@ -8,6 +8,7 @@ import gmime.format_options;
 import gmime.param_list;
 import gmime.parser_options;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -39,6 +40,15 @@ class ContentDisposition : gobject.object.ObjectWrap
   override ContentDisposition self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.content_disposition.ContentDisposition]
+  Returns: New builder object
+  */
+  static ContentDispositionGidBuilder builder()
+  {
+    return new ContentDispositionGidBuilder;
   }
 
   /**
@@ -168,5 +178,18 @@ class ContentDisposition : gobject.object.ObjectWrap
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
     g_mime_content_disposition_set_parameter(cast(GMimeContentDisposition*)this._cPtr, _name, _value);
+  }
+}
+
+class ContentDispositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.content_disposition.ContentDisposition]
+final class ContentDispositionGidBuilder : ContentDispositionGidBuilderImpl!ContentDispositionGidBuilder
+{
+  ContentDisposition build()
+  {
+    return new ContentDisposition(cast(void*)createGObject(ContentDisposition._getGType), Yes.Take);
   }
 }

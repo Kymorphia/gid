@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.box;
 import gtk.buildable;
@@ -83,6 +84,15 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
+  Get builder for [gtk.file_chooser_button.FileChooserButton]
+  Returns: New builder object
+  */
+  static FileChooserButtonGidBuilder builder()
+  {
+    return new FileChooserButtonGidBuilder;
+  }
+
+  /**
       Get `title` property.
       Returns: Title to put on the #GtkFileChooserDialog associated with the button.
   */
@@ -98,7 +108,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -117,7 +127,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   */
   @property void widthChars(int propval)
   {
-    return setWidthChars(propval);
+    setWidthChars(propval);
   }
 
   mixin FileChooserT!();
@@ -278,5 +288,53 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("file-set", closure, after);
+  }
+}
+
+class FileChooserButtonGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
+{
+
+  mixin FileChooserGidBuilderT!();
+
+  /**
+      Set `dialog` property.
+      Params:
+        propval = Instance of the #GtkFileChooserDialog associated with the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T dialog(gtk.file_chooser.FileChooser propval)
+  {
+    return setProperty("dialog", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = Title to put on the #GtkFileChooserDialog associated with the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `widthChars` property.
+      Params:
+        propval = The width of the entry and label inside the button, in characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T widthChars(int propval)
+  {
+    return setProperty("width-chars", propval);
+  }
+}
+
+/// Fluent builder for [gtk.file_chooser_button.FileChooserButton]
+final class FileChooserButtonGidBuilder : FileChooserButtonGidBuilderImpl!FileChooserButtonGidBuilder
+{
+  FileChooserButton build()
+  {
+    return new FileChooserButton(cast(void*)createGObject(FileChooserButton._getGType), No.Take);
   }
 }

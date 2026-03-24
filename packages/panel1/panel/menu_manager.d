@@ -5,6 +5,7 @@ import gid.gid;
 import gio.menu;
 import gio.menu_model;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -56,6 +57,15 @@ class MenuManager : gobject.object.ObjectWrap
   override MenuManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [panel.menu_manager.MenuManager]
+  Returns: New builder object
+  */
+  static MenuManagerGidBuilder builder()
+  {
+    return new MenuManagerGidBuilder;
   }
 
   /** */
@@ -190,5 +200,18 @@ class MenuManager : gobject.object.ObjectWrap
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
     panel_menu_manager_set_attribute_string(cast(PanelMenuManager*)this._cPtr, menu ? cast(GMenu*)menu._cPtr(No.Dup) : null, position, _attribute, _value);
+  }
+}
+
+class MenuManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [panel.menu_manager.MenuManager]
+final class MenuManagerGidBuilder : MenuManagerGidBuilderImpl!MenuManagerGidBuilder
+{
+  MenuManager build()
+  {
+    return new MenuManager(cast(void*)createGObject(MenuManager._getGType), Yes.Take);
   }
 }

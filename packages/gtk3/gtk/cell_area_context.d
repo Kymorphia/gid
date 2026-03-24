@@ -2,6 +2,7 @@
 module gtk.cell_area_context;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -46,6 +47,24 @@ class CellAreaContext : gobject.object.ObjectWrap
   override CellAreaContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.cell_area_context.CellAreaContext]
+  Returns: New builder object
+  */
+  static CellAreaContextGidBuilder builder()
+  {
+    return new CellAreaContextGidBuilder;
+  }
+
+  /**
+      Get `area` property.
+      Returns: The #GtkCellArea this context was created by
+  */
+  @property gtk.cell_area.CellArea area()
+  {
+    return getArea();
   }
 
   /**
@@ -293,5 +312,29 @@ class CellAreaContext : gobject.object.ObjectWrap
   void reset()
   {
     gtk_cell_area_context_reset(cast(GtkCellAreaContext*)this._cPtr);
+  }
+}
+
+class CellAreaContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `area` property.
+      Params:
+        propval = The #GtkCellArea this context was created by
+      Returns: Builder instance for fluent chaining
+  */
+  T area(gtk.cell_area.CellArea propval)
+  {
+    return setProperty("area", propval);
+  }
+}
+
+/// Fluent builder for [gtk.cell_area_context.CellAreaContext]
+final class CellAreaContextGidBuilder : CellAreaContextGidBuilderImpl!CellAreaContextGidBuilder
+{
+  CellAreaContext build()
+  {
+    return new CellAreaContext(cast(void*)createGObject(CellAreaContext._getGType), No.Take);
   }
 }

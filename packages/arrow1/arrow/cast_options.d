@@ -7,6 +7,7 @@ import arrow.data_type;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class CastOptions : arrow.function_options.FunctionOptions
   override CastOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.cast_options.CastOptions]
+  Returns: New builder object
+  */
+  static CastOptionsGidBuilder builder()
+  {
+    return new CastOptionsGidBuilder;
   }
 
   /**
@@ -177,5 +187,95 @@ class CastOptions : arrow.function_options.FunctionOptions
     GArrowCastOptions* _cretval;
     _cretval = garrow_cast_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `allowDecimalTruncate` property.
+      Params:
+        propval = Whether truncating decimal value is allowed or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowDecimalTruncate(bool propval)
+  {
+    return setProperty("allow-decimal-truncate", propval);
+  }
+
+  /**
+      Set `allowFloatTruncate` property.
+      Params:
+        propval = Whether truncating float value is allowed or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowFloatTruncate(bool propval)
+  {
+    return setProperty("allow-float-truncate", propval);
+  }
+
+  /**
+      Set `allowIntOverflow` property.
+      Params:
+        propval = Whether integer overflow is allowed or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowIntOverflow(bool propval)
+  {
+    return setProperty("allow-int-overflow", propval);
+  }
+
+  /**
+      Set `allowInvalidUtf8` property.
+      Params:
+        propval = Whether invalid UTF-8 string value is allowed or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowInvalidUtf8(bool propval)
+  {
+    return setProperty("allow-invalid-utf8", propval);
+  }
+
+  /**
+      Set `allowTimeOverflow` property.
+      Params:
+        propval = Whether time overflow is allowed or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowTimeOverflow(bool propval)
+  {
+    return setProperty("allow-time-overflow", propval);
+  }
+
+  /**
+      Set `allowTimeTruncate` property.
+      Params:
+        propval = Whether truncating time value is allowed or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowTimeTruncate(bool propval)
+  {
+    return setProperty("allow-time-truncate", propval);
+  }
+
+  /**
+      Set `toDataType` property.
+      Params:
+        propval = The #GArrowDataType being casted to.
+      Returns: Builder instance for fluent chaining
+  */
+  T toDataType(arrow.data_type.DataType propval)
+  {
+    return setProperty("to-data-type", propval);
+  }
+}
+
+/// Fluent builder for [arrow.cast_options.CastOptions]
+final class CastOptionsGidBuilder : CastOptionsGidBuilderImpl!CastOptionsGidBuilder
+{
+  CastOptions build()
+  {
+    return new CastOptions(cast(void*)createGObject(CastOptions._getGType), Yes.Take);
   }
 }

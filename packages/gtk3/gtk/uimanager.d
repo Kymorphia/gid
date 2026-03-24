@@ -4,6 +4,7 @@ module gtk.uimanager;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accel_group;
 import gtk.action;
@@ -275,6 +276,15 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
+  Get builder for [gtk.uimanager.UIManager]
+  Returns: New builder object
+  */
+  static UIManagerGidBuilder builder()
+  {
+    return new UIManagerGidBuilder;
+  }
+
+  /**
       Get `addTearoffs` property.
       Returns: The "add-tearoffs" property controls whether generated menus
         have tearoff menu items.
@@ -304,7 +314,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   @property void addTearoffs(bool propval)
   {
-    return setAddTearoffs(propval);
+    setAddTearoffs(propval);
   }
 
   /** */
@@ -917,5 +927,38 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pre-activate", closure, after);
+  }
+}
+
+class UIManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+
+  /**
+      Set `addTearoffs` property.
+      Params:
+        propval = The "add-tearoffs" property controls whether generated menus
+          have tearoff menu items.
+          
+          Note that this only affects regular menus. Generated popup
+          menus never have tearoff menu items.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Tearoff menus are deprecated and should not
+            be used in newly written code.
+  */
+  T addTearoffs(bool propval)
+  {
+    return setProperty("add-tearoffs", propval);
+  }
+}
+
+/// Fluent builder for [gtk.uimanager.UIManager]
+final class UIManagerGidBuilder : UIManagerGidBuilderImpl!UIManagerGidBuilder
+{
+  UIManager build()
+  {
+    return new UIManager(cast(void*)createGObject(UIManager._getGType), Yes.Take);
   }
 }

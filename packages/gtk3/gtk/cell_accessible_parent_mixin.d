@@ -7,6 +7,7 @@ public import atk.relation_set;
 public import atk.types;
 public import gdk.rectangle;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.cell_accessible;
@@ -100,4 +101,8 @@ template CellAccessibleParentT()
   {
     gtk_cell_accessible_parent_update_relationset(cast(GtkCellAccessibleParent*)this._cPtr, cell ? cast(GtkCellAccessible*)cell._cPtr(No.Dup) : null, relationset ? cast(AtkRelationSet*)relationset._cPtr(No.Dup) : null);
   }
+}
+
+template CellAccessibleParentGidBuilderT()
+{
 }

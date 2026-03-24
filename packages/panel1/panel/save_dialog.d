@@ -7,6 +7,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -55,6 +56,15 @@ class SaveDialog : adw.message_dialog.MessageDialog
   }
 
   /**
+  Get builder for [panel.save_dialog.SaveDialog]
+  Returns: New builder object
+  */
+  static SaveDialogGidBuilder builder()
+  {
+    return new SaveDialogGidBuilder;
+  }
+
+  /**
       Get `closeAfterSave` property.
       Returns: This property requests that the widget close after saving.
   
@@ -74,7 +84,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   */
   @property void closeAfterSave(bool propval)
   {
-    return setCloseAfterSave(propval);
+    setCloseAfterSave(propval);
   }
 
   /**
@@ -132,5 +142,32 @@ class SaveDialog : adw.message_dialog.MessageDialog
   void setCloseAfterSave(bool closeAfterSave)
   {
     panel_save_dialog_set_close_after_save(cast(PanelSaveDialog*)this._cPtr, closeAfterSave);
+  }
+}
+
+class SaveDialogGidBuilderImpl(T) : adw.message_dialog.MessageDialogGidBuilderImpl!T
+{
+
+
+  /**
+      Set `closeAfterSave` property.
+      Params:
+        propval = This property requests that the widget close after saving.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use `class@PanelChangesDialog`
+  */
+  T closeAfterSave(bool propval)
+  {
+    return setProperty("close-after-save", propval);
+  }
+}
+
+/// Fluent builder for [panel.save_dialog.SaveDialog]
+final class SaveDialogGidBuilder : SaveDialogGidBuilderImpl!SaveDialogGidBuilder
+{
+  SaveDialog build()
+  {
+    return new SaveDialog(cast(void*)createGObject(SaveDialog._getGType), No.Take);
   }
 }

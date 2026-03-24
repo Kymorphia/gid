@@ -8,6 +8,7 @@ import gio.tls_certificate;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -48,6 +49,15 @@ class NetworkSession : gobject.object.ObjectWrap
   override NetworkSession self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [webkit.network_session.NetworkSession]
+  Returns: New builder object
+  */
+  static NetworkSessionGidBuilder builder()
+  {
+    return new NetworkSessionGidBuilder;
   }
 
   /**
@@ -397,5 +407,40 @@ class NetworkSession : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("download-started", closure, after);
+  }
+}
+
+class NetworkSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `cacheDirectory` property.
+      Params:
+        propval = The base caches directory used to create the #WebKitWebsiteDataManager. If null, a default location will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T cacheDirectory(string propval)
+  {
+    return setProperty("cache-directory", propval);
+  }
+
+  /**
+      Set `dataDirectory` property.
+      Params:
+        propval = The base data directory used to create the #WebKitWebsiteDataManager. If null, a default location will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T dataDirectory(string propval)
+  {
+    return setProperty("data-directory", propval);
+  }
+}
+
+/// Fluent builder for [webkit.network_session.NetworkSession]
+final class NetworkSessionGidBuilder : NetworkSessionGidBuilderImpl!NetworkSessionGidBuilder
+{
+  NetworkSession build()
+  {
+    return new NetworkSession(cast(void*)createGObject(NetworkSession._getGType), Yes.Take);
   }
 }

@@ -4,6 +4,7 @@ module gobject.initially_unowned;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 
@@ -39,5 +40,27 @@ class InitiallyUnowned : gobject.object.ObjectWrap
   override InitiallyUnowned self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gobject.initially_unowned.InitiallyUnowned]
+  Returns: New builder object
+  */
+  static InitiallyUnownedGidBuilder builder()
+  {
+    return new InitiallyUnownedGidBuilder;
+  }
+}
+
+class InitiallyUnownedGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gobject.initially_unowned.InitiallyUnowned]
+final class InitiallyUnownedGidBuilder : InitiallyUnownedGidBuilderImpl!InitiallyUnownedGidBuilder
+{
+  InitiallyUnowned build()
+  {
+    return new InitiallyUnowned(cast(void*)createGObject(InitiallyUnowned._getGType), No.Take);
   }
 }

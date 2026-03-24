@@ -2,6 +2,7 @@
 module javascriptcore.exception;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.c.functions;
 import javascriptcore.c.types;
@@ -37,6 +38,15 @@ class ExceptionWrap : gobject.object.ObjectWrap
   override ExceptionWrap self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [javascriptcore.exception.ExceptionWrap]
+  Returns: New builder object
+  */
+  static ExceptionWrapGidBuilder builder()
+  {
+    return new ExceptionWrapGidBuilder;
   }
 
   /**
@@ -167,5 +177,18 @@ class ExceptionWrap : gobject.object.ObjectWrap
     _cretval = jsc_exception_to_string(cast(JSCException*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class ExceptionWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [javascriptcore.exception.ExceptionWrap]
+final class ExceptionWrapGidBuilder : ExceptionWrapGidBuilderImpl!ExceptionWrapGidBuilder
+{
+  ExceptionWrap build()
+  {
+    return new ExceptionWrap(cast(void*)createGObject(ExceptionWrap._getGType), Yes.Take);
   }
 }

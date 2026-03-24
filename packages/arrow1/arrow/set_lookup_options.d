@@ -7,6 +7,7 @@ import arrow.datum;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
   override SetLookupOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.set_lookup_options.SetLookupOptions]
+  Returns: New builder object
+  */
+  static SetLookupOptionsGidBuilder builder()
+  {
+    return new SetLookupOptionsGidBuilder;
   }
 
   /**
@@ -82,5 +92,40 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
     GArrowSetLookupOptions* _cretval;
     _cretval = garrow_set_lookup_options_new(valueSet ? cast(GArrowDatum*)valueSet._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+}
+
+class SetLookupOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `skipNulls` property.
+      Params:
+        propval = Whether NULLs are skipped or not.
+      Returns: Builder instance for fluent chaining
+  */
+  T skipNulls(bool propval)
+  {
+    return setProperty("skip-nulls", propval);
+  }
+
+  /**
+      Set `valueSet` property.
+      Params:
+        propval = The set of values to look up input values into.
+      Returns: Builder instance for fluent chaining
+  */
+  T valueSet(arrow.datum.Datum propval)
+  {
+    return setProperty("value-set", propval);
+  }
+}
+
+/// Fluent builder for [arrow.set_lookup_options.SetLookupOptions]
+final class SetLookupOptionsGidBuilder : SetLookupOptionsGidBuilderImpl!SetLookupOptionsGidBuilder
+{
+  SetLookupOptions build()
+  {
+    return new SetLookupOptions(cast(void*)createGObject(SetLookupOptions._getGType), Yes.Take);
   }
 }

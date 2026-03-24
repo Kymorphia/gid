@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.filter;
 import gmime.types;
+import gobject.gid_builder;
 
 /**
     A filter for detecting whether or not a text stream claimed to be
@@ -38,6 +39,15 @@ class FilterWindows : gmime.filter.Filter
   override FilterWindows self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.filter_windows.FilterWindows]
+  Returns: New builder object
+  */
+  static FilterWindowsGidBuilder builder()
+  {
+    return new FilterWindowsGidBuilder;
   }
 
   /**
@@ -82,5 +92,18 @@ class FilterWindows : gmime.filter.Filter
     _cretval = g_mime_filter_windows_real_charset(cast(GMimeFilterWindows*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class FilterWindowsGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.filter_windows.FilterWindows]
+final class FilterWindowsGidBuilder : FilterWindowsGidBuilderImpl!FilterWindowsGidBuilder
+{
+  FilterWindows build()
+  {
+    return new FilterWindows(cast(void*)createGObject(FilterWindows._getGType), Yes.Take);
   }
 }

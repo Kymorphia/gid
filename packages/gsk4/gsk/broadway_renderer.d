@@ -2,6 +2,7 @@
 module gsk.broadway_renderer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -37,6 +38,15 @@ class BroadwayRenderer : gsk.renderer.Renderer
   }
 
   /**
+  Get builder for [gsk.broadway_renderer.BroadwayRenderer]
+  Returns: New builder object
+  */
+  static BroadwayRendererGidBuilder builder()
+  {
+    return new BroadwayRendererGidBuilder;
+  }
+
+  /**
       Creates a new Broadway renderer.
       
       The Broadway renderer is the default renderer for the broadway backend.
@@ -52,5 +62,18 @@ class BroadwayRenderer : gsk.renderer.Renderer
     GskRenderer* _cretval;
     _cretval = gsk_broadway_renderer_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class BroadwayRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gsk.broadway_renderer.BroadwayRenderer]
+final class BroadwayRendererGidBuilder : BroadwayRendererGidBuilderImpl!BroadwayRendererGidBuilder
+{
+  BroadwayRenderer build()
+  {
+    return new BroadwayRenderer(cast(void*)createGObject(BroadwayRenderer._getGType), Yes.Take);
   }
 }

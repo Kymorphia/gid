@@ -4,6 +4,7 @@ module webkit.print_operation;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.page_setup;
 import gtk.print_settings;
@@ -50,6 +51,15 @@ class PrintOperation : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.print_operation.PrintOperation]
+  Returns: New builder object
+  */
+  static PrintOperationGidBuilder builder()
+  {
+    return new PrintOperationGidBuilder;
+  }
+
+  /**
       Get `pageSetup` property.
       Returns: The initial #GtkPageSetup for the print operation.
   */
@@ -65,7 +75,7 @@ class PrintOperation : gobject.object.ObjectWrap
   */
   @property void pageSetup(gtk.page_setup.PageSetup propval)
   {
-    return setPageSetup(propval);
+    setPageSetup(propval);
   }
 
   /**
@@ -84,7 +94,16 @@ class PrintOperation : gobject.object.ObjectWrap
   */
   @property void printSettings(gtk.print_settings.PrintSettings propval)
   {
-    return setPrintSettings(propval);
+    setPrintSettings(propval);
+  }
+
+  /**
+      Get `webView` property.
+      Returns: The #WebKitWebView that will be printed.
+  */
+  @property webkit.web_view.WebView webView()
+  {
+    return gobject.object.ObjectWrap.getProperty!(webkit.web_view.WebView)("web-view");
   }
 
   /**
@@ -292,5 +311,51 @@ class PrintOperation : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("finished", closure, after);
+  }
+}
+
+class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `pageSetup` property.
+      Params:
+        propval = The initial #GtkPageSetup for the print operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageSetup(gtk.page_setup.PageSetup propval)
+  {
+    return setProperty("page-setup", propval);
+  }
+
+  /**
+      Set `printSettings` property.
+      Params:
+        propval = The initial #GtkPrintSettings for the print operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T printSettings(gtk.print_settings.PrintSettings propval)
+  {
+    return setProperty("print-settings", propval);
+  }
+
+  /**
+      Set `webView` property.
+      Params:
+        propval = The #WebKitWebView that will be printed.
+      Returns: Builder instance for fluent chaining
+  */
+  T webView(webkit.web_view.WebView propval)
+  {
+    return setProperty("web-view", propval);
+  }
+}
+
+/// Fluent builder for [webkit.print_operation.PrintOperation]
+final class PrintOperationGidBuilder : PrintOperationGidBuilderImpl!PrintOperationGidBuilder
+{
+  PrintOperation build()
+  {
+    return new PrintOperation(cast(void*)createGObject(PrintOperation._getGType), Yes.Take);
   }
 }

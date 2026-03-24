@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class Datum : gobject.object.ObjectWrap
   override Datum self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.datum.Datum]
+  Returns: New builder object
+  */
+  static DatumGidBuilder builder()
+  {
+    return new DatumGidBuilder;
   }
 
   /** */
@@ -83,5 +93,24 @@ class Datum : gobject.object.ObjectWrap
     _cretval = garrow_datum_to_string(cast(GArrowDatum*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class DatumGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T datum(void* propval)
+  {
+    return setProperty("datum", propval);
+  }
+}
+
+/// Fluent builder for [arrow.datum.Datum]
+final class DatumGidBuilder : DatumGidBuilderImpl!DatumGidBuilder
+{
+  Datum build()
+  {
+    return new Datum(cast(void*)createGObject(Datum._getGType), No.Take);
   }
 }

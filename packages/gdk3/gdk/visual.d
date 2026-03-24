@@ -6,6 +6,7 @@ import gdk.c.types;
 import gdk.screen;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,6 +39,15 @@ class Visual : gobject.object.ObjectWrap
   override Visual self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.visual.Visual]
+  Returns: New builder object
+  */
+  static VisualGidBuilder builder()
+  {
+    return new VisualGidBuilder;
   }
 
   /**
@@ -300,5 +310,18 @@ class Visual : gobject.object.ObjectWrap
     _cretval = gdk_visual_get_visual_type(cast(GdkVisual*)this._cPtr);
     gdk.types.VisualType _retval = cast(gdk.types.VisualType)_cretval;
     return _retval;
+  }
+}
+
+class VisualGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.visual.Visual]
+final class VisualGidBuilder : VisualGidBuilderImpl!VisualGidBuilder
+{
+  Visual build()
+  {
+    return new Visual(cast(void*)createGObject(Visual._getGType), No.Take);
   }
 }

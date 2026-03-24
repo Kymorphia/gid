@@ -7,6 +7,7 @@ import arrowflight.location;
 import arrowflight.ticket;
 import arrowflight.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -36,6 +37,15 @@ class Endpoint : gobject.object.ObjectWrap
   override Endpoint self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrowflight.endpoint.Endpoint]
+  Returns: New builder object
+  */
+  static EndpointGidBuilder builder()
+  {
+    return new EndpointGidBuilder;
   }
 
   /**
@@ -72,5 +82,18 @@ class Endpoint : gobject.object.ObjectWrap
     _cretval = gaflight_endpoint_get_locations(cast(GAFlightEndpoint*)this._cPtr);
     auto _retval = gListToD!(arrowflight.location.Location, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
+  }
+}
+
+class EndpointGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowflight.endpoint.Endpoint]
+final class EndpointGidBuilder : EndpointGidBuilderImpl!EndpointGidBuilder
+{
+  Endpoint build()
+  {
+    return new Endpoint(cast(void*)createGObject(Endpoint._getGType), Yes.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.recent_chooser_dialog;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -84,5 +85,29 @@ class RecentChooserDialog : gtk.dialog.Dialog, gtk.recent_chooser.RecentChooser
     return this;
   }
 
+  /**
+  Get builder for [gtk.recent_chooser_dialog.RecentChooserDialog]
+  Returns: New builder object
+  */
+  static RecentChooserDialogGidBuilder builder()
+  {
+    return new RecentChooserDialogGidBuilder;
+  }
+
   mixin RecentChooserT!();
+}
+
+class RecentChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
+{
+
+  mixin RecentChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.recent_chooser_dialog.RecentChooserDialog]
+final class RecentChooserDialogGidBuilder : RecentChooserDialogGidBuilderImpl!RecentChooserDialogGidBuilder
+{
+  RecentChooserDialog build()
+  {
+    return new RecentChooserDialog(cast(void*)createGObject(RecentChooserDialog._getGType), No.Take);
+  }
 }

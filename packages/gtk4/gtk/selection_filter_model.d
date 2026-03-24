@@ -4,6 +4,7 @@ module gtk.selection_filter_model;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.c.functions;
@@ -44,6 +45,15 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
+  Get builder for [gtk.selection_filter_model.SelectionFilterModel]
+  Returns: New builder object
+  */
+  static SelectionFilterModelGidBuilder builder()
+  {
+    return new SelectionFilterModelGidBuilder;
+  }
+
+  /**
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
@@ -68,7 +78,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   @property void model(gtk.selection_model.SelectionModel propval)
   {
-    return setModel(propval);
+    setModel(propval);
   }
 
   /**
@@ -123,5 +133,31 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
     gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+}
+
+class SelectionFilterModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being filtered.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gtk.selection_model.SelectionModel propval)
+  {
+    return setProperty("model", propval);
+  }
+}
+
+/// Fluent builder for [gtk.selection_filter_model.SelectionFilterModel]
+final class SelectionFilterModelGidBuilder : SelectionFilterModelGidBuilderImpl!SelectionFilterModelGidBuilder
+{
+  SelectionFilterModel build()
+  {
+    return new SelectionFilterModel(cast(void*)createGObject(SelectionFilterModel._getGType), Yes.Take);
   }
 }

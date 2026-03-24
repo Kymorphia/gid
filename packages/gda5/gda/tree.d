@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -40,6 +41,15 @@ class Tree : gobject.object.ObjectWrap
   override Tree self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gda.tree.Tree]
+  Returns: New builder object
+  */
+  static TreeGidBuilder builder()
+  {
+    return new TreeGidBuilder;
   }
 
   /**
@@ -417,6 +427,19 @@ class Tree : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("node-inserted", closure, after);
+  }
+}
+
+class TreeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gda.tree.Tree]
+final class TreeGidBuilder : TreeGidBuilderImpl!TreeGidBuilder
+{
+  Tree build()
+  {
+    return new Tree(cast(void*)createGObject(Tree._getGType), Yes.Take);
   }
 }
 

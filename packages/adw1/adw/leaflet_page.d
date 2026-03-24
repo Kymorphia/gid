@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.widget;
 
@@ -42,6 +43,26 @@ class LeafletPage : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [adw.leaflet_page.LeafletPage]
+  Returns: New builder object
+  */
+  static LeafletPageGidBuilder builder()
+  {
+    return new LeafletPageGidBuilder;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The leaflet child to which the page belongs.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
+  }
+
+  /**
       Get `name` property.
       Returns: The name of the child page.
   
@@ -61,7 +82,7 @@ class LeafletPage : gobject.object.ObjectWrap
   */
   @property void name(string propval)
   {
-    return setName(propval);
+    setName(propval);
   }
 
   /**
@@ -96,7 +117,7 @@ class LeafletPage : gobject.object.ObjectWrap
   */
   @property void navigatable(bool propval)
   {
-    return setNavigatable(propval);
+    setNavigatable(propval);
   }
 
   /**
@@ -170,5 +191,63 @@ class LeafletPage : gobject.object.ObjectWrap
   void setNavigatable(bool navigatable)
   {
     adw_leaflet_page_set_navigatable(cast(AdwLeafletPage*)this._cPtr, navigatable);
+  }
+}
+
+class LeafletPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The leaflet child to which the page belongs.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name of the child page.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `navigatable` property.
+      Params:
+        propval = Whether the child can be navigated to when folded.
+          
+          If `FALSE`, the child will be ignored by
+          [adw.leaflet.Leaflet.getAdjacentChild], [adw.leaflet.Leaflet.navigate], and swipe
+          gestures.
+          
+          This can be used used to prevent switching to widgets like separators.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  T navigatable(bool propval)
+  {
+    return setProperty("navigatable", propval);
+  }
+}
+
+/// Fluent builder for [adw.leaflet_page.LeafletPage]
+final class LeafletPageGidBuilder : LeafletPageGidBuilderImpl!LeafletPageGidBuilder
+{
+  LeafletPage build()
+  {
+    return new LeafletPage(cast(void*)createGObject(LeafletPage._getGType), No.Take);
   }
 }

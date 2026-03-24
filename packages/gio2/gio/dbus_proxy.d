@@ -19,6 +19,7 @@ import gio.unix_fdlist;
 import glib.error;
 import glib.variant;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -98,6 +99,24 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   }
 
   /**
+  Get builder for [gio.dbus_proxy.DBusProxy]
+  Returns: New builder object
+  */
+  static DBusProxyGidBuilder builder()
+  {
+    return new DBusProxyGidBuilder;
+  }
+
+  /**
+      Get `gConnection` property.
+      Returns: The #GDBusConnection the proxy is for.
+  */
+  @property gio.dbus_connection.DBusConnection gConnection()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.dbus_connection.DBusConnection)("g-connection");
+  }
+
+  /**
       Get `gDefaultTimeout` property.
       Returns: The timeout to use if -1 (specifying default timeout) is passed
         as @timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
@@ -128,6 +147,15 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   @property void gDefaultTimeout(int propval)
   {
     gobject.object.ObjectWrap.setProperty!(int)("g-default-timeout", propval);
+  }
+
+  /**
+      Get `gFlags` property.
+      Returns: Flags from the #GDBusProxyFlags enumeration.
+  */
+  @property gio.types.DBusProxyFlags gFlags()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.types.DBusProxyFlags)("g-flags");
   }
 
   /**
@@ -200,6 +228,24 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   }
 
   /**
+      Get `gInterfaceName` property.
+      Returns: The D-Bus interface name the proxy is for.
+  */
+  @property string gInterfaceName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("g-interface-name");
+  }
+
+  /**
+      Get `gName` property.
+      Returns: The well-known or unique name that the proxy is for.
+  */
+  @property string gName()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("g-name");
+  }
+
+  /**
       Get `gNameOwner` property.
       Returns: The unique name that owns #GDBusProxy:g-name or null if no-one
         currently owns that name. You may connect to #GObject::notify signal to
@@ -208,6 +254,15 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   @property string gNameOwner()
   {
     return gobject.object.ObjectWrap.getProperty!(string)("g-name-owner");
+  }
+
+  /**
+      Get `gObjectPath` property.
+      Returns: The object path the proxy is for.
+  */
+  @property string gObjectPath()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("g-object-path");
   }
 
   mixin AsyncInitableT!();
@@ -1011,5 +1066,145 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("g-signal"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_initable.AsyncInitableGidBuilderImpl!T, gio.dbus_interface.DBusInterfaceGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin AsyncInitableGidBuilderT!();
+  mixin DBusInterfaceGidBuilderT!();
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `gBusType` property.
+      Params:
+        propval = If this property is not [gio.types.BusType.None], then
+          #GDBusProxy:g-connection must be null and will be set to the
+          #GDBusConnection obtained by calling [gio.global.busGet] with the value
+          of this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T gBusType(gio.types.BusType propval)
+  {
+    return setProperty("g-bus-type", propval);
+  }
+
+  /**
+      Set `gConnection` property.
+      Params:
+        propval = The #GDBusConnection the proxy is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T gConnection(gio.dbus_connection.DBusConnection propval)
+  {
+    return setProperty("g-connection", propval);
+  }
+
+  /**
+      Set `gDefaultTimeout` property.
+      Params:
+        propval = The timeout to use if -1 (specifying default timeout) is passed
+          as @timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
+          [gio.dbus_proxy.DBusProxy.callSync] functions.
+          
+          This allows applications to set a proxy-wide timeout for all
+          remote method invocations on the proxy. If this property is -1,
+          the default timeout (typically 25 seconds) is used. If set to
+          `G_MAXINT`, then no timeout is used.
+      Returns: Builder instance for fluent chaining
+  */
+  T gDefaultTimeout(int propval)
+  {
+    return setProperty("g-default-timeout", propval);
+  }
+
+  /**
+      Set `gFlags` property.
+      Params:
+        propval = Flags from the #GDBusProxyFlags enumeration.
+      Returns: Builder instance for fluent chaining
+  */
+  T gFlags(gio.types.DBusProxyFlags propval)
+  {
+    return setProperty("g-flags", propval);
+  }
+
+  /**
+      Set `gInterfaceInfo` property.
+      Params:
+        propval = Ensure that interactions with this proxy conform to the given
+          interface. This is mainly to ensure that malformed data received
+          from the other peer is ignored. The given #GDBusInterfaceInfo is
+          said to be the "expected interface".
+          
+          The checks performed are:
+          $(LIST
+            * When completing a method call, if the type signature of
+              the reply message isn't what's expected, the reply is
+              discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
+            
+            * Received signals that have a type signature mismatch are dropped and
+              a warning is logged via g_warning().
+            
+            * Properties received via the initial `GetAll()` call or via the
+              `::PropertiesChanged` signal (on the
+              [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
+              interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
+              with a type signature mismatch are ignored and a warning is
+              logged via g_warning().
+          )
+            
+          Note that these checks are never done on methods, signals and
+          properties that are not referenced in the given
+          #GDBusInterfaceInfo, since extending a D-Bus interface on the
+          service-side is not considered an ABI break.
+      Returns: Builder instance for fluent chaining
+  */
+  T gInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo propval)
+  {
+    return setProperty("g-interface-info", propval);
+  }
+
+  /**
+      Set `gInterfaceName` property.
+      Params:
+        propval = The D-Bus interface name the proxy is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T gInterfaceName(string propval)
+  {
+    return setProperty("g-interface-name", propval);
+  }
+
+  /**
+      Set `gName` property.
+      Params:
+        propval = The well-known or unique name that the proxy is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T gName(string propval)
+  {
+    return setProperty("g-name", propval);
+  }
+
+  /**
+      Set `gObjectPath` property.
+      Params:
+        propval = The object path the proxy is for.
+      Returns: Builder instance for fluent chaining
+  */
+  T gObjectPath(string propval)
+  {
+    return setProperty("g-object-path", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_proxy.DBusProxy]
+final class DBusProxyGidBuilder : DBusProxyGidBuilderImpl!DBusProxyGidBuilder
+{
+  DBusProxy build()
+  {
+    return new DBusProxy(cast(void*)createGObject(DBusProxy._getGType), No.Take);
   }
 }

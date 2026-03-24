@@ -13,6 +13,7 @@ import gio.types;
 import glib.bytes;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 
@@ -53,6 +54,15 @@ class ContentProvider : gobject.object.ObjectWrap
   override ContentProvider self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.content_provider.ContentProvider]
+  Returns: New builder object
+  */
+  static ContentProviderGidBuilder builder()
+  {
+    return new ContentProviderGidBuilder;
   }
 
   /**
@@ -262,5 +272,18 @@ class ContentProvider : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("content-changed", closure, after);
+  }
+}
+
+class ContentProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.content_provider.ContentProvider]
+final class ContentProviderGidBuilder : ContentProviderGidBuilderImpl!ContentProviderGidBuilder
+{
+  ContentProvider build()
+  {
+    return new ContentProvider(cast(void*)createGObject(ContentProvider._getGType), No.Take);
   }
 }

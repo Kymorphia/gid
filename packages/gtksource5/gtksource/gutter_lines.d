@@ -3,6 +3,7 @@ module gtksource.gutter_lines;
 
 import gid.gid;
 import glib.types;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_buffer;
 import gtk.text_iter;
@@ -48,6 +49,15 @@ class GutterLines : gobject.object.ObjectWrap
   override GutterLines self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.gutter_lines.GutterLines]
+  Returns: New builder object
+  */
+  static GutterLinesGidBuilder builder()
+  {
+    return new GutterLinesGidBuilder;
   }
 
   /**
@@ -289,5 +299,18 @@ class GutterLines : gobject.object.ObjectWrap
   void removeQclass(uint line, glib.types.Quark qname)
   {
     gtk_source_gutter_lines_remove_qclass(cast(GtkSourceGutterLines*)this._cPtr, line, qname);
+  }
+}
+
+class GutterLinesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtksource.gutter_lines.GutterLines]
+final class GutterLinesGidBuilder : GutterLinesGidBuilderImpl!GutterLinesGidBuilder
+{
+  GutterLines build()
+  {
+    return new GutterLines(cast(void*)createGObject(GutterLines._getGType), No.Take);
   }
 }

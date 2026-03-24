@@ -15,6 +15,7 @@ import gio.types;
 import gio.volume;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -436,4 +437,8 @@ interface Mount
       Returns: Signal ID
   */
   ulong connectUnmounted(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface MountGidBuilderImpl(T)
+{
 }

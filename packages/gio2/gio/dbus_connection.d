@@ -25,6 +25,7 @@ import glib.variant;
 import glib.variant_type;
 import gobject.closure;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -110,6 +111,15 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   }
 
   /**
+  Get builder for [gio.dbus_connection.DBusConnection]
+  Returns: New builder object
+  */
+  static DBusConnectionGidBuilder builder()
+  {
+    return new DBusConnectionGidBuilder;
+  }
+
+  /**
       Get `capabilities` property.
       Returns: Flags from the #GDBusCapabilityFlags enumeration
         representing connection features negotiated with the other peer.
@@ -154,7 +164,62 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   */
   @property void exitOnClose(bool propval)
   {
-    return setExitOnClose(propval);
+    setExitOnClose(propval);
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags from the #GDBusConnectionFlags enumeration.
+  */
+  @property gio.types.DBusConnectionFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Get `guid` property.
+      Returns: The GUID of the peer performing the role of server when
+        authenticating.
+        
+        If you are constructing a #GDBusConnection and pass
+        [gio.types.DBusConnectionFlags.AuthenticationServer] in the
+        #GDBusConnection:flags property then you **must** also set this
+        property to a valid guid.
+        
+        If you are constructing a #GDBusConnection and pass
+        [gio.types.DBusConnectionFlags.AuthenticationClient] in the
+        #GDBusConnection:flags property you will be able to read the GUID
+        of the other peer here after the connection has been successfully
+        initialized.
+        
+        Note that the
+        [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
+        uses the term ‘UUID’ to refer to this, whereas GLib consistently uses the
+        term ‘GUID’ for historical reasons.
+        
+        Despite its name, the format of #GDBusConnection:guid does not follow
+        [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122) or the Microsoft
+        GUID format.
+  */
+  @property string guid()
+  {
+    return getGuid();
+  }
+
+  /**
+      Get `stream` property.
+      Returns: The underlying #GIOStream used for I/O.
+        
+        If this is passed on construction and is a #GSocketConnection,
+        then the corresponding #GSocket will be put into non-blocking mode.
+        
+        While the #GDBusConnection is active, it will interact with this
+        stream from a worker thread, so it is not safe to interact with
+        the stream directly.
+  */
+  @property gio.iostream.IOStream stream()
+  {
+    return getStream();
   }
 
   /**
@@ -1706,5 +1771,121 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
+  }
+}
+
+class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_initable.AsyncInitableGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin AsyncInitableGidBuilderT!();
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `address` property.
+      Params:
+        propval = A D-Bus address specifying potential endpoints that can be used
+          when establishing the connection.
+      Returns: Builder instance for fluent chaining
+  */
+  T address(string propval)
+  {
+    return setProperty("address", propval);
+  }
+
+  /**
+      Set `authenticationObserver` property.
+      Params:
+        propval = A #GDBusAuthObserver object to assist in the authentication process or null.
+      Returns: Builder instance for fluent chaining
+  */
+  T authenticationObserver(gio.dbus_auth_observer.DBusAuthObserver propval)
+  {
+    return setProperty("authentication-observer", propval);
+  }
+
+  /**
+      Set `exitOnClose` property.
+      Params:
+        propval = A boolean specifying whether the process will be terminated (by
+          calling `raise(SIGTERM)`) if the connection is closed by the
+          remote peer.
+          
+          Note that #GDBusConnection objects returned by [gio.global.busGetFinish]
+          and [gio.global.busGetSync] will (usually) have this property set to true.
+      Returns: Builder instance for fluent chaining
+  */
+  T exitOnClose(bool propval)
+  {
+    return setProperty("exit-on-close", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags from the #GDBusConnectionFlags enumeration.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.DBusConnectionFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `guid` property.
+      Params:
+        propval = The GUID of the peer performing the role of server when
+          authenticating.
+          
+          If you are constructing a #GDBusConnection and pass
+          [gio.types.DBusConnectionFlags.AuthenticationServer] in the
+          #GDBusConnection:flags property then you **must** also set this
+          property to a valid guid.
+          
+          If you are constructing a #GDBusConnection and pass
+          [gio.types.DBusConnectionFlags.AuthenticationClient] in the
+          #GDBusConnection:flags property you will be able to read the GUID
+          of the other peer here after the connection has been successfully
+          initialized.
+          
+          Note that the
+          [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
+          uses the term ‘UUID’ to refer to this, whereas GLib consistently uses the
+          term ‘GUID’ for historical reasons.
+          
+          Despite its name, the format of #GDBusConnection:guid does not follow
+          [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122) or the Microsoft
+          GUID format.
+      Returns: Builder instance for fluent chaining
+  */
+  T guid(string propval)
+  {
+    return setProperty("guid", propval);
+  }
+
+  /**
+      Set `stream` property.
+      Params:
+        propval = The underlying #GIOStream used for I/O.
+          
+          If this is passed on construction and is a #GSocketConnection,
+          then the corresponding #GSocket will be put into non-blocking mode.
+          
+          While the #GDBusConnection is active, it will interact with this
+          stream from a worker thread, so it is not safe to interact with
+          the stream directly.
+      Returns: Builder instance for fluent chaining
+  */
+  T stream(gio.iostream.IOStream propval)
+  {
+    return setProperty("stream", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_connection.DBusConnection]
+final class DBusConnectionGidBuilder : DBusConnectionGidBuilderImpl!DBusConnectionGidBuilder
+{
+  DBusConnection build()
+  {
+    return new DBusConnection(cast(void*)createGObject(DBusConnection._getGType), No.Take);
   }
 }

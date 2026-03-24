@@ -8,6 +8,7 @@ import gio.socket_connection;
 import gio.socket_listener;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -64,6 +65,15 @@ class SocketService : gio.socket_listener.SocketListener
   override SocketService self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.socket_service.SocketService]
+  Returns: New builder object
+  */
+  static SocketServiceGidBuilder builder()
+  {
+    return new SocketServiceGidBuilder;
   }
 
   /**
@@ -209,5 +219,29 @@ class SocketService : gio.socket_listener.SocketListener
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("incoming", closure, after);
+  }
+}
+
+class SocketServiceGidBuilderImpl(T) : gio.socket_listener.SocketListenerGidBuilderImpl!T
+{
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the service is currently accepting connections.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+}
+
+/// Fluent builder for [gio.socket_service.SocketService]
+final class SocketServiceGidBuilder : SocketServiceGidBuilderImpl!SocketServiceGidBuilder
+{
+  SocketService build()
+  {
+    return new SocketService(cast(void*)createGObject(SocketService._getGType), Yes.Take);
   }
 }

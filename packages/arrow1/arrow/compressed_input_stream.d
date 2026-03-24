@@ -12,6 +12,8 @@ import arrow.readable_mixin;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class CompressedInputStream : arrow.input_stream.InputStream
@@ -42,6 +44,27 @@ class CompressedInputStream : arrow.input_stream.InputStream
     return this;
   }
 
+  /**
+  Get builder for [arrow.compressed_input_stream.CompressedInputStream]
+  Returns: New builder object
+  */
+  static CompressedInputStreamGidBuilder builder()
+  {
+    return new CompressedInputStreamGidBuilder;
+  }
+
+  /** */
+  @property arrow.codec.Codec codec()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.codec.Codec)("codec");
+  }
+
+  /** */
+  @property arrow.input_stream.InputStream raw()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.input_stream.InputStream)("raw");
+  }
+
   /** */
   this(arrow.codec.Codec codec, arrow.input_stream.InputStream raw)
   {
@@ -51,5 +74,31 @@ class CompressedInputStream : arrow.input_stream.InputStream
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
+  }
+}
+
+class CompressedInputStreamGidBuilderImpl(T) : arrow.input_stream.InputStreamGidBuilderImpl!T
+{
+
+
+  /** */
+  T codec(arrow.codec.Codec propval)
+  {
+    return setProperty("codec", propval);
+  }
+
+  /** */
+  T raw(arrow.input_stream.InputStream propval)
+  {
+    return setProperty("raw", propval);
+  }
+}
+
+/// Fluent builder for [arrow.compressed_input_stream.CompressedInputStream]
+final class CompressedInputStreamGidBuilder : CompressedInputStreamGidBuilderImpl!CompressedInputStreamGidBuilder
+{
+  CompressedInputStream build()
+  {
+    return new CompressedInputStream(cast(void*)createGObject(CompressedInputStream._getGType), Yes.Take);
   }
 }

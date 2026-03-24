@@ -3,6 +3,7 @@ module panel.dock;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -59,6 +60,15 @@ class Dock : gtk.widget.Widget
     return this;
   }
 
+  /**
+  Get builder for [panel.dock.Dock]
+  Returns: New builder object
+  */
+  static DockGidBuilder builder()
+  {
+    return new DockGidBuilder;
+  }
+
   /** */
   @property int bottomHeight()
   {
@@ -68,7 +78,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void bottomHeight(int propval)
   {
-    return setBottomHeight(propval);
+    setBottomHeight(propval);
   }
 
   /** */
@@ -104,7 +114,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void endWidth(int propval)
   {
-    return setEndWidth(propval);
+    setEndWidth(propval);
   }
 
   /** */
@@ -116,7 +126,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void revealBottom(bool propval)
   {
-    return setRevealBottom(propval);
+    setRevealBottom(propval);
   }
 
   /** */
@@ -128,7 +138,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void revealEnd(bool propval)
   {
-    return setRevealEnd(propval);
+    setRevealEnd(propval);
   }
 
   /** */
@@ -140,7 +150,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void revealStart(bool propval)
   {
-    return setRevealStart(propval);
+    setRevealStart(propval);
   }
 
   /** */
@@ -152,7 +162,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void revealTop(bool propval)
   {
-    return setRevealTop(propval);
+    setRevealTop(propval);
   }
 
   /** */
@@ -164,7 +174,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void startWidth(int propval)
   {
-    return setStartWidth(propval);
+    setStartWidth(propval);
   }
 
   /** */
@@ -176,7 +186,7 @@ class Dock : gtk.widget.Widget
   /** */
   @property void topHeight(int propval)
   {
-    return setTopHeight(propval);
+    setTopHeight(propval);
   }
 
   /**
@@ -625,5 +635,67 @@ class Dock : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("panel-drag-end", closure, after);
+  }
+}
+
+class DockGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /** */
+  T bottomHeight(int propval)
+  {
+    return setProperty("bottom-height", propval);
+  }
+
+  /** */
+  T endWidth(int propval)
+  {
+    return setProperty("end-width", propval);
+  }
+
+  /** */
+  T revealBottom(bool propval)
+  {
+    return setProperty("reveal-bottom", propval);
+  }
+
+  /** */
+  T revealEnd(bool propval)
+  {
+    return setProperty("reveal-end", propval);
+  }
+
+  /** */
+  T revealStart(bool propval)
+  {
+    return setProperty("reveal-start", propval);
+  }
+
+  /** */
+  T revealTop(bool propval)
+  {
+    return setProperty("reveal-top", propval);
+  }
+
+  /** */
+  T startWidth(int propval)
+  {
+    return setProperty("start-width", propval);
+  }
+
+  /** */
+  T topHeight(int propval)
+  {
+    return setProperty("top-height", propval);
+  }
+}
+
+/// Fluent builder for [panel.dock.Dock]
+final class DockGidBuilder : DockGidBuilderImpl!DockGidBuilder
+{
+  Dock build()
+  {
+    return new Dock(cast(void*)createGObject(Dock._getGType), No.Take);
   }
 }

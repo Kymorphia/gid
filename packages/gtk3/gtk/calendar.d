@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -65,6 +66,15 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.calendar.Calendar]
+  Returns: New builder object
+  */
+  static CalendarGidBuilder builder()
+  {
+    return new CalendarGidBuilder;
+  }
+
+  /**
       Get `day` property.
       Returns: The selected day (as a number between 1 and 31, or 0
         to unselect the currently selected day).
@@ -105,7 +115,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void detailHeightRows(int propval)
   {
-    return setDetailHeightRows(propval);
+    setDetailHeightRows(propval);
   }
 
   /**
@@ -126,7 +136,7 @@ class Calendar : gtk.widget.Widget
   */
   @property void detailWidthChars(int propval)
   {
-    return setDetailWidthChars(propval);
+    setDetailWidthChars(propval);
   }
 
   /**
@@ -728,5 +738,137 @@ class Calendar : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prev-year", closure, after);
+  }
+}
+
+class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31, or 0
+          to unselect the currently selected day).
+          This property gets initially set to the current day.
+      Returns: Builder instance for fluent chaining
+  */
+  T day(int propval)
+  {
+    return setProperty("day", propval);
+  }
+
+  /**
+      Set `detailHeightRows` property.
+      Params:
+        propval = Height of a detail cell, in rows.
+          A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+      Returns: Builder instance for fluent chaining
+  */
+  T detailHeightRows(int propval)
+  {
+    return setProperty("detail-height-rows", propval);
+  }
+
+  /**
+      Set `detailWidthChars` property.
+      Params:
+        propval = Width of a detail cell, in characters.
+          A value of 0 allows any width. See [gtk.calendar.Calendar.setDetailFunc].
+      Returns: Builder instance for fluent chaining
+  */
+  T detailWidthChars(int propval)
+  {
+    return setProperty("detail-width-chars", propval);
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+          This property gets initially set to the current month.
+      Returns: Builder instance for fluent chaining
+  */
+  T month(int propval)
+  {
+    return setProperty("month", propval);
+  }
+
+  /**
+      Set `noMonthChange` property.
+      Params:
+        propval = Determines whether the selected month can be changed.
+      Returns: Builder instance for fluent chaining
+  */
+  T noMonthChange(bool propval)
+  {
+    return setProperty("no-month-change", propval);
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDayNames(bool propval)
+  {
+    return setProperty("show-day-names", propval);
+  }
+
+  /**
+      Set `showDetails` property.
+      Params:
+        propval = Determines whether details are shown directly in the widget, or if they are
+          available only as tooltip. When this property is set days with details are
+          marked.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDetails(bool propval)
+  {
+    return setProperty("show-details", propval);
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showHeading(bool propval)
+  {
+    return setProperty("show-heading", propval);
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showWeekNumbers(bool propval)
+  {
+    return setProperty("show-week-numbers", propval);
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+          This property gets initially set to the current year.
+      Returns: Builder instance for fluent chaining
+  */
+  T year(int propval)
+  {
+    return setProperty("year", propval);
+  }
+}
+
+/// Fluent builder for [gtk.calendar.Calendar]
+final class CalendarGidBuilder : CalendarGidBuilderImpl!CalendarGidBuilder
+{
+  Calendar build()
+  {
+    return new Calendar(cast(void*)createGObject(Calendar._getGType), No.Take);
   }
 }

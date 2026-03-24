@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.permission;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -77,6 +78,15 @@ class LockButton : gtk.button.Button
     return this;
   }
 
+  /**
+  Get builder for [gtk.lock_button.LockButton]
+  Returns: New builder object
+  */
+  static LockButtonGidBuilder builder()
+  {
+    return new LockButtonGidBuilder;
+  }
+
   /** */
   @property gio.permission.Permission permission()
   {
@@ -86,7 +96,7 @@ class LockButton : gtk.button.Button
   /** */
   @property void permission(gio.permission.Permission propval)
   {
-    return setPermission(propval);
+    setPermission(propval);
   }
 
   /** */
@@ -184,5 +194,55 @@ class LockButton : gtk.button.Button
   void setPermission(gio.permission.Permission permission = null)
   {
     gtk_lock_button_set_permission(cast(GtkLockButton*)this._cPtr, permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
+  }
+}
+
+class LockButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
+{
+
+
+  /** */
+  T permission(gio.permission.Permission propval)
+  {
+    return setProperty("permission", propval);
+  }
+
+  /** */
+  T textLock(string propval)
+  {
+    return setProperty("text-lock", propval);
+  }
+
+  /** */
+  T textUnlock(string propval)
+  {
+    return setProperty("text-unlock", propval);
+  }
+
+  /** */
+  T tooltipLock(string propval)
+  {
+    return setProperty("tooltip-lock", propval);
+  }
+
+  /** */
+  T tooltipNotAuthorized(string propval)
+  {
+    return setProperty("tooltip-not-authorized", propval);
+  }
+
+  /** */
+  T tooltipUnlock(string propval)
+  {
+    return setProperty("tooltip-unlock", propval);
+  }
+}
+
+/// Fluent builder for [gtk.lock_button.LockButton]
+final class LockButtonGidBuilder : LockButtonGidBuilderImpl!LockButtonGidBuilder
+{
+  LockButton build()
+  {
+    return new LockButton(cast(void*)createGObject(LockButton._getGType), No.Take);
   }
 }

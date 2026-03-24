@@ -5,6 +5,7 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -45,6 +46,33 @@ class InetAddress : gobject.object.ObjectWrap
   override InetAddress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.inet_address.InetAddress]
+  Returns: New builder object
+  */
+  static InetAddressGidBuilder builder()
+  {
+    return new InetAddressGidBuilder;
+  }
+
+  /**
+      Get `bytes` property.
+      Returns: The raw address data.
+  */
+  @property void* bytes()
+  {
+    return gobject.object.ObjectWrap.getProperty!(void*)("bytes");
+  }
+
+  /**
+      Get `family` property.
+      Returns: The address family (IPv4 or IPv6).
+  */
+  @property gio.types.SocketFamily family()
+  {
+    return getFamily();
   }
 
   /**
@@ -384,5 +412,40 @@ class InetAddress : gobject.object.ObjectWrap
     _cretval = g_inet_address_to_string(cast(GInetAddress*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class InetAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `bytes` property.
+      Params:
+        propval = The raw address data.
+      Returns: Builder instance for fluent chaining
+  */
+  T bytes(void* propval)
+  {
+    return setProperty("bytes", propval);
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = The address family (IPv4 or IPv6).
+      Returns: Builder instance for fluent chaining
+  */
+  T family(gio.types.SocketFamily propval)
+  {
+    return setProperty("family", propval);
+  }
+}
+
+/// Fluent builder for [gio.inet_address.InetAddress]
+final class InetAddressGidBuilder : InetAddressGidBuilderImpl!InetAddressGidBuilder
+{
+  InetAddress build()
+  {
+    return new InetAddress(cast(void*)createGObject(InetAddress._getGType), No.Take);
   }
 }

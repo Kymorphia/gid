@@ -2,6 +2,7 @@
 module gst.element_factory;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -65,6 +66,15 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   override ElementFactory self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gst.element_factory.ElementFactory]
+  Returns: New builder object
+  */
+  static ElementFactoryGidBuilder builder()
+  {
+    return new ElementFactoryGidBuilder;
   }
 
   /**
@@ -447,5 +457,18 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     bool _retval;
     _retval = cast(bool)gst_element_factory_list_is_type(cast(GstElementFactory*)this._cPtr, type);
     return _retval;
+  }
+}
+
+class ElementFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gst.element_factory.ElementFactory]
+final class ElementFactoryGidBuilder : ElementFactoryGidBuilderImpl!ElementFactoryGidBuilder
+{
+  ElementFactory build()
+  {
+    return new ElementFactory(cast(void*)createGObject(ElementFactory._getGType), No.Take);
   }
 }

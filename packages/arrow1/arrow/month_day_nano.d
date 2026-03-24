@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class MonthDayNano : gobject.object.ObjectWrap
   override MonthDayNano self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.month_day_nano.MonthDayNano]
+  Returns: New builder object
+  */
+  static MonthDayNanoGidBuilder builder()
+  {
+    return new MonthDayNanoGidBuilder;
   }
 
   /**
@@ -107,5 +117,51 @@ class MonthDayNano : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)this._cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class MonthDayNanoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The day part value.
+      Returns: Builder instance for fluent chaining
+  */
+  T day(int propval)
+  {
+    return setProperty("day", propval);
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The month part value.
+      Returns: Builder instance for fluent chaining
+  */
+  T month(int propval)
+  {
+    return setProperty("month", propval);
+  }
+
+  /**
+      Set `nanosecond` property.
+      Params:
+        propval = The nanosecond part value.
+      Returns: Builder instance for fluent chaining
+  */
+  T nanosecond(long propval)
+  {
+    return setProperty("nanosecond", propval);
+  }
+}
+
+/// Fluent builder for [arrow.month_day_nano.MonthDayNano]
+final class MonthDayNanoGidBuilder : MonthDayNanoGidBuilderImpl!MonthDayNanoGidBuilder
+{
+  MonthDayNano build()
+  {
+    return new MonthDayNano(cast(void*)createGObject(MonthDayNano._getGType), Yes.Take);
   }
 }

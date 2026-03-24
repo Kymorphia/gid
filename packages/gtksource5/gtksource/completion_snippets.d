@@ -2,6 +2,7 @@
 module gtksource.completion_snippets;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -44,6 +45,15 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
     return this;
   }
 
+  /**
+  Get builder for [gtksource.completion_snippets.CompletionSnippets]
+  Returns: New builder object
+  */
+  static CompletionSnippetsGidBuilder builder()
+  {
+    return new CompletionSnippetsGidBuilder;
+  }
+
   /** */
   @property int priority()
   {
@@ -76,5 +86,32 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
     GtkSourceCompletionSnippets* _cretval;
     _cretval = gtk_source_completion_snippets_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class CompletionSnippetsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtksource.completion_provider.CompletionProviderGidBuilderImpl!T
+{
+
+  mixin CompletionProviderGidBuilderT!();
+
+  /** */
+  T priority(int propval)
+  {
+    return setProperty("priority", propval);
+  }
+
+  /** */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion_snippets.CompletionSnippets]
+final class CompletionSnippetsGidBuilder : CompletionSnippetsGidBuilderImpl!CompletionSnippetsGidBuilder
+{
+  CompletionSnippets build()
+  {
+    return new CompletionSnippets(cast(void*)createGObject(CompletionSnippets._getGType), Yes.Take);
   }
 }

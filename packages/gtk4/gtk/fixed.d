@@ -2,6 +2,7 @@
 module gtk.fixed;
 
 import gid.gid;
+import gobject.gid_builder;
 import gsk.transform;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -81,6 +82,15 @@ class Fixed : gtk.widget.Widget
   override Fixed self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.fixed.Fixed]
+  Returns: New builder object
+  */
+  static FixedGidBuilder builder()
+  {
+    return new FixedGidBuilder;
   }
 
   /**
@@ -179,5 +189,19 @@ class Fixed : gtk.widget.Widget
   void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform = null)
   {
     gtk_fixed_set_child_transform(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
+  }
+}
+
+class FixedGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.fixed.Fixed]
+final class FixedGidBuilder : FixedGidBuilderImpl!FixedGidBuilder
+{
+  Fixed build()
+  {
+    return new Fixed(cast(void*)createGObject(Fixed._getGType), No.Take);
   }
 }

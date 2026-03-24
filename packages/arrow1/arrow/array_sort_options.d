@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
   override ArraySortOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.array_sort_options.ArraySortOptions]
+  Returns: New builder object
+  */
+  static ArraySortOptionsGidBuilder builder()
+  {
+    return new ArraySortOptionsGidBuilder;
   }
 
   /**
@@ -72,5 +82,29 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
     bool _retval;
     _retval = cast(bool)garrow_array_sort_options_equal(cast(GArrowArraySortOptions*)this._cPtr, otherOptions ? cast(GArrowArraySortOptions*)otherOptions._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class ArraySortOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `order` property.
+      Params:
+        propval = How to order values.
+      Returns: Builder instance for fluent chaining
+  */
+  T order(arrow.types.SortOrder propval)
+  {
+    return setProperty("order", propval);
+  }
+}
+
+/// Fluent builder for [arrow.array_sort_options.ArraySortOptions]
+final class ArraySortOptionsGidBuilder : ArraySortOptionsGidBuilderImpl!ArraySortOptionsGidBuilder
+{
+  ArraySortOptions build()
+  {
+    return new ArraySortOptions(cast(void*)createGObject(ArraySortOptions._getGType), Yes.Take);
   }
 }

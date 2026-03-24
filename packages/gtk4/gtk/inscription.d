@@ -2,6 +2,7 @@
 module gtk.inscription;
 
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_text;
@@ -60,6 +61,15 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
+  Get builder for [gtk.inscription.Inscription]
+  Returns: New builder object
+  */
+  static InscriptionGidBuilder builder()
+  {
+    return new InscriptionGidBuilder;
+  }
+
+  /**
       Get `attributes` property.
       Returns: A list of style attributes to apply to the text of the inscription.
   */
@@ -75,7 +85,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void attributes(pango.attr_list.AttrList propval)
   {
-    return setAttributes(propval);
+    setAttributes(propval);
   }
 
   /**
@@ -91,7 +101,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void markup(string propval)
   {
-    return setMarkup(propval);
+    setMarkup(propval);
   }
 
   /**
@@ -130,7 +140,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void minChars(uint propval)
   {
-    return setMinChars(propval);
+    setMinChars(propval);
   }
 
   /**
@@ -167,7 +177,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void minLines(uint propval)
   {
-    return setMinLines(propval);
+    setMinLines(propval);
   }
 
   /**
@@ -200,7 +210,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void natChars(uint propval)
   {
-    return setNatChars(propval);
+    setNatChars(propval);
   }
 
   /**
@@ -233,7 +243,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void natLines(uint propval)
   {
-    return setNatLines(propval);
+    setNatLines(propval);
   }
 
   /**
@@ -252,7 +262,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void text(string propval)
   {
-    return setText(propval);
+    setText(propval);
   }
 
   /**
@@ -271,7 +281,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void textOverflow(gtk.types.InscriptionOverflow propval)
   {
-    return setTextOverflow(propval);
+    setTextOverflow(propval);
   }
 
   /**
@@ -294,7 +304,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void wrapMode(pango.types.WrapMode propval)
   {
-    return setWrapMode(propval);
+    setWrapMode(propval);
   }
 
   /**
@@ -319,7 +329,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void xalign(float propval)
   {
-    return setXalign(propval);
+    setXalign(propval);
   }
 
   /**
@@ -344,7 +354,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   @property void yalign(float propval)
   {
-    return setYalign(propval);
+    setYalign(propval);
   }
 
   mixin AccessibleTextT!();
@@ -629,5 +639,188 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   void setYalign(float yalign)
   {
     gtk_inscription_set_yalign(cast(GtkInscription*)this._cPtr, yalign);
+  }
+}
+
+class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T
+{
+
+  mixin AccessibleTextGidBuilderT!();
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of style attributes to apply to the text of the inscription.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(pango.attr_list.AttrList propval)
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `markup` property.
+      Params:
+        propval = Utility property that sets both the [gtk.inscription.Inscription.text] and
+          [gtk.inscription.Inscription.attributes] properties, mainly intended for use in
+          GtkBuilder ui files to ease translation support and bindings.
+          
+          This function uses `func@Pango.parse_markup` to parse the markup into text and
+          attributes. The markup must be valid. If you cannot ensure that, consider using
+          `func@Pango.parse_markup` and setting the two properties yourself.
+      Returns: Builder instance for fluent chaining
+  */
+  T markup(string propval)
+  {
+    return setProperty("markup", propval);
+  }
+
+  /**
+      Set `minChars` property.
+      Params:
+        propval = The number of characters that should fit into the inscription at minimum.
+          
+          This influences the requested width, not the width actually given to the widget,
+          which might turn out to be larger.
+          
+          Note that this is an approximate character width, so some characters might be
+          wider and some might be thinner, so do not expect the number of characters to
+          exactly match.
+          
+          If you set this property to 0, the inscription will not request any width at all
+          and its width will be determined entirely by its surroundings.
+      Returns: Builder instance for fluent chaining
+  */
+  T minChars(uint propval)
+  {
+    return setProperty("min-chars", propval);
+  }
+
+  /**
+      Set `minLines` property.
+      Params:
+        propval = The number of lines that should fit into the inscription at minimum.
+          
+          This influences the requested height, not the height actually given to the widget,
+          which might turn out to be larger.
+          
+          Note that this is an approximate line height, so if the text uses things like fancy
+          Unicode or attribute that influence the height, the text might not fit.
+          
+          If you set this property to 0, the inscription will not request any height at all
+          and its height will be determined entirely by its surroundings.
+      Returns: Builder instance for fluent chaining
+  */
+  T minLines(uint propval)
+  {
+    return setProperty("min-lines", propval);
+  }
+
+  /**
+      Set `natChars` property.
+      Params:
+        propval = The number of characters that should ideally fit into the inscription.
+          
+          This influences the requested width, not the width actually given to the widget.
+          The widget might turn out larger as well as smaller.
+          
+          If this property is set to a value smaller than `property@Gtk.Inscription:min-chars`,
+          that value will be used. In particular, for the default value of 0, this will always
+          be the case.
+      Returns: Builder instance for fluent chaining
+  */
+  T natChars(uint propval)
+  {
+    return setProperty("nat-chars", propval);
+  }
+
+  /**
+      Set `natLines` property.
+      Params:
+        propval = The number of lines that should ideally fit into the inscription.
+          
+          This influences the requested height, not the height actually given to the widget.
+          The widget might turn out larger as well as smaller.
+          
+          If this property is set to a value smaller than `property@Gtk.Inscription:min-lines`,
+          that value will be used. In particular, for the default value of 0, this will always
+          be the case.
+      Returns: Builder instance for fluent chaining
+  */
+  T natLines(uint propval)
+  {
+    return setProperty("nat-lines", propval);
+  }
+
+  /**
+      Set `text` property.
+      Params:
+        propval = The displayed text.
+      Returns: Builder instance for fluent chaining
+  */
+  T text(string propval)
+  {
+    return setProperty("text", propval);
+  }
+
+  /**
+      Set `textOverflow` property.
+      Params:
+        propval = The overflow method to use for the text.
+      Returns: Builder instance for fluent chaining
+  */
+  T textOverflow(gtk.types.InscriptionOverflow propval)
+  {
+    return setProperty("text-overflow", propval);
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Controls how the line wrapping is done.
+          
+          Note that unlike [gtk.label.Label], the default here is [pango.types.WrapMode.WordChar].
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapMode(pango.types.WrapMode propval)
+  {
+    return setProperty("wrap-mode", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of the text inside the allocated size.
+          
+          Compare this to [gtk.widget.Widget.halign], which determines how the
+          inscription's size allocation is positioned in the available space.
+      Returns: Builder instance for fluent chaining
+  */
+  T xalign(float propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of the text inside the allocated size.
+          
+          Compare this to [gtk.widget.Widget.valign], which determines how the
+          inscription's size allocation is positioned in the available space.
+      Returns: Builder instance for fluent chaining
+  */
+  T yalign(float propval)
+  {
+    return setProperty("yalign", propval);
+  }
+}
+
+/// Fluent builder for [gtk.inscription.Inscription]
+final class InscriptionGidBuilder : InscriptionGidBuilderImpl!InscriptionGidBuilder
+{
+  Inscription build()
+  {
+    return new Inscription(cast(void*)createGObject(Inscription._getGType), No.Take);
   }
 }

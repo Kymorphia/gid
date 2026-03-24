@@ -2,6 +2,7 @@
 module soup.auth_digest;
 
 import gid.gid;
+import gobject.gid_builder;
 import soup.auth;
 import soup.c.functions;
 import soup.c.types;
@@ -40,5 +41,27 @@ class AuthDigest : soup.auth.Auth
   override AuthDigest self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [soup.auth_digest.AuthDigest]
+  Returns: New builder object
+  */
+  static AuthDigestGidBuilder builder()
+  {
+    return new AuthDigestGidBuilder;
+  }
+}
+
+class AuthDigestGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [soup.auth_digest.AuthDigest]
+final class AuthDigestGidBuilder : AuthDigestGidBuilderImpl!AuthDigestGidBuilder
+{
+  AuthDigest build()
+  {
+    return new AuthDigest(cast(void*)createGObject(AuthDigest._getGType), No.Take);
   }
 }

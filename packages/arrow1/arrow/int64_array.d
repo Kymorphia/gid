@@ -8,6 +8,7 @@ import arrow.numeric_array;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class Int64Array : arrow.numeric_array.NumericArray
@@ -36,6 +37,15 @@ class Int64Array : arrow.numeric_array.NumericArray
   override Int64Array self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.int64_array.Int64Array]
+  Returns: New builder object
+  */
+  static Int64ArrayGidBuilder builder()
+  {
+    return new Int64ArrayGidBuilder;
   }
 
   /** */
@@ -78,5 +88,18 @@ class Int64Array : arrow.numeric_array.NumericArray
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class Int64ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.int64_array.Int64Array]
+final class Int64ArrayGidBuilder : Int64ArrayGidBuilderImpl!Int64ArrayGidBuilder
+{
+  Int64Array build()
+  {
+    return new Int64Array(cast(void*)createGObject(Int64Array._getGType), Yes.Take);
   }
 }

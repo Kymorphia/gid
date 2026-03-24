@@ -3,6 +3,7 @@ module json.path;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import json.c.functions;
 import json.c.types;
@@ -169,6 +170,15 @@ class Path : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [json.path.Path]
+  Returns: New builder object
+  */
+  static PathGidBuilder builder()
+  {
+    return new PathGidBuilder;
+  }
+
+  /**
       Creates a new [json.path.Path] instance.
       
       Once created, the [json.path.Path] object should be used with
@@ -249,5 +259,18 @@ class Path : gobject.object.ObjectWrap
     _cretval = json_path_match(cast(JsonPath*)this._cPtr, root ? cast(JsonNode*)root._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+}
+
+class PathGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [json.path.Path]
+final class PathGidBuilder : PathGidBuilderImpl!PathGidBuilder
+{
+  Path build()
+  {
+    return new Path(cast(void*)createGObject(Path._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gtk.assistant_page;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -39,6 +40,26 @@ class AssistantPage : gobject.object.ObjectWrap
   override AssistantPage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.assistant_page.AssistantPage]
+  Returns: New builder object
+  */
+  static AssistantPageGidBuilder builder()
+  {
+    return new AssistantPageGidBuilder;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  @property gtk.widget.Widget child()
+  {
+    return getChild();
   }
 
   /**
@@ -128,5 +149,73 @@ class AssistantPage : gobject.object.ObjectWrap
     _cretval = gtk_assistant_page_get_child(cast(GtkAssistantPage*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+}
+
+class AssistantPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `complete` property.
+      Params:
+        propval = Whether all required fields are filled in.
+          
+          GTK uses this information to control the sensitivity
+          of the navigation buttons.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  T complete(bool propval)
+  {
+    return setProperty("complete", propval);
+  }
+
+  /**
+      Set `pageType` property.
+      Params:
+        propval = The type of the assistant page.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  T pageType(gtk.types.AssistantPageType propval)
+  {
+    return setProperty("page-type", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the page.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This object will be removed in GTK 5
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtk.assistant_page.AssistantPage]
+final class AssistantPageGidBuilder : AssistantPageGidBuilderImpl!AssistantPageGidBuilder
+{
+  AssistantPage build()
+  {
+    return new AssistantPage(cast(void*)createGObject(AssistantPage._getGType), No.Take);
   }
 }

@@ -4,6 +4,7 @@ module gtk.menu_button;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -110,6 +111,15 @@ class MenuButton : gtk.widget.Widget
   }
 
   /**
+  Get builder for [gtk.menu_button.MenuButton]
+  Returns: New builder object
+  */
+  static MenuButtonGidBuilder builder()
+  {
+    return new MenuButtonGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: Whether the menu button is active.
   */
@@ -125,7 +135,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -144,7 +154,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void alwaysShowArrow(bool propval)
   {
-    return setAlwaysShowArrow(propval);
+    setAlwaysShowArrow(propval);
   }
 
   /**
@@ -165,7 +175,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void canShrink(bool propval)
   {
-    return setCanShrink(propval);
+    setCanShrink(propval);
   }
 
   /**
@@ -184,7 +194,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -205,7 +215,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void direction(gtk.types.ArrowType propval)
   {
-    return setDirection(propval);
+    setDirection(propval);
   }
 
   /**
@@ -224,7 +234,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void hasFrame(bool propval)
   {
-    return setHasFrame(propval);
+    setHasFrame(propval);
   }
 
   /**
@@ -243,7 +253,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -262,7 +272,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void label(string propval)
   {
-    return setLabel(propval);
+    setLabel(propval);
   }
 
   /**
@@ -287,7 +297,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
   {
-    return setMenuModel(propval);
+    setMenuModel(propval);
   }
 
   /**
@@ -329,7 +339,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void primary(bool propval)
   {
-    return setPrimary(propval);
+    setPrimary(propval);
   }
 
   /**
@@ -348,7 +358,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void useUnderline(bool propval)
   {
-    return setUseUnderline(propval);
+    setUseUnderline(propval);
   }
 
   /**
@@ -792,5 +802,158 @@ class MenuButton : gtk.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the menu button is active.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `alwaysShowArrow` property.
+      Params:
+        propval = Whether to show a dropdown arrow even when using an icon or a custom child.
+      Returns: Builder instance for fluent chaining
+  */
+  T alwaysShowArrow(bool propval)
+  {
+    return setProperty("always-show-arrow", propval);
+  }
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = Whether the size of the button can be made smaller than the natural
+          size of its contents.
+      Returns: Builder instance for fluent chaining
+  */
+  T canShrink(bool propval)
+  {
+    return setProperty("can-shrink", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The [gtk.types.ArrowType] representing the direction in which the
+          menu or popover will be popped out.
+      Returns: Builder instance for fluent chaining
+  */
+  T direction(gtk.types.ArrowType propval)
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether the button has a frame.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval)
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon used to automatically populate the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The label for the button.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval)
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The [gio.menu_model.MenuModel] from which the popup will be created.
+          
+          See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
+          with the [gtk.menu_button.MenuButton.popover] property.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("menu-model", propval);
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The [gtk.popover.Popover] that will be popped up when the button is clicked.
+      Returns: Builder instance for fluent chaining
+  */
+  T popover(gtk.popover.Popover propval)
+  {
+    return setProperty("popover", propval);
+  }
+
+  /**
+      Set `primary` property.
+      Params:
+        propval = Whether the menu button acts as a primary menu.
+          
+          Primary menus can be opened using the <kbd>F10</kbd> key
+      Returns: Builder instance for fluent chaining
+  */
+  T primary(bool propval)
+  {
+    return setProperty("primary", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = If set an underscore in the text indicates a mnemonic.
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval)
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gtk.menu_button.MenuButton]
+final class MenuButtonGidBuilder : MenuButtonGidBuilderImpl!MenuButtonGidBuilder
+{
+  MenuButton build()
+  {
+    return new MenuButton(cast(void*)createGObject(MenuButton._getGType), No.Take);
   }
 }

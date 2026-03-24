@@ -2,6 +2,7 @@
 module pango.fontset_simple;
 
 import gid.gid;
+import gobject.gid_builder;
 import pango.c.functions;
 import pango.c.types;
 import pango.font;
@@ -45,6 +46,15 @@ class FontsetSimple : pango.fontset.Fontset
   }
 
   /**
+  Get builder for [pango.fontset_simple.FontsetSimple]
+  Returns: New builder object
+  */
+  static FontsetSimpleGidBuilder builder()
+  {
+    return new FontsetSimpleGidBuilder;
+  }
+
+  /**
       Creates a new [pango.fontset_simple.FontsetSimple] for the given language.
   
       Params:
@@ -80,5 +90,18 @@ class FontsetSimple : pango.fontset.Fontset
     int _retval;
     _retval = pango_fontset_simple_size(cast(PangoFontsetSimple*)this._cPtr);
     return _retval;
+  }
+}
+
+class FontsetSimpleGidBuilderImpl(T) : pango.fontset.FontsetGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [pango.fontset_simple.FontsetSimple]
+final class FontsetSimpleGidBuilder : FontsetSimpleGidBuilderImpl!FontsetSimpleGidBuilder
+{
+  FontsetSimple build()
+  {
+    return new FontsetSimple(cast(void*)createGObject(FontsetSimple._getGType), Yes.Take);
   }
 }

@@ -9,6 +9,8 @@ import gio.inet_socket_address;
 import gio.socket_connectable;
 import gio.socket_connectable_mixin;
 import gio.types;
+import gobject.gid_builder;
+import gobject.object;
 
 /**
     A [gio.inet_socket_address.InetSocketAddress] representing a connection via a proxy server.
@@ -39,6 +41,80 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
   override ProxyAddress self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.proxy_address.ProxyAddress]
+  Returns: New builder object
+  */
+  static ProxyAddressGidBuilder builder()
+  {
+    return new ProxyAddressGidBuilder;
+  }
+
+  /**
+      Get `destinationHostname` property.
+      Returns: The proxy destination hostname.
+  */
+  @property string destinationHostname()
+  {
+    return getDestinationHostname();
+  }
+
+  /**
+      Get `destinationPort` property.
+      Returns: The proxy destination port.
+  */
+  @property uint destinationPort()
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("destination-port");
+  }
+
+  /**
+      Get `destinationProtocol` property.
+      Returns: The protocol being spoke to the destination host, or null if
+        the #GProxyAddress doesn't know.
+  */
+  @property string destinationProtocol()
+  {
+    return getDestinationProtocol();
+  }
+
+  /**
+      Get `password` property.
+      Returns: The proxy password.
+  */
+  @property string password()
+  {
+    return getPassword();
+  }
+
+  /**
+      Get `protocol` property.
+      Returns: The proxy protocol.
+  */
+  @property string protocol()
+  {
+    return getProtocol();
+  }
+
+  /**
+      Get `uri` property.
+      Returns: The URI string that the proxy was constructed from (or null
+        if the creator didn't specify this).
+  */
+  @property string uri()
+  {
+    return getUri();
+  }
+
+  /**
+      Get `username` property.
+      Returns: The proxy username.
+  */
+  @property string username()
+  {
+    return getUsername();
   }
 
   /**
@@ -158,5 +234,98 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
     _cretval = g_proxy_address_get_username(cast(GProxyAddress*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
+  }
+}
+
+class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressGidBuilderImpl!T
+{
+
+
+  /**
+      Set `destinationHostname` property.
+      Params:
+        propval = The proxy destination hostname.
+      Returns: Builder instance for fluent chaining
+  */
+  T destinationHostname(string propval)
+  {
+    return setProperty("destination-hostname", propval);
+  }
+
+  /**
+      Set `destinationPort` property.
+      Params:
+        propval = The proxy destination port.
+      Returns: Builder instance for fluent chaining
+  */
+  T destinationPort(uint propval)
+  {
+    return setProperty("destination-port", propval);
+  }
+
+  /**
+      Set `destinationProtocol` property.
+      Params:
+        propval = The protocol being spoke to the destination host, or null if
+          the #GProxyAddress doesn't know.
+      Returns: Builder instance for fluent chaining
+  */
+  T destinationProtocol(string propval)
+  {
+    return setProperty("destination-protocol", propval);
+  }
+
+  /**
+      Set `password` property.
+      Params:
+        propval = The proxy password.
+      Returns: Builder instance for fluent chaining
+  */
+  T password(string propval)
+  {
+    return setProperty("password", propval);
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = The proxy protocol.
+      Returns: Builder instance for fluent chaining
+  */
+  T protocol(string propval)
+  {
+    return setProperty("protocol", propval);
+  }
+
+  /**
+      Set `uri` property.
+      Params:
+        propval = The URI string that the proxy was constructed from (or null
+          if the creator didn't specify this).
+      Returns: Builder instance for fluent chaining
+  */
+  T uri(string propval)
+  {
+    return setProperty("uri", propval);
+  }
+
+  /**
+      Set `username` property.
+      Params:
+        propval = The proxy username.
+      Returns: Builder instance for fluent chaining
+  */
+  T username(string propval)
+  {
+    return setProperty("username", propval);
+  }
+}
+
+/// Fluent builder for [gio.proxy_address.ProxyAddress]
+final class ProxyAddressGidBuilder : ProxyAddressGidBuilderImpl!ProxyAddressGidBuilder
+{
+  ProxyAddress build()
+  {
+    return new ProxyAddress(cast(void*)createGObject(ProxyAddress._getGType), Yes.Take);
   }
 }

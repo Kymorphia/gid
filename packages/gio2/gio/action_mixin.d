@@ -9,6 +9,7 @@ public import gio.types;
 public import glib.error;
 public import glib.variant;
 public import glib.variant_type;
+public import gobject.gid_builder;
 
 /**
     [gio.action.Action] represents a single named action.
@@ -251,4 +252,8 @@ template ActionT()
     auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
+}
+
+template ActionGidBuilderT()
+{
 }

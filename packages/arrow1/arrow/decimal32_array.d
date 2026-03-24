@@ -7,6 +7,7 @@ import arrow.decimal32;
 import arrow.fixed_size_binary_array;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -38,6 +39,15 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     return this;
   }
 
+  /**
+  Get builder for [arrow.decimal32_array.Decimal32Array]
+  Returns: New builder object
+  */
+  static Decimal32ArrayGidBuilder builder()
+  {
+    return new Decimal32ArrayGidBuilder;
+  }
+
   /** */
   string formatValue(long i)
   {
@@ -56,5 +66,18 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     _cretval = garrow_decimal32_array_get_value(cast(GArrowDecimal32Array*)this._cPtr, i);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class Decimal32ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSizeBinaryArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.decimal32_array.Decimal32Array]
+final class Decimal32ArrayGidBuilder : Decimal32ArrayGidBuilderImpl!Decimal32ArrayGidBuilder
+{
+  Decimal32Array build()
+  {
+    return new Decimal32Array(cast(void*)createGObject(Decimal32Array._getGType), No.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.field;
 import arrow.types;
 import arrow.union_data_type;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class DenseUnionDataType : arrow.union_data_type.UnionDataType
@@ -37,6 +38,15 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
     return this;
   }
 
+  /**
+  Get builder for [arrow.dense_union_data_type.DenseUnionDataType]
+  Returns: New builder object
+  */
+  static DenseUnionDataTypeGidBuilder builder()
+  {
+    return new DenseUnionDataTypeGidBuilder;
+  }
+
   /** */
   this(arrow.field.Field[] fields, byte[] typeCodes)
   {
@@ -50,5 +60,18 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
     auto _typeCodes = cast(byte*)typeCodes.ptr;
     _cretval = garrow_dense_union_data_type_new(_fields, _typeCodes, _nTypeCodes);
     this(_cretval, Yes.Take);
+  }
+}
+
+class DenseUnionDataTypeGidBuilderImpl(T) : arrow.union_data_type.UnionDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.dense_union_data_type.DenseUnionDataType]
+final class DenseUnionDataTypeGidBuilder : DenseUnionDataTypeGidBuilderImpl!DenseUnionDataTypeGidBuilder
+{
+  DenseUnionDataType build()
+  {
+    return new DenseUnionDataType(cast(void*)createGObject(DenseUnionDataType._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import arrowdataset.c.types;
 import arrowdataset.file_format;
 import arrowdataset.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class CSVFileFormat : arrowdataset.file_format.FileFormat
@@ -36,11 +37,33 @@ class CSVFileFormat : arrowdataset.file_format.FileFormat
     return this;
   }
 
+  /**
+  Get builder for [arrowdataset.csvfile_format.CSVFileFormat]
+  Returns: New builder object
+  */
+  static CSVFileFormatGidBuilder builder()
+  {
+    return new CSVFileFormatGidBuilder;
+  }
+
   /** */
   this()
   {
     GADatasetCSVFileFormat* _cretval;
     _cretval = gadataset_csv_file_format_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class CSVFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.csvfile_format.CSVFileFormat]
+final class CSVFileFormatGidBuilder : CSVFileFormatGidBuilderImpl!CSVFileFormatGidBuilder
+{
+  CSVFileFormat build()
+  {
+    return new CSVFileFormat(cast(void*)createGObject(CSVFileFormat._getGType), Yes.Take);
   }
 }

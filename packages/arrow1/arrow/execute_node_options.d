@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,5 +35,33 @@ class ExecuteNodeOptions : gobject.object.ObjectWrap
   override ExecuteNodeOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.execute_node_options.ExecuteNodeOptions]
+  Returns: New builder object
+  */
+  static ExecuteNodeOptionsGidBuilder builder()
+  {
+    return new ExecuteNodeOptionsGidBuilder;
+  }
+}
+
+class ExecuteNodeOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T options(void* propval)
+  {
+    return setProperty("options", propval);
+  }
+}
+
+/// Fluent builder for [arrow.execute_node_options.ExecuteNodeOptions]
+final class ExecuteNodeOptionsGidBuilder : ExecuteNodeOptionsGidBuilderImpl!ExecuteNodeOptionsGidBuilder
+{
+  ExecuteNodeOptions build()
+  {
+    return new ExecuteNodeOptions(cast(void*)createGObject(ExecuteNodeOptions._getGType), No.Take);
   }
 }

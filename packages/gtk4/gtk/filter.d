@@ -3,6 +3,7 @@ module gtk.filter;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -54,6 +55,15 @@ class Filter : gobject.object.ObjectWrap
   override Filter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.filter.Filter]
+  Returns: New builder object
+  */
+  static FilterGidBuilder builder()
+  {
+    return new FilterGidBuilder;
   }
 
   /**
@@ -163,5 +173,18 @@ class Filter : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class FilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.filter.Filter]
+final class FilterGidBuilder : FilterGidBuilderImpl!FilterGidBuilder
+{
+  Filter build()
+  {
+    return new Filter(cast(void*)createGObject(Filter._getGType), No.Take);
   }
 }

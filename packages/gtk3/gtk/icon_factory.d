@@ -2,6 +2,7 @@
 module gtk.icon_factory;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -110,6 +111,15 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   override IconFactory self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.icon_factory.IconFactory]
+  Returns: New builder object
+  */
+  static IconFactoryGidBuilder builder()
+  {
+    return new IconFactoryGidBuilder;
   }
 
   mixin BuildableT!();
@@ -232,5 +242,20 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   void removeDefault()
   {
     gtk_icon_factory_remove_default(cast(GtkIconFactory*)this._cPtr);
+  }
+}
+
+class IconFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.icon_factory.IconFactory]
+final class IconFactoryGidBuilder : IconFactoryGidBuilderImpl!IconFactoryGidBuilder
+{
+  IconFactory build()
+  {
+    return new IconFactory(cast(void*)createGObject(IconFactory._getGType), Yes.Take);
   }
 }

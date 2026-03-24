@@ -7,6 +7,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -146,4 +147,8 @@ interface AsyncResult
       Throws: [ErrorWrap]
   */
   bool legacyPropagateError();
+}
+
+interface AsyncResultGidBuilderImpl(T)
+{
 }

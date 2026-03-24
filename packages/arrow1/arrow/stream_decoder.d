@@ -11,6 +11,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -40,6 +41,24 @@ class StreamDecoder : gobject.object.ObjectWrap
   override StreamDecoder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.stream_decoder.StreamDecoder]
+  Returns: New builder object
+  */
+  static StreamDecoderGidBuilder builder()
+  {
+    return new StreamDecoderGidBuilder;
+  }
+
+  /**
+      Get `listener` property.
+      Returns: A listener that receives decoded events.
+  */
+  @property arrow.stream_listener.StreamListener listener()
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.stream_listener.StreamListener)("listener");
   }
 
   /** */
@@ -184,5 +203,35 @@ class StreamDecoder : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class StreamDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T decoder(void* propval)
+  {
+    return setProperty("decoder", propval);
+  }
+
+  /**
+      Set `listener` property.
+      Params:
+        propval = A listener that receives decoded events.
+      Returns: Builder instance for fluent chaining
+  */
+  T listener(arrow.stream_listener.StreamListener propval)
+  {
+    return setProperty("listener", propval);
+  }
+}
+
+/// Fluent builder for [arrow.stream_decoder.StreamDecoder]
+final class StreamDecoderGidBuilder : StreamDecoderGidBuilderImpl!StreamDecoderGidBuilder
+{
+  StreamDecoder build()
+  {
+    return new StreamDecoder(cast(void*)createGObject(StreamDecoder._getGType), Yes.Take);
   }
 }

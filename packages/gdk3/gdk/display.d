@@ -15,6 +15,7 @@ import gdk.types;
 import gdk.window;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -65,6 +66,15 @@ class Display : gobject.object.ObjectWrap
   override Display self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.display.Display]
+  Returns: New builder object
+  */
+  static DisplayGidBuilder builder()
+  {
+    return new DisplayGidBuilder;
   }
 
   /**
@@ -1020,5 +1030,18 @@ class Display : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("seat-removed", closure, after);
+  }
+}
+
+class DisplayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.display.Display]
+final class DisplayGidBuilder : DisplayGidBuilderImpl!DisplayGidBuilder
+{
+  Display build()
+  {
+    return new Display(cast(void*)createGObject(Display._getGType), No.Take);
   }
 }

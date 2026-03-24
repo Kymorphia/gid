@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.bin;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -39,6 +40,15 @@ class FlowBoxChild : gtk.bin.Bin
   override FlowBoxChild self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.flow_box_child.FlowBoxChild]
+  Returns: New builder object
+  */
+  static FlowBoxChildGidBuilder builder()
+  {
+    return new FlowBoxChildGidBuilder;
   }
 
   /**
@@ -141,5 +151,19 @@ class FlowBoxChild : gtk.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+}
+
+class FlowBoxChildGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.flow_box_child.FlowBoxChild]
+final class FlowBoxChildGidBuilder : FlowBoxChildGidBuilderImpl!FlowBoxChildGidBuilder
+{
+  FlowBoxChild build()
+  {
+    return new FlowBoxChild(cast(void*)createGObject(FlowBoxChild._getGType), No.Take);
   }
 }

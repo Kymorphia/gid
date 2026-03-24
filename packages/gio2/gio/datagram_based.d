@@ -10,6 +10,7 @@ import gio.types;
 import glib.error;
 import glib.source;
 import glib.types;
+import gobject.gid_builder;
 
 /**
     Interface for socket-like objects with datagram semantics.
@@ -156,4 +157,8 @@ interface DatagramBased
       Returns: a newly allocated #GSource
   */
   glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null);
+}
+
+interface DatagramBasedGidBuilderImpl(T)
+{
 }

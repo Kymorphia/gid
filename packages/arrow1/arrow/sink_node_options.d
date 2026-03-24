@@ -8,6 +8,7 @@ import arrow.record_batch_reader;
 import arrow.schema;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -39,6 +40,15 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return this;
   }
 
+  /**
+  Get builder for [arrow.sink_node_options.SinkNodeOptions]
+  Returns: New builder object
+  */
+  static SinkNodeOptionsGidBuilder builder()
+  {
+    return new SinkNodeOptionsGidBuilder;
+  }
+
   /** */
   this()
   {
@@ -54,5 +64,18 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
+  }
+}
+
+class SinkNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.sink_node_options.SinkNodeOptions]
+final class SinkNodeOptionsGidBuilder : SinkNodeOptionsGidBuilderImpl!SinkNodeOptionsGidBuilder
+{
+  SinkNodeOptions build()
+  {
+    return new SinkNodeOptions(cast(void*)createGObject(SinkNodeOptions._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import gio.c.types;
 import gio.icon;
 import gio.types;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -82,6 +83,15 @@ class Notification : gobject.object.ObjectWrap
   override Notification self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.notification.Notification]
+  Returns: New builder object
+  */
+  static NotificationGidBuilder builder()
+  {
+    return new NotificationGidBuilder;
   }
 
   /**
@@ -263,5 +273,18 @@ class Notification : gobject.object.ObjectWrap
   void setUrgent(bool urgent)
   {
     g_notification_set_urgent(cast(GNotification*)this._cPtr, urgent);
+  }
+}
+
+class NotificationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.notification.Notification]
+final class NotificationGidBuilder : NotificationGidBuilderImpl!NotificationGidBuilder
+{
+  Notification build()
+  {
+    return new Notification(cast(void*)createGObject(Notification._getGType), Yes.Take);
   }
 }

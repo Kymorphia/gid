@@ -5,6 +5,7 @@ public import gtksource.completion_provider_iface_proxy;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_iter;
 import gtk.widget;
@@ -178,4 +179,8 @@ interface CompletionProvider
         info = a #GtkSourceCompletionInfo.
   */
   void updateInfo(gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_info.CompletionInfo info);
+}
+
+interface CompletionProviderGidBuilderImpl(T)
+{
 }

@@ -4,6 +4,7 @@ module gst.urihandler_mixin;
 public import gst.urihandler_iface_proxy;
 public import gid.gid;
 public import glib.error;
+public import gobject.gid_builder;
 public import gst.c.functions;
 public import gst.c.types;
 public import gst.types;
@@ -93,4 +94,8 @@ template URIHandlerT()
       throw new ErrorWrap(_err);
     return _retval;
   }
+}
+
+template URIHandlerGidBuilderT()
+{
 }

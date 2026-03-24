@@ -4,6 +4,7 @@ module gtk.string_list;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.buildable;
@@ -67,6 +68,15 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   override StringList self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.string_list.StringList]
+  Returns: New builder object
+  */
+  static StringListGidBuilder builder()
+  {
+    return new StringListGidBuilder;
   }
 
   /**
@@ -207,5 +217,21 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   {
     char* _string_ = string_.toCString(Yes.Alloc);
     gtk_string_list_take(cast(GtkStringList*)this._cPtr, _string_);
+  }
+}
+
+class StringListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.string_list.StringList]
+final class StringListGidBuilder : StringListGidBuilderImpl!StringListGidBuilder
+{
+  StringList build()
+  {
+    return new StringList(cast(void*)createGObject(StringList._getGType), Yes.Take);
   }
 }

@@ -4,6 +4,7 @@ module gst.child_proxy;
 public import gst.child_proxy_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.param_spec;
 import gobject.value;
@@ -176,4 +177,8 @@ interface ChildProxy
       Returns: Signal ID
   */
   ulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface ChildProxyGidBuilderImpl(T)
+{
 }

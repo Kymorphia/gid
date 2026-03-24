@@ -4,6 +4,7 @@ module gst.child_proxy_mixin;
 public import gst.child_proxy_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.param_spec;
 public import gobject.value;
@@ -278,4 +279,8 @@ template ChildProxyT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("child-removed", closure, after);
   }
+}
+
+template ChildProxyGidBuilderT()
+{
 }

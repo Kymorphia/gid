@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.file_system;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class HDFSFileSystem : arrow.file_system.FileSystem
@@ -34,5 +35,27 @@ class HDFSFileSystem : arrow.file_system.FileSystem
   override HDFSFileSystem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.hdfsfile_system.HDFSFileSystem]
+  Returns: New builder object
+  */
+  static HDFSFileSystemGidBuilder builder()
+  {
+    return new HDFSFileSystemGidBuilder;
+  }
+}
+
+class HDFSFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.hdfsfile_system.HDFSFileSystem]
+final class HDFSFileSystemGidBuilder : HDFSFileSystemGidBuilderImpl!HDFSFileSystemGidBuilder
+{
+  HDFSFileSystem build()
+  {
+    return new HDFSFileSystem(cast(void*)createGObject(HDFSFileSystem._getGType), No.Take);
   }
 }

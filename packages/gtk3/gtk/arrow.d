@@ -4,6 +4,7 @@ module gtk.arrow;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -62,6 +63,15 @@ class Arrow : gtk.misc.Misc
     return this;
   }
 
+  /**
+  Get builder for [gtk.arrow.Arrow]
+  Returns: New builder object
+  */
+  static ArrowGidBuilder builder()
+  {
+    return new ArrowGidBuilder;
+  }
+
   /** */
   @property gtk.types.ArrowType arrowType()
   {
@@ -115,5 +125,31 @@ class Arrow : gtk.misc.Misc
   void set(gtk.types.ArrowType arrowType, gtk.types.ShadowType shadowType)
   {
     gtk_arrow_set(cast(GtkArrow*)this._cPtr, arrowType, shadowType);
+  }
+}
+
+class ArrowGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
+{
+
+
+  /** */
+  T arrowType(gtk.types.ArrowType propval)
+  {
+    return setProperty("arrow-type", propval);
+  }
+
+  /** */
+  T shadowType(gtk.types.ShadowType propval)
+  {
+    return setProperty("shadow-type", propval);
+  }
+}
+
+/// Fluent builder for [gtk.arrow.Arrow]
+final class ArrowGidBuilder : ArrowGidBuilderImpl!ArrowGidBuilder
+{
+  Arrow build()
+  {
+    return new Arrow(cast(void*)createGObject(Arrow._getGType), No.Take);
   }
 }

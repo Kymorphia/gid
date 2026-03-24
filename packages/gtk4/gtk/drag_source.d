@@ -7,6 +7,7 @@ import gdk.paintable;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -120,6 +121,15 @@ class DragSource : gtk.gesture_single.GestureSingle
   }
 
   /**
+  Get builder for [gtk.drag_source.DragSource]
+  Returns: New builder object
+  */
+  static DragSourceGidBuilder builder()
+  {
+    return new DragSourceGidBuilder;
+  }
+
+  /**
       Get `actions` property.
       Returns: The actions that are supported by drag operations from the source.
         
@@ -141,7 +151,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   @property void actions(gdk.types.DragAction propval)
   {
-    return setActions(propval);
+    setActions(propval);
   }
 
   /**
@@ -160,7 +170,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   @property void content(gdk.content_provider.ContentProvider propval)
   {
-    return setContent(propval);
+    setContent(propval);
   }
 
   /**
@@ -491,5 +501,43 @@ class DragSource : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prepare", closure, after);
+  }
+}
+
+class DragSourceGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+
+  /**
+      Set `actions` property.
+      Params:
+        propval = The actions that are supported by drag operations from the source.
+          
+          Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+          if the actions include [gdk.types.DragAction.Move].
+      Returns: Builder instance for fluent chaining
+  */
+  T actions(gdk.types.DragAction propval)
+  {
+    return setProperty("actions", propval);
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The data that is offered by drag operations from this source.
+      Returns: Builder instance for fluent chaining
+  */
+  T content(gdk.content_provider.ContentProvider propval)
+  {
+    return setProperty("content", propval);
+  }
+}
+
+/// Fluent builder for [gtk.drag_source.DragSource]
+final class DragSourceGidBuilder : DragSourceGidBuilderImpl!DragSourceGidBuilder
+{
+  DragSource build()
+  {
+    return new DragSource(cast(void*)createGObject(DragSource._getGType), Yes.Take);
   }
 }

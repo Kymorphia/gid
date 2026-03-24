@@ -3,6 +3,7 @@ module gtk.gesture_swipe;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture_single;
@@ -47,6 +48,15 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   override GestureSwipe self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.gesture_swipe.GestureSwipe]
+  Returns: New builder object
+  */
+  static GestureSwipeGidBuilder builder()
+  {
+    return new GestureSwipeGidBuilder;
   }
 
   /**
@@ -128,5 +138,18 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("swipe", closure, after);
+  }
+}
+
+class GestureSwipeGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.gesture_swipe.GestureSwipe]
+final class GestureSwipeGidBuilder : GestureSwipeGidBuilderImpl!GestureSwipeGidBuilder
+{
+  GestureSwipe build()
+  {
+    return new GestureSwipe(cast(void*)createGObject(GestureSwipe._getGType), Yes.Take);
   }
 }

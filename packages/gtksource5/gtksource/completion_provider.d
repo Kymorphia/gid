@@ -9,6 +9,7 @@ import gio.cancellable;
 import gio.list_model;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_iter;
 import gtksource.c.functions;
@@ -182,4 +183,8 @@ interface CompletionProvider
         model = a #GListModel
   */
   void refilter(gtksource.completion_context.CompletionContext context, gio.list_model.ListModel model);
+}
+
+interface CompletionProviderGidBuilderImpl(T)
+{
 }

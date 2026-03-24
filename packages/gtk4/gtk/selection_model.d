@@ -4,6 +4,7 @@ module gtk.selection_model;
 public import gtk.selection_model_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.bitset;
 import gtk.c.functions;
 import gtk.c.types;
@@ -236,4 +237,8 @@ interface SelectionModel
       Returns: Signal ID
   */
   ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface SelectionModelGidBuilderImpl(T)
+{
 }

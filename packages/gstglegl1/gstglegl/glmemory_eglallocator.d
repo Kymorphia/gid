@@ -2,6 +2,7 @@
 module gstglegl.glmemory_eglallocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gstgl.glmemory_allocator;
 import gstglegl.c.functions;
 import gstglegl.c.types;
@@ -36,5 +37,27 @@ class GLMemoryEGLAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
   override GLMemoryEGLAllocator self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstglegl.glmemory_eglallocator.GLMemoryEGLAllocator]
+  Returns: New builder object
+  */
+  static GLMemoryEGLAllocatorGidBuilder builder()
+  {
+    return new GLMemoryEGLAllocatorGidBuilder;
+  }
+}
+
+class GLMemoryEGLAllocatorGidBuilderImpl(T) : gstgl.glmemory_allocator.GLMemoryAllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstglegl.glmemory_eglallocator.GLMemoryEGLAllocator]
+final class GLMemoryEGLAllocatorGidBuilder : GLMemoryEGLAllocatorGidBuilderImpl!GLMemoryEGLAllocatorGidBuilder
+{
+  GLMemoryEGLAllocator build()
+  {
+    return new GLMemoryEGLAllocator(cast(void*)createGObject(GLMemoryEGLAllocator._getGType), No.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstcontroller.trigger_control_source;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstcontroller.c.functions;
 import gstcontroller.c.types;
@@ -46,6 +47,15 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
     return this;
   }
 
+  /**
+  Get builder for [gstcontroller.trigger_control_source.TriggerControlSource]
+  Returns: New builder object
+  */
+  static TriggerControlSourceGidBuilder builder()
+  {
+    return new TriggerControlSourceGidBuilder;
+  }
+
   /** */
   @property long tolerance()
   {
@@ -67,5 +77,24 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
     GstControlSource* _cretval;
     _cretval = gst_trigger_control_source_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class TriggerControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_control_source.TimedValueControlSourceGidBuilderImpl!T
+{
+
+  /** */
+  T tolerance(long propval)
+  {
+    return setProperty("tolerance", propval);
+  }
+}
+
+/// Fluent builder for [gstcontroller.trigger_control_source.TriggerControlSource]
+final class TriggerControlSourceGidBuilder : TriggerControlSourceGidBuilderImpl!TriggerControlSourceGidBuilder
+{
+  TriggerControlSource build()
+  {
+    return new TriggerControlSource(cast(void*)createGObject(TriggerControlSource._getGType), Yes.Take);
   }
 }

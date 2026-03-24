@@ -8,6 +8,7 @@ import gio.converter;
 import gio.converter_mixin;
 import gio.file_info;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -43,6 +44,15 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /**
+  Get builder for [gio.zlib_compressor.ZlibCompressor]
+  Returns: New builder object
+  */
+  static ZlibCompressorGidBuilder builder()
+  {
+    return new ZlibCompressorGidBuilder;
+  }
+
+  /**
       Get `fileInfo` property.
       Returns: If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
         [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
@@ -62,7 +72,26 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   */
   @property void fileInfo(gio.file_info.FileInfo propval)
   {
-    return setFileInfo(propval);
+    setFileInfo(propval);
+  }
+
+  /**
+      Get `format` property.
+      Returns: The format of the compressed data.
+  */
+  @property gio.types.ZlibCompressorFormat format()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.types.ZlibCompressorFormat)("format");
+  }
+
+  /**
+      Get `level` property.
+      Returns: The level of compression from `0` (no compression) to `9` (most
+        compression). `-1` for the default level.
+  */
+  @property int level()
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("level");
   }
 
   mixin ConverterT!();
@@ -110,5 +139,56 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   void setFileInfo(gio.file_info.FileInfo fileInfo = null)
   {
     g_zlib_compressor_set_file_info(cast(GZlibCompressor*)this._cPtr, fileInfo ? cast(GFileInfo*)fileInfo._cPtr(No.Dup) : null);
+  }
+}
+
+class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.converter.ConverterGidBuilderImpl!T
+{
+
+  mixin ConverterGidBuilderT!();
+
+  /**
+      Set `fileInfo` property.
+      Params:
+        propval = If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
+          [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
+          and modification time from the file info to the GZIP header.
+      Returns: Builder instance for fluent chaining
+  */
+  T fileInfo(gio.file_info.FileInfo propval)
+  {
+    return setProperty("file-info", propval);
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format of the compressed data.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(gio.types.ZlibCompressorFormat propval)
+  {
+    return setProperty("format", propval);
+  }
+
+  /**
+      Set `level` property.
+      Params:
+        propval = The level of compression from `0` (no compression) to `9` (most
+          compression). `-1` for the default level.
+      Returns: Builder instance for fluent chaining
+  */
+  T level(int propval)
+  {
+    return setProperty("level", propval);
+  }
+}
+
+/// Fluent builder for [gio.zlib_compressor.ZlibCompressor]
+final class ZlibCompressorGidBuilder : ZlibCompressorGidBuilderImpl!ZlibCompressorGidBuilder
+{
+  ZlibCompressor build()
+  {
+    return new ZlibCompressor(cast(void*)createGObject(ZlibCompressor._getGType), Yes.Take);
   }
 }

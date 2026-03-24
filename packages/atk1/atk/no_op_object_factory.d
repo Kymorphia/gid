@@ -6,6 +6,7 @@ import atk.c.types;
 import atk.object_factory;
 import atk.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /**
     The AtkObjectFactory which creates an AtkNoOpObject.
@@ -43,6 +44,15 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
   }
 
   /**
+  Get builder for [atk.no_op_object_factory.NoOpObjectFactory]
+  Returns: New builder object
+  */
+  static NoOpObjectFactoryGidBuilder builder()
+  {
+    return new NoOpObjectFactoryGidBuilder;
+  }
+
+  /**
       Creates an instance of an #AtkObjectFactory which generates primitive
       (non-functioning) #AtkObjects.
       Returns: an instance of an #AtkObjectFactory
@@ -52,5 +62,18 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
     AtkObjectFactory* _cretval;
     _cretval = atk_no_op_object_factory_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class NoOpObjectFactoryGidBuilderImpl(T) : atk.object_factory.ObjectFactoryGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [atk.no_op_object_factory.NoOpObjectFactory]
+final class NoOpObjectFactoryGidBuilder : NoOpObjectFactoryGidBuilderImpl!NoOpObjectFactoryGidBuilder
+{
+  NoOpObjectFactory build()
+  {
+    return new NoOpObjectFactory(cast(void*)createGObject(NoOpObjectFactory._getGType), Yes.Take);
   }
 }

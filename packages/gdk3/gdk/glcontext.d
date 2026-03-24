@@ -8,6 +8,7 @@ import gdk.types;
 import gdk.window;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -89,6 +90,42 @@ class GLContext : gobject.object.ObjectWrap
   override GLContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.glcontext.GLContext]
+  Returns: New builder object
+  */
+  static GLContextGidBuilder builder()
+  {
+    return new GLContextGidBuilder;
+  }
+
+  /**
+      Get `display` property.
+      Returns: The #GdkDisplay used to create the #GdkGLContext.
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
+  }
+
+  /**
+      Get `sharedContext` property.
+      Returns: The #GdkGLContext that this context is sharing data with, or null
+  */
+  @property gdk.glcontext.GLContext sharedContext()
+  {
+    return getSharedContext();
+  }
+
+  /**
+      Get `window` property.
+      Returns: The #GdkWindow the gl context is bound to.
+  */
+  @property gdk.window.Window window()
+  {
+    return getWindow();
   }
 
   /**
@@ -334,5 +371,51 @@ class GLContext : gobject.object.ObjectWrap
   void setUseEs(int useEs)
   {
     gdk_gl_context_set_use_es(cast(GdkGLContext*)this._cPtr, useEs);
+  }
+}
+
+class GLContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The #GdkDisplay used to create the #GdkGLContext.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `sharedContext` property.
+      Params:
+        propval = The #GdkGLContext that this context is sharing data with, or null
+      Returns: Builder instance for fluent chaining
+  */
+  T sharedContext(gdk.glcontext.GLContext propval)
+  {
+    return setProperty("shared-context", propval);
+  }
+
+  /**
+      Set `window` property.
+      Params:
+        propval = The #GdkWindow the gl context is bound to.
+      Returns: Builder instance for fluent chaining
+  */
+  T window(gdk.window.Window propval)
+  {
+    return setProperty("window", propval);
+  }
+}
+
+/// Fluent builder for [gdk.glcontext.GLContext]
+final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
+{
+  GLContext build()
+  {
+    return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);
   }
 }

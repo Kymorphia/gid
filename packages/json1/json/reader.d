@@ -3,6 +3,7 @@ module json.reader;
 
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import json.c.functions;
 import json.c.types;
@@ -99,6 +100,15 @@ class Reader : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [json.reader.Reader]
+  Returns: New builder object
+  */
+  static ReaderGidBuilder builder()
+  {
+    return new ReaderGidBuilder;
+  }
+
+  /**
       Get `root` property.
       Returns: The root of the JSON tree that the reader should read.
   */
@@ -114,7 +124,7 @@ class Reader : gobject.object.ObjectWrap
   */
   @property void root(json.node.Node propval)
   {
-    return setRoot(propval);
+    setRoot(propval);
   }
 
   /**
@@ -497,5 +507,29 @@ class Reader : gobject.object.ObjectWrap
   void setRoot(json.node.Node root = null)
   {
     json_reader_set_root(cast(JsonReader*)this._cPtr, root ? cast(JsonNode*)root._cPtr(No.Dup) : null);
+  }
+}
+
+class ReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root of the JSON tree that the reader should read.
+      Returns: Builder instance for fluent chaining
+  */
+  T root(json.node.Node propval)
+  {
+    return setProperty("root", propval);
+  }
+}
+
+/// Fluent builder for [json.reader.Reader]
+final class ReaderGidBuilder : ReaderGidBuilderImpl!ReaderGidBuilder
+{
+  Reader build()
+  {
+    return new Reader(cast(void*)createGObject(Reader._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -80,6 +81,15 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   override RadioMenuItem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.radio_menu_item.RadioMenuItem]
+  Returns: New builder object
+  */
+  static RadioMenuItemGidBuilder builder()
+  {
+    return new RadioMenuItemGidBuilder;
   }
 
   /**
@@ -301,5 +311,30 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("group-changed", closure, after);
+  }
+}
+
+class RadioMenuItemGidBuilderImpl(T) : gtk.check_menu_item.CheckMenuItemGidBuilderImpl!T
+{
+
+
+  /**
+      Set `group` property.
+      Params:
+        propval = The radio menu item whose group this widget belongs to.
+      Returns: Builder instance for fluent chaining
+  */
+  T group(gtk.radio_menu_item.RadioMenuItem propval)
+  {
+    return setProperty("group", propval);
+  }
+}
+
+/// Fluent builder for [gtk.radio_menu_item.RadioMenuItem]
+final class RadioMenuItemGidBuilder : RadioMenuItemGidBuilderImpl!RadioMenuItemGidBuilder
+{
+  RadioMenuItem build()
+  {
+    return new RadioMenuItem(cast(void*)createGObject(RadioMenuItem._getGType), No.Take);
   }
 }

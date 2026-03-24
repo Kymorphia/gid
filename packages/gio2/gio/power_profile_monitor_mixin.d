@@ -6,6 +6,7 @@ public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
+public import gobject.gid_builder;
 public import gobject.object;
 
 /**
@@ -62,4 +63,8 @@ template PowerProfileMonitorT()
     _retval = cast(bool)g_power_profile_monitor_get_power_saver_enabled(cast(GPowerProfileMonitor*)this._cPtr);
     return _retval;
   }
+}
+
+template PowerProfileMonitorGidBuilderT()
+{
 }

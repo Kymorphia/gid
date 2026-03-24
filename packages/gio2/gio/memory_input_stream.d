@@ -11,6 +11,7 @@ import gio.seekable;
 import gio.seekable_mixin;
 import gio.types;
 import glib.bytes;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -46,6 +47,15 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   override MemoryInputStream self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.memory_input_stream.MemoryInputStream]
+  Returns: New builder object
+  */
+  static MemoryInputStreamGidBuilder builder()
+  {
+    return new MemoryInputStreamGidBuilder;
   }
 
   mixin PollableInputStreamT!();
@@ -86,5 +96,21 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   void addBytes(glib.bytes.Bytes bytes)
   {
     g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
+  }
+}
+
+class MemoryInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T, gio.pollable_input_stream.PollableInputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
+{
+
+  mixin PollableInputStreamGidBuilderT!();
+  mixin SeekableGidBuilderT!();
+}
+
+/// Fluent builder for [gio.memory_input_stream.MemoryInputStream]
+final class MemoryInputStreamGidBuilder : MemoryInputStreamGidBuilderImpl!MemoryInputStreamGidBuilder
+{
+  MemoryInputStream build()
+  {
+    return new MemoryInputStream(cast(void*)createGObject(MemoryInputStream._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstaudio.audio_aggregator_pad;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstaudio.c.functions;
 import gstaudio.c.types;
@@ -40,6 +41,15 @@ class AudioAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   }
 
   /**
+  Get builder for [gstaudio.audio_aggregator_pad.AudioAggregatorPad]
+  Returns: New builder object
+  */
+  static AudioAggregatorPadGidBuilder builder()
+  {
+    return new AudioAggregatorPadGidBuilder;
+  }
+
+  /**
       Get `qosMessages` property.
       Returns: Emit QoS messages when dropping buffers.
   */
@@ -56,5 +66,29 @@ class AudioAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   @property void qosMessages(bool propval)
   {
     gobject.object.ObjectWrap.setProperty!(bool)("qos-messages", propval);
+  }
+}
+
+class AudioAggregatorPadGidBuilderImpl(T) : gstbase.aggregator_pad.AggregatorPadGidBuilderImpl!T
+{
+
+  /**
+      Set `qosMessages` property.
+      Params:
+        propval = Emit QoS messages when dropping buffers.
+      Returns: Builder instance for fluent chaining
+  */
+  T qosMessages(bool propval)
+  {
+    return setProperty("qos-messages", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_aggregator_pad.AudioAggregatorPad]
+final class AudioAggregatorPadGidBuilder : AudioAggregatorPadGidBuilderImpl!AudioAggregatorPadGidBuilder
+{
+  AudioAggregatorPad build()
+  {
+    return new AudioAggregatorPad(cast(void*)createGObject(AudioAggregatorPad._getGType), No.Take);
   }
 }

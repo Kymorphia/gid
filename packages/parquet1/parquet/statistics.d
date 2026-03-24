@@ -2,6 +2,7 @@
 module parquet.statistics;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
@@ -34,6 +35,15 @@ class Statistics : gobject.object.ObjectWrap
   override Statistics self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [parquet.statistics.Statistics]
+  Returns: New builder object
+  */
+  static StatisticsGidBuilder builder()
+  {
+    return new StatisticsGidBuilder;
   }
 
   /** */
@@ -90,5 +100,24 @@ class Statistics : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gparquet_statistics_has_n_nulls(cast(GParquetStatistics*)this._cPtr);
     return _retval;
+  }
+}
+
+class StatisticsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T statistics(void* propval)
+  {
+    return setProperty("statistics", propval);
+  }
+}
+
+/// Fluent builder for [parquet.statistics.Statistics]
+final class StatisticsGidBuilder : StatisticsGidBuilderImpl!StatisticsGidBuilder
+{
+  Statistics build()
+  {
+    return new Statistics(cast(void*)createGObject(Statistics._getGType), No.Take);
   }
 }

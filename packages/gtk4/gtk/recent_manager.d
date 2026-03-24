@@ -4,6 +4,7 @@ module gtk.recent_manager;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -95,6 +96,25 @@ class RecentManager : gobject.object.ObjectWrap
   override RecentManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.recent_manager.RecentManager]
+  Returns: New builder object
+  */
+  static RecentManagerGidBuilder builder()
+  {
+    return new RecentManagerGidBuilder;
+  }
+
+  /**
+      Get `filename` property.
+      Returns: The full path to the file to be used to store and read the
+        recently used resources list
+  */
+  @property string filename()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("filename");
   }
 
   /**
@@ -356,5 +376,30 @@ class RecentManager : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class RecentManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `filename` property.
+      Params:
+        propval = The full path to the file to be used to store and read the
+          recently used resources list
+      Returns: Builder instance for fluent chaining
+  */
+  T filename(string propval)
+  {
+    return setProperty("filename", propval);
+  }
+}
+
+/// Fluent builder for [gtk.recent_manager.RecentManager]
+final class RecentManagerGidBuilder : RecentManagerGidBuilderImpl!RecentManagerGidBuilder
+{
+  RecentManager build()
+  {
+    return new RecentManager(cast(void*)createGObject(RecentManager._getGType), Yes.Take);
   }
 }

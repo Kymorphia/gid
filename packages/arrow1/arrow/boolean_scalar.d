@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class BooleanScalar : arrow.scalar.Scalar
@@ -36,6 +37,15 @@ class BooleanScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.boolean_scalar.BooleanScalar]
+  Returns: New builder object
+  */
+  static BooleanScalarGidBuilder builder()
+  {
+    return new BooleanScalarGidBuilder;
+  }
+
   /** */
   this(bool value)
   {
@@ -50,5 +60,18 @@ class BooleanScalar : arrow.scalar.Scalar
     bool _retval;
     _retval = cast(bool)garrow_boolean_scalar_get_value(cast(GArrowBooleanScalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class BooleanScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.boolean_scalar.BooleanScalar]
+final class BooleanScalarGidBuilder : BooleanScalarGidBuilderImpl!BooleanScalarGidBuilder
+{
+  BooleanScalar build()
+  {
+    return new BooleanScalar(cast(void*)createGObject(BooleanScalar._getGType), Yes.Take);
   }
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.actionable;
 import gtk.actionable_mixin;
@@ -69,6 +70,15 @@ class MenuToolButton : gtk.tool_button.ToolButton
   override MenuToolButton self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.menu_tool_button.MenuToolButton]
+  Returns: New builder object
+  */
+  static MenuToolButtonGidBuilder builder()
+  {
+    return new MenuToolButtonGidBuilder;
   }
 
   /** */
@@ -215,5 +225,25 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show-menu", closure, after);
+  }
+}
+
+class MenuToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderImpl!T
+{
+
+
+  /** */
+  T menu(gtk.menu.Menu propval)
+  {
+    return setProperty("menu", propval);
+  }
+}
+
+/// Fluent builder for [gtk.menu_tool_button.MenuToolButton]
+final class MenuToolButtonGidBuilder : MenuToolButtonGidBuilderImpl!MenuToolButtonGidBuilder
+{
+  MenuToolButton build()
+  {
+    return new MenuToolButton(cast(void*)createGObject(MenuToolButton._getGType), No.Take);
   }
 }

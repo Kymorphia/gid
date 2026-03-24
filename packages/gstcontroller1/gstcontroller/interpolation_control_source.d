@@ -2,6 +2,7 @@
 module gstcontroller.interpolation_control_source;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gstcontroller.c.functions;
 import gstcontroller.c.types;
@@ -46,6 +47,15 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
     return this;
   }
 
+  /**
+  Get builder for [gstcontroller.interpolation_control_source.InterpolationControlSource]
+  Returns: New builder object
+  */
+  static InterpolationControlSourceGidBuilder builder()
+  {
+    return new InterpolationControlSourceGidBuilder;
+  }
+
   /** */
   @property gstcontroller.types.InterpolationMode mode()
   {
@@ -67,5 +77,24 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
     GstControlSource* _cretval;
     _cretval = gst_interpolation_control_source_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class InterpolationControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_control_source.TimedValueControlSourceGidBuilderImpl!T
+{
+
+  /** */
+  T mode(gstcontroller.types.InterpolationMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+}
+
+/// Fluent builder for [gstcontroller.interpolation_control_source.InterpolationControlSource]
+final class InterpolationControlSourceGidBuilder : InterpolationControlSourceGidBuilderImpl!InterpolationControlSourceGidBuilder
+{
+  InterpolationControlSource build()
+  {
+    return new InterpolationControlSource(cast(void*)createGObject(InterpolationControlSource._getGType), Yes.Take);
   }
 }

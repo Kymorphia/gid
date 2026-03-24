@@ -5,6 +5,7 @@ import gdk.display;
 import gid.gid;
 import gio.icon;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -74,6 +75,15 @@ class IconTheme : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.icon_theme.IconTheme]
+  Returns: New builder object
+  */
+  static IconThemeGidBuilder builder()
+  {
+    return new IconThemeGidBuilder;
+  }
+
+  /**
       Get `display` property.
       Returns: The display that this icon theme object is attached to.
   */
@@ -116,7 +126,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   @property void themeName(string propval)
   {
-    return setThemeName(propval);
+    setThemeName(propval);
   }
 
   /**
@@ -539,5 +549,44 @@ class IconTheme : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class IconThemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display that this icon theme object is attached to.
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+
+  /**
+      Set `themeName` property.
+      Params:
+        propval = The name of the icon theme that is being used.
+          
+          Unless set to a different value, this will be the value of
+          the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
+          object associated to the display of the icontheme object.
+      Returns: Builder instance for fluent chaining
+  */
+  T themeName(string propval)
+  {
+    return setProperty("theme-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.icon_theme.IconTheme]
+final class IconThemeGidBuilder : IconThemeGidBuilderImpl!IconThemeGidBuilder
+{
+  IconTheme build()
+  {
+    return new IconTheme(cast(void*)createGObject(IconTheme._getGType), Yes.Take);
   }
 }

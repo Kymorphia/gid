@@ -2,6 +2,7 @@
 module gtk.text_child_anchor;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,6 +41,15 @@ class TextChildAnchor : gobject.object.ObjectWrap
   override TextChildAnchor self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.text_child_anchor.TextChildAnchor]
+  Returns: New builder object
+  */
+  static TextChildAnchorGidBuilder builder()
+  {
+    return new TextChildAnchorGidBuilder;
   }
 
   /**
@@ -117,5 +127,18 @@ class TextChildAnchor : gobject.object.ObjectWrap
       gFree(cast(void*)_cretval);
     }
     return _retval;
+  }
+}
+
+class TextChildAnchorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.text_child_anchor.TextChildAnchor]
+final class TextChildAnchorGidBuilder : TextChildAnchorGidBuilderImpl!TextChildAnchorGidBuilder
+{
+  TextChildAnchor build()
+  {
+    return new TextChildAnchor(cast(void*)createGObject(TextChildAnchor._getGType), Yes.Take);
   }
 }

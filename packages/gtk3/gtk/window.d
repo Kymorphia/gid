@@ -11,6 +11,7 @@ import gdkpixbuf.pixbuf;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accel_group;
 import gtk.application;
@@ -110,6 +111,15 @@ class Window : gtk.bin.Bin
   }
 
   /**
+  Get builder for [gtk.window.Window]
+  Returns: New builder object
+  */
+  static WindowGidBuilder builder()
+  {
+    return new WindowGidBuilder;
+  }
+
+  /**
       Get `acceptFocus` property.
       Returns: Whether the window should receive the input focus.
   */
@@ -125,7 +135,7 @@ class Window : gtk.bin.Bin
   */
   @property void acceptFocus(bool propval)
   {
-    return setAcceptFocus(propval);
+    setAcceptFocus(propval);
   }
 
   /**
@@ -160,7 +170,7 @@ class Window : gtk.bin.Bin
   */
   @property void application(gtk.application.Application propval)
   {
-    return setApplication(propval);
+    setApplication(propval);
   }
 
   /**
@@ -191,7 +201,7 @@ class Window : gtk.bin.Bin
   */
   @property void attachedTo(gtk.widget.Widget propval)
   {
-    return setAttachedTo(propval);
+    setAttachedTo(propval);
   }
 
   /**
@@ -210,7 +220,7 @@ class Window : gtk.bin.Bin
   */
   @property void decorated(bool propval)
   {
-    return setDecorated(propval);
+    setDecorated(propval);
   }
 
   /** */
@@ -253,7 +263,7 @@ class Window : gtk.bin.Bin
   */
   @property void deletable(bool propval)
   {
-    return setDeletable(propval);
+    setDeletable(propval);
   }
 
   /** */
@@ -265,7 +275,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void destroyWithParent(bool propval)
   {
-    return setDestroyWithParent(propval);
+    setDestroyWithParent(propval);
   }
 
   /**
@@ -284,7 +294,7 @@ class Window : gtk.bin.Bin
   */
   @property void focusOnMap(bool propval)
   {
-    return setFocusOnMap(propval);
+    setFocusOnMap(propval);
   }
 
   /**
@@ -309,7 +319,7 @@ class Window : gtk.bin.Bin
   */
   @property void focusVisible(bool propval)
   {
-    return setFocusVisible(propval);
+    setFocusVisible(propval);
   }
 
   /**
@@ -330,7 +340,7 @@ class Window : gtk.bin.Bin
   */
   @property void gravity(gdk.types.Gravity propval)
   {
-    return setGravity(propval);
+    setGravity(propval);
   }
 
   /**
@@ -363,7 +373,7 @@ class Window : gtk.bin.Bin
   */
   @property void hasResizeGrip(bool propval)
   {
-    return setHasResizeGrip(propval);
+    setHasResizeGrip(propval);
   }
 
   /**
@@ -382,7 +392,7 @@ class Window : gtk.bin.Bin
   */
   @property void hideTitlebarWhenMaximized(bool propval)
   {
-    return setHideTitlebarWhenMaximized(propval);
+    setHideTitlebarWhenMaximized(propval);
   }
 
   /** */
@@ -394,7 +404,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void icon(gdkpixbuf.pixbuf.Pixbuf propval)
   {
-    return setIcon(propval);
+    setIcon(propval);
   }
 
   /**
@@ -415,7 +425,7 @@ class Window : gtk.bin.Bin
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -440,7 +450,7 @@ class Window : gtk.bin.Bin
   */
   @property void mnemonicsVisible(bool propval)
   {
-    return setMnemonicsVisible(propval);
+    setMnemonicsVisible(propval);
   }
 
   /** */
@@ -452,7 +462,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /** */
@@ -464,7 +474,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void resizable(bool propval)
   {
-    return setResizable(propval);
+    setResizable(propval);
   }
 
   /**
@@ -487,7 +497,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void role(string propval)
   {
-    return setRole(propval);
+    setRole(propval);
   }
 
   /** */
@@ -499,7 +509,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void screen(gdk.screen.Screen propval)
   {
-    return setScreen(propval);
+    setScreen(propval);
   }
 
   /** */
@@ -511,7 +521,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void skipPagerHint(bool propval)
   {
-    return setSkipPagerHint(propval);
+    setSkipPagerHint(propval);
   }
 
   /** */
@@ -523,7 +533,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void skipTaskbarHint(bool propval)
   {
-    return setSkipTaskbarHint(propval);
+    setSkipTaskbarHint(propval);
   }
 
   /**
@@ -535,7 +545,7 @@ class Window : gtk.bin.Bin
   */
   @property void startupId(string propval)
   {
-    return setStartupId(propval);
+    setStartupId(propval);
   }
 
   /** */
@@ -547,7 +557,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -568,7 +578,13 @@ class Window : gtk.bin.Bin
   */
   @property void transientFor(gtk.window.Window propval)
   {
-    return setTransientFor(propval);
+    setTransientFor(propval);
+  }
+
+  /** */
+  @property gtk.types.WindowType type()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.WindowType)("type");
   }
 
   /** */
@@ -580,7 +596,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void typeHint(gdk.types.WindowTypeHint propval)
   {
-    return setTypeHint(propval);
+    setTypeHint(propval);
   }
 
   /** */
@@ -592,7 +608,7 @@ class Window : gtk.bin.Bin
   /** */
   @property void urgencyHint(bool propval)
   {
-    return setUrgencyHint(propval);
+    setUrgencyHint(propval);
   }
 
   /** */
@@ -2977,5 +2993,295 @@ class Window : gtk.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("set-focus", closure, after);
+  }
+}
+
+class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
+{
+
+
+  /**
+      Set `acceptFocus` property.
+      Params:
+        propval = Whether the window should receive the input focus.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptFocus(bool propval)
+  {
+    return setProperty("accept-focus", propval);
+  }
+
+  /**
+      Set `application` property.
+      Params:
+        propval = The #GtkApplication associated with the window.
+          
+          The application will be kept alive for at least as long as it
+          has any windows associated with it (see [gio.application.Application.hold]
+          for a way to keep it alive without windows).
+          
+          Normally, the connection between the application and the window
+          will remain until the window is destroyed, but you can explicitly
+          remove it by setting the :application property to null.
+      Returns: Builder instance for fluent chaining
+  */
+  T application(gtk.application.Application propval)
+  {
+    return setProperty("application", propval);
+  }
+
+  /**
+      Set `attachedTo` property.
+      Params:
+        propval = The widget to which this window is attached.
+          See [gtk.window.Window.setAttachedTo].
+          
+          Examples of places where specifying this relation is useful are
+          for instance a #GtkMenu created by a #GtkComboBox, a completion
+          popup window created by #GtkEntry or a typeahead search entry
+          created by #GtkTreeView.
+      Returns: Builder instance for fluent chaining
+  */
+  T attachedTo(gtk.widget.Widget propval)
+  {
+    return setProperty("attached-to", propval);
+  }
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window should be decorated by the window manager.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorated(bool propval)
+  {
+    return setProperty("decorated", propval);
+  }
+
+  /** */
+  T defaultHeight(int propval)
+  {
+    return setProperty("default-height", propval);
+  }
+
+  /** */
+  T defaultWidth(int propval)
+  {
+    return setProperty("default-width", propval);
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window frame should have a close button.
+      Returns: Builder instance for fluent chaining
+  */
+  T deletable(bool propval)
+  {
+    return setProperty("deletable", propval);
+  }
+
+  /** */
+  T destroyWithParent(bool propval)
+  {
+    return setProperty("destroy-with-parent", propval);
+  }
+
+  /**
+      Set `focusOnMap` property.
+      Params:
+        propval = Whether the window should receive the input focus when mapped.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusOnMap(bool propval)
+  {
+    return setProperty("focus-on-map", propval);
+  }
+
+  /**
+      Set `focusVisible` property.
+      Params:
+        propval = Whether 'focus rectangles' are currently visible in this window.
+          
+          This property is maintained by GTK+ based on user input
+          and should not be set by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T focusVisible(bool propval)
+  {
+    return setProperty("focus-visible", propval);
+  }
+
+  /**
+      Set `gravity` property.
+      Params:
+        propval = The window gravity of the window. See [gtk.window.Window.move] and #GdkGravity for
+          more details about window gravity.
+      Returns: Builder instance for fluent chaining
+  */
+  T gravity(gdk.types.Gravity propval)
+  {
+    return setProperty("gravity", propval);
+  }
+
+  /**
+      Set `hasResizeGrip` property.
+      Params:
+        propval = Whether the window has a corner resize grip.
+          
+          Note that the resize grip is only shown if the window is
+          actually resizable and not maximized. Use
+          #GtkWindow:resize-grip-visible to find out if the resize
+          grip is currently shown.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Resize grips have been removed.
+  */
+  T hasResizeGrip(bool propval)
+  {
+    return setProperty("has-resize-grip", propval);
+  }
+
+  /**
+      Set `hideTitlebarWhenMaximized` property.
+      Params:
+        propval = Whether the titlebar should be hidden during maximization.
+      Returns: Builder instance for fluent chaining
+  */
+  T hideTitlebarWhenMaximized(bool propval)
+  {
+    return setProperty("hide-titlebar-when-maximized", propval);
+  }
+
+  /** */
+  T icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The :icon-name property specifies the name of the themed icon to
+          use as the window icon. See #GtkIconTheme for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `mnemonicsVisible` property.
+      Params:
+        propval = Whether mnemonics are currently visible in this window.
+          
+          This property is maintained by GTK+ based on user input,
+          and should not be set by applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T mnemonicsVisible(bool propval)
+  {
+    return setProperty("mnemonics-visible", propval);
+  }
+
+  /** */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /** */
+  T resizable(bool propval)
+  {
+    return setProperty("resizable", propval);
+  }
+
+  /** */
+  T role(string propval)
+  {
+    return setProperty("role", propval);
+  }
+
+  /** */
+  T screen(gdk.screen.Screen propval)
+  {
+    return setProperty("screen", propval);
+  }
+
+  /** */
+  T skipPagerHint(bool propval)
+  {
+    return setProperty("skip-pager-hint", propval);
+  }
+
+  /** */
+  T skipTaskbarHint(bool propval)
+  {
+    return setProperty("skip-taskbar-hint", propval);
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The :startup-id is a write-only property for setting window's
+          startup notification identifier. See [gtk.window.Window.setStartupId]
+          for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T startupId(string propval)
+  {
+    return setProperty("startup-id", propval);
+  }
+
+  /** */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the window. See [gtk.window.Window.setTransientFor] for
+          more details about transient windows.
+      Returns: Builder instance for fluent chaining
+  */
+  T transientFor(gtk.window.Window propval)
+  {
+    return setProperty("transient-for", propval);
+  }
+
+  /** */
+  T type(gtk.types.WindowType propval)
+  {
+    return setProperty("type", propval);
+  }
+
+  /** */
+  T typeHint(gdk.types.WindowTypeHint propval)
+  {
+    return setProperty("type-hint", propval);
+  }
+
+  /** */
+  T urgencyHint(bool propval)
+  {
+    return setProperty("urgency-hint", propval);
+  }
+
+  /** */
+  T windowPosition(gtk.types.WindowPosition propval)
+  {
+    return setProperty("window-position", propval);
+  }
+}
+
+/// Fluent builder for [gtk.window.Window]
+final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
+{
+  Window build()
+  {
+    return new Window(cast(void*)createGObject(Window._getGType), No.Take);
   }
 }

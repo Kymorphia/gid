@@ -2,6 +2,7 @@
 module webkit.policy_decision;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
@@ -50,6 +51,15 @@ class PolicyDecision : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [webkit.policy_decision.PolicyDecision]
+  Returns: New builder object
+  */
+  static PolicyDecisionGidBuilder builder()
+  {
+    return new PolicyDecisionGidBuilder;
+  }
+
+  /**
       Spawn a download from this decision.
   */
   void download()
@@ -93,5 +103,18 @@ class PolicyDecision : gobject.object.ObjectWrap
   void useWithPolicies(webkit.website_policies.WebsitePolicies policies)
   {
     webkit_policy_decision_use_with_policies(cast(WebKitPolicyDecision*)this._cPtr, policies ? cast(WebKitWebsitePolicies*)policies._cPtr(No.Dup) : null);
+  }
+}
+
+class PolicyDecisionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [webkit.policy_decision.PolicyDecision]
+final class PolicyDecisionGidBuilder : PolicyDecisionGidBuilderImpl!PolicyDecisionGidBuilder
+{
+  PolicyDecision build()
+  {
+    return new PolicyDecision(cast(void*)createGObject(PolicyDecision._getGType), No.Take);
   }
 }

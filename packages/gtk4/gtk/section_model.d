@@ -4,6 +4,7 @@ module gtk.section_model;
 public import gtk.section_model_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -82,4 +83,8 @@ interface SectionModel
       Returns: Signal ID
   */
   ulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface SectionModelGidBuilderImpl(T)
+{
 }

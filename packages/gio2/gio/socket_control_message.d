@@ -5,6 +5,7 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -55,6 +56,15 @@ class SocketControlMessage : gobject.object.ObjectWrap
   override SocketControlMessage self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gio.socket_control_message.SocketControlMessage]
+  Returns: New builder object
+  */
+  static SocketControlMessageGidBuilder builder()
+  {
+    return new SocketControlMessageGidBuilder;
   }
 
   /**
@@ -135,5 +145,18 @@ class SocketControlMessage : gobject.object.ObjectWrap
   void serialize(void* data)
   {
     g_socket_control_message_serialize(cast(GSocketControlMessage*)this._cPtr, data);
+  }
+}
+
+class SocketControlMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.socket_control_message.SocketControlMessage]
+final class SocketControlMessageGidBuilder : SocketControlMessageGidBuilderImpl!SocketControlMessageGidBuilder
+{
+  SocketControlMessage build()
+  {
+    return new SocketControlMessage(cast(void*)createGObject(SocketControlMessage._getGType), No.Take);
   }
 }

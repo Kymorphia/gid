@@ -7,6 +7,7 @@ import arrow.scalar;
 import arrow.timestamp_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class TimestampScalar : arrow.scalar.Scalar
@@ -37,6 +38,15 @@ class TimestampScalar : arrow.scalar.Scalar
     return this;
   }
 
+  /**
+  Get builder for [arrow.timestamp_scalar.TimestampScalar]
+  Returns: New builder object
+  */
+  static TimestampScalarGidBuilder builder()
+  {
+    return new TimestampScalarGidBuilder;
+  }
+
   /** */
   this(arrow.timestamp_data_type.TimestampDataType dataType, long value)
   {
@@ -51,5 +61,18 @@ class TimestampScalar : arrow.scalar.Scalar
     long _retval;
     _retval = garrow_timestamp_scalar_get_value(cast(GArrowTimestampScalar*)this._cPtr);
     return _retval;
+  }
+}
+
+class TimestampScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.timestamp_scalar.TimestampScalar]
+final class TimestampScalarGidBuilder : TimestampScalarGidBuilderImpl!TimestampScalarGidBuilder
+{
+  TimestampScalar build()
+  {
+    return new TimestampScalar(cast(void*)createGObject(TimestampScalar._getGType), Yes.Take);
   }
 }

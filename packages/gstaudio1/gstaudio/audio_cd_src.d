@@ -2,6 +2,7 @@
 module gstaudio.audio_cd_src;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.urihandler;
 import gst.urihandler_mixin;
@@ -84,6 +85,15 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
     return this;
   }
 
+  /**
+  Get builder for [gstaudio.audio_cd_src.AudioCdSrc]
+  Returns: New builder object
+  */
+  static AudioCdSrcGidBuilder builder()
+  {
+    return new AudioCdSrcGidBuilder;
+  }
+
   /** */
   @property string device()
   {
@@ -137,5 +147,38 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
     bool _retval;
     _retval = cast(bool)gst_audio_cd_src_add_track(cast(GstAudioCdSrc*)this._cPtr, track ? cast(GstAudioCdSrcTrack*)track._cPtr : null);
     return _retval;
+  }
+}
+
+class AudioCdSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T, gst.urihandler.URIHandlerGidBuilderImpl!T
+{
+
+  mixin URIHandlerGidBuilderT!();
+
+  /** */
+  T device(string propval)
+  {
+    return setProperty("device", propval);
+  }
+
+  /** */
+  T mode(gstaudio.types.AudioCdSrcMode propval)
+  {
+    return setProperty("mode", propval);
+  }
+
+  /** */
+  T track(uint propval)
+  {
+    return setProperty("track", propval);
+  }
+}
+
+/// Fluent builder for [gstaudio.audio_cd_src.AudioCdSrc]
+final class AudioCdSrcGidBuilder : AudioCdSrcGidBuilderImpl!AudioCdSrcGidBuilder
+{
+  AudioCdSrc build()
+  {
+    return new AudioCdSrc(cast(void*)createGObject(AudioCdSrc._getGType), No.Take);
   }
 }

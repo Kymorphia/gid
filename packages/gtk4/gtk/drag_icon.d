@@ -4,6 +4,7 @@ module gtk.drag_icon;
 import gdk.drag;
 import gdk.paintable;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.value;
 import gtk.accessible;
@@ -63,6 +64,15 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   }
 
   /**
+  Get builder for [gtk.drag_icon.DragIcon]
+  Returns: New builder object
+  */
+  static DragIconGidBuilder builder()
+  {
+    return new DragIconGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The widget to display as drag icon.
   */
@@ -78,7 +88,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   mixin NativeT!();
@@ -166,5 +176,32 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_drag_icon_set_child(cast(GtkDragIcon*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class DragIconGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.NativeGidBuilderImpl!T, gtk.root.RootGidBuilderImpl!T
+{
+
+  mixin NativeGidBuilderT!();
+  mixin RootGidBuilderT!();
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The widget to display as drag icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [gtk.drag_icon.DragIcon]
+final class DragIconGidBuilder : DragIconGidBuilderImpl!DragIconGidBuilder
+{
+  DragIcon build()
+  {
+    return new DragIcon(cast(void*)createGObject(DragIcon._getGType), No.Take);
   }
 }

@@ -8,6 +8,7 @@ import gio.file;
 import gio.list_model;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -56,6 +57,15 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gtk.file_dialog.FileDialog]
+  Returns: New builder object
+  */
+  static FileDialogGidBuilder builder()
+  {
+    return new FileDialogGidBuilder;
+  }
+
+  /**
       Get `acceptLabel` property.
       Returns: Label for the file chooser's accept button.
   */
@@ -71,7 +81,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void acceptLabel(string propval)
   {
-    return setAcceptLabel(propval);
+    setAcceptLabel(propval);
   }
 
   /**
@@ -106,7 +116,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void defaultFilter(gtk.file_filter.FileFilter propval)
   {
-    return setDefaultFilter(propval);
+    setDefaultFilter(propval);
   }
 
   /**
@@ -129,7 +139,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void filters(gio.list_model.ListModel propval)
   {
-    return setFilters(propval);
+    setFilters(propval);
   }
 
   /**
@@ -156,7 +166,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void initialFile(gio.file.File propval)
   {
-    return setInitialFile(propval);
+    setInitialFile(propval);
   }
 
   /**
@@ -177,7 +187,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void initialFolder(gio.file.File propval)
   {
-    return setInitialFolder(propval);
+    setInitialFolder(propval);
   }
 
   /**
@@ -198,7 +208,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void initialName(string propval)
   {
-    return setInitialName(propval);
+    setInitialName(propval);
   }
 
   /**
@@ -217,7 +227,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void modal(bool propval)
   {
-    return setModal(propval);
+    setModal(propval);
   }
 
   /**
@@ -236,7 +246,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -714,5 +724,122 @@ class FileDialog : gobject.object.ObjectWrap
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_file_dialog_set_title(cast(GtkFileDialog*)this._cPtr, _title);
+  }
+}
+
+class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = Label for the file chooser's accept button.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptLabel(string propval)
+  {
+    return setProperty("accept-label", propval);
+  }
+
+  /**
+      Set `defaultFilter` property.
+      Params:
+        propval = The default filter, that is, the filter that is initially
+          active in the file chooser dialog.
+          
+          If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+          is used as the default filter. If that property contains no filter, the dialog will
+          be unfiltered.
+          
+          If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
+          of the list. If it is not, the dialog may choose to not make it available.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultFilter(gtk.file_filter.FileFilter propval)
+  {
+    return setProperty("default-filter", propval);
+  }
+
+  /**
+      Set `filters` property.
+      Params:
+        propval = The list of filters.
+          
+          See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+      Returns: Builder instance for fluent chaining
+  */
+  T filters(gio.list_model.ListModel propval)
+  {
+    return setProperty("filters", propval);
+  }
+
+  /**
+      Set `initialFile` property.
+      Params:
+        propval = The initial file, that is, the file that is initially selected
+          in the file chooser dialog
+          
+          This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
+          `property@Gtk.FileDialog:initial-name`.
+      Returns: Builder instance for fluent chaining
+  */
+  T initialFile(gio.file.File propval)
+  {
+    return setProperty("initial-file", propval);
+  }
+
+  /**
+      Set `initialFolder` property.
+      Params:
+        propval = The initial folder, that is, the directory that is initially
+          opened in the file chooser dialog
+      Returns: Builder instance for fluent chaining
+  */
+  T initialFolder(gio.file.File propval)
+  {
+    return setProperty("initial-folder", propval);
+  }
+
+  /**
+      Set `initialName` property.
+      Params:
+        propval = The initial name, that is, the filename that is initially
+          selected in the file chooser dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T initialName(string propval)
+  {
+    return setProperty("initial-name", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the file chooser dialog is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval)
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the file chooser dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gtk.file_dialog.FileDialog]
+final class FileDialogGidBuilder : FileDialogGidBuilderImpl!FileDialogGidBuilder
+{
+  FileDialog build()
+  {
+    return new FileDialog(cast(void*)createGObject(FileDialog._getGType), Yes.Take);
   }
 }

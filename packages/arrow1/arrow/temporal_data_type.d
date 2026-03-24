@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 
 /** */
 class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
@@ -34,5 +35,27 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
   override TemporalDataType self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.temporal_data_type.TemporalDataType]
+  Returns: New builder object
+  */
+  static TemporalDataTypeGidBuilder builder()
+  {
+    return new TemporalDataTypeGidBuilder;
+  }
+}
+
+class TemporalDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.temporal_data_type.TemporalDataType]
+final class TemporalDataTypeGidBuilder : TemporalDataTypeGidBuilderImpl!TemporalDataTypeGidBuilder
+{
+  TemporalDataType build()
+  {
+    return new TemporalDataType(cast(void*)createGObject(TemporalDataType._getGType), No.Take);
   }
 }

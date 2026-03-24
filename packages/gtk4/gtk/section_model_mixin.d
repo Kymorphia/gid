@@ -4,6 +4,7 @@ module gtk.section_model_mixin;
 public import gtk.section_model_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
+public import gobject.gid_builder;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -109,4 +110,8 @@ template SectionModelT()
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sections-changed", closure, after);
   }
+}
+
+template SectionModelGidBuilderT()
+{
 }

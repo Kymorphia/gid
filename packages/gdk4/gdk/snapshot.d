@@ -5,6 +5,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -38,5 +39,27 @@ class Snapshot : gobject.object.ObjectWrap
   override Snapshot self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.snapshot.Snapshot]
+  Returns: New builder object
+  */
+  static SnapshotGidBuilder builder()
+  {
+    return new SnapshotGidBuilder;
+  }
+}
+
+class SnapshotGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.snapshot.Snapshot]
+final class SnapshotGidBuilder : SnapshotGidBuilderImpl!SnapshotGidBuilder
+{
+  Snapshot build()
+  {
+    return new Snapshot(cast(void*)createGObject(Snapshot._getGType), No.Take);
   }
 }

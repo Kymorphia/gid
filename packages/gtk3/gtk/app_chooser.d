@@ -4,6 +4,7 @@ module gtk.app_chooser;
 public import gtk.app_chooser_iface_proxy;
 import gid.gid;
 import gio.app_info;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -39,6 +40,15 @@ interface AppChooser
   }
 
   /**
+      Get `contentType` property.
+      Returns: The content type of the #GtkAppChooser object.
+        
+        See [GContentType][gio-GContentType]
+        for more information about content types.
+  */
+  @property string contentType();
+
+  /**
       Returns the currently selected application.
       Returns: a #GAppInfo for the currently selected
             application, or null if none is selected. Free with [gobject.object.ObjectWrap.unref]
@@ -55,4 +65,19 @@ interface AppChooser
       Reloads the list of applications.
   */
   void refresh();
+}
+
+interface AppChooserGidBuilderImpl(T)
+{
+
+  /**
+      Set `contentType` property.
+      Params:
+        propval = The content type of the #GtkAppChooser object.
+          
+          See [GContentType][gio-GContentType]
+          for more information about content types.
+      Returns: Builder instance for fluent chaining
+  */
+  T contentType(string propval);
 }

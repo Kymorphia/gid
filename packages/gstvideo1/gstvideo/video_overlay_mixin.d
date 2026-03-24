@@ -3,6 +3,7 @@ module gstvideo.video_overlay_mixin;
 
 public import gstvideo.video_overlay_iface_proxy;
 public import gid.gid;
+public import gobject.gid_builder;
 public import gobject.object;
 public import gobject.value;
 public import gstvideo.c.functions;
@@ -364,4 +365,8 @@ template VideoOverlayT()
   {
     gst_video_overlay_set_window_handle(cast(GstVideoOverlay*)this._cPtr, handle);
   }
+}
+
+template VideoOverlayGidBuilderT()
+{
 }

@@ -5,6 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -81,6 +82,15 @@ class ShortcutsWindow : gtk.window.Window
   override ShortcutsWindow self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.shortcuts_window.ShortcutsWindow]
+  Returns: New builder object
+  */
+  static ShortcutsWindowGidBuilder builder()
+  {
+    return new ShortcutsWindowGidBuilder;
   }
 
   /**
@@ -218,5 +228,49 @@ class ShortcutsWindow : gtk.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("search", closure, after);
+  }
+}
+
+class ShortcutsWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `sectionName` property.
+      Params:
+        propval = The name of the section to show.
+          
+          This should be the section-name of one of the #GtkShortcutsSection
+          objects that are in this shortcuts window.
+      Returns: Builder instance for fluent chaining
+  */
+  T sectionName(string propval)
+  {
+    return setProperty("section-name", propval);
+  }
+
+  /**
+      Set `viewName` property.
+      Params:
+        propval = The view name by which to filter the contents.
+          
+          This should correspond to the #GtkShortcutsGroup:view property of some of
+          the #GtkShortcutsGroup objects that are inside this shortcuts window.
+          
+          Set this to null to show all groups.
+      Returns: Builder instance for fluent chaining
+  */
+  T viewName(string propval)
+  {
+    return setProperty("view-name", propval);
+  }
+}
+
+/// Fluent builder for [gtk.shortcuts_window.ShortcutsWindow]
+final class ShortcutsWindowGidBuilder : ShortcutsWindowGidBuilderImpl!ShortcutsWindowGidBuilder
+{
+  ShortcutsWindow build()
+  {
+    return new ShortcutsWindow(cast(void*)createGObject(ShortcutsWindow._getGType), No.Take);
   }
 }

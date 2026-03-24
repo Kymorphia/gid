@@ -6,6 +6,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -157,6 +158,15 @@ class BreakpointBin : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.breakpoint_bin.BreakpointBin]
+  Returns: New builder object
+  */
+  static BreakpointBinGidBuilder builder()
+  {
+    return new BreakpointBinGidBuilder;
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -172,7 +182,7 @@ class BreakpointBin : gtk.widget.Widget
   */
   @property void child(gtk.widget.Widget propval)
   {
-    return setChild(propval);
+    setChild(propval);
   }
 
   /**
@@ -250,5 +260,30 @@ class BreakpointBin : gtk.widget.Widget
   void setChild(gtk.widget.Widget child = null)
   {
     adw_breakpoint_bin_set_child(cast(AdwBreakpointBin*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+}
+
+class BreakpointBinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gtk.widget.Widget propval)
+  {
+    return setProperty("child", propval);
+  }
+}
+
+/// Fluent builder for [adw.breakpoint_bin.BreakpointBin]
+final class BreakpointBinGidBuilder : BreakpointBinGidBuilderImpl!BreakpointBinGidBuilder
+{
+  BreakpointBin build()
+  {
+    return new BreakpointBin(cast(void*)createGObject(BreakpointBin._getGType), No.Take);
   }
 }

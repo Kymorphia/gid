@@ -5,6 +5,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -57,6 +58,15 @@ class WindowTitle : gtk.widget.Widget
   }
 
   /**
+  Get builder for [adw.window_title.WindowTitle]
+  Returns: New builder object
+  */
+  static WindowTitleGidBuilder builder()
+  {
+    return new WindowTitleGidBuilder;
+  }
+
+  /**
       Get `subtitle` property.
       Returns: The subtitle to display.
         
@@ -76,7 +86,7 @@ class WindowTitle : gtk.widget.Widget
   */
   @property void subtitle(string propval)
   {
-    return setSubtitle(propval);
+    setSubtitle(propval);
   }
 
   /**
@@ -101,7 +111,7 @@ class WindowTitle : gtk.widget.Widget
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -172,5 +182,46 @@ class WindowTitle : gtk.widget.Widget
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_window_title_set_title(cast(AdwWindowTitle*)this._cPtr, _title);
+  }
+}
+
+class WindowTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle to display.
+          
+          The subtitle should give the user additional details.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitle(string propval)
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to display.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [adw.window_title.WindowTitle]
+final class WindowTitleGidBuilder : WindowTitleGidBuilderImpl!WindowTitleGidBuilder
+{
+  WindowTitle build()
+  {
+    return new WindowTitle(cast(void*)createGObject(WindowTitle._getGType), No.Take);
   }
 }

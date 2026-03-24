@@ -7,6 +7,7 @@ import gdk.window;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -14,6 +15,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.icon_set;
 import gtk.icon_source;
+import gtk.style_context;
 import gtk.types;
 import gtk.widget;
 
@@ -61,6 +63,21 @@ class Style : gobject.object.ObjectWrap
   override Style self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.style.Style]
+  Returns: New builder object
+  */
+  static StyleGidBuilder builder()
+  {
+    return new StyleGidBuilder;
+  }
+
+  /** */
+  @property gtk.style_context.StyleContext context()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.style_context.StyleContext)("context");
   }
 
   /**
@@ -299,5 +316,24 @@ class Style : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unrealize", closure, after);
+  }
+}
+
+class StyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T context(gtk.style_context.StyleContext propval)
+  {
+    return setProperty("context", propval);
+  }
+}
+
+/// Fluent builder for [gtk.style.Style]
+final class StyleGidBuilder : StyleGidBuilderImpl!StyleGidBuilder
+{
+  Style build()
+  {
+    return new Style(cast(void*)createGObject(Style._getGType), Yes.Take);
   }
 }

@@ -9,6 +9,7 @@ import atk.object;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -47,6 +48,15 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   override Hyperlink self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [atk.hyperlink.Hyperlink]
+  Returns: New builder object
+  */
+  static HyperlinkGidBuilder builder()
+  {
+    return new HyperlinkGidBuilder;
   }
 
   /** */
@@ -229,5 +239,20 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("link-activated", closure, after);
+  }
+}
+
+class HyperlinkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+}
+
+/// Fluent builder for [atk.hyperlink.Hyperlink]
+final class HyperlinkGidBuilder : HyperlinkGidBuilderImpl!HyperlinkGidBuilder
+{
+  Hyperlink build()
+  {
+    return new Hyperlink(cast(void*)createGObject(Hyperlink._getGType), No.Take);
   }
 }

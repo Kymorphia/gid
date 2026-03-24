@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -35,6 +36,15 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
   override MatchSubstringOptions self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.match_substring_options.MatchSubstringOptions]
+  Returns: New builder object
+  */
+  static MatchSubstringOptionsGidBuilder builder()
+  {
+    return new MatchSubstringOptionsGidBuilder;
   }
 
   /**
@@ -83,5 +93,41 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
     GArrowMatchSubstringOptions* _cretval;
     _cretval = garrow_match_substring_options_new();
     this(_cretval, Yes.Take);
+  }
+}
+
+class MatchSubstringOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = Whether to perform a case-insensitive match.
+      Returns: Builder instance for fluent chaining
+  */
+  T ignoreCase(bool propval)
+  {
+    return setProperty("ignore-case", propval);
+  }
+
+  /**
+      Set `pattern` property.
+      Params:
+        propval = The exact substring (or regex, depending on kernel) to look for
+          inside input values.
+      Returns: Builder instance for fluent chaining
+  */
+  T pattern(string propval)
+  {
+    return setProperty("pattern", propval);
+  }
+}
+
+/// Fluent builder for [arrow.match_substring_options.MatchSubstringOptions]
+final class MatchSubstringOptionsGidBuilder : MatchSubstringOptionsGidBuilderImpl!MatchSubstringOptionsGidBuilder
+{
+  MatchSubstringOptions build()
+  {
+    return new MatchSubstringOptions(cast(void*)createGObject(MatchSubstringOptions._getGType), Yes.Take);
   }
 }

@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gdk.types;
 import gid.gid;
 import gobject.closure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -105,6 +106,15 @@ class AccelLabel : gtk.label.Label
     return this;
   }
 
+  /**
+  Get builder for [gtk.accel_label.AccelLabel]
+  Returns: New builder object
+  */
+  static AccelLabelGidBuilder builder()
+  {
+    return new AccelLabelGidBuilder;
+  }
+
   /** */
   @property gobject.closure.Closure accelClosure()
   {
@@ -114,7 +124,7 @@ class AccelLabel : gtk.label.Label
   /** */
   @property void accelClosure(gobject.closure.Closure propval)
   {
-    return setAccelClosure(propval);
+    setAccelClosure(propval);
   }
 
   /** */
@@ -126,7 +136,7 @@ class AccelLabel : gtk.label.Label
   /** */
   @property void accelWidget(gtk.widget.Widget propval)
   {
-    return setAccelWidget(propval);
+    setAccelWidget(propval);
   }
 
   /**
@@ -239,5 +249,31 @@ class AccelLabel : gtk.label.Label
   void setAccelWidget(gtk.widget.Widget accelWidget = null)
   {
     gtk_accel_label_set_accel_widget(cast(GtkAccelLabel*)this._cPtr, accelWidget ? cast(GtkWidget*)accelWidget._cPtr(No.Dup) : null);
+  }
+}
+
+class AccelLabelGidBuilderImpl(T) : gtk.label.LabelGidBuilderImpl!T
+{
+
+
+  /** */
+  T accelClosure(gobject.closure.Closure propval)
+  {
+    return setProperty("accel-closure", propval);
+  }
+
+  /** */
+  T accelWidget(gtk.widget.Widget propval)
+  {
+    return setProperty("accel-widget", propval);
+  }
+}
+
+/// Fluent builder for [gtk.accel_label.AccelLabel]
+final class AccelLabelGidBuilder : AccelLabelGidBuilderImpl!AccelLabelGidBuilder
+{
+  AccelLabel build()
+  {
+    return new AccelLabel(cast(void*)createGObject(AccelLabel._getGType), No.Take);
   }
 }

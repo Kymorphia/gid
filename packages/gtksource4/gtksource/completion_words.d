@@ -3,6 +3,7 @@ module gtksource.completion_words;
 
 import gdkpixbuf.pixbuf;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.text_buffer;
 import gtksource.c.functions;
@@ -38,6 +39,15 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   override CompletionWords self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtksource.completion_words.CompletionWords]
+  Returns: New builder object
+  */
+  static CompletionWordsGidBuilder builder()
+  {
+    return new CompletionWordsGidBuilder;
   }
 
   /**
@@ -174,5 +184,73 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   void unregister(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
+  }
+}
+
+class CompletionWordsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtksource.completion_provider.CompletionProviderGidBuilderImpl!T
+{
+
+  mixin CompletionProviderGidBuilderT!();
+
+  /**
+      Set `activation` property.
+      Params:
+        propval = The type of activation.
+      Returns: Builder instance for fluent chaining
+  */
+  T activation(gtksource.types.CompletionActivation propval)
+  {
+    return setProperty("activation", propval);
+  }
+
+  /** */
+  T icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /** */
+  T interactiveDelay(int propval)
+  {
+    return setProperty("interactive-delay", propval);
+  }
+
+  /** */
+  T minimumWordSize(uint propval)
+  {
+    return setProperty("minimum-word-size", propval);
+  }
+
+  /** */
+  T name(string propval)
+  {
+    return setProperty("name", propval);
+  }
+
+  /** */
+  T priority(int propval)
+  {
+    return setProperty("priority", propval);
+  }
+
+  /** */
+  T proposalsBatchSize(uint propval)
+  {
+    return setProperty("proposals-batch-size", propval);
+  }
+
+  /** */
+  T scanBatchSize(uint propval)
+  {
+    return setProperty("scan-batch-size", propval);
+  }
+}
+
+/// Fluent builder for [gtksource.completion_words.CompletionWords]
+final class CompletionWordsGidBuilder : CompletionWordsGidBuilderImpl!CompletionWordsGidBuilder
+{
+  CompletionWords build()
+  {
+    return new CompletionWords(cast(void*)createGObject(CompletionWords._getGType), Yes.Take);
   }
 }

@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 import glib.error;
+import gobject.gid_builder;
 
 /** */
 class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -35,6 +36,15 @@ class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   override MonthIntervalArrayBuilder self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.month_interval_array_builder.MonthIntervalArrayBuilder]
+  Returns: New builder object
+  */
+  static MonthIntervalArrayBuilderGidBuilder builder()
+  {
+    return new MonthIntervalArrayBuilderGidBuilder;
   }
 
   /** */
@@ -87,5 +97,18 @@ class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
+  }
+}
+
+class MonthIntervalArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_interval_array_builder.MonthIntervalArrayBuilder]
+final class MonthIntervalArrayBuilderGidBuilder : MonthIntervalArrayBuilderGidBuilderImpl!MonthIntervalArrayBuilderGidBuilder
+{
+  MonthIntervalArrayBuilder build()
+  {
+    return new MonthIntervalArrayBuilder(cast(void*)createGObject(MonthIntervalArrayBuilder._getGType), Yes.Take);
   }
 }

@@ -2,6 +2,7 @@
 module gstbase.base_transform;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
@@ -159,6 +160,15 @@ class BaseTransform : gst.element.Element
   override BaseTransform self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gstbase.base_transform.BaseTransform]
+  Returns: New builder object
+  */
+  static BaseTransformGidBuilder builder()
+  {
+    return new BaseTransformGidBuilder;
   }
 
   /** */
@@ -407,5 +417,24 @@ class BaseTransform : gst.element.Element
     bool _retval;
     _retval = cast(bool)gst_base_transform_update_src_caps(cast(GstBaseTransform*)this._cPtr, updatedCaps ? cast(GstCaps*)updatedCaps._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class BaseTransformGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
+{
+
+  /** */
+  T qos(bool propval)
+  {
+    return setProperty("qos", propval);
+  }
+}
+
+/// Fluent builder for [gstbase.base_transform.BaseTransform]
+final class BaseTransformGidBuilder : BaseTransformGidBuilderImpl!BaseTransformGidBuilder
+{
+  BaseTransform build()
+  {
+    return new BaseTransform(cast(void*)createGObject(BaseTransform._getGType), No.Take);
   }
 }

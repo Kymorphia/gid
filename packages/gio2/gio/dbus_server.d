@@ -12,6 +12,7 @@ import gio.initable_mixin;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -65,6 +66,15 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
+  Get builder for [gio.dbus_server.DBusServer]
+  Returns: New builder object
+  */
+  static DBusServerGidBuilder builder()
+  {
+    return new DBusServerGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: Whether the server is currently active.
   */
@@ -74,12 +84,50 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
+      Get `address` property.
+      Returns: The D-Bus address to listen on.
+  */
+  @property string address()
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("address");
+  }
+
+  /**
+      Get `authenticationObserver` property.
+      Returns: A #GDBusAuthObserver object to assist in the authentication process or null.
+  */
+  @property gio.dbus_auth_observer.DBusAuthObserver authenticationObserver()
+  {
+    return gobject.object.ObjectWrap.getProperty!(gio.dbus_auth_observer.DBusAuthObserver)("authentication-observer");
+  }
+
+  /**
       Get `clientAddress` property.
       Returns: The D-Bus address that clients can use.
   */
   @property string clientAddress()
   {
     return getClientAddress();
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags from the #GDBusServerFlags enumeration.
+  */
+  @property gio.types.DBusServerFlags flags()
+  {
+    return getFlags();
+  }
+
+  /**
+      Get `guid` property.
+      Returns: The GUID of the server.
+        
+        See #GDBusConnection:guid for more details.
+  */
+  @property string guid()
+  {
+    return getGuid();
   }
 
   mixin InitableT!();
@@ -262,5 +310,66 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("new-connection", closure, after);
+  }
+}
+
+class DBusServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `address` property.
+      Params:
+        propval = The D-Bus address to listen on.
+      Returns: Builder instance for fluent chaining
+  */
+  T address(string propval)
+  {
+    return setProperty("address", propval);
+  }
+
+  /**
+      Set `authenticationObserver` property.
+      Params:
+        propval = A #GDBusAuthObserver object to assist in the authentication process or null.
+      Returns: Builder instance for fluent chaining
+  */
+  T authenticationObserver(gio.dbus_auth_observer.DBusAuthObserver propval)
+  {
+    return setProperty("authentication-observer", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags from the #GDBusServerFlags enumeration.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gio.types.DBusServerFlags propval)
+  {
+    return setProperty("flags", propval);
+  }
+
+  /**
+      Set `guid` property.
+      Params:
+        propval = The GUID of the server.
+          
+          See #GDBusConnection:guid for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T guid(string propval)
+  {
+    return setProperty("guid", propval);
+  }
+}
+
+/// Fluent builder for [gio.dbus_server.DBusServer]
+final class DBusServerGidBuilder : DBusServerGidBuilderImpl!DBusServerGidBuilder
+{
+  DBusServer build()
+  {
+    return new DBusServer(cast(void*)createGObject(DBusServer._getGType), No.Take);
   }
 }

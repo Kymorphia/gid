@@ -6,6 +6,7 @@ import gmime.c.functions;
 import gmime.c.types;
 import gmime.stream;
 import gmime.types;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -37,6 +38,15 @@ class StreamMem : gmime.stream.Stream
   override StreamMem self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gmime.stream_mem.StreamMem]
+  Returns: New builder object
+  */
+  static StreamMemGidBuilder builder()
+  {
+    return new StreamMemGidBuilder;
   }
 
   /**
@@ -140,5 +150,18 @@ class StreamMem : gmime.stream.Stream
   void setOwner(bool owner)
   {
     g_mime_stream_mem_set_owner(cast(GMimeStreamMem*)this._cPtr, owner);
+  }
+}
+
+class StreamMemGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gmime.stream_mem.StreamMem]
+final class StreamMemGidBuilder : StreamMemGidBuilderImpl!StreamMemGidBuilder
+{
+  StreamMem build()
+  {
+    return new StreamMem(cast(void*)createGObject(StreamMem._getGType), Yes.Take);
   }
 }

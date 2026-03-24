@@ -6,6 +6,7 @@ import adw.c.types;
 import adw.types;
 import gdk.display;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -44,6 +45,15 @@ class StyleManager : gobject.object.ObjectWrap
   override StyleManager self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [adw.style_manager.StyleManager]
+  Returns: New builder object
+  */
+  static StyleManagerGidBuilder builder()
+  {
+    return new StyleManagerGidBuilder;
   }
 
   /**
@@ -122,7 +132,7 @@ class StyleManager : gobject.object.ObjectWrap
   */
   @property void colorScheme(adw.types.ColorScheme propval)
   {
-    return setColorScheme(propval);
+    setColorScheme(propval);
   }
 
   /**
@@ -135,6 +145,18 @@ class StyleManager : gobject.object.ObjectWrap
   @property bool dark()
   {
     return getDark();
+  }
+
+  /**
+      Get `display` property.
+      Returns: The display the style manager is associated with.
+        
+        The display will be `NULL` for the style manager returned by
+        [adw.style_manager.StyleManager.getDefault].
+  */
+  @property gdk.display.Display display()
+  {
+    return getDisplay();
   }
 
   /**
@@ -308,5 +330,73 @@ class StyleManager : gobject.object.ObjectWrap
   void setColorScheme(adw.types.ColorScheme colorScheme)
   {
     adw_style_manager_set_color_scheme(cast(AdwStyleManager*)this._cPtr, colorScheme);
+  }
+}
+
+class StyleManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `colorScheme` property.
+      Params:
+        propval = The requested application color scheme.
+          
+          The effective appearance will be decided based on the application color
+          scheme and the system preferred color scheme. The
+          `property@StyleManager:dark` property can be used to query the current
+          effective appearance.
+          
+          The [adw.types.ColorScheme.PreferLight] color scheme results in the application
+          using light appearance unless the system prefers dark colors. This is the
+          default value.
+          
+          The [adw.types.ColorScheme.PreferDark] color scheme results in the application
+          using dark appearance, but can still switch to the light appearance if the
+          system can prefers it, for example, when the high contrast preference is
+          enabled.
+          
+          The [adw.types.ColorScheme.ForceLight] and [adw.types.ColorScheme.ForceDark] values
+          ignore the system preference entirely. They are useful if the application
+          wants to match its UI to its content or to provide a separate color scheme
+          switcher.
+          
+          If a per-[gdk.display.Display] style manager has its color scheme set to
+          [adw.types.ColorScheme.Default], it will inherit the color scheme from the
+          default style manager.
+          
+          For the default style manager, [adw.types.ColorScheme.Default] is equivalent to
+          [adw.types.ColorScheme.PreferLight].
+          
+          The `property@StyleManager:system-supports-color-schemes` property can be
+          used to check if the current environment provides a color scheme
+          preference.
+      Returns: Builder instance for fluent chaining
+  */
+  T colorScheme(adw.types.ColorScheme propval)
+  {
+    return setProperty("color-scheme", propval);
+  }
+
+  /**
+      Set `display` property.
+      Params:
+        propval = The display the style manager is associated with.
+          
+          The display will be `NULL` for the style manager returned by
+          [adw.style_manager.StyleManager.getDefault].
+      Returns: Builder instance for fluent chaining
+  */
+  T display(gdk.display.Display propval)
+  {
+    return setProperty("display", propval);
+  }
+}
+
+/// Fluent builder for [adw.style_manager.StyleManager]
+final class StyleManagerGidBuilder : StyleManagerGidBuilderImpl!StyleManagerGidBuilder
+{
+  StyleManager build()
+  {
+    return new StyleManager(cast(void*)createGObject(StyleManager._getGType), No.Take);
   }
 }

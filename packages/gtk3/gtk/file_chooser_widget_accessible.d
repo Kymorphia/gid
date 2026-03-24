@@ -7,6 +7,7 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container_accessible;
@@ -41,8 +42,32 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
     return this;
   }
 
+  /**
+  Get builder for [gtk.file_chooser_widget_accessible.FileChooserWidgetAccessible]
+  Returns: New builder object
+  */
+  static FileChooserWidgetAccessibleGidBuilder builder()
+  {
+    return new FileChooserWidgetAccessibleGidBuilder;
+  }
+
   mixin ActionT!();
   alias getDescription = atk.object.ObjectWrap.getDescription;
   alias getName = atk.object.ObjectWrap.getName;
   alias setDescription = atk.object.ObjectWrap.setDescription;
+}
+
+class FileChooserWidgetAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.file_chooser_widget_accessible.FileChooserWidgetAccessible]
+final class FileChooserWidgetAccessibleGidBuilder : FileChooserWidgetAccessibleGidBuilderImpl!FileChooserWidgetAccessibleGidBuilder
+{
+  FileChooserWidgetAccessible build()
+  {
+    return new FileChooserWidgetAccessible(cast(void*)createGObject(FileChooserWidgetAccessible._getGType), No.Take);
+  }
 }

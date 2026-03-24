@@ -12,6 +12,7 @@ import gio.output_stream;
 import glib.error;
 import glib.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -61,6 +62,15 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+  Get builder for [vte.terminal.Terminal]
+  Returns: New builder object
+  */
+  static TerminalGidBuilder builder()
+  {
+    return new TerminalGidBuilder;
+  }
+
+  /**
       Get `allowBold` property.
       Returns: Controls whether or not the terminal will attempt to draw bold text,
         by using a bold font variant.
@@ -82,7 +92,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void allowBold(bool propval)
   {
-    return setAllowBold(propval);
+    setAllowBold(propval);
   }
 
   /**
@@ -101,7 +111,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void allowHyperlink(bool propval)
   {
-    return setAllowHyperlink(propval);
+    setAllowHyperlink(propval);
   }
 
   /**
@@ -122,7 +132,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void audibleBell(bool propval)
   {
-    return setAudibleBell(propval);
+    setAudibleBell(propval);
   }
 
   /**
@@ -143,7 +153,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void backspaceBinding(vte.types.EraseBinding propval)
   {
-    return setBackspaceBinding(propval);
+    setBackspaceBinding(propval);
   }
 
   /**
@@ -166,7 +176,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void boldIsBright(bool propval)
   {
-    return setBoldIsBright(propval);
+    setBoldIsBright(propval);
   }
 
   /**
@@ -185,7 +195,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void cellHeightScale(double propval)
   {
-    return setCellHeightScale(propval);
+    setCellHeightScale(propval);
   }
 
   /**
@@ -204,7 +214,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void cellWidthScale(double propval)
   {
-    return setCellWidthScale(propval);
+    setCellWidthScale(propval);
   }
 
   /**
@@ -235,7 +245,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void cjkAmbiguousWidth(int propval)
   {
-    return setCjkAmbiguousWidth(propval);
+    setCjkAmbiguousWidth(propval);
   }
 
   /**
@@ -281,7 +291,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void contextMenuModel(gio.menu_model.MenuModel propval)
   {
-    return setContextMenuModel(propval);
+    setContextMenuModel(propval);
   }
 
   /**
@@ -320,7 +330,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void cursorBlinkMode(vte.types.CursorBlinkMode propval)
   {
-    return setCursorBlinkMode(propval);
+    setCursorBlinkMode(propval);
   }
 
   /**
@@ -339,7 +349,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void cursorShape(vte.types.CursorShape propval)
   {
-    return setCursorShape(propval);
+    setCursorShape(propval);
   }
 
   /**
@@ -360,7 +370,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void deleteBinding(vte.types.EraseBinding propval)
   {
-    return setDeleteBinding(propval);
+    setDeleteBinding(propval);
   }
 
   /**
@@ -379,7 +389,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void enableBidi(bool propval)
   {
-    return setEnableBidi(propval);
+    setEnableBidi(propval);
   }
 
   /** */
@@ -391,7 +401,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /** */
   @property void enableFallbackScrolling(bool propval)
   {
-    return setEnableFallbackScrolling(propval);
+    setEnableFallbackScrolling(propval);
   }
 
   /**
@@ -410,7 +420,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void enableShaping(bool propval)
   {
-    return setEnableShaping(propval);
+    setEnableShaping(propval);
   }
 
   /**
@@ -429,7 +439,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void enableSixel(bool propval)
   {
-    return setEnableSixel(propval);
+    setEnableSixel(propval);
   }
 
   /**
@@ -516,7 +526,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void fontOptions(cairo.font_options.FontOptions propval)
   {
-    return setFontOptions(propval);
+    setFontOptions(propval);
   }
 
   /**
@@ -535,7 +545,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void fontScale(double propval)
   {
-    return setFontScale(propval);
+    setFontScale(propval);
   }
 
   /**
@@ -573,7 +583,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void inputEnabled(bool propval)
   {
-    return setInputEnabled(propval);
+    setInputEnabled(propval);
   }
 
   /**
@@ -615,7 +625,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void pty(vte.pty.Pty propval)
   {
-    return setPty(propval);
+    setPty(propval);
   }
 
   /**
@@ -636,7 +646,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void rewrapOnResize(bool propval)
   {
-    return setRewrapOnResize(propval);
+    setRewrapOnResize(propval);
   }
 
   /**
@@ -657,7 +667,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void scrollOnInsert(bool propval)
   {
-    return setScrollOnInsert(propval);
+    setScrollOnInsert(propval);
   }
 
   /**
@@ -680,7 +690,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void scrollOnKeystroke(bool propval)
   {
-    return setScrollOnKeystroke(propval);
+    setScrollOnKeystroke(propval);
   }
 
   /**
@@ -701,7 +711,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void scrollOnOutput(bool propval)
   {
-    return setScrollOnOutput(propval);
+    setScrollOnOutput(propval);
   }
 
   /**
@@ -724,7 +734,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void scrollUnitIsPixels(bool propval)
   {
-    return setScrollUnitIsPixels(propval);
+    setScrollUnitIsPixels(propval);
   }
 
   /**
@@ -772,7 +782,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void textBlinkMode(vte.types.TextBlinkMode propval)
   {
-    return setTextBlinkMode(propval);
+    setTextBlinkMode(propval);
   }
 
   /**
@@ -813,7 +823,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void xalign(vte.types.Align propval)
   {
-    return setXalign(propval);
+    setXalign(propval);
   }
 
   /**
@@ -832,7 +842,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void xfill(bool propval)
   {
-    return setXfill(propval);
+    setXfill(propval);
   }
 
   /**
@@ -851,7 +861,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void yalign(vte.types.Align propval)
   {
-    return setYalign(propval);
+    setYalign(propval);
   }
 
   /**
@@ -876,7 +886,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   @property void yfill(bool propval)
   {
-    return setYfill(propval);
+    setYfill(propval);
   }
 
   mixin ScrollableT!();
@@ -3940,5 +3950,453 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-title-changed", closure, after);
+  }
+}
+
+class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+{
+
+  mixin ScrollableGidBuilderT!();
+
+  /**
+      Set `allowBold` property.
+      Params:
+        propval = Controls whether or not the terminal will attempt to draw bold text,
+          by using a bold font variant.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: There's probably no reason for this feature to exist.
+  */
+  T allowBold(bool propval)
+  {
+    return setProperty("allow-bold", propval);
+  }
+
+  /**
+      Set `allowHyperlink` property.
+      Params:
+        propval = Controls whether or not hyperlinks (OSC 8 escape sequence) are recognized and displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowHyperlink(bool propval)
+  {
+    return setProperty("allow-hyperlink", propval);
+  }
+
+  /**
+      Set `audibleBell` property.
+      Params:
+        propval = Controls whether or not the terminal will beep when the child outputs the
+          "bl" sequence.
+      Returns: Builder instance for fluent chaining
+  */
+  T audibleBell(bool propval)
+  {
+    return setProperty("audible-bell", propval);
+  }
+
+  /**
+      Set `backspaceBinding` property.
+      Params:
+        propval = Controls what string or control sequence the terminal sends to its child
+          when the user presses the backspace key.
+      Returns: Builder instance for fluent chaining
+  */
+  T backspaceBinding(vte.types.EraseBinding propval)
+  {
+    return setProperty("backspace-binding", propval);
+  }
+
+  /**
+      Set `boldIsBright` property.
+      Params:
+        propval = Whether the SGR 1 attribute also switches to the bright counterpart
+          of the first 8 palette colors, in addition to making them bold (legacy behavior)
+          or if SGR 1 only enables bold and leaves the color intact.
+      Returns: Builder instance for fluent chaining
+  */
+  T boldIsBright(bool propval)
+  {
+    return setProperty("bold-is-bright", propval);
+  }
+
+  /**
+      Set `cellHeightScale` property.
+      Params:
+        propval = Scale factor for the cell height, to increase line spacing. (The font's height is not affected.)
+      Returns: Builder instance for fluent chaining
+  */
+  T cellHeightScale(double propval)
+  {
+    return setProperty("cell-height-scale", propval);
+  }
+
+  /**
+      Set `cellWidthScale` property.
+      Params:
+        propval = Scale factor for the cell width, to increase letter spacing. (The font's width is not affected.)
+      Returns: Builder instance for fluent chaining
+  */
+  T cellWidthScale(double propval)
+  {
+    return setProperty("cell-width-scale", propval);
+  }
+
+  /**
+      Set `cjkAmbiguousWidth` property.
+      Params:
+        propval = This setting controls whether ambiguous-width characters are narrow or wide.
+          (Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
+          the width of ambiguous-width characters is fixed and determined by the encoding
+          itself.)
+          
+          This setting only takes effect the next time the terminal is reset, either
+          via escape sequence or with [vte.terminal.Terminal.reset].
+      Returns: Builder instance for fluent chaining
+  */
+  T cjkAmbiguousWidth(int propval)
+  {
+    return setProperty("cjk-ambiguous-width", propval);
+  }
+
+  /**
+      Set `contextMenu` property.
+      Params:
+        propval = The menu used for context menus. Note that context menu model set with the
+          #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
+          takes precedence over this.
+      Returns: Builder instance for fluent chaining
+  */
+  T contextMenu(gtk.popover.Popover propval)
+  {
+    return setProperty("context-menu", propval);
+  }
+
+  /**
+      Set `contextMenuModel` property.
+      Params:
+        propval = The menu model used for context menus. If non-null, the context menu is
+          generated from this model, and overrides a context menu set with the
+          #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
+      Returns: Builder instance for fluent chaining
+  */
+  T contextMenuModel(gio.menu_model.MenuModel propval)
+  {
+    return setProperty("context-menu-model", propval);
+  }
+
+  /**
+      Set `cursorBlinkMode` property.
+      Params:
+        propval = Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
+          will use the #GtkSettings:gtk-cursor-blink setting.
+      Returns: Builder instance for fluent chaining
+  */
+  T cursorBlinkMode(vte.types.CursorBlinkMode propval)
+  {
+    return setProperty("cursor-blink-mode", propval);
+  }
+
+  /**
+      Set `cursorShape` property.
+      Params:
+        propval = Controls the shape of the cursor.
+      Returns: Builder instance for fluent chaining
+  */
+  T cursorShape(vte.types.CursorShape propval)
+  {
+    return setProperty("cursor-shape", propval);
+  }
+
+  /**
+      Set `deleteBinding` property.
+      Params:
+        propval = Controls what string or control sequence the terminal sends to its child
+          when the user presses the delete key.
+      Returns: Builder instance for fluent chaining
+  */
+  T deleteBinding(vte.types.EraseBinding propval)
+  {
+    return setProperty("delete-binding", propval);
+  }
+
+  /**
+      Set `enableBidi` property.
+      Params:
+        propval = Controls whether or not the terminal will perform bidirectional text rendering.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableBidi(bool propval)
+  {
+    return setProperty("enable-bidi", propval);
+  }
+
+  /** */
+  T enableFallbackScrolling(bool propval)
+  {
+    return setProperty("enable-fallback-scrolling", propval);
+  }
+
+  /**
+      Set `enableShaping` property.
+      Params:
+        propval = Controls whether or not the terminal will shape Arabic text.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableShaping(bool propval)
+  {
+    return setProperty("enable-shaping", propval);
+  }
+
+  /**
+      Set `enableSixel` property.
+      Params:
+        propval = Controls whether SIXEL image support is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableSixel(bool propval)
+  {
+    return setProperty("enable-sixel", propval);
+  }
+
+  /**
+      Set `encoding` property.
+      Params:
+        propval = Controls the encoding the terminal will expect data from the child to
+          be encoded with.  For certain terminal types, applications executing in the
+          terminal can change the encoding.  The default is defined by the
+          application's locale settings.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Instead of using this, you should use a tool like
+          luit(1) when support for non-UTF-8 is required
+  */
+  T encoding(string propval)
+  {
+    return setProperty("encoding", propval);
+  }
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = Specifies the font used for rendering all text displayed by the terminal,
+          overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
+          will immediately attempt to load the desired font, retrieve its
+          metrics, and attempt to resize itself to keep the same number of rows
+          and columns.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontDesc(pango.font_description.FontDescription propval)
+  {
+    return setProperty("font-desc", propval);
+  }
+
+  /**
+      Set `fontOptions` property.
+      Params:
+        propval = The terminal's font options, or null to use the default font options.
+          
+          Note that on GTK4, the terminal by default uses font options
+          with [cairo.types.HintMetrics.On] set; to override that, use this
+          function to set a #cairo_font_options_t that has
+          [cairo.types.HintMetrics.Off] set.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontOptions(cairo.font_options.FontOptions propval)
+  {
+    return setProperty("font-options", propval);
+  }
+
+  /**
+      Set `fontScale` property.
+      Params:
+        propval = The terminal's font scale.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontScale(double propval)
+  {
+    return setProperty("font-scale", propval);
+  }
+
+  /**
+      Set `inputEnabled` property.
+      Params:
+        propval = Controls whether the terminal allows user input. When user input is disabled,
+          key press and mouse button press and motion events are not sent to the
+          terminal's child.
+      Returns: Builder instance for fluent chaining
+  */
+  T inputEnabled(bool propval)
+  {
+    return setProperty("input-enabled", propval);
+  }
+
+  /**
+      Set `pointerAutohide` property.
+      Params:
+        propval = Controls the value of the terminal's mouse autohide setting.  When autohiding
+          is enabled, the mouse cursor will be hidden when the user presses a key and
+          shown when the user moves the mouse.
+      Returns: Builder instance for fluent chaining
+  */
+  T pointerAutohide(bool propval)
+  {
+    return setProperty("pointer-autohide", propval);
+  }
+
+  /**
+      Set `pty` property.
+      Params:
+        propval = The PTY object for the terminal.
+      Returns: Builder instance for fluent chaining
+  */
+  T pty(vte.pty.Pty propval)
+  {
+    return setProperty("pty", propval);
+  }
+
+  /**
+      Set `rewrapOnResize` property.
+      Params:
+        propval = Controls whether or not the terminal will rewrap its contents, including
+          the scrollback buffer, whenever the terminal's width changes.
+      Returns: Builder instance for fluent chaining
+  */
+  T rewrapOnResize(bool propval)
+  {
+    return setProperty("rewrap-on-resize", propval);
+  }
+
+  /**
+      Set `scrollOnInsert` property.
+      Params:
+        propval = Controls whether or not the terminal will forcibly scroll to the bottom of
+          the viewable history when the text is inserted (e.g. by a paste).
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollOnInsert(bool propval)
+  {
+    return setProperty("scroll-on-insert", propval);
+  }
+
+  /**
+      Set `scrollOnKeystroke` property.
+      Params:
+        propval = Controls whether or not the terminal will forcibly scroll to the bottom of
+          the viewable history when the user presses a key.  Modifier keys do not
+          trigger this behavior.
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollOnKeystroke(bool propval)
+  {
+    return setProperty("scroll-on-keystroke", propval);
+  }
+
+  /**
+      Set `scrollOnOutput` property.
+      Params:
+        propval = Controls whether or not the terminal will forcibly scroll to the bottom of
+          the viewable history when the new data is received from the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollOnOutput(bool propval)
+  {
+    return setProperty("scroll-on-output", propval);
+  }
+
+  /**
+      Set `scrollUnitIsPixels` property.
+      Params:
+        propval = Controls whether the terminal's GtkAdjustment values unit is lines
+          or pixels. This can be enabled when the terminal is the child of a
+          GtkScrolledWindow to fix some bugs with its kinetic scrolling.
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollUnitIsPixels(bool propval)
+  {
+    return setProperty("scroll-unit-is-pixels", propval);
+  }
+
+  /**
+      Set `scrollbackLines` property.
+      Params:
+        propval = The length of the scrollback buffer used by the terminal.  The size of
+          the scrollback buffer will be set to the larger of this value and the number
+          of visible rows the widget can display, so 0 can safely be used to disable
+          scrollback.  Note that this setting only affects the normal screen buffer.
+          For terminal types which have an alternate screen buffer, no scrollback is
+          allowed on the alternate screen buffer.
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollbackLines(uint propval)
+  {
+    return setProperty("scrollback-lines", propval);
+  }
+
+  /**
+      Set `textBlinkMode` property.
+      Params:
+        propval = Controls whether or not the terminal will allow blinking text.
+      Returns: Builder instance for fluent chaining
+  */
+  T textBlinkMode(vte.types.TextBlinkMode propval)
+  {
+    return setProperty("text-blink-mode", propval);
+  }
+
+  /**
+      Set `xalign` property.
+      Params:
+        propval = The horizontal alignment of @terminal within its allocation.
+      Returns: Builder instance for fluent chaining
+  */
+  T xalign(vte.types.Align propval)
+  {
+    return setProperty("xalign", propval);
+  }
+
+  /**
+      Set `xfill` property.
+      Params:
+        propval = The horizontal fillment of @terminal within its allocation.
+      Returns: Builder instance for fluent chaining
+  */
+  T xfill(bool propval)
+  {
+    return setProperty("xfill", propval);
+  }
+
+  /**
+      Set `yalign` property.
+      Params:
+        propval = The vertical alignment of @terminal within its allocation
+      Returns: Builder instance for fluent chaining
+  */
+  T yalign(vte.types.Align propval)
+  {
+    return setProperty("yalign", propval);
+  }
+
+  /**
+      Set `yfill` property.
+      Params:
+        propval = The vertical fillment of @terminal within its allocation.
+          Note that #VteTerminal:yfill=true is only supported with
+          #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
+          all other yalign values.
+      Returns: Builder instance for fluent chaining
+  */
+  T yfill(bool propval)
+  {
+    return setProperty("yfill", propval);
+  }
+}
+
+/// Fluent builder for [vte.terminal.Terminal]
+final class TerminalGidBuilder : TerminalGidBuilderImpl!TerminalGidBuilder
+{
+  Terminal build()
+  {
+    return new Terminal(cast(void*)createGObject(Terminal._getGType), No.Take);
   }
 }

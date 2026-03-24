@@ -6,6 +6,7 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -80,6 +81,15 @@ class AppInfoMonitor : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [gio.app_info_monitor.AppInfoMonitor]
+  Returns: New builder object
+  */
+  static AppInfoMonitorGidBuilder builder()
+  {
+    return new AppInfoMonitorGidBuilder;
+  }
+
+  /**
       Gets the #GAppInfoMonitor for the current thread-default main
       context.
       
@@ -139,5 +149,18 @@ class AppInfoMonitor : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+}
+
+class AppInfoMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gio.app_info_monitor.AppInfoMonitor]
+final class AppInfoMonitorGidBuilder : AppInfoMonitorGidBuilderImpl!AppInfoMonitorGidBuilder
+{
+  AppInfoMonitor build()
+  {
+    return new AppInfoMonitor(cast(void*)createGObject(AppInfoMonitor._getGType), No.Take);
   }
 }

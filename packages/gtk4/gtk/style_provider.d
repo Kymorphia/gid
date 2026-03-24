@@ -4,6 +4,7 @@ module gtk.style_provider;
 public import gtk.style_provider_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -45,4 +46,8 @@ interface StyleProvider
       Returns: Signal ID
   */
   ulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After);
+}
+
+interface StyleProviderGidBuilderImpl(T)
+{
 }

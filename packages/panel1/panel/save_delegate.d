@@ -9,6 +9,7 @@ import gio.task;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import panel.c.functions;
 import panel.c.types;
@@ -44,6 +45,15 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 
   /**
+  Get builder for [panel.save_delegate.SaveDelegate]
+  Returns: New builder object
+  */
+  static SaveDelegateGidBuilder builder()
+  {
+    return new SaveDelegateGidBuilder;
+  }
+
+  /**
       Get `icon` property.
       Returns: The "icon" property contains a #GIcon that describes the save
         operation. Generally, this should be the symbolic icon of the
@@ -69,7 +79,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   @property void icon(gio.icon.Icon propval)
   {
-    return setIcon(propval);
+    setIcon(propval);
   }
 
   /**
@@ -98,7 +108,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   @property void iconName(string propval)
   {
-    return setIconName(propval);
+    setIconName(propval);
   }
 
   /**
@@ -119,7 +129,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   @property void isDraft(bool propval)
   {
-    return setIsDraft(propval);
+    setIsDraft(propval);
   }
 
   /**
@@ -140,7 +150,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   @property void progress(double propval)
   {
-    return setProgress(propval);
+    setProgress(propval);
   }
 
   /**
@@ -163,7 +173,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   @property void subtitle(string propval)
   {
-    return setSubtitle(propval);
+    setSubtitle(propval);
   }
 
   /**
@@ -186,7 +196,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   @property void title(string propval)
   {
-    return setTitle(propval);
+    setTitle(propval);
   }
 
   /**
@@ -496,5 +506,100 @@ class SaveDelegate : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("save", closure, after);
+  }
+}
+
+class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `icon` property.
+      Params:
+        propval = The "icon" property contains a #GIcon that describes the save
+          operation. Generally, this should be the symbolic icon of the
+          document class you are saving.
+          
+          Alternatively, you can use #PanelSaveDelegate:icon-name for a
+          named icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T icon(gio.icon.Icon propval)
+  {
+    return setProperty("icon", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The "icon-name" property contains the name of an icon to use when
+          showing information about the save operation in UI such as a save
+          dialog.
+          
+          You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
+          an icon name.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval)
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `isDraft` property.
+      Params:
+        propval = The "is-draft" property indicates that the document represented by the
+          delegate is a draft and might be lost of not saved.
+      Returns: Builder instance for fluent chaining
+  */
+  T isDraft(bool propval)
+  {
+    return setProperty("is-draft", propval);
+  }
+
+  /**
+      Set `progress` property.
+      Params:
+        propval = The "progress" property contains progress between 0.0 and 1.0 and
+          should be updated by the delegate implementation as saving progresses.
+      Returns: Builder instance for fluent chaining
+  */
+  T progress(double propval)
+  {
+    return setProperty("progress", propval);
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The "subtitle" property contains additional information that may
+          not make sense to put in the title. This might include the directory
+          that the file will be saved within.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitle(string propval)
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The "title" property contains the title of the document being saved.
+          Generally, this should be the base name of the document such as
+          `file.txt`.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval)
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [panel.save_delegate.SaveDelegate]
+final class SaveDelegateGidBuilder : SaveDelegateGidBuilderImpl!SaveDelegateGidBuilder
+{
+  SaveDelegate build()
+  {
+    return new SaveDelegate(cast(void*)createGObject(SaveDelegate._getGType), Yes.Take);
   }
 }

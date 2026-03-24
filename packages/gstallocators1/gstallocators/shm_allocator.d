@@ -2,6 +2,7 @@
 module gstallocators.shm_allocator;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gst.allocator;
 import gstallocators.c.functions;
@@ -49,6 +50,15 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   }
 
   /**
+  Get builder for [gstallocators.shm_allocator.ShmAllocator]
+  Returns: New builder object
+  */
+  static ShmAllocatorGidBuilder builder()
+  {
+    return new ShmAllocatorGidBuilder;
+  }
+
+  /**
       Get the #GstShmAllocator singleton previously registered with
       [gstallocators.shm_allocator.ShmAllocator.initOnce].
       Returns: a #GstAllocator or null if
@@ -69,5 +79,18 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   static void initOnce()
   {
     gst_shm_allocator_init_once();
+  }
+}
+
+class ShmAllocatorGidBuilderImpl(T) : gstallocators.fd_allocator.FdAllocatorGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gstallocators.shm_allocator.ShmAllocator]
+final class ShmAllocatorGidBuilder : ShmAllocatorGidBuilderImpl!ShmAllocatorGidBuilder
+{
+  ShmAllocator build()
+  {
+    return new ShmAllocator(cast(void*)createGObject(ShmAllocator._getGType), No.Take);
   }
 }

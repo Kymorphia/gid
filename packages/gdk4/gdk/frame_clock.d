@@ -7,6 +7,7 @@ import gdk.frame_timings;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -70,6 +71,15 @@ class FrameClock : gobject.object.ObjectWrap
   override FrameClock self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.frame_clock.FrameClock]
+  Returns: New builder object
+  */
+  static FrameClockGidBuilder builder()
+  {
+    return new FrameClockGidBuilder;
   }
 
   /**
@@ -524,5 +534,18 @@ class FrameClock : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update", closure, after);
+  }
+}
+
+class FrameClockGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gdk.frame_clock.FrameClock]
+final class FrameClockGidBuilder : FrameClockGidBuilderImpl!FrameClockGidBuilder
+{
+  FrameClock build()
+  {
+    return new FrameClock(cast(void*)createGObject(FrameClock._getGType), No.Take);
   }
 }

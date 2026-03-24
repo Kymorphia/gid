@@ -6,6 +6,7 @@ public import gdk.c.functions;
 public import gdk.c.types;
 public import gdk.types;
 public import gid.gid;
+public import gobject.gid_builder;
 
 /**
     [gdk.device_pad.DevicePad] is an interface implemented by devices of type
@@ -88,4 +89,8 @@ template DevicePadT()
     _retval = gdk_device_pad_get_n_groups(cast(GdkDevicePad*)this._cPtr);
     return _retval;
   }
+}
+
+template DevicePadGidBuilderT()
+{
 }

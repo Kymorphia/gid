@@ -7,6 +7,7 @@ import gio.async_result;
 import gio.cancellable;
 import gio.types;
 import glib.error;
+import gobject.gid_builder;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -41,4 +42,8 @@ interface HoverProvider
 
   /** */
   bool populateFinish(gio.async_result.AsyncResult result);
+}
+
+interface HoverProviderGidBuilderImpl(T)
+{
 }

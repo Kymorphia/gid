@@ -5,6 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 
 /** */
@@ -34,6 +35,15 @@ class DayMillisecond : gobject.object.ObjectWrap
   override DayMillisecond self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [arrow.day_millisecond.DayMillisecond]
+  Returns: New builder object
+  */
+  static DayMillisecondGidBuilder builder()
+  {
+    return new DayMillisecondGidBuilder;
   }
 
   /**
@@ -96,5 +106,40 @@ class DayMillisecond : gobject.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)garrow_day_millisecond_less_than(cast(GArrowDayMillisecond*)this._cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond._cPtr(No.Dup) : null);
     return _retval;
+  }
+}
+
+class DayMillisecondGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The day part value.
+      Returns: Builder instance for fluent chaining
+  */
+  T day(int propval)
+  {
+    return setProperty("day", propval);
+  }
+
+  /**
+      Set `millisecond` property.
+      Params:
+        propval = The millisecond part value.
+      Returns: Builder instance for fluent chaining
+  */
+  T millisecond(int propval)
+  {
+    return setProperty("millisecond", propval);
+  }
+}
+
+/// Fluent builder for [arrow.day_millisecond.DayMillisecond]
+final class DayMillisecondGidBuilder : DayMillisecondGidBuilderImpl!DayMillisecondGidBuilder
+{
+  DayMillisecond build()
+  {
+    return new DayMillisecond(cast(void*)createGObject(DayMillisecond._getGType), Yes.Take);
   }
 }

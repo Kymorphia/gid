@@ -4,6 +4,7 @@ module gtk.multi_sorter;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gtk.buildable;
@@ -46,6 +47,15 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   override MultiSorter self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.multi_sorter.MultiSorter]
+  Returns: New builder object
+  */
+  static MultiSorterGidBuilder builder()
+  {
+    return new MultiSorterGidBuilder;
   }
 
   /**
@@ -111,5 +121,21 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   void remove(uint position)
   {
     gtk_multi_sorter_remove(cast(GtkMultiSorter*)this._cPtr, position);
+  }
+}
+
+class MultiSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+  mixin BuildableGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.multi_sorter.MultiSorter]
+final class MultiSorterGidBuilder : MultiSorterGidBuilderImpl!MultiSorterGidBuilder
+{
+  MultiSorter build()
+  {
+    return new MultiSorter(cast(void*)createGObject(MultiSorter._getGType), Yes.Take);
   }
 }

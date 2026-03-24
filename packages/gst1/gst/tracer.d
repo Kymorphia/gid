@@ -2,6 +2,7 @@
 module gst.tracer;
 
 import gid.gid;
+import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
 import gst.c.functions;
@@ -44,6 +45,15 @@ class Tracer : gst.object.ObjectWrap
     return this;
   }
 
+  /**
+  Get builder for [gst.tracer.Tracer]
+  Returns: New builder object
+  */
+  static TracerGidBuilder builder()
+  {
+    return new TracerGidBuilder;
+  }
+
   /** */
   @property string params()
   {
@@ -72,5 +82,24 @@ class Tracer : gst.object.ObjectWrap
     const(char)* _name = name.toCString(No.Alloc);
     _retval = cast(bool)gst_tracer_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, type);
     return _retval;
+  }
+}
+
+class TracerGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T params(string propval)
+  {
+    return setProperty("params", propval);
+  }
+}
+
+/// Fluent builder for [gst.tracer.Tracer]
+final class TracerGidBuilder : TracerGidBuilderImpl!TracerGidBuilder
+{
+  Tracer build()
+  {
+    return new Tracer(cast(void*)createGObject(Tracer._getGType), No.Take);
   }
 }

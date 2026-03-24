@@ -9,6 +9,7 @@ import gid.gid;
 import gio.initable;
 import gio.initable_mixin;
 import gobject.dclosure;
+import gobject.gid_builder;
 
 /**
     [gdk.vulkan_context.VulkanContext] is an object representing the platform-specific
@@ -47,6 +48,15 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
   override VulkanContext self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gdk.vulkan_context.VulkanContext]
+  Returns: New builder object
+  */
+  static VulkanContextGidBuilder builder()
+  {
+    return new VulkanContextGidBuilder;
   }
 
   mixin InitableT!();
@@ -89,5 +99,20 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("images-updated", closure, after);
+  }
+}
+
+class VulkanContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+{
+
+  mixin InitableGidBuilderT!();
+}
+
+/// Fluent builder for [gdk.vulkan_context.VulkanContext]
+final class VulkanContextGidBuilder : VulkanContextGidBuilderImpl!VulkanContextGidBuilder
+{
+  VulkanContext build()
+  {
+    return new VulkanContext(cast(void*)createGObject(VulkanContext._getGType), No.Take);
   }
 }

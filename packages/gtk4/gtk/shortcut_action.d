@@ -4,6 +4,7 @@ module gtk.shortcut_action;
 import gid.gid;
 import glib.string_;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -67,6 +68,15 @@ class ShortcutAction : gobject.object.ObjectWrap
   override ShortcutAction self()
   {
     return this;
+  }
+
+  /**
+  Get builder for [gtk.shortcut_action.ShortcutAction]
+  Returns: New builder object
+  */
+  static ShortcutActionGidBuilder builder()
+  {
+    return new ShortcutActionGidBuilder;
   }
 
   /**
@@ -149,5 +159,18 @@ class ShortcutAction : gobject.object.ObjectWrap
     _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
+  }
+}
+
+class ShortcutActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gtk.shortcut_action.ShortcutAction]
+final class ShortcutActionGidBuilder : ShortcutActionGidBuilderImpl!ShortcutActionGidBuilder
+{
+  ShortcutAction build()
+  {
+    return new ShortcutAction(cast(void*)createGObject(ShortcutAction._getGType), No.Take);
   }
 }

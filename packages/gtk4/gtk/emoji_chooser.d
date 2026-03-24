@@ -3,6 +3,7 @@ module gtk.emoji_chooser;
 
 import gid.gid;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -77,6 +78,15 @@ class EmojiChooser : gtk.popover.Popover
   }
 
   /**
+  Get builder for [gtk.emoji_chooser.EmojiChooser]
+  Returns: New builder object
+  */
+  static EmojiChooserGidBuilder builder()
+  {
+    return new EmojiChooserGidBuilder;
+  }
+
+  /**
       Creates a new [gtk.emoji_chooser.EmojiChooser].
       Returns: a new [gtk.emoji_chooser.EmojiChooser]
   */
@@ -128,5 +138,19 @@ class EmojiChooser : gtk.popover.Popover
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("emoji-picked", closure, after);
+  }
+}
+
+class EmojiChooserGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gtk.emoji_chooser.EmojiChooser]
+final class EmojiChooserGidBuilder : EmojiChooserGidBuilderImpl!EmojiChooserGidBuilder
+{
+  EmojiChooser build()
+  {
+    return new EmojiChooser(cast(void*)createGObject(EmojiChooser._getGType), No.Take);
   }
 }

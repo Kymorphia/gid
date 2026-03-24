@@ -6,6 +6,7 @@ import atk.component_mixin;
 import atk.image;
 import atk.image_mixin;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -40,5 +41,29 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
     return this;
   }
 
+  /**
+  Get builder for [gtk.image_accessible.ImageAccessible]
+  Returns: New builder object
+  */
+  static ImageAccessibleGidBuilder builder()
+  {
+    return new ImageAccessibleGidBuilder;
+  }
+
   mixin ImageT!();
+}
+
+class ImageAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
+{
+
+  mixin ImageGidBuilderT!();
+}
+
+/// Fluent builder for [gtk.image_accessible.ImageAccessible]
+final class ImageAccessibleGidBuilder : ImageAccessibleGidBuilderImpl!ImageAccessibleGidBuilder
+{
+  ImageAccessible build()
+  {
+    return new ImageAccessible(cast(void*)createGObject(ImageAccessible._getGType), No.Take);
+  }
 }

@@ -6,6 +6,7 @@ import atk.implementor_iface_mixin;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
+import gobject.gid_builder;
 import gobject.object;
 import gtk.adjustment;
 import gtk.buildable;
@@ -93,6 +94,15 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
+  Get builder for [gtk.flow_box.FlowBox]
+  Returns: New builder object
+  */
+  static FlowBoxGidBuilder builder()
+  {
+    return new FlowBoxGidBuilder;
+  }
+
+  /**
       Get `activateOnSingleClick` property.
       Returns: Determines whether children can be activated with a single
         click, or require a double-click.
@@ -110,7 +120,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void activateOnSingleClick(bool propval)
   {
-    return setActivateOnSingleClick(propval);
+    setActivateOnSingleClick(propval);
   }
 
   /**
@@ -129,7 +139,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void columnSpacing(uint propval)
   {
-    return setColumnSpacing(propval);
+    setColumnSpacing(propval);
   }
 
   /**
@@ -150,7 +160,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void homogeneous(bool propval)
   {
-    return setHomogeneous(propval);
+    setHomogeneous(propval);
   }
 
   /**
@@ -171,7 +181,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void maxChildrenPerLine(uint propval)
   {
-    return setMaxChildrenPerLine(propval);
+    setMaxChildrenPerLine(propval);
   }
 
   /**
@@ -200,7 +210,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void minChildrenPerLine(uint propval)
   {
-    return setMinChildrenPerLine(propval);
+    setMinChildrenPerLine(propval);
   }
 
   /**
@@ -219,7 +229,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void rowSpacing(uint propval)
   {
-    return setRowSpacing(propval);
+    setRowSpacing(propval);
   }
 
   /**
@@ -238,7 +248,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   @property void selectionMode(gtk.types.SelectionMode propval)
   {
-    return setSelectionMode(propval);
+    setSelectionMode(propval);
   }
 
   mixin OrientableT!();
@@ -1045,5 +1055,105 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+}
+
+class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `activateOnSingleClick` property.
+      Params:
+        propval = Determines whether children can be activated with a single
+          click, or require a double-click.
+      Returns: Builder instance for fluent chaining
+  */
+  T activateOnSingleClick(bool propval)
+  {
+    return setProperty("activate-on-single-click", propval);
+  }
+
+  /**
+      Set `columnSpacing` property.
+      Params:
+        propval = The amount of horizontal space between two children.
+      Returns: Builder instance for fluent chaining
+  */
+  T columnSpacing(uint propval)
+  {
+    return setProperty("column-spacing", propval);
+  }
+
+  /**
+      Set `homogeneous` property.
+      Params:
+        propval = Determines whether all children should be allocated the
+          same size.
+      Returns: Builder instance for fluent chaining
+  */
+  T homogeneous(bool propval)
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /**
+      Set `maxChildrenPerLine` property.
+      Params:
+        propval = The maximum amount of children to request space for consecutively
+          in the given orientation.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxChildrenPerLine(uint propval)
+  {
+    return setProperty("max-children-per-line", propval);
+  }
+
+  /**
+      Set `minChildrenPerLine` property.
+      Params:
+        propval = The minimum number of children to allocate consecutively
+          in the given orientation.
+          
+          Setting the minimum children per line ensures
+          that a reasonably small height will be requested
+          for the overall minimum width of the box.
+      Returns: Builder instance for fluent chaining
+  */
+  T minChildrenPerLine(uint propval)
+  {
+    return setProperty("min-children-per-line", propval);
+  }
+
+  /**
+      Set `rowSpacing` property.
+      Params:
+        propval = The amount of vertical space between two children.
+      Returns: Builder instance for fluent chaining
+  */
+  T rowSpacing(uint propval)
+  {
+    return setProperty("row-spacing", propval);
+  }
+
+  /**
+      Set `selectionMode` property.
+      Params:
+        propval = The selection mode used by the flow  box.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectionMode(gtk.types.SelectionMode propval)
+  {
+    return setProperty("selection-mode", propval);
+  }
+}
+
+/// Fluent builder for [gtk.flow_box.FlowBox]
+final class FlowBoxGidBuilder : FlowBoxGidBuilderImpl!FlowBoxGidBuilder
+{
+  FlowBox build()
+  {
+    return new FlowBox(cast(void*)createGObject(FlowBox._getGType), No.Take);
   }
 }

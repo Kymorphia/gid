@@ -6,6 +6,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gobject.gid_builder;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -76,6 +77,15 @@ class SwitchRow : adw.action_row.ActionRow
   }
 
   /**
+  Get builder for [adw.switch_row.SwitchRow]
+  Returns: New builder object
+  */
+  static SwitchRowGidBuilder builder()
+  {
+    return new SwitchRowGidBuilder;
+  }
+
+  /**
       Get `active` property.
       Returns: Whether the switch row is in the "on" or "off" position.
   */
@@ -91,7 +101,7 @@ class SwitchRow : adw.action_row.ActionRow
   */
   @property void active(bool propval)
   {
-    return setActive(propval);
+    setActive(propval);
   }
 
   /**
@@ -125,5 +135,30 @@ class SwitchRow : adw.action_row.ActionRow
   void setActive(bool isActive)
   {
     adw_switch_row_set_active(cast(AdwSwitchRow*)this._cPtr, isActive);
+  }
+}
+
+class SwitchRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the switch row is in the "on" or "off" position.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(bool propval)
+  {
+    return setProperty("active", propval);
+  }
+}
+
+/// Fluent builder for [adw.switch_row.SwitchRow]
+final class SwitchRowGidBuilder : SwitchRowGidBuilderImpl!SwitchRowGidBuilder
+{
+  SwitchRow build()
+  {
+    return new SwitchRow(cast(void*)createGObject(SwitchRow._getGType), No.Take);
   }
 }

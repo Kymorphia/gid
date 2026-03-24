@@ -8,6 +8,7 @@ import gio.c.types;
 import gio.types;
 import glib.error;
 import glib.variant;
+import gobject.gid_builder;
 import gobject.object;
 
 /**
@@ -142,4 +143,8 @@ interface Icon
         null if icon can't be serialized. Use [glib.global.gfree] to free.
   */
   string toString_();
+}
+
+interface IconGidBuilderImpl(T)
+{
 }
