@@ -91,9 +91,10 @@ else // Linux or OSX
 
     foreach (lib; libs)
     {
-      version (OSX) lib = lib.buildPath(basePath, lib);
+      string libPath = lib;
+      version (OSX) libPath = buildPath(basePath, lib);
 
-      if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
+      if (auto handle = dlopen(cast(char*)toStringz(libPath), RTLD_GLOBAL | RTLD_NOW))
       {
         debug
         {
@@ -106,7 +107,7 @@ else // Linux or OSX
               import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
 
               if (dlinfo(handle, RTLD_DI_ORIGIN, path.ptr) == 0)
-                stderr.writeln("Found ", lib, " at ", path.fromStringz.idup);
+                stderr.writeln("Found ", libPath, " at ", path.fromStringz.idup);
               else
                 stderr.writeln("dlinfo() returned error: ", dlerror().fromStringz.idup);
             }
@@ -166,7 +167,7 @@ else // Linux or OSX
           path = environment.get("HOMEBREW_ROOT");
 
           if (path)
-            path = path.buildPath("lib");
+            path = buildPath(path, "lib");
         }
       }
 
