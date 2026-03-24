@@ -164,7 +164,7 @@ else // Linux or OSX
 
         if(!path)
         {
-          path = environment.get("HOMEBREW_ROOT");
+          path = environment.get("HOMEBREW_PREFIX");
 
           if (path)
             path = buildPath(path, "lib");
